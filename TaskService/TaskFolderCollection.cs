@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	public class TaskFolderCollection : ICollection<TaskFolder>
+	/// <summary>
+	/// Provides information and control for a collection of folders that contain tasks.
+	/// </summary>
+	public class TaskFolderCollection : IEnumerable<TaskFolder>
 	{
 		private TaskScheduler.V2Interop.ITaskFolderCollection v2FolderList = null;
 		private TaskFolder[] v1FolderList = null;
@@ -23,6 +26,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v2FolderList = iCollection;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v1FolderList != null && v1FolderList.Length > 0)
@@ -34,31 +40,21 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Runtime.InteropServices.Marshal.ReleaseComObject(v2FolderList);
 		}
 
-		public void Add(TaskFolder item)
-		{
-			throw new NotSupportedException();
-		}
-
-		public void Clear()
-		{
-			throw new NotSupportedException();
-		}
-
-		public bool IsReadOnly
-		{
-			get { return true; }
-		}
-
-		public bool Remove(TaskFolder item)
-		{
-			throw new NotSupportedException();
-		}
-
+		/// <summary>
+		/// Returns the index of the TaskFolder within the collection.
+		/// </summary>
+		/// <param name="item">TaskFolder to find.</param>
+		/// <returns>Index of the TaskFolder; -1 if not found.</returns>
 		public int IndexOf(TaskFolder item)
 		{
 			return IndexOf(item.Path);
 		}
 
+		/// <summary>
+		/// Returns the index of the TaskFolder within the collection.
+		/// </summary>
+		/// <param name="path">Path to find.</param>
+		/// <returns>Index of the TaskFolder; -1 if not found.</returns>
 		public int IndexOf(string path)
 		{
 			if (v2FolderList != null)
@@ -74,6 +70,11 @@ namespace Microsoft.Win32.TaskScheduler
 				return (v1FolderList.Length > 0 && (path == string.Empty || path == "\\")) ? 0 : -1;
 		}
 
+		/// <summary>
+		/// Gets the specified folder from the collection.
+		/// </summary>
+		/// <param name="index">The index of the folder to be retrieved.</param>
+		/// <returns>A TaskFolder instance that represents the requested folder.</returns>
 		public TaskFolder this[int index]
 		{
 			get
@@ -84,6 +85,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the specified folder from the collection.
+		/// </summary>
+		/// <param name="path">The path of the folder to be retrieved.</param>
+		/// <returns>A TaskFolder instance that represents the requested folder.</returns>
 		public TaskFolder this[string path]
 		{
 			get
@@ -96,11 +102,21 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Determines whether the collection contains a specific key and value.
+		/// </summary>
+		/// <param name="item">The TaskFolder to locate in the collection.</param>
+		/// <returns>true if item is found in the collection; otherwise, false.</returns>
 		public bool Contains(TaskFolder item)
 		{
 			return IndexOf(item) != -1;
 		}
 
+		/// <summary>
+		/// Copies the elements of the ICollection to an Array, starting at a particular Array index.
+		/// </summary>
+		/// <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="ICollection{T}"/>. The Array must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
 		public void CopyTo(TaskFolder[] array, int arrayIndex)
 		{
 			if (arrayIndex < 0) throw new ArgumentOutOfRangeException();
@@ -120,11 +136,18 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the number of items in the collection.
+		/// </summary>
 		public int Count
 		{
 			get { return (v2FolderList != null) ? v2FolderList.Count : v1FolderList.Length; }
 		}
 
+		/// <summary>
+		/// Gets a list of items in a collection.
+		/// </summary>
+		/// <returns>Enumerated list of items in the collection.</returns>
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
 			TaskFolder[] eArray = new TaskFolder[this.Count];
@@ -148,6 +171,9 @@ namespace Microsoft.Win32.TaskScheduler
 				iEnum = f.GetEnumerator();
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 			}

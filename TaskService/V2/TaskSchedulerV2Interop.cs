@@ -3,7 +3,6 @@ using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.CustomMarshalers;
 
 namespace Microsoft.Win32.TaskScheduler.V2Interop
 {
