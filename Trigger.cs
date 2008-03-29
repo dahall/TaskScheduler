@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
@@ -146,11 +145,15 @@ namespace Microsoft.Win32.TaskScheduler
 		December = 0x800
 	}
 
+	/// <summary>
+	/// Provides the common properties that are inherited by all trigger classes.
+	/// </summary>
 	public abstract class Trigger : IDisposable
 	{
 		internal V1Interop.ITaskTrigger v1Trigger = null;
 		internal V1Interop.TaskTrigger v1TriggerData;
 		internal V2Interop.ITrigger v2Trigger = null;
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
 		internal Trigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType type) :
@@ -175,6 +178,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public virtual void Dispose()
 		{
 			if (v2Trigger != null)
@@ -183,12 +189,14 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v1Trigger);
 		}
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal void Bind()
 		{
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
 		}
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		protected void BindValues()
 		{
 			if (v2Trigger != null)
@@ -259,6 +267,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.
+		/// </summary>
 		public string Id
 		{
 			get
@@ -277,6 +288,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		private RepetitionPattern repititionPattern = null;
+		/// <summary>
+		/// Gets a <see cref="RepetitionPattern"/> instance that indicates how often the task is run and how long the repetition pattern is repeated after the task is started.
+		/// </summary>
 		public RepetitionPattern Repetition
 		{
 			get
@@ -292,6 +306,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task Scheduler 1.0.
+		/// </summary>
 		public TimeSpan ExecutionTimeLimit
 		{
 			get
@@ -309,14 +326,17 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss";
+		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFF";
 
+		/// <summary>
+		/// Gets or sets the date and time when the trigger is activated.
+		/// </summary>
 		public DateTime StartBoundary
 		{
 			get
 			{
 				if (v2Trigger != null)
-					return DateTime.ParseExact(v2Trigger.StartBoundary, V2BoundaryDateFormat, null, System.Globalization.DateTimeStyles.AdjustToUniversal);
+					return DateTime.Parse(v2Trigger.StartBoundary);
 				return v1TriggerData.BeginDate;
 			}
 			set
@@ -331,12 +351,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
+		/// </summary>
 		public DateTime EndBoundary
 		{
 			get
 			{
 				if (v2Trigger != null)
-					return DateTime.ParseExact(v2Trigger.EndBoundary, V2BoundaryDateFormat, null, System.Globalization.DateTimeStyles.AdjustToUniversal);
+					return DateTime.Parse(v2Trigger.EndBoundary);
 				return v1TriggerData.EndDate;
 			}
 			set
@@ -351,6 +374,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates whether the trigger is enabled.
+		/// </summary>
 		public bool Enabled
 		{
 			get
@@ -374,6 +400,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal bool Bound
 		{
 			get
@@ -384,12 +411,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/*internal void Bind(V1Interop.ITaskTrigger iTrigger)
+		/*
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal void Bind(V1Interop.ITaskTrigger iTrigger)
 		{
 			if (v1Trigger != null)
 				v1Trigger.Bind(iTrigger);
 		}
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal void Bind(V2Interop.ITrigger iTrigger)
 		{
 			if (v2Trigger != null)
@@ -397,6 +427,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}*/
 	}
 
+	/// <summary>
+	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
+	/// </summary>
 	public class RepetitionPattern : IDisposable
 	{
 		private V1Interop.ITaskTrigger v1Trigger = null;
@@ -412,12 +445,18 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Trigger.SetTrigger(ref v1TriggerData);
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Pattern != null) Marshal.ReleaseComObject(v2Pattern);
 			v1Trigger = null;
 		}
 
+		/// <summary>
+		/// Gets or sets the amount of time between each restart of the task.
+		/// </summary>
 		public TimeSpan Interval
 		{
 			get
@@ -438,6 +477,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets how long the pattern is repeated.
+		/// </summary>
 		public TimeSpan Duration
 		{
 			get
@@ -458,6 +500,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
+		/// </summary>
 		public bool StopAtDurationEnd
 		{
 			get
@@ -482,11 +527,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task when the system is booted.
+	/// </summary>
 	public class BootTrigger : Trigger
 	{
 		internal BootTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnSystemStart) { }
 		internal BootTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
+		/// </summary>
 		public TimeSpan Delay
 		{
 			get
@@ -505,10 +556,16 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task when a system event occurs. Not available on Task Scheduler 1.0.
+	/// </summary>
 	public class EventTrigger : Trigger
 	{
 		internal EventTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets the XPath query string that identifies the event that fires the trigger.
+		/// </summary>
 		public string Subscription
 		{
 			get
@@ -526,6 +583,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the event occurs and when the task is started.
+		/// </summary>
 		public TimeSpan Delay
 		{
 			get
@@ -543,9 +603,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private TaskNamedValueCollection nvc = null;
+		private NamedValueCollection nvc = null;
 
-		public TaskNamedValueCollection ValueQueries
+		/// <summary>
+		/// Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from the subscription query specified in the Subscription property. The name of the query can be used as a variable in the message of a <see cref="ShowMessageAction"/> action.
+		/// </summary>
+		public NamedValueCollection ValueQueries
 		{
 			get
 			{
@@ -553,69 +616,24 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (v2Trigger == null)
 						throw new NotSupportedException();
-					nvc = new TaskNamedValueCollection(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
+					nvc = new NamedValueCollection(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
 				}
 				return nvc;
 			}
 		}
-
-		public class TaskNamedValueCollection : IDisposable, System.Collections.IEnumerable
-		{
-			private V2Interop.ITaskNamedValueCollection v2Coll = null;
-
-			internal TaskNamedValueCollection(V2Interop.ITaskNamedValueCollection iColl) { v2Coll = iColl; }
-
-			public void Dispose()
-			{
-				if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
-			}
-
-			public int Count
-			{
-				get { return v2Coll.Count; }
-			}
-
-			public string this[int index]
-			{
-				get
-				{
-					return v2Coll[index].Value;
-				}
-			}
-			
-			// TODO: Figure out how to make this more of a real collection
-			/*public string this[string name]
-			{
-				get { throw new NotImplementedException(); }
-			}*/
-
-			public void Add(string Name, string Value)
-			{
-				v2Coll.Create(Name, Value);
-			}
-
-			public void Remove(int index)
-			{
-				v2Coll.Remove(index);
-			}
-
-			public void Clear()
-			{
-				v2Coll.Clear();
-			}
-
-			public System.Collections.IEnumerator GetEnumerator()
-			{
-				return v2Coll.GetEnumerator();
-			}
-		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
+	/// </summary>
 	public class DailyTrigger : Trigger
 	{
 		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { }
 		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Sets or retrieves the interval between the days in the schedule.
+		/// </summary>
 		public short DaysInterval
 		{
 			get
@@ -636,6 +654,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
+		/// </summary>
 		public TimeSpan RandomDelay
 		{
 			get
@@ -654,17 +675,26 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task when the computer goes into an idle state. For information about idle conditions, see Task Idle Conditions.
+	/// </summary>
 	public class IdleTrigger : Trigger
 	{
 		internal IdleTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnIdle) { }
 		internal IdleTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
+	/// </summary>
 	public class LogonTrigger : Trigger
 	{
 		internal LogonTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnLogon) { }
 		internal LogonTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the user logs on and when the job is started.
+		/// </summary>
 		public TimeSpan Delay
 		{
 			get
@@ -682,6 +712,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the user.
+		/// </summary>
 		public string UserId
 		{
 			get
@@ -700,11 +733,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May through October.
+	/// </summary>
 	public class MonthlyDOWTrigger : Trigger
 	{
 		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { }
 		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets the days of the week during which the task runs.
+		/// </summary>
 		public DaysOfTheWeek DaysOfWeek
 		{
 			get
@@ -725,6 +764,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the weeks of the month during which the task runs.
+		/// </summary>
 		public WhichWeek WeeksOfMonth
 		{
 			get
@@ -745,6 +787,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the months of the year during which the task runs.
+		/// </summary>
 		public MonthsOfTheYear MonthsOfYear
 		{
 			get
@@ -765,6 +810,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task runs on the last week of the month.
+		/// </summary>
 		public bool RunOnLastWeekOfMonth
 		{
 			get
@@ -789,6 +837,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
+		/// </summary>
 		public TimeSpan RandomDelay
 		{
 			get
@@ -807,6 +858,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
+	/// </summary>
 	public class MonthlyTrigger : Trigger
 	{
 		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { }
@@ -851,6 +905,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return mask;
 		}
 
+		/// <summary>
+		/// Gets or sets the days of the month during which the task runs.
+		/// </summary>
 		public int[] DaysOfMonth
 		{
 			get
@@ -871,6 +928,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the months of the year during which the task runs.
+		/// </summary>
 		public MonthsOfTheYear MonthsOfYear
 		{
 			get
@@ -891,6 +951,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task runs on the last day of the month.
+		/// </summary>
 		public bool RunOnLastDayOfMonth
 		{
 			get
@@ -908,6 +971,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
+		/// </summary>
 		public TimeSpan RandomDelay
 		{
 			get
@@ -926,10 +992,16 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
+	/// </summary>
 	public class RegistrationTrigger : Trigger
 	{
 		internal RegistrationTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets the amount of time between when the task is registered and when the task is started.
+		/// </summary>
 		public TimeSpan Delay
 		{
 			get
@@ -948,10 +1020,16 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
+	/// </summary>
 	public class SessionStateChangeTrigger : Trigger
 	{
 		internal SessionStateChangeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets a value that indicates how long of a delay takes place before a task is started after a Terminal Server session state change is detected.
+		/// </summary>
 		public TimeSpan Delay
 		{
 			get
@@ -969,6 +1047,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.
+		/// </summary>
 		public string UserId
 		{
 			get
@@ -986,6 +1067,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the kind of Terminal Server session change that would trigger a task launch.
+		/// </summary>
 		public TaskSessionStateChangeType StateChange
 		{
 			get
@@ -1004,11 +1088,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task at a specific date and time.
+	/// </summary>
 	public class TimeTrigger : Trigger
 	{
 		internal TimeTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunOnce) { }
 		internal TimeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
+		/// </summary>
 		public TimeSpan RandomDelay
 		{
 			get
@@ -1027,11 +1117,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
+	/// </summary>
 	public class WeeklyTrigger : Trigger
 	{
 		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { }
 		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
+		/// <summary>
+		/// Gets or sets the days of the week on which the task runs.
+		/// </summary>
 		public DaysOfTheWeek DaysOfWeek
 		{
 			get
@@ -1052,6 +1148,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the interval between the weeks in the schedule.
+		/// </summary>
 		public short WeeksInterval
 		{
 			get
@@ -1072,6 +1171,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
+		/// </summary>
 		public TimeSpan RandomDelay
 		{
 			get

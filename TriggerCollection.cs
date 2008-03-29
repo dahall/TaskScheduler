@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	/// <summary>
+	/// Provides the methods that are used to add to, remove from, and get the triggers of a task.
+	/// </summary>
 	public sealed class TriggerCollection : IEnumerable<Trigger>, IDisposable
 	{
 		private V1Interop.ITask v1Task = null;
@@ -21,6 +23,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Coll = iColl;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
@@ -29,6 +34,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		#region IEnumerable<Trigger> Members
 
+		/// <summary>
+		/// Gets the collection enumerator for this collection.
+		/// </summary>
+		/// <returns>The <see cref="IEnumerator{T}"/> for this collection.</returns>
 		public IEnumerator<Trigger> GetEnumerator()
 		{
 			if (v1Task != null)
@@ -47,7 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		#endregion
 
-		public sealed class V1TriggerEnumerator : IEnumerator<Trigger>
+		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
 		{
 			private V1Interop.ITask iTask;
 			private short curItem = -1;
@@ -65,6 +74,9 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				iTask = null;
@@ -88,7 +100,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public sealed class V2TriggerEnumerator : IEnumerator<Trigger>
+		internal sealed class V2TriggerEnumerator : IEnumerator<Trigger>
 		{
 			private System.Collections.IEnumerator iEnum;
 
@@ -111,6 +123,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 			#region IDisposable Members
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				iEnum = null;
@@ -138,11 +153,11 @@ namespace Microsoft.Win32.TaskScheduler
 			#endregion
 		}
 
-		public void Add(Trigger trigger)
-		{
-			throw new NotImplementedException();
-		}
-
+		/// <summary>
+		/// Add a new trigger to the collections of triggers for the task.
+		/// </summary>
+		/// <param name="taskTriggerType">The type of trigger to create.</param>
+		/// <returns>A <see cref="Trigger"/> instance of the specified type.</returns>
 		public Trigger AddNew(TaskTriggerType taskTriggerType)
 		{
 			if (v1Task != null)

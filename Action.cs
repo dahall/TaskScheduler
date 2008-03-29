@@ -1,41 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections;
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	/// <summary>
+	/// Defines the type of actions a task can perform.
+	/// </summary>
+	/// <remarks>The action type is defined when the action is created and cannot be changed later. See <see cref="ActionCollection.AddNew"/>.</remarks>
 	public enum TaskActionType
 	{
+		/// <summary>This action fires a handler.</summary>
 		ComHandler = 5,
+		/// <summary>This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is provided, find its associated application and launch the application with the document.</summary>
 		Execute = 0,
+		/// <summary>This action sends and e-mail.</summary>
 		SendEmail = 6,
+		/// <summary>This action shows a message box.</summary>
 		ShowMessage = 7
 	}
 
+	/// <summary>
+	/// Abstract base class that provides the common properties that are inherited by all action objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
+	/// </summary>
 	public abstract class Action : IDisposable
 	{
 		internal V2Interop.IAction iAction = null;
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal abstract void Bind(V2Interop.ITaskDefinition iTaskDef);
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public virtual void Dispose()
 		{
 			if (iAction != null)
 				Marshal.ReleaseComObject(iAction);
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the action.
+		/// </summary>
 		public virtual string Id
 		{
 			get { return (iAction == null) ? (string)unboundValues["Id"] : this.iAction.Id; }
 			set { if (iAction == null) unboundValues["Id"] = value; else this.iAction.Id = value; }
 		}
 
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual bool Bound { get { return this.iAction != null; } }
 
+		/// <summary>
+		/// Binds values to the interface that were set before the interface was available.
+		/// </summary>
 		protected void BindValues()
 		{
 			foreach (string key in unboundValues.Keys)
@@ -44,6 +66,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Creates a specialized class from a defined interface.
+		/// </summary>
+		/// <param name="iAction">Version 2.0 Action interface.</param>
+		/// <returns>Specialized action class</returns>
 		internal static Action CreateAction(V2Interop.IAction iAction)
 		{
 			switch (iAction.Type)
@@ -61,6 +88,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
+	/// </summary>
 	public class ComHandlerAction : Action
 	{
 		internal ComHandlerAction(V2Interop.IComHandlerAction action)
@@ -74,12 +104,18 @@ namespace Microsoft.Win32.TaskScheduler
 			BindValues();
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the handler class.
+		/// </summary>
 		public Guid ClassId
 		{
 			get { return (iAction == null) ? (Guid)unboundValues["ClassId"] : new Guid(((V2Interop.IComHandlerAction)iAction).ClassId); }
 			set { if (iAction == null) unboundValues["ClassId"] = value; else ((V2Interop.IComHandlerAction)iAction).ClassId = value.ToString(); }
 		}
 
+		/// <summary>
+		/// Gets or sets additional data that is associated with the handler.
+		/// </summary>
 		public string Data
 		{
 			get { return (iAction == null) ? (string)unboundValues["Data"] : ((V2Interop.IComHandlerAction)iAction).Data; }
@@ -87,11 +123,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents an action that executes a command-line operation.
+	/// </summary>
 	public class ExecAction : Action
 	{
 		private V1Interop.ITask v1Task;
 
-		public ExecAction(string path, string arguments, string workingDirectory)
+		/// <summary>
+		/// Creates a new instance of 
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="arguments"></param>
+		/// <param name="workingDirectory"></param>
+		internal ExecAction(string path, string arguments, string workingDirectory)
 		{
 			this.Path = path;
 			this.Arguments = arguments;
@@ -135,6 +180,9 @@ namespace Microsoft.Win32.TaskScheduler
 			BindValues();
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the action.
+		/// </summary>
 		public override string Id
 		{
 			get
@@ -151,6 +199,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the path to an executable file.
+		/// </summary>
 		public string Path
 		{
 			get
@@ -172,6 +223,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the arguments associated with the command-line operation.
+		/// </summary>
 		public string Arguments
 		{
 			get
@@ -193,6 +247,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the directory that contains either the executable file or the files that are used by the executable file.
+		/// </summary>
 		public string WorkingDirectory
 		{
 			get
@@ -215,6 +272,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents an action that sends an e-mail.
+	/// </summary>
 	public class EmailAction : Action
 	{
 		internal EmailAction(V2Interop.IEmailAction action)
@@ -228,66 +288,96 @@ namespace Microsoft.Win32.TaskScheduler
 			BindValues();
 		}
 
+		/// <summary>
+		/// Gets or sets the name of the server that you use to send e-mail from.
+		/// </summary>
 		public string Server
 		{
 			get { return (iAction == null) ? (string)unboundValues["Server"] : ((V2Interop.IEmailAction)iAction).Server; }
 			set { if (iAction == null) unboundValues["Server"] = value; else ((V2Interop.IEmailAction)iAction).Server = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the subject of the e-mail.
+		/// </summary>
 		public string Subject
 		{
 			get { return (iAction == null) ? (string)unboundValues["Subject"] : ((V2Interop.IEmailAction)iAction).Subject; }
 			set { if (iAction == null) unboundValues["Subject"] = value; else ((V2Interop.IEmailAction)iAction).Subject = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the e-mail address or addresses that you want to send the e-mail to.
+		/// </summary>
 		public string To
 		{
 			get { return (iAction == null) ? (string)unboundValues["To"] : ((V2Interop.IEmailAction)iAction).To; }
 			set { if (iAction == null) unboundValues["To"] = value; else ((V2Interop.IEmailAction)iAction).To = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the e-mail address or addresses that you want to Cc in the e-mail.
+		/// </summary>
 		public string Cc
 		{
 			get { return (iAction == null) ? (string)unboundValues["Cc"] : ((V2Interop.IEmailAction)iAction).Cc; }
 			set { if (iAction == null) unboundValues["Cc"] = value; else ((V2Interop.IEmailAction)iAction).Cc = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the e-mail address or addresses that you want to Bcc in the e-mail.
+		/// </summary>
 		public string Bcc
 		{
 			get { return (iAction == null) ? (string)unboundValues["Bcc"] : ((V2Interop.IEmailAction)iAction).Bcc; }
 			set { if (iAction == null) unboundValues["Bcc"] = value; else ((V2Interop.IEmailAction)iAction).Bcc = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the e-mail address that you want to reply to.
+		/// </summary>
 		public string ReplyTo
 		{
 			get { return (iAction == null) ? (string)unboundValues["ReplyTo"] : ((V2Interop.IEmailAction)iAction).ReplyTo; }
 			set { if (iAction == null) unboundValues["ReplyTo"] = value; else ((V2Interop.IEmailAction)iAction).ReplyTo = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the e-mail address that you want to send the e-mail from.
+		/// </summary>
 		public string From
 		{
 			get { return (iAction == null) ? (string)unboundValues["From"] : ((V2Interop.IEmailAction)iAction).From; }
 			set { if (iAction == null) unboundValues["From"] = value; else ((V2Interop.IEmailAction)iAction).From = value; }
 		}
 
-		/*public Microsoft.Win32.TaskScheduler.InternalV2.ITaskNamedValueCollection HeaderFields
+		private NamedValueCollection nvc = null;
+
+		/// <summary>
+		/// Gets or sets the header information in the e-mail message to send.
+		/// </summary>
+		public NamedValueCollection HeaderFields
 		{
 			get
 			{
-				throw new NotImplementedException();
+				if (nvc == null)
+					nvc = new NamedValueCollection(((V2Interop.IEmailAction)iAction).HeaderFields);
+				return nvc;
 			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}*/
+		}
 
+		/// <summary>
+		/// Gets or sets the body of the e-mail that contains the e-mail message.
+		/// </summary>
 		public string Body
 		{
 			get { return (iAction == null) ? (string)unboundValues["Body"] : ((V2Interop.IEmailAction)iAction).Body; }
 			set { if (iAction == null) unboundValues["Body"] = value; else ((V2Interop.IEmailAction)iAction).Body = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets an array of attachments that is sent with the e-mail.
+		/// </summary>
 		public object[] Attachments
 		{
 			get { return (iAction == null) ? (object[])unboundValues["Attachments"] : ((V2Interop.IEmailAction)iAction).Attachments; }
@@ -295,9 +385,12 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Represents an action that shows a message box when a task is activated.
+	/// </summary>
 	public class ShowMessageAction : Action
 	{
-		public ShowMessageAction(string messageBody, string title)
+		internal ShowMessageAction(string messageBody, string title)
 		{
 			this.MessageBody = messageBody;
 			this.Title = title;
@@ -314,12 +407,18 @@ namespace Microsoft.Win32.TaskScheduler
 			BindValues();
 		}
 
+		/// <summary>
+		/// Gets or sets the title of the message box.
+		/// </summary>
 		public string Title
 		{
 			get { return (iAction == null) ? (string)unboundValues["Title"] : ((V2Interop.IShowMessageAction)iAction).Title; }
 			set { if (iAction == null) unboundValues["Title"] = value; else ((V2Interop.IShowMessageAction)iAction).Title = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the message text that is displayed in the body of the message box.
+		/// </summary>
 		public string MessageBody
 		{
 			get { return (iAction == null) ? (string)unboundValues["MessageBody"] : ((V2Interop.IShowMessageAction)iAction).MessageBody; }
@@ -327,7 +426,11 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
-	public sealed class ActionCollection : ICollection<Action>, IDisposable
+	/// <summary>
+	/// Collection that contains the actions that are performed by the task.
+	/// </summary>
+	/// <remarks>A Task Scheduler 1.0 task can only contain a single <see cref="ExecAction"/>.</remarks>
+	public sealed class ActionCollection : IEnumerable<Action>, IDisposable
 	{
 		private V1Interop.ITask v1Task;
 		private V2Interop.IActionCollection v2Coll;
@@ -342,14 +445,20 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Coll = iTaskDef.Actions;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			v1Task = null;
 			v2Coll = null;
 		}
 
-		public void Add(Action action) { throw new NotImplementedException(); }
-
+		/// <summary>
+		/// Adds a new <see cref="Action"/> instance to the task.
+		/// </summary>
+		/// <param name="actionType">Type of task to be created</param>
+		/// <returns>Specialized <see cref="Action"/> instance.</returns>
 		public Action AddNew(TaskActionType actionType)
 		{
 			if (v1Task != null)
@@ -358,36 +467,73 @@ namespace Microsoft.Win32.TaskScheduler
 			return Action.CreateAction(v2Coll.Create(actionType));
 		}
 
-		public void Clear()
+		/// <summary>
+		/// Gets a specified action from the collection.
+		/// </summary>
+		/// <param name="index">The index of the action to be retrieved.</param>
+		/// <returns>Specialized <see cref="Action"/> instance.</returns>
+		public Action this[int index]
 		{
-			throw new NotImplementedException();
+			get { if (v2Coll != null) return Action.CreateAction(v2Coll[index]); throw new NotSupportedException(); }
 		}
 
-		public bool Contains(Action item)
+		/// <summary>
+		/// Gets or sets the identifier of the principal for the task.
+		/// </summary>
+		public string Context
 		{
-			throw new NotImplementedException();
+			get
+			{
+				if (v2Coll != null)
+					return v2Coll.Context;
+				return string.Empty;
+			}
+			set
+			{
+				if (v2Coll != null)
+					v2Coll.Context = value;
+				else
+					throw new NotSupportedException();
+			}
 		}
 
-		public void CopyTo(Action[] array, int arrayIndex)
-		{
-			throw new NotImplementedException();
-		}
-
+		/// <summary>
+		/// Gets the number of actions in the collection.
+		/// </summary>
 		public int Count
 		{
-			get { throw new NotImplementedException(); }
+			get
+			{
+				if (v2Coll != null)
+					return v2Coll.Count;
+				return 1;
+			}
 		}
 
-		public bool IsReadOnly
+		/// <summary>
+		/// Gets or sets an XML-formatted version of the collection.
+		/// </summary>
+		public string XmlText
 		{
-			get { throw new NotImplementedException(); }
+			get
+			{
+				if (v2Coll != null)
+					return v2Coll.XmlText;
+				throw new NotSupportedException();
+			}
+			set
+			{
+				if (v2Coll != null)
+					v2Coll.XmlText = value;
+				else
+					throw new NotSupportedException();
+			}
 		}
 
-		public bool Remove(Action item)
-		{
-			throw new NotImplementedException();
-		}
-
+		/// <summary>
+		/// Retrieves an enumeration of each of the actions.
+		/// </summary>
+		/// <returns>Returns an object that implements the <see cref="IEnumerator"/> interface and that can iterate through the <see cref="Action"/> objects within the <see cref="ActionCollection"/>.</returns>
 		public IEnumerator<Action> GetEnumerator()
 		{
 			throw new NotImplementedException();
@@ -398,7 +544,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return this.GetEnumerator();
 		}
 
-		public class Enumerator : IEnumerator<Action>
+		internal class Enumerator : IEnumerator<Action>
 		{
 			private V1Interop.ITask v1Task;
 			private int v1Pos = -1;
@@ -433,6 +579,9 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				v1Task = null;
@@ -458,7 +607,6 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Pos = -1;
 			}
 		}
-
 	}
 
 }

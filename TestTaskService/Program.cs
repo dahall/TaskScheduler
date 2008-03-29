@@ -45,7 +45,7 @@ namespace TestTaskService
 				TaskFolder sub = tf.SubFolders["Microsoft"];
 				Console.WriteLine("Subfolder path: " + sub.Path);
 			}
-			catch (NotSupportedException nse) { }
+			catch (NotSupportedException) { }
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.ToString());

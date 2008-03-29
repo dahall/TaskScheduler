@@ -64,7 +64,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	/// user interface in Windows XP so that may not be true.
 	/// </summary>
 	[Flags]
-	public enum TaskFlags
+	internal enum TaskFlags
 	{
 		/// <summary>
 		/// The interactive flag is set if the task is intended to be displayed to the user. 
@@ -88,7 +88,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		/// <summary>
 		/// The task terminates if the computer makes an idle to non-idle transition while the task is running.
 		/// The computer is not considered idle until the IdleWait triggers' time elapses with no user input.
-		/// Windows 95 only. For information regarding idle triggers, see <see cref="OnIdleTrigger"/>.
+		/// Windows 95 only. For information regarding idle triggers, see <see cref="IdleTrigger"/>.
 		/// </summary>
 		KillOnIdleEnd = 0x20,
 		/// <summary>
@@ -133,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	/// Status values returned for a task.  Some values have been determined to occur although
 	/// they do no appear in the Task Scheduler system documentation.
 	/// </summary>
-	public enum TaskStatus
+	internal enum TaskStatus
 	{
 		/// <summary>The task is ready to run at its next scheduled time.</summary>
 		Ready = HResult.SCHED_S_TASK_READY,

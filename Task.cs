@@ -128,6 +128,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 	#region Task Support Classes
 
+	/// <summary>
+	/// Provides the administrative information that can be used to describe the task. This information includes details such as a description of the task, the author of the task, the date the task is registered, and the security descriptor of the task.
+	/// </summary>
 	public sealed class TaskRegistrationInfo : IDisposable
 	{
 		private TaskScheduler.V1Interop.ITask v1Task = null;
@@ -143,6 +146,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			v1Task = null;
@@ -150,6 +156,9 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v2RegInfo);
 		}
 
+		/// <summary>
+		/// Gets or sets the description of the task.
+		/// </summary>
 		public string Description
 		{
 			get
@@ -167,6 +176,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the author of the task.
+		/// </summary>
 		public string Author
 		{
 			get
@@ -184,35 +196,44 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public string Version
+		/// <summary>
+		/// Gets or sets the version number of the task.
+		/// </summary>
+		public Version Version
 		{
 			get
 			{
 				if (v2RegInfo != null)
-					return v2RegInfo.Version;
-				return string.Empty;
+				{
+					try { return new Version(v2RegInfo.Version); }
+					catch { }
+				}
+				return new Version(1, 0);
 			}
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Version = value;
+					v2RegInfo.Version = value.ToString();
 				else
 					throw new NotSupportedException();
 			}
 		}
 
-		public string Date
+		/// <summary>
+		/// Gets or sets the date and time when the task is registered.
+		/// </summary>
+		public DateTime Date
 		{
 			get
 			{
 				if (v2RegInfo != null)
-					return v2RegInfo.Date;
+					return DateTime.Parse(v2RegInfo.Date);
 				throw new NotSupportedException();
 			}
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Date = value;
+					v2RegInfo.Date = value.ToString(Trigger.V2BoundaryDateFormat);
 				else
 					throw new NotSupportedException();
 			}
@@ -243,6 +264,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task.SetWorkItemData((ushort)stream.Length, stream.GetBuffer());
 		}
 
+		/// <summary>
+		/// Gets or sets any additional documentation for the task.
+		/// </summary>
 		public string Documentation
 		{
 			get
@@ -260,6 +284,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets an XML-formatted version of the registration information for the task. Not available for Task Scheduler 1.0.
+		/// </summary>
 		public string XmlText
 		{
 			get
@@ -277,23 +304,29 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public string URI
+		/// <summary>
+		/// Gets or sets the URI of the task.
+		/// </summary>
+		public Uri URI
 		{
 			get
 			{
 				if (v2RegInfo != null)
-					return v2RegInfo.URI;
+					return new Uri(v2RegInfo.URI);
 				throw new NotSupportedException();
 			}
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.URI = value;
+					v2RegInfo.URI = value.ToString();
 				else
 					throw new NotSupportedException();
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the security descriptor of the task.
+		/// </summary>
 		public string SecurityDescriptorSddlForm
 		{
 			get
@@ -311,6 +344,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets where the task originated from. For example, a task may originate from a component, service, application, or user.
+		/// </summary>
 		public string Source
 		{
 			get
@@ -329,6 +365,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Provides the settings that the Task Scheduler service uses to perform the task.
+	/// </summary>
 	public sealed class TaskSettings : IDisposable
 	{
 		private TaskScheduler.V1Interop.ITask v1Task = null;
@@ -346,6 +385,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Settings != null)
@@ -355,6 +397,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = null;
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.
+		/// </summary>
 		public bool AllowDemandStart
 		{
 			get
@@ -372,6 +417,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value that specifies how long the Task Scheduler will attempt to restart the task.
+		/// </summary>
 		public int RestartInterval
 		{
 			get
@@ -389,6 +437,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the number of times that the Task Scheduler will attempt to restart the task.
+		/// </summary>
 		public int RestartCount
 		{
 			get
@@ -406,6 +457,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the policy that defines how the Task Scheduler handles multiple instances of the task.
+		/// </summary>
 		public TaskInstancesPolicy MultipleInstances
 		{
 			get
@@ -423,6 +477,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task will be stopped if the computer switches to battery power.
+		/// </summary>
 		public bool StopIfGoingOnBatteries
 		{
 			get
@@ -446,6 +503,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task will not be started if the computer is running on battery power.
+		/// </summary>
 		public bool DisallowStartIfOnBatteries
 		{
 			get
@@ -469,6 +529,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task may be terminated by using TerminateProcess.
+		/// </summary>
 		public bool AllowHardTerminate
 		{
 			get
@@ -486,6 +549,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.
+		/// </summary>
 		public bool StartWhenAvailable
 		{
 			get
@@ -503,6 +569,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets an XML-formatted definition of the task settings.
+		/// </summary>
 		public string XmlText
 		{
 			get
@@ -520,6 +589,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only when a network is available.
+		/// </summary>
 		public bool RunOnlyIfNetworkAvailable
 		{
 			get
@@ -543,6 +615,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the amount of time that is allowed to complete the task.
+		/// </summary>
 		public TimeSpan ExecutionTimeLimit
 		{
 			get
@@ -560,6 +635,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task is enabled. The task can be performed only when this setting is TRUE.
+		/// </summary>
 		public bool Enabled
 		{
 			get
@@ -583,6 +661,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.
+		/// </summary>
 		public TimeSpan DeleteExpiredTaskAfter
 		{
 			get
@@ -600,6 +681,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the priority level of the task.
+		/// </summary>
 		public System.Diagnostics.ProcessPriorityClass Priority
 		{
 			get
@@ -617,6 +701,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets an integer value that indicates which version of Task Scheduler a task is compatible with.
+		/// </summary>
 		public TaskCompatibility Compatibility
 		{
 			get
@@ -634,6 +721,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task will not be visible in the UI by default.
+		/// </summary>
 		public bool Hidden
 		{
 			get
@@ -657,6 +747,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the information that specifies how the Task Scheduler performs tasks when the computer is in an idle state.
+		/// </summary>
 		public IdleSettings IdleSettings
 		{
 			get
@@ -672,6 +765,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the computer is in an idle condition.
+		/// </summary>
 		public bool RunOnlyIfIdle
 		{
 			get
@@ -695,6 +791,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler will wake the computer when it is time to run the task.
+		/// </summary>
 		public bool WakeToRun
 		{
 			get
@@ -712,6 +811,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of ITaskSettings is true and a network propfile is specified in the NetworkSettings property, then the task will run only if the specified network profile is available.
+		/// </summary>
 		public NetworkSettings NetworkSettings
 		{
 			get
@@ -728,6 +830,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Specifies how the Task Scheduler performs tasks when the computer is in an idle condition. For information about idle conditions, see Task Idle Conditions.
+	/// </summary>
 	public sealed class IdleSettings : IDisposable
 	{
 		private V1Interop.ITask v1Task = null;
@@ -743,6 +848,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Settings != null)
@@ -750,6 +858,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = null;
 		}
 
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.
+		/// </summary>
 		public TimeSpan IdleDuration
 		{
 			get
@@ -771,6 +882,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur.
+		/// </summary>
 		public TimeSpan WaitTimeout
 		{
 			get
@@ -792,6 +906,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler will terminate the task if the idle condition ends before the task is completed.
+		/// </summary>
 		public bool StopOnIdleEnd
 		{
 			get
@@ -815,6 +932,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates whether the task is restarted when the computer cycles into an idle condition more than once.
+		/// </summary>
 		public bool RestartOnIdle
 		{
 			get
@@ -839,6 +959,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Provides the settings that the Task Scheduler service uses to obtain a network profile.
+	/// </summary>
 	public sealed class NetworkSettings : IDisposable
 	{
 		private V2Interop.INetworkSettings v2Settings = null;
@@ -852,12 +975,18 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Settings != null)
 				Marshal.ReleaseComObject(v2Settings);
 		}
 
+		/// <summary>
+		/// Gets or sets the name of a network profile. The name is used for display purposes.
+		/// </summary>
 		public string Name
 		{
 			get
@@ -875,6 +1004,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a GUID value that identifies a network profile.
+		/// </summary>
 		public string Id
 		{
 			get
@@ -893,6 +1025,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Provides the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+	/// </summary>
 	public sealed class TaskPrincipal
 	{
 		private V2Interop.IPrincipal v2Principal;
@@ -908,6 +1043,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Principal != null)
@@ -915,6 +1053,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = null;
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the principal.
+		/// </summary>
 		public string Id
 		{
 			get
@@ -932,6 +1073,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the name of the principal that is displayed in the Task Scheduler UI.
+		/// </summary>
 		public string DisplayName
 		{
 			get
@@ -949,6 +1093,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the user identifier that is required to run the tasks that are associated with the principal.
+		/// </summary>
 		public string UserId
 		{
 			get
@@ -966,6 +1113,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the security logon method that is required to run the tasks that are associated with the principal.
+		/// </summary>
 		public TaskLogonType LogonType
 		{
 			get
@@ -1000,6 +1150,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal.
+		/// </summary>
 		public string GroupId
 		{
 			get
@@ -1017,6 +1170,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
+		/// </summary>
 		public TaskRunLevel RunLevel
 		{
 			get
@@ -1035,6 +1191,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Defines all the components of a task, such as the task settings, triggers, actions, and registration information.
+	/// </summary>
 	public sealed class TaskDefinition
 	{
 		internal V2Interop.ITaskDefinition v2Def = null;
@@ -1057,6 +1216,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Def = iDef;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			regInfo = null;
@@ -1087,6 +1249,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets a class instance of registration information that is used to describe a task, such as the description of the task, the author of the task, and the date the task is registered.
+		/// </summary>
 		public TaskRegistrationInfo RegistrationInfo
 		{
 			get
@@ -1102,6 +1267,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets a collection of triggers that are used to start a task.
+		/// </summary>
 		public TriggerCollection Triggers
 		{
 			get
@@ -1117,6 +1285,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the settings that define how the Task Scheduler service performs the task.
+		/// </summary>
 		public TaskSettings Settings
 		{
 			get
@@ -1132,6 +1303,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the data that is associated with the task. This data is ignored by the Task Scheduler service, but is used by third-parties who wish to extend the task format.
+		/// </summary>
 		public string Data
 		{
 			get
@@ -1149,6 +1323,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the principal for the task that provides the security credentials for the task.
+		/// </summary>
 		public TaskPrincipal Principal
 		{
 			get
@@ -1164,6 +1341,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets a collection of actions that are performed by the task.
+		/// </summary>
 		public ActionCollection Actions
 		{
 			get
@@ -1179,6 +1359,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the XML-formatted definition of the task. Not available on Task Scheduler 1.0.
+		/// </summary>
 		public string XmlText
 		{
 			get
@@ -1200,6 +1383,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 	#endregion
 
+	/// <summary>
+	/// Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials that are used to register the task, and the properties that describe the task.
+	/// </summary>
 	public sealed class Task : IDisposable
 	{
 		internal V1Interop.ITask v1Task;
@@ -1215,6 +1401,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			if (v2Task != null)
@@ -1268,6 +1457,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return fileName;
 		}
 
+		/// <summary>
+		/// Gets the name of the registered task.
+		/// </summary>
 		public string Name
 		{
 			get
@@ -1278,6 +1470,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the path to where the registered task is stored.
+		/// </summary>
 		public string Path
 		{
 			get
@@ -1288,6 +1483,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the operational state of the registered task.
+		/// </summary>
 		public TaskState State
 		{
 			get
@@ -1315,6 +1513,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates if the registered task is enabled.
+		/// </summary>
 		public bool Enabled
 		{
 			get
@@ -1338,7 +1539,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public RunningTask Run(object parameters)
+		/// <summary>
+		/// Runs the registered task immediately.
+		/// </summary>
+		/// <param name="parameters">The parameters used as values in the task actions.</param>
+		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
 				return new RunningTask(v2Task.Run(parameters));
@@ -1347,10 +1553,18 @@ namespace Microsoft.Win32.TaskScheduler
 			return new RunningTask(this);
 		}
 
-		public RunningTask RunEx(object parameters, int flags, int sessionID, string user)
+		/// <summary>
+		/// Runs the registered task immediately using specified flags and a session identifier.
+		/// </summary>
+		/// <param name="flags">Defines how the task is run.</param>
+		/// <param name="sessionID">The terminal server session in which you want to start the task.</param>
+		/// <param name="user">The user for which the task runs.</param>
+		/// <param name="parameters">The parameters used as values in the task actions.</param>
+		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(v2Task.RunEx(parameters, flags, sessionID, user));
+				return new RunningTask(v2Task.RunEx(parameters, (int)flags, sessionID, user));
 			throw new NotSupportedException();
 		}
 
@@ -1361,6 +1575,9 @@ namespace Microsoft.Win32.TaskScheduler
 			throw new NotSupportedException();
 		}*/
 
+		/// <summary>
+		/// Gets the time the registered task was last run.
+		/// </summary>
 		public DateTime LastRunTime
 		{
 			get
@@ -1371,6 +1588,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the results that were returned the last time the registered task was run.
+		/// </summary>
 		public int LastTaskResult
 		{
 			get
@@ -1381,6 +1601,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the number of times the registered task has missed a scheduled run.
+		/// </summary>
 		public int NumberOfMissedRuns
 		{
 			get
@@ -1392,6 +1615,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the time when the registered task is next scheduled to run.
+		/// </summary>
 		public DateTime NextRunTime
 		{
 			get
@@ -1402,6 +1628,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the definition of the task.
+		/// </summary>
 		public TaskDefinition Definition
 		{
 			get
@@ -1414,6 +1643,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the XML-formatted registration information for the registered task. Not available with Task Scheduler 1.0.
+		/// </summary>
 		public string Xml
 		{
 			get
@@ -1425,6 +1657,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the security descriptor for the task. Not available to Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
+		/// <returns>The security descriptor for the task.</returns>
 		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
 		{
 			if (v2Task != null)
@@ -1433,14 +1670,22 @@ namespace Microsoft.Win32.TaskScheduler
 			throw new NotSupportedException();
 		}
 
-		public void SetSecurityDescriptorSddlForm(string sddl, System.Security.AccessControl.AccessControlSections includeSections)
+		/// <summary>
+		/// Sets the security descriptor for the task. Not available to Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="sddlForm">The security descriptor for the task.</param>
+		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
+		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.AccessControlSections includeSections)
 		{
 			if (v2Task != null)
-				v2Task.SetSecurityDescriptor(sddl, (int)includeSections);
+				v2Task.SetSecurityDescriptor(sddlForm, (int)includeSections);
 
 			throw new NotSupportedException();
 		}
 
+		/// <summary>
+		/// Stops the registered task immediately.
+		/// </summary>
 		public void Stop()
 		{
 			if (v2Task != null)
@@ -1448,6 +1693,12 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task.Terminate();
 		}
 
+		/// <summary>
+		/// Gets the times that the registered task is scheduled to run during a specified time. Not available under Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="start">The starting time for the query.</param>
+		/// <param name="end">The ending time for the query.</param>
+		/// <returns>The scheduled times that the task will run.</returns>
 		public DateTime[] GetRunTimes(DateTime start, DateTime end)
 		{
 			if (v2Task != null)
@@ -1471,6 +1722,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Provides the methods to get information from and control a running task.
+	/// </summary>
 	public class RunningTask : IDisposable
 	{
 		private Task v1Task;
@@ -1486,12 +1740,18 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
 		public void Dispose()
 		{
 			v1Task = null;
 			if (v2Task != null) Marshal.ReleaseComObject(v2Task);
 		}
 
+		/// <summary>
+		/// Gets the name of the task.
+		/// </summary>
 		public string Name
 		{
 			get
@@ -1502,6 +1762,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the GUID identifier for this instance of the task.
+		/// </summary>
 		public Guid InstanceGuid
 		{
 			get
@@ -1512,6 +1775,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the path to where the task is stored.
+		/// </summary>
 		public string Path
 		{
 			get
@@ -1522,6 +1788,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the state of the running task.
+		/// </summary>
 		public TaskState State
 		{
 			get
@@ -1532,6 +1801,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the current action that the running task is performing.
+		/// </summary>
 		public string CurrentAction
 		{
 			get
@@ -1542,6 +1814,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Stops this instance of the task.
+		/// </summary>
 		public void Stop()
 		{
 			if (v2Task != null)
@@ -1549,12 +1824,18 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task.v1Task.Terminate();
 		}
 
+		/// <summary>
+		/// Refreshes all of the local instance variables of the task.
+		/// </summary>
 		public void Refresh()
 		{
 			if (v2Task != null)
 				v2Task.Refresh();
 		}
 
+		/// <summary>
+		/// Gets the process ID for the engine (process) which is running the task.
+		/// </summary>
 		public uint EnginePID
 		{
 			get

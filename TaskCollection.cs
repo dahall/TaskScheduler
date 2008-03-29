@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	public sealed class TaskCollection : ICollection<Task>
+	/// <summary>
+	/// Contains all the tasks that are registered.
+	/// </summary>
+	public sealed class TaskCollection : IEnumerable<Task>, IDisposable
 	{
 		private V1Interop.ITaskScheduler v1TS = null;
 		private V2Interop.IRegisteredTaskCollection v2Coll = null;
@@ -21,6 +23,20 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Coll = iTaskColl;
 		}
 
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
+		public void Dispose()
+		{
+			v1TS = null;
+			if (v2Coll != null)
+				Marshal.ReleaseComObject(v2Coll);
+		}
+
+		/// <summary>
+		/// Gets the collection enumerator for the register task collection.
+		/// </summary>
+		/// <returns>An <see cref="System.Collections.IEnumerator"/> for this collection.</returns>
 		public IEnumerator<Task> GetEnumerator()
 		{
 			if (v1TS != null)
@@ -33,7 +49,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return this.GetEnumerator();
 		}
 
-		public class V1TaskEnumerator : IEnumerator<Task>
+		internal class V1TaskEnumerator : IEnumerator<Task>, IDisposable
 		{
 			private V1Interop.IEnumWorkItems wienum = null;
 			private V1Interop.ITaskScheduler m_ts = null;
@@ -41,7 +57,7 @@ namespace Microsoft.Win32.TaskScheduler
 			private string curItem = null;
 
 			/// <summary>
-			/// Internal constructor - Only accessable through <see cref="Scheduler.Tasks.GetEnumerator()"/>
+			/// Internal constructor
 			/// </summary>
 			/// <param name="ts">ITaskScheduler instance</param>
 			internal V1TaskEnumerator(V1Interop.ITaskScheduler ts)
@@ -59,6 +75,9 @@ namespace Microsoft.Win32.TaskScheduler
 				get { return new Task(m_ts.Activate(curItem, ref ITaskGuid)); }
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				if (wienum != null) Marshal.ReleaseComObject(wienum);
@@ -71,7 +90,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Moves to the next task. See <see cref="IEnumerator.MoveNext()"/> for more information.
+			/// Moves to the next task. See MoveNext for more information.
 			/// </summary>
 			/// <returns>true if next task found, false if no more tasks.</returns>
 			public bool MoveNext()
@@ -97,7 +116,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Reset task enumeration. See <see cref="IEnumerator.Reset()"/> for more information.
+			/// Reset task enumeration. See Reset for more information.
 			/// </summary>
 			public void Reset()
 			{
@@ -106,7 +125,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public class V2TaskEnumerator : IEnumerator<Task>
+		internal class V2TaskEnumerator : IEnumerator<Task>, IDisposable
 		{
 			private System.Collections.IEnumerator iEnum;
 
@@ -120,6 +139,9 @@ namespace Microsoft.Win32.TaskScheduler
 				get { return new Task((TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				iEnum = null;
@@ -141,26 +163,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public void Add(Task item)
-		{
-			throw new NotSupportedException();
-		}
-
-		public void Clear()
-		{
-			throw new NotSupportedException();
-		}
-
-		public bool Contains(Task item)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CopyTo(Task[] array, int arrayIndex)
-		{
-			throw new NotImplementedException();
-		}
-
+		/// <summary>
+		/// Gets the number of registered tasks in the collection.
+		/// </summary>
 		public int Count
 		{
 			get
@@ -175,6 +180,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the specified registered task from the collection.
+		/// </summary>
+		/// <param name="index">The name of the registered task to be retrieved.</param>
+		/// <returns>A <see cref="Task"/> instance that contains the requested context.</returns>
 		public Task this[string index]
 		{
 			get
@@ -185,18 +195,11 @@ namespace Microsoft.Win32.TaskScheduler
 				return new Task(v1TS.Activate(index, ref ITaskGuid));
 			}
 		}
-
-		public bool IsReadOnly
-		{
-			get { return true; }
-		}
-
-		public bool Remove(Task item)
-		{
-			throw new NotSupportedException();
-		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public sealed class RunningTaskCollection : IEnumerable<RunningTask>
 	{
 		private TaskScheduler.V1Interop.ITaskScheduler v1TS = null;
@@ -212,6 +215,10 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Coll = iTaskColl;
 		}
 
+		/// <summary>
+		/// Gets an IEnumerator instance for this collection.
+		/// </summary>
+		/// <returns>An enumerator.</returns>
 		public IEnumerator<RunningTask> GetEnumerator()
 		{
 			if (v2Coll != null)
@@ -224,7 +231,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return this.GetEnumerator();
 		}
 
-		public class V1RunningTaskEnumerator : IEnumerator<RunningTask>
+		internal class V1RunningTaskEnumerator : IEnumerator<RunningTask>
 		{
 			private TaskCollection.V1TaskEnumerator tEnum;
 
@@ -249,6 +256,9 @@ namespace Microsoft.Win32.TaskScheduler
 				get { return new RunningTask(tEnum.Current); }
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				tEnum.Dispose();
@@ -265,7 +275,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public class RunningTaskEnumerator : IEnumerator<RunningTask>
+		internal class RunningTaskEnumerator : IEnumerator<RunningTask>
 		{
 			private System.Collections.IEnumerator iEnum;
 
@@ -279,6 +289,9 @@ namespace Microsoft.Win32.TaskScheduler
 				get { return new RunningTask((TaskScheduler.V2Interop.IRunningTask)iEnum.Current); }
 			}
 
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
 			public void Dispose()
 			{
 				iEnum = null;
