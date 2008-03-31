@@ -50,7 +50,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				return new TaskFolder(v2Folder.GetFolder(Path));
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}*/
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				return new TaskFolder(v2Folder.CreateFolder(subFolderName, sddlForm));
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				v2Folder.DeleteFolder(subFolderName, 0);
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/*public Task GetTask(string Path)
@@ -141,7 +141,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				return new Task(v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -173,7 +173,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				return v2Folder.GetSecurityDescriptor((int)includeSections);
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -186,7 +186,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Folder != null)
 				v2Folder.SetSecurityDescriptor(sddlForm, (int)includeSections);
 			else
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 		}
 	}
 }

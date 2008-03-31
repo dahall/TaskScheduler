@@ -36,113 +36,73 @@ namespace Microsoft.Win32.TaskScheduler
 	[Flags]
 	public enum DaysOfTheWeek : short
 	{
-		/// <summary>
-		/// Sunday
-		/// </summary>
+		/// <summary>Sunday</summary>
 		Sunday = 0x1,
-		/// <summary>
-		/// Monday
-		/// </summary>
+		/// <summary>Monday</summary>
 		Monday = 0x2,
-		/// <summary>
-		/// Tuesday
-		/// </summary>
+		/// <summary>Tuesday</summary>
 		Tuesday = 0x4,
-		/// <summary>
-		/// Wednesday
-		/// </summary>
+		/// <summary>Wednesday</summary>
 		Wednesday = 0x8,
-		/// <summary>
-		/// Thursday
-		/// </summary>
+		/// <summary>Thursday</summary>
 		Thursday = 0x10,
-		/// <summary>
-		/// Friday
-		/// </summary>
+		/// <summary>Friday</summary>
 		Friday = 0x20,
-		/// <summary>
-		/// Saturday
-		/// </summary>
-		Saturday = 0x40
+		/// <summary>Saturday</summary>
+		Saturday = 0x40,
+		/// <summary>All days</summary>
+		AllDays = 0x7F
 	}
 
 	/// <summary>Values for week of month (first, second, ..., last)</summary>
 	public enum WhichWeek : short
 	{
-		/// <summary>
-		/// First week of the month
-		/// </summary>
+		/// <summary>First week of the month</summary>
 		FirstWeek = 1,
-		/// <summary>
-		/// Second week of the month
-		/// </summary>
+		/// <summary>Second week of the month</summary>
 		SecondWeek = 2,
-		/// <summary>
-		/// Third week of the month
-		/// </summary>
-		ThirdWeek = 3,
-		/// <summary>
-		/// Fourth week of the month
-		/// </summary>
-		FourthWeek = 4,
-		/// <summary>
-		/// Last week of the month
-		/// </summary>
-		LastWeek = 5
+		/// <summary>Third week of the month</summary>
+		ThirdWeek = 4,
+		/// <summary>Fourth week of the month</summary>
+		FourthWeek = 8,
+		/// <summary>Fifth week of the month</summary>
+		FifthWeek = 0x10,
+		/// <summary>Last week of the month</summary>
+		LastWeek = 0x20,
+		/// <summary>Last week of the month</summary>
+		AllWeeks = 0x1F
 	}
 
 	/// <summary>Values for months of the year (January, February, etc.)</summary>
 	[Flags]
 	public enum MonthsOfTheYear : short
 	{
-		/// <summary>
-		/// January
-		/// </summary>
+		/// <summary>January</summary>
 		January = 0x1,
-		/// <summary>
-		/// February
-		/// </summary>
+		/// <summary>February</summary>
 		February = 0x2,
-		/// <summary>
-		/// March
-		/// </summary>
+		/// <summary>March</summary>
 		March = 0x4,
-		/// <summary>
-		/// April
-		/// </summary>
+		/// <summary>April</summary>
 		April = 0x8,
-		/// <summary>
-		///May 
-		/// </summary>
+		/// <summary>May</summary>
 		May = 0x10,
-		/// <summary>
-		/// June
-		/// </summary>
+		/// <summary>June</summary>
 		June = 0x20,
-		/// <summary>
-		/// July
-		/// </summary>
+		/// <summary>July</summary>
 		July = 0x40,
-		/// <summary>
-		/// August
-		/// </summary>
+		/// <summary>August</summary>
 		August = 0x80,
-		/// <summary>
-		/// September
-		/// </summary>
+		/// <summary>September</summary>
 		September = 0x100,
-		/// <summary>
-		/// October
-		/// </summary>
+		/// <summary>October</summary>
 		October = 0x200,
-		/// <summary>
-		/// November
-		/// </summary>
+		/// <summary>November</summary>
 		November = 0x400,
-		/// <summary>
-		/// December
-		/// </summary>
-		December = 0x800
+		/// <summary>December</summary>
+		December = 0x800,
+		/// <summary>All months</summary>
+		AllMonths = 0xFFF
 	}
 
 	/// <summary>
@@ -283,7 +243,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Trigger != null)
 					v2Trigger.Id = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -315,14 +275,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(v2Trigger.ExecutionTimeLimit);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					v2Trigger.ExecutionTimeLimit = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -544,14 +504,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IBootTrigger)v2Trigger).Delay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IBootTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -572,14 +532,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IEventTrigger)v2Trigger).Subscription;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Subscription = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -592,14 +552,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IEventTrigger)v2Trigger).Delay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -615,7 +575,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (nvc == null)
 				{
 					if (v2Trigger == null)
-						throw new NotSupportedException();
+						throw new NotV1SupportedException();
 					nvc = new NamedValueCollection(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
 				}
 				return nvc;
@@ -663,14 +623,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -701,14 +661,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ILogonTrigger)v2Trigger).Delay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ILogonTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -721,14 +681,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ILogonTrigger)v2Trigger).UserId = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -773,7 +733,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
-				return (WhichWeek)v1TriggerData.Data.monthlyDOW.WhichWeek;
+				int wk = 1 << (v1TriggerData.Data.monthlyDOW.WhichWeek - 1);
+				if (wk == 0x10) wk = 0x20;
+				return (WhichWeek)wk;
 			}
 			set
 			{
@@ -781,11 +743,20 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)value;
+					if (Contains(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x20 }, (ushort)value))
+						v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)value;
+					else
+						throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
 					Bind();
 				}
 			}
 		}
+
+		internal static bool Contains<T>(ICollection<T> data, T value)
+		{
+			if (data == null) throw new ArgumentNullException("data");
+			return data.Contains(value);
+		} 
 
 		/// <summary>
 		/// Gets or sets the months of the year during which the task runs.
@@ -819,21 +790,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth;
-				return (v1TriggerData.Data.monthlyDOW.WhichWeek & (short)WhichWeek.LastWeek) == (short)WhichWeek.LastWeek;
+				return v1TriggerData.Data.monthlyDOW.WhichWeek == 5;
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth = value;
 				else
-				{
-					WhichWeek wom = this.WeeksOfMonth;
-					if (value)
-						this.WeeksOfMonth |= WhichWeek.LastWeek;
-					else
-						this.WeeksOfMonth ^= ~WhichWeek.LastWeek;
-					Bind();
-				}
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -846,14 +810,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -960,14 +924,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -980,14 +944,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1008,14 +972,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IRegistrationTrigger)v2Trigger).Delay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IRegistrationTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1036,14 +1000,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1056,14 +1020,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1076,14 +1040,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1105,14 +1069,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ITimeTrigger)v2Trigger).RandomDelay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ITimeTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1180,14 +1144,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}

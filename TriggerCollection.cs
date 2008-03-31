@@ -163,7 +163,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v1Task != null)
 			{
 				if (taskTriggerType == TaskTriggerType.Registration || taskTriggerType == TaskTriggerType.Event || taskTriggerType == TaskTriggerType.SessionStateChange)
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 				int v1tt = (int)taskTriggerType - 1;
 				if (v1tt >= 7) v1tt--;
 				ushort idx;
