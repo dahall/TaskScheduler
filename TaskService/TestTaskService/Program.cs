@@ -26,7 +26,7 @@ namespace TestTaskService
 			Console.WriteLine("Root folder tasks ({0}):", tf.Tasks.Count);
 			foreach (Task t in tf.Tasks)
 			{
-				Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Path, t.State);
+				Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
 				foreach (Trigger trg in t.Definition.Triggers)
 					Console.WriteLine(" + {0}", trg.Id);
 			}
@@ -52,28 +52,119 @@ namespace TestTaskService
 			}
 			
 			TaskDefinition td = ts.NewTask();
-			td.RegistrationInfo.Author = "dahall";
-			td.RegistrationInfo.Description = "Does something";
+			td.Data = "Your data";
 			td.Principal.UserId = "AMERICAS\\dahall";
 			td.Principal.LogonType = TaskLogonType.InteractiveToken;
+			td.RegistrationInfo.Author = "dahall";
+			td.RegistrationInfo.Description = "Does something";
+			td.RegistrationInfo.Documentation = "Don't pretend this is real.";
+			td.Settings.DisallowStartIfOnBatteries = true;
+			td.Settings.Enabled = true;
 			td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(1);
+			td.Settings.Hidden = true;
 			td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
+			td.Settings.IdleSettings.RestartOnIdle = false;
+			td.Settings.IdleSettings.StopOnIdleEnd = false;
 			td.Settings.IdleSettings.WaitTimeout = TimeSpan.FromMinutes(10);
+			td.Settings.Priority = System.Diagnostics.ProcessPriorityClass.Normal;
+			td.Settings.RunOnlyIfIdle = false;
+			td.Settings.RunOnlyIfNetworkAvailable = false;
+			td.Settings.StopIfGoingOnBatteries = true;
 			if (newVer)
+			{
+				td.Principal.RunLevel = TaskRunLevel.LUA;
+				//td.RegistrationInfo.SecurityDescriptorSddlForm = "O:COG:CGD::(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)";
+				td.RegistrationInfo.Source = "Test App";
+				td.RegistrationInfo.URI = new Uri("test://app");
+				td.RegistrationInfo.Version = new Version(0, 9);
+				td.Settings.AllowDemandStart = true;
+				td.Settings.AllowHardTerminate = true;
+				td.Settings.Compatibility = TaskCompatibility.V2;
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromMinutes(1);
+				td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
+				td.Settings.StartWhenAvailable = true;
+				td.Settings.WakeToRun = false;
+				td.Settings.RestartCount = 5;
+				td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
+			}
 
+			BootTrigger bTrigger = (BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
+			bTrigger.StartBoundary = DateTime.Now;
+			if (newVer) bTrigger.Delay = TimeSpan.FromMinutes(5);
+
+			DailyTrigger dTrigger = (DailyTrigger)td.Triggers.AddNew(TaskTriggerType.Daily);
+			dTrigger.StartBoundary = DateTime.Now;
+			dTrigger.DaysInterval = 2;
+			if (newVer) dTrigger.RandomDelay = TimeSpan.FromHours(2);
+
+			if (newVer)
+			{
+				EventTrigger eTrigger = (EventTrigger)td.Triggers.AddNew(TaskTriggerType.Event);
+				eTrigger.StartBoundary = DateTime.Now;
+				eTrigger.Subscription = @"<QueryList><Query Id='1'><Select Path='System'>*[System/Level=2]</Select></Query></QueryList>";
+				eTrigger.ValueQueries.Add("Name", "Value");
+
+				RegistrationTrigger rTrigger = (RegistrationTrigger)td.Triggers.AddNew(TaskTriggerType.Registration);
+				rTrigger.StartBoundary = DateTime.Now;
+				rTrigger.Delay = TimeSpan.FromMinutes(5);
+
+				SessionStateChangeTrigger sTrigger = (SessionStateChangeTrigger)td.Triggers.AddNew(TaskTriggerType.SessionStateChange);
+				sTrigger.StartBoundary = DateTime.Now;
+				sTrigger.StateChange = TaskSessionStateChangeType.RemoteConnect;
+			}
+
+			IdleTrigger iTrigger = (IdleTrigger)td.Triggers.AddNew(TaskTriggerType.Idle);
+			iTrigger.StartBoundary = DateTime.Now;
+
+			LogonTrigger lTrigger = (LogonTrigger)td.Triggers.AddNew(TaskTriggerType.Logon);
+			lTrigger.StartBoundary = DateTime.Now;
+			if (newVer) lTrigger.Delay = TimeSpan.FromMinutes(15);
+			if (newVer) lTrigger.UserId = null;
+
+			MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.AddNew(TaskTriggerType.Monthly);
+			mTrigger.StartBoundary = DateTime.Now;
+			mTrigger.DaysOfMonth = new int[] { 3, 6, 10, 18 };
+			mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
+			if (newVer) mTrigger.RunOnLastDayOfMonth = true;
+
+			MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.AddNew(TaskTriggerType.MonthlyDOW);
+			mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
+			mdTrigger.MonthsOfYear = MonthsOfTheYear.January | MonthsOfTheYear.December;
+			if (newVer) mdTrigger.RunOnLastWeekOfMonth = true;
+			mdTrigger.WeeksOfMonth = WhichWeek.FirstWeek;
+			
 			TimeTrigger tTrigger = (TimeTrigger)td.Triggers.AddNew(TaskTriggerType.Time);
 			tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 			tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
-			tTrigger.Enabled = true;
-			
+			if (newVer) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(15);
+			if (newVer) tTrigger.Id = "Time test";
+			tTrigger.Repetition.Duration = TimeSpan.FromMinutes(20);
+			tTrigger.Repetition.Interval = TimeSpan.FromMinutes(15);
+			tTrigger.Repetition.StopAtDurationEnd = true;
+
+			WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.AddNew(TaskTriggerType.Weekly);
+			wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
+			wTrigger.WeeksInterval = 1;
+
 			ExecAction action = (ExecAction)td.Actions.AddNew(TaskActionType.Execute);
 			action.Path = "notepad.exe";
 			action.Arguments = "c:\\pdanetbt.log";
 			if (newVer)
 			{
 				ShowMessageAction showMsg = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
+				showMsg.Title = "Info";
 				showMsg.MessageBody = "Running Notepad";
+
+				EmailAction email = (EmailAction)td.Actions.AddNew(TaskActionType.SendEmail);
+				email.To = "user@test.com";
+				email.From = "dahall@codeplex.com";
+				email.Subject = "Testing";
+				email.Server = "mail.myisp.com";
+				email.Body = "You've got mail.";
+
+				ComHandlerAction com = (ComHandlerAction)td.Actions.AddNew(TaskActionType.ComHandler);
+				com.ClassId = Guid.Empty;
+				com.Data = "Going";
 			}
 
 			Task runningTask = tf.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);

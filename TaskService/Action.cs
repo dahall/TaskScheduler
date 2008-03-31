@@ -194,7 +194,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v1Task != null)
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 				base.Id = value;
 			}
 		}
@@ -474,7 +474,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Specialized <see cref="Action"/> instance.</returns>
 		public Action this[int index]
 		{
-			get { if (v2Coll != null) return Action.CreateAction(v2Coll[index]); throw new NotSupportedException(); }
+			get { if (v2Coll != null) return Action.CreateAction(v2Coll[index]); throw new NotV1SupportedException(); }
 		}
 
 		/// <summary>
@@ -493,7 +493,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					v2Coll.Context = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -519,14 +519,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return v2Coll.XmlText;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Coll != null)
 					v2Coll.XmlText = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 

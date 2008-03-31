@@ -215,7 +215,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 					v2RegInfo.Version = value.ToString();
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -228,14 +228,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 					return DateTime.Parse(v2RegInfo.Date);
-				throw new NotSupportedException();
+				return System.IO.File.GetLastWriteTime(Task.GetV1Path(v1Task));
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.Date = value.ToString(Trigger.V2BoundaryDateFormat);
 				else
-					throw new NotSupportedException();
+					System.IO.File.SetLastWriteTime(Task.GetV1Path(v1Task), value);
 			}
 		}
 
@@ -293,14 +293,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 					return v2RegInfo.XmlText;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.XmlText = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -311,16 +311,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
+				string uri = null;
 				if (v2RegInfo != null)
-					return new Uri(v2RegInfo.URI);
-				throw new NotSupportedException();
+					uri = v2RegInfo.URI;
+				if (string.IsNullOrEmpty(uri))
+					return null;
+				return new Uri(uri);
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.URI = value.ToString();
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -331,16 +334,17 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
+				object sddl = null;
 				if (v2RegInfo != null)
-					return v2RegInfo.SecurityDescriptor.ToString();
-				throw new NotSupportedException();
+					sddl = v2RegInfo.SecurityDescriptor;
+				return sddl == null ? null : sddl.ToString();
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.SecurityDescriptor = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -353,14 +357,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 					return v2RegInfo.Source;
-				throw new NotSupportedException();
+				return null;
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.Source = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -413,27 +417,27 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.AllowDemandStart = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets a value that specifies how long the Task Scheduler will attempt to restart the task.
 		/// </summary>
-		public int RestartInterval
+		public TimeSpan RestartInterval
 		{
 			get
 			{
 				if (v2Settings != null)
-					return Int32.Parse(v2Settings.RestartInterval);
-				return 0;
+					return Task.StringToTimeSpan(v2Settings.RestartInterval);
+				return TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.RestartInterval = value.ToString();
+					v2Settings.RestartInterval = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -453,7 +457,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.RestartCount = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -473,7 +477,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.MultipleInstances = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -545,7 +549,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.AllowHardTerminate = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -565,7 +569,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.StartWhenAvailable = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -578,14 +582,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.XmlText;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.XmlText = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -670,14 +674,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return Task.StringToTimeSpan(v2Settings.DeleteExpiredTaskAfter);
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.DeleteExpiredTaskAfter = Task.TimeSpanToString(value);
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -689,15 +693,65 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Settings != null)
-					return (System.Diagnostics.ProcessPriorityClass)v2Settings.Priority;
+				{
+					switch (v2Settings.Priority)
+					{
+						case 0:
+							return System.Diagnostics.ProcessPriorityClass.RealTime;
+						case 1:
+							return System.Diagnostics.ProcessPriorityClass.High;
+						case 2:
+						case 3:
+							return System.Diagnostics.ProcessPriorityClass.AboveNormal;
+						case 7:
+						case 8:
+							return System.Diagnostics.ProcessPriorityClass.BelowNormal;
+						case 9:
+						case 10:
+							return System.Diagnostics.ProcessPriorityClass.Idle;
+						case 4:
+						case 5:
+						case 6:
+						default:
+							return System.Diagnostics.ProcessPriorityClass.Normal;
+					}
+				}
 				return (System.Diagnostics.ProcessPriorityClass)v1Task.GetPriority();
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Priority = (int)value;
+				{
+					int p = 7;
+					switch (value)
+					{
+						case System.Diagnostics.ProcessPriorityClass.AboveNormal:
+							p = 3;
+							break;
+						case System.Diagnostics.ProcessPriorityClass.High:
+							p = 1;
+							break;
+						case System.Diagnostics.ProcessPriorityClass.Idle:
+							p = 10;
+							break;
+						case System.Diagnostics.ProcessPriorityClass.Normal:
+							p = 5;
+							break;
+						case System.Diagnostics.ProcessPriorityClass.RealTime:
+							p = 0;
+							break;
+						case System.Diagnostics.ProcessPriorityClass.BelowNormal:
+						default:
+							break;
+					}
+					v2Settings.Priority = p;
+				}
 				else
+				{
+					if (value == System.Diagnostics.ProcessPriorityClass.AboveNormal || value == System.Diagnostics.ProcessPriorityClass.BelowNormal)
+						throw new NotV1SupportedException("Unsupported priority level on Task Scheduler 1.0.");
 					v1Task.SetPriority((uint)value);
+				}
 			}
 		}
 
@@ -710,14 +764,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.Compatibility;
-				throw new NotSupportedException();
+				return TaskCompatibility.V1;
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.Compatibility = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -800,14 +854,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.WakeToRun;
-				throw new NotSupportedException();
+				return false;
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.WakeToRun = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -993,34 +1047,35 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.Name;
-				throw new NotSupportedException();
+				return null;
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.Name = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets a GUID value that identifies a network profile.
 		/// </summary>
-		public string Id
+		public Guid Id
 		{
 			get
 			{
+				string id = null;
 				if (v2Settings != null)
-					return v2Settings.Id;
-				throw new NotSupportedException();
+					id = v2Settings.Id;
+				return string.IsNullOrEmpty(id) ? Guid.Empty : new Guid(id);
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Id = value;
+					v2Settings.Id = value.ToString();
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1062,14 +1117,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.Id;
-				throw new NotSupportedException();
+				return "Author";
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.Id = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1082,14 +1137,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.DisplayName;
-				throw new NotSupportedException();
+				return null;
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.DisplayName = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1126,7 +1181,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return TaskLogonType.InteractiveToken;
 				else if ((v1Task.GetFlags() & V1Interop.TaskFlags.SystemRequired) == V1Interop.TaskFlags.SystemRequired)
 					return TaskLogonType.ServiceAccount;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
@@ -1145,7 +1200,7 @@ namespace Microsoft.Win32.TaskScheduler
 						flags &= ~V1Interop.TaskFlags.SystemRequired;
 					v1Task.SetFlags(flags);
 					if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
-						throw new NotSupportedException();
+						throw new NotV1SupportedException();
 				}
 			}
 		}
@@ -1159,14 +1214,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.GroupId;
-				throw new NotSupportedException();
+				return null;
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.GroupId = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1179,14 +1234,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.RunLevel;
-				throw new NotSupportedException();
+				return TaskRunLevel.Highest;
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.RunLevel = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 	}
@@ -1368,14 +1423,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Def != null)
 					return v2Def.XmlText;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 			set
 			{
 				if (v2Def != null)
 					v2Def.XmlText = value;
 				else
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -1565,14 +1620,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Task != null)
 				return new RunningTask(v2Task.RunEx(parameters, (int)flags, sessionID, user));
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/*public Microsoft.Win32.TaskScheduler.InternalV2.IRunningTaskCollection GetInstances(int flags)
 		{
 			if (v2Task != null)
 				return v2Task.GetInstances(flags);
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}*/
 
 		/// <summary>
@@ -1611,7 +1666,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Task != null)
 					return v2Task.NumberOfMissedRuns;
 
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 		}
 
@@ -1637,9 +1692,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Task != null)
 					return new TaskDefinition(v2Task.Definition);
-				TaskDefinition td = new TaskDefinition(v1Task, this.Name);
-				// TODO: Populate td
-				return td;
+				return new TaskDefinition(v1Task, this.Name);
 			}
 		}
 
@@ -1653,7 +1706,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Task != null)
 					return v2Task.Xml;
 
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 		}
 
@@ -1667,7 +1720,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Task != null)
 				return v2Task.GetSecurityDescriptor((int)includeSections);
 
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -1680,7 +1733,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Task != null)
 				v2Task.SetSecurityDescriptor(sddlForm, (int)includeSections);
 
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -1718,7 +1771,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.FreeCoTaskMem(runTimes);
 				return ret;
 			}
-			throw new NotSupportedException();
+			throw new NotV1SupportedException();
 		}
 	}
 
@@ -1810,7 +1863,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Task != null)
 					return v2Task.CurrentAction;
-				throw new NotSupportedException();
+				return v1Task.v1Task.GetApplicationName();
 			}
 		}
 
@@ -1842,7 +1895,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Task != null)
 					return v2Task.EnginePID;
-				throw new NotSupportedException();
+				throw new NotV1SupportedException();
 			}
 		}
 	}

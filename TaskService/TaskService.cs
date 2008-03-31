@@ -38,7 +38,7 @@ namespace Microsoft.Win32.TaskScheduler
 			else
 			{
 				if (!string.IsNullOrEmpty(userName) || !string.IsNullOrEmpty(accountDomain) || !string.IsNullOrEmpty(password))
-					throw new NotSupportedException();
+					throw new NotV1SupportedException();
 				V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
 				v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
 				if (!string.IsNullOrEmpty(targetServer))
@@ -64,7 +64,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="folderName">The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <returns><see cref="TaskFolder"/> instance for the requested folder.</returns>
 		/// <exception cref="Exception">Requested folder was not found.</exception>
-		/// <exception cref="NotSupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
+		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
 		public TaskFolder GetFolder(string folderName)
 		{
 			return v2 ? new TaskFolder(v2TaskService.GetFolder(folderName)) : new TaskFolder(v1TaskScheduler);
@@ -113,19 +113,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the name of the domain to which the <see cref="TargetServer"/> computer is connected.
 		/// </summary>
-		/// <exception cref="NotSupportedException">Thrown when called against Task Scheduler 1.0.</exception>
+		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedDomain
 		{
-			get { if (v2) return v2TaskService.ConnectedDomain; throw new NotSupportedException(); }
+			get { if (v2) return v2TaskService.ConnectedDomain; throw new NotV1SupportedException(); }
 		}
 
 		/// <summary>
 		/// Gets the name of the user that is connected to the Task Scheduler service.
 		/// </summary>
-		/// <exception cref="NotSupportedException">Thrown when called against Task Scheduler 1.0.</exception>
+		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedUser
 		{
-			get { if (v2) return v2TaskService.ConnectedUser; throw new NotSupportedException(); }
+			get { if (v2) return v2TaskService.ConnectedUser; throw new NotV1SupportedException(); }
 		}
 
 		/// <summary>
