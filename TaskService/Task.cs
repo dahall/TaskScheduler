@@ -1298,6 +1298,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					string path;
 					iFile.GetCurFile(out path);
+					System.IO.File.Delete(path);
 					iFile.Save(System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar + newName + System.IO.Path.GetExtension(path), true);
 				}
 				iFile = null;
@@ -1332,7 +1333,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (triggers == null)
 				{
 					if (v2Def != null)
-						triggers = new TriggerCollection(v2Def.Triggers);
+						triggers = new TriggerCollection(v2Def);
 					else
 						triggers = new TriggerCollection(v1Task);
 				}
@@ -1469,7 +1470,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static TimeSpan StringToTimeSpan(string input)
 		{
 			TimeSpan span = new TimeSpan(0);
-			System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(input, "P(?:(?<Y>[0-9]*)Y)?(?:(?<Mo>[0-9]*)M)?(?:(?<D>[0-9]*)D)?T(?:(?<H>[0-9]*)H)?(?:(?<M>[0-9]*)M)?(?:(?<S>[0-9]*)S)", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline | System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
+			System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(input, "P(?:(?<Y>[0-9]*)Y)?(?:(?<Mo>[0-9]*)M)?(?:(?<D>[0-9]*)D)?T(?:(?<H>[0-9]*)H)?(?:(?<M>[0-9]*)M)?(?:(?<S>[0-9]*)S)?", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline | System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
 			if (m.Success)
 			{
 				DateTime now = DateTime.Now;

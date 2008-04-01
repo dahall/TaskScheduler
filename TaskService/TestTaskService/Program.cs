@@ -22,7 +22,7 @@ namespace TestTaskService
 			}
 			Console.WriteLine();
 
-			TaskFolder tf = ts.GetFolder("\\");
+			TaskFolder tf = ts.RootFolder;
 			Console.WriteLine("Root folder tasks ({0}):", tf.Tasks.Count);
 			foreach (Task t in tf.Tasks)
 			{
@@ -88,52 +88,42 @@ namespace TestTaskService
 				td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
 			}
 
-			BootTrigger bTrigger = (BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
-			bTrigger.StartBoundary = DateTime.Now;
+			BootTrigger bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
 			if (newVer) bTrigger.Delay = TimeSpan.FromMinutes(5);
 
-			DailyTrigger dTrigger = (DailyTrigger)td.Triggers.AddNew(TaskTriggerType.Daily);
-			dTrigger.StartBoundary = DateTime.Now;
+			DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
 			dTrigger.DaysInterval = 2;
 			if (newVer) dTrigger.RandomDelay = TimeSpan.FromHours(2);
 
 			if (newVer)
 			{
-				EventTrigger eTrigger = (EventTrigger)td.Triggers.AddNew(TaskTriggerType.Event);
-				eTrigger.StartBoundary = DateTime.Now;
+				EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 				eTrigger.Subscription = @"<QueryList><Query Id='1'><Select Path='System'>*[System/Level=2]</Select></Query></QueryList>";
 				eTrigger.ValueQueries.Add("Name", "Value");
 
-				RegistrationTrigger rTrigger = (RegistrationTrigger)td.Triggers.AddNew(TaskTriggerType.Registration);
-				rTrigger.StartBoundary = DateTime.Now;
-				rTrigger.Delay = TimeSpan.FromMinutes(5);
+				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
-				SessionStateChangeTrigger sTrigger = (SessionStateChangeTrigger)td.Triggers.AddNew(TaskTriggerType.SessionStateChange);
-				sTrigger.StartBoundary = DateTime.Now;
-				sTrigger.StateChange = TaskSessionStateChangeType.RemoteConnect;
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
 			}
 
-			IdleTrigger iTrigger = (IdleTrigger)td.Triggers.AddNew(TaskTriggerType.Idle);
-			iTrigger.StartBoundary = DateTime.Now;
+			td.Triggers.Add(new IdleTrigger());
 
-			LogonTrigger lTrigger = (LogonTrigger)td.Triggers.AddNew(TaskTriggerType.Logon);
-			lTrigger.StartBoundary = DateTime.Now;
+			LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
 			if (newVer) lTrigger.Delay = TimeSpan.FromMinutes(15);
 			if (newVer) lTrigger.UserId = null;
 
-			MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.AddNew(TaskTriggerType.Monthly);
-			mTrigger.StartBoundary = DateTime.Now;
+			MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
 			mTrigger.DaysOfMonth = new int[] { 3, 6, 10, 18 };
 			mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
 			if (newVer) mTrigger.RunOnLastDayOfMonth = true;
 
-			MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.AddNew(TaskTriggerType.MonthlyDOW);
+			MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
 			mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
 			mdTrigger.MonthsOfYear = MonthsOfTheYear.January | MonthsOfTheYear.December;
 			if (newVer) mdTrigger.RunOnLastWeekOfMonth = true;
 			mdTrigger.WeeksOfMonth = WhichWeek.FirstWeek;
 			
-			TimeTrigger tTrigger = (TimeTrigger)td.Triggers.AddNew(TaskTriggerType.Time);
+			TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
 			tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 			tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
 			if (newVer) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(15);
@@ -142,29 +132,16 @@ namespace TestTaskService
 			tTrigger.Repetition.Interval = TimeSpan.FromMinutes(15);
 			tTrigger.Repetition.StopAtDurationEnd = true;
 
-			WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.AddNew(TaskTriggerType.Weekly);
+			WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
 			wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 			wTrigger.WeeksInterval = 1;
 
-			ExecAction action = (ExecAction)td.Actions.AddNew(TaskActionType.Execute);
-			action.Path = "notepad.exe";
-			action.Arguments = "c:\\pdanetbt.log";
+			td.Actions.Add(new ExecAction("notepad.exe", "c:\\pdanetbt.log", null));
 			if (newVer)
 			{
-				ShowMessageAction showMsg = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
-				showMsg.Title = "Info";
-				showMsg.MessageBody = "Running Notepad";
-
-				EmailAction email = (EmailAction)td.Actions.AddNew(TaskActionType.SendEmail);
-				email.To = "user@test.com";
-				email.From = "dahall@codeplex.com";
-				email.Subject = "Testing";
-				email.Server = "mail.myisp.com";
-				email.Body = "You've got mail.";
-
-				ComHandlerAction com = (ComHandlerAction)td.Actions.AddNew(TaskActionType.ComHandler);
-				com.ClassId = Guid.Empty;
-				com.Data = "Going";
+				td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
+				td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
+				td.Actions.Add(new ComHandlerAction(new Guid("{F09878A1-4652-4292-AA63-8C7D4FD7648F}"), "\\b"));
 			}
 
 			Task runningTask = tf.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);

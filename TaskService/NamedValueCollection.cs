@@ -11,8 +11,27 @@ namespace Microsoft.Win32.TaskScheduler
 	public class NamedValueCollection : IDisposable, System.Collections.IEnumerable
 	{
 		private V2Interop.ITaskNamedValueCollection v2Coll = null;
+		private Dictionary<string, string> unboundDict = null;
 
 		internal NamedValueCollection(V2Interop.ITaskNamedValueCollection iColl) { v2Coll = iColl; }
+
+		internal NamedValueCollection()
+		{
+			unboundDict = new Dictionary<string, string>(5); ;
+		}
+
+		internal bool Bound
+		{
+			get { return v2Coll != null; }
+		}
+
+		internal void Bind(V2Interop.ITaskNamedValueCollection iTaskNamedValueCollection)
+		{
+			v2Coll = iTaskNamedValueCollection;
+			v2Coll.Clear();
+			foreach (var item in unboundDict)
+				v2Coll.Create(item.Key, item.Value);
+		}
 
 		/// <summary>
 		/// Releases all resources used by this class.
@@ -27,7 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public int Count
 		{
-			get { return v2Coll.Count; }
+			get { return v2Coll != null ? v2Coll.Count : unboundDict.Count; }
 		}
 
 		/// <summary>
@@ -56,7 +75,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="Value">The value associated with a name in a name-value pair.</param>
 		public void Add(string Name, string Value)
 		{
-			v2Coll.Create(Name, Value);
+			if (v2Coll != null)
+				v2Coll.Create(Name, Value);
+			else
+				unboundDict.Add(Name, Value);
 		}
 
 		/// <summary>
@@ -73,7 +95,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void Clear()
 		{
-			v2Coll.Clear();
+			if (v2Coll != null)
+				v2Coll.Clear();
+			else
+				unboundDict.Clear();
 		}
 
 		/// <summary>
@@ -82,7 +107,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>An <see cref="System.Collections.IEnumerator"/> for the collection.</returns>
 		public System.Collections.IEnumerator GetEnumerator()
 		{
-			return v2Coll.GetEnumerator();
+			if (v2Coll != null)
+				return v2Coll.GetEnumerator();
+			else
+				return unboundDict.GetEnumerator();
 		}
 	}
 }

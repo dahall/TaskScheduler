@@ -28,11 +28,52 @@ namespace Microsoft.Win32.TaskScheduler
 	public abstract class Action : IDisposable
 	{
 		internal V2Interop.IAction iAction = null;
+
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal abstract void Bind(V2Interop.ITaskDefinition iTaskDef);
+		internal virtual bool Bound { get { return this.iAction != null; } }
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal virtual void Bind(V1Interop.ITask iTask)
+		{
+		}
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
+		{
+			V2Interop.IActionCollection iActions = iTaskDef.Actions;
+			switch (this.GetType().Name)
+			{
+				case "ComHandlerAction":
+					iAction = iActions.Create(TaskActionType.ComHandler);
+					break;
+				case "ExecAction":
+					iAction = iActions.Create(TaskActionType.Execute);
+					break;
+				case "EmailAction":
+					iAction = iActions.Create(TaskActionType.SendEmail);
+					break;
+				case "ShowMessageAction":
+					iAction = iActions.Create(TaskActionType.ShowMessage);
+					break;
+				default:
+					throw new ArgumentException();
+			}
+			Marshal.ReleaseComObject(iActions);
+			foreach (string key in unboundValues.Keys)
+			{
+				try
+				{
+					iAction.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, iAction, new object[] { unboundValues[key] });
+				}
+				catch (System.Reflection.TargetInvocationException tie) { throw tie.InnerException; }
+				catch { }
+			}
+			unboundValues.Clear();
+			unboundValues = null;
+		}
 
 		/// <summary>
 		/// Releases all resources used by this class.
@@ -50,20 +91,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get { return (iAction == null) ? (string)unboundValues["Id"] : this.iAction.Id; }
 			set { if (iAction == null) unboundValues["Id"] = value; else this.iAction.Id = value; }
-		}
-
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal virtual bool Bound { get { return this.iAction != null; } }
-
-		/// <summary>
-		/// Binds values to the interface that were set before the interface was available.
-		/// </summary>
-		protected void BindValues()
-		{
-			foreach (string key in unboundValues.Keys)
-			{
-				iAction.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, iAction, new object[] { unboundValues[key] });
-			}
 		}
 
 		/// <summary>
@@ -91,17 +118,22 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
 	/// </summary>
-	public class ComHandlerAction : Action
+	public sealed class ComHandlerAction : Action
 	{
+		/// <summary>
+		/// Creates an unbound instance of <see cref="ComHandlerAction"/>.
+		/// </summary>
+		/// <param name="classId">Identifier of the handler class.</param>
+		/// <param name="data">Addition data associated with the handler.</param>
+		public ComHandlerAction(Guid classId, string data)
+		{
+			this.ClassId = classId;
+			this.Data = data;
+		}
+
 		internal ComHandlerAction(V2Interop.IComHandlerAction action)
 		{
 			iAction = action;
-		}
-
-		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
-		{
-			//iAction = iTaskDef.Actions.Create(InternalV2.TaskActionType.ComHandler);
-			BindValues();
 		}
 
 		/// <summary>
@@ -110,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Guid ClassId
 		{
 			get { return (iAction == null) ? (Guid)unboundValues["ClassId"] : new Guid(((V2Interop.IComHandlerAction)iAction).ClassId); }
-			set { if (iAction == null) unboundValues["ClassId"] = value; else ((V2Interop.IComHandlerAction)iAction).ClassId = value.ToString(); }
+			set { if (iAction == null) unboundValues["ClassId"] = value.ToString(); else ((V2Interop.IComHandlerAction)iAction).ClassId = value.ToString(); }
 		}
 
 		/// <summary>
@@ -126,17 +158,17 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that executes a command-line operation.
 	/// </summary>
-	public class ExecAction : Action
+	public sealed class ExecAction : Action
 	{
 		private V1Interop.ITask v1Task;
 
 		/// <summary>
-		/// Creates a new instance of 
+		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
 		/// </summary>
-		/// <param name="path"></param>
-		/// <param name="arguments"></param>
-		/// <param name="workingDirectory"></param>
-		internal ExecAction(string path, string arguments, string workingDirectory)
+		/// <param name="path">Path to an executable file.</param>
+		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
+		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
+		public ExecAction(string path, string arguments, string workingDirectory)
 		{
 			this.Path = path;
 			this.Arguments = arguments;
@@ -163,21 +195,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal void Bind(V1Interop.ITask v1Task)
+		internal override void Bind(V1Interop.ITask v1Task)
 		{
 			object o;
-			if (unboundValues.TryGetValue("Path", out o))
+			if (unboundValues.TryGetValue("Path", out o) && o != null)
 				v1Task.SetApplicationName((string)o);
-			if (unboundValues.TryGetValue("Arguments", out o))
+			if (unboundValues.TryGetValue("Arguments", out o) && o != null)
 				v1Task.SetParameters((string)o);
-			if (unboundValues.TryGetValue("WorkingDirectory", out o))
+			if (unboundValues.TryGetValue("WorkingDirectory", out o) && o != null)
 				v1Task.SetWorkingDirectory((string)o);
-		}
-
-		internal override void Bind(V2Interop.ITaskDefinition iTaskDef)
-		{
-			iAction = iTaskDef.Actions.Create(TaskActionType.Execute);
-			BindValues();
 		}
 
 		/// <summary>
@@ -275,8 +301,25 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that sends an e-mail.
 	/// </summary>
-	public class EmailAction : Action
+	public sealed class EmailAction : Action
 	{
+		/// <summary>
+		/// Creates an unbound instance of <see cref="EmailAction"/>.
+		/// </summary>
+		/// <param name="subject">Subject of the e-mail.</param>
+		/// <param name="from">E-mail address that you want to send the e-mail from.</param>
+		/// <param name="to">E-mail address or addresses that you want to send the e-mail to.</param>
+		/// <param name="body">Body of the e-mail that contains the e-mail message.</param>
+		/// <param name="mailServer">Name of the server that you use to send e-mail from.</param>
+		public EmailAction(string subject, string from, string to, string body, string mailServer)
+		{
+			this.Subject = subject;
+			this.From = from;
+			this.To = to;
+			this.Body = body;
+			this.Server = mailServer;
+		}
+
 		internal EmailAction(V2Interop.IEmailAction action)
 		{
 			iAction = action;
@@ -284,8 +327,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
 		{
-			//iAction = iTaskDef.Actions.Create(Microsoft.Win32.TaskScheduler.InternalV2.TaskActionType.SendEmail);
-			BindValues();
+			base.Bind(iTaskDef);
+			if (nvc != null)
+				nvc.Bind(((V2Interop.IEmailAction)iAction).HeaderFields);
 		}
 
 		/// <summary>
@@ -361,7 +405,12 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (nvc == null)
-					nvc = new NamedValueCollection(((V2Interop.IEmailAction)iAction).HeaderFields);
+				{
+					if (iAction != null)
+						nvc = new NamedValueCollection(((V2Interop.IEmailAction)iAction).HeaderFields);
+					else
+						nvc = new NamedValueCollection();
+				}
 				return nvc;
 			}
 		}
@@ -388,9 +437,14 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that shows a message box when a task is activated.
 	/// </summary>
-	public class ShowMessageAction : Action
+	public sealed class ShowMessageAction : Action
 	{
-		internal ShowMessageAction(string messageBody, string title)
+		/// <summary>
+		/// Creates a new unbound instance of <see cref="ShowMessageAction"/>.
+		/// </summary>
+		/// <param name="messageBody">Message text that is displayed in the body of the message box.</param>
+		/// <param name="title">Title of the message box.</param>
+		public ShowMessageAction(string messageBody, string title)
 		{
 			this.MessageBody = messageBody;
 			this.Title = title;
@@ -399,12 +453,6 @@ namespace Microsoft.Win32.TaskScheduler
 		internal ShowMessageAction(V2Interop.IShowMessageAction action)
 		{
 			iAction = action;
-		}
-
-		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
-		{
-			//iAction = iTaskDef.Actions.Create(Microsoft.Win32.TaskScheduler.InternalV2.TaskActionType.ShowMessage);
-			BindValues();
 		}
 
 		/// <summary>
@@ -433,6 +481,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class ActionCollection : IEnumerable<Action>, IDisposable
 	{
 		private V1Interop.ITask v1Task;
+		private V2Interop.ITaskDefinition v2Def;
 		private V2Interop.IActionCollection v2Coll;
 
 		internal ActionCollection(V1Interop.ITask task)
@@ -442,6 +491,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal ActionCollection(V2Interop.ITaskDefinition iTaskDef)
 		{
+			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
 		}
 
@@ -451,7 +501,21 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Dispose()
 		{
 			v1Task = null;
+			v2Def = null;
 			v2Coll = null;
+		}
+
+		/// <summary>
+		/// Adds an action to the task.
+		/// </summary>
+		/// <param name="action">A derived <see cref="Action"/> class.</param>
+		public Action Add(Action action)
+		{
+			if (v2Def != null)
+				action.Bind(v2Def);
+			else
+				action.Bind(v1Task);
+			return action;
 		}
 
 		/// <summary>

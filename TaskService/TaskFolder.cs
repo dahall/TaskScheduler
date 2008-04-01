@@ -160,7 +160,25 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Folder != null)
 				return new Task(v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
 
-			definition.V1Save(Path);
+			switch (createType)
+			{
+				case TaskCreation.Create:
+				case TaskCreation.CreateOrUpdate:
+				case TaskCreation.Disable:
+				case TaskCreation.Update:
+					if (createType == TaskCreation.Disable)
+						definition.Settings.Enabled = false;
+					definition.V1Save(Path);
+					break;
+				case TaskCreation.DontAddPrincipalAce:
+					throw new NotV1SupportedException("Security settings are not available on Task Scheduler 1.0.");
+				case TaskCreation.IgnoreRegistrationTriggers:
+					throw new NotV1SupportedException("Registration triggers are not available on Task Scheduler 1.0.");
+				case TaskCreation.ValidateOnly:
+					throw new NotV1SupportedException("Xml validation not available on Task Scheduler 1.0.");
+				default:
+					break;
+			}
 			return new Task(definition.v1Task);
 		}
 
