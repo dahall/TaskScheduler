@@ -113,14 +113,14 @@ namespace Microsoft.Win32.TaskScheduler
 		internal V1Interop.ITaskTrigger v1Trigger = null;
 		internal V1Interop.TaskTrigger v1TriggerData;
 		internal V2Interop.ITrigger v2Trigger = null;
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
+		internal TaskTriggerType ttype;
 
 		internal Trigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType type) :
 			this(trigger, trigger.GetTrigger())
 		{
 			v1TriggerData.TriggerSize = (ushort)Marshal.SizeOf(typeof(V1Interop.TaskTrigger));
 			v1TriggerData.Type = type;
+			v1TriggerData.Flags = 0;
 		}
 
 		internal Trigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTrigger data)
@@ -132,10 +132,19 @@ namespace Microsoft.Win32.TaskScheduler
 		internal Trigger(V2Interop.ITrigger iTrigger)
 		{
 			v2Trigger = iTrigger;
+			this.StartBoundary = DateTime.Now;
 		}
 
-		internal Trigger()
+		internal Trigger(TaskTriggerType triggerType)
 		{
+			this.ttype = triggerType;
+			unboundValues = new Dictionary<string, object>();
+
+			v1TriggerData = new V1Interop.TaskTrigger();
+			v1TriggerData.TriggerSize = (ushort)Marshal.SizeOf(typeof(V1Interop.TaskTrigger));
+			try { v1TriggerData.Type = ConvertToV1TriggerType(this.ttype); } catch { }
+
+			this.StartBoundary = DateTime.Now;
 		}
 
 		/// <summary>
@@ -150,18 +159,68 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal void Bind()
+		protected Dictionary<string, object> unboundValues;
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal virtual bool Bound
+		{
+			get
+			{
+				if (v1Trigger != null)
+					return v1Trigger.GetTrigger().Equals(v1TriggerData);
+				return (v2Trigger != null);
+			}
+		}
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal virtual void Bind(V1Interop.ITask iTask)
+		{
+			if (v1Trigger == null)
+			{
+				ushort idx;
+				v1Trigger = iTask.CreateTrigger(out idx);
+			}
+			SetV1TriggerData();
+		}
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
+		{
+			V2Interop.ITriggerCollection iTriggers = iTaskDef.Triggers;
+			v2Trigger = iTriggers.Create(ttype);
+			Marshal.ReleaseComObject(iTriggers);
+			foreach (string key in unboundValues.Keys)
+			{
+				try
+				{
+					object o = unboundValues[key];
+					if (o is TimeSpan)
+						o = Task.TimeSpanToString((TimeSpan)o);
+					if (o is DateTime)
+						o = ((DateTime)o).ToString(V2BoundaryDateFormat);
+					v2Trigger.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, v2Trigger, new object[] { o });
+				}
+				catch (System.Reflection.TargetInvocationException tie) { throw tie.InnerException; }
+				catch { }
+			}
+			unboundValues.Clear();
+			unboundValues = null;
+		}
+
+		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
+		internal void SetV1TriggerData()
 		{
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
 		}
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		protected void BindValues()
+		internal static V1Interop.TaskTriggerType ConvertToV1TriggerType(TaskTriggerType type)
 		{
-			if (v2Trigger != null)
-				foreach (string key in unboundValues.Keys)
-					v2Trigger.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, v2Trigger, new object[] { unboundValues[key] });
+			if (type == TaskTriggerType.Registration || type == TaskTriggerType.Event || type == TaskTriggerType.SessionStateChange)
+				throw new NotV1SupportedException();
+			int v1tt = (int)type - 1;
+			if (v1tt >= 7) v1tt--;
+			return (V1Interop.TaskTriggerType)v1tt;
 		}
 
 		internal static Trigger CreateTrigger(V1Interop.ITaskTrigger trigger)
@@ -236,14 +295,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return v2Trigger.Id;
-				return v1Trigger.GetTriggerString();
+				if (v1Trigger != null)
+					return v1Trigger.GetTriggerString();
+				return (string)unboundValues["Id"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					v2Trigger.Id = value;
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["Id"] = value;
 			}
 		}
 
@@ -275,14 +338,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(v2Trigger.ExecutionTimeLimit);
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["ExecutionTimeLimit"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					v2Trigger.ExecutionTimeLimit = Task.TimeSpanToString(value);
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["ExecutionTimeLimit"] = value;
 			}
 		}
 
@@ -306,7 +373,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.BeginDate = value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["StartBoundary"] = value;
 				}
 			}
 		}
@@ -329,7 +399,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.EndDate = value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["EndBoundary"] = value;
 				}
 			}
 		}
@@ -343,7 +416,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return v2Trigger.Enabled;
-				return ((v1TriggerData.Flags & V1Interop.TaskTriggerFlags.Disabled) == V1Interop.TaskTriggerFlags.Disabled);
+				return ((v1TriggerData.Flags & V1Interop.TaskTriggerFlags.Disabled) != V1Interop.TaskTriggerFlags.Disabled);
 			}
 			set
 			{
@@ -351,40 +424,17 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.Enabled = value;
 				else
 				{
-					if (value)
+					if (!value)
 						v1TriggerData.Flags |= V1Interop.TaskTriggerFlags.Disabled;
 					else
 						v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.Disabled;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["Enabled"] = value;
 				}
 			}
 		}
-
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal bool Bound
-		{
-			get
-			{
-				if (v1Trigger != null)
-					return v1Trigger.GetTrigger().Equals(v1TriggerData);
-				return false;
-			}
-		}
-
-		/*
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal void Bind(V1Interop.ITaskTrigger iTrigger)
-		{
-			if (v1Trigger != null)
-				v1Trigger.Bind(iTrigger);
-		}
-
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		internal void Bind(V2Interop.ITrigger iTrigger)
-		{
-			if (v2Trigger != null)
-				v2Trigger.Bind(iTrigger);
-		}*/
 	}
 
 	/// <summary>
@@ -496,6 +546,11 @@ namespace Microsoft.Win32.TaskScheduler
 		internal BootTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
+		/// Creates an unbound instance of a <see cref="BootTrigger"/>.
+		/// </summary>
+		public BootTrigger() : base(TaskTriggerType.Boot) { }
+
+		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
 		public TimeSpan Delay
@@ -504,14 +559,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IBootTrigger)v2Trigger).Delay);
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["Delay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IBootTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["Delay"] = value;
 			}
 		}
 	}
@@ -524,6 +583,18 @@ namespace Microsoft.Win32.TaskScheduler
 		internal EventTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
+		/// Creates an unbound instance of a <see cref="EventTrigger"/>.
+		/// </summary>
+		public EventTrigger() : base(TaskTriggerType.Event) { }
+
+		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
+		{
+			base.Bind(iTaskDef);
+			if (nvc != null)
+				nvc.Bind(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
+		}
+
+		/// <summary>
 		/// Gets or sets the XPath query string that identifies the event that fires the trigger.
 		/// </summary>
 		public string Subscription
@@ -532,19 +603,19 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IEventTrigger)v2Trigger).Subscription;
-				throw new NotV1SupportedException();
+				return (string)unboundValues["Subscription"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Subscription = value;
 				else
-					throw new NotV1SupportedException();
+					unboundValues["Subscription"] = value;
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets a value that indicates the amount of time between when the event occurs and when the task is started.
+		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
 		public TimeSpan Delay
 		{
@@ -552,14 +623,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IEventTrigger)v2Trigger).Delay);
-				throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["Delay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotV1SupportedException();
+					unboundValues["Delay"] = value;
 			}
 		}
 
@@ -575,7 +646,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (nvc == null)
 				{
 					if (v2Trigger == null)
-						throw new NotV1SupportedException();
+						nvc = new NamedValueCollection();
 					nvc = new NamedValueCollection(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
 				}
 				return nvc;
@@ -588,8 +659,18 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class DailyTrigger : Trigger
 	{
-		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { }
-		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
+		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { Init(); }
+		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="DailyTrigger"/>.
+		/// </summary>
+		public DailyTrigger() : base(TaskTriggerType.Daily) { Init(); }
+
+		private void Init()
+		{
+			this.DaysInterval = 1;
+		}
 
 		/// <summary>
 		/// Sets or retrieves the interval between the days in the schedule.
@@ -609,7 +690,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.Data.daily.DaysInterval = (ushort)value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["DaysInterval"] = value;
 				}
 			}
 		}
@@ -623,14 +707,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["RandomDelay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RandomDelay"] = value;
 			}
 		}
 	}
@@ -642,6 +730,11 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal IdleTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnIdle) { }
 		internal IdleTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
+
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="IdleTrigger"/>.
+		/// </summary>
+		public IdleTrigger() : base(TaskTriggerType.Idle) { }
 	}
 
 	/// <summary>
@@ -653,7 +746,12 @@ namespace Microsoft.Win32.TaskScheduler
 		internal LogonTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
-		/// Gets or sets a value that indicates the amount of time between when the user logs on and when the job is started.
+		/// Creates an unbound instance of a <see cref="LogonTrigger"/>.
+		/// </summary>
+		public LogonTrigger() : base(TaskTriggerType.Logon) { }
+
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
 		public TimeSpan Delay
 		{
@@ -661,14 +759,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ILogonTrigger)v2Trigger).Delay);
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["Delay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ILogonTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["Delay"] = value;
 			}
 		}
 
@@ -681,14 +783,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (string)unboundValues["UserId"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ILogonTrigger)v2Trigger).UserId = value;
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["UserId"] = value;
 			}
 		}
 	}
@@ -698,8 +804,20 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class MonthlyDOWTrigger : Trigger
 	{
-		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { }
-		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
+		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { Init(); }
+		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
+		/// </summary>
+		public MonthlyDOWTrigger() : base(TaskTriggerType.MonthlyDOW) { Init(); }
+
+		private void Init()
+		{
+			this.DaysOfWeek = DaysOfTheWeek.Sunday;
+			this.MonthsOfYear = MonthsOfTheYear.AllMonths;
+			this.WeeksOfMonth = WhichWeek.FirstWeek;
+		}
 
 		/// <summary>
 		/// Gets or sets the days of the week during which the task runs.
@@ -719,7 +837,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = (ushort)value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["DaysOfWeek"] = (short)value;
 				}
 			}
 		}
@@ -743,20 +864,18 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
 				else
 				{
-					if (Contains(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x20 }, (ushort)value))
-						v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)value;
+					int idx = Array.IndexOf<ushort>(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x20 }, (ushort)value);
+					if (idx >= 0)
+						v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)(idx + 1);
 					else
 						throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["WeeksOfMonth"] = (short)value;
 				}
 			}
 		}
-
-		internal static bool Contains<T>(ICollection<T> data, T value)
-		{
-			if (data == null) throw new ArgumentNullException("data");
-			return data.Contains(value);
-		} 
 
 		/// <summary>
 		/// Gets or sets the months of the year during which the task runs.
@@ -776,7 +895,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["MonthsOfYear"] = (short)value;
 				}
 			}
 		}
@@ -790,14 +912,19 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth;
-				return v1TriggerData.Data.monthlyDOW.WhichWeek == 5;
+				else if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				else
+					return (bool)unboundValues["RunOnLastWeekOfMonth"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth = value;
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RunOnLastWeekOfMonth"] = value;
 			}
 		}
 
@@ -809,15 +936,19 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return Task.StringToTimeSpan(((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay);
-				throw new NotV1SupportedException();
+					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["RandomDelay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
-				else
+					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RandomDelay"] = value;
 			}
 		}
 	}
@@ -827,8 +958,19 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class MonthlyTrigger : Trigger
 	{
-		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { }
-		internal MonthlyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
+		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { Init(); }
+		internal MonthlyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
+		/// </summary>
+		public MonthlyTrigger() : base(TaskTriggerType.Monthly) { Init(); }
+
+		private void Init()
+		{
+			this.DaysOfMonth = new int[] { 1 };
+			this.MonthsOfYear = MonthsOfTheYear.AllMonths;
+		}
 
 		/// <summary>
 		/// Convert an integer representing a mask to an array where each element contains the index
@@ -882,12 +1024,16 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
+				int mask = IndicesToMask(value);
 				if (v2Trigger != null)
-					((V2Interop.IMonthlyTrigger)v2Trigger).DaysOfMonth = IndicesToMask(value);
+					((V2Interop.IMonthlyTrigger)v2Trigger).DaysOfMonth = mask;
 				else
 				{
-					v1TriggerData.Data.monthlyDate.Days = (uint)IndicesToMask(value);
-					Bind();
+					v1TriggerData.Data.monthlyDate.Days = (uint)mask;
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["DaysOfMonth"] = mask;
 				}
 			}
 		}
@@ -901,7 +1047,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return (MonthsOfTheYear)((V2Interop.IMonthlyTrigger)v2Trigger).MonthsOfYear;
-				return (MonthsOfTheYear)v1TriggerData.Data.monthlyDate.Months;
+				return (MonthsOfTheYear)v1TriggerData.Data.monthlyDOW.Months;
 			}
 			set
 			{
@@ -909,8 +1055,11 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyTrigger)v2Trigger).MonthsOfYear = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDate.Months = (ushort)value;
-					Bind();
+					v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["MonthsOfYear"] = (short)value;
 				}
 			}
 		}
@@ -924,14 +1073,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth;
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (bool)unboundValues["RunOnLastDayOfMonth"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth = value;
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RunOnLastDayOfMonth"] = value;
 			}
 		}
 
@@ -943,15 +1096,19 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return Task.StringToTimeSpan(((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay);
-				throw new NotV1SupportedException();
+					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["RandomDelay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
-				else
+					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RandomDelay"] = value;
 			}
 		}
 	}
@@ -964,7 +1121,12 @@ namespace Microsoft.Win32.TaskScheduler
 		internal RegistrationTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
-		/// Gets or sets the amount of time between when the task is registered and when the task is started.
+		/// Creates an unbound instance of a <see cref="RegistrationTrigger"/>.
+		/// </summary>
+		public RegistrationTrigger() : base(TaskTriggerType.Registration) { }
+
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
 		public TimeSpan Delay
 		{
@@ -972,14 +1134,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IRegistrationTrigger)v2Trigger).Delay);
-				throw new NotV1SupportedException();
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["Delay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IRegistrationTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
-				else
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["Delay"] = value;
 			}
 		}
 	}
@@ -992,7 +1158,12 @@ namespace Microsoft.Win32.TaskScheduler
 		internal SessionStateChangeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
-		/// Gets or sets a value that indicates how long of a delay takes place before a task is started after a Terminal Server session state change is detected.
+		/// Creates an unbound instance of a <see cref="SessionStateChangeTrigger"/>.
+		/// </summary>
+		public SessionStateChangeTrigger() : base(TaskTriggerType.SessionStateChange) { }
+
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
 		public TimeSpan Delay
 		{
@@ -1000,14 +1171,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay);
-				throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["Delay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					throw new NotV1SupportedException();
+					unboundValues["Delay"] = value;
 			}
 		}
 
@@ -1019,15 +1190,15 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId;
-				throw new NotV1SupportedException();
+					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
+				return (string)unboundValues["UserId"];
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId = value;
+					((V2Interop.ILogonTrigger)v2Trigger).UserId = value;
 				else
-					throw new NotV1SupportedException();
+					unboundValues["UserId"] = value;
 			}
 		}
 
@@ -1040,14 +1211,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange;
-				throw new NotV1SupportedException();
+				return (TaskSessionStateChangeType)unboundValues["StateChange"];
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange = value;
 				else
-					throw new NotV1SupportedException();
+					unboundValues["StateChange"] = value;
 			}
 		}
 	}
@@ -1061,6 +1232,11 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TimeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
+		/// Creates an unbound instance of a <see cref="TimeTrigger"/>.
+		/// </summary>
+		public TimeTrigger() : base(TaskTriggerType.Time) { }
+
+		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
 		public TimeSpan RandomDelay
@@ -1068,15 +1244,19 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return Task.StringToTimeSpan(((V2Interop.ITimeTrigger)v2Trigger).RandomDelay);
-				throw new NotV1SupportedException();
+					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["RandomDelay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.ITimeTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
-				else
+					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RandomDelay"] = value;
 			}
 		}
 	}
@@ -1086,8 +1266,19 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class WeeklyTrigger : Trigger
 	{
-		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { }
-		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
+		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { Init(); }
+		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.
+		/// </summary>
+		public WeeklyTrigger() : base(TaskTriggerType.Weekly) { Init(); }
+
+		private void Init()
+		{
+			this.DaysOfWeek = DaysOfTheWeek.Sunday;
+			this.WeeksInterval = 1;
+		}
 
 		/// <summary>
 		/// Gets or sets the days of the week on which the task runs.
@@ -1107,7 +1298,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.Data.weekly.DaysOfTheWeek = (ushort)value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["DaysOfWeek"] = (short)value;
 				}
 			}
 		}
@@ -1130,7 +1324,10 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					v1TriggerData.Data.weekly.WeeksInterval = (ushort)value;
-					Bind();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["WeeksInterval"] = value;
 				}
 			}
 		}
@@ -1143,15 +1340,19 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return Task.StringToTimeSpan(((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay);
-				throw new NotV1SupportedException();
+					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
+				if (v1Trigger != null)
+					throw new NotV1SupportedException();
+				return (TimeSpan)unboundValues["RandomDelay"];
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
-				else
+					((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
+				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
+				else
+					unboundValues["RandomDelay"] = value;
 			}
 		}
 	}

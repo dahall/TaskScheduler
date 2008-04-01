@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TriggerCollection : IEnumerable<Trigger>, IDisposable
 	{
 		private V1Interop.ITask v1Task = null;
+		private V2Interop.ITaskDefinition v2Def = null;
 		private V2Interop.ITriggerCollection v2Coll = null;
 
 		internal TriggerCollection(V1Interop.ITask iTask)
@@ -18,9 +19,10 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
-		internal TriggerCollection(V2Interop.ITriggerCollection iColl)
+		internal TriggerCollection(V2Interop.ITaskDefinition iTaskDef)
 		{
-			v2Coll = iColl;
+			v2Def = iTaskDef;
+			v2Coll = v2Def.Triggers;
 		}
 
 		/// <summary>
@@ -29,6 +31,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Dispose()
 		{
 			if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
+			v2Def = null;
 			v1Task = null;
 		}
 
@@ -154,6 +157,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Add an unbound <see cref="Trigger"/> to the task.
+		/// </summary>
+		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
+		/// <returns>Bound trigger.</returns>
+		public Trigger Add(Trigger unboundTrigger)
+		{
+			if (v2Def != null)
+				unboundTrigger.Bind(v2Def);
+			else
+				unboundTrigger.Bind(v1Task);
+			return unboundTrigger;
+		}
+
+		/// <summary>
 		/// Add a new trigger to the collections of triggers for the task.
 		/// </summary>
 		/// <param name="taskTriggerType">The type of trigger to create.</param>
@@ -162,12 +179,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1Task != null)
 			{
-				if (taskTriggerType == TaskTriggerType.Registration || taskTriggerType == TaskTriggerType.Event || taskTriggerType == TaskTriggerType.SessionStateChange)
-					throw new NotV1SupportedException();
-				int v1tt = (int)taskTriggerType - 1;
-				if (v1tt >= 7) v1tt--;
 				ushort idx;
-				return Trigger.CreateTrigger(v1Task.CreateTrigger(out idx), (V1Interop.TaskTriggerType)v1tt);
+				return Trigger.CreateTrigger(v1Task.CreateTrigger(out idx), Trigger.ConvertToV1TriggerType(taskTriggerType));
 			}
 
 			return Trigger.CreateTrigger(v2Coll.Create(taskTriggerType));
@@ -176,7 +189,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal void Bind()
 		{
 			foreach (Trigger t in this)
-				t.Bind();
+				t.SetV1TriggerData();
 		}
 	}
 }

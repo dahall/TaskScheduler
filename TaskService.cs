@@ -143,5 +143,13 @@ namespace Microsoft.Win32.TaskScheduler
 				return new Version(1, 1);
 			}
 		}
+
+		/// <summary>
+		/// Gets the root ("\") folder. For Task Scheduler 1.0, this is the only folder.
+		/// </summary>
+		public TaskFolder RootFolder
+		{
+			get { return GetFolder(@"\"); }
+		}
 	}
 }
