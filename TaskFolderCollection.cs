@@ -80,7 +80,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2FolderList != null)
-					return new TaskFolder(v2FolderList[index]);
+					return new TaskFolder(v2FolderList[++index]);
 				return v1FolderList[index];
 			}
 		}

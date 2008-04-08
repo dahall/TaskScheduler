@@ -13,6 +13,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static readonly bool v2 = (Environment.OSVersion.Version >= new Version(6, 0));
 
 		private V1Interop.ITaskScheduler v1TaskScheduler = null;
+		private WindowsImpersonatedIdentity v1Impersonation = null;
 		private V2Interop.TaskSchedulerClass v2TaskService = null;
 
 		/// <summary>
@@ -37,8 +38,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-				if (!string.IsNullOrEmpty(userName) || !string.IsNullOrEmpty(accountDomain) || !string.IsNullOrEmpty(password))
-					throw new NotV1SupportedException();
+				v1Impersonation = new WindowsImpersonatedIdentity(userName, accountDomain, password);
 				V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
 				v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
 				if (!string.IsNullOrEmpty(targetServer))
@@ -55,6 +55,8 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v2TaskService);
 			if (v1TaskScheduler != null)
 				Marshal.ReleaseComObject(v1TaskScheduler);
+			if (v1Impersonation != null)
+				v1Impersonation.Dispose();
 			GC.SuppressFinalize(this);
 		}
 
@@ -116,7 +118,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedDomain
 		{
-			get { if (v2) return v2TaskService.ConnectedDomain; throw new NotV1SupportedException(); }
+			get
+			{
+				if (v2)
+					return v2TaskService.ConnectedDomain;
+				string[] parts = v1Impersonation.Name.Split('\\');
+				if (parts.Length == 2)
+					return parts[0];
+				return string.Empty;
+			}
 		}
 
 		/// <summary>
@@ -125,7 +135,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedUser
 		{
-			get { if (v2) return v2TaskService.ConnectedUser; throw new NotV1SupportedException(); }
+			get
+			{
+				if (v2)
+					return v2TaskService.ConnectedUser;
+				string[] parts = v1Impersonation.Name.Split('\\');
+				if (parts.Length == 2)
+					return parts[1];
+				return parts[0];
+			}
 		}
 
 		/// <summary>

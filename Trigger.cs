@@ -297,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v2Trigger.Id;
 				if (v1Trigger != null)
 					return v1Trigger.GetTriggerString();
-				return (string)unboundValues["Id"];
+				return (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null);
 			}
 			set
 			{
@@ -340,7 +340,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(v2Trigger.ExecutionTimeLimit);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["ExecutionTimeLimit"];
+				return (unboundValues.ContainsKey("ExecutionTimeLimit") ? (TimeSpan)unboundValues["ExecutionTimeLimit"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -434,6 +434,15 @@ namespace Microsoft.Win32.TaskScheduler
 						unboundValues["Enabled"] = value;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Returns a string representing this trigger.
+		/// </summary>
+		/// <returns>String value of trigger.</returns>
+		public override string ToString()
+		{
+			return this.Id;
 		}
 	}
 
@@ -561,7 +570,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IBootTrigger)v2Trigger).Delay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["Delay"];
+				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -603,7 +612,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IEventTrigger)v2Trigger).Subscription;
-				return (string)unboundValues["Subscription"];
+				return (unboundValues.ContainsKey("Subscription") ? (string)unboundValues["Subscription"] : null);
 			}
 			set
 			{
@@ -623,7 +632,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IEventTrigger)v2Trigger).Delay);
-				return (TimeSpan)unboundValues["Delay"];
+				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -709,7 +718,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["RandomDelay"];
+				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -761,7 +770,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.ILogonTrigger)v2Trigger).Delay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["Delay"];
+				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -785,7 +794,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (string)unboundValues["UserId"];
+				return (unboundValues.ContainsKey("UserId") ? (string)unboundValues["UserId"] : null);
 			}
 			set
 			{
@@ -915,7 +924,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					return (bool)unboundValues["RunOnLastWeekOfMonth"];
+					return (unboundValues.ContainsKey("RunOnLastWeekOfMonth") ? (bool)unboundValues["RunOnLastWeekOfMonth"] : false);
 			}
 			set
 			{
@@ -939,7 +948,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["RandomDelay"];
+				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -1075,7 +1084,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return ((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth;
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (bool)unboundValues["RunOnLastDayOfMonth"];
+				return (unboundValues.ContainsKey("RunOnLastDayOfMonth") ? (bool)unboundValues["RunOnLastDayOfMonth"] : false);
 			}
 			set
 			{
@@ -1099,7 +1108,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["RandomDelay"];
+				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -1136,7 +1145,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IRegistrationTrigger)v2Trigger).Delay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["Delay"];
+				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -1171,7 +1180,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay);
-				return (TimeSpan)unboundValues["Delay"];
+				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -1191,7 +1200,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
-				return (string)unboundValues["UserId"];
+				return (unboundValues.ContainsKey("UserId") ? (string)unboundValues["UserId"] : null);
 			}
 			set
 			{
@@ -1211,7 +1220,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange;
-				return (TaskSessionStateChangeType)unboundValues["StateChange"];
+				return (unboundValues.ContainsKey("StateChange") ? (TaskSessionStateChangeType)unboundValues["StateChange"] : TaskSessionStateChangeType.ConsoleConnect);
 			}
 			set
 			{
@@ -1247,7 +1256,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["RandomDelay"];
+				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -1343,7 +1352,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (TimeSpan)unboundValues["RandomDelay"];
+				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
 			}
 			set
 			{

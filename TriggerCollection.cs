@@ -157,6 +157,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the number of triggers in the collection.
+		/// </summary>
+		public int Count
+		{
+			get
+			{
+				if (v2Coll != null)
+					return v2Coll.Count;
+				return (int)v1Task.GetTriggerCount();
+			}
+		}
+
+		/// <summary>
 		/// Add an unbound <see cref="Trigger"/> to the task.
 		/// </summary>
 		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
@@ -190,6 +203,45 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			foreach (Trigger t in this)
 				t.SetV1TriggerData();
+		}
+
+		/// <summary>
+		/// Clears all triggers from the task.
+		/// </summary>
+		public void Clear()
+		{
+			if (v2Coll != null)
+				v2Coll.Clear();
+			else
+			{
+				for (int i = this.Count - 1; i >= 0; i--)
+					RemoveAt(i);
+			}
+		}
+
+		/// <summary>
+		/// Gets a specified trigger from the collection.
+		/// </summary>
+		/// <param name="index">The index of the trigger to be retrieved.</param>
+		/// <returns>Specialized <see cref="Trigger"/> instance.</returns>
+		public Trigger this[int index]
+		{
+			get { if (v2Coll != null) return Trigger.CreateTrigger(v2Coll[++index]); return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index)); }
+		}
+
+		/// <summary>
+		/// Removes the trigger at a specified index.
+		/// </summary>
+		/// <param name="index">Index of trigger to remove.</param>
+		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
+		public void RemoveAt(int index)
+		{
+			if (index >= this.Count)
+				throw new ArgumentOutOfRangeException("index", index, "Failed to remove Trigger. Index out of range.");
+			if (v2Coll != null)
+				v2Coll.Remove(++index);
+			else
+				v1Task.DeleteTrigger((ushort)index); //Remove the trigger from the Task Scheduler
 		}
 	}
 }
