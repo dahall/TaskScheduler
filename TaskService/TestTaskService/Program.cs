@@ -7,6 +7,33 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
+			LongTest();
+		}
+
+		static void ShortTest()
+		{
+			// Get the service on the local machine
+			TaskService ts = new TaskService();
+
+			// Create a new task definition and assign properties
+			TaskDefinition td = ts.NewTask();
+			td.RegistrationInfo.Description = "Does something";
+
+			// Create a trigger that will fire the task at this time every other day
+			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+
+			// Create an action that will launch Notepad whenever the trigger fires
+			td.Actions.Add(new ExecAction("notepad.exe", "c:\\pdanetbt.log", null));
+
+			// Register the task in the root folder
+			ts.RootFolder.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+
+			// Remove the task we just created
+			ts.RootFolder.DeleteTask("Test");
+		}
+
+		static void LongTest()
+		{
 			TaskService ts = new TaskService();
 			Version ver = ts.HighestSupportedVersion;
 			bool newVer = (ver == new Version(1, 2));
@@ -136,6 +163,10 @@ namespace TestTaskService
 			wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 			wTrigger.WeeksInterval = 1;
 
+			Console.WriteLine("New task triggers:");
+			for (int i = 0; i < td.Triggers.Count; i++)
+				Console.WriteLine("  {0}: {1}", i, td.Triggers[i]);
+
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\pdanetbt.log", null));
 			if (newVer)
 			{
@@ -143,6 +174,10 @@ namespace TestTaskService
 				td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
 				td.Actions.Add(new ComHandlerAction(new Guid("{F09878A1-4652-4292-AA63-8C7D4FD7648F}"), "\\b"));
 			}
+
+			Console.WriteLine("\nNew task actions:");
+			for (int i = 0; i < td.Actions.Count; i++)
+				Console.WriteLine("  {0}: {1}", i, td.Actions[i]);
 
 			Task runningTask = tf.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
 			Console.WriteLine("New task will run at " + runningTask.NextRunTime);

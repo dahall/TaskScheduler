@@ -183,16 +183,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the specified registered task from the collection.
 		/// </summary>
-		/// <param name="index">The name of the registered task to be retrieved.</param>
+		/// <param name="index">The index of the registered task to be retrieved.</param>
 		/// <returns>A <see cref="Task"/> instance that contains the requested context.</returns>
-		public Task this[string index]
+		public Task this[int index]
 		{
 			get
 			{
 				if (v2Coll != null)
-					return new Task(v2Coll[index]);
-				Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
-				return new Task(v1TS.Activate(index, ref ITaskGuid));
+					return new Task(v2Coll[++index]);
+
+				int i = 0;
+				V1TaskEnumerator v1te = new V1TaskEnumerator(v1TS);
+				while (v1te.MoveNext())
+					if (i++ == index)
+						return v1te.Current;
+				throw new ArgumentOutOfRangeException();
 			}
 		}
 	}
@@ -313,6 +318,43 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets the number of registered tasks in the collection.
+		/// </summary>
+		public int Count
+		{
+			get
+			{
+				if (v2Coll != null)
+					return v2Coll.Count;
+				int i = 0;
+				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(v1TS);
+				while (v1te.MoveNext())
+					i++;
+				return i;
+			}
+		}
+
+		/// <summary>
+		/// Gets the specified running task from the collection.
+		/// </summary>
+		/// <param name="index">The index of the running task to be retrieved.</param>
+		/// <returns>A <see cref="RunningTask"/> instance.</returns>
+		public RunningTask this[int index]
+		{
+			get
+			{
+				if (v2Coll != null)
+					return new RunningTask(v2Coll[++index]);
+
+				int i = 0;
+				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(v1TS);
+				while (v1te.MoveNext())
+					if (i++ == index)
+						return v1te.Current;
+				throw new ArgumentOutOfRangeException();
+			}
+		}
 	}
 
 }

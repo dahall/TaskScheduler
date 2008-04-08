@@ -89,8 +89,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public virtual string Id
 		{
-			get { return (iAction == null) ? (string)unboundValues["Id"] : this.iAction.Id; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null) : this.iAction.Id; }
 			set { if (iAction == null) unboundValues["Id"] = value; else this.iAction.Id = value; }
+		}
+
+		/// <summary>
+		/// Returns the action Id.
+		/// </summary>
+		/// <returns>String representation of action.</returns>
+		public override string ToString()
+		{
+			return this.Id;
 		}
 
 		/// <summary>
@@ -141,7 +150,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public Guid ClassId
 		{
-			get { return (iAction == null) ? (Guid)unboundValues["ClassId"] : new Guid(((V2Interop.IComHandlerAction)iAction).ClassId); }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("ClassId") ? (Guid)unboundValues["ClassId"] : Guid.Empty) : new Guid(((V2Interop.IComHandlerAction)iAction).ClassId); }
 			set { if (iAction == null) unboundValues["ClassId"] = value.ToString(); else ((V2Interop.IComHandlerAction)iAction).ClassId = value.ToString(); }
 		}
 
@@ -150,8 +159,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Data
 		{
-			get { return (iAction == null) ? (string)unboundValues["Data"] : ((V2Interop.IComHandlerAction)iAction).Data; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Data") ? (string)unboundValues["Data"] : null) : ((V2Interop.IComHandlerAction)iAction).Data; }
 			set { if (iAction == null) unboundValues["Data"] = value; else ((V2Interop.IComHandlerAction)iAction).Data = value; }
+		}
+
+		/// <summary>
+		/// Gets a string representation of the <see cref="ComHandlerAction"/>.
+		/// </summary>
+		/// <returns>String represention this action.</returns>
+		public override string ToString()
+		{
+			return string.Format("Custom Handler\t{0}", this.ClassId);
 		}
 	}
 
@@ -236,7 +254,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v1Task.GetApplicationName();
 				if (iAction != null)
 					return ((V2Interop.IExecAction)iAction).Path;
-				return (string)unboundValues["Path"];
+				return unboundValues.ContainsKey("Path") ? (string)unboundValues["Path"] : null;
 			}
 			set
 			{
@@ -260,7 +278,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v1Task.GetParameters();
 				if (iAction != null)
 					return ((V2Interop.IExecAction)iAction).Arguments;
-				return (string)unboundValues["Arguments"];
+				return unboundValues.ContainsKey("Arguments") ? (string)unboundValues["Arguments"] : null;
 			}
 			set
 			{
@@ -284,7 +302,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v1Task.GetWorkingDirectory();
 				if (iAction != null)
 					return ((V2Interop.IExecAction)iAction).WorkingDirectory;
-				return (string)unboundValues["WorkingDirectory"];
+				return unboundValues.ContainsKey("WorkingDirectory") ? (string)unboundValues["WorkingDirectory"] : null;
 			}
 			set
 			{
@@ -295,6 +313,15 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					unboundValues["WorkingDirectory"] = value;
 			}
+		}
+
+		/// <summary>
+		/// Gets a string representation of the <see cref="ExecAction"/>.
+		/// </summary>
+		/// <returns>String represention this action.</returns>
+		public override string ToString()
+		{
+			return string.Format("Start a program\t{0} {1}", this.Path, this.Arguments);
 		}
 	}
 
@@ -337,7 +364,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Server
 		{
-			get { return (iAction == null) ? (string)unboundValues["Server"] : ((V2Interop.IEmailAction)iAction).Server; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Server") ? (string)unboundValues["Server"] : null) : ((V2Interop.IEmailAction)iAction).Server; }
 			set { if (iAction == null) unboundValues["Server"] = value; else ((V2Interop.IEmailAction)iAction).Server = value; }
 		}
 
@@ -346,7 +373,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Subject
 		{
-			get { return (iAction == null) ? (string)unboundValues["Subject"] : ((V2Interop.IEmailAction)iAction).Subject; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Subject") ? (string)unboundValues["Subject"] : null) : ((V2Interop.IEmailAction)iAction).Subject; }
 			set { if (iAction == null) unboundValues["Subject"] = value; else ((V2Interop.IEmailAction)iAction).Subject = value; }
 		}
 
@@ -355,7 +382,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string To
 		{
-			get { return (iAction == null) ? (string)unboundValues["To"] : ((V2Interop.IEmailAction)iAction).To; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("To") ? (string)unboundValues["To"] : null) : ((V2Interop.IEmailAction)iAction).To; }
 			set { if (iAction == null) unboundValues["To"] = value; else ((V2Interop.IEmailAction)iAction).To = value; }
 		}
 
@@ -364,7 +391,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Cc
 		{
-			get { return (iAction == null) ? (string)unboundValues["Cc"] : ((V2Interop.IEmailAction)iAction).Cc; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Cc") ? (string)unboundValues["Cc"] : null) : ((V2Interop.IEmailAction)iAction).Cc; }
 			set { if (iAction == null) unboundValues["Cc"] = value; else ((V2Interop.IEmailAction)iAction).Cc = value; }
 		}
 
@@ -373,7 +400,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Bcc
 		{
-			get { return (iAction == null) ? (string)unboundValues["Bcc"] : ((V2Interop.IEmailAction)iAction).Bcc; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Bcc") ? (string)unboundValues["Bcc"] : null) : ((V2Interop.IEmailAction)iAction).Bcc; }
 			set { if (iAction == null) unboundValues["Bcc"] = value; else ((V2Interop.IEmailAction)iAction).Bcc = value; }
 		}
 
@@ -382,7 +409,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string ReplyTo
 		{
-			get { return (iAction == null) ? (string)unboundValues["ReplyTo"] : ((V2Interop.IEmailAction)iAction).ReplyTo; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("ReplyTo") ? (string)unboundValues["ReplyTo"] : null) : ((V2Interop.IEmailAction)iAction).ReplyTo; }
 			set { if (iAction == null) unboundValues["ReplyTo"] = value; else ((V2Interop.IEmailAction)iAction).ReplyTo = value; }
 		}
 
@@ -391,7 +418,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string From
 		{
-			get { return (iAction == null) ? (string)unboundValues["From"] : ((V2Interop.IEmailAction)iAction).From; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("From") ? (string)unboundValues["From"] : null) : ((V2Interop.IEmailAction)iAction).From; }
 			set { if (iAction == null) unboundValues["From"] = value; else ((V2Interop.IEmailAction)iAction).From = value; }
 		}
 
@@ -420,7 +447,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Body
 		{
-			get { return (iAction == null) ? (string)unboundValues["Body"] : ((V2Interop.IEmailAction)iAction).Body; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Body") ? (string)unboundValues["Body"] : null) : ((V2Interop.IEmailAction)iAction).Body; }
 			set { if (iAction == null) unboundValues["Body"] = value; else ((V2Interop.IEmailAction)iAction).Body = value; }
 		}
 
@@ -429,8 +456,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public object[] Attachments
 		{
-			get { return (iAction == null) ? (object[])unboundValues["Attachments"] : ((V2Interop.IEmailAction)iAction).Attachments; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Attachments") ? (object[])unboundValues["Attachments"] : null) : ((V2Interop.IEmailAction)iAction).Attachments; }
 			set { if (iAction == null) unboundValues["Attachments"] = value; else ((V2Interop.IEmailAction)iAction).Attachments = value; }
+		}
+
+		/// <summary>
+		/// Gets a string representation of the <see cref="EmailAction"/>.
+		/// </summary>
+		/// <returns>String represention this action.</returns>
+		public override string ToString()
+		{
+			return string.Format("Send an e-mail\t{1} {0}", this.Subject, this.To);
 		}
 	}
 
@@ -460,7 +496,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string Title
 		{
-			get { return (iAction == null) ? (string)unboundValues["Title"] : ((V2Interop.IShowMessageAction)iAction).Title; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Title") ? (string)unboundValues["Title"] : null) : ((V2Interop.IShowMessageAction)iAction).Title; }
 			set { if (iAction == null) unboundValues["Title"] = value; else ((V2Interop.IShowMessageAction)iAction).Title = value; }
 		}
 
@@ -469,8 +505,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public string MessageBody
 		{
-			get { return (iAction == null) ? (string)unboundValues["MessageBody"] : ((V2Interop.IShowMessageAction)iAction).MessageBody; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("MessageBody") ? (string)unboundValues["MessageBody"] : null) : ((V2Interop.IShowMessageAction)iAction).MessageBody; }
 			set { if (iAction == null) unboundValues["MessageBody"] = value; else ((V2Interop.IShowMessageAction)iAction).MessageBody = value; }
+		}
+
+		/// <summary>
+		/// Gets a string representation of the <see cref="ShowMessageAction"/>.
+		/// </summary>
+		/// <returns>String represention this action.</returns>
+		public override string ToString()
+		{
+			return string.Format("Show a message\t{0}", this.Title);
 		}
 	}
 
@@ -532,13 +577,49 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Clears all actions from the task.
+		/// </summary>
+		public void Clear()
+		{
+			if (v2Coll != null)
+				v2Coll.Clear();
+			else
+			{
+				for (int i = this.Count - 1; i >= 0; i--)
+					RemoveAt(i);
+			}
+		}
+
+		/// <summary>
+		/// Removes the action at a specified index.
+		/// </summary>
+		/// <param name="index">Index of action to remove.</param>
+		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
+		public void RemoveAt(int index)
+		{
+			if (index >= this.Count)
+				throw new ArgumentOutOfRangeException("index", index, "Failed to remove Trigger. Index out of range.");
+			if (v2Coll != null)
+				v2Coll.Remove(++index);
+			else
+				throw new NotV1SupportedException("There can be only a single action and it cannot be removed.");
+		}
+
+		/// <summary>
 		/// Gets a specified action from the collection.
 		/// </summary>
 		/// <param name="index">The index of the action to be retrieved.</param>
 		/// <returns>Specialized <see cref="Action"/> instance.</returns>
 		public Action this[int index]
 		{
-			get { if (v2Coll != null) return Action.CreateAction(v2Coll[index]); throw new NotV1SupportedException(); }
+			get
+			{
+				if (v2Coll != null)
+					return Action.CreateAction(v2Coll[++index]);
+				if (index == 0)
+					return new ExecAction(v1Task.GetApplicationName(), v1Task.GetParameters(), v1Task.GetWorkingDirectory());
+				throw new ArgumentOutOfRangeException();
+			}
 		}
 
 		/// <summary>
