@@ -149,6 +149,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="definition">The <see cref="TaskDefinition"/> of the registered task.</param>
+		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
+		public Task RegisterTaskDefinition(string Path, TaskDefinition definition)
+		{
+			return RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+		}
+
+		/// <summary>
+		/// Registers (creates) a task in a specified location using a <see cref="TaskDefinition"/> instance to define a task.
+		/// </summary>
+		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="definition">The <see cref="TaskDefinition"/> of the registered task.</param>
 		/// <param name="createType">A union of <see cref="TaskCreation"/> flags.</param>
 		/// <param name="UserId">The user credentials used to register the task.</param>
 		/// <param name="password">The password for the userId used to register the task.</param>
