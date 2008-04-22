@@ -12,9 +12,9 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool v2 = (Environment.OSVersion.Version >= new Version(6, 0));
 
-		private V1Interop.ITaskScheduler v1TaskScheduler = null;
+		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
 		private WindowsImpersonatedIdentity v1Impersonation = null;
-		private V2Interop.TaskSchedulerClass v2TaskService = null;
+		internal V2Interop.TaskSchedulerClass v2TaskService = null;
 
 		/// <summary>
 		/// Creates a new instance of a TaskService connecting to the local machine as the current user.
@@ -79,11 +79,31 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="RunningTaskCollection"/> instance with the list of running tasks.</returns>
 		public RunningTaskCollection GetRunningTasks(bool includeHidden)
 		{
-			return v2 ? new RunningTaskCollection(v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(v1TaskScheduler);
+			return v2 ? new RunningTaskCollection(v2TaskService, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(v1TaskScheduler);
+		}
+
+		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)
+		{
+			V2Interop.ITaskFolder fld = null;
+			try
+			{
+				fld = iSvc.GetFolder("\\");
+				return fld.GetTask(name);
+			}
+			finally
+			{
+				if (fld != null) Marshal.ReleaseComObject(fld);
+			}
+		}
+
+		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
+		{
+			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+			return iSvc.Activate(name, ref ITaskGuid);
 		}
 		
 		/// <summary>
-		/// Returns an empty task definition object to be filled in with settings and properties and then registered using the <see cref="TaskFolder.RegisterTaskDefinition"/> method.
+		/// Returns an empty task definition object to be filled in with settings and properties and then registered using the <see cref="TaskFolder.RegisterTaskDefinition(string, TaskDefinition)"/> method.
 		/// </summary>
 		/// <returns><see cref="TaskDefinition"/> instance for setting properties.</returns>
 		public TaskDefinition NewTask()

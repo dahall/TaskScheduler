@@ -35,8 +35,6 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = null;
 		}
 
-		#region IEnumerable<Trigger> Members
-
 		/// <summary>
 		/// Gets the collection enumerator for this collection.
 		/// </summary>
@@ -48,16 +46,10 @@ namespace Microsoft.Win32.TaskScheduler
 			return new V2TriggerEnumerator(v2Coll);
 		}
 
-		#endregion
-
-		#region IEnumerable Members
-
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
 			return this.GetEnumerator();
 		}
-
-		#endregion
 
 		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
 		{

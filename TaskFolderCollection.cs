@@ -6,7 +6,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides information and control for a collection of folders that contain tasks.
 	/// </summary>
-	public class TaskFolderCollection : IEnumerable<TaskFolder>
+	public sealed class TaskFolderCollection : IEnumerable<TaskFolder>
 	{
 		private TaskScheduler.V2Interop.ITaskFolderCollection v2FolderList = null;
 		private TaskFolder[] v1FolderList = null;
@@ -40,6 +40,7 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Runtime.InteropServices.Marshal.ReleaseComObject(v2FolderList);
 		}
 
+		/*
 		/// <summary>
 		/// Returns the index of the TaskFolder within the collection.
 		/// </summary>
@@ -69,6 +70,7 @@ namespace Microsoft.Win32.TaskScheduler
 			else
 				return (v1FolderList.Length > 0 && (path == string.Empty || path == "\\")) ? 0 : -1;
 		}
+		*/
 
 		/// <summary>
 		/// Gets the specified folder from the collection.
@@ -102,6 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/*
 		/// <summary>
 		/// Determines whether the collection contains a specific key and value.
 		/// </summary>
@@ -111,13 +114,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			return IndexOf(item) != -1;
 		}
+		*/
 
 		/// <summary>
 		/// Copies the elements of the ICollection to an Array, starting at a particular Array index.
 		/// </summary>
 		/// <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="ICollection{T}"/>. The Array must have zero-based indexing.</param>
 		/// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-		public void CopyTo(TaskFolder[] array, int arrayIndex)
+		internal void CopyTo(TaskFolder[] array, int arrayIndex)
 		{
 			if (arrayIndex < 0) throw new ArgumentOutOfRangeException();
 			if (array == null) throw new ArgumentNullException();

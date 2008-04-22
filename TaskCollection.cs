@@ -75,6 +75,11 @@ namespace Microsoft.Win32.TaskScheduler
 				get { return new Task(m_ts.Activate(curItem, ref ITaskGuid)); }
 			}
 
+			internal V1Interop.ITask ICurrent
+			{
+				get { return m_ts.Activate(curItem, ref ITaskGuid); }
+			}
+
 			/// <summary>
 			/// Releases all resources used by this class.
 			/// </summary>
@@ -200,24 +205,57 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException();
 			}
 		}
+
+		/// <summary>
+		/// Gets the named registered task from the collection.
+		/// </summary>
+		/// <param name="name">The name of the registered task to be retrieved.</param>
+		/// <returns>A <see cref="Task"/> instance that contains the requested context.</returns>
+		public Task this[string name]
+		{
+			get
+			{
+				if (v2Coll != null)
+					return new Task(v2Coll[name]);
+
+				V1TaskEnumerator v1te = new V1TaskEnumerator(v1TS);
+				while (v1te.MoveNext())
+					if (string.Compare(v1te.Current.Name, name, true) == 0)
+						return v1te.Current;
+				throw new ArgumentOutOfRangeException();
+			}
+		}
 	}
 
 	/// <summary>
 	/// 
 	/// </summary>
-	public sealed class RunningTaskCollection : IEnumerable<RunningTask>
+	public sealed class RunningTaskCollection : IEnumerable<RunningTask>, IDisposable
 	{
-		private TaskScheduler.V1Interop.ITaskScheduler v1TS = null;
-		private TaskScheduler.V2Interop.IRunningTaskCollection v2Coll = null;
+		private V1Interop.ITaskScheduler v1TS = null;
+		private V2Interop.ITaskService v2Svc = null;
+		private V2Interop.IRunningTaskCollection v2Coll = null;
 
-		internal RunningTaskCollection(TaskScheduler.V1Interop.ITaskScheduler ts)
+		internal RunningTaskCollection(V1Interop.ITaskScheduler ts)
 		{
 			v1TS = ts;
 		}
 
-		internal RunningTaskCollection(TaskScheduler.V2Interop.IRunningTaskCollection iTaskColl)
+		internal RunningTaskCollection(V2Interop.ITaskService iService, V2Interop.IRunningTaskCollection iTaskColl)
 		{
+			v2Svc = iService;
 			v2Coll = iTaskColl;
+		}
+
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
+		public void Dispose()
+		{
+			v1TS = null;
+			v2Svc = null;
+			if (v2Coll != null)
+				Marshal.ReleaseComObject(v2Coll);
 		}
 
 		/// <summary>
@@ -227,7 +265,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<RunningTask> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new RunningTaskEnumerator(v2Coll);
+				return new RunningTaskEnumerator(v2Svc, v2Coll);
 			return new V1RunningTaskEnumerator(v1TS);
 		}
 
@@ -258,7 +296,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public RunningTask Current
 			{
-				get { return new RunningTask(tEnum.Current); }
+				get { return new RunningTask(tEnum.ICurrent); }
 			}
 
 			/// <summary>
@@ -280,18 +318,24 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal class RunningTaskEnumerator : IEnumerator<RunningTask>
+		internal class RunningTaskEnumerator : IEnumerator<RunningTask>, IDisposable
 		{
+			private V2Interop.ITaskService v2Svc = null;
 			private System.Collections.IEnumerator iEnum;
 
-			internal RunningTaskEnumerator(TaskScheduler.V2Interop.IRunningTaskCollection iTaskColl)
+			internal RunningTaskEnumerator(V2Interop.ITaskService iService, V2Interop.IRunningTaskCollection iTaskColl)
 			{
+				v2Svc = iService;
 				iEnum = iTaskColl.GetEnumerator();
 			}
 
 			public RunningTask Current
 			{
-				get { return new RunningTask((TaskScheduler.V2Interop.IRunningTask)iEnum.Current); }
+				get
+				{
+					V2Interop.IRunningTask irt = (V2Interop.IRunningTask)iEnum.Current;
+					return new RunningTask(TaskService.GetTask(v2Svc, irt.Path + irt.Name), irt);
+				}
 			}
 
 			/// <summary>
@@ -299,6 +343,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			public void Dispose()
 			{
+				v2Svc = null;
 				iEnum = null;
 			}
 
@@ -345,7 +390,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return new RunningTask(v2Coll[++index]);
+				{
+					V2Interop.IRunningTask irt = v2Coll[++index];
+					return new RunningTask(TaskService.GetTask(v2Svc, irt.Path + irt.Name), irt);
+				}
 
 				int i = 0;
 				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(v1TS);

@@ -449,7 +449,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
 	/// </summary>
-	public class RepetitionPattern : IDisposable
+	public sealed class RepetitionPattern : IDisposable
 	{
 		private V1Interop.ITaskTrigger v1Trigger = null;
 		private V1Interop.TaskTrigger v1TriggerData;
@@ -549,7 +549,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when the system is booted.
 	/// </summary>
-	public class BootTrigger : Trigger
+	public sealed class BootTrigger : Trigger
 	{
 		internal BootTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnSystemStart) { }
 		internal BootTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
@@ -587,7 +587,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when a system event occurs. Not available on Task Scheduler 1.0.
 	/// </summary>
-	public class EventTrigger : Trigger
+	public sealed class EventTrigger : Trigger
 	{
 		internal EventTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
@@ -666,7 +666,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
 	/// </summary>
-	public class DailyTrigger : Trigger
+	public sealed class DailyTrigger : Trigger
 	{
 		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { Init(); }
 		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
@@ -735,7 +735,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when the computer goes into an idle state. For information about idle conditions, see Task Idle Conditions.
 	/// </summary>
-	public class IdleTrigger : Trigger
+	public sealed class IdleTrigger : Trigger
 	{
 		internal IdleTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnIdle) { }
 		internal IdleTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
@@ -749,7 +749,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
 	/// </summary>
-	public class LogonTrigger : Trigger
+	public sealed class LogonTrigger : Trigger
 	{
 		internal LogonTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.OnLogon) { }
 		internal LogonTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
@@ -811,7 +811,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May through October.
 	/// </summary>
-	public class MonthlyDOWTrigger : Trigger
+	public sealed class MonthlyDOWTrigger : Trigger
 	{
 		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { Init(); }
 		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
@@ -965,7 +965,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
 	/// </summary>
-	public class MonthlyTrigger : Trigger
+	public sealed class MonthlyTrigger : Trigger
 	{
 		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { Init(); }
 		internal MonthlyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
@@ -1125,7 +1125,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
 	/// </summary>
-	public class RegistrationTrigger : Trigger
+	public sealed class RegistrationTrigger : Trigger
 	{
 		internal RegistrationTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
@@ -1162,7 +1162,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
 	/// </summary>
-	public class SessionStateChangeTrigger : Trigger
+	public sealed class SessionStateChangeTrigger : Trigger
 	{
 		internal SessionStateChangeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
@@ -1235,7 +1235,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task at a specific date and time.
 	/// </summary>
-	public class TimeTrigger : Trigger
+	public sealed class TimeTrigger : Trigger
 	{
 		internal TimeTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunOnce) { }
 		internal TimeTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
@@ -1273,7 +1273,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
 	/// </summary>
-	public class WeeklyTrigger : Trigger
+	public sealed class WeeklyTrigger : Trigger
 	{
 		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { Init(); }
 		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }

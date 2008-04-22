@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="Microsoft.Win32.TaskScheduler.Action" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAACAAAAAEAAAgAAACAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ComHandlerAction" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAEAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ExecAction" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCgAAAAAAAAAIEAAAAAAAAAAAAAAAAIAAAAAQAAgA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.EmailAction" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAgAAIAAAAAAEEAIABAACAAAAIAAAAAAAAAgAAQBg=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ShowMessageAction" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ActionCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCoAAAQAAmAAABAACAAAAAQAAAAAAAAACAAAAABAIAA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.NamedValueCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAgAAAACAAABAACAAAAAQAAAAAAAAACAAAAARAAgA=</HashCode>
+      <FileName>NamedValueCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.NotV1SupportedException" Collapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>NotV1SupportedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskRegistrationInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YIgAAARAAiAgAAAAgAAAAAAAACAMAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiEAAQACGAAAYAFAAFQAQAQAAAAAEgAAAgQAACUAMA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.IdleSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiAAAAAACAAIAAAAAAAAAAAAAAAAggAAAAAAAAAACA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.NetworkSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskPrincipal" Collapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCEAAEACAAAAAAAAAAAAgAAAAAAAAACAAAACAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskDefinition" Collapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAQAICAAACAAAAAIAAACCACEABAAgAAAEAAAMgA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.Task" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgADABAImABCIKAADAAAAQABAAAAAAAIAAABAAAAAI=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.RunningTask" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAIACBAAAIAAAAAAAQIAAAAAAAAIAAQBAAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAADAAABAACAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.RunningTaskCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAABAAABAACAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskFolder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAEABAAGAAAAIAABAAAAwAABAAAAAEAAAIAABAAAA=</HashCode>
+      <FileName>TaskFolder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskFolderCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAABAACAAAAAQAAAAAAAAAAEAIAAAAIAA=</HashCode>
+      <FileName>TaskFolderCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAAACAAQAgBAAEAgCAAIASAAAAAAAAEAYAAAAA=</HashCode>
+      <FileName>TaskService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.Trigger" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCmIAACCAAAIIEAAAwAAEAAAAEAAAAAAAAACAAAgA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.RepetitionPattern" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAACACACABAAAIAAAAEAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.BootTrigger" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.EventTrigger" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIACAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.DailyTrigger" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.IdleTrigger" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.LogonTrigger" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAACIAAAAAQAAAAAAAAAAACABAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.MonthlyTrigger" Collapsed="true">
+    <Position X="24" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAACAAAAAIAAAAAAAAAAAAAAgAACgAACAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.RegistrationTrigger" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TimeTrigger" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.WeeklyTrigger" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAQAEAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TriggerCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCoAgAAAAGAAABAACAAAAAQAAAAAAAAACAAAAABAIAA=</HashCode>
+      <FileName>TriggerCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskActionType" Collapsed="true">
+    <Position X="30" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAQIAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskCompatibility" Collapsed="true">
+    <Position X="31.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskCreation" Collapsed="true">
+    <Position X="26.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAgAAAAAAAAAAAAAEEABAAAgAAAAABA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskInstancesPolicy" Collapsed="true">
+    <Position X="28.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABIAAAAQAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskLogonType" Collapsed="true">
+    <Position X="30" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAAAAAAAAAAAAAAAEAAEAAACAAAgAAEAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskRunFlags" Collapsed="true">
+    <Position X="31.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAACAAAAAAAAAAAAAIAAAAKAAAAAAAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskRunLevel" Collapsed="true">
+    <Position X="26.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType" Collapsed="true">
+    <Position X="28.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAABAAAAAAAQAIAAAAAAAAAAAAAAAIAAAAAAAE=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskState" Collapsed="true">
+    <Position X="30" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAACAAAAAQAAAAAAIAAAAAAAAABA=</HashCode>
+      <FileName>Task.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.TaskTriggerType" Collapsed="true">
+    <Position X="31.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAEAAAAAAAIAAAAAQAAgAAAAAAAAgABAAEAwA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.DaysOfTheWeek" Collapsed="true">
+    <Position X="26.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.WhichWeek" Collapsed="true">
+    <Position X="26.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAQAAIAAAAAEAAEAAAAAAAAAAAAAQQ=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.MonthsOfTheYear" Collapsed="true">
+    <Position X="28.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEgAAABRAAAAACQAwgAAAAAAQAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

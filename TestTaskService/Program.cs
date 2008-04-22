@@ -23,10 +23,10 @@ namespace TestTaskService
 			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 
 			// Create an action that will launch Notepad whenever the trigger fires
-			td.Actions.Add(new ExecAction("notepad.exe", "c:\\pdanetbt.log", null));
+			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
 			// Register the task in the root folder
-			ts.RootFolder.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+			ts.RootFolder.RegisterTaskDefinition("Test", td);
 
 			// Remove the task we just created
 			ts.RootFolder.DeleteTask("Test");
@@ -47,30 +47,27 @@ namespace TestTaskService
 				if (ver.Minor > 0)
 					Console.WriteLine("  Current Action: " + rt.CurrentAction);
 			}
-			Console.WriteLine();
 
 			TaskFolder tf = ts.RootFolder;
-			Console.WriteLine("Root folder tasks ({0}):", tf.Tasks.Count);
+			Console.WriteLine("\nRoot folder tasks ({0}):", tf.Tasks.Count);
 			foreach (Task t in tf.Tasks)
 			{
 				Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
 				foreach (Trigger trg in t.Definition.Triggers)
 					Console.WriteLine(" + {0}", trg.Id);
 			}
-			Console.WriteLine();
 
 			TaskFolderCollection tfs = tf.SubFolders;
 			if (tfs.Count > 0)
 			{
-				Console.WriteLine("Sub folders:");
+				Console.WriteLine("\nSub folders:");
 				foreach (TaskFolder sf in tfs)
 					Console.WriteLine("+ {0}", sf.Path);
-				Console.WriteLine();
 			}
 			try
 			{
 				TaskFolder sub = tf.SubFolders["Microsoft"];
-				Console.WriteLine("Subfolder path: " + sub.Path);
+				Console.WriteLine("\nSubfolder path: " + sub.Path);
 			}
 			catch (NotSupportedException) { }
 			catch (Exception ex)
@@ -163,11 +160,7 @@ namespace TestTaskService
 			wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 			wTrigger.WeeksInterval = 1;
 
-			Console.WriteLine("New task triggers:");
-			for (int i = 0; i < td.Triggers.Count; i++)
-				Console.WriteLine("  {0}: {1}", i, td.Triggers[i]);
-
-			td.Actions.Add(new ExecAction("notepad.exe", "c:\\pdanetbt.log", null));
+			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 			if (newVer)
 			{
 				td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
@@ -175,12 +168,16 @@ namespace TestTaskService
 				td.Actions.Add(new ComHandlerAction(new Guid("{F09878A1-4652-4292-AA63-8C7D4FD7648F}"), "\\b"));
 			}
 
-			Console.WriteLine("\nNew task actions:");
-			for (int i = 0; i < td.Actions.Count; i++)
-				Console.WriteLine("  {0}: {1}", i, td.Actions[i]);
+			tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
 
-			Task runningTask = tf.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
-			Console.WriteLine("New task will run at " + runningTask.NextRunTime);
+			Task runningTask = tf.Tasks["Test"];
+			Console.WriteLine("\nNew task will run at " + runningTask.NextRunTime);
+			Console.WriteLine("\nNew task triggers:");
+			for (int i = 0; i < runningTask.Definition.Triggers.Count; i++)
+				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Triggers[i]);
+			Console.WriteLine("\nNew task actions:");
+			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
+				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
 			Console.ReadKey(false);
 			tf.DeleteTask("Test");
