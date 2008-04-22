@@ -1442,7 +1442,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials that are used to register the task, and the properties that describe the task.
 	/// </summary>
-	public sealed class Task : IDisposable
+	public class Task : IDisposable
 	{
 		internal V1Interop.ITask v1Task;
 		private V2Interop.IRegisteredTask v2Task;
@@ -1603,10 +1603,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(v2Task.Run(parameters));
+				return new RunningTask(this.v2Task, v2Task.Run(parameters));
 
 			v1Task.Run();
-			return new RunningTask(this);
+			return new RunningTask(this.v1Task);
 		}
 
 		/// <summary>
@@ -1620,7 +1620,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(v2Task.RunEx(parameters, (int)flags, sessionID, user));
+				return new RunningTask(this.v2Task, v2Task.RunEx(parameters, (int)flags, sessionID, user));
 			throw new NotV1SupportedException();
 		}
 
@@ -1779,41 +1779,26 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the methods to get information from and control a running task.
 	/// </summary>
-	public class RunningTask : IDisposable
+	public sealed class RunningTask : Task
 	{
-		private Task v1Task;
-		private TaskScheduler.V2Interop.IRunningTask v2Task;
+		private TaskScheduler.V2Interop.IRunningTask v2RunningTask;
 
-		internal RunningTask(TaskScheduler.V2Interop.IRunningTask iTask)
+		internal RunningTask(V2Interop.IRegisteredTask iTask, V2Interop.IRunningTask iRunningTask) : base(iTask)
 		{
-			v2Task = iTask;
+			v2RunningTask = iRunningTask;
 		}
 
-		internal RunningTask(Task iTask)
+		internal RunningTask(V1Interop.ITask iTask) : base(iTask)
 		{
-			v1Task = iTask;
 		}
 
 		/// <summary>
 		/// Releases all resources used by this class.
 		/// </summary>
-		public void Dispose()
+		public new void Dispose()
 		{
-			v1Task = null;
-			if (v2Task != null) Marshal.ReleaseComObject(v2Task);
-		}
-
-		/// <summary>
-		/// Gets the name of the task.
-		/// </summary>
-		public string Name
-		{
-			get
-			{
-				if (v2Task != null)
-					return v2Task.Name;
-				return v1Task.Name;
-			}
+			base.Dispose();
+			if (v2RunningTask != null) Marshal.ReleaseComObject(v2RunningTask);
 		}
 
 		/// <summary>
@@ -1823,35 +1808,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Task != null)
-					return new Guid(v2Task.InstanceGuid);
+				if (v2RunningTask != null)
+					return new Guid(v2RunningTask.InstanceGuid);
 				return Guid.Empty;
-			}
-		}
-
-		/// <summary>
-		/// Gets the path to where the task is stored.
-		/// </summary>
-		public string Path
-		{
-			get
-			{
-				if (v2Task != null)
-					return v2Task.Path;
-				return v1Task.Path;
-			}
-		}
-
-		/// <summary>
-		/// Gets the state of the running task.
-		/// </summary>
-		public TaskState State
-		{
-			get
-			{
-				if (v2Task != null)
-					return v2Task.State;
-				return v1Task.State;
 			}
 		}
 
@@ -1862,20 +1821,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Task != null)
-					return v2Task.CurrentAction;
-				return v1Task.v1Task.GetApplicationName();
+				if (v2RunningTask != null)
+					return v2RunningTask.CurrentAction;
+				return base.v1Task.GetApplicationName();
 			}
-		}
-
-		/// <summary>
-		/// Stops this instance of the task.
-		/// </summary>
-		public void Stop()
-		{
-			if (v2Task != null)
-				v2Task.Stop();
-			v1Task.v1Task.Terminate();
 		}
 
 		/// <summary>
@@ -1883,8 +1832,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void Refresh()
 		{
-			if (v2Task != null)
-				v2Task.Refresh();
+			if (v2RunningTask != null)
+				v2RunningTask.Refresh();
 		}
 
 		/// <summary>
@@ -1894,8 +1843,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Task != null)
-					return v2Task.EnginePID;
+				if (v2RunningTask != null)
+					return v2RunningTask.EnginePID;
 				throw new NotV1SupportedException();
 			}
 		}

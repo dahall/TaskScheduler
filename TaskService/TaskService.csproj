@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
+    <Compile Include="ActionCollection.cs" />
     <Compile Include="Impersonation.cs" />
     <Compile Include="NamedValueCollection.cs" />
     <Compile Include="NotV1SupportedException.cs" />
@@ -55,6 +56,9 @@
     <Compile Include="TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="V2\TaskSchedulerV2Interop.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,7 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Contains a collection of name-value pairs.
 	/// </summary>
-	public class NamedValueCollection : IDisposable, System.Collections.IEnumerable
+	public sealed class NamedValueCollection : IDisposable, System.Collections.IEnumerable
 	{
 		private V2Interop.ITaskNamedValueCollection v2Coll = null;
 		private Dictionary<string, string> unboundDict = null;
@@ -58,15 +58,38 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				return v2Coll[index].Value;
+				if (v2Coll != null)
+					return v2Coll[++index].Value;
+				string[] keys = new string[unboundDict.Count];
+				unboundDict.Keys.CopyTo(keys, 0);
+				return unboundDict[keys[index]];
 			}
 		}
 
-		// TODO: Figure out how to make this more of a real collection
-		/*public string this[string name]
+		/// <summary>
+		/// Gets the value of the item with the specified key.
+		/// </summary>
+		/// <param name="key">Key to get the value for.</param>
+		/// <returns>Value for the key, or null if not found.</returns>
+		public string this[string key]
 		{
-			get { throw new NotImplementedException(); }
-		}*/
+			get
+			{
+				if (v2Coll != null)
+				{
+					foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+					{
+						if (string.Compare(item.Name, key, false) == 0)
+							return item.Value;
+					}
+					return null;
+				}
+
+				string val = null;
+				unboundDict.TryGetValue(key, out val);
+				return val;
+			}
+		}
 
 		/// <summary>
 		/// Adds a name-value pair to the collection.
@@ -85,7 +108,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Removes a selected name-value pair from the collection.
 		/// </summary>
 		/// <param name="index">Index of the pair to remove.</param>
-		public void Remove(int index)
+		public void RemoveAt(int index)
 		{
 			v2Coll.Remove(index);
 		}
