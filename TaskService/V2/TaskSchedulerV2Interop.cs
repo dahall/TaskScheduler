@@ -11,7 +11,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		Hidden = 1
 	}
 
-	[ComImport, Guid("BAE54997-48B1-4CBE-9965-D6BE263EBEA4"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("BAE54997-48B1-4CBE-9965-D6BE263EBEA4"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IAction
 	{
 		[DispId(1)]
@@ -20,7 +20,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		TaskActionType Type { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] get; }
 	}
 
-	[ComImport, Guid("02820E19-7B98-4ED2-B2E8-FDCCCEFF619B"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("02820E19-7B98-4ED2-B2E8-FDCCCEFF619B"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IActionCollection : IEnumerable
 	{
 		[DispId(1)]
@@ -43,7 +43,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Context { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(6)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(6)] set; }
 	}
 
-	[ComImport, Guid("2A9C35DA-D357-41F4-BBC1-207AC1B1F3CB"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("2A9C35DA-D357-41F4-BBC1-207AC1B1F3CB"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IBootTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -65,7 +65,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Delay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, Guid("6D2FD252-75C5-4F66-90BA-2A7D8CC3039F"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("6D2FD252-75C5-4F66-90BA-2A7D8CC3039F"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IComHandlerAction : IAction
 	{
 		[DispId(1)]
@@ -78,7 +78,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Data { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(11)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(11)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("126C5CD8-B288-41D5-8DBF-E491446ADC5C")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("126C5CD8-B288-41D5-8DBF-E491446ADC5C"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IDailyTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -102,7 +102,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string RandomDelay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, Guid("10F62C64-7E16-4314-A0C2-0C3683F99D40"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("10F62C64-7E16-4314-A0C2-0C3683F99D40"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IEmailAction : IAction
 	{
 		[DispId(1)]
@@ -131,7 +131,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		object[] Attachments { [return: MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x13)] get; [param: In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x13)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("D45B0167-9653-4EEF-B94F-0732CA7AF251")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("D45B0167-9653-4EEF-B94F-0732CA7AF251"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IEventTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -157,7 +157,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		ITaskNamedValueCollection ValueQueries { [return: MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] get; [param: In, MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] set; }
 	}
 
-	[ComImport, Guid("4C3D624D-FD6B-49A3-B9B7-09CB3CD3F047"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("4C3D624D-FD6B-49A3-B9B7-09CB3CD3F047"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IExecAction : IAction
 	{
 		[DispId(1)]
@@ -172,7 +172,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string WorkingDirectory { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(12)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(12)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("84594461-0053-4342-A8FD-088FABF11F32")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("84594461-0053-4342-A8FD-088FABF11F32"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IIdleSettings
 	{
 		[DispId(1)]
@@ -185,7 +185,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		bool RestartOnIdle { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(4)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(4)] set; }
 	}
 
-	[ComImport, Guid("D537D2B0-9FB3-4D34-9739-1FF5CE7B1EF3"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("D537D2B0-9FB3-4D34-9739-1FF5CE7B1EF3"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IIdleTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -204,7 +204,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		new bool Enabled { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] set; }
 	}
 
-	[ComImport, Guid("72DADE38-FAE4-4B3E-BAF4-5D009AF02B1C"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("72DADE38-FAE4-4B3E-BAF4-5D009AF02B1C"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ILogonTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -228,7 +228,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string UserId { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x15)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x15)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("77D025A3-90FA-43AA-B52E-CDA5499B946A")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("77D025A3-90FA-43AA-B52E-CDA5499B946A"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IMonthlyDOWTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -258,7 +258,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string RandomDelay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, Guid("97C45EF1-6B02-4A1A-9C0E-1EBFBA1500AC"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("97C45EF1-6B02-4A1A-9C0E-1EBFBA1500AC"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IMonthlyTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -286,7 +286,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string RandomDelay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("9F7DEA84-C30B-4245-80B6-00E9F646F1B4")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("9F7DEA84-C30B-4245-80B6-00E9F646F1B4"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface INetworkSettings
 	{
 		[DispId(1)]
@@ -295,7 +295,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Id { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("D98D51E5-C9B4-496A-A9C1-18980261CF0F")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("D98D51E5-C9B4-496A-A9C1-18980261CF0F"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IPrincipal
 	{
 		[DispId(1)]
@@ -312,7 +312,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		TaskRunLevel RunLevel { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(6)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(6)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("9C86F320-DEE3-4DD1-B972-A303F26B061E"), ComConversionLoss, DefaultMember("Path")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("9C86F320-DEE3-4DD1-B972-A303F26B061E"), ComConversionLoss, DefaultMember("Path"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRegisteredTask
 	{
 		[DispId(1)]
@@ -355,7 +355,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void GetRunTimes([In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstStart, [In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstEnd, [Out] out uint pCount, [In, Out] ref IntPtr pRunTimes);
 	}
 
-	[ComImport, Guid("86627EB4-42A7-41E4-A4D9-AC33A72F2D52"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("86627EB4-42A7-41E4-A4D9-AC33A72F2D52"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRegisteredTaskCollection : IEnumerable
 	{
 		[DispId(0x60020000)]
@@ -367,7 +367,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		new IEnumerator GetEnumerator();
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("416D8B73-CB41-4EA1-805C-9BE9A5AC4A74")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("416D8B73-CB41-4EA1-805C-9BE9A5AC4A74"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRegistrationInfo
 	{
 		[DispId(1)]
@@ -390,7 +390,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Source { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(12)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(12)] set; }
 	}
 
-	[ComImport, Guid("4C8FEC3A-C218-4E0C-B23D-629024DB91A2"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("4C8FEC3A-C218-4E0C-B23D-629024DB91A2"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRegistrationTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -412,7 +412,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Delay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, Guid("7FB9ACF1-26BE-400E-85B5-294B9C75DFD6"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("7FB9ACF1-26BE-400E-85B5-294B9C75DFD6"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRepetitionPattern
 	{
 		[DispId(1)]
@@ -423,7 +423,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		bool StopAtDurationEnd { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(3)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(3)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), DefaultMember("InstanceGuid"), Guid("653758FB-7B9A-4F1E-A471-BEEB8E9B834E")]
+	[ComImport, TypeLibType((short)0x10c0), DefaultMember("InstanceGuid"), Guid("653758FB-7B9A-4F1E-A471-BEEB8E9B834E"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRunningTask
 	{
 		[DispId(1)]
@@ -444,7 +444,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		uint EnginePID { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] get; }
 	}
 
-	[ComImport, Guid("6A67614B-6828-4FEC-AA54-6D52E8F1F2DB"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("6A67614B-6828-4FEC-AA54-6D52E8F1F2DB"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IRunningTaskCollection : IEnumerable
 	{
 		[DispId(1)]
@@ -456,7 +456,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		new IEnumerator GetEnumerator();
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("754DA71B-4385-4475-9DD9-598294FA3641")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("754DA71B-4385-4475-9DD9-598294FA3641"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ISessionStateChangeTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -482,7 +482,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		TaskSessionStateChangeType StateChange { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] set; }
 	}
 
-	[ComImport, Guid("505E9E68-AF89-46B8-A30F-56162A83D537"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("505E9E68-AF89-46B8-A30F-56162A83D537"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IShowMessageAction : IAction
 	{
 		[DispId(1)]
@@ -495,7 +495,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string MessageBody { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(11)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(11)] set; }
 	}
 
-	[ComImport, Guid("F5BC8FC5-536D-4F77-B852-FBC1356FDEB6"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("F5BC8FC5-536D-4F77-B852-FBC1356FDEB6"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskDefinition
 	{
 		[DispId(1)]
@@ -514,7 +514,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string XmlText { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(14)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(14)] set; }
 	}
 
-	[ComImport, Guid("8CFAC062-A080-4C15-9A88-AA7C2AF80DFC"), DefaultMember("Path"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("8CFAC062-A080-4C15-9A88-AA7C2AF80DFC"), DefaultMember("Path"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskFolder
 	{
 		[DispId(1)]
@@ -553,7 +553,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void SetSecurityDescriptor([In, MarshalAs(UnmanagedType.BStr)] string sddl, [In] int flags);
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("79184A66-8664-423F-97F1-637356A5D812")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("79184A66-8664-423F-97F1-637356A5D812"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskFolderCollection : IEnumerable
 	{
 		[DispId(0x60020000)]
@@ -565,7 +565,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		new IEnumerator GetEnumerator();
 	}
 
-	[ComImport, Guid("839D7762-5121-4009-9234-4F0D19394F04"), InterfaceType((short)1)]
+	[ComImport, Guid("839D7762-5121-4009-9234-4F0D19394F04"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskHandler
 	{
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
@@ -578,7 +578,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void Resume();
 	}
 
-	[ComImport, Guid("EAEC7A8F-27A0-4DDC-8675-14726A01A38A"), InterfaceType((short)1)]
+	[ComImport, Guid("EAEC7A8F-27A0-4DDC-8675-14726A01A38A"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskHandlerStatus
 	{
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
@@ -587,7 +587,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode);
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("B4EF826B-63C3-46E4-A504-EF69E4F7EA4D")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("B4EF826B-63C3-46E4-A504-EF69E4F7EA4D"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskNamedValueCollection : IEnumerable
 	{
 		[DispId(1)]
@@ -606,7 +606,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void Clear();
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("39038068-2B46-4AFD-8662-7BB6F868D221"), DefaultMember("Name")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("39038068-2B46-4AFD-8662-7BB6F868D221"), DefaultMember("Name"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskNamedValuePair
 	{
 		[DispId(0)]
@@ -615,7 +615,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Value { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), DefaultMember("TargetServer"), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85")]
+	[ComImport, TypeLibType((short)0x10c0), DefaultMember("TargetServer"), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskService
 	{
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -641,12 +641,12 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		uint HighestVersion { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(8)] get; }
 	}
 
-	[ComImport, CoClass(typeof(TaskSchedulerClass)), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85")]
+	[ComImport, CoClass(typeof(TaskSchedulerClass)), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface TaskScheduler : ITaskService
 	{
 	}
 
-	[ComImport, DefaultMember("TargetServer"), Guid("0F87369F-A4E5-4CFC-BD3E-73E6154572DD"), TypeLibType((short)2), ClassInterface((short)0)]
+	[ComImport, DefaultMember("TargetServer"), Guid("0F87369F-A4E5-4CFC-BD3E-73E6154572DD"), TypeLibType((short)2), ClassInterface((short)0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal class TaskSchedulerClass : TaskScheduler
 	{
 		// Methods
@@ -675,7 +675,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		public virtual extern string TargetServer { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0)] get; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("8FD4711D-2D02-4C8C-87E3-EFF699DE127E")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("8FD4711D-2D02-4C8C-87E3-EFF699DE127E"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskSettings
 	{
 		[DispId(3)]
@@ -720,7 +720,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		INetworkSettings NetworkSettings { [return: MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] get; [param: In, MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x16)] set; }
 	}
 
-	[ComImport, Guid("3E4C9351-D966-4B8B-BB87-CEBA68BB0107"), InterfaceType((short)1)]
+	[ComImport, Guid("3E4C9351-D966-4B8B-BB87-CEBA68BB0107"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskVariables
 	{
 		[return: MarshalAs(UnmanagedType.BStr)]
@@ -733,7 +733,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string GetContext();
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("B45747E0-EBA7-4276-9F29-85C5BB300006")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("B45747E0-EBA7-4276-9F29-85C5BB300006"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITimeTrigger : ITrigger
 	{
 		[DispId(1)]
@@ -755,7 +755,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string RandomDelay { [return: MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] get; [param: In, MarshalAs(UnmanagedType.BStr)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(20)] set; }
 	}
 
-	[ComImport, Guid("09941815-EA89-4B5B-89E0-2A773801FAC3"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("09941815-EA89-4B5B-89E0-2A773801FAC3"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITrigger
 	{
 		[DispId(1)]
@@ -774,7 +774,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		bool Enabled { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] set; }
 	}
 
-	[ComImport, Guid("85DF5081-1B24-4F32-878A-D9D14DF4CB77"), TypeLibType((short)0x10c0)]
+	[ComImport, Guid("85DF5081-1B24-4F32-878A-D9D14DF4CB77"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITriggerCollection : IEnumerable
 	{
 		[DispId(1)]
@@ -793,7 +793,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void Clear();
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), Guid("5038FC98-82FF-436D-8728-A512A57C9DC1")]
+	[ComImport, TypeLibType((short)0x10c0), Guid("5038FC98-82FF-436D-8728-A512A57C9DC1"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IWeeklyTrigger : ITrigger
 	{
 		[DispId(1)]
