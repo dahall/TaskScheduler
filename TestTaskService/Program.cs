@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			LongTest();
+			ShortTest();
 		}
 
 		static void ShortTest()
@@ -18,9 +18,18 @@ namespace TestTaskService
 			// Create a new task definition and assign properties
 			TaskDefinition td = ts.NewTask();
 			td.RegistrationInfo.Description = "Does something";
+			td.Principal.LogonType = TaskLogonType.InteractiveToken;
+
+			/*WeeklyTrigger weeklyTrigger = new WeeklyTrigger();
+			weeklyTrigger.DaysOfWeek = DaysOfTheWeek.Tuesday;
+			weeklyTrigger.WeeksInterval = 1;
+			weeklyTrigger.StartBoundary = DateTime.Today.AddHours(16);
+			td.Triggers.Add(weeklyTrigger);*/
+
+			td.Triggers.Add(new MonthlyTrigger() { DaysOfMonth = new int[] { 1, 8, 15, 22, 29 }, MonthsOfYear = MonthsOfTheYear.July, StartBoundary = DateTime.Today.AddHours(9) });
 
 			// Create a trigger that will fire the task at this time every other day
-			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+			//td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 
 			// Create an action that will launch Notepad whenever the trigger fires
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
@@ -29,7 +38,7 @@ namespace TestTaskService
 			ts.RootFolder.RegisterTaskDefinition("Test", td);
 
 			// Remove the task we just created
-			ts.RootFolder.DeleteTask("Test");
+			//ts.RootFolder.DeleteTask("Test");
 		}
 
 		static void LongTest()

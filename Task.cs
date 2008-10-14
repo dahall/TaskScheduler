@@ -594,6 +594,30 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the user is logged on (v1.0 only)
+		/// </summary>
+		public bool RunOnlyIfLoggedOn
+		{
+			get
+			{
+				if (v2Settings != null)
+					return true;
+				return (v1Task.GetFlags() & V1Interop.TaskFlags.RunOnlyIfLoggedOn) == V1Interop.TaskFlags.RunOnlyIfLoggedOn;
+			}
+			set
+			{
+				if (v1Task != null && v2Settings == null)
+				{
+					V1Interop.TaskFlags flags = v1Task.GetFlags();
+					if (value)
+						v1Task.SetFlags(flags |= V1Interop.TaskFlags.RunOnlyIfLoggedOn);
+					else
+						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.RunOnlyIfLoggedOn);
+				}
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only when a network is available.
 		/// </summary>
 		public bool RunOnlyIfNetworkAvailable
@@ -1289,7 +1313,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1Task != null)
 			{
-				this.triggers.Bind();
+				this.Triggers.Bind();
 	
 				IPersistFile iFile = (IPersistFile)v1Task;
 				if (string.IsNullOrEmpty(newName) || newName == v1Name)
