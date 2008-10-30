@@ -34,6 +34,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2)
 			{
 				v2TaskService = new V2Interop.TaskSchedulerClass();
+				// Check to ensure character only server name. (Suggested by bigsan)
+				if (!string.IsNullOrEmpty(targetServer) && targetServer.StartsWith(@"\"))
+					targetServer = targetServer.TrimStart('\\');
 				v2TaskService.Connect(targetServer, userName, accountDomain, password);
 			}
 			else
@@ -42,7 +45,12 @@ namespace Microsoft.Win32.TaskScheduler
 				V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
 				v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
 				if (!string.IsNullOrEmpty(targetServer))
+				{
+					// Check to ensure UNC format for server name. (Suggested by bigsan)
+					if (!targetServer.StartsWith(@"\\"))
+						targetServer = @"\\" + targetServer;
 					v1TaskScheduler.SetTargetComputer(targetServer);
+				}
 			}
 		}
 

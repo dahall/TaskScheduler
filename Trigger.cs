@@ -132,7 +132,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal Trigger(V2Interop.ITrigger iTrigger)
 		{
 			v2Trigger = iTrigger;
-			this.StartBoundary = DateTime.Now;
+			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
+				this.StartBoundary = DateTime.Now;
 		}
 
 		internal Trigger(TaskTriggerType triggerType)
@@ -296,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Trigger != null)
 					return v2Trigger.Id;
 				if (v1Trigger != null)
-					return v1Trigger.GetTriggerString();
+					throw new NotV1SupportedException();
 				return (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null);
 			}
 			set
@@ -389,13 +390,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return DateTime.Parse(v2Trigger.EndBoundary);
+					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary);
 				return v1TriggerData.EndDate;
 			}
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.EndBoundary = value.ToString(V2BoundaryDateFormat);
+					v2Trigger.EndBoundary = value == DateTime.MaxValue ? null : value.ToString(V2BoundaryDateFormat);
 				else
 				{
 					v1TriggerData.EndDate = value;
@@ -442,7 +443,38 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String value of trigger.</returns>
 		public override string ToString()
 		{
-			return this.Id;
+			if (v2Trigger != null)
+				return V2GetTriggerString() + V2BaseTriggerString();
+			if (v1Trigger != null)
+				return v1Trigger.GetTriggerString();
+			return string.Empty;
+		}
+
+		private string V2BaseTriggerString()
+		{
+			StringBuilder ret = new StringBuilder();
+			if (this.Repetition.Interval != TimeSpan.Zero)
+			{
+				ret.AppendFormat(" After triggered, repeat every {0}", this.Repetition.Interval);
+				if (this.Repetition.Duration == TimeSpan.Zero)
+					ret.Append(" indefinitely.");
+				else
+					ret.AppendFormat(" for a duration of {0}.", this.Repetition.Duration);
+			}
+			if (!string.IsNullOrEmpty(v2Trigger.EndBoundary))
+				ret.AppendFormat(" Trigger expires at {0:G}.", this.EndBoundary);
+			if (ret.Length > 0)
+				ret.Insert(0, " -");
+			return ret.ToString();
+		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected virtual string V2GetTriggerString()
+		{
+			return string.Empty;
 		}
 	}
 
@@ -582,6 +614,15 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["Delay"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return "At system startup";
+		}
 	}
 
 	/// <summary>
@@ -661,6 +702,15 @@ namespace Microsoft.Win32.TaskScheduler
 				return nvc;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return "Custom event filter";
+		}
 	}
 
 	/// <summary>
@@ -668,18 +718,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class DailyTrigger : Trigger
 	{
-		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { Init(); }
-		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunDaily) { }
+		internal DailyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="DailyTrigger"/>.
 		/// </summary>
-		public DailyTrigger() : base(TaskTriggerType.Daily) { Init(); }
-
-		private void Init()
-		{
-			this.DaysInterval = 1;
-		}
+		public DailyTrigger() : base(TaskTriggerType.Daily) { this.DaysInterval = 1; }
 
 		/// <summary>
 		/// Sets or retrieves the interval between the days in the schedule.
@@ -730,6 +775,17 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["RandomDelay"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			if (this.DaysInterval == 1)
+				return string.Format("At {0:t} every day", this.StartBoundary);
+			return string.Format("At {0:t} every {1} days", this.StartBoundary, this.DaysInterval);
+		}
 	}
 
 	/// <summary>
@@ -744,6 +800,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Creates an unbound instance of a <see cref="IdleTrigger"/>.
 		/// </summary>
 		public IdleTrigger() : base(TaskTriggerType.Idle) { }
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return "When computer is idle";
+		}
 	}
 
 	/// <summary>
@@ -806,6 +871,15 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["UserId"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return "At log on of " + (string.IsNullOrEmpty(this.UserId) ? "any user" : this.UserId);
+		}
 	}
 
 	/// <summary>
@@ -813,15 +887,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class MonthlyDOWTrigger : Trigger
 	{
-		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { Init(); }
-		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW) { }
+		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
 		/// </summary>
-		public MonthlyDOWTrigger() : base(TaskTriggerType.MonthlyDOW) { Init(); }
-
-		private void Init()
+		public MonthlyDOWTrigger() : base(TaskTriggerType.MonthlyDOW)
 		{
 			this.DaysOfWeek = DaysOfTheWeek.Sunday;
 			this.MonthsOfYear = MonthsOfTheYear.AllMonths;
@@ -960,6 +1032,18 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["RandomDelay"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			string ww = System.Text.RegularExpressions.Regex.Replace(this.WeeksOfMonth.ToString(), "Week[s]?", "");
+			string days = this.DaysOfWeek == DaysOfTheWeek.AllDays ? "every day" : this.DaysOfWeek.ToString();
+			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? "every month" : this.MonthsOfYear.ToString();
+			return string.Format("At {0:t} on the {1} {2:f} each {3}, starting {0:d}", this.StartBoundary, ww, days, months);
+		}
 	}
 
 	/// <summary>
@@ -967,15 +1051,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class MonthlyTrigger : Trigger
 	{
-		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { Init(); }
-		internal MonthlyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunMonthly) { }
+		internal MonthlyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
 		/// </summary>
-		public MonthlyTrigger() : base(TaskTriggerType.Monthly) { Init(); }
-
-		private void Init()
+		public MonthlyTrigger() : base(TaskTriggerType.Monthly)
 		{
 			this.DaysOfMonth = new int[] { 1 };
 			this.MonthsOfYear = MonthsOfTheYear.AllMonths;
@@ -1120,6 +1202,17 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["RandomDelay"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			string days = string.Join(", ", Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
+			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? "every month" : this.MonthsOfYear.ToString();
+			return string.Format("At {0:t} on day {1} of {2}, starting {0:d}", this.StartBoundary, days, months);
+		}
 	}
 
 	/// <summary>
@@ -1156,6 +1249,15 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					unboundValues["Delay"] = value;
 			}
+		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return "When the task is created or modified";
 		}
 	}
 
@@ -1199,13 +1301,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
+					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId;
 				return (unboundValues.ContainsKey("UserId") ? (string)unboundValues["UserId"] : null);
 			}
 			set
 			{
 				if (v2Trigger != null)
-					((V2Interop.ILogonTrigger)v2Trigger).UserId = value;
+					((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId = value;
 				else
 					unboundValues["UserId"] = value;
 			}
@@ -1229,6 +1331,55 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					unboundValues["StateChange"] = value;
 			}
+		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			string ret = string.Empty;
+			switch (this.StateChange)
+			{
+				case TaskSessionStateChangeType.ConsoleConnect:
+					ret = "On local connection to ";
+					break;
+				case TaskSessionStateChangeType.ConsoleDisconnect:
+					ret = "On local disconnect from ";
+					break;
+				case TaskSessionStateChangeType.RemoteConnect:
+					ret = "On remote connection to ";
+					break;
+				case TaskSessionStateChangeType.RemoteDisconnect:
+					ret = "On remote disconnect from ";
+					break;
+				case TaskSessionStateChangeType.SessionLock:
+					ret = "On workstation lock of ";
+					break;
+				case TaskSessionStateChangeType.SessionUnlock:
+					ret = "On workstation unlock of ";
+					break;
+				default:
+					break;
+			}
+
+			if (!string.IsNullOrEmpty(this.UserId))
+			{
+				if (this.StateChange == TaskSessionStateChangeType.SessionLock || this.StateChange == TaskSessionStateChangeType.SessionUnlock)
+					ret = ret + this.UserId;
+				else
+					ret = ret + "user session of " + this.UserId;
+			}
+			else
+			{
+				if (this.StateChange == TaskSessionStateChangeType.SessionLock || this.StateChange == TaskSessionStateChangeType.SessionUnlock)
+					ret = ret + "any user";
+				else
+					ret = ret + "any user session";
+			}
+
+			return ret;
 		}
 	}
 
@@ -1268,6 +1419,15 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues["RandomDelay"] = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return string.Format("At {0:t} on {0:d}", this.StartBoundary);
+		}
 	}
 
 	/// <summary>
@@ -1275,15 +1435,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class WeeklyTrigger : Trigger
 	{
-		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { Init(); }
-		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { Init(); }
+		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger) : base(iTrigger, V1Interop.TaskTriggerType.RunWeekly) { }
+		internal WeeklyTrigger(V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.
 		/// </summary>
-		public WeeklyTrigger() : base(TaskTriggerType.Weekly) { Init(); }
-
-		private void Init()
+		public WeeklyTrigger() : base(TaskTriggerType.Weekly)
 		{
 			this.DaysOfWeek = DaysOfTheWeek.Sunday;
 			this.WeeksInterval = 1;
@@ -1363,6 +1521,15 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					unboundValues["RandomDelay"] = value;
 			}
+		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return string.Format("At {0:t} every {1} of every {2}, starting {0:d}", this.StartBoundary, this.DaysOfWeek, this.WeeksInterval == 1 ? "week" : this.WeeksInterval.ToString() + " weeks" );
 		}
 	}
 }
