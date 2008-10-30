@@ -10,11 +10,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class TaskService : IDisposable
 	{
-		internal static readonly bool v2 = (Environment.OSVersion.Version >= new Version(6, 0));
+		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
 		private WindowsImpersonatedIdentity v1Impersonation = null;
 		internal V2Interop.TaskSchedulerClass v2TaskService = null;
+		internal bool v2 = false;
 
 		/// <summary>
 		/// Creates a new instance of a TaskService connecting to the local machine as the current user.
@@ -24,15 +25,32 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates a new instance of a TaskService connecting to a remote machine as the current user.
 		/// </summary>
+		/// <param name="targetServer">The target server.</param>
 		public TaskService(string targetServer) : this(targetServer, null, null, null) { }
 
 		/// <summary>
 		/// Creates a new instance of a TaskService connecting to a remote machine as the specified user.
 		/// </summary>
-		public TaskService(string targetServer, string userName, string accountDomain, string password)
+		/// <param name="targetServer">The target server.</param>
+		/// <param name="userName">Name of the user.</param>
+		/// <param name="accountDomain">The account domain.</param>
+		/// <param name="password">The password.</param>
+		public TaskService(string targetServer, string userName, string accountDomain, string password) :
+			this(targetServer, userName, accountDomain, password, false) { }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskService"/> class.
+		/// </summary>
+		/// <param name="targetServer">The target server. A null value implies the local machine.</param>
+		/// <param name="userName">Name of the user.</param>
+		/// <param name="accountDomain">The account domain.</param>
+		/// <param name="password">The password.</param>
+		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
+		public TaskService(string targetServer, string userName, string accountDomain, string password, bool forceV1)
 		{
-			if (v2)
+			if (hasV2 && !forceV1)
 			{
+				v2 = true;
 				v2TaskService = new V2Interop.TaskSchedulerClass();
 				// Check to ensure character only server name. (Suggested by bigsan)
 				if (!string.IsNullOrEmpty(targetServer) && targetServer.StartsWith(@"\"))
