@@ -63,7 +63,7 @@ namespace TestTaskService
 			{
 				Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
 				foreach (Trigger trg in t.Definition.Triggers)
-					Console.WriteLine(" + {0}", trg.Id);
+					Console.WriteLine(" + {0}", trg);
 			}
 
 			TaskFolderCollection tfs = tf.SubFolders;
