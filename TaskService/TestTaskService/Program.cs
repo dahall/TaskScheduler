@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			ShortTest();
+			LongTest();
 		}
 
 		static void ShortTest()
@@ -136,19 +136,26 @@ namespace TestTaskService
 
 				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = "AMERICAS\\dahall" });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect });
 				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = "AMERICAS\\dahall" });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock });
 			}
 
 			td.Triggers.Add(new IdleTrigger());
 
 			LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
 			if (newVer) lTrigger.Delay = TimeSpan.FromMinutes(15);
-			if (newVer) lTrigger.UserId = null;
+			if (newVer) lTrigger.UserId = "AMERICAS\\dahall";
+			if (newVer) lTrigger.Repetition.Interval = TimeSpan.FromSeconds(1000);
 
 			MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
 			mTrigger.DaysOfMonth = new int[] { 3, 6, 10, 18 };
 			mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
 			if (newVer) mTrigger.RunOnLastDayOfMonth = true;
+			mTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(90);
 
 			MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
 			mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
@@ -167,7 +174,7 @@ namespace TestTaskService
 
 			WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
 			wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
-			wTrigger.WeeksInterval = 1;
+			wTrigger.WeeksInterval = 3;
 
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 			if (newVer)
