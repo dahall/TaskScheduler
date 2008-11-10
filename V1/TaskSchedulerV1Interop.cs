@@ -287,6 +287,13 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 				}
 			}
 		}
+
+		public override string ToString()
+		{
+			return string.Format("Trigger Type: {6};\n> Start: {0}; End: {1};\n> DurMin: {4}; DurItv: {5};\n>",
+				this.BeginDate, (this.EndYear == 0 ? "null" : this.EndDate.ToString()), this.Data, this.Flags,
+				this.MinutesDuration, this.MinutesInterval, this.Type);
+		}
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack=2)]
