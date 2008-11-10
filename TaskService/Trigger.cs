@@ -213,6 +213,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
+			System.Diagnostics.Debug.WriteLine(v1TriggerData);
 		}
 
 		internal static V1Interop.TaskTriggerType ConvertToV1TriggerType(TaskTriggerType type)
@@ -324,7 +325,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (this.v2Trigger != null)
 						repititionPattern = new RepetitionPattern(this.v2Trigger.Repetition);
 					else
-						repititionPattern = new RepetitionPattern(this.v1Trigger, this.v1TriggerData);
+						repititionPattern = new RepetitionPattern(this.v1Trigger, this);
 				}
 				return repititionPattern;
 			}
@@ -484,16 +485,16 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class RepetitionPattern : IDisposable
 	{
 		private V1Interop.ITaskTrigger v1Trigger = null;
-		private V1Interop.TaskTrigger v1TriggerData;
+		private Trigger pTrigger;
 		private V2Interop.IRepetitionPattern v2Pattern = null;
 
-		internal RepetitionPattern(V1Interop.ITaskTrigger trigger, V1Interop.TaskTrigger data) { v1Trigger = trigger; v1TriggerData = data; }
+		internal RepetitionPattern(V1Interop.ITaskTrigger trigger, Trigger parent) { v1Trigger = trigger; pTrigger = parent; }
 		internal RepetitionPattern(V2Interop.IRepetitionPattern pattern) { v2Pattern = pattern; }
 
 		internal void Bind()
 		{
 			if (v1Trigger != null)
-				v1Trigger.SetTrigger(ref v1TriggerData);
+				v1Trigger.SetTrigger(ref pTrigger.v1TriggerData);
 		}
 
 		/// <summary>
@@ -514,7 +515,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Pattern != null)
 					return Task.StringToTimeSpan(v2Pattern.Interval);
-				return TimeSpan.FromMinutes(v1TriggerData.MinutesInterval);
+				return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
 			}
 			set
 			{
@@ -522,7 +523,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Pattern.Interval = Task.TimeSpanToString(value);
 				else
 				{
-					v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
+					pTrigger.v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
 					Bind();
 				}
 			}
@@ -537,7 +538,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Pattern != null)
 					return Task.StringToTimeSpan(v2Pattern.Duration);
-				return TimeSpan.FromMinutes(v1TriggerData.MinutesDuration);
+				return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
 			}
 			set
 			{
@@ -545,7 +546,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Pattern.Duration = Task.TimeSpanToString(value);
 				else
 				{
-					v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
+					pTrigger.v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
 					Bind();
 				}
 			}
@@ -560,7 +561,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Pattern != null)
 					return v2Pattern.StopAtDurationEnd;
-				return (v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
+				return (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 			}
 			set
 			{
@@ -569,9 +570,9 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					if (value)
-						v1TriggerData.Flags |= V1Interop.TaskTriggerFlags.KillAtDurationEnd;
+						pTrigger.v1TriggerData.Flags |= V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 					else
-						v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.KillAtDurationEnd;
+						pTrigger.v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 					Bind();
 				}
 			}
