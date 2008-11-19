@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			LongTest();
+			ShortTest();
 		}
 
 		static void ShortTest()
@@ -35,10 +35,12 @@ namespace TestTaskService
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
 			// Register the task in the root folder
-			ts.RootFolder.RegisterTaskDefinition("Test", td);
+			Task t = ts.RootFolder.RegisterTaskDefinition("Test", td);
+			Console.WriteLine("LastTime & Result: {0} ({1})" , t.LastRunTime, t.LastTaskResult);
 
 			// Remove the task we just created
-			//ts.RootFolder.DeleteTask("Test");
+			Console.ReadKey(false);
+			ts.RootFolder.DeleteTask("Test");
 		}
 
 		static void LongTest()

@@ -1468,6 +1468,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class Task : IDisposable
 	{
+		private static readonly DateTime v2InvalidDate = new DateTime(1899, 12, 30);
 		internal V1Interop.ITask v1Task;
 		private V2Interop.IRegisteredTask v2Task;
 
@@ -1668,7 +1669,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Task != null)
-					return v2Task.LastRunTime;
+				{
+					DateTime dt = v2Task.LastRunTime;
+					return dt == v2InvalidDate ? DateTime.MinValue : dt;
+				}
 				return v1Task.GetMostRecentRunTime();
 			}
 		}
