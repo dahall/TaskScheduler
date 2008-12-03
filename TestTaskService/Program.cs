@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			ShortTest();
+			LongTest();
 		}
 
 		static void ShortTest()
@@ -66,6 +66,8 @@ namespace TestTaskService
 				Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
 				foreach (Trigger trg in t.Definition.Triggers)
 					Console.WriteLine(" + {0}", trg);
+				foreach (Action act in t.Definition.Actions)
+					Console.WriteLine(" = {0}", act);
 			}
 
 			TaskFolderCollection tfs = tf.SubFolders;
