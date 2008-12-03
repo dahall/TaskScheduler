@@ -127,6 +127,29 @@ namespace Microsoft.Win32.TaskScheduler
 			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 			return iSvc.Activate(name, ref ITaskGuid);
 		}
+
+		/// <summary>
+		/// Gets the task with the specified path.
+		/// </summary>
+		/// <param name="taskPath">The task path.</param>
+		/// <returns>The task.</returns>
+		public Task GetTask(string taskPath)
+		{
+			Task t = null;
+			if (v2)
+			{
+				V2Interop.IRegisteredTask iTask = GetTask(this.v2TaskService, taskPath);
+				if (iTask != null)
+					t = new Task(iTask);
+			}
+			else
+			{
+				V1Interop.ITask iTask = GetTask(this.v1TaskScheduler, taskPath);
+				if (iTask != null)
+					t = new Task(iTask);
+			}
+			return t;
+		}
 		
 		/// <summary>
 		/// Returns an empty task definition object to be filled in with settings and properties and then registered using the <see cref="TaskFolder.RegisterTaskDefinition(string, TaskDefinition)"/> method.
