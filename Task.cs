@@ -692,20 +692,29 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.
 		/// </summary>
+		/// <remarks>
+		/// For Task Scheduler 1.0, this property will return a TimeSpan of 1 second if the task is set to delete when done. For either version, TimeSpan.Zero will indicate that the task should not be deleted.
+		/// </remarks>
 		public TimeSpan DeleteExpiredTaskAfter
 		{
 			get
 			{
 				if (v2Settings != null)
 					return Task.StringToTimeSpan(v2Settings.DeleteExpiredTaskAfter);
-				throw new NotV1SupportedException();
+				return (v1Task.GetFlags() & V1Interop.TaskFlags.DeleteWhenDone) == V1Interop.TaskFlags.DeleteWhenDone ? TimeSpan.FromSeconds(1) : TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.DeleteExpiredTaskAfter = Task.TimeSpanToString(value);
 				else
-					throw new NotV1SupportedException();
+				{
+					V1Interop.TaskFlags flags = v1Task.GetFlags();
+					if (value >= TimeSpan.FromSeconds(1))
+						v1Task.SetFlags(flags |= V1Interop.TaskFlags.DeleteWhenDone);
+					else
+						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.DeleteWhenDone);
+				}
 			}
 		}
 
@@ -878,14 +887,20 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.WakeToRun;
-				return false;
+				return ((v1Task.GetFlags() & V1Interop.TaskFlags.SystemRequired) == V1Interop.TaskFlags.SystemRequired);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.WakeToRun = value;
 				else
-					throw new NotV1SupportedException();
+				{
+					V1Interop.TaskFlags flags = v1Task.GetFlags();
+					if (value)
+						v1Task.SetFlags(flags |= V1Interop.TaskFlags.SystemRequired);
+					else
+						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.SystemRequired);
+				}
 			}
 		}
 
@@ -1203,8 +1218,6 @@ namespace Microsoft.Win32.TaskScheduler
 					return v2Principal.LogonType;
 				if ((v1Task.GetFlags() & V1Interop.TaskFlags.Interactive) == V1Interop.TaskFlags.Interactive)
 					return TaskLogonType.InteractiveToken;
-				else if ((v1Task.GetFlags() & V1Interop.TaskFlags.SystemRequired) == V1Interop.TaskFlags.SystemRequired)
-					return TaskLogonType.ServiceAccount;
 				throw new NotV1SupportedException();
 			}
 			set
@@ -1218,10 +1231,6 @@ namespace Microsoft.Win32.TaskScheduler
 						flags |= V1Interop.TaskFlags.Interactive;
 					else
 						flags &= ~V1Interop.TaskFlags.Interactive;
-					if (value == TaskLogonType.ServiceAccount)
-						flags |= V1Interop.TaskFlags.SystemRequired;
-					else
-						flags &= ~V1Interop.TaskFlags.SystemRequired;
 					v1Task.SetFlags(flags);
 					if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
 						throw new NotV1SupportedException();
