@@ -169,7 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String represention this action.</returns>
 		public override string ToString()
 		{
-			return string.Format("Custom Handler\t{0}", this.ClassId);
+			return string.Format(Properties.Resources.ComHandlerAction, this.ClassId, this.Data, this.Id);
 		}
 	}
 
@@ -321,7 +321,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String represention this action.</returns>
 		public override string ToString()
 		{
-			return string.Format("Start a program\t{0} {1}", this.Path, this.Arguments);
+			return string.Format(Properties.Resources.ExecAction, this.Path, this.Arguments, this.WorkingDirectory, this.Id);
 		}
 	}
 
@@ -466,7 +466,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String represention this action.</returns>
 		public override string ToString()
 		{
-			return string.Format("Send an e-mail\t{1} {0}", this.Subject, this.To);
+			return string.Format(Properties.Resources.EmailAction, this.Subject, this.To, this.Cc, this.Bcc, this.From, this.ReplyTo, this.Body, this.Server, this.Id);
 		}
 	}
 
@@ -515,7 +515,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String represention this action.</returns>
 		public override string ToString()
 		{
-			return string.Format("Show a message\t{0}", this.Title);
+			return string.Format(Properties.Resources.ShowMessageAction, this.Title, this.MessageBody, this.Id);
 		}
 	}
 }

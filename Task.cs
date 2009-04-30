@@ -606,7 +606,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (v1Task != null && v2Settings == null)
+				if (v1Task != null)
 				{
 					V1Interop.TaskFlags flags = v1Task.GetFlags();
 					if (value)
@@ -614,6 +614,8 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.RunOnlyIfLoggedOn);
 				}
+				else if (v2Settings != null)
+					throw new NotV2SupportedException("Task Scheduler 2.0 (1.2) does not support setting this property. You must use an InteractiveToken in order to have the task run in the current user session.");
 			}
 		}
 
@@ -1815,6 +1817,17 @@ namespace Microsoft.Win32.TaskScheduler
 				return ret;
 			}
 			throw new NotV1SupportedException();
+		}
+
+		/// <summary>
+		/// Shows the property page for the task (v1.0 only).
+		/// </summary>
+		public void ShowPropertyPage()
+		{
+			if (v1Task != null)
+				v1Task.EditWorkItem(0, 0);
+			else
+				throw new NotV2SupportedException();
 		}
 	}
 
