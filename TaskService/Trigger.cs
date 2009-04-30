@@ -456,14 +456,15 @@ namespace Microsoft.Win32.TaskScheduler
 			StringBuilder ret = new StringBuilder();
 			if (this.Repetition.Interval != TimeSpan.Zero)
 			{
-				ret.AppendFormat(" After triggered, repeat every {0}", this.Repetition.Interval);
+				ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase1, this.Repetition.Interval);
 				if (this.Repetition.Duration == TimeSpan.Zero)
-					ret.Append(" indefinitely.");
+					ret.Append(" " + Properties.Resources.TriggerBase2);
 				else
-					ret.AppendFormat(" for a duration of {0}.", this.Repetition.Duration);
+					ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase3, this.Repetition.Duration);
+				ret.Append(".");
 			}
 			if (!string.IsNullOrEmpty(v2Trigger.EndBoundary))
-				ret.AppendFormat(" Trigger expires at {0:G}.", this.EndBoundary);
+				ret.AppendFormat(" {0} {1:G}.", Properties.Resources.TriggerBase4, this.EndBoundary);
 			if (ret.Length > 0)
 				ret.Insert(0, " -");
 			return ret.ToString();
@@ -622,7 +623,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return "At system startup";
+			return Properties.Resources.TriggerBoot1;
 		}
 	}
 
@@ -710,7 +711,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return "Custom event filter";
+			return Properties.Resources.TriggerEvent1;
 		}
 	}
 
@@ -784,8 +785,8 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			if (this.DaysInterval == 1)
-				return string.Format("At {0:t} every day", this.StartBoundary);
-			return string.Format("At {0:t} every {1} days", this.StartBoundary, this.DaysInterval);
+				return string.Format(Properties.Resources.TriggerDaily1, this.StartBoundary);
+			return string.Format(Properties.Resources.TriggerDaily2, this.StartBoundary, this.DaysInterval);
 		}
 	}
 
@@ -808,7 +809,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return "When computer is idle";
+			return Properties.Resources.TriggerIdle1;
 		}
 	}
 
@@ -879,7 +880,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return "At log on of " + (string.IsNullOrEmpty(this.UserId) ? "any user" : this.UserId);
+			string user = string.IsNullOrEmpty(this.UserId) ? Properties.Resources.TriggerAnyUser : this.UserId;
+			return string.Format(Properties.Resources.TriggerLogon1, user);
 		}
 	}
 
@@ -1034,15 +1036,28 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		internal static string BuildEnumString(string preface, object enumValue)
+		{
+			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
+			if (vals.Length == 0)
+				return string.Empty;
+
+			for (int i = 0; i < vals.Length; i++)
+			{
+				vals[i] = Properties.Resources.ResourceManager.GetString(preface + vals[i]);
+			}
+			return string.Join(", ", vals);
+		}
+
 		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string ww = System.Text.RegularExpressions.Regex.Replace(this.WeeksOfMonth.ToString(), "Week[s]?", "");
-			string days = this.DaysOfWeek == DaysOfTheWeek.AllDays ? "every day" : this.DaysOfWeek.ToString();
-			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? "every month" : this.MonthsOfYear.ToString();
+			string ww = BuildEnumString("WW", this.WeeksOfMonth);
+			string days = this.DaysOfWeek == DaysOfTheWeek.AllDays ? Properties.Resources.DOWAllDays : BuildEnumString("DOW", this.DaysOfWeek);
+			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : BuildEnumString("MOY", this.MonthsOfYear);
 			return string.Format("At {0:t} on the {1} {2:f} each {3}, starting {0:d}", this.StartBoundary, ww, days, months);
 		}
 	}
@@ -1211,8 +1226,8 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			string days = string.Join(", ", Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
-			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? "every month" : this.MonthsOfYear.ToString();
-			return string.Format("At {0:t} on day {1} of {2}, starting {0:d}", this.StartBoundary, days, months);
+			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : MonthlyDOWTrigger.BuildEnumString("MOY", this.MonthsOfYear);
+			return string.Format(Properties.Resources.TriggerMonthly1, this.StartBoundary, days, months);
 		}
 	}
 
@@ -1258,7 +1273,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return "When the task is created or modified";
+			return Properties.Resources.TriggerRegistration1;
 		}
 	}
 
@@ -1340,47 +1355,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string ret = string.Empty;
-			switch (this.StateChange)
-			{
-				case TaskSessionStateChangeType.ConsoleConnect:
-					ret = "On local connection to ";
-					break;
-				case TaskSessionStateChangeType.ConsoleDisconnect:
-					ret = "On local disconnect from ";
-					break;
-				case TaskSessionStateChangeType.RemoteConnect:
-					ret = "On remote connection to ";
-					break;
-				case TaskSessionStateChangeType.RemoteDisconnect:
-					ret = "On remote disconnect from ";
-					break;
-				case TaskSessionStateChangeType.SessionLock:
-					ret = "On workstation lock of ";
-					break;
-				case TaskSessionStateChangeType.SessionUnlock:
-					ret = "On workstation unlock of ";
-					break;
-				default:
-					break;
-			}
-
-			if (!string.IsNullOrEmpty(this.UserId))
-			{
-				if (this.StateChange == TaskSessionStateChangeType.SessionLock || this.StateChange == TaskSessionStateChangeType.SessionUnlock)
-					ret = ret + this.UserId;
-				else
-					ret = ret + "user session of " + this.UserId;
-			}
-			else
-			{
-				if (this.StateChange == TaskSessionStateChangeType.SessionLock || this.StateChange == TaskSessionStateChangeType.SessionUnlock)
-					ret = ret + "any user";
-				else
-					ret = ret + "any user session";
-			}
-
-			return ret;
+			string str = Properties.Resources.ResourceManager.GetString("TriggerSession" + this.StateChange.ToString());
+			string user = string.IsNullOrEmpty(this.UserId) ? Properties.Resources.TriggerAnyUser : this.UserId;
+			if (this.StateChange != TaskSessionStateChangeType.SessionLock && this.StateChange != TaskSessionStateChangeType.SessionUnlock)
+				user = string.Format(Properties.Resources.TriggerSessionUserSession, user);
+			return string.Format(str, user);
 		}
 	}
 
@@ -1427,7 +1406,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return string.Format("At {0:t} on {0:d}", this.StartBoundary);
+			return string.Format(Properties.Resources.TriggerTime1, this.StartBoundary);
 		}
 	}
 
@@ -1530,7 +1509,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return string.Format("At {0:t} every {1} of every {2}, starting {0:d}", this.StartBoundary, this.DaysOfWeek, this.WeeksInterval == 1 ? "week" : this.WeeksInterval.ToString() + " weeks" );
+			return string.Format(this.WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
+				this.StartBoundary, this.DaysOfWeek, this.WeeksInterval);
 		}
 	}
 }
