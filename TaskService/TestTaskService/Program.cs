@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			ShortTest();
+			LongTest();
 		}
 
 		static void ShortTest()
@@ -20,27 +20,11 @@ namespace TestTaskService
 			td.RegistrationInfo.Description = "Does something";
 			td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
-			/*WeeklyTrigger weeklyTrigger = new WeeklyTrigger();
-			weeklyTrigger.DaysOfWeek = DaysOfTheWeek.Tuesday;
-			weeklyTrigger.WeeksInterval = 1;
-			weeklyTrigger.StartBoundary = DateTime.Today.AddHours(16);
-			td.Triggers.Add(weeklyTrigger);*/
-
-			//td.Triggers.Add(new MonthlyTrigger() { DaysOfMonth = new int[] { 1, 8, 15, 22, 29 }, MonthsOfYear = MonthsOfTheYear.July, StartBoundary = DateTime.Today.AddHours(9) });
-
 			// Create a trigger that will fire the task at this time every other day
 			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 
-			/*TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
-			tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromSeconds(10);
-			tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
-			tTrigger.Repetition.Duration = TimeSpan.FromHours(12);
-			tTrigger.Repetition.Interval = TimeSpan.FromMinutes(60);
-			tTrigger.Repetition.StopAtDurationEnd = true;*/
-
 			// Create an action that will launch Notepad whenever the trigger fires
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
-			//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), string.Empty));
 
 			// Register the task in the root folder
 			const string taskName = "Test";
