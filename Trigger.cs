@@ -438,6 +438,19 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		internal static string BuildEnumString(string preface, object enumValue)
+		{
+			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
+			if (vals.Length == 0)
+				return string.Empty;
+
+			for (int i = 0; i < vals.Length; i++)
+			{
+				vals[i] = Properties.Resources.ResourceManager.GetString(preface + vals[i]);
+			}
+			return string.Join(", ", vals);
+		}
+
 		/// <summary>
 		/// Returns a string representing this trigger.
 		/// </summary>
@@ -1036,19 +1049,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal static string BuildEnumString(string preface, object enumValue)
-		{
-			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
-			if (vals.Length == 0)
-				return string.Empty;
-
-			for (int i = 0; i < vals.Length; i++)
-			{
-				vals[i] = Properties.Resources.ResourceManager.GetString(preface + vals[i]);
-			}
-			return string.Join(", ", vals);
-		}
-
 		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
@@ -1226,7 +1226,7 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			string days = string.Join(", ", Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
-			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : MonthlyDOWTrigger.BuildEnumString("MOY", this.MonthsOfYear);
+			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : BuildEnumString("MOY", this.MonthsOfYear);
 			return string.Format(Properties.Resources.TriggerMonthly1, this.StartBoundary, days, months);
 		}
 	}
@@ -1509,8 +1509,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
+			string days = this.DaysOfWeek == DaysOfTheWeek.AllDays ? Properties.Resources.DOWAllDays : BuildEnumString("DOW", this.DaysOfWeek);
 			return string.Format(this.WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
-				this.StartBoundary, this.DaysOfWeek, this.WeeksInterval);
+				this.StartBoundary, days, this.WeeksInterval);
 		}
 	}
 }
