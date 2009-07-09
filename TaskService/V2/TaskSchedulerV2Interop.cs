@@ -565,28 +565,6 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		new IEnumerator GetEnumerator();
 	}
 
-	[ComImport, Guid("839D7762-5121-4009-9234-4F0D19394F04"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface ITaskHandler
-	{
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void Start([In, MarshalAs(UnmanagedType.IUnknown)] object pHandlerServices, [In, MarshalAs(UnmanagedType.BStr)] string Data);
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void Stop([MarshalAs(UnmanagedType.Error)] out int pRetCode);
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void Pause();
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void Resume();
-	}
-
-	[ComImport, Guid("EAEC7A8F-27A0-4DDC-8675-14726A01A38A"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface ITaskHandlerStatus
-	{
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage);
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode);
-	}
-
 	[ComImport, TypeLibType((short)0x10c0), Guid("B4EF826B-63C3-46E4-A504-EF69E4F7EA4D"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskNamedValueCollection : IEnumerable
 	{

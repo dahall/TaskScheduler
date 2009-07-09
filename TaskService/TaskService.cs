@@ -116,6 +116,10 @@ namespace Microsoft.Win32.TaskScheduler
 				fld = iSvc.GetFolder("\\");
 				return fld.GetTask(name);
 			}
+			catch
+			{
+				return null;
+			}
 			finally
 			{
 				if (fld != null) Marshal.ReleaseComObject(fld);

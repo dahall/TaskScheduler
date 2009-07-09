@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		static void Main(string[] args)
 		{
-			LongTest();
+			ShortTest();
 		}
 
 		static void ShortTest()
@@ -26,21 +26,38 @@ namespace TestTaskService
 			weeklyTrigger.StartBoundary = DateTime.Today.AddHours(16);
 			td.Triggers.Add(weeklyTrigger);*/
 
-			td.Triggers.Add(new MonthlyTrigger() { DaysOfMonth = new int[] { 1, 8, 15, 22, 29 }, MonthsOfYear = MonthsOfTheYear.July, StartBoundary = DateTime.Today.AddHours(9) });
+			//td.Triggers.Add(new MonthlyTrigger() { DaysOfMonth = new int[] { 1, 8, 15, 22, 29 }, MonthsOfYear = MonthsOfTheYear.July, StartBoundary = DateTime.Today.AddHours(9) });
 
 			// Create a trigger that will fire the task at this time every other day
-			//td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+
+			/*TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
+			tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromSeconds(10);
+			tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
+			tTrigger.Repetition.Duration = TimeSpan.FromHours(12);
+			tTrigger.Repetition.Interval = TimeSpan.FromMinutes(60);
+			tTrigger.Repetition.StopAtDurationEnd = true;*/
 
 			// Create an action that will launch Notepad whenever the trigger fires
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+			//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), string.Empty));
 
 			// Register the task in the root folder
-			Task t = ts.RootFolder.RegisterTaskDefinition("Test", td);
+			const string taskName = "Test";
+			Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+			System.Threading.Thread.Sleep(1000);
 			Console.WriteLine("LastTime & Result: {0} ({1})" , t.LastRunTime, t.LastTaskResult);
+
+			// Retrieve the task, add a trigger and save it.
+			t = ts.GetTask(taskName);
+			td = t.Definition;
+			td.Triggers.Add(new BootTrigger { Enabled = false });
+			ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, null, null,
+				td.Principal.LogonType, null);
 
 			// Remove the task we just created
 			Console.ReadKey(false);
-			ts.RootFolder.DeleteTask("Test");
+			ts.RootFolder.DeleteTask(taskName);
 		}
 
 		static void LongTest()
@@ -54,9 +71,12 @@ namespace TestTaskService
 			Console.WriteLine("Running tasks:");
 			foreach (RunningTask rt in ts.GetRunningTasks(true))
 			{
-				Console.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
-				if (ver.Minor > 0)
-					Console.WriteLine("  Current Action: " + rt.CurrentAction);
+				if (rt != null)
+				{
+					Console.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
+					if (ver.Minor > 0)
+						Console.WriteLine("  Current Action: " + rt.CurrentAction);
+				}
 			}
 
 			TaskFolder tf = ts.RootFolder;
@@ -102,7 +122,7 @@ namespace TestTaskService
 			td.Settings.DisallowStartIfOnBatteries = true;
 			td.Settings.Enabled = true;
 			td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(1);
-			td.Settings.Hidden = true;
+			td.Settings.Hidden = false;
 			td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
 			td.Settings.IdleSettings.RestartOnIdle = false;
 			td.Settings.IdleSettings.StopOnIdleEnd = false;
@@ -189,7 +209,7 @@ namespace TestTaskService
 			{
 				td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
 				td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
-				td.Actions.Add(new ComHandlerAction(new Guid("{F09878A1-4652-4292-AA63-8C7D4FD7648F}"), "\\b"));
+				td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), string.Empty));
 			}
 
 			tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
