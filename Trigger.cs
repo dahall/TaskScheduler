@@ -65,10 +65,8 @@ namespace Microsoft.Win32.TaskScheduler
 		ThirdWeek = 4,
 		/// <summary>Fourth week of the month</summary>
 		FourthWeek = 8,
-		/// <summary>Fifth week of the month</summary>
-		FifthWeek = 0x10,
 		/// <summary>Last week of the month</summary>
-		LastWeek = 0x20,
+		LastWeek = 0x10,
 		/// <summary>Last week of the month</summary>
 		AllWeeks = 0x1F
 	}
