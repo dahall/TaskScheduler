@@ -207,7 +207,9 @@ namespace TestTaskService
 			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
 				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
-			Console.ReadKey(false);
+			Form1 frm = new Form1();
+			frm.taskPropertiesControl1.SetTask(runningTask);
+			frm.ShowDialog();
 			tf.DeleteTask("Test");
 		}
 	}

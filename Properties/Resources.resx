@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Call a COM object</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Start a program</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>Send an e-mail</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Display a message</value>
+  </data>
   <data name="ComHandlerAction" xml:space="preserve">
     <value>Custom Handler\t{0}</value>
     <comment>0 = Class GUID; 1 = Data; 2 = Id</comment>
@@ -277,6 +289,39 @@
   <data name="TriggerTime1" xml:space="preserve">
     <value>At {0:t} on {0:d}</value>
     <comment>0 = StartBoundary</comment>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>At startup</value>
+  </data>
+  <data name="TriggerTypeDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>On an event</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>On idle</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>At log on</value>
+  </data>
+  <data name="TriggerTypeMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="TriggerTypeMonthlyDOW" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>At task creation/modification</value>
+  </data>
+  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
+    <value>On state change</value>
+  </data>
+  <data name="TriggerTypeTime" xml:space="preserve">
+    <value>One time</value>
+  </data>
+  <data name="TriggerTypeWeekly" xml:space="preserve">
+    <value>Weekly</value>
   </data>
   <data name="TriggerWeekly1Week" xml:space="preserve">
     <value>At {0:t} every {1} of every week, starting {0:d}</value>

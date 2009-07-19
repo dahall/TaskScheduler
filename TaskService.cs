@@ -170,6 +170,28 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Creates a new task, registers the taks, and returns the instance.
+		/// </summary>
+		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
+		/// <param name="action">The <see cref="Action"/> to determine what happens when the task is triggered.</param>
+		/// <returns>A <see cref="Task"/> instance of the registered task.</returns>
+		public Task AddTask(string path, Trigger trigger, Action action)
+		{
+			TaskDefinition td = NewTask();
+			td.Principal.LogonType = TaskLogonType.InteractiveToken;
+
+			// Create a trigger that will fire the task at a specific date and time
+			td.Triggers.Add(trigger);
+
+			// Create an action that will launch Notepad whenever the trigger fires
+			td.Actions.Add(action);
+
+			// Register the task in the root folder
+			return RootFolder.RegisterTaskDefinition(path, td);
+		}
+
+		/// <summary>
 		/// Gets a Boolean value that indicates if you are connected to the Task Scheduler service.
 		/// </summary>
 		public bool Connected
