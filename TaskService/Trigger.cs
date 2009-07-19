@@ -67,7 +67,7 @@ namespace Microsoft.Win32.TaskScheduler
 		FourthWeek = 8,
 		/// <summary>Last week of the month</summary>
 		LastWeek = 0x10,
-		/// <summary>Last week of the month</summary>
+		/// <summary>Every week of the month</summary>
 		AllWeeks = 0x1F
 	}
 
@@ -130,6 +130,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal Trigger(V2Interop.ITrigger iTrigger)
 		{
 			v2Trigger = iTrigger;
+			this.ttype = iTrigger.Type;
 			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
 				this.StartBoundary = DateTime.Now;
 		}
@@ -230,28 +231,38 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static Trigger CreateTrigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType triggerType)
 		{
+			Trigger t = null;
 			switch (triggerType)
 			{
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.RunOnce:
-					return new TimeTrigger(trigger);
+					t = new TimeTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.RunDaily:
-					return new DailyTrigger(trigger);
+					t = new DailyTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.RunWeekly:
-					return new WeeklyTrigger(trigger);
+					t = new WeeklyTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.RunMonthly:
-					return new MonthlyTrigger(trigger);
+					t = new MonthlyTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.RunMonthlyDOW:
-					return new MonthlyDOWTrigger(trigger);
+					t = new MonthlyDOWTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.OnIdle:
-					return new IdleTrigger(trigger);
+					t = new IdleTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.OnSystemStart:
-					return new BootTrigger(trigger);
+					t = new BootTrigger(trigger);
+					break;
 				case Microsoft.Win32.TaskScheduler.V1Interop.TaskTriggerType.OnLogon:
-					return new LogonTrigger(trigger);
+					t = new LogonTrigger(trigger);
+					break;
 				default:
 					break;
 			}
-			return null;
+			//if (t != null) t.ttype = triggerType;
+			return t;
 		}
 
 		internal static Trigger CreateTrigger(V2Interop.ITrigger iTrigger)
@@ -435,6 +446,12 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 		}
+
+		/// <summary>
+		/// Gets the type of the trigger.
+		/// </summary>
+		/// <value>The <see cref="TaskTriggerType"/> of the trigger.</value>
+		public TaskTriggerType TriggerType { get { return ttype; } }
 
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
