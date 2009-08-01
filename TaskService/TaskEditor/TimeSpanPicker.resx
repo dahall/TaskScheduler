@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,81 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnyConnection" xml:space="preserve">
-    <value>Any connection</value>
-    <comment>Default item for displaying status of Networking setting</comment>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>Disabled</value>
-  </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="TimeSpanDay" xml:space="preserve">
-    <value>day</value>
-  </data>
-  <data name="TimeSpanDays" xml:space="preserve">
+  <data name="comboBoxTimeSpan.AutoCompleteCustomSource" xml:space="preserve">
     <value>days</value>
   </data>
-  <data name="TimeSpanDayStrings" xml:space="preserve">
-    <value>days,day,d</value>
-  </data>
-  <data name="TimeSpanHour" xml:space="preserve">
-    <value>hour</value>
-  </data>
-  <data name="TimeSpanHours" xml:space="preserve">
-    <value>hours</value>
-  </data>
-  <data name="TimeSpanHourStrings" xml:space="preserve">
-    <value>hours,hour,hrs,hr,h</value>
-  </data>
-  <data name="TimeSpanMinute" xml:space="preserve">
-    <value>minute</value>
-  </data>
-  <data name="TimeSpanMinutes" xml:space="preserve">
+  <data name="comboBoxTimeSpan.AutoCompleteCustomSource1" xml:space="preserve">
     <value>minutes</value>
   </data>
-  <data name="TimeSpanMinuteStrings" xml:space="preserve">
-    <value>minutes,minute,mins,min,m</value>
+  <data name="comboBoxTimeSpan.AutoCompleteCustomSource2" xml:space="preserve">
+    <value>hours</value>
   </data>
-  <data name="TimeSpanMonth" xml:space="preserve">
-    <value>month</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="comboBoxTimeSpan.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="TimeSpanMonths" xml:space="preserve">
-    <value>months</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="comboBoxTimeSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="TimeSpanMonthStrings" xml:space="preserve">
-    <value>months,month,mos,mo,m</value>
+  <data name="comboBoxTimeSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 21</value>
   </data>
-  <data name="TimeSpanSecond" xml:space="preserve">
-    <value>second</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="comboBoxTimeSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="TimeSpanSeconds" xml:space="preserve">
-    <value>seconds</value>
+  <data name="&gt;&gt;comboBoxTimeSpan.Name" xml:space="preserve">
+    <value>comboBoxTimeSpan</value>
   </data>
-  <data name="TimeSpanSecondStrings" xml:space="preserve">
-    <value>seconds,second,secs,sec,s</value>
+  <data name="&gt;&gt;comboBoxTimeSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TimeSpanYear" xml:space="preserve">
-    <value>year</value>
+  <data name="&gt;&gt;comboBoxTimeSpan.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="TimeSpanYears" xml:space="preserve">
-    <value>years</value>
+  <data name="&gt;&gt;comboBoxTimeSpan.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="TimeSpanYearStrings" xml:space="preserve">
-    <value>years,year,yrs,yr,y</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="TimeSpanSeparator" xml:space="preserve">
-    <value>, </value>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Do not wait</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 21</value>
   </data>
-  <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Immediately</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TimeSpanPicker</value>
   </data>
-  <data name="Last" xml:space="preserve">
-    <value>Last</value>
-    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

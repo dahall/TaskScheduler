@@ -10,16 +10,21 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class TaskCollection : IEnumerable<Task>, IDisposable
 	{
+		private TaskService svc;
+		private TaskFolder fld;
 		private V1Interop.ITaskScheduler v1TS = null;
 		private V2Interop.IRegisteredTaskCollection v2Coll = null;
 
-		internal TaskCollection(V1Interop.ITaskScheduler ts)
+		internal TaskCollection(TaskService svc)
 		{
-			v1TS = ts;
+			this.svc = svc;
+			v1TS = svc.v1TaskScheduler;
 		}
 
-		internal TaskCollection(V2Interop.IRegisteredTaskCollection iTaskColl)
+		internal TaskCollection(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl)
 		{
+			this.svc = folder.TaskService;
+			fld = folder;
 			v2Coll = iTaskColl;
 		}
 
@@ -40,8 +45,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<Task> GetEnumerator()
 		{
 			if (v1TS != null)
-				return new V1TaskEnumerator(v1TS);
-			return new V2TaskEnumerator(v2Coll);
+				return new V1TaskEnumerator(svc);
+			return new V2TaskEnumerator(fld, v2Coll);
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -51,6 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal class V1TaskEnumerator : IEnumerator<Task>, IDisposable
 		{
+			private TaskService svc;
 			private V1Interop.IEnumWorkItems wienum = null;
 			private V1Interop.ITaskScheduler m_ts = null;
 			private Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
@@ -60,9 +66,10 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Internal constructor
 			/// </summary>
 			/// <param name="ts">ITaskScheduler instance</param>
-			internal V1TaskEnumerator(V1Interop.ITaskScheduler ts)
+			internal V1TaskEnumerator(TaskService svc)
 			{
-				m_ts = ts;
+				this.svc = svc;
+				m_ts = svc.v1TaskScheduler;
 				wienum = m_ts.Enum();
 				Reset();
 			}
@@ -72,7 +79,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			public Microsoft.Win32.TaskScheduler.Task Current
 			{
-				get { return new Task(m_ts.Activate(curItem, ref ITaskGuid)); }
+				get { return new Task(svc, m_ts.Activate(curItem, ref ITaskGuid)); }
 			}
 
 			internal V1Interop.ITask ICurrent
@@ -133,15 +140,17 @@ namespace Microsoft.Win32.TaskScheduler
 		internal class V2TaskEnumerator : IEnumerator<Task>, IDisposable
 		{
 			private System.Collections.IEnumerator iEnum;
+			private TaskFolder fld;
 
-			internal V2TaskEnumerator(TaskScheduler.V2Interop.IRegisteredTaskCollection iTaskColl)
+			internal V2TaskEnumerator(TaskFolder folder, TaskScheduler.V2Interop.IRegisteredTaskCollection iTaskColl)
 			{
+				fld = folder;
 				iEnum = iTaskColl.GetEnumerator();
 			}
 
 			public Task Current
 			{
-				get { return new Task((TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
+				get { return new Task(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
 			}
 
 			/// <summary>
@@ -178,7 +187,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return v2Coll.Count;
 				int i = 0;
-				V1TaskEnumerator v1te = new V1TaskEnumerator(v1TS);
+				V1TaskEnumerator v1te = new V1TaskEnumerator(svc);
 				while (v1te.MoveNext())
 					i++;
 				return i;
@@ -195,10 +204,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return new Task(v2Coll[++index]);
+					return new Task(svc, v2Coll[++index]);
 
 				int i = 0;
-				V1TaskEnumerator v1te = new V1TaskEnumerator(v1TS);
+				V1TaskEnumerator v1te = new V1TaskEnumerator(svc);
 				while (v1te.MoveNext())
 					if (i++ == index)
 						return v1te.Current;
@@ -216,9 +225,9 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return new Task(v2Coll[name]);
+					return new Task(svc, v2Coll[name]);
 
-				V1TaskEnumerator v1te = new V1TaskEnumerator(v1TS);
+				V1TaskEnumerator v1te = new V1TaskEnumerator(svc);
 				while (v1te.MoveNext())
 					if (string.Compare(v1te.Current.Name, name, true) == 0)
 						return v1te.Current;
@@ -232,18 +241,21 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class RunningTaskCollection : IEnumerable<RunningTask>, IDisposable
 	{
+		private TaskService svc;
 		private V1Interop.ITaskScheduler v1TS = null;
 		private V2Interop.ITaskService v2Svc = null;
 		private V2Interop.IRunningTaskCollection v2Coll = null;
 
-		internal RunningTaskCollection(V1Interop.ITaskScheduler ts)
+		internal RunningTaskCollection(TaskService svc)
 		{
-			v1TS = ts;
+			this.svc = svc;
+			v1TS = svc.v1TaskScheduler;
 		}
 
-		internal RunningTaskCollection(V2Interop.ITaskService iService, V2Interop.IRunningTaskCollection iTaskColl)
+		internal RunningTaskCollection(TaskService svc, V2Interop.IRunningTaskCollection iTaskColl)
 		{
-			v2Svc = iService;
+			this.svc = svc;
+			v2Svc = svc.v2TaskService;
 			v2Coll = iTaskColl;
 		}
 
@@ -265,8 +277,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<RunningTask> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new RunningTaskEnumerator(v2Svc, v2Coll);
-			return new V1RunningTaskEnumerator(v1TS);
+				return new RunningTaskEnumerator(svc, v2Coll);
+			return new V1RunningTaskEnumerator(svc);
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -276,11 +288,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal class V1RunningTaskEnumerator : IEnumerator<RunningTask>
 		{
+			private TaskService svc;
 			private TaskCollection.V1TaskEnumerator tEnum;
 
-			internal V1RunningTaskEnumerator(V1Interop.ITaskScheduler ts)
+			internal V1RunningTaskEnumerator(TaskService svc)
 			{
-				tEnum = new TaskCollection.V1TaskEnumerator(ts);
+				this.svc = svc;
+				tEnum = new TaskCollection.V1TaskEnumerator(svc);
 			}
 
 			public bool MoveNext()
@@ -296,7 +310,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public RunningTask Current
 			{
-				get { return new RunningTask(tEnum.ICurrent); }
+				get { return new RunningTask(svc, tEnum.ICurrent); }
 			}
 
 			/// <summary>
@@ -320,12 +334,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal class RunningTaskEnumerator : IEnumerator<RunningTask>, IDisposable
 		{
+			private TaskService svc;
 			private V2Interop.ITaskService v2Svc = null;
 			private System.Collections.IEnumerator iEnum;
 
-			internal RunningTaskEnumerator(V2Interop.ITaskService iService, V2Interop.IRunningTaskCollection iTaskColl)
+			internal RunningTaskEnumerator(TaskService svc, V2Interop.IRunningTaskCollection iTaskColl)
 			{
-				v2Svc = iService;
+				this.svc = svc;
+				v2Svc = svc.v2TaskService;
 				iEnum = iTaskColl.GetEnumerator();
 			}
 
@@ -336,7 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 					V2Interop.IRunningTask irt = (V2Interop.IRunningTask)iEnum.Current;
 					V2Interop.IRegisteredTask task = TaskService.GetTask(v2Svc, irt.Path);
 					if (task == null) return null;
-					return new RunningTask(task, irt);
+					return new RunningTask(svc, task, irt);
 				}
 			}
 
@@ -375,7 +391,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return v2Coll.Count;
 				int i = 0;
-				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(v1TS);
+				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(svc);
 				while (v1te.MoveNext())
 					i++;
 				return i;
@@ -394,11 +410,11 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 				{
 					V2Interop.IRunningTask irt = v2Coll[++index];
-					return new RunningTask(TaskService.GetTask(v2Svc, irt.Path + irt.Name), irt);
+					return new RunningTask(svc, TaskService.GetTask(svc.v2TaskService, irt.Path + irt.Name), irt);
 				}
 
 				int i = 0;
-				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(v1TS);
+				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(svc);
 				while (v1te.MoveNext())
 					if (i++ == index)
 						return v1te.Current;

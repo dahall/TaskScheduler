@@ -8,6 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class TaskFolderCollection : IEnumerable<TaskFolder>
 	{
+		private TaskFolder parent;
 		private TaskScheduler.V2Interop.ITaskFolderCollection v2FolderList = null;
 		private TaskFolder[] v1FolderList = null;
 
@@ -18,11 +19,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal TaskFolderCollection(TaskFolder v1Folder)
 		{
+			parent = v1Folder;
 			v1FolderList = new TaskFolder[] { v1Folder };
 		}
 
-		internal TaskFolderCollection(TaskScheduler.V2Interop.ITaskFolderCollection iCollection)
+		internal TaskFolderCollection(TaskFolder folder, TaskScheduler.V2Interop.ITaskFolderCollection iCollection)
 		{
+			parent = folder;
 			v2FolderList = iCollection;
 		}
 
@@ -82,7 +85,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2FolderList != null)
-					return new TaskFolder(v2FolderList[++index]);
+					return new TaskFolder(parent.TaskService, v2FolderList[++index]);
 				return v1FolderList[index];
 			}
 		}
@@ -97,7 +100,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2FolderList != null)
-					return new TaskFolder(v2FolderList[path]);
+					return new TaskFolder(parent.TaskService, v2FolderList[path]);
 				if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
 					return v1FolderList[0];
 				throw new ArgumentException("Path not found");
@@ -130,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (arrayIndex + this.Count > array.Length)
 					throw new ArgumentException();
 				foreach (TaskScheduler.V2Interop.ITaskFolder f in v2FolderList)
-					array[arrayIndex++] = new TaskFolder(f);
+					array[arrayIndex++] = new TaskFolder(parent.TaskService, f);
 			}
 			else
 			{

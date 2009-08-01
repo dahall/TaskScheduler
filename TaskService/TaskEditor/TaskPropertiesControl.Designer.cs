@@ -72,33 +72,33 @@
 			this.availableConnectionsCombo = new System.Windows.Forms.ComboBox();
 			this.taskStartIfConnectionCheck = new System.Windows.Forms.CheckBox();
 			this.powerConditionGroupBox = new System.Windows.Forms.GroupBox();
-			this.taskStopIfBatteryCheck = new System.Windows.Forms.CheckBox();
+			this.taskStopIfGoingOnBatteriesCheck = new System.Windows.Forms.CheckBox();
 			this.taskWakeToRunCheck = new System.Windows.Forms.CheckBox();
-			this.taskStartOnlyOnACCheck = new System.Windows.Forms.CheckBox();
+			this.taskDisallowStartIfOnBatteriesCheck = new System.Windows.Forms.CheckBox();
 			this.idleConditionGroupBox = new System.Windows.Forms.GroupBox();
-			this.taskIdleDelayCombo = new System.Windows.Forms.ComboBox();
-			this.taskStartAfterIdleCombo = new System.Windows.Forms.ComboBox();
-			this.taskRestartWhenIdleCheck = new System.Windows.Forms.CheckBox();
-			this.taskStopIfNotIdleCheck = new System.Windows.Forms.CheckBox();
+			this.taskIdleWaitTimeoutCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskIdleDurationCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskRestartOnIdleCheck = new System.Windows.Forms.CheckBox();
+			this.taskStopOnIdleEndCheck = new System.Windows.Forms.CheckBox();
 			this.taskIdleDelayLabel = new System.Windows.Forms.Label();
-			this.taskStartAfterIdleCheck = new System.Windows.Forms.CheckBox();
+			this.taskIdleDurationCheck = new System.Windows.Forms.CheckBox();
 			this.conditionIntroLabel = new System.Windows.Forms.Label();
 			this.settingsTab = new System.Windows.Forms.TabPage();
-			this.taskRestartAttemptsText = new System.Windows.Forms.TextBox();
-			this.taskDeleteAfterCombo = new System.Windows.Forms.ComboBox();
-			this.taskStopIfRunningAfterCombo = new System.Windows.Forms.ComboBox();
-			this.taskRestartAfterSpanCombo = new System.Windows.Forms.ComboBox();
-			this.taskRunningRuleCombo = new System.Windows.Forms.ComboBox();
+			this.taskRestartCountText = new System.Windows.Forms.NumericUpDown();
+			this.taskMultInstCombo = new System.Windows.Forms.ComboBox();
 			this.taskRunningRuleLabel = new System.Windows.Forms.Label();
 			this.taskRestartAttemptTimesLabel = new System.Windows.Forms.Label();
 			this.taskRestartAttemptsLabel = new System.Windows.Forms.Label();
 			this.taskDeleteAfterCheck = new System.Windows.Forms.CheckBox();
-			this.taskForceStopCheck = new System.Windows.Forms.CheckBox();
-			this.taskStopIfRunningAfterCheck = new System.Windows.Forms.CheckBox();
-			this.taskRestartAfterFailureCheck = new System.Windows.Forms.CheckBox();
-			this.taskRunAfterMissedCheck = new System.Windows.Forms.CheckBox();
-			this.taskRunOnDemandCheck = new System.Windows.Forms.CheckBox();
+			this.taskAllowHardTerminateCheck = new System.Windows.Forms.CheckBox();
+			this.taskExecutionTimeLimitCheck = new System.Windows.Forms.CheckBox();
+			this.taskRestartIntervalCheck = new System.Windows.Forms.CheckBox();
+			this.taskStartWhenAvailableCheck = new System.Windows.Forms.CheckBox();
+			this.taskAllowDemandStartCheck = new System.Windows.Forms.CheckBox();
 			this.settingsIntroLabel = new System.Windows.Forms.Label();
+			this.taskDeleteAfterCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskExecutionTimeLimitCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskRestartIntervalCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
 			this.historyTab = new System.Windows.Forms.TabPage();
 			this.historyListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
@@ -118,6 +118,7 @@
 			this.powerConditionGroupBox.SuspendLayout();
 			this.idleConditionGroupBox.SuspendLayout();
 			this.settingsTab.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
 			this.historyTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -168,6 +169,7 @@
 			// 
 			resources.ApplyResources(this.taskNameText, "taskNameText");
 			this.taskNameText.Name = "taskNameText";
+			this.taskNameText.ReadOnly = true;
 			// 
 			// taskAuthorText
 			// 
@@ -178,6 +180,7 @@
 			// 
 			resources.ApplyResources(this.taskDescText, "taskDescText");
 			this.taskDescText.Name = "taskDescText";
+			this.taskDescText.Leave += new System.EventHandler(this.taskDescText_Leave);
 			// 
 			// taskVersionCombo
 			// 
@@ -187,6 +190,7 @@
             resources.GetString("taskVersionCombo.Items"),
             resources.GetString("taskVersionCombo.Items1")});
 			this.taskVersionCombo.Name = "taskVersionCombo";
+			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
 			// 
 			// taskVersionLabel
 			// 
@@ -198,6 +202,7 @@
 			resources.ApplyResources(this.taskHiddenCheck, "taskHiddenCheck");
 			this.taskHiddenCheck.Name = "taskHiddenCheck";
 			this.taskHiddenCheck.UseVisualStyleBackColor = true;
+			this.taskHiddenCheck.CheckedChanged += new System.EventHandler(this.taskHiddenCheck_CheckedChanged);
 			// 
 			// taskSecurityGroupBox
 			// 
@@ -243,6 +248,7 @@
 			// 
 			resources.ApplyResources(this.taskPrincipalText, "taskPrincipalText");
 			this.taskPrincipalText.Name = "taskPrincipalText";
+			this.taskPrincipalText.ReadOnly = true;
 			// 
 			// changePrincipalButton
 			// 
@@ -295,11 +301,13 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+			this.triggerListView.FullRowSelect = true;
 			this.triggerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.triggerListView.HideSelection = false;
 			this.triggerListView.Name = "triggerListView";
 			this.triggerListView.UseCompatibleStateImageBehavior = false;
 			this.triggerListView.View = System.Windows.Forms.View.Details;
+			this.triggerListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.triggerListView_MouseDoubleClick);
 			// 
 			// columnHeader1
 			// 
@@ -372,11 +380,13 @@
 			this.actionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5});
+			this.actionListView.FullRowSelect = true;
 			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.actionListView.HideSelection = false;
 			this.actionListView.Name = "actionListView";
 			this.actionListView.UseCompatibleStateImageBehavior = false;
 			this.actionListView.View = System.Windows.Forms.View.Details;
+			this.actionListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.actionListView_MouseDoubleClick);
 			// 
 			// columnHeader4
 			// 
@@ -416,6 +426,7 @@
 			this.availableConnectionsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.availableConnectionsCombo.FormattingEnabled = true;
 			this.availableConnectionsCombo.Name = "availableConnectionsCombo";
+			this.availableConnectionsCombo.SelectedIndexChanged += new System.EventHandler(this.availableConnectionsCombo_SelectedIndexChanged);
 			// 
 			// taskStartIfConnectionCheck
 			// 
@@ -427,95 +438,84 @@
 			// powerConditionGroupBox
 			// 
 			resources.ApplyResources(this.powerConditionGroupBox, "powerConditionGroupBox");
-			this.powerConditionGroupBox.Controls.Add(this.taskStopIfBatteryCheck);
+			this.powerConditionGroupBox.Controls.Add(this.taskStopIfGoingOnBatteriesCheck);
 			this.powerConditionGroupBox.Controls.Add(this.taskWakeToRunCheck);
-			this.powerConditionGroupBox.Controls.Add(this.taskStartOnlyOnACCheck);
+			this.powerConditionGroupBox.Controls.Add(this.taskDisallowStartIfOnBatteriesCheck);
 			this.powerConditionGroupBox.Name = "powerConditionGroupBox";
 			this.powerConditionGroupBox.TabStop = false;
 			// 
-			// taskStopIfBatteryCheck
+			// taskStopIfGoingOnBatteriesCheck
 			// 
-			resources.ApplyResources(this.taskStopIfBatteryCheck, "taskStopIfBatteryCheck");
-			this.taskStopIfBatteryCheck.Name = "taskStopIfBatteryCheck";
-			this.taskStopIfBatteryCheck.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.taskStopIfGoingOnBatteriesCheck, "taskStopIfGoingOnBatteriesCheck");
+			this.taskStopIfGoingOnBatteriesCheck.Name = "taskStopIfGoingOnBatteriesCheck";
+			this.taskStopIfGoingOnBatteriesCheck.UseVisualStyleBackColor = true;
+			this.taskStopIfGoingOnBatteriesCheck.CheckedChanged += new System.EventHandler(this.taskStopIfGoingOnBatteriesCheck_CheckedChanged);
 			// 
 			// taskWakeToRunCheck
 			// 
 			resources.ApplyResources(this.taskWakeToRunCheck, "taskWakeToRunCheck");
 			this.taskWakeToRunCheck.Name = "taskWakeToRunCheck";
 			this.taskWakeToRunCheck.UseVisualStyleBackColor = true;
+			this.taskWakeToRunCheck.CheckedChanged += new System.EventHandler(this.taskWakeToRunCheck_CheckedChanged);
 			// 
-			// taskStartOnlyOnACCheck
+			// taskDisallowStartIfOnBatteriesCheck
 			// 
-			resources.ApplyResources(this.taskStartOnlyOnACCheck, "taskStartOnlyOnACCheck");
-			this.taskStartOnlyOnACCheck.Name = "taskStartOnlyOnACCheck";
-			this.taskStartOnlyOnACCheck.UseVisualStyleBackColor = true;
-			this.taskStartOnlyOnACCheck.CheckedChanged += new System.EventHandler(this.taskStartOnlyOnACCheck_CheckedChanged);
+			resources.ApplyResources(this.taskDisallowStartIfOnBatteriesCheck, "taskDisallowStartIfOnBatteriesCheck");
+			this.taskDisallowStartIfOnBatteriesCheck.Name = "taskDisallowStartIfOnBatteriesCheck";
+			this.taskDisallowStartIfOnBatteriesCheck.UseVisualStyleBackColor = true;
+			this.taskDisallowStartIfOnBatteriesCheck.CheckedChanged += new System.EventHandler(this.taskDisallowStartIfOnBatteriesCheck_CheckedChanged);
 			// 
 			// idleConditionGroupBox
 			// 
 			resources.ApplyResources(this.idleConditionGroupBox, "idleConditionGroupBox");
-			this.idleConditionGroupBox.Controls.Add(this.taskIdleDelayCombo);
-			this.idleConditionGroupBox.Controls.Add(this.taskStartAfterIdleCombo);
-			this.idleConditionGroupBox.Controls.Add(this.taskRestartWhenIdleCheck);
-			this.idleConditionGroupBox.Controls.Add(this.taskStopIfNotIdleCheck);
+			this.idleConditionGroupBox.Controls.Add(this.taskIdleWaitTimeoutCombo);
+			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCombo);
+			this.idleConditionGroupBox.Controls.Add(this.taskRestartOnIdleCheck);
+			this.idleConditionGroupBox.Controls.Add(this.taskStopOnIdleEndCheck);
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleDelayLabel);
-			this.idleConditionGroupBox.Controls.Add(this.taskStartAfterIdleCheck);
+			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCheck);
 			this.idleConditionGroupBox.Name = "idleConditionGroupBox";
 			this.idleConditionGroupBox.TabStop = false;
 			// 
-			// taskIdleDelayCombo
+			// taskIdleWaitTimeoutCombo
 			// 
-			this.taskIdleDelayCombo.FormattingEnabled = true;
-			this.taskIdleDelayCombo.Items.AddRange(new object[] {
-            resources.GetString("taskIdleDelayCombo.Items"),
-            resources.GetString("taskIdleDelayCombo.Items1"),
-            resources.GetString("taskIdleDelayCombo.Items2"),
-            resources.GetString("taskIdleDelayCombo.Items3"),
-            resources.GetString("taskIdleDelayCombo.Items4"),
-            resources.GetString("taskIdleDelayCombo.Items5"),
-            resources.GetString("taskIdleDelayCombo.Items6"),
-            resources.GetString("taskIdleDelayCombo.Items7")});
-			resources.ApplyResources(this.taskIdleDelayCombo, "taskIdleDelayCombo");
-			this.taskIdleDelayCombo.Name = "taskIdleDelayCombo";
+			resources.ApplyResources(this.taskIdleWaitTimeoutCombo, "taskIdleWaitTimeoutCombo");
+			this.taskIdleWaitTimeoutCombo.Name = "taskIdleWaitTimeoutCombo";
+			this.taskIdleWaitTimeoutCombo.Value = System.TimeSpan.Parse("00:00:00");
+			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleDelayCombo_ValueChanged);
 			// 
-			// taskStartAfterIdleCombo
+			// taskIdleDurationCombo
 			// 
-			this.taskStartAfterIdleCombo.FormattingEnabled = true;
-			this.taskStartAfterIdleCombo.Items.AddRange(new object[] {
-            resources.GetString("taskStartAfterIdleCombo.Items"),
-            resources.GetString("taskStartAfterIdleCombo.Items1"),
-            resources.GetString("taskStartAfterIdleCombo.Items2"),
-            resources.GetString("taskStartAfterIdleCombo.Items3"),
-            resources.GetString("taskStartAfterIdleCombo.Items4"),
-            resources.GetString("taskStartAfterIdleCombo.Items5")});
-			resources.ApplyResources(this.taskStartAfterIdleCombo, "taskStartAfterIdleCombo");
-			this.taskStartAfterIdleCombo.Name = "taskStartAfterIdleCombo";
+			resources.ApplyResources(this.taskIdleDurationCombo, "taskIdleDurationCombo");
+			this.taskIdleDurationCombo.Name = "taskIdleDurationCombo";
+			this.taskIdleDurationCombo.Value = System.TimeSpan.Parse("00:00:00");
+			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskStartAfterIdleCombo_ValueChanged);
 			// 
-			// taskRestartWhenIdleCheck
+			// taskRestartOnIdleCheck
 			// 
-			resources.ApplyResources(this.taskRestartWhenIdleCheck, "taskRestartWhenIdleCheck");
-			this.taskRestartWhenIdleCheck.Name = "taskRestartWhenIdleCheck";
-			this.taskRestartWhenIdleCheck.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.taskRestartOnIdleCheck, "taskRestartOnIdleCheck");
+			this.taskRestartOnIdleCheck.Name = "taskRestartOnIdleCheck";
+			this.taskRestartOnIdleCheck.UseVisualStyleBackColor = true;
+			this.taskRestartOnIdleCheck.CheckedChanged += new System.EventHandler(this.taskRestartOnIdleCheck_CheckedChanged);
 			// 
-			// taskStopIfNotIdleCheck
+			// taskStopOnIdleEndCheck
 			// 
-			resources.ApplyResources(this.taskStopIfNotIdleCheck, "taskStopIfNotIdleCheck");
-			this.taskStopIfNotIdleCheck.Name = "taskStopIfNotIdleCheck";
-			this.taskStopIfNotIdleCheck.UseVisualStyleBackColor = true;
-			this.taskStopIfNotIdleCheck.CheckedChanged += new System.EventHandler(this.taskStopIfNotIdleCheck_CheckedChanged);
+			resources.ApplyResources(this.taskStopOnIdleEndCheck, "taskStopOnIdleEndCheck");
+			this.taskStopOnIdleEndCheck.Name = "taskStopOnIdleEndCheck";
+			this.taskStopOnIdleEndCheck.UseVisualStyleBackColor = true;
+			this.taskStopOnIdleEndCheck.CheckedChanged += new System.EventHandler(this.taskStopOnIdleEndCheck_CheckedChanged);
 			// 
 			// taskIdleDelayLabel
 			// 
 			resources.ApplyResources(this.taskIdleDelayLabel, "taskIdleDelayLabel");
 			this.taskIdleDelayLabel.Name = "taskIdleDelayLabel";
 			// 
-			// taskStartAfterIdleCheck
+			// taskIdleDurationCheck
 			// 
-			resources.ApplyResources(this.taskStartAfterIdleCheck, "taskStartAfterIdleCheck");
-			this.taskStartAfterIdleCheck.Name = "taskStartAfterIdleCheck";
-			this.taskStartAfterIdleCheck.UseVisualStyleBackColor = true;
-			this.taskStartAfterIdleCheck.CheckedChanged += new System.EventHandler(this.taskStartAfterIdleCheck_CheckedChanged);
+			resources.ApplyResources(this.taskIdleDurationCheck, "taskIdleDurationCheck");
+			this.taskIdleDurationCheck.Name = "taskIdleDurationCheck";
+			this.taskIdleDurationCheck.UseVisualStyleBackColor = true;
+			this.taskIdleDurationCheck.CheckedChanged += new System.EventHandler(this.taskIdleDurationCheck_CheckedChanged);
 			// 
 			// conditionIntroLabel
 			// 
@@ -524,81 +524,43 @@
 			// 
 			// settingsTab
 			// 
-			this.settingsTab.Controls.Add(this.taskRestartAttemptsText);
-			this.settingsTab.Controls.Add(this.taskDeleteAfterCombo);
-			this.settingsTab.Controls.Add(this.taskStopIfRunningAfterCombo);
-			this.settingsTab.Controls.Add(this.taskRestartAfterSpanCombo);
-			this.settingsTab.Controls.Add(this.taskRunningRuleCombo);
+			this.settingsTab.Controls.Add(this.taskRestartCountText);
+			this.settingsTab.Controls.Add(this.taskMultInstCombo);
 			this.settingsTab.Controls.Add(this.taskRunningRuleLabel);
 			this.settingsTab.Controls.Add(this.taskRestartAttemptTimesLabel);
 			this.settingsTab.Controls.Add(this.taskRestartAttemptsLabel);
 			this.settingsTab.Controls.Add(this.taskDeleteAfterCheck);
-			this.settingsTab.Controls.Add(this.taskForceStopCheck);
-			this.settingsTab.Controls.Add(this.taskStopIfRunningAfterCheck);
-			this.settingsTab.Controls.Add(this.taskRestartAfterFailureCheck);
-			this.settingsTab.Controls.Add(this.taskRunAfterMissedCheck);
-			this.settingsTab.Controls.Add(this.taskRunOnDemandCheck);
+			this.settingsTab.Controls.Add(this.taskAllowHardTerminateCheck);
+			this.settingsTab.Controls.Add(this.taskExecutionTimeLimitCheck);
+			this.settingsTab.Controls.Add(this.taskRestartIntervalCheck);
+			this.settingsTab.Controls.Add(this.taskStartWhenAvailableCheck);
+			this.settingsTab.Controls.Add(this.taskAllowDemandStartCheck);
 			this.settingsTab.Controls.Add(this.settingsIntroLabel);
+			this.settingsTab.Controls.Add(this.taskDeleteAfterCombo);
+			this.settingsTab.Controls.Add(this.taskExecutionTimeLimitCombo);
+			this.settingsTab.Controls.Add(this.taskRestartIntervalCombo);
 			resources.ApplyResources(this.settingsTab, "settingsTab");
 			this.settingsTab.Name = "settingsTab";
 			this.settingsTab.UseVisualStyleBackColor = true;
 			// 
-			// taskRestartAttemptsText
+			// taskRestartCountText
 			// 
-			resources.ApplyResources(this.taskRestartAttemptsText, "taskRestartAttemptsText");
-			this.taskRestartAttemptsText.Name = "taskRestartAttemptsText";
+			resources.ApplyResources(this.taskRestartCountText, "taskRestartCountText");
+			this.taskRestartCountText.Name = "taskRestartCountText";
+			this.taskRestartCountText.ValueChanged += new System.EventHandler(this.taskRestartCountText_ValueChanged);
 			// 
-			// taskDeleteAfterCombo
+			// taskMultInstCombo
 			// 
-			this.taskDeleteAfterCombo.FormattingEnabled = true;
-			this.taskDeleteAfterCombo.Items.AddRange(new object[] {
-            resources.GetString("taskDeleteAfterCombo.Items"),
-            resources.GetString("taskDeleteAfterCombo.Items1"),
-            resources.GetString("taskDeleteAfterCombo.Items2"),
-            resources.GetString("taskDeleteAfterCombo.Items3"),
-            resources.GetString("taskDeleteAfterCombo.Items4")});
-			resources.ApplyResources(this.taskDeleteAfterCombo, "taskDeleteAfterCombo");
-			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
-			// 
-			// taskStopIfRunningAfterCombo
-			// 
-			this.taskStopIfRunningAfterCombo.FormattingEnabled = true;
-			this.taskStopIfRunningAfterCombo.Items.AddRange(new object[] {
-            resources.GetString("taskStopIfRunningAfterCombo.Items"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items1"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items2"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items3"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items4"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items5"),
-            resources.GetString("taskStopIfRunningAfterCombo.Items6")});
-			resources.ApplyResources(this.taskStopIfRunningAfterCombo, "taskStopIfRunningAfterCombo");
-			this.taskStopIfRunningAfterCombo.Name = "taskStopIfRunningAfterCombo";
-			// 
-			// taskRestartAfterSpanCombo
-			// 
-			this.taskRestartAfterSpanCombo.FormattingEnabled = true;
-			this.taskRestartAfterSpanCombo.Items.AddRange(new object[] {
-            resources.GetString("taskRestartAfterSpanCombo.Items"),
-            resources.GetString("taskRestartAfterSpanCombo.Items1"),
-            resources.GetString("taskRestartAfterSpanCombo.Items2"),
-            resources.GetString("taskRestartAfterSpanCombo.Items3"),
-            resources.GetString("taskRestartAfterSpanCombo.Items4"),
-            resources.GetString("taskRestartAfterSpanCombo.Items5"),
-            resources.GetString("taskRestartAfterSpanCombo.Items6")});
-			resources.ApplyResources(this.taskRestartAfterSpanCombo, "taskRestartAfterSpanCombo");
-			this.taskRestartAfterSpanCombo.Name = "taskRestartAfterSpanCombo";
-			// 
-			// taskRunningRuleCombo
-			// 
-			this.taskRunningRuleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.taskRunningRuleCombo.FormattingEnabled = true;
-			this.taskRunningRuleCombo.Items.AddRange(new object[] {
-            resources.GetString("taskRunningRuleCombo.Items"),
-            resources.GetString("taskRunningRuleCombo.Items1"),
-            resources.GetString("taskRunningRuleCombo.Items2"),
-            resources.GetString("taskRunningRuleCombo.Items3")});
-			resources.ApplyResources(this.taskRunningRuleCombo, "taskRunningRuleCombo");
-			this.taskRunningRuleCombo.Name = "taskRunningRuleCombo";
+			this.taskMultInstCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.taskMultInstCombo.FormattingEnabled = true;
+			this.taskMultInstCombo.Items.AddRange(new object[] {
+            resources.GetString("taskMultInstCombo.Items"),
+            resources.GetString("taskMultInstCombo.Items1"),
+            resources.GetString("taskMultInstCombo.Items2"),
+            resources.GetString("taskMultInstCombo.Items3")});
+			resources.ApplyResources(this.taskMultInstCombo, "taskMultInstCombo");
+			this.taskMultInstCombo.Name = "taskMultInstCombo";
+			this.taskMultInstCombo.SelectedIndexChanged += new System.EventHandler(this.taskMultInstCombo_SelectedIndexChanged);
 			// 
 			// taskRunningRuleLabel
 			// 
@@ -622,42 +584,66 @@
 			this.taskDeleteAfterCheck.UseVisualStyleBackColor = true;
 			this.taskDeleteAfterCheck.CheckedChanged += new System.EventHandler(this.taskDeleteAfterCheck_CheckedChanged);
 			// 
-			// taskForceStopCheck
+			// taskAllowHardTerminateCheck
 			// 
-			resources.ApplyResources(this.taskForceStopCheck, "taskForceStopCheck");
-			this.taskForceStopCheck.Name = "taskForceStopCheck";
-			this.taskForceStopCheck.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.taskAllowHardTerminateCheck, "taskAllowHardTerminateCheck");
+			this.taskAllowHardTerminateCheck.Name = "taskAllowHardTerminateCheck";
+			this.taskAllowHardTerminateCheck.UseVisualStyleBackColor = true;
+			this.taskAllowHardTerminateCheck.CheckedChanged += new System.EventHandler(this.taskAllowHardTerminateCheck_CheckedChanged);
 			// 
-			// taskStopIfRunningAfterCheck
+			// taskExecutionTimeLimitCheck
 			// 
-			resources.ApplyResources(this.taskStopIfRunningAfterCheck, "taskStopIfRunningAfterCheck");
-			this.taskStopIfRunningAfterCheck.Name = "taskStopIfRunningAfterCheck";
-			this.taskStopIfRunningAfterCheck.UseVisualStyleBackColor = true;
-			this.taskStopIfRunningAfterCheck.CheckedChanged += new System.EventHandler(this.taskStopIfRunningAfterCheck_CheckedChanged);
+			resources.ApplyResources(this.taskExecutionTimeLimitCheck, "taskExecutionTimeLimitCheck");
+			this.taskExecutionTimeLimitCheck.Name = "taskExecutionTimeLimitCheck";
+			this.taskExecutionTimeLimitCheck.UseVisualStyleBackColor = true;
+			this.taskExecutionTimeLimitCheck.CheckedChanged += new System.EventHandler(this.taskExecutionTimeLimitCheck_CheckedChanged);
 			// 
-			// taskRestartAfterFailureCheck
+			// taskRestartIntervalCheck
 			// 
-			resources.ApplyResources(this.taskRestartAfterFailureCheck, "taskRestartAfterFailureCheck");
-			this.taskRestartAfterFailureCheck.Name = "taskRestartAfterFailureCheck";
-			this.taskRestartAfterFailureCheck.UseVisualStyleBackColor = true;
-			this.taskRestartAfterFailureCheck.CheckedChanged += new System.EventHandler(this.taskRestartAfterFailureCheck_CheckedChanged);
+			resources.ApplyResources(this.taskRestartIntervalCheck, "taskRestartIntervalCheck");
+			this.taskRestartIntervalCheck.Name = "taskRestartIntervalCheck";
+			this.taskRestartIntervalCheck.UseVisualStyleBackColor = true;
+			this.taskRestartIntervalCheck.CheckedChanged += new System.EventHandler(this.taskRestartIntervalCheck_CheckedChanged);
 			// 
-			// taskRunAfterMissedCheck
+			// taskStartWhenAvailableCheck
 			// 
-			resources.ApplyResources(this.taskRunAfterMissedCheck, "taskRunAfterMissedCheck");
-			this.taskRunAfterMissedCheck.Name = "taskRunAfterMissedCheck";
-			this.taskRunAfterMissedCheck.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.taskStartWhenAvailableCheck, "taskStartWhenAvailableCheck");
+			this.taskStartWhenAvailableCheck.Name = "taskStartWhenAvailableCheck";
+			this.taskStartWhenAvailableCheck.UseVisualStyleBackColor = true;
+			this.taskStartWhenAvailableCheck.CheckedChanged += new System.EventHandler(this.taskStartWhenAvailableCheck_CheckedChanged);
 			// 
-			// taskRunOnDemandCheck
+			// taskAllowDemandStartCheck
 			// 
-			resources.ApplyResources(this.taskRunOnDemandCheck, "taskRunOnDemandCheck");
-			this.taskRunOnDemandCheck.Name = "taskRunOnDemandCheck";
-			this.taskRunOnDemandCheck.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.taskAllowDemandStartCheck, "taskAllowDemandStartCheck");
+			this.taskAllowDemandStartCheck.Name = "taskAllowDemandStartCheck";
+			this.taskAllowDemandStartCheck.UseVisualStyleBackColor = true;
+			this.taskAllowDemandStartCheck.CheckedChanged += new System.EventHandler(this.taskAllowDemandStartCheck_CheckedChanged);
 			// 
 			// settingsIntroLabel
 			// 
 			resources.ApplyResources(this.settingsIntroLabel, "settingsIntroLabel");
 			this.settingsIntroLabel.Name = "settingsIntroLabel";
+			// 
+			// taskDeleteAfterCombo
+			// 
+			resources.ApplyResources(this.taskDeleteAfterCombo, "taskDeleteAfterCombo");
+			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
+			this.taskDeleteAfterCombo.Value = System.TimeSpan.Parse("00:00:00");
+			this.taskDeleteAfterCombo.ValueChanged += new System.EventHandler(this.taskDeleteAfterCombo_ValueChanged);
+			// 
+			// taskExecutionTimeLimitCombo
+			// 
+			resources.ApplyResources(this.taskExecutionTimeLimitCombo, "taskExecutionTimeLimitCombo");
+			this.taskExecutionTimeLimitCombo.Name = "taskExecutionTimeLimitCombo";
+			this.taskExecutionTimeLimitCombo.Value = System.TimeSpan.Parse("00:00:00");
+			this.taskExecutionTimeLimitCombo.ValueChanged += new System.EventHandler(this.taskExecutionTimeLimitCombo_ValueChanged);
+			// 
+			// taskRestartIntervalCombo
+			// 
+			resources.ApplyResources(this.taskRestartIntervalCombo, "taskRestartIntervalCombo");
+			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
+			this.taskRestartIntervalCombo.Value = System.TimeSpan.Parse("00:00:00");
+			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
 			// 
 			// historyTab
 			// 
@@ -677,6 +663,7 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11});
+			this.historyListView.FullRowSelect = true;
 			this.historyListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.historyListView.HideSelection = false;
 			this.historyListView.Name = "historyListView";
@@ -710,6 +697,7 @@
 			// historyBackgroundWorker
 			// 
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
+			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
 			// TaskPropertiesControl
 			// 
@@ -734,6 +722,7 @@
 			this.idleConditionGroupBox.PerformLayout();
 			this.settingsTab.ResumeLayout(false);
 			this.settingsTab.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
 			this.historyTab.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -785,32 +774,32 @@
 		private System.Windows.Forms.TextBox taskDescText;
 		private System.Windows.Forms.GroupBox powerConditionGroupBox;
 		private System.Windows.Forms.GroupBox idleConditionGroupBox;
-		private System.Windows.Forms.ComboBox taskIdleDelayCombo;
-		private System.Windows.Forms.ComboBox taskStartAfterIdleCombo;
-		private System.Windows.Forms.CheckBox taskRestartWhenIdleCheck;
-		private System.Windows.Forms.CheckBox taskStopIfNotIdleCheck;
+		private TimeSpanPicker taskIdleWaitTimeoutCombo;
+		private TimeSpanPicker taskIdleDurationCombo;
+		private System.Windows.Forms.CheckBox taskRestartOnIdleCheck;
+		private System.Windows.Forms.CheckBox taskStopOnIdleEndCheck;
 		private System.Windows.Forms.Label taskIdleDelayLabel;
-		private System.Windows.Forms.CheckBox taskStartAfterIdleCheck;
-		private System.Windows.Forms.CheckBox taskStopIfBatteryCheck;
+		private System.Windows.Forms.CheckBox taskIdleDurationCheck;
+		private System.Windows.Forms.CheckBox taskStopIfGoingOnBatteriesCheck;
 		private System.Windows.Forms.CheckBox taskWakeToRunCheck;
-		private System.Windows.Forms.CheckBox taskStartOnlyOnACCheck;
+		private System.Windows.Forms.CheckBox taskDisallowStartIfOnBatteriesCheck;
 		private System.Windows.Forms.GroupBox networkConditionGroupBox;
 		private System.Windows.Forms.ComboBox availableConnectionsCombo;
 		private System.Windows.Forms.CheckBox taskStartIfConnectionCheck;
-		private System.Windows.Forms.ComboBox taskRunningRuleCombo;
+		private System.Windows.Forms.ComboBox taskMultInstCombo;
 		private System.Windows.Forms.Label taskRunningRuleLabel;
 		private System.Windows.Forms.Label taskRestartAttemptsLabel;
 		private System.Windows.Forms.CheckBox taskDeleteAfterCheck;
-		private System.Windows.Forms.CheckBox taskForceStopCheck;
-		private System.Windows.Forms.CheckBox taskStopIfRunningAfterCheck;
-		private System.Windows.Forms.CheckBox taskRestartAfterFailureCheck;
-		private System.Windows.Forms.CheckBox taskRunAfterMissedCheck;
-		private System.Windows.Forms.CheckBox taskRunOnDemandCheck;
+		private System.Windows.Forms.CheckBox taskAllowHardTerminateCheck;
+		private System.Windows.Forms.CheckBox taskExecutionTimeLimitCheck;
+		private System.Windows.Forms.CheckBox taskRestartIntervalCheck;
+		private System.Windows.Forms.CheckBox taskStartWhenAvailableCheck;
+		private System.Windows.Forms.CheckBox taskAllowDemandStartCheck;
 		private System.Windows.Forms.Label settingsIntroLabel;
-		private System.Windows.Forms.ComboBox taskDeleteAfterCombo;
-		private System.Windows.Forms.ComboBox taskStopIfRunningAfterCombo;
-		private System.Windows.Forms.ComboBox taskRestartAfterSpanCombo;
-		private System.Windows.Forms.TextBox taskRestartAttemptsText;
+		private TimeSpanPicker taskDeleteAfterCombo;
+		private TimeSpanPicker taskExecutionTimeLimitCombo;
+		private TimeSpanPicker taskRestartIntervalCombo;
+		private System.Windows.Forms.NumericUpDown taskRestartCountText;
 		private System.Windows.Forms.Label taskRestartAttemptTimesLabel;
 		private System.Windows.Forms.ListView historyListView;
 		private System.Windows.Forms.ColumnHeader columnHeader6;

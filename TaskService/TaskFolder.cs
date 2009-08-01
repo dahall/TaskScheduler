@@ -10,13 +10,15 @@ namespace Microsoft.Win32.TaskScheduler
 		V1Interop.ITaskScheduler v1List = null;
 		V2Interop.ITaskFolder v2Folder = null;
 
-		internal TaskFolder(V1Interop.ITaskScheduler ts)
+		internal TaskFolder(TaskService svc)
 		{
-			v1List = ts;
+			this.TaskService = svc;
+			v1List = svc.v1TaskScheduler;
 		}
 
-		internal TaskFolder(V2Interop.ITaskFolder iFldr)
+		internal TaskFolder(TaskService svc, V2Interop.ITaskFolder iFldr)
 		{
+			this.TaskService = svc;
 			v2Folder = iFldr;
 		}
 
@@ -61,10 +63,16 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Folder != null)
-					return new TaskFolderCollection(v2Folder.GetFolders(0));
+					return new TaskFolderCollection(this, v2Folder.GetFolders(0));
 				return new TaskFolderCollection();
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="TaskService"/> that manages this task.
+		/// </summary>
+		/// <value>The task service.</value>
+		public TaskService TaskService { get; private set; }
 
 		/// <summary>
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
@@ -75,7 +83,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskFolder CreateFolder(string subFolderName, string sddlForm)
 		{
 			if (v2Folder != null)
-				return new TaskFolder(v2Folder.CreateFolder(subFolderName, sddlForm));
+				return new TaskFolder(this.TaskService, v2Folder.CreateFolder(subFolderName, sddlForm));
 			throw new NotV1SupportedException();
 		}
 
@@ -105,8 +113,8 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Folder != null)
-					return new TaskCollection(v2Folder.GetTasks(1));
-				return new TaskCollection(v1List);
+					return new TaskCollection(this, v2Folder.GetTasks(1));
+				return new TaskCollection(this.TaskService);
 			}
 		}
 
@@ -140,7 +148,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task RegisterTask(string Path, string XmlText, TaskCreation createType, string UserId, string password, TaskLogonType LogonType, string sddl)
 		{
 			if (v2Folder != null)
-				return new Task(v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
+				return new Task(this.TaskService, v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
 			throw new NotV1SupportedException();
 		}
 
@@ -169,7 +177,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password, TaskLogonType LogonType, string sddl)
 		{
 			if (v2Folder != null)
-				return new Task(v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
+				return new Task(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
 
 			// Adds ability to set a password for a V1 task. Provided by Arcao.
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
@@ -221,7 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 				default:
 					break;
 			}
-			return new Task(definition.v1Task);
+			return new Task(this.TaskService, definition.v1Task);
 		}
 
 		/// <summary>
