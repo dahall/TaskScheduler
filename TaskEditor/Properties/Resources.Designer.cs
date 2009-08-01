@@ -88,6 +88,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last.
+        /// </summary>
+        internal static string Last {
+            get {
+                return ResourceManager.GetString("Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to day.
         /// </summary>
         internal static string TimeSpanDay {
@@ -102,6 +111,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TimeSpanDays {
             get {
                 return ResourceManager.GetString("TimeSpanDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to days,day,d.
+        /// </summary>
+        internal static string TimeSpanDayStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanDayStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not wait.
+        /// </summary>
+        internal static string TimeSpanDoNotWait {
+            get {
+                return ResourceManager.GetString("TimeSpanDoNotWait", resourceCulture);
             }
         }
         
@@ -124,6 +151,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to hours,hour,hrs,hr,h.
+        /// </summary>
+        internal static string TimeSpanHourStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanHourStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Immediately.
+        /// </summary>
+        internal static string TimeSpanImmediately {
+            get {
+                return ResourceManager.GetString("TimeSpanImmediately", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to minute.
         /// </summary>
         internal static string TimeSpanMinute {
@@ -138,6 +183,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TimeSpanMinutes {
             get {
                 return ResourceManager.GetString("TimeSpanMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes,minute,mins,min,m.
+        /// </summary>
+        internal static string TimeSpanMinuteStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanMinuteStrings", resourceCulture);
             }
         }
         
@@ -160,6 +214,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to months,month,mos,mo,m.
+        /// </summary>
+        internal static string TimeSpanMonthStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanMonthStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to second.
         /// </summary>
         internal static string TimeSpanSecond {
@@ -178,6 +241,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to seconds,second,secs,sec,s.
+        /// </summary>
+        internal static string TimeSpanSecondStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanSecondStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to , .
+        /// </summary>
+        internal static string TimeSpanSeparator {
+            get {
+                return ResourceManager.GetString("TimeSpanSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to year.
         /// </summary>
         internal static string TimeSpanYear {
@@ -192,6 +273,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TimeSpanYears {
             get {
                 return ResourceManager.GetString("TimeSpanYears", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to years,year,yrs,yr,y.
+        /// </summary>
+        internal static string TimeSpanYearStrings {
+            get {
+                return ResourceManager.GetString("TimeSpanYearStrings", resourceCulture);
             }
         }
     }

@@ -97,7 +97,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom Handler\t{0}.
+        ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string ComHandlerAction {
             get {
@@ -178,7 +178,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send an e-mail\t{1} {0}.
+        ///   Looks up a localized string similar to {1} {0}.
         /// </summary>
         internal static string EmailAction {
             get {
@@ -196,7 +196,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start a program\t{0} {1}.
+        ///   Looks up a localized string similar to {0} {1}.
         /// </summary>
         internal static string ExecAction {
             get {
@@ -331,7 +331,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show a message\t{0}.
+        ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string ShowMessageAction {
             get {

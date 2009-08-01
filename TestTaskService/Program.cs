@@ -5,8 +5,10 @@ namespace TestTaskService
 {
 	class Program
 	{
+		[STAThread]
 		static void Main(string[] args)
 		{
+			System.Windows.Forms.Application.EnableVisualStyles(); 
 			LongTest();
 		}
 
@@ -208,6 +210,7 @@ namespace TestTaskService
 				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
 			Form1 frm = new Form1();
+			frm.taskPropertiesControl1.Editable = true;
 			frm.taskPropertiesControl1.SetTask(runningTask);
 			frm.ShowDialog();
 			tf.DeleteTask("Test");

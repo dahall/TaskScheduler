@@ -130,7 +130,7 @@
     <value>Display a message</value>
   </data>
   <data name="ComHandlerAction" xml:space="preserve">
-    <value>Custom Handler\t{0}</value>
+    <value>{0}</value>
     <comment>0 = Class GUID; 1 = Data; 2 = Id</comment>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
@@ -158,14 +158,14 @@
     <value>Wednesday</value>
   </data>
   <data name="EmailAction" xml:space="preserve">
-    <value>Send an e-mail\t{1} {0}</value>
+    <value>{1} {0}</value>
     <comment>0 = Subject; 1 = To; 2 = Cc, 3 = Bcc, 4 = From, 5 = ReplyTo, 6 = Body, 7 = Server, 8 = Id</comment>
   </data>
   <data name="EndSentence" xml:space="preserve">
     <value>.</value>
   </data>
   <data name="ExecAction" xml:space="preserve">
-    <value>Start a program\t{0} {1}</value>
+    <value>{0} {1}</value>
     <comment>0 = Executable Path; 1 = Arguments; 2 = WorkingDirectory; 3 = Id</comment>
   </data>
   <data name="ListSeparator" xml:space="preserve">
@@ -211,7 +211,7 @@
     <value>September</value>
   </data>
   <data name="ShowMessageAction" xml:space="preserve">
-    <value>Show a message\t{0}</value>
+    <value>{0}</value>
     <comment>0 = Title; 1 = MessageBody; 2 = Id</comment>
   </data>
   <data name="TriggerAnyUser" xml:space="preserve">

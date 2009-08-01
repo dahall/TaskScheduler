@@ -1483,13 +1483,15 @@ namespace Microsoft.Win32.TaskScheduler
 		internal V1Interop.ITask v1Task;
 		private V2Interop.IRegisteredTask v2Task;
 
-		internal Task(TaskScheduler.V1Interop.ITask iTask)
+		internal Task(TaskService svc, TaskScheduler.V1Interop.ITask iTask)
 		{
+			this.TaskService = svc;
 			v1Task = iTask;
 		}
 
-		internal Task(TaskScheduler.V2Interop.IRegisteredTask iTask)
+		internal Task(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
 		{
+			this.TaskService = svc;
 			v2Task = iTask;
 		}
 
@@ -1637,6 +1639,12 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the <see cref="TaskService"/> that manages this task.
+		/// </summary>
+		/// <value>The task service.</value>
+		public TaskService TaskService { get; private set; }
+
+		/// <summary>
 		/// Runs the registered task immediately.
 		/// </summary>
 		/// <param name="parameters">The parameters used as values in the task actions.</param>
@@ -1644,10 +1652,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(this.v2Task, v2Task.Run(parameters));
+				return new RunningTask(this.TaskService, this.v2Task, v2Task.Run(parameters));
 
 			v1Task.Run();
-			return new RunningTask(this.v1Task);
+			return new RunningTask(this.TaskService, this.v1Task);
 		}
 
 		/// <summary>
@@ -1661,7 +1669,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(this.v2Task, v2Task.RunEx(parameters, (int)flags, sessionID, user));
+				return new RunningTask(this.TaskService, this.v2Task, v2Task.RunEx(parameters, (int)flags, sessionID, user));
 			throw new NotV1SupportedException();
 		}
 
@@ -1838,12 +1846,14 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private TaskScheduler.V2Interop.IRunningTask v2RunningTask;
 
-		internal RunningTask(V2Interop.IRegisteredTask iTask, V2Interop.IRunningTask iRunningTask) : base(iTask)
+		internal RunningTask(TaskService svc, V2Interop.IRegisteredTask iTask, V2Interop.IRunningTask iRunningTask)
+			: base(svc, iTask)
 		{
 			v2RunningTask = iRunningTask;
 		}
 
-		internal RunningTask(V1Interop.ITask iTask) : base(iTask)
+		internal RunningTask(TaskService svc, V1Interop.ITask iTask)
+			: base(svc, iTask)
 		{
 		}
 

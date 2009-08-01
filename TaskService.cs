@@ -95,7 +95,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
 		public TaskFolder GetFolder(string folderName)
 		{
-			return v2 ? new TaskFolder(v2TaskService.GetFolder(folderName)) : new TaskFolder(v1TaskScheduler);
+			return v2 ? new TaskFolder(this, v2TaskService.GetFolder(folderName)) : new TaskFolder(this);
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="RunningTaskCollection"/> instance with the list of running tasks.</returns>
 		public RunningTaskCollection GetRunningTasks(bool includeHidden)
 		{
-			return v2 ? new RunningTaskCollection(v2TaskService, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(v1TaskScheduler);
+			return v2 ? new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(this);
 		}
 
 		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)
@@ -144,13 +144,13 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				V2Interop.IRegisteredTask iTask = GetTask(this.v2TaskService, taskPath);
 				if (iTask != null)
-					t = new Task(iTask);
+					t = new Task(this, iTask);
 			}
 			else
 			{
 				V1Interop.ITask iTask = GetTask(this.v1TaskScheduler, taskPath);
 				if (iTask != null)
-					t = new Task(iTask);
+					t = new Task(this, iTask);
 			}
 			return t;
 		}
@@ -172,7 +172,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates a new task, registers the taks, and returns the instance.
 		/// </summary>
-		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
 		/// <param name="action">The <see cref="Action"/> to determine what happens when the task is triggered.</param>
 		/// <returns>A <see cref="Task"/> instance of the registered task.</returns>
@@ -210,7 +210,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the name of the domain to which the <see cref="TargetServer"/> computer is connected.
 		/// </summary>
-		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedDomain
 		{
 			get
@@ -227,7 +226,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the name of the user that is connected to the Task Scheduler service.
 		/// </summary>
-		/// <exception cref="NotV1SupportedException">Thrown when called against Task Scheduler 1.0.</exception>
 		public string ConnectedUser
 		{
 			get
