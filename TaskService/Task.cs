@@ -261,7 +261,7 @@ namespace Microsoft.Win32.TaskScheduler
 			System.Runtime.Serialization.Formatters.Binary.BinaryFormatter b = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 			System.IO.MemoryStream stream = new System.IO.MemoryStream();
 			b.Serialize(stream, value);
-			v1Task.SetWorkItemData((ushort)stream.Length, stream.GetBuffer());
+			v1Task.SetWorkItemData((ushort)stream.Length, stream.ToArray());
 		}
 
 		/// <summary>

@@ -364,7 +364,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFF";
+		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 
 		/// <summary>
 		/// Gets or sets the date and time when the trigger is activated.
