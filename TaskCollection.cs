@@ -410,7 +410,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 				{
 					V2Interop.IRunningTask irt = v2Coll[++index];
-					return new RunningTask(svc, TaskService.GetTask(svc.v2TaskService, irt.Path + irt.Name), irt);
+					return new RunningTask(svc, TaskService.GetTask(svc.v2TaskService, irt.Path), irt);
 				}
 
 				int i = 0;
