@@ -270,10 +270,10 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime EndDate
 		{
-			get { return this.EndYear == 0 ? DateTime.MinValue : new DateTime(this.EndYear, this.EndMonth, this.EndDay); }
+			get { return this.EndYear == 0 ? DateTime.MaxValue : new DateTime(this.EndYear, this.EndMonth, this.EndDay); }
 			set
 			{
-				if (value != DateTime.MinValue)
+				if (value != DateTime.MaxValue)
 				{
 					this.EndYear = (ushort)value.Year;
 					this.EndMonth = (ushort)value.Month;

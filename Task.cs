@@ -1469,7 +1469,6 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 			}
 		}
-
 	}
 
 	#endregion
@@ -1510,18 +1509,18 @@ namespace Microsoft.Win32.TaskScheduler
 			TimeSpan span = TimeSpan.Zero;
 			if (!string.IsNullOrEmpty(input))
 			{
-				System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(input, "P(?:(?<Y>[0-9]*)Y)?(?:(?<Mo>[0-9]*)M)?(?:(?<D>[0-9]*)D)?T(?:(?<H>[0-9]*)H)?(?:(?<M>[0-9]*)M)?(?:(?<S>[0-9]*)S)?", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline | System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
+				System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(input, @"P(?:(?<Y>\d+)Y)?(?:(?<Mo>\d+)M)?(?:(?<D>\d+)D)?(?:T(?:(?<H>\d+)H)?(?:(?<M>\d+)M)?(?:(?<S>\d+)S)?)?", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline | System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
 				if (m.Success)
 				{
 					DateTime now = DateTime.Now;
-					int years = string.IsNullOrEmpty(m.Groups["Y"].Value) ? 0 : Int32.Parse(m.Groups["Y"].Value);
-					int months = string.IsNullOrEmpty(m.Groups["Mo"].Value) ? 0 : Int32.Parse(m.Groups["Mo"].Value);
-					int days = string.IsNullOrEmpty(m.Groups["D"].Value) ? 0 : Int32.Parse(m.Groups["D"].Value);
+					int years = m.Groups["Y"].Success ? Int32.Parse(m.Groups["Y"].Value) : 0;
+					int months = m.Groups["Mo"].Success ? Int32.Parse(m.Groups["Mo"].Value) : 0;
+					int days = m.Groups["D"].Success ? Int32.Parse(m.Groups["D"].Value) : 0;
 					if (years > 0 || months > 0)
 						days += (now - new DateTime(now.Year + years + (now.Month + months) / 12, (now.Month + months) % 12, 1)).Days;
-					int hours = string.IsNullOrEmpty(m.Groups["H"].Value) ? 0 : Int32.Parse(m.Groups["H"].Value);
-					int minutes = string.IsNullOrEmpty(m.Groups["M"].Value) ? 0 : Int32.Parse(m.Groups["M"].Value);
-					int seconds = string.IsNullOrEmpty(m.Groups["S"].Value) ? 0 : Int32.Parse(m.Groups["S"].Value);
+					int hours = m.Groups["H"].Success ? Int32.Parse(m.Groups["H"].Value) : 0;
+					int minutes = m.Groups["M"].Success ? Int32.Parse(m.Groups["M"].Value) : 0;
+					int seconds = m.Groups["S"].Success ? Int32.Parse(m.Groups["S"].Value) : 0;
 					span = new TimeSpan(days, hours, minutes, seconds);
 				}
 			}
@@ -1534,7 +1533,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			System.Text.StringBuilder sb = new System.Text.StringBuilder("P", 20);
 			if (span.Days > 0) sb.AppendFormat("{0}D", span.Days);
-			sb.Append('T');
+			if (span.TotalDays - Math.Truncate(span.TotalDays) != 0) sb.Append('T');
 			if (span.Hours > 0) sb.AppendFormat("{0}H", span.Hours);
 			if (span.Minutes > 0) sb.AppendFormat("{0}M", span.Minutes);
 			if (span.Seconds > 0) sb.AppendFormat("{0}S", span.Seconds);
