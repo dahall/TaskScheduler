@@ -34,6 +34,24 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Copies current <see cref="NamedValueCollection"/> to another.
+		/// </summary>
+		/// <param name="destCollection">The destination collection.</param>
+		public void CopyTo(NamedValueCollection destCollection)
+		{
+			if (v2Coll != null)
+			{
+				for (int i = 1; i <= this.Count; i++)
+					destCollection.Add(v2Coll[i].Name, v2Coll[i].Value);
+			}
+			else
+			{
+				foreach (var item in unboundDict)
+					destCollection.Add(item.Key, item.Value);
+			}
+		}
+
+		/// <summary>
 		/// Releases all resources used by this class.
 		/// </summary>
 		public void Dispose()
