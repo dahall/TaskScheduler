@@ -129,7 +129,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
 		{
 			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
-			return iSvc.Activate(name, ref ITaskGuid);
+			try { return iSvc.Activate(name, ref ITaskGuid); } catch {}
+			return null;
 		}
 
 		/// <summary>
