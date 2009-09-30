@@ -104,7 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// Provides the common properties that are inherited by all trigger classes.
+	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="TriggerCollection.Add"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
 	public abstract class Trigger : IDisposable, ICloneable
 	{
@@ -769,6 +769,10 @@ namespace Microsoft.Win32.TaskScheduler
 				nvc.Bind(((V2Interop.IEventTrigger)v2Trigger).ValueQueries);
 		}
 
+		/// <summary>
+		/// Copies the properties from another <see cref="Trigger"/> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="ITriggerDelay"/> interface.
+		/// </summary>
+		/// <param name="sourceTrigger">The source <see cref="Trigger"/>.</param>
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);

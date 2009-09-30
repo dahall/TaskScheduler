@@ -65,7 +65,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Internal constructor
 			/// </summary>
-			/// <param name="ts">ITaskScheduler instance</param>
+			/// <param name="svc">TaskService instance</param>
 			internal V1TaskEnumerator(TaskService svc)
 			{
 				this.svc = svc;
