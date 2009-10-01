@@ -76,8 +76,8 @@
 			this.taskWakeToRunCheck = new System.Windows.Forms.CheckBox();
 			this.taskDisallowStartIfOnBatteriesCheck = new System.Windows.Forms.CheckBox();
 			this.idleConditionGroupBox = new System.Windows.Forms.GroupBox();
-			this.taskIdleWaitTimeoutCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.taskIdleDurationCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskIdleWaitTimeoutCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskIdleDurationCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartOnIdleCheck = new System.Windows.Forms.CheckBox();
 			this.taskStopOnIdleEndCheck = new System.Windows.Forms.CheckBox();
 			this.taskIdleDelayLabel = new System.Windows.Forms.Label();
@@ -96,9 +96,9 @@
 			this.taskStartWhenAvailableCheck = new System.Windows.Forms.CheckBox();
 			this.taskAllowDemandStartCheck = new System.Windows.Forms.CheckBox();
 			this.settingsIntroLabel = new System.Windows.Forms.Label();
-			this.taskDeleteAfterCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.taskExecutionTimeLimitCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.taskRestartIntervalCombo = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.taskDeleteAfterCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.historyTab = new System.Windows.Forms.TabPage();
 			this.historyListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
@@ -774,8 +774,8 @@
 		private System.Windows.Forms.TextBox taskDescText;
 		private System.Windows.Forms.GroupBox powerConditionGroupBox;
 		private System.Windows.Forms.GroupBox idleConditionGroupBox;
-		private TimeSpanPicker taskIdleWaitTimeoutCombo;
-		private TimeSpanPicker taskIdleDurationCombo;
+		private System.Windows.Forms.TimeSpanPicker taskIdleWaitTimeoutCombo;
+		private System.Windows.Forms.TimeSpanPicker taskIdleDurationCombo;
 		private System.Windows.Forms.CheckBox taskRestartOnIdleCheck;
 		private System.Windows.Forms.CheckBox taskStopOnIdleEndCheck;
 		private System.Windows.Forms.Label taskIdleDelayLabel;
@@ -796,9 +796,9 @@
 		private System.Windows.Forms.CheckBox taskStartWhenAvailableCheck;
 		private System.Windows.Forms.CheckBox taskAllowDemandStartCheck;
 		private System.Windows.Forms.Label settingsIntroLabel;
-		private TimeSpanPicker taskDeleteAfterCombo;
-		private TimeSpanPicker taskExecutionTimeLimitCombo;
-		private TimeSpanPicker taskRestartIntervalCombo;
+		private System.Windows.Forms.TimeSpanPicker taskDeleteAfterCombo;
+		private System.Windows.Forms.TimeSpanPicker taskExecutionTimeLimitCombo;
+		private System.Windows.Forms.TimeSpanPicker taskRestartIntervalCombo;
 		private System.Windows.Forms.NumericUpDown taskRestartCountText;
 		private System.Windows.Forms.Label taskRestartAttemptTimesLabel;
 		private System.Windows.Forms.ListView historyListView;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,114 +117,125 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnyConnection" xml:space="preserve">
-    <value>Any connection</value>
-    <comment>Default item for displaying status of Networking setting</comment>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="introLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 13</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>Disabled</value>
+  <data name="introLabel.Text" xml:space="preserve">
+    <value>Si deve specificare quali azioni si svolgono questo compito.</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>Enabled</value>
+  <data name="execProgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
   </data>
-  <data name="TimeSpanDay" xml:space="preserve">
-    <value>day</value>
+  <data name="execProgLabel.Text" xml:space="preserve">
+    <value>Programma/script:</value>
   </data>
-  <data name="TimeSpanDays" xml:space="preserve">
-    <value>days</value>
+  <data name="actionsCombo.Items" xml:space="preserve">
+    <value>Avviare un programma</value>
   </data>
-  <data name="TimeSpanDayStrings" xml:space="preserve">
-    <value>days,day,d</value>
+  <data name="actionsCombo.Items1" xml:space="preserve">
+    <value>Invia una e-mail</value>
   </data>
-  <data name="TimeSpanHour" xml:space="preserve">
-    <value>hour</value>
+  <data name="actionsCombo.Items2" xml:space="preserve">
+    <value>Visualizzare un messaggio</value>
   </data>
-  <data name="TimeSpanHours" xml:space="preserve">
-    <value>hours</value>
+  <data name="actionsCombo.Items3" xml:space="preserve">
+    <value>Custom gestore</value>
   </data>
-  <data name="TimeSpanHourStrings" xml:space="preserve">
-    <value>hours,hour,hrs,hr,h</value>
+  <data name="execProgBrowseBtn.Text" xml:space="preserve">
+    <value>Sfoglia...</value>
   </data>
-  <data name="TimeSpanMinute" xml:space="preserve">
-    <value>minute</value>
+  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
   </data>
-  <data name="TimeSpanMinutes" xml:space="preserve">
-    <value>minutes</value>
+  <data name="execDirLabel.Text" xml:space="preserve">
+    <value>Avvio in (opzionale):</value>
   </data>
-  <data name="TimeSpanMinuteStrings" xml:space="preserve">
-    <value>minutes,minute,mins,min,m</value>
+  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 13</value>
   </data>
-  <data name="TimeSpanMonth" xml:space="preserve">
-    <value>month</value>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value>Aggiungi argomenti (opzionale):</value>
   </data>
-  <data name="TimeSpanMonths" xml:space="preserve">
-    <value>months</value>
+  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
+    <value>Sfoglia...</value>
   </data>
-  <data name="TimeSpanMonthStrings" xml:space="preserve">
-    <value>months,month,mos,mo,m</value>
+  <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
   </data>
-  <data name="TimeSpanSecond" xml:space="preserve">
-    <value>second</value>
+  <data name="emailSMTPLabel.Text" xml:space="preserve">
+    <value>Server SMTP:</value>
   </data>
-  <data name="TimeSpanSeconds" xml:space="preserve">
-    <value>seconds</value>
+  <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
   </data>
-  <data name="TimeSpanSecondStrings" xml:space="preserve">
-    <value>seconds,second,secs,sec,s</value>
+  <data name="emailAttachmentLabel.Text" xml:space="preserve">
+    <value>Allegato:</value>
   </data>
-  <data name="TimeSpanYear" xml:space="preserve">
-    <value>year</value>
+  <data name="emailTextLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
-  <data name="TimeSpanYears" xml:space="preserve">
-    <value>years</value>
+  <data name="emailTextLabel.Text" xml:space="preserve">
+    <value>Testo:</value>
   </data>
-  <data name="TimeSpanYearStrings" xml:space="preserve">
-    <value>years,year,yrs,yr,y</value>
+  <data name="emailSubjectLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
   </data>
-  <data name="TimeSpanSeparator" xml:space="preserve">
-    <value>, </value>
+  <data name="emailSubjectLabel.Text" xml:space="preserve">
+    <value>Oggetto:</value>
   </data>
-  <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Do not wait</value>
+  <data name="emailToLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
   </data>
-  <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Immediately</value>
+  <data name="emailToLabel.Text" xml:space="preserve">
+    <value>A:</value>
   </data>
-  <data name="Last" xml:space="preserve">
-    <value>Last</value>
-    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  <data name="emailFromLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 13</value>
   </data>
-  <data name="TimeSpanIndefinitely" xml:space="preserve">
-    <value>Indefinitely</value>
+  <data name="emailFromLabel.Text" xml:space="preserve">
+    <value>Da:</value>
   </data>
-  <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>At startup</value>
+  <data name="msgMsgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
   </data>
-  <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>On an event</value>
+  <data name="msgMsgLabel.Text" xml:space="preserve">
+    <value>Messaggio:</value>
   </data>
-  <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>On idle</value>
+  <data name="msgTitleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
   </data>
-  <data name="TriggerTypeLogon" xml:space="preserve">
-    <value>At log on</value>
+  <data name="msgTitleLabel.Text" xml:space="preserve">
+    <value>Titolo:</value>
   </data>
-  <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>At task creation/modification</value>
+  <data name="msgIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 13</value>
   </data>
-  <data name="TriggerTypeSchedule" xml:space="preserve">
-    <value>On schedule</value>
+  <data name="msgIntroLabel.Text" xml:space="preserve">
+    <value>Questa azione viene visualizzata una finestra di messaggio sul desktop.</value>
   </data>
-  <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>On connection to a user session</value>
+  <data name="comDataLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
   </data>
-  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
-    <value>On disconnect from a user session</value>
+  <data name="comDataLabel.Text" xml:space="preserve">
+    <value>Dati:</value>
   </data>
-  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
-    <value>On workstation lock</value>
+  <data name="comIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 13</value>
   </data>
-  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
-    <value>On workstation unlock</value>
+  <data name="comIntroLabel.Text" xml:space="preserve">
+    <value>Questa azione offre un custom gestore COM.</value>
+  </data>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="actionsLabel.Text" xml:space="preserve">
+    <value>Azione:</value>
   </data>
 </root>

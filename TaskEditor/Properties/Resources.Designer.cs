@@ -169,6 +169,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indefinitely.
+        /// </summary>
+        internal static string TimeSpanIndefinitely {
+            get {
+                return ResourceManager.GetString("TimeSpanIndefinitely", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to minute.
         /// </summary>
         internal static string TimeSpanMinute {
@@ -282,6 +291,96 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TimeSpanYearStrings {
             get {
                 return ResourceManager.GetString("TimeSpanYearStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At startup.
+        /// </summary>
+        internal static string TriggerTypeBoot {
+            get {
+                return ResourceManager.GetString("TriggerTypeBoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On an event.
+        /// </summary>
+        internal static string TriggerTypeEvent {
+            get {
+                return ResourceManager.GetString("TriggerTypeEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On idle.
+        /// </summary>
+        internal static string TriggerTypeIdle {
+            get {
+                return ResourceManager.GetString("TriggerTypeIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At log on.
+        /// </summary>
+        internal static string TriggerTypeLogon {
+            get {
+                return ResourceManager.GetString("TriggerTypeLogon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At task creation/modification.
+        /// </summary>
+        internal static string TriggerTypeRegistration {
+            get {
+                return ResourceManager.GetString("TriggerTypeRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On schedule.
+        /// </summary>
+        internal static string TriggerTypeSchedule {
+            get {
+                return ResourceManager.GetString("TriggerTypeSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On connection to a user session.
+        /// </summary>
+        internal static string TriggerTypeSessionConnect {
+            get {
+                return ResourceManager.GetString("TriggerTypeSessionConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On disconnect from a user session.
+        /// </summary>
+        internal static string TriggerTypeSessionDisconnect {
+            get {
+                return ResourceManager.GetString("TriggerTypeSessionDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On workstation lock.
+        /// </summary>
+        internal static string TriggerTypeWorkstationLock {
+            get {
+                return ResourceManager.GetString("TriggerTypeWorkstationLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On workstation unlock.
+        /// </summary>
+        internal static string TriggerTypeWorkstationUnlock {
+            get {
+                return ResourceManager.GetString("TriggerTypeWorkstationUnlock", resourceCulture);
             }
         }
     }

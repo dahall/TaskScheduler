@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Win32.TaskScheduler
 {
-	partial class TriggerEditDialog
+	internal partial class TriggerEditDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -92,10 +92,10 @@
 			this.eventCustomRadio = new System.Windows.Forms.RadioButton();
 			this.eventBasicRadio = new System.Windows.Forms.RadioButton();
 			this.advSettingsGroup = new System.Windows.Forms.GroupBox();
-			this.stopIfRunsSpan = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.durationSpan = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.repeatSpan = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
-			this.delaySpan = new Microsoft.Win32.TaskScheduler.TimeSpanPicker();
+			this.stopIfRunsSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.delaySpan = new System.Windows.Forms.TimeSpanPicker();
 			this.expireDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.activateDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.durationLabel = new System.Windows.Forms.Label();
@@ -136,20 +136,9 @@
 			// 
 			this.triggerTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.triggerTypeCombo.FormattingEnabled = true;
-			this.triggerTypeCombo.Items.AddRange(new object[] {
-            resources.GetString("triggerTypeCombo.Items"),
-            resources.GetString("triggerTypeCombo.Items1"),
-            resources.GetString("triggerTypeCombo.Items2"),
-            resources.GetString("triggerTypeCombo.Items3"),
-            resources.GetString("triggerTypeCombo.Items4"),
-            resources.GetString("triggerTypeCombo.Items5"),
-            resources.GetString("triggerTypeCombo.Items6"),
-            resources.GetString("triggerTypeCombo.Items7"),
-            resources.GetString("triggerTypeCombo.Items8"),
-            resources.GetString("triggerTypeCombo.Items9")});
 			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.Name = "triggerTypeCombo";
-			this.triggerTypeCombo.SelectedIndexChanged += new System.EventHandler(this.triggerTypeCombo_SelectedIndexChanged);
+			this.triggerTypeCombo.SelectedValueChanged += new System.EventHandler(this.triggerTypeCombo_SelectedValueChanged);
 			// 
 			// groupBox1
 			// 
@@ -169,6 +158,7 @@
 			this.settingsTabControl.Name = "settingsTabControl";
 			this.settingsTabControl.SelectedIndex = 0;
 			this.settingsTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+			this.settingsTabControl.TabStop = false;
 			// 
 			// scheduleTab
 			// 
@@ -214,6 +204,7 @@
 			this.schedTabControl.Name = "schedTabControl";
 			this.schedTabControl.SelectedIndex = 0;
 			this.schedTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+			this.schedTabControl.TabStop = false;
 			// 
 			// oneTimeTab
 			// 
@@ -358,34 +349,47 @@
 			// 
 			// monthlyDaysDropDown
 			// 
+			this.monthlyDaysDropDown.AllowResizeDropDown = true;
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyDaysDropDown.CheckedFlagValue = ((long)(0));
-			this.monthlyDaysDropDown.DropDownWidth = 296;
+			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyDaysDropDown.DataSource = this.monthlyDaysDropDown.Items;
+			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
 			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
 			// 
 			// monthlyOnDOWDropDown
 			// 
+			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
 			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
 			this.monthlyOnDOWDropDown.CheckedFlagValue = ((long)(0));
-			this.monthlyOnDOWDropDown.DropDownWidth = 159;
+			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyOnDOWDropDown.DataSource = this.monthlyOnDOWDropDown.Items;
+			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
 			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
 			// 
 			// monthlyOnWeekDropDown
 			// 
+			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
 			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnWeekDropDown.CheckedFlagValue = ((long)(0));
-			this.monthlyOnWeekDropDown.DropDownWidth = 119;
+			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyOnWeekDropDown.DataSource = this.monthlyOnWeekDropDown.Items;
+			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
 			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
 			// 
 			// monthlyMonthsDropDown
 			// 
+			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
 			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
 			this.monthlyMonthsDropDown.CheckedFlagValue = ((long)(0));
+			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyMonthsDropDown.DataSource = this.monthlyMonthsDropDown.Items;
+			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
 			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
 			// 
@@ -464,6 +468,7 @@
 			resources.ApplyResources(this.logonChgUserBtn, "logonChgUserBtn");
 			this.logonChgUserBtn.Name = "logonChgUserBtn";
 			this.logonChgUserBtn.UseVisualStyleBackColor = true;
+			this.logonChgUserBtn.Click += new System.EventHandler(this.logonChgUserBtn_Click);
 			// 
 			// logonUserLabel
 			// 
@@ -473,16 +478,16 @@
 			// logonSpecUserRadio
 			// 
 			resources.ApplyResources(this.logonSpecUserRadio, "logonSpecUserRadio");
-			this.logonSpecUserRadio.Checked = true;
 			this.logonSpecUserRadio.Name = "logonSpecUserRadio";
-			this.logonSpecUserRadio.TabStop = true;
 			this.logonSpecUserRadio.UseVisualStyleBackColor = true;
+			this.logonSpecUserRadio.CheckedChanged += new System.EventHandler(this.logonAnyUserRadio_CheckedChanged);
 			// 
 			// logonAnyUserRadio
 			// 
 			resources.ApplyResources(this.logonAnyUserRadio, "logonAnyUserRadio");
 			this.logonAnyUserRadio.Name = "logonAnyUserRadio";
 			this.logonAnyUserRadio.UseVisualStyleBackColor = true;
+			this.logonAnyUserRadio.CheckedChanged += new System.EventHandler(this.logonAnyUserRadio_CheckedChanged);
 			// 
 			// startupTab
 			// 
@@ -597,24 +602,28 @@
 			resources.ApplyResources(this.stopIfRunsSpan, "stopIfRunsSpan");
 			this.stopIfRunsSpan.Name = "stopIfRunsSpan";
 			this.stopIfRunsSpan.Value = System.TimeSpan.Parse("00:00:00");
+			this.stopIfRunsSpan.ValueChanged += new System.EventHandler(this.stopIfRunsSpan_ValueChanged);
 			// 
 			// durationSpan
 			// 
 			resources.ApplyResources(this.durationSpan, "durationSpan");
 			this.durationSpan.Name = "durationSpan";
 			this.durationSpan.Value = System.TimeSpan.Parse("00:00:00");
+			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
 			// 
 			// repeatSpan
 			// 
 			resources.ApplyResources(this.repeatSpan, "repeatSpan");
 			this.repeatSpan.Name = "repeatSpan";
 			this.repeatSpan.Value = System.TimeSpan.Parse("00:00:00");
+			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
 			// 
 			// delaySpan
 			// 
 			resources.ApplyResources(this.delaySpan, "delaySpan");
 			this.delaySpan.Name = "delaySpan";
 			this.delaySpan.Value = System.TimeSpan.Parse("00:00:00");
+			this.delaySpan.ValueChanged += new System.EventHandler(this.delaySpan_ValueChanged);
 			// 
 			// expireDatePicker
 			// 
@@ -652,30 +661,35 @@
 			resources.ApplyResources(this.expireCheckBox, "expireCheckBox");
 			this.expireCheckBox.Name = "expireCheckBox";
 			this.expireCheckBox.UseVisualStyleBackColor = true;
+			this.expireCheckBox.CheckedChanged += new System.EventHandler(this.expireCheckBox_CheckedChanged);
 			// 
 			// activateCheckBox
 			// 
 			resources.ApplyResources(this.activateCheckBox, "activateCheckBox");
 			this.activateCheckBox.Name = "activateCheckBox";
 			this.activateCheckBox.UseVisualStyleBackColor = true;
+			this.activateCheckBox.CheckedChanged += new System.EventHandler(this.activateCheckBox_CheckedChanged);
 			// 
 			// stopIfRunsCheckBox
 			// 
 			resources.ApplyResources(this.stopIfRunsCheckBox, "stopIfRunsCheckBox");
 			this.stopIfRunsCheckBox.Name = "stopIfRunsCheckBox";
 			this.stopIfRunsCheckBox.UseVisualStyleBackColor = true;
+			this.stopIfRunsCheckBox.CheckedChanged += new System.EventHandler(this.stopIfRunsCheckBox_CheckedChanged);
 			// 
 			// repeatCheckBox
 			// 
 			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
 			this.repeatCheckBox.Name = "repeatCheckBox";
 			this.repeatCheckBox.UseVisualStyleBackColor = true;
+			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
 			// 
 			// delayCheckBox
 			// 
 			resources.ApplyResources(this.delayCheckBox, "delayCheckBox");
 			this.delayCheckBox.Name = "delayCheckBox";
 			this.delayCheckBox.UseVisualStyleBackColor = true;
+			this.delayCheckBox.CheckedChanged += new System.EventHandler(this.delayCheckBox_CheckedChanged);
 			// 
 			// cancelBtn
 			// 
@@ -769,15 +783,15 @@
 		private System.Windows.Forms.CheckBox activateCheckBox;
 		private System.Windows.Forms.Label durationLabel;
 		private FullDateTimePicker schedStartDatePicker;
-		private TimeSpanPicker delaySpan;
+		private System.Windows.Forms.TimeSpanPicker delaySpan;
 		private FullDateTimePicker expireDatePicker;
 		private FullDateTimePicker activateDatePicker;
 		private System.Windows.Forms.NumericUpDown dailyRecurNumUpDn;
 		private System.Windows.Forms.Label dailyDaysLabel;
 		private System.Windows.Forms.Label dailyRecurLabel;
-		private TimeSpanPicker stopIfRunsSpan;
-		private TimeSpanPicker durationSpan;
-		private TimeSpanPicker repeatSpan;
+		private System.Windows.Forms.TimeSpanPicker stopIfRunsSpan;
+		private System.Windows.Forms.TimeSpanPicker durationSpan;
+		private System.Windows.Forms.TimeSpanPicker repeatSpan;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.CheckBox weeklySunCheck;
 		private System.Windows.Forms.CheckBox weeklyMonCheck;

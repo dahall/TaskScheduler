@@ -8,7 +8,6 @@ namespace TestTaskService
 		[STAThread]
 		static void Main(string[] args)
 		{
-			System.Windows.Forms.Application.EnableVisualStyles(); 
 			LongTest();
 		}
 
@@ -23,7 +22,9 @@ namespace TestTaskService
 			td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 			// Create a trigger that will fire the task at this time every other day
-			td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+			DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+			dt.Repetition.Interval = TimeSpan.FromHours(1);
+			dt.Repetition.Duration = TimeSpan.FromHours(4);
 
 			// Create an action that will launch Notepad whenever the trigger fires
 			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
@@ -38,6 +39,8 @@ namespace TestTaskService
 			t = ts.GetTask(taskName);
 			td = t.Definition;
 			td.Triggers.Add(new BootTrigger { Enabled = false });
+			td.Principal.LogonType = TaskLogonType.ServiceAccount;
+			td.Principal.UserId = "SYSTEM";
 			ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, null, null,
 				td.Principal.LogonType, null);
 
@@ -48,6 +51,8 @@ namespace TestTaskService
 
 		static void LongTest()
 		{
+			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
 			TaskService ts = new TaskService();
 			Version ver = ts.HighestSupportedVersion;
 			bool newVer = (ver == new Version(1, 2));
@@ -100,13 +105,13 @@ namespace TestTaskService
 			
 			TaskDefinition td = ts.NewTask();
 			td.Data = "Your data";
-			td.Principal.UserId = "AMERICAS\\dahall";
+			td.Principal.UserId = user;
 			td.Principal.LogonType = TaskLogonType.InteractiveToken;
 			td.RegistrationInfo.Author = "dahall";
 			td.RegistrationInfo.Description = "Does something";
 			td.RegistrationInfo.Documentation = "Don't pretend this is real.";
 			td.Settings.DisallowStartIfOnBatteries = true;
-			td.Settings.Enabled = true;
+			td.Settings.Enabled = false;
 			td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(1);
 			td.Settings.Hidden = false;
 			td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
@@ -162,7 +167,7 @@ namespace TestTaskService
 
 			LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
 			if (newVer) lTrigger.Delay = TimeSpan.FromMinutes(15);
-			if (newVer) lTrigger.UserId = "AMERICAS\\dahall";
+			if (newVer) lTrigger.UserId = user;
 			if (newVer) lTrigger.Repetition.Interval = TimeSpan.FromSeconds(1000);
 
 			MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
@@ -209,9 +214,10 @@ namespace TestTaskService
 			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
 				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
+			System.Windows.Forms.Application.EnableVisualStyles();
 			Form1 frm = new Form1();
+			frm.taskPropertiesControl1.Initialize(runningTask);
 			frm.taskPropertiesControl1.Editable = true;
-			frm.taskPropertiesControl1.SetTask(runningTask);
 			frm.ShowDialog();
 			tf.DeleteTask("Test");
 		}

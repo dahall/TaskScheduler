@@ -16,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 #if DESIGNER
     [Designer(typeof(CustomComboBoxDesigner))]
 #endif
-	public class CustomComboBox : ComboBox, IPopupControlHost
+	internal class CustomComboBox : ComboBox, IPopupControlHost
     {
         private const uint CBN_CLOSEUP = 8;
         private const uint CBN_DROPDOWN = 7;
@@ -306,16 +306,6 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get { return this.m_bDroppedDown /*&& m_popupCtrl.Visible*/; }
         }
-
-		public new string Text
-		{
-			get { return base.Text; }
-			set
-			{
-				base.Items[0] = value;
-				base.SelectedIndex = 0;
-			}
-		}
 
         /// <summary>
         /// Hides drop-down area of combo box, if shown.
