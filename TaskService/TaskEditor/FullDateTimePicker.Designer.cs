@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Win32.TaskScheduler
 {
-	partial class FullDateTimePicker
+	internal partial class FullDateTimePicker
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FullDateTimePicker));
 			this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
 			this.tableLayoutPanelFullDateTime = new System.Windows.Forms.TableLayoutPanel();
 			this.dateTimePickerTime = new System.Windows.Forms.DateTimePicker();
@@ -37,63 +38,61 @@
 			// 
 			// dateTimePickerDate
 			// 
+			this.dateTimePickerDate.AccessibleDescription = null;
+			this.dateTimePickerDate.AccessibleName = null;
+			resources.ApplyResources(this.dateTimePickerDate, "dateTimePickerDate");
+			this.dateTimePickerDate.BackgroundImage = null;
+			this.dateTimePickerDate.CalendarFont = null;
+			this.dateTimePickerDate.CustomFormat = null;
+			this.dateTimePickerDate.Font = null;
 			this.dateTimePickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateTimePickerDate.Location = new System.Drawing.Point(0, 0);
-			this.dateTimePickerDate.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.dateTimePickerDate.Name = "dateTimePickerDate";
-			this.dateTimePickerDate.Size = new System.Drawing.Size(100, 20);
-			this.dateTimePickerDate.TabIndex = 0;
 			// 
 			// tableLayoutPanelFullDateTime
 			// 
-			this.tableLayoutPanelFullDateTime.AutoSize = true;
-			this.tableLayoutPanelFullDateTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanelFullDateTime.ColumnCount = 3;
-			this.tableLayoutPanelFullDateTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanelFullDateTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanelFullDateTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanelFullDateTime.AccessibleDescription = null;
+			this.tableLayoutPanelFullDateTime.AccessibleName = null;
+			resources.ApplyResources(this.tableLayoutPanelFullDateTime, "tableLayoutPanelFullDateTime");
+			this.tableLayoutPanelFullDateTime.BackgroundImage = null;
 			this.tableLayoutPanelFullDateTime.Controls.Add(this.dateTimePickerDate, 0, 0);
 			this.tableLayoutPanelFullDateTime.Controls.Add(this.dateTimePickerTime, 1, 0);
 			this.tableLayoutPanelFullDateTime.Controls.Add(this.utcCheckBox, 2, 0);
-			this.tableLayoutPanelFullDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanelFullDateTime.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanelFullDateTime.Font = null;
 			this.tableLayoutPanelFullDateTime.Name = "tableLayoutPanelFullDateTime";
-			this.tableLayoutPanelFullDateTime.RowCount = 1;
-			this.tableLayoutPanelFullDateTime.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanelFullDateTime.Size = new System.Drawing.Size(383, 20);
-			this.tableLayoutPanelFullDateTime.TabIndex = 1;
 			// 
 			// dateTimePickerTime
 			// 
+			this.dateTimePickerTime.AccessibleDescription = null;
+			this.dateTimePickerTime.AccessibleName = null;
+			resources.ApplyResources(this.dateTimePickerTime, "dateTimePickerTime");
+			this.dateTimePickerTime.BackgroundImage = null;
+			this.dateTimePickerTime.CalendarFont = null;
+			this.dateTimePickerTime.CustomFormat = null;
+			this.dateTimePickerTime.Font = null;
 			this.dateTimePickerTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-			this.dateTimePickerTime.Location = new System.Drawing.Point(106, 0);
-			this.dateTimePickerTime.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
 			this.dateTimePickerTime.Name = "dateTimePickerTime";
 			this.dateTimePickerTime.ShowUpDown = true;
-			this.dateTimePickerTime.Size = new System.Drawing.Size(100, 20);
-			this.dateTimePickerTime.TabIndex = 1;
 			// 
 			// utcCheckBox
 			// 
-			this.utcCheckBox.AutoSize = true;
-			this.utcCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.utcCheckBox.Location = new System.Drawing.Point(212, 2);
-			this.utcCheckBox.Margin = new System.Windows.Forms.Padding(6, 2, 0, 0);
+			this.utcCheckBox.AccessibleDescription = null;
+			this.utcCheckBox.AccessibleName = null;
+			resources.ApplyResources(this.utcCheckBox, "utcCheckBox");
+			this.utcCheckBox.BackgroundImage = null;
+			this.utcCheckBox.Font = null;
 			this.utcCheckBox.Name = "utcCheckBox";
-			this.utcCheckBox.Size = new System.Drawing.Size(171, 17);
-			this.utcCheckBox.TabIndex = 3;
-			this.utcCheckBox.Text = "Synchronize across time zones";
 			this.utcCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// FullDateTimePicker
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.BackgroundImage = null;
 			this.Controls.Add(this.tableLayoutPanelFullDateTime);
+			this.Font = null;
 			this.Name = "FullDateTimePicker";
-			this.Size = new System.Drawing.Size(383, 20);
 			this.Load += new System.EventHandler(this.FullDateTimePicker_Load);
 			this.RightToLeftChanged += new System.EventHandler(this.FullDateTimePicker_RightToLeftChanged);
 			this.tableLayoutPanelFullDateTime.ResumeLayout(false);

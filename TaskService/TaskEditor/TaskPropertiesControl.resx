@@ -1294,7 +1294,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1318,7 +1318,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1891,7 +1891,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1915,7 +1915,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1939,7 +1939,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3500.643, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>

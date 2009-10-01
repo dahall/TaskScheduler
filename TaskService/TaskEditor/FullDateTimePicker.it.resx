@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,114 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnyConnection" xml:space="preserve">
-    <value>Any connection</value>
-    <comment>Default item for displaying status of Networking setting</comment>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="utcCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 17</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>Disabled</value>
+  <data name="utcCheckBox.Text" xml:space="preserve">
+    <value>Sincronizzare tutti i fusi orari</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>Enabled</value>
+  <data name="tableLayoutPanelFullDateTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 20</value>
   </data>
-  <data name="TimeSpanDay" xml:space="preserve">
-    <value>day</value>
-  </data>
-  <data name="TimeSpanDays" xml:space="preserve">
-    <value>days</value>
-  </data>
-  <data name="TimeSpanDayStrings" xml:space="preserve">
-    <value>days,day,d</value>
-  </data>
-  <data name="TimeSpanHour" xml:space="preserve">
-    <value>hour</value>
-  </data>
-  <data name="TimeSpanHours" xml:space="preserve">
-    <value>hours</value>
-  </data>
-  <data name="TimeSpanHourStrings" xml:space="preserve">
-    <value>hours,hour,hrs,hr,h</value>
-  </data>
-  <data name="TimeSpanMinute" xml:space="preserve">
-    <value>minute</value>
-  </data>
-  <data name="TimeSpanMinutes" xml:space="preserve">
-    <value>minutes</value>
-  </data>
-  <data name="TimeSpanMinuteStrings" xml:space="preserve">
-    <value>minutes,minute,mins,min,m</value>
-  </data>
-  <data name="TimeSpanMonth" xml:space="preserve">
-    <value>month</value>
-  </data>
-  <data name="TimeSpanMonths" xml:space="preserve">
-    <value>months</value>
-  </data>
-  <data name="TimeSpanMonthStrings" xml:space="preserve">
-    <value>months,month,mos,mo,m</value>
-  </data>
-  <data name="TimeSpanSecond" xml:space="preserve">
-    <value>second</value>
-  </data>
-  <data name="TimeSpanSeconds" xml:space="preserve">
-    <value>seconds</value>
-  </data>
-  <data name="TimeSpanSecondStrings" xml:space="preserve">
-    <value>seconds,second,secs,sec,s</value>
-  </data>
-  <data name="TimeSpanYear" xml:space="preserve">
-    <value>year</value>
-  </data>
-  <data name="TimeSpanYears" xml:space="preserve">
-    <value>years</value>
-  </data>
-  <data name="TimeSpanYearStrings" xml:space="preserve">
-    <value>years,year,yrs,yr,y</value>
-  </data>
-  <data name="TimeSpanSeparator" xml:space="preserve">
-    <value>, </value>
-  </data>
-  <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Do not wait</value>
-  </data>
-  <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Immediately</value>
-  </data>
-  <data name="Last" xml:space="preserve">
-    <value>Last</value>
-    <comment>Text for days of month drop down representing last day of specified month.</comment>
-  </data>
-  <data name="TimeSpanIndefinitely" xml:space="preserve">
-    <value>Indefinitely</value>
-  </data>
-  <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>At startup</value>
-  </data>
-  <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>On an event</value>
-  </data>
-  <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>On idle</value>
-  </data>
-  <data name="TriggerTypeLogon" xml:space="preserve">
-    <value>At log on</value>
-  </data>
-  <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>At task creation/modification</value>
-  </data>
-  <data name="TriggerTypeSchedule" xml:space="preserve">
-    <value>On schedule</value>
-  </data>
-  <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>On connection to a user session</value>
-  </data>
-  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
-    <value>On disconnect from a user session</value>
-  </data>
-  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
-    <value>On workstation lock</value>
-  </data>
-  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
-    <value>On workstation unlock</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 20</value>
   </data>
 </root>

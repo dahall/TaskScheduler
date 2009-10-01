@@ -147,36 +147,6 @@
   <data name="&gt;&gt;triggerTypeLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="triggerTypeCombo.Items" xml:space="preserve">
-    <value>On a schedule</value>
-  </data>
-  <data name="triggerTypeCombo.Items1" xml:space="preserve">
-    <value>At logon</value>
-  </data>
-  <data name="triggerTypeCombo.Items2" xml:space="preserve">
-    <value>At startup</value>
-  </data>
-  <data name="triggerTypeCombo.Items3" xml:space="preserve">
-    <value>On idle</value>
-  </data>
-  <data name="triggerTypeCombo.Items4" xml:space="preserve">
-    <value>On an event</value>
-  </data>
-  <data name="triggerTypeCombo.Items5" xml:space="preserve">
-    <value>At task creation/modification</value>
-  </data>
-  <data name="triggerTypeCombo.Items6" xml:space="preserve">
-    <value>On connection to user session</value>
-  </data>
-  <data name="triggerTypeCombo.Items7" xml:space="preserve">
-    <value>On disconnect from user session</value>
-  </data>
-  <data name="triggerTypeCombo.Items8" xml:space="preserve">
-    <value>On workstation lock</value>
-  </data>
-  <data name="triggerTypeCombo.Items9" xml:space="preserve">
-    <value>On workstation unlock</value>
-  </data>
   <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 10</value>
   </data>
@@ -220,7 +190,7 @@
     <value>schedStartDatePicker</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -235,7 +205,7 @@
     <value>2, 133</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -283,7 +253,7 @@
     <value>46, 20</value>
   </data>
   <data name="dailyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;dailyRecurNumUpDn.Name" xml:space="preserve">
     <value>dailyRecurNumUpDn</value>
@@ -340,7 +310,7 @@
     <value>68, 13</value>
   </data>
   <data name="dailyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
     <value>Recur every:</value>
@@ -604,7 +574,7 @@
     <value>412, 46</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -628,7 +598,7 @@
     <value>46, 20</value>
   </data>
   <data name="weeklyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;weeklyRecurNumUpDn.Name" xml:space="preserve">
     <value>weeklyRecurNumUpDn</value>
@@ -655,7 +625,7 @@
     <value>56, 13</value>
   </data>
   <data name="weeklyOnWeeksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
     <value>weeks on:</value>
@@ -685,7 +655,7 @@
     <value>68, 13</value>
   </data>
   <data name="weeklyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
     <value>Recur every:</value>
@@ -766,7 +736,7 @@
     <value>52, 17</value>
   </data>
   <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="monthlyDaysRadio.Text" xml:space="preserve">
     <value>Days:</value>
@@ -796,7 +766,7 @@
     <value>45, 13</value>
   </data>
   <data name="monthlyMonthsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="monthlyMonthsLabel.Text" xml:space="preserve">
     <value>Months:</value>
@@ -820,13 +790,13 @@
     <value>296, 21</value>
   </data>
   <data name="monthlyDaysDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Name" xml:space="preserve">
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -841,13 +811,13 @@
     <value>159, 21</value>
   </data>
   <data name="monthlyOnDOWDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Name" xml:space="preserve">
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -862,13 +832,13 @@
     <value>119, 21</value>
   </data>
   <data name="monthlyOnWeekDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Name" xml:space="preserve">
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -883,13 +853,13 @@
     <value>188, 21</value>
   </data>
   <data name="monthlyMonthsDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Name" xml:space="preserve">
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -952,7 +922,7 @@
     <value>426, 115</value>
   </data>
   <data name="schedGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;schedGroup.Name" xml:space="preserve">
     <value>schedGroup</value>
@@ -979,7 +949,7 @@
     <value>32, 13</value>
   </data>
   <data name="schedStartLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
     <value>Start:</value>
@@ -1009,7 +979,7 @@
     <value>62, 17</value>
   </data>
   <data name="schedMonthlyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="schedMonthlyRadio.Text" xml:space="preserve">
     <value>Monthly</value>
@@ -1039,7 +1009,7 @@
     <value>61, 17</value>
   </data>
   <data name="schedWeeklyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="schedWeeklyRadio.Text" xml:space="preserve">
     <value>Weekly</value>
@@ -1069,7 +1039,7 @@
     <value>48, 17</value>
   </data>
   <data name="schedDailyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="schedDailyRadio.Text" xml:space="preserve">
     <value>Daily</value>
@@ -1177,7 +1147,7 @@
     <value>174, 17</value>
   </data>
   <data name="logonLocalRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
     <value>Connection from local computer</value>
@@ -1207,7 +1177,7 @@
     <value>184, 17</value>
   </data>
   <data name="logonRemoteRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
     <value>Connection from remote computer</value>
@@ -1255,7 +1225,7 @@
     <value>151, 23</value>
   </data>
   <data name="logonChgUserBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
     <value>Change User or Group...</value>
@@ -1282,13 +1252,13 @@
     <value>158, 33</value>
   </data>
   <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>76, 13</value>
   </data>
   <data name="logonUserLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>label8</value>
+    <value>&lt;Current user&gt;</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Name" xml:space="preserve">
     <value>logonUserLabel</value>
@@ -1315,7 +1285,7 @@
     <value>131, 17</value>
   </data>
   <data name="logonSpecUserRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
     <value>Specific user or group:</value>
@@ -1456,7 +1426,7 @@
     <value>456, 13</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>To change idle conditions, use the Conditions page in the Create Task or task Properties sheet.</value>
@@ -1504,7 +1474,7 @@
     <value>315, 20</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
     <value>textBox2</value>
@@ -1525,7 +1495,7 @@
     <value>315, 20</value>
   </data>
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
     <value>textBox1</value>
@@ -1552,7 +1522,7 @@
     <value>52, 13</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Event ID:</value>
@@ -1576,7 +1546,7 @@
     <value>315, 21</value>
   </data>
   <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
     <value>comboBox1</value>
@@ -1603,7 +1573,7 @@
     <value>44, 13</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>Source:</value>
@@ -1633,7 +1603,7 @@
     <value>28, 13</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>3</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>Log:</value>
@@ -1657,7 +1627,7 @@
     <value>2, 133</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
     <value>groupBox5</value>
@@ -1684,7 +1654,7 @@
     <value>60, 17</value>
   </data>
   <data name="eventCustomRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="eventCustomRadio.Text" xml:space="preserve">
     <value>Custom</value>
@@ -1714,7 +1684,7 @@
     <value>51, 17</value>
   </data>
   <data name="eventBasicRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="eventBasicRadio.Text" xml:space="preserve">
     <value>Basic</value>
@@ -1813,16 +1783,16 @@
     <value>223, 99</value>
   </data>
   <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 21</value>
+    <value>162, 21</value>
   </data>
   <data name="stopIfRunsSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Name" xml:space="preserve">
     <value>stopIfRunsSpan</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1840,13 +1810,13 @@
     <value>129, 21</value>
   </data>
   <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
     <value>durationSpan</value>
   </data>
   <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1861,16 +1831,16 @@
     <value>148, 45</value>
   </data>
   <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 21</value>
+    <value>152, 21</value>
   </data>
   <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
     <value>repeatSpan</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1885,16 +1855,16 @@
     <value>223, 18</value>
   </data>
   <data name="delaySpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 21</value>
+    <value>162, 21</value>
   </data>
   <data name="delaySpan.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;delaySpan.Name" xml:space="preserve">
     <value>delaySpan</value>
   </data>
   <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TimeSpanPicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1921,7 +1891,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1942,13 +1912,13 @@
     <value>383, 20</value>
   </data>
   <data name="activateDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Name" xml:space="preserve">
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3499.15139, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.3.3560.28824, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1966,7 +1936,7 @@
     <value>107, 17</value>
   </data>
   <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
     <value>for a duration of:</value>
@@ -1999,7 +1969,7 @@
     <value>259, 17</value>
   </data>
   <data name="stopAfterDurationCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
     <value>Stop all running tasks at end of repetition duration</value>
@@ -2029,7 +1999,7 @@
     <value>65, 17</value>
   </data>
   <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>13</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
     <value>Enabled</value>
@@ -2059,7 +2029,7 @@
     <value>58, 17</value>
   </data>
   <data name="expireCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>11</value>
   </data>
   <data name="expireCheckBox.Text" xml:space="preserve">
     <value>Expire:</value>
@@ -2089,7 +2059,7 @@
     <value>68, 17</value>
   </data>
   <data name="activateCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>9</value>
   </data>
   <data name="activateCheckBox.Text" xml:space="preserve">
     <value>Activate:</value>
@@ -2119,7 +2089,7 @@
     <value>169, 17</value>
   </data>
   <data name="stopIfRunsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
     <value>Stop task if it runs longer than:</value>
@@ -2149,7 +2119,7 @@
     <value>116, 17</value>
   </data>
   <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
     <value>Repeat task every:</value>
@@ -2233,7 +2203,7 @@
     <value>75, 23</value>
   </data>
   <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -2263,7 +2233,7 @@
     <value>75, 23</value>
   </data>
   <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>OK</value>

@@ -44,6 +44,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TimeSpan2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TimeSpan2\bin\Release\TimeSpan2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionEditDialog.cs">
@@ -65,7 +69,8 @@
     <Compile Include="FullDateTimePicker.Designer.cs">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="NativeMethods.cs">
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -80,12 +85,6 @@
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TimeSpanExtension.cs" />
-    <Compile Include="TimeSpanPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TimeSpanPicker.Designer.cs">
-      <DependentUpon>TimeSpanPicker.cs</DependentUpon>
-    </Compile>
     <Compile Include="TriggerEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,8 +93,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ActionEditDialog.it.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ActionEditDialog.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.it.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
@@ -107,11 +112,12 @@
     <EmbeddedResource Include="TaskPropertiesControl.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TimeSpanPicker.resx">
-      <DependentUpon>TimeSpanPicker.cs</DependentUpon>
+    <EmbeddedResource Include="TriggerEditDialog.it.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
