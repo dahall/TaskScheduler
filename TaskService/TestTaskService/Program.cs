@@ -8,45 +8,43 @@ namespace TestTaskService
 		[STAThread]
 		static void Main(string[] args)
 		{
-			LongTest();
+			ShortTest();
 		}
 
 		static void ShortTest()
 		{
 			// Get the service on the local machine
-			TaskService ts = new TaskService();
+			using (TaskService ts = new TaskService(null, null, null, null, false))
+			{
+				// Create a new task definition and assign properties
+				TaskDefinition td = ts.NewTask();
+				td.RegistrationInfo.Description = "Does something";
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
-			// Create a new task definition and assign properties
-			TaskDefinition td = ts.NewTask();
-			td.RegistrationInfo.Description = "Does something";
-			td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				// Create a trigger that will fire the task at this time every other day
+				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				dt.Repetition.Duration = TimeSpan.FromHours(4);
+				dt.Repetition.Interval = TimeSpan.FromHours(1);
 
-			// Create a trigger that will fire the task at this time every other day
-			DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
-			dt.Repetition.Interval = TimeSpan.FromHours(1);
-			dt.Repetition.Duration = TimeSpan.FromHours(4);
+				// Create an action that will launch Notepad whenever the trigger fires
+				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
-			// Create an action that will launch Notepad whenever the trigger fires
-			td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+				// Register the task in the root folder
+				const string taskName = "Test";
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				System.Threading.Thread.Sleep(1000);
+				Console.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
 
-			// Register the task in the root folder
-			const string taskName = "Test";
-			Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-			System.Threading.Thread.Sleep(1000);
-			Console.WriteLine("LastTime & Result: {0} ({1})" , t.LastRunTime, t.LastTaskResult);
+				// Retrieve the task, add a trigger and save it.
+				t = ts.GetTask(taskName);
+				td = t.Definition;
+				td.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
+				ts.RootFolder.RegisterTaskDefinition(taskName, td);//, TaskCreation.Update, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 
-			// Retrieve the task, add a trigger and save it.
-			t = ts.GetTask(taskName);
-			td = t.Definition;
-			td.Triggers.Add(new BootTrigger { Enabled = false });
-			td.Principal.LogonType = TaskLogonType.ServiceAccount;
-			td.Principal.UserId = "SYSTEM";
-			ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, null, null,
-				td.Principal.LogonType, null);
-
-			// Remove the task we just created
-			Console.ReadKey(false);
-			ts.RootFolder.DeleteTask(taskName);
+				// Remove the task we just created
+				Console.ReadKey(false);
+				ts.RootFolder.DeleteTask(taskName);
+			}
 		}
 
 		static void LongTest()
@@ -155,11 +153,11 @@ namespace TestTaskService
 
 				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
-				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = "AMERICAS\\dahall" });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = user });
 				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect });
 				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
 				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect });
-				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = "AMERICAS\\dahall" });
+				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = user });
 				td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock });
 			}
 

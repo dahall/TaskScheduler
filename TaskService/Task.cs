@@ -1232,7 +1232,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (value == TaskLogonType.InteractiveToken)
 						flags |= V1Interop.TaskFlags.Interactive;
 					else
-						flags &= ~V1Interop.TaskFlags.Interactive;
+						flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
 					v1Task.SetFlags(flags);
 					if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
 						throw new NotV1SupportedException();
