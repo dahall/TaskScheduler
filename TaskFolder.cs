@@ -194,12 +194,13 @@ namespace Microsoft.Win32.TaskScheduler
 					definition.v1Task.SetAccountInformation(UserId, IntPtr.Zero);
 					break;
 				case TaskLogonType.ServiceAccount:
+					flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
 					definition.v1Task.SetAccountInformation(String.IsNullOrEmpty(UserId) ? String.Empty : UserId, IntPtr.Zero);
 					break;
 				case TaskLogonType.InteractiveTokenOrPassword:
+					flags |= V1Interop.TaskFlags.Interactive;
 					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
 						definition.v1Task.SetAccountInformation(UserId, cpwd.DangerousGetHandle());
-					flags |= V1Interop.TaskFlags.Interactive;
 					break;
 				case TaskLogonType.Password:
 					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
