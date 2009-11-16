@@ -79,7 +79,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			public Microsoft.Win32.TaskScheduler.Task Current
 			{
-				get { return new Task(svc, m_ts.Activate(curItem, ref ITaskGuid)); }
+				get { return new Task(svc, this.ICurrent); }
 			}
 
 			internal V1Interop.ITask ICurrent
@@ -108,22 +108,28 @@ namespace Microsoft.Win32.TaskScheduler
 			public bool MoveNext()
 			{
 				IntPtr names = IntPtr.Zero;
-				curItem = null;
-				try
+				bool valid = false;
+				do
 				{
+					curItem = null;
 					uint uFetched = 0;
-					wienum.Next(1, out names, out uFetched);
-					if (uFetched == 1)
+					try
 					{
+						wienum.Next(1, out names, out uFetched);
+						if (uFetched != 1)
+							break;
 						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
 							curItem = name.ToString();
 					}
-				}
-				catch { }
-				finally
-				{
-					Marshal.FreeCoTaskMem(names);
-				}
+					catch { }
+					finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
+
+					V1Interop.ITask itask = null;
+					try { itask = this.ICurrent; valid = true; }
+					catch { valid = false; }
+					finally { itask = null; }
+				} while (!valid);
+
 				return (curItem != null);
 			}
 

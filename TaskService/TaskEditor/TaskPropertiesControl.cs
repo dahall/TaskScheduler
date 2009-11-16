@@ -500,12 +500,14 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
         {
-            td.Settings.AllowDemandStart = taskAllowDemandStartCheck.Checked;
+			if (td.Settings.Compatibility == TaskCompatibility.V2)
+				td.Settings.AllowDemandStart = taskAllowDemandStartCheck.Checked;
         }
 
         private void taskAllowHardTerminateCheck_CheckedChanged(object sender, EventArgs e)
         {
-            td.Settings.AllowHardTerminate = taskAllowHardTerminateCheck.Checked;
+			if (td.Settings.Compatibility == TaskCompatibility.V2)
+				td.Settings.AllowHardTerminate = taskAllowHardTerminateCheck.Checked;
         }
 
         private void taskDeleteAfterCheck_CheckedChanged(object sender, EventArgs e)
@@ -579,7 +581,8 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            td.Settings.MultipleInstances = (TaskInstancesPolicy)taskMultInstCombo.SelectedIndex;
+			if (td.Settings.Compatibility == TaskCompatibility.V2)
+				td.Settings.MultipleInstances = (TaskInstancesPolicy)taskMultInstCombo.SelectedIndex;
         }
 
         private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
@@ -642,7 +645,8 @@ namespace Microsoft.Win32.TaskScheduler
         private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool isV2 = taskVersionCombo.SelectedIndex != 0;
-            td.Settings.Compatibility = isV2 ? TaskCompatibility.V2 : TaskCompatibility.V1;
+			if (isV2)
+	            td.Settings.Compatibility = TaskCompatibility.V2;
 
             taskRestartOnIdleCheck.Enabled = isV2;
             taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = isV2;
