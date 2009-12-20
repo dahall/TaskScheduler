@@ -8,13 +8,13 @@ namespace TestTaskService
 		[STAThread]
 		static void Main(string[] args)
 		{
-			ShortTest();
+			ShortTest(args);
 		}
 
-		static void ShortTest()
+		static void ShortTest(string[] args)
 		{
 			// Get the service on the local machine
-			using (TaskService ts = new TaskService(null, null, null, null, false))
+			using (TaskService ts = new TaskService("DHALL5", "LocalAcct", "DHALL5", "Localpassw0rd", args.Length > 0 && args[0] == "1"))
 			{
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
@@ -25,6 +25,8 @@ namespace TestTaskService
 				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				dt.Repetition.Duration = TimeSpan.FromHours(4);
 				dt.Repetition.Interval = TimeSpan.FromHours(1);
+
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
 
 				// Create an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
@@ -47,11 +49,11 @@ namespace TestTaskService
 			}
 		}
 
-		static void LongTest()
+		static void LongTest(string[] args)
 		{
 			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-			TaskService ts = new TaskService();
+			TaskService ts = new TaskService(null, null, null, null, args.Length > 0 && args[0] == "1"); // "LocalAcct", "DHALL5", "Localpassw0rd", false);
 			Version ver = ts.HighestSupportedVersion;
 			bool newVer = (ver == new Version(1, 2));
 			Console.WriteLine("Highest version: " + ver);
