@@ -124,6 +124,17 @@ namespace Microsoft.Win32.TaskScheduler
 		Running
 	}
 
+	/// <summary>Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of process SID in the <see cref="IPrincipal2"/> interface.</summary>
+	public enum TaskProcessTokenSidType
+	{
+		/// <summary>No changes will be made to the process token groups list.</summary>
+		None = 0,
+		/// <summary>A task SID that is derived from the task name will be added to the process token groups list, and the token default discretionary access control list (DACL) will be modified to allow only the task SID and local system full control and the account SID read control.</summary>
+		Unrestricted = 1,
+		/// <summary>A Task Scheduler will apply default settings to the task process.</summary>
+		Default = 2
+	}
+
 	#endregion
 
 	#region Task Support Classes

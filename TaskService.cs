@@ -52,9 +52,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				v2 = true;
 				v2TaskService = new V2Interop.TaskSchedulerClass();
-				// Check to ensure character only server name. (Suggested by bigsan)
-				if (!string.IsNullOrEmpty(targetServer) && targetServer.StartsWith(@"\"))
-					targetServer = targetServer.TrimStart('\\');
+				if (!string.IsNullOrEmpty(targetServer))
+				{
+					// Check to ensure character only server name. (Suggested by bigsan)
+					if (targetServer.StartsWith(@"\"))
+						targetServer = targetServer.TrimStart('\\');
+					// Make sure null is provided for local machine to compensate for a native library oddity (Found by ctrollen)
+					if (targetServer.Equals(Environment.MachineName, StringComparison.CurrentCultureIgnoreCase))
+						targetServer = null;
+				}
 				v2TaskService.Connect(targetServer, userName, accountDomain, password);
 			}
 			else
