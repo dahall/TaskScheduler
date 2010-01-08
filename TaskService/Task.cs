@@ -68,7 +68,7 @@ namespace Microsoft.Win32.TaskScheduler
         InteractiveTokenOrPassword
     }
 
-    /// <summary>Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of process SID in the <see cref="IPrincipal2"/> interface.</summary>
+    /// <summary>Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of process SID in the IPrincipal2 interface.</summary>
     public enum TaskProcessTokenSidType
     {
         /// <summary>No changes will be made to the process token groups list.</summary>

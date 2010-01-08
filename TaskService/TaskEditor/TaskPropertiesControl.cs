@@ -221,7 +221,7 @@ namespace Microsoft.Win32.TaskScheduler
         }
 
         /// <summary>
-        /// Initializes the control for the editing of a new <see cref="TaskDefintion"/>.
+        /// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
         /// </summary>
         /// <param name="service">A <see cref="TaskService"/> instance.</param>
         public void Initialize(TaskService service)
