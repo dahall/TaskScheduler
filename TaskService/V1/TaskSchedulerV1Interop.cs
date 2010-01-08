@@ -283,7 +283,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 				else
 				{
 					this.EndYear = this.EndMonth = this.EndDay = 0;
-					this.Flags ^= ~TaskTriggerFlags.HasEndDate;
+					this.Flags &= ~TaskTriggerFlags.HasEndDate;
 				}
 			}
 		}

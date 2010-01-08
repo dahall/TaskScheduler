@@ -24,20 +24,10 @@ namespace Microsoft.Win32.TaskScheduler
             long allVal;
             ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
 
-            // Setup for compatibility
-            if (taskDefinition.Settings.Compatibility != TaskCompatibility.V2)
-            {
-                // Remove unavailable triggers
-                triggerComboItems.RemoveRange(4, 6);
-
-                // Disable logon trigger options
-                foreach (Control c in logonTab.Controls)
-                    c.Enabled = false;
-            }
-
             triggerTypeCombo.DisplayMember = "Text";
             triggerTypeCombo.ValueMember = "Value";
-            triggerTypeCombo.DataSource = triggerComboItems;
+
+            ConfigForVersion(taskDefinition.Settings.Compatibility);
 
             monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
             monthlyMonthsDropDown.Items.RemoveAt(13);
@@ -97,6 +87,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 onAssignment = true;
                 trigger = value;
+                bool isV2 = td.Settings.Compatibility == TaskCompatibility.V2;
                 switch (trigger.TriggerType)
                 {
                     case TaskTriggerType.Time:
@@ -150,6 +141,17 @@ namespace Microsoft.Win32.TaskScheduler
                         break;
                     case TaskTriggerType.Event:
                         TriggerView = TaskTriggerDisplayType.Event;
+                        string log, source; int? id;
+                        bool basic = ((EventTrigger)trigger).GetBasic(out log, out source, out id);
+                        onEventCustomText.Text = ((EventTrigger)trigger).Subscription;
+                        if (basic)
+                        {
+                            onEventLogCombo.Text = log;
+                            onEventSourceCombo.Text = source;
+                            onEventIdText.Text = id.HasValue ? id.Value.ToString() : string.Empty;
+                        }
+                        eventBasicRadio.Checked = basic;
+                        eventCustomRadio.Checked = !basic;
                         break;
                     case TaskTriggerType.Registration:
                         TriggerView = TaskTriggerDisplayType.Registration;
@@ -158,11 +160,13 @@ namespace Microsoft.Win32.TaskScheduler
                         int state = 110 + (int)((SessionStateChangeTrigger)trigger).StateChange;
                         if (state == 113 || state == 114) state -= 2;
                         TriggerView = (TaskTriggerDisplayType)state;
+                        logonRemoteRadio.Checked = (((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteConnect || ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteDisconnect);
+                        logonLocalRadio.Checked = !logonRemoteRadio.Checked;
                         break;
                     default:
                         break;
                 }
-                if (trigger is ITriggerDelay)
+                if (trigger is ITriggerDelay && isV2)
                 {
                     delayCheckBox.Checked = delaySpan.Enabled = ((ITriggerDelay)trigger).Delay != TimeSpan.Zero;
                     delaySpan.Value = ((ITriggerDelay)trigger).Delay;
@@ -172,13 +176,11 @@ namespace Microsoft.Win32.TaskScheduler
                     delayCheckBox.Checked = delayCheckBox.Enabled = delaySpan.Enabled = false;
                     delaySpan.Value = TimeSpan.Zero;
                 }
-                if (trigger is ITriggerUserId)
+                if (trigger is ITriggerUserId && isV2)
                 {
                     logonUserLabel.Text = ((ITriggerUserId)trigger).UserId;
-                    if (logonUserLabel.Text.Length == 0)
-                        logonAnyUserRadio.Checked = true;
-                    else
-                        logonLocalRadio.Checked = true;
+                    logonAnyUserRadio.Checked = (logonUserLabel.Text.Length == 0);
+                    logonSpecUserRadio.Checked = (logonUserLabel.Text.Length > 0);
                 }
                 bool hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
                 repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = hasRep;
@@ -193,9 +195,11 @@ namespace Microsoft.Win32.TaskScheduler
                     durationSpan.Value = trigger.Repetition.Duration;
                     stopAfterDurationCheckBox.Checked = trigger.Repetition.StopAtDurationEnd;
                 }
-                stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
-                stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
-                activateCheckBox.Visible = activateCheckBox.Checked = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
+                if (isV2)
+                {
+                    stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
+                    stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
+                }
                 if (activateCheckBox.Visible)
                 {
                     activateCheckBox.Checked = activateDatePicker.Enabled = trigger.StartBoundary != DateTime.MinValue;
@@ -225,12 +229,6 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
-        private void SetSchedTrigger()
-        {
-            TriggerView = TaskTriggerDisplayType.Schedule;
-            schedStartDatePicker.Value = trigger.StartBoundary;
-        }
-
         private void activateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             activateDatePicker.Enabled = activateCheckBox.Checked;
@@ -240,6 +238,19 @@ namespace Microsoft.Win32.TaskScheduler
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ConfigForVersion(TaskCompatibility ver)
+        {
+            bool isV2 = ver == TaskCompatibility.V2;
+            if (!isV2)
+                triggerComboItems.RemoveRange(4, 6);
+            triggerTypeCombo.DataSource = triggerComboItems;
+            stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
+            delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+            // Disable logon trigger options
+            foreach (Control c in logonTab.Controls)
+                c.Enabled = isV2;
         }
 
         private void delayCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -258,6 +269,18 @@ namespace Microsoft.Win32.TaskScheduler
         {
             if (!onAssignment)
                 trigger.Repetition.Duration = durationSpan.Value;
+        }
+
+        private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            trigger.Enabled = enabledCheckBox.Checked;
+        }
+
+        private void eventBasicRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            bool basic = eventBasicRadio.Checked;
+            onEventBasicPanel.Visible = basic;
+            onEventCustomText.Visible = !basic;
         }
 
         private void expireCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -360,6 +383,18 @@ namespace Microsoft.Win32.TaskScheduler
                     this.Trigger = newTrigger;
                 }
             }
+        }
+
+        private void SetSchedTrigger()
+        {
+            TriggerView = TaskTriggerDisplayType.Schedule;
+            schedStartDatePicker.Value = trigger.StartBoundary;
+            activateCheckBox.Visible = activateDatePicker.Visible = false;
+        }
+
+        private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            trigger.Repetition.StopAtDurationEnd = stopAfterDurationCheckBox.Checked;
         }
 
         private void stopIfRunsCheckBox_CheckedChanged(object sender, EventArgs e)

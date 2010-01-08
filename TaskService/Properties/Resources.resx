@@ -241,6 +241,18 @@
   <data name="TriggerEvent1" xml:space="preserve">
     <value>Custom event filter</value>
   </data>
+  <data name="TriggerEventBasic1" xml:space="preserve">
+    <value>On event - Log: {0}</value>
+    <comment>0 = Log name</comment>
+  </data>
+  <data name="TriggerEventBasic2" xml:space="preserve">
+    <value>, Source: {0}</value>
+    <comment>0 = Source name (appended after log)</comment>
+  </data>
+  <data name="TriggerEventBasic3" xml:space="preserve">
+    <value>, EventID: {0}</value>
+    <comment>0 = Event ID (appended after log or source)</comment>
+  </data>
   <data name="TriggerIdle1" xml:space="preserve">
     <value>When computer is idle</value>
   </data>
