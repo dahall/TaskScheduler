@@ -1,22 +1,30 @@
 ﻿using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// <c>CustomComboBox</c> is an extension of <see cref="ComboBox"/> which provides drop-down customization.
-	/// </summary>
+    internal interface IPopupControlHost
+    {
+        /// <summary>
+        /// Hides drop-down area of combo box, if shown.
+        /// </summary>
+        void HideDropDown();
+
+        /// <summary>
+        /// Displays drop-down area of combo box, if not already shown.
+        /// </summary>
+        void ShowDropDown();
+    }
+
+    /// <summary>
+    /// <c>CustomComboBox</c> is an extension of <see cref="ComboBox"/> which provides drop-down customization.
+    /// </summary>
     [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-#if DESIGNER
-    [Designer(typeof(CustomComboBoxDesigner))]
-#endif
-	internal class CustomComboBox : ComboBox, IPopupControlHost
+    internal class CustomComboBox : ComboBox, IPopupControlHost
     {
         private const uint CBN_CLOSEUP = 8;
         private const uint CBN_DROPDOWN = 7;
@@ -54,42 +62,44 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>Automatic focus timer helps make sure drop-down control is focused for user input upon drop-down.</summary>
         Timer m_timerAutoFocus;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CustomComboBox"/> class.
-		/// </summary>
-        public CustomComboBox() : base()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomComboBox"/> class.
+        /// </summary>
+        public CustomComboBox()
+            : base()
         {
-			base.DropDownStyle = ComboBoxStyle.DropDownList;
-			base.Items.Add(String.Empty);
+            base.DropDownStyle = ComboBoxStyle.DropDownList;
+            base.Items.Add(String.Empty);
             m_sizeCombo = new Size(base.DropDownWidth, base.DropDownHeight);
             m_popupCtrl.Closing += new ToolStripDropDownClosingEventHandler(m_dropDown_Closing);
         }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CustomComboBox"/> class.
-		/// </summary>
-		/// <param name="dropControl">The control to display in the drop-down.</param>
-        public CustomComboBox(Control dropControl) : this()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomComboBox"/> class.
+        /// </summary>
+        /// <param name="dropControl">The control to display in the drop-down.</param>
+        public CustomComboBox(Control dropControl)
+            : this()
         {
             DropDownControl = dropControl;
         }
 
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public enum SizeMode
         {
-			/// <summary>
-			/// 
-			/// </summary>
+            /// <summary>
+            ///
+            /// </summary>
             UseComboSize,
-			/// <summary>
-			/// 
-			/// </summary>
+            /// <summary>
+            ///
+            /// </summary>
             UseControlSize,
-			/// <summary>
-			/// 
-			/// </summary>
+            /// <summary>
+            ///
+            /// </summary>
             UseDropDownSize,
         }
 
@@ -119,14 +129,14 @@ namespace Microsoft.Win32.TaskScheduler
             BottomRight = (Bottom | Right),
         }
 
-		/// <summary>
-		/// Occurs when the drop-down portion of a <see cref="CustomComboBox"/> is shown.
-		/// </summary>
+        /// <summary>
+        /// Occurs when the drop-down portion of a <see cref="CustomComboBox"/> is shown.
+        /// </summary>
         public new event EventHandler DropDown;
 
-		/// <summary>
-		/// Occurs when the drop-down portion of the <see cref="CustomComboBox"/> is no longer visible.
-		/// </summary>
+        /// <summary>
+        /// Occurs when the drop-down portion of the <see cref="CustomComboBox"/> is no longer visible.
+        /// </summary>
         public new event EventHandler DropDownClosed;
 
         /// <summary>
@@ -140,10 +150,10 @@ namespace Microsoft.Win32.TaskScheduler
             set { this.m_bIsResizable = value; }
         }
 
-		/// <summary>
-		/// Gets or sets the size of the drop-down control itself.
-		/// </summary>
-		/// <value>The size of the drop-down control.</value>
+        /// <summary>
+        /// Gets or sets the size of the drop-down control itself.
+        /// </summary>
+        /// <value>The size of the drop-down control.</value>
         [Category("Custom Drop-Down"),
         Browsable(false)]
         public Size ControlSize
@@ -157,6 +167,15 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new string DisplayMember
+        {
+            get { return base.DisplayMember; }
+            set { }
+        }
+
         /// <summary>
         /// Gets or sets drop-down control itself.
         /// </summary>
@@ -165,6 +184,15 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get { return m_dropDownCtrl; }
             set { AssignControl(value); }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new int DropDownHeight
+        {
+            get { return base.DropDownHeight; }
+            set { }
         }
 
         /// <summary>
@@ -184,29 +212,9 @@ namespace Microsoft.Win32.TaskScheduler
                     AutoSizeDropDown();
                 }
             }
-		}
+        }
 
-		#region Properties to be hidden
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new string DisplayMember
-		{
-			get { return base.DisplayMember; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new int DropDownHeight
-		{
-			get { return base.DropDownHeight; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false),
         ReadOnly(true)]
         public new ComboBoxStyle DropDownStyle
@@ -222,68 +230,13 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get { return base.DropDownWidth; }
             set { }
-		}
+        }
 
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new bool IntegralHeight
-		{
-			get { return base.IntegralHeight; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new int ItemHeight
-		{
-			get { return base.ItemHeight; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new ObjectCollection Items
-		{
-			get { return base.Items; }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new int MaxDropDownItems
-		{
-			get { return base.MaxDropDownItems; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new bool Sorted
-		{
-			get { return base.Sorted; }
-			set { }
-		}
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Browsable(false),
-		ReadOnly(true)]
-		public new string ValueMember
-		{
-			get { return base.ValueMember; }
-			set { }
-		}
-
-		#endregion
-
-		/// <summary>
-		/// Gets or sets the size of the drop.
-		/// </summary>
-		/// <value>The size of the drop.</value>
-		[Category("Custom Drop-Down")]
+        /// <summary>
+        /// Gets or sets the size of the drop.
+        /// </summary>
+        /// <value>The size of the drop.</value>
+        [Category("Custom Drop-Down")]
         public Size DropSize
         {
             get { return m_sizeCombo; }
@@ -295,16 +248,88 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
-		/// <summary>
-		/// Indicates if drop-down is currently shown.
-		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if this instance is dropped down; otherwise, <c>false</c>.
-		/// </value>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new bool IntegralHeight
+        {
+            get { return base.IntegralHeight; }
+            set { }
+        }
+
+        /// <summary>
+        /// Indicates if drop-down is currently shown.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is dropped down; otherwise, <c>false</c>.
+        /// </value>
         [Browsable(false)]
         public bool IsDroppedDown
         {
             get { return this.m_bDroppedDown /*&& m_popupCtrl.Visible*/; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new int ItemHeight
+        {
+            get { return base.ItemHeight; }
+            set { }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new ObjectCollection Items
+        {
+            get { return base.Items; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new int MaxDropDownItems
+        {
+            get { return base.MaxDropDownItems; }
+            set { }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new bool Sorted
+        {
+            get { return base.Sorted; }
+            set { }
+        }
+
+        /// <summary>
+        /// Gets or sets the text associated with this control.
+        /// </summary>
+        /// <value></value>
+        /// <returns>
+        /// The text associated with this control.
+        /// </returns>
+        /// <PermissionSet>
+        /// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+        /// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+        /// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+        /// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+        /// </PermissionSet>
+        public new string Text
+        {
+            get { return base.Items.Count == 0 ? string.Empty : base.Items[0].ToString(); }
+            set { if (base.Items.Count == 0) base.Items.Add(value); else base.Items[0] = value; base.SelectedIndex = 0; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false),
+        ReadOnly(true)]
+        public new string ValueMember
+        {
+            get { return base.ValueMember; }
+            set { }
         }
 
         /// <summary>
@@ -322,18 +347,18 @@ namespace Microsoft.Win32.TaskScheduler
                 if (m_timerAutoFocus != null && m_timerAutoFocus.Enabled)
                     m_timerAutoFocus.Enabled = false;
 
-				this.Focus();
+                this.Focus();
 
                 // Raise drop-down closed event.
                 OnDropDownClosed(EventArgs.Empty);
             }
         }
 
-		/// <summary>
-		/// Preprocesses keyboard or input messages within the message loop before they are dispatched. 
-		/// </summary>
-		/// <param name="m">A <see cref="Message"/>, passed by reference, that represents the message to process. The possible values are WM_KEYDOWN, WM_SYSKEYDOWN, WM_CHAR, and WM_SYSCHAR.</param>
-		/// <returns><c>true</c> if the message was processed by the control; otherwise, <c>false</c>.</returns>
+        /// <summary>
+        /// Preprocesses keyboard or input messages within the message loop before they are dispatched. 
+        /// </summary>
+        /// <param name="m">A <see cref="Message"/>, passed by reference, that represents the message to process. The possible values are WM_KEYDOWN, WM_SYSKEYDOWN, WM_CHAR, and WM_SYSCHAR.</param>
+        /// <returns><c>true</c> if the message was processed by the control; otherwise, <c>false</c>.</returns>
         public override bool PreProcessMessage(ref Message m)
         {
             if (m.Msg == (WM_REFLECT + WM_COMMAND))
@@ -425,10 +450,10 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
-		/// <summary>
-		/// Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox"/> and optionally releases the managed resources.
-		/// </summary>
-		/// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <summary>
+        /// Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox"/> and optionally releases the managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -442,10 +467,10 @@ namespace Microsoft.Win32.TaskScheduler
             base.Dispose(disposing);
         }
 
-		/// <summary>
-		/// Raises the <see cref="E:DropDown"/> event.
-		/// </summary>
-		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Raises the <see cref="E:DropDown"/> event.
+        /// </summary>
+        /// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected new virtual void OnDropDown(EventArgs args)
         {
             EventHandler eventHandler = this.DropDown;
@@ -453,10 +478,10 @@ namespace Microsoft.Win32.TaskScheduler
                 this.DropDown(this, args);
         }
 
-		/// <summary>
-		/// Raises the <see cref="E:DropDownClosed"/> event.
-		/// </summary>
-		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Raises the <see cref="E:DropDownClosed"/> event.
+        /// </summary>
+        /// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected new virtual void OnDropDownClosed(EventArgs args)
         {
             EventHandler eventHandler = this.DropDownClosed;
@@ -464,10 +489,10 @@ namespace Microsoft.Win32.TaskScheduler
                 this.DropDownClosed(this, args);
         }
 
-		/// <summary>
-		/// Processes Windows messages.
-		/// </summary>
-		/// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        /// <summary>
+        /// Processes Windows messages.
+        /// </summary>
+        /// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_LBUTTONDOWN)
@@ -909,6 +934,13 @@ namespace Microsoft.Win32.TaskScheduler
                 return LOWORD(unchecked((int)(long)n));
             }
 
+            protected void hostedControl_SizeChanged(object sender, EventArgs e)
+            {
+                // Only update size of this container when it is not locked.
+                if (!m_lockedHostedControlSize)
+                    ResizeFromContent(-1);
+            }
+
             protected override void OnClosing(ToolStripDropDownClosingEventArgs e)
             {
                 Control hostedControl = GetHostedControl();
@@ -1061,13 +1093,6 @@ namespace Microsoft.Win32.TaskScheduler
                     base.WndProc(ref m);
             }
 
-            protected void hostedControl_SizeChanged(object sender, EventArgs e)
-            {
-                // Only update size of this container when it is not locked.
-                if (!m_lockedHostedControlSize)
-                    ResizeFromContent(-1);
-            }
-
             [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
             private bool OnGetMinMaxInfo(ref Message m)
             {
@@ -1179,20 +1204,8 @@ namespace Microsoft.Win32.TaskScheduler
         }
     }
 
-	internal interface IPopupControlHost
-	{
-		/// <summary>
-		/// Hides drop-down area of combo box, if shown.
-		/// </summary>
-		void HideDropDown();
+    #if DESIGNER
 
-		/// <summary>
-		/// Displays drop-down area of combo box, if not already shown.
-		/// </summary>
-		void ShowDropDown();
-	}
-
-#if DESIGNER
     internal class CustomComboBoxDesigner : ParentControlDesigner
     {
         protected override void PreFilterProperties(IDictionary properties)
@@ -1210,5 +1223,6 @@ namespace Microsoft.Win32.TaskScheduler
             properties.Remove("Sorted");
         }
     }
-#endif
+
+    #endif
 }

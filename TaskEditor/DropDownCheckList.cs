@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -82,20 +79,22 @@ namespace Microsoft.Win32.TaskScheduler
 
         public DropDownCheckList()
         {
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(17, 35);
-            this.checkedListBox1.MultiColumn = false;
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(187, 105);
-            this.checkedListBox1.TabIndex = 0;
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox()
+            {
+                BorderStyle = System.Windows.Forms.BorderStyle.None,
+                CheckOnClick = true,
+                FormattingEnabled = true,
+                Location = new System.Drawing.Point(17, 35),
+                MultiColumn = false,
+                Name = "checkedListBox1",
+                Size = new System.Drawing.Size(187, 105),
+                TabIndex = 0
+            };
             this.checkedListBox1.ItemCheck += new ItemCheckEventHandler(checkedListBox1_ItemCheck);
             base.DropDownControl = this.checkedListBox1;
-            base.DataSource = this.checkedListBox1.Items;
+            /*base.DataSource = this.checkedListBox1.Items;
             base.ValueMember = "Value";
-            base.DisplayMember = "Text";
+            base.DisplayMember = "Text";*/
         }
 
         [DefaultValue(null),

@@ -82,12 +82,14 @@
 			this.idleTab = new System.Windows.Forms.TabPage();
 			this.label8 = new System.Windows.Forms.Label();
 			this.onEventTab = new System.Windows.Forms.TabPage();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
+			this.onEventBasicPanel = new System.Windows.Forms.Panel();
+			this.onEventLogLabel = new System.Windows.Forms.Label();
+			this.onEventIdText = new System.Windows.Forms.TextBox();
+			this.onEventSourceLabel = new System.Windows.Forms.Label();
+			this.onEventSourceCombo = new System.Windows.Forms.TextBox();
+			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
+			this.onEventIdLabel = new System.Windows.Forms.Label();
+			this.onEventCustomText = new System.Windows.Forms.TextBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.eventCustomRadio = new System.Windows.Forms.RadioButton();
 			this.eventBasicRadio = new System.Windows.Forms.RadioButton();
@@ -124,6 +126,7 @@
 			this.startupTab.SuspendLayout();
 			this.idleTab.SuspendLayout();
 			this.onEventTab.SuspendLayout();
+			this.onEventBasicPanel.SuspendLayout();
 			this.advSettingsGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -353,7 +356,6 @@
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyDaysDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyDaysDropDown.DataSource = this.monthlyDaysDropDown.Items;
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
 			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
@@ -365,7 +367,6 @@
 			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
 			this.monthlyOnDOWDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnDOWDropDown.DataSource = this.monthlyOnDOWDropDown.Items;
 			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
 			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
@@ -376,7 +377,6 @@
 			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnWeekDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnWeekDropDown.DataSource = this.monthlyOnWeekDropDown.Items;
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
 			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
@@ -388,7 +388,6 @@
 			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
 			this.monthlyMonthsDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyMonthsDropDown.DataSource = this.monthlyMonthsDropDown.Items;
 			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
 			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
@@ -515,12 +514,8 @@
 			// 
 			// onEventTab
 			// 
-			this.onEventTab.Controls.Add(this.textBox2);
-			this.onEventTab.Controls.Add(this.textBox1);
-			this.onEventTab.Controls.Add(this.label11);
-			this.onEventTab.Controls.Add(this.comboBox1);
-			this.onEventTab.Controls.Add(this.label10);
-			this.onEventTab.Controls.Add(this.label9);
+			this.onEventTab.Controls.Add(this.onEventBasicPanel);
+			this.onEventTab.Controls.Add(this.onEventCustomText);
 			this.onEventTab.Controls.Add(this.groupBox5);
 			this.onEventTab.Controls.Add(this.eventCustomRadio);
 			this.onEventTab.Controls.Add(this.eventBasicRadio);
@@ -528,36 +523,54 @@
 			this.onEventTab.Name = "onEventTab";
 			this.onEventTab.UseVisualStyleBackColor = true;
 			// 
-			// textBox2
+			// onEventBasicPanel
 			// 
-			resources.ApplyResources(this.textBox2, "textBox2");
-			this.textBox2.Name = "textBox2";
+			this.onEventBasicPanel.Controls.Add(this.onEventLogLabel);
+			this.onEventBasicPanel.Controls.Add(this.onEventIdText);
+			this.onEventBasicPanel.Controls.Add(this.onEventSourceLabel);
+			this.onEventBasicPanel.Controls.Add(this.onEventSourceCombo);
+			this.onEventBasicPanel.Controls.Add(this.onEventLogCombo);
+			this.onEventBasicPanel.Controls.Add(this.onEventIdLabel);
+			resources.ApplyResources(this.onEventBasicPanel, "onEventBasicPanel");
+			this.onEventBasicPanel.Name = "onEventBasicPanel";
 			// 
-			// textBox1
+			// onEventLogLabel
 			// 
-			resources.ApplyResources(this.textBox1, "textBox1");
-			this.textBox1.Name = "textBox1";
+			resources.ApplyResources(this.onEventLogLabel, "onEventLogLabel");
+			this.onEventLogLabel.Name = "onEventLogLabel";
 			// 
-			// label11
+			// onEventIdText
 			// 
-			resources.ApplyResources(this.label11, "label11");
-			this.label11.Name = "label11";
+			resources.ApplyResources(this.onEventIdText, "onEventIdText");
+			this.onEventIdText.Name = "onEventIdText";
 			// 
-			// comboBox1
+			// onEventSourceLabel
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			resources.ApplyResources(this.comboBox1, "comboBox1");
-			this.comboBox1.Name = "comboBox1";
+			resources.ApplyResources(this.onEventSourceLabel, "onEventSourceLabel");
+			this.onEventSourceLabel.Name = "onEventSourceLabel";
 			// 
-			// label10
+			// onEventSourceCombo
 			// 
-			resources.ApplyResources(this.label10, "label10");
-			this.label10.Name = "label10";
+			resources.ApplyResources(this.onEventSourceCombo, "onEventSourceCombo");
+			this.onEventSourceCombo.Name = "onEventSourceCombo";
 			// 
-			// label9
+			// onEventLogCombo
 			// 
-			resources.ApplyResources(this.label9, "label9");
-			this.label9.Name = "label9";
+			this.onEventLogCombo.FormattingEnabled = true;
+			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
+			this.onEventLogCombo.Name = "onEventLogCombo";
+			// 
+			// onEventIdLabel
+			// 
+			resources.ApplyResources(this.onEventIdLabel, "onEventIdLabel");
+			this.onEventIdLabel.Name = "onEventIdLabel";
+			// 
+			// onEventCustomText
+			// 
+			this.onEventCustomText.AcceptsReturn = true;
+			this.onEventCustomText.AcceptsTab = true;
+			resources.ApplyResources(this.onEventCustomText, "onEventCustomText");
+			this.onEventCustomText.Name = "onEventCustomText";
 			// 
 			// groupBox5
 			// 
@@ -570,12 +583,14 @@
 			resources.ApplyResources(this.eventCustomRadio, "eventCustomRadio");
 			this.eventCustomRadio.Name = "eventCustomRadio";
 			this.eventCustomRadio.UseVisualStyleBackColor = true;
+			this.eventCustomRadio.CheckedChanged += new System.EventHandler(this.eventBasicRadio_CheckedChanged);
 			// 
 			// eventBasicRadio
 			// 
 			resources.ApplyResources(this.eventBasicRadio, "eventBasicRadio");
 			this.eventBasicRadio.Name = "eventBasicRadio";
 			this.eventBasicRadio.UseVisualStyleBackColor = true;
+			this.eventBasicRadio.CheckedChanged += new System.EventHandler(this.eventBasicRadio_CheckedChanged);
 			// 
 			// advSettingsGroup
 			// 
@@ -649,12 +664,14 @@
 			resources.ApplyResources(this.stopAfterDurationCheckBox, "stopAfterDurationCheckBox");
 			this.stopAfterDurationCheckBox.Name = "stopAfterDurationCheckBox";
 			this.stopAfterDurationCheckBox.UseVisualStyleBackColor = true;
+			this.stopAfterDurationCheckBox.CheckedChanged += new System.EventHandler(this.stopAfterDurationCheckBox_CheckedChanged);
 			// 
 			// enabledCheckBox
 			// 
 			resources.ApplyResources(this.enabledCheckBox, "enabledCheckBox");
 			this.enabledCheckBox.Name = "enabledCheckBox";
 			this.enabledCheckBox.UseVisualStyleBackColor = true;
+			this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
 			// 
 			// expireCheckBox
 			// 
@@ -697,17 +714,21 @@
 			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelBtn.Name = "cancelBtn";
 			this.cancelBtn.UseVisualStyleBackColor = true;
+			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
 			// okBtn
 			// 
 			resources.ApplyResources(this.okBtn, "okBtn");
 			this.okBtn.Name = "okBtn";
 			this.okBtn.UseVisualStyleBackColor = true;
+			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
 			// TriggerEditDialog
 			// 
+			this.AcceptButton = this.okBtn;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.cancelBtn;
 			this.Controls.Add(this.cancelBtn);
 			this.Controls.Add(this.okBtn);
 			this.Controls.Add(this.advSettingsGroup);
@@ -744,6 +765,8 @@
 			this.idleTab.PerformLayout();
 			this.onEventTab.ResumeLayout(false);
 			this.onEventTab.PerformLayout();
+			this.onEventBasicPanel.ResumeLayout(false);
+			this.onEventBasicPanel.PerformLayout();
 			this.advSettingsGroup.ResumeLayout(false);
 			this.advSettingsGroup.PerformLayout();
 			this.ResumeLayout(false);
@@ -810,12 +833,12 @@
 		private System.Windows.Forms.RadioButton logonAnyUserRadio;
 		private System.Windows.Forms.Label startupIntroLabel;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.TextBox onEventIdText;
+		private System.Windows.Forms.TextBox onEventSourceCombo;
+		private System.Windows.Forms.Label onEventIdLabel;
+		private System.Windows.Forms.ComboBox onEventLogCombo;
+		private System.Windows.Forms.Label onEventSourceLabel;
+		private System.Windows.Forms.Label onEventLogLabel;
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.RadioButton eventCustomRadio;
 		private System.Windows.Forms.RadioButton eventBasicRadio;
@@ -831,5 +854,7 @@
 		private DropDownCheckList monthlyOnDOWDropDown;
 		private DropDownCheckList monthlyOnWeekDropDown;
 		private System.Windows.Forms.Label monthlyMonthsLabel;
+		private System.Windows.Forms.Panel onEventBasicPanel;
+		private System.Windows.Forms.TextBox onEventCustomText;
 	}
 }

@@ -482,14 +482,14 @@
 			resources.ApplyResources(this.taskIdleWaitTimeoutCombo, "taskIdleWaitTimeoutCombo");
 			this.taskIdleWaitTimeoutCombo.Name = "taskIdleWaitTimeoutCombo";
 			this.taskIdleWaitTimeoutCombo.Value = System.TimeSpan.Parse("00:00:00");
-			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleDelayCombo_ValueChanged);
+			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleWaitTimeoutCombo_ValueChanged);
 			// 
 			// taskIdleDurationCombo
 			// 
 			resources.ApplyResources(this.taskIdleDurationCombo, "taskIdleDurationCombo");
 			this.taskIdleDurationCombo.Name = "taskIdleDurationCombo";
 			this.taskIdleDurationCombo.Value = System.TimeSpan.Parse("00:00:00");
-			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskStartAfterIdleCombo_ValueChanged);
+			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskIdleDurationCombo_ValueChanged);
 			// 
 			// taskRestartOnIdleCheck
 			// 
