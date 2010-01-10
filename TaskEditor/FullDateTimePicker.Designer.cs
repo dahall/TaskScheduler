@@ -47,6 +47,7 @@
 			this.dateTimePickerDate.Font = null;
 			this.dateTimePickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
 			this.dateTimePickerDate.Name = "dateTimePickerDate";
+			this.dateTimePickerDate.ValueChanged += new System.EventHandler(this.subControl_ValueChanged);
 			// 
 			// tableLayoutPanelFullDateTime
 			// 
@@ -72,6 +73,7 @@
 			this.dateTimePickerTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
 			this.dateTimePickerTime.Name = "dateTimePickerTime";
 			this.dateTimePickerTime.ShowUpDown = true;
+			this.dateTimePickerTime.ValueChanged += new System.EventHandler(this.subControl_ValueChanged);
 			// 
 			// utcCheckBox
 			// 
@@ -82,6 +84,7 @@
 			this.utcCheckBox.Font = null;
 			this.utcCheckBox.Name = "utcCheckBox";
 			this.utcCheckBox.UseVisualStyleBackColor = true;
+			this.utcCheckBox.CheckedChanged += new System.EventHandler(this.subControl_ValueChanged);
 			// 
 			// FullDateTimePicker
 			// 

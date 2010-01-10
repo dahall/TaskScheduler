@@ -9,19 +9,57 @@ namespace TestTaskService
 		static void Main(string[] args)
 		{
 			int init = 0;
-			bool runLong = true;
-			if (args.Length > 0 && args[0].ToUpper() == "S")
+			char test = 'L';
+			if (args.Length > 0 && char.IsLetter(args[0][0]))
 			{
-				runLong = false;
+				test = args[0].ToUpper()[0];
 				init++;
 			}
 			string[] newArgs = new string[] { args.Length > init ? args[init] : "2", null, null, null, null };
 			for (int i = init + 1; i < init + 5; i++)
 				if (args.Length > i) newArgs[i] = args[i];
-			if (runLong)
-				LongTest(newArgs);
-			else
-				ShortTest(newArgs);
+			switch (test)
+			{
+				case 'E':
+					EditorTest(newArgs);
+					break;
+				case 'S':
+					ShortTest(newArgs);
+					break;
+				default:
+					LongTest(newArgs);
+					break;
+			}
+		}
+
+		static void EditorTest(string[] args)
+		{
+			// Get the service on the local machine
+			try
+			{
+				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
+				{
+					// Create a new task definition and assign properties
+					const string taskName = "TestEditor";
+					ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromMinutes(10) }, new ExecAction("notepad.exe", "c:\\test.log", null));
+
+					// Edit task
+					Task t = ts.GetTask(taskName);
+					TaskDefinition td = DisplayTask(t, true);
+
+					// Register then show task again
+					ts.RootFolder.RegisterTaskDefinition(taskName, td);
+					t = ts.GetTask(taskName);
+					DisplayTask(t, false);
+
+					// Remove the task we just created
+					ts.RootFolder.DeleteTask(taskName);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+			}
 		}
 
 		static void ShortTest(string[] args)
@@ -268,12 +306,17 @@ namespace TestTaskService
 			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
 				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
+			DisplayTask(runningTask, true);
+			tf.DeleteTask("Test");
+		}
+
+		static TaskDefinition DisplayTask(Task t, bool editable)
+		{
 			System.Windows.Forms.Application.EnableVisualStyles();
 			Form1 frm = new Form1();
-			frm.taskPropertiesControl1.Editable = true;
-			frm.taskPropertiesControl1.Initialize(runningTask);
-			frm.ShowDialog();
-			tf.DeleteTask("Test");
+			frm.taskPropertiesControl1.Editable = editable;
+			frm.taskPropertiesControl1.Initialize(t);
+			return (frm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? frm.taskPropertiesControl1.TaskDefinition : null;
 		}
 	}
 }

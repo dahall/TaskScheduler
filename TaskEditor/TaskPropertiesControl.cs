@@ -61,6 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// Gets or sets a value indicating whether this <see cref="TaskPropertiesControl"/> is editable.
         /// </summary>
         /// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the task can be edited.")]
         public bool Editable
         {
             get { return editable; }
@@ -187,7 +188,8 @@ namespace Microsoft.Win32.TaskScheduler
                 taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
                 taskStopIfGoingOnBatteriesCheck.Checked = td.Settings.StopIfGoingOnBatteries;
                 taskWakeToRunCheck.Checked = td.Settings.WakeToRun;
-                taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
+				taskStartIfConnectionCheck.Enabled = editable;
+				taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
                 availableConnectionsCombo.Enabled = editable && td.Settings.RunOnlyIfNetworkAvailable;
                 if (taskStartIfConnectionCheck.Checked) availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Name;
 
@@ -667,16 +669,17 @@ namespace Microsoft.Win32.TaskScheduler
             if (isV2 && td != null)
                 td.Settings.Compatibility = TaskCompatibility.V2;
 
-            if (tabControl1.TabPages.Contains(historyTab) && !isV2)
+			bool isVistaPlus = System.Environment.OSVersion.Version.Major >= 6;
+			if (tabControl1.TabPages.Contains(historyTab) && !isVistaPlus)
                 tabControl1.TabPages.Remove(historyTab);
-            else if (!tabControl1.TabPages.Contains(historyTab) && isV2)
+			else if (!tabControl1.TabPages.Contains(historyTab) && isVistaPlus)
                 tabControl1.TabPages.Add(historyTab);
-            taskRestartOnIdleCheck.Enabled = isV2;
-            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled = isV2;
-            taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled = isV2;
-            taskRestartAttemptsLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled = isV2;
-            taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = isV2;
-            taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = isV2;
+			taskRestartOnIdleCheck.Enabled = editable && isV2;
+            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled = editable && isV2;
+			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled = editable && isV2;
+			taskRestartAttemptsLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled = editable && isV2;
+			taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = editable && isV2;
+			taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && isV2;
         }
 
         private void taskWakeToRunCheck_CheckedChanged(object sender, EventArgs e)

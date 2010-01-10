@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 {
     internal partial class TriggerEditDialog : Form
     {
+		private bool isV2;
         private bool onAssignment = false;
         private TaskDefinition td;
         private Trigger trigger;
@@ -87,7 +88,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 onAssignment = true;
                 trigger = value;
-                bool isV2 = td.Settings.Compatibility == TaskCompatibility.V2;
+				isV2 = td.Settings.Compatibility == TaskCompatibility.V2;
                 switch (trigger.TriggerType)
                 {
                     case TaskTriggerType.Time:
@@ -267,8 +268,17 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void durationSpan_ValueChanged(object sender, EventArgs e)
         {
-            if (!onAssignment)
-                trigger.Repetition.Duration = durationSpan.Value;
+			if (!onAssignment)
+			{
+				trigger.Repetition.Duration = durationSpan.Value;
+				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+				{
+					onAssignment = true;
+					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
+					trigger.Repetition.Interval = repeatSpan.Value;
+					onAssignment = false;
+				}
+			}
         }
 
         private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -342,8 +352,17 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void repeatSpan_ValueChanged(object sender, EventArgs e)
         {
-            if (!onAssignment)
-                trigger.Repetition.Interval = repeatSpan.Value;
+			if (!onAssignment)
+			{
+				trigger.Repetition.Interval = repeatSpan.Value;
+				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+				{
+					onAssignment = true;
+					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
+					trigger.Repetition.Duration = durationSpan.Value;
+					onAssignment = false;
+				}
+			}
         }
 
         private void schedOneRadio_CheckedChanged(object sender, EventArgs e)
@@ -466,5 +485,23 @@ namespace Microsoft.Win32.TaskScheduler
                 this.Trigger = newTrigger;
             }
         }
+
+		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				trigger.StartBoundary = schedStartDatePicker.Value;
+		}
+
+		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				trigger.EndBoundary = expireDatePicker.Value;
+		}
+
+		private void activateDatePicker_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				trigger.StartBoundary = activateDatePicker.Value;
+		}
     }
 }

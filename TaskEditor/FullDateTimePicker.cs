@@ -14,6 +14,9 @@ namespace Microsoft.Win32.TaskScheduler
             InitializeComponent();
         }
 
+		[Category("Action"), Description("Occurs when the Value property changes.")]
+		public event EventHandler ValueChanged;
+
         [DefaultValue("Synchronize across time zones"),
         Category("Behavior")]
         public string UTCPrompt
@@ -59,6 +62,13 @@ namespace Microsoft.Win32.TaskScheduler
             get { return this.currentValue.ToUniversalTime() == this.currentValue; }
         }
 
+		protected virtual void OnValueChanged(EventArgs eventArgs)
+		{
+			EventHandler h = this.ValueChanged;
+			if (h != null)
+				h(this, EventArgs.Empty);
+		}
+
         protected void SelectDate()
         {
             this.dateTimePickerDate.Select();
@@ -96,5 +106,10 @@ namespace Microsoft.Win32.TaskScheduler
             this.dateTimePickerTime.RightToLeft = rightToLeftProperty;
             this.dateTimePickerTime.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
         }
+
+		private void subControl_ValueChanged(object sender, EventArgs e)
+		{
+			OnValueChanged(e);
+		}
     }
 }
