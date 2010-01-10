@@ -183,6 +183,7 @@
 			this.schedStartDatePicker.Name = "schedStartDatePicker";
 			this.schedStartDatePicker.UTCPrompt = null;
 			this.schedStartDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.schedStartDatePicker.ValueChanged += new System.EventHandler(this.schedStartDatePicker_ValueChanged);
 			// 
 			// groupBox3
 			// 
@@ -646,6 +647,7 @@
 			this.expireDatePicker.Name = "expireDatePicker";
 			this.expireDatePicker.UTCPrompt = null;
 			this.expireDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.expireDatePicker.ValueChanged += new System.EventHandler(this.expireDatePicker_ValueChanged);
 			// 
 			// activateDatePicker
 			// 
@@ -653,6 +655,7 @@
 			this.activateDatePicker.Name = "activateDatePicker";
 			this.activateDatePicker.UTCPrompt = null;
 			this.activateDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.activateDatePicker.ValueChanged += new System.EventHandler(this.activateDatePicker_ValueChanged);
 			// 
 			// durationLabel
 			// 

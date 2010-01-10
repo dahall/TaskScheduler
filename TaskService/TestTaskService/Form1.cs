@@ -8,5 +8,11 @@ namespace TestTaskService
 		{
 			InitializeComponent();
 		}
+
+		private void okBtn_Click(object sender, System.EventArgs e)
+		{
+			this.DialogResult = DialogResult.OK;
+			Close();
+		}
 	}
 }
