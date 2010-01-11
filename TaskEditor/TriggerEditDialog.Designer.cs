@@ -360,6 +360,7 @@
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
 			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
+			this.monthlyDaysDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyDaysDropDown_SelectedItemsChanged);
 			// 
 			// monthlyOnDOWDropDown
 			// 
@@ -371,6 +372,7 @@
 			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
 			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
+			this.monthlyOnDOWDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyOnDOWDropDown_SelectedItemsChanged);
 			// 
 			// monthlyOnWeekDropDown
 			// 
@@ -381,6 +383,7 @@
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
 			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
+			this.monthlyOnWeekDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyOnWeekDropDown_SelectedItemsChanged);
 			// 
 			// monthlyMonthsDropDown
 			// 
@@ -392,6 +395,7 @@
 			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
 			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
+			this.monthlyMonthsDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyMonthsDropDown_SelectedItemsChanged);
 			// 
 			// schedStartLabel
 			// 

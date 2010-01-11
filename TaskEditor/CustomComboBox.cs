@@ -295,7 +295,55 @@ namespace Microsoft.Win32.TaskScheduler
             set { }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new int SelectedIndex
+		{
+			get { return base.SelectedIndex; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new object SelectedItem
+		{
+			get { return base.SelectedItem; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new string SelectedText
+		{
+			get { return base.SelectedText; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new object SelectedValue
+		{
+			get { return base.SelectedValue; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new int SelectionLength
+		{
+			get { return base.SelectionLength; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[Browsable(false), ReadOnly(true)]
+		public new int SelectionStart
+		{
+			get { return base.SelectionStart; }
+			set { }
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false),
         ReadOnly(true)]
         public new bool Sorted

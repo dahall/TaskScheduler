@@ -97,7 +97,10 @@ namespace Microsoft.Win32.TaskScheduler
             base.DisplayMember = "Text";*/
         }
 
-        [DefaultValue(null),
+		[Category("Action"), Description("Occurs when the SelectedItems property changes.")]
+		public event EventHandler SelectedItemsChanged;
+
+		[DefaultValue(null),
         Category("Appearance")]
         public string CheckAllText
         {
@@ -109,10 +112,10 @@ namespace Microsoft.Win32.TaskScheduler
             get
             {
                 long ret = 0;
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
                 {
-                    object o = checkedListBox1.Items[i];
-                    if (checkedListBox1.Items[i] is DropDownCheckListItem)
+					object o = checkedListBox1.CheckedItems[i];
+                    if (o is DropDownCheckListItem)
                         o = ((DropDownCheckListItem)o).Value;
                     try { ret |= Convert.ToInt64(o); }
                     catch {}
@@ -158,7 +161,7 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get
             {
-                ListBox.SelectedObjectCollection c = this.checkedListBox1.SelectedItems;
+                var c = this.checkedListBox1.CheckedItems;
                 DropDownCheckListItem[] ret = new DropDownCheckListItem[c.Count];
                 for (int i = 0; i < ret.Length; i++)
                 {
@@ -200,8 +203,13 @@ namespace Microsoft.Win32.TaskScheduler
             foreach (var item in this.checkedListBox1.CheckedItems)
                 items.Add(item.ToString());
             if (!string.IsNullOrEmpty(CheckAllText) && items.Count > 0 && items[0] == CheckAllText) items.RemoveAt(0);
-            this.Text = string.Join(", ", items.ToArray());
-        }
+			string newText = string.Join(", ", items.ToArray());
+			if (newText != this.Text)
+			{
+				this.Text = newText;
+				OnSelectedItemsChanged(EventArgs.Empty);
+			}
+		}
 
         internal void InitializeFromRange(int start, int end)
         {
@@ -218,7 +226,14 @@ namespace Microsoft.Win32.TaskScheduler
             UpdateText();
         }
 
-        void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+		protected virtual void OnSelectedItemsChanged(EventArgs eventArgs)
+		{
+			EventHandler h = this.SelectedItemsChanged;
+			if (h != null)
+				h(this, EventArgs.Empty);
+		}
+
+		void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (e.Index == 0 && !string.IsNullOrEmpty(CheckAllText) && this.checkedListBox1.Items.Count > 1)
             {

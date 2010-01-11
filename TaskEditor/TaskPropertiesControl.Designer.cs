@@ -222,12 +222,14 @@
 			resources.ApplyResources(this.taskRunLevelCheck, "taskRunLevelCheck");
 			this.taskRunLevelCheck.Name = "taskRunLevelCheck";
 			this.taskRunLevelCheck.UseVisualStyleBackColor = true;
+			this.taskRunLevelCheck.CheckedChanged += new System.EventHandler(this.taskRunLevelCheck_CheckedChanged);
 			// 
 			// taskLocalOnlyCheck
 			// 
 			resources.ApplyResources(this.taskLocalOnlyCheck, "taskLocalOnlyCheck");
 			this.taskLocalOnlyCheck.Name = "taskLocalOnlyCheck";
 			this.taskLocalOnlyCheck.UseVisualStyleBackColor = true;
+			this.taskLocalOnlyCheck.CheckedChanged += new System.EventHandler(this.taskLocalOnlyCheck_CheckedChanged);
 			// 
 			// taskLoggedOptionalRadio
 			// 
@@ -243,6 +245,7 @@
 			this.taskLoggedOnRadio.Name = "taskLoggedOnRadio";
 			this.taskLoggedOnRadio.TabStop = true;
 			this.taskLoggedOnRadio.UseVisualStyleBackColor = true;
+			this.taskLoggedOnRadio.CheckedChanged += new System.EventHandler(this.taskLoggedOnRadio_CheckedChanged);
 			// 
 			// taskPrincipalText
 			// 

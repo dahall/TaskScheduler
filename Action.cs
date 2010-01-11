@@ -216,12 +216,12 @@ namespace Microsoft.Win32.TaskScheduler
 		internal override void Bind(V1Interop.ITask v1Task)
 		{
 			object o;
-			if (unboundValues.TryGetValue("Path", out o) && o != null)
-				v1Task.SetApplicationName((string)o);
-			if (unboundValues.TryGetValue("Arguments", out o) && o != null)
-				v1Task.SetParameters((string)o);
-			if (unboundValues.TryGetValue("WorkingDirectory", out o) && o != null)
-				v1Task.SetWorkingDirectory((string)o);
+			if (unboundValues.TryGetValue("Path", out o))
+				v1Task.SetApplicationName(o == null ? string.Empty : o.ToString());
+			if (unboundValues.TryGetValue("Arguments", out o))
+				v1Task.SetParameters(o == null ? string.Empty : o.ToString());
+			if (unboundValues.TryGetValue("WorkingDirectory", out o))
+				v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
 		}
 
 		/// <summary>
