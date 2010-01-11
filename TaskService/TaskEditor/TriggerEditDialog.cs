@@ -503,5 +503,39 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!onAssignment)
 				trigger.StartBoundary = activateDatePicker.Value;
 		}
+
+		private void monthlyMonthsDropDown_SelectedItemsChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				if (monthlyDaysRadio.Checked)
+					((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+				else
+					((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+			}
+		}
+
+		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
+				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
+					days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
+				((MonthlyTrigger)trigger).DaysOfMonth = days;
+			}
+		}
+
+		private void monthlyOnWeekDropDown_SelectedItemsChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
+		}
+
+		private void monthlyOnDOWDropDown_SelectedItemsChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
+		}
     }
 }
