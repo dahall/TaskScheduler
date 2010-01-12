@@ -181,6 +181,7 @@
 			// 
 			resources.ApplyResources(this.schedStartDatePicker, "schedStartDatePicker");
 			this.schedStartDatePicker.Name = "schedStartDatePicker";
+			this.schedStartDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
 			this.schedStartDatePicker.UTCPrompt = null;
 			this.schedStartDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			this.schedStartDatePicker.ValueChanged += new System.EventHandler(this.schedStartDatePicker_ValueChanged);
@@ -229,6 +230,7 @@
 			// 
 			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
 			this.dailyRecurNumUpDn.Name = "dailyRecurNumUpDn";
+			this.dailyRecurNumUpDn.ValueChanged += new System.EventHandler(this.dailyRecurNumUpDn_ValueChanged);
 			// 
 			// dailyDaysLabel
 			// 
@@ -267,47 +269,55 @@
 			resources.ApplyResources(this.weeklySunCheck, "weeklySunCheck");
 			this.weeklySunCheck.Name = "weeklySunCheck";
 			this.weeklySunCheck.UseVisualStyleBackColor = true;
+			this.weeklySunCheck.CheckedChanged += new System.EventHandler(this.weeklySunCheck_CheckedChanged);
 			// 
 			// weeklyMonCheck
 			// 
 			resources.ApplyResources(this.weeklyMonCheck, "weeklyMonCheck");
 			this.weeklyMonCheck.Name = "weeklyMonCheck";
 			this.weeklyMonCheck.UseVisualStyleBackColor = true;
+			this.weeklyMonCheck.CheckedChanged += new System.EventHandler(this.weeklyMonCheck_CheckedChanged);
 			// 
 			// weeklyTueCheck
 			// 
 			resources.ApplyResources(this.weeklyTueCheck, "weeklyTueCheck");
 			this.weeklyTueCheck.Name = "weeklyTueCheck";
 			this.weeklyTueCheck.UseVisualStyleBackColor = true;
+			this.weeklyTueCheck.CheckedChanged += new System.EventHandler(this.weeklyTueCheck_CheckedChanged);
 			// 
 			// weeklyWedCheck
 			// 
 			resources.ApplyResources(this.weeklyWedCheck, "weeklyWedCheck");
 			this.weeklyWedCheck.Name = "weeklyWedCheck";
 			this.weeklyWedCheck.UseVisualStyleBackColor = true;
+			this.weeklyWedCheck.CheckedChanged += new System.EventHandler(this.weeklyWedCheck_CheckedChanged);
 			// 
 			// weeklyThuCheck
 			// 
 			resources.ApplyResources(this.weeklyThuCheck, "weeklyThuCheck");
 			this.weeklyThuCheck.Name = "weeklyThuCheck";
 			this.weeklyThuCheck.UseVisualStyleBackColor = true;
+			this.weeklyThuCheck.CheckedChanged += new System.EventHandler(this.weeklyThuCheck_CheckedChanged);
 			// 
 			// weeklyFriCheck
 			// 
 			resources.ApplyResources(this.weeklyFriCheck, "weeklyFriCheck");
 			this.weeklyFriCheck.Name = "weeklyFriCheck";
 			this.weeklyFriCheck.UseVisualStyleBackColor = true;
+			this.weeklyFriCheck.CheckedChanged += new System.EventHandler(this.weeklyFriCheck_CheckedChanged);
 			// 
 			// weeklySatCheck
 			// 
 			resources.ApplyResources(this.weeklySatCheck, "weeklySatCheck");
 			this.weeklySatCheck.Name = "weeklySatCheck";
 			this.weeklySatCheck.UseVisualStyleBackColor = true;
+			this.weeklySatCheck.CheckedChanged += new System.EventHandler(this.weeklySatCheck_CheckedChanged);
 			// 
 			// weeklyRecurNumUpDn
 			// 
 			resources.ApplyResources(this.weeklyRecurNumUpDn, "weeklyRecurNumUpDn");
 			this.weeklyRecurNumUpDn.Name = "weeklyRecurNumUpDn";
+			this.weeklyRecurNumUpDn.ValueChanged += new System.EventHandler(this.weeklyRecurNumUpDn_ValueChanged);
 			// 
 			// weeklyOnWeeksLabel
 			// 
@@ -649,6 +659,7 @@
 			// 
 			resources.ApplyResources(this.expireDatePicker, "expireDatePicker");
 			this.expireDatePicker.Name = "expireDatePicker";
+			this.expireDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
 			this.expireDatePicker.UTCPrompt = null;
 			this.expireDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			this.expireDatePicker.ValueChanged += new System.EventHandler(this.expireDatePicker_ValueChanged);
@@ -657,6 +668,7 @@
 			// 
 			resources.ApplyResources(this.activateDatePicker, "activateDatePicker");
 			this.activateDatePicker.Name = "activateDatePicker";
+			this.activateDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
 			this.activateDatePicker.UTCPrompt = null;
 			this.activateDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			this.activateDatePicker.ValueChanged += new System.EventHandler(this.activateDatePicker_ValueChanged);

@@ -20,6 +20,9 @@ namespace TestTaskService
 				if (args.Length > i) newArgs[i] = args[i];
 			switch (test)
 			{
+				case 'W':
+					Win7Test(newArgs);
+					break;
 				case 'E':
 					EditorTest(newArgs);
 					break;
@@ -32,6 +35,46 @@ namespace TestTaskService
 			}
 		}
 
+		static void Win7Test(string[] args)
+		{
+			// Get the service on the local machine
+			try
+			{
+				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
+				{
+					// Create a new task definition and assign properties
+					TaskDefinition td = ts.NewTask();
+
+					switch (int.Parse(args[0]))
+					{
+						case 2:
+							td.Triggers.Add(new BootTrigger { Delay = TimeSpan.FromMinutes(10) });
+							break;
+						case 3:
+							td.Triggers.Add(new EventTrigger("Security", "VSSAudit", null));
+							break;
+						case 4:
+							td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.SessionUnlock));
+							break;
+						case 5:
+							td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
+							break;
+					}
+
+					td.Actions.Add(new ShowMessageAction("Win7 task has fired", "Task Test"));
+
+					const string taskName = "Test";
+					ts.RootFolder.RegisterTaskDefinition(taskName, td);
+					ts.RootFolder.DeleteTask(taskName);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				Console.ReadKey(false);
+			}
+		}
+
 		static void EditorTest(string[] args)
 		{
 			// Get the service on the local machine
@@ -41,7 +84,7 @@ namespace TestTaskService
 				{
 					// Create a new task definition and assign properties
 					const string taskName = "TestEditor";
-					ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromMinutes(10) }, new ExecAction("notepad.exe", "c:\\test.log", null));
+					ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
 
 					// Edit task
 					Task t = ts.GetTask(taskName);
@@ -59,6 +102,7 @@ namespace TestTaskService
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.ToString());
+				Console.ReadKey(false);
 			}
 		}
 
@@ -104,6 +148,7 @@ namespace TestTaskService
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.ToString());
+				Console.ReadKey(false);
 			}
 		}
 
