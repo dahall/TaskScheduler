@@ -76,6 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
     internal partial class DropDownCheckList : CustomComboBox
     {
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+		private bool privateSet = false;
 
         public DropDownCheckList()
         {
@@ -92,21 +93,21 @@ namespace Microsoft.Win32.TaskScheduler
             };
             this.checkedListBox1.ItemCheck += new ItemCheckEventHandler(checkedListBox1_ItemCheck);
             base.DropDownControl = this.checkedListBox1;
-            /*base.DataSource = this.checkedListBox1.Items;
-            base.ValueMember = "Value";
-            base.DisplayMember = "Text";*/
         }
 
 		[Category("Action"), Description("Occurs when the SelectedItems property changes.")]
 		public event EventHandler SelectedItemsChanged;
 
-		[DefaultValue(null),
-        Category("Appearance")]
+		[Category("Behavior"), DefaultValue(false)]
+		public bool AllowOnlyOneCheckedItem { get; set; }
+
+		[DefaultValue(null), Category("Appearance")]
         public string CheckAllText
         {
             get; set;
         }
 
+		[DefaultValue(0L), Category("Data")]
         public long CheckedFlagValue
         {
             get
@@ -124,7 +125,8 @@ namespace Microsoft.Win32.TaskScheduler
             }
             set
             {
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+				privateSet = true;
+				for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 {
                     long? val = null;
                     object o = checkedListBox1.Items[i];
@@ -138,19 +140,18 @@ namespace Microsoft.Win32.TaskScheduler
                     else
                         this.checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 }
-                UpdateText();
+				privateSet = false;
+				UpdateText();
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        Category("Data")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content), Category("Data")]
         public new CheckedListBox.ObjectCollection Items
         {
             get { return this.checkedListBox1.Items; }
         }
 
-        [DefaultValue(false),
-        Category("Appearance")]
+        [DefaultValue(false), Category("Appearance")]
         public bool MultiColumnList
         {
             get { return this.checkedListBox1.MultiColumn; }
@@ -213,11 +214,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         internal void InitializeFromRange(int start, int end)
         {
+			privateSet = true;
             this.checkedListBox1.Items.Clear();
             for (int i = start; i <= end; i++)
             {
                 this.checkedListBox1.Items.Add(new DropDownCheckListItem(i));
             }
+			privateSet = false;
         }
 
         protected override void OnDropDownClosed(EventArgs e)
@@ -235,14 +238,37 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (e.Index == 0 && !string.IsNullOrEmpty(CheckAllText) && this.checkedListBox1.Items.Count > 1)
-            {
-                bool chk = !GetItemChecked(0);
-                for (int i = 1; i < this.checkedListBox1.Items.Count; i++)
-                {
-                    SetItemChecked(i, chk);
-                }
-            }
+			if (!privateSet)
+			{
+				privateSet = true;
+				if (e.Index == 0 && !string.IsNullOrEmpty(CheckAllText) && this.checkedListBox1.Items.Count > 1)
+				{
+					bool chk = !GetItemChecked(0);
+					if (!chk) this.checkedListBox1.SetItemChecked(1, true);
+					for (int i = chk ? 1 : 2; i < this.checkedListBox1.Items.Count; i++)
+						this.checkedListBox1.SetItemChecked(i, chk);
+				}
+				else
+				{
+					if (AllowOnlyOneCheckedItem)
+					{
+						if (e.NewValue == CheckState.Checked)
+						{
+							foreach (var i in this.checkedListBox1.CheckedIndices)
+								this.checkedListBox1.SetItemChecked((int)i, false);
+						}
+						else
+							e.NewValue = CheckState.Checked;
+					}
+					else
+					{
+						if (e.NewValue == CheckState.Unchecked && this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index)
+							e.NewValue = CheckState.Checked;
+					}
+				}
+				privateSet = false;
+			}
+			//base.PreventPopupHide = this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index && e.NewValue == CheckState.Unchecked;
         }
     }
 }

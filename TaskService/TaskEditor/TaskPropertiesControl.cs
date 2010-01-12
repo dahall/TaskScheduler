@@ -22,6 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
         private TaskService service = null;
         private Task task = null;
         private TaskDefinition td = null;
+		private bool v2 = true;
 
         static TaskPropertiesControl()
         {
@@ -70,19 +71,11 @@ namespace Microsoft.Win32.TaskScheduler
             set
             {
                 editable = value;
-                bool v2 = true;
-                System.Security.Principal.WindowsIdentity wid = System.Security.Principal.WindowsIdentity.GetCurrent();
-                if (task != null)
-                {
-                    v2 = td.Settings.Compatibility == TaskCompatibility.V2;
-                    try { wid = new System.Security.Principal.WindowsIdentity(td.Principal.UserId); }
-                    catch { }
-                }
 
                 // General tab
                 taskDescText.ReadOnly = !value;
                 changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = value;
-                SetUserControls(task != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
+                SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
 
                 // Triggers tab
                 triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = value;
@@ -141,8 +134,12 @@ namespace Microsoft.Win32.TaskScheduler
                 if (service == null)
                     throw new ArgumentNullException("TaskDefinition cannot be set until TaskService has been set with a valid object.");
 
+				if (value == null)
+					throw new ArgumentNullException("TaskDefinition cannot be set to null.");
+
                 td = value;
                 onAssignment = true;
+				v2 = td.Settings.Compatibility == TaskCompatibility.V2;
 
                 this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
                 //this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
@@ -285,11 +282,11 @@ namespace Microsoft.Win32.TaskScheduler
         private void actionEditButton_Click(object sender, EventArgs e)
         {
             int idx = actionListView.SelectedIndices[0];
-            ActionEditDialog dlg = new ActionEditDialog(td.Settings.Compatibility == TaskCompatibility.V2);
+            ActionEditDialog dlg = new ActionEditDialog(v2);
             dlg.Action = actionListView.Items[idx].Tag as Action;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                if (td.Settings.Compatibility == TaskCompatibility.V2)
+                if (v2)
                     td.Actions.RemoveAt(idx);
                 actionListView.Items.RemoveAt(idx);
                 td.Actions.Add(dlg.Action);
@@ -304,7 +301,7 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionNewButton_Click(object sender, EventArgs e)
         {
-            ActionEditDialog dlg = new ActionEditDialog(td.Settings.Compatibility == TaskCompatibility.V2);
+            ActionEditDialog dlg = new ActionEditDialog(v2);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Actions.Add(dlg.Action);
@@ -507,7 +504,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 taskLoggedOnRadio.Enabled = editable;
                 taskLoggedOptionalRadio.Enabled = editable;
-                taskLocalOnlyCheck.Enabled = editable && (task == null || td.Settings.Compatibility == TaskCompatibility.V2);
+                taskLocalOnlyCheck.Enabled = editable && (task == null || v2);
             }
             if (task != null)
                 taskPrincipalText.Text = this.flagExecutorIsGroup ? td.Principal.GroupId : td.Principal.UserId;
@@ -517,13 +514,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && td.Settings.Compatibility == TaskCompatibility.V2)
+			if (!onAssignment && v2)
                 td.Settings.AllowDemandStart = taskAllowDemandStartCheck.Checked;
         }
 
         private void taskAllowHardTerminateCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && td.Settings.Compatibility == TaskCompatibility.V2)
+			if (!onAssignment && v2)
                 td.Settings.AllowHardTerminate = taskAllowHardTerminateCheck.Checked;
         }
 
@@ -623,13 +620,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
         {
-            taskLocalOnlyCheck.Enabled = editable && (task == null || td.Settings.Compatibility == TaskCompatibility.V2) && taskLoggedOptionalRadio.Checked;
+            taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked;
             UpdatePrincipal();
         }
 
         private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && td.Settings.Compatibility == TaskCompatibility.V2)
+			if (!onAssignment && v2)
                 td.Settings.MultipleInstances = (TaskInstancesPolicy)taskMultInstCombo.SelectedIndex;
         }
 
@@ -701,21 +698,21 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool isV2 = taskVersionCombo.SelectedIndex != 0;
-            if (isV2 && td != null)
-                td.Settings.Compatibility = TaskCompatibility.V2;
+            v2 = taskVersionCombo.SelectedIndex != 0;
+            if (td != null && !onAssignment)
+                td.Settings.Compatibility = v2 ? TaskCompatibility.V2 : TaskCompatibility.V1;
 
             bool isVistaPlus = System.Environment.OSVersion.Version.Major >= 6;
             if (tabControl1.TabPages.Contains(historyTab) && !isVistaPlus)
                 tabControl1.TabPages.Remove(historyTab);
             else if (!tabControl1.TabPages.Contains(historyTab) && isVistaPlus)
                 tabControl1.TabPages.Add(historyTab);
-            taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled = editable && isV2;
-            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled = editable && isV2;
-            taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled = editable && isV2;
-            taskRestartAttemptsLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled = editable && isV2;
-            taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = editable && isV2;
-            taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && isV2;
+            taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled = 
+            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled = 
+            taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled = 
+            taskRestartAttemptsLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled = 
+            taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = 
+            taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && v2;
         }
 
         private void taskWakeToRunCheck_CheckedChanged(object sender, EventArgs e)

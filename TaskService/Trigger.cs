@@ -169,7 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Trigger = iTrigger;
 			this.ttype = iTrigger.Type;
 			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
-				this.StartBoundary = DateTime.Now;
+				this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
 		}
 
 		internal Trigger(TaskTriggerType triggerType)
@@ -181,7 +181,7 @@ namespace Microsoft.Win32.TaskScheduler
 			try { v1TriggerData.Type = ConvertToV1TriggerType(this.ttype); }
 			catch { }
 
-			this.StartBoundary = DateTime.Now;
+			this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
 		}
 
 		/// <summary>
@@ -224,7 +224,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary);
-				return v1TriggerData.EndDate;
+				return unboundValues.ContainsKey("EndBoundary") ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
 			}
 			set
 			{
@@ -313,7 +313,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return DateTime.Parse(v2Trigger.StartBoundary);
-				return v1TriggerData.BeginDate;
+				return unboundValues.ContainsKey("StartBoundary") ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
 			}
 			set
 			{
@@ -798,6 +798,14 @@ namespace Microsoft.Win32.TaskScheduler
             : base(TaskTriggerType.Event)
         {
         }
+
+		/// <summary>
+		/// Initializes an unbound instance of the <see cref="EventTrigger"/> class and sets a basic event.
+		/// </summary>
+		/// <param name="log">The event's log.</param>
+		/// <param name="source">The event's source. Can be <c>null</c>.</param>
+		/// <param name="eventId">The event's id. Can be <c>null</c>.</param>
+		public EventTrigger(string log, string source, int? eventId) : this() { SetBasic(log, source, eventId); }
 
         internal EventTrigger(V2Interop.ITrigger iTrigger)
             : base(iTrigger)
@@ -1664,6 +1672,15 @@ namespace Microsoft.Win32.TaskScheduler
             : base(TaskTriggerType.SessionStateChange)
         {
         }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SessionStateChangeTrigger"/> class.
+		/// </summary>
+		/// <param name="stateChange">The state change.</param>
+		public SessionStateChangeTrigger(TaskSessionStateChangeType stateChange) : this()
+		{
+			this.StateChange = stateChange;
+		}
 
         internal SessionStateChangeTrigger(V2Interop.ITrigger iTrigger)
             : base(iTrigger)

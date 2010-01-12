@@ -295,6 +295,8 @@ namespace Microsoft.Win32.TaskScheduler
             set { }
         }
 
+		protected bool PreventPopupHide { get; set; }
+
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new int SelectedIndex
@@ -385,7 +387,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// </summary>
         public virtual void HideDropDown()
         {
-            if (m_popupCtrl != null && IsDroppedDown)
+            if (m_popupCtrl != null && IsDroppedDown && !PreventPopupHide)
             {
                 // Hide drop-down control.
                 m_popupCtrl.Hide();
