@@ -32,6 +32,20 @@ namespace Microsoft.Win32.TaskScheduler
             InitializeComponent();
         }
 
+		[RefreshProperties(RefreshProperties.Repaint), DefaultValue((string) null), Localizable(true), Category("Behavior")]
+		public string CustomTimeFormat
+		{
+			set
+			{
+				dateTimePickerTime.Format = string.IsNullOrEmpty( value) ? DateTimePickerFormat.Time : DateTimePickerFormat.Custom;
+				dateTimePickerTime.CustomFormat = value;
+			}
+			get
+			{
+				return dateTimePickerTime.CustomFormat;
+			}
+		}
+
 		/// <summary>
 		/// Occurs when the <see cref="Value"/> property changes.
 		/// </summary>
