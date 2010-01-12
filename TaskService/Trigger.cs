@@ -224,7 +224,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary);
-				return unboundValues.ContainsKey("EndBoundary") ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
+				return (unboundValues!=null && unboundValues.ContainsKey("EndBoundary")) ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
 			}
 			set
 			{
@@ -253,7 +253,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(v2Trigger.ExecutionTimeLimit);
 				if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				return (unboundValues.ContainsKey("ExecutionTimeLimit") ? (TimeSpan)unboundValues["ExecutionTimeLimit"] : TimeSpan.Zero);
+				return ((unboundValues!=null && unboundValues.ContainsKey("ExecutionTimeLimit")) ? (TimeSpan)unboundValues["ExecutionTimeLimit"] : TimeSpan.Zero);
 			}
 			set
 			{
@@ -313,7 +313,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return DateTime.Parse(v2Trigger.StartBoundary);
-				return unboundValues.ContainsKey("StartBoundary") ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
+				return (unboundValues!=null && unboundValues.ContainsKey("StartBoundary")) ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
 			}
 			set
 			{

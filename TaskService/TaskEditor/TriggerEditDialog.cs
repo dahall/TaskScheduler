@@ -256,6 +256,9 @@ namespace Microsoft.Win32.TaskScheduler
             stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
             delayCheckBox.Enabled = delaySpan.Enabled = isV2;
 			monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
+        	schedStartDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
+        	activateDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
+        	expireDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
             // Disable logon trigger options
             foreach (Control c in logonTab.Controls)
                 c.Enabled = isV2;
@@ -570,12 +573,21 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetWeeklyDay(CheckBox cb, DaysOfTheWeek dow)
 		{
-			if (!onAssignment && cb != null)
+			if (!onAssignment && cb != null )
 			{
+				var weeklyTrigger = (WeeklyTrigger)trigger;
+
 				if (cb.Checked)
-					((WeeklyTrigger)trigger).DaysOfWeek |= dow;
+					weeklyTrigger.DaysOfWeek |= dow;
 				else
-					((WeeklyTrigger)trigger).DaysOfWeek &= ~dow;
+					weeklyTrigger.DaysOfWeek &= ~dow;
+
+				// Ensure that ONE day is always checked.
+				if( weeklyTrigger.DaysOfWeek == 0 )
+				{
+					weeklyTrigger.DaysOfWeek |= dow;
+					cb.Checked = true;
+				}
 			}
 		}
 
