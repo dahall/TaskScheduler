@@ -4,14 +4,25 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	internal enum FullDateTimePickerTimeFormat
+	{
+		/// <summary>Shows hours, minutes and seconds</summary>
+		LongTime,
+		/// <summary>Shows hours and minutes</summary>
+		ShortTime,
+		/// <summary>No time box shown</summary>
+		Hidden
+	}
+
 	/// <summary>
 	/// A single control that can represent a full date and time.
 	/// </summary>
     internal partial class FullDateTimePicker : UserControl
     {
         private DateTime currentValue = new DateTime(0L);
+		private FullDateTimePickerTimeFormat timeFormat = FullDateTimePickerTimeFormat.LongTime;
 		private FieldConversionUtcCheckBehavior utcBehavior = FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
-		private string utcPrompt = null;
+		private string utcPrompt = "Synchronize across time zones";
 
 		/// <summary>
 		/// Behavior of producing value when Utc check is checked
@@ -32,17 +43,30 @@ namespace Microsoft.Win32.TaskScheduler
             InitializeComponent();
         }
 
-		[RefreshProperties(RefreshProperties.Repaint), DefaultValue((string) null), Localizable(true), Category("Behavior")]
-		public string CustomTimeFormat
+		[RefreshProperties(RefreshProperties.Repaint), DefaultValue(FullDateTimePickerTimeFormat.LongTime), Category("Behavior")]
+		public FullDateTimePickerTimeFormat TimeFormat
 		{
+			get { return timeFormat; }
 			set
 			{
-				dateTimePickerTime.Format = string.IsNullOrEmpty( value) ? DateTimePickerFormat.Time : DateTimePickerFormat.Custom;
-				dateTimePickerTime.CustomFormat = value;
-			}
-			get
-			{
-				return dateTimePickerTime.CustomFormat;
+				timeFormat = value;
+				switch (value)
+				{
+					case FullDateTimePickerTimeFormat.ShortTime:
+						dateTimePickerTime.Format = DateTimePickerFormat.Custom;
+						dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortTimePattern;
+						dateTimePickerTime.Visible = true;
+						break;
+					case FullDateTimePickerTimeFormat.Hidden:
+						//dateTimePickerTime.Value = dateTimePickerTime.Value.Date;
+						dateTimePickerTime.Visible = false;
+						break;
+					case FullDateTimePickerTimeFormat.LongTime:
+					default:
+						dateTimePickerTime.Format = DateTimePickerFormat.Time;
+						dateTimePickerTime.Visible = true;
+						break;
+				}
 			}
 		}
 
@@ -67,7 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the UTC prompt.
 		/// </summary>
 		/// <value>The UTC prompt.</value>
-        [DefaultValue("Synchronize across time zones"), Category("Behavior")]
+		[RefreshProperties(RefreshProperties.Repaint), DefaultValue("Synchronize across time zones"), Category("Behavior")]
         public string UTCPrompt
         {
             get { return utcPrompt; }
@@ -76,15 +100,15 @@ namespace Microsoft.Win32.TaskScheduler
                 utcPrompt = value;
                 if (string.IsNullOrEmpty(utcPrompt))
                 {
-                    tableLayoutPanelFullDateTime.ColumnStyles[2].Width = 0;
-                    utcCheckBox.Checked = false;
-                }
+					utcCheckBox.Checked = false;
+					utcCheckBox.Visible = false;
+				}
                 else
                 {
                     utcCheckBox.Text = utcPrompt;
-                    tableLayoutPanelFullDateTime.ColumnStyles[2].Width = utcCheckBox.Width;
                     utcCheckBox.Checked = false;
-                }
+					utcCheckBox.Visible = true;
+				}
             }
         }
 
@@ -138,8 +162,8 @@ namespace Microsoft.Win32.TaskScheduler
         private void ControlsToData()
         {
             DateTime time = this.dateTimePickerDate.Value;
-            DateTime time2 = this.dateTimePickerTime.Value;
-            time = time.Add(time2.TimeOfDay);
+			if (timeFormat != FullDateTimePickerTimeFormat.Hidden)
+				time += this.dateTimePickerTime.Value.TimeOfDay;
 			if (!utcCheckBox.Checked)
 				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
 			else
