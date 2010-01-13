@@ -205,7 +205,8 @@ namespace Microsoft.Win32.TaskScheduler
 
                 // Set version
                 taskVersionCombo.SelectedIndex = -1;
-                taskVersionCombo.SelectedIndex = td.Settings.Compatibility == TaskCompatibility.V1 ? 0 : 1;
+				taskVersionCombo.Items.RemoveAt(v2 ? 0 : 1);
+                taskVersionCombo.SelectedIndex = 0;
 
                 onAssignment = false;
             }
@@ -698,10 +699,6 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            v2 = taskVersionCombo.SelectedIndex != 0;
-            if (td != null && !onAssignment)
-                td.Settings.Compatibility = v2 ? TaskCompatibility.V2 : TaskCompatibility.V1;
-
             bool isVistaPlus = System.Environment.OSVersion.Version.Major >= 6;
             if (tabControl1.TabPages.Contains(historyTab) && !isVistaPlus)
                 tabControl1.TabPages.Remove(historyTab);

@@ -227,4 +227,7 @@
   <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
     <value>On workstation unlock</value>
   </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>Synchronize across time zones</value>
+  </data>
 </root>

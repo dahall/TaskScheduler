@@ -160,7 +160,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition)
 		{
-			return RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+			return RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate, definition.Principal.UserId, null, definition.Principal.LogonType, null);
 		}
 
 		/// <summary>

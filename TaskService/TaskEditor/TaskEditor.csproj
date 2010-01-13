@@ -37,11 +37,14 @@
     <DocumentationFile>bin\Release\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.0.3664.29139, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -70,8 +73,7 @@
     <Compile Include="FullDateTimePicker.Designer.cs">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs">
-    </Compile>
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

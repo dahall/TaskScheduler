@@ -976,6 +976,7 @@ namespace Microsoft.Win32.TaskScheduler
     /// </summary>
     public sealed class TaskPrincipal
     {
+		private const string localSystemAcct = "SYSTEM";
         private V1Interop.ITask v1Task = null;
         private V2Interop.IPrincipal v2Principal;
 
@@ -1060,7 +1061,7 @@ namespace Microsoft.Win32.TaskScheduler
                     return v2Principal.LogonType;
                 if ((v1Task.GetFlags() & V1Interop.TaskFlags.Interactive) == V1Interop.TaskFlags.Interactive)
                     return TaskLogonType.InteractiveToken;
-                throw new NotV1SupportedException();
+                return TaskLogonType.ServiceAccount;
             }
             set
             {
@@ -1068,14 +1069,14 @@ namespace Microsoft.Win32.TaskScheduler
                     v2Principal.LogonType = value;
                 else
                 {
-                    V1Interop.TaskFlags flags = v1Task.GetFlags();
+					if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
+						throw new NotV1SupportedException();
+					V1Interop.TaskFlags flags = v1Task.GetFlags();
                     if (value == TaskLogonType.InteractiveToken)
                         flags |= V1Interop.TaskFlags.Interactive;
                     else
                         flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
                     v1Task.SetFlags(flags);
-                    if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
-                        throw new NotV1SupportedException();
                 }
             }
         }
@@ -1109,14 +1110,23 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 if (v2Principal != null)
                     return v2Principal.UserId;
-                try { return v1Task.GetAccountInformation(); } catch { return null; }
+                try
+				{
+					string acct = v1Task.GetAccountInformation();
+					return string.IsNullOrEmpty(acct) ? localSystemAcct : acct;
+				}
+				catch { return null; }
             }
             set
             {
-                if (v2Principal != null)
-                    v2Principal.UserId = value;
-                else
-                    v1Task.SetAccountInformation(value, IntPtr.Zero);
+				if (v2Principal != null)
+					v2Principal.UserId = value;
+				else
+				{
+					if (value.Equals(localSystemAcct, StringComparison.CurrentCultureIgnoreCase))
+						value = "";
+					v1Task.SetAccountInformation(value, IntPtr.Zero);
+				}
             }
         }
 

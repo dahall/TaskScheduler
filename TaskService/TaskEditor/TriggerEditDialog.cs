@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -201,7 +196,8 @@ namespace Microsoft.Win32.TaskScheduler
                     stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
                     stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
                 }
-                if (activateCheckBox.Visible)
+				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
+				if (activateCheckBox.Visible)
                 {
                     activateCheckBox.Checked = activateDatePicker.Enabled = trigger.StartBoundary != DateTime.MinValue;
                     if (activateCheckBox.Checked)
@@ -256,10 +252,14 @@ namespace Microsoft.Win32.TaskScheduler
             stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
             delayCheckBox.Enabled = delaySpan.Enabled = isV2;
 			monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
-        	schedStartDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
-        	activateDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
-        	expireDatePicker.CustomTimeFormat = (isV2) ? null : "HH:mm";
-            // Disable logon trigger options
+
+			// Set date/time controls
+			schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
+			schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+			activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+        	expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
+
+			// Disable logon trigger options
             foreach (Control c in logonTab.Controls)
                 c.Enabled = isV2;
         }
@@ -429,7 +429,6 @@ namespace Microsoft.Win32.TaskScheduler
         {
             TriggerView = TaskTriggerDisplayType.Schedule;
             schedStartDatePicker.Value = trigger.StartBoundary;
-            activateCheckBox.Visible = activateDatePicker.Visible = false;
         }
 
         private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -580,13 +579,12 @@ namespace Microsoft.Win32.TaskScheduler
 				if (cb.Checked)
 					weeklyTrigger.DaysOfWeek |= dow;
 				else
-					weeklyTrigger.DaysOfWeek &= ~dow;
-
-				// Ensure that ONE day is always checked.
-				if( weeklyTrigger.DaysOfWeek == 0 )
 				{
-					weeklyTrigger.DaysOfWeek |= dow;
-					cb.Checked = true;
+					// Ensure that ONE day is always checked.
+					if (weeklyTrigger.DaysOfWeek == dow)
+						cb.Checked = true;
+					else
+						weeklyTrigger.DaysOfWeek &= ~dow;
 				}
 			}
 		}
