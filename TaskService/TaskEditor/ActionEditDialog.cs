@@ -33,6 +33,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the action.
 		/// </summary>
 		/// <value>The action.</value>
+		[DefaultValue(null), Browsable(false)]
         public Action Action
         {
             get
@@ -81,9 +82,21 @@ namespace Microsoft.Win32.TaskScheduler
         }
 
 		/// <summary>
+		/// Gets or sets the prompt text at the top of the dialog.
+		/// </summary>
+		/// <value>The text to use as a prompt.</value>
+		[DefaultValue("You must specify what action this task will perform."), Category("Appearance")]
+		public string Prompt
+		{
+			get { return promptLabel.Text; }
+			set { promptLabel.Text = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether this editor only supports V1 actions.
 		/// </summary>
 		/// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Behavior")]
 		public bool SupportV1Only
 		{
 			get { return !isV2; }

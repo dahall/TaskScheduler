@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionEditDialog));
-			this.introLabel = new System.Windows.Forms.Label();
+			this.promptLabel = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.execProgLabel = new System.Windows.Forms.Label();
 			this.actionsCombo = new System.Windows.Forms.ComboBox();
@@ -81,10 +81,10 @@
 			this.comTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// introLabel
+			// promptLabel
 			// 
-			resources.ApplyResources(this.introLabel, "introLabel");
-			this.introLabel.Name = "introLabel";
+			resources.ApplyResources(this.promptLabel, "promptLabel");
+			this.promptLabel.Name = "promptLabel";
 			// 
 			// groupBox1
 			// 
@@ -380,7 +380,7 @@
 			this.Controls.Add(this.actionsCombo);
 			this.Controls.Add(this.actionsLabel);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.introLabel);
+			this.Controls.Add(this.promptLabel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -404,7 +404,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.Label introLabel;
+		private System.Windows.Forms.Label promptLabel;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Label execProgLabel;
 		private System.Windows.Forms.ComboBox actionsCombo;
