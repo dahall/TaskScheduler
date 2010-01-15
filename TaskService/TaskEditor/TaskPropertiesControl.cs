@@ -283,8 +283,8 @@ namespace Microsoft.Win32.TaskScheduler
         private void actionEditButton_Click(object sender, EventArgs e)
         {
             int idx = actionListView.SelectedIndices[0];
-            ActionEditDialog dlg = new ActionEditDialog(v2);
-            dlg.Action = actionListView.Items[idx].Tag as Action;
+            ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
+			if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 if (v2)
@@ -302,7 +302,7 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionNewButton_Click(object sender, EventArgs e)
         {
-            ActionEditDialog dlg = new ActionEditDialog(v2);
+			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Actions.Add(dlg.Action);

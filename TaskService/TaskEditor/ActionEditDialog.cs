@@ -4,22 +4,35 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-    internal partial class ActionEditDialog : Form
+	/// <summary>
+	/// An editor that handles all Task actions.
+	/// </summary>
+    public partial class ActionEditDialog : Form
     {
         private Action action;
+		private bool isV2 = true;
 
-        public ActionEditDialog(bool isV2)
-        {
-            InitializeComponent();
-            if (!isV2)
-            {
-                actionsCombo.Items.RemoveAt(3);
-                actionsCombo.Items.RemoveAt(2);
-                actionsCombo.Items.RemoveAt(1);
-            }
-            actionsCombo.SelectedIndex = 0;
-        }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ActionEditDialog"/> class.
+		/// </summary>
+		public ActionEditDialog()
+		{
+			InitializeComponent();
+		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ActionEditDialog"/> class with the provided action.
+		/// </summary>
+		/// <param name="action">The action.</param>
+		public ActionEditDialog(Action action) : this()
+		{
+			this.Action = action;
+		}
+
+		/// <summary>
+		/// Gets or sets the action.
+		/// </summary>
+		/// <value>The action.</value>
         public Action Action
         {
             get
@@ -29,7 +42,13 @@ namespace Microsoft.Win32.TaskScheduler
             set
             {
                 action = value;
-                if (action is ExecAction)
+
+				// Try and determine if this is a V1 task
+				string id = action.Id;
+				try { action.Id = "test"; action.Id = id; SupportV1Only = false; }
+				catch { SupportV1Only = true; }
+
+				if (action is ExecAction)
                 {
                     actionsCombo.SelectedIndex = 0;
                     execProgText.Text = ((ExecAction)action).Path;
@@ -60,6 +79,33 @@ namespace Microsoft.Win32.TaskScheduler
                 }
             }
         }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this editor only supports V1 actions.
+		/// </summary>
+		/// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
+		public bool SupportV1Only
+		{
+			get { return !isV2; }
+			set
+			{
+				isV2 = !value;
+				if (!isV2 && actionsCombo.Items.Count > 1)
+				{
+					actionsCombo.SelectedIndex = 0;
+					actionsCombo.Items.RemoveAt(3);
+					actionsCombo.Items.RemoveAt(2);
+					actionsCombo.Items.RemoveAt(1);
+				}
+				else if (isV2 && actionsCombo.Items.Count < 4)
+				{
+					System.Resources.ResourceManager rm = new System.Resources.ResourceManager(this.GetType());
+					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items1"));
+					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items2"));
+					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items3"));
+				}
+			}
+		}
 
         private void UpdateAction()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Win32.TaskScheduler
 {
-	internal partial class ActionEditDialog
+	public partial class ActionEditDialog
 	{
 		/// <summary>
 		/// Required designer variable.
