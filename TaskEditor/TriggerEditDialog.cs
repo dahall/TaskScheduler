@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-    internal partial class TriggerEditDialog : Form
+	/// <summary>
+	/// An editor that handles all Task triggers.
+	/// </summary>
+	public partial class TriggerEditDialog : Form
     {
 		private bool isV2;
         private bool onAssignment = false;
-        private TaskDefinition td;
         private Trigger trigger;
         private List<DropDownCheckListItem> triggerComboItems = new List<DropDownCheckListItem>(12);
 
-        internal TriggerEditDialog(TaskDefinition taskDefinition, Trigger trigger)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
+		/// </summary>
+		public TriggerEditDialog() : this(null, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
+		/// </summary>
+		/// <param name="taskCompatibility">The task compatibility for this trigger.</param>
+		/// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
+		public TriggerEditDialog(Trigger trigger, bool supportV1Only)
         {
             InitializeComponent();
 
+			this.SupportV1Only = supportV1Only;
+
             // Populate combo boxes
-            long allVal;
-            ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
-
-            triggerTypeCombo.DisplayMember = "Text";
-            triggerTypeCombo.ValueMember = "Value";
-
-            ConfigForVersion(taskDefinition.Settings.Compatibility);
-
             monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
             monthlyMonthsDropDown.Items.RemoveAt(13);
             monthlyDaysDropDown.InitializeFromRange(1, 31);
@@ -41,15 +50,14 @@ namespace Microsoft.Win32.TaskScheduler
             durationSpan.FormattedZero = Properties.Resources.TimeSpanIndefinitely;
             stopIfRunsSpan.Items.AddRange(new TimeSpan[] { TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(2), TimeSpan.FromHours(4), TimeSpan.FromHours(8), TimeSpan.FromHours(12), TimeSpan.FromDays(1), TimeSpan.FromDays(3) });
 
-            td = taskDefinition;
             if (trigger != null)
-                this.Trigger = trigger.Clone() as Trigger;
+                this.Trigger = trigger;
             else
                 this.Trigger = new TimeTrigger();
         }
 
         /// <summary>Defines the type of triggers that can be used by tasks.</summary>
-        public enum TaskTriggerDisplayType
+        private enum TaskTriggerDisplayType
         {
             /// <summary>Triggers the task on a schedule.</summary>
             Schedule = 1,
@@ -73,6 +81,10 @@ namespace Microsoft.Win32.TaskScheduler
             WorkstationUnlock = 118,
         }
 
+		/// <summary>
+		/// Gets or sets the trigger that is being edited.
+		/// </summary>
+		/// <value>The trigger.</value>
         public Trigger Trigger
         {
             get
@@ -82,8 +94,7 @@ namespace Microsoft.Win32.TaskScheduler
             set
             {
                 onAssignment = true;
-                trigger = value;
-				isV2 = td.Settings.Compatibility == TaskCompatibility.V2;
+                trigger = value.Clone() as Trigger;
                 switch (trigger.TriggerType)
                 {
                     case TaskTriggerType.Time:
@@ -210,6 +221,46 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this editor only supports V1 triggers.
+		/// </summary>
+		/// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Behavior")]
+		public bool SupportV1Only
+		{
+			get { return !isV2; }
+			set
+			{
+				isV2 = !value;
+
+				// Setup list of triggers available
+				long allVal;
+				triggerComboItems.Clear();
+				ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
+				if (!isV2)
+					triggerComboItems.RemoveRange(4, 6);
+				triggerTypeCombo.DataSource = null;
+				triggerTypeCombo.DisplayMember = "Text";
+				triggerTypeCombo.ValueMember = "Value";
+				triggerTypeCombo.DataSource = triggerComboItems;
+
+				// Enable/disable version specific features
+				stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
+				delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
+
+				// Set date/time controls
+				schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
+				schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+				activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+				expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
+
+				// Disable logon trigger options
+				foreach (Control c in logonTab.Controls)
+					c.Enabled = isV2;
+			}
+		}
+
         private TaskTriggerDisplayType TriggerView
         {
             get
@@ -241,27 +292,6 @@ namespace Microsoft.Win32.TaskScheduler
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void ConfigForVersion(TaskCompatibility ver)
-        {
-            bool isV2 = ver == TaskCompatibility.V2;
-            if (!isV2)
-                triggerComboItems.RemoveRange(4, 6);
-            triggerTypeCombo.DataSource = triggerComboItems;
-            stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
-            delayCheckBox.Enabled = delaySpan.Enabled = isV2;
-			monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
-
-			// Set date/time controls
-			schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
-			schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-			activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-        	expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
-
-			// Disable logon trigger options
-            foreach (Control c in logonTab.Controls)
-                c.Enabled = isV2;
         }
 
         private void delayCheckBox_CheckedChanged(object sender, EventArgs e)

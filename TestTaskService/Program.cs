@@ -83,7 +83,7 @@ namespace TestTaskService
 				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
 				{
 					// Create a new task definition and assign properties
-					const string taskName = "TestEditor";
+					const string taskName = "Test";
 					ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
 
 					// Edit task
@@ -91,9 +91,12 @@ namespace TestTaskService
 					TaskDefinition td = DisplayTask(t, true);
 
 					// Register then show task again
-					ts.RootFolder.RegisterTaskDefinition(taskName, td);
-					t = ts.GetTask(taskName);
-					DisplayTask(t, false);
+					if (td != null)
+					{
+						ts.RootFolder.RegisterTaskDefinition(taskName, td);
+						t = ts.GetTask(taskName);
+						DisplayTask(t, false);
+					}
 
 					// Remove the task we just created
 					ts.RootFolder.DeleteTask(taskName);

@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Win32.TaskScheduler
 {
-	internal partial class TriggerEditDialog
+	public partial class TriggerEditDialog
 	{
 		/// <summary>
 		/// Required designer variable.
