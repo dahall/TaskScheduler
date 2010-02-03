@@ -48,6 +48,11 @@ namespace Microsoft.Win32.TaskScheduler
             return base.Equals(obj);
         }
 
+		public override int GetHashCode()
+		{
+			return Text.GetHashCode();
+		}
+
         public override string ToString()
         {
             return this.Text;
