@@ -728,7 +728,7 @@ namespace Microsoft.Win32.TaskScheduler
         private void triggerEditButton_Click(object sender, EventArgs e)
         {
             int idx = triggerListView.SelectedIndices[0];
-            TriggerEditDialog dlg = new TriggerEditDialog(td, td.Triggers[idx]);
+            TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Triggers.RemoveAt(idx);
@@ -745,7 +745,7 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void triggerNewButton_Click(object sender, EventArgs e)
         {
-            TriggerEditDialog dlg = new TriggerEditDialog(td, null);
+			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Triggers.Add(dlg.Trigger);
