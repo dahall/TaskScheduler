@@ -25,8 +25,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
 		/// </summary>
-		/// <param name="taskCompatibility">The task compatibility for this trigger.</param>
 		/// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
+		/// <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
 		public TriggerEditDialog(Trigger trigger, bool supportV1Only)
         {
             InitializeComponent();
