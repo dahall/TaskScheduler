@@ -106,6 +106,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Local Machine.
+        /// </summary>
+        internal static string LocalMachine {
+            get {
+                return ResourceManager.GetString("LocalMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Properties ({1}).
+        /// </summary>
+        internal static string TaskEditDlgTitle {
+            get {
+                return ResourceManager.GetString("TaskEditDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to day.
         /// </summary>
         internal static string TimeSpanDay {

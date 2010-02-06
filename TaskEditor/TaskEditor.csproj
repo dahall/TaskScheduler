@@ -75,6 +75,12 @@
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TaskEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskEditDialog.Designer.cs">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FullDateTimePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,6 +101,12 @@
     <Compile Include="TaskPropertiesControl.Designer.cs">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskSchedulerWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskSchedulerWizard.Designer.cs">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeSpanExtension.cs" />
     <Compile Include="TriggerEditDialog.cs">
       <SubType>Form</SubType>
@@ -110,6 +122,9 @@
     <EmbeddedResource Include="ActionEditDialog.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.it.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.it.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>

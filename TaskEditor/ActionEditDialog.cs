@@ -63,7 +63,8 @@ namespace Microsoft.Win32.TaskScheduler
                     emailToText.Text = ((EmailAction)action).To;
                     emailSubjectText.Text = ((EmailAction)action).Subject;
                     emailTextText.Text = ((EmailAction)action).Body;
-                    //emailAttachmentText.Text = ((EmailAction)action).Attachments;
+					if (((EmailAction)action).Attachments.Length > 0)
+	                    emailAttachmentText.Text = ((EmailAction)action).Attachments[0].ToString();
                     emailSMTPText.Text = ((EmailAction)action).Server;
                 }
                 else if (action is ShowMessageAction)
@@ -136,6 +137,8 @@ namespace Microsoft.Win32.TaskScheduler
                 case 1:
                     ret = new EmailAction(emailSubjectText.Text, emailFromText.Text,
                         emailToText.Text, emailTextText.Text, emailSMTPText.Text);
+					if (emailAttachmentText.TextLength > 0)
+						((EmailAction)ret).Attachments = new object[] { emailAttachmentText.Text };
                     break;
                 case 2:
                     ret = new ShowMessageAction(msgMsgText.Text, msgTitleText.Text);

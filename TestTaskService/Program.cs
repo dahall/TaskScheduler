@@ -5,7 +5,7 @@ namespace TestTaskService
 {
 	class Program
 	{
-		private static Form1 editorForm;
+		private static TaskEditDialog editorForm;
 
         [STAThread]
 		static void Main(string[] args)
@@ -43,8 +43,8 @@ namespace TestTaskService
 		static void WizardTest(string[] args)
 		{
 			System.Windows.Forms.Application.EnableVisualStyles();
-			//TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-			//wiz.ShowDialog();
+			TaskSchedulerWizard wiz = new TaskSchedulerWizard();
+			wiz.ShowDialog();
 		}
 
 		static void Win7Test(string[] args)
@@ -375,11 +375,11 @@ namespace TestTaskService
 			if (editorForm == null)
 			{
 				System.Windows.Forms.Application.EnableVisualStyles();
-				editorForm = new Form1();
-				editorForm.taskPropertiesControl1.Editable = editable;
+				editorForm = new TaskEditDialog();
 			}
-			editorForm.taskPropertiesControl1.Initialize(t);
-			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.taskPropertiesControl1.TaskDefinition : null;
+			editorForm.Editable = editable;
+			editorForm.Initialize(t);
+			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 	}
 }

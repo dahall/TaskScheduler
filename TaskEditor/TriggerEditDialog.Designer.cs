@@ -365,7 +365,6 @@
 			// 
 			this.monthlyDaysDropDown.AllowResizeDropDown = true;
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyDaysDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
@@ -377,7 +376,6 @@
 			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
 			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
-			this.monthlyOnDOWDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
@@ -388,7 +386,6 @@
 			// 
 			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
 			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyOnWeekDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
@@ -400,7 +397,6 @@
 			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
 			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
-			this.monthlyMonthsDropDown.CheckedFlagValue = ((long)(0));
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
@@ -558,6 +554,7 @@
 			// 
 			resources.ApplyResources(this.onEventIdText, "onEventIdText");
 			this.onEventIdText.Name = "onEventIdText";
+			this.onEventIdText.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventSourceLabel
 			// 
@@ -568,12 +565,14 @@
 			// 
 			resources.ApplyResources(this.onEventSourceCombo, "onEventSourceCombo");
 			this.onEventSourceCombo.Name = "onEventSourceCombo";
+			this.onEventSourceCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventLogCombo
 			// 
 			this.onEventLogCombo.FormattingEnabled = true;
 			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
 			this.onEventLogCombo.Name = "onEventLogCombo";
+			this.onEventLogCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventIdLabel
 			// 
@@ -586,6 +585,7 @@
 			this.onEventCustomText.AcceptsTab = true;
 			resources.ApplyResources(this.onEventCustomText, "onEventCustomText");
 			this.onEventCustomText.Name = "onEventCustomText";
+			this.onEventCustomText.Leave += new System.EventHandler(this.onEventCustomText_Leave);
 			// 
 			// groupBox5
 			// 
