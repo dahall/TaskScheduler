@@ -653,5 +653,21 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
 		}
+
+		private void onEventTextBox_Leave(object sender, EventArgs e)
+		{
+			EventTrigger et = trigger as EventTrigger;
+			if (et != null && onEventLogCombo.Text.Length > 0)
+			{
+				int rid;
+				int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
+				et.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
+			}
+		}
+
+		private void onEventCustomText_Leave(object sender, EventArgs e)
+		{
+			((EventTrigger)trigger).Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
+		}
     }
 }

@@ -880,8 +880,11 @@ namespace Microsoft.Win32.TaskScheduler
         public override void CopyProperties(Trigger sourceTrigger)
         {
             base.CopyProperties(sourceTrigger);
-            this.Subscription = ((EventTrigger)sourceTrigger).Subscription;
-            ((EventTrigger)sourceTrigger).ValueQueries.CopyTo(this.ValueQueries);
+			if (sourceTrigger.GetType() == this.GetType())
+			{
+				this.Subscription = ((EventTrigger)sourceTrigger).Subscription;
+				((EventTrigger)sourceTrigger).ValueQueries.CopyTo(this.ValueQueries);
+			}
         }
 
         /// <summary>
@@ -895,37 +898,40 @@ namespace Microsoft.Win32.TaskScheduler
         {
             log = source = null;
             eventId = null;
-            using (System.IO.MemoryStream str = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(this.Subscription)))
-            {
-                using (System.Xml.XmlTextReader rdr = new System.Xml.XmlTextReader(str))
-                {
-                    rdr.MoveToContent();
-                    rdr.ReadStartElement("QueryList");
-                    if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
-                    {
-                        string path = rdr.Value;
-                        if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            string content = rdr.ReadString();
-                            System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content,
-                                @"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
-                                System.Text.RegularExpressions.RegexOptions.IgnoreCase |
-                                System.Text.RegularExpressions.RegexOptions.Compiled |
-                                System.Text.RegularExpressions.RegexOptions.Singleline |
-                                System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
-                            if (m.Success)
-                            {
-                                log = path;
-                                if (m.Groups["s"].Success)
-                                    source = m.Groups["s"].Value;
-                                if (m.Groups["e"].Success)
-                                    eventId = Convert.ToInt32(m.Groups["e"].Value);
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+			if (!string.IsNullOrEmpty(this.Subscription))
+			{
+				using (System.IO.MemoryStream str = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(this.Subscription)))
+				{
+					using (System.Xml.XmlTextReader rdr = new System.Xml.XmlTextReader(str))
+					{
+						rdr.MoveToContent();
+						rdr.ReadStartElement("QueryList");
+						if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
+						{
+							string path = rdr.Value;
+							if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
+							{
+								string content = rdr.ReadString();
+								System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content,
+									@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
+									System.Text.RegularExpressions.RegexOptions.IgnoreCase |
+									System.Text.RegularExpressions.RegexOptions.Compiled |
+									System.Text.RegularExpressions.RegexOptions.Singleline |
+									System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
+								if (m.Success)
+								{
+									log = path;
+									if (m.Groups["s"].Success)
+										source = m.Groups["s"].Value;
+									if (m.Groups["e"].Success)
+										eventId = Convert.ToInt32(m.Groups["e"].Value);
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
             return false;
         }
 
