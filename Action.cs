@@ -122,6 +122,27 @@ namespace Microsoft.Win32.TaskScheduler
 					return new ExecAction((V2Interop.IExecAction)iAction);
 			}
 		}
+
+		/// <summary>
+		/// Creates the specified action.
+		/// </summary>
+		/// <param name="actionType">Type of the action to instantiate.</param>
+		/// <returns><see cref="Action"/> of specified type.</returns>
+		public static Action CreateAction(TaskActionType actionType)
+		{
+			switch (actionType)
+			{
+				case TaskActionType.ComHandler:
+					return new ComHandlerAction();
+				case TaskActionType.SendEmail:
+					return new EmailAction();
+				case TaskActionType.ShowMessage:
+					return new ShowMessageAction();
+				case TaskActionType.Execute:
+				default:
+					return new ExecAction();
+			}
+		}
 	}
 
 	/// <summary>
@@ -129,6 +150,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class ComHandlerAction : Action
 	{
+		/// <summary>
+		/// Creates an unbound instance of <see cref="ComHandlerAction"/>.
+		/// </summary>
+		public ComHandlerAction()
+		{
+		}
+
 		/// <summary>
 		/// Creates an unbound instance of <see cref="ComHandlerAction"/>.
 		/// </summary>
@@ -179,6 +207,13 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class ExecAction : Action
 	{
 		private V1Interop.ITask v1Task;
+
+		/// <summary>
+		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
+		/// </summary>
+		public ExecAction()
+		{
+		}
 
 		/// <summary>
 		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
@@ -333,6 +368,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates an unbound instance of <see cref="EmailAction"/>.
 		/// </summary>
+		public EmailAction()
+		{
+		}
+
+		/// <summary>
+		/// Creates an unbound instance of <see cref="EmailAction"/>.
+		/// </summary>
 		/// <param name="subject">Subject of the e-mail.</param>
 		/// <param name="from">E-mail address that you want to send the e-mail from.</param>
 		/// <param name="to">E-mail address or addresses that you want to send the e-mail to.</param>
@@ -475,6 +517,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class ShowMessageAction : Action
 	{
+		/// <summary>
+		/// Creates a new unbound instance of <see cref="ShowMessageAction"/>.
+		/// </summary>
+		public ShowMessageAction()
+		{
+		}
+
 		/// <summary>
 		/// Creates a new unbound instance of <see cref="ShowMessageAction"/>.
 		/// </summary>

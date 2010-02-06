@@ -402,11 +402,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String value of trigger.</returns>
 		public override string ToString()
 		{
-			if (v2Trigger != null)
-				return V2GetTriggerString() + V2BaseTriggerString();
 			if (v1Trigger != null)
 				return v1Trigger.GetTriggerString();
-			return string.Empty;
+			return V2GetTriggerString() + V2BaseTriggerString();
 		}
 
 		internal static string BuildEnumString(string preface, object enumValue)
@@ -511,7 +509,12 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		internal static Trigger CreateTrigger(TaskTriggerType triggerType)
+		/// <summary>
+		/// Creates the specified trigger.
+		/// </summary>
+		/// <param name="triggerType">Type of the trigger to instantiate.</param>
+		/// <returns><see cref="Trigger"/> of specified type.</returns>
+		public static Trigger CreateTrigger(TaskTriggerType triggerType)
 		{
 			switch (triggerType)
 			{
@@ -610,7 +613,7 @@ namespace Microsoft.Win32.TaskScheduler
 					ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase3, this.Repetition.Duration);
 				ret.Append(".");
 			}
-			if (!string.IsNullOrEmpty(v2Trigger.EndBoundary))
+			if (this.EndBoundary != DateTime.MaxValue)
 				ret.AppendFormat(" {0} {1:G}.", Properties.Resources.TriggerBase4, this.EndBoundary);
 			if (ret.Length > 0)
 				ret.Insert(0, " -");

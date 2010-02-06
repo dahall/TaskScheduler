@@ -37,9 +37,17 @@
     <DocumentationFile>bin\Release\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AeroWizard, Version=1.0.3687.1219, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AeroWizard\bin\Release\AeroWizard.dll</HintPath>
+    </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.0.3664.29139, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="GroupControls, Version=1.0.3630.42707, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

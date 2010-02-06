@@ -80,7 +80,7 @@
 			this.taskIdleDurationCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartOnIdleCheck = new System.Windows.Forms.CheckBox();
 			this.taskStopOnIdleEndCheck = new System.Windows.Forms.CheckBox();
-			this.taskIdleDelayLabel = new System.Windows.Forms.Label();
+			this.taskIdleWaitTimeoutLabel = new System.Windows.Forms.Label();
 			this.taskIdleDurationCheck = new System.Windows.Forms.CheckBox();
 			this.conditionIntroLabel = new System.Windows.Forms.Label();
 			this.settingsTab = new System.Windows.Forms.TabPage();
@@ -88,7 +88,7 @@
 			this.taskMultInstCombo = new System.Windows.Forms.ComboBox();
 			this.taskRunningRuleLabel = new System.Windows.Forms.Label();
 			this.taskRestartAttemptTimesLabel = new System.Windows.Forms.Label();
-			this.taskRestartAttemptsLabel = new System.Windows.Forms.Label();
+			this.taskRestartCountLabel = new System.Windows.Forms.Label();
 			this.taskDeleteAfterCheck = new System.Windows.Forms.CheckBox();
 			this.taskAllowHardTerminateCheck = new System.Windows.Forms.CheckBox();
 			this.taskExecutionTimeLimitCheck = new System.Windows.Forms.CheckBox();
@@ -475,7 +475,7 @@
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCombo);
 			this.idleConditionGroupBox.Controls.Add(this.taskRestartOnIdleCheck);
 			this.idleConditionGroupBox.Controls.Add(this.taskStopOnIdleEndCheck);
-			this.idleConditionGroupBox.Controls.Add(this.taskIdleDelayLabel);
+			this.idleConditionGroupBox.Controls.Add(this.taskIdleWaitTimeoutLabel);
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCheck);
 			this.idleConditionGroupBox.Name = "idleConditionGroupBox";
 			this.idleConditionGroupBox.TabStop = false;
@@ -508,10 +508,10 @@
 			this.taskStopOnIdleEndCheck.UseVisualStyleBackColor = true;
 			this.taskStopOnIdleEndCheck.CheckedChanged += new System.EventHandler(this.taskStopOnIdleEndCheck_CheckedChanged);
 			// 
-			// taskIdleDelayLabel
+			// taskIdleWaitTimeoutLabel
 			// 
-			resources.ApplyResources(this.taskIdleDelayLabel, "taskIdleDelayLabel");
-			this.taskIdleDelayLabel.Name = "taskIdleDelayLabel";
+			resources.ApplyResources(this.taskIdleWaitTimeoutLabel, "taskIdleWaitTimeoutLabel");
+			this.taskIdleWaitTimeoutLabel.Name = "taskIdleWaitTimeoutLabel";
 			// 
 			// taskIdleDurationCheck
 			// 
@@ -531,7 +531,7 @@
 			this.settingsTab.Controls.Add(this.taskMultInstCombo);
 			this.settingsTab.Controls.Add(this.taskRunningRuleLabel);
 			this.settingsTab.Controls.Add(this.taskRestartAttemptTimesLabel);
-			this.settingsTab.Controls.Add(this.taskRestartAttemptsLabel);
+			this.settingsTab.Controls.Add(this.taskRestartCountLabel);
 			this.settingsTab.Controls.Add(this.taskDeleteAfterCheck);
 			this.settingsTab.Controls.Add(this.taskAllowHardTerminateCheck);
 			this.settingsTab.Controls.Add(this.taskExecutionTimeLimitCheck);
@@ -575,10 +575,10 @@
 			resources.ApplyResources(this.taskRestartAttemptTimesLabel, "taskRestartAttemptTimesLabel");
 			this.taskRestartAttemptTimesLabel.Name = "taskRestartAttemptTimesLabel";
 			// 
-			// taskRestartAttemptsLabel
+			// taskRestartCountLabel
 			// 
-			resources.ApplyResources(this.taskRestartAttemptsLabel, "taskRestartAttemptsLabel");
-			this.taskRestartAttemptsLabel.Name = "taskRestartAttemptsLabel";
+			resources.ApplyResources(this.taskRestartCountLabel, "taskRestartCountLabel");
+			this.taskRestartCountLabel.Name = "taskRestartCountLabel";
 			// 
 			// taskDeleteAfterCheck
 			// 
@@ -707,7 +707,7 @@
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabControl1);
-			this.MinimumSize = new System.Drawing.Size(533, 375);
+			this.MinimumSize = new System.Drawing.Size(622, 400);
 			this.Name = "TaskPropertiesControl";
 			this.tabControl1.ResumeLayout(false);
 			this.generalTab.ResumeLayout(false);
@@ -781,7 +781,7 @@
 		private System.Windows.Forms.TimeSpanPicker taskIdleDurationCombo;
 		private System.Windows.Forms.CheckBox taskRestartOnIdleCheck;
 		private System.Windows.Forms.CheckBox taskStopOnIdleEndCheck;
-		private System.Windows.Forms.Label taskIdleDelayLabel;
+		private System.Windows.Forms.Label taskIdleWaitTimeoutLabel;
 		private System.Windows.Forms.CheckBox taskIdleDurationCheck;
 		private System.Windows.Forms.CheckBox taskStopIfGoingOnBatteriesCheck;
 		private System.Windows.Forms.CheckBox taskWakeToRunCheck;
@@ -791,7 +791,7 @@
 		private System.Windows.Forms.CheckBox taskStartIfConnectionCheck;
 		private System.Windows.Forms.ComboBox taskMultInstCombo;
 		private System.Windows.Forms.Label taskRunningRuleLabel;
-		private System.Windows.Forms.Label taskRestartAttemptsLabel;
+		private System.Windows.Forms.Label taskRestartCountLabel;
 		private System.Windows.Forms.CheckBox taskDeleteAfterCheck;
 		private System.Windows.Forms.CheckBox taskAllowHardTerminateCheck;
 		private System.Windows.Forms.CheckBox taskExecutionTimeLimitCheck;
