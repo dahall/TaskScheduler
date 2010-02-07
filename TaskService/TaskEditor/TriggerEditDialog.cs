@@ -150,7 +150,14 @@ namespace Microsoft.Win32.TaskScheduler
                         TriggerView = TaskTriggerDisplayType.Event;
                         string log, source; int? id;
                         bool basic = ((EventTrigger)trigger).GetBasic(out log, out source, out id);
-                        onEventCustomText.Text = ((EventTrigger)trigger).Subscription;
+						if (!basic)
+						{
+							string sub = ((EventTrigger)trigger).Subscription;
+							if (!string.IsNullOrEmpty(sub))
+								onEventCustomText.Text = sub;
+							else
+								basic = true;
+						}
                         if (basic)
                         {
                             onEventLogCombo.Text = log;
@@ -261,6 +268,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the target server.
+		/// </summary>
+		/// <value>The target server.</value>
+		[DefaultValue((string)null)]
+		public string TargetServer { get; set; }
+
         private TaskTriggerDisplayType TriggerView
         {
             get
@@ -328,9 +342,10 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void eventBasicRadio_CheckedChanged(object sender, EventArgs e)
         {
-            bool basic = eventBasicRadio.Checked;
+            bool basic = eventBasicRadio.Checked || !eventCustomRadio.Checked;
             onEventBasicPanel.Visible = basic;
             onEventCustomText.Visible = !basic;
+			InitializeEventLogList();
         }
 
         private void expireCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -512,6 +527,7 @@ namespace Microsoft.Win32.TaskScheduler
                 case TaskTriggerDisplayType.Event:
                     settingsTabControl.SelectedTab = onEventTab;
                     if (!onAssignment) newTrigger = new EventTrigger();
+					InitializeEventLogList();
                     break;
                 case TaskTriggerDisplayType.Registration:
                     settingsTabControl.SelectedTab = startupTab;
@@ -535,6 +551,14 @@ namespace Microsoft.Win32.TaskScheduler
                 this.Trigger = newTrigger;
             }
         }
+
+		private void InitializeEventLogList()
+		{
+			if (eventBasicRadio.Checked && onEventLogCombo.Items.Count == 0)
+			{
+				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(TargetServer));
+			}
+		}
 
 		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
 		{
@@ -668,6 +692,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private void onEventCustomText_Leave(object sender, EventArgs e)
 		{
 			((EventTrigger)trigger).Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
+		}
+
+		private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			onEventSourceCombo.Items.Clear();
+			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
 		}
     }
 }
