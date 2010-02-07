@@ -48,7 +48,6 @@
 			this.triggerSelectPage = new AeroWizard.WizardPage();
 			this.triggerSelectionList = new GroupControls.RadioButtonList();
 			this.dailyTriggerPage = new AeroWizard.WizardPage();
-			this.dailyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.label3 = new System.Windows.Forms.Label();
 			this.dailyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
 			this.dailyDaysLabel = new System.Windows.Forms.Label();
@@ -56,10 +55,8 @@
 			this.actionSelectPage = new AeroWizard.WizardPage();
 			this.actionSelectionList = new GroupControls.RadioButtonList();
 			this.oneTimeTriggerPage = new AeroWizard.WizardPage();
-			this.oneTimeStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.oneTimeStartLabel = new System.Windows.Forms.Label();
 			this.weeklyTriggerPage = new AeroWizard.WizardPage();
-			this.weeklyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.label4 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.weeklySunCheck = new System.Windows.Forms.CheckBox();
@@ -73,20 +70,15 @@
 			this.weeklyOnWeeksLabel = new System.Windows.Forms.Label();
 			this.weeklyRecurLabel = new System.Windows.Forms.Label();
 			this.monthlyTriggerPage = new AeroWizard.WizardPage();
-			this.monthlyDaysDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyOnDOWDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyOnWeekDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyMonthsDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.monthlyOnRadio = new System.Windows.Forms.RadioButton();
 			this.monthlyDaysRadio = new System.Windows.Forms.RadioButton();
 			this.monthlyMonthsLabel = new System.Windows.Forms.Label();
-			this.monthlyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.label7 = new System.Windows.Forms.Label();
 			this.onEventTriggerPage = new AeroWizard.WizardPage();
 			this.onEventLogLabel = new System.Windows.Forms.Label();
 			this.onEventIdText = new System.Windows.Forms.TextBox();
 			this.onEventSourceLabel = new System.Windows.Forms.Label();
-			this.onEventSourceCombo = new System.Windows.Forms.TextBox();
+			this.onEventSourceCombo = new System.Windows.Forms.ComboBox();
 			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
 			this.onEventIdLabel = new System.Windows.Forms.Label();
 			this.runActionPage = new AeroWizard.WizardPage();
@@ -130,6 +122,14 @@
 			this.msgTitleLabel = new System.Windows.Forms.Label();
 			this.msgIntroLabel = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.dailyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.oneTimeStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.weeklyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.monthlyDaysDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.monthlyOnDOWDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.monthlyOnWeekDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.monthlyMonthsDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.monthlyStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
 			this.introPage.SuspendLayout();
 			this.triggerSelectPage.SuspendLayout();
@@ -248,14 +248,6 @@
 			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			this.dailyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.dailyTriggerPage_Commit);
 			// 
-			// dailyStartTimePicker
-			// 
-			resources.ApplyResources(this.dailyStartTimePicker, "dailyStartTimePicker");
-			this.dailyStartTimePicker.Name = "dailyStartTimePicker";
-			this.dailyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.dailyStartTimePicker.UTCPrompt = null;
-			this.dailyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
-			// 
 			// label3
 			// 
 			resources.ApplyResources(this.label3, "label3");
@@ -309,14 +301,6 @@
 			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.oneTimeTriggerPage_Commit);
 			// 
-			// oneTimeStartTimePicker
-			// 
-			resources.ApplyResources(this.oneTimeStartTimePicker, "oneTimeStartTimePicker");
-			this.oneTimeStartTimePicker.Name = "oneTimeStartTimePicker";
-			this.oneTimeStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.oneTimeStartTimePicker.UTCPrompt = null;
-			this.oneTimeStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
-			// 
 			// oneTimeStartLabel
 			// 
 			resources.ApplyResources(this.oneTimeStartLabel, "oneTimeStartLabel");
@@ -335,14 +319,6 @@
 			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			this.weeklyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.weeklyTriggerPage_Initialize);
 			this.weeklyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.weeklyTriggerPage_Commit);
-			// 
-			// weeklyStartTimePicker
-			// 
-			resources.ApplyResources(this.weeklyStartTimePicker, "weeklyStartTimePicker");
-			this.weeklyStartTimePicker.Name = "weeklyStartTimePicker";
-			this.weeklyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.weeklyStartTimePicker.UTCPrompt = null;
-			this.weeklyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// label4
 			// 
@@ -442,44 +418,6 @@
 			this.monthlyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.monthlyTriggerPage_Initialize);
 			this.monthlyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.monthlyTriggerPage_Commit);
 			// 
-			// monthlyDaysDropDown
-			// 
-			this.monthlyDaysDropDown.AllowResizeDropDown = true;
-			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
-			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
-			// 
-			// monthlyOnDOWDropDown
-			// 
-			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
-			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
-			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
-			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
-			// 
-			// monthlyOnWeekDropDown
-			// 
-			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
-			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
-			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
-			// 
-			// monthlyMonthsDropDown
-			// 
-			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
-			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
-			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
-			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
-			// 
 			// monthlyOnRadio
 			// 
 			resources.ApplyResources(this.monthlyOnRadio, "monthlyOnRadio");
@@ -498,14 +436,6 @@
 			// 
 			resources.ApplyResources(this.monthlyMonthsLabel, "monthlyMonthsLabel");
 			this.monthlyMonthsLabel.Name = "monthlyMonthsLabel";
-			// 
-			// monthlyStartTimePicker
-			// 
-			resources.ApplyResources(this.monthlyStartTimePicker, "monthlyStartTimePicker");
-			this.monthlyStartTimePicker.Name = "monthlyStartTimePicker";
-			this.monthlyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.monthlyStartTimePicker.UTCPrompt = null;
-			this.monthlyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// label7
 			// 
@@ -548,9 +478,11 @@
 			// 
 			// onEventLogCombo
 			// 
+			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.onEventLogCombo.FormattingEnabled = true;
 			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
 			this.onEventLogCombo.Name = "onEventLogCombo";
+			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
 			// 
 			// onEventIdLabel
 			// 
@@ -816,6 +748,76 @@
 			this.openFileDialog1.FileName = "openFileDialog";
 			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
 			// 
+			// dailyStartTimePicker
+			// 
+			resources.ApplyResources(this.dailyStartTimePicker, "dailyStartTimePicker");
+			this.dailyStartTimePicker.Name = "dailyStartTimePicker";
+			this.dailyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
+			this.dailyStartTimePicker.UTCPrompt = null;
+			this.dailyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			// 
+			// oneTimeStartTimePicker
+			// 
+			resources.ApplyResources(this.oneTimeStartTimePicker, "oneTimeStartTimePicker");
+			this.oneTimeStartTimePicker.Name = "oneTimeStartTimePicker";
+			this.oneTimeStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
+			this.oneTimeStartTimePicker.UTCPrompt = null;
+			this.oneTimeStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			// 
+			// weeklyStartTimePicker
+			// 
+			resources.ApplyResources(this.weeklyStartTimePicker, "weeklyStartTimePicker");
+			this.weeklyStartTimePicker.Name = "weeklyStartTimePicker";
+			this.weeklyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
+			this.weeklyStartTimePicker.UTCPrompt = null;
+			this.weeklyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			// 
+			// monthlyDaysDropDown
+			// 
+			this.monthlyDaysDropDown.AllowResizeDropDown = true;
+			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
+			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
+			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
+			// 
+			// monthlyOnDOWDropDown
+			// 
+			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
+			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
+			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
+			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
+			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
+			// 
+			// monthlyOnWeekDropDown
+			// 
+			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
+			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
+			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
+			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
+			// 
+			// monthlyMonthsDropDown
+			// 
+			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
+			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
+			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
+			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
+			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
+			// 
+			// monthlyStartTimePicker
+			// 
+			resources.ApplyResources(this.monthlyStartTimePicker, "monthlyStartTimePicker");
+			this.monthlyStartTimePicker.Name = "monthlyStartTimePicker";
+			this.monthlyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
+			this.monthlyStartTimePicker.UTCPrompt = null;
+			this.monthlyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			// 
 			// TaskSchedulerWizard
 			// 
 			resources.ApplyResources(this, "$this");
@@ -827,7 +829,6 @@
 			this.introPage.ResumeLayout(false);
 			this.introPage.PerformLayout();
 			this.triggerSelectPage.ResumeLayout(false);
-			this.triggerSelectPage.PerformLayout();
 			this.dailyTriggerPage.ResumeLayout(false);
 			this.dailyTriggerPage.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).EndInit();
@@ -918,7 +919,7 @@
 		private System.Windows.Forms.Label onEventLogLabel;
 		private System.Windows.Forms.TextBox onEventIdText;
 		private System.Windows.Forms.Label onEventSourceLabel;
-		private System.Windows.Forms.TextBox onEventSourceCombo;
+		private System.Windows.Forms.ComboBox onEventSourceCombo;
 		private System.Windows.Forms.ComboBox onEventLogCombo;
 		private System.Windows.Forms.Label onEventIdLabel;
 		private FullDateTimePicker dailyStartTimePicker;

@@ -184,6 +184,8 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void onEventTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
+			if (onEventLogCombo.Items.Count == 0)
+				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(null));
         }
 
         private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -307,5 +309,11 @@ namespace Microsoft.Win32.TaskScheduler
                 }
             }
         }
+
+		private void onEventLogCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			onEventSourceCombo.Items.Clear();
+			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(null, onEventLogCombo.Text));
+		}
     }
 }

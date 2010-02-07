@@ -86,7 +86,7 @@
 			this.onEventLogLabel = new System.Windows.Forms.Label();
 			this.onEventIdText = new System.Windows.Forms.TextBox();
 			this.onEventSourceLabel = new System.Windows.Forms.Label();
-			this.onEventSourceCombo = new System.Windows.Forms.TextBox();
+			this.onEventSourceCombo = new System.Windows.Forms.ComboBox();
 			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
 			this.onEventIdLabel = new System.Windows.Forms.Label();
 			this.onEventCustomText = new System.Windows.Forms.TextBox();
@@ -569,9 +569,11 @@
 			// 
 			// onEventLogCombo
 			// 
+			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.onEventLogCombo.FormattingEnabled = true;
 			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
 			this.onEventLogCombo.Name = "onEventLogCombo";
+			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
 			this.onEventLogCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventIdLabel
@@ -853,7 +855,7 @@
 		private System.Windows.Forms.Label startupIntroLabel;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.TextBox onEventIdText;
-		private System.Windows.Forms.TextBox onEventSourceCombo;
+		private System.Windows.Forms.ComboBox onEventSourceCombo;
 		private System.Windows.Forms.Label onEventIdLabel;
 		private System.Windows.Forms.ComboBox onEventLogCombo;
 		private System.Windows.Forms.Label onEventSourceLabel;
