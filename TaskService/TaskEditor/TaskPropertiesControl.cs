@@ -346,24 +346,8 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void AddActionToList(Action act, int index)
         {
-            TaskActionType t = TaskActionType.Execute;
-            switch (act.GetType().Name)
-            {
-                case "ComHandlerAction":
-                    t = TaskActionType.ComHandler;
-                    break;
-                case "EmailAction":
-                    t = TaskActionType.SendEmail;
-                    break;
-                case "ShowMessageAction":
-                    t = TaskActionType.ShowMessage;
-                    break;
-                case "ExecAction":
-                default:
-                    break;
-            }
             ListViewItem lvi = new ListViewItem(new string[] {
-                    BuildEnumString(taskSchedResources, "ActionType", t),
+                    BuildEnumString(taskSchedResources, "ActionType", act.ActionType),
                     act.ToString() }) { Tag = act };
             if (index < 0)
                 actionListView.Items.Add(lvi);
