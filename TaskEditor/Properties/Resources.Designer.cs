@@ -410,5 +410,50 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
                 return ResourceManager.GetString("TriggerTypeWorkstationUnlock", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Event Trigger.
+        /// </summary>
+        internal static string WizardEventTriggerErrorTitle {
+            get {
+                return ResourceManager.GetString("WizardEventTriggerErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At a minimum, a log must be selected..
+        /// </summary>
+        internal static string WizardEventTriggerInvalid {
+            get {
+                return ResourceManager.GetString("WizardEventTriggerInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There must be at least one month, one week, and one weekday selected..
+        /// </summary>
+        internal static string WizardMonthlyDOWTriggerInvalid {
+            get {
+                return ResourceManager.GetString("WizardMonthlyDOWTriggerInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Monthly Trigger.
+        /// </summary>
+        internal static string WizardMonthlyTriggerErrorTitle {
+            get {
+                return ResourceManager.GetString("WizardMonthlyTriggerErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There must be at least one month and one day selected..
+        /// </summary>
+        internal static string WizardMonthlyTriggerInvalid {
+            get {
+                return ResourceManager.GetString("WizardMonthlyTriggerInvalid", resourceCulture);
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
         public TaskSchedulerWizard()
         {
             InitializeComponent();
+			wizardControl1.TitleIcon = this.Icon;
             RegisterTaskOnFinish = false;
         }
 
@@ -126,13 +127,23 @@ namespace Microsoft.Win32.TaskScheduler
                 for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
                     days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
                 ((MonthlyTrigger)trigger).DaysOfMonth = days;
+				if (days.Length == 0 || monthlyMonthsDropDown.CheckedFlagValue == 0)
+				{
+					e.Cancel = true;
+					MessageBox.Show(this, Properties.Resources.WizardMonthlyTriggerInvalid, Properties.Resources.WizardMonthlyTriggerErrorTitle);
+				}
             }
             else
             {
                 trigger = new MonthlyDOWTrigger() { MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue };
                 ((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
                 ((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
-            }
+				if (monthlyMonthsDropDown.CheckedFlagValue == 0 || monthlyOnWeekDropDown.CheckedFlagValue == 0 || monthlyOnDOWDropDown.CheckedFlagValue == 0)
+				{
+					e.Cancel = true;
+					MessageBox.Show(this, Properties.Resources.WizardMonthlyDOWTriggerInvalid, Properties.Resources.WizardMonthlyTriggerErrorTitle);
+				}
+			}
             trigger.StartBoundary = monthlyStartTimePicker.Value;
         }
 
@@ -172,14 +183,17 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void onEventTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            if (onEventLogCombo.Text.Length > 0)
-            {
-                int rid;
-                int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
-                ((EventTrigger)trigger).SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
-            }
-            else
-                e.Cancel = true;
+			if (onEventLogCombo.Text.Length > 0)
+			{
+				int rid;
+				int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
+				((EventTrigger)trigger).SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
+			}
+			else
+			{
+				e.Cancel = true;
+				MessageBox.Show(this, Properties.Resources.WizardEventTriggerInvalid, Properties.Resources.WizardEventTriggerErrorTitle);
+			}
         }
 
         private void onEventTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
@@ -200,7 +214,7 @@ namespace Microsoft.Win32.TaskScheduler
             sumNameText.Text = nameText.Text;
             sumDescText.Text = descText.Text;
             sumTriggerText.Text = trigger.ToString();
-            sumActionText.Text = action.ToString();
+            sumActionText.Text = TaskPropertiesControl.BuildEnumString(TaskPropertiesControl.taskSchedResources, "ActionType", action.ActionType) + ": " + action.ToString();
         }
 
         private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -283,6 +297,8 @@ namespace Microsoft.Win32.TaskScheduler
             weeklyThuCheck.Tag = DaysOfTheWeek.Thursday;
             weeklyFriCheck.Tag = DaysOfTheWeek.Friday;
             weeklySatCheck.Tag = DaysOfTheWeek.Saturday;
+			if ((int)((WeeklyTrigger)trigger).DaysOfWeek == 0)
+				((WeeklyTrigger)trigger).DaysOfWeek = DaysOfTheWeek.Sunday;
         }
 
         private void wizardControl1_Finished(object sender, System.EventArgs e)

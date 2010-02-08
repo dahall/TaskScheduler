@@ -121,11 +121,15 @@
   <data name="wizardControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="nameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="nameText.Location" type="System.Drawing.Point, System.Drawing">
     <value>79, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 23</value>
+    <value>401, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameText.TabIndex" type="System.Int32, mscorlib">
@@ -143,6 +147,9 @@
   <data name="&gt;&gt;nameText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="descText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="descText.Location" type="System.Drawing.Point, System.Drawing">
     <value>79, 29</value>
   </data>
@@ -150,7 +157,7 @@
     <value>True</value>
   </data>
   <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 129</value>
+    <value>401, 129</value>
   </data>
   <data name="descText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -170,7 +177,6 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -228,6 +234,9 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="introPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 241</value>
+  </data>
   <data name="introPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -238,22 +247,28 @@
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="triggerSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>503, 326</value>
+    <value>397, 341</value>
   </data>
   <data name="triggerSelectionList.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="triggerSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="triggerSelectionList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="triggerSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
   <data name="triggerSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 280</value>
+    <value>414, 188</value>
   </data>
   <data name="triggerSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -270,6 +285,9 @@
   <data name="&gt;&gt;triggerSelectionList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="triggerSelectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="triggerSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -280,7 +298,7 @@
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -301,7 +319,7 @@
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -424,13 +442,19 @@
     <value>True</value>
   </data>
   <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>499, 117</value>
+    <value>414, 117</value>
+  </data>
+  <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="actionSelectionList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="actionSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
   <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 117</value>
+    <value>414, 117</value>
   </data>
   <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -447,6 +471,9 @@
   <data name="&gt;&gt;actionSelectionList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -457,7 +484,10 @@
     <value>actionSelectPage</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
   </data>
   <data name="dailyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -469,7 +499,7 @@
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="oneTimeStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -490,7 +520,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -528,6 +558,9 @@
   <data name="&gt;&gt;oneTimeStartLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="oneTimeTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="oneTimeTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
@@ -538,7 +571,7 @@
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="weeklyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -559,7 +592,7 @@
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -597,6 +630,12 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -610,7 +649,7 @@
     <value>3, 3</value>
   </data>
   <data name="weeklySunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 17</value>
+    <value>65, 19</value>
   </data>
   <data name="weeklySunCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -637,10 +676,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyMonCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 3</value>
+    <value>96, 3</value>
   </data>
   <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 17</value>
+    <value>70, 19</value>
   </data>
   <data name="weeklyMonCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -667,10 +706,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyTueCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 3</value>
+    <value>189, 3</value>
   </data>
   <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 17</value>
+    <value>70, 19</value>
   </data>
   <data name="weeklyTueCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -697,10 +736,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyWedCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 3</value>
+    <value>282, 3</value>
   </data>
   <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 17</value>
+    <value>87, 19</value>
   </data>
   <data name="weeklyWedCheck.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -727,10 +766,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyThuCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
+    <value>3, 28</value>
   </data>
   <data name="weeklyThuCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 17</value>
+    <value>75, 19</value>
   </data>
   <data name="weeklyThuCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -757,10 +796,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyFriCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 26</value>
+    <value>96, 28</value>
   </data>
   <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+    <value>58, 19</value>
   </data>
   <data name="weeklyFriCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -787,10 +826,10 @@
     <value>NoControl</value>
   </data>
   <data name="weeklySatCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 26</value>
+    <value>189, 28</value>
   </data>
   <data name="weeklySatCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
+    <value>72, 19</value>
   </data>
   <data name="weeklySatCheck.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -817,7 +856,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>412, 46</value>
+    <value>374, 50</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -835,7 +874,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="weeklySunCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyMonCheck" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklyTueCheck" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="weeklyWedCheck" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="weeklyThuCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyFriCheck" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklySatCheck" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,25,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="weeklySunCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyMonCheck" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklyTueCheck" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="weeklyWedCheck" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="weeklyThuCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyFriCheck" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklySatCheck" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,25,Percent,25" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="weeklyRecurNumUpDn.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 29</value>
@@ -918,6 +957,9 @@
   <data name="&gt;&gt;weeklyRecurLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="weeklyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="weeklyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -928,7 +970,7 @@
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 58</value>
@@ -943,7 +985,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -964,7 +1006,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -985,7 +1027,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1006,7 +1048,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1123,7 +1165,7 @@
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.4.3690.3400, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1161,6 +1203,9 @@
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="monthlyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="monthlyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -1171,7 +1216,7 @@
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1203,11 +1248,14 @@
   <data name="&gt;&gt;onEventLogLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="onEventIdText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="onEventIdText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 54</value>
+    <value>91, 57</value>
   </data>
   <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1254,11 +1302,14 @@
   <data name="&gt;&gt;onEventSourceLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="onEventSourceCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="onEventSourceCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 28</value>
   </data>
   <data name="onEventSourceCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="onEventSourceCombo.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1275,11 +1326,14 @@
   <data name="&gt;&gt;onEventSourceCombo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="onEventLogCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="onEventLogCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 0</value>
   </data>
   <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1303,7 +1357,7 @@
     <value>NoControl</value>
   </data>
   <data name="onEventIdLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 57</value>
+    <value>3, 60</value>
   </data>
   <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 15</value>
@@ -1326,6 +1380,9 @@
   <data name="&gt;&gt;onEventIdLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="onEventTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="onEventTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -1336,13 +1393,16 @@
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="execProgBrowseBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 16</value>
+    <value>291, 16</value>
   </data>
   <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 23</value>
@@ -1365,11 +1425,14 @@
   <data name="&gt;&gt;execProgBrowseBtn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="execDirText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
     <value>176, 74</value>
   </data>
   <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>199, 23</value>
   </data>
   <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1386,11 +1449,14 @@
   <data name="&gt;&gt;execDirText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="execArgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="execArgText.Location" type="System.Drawing.Point, System.Drawing">
     <value>176, 45</value>
   </data>
   <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>199, 23</value>
   </data>
   <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1407,11 +1473,14 @@
   <data name="&gt;&gt;execArgText.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="execProgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="execProgText.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
   </data>
   <data name="execProgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 23</value>
+    <value>279, 23</value>
   </data>
   <data name="execProgText.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1518,6 +1587,9 @@
   <data name="&gt;&gt;execProgLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="sumDescText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="sumDescText.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 29</value>
   </data>
@@ -1525,7 +1597,7 @@
     <value>True</value>
   </data>
   <data name="sumDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 68</value>
+    <value>325, 23</value>
   </data>
   <data name="sumDescText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1542,11 +1614,14 @@
   <data name="&gt;&gt;sumDescText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="sumActionText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="sumActionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 132</value>
+    <value>82, 87</value>
   </data>
   <data name="sumActionText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 23</value>
+    <value>325, 23</value>
   </data>
   <data name="sumActionText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1563,11 +1638,14 @@
   <data name="&gt;&gt;sumActionText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="sumTriggerText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="sumTriggerText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 103</value>
+    <value>82, 58</value>
   </data>
   <data name="sumTriggerText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 23</value>
+    <value>325, 23</value>
   </data>
   <data name="sumTriggerText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1584,11 +1662,14 @@
   <data name="&gt;&gt;sumTriggerText.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="sumNameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="sumNameText.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 0</value>
   </data>
   <data name="sumNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 23</value>
+    <value>325, 23</value>
   </data>
   <data name="sumNameText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1605,6 +1686,9 @@
   <data name="&gt;&gt;sumNameText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="openDlgAfterCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="openDlgAfterCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1612,7 +1696,7 @@
     <value>NoControl</value>
   </data>
   <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 182</value>
+    <value>82, 127</value>
   </data>
   <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 19</value>
@@ -1665,6 +1749,9 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1672,7 +1759,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 135</value>
+    <value>3, 90</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 15</value>
@@ -1695,6 +1782,9 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1702,7 +1792,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 106</value>
+    <value>3, 61</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 15</value>
@@ -1755,9 +1845,6 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="label11.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -1765,10 +1852,10 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, -15</value>
+    <value>0, 173</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 15</value>
+    <value>414, 15</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1788,6 +1875,9 @@
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -1798,7 +1888,10 @@
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
   </data>
   <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1810,13 +1903,16 @@
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="emailAttachementBrowseBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 215</value>
+    <value>316, 117</value>
   </data>
   <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1839,8 +1935,11 @@
   <data name="&gt;&gt;emailAttachementBrowseBtn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="emailSMTPText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 252</value>
+    <value>100, 154</value>
   </data>
   <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 23</value>
@@ -1860,6 +1959,9 @@
   <data name="&gt;&gt;emailSMTPText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="emailSMTPLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="emailSMTPLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1867,7 +1969,7 @@
     <value>NoControl</value>
   </data>
   <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 255</value>
+    <value>3, 157</value>
   </data>
   <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 15</value>
@@ -1890,8 +1992,11 @@
   <data name="&gt;&gt;emailSMTPLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="emailAttachmentText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 217</value>
+    <value>100, 119</value>
   </data>
   <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
@@ -1911,6 +2016,9 @@
   <data name="&gt;&gt;emailAttachmentText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="emailAttachmentLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="emailAttachmentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1918,7 +2026,7 @@
     <value>NoControl</value>
   </data>
   <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 220</value>
+    <value>3, 122</value>
   </data>
   <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
@@ -1941,8 +2049,11 @@
   <data name="&gt;&gt;emailAttachmentLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 244</value>
+    <value>6, 146</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 2</value>
@@ -1962,6 +2073,9 @@
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="emailTextText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="emailTextText.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 78</value>
   </data>
@@ -1969,7 +2083,7 @@
     <value>True</value>
   </data>
   <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 133</value>
+    <value>326, 35</value>
   </data>
   <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -2169,6 +2283,9 @@
   <data name="&gt;&gt;emailFromLabel.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -2179,7 +2296,10 @@
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="msgMsgText.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 51</value>
@@ -2188,7 +2308,7 @@
     <value>True</value>
   </data>
   <data name="msgMsgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 229</value>
+    <value>326, 131</value>
   </data>
   <data name="msgMsgText.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2316,6 +2436,9 @@
   <data name="&gt;&gt;msgIntroLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 188</value>
+  </data>
   <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
@@ -2326,10 +2449,10 @@
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 436</value>
+    <value>537, 391</value>
   </data>
   <data name="wizardControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2341,7 +2464,7 @@
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.3687.1219, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2362,7 +2485,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>570, 436</value>
+    <value>537, 391</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4013,14 +4136,8 @@
         AAAAAAAAAAAAgAEAAIABAADAAwAA8A8AAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>586, 472</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>586, 472</value>
+    <value>477, 374</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
     <value>openFileDialog1</value>

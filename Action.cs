@@ -85,6 +85,26 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the type of the action.
+		/// </summary>
+		/// <value>The type of the action.</value>
+		public TaskActionType ActionType
+		{
+			get
+			{
+				if (iAction != null)
+					return iAction.Type;
+				if (this is ComHandlerAction)
+					return TaskActionType.ComHandler;
+				if (this is ShowMessageAction)
+					return TaskActionType.ShowMessage;
+				if (this is EmailAction)
+					return TaskActionType.SendEmail;
+				return TaskActionType.Execute;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the identifier of the action.
 		/// </summary>
 		public virtual string Id

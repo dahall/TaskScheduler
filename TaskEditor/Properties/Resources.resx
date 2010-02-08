@@ -237,4 +237,19 @@
     <value>{0} Properties ({1})</value>
     <comment>0=Task name; 1=Machine</comment>
   </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>Invalid Event Trigger</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>At a minimum, a log must be selected.</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>There must be at least one month, one week, and one weekday selected.</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>Invalid Monthly Trigger</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>There must be at least one month and one day selected.</value>
+  </data>
 </root>
