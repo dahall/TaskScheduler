@@ -208,7 +208,7 @@ namespace Microsoft.Win32.TaskScheduler
 						v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.Disabled;
 					if (v1Trigger != null)
 						SetV1TriggerData();
-					else if (!value)
+					else
 						unboundValues["Enabled"] = value;
 				}
 			}
@@ -217,7 +217,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(0x2bca2875f4373fffL)]
 		public DateTime EndBoundary
 		{
 			get
@@ -235,7 +235,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v1TriggerData.EndDate = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
-					else if (value != DateTime.MaxValue)
+					else
 						unboundValues["EndBoundary"] = value;
 				}
 			}
@@ -261,7 +261,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.ExecutionTimeLimit = Task.TimeSpanToString(value);
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["ExecutionTimeLimit"] = value;
 			}
 		}
@@ -286,7 +286,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.Id = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
-				else if (!string.IsNullOrEmpty(value))
+				else
 					unboundValues["Id"] = value;
 			}
 		}
@@ -647,7 +647,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
         /// </summary>
-        public TimeSpan Delay
+		[DefaultValue(0)]
+		public TimeSpan Delay
         {
             get
             {
@@ -663,7 +664,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IBootTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-                else if (value != TimeSpan.Zero)
+                else
                     unboundValues["Delay"] = value;
             }
         }
@@ -705,7 +706,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Sets or retrieves the interval between the days in the schedule.
         /// </summary>
-        public short DaysInterval
+		[DefaultValue(1)]
+		public short DaysInterval
         {
             get
             {
@@ -722,7 +724,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.daily.DaysInterval = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-                    else if (value != 0)
+                    else
                         unboundValues["DaysInterval"] = value;
                 }
             }
@@ -731,7 +733,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a delay time that is randomly added to the start time of the trigger.
         /// </summary>
-        public TimeSpan RandomDelay
+		[DefaultValue(0)]
+		public TimeSpan RandomDelay
         {
             get
             {
@@ -747,7 +750,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IDailyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["RandomDelay"] = value;
             }
         }
@@ -818,7 +821,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
         /// </summary>
-        public TimeSpan Delay
+		[DefaultValue(0)]
+		public TimeSpan Delay
         {
             get
             {
@@ -830,7 +834,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 if (v2Trigger != null)
                     ((V2Interop.IEventTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["Delay"] = value;
             }
         }
@@ -838,7 +842,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the XPath query string that identifies the event that fires the trigger.
         /// </summary>
-        public string Subscription
+		[DefaultValue((string)null)]
+		public string Subscription
         {
             get
             {
@@ -850,7 +855,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 if (v2Trigger != null)
                     ((V2Interop.IEventTrigger)v2Trigger).Subscription = value;
-                else if (!string.IsNullOrEmpty(value))
+                else
                     unboundValues["Subscription"] = value;
             }
         }
@@ -1051,7 +1056,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
         /// </summary>
-        public TimeSpan Delay
+		[DefaultValue(0)]
+		public TimeSpan Delay
         {
             get
             {
@@ -1067,7 +1073,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.ILogonTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["Delay"] = value;
             }
         }
@@ -1075,7 +1081,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the identifier of the user.
         /// </summary>
-        public string UserId
+		[DefaultValue((string)null)]
+		public string UserId
         {
             get
             {
@@ -1091,7 +1098,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.ILogonTrigger)v2Trigger).UserId = value;
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-                else if (!string.IsNullOrEmpty(value))
+                else
                     unboundValues["UserId"] = value;
             }
         }
@@ -1136,7 +1143,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the days of the week during which the task runs.
         /// </summary>
-        public DaysOfTheWeek DaysOfWeek
+		[DefaultValue(0)]
+		public DaysOfTheWeek DaysOfWeek
         {
             get
             {
@@ -1153,7 +1161,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-                    else if ((short)value != 0)
+                    else
                         unboundValues["DaysOfWeek"] = (short)value;
                 }
             }
@@ -1162,7 +1170,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the months of the year during which the task runs.
         /// </summary>
-        public MonthsOfTheYear MonthsOfYear
+		[DefaultValue(0)]
+		public MonthsOfTheYear MonthsOfYear
         {
             get
             {
@@ -1179,7 +1188,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-					else if ((short)value != 0)
+					else
 						unboundValues["MonthsOfYear"] = (short)value;
                 }
             }
@@ -1188,7 +1197,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a delay time that is randomly added to the start time of the trigger.
         /// </summary>
-        public TimeSpan RandomDelay
+		[DefaultValue(0)]
+		public TimeSpan RandomDelay
         {
             get
             {
@@ -1204,7 +1214,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["RandomDelay"] = value;
             }
         }
@@ -1212,7 +1222,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a Boolean value that indicates that the task runs on the last week of the month.
         /// </summary>
-        public bool RunOnLastWeekOfMonth
+		[DefaultValue(false)]
+		public bool RunOnLastWeekOfMonth
         {
             get
             {
@@ -1229,7 +1240,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth = value;
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-                else if (value)
+                else
                     unboundValues["RunOnLastWeekOfMonth"] = value;
             }
         }
@@ -1237,7 +1248,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the weeks of the month during which the task runs.
         /// </summary>
-        public WhichWeek WeeksOfMonth
+		[DefaultValue(0)]
+		public WhichWeek WeeksOfMonth
         {
             get
             {
@@ -1260,7 +1272,7 @@ namespace Microsoft.Win32.TaskScheduler
                         throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
                     if (v1Trigger != null)
                         SetV1TriggerData();
-					else if ((short)value != 0)
+					else
 						unboundValues["WeeksOfMonth"] = (short)value;
                 }
             }
@@ -1351,7 +1363,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.monthlyDate.Days = (uint)mask;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-                    else if (mask != 0)
+                    else
                         unboundValues["DaysOfMonth"] = mask;
                 }
             }
@@ -1360,7 +1372,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the months of the year during which the task runs.
         /// </summary>
-        public MonthsOfTheYear MonthsOfYear
+		[DefaultValue(0)]
+		public MonthsOfTheYear MonthsOfYear
         {
             get
             {
@@ -1377,7 +1390,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-					else if ((short)value != 0)
+					else
 						unboundValues["MonthsOfYear"] = (short)value;
                 }
             }
@@ -1386,7 +1399,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a delay time that is randomly added to the start time of the trigger.
         /// </summary>
-        public TimeSpan RandomDelay
+		[DefaultValue(0)]
+		public TimeSpan RandomDelay
         {
             get
             {
@@ -1402,7 +1416,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["RandomDelay"] = value;
             }
         }
@@ -1410,7 +1424,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a Boolean value that indicates that the task runs on the last day of the month.
         /// </summary>
-        public bool RunOnLastDayOfMonth
+		[DefaultValue(false)]
+		public bool RunOnLastDayOfMonth
         {
             get
             {
@@ -1426,7 +1441,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth = value;
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-                else if (value)
+                else
                     unboundValues["RunOnLastDayOfMonth"] = value;
             }
         }
@@ -1528,7 +1543,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
         /// </summary>
-        public TimeSpan Delay
+		[DefaultValue(0)]
+		public TimeSpan Delay
         {
             get
             {
@@ -1544,7 +1560,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IRegistrationTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["Delay"] = value;
             }
         }
@@ -1577,7 +1593,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets how long the pattern is repeated.
         /// </summary>
-        public TimeSpan Duration
+		[DefaultValue(0)]
+		public TimeSpan Duration
         {
             get
             {
@@ -1600,7 +1617,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the amount of time between each restart of the task.
         /// </summary>
-        public TimeSpan Interval
+		[DefaultValue(0)]
+		public TimeSpan Interval
         {
             get
             {
@@ -1623,7 +1641,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
         /// </summary>
-        public bool StopAtDurationEnd
+		[DefaultValue(false)]
+		public bool StopAtDurationEnd
         {
             get
             {
@@ -1699,7 +1718,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
         /// </summary>
-        public TimeSpan Delay
+		[DefaultValue(0)]
+		public TimeSpan Delay
         {
             get
             {
@@ -1711,7 +1731,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 if (v2Trigger != null)
                     ((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["Delay"] = value;
             }
         }
@@ -1719,7 +1739,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the kind of Terminal Server session change that would trigger a task launch.
         /// </summary>
-        public TaskSessionStateChangeType StateChange
+		[DefaultValue(0)]
+		public TaskSessionStateChangeType StateChange
         {
             get
             {
@@ -1739,7 +1760,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.
         /// </summary>
-        public string UserId
+		[DefaultValue((string)null)]
+		public string UserId
         {
             get
             {
@@ -1751,7 +1773,7 @@ namespace Microsoft.Win32.TaskScheduler
             {
                 if (v2Trigger != null)
                     ((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId = value;
-                else if (!string.IsNullOrEmpty(value))
+                else
                     unboundValues["UserId"] = value;
             }
         }
@@ -1807,7 +1829,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a delay time that is randomly added to the start time of the trigger.
         /// </summary>
-        public TimeSpan RandomDelay
+		[DefaultValue(0)]
+		public TimeSpan RandomDelay
         {
             get
             {
@@ -1823,7 +1846,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.ITimeTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-                else if (value != TimeSpan.Zero)
+                else
                     unboundValues["RandomDelay"] = value;
             }
         }
@@ -1876,7 +1899,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the days of the week on which the task runs.
         /// </summary>
-        public DaysOfTheWeek DaysOfWeek
+		[DefaultValue(0)]
+		public DaysOfTheWeek DaysOfWeek
         {
             get
             {
@@ -1893,7 +1917,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.weekly.DaysOfTheWeek = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-                    else if ((short)value != 0)
+                    else
                         unboundValues["DaysOfWeek"] = (short)value;
                 }
             }
@@ -1902,7 +1926,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets a delay time that is randomly added to the start time of the trigger.
         /// </summary>
-        public TimeSpan RandomDelay
+		[DefaultValue(0)]
+		public TimeSpan RandomDelay
         {
             get
             {
@@ -1918,7 +1943,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay = Task.TimeSpanToString(value);
                 else if (v1Trigger != null)
                     throw new NotV1SupportedException();
-				else if (value != TimeSpan.Zero)
+				else
 					unboundValues["RandomDelay"] = value;
             }
         }
@@ -1926,7 +1951,8 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Gets or sets the interval between the weeks in the schedule.
         /// </summary>
-        public short WeeksInterval
+		[DefaultValue(0)]
+		public short WeeksInterval
         {
             get
             {
@@ -1943,7 +1969,7 @@ namespace Microsoft.Win32.TaskScheduler
                     v1TriggerData.Data.weekly.WeeksInterval = (ushort)value;
                     if (v1Trigger != null)
                         SetV1TriggerData();
-					else if ((short)value != 0)
+					else
 						unboundValues["WeeksInterval"] = value;
                 }
             }

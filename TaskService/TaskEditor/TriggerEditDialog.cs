@@ -44,11 +44,11 @@ namespace Microsoft.Win32.TaskScheduler
             monthlyOnDOWDropDown.InitializeFromEnum(typeof(DaysOfTheWeek), TaskPropertiesControl.taskSchedResources, "DOW");
             monthlyOnDOWDropDown.Items.RemoveAt(8);
 
-            delaySpan.Items.AddRange(new TimeSpan[] { TimeSpan.FromSeconds(30), TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(8), TimeSpan.FromDays(1) });
-            repeatSpan.Items.AddRange(new TimeSpan[] { TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(30), TimeSpan.FromHours(1) });
-            durationSpan.Items.AddRange(new TimeSpan[] { TimeSpan.Zero, TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(12), TimeSpan.FromDays(1) });
+            delaySpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });
+            repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
+            durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
             durationSpan.FormattedZero = Properties.Resources.TimeSpanIndefinitely;
-            stopIfRunsSpan.Items.AddRange(new TimeSpan[] { TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(2), TimeSpan.FromHours(4), TimeSpan.FromHours(8), TimeSpan.FromHours(12), TimeSpan.FromDays(1), TimeSpan.FromDays(3) });
+            stopIfRunsSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 
             if (trigger != null)
                 this.Trigger = trigger;

@@ -11,14 +11,14 @@ namespace Microsoft.Win32.TaskScheduler
 
         public static TimeSpan Parse(string value, string formattedZero)
         {
-            System.Globalization.TimeSpanFormatInfo fi = System.Globalization.TimeSpanFormatInfo.CurrentInfo;
+            System.Globalization.TimeSpan2FormatInfo fi = System.Globalization.TimeSpan2FormatInfo.CurrentInfo;
             fi.TimeSpanZeroDisplay = formattedZero;
-            return fi.Parse(value);
+            return TimeSpan2.Parse(value, fi);
         }
 
         public static string ToString(this TimeSpan span, string format)
         {
-            return System.Globalization.TimeSpanFormatInfo.CurrentInfo.Format(format, span, null);
+            return System.Globalization.TimeSpan2FormatInfo.CurrentInfo.Format(format, span, null);
         }
     }
 }
