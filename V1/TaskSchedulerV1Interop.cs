@@ -415,7 +415,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		void GetIdleWait([Out] out ushort IdleMinutes, [Out] out ushort DeadlineMinutes);
 		void Run();
 		void Terminate();
-		void EditWorkItem([In] uint hParent, [In] uint dwReserved);
+		void EditWorkItem([In] IntPtr hParent, [In] uint dwReserved);
 		[return: MarshalAs(UnmanagedType.Struct)]
 		SystemTime GetMostRecentRunTime();
 		TaskStatus GetStatus();

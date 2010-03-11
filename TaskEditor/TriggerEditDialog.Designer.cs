@@ -633,28 +633,24 @@
 			// 
 			resources.ApplyResources(this.stopIfRunsSpan, "stopIfRunsSpan");
 			this.stopIfRunsSpan.Name = "stopIfRunsSpan";
-			this.stopIfRunsSpan.Value = System.TimeSpan.Parse("00:00:00");
 			this.stopIfRunsSpan.ValueChanged += new System.EventHandler(this.stopIfRunsSpan_ValueChanged);
 			// 
 			// durationSpan
 			// 
 			resources.ApplyResources(this.durationSpan, "durationSpan");
 			this.durationSpan.Name = "durationSpan";
-			this.durationSpan.Value = System.TimeSpan.Parse("00:00:00");
 			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
 			// 
 			// repeatSpan
 			// 
 			resources.ApplyResources(this.repeatSpan, "repeatSpan");
 			this.repeatSpan.Name = "repeatSpan";
-			this.repeatSpan.Value = System.TimeSpan.Parse("00:00:00");
 			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
 			// 
 			// delaySpan
 			// 
 			resources.ApplyResources(this.delaySpan, "delaySpan");
 			this.delaySpan.Name = "delaySpan";
-			this.delaySpan.Value = System.TimeSpan.Parse("00:00:00");
 			this.delaySpan.ValueChanged += new System.EventHandler(this.delaySpan_ValueChanged);
 			// 
 			// expireDatePicker

@@ -484,14 +484,12 @@
 			// 
 			resources.ApplyResources(this.taskIdleWaitTimeoutCombo, "taskIdleWaitTimeoutCombo");
 			this.taskIdleWaitTimeoutCombo.Name = "taskIdleWaitTimeoutCombo";
-			this.taskIdleWaitTimeoutCombo.Value = System.TimeSpan.Parse("00:00:00");
 			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleWaitTimeoutCombo_ValueChanged);
 			// 
 			// taskIdleDurationCombo
 			// 
 			resources.ApplyResources(this.taskIdleDurationCombo, "taskIdleDurationCombo");
 			this.taskIdleDurationCombo.Name = "taskIdleDurationCombo";
-			this.taskIdleDurationCombo.Value = System.TimeSpan.Parse("00:00:00");
 			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskIdleDurationCombo_ValueChanged);
 			// 
 			// taskRestartOnIdleCheck
@@ -631,21 +629,18 @@
 			// 
 			resources.ApplyResources(this.taskDeleteAfterCombo, "taskDeleteAfterCombo");
 			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
-			this.taskDeleteAfterCombo.Value = System.TimeSpan.Parse("00:00:00");
 			this.taskDeleteAfterCombo.ValueChanged += new System.EventHandler(this.taskDeleteAfterCombo_ValueChanged);
 			// 
 			// taskExecutionTimeLimitCombo
 			// 
 			resources.ApplyResources(this.taskExecutionTimeLimitCombo, "taskExecutionTimeLimitCombo");
 			this.taskExecutionTimeLimitCombo.Name = "taskExecutionTimeLimitCombo";
-			this.taskExecutionTimeLimitCombo.Value = System.TimeSpan.Parse("00:00:00");
 			this.taskExecutionTimeLimitCombo.ValueChanged += new System.EventHandler(this.taskExecutionTimeLimitCombo_ValueChanged);
 			// 
 			// taskRestartIntervalCombo
 			// 
 			resources.ApplyResources(this.taskRestartIntervalCombo, "taskRestartIntervalCombo");
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
-			this.taskRestartIntervalCombo.Value = System.TimeSpan.Parse("00:00:00");
 			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
 			// 
 			// historyTab

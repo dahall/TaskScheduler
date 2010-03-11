@@ -49,13 +49,13 @@ namespace Microsoft.Win32.TaskScheduler
             actionUpButton.Image = bmpDn;
             actionDownButton.Image = bmpUp;
 
-            taskIdleDurationCombo.Items.AddRange(new TimeSpan[] { TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(30), TimeSpan.FromMinutes(60) });
+            taskIdleDurationCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
             taskIdleWaitTimeoutCombo.FormattedZero = Properties.Resources.TimeSpanDoNotWait;
-            taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan[] { TimeSpan.Zero, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(2) });
-            taskRestartIntervalCombo.Items.AddRange(new TimeSpan[] { TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(15), TimeSpan.FromMinutes(30), TimeSpan.FromHours(1), TimeSpan.FromHours(2) });
-            taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan[] { TimeSpan.FromHours(1), TimeSpan.FromHours(2), TimeSpan.FromHours(4), TimeSpan.FromHours(8), TimeSpan.FromHours(12), TimeSpan.FromDays(1), TimeSpan.FromDays(3) });
+            taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+            taskRestartIntervalCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+            taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
             taskDeleteAfterCombo.FormattedZero = Properties.Resources.TimeSpanImmediately;
-            taskDeleteAfterCombo.Items.AddRange(new TimeSpan[] { TimeSpan.Zero, TimeSpan.FromDays(30), TimeSpan.FromDays(90), TimeSpan.FromDays(180), TimeSpan.FromDays(365) });
+            taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Microsoft.Win32.TaskScheduler
 				triggerListView.Items.Clear();
                 foreach (Trigger tr in td.Triggers)
                 {
-                    AddTriggerToList(tr);
+                    AddTriggerToList(tr, -1);
                 }
 
                 // Set Actions tab
@@ -215,16 +215,18 @@ namespace Microsoft.Win32.TaskScheduler
                 taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
                 taskStartWhenAvailableCheck.Checked = td.Settings.StartWhenAvailable;
                 taskRestartIntervalCheck.Checked = td.Settings.RestartInterval != TimeSpan.Zero;
+				taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
 				if (taskRestartIntervalCheck.Checked)
                 {
                     taskRestartIntervalCombo.Value = td.Settings.RestartInterval;
                     taskRestartCountText.Value = td.Settings.RestartCount;
                 }
-				taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
-                taskExecutionTimeLimitCheck.Checked = taskExecutionTimeLimitCombo.Enabled = td.Settings.ExecutionTimeLimit != TimeSpan.Zero;
+                taskExecutionTimeLimitCheck.Checked = td.Settings.ExecutionTimeLimit != TimeSpan.Zero;
+				taskExecutionTimeLimitCombo.Enabled = editable && taskExecutionTimeLimitCheck.Checked;
                 taskExecutionTimeLimitCombo.Value = td.Settings.ExecutionTimeLimit;
                 taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
-                taskDeleteAfterCheck.Checked = taskDeleteAfterCombo.Enabled = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+                taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
                 taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
                 taskMultInstCombo.SelectedIndex = (int)td.Settings.MultipleInstances;
 
@@ -281,10 +283,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionDeleteButton_Click(object sender, EventArgs e)
         {
-            int idx = actionListView.SelectedIndices[0];
-            td.Actions.RemoveAt(idx);
-            actionListView.Items.RemoveAt(idx);
-            SetActionUpDnState();
+			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
+			if (idx >= 0)
+			{
+				td.Actions.RemoveAt(idx);
+				actionListView.Items.RemoveAt(idx);
+				SetActionUpDnState();
+			}
         }
 
         private void actionDownButton_Click(object sender, EventArgs e)
@@ -302,17 +307,21 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionEditButton_Click(object sender, EventArgs e)
         {
-            int idx = actionListView.SelectedIndices[0];
-            ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
-			if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                if (v2)
-                    td.Actions.RemoveAt(idx);
-                actionListView.Items.RemoveAt(idx);
-                td.Actions.Add(dlg.Action);
-                AddActionToList(dlg.Action, idx);
-            }
+			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
+			if (idx >= 0)
+			{
+				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
+				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					if (v2)
+						td.Actions.RemoveAt(idx);
+					actionListView.Items.RemoveAt(idx);
+					td.Actions.Add(dlg.Action);
+					AddActionToList(dlg.Action, idx);
+					actionListView.Items[idx].Selected = true;
+				}
+			}
         }
 
         private void actionListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -355,13 +364,17 @@ namespace Microsoft.Win32.TaskScheduler
                 actionListView.Items.Insert(index, lvi);
         }
 
-        private void AddTriggerToList(Trigger tr)
+        private void AddTriggerToList(Trigger tr, int index)
         {
-            triggerListView.Items.Add(new ListViewItem(new string[] {
+            ListViewItem lvi = new ListViewItem(new string[] {
                     BuildEnumString(taskSchedResources, "TriggerType", tr.TriggerType),
                     tr.ToString(),
                     tr.Enabled ? Properties.Resources.Enabled : Properties.Resources.Disabled
-                }));
+                });
+			if (index < 0)
+				triggerListView.Items.Add(lvi);
+			else
+				triggerListView.Items.Insert(index, lvi);
         }
 
         private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -576,7 +589,7 @@ namespace Microsoft.Win32.TaskScheduler
         {
 			if (!onAssignment)
 				td.Settings.ExecutionTimeLimit = taskExecutionTimeLimitCombo.Value;
-            taskExecutionTimeLimitCheck.Checked = taskExecutionTimeLimitCombo.Value != TimeSpan.Zero;
+            taskExecutionTimeLimitCheck.Checked = taskExecutionTimeLimitCombo.Value != TimeSpan2.Zero;
         }
 
         private void taskHiddenCheck_CheckedChanged(object sender, EventArgs e)
@@ -722,23 +735,30 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void triggerDeleteButton_Click(object sender, EventArgs e)
         {
-            int idx = triggerListView.SelectedIndices[0];
-            td.Triggers.RemoveAt(idx);
-            triggerListView.Items.RemoveAt(idx);
+			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
+			if (idx >= 0)
+			{
+				td.Triggers.RemoveAt(idx);
+				triggerListView.Items.RemoveAt(idx);
+			}
         }
 
         private void triggerEditButton_Click(object sender, EventArgs e)
         {
-            int idx = triggerListView.SelectedIndices[0];
-            TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
-			dlg.TargetServer = TaskService.TargetServer;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                td.Triggers.RemoveAt(idx);
-                triggerListView.Items.RemoveAt(idx);
-                td.Triggers.Add(dlg.Trigger);
-                AddTriggerToList(dlg.Trigger);
-            }
+            int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
+			if (idx >= 0)
+			{
+				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
+				dlg.TargetServer = TaskService.TargetServer;
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					td.Triggers.RemoveAt(idx);
+					triggerListView.Items.RemoveAt(idx);
+					td.Triggers.Add(dlg.Trigger);
+					AddTriggerToList(dlg.Trigger, idx);
+					triggerListView.Items[idx].Selected = true;
+				}
+			}
         }
 
         private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -753,7 +773,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Triggers.Add(dlg.Trigger);
-                AddTriggerToList(dlg.Trigger);
+                AddTriggerToList(dlg.Trigger, -1);
             }
         }
 
@@ -762,11 +782,12 @@ namespace Microsoft.Win32.TaskScheduler
 			bool isSet = taskIdleDurationCheck.Checked;
 			if (isSet)
 			{
-				taskIdleDurationCombo.Enabled = true;
-				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = true;
-				taskStopOnIdleEndCheck.Enabled = true;
+				taskIdleDurationCombo.Enabled = editable;
+				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = editable;
+				taskStopOnIdleEndCheck.Enabled = editable;
 				onAssignment = true;
-				taskStopOnIdleEndCheck.Checked = taskRestartOnIdleCheck.Enabled = td.Settings.IdleSettings.StopOnIdleEnd;
+				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+				taskRestartOnIdleCheck.Enabled = editable && td.Settings.IdleSettings.StopOnIdleEnd;
 				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
 				onAssignment = false;
 			}

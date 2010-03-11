@@ -711,7 +711,7 @@ namespace Microsoft.Win32.TaskScheduler
         public void ShowPropertyPage()
         {
             if (v1Task != null)
-                v1Task.EditWorkItem(0, 0);
+                v1Task.EditWorkItem(IntPtr.Zero, 0);
             else
                 throw new NotV2SupportedException();
         }
