@@ -131,7 +131,7 @@ namespace TestTaskService
 					// Create a new task definition and assign properties
 					TaskDefinition td = ts.NewTask();
 					td.RegistrationInfo.Description = "Does something";
-					td.Principal.LogonType = TaskLogonType.InteractiveToken;
+					//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 					// Create a trigger that will fire the task at this time every other day
 					DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
@@ -145,15 +145,14 @@ namespace TestTaskService
 
 					// Register the task in the root folder
 					const string taskName = "Test";
-					Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+					Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 					System.Threading.Thread.Sleep(1000);
 					Console.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
 
 					// Retrieve the task, add a trigger and save it.
 					t = ts.GetTask(taskName);
-					td = t.Definition;
-					td.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
-					ts.RootFolder.RegisterTaskDefinition(taskName, td);//, TaskCreation.Update, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+					t.Definition.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
+					t.RegisterChanges();
 
 					// Remove the task we just created
 					Console.ReadKey(false);

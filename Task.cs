@@ -419,6 +419,7 @@ namespace Microsoft.Win32.TaskScheduler
         private static readonly DateTime v2InvalidDate = new DateTime(1899, 12, 30);
 
         private V2Interop.IRegisteredTask v2Task;
+		private TaskDefinition myTD;
 
         internal Task(TaskService svc, TaskScheduler.V1Interop.ITask iTask)
         {
@@ -439,9 +440,14 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get
             {
-                if (v2Task != null)
-                    return new TaskDefinition(v2Task.Definition);
-                return new TaskDefinition(v1Task, this.Name);
+				if (myTD == null)
+				{
+					if (v2Task != null)
+						myTD = new TaskDefinition(v2Task.Definition);
+					else
+						myTD = new TaskDefinition(v1Task, this.Name);
+				}
+				return myTD;
             }
         }
 
@@ -559,6 +565,23 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
+		/// <summary>
+		/// Gets or sets the security descriptor for the task.
+		/// </summary>
+		/// <value>The security descriptor.</value>
+		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
+		{
+			get
+			{
+				string sddl = GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All);
+				return new System.Security.AccessControl.RawSecurityDescriptor(sddl);
+			}
+			set
+			{
+				SetSecurityDescriptorSddlForm(value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All), System.Security.AccessControl.AccessControlSections.All);
+			}
+		}
+
         /// <summary>
         /// Gets the operational state of the registered task.
         /// </summary>
@@ -662,6 +685,14 @@ namespace Microsoft.Win32.TaskScheduler
 
             throw new NotV1SupportedException();
         }
+
+		/// <summary>
+		/// Updates the task with any changes made to the <see cref="Definition"/> by calling <see cref="TaskFolder.RegisterTaskDefinition"/> from the currently registered folder using the currently registered name.
+		/// </summary>
+		public void RegisterChanges()
+		{
+			TaskService.GetFolder(System.IO.Path.GetDirectoryName(this.Path)).RegisterTaskDefinition(this.Name, this.Definition);
+		}
 
         /// <summary>
         /// Runs the registered task immediately.
@@ -1238,6 +1269,22 @@ namespace Microsoft.Win32.TaskScheduler
                     SetTaskData(v1Task, value);
             }
         }
+
+		/// <summary>
+		/// Gets or sets the security descriptor of the task.
+		/// </summary>
+		/// <value>The security descriptor.</value>
+		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
+		{
+			get
+			{
+				return new System.Security.AccessControl.RawSecurityDescriptor(this.SecurityDescriptorSddlForm);
+			}
+			set
+			{
+				this.SecurityDescriptorSddlForm = value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All);
+			}
+		}
 
         /// <summary>
         /// Gets or sets the security descriptor of the task.
