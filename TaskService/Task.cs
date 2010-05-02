@@ -689,8 +689,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Updates the task with any changes made to the <see cref="Definition"/> by calling <see cref="TaskFolder.RegisterTaskDefinition"/> from the currently registered folder using the currently registered name.
 		/// </summary>
+		/// <exception cref="System.Security.SecurityException">Thrown if task was previously registered with a password.</exception>
 		public void RegisterChanges()
 		{
+			if (this.Definition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.Definition.Principal.LogonType == TaskLogonType.Password || this.Definition.Principal.LogonType == TaskLogonType.Group)
+				throw new System.Security.SecurityException("Tasks which have been registered previously with stored passwords must use the TaskFolder.RegisterTaskDefinition method for updates.");
 			TaskService.GetFolder(System.IO.Path.GetDirectoryName(this.Path)).RegisterTaskDefinition(this.Name, this.Definition);
 		}
 
@@ -1603,10 +1606,10 @@ namespace Microsoft.Win32.TaskScheduler
             }
             set
             {
-                if (v2Settings != null)
-                    v2Settings.ExecutionTimeLimit = Task.TimeSpanToString(value);
-                else
-                    v1Task.SetMaxRunTime(Convert.ToUInt32(value.TotalMilliseconds));
+				if (v2Settings != null)
+					v2Settings.ExecutionTimeLimit = value == TimeSpan.Zero ? "PT0S" : Task.TimeSpanToString(value);
+				else
+					v1Task.SetMaxRunTime(Convert.ToUInt32(value.TotalMilliseconds));
             }
         }
 
