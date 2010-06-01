@@ -295,7 +295,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.
 		/// </summary>
-		/// <param name="sddlForm">The security descriptor for the folder.</param>
+		/// <param name="sd">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.AccessControlSections includeSections)
 		{
