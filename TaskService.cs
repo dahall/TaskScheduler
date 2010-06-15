@@ -184,7 +184,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return ShouldSerializeUserAccountDomain() ? userDomain : null; }
 			set
             {
-                if (!userDomain.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+				if (userDomain != null && !userDomain.Equals(value, StringComparison.InvariantCultureIgnoreCase))
                 {
                     userDomain = value;
 					Connect();
@@ -202,7 +202,7 @@ namespace Microsoft.Win32.TaskScheduler
             get { return ShouldSerializeUserName() ? userName : null; }
             set
             {
-                if (!userName.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+                if (userName != null && !userName.Equals(value, StringComparison.InvariantCultureIgnoreCase))
                 {
                     userName = value;
                     Connect();
@@ -220,7 +220,7 @@ namespace Microsoft.Win32.TaskScheduler
             get { return userPassword; }
             set
             {
-                if (!userPassword.Equals(value, StringComparison.InvariantCulture))
+                if (userPassword != value)
                 {
                     userPassword = value;
 					Connect();
@@ -438,17 +438,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ShouldSerializeTargetServer()
 		{
-			return !targetServer.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase);
+			return targetServer != null && !targetServer.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		private bool ShouldSerializeUserAccountDomain()
 		{
-			return !userDomain.Equals(System.Environment.UserDomainName, StringComparison.InvariantCultureIgnoreCase);
+			return userDomain != null && !userDomain.Equals(System.Environment.UserDomainName, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		private bool ShouldSerializeUserName()
 		{
-			return !userName.Equals(System.Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
+			return userName != null && !userName.Equals(System.Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		private class VersionConverter : TypeConverter
