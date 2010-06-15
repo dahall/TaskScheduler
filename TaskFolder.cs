@@ -232,7 +232,7 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 				case TaskLogonType.ServiceAccount:
 					flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-					definition.v1Task.SetAccountInformation(String.IsNullOrEmpty(UserId) ? String.Empty : UserId, IntPtr.Zero);
+					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(UserId) || UserId.Equals("SYSTEM", StringComparison.CurrentCultureIgnoreCase)) ? String.Empty : UserId, IntPtr.Zero);
 					break;
 				case TaskLogonType.InteractiveTokenOrPassword:
 					flags |= V1Interop.TaskFlags.Interactive;
