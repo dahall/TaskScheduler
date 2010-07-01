@@ -245,7 +245,7 @@ namespace TestTaskService
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
 				td.Settings.DisallowStartIfOnBatteries = true;
-				td.Settings.Enabled = false;
+				//td.Settings.Enabled = false;
 				td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(2);
 				td.Settings.Hidden = false;
 				td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
@@ -357,7 +357,14 @@ namespace TestTaskService
 			}
 
 			Task runningTask = tf.Tasks["Test"];
-			Console.WriteLine("\nNew task will run at " + runningTask.NextRunTime);
+			Console.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
+			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
+			if (times.Length > 0)
+			{
+				Console.WriteLine("\nNew task will run at the following times over the next week:");
+				foreach (DateTime dt in times)
+					Console.WriteLine("  {0}", dt);
+			}
 			Console.WriteLine("\nNew task triggers:");
 			for (int i = 0; i < runningTask.Definition.Triggers.Count; i++)
 				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Triggers[i]);

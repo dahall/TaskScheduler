@@ -365,7 +365,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x11)]
 		void Stop(int flags);
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), TypeLibFunc((short)0x41), DispId(0x60020011)]
-		void GetRunTimes([In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstStart, [In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstEnd, [Out] out uint pCount, [In, Out] ref IntPtr pRunTimes);
+		void GetRunTimes([In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstStart, [In] Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstEnd, [In, Out] ref uint pCount, [In, Out] ref IntPtr pRunTimes);
 	}
 
 	[ComImport, Guid("86627EB4-42A7-41E4-A4D9-AC33A72F2D52"), TypeLibType((short)0x10c0), System.Security.SuppressUnmanagedCodeSecurity]

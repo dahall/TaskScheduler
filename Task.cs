@@ -646,31 +646,35 @@ namespace Microsoft.Win32.TaskScheduler
         }
 
         /// <summary>
-        /// Gets the times that the registered task is scheduled to run during a specified time. Not available under Task Scheduler 1.0.
-        /// </summary>
+        /// Gets the times that the registered task is scheduled to run during a specified time.
+		/// </summary>
         /// <param name="start">The starting time for the query.</param>
         /// <param name="end">The ending time for the query.</param>
+		/// <param name="count">The requested number of runs. A value of 0 will return all times requested.</param>
         /// <returns>The scheduled times that the task will run.</returns>
-        public DateTime[] GetRunTimes(DateTime start, DateTime end)
+        public DateTime[] GetRunTimes(DateTime start, DateTime end, uint count)
         {
-            if (v2Task != null)
+			const ushort TASK_MAX_RUN_TIMES = 1440;
+
+			TaskScheduler.V1Interop.SystemTime stStart = new TaskScheduler.V1Interop.SystemTime(start);
+            TaskScheduler.V1Interop.SystemTime stEnd = new TaskScheduler.V1Interop.SystemTime(end);
+            IntPtr runTimes = IntPtr.Zero, st;
+			if (v2Task != null)
+				v2Task.GetRunTimes(stStart, stEnd, ref count, ref runTimes);
+			else
+			{
+				ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
+				v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
+				count = count1;
+			}
+            DateTime[] ret = new DateTime[count];
+            for (int i = 0; i < count; i++)
             {
-                TaskScheduler.V1Interop.SystemTime stStart = new TaskScheduler.V1Interop.SystemTime(start);
-                TaskScheduler.V1Interop.SystemTime stEnd = new TaskScheduler.V1Interop.SystemTime(end);
-                uint count;
-                IntPtr runTimes = IntPtr.Zero, st;
-                v2Task.GetRunTimes(stStart, stEnd, out count, ref runTimes);
-                DateTime[] ret = new DateTime[count];
-                for (int i = 0; i < count; i++)
-                {
-                    st = Marshal.ReadIntPtr(runTimes, i * IntPtr.Size);
-                    ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
-                    Marshal.FreeCoTaskMem(st);
-                }
-                Marshal.FreeCoTaskMem(runTimes);
-                return ret;
+				st = new IntPtr(runTimes.ToInt64() + (i * Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime))));
+                ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
             }
-            throw new NotV1SupportedException();
+            Marshal.FreeCoTaskMem(runTimes);
+            return ret;
         }
 
         /// <summary>
