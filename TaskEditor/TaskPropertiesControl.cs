@@ -165,7 +165,7 @@ namespace Microsoft.Win32.TaskScheduler
 
                 this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
                 //this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
-                this.flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(service.ConnectedUser);
+                this.flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(service.UserName);
                 //this.flagExecutorIsTheMachineAdministrator = this.ExecutorIsTheMachineAdministrator(executor);
 
                 // Set General tab
@@ -780,6 +780,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void UpdateIdleSettingsControls()
 		{
 			bool isSet = taskIdleDurationCheck.Checked;
+			bool alreadyOnAssigment = onAssignment;
 			if (isSet)
 			{
 				taskIdleDurationCombo.Enabled = editable;
@@ -789,7 +790,8 @@ namespace Microsoft.Win32.TaskScheduler
 				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
 				taskRestartOnIdleCheck.Enabled = editable && td.Settings.IdleSettings.StopOnIdleEnd;
 				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
-				onAssignment = false;
+				if (!alreadyOnAssigment)
+					onAssignment = false;
 			}
 			else
 			{
@@ -798,7 +800,8 @@ namespace Microsoft.Win32.TaskScheduler
 				onAssignment = true;
 				taskRestartOnIdleCheck.Enabled = taskRestartOnIdleCheck.Checked = false;
 				taskStopOnIdleEndCheck.Enabled = taskStopOnIdleEndCheck.Checked = false;
-				onAssignment = false;
+				if (!alreadyOnAssigment)
+					onAssignment = false;
 			}
 		}
 
