@@ -568,10 +568,7 @@ namespace Microsoft.Win32.TaskScheduler
 				try
 				{
 					object o = unboundValues[key];
-					if (o is TimeSpan)
-						o = Task.TimeSpanToString((TimeSpan)o);
-					if (o is DateTime)
-						o = ((DateTime)o).ToString(V2BoundaryDateFormat);
+					CheckBindValue(key, ref o);
 					v2Trigger.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, v2Trigger, new object[] { o });
 				}
 				catch (System.Reflection.TargetInvocationException tie) { throw tie.InnerException; }
@@ -582,6 +579,24 @@ namespace Microsoft.Win32.TaskScheduler
 
 			this.repititionPattern = new RepetitionPattern(this);
 			this.repititionPattern.Bind();
+		}
+
+		/// <summary>
+		/// Checks the bind value for any conversion.
+		/// </summary>
+		/// <param name="key">The key (property) name.</param>
+		/// <param name="o">The value.</param>
+		internal virtual void CheckBindValue(string key, ref object o)
+		{
+			if (o is TimeSpan)
+				o = Task.TimeSpanToString((TimeSpan)o);
+			if (o is DateTime)
+			{
+				if (key == "EndBoundary" && ((DateTime)o) == DateTime.MaxValue)
+					o = null;
+				else
+					o = ((DateTime)o).ToString(V2BoundaryDateFormat);
+			}
 		}
 
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
@@ -687,10 +702,11 @@ namespace Microsoft.Win32.TaskScheduler
         /// <summary>
         /// Creates an unbound instance of a <see cref="DailyTrigger"/>.
         /// </summary>
-        public DailyTrigger()
+		/// <param name="daysInterval">Interval between the days in the schedule.</param>
+        public DailyTrigger(short daysInterval = 1)
             : base(TaskTriggerType.Daily)
         {
-            this.DaysInterval = 1;
+			this.DaysInterval = daysInterval;
         }
 
         internal DailyTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -1119,15 +1135,18 @@ namespace Microsoft.Win32.TaskScheduler
     /// </summary>
     public sealed class MonthlyDOWTrigger : Trigger, ITriggerDelay
     {
-        /// <summary>
-        /// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
-        /// </summary>
-        public MonthlyDOWTrigger()
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
+		/// </summary>
+		/// <param name="daysOfWeek">The days of the week.</param>
+		/// <param name="monthsOfYear">The months of the year.</param>
+		/// <param name="weeksOfMonth">The weeks of the month.</param>
+        public MonthlyDOWTrigger(DaysOfTheWeek daysOfWeek = DaysOfTheWeek.Sunday, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths, WhichWeek weeksOfMonth = WhichWeek.FirstWeek)
             : base(TaskTriggerType.MonthlyDOW)
         {
-            this.DaysOfWeek = DaysOfTheWeek.Sunday;
-            this.MonthsOfYear = MonthsOfTheYear.AllMonths;
-            this.WeeksOfMonth = WhichWeek.FirstWeek;
+            this.DaysOfWeek = daysOfWeek;
+            this.MonthsOfYear = monthsOfYear;
+            this.WeeksOfMonth = weeksOfMonth;
         }
 
         internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -1322,14 +1341,16 @@ namespace Microsoft.Win32.TaskScheduler
     /// </summary>
     public sealed class MonthlyTrigger : Trigger, ITriggerDelay
     {
-        /// <summary>
-        /// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
-        /// </summary>
-        public MonthlyTrigger()
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
+		/// </summary>
+		/// <param name="dayOfMonth">The day of the month.</param>
+		/// <param name="monthsOfYear">The months of the year.</param>
+        public MonthlyTrigger(int dayOfMonth = 1, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths)
             : base(TaskTriggerType.Monthly)
         {
-            this.DaysOfMonth = new int[] { 1 };
-            this.MonthsOfYear = MonthsOfTheYear.AllMonths;
+			this.DaysOfMonth = new int[] { dayOfMonth };
+			this.MonthsOfYear = monthsOfYear;
         }
 
         internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -1876,10 +1897,12 @@ namespace Microsoft.Win32.TaskScheduler
     /// </summary>
     public sealed class WeeklyTrigger : Trigger, ITriggerDelay
     {
-        /// <summary>
-        /// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.
-        /// </summary>
-        public WeeklyTrigger()
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.
+		/// </summary>
+		/// <param name="daysOfWeek">The days of the week.</param>
+		/// <param name="weeksInterval">The interval between the weeks in the schedule.</param>
+        public WeeklyTrigger(DaysOfTheWeek daysOfWeek = DaysOfTheWeek.Sunday, short weeksInterval = 1)
             : base(TaskTriggerType.Weekly)
         {
             this.DaysOfWeek = DaysOfTheWeek.Sunday;

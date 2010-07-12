@@ -241,7 +241,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="path">Path to an executable file.</param>
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
-		public ExecAction(string path, string arguments, string workingDirectory)
+		public ExecAction(string path, string arguments = null, string workingDirectory = null)
 		{
 			this.Path = path;
 			this.Arguments = arguments;
