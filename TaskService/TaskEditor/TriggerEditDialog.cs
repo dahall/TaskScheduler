@@ -568,7 +568,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment)
+			if (!onAssignment && expireCheckBox.Checked)
 				trigger.EndBoundary = expireDatePicker.Value;
 		}
 

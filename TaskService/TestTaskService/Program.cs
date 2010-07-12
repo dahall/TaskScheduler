@@ -103,11 +103,11 @@ namespace TestTaskService
 					TaskDefinition td = DisplayTask(t, true);
 
 					// Register then show task again
-					if (td != null)
+					while (td != null)
 					{
 						ts.RootFolder.RegisterTaskDefinition(taskName, td);
 						t = ts.GetTask(taskName);
-						DisplayTask(t, false);
+						td = DisplayTask(t, true);
 					}
 
 					// Remove the task we just created

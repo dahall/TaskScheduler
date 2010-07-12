@@ -34,7 +34,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!base.DesignMode)
 	            Connect();
         }
-
+/*
         /// <summary>
         /// Creates a new instance of a TaskService connecting to a remote machine as the current user.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// <param name="userName">Name of the user.</param>
         /// <param name="accountDomain">The account domain.</param>
         /// <param name="password">The password.</param>
-        public TaskService(string targetServer, string userName, string accountDomain, string password)
+        public TaskService(string targetServer, string userName , string accountDomain, string password)
         {
             this.targetServer = targetServer;
             this.userName = userName;
@@ -62,7 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
             ResetHighestSupportedVersion();
             Connect();
         }
-
+*/
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskService"/> class.
         /// </summary>
@@ -71,7 +71,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// <param name="accountDomain">The account domain.</param>
         /// <param name="password">The password.</param>
         /// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
-        public TaskService(string targetServer, string userName, string accountDomain, string password, bool forceV1)
+        public TaskService(string targetServer, string userName = null, string accountDomain = null, string password = null, bool forceV1 = false)
         {
             this.targetServer = targetServer;
             this.userName = userName;
@@ -278,7 +278,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// </summary>
         /// <param name="includeHidden">True to include hidden tasks.</param>
         /// <returns><see cref="RunningTaskCollection"/> instance with the list of running tasks.</returns>
-        public RunningTaskCollection GetRunningTasks(bool includeHidden)
+        public RunningTaskCollection GetRunningTasks(bool includeHidden = true)
         {
             return v2 ? new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(this);
         }

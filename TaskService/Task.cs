@@ -652,7 +652,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// <param name="end">The ending time for the query.</param>
 		/// <param name="count">The requested number of runs. A value of 0 will return all times requested.</param>
         /// <returns>The scheduled times that the task will run.</returns>
-        public DateTime[] GetRunTimes(DateTime start, DateTime end, uint count)
+        public DateTime[] GetRunTimes(DateTime start, DateTime end, uint count = 0)
         {
 			const ushort TASK_MAX_RUN_TIMES = 1440;
 

@@ -117,7 +117,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="sddlForm">The security descriptor associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
-		public TaskFolder CreateFolder(string subFolderName, string sddlForm)
+		public TaskFolder CreateFolder(string subFolderName, string sddlForm = null)
 		{
 			if (v2Folder != null)
 				return new TaskFolder(this.TaskService, v2Folder.CreateFolder(subFolderName, sddlForm));
@@ -211,7 +211,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="sddl">The security descriptor associated with the registered task. You can specify the access control list (ACL) in the security descriptor for a task in order to allow or deny certain users and groups access to a task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
-		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password, TaskLogonType LogonType, string sddl)
+		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
 				return new Task(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
