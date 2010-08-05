@@ -28,6 +28,9 @@ namespace TestTaskService
 				case 'E':
 					EditorTest(newArgs);
 					break;
+				case 'F':
+					FindActionString(newArgs);
+					break;
 				case 'S':
 					ShortTest(newArgs);
 					break;
@@ -37,6 +40,88 @@ namespace TestTaskService
 				default:
 					LongTest(newArgs);
 					break;
+			}
+		}
+
+		static void FindActionString(string[] args)
+		{
+			try
+			{
+				using (TaskService ts = new TaskService())
+				{
+					TaskFolder tf = ts.RootFolder;
+					FindActionStringInFolder(tf, args[0]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+			}
+			Console.ReadKey(false);
+		}
+
+		static void FindActionStringInFolder(TaskFolder tf, string arg)
+		{
+			foreach (Task t in tf.Tasks)
+			{
+				try
+				{
+					bool found = false;
+					foreach (var action in t.Definition.Actions)
+					{
+						switch (action.ActionType)
+						{
+							case TaskActionType.ComHandler:
+								/*if (((ComHandlerAction)action).ClassId.ToString().IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((ComHandlerAction)action).Data.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)*/
+									found = true;
+								Console.WriteLine(" > " + action.ToString());
+								break;
+							case TaskActionType.Execute:
+								if (((ExecAction)action).Path.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((ExecAction)action).Arguments.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
+									found = true;
+								break;
+							case TaskActionType.SendEmail:
+								if (((EmailAction)action).Bcc.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).Body.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).Cc.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).From.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).ReplyTo.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).Server.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).Subject.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+									((EmailAction)action).To.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
+									found = true;
+									break;
+							case TaskActionType.ShowMessage:
+									if (((ShowMessageAction)action).MessageBody.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+										((ShowMessageAction)action).Title.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
+										found = true;
+									break;
+							default:
+								break;
+						}
+					}
+					if (found)
+					{
+						Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Path, t.State);
+					}
+				}
+				catch { }
+			}
+
+			TaskFolderCollection tfs = tf.SubFolders;
+			if (tfs.Count > 0)
+			{
+				try
+				{
+					foreach (TaskFolder sf in tfs)
+						FindActionStringInFolder(sf, arg);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.ToString());
+				}
 			}
 		}
 
@@ -105,7 +190,7 @@ namespace TestTaskService
 					// Register then show task again
 					while (td != null)
 					{
-						ts.RootFolder.RegisterTaskDefinition(taskName, td);
+						ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
 						t = ts.GetTask(taskName);
 						td = DisplayTask(t, true);
 					}

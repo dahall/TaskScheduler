@@ -71,7 +71,9 @@
     <Compile Include="Trigger.cs" />
     <Compile Include="TriggerCollection.cs" />
     <Compile Include="V1\TaskSchedulerV1Interop.cs" />
-    <Compile Include="TaskService.cs" />
+    <Compile Include="TaskService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="V2\TaskSchedulerV2Interop.cs" />
   </ItemGroup>
