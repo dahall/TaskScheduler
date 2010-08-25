@@ -1837,7 +1837,17 @@ namespace Microsoft.Win32.TaskScheduler
         {
         }
 
-        internal TimeTrigger(V1Interop.ITaskTrigger iTrigger)
+		/// <summary>
+		/// Creates an unbound instance of a <see cref="TimeTrigger"/> and assigns the execution time.
+		/// </summary>
+		/// <param name="startBoundary">Date and time for the trigger to fire.</param>
+		public TimeTrigger(DateTime startBoundary)
+			: base(TaskTriggerType.Time)
+		{
+			this.StartBoundary = startBoundary;
+		}
+
+		internal TimeTrigger(V1Interop.ITaskTrigger iTrigger)
             : base(iTrigger, V1Interop.TaskTriggerType.RunOnce)
         {
         }
@@ -1905,8 +1915,8 @@ namespace Microsoft.Win32.TaskScheduler
         public WeeklyTrigger(DaysOfTheWeek daysOfWeek = DaysOfTheWeek.Sunday, short weeksInterval = 1)
             : base(TaskTriggerType.Weekly)
         {
-            this.DaysOfWeek = DaysOfTheWeek.Sunday;
-            this.WeeksInterval = 1;
+            this.DaysOfWeek = daysOfWeek;
+            this.WeeksInterval = weeksInterval;
         }
 
         internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger)
