@@ -120,6 +120,97 @@ namespace Microsoft.Win32.TaskScheduler
         SessionUnlock = 8
     }
 
+	/***** WAITING TO DETERMINE USE CASE *****
+	/// <summary>
+	/// Success and error codes that some methods will expose through <see cref="COMExcpetion"/>.
+	/// </summary>
+	public enum TaskResultCode
+	{
+		/// <summary>The task is ready to run at its next scheduled time.</summary>
+		TaskReady = 0x00041300,
+		/// <summary>The task is currently running.</summary>
+		TaskRunning = 0x00041301,
+		/// <summary>The task will not run at the scheduled times because it has been disabled.</summary>
+		TaskDisabled = 0x00041302,
+		/// <summary>The task has not yet run.</summary>
+		TaskHasNotRun = 0x00041303,
+		/// <summary>There are no more runs scheduled for this task.</summary>
+		TaskNoMoreRuns = 0x00041304,
+		/// <summary>One or more of the properties that are needed to run this task on a schedule have not been set.</summary>
+		TaskNotScheduled = 0x00041305,
+		/// <summary>The last run of the task was terminated by the user.</summary>
+		TaskTerminated = 0x00041306,
+		/// <summary>Either the task has no triggers or the existing triggers are disabled or not set.</summary>
+		TaskNoValidTriggers = 0x00041307,
+		/// <summary>Event triggers do not have set run times.</summary>
+		EventTrigger = 0x00041308,
+		/// <summary>A task's trigger is not found.</summary>
+		TriggerNotFound = 0x80041309,
+		/// <summary>One or more of the properties required to run this task have not been set.</summary>
+		TaskNotReady = 0x8004130A,
+		/// <summary>There is no running instance of the task.</summary>
+		TaskNotRunning = 0x8004130B,
+		/// <summary>The Task Scheduler service is not installed on this computer.</summary>
+		ServiceNotInstalled = 0x8004130C,
+		/// <summary>The task object could not be opened.</summary>
+		CannotOpenTask = 0x8004130D,
+		/// <summary>The object is either an invalid task object or is not a task object.</summary>
+		InvalidTask = 0x8004130E,
+		/// <summary>No account information could be found in the Task Scheduler security database for the task indicated.</summary>
+		AccountInformationNotSet = 0x8004130F,
+		/// <summary>Unable to establish existence of the account specified.</summary>
+		AccountNameNotFound = 0x80041310,
+		/// <summary>Corruption was detected in the Task Scheduler security database; the database has been reset.</summary>
+		AccountDbaseCorrupt = 0x80041311,
+		/// <summary>Task Scheduler security services are available only on Windows NT.</summary>
+		NoSecurityServices = 0x80041312,
+		/// <summary>The task object version is either unsupported or invalid.</summary>
+		UnknownObjectVersion = 0x80041313,
+		/// <summary>The task has been configured with an unsupported combination of account settings and run time options.</summary>
+		UnsupportedAccountOption = 0x80041314,
+		/// <summary>The Task Scheduler Service is not running.</summary>
+		ServiceNotRunning = 0x80041315,
+		/// <summary>The task XML contains an unexpected node.</summary>
+		UnexpectedNode = 0x80041316,
+		/// <summary>The task XML contains an element or attribute from an unexpected namespace.</summary>
+		Namespace = 0x80041317,
+		/// <summary>The task XML contains a value which is incorrectly formatted or out of range.</summary>
+		InvalidValue = 0x80041318,
+		/// <summary>The task XML is missing a required element or attribute.</summary>
+		MissingNode = 0x80041319,
+		/// <summary>The task XML is malformed.</summary>
+		MalformedXml = 0x8004131A,
+		/// <summary>The task is registered, but not all specified triggers will start the task.</summary>
+		SomeTriggersFailed = 0x0004131B,
+		/// <summary>The task is registered, but may fail to start. Batch logon privilege needs to be enabled for the task principal.</summary>
+		BatchLogonProblem = 0x0004131C,
+		/// <summary>The task XML contains too many nodes of the same type.</summary>
+		TooManyNodes = 0x8004131D,
+		/// <summary>The task cannot be started after the trigger end boundary.</summary>
+		PastEndBoundary = 0x8004131E,
+		/// <summary>An instance of this task is already running.</summary>
+		AlreadyRunning = 0x8004131F,
+		/// <summary>The task will not run because the user is not logged on.</summary>
+		UserNotLoggedOn = 0x80041320,
+		/// <summary>The task image is corrupt or has been tampered with.</summary>
+		InvalidTaskHash = 0x80041321,
+		/// <summary>The Task Scheduler service is not available.</summary>
+		ServiceNotAvailable = 0x80041322,
+		/// <summary>The Task Scheduler service is too busy to handle your request. Please try again later.</summary>
+		ServiceTooBusy = 0x80041323,
+		/// <summary>The Task Scheduler service attempted to run the task, but the task did not run due to one of the constraints in the task definition.</summary>
+		TaskAttempted = 0x80041324,
+		/// <summary>The Task Scheduler service has asked the task to run.</summary>
+		TaskQueued = 0x00041325,
+		/// <summary>The task is disabled.</summary>
+		TaskDisabled = 0x80041326,
+		/// <summary>The task has properties that are not compatible with earlier versions of Windows.</summary>
+		TaskNotV1Compatible = 0x80041327,
+		/// <summary>The task settings do not allow the task to start on demand.</summary>
+		StartOnDemand = 0x80041328,
+	}
+	*/
+
     /// <summary>Defines the different states that a registered task can be in.</summary>
     public enum TaskState
     {
@@ -708,8 +799,12 @@ namespace Microsoft.Win32.TaskScheduler
         /// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
         public RunningTask Run(params string[] parameters)
         {
-            if (v2Task != null)
-                return new RunningTask(this.TaskService, this.v2Task, v2Task.Run(parameters));
+			if (v2Task != null)
+			{
+				if (parameters != null && parameters.Length > 32)
+					throw new ArgumentOutOfRangeException("parameters", "A maximum of 32 values is allowed.");
+				return new RunningTask(this.TaskService, this.v2Task, v2Task.Run(parameters));
+			}
 
             v1Task.Run();
             return new RunningTask(this.TaskService, this.v1Task);
@@ -761,7 +856,8 @@ namespace Microsoft.Win32.TaskScheduler
         {
             if (v2Task != null)
                 v2Task.Stop(0);
-            v1Task.Terminate();
+			else
+	            v1Task.Terminate();
         }
 
         internal static string GetV1Path(V1Interop.ITask v1Task)
