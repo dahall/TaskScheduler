@@ -1275,7 +1275,6 @@ namespace Microsoft.Win32.TaskScheduler
                 if (v2Trigger != null)
                     return (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
                 int wk = 1 << (v1TriggerData.Data.monthlyDOW.WhichWeek - 1);
-                if (wk == 0x10) wk = 0x20;
                 return (WhichWeek)wk;
             }
             set
@@ -1284,7 +1283,7 @@ namespace Microsoft.Win32.TaskScheduler
                     ((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
                 else
                 {
-                    int idx = Array.IndexOf<ushort>(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x20 }, (ushort)value);
+                    int idx = Array.IndexOf<ushort>(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (ushort)value);
                     if (idx >= 0)
                         v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)(idx + 1);
                     else
