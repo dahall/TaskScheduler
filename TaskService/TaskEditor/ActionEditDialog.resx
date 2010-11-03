@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="promptLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 13</value>
+    <value>15, 15</value>
   </data>
   <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 13</value>
+    <value>279, 15</value>
   </data>
   <data name="promptLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -151,10 +151,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 40</value>
+    <value>19, 46</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 2</value>
+    <value>471, 2</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -175,10 +175,10 @@
     <value>True</value>
   </data>
   <data name="execProgLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 3</value>
+    <value>7, 3</value>
   </data>
   <data name="execProgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+    <value>90, 15</value>
   </data>
   <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -214,10 +214,10 @@
     <value>Custom handler</value>
   </data>
   <data name="actionsCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 53</value>
+    <value>98, 61</value>
   </data>
   <data name="actionsCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 21</value>
+    <value>391, 23</value>
   </data>
   <data name="actionsCombo.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -244,10 +244,10 @@
     <value>Top, Right</value>
   </data>
   <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 20</value>
+    <value>356, 23</value>
   </data>
   <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
+    <value>98, 27</value>
   </data>
   <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -271,10 +271,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 77</value>
+    <value>209, 89</value>
   </data>
   <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>244, 23</value>
   </data>
   <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -295,10 +295,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="execArgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 51</value>
+    <value>209, 59</value>
   </data>
   <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>244, 23</value>
   </data>
   <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -319,10 +319,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="execProgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 20</value>
+    <value>10, 23</value>
   </data>
   <data name="execProgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 20</value>
+    <value>336, 23</value>
   </data>
   <data name="execProgText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -343,10 +343,10 @@
     <value>True</value>
   </data>
   <data name="execDirLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 80</value>
+    <value>7, 92</value>
   </data>
   <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>102, 15</value>
   </data>
   <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -370,10 +370,10 @@
     <value>True</value>
   </data>
   <data name="execArgLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 54</value>
+    <value>7, 62</value>
   </data>
   <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 13</value>
+    <value>147, 15</value>
   </data>
   <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -400,7 +400,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 283</value>
+    <value>462, 328</value>
   </data>
   <data name="execTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -421,10 +421,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 218</value>
+    <value>369, 252</value>
   </data>
   <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>87, 27</value>
   </data>
   <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -448,10 +448,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 255</value>
+    <value>117, 294</value>
   </data>
   <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 20</value>
+    <value>339, 23</value>
   </data>
   <data name="emailSMTPText.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -475,10 +475,10 @@
     <value>True</value>
   </data>
   <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 258</value>
+    <value>3, 298</value>
   </data>
   <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>75, 15</value>
   </data>
   <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -502,10 +502,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 220</value>
+    <value>117, 254</value>
   </data>
   <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 20</value>
+    <value>244, 23</value>
   </data>
   <data name="emailAttachmentText.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -529,10 +529,10 @@
     <value>True</value>
   </data>
   <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 223</value>
+    <value>3, 257</value>
   </data>
   <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
+    <value>73, 15</value>
   </data>
   <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -556,10 +556,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 247</value>
+    <value>7, 285</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 2</value>
+    <value>448, 2</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -580,13 +580,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="emailTextText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 81</value>
+    <value>76, 93</value>
   </data>
   <data name="emailTextText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 133</value>
+    <value>380, 153</value>
   </data>
   <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -607,10 +607,10 @@
     <value>True</value>
   </data>
   <data name="emailTextLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 84</value>
+    <value>3, 97</value>
   </data>
   <data name="emailTextLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+    <value>32, 15</value>
   </data>
   <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -634,10 +634,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="emailSubjectText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 55</value>
+    <value>76, 63</value>
   </data>
   <data name="emailSubjectText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 20</value>
+    <value>380, 23</value>
   </data>
   <data name="emailSubjectText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -658,10 +658,10 @@
     <value>True</value>
   </data>
   <data name="emailSubjectLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 58</value>
+    <value>3, 67</value>
   </data>
   <data name="emailSubjectLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>49, 15</value>
   </data>
   <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -685,10 +685,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="emailToText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 29</value>
+    <value>76, 33</value>
   </data>
   <data name="emailToText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 20</value>
+    <value>380, 23</value>
   </data>
   <data name="emailToText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -709,10 +709,10 @@
     <value>True</value>
   </data>
   <data name="emailToLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+    <value>3, 37</value>
   </data>
   <data name="emailToLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 13</value>
+    <value>24, 15</value>
   </data>
   <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -736,10 +736,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="emailFromText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 3</value>
+    <value>76, 3</value>
   </data>
   <data name="emailFromText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 20</value>
+    <value>380, 23</value>
   </data>
   <data name="emailFromText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -760,10 +760,10 @@
     <value>True</value>
   </data>
   <data name="emailFromLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
+    <value>3, 7</value>
   </data>
   <data name="emailFromLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 13</value>
+    <value>38, 15</value>
   </data>
   <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -787,7 +787,7 @@
     <value>4, 5</value>
   </data>
   <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 283</value>
+    <value>462, 328</value>
   </data>
   <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -808,13 +808,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="msgMsgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 51</value>
+    <value>76, 59</value>
   </data>
   <data name="msgMsgText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="msgMsgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 229</value>
+    <value>380, 264</value>
   </data>
   <data name="msgMsgText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -835,10 +835,10 @@
     <value>True</value>
   </data>
   <data name="msgMsgLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 54</value>
+    <value>3, 62</value>
   </data>
   <data name="msgMsgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>56, 15</value>
   </data>
   <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -862,10 +862,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="msgTitleText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 25</value>
+    <value>76, 29</value>
   </data>
   <data name="msgTitleText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 20</value>
+    <value>380, 23</value>
   </data>
   <data name="msgTitleText.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -886,10 +886,10 @@
     <value>True</value>
   </data>
   <data name="msgTitleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 32</value>
   </data>
   <data name="msgTitleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>33, 15</value>
   </data>
   <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -916,7 +916,7 @@
     <value>3, 0</value>
   </data>
   <data name="msgIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 13</value>
+    <value>275, 15</value>
   </data>
   <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -940,7 +940,7 @@
     <value>4, 5</value>
   </data>
   <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 283</value>
+    <value>462, 328</value>
   </data>
   <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -957,14 +957,38 @@
   <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="getCLSIDButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 29</value>
+  </data>
+  <data name="getCLSIDButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 24</value>
+  </data>
+  <data name="getCLSIDButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Name" xml:space="preserve">
+    <value>getCLSIDButton</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="comDataText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="comDataText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 51</value>
+    <value>118, 59</value>
   </data>
   <data name="comDataText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>339, 23</value>
   </data>
   <data name="comDataText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -979,16 +1003,16 @@
     <value>comTab</value>
   </data>
   <data name="&gt;&gt;comDataText.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="comDataLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="comDataLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 54</value>
+    <value>3, 62</value>
   </data>
   <data name="comDataLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 13</value>
+    <value>34, 15</value>
   </data>
   <data name="comDataLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1006,16 +1030,16 @@
     <value>comTab</value>
   </data>
   <data name="&gt;&gt;comDataLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="comCLSIDText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="comCLSIDText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 25</value>
+    <value>118, 29</value>
   </data>
   <data name="comCLSIDText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>312, 23</value>
   </data>
   <data name="comCLSIDText.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1030,22 +1054,22 @@
     <value>comTab</value>
   </data>
   <data name="&gt;&gt;comCLSIDText.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comCLSIDLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="comCLSIDLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 32</value>
   </data>
   <data name="comCLSIDLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+    <value>76, 15</value>
   </data>
   <data name="comCLSIDLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="comCLSIDLabel.Text" xml:space="preserve">
-    <value>COM Class ID:</value>
+    <value>COM Object:</value>
   </data>
   <data name="&gt;&gt;comCLSIDLabel.Name" xml:space="preserve">
     <value>comCLSIDLabel</value>
@@ -1057,7 +1081,7 @@
     <value>comTab</value>
   </data>
   <data name="&gt;&gt;comCLSIDLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="comIntroLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1066,7 +1090,7 @@
     <value>3, 0</value>
   </data>
   <data name="comIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 13</value>
+    <value>220, 15</value>
   </data>
   <data name="comIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1084,13 +1108,13 @@
     <value>comTab</value>
   </data>
   <data name="&gt;&gt;comIntroLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
   </data>
   <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 283</value>
+    <value>462, 328</value>
   </data>
   <data name="comTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1114,10 +1138,10 @@
     <value>0, 1</value>
   </data>
   <data name="settingsTabs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>3, 19</value>
   </data>
   <data name="settingsTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 292</value>
+    <value>470, 337</value>
   </data>
   <data name="settingsTabs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1135,10 +1159,10 @@
     <value>0</value>
   </data>
   <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 80</value>
+    <value>14, 92</value>
   </data>
   <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 311</value>
+    <value>476, 359</value>
   </data>
   <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1162,10 +1186,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 399</value>
+    <value>308, 460</value>
   </data>
   <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>87, 27</value>
   </data>
   <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1189,10 +1213,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 399</value>
+    <value>402, 460</value>
   </data>
   <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>87, 27</value>
   </data>
   <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1216,10 +1240,10 @@
     <value>True</value>
   </data>
   <data name="actionsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 56</value>
+    <value>14, 65</value>
   </data>
   <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+    <value>45, 15</value>
   </data>
   <data name="actionsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1242,14 +1266,20 @@
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>432, 434</value>
+    <value>504, 501</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>New Action</value>
@@ -1259,6 +1289,12 @@
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ActionEditDialog</value>

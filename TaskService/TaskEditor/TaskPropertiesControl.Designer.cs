@@ -53,9 +53,9 @@
 			this.triggerEditButton = new System.Windows.Forms.Button();
 			this.triggerNewButton = new System.Windows.Forms.Button();
 			this.triggerListView = new System.Windows.Forms.ListView();
-			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.taskTriggerIntroLabel = new System.Windows.Forms.Label();
 			this.actionsTab = new System.Windows.Forms.TabPage();
 			this.actionDownButton = new System.Windows.Forms.Button();
@@ -64,8 +64,8 @@
 			this.actionEditButton = new System.Windows.Forms.Button();
 			this.actionNewButton = new System.Windows.Forms.Button();
 			this.actionListView = new System.Windows.Forms.ListView();
-			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.actionIntroLabel = new System.Windows.Forms.Label();
 			this.conditionsTab = new System.Windows.Forms.TabPage();
 			this.networkConditionGroupBox = new System.Windows.Forms.GroupBox();
@@ -101,12 +101,12 @@
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.historyTab = new System.Windows.Forms.TabPage();
 			this.historyListView = new System.Windows.Forms.ListView();
-			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.tabControl1.SuspendLayout();
 			this.generalTab.SuspendLayout();
@@ -502,6 +502,8 @@
 			// taskStopOnIdleEndCheck
 			// 
 			resources.ApplyResources(this.taskStopOnIdleEndCheck, "taskStopOnIdleEndCheck");
+			this.taskStopOnIdleEndCheck.Checked = true;
+			this.taskStopOnIdleEndCheck.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.taskStopOnIdleEndCheck.Name = "taskStopOnIdleEndCheck";
 			this.taskStopOnIdleEndCheck.UseVisualStyleBackColor = true;
 			this.taskStopOnIdleEndCheck.CheckedChanged += new System.EventHandler(this.taskStopOnIdleEndCheck_CheckedChanged);
