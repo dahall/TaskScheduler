@@ -117,142 +117,154 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnyConnection" xml:space="preserve">
-    <value>Any connection</value>
-    <comment>Default item for displaying status of Networking setting</comment>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>Disabled</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 265</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>Enabled</value>
+  <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
   </data>
-  <data name="TimeSpanDay" xml:space="preserve">
-    <value>day</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="okButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="TimeSpanDays" xml:space="preserve">
-    <value>days</value>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="TimeSpanDayStrings" xml:space="preserve">
-    <value>days,day,d</value>
+  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
+    <value>okButton</value>
   </data>
-  <data name="TimeSpanHour" xml:space="preserve">
-    <value>hour</value>
+  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TimeSpanHours" xml:space="preserve">
-    <value>hours</value>
+  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="TimeSpanHourStrings" xml:space="preserve">
-    <value>hours,hour,hrs,hr,h</value>
+  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="TimeSpanMinute" xml:space="preserve">
-    <value>minute</value>
+  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
-  <data name="TimeSpanMinutes" xml:space="preserve">
-    <value>minutes</value>
+  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 265</value>
   </data>
-  <data name="TimeSpanMinuteStrings" xml:space="preserve">
-    <value>minutes,minute,mins,min,m</value>
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
   </data>
-  <data name="TimeSpanMonth" xml:space="preserve">
-    <value>month</value>
+  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="TimeSpanMonths" xml:space="preserve">
-    <value>months</value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="TimeSpanMonthStrings" xml:space="preserve">
-    <value>months,month,mos,mo,m</value>
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+    <value>cancelButton</value>
   </data>
-  <data name="TimeSpanSecond" xml:space="preserve">
-    <value>second</value>
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TimeSpanSeconds" xml:space="preserve">
-    <value>seconds</value>
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="TimeSpanSecondStrings" xml:space="preserve">
-    <value>seconds,second,secs,sec,s</value>
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="TimeSpanYear" xml:space="preserve">
-    <value>year</value>
+  <data name="listView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="TimeSpanYears" xml:space="preserve">
-    <value>years</value>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>CLSID</value>
   </data>
-  <data name="TimeSpanYearStrings" xml:space="preserve">
-    <value>years,year,yrs,yr,y</value>
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>160</value>
   </data>
-  <data name="TimeSpanSeparator" xml:space="preserve">
-    <value>, </value>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>COM Object</value>
   </data>
-  <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Do not wait</value>
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>160</value>
   </data>
-  <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Immediately</value>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Path</value>
   </data>
-  <data name="Last" xml:space="preserve">
-    <value>Last</value>
-    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>140</value>
   </data>
-  <data name="TimeSpanIndefinitely" xml:space="preserve">
-    <value>Indefinitely</value>
+  <data name="listView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
-  <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>At startup</value>
+  <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>489, 247</value>
   </data>
-  <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>On an event</value>
+  <data name="listView1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>On idle</value>
+  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
+    <value>listView1</value>
   </data>
-  <data name="TriggerTypeLogon" xml:space="preserve">
-    <value>At log on</value>
+  <data name="&gt;&gt;listView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>At task creation/modification</value>
+  <data name="&gt;&gt;listView1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="TriggerTypeSchedule" xml:space="preserve">
-    <value>On schedule</value>
+  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>On connection to a user session</value>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
   </data>
-  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
-    <value>On disconnect from a user session</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>513, 304</value>
   </data>
-  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
-    <value>On workstation lock</value>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
-    <value>On workstation unlock</value>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
   </data>
-  <data name="DateTimeSyncText" xml:space="preserve">
-    <value>Synchronize across time zones</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Select COM Object</value>
   </data>
-  <data name="LocalMachine" xml:space="preserve">
-    <value>Local Machine</value>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
   </data>
-  <data name="TaskEditDlgTitle" xml:space="preserve">
-    <value>{0} Properties ({1})</value>
-    <comment>0=Task name; 1=Machine</comment>
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value>Invalid Event Trigger</value>
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
+    <value>columnHeader2</value>
   </data>
-  <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value>At a minimum, a log must be selected.</value>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value>There must be at least one month, one week, and one weekday selected.</value>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
   </data>
-  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value>Invalid Monthly Trigger</value>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value>There must be at least one month and one day selected.</value>
+  <data name="&gt;&gt;backgroundWorker1.Name" xml:space="preserve">
+    <value>backgroundWorker1</value>
   </data>
-  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
-    <value>This COM Class does not support the required interface.</value>
+  <data name="&gt;&gt;backgroundWorker1.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ComObjectSelectionDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

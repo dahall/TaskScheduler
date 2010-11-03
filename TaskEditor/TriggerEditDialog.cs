@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// An editor that handles all Task triggers.
-	/// </summary>
-	public partial class TriggerEditDialog : Form
+    /// <summary>
+    /// An editor that handles all Task triggers.
+    /// </summary>
+    public partial class TriggerEditDialog : Form
     {
-		private bool isV2;
+        private bool isV2;
         private bool onAssignment = false;
         private Trigger trigger;
         private List<DropDownCheckListItem> triggerComboItems = new List<DropDownCheckListItem>(12);
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
-		/// </summary>
-		public TriggerEditDialog() : this(null, false)
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
+        /// </summary>
+        public TriggerEditDialog() : this(null, false)
+        {
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
-		/// </summary>
-		/// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
-		/// <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
-		public TriggerEditDialog(Trigger trigger, bool supportV1Only)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
+        /// </summary>
+        /// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
+        /// <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
+        public TriggerEditDialog(Trigger trigger, bool supportV1Only)
         {
             InitializeComponent();
 
-			this.SupportV1Only = supportV1Only;
+            this.SupportV1Only = supportV1Only;
 
             // Populate combo boxes
             monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
@@ -81,10 +81,60 @@ namespace Microsoft.Win32.TaskScheduler
             WorkstationUnlock = 118,
         }
 
-		/// <summary>
-		/// Gets or sets the trigger that is being edited.
-		/// </summary>
-		/// <value>The trigger.</value>
+        /// <summary>
+        /// Gets or sets a value indicating whether this editor only supports V1 triggers.
+        /// </summary>
+        /// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
+        [DefaultValue(false), Category("Behavior")]
+        public bool SupportV1Only
+        {
+            get { return !isV2; }
+            set
+            {
+                isV2 = !value;
+
+                // Setup list of triggers available
+                long allVal;
+                triggerComboItems.Clear();
+                ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
+                if (!isV2)
+                    triggerComboItems.RemoveRange(4, 6);
+                triggerTypeCombo.DataSource = null;
+                triggerTypeCombo.DisplayMember = "Text";
+                triggerTypeCombo.ValueMember = "Value";
+                triggerTypeCombo.DataSource = triggerComboItems;
+
+                // Enable/disable version specific features
+                stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
+                delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+                monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
+
+                // Set date/time controls
+                schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
+                schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+                activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+                expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
+
+                // Disable logon trigger options
+                foreach (Control c in logonTab.Controls)
+                    c.Enabled = isV2;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the target server.
+        /// </summary>
+        /// <value>The target server.</value>
+        [DefaultValue((string)null)]
+        public string TargetServer
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets the trigger that is being edited.
+        /// </summary>
+        /// <value>The trigger.</value>
         public Trigger Trigger
         {
             get
@@ -150,14 +200,14 @@ namespace Microsoft.Win32.TaskScheduler
                         TriggerView = TaskTriggerDisplayType.Event;
                         string log, source; int? id;
                         bool basic = ((EventTrigger)trigger).GetBasic(out log, out source, out id);
-						if (!basic)
-						{
-							string sub = ((EventTrigger)trigger).Subscription;
-							if (!string.IsNullOrEmpty(sub))
-								onEventCustomText.Text = sub;
-							else
-								basic = true;
-						}
+                        if (!basic)
+                        {
+                            string sub = ((EventTrigger)trigger).Subscription;
+                            if (!string.IsNullOrEmpty(sub))
+                                onEventCustomText.Text = sub;
+                            else
+                                basic = true;
+                        }
                         if (basic)
                         {
                             onEventLogCombo.Text = log;
@@ -201,12 +251,12 @@ namespace Microsoft.Win32.TaskScheduler
                 if (!hasRep)
                 {
                     stopAfterDurationCheckBox.Checked = false;
-					durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
+                    durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
                 }
                 else
                 {
-					durationSpan.Value = trigger.Repetition.Duration;
-					repeatSpan.Value = trigger.Repetition.Interval;
+                    durationSpan.Value = trigger.Repetition.Duration;
+                    repeatSpan.Value = trigger.Repetition.Interval;
                     stopAfterDurationCheckBox.Checked = trigger.Repetition.StopAtDurationEnd;
                 }
                 if (isV2)
@@ -214,66 +264,19 @@ namespace Microsoft.Win32.TaskScheduler
                     stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
                     stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
                 }
-				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
-				if (activateCheckBox.Visible)
+                activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
+                if (activateCheckBox.Visible)
                 {
                     activateCheckBox.Checked = activateDatePicker.Enabled = trigger.StartBoundary != DateTime.MinValue;
                     if (activateCheckBox.Checked)
                         activateDatePicker.Value = trigger.StartBoundary;
                 }
                 expireCheckBox.Checked = expireDatePicker.Enabled = trigger.EndBoundary != DateTime.MaxValue;
-				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : trigger.StartBoundary;
+                expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : trigger.StartBoundary;
                 enabledCheckBox.Checked = trigger.Enabled;
                 onAssignment = false;
             }
         }
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this editor only supports V1 triggers.
-		/// </summary>
-		/// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior")]
-		public bool SupportV1Only
-		{
-			get { return !isV2; }
-			set
-			{
-				isV2 = !value;
-
-				// Setup list of triggers available
-				long allVal;
-				triggerComboItems.Clear();
-				ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
-				if (!isV2)
-					triggerComboItems.RemoveRange(4, 6);
-				triggerTypeCombo.DataSource = null;
-				triggerTypeCombo.DisplayMember = "Text";
-				triggerTypeCombo.ValueMember = "Value";
-				triggerTypeCombo.DataSource = triggerComboItems;
-
-				// Enable/disable version specific features
-				stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
-				delayCheckBox.Enabled = delaySpan.Enabled = isV2;
-				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
-
-				// Set date/time controls
-				schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
-				schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-				activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-				expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
-
-				// Disable logon trigger options
-				foreach (Control c in logonTab.Controls)
-					c.Enabled = isV2;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the target server.
-		/// </summary>
-		/// <value>The target server.</value>
-		[DefaultValue((string)null)]
-		public string TargetServer { get; set; }
 
         private TaskTriggerDisplayType TriggerView
         {
@@ -293,19 +296,31 @@ namespace Microsoft.Win32.TaskScheduler
         private void activateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             activateDatePicker.Enabled = activateCheckBox.Checked;
-			if (!onAssignment)
-			{
-				if (expireCheckBox.Checked)
-					trigger.StartBoundary = activateDatePicker.Value;
-				else
-					trigger.StartBoundary = DateTime.MaxValue;
-			}
-		}
+            if (!onAssignment)
+            {
+                if (expireCheckBox.Checked)
+                    trigger.StartBoundary = activateDatePicker.Value;
+                else
+                    trigger.StartBoundary = DateTime.MaxValue;
+            }
+        }
+
+        private void activateDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                trigger.StartBoundary = activateDatePicker.Value;
+        }
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void dailyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                ((DailyTrigger)trigger).DaysInterval = Convert.ToInt16(dailyRecurNumUpDn.Value);
         }
 
         private void delayCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -322,17 +337,17 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void durationSpan_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-			{
-				trigger.Repetition.Duration = durationSpan.Value;
-				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
-				{
-					onAssignment = true;
-					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
-					trigger.Repetition.Interval = repeatSpan.Value;
-					onAssignment = false;
-				}
-			}
+            if (!onAssignment)
+            {
+                trigger.Repetition.Duration = durationSpan.Value;
+                if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+                {
+                    onAssignment = true;
+                    repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
+                    trigger.Repetition.Interval = repeatSpan.Value;
+                    onAssignment = false;
+                }
+            }
         }
 
         private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -345,19 +360,33 @@ namespace Microsoft.Win32.TaskScheduler
             bool basic = eventBasicRadio.Checked || !eventCustomRadio.Checked;
             onEventBasicPanel.Visible = basic;
             onEventCustomText.Visible = !basic;
-			InitializeEventLogList();
+            InitializeEventLogList();
         }
 
         private void expireCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             expireDatePicker.Enabled = expireCheckBox.Checked;
-			if (!onAssignment)
-			{
-				if (expireCheckBox.Checked)
-					trigger.EndBoundary = expireDatePicker.Value;
-				else
-					trigger.EndBoundary = DateTime.MaxValue;
-			}
+            if (!onAssignment)
+            {
+                if (expireCheckBox.Checked)
+                    trigger.EndBoundary = expireDatePicker.Value;
+                else
+                    trigger.EndBoundary = DateTime.MaxValue;
+            }
+        }
+
+        private void expireDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment && expireCheckBox.Checked)
+                trigger.EndBoundary = expireDatePicker.Value;
+        }
+
+        private void InitializeEventLogList()
+        {
+            if (eventBasicRadio.Checked && onEventLogCombo.Items.Count == 0)
+            {
+                onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(TargetServer));
+            }
         }
 
         private void logonAnyUserRadio_CheckedChanged(object sender, EventArgs e)
@@ -374,6 +403,17 @@ namespace Microsoft.Win32.TaskScheduler
             if (!NativeMethods.AccountUtils.SelectAccount(this, null, ref acct, ref isGroup, ref isService))
                 return;
             ((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
+        }
+
+        private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+            {
+                int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
+                for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
+                    days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
+                ((MonthlyTrigger)trigger).DaysOfMonth = days;
+            }
         }
 
         private void monthlyDaysRadio_CheckedChanged(object sender, EventArgs e)
@@ -396,39 +436,84 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
+        private void monthlyMonthsDropDown_SelectedItemsChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+            {
+                if (monthlyDaysRadio.Checked)
+                    ((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+                else
+                    ((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+            }
+        }
+
+        private void monthlyOnDOWDropDown_SelectedItemsChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                ((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
+        }
+
+        private void monthlyOnWeekDropDown_SelectedItemsChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                ((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
+        }
+
         private void okBtn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
+        private void onEventCustomText_Leave(object sender, EventArgs e)
+        {
+            ((EventTrigger)trigger).Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
+        }
+
+        private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            onEventSourceCombo.Items.Clear();
+            onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
+        }
+
+        private void onEventTextBox_Leave(object sender, EventArgs e)
+        {
+            EventTrigger et = trigger as EventTrigger;
+            if (et != null && onEventLogCombo.Text.Length > 0)
+            {
+                int rid;
+                int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
+                et.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
+            }
+        }
+
         private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             repeatSpan.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = repeatCheckBox.Checked;
-			if (repeatCheckBox.Checked)
-			{
-				durationSpan.Value = durationSpan.Items[durationSpan.Items.Count - 1];
-				repeatSpan.Value = repeatSpan.Items[repeatSpan.Items.Count - 1];
-			}
-			else
-			{
-				trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
-			}
+            if (repeatCheckBox.Checked)
+            {
+                durationSpan.Value = durationSpan.Items[durationSpan.Items.Count - 1];
+                repeatSpan.Value = repeatSpan.Items[repeatSpan.Items.Count - 1];
+            }
+            else
+            {
+                trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
+            }
         }
 
         private void repeatSpan_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-			{
-				trigger.Repetition.Interval = repeatSpan.Value;
-				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
-				{
-					onAssignment = true;
-					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
-					trigger.Repetition.Duration = durationSpan.Value;
-					onAssignment = false;
-				}
-			}
+            if (!onAssignment)
+            {
+                trigger.Repetition.Interval = repeatSpan.Value;
+                if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+                {
+                    onAssignment = true;
+                    durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
+                    trigger.Repetition.Duration = durationSpan.Value;
+                    onAssignment = false;
+                }
+            }
         }
 
         private void schedOneRadio_CheckedChanged(object sender, EventArgs e)
@@ -470,10 +555,35 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
+        private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                trigger.StartBoundary = schedStartDatePicker.Value;
+        }
+
         private void SetSchedTrigger()
         {
             TriggerView = TaskTriggerDisplayType.Schedule;
             schedStartDatePicker.Value = trigger.StartBoundary;
+        }
+
+        private void SetWeeklyDay(CheckBox cb, DaysOfTheWeek dow)
+        {
+            if (!onAssignment && cb != null )
+            {
+                var weeklyTrigger = (WeeklyTrigger)trigger;
+
+                if (cb.Checked)
+                    weeklyTrigger.DaysOfWeek |= dow;
+                else
+                {
+                    // Ensure that ONE day is always checked.
+                    if (weeklyTrigger.DaysOfWeek == dow)
+                        cb.Checked = true;
+                    else
+                        weeklyTrigger.DaysOfWeek &= ~dow;
+                }
+            }
         }
 
         private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -527,7 +637,7 @@ namespace Microsoft.Win32.TaskScheduler
                 case TaskTriggerDisplayType.Event:
                     settingsTabControl.SelectedTab = onEventTab;
                     if (!onAssignment) newTrigger = new EventTrigger();
-					InitializeEventLogList();
+                    InitializeEventLogList();
                     break;
                 case TaskTriggerDisplayType.Registration:
                     settingsTabControl.SelectedTab = startupTab;
@@ -552,152 +662,45 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
-		private void InitializeEventLogList()
-		{
-			if (eventBasicRadio.Checked && onEventLogCombo.Items.Count == 0)
-			{
-				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(TargetServer));
-			}
-		}
+        private void weeklyFriCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Friday);
+        }
 
-		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				trigger.StartBoundary = schedStartDatePicker.Value;
-		}
+        private void weeklyMonCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Monday);
+        }
 
-		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment && expireCheckBox.Checked)
-				trigger.EndBoundary = expireDatePicker.Value;
-		}
+        private void weeklyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
+        {
+            if (!onAssignment)
+                ((WeeklyTrigger)trigger).WeeksInterval = Convert.ToInt16(weeklyRecurNumUpDn.Value);
+        }
 
-		private void activateDatePicker_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				trigger.StartBoundary = activateDatePicker.Value;
-		}
+        private void weeklySatCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
+        }
 
-		private void monthlyMonthsDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				if (monthlyDaysRadio.Checked)
-					((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
-				else
-					((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
-			}
-		}
+        private void weeklySunCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Sunday);
+        }
 
-		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
-				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
-					days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
-				((MonthlyTrigger)trigger).DaysOfMonth = days;
-			}
-		}
+        private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Thursday);
+        }
 
-		private void monthlyOnWeekDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
-		}
+        private void weeklyTueCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Tuesday);
+        }
 
-		private void monthlyOnDOWDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
-		}
-
-		private void weeklyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((WeeklyTrigger)trigger).WeeksInterval = Convert.ToInt16(weeklyRecurNumUpDn.Value);
-		}
-
-		private void dailyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((DailyTrigger)trigger).DaysInterval = Convert.ToInt16(dailyRecurNumUpDn.Value);
-		}
-
-		private void SetWeeklyDay(CheckBox cb, DaysOfTheWeek dow)
-		{
-			if (!onAssignment && cb != null )
-			{
-				var weeklyTrigger = (WeeklyTrigger)trigger;
-
-				if (cb.Checked)
-					weeklyTrigger.DaysOfWeek |= dow;
-				else
-				{
-					// Ensure that ONE day is always checked.
-					if (weeklyTrigger.DaysOfWeek == dow)
-						cb.Checked = true;
-					else
-						weeklyTrigger.DaysOfWeek &= ~dow;
-				}
-			}
-		}
-
-		private void weeklySunCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Sunday);
-		}
-
-		private void weeklyMonCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Monday);
-		}
-
-		private void weeklyTueCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Tuesday);
-		}
-
-		private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
-		}
-
-		private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Thursday);
-		}
-
-		private void weeklyFriCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Friday);
-		}
-
-		private void weeklySatCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
-		}
-
-		private void onEventTextBox_Leave(object sender, EventArgs e)
-		{
-			EventTrigger et = trigger as EventTrigger;
-			if (et != null && onEventLogCombo.Text.Length > 0)
-			{
-				int rid;
-				int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
-				et.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
-			}
-		}
-
-		private void onEventCustomText_Leave(object sender, EventArgs e)
-		{
-			((EventTrigger)trigger).Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
-		}
-
-		private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
-		}
+        private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
+        }
     }
 }

@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionEditDialog));
 			this.promptLabel = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -64,6 +65,7 @@
 			this.msgTitleLabel = new System.Windows.Forms.Label();
 			this.msgIntroLabel = new System.Windows.Forms.Label();
 			this.comTab = new System.Windows.Forms.TabPage();
+			this.getCLSIDButton = new System.Windows.Forms.Button();
 			this.comDataText = new System.Windows.Forms.TextBox();
 			this.comDataLabel = new System.Windows.Forms.Label();
 			this.comCLSIDText = new System.Windows.Forms.TextBox();
@@ -73,6 +75,7 @@
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.actionsLabel = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.settingsGroup.SuspendLayout();
 			this.settingsTabs.SuspendLayout();
 			this.execTab.SuspendLayout();
@@ -167,6 +170,7 @@
 			this.execProgText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
 			this.execProgText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
 			this.execProgText.Name = "execProgText";
+			this.execProgText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// execDirLabel
 			// 
@@ -209,6 +213,7 @@
 			// 
 			resources.ApplyResources(this.emailSMTPText, "emailSMTPText");
 			this.emailSMTPText.Name = "emailSMTPText";
+			this.emailSMTPText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailSMTPLabel
 			// 
@@ -235,6 +240,7 @@
 			// 
 			resources.ApplyResources(this.emailTextText, "emailTextText");
 			this.emailTextText.Name = "emailTextText";
+			this.emailTextText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailTextLabel
 			// 
@@ -245,6 +251,7 @@
 			// 
 			resources.ApplyResources(this.emailSubjectText, "emailSubjectText");
 			this.emailSubjectText.Name = "emailSubjectText";
+			this.emailSubjectText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailSubjectLabel
 			// 
@@ -255,6 +262,7 @@
 			// 
 			resources.ApplyResources(this.emailToText, "emailToText");
 			this.emailToText.Name = "emailToText";
+			this.emailToText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailToLabel
 			// 
@@ -265,6 +273,7 @@
 			// 
 			resources.ApplyResources(this.emailFromText, "emailFromText");
 			this.emailFromText.Name = "emailFromText";
+			this.emailFromText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailFromLabel
 			// 
@@ -286,6 +295,7 @@
 			// 
 			resources.ApplyResources(this.msgMsgText, "msgMsgText");
 			this.msgMsgText.Name = "msgMsgText";
+			this.msgMsgText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// msgMsgLabel
 			// 
@@ -309,6 +319,7 @@
 			// 
 			// comTab
 			// 
+			this.comTab.Controls.Add(this.getCLSIDButton);
 			this.comTab.Controls.Add(this.comDataText);
 			this.comTab.Controls.Add(this.comDataLabel);
 			this.comTab.Controls.Add(this.comCLSIDText);
@@ -317,6 +328,13 @@
 			resources.ApplyResources(this.comTab, "comTab");
 			this.comTab.Name = "comTab";
 			this.comTab.UseVisualStyleBackColor = true;
+			// 
+			// getCLSIDButton
+			// 
+			resources.ApplyResources(this.getCLSIDButton, "getCLSIDButton");
+			this.getCLSIDButton.Name = "getCLSIDButton";
+			this.getCLSIDButton.UseVisualStyleBackColor = true;
+			this.getCLSIDButton.Click += new System.EventHandler(this.getCLSIDButton_Click);
 			// 
 			// comDataText
 			// 
@@ -332,7 +350,9 @@
 			// 
 			resources.ApplyResources(this.comCLSIDText, "comCLSIDText");
 			this.comCLSIDText.Name = "comCLSIDText";
-			this.comCLSIDText.Validating += new System.ComponentModel.CancelEventHandler(this.comCLSIDText_Validating);
+			this.comCLSIDText.ReadOnly = true;
+			this.comCLSIDText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
+			this.comCLSIDText.DoubleClick += new System.EventHandler(this.getCLSIDButton_Click);
 			// 
 			// comCLSIDLabel
 			// 
@@ -448,5 +468,7 @@
 		private System.Windows.Forms.TextBox comCLSIDText;
 		private System.Windows.Forms.Label comCLSIDLabel;
 		private System.Windows.Forms.Label comIntroLabel;
+		private System.Windows.Forms.Button getCLSIDButton;
+		private System.Windows.Forms.ToolTip toolTip;
 	}
 }

@@ -22,7 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
         private TaskService service = null;
         private Task task = null;
         private TaskDefinition td = null;
-		private bool v2 = true;
+        private bool v2 = true;
 
         static TaskPropertiesControl()
         {
@@ -62,9 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
         /// Gets or sets a value indicating whether this <see cref="TaskPropertiesControl"/> is editable.
         /// </summary>
         /// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
-        [DefaultValue(false),
-        Category("Behavior"),
-        Description("Determines whether the task can be edited.")]
+        [DefaultValue(false), Category("Behavior"), Description("Determines whether the task can be edited.")]
         public bool Editable
         {
             get { return editable; }
@@ -99,8 +97,8 @@ namespace Microsoft.Win32.TaskScheduler
                 if (td != null)
                     this.TaskDefinition = td;
 
-				// Setup specific controls
-				taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
+                // Setup specific controls
+                taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
             }
         }
 
@@ -125,24 +123,6 @@ namespace Microsoft.Win32.TaskScheduler
             }
         }
 
-		private bool IsV2
-		{
-			get { return v2; }
-			set
-			{
-				if (v2 != value || onAssignment)
-				{
-					v2 = value;
-					this.taskVersionCombo.Items.Clear();
-					System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
-					if (!v2)
-						this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items"));
-					this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1"));
-					taskVersionCombo.SelectedIndex = 0;
-				}
-			}
-		}
-
         /// <summary>
         /// Gets the <see cref="TaskDefinition"/> in its edited state.
         /// </summary>
@@ -155,13 +135,13 @@ namespace Microsoft.Win32.TaskScheduler
                 if (service == null)
                     throw new ArgumentNullException("TaskDefinition cannot be set until TaskService has been set with a valid object.");
 
-				if (value == null)
-					throw new ArgumentNullException("TaskDefinition cannot be set to null.");
+                if (value == null)
+                    throw new ArgumentNullException("TaskDefinition cannot be set to null.");
 
                 td = value;
                 onAssignment = true;
-				IsV2 = td.Settings.Compatibility == TaskCompatibility.V2;
-				tabControl1.SelectedIndex = 0;
+                IsV2 = td.Settings.Compatibility == TaskCompatibility.V2;
+                tabControl1.SelectedIndex = 0;
 
                 this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
                 //this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
@@ -171,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
                 // Set General tab
                 SetUserControls(td.Principal.LogonType);
                 if (task != null) taskNameText.Text = task.Name;
-                taskAuthorText.Text = td.RegistrationInfo.Author;
+                taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
                 taskDescText.Text = td.RegistrationInfo.Description;
                 taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
                 taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
@@ -180,14 +160,14 @@ namespace Microsoft.Win32.TaskScheduler
                 taskHiddenCheck.Checked = td.Settings.Hidden;
 
                 // Set Triggers tab
-				triggerListView.Items.Clear();
+                triggerListView.Items.Clear();
                 foreach (Trigger tr in td.Triggers)
                 {
                     AddTriggerToList(tr, -1);
                 }
 
                 // Set Actions tab
-				actionListView.Items.Clear();
+                actionListView.Items.Clear();
                 foreach (Action act in td.Actions)
                 {
                     AddActionToList(act, -1);
@@ -195,13 +175,13 @@ namespace Microsoft.Win32.TaskScheduler
                 SetActionUpDnState();
 
                 // Set Conditions tab
-				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
-				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-				taskIdleDurationCombo.Value = td.Settings.IdleSettings.IdleDuration;
+                taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
+                taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+                taskIdleDurationCombo.Value = td.Settings.IdleSettings.IdleDuration;
                 taskIdleWaitTimeoutCombo.Value = td.Settings.IdleSettings.WaitTimeout;
-				taskIdleDurationCheck.Checked = td.Settings.IdleSettings.IdleDuration != TimeSpan.FromMinutes(10) ||
-					td.Settings.IdleSettings.WaitTimeout != TimeSpan.FromHours(1);
-				UpdateIdleSettingsControls();
+                taskIdleDurationCheck.Checked = td.Settings.IdleSettings.IdleDuration != TimeSpan.FromMinutes(10) ||
+                    td.Settings.IdleSettings.WaitTimeout != TimeSpan.FromHours(1);
+                UpdateIdleSettingsControls();
                 taskDisallowStartIfOnBatteriesCheck.Checked = td.Settings.DisallowStartIfOnBatteries;
                 taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
                 taskStopIfGoingOnBatteriesCheck.Checked = td.Settings.StopIfGoingOnBatteries;
@@ -215,18 +195,18 @@ namespace Microsoft.Win32.TaskScheduler
                 taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
                 taskStartWhenAvailableCheck.Checked = td.Settings.StartWhenAvailable;
                 taskRestartIntervalCheck.Checked = td.Settings.RestartInterval != TimeSpan.Zero;
-				taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
-				if (taskRestartIntervalCheck.Checked)
+                taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
+                if (taskRestartIntervalCheck.Checked)
                 {
                     taskRestartIntervalCombo.Value = td.Settings.RestartInterval;
                     taskRestartCountText.Value = td.Settings.RestartCount;
                 }
                 taskExecutionTimeLimitCheck.Checked = td.Settings.ExecutionTimeLimit != TimeSpan.Zero;
-				taskExecutionTimeLimitCombo.Enabled = editable && taskExecutionTimeLimitCheck.Checked;
+                taskExecutionTimeLimitCombo.Enabled = editable && taskExecutionTimeLimitCheck.Checked;
                 taskExecutionTimeLimitCombo.Value = td.Settings.ExecutionTimeLimit;
                 taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
                 taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
-				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
+                taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
                 taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
                 taskMultInstCombo.SelectedIndex = (int)td.Settings.MultipleInstances;
 
@@ -242,6 +222,24 @@ namespace Microsoft.Win32.TaskScheduler
         {
             get { return service; }
             private set { service = value; }
+        }
+
+        private bool IsV2
+        {
+            get { return v2; }
+            set
+            {
+                if (v2 != value || onAssignment)
+                {
+                    v2 = value;
+                    this.taskVersionCombo.Items.Clear();
+                    System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
+                    if (!v2)
+                        this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items"));
+                    this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1"));
+                    taskVersionCombo.SelectedIndex = 0;
+                }
+            }
         }
 
         /// <summary>
@@ -283,13 +281,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionDeleteButton_Click(object sender, EventArgs e)
         {
-			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				td.Actions.RemoveAt(idx);
-				actionListView.Items.RemoveAt(idx);
-				SetActionUpDnState();
-			}
+            int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
+            if (idx >= 0)
+            {
+                td.Actions.RemoveAt(idx);
+                actionListView.Items.RemoveAt(idx);
+                SetActionUpDnState();
+            }
         }
 
         private void actionDownButton_Click(object sender, EventArgs e)
@@ -307,21 +305,21 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionEditButton_Click(object sender, EventArgs e)
         {
-			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
-				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					if (v2)
-						td.Actions.RemoveAt(idx);
-					actionListView.Items.RemoveAt(idx);
-					td.Actions.Add(dlg.Action);
-					AddActionToList(dlg.Action, idx);
-					actionListView.Items[idx].Selected = true;
-				}
-			}
+            int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
+            if (idx >= 0)
+            {
+                ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
+                if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (v2)
+                        td.Actions.RemoveAt(idx);
+                    actionListView.Items.RemoveAt(idx);
+                    td.Actions.Add(dlg.Action);
+                    AddActionToList(dlg.Action, idx);
+                    actionListView.Items[idx].Selected = true;
+                }
+            }
         }
 
         private void actionListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -331,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void actionNewButton_Click(object sender, EventArgs e)
         {
-			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
+            ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Actions.Add(dlg.Action);
@@ -371,22 +369,22 @@ namespace Microsoft.Win32.TaskScheduler
                     tr.ToString(),
                     tr.Enabled ? Properties.Resources.Enabled : Properties.Resources.Disabled
                 });
-			if (index < 0)
-				triggerListView.Items.Add(lvi);
-			else
-				triggerListView.Items.Insert(index, lvi);
+            if (index < 0)
+                triggerListView.Items.Add(lvi);
+            else
+                triggerListView.Items.Insert(index, lvi);
         }
 
         private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-			{
-				bool onNet = td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked && availableConnectionsCombo.SelectedIndex != -1;
-				if (onNet && availableConnectionsCombo.SelectedIndex > 0)
-					td.Settings.NetworkSettings.Name = availableConnectionsCombo.SelectedItem.ToString();
-				else
-					td.Settings.NetworkSettings.Name = null;
-			}
+            if (!onAssignment)
+            {
+                bool onNet = td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked && availableConnectionsCombo.SelectedIndex != -1;
+                if (onNet && availableConnectionsCombo.SelectedIndex > 0)
+                    td.Settings.NetworkSettings.Name = availableConnectionsCombo.SelectedItem.ToString();
+                else
+                    td.Settings.NetworkSettings.Name = null;
+            }
         }
 
         private void changePrincipalButton_Click(object sender, EventArgs e)
@@ -401,8 +399,8 @@ namespace Microsoft.Win32.TaskScheduler
             availableConnectionsCombo.Items.Add(Properties.Resources.AnyConnection);
             foreach (var n in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
                 availableConnectionsCombo.Items.Add(n.Name);
-            if (task == null)
-                availableConnectionsCombo.SelectedIndex = -1;
+            if (task == null || string.IsNullOrEmpty(td.Settings.NetworkSettings.Name))
+                availableConnectionsCombo.SelectedIndex = 0;
             else
                 availableConnectionsCombo.SelectedText = td.Settings.NetworkSettings.Name;
         }
@@ -532,13 +530,13 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && v2)
+            if (!onAssignment && v2)
                 td.Settings.AllowDemandStart = taskAllowDemandStartCheck.Checked;
         }
 
         private void taskAllowHardTerminateCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && v2)
+            if (!onAssignment && v2)
                 td.Settings.AllowHardTerminate = taskAllowHardTerminateCheck.Checked;
         }
 
@@ -556,21 +554,21 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskDeleteAfterCombo_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCombo.Value;
+            if (!onAssignment)
+                td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCombo.Value;
         }
 
         private void taskDescText_Leave(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.RegistrationInfo.Description = taskDescText.Text;
+            if (!onAssignment)
+                td.RegistrationInfo.Description = taskDescText.Text;
         }
 
         private void taskDisallowStartIfOnBatteriesCheck_CheckedChanged(object sender, EventArgs e)
         {
             taskStopIfGoingOnBatteriesCheck.Enabled = editable && taskDisallowStartIfOnBatteriesCheck.Checked;
-			if (!onAssignment)
-				td.Settings.DisallowStartIfOnBatteries = taskDisallowStartIfOnBatteriesCheck.Checked;
+            if (!onAssignment)
+                td.Settings.DisallowStartIfOnBatteries = taskDisallowStartIfOnBatteriesCheck.Checked;
         }
 
         private void taskExecutionTimeLimitCheck_CheckedChanged(object sender, EventArgs e)
@@ -587,39 +585,39 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskExecutionTimeLimitCombo_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.ExecutionTimeLimit = taskExecutionTimeLimitCombo.Value;
+            if (!onAssignment)
+                td.Settings.ExecutionTimeLimit = taskExecutionTimeLimitCombo.Value;
             taskExecutionTimeLimitCheck.Checked = taskExecutionTimeLimitCombo.Value != TimeSpan2.Zero;
         }
 
         private void taskHiddenCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.Hidden = taskHiddenCheck.Checked;
+            if (!onAssignment)
+                td.Settings.Hidden = taskHiddenCheck.Checked;
         }
 
         private void taskIdleDurationCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (!onAssignment)
             {
-				taskIdleDurationCombo.Value = TimeSpan.FromMinutes(10);
+                taskIdleDurationCombo.Value = TimeSpan.FromMinutes(10);
                 taskIdleWaitTimeoutCombo.Value = TimeSpan.FromHours(1);
-				if (taskIdleDurationCheck.Checked)
-					td.Settings.IdleSettings.StopOnIdleEnd = false;
+                if (taskIdleDurationCheck.Checked)
+                    td.Settings.IdleSettings.StopOnIdleEnd = false;
             }
-			UpdateIdleSettingsControls();
+            UpdateIdleSettingsControls();
         }
 
         private void taskIdleDurationCombo_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.IdleSettings.IdleDuration = taskIdleDurationCombo.Value;
+            if (!onAssignment)
+                td.Settings.IdleSettings.IdleDuration = taskIdleDurationCombo.Value;
         }
 
         private void taskIdleWaitTimeoutCombo_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.IdleSettings.WaitTimeout = taskIdleWaitTimeoutCombo.Value;
+            if (!onAssignment)
+                td.Settings.IdleSettings.WaitTimeout = taskIdleWaitTimeoutCombo.Value;
         }
 
         private void taskLocalOnlyCheck_CheckedChanged(object sender, EventArgs e)
@@ -640,14 +638,14 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (!onAssignment && v2)
+            if (!onAssignment && v2)
                 td.Settings.MultipleInstances = (TaskInstancesPolicy)taskMultInstCombo.SelectedIndex;
         }
 
         private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.RestartCount = Convert.ToInt32(taskRestartCountText.Value);
+            if (!onAssignment)
+                td.Settings.RestartCount = Convert.ToInt32(taskRestartCountText.Value);
         }
 
         private void taskRestartIntervalCheck_CheckedChanged(object sender, EventArgs e)
@@ -665,19 +663,19 @@ namespace Microsoft.Win32.TaskScheduler
                     taskRestartCountText.Value = 0;
                 }
             }
-			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = editable && taskRestartIntervalCheck.Checked;
-		}
+            taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = editable && taskRestartIntervalCheck.Checked;
+        }
 
         private void taskRestartIntervalCombo_ValueChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.RestartInterval = taskRestartIntervalCombo.Value;
+            if (!onAssignment)
+                td.Settings.RestartInterval = taskRestartIntervalCombo.Value;
         }
 
         private void taskRestartOnIdleCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.IdleSettings.RestartOnIdle = taskRestartOnIdleCheck.Checked;
+            if (!onAssignment)
+                td.Settings.IdleSettings.RestartOnIdle = taskRestartOnIdleCheck.Checked;
         }
 
         private void taskRunLevelCheck_CheckedChanged(object sender, EventArgs e)
@@ -693,23 +691,23 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskStartWhenAvailableCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.StartWhenAvailable = taskStartWhenAvailableCheck.Checked;
+            if (!onAssignment)
+                td.Settings.StartWhenAvailable = taskStartWhenAvailableCheck.Checked;
         }
 
         private void taskStopIfGoingOnBatteriesCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.StopIfGoingOnBatteries = taskStopIfGoingOnBatteriesCheck.Checked;
+            if (!onAssignment)
+                td.Settings.StopIfGoingOnBatteries = taskStopIfGoingOnBatteriesCheck.Checked;
         }
 
         private void taskStopOnIdleEndCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-			{
-				td.Settings.IdleSettings.StopOnIdleEnd = taskStopOnIdleEndCheck.Checked;
-				UpdateIdleSettingsControls();
-			}
+            if (!onAssignment)
+            {
+                td.Settings.IdleSettings.StopOnIdleEnd = taskStopOnIdleEndCheck.Checked;
+                UpdateIdleSettingsControls();
+            }
         }
 
         private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -719,46 +717,46 @@ namespace Microsoft.Win32.TaskScheduler
                 tabControl1.TabPages.Remove(historyTab);
             else if (!tabControl1.TabPages.Contains(historyTab) && isVistaPlus)
                 tabControl1.TabPages.Add(historyTab);
-            taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled = 
-            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled = 
-            taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled = 
-            taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled = 
-            taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = 
+            taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
+            taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
+            taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
+            taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
+            taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
             taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && v2;
         }
 
         private void taskWakeToRunCheck_CheckedChanged(object sender, EventArgs e)
         {
-			if (!onAssignment)
-				td.Settings.WakeToRun = taskWakeToRunCheck.Checked;
+            if (!onAssignment)
+                td.Settings.WakeToRun = taskWakeToRunCheck.Checked;
         }
 
         private void triggerDeleteButton_Click(object sender, EventArgs e)
         {
-			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				td.Triggers.RemoveAt(idx);
-				triggerListView.Items.RemoveAt(idx);
-			}
+            int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
+            if (idx >= 0)
+            {
+                td.Triggers.RemoveAt(idx);
+                triggerListView.Items.RemoveAt(idx);
+            }
         }
 
         private void triggerEditButton_Click(object sender, EventArgs e)
         {
             int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
-				dlg.TargetServer = TaskService.TargetServer;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					td.Triggers.RemoveAt(idx);
-					triggerListView.Items.RemoveAt(idx);
-					td.Triggers.Add(dlg.Trigger);
-					AddTriggerToList(dlg.Trigger, idx);
-					triggerListView.Items[idx].Selected = true;
-				}
-			}
+            if (idx >= 0)
+            {
+                TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
+                dlg.TargetServer = TaskService.TargetServer;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    td.Triggers.RemoveAt(idx);
+                    triggerListView.Items.RemoveAt(idx);
+                    td.Triggers.Add(dlg.Trigger);
+                    AddTriggerToList(dlg.Trigger, idx);
+                    triggerListView.Items[idx].Selected = true;
+                }
+            }
         }
 
         private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -768,44 +766,46 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void triggerNewButton_Click(object sender, EventArgs e)
         {
-			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
-			dlg.TargetServer = TaskService.TargetServer;
-			if (dlg.ShowDialog() == DialogResult.OK)
+            TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
+            dlg.TargetServer = TaskService.TargetServer;
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
                 td.Triggers.Add(dlg.Trigger);
                 AddTriggerToList(dlg.Trigger, -1);
             }
         }
 
-		private void UpdateIdleSettingsControls()
-		{
-			bool isSet = taskIdleDurationCheck.Checked;
-			bool alreadyOnAssigment = onAssignment;
-			if (isSet)
-			{
-				taskIdleDurationCombo.Enabled = editable;
-				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = editable;
-				taskStopOnIdleEndCheck.Enabled = editable;
-				onAssignment = true;
-				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-				taskRestartOnIdleCheck.Enabled = editable && td.Settings.IdleSettings.StopOnIdleEnd;
-				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
-				if (!alreadyOnAssigment)
-					onAssignment = false;
-			}
-			else
-			{
-				taskIdleDurationCombo.Enabled = false;
-				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = false;
-				onAssignment = true;
-				taskRestartOnIdleCheck.Enabled = taskRestartOnIdleCheck.Checked = false;
-				taskStopOnIdleEndCheck.Enabled = taskStopOnIdleEndCheck.Checked = false;
-				if (!alreadyOnAssigment)
-					onAssignment = false;
-			}
-		}
+        private void UpdateIdleSettingsControls()
+        {
+            bool isSet = taskIdleDurationCheck.Checked;
+            bool alreadyOnAssigment = onAssignment;
+            if (isSet)
+            {
+                taskIdleDurationCombo.Enabled = editable;
+                taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = editable;
+                taskStopOnIdleEndCheck.Enabled = editable;
+                onAssignment = true;
+                taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+                taskRestartOnIdleCheck.Enabled = editable && td.Settings.IdleSettings.StopOnIdleEnd;
+                taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
+                if (!alreadyOnAssigment)
+                    onAssignment = false;
+            }
+            else
+            {
+                taskIdleDurationCombo.Enabled = false;
+                taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = false;
+                onAssignment = true;
+                taskRestartOnIdleCheck.Enabled = false;
+                taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
+                taskStopOnIdleEndCheck.Enabled = false;
+                taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+                if (!alreadyOnAssigment)
+                    onAssignment = false;
+            }
+        }
 
-		private void UpdatePrincipal()
+        private void UpdatePrincipal()
         {
             if (!onAssignment)
                 throw new NotImplementedException();
