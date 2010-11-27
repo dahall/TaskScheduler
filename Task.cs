@@ -751,7 +751,7 @@ namespace Microsoft.Win32.TaskScheduler
             TaskScheduler.V1Interop.SystemTime stEnd = new TaskScheduler.V1Interop.SystemTime(end);
             IntPtr runTimes = IntPtr.Zero, st;
 			if (v2Task != null)
-				v2Task.GetRunTimes(stStart, stEnd, ref count, ref runTimes);
+				v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
 			else
 			{
 				ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
