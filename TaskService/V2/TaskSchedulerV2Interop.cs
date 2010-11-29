@@ -316,13 +316,13 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	internal interface IPrincipal2
 	{
 		[DispId(1)]
-        TaskProcessTokenSidType ProcessTokenSidType { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] set; }
+		TaskProcessTokenSidType ProcessTokenSidType { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] set; }
 		[DispId(2)]
 		long RequiredPrivilegeCount { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] get; }
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(3)]
 		string GetRequiredPrivilege(long index);
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(4)]
-        void AddRequiredPrivilege([In, MarshalAs(UnmanagedType.BStr)] string privilege);
+		void AddRequiredPrivilege([In, MarshalAs(UnmanagedType.BStr)] string privilege);
 	}
 
 	[ComImport, TypeLibType((short)0x10c0), Guid("9C86F320-DEE3-4DD1-B972-A303F26B061E"), ComConversionLoss, DefaultMember("Path"), System.Security.SuppressUnmanagedCodeSecurity]
