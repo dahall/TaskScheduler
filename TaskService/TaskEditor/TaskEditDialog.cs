@@ -18,11 +18,31 @@ namespace Microsoft.Win32.TaskScheduler
 			RegisterTaskOnAccept = false;
 		}
 
+		private string InvokeCredentialDialog(string userName)
+		{
+			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
+				Properties.Resources.CredentialPromptMessage, userName);
+			dlg.Options |= CredentialsDialogOptions.Persist;
+			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
+				return dlg.Password;
+			return null;
+		}
+
 		private void okBtn_Click(object sender, System.EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
 			if (RegisterTaskOnAccept)
-				this.TaskService.RootFolder.RegisterTaskDefinition(this.Task.Name, this.TaskDefinition);
+			{
+				string pwd = null;
+				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+				{
+					pwd = InvokeCredentialDialog(this.TaskDefinition.Principal.UserId);
+					if (pwd == null)
+						throw new System.Security.Authentication.AuthenticationException(Properties.Resources.UserAuthenticationError);
+				}
+				this.TaskService.RootFolder.RegisterTaskDefinition(this.Task.Name, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+					this.TaskDefinition.Principal.UserId, pwd, this.TaskDefinition.Principal.LogonType);
+			}
+			this.DialogResult = DialogResult.OK;
 			Close();
 		}
 

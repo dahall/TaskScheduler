@@ -84,6 +84,9 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlProcessing.cs" />
+    <Compile Include="CredentialsDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
