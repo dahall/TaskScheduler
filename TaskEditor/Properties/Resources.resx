@@ -255,4 +255,19 @@
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
     <value>This COM Class does not support the required interface.</value>
   </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Call to CredUIConfirmCredentials failed with error code: {0}</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Call to CredUIPromptForCredentials failed with error code: {0}</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>Task Scheduler</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>Enter user account information for running this task.</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>A valid password for the specified account was not provided.</value>
+  </data>
 </root>

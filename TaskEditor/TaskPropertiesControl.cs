@@ -622,18 +622,20 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void taskLocalOnlyCheck_CheckedChanged(object sender, EventArgs e)
         {
-            UpdatePrincipal();
-        }
+			if (!onAssignment)
+				td.Principal.LogonType = (taskLocalOnlyCheck.Checked && v2) ? TaskLogonType.S4U : TaskLogonType.Password;
+		}
 
         private void taskLoggedOnRadio_CheckedChanged(object sender, EventArgs e)
         {
-            UpdatePrincipal();
-        }
+			if (!onAssignment)
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+		}
 
         private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
         {
-            taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked;
-            UpdatePrincipal();
+			taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked;
+			taskLocalOnlyCheck_CheckedChanged(sender, e);
         }
 
         private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -807,8 +809,6 @@ namespace Microsoft.Win32.TaskScheduler
 
         private void UpdatePrincipal()
         {
-            if (!onAssignment)
-                throw new NotImplementedException();
         }
     }
 }

@@ -79,6 +79,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter user account information for running this task..
+        /// </summary>
+        internal static string CredentialPromptMessage {
+            get {
+                return ResourceManager.GetString("CredentialPromptMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Synchronize across time zones.
         /// </summary>
         internal static string DateTimeSyncText {
@@ -106,6 +115,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Call to CredUIConfirmCredentials failed with error code: {0}.
+        /// </summary>
+        internal static string Error_CredUIConfirmFailed {
+            get {
+                return ResourceManager.GetString("Error_CredUIConfirmFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Call to CredUIPromptForCredentials failed with error code: {0}.
+        /// </summary>
+        internal static string Error_CredUIPromptFailed {
+            get {
+                return ResourceManager.GetString("Error_CredUIPromptFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last.
         /// </summary>
         internal static string Last {
@@ -129,6 +156,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TaskEditDlgTitle {
             get {
                 return ResourceManager.GetString("TaskEditDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Scheduler.
+        /// </summary>
+        internal static string TaskSchedulerName {
+            get {
+                return ResourceManager.GetString("TaskSchedulerName", resourceCulture);
             }
         }
         
@@ -417,6 +453,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TriggerTypeWorkstationUnlock {
             get {
                 return ResourceManager.GetString("TriggerTypeWorkstationUnlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A valid password for the specified account was not provided..
+        /// </summary>
+        internal static string UserAuthenticationError {
+            get {
+                return ResourceManager.GetString("UserAuthenticationError", resourceCulture);
             }
         }
         
