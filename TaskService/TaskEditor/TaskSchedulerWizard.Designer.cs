@@ -233,6 +233,8 @@
 			this.triggerSelectionList.Items.Add(radioButtonListItem6);
 			this.triggerSelectionList.Items.Add(radioButtonListItem7);
 			this.triggerSelectionList.Name = "triggerSelectionList";
+			this.triggerSelectionList.RepeatColumns = 1;
+			this.triggerSelectionList.RepeatDirection = GroupControls.RepeatDirection.Vertical;
 			this.triggerSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.triggerSelectionList.SelectedIndexChanged += new System.EventHandler(this.triggerSelectionList_SelectedIndexChanged);
 			// 
@@ -312,6 +314,8 @@
 			this.actionSelectionList.Items.Add(radioButtonListItem9);
 			this.actionSelectionList.Items.Add(radioButtonListItem10);
 			this.actionSelectionList.Name = "actionSelectionList";
+			this.actionSelectionList.RepeatColumns = 1;
+			this.actionSelectionList.RepeatDirection = GroupControls.RepeatDirection.Vertical;
 			this.actionSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.actionSelectionList.SelectedIndexChanged += new System.EventHandler(this.actionSelectionList_SelectedIndexChanged);
 			// 
@@ -348,8 +352,8 @@
 			this.weeklyTriggerPage.Name = "weeklyTriggerPage";
 			this.weeklyTriggerPage.NextPage = this.actionSelectPage;
 			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
-			this.weeklyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.weeklyTriggerPage_Initialize);
 			this.weeklyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.weeklyTriggerPage_Commit);
+			this.weeklyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.weeklyTriggerPage_Initialize);
 			// 
 			// weeklyStartTimePicker
 			// 
@@ -473,8 +477,8 @@
 			this.monthlyTriggerPage.Name = "monthlyTriggerPage";
 			this.monthlyTriggerPage.NextPage = this.actionSelectPage;
 			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
-			this.monthlyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.monthlyTriggerPage_Initialize);
 			this.monthlyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.monthlyTriggerPage_Commit);
+			this.monthlyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.monthlyTriggerPage_Initialize);
 			// 
 			// monthlyDaysDropDown
 			// 
@@ -557,8 +561,8 @@
 			this.onEventTriggerPage.Name = "onEventTriggerPage";
 			this.onEventTriggerPage.NextPage = this.actionSelectPage;
 			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
-			this.onEventTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
 			this.onEventTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
+			this.onEventTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
 			// 
 			// onEventLogLabel
 			// 

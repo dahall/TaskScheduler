@@ -129,11 +129,11 @@
     <value>79, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 23</value>
+    <value>257, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;nameText.Name" xml:space="preserve">
     <value>nameText</value>
@@ -157,10 +157,10 @@
     <value>True</value>
   </data>
   <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 129</value>
+    <value>257, 129</value>
   </data>
   <data name="descText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;descText.Name" xml:space="preserve">
     <value>descText</value>
@@ -187,7 +187,7 @@
     <value>70, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Description:</value>
@@ -235,7 +235,7 @@
     <value>3</value>
   </data>
   <data name="introPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 241</value>
+    <value>490, 239</value>
   </data>
   <data name="introPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -247,13 +247,13 @@
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="triggerSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>397, 341</value>
+    <value>473, 326</value>
   </data>
   <data name="triggerSelectionList.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -268,7 +268,7 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="triggerSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="triggerSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -277,7 +277,7 @@
     <value>triggerSelectionList</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.1.3690.2723, Culture=neutral, PublicKeyToken=null</value>
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.1.4028.21111, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Parent" xml:space="preserve">
     <value>triggerSelectPage</value>
@@ -286,7 +286,7 @@
     <value>0</value>
   </data>
   <data name="triggerSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="triggerSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -298,7 +298,7 @@
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -313,13 +313,13 @@
     <value>238, 23</value>
   </data>
   <data name="dailyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Name" xml:space="preserve">
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -340,7 +340,7 @@
     <value>34, 15</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Start:</value>
@@ -364,7 +364,7 @@
     <value>46, 23</value>
   </data>
   <data name="dailyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;dailyRecurNumUpDn.Name" xml:space="preserve">
     <value>dailyRecurNumUpDn</value>
@@ -391,7 +391,7 @@
     <value>31, 15</value>
   </data>
   <data name="dailyDaysLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="dailyDaysLabel.Text" xml:space="preserve">
     <value>days</value>
@@ -421,7 +421,7 @@
     <value>71, 15</value>
   </data>
   <data name="dailyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
     <value>Recur every:</value>
@@ -442,7 +442,7 @@
     <value>True</value>
   </data>
   <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>414, 117</value>
+    <value>490, 117</value>
   </data>
   <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -454,7 +454,7 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 117</value>
+    <value>490, 117</value>
   </data>
   <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -463,7 +463,7 @@
     <value>actionSelectionList</value>
   </data>
   <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.1.3690.2723, Culture=neutral, PublicKeyToken=null</value>
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.1.4028.21111, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
     <value>actionSelectPage</value>
@@ -472,7 +472,7 @@
     <value>0</value>
   </data>
   <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -484,10 +484,10 @@
     <value>actionSelectPage</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="dailyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -499,7 +499,7 @@
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="oneTimeStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -514,13 +514,13 @@
     <value>238, 23</value>
   </data>
   <data name="oneTimeStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Name" xml:space="preserve">
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -559,7 +559,7 @@
     <value>1</value>
   </data>
   <data name="oneTimeTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="oneTimeTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -571,7 +571,7 @@
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="weeklyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -586,13 +586,13 @@
     <value>238, 23</value>
   </data>
   <data name="weeklyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Name" xml:space="preserve">
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -613,7 +613,7 @@
     <value>34, 15</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>0</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Start:</value>
@@ -676,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyMonCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 3</value>
+    <value>108, 3</value>
   </data>
   <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 19</value>
@@ -706,7 +706,7 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyTueCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 3</value>
+    <value>213, 3</value>
   </data>
   <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 19</value>
@@ -736,7 +736,7 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyWedCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 3</value>
+    <value>318, 3</value>
   </data>
   <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 19</value>
@@ -796,7 +796,7 @@
     <value>NoControl</value>
   </data>
   <data name="weeklyFriCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 28</value>
+    <value>108, 28</value>
   </data>
   <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 19</value>
@@ -826,7 +826,7 @@
     <value>NoControl</value>
   </data>
   <data name="weeklySatCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="weeklySatCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 19</value>
@@ -856,7 +856,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 50</value>
+    <value>420, 50</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -883,7 +883,7 @@
     <value>46, 23</value>
   </data>
   <data name="weeklyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;weeklyRecurNumUpDn.Name" xml:space="preserve">
     <value>weeklyRecurNumUpDn</value>
@@ -910,7 +910,7 @@
     <value>59, 15</value>
   </data>
   <data name="weeklyOnWeeksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
     <value>weeks on:</value>
@@ -940,7 +940,7 @@
     <value>71, 15</value>
   </data>
   <data name="weeklyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
     <value>Recur every:</value>
@@ -958,7 +958,7 @@
     <value>5</value>
   </data>
   <data name="weeklyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="weeklyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -970,7 +970,7 @@
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 58</value>
@@ -979,13 +979,13 @@
     <value>296, 23</value>
   </data>
   <data name="monthlyDaysDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Name" xml:space="preserve">
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1000,13 +1000,13 @@
     <value>159, 23</value>
   </data>
   <data name="monthlyOnDOWDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Name" xml:space="preserve">
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1021,13 +1021,13 @@
     <value>131, 23</value>
   </data>
   <data name="monthlyOnWeekDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Name" xml:space="preserve">
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1042,13 +1042,13 @@
     <value>296, 23</value>
   </data>
   <data name="monthlyMonthsDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Name" xml:space="preserve">
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1159,13 +1159,13 @@
     <value>238, 23</value>
   </data>
   <data name="monthlyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Name" xml:space="preserve">
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.3691.20884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.5.4028.20871, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1204,7 +1204,7 @@
     <value>8</value>
   </data>
   <data name="monthlyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="monthlyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1216,7 +1216,7 @@
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,10 +1255,10 @@
     <value>91, 57</value>
   </data>
   <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>320, 23</value>
   </data>
   <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;onEventIdText.Name" xml:space="preserve">
     <value>onEventIdText</value>
@@ -1309,10 +1309,10 @@
     <value>91, 28</value>
   </data>
   <data name="onEventSourceCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>320, 23</value>
   </data>
   <data name="onEventSourceCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;onEventSourceCombo.Name" xml:space="preserve">
     <value>onEventSourceCombo</value>
@@ -1333,10 +1333,10 @@
     <value>91, 0</value>
   </data>
   <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>320, 23</value>
   </data>
   <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;onEventLogCombo.Name" xml:space="preserve">
     <value>onEventLogCombo</value>
@@ -1381,7 +1381,7 @@
     <value>5</value>
   </data>
   <data name="onEventTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="onEventTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1393,7 +1393,7 @@
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1402,13 +1402,13 @@
     <value>NoControl</value>
   </data>
   <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 16</value>
+    <value>367, 16</value>
   </data>
   <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 23</value>
   </data>
   <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>1</value>
   </data>
   <data name="execProgBrowseBtn.Text" xml:space="preserve">
     <value>Browse...</value>
@@ -1432,10 +1432,10 @@
     <value>176, 74</value>
   </data>
   <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 23</value>
+    <value>275, 23</value>
   </data>
   <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;execDirText.Name" xml:space="preserve">
     <value>execDirText</value>
@@ -1456,10 +1456,10 @@
     <value>176, 45</value>
   </data>
   <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 23</value>
+    <value>275, 23</value>
   </data>
   <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;execArgText.Name" xml:space="preserve">
     <value>execArgText</value>
@@ -1480,10 +1480,10 @@
     <value>6, 17</value>
   </data>
   <data name="execProgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 23</value>
+    <value>355, 23</value>
   </data>
   <data name="execProgText.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;execProgText.Name" xml:space="preserve">
     <value>execProgText</value>
@@ -1597,10 +1597,10 @@
     <value>True</value>
   </data>
   <data name="sumDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 23</value>
+    <value>401, 74</value>
   </data>
   <data name="sumDescText.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;sumDescText.Name" xml:space="preserve">
     <value>sumDescText</value>
@@ -1618,13 +1618,13 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="sumActionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 87</value>
+    <value>82, 138</value>
   </data>
   <data name="sumActionText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 23</value>
+    <value>401, 23</value>
   </data>
   <data name="sumActionText.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;sumActionText.Name" xml:space="preserve">
     <value>sumActionText</value>
@@ -1642,13 +1642,13 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="sumTriggerText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 58</value>
+    <value>82, 109</value>
   </data>
   <data name="sumTriggerText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 23</value>
+    <value>401, 23</value>
   </data>
   <data name="sumTriggerText.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;sumTriggerText.Name" xml:space="preserve">
     <value>sumTriggerText</value>
@@ -1669,10 +1669,10 @@
     <value>82, 0</value>
   </data>
   <data name="sumNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 23</value>
+    <value>401, 23</value>
   </data>
   <data name="sumNameText.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;sumNameText.Name" xml:space="preserve">
     <value>sumNameText</value>
@@ -1696,13 +1696,13 @@
     <value>NoControl</value>
   </data>
   <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 127</value>
+    <value>82, 178</value>
   </data>
   <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 19</value>
   </data>
   <data name="openDlgAfterCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="openDlgAfterCheck.Text" xml:space="preserve">
     <value>Open the Properties dialog for this task when I click Finish</value>
@@ -1759,13 +1759,13 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 90</value>
+    <value>3, 141</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 15</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>Action:</value>
@@ -1792,13 +1792,13 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 61</value>
+    <value>3, 112</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 15</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Trigger:</value>
@@ -1828,7 +1828,7 @@
     <value>69, 15</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Task Name:</value>
@@ -1852,13 +1852,13 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 173</value>
+    <value>0, 224</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 15</value>
+    <value>490, 15</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>9</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>When you click Finish, the new task will be created and added to your Windows schedule.</value>
@@ -1876,7 +1876,7 @@
     <value>9</value>
   </data>
   <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1888,10 +1888,10 @@
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1903,7 +1903,7 @@
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1912,13 +1912,13 @@
     <value>NoControl</value>
   </data>
   <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 117</value>
+    <value>316, 168</value>
   </data>
   <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>10</value>
   </data>
   <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
     <value>Browse...</value>
@@ -1939,13 +1939,13 @@
     <value>Bottom, Left</value>
   </data>
   <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 154</value>
+    <value>100, 205</value>
   </data>
   <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 23</value>
   </data>
   <data name="emailSMTPText.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;emailSMTPText.Name" xml:space="preserve">
     <value>emailSMTPText</value>
@@ -1969,13 +1969,13 @@
     <value>NoControl</value>
   </data>
   <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 157</value>
+    <value>3, 208</value>
   </data>
   <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 15</value>
   </data>
   <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>12</value>
   </data>
   <data name="emailSMTPLabel.Text" xml:space="preserve">
     <value>SMTP server:</value>
@@ -1996,13 +1996,13 @@
     <value>Bottom, Left</value>
   </data>
   <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 119</value>
+    <value>100, 170</value>
   </data>
   <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
   <data name="emailAttachmentText.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;emailAttachmentText.Name" xml:space="preserve">
     <value>emailAttachmentText</value>
@@ -2026,13 +2026,13 @@
     <value>NoControl</value>
   </data>
   <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 122</value>
+    <value>3, 173</value>
   </data>
   <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
   </data>
   <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>8</value>
   </data>
   <data name="emailAttachmentLabel.Text" xml:space="preserve">
     <value>Attachment:</value>
@@ -2053,13 +2053,13 @@
     <value>Bottom, Left</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 146</value>
+    <value>6, 197</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 2</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -2083,10 +2083,10 @@
     <value>True</value>
   </data>
   <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 35</value>
+    <value>326, 86</value>
   </data>
   <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;emailTextText.Name" xml:space="preserve">
     <value>emailTextText</value>
@@ -2113,7 +2113,7 @@
     <value>32, 15</value>
   </data>
   <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>6</value>
   </data>
   <data name="emailTextLabel.Text" xml:space="preserve">
     <value>Text:</value>
@@ -2137,7 +2137,7 @@
     <value>326, 23</value>
   </data>
   <data name="emailSubjectText.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;emailSubjectText.Name" xml:space="preserve">
     <value>emailSubjectText</value>
@@ -2164,7 +2164,7 @@
     <value>49, 15</value>
   </data>
   <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>4</value>
   </data>
   <data name="emailSubjectLabel.Text" xml:space="preserve">
     <value>Subject:</value>
@@ -2188,7 +2188,7 @@
     <value>326, 23</value>
   </data>
   <data name="emailToText.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;emailToText.Name" xml:space="preserve">
     <value>emailToText</value>
@@ -2215,7 +2215,7 @@
     <value>24, 15</value>
   </data>
   <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>2</value>
   </data>
   <data name="emailToLabel.Text" xml:space="preserve">
     <value>To:</value>
@@ -2239,7 +2239,7 @@
     <value>326, 23</value>
   </data>
   <data name="emailFromText.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;emailFromText.Name" xml:space="preserve">
     <value>emailFromText</value>
@@ -2266,7 +2266,7 @@
     <value>38, 15</value>
   </data>
   <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>0</value>
   </data>
   <data name="emailFromLabel.Text" xml:space="preserve">
     <value>From:</value>
@@ -2284,7 +2284,7 @@
     <value>13</value>
   </data>
   <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2296,7 +2296,7 @@
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -2308,10 +2308,10 @@
     <value>True</value>
   </data>
   <data name="msgMsgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 131</value>
+    <value>326, 182</value>
   </data>
   <data name="msgMsgText.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;msgMsgText.Name" xml:space="preserve">
     <value>msgMsgText</value>
@@ -2338,7 +2338,7 @@
     <value>56, 15</value>
   </data>
   <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>3</value>
   </data>
   <data name="msgMsgLabel.Text" xml:space="preserve">
     <value>Message:</value>
@@ -2362,7 +2362,7 @@
     <value>326, 23</value>
   </data>
   <data name="msgTitleText.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;msgTitleText.Name" xml:space="preserve">
     <value>msgTitleText</value>
@@ -2389,7 +2389,7 @@
     <value>33, 15</value>
   </data>
   <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="msgTitleLabel.Text" xml:space="preserve">
     <value>Title:</value>
@@ -2419,7 +2419,7 @@
     <value>275, 15</value>
   </data>
   <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="msgIntroLabel.Text" xml:space="preserve">
     <value>This action displays a message box on the desktop.</value>
@@ -2437,7 +2437,7 @@
     <value>4</value>
   </data>
   <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 188</value>
+    <value>490, 239</value>
   </data>
   <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2449,7 +2449,7 @@
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>537, 391</value>
@@ -2464,7 +2464,7 @@
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.3690.42670, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>
