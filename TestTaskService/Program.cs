@@ -7,7 +7,7 @@ namespace TestTaskService
 	{
 		private static TaskEditDialog editorForm;
 
-        [STAThread]
+		[STAThread]
 		static void Main(string[] args)
 		{
 			int init = 0;
@@ -23,7 +23,7 @@ namespace TestTaskService
 			switch (test)
 			{
 				case 'W':
-					Win7Test(newArgs);
+					WizardTest(newArgs);
 					break;
 				case 'E':
 					EditorTest(newArgs);
@@ -33,9 +33,6 @@ namespace TestTaskService
 					break;
 				case 'S':
 					ShortTest(newArgs);
-					break;
-				case 'Z':
-					WizardTest(newArgs);
 					break;
 				default:
 					LongTest(newArgs);
@@ -132,46 +129,6 @@ namespace TestTaskService
 			wiz.ShowDialog();
 		}
 
-		static void Win7Test(string[] args)
-		{
-			// Get the service on the local machine
-			try
-			{
-				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
-				{
-					// Create a new task definition and assign properties
-					TaskDefinition td = ts.NewTask();
-
-					switch (int.Parse(args[0]))
-					{
-						case 2:
-							td.Triggers.Add(new BootTrigger { Delay = TimeSpan.FromMinutes(10) });
-							break;
-						case 3:
-							td.Triggers.Add(new EventTrigger("Security", "VSSAudit", null));
-							break;
-						case 4:
-							td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.SessionUnlock));
-							break;
-						case 5:
-							td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
-							break;
-					}
-
-					td.Actions.Add(new ShowMessageAction("Win7 task has fired", "Task Test"));
-
-					const string taskName = "Test";
-					ts.RootFolder.RegisterTaskDefinition(taskName, td);
-					ts.RootFolder.DeleteTask(taskName);
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.ToString());
-				Console.ReadKey(false);
-			}
-		}
-
 		static void EditorTest(string[] args)
 		{
 			// Get the service on the local machine
@@ -190,7 +147,7 @@ namespace TestTaskService
 					// Register then show task again
 					while (td != null)
 					{
-						ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
+						//ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
 						t = ts.GetTask(taskName);
 						td = DisplayTask(t, true);
 					}
@@ -470,6 +427,7 @@ namespace TestTaskService
 			}
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
+			editorForm.RegisterTaskOnAccept = true;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 	}
