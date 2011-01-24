@@ -32,15 +32,18 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (RegisterTaskOnAccept)
 			{
+				string user = this.TaskDefinition.Principal.UserId;
 				string pwd = null;
 				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 				{
-					pwd = InvokeCredentialDialog(this.TaskDefinition.Principal.UserId);
+					pwd = InvokeCredentialDialog(user);
 					if (pwd == null)
 						throw new System.Security.Authentication.AuthenticationException(Properties.Resources.UserAuthenticationError);
 				}
+				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
+					user = this.TaskDefinition.Principal.GroupId;
 				this.TaskService.RootFolder.RegisterTaskDefinition(this.Task.Name, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-					this.TaskDefinition.Principal.UserId, pwd, this.TaskDefinition.Principal.LogonType);
+					user, pwd, this.TaskDefinition.Principal.LogonType);
 			}
 			this.DialogResult = DialogResult.OK;
 			Close();
