@@ -245,11 +245,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
 		/// <param name="action">The <see cref="Action"/> to determine what happens when the task is triggered.</param>
-		/// <returns>A <see cref="Task"/> instance of the registered task.</returns>
-		public Task AddTask(string path, Trigger trigger, Action action)
+		/// <param name="UserId">The user credentials used to register the task.</param>
+		/// <param name="Password">The password for the userId used to register the task.</param>
+		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <returns>
+		/// A <see cref="Task"/> instance of the registered task.
+		/// </returns>
+		public Task AddTask(string path, Trigger trigger, Action action, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken)
 		{
 			TaskDefinition td = NewTask();
-			td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 			// Create a trigger that will fire the task at a specific date and time
 			td.Triggers.Add(trigger);
@@ -258,7 +262,7 @@ namespace Microsoft.Win32.TaskScheduler
 			td.Actions.Add(action);
 
 			// Register the task in the root folder
-			return RootFolder.RegisterTaskDefinition(path, td);
+			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);
 		}
 
 		/// <summary>
@@ -329,6 +333,15 @@ namespace Microsoft.Win32.TaskScheduler
 			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
 			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, ref CTaskGuid, ref ITaskGuid), v1Name);
+		}
+
+		/// <summary>
+		/// Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.
+		/// </summary>
+		public void StartSystemTaskSchedulerManager()
+		{
+			if (System.Environment.UserInteractive)
+				System.Diagnostics.Process.Start("control.exe", "schedtasks");
 		}
 
 		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)

@@ -18,6 +18,20 @@ namespace Microsoft.Win32.TaskScheduler
 			RegisterTaskOnAccept = false;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskEditDialog"/> class.
+		/// </summary>
+		/// <param name="task">The task.</param>
+		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		public TaskEditDialog(Task task, bool editable = true, bool registerOnAccept = true)
+		{
+			InitializeComponent();
+			this.Editable = editable;
+			this.Initialize(task);
+			this.RegisterTaskOnAccept = registerOnAccept;
+		}
+
 		private string InvokeCredentialDialog(string userName)
 		{
 			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
