@@ -839,6 +839,38 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Dynamically tries to load the assembly for the editor and displays it as editable for this task.
+		/// </summary>
+		/// <remarks>The Microsoft.Win32.TaskSchedulerEditor.dll assembly must reside in the same directory as the Microsoft.Win32.TaskScheduler.dll or in the GAC.</remarks>
+		public bool ShowEditor()
+		{
+			try
+			{
+				System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("Microsoft.Win32.TaskSchedulerEditor.dll");
+				if (asm != null)
+				{
+					Type t = asm.GetType("Microsoft.Win32.TaskScheduler.TaskEditDialog", false, false);
+					if (t != null)
+					{
+						object o = Activator.CreateInstance(t, this, true, true);
+						if (o != null)
+						{
+							System.Reflection.MethodInfo mi = t.GetMethod("ShowDialog", Type.EmptyTypes);
+							if (mi != null)
+							{
+								object r = mi.Invoke(o, null);
+								int ir = Convert.ToInt32(r);
+								return ir == 1;
+							}
+						}
+					}
+				}
+			}
+			catch { }
+			return false;
+		}
+
+		/// <summary>
 		/// Shows the property page for the task (v1.0 only).
 		/// </summary>
 		public void ShowPropertyPage()
