@@ -25,22 +25,18 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class that provides the common properties that are inherited by all action objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
-	public abstract class Action : IDisposable
+	public abstract class Action : IDisposable, ICloneable
 	{
 		internal V2Interop.IAction iAction = null;
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual bool Bound { get { return this.iAction != null; } }
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
 		}
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
 		{
 			V2Interop.IActionCollection iActions = iTaskDef.Actions;
@@ -72,7 +68,28 @@ namespace Microsoft.Win32.TaskScheduler
 				catch { }
 			}
 			unboundValues.Clear();
-			unboundValues = null;
+		}
+
+		/// <summary>
+		/// Creates a new object that is a copy of the current instance.
+		/// </summary>
+		/// <returns>
+		/// A new object that is a copy of this instance.
+		/// </returns>
+		public object Clone()
+		{
+			Action ret = CreateAction(this.ActionType);
+			ret.CopyProperties(this);
+			return ret;
+		}
+
+		/// <summary>
+		/// Copies the properties from another <see cref="Action"/> the current instance.
+		/// </summary>
+		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
+		protected virtual void CopyProperties(Action sourceAction)
+		{
+			this.Id = sourceAction.Id;
 		}
 
 		/// <summary>
@@ -212,6 +229,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Copies the properties from another <see cref="Action"/> the current instance.
+		/// </summary>
+		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
+		protected override void CopyProperties(Action sourceAction)
+		{
+			if (sourceAction.GetType() == this.GetType())
+			{
+				base.CopyProperties(sourceAction);
+				this.ClassId = ((ComHandlerAction)sourceAction).ClassId;
+				this.Data = ((ComHandlerAction)sourceAction).Data;
+			}
+		}
+
+		/// <summary>
 		/// Gets a string representation of the <see cref="ComHandlerAction"/>.
 		/// </summary>
 		/// <returns>String represention this action.</returns>
@@ -270,13 +301,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal override void Bind(V1Interop.ITask v1Task)
 		{
-			object o;
-			if (unboundValues.TryGetValue("Path", out o))
-				v1Task.SetApplicationName(o == null ? string.Empty : o.ToString());
-			if (unboundValues.TryGetValue("Arguments", out o))
-				v1Task.SetParameters(o == null ? string.Empty : o.ToString());
-			if (unboundValues.TryGetValue("WorkingDirectory", out o))
-				v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
+			object o = null;
+			unboundValues.TryGetValue("Path", out o);
+			v1Task.SetApplicationName(o == null ? string.Empty : o.ToString());
+			o = null;
+			unboundValues.TryGetValue("Arguments", out o);
+			v1Task.SetParameters(o == null ? string.Empty : o.ToString());
+			o = null;
+			unboundValues.TryGetValue("WorkingDirectory", out o);
+			v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
 		}
 
 		/// <summary>
@@ -367,6 +400,21 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IExecAction)iAction).WorkingDirectory = value;
 				else
 					unboundValues["WorkingDirectory"] = value;
+			}
+		}
+
+		/// <summary>
+		/// Copies the properties from another <see cref="Action"/> the current instance.
+		/// </summary>
+		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
+		protected override void CopyProperties(Action sourceAction)
+		{
+			if (sourceAction.GetType() == this.GetType())
+			{
+				base.CopyProperties(sourceAction);
+				this.Path = ((ExecAction)sourceAction).Path;
+				this.Arguments = ((ExecAction)sourceAction).Arguments;
+				this.WorkingDirectory = ((ExecAction)sourceAction).WorkingDirectory;
 			}
 		}
 
@@ -523,6 +571,30 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Copies the properties from another <see cref="Action"/> the current instance.
+		/// </summary>
+		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
+		protected override void CopyProperties(Action sourceAction)
+		{
+			if (sourceAction.GetType() == this.GetType())
+			{
+				base.CopyProperties(sourceAction);
+				if (((EmailAction)sourceAction).Attachments != null)
+					this.Attachments = (object[])((EmailAction)sourceAction).Attachments.Clone();
+				this.Bcc = ((EmailAction)sourceAction).Bcc;
+				this.Body = ((EmailAction)sourceAction).Body;
+				this.Cc = ((EmailAction)sourceAction).Cc;
+				this.From = ((EmailAction)sourceAction).From;
+				if (((EmailAction)sourceAction).nvc != null)
+					((EmailAction)sourceAction).HeaderFields.CopyTo(this.HeaderFields);
+				this.ReplyTo = ((EmailAction)sourceAction).ReplyTo;
+				this.Server = ((EmailAction)sourceAction).Server;
+				this.Subject = ((EmailAction)sourceAction).Subject;
+				this.To = ((EmailAction)sourceAction).To;
+			}
+		}
+
+		/// <summary>
 		/// Gets a string representation of the <see cref="EmailAction"/>.
 		/// </summary>
 		/// <returns>String represention this action.</returns>
@@ -576,6 +648,20 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("MessageBody") ? (string)unboundValues["MessageBody"] : null) : ((V2Interop.IShowMessageAction)iAction).MessageBody; }
 			set { if (iAction == null) unboundValues["MessageBody"] = value; else ((V2Interop.IShowMessageAction)iAction).MessageBody = value; }
+		}
+
+		/// <summary>
+		/// Copies the properties from another <see cref="Action"/> the current instance.
+		/// </summary>
+		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
+		protected override void CopyProperties(Action sourceAction)
+		{
+			if (sourceAction.GetType() == this.GetType())
+			{
+				base.CopyProperties(sourceAction);
+				this.Title = ((ShowMessageAction)sourceAction).Title;
+				this.MessageBody = ((ShowMessageAction)sourceAction).MessageBody;
+			}
 		}
 
 		/// <summary>

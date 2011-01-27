@@ -165,14 +165,16 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					AddTriggerToList(tr, -1);
 				}
+				SetTriggerButtonState();
 
 				// Set Actions tab
 				actionListView.Items.Clear();
-				foreach (Action act in td.Actions)
+				if (td.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
 				{
-					AddActionToList(act, -1);
+					foreach (Action act in td.Actions)
+						AddActionToList(act, -1);
 				}
-				SetActionUpDnState();
+				SetActionButtonState();
 
 				// Set Conditions tab
 				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
@@ -286,7 +288,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				td.Actions.RemoveAt(idx);
 				actionListView.Items.RemoveAt(idx);
-				SetActionUpDnState();
+				SetActionButtonState();
 			}
 		}
 
@@ -297,8 +299,12 @@ namespace Microsoft.Win32.TaskScheduler
 				int index = actionListView.SelectedIndices[0];
 				actionListView.BeginUpdate();
 				ListViewItem lvi = this.actionListView.Items[index];
+				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
 				actionListView.Items.RemoveAt(index);
+				td.Actions.RemoveAt(index);
 				actionListView.Items.Insert(index + 1, lvi);
+				td.Actions.Insert(index + 1, aTemp as Action);
+				lvi.Tag = aTemp;
 				actionListView.EndUpdate();
 			}
 		}
@@ -312,10 +318,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
-					if (v2)
-						td.Actions.RemoveAt(idx);
 					actionListView.Items.RemoveAt(idx);
-					td.Actions.Add(dlg.Action);
+					td.Actions[idx] = dlg.Action;
 					AddActionToList(dlg.Action, idx);
 					actionListView.Items[idx].Selected = true;
 				}
@@ -327,6 +331,11 @@ namespace Microsoft.Win32.TaskScheduler
 			actionEditButton_Click(sender, EventArgs.Empty);
 		}
 
+		private void actionListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			SetActionButtonState();
+		}
+
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
 			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
@@ -334,7 +343,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				td.Actions.Add(dlg.Action);
 				AddActionToList(dlg.Action, -1);
-				SetActionUpDnState();
+				SetActionButtonState();
 			}
 		}
 
@@ -345,8 +354,12 @@ namespace Microsoft.Win32.TaskScheduler
 				int index = actionListView.SelectedIndices[0];
 				actionListView.BeginUpdate();
 				ListViewItem lvi = this.actionListView.Items[index];
+				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
 				actionListView.Items.RemoveAt(index);
+				td.Actions.RemoveAt(index);
 				actionListView.Items.Insert(index - 1, lvi);
+				td.Actions.Insert(index - 1, aTemp);
+				lvi.Tag = aTemp;
 				actionListView.EndUpdate();
 			}
 		}
@@ -470,9 +483,17 @@ namespace Microsoft.Win32.TaskScheduler
 			SetUserControls(td.Principal.LogonType);
 		}
 
-		private void SetActionUpDnState()
+		private void SetActionButtonState()
 		{
 			actionUpButton.Enabled = actionDownButton.Enabled = actionListView.Items.Count > 1;
+			actionNewButton.Enabled = editable && (v2 || actionListView.Items.Count == 0);
+			actionEditButton.Enabled = actionDeleteButton.Enabled = editable && actionListView.Items.Count > 0 && actionListView.SelectedIndices.Count > 0;
+		}
+
+		private void SetTriggerButtonState()
+		{
+			triggerNewButton.Enabled = editable;
+			triggerEditButton.Enabled = triggerDeleteButton.Enabled = editable && triggerListView.Items.Count > 0 && triggerListView.SelectedIndices.Count > 0;
 		}
 
 		private void SetUserControls(TaskLogonType logonType)
@@ -755,9 +776,8 @@ namespace Microsoft.Win32.TaskScheduler
 				dlg.TargetServer = TaskService.TargetServer;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
-					td.Triggers.RemoveAt(idx);
 					triggerListView.Items.RemoveAt(idx);
-					td.Triggers.Add(dlg.Trigger);
+					td.Triggers[idx] = dlg.Trigger;
 					AddTriggerToList(dlg.Trigger, idx);
 					triggerListView.Items[idx].Selected = true;
 				}
@@ -767,6 +787,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			triggerEditButton_Click(sender, EventArgs.Empty);
+		}
+
+		private void triggerListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			SetTriggerButtonState();
 		}
 
 		private void triggerNewButton_Click(object sender, EventArgs e)

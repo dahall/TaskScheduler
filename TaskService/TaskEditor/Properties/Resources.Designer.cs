@@ -160,6 +160,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There must be at least one action assigned to this task..
+        /// </summary>
+        internal static string TaskMustHaveActionsError {
+            get {
+                return ResourceManager.GetString("TaskMustHaveActionsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Scheduler.
         /// </summary>
         internal static string TaskSchedulerName {

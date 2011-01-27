@@ -218,7 +218,36 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Specialized <see cref="Trigger"/> instance.</returns>
 		public Trigger this[int index]
 		{
-			get { if (v2Coll != null) return Trigger.CreateTrigger(v2Coll[++index]); return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index)); }
+			get
+			{
+				if (v2Coll != null)
+					return Trigger.CreateTrigger(v2Coll[++index]);
+				return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index));
+			}
+			set
+			{
+				if (this.Count <= index)
+					throw new ArgumentOutOfRangeException("index", index, "Index is not a valid index in the TriggerCollection");
+				RemoveAt(index);
+				Insert(index, value);
+			}
+		}
+
+		/// <summary>
+		/// Inserts an trigger at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index at which trigger should be inserted.</param>
+		/// <param name="trigger">The trigger to insert into the list.</param>
+		public void Insert(int index, Trigger trigger)
+		{
+			Trigger[] pushItems = new Trigger[this.Count - index];
+			for (int i = index; i < this.Count; i++)
+				pushItems[i - index] = (Trigger)this[i].Clone();
+			for (int j = this.Count - 1; j >= index; j--)
+				RemoveAt(j);
+			Add(trigger);
+			for (int k = 0; k < pushItems.Length; k++)
+				Add(pushItems[k]);
 		}
 
 		/// <summary>

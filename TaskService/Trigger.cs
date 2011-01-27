@@ -312,13 +312,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return DateTime.Parse(v2Trigger.StartBoundary);
+					return string.IsNullOrEmpty(v2Trigger.StartBoundary) ? DateTime.MinValue : DateTime.Parse(v2Trigger.StartBoundary);
 				return (unboundValues!=null && unboundValues.ContainsKey("StartBoundary")) ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
 			}
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.StartBoundary = value.ToString(V2BoundaryDateFormat);
+					v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat);
 				else
 				{
 					v1TriggerData.BeginDate = value;
@@ -592,7 +592,7 @@ namespace Microsoft.Win32.TaskScheduler
 				o = Task.TimeSpanToString((TimeSpan)o);
 			if (o is DateTime)
 			{
-				if (key == "EndBoundary" && ((DateTime)o) == DateTime.MaxValue)
+				if ((key == "EndBoundary" && ((DateTime)o) == DateTime.MaxValue) || (key == "StartBoundary" && ((DateTime)o) == DateTime.MinValue))
 					o = null;
 				else
 					o = ((DateTime)o).ToString(V2BoundaryDateFormat);

@@ -44,6 +44,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void okBtn_Click(object sender, System.EventArgs e)
 		{
+			if (this.TaskDefinition.Actions.Count == 0)
+			{
+				MessageBox.Show(Properties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			if (RegisterTaskOnAccept)
 			{
 				string user = this.TaskDefinition.Principal.UserId;
