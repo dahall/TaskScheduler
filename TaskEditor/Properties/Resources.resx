@@ -270,4 +270,7 @@
   <data name="UserAuthenticationError" xml:space="preserve">
     <value>A valid password for the specified account was not provided.</value>
   </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>There must be at least one action assigned to this task.</value>
+  </data>
 </root>

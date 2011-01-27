@@ -69,10 +69,27 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll != null)
 				v2Coll.Clear();
 			else
-			{
-				for (int i = this.Count - 1; i >= 0; i--)
-					RemoveAt(i);
-			}
+				Add(new ExecAction());
+		}
+
+		/// <summary>
+		/// Inserts an action at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index at which action should be inserted.</param>
+		/// <param name="action">The action to insert into the list.</param>
+		public void Insert(int index, Action action)
+		{
+			if (v2Coll == null && this.Count > 0)
+				throw new NotV1SupportedException("Only a single action is allowed.");
+
+			Action[] pushItems = new Action[this.Count - index];
+			for (int i = index; i < this.Count; i++)
+				pushItems[i - index] = (Action)this[i].Clone();
+			for (int j = this.Count - 1; j >= index; j--)
+				RemoveAt(j);
+			Add(action);
+			for (int k = 0; k < pushItems.Length; k++)
+				Add(pushItems[k]);
 		}
 
 		/// <summary>
@@ -83,18 +100,19 @@ namespace Microsoft.Win32.TaskScheduler
 		public void RemoveAt(int index)
 		{
 			if (index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Failed to remove Trigger. Index out of range.");
+				throw new ArgumentOutOfRangeException("index", index, "Failed to remove action. Index out of range.");
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
+			else if (index == 0)
+				Add(new ExecAction());
 			else
 				throw new NotV1SupportedException("There can be only a single action and it cannot be removed.");
 		}
 
 		/// <summary>
-		/// Gets a specified action from the collection.
+		/// Gets or sets a an action at the specified index.
 		/// </summary>
-		/// <param name="index">The index of the action to be retrieved.</param>
-		/// <returns>Specialized <see cref="Action"/> instance.</returns>
+		/// <value>The zero-based index of the action to get or set.</value>
 		public Action this[int index]
 		{
 			get
@@ -104,6 +122,13 @@ namespace Microsoft.Win32.TaskScheduler
 				if (index == 0)
 					return new ExecAction(v1Task.GetApplicationName(), v1Task.GetParameters(), v1Task.GetWorkingDirectory());
 				throw new ArgumentOutOfRangeException();
+			}
+			set
+			{
+				if (this.Count <= index)
+					throw new ArgumentOutOfRangeException("index", index, "Index is not a valid index in the ActionCollection");
+				RemoveAt(index);
+				Insert(index, value);
 			}
 		}
 
@@ -136,7 +161,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return v2Coll.Count;
-				return 1;
+				return ((string)v1Task.GetApplicationName()).Length == 0 ? 0 : 1;
 			}
 		}
 

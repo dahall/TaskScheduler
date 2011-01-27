@@ -310,6 +310,7 @@
 			this.triggerListView.Name = "triggerListView";
 			this.triggerListView.UseCompatibleStateImageBehavior = false;
 			this.triggerListView.View = System.Windows.Forms.View.Details;
+			this.triggerListView.SelectedIndexChanged += new System.EventHandler(this.triggerListView_SelectedIndexChanged);
 			this.triggerListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.triggerListView_MouseDoubleClick);
 			// 
 			// columnHeader1
@@ -389,6 +390,7 @@
 			this.actionListView.Name = "actionListView";
 			this.actionListView.UseCompatibleStateImageBehavior = false;
 			this.actionListView.View = System.Windows.Forms.View.Details;
+			this.actionListView.SelectedIndexChanged += new System.EventHandler(this.actionListView_SelectedIndexChanged);
 			this.actionListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.actionListView_MouseDoubleClick);
 			// 
 			// columnHeader4

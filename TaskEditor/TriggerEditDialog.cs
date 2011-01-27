@@ -265,7 +265,7 @@ namespace Microsoft.Win32.TaskScheduler
                     stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
                 }
                 activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
-                if (activateCheckBox.Visible)
+				if (TriggerView != TaskTriggerDisplayType.Schedule)
                 {
                     activateCheckBox.Checked = activateDatePicker.Enabled = trigger.StartBoundary != DateTime.MinValue;
                     if (activateCheckBox.Checked)
@@ -301,7 +301,7 @@ namespace Microsoft.Win32.TaskScheduler
                 if (expireCheckBox.Checked)
                     trigger.StartBoundary = activateDatePicker.Value;
                 else
-                    trigger.StartBoundary = DateTime.MaxValue;
+                    trigger.StartBoundary = DateTime.MinValue;
             }
         }
 
