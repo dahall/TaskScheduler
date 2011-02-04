@@ -169,6 +169,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task Run Times ({0}).
+        /// </summary>
+        internal static string TaskRunTimesDialogTitle {
+            get {
+                return ResourceManager.GetString("TaskRunTimesDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Scheduler.
         /// </summary>
         internal static string TaskSchedulerName {

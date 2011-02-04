@@ -233,8 +233,6 @@
 			this.triggerSelectionList.Items.Add(radioButtonListItem6);
 			this.triggerSelectionList.Items.Add(radioButtonListItem7);
 			this.triggerSelectionList.Name = "triggerSelectionList";
-			this.triggerSelectionList.RepeatColumns = 1;
-			this.triggerSelectionList.RepeatDirection = GroupControls.RepeatDirection.Vertical;
 			this.triggerSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.triggerSelectionList.SelectedIndexChanged += new System.EventHandler(this.triggerSelectionList_SelectedIndexChanged);
 			// 
@@ -314,8 +312,6 @@
 			this.actionSelectionList.Items.Add(radioButtonListItem9);
 			this.actionSelectionList.Items.Add(radioButtonListItem10);
 			this.actionSelectionList.Name = "actionSelectionList";
-			this.actionSelectionList.RepeatColumns = 1;
-			this.actionSelectionList.RepeatDirection = GroupControls.RepeatDirection.Vertical;
 			this.actionSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.actionSelectionList.SelectedIndexChanged += new System.EventHandler(this.actionSelectionList_SelectedIndexChanged);
 			// 
