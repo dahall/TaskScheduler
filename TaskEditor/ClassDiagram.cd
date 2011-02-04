@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Microsoft.Win32.TaskScheduler.ActionEditDialog" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAKQDC4BACKAwCGG6DiFRHAKIZAyAQAMACBBgABQgCQ=</HashCode>
+      <FileName>ActionEditDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQCAAAAACRAAAEAAACAAAKDAwAAEAQAAAAwAIghAAE=</HashCode>
+      <FileName>ComObjectSelectionDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ControlProcessing" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ControlProcessing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.CredentialsDialog" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIARAwAAAIBACAAjQAAAAASCQAAIABAAAQ=</HashCode>
+      <FileName>CredentialsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.CustomComboBox" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAJBRAEKQimASgEACAQkAgEioGCAAAAAENFYWRECGEA=</HashCode>
+      <FileName>CustomComboBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.DropDownCheckListItem" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAgCAAAAAA=</HashCode>
+      <FileName>DropDownCheckList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.ComboBoxExtension" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DropDownCheckList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.DropDownCheckList" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABAQAAAgACAACoAgAAAAAAJABAAAEIAAQAAFAAAA=</HashCode>
+      <FileName>DropDownCheckList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.FullDateTimePicker" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAADAAACAAkABAAACBAAASMEBAACEAAwAiAEAQAAI=</HashCode>
+      <FileName>FullDateTimePicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.NativeMethods" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NativeMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.SystemEventEnumerator" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemEventEnumerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskEditDialog" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAYAACEAAQEAiACAAAACAAAAAAAAAEACgAAAAIA=</HashCode>
+      <FileName>TaskEditDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskEvent" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAgAAAAAEIEQAAAAAgAAAAAEAABAAAAAAIAAAQ=</HashCode>
+      <FileName>TaskEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskEventEnumerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAABAAAAACACAAAAAAAAAAAKAAAAAAAAAA=</HashCode>
+      <FileName>TaskEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskEventLog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAABAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>TaskEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskPropertiesControl" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xiVnfIysmigYN9QD4ATYABn/Vw5qrocQfe4rCvhRdbg=</HashCode>
+      <FileName>TaskPropertiesControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cMLgBK45VaKJ4jOm5CCBZRFaIRgGORArBCAxWEBVCTQ=</HashCode>
+      <FileName>TaskSchedulerWizard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TimeSpanExtension" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSpanExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.TriggerEditDialog" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ZsTQANR0PerZF9cCFA3wHFAfFxMIfShBCCQp6FJGSSA=</HashCode>
+      <FileName>TriggerEditDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Win32.TaskScheduler.Properties.Resources" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKKoICgCAgCILAIRQCBEIAALQABRACAHDAChAAECoI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Microsoft.Win32.TaskScheduler.IPopupControlHost" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>CustomComboBox.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Microsoft.Win32.TaskScheduler.CredentialsDialogOptions" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAoAAIAAAAAIkIBFAgAAAAAAAAEgCkAAMA=</HashCode>
+      <FileName>CredentialsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat" Collapsed="true">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAAAEAAA=</HashCode>
+      <FileName>FullDateTimePicker.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

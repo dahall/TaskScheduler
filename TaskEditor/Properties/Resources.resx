@@ -273,4 +273,7 @@
   <data name="TaskMustHaveActionsError" xml:space="preserve">
     <value>There must be at least one action assigned to this task.</value>
   </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>Task Run Times ({0})</value>
+  </data>
 </root>
