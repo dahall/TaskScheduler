@@ -29,6 +29,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal V2Interop.IAction iAction = null;
 
+		/// <summary>List of unbound values when working with Actions not associated with a registered task.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
 		internal virtual bool Bound { get { return this.iAction != null; } }

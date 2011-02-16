@@ -29,12 +29,14 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabControl = new System.Windows.Forms.TabControl();
 			this.generalTab = new System.Windows.Forms.TabPage();
 			this.taskNameLabel = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.taskAuthorLabel = new System.Windows.Forms.Label();
 			this.taskDescLabel = new System.Windows.Forms.Label();
 			this.taskNameText = new System.Windows.Forms.TextBox();
+			this.taskLocationText = new System.Windows.Forms.Label();
 			this.taskAuthorText = new System.Windows.Forms.Label();
 			this.taskDescText = new System.Windows.Forms.TextBox();
 			this.taskVersionCombo = new System.Windows.Forms.ComboBox();
@@ -99,6 +101,11 @@
 			this.taskDeleteAfterCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.runTimesTab = new System.Windows.Forms.TabPage();
+			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
+			this.runTimesErrorLabel = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			this.historyTab = new System.Windows.Forms.TabPage();
 			this.historyListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -108,7 +115,7 @@
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			this.tabControl1.SuspendLayout();
+			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
 			this.triggersTab.SuspendLayout();
@@ -119,27 +126,32 @@
 			this.idleConditionGroupBox.SuspendLayout();
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
+			this.runTimesTab.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// tabControl1
+			// tabControl
 			// 
-			this.tabControl1.Controls.Add(this.generalTab);
-			this.tabControl1.Controls.Add(this.triggersTab);
-			this.tabControl1.Controls.Add(this.actionsTab);
-			this.tabControl1.Controls.Add(this.conditionsTab);
-			this.tabControl1.Controls.Add(this.settingsTab);
-			this.tabControl1.Controls.Add(this.historyTab);
-			resources.ApplyResources(this.tabControl1, "tabControl1");
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
+			this.tabControl.Controls.Add(this.generalTab);
+			this.tabControl.Controls.Add(this.triggersTab);
+			this.tabControl.Controls.Add(this.actionsTab);
+			this.tabControl.Controls.Add(this.conditionsTab);
+			this.tabControl.Controls.Add(this.settingsTab);
+			this.tabControl.Controls.Add(this.runTimesTab);
+			this.tabControl.Controls.Add(this.historyTab);
+			resources.ApplyResources(this.tabControl, "tabControl");
+			this.tabControl.Name = "tabControl";
+			this.tabControl.SelectedIndex = 0;
 			// 
 			// generalTab
 			// 
 			this.generalTab.Controls.Add(this.taskNameLabel);
+			this.generalTab.Controls.Add(this.label2);
 			this.generalTab.Controls.Add(this.taskAuthorLabel);
 			this.generalTab.Controls.Add(this.taskDescLabel);
 			this.generalTab.Controls.Add(this.taskNameText);
+			this.generalTab.Controls.Add(this.taskLocationText);
 			this.generalTab.Controls.Add(this.taskAuthorText);
 			this.generalTab.Controls.Add(this.taskDescText);
 			this.generalTab.Controls.Add(this.taskVersionCombo);
@@ -154,6 +166,11 @@
 			// 
 			resources.ApplyResources(this.taskNameLabel, "taskNameLabel");
 			this.taskNameLabel.Name = "taskNameLabel";
+			// 
+			// label2
+			// 
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Name = "label2";
 			// 
 			// taskAuthorLabel
 			// 
@@ -170,6 +187,11 @@
 			resources.ApplyResources(this.taskNameText, "taskNameText");
 			this.taskNameText.Name = "taskNameText";
 			this.taskNameText.ReadOnly = true;
+			// 
+			// taskLocationText
+			// 
+			resources.ApplyResources(this.taskLocationText, "taskLocationText");
+			this.taskLocationText.Name = "taskLocationText";
 			// 
 			// taskAuthorText
 			// 
@@ -647,6 +669,39 @@
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
 			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
 			// 
+			// runTimesTab
+			// 
+			this.runTimesTab.Controls.Add(this.taskRunTimesControl1);
+			this.runTimesTab.Controls.Add(this.runTimesErrorLabel);
+			this.runTimesTab.Controls.Add(this.label3);
+			this.runTimesTab.Controls.Add(this.label1);
+			resources.ApplyResources(this.runTimesTab, "runTimesTab");
+			this.runTimesTab.Name = "runTimesTab";
+			this.runTimesTab.UseVisualStyleBackColor = true;
+			this.runTimesTab.Enter += new System.EventHandler(this.runTimesTab_Enter);
+			this.runTimesTab.Leave += new System.EventHandler(this.runTimesTab_Leave);
+			// 
+			// taskRunTimesControl1
+			// 
+			resources.ApplyResources(this.taskRunTimesControl1, "taskRunTimesControl1");
+			this.taskRunTimesControl1.MinimumSize = new System.Drawing.Size(285, 213);
+			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
+			// 
+			// runTimesErrorLabel
+			// 
+			resources.ApplyResources(this.runTimesErrorLabel, "runTimesErrorLabel");
+			this.runTimesErrorLabel.Name = "runTimesErrorLabel";
+			// 
+			// label3
+			// 
+			resources.ApplyResources(this.label3, "label3");
+			this.label3.Name = "label3";
+			// 
+			// label1
+			// 
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
 			// historyTab
 			// 
 			this.historyTab.Controls.Add(this.historyListView);
@@ -705,10 +760,10 @@
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.tabControl);
 			this.MinimumSize = new System.Drawing.Size(622, 400);
 			this.Name = "TaskPropertiesControl";
-			this.tabControl1.ResumeLayout(false);
+			this.tabControl.ResumeLayout(false);
 			this.generalTab.ResumeLayout(false);
 			this.generalTab.PerformLayout();
 			this.taskSecurityGroupBox.ResumeLayout(false);
@@ -725,6 +780,9 @@
 			this.settingsTab.ResumeLayout(false);
 			this.settingsTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
+			this.runTimesTab.ResumeLayout(false);
+			this.runTimesTab.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -732,7 +790,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.TabPage generalTab;
 		private System.Windows.Forms.GroupBox taskSecurityGroupBox;
 		private System.Windows.Forms.TabPage triggersTab;
@@ -811,5 +869,12 @@
 		private System.Windows.Forms.ColumnHeader columnHeader10;
 		private System.Windows.Forms.ColumnHeader columnHeader11;
 		private System.ComponentModel.BackgroundWorker historyBackgroundWorker;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label taskLocationText;
+		private System.Windows.Forms.TabPage runTimesTab;
+		private TaskRunTimesControl taskRunTimesControl1;
+		private System.Windows.Forms.Label runTimesErrorLabel;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label1;
 	}
 }

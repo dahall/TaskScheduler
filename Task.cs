@@ -892,6 +892,17 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Task.Terminate();
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			return this.Name;
+		}
+
 		internal static string GetV1Path(V1Interop.ITask v1Task)
 		{
 			string fileName = string.Empty;
@@ -1353,7 +1364,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2RegInfo != null)
-					return DateTime.Parse(v2RegInfo.Date);
+				{
+					string d = v2RegInfo.Date;
+					return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d);
+				}
 				return System.IO.File.GetLastWriteTime(Task.GetV1Path(v1Task));
 			}
 			set

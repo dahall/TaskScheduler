@@ -129,7 +129,7 @@
     <value>79, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 23</value>
+    <value>408, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameText.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>True</value>
   </data>
   <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 129</value>
+    <value>408, 129</value>
   </data>
   <data name="descText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -300,12 +300,6 @@
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="dailyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dailyStartTimePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="dailyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
   </data>
@@ -315,11 +309,14 @@
   <data name="dailyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="dailyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;dailyStartTimePicker.Name" xml:space="preserve">
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -501,12 +498,6 @@
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="oneTimeStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="oneTimeStartTimePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 0</value>
   </data>
@@ -516,11 +507,14 @@
   <data name="oneTimeStartTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="oneTimeStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Name" xml:space="preserve">
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -573,12 +567,6 @@
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="weeklyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyStartTimePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="weeklyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
   </data>
@@ -588,11 +576,14 @@
   <data name="weeklyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="weeklyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Name" xml:space="preserve">
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -985,7 +976,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1006,7 +997,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1027,7 +1018,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1048,7 +1039,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1146,12 +1137,6 @@
   <data name="&gt;&gt;monthlyMonthsLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="monthlyStartTimePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="monthlyStartTimePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="monthlyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 0</value>
   </data>
@@ -1161,11 +1146,14 @@
   <data name="monthlyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="monthlyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Name" xml:space="preserve">
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.28192, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
