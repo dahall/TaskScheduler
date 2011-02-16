@@ -210,9 +210,30 @@
   <data name="MOYSeptember" xml:space="preserve">
     <value>September</value>
   </data>
+  <data name="MultipleActions" xml:space="preserve">
+    <value>Multiple actions defined</value>
+  </data>
+  <data name="MultipleTriggers" xml:space="preserve">
+    <value>Multiple triggers defined</value>
+  </data>
   <data name="ShowMessageAction" xml:space="preserve">
     <value>{0}</value>
     <comment>0 = Title; 1 = MessageBody; 2 = Id</comment>
+  </data>
+  <data name="TaskStateDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="TaskStateQueued" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="TaskStateReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="TaskStateRunning" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="TaskStateUnknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="TriggerAnyUser" xml:space="preserve">
     <value>any user</value>

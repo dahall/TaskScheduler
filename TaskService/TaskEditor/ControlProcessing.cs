@@ -4,7 +4,7 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	internal static class ControlProcessing
 	{
-		public static RightToLeft GetRightToLeftProperty(Control ctl)
+		public static RightToLeft GetRightToLeftProperty(this Control ctl)
 		{
 			if (ctl.RightToLeft == RightToLeft.Inherit)
 			{

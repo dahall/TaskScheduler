@@ -114,11 +114,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskEvent.cs" />
+    <Compile Include="TaskListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskListView.Designer.cs">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskPropertiesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TaskPropertiesControl.Designer.cs">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunTimesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskRunTimesControl.Designer.cs">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskRunTimesDialog.cs">
       <SubType>Form</SubType>
@@ -163,8 +175,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesDialog.resx">
       <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>

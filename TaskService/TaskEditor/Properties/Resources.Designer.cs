@@ -142,11 +142,29 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation completed successfully. (0x0).
+        /// </summary>
+        internal static string LastResultSuccessful {
+            get {
+                return ResourceManager.GetString("LastResultSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Local Machine.
         /// </summary>
         internal static string LocalMachine {
             get {
                 return ResourceManager.GetString("LocalMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never.
+        /// </summary>
+        internal static string Never {
+            get {
+                return ResourceManager.GetString("Never", resourceCulture);
             }
         }
         

@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	#region Enumerations
+
 	internal enum FullDateTimePickerTimeFormat
 	{
 		/// <summary>Shows hours, minutes and seconds</summary>
@@ -14,15 +16,31 @@ namespace Microsoft.Win32.TaskScheduler
 		Hidden
 	}
 
+	#endregion Enumerations
+
 	/// <summary>
 	/// A single control that can represent a full date and time.
 	/// </summary>
-    internal partial class FullDateTimePicker : UserControl
-    {
-        private DateTime currentValue = new DateTime(0L);
+	[DefaultEvent("ValueChanged"),
+	DefaultProperty("Value"),
+	DefaultBindingProperty("Value")]
+	internal partial class FullDateTimePicker : UserControl
+	{
+		private DateTime currentValue;
+		private bool initializing = false;
 		private FullDateTimePickerTimeFormat timeFormat = FullDateTimePickerTimeFormat.LongTime;
+		private bool userHasSetValue;
 		private FieldConversionUtcCheckBehavior utcBehavior = FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
 		private string utcPrompt = "Synchronize across time zones";
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="FullDateTimePicker"/> class.
+		/// </summary>
+		public FullDateTimePicker()
+		{
+			InitializeComponent();
+			ResetValue();
+		}
 
 		/// <summary>
 		/// Behavior of producing value when Utc check is checked
@@ -36,12 +54,56 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="FullDateTimePicker"/> class.
+		/// Occurs when the <see cref="Value"/> property changes.
 		/// </summary>
-        public FullDateTimePicker()
-        {
-            InitializeComponent();
-        }
+		[Category("Action"), Description("Occurs when the Value property changes.")]
+		public event EventHandler ValueChanged;
+
+		/// <summary>
+		/// Gets or sets a value indicating whether [auto size].
+		/// </summary>
+		/// <value><c>true</c> if [auto size]; otherwise, <c>false</c>.</value>
+		[Browsable(true), Category("Layout"), DefaultValue(true), EditorBrowsable(EditorBrowsableState.Always), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		public override bool AutoSize
+		{
+			get { return base.AutoSize; }
+			set { base.AutoSize = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets how the control will resize itself.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A value from the <see cref="T:System.Windows.Forms.AutoSizeMode"/> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly"/>.
+		/// </returns>
+		[Browsable(true), Category("Layout"), Description("How the control will resize itself"), DefaultValue(AutoSizeMode.GrowAndShrink), Localizable(true)]
+		public new AutoSizeMode AutoSizeMode
+		{
+			get { return base.AutoSizeMode; }
+			set { base.AutoSizeMode = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets the text associated with this control.
+		/// </summary>
+		/// <value></value>
+		/// <returns>A string that represents the text associated with this control.</returns>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+		public override string Text
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				if ((value == null) || (value.Length == 0))
+					this.ResetValue();
+				else
+					this.Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentCulture);
+			}
+		}
 
 		[RefreshProperties(RefreshProperties.Repaint), DefaultValue(FullDateTimePickerTimeFormat.LongTime), Category("Behavior")]
 		public FullDateTimePickerTimeFormat TimeFormat
@@ -49,38 +111,35 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return timeFormat; }
 			set
 			{
-				timeFormat = value;
-				switch (value)
+				if (timeFormat != value)
 				{
-					case FullDateTimePickerTimeFormat.ShortTime:
-						dateTimePickerTime.Format = DateTimePickerFormat.Custom;
-						dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortTimePattern;
-						dateTimePickerTime.Visible = true;
-						break;
-					case FullDateTimePickerTimeFormat.Hidden:
-						//dateTimePickerTime.Value = dateTimePickerTime.Value.Date;
-						dateTimePickerTime.Visible = false;
-						break;
-					case FullDateTimePickerTimeFormat.LongTime:
-					default:
-						dateTimePickerTime.Format = DateTimePickerFormat.Time;
-						dateTimePickerTime.Visible = true;
-						break;
+					timeFormat = value;
+					switch (value)
+					{
+						case FullDateTimePickerTimeFormat.ShortTime:
+							dateTimePickerTime.Format = DateTimePickerFormat.Custom;
+							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortTimePattern;
+							dateTimePickerTime.Visible = true;
+							break;
+						case FullDateTimePickerTimeFormat.Hidden:
+							//dateTimePickerTime.Value = dateTimePickerTime.Value.Date;
+							dateTimePickerTime.Visible = false;
+							break;
+						case FullDateTimePickerTimeFormat.LongTime:
+						default:
+							dateTimePickerTime.Format = DateTimePickerFormat.Time;
+							dateTimePickerTime.Visible = true;
+							break;
+					}
 				}
 			}
 		}
 
 		/// <summary>
-		/// Occurs when the <see cref="Value"/> property changes.
-		/// </summary>
-		[Category("Action"), Description("Occurs when the Value property changes.")]
-		public event EventHandler ValueChanged;
-
-		/// <summary>
 		/// Gets or sets how fields are processed when the Utc Checkbox is checked.
 		/// </summary>
 		/// <value>The UTC check behavior.</value>
-		[DefaultValue(0), Category("Behavior"), Description("Determines how to process fields when Utc Checkbox is checked")]
+		[DefaultValue(FieldConversionUtcCheckBehavior.ConvertLocalToUtc), Category("Behavior"), Description("Determines how to process fields when Utc Checkbox is checked")]
 		public FieldConversionUtcCheckBehavior UtcCheckBehavior
 		{
 			get { return utcBehavior; }
@@ -91,57 +150,71 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the UTC prompt.
 		/// </summary>
 		/// <value>The UTC prompt.</value>
-		[RefreshProperties(RefreshProperties.Repaint), DefaultValue("Synchronize across time zones"), Category("Behavior")]
-        public string UTCPrompt
-        {
-            get { return utcPrompt; }
-            set
-            {
-                utcPrompt = value;
-                if (string.IsNullOrEmpty(utcPrompt))
-                {
-					utcCheckBox.Checked = false;
-					utcCheckBox.Visible = false;
+		[RefreshProperties(RefreshProperties.Repaint), DefaultValue("Synchronize across time zones"), Category("Behavior"), Localizable(true), Bindable(true)]
+		public string UTCPrompt
+		{
+			get { return utcPrompt; }
+			set
+			{
+				if (utcPrompt != value)
+				{
+					utcPrompt = value;
+					if (string.IsNullOrEmpty(utcPrompt))
+					{
+						utcCheckBox.Checked = false;
+						utcCheckBox.Visible = false;
+					}
+					else
+					{
+						utcCheckBox.Text = utcPrompt;
+						utcCheckBox.Checked = false;
+						utcCheckBox.Visible = true;
+					}
 				}
-                else
-                {
-                    utcCheckBox.Text = utcPrompt;
-                    utcCheckBox.Checked = false;
-					utcCheckBox.Visible = true;
-				}
-            }
-        }
-
-        // Properties
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the value.
 		/// </summary>
 		/// <value>The value.</value>
-        [DefaultValue(0L), Category("Data")]
-        public DateTime Value
-        {
-            get
-            {
-                this.ControlsToData();
-                return this.currentValue;
-            }
-            set
-            {
-                this.currentValue = value;
-                this.DataToControls();
-            }
-        }
+		[Category("Data"), RefreshProperties(RefreshProperties.All), Bindable(true)]
+		public DateTime Value
+		{
+			get
+			{
+				return this.currentValue;
+			}
+			set
+			{
+				bool newVal = this.currentValue != value;
+				if (newVal || !this.userHasSetValue)
+				{
+					this.currentValue = value;
+					this.userHasSetValue = true;
+					this.initializing = true;
+					this.DataToControls();
+					this.initializing = false;
+					if (newVal)
+						OnValueChanged(EventArgs.Empty);
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets a value indicating whether value is UTC.
 		/// </summary>
 		/// <value><c>true</c> if value is UTC; otherwise, <c>false</c>.</value>
-        [Browsable(false)]
-        public bool ValueIsUTC
-        {
-            get { return this.currentValue.Kind == DateTimeKind.Utc; }
-        }
+		[Browsable(false)]
+		public bool ValueIsUTC
+		{
+			get { return this.currentValue.Kind == DateTimeKind.Utc; }
+		}
+
+		internal bool ShouldSerializeValue()
+		{
+			return this.userHasSetValue;
+		}
 
 		/// <summary>
 		/// Raises the <see cref="E:ValueChanged"/> event.
@@ -154,14 +227,17 @@ namespace Microsoft.Win32.TaskScheduler
 				h(this, EventArgs.Empty);
 		}
 
-        protected void SelectDate()
-        {
-            this.dateTimePickerDate.Select();
-        }
+		/// <summary>
+		/// Selects the date control.
+		/// </summary>
+		protected void SelectDate()
+		{
+			this.dateTimePickerDate.Select();
+		}
 
-        private void ControlsToData()
-        {
-            DateTime time = this.dateTimePickerDate.Value;
+		private void ControlsToData()
+		{
+			DateTime time = this.dateTimePickerDate.Value;
 			if (timeFormat != FullDateTimePickerTimeFormat.Hidden)
 				time += this.dateTimePickerTime.Value.TimeOfDay;
 			if (!utcCheckBox.Checked)
@@ -173,37 +249,45 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
 			}
-        }
+		}
 
-        private void DataToControls()
-        {
-            this.dateTimePickerDate.Value = this.currentValue.Date;
-            this.dateTimePickerTime.Value = this.currentValue;
+		private void DataToControls()
+		{
+			this.dateTimePickerDate.Value = this.currentValue.Date;
+			this.dateTimePickerTime.Value = this.currentValue;
 			this.utcCheckBox.Checked = this.currentValue.Kind != DateTimeKind.Unspecified;
-        }
+		}
 
-        private void FullDateTimePicker_Load(object sender, EventArgs e)
-        {
-            SetRightToLeft();
-        }
+		private void FullDateTimePicker_Load(object sender, EventArgs e)
+		{
+			SetRightToLeft();
+		}
 
-        private void FullDateTimePicker_RightToLeftChanged(object sender, EventArgs e)
-        {
-            SetRightToLeft();
-        }
+		private void FullDateTimePicker_RightToLeftChanged(object sender, EventArgs e)
+		{
+			SetRightToLeft();
+		}
 
-        private void SetRightToLeft()
-        {
-            RightToLeft rightToLeftProperty = ControlProcessing.GetRightToLeftProperty(this);
-            this.dateTimePickerDate.RightToLeft = rightToLeftProperty;
-            this.dateTimePickerDate.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
-            this.dateTimePickerTime.RightToLeft = rightToLeftProperty;
-            this.dateTimePickerTime.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
-        }
+		private void ResetValue()
+		{
+			this.Value = DateTime.Now;
+			this.userHasSetValue = false;
+		}
+
+		private void SetRightToLeft()
+		{
+			RightToLeft rightToLeftProperty = this.GetRightToLeftProperty();
+			this.dateTimePickerDate.RightToLeft = rightToLeftProperty;
+			this.dateTimePickerDate.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
+			this.dateTimePickerTime.RightToLeft = rightToLeftProperty;
+			this.dateTimePickerTime.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
+		}
 
 		private void subControl_ValueChanged(object sender, EventArgs e)
 		{
-			OnValueChanged(e);
+			ControlsToData();
+			if (!initializing)
+				OnValueChanged(e);
 		}
-    }
+	}
 }

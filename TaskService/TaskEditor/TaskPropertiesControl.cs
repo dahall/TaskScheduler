@@ -15,13 +15,15 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static global::System.Resources.ResourceManager taskSchedResources;
 
 		private bool editable = false;
-
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
 		private bool onAssignment = false;
+		private string runTimesTaskName = null;
 		private TaskService service = null;
+		private bool showRunTimesTab = true;
 		private Task task = null;
 		private TaskDefinition td = null;
+		private TabPage tempRunTimesTabPage = null;
 		private bool v2 = true;
 
 		static TaskPropertiesControl()
@@ -103,6 +105,36 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Run Times' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Run Times tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown.")]
+		public bool ShowRunTimesTab
+		{
+			get
+			{
+				return showRunTimesTab;
+			}
+			set
+			{
+				if (value == showRunTimesTab || this.DesignMode == true)
+					return;
+
+				if (value)
+				{
+					tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempRunTimesTabPage);
+					tempRunTimesTabPage = null;
+				}
+				else
+				{
+					tempRunTimesTabPage = runTimesTab;
+					tabControl.TabPages.Remove(runTimesTab);
+				}
+				showRunTimesTab = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
 		/// </summary>
 		/// <value>The task.</value>
@@ -141,7 +173,7 @@ namespace Microsoft.Win32.TaskScheduler
 				td = value;
 				onAssignment = true;
 				IsV2 = td.Settings.Compatibility == TaskCompatibility.V2;
-				tabControl1.SelectedIndex = 0;
+				tabControl.SelectedIndex = 0;
 
 				this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
 				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
@@ -150,7 +182,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 				// Set General tab
 				SetUserControls(td.Principal.LogonType);
-				if (task != null) taskNameText.Text = task.Name;
+				taskNameText.Text = task != null ? task.Name : string.Empty;
+				taskLocationText.Text = GetTaskLocation();
 				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
 				taskDescText.Text = td.RegistrationInfo.Description;
 				taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
@@ -251,6 +284,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(TaskService service)
 		{
 			this.TaskService = service;
+			this.task = null;
 			this.TaskDefinition = service.NewTask();
 		}
 
@@ -418,6 +452,13 @@ namespace Microsoft.Win32.TaskScheduler
 				availableConnectionsCombo.SelectedText = td.Settings.NetworkSettings.Name;
 		}
 
+		private string GetTaskLocation()
+		{
+			if (task == null || !IsV2)
+				return @"\";
+			return System.IO.Path.GetDirectoryName(task.Path);
+		}
+
 		private void historyBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
 			TaskEventLog log = new TaskEventLog(task.Path);
@@ -481,6 +522,45 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 			SetUserControls(td.Principal.LogonType);
+		}
+
+		private void runTimesTab_Enter(object sender, EventArgs e)
+		{
+			if (task == null)
+				return;
+
+			Task tempTask = null;
+			try
+			{
+				// Create a temporary task using current definition
+				runTimesTaskName = "TempTask-" + Guid.NewGuid().ToString();
+				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, this.TaskDefinition);
+				// Disable, set only action to non-action, hide, register, re-enable, show
+				tempTask.Enabled = false;
+				tempTask.Definition.Actions.Clear();
+				tempTask.Definition.Actions.Add(new ExecAction("rundll32.exe"));
+				tempTask.Definition.Settings.Hidden = true;
+				tempTask.RegisterChanges();
+				taskRunTimesControl1.Show();
+				tempTask.Enabled = true;
+				taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now + TimeSpan.FromDays(365));
+			}
+			catch (Exception ex)
+			{
+				// On error, post and delete temporary task
+				runTimesErrorLabel.Text = ex.ToString();
+				taskRunTimesControl1.Hide();
+				runTimesTab_Leave(sender, e);
+			}
+		}
+
+		private void runTimesTab_Leave(object sender, EventArgs e)
+		{
+			if (runTimesTaskName != null)
+			{
+				service.RootFolder.DeleteTask(runTimesTaskName);
+				runTimesTaskName = null;
+			}
 		}
 
 		private void SetActionButtonState()
@@ -739,10 +819,10 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			bool isVistaPlus = System.Environment.OSVersion.Version.Major >= 6;
-			if (tabControl1.TabPages.Contains(historyTab) && !isVistaPlus)
-				tabControl1.TabPages.Remove(historyTab);
-			else if (!tabControl1.TabPages.Contains(historyTab) && isVistaPlus)
-				tabControl1.TabPages.Add(historyTab);
+			if (tabControl.TabPages.Contains(historyTab) && !isVistaPlus)
+				tabControl.TabPages.Remove(historyTab);
+			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
+				tabControl.TabPages.Add(historyTab);
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
@@ -833,10 +913,6 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!alreadyOnAssigment)
 					onAssignment = false;
 			}
-		}
-
-		private void UpdatePrincipal()
-		{
 		}
 	}
 }

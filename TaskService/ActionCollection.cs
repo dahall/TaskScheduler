@@ -110,6 +110,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents the actions in this collection.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents the actions in this collection.
+		/// </returns>
+		public override string ToString()
+		{
+			if (this.Count == 1)
+				return this[0].ToString();
+			if (this.Count > 1)
+				return Properties.Resources.MultipleActions;
+			return string.Empty;
+		}
+
+		/// <summary>
 		/// Gets or sets a an action at the specified index.
 		/// </summary>
 		/// <value>The zero-based index of the action to get or set.</value>

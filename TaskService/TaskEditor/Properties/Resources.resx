@@ -276,4 +276,10 @@
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
     <value>Task Run Times ({0})</value>
   </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>The operation completed successfully. (0x0)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Never</value>
+  </data>
 </root>

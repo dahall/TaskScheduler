@@ -135,24 +135,24 @@ namespace Microsoft.Win32.TaskScheduler
 			throw new NotV1SupportedException();
 		}
 
-		/*public Task GetTask(string Path)
+		/// <summary>
+		/// Gets a collection of all the tasks in the folder whose name matches the optional <paramref name="filter"/>.
+		/// </summary>
+		/// <param name="filter">The optional name filter expression.</param>
+		/// <returns>Collection of all matching tasks.</returns>
+		public TaskCollection GetTasks(System.Text.RegularExpressions.Regex filter = null)
 		{
 			if (v2Folder != null)
-				return new Task(v2Folder.GetTask(Path));
-			throw new NotImplementedException();
-		}*/
+				return new TaskCollection(this, v2Folder.GetTasks(1), filter);
+			return new TaskCollection(this.TaskService, filter);
+		}
 
 		/// <summary>
 		/// Gets a collection of all the tasks in the folder.
 		/// </summary>
 		public TaskCollection Tasks
 		{
-			get
-			{
-				if (v2Folder != null)
-					return new TaskCollection(this, v2Folder.GetTasks(1));
-				return new TaskCollection(this.TaskService);
-			}
+			get { return GetTasks(); }
 		}
 
 		/// <summary>
@@ -197,7 +197,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition)
 		{
-			return RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate, definition.Principal.UserId, null, definition.Principal.LogonType, null);
+			return RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate,
+				definition.Principal.LogonType == TaskLogonType.Group ? definition.Principal.GroupId : definition.Principal.UserId,
+				null, definition.Principal.LogonType, null);
 		}
 
 		/// <summary>
@@ -313,6 +315,17 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Folder.SetSecurityDescriptor(sddlForm, (int)includeSections);
 			else
 				throw new NotV1SupportedException();
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			return this.Path;
 		}
 	}
 }

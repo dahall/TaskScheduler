@@ -7,6 +7,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides access to the Task Scheduler service for managing registered tasks.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(TaskService)), Description("Provides access to the Task Scheduler service.")]
 	public sealed class TaskService : Component, IDisposable, ISupportInitialize
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
@@ -34,35 +35,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!base.DesignMode)
 				Connect();
 		}
-/*
-		/// <summary>
-		/// Creates a new instance of a TaskService connecting to a remote machine as the current user.
-		/// </summary>
-		/// <param name="targetServer">The target server.</param>
-		public TaskService(string targetServer)
-		{
-			this.targetServer = targetServer;
-			ResetHighestSupportedVersion();
-			Connect();
-		}
 
-		/// <summary>
-		/// Creates a new instance of a TaskService connecting to a remote machine as the specified user.
-		/// </summary>
-		/// <param name="targetServer">The target server.</param>
-		/// <param name="userName">Name of the user.</param>
-		/// <param name="accountDomain">The account domain.</param>
-		/// <param name="password">The password.</param>
-		public TaskService(string targetServer, string userName , string accountDomain, string password)
-		{
-			this.targetServer = targetServer;
-			this.userName = userName;
-			this.userDomain = accountDomain;
-			this.userPassword = password;
-			ResetHighestSupportedVersion();
-			Connect();
-		}
-*/
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskService"/> class.
 		/// </summary>
@@ -132,7 +105,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the highest version of Task Scheduler that a computer supports.
 		/// </summary>
-		[TypeConverter(typeof(VersionConverter))]
+		[TypeConverter(typeof(VersionConverter)), Description("Highest version of library that should be used.")]
 		public Version HighestSupportedVersion
 		{
 			get { return maxVer; }
@@ -160,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
 		/// </summary>
-		[DefaultValue((string)null)]
+		[DefaultValue((string)null), Description("The name of the computer to connect to.")]
 		public string TargetServer
 		{
 			get { return targetServer; }
@@ -178,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user account domain to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user account domain.</value>
-		[DefaultValue((string)null)]
+		[DefaultValue((string)null), Description("The user account domain to be used when connecting.")]
 		public string UserAccountDomain
 		{
 			get { return ShouldSerializeUserAccountDomain() ? userDomain : null; }
@@ -196,7 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user name.</value>
-		[DefaultValue((string)null)]
+		[DefaultValue((string)null), Description("The user name to be used when connecting.")]
 		public string UserName
 		{
 			get { return ShouldSerializeUserName() ? userName : null; }
@@ -214,7 +187,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user password to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user password.</value>
-		[DefaultValue((string)null)]
+		[DefaultValue((string)null), Description("The user password to be used when connecting.")]
 		public string UserPassword
 		{
 			get { return userPassword; }
@@ -263,6 +236,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Register the task in the root folder
 			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);
+		}
+
+		/// <summary>
+		/// Finds a task given a name and standard wildcards.
+		/// </summary>
+		/// <param name="name">The task name. This can include the wildcards * or ?.</param>
+		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
+		/// <returns>A <see cref="Task"/> if one matches <paramref name="name"/>, otherwise NULL.</returns>
+		public Task FindTask(string name, bool searchAllFolders = true)
+		{
+			return FindTaskInFolder(this.RootFolder, new Wildcard(name), searchAllFolders);
 		}
 
 		/// <summary>
@@ -428,6 +412,30 @@ namespace Microsoft.Win32.TaskScheduler
 					maxVer = v1Ver;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Finds the task in folder.
+		/// </summary>
+		/// <param name="fld">The folder.</param>
+		/// <param name="taskName">The wildcard expression to compare task names with.</param>
+		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
+		/// <returns>A <see cref="Task"/> if one matches <paramref name="taskName"/>, otherwise NULL.</returns>
+		private Task FindTaskInFolder(TaskFolder fld, System.Text.RegularExpressions.Regex taskName, bool recurse = true)
+		{
+			foreach (var t in fld.GetTasks(taskName))
+				return t;
+
+			if (recurse)
+			{
+				Task task = null;
+				foreach (var f in fld.SubFolders)
+				{
+					if ((task = FindTaskInFolder(f, taskName, recurse)) != null)
+						return task;
+				}
+			}
+			return null;
 		}
 
 		private Version GetV2Version()

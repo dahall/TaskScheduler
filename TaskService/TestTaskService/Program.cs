@@ -34,6 +34,9 @@ namespace TestTaskService
 				case 'S':
 					ShortTest(newArgs);
 					break;
+				case 'M':
+					MMCTest(newArgs);
+					break;
 				default:
 					LongTest(newArgs);
 					break;
@@ -176,11 +179,12 @@ namespace TestTaskService
 					//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 					// Create a trigger that will fire the task at this time every other day
-					DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+					/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 					dt.Repetition.Duration = TimeSpan.FromHours(4);
 					dt.Repetition.Interval = TimeSpan.FromHours(1);
 
-					td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
+					td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
+					td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
 
 					// Create an action that will launch Notepad whenever the trigger fires
 					td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
@@ -190,6 +194,7 @@ namespace TestTaskService
 					Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 					System.Threading.Thread.Sleep(1000);
 					Console.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
+					Console.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
 
 					// Retrieve the task, add a trigger and save it.
 					t = ts.GetTask(taskName);
@@ -230,9 +235,11 @@ namespace TestTaskService
 				}
 			}
 
+			const string filter = "";
 			TaskFolder tf = ts.RootFolder;
-			Console.WriteLine("\nRoot folder tasks ({0}):", tf.Tasks.Count);
-			foreach (Task t in tf.Tasks)
+			TaskCollection tasks = tf.GetTasks(new Wildcard(filter));
+			Console.WriteLine("\nRoot folder tasks matching \"{1}\" ({0}):", tasks.Count, filter);
+			foreach (Task t in tasks)
 			{
 				try
 				{
@@ -245,7 +252,13 @@ namespace TestTaskService
 				catch { }
 			}
 
-			Console.WriteLine("\n***Checking folder enum***");
+			Console.WriteLine("\n***Finding defrag task***");
+			Task ft = ts.FindTask("*defrag*");
+			if (ft != null)
+				Console.WriteLine("Defrag task found at " + ft.Path);
+			else
+				Console.WriteLine("Defrag task not found.");
+
 			TaskFolderCollection tfs = tf.SubFolders;
 			if (tfs.Count > 0)
 			{
@@ -416,6 +429,13 @@ namespace TestTaskService
 
 			DisplayTask(runningTask, true);
 			tf.DeleteTask("Test");
+		}
+
+		static void MMCTest(string[] newArgs)
+		{
+			System.Windows.Forms.Application.EnableVisualStyles();
+			TSMMCMockup form = new TSMMCMockup();
+			form.ShowDialog();
 		}
 
 		static TaskDefinition DisplayTask(Task t, bool editable)

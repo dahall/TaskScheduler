@@ -264,5 +264,20 @@ namespace Microsoft.Win32.TaskScheduler
 			else
 				v1Task.DeleteTrigger((ushort)index); //Remove the trigger from the Task Scheduler
 		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents the triggers in this collection.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents the triggers in this collection.
+		/// </returns>
+		public override string ToString()
+		{
+			if (this.Count == 1)
+				return this[0].ToString();
+			if (this.Count > 1)
+				return Properties.Resources.MultipleTriggers;
+			return string.Empty;
+		}
 	}
 }

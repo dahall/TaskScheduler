@@ -253,8 +253,6 @@
 			resources.ApplyResources(this.dailyStartTimePicker, "dailyStartTimePicker");
 			this.dailyStartTimePicker.Name = "dailyStartTimePicker";
 			this.dailyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.dailyStartTimePicker.UTCPrompt = null;
-			this.dailyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// label3
 			// 
@@ -329,8 +327,6 @@
 			resources.ApplyResources(this.oneTimeStartTimePicker, "oneTimeStartTimePicker");
 			this.oneTimeStartTimePicker.Name = "oneTimeStartTimePicker";
 			this.oneTimeStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.oneTimeStartTimePicker.UTCPrompt = null;
-			this.oneTimeStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// oneTimeStartLabel
 			// 
@@ -356,8 +352,6 @@
 			resources.ApplyResources(this.weeklyStartTimePicker, "weeklyStartTimePicker");
 			this.weeklyStartTimePicker.Name = "weeklyStartTimePicker";
 			this.weeklyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.weeklyStartTimePicker.UTCPrompt = null;
-			this.weeklyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// label4
 			// 
@@ -538,8 +532,6 @@
 			resources.ApplyResources(this.monthlyStartTimePicker, "monthlyStartTimePicker");
 			this.monthlyStartTimePicker.Name = "monthlyStartTimePicker";
 			this.monthlyStartTimePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc;
-			this.monthlyStartTimePicker.UTCPrompt = null;
-			this.monthlyStartTimePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
 			// 
 			// label7
 			// 
