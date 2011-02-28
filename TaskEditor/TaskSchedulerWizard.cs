@@ -52,6 +52,13 @@ namespace Microsoft.Win32.TaskScheduler
 			set { nameText.Text = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the <see cref="TaskService"/>.
+		/// </summary>
+		/// <value>The task service.</value>
+		[DefaultValue(null)]
+		public TaskService TaskService { get; set; }
+
 		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
 			actionSelectPage.AllowNext = (actionSelectionList.SelectedIndex >= 0);
@@ -302,27 +309,35 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void wizardControl1_Finished(object sender, System.EventArgs e)
 		{
-			using (TaskService ts = new TaskService())
+			bool myTS = false;
+
+			if (this.TaskService == null)
 			{
-				TaskDefinition td = ts.NewTask();
-				td.Data = TaskName;
-				td.RegistrationInfo.Description = descText.Text;
-				td.Triggers.Add(trigger);
-				td.Actions.Add(action);
-				this.TaskDefinition = td;
-				if (RegisterTaskOnFinish || openDlgAfterCheck.Checked)
+				this.TaskService = new TaskService();
+				myTS = true;
+			}
+
+			TaskDefinition td = this.TaskService.NewTask();
+			td.Data = TaskName;
+			td.RegistrationInfo.Description = descText.Text;
+			td.Triggers.Add(trigger);
+			td.Actions.Add(action);
+			this.TaskDefinition = td;
+			if (RegisterTaskOnFinish || openDlgAfterCheck.Checked)
+			{
+				Task t = this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, td);
+				if (openDlgAfterCheck.Checked)
 				{
-					Task t = ts.RootFolder.RegisterTaskDefinition(TaskName, td);
-					if (openDlgAfterCheck.Checked)
-					{
-						TaskEditDialog dlg = new TaskEditDialog();
-						dlg.Editable = true;
-						dlg.Initialize(t);
-						dlg.RegisterTaskOnAccept = true;
-						dlg.ShowDialog(this.ParentForm);
-					}
+					TaskEditDialog dlg = new TaskEditDialog();
+					dlg.Editable = true;
+					dlg.Initialize(t);
+					dlg.RegisterTaskOnAccept = true;
+					dlg.ShowDialog(this.ParentForm);
 				}
 			}
+
+			if (myTS)
+				this.TaskService = null;
 		}
 
 		private void onEventLogCombo_SelectedIndexChanged(object sender, System.EventArgs e)

@@ -362,7 +362,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void actionListView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			actionEditButton_Click(sender, EventArgs.Empty);
+			if (editable)
+				actionEditButton_Click(sender, EventArgs.Empty);
 		}
 
 		private void actionListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -866,7 +867,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			triggerEditButton_Click(sender, EventArgs.Empty);
+			if (editable)
+				triggerEditButton_Click(sender, EventArgs.Empty);
 		}
 
 		private void triggerListView_SelectedIndexChanged(object sender, EventArgs e)
