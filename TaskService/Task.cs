@@ -787,7 +787,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.Security.SecurityException">Thrown if task was previously registered with a password.</exception>
 		public void RegisterChanges()
 		{
-			if (this.Definition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.Definition.Principal.LogonType == TaskLogonType.Password || this.Definition.Principal.LogonType == TaskLogonType.Group)
+			if (this.Definition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.Definition.Principal.LogonType == TaskLogonType.Password)
 				throw new System.Security.SecurityException("Tasks which have been registered previously with stored passwords must use the TaskFolder.RegisterTaskDefinition method for updates.");
 			TaskService.GetFolder(System.IO.Path.GetDirectoryName(this.Path)).RegisterTaskDefinition(this.Name, this.Definition);
 		}

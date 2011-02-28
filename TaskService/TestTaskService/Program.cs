@@ -1,14 +1,31 @@
 ﻿using System;
 using Microsoft.Win32.TaskScheduler;
+using System.Windows.Forms;
 
 namespace TestTaskService
 {
 	class Program
 	{
 		private static TaskEditDialog editorForm;
+		public delegate void TestMethod(TaskService ts, System.IO.TextWriter output, params string[] arg);
 
 		[STAThread]
 		static void Main(string[] args)
+		{
+			if (args.Length > 0 && char.ToUpper(args[0][0]) == 'C')
+			{
+				string[] newArgs = new string[args.Length - 1];
+				args.CopyTo(newArgs, 1);
+				ConsoleMain(newArgs);
+				return;
+			}
+
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new Main());
+		}
+
+		static void ConsoleMain(string[] args)
 		{
 			int init = 0;
 			char test = 'L';
@@ -20,47 +37,51 @@ namespace TestTaskService
 			string[] newArgs = new string[] { args.Length > init ? args[init] : "2", null, null, null, null };
 			for (int i = init + 1; i < init + 5; i++)
 				if (args.Length > i) newArgs[i] = args[i];
-			switch (test)
+
+			System.Windows.Forms.Application.EnableVisualStyles();
+			using (TaskService ts = new TaskService(newArgs[1], newArgs[2], newArgs[3], newArgs[4], newArgs[0] == "1"))
 			{
-				case 'W':
-					WizardTest(newArgs);
-					break;
-				case 'E':
-					EditorTest(newArgs);
-					break;
-				case 'F':
-					FindActionString(newArgs);
-					break;
-				case 'S':
-					ShortTest(newArgs);
-					break;
-				case 'M':
-					MMCTest(newArgs);
-					break;
-				default:
-					LongTest(newArgs);
-					break;
+				switch (test)
+				{
+					case 'W':
+						WizardTest(ts, Console.Out);
+						break;
+					case 'E':
+						EditorTest(ts, Console.Out);
+						break;
+					case 'F':
+						FindActionString(ts, Console.Out, newArgs[5]);
+						Console.ReadKey();
+						break;
+					case 'S':
+						ShortTest(ts, Console.Out);
+						Console.ReadKey();
+						break;
+					case 'M':
+						MMCTest(ts, Console.Out);
+						break;
+					default:
+						LongTest(ts, Console.Out);
+						Console.ReadKey();
+						break;
+				}
 			}
 		}
 
-		static void FindActionString(string[] args)
+		internal static void FindActionString(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			try
 			{
-				using (TaskService ts = new TaskService())
-				{
-					TaskFolder tf = ts.RootFolder;
-					FindActionStringInFolder(tf, args[0]);
-				}
+				TaskFolder tf = ts.RootFolder;
+				FindActionStringInFolder(output, tf, arg[0]);
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
+				output.WriteLine(ex.ToString());
 			}
-			Console.ReadKey(false);
 		}
 
-		static void FindActionStringInFolder(TaskFolder tf, string arg)
+		static void FindActionStringInFolder(System.IO.TextWriter output, TaskFolder tf, string arg)
 		{
 			foreach (Task t in tf.Tasks)
 			{
@@ -75,7 +96,7 @@ namespace TestTaskService
 								/*if (((ComHandlerAction)action).ClassId.ToString().IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
 									((ComHandlerAction)action).Data.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)*/
 									found = true;
-								Console.WriteLine(" > " + action.ToString());
+								output.WriteLine(" > " + action.ToString());
 								break;
 							case TaskActionType.Execute:
 								if (((ExecAction)action).Path.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
@@ -104,7 +125,7 @@ namespace TestTaskService
 					}
 					if (found)
 					{
-						Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Path, t.State);
+						output.WriteLine("+ {0}, {1} ({2})", t.Name, t.Path, t.State);
 					}
 				}
 				catch { }
@@ -116,180 +137,169 @@ namespace TestTaskService
 				try
 				{
 					foreach (TaskFolder sf in tfs)
-						FindActionStringInFolder(sf, arg);
+						FindActionStringInFolder(output, sf, arg);
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine(ex.ToString());
+					output.WriteLine(ex.ToString());
 				}
 			}
 		}
 
-		static void WizardTest(string[] args)
+		internal static void WizardTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			System.Windows.Forms.Application.EnableVisualStyles();
 			TaskSchedulerWizard wiz = new TaskSchedulerWizard();
+			wiz.TaskService = ts;
 			wiz.ShowDialog();
 		}
 
-		static void EditorTest(string[] args)
+		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			// Get the service on the local machine
 			try
 			{
-				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
+				// Create a new task definition and assign properties
+				const string taskName = "Test";
+				ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
+
+				// Edit task
+				Task t = ts.GetTask(taskName);
+				TaskDefinition td = DisplayTask(t, true);
+
+				// Register then show task again
+				while (td != null)
 				{
-					// Create a new task definition and assign properties
-					const string taskName = "Test";
-					ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
-
-					// Edit task
-					Task t = ts.GetTask(taskName);
-					TaskDefinition td = DisplayTask(t, true);
-
-					// Register then show task again
-					while (td != null)
-					{
-						//ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
-						t = ts.GetTask(taskName);
-						td = DisplayTask(t, true);
-					}
-
-					// Remove the task we just created
-					ts.RootFolder.DeleteTask(taskName);
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.ToString());
-				Console.ReadKey(false);
-			}
-		}
-
-		static void ShortTest(string[] args)
-		{
-			// Get the service on the local machine
-			try
-			{
-				using (TaskService ts = new TaskService(args[1], args[2], args[3], args[4], args[0] == "1"))
-				{
-					// Create a new task definition and assign properties
-					TaskDefinition td = ts.NewTask();
-					td.RegistrationInfo.Description = "Does something";
-					//td.Principal.LogonType = TaskLogonType.InteractiveToken;
-
-					// Create a trigger that will fire the task at this time every other day
-					/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
-					dt.Repetition.Duration = TimeSpan.FromHours(4);
-					dt.Repetition.Interval = TimeSpan.FromHours(1);
-
-					td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
-					td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
-
-					// Create an action that will launch Notepad whenever the trigger fires
-					td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
-
-					// Register the task in the root folder
-					const string taskName = "Test";
-					Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
-					System.Threading.Thread.Sleep(1000);
-					Console.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
-					Console.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-
-					// Retrieve the task, add a trigger and save it.
+					//ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
 					t = ts.GetTask(taskName);
-					t.Definition.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
-					t.RegisterChanges();
-
-					// Remove the task we just created
-					Console.ReadKey(false);
-					ts.RootFolder.DeleteTask(taskName);
+					td = DisplayTask(t, true);
 				}
+
+				// Remove the task we just created
+				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
-				Console.ReadKey(false);
+				output.WriteLine(ex.ToString());
 			}
 		}
 
-		static void LongTest(string[] args)
+		internal static void ShortTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
+		{
+			// Get the service on the local machine
+			try
+			{
+				// Create a new task definition and assign properties
+				TaskDefinition td = ts.NewTask();
+				td.RegistrationInfo.Description = "Does something";
+				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
+
+				// Create a trigger that will fire the task at this time every other day
+				/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				dt.Repetition.Duration = TimeSpan.FromHours(4);
+				dt.Repetition.Interval = TimeSpan.FromHours(1);
+
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
+				td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
+
+				// Create an action that will launch Notepad whenever the trigger fires
+				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+
+				// Register the task in the root folder
+				const string taskName = "Test";
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+				System.Threading.Thread.Sleep(1000);
+				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
+				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+
+				// Retrieve the task, add a trigger and save it.
+				t = ts.GetTask(taskName);
+				t.Definition.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
+				t.RegisterChanges();
+
+				// Remove the task we just created
+				ts.RootFolder.DeleteTask(taskName);
+			}
+			catch (Exception ex)
+			{
+				output.WriteLine(ex.ToString());
+			}
+		}
+
+		internal static void LongTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-			int key = int.Parse(args[0]);
 
-			TaskService ts = new TaskService(args[1], args[2], args[3], args[4], key == 1);
 			Version ver = ts.HighestSupportedVersion;
 			bool newVer = (ver >= new Version(1, 2));
-			Console.WriteLine("Highest version: " + ver);
-			Console.WriteLine("Server: {0} ({1})", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected");
+			output.WriteLine("Highest version: " + ver);
+			output.WriteLine("Server: {0} ({1})", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected");
 
-			Console.WriteLine("Running tasks:");
+			output.WriteLine("Running tasks:");
 			foreach (RunningTask rt in ts.GetRunningTasks(true))
 			{
 				if (rt != null)
 				{
-					Console.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
+					output.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
 					if (ver.Minor > 0)
-						Console.WriteLine("  Current Action: " + rt.CurrentAction);
+						output.WriteLine("  Current Action: " + rt.CurrentAction);
 				}
 			}
 
 			const string filter = "";
 			TaskFolder tf = ts.RootFolder;
 			TaskCollection tasks = tf.GetTasks(new Wildcard(filter));
-			Console.WriteLine("\nRoot folder tasks matching \"{1}\" ({0}):", tasks.Count, filter);
+			output.WriteLine("\nRoot folder tasks matching \"{1}\" ({0}):", tasks.Count, filter);
 			foreach (Task t in tasks)
 			{
 				try
 				{
-					Console.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
+					output.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
 					foreach (Trigger trg in t.Definition.Triggers)
-						Console.WriteLine(" + {0}", trg);
+						output.WriteLine(" + {0}", trg);
 					foreach (var act in t.Definition.Actions)
-						Console.WriteLine(" = {0}", act);
+						output.WriteLine(" = {0}", act);
 				}
 				catch { }
 			}
 
-			Console.WriteLine("\n***Finding defrag task***");
+			output.WriteLine("\n***Finding defrag task***");
 			Task ft = ts.FindTask("*defrag*");
 			if (ft != null)
-				Console.WriteLine("Defrag task found at " + ft.Path);
+				output.WriteLine("Defrag task found at " + ft.Path);
 			else
-				Console.WriteLine("Defrag task not found.");
+				output.WriteLine("Defrag task not found.");
 
 			TaskFolderCollection tfs = tf.SubFolders;
 			if (tfs.Count > 0)
 			{
-				Console.WriteLine("\nSub folders:");
+				output.WriteLine("\nSub folders:");
 				try
 				{
 					foreach (TaskFolder sf in tfs)
-						Console.WriteLine("+ {0}", sf.Path);
+						output.WriteLine("+ {0}", sf.Path);
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine(ex.ToString());
+					output.WriteLine(ex.ToString());
 				}
 			}
 
 			if (newVer)
 			{
-				Console.WriteLine("\n***Checking folder retrieval***");
+				output.WriteLine("\n***Checking folder retrieval***");
 				try
 				{
 					TaskFolder sub = tf.SubFolders["Microsoft"];
-					Console.WriteLine("\nSubfolder path: " + sub.Path);
+					output.WriteLine("\nSubfolder path: " + sub.Path);
 				}
 				catch (NotSupportedException) { }
 				catch (Exception ex)
 				{
-					Console.WriteLine(ex.ToString());
+					output.WriteLine(ex.ToString());
 				}
 			}
 
-			Console.WriteLine("\n***Checking task creation***");
+			output.WriteLine("\n***Checking task creation***");
 			try
 			{
 				TaskDefinition td = ts.NewTask();
@@ -329,7 +339,7 @@ namespace TestTaskService
 					td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
 				}
 
-				if (key == 2)
+				if (newVer)
 				{
 					BootTrigger bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
 					if (newVer) bTrigger.Delay = TimeSpan.FromMinutes(5);
@@ -341,24 +351,18 @@ namespace TestTaskService
 
 				if (newVer)
 				{
-					if (key == 2)
-					{
-						EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
-						eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
-						eTrigger.ValueQueries.Add("Name", "Value");
-					}
+					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
+					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
+					eTrigger.ValueQueries.Add("Name", "Value");
 
 					td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
-					if (key == 2)
-					{
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = user });
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect });
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect });
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = user });
-						td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock });
-					}
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = user });
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect });
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect });
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = user });
+					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock });
 				}
 
 				td.Triggers.Add(new IdleTrigger());
@@ -408,32 +412,31 @@ namespace TestTaskService
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
+				output.WriteLine(ex.ToString());
 			}
 
 			Task runningTask = tf.Tasks["Test"];
-			Console.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
+			output.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
 			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
 			if (times.Length > 0)
 			{
-				Console.WriteLine("\nNew task will run at the following times over the next week:");
+				output.WriteLine("\nNew task will run at the following times over the next week:");
 				foreach (DateTime dt in times)
-					Console.WriteLine("  {0}", dt);
+					output.WriteLine("  {0}", dt);
 			}
-			Console.WriteLine("\nNew task triggers:");
+			output.WriteLine("\nNew task triggers:");
 			for (int i = 0; i < runningTask.Definition.Triggers.Count; i++)
-				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Triggers[i]);
-			Console.WriteLine("\nNew task actions:");
+				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Triggers[i]);
+			output.WriteLine("\nNew task actions:");
 			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
-				Console.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
+				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
 			DisplayTask(runningTask, true);
 			tf.DeleteTask("Test");
 		}
 
-		static void MMCTest(string[] newArgs)
+		internal static void MMCTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			System.Windows.Forms.Application.EnableVisualStyles();
 			TSMMCMockup form = new TSMMCMockup();
 			form.ShowDialog();
 		}
@@ -441,10 +444,7 @@ namespace TestTaskService
 		static TaskDefinition DisplayTask(Task t, bool editable)
 		{
 			if (editorForm == null)
-			{
-				System.Windows.Forms.Application.EnableVisualStyles();
 				editorForm = new TaskEditDialog();
-			}
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = true;

@@ -94,6 +94,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task Task
 		{
 			get { return taskPropertiesControl1.Task; }
+			set { taskPropertiesControl1.Initialize(value); }
 		}
 
 		/// <summary>
@@ -112,6 +113,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskService TaskService
 		{
 			get { return taskPropertiesControl1.TaskService; }
+			set { taskPropertiesControl1.Initialize(value); }
 		}
 
 		private string GetServerString(TaskService service)

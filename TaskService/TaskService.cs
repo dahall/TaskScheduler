@@ -32,8 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskService()
 		{
 			ResetHighestSupportedVersion();
-			if (!base.DesignMode)
-				Connect();
+			Connect();
 		}
 
 		/// <summary>
@@ -61,7 +60,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false)]
 		public bool Connected
 		{
-			get { return v2 ? v2TaskService.Connected : true; }
+			get { return v2 ? v2TaskService.Connected : (v1TaskScheduler != null); }
 		}
 
 		/// <summary>
@@ -294,12 +293,18 @@ namespace Microsoft.Win32.TaskScheduler
 			return t;
 		}
 
-		void ISupportInitialize.BeginInit()
+		/// <summary>
+		/// Signals the object that initialization is starting.
+		/// </summary>
+		public void BeginInit()
 		{
 			initializing = true;
 		}
 
-		void ISupportInitialize.EndInit()
+		/// <summary>
+		/// Signals the object that initialization is complete.
+		/// </summary>
+		public void EndInit()
 		{
 			initializing = false;
 			Connect();
@@ -360,11 +365,20 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override void Dispose(bool disposing)
 		{
 			if (v2TaskService != null)
+			{
 				Marshal.ReleaseComObject(v2TaskService);
+				v2TaskService = null;
+			}
 			if (v1TaskScheduler != null)
+			{
 				Marshal.ReleaseComObject(v1TaskScheduler);
+				v1TaskScheduler = null;
+			}
 			if (v1Impersonation != null)
+			{
 				v1Impersonation.Dispose();
+				v1Impersonation = null;
+			}
 			base.Dispose(disposing);
 		}
 
@@ -377,6 +391,10 @@ namespace Microsoft.Win32.TaskScheduler
 				((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) ||
 				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
 			{
+				// Clear stuff if already connected
+				if (this.v2TaskService != null || this.v1TaskScheduler != null)
+					this.Dispose(true);
+
 				if (hasV2 && !forceV1)
 				{
 					v2 = true;
