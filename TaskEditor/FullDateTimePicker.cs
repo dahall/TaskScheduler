@@ -285,9 +285,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void subControl_ValueChanged(object sender, EventArgs e)
 		{
-			ControlsToData();
 			if (!initializing)
+			{
+				ControlsToData();
 				OnValueChanged(e);
+			}
 		}
 	}
 }
