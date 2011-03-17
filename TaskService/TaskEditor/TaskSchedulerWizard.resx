@@ -129,7 +129,7 @@
     <value>79, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 23</value>
+    <value>336, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameText.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>True</value>
   </data>
   <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 129</value>
+    <value>336, 129</value>
   </data>
   <data name="descText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -247,7 +247,7 @@
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +298,7 @@
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -316,7 +316,7 @@
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -481,7 +481,7 @@
     <value>actionSelectPage</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 239</value>
@@ -496,7 +496,7 @@
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 0</value>
@@ -514,7 +514,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -565,7 +565,7 @@
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="weeklyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -583,7 +583,7 @@
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -961,7 +961,7 @@
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 58</value>
@@ -976,7 +976,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -997,7 +997,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1018,7 +1018,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1039,7 +1039,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1153,7 +1153,7 @@
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.31713, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4087.34157, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1204,7 +1204,7 @@
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1381,7 +1381,7 @@
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1876,7 +1876,7 @@
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 239</value>
@@ -1891,7 +1891,7 @@
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2284,7 +2284,7 @@
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -2437,7 +2437,7 @@
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>537, 391</value>
@@ -2452,7 +2452,7 @@
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.4027.32550, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.0.4087.31230, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>

@@ -61,6 +61,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Action.
+        /// </summary>
+        internal static string ActionDlgEditCaption {
+            get {
+                return ResourceManager.GetString("ActionDlgEditCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Action.
+        /// </summary>
+        internal static string ActionDlgNewCaption {
+            get {
+                return ResourceManager.GetString("ActionDlgNewCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any connection.
         /// </summary>
         internal static string AnyConnection {
@@ -403,6 +421,24 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Trigger.
+        /// </summary>
+        internal static string TriggerDlgEditCaption {
+            get {
+                return ResourceManager.GetString("TriggerDlgEditCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Trigger.
+        /// </summary>
+        internal static string TriggerDlgNewCaption {
+            get {
+                return ResourceManager.GetString("TriggerDlgNewCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At startup.
         /// </summary>
         internal static string TriggerTypeBoot {
@@ -448,7 +484,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On schedule.
+        ///   Looks up a localized string similar to On a schedule.
         /// </summary>
         internal static string TriggerTypeSchedule {
             get {

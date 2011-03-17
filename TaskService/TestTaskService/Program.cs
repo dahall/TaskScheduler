@@ -160,7 +160,7 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
+				ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), RandomDelay = TimeSpan.FromDays(2), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
 
 				// Edit task
 				Task t = ts.GetTask(taskName);
@@ -310,7 +310,7 @@ namespace TestTaskService
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
 				td.Settings.DisallowStartIfOnBatteries = true;
-				//td.Settings.Enabled = false;
+				td.Settings.Enabled = false;
 				td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(2);
 				td.Settings.Hidden = false;
 				td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
@@ -390,10 +390,10 @@ namespace TestTaskService
 				TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
 				tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
-				if (newVer) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(15);
+				if (newVer) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
 				if (newVer) tTrigger.Id = "Time test";
-				tTrigger.Repetition.Duration = TimeSpan.FromMinutes(20);
-				tTrigger.Repetition.Interval = TimeSpan.FromMinutes(15);
+				tTrigger.Repetition.Duration = TimeSpan.FromMinutes(21);
+				tTrigger.Repetition.Interval = TimeSpan.FromMinutes(17);
 				tTrigger.Repetition.StopAtDurationEnd = true;
 
 				WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());

@@ -213,7 +213,7 @@
     <value>At task creation/modification</value>
   </data>
   <data name="TriggerTypeSchedule" xml:space="preserve">
-    <value>On schedule</value>
+    <value>On a schedule</value>
   </data>
   <data name="TriggerTypeSessionConnect" xml:space="preserve">
     <value>On connection to a user session</value>
@@ -281,5 +281,17 @@
   </data>
   <data name="Never" xml:space="preserve">
     <value>Never</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>Edit Action</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>New Action</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>Edit Trigger</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>New Trigger</value>
   </data>
 </root>

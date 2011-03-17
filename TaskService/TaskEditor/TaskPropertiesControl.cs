@@ -350,6 +350,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
 				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
+				dlg.Text = Properties.Resources.ActionDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					actionListView.Items.RemoveAt(idx);
@@ -374,6 +375,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
 			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
+			dlg.Text = Properties.Resources.ActionDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				td.Actions.Add(dlg.Action);
@@ -855,6 +857,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
 				dlg.TargetServer = TaskService.TargetServer;
+				dlg.Text = Properties.Resources.TriggerDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					triggerListView.Items.RemoveAt(idx);
@@ -880,6 +883,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
 			dlg.TargetServer = TaskService.TargetServer;
+			dlg.Text = Properties.Resources.TriggerDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				td.Triggers.Add(dlg.Trigger);

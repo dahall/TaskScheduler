@@ -171,12 +171,6 @@
   <data name="settingsTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>Buttons</value>
   </data>
-  <data name="schedStartDatePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedStartDatePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="schedStartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 7</value>
   </data>
@@ -186,11 +180,14 @@
   <data name="schedStartDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="schedStartDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;schedStartDatePicker.Name" xml:space="preserve">
     <value>schedStartDatePicker</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -796,7 +793,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -817,7 +814,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -838,7 +835,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -859,7 +856,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -1923,12 +1920,6 @@
   <data name="&gt;&gt;delaySpan.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="expireDatePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="expireDatePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="expireDatePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1941,23 +1932,20 @@
   <data name="expireDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
+  <data name="expireDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;expireDatePicker.Name" xml:space="preserve">
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="activateDatePicker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="activateDatePicker.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
   </data>
   <data name="activateDatePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1971,11 +1959,14 @@
   <data name="activateDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="activateDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="&gt;&gt;activateDatePicker.Name" xml:space="preserve">
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4052.26389, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4084.23494, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>

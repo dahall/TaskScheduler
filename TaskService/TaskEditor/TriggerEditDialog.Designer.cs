@@ -181,9 +181,7 @@
 			// 
 			resources.ApplyResources(this.schedStartDatePicker, "schedStartDatePicker");
 			this.schedStartDatePicker.Name = "schedStartDatePicker";
-			this.schedStartDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
-			this.schedStartDatePicker.UTCPrompt = null;
-			this.schedStartDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.schedStartDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 46, 672);
 			this.schedStartDatePicker.ValueChanged += new System.EventHandler(this.schedStartDatePicker_ValueChanged);
 			// 
 			// groupBox3
@@ -657,18 +655,14 @@
 			// 
 			resources.ApplyResources(this.expireDatePicker, "expireDatePicker");
 			this.expireDatePicker.Name = "expireDatePicker";
-			this.expireDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
-			this.expireDatePicker.UTCPrompt = null;
-			this.expireDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.expireDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 48, 186);
 			this.expireDatePicker.ValueChanged += new System.EventHandler(this.expireDatePicker_ValueChanged);
 			// 
 			// activateDatePicker
 			// 
 			resources.ApplyResources(this.activateDatePicker, "activateDatePicker");
 			this.activateDatePicker.Name = "activateDatePicker";
-			this.activateDatePicker.UtcCheckBehavior = Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
-			this.activateDatePicker.UTCPrompt = null;
-			this.activateDatePicker.Value = new System.DateTime(2009, 7, 30, 14, 15, 27, 75);
+			this.activateDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 48, 206);
 			this.activateDatePicker.ValueChanged += new System.EventHandler(this.activateDatePicker_ValueChanged);
 			// 
 			// durationLabel
