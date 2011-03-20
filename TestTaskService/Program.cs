@@ -311,15 +311,15 @@ namespace TestTaskService
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
 				td.Settings.DisallowStartIfOnBatteries = true;
 				td.Settings.Enabled = false;
-				td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(2);
+				td.Settings.ExecutionTimeLimit = TimeSpan.Zero; // FromHours(2);
 				td.Settings.Hidden = false;
 				td.Settings.IdleSettings.IdleDuration = TimeSpan.FromMinutes(20);
 				td.Settings.IdleSettings.RestartOnIdle = false;
 				td.Settings.IdleSettings.StopOnIdleEnd = false;
 				td.Settings.IdleSettings.WaitTimeout = TimeSpan.FromMinutes(10);
 				td.Settings.Priority = System.Diagnostics.ProcessPriorityClass.Normal;
-				td.Settings.RunOnlyIfIdle = false;
-				td.Settings.RunOnlyIfNetworkAvailable = false;
+				td.Settings.RunOnlyIfIdle = true;
+				td.Settings.RunOnlyIfNetworkAvailable = true;
 				td.Settings.StopIfGoingOnBatteries = true;
 				if (newVer)
 				{
@@ -328,15 +328,16 @@ namespace TestTaskService
 					td.RegistrationInfo.Source = "Test App";
 					td.RegistrationInfo.URI = new Uri("test://app");
 					td.RegistrationInfo.Version = new Version(0, 9);
-					td.Settings.AllowDemandStart = true;
-					td.Settings.AllowHardTerminate = true;
+					td.Settings.AllowDemandStart = false;
+					td.Settings.AllowHardTerminate = false;
 					td.Settings.Compatibility = TaskCompatibility.V2;
 					td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromMinutes(1);
 					td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
 					td.Settings.StartWhenAvailable = true;
-					td.Settings.WakeToRun = false;
+					td.Settings.WakeToRun = true;
 					td.Settings.RestartCount = 5;
 					td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
+					td.Settings.NetworkSettings.Id = new Guid("{99AF272D-BC5B-4F64-A5B7-8688392C13E6}");
 				}
 
 				if (newVer)
@@ -413,6 +414,7 @@ namespace TestTaskService
 			catch (Exception ex)
 			{
 				output.WriteLine(ex.ToString());
+				return;
 			}
 
 			Task runningTask = tf.Tasks["Test"];

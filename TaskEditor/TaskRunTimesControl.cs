@@ -110,12 +110,12 @@ namespace Microsoft.Win32.TaskScheduler
 			listBox1.DataSource = task == null ? null : task.GetRunTimes(this.StartDate, this.EndDate);
 		}
 
-		private bool ShouldSerializeEndDate()
+		internal bool ShouldSerializeEndDate()
 		{
 			return endDatePicker.ShouldSerializeValue();
 		}
 
-		private bool ShouldSerializeStartDate()
+		internal bool ShouldSerializeStartDate()
 		{
 			return startDatePicker.ShouldSerializeValue();
 		}

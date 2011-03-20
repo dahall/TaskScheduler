@@ -1,13 +1,21 @@
-﻿using System.Windows.Forms;
+﻿using System;
 using System.ComponentModel;
-using System;
+using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Dialog that allows tasks to be edited
 	/// </summary>
-	public partial class TaskEditDialog : Form
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task.")]
+	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+	[DesignTimeVisible(true)]
+	public partial class TaskEditDialog :
+#if DEBUG
+		Form
+#else
+		DialogBase
+#endif
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskEditDialog"/> class.
@@ -30,6 +38,93 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Editable = editable;
 			this.Initialize(task);
 			this.RegisterTaskOnAccept = registerOnAccept;
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="TaskEditDialog"/> is editable.
+		/// </summary>
+		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the task can be edited.")]
+		public bool Editable
+		{
+			get { return taskPropertiesControl1.Editable; }
+			set { taskPropertiesControl1.Editable = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to register task when Accept (Ok) button pressed.
+		/// </summary>
+		/// <value><c>true</c> if updated task is to be registered; otherwise, <c>false</c>.</value>
+		[Category("Behavior"), DefaultValue(false)]
+		public bool RegisterTaskOnAccept { get; set; }
+
+		/// <summary>
+		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
+		/// </summary>
+		/// <value>The task.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Task Task
+		{
+			get { return taskPropertiesControl1.Task; }
+			set { taskPropertiesControl1.Initialize(value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="TaskDefinition"/> in its edited state.
+		/// </summary>
+		/// <value>The task definition.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public TaskDefinition TaskDefinition
+		{
+			get { return taskPropertiesControl1.TaskDefinition; }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="TaskService"/> assigned at initialization.
+		/// </summary>
+		/// <value>The task service.</value>
+		[DefaultValue(null), Category("Data"), Description("The TaskService for this dialog.")]
+		public TaskService TaskService
+		{
+			get { return taskPropertiesControl1.TaskService; }
+			set { taskPropertiesControl1.Initialize(value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the title.
+		/// </summary>
+		/// <value>The title.</value>
+		[Category("Appearance"), Description("A string to display in the title bar of the dialog box."), Localizable(true)]
+		public string Title
+		{
+			get { return base.Text; }
+			set { base.Text = value; }
+		}
+
+		/// <summary>
+		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
+		/// </summary>
+		/// <param name="service">A <see cref="TaskService"/> instance.</param>
+		public void Initialize(TaskService service)
+		{
+			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
+			taskPropertiesControl1.Initialize(service);
+		}
+
+		/// <summary>
+		/// Initializes the control for the editing of an existing <see cref="Task"/>.
+		/// </summary>
+		/// <param name="task">A <see cref="Task"/> instance.</param>
+		public void Initialize(Task task)
+		{
+			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
+			taskPropertiesControl1.Initialize(task);
+		}
+
+		private string GetServerString(TaskService service)
+		{
+			return Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
+				Properties.Resources.LocalMachine : service.TargetServer;
 		}
 
 		private string InvokeCredentialDialog(string userName)
@@ -69,77 +164,16 @@ namespace Microsoft.Win32.TaskScheduler
 			Close();
 		}
 
-		/// <summary>
-		/// Gets or sets a value indicating whether to register task when Accept (Ok) button pressed.
-		/// </summary>
-		/// <value><c>true</c> if updated task is to be registered; otherwise, <c>false</c>.</value>
-		[DefaultValue(false)]
-		public bool RegisterTaskOnAccept { get; set; }
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this <see cref="TaskEditDialog"/> is editable.
-		/// </summary>
-		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior"), Description("Determines whether the task can be edited.")]
-		public bool Editable
+		private void ResetTitle()
 		{
-			get { return taskPropertiesControl1.Editable; }
-			set { taskPropertiesControl1.Editable = value; }
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
+			base.Text = resources.GetString("$this.Text");
 		}
 
-		/// <summary>
-		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
-		/// </summary>
-		/// <value>The task.</value>
-		public Task Task
+		private bool ShouldSerializeTitle()
 		{
-			get { return taskPropertiesControl1.Task; }
-			set { taskPropertiesControl1.Initialize(value); }
-		}
-
-		/// <summary>
-		/// Gets the <see cref="TaskDefinition"/> in its edited state.
-		/// </summary>
-		/// <value>The task definition.</value>
-		public TaskDefinition TaskDefinition
-		{
-			get { return taskPropertiesControl1.TaskDefinition; }
-		}
-
-		/// <summary>
-		/// Gets the <see cref="TaskService"/> assigned at initialization.
-		/// </summary>
-		/// <value>The task service.</value>
-		public TaskService TaskService
-		{
-			get { return taskPropertiesControl1.TaskService; }
-			set { taskPropertiesControl1.Initialize(value); }
-		}
-
-		private string GetServerString(TaskService service)
-		{
-			return service.TargetServer.Equals(Environment.MachineName, StringComparison.CurrentCultureIgnoreCase) ?
-				Properties.Resources.LocalMachine : service.TargetServer;
-		}
-
-		/// <summary>
-		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
-		/// </summary>
-		/// <param name="service">A <see cref="TaskService"/> instance.</param>
-		public void Initialize(TaskService service)
-		{
-			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
-			taskPropertiesControl1.Initialize(service);
-		}
-
-		/// <summary>
-		/// Initializes the control for the editing of an existing <see cref="Task"/>.
-		/// </summary>
-		/// <param name="task">A <see cref="Task"/> instance.</param>
-		public void Initialize(Task task)
-		{
-			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
-			taskPropertiesControl1.Initialize(task);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
+			return base.Text != resources.GetString("$this.Text");
 		}
 	}
 }

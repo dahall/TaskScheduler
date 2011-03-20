@@ -388,7 +388,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Id = value.ToString();
+					v2Settings.Id = value == Guid.Empty ? null : value.ToString();
 				else
 					throw new NotV1SupportedException();
 			}

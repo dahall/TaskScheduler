@@ -11,24 +11,14 @@ namespace TestTaskService
 			InitializeComponent();
 		}
 
+		private void closeButton_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
 		private void reconnectLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			TSConnectDlg dlg = new TSConnectDlg();
-			dlg.TargetServer = ts.TargetServer;
-			dlg.User = ts.UserName;
-			dlg.Domain = ts.UserAccountDomain;
-			dlg.Password = ts.UserPassword;
-			dlg.ForceV1 = ts.HighestSupportedVersion <= new Version(1, 1);
-			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-			{
-				ts.BeginInit();
-				ts.TargetServer = dlg.TargetServer;
-				ts.UserName = dlg.User;
-				ts.UserAccountDomain = dlg.Domain;
-				ts.UserPassword = dlg.Password;
-				ts.HighestSupportedVersion = new Version(1, 3);
-				ts.EndInit();
-			}
+			taskServiceConnectDialog1.ShowDialog(this);
 		}
 
 		private void runButton_Click(object sender, EventArgs e)
@@ -60,11 +50,6 @@ namespace TestTaskService
 			}
 
 			textBox1.Text = output.ToString();
-		}
-
-		private void closeButton_Click(object sender, EventArgs e)
-		{
-			Close();
 		}
 	}
 }

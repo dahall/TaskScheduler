@@ -4,15 +4,25 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Dialog box which prompts for user credentials using the Win32 CREDUI methods.
 	/// </summary>
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog that prompts the user for credentials."), Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DesignTimeVisible(true)]
 	public class CredentialsDialog : CommonDialog
 	{
 		private const int maxStringLength = 100;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="CredentialsDialog"/> class.
+		/// </summary>
+		public CredentialsDialog()
+		{
+			Reset();
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CredentialsDialog"/> class.
@@ -21,9 +31,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="message">The message.</param>
 		/// <param name="userName">Name of the user.</param>
 		/// <param name="options">The options.</param>
-		public CredentialsDialog(string caption = null, string message = null, string userName = null, CredentialsDialogOptions options = CredentialsDialogOptions.Default)
+		public CredentialsDialog(string caption = null, string message = null, string userName = null, CredentialsDialogOptions options = CredentialsDialogOptions.Default) : this()
 		{
-			this.EncryptPassword = false;
 			this.Caption = caption;
 			this.Message = message;
 			this.UserName = userName;
@@ -43,47 +52,47 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the Windows Error Code that caused this
-		/// credential dialog to appear, if applicable.
+		/// Gets or sets the Windows Error Code that caused this credential dialog to appear, if applicable.
 		/// </summary>
+		[System.ComponentModel.DefaultValue(0), Category("Data"), Description("Windows Error Code that caused this credential dialog")]
 		public int AuthenticationError { get; set; }
 
 		/// <summary>
 		/// Gets or sets the image to display as the banner for the dialog
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Image to display in dialog banner")]
 		public Bitmap Banner { get; set; }
 
 		/// <summary>
 		/// Gets or sets the caption for the dialog
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Caption to display for dialog")]
 		public string Caption { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to encrypt password.
 		/// </summary>
 		/// <value><c>true</c> if password is to be encrypted; otherwise, <c>false</c>.</value>
-		[System.ComponentModel.DefaultValue(false)]
+		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates whether to encrypt password")]
 		public bool EncryptPassword { get; set; }
 
 		/// <summary>
 		/// Gets or sets the message to display on the dialog
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Message to display in the dialog")]
 		public string Message { get; set; }
 
 		/// <summary>
 		/// Gets or sets the options for the dialog.
 		/// </summary>
 		/// <value>The options.</value>
-		[System.ComponentModel.DefaultValue(CredentialsDialogOptions.None)]
+		[System.ComponentModel.DefaultValue(typeof(CredentialsDialogOptions), "Default"), Category("Behavior"), Description("Options for the dialog")]
 		public CredentialsDialogOptions Options { get; set; }
 
 		/// <summary>
 		/// Gets the password entered by the user
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Browsable(false)]
 		public string Password { get; private set; }
 
 		/// <summary>
@@ -92,13 +101,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>
 		/// Only valid if <see cref="CredentialsDialog.Options"/> has the <see cref="CredentialsDialogOptions.DoNotPersist"/> flag set.
 		/// </remarks>
-		[System.ComponentModel.DefaultValue(false)]
+		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates if the save check box is checked.")]
 		public bool SaveChecked { get; set; }
 
 		/// <summary>
 		/// Gets the password entered by the user using an encrypted string
 		/// </summary>
-		[System.ComponentModel.DefaultValue(null)]
+		[System.ComponentModel.DefaultValue(null), Browsable(false)]
 		public SecureString SecurePassword { get; private set; }
 
 		/// <summary>
@@ -107,7 +116,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>
 		/// This value is used as a key to store the credentials if persisted
 		/// </remarks>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Category("Data"), Description("Target for the credentials")]
 		public string Target { get; set; }
 
 		/// <summary>
@@ -116,7 +125,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>
 		/// If non-empty before calling <see cref="RunDialog"/>, this value will be displayed in the dialog
 		/// </remarks>
-		[System.ComponentModel.DefaultValue((string)null)]
+		[System.ComponentModel.DefaultValue((string)null), Category("Data"), Description("User name displayed in the dialog")]
 		public string UserName { get; set; }
 
 		/// <summary>
@@ -144,8 +153,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public override void Reset()
 		{
-			this.Target = this.DefaultTarget;
-			this.UserName = this.Caption = this.Message = this.Password = null;
+			this.Target = this.UserName = this.Caption = this.Message = this.Password = null;
 			this.Banner = null;
 			this.EncryptPassword = this.SaveChecked = false;
 			this.Options = CredentialsDialogOptions.Default;

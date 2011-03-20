@@ -15,10 +15,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public static bool CurrentUserIsAdmin(string computerName)
 			{
-				if (!string.IsNullOrEmpty(computerName) || computerName.Equals(".", StringComparison.OrdinalIgnoreCase))
-				{
+				if (!string.IsNullOrEmpty(computerName) || computerName == ".")
 					return true;
-				}
+
 				WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
 				return principal.IsInRole(0x220);
 			}
