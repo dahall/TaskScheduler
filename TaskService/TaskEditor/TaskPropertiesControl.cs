@@ -224,7 +224,6 @@ namespace Microsoft.Win32.TaskScheduler
 				taskStartIfConnectionCheck.Enabled = editable;
 				taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
 				availableConnectionsCombo.Enabled = editable && td.Settings.RunOnlyIfNetworkAvailable;
-				if (taskStartIfConnectionCheck.Checked) availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Name;
 
 				// Set Settings tab
 				taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
@@ -285,7 +284,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			this.TaskService = service;
 			this.task = null;
-			this.TaskDefinition = service.NewTask();
+			if (!this.IsDesignMode())
+				this.TaskDefinition = service.NewTask();
 		}
 
 		/// <summary>
@@ -431,9 +431,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				bool onNet = td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked && availableConnectionsCombo.SelectedIndex != -1;
 				if (onNet && availableConnectionsCombo.SelectedIndex > 0)
-					td.Settings.NetworkSettings.Name = availableConnectionsCombo.SelectedItem.ToString();
+				{
+					td.Settings.NetworkSettings.Id = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
+					td.Settings.NetworkSettings.Name = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
+				}
 				else
+				{
+					td.Settings.NetworkSettings.Id = Guid.Empty;
 					td.Settings.NetworkSettings.Name = null;
+				}
 			}
 		}
 
@@ -447,12 +453,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// Load network connections
 			availableConnectionsCombo.Items.Clear();
 			availableConnectionsCombo.Items.Add(Properties.Resources.AnyConnection);
-			foreach (var n in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
-				availableConnectionsCombo.Items.Add(n.Name);
-			if (task == null || string.IsNullOrEmpty(td.Settings.NetworkSettings.Name))
+			availableConnectionsCombo.Items.AddRange(NetworkProfile.GetAllLocalProfiles());
+			if (task == null || td.Settings.NetworkSettings.Id == Guid.Empty)
 				availableConnectionsCombo.SelectedIndex = 0;
 			else
-				availableConnectionsCombo.SelectedText = td.Settings.NetworkSettings.Name;
+				availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Id;
 		}
 
 		private string GetTaskLocation()

@@ -12,5 +12,18 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return ctl.RightToLeft;
 		}
+
+		public static bool IsDesignMode(this Control ctrl)
+		{
+			Control p = ctrl.Parent;
+			while (p != null)
+			{
+				var site = p.Site;
+				if (site != null && site.DesignMode)
+					return true;
+				p = p.Parent;
+			}
+			return false;
+		}
 	}
 }

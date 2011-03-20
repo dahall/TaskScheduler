@@ -2035,7 +2035,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4062.42780, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4093.13725, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>

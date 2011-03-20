@@ -6,7 +6,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// A wizard that walks the user through the creation of a simple task.
 	/// </summary>
-	public sealed partial class TaskSchedulerWizard : Form
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Wizard that walks the user through the creation of a simple task."), Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DesignTimeVisible(true), DefaultProperty("RegisterTaskOnFinish")]
+	public sealed partial class TaskSchedulerWizard :
+#if DEBUG
+		Form
+#else
+		DialogBase
+#endif
 	{
 		private Action action;
 		private Trigger trigger;
@@ -25,10 +31,23 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to register the task on Finish.
 		/// </summary>
 		/// <value><c>true</c> if task registered on Finish; otherwise, <c>false</c>.</value>
-		[DefaultValue(false)]
+		[DefaultValue(false), Category("Behavior"), Description("Indicates whether to register the task on Finish")]
 		public bool RegisterTaskOnFinish
 		{
 			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether an icon is displayed in the caption bar of the form.
+		/// </summary>
+		/// <value></value>
+		/// <returns>true if the form displays an icon in the caption bar; otherwise, false. The default is true.
+		/// </returns>
+		[Browsable(true), EditorBrowsable(EditorBrowsableState.Always), DefaultValue(true)]
+		public new bool ShowIcon
+		{
+			get { return base.ShowIcon; }
+			set { base.ShowIcon = value; }
 		}
 
 		/// <summary>
@@ -45,7 +64,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the name of the task.
 		/// </summary>
 		/// <value>The name of the task.</value>
-		[DefaultValue("")]
+		[DefaultValue(""), Category("Appearance"), Description("Name of the task to display")]
 		public string TaskName
 		{
 			get { return nameText.Text; }
@@ -56,7 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the <see cref="TaskService"/>.
 		/// </summary>
 		/// <value>The task service.</value>
-		[DefaultValue(null)]
+		[DefaultValue(null), Category("Data"), Description("The TaskService for this wizard")]
 		public TaskService TaskService { get; set; }
 
 		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -185,6 +204,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private void oneTimeTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			trigger.StartBoundary = oneTimeStartTimePicker.Value;
+		}
+
+		private void onEventLogCombo_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			onEventSourceCombo.Items.Clear();
+			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(null, onEventLogCombo.Text));
 		}
 
 		private void onEventTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -338,12 +363,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (myTS)
 				this.TaskService = null;
-		}
-
-		private void onEventLogCombo_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(null, onEventLogCombo.Text));
 		}
 	}
 }

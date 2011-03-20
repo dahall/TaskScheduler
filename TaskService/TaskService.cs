@@ -14,16 +14,20 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static readonly Version v1Ver = new Version(1, 1);
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
-		internal bool v2 = false;
 		internal V2Interop.TaskSchedulerClass v2TaskService = null;
 
 		private bool forceV1 = false;
 		private bool initializing = false;
 		private Version maxVer;
+		private bool maxVerSet = false;
 		private string targetServer = null;
+		private bool targetServerSet = false;
 		private string userDomain = null;
+		private bool userDomainSet = false;
 		private string userName = null;
+		private bool userNameSet = false;
 		private string userPassword = null;
+		private bool userPasswordSet = false;
 		private WindowsImpersonatedIdentity v1Impersonation = null;
 
 		/// <summary>
@@ -45,13 +49,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
 		public TaskService(string targetServer, string userName = null, string accountDomain = null, string password = null, bool forceV1 = false)
 		{
-			this.targetServer = targetServer;
-			this.userName = userName;
-			this.userDomain = accountDomain;
-			this.userPassword = password;
+			this.BeginInit();
+			this.TargetServer = targetServer;
+			this.UserName = userName;
+			this.UserAccountDomain = accountDomain;
+			this.UserPassword = password;
 			this.forceV1 = forceV1;
 			ResetHighestSupportedVersion();
-			Connect();
+			this.EndInit();
 		}
 
 		/// <summary>
@@ -60,7 +65,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false)]
 		public bool Connected
 		{
-			get { return v2 ? v2TaskService.Connected : (v1TaskScheduler != null); }
+			get { return (v2TaskService != null && v2TaskService.Connected) || v1TaskScheduler != null; }
 		}
 
 		/// <summary>
@@ -73,7 +78,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2)
+				if (v2TaskService != null)
 					return v2TaskService.ConnectedDomain;
 				string[] parts = v1Impersonation.Name.Split('\\');
 				if (parts.Length == 2)
@@ -92,7 +97,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2)
+				if (v2TaskService != null)
 					return v2TaskService.ConnectedUser;
 				string[] parts = v1Impersonation.Name.Split('\\');
 				if (parts.Length == 2)
@@ -104,13 +109,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the highest version of Task Scheduler that a computer supports.
 		/// </summary>
-		[TypeConverter(typeof(VersionConverter)), Description("Highest version of library that should be used.")]
+		[Category("Data"), TypeConverter(typeof(VersionConverter)), Description("Highest version of library that should be used.")]
 		public Version HighestSupportedVersion
 		{
 			get { return maxVer; }
 			set
 			{
 				this.maxVer = value;
+				this.maxVerSet = true;
 				bool forceV1 = (value <= v1Ver);
 				if (forceV1 != this.forceV1)
 				{
@@ -132,14 +138,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
 		/// </summary>
-		[DefaultValue((string)null), Description("The name of the computer to connect to.")]
+		[Category("Data"), DefaultValue((string)null), Description("The name of the computer to connect to.")]
 		public string TargetServer
 		{
-			get { return targetServer; }
+			get { return ShouldSerializeTargetServer() ? targetServer : null; }
 			set
 			{
-				if (!targetServer.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+				if (value == null || value.Trim() == string.Empty) value = null;
+				if (string.Compare(value, targetServer, true) != 0)
 				{
+					this.targetServerSet = true;
 					targetServer = value;
 					Connect();
 				}
@@ -150,14 +158,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user account domain to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user account domain.</value>
-		[DefaultValue((string)null), Description("The user account domain to be used when connecting.")]
+		[Category("Data"), DefaultValue((string)null), Description("The user account domain to be used when connecting.")]
 		public string UserAccountDomain
 		{
 			get { return ShouldSerializeUserAccountDomain() ? userDomain : null; }
 			set
 			{
-				if (userDomain != null && !userDomain.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+				if (value == null || value.Trim() == string.Empty) value = null;
+				if (string.Compare(value, userDomain, true) != 0)
 				{
+					this.userDomainSet = true;
 					userDomain = value;
 					Connect();
 				}
@@ -168,14 +178,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user name.</value>
-		[DefaultValue((string)null), Description("The user name to be used when connecting.")]
+		[Category("Data"), DefaultValue((string)null), Description("The user name to be used when connecting.")]
 		public string UserName
 		{
 			get { return ShouldSerializeUserName() ? userName : null; }
 			set
 			{
-				if (userName != null && !userName.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+				if (value == null || value.Trim() == string.Empty) value = null;
+				if (string.Compare(value, userName, true) != 0)
 				{
+					this.userNameSet = true;
 					userName = value;
 					Connect();
 				}
@@ -186,14 +198,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user password to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user password.</value>
-		[DefaultValue((string)null), Description("The user password to be used when connecting.")]
+		[Category("Data"), DefaultValue((string)null), Description("The user password to be used when connecting.")]
 		public string UserPassword
 		{
 			get { return userPassword; }
 			set
 			{
-				if (userPassword != value)
+				if (value == null || value.Trim() == string.Empty) value = null;
+				if (string.Compare(value, userPassword, true) != 0)
 				{
+					this.userPasswordSet = true;
 					userPassword = value;
 					Connect();
 				}
@@ -257,7 +271,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
 		public TaskFolder GetFolder(string folderName)
 		{
-			return v2 ? new TaskFolder(this, v2TaskService.GetFolder(folderName)) : new TaskFolder(this);
+			return v2TaskService != null ? new TaskFolder(this, v2TaskService.GetFolder(folderName)) : new TaskFolder(this);
 		}
 
 		/// <summary>
@@ -267,7 +281,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="RunningTaskCollection"/> instance with the list of running tasks.</returns>
 		public RunningTaskCollection GetRunningTasks(bool includeHidden = true)
 		{
-			return v2 ? new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(this);
+			return v2TaskService != null ? new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(this);
 		}
 
 		/// <summary>
@@ -278,7 +292,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task GetTask(string taskPath)
 		{
 			Task t = null;
-			if (v2)
+			if (v2TaskService != null)
 			{
 				V2Interop.IRegisteredTask iTask = GetTask(this.v2TaskService, taskPath);
 				if (iTask != null)
@@ -316,7 +330,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="TaskDefinition"/> instance for setting properties.</returns>
 		public TaskDefinition NewTask()
 		{
-			if (v2)
+			if (v2TaskService != null)
 				return new TaskDefinition(v2TaskService.NewTask(0));
 			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
@@ -387,6 +401,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		private void Connect()
 		{
+			ResetUnsetProperties();
+
 			if (!initializing && !DesignMode &&
 				((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) ||
 				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
@@ -397,7 +413,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 				if (hasV2 && !forceV1)
 				{
-					v2 = true;
 					v2TaskService = new V2Interop.TaskSchedulerClass();
 					if (!string.IsNullOrEmpty(targetServer))
 					{
@@ -462,6 +477,15 @@ namespace Microsoft.Win32.TaskScheduler
 			return new Version((int)(v >> 16), (int)(v & 0x0000FFFF));
 		}
 
+		private void ResetUnsetProperties()
+		{
+			if (!maxVerSet) ResetHighestSupportedVersion();
+			if (!targetServerSet) targetServer = null;
+			if (!userDomainSet) userDomain = null;
+			if (!userNameSet) userName = null;
+			if (!userPasswordSet) userPassword = null;
+		}
+
 		private void ResetHighestSupportedVersion()
 		{
 			if (this.Connected)
@@ -477,7 +501,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ShouldSerializeTargetServer()
 		{
-			return targetServer != null && !targetServer.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase);
+			return targetServer != null && !targetServer.Trim('\\').Equals(System.Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		private bool ShouldSerializeUserAccountDomain()

@@ -8,7 +8,15 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// An editor that handles all Task triggers.
 	/// </summary>
-	public partial class TriggerEditDialog : Form
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task.")]
+	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+	[DesignTimeVisible(true)]
+	public partial class TriggerEditDialog :
+#if DEBUG
+		Form
+#else
+		DialogBase
+#endif
 	{
 		private bool isV2;
 		private bool onAssignment = false;
@@ -125,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the target server.
 		/// </summary>
 		/// <value>The target server.</value>
-		[DefaultValue((string)null)]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), DefaultValue((string)null)]
 		public string TargetServer
 		{
 			get; set;
@@ -135,6 +143,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the trigger that is being edited.
 		/// </summary>
 		/// <value>The trigger.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Trigger Trigger
 		{
 			get
@@ -261,8 +270,8 @@ namespace Microsoft.Win32.TaskScheduler
 				repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = hasRep;
 				if (isV2)
 				{
-					stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
 					stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
+					stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
 				}
 				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
 				if (TriggerView != TaskTriggerDisplayType.Schedule)

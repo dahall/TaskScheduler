@@ -42,25 +42,27 @@
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.reconnectLink = new System.Windows.Forms.LinkLabel();
 			this.ts = new Microsoft.Win32.TaskScheduler.TaskService();
+			this.taskServiceConnectDialog1 = new Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog();
 			((System.ComponentModel.ISupportInitialize)(this.ts)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.Location = new System.Drawing.Point(13, 88);
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ReadOnly = true;
+			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBox1.Size = new System.Drawing.Size(390, 128);
 			this.textBox1.TabIndex = 3;
 			// 
 			// radioButtonList1
 			// 
-			this.radioButtonList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.radioButtonList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonList1.AutoScroll = true;
 			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(390, 35);
 			radioButtonListItem1.Text = "Short test";
@@ -116,8 +118,8 @@
 			// 
 			// textBox2
 			// 
-			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox2.Location = new System.Drawing.Point(53, 62);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.Size = new System.Drawing.Size(350, 20);
@@ -135,9 +137,14 @@
 			this.reconnectLink.Text = "Change connection settings...";
 			this.reconnectLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.reconnectLink_LinkClicked);
 			// 
-			// ts
+			// taskServiceConnectDialog1
 			// 
-			this.ts.TargetServer = "DHALL5";
+			this.taskServiceConnectDialog1.Domain = null;
+			this.taskServiceConnectDialog1.Name = "TSConnectDlg";
+			this.taskServiceConnectDialog1.Password = null;
+			this.taskServiceConnectDialog1.TargetServer = null;
+			this.taskServiceConnectDialog1.TaskService = this.ts;
+			this.taskServiceConnectDialog1.User = null;
 			// 
 			// Main
 			// 
@@ -171,5 +178,6 @@
 		private System.Windows.Forms.TextBox textBox2;
 		private Microsoft.Win32.TaskScheduler.TaskService ts;
 		private System.Windows.Forms.LinkLabel reconnectLink;
+		private Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog taskServiceConnectDialog1;
 	}
 }
