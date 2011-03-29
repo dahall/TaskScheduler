@@ -28,12 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			GroupControls.RadioButtonListItem radioButtonListItem1 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem2 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem3 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem4 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem5 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem6 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem7 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem8 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem9 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem10 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem11 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem12 = new GroupControls.RadioButtonListItem();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.radioButtonList1 = new GroupControls.RadioButtonList();
 			this.closeButton = new System.Windows.Forms.Button();
@@ -65,18 +65,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonList1.AutoScroll = true;
 			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(390, 35);
-			radioButtonListItem1.Text = "Short test";
-			radioButtonListItem2.Text = "Long test";
-			radioButtonListItem3.Text = "Editor test";
-			radioButtonListItem4.Text = "Find Action test";
-			radioButtonListItem5.Text = "Wizard test";
-			radioButtonListItem6.Text = "MMC test";
-			this.radioButtonList1.Items.Add(radioButtonListItem1);
-			this.radioButtonList1.Items.Add(radioButtonListItem2);
-			this.radioButtonList1.Items.Add(radioButtonListItem3);
-			this.radioButtonList1.Items.Add(radioButtonListItem4);
-			this.radioButtonList1.Items.Add(radioButtonListItem5);
-			this.radioButtonList1.Items.Add(radioButtonListItem6);
+			radioButtonListItem7.Text = "Short test";
+			radioButtonListItem8.Text = "Long test";
+			radioButtonListItem9.Text = "Editor test";
+			radioButtonListItem10.Text = "Find Action test";
+			radioButtonListItem11.Text = "Wizard test";
+			radioButtonListItem12.Text = "MMC test";
+			this.radioButtonList1.Items.Add(radioButtonListItem7);
+			this.radioButtonList1.Items.Add(radioButtonListItem8);
+			this.radioButtonList1.Items.Add(radioButtonListItem9);
+			this.radioButtonList1.Items.Add(radioButtonListItem10);
+			this.radioButtonList1.Items.Add(radioButtonListItem11);
+			this.radioButtonList1.Items.Add(radioButtonListItem12);
 			this.radioButtonList1.Location = new System.Drawing.Point(13, 13);
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 3;

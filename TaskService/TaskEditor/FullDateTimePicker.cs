@@ -6,7 +6,10 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	#region Enumerations
 
-	internal enum FullDateTimePickerTimeFormat
+	/// <summary>
+	/// Determines the format of the <see cref="FullDateTimePicker"/> control.
+	/// </summary>
+	public enum FullDateTimePickerTimeFormat
 	{
 		/// <summary>Shows hours, minutes and seconds</summary>
 		LongTime,
@@ -21,10 +24,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// A single control that can represent a full date and time.
 	/// </summary>
-	[DefaultEvent("ValueChanged"),
-	DefaultProperty("Value"),
-	DefaultBindingProperty("Value")]
-	internal partial class FullDateTimePicker : UserControl
+	[DefaultEvent("ValueChanged"), DefaultProperty("Value"), DefaultBindingProperty("Value")]
+	public partial class FullDateTimePicker : UserControl
 	{
 		private DateTime currentValue;
 		private bool initializing = false;
@@ -105,7 +106,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the format of the time portion of the control.
+		/// </summary>
+		/// <value>The time format.</value>
 		[RefreshProperties(RefreshProperties.Repaint), DefaultValue(FullDateTimePickerTimeFormat.LongTime), Category("Behavior")]
+		[Description("The format of the time portion of the control.")]
 		public FullDateTimePickerTimeFormat TimeFormat
 		{
 			get { return timeFormat; }
@@ -147,10 +153,11 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the UTC prompt.
+		/// Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.
 		/// </summary>
-		/// <value>The UTC prompt.</value>
+		/// <value>The text prompt for the UTC CheckBox.</value>
 		[RefreshProperties(RefreshProperties.Repaint), DefaultValue("Synchronize across time zones"), Category("Behavior"), Localizable(true), Bindable(true)]
+		[Description("The text prompt for the UTC CheckBox.")]
 		public string UTCPrompt
 		{
 			get { return utcPrompt; }
@@ -178,7 +185,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the value.
 		/// </summary>
 		/// <value>The value.</value>
-		[Category("Data"), RefreshProperties(RefreshProperties.All), Bindable(true)]
+		[Category("Data"), RefreshProperties(RefreshProperties.All), Bindable(true), Description("The full date and time.")]
 		public DateTime Value
 		{
 			get
