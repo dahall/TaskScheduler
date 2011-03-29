@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Win32.TaskScheduler
 {
-	internal partial class FullDateTimePicker
+	public partial class FullDateTimePicker
 	{
 		/// <summary> 
 		/// Required designer variable.

@@ -24,7 +24,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <c>CustomComboBox</c> is an extension of <see cref="ComboBox"/> which provides drop-down customization.
 	/// </summary>
 	[SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	internal class CustomComboBox : ComboBox, IPopupControlHost
+	public abstract class CustomComboBox : ComboBox, IPopupControlHost
 	{
 		private const uint CBN_CLOSEUP = 8;
 		private const uint CBN_DROPDOWN = 7;
@@ -85,20 +85,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// 
+		/// Sizing mode for the CustomComboBox drop-down area.
 		/// </summary>
 		public enum SizeMode
 		{
 			/// <summary>
-			///
+			/// Uses the width of the parent.
 			/// </summary>
 			UseComboSize,
 			/// <summary>
-			///
+			/// Uses the width of the supplied control for the drop-down.
 			/// </summary>
 			UseControlSize,
 			/// <summary>
-			///
+			/// Uses the width of the combo box drop-down box.
 			/// </summary>
 			UseDropDownSize,
 		}
@@ -132,18 +132,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Occurs when the drop-down portion of a <see cref="CustomComboBox"/> is shown.
 		/// </summary>
+		[Category("Action")]
 		public new event EventHandler DropDown;
 
 		/// <summary>
 		/// Occurs when the drop-down portion of the <see cref="CustomComboBox"/> is no longer visible.
 		/// </summary>
+		[Category("Action")]
 		public new event EventHandler DropDownClosed;
 
 		/// <summary>
 		/// Indicates if drop-down is resizable.
 		/// </summary>
-		[Category("Custom Drop-Down"),
-		Description("Indicates if drop-down is resizable.")]
+		[Category("Custom Drop-Down"), Description("Indicates if drop-down is resizable."), DefaultValue(true)]
 		public bool AllowResizeDropDown
 		{
 			get { return this.m_bIsResizable; }
@@ -167,6 +168,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the property to display for this <see cref="T:System.Windows.Forms.ListControl"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A <see cref="T:System.String"/> specifying the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property. The default is an empty string ("").
+		/// </returns>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -179,6 +187,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets drop-down control itself.
 		/// </summary>
+		/// <value>The drop down control.</value>
 		[Browsable(false)]
 		public Control DropDownControl
 		{
@@ -186,6 +195,22 @@ namespace Microsoft.Win32.TaskScheduler
 			set { AssignControl(value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the height in pixels of the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The height, in pixels, of the drop-down box.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The specified value is less than one.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -198,6 +223,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the sizing mode for the drop-down.
 		/// </summary>
+		/// <value>The drop down size mode.</value>
 		[Category("Custom Drop-Down"),
 		Description("Indicates current sizing mode."),
 		DefaultValue(SizeMode.UseComboSize)]
@@ -214,6 +240,22 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value specifying the style of the combo box.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// One of the <see cref="T:System.Windows.Forms.ComboBoxStyle"/> values. The default is DropDown.
+		/// </returns>
+		/// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+		/// The assigned value is not one of the <see cref="T:System.Windows.Forms.ComboBoxStyle"/> values.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -223,6 +265,22 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the of the drop-down portion of a combo box.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The width, in pixels, of the drop-down box.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The specified value is less than one.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -233,9 +291,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the size of the drop.
+		/// Gets or sets the size of the drop-down area.
 		/// </summary>
-		/// <value>The size of the drop.</value>
+		/// <value>The size of the drop-down area.</value>
 		[Category("Custom Drop-Down")]
 		public Size DropSize
 		{
@@ -248,6 +306,18 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether the control should resize to avoid showing partial items.
+		/// </summary>
+		/// <value></value>
+		/// <returns>true if the list portion can contain only complete items; otherwise, false. The default is true.
+		/// </returns>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -269,6 +339,22 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return this.m_bDroppedDown /*&& m_popupCtrl.Visible*/; }
 		}
 
+		/// <summary>
+		/// Gets or sets the height of an item in the combo box.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The height, in pixels, of an item in the combo box.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The item height value is less than zero.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -278,6 +364,13 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets an object representing the collection of the items contained in this <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection"/> representing the items in the <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </returns>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -286,6 +379,16 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return base.Items; }
 		}
 
+		/// <summary>
+		/// Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The maximum number of items of in the drop-down portion. The minimum for this property is 1 and the maximum is 100.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The maximum number is set less than one or greater than 100.
+		/// </exception>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -295,8 +398,30 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether to prevent hiding the popup window.
+		/// </summary>
+		/// <value><c>true</c> if hiding is prevented; otherwise, <c>false</c>.</value>
 		protected bool PreventPopupHide { get; set; }
 
+		/// <summary>
+		/// Gets or sets the index specifying the currently selected item.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A zero-based index of the currently selected item. A value of negative one (-1) is returned if no item is selected.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentOutOfRangeException">
+		/// The specified index is less than or equal to -2.
+		/// -or-
+		/// The specified index is greater than or equal to the number of items in the combo box.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new int SelectedIndex
@@ -305,6 +430,19 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets currently selected item in the <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The object that is the currently selected item or null if there is no currently selected item.
+		/// </returns>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new object SelectedItem
@@ -313,6 +451,19 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets the text that is selected in the editable portion of a <see cref="T:System.Windows.Forms.ComboBox"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A string that represents the currently selected text in the combo box. If <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle"/> is set to <see cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList"/>, the return value is an empty string ("").
+		/// </returns>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new string SelectedText
@@ -321,6 +472,16 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets the value of the member property specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember"/> property.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// An object containing the value of the member of the data source specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember"/> property.
+		/// </returns>
+		/// <exception cref="T:System.InvalidOperationException">
+		/// The assigned value is null or the empty string ("").
+		/// </exception>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new object SelectedValue
@@ -329,6 +490,22 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets the number of characters selected in the editable portion of the combo box.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The number of characters selected in the combo box.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The value was less than zero.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new int SelectionLength
@@ -337,6 +514,22 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets the starting index of text selected in the combo box.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The zero-based index of the first character in the string of the current text selection.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The value is less than zero.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false), ReadOnly(true)]
 		public new int SelectionStart
@@ -345,6 +538,21 @@ namespace Microsoft.Win32.TaskScheduler
 			set { }
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether the items in the combo box are sorted.
+		/// </summary>
+		/// <value></value>
+		/// <returns>true if the combo box is sorted; otherwise, false. The default is false.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox"/> that is attached to a data source.
+		/// </exception>
+		/// <PermissionSet>
+		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
@@ -373,6 +581,16 @@ namespace Microsoft.Win32.TaskScheduler
 			set { if (base.Items.Count == 0) base.Items.Add(value); else base.Items[0] = value; base.SelectedIndex = 0; }
 		}
 
+		/// <summary>
+		/// Gets or sets the property to use as the actual value for the items in the <see cref="T:System.Windows.Forms.ListControl"/>.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// A <see cref="T:System.String"/> representing the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property. The default is an empty string ("").
+		/// </returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// The specified property cannot be found on the object specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource"/> property.
+		/// </exception>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]

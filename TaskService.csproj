@@ -50,8 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
@@ -82,6 +81,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="TaskService.nuspec" />
     <None Include="TaskService.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +95,9 @@
     <EmbeddedResource Include="TaskService.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)..\NuGet.exe" pack "$(ProjectDir)$(ProjectName).nuspec" /o "$(ProjectDir)bin\$(ConfigurationName)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
