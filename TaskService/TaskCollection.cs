@@ -313,7 +313,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// 
+	/// Collection of running tasks.
 	/// </summary>
 	public sealed class RunningTaskCollection : IEnumerable<RunningTask>, IDisposable
 	{

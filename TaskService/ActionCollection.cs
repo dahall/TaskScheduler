@@ -39,6 +39,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Adds an action to the task.
 		/// </summary>
 		/// <param name="action">A derived <see cref="Action"/> class.</param>
+		/// <returns>The bound <see cref="Action"/> that was added to the collection.</returns>
 		public Action Add(Action action)
 		{
 			if (v2Def != null)

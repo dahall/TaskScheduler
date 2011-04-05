@@ -232,7 +232,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed"/> event.
+		/// Raises the <see cref="System.Windows.Forms.ComboBox.DropDownClosed"/> event.
 		/// </summary>
 		/// <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
 		protected override void OnDropDownClosed(EventArgs e)
@@ -242,7 +242,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:SelectedItemsChanged"/> event.
+		/// Raises the <see cref="SelectedItemsChanged"/> event.
 		/// </summary>
 		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected virtual void OnSelectedItemsChanged(EventArgs eventArgs)

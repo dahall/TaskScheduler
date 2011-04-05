@@ -42,7 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:TaskSelected"/> event.
+		/// Raises the <see cref="TaskSelected"/> event.
 		/// </summary>
 		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs"/> instance containing the event data.</param>
 		protected virtual void OnTaskSelected(TaskSelectedEventArgs e)

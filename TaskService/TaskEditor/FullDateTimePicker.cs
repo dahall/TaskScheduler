@@ -224,7 +224,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:ValueChanged"/> event.
+		/// Raises the <see cref="ValueChanged"/> event.
 		/// </summary>
 		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected virtual void OnValueChanged(EventArgs eventArgs)

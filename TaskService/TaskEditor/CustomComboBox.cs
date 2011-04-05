@@ -736,7 +736,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:DropDown"/> event.
+		/// Raises the <see cref="DropDown"/> event.
 		/// </summary>
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDown(EventArgs args)
@@ -747,7 +747,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:DropDownClosed"/> event.
+		/// Raises the <see cref="DropDownClosed"/> event.
 		/// </summary>
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDownClosed(EventArgs args)

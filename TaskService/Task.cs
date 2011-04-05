@@ -841,6 +841,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Dynamically tries to load the assembly for the editor and displays it as editable for this task.
 		/// </summary>
+		/// <returns><c>true</c> if editor returns with Ok response; <c>false</c> otherwise.</returns>
 		/// <remarks>The Microsoft.Win32.TaskSchedulerEditor.dll assembly must reside in the same directory as the Microsoft.Win32.TaskScheduler.dll or in the GAC.</remarks>
 		public bool ShowEditor()
 		{

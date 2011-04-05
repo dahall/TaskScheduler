@@ -294,4 +294,7 @@
   <data name="TriggerDlgNewCaption" xml:space="preserve">
     <value>New Trigger</value>
   </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>If you want to have a task deleted automatically after it runs, you must add at least one trigger that has an expiration date.</value>
+  </data>
 </root>
