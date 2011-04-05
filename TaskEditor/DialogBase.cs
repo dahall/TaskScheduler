@@ -1245,11 +1245,11 @@ namespace System.Windows.Forms
 		}
 
 		/// <summary>
+		/// Gets or sets a value that indicates whether controls in this container will be automatically validated when the focus changes.
 		/// </summary>
-		/// <value></value>
-		/// <returns>
+		/// <value>
 		/// An <see cref="T:System.Windows.Forms.AutoValidate"/> enumerated value that indicates whether contained controls are implicitly validated on focus change. The default is <see cref="F:System.Windows.Forms.AutoValidate.Inherit"/>.
-		/// </returns>
+		/// </value>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public override AutoValidate AutoValidate
 		{
@@ -1264,11 +1264,11 @@ namespace System.Windows.Forms
 		}
 
 		/// <summary>
+		/// Gets or sets the background color for the control.
 		/// </summary>
-		/// <value></value>
-		/// <returns>
+		/// <value>
 		/// A <see cref="T:System.Drawing.Color"/> that represents the background color of the control. The default is the value of the <see cref="P:System.Windows.Forms.Control.DefaultBackColor"/> property.
-		/// </returns>
+		/// </value>
 		/// <PermissionSet>
 		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
@@ -2173,8 +2173,9 @@ namespace System.Windows.Forms
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether the user can give the focus to this control using the TAB key.
 		/// </summary>
-		/// <value></value>
+		/// <value><c>true</c> if the user can give the focus to the control using the TAB key; otherwise, <c>false</c>. The default is <c>true</c>.</value>
 		/// <PermissionSet>
 		/// 	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
@@ -2215,11 +2216,9 @@ namespace System.Windows.Forms
 		}
 
 		/// <summary>
+		/// Gets or sets the text associated with this control.
 		/// </summary>
-		/// <value></value>
-		/// <returns>
-		/// The text associated with this control.
-		/// </returns>
+		/// <value>The text associated with this control.</value>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public override string Text
 		{

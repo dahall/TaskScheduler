@@ -123,7 +123,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string GetServerString(TaskService service)
 		{
-			return Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
+			return service.TargetServer == null || Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
 				Properties.Resources.LocalMachine : service.TargetServer;
 		}
 
@@ -142,6 +142,12 @@ namespace Microsoft.Win32.TaskScheduler
 			if (this.TaskDefinition.Actions.Count == 0)
 			{
 				MessageBox.Show(Properties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (this.TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !ValidateOneTriggerExpires())
+			{
+				MessageBox.Show(Properties.Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -174,6 +180,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
 			return base.Text != resources.GetString("$this.Text");
+		}
+
+		private bool ValidateOneTriggerExpires()
+		{
+			foreach (var tr in this.TaskDefinition.Triggers)
+			{
+				if (tr.EndBoundary != DateTime.MaxValue)
+					return true;
+			}
+			return false;
 		}
 	}
 }

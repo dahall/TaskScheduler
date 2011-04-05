@@ -429,8 +429,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 			{
-				bool onNet = td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked && availableConnectionsCombo.SelectedIndex != -1;
-				if (onNet && availableConnectionsCombo.SelectedIndex > 0)
+				if (availableConnectionsCombo.SelectedIndex > 0)
 				{
 					td.Settings.NetworkSettings.Id = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
 					td.Settings.NetworkSettings.Name = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
@@ -451,13 +450,17 @@ namespace Microsoft.Win32.TaskScheduler
 		private void conditionsTab_Enter(object sender, EventArgs e)
 		{
 			// Load network connections
+			availableConnectionsCombo.BeginUpdate();
 			availableConnectionsCombo.Items.Clear();
 			availableConnectionsCombo.Items.Add(Properties.Resources.AnyConnection);
 			availableConnectionsCombo.Items.AddRange(NetworkProfile.GetAllLocalProfiles());
+			availableConnectionsCombo.EndUpdate();
+			onAssignment = true;
 			if (task == null || td.Settings.NetworkSettings.Id == Guid.Empty)
 				availableConnectionsCombo.SelectedIndex = 0;
 			else
 				availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Id;
+			onAssignment = false;
 		}
 
 		private string GetTaskLocation()
@@ -801,6 +804,8 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked;
+			if (!onAssignment)
+				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
 		}
 
 		private void taskStartWhenAvailableCheck_CheckedChanged(object sender, EventArgs e)
