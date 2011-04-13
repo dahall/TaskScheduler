@@ -154,6 +154,42 @@ namespace Microsoft.Win32.TaskScheduler
 				curItem = null;
 				wienum.Reset();
 			}
+
+			internal string[] TaskNames
+			{
+				get
+				{
+					List<string> ret = new List<string>();
+					IntPtr names = IntPtr.Zero;
+					bool valid = false;
+					do
+					{
+						uint uFetched = 0;
+						try
+						{
+							wienum.Next(50, out names, out uFetched);
+							if (uFetched == 0)
+								break;
+
+							IntPtr cName = names;
+							for (uint i = 0; i < uFetched; cName = (IntPtr)((long)cName + Marshal.SizeOf(cName)), i++)
+							{
+								using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(cName)))
+								{
+									string tempStr = name.ToString();
+									if (filter == null || filter.IsMatch(tempStr))
+										ret.Add(tempStr);
+								}
+							}
+						}
+						catch { }
+						finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
+					} while (!valid);
+
+					Reset();
+					return ret.ToArray();
+				}
+			}
 		}
 
 		internal class V2TaskEnumerator : IEnumerator<Task>, IDisposable
@@ -231,8 +267,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					V1TaskEnumerator v1te = new V1TaskEnumerator(this.svc, this.filter);
-					while (v1te.MoveNext())
-						i++;
+					return v1te.TaskNames.Length;
 				}
 				return i;
 			}
@@ -303,10 +338,10 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return new Task(svc, v2Coll[name]);
 
-				V1TaskEnumerator v1te = new V1TaskEnumerator(svc);
-				while (v1te.MoveNext())
-					if (string.Compare(v1te.Current.Name, name, true) == 0)
-						return v1te.Current;
+				Task v1Task = svc.GetTask(name);
+				if (v1Task != null)
+					return v1Task;
+
 				throw new ArgumentOutOfRangeException();
 			}
 		}
