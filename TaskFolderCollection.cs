@@ -137,7 +137,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-				if (arrayIndex > v1FolderList.Length - 1)
+				if (arrayIndex + v1FolderList.Length > array.Length)
 					throw new ArgumentException();
 				v1FolderList.CopyTo(array, arrayIndex);
 			}
