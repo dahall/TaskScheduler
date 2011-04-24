@@ -1276,25 +1276,26 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
-				int wk = 1 << (v1TriggerData.Data.monthlyDOW.WhichWeek - 1);
-				return (WhichWeek)wk;
+				else if (v1Trigger != null)
+					return (WhichWeek)(1 << (v1TriggerData.Data.monthlyDOW.WhichWeek - 1));
+				else
+					return (unboundValues.ContainsKey("WeeksOfMonth") ? (WhichWeek)unboundValues["WeeksOfMonth"] : WhichWeek.FirstWeek);
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
-				else
+				else if (v1Trigger != null)
 				{
 					int idx = Array.IndexOf<ushort>(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (ushort)value);
 					if (idx >= 0)
 						v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)(idx + 1);
 					else
 						throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
-					if (v1Trigger != null)
-						SetV1TriggerData();
-					else
-						unboundValues["WeeksOfMonth"] = (short)value;
+					SetV1TriggerData();
 				}
+				else
+					unboundValues["WeeksOfMonth"] = (short)value;
 			}
 		}
 
