@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -16,9 +17,11 @@ namespace Microsoft.Win32.TaskScheduler
 		DialogBase
 #endif
 	{
-		private const int chunk = 500;
+		private const int chunk = 100;
 
 		private Guid supportedInterface = Guid.Empty;
+		private System.Collections.Generic.Queue<Guid> guidsToValidate;
+private  bool loading;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ComObjectSelectionDialog"/> class.
@@ -85,6 +88,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			BackgroundWorker bw = sender as BackgroundWorker;
 			List<ListViewItem> items = new List<ListViewItem>(chunk);
+			if (supportedInterface != Guid.Empty)
+				guidsToValidate = new Queue<Guid>();
+			loading = true;
 			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
 			{
 				try
@@ -108,22 +114,31 @@ namespace Microsoft.Win32.TaskScheduler
 						{
 							try
 							{
+								ListViewItem lvi = null;
 								using (RegistryKey k2 = k.OpenSubKey(l[i]))
 								{
 									if (ServerType == SupportedServers.OutOfProcess)
 									{
 										using (RegistryKey k3 = k2.OpenSubKey("LocalServer32", false))
 											if (k3 != null)
-												items.Add(new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, k3.GetValue(null) as string }));
+												lvi = new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, k3.GetValue(null) as string });
 									}
 									else
 									{
 										using (RegistryKey k3 = k2.OpenSubKey("InProcServer32", false))
 											if (k3 != null)
-												items.Add(new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, k3.GetValue(null) as string }));
+												lvi = new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, k3.GetValue(null) as string });
 											else
-												items.Add(new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, null }));
+												lvi = new ListViewItem(new string[] { l[i].ToLower(), k2.GetValue(null) as string, null });
 									}
+								}
+
+								if (lvi != null)
+								{
+									lvi.Name = lvi.SubItems[0].Text;
+									items.Add(lvi);
+									if (guidsToValidate != null)
+										guidsToValidate.Enqueue(new Guid(l[i]));
 								}
 							}
 							catch { }
@@ -145,9 +160,61 @@ namespace Microsoft.Win32.TaskScheduler
 			listView1.Items.AddRange(items);
 		}
 
+		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			loading = false;
+			/*if (supportedInterface != null && supportedInterface != Guid.Empty)
+				backgroundWorker2.RunWorkerAsync(listView1.Items);
+			else*/
+				this.UseWaitCursor = false;
+		}
+
+		private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+		{
+			while (loading || guidsToValidate.Count > 0)
+			{
+				while (loading && guidsToValidate.Count == 0 && !e.Cancel)
+					System.Threading.Thread.Sleep(50);
+
+				if (e.Cancel)
+					break;
+
+				if (guidsToValidate.Count > 0)
+				{
+					Guid g = guidsToValidate.Dequeue();
+					if (!SupportsInterface(g, supportedInterface))
+						this.Invoke(new ItemInvoke(DisableKey), g);
+				}
+			}
+		}
+
+		private delegate void ItemInvoke(Guid key);
+
+		private void DisableItem(ListViewItem item)
+		{
+			if (item != null)
+			{
+				item.ForeColor = System.Drawing.SystemColors.GrayText;
+				item.Tag = false;
+			}
+		}
+
+		private void DisableKey(Guid key)
+		{
+			int i = listView1.Items.IndexOfKey(key.ToString("B").ToLower());
+			if (i != -1)
+				DisableItem(listView1.Items[i]);
+		}
+
+		private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			this.UseWaitCursor = false;
+		}
+
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			backgroundWorker1.CancelAsync();
+			backgroundWorker2.CancelAsync();
 			CLSID = Guid.Empty;
 		}
 
@@ -155,6 +222,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			listView1.Items.Clear();
 			backgroundWorker1.RunWorkerAsync();
+			this.UseWaitCursor = true;
 		}
 
 		private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -165,29 +233,34 @@ namespace Microsoft.Win32.TaskScheduler
 		private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
 		{
 			CLSID = new Guid(e.Item.SubItems[0].Text);
+			bool valid = (e.Item.Tag != null && (bool)e.Item.Tag == false) ? false : SupportsInterface(CLSID, supportedInterface);
+			okButton.Enabled = valid;
+			if (!valid)
+				DisableItem(e.Item);
 		}
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
 			backgroundWorker1.CancelAsync();
-			if (!SupportsInterface())
+			backgroundWorker2.CancelAsync();
+			if (!SupportsInterface(CLSID, supportedInterface))
 				MessageBox.Show(this, Properties.Resources.ComObjectDoesNotSupportInterfaceErrorMessage, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			else
 				this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
-		private bool SupportsInterface()
+		private static bool SupportsInterface(Guid clsid, Guid iGuid)
 		{
-			if (SupportedInterface == Guid.Empty)
+			if (iGuid == Guid.Empty)
 				return true;
 
 			object o = null;
 			IntPtr iu = IntPtr.Zero, ppv = IntPtr.Zero;
 			try
 			{
-				o = Activator.CreateInstance(Type.GetTypeFromCLSID(CLSID, false));
+				o = Activator.CreateInstance(Type.GetTypeFromCLSID(clsid, false));
 				iu = System.Runtime.InteropServices.Marshal.GetIUnknownForObject(o);
-				return 0 == System.Runtime.InteropServices.Marshal.QueryInterface(iu, ref supportedInterface, out ppv);
+				return 0 == System.Runtime.InteropServices.Marshal.QueryInterface(iu, ref iGuid, out ppv);
 			}
 			catch
 			{

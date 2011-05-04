@@ -95,7 +95,7 @@ namespace TestTaskService
 							case TaskActionType.ComHandler:
 								/*if (((ComHandlerAction)action).ClassId.ToString().IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
 									((ComHandlerAction)action).Data.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)*/
-									found = true;
+									//found = true;
 								output.WriteLine(" > " + action.ToString());
 								break;
 							case TaskActionType.Execute:
@@ -410,6 +410,15 @@ namespace TestTaskService
 				}
 				
 				tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+
+				// Try copying it
+				TaskDefinition td2 = ts.NewTask();
+				foreach (Trigger tg in td.Triggers)
+					td2.Triggers.Add((Trigger)tg.Clone());
+				foreach (Microsoft.Win32.TaskScheduler.Action a in td.Actions)
+					td2.Actions.Add((Microsoft.Win32.TaskScheduler.Action)a.Clone());
+				tf.RegisterTaskDefinition("Test2", td2);
+				tf.DeleteTask("Test2");
 			}
 			catch (Exception ex)
 			{
