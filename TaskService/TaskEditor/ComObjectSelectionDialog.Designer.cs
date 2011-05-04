@@ -36,6 +36,7 @@
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+			this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
 			this.SuspendLayout();
 			// 
 			// okButton
@@ -86,6 +87,13 @@
 			this.backgroundWorker1.WorkerSupportsCancellation = true;
 			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
 			this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+			this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+			// 
+			// backgroundWorker2
+			// 
+			this.backgroundWorker2.WorkerSupportsCancellation = true;
+			this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+			this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
 			// 
 			// ComObjectSelectionDialog
 			// 
@@ -112,5 +120,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.ComponentModel.BackgroundWorker backgroundWorker2;
 	}
 }

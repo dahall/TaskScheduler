@@ -177,24 +177,6 @@
   <data name="listView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>CLSID</value>
-  </data>
-  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
-    <value>160</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>COM Object</value>
-  </data>
-  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
-    <value>160</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Path</value>
-  </data>
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
-    <value>140</value>
-  </data>
   <data name="listView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
@@ -216,8 +198,29 @@
   <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>CLSID</value>
+  </data>
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>COM Object</value>
+  </data>
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
   <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>181, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -259,6 +262,12 @@
     <value>backgroundWorker1</value>
   </data>
   <data name="&gt;&gt;backgroundWorker1.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorker2.Name" xml:space="preserve">
+    <value>backgroundWorker2</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorker2.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
