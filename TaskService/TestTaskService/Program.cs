@@ -160,7 +160,9 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				ts.AddTask(taskName, new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), RandomDelay = TimeSpan.FromDays(2), Enabled = false }, new ExecAction("notepad.exe", "c:\\test.log", "C:\\"));
+				ts.AddTask(taskName,
+					new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), RandomDelay = TimeSpan.FromDays(2), Enabled = false }, 
+					new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 
 				// Edit task
 				Task t = ts.GetTask(taskName);
@@ -406,10 +408,10 @@ namespace TestTaskService
 				{
 					td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
 					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
-					td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), string.Empty));
+					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 				
-				tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, null);
+				tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 
 				// Try copying it
 				TaskDefinition td2 = ts.NewTask();

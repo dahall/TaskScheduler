@@ -46,20 +46,22 @@
 			// 
 			// taskRunTimesControl1
 			// 
-			this.taskRunTimesControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.taskRunTimesControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.taskRunTimesControl1.AutoSize = true;
 			this.taskRunTimesControl1.Location = new System.Drawing.Point(12, 12);
 			this.taskRunTimesControl1.MinimumSize = new System.Drawing.Size(244, 185);
 			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
 			this.taskRunTimesControl1.Size = new System.Drawing.Size(245, 241);
 			this.taskRunTimesControl1.TabIndex = 10;
-			this.taskRunTimesControl1.Task = null;
 			// 
 			// TaskRunTimesDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(269, 294);
 			this.Controls.Add(this.taskRunTimesControl1);
@@ -69,6 +71,7 @@
 			this.Text = "Task Run Times";
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 

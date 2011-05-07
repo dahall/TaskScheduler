@@ -361,7 +361,6 @@
 			// 
 			// monthlyDaysDropDown
 			// 
-			this.monthlyDaysDropDown.AllowResizeDropDown = true;
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
@@ -371,7 +370,6 @@
 			// 
 			// monthlyOnDOWDropDown
 			// 
-			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
 			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
 			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
@@ -382,7 +380,6 @@
 			// 
 			// monthlyOnWeekDropDown
 			// 
-			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
 			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
@@ -392,7 +389,6 @@
 			// 
 			// monthlyMonthsDropDown
 			// 
-			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
 			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);

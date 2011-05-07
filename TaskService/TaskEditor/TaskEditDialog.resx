@@ -121,6 +121,13 @@
   <data name="taskPropertiesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="taskPropertiesControl1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskPropertiesControl1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskPropertiesControl1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -129,9 +136,8 @@
     <value>12, 12</value>
   </data>
   <data name="taskPropertiesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 433</value>
+    <value>622, 433</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskPropertiesControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -139,7 +145,7 @@
     <value>taskPropertiesControl1</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4095.43001, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4143.28388, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -212,6 +218,12 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>651, 493</value>
