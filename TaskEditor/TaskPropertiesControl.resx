@@ -466,7 +466,7 @@
     <value>9, 141</value>
   </data>
   <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>133, 13</value>
   </data>
   <data name="taskRunLevelCheck.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -496,7 +496,7 @@
     <value>27, 116</value>
   </data>
   <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 17</value>
+    <value>367, 13</value>
   </data>
   <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -526,7 +526,7 @@
     <value>9, 91</value>
   </data>
   <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 17</value>
+    <value>174, 13</value>
   </data>
   <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -556,7 +556,7 @@
     <value>9, 66</value>
   </data>
   <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 17</value>
+    <value>157, 13</value>
   </data>
   <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1080,6 +1080,9 @@
   <data name="&gt;&gt;actionListView.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="actionIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="actionIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1171,7 +1174,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskStartIfConnectionCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 17</value>
+    <value>258, 13</value>
   </data>
   <data name="taskStartIfConnectionCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1228,7 +1231,7 @@
     <value>27, 47</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 17</value>
+    <value>214, 13</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1258,7 +1261,7 @@
     <value>6, 72</value>
   </data>
   <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
+    <value>168, 13</value>
   </data>
   <data name="taskWakeToRunCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1288,7 +1291,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 17</value>
+    <value>226, 13</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1387,7 +1390,7 @@
     <value>47, 104</value>
   </data>
   <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 17</value>
+    <value>151, 13</value>
   </data>
   <data name="taskRestartOnIdleCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1417,7 +1420,7 @@
     <value>27, 79</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 17</value>
+    <value>178, 13</value>
   </data>
   <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1477,7 +1480,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 17</value>
+    <value>202, 13</value>
   </data>
   <data name="taskIdleDurationCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1520,6 +1523,9 @@
   </data>
   <data name="&gt;&gt;idleConditionGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="conditionIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="conditionIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1729,7 +1735,7 @@
     <value>6, 228</value>
   </data>
   <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 17</value>
+    <value>247, 13</value>
   </data>
   <data name="taskDeleteAfterCheck.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1759,7 +1765,7 @@
     <value>6, 198</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 17</value>
+    <value>287, 13</value>
   </data>
   <data name="taskAllowHardTerminateCheck.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1789,7 +1795,7 @@
     <value>6, 168</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 17</value>
+    <value>164, 13</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1819,7 +1825,7 @@
     <value>6, 108</value>
   </data>
   <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 17</value>
+    <value>141, 13</value>
   </data>
   <data name="taskRestartIntervalCheck.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1849,7 +1855,7 @@
     <value>6, 78</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 17</value>
+    <value>277, 13</value>
   </data>
   <data name="taskStartWhenAvailableCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1879,7 +1885,7 @@
     <value>6, 48</value>
   </data>
   <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 17</value>
+    <value>153, 13</value>
   </data>
   <data name="taskAllowDemandStartCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1898,6 +1904,9 @@
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="settingsIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="settingsIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2023,19 +2032,19 @@
     <value>True</value>
   </data>
   <data name="taskRunTimesControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
+    <value>6, 6</value>
   </data>
   <data name="taskRunTimesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 359</value>
+    <value>602, 360</value>
   </data>
   <data name="taskRunTimesControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Name" xml:space="preserve">
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4093.13725, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4146.19733, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>

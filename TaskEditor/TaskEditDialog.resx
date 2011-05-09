@@ -121,23 +121,20 @@
   <data name="taskPropertiesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="taskPropertiesControl1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskPropertiesControl1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskPropertiesControl1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="taskPropertiesControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>14, 16</value>
+  </data>
+  <data name="taskPropertiesControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 5</value>
   </data>
   <data name="taskPropertiesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 433</value>
+    <value>714, 577</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskPropertiesControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -145,7 +142,7 @@
     <value>taskPropertiesControl1</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4143.28388, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4146.18960, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -160,10 +157,13 @@
     <value>NoControl</value>
   </data>
   <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 453</value>
+    <value>629, 604</value>
+  </data>
+  <data name="cancelBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+    <value>99, 36</value>
   </data>
   <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -190,10 +190,13 @@
     <value>NoControl</value>
   </data>
   <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>455, 453</value>
+    <value>520, 604</value>
+  </data>
+  <data name="okBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+    <value>99, 36</value>
   </data>
   <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -217,7 +220,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+    <value>8, 20</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -226,10 +229,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>651, 493</value>
+    <value>744, 657</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Task Properties</value>
