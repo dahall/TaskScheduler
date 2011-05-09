@@ -238,6 +238,7 @@
 			// 
 			// emailTextText
 			// 
+			this.emailTextText.AcceptsReturn = true;
 			resources.ApplyResources(this.emailTextText, "emailTextText");
 			this.emailTextText.Name = "emailTextText";
 			this.emailTextText.TextChanged += new System.EventHandler(this.keyField_TextChanged);
@@ -293,6 +294,7 @@
 			// 
 			// msgMsgText
 			// 
+			this.msgMsgText.AcceptsReturn = true;
 			resources.ApplyResources(this.msgMsgText, "msgMsgText");
 			this.msgMsgText.Name = "msgMsgText";
 			this.msgMsgText.TextChanged += new System.EventHandler(this.keyField_TextChanged);

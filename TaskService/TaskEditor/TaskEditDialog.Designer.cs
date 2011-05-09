@@ -37,7 +37,7 @@
 			// taskPropertiesControl1
 			// 
 			resources.ApplyResources(this.taskPropertiesControl1, "taskPropertiesControl1");
-			this.taskPropertiesControl1.MinimumSize = new System.Drawing.Size(622, 433);
+			this.taskPropertiesControl1.MinimumSize = new System.Drawing.Size(711, 577);
 			this.taskPropertiesControl1.Name = "taskPropertiesControl1";
 			// 
 			// cancelBtn
@@ -68,7 +68,6 @@
 			this.ShowIcon = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 

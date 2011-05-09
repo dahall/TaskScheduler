@@ -102,7 +102,6 @@
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.runTimesTab = new System.Windows.Forms.TabPage();
-			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
 			this.runTimesErrorLabel = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
@@ -115,6 +114,7 @@
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
 			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
@@ -127,8 +127,8 @@
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
 			this.runTimesTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -681,12 +681,6 @@
 			this.runTimesTab.Enter += new System.EventHandler(this.runTimesTab_Enter);
 			this.runTimesTab.Leave += new System.EventHandler(this.runTimesTab_Leave);
 			// 
-			// taskRunTimesControl1
-			// 
-			resources.ApplyResources(this.taskRunTimesControl1, "taskRunTimesControl1");
-			this.taskRunTimesControl1.MinimumSize = new System.Drawing.Size(285, 213);
-			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
-			// 
 			// runTimesErrorLabel
 			// 
 			resources.ApplyResources(this.runTimesErrorLabel, "runTimesErrorLabel");
@@ -756,6 +750,11 @@
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
+			// taskRunTimesControl1
+			// 
+			resources.ApplyResources(this.taskRunTimesControl1, "taskRunTimesControl1");
+			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
+			// 
 			// TaskPropertiesControl
 			// 
 			resources.ApplyResources(this, "$this");
@@ -782,8 +781,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
 			this.runTimesTab.ResumeLayout(false);
 			this.runTimesTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -872,9 +871,9 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label taskLocationText;
 		private System.Windows.Forms.TabPage runTimesTab;
-		private TaskRunTimesControl taskRunTimesControl1;
 		private System.Windows.Forms.Label runTimesErrorLabel;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label1;
+		private TaskRunTimesControl taskRunTimesControl1;
 	}
 }
