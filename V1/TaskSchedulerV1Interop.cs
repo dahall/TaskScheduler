@@ -198,22 +198,38 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	internal struct Weekly
 	{
 		public ushort WeeksInterval;
-		public ushort DaysOfTheWeek;
+		public DaysOfTheWeek DaysOfTheWeek;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct MonthlyDate
 	{
 		public uint Days;
-		public ushort Months;
+		public MonthsOfTheYear Months;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct MonthlyDOW
 	{
 		public ushort WhichWeek;
-		public ushort DaysOfTheWeek;
-		public ushort Months;
+		public DaysOfTheWeek DaysOfTheWeek;
+		public MonthsOfTheYear Months;
+
+		public WhichWeek V2WhichWeek
+		{
+			get
+			{
+				return (WhichWeek)(1 << ((short)WhichWeek - 1));
+			}
+			set
+			{
+				int idx = Array.IndexOf<short>(new short[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (short)value);
+				if (idx >= 0)
+					WhichWeek = (ushort)(idx + 1);
+				else
+					throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
+			}
+		}
 	}
 
 	[StructLayout(LayoutKind.Explicit)]

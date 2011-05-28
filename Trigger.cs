@@ -546,7 +546,6 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
 			if (v1Trigger == null)
@@ -557,7 +556,6 @@ namespace Microsoft.Win32.TaskScheduler
 			SetV1TriggerData();
 		}
 
-		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
 		{
 			V2Interop.ITriggerCollection iTriggers = iTaskDef.Triggers;
@@ -602,7 +600,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Assigns the unbound TriggerData structure to the V1 trigger instance.</summary>
 		internal void SetV1TriggerData()
 		{
-			if (v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
+			if (v1TriggerData.MinutesDuration != 0 && v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
 				throw new ArgumentException("Trigger.Repetition.Interval must be less than Trigger.Repetition.Duration under Task Scheduler 1.0.");
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
@@ -1179,7 +1177,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).DaysOfWeek = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = (ushort)value;
+					v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -1206,7 +1204,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).MonthsOfYear = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
+					v1TriggerData.Data.monthlyDOW.Months = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -1277,7 +1275,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Trigger != null)
 					return (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
 				else if (v1Trigger != null)
-					return (WhichWeek)(1 << (v1TriggerData.Data.monthlyDOW.WhichWeek - 1));
+					return v1TriggerData.Data.monthlyDOW.V2WhichWeek;
 				else
 					return (unboundValues.ContainsKey("WeeksOfMonth") ? (WhichWeek)unboundValues["WeeksOfMonth"] : WhichWeek.FirstWeek);
 			}
@@ -1285,17 +1283,12 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
-				else if (v1Trigger != null)
-				{
-					int idx = Array.IndexOf<ushort>(new ushort[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (ushort)value);
-					if (idx >= 0)
-						v1TriggerData.Data.monthlyDOW.WhichWeek = (ushort)(idx + 1);
-					else
-						throw new NotV1SupportedException("Only a single week can be set with Task Scheduler 1.0.");
-					SetV1TriggerData();
-				}
 				else
-					unboundValues["WeeksOfMonth"] = (short)value;
+					v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["WeeksOfMonth"] = (short)value;
 			}
 		}
 
@@ -1410,7 +1403,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyTrigger)v2Trigger).MonthsOfYear = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.Months = (ushort)value;
+					v1TriggerData.Data.monthlyDOW.Months = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -1949,7 +1942,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IWeeklyTrigger)v2Trigger).DaysOfWeek = (short)value;
 				else
 				{
-					v1TriggerData.Data.weekly.DaysOfTheWeek = (ushort)value;
+					v1TriggerData.Data.weekly.DaysOfTheWeek = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
