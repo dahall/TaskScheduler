@@ -1095,8 +1095,12 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the identifier of the user.
+		/// <para>Gets or sets The identifier of the user. For example, "MyDomain\MyName" or for a local account, "Administrator".</para>
+		/// <para>This property can be in one of the following formats:</para>
+		/// <para>• User name or SID: The task is started when the user logs on to the computer.</para>
+		/// <para>• NULL: The task is started when any user logs on to the computer.</para>
 		/// </summary>
+		/// <remarks>If you want a task to be triggered when any member of a group logs on to the computer rather than when a specific user logs on, then do not assign a value to the LogonTrigger.UserId property. Instead, create a logon trigger with an empty LogonTrigger.UserId property and assign a value to the principal for the task using the Principal.GroupId property.</remarks>
 		[DefaultValue((string)null)]
 		public string UserId
 		{

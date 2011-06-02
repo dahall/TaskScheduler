@@ -42,10 +42,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskService"/> class.
 		/// </summary>
-		/// <param name="targetServer">The target server. A null value implies the local machine.</param>
-		/// <param name="userName">Name of the user.</param>
-		/// <param name="accountDomain">The account domain.</param>
-		/// <param name="password">The password.</param>
+		/// <param name="targetServer">The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.</param>
+		/// <param name="userName">The user name that is used during the connection to the computer. If the user is not specified, then the current token is used.</param>
+		/// <param name="accountDomain">The domain of the user specified in the <paramref name="userName"/> parameter.</param>
+		/// <param name="password">The password that is used to connect to the computer. If the user name and password are not specified, then the current token is used.</param>
 		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
 		public TaskService(string targetServer, string userName = null, string accountDomain = null, string password = null, bool forceV1 = false)
 		{

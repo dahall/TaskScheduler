@@ -1189,7 +1189,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal.
+		/// Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal. Setting this property to something other than a null or empty string, will set the <see cref="UserId"/> property to NULL and will set the <see cref="LogonType"/> property to TaskLogonType.Group;
 		/// </summary>
 		public string GroupId
 		{
@@ -1201,8 +1201,18 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
+
 				if (v2Principal != null)
+				{
+					if (string.IsNullOrEmpty(value))
+						value = null;
+					else
+					{
+						v2Principal.UserId = null;
+						v2Principal.LogonType = TaskLogonType.Group;
+					}
 					v2Principal.GroupId = value;
+				}
 				else
 					throw new NotV1SupportedException();
 			}
@@ -1280,7 +1290,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the user identifier that is required to run the tasks that are associated with the principal.
+		/// Gets or sets the user identifier that is required to run the tasks that are associated with the principal. Setting this property to something other than a null or empty string, will set the <see cref="GroupId"/> property to NULL;
 		/// </summary>
 		public string UserId
 		{
@@ -1298,7 +1308,17 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Principal != null)
+				{
+					if (string.IsNullOrEmpty(value))
+						value = null;
+					else
+					{
+						v2Principal.GroupId = null;
+						if (value.Contains(@"\") && !value.Contains(@"\\"))
+							value.Replace(@"\", @"\\");
+					}
 					v2Principal.UserId = value;
+				}
 				else
 				{
 					if (value.Equals(localSystemAcct, StringComparison.CurrentCultureIgnoreCase))
