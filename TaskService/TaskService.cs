@@ -439,8 +439,10 @@ namespace Microsoft.Win32.TaskScheduler
 						// Check to ensure UNC format for server name. (Suggested by bigsan)
 						if (!targetServer.StartsWith(@"\\"))
 							targetServer = @"\\" + targetServer;
-						v1TaskScheduler.SetTargetComputer(targetServer);
 					}
+					else
+						targetServer = null;
+					v1TaskScheduler.SetTargetComputer(targetServer);
 					targetServer = v1TaskScheduler.GetTargetComputer();
 					maxVer = v1Ver;
 				}

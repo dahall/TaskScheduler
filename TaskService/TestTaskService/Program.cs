@@ -193,6 +193,9 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Does something";
+				td.Principal.UserId = "BLOODY\\hell";
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Principal.GroupId = "Administrators";
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 				// Create a trigger that will fire the task at this time every other day
@@ -201,14 +204,15 @@ namespace TestTaskService
 				dt.Repetition.Interval = TimeSpan.FromHours(1);
 
 				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
-				td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
+				//td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
+				td.Triggers.Add(new LogonTrigger { UserId = string.Empty });
 
 				// Create an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
 				// Register the task in the root folder
 				const string taskName = "Test";
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);

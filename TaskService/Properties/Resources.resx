@@ -220,6 +220,9 @@
     <value>{0}</value>
     <comment>0 = Title; 1 = MessageBody; 2 = Id</comment>
   </data>
+  <data name="TaskDefaultPrincipal" xml:space="preserve">
+    <value>Author</value>
+  </data>
   <data name="TaskStateDisabled" xml:space="preserve">
     <value>Disabled</value>
   </data>

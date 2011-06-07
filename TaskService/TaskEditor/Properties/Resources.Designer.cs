@@ -88,6 +88,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a new target computer:.
+        /// </summary>
+        internal static string BrowseForTargetServerPrompt {
+            get {
+                return ResourceManager.GetString("BrowseForTargetServerPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This COM Class does not support the required interface..
         /// </summary>
         internal static string ComObjectDoesNotSupportInterfaceErrorMessage {

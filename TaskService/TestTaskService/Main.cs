@@ -9,6 +9,7 @@ namespace TestTaskService
 		public Main()
 		{
 			InitializeComponent();
+			radioButtonList1.SelectedIndex = 0;
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)

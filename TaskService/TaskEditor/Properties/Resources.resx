@@ -297,4 +297,7 @@
   <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
     <value>If you want to have a task deleted automatically after it runs, you must add at least one trigger that has an expiration date.</value>
   </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>Select a new target computer:</value>
+  </data>
 </root>
