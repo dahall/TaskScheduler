@@ -99,6 +99,9 @@
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FolderBrowserDialog2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NetworkProfile.cs" />
     <Compile Include="SystemEventEnumerator.cs" />
     <Compile Include="TaskEditDialog.cs">
@@ -151,15 +154,18 @@
     <Compile Include="TaskSchedulerWizard.Designer.cs">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskServiceConnectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskServiceConnectDialog.Designer.cs">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeSpanExtension.cs" />
     <Compile Include="TriggerEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TriggerEditDialog.Designer.cs">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TaskServiceConnectDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -200,15 +206,15 @@
     <EmbeddedResource Include="TaskSchedulerWizard.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.it.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TaskServiceConnectDialog.resx">
-      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1227,7 +1227,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.Id;
-				return "Author";
+				return Properties.Resources.TaskDefaultPrincipal;
 			}
 			set
 			{
@@ -1315,7 +1315,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						v2Principal.GroupId = null;
 						if (value.Contains(@"\") && !value.Contains(@"\\"))
-							value.Replace(@"\", @"\\");
+							value = value.Replace(@"\", @"\\");
 					}
 					v2Principal.UserId = value;
 				}
