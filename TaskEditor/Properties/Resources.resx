@@ -247,4 +247,7 @@
   <data name="TimeSpanIndefinitely" xml:space="preserve">
     <value>Indefinitely</value>
   </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>Unable to retrieve task history. Error: {0}</value>
+  </data>
 </root>

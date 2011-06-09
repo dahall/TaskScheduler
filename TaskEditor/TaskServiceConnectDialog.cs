@@ -85,7 +85,18 @@ namespace Microsoft.Win32.TaskScheduler
 					this.User = value.UserName;
 					this.Domain = value.UserAccountDomain;
 					this.Password = value.UserPassword;
-					this.ForceV1 = value.HighestSupportedVersion <= new Version(1, 1);
+					this.v1Check.Checked = this.ForceV1 = value.HighestSupportedVersion <= new Version(1, 1);
+
+					if (this.TargetServer == null && this.User == null)
+					{
+						this.localComputerRadio.Checked = true;
+					}
+					else
+					{
+						this.remoteComputerText.Text = this.TargetServer;
+						SetUserText(string.Concat(this.Domain, @"\", this.User));
+						this.remoteComputerRadio.Checked = true;
+					}
 				}
 			}
 		}
@@ -201,6 +212,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			runButton.Enabled = remoteComputerText.TextLength > 0;
 			this.TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
+		}
+
+		private void v1Check_CheckedChanged(object sender, EventArgs e)
+		{
+			this.ForceV1 = v1Check.Checked;
 		}
 	}
 }

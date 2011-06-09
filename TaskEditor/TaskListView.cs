@@ -36,8 +36,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				coll = value;
 				listView1.Items.Clear();
-				foreach (var item in coll)
-					listView1.Items.Add(LVIFromTask(item));
+				if (coll != null)
+					foreach (var item in coll)
+						listView1.Items.Add(LVIFromTask(item));
 			}
 		}
 

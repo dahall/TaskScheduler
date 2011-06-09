@@ -58,6 +58,8 @@ namespace Microsoft.Win32.TaskScheduler
 			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = Properties.Resources.TimeSpanImmediately;
 			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
+
+			Editable = false;
 		}
 
 		/// <summary>
@@ -138,6 +140,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
 		/// </summary>
 		/// <value>The task.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Task Task
 		{
 			get
@@ -159,6 +162,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the <see cref="TaskDefinition"/> in its edited state.
 		/// </summary>
 		/// <value>The task definition.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskDefinition TaskDefinition
 		{
 			get { return td; }
@@ -172,6 +176,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				td = value;
 				onAssignment = true;
+				SetVersionComboItems();
 				IsV2 = td.Settings.Compatibility == TaskCompatibility.V2;
 				tabControl.SelectedIndex = 0;
 
@@ -183,6 +188,7 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set General tab
 				SetUserControls(td.Principal.LogonType);
 				taskNameText.Text = task != null ? task.Name : string.Empty;
+				taskNameText.ReadOnly = !(task == null && editable);
 				taskLocationText.Text = GetTaskLocation();
 				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
 				taskDescText.Text = td.RegistrationInfo.Description;
@@ -249,13 +255,34 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the registered task.
+		/// </summary>
+		/// <value>The task name.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string TaskName
+		{
+			get { return taskNameText.Text; }
+			private set { taskNameText.Text = value; }
+		}
+
+		/// <summary>
 		/// Gets the <see cref="TaskService"/> assigned at initialization.
 		/// </summary>
 		/// <value>The task service.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskService TaskService
 		{
 			get { return service; }
 			private set { service = value; }
+		}
+
+		private void SetVersionComboItems()
+		{
+			this.taskVersionCombo.Items.Clear();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
+			if (td.Settings.Compatibility == TaskCompatibility.V2 || (TaskService != null && TaskService.HighestSupportedVersion.Major > 1))
+				this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1"));
+			this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items"));
 		}
 
 		private bool IsV2
@@ -266,12 +293,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2 != value || onAssignment)
 				{
 					v2 = value;
-					this.taskVersionCombo.Items.Clear();
-					System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
-					if (!v2)
-						this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items"));
-					this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1"));
-					taskVersionCombo.SelectedIndex = 0;
+					taskVersionCombo.SelectedIndex = v2 ? 0 : taskVersionCombo.Items.Count - 1;
 				}
 			}
 		}
@@ -472,19 +494,26 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
-			TaskEventLog log = new TaskEventLog(task.Path);
 			List<ListViewItem> c = new List<ListViewItem>(100);
-			foreach (TaskEvent item in log)
-				c.Add(new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
+			try
+			{
+				TaskEventLog log = TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path);
+				foreach (TaskEvent item in log)
+					c.Add(new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
 					item.TaskCategory, item.OpCode, item.ActivityId.ToString() }));
-			c.Reverse();
-			e.Result = c.ToArray();
+				c.Reverse();
+				e.Result = c.ToArray();
+			}
+			catch (Exception ex) { e.Result = ex; }
 		}
 
 		private void historyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			historyListView.Items.AddRange(e.Result as ListViewItem[]);
 			historyListView.Cursor = Cursors.Default;
+			if (e.Result is ListViewItem[])
+				historyListView.Items.AddRange(e.Result as ListViewItem[]);
+			else if (e.Result is Exception)
+				MessageBox.Show(string.Format(Properties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void historyTab_Enter(object sender, EventArgs e)
@@ -836,6 +865,7 @@ namespace Microsoft.Win32.TaskScheduler
 				tabControl.TabPages.Remove(historyTab);
 			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
 				tabControl.TabPages.Add(historyTab);
+			v2 = taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0;
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =

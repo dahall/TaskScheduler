@@ -17,6 +17,8 @@ namespace Microsoft.Win32.TaskScheduler
 		DialogBase
 #endif
 	{
+		private bool titleSet = false;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskEditDialog"/> class.
 		/// </summary>
@@ -98,7 +100,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Title
 		{
 			get { return base.Text; }
-			set { base.Text = value; }
+			set { base.Text = value; titleSet = true; }
 		}
 
 		/// <summary>
@@ -107,7 +109,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		public void Initialize(TaskService service)
 		{
-			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
+			if (!titleSet)
+				this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
 			taskPropertiesControl1.Initialize(service);
 		}
 
@@ -117,7 +120,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
-			this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
+			if (!titleSet)
+				this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
 			taskPropertiesControl1.Initialize(task);
 		}
 
@@ -163,7 +167,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
 					user = this.TaskDefinition.Principal.GroupId;
-				this.TaskService.RootFolder.RegisterTaskDefinition(this.Task.Name, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+				this.TaskService.RootFolder.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
 					user, pwd, this.TaskDefinition.Principal.LogonType);
 			}
 			this.DialogResult = DialogResult.OK;
