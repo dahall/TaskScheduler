@@ -25,13 +25,14 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskServiceConnectDialog()
 		{
 			InitializeComponent();
+			SetUserText(null);
 		}
 
 		/// <summary>
 		/// Gets or sets the domain.
 		/// </summary>
 		/// <value>The domain.</value>
-		[Category("Data"), Description("The user's account domain."), DefaultValue("")]
+		[Browsable(false), Description("The user's account domain."), DefaultValue((string)null)]
 		public string Domain { get; set; }
 
 		/// <summary>
@@ -45,14 +46,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the password.
 		/// </summary>
 		/// <value>The password.</value>
-		[Category("Data"), Description("The user's password."), DefaultValue("")]
+		[Browsable(false), Description("The user's password."), DefaultValue((string)null)]
 		public string Password { get; set; }
 
 		/// <summary>
 		/// Gets or sets the target server.
 		/// </summary>
 		/// <value>The target server.</value>
-		[Category("Data"), Description("The name of the server to get the Task Scheduler."), DefaultValue("")]
+		[Browsable(false), Description("The name of the server to get the Task Scheduler."), DefaultValue((string)null)]
 		public string TargetServer
 		{
 			get
@@ -104,18 +105,23 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user.
 		/// </summary>
 		/// <value>The user.</value>
-		[Category("Data"), Description("The user's username."), DefaultValue("")]
+		[Browsable(false), Description("The user's username."), DefaultValue((string)null)]
 		public string User { get; set; }
+
+		private string GetLocalizedResourceString(string resourceName)
+		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(this.GetType());
+			return resources.GetString(resourceName);
+		}
 
 		private void ResetTitle()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskServiceConnectDialog));
-			base.Text = resources.GetString("$this.Text");
+			base.Text = GetLocalizedResourceString("$this.Text");
 		}
 
 		private void runButton_Click(object sender, EventArgs e)
 		{
-			this.UseWaitCursor = true;
+			bool success = true;
 			ts.BeginInit();
 			ts.TargetServer = this.TargetServer;
 			ts.UserName = this.User;
@@ -123,13 +129,27 @@ namespace Microsoft.Win32.TaskScheduler
 			ts.UserPassword = this.Password;
 			ts.HighestSupportedVersion = new Version(1, this.ForceV1 ? 1 : 2);
 			try { ts.EndInit(); }
-			finally { this.UseWaitCursor = false; }
+			catch (Exception ex) { success = false; MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+			if (success)
+			{
+				this.DialogResult = System.Windows.Forms.DialogResult.OK;
+				Close();
+			}
+		}
+
+		private void SetUserText(string value)
+		{
+			if (String.IsNullOrEmpty(value))
+			{
+				value = Properties.Resources.NoUserSpecifiedText;
+				otherUserCheckbox.Checked = false;
+			}
+			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
 		}
 
 		private bool ShouldSerializeTitle()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskServiceConnectDialog));
-			return base.Text != resources.GetString("$this.Text");
+			return base.Text != GetLocalizedResourceString("$this.Text");
 		}
 
 		private void setUserBtn_Click(object sender, EventArgs e)
@@ -139,7 +159,7 @@ namespace Microsoft.Win32.TaskScheduler
 				dlg.Target = this.TargetServer;
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
-				otherUserCheckbox.Text = string.Format("Connect as another user: {0}", dlg.UserName);
+				SetUserText(dlg.UserName);
 				string[] userParts = dlg.UserName.Split('\\');
 				if (userParts.Length == 2)
 				{
@@ -155,6 +175,12 @@ namespace Microsoft.Win32.TaskScheduler
 			runButton.Enabled = (localComputerRadio.Checked || remoteComputerText.TextLength > 0);
 			remoteComputerText.Enabled = computerBrowseBtn.Enabled = otherUserCheckbox.Enabled = !localComputerRadio.Checked;
 			setUserBtn.Enabled = !localComputerRadio.Checked && otherUserCheckbox.Checked;
+			if (localComputerRadio.Checked)
+			{
+				this.TargetServer = this.User = this.Domain = this.Password = null;
+				SetUserText(null);
+				remoteComputerText.Clear();
+			}
 		}
 
 		private void computerBrowseBtn_Click(object sender, EventArgs e)
@@ -174,6 +200,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void remoteComputerText_TextChanged(object sender, EventArgs e)
 		{
 			runButton.Enabled = remoteComputerText.TextLength > 0;
+			this.TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
 		}
 	}
 }

@@ -50,7 +50,6 @@
 			// runButton
 			// 
 			resources.ApplyResources(this.runButton, "runButton");
-			this.runButton.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.runButton.Name = "runButton";
 			this.runButton.UseVisualStyleBackColor = true;
 			this.runButton.Click += new System.EventHandler(this.runButton_Click);
@@ -112,7 +111,6 @@
 			// 
 			// TaskServiceConnectDialog
 			// 
-			this.AcceptButton = this.runButton;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.closeButton;

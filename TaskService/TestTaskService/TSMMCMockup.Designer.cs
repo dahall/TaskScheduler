@@ -37,6 +37,8 @@
 			this.splitter2 = new System.Windows.Forms.Splitter();
 			this.taskPropertiesControl1 = new Microsoft.Win32.TaskScheduler.TaskPropertiesControl();
 			this.taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+			this.taskServiceConnectDialog1 = new Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog();
+			this.taskRunTimesDialog1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesDialog();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -58,7 +60,7 @@
 			// 
 			// statusStrip1
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 559);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 664);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(959, 22);
 			this.statusStrip1.TabIndex = 2;
@@ -69,7 +71,7 @@
 			this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.treeView1.Location = new System.Drawing.Point(0, 49);
 			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(215, 510);
+			this.treeView1.Size = new System.Drawing.Size(215, 615);
 			this.treeView1.TabIndex = 3;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
@@ -77,7 +79,7 @@
 			// 
 			this.splitter1.Location = new System.Drawing.Point(215, 49);
 			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(3, 510);
+			this.splitter1.Size = new System.Drawing.Size(3, 615);
 			this.splitter1.TabIndex = 4;
 			this.splitter1.TabStop = false;
 			// 
@@ -110,15 +112,22 @@
 			this.taskPropertiesControl1.Size = new System.Drawing.Size(741, 400);
 			this.taskPropertiesControl1.TabIndex = 7;
 			// 
-			// taskService
+			// taskServiceConnectDialog1
 			// 
-			this.taskService.TargetServer = "DHALL5";
+			this.taskServiceConnectDialog1.Name = "TaskServiceConnectDialog";
+			this.taskServiceConnectDialog1.TargetServer = "DHALL5";
+			this.taskServiceConnectDialog1.TaskService = this.taskService;
+			// 
+			// taskRunTimesDialog1
+			// 
+			this.taskRunTimesDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.taskRunTimesDialog1.Name = "TaskRunTimesDialog";
 			// 
 			// TSMMCMockup
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(959, 581);
+			this.ClientSize = new System.Drawing.Size(959, 686);
 			this.Controls.Add(this.taskPropertiesControl1);
 			this.Controls.Add(this.splitter2);
 			this.Controls.Add(this.taskListView1);
@@ -148,5 +157,7 @@
 		private System.Windows.Forms.Splitter splitter2;
 		private Microsoft.Win32.TaskScheduler.TaskPropertiesControl taskPropertiesControl1;
 		private Microsoft.Win32.TaskScheduler.TaskService taskService;
+		private Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog taskServiceConnectDialog1;
+		private Microsoft.Win32.TaskScheduler.TaskRunTimesDialog taskRunTimesDialog1;
 	}
 }

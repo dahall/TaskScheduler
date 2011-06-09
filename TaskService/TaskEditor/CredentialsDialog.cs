@@ -180,13 +180,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// When overridden in a derived class, specifies a common dialog box.
 		/// </summary>
-		/// <param name="hwndOwner">A value that represents the window handle of the owner window for the common dialog box.</param>
+		/// <param name="parentWindowHandle">A value that represents the window handle of the owner window for the common dialog box.</param>
 		/// <returns>
 		/// true if the dialog box was successfully run; otherwise, false.
 		/// </returns>
-		protected override bool RunDialog(IntPtr hwndOwner)
+		protected override bool RunDialog(IntPtr parentWindowHandle)
 		{
-			CREDUI_INFO info = new CREDUI_INFO(hwndOwner, this.Caption, this.Message, this.Banner);
+			CREDUI_INFO info = new CREDUI_INFO(parentWindowHandle, this.Caption, this.Message, this.Banner);
 			try
 			{
 

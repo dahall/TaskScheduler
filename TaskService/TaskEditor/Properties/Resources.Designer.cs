@@ -205,6 +205,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;none&gt;.
+        /// </summary>
+        internal static string NoUserSpecifiedText {
+            get {
+                return ResourceManager.GetString("NoUserSpecifiedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Properties ({1}).
         /// </summary>
         internal static string TaskEditDlgTitle {
@@ -241,65 +250,11 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to day.
-        /// </summary>
-        internal static string TimeSpanDay {
-            get {
-                return ResourceManager.GetString("TimeSpanDay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to days.
-        /// </summary>
-        internal static string TimeSpanDays {
-            get {
-                return ResourceManager.GetString("TimeSpanDays", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to days,day,d.
-        /// </summary>
-        internal static string TimeSpanDayStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanDayStrings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Do not wait.
         /// </summary>
         internal static string TimeSpanDoNotWait {
             get {
                 return ResourceManager.GetString("TimeSpanDoNotWait", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to hour.
-        /// </summary>
-        internal static string TimeSpanHour {
-            get {
-                return ResourceManager.GetString("TimeSpanHour", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to hours.
-        /// </summary>
-        internal static string TimeSpanHours {
-            get {
-                return ResourceManager.GetString("TimeSpanHours", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to hours,hour,hrs,hr,h.
-        /// </summary>
-        internal static string TimeSpanHourStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanHourStrings", resourceCulture);
             }
         }
         
@@ -318,123 +273,6 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string TimeSpanIndefinitely {
             get {
                 return ResourceManager.GetString("TimeSpanIndefinitely", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to minute.
-        /// </summary>
-        internal static string TimeSpanMinute {
-            get {
-                return ResourceManager.GetString("TimeSpanMinute", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to minutes.
-        /// </summary>
-        internal static string TimeSpanMinutes {
-            get {
-                return ResourceManager.GetString("TimeSpanMinutes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to minutes,minute,mins,min,m.
-        /// </summary>
-        internal static string TimeSpanMinuteStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanMinuteStrings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to month.
-        /// </summary>
-        internal static string TimeSpanMonth {
-            get {
-                return ResourceManager.GetString("TimeSpanMonth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to months.
-        /// </summary>
-        internal static string TimeSpanMonths {
-            get {
-                return ResourceManager.GetString("TimeSpanMonths", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to months,month,mos,mo,m.
-        /// </summary>
-        internal static string TimeSpanMonthStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanMonthStrings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to second.
-        /// </summary>
-        internal static string TimeSpanSecond {
-            get {
-                return ResourceManager.GetString("TimeSpanSecond", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to seconds.
-        /// </summary>
-        internal static string TimeSpanSeconds {
-            get {
-                return ResourceManager.GetString("TimeSpanSeconds", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to seconds,second,secs,sec,s.
-        /// </summary>
-        internal static string TimeSpanSecondStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanSecondStrings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to , .
-        /// </summary>
-        internal static string TimeSpanSeparator {
-            get {
-                return ResourceManager.GetString("TimeSpanSeparator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to year.
-        /// </summary>
-        internal static string TimeSpanYear {
-            get {
-                return ResourceManager.GetString("TimeSpanYear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to years.
-        /// </summary>
-        internal static string TimeSpanYears {
-            get {
-                return ResourceManager.GetString("TimeSpanYears", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to years,year,yrs,yr,y.
-        /// </summary>
-        internal static string TimeSpanYearStrings {
-            get {
-                return ResourceManager.GetString("TimeSpanYearStrings", resourceCulture);
             }
         }
         

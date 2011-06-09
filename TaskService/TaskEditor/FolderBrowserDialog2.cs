@@ -153,12 +153,6 @@ namespace Microsoft.Win32.TaskScheduler
 		#region Events
 
 		/// <summary>
-		/// Occurs when the user clicks the Help button on a common dialog box.
-		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public new event EventHandler HelpRequest;
-
-		/// <summary>
 		/// Occurs when dialog box has been initialized and primary values have been set.
 		/// </summary>
 		public event EventHandler<FolderBrowserDialogInitializedEventArgs> Initialized;
@@ -177,6 +171,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		#region Properties
 
+		/// <summary>
+		/// Gets or sets an additional settings flag.
+		/// </summary>
 		[DefaultValue(0), Category("Folder Browsing"), Localizable(false)]
 		public int BrowserFlag
 		{
@@ -211,6 +208,9 @@ namespace Microsoft.Win32.TaskScheduler
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the root folder.
+		/// </summary>
 		[DefaultValue(0), Localizable(false), Category("Folder Browsing")]
 		public Environment.SpecialFolder RootFolder
 		{
@@ -258,6 +258,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		#region Methods
 
+		/// <summary>
+		/// When overridden in a derived class, resets the properties of a common dialog box to their default values.
+		/// </summary>
 		public override void Reset()
 		{
 			this.BrowserFlag = 0;
@@ -271,16 +274,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="parentWindowHandle">The HWND of the parent window.</param>
 		/// <returns>The selected folder or <c>null</c> if no folder was selected by the user.</returns>
-		protected override bool RunDialog(IntPtr hwndOwner)
+		protected override bool RunDialog(IntPtr parentWindowHandle)
 		{
 			// Make sure OLE is initialized. This is a prerequisite for calling SHBrowseForFolder.
 			UnsafeNativeMethods.OleInitialize(IntPtr.Zero);
 
 			IntPtr rpidl = IntPtr.Zero;
-			UnsafeNativeMethods.SHGetSpecialFolderLocation(hwndOwner, (int)this.RootFolder, out rpidl);
+			UnsafeNativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, (int)this.RootFolder, out rpidl);
 			if (rpidl == IntPtr.Zero)
 			{
-				UnsafeNativeMethods.SHGetSpecialFolderLocation(hwndOwner, 0, out rpidl);
+				UnsafeNativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, 0, out rpidl);
 				if (rpidl == IntPtr.Zero)
 					throw new InvalidOperationException("No root folder specified for FolderBrowserDialog2.");
 			}
@@ -298,7 +301,7 @@ namespace Microsoft.Win32.TaskScheduler
 			browseInfoFlag |= (BrowseInfoFlag)BrowserFlag;
 
 			BROWSEINFO bi;
-			bi.hwndOwner = hwndOwner;
+			bi.hwndOwner = parentWindowHandle;
 			bi.pidlRoot = rpidl;
 			bi.pszDisplayName = new string('\0', 260);
 			bi.lpszTitle = Description;
