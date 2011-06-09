@@ -209,13 +209,13 @@
 			// 
 			resources.ApplyResources(this.triggerSelectionList, "triggerSelectionList");
 			radioButtonListItem1.Subtext = "Starts a task based on a daily schedule. For example, the task starts at a specif" +
-				"ic time every day, every other day, every third day, and so on.";
+    "ic time every day, every other day, every third day, and so on.";
 			radioButtonListItem1.Text = "Daily";
 			radioButtonListItem2.Subtext = "Starts a task based on a weekly schedule. For example, the task starts at 8:00 A." +
-				"M. on a specific day of the week every week or every other week.";
+    "M. on a specific day of the week every week or every other week.";
 			radioButtonListItem2.Text = "Weekly";
 			radioButtonListItem3.Subtext = "Starts a task based on a monthly schedule. For example, the task starts on specif" +
-				"ic days of specific months.";
+    "ic days of specific months.";
 			radioButtonListItem3.Text = "Monthly";
 			radioButtonListItem4.Subtext = "Starts a task at a specific date and time.";
 			radioButtonListItem4.Text = "One time";
@@ -472,7 +472,6 @@
 			// 
 			// monthlyDaysDropDown
 			// 
-			this.monthlyDaysDropDown.AllowResizeDropDown = true;
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
@@ -481,7 +480,6 @@
 			// 
 			// monthlyOnDOWDropDown
 			// 
-			this.monthlyOnDOWDropDown.AllowResizeDropDown = true;
 			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnDOWDropDown.CheckAllText = "<Select all days>";
 			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
@@ -491,7 +489,6 @@
 			// 
 			// monthlyOnWeekDropDown
 			// 
-			this.monthlyOnWeekDropDown.AllowResizeDropDown = true;
 			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
@@ -500,7 +497,6 @@
 			// 
 			// monthlyMonthsDropDown
 			// 
-			this.monthlyMonthsDropDown.AllowResizeDropDown = true;
 			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
 			this.monthlyMonthsDropDown.CheckAllText = "<Select all months>";
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
@@ -663,21 +659,25 @@
 			// 
 			resources.ApplyResources(this.sumDescText, "sumDescText");
 			this.sumDescText.Name = "sumDescText";
+			this.sumDescText.ReadOnly = true;
 			// 
 			// sumActionText
 			// 
 			resources.ApplyResources(this.sumActionText, "sumActionText");
 			this.sumActionText.Name = "sumActionText";
+			this.sumActionText.ReadOnly = true;
 			// 
 			// sumTriggerText
 			// 
 			resources.ApplyResources(this.sumTriggerText, "sumTriggerText");
 			this.sumTriggerText.Name = "sumTriggerText";
+			this.sumTriggerText.ReadOnly = true;
 			// 
 			// sumNameText
 			// 
 			resources.ApplyResources(this.sumNameText, "sumNameText");
 			this.sumNameText.Name = "sumNameText";
+			this.sumNameText.ReadOnly = true;
 			// 
 			// openDlgAfterCheck
 			// 

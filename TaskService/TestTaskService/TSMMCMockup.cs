@@ -12,6 +12,8 @@ namespace TestTaskService
 {
 	public partial class TSMMCMockup : Form
 	{
+		private Task selTask;
+
 		public TSMMCMockup()
 		{
 			InitializeComponent();
@@ -20,11 +22,15 @@ namespace TestTaskService
 		private void taskListView1_TaskSelected(object sender, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs e)
 		{
 			if (e.Task == null)
+			{
 				taskPropertiesControl1.Hide();
+				selTask = null;
+			}
 			else
 			{
 				taskPropertiesControl1.Show();
 				taskPropertiesControl1.Initialize(e.Task);
+				selTask = e.Task;
 			}
 		}
 
@@ -38,7 +44,8 @@ namespace TestTaskService
 
 		private void TSMMCMockup_Load(object sender, EventArgs e)
 		{
-			TreeNode n = treeView1.Nodes.Add("Task Scheduler (Local)");
+			treeView1.Nodes.Clear();
+			TreeNode n = treeView1.Nodes.Add(string.Format("Task Scheduler ({0})", taskService.TargetServer == null || taskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : taskService.TargetServer));
 			TreeNode p = n.Nodes.Add("Task Scheduler Library");
 			p.Tag = taskService.RootFolder;
 			LoadChildren(p);
@@ -52,6 +59,68 @@ namespace TestTaskService
 				n.Tag = item;
 				LoadChildren(n);
 			}
+		}
+
+		private void connectToAnotherComputerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (taskServiceConnectDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			{
+				TSMMCMockup_Load(this, EventArgs.Empty);
+			}
+		}
+
+		private void createBasicTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			taskSchedulerWizard1.ShowDialog(this);
+		}
+
+		private void createTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			taskEditDialog1.Initialize(taskService);
+			taskEditDialog1.ShowDialog(this);
+		}
+
+		private void importTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (openFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			{
+				try
+				{
+					TaskDefinition td = taskService.NewTask();
+					td.XmlText = System.IO.File.ReadAllText(openFileDialog1.FileName);
+					taskService.RootFolder.RegisterTaskDefinition(null, td);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error: " + ex.ToString());
+				}
+			}
+		}
+
+		private void displayAllRunningTasksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void runMenu_Click(object sender, EventArgs e)
+		{
+			if (selTask != null)
+				selTask.Run();
+		}
+
+		private void propMenu_Click(object sender, EventArgs e)
+		{
+			if (selTask != null)
+			{
+				taskEditDialog1.Initialize(selTask);
+				taskEditDialog1.ShowDialog(this);
+			}
+		}
+
+		private void deleteMenu_Click(object sender, EventArgs e)
+		{
+			if (selTask != null)
+				taskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
 		}
 	}
 }

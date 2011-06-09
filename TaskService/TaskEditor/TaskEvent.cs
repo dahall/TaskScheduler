@@ -223,6 +223,8 @@ namespace Microsoft.Win32.TaskScheduler
 				"</QueryList>";
 
 			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, string.Format(queryString, taskPath));
+			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
+				q.Session = new EventLogSession(machineName);
 		}
 
 		/// <summary>

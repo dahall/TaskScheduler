@@ -45,7 +45,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GroupControls, Version=1.3.4049.24709, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GroupControls, Version=1.3.4097.30524, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

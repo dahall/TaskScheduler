@@ -46,6 +46,7 @@
 			resources.ApplyResources(this.v1Check, "v1Check");
 			this.v1Check.Name = "v1Check";
 			this.v1Check.UseVisualStyleBackColor = true;
+			this.v1Check.CheckedChanged += new System.EventHandler(this.v1Check_CheckedChanged);
 			// 
 			// runButton
 			// 

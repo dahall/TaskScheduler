@@ -142,6 +142,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to retrieve task history. Error: {0}.
+        /// </summary>
+        internal static string Error_CannotRetrieveHistory {
+            get {
+                return ResourceManager.GetString("Error_CannotRetrieveHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Call to CredUIConfirmCredentials failed with error code: {0}.
         /// </summary>
         internal static string Error_CredUIConfirmFailed {
