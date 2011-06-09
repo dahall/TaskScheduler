@@ -127,75 +127,9 @@
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
-  <data name="TimeSpanDay" xml:space="preserve">
-    <value>day</value>
-  </data>
-  <data name="TimeSpanDays" xml:space="preserve">
-    <value>days</value>
-  </data>
-  <data name="TimeSpanDayStrings" xml:space="preserve">
-    <value>days,day,d</value>
-  </data>
-  <data name="TimeSpanHour" xml:space="preserve">
-    <value>hour</value>
-  </data>
-  <data name="TimeSpanHours" xml:space="preserve">
-    <value>hours</value>
-  </data>
-  <data name="TimeSpanHourStrings" xml:space="preserve">
-    <value>hours,hour,hrs,hr,h</value>
-  </data>
-  <data name="TimeSpanMinute" xml:space="preserve">
-    <value>minute</value>
-  </data>
-  <data name="TimeSpanMinutes" xml:space="preserve">
-    <value>minutes</value>
-  </data>
-  <data name="TimeSpanMinuteStrings" xml:space="preserve">
-    <value>minutes,minute,mins,min,m</value>
-  </data>
-  <data name="TimeSpanMonth" xml:space="preserve">
-    <value>month</value>
-  </data>
-  <data name="TimeSpanMonths" xml:space="preserve">
-    <value>months</value>
-  </data>
-  <data name="TimeSpanMonthStrings" xml:space="preserve">
-    <value>months,month,mos,mo,m</value>
-  </data>
-  <data name="TimeSpanSecond" xml:space="preserve">
-    <value>second</value>
-  </data>
-  <data name="TimeSpanSeconds" xml:space="preserve">
-    <value>seconds</value>
-  </data>
-  <data name="TimeSpanSecondStrings" xml:space="preserve">
-    <value>seconds,second,secs,sec,s</value>
-  </data>
-  <data name="TimeSpanYear" xml:space="preserve">
-    <value>year</value>
-  </data>
-  <data name="TimeSpanYears" xml:space="preserve">
-    <value>years</value>
-  </data>
-  <data name="TimeSpanYearStrings" xml:space="preserve">
-    <value>years,year,yrs,yr,y</value>
-  </data>
-  <data name="TimeSpanSeparator" xml:space="preserve">
-    <value>, </value>
-  </data>
-  <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Do not wait</value>
-  </data>
-  <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Immediately</value>
-  </data>
   <data name="Last" xml:space="preserve">
     <value>Last</value>
     <comment>Text for days of month drop down representing last day of specified month.</comment>
-  </data>
-  <data name="TimeSpanIndefinitely" xml:space="preserve">
-    <value>Indefinitely</value>
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
     <value>At startup</value>
@@ -299,5 +233,18 @@
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
     <value>Select a new target computer:</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;none&gt;</value>
+    <comment>Used when user is null in TaskServiceConnectDialog</comment>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>Do not wait</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>Immediately</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>Indefinitely</value>
   </data>
 </root>
