@@ -8,6 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Contains all the tasks that are registered.
 	/// </summary>
+	/// <remarks>Potentially breaking change in 1.6.2 and later where under V1 the list previously included the '.job' extension on the task name. This has been removed so that it is consistent with V2.</remarks>
 	public sealed class TaskCollection : IEnumerable<Task>, IDisposable
 	{
 		private TaskService svc;
@@ -126,6 +127,8 @@ namespace Microsoft.Win32.TaskScheduler
 							break;
 						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
 							curItem = name.ToString();
+						if (curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
+							curItem = curItem.Remove(curItem.Length - 4);
 					}
 					catch { }
 					finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
@@ -177,6 +180,8 @@ namespace Microsoft.Win32.TaskScheduler
 								using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(cName)))
 								{
 									string tempStr = name.ToString();
+									if (tempStr.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
+										tempStr = tempStr.Remove(tempStr.Length - 4);
 									if (filter == null || filter.IsMatch(tempStr))
 										ret.Add(tempStr);
 								}
@@ -289,7 +294,12 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value != null && (sfilter == string.Empty || sfilter == "*"))
 					filter = null;
 				else
-					filter = value;
+				{
+					if (value.ToString().TrimEnd('$').EndsWith("\\.job", StringComparison.InvariantCultureIgnoreCase))
+						filter = new Regex(value.ToString().Replace("\\.job", ""));
+					else
+						filter = value;
+				}
 			}
 		}
 
