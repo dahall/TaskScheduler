@@ -262,7 +262,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string TaskName
 		{
 			get { return taskNameText.Text; }
-			private set { taskNameText.Text = value; }
+			set { taskNameText.Text = value; }
 		}
 
 		/// <summary>
@@ -302,12 +302,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
-		public void Initialize(TaskService service)
+		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
 			this.TaskService = service;
 			this.task = null;
 			if (!this.IsDesignMode())
-				this.TaskDefinition = service.NewTask();
+			{
+				if (td == null)
+					this.TaskDefinition = service.NewTask();
+				else
+					this.TaskDefinition = td;
+			}
 		}
 
 		/// <summary>

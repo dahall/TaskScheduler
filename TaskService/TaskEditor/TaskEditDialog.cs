@@ -82,6 +82,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the registered task.
+		/// </summary>
+		/// <value>The task name.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string TaskName
+		{
+			get { return taskPropertiesControl1.TaskName; }
+			set { taskPropertiesControl1.TaskName = value; }
+		}
+
+		/// <summary>
 		/// Gets the <see cref="TaskService"/> assigned at initialization.
 		/// </summary>
 		/// <value>The task service.</value>
@@ -107,11 +118,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
-		public void Initialize(TaskService service)
+		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
 			if (!titleSet)
 				this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
-			taskPropertiesControl1.Initialize(service);
+			taskPropertiesControl1.Initialize(service, td);
 		}
 
 		/// <summary>
