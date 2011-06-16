@@ -1667,7 +1667,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.Compatibility;
+					return ((int)v2Settings.Compatibility) >= 2 ? TaskCompatibility.V2 : v2Settings.Compatibility;
 				return TaskCompatibility.V1;
 			}
 			set

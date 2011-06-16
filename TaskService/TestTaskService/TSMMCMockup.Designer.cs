@@ -192,8 +192,7 @@
 			// openFileDialog1
 			// 
 			this.openFileDialog1.DefaultExt = "xml";
-			this.openFileDialog1.FileName = "openFileDialog1";
-			this.openFileDialog1.Filter = ".xml|Xml File";
+			this.openFileDialog1.Filter = "Xml files (*.xml)|*.xml";
 			this.openFileDialog1.Title = "Import Task";
 			// 
 			// taskPropertiesControl1
@@ -219,57 +218,29 @@
 			// 
 			// taskServiceConnectDialog1
 			// 
-			this.taskServiceConnectDialog1.AutoSize = true;
 			this.taskServiceConnectDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskServiceConnectDialog1.ClientSize = new System.Drawing.Size(444, 181);
-			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.taskServiceConnectDialog1.Location = new System.Drawing.Point(25, 25);
 			this.taskServiceConnectDialog1.Name = "TaskServiceConnectDialog";
 			this.taskServiceConnectDialog1.TaskService = this.taskService;
-			this.taskServiceConnectDialog1.Text = "Select Computer";
-			this.taskServiceConnectDialog1.Visible = false;
 			// 
 			// taskRunTimesDialog1
 			// 
-			this.taskRunTimesDialog1.AutoSize = true;
 			this.taskRunTimesDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskRunTimesDialog1.ClientSize = new System.Drawing.Size(269, 294);
-			this.taskRunTimesDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.taskRunTimesDialog1.Location = new System.Drawing.Point(50, 50);
 			this.taskRunTimesDialog1.Name = "TaskRunTimesDialog";
-			this.taskRunTimesDialog1.Text = "Task Run Times";
-			this.taskRunTimesDialog1.Visible = false;
 			// 
 			// taskSchedulerWizard1
 			// 
-			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(537, 391);
-			this.taskSchedulerWizard1.Icon = ((System.Drawing.Icon)(resources.GetObject("taskSchedulerWizard1.Icon")));
-			this.taskSchedulerWizard1.Location = new System.Drawing.Point(75, 75);
-			this.taskSchedulerWizard1.MinimumSize = new System.Drawing.Size(477, 374);
 			this.taskSchedulerWizard1.Name = "TaskSchedulerWizard";
 			this.taskSchedulerWizard1.RegisterTaskOnFinish = true;
-			this.taskSchedulerWizard1.ShowIcon = false;
 			this.taskSchedulerWizard1.TaskService = this.taskService;
-			this.taskSchedulerWizard1.Text = "Create Task Wizard";
-			this.taskSchedulerWizard1.Visible = false;
 			// 
 			// taskEditDialog1
 			// 
-			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskEditDialog1.ClientSize = new System.Drawing.Size(651, 493);
 			this.taskEditDialog1.Editable = true;
-			this.taskEditDialog1.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.taskEditDialog1.Location = new System.Drawing.Point(100, 100);
-			this.taskEditDialog1.MaximizeBox = false;
 			this.taskEditDialog1.Name = "TaskEditDialog";
 			this.taskEditDialog1.RegisterTaskOnAccept = true;
-			this.taskEditDialog1.ShowIcon = false;
-			this.taskEditDialog1.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.taskEditDialog1.TaskService = this.taskService;
-			this.taskEditDialog1.Text = "Create Task";
 			this.taskEditDialog1.Title = "Create Task";
-			this.taskEditDialog1.Visible = false;
 			// 
 			// TSMMCMockup
 			// 
