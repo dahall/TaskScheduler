@@ -68,6 +68,22 @@ namespace TestTaskService
 			}
 		}
 
+		internal static void FindTask(TaskService ts, System.IO.TextWriter output, params string[] arg)
+		{
+			try
+			{
+				Task t = ts.FindTask(arg[0]);
+				if (t == null)
+					output.WriteLine(string.Format("Task '{0}' not found.", arg[0]));
+				else
+					output.WriteLine(string.Format("Task '{0}' found. Created on {1:g} and last run on {2:g}.", t.Name, t.Definition.RegistrationInfo.Date, t.LastRunTime));
+			}
+			catch (Exception ex)
+			{
+				output.WriteLine(ex.ToString());
+			}
+		}
+
 		internal static void FindActionString(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			try
@@ -193,19 +209,21 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Does something";
-				td.Principal.UserId = "BLOODY\\hell";
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
-				td.Principal.GroupId = "Administrators";
+				//td.Principal.UserId = "BLOODY\\hell";
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				//td.Principal.GroupId = "Administrators";
+				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				//td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromMinutes(1);
 
 				// Create a trigger that will fire the task at this time every other day
-				/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
-				dt.Repetition.Duration = TimeSpan.FromHours(4);
-				dt.Repetition.Interval = TimeSpan.FromHours(1);
+				//DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
+				//dt.EndBoundary = DateTime.Today + TimeSpan.FromDays(1);
+				//dt.Repetition.Duration = TimeSpan.FromHours(24);
+				//dt.Repetition.Interval = TimeSpan.FromHours(1);
 
-				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
 				//td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
-				td.Triggers.Add(new LogonTrigger { UserId = string.Empty });
+				//td.Triggers.Add(new LogonTrigger { UserId = string.Empty });
 
 				// Create an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
@@ -343,7 +361,7 @@ namespace TestTaskService
 					td.Settings.WakeToRun = true;
 					td.Settings.RestartCount = 5;
 					td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
-					td.Settings.NetworkSettings.Id = new Guid("{99AF272D-BC5B-4F64-A5B7-8688392C13E6}");
+					//td.Settings.NetworkSettings.Id = new Guid("{99AF272D-BC5B-4F64-A5B7-8688392C13E6}");
 				}
 
 				if (newVer)

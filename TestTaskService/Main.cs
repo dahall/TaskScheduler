@@ -37,7 +37,7 @@ namespace TestTaskService
 				case 2: // Editor
 					Program.EditorTest(ts, output);
 					break;
-				case 3: // Find
+				case 3: // Find action
 					Program.FindActionString(ts, output, textBox2.Text);
 					break;
 				case 4: // Wiz
@@ -45,6 +45,9 @@ namespace TestTaskService
 					break;
 				case 5: // MMC
 					Program.MMCTest(ts, output);
+					break;
+				case 6: // Find task
+					Program.FindTask(ts, output, textBox2.Text);
 					break;
 				default:
 					break;

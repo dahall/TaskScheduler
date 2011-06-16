@@ -493,7 +493,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string GetTaskLocation()
 		{
-			if (task == null || !IsV2)
+			if (task == null || TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) == 0)
 				return @"\";
 			return System.IO.Path.GetDirectoryName(task.Path);
 		}

@@ -88,7 +88,9 @@ namespace TestTaskService
 				{
 					TaskDefinition td = taskService.NewTask();
 					td.XmlText = System.IO.File.ReadAllText(openFileDialog1.FileName);
-					taskService.RootFolder.RegisterTaskDefinition(null, td);
+					taskEditDialog1.Initialize(taskService, td);
+					taskEditDialog1.TaskName = System.IO.Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+					taskEditDialog1.ShowDialog(this);
 				}
 				catch (Exception ex)
 				{

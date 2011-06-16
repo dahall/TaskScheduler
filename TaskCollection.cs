@@ -291,7 +291,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				string sfilter = value == null ? string.Empty : value.ToString().TrimStart('^').TrimEnd('$');
-				if (value != null && (sfilter == string.Empty || sfilter == "*"))
+				if (sfilter == string.Empty || sfilter == "*")
 					filter = null;
 				else
 				{
