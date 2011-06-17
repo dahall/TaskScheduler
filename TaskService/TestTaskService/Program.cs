@@ -256,7 +256,7 @@ namespace TestTaskService
 			Version ver = ts.HighestSupportedVersion;
 			bool newVer = (ver >= new Version(1, 2));
 			output.WriteLine("Highest version: " + ver);
-			output.WriteLine("Server: {0} ({1})", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected");
+			output.WriteLine("Server: {0} ({1}); User: {2}\\{3}", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected", ts.UserAccountDomain, ts.UserName);
 
 			output.WriteLine("Running tasks:");
 			foreach (RunningTask rt in ts.GetRunningTasks(true))
@@ -269,7 +269,7 @@ namespace TestTaskService
 				}
 			}
 
-			const string filter = "";
+			string filter = arg.Length > 0 ? arg[0] : string.Empty;
 			TaskFolder tf = ts.RootFolder;
 			TaskCollection tasks = tf.GetTasks(new Wildcard(filter));
 			output.WriteLine("\nRoot folder tasks matching \"{1}\" ({0}):", tasks.Count, filter);
@@ -313,8 +313,11 @@ namespace TestTaskService
 				output.WriteLine("\n***Checking folder retrieval***");
 				try
 				{
-					TaskFolder sub = tf.SubFolders["Microsoft"];
+					const string testFolder = "TestFolder";
+					tf.CreateFolder(testFolder);
+					TaskFolder sub = tf.SubFolders[testFolder];
 					output.WriteLine("\nSubfolder path: " + sub.Path);
+					tf.DeleteFolder(testFolder);
 				}
 				catch (NotSupportedException) { }
 				catch (Exception ex)
@@ -328,8 +331,8 @@ namespace TestTaskService
 			{
 				TaskDefinition td = ts.NewTask();
 				td.Data = "Your data";
-				td.Principal.UserId = user;
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Principal.UserId = "SYSTEM";
+				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				td.RegistrationInfo.Author = "dahall";
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
@@ -433,7 +436,7 @@ namespace TestTaskService
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 				
-				tf.RegisterTaskDefinition("Test", td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+				tf.RegisterTaskDefinition("Test", td);
 
 				// Try copying it
 				TaskDefinition td2 = ts.NewTask();
@@ -441,7 +444,7 @@ namespace TestTaskService
 					td2.Triggers.Add((Trigger)tg.Clone());
 				foreach (Microsoft.Win32.TaskScheduler.Action a in td.Actions)
 					td2.Actions.Add((Microsoft.Win32.TaskScheduler.Action)a.Clone());
-				tf.RegisterTaskDefinition("Test2", td2);
+				tf.RegisterTaskDefinition("Test2", td2, TaskCreation.CreateOrUpdate, user, null, TaskLogonType.InteractiveToken, null);
 				tf.DeleteTask("Test2");
 			}
 			catch (Exception ex)

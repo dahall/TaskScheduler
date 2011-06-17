@@ -132,7 +132,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 				v2Folder.DeleteFolder(subFolderName, 0);
-			throw new NotV1SupportedException();
+			else
+				throw new NotV1SupportedException();
 		}
 
 		/// <summary>
