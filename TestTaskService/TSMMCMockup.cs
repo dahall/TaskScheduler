@@ -37,9 +37,18 @@ namespace TestTaskService
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			if (e.Node.Tag == null)
+			{
 				taskListView1.Tasks = null;
+				taskListView1_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);
+			}
 			else
+			{
 				taskListView1.Tasks = ((TaskFolder)e.Node.Tag).Tasks;
+				if (taskListView1.Tasks.Count > 0)
+					taskListView1.SelectedIndex = 0;
+				else
+					taskListView1_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);
+			}
 		}
 
 		private void TSMMCMockup_Load(object sender, EventArgs e)

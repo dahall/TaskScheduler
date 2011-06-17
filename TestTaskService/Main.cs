@@ -32,7 +32,7 @@ namespace TestTaskService
 					Program.ShortTest(ts, output);
 					break;
 				case 1: // Long
-					Program.LongTest(ts, output);
+					Program.LongTest(ts, output, textBox2.Text);
 					break;
 				case 2: // Editor
 					Program.EditorTest(ts, output);

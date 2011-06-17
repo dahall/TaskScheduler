@@ -25,6 +25,26 @@ namespace Microsoft.Win32.TaskScheduler
 		public event EventHandler<TaskSelectedEventArgs> TaskSelected;
 
 		/// <summary>
+		/// Gets or sets the zero-based index of the currently selected item in a <see cref="TaskListView"/>.
+		/// </summary>
+		/// <value>
+		/// A zero-based index of the currently selected item. A value of negative one (-1) is returned if no item is selected.
+		/// </value>
+		public int SelectedIndex
+		{
+			get
+			{
+				return listView1.SelectedIndices.Count == 0 ? -1 : listView1.SelectedIndices[0];
+			}
+			set
+			{
+				foreach (int i in listView1.SelectedIndices)
+					listView1.Items[i].Selected = false;
+				listView1.Items[value].Selected = true;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the tasks.
 		/// </summary>
 		/// <value>The tasks.</value>
