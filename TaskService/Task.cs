@@ -1157,10 +1157,14 @@ namespace Microsoft.Win32.TaskScheduler
 		private const string localSystemAcct = "SYSTEM";
 		private V1Interop.ITask v1Task = null;
 		private V2Interop.IPrincipal v2Principal;
+		private V2Interop.IPrincipal2 v2Principal2;
+		private TaskPrincipalPrivileges reqPriv;
 
 		internal TaskPrincipal(V2Interop.IPrincipal iPrincipal)
 		{
 			v2Principal = iPrincipal;
+			try { v2Principal2 = (V2Interop.IPrincipal2)v2Principal; }
+			catch { }
 		}
 
 		internal TaskPrincipal(TaskScheduler.V1Interop.ITask iTask)
@@ -1270,6 +1274,42 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the task process security identifier (SID) type.
+		/// </summary>
+		/// <value>
+		/// One of the <see cref="TaskProcessTokenSidType"/> enumeration constants.
+		/// </value>
+		public TaskProcessTokenSidType ProcessTokenSidType
+		{
+			get
+			{
+				if (v2Principal2 != null)
+					return v2Principal2.ProcessTokenSidType;
+				return TaskProcessTokenSidType.Default;
+			}
+			set
+			{
+				if (v2Principal2 != null)
+					v2Principal2.ProcessTokenSidType = value;
+				else
+					throw new NotV1SupportedException();
+			}
+		}
+
+		/// <summary>
+		/// Gets the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+		/// </summary>
+		public TaskPrincipalPrivileges RequiredPrivileges
+		{
+			get
+			{
+				if (reqPriv == null)
+					reqPriv = new TaskPrincipalPrivileges(this.v2Principal2);
+				return reqPriv;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
 		/// </summary>
 		public TaskRunLevel RunLevel
@@ -1347,6 +1387,272 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return this.LogonType == TaskLogonType.Group ? this.GroupId : this.UserId;
+		}
+	}
+
+	/// <summary>
+	/// List of security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+	/// </summary>
+	public sealed class TaskPrincipalPrivileges : System.Collections.Generic.IList<string>
+	{
+		private V2Interop.IPrincipal2 v2Principal2;
+
+		internal TaskPrincipalPrivileges(V2Interop.IPrincipal2 iPrincipal2 = null)
+		{
+			this.v2Principal2 = iPrincipal2;
+		}
+
+		/// <summary>
+		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+		/// <returns>
+		/// The index of <paramref name="item"/> if found in the list; otherwise, -1.
+		/// </returns>
+		public int IndexOf(string item)
+		{
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (string.Compare(item, this[i], true) == 0)
+					return i;
+			}
+			return -1;
+		}
+
+		/// <summary>
+		/// Inserts an item to the <see cref="T:System.Collections.Generic.IList`1"/> at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+		/// <param name="item">The object to insert into the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+		///   </exception>
+		///   
+		/// <exception cref="T:System.NotSupportedException">
+		/// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+		///   </exception>
+		public void Insert(int index, string item)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Removes the <see cref="T:System.Collections.Generic.IList`1"/> item at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index of the item to remove.</param>
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+		///   </exception>
+		///   
+		/// <exception cref="T:System.NotSupportedException">
+		/// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+		///   </exception>
+		public void RemoveAt(int index)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Gets or sets the element at the specified index.
+		/// </summary>
+		/// <returns>
+		/// The element at the specified index.
+		///   </returns>
+		///   
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+		///   </exception>
+		///   
+		/// <exception cref="T:System.NotSupportedException">
+		/// The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+		///   </exception>
+		public string this[int index]
+		{
+			get
+			{
+				if (this.v2Principal2 != null)
+					return this.v2Principal2.GetRequiredPrivilege(index + 1);
+				throw new IndexOutOfRangeException();
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		/// <summary>
+		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		/// </summary>
+		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+		/// <exception cref="T:System.NotSupportedException">
+		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+		///   </exception>
+		public void Add(string item)
+		{
+			if (this.v2Principal2 != null)
+				this.v2Principal2.AddRequiredPrivilege(item);
+			else
+				throw new NotV1SupportedException();
+		}
+
+		/// <summary>
+		/// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		/// </summary>
+		/// <exception cref="T:System.NotSupportedException">
+		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+		///   </exception>
+		public void Clear()
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+		/// <returns>
+		/// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+		/// </returns>
+		public bool Contains(string item)
+		{
+			return (this.IndexOf(item) != -1);
+		}
+
+		/// <summary>
+		/// Copies to.
+		/// </summary>
+		/// <param name="array">The array.</param>
+		/// <param name="arrayIndex">Index of the array.</param>
+		public void CopyTo(string[] array, int arrayIndex)
+		{
+			var pEnum = GetEnumerator();
+			for (int i = arrayIndex; i < array.Length; i++)
+			{
+				if (!pEnum.MoveNext())
+					break;
+				array[i] = pEnum.Current;
+			}
+		}
+
+		/// <summary>
+		/// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		/// </summary>
+		/// <returns>
+		/// The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		///   </returns>
+		public int Count
+		{
+			get { return (this.v2Principal2 != null) ? (int)this.v2Principal2.RequiredPrivilegeCount : 0; }
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+		/// </summary>
+		/// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+		///   </returns>
+		public bool IsReadOnly
+		{
+			get { return false; }
+		}
+
+		/// <summary>
+		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		/// </summary>
+		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+		/// <returns>
+		/// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+		/// </returns>
+		/// <exception cref="T:System.NotSupportedException">
+		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+		///   </exception>
+		public bool Remove(string item)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Returns an enumerator that iterates through the collection.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+		/// </returns>
+		public System.Collections.Generic.IEnumerator<string> GetEnumerator()
+		{
+			return new TaskPrincipalPrivilegesEnumerator(this.v2Principal2);
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public sealed class TaskPrincipalPrivilegesEnumerator : System.Collections.Generic.IEnumerator<string>
+		{
+			private V2Interop.IPrincipal2 v2Principal2;
+			int cur;
+			string curString;
+
+			internal TaskPrincipalPrivilegesEnumerator(V2Interop.IPrincipal2 iPrincipal2 = null)
+			{
+				this.v2Principal2 = iPrincipal2;
+				Reset();
+			}
+
+			/// <summary>
+			/// Gets the element in the collection at the current position of the enumerator.
+			/// </summary>
+			/// <returns>
+			/// The element in the collection at the current position of the enumerator.
+			///   </returns>
+			public string Current
+			{
+				get { return curString; }
+			}
+
+			/// <summary>
+			/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+			/// </summary>
+			public void Dispose()
+			{
+			}
+
+			object System.Collections.IEnumerator.Current
+			{
+				get { return this.Current; }
+			}
+
+			/// <summary>
+			/// Advances the enumerator to the next element of the collection.
+			/// </summary>
+			/// <returns>
+			/// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+			/// </returns>
+			/// <exception cref="T:System.InvalidOperationException">
+			/// The collection was modified after the enumerator was created.
+			///   </exception>
+			public bool MoveNext()
+			{
+				if (this.v2Principal2 != null && cur < v2Principal2.RequiredPrivilegeCount)
+				{
+					cur++;
+					curString = v2Principal2.GetRequiredPrivilege(cur);
+					return true;
+				}
+				curString = null;
+				return false;
+			}
+
+			/// <summary>
+			/// Sets the enumerator to its initial position, which is before the first element in the collection.
+			/// </summary>
+			/// <exception cref="T:System.InvalidOperationException">
+			/// The collection was modified after the enumerator was created.
+			///   </exception>
+			public void Reset()
+			{
+				cur = 0;
+				curString = null;
+			}
 		}
 	}
 
@@ -1619,10 +1925,13 @@ namespace Microsoft.Win32.TaskScheduler
 		private NetworkSettings networkSettings = null;
 		private TaskScheduler.V1Interop.ITask v1Task = null;
 		private TaskScheduler.V2Interop.ITaskSettings v2Settings = null;
+		private TaskScheduler.V2Interop.ITaskSettings2 v2Settings2 = null;
 
 		internal TaskSettings(TaskScheduler.V2Interop.ITaskSettings iSettings)
 		{
 			v2Settings = iSettings;
+			try { v2Settings2 = (TaskScheduler.V2Interop.ITaskSettings2)v2Settings; }
+			catch { }
 		}
 
 		internal TaskSettings(TaskScheduler.V1Interop.ITask iTask)
@@ -1742,6 +2051,26 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.DontStartIfOnBatteries);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task will not be started if the task is triggered to run in a Remote Applications Integrated Locally (RAIL) session.
+		/// </summary>
+		public bool DisallowStartOnRemoteAppSession 
+		{
+			get
+			{
+				if (v2Settings2 != null)
+					return v2Settings2.DisallowStartOnRemoteAppSession;
+				return false;
+			}
+			set
+			{
+				if (v2Settings2 != null)
+					v2Settings2.DisallowStartOnRemoteAppSession = value;
+				else
+					throw new NotV1SupportedException();
 			}
 		}
 
@@ -2104,6 +2433,26 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.KillIfGoingOnBatteries);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the Unified Scheduling Engine will be utilized to run this task.
+		/// </summary>
+		public bool UseUnifiedSchedulingEngine
+		{
+			get
+			{
+				if (v2Settings2 != null)
+					return v2Settings2.UseUnifiedSchedulingEngine;
+				return false;
+			}
+			set
+			{
+				if (v2Settings2 != null)
+					v2Settings2.UseUnifiedSchedulingEngine = value;
+				else
+					throw new NotV1SupportedException();
 			}
 		}
 

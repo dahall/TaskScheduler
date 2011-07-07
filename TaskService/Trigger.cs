@@ -1277,7 +1277,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
+				{
+					WhichWeek ww = (WhichWeek)((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth;
+					// Following addition give accurate results for confusing RunOnLastWeekOfMonth property (thanks kbergeron)
+					if (((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth)
+						ww |= WhichWeek.LastWeek;
+					return ww;
+				}
 				else if (v1Trigger != null)
 					return v1TriggerData.Data.monthlyDOW.V2WhichWeek;
 				else
