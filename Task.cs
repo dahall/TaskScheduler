@@ -1279,7 +1279,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// One of the <see cref="TaskProcessTokenSidType"/> enumeration constants.
 		/// </value>
-		public TaskProcessTokenSidType ProcessTokenSidType
+		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
+		private TaskProcessTokenSidType ProcessTokenSidType
 		{
 			get
 			{
@@ -1299,7 +1300,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
 		/// </summary>
-		public TaskPrincipalPrivileges RequiredPrivileges
+		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
+		private TaskPrincipalPrivileges RequiredPrivileges
 		{
 			get
 			{
@@ -1391,7 +1393,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// List of security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+	/// List of security credentials for a principal under version 1.3 of the Task Scheduler. These security credentials define the security context for the tasks that are associated with the principal.
 	/// </summary>
 	public sealed class TaskPrincipalPrivileges : System.Collections.Generic.IList<string>
 	{
@@ -1584,7 +1586,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// 
+		/// Enumerates the privileges set for a principal under version 1.3 of the Task Scheduler.
 		/// </summary>
 		public sealed class TaskPrincipalPrivilegesEnumerator : System.Collections.Generic.IEnumerator<string>
 		{

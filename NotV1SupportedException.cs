@@ -14,7 +14,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TSNotSupportedException()
 		{
 			StackTrace stackTrace = new StackTrace();
-			StackFrame stackFrame = stackTrace.GetFrame(1);
+			StackFrame stackFrame = stackTrace.GetFrame(2);
 			MethodBase methodBase = stackFrame.GetMethod();
 			myMessage = string.Format("{0}.{1} is not supported on {2}", methodBase.DeclaringType.Name, methodBase.Name, this.LibName);
 		}
