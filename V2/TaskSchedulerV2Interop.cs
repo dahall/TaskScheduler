@@ -315,13 +315,13 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	[ComImport, TypeLibType((short)0x10c0), Guid("248919AE-E345-4A6D-8AEB-E0D3165C904E"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IPrincipal2
 	{
-		[DispId(1)]
-		TaskProcessTokenSidType ProcessTokenSidType { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] set; }
-		[DispId(2)]
-		long RequiredPrivilegeCount { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] get; }
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(3)]
+		[DispId(7)]
+		TaskProcessTokenSidType ProcessTokenSidType { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(7)] set; }
+		[DispId(8)]
+		long RequiredPrivilegeCount { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(8)] get; }
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(9)]
 		string GetRequiredPrivilege(long index);
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(4)]
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(10)]
 		void AddRequiredPrivilege([In, MarshalAs(UnmanagedType.BStr)] string privilege);
 	}
 
@@ -714,10 +714,10 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	[ComImport, TypeLibType((short)0x10c0), Guid("2C05C3F0-6EED-4c05-A15F-ED7D7A98A369"), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskSettings2
 	{
-		[DispId(1)]
-		bool DisallowStartOnRemoteAppSession { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)] set; }
-		[DispId(2)]
-		bool UseUnifiedSchedulingEngine { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)] set; }
+		[DispId(30)]
+		bool DisallowStartOnRemoteAppSession { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(30)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(30)] set; }
+		[DispId(0x1f)]
+		bool UseUnifiedSchedulingEngine { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x1f)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x1f)] set; }
 	}
 
 	[ComImport, Guid("3E4C9351-D966-4B8B-BB87-CEBA68BB0107"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
