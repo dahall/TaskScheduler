@@ -94,16 +94,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
-		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
-		public TaskFolder CreateFolder(string subFolderName)
-		{
-			return this.CreateFolder(subFolderName, (string)null);
-		}
-
-		/// <summary>
-		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
-		/// </summary>
-		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="sd">The security descriptor associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
 		public TaskFolder CreateFolder(string subFolderName, System.Security.AccessControl.GenericSecurityDescriptor sd)
