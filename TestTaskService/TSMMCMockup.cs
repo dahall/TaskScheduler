@@ -133,5 +133,12 @@ namespace TestTaskService
 			if (selTask != null)
 				taskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
 		}
+
+		private void exportTaskToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			if (selTask != null)
+				if (saveFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+					System.IO.File.WriteAllText(saveFileDialog1.FileName, selTask.Xml);
+		}
 	}
 }

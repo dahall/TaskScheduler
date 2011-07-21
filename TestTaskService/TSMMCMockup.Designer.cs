@@ -54,6 +54,8 @@
 			this.taskRunTimesDialog1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesDialog();
 			this.taskSchedulerWizard1 = new Microsoft.Win32.TaskScheduler.TaskSchedulerWizard();
 			this.taskEditDialog1 = new Microsoft.Win32.TaskScheduler.TaskEditDialog();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.exportTaskToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).BeginInit();
@@ -154,10 +156,11 @@
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runMenu,
             this.propMenu,
-            this.deleteMenu});
+            this.deleteMenu,
+            this.exportTaskToolStripMenuItem1});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
 			this.contextMenuStrip1.ShowImageMargin = false;
-			this.contextMenuStrip1.Size = new System.Drawing.Size(103, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(119, 92);
 			// 
 			// runMenu
 			// 
@@ -212,35 +215,71 @@
 			this.taskListView1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.taskListView1.Location = new System.Drawing.Point(218, 49);
 			this.taskListView1.Name = "taskListView1";
+			this.taskListView1.SelectedIndex = -1;
 			this.taskListView1.Size = new System.Drawing.Size(741, 232);
 			this.taskListView1.TabIndex = 5;
 			this.taskListView1.TaskSelected += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs>(this.taskListView1_TaskSelected);
+			this.taskListView1.DoubleClick += new System.EventHandler(this.propMenu_Click);
 			// 
 			// taskServiceConnectDialog1
 			// 
+			this.taskServiceConnectDialog1.AutoSize = true;
 			this.taskServiceConnectDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.taskServiceConnectDialog1.ClientSize = new System.Drawing.Size(444, 181);
+			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskServiceConnectDialog1.Name = "TaskServiceConnectDialog";
 			this.taskServiceConnectDialog1.TaskService = this.taskService;
+			this.taskServiceConnectDialog1.Text = "Select Computer";
+			this.taskServiceConnectDialog1.Visible = false;
 			// 
 			// taskRunTimesDialog1
 			// 
+			this.taskRunTimesDialog1.AutoSize = true;
 			this.taskRunTimesDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.taskRunTimesDialog1.ClientSize = new System.Drawing.Size(269, 294);
+			this.taskRunTimesDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskRunTimesDialog1.Name = "TaskRunTimesDialog";
+			this.taskRunTimesDialog1.Text = "Task Run Times";
+			this.taskRunTimesDialog1.Visible = false;
 			// 
 			// taskSchedulerWizard1
 			// 
+			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(537, 391);
+			this.taskSchedulerWizard1.Icon = ((System.Drawing.Icon)(resources.GetObject("taskSchedulerWizard1.Icon")));
+			this.taskSchedulerWizard1.MinimumSize = new System.Drawing.Size(477, 374);
 			this.taskSchedulerWizard1.Name = "TaskSchedulerWizard";
 			this.taskSchedulerWizard1.RegisterTaskOnFinish = true;
+			this.taskSchedulerWizard1.ShowIcon = false;
 			this.taskSchedulerWizard1.TaskService = this.taskService;
+			this.taskSchedulerWizard1.Visible = false;
 			// 
 			// taskEditDialog1
 			// 
+			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.taskEditDialog1.ClientSize = new System.Drawing.Size(651, 493);
 			this.taskEditDialog1.Editable = true;
+			this.taskEditDialog1.Font = new System.Drawing.Font("Segoe UI", 9F);
+			this.taskEditDialog1.MaximizeBox = false;
 			this.taskEditDialog1.Name = "TaskEditDialog";
 			this.taskEditDialog1.RegisterTaskOnAccept = true;
+			this.taskEditDialog1.ShowIcon = false;
+			this.taskEditDialog1.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.taskEditDialog1.TaskService = this.taskService;
+			this.taskEditDialog1.Text = "Create Task";
 			this.taskEditDialog1.Title = "Create Task";
+			this.taskEditDialog1.Visible = false;
+			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.DefaultExt = "xml";
+			this.saveFileDialog1.Filter = "Xml files (*.xml)|*.xml";
+			// 
+			// exportTaskToolStripMenuItem1
+			// 
+			this.exportTaskToolStripMenuItem1.Name = "exportTaskToolStripMenuItem1";
+			this.exportTaskToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+			this.exportTaskToolStripMenuItem1.Text = "Export Task...";
 			// 
 			// TSMMCMockup
 			// 
@@ -295,5 +334,7 @@
 		private System.Windows.Forms.ToolStripMenuItem runMenu;
 		private System.Windows.Forms.ToolStripMenuItem propMenu;
 		private System.Windows.Forms.ToolStripMenuItem deleteMenu;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.ToolStripMenuItem exportTaskToolStripMenuItem1;
 	}
 }
