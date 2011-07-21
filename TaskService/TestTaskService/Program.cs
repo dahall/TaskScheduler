@@ -209,7 +209,8 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Does something";
-				//td.Principal.UserId = "BLOODY\\hell";
+				td.RegistrationInfo.Source = "Installer";
+				td.Triggers.Add(new LogonTrigger());
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				//td.Principal.GroupId = "Administrators";
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
@@ -221,8 +222,8 @@ namespace TestTaskService
 				//dt.Repetition.Duration = TimeSpan.FromHours(24);
 				//dt.Repetition.Interval = TimeSpan.FromHours(1);
 
-				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
-				//td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.LastWeek));
+				//td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
+				//td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.FirstWeek) { RunOnLastWeekOfMonth = true });
 				//td.Triggers.Add(new LogonTrigger { UserId = string.Empty });
 
 				// Create an action that will launch Notepad whenever the trigger fires
@@ -230,7 +231,7 @@ namespace TestTaskService
 
 				// Register the task in the root folder
 				const string taskName = "Test";
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
@@ -239,6 +240,8 @@ namespace TestTaskService
 				t = ts.GetTask(taskName);
 				t.Definition.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
 				t.RegisterChanges();
+
+				//System.IO.File.WriteAllText(System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop), taskName + ".xml"), t.Xml);
 
 				// Remove the task we just created
 				ts.RootFolder.DeleteTask(taskName);
@@ -254,7 +257,8 @@ namespace TestTaskService
 			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
 			Version ver = ts.HighestSupportedVersion;
-			bool newVer = (ver >= new Version(1, 2));
+			bool isV12 = (ver >= new Version(1, 2));
+			bool isV13 = (ver >= new Version(1, 3));
 			output.WriteLine("Highest version: " + ver);
 			output.WriteLine("Server: {0} ({1}); User: {2}\\{3}", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected", ts.UserAccountDomain, ts.UserName);
 
@@ -308,7 +312,7 @@ namespace TestTaskService
 				}
 			}
 
-			if (newVer)
+			if (isV12)
 			{
 				output.WriteLine("\n***Checking folder retrieval***");
 				try
@@ -348,7 +352,7 @@ namespace TestTaskService
 				td.Settings.RunOnlyIfIdle = true;
 				td.Settings.RunOnlyIfNetworkAvailable = true;
 				td.Settings.StopIfGoingOnBatteries = true;
-				if (newVer)
+				if (isV12)
 				{
 					td.Principal.RunLevel = TaskRunLevel.Highest; //.LUA;
 					//td.RegistrationInfo.SecurityDescriptorSddlForm = "O:COG:CGD::(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)";
@@ -366,18 +370,31 @@ namespace TestTaskService
 					td.Settings.RestartInterval = TimeSpan.FromSeconds(100);
 					//td.Settings.NetworkSettings.Id = new Guid("{99AF272D-BC5B-4F64-A5B7-8688392C13E6}");
 				}
+				if (isV13)
+				{
+					/*td.Principal.ProcessTokenSidType = TaskProcessTokenSidType.Unrestricted;
+					td.Principal.RequiredPrivileges.Add("SeBackupPrivilege");
+					td.Principal.RequiredPrivileges.Add("SeDebugPrivilege");
+					td.Principal.RequiredPrivileges.Add("SeImpersonatePrivilege");
+					output.Write("Priv: ");
+					foreach (string item in td.Principal.RequiredPrivileges)
+						output.Write(item + ", ");
+					output.WriteLine();*/
+					td.Settings.DisallowStartOnRemoteAppSession = true;
+					td.Settings.UseUnifiedSchedulingEngine = true;
+				}
 
-				if (newVer)
+				if (isV12)
 				{
 					BootTrigger bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
-					if (newVer) bTrigger.Delay = TimeSpan.FromMinutes(5);
+					if (isV12) bTrigger.Delay = TimeSpan.FromMinutes(5);
 				}
 
 				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
 				dTrigger.DaysInterval = 2;
-				if (newVer) dTrigger.RandomDelay = TimeSpan.FromHours(2);
+				if (isV12) dTrigger.RandomDelay = TimeSpan.FromHours(2);
 
-				if (newVer)
+				if (isV12)
 				{
 					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
@@ -396,7 +413,7 @@ namespace TestTaskService
 				td.Triggers.Add(new IdleTrigger());
 
 				LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
-				if (newVer)
+				if (isV12)
 				{
 					lTrigger.Delay = TimeSpan.FromMinutes(15);
 					lTrigger.UserId = user;
@@ -406,20 +423,20 @@ namespace TestTaskService
 				MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
 				mTrigger.DaysOfMonth = new int[] { 3, 6, 10, 18 };
 				mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
-				if (newVer) mTrigger.RunOnLastDayOfMonth = true;
+				if (isV12) mTrigger.RunOnLastDayOfMonth = true;
 				mTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(90);
 
 				MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
 				mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
 				mdTrigger.MonthsOfYear = MonthsOfTheYear.January | MonthsOfTheYear.December;
-				if (newVer) mdTrigger.RunOnLastWeekOfMonth = true;
+				if (isV12) mdTrigger.RunOnLastWeekOfMonth = true;
 				mdTrigger.WeeksOfMonth = WhichWeek.FirstWeek;
 
 				TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
 				tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
-				if (newVer) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
-				if (newVer) tTrigger.Id = "Time test";
+				if (isV12) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
+				if (isV12) tTrigger.Id = "Time test";
 				tTrigger.Repetition.Duration = TimeSpan.FromMinutes(21);
 				tTrigger.Repetition.Interval = TimeSpan.FromMinutes(17);
 				tTrigger.Repetition.StopAtDurationEnd = true;
@@ -429,7 +446,7 @@ namespace TestTaskService
 				wTrigger.WeeksInterval = 3;
 
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
-				if (newVer)
+				if (isV12)
 				{
 					td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
 					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
