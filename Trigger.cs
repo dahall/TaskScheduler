@@ -1292,16 +1292,15 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
-				{
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
-				}
-				else if (v1Trigger != null)
+				else
 				{
 					v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
-					SetV1TriggerData();
+					if (v1Trigger != null)
+						SetV1TriggerData();
+					else
+						unboundValues["WeeksOfMonth"] = (short)value;
 				}
-				else
-					unboundValues["WeeksOfMonth"] = (short)value;
 			}
 		}
 
