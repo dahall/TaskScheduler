@@ -540,14 +540,25 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (this.flagExecutorIsServiceAccount)
 			{
+				if (!v2 && acct != "SYSTEM")
+				{
+					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
 				this.flagExecutorIsGroup = false;
-				td.Principal.GroupId = null;
+				if (v2)
+					td.Principal.GroupId = null;
 				td.Principal.UserId = acct;
 				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				//this.flagExecutorIsCurrentUser = false;
 			}
 			else if (this.flagExecutorIsGroup)
 			{
+				if (!v2)
+				{
+					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
 				td.Principal.GroupId = acct;
 				td.Principal.UserId = null;
 				td.Principal.LogonType = TaskLogonType.Group;
@@ -555,7 +566,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-				td.Principal.GroupId = null;
+				if (v2)
+					td.Principal.GroupId = null;
 				td.Principal.UserId = acct;
 				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(objArray[0].ObjectName);
 				if (td.Principal.LogonType == TaskLogonType.Group)
@@ -564,7 +576,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else if (td.Principal.LogonType == TaskLogonType.ServiceAccount)
 				{
-					td.Principal.LogonType = TaskLogonType.Password;
+					td.Principal.LogonType = TaskLogonType.InteractiveTokenOrPassword;
 				}
 			}
 			SetUserControls(td.Principal.LogonType);
@@ -773,7 +785,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskLocalOnlyCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Principal.LogonType = (taskLocalOnlyCheck.Checked && v2) ? TaskLogonType.S4U : TaskLogonType.Password;
+				td.Principal.LogonType = v2 ? ((taskLocalOnlyCheck.Checked) ? TaskLogonType.S4U : TaskLogonType.Password) : TaskLogonType.InteractiveTokenOrPassword;
 		}
 
 		private void taskLoggedOnRadio_CheckedChanged(object sender, EventArgs e)

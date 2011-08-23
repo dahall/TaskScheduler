@@ -176,13 +176,14 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				ts.AddTask(taskName,
-					new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1), RandomDelay = TimeSpan.FromDays(2), Enabled = false }, 
-					new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
+				TaskDefinition td = ts.NewTask();
+				td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
+				td.Actions.Add(new ExecAction("notepad.exe"));
+				ts.RootFolder.RegisterTaskDefinition(taskName, td);
 
 				// Edit task
 				Task t = ts.GetTask(taskName);
-				TaskDefinition td = DisplayTask(t, true);
+				td = DisplayTask(t, true);
 
 				// Register then show task again
 				while (td != null)
@@ -209,8 +210,9 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Does something";
-				td.RegistrationInfo.Source = "Installer";
-				td.Triggers.Add(new LogonTrigger());
+				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
+				//td.RegistrationInfo.Source = "Installer";
+				td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Monday, MonthsOfTheYear.January, WhichWeek.FirstWeek));
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				//td.Principal.GroupId = "Administrators";
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
@@ -281,7 +283,7 @@ namespace TestTaskService
 			{
 				try
 				{
-					output.WriteLine("+ {0}, {1} ({2})", t.Name, t.Definition.RegistrationInfo.Author, t.State);
+					output.WriteLine("+ {0}, {1} ({2}) - {3}", t.Name, t.Definition.RegistrationInfo.Author, t.State, t.Definition.Settings.Compatibility);
 					foreach (Trigger trg in t.Definition.Triggers)
 						output.WriteLine(" + {0}", trg);
 					foreach (var act in t.Definition.Actions)
@@ -317,10 +319,13 @@ namespace TestTaskService
 				output.WriteLine("\n***Checking folder retrieval***");
 				try
 				{
-					const string testFolder = "TestFolder";
+					const string testFolder = "David's TestFolder";
 					tf.CreateFolder(testFolder);
 					TaskFolder sub = tf.SubFolders[testFolder];
 					output.WriteLine("\nSubfolder path: " + sub.Path);
+					ts.AddTask(testFolder + @"\MyTask", new LogonTrigger(), new ExecAction("notepad"));
+					output.WriteLine(" - Tasks: " + sub.Tasks.Count.ToString());
+					sub.DeleteTask("MyTask");
 					tf.DeleteFolder(testFolder);
 				}
 				catch (NotSupportedException) { }
