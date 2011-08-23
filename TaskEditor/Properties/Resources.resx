@@ -250,4 +250,7 @@
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
     <value>Unable to retrieve task history. Error: {0}</value>
   </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>Running a task under a group user account is supported only on Windows Vista™ or later. To run a task under a group account, you must upgrade this task to a Windows Vista™ task.</value>
+  </data>
 </root>

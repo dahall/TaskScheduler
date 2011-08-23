@@ -211,6 +211,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Adds ability to set a password for a V1 task. Provided by Arcao.
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
+			if (LogonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
+				LogonType = TaskLogonType.InteractiveToken;
 			switch (LogonType)
 			{
 				case TaskLogonType.Group:

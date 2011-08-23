@@ -1251,9 +1251,11 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.LogonType;
-				if ((v1Task.GetFlags() & V1Interop.TaskFlags.Interactive) == V1Interop.TaskFlags.Interactive)
+				if (this.UserId == localSystemAcct)
+					return TaskLogonType.ServiceAccount;
+				if ((v1Task.GetFlags() & V1Interop.TaskFlags.RunOnlyIfLoggedOn) == V1Interop.TaskFlags.RunOnlyIfLoggedOn)
 					return TaskLogonType.InteractiveToken;
-				return TaskLogonType.ServiceAccount;
+				return TaskLogonType.InteractiveTokenOrPassword;
 			}
 			set
 			{
@@ -1261,13 +1263,13 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Principal.LogonType = value;
 				else
 				{
-					if (value == TaskLogonType.Group || value == TaskLogonType.InteractiveTokenOrPassword || value == TaskLogonType.None || value == TaskLogonType.Password || value == TaskLogonType.S4U)
+					if (value == TaskLogonType.Group || value == TaskLogonType.None || value == TaskLogonType.S4U)
 						throw new NotV1SupportedException();
 					V1Interop.TaskFlags flags = v1Task.GetFlags();
 					if (value == TaskLogonType.InteractiveToken)
-						flags |= V1Interop.TaskFlags.Interactive;
+						flags |= V1Interop.TaskFlags.RunOnlyIfLoggedOn;
 					else
-						flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
+						flags &= ~(V1Interop.TaskFlags.RunOnlyIfLoggedOn);
 					v1Task.SetFlags(flags);
 				}
 			}
