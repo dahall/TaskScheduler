@@ -173,11 +173,12 @@ namespace TestTaskService
 			//Task t = ts.FindTask(taskName, true);
 
 			TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-			wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+			wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
 			wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
 			wiz.AllowEditorOnFinish = false;
 			wiz.RegisterTaskOnFinish = false;
 			wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
+			wiz.Title = "My Wizard";
 			wiz.Initialize(t);
 			if (wiz.ShowDialog() == DialogResult.OK)
 			{

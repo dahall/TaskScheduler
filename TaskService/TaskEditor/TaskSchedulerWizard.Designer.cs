@@ -35,6 +35,7 @@
 			this.descText = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.secOptPage = new AeroWizard.WizardPage();
 			this.triggerSelectPage = new AeroWizard.WizardPage();
 			this.triggerSelectionList = new GroupControls.RadioButtonList();
 			this.dailyTriggerPage = new AeroWizard.WizardPage();
@@ -113,8 +114,15 @@
 			this.msgTitleLabel = new System.Windows.Forms.Label();
 			this.msgIntroLabel = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.taskLocalOnlyCheck = new System.Windows.Forms.CheckBox();
+			this.taskLoggedOptionalRadio = new System.Windows.Forms.RadioButton();
+			this.taskLoggedOnRadio = new System.Windows.Forms.RadioButton();
+			this.taskPrincipalText = new System.Windows.Forms.TextBox();
+			this.changePrincipalButton = new System.Windows.Forms.Button();
+			this.taskUserAcctLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
 			this.introPage.SuspendLayout();
+			this.secOptPage.SuspendLayout();
 			this.triggerSelectPage.SuspendLayout();
 			this.dailyTriggerPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).BeginInit();
@@ -136,6 +144,7 @@
 			resources.ApplyResources(this.wizardControl1, "wizardControl1");
 			this.wizardControl1.Name = "wizardControl1";
 			this.wizardControl1.Pages.Add(this.introPage);
+			this.wizardControl1.Pages.Add(this.secOptPage);
 			this.wizardControl1.Pages.Add(this.triggerSelectPage);
 			this.wizardControl1.Pages.Add(this.dailyTriggerPage);
 			this.wizardControl1.Pages.Add(this.oneTimeTriggerPage);
@@ -180,6 +189,17 @@
 			// 
 			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
+			// 
+			// secOptPage
+			// 
+			this.secOptPage.Controls.Add(this.taskLocalOnlyCheck);
+			this.secOptPage.Controls.Add(this.taskLoggedOptionalRadio);
+			this.secOptPage.Controls.Add(this.taskLoggedOnRadio);
+			this.secOptPage.Controls.Add(this.taskPrincipalText);
+			this.secOptPage.Controls.Add(this.changePrincipalButton);
+			this.secOptPage.Controls.Add(this.taskUserAcctLabel);
+			this.secOptPage.Name = "secOptPage";
+			resources.ApplyResources(this.secOptPage, "secOptPage");
 			// 
 			// triggerSelectPage
 			// 
@@ -752,6 +772,47 @@
 			this.openFileDialog1.FileName = "openFileDialog";
 			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
 			// 
+			// taskLocalOnlyCheck
+			// 
+			resources.ApplyResources(this.taskLocalOnlyCheck, "taskLocalOnlyCheck");
+			this.taskLocalOnlyCheck.Name = "taskLocalOnlyCheck";
+			this.taskLocalOnlyCheck.UseVisualStyleBackColor = true;
+			this.taskLocalOnlyCheck.CheckedChanged += new System.EventHandler(this.taskLocalOnlyCheck_CheckedChanged);
+			// 
+			// taskLoggedOptionalRadio
+			// 
+			resources.ApplyResources(this.taskLoggedOptionalRadio, "taskLoggedOptionalRadio");
+			this.taskLoggedOptionalRadio.Name = "taskLoggedOptionalRadio";
+			this.taskLoggedOptionalRadio.TabStop = true;
+			this.taskLoggedOptionalRadio.UseVisualStyleBackColor = true;
+			this.taskLoggedOptionalRadio.CheckedChanged += new System.EventHandler(this.taskLoggedOptionalRadio_CheckedChanged);
+			// 
+			// taskLoggedOnRadio
+			// 
+			resources.ApplyResources(this.taskLoggedOnRadio, "taskLoggedOnRadio");
+			this.taskLoggedOnRadio.Name = "taskLoggedOnRadio";
+			this.taskLoggedOnRadio.TabStop = true;
+			this.taskLoggedOnRadio.UseVisualStyleBackColor = true;
+			this.taskLoggedOnRadio.CheckedChanged += new System.EventHandler(this.taskLoggedOnRadio_CheckedChanged);
+			// 
+			// taskPrincipalText
+			// 
+			resources.ApplyResources(this.taskPrincipalText, "taskPrincipalText");
+			this.taskPrincipalText.Name = "taskPrincipalText";
+			this.taskPrincipalText.ReadOnly = true;
+			// 
+			// changePrincipalButton
+			// 
+			resources.ApplyResources(this.changePrincipalButton, "changePrincipalButton");
+			this.changePrincipalButton.Name = "changePrincipalButton";
+			this.changePrincipalButton.UseVisualStyleBackColor = true;
+			this.changePrincipalButton.Click += new System.EventHandler(this.changePrincipalButton_Click);
+			// 
+			// taskUserAcctLabel
+			// 
+			resources.ApplyResources(this.taskUserAcctLabel, "taskUserAcctLabel");
+			this.taskUserAcctLabel.Name = "taskUserAcctLabel";
+			// 
 			// TaskSchedulerWizard
 			// 
 			resources.ApplyResources(this, "$this");
@@ -762,6 +823,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
 			this.introPage.ResumeLayout(false);
 			this.introPage.PerformLayout();
+			this.secOptPage.ResumeLayout(false);
+			this.secOptPage.PerformLayout();
 			this.triggerSelectPage.ResumeLayout(false);
 			this.dailyTriggerPage.ResumeLayout(false);
 			this.dailyTriggerPage.PerformLayout();
@@ -877,6 +940,13 @@
 		private DropDownCheckList monthlyOnWeekDropDown;
 		private DropDownCheckList monthlyMonthsDropDown;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private AeroWizard.WizardPage secOptPage;
+		private System.Windows.Forms.CheckBox taskLocalOnlyCheck;
+		private System.Windows.Forms.RadioButton taskLoggedOptionalRadio;
+		private System.Windows.Forms.RadioButton taskLoggedOnRadio;
+		private System.Windows.Forms.TextBox taskPrincipalText;
+		private System.Windows.Forms.Button changePrincipalButton;
+		private System.Windows.Forms.Label taskUserAcctLabel;
 
 	}
 }
