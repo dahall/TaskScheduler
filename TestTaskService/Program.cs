@@ -164,9 +164,27 @@ namespace TestTaskService
 
 		internal static void WizardTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
+			// Create a new task definition and assign properties
+			const string taskName = "Test";
+			TaskDefinition td = ts.NewTask();
+			td.Triggers.Add(new DailyTrigger(3) { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
+			td.Actions.Add(new ExecAction("Hello", "Buddy"));
+			Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+			//Task t = ts.FindTask(taskName, true);
+
 			TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-			wiz.TaskService = ts;
-			wiz.ShowDialog();
+			wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+			wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
+			wiz.AllowEditorOnFinish = false;
+			wiz.RegisterTaskOnFinish = false;
+			wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
+			wiz.Initialize(t);
+			if (wiz.ShowDialog() == DialogResult.OK)
+			{
+				ts.RootFolder.RegisterTaskDefinition(taskName, wiz.TaskDefinition);
+			}
+
+			ts.RootFolder.DeleteTask(taskName);
 		}
 
 		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)

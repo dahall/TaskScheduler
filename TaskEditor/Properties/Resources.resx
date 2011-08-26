@@ -253,4 +253,64 @@
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
     <value>Running a task under a group user account is supported only on Windows Vista™ or later. To run a task under a group account, you must upgrade this task to a Windows Vista™ task.</value>
   </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>Sends an e-mail using supplied information.</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>Executes a command-line operation.</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>Shows a message box when a task is activated.</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>Run a program</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>Send an e-mail</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>Display a message</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>Starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>Starts a task when a system event occurs.</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>When a specific event is logged</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>Starts a task based on a monthly schedule. For example, the task starts on specific days of specific months.</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>Starts a task at a specific date and time.</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>One time</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>Starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>Name: {0}
+
+Description: {1}
+
+Trigger: {2}
+
+Action: {3}</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>The repetition interval value must be less than or equal to the repetition duration value.</value>
+  </data>
 </root>
