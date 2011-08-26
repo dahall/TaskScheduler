@@ -178,6 +178,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The repetition interval value must be less than or equal to the repetition duration value..
+        /// </summary>
+        internal static string Error_RepetitionMoreThanDuration {
+            get {
+                return ResourceManager.GetString("Error_RepetitionMoreThanDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you want to have a task deleted automatically after it runs, you must add at least one trigger that has an expiration date..
         /// </summary>
         internal static string Error_TaskDeleteMustHaveExpiringTrigger {
@@ -412,6 +421,60 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sends an e-mail using supplied information..
+        /// </summary>
+        internal static string WizActionSubtextEmail {
+            get {
+                return ResourceManager.GetString("WizActionSubtextEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executes a command-line operation..
+        /// </summary>
+        internal static string WizActionSubtextExecute {
+            get {
+                return ResourceManager.GetString("WizActionSubtextExecute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows a message box when a task is activated..
+        /// </summary>
+        internal static string WizActionSubtextShowMessage {
+            get {
+                return ResourceManager.GetString("WizActionSubtextShowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run a program.
+        /// </summary>
+        internal static string WizActionTextExecute {
+            get {
+                return ResourceManager.GetString("WizActionTextExecute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send an e-mail.
+        /// </summary>
+        internal static string WizActionTextSendEmail {
+            get {
+                return ResourceManager.GetString("WizActionTextSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display a message.
+        /// </summary>
+        internal static string WizActionTextShowMessage {
+            get {
+                return ResourceManager.GetString("WizActionTextShowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Event Trigger.
         /// </summary>
         internal static string WizardEventTriggerErrorTitle {
@@ -453,6 +516,111 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         internal static string WizardMonthlyTriggerInvalid {
             get {
                 return ResourceManager.GetString("WizardMonthlyTriggerInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name: {0}
+        ///
+        ///Description: {1}
+        ///
+        ///Trigger: {2}
+        ///
+        ///Action: {3}.
+        /// </summary>
+        internal static string WizardSummaryFormatString {
+            get {
+                return ResourceManager.GetString("WizardSummaryFormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on..
+        /// </summary>
+        internal static string WizTriggerSubtextDaily {
+            get {
+                return ResourceManager.GetString("WizTriggerSubtextDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts a task when a system event occurs..
+        /// </summary>
+        internal static string WizTriggerSubtextEvent {
+            get {
+                return ResourceManager.GetString("WizTriggerSubtextEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts a task based on a monthly schedule. For example, the task starts on specific days of specific months..
+        /// </summary>
+        internal static string WizTriggerSubtextMonthly {
+            get {
+                return ResourceManager.GetString("WizTriggerSubtextMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts a task at a specific date and time..
+        /// </summary>
+        internal static string WizTriggerSubtextTime {
+            get {
+                return ResourceManager.GetString("WizTriggerSubtextTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week..
+        /// </summary>
+        internal static string WizTriggerSubtextWeekly {
+            get {
+                return ResourceManager.GetString("WizTriggerSubtextWeekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        internal static string WizTriggerTextDaily {
+            get {
+                return ResourceManager.GetString("WizTriggerTextDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When a specific event is logged.
+        /// </summary>
+        internal static string WizTriggerTextEvent {
+            get {
+                return ResourceManager.GetString("WizTriggerTextEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly.
+        /// </summary>
+        internal static string WizTriggerTextMonthly {
+            get {
+                return ResourceManager.GetString("WizTriggerTextMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One time.
+        /// </summary>
+        internal static string WizTriggerTextTime {
+            get {
+                return ResourceManager.GetString("WizTriggerTextTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        internal static string WizTriggerTextWeekly {
+            get {
+                return ResourceManager.GetString("WizTriggerTextWeekly", resourceCulture);
             }
         }
     }

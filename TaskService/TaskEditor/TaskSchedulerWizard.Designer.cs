@@ -29,16 +29,6 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskSchedulerWizard));
-			GroupControls.RadioButtonListItem radioButtonListItem1 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem2 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem3 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem4 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem5 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem6 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem7 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem8 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem9 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem10 = new GroupControls.RadioButtonListItem();
 			this.wizardControl1 = new AeroWizard.WizardControl();
 			this.introPage = new AeroWizard.WizardPage();
 			this.nameText = new System.Windows.Forms.TextBox();
@@ -98,16 +88,9 @@
 			this.execArgLabel = new System.Windows.Forms.Label();
 			this.execProgLabel = new System.Windows.Forms.Label();
 			this.summaryPage = new AeroWizard.WizardPage();
-			this.sumDescText = new System.Windows.Forms.TextBox();
-			this.sumActionText = new System.Windows.Forms.TextBox();
-			this.sumTriggerText = new System.Windows.Forms.TextBox();
-			this.sumNameText = new System.Windows.Forms.TextBox();
+			this.sumText = new System.Windows.Forms.TextBox();
 			this.openDlgAfterCheck = new System.Windows.Forms.CheckBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
+			this.summaryPrompt = new System.Windows.Forms.Label();
 			this.emailActionPage = new AeroWizard.WizardPage();
 			this.emailAttachementBrowseBtn = new System.Windows.Forms.Button();
 			this.emailSMTPText = new System.Windows.Forms.TextBox();
@@ -165,6 +148,7 @@
 			this.wizardControl1.Pages.Add(this.msgActionPage);
 			this.wizardControl1.Pages.Add(this.summaryPage);
 			this.wizardControl1.Finished += new System.EventHandler(this.wizardControl1_Finished);
+			this.wizardControl1.SelectedPageChanged += new System.EventHandler(this.wizardControl1_SelectedPageChanged);
 			// 
 			// introPage
 			// 
@@ -208,30 +192,6 @@
 			// triggerSelectionList
 			// 
 			resources.ApplyResources(this.triggerSelectionList, "triggerSelectionList");
-			radioButtonListItem1.Subtext = "Starts a task based on a daily schedule. For example, the task starts at a specif" +
-    "ic time every day, every other day, every third day, and so on.";
-			radioButtonListItem1.Text = "Daily";
-			radioButtonListItem2.Subtext = "Starts a task based on a weekly schedule. For example, the task starts at 8:00 A." +
-    "M. on a specific day of the week every week or every other week.";
-			radioButtonListItem2.Text = "Weekly";
-			radioButtonListItem3.Subtext = "Starts a task based on a monthly schedule. For example, the task starts on specif" +
-    "ic days of specific months.";
-			radioButtonListItem3.Text = "Monthly";
-			radioButtonListItem4.Subtext = "Starts a task at a specific date and time.";
-			radioButtonListItem4.Text = "One time";
-			radioButtonListItem5.Subtext = "Starts a task when the system is booted.";
-			radioButtonListItem5.Text = "When the computer starts";
-			radioButtonListItem6.Subtext = "Starts a task when user logs on.";
-			radioButtonListItem6.Text = "When I log on";
-			radioButtonListItem7.Subtext = "Starts a task when a system event occurs.";
-			radioButtonListItem7.Text = "When a specific event is logged";
-			this.triggerSelectionList.Items.Add(radioButtonListItem1);
-			this.triggerSelectionList.Items.Add(radioButtonListItem2);
-			this.triggerSelectionList.Items.Add(radioButtonListItem3);
-			this.triggerSelectionList.Items.Add(radioButtonListItem4);
-			this.triggerSelectionList.Items.Add(radioButtonListItem5);
-			this.triggerSelectionList.Items.Add(radioButtonListItem6);
-			this.triggerSelectionList.Items.Add(radioButtonListItem7);
 			this.triggerSelectionList.Name = "triggerSelectionList";
 			this.triggerSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.triggerSelectionList.SelectedIndexChanged += new System.EventHandler(this.triggerSelectionList_SelectedIndexChanged);
@@ -300,15 +260,6 @@
 			// actionSelectionList
 			// 
 			resources.ApplyResources(this.actionSelectionList, "actionSelectionList");
-			radioButtonListItem8.Subtext = "Executes a command-line operation.";
-			radioButtonListItem8.Text = "Run a program";
-			radioButtonListItem9.Subtext = "Shows a message box when a task is activated.";
-			radioButtonListItem9.Text = "Display a message";
-			radioButtonListItem10.Subtext = "Sends an e-mail using supplied information.";
-			radioButtonListItem10.Text = "Send an e-mail";
-			this.actionSelectionList.Items.Add(radioButtonListItem8);
-			this.actionSelectionList.Items.Add(radioButtonListItem9);
-			this.actionSelectionList.Items.Add(radioButtonListItem10);
 			this.actionSelectionList.Name = "actionSelectionList";
 			this.actionSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
 			this.actionSelectionList.SelectedIndexChanged += new System.EventHandler(this.actionSelectionList_SelectedIndexChanged);
@@ -640,44 +591,19 @@
 			// 
 			// summaryPage
 			// 
-			this.summaryPage.Controls.Add(this.sumDescText);
-			this.summaryPage.Controls.Add(this.sumActionText);
-			this.summaryPage.Controls.Add(this.sumTriggerText);
-			this.summaryPage.Controls.Add(this.sumNameText);
+			this.summaryPage.Controls.Add(this.sumText);
 			this.summaryPage.Controls.Add(this.openDlgAfterCheck);
-			this.summaryPage.Controls.Add(this.label5);
-			this.summaryPage.Controls.Add(this.label10);
-			this.summaryPage.Controls.Add(this.label8);
-			this.summaryPage.Controls.Add(this.label6);
-			this.summaryPage.Controls.Add(this.label11);
+			this.summaryPage.Controls.Add(this.summaryPrompt);
 			this.summaryPage.IsFinishPage = true;
 			this.summaryPage.Name = "summaryPage";
 			resources.ApplyResources(this.summaryPage, "summaryPage");
 			this.summaryPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.summaryPage_Initialize);
 			// 
-			// sumDescText
+			// sumText
 			// 
-			resources.ApplyResources(this.sumDescText, "sumDescText");
-			this.sumDescText.Name = "sumDescText";
-			this.sumDescText.ReadOnly = true;
-			// 
-			// sumActionText
-			// 
-			resources.ApplyResources(this.sumActionText, "sumActionText");
-			this.sumActionText.Name = "sumActionText";
-			this.sumActionText.ReadOnly = true;
-			// 
-			// sumTriggerText
-			// 
-			resources.ApplyResources(this.sumTriggerText, "sumTriggerText");
-			this.sumTriggerText.Name = "sumTriggerText";
-			this.sumTriggerText.ReadOnly = true;
-			// 
-			// sumNameText
-			// 
-			resources.ApplyResources(this.sumNameText, "sumNameText");
-			this.sumNameText.Name = "sumNameText";
-			this.sumNameText.ReadOnly = true;
+			resources.ApplyResources(this.sumText, "sumText");
+			this.sumText.Name = "sumText";
+			this.sumText.ReadOnly = true;
 			// 
 			// openDlgAfterCheck
 			// 
@@ -685,30 +611,10 @@
 			this.openDlgAfterCheck.Name = "openDlgAfterCheck";
 			this.openDlgAfterCheck.UseVisualStyleBackColor = true;
 			// 
-			// label5
+			// summaryPrompt
 			// 
-			resources.ApplyResources(this.label5, "label5");
-			this.label5.Name = "label5";
-			// 
-			// label10
-			// 
-			resources.ApplyResources(this.label10, "label10");
-			this.label10.Name = "label10";
-			// 
-			// label8
-			// 
-			resources.ApplyResources(this.label8, "label8");
-			this.label8.Name = "label8";
-			// 
-			// label6
-			// 
-			resources.ApplyResources(this.label6, "label6");
-			this.label6.Name = "label6";
-			// 
-			// label11
-			// 
-			resources.ApplyResources(this.label11, "label11");
-			this.label11.Name = "label11";
+			resources.ApplyResources(this.summaryPrompt, "summaryPrompt");
+			this.summaryPrompt.Name = "summaryPrompt";
 			// 
 			// emailActionPage
 			// 
@@ -898,15 +804,8 @@
 		private GroupControls.RadioButtonList actionSelectionList;
 		private AeroWizard.WizardPage summaryPage;
 		private System.Windows.Forms.CheckBox openDlgAfterCheck;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.TextBox sumDescText;
-		private System.Windows.Forms.TextBox sumActionText;
-		private System.Windows.Forms.TextBox sumTriggerText;
-		private System.Windows.Forms.TextBox sumNameText;
+		private System.Windows.Forms.Label summaryPrompt;
+		private System.Windows.Forms.TextBox sumText;
 		private AeroWizard.WizardPage dailyTriggerPage;
 		private AeroWizard.WizardPage oneTimeTriggerPage;
 		private AeroWizard.WizardPage weeklyTriggerPage;

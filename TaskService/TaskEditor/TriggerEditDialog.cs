@@ -352,7 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!onAssignment)
 			{
 				trigger.Repetition.Duration = durationSpan.Value;
-				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
 				{
 					onAssignment = true;
 					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
@@ -521,7 +521,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!onAssignment)
 			{
 				trigger.Repetition.Interval = repeatSpan.Value;
-				if (!this.isV2 && trigger.Repetition.Duration <= trigger.Repetition.Interval)
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
 				{
 					onAssignment = true;
 					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
