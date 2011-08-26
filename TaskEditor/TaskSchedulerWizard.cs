@@ -20,14 +20,16 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private Action action;
 		private AvailableWizardActions availActions = (AvailableWizardActions)0xD;
-		private AvailableWizardPages availPages = (AvailableWizardPages)0xF;
+		private AvailableWizardPages availPages = (AvailableWizardPages)0x1F;
 		private AvailableWizardTriggers availTriggers = (AvailableWizardTriggers)0x7FF;
+		private bool flagExecutorIsGroup, flagExecutorIsServiceAccount;
 		private bool IsV2 = true;
 		private bool onAssignment = false;
 		private bool registerTaskOnFinish;
 		private Task task;
 		private TaskDefinition td;
 		private Trigger trigger;
+		private bool flagRunOnlyWhenUserIsLoggedOn;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
@@ -67,6 +69,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			/// <summary>Displays the introduction page with name and description.</summary>
 			IntroPage = 0x1,
+			/// <summary>Displays the security options page with user and password options.</summary>
+			SecurityPage = 0x10,
 			/// <summary>Displays trigger selection page.</summary>
 			TriggerSelectPage = 0x2,
 			/// <summary>Displays action selection page.</summary>
@@ -140,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The available pages.
 		/// </value>
-		[DefaultValue((AvailableWizardPages)0xF)]
+		[DefaultValue((AvailableWizardPages)0x1F)]
 		public AvailableWizardPages AvailablePages
 		{
 			get { return availPages; }
@@ -290,10 +294,10 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set General tab
 				nameText.Text = task != null ? task.Name : string.Empty;
 				descText.Text = td.RegistrationInfo.Description;
-				/*SetUserControls(td.Principal.LogonType);
+				SetUserControls(td.Principal.LogonType);
 				taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
 				taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
-				taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && td.Principal.LogonType == TaskLogonType.S4U;*/
+				taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && td.Principal.LogonType == TaskLogonType.S4U;
 
 				// Setup trigger values
 				if (td.Triggers.Count > 0)
@@ -518,6 +522,56 @@ namespace Microsoft.Win32.TaskScheduler
 			});
 		}
 
+		private void changePrincipalButton_Click(object sender, EventArgs e)
+		{
+			string acct = String.Empty;
+			if (!NativeMethods.AccountUtils.SelectAccount(this, TaskService.TargetServer, ref acct, ref flagExecutorIsGroup, ref flagExecutorIsServiceAccount))
+				return;
+
+			if (flagExecutorIsServiceAccount)
+			{
+				if (!IsV2 && acct != "SYSTEM")
+				{
+					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+				flagExecutorIsGroup = false;
+				if (IsV2)
+					td.Principal.GroupId = null;
+				td.Principal.UserId = acct;
+				td.Principal.LogonType = TaskLogonType.ServiceAccount;
+				//this.flagExecutorIsCurrentUser = false;
+			}
+			else if (flagExecutorIsGroup)
+			{
+				if (!IsV2)
+				{
+					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					return;
+				}
+				td.Principal.GroupId = acct;
+				td.Principal.UserId = null;
+				td.Principal.LogonType = TaskLogonType.Group;
+				//this.flagExecutorIsCurrentUser = false;
+			}
+			else
+			{
+				if (IsV2)
+					td.Principal.GroupId = null;
+				td.Principal.UserId = acct;
+				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(objArray[0].ObjectName);
+				if (td.Principal.LogonType == TaskLogonType.Group)
+				{
+					td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				}
+				else if (td.Principal.LogonType == TaskLogonType.ServiceAccount)
+				{
+					td.Principal.LogonType = TaskLogonType.InteractiveTokenOrPassword;
+				}
+			}
+			SetUserControls(td.Principal.LogonType);
+		}
+
 		private void dailyTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			trigger.StartBoundary = dailyStartTimePicker.Value;
@@ -700,6 +754,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void SetupPages()
 		{
 			SetPage(introPage, (int)AvailableWizardPages.IntroPage, (int)availPages);
+			SetPage(secOptPage, (int)AvailableWizardPages.SecurityPage, (int)availPages);
 			SetPage(triggerSelectPage, (int)AvailableWizardPages.TriggerSelectPage, (int)availPages);
 			SetPage(actionSelectPage, (int)AvailableWizardPages.ActionSelectPage, (int)availPages);
 			SetPage(summaryPage, (int)AvailableWizardPages.SummaryPage, (int)availPages);
@@ -721,6 +776,62 @@ namespace Microsoft.Win32.TaskScheduler
 				AddTriggerToSelectionList(AvailableWizardTriggers.Weekly);
 		}
 
+		private void SetUserControls(TaskLogonType logonType)
+		{
+			switch (logonType)
+			{
+				case TaskLogonType.InteractiveToken:
+					this.flagRunOnlyWhenUserIsLoggedOn = true;
+					this.flagExecutorIsServiceAccount = false;
+					this.flagExecutorIsGroup = false;
+					break;
+				case TaskLogonType.Group:
+					this.flagRunOnlyWhenUserIsLoggedOn = true;
+					this.flagExecutorIsServiceAccount = false;
+					this.flagExecutorIsGroup = true;
+					break;
+				case TaskLogonType.ServiceAccount:
+					this.flagRunOnlyWhenUserIsLoggedOn = false;
+					this.flagExecutorIsServiceAccount = true;
+					this.flagExecutorIsGroup = false;
+					break;
+				default:
+					this.flagRunOnlyWhenUserIsLoggedOn = false;
+					this.flagExecutorIsServiceAccount = false;
+					this.flagExecutorIsGroup = false;
+					break;
+			}
+
+			if (this.flagExecutorIsServiceAccount)
+			{
+				taskLoggedOnRadio.Enabled = false;
+				taskLoggedOptionalRadio.Enabled = false;
+				taskLocalOnlyCheck.Enabled = false;
+			}
+			else if (this.flagExecutorIsGroup)
+			{
+				taskLoggedOnRadio.Enabled = true;
+				taskLoggedOptionalRadio.Enabled = false;
+				taskLocalOnlyCheck.Enabled = false;
+			}
+			else if (this.flagRunOnlyWhenUserIsLoggedOn)
+			{
+				taskLoggedOnRadio.Enabled = true;
+				taskLoggedOptionalRadio.Enabled = true;
+				taskLocalOnlyCheck.Enabled = false;
+			}
+			else
+			{
+				taskLoggedOnRadio.Enabled = true;
+				taskLoggedOptionalRadio.Enabled = true;
+				taskLocalOnlyCheck.Enabled = true && (task == null || IsV2);
+			}
+			if (task != null)
+				taskPrincipalText.Text = this.flagExecutorIsGroup ? td.Principal.GroupId : td.Principal.UserId;
+			else
+				taskPrincipalText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+		}
+
 		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
 			summaryPrompt.Visible = RegisterTaskOnFinish;
@@ -732,6 +843,24 @@ namespace Microsoft.Win32.TaskScheduler
 				trigger.ToString(),
 				TaskPropertiesControl.BuildEnumString(TaskPropertiesControl.taskSchedResources, "ActionType", action.ActionType) + ": " + action.ToString());
 			sumText.Select(0, 0);
+		}
+
+		private void taskLocalOnlyCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Principal.LogonType = IsV2 ? ((taskLocalOnlyCheck.Checked) ? TaskLogonType.S4U : TaskLogonType.Password) : TaskLogonType.InteractiveTokenOrPassword;
+		}
+
+		private void taskLoggedOnRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+		}
+
+		private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			taskLocalOnlyCheck.Enabled = (task == null || IsV2) && taskLoggedOptionalRadio.Checked;
+			taskLocalOnlyCheck_CheckedChanged(sender, e);
 		}
 
 		private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -865,10 +994,33 @@ namespace Microsoft.Win32.TaskScheduler
 					this.td = dlg.TaskDefinition;
 			}
 			if (RegisterTaskOnFinish)
-				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, td);
+			{
+				string user = this.TaskDefinition.Principal.UserId;
+				string pwd = null;
+				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+				{
+					pwd = InvokeCredentialDialog(user);
+					if (pwd == null)
+						throw new System.Security.Authentication.AuthenticationException(Properties.Resources.UserAuthenticationError);
+				}
+				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
+					user = this.TaskDefinition.Principal.GroupId;
+				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+					user, pwd, this.TaskDefinition.Principal.LogonType);
+			}
 
 			if (myTS)
 				this.TaskService = null;
+		}
+
+		private string InvokeCredentialDialog(string userName)
+		{
+			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
+				Properties.Resources.CredentialPromptMessage, userName);
+			dlg.Options |= CredentialsDialogOptions.Persist;
+			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
+				return dlg.Password;
+			return null;
 		}
 
 		private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
