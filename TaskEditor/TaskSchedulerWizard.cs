@@ -189,6 +189,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the text shown on the summary page prompting for editor on finish click.
+		/// </summary>
+		/// <value>
+		/// The editor on finish text.
+		/// </value>
+		[DefaultValue((string)null), Category("Appearance")]
+		public string EditorOnFinishText { get; set; }
+
+		/// <summary>
 		/// Gets or sets the icon for the form.
 		/// </summary>
 		/// <returns>
@@ -205,6 +214,12 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return wizardControl1.TitleIcon; }
 			set { wizardControl1.TitleIcon = value; }
 		}
+
+		/// <summary>
+		/// Gets the password.
+		/// </summary>
+		[Browsable(false), DefaultValue((string)null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string Password { get; private set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to register the task on Finish.
@@ -243,8 +258,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The summary format string.
 		/// </value>
-		[DefaultValue((string)null)]
+		[DefaultValue((string)null), Category("Appearance")]
 		public string SummaryFormatString { get; set; }
+
+		/// <summary>
+		/// Gets or sets the summary registration notice.
+		/// </summary>
+		/// <value>
+		/// The summary registration notice.
+		/// </value>
+		[DefaultValue((string)null), Category("Appearance")]
+		public string SummaryRegistrationNotice { get; set; }
 
 		/// <summary>
 		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
@@ -444,6 +468,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the trigger page prompt.
+		/// </summary>
+		/// <value>
+		/// The trigger page prompt.
+		/// </value>
+		[DefaultValue((string)null), Category("Appearance"), Description("Trigger page title prompt.")]
+		public string TriggerPagePrompt { get; set; }
+
+		/// <summary>
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
@@ -457,7 +490,11 @@ namespace Microsoft.Win32.TaskScheduler
 				if (td == null)
 					this.TaskDefinition = service.NewTask();
 				else
+				{
+					if (td.Triggers.Count > 1)
+						throw new ArgumentException("Only tasks with a single trigger can be used to initialize the wizard.");
 					this.TaskDefinition = td;
+				}
 			}
 		}
 
@@ -708,6 +745,21 @@ namespace Microsoft.Win32.TaskScheduler
 			((ExecAction)action).WorkingDirectory = execDirText.Text;
 		}
 
+		private void secOptPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		{
+			string user = this.TaskDefinition.Principal.UserId;
+			Password = null;
+			if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+			{
+				Password = InvokeCredentialDialog(user);
+				if (Password == null)
+				{
+					MessageBox.Show(this, Properties.Resources.UserAuthenticationError, null);
+					e.Cancel = true;
+				}
+			}
+		}
+
 		private void SetActionListItem(AvailableWizardActions availableWizardActions)
 		{
 			foreach (var item in actionSelectionList.Items)
@@ -754,9 +806,9 @@ namespace Microsoft.Win32.TaskScheduler
 		private void SetupPages()
 		{
 			SetPage(introPage, (int)AvailableWizardPages.IntroPage, (int)availPages);
-			SetPage(secOptPage, (int)AvailableWizardPages.SecurityPage, (int)availPages);
 			SetPage(triggerSelectPage, (int)AvailableWizardPages.TriggerSelectPage, (int)availPages);
 			SetPage(actionSelectPage, (int)AvailableWizardPages.ActionSelectPage, (int)availPages);
+			SetPage(secOptPage, (int)AvailableWizardPages.SecurityPage, (int)availPages);
 			SetPage(summaryPage, (int)AvailableWizardPages.SummaryPage, (int)availPages);
 		}
 
@@ -835,7 +887,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
 			summaryPrompt.Visible = RegisterTaskOnFinish;
+			if (SummaryRegistrationNotice != null)
+				summaryPrompt.Text = SummaryRegistrationNotice;
 			openDlgAfterCheck.Visible = AllowEditorOnFinish;
+			if (EditorOnFinishText != null)
+				openDlgAfterCheck.Text = EditorOnFinishText;
 			string fmt = string.IsNullOrEmpty(SummaryFormatString) ? Properties.Resources.WizardSummaryFormatString : SummaryFormatString;
 			sumText.Text = string.Format(fmt,
 				nameText.Text,
@@ -930,6 +986,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private void triggerSelectPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		{
+			if (this.TriggerPagePrompt != null)
+				this.triggerSelectPage.Text = this.TriggerPagePrompt;
+		}
+
 		private void weeklyCheck_CheckedChanged(object sender, System.EventArgs e)
 		{
 			var weeklyTrigger = (WeeklyTrigger)trigger;
@@ -996,17 +1058,10 @@ namespace Microsoft.Win32.TaskScheduler
 			if (RegisterTaskOnFinish)
 			{
 				string user = this.TaskDefinition.Principal.UserId;
-				string pwd = null;
-				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
-				{
-					pwd = InvokeCredentialDialog(user);
-					if (pwd == null)
-						throw new System.Security.Authentication.AuthenticationException(Properties.Resources.UserAuthenticationError);
-				}
 				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
 					user = this.TaskDefinition.Principal.GroupId;
 				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-					user, pwd, this.TaskDefinition.Principal.LogonType);
+					user, Password, this.TaskDefinition.Principal.LogonType);
 			}
 
 			if (myTS)
@@ -1018,6 +1073,7 @@ namespace Microsoft.Win32.TaskScheduler
 			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
 				Properties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
+			dlg.ValidatePassword = true;
 			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
 				return dlg.Password;
 			return null;

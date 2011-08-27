@@ -164,28 +164,54 @@ namespace TestTaskService
 
 		internal static void WizardTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			// Create a new task definition and assign properties
-			const string taskName = "Test";
-			TaskDefinition td = ts.NewTask();
-			td.Triggers.Add(new DailyTrigger(3) { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
-			td.Actions.Add(new ExecAction("Hello", "Buddy"));
-			Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-			//Task t = ts.FindTask(taskName, true);
-
-			TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-			wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
-			wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
-			wiz.AllowEditorOnFinish = false;
-			wiz.RegisterTaskOnFinish = false;
-			wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
-			wiz.Title = "My Wizard";
-			wiz.Initialize(t);
-			if (wiz.ShowDialog() == DialogResult.OK)
+			try
 			{
-				ts.RootFolder.RegisterTaskDefinition(taskName, wiz.TaskDefinition);
-			}
+				// Create a new task definition and assign properties
+				const string taskName = "Test";
+				Task t = ts.FindTask(taskName, true);
+				if (t == null)
+				{
+					TaskDefinition td = ts.NewTask();
+					td.RegistrationInfo.Description = "Longer Description Of Task Goes Here";
+					td.Triggers.Add(new DailyTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
+					td.Actions.Add(new ExecAction("A", "B"));
+					t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				}
 
-			ts.RootFolder.DeleteTask(taskName);
+				if (t.Definition.Triggers.Count > 1)
+				{
+					TaskEditDialog editorForm = new TaskEditDialog();
+					editorForm.Editable = true;
+					editorForm.RegisterTaskOnAccept = true;
+					editorForm.Initialize(t);
+					editorForm.ShowDialog();
+				}
+				else
+				{
+					TaskSchedulerWizard wiz = new TaskSchedulerWizard();
+					wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+					wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
+					wiz.AllowEditorOnFinish = true;
+					wiz.EditorOnFinishText = "Show dialog";
+					wiz.TriggerPagePrompt = "When???";
+					wiz.RegisterTaskOnFinish = true;
+					wiz.SummaryRegistrationNotice = "Done when you click Finish";
+					wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
+					wiz.Title = "My Wizard";
+					wiz.Initialize(t);
+					if (wiz.ShowDialog() == DialogResult.OK)
+					{
+						ts.RootFolder.RegisterTaskDefinition(wiz.TaskName, wiz.TaskDefinition, TaskCreation.CreateOrUpdate,
+							wiz.TaskDefinition.Principal.ToString(), wiz.Password, wiz.TaskDefinition.Principal.LogonType);
+					}
+				}
+
+				ts.RootFolder.DeleteTask(taskName);
+			}
+			catch (Exception ex)
+			{
+				output.WriteLine(ex.ToString());
+			}
 		}
 
 		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)

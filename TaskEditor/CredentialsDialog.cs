@@ -129,6 +129,15 @@ namespace Microsoft.Win32.TaskScheduler
 		public string UserName { get; set; }
 
 		/// <summary>
+		/// Gets or sets a value indicating whether the password should be validated before returning.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if the password should be validated; otherwise, <c>false</c>.
+		/// </value>
+		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates if the password should be validated before returning.")]
+		public bool ValidatePassword { get; set; }
+
+		/// <summary>
 		/// Gets a default value for the target.
 		/// </summary>
 		/// <value>The default target.</value>
@@ -174,8 +183,34 @@ namespace Microsoft.Win32.TaskScheduler
 			[MarshalAs(UnmanagedType.Bool)] ref bool pfSave,
 			CredentialsDialogOptions flags);
 
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+		internal static extern bool CloseHandle(IntPtr handle);
+
 		[DllImport("gdi32.dll")]
 		internal static extern bool DeleteObject(IntPtr hObject);
+
+		[DllImport("advapi32.dll", SetLastError = true)]
+		internal static extern int LogonUser(string lpszUserName, string lpszDomain, string lpszPassword,
+			int dwLogonType, int dwLogonProvider, ref IntPtr phToken);
+
+		private bool IsValidPassword(string userName, string password)
+		{
+			IntPtr token = IntPtr.Zero;
+			string[] udn = userName.Split('\\');
+			string domain = udn.Length == 2 ? udn[0] : null;
+			string user = udn.Length == 2 ? udn[1] : udn[0];
+			try
+			{
+				if (LogonUser(user, domain, password, 3, 0, ref token) != 0)
+					return true;
+			}
+			finally
+			{
+				if (token != IntPtr.Zero)
+					CloseHandle(token);
+			}
+			return false;
+		}
 
 		/// <summary>
 		/// When overridden in a derived class, specifies a common dialog box.
@@ -200,6 +235,8 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (ret)
 				{
 					case CredUIReturnCodes.NO_ERROR:
+						if (this.ValidatePassword && !IsValidPassword(this.UserName, password.ToString()))
+							return false;
 						/*if (save)
 						{
 							CredUIReturnCodes cret = CredUIConfirmCredentials(this.Target, false);
