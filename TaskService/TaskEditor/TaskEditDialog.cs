@@ -148,6 +148,7 @@ namespace Microsoft.Win32.TaskScheduler
 			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
 				Properties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
+			dlg.ValidatePassword = true;
 			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
 				return dlg.Password;
 			return null;
