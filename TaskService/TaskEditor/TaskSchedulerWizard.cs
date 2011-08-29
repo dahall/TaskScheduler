@@ -1057,11 +1057,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (RegisterTaskOnFinish)
 			{
-				string user = this.TaskDefinition.Principal.UserId;
-				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
-					user = this.TaskDefinition.Principal.GroupId;
-				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-					user, Password, this.TaskDefinition.Principal.LogonType);
+				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate,
+					td.Principal.ToString(), Password, td.Principal.LogonType);
 			}
 
 			if (myTS)

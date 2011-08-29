@@ -684,10 +684,11 @@ namespace Microsoft.Win32.TaskScheduler
 				taskLoggedOptionalRadio.Enabled = editable;
 				taskLocalOnlyCheck.Enabled = editable && (task == null || v2);
 			}
-			if (task != null)
-				taskPrincipalText.Text = this.flagExecutorIsGroup ? td.Principal.GroupId : td.Principal.UserId;
-			else
-				taskPrincipalText.Text = WindowsIdentity.GetCurrent().Name;
+
+			string user = td == null ? null : td.Principal.ToString();
+			if (string.IsNullOrEmpty(user))
+				user = WindowsIdentity.GetCurrent().Name;
+			taskPrincipalText.Text = user;
 		}
 
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
