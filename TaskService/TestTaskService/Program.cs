@@ -253,44 +253,22 @@ namespace TestTaskService
 			try
 			{
 				// Create a new task definition and assign properties
-				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "Does something";
-				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
-				//td.RegistrationInfo.Source = "Installer";
-				td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Monday, MonthsOfTheYear.January, WhichWeek.FirstWeek));
-				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
-				//td.Principal.GroupId = "Administrators";
-				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
-				//td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromMinutes(1);
-
-				// Create a trigger that will fire the task at this time every other day
-				//DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
-				//dt.EndBoundary = DateTime.Today + TimeSpan.FromDays(1);
-				//dt.Repetition.Duration = TimeSpan.FromHours(24);
-				//dt.Repetition.Interval = TimeSpan.FromHours(1);
-
-				//td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
-				//td.Triggers.Add(new MonthlyDOWTrigger(DaysOfTheWeek.Friday | DaysOfTheWeek.Saturday | DaysOfTheWeek.Sunday, MonthsOfTheYear.October, WhichWeek.FirstWeek) { RunOnLastWeekOfMonth = true });
-				//td.Triggers.Add(new LogonTrigger { UserId = string.Empty });
-
-				// Create an action that will launch Notepad whenever the trigger fires
-				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
-
-				// Register the task in the root folder
 				const string taskName = "Test";
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount, null);
+				Task t = ts.AddTask(taskName,
+					new MonthlyDOWTrigger(DaysOfTheWeek.Monday, MonthsOfTheYear.January, WhichWeek.FirstWeek),
+					new ExecAction("notepad.exe", "c:\\test.log", null), "SYSTEM", null, TaskLogonType.ServiceAccount);
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+				TaskDefinition td = t.Definition;
+				t = null;
 
 				// Retrieve the task, add a trigger and save it.
 				t = ts.GetTask(taskName);
-				t.Definition.Triggers[0].StartBoundary = DateTime.Today + TimeSpan.FromDays(7);
-				t.RegisterChanges();
+				ts.RootFolder.DeleteTask(taskName);
 
-				//System.IO.File.WriteAllText(System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop), taskName + ".xml"), t.Xml);
-
-				// Remove the task we just created
+				ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				System.Threading.Thread.Sleep(1000);
 				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
