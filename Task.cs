@@ -1134,16 +1134,23 @@ namespace Microsoft.Win32.TaskScheduler
 
 				IPersistFile iFile = (IPersistFile)v1Task;
 				if (string.IsNullOrEmpty(newName) || newName == v1Name)
-					iFile.Save(null, false);
-				else
 				{
-					string path;
-					iFile.GetCurFile(out path);
-					System.IO.File.Delete(path);
-					path = System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar + newName + System.IO.Path.GetExtension(path);
-					System.IO.File.Delete(path);
-					iFile.Save(path, true);
+					try
+					{
+						iFile.Save(null, false);
+						iFile = null;
+						return;
+					}
+					catch { }
+
 				}
+
+				string path;
+				iFile.GetCurFile(out path);
+				System.IO.File.Delete(path);
+				path = System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar + newName + System.IO.Path.GetExtension(path);
+				System.IO.File.Delete(path);
+				iFile.Save(path, true);
 				iFile = null;
 			}
 		}
