@@ -642,6 +642,21 @@ namespace Microsoft.Win32.TaskScheduler
 			((DailyTrigger)trigger).DaysInterval = (short)dailyRecurNumUpDn.Value;
 		}
 
+		private void durationSpan_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				trigger.Repetition.Duration = durationSpan.Value;
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval && trigger.Repetition.Duration != TimeSpan.Zero)
+				{
+					onAssignment = true;
+					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
+					trigger.Repetition.Interval = repeatSpan.Value;
+					onAssignment = false;
+				}
+			}
+		}
+
 		private void emailActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			EmailAction ea = action as EmailAction;
@@ -662,10 +677,26 @@ namespace Microsoft.Win32.TaskScheduler
 				emailAttachmentText.Text = openFileDialog1.FileName;
 		}
 
+		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			trigger.Enabled = enabledCheckBox.Checked;
+		}
+
 		private void execProgBrowseBtn_Click(object sender, System.EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
 				execProgText.Text = openFileDialog1.FileName;
+		}
+
+		private string InvokeCredentialDialog(string userName)
+		{
+			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
+				Properties.Resources.CredentialPromptMessage, userName);
+			dlg.Options |= CredentialsDialogOptions.Persist;
+			dlg.ValidatePassword = true;
+			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
+				return dlg.Password;
+			return null;
 		}
 
 		private void monthlyDaysRadio_CheckedChanged(object sender, System.EventArgs e)
@@ -763,6 +794,38 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (onEventLogCombo.Items.Count == 0)
 				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(null));
+		}
+
+		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				if (repeatCheckBox.Checked)
+				{
+					repeatSpan.Value = repeatSpan.Items[repeatSpan.Items.Count - 1];
+					durationSpan.Value = TimeSpan.Zero;
+				}
+				else
+				{
+					trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
+				}
+				repeatSpan.Enabled = durationSpan.Enabled = durationLabel.Enabled = repeatCheckBox.Checked;
+			}
+		}
+
+		private void repeatSpan_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				trigger.Repetition.Interval = repeatSpan.Value;
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval && trigger.Repetition.Duration != TimeSpan.Zero)
+				{
+					onAssignment = true;
+					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
+					trigger.Repetition.Duration = durationSpan.Value;
+					onAssignment = false;
+				}
+			}
 		}
 
 		private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -1099,71 +1162,8 @@ namespace Microsoft.Win32.TaskScheduler
 				this.TaskService = null;
 		}
 
-		private string InvokeCredentialDialog(string userName)
-		{
-			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
-				Properties.Resources.CredentialPromptMessage, userName);
-			dlg.Options |= CredentialsDialogOptions.Persist;
-			dlg.ValidatePassword = true;
-			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
-				return dlg.Password;
-			return null;
-		}
-
 		private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
 		{
-		}
-
-		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				if (repeatCheckBox.Checked)
-				{
-					durationSpan.Value = durationSpan.Items[durationSpan.Items.Count - 1];
-					repeatSpan.Value = repeatSpan.Items[repeatSpan.Items.Count - 1];
-				}
-				else
-				{
-					trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
-				}
-				repeatSpan.Enabled = durationSpan.Enabled = durationLabel.Enabled = repeatCheckBox.Checked;
-			}
-		}
-
-		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
-		{
-			trigger.Enabled = enabledCheckBox.Checked;
-		}
-
-		private void repeatSpan_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				trigger.Repetition.Interval = repeatSpan.Value;
-				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
-				{
-					onAssignment = true;
-					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
-					trigger.Repetition.Duration = durationSpan.Value;
-					onAssignment = false;
-				}
-			}
-		}
-
-		private void durationSpan_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				trigger.Repetition.Duration = durationSpan.Value;
-				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
-				{
-					onAssignment = true;
-					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
-					trigger.Repetition.Interval = repeatSpan.Value;
-					onAssignment = false;
-				}
-			}
 		}
 	}
 }

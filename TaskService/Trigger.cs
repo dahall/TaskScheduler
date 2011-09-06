@@ -621,11 +621,11 @@ namespace Microsoft.Win32.TaskScheduler
 			StringBuilder ret = new StringBuilder();
 			if (this.Repetition.Interval != TimeSpan.Zero)
 			{
-				ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase1, this.Repetition.Interval);
+				ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase1, GetBestTimeSpanString(this.Repetition.Interval));
 				if (this.Repetition.Duration == TimeSpan.Zero)
 					ret.Append(" " + Properties.Resources.TriggerBase2);
 				else
-					ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase3, this.Repetition.Duration);
+					ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase3, GetBestTimeSpanString(this.Repetition.Duration));
 				ret.Append(".");
 			}
 			if (this.EndBoundary != DateTime.MaxValue)
@@ -633,6 +633,55 @@ namespace Microsoft.Win32.TaskScheduler
 			if (ret.Length > 0)
 				ret.Insert(0, " -");
 			return ret.ToString();
+		}
+
+		private static Type timeSpan2Type = null;
+		private static bool foundTimeSpan2 = false;
+
+		/// <summary>
+		/// Gets the best time span string.
+		/// </summary>
+		/// <param name="span">The <see cref="TimeSpan"/> to display.</param>
+		/// <returns>Either the full string representation created by TimeSpan2 or the default TimeSpan representation.</returns>
+		private static string GetBestTimeSpanString(TimeSpan span)
+		{
+			// See if the TimeSpan2 assembly is accessible
+			if (!foundTimeSpan2)
+			{
+				try
+				{
+					System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("TimeSpan2.dll");
+					if (asm != null)
+					{
+						timeSpan2Type = asm.GetType("System.TimeSpan2", false, false);
+						if (timeSpan2Type != null)
+							foundTimeSpan2 = true;
+					}
+				}
+				catch { }
+			}
+
+			// If the TimeSpan2 assembly is available, try to call the ToString("f") method and return the result.
+			if (foundTimeSpan2 && timeSpan2Type != null)
+			{
+				try
+				{
+					object o = Activator.CreateInstance(timeSpan2Type, span);
+					if (o != null)
+					{
+						System.Reflection.MethodInfo mi = timeSpan2Type.GetMethod("ToString", new Type[] { typeof(string) });
+						if (mi != null)
+						{
+							object r = mi.Invoke(o, new object[] { "f" });
+							if (r != null)
+								return r.ToString();
+						}
+					}
+				}
+				catch { }
+			}
+
+			return span.ToString();
 		}
 	}
 
