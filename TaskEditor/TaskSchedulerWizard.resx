@@ -247,7 +247,7 @@
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +277,7 @@
     <value>triggerSelectionList</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.4254.2923, Culture=neutral, PublicKeyToken=null</value>
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.1.27894, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Parent" xml:space="preserve">
     <value>triggerSelectPage</value>
@@ -298,7 +298,7 @@
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -316,7 +316,7 @@
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -435,53 +435,185 @@
   <data name="&gt;&gt;dailyRecurLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="actionSelectionList.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="triggerPropText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>490, 120</value>
+  <data name="triggerPropText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 106</value>
   </data>
-  <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="triggerPropText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 64</value>
   </data>
-  <data name="actionSelectionList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="triggerPropText.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="actionSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 0, 0</value>
+  <data name="&gt;&gt;triggerPropText.Name" xml:space="preserve">
+    <value>triggerPropText</value>
   </data>
-  <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 239</value>
+  <data name="&gt;&gt;triggerPropText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;triggerPropText.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;triggerPropText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;actionSelectionList.Name" xml:space="preserve">
-    <value>actionSelectionList</value>
+  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.4254.2923, Culture=neutral, PublicKeyToken=null</value>
+  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 32</value>
   </data>
-  <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
-    <value>actionSelectPage</value>
+  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
   </data>
-  <data name="&gt;&gt;actionSelectionList.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
-  <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 239</value>
+  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
+    <value>durationSpan</value>
   </data>
-  <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 3</value>
+  </data>
+  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
+    <value>repeatSpan</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="actionSelectPage.Text" xml:space="preserve">
-    <value>Choose the action to perform</value>
+  <data name="durationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;actionSelectPage.Name" xml:space="preserve">
-    <value>actionSelectPage</value>
+  <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 35</value>
+  </data>
+  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 15</value>
+  </data>
+  <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>for a duration of:</value>
+  </data>
+  <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Name" xml:space="preserve">
+    <value>durationLabel</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 68</value>
+  </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
+    <value>enabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Repeat task every:</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
+    <value>repeatCheckBox</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="triggerPropPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 239</value>
+  </data>
+  <data name="triggerPropPage.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="triggerPropPage.Text" xml:space="preserve">
+    <value>Trigger properties</value>
+  </data>
+  <data name="&gt;&gt;triggerPropPage.Name" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;triggerPropPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 239</value>
@@ -496,7 +628,7 @@
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 0</value>
@@ -514,7 +646,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -565,7 +697,7 @@
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="weeklyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -583,7 +715,7 @@
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -961,7 +1093,7 @@
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 58</value>
@@ -976,7 +1108,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -997,7 +1129,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1018,7 +1150,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1039,7 +1171,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1153,7 +1285,7 @@
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4255.32497, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4265.37753, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1204,7 +1336,7 @@
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1381,7 +1513,55 @@
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="actionSelectionList.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>490, 120</value>
+  </data>
+  <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="actionSelectionList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="actionSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 239</value>
+  </data>
+  <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Name" xml:space="preserve">
+    <value>actionSelectionList</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.1.27894, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
+    <value>actionSelectPage</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 239</value>
+  </data>
+  <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="actionSelectPage.Text" xml:space="preserve">
+    <value>Choose the action to perform</value>
+  </data>
+  <data name="&gt;&gt;actionSelectPage.Name" xml:space="preserve">
+    <value>actionSelectPage</value>
+  </data>
+  <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1762,7 +1942,7 @@
     <value>secOptPage</value>
   </data>
   <data name="&gt;&gt;secOptPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 239</value>
@@ -1777,7 +1957,7 @@
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2170,7 +2350,7 @@
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -2323,7 +2503,7 @@
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="sumText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2428,7 +2608,7 @@
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>537, 391</value>
@@ -2443,7 +2623,7 @@
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.1.4254.39704, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.1.4256.27837, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>

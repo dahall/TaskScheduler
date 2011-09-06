@@ -20,7 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private Action action;
 		private AvailableWizardActions availActions = (AvailableWizardActions)0xD;
-		private AvailableWizardPages availPages = (AvailableWizardPages)0x1F;
+		private AvailableWizardPages availPages = (AvailableWizardPages)0x3F;
 		private AvailableWizardTriggers availTriggers = (AvailableWizardTriggers)0x7FF;
 		private bool flagExecutorIsGroup, flagExecutorIsServiceAccount;
 		private bool IsV2 = true;
@@ -43,6 +43,9 @@ namespace Microsoft.Win32.TaskScheduler
 			SetupPages();
 			SetupTriggerList();
 			SetupActionList();
+			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
+			durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
+			durationSpan.FormattedZero = Properties.Resources.TimeSpanIndefinitely;
 		}
 
 		/// <summary>
@@ -73,6 +76,8 @@ namespace Microsoft.Win32.TaskScheduler
 			SecurityPage = 0x10,
 			/// <summary>Displays trigger selection page.</summary>
 			TriggerSelectPage = 0x2,
+			/// <summary>Displays generic trigger properties page.</summary>
+			TriggerPropertiesPage = 0x20,
 			/// <summary>Displays action selection page.</summary>
 			ActionSelectPage = 0x4,
 			/// <summary>Displays the summary page.</summary>
@@ -144,7 +149,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The available pages.
 		/// </value>
-		[DefaultValue((AvailableWizardPages)0x1F)]
+		[DefaultValue((AvailableWizardPages)0x3F)]
 		public AvailableWizardPages AvailablePages
 		{
 			get { return availPages; }
@@ -386,6 +391,19 @@ namespace Microsoft.Win32.TaskScheduler
 						default:
 							break;
 					}
+
+					bool hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
+					if (!hasRep)
+					{
+						durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
+					}
+					else
+					{
+						durationSpan.Value = trigger.Repetition.Duration;
+						repeatSpan.Value = trigger.Repetition.Interval;
+					}
+					repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = hasRep;
+					enabledCheckBox.Checked = trigger.Enabled;
 				}
 
 				// Setup action values
@@ -475,6 +493,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		[DefaultValue((string)null), Category("Appearance"), Description("Trigger page title prompt.")]
 		public string TriggerPagePrompt { get; set; }
+
+		/// <summary>
+		/// Gets or sets the trigger properties page instructions text.
+		/// </summary>
+		/// <value>
+		/// The trigger properties instruction text.
+		/// </value>
+		[DefaultValue((string)null), Category("Appearance"), Description("Trigger properties page instruction text.")]
+		public string TriggerPropertiesInstructions { get; set; }
 
 		/// <summary>
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
@@ -807,6 +834,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			SetPage(introPage, (int)AvailableWizardPages.IntroPage, (int)availPages);
 			SetPage(triggerSelectPage, (int)AvailableWizardPages.TriggerSelectPage, (int)availPages);
+			SetPage(triggerPropPage, (int)AvailableWizardPages.TriggerPropertiesPage, (int)availPages);
 			SetPage(actionSelectPage, (int)AvailableWizardPages.ActionSelectPage, (int)availPages);
 			SetPage(secOptPage, (int)AvailableWizardPages.SecurityPage, (int)availPages);
 			SetPage(summaryPage, (int)AvailableWizardPages.SummaryPage, (int)availPages);
@@ -917,6 +945,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			taskLocalOnlyCheck.Enabled = (task == null || IsV2) && taskLoggedOptionalRadio.Checked;
 			taskLocalOnlyCheck_CheckedChanged(sender, e);
+		}
+
+		private void triggerPropPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		{
+			if (this.TriggerPropertiesInstructions != null)
+				triggerPropText.Text = this.TriggerPropertiesInstructions;
 		}
 
 		private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -1078,6 +1112,58 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
 		{
+		}
+
+		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				if (repeatCheckBox.Checked)
+				{
+					durationSpan.Value = durationSpan.Items[durationSpan.Items.Count - 1];
+					repeatSpan.Value = repeatSpan.Items[repeatSpan.Items.Count - 1];
+				}
+				else
+				{
+					trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
+				}
+				repeatSpan.Enabled = durationSpan.Enabled = durationLabel.Enabled = repeatCheckBox.Checked;
+			}
+		}
+
+		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			trigger.Enabled = enabledCheckBox.Checked;
+		}
+
+		private void repeatSpan_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				trigger.Repetition.Interval = repeatSpan.Value;
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
+				{
+					onAssignment = true;
+					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
+					trigger.Repetition.Duration = durationSpan.Value;
+					onAssignment = false;
+				}
+			}
+		}
+
+		private void durationSpan_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				trigger.Repetition.Duration = durationSpan.Value;
+				if (trigger.Repetition.Duration < trigger.Repetition.Interval)
+				{
+					onAssignment = true;
+					repeatSpan.Value = trigger.Repetition.Duration - TimeSpan.FromMinutes(1);
+					trigger.Repetition.Interval = repeatSpan.Value;
+					onAssignment = false;
+				}
+			}
 		}
 	}
 }

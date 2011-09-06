@@ -189,7 +189,7 @@ namespace TestTaskService
 				else
 				{
 					TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-					wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+					wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
 					wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
 					wiz.AllowEditorOnFinish = true;
 					wiz.EditorOnFinishText = "Show dialog";
