@@ -43,8 +43,13 @@
 			this.dailyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
 			this.dailyDaysLabel = new System.Windows.Forms.Label();
 			this.dailyRecurLabel = new System.Windows.Forms.Label();
-			this.actionSelectPage = new AeroWizard.WizardPage();
-			this.actionSelectionList = new GroupControls.RadioButtonList();
+			this.triggerPropPage = new AeroWizard.WizardPage();
+			this.triggerPropText = new System.Windows.Forms.Label();
+			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.durationLabel = new System.Windows.Forms.Label();
+			this.enabledCheckBox = new System.Windows.Forms.CheckBox();
+			this.repeatCheckBox = new System.Windows.Forms.CheckBox();
 			this.oneTimeTriggerPage = new AeroWizard.WizardPage();
 			this.oneTimeStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.oneTimeStartLabel = new System.Windows.Forms.Label();
@@ -79,6 +84,8 @@
 			this.onEventSourceCombo = new System.Windows.Forms.ComboBox();
 			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
 			this.onEventIdLabel = new System.Windows.Forms.Label();
+			this.actionSelectPage = new AeroWizard.WizardPage();
+			this.actionSelectionList = new GroupControls.RadioButtonList();
 			this.runActionPage = new AeroWizard.WizardPage();
 			this.execProgBrowseBtn = new System.Windows.Forms.Button();
 			this.execDirText = new System.Windows.Forms.TextBox();
@@ -125,13 +132,14 @@
 			this.triggerSelectPage.SuspendLayout();
 			this.dailyTriggerPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).BeginInit();
-			this.actionSelectPage.SuspendLayout();
+			this.triggerPropPage.SuspendLayout();
 			this.oneTimeTriggerPage.SuspendLayout();
 			this.weeklyTriggerPage.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.weeklyRecurNumUpDn)).BeginInit();
 			this.monthlyTriggerPage.SuspendLayout();
 			this.onEventTriggerPage.SuspendLayout();
+			this.actionSelectPage.SuspendLayout();
 			this.runActionPage.SuspendLayout();
 			this.secOptPage.SuspendLayout();
 			this.emailActionPage.SuspendLayout();
@@ -150,6 +158,7 @@
 			this.wizardControl1.Pages.Add(this.weeklyTriggerPage);
 			this.wizardControl1.Pages.Add(this.monthlyTriggerPage);
 			this.wizardControl1.Pages.Add(this.onEventTriggerPage);
+			this.wizardControl1.Pages.Add(this.triggerPropPage);
 			this.wizardControl1.Pages.Add(this.actionSelectPage);
 			this.wizardControl1.Pages.Add(this.runActionPage);
 			this.wizardControl1.Pages.Add(this.emailActionPage);
@@ -214,7 +223,7 @@
 			this.dailyTriggerPage.Controls.Add(this.dailyDaysLabel);
 			this.dailyTriggerPage.Controls.Add(this.dailyRecurLabel);
 			this.dailyTriggerPage.Name = "dailyTriggerPage";
-			this.dailyTriggerPage.NextPage = this.actionSelectPage;
+			this.dailyTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			this.dailyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.dailyTriggerPage_Commit);
 			// 
@@ -259,27 +268,60 @@
 			resources.ApplyResources(this.dailyRecurLabel, "dailyRecurLabel");
 			this.dailyRecurLabel.Name = "dailyRecurLabel";
 			// 
-			// actionSelectPage
+			// triggerPropPage
 			// 
-			this.actionSelectPage.AllowNext = false;
-			this.actionSelectPage.Controls.Add(this.actionSelectionList);
-			this.actionSelectPage.Name = "actionSelectPage";
-			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
-			this.actionSelectPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.actionSelectPage_Commit);
+			this.triggerPropPage.Controls.Add(this.triggerPropText);
+			this.triggerPropPage.Controls.Add(this.durationSpan);
+			this.triggerPropPage.Controls.Add(this.repeatSpan);
+			this.triggerPropPage.Controls.Add(this.durationLabel);
+			this.triggerPropPage.Controls.Add(this.enabledCheckBox);
+			this.triggerPropPage.Controls.Add(this.repeatCheckBox);
+			this.triggerPropPage.Name = "triggerPropPage";
+			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
+			this.triggerPropPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.triggerPropPage_Initialize);
 			// 
-			// actionSelectionList
+			// triggerPropText
 			// 
-			resources.ApplyResources(this.actionSelectionList, "actionSelectionList");
-			this.actionSelectionList.Name = "actionSelectionList";
-			this.actionSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
-			this.actionSelectionList.SelectedIndexChanged += new System.EventHandler(this.actionSelectionList_SelectedIndexChanged);
+			resources.ApplyResources(this.triggerPropText, "triggerPropText");
+			this.triggerPropText.Name = "triggerPropText";
+			// 
+			// durationSpan
+			// 
+			resources.ApplyResources(this.durationSpan, "durationSpan");
+			this.durationSpan.Name = "durationSpan";
+			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
+			// 
+			// repeatSpan
+			// 
+			resources.ApplyResources(this.repeatSpan, "repeatSpan");
+			this.repeatSpan.Name = "repeatSpan";
+			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
+			// 
+			// durationLabel
+			// 
+			resources.ApplyResources(this.durationLabel, "durationLabel");
+			this.durationLabel.Name = "durationLabel";
+			// 
+			// enabledCheckBox
+			// 
+			resources.ApplyResources(this.enabledCheckBox, "enabledCheckBox");
+			this.enabledCheckBox.Name = "enabledCheckBox";
+			this.enabledCheckBox.UseVisualStyleBackColor = true;
+			this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
+			// 
+			// repeatCheckBox
+			// 
+			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
+			this.repeatCheckBox.Name = "repeatCheckBox";
+			this.repeatCheckBox.UseVisualStyleBackColor = true;
+			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
 			// 
 			// oneTimeTriggerPage
 			// 
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartTimePicker);
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartLabel);
 			this.oneTimeTriggerPage.Name = "oneTimeTriggerPage";
-			this.oneTimeTriggerPage.NextPage = this.actionSelectPage;
+			this.oneTimeTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.oneTimeTriggerPage_Commit);
 			// 
@@ -303,7 +345,7 @@
 			this.weeklyTriggerPage.Controls.Add(this.weeklyOnWeeksLabel);
 			this.weeklyTriggerPage.Controls.Add(this.weeklyRecurLabel);
 			this.weeklyTriggerPage.Name = "weeklyTriggerPage";
-			this.weeklyTriggerPage.NextPage = this.actionSelectPage;
+			this.weeklyTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			this.weeklyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.weeklyTriggerPage_Commit);
 			this.weeklyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.weeklyTriggerPage_Initialize);
@@ -426,7 +468,7 @@
 			this.monthlyTriggerPage.Controls.Add(this.monthlyStartTimePicker);
 			this.monthlyTriggerPage.Controls.Add(this.label7);
 			this.monthlyTriggerPage.Name = "monthlyTriggerPage";
-			this.monthlyTriggerPage.NextPage = this.actionSelectPage;
+			this.monthlyTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			this.monthlyTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.monthlyTriggerPage_Commit);
 			this.monthlyTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.monthlyTriggerPage_Initialize);
@@ -504,7 +546,7 @@
 			this.onEventTriggerPage.Controls.Add(this.onEventLogCombo);
 			this.onEventTriggerPage.Controls.Add(this.onEventIdLabel);
 			this.onEventTriggerPage.Name = "onEventTriggerPage";
-			this.onEventTriggerPage.NextPage = this.actionSelectPage;
+			this.onEventTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
 			this.onEventTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
@@ -543,6 +585,21 @@
 			// 
 			resources.ApplyResources(this.onEventIdLabel, "onEventIdLabel");
 			this.onEventIdLabel.Name = "onEventIdLabel";
+			// 
+			// actionSelectPage
+			// 
+			this.actionSelectPage.AllowNext = false;
+			this.actionSelectPage.Controls.Add(this.actionSelectionList);
+			this.actionSelectPage.Name = "actionSelectPage";
+			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
+			this.actionSelectPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.actionSelectPage_Commit);
+			// 
+			// actionSelectionList
+			// 
+			resources.ApplyResources(this.actionSelectionList, "actionSelectionList");
+			this.actionSelectionList.Name = "actionSelectionList";
+			this.actionSelectionList.SubtextForeColor = System.Drawing.SystemColors.GrayText;
+			this.actionSelectionList.SelectedIndexChanged += new System.EventHandler(this.actionSelectionList_SelectedIndexChanged);
 			// 
 			// runActionPage
 			// 
@@ -829,8 +886,8 @@
 			this.dailyTriggerPage.ResumeLayout(false);
 			this.dailyTriggerPage.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).EndInit();
-			this.actionSelectPage.ResumeLayout(false);
-			this.actionSelectPage.PerformLayout();
+			this.triggerPropPage.ResumeLayout(false);
+			this.triggerPropPage.PerformLayout();
 			this.oneTimeTriggerPage.ResumeLayout(false);
 			this.oneTimeTriggerPage.PerformLayout();
 			this.weeklyTriggerPage.ResumeLayout(false);
@@ -842,6 +899,8 @@
 			this.monthlyTriggerPage.PerformLayout();
 			this.onEventTriggerPage.ResumeLayout(false);
 			this.onEventTriggerPage.PerformLayout();
+			this.actionSelectPage.ResumeLayout(false);
+			this.actionSelectPage.PerformLayout();
 			this.runActionPage.ResumeLayout(false);
 			this.runActionPage.PerformLayout();
 			this.secOptPage.ResumeLayout(false);
@@ -949,6 +1008,13 @@
 		private System.Windows.Forms.TextBox taskPrincipalText;
 		private System.Windows.Forms.Button changePrincipalButton;
 		private System.Windows.Forms.Label taskUserAcctLabel;
+		private AeroWizard.WizardPage triggerPropPage;
+		private System.Windows.Forms.TimeSpanPicker durationSpan;
+		private System.Windows.Forms.TimeSpanPicker repeatSpan;
+		private System.Windows.Forms.Label durationLabel;
+		private System.Windows.Forms.CheckBox enabledCheckBox;
+		private System.Windows.Forms.CheckBox repeatCheckBox;
+		private System.Windows.Forms.Label triggerPropText;
 
 	}
 }
