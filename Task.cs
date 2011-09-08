@@ -1717,14 +1717,24 @@ namespace Microsoft.Win32.TaskScheduler
 					string d = v2RegInfo.Date;
 					return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d);
 				}
-				return System.IO.File.GetLastWriteTime(Task.GetV1Path(v1Task));
+
+				string v1Path = Task.GetV1Path(v1Task);
+				if (!string.IsNullOrEmpty(v1Path) && System.IO.File.Exists(v1Path))
+					return System.IO.File.GetLastWriteTime(v1Path);
+				return DateTime.MinValue;
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.Date = value.ToString(Trigger.V2BoundaryDateFormat);
 				else
-					System.IO.File.SetLastWriteTime(Task.GetV1Path(v1Task), value);
+				{
+					string v1Path = Task.GetV1Path(v1Task);
+					if (!string.IsNullOrEmpty(v1Path) && System.IO.File.Exists(v1Path))
+						System.IO.File.SetLastWriteTime(v1Path, value);
+					else
+						throw new NotV1SupportedException("This property cannot be set on an unregistered task.");
+				}
 			}
 		}
 
