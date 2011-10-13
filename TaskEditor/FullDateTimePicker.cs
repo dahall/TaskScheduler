@@ -51,7 +51,9 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>Takes time in fields as local and produces value in Utc.</summary>
 			ConvertLocalToUtc = 0,
 			/// <summary>Takes time in fields as Utc and produces value in local.</summary>
-			AssumeUtc = 1
+			AssumeUtc = 1,
+			/// <summary>Takes time in fields as local and leaves them local.</summary>
+			AssumeLocal = 2
 		}
 
 		/// <summary>
@@ -251,10 +253,19 @@ namespace Microsoft.Win32.TaskScheduler
 				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
 			else
 			{
-				if (utcBehavior == FieldConversionUtcCheckBehavior.ConvertLocalToUtc)
-					this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
-				else
-					this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
+				switch (utcBehavior)
+				{
+					case FieldConversionUtcCheckBehavior.ConvertLocalToUtc:
+						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
+						break;
+					case FieldConversionUtcCheckBehavior.AssumeUtc:
+						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
+						break;
+					case FieldConversionUtcCheckBehavior.AssumeLocal:
+					default:
+						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
+						break;
+				}
 			}
 		}
 
