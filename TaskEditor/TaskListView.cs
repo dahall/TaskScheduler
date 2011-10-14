@@ -40,7 +40,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				foreach (int i in listView1.SelectedIndices)
 					listView1.Items[i].Selected = false;
-				listView1.Items[value].Selected = true;
+				if (value != -1)
+					listView1.Items[value].Selected = true;
 			}
 		}
 
