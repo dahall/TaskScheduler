@@ -19,8 +19,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(RegPath + "\\" + guid))
 			{
-				this.Name = hk.GetValue("ProfileName").ToString();
-				this.Id = new Guid(guid);
+				if (hk != null)
+				{
+					this.Name = hk.GetValue("ProfileName").ToString();
+					this.Id = new Guid(guid);
+				}
 			}
 		}
 
@@ -85,12 +88,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(NetworkProfile.RegPath))
 			{
-				NetworkProfile[] ret = new NetworkProfile[hk.SubKeyCount];
-				string[] sks = hk.GetSubKeyNames();
-				for (int i = 0; i < sks.Length; i++)
-					ret[i] = new NetworkProfile(sks[i]);
-				return ret;
+				if (hk != null)
+				{
+					NetworkProfile[] ret = new NetworkProfile[hk.SubKeyCount];
+					string[] sks = hk.GetSubKeyNames();
+					for (int i = 0; i < sks.Length; i++)
+						ret[i] = new NetworkProfile(sks[i]);
+					return ret;
+				}
 			}
+			return new NetworkProfile[0];
 		}
 	}
 }
