@@ -17,14 +17,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private NetworkProfile(string guid)
 		{
-			using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(RegPath + "\\" + guid))
+			try
 			{
-				if (hk != null)
+				using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(RegPath + "\\" + guid))
 				{
-					this.Name = hk.GetValue("ProfileName").ToString();
-					this.Id = new Guid(guid);
+					if (hk != null)
+					{
+						this.Name = hk.GetValue("ProfileName").ToString();
+						this.Id = new Guid(guid);
+					}
 				}
 			}
+			catch { }
 		}
 
 		/// <summary>
