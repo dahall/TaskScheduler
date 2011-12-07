@@ -7,28 +7,17 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	internal class NetworkProfile
 	{
-		private const string RegPath = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles";
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NetworkProfile"/> class using the GUID of the network profile.
 		/// </summary>
 		/// <param name="guid">The GUID of the network profile.</param>
-		public NetworkProfile(Guid guid) : this(guid.ToString("B")) { }
+		/// <param name="name">The name of the network profile.</param>
+		public NetworkProfile(Guid guid, string name) : this(guid.ToString("B"), name) { }
 
-		private NetworkProfile(string guid)
+		private NetworkProfile(string guid, string name)
 		{
-			try
-			{
-				using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(RegPath + "\\" + guid))
-				{
-					if (hk != null)
-					{
-						this.Name = hk.GetValue("ProfileName").ToString();
-						this.Id = new Guid(guid);
-					}
-				}
-			}
-			catch { }
+			this.Name = name;
+			this.Id = new Guid(guid);
 		}
 
 		/// <summary>
@@ -90,17 +79,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Array of <see cref="NetworkProfile"/> objects.</returns>
 		public static NetworkProfile[] GetAllLocalProfiles()
 		{
-			using (RegistryKey hk = Registry.LocalMachine.OpenSubKey(NetworkProfile.RegPath))
+			try
 			{
-				if (hk != null)
-				{
-					NetworkProfile[] ret = new NetworkProfile[hk.SubKeyCount];
-					string[] sks = hk.GetSubKeyNames();
-					for (int i = 0; i < sks.Length; i++)
-						ret[i] = new NetworkProfile(sks[i]);
-					return ret;
-				}
+				return NetworkListManager.GetNetworkList();
 			}
+			catch { }
 			return new NetworkProfile[0];
 		}
 	}
