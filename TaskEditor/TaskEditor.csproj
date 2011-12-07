@@ -102,6 +102,7 @@
     <Compile Include="FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NetworkListManager.cs" />
     <Compile Include="NetworkProfile.cs" />
     <Compile Include="SystemEventEnumerator.cs" />
     <Compile Include="TaskEditDialog.cs">
