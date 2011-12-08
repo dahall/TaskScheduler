@@ -921,38 +921,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static TimeSpan StringToTimeSpan(string input)
 		{
-			TimeSpan span = TimeSpan.Zero;
 			if (!string.IsNullOrEmpty(input))
-			{
-				System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(input, @"P(?:(?<Y>\d+)Y)?(?:(?<Mo>\d+)M)?(?:(?<D>\d+)D)?(?:T(?:(?<H>\d+)H)?(?:(?<M>\d+)M)?(?:(?<S>\d+)S)?)?", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline | System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
-				if (m.Success)
-				{
-					DateTime now = DateTime.Now;
-					int years = m.Groups["Y"].Success ? Int32.Parse(m.Groups["Y"].Value) : 0;
-					int months = m.Groups["Mo"].Success ? Int32.Parse(m.Groups["Mo"].Value) : 0;
-					int days = m.Groups["D"].Success ? Int32.Parse(m.Groups["D"].Value) : 0;
-					if (years > 0 || months > 0)
-						days += (now - new DateTime(now.Year + years + (now.Month + months) / 12, (now.Month + months) % 12, 1)).Days;
-					int hours = m.Groups["H"].Success ? Int32.Parse(m.Groups["H"].Value) : 0;
-					int minutes = m.Groups["M"].Success ? Int32.Parse(m.Groups["M"].Value) : 0;
-					int seconds = m.Groups["S"].Success ? Int32.Parse(m.Groups["S"].Value) : 0;
-					span = new TimeSpan(days, hours, minutes, seconds);
-				}
-			}
-			return span;
+				try { return System.Xml.XmlConvert.ToTimeSpan(input); } catch { }
+			return TimeSpan.Zero;
 		}
 
 		internal static string TimeSpanToString(TimeSpan span)
 		{
-			if (span == TimeSpan.Zero) return null;
-
-			System.Text.StringBuilder sb = new System.Text.StringBuilder("P", 20);
-			if (span.Days > 0) sb.AppendFormat("{0}D", span.Days);
-			if (span.TotalDays - Math.Truncate(span.TotalDays) != 0) sb.Append('T');
-			if (span.Hours > 0) sb.AppendFormat("{0}H", span.Hours);
-			if (span.Minutes > 0) sb.AppendFormat("{0}M", span.Minutes);
-			if (span.Seconds > 0) sb.AppendFormat("{0}S", span.Seconds);
-			return sb.ToString();
+			if (span != TimeSpan.Zero)
+				try { return System.Xml.XmlConvert.ToString(span); } catch { }
+			return null;
 		}
 	}
 
