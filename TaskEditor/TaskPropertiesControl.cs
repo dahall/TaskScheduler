@@ -765,8 +765,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				taskIdleDurationCombo.Value = TimeSpan.FromMinutes(10);
 				taskIdleWaitTimeoutCombo.Value = TimeSpan.FromHours(1);
-				if (taskIdleDurationCheck.Checked)
-					td.Settings.IdleSettings.StopOnIdleEnd = false;
+//				if (taskIdleDurationCheck.Checked)
+//					td.Settings.IdleSettings.StopOnIdleEnd = true;
 			}
 			UpdateIdleSettingsControls();
 		}
