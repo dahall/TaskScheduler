@@ -471,7 +471,8 @@ namespace Microsoft.Win32.TaskScheduler
 				get
 				{
 					V2Interop.IRunningTask irt = (V2Interop.IRunningTask)iEnum.Current;
-					V2Interop.IRegisteredTask task = TaskService.GetTask(v2Svc, irt.Path);
+					V2Interop.IRegisteredTask task = null;
+					try { task = TaskService.GetTask(v2Svc, irt.Path); } catch { }
 					if (task == null) return null;
 					return new RunningTask(svc, task, irt);
 				}
