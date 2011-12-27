@@ -105,7 +105,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		/// </summary>
 		RunOnlyIfDocked = 0x100,
 		/// <summary>
-		/// The task is hidden. When the task begins execution, it runs in a hidden window.
+		/// The work item created will be hidden.
 		/// </summary>
 		Hidden = 0x200,
 		/// <summary>
