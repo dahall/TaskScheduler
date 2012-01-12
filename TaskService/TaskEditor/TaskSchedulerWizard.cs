@@ -49,6 +49,27 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
+		/// </summary>
+		/// <param name="service">A <see cref="TaskService"/> instance.</param>
+		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		public TaskSchedulerWizard(TaskService service, TaskDefinition definition = null)
+			: this()
+		{
+			Initialize(service, definition);
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
+		/// </summary>
+		/// <param name="service">A <see cref="Task"/> instance.</param>
+		public TaskSchedulerWizard(Task task)
+			: this()
+		{
+			Initialize(task);
+		}
+
+		/// <summary>
 		/// Flags to indicate which actions are available in the <see cref="TaskSchedulerWizard"/>.
 		/// </summary>
 		[Flags]
