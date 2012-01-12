@@ -136,7 +136,7 @@
     <value>0</value>
   </data>
   <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>Name:</value>
+    <value>名称:</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.Name" xml:space="preserve">
     <value>taskNameLabel</value>
@@ -166,7 +166,7 @@
     <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Location:</value>
+    <value>位置:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -196,7 +196,7 @@
     <value>2</value>
   </data>
   <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Author:</value>
+    <value>创建者:</value>
   </data>
   <data name="&gt;&gt;taskAuthorLabel.Name" xml:space="preserve">
     <value>taskAuthorLabel</value>
@@ -226,7 +226,7 @@
     <value>4</value>
   </data>
   <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>Description:</value>
+    <value>描述:</value>
   </data>
   <data name="&gt;&gt;taskDescLabel.Name" xml:space="preserve">
     <value>taskDescLabel</value>
@@ -253,7 +253,7 @@
     <value>1</value>
   </data>
   <data name="taskNameText.Text" xml:space="preserve">
-    <value>Task Name</value>
+    <value>任务名称</value>
   </data>
   <data name="&gt;&gt;taskNameText.Name" xml:space="preserve">
     <value>taskNameText</value>
@@ -403,7 +403,7 @@
     <value>8</value>
   </data>
   <data name="taskVersionLabel.Text" xml:space="preserve">
-    <value>Configure for:</value>
+    <value>配置:</value>
   </data>
   <data name="taskVersionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
@@ -439,7 +439,7 @@
     <value>7</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Hidden</value>
+    <value>隐藏</value>
   </data>
   <data name="&gt;&gt;taskHiddenCheck.Name" xml:space="preserve">
     <value>taskHiddenCheck</value>
@@ -472,7 +472,7 @@
     <value>6</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Run with highest privileges</value>
+    <value>使用最高权限运行</value>
   </data>
   <data name="&gt;&gt;taskRunLevelCheck.Name" xml:space="preserve">
     <value>taskRunLevelCheck</value>
@@ -502,7 +502,7 @@
     <value>5</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Do not store password. The task will only have access to local computer resources.</value>
+    <value>不存储密码。该任务将只有访问本地计算机资源的权限。</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
     <value>taskLocalOnlyCheck</value>
@@ -532,7 +532,7 @@
     <value>4</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Run whether user is logged on or not</value>
+    <value>不管用户是否登录都要运行</value>
   </data>
   <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
     <value>taskLoggedOptionalRadio</value>
@@ -562,7 +562,7 @@
     <value>3</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Run only when user is logged on</value>
+    <value>只在用户登录时运行</value>
   </data>
   <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
     <value>taskLoggedOnRadio</value>
@@ -616,7 +616,7 @@
     <value>2</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Change User or Group...</value>
+    <value>更改用户或组...</value>
   </data>
   <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
     <value>changePrincipalButton</value>
@@ -646,7 +646,7 @@
     <value>0</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>When running the task, use the following user account:</value>
+    <value>运行任务时，请使用下列用户账户:</value>
   </data>
   <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
     <value>taskUserAcctLabel</value>
@@ -670,7 +670,7 @@
     <value>6</value>
   </data>
   <data name="taskSecurityGroupBox.Text" xml:space="preserve">
-    <value>Security options</value>
+    <value>安全选项</value>
   </data>
   <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -697,7 +697,7 @@
     <value>0</value>
   </data>
   <data name="generalTab.Text" xml:space="preserve">
-    <value>General</value>
+    <value>常规</value>
   </data>
   <data name="&gt;&gt;generalTab.Name" xml:space="preserve">
     <value>generalTab</value>
@@ -727,7 +727,7 @@
     <value>4</value>
   </data>
   <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>删除</value>
   </data>
   <data name="&gt;&gt;triggerDeleteButton.Name" xml:space="preserve">
     <value>triggerDeleteButton</value>
@@ -757,7 +757,7 @@
     <value>3</value>
   </data>
   <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>Edit...</value>
+    <value>编辑...</value>
   </data>
   <data name="&gt;&gt;triggerEditButton.Name" xml:space="preserve">
     <value>triggerEditButton</value>
@@ -787,7 +787,7 @@
     <value>2</value>
   </data>
   <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>New...</value>
+    <value>新建...</value>
   </data>
   <data name="&gt;&gt;triggerNewButton.Name" xml:space="preserve">
     <value>triggerNewButton</value>
@@ -805,19 +805,19 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Trigger</value>
+    <value>触发器</value>
   </data>
   <data name="columnHeader1.Width" type="System.Int32, mscorlib">
     <value>95</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Details</value>
+    <value>详细信息</value>
   </data>
   <data name="columnHeader2.Width" type="System.Int32, mscorlib">
     <value>315</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Status</value>
+    <value>状态</value>
   </data>
   <data name="columnHeader3.Width" type="System.Int32, mscorlib">
     <value>74</value>
@@ -859,7 +859,7 @@
     <value>0</value>
   </data>
   <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
-    <value>When you create a task, you can specify the conditions that will trigger the task.</value>
+    <value>创建任务时，可以指定触发该任务的条件。</value>
   </data>
   <data name="&gt;&gt;taskTriggerIntroLabel.Name" xml:space="preserve">
     <value>taskTriggerIntroLabel</value>
@@ -886,7 +886,7 @@
     <value>1</value>
   </data>
   <data name="triggersTab.Text" xml:space="preserve">
-    <value>Triggers</value>
+    <value>触发器</value>
   </data>
   <data name="&gt;&gt;triggersTab.Name" xml:space="preserve">
     <value>triggersTab</value>
@@ -970,7 +970,7 @@
     <value>6</value>
   </data>
   <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>删除</value>
   </data>
   <data name="&gt;&gt;actionDeleteButton.Name" xml:space="preserve">
     <value>actionDeleteButton</value>
@@ -1000,7 +1000,7 @@
     <value>5</value>
   </data>
   <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Edit...</value>
+    <value>修改...</value>
   </data>
   <data name="&gt;&gt;actionEditButton.Name" xml:space="preserve">
     <value>actionEditButton</value>
@@ -1030,7 +1030,7 @@
     <value>4</value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
-    <value>New...</value>
+    <value>新建...</value>
   </data>
   <data name="&gt;&gt;actionNewButton.Name" xml:space="preserve">
     <value>actionNewButton</value>
@@ -1048,13 +1048,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Action</value>
+    <value>操作</value>
   </data>
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>112</value>
   </data>
   <data name="columnHeader5.Text" xml:space="preserve">
-    <value>Details</value>
+    <value>详细信息</value>
   </data>
   <data name="columnHeader5.Width" type="System.Int32, mscorlib">
     <value>290</value>
@@ -1096,7 +1096,7 @@
     <value>0</value>
   </data>
   <data name="actionIntroLabel.Text" xml:space="preserve">
-    <value>When you create a task, you must specify the action that will occur when your task starts.</value>
+    <value>创建任务时，必须指定任务启动时发生的操作。</value>
   </data>
   <data name="&gt;&gt;actionIntroLabel.Name" xml:space="preserve">
     <value>actionIntroLabel</value>
@@ -1123,7 +1123,7 @@
     <value>2</value>
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
-    <value>Actions</value>
+    <value>操作</value>
   </data>
   <data name="&gt;&gt;actionsTab.Name" xml:space="preserve">
     <value>actionsTab</value>
@@ -1180,7 +1180,7 @@
     <value>0</value>
   </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Start only if the following network connection is available:</value>
+    <value>只有在以下网络连接可用时才启动:</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.Name" xml:space="preserve">
     <value>taskStartIfConnectionCheck</value>
@@ -1204,7 +1204,7 @@
     <value>3</value>
   </data>
   <data name="networkConditionGroupBox.Text" xml:space="preserve">
-    <value>Network</value>
+    <value>网络</value>
   </data>
   <data name="&gt;&gt;networkConditionGroupBox.Name" xml:space="preserve">
     <value>networkConditionGroupBox</value>
@@ -1237,7 +1237,7 @@
     <value>1</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Stop if the computer switches to battery power</value>
+    <value>如果计算机改用电池，则停止</value>
   </data>
   <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Name" xml:space="preserve">
     <value>taskStopIfGoingOnBatteriesCheck</value>
@@ -1267,7 +1267,7 @@
     <value>2</value>
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>Wake the computer to run this task</value>
+    <value>唤醒计算机运行此任务</value>
   </data>
   <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
     <value>taskWakeToRunCheck</value>
@@ -1297,7 +1297,7 @@
     <value>0</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Start the task only if the computer is on AC power</value>
+    <value>只有在计算机使用交流电源时才启动此任务</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Name" xml:space="preserve">
     <value>taskDisallowStartIfOnBatteriesCheck</value>
@@ -1321,7 +1321,7 @@
     <value>2</value>
   </data>
   <data name="powerConditionGroupBox.Text" xml:space="preserve">
-    <value>Power</value>
+    <value>电源</value>
   </data>
   <data name="&gt;&gt;powerConditionGroupBox.Name" xml:space="preserve">
     <value>powerConditionGroupBox</value>
@@ -1396,7 +1396,7 @@
     <value>5</value>
   </data>
   <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Restart if the idle state resumes</value>
+    <value>如果空闲状态继续，则重新启动</value>
   </data>
   <data name="&gt;&gt;taskRestartOnIdleCheck.Name" xml:space="preserve">
     <value>taskRestartOnIdleCheck</value>
@@ -1426,7 +1426,7 @@
     <value>4</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Stop if the computer ceases to be idle</value>
+    <value>如果计算机不再空闲，则停止</value>
   </data>
   <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
     <value>taskStopOnIdleEndCheck</value>
@@ -1456,7 +1456,7 @@
     <value>2</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>Wait for idle for:</value>
+    <value>等待空闲时间:</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Name" xml:space="preserve">
     <value>taskIdleWaitTimeoutLabel</value>
@@ -1486,7 +1486,7 @@
     <value>0</value>
   </data>
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Start the task only if the computer is idle for:</value>
+    <value>仅当计算机空闲时间超过下列值时才启动任务:</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCheck.Name" xml:space="preserve">
     <value>taskIdleDurationCheck</value>
@@ -1510,7 +1510,7 @@
     <value>1</value>
   </data>
   <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>Idle</value>
+    <value>空闲</value>
   </data>
   <data name="&gt;&gt;idleConditionGroupBox.Name" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1540,7 +1540,7 @@
     <value>0</value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
-    <value>Specify the conditions that. along with the trigger, determine whether the task should run. The task will not run if any condition specified is not true.</value>
+    <value>指定用于触发器一起判断是否应运行该任务的条件。如果这里指定的条件不是真，该任务将不会运行。</value>
   </data>
   <data name="&gt;&gt;conditionIntroLabel.Name" xml:space="preserve">
     <value>conditionIntroLabel</value>
@@ -1567,7 +1567,7 @@
     <value>3</value>
   </data>
   <data name="conditionsTab.Text" xml:space="preserve">
-    <value>Conditions</value>
+    <value>条件</value>
   </data>
   <data name="&gt;&gt;conditionsTab.Name" xml:space="preserve">
     <value>conditionsTab</value>
@@ -1603,16 +1603,16 @@
     <value>0</value>
   </data>
   <data name="taskMultInstCombo.Items" xml:space="preserve">
-    <value>Run a new instance in parallel</value>
+    <value>并行运行新实例</value>
   </data>
   <data name="taskMultInstCombo.Items1" xml:space="preserve">
-    <value>Queue a new instance</value>
+    <value>对新实例排队</value>
   </data>
   <data name="taskMultInstCombo.Items2" xml:space="preserve">
-    <value>Do not start a new instance</value>
+    <value>请勿启动新实例</value>
   </data>
   <data name="taskMultInstCombo.Items3" xml:space="preserve">
-    <value>Stop the existing instance</value>
+    <value>停止现有实例</value>
   </data>
   <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 288</value>
@@ -1651,7 +1651,7 @@
     <value>13</value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>If the task is already running, then the following rule applies:</value>
+    <value>如果此任务已经运行，以下规则适用:</value>
   </data>
   <data name="&gt;&gt;taskRunningRuleLabel.Name" xml:space="preserve">
     <value>taskRunningRuleLabel</value>
@@ -1681,7 +1681,7 @@
     <value>7</value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>times</value>
+    <value>次</value>
   </data>
   <data name="&gt;&gt;taskRestartAttemptTimesLabel.Name" xml:space="preserve">
     <value>taskRestartAttemptTimesLabel</value>
@@ -1711,7 +1711,7 @@
     <value>5</value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Attempt restart up to:</value>
+    <value>尝试重新启动最多次数:</value>
   </data>
   <data name="&gt;&gt;taskRestartCountLabel.Name" xml:space="preserve">
     <value>taskRestartCountLabel</value>
@@ -1741,7 +1741,7 @@
     <value>11</value>
   </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>If the task is not scheduled to run again, delete it after:</value>
+    <value>如果任务没有计划再次运行，则在此之后删除该任务</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCheck.Name" xml:space="preserve">
     <value>taskDeleteAfterCheck</value>
@@ -1771,7 +1771,7 @@
     <value>10</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>If the running task does not end when requested, force it to stop</value>
+    <value>如果请求后任务还在运行，强行将其停止</value>
   </data>
   <data name="&gt;&gt;taskAllowHardTerminateCheck.Name" xml:space="preserve">
     <value>taskAllowHardTerminateCheck</value>
@@ -1801,7 +1801,7 @@
     <value>8</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Stop the task if it runs longer than:</value>
+    <value>如果任务运行时间超过以下时间，停止任务:</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
     <value>taskExecutionTimeLimitCheck</value>
@@ -1831,7 +1831,7 @@
     <value>3</value>
   </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>If the task fails, restart every:</value>
+    <value>如果任务失败，按以下频率重新启动:</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCheck.Name" xml:space="preserve">
     <value>taskRestartIntervalCheck</value>
@@ -1861,7 +1861,7 @@
     <value>2</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Run task as soon as possible after a scheduled start is missed</value>
+    <value>如果过了计划开始时间，立即启动任务</value>
   </data>
   <data name="&gt;&gt;taskStartWhenAvailableCheck.Name" xml:space="preserve">
     <value>taskStartWhenAvailableCheck</value>
@@ -1891,7 +1891,7 @@
     <value>1</value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>Allow task to be run on demand</value>
+    <value>允许按需运行任务</value>
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.Name" xml:space="preserve">
     <value>taskAllowDemandStartCheck</value>
@@ -1921,7 +1921,7 @@
     <value>0</value>
   </data>
   <data name="settingsIntroLabel.Text" xml:space="preserve">
-    <value>Specify additional settings that affect the behavior of the task.</value>
+    <value>指定影响任务行为的其他设置。</value>
   </data>
   <data name="&gt;&gt;settingsIntroLabel.Name" xml:space="preserve">
     <value>settingsIntroLabel</value>
@@ -2011,7 +2011,7 @@
     <value>4</value>
   </data>
   <data name="settingsTab.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="&gt;&gt;settingsTab.Name" xml:space="preserve">
     <value>settingsTab</value>
@@ -2047,7 +2047,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4359.18784, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -2071,7 +2071,7 @@
     <value>1</value>
   </data>
   <data name="runTimesErrorLabel.Text" xml:space="preserve">
-    <value>(error text)</value>
+    <value>(错误信息)</value>
   </data>
   <data name="&gt;&gt;runTimesErrorLabel.Name" xml:space="preserve">
     <value>runTimesErrorLabel</value>
@@ -2101,7 +2101,7 @@
     <value>1</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Error:</value>
+    <value>错误:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -2128,7 +2128,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Unable to show the run times for this task.</value>
+    <value>不能显示该任务的运行时间。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -2155,7 +2155,7 @@
     <value>6</value>
   </data>
   <data name="runTimesTab.Text" xml:space="preserve">
-    <value>Run Times</value>
+    <value>运行时间</value>
   </data>
   <data name="&gt;&gt;runTimesTab.Name" xml:space="preserve">
     <value>runTimesTab</value>
@@ -2173,37 +2173,37 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="columnHeader6.Text" xml:space="preserve">
-    <value>Level</value>
+    <value>级别</value>
   </data>
   <data name="columnHeader6.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="columnHeader7.Text" xml:space="preserve">
-    <value>Date and Time</value>
+    <value>日期和时间</value>
   </data>
   <data name="columnHeader7.Width" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
   <data name="columnHeader8.Text" xml:space="preserve">
-    <value>Event ID</value>
+    <value>事件ID</value>
   </data>
   <data name="columnHeader8.Width" type="System.Int32, mscorlib">
     <value>73</value>
   </data>
   <data name="columnHeader9.Text" xml:space="preserve">
-    <value>Task Category</value>
+    <value>任务类别</value>
   </data>
   <data name="columnHeader9.Width" type="System.Int32, mscorlib">
     <value>88</value>
   </data>
   <data name="columnHeader10.Text" xml:space="preserve">
-    <value>Operational Code</value>
+    <value>操作代码</value>
   </data>
   <data name="columnHeader10.Width" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
   <data name="columnHeader11.Text" xml:space="preserve">
-    <value>Correlation Id</value>
+    <value>相关Id</value>
   </data>
   <data name="columnHeader11.Width" type="System.Int32, mscorlib">
     <value>95</value>
@@ -2242,7 +2242,7 @@
     <value>5</value>
   </data>
   <data name="historyTab.Text" xml:space="preserve">
-    <value>History</value>
+    <value>历史记录</value>
   </data>
   <data name="&gt;&gt;historyTab.Name" xml:space="preserve">
     <value>historyTab</value>
@@ -2280,15 +2280,15 @@
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="historyBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="historyBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>55</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>

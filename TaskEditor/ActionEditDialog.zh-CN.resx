@@ -1,0 +1,1410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="promptLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="promptLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 20</value>
+  </data>
+  <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 20</value>
+  </data>
+  <data name="promptLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="promptLabel.Text" xml:space="preserve">
+    <value>你必须为此任务指定要执行的操作。</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Name" xml:space="preserve">
+    <value>promptLabel</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 61</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 3</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="execProgLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="execProgLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 4</value>
+  </data>
+  <data name="execProgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="execProgLabel.Text" xml:space="preserve">
+    <value>程序/脚本:</value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
+    <value>execProgLabel</value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="actionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="actionsCombo.Items" xml:space="preserve">
+    <value>启动程序</value>
+  </data>
+  <data name="actionsCombo.Items1" xml:space="preserve">
+    <value>发送电子邮件</value>
+  </data>
+  <data name="actionsCombo.Items2" xml:space="preserve">
+    <value>显示消息</value>
+  </data>
+  <data name="actionsCombo.Items3" xml:space="preserve">
+    <value>自定义处理程序</value>
+  </data>
+  <data name="actionsCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 81</value>
+  </data>
+  <data name="actionsCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="actionsCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>446, 28</value>
+  </data>
+  <data name="actionsCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.Name" xml:space="preserve">
+    <value>actionsCombo</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="settingsGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="settingsTabs.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
+    <value>Buttons</value>
+  </data>
+  <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 31</value>
+  </data>
+  <data name="execProgBrowseBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 36</value>
+  </data>
+  <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="execProgBrowseBtn.Text" xml:space="preserve">
+    <value>浏览...</value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Name" xml:space="preserve">
+    <value>execProgBrowseBtn</value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="execDirText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 119</value>
+  </data>
+  <data name="execDirText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 27</value>
+  </data>
+  <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;execDirText.Name" xml:space="preserve">
+    <value>execDirText</value>
+  </data>
+  <data name="&gt;&gt;execDirText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execDirText.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execDirText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="execArgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="execArgText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 79</value>
+  </data>
+  <data name="execArgText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 27</value>
+  </data>
+  <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;execArgText.Name" xml:space="preserve">
+    <value>execArgText</value>
+  </data>
+  <data name="&gt;&gt;execArgText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execArgText.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execArgText.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="execProgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="execProgText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 31</value>
+  </data>
+  <data name="execProgText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execProgText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 27</value>
+  </data>
+  <data name="execProgText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;execProgText.Name" xml:space="preserve">
+    <value>execProgText</value>
+  </data>
+  <data name="&gt;&gt;execProgText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execProgText.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execProgText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="execDirLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="execDirLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 123</value>
+  </data>
+  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="execDirLabel.Text" xml:space="preserve">
+    <value>起始于 (可选):</value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
+    <value>execDirLabel</value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="execArgLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="execArgLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 83</value>
+  </data>
+  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value>添加参数 (可选):</value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Name" xml:space="preserve">
+    <value>execArgLabel</value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="execTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="execTab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 440</value>
+  </data>
+  <data name="execTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;execTab.Name" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;execTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>423, 338</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 36</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
+    <value>浏览...</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
+    <value>emailAttachementBrowseBtn</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="emailSMTPText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 394</value>
+  </data>
+  <data name="emailSMTPText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>388, 27</value>
+  </data>
+  <data name="emailSMTPText.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Name" xml:space="preserve">
+    <value>emailSMTPText</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="emailSMTPLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailSMTPLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 399</value>
+  </data>
+  <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 20</value>
+  </data>
+  <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="emailSMTPLabel.Text" xml:space="preserve">
+    <value>SMTP服务器:</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
+    <value>emailSMTPLabel</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="emailAttachmentText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 341</value>
+  </data>
+  <data name="emailAttachmentText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 27</value>
+  </data>
+  <data name="emailAttachmentText.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Name" xml:space="preserve">
+    <value>emailAttachmentText</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="emailAttachmentLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailAttachmentLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 345</value>
+  </data>
+  <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 20</value>
+  </data>
+  <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="emailAttachmentLabel.Text" xml:space="preserve">
+    <value>附件:</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
+    <value>emailAttachmentLabel</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 382</value>
+  </data>
+  <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 3</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="emailTextText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="emailTextText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 124</value>
+  </data>
+  <data name="emailTextText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailTextText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailTextText.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 205</value>
+  </data>
+  <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Name" xml:space="preserve">
+    <value>emailTextText</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="emailTextLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailTextLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 129</value>
+  </data>
+  <data name="emailTextLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="emailTextLabel.Text" xml:space="preserve">
+    <value>正文:</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
+    <value>emailTextLabel</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="emailSubjectText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="emailSubjectText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 84</value>
+  </data>
+  <data name="emailSubjectText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailSubjectText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 27</value>
+  </data>
+  <data name="emailSubjectText.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Name" xml:space="preserve">
+    <value>emailSubjectText</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="emailSubjectLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailSubjectLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 89</value>
+  </data>
+  <data name="emailSubjectLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="emailSubjectLabel.Text" xml:space="preserve">
+    <value>标题:</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
+    <value>emailSubjectLabel</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="emailToText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="emailToText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 44</value>
+  </data>
+  <data name="emailToText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailToText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 27</value>
+  </data>
+  <data name="emailToText.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Name" xml:space="preserve">
+    <value>emailToText</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailToText.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="emailToLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailToLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 49</value>
+  </data>
+  <data name="emailToLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="emailToLabel.Text" xml:space="preserve">
+    <value>收件人:</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
+    <value>emailToLabel</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="emailFromText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="emailFromText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 4</value>
+  </data>
+  <data name="emailFromText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailFromText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 27</value>
+  </data>
+  <data name="emailFromText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Name" xml:space="preserve">
+    <value>emailFromText</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="emailFromLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailFromLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="emailFromLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="emailFromLabel.Text" xml:space="preserve">
+    <value>发件人:</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
+    <value>emailFromLabel</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="emailTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="emailTab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 442</value>
+  </data>
+  <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Name" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;emailTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="msgMsgText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 79</value>
+  </data>
+  <data name="msgMsgText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="msgMsgText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="msgMsgText.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="msgMsgText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 353</value>
+  </data>
+  <data name="msgMsgText.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Name" xml:space="preserve">
+    <value>msgMsgText</value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="msgMsgLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="msgMsgLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 83</value>
+  </data>
+  <data name="msgMsgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="msgMsgLabel.Text" xml:space="preserve">
+    <value>邮件:</value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Name" xml:space="preserve">
+    <value>msgMsgLabel</value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="msgTitleText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="msgTitleText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 39</value>
+  </data>
+  <data name="msgTitleText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="msgTitleText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 27</value>
+  </data>
+  <data name="msgTitleText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Name" xml:space="preserve">
+    <value>msgTitleText</value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="msgTitleLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="msgTitleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
+  </data>
+  <data name="msgTitleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="msgTitleLabel.Text" xml:space="preserve">
+    <value>标题:</value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Name" xml:space="preserve">
+    <value>msgTitleLabel</value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="msgIntroLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="msgIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="msgIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 20</value>
+  </data>
+  <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="msgIntroLabel.Text" xml:space="preserve">
+    <value>该操作在桌面上显示一个消息框。</value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Name" xml:space="preserve">
+    <value>msgIntroLabel</value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="messageTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="messageTab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 442</value>
+  </data>
+  <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;messageTab.Name" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;messageTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;messageTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="getCLSIDButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 39</value>
+  </data>
+  <data name="getCLSIDButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="getCLSIDButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
+  </data>
+  <data name="getCLSIDButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Name" xml:space="preserve">
+    <value>getCLSIDButton</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;getCLSIDButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comDataText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="comDataText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 79</value>
+  </data>
+  <data name="comDataText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="comDataText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 27</value>
+  </data>
+  <data name="comDataText.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;comDataText.Name" xml:space="preserve">
+    <value>comDataText</value>
+  </data>
+  <data name="&gt;&gt;comDataText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comDataText.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comDataText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="comDataLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="comDataLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 83</value>
+  </data>
+  <data name="comDataLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="comDataLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="comDataLabel.Text" xml:space="preserve">
+    <value>数据:</value>
+  </data>
+  <data name="&gt;&gt;comDataLabel.Name" xml:space="preserve">
+    <value>comDataLabel</value>
+  </data>
+  <data name="&gt;&gt;comDataLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comDataLabel.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comDataLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="comCLSIDText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="comCLSIDText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 39</value>
+  </data>
+  <data name="comCLSIDText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="comCLSIDText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 27</value>
+  </data>
+  <data name="comCLSIDText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDText.Name" xml:space="preserve">
+    <value>comCLSIDText</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDText.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="comCLSIDLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="comCLSIDLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
+  </data>
+  <data name="comCLSIDLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="comCLSIDLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="comCLSIDLabel.Text" xml:space="preserve">
+    <value>COM对象:</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDLabel.Name" xml:space="preserve">
+    <value>comCLSIDLabel</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDLabel.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comCLSIDLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="comIntroLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="comIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="comIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 20</value>
+  </data>
+  <data name="comIntroLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="comIntroLabel.Text" xml:space="preserve">
+    <value>该操作运行一个COM处理程序。</value>
+  </data>
+  <data name="&gt;&gt;comIntroLabel.Name" xml:space="preserve">
+    <value>comIntroLabel</value>
+  </data>
+  <data name="&gt;&gt;comIntroLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comIntroLabel.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comIntroLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="comTab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 440</value>
+  </data>
+  <data name="comTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;comTab.Name" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;comTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="settingsTabs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="settingsTabs.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="settingsTabs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 24</value>
+  </data>
+  <data name="settingsTabs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="settingsTabs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 451</value>
+  </data>
+  <data name="settingsTabs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Name" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Parent" xml:space="preserve">
+    <value>settingsGroup</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 123</value>
+  </data>
+  <data name="settingsGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="settingsGroup.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>544, 479</value>
+  </data>
+  <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Name" xml:space="preserve">
+    <value>settingsGroup</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 613</value>
+  </data>
+  <data name="okBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 36</value>
+  </data>
+  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
+    <value>okBtn</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>459, 613</value>
+  </data>
+  <data name="cancelBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 36</value>
+  </data>
+  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
+    <value>cancelBtn</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="actionsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="actionsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 87</value>
+  </data>
+  <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="actionsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="actionsLabel.Text" xml:space="preserve">
+    <value>操作:</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Name" xml:space="preserve">
+    <value>actionsLabel</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>157, 17</value>
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>576, 668</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>新操作</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
+    <value>openFileDialog1</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ActionEditDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

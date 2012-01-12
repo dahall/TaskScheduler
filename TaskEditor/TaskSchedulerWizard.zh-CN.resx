@@ -190,7 +190,7 @@
     <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Description:</value>
+    <value>描述:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -220,7 +220,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Task Name:</value>
+    <value>任务名称:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -241,13 +241,13 @@
     <value>0</value>
   </data>
   <data name="introPage.Text" xml:space="preserve">
-    <value>Create a task</value>
+    <value>创建任务</value>
   </data>
   <data name="&gt;&gt;introPage.Name" xml:space="preserve">
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,13 +292,13 @@
     <value>1</value>
   </data>
   <data name="triggerSelectPage.Text" xml:space="preserve">
-    <value>Choose what triggers the task</value>
+    <value>希望该任务何时开始？</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Name" xml:space="preserve">
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -316,7 +316,7 @@
     <value>dailyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -340,7 +340,7 @@
     <value>4</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>开始:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -391,7 +391,7 @@
     <value>3</value>
   </data>
   <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>days</value>
+    <value>天</value>
   </data>
   <data name="&gt;&gt;dailyDaysLabel.Name" xml:space="preserve">
     <value>dailyDaysLabel</value>
@@ -421,7 +421,7 @@
     <value>1</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
+    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;dailyRecurLabel.Name" xml:space="preserve">
     <value>dailyRecurLabel</value>
@@ -526,7 +526,7 @@
     <value>16</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>for a duration of:</value>
+    <value>持续时间:</value>
   </data>
   <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -559,7 +559,7 @@
     <value>19</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Enabled</value>
+    <value>启用</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
     <value>enabledCheckBox</value>
@@ -589,7 +589,7 @@
     <value>14</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repeat task every:</value>
+    <value>重复任务每隔:</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
     <value>repeatCheckBox</value>
@@ -610,13 +610,13 @@
     <value>14</value>
   </data>
   <data name="triggerPropPage.Text" xml:space="preserve">
-    <value>Trigger properties</value>
+    <value>触发器属性</value>
   </data>
   <data name="&gt;&gt;triggerPropPage.Name" xml:space="preserve">
     <value>triggerPropPage</value>
   </data>
   <data name="&gt;&gt;triggerPropPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 237</value>
@@ -625,13 +625,13 @@
     <value>4</value>
   </data>
   <data name="dailyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a daily trigger</value>
+    <value>每天</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Name" xml:space="preserve">
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 0</value>
@@ -649,7 +649,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -673,7 +673,7 @@
     <value>6</value>
   </data>
   <data name="oneTimeStartLabel.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>开始:</value>
   </data>
   <data name="&gt;&gt;oneTimeStartLabel.Name" xml:space="preserve">
     <value>oneTimeStartLabel</value>
@@ -694,13 +694,13 @@
     <value>5</value>
   </data>
   <data name="oneTimeTriggerPage.Text" xml:space="preserve">
-    <value>Setup a one time trigger</value>
+    <value>一次</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Name" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="weeklyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>50, 0</value>
@@ -718,7 +718,7 @@
     <value>weeklyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -742,7 +742,7 @@
     <value>0</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>开始:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -781,7 +781,7 @@
     <value>0</value>
   </data>
   <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>Sunday</value>
+    <value>星期天</value>
   </data>
   <data name="&gt;&gt;weeklySunCheck.Name" xml:space="preserve">
     <value>weeklySunCheck</value>
@@ -811,7 +811,7 @@
     <value>1</value>
   </data>
   <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>Monday</value>
+    <value>星期一</value>
   </data>
   <data name="&gt;&gt;weeklyMonCheck.Name" xml:space="preserve">
     <value>weeklyMonCheck</value>
@@ -841,7 +841,7 @@
     <value>2</value>
   </data>
   <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>Tuesday</value>
+    <value>星期二</value>
   </data>
   <data name="&gt;&gt;weeklyTueCheck.Name" xml:space="preserve">
     <value>weeklyTueCheck</value>
@@ -871,7 +871,7 @@
     <value>3</value>
   </data>
   <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>Wednesday</value>
+    <value>星期三</value>
   </data>
   <data name="&gt;&gt;weeklyWedCheck.Name" xml:space="preserve">
     <value>weeklyWedCheck</value>
@@ -901,7 +901,7 @@
     <value>4</value>
   </data>
   <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>Thursday</value>
+    <value>星期四</value>
   </data>
   <data name="&gt;&gt;weeklyThuCheck.Name" xml:space="preserve">
     <value>weeklyThuCheck</value>
@@ -931,7 +931,7 @@
     <value>5</value>
   </data>
   <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>Friday</value>
+    <value>星期五</value>
   </data>
   <data name="&gt;&gt;weeklyFriCheck.Name" xml:space="preserve">
     <value>weeklyFriCheck</value>
@@ -961,7 +961,7 @@
     <value>6</value>
   </data>
   <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>Saturday</value>
+    <value>星期六</value>
   </data>
   <data name="&gt;&gt;weeklySatCheck.Name" xml:space="preserve">
     <value>weeklySatCheck</value>
@@ -1039,7 +1039,7 @@
     <value>4</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>weeks on:</value>
+    <value>周:</value>
   </data>
   <data name="&gt;&gt;weeklyOnWeeksLabel.Name" xml:space="preserve">
     <value>weeklyOnWeeksLabel</value>
@@ -1069,7 +1069,7 @@
     <value>2</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
+    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;weeklyRecurLabel.Name" xml:space="preserve">
     <value>weeklyRecurLabel</value>
@@ -1090,13 +1090,13 @@
     <value>6</value>
   </data>
   <data name="weeklyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a weekly trigger</value>
+    <value>每周</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Name" xml:space="preserve">
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 58</value>
@@ -1111,7 +1111,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1132,7 +1132,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1153,7 +1153,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1174,7 +1174,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1198,7 +1198,7 @@
     <value>14</value>
   </data>
   <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>On:</value>
+    <value>在:</value>
   </data>
   <data name="&gt;&gt;monthlyOnRadio.Name" xml:space="preserve">
     <value>monthlyOnRadio</value>
@@ -1228,7 +1228,7 @@
     <value>13</value>
   </data>
   <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>Days:</value>
+    <value>日:</value>
   </data>
   <data name="&gt;&gt;monthlyDaysRadio.Name" xml:space="preserve">
     <value>monthlyDaysRadio</value>
@@ -1258,7 +1258,7 @@
     <value>12</value>
   </data>
   <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>Months:</value>
+    <value>月:</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsLabel.Name" xml:space="preserve">
     <value>monthlyMonthsLabel</value>
@@ -1288,7 +1288,7 @@
     <value>monthlyStartTimePicker</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4303.16184, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -1312,7 +1312,7 @@
     <value>10</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>开始:</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -1333,13 +1333,13 @@
     <value>7</value>
   </data>
   <data name="monthlyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a monthly trigger</value>
+    <value>每月</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Name" xml:space="preserve">
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1357,7 +1357,7 @@
     <value>9</value>
   </data>
   <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Log:</value>
+    <value>日志:</value>
   </data>
   <data name="&gt;&gt;onEventLogLabel.Name" xml:space="preserve">
     <value>onEventLogLabel</value>
@@ -1411,7 +1411,7 @@
     <value>11</value>
   </data>
   <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Source:</value>
+    <value>源:</value>
   </data>
   <data name="&gt;&gt;onEventSourceLabel.Name" xml:space="preserve">
     <value>onEventSourceLabel</value>
@@ -1489,7 +1489,7 @@
     <value>13</value>
   </data>
   <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>Event ID:</value>
+    <value>事件ID:</value>
   </data>
   <data name="&gt;&gt;onEventIdLabel.Name" xml:space="preserve">
     <value>onEventIdLabel</value>
@@ -1510,13 +1510,13 @@
     <value>10</value>
   </data>
   <data name="onEventTriggerPage.Text" xml:space="preserve">
-    <value>Setup a trigger on a system event</value>
+    <value>当特定事件被记录时</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Name" xml:space="preserve">
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="actionSelectionList.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1558,13 +1558,13 @@
     <value>2</value>
   </data>
   <data name="actionSelectPage.Text" xml:space="preserve">
-    <value>Choose the action to perform</value>
+    <value>希望该任务执行什么操作？</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Name" xml:space="preserve">
     <value>actionSelectPage</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1582,7 +1582,7 @@
     <value>1</value>
   </data>
   <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>浏览...</value>
   </data>
   <data name="&gt;&gt;execProgBrowseBtn.Name" xml:space="preserve">
     <value>execProgBrowseBtn</value>
@@ -1684,7 +1684,7 @@
     <value>12</value>
   </data>
   <data name="execDirLabel.Text" xml:space="preserve">
-    <value>Start in (optional):</value>
+    <value>起始于 (可选):</value>
   </data>
   <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
     <value>execDirLabel</value>
@@ -1714,7 +1714,7 @@
     <value>10</value>
   </data>
   <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Add arguments (optional):</value>
+    <value>添加参数 (可选):</value>
   </data>
   <data name="&gt;&gt;execArgLabel.Name" xml:space="preserve">
     <value>execArgLabel</value>
@@ -1744,7 +1744,7 @@
     <value>7</value>
   </data>
   <data name="execProgLabel.Text" xml:space="preserve">
-    <value>Program/script:</value>
+    <value>程序/脚本:</value>
   </data>
   <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
     <value>execProgLabel</value>
@@ -1774,7 +1774,7 @@
     <value>11</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Do not store password. The task will only have access to local computer resources.</value>
+    <value>不存储密码。该任务将只有访问本地计算机资源的权限。</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
     <value>taskLocalOnlyCheck</value>
@@ -1804,7 +1804,7 @@
     <value>10</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Run whether user is logged on or not</value>
+    <value>不管用户是否登录都要运行</value>
   </data>
   <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
     <value>taskLoggedOptionalRadio</value>
@@ -1834,7 +1834,7 @@
     <value>9</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Run only when user is logged on</value>
+    <value>只在用户登录时运行</value>
   </data>
   <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
     <value>taskLoggedOnRadio</value>
@@ -1888,7 +1888,7 @@
     <value>8</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Change User or Group...</value>
+    <value>更改用户或组...</value>
   </data>
   <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
     <value>changePrincipalButton</value>
@@ -1918,7 +1918,7 @@
     <value>6</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>When running the task, use the following user account:</value>
+    <value>运行任务时，请使用下列用户账户:</value>
   </data>
   <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
     <value>taskUserAcctLabel</value>
@@ -1939,13 +1939,13 @@
     <value>1</value>
   </data>
   <data name="secOptPage.Text" xml:space="preserve">
-    <value>Security Options</value>
+    <value>安全设置</value>
   </data>
   <data name="&gt;&gt;secOptPage.Name" xml:space="preserve">
     <value>secOptPage</value>
   </data>
   <data name="&gt;&gt;secOptPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 237</value>
@@ -1954,13 +1954,13 @@
     <value>11</value>
   </data>
   <data name="runActionPage.Text" xml:space="preserve">
-    <value>Setup a program to run</value>
+    <value>运行程序</value>
   </data>
   <data name="&gt;&gt;runActionPage.Name" xml:space="preserve">
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1978,7 +1978,7 @@
     <value>10</value>
   </data>
   <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>浏览...</value>
   </data>
   <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
     <value>emailAttachementBrowseBtn</value>
@@ -2035,7 +2035,7 @@
     <value>12</value>
   </data>
   <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value>SMTP server:</value>
+    <value>SMTP服务器:</value>
   </data>
   <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
     <value>emailSMTPLabel</value>
@@ -2092,7 +2092,7 @@
     <value>8</value>
   </data>
   <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value>Attachment:</value>
+    <value>附件:</value>
   </data>
   <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
     <value>emailAttachmentLabel</value>
@@ -2173,7 +2173,7 @@
     <value>6</value>
   </data>
   <data name="emailTextLabel.Text" xml:space="preserve">
-    <value>Text:</value>
+    <value>正文:</value>
   </data>
   <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
     <value>emailTextLabel</value>
@@ -2224,7 +2224,7 @@
     <value>4</value>
   </data>
   <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value>Subject:</value>
+    <value>标题:</value>
   </data>
   <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
     <value>emailSubjectLabel</value>
@@ -2275,7 +2275,7 @@
     <value>2</value>
   </data>
   <data name="emailToLabel.Text" xml:space="preserve">
-    <value>To:</value>
+    <value>收件人:</value>
   </data>
   <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
     <value>emailToLabel</value>
@@ -2326,7 +2326,7 @@
     <value>0</value>
   </data>
   <data name="emailFromLabel.Text" xml:space="preserve">
-    <value>From:</value>
+    <value>发件人:</value>
   </data>
   <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
     <value>emailFromLabel</value>
@@ -2347,13 +2347,13 @@
     <value>12</value>
   </data>
   <data name="emailActionPage.Text" xml:space="preserve">
-    <value>Setup an email message to send</value>
+    <value>发送电子邮件</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Name" xml:space="preserve">
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -2398,7 +2398,7 @@
     <value>3</value>
   </data>
   <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value>Message:</value>
+    <value>邮件:</value>
   </data>
   <data name="&gt;&gt;msgMsgLabel.Name" xml:space="preserve">
     <value>msgMsgLabel</value>
@@ -2449,7 +2449,7 @@
     <value>1</value>
   </data>
   <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value>Title:</value>
+    <value>标题:</value>
   </data>
   <data name="&gt;&gt;msgTitleLabel.Name" xml:space="preserve">
     <value>msgTitleLabel</value>
@@ -2479,7 +2479,7 @@
     <value>0</value>
   </data>
   <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value>This action displays a message box on the desktop.</value>
+    <value>该操作在桌面上显示一个消息框。</value>
   </data>
   <data name="&gt;&gt;msgIntroLabel.Name" xml:space="preserve">
     <value>msgIntroLabel</value>
@@ -2500,13 +2500,13 @@
     <value>13</value>
   </data>
   <data name="msgActionPage.Text" xml:space="preserve">
-    <value>Setup a message to display</value>
+    <value>显示消息</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Name" xml:space="preserve">
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="sumText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2554,7 +2554,7 @@
     <value>8</value>
   </data>
   <data name="openDlgAfterCheck.Text" xml:space="preserve">
-    <value>Open the Properties dialog for this task when I click Finish</value>
+    <value>当单击 "完成" 时，打开此任务属性的对话框。</value>
   </data>
   <data name="&gt;&gt;openDlgAfterCheck.Name" xml:space="preserve">
     <value>openDlgAfterCheck</value>
@@ -2584,7 +2584,7 @@
     <value>9</value>
   </data>
   <data name="summaryPrompt.Text" xml:space="preserve">
-    <value>When you click Finish, the new task will be created and added to your Windows schedule.</value>
+    <value>当单击 “完成” 时，新任务将会被创建并添加到Windows计划中。</value>
   </data>
   <data name="&gt;&gt;summaryPrompt.Name" xml:space="preserve">
     <value>summaryPrompt</value>
@@ -2605,13 +2605,13 @@
     <value>3</value>
   </data>
   <data name="summaryPage.Text" xml:space="preserve">
-    <value>Summary</value>
+    <value>描述</value>
   </data>
   <data name="&gt;&gt;summaryPage.Name" xml:space="preserve">
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>537, 391</value>
@@ -2620,13 +2620,13 @@
     <value>0</value>
   </data>
   <data name="wizardControl1.Title" xml:space="preserve">
-    <value>Create Task Wizard</value>
+    <value>创建任务向导</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Name" xml:space="preserve">
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.1.4286.19750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2634,15 +2634,15 @@
   <data name="&gt;&gt;wizardControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <data name="openFileDialog1.Filter" xml:space="preserve">
-    <value>All files|*.*</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>所有文件|*.*</value>
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -3046,6 +3046,9 @@
         rEEAAKxBAACsQQAArEEAAKxBgAGsQYABrEHAA6xB4AesQfgfrEE=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>477, 374</value>
   </data>
@@ -3056,7 +3059,7 @@
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TaskSchedulerWizard</value>
+    <value>计划任务向导</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

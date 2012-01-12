@@ -118,50 +118,50 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="name.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>名称</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="name.Width" type="System.Int32, mscorlib">
     <value>84</value>
   </data>
   <data name="status.Text" xml:space="preserve">
-    <value>Status</value>
+    <value>状态</value>
   </data>
   <data name="status.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="triggers.Text" xml:space="preserve">
-    <value>Triggers</value>
+    <value>触发器</value>
   </data>
   <data name="triggers.Width" type="System.Int32, mscorlib">
     <value>384</value>
   </data>
   <data name="nextRunTime.Text" xml:space="preserve">
-    <value>Next Run Time</value>
+    <value>下次运行时间</value>
   </data>
   <data name="nextRunTime.Width" type="System.Int32, mscorlib">
     <value>107</value>
   </data>
   <data name="lastRunTime.Text" xml:space="preserve">
-    <value>Last Run Time</value>
+    <value>上次运行时间</value>
   </data>
   <data name="lastRunTime.Width" type="System.Int32, mscorlib">
     <value>112</value>
   </data>
   <data name="lastRunResult.Text" xml:space="preserve">
-    <value>Last Run Result</value>
+    <value>上次运行结果</value>
   </data>
   <data name="lastRunResult.Width" type="System.Int32, mscorlib">
     <value>132</value>
   </data>
   <data name="author.Text" xml:space="preserve">
-    <value>Author</value>
+    <value>创建者</value>
   </data>
   <data name="author.Width" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
   <data name="created.Text" xml:space="preserve">
-    <value>Created</value>
+    <value>创建</value>
   </data>
   <data name="created.Width" type="System.Int32, mscorlib">
     <value>84</value>
@@ -192,9 +192,9 @@
   <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>

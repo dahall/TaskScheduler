@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyConnection" xml:space="preserve">
+    <value>任何连接</value>
+    <comment>Default item for displaying status of Networking setting</comment>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>最后一天</value>
+    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>当开机</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>当事件</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>当空闲</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>当登录</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>在任务创建/更改</value>
+  </data>
+  <data name="TriggerTypeSchedule" xml:space="preserve">
+    <value>当计划</value>
+  </data>
+  <data name="TriggerTypeSessionConnect" xml:space="preserve">
+    <value>当连接到用户会话</value>
+  </data>
+  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
+    <value>当断开用户会话</value>
+  </data>
+  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
+    <value>当计算机锁住</value>
+  </data>
+  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
+    <value>当计算机解锁</value>
+  </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>跨时区同步</value>
+  </data>
+  <data name="LocalMachine" xml:space="preserve">
+    <value>本地计算机</value>
+  </data>
+  <data name="TaskEditDlgTitle" xml:space="preserve">
+    <value>{0} 属性 ({1})</value>
+    <comment>0=Task name; 1=Machine</comment>
+  </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>无效的事件触发器</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>至少要选择一个日志。</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>至少选择月，周和天。</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>无效的每月触发器</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>至少选择一个月和一天。</value>
+  </data>
+  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
+    <value>这个COM类不支持需要的接口。</value>
+  </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Call to CredUIConfirmCredentials failed with error code: {0}</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Call to CredUIPromptForCredentials failed with error code: {0}</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>任务计划</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>输入运行该任务的用户信息。</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>对应账号的密码无效。</value>
+  </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>该任务至少要有一个操作。</value>
+  </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>任务运行时间 ({0})</value>
+  </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>该操作成功。 (0x0)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>从未</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>修改操作</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>新操作</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>修改触发器</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>新触发器</value>
+  </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>如果希望任务在运行后自动被删除，必须添加至少一个有过期日期的触发器。</value>
+  </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>选择新的目标计算机:</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;无&gt;</value>
+    <comment>Used when user is null in TaskServiceConnectDialog</comment>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>不等待</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>立即</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>无限期</value>
+  </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>无法获取任务历史。错误: {0}</value>
+  </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>只在 Windows Vista™ 及之后的版本在账户组下运行任务。要在在账户组下运行任务，必须升级该任务成 Windows Vista™ 任务.</value>
+  </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>用提供的信息发送电子邮件。</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>运行命令行操作。</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>当一个任务激活时显示一个消息窗口。</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>运行程序</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>发送电子邮件</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>显示信息</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>计划每天开始任务。例如，任务在每天，隔天，每3天等，指定的时间开始。</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>每天</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>当系统时间发生时开始任务。</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>当指定事件被记入日志</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>计划每月开始任务。例如，任务在指定月的指定日子里开始。</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>每月</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>指定时间开始任务。</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>一次</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>计划每周开始任务。例如，任务在每周或隔周指定日子的上午8:00开始。</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>每周</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>名称: {0}
+
+描述: {1}
+
+触发器: {2}
+
+操作: {3}</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>重复的间隔值必须少于等于重复的持续值</value>
+  </data>
+</root>

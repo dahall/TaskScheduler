@@ -117,151 +117,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dateTimePickerDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;dateTimePickerDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerDate.Parent" xml:space="preserve">
-    <value>tableLayoutPanelFullDateTime</value>
-  </data>
-  <data name="tableLayoutPanelFullDateTime.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="utcCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
   </data>
-  <data name="&gt;&gt;dateTimePickerDate.Name" xml:space="preserve">
-    <value>dateTimePickerDate</value>
-  </data>
-  <data name="tableLayoutPanelFullDateTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;utcCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;utcCheckBox.Name" xml:space="preserve">
-    <value>utcCheckBox</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanelFullDateTime.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelFullDateTime.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="dateTimePickerTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="&gt;&gt;utcCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="utcCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="dateTimePickerTime.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerTime.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;dateTimePickerTime.Parent" xml:space="preserve">
+    <value>tableLayoutPanelFullDateTime</value>
   </data>
   <data name="utcCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 2</value>
   </data>
-  <data name="&gt;&gt;dateTimePickerTime.Name" xml:space="preserve">
-    <value>dateTimePickerTime</value>
-  </data>
   <data name="&gt;&gt;tableLayoutPanelFullDateTime.Name" xml:space="preserve">
     <value>tableLayoutPanelFullDateTime</value>
-  </data>
-  <data name="tableLayoutPanelFullDateTime.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerDate" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="utcCheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="dateTimePickerTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanelFullDateTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="utcCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 2, 0, 0</value>
-  </data>
-  <data name="dateTimePickerDate.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="dateTimePickerTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 0</value>
   </data>
-  <data name="tableLayoutPanelFullDateTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 20</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tableLayoutPanelFullDateTime.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="dateTimePickerDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerTime.Parent" xml:space="preserve">
-    <value>tableLayoutPanelFullDateTime</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelFullDateTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dateTimePickerDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="utcCheckBox.Text" xml:space="preserve">
-    <value>Synchronize across time zones</value>
-  </data>
-  <data name="utcCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 20</value>
-  </data>
-  <data name="tableLayoutPanelFullDateTime.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelFullDateTime.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerDate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;utcCheckBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelFullDateTime</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="utcCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FullDateTimePicker</value>
   </data>
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="tableLayoutPanelFullDateTime.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerDate" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="utcCheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 20</value>
+  </data>
+  <data name="utcCheckBox.Text" xml:space="preserve">
+    <value>Synchronize across time zones</value>
+  </data>
+  <data name="dateTimePickerDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;utcCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dateTimePickerDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 20</value>
+  </data>
+  <data name="dateTimePickerTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerDate.Parent" xml:space="preserve">
+    <value>tableLayoutPanelFullDateTime</value>
+  </data>
+  <data name="&gt;&gt;utcCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelFullDateTime</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dateTimePickerDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTime.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerDate.Name" xml:space="preserve">
+    <value>dateTimePickerDate</value>
+  </data>
+  <data name="&gt;&gt;utcCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelFullDateTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanelFullDateTime.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="utcCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="utcCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 2, 0, 0</value>
+  </data>
+  <data name="dateTimePickerTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelFullDateTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTime.Name" xml:space="preserve">
+    <value>dateTimePickerTime</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelFullDateTime.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="dateTimePickerTime.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="utcCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;utcCheckBox.Name" xml:space="preserve">
+    <value>utcCheckBox</value>
+  </data>
+  <data name="tableLayoutPanelFullDateTime.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Italian</value>
+    <value>it</value>
   </metadata>
 </root>

@@ -176,9 +176,19 @@
     <EmbeddedResource Include="ActionEditDialog.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ActionEditDialog.zh-CN.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComObjectSelectionDialog.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.zh-CN.resx" />
     <EmbeddedResource Include="TaskEditDialog.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,13 +202,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskListView.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.zh-CN.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.zh-CN.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesControl.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.zh-CN.resx">
       <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesDialog.resx">
@@ -207,7 +229,13 @@
     <EmbeddedResource Include="TaskSchedulerWizard.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.zh-CN.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskServiceConnectDialog.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.zh-CN.resx">
       <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.it.resx">
@@ -216,6 +244,9 @@
     <EmbeddedResource Include="TriggerEditDialog.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
