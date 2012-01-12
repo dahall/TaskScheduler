@@ -133,7 +133,7 @@
     <value>0</value>
   </data>
   <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Begin the task:</value>
+    <value>开始任务:</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Name" xml:space="preserve">
     <value>triggerTypeLabel</value>
@@ -187,7 +187,7 @@
     <value>schedStartDatePicker</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -280,7 +280,7 @@
     <value>2</value>
   </data>
   <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>days</value>
+    <value>天</value>
   </data>
   <data name="&gt;&gt;dailyDaysLabel.Name" xml:space="preserve">
     <value>dailyDaysLabel</value>
@@ -310,7 +310,7 @@
     <value>0</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
+    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;dailyRecurLabel.Name" xml:space="preserve">
     <value>dailyRecurLabel</value>
@@ -367,7 +367,7 @@
     <value>0</value>
   </data>
   <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>Sunday</value>
+    <value>星期天</value>
   </data>
   <data name="&gt;&gt;weeklySunCheck.Name" xml:space="preserve">
     <value>weeklySunCheck</value>
@@ -397,7 +397,7 @@
     <value>1</value>
   </data>
   <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>Monday</value>
+    <value>星期一</value>
   </data>
   <data name="&gt;&gt;weeklyMonCheck.Name" xml:space="preserve">
     <value>weeklyMonCheck</value>
@@ -427,7 +427,7 @@
     <value>2</value>
   </data>
   <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>Tuesday</value>
+    <value>星期二</value>
   </data>
   <data name="&gt;&gt;weeklyTueCheck.Name" xml:space="preserve">
     <value>weeklyTueCheck</value>
@@ -457,7 +457,7 @@
     <value>3</value>
   </data>
   <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>Wednesday</value>
+    <value>星期三</value>
   </data>
   <data name="&gt;&gt;weeklyWedCheck.Name" xml:space="preserve">
     <value>weeklyWedCheck</value>
@@ -487,7 +487,7 @@
     <value>4</value>
   </data>
   <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>Thursday</value>
+    <value>星期四</value>
   </data>
   <data name="&gt;&gt;weeklyThuCheck.Name" xml:space="preserve">
     <value>weeklyThuCheck</value>
@@ -517,7 +517,7 @@
     <value>5</value>
   </data>
   <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>Friday</value>
+    <value>星期五</value>
   </data>
   <data name="&gt;&gt;weeklyFriCheck.Name" xml:space="preserve">
     <value>weeklyFriCheck</value>
@@ -547,7 +547,7 @@
     <value>6</value>
   </data>
   <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>Saturday</value>
+    <value>星期六</value>
   </data>
   <data name="&gt;&gt;weeklySatCheck.Name" xml:space="preserve">
     <value>weeklySatCheck</value>
@@ -625,7 +625,7 @@
     <value>2</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>weeks on:</value>
+    <value>周:</value>
   </data>
   <data name="&gt;&gt;weeklyOnWeeksLabel.Name" xml:space="preserve">
     <value>weeklyOnWeeksLabel</value>
@@ -655,7 +655,7 @@
     <value>0</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
+    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;weeklyRecurLabel.Name" xml:space="preserve">
     <value>weeklyRecurLabel</value>
@@ -700,13 +700,13 @@
     <value>7, 65</value>
   </data>
   <data name="monthlyOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 19</value>
+    <value>42, 17</value>
   </data>
   <data name="monthlyOnRadio.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>On:</value>
+    <value>在:</value>
   </data>
   <data name="&gt;&gt;monthlyOnRadio.Name" xml:space="preserve">
     <value>monthlyOnRadio</value>
@@ -730,13 +730,13 @@
     <value>7, 33</value>
   </data>
   <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 19</value>
+    <value>52, 17</value>
   </data>
   <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>Days:</value>
+    <value>天:</value>
   </data>
   <data name="&gt;&gt;monthlyDaysRadio.Name" xml:space="preserve">
     <value>monthlyDaysRadio</value>
@@ -766,7 +766,7 @@
     <value>0</value>
   </data>
   <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>Months:</value>
+    <value>月:</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsLabel.Name" xml:space="preserve">
     <value>monthlyMonthsLabel</value>
@@ -793,7 +793,7 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -814,7 +814,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -835,7 +835,7 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -856,7 +856,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -949,7 +949,7 @@
     <value>5</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>开始:</value>
   </data>
   <data name="&gt;&gt;schedStartLabel.Name" xml:space="preserve">
     <value>schedStartLabel</value>
@@ -979,7 +979,7 @@
     <value>3</value>
   </data>
   <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Monthly</value>
+    <value>每月</value>
   </data>
   <data name="&gt;&gt;schedMonthlyRadio.Name" xml:space="preserve">
     <value>schedMonthlyRadio</value>
@@ -1009,7 +1009,7 @@
     <value>2</value>
   </data>
   <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Weekly</value>
+    <value>每周</value>
   </data>
   <data name="&gt;&gt;schedWeeklyRadio.Name" xml:space="preserve">
     <value>schedWeeklyRadio</value>
@@ -1039,7 +1039,7 @@
     <value>1</value>
   </data>
   <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Daily</value>
+    <value>每天</value>
   </data>
   <data name="&gt;&gt;schedDailyRadio.Name" xml:space="preserve">
     <value>schedDailyRadio</value>
@@ -1069,7 +1069,7 @@
     <value>0</value>
   </data>
   <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>One time</value>
+    <value>一次</value>
   </data>
   <data name="&gt;&gt;schedOneRadio.Name" xml:space="preserve">
     <value>schedOneRadio</value>
@@ -1147,7 +1147,7 @@
     <value>2</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
-    <value>Connection from local computer</value>
+    <value>本地计算机的连接</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Name" xml:space="preserve">
     <value>logonLocalRadio</value>
@@ -1177,7 +1177,7 @@
     <value>1</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Connection from remote computer</value>
+    <value>远程计算机的连接</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.Name" xml:space="preserve">
     <value>logonRemoteRadio</value>
@@ -1225,7 +1225,7 @@
     <value>3</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Change User or Group...</value>
+    <value>更改用户或组...</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Name" xml:space="preserve">
     <value>logonChgUserBtn</value>
@@ -1255,7 +1255,7 @@
     <value>2</value>
   </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt;Current user&gt;</value>
+    <value>&lt;当前用户&gt;</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Name" xml:space="preserve">
     <value>logonUserLabel</value>
@@ -1285,7 +1285,7 @@
     <value>1</value>
   </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Specific user or group:</value>
+    <value>指定用户或组:</value>
   </data>
   <data name="&gt;&gt;logonSpecUserRadio.Name" xml:space="preserve">
     <value>logonSpecUserRadio</value>
@@ -1315,7 +1315,7 @@
     <value>0</value>
   </data>
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
-    <value>Any user</value>
+    <value>所有用户</value>
   </data>
   <data name="&gt;&gt;logonAnyUserRadio.Name" xml:space="preserve">
     <value>logonAnyUserRadio</value>
@@ -1372,7 +1372,7 @@
     <value>0</value>
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>No additional settings required.</value>
+    <value>不需其他设置。</value>
   </data>
   <data name="&gt;&gt;startupIntroLabel.Name" xml:space="preserve">
     <value>startupIntroLabel</value>
@@ -1426,7 +1426,7 @@
     <value>0</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>To change idle conditions, use the Conditions page in the Create Task or task Properties sheet.</value>
+    <value>若要更改空闲条件，请使用“创建任务” 或任务 “属性” 页中的 “条件” 页面。</value>
   </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
@@ -1480,7 +1480,7 @@
     <value>3</value>
   </data>
   <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Log:</value>
+    <value>日志:</value>
   </data>
   <data name="&gt;&gt;onEventLogLabel.Name" xml:space="preserve">
     <value>onEventLogLabel</value>
@@ -1531,7 +1531,7 @@
     <value>5</value>
   </data>
   <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Source:</value>
+    <value>源:</value>
   </data>
   <data name="&gt;&gt;onEventSourceLabel.Name" xml:space="preserve">
     <value>onEventSourceLabel</value>
@@ -1603,7 +1603,7 @@
     <value>7</value>
   </data>
   <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>Event ID:</value>
+    <value>事件ID:</value>
   </data>
   <data name="&gt;&gt;onEventIdLabel.Name" xml:space="preserve">
     <value>onEventIdLabel</value>
@@ -1705,7 +1705,7 @@
     <value>1</value>
   </data>
   <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value>Custom</value>
+    <value>自定义</value>
   </data>
   <data name="&gt;&gt;eventCustomRadio.Name" xml:space="preserve">
     <value>eventCustomRadio</value>
@@ -1735,7 +1735,7 @@
     <value>0</value>
   </data>
   <data name="eventBasicRadio.Text" xml:space="preserve">
-    <value>Basic</value>
+    <value>基本</value>
   </data>
   <data name="&gt;&gt;eventBasicRadio.Name" xml:space="preserve">
     <value>eventBasicRadio</value>
@@ -1810,7 +1810,7 @@
     <value>2</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
@@ -1939,7 +1939,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1966,7 +1966,7 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.6.4141.23966, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1987,7 +1987,7 @@
     <value>4</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>for a duration of:</value>
+    <value>持续时间:</value>
   </data>
   <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -2020,7 +2020,7 @@
     <value>6</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Stop all running tasks at end of repetition duration</value>
+    <value>重复持续时间结束时停止所有运行的任务</value>
   </data>
   <data name="&gt;&gt;stopAfterDurationCheckBox.Name" xml:space="preserve">
     <value>stopAfterDurationCheckBox</value>
@@ -2050,7 +2050,7 @@
     <value>13</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Enabled</value>
+    <value>启用</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
     <value>enabledCheckBox</value>
@@ -2080,7 +2080,7 @@
     <value>11</value>
   </data>
   <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Expire:</value>
+    <value>过期日期:</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Name" xml:space="preserve">
     <value>expireCheckBox</value>
@@ -2110,7 +2110,7 @@
     <value>9</value>
   </data>
   <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Activate:</value>
+    <value>激活:</value>
   </data>
   <data name="&gt;&gt;activateCheckBox.Name" xml:space="preserve">
     <value>activateCheckBox</value>
@@ -2140,7 +2140,7 @@
     <value>7</value>
   </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Stop task if it runs longer than:</value>
+    <value>停止运行时间超过以下时间的所有任务:</value>
   </data>
   <data name="&gt;&gt;stopIfRunsCheckBox.Name" xml:space="preserve">
     <value>stopIfRunsCheckBox</value>
@@ -2170,7 +2170,7 @@
     <value>2</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repeat task every:</value>
+    <value>重复任务间隔:</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
     <value>repeatCheckBox</value>
@@ -2200,7 +2200,7 @@
     <value>0</value>
   </data>
   <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Delay task for up to (random delay):</value>
+    <value>任务最多延迟时间 (随机延迟):</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Name" xml:space="preserve">
     <value>delayCheckBox</value>
@@ -2224,7 +2224,7 @@
     <value>3</value>
   </data>
   <data name="advSettingsGroup.Text" xml:space="preserve">
-    <value>Advanced Settings</value>
+    <value>高级设置</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.Name" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -2254,7 +2254,7 @@
     <value>5</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
     <value>cancelBtn</value>
@@ -2284,7 +2284,7 @@
     <value>4</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+    <value>确定</value>
   </data>
   <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
     <value>okBtn</value>
@@ -2298,9 +2298,9 @@
   <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
@@ -2317,7 +2317,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>New Trigger</value>
+    <value>新触发器</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TriggerEditDialog</value>
