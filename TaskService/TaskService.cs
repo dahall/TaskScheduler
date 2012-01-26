@@ -252,6 +252,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Finds all tasks matching a name or standard wildcards.
+		/// </summary>
+		/// <param name="name">Name of the task in regular expression form.</param>
+		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
+		/// <returns>A <see cref="Task[]"/> of all tasks matching <paramref name="name"/>.</returns>
+		public Task[] FindAllTasks(System.Text.RegularExpressions.Regex name, bool searchAllFolders = true)
+		{
+			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
+			FindTaskInFolder(this.RootFolder, name, ref results, searchAllFolders);
+			return results.ToArray();
+		}
+
+		/// <summary>
 		/// Finds a task given a name and standard wildcards.
 		/// </summary>
 		/// <param name="name">The task name. This can include the wildcards * or ?.</param>
@@ -259,7 +272,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="Task"/> if one matches <paramref name="name"/>, otherwise NULL.</returns>
 		public Task FindTask(string name, bool searchAllFolders = true)
 		{
-			return FindTaskInFolder(this.RootFolder, new Wildcard(name), searchAllFolders);
+			Task[] results = FindAllTasks(new Wildcard(name), searchAllFolders);
+			if (results.Length > 0)
+				return results[0];
+			return null;
 		}
 
 		/// <summary>
@@ -456,21 +472,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="taskName">The wildcard expression to compare task names with.</param>
 		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
 		/// <returns>A <see cref="Task"/> if one matches <paramref name="taskName"/>, otherwise NULL.</returns>
-		private Task FindTaskInFolder(TaskFolder fld, System.Text.RegularExpressions.Regex taskName, bool recurse = true)
+		private bool FindTaskInFolder(TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
-			foreach (var t in fld.GetTasks(taskName))
-				return t;
+			results.AddRange(fld.GetTasks(taskName));
 
 			if (recurse)
 			{
-				Task task = null;
 				foreach (var f in fld.SubFolders)
 				{
-					if ((task = FindTaskInFolder(f, taskName, recurse)) != null)
-						return task;
+					if (FindTaskInFolder(f, taskName, ref results, recurse))
+						return true;
 				}
 			}
-			return null;
+			return false;
 		}
 
 		private Version GetV2Version()
