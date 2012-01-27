@@ -20,6 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool onAssignment = false;
 		private string runTimesTaskName = null;
 		private TaskService service = null;
+		private bool showErrors = true;
 		private bool showRunTimesTab = true;
 		private Task task = null;
 		private TaskDefinition td = null;
@@ -52,11 +53,11 @@ namespace Microsoft.Win32.TaskScheduler
 			actionDownButton.Image = bmpUp;
 
 			taskIdleDurationCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
-			taskIdleWaitTimeoutCombo.FormattedZero = Properties.Resources.TimeSpanDoNotWait;
+			taskIdleWaitTimeoutCombo.FormattedZero = EditorProperties.Resources.TimeSpanDoNotWait;
 			taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
 			taskRestartIntervalCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
 			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
-			taskDeleteAfterCombo.FormattedZero = Properties.Resources.TimeSpanImmediately;
+			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
 
 			Editable = false;
@@ -103,6 +104,25 @@ namespace Microsoft.Win32.TaskScheduler
 
 				// Setup specific controls
 				taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether errors are shown in the UI.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if errors are shown; otherwise, <c>false</c>.
+		/// </value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether errors are shown in the UI.")]
+		public bool ShowErrors
+		{
+			get
+			{
+				return showErrors;
+			}
+			set
+			{
+				showErrors = value;
 			}
 		}
 
@@ -281,8 +301,8 @@ namespace Microsoft.Win32.TaskScheduler
 			this.taskVersionCombo.Items.Clear();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
 			if (td.Settings.Compatibility == TaskCompatibility.V2 || (TaskService != null && TaskService.HighestSupportedVersion.Major > 1))
-				this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1"));
-			this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items"));
+				this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1", System.Globalization.CultureInfo.CurrentUICulture));
+			this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items", System.Globalization.CultureInfo.CurrentUICulture));
 		}
 
 		private bool IsV2
@@ -327,7 +347,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
-			return BuildEnumString(Properties.Resources.ResourceManager, preface, enumValue);
+			return BuildEnumString(EditorProperties.Resources.ResourceManager, preface, enumValue);
 		}
 
 		internal static string BuildEnumString(System.Resources.ResourceManager mgr, string preface, object enumValue)
@@ -338,7 +358,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			for (int i = 0; i < vals.Length; i++)
 			{
-				vals[i] = mgr.GetString(preface + vals[i]);
+				vals[i] = mgr.GetString(preface + vals[i], System.Globalization.CultureInfo.CurrentUICulture);
 			}
 			return string.Join(", ", vals);
 		}
@@ -378,7 +398,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
 				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
-				dlg.Text = Properties.Resources.ActionDlgEditCaption;
+				dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					actionListView.Items.RemoveAt(idx);
@@ -403,7 +423,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
 			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
-			dlg.Text = Properties.Resources.ActionDlgNewCaption;
+			dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				td.Actions.Add(dlg.Action);
@@ -445,7 +465,7 @@ namespace Microsoft.Win32.TaskScheduler
 			ListViewItem lvi = new ListViewItem(new string[] {
 					BuildEnumString(taskSchedResources, "TriggerType", tr.TriggerType),
 					tr.ToString(),
-					tr.Enabled ? Properties.Resources.Enabled : Properties.Resources.Disabled
+					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
 				});
 			if (index < 0)
 				triggerListView.Items.Add(lvi);
@@ -480,7 +500,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// Load network connections
 			availableConnectionsCombo.BeginUpdate();
 			availableConnectionsCombo.Items.Clear();
-			availableConnectionsCombo.Items.Add(Properties.Resources.AnyConnection);
+			availableConnectionsCombo.Items.Add(EditorProperties.Resources.AnyConnection);
 			availableConnectionsCombo.Items.AddRange(NetworkProfile.GetAllLocalProfiles());
 			availableConnectionsCombo.EndUpdate();
 			onAssignment = true;
@@ -518,8 +538,8 @@ namespace Microsoft.Win32.TaskScheduler
 			historyListView.Cursor = Cursors.Default;
 			if (e.Result is ListViewItem[])
 				historyListView.Items.AddRange(e.Result as ListViewItem[]);
-			else if (e.Result is Exception)
-				MessageBox.Show(string.Format(Properties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			else if (e.Result is Exception && showErrors)
+				MessageBox.Show(string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void historyTab_Enter(object sender, EventArgs e)
@@ -542,7 +562,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!v2 && acct != "SYSTEM")
 				{
-					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				this.flagExecutorIsGroup = false;
@@ -556,7 +576,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!v2)
 				{
-					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				td.Principal.GroupId = acct;
@@ -593,22 +613,28 @@ namespace Microsoft.Win32.TaskScheduler
 				// Create a temporary task using current definition
 				runTimesTaskName = "TempTask-" + Guid.NewGuid().ToString();
 				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, this.TaskDefinition);
-				// Disable, set only action to non-action, hide, register, re-enable, show
-				tempTask.Enabled = false;
-				tempTask.Definition.Actions.Clear();
-				tempTask.Definition.Actions.Add(new ExecAction("rundll32.exe"));
-				tempTask.Definition.Settings.Hidden = true;
-				tempTask.RegisterChanges();
-				taskRunTimesControl1.Show();
-				tempTask.Enabled = true;
-				taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now + TimeSpan.FromDays(365));
+				if (tempTask != null)
+				{
+					// Disable, set only action to non-action, hide, register, re-enable, show
+					tempTask.Enabled = false;
+					tempTask.Definition.Actions.Clear();
+					tempTask.Definition.Actions.Add(new ExecAction("rundll32.exe"));
+					tempTask.Definition.Settings.Hidden = true;
+					tempTask.RegisterChanges();
+					taskRunTimesControl1.Show();
+					tempTask.Enabled = true;
+					taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now + TimeSpan.FromDays(365));
+				}
 			}
 			catch (Exception ex)
 			{
 				// On error, post and delete temporary task
-				runTimesErrorLabel.Text = ex.ToString();
+				runTimesErrorLabel.Text = showErrors ? ex.ToString() : null;
 				taskRunTimesControl1.Hide();
-				runTimesTab_Leave(sender, e);
+				if (tempTask != null)
+					runTimesTab_Leave(sender, e);
+				else
+					runTimesTaskName = null;
 			}
 		}
 
@@ -916,7 +942,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
 				dlg.TargetServer = TaskService.TargetServer;
-				dlg.Text = Properties.Resources.TriggerDlgEditCaption;
+				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					triggerListView.Items.RemoveAt(idx);
@@ -942,7 +968,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
 			dlg.TargetServer = TaskService.TargetServer;
-			dlg.Text = Properties.Resources.TriggerDlgNewCaption;
+			dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				td.Triggers.Add(dlg.Trigger);

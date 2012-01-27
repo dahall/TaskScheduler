@@ -187,7 +187,7 @@
     <value>schedStartDatePicker</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -700,7 +700,7 @@
     <value>7, 65</value>
   </data>
   <data name="monthlyOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 19</value>
+    <value>42, 17</value>
   </data>
   <data name="monthlyOnRadio.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -730,7 +730,7 @@
     <value>7, 33</value>
   </data>
   <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 19</value>
+    <value>52, 17</value>
   </data>
   <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -793,13 +793,16 @@
     <value>monthlyDaysDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
   </data>
   <data name="&gt;&gt;monthlyDaysDropDown.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Select all days&gt;</value>
   </data>
   <data name="monthlyOnDOWDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 62</value>
@@ -814,7 +817,7 @@
     <value>monthlyOnDOWDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -835,13 +838,16 @@
     <value>monthlyOnWeekDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
   </data>
   <data name="&gt;&gt;monthlyOnWeekDropDown.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="monthlyMonthsDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Select all months&gt;</value>
   </data>
   <data name="monthlyMonthsDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 0</value>
@@ -856,7 +862,7 @@
     <value>monthlyMonthsDropDown</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -1840,7 +1846,7 @@
     <value>stopIfRunsSpan</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4402.25592, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1864,7 +1870,7 @@
     <value>durationSpan</value>
   </data>
   <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4402.25592, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1888,7 +1894,7 @@
     <value>repeatSpan</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4402.25592, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1912,7 +1918,7 @@
     <value>delaySpan</value>
   </data>
   <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4402.25592, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1939,7 +1945,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1966,7 +1972,7 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4408.23717, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>

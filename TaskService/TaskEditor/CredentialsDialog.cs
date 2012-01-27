@@ -154,7 +154,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			CredUIReturnCodes ret = CredUIConfirmCredentials(this.Target, storedCredentials);
 			if (ret != CredUIReturnCodes.NO_ERROR && ret != CredUIReturnCodes.ERROR_INVALID_PARAMETER)
-				throw new InvalidOperationException(String.Format(Properties.Resources.Error_CredUIConfirmFailed, ret));
+				throw new InvalidOperationException(String.Format(EditorProperties.Resources.Error_CredUIConfirmFailed, ret));
 		}
 
 		/// <summary>
@@ -250,7 +250,7 @@ namespace Microsoft.Win32.TaskScheduler
 					case CredUIReturnCodes.ERROR_CANCELLED:
 						return false;
 					default:
-						throw new InvalidOperationException(String.Format(Properties.Resources.Error_CredUIPromptFailed, ret));
+						throw new InvalidOperationException(String.Format(EditorProperties.Resources.Error_CredUIPromptFailed, ret));
 				}
 
 				if (this.EncryptPassword)

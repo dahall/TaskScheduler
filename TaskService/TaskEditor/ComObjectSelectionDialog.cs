@@ -244,7 +244,7 @@ private  bool loading;
 			backgroundWorker1.CancelAsync();
 			backgroundWorker2.CancelAsync();
 			if (!SupportsInterface(CLSID, supportedInterface))
-				MessageBox.Show(this, Properties.Resources.ComObjectDoesNotSupportInterfaceErrorMessage, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(this, EditorProperties.Resources.ComObjectDoesNotSupportInterfaceErrorMessage, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			else
 				this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
