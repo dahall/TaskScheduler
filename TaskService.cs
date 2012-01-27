@@ -256,7 +256,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="name">Name of the task in regular expression form.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
-		/// <returns>A <see cref="Task[]"/> of all tasks matching <paramref name="name"/>.</returns>
+		/// <returns>A <see cref="T:Task[]"/> of all tasks matching <paramref name="name"/>.</returns>
 		public Task[] FindAllTasks(System.Text.RegularExpressions.Regex name, bool searchAllFolders = true)
 		{
 			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
@@ -470,8 +470,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="fld">The folder.</param>
 		/// <param name="taskName">The wildcard expression to compare task names with.</param>
+		/// <param name="results">The results.</param>
 		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
-		/// <returns>A <see cref="Task"/> if one matches <paramref name="taskName"/>, otherwise NULL.</returns>
+		/// <returns>True if any tasks are found, False if not.</returns>
 		private bool FindTaskInFolder(TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
 			results.AddRange(fld.GetTasks(taskName));
