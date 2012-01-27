@@ -600,7 +600,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Assigns the unbound TriggerData structure to the V1 trigger instance.</summary>
 		internal void SetV1TriggerData()
 		{
-			if (v1TriggerData.MinutesDuration != 0 && v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
+			if (v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
 				throw new ArgumentException("Trigger.Repetition.Interval must be less than Trigger.Repetition.Duration under Task Scheduler 1.0.");
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
