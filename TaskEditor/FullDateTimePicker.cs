@@ -40,6 +40,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public FullDateTimePicker()
 		{
 			InitializeComponent();
+			dateTimePickerTime.Format = DateTimePickerFormat.Custom;
+			dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.LongTimePattern;
 			ResetValue();
 		}
 
@@ -135,7 +137,8 @@ namespace Microsoft.Win32.TaskScheduler
 							break;
 						case FullDateTimePickerTimeFormat.LongTime:
 						default:
-							dateTimePickerTime.Format = DateTimePickerFormat.Time;
+							dateTimePickerTime.Format = DateTimePickerFormat.Custom;
+							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.LongTimePattern;
 							dateTimePickerTime.Visible = true;
 							break;
 					}

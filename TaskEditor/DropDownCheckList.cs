@@ -52,7 +52,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.
 		/// </summary>
 		/// <value>The text.</value>
-		[DefaultValue((string)null), Category("Appearance")]
+		[DefaultValue((string)null), Category("Appearance"), Localizable(true)]
 		public string CheckAllText
 		{
 			get; set;
@@ -405,7 +405,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				long val = Convert.ToInt64(vals.GetValue(i));
 				allVal |= val;
-				string text = mgr.GetString(prefix + names.GetValue(i).ToString());
+				string text = mgr.GetString(prefix + names.GetValue(i).ToString(), System.Globalization.CultureInfo.CurrentUICulture);
 				if (text.Length > 1) text = text.Substring(0, 1).ToUpper() + text.Substring(1);
 				list.Add(new DropDownCheckListItem(text, val));
 			}

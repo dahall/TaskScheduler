@@ -45,7 +45,7 @@ namespace Microsoft.Win32.TaskScheduler
 			monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
 			monthlyMonthsDropDown.Items.RemoveAt(13);
 			monthlyDaysDropDown.InitializeFromRange(1, 31);
-			monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(Properties.Resources.Last, 99));
+			monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
 			monthlyDaysDropDown.MultiColumnList = true;
 			monthlyOnWeekDropDown.InitializeFromEnum(typeof(WhichWeek), TaskPropertiesControl.taskSchedResources, "WW");
 			monthlyOnWeekDropDown.Items.RemoveAt(5);
@@ -55,7 +55,7 @@ namespace Microsoft.Win32.TaskScheduler
 			delaySpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });
 			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
 			durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
-			durationSpan.FormattedZero = Properties.Resources.TimeSpanIndefinitely;
+			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
 			stopIfRunsSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 
 			if (trigger != null)
@@ -104,7 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 				// Setup list of triggers available
 				long allVal;
 				triggerComboItems.Clear();
-				ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), Properties.Resources.ResourceManager, "TriggerType", out allVal);
+				ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out allVal);
 				if (!isV2)
 					triggerComboItems.RemoveRange(4, 6);
 				triggerTypeCombo.DataSource = null;
@@ -118,7 +118,7 @@ namespace Microsoft.Win32.TaskScheduler
 				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
 
 				// Set date/time controls
-				schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? Properties.Resources.DateTimeSyncText : null;
+				schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
 				schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
 				activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
 				expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;

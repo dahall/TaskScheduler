@@ -45,14 +45,14 @@ namespace Microsoft.Win32.TaskScheduler
 			SetupActionList();
 			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
 			durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
-			durationSpan.FormattedZero = Properties.Resources.TimeSpanIndefinitely;
+			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
-		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		/// <param name="definition">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public TaskSchedulerWizard(TaskService service, TaskDefinition definition = null)
 			: this()
 		{
@@ -62,7 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
 		/// </summary>
-		/// <param name="service">A <see cref="Task"/> instance.</param>
+		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public TaskSchedulerWizard(Task task)
 			: this()
 		{
@@ -617,7 +617,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!IsV2 && acct != "SYSTEM")
 				{
-					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				flagExecutorIsGroup = false;
@@ -631,7 +631,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!IsV2)
 				{
-					MessageBox.Show(this, Properties.Resources.TaskSchedulerName, Properties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				td.Principal.GroupId = acct;
@@ -711,8 +711,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string InvokeCredentialDialog(string userName)
 		{
-			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
-				Properties.Resources.CredentialPromptMessage, userName);
+			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName,
+				EditorProperties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
 			dlg.ValidatePassword = true;
 			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
@@ -739,7 +739,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (days.Length == 0 || monthlyMonthsDropDown.CheckedFlagValue == 0)
 				{
 					e.Cancel = true;
-					MessageBox.Show(this, Properties.Resources.WizardMonthlyTriggerInvalid, Properties.Resources.WizardMonthlyTriggerErrorTitle);
+					MessageBox.Show(this, EditorProperties.Resources.WizardMonthlyTriggerInvalid, EditorProperties.Resources.WizardMonthlyTriggerErrorTitle);
 				}
 			}
 			else
@@ -750,7 +750,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (monthlyMonthsDropDown.CheckedFlagValue == 0 || monthlyOnWeekDropDown.CheckedFlagValue == 0 || monthlyOnDOWDropDown.CheckedFlagValue == 0)
 				{
 					e.Cancel = true;
-					MessageBox.Show(this, Properties.Resources.WizardMonthlyDOWTriggerInvalid, Properties.Resources.WizardMonthlyTriggerErrorTitle);
+					MessageBox.Show(this, EditorProperties.Resources.WizardMonthlyDOWTriggerInvalid, EditorProperties.Resources.WizardMonthlyTriggerErrorTitle);
 				}
 			}
 			trigger.StartBoundary = monthlyStartTimePicker.Value;
@@ -763,7 +763,7 @@ namespace Microsoft.Win32.TaskScheduler
 				monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
 				monthlyMonthsDropDown.Items.RemoveAt(13);
 				monthlyDaysDropDown.InitializeFromRange(1, 31);
-				monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(Properties.Resources.Last, 99));
+				monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
 				monthlyDaysDropDown.MultiColumnList = true;
 				monthlyOnWeekDropDown.InitializeFromEnum(typeof(WhichWeek), TaskPropertiesControl.taskSchedResources, "WW");
 				monthlyOnWeekDropDown.Items.RemoveAt(5);
@@ -807,7 +807,7 @@ namespace Microsoft.Win32.TaskScheduler
 			else
 			{
 				e.Cancel = true;
-				MessageBox.Show(this, Properties.Resources.WizardEventTriggerInvalid, Properties.Resources.WizardEventTriggerErrorTitle);
+				MessageBox.Show(this, EditorProperties.Resources.WizardEventTriggerInvalid, EditorProperties.Resources.WizardEventTriggerErrorTitle);
 			}
 		}
 
@@ -865,7 +865,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Password = InvokeCredentialDialog(user);
 				if (Password == null)
 				{
-					MessageBox.Show(this, Properties.Resources.UserAuthenticationError, null);
+					MessageBox.Show(this, EditorProperties.Resources.UserAuthenticationError, null);
 					e.Cancel = true;
 				}
 			}
@@ -1004,7 +1004,7 @@ namespace Microsoft.Win32.TaskScheduler
 			openDlgAfterCheck.Visible = AllowEditorOnFinish;
 			if (EditorOnFinishText != null)
 				openDlgAfterCheck.Text = EditorOnFinishText;
-			string fmt = string.IsNullOrEmpty(SummaryFormatString) ? Properties.Resources.WizardSummaryFormatString : SummaryFormatString;
+			string fmt = string.IsNullOrEmpty(SummaryFormatString) ? EditorProperties.Resources.WizardSummaryFormatString : SummaryFormatString;
 			sumText.Text = string.Format(fmt,
 				nameText.Text,
 				descText.Text,

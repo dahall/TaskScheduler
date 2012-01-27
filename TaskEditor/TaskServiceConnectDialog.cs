@@ -152,7 +152,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (String.IsNullOrEmpty(value))
 			{
-				value = Properties.Resources.NoUserSpecifiedText;
+				value = EditorProperties.Resources.NoUserSpecifiedText;
 				otherUserCheckbox.Checked = false;
 			}
 			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
@@ -165,7 +165,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void setUserBtn_Click(object sender, EventArgs e)
 		{
-			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName);
+			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName);
 			if (this.TargetServer != null)
 				dlg.Target = this.TargetServer;
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -197,7 +197,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void computerBrowseBtn_Click(object sender, EventArgs e)
 		{
 			FolderBrowserDialog2 dlg = FolderBrowserDialog2.ComputerBrowser;
-			dlg.Description = Properties.Resources.BrowseForTargetServerPrompt;
+			dlg.Description = EditorProperties.Resources.BrowseForTargetServerPrompt;
 			dlg.SelectedPath = this.TargetServer == null ? Environment.MachineName : this.TargetServer;
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 				this.TargetServer = this.remoteComputerText.Text = dlg.SelectedPath;

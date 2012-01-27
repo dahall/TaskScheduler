@@ -61,7 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				task = value;
-				this.Text = task == null ? null : string.Format(Properties.Resources.TaskRunTimesDialogTitle, value.Name);
+				this.Text = task == null ? null : string.Format(EditorProperties.Resources.TaskRunTimesDialogTitle, value.Name);
 				Fetch();
 			}
 		}

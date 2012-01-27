@@ -90,8 +90,8 @@ namespace Microsoft.Win32.TaskScheduler
 				TaskPropertiesControl.BuildEnumString(TaskPropertiesControl.taskSchedResources, "TaskState", task.State),
 				task.Definition.Triggers.ToString(),
 				disabled || task.NextRunTime < DateTime.Now ? string.Empty : task.NextRunTime.ToString("G"),
-				task.LastRunTime == DateTime.MinValue ? Properties.Resources.Never :  task.LastRunTime.ToString("G"),
-				task.LastTaskResult == 0 ? Properties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult),
+				task.LastRunTime == DateTime.MinValue ? EditorProperties.Resources.Never :  task.LastRunTime.ToString("G"),
+				task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult),
 				task.Definition.RegistrationInfo.Author,
 				string.Empty
 				}, 0);

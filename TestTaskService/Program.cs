@@ -20,6 +20,8 @@ namespace TestTaskService
 				return;
 			}
 
+			//System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("zh-CN");
+			//System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());
@@ -222,9 +224,37 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
+				/*td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				ts.RootFolder.RegisterTaskDefinition(taskName, td);*/
+				const string user = @"AMERICAS\dahall";
+				td.Data = "Your data";
+				//td.Principal.UserId = user;
+				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.RegistrationInfo.Author = "Elucidate";
+				td.RegistrationInfo.Description = "Performs the SnapRAID Sync command after a small delay after logon";
+				td.RegistrationInfo.Documentation = "http://elucidate.codeplex.com/documentation";
+				td.Settings.DisallowStartIfOnBatteries = true;
+				td.Settings.Enabled = true;
+				td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(24);
+				td.Settings.Hidden = false;
+				td.Settings.Priority = System.Diagnostics.ProcessPriorityClass.Normal;
+				td.Settings.RunOnlyIfIdle = false;
+				td.Settings.RunOnlyIfNetworkAvailable = false;
+				td.Settings.StopIfGoingOnBatteries = true;
+				Version ver = ts.HighestSupportedVersion;
+				bool newVer = (ver >= new Version(1, 2));
+				// Create a trigger that fires 15 minutes after the current user logs on and then every 1000 seconds after that
+				LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
+				if (newVer)
+				{
+					lTrigger.Delay = TimeSpan.FromSeconds(30);
+					lTrigger.UserId = user;
+				}
+				// Create an action which opens a log file in notepad
+				td.Actions.Add(new ExecAction("cmd", @"/k", null));
+				// Register the task definition (saves it) in the security context of the interactive user
+				ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
 
 				// Edit task
 				Task t = ts.GetTask(taskName);

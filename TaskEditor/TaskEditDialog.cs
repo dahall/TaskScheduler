@@ -61,6 +61,30 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool RegisterTaskOnAccept { get; set; }
 
 		/// <summary>
+		/// Gets or sets a value indicating whether errors are shown in the UI.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if errors are shown; otherwise, <c>false</c>.
+		/// </value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether errors are shown in the UI.")]
+		public bool ShowErrors
+		{
+			get { return taskPropertiesControl1.ShowErrors; }
+			set { taskPropertiesControl1.ShowErrors = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Run Times' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Run Times tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown.")]
+		public bool ShowRunTimesTab
+		{
+			get { return taskPropertiesControl1.ShowRunTimesTab; }
+			set { taskPropertiesControl1.ShowRunTimesTab = value; }
+		}
+
+		/// <summary>
 		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
 		/// </summary>
 		/// <value>The task.</value>
@@ -122,7 +146,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
 			if (!titleSet)
-				this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
+				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
 			taskPropertiesControl1.Initialize(service, td);
 		}
 
@@ -133,20 +157,20 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(Task task)
 		{
 			if (!titleSet)
-				this.Text = string.Format(Properties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
+				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
 			taskPropertiesControl1.Initialize(task);
 		}
 
 		private string GetServerString(TaskService service)
 		{
 			return service.TargetServer == null || Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
-				Properties.Resources.LocalMachine : service.TargetServer;
+				EditorProperties.Resources.LocalMachine : service.TargetServer;
 		}
 
 		private string InvokeCredentialDialog(string userName)
 		{
-			CredentialsDialog dlg = new CredentialsDialog(Properties.Resources.TaskSchedulerName,
-				Properties.Resources.CredentialPromptMessage, userName);
+			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName,
+				EditorProperties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
 			dlg.ValidatePassword = true;
 			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
@@ -158,13 +182,13 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (this.TaskDefinition.Actions.Count == 0)
 			{
-				MessageBox.Show(Properties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(EditorProperties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
 			if (this.TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !ValidateOneTriggerExpires())
 			{
-				MessageBox.Show(Properties.Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(EditorProperties.Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -176,7 +200,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					pwd = InvokeCredentialDialog(user);
 					if (pwd == null)
-						throw new System.Security.Authentication.AuthenticationException(Properties.Resources.UserAuthenticationError);
+						throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
 				}
 				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
 					user = this.TaskDefinition.Principal.GroupId;
