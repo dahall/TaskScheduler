@@ -1344,9 +1344,11 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
 					if (v1Trigger != null)
+					{
+						v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
 						SetV1TriggerData();
+					}
 					else
 						unboundValues["WeeksOfMonth"] = (short)value;
 				}
