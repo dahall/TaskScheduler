@@ -612,18 +612,20 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				// Create a temporary task using current definition
 				runTimesTaskName = "TempTask-" + Guid.NewGuid().ToString();
-				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, this.TaskDefinition);
+				TaskDefinition ttd = service.NewTask();
+				//this.TaskDefinition.Principal.CopyTo(ttd.Principal);
+				ttd.Settings.Enabled = false;
+				ttd.Settings.Hidden = true;
+				ttd.Actions.Add(new ExecAction("rundll32.exe"));
+				foreach (Trigger tg in this.TaskDefinition.Triggers)
+					ttd.Triggers.Add((Trigger)tg.Clone());
+				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, ttd);
 				if (tempTask != null)
 				{
-					// Disable, set only action to non-action, hide, register, re-enable, show
-					tempTask.Enabled = false;
-					tempTask.Definition.Actions.Clear();
-					tempTask.Definition.Actions.Add(new ExecAction("rundll32.exe"));
-					tempTask.Definition.Settings.Hidden = true;
-					tempTask.RegisterChanges();
 					taskRunTimesControl1.Show();
 					tempTask.Enabled = true;
 					taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now + TimeSpan.FromDays(365));
+					tempTask.Enabled = false;
 				}
 			}
 			catch (Exception ex)
@@ -631,20 +633,17 @@ namespace Microsoft.Win32.TaskScheduler
 				// On error, post and delete temporary task
 				runTimesErrorLabel.Text = showErrors ? ex.ToString() : null;
 				taskRunTimesControl1.Hide();
+			}
+			finally
+			{
 				if (tempTask != null)
-					runTimesTab_Leave(sender, e);
-				else
-					runTimesTaskName = null;
+					service.RootFolder.DeleteTask(runTimesTaskName);
+				runTimesTaskName = null;
 			}
 		}
 
 		private void runTimesTab_Leave(object sender, EventArgs e)
 		{
-			if (runTimesTaskName != null)
-			{
-				service.RootFolder.DeleteTask(runTimesTaskName);
-				runTimesTaskName = null;
-			}
 		}
 
 		private void SetActionButtonState()

@@ -141,6 +141,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this action.
+		/// </summary>
+		/// <param name="culture">The culture.</param>
+		/// <returns>String representation of action.</returns>
+		public virtual string ToString(System.Globalization.CultureInfo culture)
+		{
+			using (new CultureSwitcher(culture))
+				return this.ToString();
+		}
+
+		/// <summary>
 		/// Creates a specialized class from a defined interface.
 		/// </summary>
 		/// <param name="iAction">Version 2.0 Action interface.</param>

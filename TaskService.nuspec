@@ -15,5 +15,6 @@
   <files>
     <file src="bin\Release\*.dll" target="lib\2" />
     <file src="bin\Release\*.xml" target="lib\2" />
+    <file src="bin\Release\**\Microsoft.Win32.TaskScheduler.resources.dll" target="lib\2" />
   </files>
 </package>

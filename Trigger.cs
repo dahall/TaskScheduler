@@ -407,6 +407,17 @@ namespace Microsoft.Win32.TaskScheduler
 			return V2GetTriggerString() + V2BaseTriggerString();
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this trigger in a specific language.
+		/// </summary>
+		/// <param name="culture">The language of the resulting string.</param>
+		/// <returns>String value of trigger.</returns>
+		public virtual string ToString(System.Globalization.CultureInfo culture)
+		{
+			using (new CultureSwitcher(culture))
+				return this.ToString();
+		}
+
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
 			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
