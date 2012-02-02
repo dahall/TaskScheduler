@@ -191,6 +191,7 @@
     <EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditorProperties\Resources.it.resx" />
     <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>

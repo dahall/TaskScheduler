@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyConnection" xml:space="preserve">
+    <value>Qualsiasi connessione</value>
+    <comment>Default item for displaying status of Networking setting</comment>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabile</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Abilitato</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Scorso</value>
+    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>All'avvio</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>Su un evento</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>Su di inattività</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>A effettuare l'accesso</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>Alla creazione / modifica di attività</value>
+  </data>
+  <data name="TriggerTypeSchedule" xml:space="preserve">
+    <value>Su una pianificazione</value>
+  </data>
+  <data name="TriggerTypeSessionConnect" xml:space="preserve">
+    <value>Alla connessione a una sessione utente</value>
+  </data>
+  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
+    <value>Alla disconnessione a una sessione utente</value>
+  </data>
+  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
+    <value>Sul blocco della workstation</value>
+  </data>
+  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
+    <value>Su sblocco della workstation</value>
+  </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>Sincronizzare attraverso i fusi orari</value>
+  </data>
+  <data name="LocalMachine" xml:space="preserve">
+    <value>Computer locale</value>
+  </data>
+  <data name="TaskEditDlgTitle" xml:space="preserve">
+    <value>{0} Compito ({1})</value>
+    <comment>0=Task name; 1=Machine</comment>
+  </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>Invalido Trigger di Evento</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>Come minimo, un registro deve essere selezionato.</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>Ci deve essere almeno un mese, una settimana, e un giorno della settimana selezionata.</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>Invalido Trigger Mensile</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>Ci deve essere almeno un mese e un giorno selezionato.</value>
+  </data>
+  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
+    <value>Questa classe COM non supporta l'interfaccia richiesta.</value>
+  </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Chiamata a CredUIConfirmCredentials riuscita con codice di errore: {0}</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Chiamata a CredUIPromptForCredentials riuscita con codice di errore: {0}</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>Pianificatore per compiti</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>Inserisci le informazioni sull'account utente per l'esecuzione di questo compito.</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>Una password valida per l'account specificato non è stato fornito.</value>
+  </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>Ci deve essere almeno una azione assegnata a questo compito.</value>
+  </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>Tempi di funzionamento per il compito ({0})</value>
+  </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>L'operazione è stata completata con successo. (0x0)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Mai</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>Modifica azione</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>Nuova azione</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>Modifica trigger</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>Nuova trigger</value>
+  </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>Se si desidera avere un compito cancellati automaticamente dopo viene eseguito, è necessario aggiungere almeno un trigger che ha una data di scadenza.</value>
+  </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>Selezionare un nuovo computer di destinazione:</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;nessuno&gt;</value>
+    <comment>Used when user is null in TaskServiceConnectDialog</comment>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>Non aspettare</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>Immediatamente</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>Indefinitamente</value>
+  </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>Impossibile recuperare la cronologia delle attività. Errore: {0}</value>
+  </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>L'esecuzione di un compito con un account utente del gruppo è supportato solo su Windows Vista ™ o versioni successive. Per eseguire un compito con un account di gruppo, è necessario aggiornare questo compito ad una delle applicazioni di Windows Vista ™.</value>
+  </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>Invia una e-mail utilizzando le informazioni fornite.</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>Esegue un'operazione dal command-line.</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>Mostra un messaggio quando un compito viene attivato.</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>Eseguire un programma</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>Invia una e-mail</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>Mostrare un messaggio</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>Avvia un compito basato su un programma giornaliero. Per esempio, il compito inizia in un momento specifico ogni giorno, ogni giorno, ogni tre giorni, e così via.</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>Quotidiano</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>Avvia un'attività quando si verifica un evento di sistema.</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>Quando un determinato evento viene registrato</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>Avvia un compito basato su una pianificazione mensile. Per esempio, il compito inizia in giorni specifici della mesi specifici.</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>Mensile</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>Avvia un compito a una data e un'ora specifiche.</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>Una volta</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>Avvia un compito basato su una pianificazione settimanale. Per esempio, il compito inizia alle 08:00 in un giorno specifico della settimana, ogni settimana o ogni due settimane.</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>Settimanale</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>Nome: {0}
+
+Descrizione: {1}
+
+Trigger: {2}
+
+Azione: {3}</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>Il valore di intervallo di ripetizione deve essere inferiore o uguale al valore di durata ripetizione.</value>
+  </data>
+</root>

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
+    <Compile Include="CultureSwitcher.cs" />
     <Compile Include="Impersonation.cs" />
     <Compile Include="NamedValueCollection.cs" />
     <Compile Include="NotV1SupportedException.cs" />
@@ -85,6 +86,9 @@
     <None Include="TaskService.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
