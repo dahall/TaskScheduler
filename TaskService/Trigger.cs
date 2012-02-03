@@ -90,6 +90,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Values for week of month (first, second, ..., last)</summary>
+	[Flags]
 	public enum WhichWeek : short
 	{
 		/// <summary>First week of the month</summary>
