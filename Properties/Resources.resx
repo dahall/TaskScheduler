@@ -136,27 +136,6 @@
   <data name="DOWAllDays" xml:space="preserve">
     <value>every day</value>
   </data>
-  <data name="DOWFriday" xml:space="preserve">
-    <value>Friday</value>
-  </data>
-  <data name="DOWMonday" xml:space="preserve">
-    <value>Monday</value>
-  </data>
-  <data name="DOWSaturday" xml:space="preserve">
-    <value>Saturday</value>
-  </data>
-  <data name="DOWSunday" xml:space="preserve">
-    <value>Sunday</value>
-  </data>
-  <data name="DOWThursday" xml:space="preserve">
-    <value>Thursday</value>
-  </data>
-  <data name="DOWTuesday" xml:space="preserve">
-    <value>Tuesday</value>
-  </data>
-  <data name="DOWWednesday" xml:space="preserve">
-    <value>Wednesday</value>
-  </data>
   <data name="EmailAction" xml:space="preserve">
     <value>{1} {0}</value>
     <comment>0 = Subject; 1 = To; 2 = Cc, 3 = Bcc, 4 = From, 5 = ReplyTo, 6 = Body, 7 = Server, 8 = Id</comment>
@@ -168,47 +147,14 @@
     <value>{0} {1}</value>
     <comment>0 = Executable Path; 1 = Arguments; 2 = WorkingDirectory; 3 = Id</comment>
   </data>
+  <data name="HyphenSeparator" xml:space="preserve">
+    <value> -</value>
+  </data>
   <data name="ListSeparator" xml:space="preserve">
     <value>, </value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>every month</value>
-  </data>
-  <data name="MOYApril" xml:space="preserve">
-    <value>April</value>
-  </data>
-  <data name="MOYAugust" xml:space="preserve">
-    <value>August</value>
-  </data>
-  <data name="MOYDecember" xml:space="preserve">
-    <value>December</value>
-  </data>
-  <data name="MOYFebruary" xml:space="preserve">
-    <value>February</value>
-  </data>
-  <data name="MOYJanuary" xml:space="preserve">
-    <value>January</value>
-  </data>
-  <data name="MOYJuly" xml:space="preserve">
-    <value>July</value>
-  </data>
-  <data name="MOYJune" xml:space="preserve">
-    <value>June</value>
-  </data>
-  <data name="MOYMarch" xml:space="preserve">
-    <value>March</value>
-  </data>
-  <data name="MOYMay" xml:space="preserve">
-    <value>May</value>
-  </data>
-  <data name="MOYNovember" xml:space="preserve">
-    <value>November</value>
-  </data>
-  <data name="MOYOctober" xml:space="preserve">
-    <value>October</value>
-  </data>
-  <data name="MOYSeptember" xml:space="preserve">
-    <value>September</value>
   </data>
   <data name="MultipleActions" xml:space="preserve">
     <value>Multiple actions defined</value>
@@ -241,18 +187,6 @@
   <data name="TriggerAnyUser" xml:space="preserve">
     <value>any user</value>
   </data>
-  <data name="TriggerBase1" xml:space="preserve">
-    <value>After triggered, repeat every</value>
-  </data>
-  <data name="TriggerBase2" xml:space="preserve">
-    <value>indefinitely</value>
-  </data>
-  <data name="TriggerBase3" xml:space="preserve">
-    <value>for a duration of</value>
-  </data>
-  <data name="TriggerBase4" xml:space="preserve">
-    <value>Trigger expires at</value>
-  </data>
   <data name="TriggerBoot1" xml:space="preserve">
     <value>At system startup</value>
   </data>
@@ -261,6 +195,17 @@
   </data>
   <data name="TriggerDaily2" xml:space="preserve">
     <value>At {0:t} every {1} days</value>
+  </data>
+  <data name="TriggerDuration0" xml:space="preserve">
+    <value> indefinitely</value>
+  </data>
+  <data name="TriggerDurationNot0" xml:space="preserve">
+    <value> for a duration of {0}</value>
+    <comment>0 = Duration</comment>
+  </data>
+  <data name="TriggerEndBoundary" xml:space="preserve">
+    <value> Trigger expires at {0:G}.</value>
+    <comment>0 = EndBoundary</comment>
   </data>
   <data name="TriggerEvent1" xml:space="preserve">
     <value>Custom event filter</value>
@@ -293,6 +238,10 @@
   </data>
   <data name="TriggerRegistration1" xml:space="preserve">
     <value>When the task is created or modified</value>
+  </data>
+  <data name="TriggerRepetition" xml:space="preserve">
+    <value> After triggered, repeat every {0}{1}.</value>
+    <comment>0 = Interval; 1= Duration string</comment>
   </data>
   <data name="TriggerSessionConsoleConnect" xml:space="preserve">
     <value>On local connection to {0}.</value>
