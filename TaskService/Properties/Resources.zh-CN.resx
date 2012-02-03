@@ -135,27 +135,6 @@
   <data name="DOWAllDays" xml:space="preserve">
     <value>每天</value>
   </data>
-  <data name="DOWFriday" xml:space="preserve">
-    <value>星期五</value>
-  </data>
-  <data name="DOWMonday" xml:space="preserve">
-    <value>星期一</value>
-  </data>
-  <data name="DOWSaturday" xml:space="preserve">
-    <value>星期六</value>
-  </data>
-  <data name="DOWSunday" xml:space="preserve">
-    <value>星期日</value>
-  </data>
-  <data name="DOWThursday" xml:space="preserve">
-    <value>星期四</value>
-  </data>
-  <data name="DOWTuesday" xml:space="preserve">
-    <value>星期二</value>
-  </data>
-  <data name="DOWWednesday" xml:space="preserve">
-    <value>星期三</value>
-  </data>
   <data name="EmailAction" xml:space="preserve">
     <value>{1} {0}</value>
   </data>
@@ -165,47 +144,14 @@
   <data name="ExecAction" xml:space="preserve">
     <value>{0} {1}</value>
   </data>
+  <data name="HyphenSeparator" xml:space="preserve">
+    <value> - </value>
+  </data>
   <data name="ListSeparator" xml:space="preserve">
     <value>, </value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>每月</value>
-  </data>
-  <data name="MOYApril" xml:space="preserve">
-    <value>四月</value>
-  </data>
-  <data name="MOYAugust" xml:space="preserve">
-    <value>八月</value>
-  </data>
-  <data name="MOYDecember" xml:space="preserve">
-    <value>十二月</value>
-  </data>
-  <data name="MOYFebruary" xml:space="preserve">
-    <value>二月</value>
-  </data>
-  <data name="MOYJanuary" xml:space="preserve">
-    <value>一月</value>
-  </data>
-  <data name="MOYJuly" xml:space="preserve">
-    <value>七月</value>
-  </data>
-  <data name="MOYJune" xml:space="preserve">
-    <value>六月</value>
-  </data>
-  <data name="MOYMarch" xml:space="preserve">
-    <value>三月</value>
-  </data>
-  <data name="MOYMay" xml:space="preserve">
-    <value>五月</value>
-  </data>
-  <data name="MOYNovember" xml:space="preserve">
-    <value>十一月</value>
-  </data>
-  <data name="MOYOctober" xml:space="preserve">
-    <value>十月</value>
-  </data>
-  <data name="MOYSeptember" xml:space="preserve">
-    <value>九月</value>
   </data>
   <data name="MultipleActions" xml:space="preserve">
     <value>已定义多个操作</value>
@@ -237,18 +183,6 @@
   <data name="TriggerAnyUser" xml:space="preserve">
     <value>任何人</value>
   </data>
-  <data name="TriggerBase1" xml:space="preserve">
-    <value>触发后，每</value>
-  </data>
-  <data name="TriggerBase2" xml:space="preserve">
-    <value>无限</value>
-  </data>
-  <data name="TriggerBase3" xml:space="preserve">
-    <value>持续时间</value>
-  </data>
-  <data name="TriggerBase4" xml:space="preserve">
-    <value>触发器过期于</value>
-  </data>
   <data name="TriggerBoot1" xml:space="preserve">
     <value>当系统启动</value>
   </data>
@@ -257,6 +191,15 @@
   </data>
   <data name="TriggerDaily2" xml:space="preserve">
     <value>每 {1} 天 {0:t}</value>
+  </data>
+  <data name="TriggerDuration0" xml:space="preserve">
+    <value>无限</value>
+  </data>
+  <data name="TriggerDurationNot0" xml:space="preserve">
+    <value>持续时间{0}</value>
+  </data>
+  <data name="TriggerEndBoundary" xml:space="preserve">
+    <value>触发器过期于{0:G}</value>
   </data>
   <data name="TriggerEvent1" xml:space="preserve">
     <value>自定义时间过滤器</value>
@@ -284,6 +227,9 @@
   </data>
   <data name="TriggerRegistration1" xml:space="preserve">
     <value>当任务被创建或修改</value>
+  </data>
+  <data name="TriggerRepetition" xml:space="preserve">
+    <value>触发后，每 {0}{1}</value>
   </data>
   <data name="TriggerSessionConsoleConnect" xml:space="preserve">
     <value>当用户 {0} 本地连线</value>

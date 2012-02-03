@@ -419,8 +419,71 @@ namespace Microsoft.Win32.TaskScheduler
 				return this.ToString();
 		}
 
+		internal static string GetCultureEquivalentString(DaysOfTheWeek val)
+		{
+			if (val == DaysOfTheWeek.AllDays)
+				return Properties.Resources.DOWAllDays;
+
+			List<string> s = new List<string>(7);
+			if ((val & DaysOfTheWeek.Sunday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Sunday));
+			if ((val & DaysOfTheWeek.Monday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Monday));
+			if ((val & DaysOfTheWeek.Tuesday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Tuesday));
+			if ((val & DaysOfTheWeek.Wednesday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Wednesday));
+			if ((val & DaysOfTheWeek.Thursday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Thursday));
+			if ((val & DaysOfTheWeek.Friday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Friday));
+			if ((val & DaysOfTheWeek.Saturday) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Saturday));
+
+			return string.Join(Properties.Resources.ListSeparator, s.ToArray());
+		}
+
+		internal static string GetCultureEquivalentString(MonthsOfTheYear val)
+		{
+			if (val == MonthsOfTheYear.AllMonths)
+				return Properties.Resources.MOYAllMonths;
+
+			List<string> s = new List<string>(12);
+			if ((val & MonthsOfTheYear.January) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(1));
+			if ((val & MonthsOfTheYear.February) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(2));
+			if ((val & MonthsOfTheYear.March) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(3));
+			if ((val & MonthsOfTheYear.April) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(4));
+			if ((val & MonthsOfTheYear.May) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(5));
+			if ((val & MonthsOfTheYear.June) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(6));
+			if ((val & MonthsOfTheYear.July) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(7));
+			if ((val & MonthsOfTheYear.August) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(8));
+			if ((val & MonthsOfTheYear.September) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(9));
+			if ((val & MonthsOfTheYear.October) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(10));
+			if ((val & MonthsOfTheYear.November) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(11));
+			if ((val & MonthsOfTheYear.December) > 0)
+				s.Add(System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(12));
+
+			return string.Join(Properties.Resources.ListSeparator, s.ToArray());
+		}
+
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
+			if (enumValue is DaysOfTheWeek)
+				return GetCultureEquivalentString((DaysOfTheWeek)enumValue);
+			if (enumValue is MonthsOfTheYear)
+				return GetCultureEquivalentString((MonthsOfTheYear)enumValue);
+
 			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
 			if (vals.Length == 0)
 				return string.Empty;
@@ -429,7 +492,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				vals[i] = Properties.Resources.ResourceManager.GetString(preface + vals[i]);
 			}
-			return string.Join(", ", vals);
+			return string.Join(Properties.Resources.ListSeparator, vals);
 		}
 
 		internal static TaskTriggerType ConvertFromV1TriggerType(V1Interop.TaskTriggerType v1Type)
@@ -633,17 +696,17 @@ namespace Microsoft.Win32.TaskScheduler
 			StringBuilder ret = new StringBuilder();
 			if (this.Repetition.Interval != TimeSpan.Zero)
 			{
-				ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase1, GetBestTimeSpanString(this.Repetition.Interval));
+				string sduration = string.Empty;
 				if (this.Repetition.Duration == TimeSpan.Zero)
-					ret.Append(" " + Properties.Resources.TriggerBase2);
+					sduration = Properties.Resources.TriggerDuration0;
 				else
-					ret.AppendFormat(" {0} {1}", Properties.Resources.TriggerBase3, GetBestTimeSpanString(this.Repetition.Duration));
-				ret.Append(".");
+					sduration = string.Format(Properties.Resources.TriggerDurationNot0, GetBestTimeSpanString(this.Repetition.Duration));
+				ret.AppendFormat(Properties.Resources.TriggerRepetition, GetBestTimeSpanString(this.Repetition.Interval), sduration);
 			}
 			if (this.EndBoundary != DateTime.MaxValue)
-				ret.AppendFormat(" {0} {1:G}.", Properties.Resources.TriggerBase4, this.EndBoundary);
+				ret.AppendFormat(Properties.Resources.TriggerEndBoundary, this.EndBoundary);
 			if (ret.Length > 0)
-				ret.Insert(0, " -");
+				ret.Insert(0, Properties.Resources.HyphenSeparator);
 			return ret.ToString();
 		}
 
@@ -1402,7 +1465,7 @@ namespace Microsoft.Win32.TaskScheduler
 			string ww = BuildEnumString("WW", this.WeeksOfMonth);
 			string days = this.DaysOfWeek == DaysOfTheWeek.AllDays ? Properties.Resources.DOWAllDays : BuildEnumString("DOW", this.DaysOfWeek);
 			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : BuildEnumString("MOY", this.MonthsOfYear);
-			return string.Format("At {0:t} on the {1} {2:f} each {3}, starting {0:d}", this.StartBoundary, ww, days, months);
+			return string.Format(Properties.Resources.TriggerMonthlyDOW1, this.StartBoundary, ww, days, months);
 		}
 	}
 
@@ -1607,7 +1670,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string days = string.Join(", ", Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
+			string days = string.Join(Properties.Resources.ListSeparator, Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
 			string months = this.MonthsOfYear == MonthsOfTheYear.AllMonths ? Properties.Resources.MOYAllMonths : BuildEnumString("MOY", this.MonthsOfYear);
 			return string.Format(Properties.Resources.TriggerMonthly1, this.StartBoundary, days, months);
 		}
