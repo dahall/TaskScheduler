@@ -56,6 +56,7 @@
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
     <Compile Include="CultureSwitcher.cs" />
+    <Compile Include="EnumGlobalizer.cs" />
     <Compile Include="Impersonation.cs" />
     <Compile Include="NamedValueCollection.cs" />
     <Compile Include="NotV1SupportedException.cs" />
