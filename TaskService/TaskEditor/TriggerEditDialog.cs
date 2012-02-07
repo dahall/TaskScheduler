@@ -42,14 +42,14 @@ namespace Microsoft.Win32.TaskScheduler
 			this.SupportV1Only = supportV1Only;
 
 			// Populate combo boxes
-			monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
+			monthlyMonthsDropDown.InitializeFromTaskEnum(typeof(MonthsOfTheYear));
 			monthlyMonthsDropDown.Items.RemoveAt(13);
 			monthlyDaysDropDown.InitializeFromRange(1, 31);
 			monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
 			monthlyDaysDropDown.MultiColumnList = true;
-			monthlyOnWeekDropDown.InitializeFromEnum(typeof(WhichWeek), TaskPropertiesControl.taskSchedResources, "WW");
+			monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
 			monthlyOnWeekDropDown.Items.RemoveAt(5);
-			monthlyOnDOWDropDown.InitializeFromEnum(typeof(DaysOfTheWeek), TaskPropertiesControl.taskSchedResources, "DOW");
+			monthlyOnDOWDropDown.InitializeFromTaskEnum(typeof(DaysOfTheWeek));
 			monthlyOnDOWDropDown.Items.RemoveAt(8);
 
 			delaySpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });

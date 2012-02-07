@@ -12,8 +12,6 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public partial class TaskPropertiesControl : UserControl
 	{
-		internal static global::System.Resources.ResourceManager taskSchedResources;
-
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
@@ -26,11 +24,6 @@ namespace Microsoft.Win32.TaskScheduler
 		private TaskDefinition td = null;
 		private TabPage tempRunTimesTabPage = null;
 		private bool v2 = true;
-
-		static TaskPropertiesControl()
-		{
-			taskSchedResources = new global::System.Resources.ResourceManager("Microsoft.Win32.TaskScheduler.Properties.Resources", typeof(Trigger).Assembly);
-		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskPropertiesControl"/> class.
@@ -347,18 +340,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
-			return BuildEnumString(EditorProperties.Resources.ResourceManager, preface, enumValue);
-		}
-
-		internal static string BuildEnumString(System.Resources.ResourceManager mgr, string preface, object enumValue)
-		{
 			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
 			if (vals.Length == 0)
 				return string.Empty;
 
 			for (int i = 0; i < vals.Length; i++)
 			{
-				vals[i] = mgr.GetString(preface + vals[i], System.Globalization.CultureInfo.CurrentUICulture);
+				vals[i] = EditorProperties.Resources.ResourceManager.GetString(preface + vals[i], System.Globalization.CultureInfo.CurrentUICulture);
 			}
 			return string.Join(", ", vals);
 		}
@@ -452,7 +440,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void AddActionToList(Action act, int index)
 		{
 			ListViewItem lvi = new ListViewItem(new string[] {
-					BuildEnumString(taskSchedResources, "ActionType", act.ActionType),
+					TaskEnumGlobalizer.GetString(act.ActionType),
 					act.ToString() }) { Tag = act };
 			if (index < 0)
 				actionListView.Items.Add(lvi);
@@ -463,7 +451,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void AddTriggerToList(Trigger tr, int index)
 		{
 			ListViewItem lvi = new ListViewItem(new string[] {
-					BuildEnumString(taskSchedResources, "TriggerType", tr.TriggerType),
+					TaskEnumGlobalizer.GetString(tr.TriggerType),
 					tr.ToString(),
 					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
 				});

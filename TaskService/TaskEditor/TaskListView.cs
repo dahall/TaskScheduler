@@ -87,7 +87,7 @@ namespace Microsoft.Win32.TaskScheduler
 			bool disabled = task.State == TaskState.Disabled;
 			ListViewItem lvi = new ListViewItem(new string[] {
 				task.Name,
-				TaskPropertiesControl.BuildEnumString(TaskPropertiesControl.taskSchedResources, "TaskState", task.State),
+				TaskEnumGlobalizer.GetString(task.State),
 				task.Definition.Triggers.ToString(),
 				disabled || task.NextRunTime < DateTime.Now ? string.Empty : task.NextRunTime.ToString("G"),
 				task.LastRunTime == DateTime.MinValue ? EditorProperties.Resources.Never :  task.LastRunTime.ToString("G"),

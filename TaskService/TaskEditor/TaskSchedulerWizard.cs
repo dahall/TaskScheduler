@@ -760,14 +760,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (monthlyMonthsDropDown.Items.Count == 0)
 			{
-				monthlyMonthsDropDown.InitializeFromEnum(typeof(MonthsOfTheYear), TaskPropertiesControl.taskSchedResources, "MOY");
+				monthlyMonthsDropDown.InitializeFromTaskEnum(typeof(MonthsOfTheYear));
 				monthlyMonthsDropDown.Items.RemoveAt(13);
 				monthlyDaysDropDown.InitializeFromRange(1, 31);
 				monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
 				monthlyDaysDropDown.MultiColumnList = true;
-				monthlyOnWeekDropDown.InitializeFromEnum(typeof(WhichWeek), TaskPropertiesControl.taskSchedResources, "WW");
+				monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
 				monthlyOnWeekDropDown.Items.RemoveAt(5);
-				monthlyOnDOWDropDown.InitializeFromEnum(typeof(DaysOfTheWeek), TaskPropertiesControl.taskSchedResources, "DOW");
+				monthlyOnDOWDropDown.InitializeFromTaskEnum(typeof(DaysOfTheWeek));
 				monthlyOnDOWDropDown.Items.RemoveAt(8);
 			}
 			if (!monthlyDaysRadio.Checked && !monthlyOnRadio.Checked)
@@ -1009,7 +1009,7 @@ namespace Microsoft.Win32.TaskScheduler
 				nameText.Text,
 				descText.Text,
 				trigger.ToString(),
-				TaskPropertiesControl.BuildEnumString(TaskPropertiesControl.taskSchedResources, "ActionType", action.ActionType) + ": " + action.ToString());
+				TaskEnumGlobalizer.GetString(action.ActionType) + ": " + action.ToString());
 			sumText.Select(0, 0);
 		}
 

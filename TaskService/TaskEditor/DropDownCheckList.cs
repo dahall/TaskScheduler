@@ -184,6 +184,28 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Initializes the check list from an enumerated type defined in the TaskScheduler assembly
+		/// </summary>
+		/// <param name="enumType">The enumerated type.</param>
+		public void InitializeFromTaskEnum(Type enumType)
+		{
+			this.checkedListBox1.Items.Clear();
+			long allVal = 0;
+			Array vals = Enum.GetValues(enumType);
+			for (int i = 0; i < vals.Length; i++)
+			{
+				long val = Convert.ToInt64(vals.GetValue(i));
+				allVal |= val;
+				string text = TaskEnumGlobalizer.GetString(vals.GetValue(i));
+				//if (text != null)
+				//	text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
+				this.checkedListBox1.Items.Add(new DropDownCheckListItem(text, val));
+			}
+			if (!string.IsNullOrEmpty(this.CheckAllText))
+				this.checkedListBox1.Items.Insert(0, new DropDownCheckListItem(this.CheckAllText, allVal));
+		}
+
+		/// <summary>
 		/// Removes the specifed item from the check list.
 		/// </summary>
 		/// <param name="index">The index of the item to remove.</param>
@@ -406,7 +428,9 @@ namespace Microsoft.Win32.TaskScheduler
 				long val = Convert.ToInt64(vals.GetValue(i));
 				allVal |= val;
 				string text = mgr.GetString(prefix + names.GetValue(i).ToString(), System.Globalization.CultureInfo.CurrentUICulture);
-				if (text.Length > 1) text = text.Substring(0, 1).ToUpper() + text.Substring(1);
+				if (string.IsNullOrEmpty(text))
+					text = names.GetValue(i).ToString();
+				text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
 				list.Add(new DropDownCheckListItem(text, val));
 			}
 		}
