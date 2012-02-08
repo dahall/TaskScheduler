@@ -224,40 +224,15 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				/*td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
+				td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
+				td.Settings.WakeToRun = true;
+				td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				ts.RootFolder.RegisterTaskDefinition(taskName, td);*/
-				const string user = @"AMERICAS\dahall";
-				td.Data = "Your data";
-				//td.Principal.UserId = user;
-				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
-				td.RegistrationInfo.Author = "Elucidate";
-				td.RegistrationInfo.Description = "Performs the SnapRAID Sync command after a small delay after logon";
-				td.RegistrationInfo.Documentation = "http://elucidate.codeplex.com/documentation";
-				td.Settings.DisallowStartIfOnBatteries = true;
-				td.Settings.Enabled = true;
-				td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(24);
-				td.Settings.Hidden = false;
-				td.Settings.Priority = System.Diagnostics.ProcessPriorityClass.Normal;
-				td.Settings.RunOnlyIfIdle = false;
-				td.Settings.RunOnlyIfNetworkAvailable = false;
-				td.Settings.StopIfGoingOnBatteries = true;
-				Version ver = ts.HighestSupportedVersion;
-				bool newVer = (ver >= new Version(1, 2));
-				// Create a trigger that fires 15 minutes after the current user logs on and then every 1000 seconds after that
-				LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
-				if (newVer)
-				{
-					lTrigger.Delay = TimeSpan.FromSeconds(30);
-					lTrigger.UserId = user;
-				}
-				// Create an action which opens a log file in notepad
-				td.Actions.Add(new ExecAction("cmd", @"/k", null));
-				// Register the task definition (saves it) in the security context of the interactive user
-				ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+
+				DateTime dt = t.NextRunTime;
 
 				// Edit task
-				Task t = ts.GetTask(taskName);
 				td = DisplayTask(t, true);
 
 				// Register then show task again
@@ -563,6 +538,16 @@ namespace TestTaskService
 				editorForm = new TaskEditDialog();
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
+			editorForm.RegisterTaskOnAccept = true;
+			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
+		}
+
+		static TaskDefinition DisplayTask(TaskService ts, TaskDefinition td, bool editable)
+		{
+			if (editorForm == null)
+				editorForm = new TaskEditDialog();
+			editorForm.Editable = editable;
+			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = true;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}

@@ -253,7 +253,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (timeFormat != FullDateTimePickerTimeFormat.Hidden)
 				time += this.dateTimePickerTime.Value.TimeOfDay;
 			if (!utcCheckBox.Checked)
-				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
+				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
 			else
 			{
 				switch (utcBehavior)
@@ -276,7 +276,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			this.dateTimePickerDate.Value = this.currentValue.Date;
 			this.dateTimePickerTime.Value = this.currentValue;
-			this.utcCheckBox.Checked = this.currentValue.Kind != DateTimeKind.Unspecified;
+			if (!string.IsNullOrEmpty(utcPrompt))
+				this.utcCheckBox.Checked = this.currentValue.Kind == DateTimeKind.Utc;
 		}
 
 		private void FullDateTimePicker_Load(object sender, EventArgs e)
