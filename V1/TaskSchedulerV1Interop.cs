@@ -268,7 +268,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime BeginDate
 		{
-			get { return new DateTime(this.BeginYear, this.BeginMonth, this.BeginDay, this.StartHour, this.StartMinute, 0); }
+			get { return new DateTime(this.BeginYear, this.BeginMonth, this.BeginDay, this.StartHour, this.StartMinute, 0, DateTimeKind.Local); }
 			set
 			{
 				if (value != DateTime.MinValue)
