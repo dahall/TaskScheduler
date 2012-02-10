@@ -85,6 +85,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a collection of all the tasks in the folder.
+		/// </summary>
+		public TaskCollection Tasks
+		{
+			get { return GetTasks(); }
+		}
+
+		/// <summary>
 		/// Gets or sets the <see cref="TaskService"/> that manages this task.
 		/// </summary>
 		/// <value>The task service.</value>
@@ -127,26 +135,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets a collection of all the tasks in the folder whose name matches the optional <paramref name="filter"/>.
-		/// </summary>
-		/// <param name="filter">The optional name filter expression.</param>
-		/// <returns>Collection of all matching tasks.</returns>
-		public TaskCollection GetTasks(System.Text.RegularExpressions.Regex filter = null)
-		{
-			if (v2Folder != null)
-				return new TaskCollection(this, v2Folder.GetTasks(1), filter);
-			return new TaskCollection(this.TaskService, filter);
-		}
-
-		/// <summary>
-		/// Gets a collection of all the tasks in the folder.
-		/// </summary>
-		public TaskCollection Tasks
-		{
-			get { return GetTasks(); }
-		}
-
-		/// <summary>
 		/// Deletes a task from the folder.
 		/// </summary>
 		/// <param name="Name">The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
@@ -160,6 +148,40 @@ namespace Microsoft.Win32.TaskScheduler
 					Name += ".job";
 				v1List.Delete(Name);
 			}
+		}
+
+		/// <summary>
+		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
+		/// <returns>The security descriptor for the folder.</returns>
+		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(System.Security.AccessControl.AccessControlSections includeSections)
+		{
+			return new System.Security.AccessControl.RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
+		}
+
+		/// <summary>
+		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
+		/// <returns>The security descriptor for the folder.</returns>
+		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
+		{
+			if (v2Folder != null)
+				return v2Folder.GetSecurityDescriptor((int)includeSections);
+			throw new NotV1SupportedException();
+		}
+
+		/// <summary>
+		/// Gets a collection of all the tasks in the folder whose name matches the optional <paramref name="filter"/>.
+		/// </summary>
+		/// <param name="filter">The optional name filter expression.</param>
+		/// <returns>Collection of all matching tasks.</returns>
+		public TaskCollection GetTasks(System.Text.RegularExpressions.Regex filter = null)
+		{
+			if (v2Folder != null)
+				return new TaskCollection(this, v2Folder.GetTasks(1), filter);
+			return new TaskCollection(this.TaskService, filter);
 		}
 
 		/// <summary>
@@ -263,28 +285,6 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 			return new Task(this.TaskService, definition.v1Task);
-		}
-
-		/// <summary>
-		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
-		/// </summary>
-		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
-		/// <returns>The security descriptor for the folder.</returns>
-		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(System.Security.AccessControl.AccessControlSections includeSections)
-		{
-			return new System.Security.AccessControl.RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
-		}
-
-		/// <summary>
-		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
-		/// </summary>
-		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
-		/// <returns>The security descriptor for the folder.</returns>
-		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
-		{
-			if (v2Folder != null)
-				return v2Folder.GetSecurityDescriptor((int)includeSections);
-			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
