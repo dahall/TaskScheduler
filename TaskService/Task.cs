@@ -482,6 +482,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the operational state of the running task.
+		/// </summary>
+		public override TaskState State
+		{
+			get
+			{
+				if (v2RunningTask != null)
+					return v2RunningTask.State;
+				return base.State;
+			}
+		}
+
+		/// <summary>
 		/// Releases all resources used by this class.
 		/// </summary>
 		public new void Dispose()
@@ -545,6 +558,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates if the registered task is enabled.
 		/// </summary>
+		/// <remarks>As of version 1.8.1, under V1 systems (prior to Vista), this method will immediately set the enabled property and re-save the current task. If changes have been made to the <see cref="TaskDefinition"/>, then those changes will be saved.</remarks>
 		public bool Enabled
 		{
 			get
@@ -564,6 +578,7 @@ namespace Microsoft.Win32.TaskScheduler
 						v1Task.SetFlags(flags |= V1Interop.TaskFlags.Disabled);
 					else
 						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.Disabled);
+					this.Definition.V1Save(null);
 				}
 			}
 		}
@@ -676,13 +691,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the operational state of the registered task.
 		/// </summary>
-		public TaskState State
+		public virtual TaskState State
 		{
 			get
 			{
 				if (v2Task != null)
 					return v2Task.State;
 
+				V1Reactivate();
 				switch (v1Task.GetStatus())
 				{
 					case V1Interop.TaskStatus.Ready:
@@ -902,6 +918,13 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return this.Name;
+		}
+
+		internal void V1Reactivate()
+		{
+			V1Interop.ITask iTask = TaskService.GetTask(this.TaskService.v1TaskScheduler, GetV1Path(v1Task));
+			if (iTask != null)
+				v1Task = iTask;
 		}
 
 		internal static string GetV1Path(V1Interop.ITask v1Task)
