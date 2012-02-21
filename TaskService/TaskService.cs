@@ -419,48 +419,54 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			ResetUnsetProperties();
 
-			if (!initializing && !DesignMode &&
-				((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) ||
-				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
+			if (!initializing && !DesignMode)
 			{
-				// Clear stuff if already connected
-				if (this.v2TaskService != null || this.v1TaskScheduler != null)
-					this.Dispose(true);
-
-				if (hasV2 && !forceV1)
+				if (((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) ||
+				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
 				{
-					v2TaskService = new V2Interop.TaskSchedulerClass();
-					if (!string.IsNullOrEmpty(targetServer))
+					// Clear stuff if already connected
+					if (this.v2TaskService != null || this.v1TaskScheduler != null)
+						this.Dispose(true);
+
+					if (hasV2 && !forceV1)
 					{
-						// Check to ensure character only server name. (Suggested by bigsan)
-						if (targetServer.StartsWith(@"\"))
-							targetServer = targetServer.TrimStart('\\');
-						// Make sure null is provided for local machine to compensate for a native library oddity (Found by ctrollen)
-						if (targetServer.Equals(Environment.MachineName, StringComparison.CurrentCultureIgnoreCase))
-							targetServer = null;
+						v2TaskService = new V2Interop.TaskSchedulerClass();
+						if (!string.IsNullOrEmpty(targetServer))
+						{
+							// Check to ensure character only server name. (Suggested by bigsan)
+							if (targetServer.StartsWith(@"\"))
+								targetServer = targetServer.TrimStart('\\');
+							// Make sure null is provided for local machine to compensate for a native library oddity (Found by ctrollen)
+							if (targetServer.Equals(Environment.MachineName, StringComparison.CurrentCultureIgnoreCase))
+								targetServer = null;
+						}
+						v2TaskService.Connect(targetServer, userName, userDomain, userPassword);
+						targetServer = v2TaskService.TargetServer;
+						userName = v2TaskService.ConnectedUser;
+						userDomain = v2TaskService.ConnectedDomain;
+						maxVer = GetV2Version();
 					}
-					v2TaskService.Connect(targetServer, userName, userDomain, userPassword);
-					targetServer = v2TaskService.TargetServer;
-					userName = v2TaskService.ConnectedUser;
-					userDomain = v2TaskService.ConnectedDomain;
-					maxVer = GetV2Version();
+					else
+					{
+						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
+						V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
+						v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
+						if (!string.IsNullOrEmpty(targetServer))
+						{
+							// Check to ensure UNC format for server name. (Suggested by bigsan)
+							if (!targetServer.StartsWith(@"\\"))
+								targetServer = @"\\" + targetServer;
+						}
+						else
+							targetServer = null;
+						v1TaskScheduler.SetTargetComputer(targetServer);
+						targetServer = v1TaskScheduler.GetTargetComputer();
+						maxVer = v1Ver;
+					}
 				}
 				else
 				{
-					v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
-					V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
-					v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
-					if (!string.IsNullOrEmpty(targetServer))
-					{
-						// Check to ensure UNC format for server name. (Suggested by bigsan)
-						if (!targetServer.StartsWith(@"\\"))
-							targetServer = @"\\" + targetServer;
-					}
-					else
-						targetServer = null;
-					v1TaskScheduler.SetTargetComputer(targetServer);
-					targetServer = v1TaskScheduler.GetTargetComputer();
-					maxVer = v1Ver;
+					throw new ArgumentException("A username, password, and domain must be provided.");
 				}
 			}
 		}
