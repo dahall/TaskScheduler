@@ -154,8 +154,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private RepetitionPattern repititionPattern = null;
 
 		internal Trigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType type)
-			: this(trigger, trigger.GetTrigger())
 		{
+			v1Trigger = trigger;
+			v1TriggerData = trigger.GetTrigger();
+			v1TriggerData.Type = type;
+			ttype = ConvertFromV1TriggerType(type);
 		}
 
 		internal Trigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTrigger data)
