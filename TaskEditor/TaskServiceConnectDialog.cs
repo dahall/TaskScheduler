@@ -172,7 +172,12 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				SetUserText(dlg.UserName);
 				string[] userParts = dlg.UserName.Split('\\');
-				if (userParts.Length == 2)
+				if (userParts.Length == 1)
+				{
+					this.Domain = this.TargetServer;
+					this.User = userParts[0];
+				}
+				else if (userParts.Length == 2)
 				{
 					this.Domain = userParts[0];
 					this.User = userParts[1];

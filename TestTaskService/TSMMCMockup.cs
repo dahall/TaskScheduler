@@ -1,70 +1,105 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler;
 
 namespace TestTaskService
 {
+	public interface ISupportTasks
+	{
+		TaskService TaskService { get; set; }
+		ContextMenuStrip MenuItems { get; }
+	}
+
 	public partial class TSMMCMockup : Form
 	{
-		private Task selTask;
+		private FolderPanel folderPanel;
+		private HomePanel homePanel;
+		private Control curPanel;
 
 		public TSMMCMockup()
 		{
 			InitializeComponent();
 		}
 
-		private void taskListView1_TaskSelected(object sender, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs e)
+		private void SetActionMenu(ContextMenuStrip menuItems)
 		{
-			if (e.Task == null)
+			ToolStripItemCollection coll = this.contextMenuStrip1.Items;
+			if (menuItems != null)
+				coll = menuItems.Items;
+			actionToolStripMenuItem.DropDownItems.Clear();
+			actionToolStripMenuItem.DropDownItems.AddRange(coll);
+			actionToolStrip.Items.Clear();
+			actionToolStrip.Items.AddRange(coll);
+		}
+
+		private void ShowPanel(Control panel)
+		{
+			if (curPanel != null)
+				curPanel.Hide();
+			curPanel = panel;
+			if (panel is ISupportTasks)
 			{
-				taskPropertiesControl1.Hide();
-				selTask = null;
+				((ISupportTasks)panel).TaskService = this.TaskService;
+				SetActionMenu(((ISupportTasks)panel).MenuItems);
 			}
-			else
+			panel.Show();
+		}
+
+		private void ShowHome()
+		{
+			if (homePanel == null)
 			{
-				taskPropertiesControl1.Show();
-				taskPropertiesControl1.Initialize(e.Task);
-				selTask = e.Task;
+				homePanel = new HomePanel();
+				splitContainer1.Panel2.Controls.Add(homePanel);
+				homePanel.Dock = DockStyle.Fill;
 			}
+			ShowPanel(homePanel);
+		}
+
+		private void ShowFolder(TaskFolder folder)
+		{
+			if (folderPanel == null)
+			{
+				folderPanel = new FolderPanel();
+				splitContainer1.Panel2.Controls.Add(folderPanel);
+				folderPanel.Dock = DockStyle.Fill;
+			}
+			folderPanel.Tasks = folder.Tasks;
+			ShowPanel(folderPanel);
 		}
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			if (e.Node.Tag == null)
-			{
-				taskListView1.Tasks = null;
-				taskListView1_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);
-			}
+				ShowHome();
 			else
-			{
-				taskListView1.Tasks = ((TaskFolder)e.Node.Tag).Tasks;
-				if (taskListView1.Tasks.Count > 0)
-					taskListView1.SelectedIndex = 0;
-				else
-					taskListView1_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);
-			}
+				ShowFolder(e.Node.Tag as TaskFolder);
 		}
 
 		private void TSMMCMockup_Load(object sender, EventArgs e)
 		{
+			imageList1.Images.Add(Properties.Resources.Properties);
+			imageList1.Images.Add(Properties.Resources.TaskLibraryRootNode);
+			imageList1.Images.Add(Properties.Resources.Folder_16);
+			RefreshList();
+		}
+
+		private void RefreshList()
+		{
 			treeView1.Nodes.Clear();
-			TreeNode n = treeView1.Nodes.Add(string.Format("Task Scheduler ({0})", taskService.TargetServer == null || taskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : taskService.TargetServer));
-			TreeNode p = n.Nodes.Add("Task Scheduler Library");
-			p.Tag = taskService.RootFolder;
+			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 0, 0);
+			TreeNode p = n.Nodes.Add(null, "Task Scheduler Library", 1, 1);
+			p.Tag = TaskService.RootFolder;
+			n.Expand();
 			LoadChildren(p);
+			treeView1.SelectedNode = n;
 		}
 
 		private void LoadChildren(TreeNode p)
 		{
 			foreach (var item in ((TaskFolder)p.Tag).SubFolders)
 			{
-				TreeNode n = p.Nodes.Add(item.Name);
+				TreeNode n = p.Nodes.Add(null, item.Name, 2, 2);
 				n.Tag = item;
 				LoadChildren(n);
 			}
@@ -73,31 +108,29 @@ namespace TestTaskService
 		private void connectToAnotherComputerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (taskServiceConnectDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-			{
-				TSMMCMockup_Load(this, EventArgs.Empty);
-			}
+				RefreshList();
 		}
 
-		private void createBasicTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		private void createBasicTaskMenu_Click(object sender, EventArgs e)
 		{
 			taskSchedulerWizard1.ShowDialog(this);
 		}
 
-		private void createTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		private void createTaskMenu_Click(object sender, EventArgs e)
 		{
-			taskEditDialog1.Initialize(taskService);
+			taskEditDialog1.Initialize(TaskService);
 			taskEditDialog1.ShowDialog(this);
 		}
 
-		private void importTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		private void importTaskMenu_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
 				try
 				{
-					TaskDefinition td = taskService.NewTask();
+					TaskDefinition td = TaskService.NewTask();
 					td.XmlText = System.IO.File.ReadAllText(openFileDialog1.FileName);
-					taskEditDialog1.Initialize(taskService, td);
+					taskEditDialog1.Initialize(TaskService, td);
 					taskEditDialog1.TaskName = System.IO.Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 					taskEditDialog1.ShowDialog(this);
 				}
@@ -113,32 +146,9 @@ namespace TestTaskService
 
 		}
 
-		private void runMenu_Click(object sender, EventArgs e)
+		private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (selTask != null)
-				selTask.Run();
-		}
-
-		private void propMenu_Click(object sender, EventArgs e)
-		{
-			if (selTask != null)
-			{
-				taskEditDialog1.Initialize(selTask);
-				taskEditDialog1.ShowDialog(this);
-			}
-		}
-
-		private void deleteMenu_Click(object sender, EventArgs e)
-		{
-			if (selTask != null)
-				taskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
-		}
-
-		private void exportTaskToolStripMenuItem1_Click(object sender, EventArgs e)
-		{
-			if (selTask != null)
-				if (saveFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-					System.IO.File.WriteAllText(saveFileDialog1.FileName, selTask.Xml);
+			RefreshList();
 		}
 	}
 }

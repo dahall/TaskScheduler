@@ -185,7 +185,7 @@ namespace Microsoft.Win32.TaskScheduler
 			try { v1TriggerData.Type = ConvertToV1TriggerType(this.ttype); }
 			catch { }
 
-			this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
+			this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
 		/// <summary>
@@ -316,7 +316,19 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return string.IsNullOrEmpty(v2Trigger.StartBoundary) ? DateTime.MinValue : DateTime.Parse(v2Trigger.StartBoundary);
+				{
+					if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
+					{
+						return DateTime.MinValue;
+					}
+					else
+					{
+						DateTime ret = DateTime.Parse(v2Trigger.StartBoundary);
+						if (v2Trigger.StartBoundary.EndsWith("Z"))
+							ret = ret.ToUniversalTime();
+						return ret;
+					}
+				}
 				return (unboundValues!=null && unboundValues.ContainsKey("StartBoundary")) ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
 			}
 			set
@@ -618,6 +630,11 @@ namespace Microsoft.Win32.TaskScheduler
 			return string.Empty;
 		}
 
+		internal static DateTime AdjustToLocal(DateTime dt)
+		{
+			return dt.Kind == DateTimeKind.Utc ? dt.ToLocalTime() : dt;
+		}
+
 		private string V2BaseTriggerString()
 		{
 			StringBuilder ret = new StringBuilder();
@@ -631,7 +648,7 @@ namespace Microsoft.Win32.TaskScheduler
 				ret.AppendFormat(Properties.Resources.TriggerRepetition, GetBestTimeSpanString(this.Repetition.Interval), sduration);
 			}
 			if (this.EndBoundary != DateTime.MaxValue)
-				ret.AppendFormat(Properties.Resources.TriggerEndBoundary, this.EndBoundary);
+				ret.AppendFormat(Properties.Resources.TriggerEndBoundary, AdjustToLocal(this.EndBoundary));
 			if (ret.Length > 0)
 				ret.Insert(0, Properties.Resources.HyphenSeparator);
 			return ret.ToString();
@@ -852,8 +869,8 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			if (this.DaysInterval == 1)
-				return string.Format(Properties.Resources.TriggerDaily1, this.StartBoundary);
-			return string.Format(Properties.Resources.TriggerDaily2, this.StartBoundary, this.DaysInterval);
+				return string.Format(Properties.Resources.TriggerDaily1, AdjustToLocal(this.StartBoundary));
+			return string.Format(Properties.Resources.TriggerDaily2, AdjustToLocal(this.StartBoundary), this.DaysInterval);
 		}
 	}
 
@@ -1392,7 +1409,7 @@ namespace Microsoft.Win32.TaskScheduler
 			string ww = TaskEnumGlobalizer.GetString(this.WeeksOfMonth);
 			string days = TaskEnumGlobalizer.GetString(this.DaysOfWeek);
 			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
-			return string.Format(Properties.Resources.TriggerMonthlyDOW1, this.StartBoundary, ww, days, months);
+			return string.Format(Properties.Resources.TriggerMonthlyDOW1, AdjustToLocal(this.StartBoundary), ww, days, months);
 		}
 	}
 
@@ -1599,7 +1616,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			string days = string.Join(Properties.Resources.ListSeparator, Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
 			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
-			return string.Format(Properties.Resources.TriggerMonthly1, this.StartBoundary, days, months);
+			return string.Format(Properties.Resources.TriggerMonthly1, AdjustToLocal(this.StartBoundary), days, months);
 		}
 	}
 
@@ -1958,7 +1975,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return string.Format(Properties.Resources.TriggerTime1, this.StartBoundary);
+			return string.Format(Properties.Resources.TriggerTime1, AdjustToLocal(this.StartBoundary));
 		}
 	}
 
@@ -2100,7 +2117,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			string days = TaskEnumGlobalizer.GetString(this.DaysOfWeek);
 			return string.Format(this.WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
-				this.StartBoundary, days, this.WeeksInterval);
+				AdjustToLocal(this.StartBoundary), days, this.WeeksInterval);
 		}
 	}
 }

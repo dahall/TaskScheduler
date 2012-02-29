@@ -253,31 +253,38 @@ namespace Microsoft.Win32.TaskScheduler
 			if (timeFormat != FullDateTimePickerTimeFormat.Hidden)
 				time += this.dateTimePickerTime.Value.TimeOfDay;
 			if (!utcCheckBox.Checked)
-				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
+				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
 			else
 			{
-				switch (utcBehavior)
+				if (this.currentValue.Kind == DateTimeKind.Unspecified)
 				{
-					case FieldConversionUtcCheckBehavior.ConvertLocalToUtc:
-						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
-						break;
-					case FieldConversionUtcCheckBehavior.AssumeUtc:
-						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
-						break;
-					case FieldConversionUtcCheckBehavior.AssumeLocal:
-					default:
-						this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
-						break;
+					switch (utcBehavior)
+					{
+						case FieldConversionUtcCheckBehavior.ConvertLocalToUtc:
+							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
+							break;
+						case FieldConversionUtcCheckBehavior.AssumeUtc:
+							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
+							break;
+						case FieldConversionUtcCheckBehavior.AssumeLocal:
+							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
+							break;
+						default:
+							break;
+					}
 				}
+				else
+					this.currentValue = DateTime.SpecifyKind(time, currentValue.Kind);
 			}
 		}
 
 		private void DataToControls()
 		{
-			this.dateTimePickerDate.Value = this.currentValue.Date;
-			this.dateTimePickerTime.Value = this.currentValue;
+			DateTime displayTime = this.currentValue.Kind == DateTimeKind.Utc ? this.currentValue.ToLocalTime() : this.currentValue;
+			this.dateTimePickerDate.Value = displayTime.Date;
+			this.dateTimePickerTime.Value = displayTime;
 			if (!string.IsNullOrEmpty(utcPrompt))
-				this.utcCheckBox.Checked = this.currentValue.Kind == DateTimeKind.Utc;
+				this.utcCheckBox.Checked = this.currentValue.Kind != DateTimeKind.Unspecified;
 		}
 
 		private void FullDateTimePicker_Load(object sender, EventArgs e)

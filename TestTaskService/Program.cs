@@ -223,17 +223,18 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				TaskDefinition td = ts.NewTask();
+				/*TaskDefinition td = ts.NewTask();
 				td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
 				td.Settings.WakeToRun = true;
 				td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
-
-				DateTime dt = t.NextRunTime;
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);*/
+				Task t = ts.AddTask(taskName,
+					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Unspecified) },
+					new ExecAction("notepad.exe"));
 
 				// Edit task
-				td = DisplayTask(t, true);
+				TaskDefinition td = DisplayTask(t, true);
 
 				// Register then show task again
 				while (td != null)
@@ -259,25 +260,24 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				Task t;/* = ts.AddTask(taskName,
-					new MonthlyDOWTrigger(DaysOfTheWeek.Monday, MonthsOfTheYear.January, WhichWeek.FirstWeek),
-					new ExecAction("notepad.exe", "c:\\test.log", null), "SYSTEM", null, TaskLogonType.ServiceAccount);
+				Task t = ts.AddTask(taskName,
+					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Utc) },
+					new ExecAction("notepad.exe"));
 				System.Threading.Thread.Sleep(1000);
-				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime, t.LastTaskResult);
+				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-				TaskDefinition td = t.Definition;
-				t = null;*/
 
 				// Retrieve the task, add a trigger and save it.
-				t = ts.GetTask(taskName);
+				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
 				TaskDefinition td = t.Definition;
 				td.Triggers.Clear();
-				td.Triggers.Add(new TimeTrigger());
+				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
+				wt.DaysOfWeek = DaysOfTheWeek.Friday;
 
 				ts.RootFolder.RegisterTaskDefinition(taskName, td);
 				System.Threading.Thread.Sleep(1000);
-//				ts.RootFolder.DeleteTask(taskName);
+				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
 			{
