@@ -343,7 +343,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Returns an empty task definition object to be filled in with settings and properties and then registered using the <see cref="TaskFolder.RegisterTaskDefinition(string, TaskDefinition)"/> method.
 		/// </summary>
-		/// <returns><see cref="TaskDefinition"/> instance for setting properties.</returns>
+		/// <returns>A <see cref="TaskDefinition"/> instance for setting properties.</returns>
 		public TaskDefinition NewTask()
 		{
 			if (v2TaskService != null)
@@ -352,6 +352,23 @@ namespace Microsoft.Win32.TaskScheduler
 			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
 			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, ref CTaskGuid, ref ITaskGuid), v1Name);
+		}
+
+		/// <summary>
+		/// Returns a <see cref="TaskDefinition"/> populated with the properties defined in an XML file.
+		/// </summary>
+		/// <param name="xmlFile">The XML file to use as input.</param>
+		/// <returns>A <see cref="TaskDefinition"/> instance.</returns>
+		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
+		public TaskDefinition NewTaskFromFile(string xmlFile)
+		{
+			if (v2TaskService != null)
+			{
+				TaskDefinition td = new TaskDefinition(v2TaskService.NewTask(0));
+				td.XmlText = System.IO.File.ReadAllText(xmlFile);
+				return td;
+			}
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>

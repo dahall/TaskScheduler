@@ -128,8 +128,7 @@ namespace TestTaskService
 			{
 				try
 				{
-					TaskDefinition td = TaskService.NewTask();
-					td.XmlText = System.IO.File.ReadAllText(openFileDialog1.FileName);
+					TaskDefinition td = TaskService.NewTaskFromFile(openFileDialog1.FileName);
 					taskEditDialog1.Initialize(TaskService, td);
 					taskEditDialog1.TaskName = System.IO.Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 					taskEditDialog1.ShowDialog(this);
