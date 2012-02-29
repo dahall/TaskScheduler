@@ -83,7 +83,7 @@ namespace TestTaskService
 		{
 			if (selTask != null)
 				if (saveFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-					System.IO.File.WriteAllText(saveFileDialog1.FileName, selTask.Xml);
+					selTask.Export(saveFileDialog1.FileName);
 		}
 
 		private void propMenu_Click(object sender, EventArgs e)

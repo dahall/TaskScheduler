@@ -753,6 +753,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Exports the task to the specified file in XML.
+		/// </summary>
+		/// <param name="outputFileName">Name of the output file.</param>
+		/// <exception cref="NotV1SupportedException">Exporting to an XML file is only supported under Task Scheduler 2.0.</exception>
+		public void Export(string outputFileName)
+		{
+			if (v2Task != null)
+				System.IO.File.WriteAllText(outputFileName, v2Task.Xml, System.Text.Encoding.Unicode);
+			else
+				throw new NotV1SupportedException();
+		}
+
+		/// <summary>
 		/// Gets the times that the registered task is scheduled to run during a specified time.
 		/// </summary>
 		/// <param name="start">The starting time for the query.</param>

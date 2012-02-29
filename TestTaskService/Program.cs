@@ -230,8 +230,9 @@ namespace TestTaskService
 				td.Actions.Add(new ExecAction("notepad.exe"));
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);*/
 				Task t = ts.AddTask(taskName,
-					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Unspecified) },
+					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Local) },
 					new ExecAction("notepad.exe"));
+				WriteXml(t);
 
 				// Edit task
 				TaskDefinition td = DisplayTask(t, true);
@@ -241,6 +242,7 @@ namespace TestTaskService
 				{
 					//ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
 					t = ts.GetTask(taskName);
+					WriteXml(t);
 					td = DisplayTask(t, true);
 				}
 
@@ -266,7 +268,7 @@ namespace TestTaskService
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-
+				
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
@@ -550,6 +552,12 @@ namespace TestTaskService
 			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = true;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
+		}
+
+		static void WriteXml(Task t)
+		{
+			if (t.TaskService.HighestSupportedVersion > new Version(1, 1))
+				t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
 		}
 	}
 }

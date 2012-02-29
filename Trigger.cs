@@ -223,7 +223,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <remarks>
 		/// <para>Version 1 (1.1 on all systems prior to Vista) of the native library only allows for the Day, Month and Year values of the <see cref="DateTime"/> structure.</para>
-		/// <para>Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString"/> methods
+		/// <para>Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString()"/> methods
 		/// will always show the time translated to local time. The library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor
 		/// library, the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user selects the checkbox, the Kind will
 		/// be changed to Utc and the time adjusted from the value displayed as the local time.
@@ -324,7 +324,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// If the DateTime value Kind is <see cref="DateTimeKind.Local"/> then it will be used as is. If the DateTime value Kind is <see cref="DateTimeKind.Utc"/> then it will be 
 		/// converted to the local time and then used.
 		/// </para>
-		/// <para>Version 2 (1.2 or higher) of the native library only allows for all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString"/> methods
+		/// <para>Version 2 (1.2 or higher) of the native library only allows for all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString()"/> methods
 		/// will always show the time translated to local time. The library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor
 		/// library, the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user selects the checkbox, the Kind will
 		/// be changed to Utc and the time adjusted from the value displayed as the local time.
