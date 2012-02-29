@@ -268,16 +268,17 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime BeginDate
 		{
-			get { return new DateTime(this.BeginYear, this.BeginMonth, this.BeginDay, this.StartHour, this.StartMinute, 0, DateTimeKind.Local); }
+			get { return new DateTime(this.BeginYear, this.BeginMonth, this.BeginDay, this.StartHour, this.StartMinute, 0, DateTimeKind.Unspecified); }
 			set
 			{
 				if (value != DateTime.MinValue)
 				{
-					this.BeginYear = (ushort)value.Year;
-					this.BeginMonth = (ushort)value.Month;
-					this.BeginDay = (ushort)value.Day;
-					this.StartHour = (ushort)value.Hour;
-					this.StartMinute = (ushort)value.Minute;
+					DateTime local = value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value;
+					this.BeginYear = (ushort)local.Year;
+					this.BeginMonth = (ushort)local.Month;
+					this.BeginDay = (ushort)local.Day;
+					this.StartHour = (ushort)local.Hour;
+					this.StartMinute = (ushort)local.Minute;
 				}
 				else
 					this.BeginYear = this.BeginMonth = this.BeginDay = this.StartHour = this.StartMinute = 0;
