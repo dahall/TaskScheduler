@@ -173,7 +173,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Trigger = iTrigger;
 			this.ttype = iTrigger.Type;
 			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
-				this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
+				this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
 		internal Trigger(TaskTriggerType triggerType)
@@ -221,6 +221,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
 		/// </summary>
+		/// <remarks>
+		/// <para>Version 1 (1.1 on all systems prior to Vista) of the native library only allows for the Day, Month and Year values of the <see cref="DateTime"/> structure.</para>
+		/// <para>Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString"/> methods
+		/// will always show the time translated to local time. The library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor
+		/// library, the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user selects the checkbox, the Kind will
+		/// be changed to Utc and the time adjusted from the value displayed as the local time.
+		/// </para>
+		/// </remarks>
 		[DefaultValue(0x2bca2875f4373fffL)]
 		public DateTime EndBoundary
 		{
@@ -311,6 +319,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the date and time when the trigger is activated.
 		/// </summary>
+		/// <remarks>
+		/// <para>Version 1 (1.1 on all systems prior to Vista) of the native library only allows for <see cref="DateTime"/> values where the <see cref="DateTime.Kind"/> is unspecified.
+		/// If the DateTime value Kind is <see cref="DateTimeKind.Local"/> then it will be used as is. If the DateTime value Kind is <see cref="DateTimeKind.Utc"/> then it will be 
+		/// converted to the local time and then used.
+		/// </para>
+		/// <para>Version 2 (1.2 or higher) of the native library only allows for all <see cref="DateTime.Kind"/> values. However, the user interface and <see cref="Trigger.ToString"/> methods
+		/// will always show the time translated to local time. The library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor
+		/// library, the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user selects the checkbox, the Kind will
+		/// be changed to Utc and the time adjusted from the value displayed as the local time.
+		/// </para>
+		/// <para>Under Version 2, when converting the string used in the native library for this value (ITrigger.Startboundary) this library will behave as follows:
+		/// <list type="bullet">
+		///	<item><description>YYYY-MM-DDTHH:MM:SS format uses DateTimeKind.Unspecified and the time specified.</description></item>
+		///	<item><description>YYYY-MM-DDTHH:MM:SSZ format uses DateTimeKind.Utc and the time specified as the GMT time.</description></item>
+		///	<item><description>YYYY-MM-DDTHH:MM:SS±HH:MM format uses DateTimeKind.Local and the time specified in that time zone.</description></item>
+		/// </list>
+		/// </para>
+		/// </remarks>
 		public DateTime StartBoundary
 		{
 			get
