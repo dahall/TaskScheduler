@@ -194,18 +194,21 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				string user = this.TaskDefinition.Principal.UserId;
-				string pwd = null;
-				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+				if (this.Task != null)
+					this.Task.RegisterChanges();
+				else
 				{
-					pwd = InvokeCredentialDialog(user);
-					if (pwd == null)
-						throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
+					string user = this.TaskDefinition.Principal.ToString();
+					string pwd = null;
+					if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+					{
+						pwd = InvokeCredentialDialog(user);
+						if (pwd == null)
+							throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
+					}
+					this.TaskService.RootFolder.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+						user, pwd, this.TaskDefinition.Principal.LogonType);
 				}
-				if (this.TaskDefinition.Principal.LogonType == TaskLogonType.Group)
-					user = this.TaskDefinition.Principal.GroupId;
-				this.TaskService.RootFolder.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-					user, pwd, this.TaskDefinition.Principal.LogonType);
 			}
 			this.DialogResult = DialogResult.OK;
 			Close();
