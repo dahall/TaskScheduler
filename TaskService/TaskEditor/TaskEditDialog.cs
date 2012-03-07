@@ -106,6 +106,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the folder for the task. If control is initialized with a <see cref="Task"/>, this value will be set to the folder of the registered task.
+		/// </summary>
+		/// <value>The task folder name.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string TaskFolder
+		{
+			get { return taskPropertiesControl1.TaskFolder; }
+			set { taskPropertiesControl1.TaskFolder = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the registered task.
 		/// </summary>
 		/// <value>The task name.</value>
@@ -200,13 +211,14 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					string user = this.TaskDefinition.Principal.ToString();
 					string pwd = null;
+					TaskFolder fld = this.TaskService.GetFolder(this.TaskFolder);
 					if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 					{
 						pwd = InvokeCredentialDialog(user);
 						if (pwd == null)
 							throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
 					}
-					this.TaskService.RootFolder.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+					fld.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
 						user, pwd, this.TaskDefinition.Principal.LogonType);
 				}
 			}
