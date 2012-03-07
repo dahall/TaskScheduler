@@ -312,6 +312,7 @@ namespace Microsoft.Win32.TaskScheduler
 				task = value;
 				if (task != null)
 				{
+					TaskFolder = System.IO.Path.GetDirectoryName(task.Path);
 					TaskService = task.TaskService;
 					TaskDefinition = task.Definition;
 				}
@@ -465,6 +466,13 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the folder for the task. Used only if <see cref="Task"/> property has not been set and <see cref="RegisterTaskOnFinish"/> property is true.
+		/// </summary>
+		/// <value>The task folder name.</value>
+		[DefaultValue(null), Category("Behavior"), Description("Folder for registering the task.")]
+		public string TaskFolder { get; set; }
+
+		/// <summary>
 		/// Gets or sets the name of the task.
 		/// </summary>
 		/// <value>The name of the task.</value>
@@ -544,6 +552,7 @@ namespace Microsoft.Win32.TaskScheduler
 					this.TaskDefinition = td;
 				}
 			}
+			this.wizardControl1.RestartPages();
 		}
 
 		/// <summary>
@@ -553,6 +562,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(Task task)
 		{
 			this.Task = task;
+			this.wizardControl1.RestartPages();
 		}
 
 		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -905,6 +915,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void SetupActionList()
 		{
 			actionSelectionList.Items.Clear();
+			actionSelectionList.SelectedIndex = -1;
 
 			if (SetPage(runActionPage, (int)AvailableWizardActions.Execute, (int)AvailableActions))
 				AddActionToSelectionList(AvailableWizardActions.Execute);
@@ -927,6 +938,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void SetupTriggerList()
 		{
 			triggerSelectionList.Items.Clear();
+			triggerSelectionList.SelectedIndex = -1;
 
 			if (SetPage(dailyTriggerPage, (int)AvailableWizardTriggers.Daily, (int)AvailableTriggers))
 				AddTriggerToSelectionList(AvailableWizardTriggers.Daily);
@@ -1175,8 +1187,10 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (RegisterTaskOnFinish)
 			{
-				this.TaskService.RootFolder.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate,
-					td.Principal.ToString(), Password, td.Principal.LogonType);
+				TaskFolder fld = this.TaskService.RootFolder;
+				if (!string.IsNullOrEmpty(this.TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) != 0)
+					fld = this.TaskService.GetFolder(this.TaskFolder);
+				task = fld.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate, td.Principal.ToString(), Password, td.Principal.LogonType);
 			}
 
 			if (myTS)

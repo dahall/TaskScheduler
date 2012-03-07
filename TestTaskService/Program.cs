@@ -169,46 +169,31 @@ namespace TestTaskService
 			try
 			{
 				// Create a new task definition and assign properties
-				const string taskName = "Test";
-				Task t = ts.FindTask(taskName, true);
-				if (t == null)
+				TaskSchedulerWizard wiz = new TaskSchedulerWizard(ts);
+				wiz.RegisterTaskOnFinish = true;
+				wiz.TaskFolder = @"\Microsoft";
+				if (wiz.ShowDialog() == DialogResult.OK)
 				{
-					TaskDefinition td = ts.NewTask();
-					td.RegistrationInfo.Description = "Longer Description Of Task Goes Here";
-					td.Triggers.Add(new DailyTrigger() { StartBoundary = DateTime.Now + TimeSpan.FromHours(1) });
-					td.Actions.Add(new ExecAction("A", "B"));
-					t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				}
-
-				if (t.Definition.Triggers.Count > 1)
-				{
-					TaskEditDialog editorForm = new TaskEditDialog();
-					editorForm.Editable = true;
-					editorForm.RegisterTaskOnAccept = true;
-					editorForm.Initialize(t);
-					editorForm.ShowDialog();
-				}
-				else
-				{
-					TaskSchedulerWizard wiz = new TaskSchedulerWizard();
-					wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
-					wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
-					wiz.AllowEditorOnFinish = true;
-					wiz.EditorOnFinishText = "Show dialog";
-					wiz.TriggerPagePrompt = "When???";
-					wiz.RegisterTaskOnFinish = true;
-					wiz.SummaryRegistrationNotice = "Done when you click Finish";
-					wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
-					wiz.Title = "My Wizard";
-					wiz.Initialize(t);
-					if (wiz.ShowDialog() == DialogResult.OK)
+					Task t = wiz.Task;
+					if (t.Definition.Triggers.Count > 1)
+						new TaskEditDialog(t).ShowDialog();
+					else
 					{
-						ts.RootFolder.RegisterTaskDefinition(wiz.TaskName, wiz.TaskDefinition, TaskCreation.CreateOrUpdate,
-							wiz.TaskDefinition.Principal.ToString(), wiz.Password, wiz.TaskDefinition.Principal.LogonType);
+						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+						wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
+						wiz.AllowEditorOnFinish = true;
+						wiz.EditorOnFinishText = "Show dialog";
+						wiz.TriggerPagePrompt = "When???";
+						wiz.RegisterTaskOnFinish = true;
+						wiz.SummaryRegistrationNotice = "Done when you click Finish";
+						wiz.SummaryFormatString = "Name: {0}\r\nDescription: {1}\r\nTrigger: {2}";
+						wiz.Title = "My Wizard";
+						wiz.Initialize(t);
+						wiz.ShowDialog();
 					}
 				}
 
-				ts.RootFolder.DeleteTask(taskName);
+				ts.RootFolder.DeleteTask(wiz.Task.Path);
 			}
 			catch (Exception ex)
 			{
@@ -268,7 +253,16 @@ namespace TestTaskService
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-				
+
+				using (var taskEditDialog = new TaskEditDialog(t, true, true))
+				{
+					if (taskEditDialog.ShowDialog() == DialogResult.OK)
+					{
+						var t2 = taskEditDialog.Task;
+						output.WriteLine("Triggers: {0}", t2.Definition.Triggers);
+					}
+				}
+
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);

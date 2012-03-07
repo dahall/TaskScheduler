@@ -268,6 +268,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the folder for the task. If control is initialized with a <see cref="Task"/>, this value will be set to the folder of the registered task.
+		/// </summary>
+		/// <value>The task folder name.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string TaskFolder
+		{
+			get { return taskLocationText.Text; }
+			set { taskLocationText.Text = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the registered task.
 		/// </summary>
 		/// <value>The task name.</value>
