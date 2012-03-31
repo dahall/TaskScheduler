@@ -53,20 +53,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="definition">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
-		public TaskSchedulerWizard(TaskService service, TaskDefinition definition = null)
+		/// <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
+		public TaskSchedulerWizard(TaskService service, TaskDefinition definition = null, bool registerOnFinish = false)
 			: this()
 		{
 			Initialize(service, definition);
+			RegisterTaskOnFinish = registerOnFinish;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
 		/// </summary>
 		/// <param name="task">A <see cref="Task"/> instance.</param>
-		public TaskSchedulerWizard(Task task)
+		/// <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
+		public TaskSchedulerWizard(Task task, bool registerOnFinish = false)
 			: this()
 		{
 			Initialize(task);
+			RegisterTaskOnFinish = registerOnFinish;
 		}
 
 		/// <summary>
