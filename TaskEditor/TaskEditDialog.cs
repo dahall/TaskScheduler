@@ -43,6 +43,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskEditDialog"/> class.
+		/// </summary>
+		/// <param name="service">A <see cref="TaskService"/> instance.</param>
+		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		public TaskEditDialog(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true)
+		{
+			InitializeComponent();
+			this.Editable = editable;
+			this.Initialize(service, td);
+			this.RegisterTaskOnAccept = registerOnAccept;
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="TaskEditDialog"/> is editable.
 		/// </summary>
 		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
