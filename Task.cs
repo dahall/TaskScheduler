@@ -639,7 +639,15 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Task != null)
-					return v2Task.NextRunTime;
+				{
+					DateTime ret = v2Task.NextRunTime;
+					if (ret == DateTime.MinValue)
+					{
+						DateTime[] nrts = this.GetRunTimes(DateTime.Now, DateTime.MaxValue, 1);
+						ret = nrts.Length > 0 ? nrts[0] : DateTime.MinValue;
+					}
+					return ret;
+				}
 				return v1Task.GetNextRunTime();
 			}
 		}
