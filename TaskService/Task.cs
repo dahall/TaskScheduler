@@ -589,9 +589,11 @@ namespace Microsoft.Win32.TaskScheduler
 				return v2Task.GetInstances(flags);
 			throw new NotV1SupportedException();
 		}*/
+
 		/// <summary>
 		/// Gets the time the registered task was last run.
 		/// </summary>
+		/// <value>Returns <see cref="DateTime.MinValue"/> if there are no prior run times.</value>
 		public DateTime LastRunTime
 		{
 			get
@@ -634,6 +636,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the time when the registered task is next scheduled to run.
 		/// </summary>
+		/// <value>Returns <see cref="DateTime.MinValue"/> if there are no future run times.</value>
+		/// <remarks>
+		/// Potentially breaking change in release 1.8.2. For Task Scheduler 2.0, the return value prior to 1.8.2 would be Dec 30, 1899
+		/// if there were no future run times. For 1.0, that value would have been <c>DateTime.MinValue</c>. In release 1.8.2 and later, all 
+		/// versions will return <c>DateTime.MinValue</c> if there are no future run times. While this is different from the native 2.0
+		/// library, it was deemed more appropriate to have consistency between the two libraries and with other .NET libraries.
+		/// </remarks>
 		public DateTime NextRunTime
 		{
 			get
@@ -641,12 +650,12 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Task != null)
 				{
 					DateTime ret = v2Task.NextRunTime;
-					if (ret == DateTime.MinValue)
+					if (ret == DateTime.MinValue || ret == v2InvalidDate)
 					{
 						DateTime[] nrts = this.GetRunTimes(DateTime.Now, DateTime.MaxValue, 1);
 						ret = nrts.Length > 0 ? nrts[0] : DateTime.MinValue;
 					}
-					return ret;
+					return ret == v2InvalidDate ? DateTime.MinValue : ret;
 				}
 				return v1Task.GetNextRunTime();
 			}
