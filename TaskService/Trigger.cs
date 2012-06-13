@@ -806,7 +806,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger)
 			: base(iTrigger, V1Interop.TaskTriggerType.RunDaily)
 		{
-			v1TriggerData.Data.daily.DaysInterval = 1;
+			if (v1TriggerData.Data.daily.DaysInterval == 0)
+				v1TriggerData.Data.daily.DaysInterval = 1;
 		}
 
 		internal DailyTrigger(V2Interop.ITrigger iTrigger)
@@ -1251,8 +1252,10 @@ namespace Microsoft.Win32.TaskScheduler
 		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger)
 			: base(iTrigger, V1Interop.TaskTriggerType.RunMonthlyDOW)
 		{
-			v1TriggerData.Data.monthlyDOW.Months = MonthsOfTheYear.AllMonths;
-			v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = DaysOfTheWeek.Sunday;
+			if (v1TriggerData.Data.monthlyDOW.Months == 0)
+				v1TriggerData.Data.monthlyDOW.Months = MonthsOfTheYear.AllMonths;
+			if (v1TriggerData.Data.monthlyDOW.DaysOfTheWeek == 0)
+				v1TriggerData.Data.monthlyDOW.DaysOfTheWeek = DaysOfTheWeek.Sunday;
 		}
 
 		internal MonthlyDOWTrigger(V2Interop.ITrigger iTrigger)
@@ -1460,8 +1463,10 @@ namespace Microsoft.Win32.TaskScheduler
 		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger)
 			: base(iTrigger, V1Interop.TaskTriggerType.RunMonthly)
 		{
-			v1TriggerData.Data.monthlyDate.Months = MonthsOfTheYear.AllMonths;
-			v1TriggerData.Data.monthlyDate.Days = 1;
+			if (v1TriggerData.Data.monthlyDate.Months == 0)
+				v1TriggerData.Data.monthlyDate.Months = MonthsOfTheYear.AllMonths;
+			if (v1TriggerData.Data.monthlyDate.Days == 0)
+				v1TriggerData.Data.monthlyDate.Days = 1;
 		}
 
 		internal MonthlyTrigger(V2Interop.ITrigger iTrigger)
@@ -2028,8 +2033,10 @@ namespace Microsoft.Win32.TaskScheduler
 		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger)
 			: base(iTrigger, V1Interop.TaskTriggerType.RunWeekly)
 		{
-			v1TriggerData.Data.weekly.DaysOfTheWeek = DaysOfTheWeek.Sunday;
-			v1TriggerData.Data.weekly.WeeksInterval = 1;
+			if (v1TriggerData.Data.weekly.DaysOfTheWeek == 0)
+				v1TriggerData.Data.weekly.DaysOfTheWeek = DaysOfTheWeek.Sunday;
+			if (v1TriggerData.Data.weekly.WeeksInterval == 0)
+				v1TriggerData.Data.weekly.WeeksInterval = 1;
 		}
 
 		internal WeeklyTrigger(V2Interop.ITrigger iTrigger)
