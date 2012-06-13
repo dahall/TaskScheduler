@@ -805,12 +805,14 @@ namespace Microsoft.Win32.TaskScheduler
 				count = count1;
 			}
 			DateTime[] ret = new DateTime[count];
+			int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
 			for (int i = 0; i < count; i++)
 			{
-				st = new IntPtr(runTimes.ToInt64() + (i * Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime))));
+				st = new IntPtr(runTimes.ToInt64() + (i * stSize));
 				ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
 			}
 			Marshal.FreeCoTaskMem(runTimes);
+			System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes ({0}): Returned {1} items from {2} to {3}.", v2Task != null ? "V2" : "V1", count, stStart, stEnd));
 			return ret;
 		}
 

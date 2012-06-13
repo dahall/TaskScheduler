@@ -388,6 +388,11 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		{
 			return base.GetHashCode();
 		}
+
+		public override string ToString()
+		{
+			return ((DateTime)this).ToString();
+		}
 	}
 
 	#endregion
