@@ -15,6 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public partial class TaskRunTimesControl : UserControl, ISupportInitialize
 	{
 		private bool initializing = false;
+		private bool isTemp = false;
 		private Task task;
 
 		/// <summary>
@@ -62,7 +63,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				task = value;
 				this.Text = task == null ? null : string.Format(EditorProperties.Resources.TaskRunTimesDialogTitle, value.Name);
-				Fetch();
+				isTemp = task == null ? false : task.Name.StartsWith(TaskPropertiesControl.runTimesTempTaskPrefix) && task.Name.Length == (TaskPropertiesControl.runTimesTempTaskPrefix.Length + Guid.NewGuid().ToString().Length);
+				if (!initializing)
+					Fetch();
 			}
 		}
 
@@ -80,6 +83,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void EndInit()
 		{
 			initializing = false;
+			Fetch();
 		}
 
 		/// <summary>
@@ -107,7 +111,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void Fetch()
 		{
-			listBox1.DataSource = task == null ? null : task.GetRunTimes(this.StartDate, this.EndDate);
+			if (task == null)
+				listBox1.DataSource = null;
+			else
+			{
+				if (isTemp) task.Enabled = true;
+				listBox1.DataSource = task.GetRunTimes(this.StartDate, this.EndDate);
+				if (isTemp) task.Enabled = false;
+			}
 		}
 
 		internal bool ShouldSerializeEndDate()

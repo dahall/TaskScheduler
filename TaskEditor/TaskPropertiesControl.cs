@@ -12,6 +12,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public partial class TaskPropertiesControl : UserControl
 	{
+		internal const string runTimesTempTaskPrefix = "TempTask-";
+
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
@@ -610,7 +612,7 @@ namespace Microsoft.Win32.TaskScheduler
 			try
 			{
 				// Create a temporary task using current definition
-				runTimesTaskName = "TempTask-" + Guid.NewGuid().ToString();
+				runTimesTaskName = runTimesTempTaskPrefix + Guid.NewGuid().ToString();
 				TaskDefinition ttd = service.NewTask();
 				//this.TaskDefinition.Principal.CopyTo(ttd.Principal);
 				ttd.Settings.Enabled = false;
@@ -623,7 +625,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					taskRunTimesControl1.Show();
 					tempTask.Enabled = true;
-					taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now + TimeSpan.FromDays(365));
+					taskRunTimesControl1.Initialize(tempTask, DateTime.Now, DateTime.Now.AddYears(1));
 					tempTask.Enabled = false;
 				}
 			}
@@ -633,16 +635,16 @@ namespace Microsoft.Win32.TaskScheduler
 				runTimesErrorLabel.Text = showErrors ? ex.ToString() : null;
 				taskRunTimesControl1.Hide();
 			}
-			finally
-			{
-				if (tempTask != null)
-					service.RootFolder.DeleteTask(runTimesTaskName);
-				runTimesTaskName = null;
-			}
 		}
 
 		private void runTimesTab_Leave(object sender, EventArgs e)
 		{
+			if (taskRunTimesControl1.Task != null)
+			{
+				service.RootFolder.DeleteTask(runTimesTaskName);
+				taskRunTimesControl1.Task = null;
+			}
+			runTimesTaskName = null;
 		}
 
 		private void SetActionButtonState()
