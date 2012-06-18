@@ -224,7 +224,6 @@ namespace Microsoft.Win32.TaskScheduler
 			CREDUI_INFO info = new CREDUI_INFO(parentWindowHandle, this.Caption, this.Message, this.Banner);
 			try
 			{
-
 				StringBuilder userName = new StringBuilder(this.UserName, maxStringLength);
 				StringBuilder password = new StringBuilder(maxStringLength);
 				bool save = this.SaveChecked;
@@ -235,7 +234,7 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (ret)
 				{
 					case CredUIReturnCodes.NO_ERROR:
-						if (this.ValidatePassword && !IsValidPassword(this.UserName, password.ToString()))
+						if (this.ValidatePassword && !IsValidPassword(userName.ToString(), password.ToString()))
 							return false;
 						/*if (save)
 						{
