@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Collections;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -106,6 +106,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the type of the action.
 		/// </summary>
 		/// <value>The type of the action.</value>
+		[XmlIgnore]
 		public TaskActionType ActionType
 		{
 			get
@@ -125,6 +126,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the action.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlAttribute(AttributeName = "id", DataType = "ID")]
 		public virtual string Id
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null) : this.iAction.Id; }
@@ -197,6 +200,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class ComHandlerAction : Action
 	{
 		/// <summary>
@@ -234,6 +238,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets additional data that is associated with the handler.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Data
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Data") ? (string)unboundValues["Data"] : null) : ((V2Interop.IComHandlerAction)iAction).Data; }
@@ -267,6 +272,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that executes a command-line operation.
 	/// </summary>
+	[XmlRoot("Exec", Namespace = "http://schemas.microsoft.com/windows/2004/02/mit/task", IsNullable = false)]
 	public sealed class ExecAction : Action
 	{
 		private V1Interop.ITask v1Task;
@@ -274,9 +280,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
 		/// </summary>
-		public ExecAction()
-		{
-		}
+		public ExecAction() { }
 
 		/// <summary>
 		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
@@ -327,6 +331,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the action.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlAttribute(AttributeName = "id", DataType = "ID")]
+		[XmlIgnore]
 		public override string Id
 		{
 			get
@@ -346,6 +353,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the path to an executable file.
 		/// </summary>
+		[XmlElement("Command")]
 		public string Path
 		{
 			get
@@ -370,6 +378,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the arguments associated with the command-line operation.
 		/// </summary>
+		[DefaultValue("")]
 		public string Arguments
 		{
 			get
@@ -394,6 +403,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the directory that contains either the executable file or the files that are used by the executable file.
 		/// </summary>
+		[DefaultValue("")]
 		public string WorkingDirectory
 		{
 			get
@@ -443,6 +453,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that sends an e-mail.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class EmailAction : Action
 	{
 		/// <summary>
@@ -493,6 +504,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the subject of the e-mail.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Subject
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Subject") ? (string)unboundValues["Subject"] : null) : ((V2Interop.IEmailAction)iAction).Subject; }
@@ -502,6 +514,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the e-mail address or addresses that you want to send the e-mail to.
 		/// </summary>
+		[DefaultValue(null)]
 		public string To
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("To") ? (string)unboundValues["To"] : null) : ((V2Interop.IEmailAction)iAction).To; }
@@ -511,6 +524,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the e-mail address or addresses that you want to Cc in the e-mail.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Cc
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Cc") ? (string)unboundValues["Cc"] : null) : ((V2Interop.IEmailAction)iAction).Cc; }
@@ -520,6 +534,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the e-mail address or addresses that you want to Bcc in the e-mail.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Bcc
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Bcc") ? (string)unboundValues["Bcc"] : null) : ((V2Interop.IEmailAction)iAction).Bcc; }
@@ -529,6 +544,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the e-mail address that you want to reply to.
 		/// </summary>
+		[DefaultValue(null)]
 		public string ReplyTo
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("ReplyTo") ? (string)unboundValues["ReplyTo"] : null) : ((V2Interop.IEmailAction)iAction).ReplyTo; }
@@ -538,6 +554,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the e-mail address that you want to send the e-mail from.
 		/// </summary>
+		[DefaultValue(null)]
 		public string From
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("From") ? (string)unboundValues["From"] : null) : ((V2Interop.IEmailAction)iAction).From; }
@@ -567,6 +584,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the body of the e-mail that contains the e-mail message.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Body
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Body") ? (string)unboundValues["Body"] : null) : ((V2Interop.IEmailAction)iAction).Body; }
@@ -619,6 +637,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that shows a message box when a task is activated.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class ShowMessageAction : Action
 	{
 		/// <summary>
@@ -656,6 +675,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the message text that is displayed in the body of the message box.
 		/// </summary>
+		[XmlElement("Body")]
 		public string MessageBody
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("MessageBody") ? (string)unboundValues["MessageBody"] : null) : ((V2Interop.IShowMessageAction)iAction).MessageBody; }

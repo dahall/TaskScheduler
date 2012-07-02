@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -8,7 +9,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Collection that contains the actions that are performed by the task.
 	/// </summary>
 	/// <remarks>A Task Scheduler 1.0 task can only contain a single <see cref="ExecAction"/>.</remarks>
-	public sealed class ActionCollection : IEnumerable<Action>, IDisposable
+	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class ActionCollection : IEnumerable<Action>, IDisposable, IXmlSerializable
 	{
 		private V1Interop.ITask v1Task;
 		private V2Interop.ITaskDefinition v2Def;
@@ -151,6 +153,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the principal for the task.
 		/// </summary>
+		[System.Xml.Serialization.XmlAttribute(AttributeName = "Context", DataType = "IDREF")]
 		public string Context
 		{
 			get
@@ -190,14 +193,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return v2Coll.XmlText;
-				throw new NotV1SupportedException();
+				return XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
 				if (v2Coll != null)
 					v2Coll.XmlText = value;
 				else
-					throw new NotV1SupportedException();
+					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
 			}
 		}
 
@@ -278,6 +281,40 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Enum != null)
 					v2Enum.Reset();
 				v1Pos = -1;
+			}
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Actions", TaskDefinition.tns);
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				Action newAction = null;
+				switch (reader.LocalName)
+				{
+					case "Exec":
+						newAction = this.AddNew(TaskActionType.Execute);
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+				if (newAction != null)
+					XmlSerializationHelper.ReadObject(reader, newAction);
+			}
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			if (this.Count > 0)
+			{
+				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
 			}
 		}
 	}

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -191,7 +192,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates whether the trigger is enabled.
 		/// </summary>
-		[DefaultValue(true)]
 		public bool Enabled
 		{
 			get
@@ -229,7 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// be changed to Utc and the time adjusted from the value displayed as the local time.
 		/// </para>
 		/// </remarks>
-		[DefaultValue(0x2bca2875f4373fffL)]
+		[DefaultValue(typeof(DateTime), "9999-12-31T23:59:59.9999999")]
 		public DateTime EndBoundary
 		{
 			get
@@ -256,7 +256,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task Scheduler 1.0.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan ExecutionTimeLimit
 		{
 			get
@@ -282,6 +283,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.
 		/// </summary>
 		[DefaultValue(null)]
+		[XmlIgnore]
 		public string Id
 		{
 			get
@@ -376,6 +378,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the type of the trigger.
 		/// </summary>
 		/// <value>The <see cref="TaskTriggerType"/> of the trigger.</value>
+		[XmlIgnore]
 		public TaskTriggerType TriggerType
 		{
 			get { return ttype; }
@@ -513,7 +516,6 @@ namespace Microsoft.Win32.TaskScheduler
 				default:
 					break;
 			}
-			//if (t != null) t.ttype = triggerType;
 			return t;
 		}
 
@@ -756,7 +758,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan Delay
 		{
 			get
@@ -788,10 +791,103 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	internal static class CalendarTrigger
+	{
+		internal delegate void CalendarXmlReader(System.Xml.XmlReader reader);
+		internal delegate void CalendarXmlWriter(System.Xml.XmlWriter writer);
+
+		internal static Trigger GetTriggerFromXml(System.Xml.XmlReader reader)
+		{
+			Trigger t = null;
+			string xml = reader.ReadOuterXml();
+			var match = System.Text.RegularExpressions.Regex.Match(xml, @"\<(?<T>ScheduleBy.+)\>");
+			if (match.Success && match.Groups.Count == 2)
+			{
+				switch (match.Groups[1].Value)
+				{
+					case "ScheduleByDay":
+						t = new DailyTrigger();
+						break;
+					case "ScheduleByWeek":
+						t = new WeeklyTrigger();
+						break;
+					case "ScheduleByMonth":
+						t = new MonthlyTrigger();
+						break;
+					case "ScheduleByMonthDayOfWeek":
+						t = new MonthlyDOWTrigger();
+						break;
+					default:
+						break;
+				}
+
+				if (t != null)
+				{
+					using (System.IO.StringReader ms = new System.IO.StringReader(xml))
+					{
+						using (System.Xml.XmlReader iReader = System.Xml.XmlReader.Create(ms))
+						{
+							((IXmlSerializable)t).ReadXml(iReader);
+						}
+					}
+				}
+			}
+			return t;
+		}
+
+		internal static void ReadXml(System.Xml.XmlReader reader, Trigger t, CalendarXmlReader calReaderProc)
+		{
+			reader.ReadStartElement("CalendarTrigger", TaskDefinition.tns);
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "Enabled":
+						t.Enabled = reader.ReadElementContentAsBoolean();
+						break;
+					case "EndBoundary":
+						t.EndBoundary = reader.ReadElementContentAsDateTime();
+						break;
+					case "RandomDelay":
+						((ITriggerDelay)t).Delay = Task.StringToTimeSpan(reader.ReadElementContentAsString());
+						break;
+					case "StartBoundary":
+						t.StartBoundary = reader.ReadElementContentAsDateTime();
+						break;
+					case "Repetition":
+						XmlSerializationHelper.ReadObject(reader, t.Repetition);
+						break;
+					case "ScheduleByDay":
+					case "ScheduleByWeek":
+					case "ScheduleByMonth":
+					case "ScheduleByMonthDayOfWeek":
+						calReaderProc(reader);
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		public static void WriteXml(System.Xml.XmlWriter writer, Trigger t, CalendarXmlWriter calWriterProc)
+		{
+			if (!t.Enabled)
+				writer.WriteElementString("Enabled", System.Xml.XmlConvert.ToString(t.Enabled));
+			if (t.EndBoundary != DateTime.MaxValue)
+				writer.WriteElementString("EndBoundary", System.Xml.XmlConvert.ToString(t.EndBoundary, System.Xml.XmlDateTimeSerializationMode.RoundtripKind));
+			XmlSerializationHelper.WriteObject(writer, t.Repetition);
+			writer.WriteElementString("StartBoundary", System.Xml.XmlConvert.ToString(t.StartBoundary, System.Xml.XmlDateTimeSerializationMode.RoundtripKind));
+			calWriterProc(writer);
+		}
+	}
+
 	/// <summary>
 	/// Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
 	/// </summary>
-	public sealed class DailyTrigger : Trigger, ITriggerDelay
+	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class DailyTrigger : Trigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="DailyTrigger"/>.
@@ -845,7 +941,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
 			get
@@ -900,11 +997,46 @@ namespace Microsoft.Win32.TaskScheduler
 				return string.Format(Properties.Resources.TriggerDaily1, AdjustToLocal(this.StartBoundary));
 			return string.Format(Properties.Resources.TriggerDaily2, AdjustToLocal(this.StartBoundary), this.DaysInterval);
 		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void ReadMyXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("ScheduleByDay");
+			if (reader.MoveToContent() == System.Xml.XmlNodeType.Element && reader.LocalName == "DaysInterval")
+				this.DaysInterval = (short)reader.ReadElementContentAs(typeof(short), null);
+			reader.Read();
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+		}
+
+		void WriteMyXml(System.Xml.XmlWriter writer)
+		{
+			if (this.DaysInterval != 1)
+			{
+				writer.WriteStartElement("ScheduleByDay");
+				writer.WriteElementString("DaysInterval", this.DaysInterval.ToString());
+				writer.WriteEndElement();
+			}
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+		}
 	}
 
 	/// <summary>
 	/// Represents a trigger that starts a task when a system event occurs. Not available on Task Scheduler 1.0.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class EventTrigger : Trigger, ITriggerDelay
 	{
 		private NamedValueCollection nvc = null;
@@ -933,7 +1065,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Delay
 		{
 			get
@@ -1168,7 +1300,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan Delay
 		{
 			get
@@ -1198,6 +1331,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <remarks>If you want a task to be triggered when any member of a group logs on to the computer rather than when a specific user logs on, then do not assign a value to the LogonTrigger.UserId property. Instead, create a logon trigger with an empty LogonTrigger.UserId property and assign a value to the principal for the task using the Principal.GroupId property.</remarks>
 		[DefaultValue((string)null)]
+		[XmlIgnore]
 		public string UserId
 		{
 			get
@@ -1233,7 +1367,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May through October.
 	/// </summary>
-	public sealed class MonthlyDOWTrigger : Trigger, ITriggerDelay
+	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class MonthlyDOWTrigger : Trigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
@@ -1320,7 +1455,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
 			get
@@ -1346,6 +1482,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a Boolean value that indicates that the task runs on the last week of the month.
 		/// </summary>
 		[DefaultValue(false)]
+		[XmlIgnore]
 		public bool RunOnLastWeekOfMonth
 		{
 			get
@@ -1395,7 +1532,14 @@ namespace Microsoft.Win32.TaskScheduler
 					((V2Interop.IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
 				else
 				{
-					v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
+					try
+					{
+						v1TriggerData.Data.monthlyDOW.V2WhichWeek = value;
+					}
+					catch (NotV1SupportedException)
+					{
+						if (v1Trigger != null) throw;
+					}
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -1431,6 +1575,92 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Reads the subclass XML for V1 streams.
+		/// </summary>
+		/// <param name="reader">The reader.</param>
+		void ReadMyXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("ScheduleByMonthDayOfWeek");
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "Weeks":
+						reader.Read();
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							if (reader.LocalName == "Week")
+							{
+								string wk = reader.ReadElementContentAsString();
+								if (wk == "Last")
+									this.WeeksOfMonth = WhichWeek.LastWeek;
+								else
+								{
+									switch (Int32.Parse(wk))
+									{
+										case 1:
+											this.WeeksOfMonth = WhichWeek.FirstWeek;
+											break;
+										case 2:
+											this.WeeksOfMonth = WhichWeek.SecondWeek;
+											break;
+										case 3:
+											this.WeeksOfMonth = WhichWeek.ThirdWeek;
+											break;
+										case 4:
+											this.WeeksOfMonth = WhichWeek.FourthWeek;
+											break;
+										default:
+											throw new System.Xml.XmlException("Week element must contain a 1-4 or Last as content.");
+									}
+								}
+							}
+						}
+						reader.ReadEndElement();
+						break;
+					case "DaysOfWeek":
+						reader.Read();
+						this.DaysOfWeek = 0;
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							try
+							{
+								this.DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
+							}
+							catch
+							{
+								throw new System.Xml.XmlException("Invalid days of the week element.");
+							}
+							reader.Read();
+						}
+						reader.ReadEndElement();
+						break;
+					case "Months":
+						reader.Read();
+						this.MonthsOfYear = 0;
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							try
+							{
+								this.MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
+							}
+							catch
+							{
+								throw new System.Xml.XmlException("Invalid months of the year element.");
+							}
+							reader.Read();
+						}
+						reader.ReadEndElement();
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
@@ -1441,12 +1671,64 @@ namespace Microsoft.Win32.TaskScheduler
 			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
 			return string.Format(Properties.Resources.TriggerMonthlyDOW1, AdjustToLocal(this.StartBoundary), ww, days, months);
 		}
+
+		/// <summary>
+		/// Writes the subclass XML for V1 streams.
+		/// </summary>
+		/// <param name="writer">The writer.</param>
+		void WriteMyXml(System.Xml.XmlWriter writer)
+		{
+			writer.WriteStartElement("ScheduleByMonthDayOfWeek");
+
+			writer.WriteStartElement("Weeks");
+			if ((this.WeeksOfMonth & WhichWeek.FirstWeek) == WhichWeek.FirstWeek)
+				writer.WriteElementString("Week", "1");
+			if ((this.WeeksOfMonth & WhichWeek.SecondWeek) == WhichWeek.SecondWeek)
+				writer.WriteElementString("Week", "2");
+			if ((this.WeeksOfMonth & WhichWeek.ThirdWeek) == WhichWeek.ThirdWeek)
+				writer.WriteElementString("Week", "3");
+			if ((this.WeeksOfMonth & WhichWeek.FourthWeek) == WhichWeek.FourthWeek)
+				writer.WriteElementString("Week", "4");
+			if ((this.WeeksOfMonth & WhichWeek.LastWeek) == WhichWeek.LastWeek)
+				writer.WriteElementString("Week", "Last");
+			writer.WriteEndElement();
+
+			writer.WriteStartElement("DaysOfWeek");
+			foreach (DaysOfTheWeek e in Enum.GetValues(typeof(DaysOfTheWeek)))
+				if (e != DaysOfTheWeek.AllDays && (this.DaysOfWeek & e) == e)
+					writer.WriteElementString(e.ToString(), null);
+			writer.WriteEndElement();
+
+			writer.WriteStartElement("Months");
+			foreach (MonthsOfTheYear e in Enum.GetValues(typeof(MonthsOfTheYear)))
+				if (e != MonthsOfTheYear.AllMonths && (this.MonthsOfYear & e) == e)
+					writer.WriteElementString(e.ToString(), null);
+			writer.WriteEndElement();
+
+			writer.WriteEndElement();
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+		}
 	}
 
 	/// <summary>
 	/// Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
 	/// </summary>
-	public sealed class MonthlyTrigger : Trigger, ITriggerDelay
+	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class MonthlyTrigger : Trigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
@@ -1531,7 +1813,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
 			get
@@ -1557,6 +1840,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a Boolean value that indicates that the task runs on the last day of the month.
 		/// </summary>
 		[DefaultValue(false)]
+		[XmlIgnore]
 		public bool RunOnLastDayOfMonth
 		{
 			get
@@ -1643,6 +1927,61 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Reads the subclass XML for V1 streams.
+		/// </summary>
+		/// <param name="reader">The reader.</param>
+		void ReadMyXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("ScheduleByMonth");
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "DaysOfMonth":
+						reader.Read();
+						List<int> days = new List<int>();
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							if (reader.LocalName == "Day")
+							{
+								string sday = reader.ReadElementContentAsString();
+								if (!sday.Equals("Last", StringComparison.InvariantCultureIgnoreCase))
+								{
+									int day = Int32.Parse(sday);
+									if (day >= 1 && day <= 31)
+										days.Add(day);
+								}
+							}
+						}
+						this.DaysOfMonth = days.ToArray();
+						reader.ReadEndElement();
+						break;
+					case "Months":
+						reader.Read();
+						this.MonthsOfYear = 0;
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							try
+							{
+								this.MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
+							}
+							catch
+							{
+								throw new System.Xml.XmlException("Invalid months of the year element.");
+							}
+							reader.Read();
+						}
+						reader.ReadEndElement();
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
@@ -1652,11 +1991,45 @@ namespace Microsoft.Win32.TaskScheduler
 			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
 			return string.Format(Properties.Resources.TriggerMonthly1, AdjustToLocal(this.StartBoundary), days, months);
 		}
+
+		void WriteMyXml(System.Xml.XmlWriter writer)
+		{
+			writer.WriteStartElement("ScheduleByMonth");
+
+			writer.WriteStartElement("DaysOfMonth");
+			foreach (var day in this.DaysOfMonth)
+				writer.WriteElementString("Day", day.ToString());
+			writer.WriteEndElement();
+
+			writer.WriteStartElement("Months");
+			foreach (MonthsOfTheYear e in Enum.GetValues(typeof(MonthsOfTheYear)))
+				if (e != MonthsOfTheYear.AllMonths && (this.MonthsOfYear & e) == e)
+					writer.WriteElementString(e.ToString(), null);
+			writer.WriteEndElement();
+
+			writer.WriteEndElement();
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+		}
 	}
 
 	/// <summary>
 	/// Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class RegistrationTrigger : Trigger, ITriggerDelay
 	{
 		/// <summary>
@@ -1675,7 +2048,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan Delay
 		{
 			get
@@ -1710,7 +2084,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
 	/// </summary>
-	public sealed class RepetitionPattern : IDisposable
+	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable
 	{
 		private Trigger pTrigger;
 		private V2Interop.IRepetitionPattern v2Pattern = null;
@@ -1718,27 +2093,29 @@ namespace Microsoft.Win32.TaskScheduler
 		internal RepetitionPattern(Trigger parent)
 		{
 			pTrigger = parent;
-			if (pTrigger.v2Trigger != null)
+			if (pTrigger != null && pTrigger.v2Trigger != null)
 				v2Pattern = pTrigger.v2Trigger.Repetition;
 		}
 
 		/// <summary>
 		/// Gets or sets how long the pattern is repeated.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Duration
 		{
 			get
 			{
 				if (v2Pattern != null)
 					return Task.StringToTimeSpan(v2Pattern.Duration);
-				return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
+				if (pTrigger != null)
+					return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
+				return TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Pattern != null)
 					v2Pattern.Duration = Task.TimeSpanToString(value);
-				else
+				else if (pTrigger != null)
 				{
 					pTrigger.v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
 					Bind();
@@ -1749,20 +2126,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time between each restart of the task.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Interval
 		{
 			get
 			{
 				if (v2Pattern != null)
 					return Task.StringToTimeSpan(v2Pattern.Interval);
-				return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
+				if (pTrigger != null)
+					return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
+				return TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Pattern != null)
 					v2Pattern.Interval = Task.TimeSpanToString(value);
-				else
+				else if (pTrigger != null)
 				{
 					pTrigger.v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
 					Bind();
@@ -1773,20 +2152,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
 		/// </summary>
-		[DefaultValue(false)]
 		public bool StopAtDurationEnd
 		{
 			get
 			{
 				if (v2Pattern != null)
 					return v2Pattern.StopAtDurationEnd;
-				return (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
+				if (pTrigger != null)
+					return (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
+				return false;
 			}
 			set
 			{
 				if (v2Pattern != null)
 					v2Pattern.StopAtDurationEnd = value;
-				else
+				else if (pTrigger != null)
 				{
 					if (value)
 						pTrigger.v1TriggerData.Flags |= V1Interop.TaskTriggerFlags.KillAtDurationEnd;
@@ -1808,7 +2188,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal void Bind()
 		{
 			if (pTrigger.v1Trigger != null)
-				pTrigger.v1Trigger.SetTrigger(ref pTrigger.v1TriggerData);
+				pTrigger.SetV1TriggerData();
 			else if (pTrigger.v2Trigger != null)
 			{
 				if (pTrigger.v1TriggerData.MinutesInterval != 0)
@@ -1818,11 +2198,39 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Pattern.StopAtDurationEnd = (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 			}
 		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		bool ReadXmlConverter(System.Reflection.PropertyInfo pi, Object obj, ref Object value)
+		{
+			if (pi.Name == "Interval")
+			{
+				if (value is TimeSpan && !((TimeSpan)value).Equals(TimeSpan.Zero) && this.Duration <= (TimeSpan)value)
+					this.Duration = ((TimeSpan)value).Add(TimeSpan.FromMinutes(1));
+			}
+			return false;
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Repetition", TaskDefinition.tns);
+			XmlSerializationHelper.ReadObjectProperties(reader, this, this.ReadXmlConverter);
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			XmlSerializationHelper.WriteObjectProperties(writer, this);
+		}
 	}
 
 	/// <summary>
 	/// Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class SessionStateChangeTrigger : Trigger, ITriggerDelay, ITriggerUserId
 	{
 		/// <summary>
@@ -1850,7 +2258,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Delay
 		{
 			get
@@ -1871,7 +2279,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the kind of Terminal Server session change that would trigger a task launch.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(1)]
 		public TaskSessionStateChangeType StateChange
 		{
 			get
@@ -1971,7 +2379,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
 			get
@@ -2016,7 +2425,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
 	/// </summary>
-	public sealed class WeeklyTrigger : Trigger, ITriggerDelay
+	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class WeeklyTrigger : Trigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.
@@ -2074,7 +2484,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
 			get
@@ -2099,7 +2510,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the interval between the weeks in the schedule.
 		/// </summary>
-		[DefaultValue(0)]
+		[DefaultValue(1)]
 		public short WeeksInterval
 		{
 			get
@@ -2148,6 +2559,45 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Reads the subclass XML for V1 streams.
+		/// </summary>
+		/// <param name="reader">The reader.</param>
+		void ReadMyXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("ScheduleByWeek");
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "WeeksInterval":
+						this.WeeksInterval = (short)reader.ReadElementContentAsInt();
+						break;
+					case "DaysOfWeek":
+						reader.Read();
+						this.DaysOfWeek = 0;
+						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+						{
+							try
+							{
+								this.DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
+							}
+							catch
+							{
+								throw new System.Xml.XmlException("Invalid days of the week element.");
+							}
+							reader.Read();
+						}
+						reader.ReadEndElement();
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
@@ -2156,6 +2606,41 @@ namespace Microsoft.Win32.TaskScheduler
 			string days = TaskEnumGlobalizer.GetString(this.DaysOfWeek);
 			return string.Format(this.WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
 				AdjustToLocal(this.StartBoundary), days, this.WeeksInterval);
+		}
+
+		/// <summary>
+		/// Writes the subclass XML for V1 streams.
+		/// </summary>
+		/// <param name="writer">The writer.</param>
+		void WriteMyXml(System.Xml.XmlWriter writer)
+		{
+			writer.WriteStartElement("ScheduleByWeek");
+
+			if (this.WeeksInterval != 1)
+				writer.WriteElementString("WeeksInterval", this.WeeksInterval.ToString());
+
+			writer.WriteStartElement("DaysOfWeek");
+			foreach (DaysOfTheWeek e in Enum.GetValues(typeof(DaysOfTheWeek)))
+				if (e != DaysOfTheWeek.AllDays && (this.DaysOfWeek & e) == e)
+					writer.WriteElementString(e.ToString(), null);
+			writer.WriteEndElement();
+
+			writer.WriteEndElement();
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
 		}
 	}
 }
