@@ -35,6 +35,7 @@
 			GroupControls.RadioButtonListItem radioButtonListItem5 = new GroupControls.RadioButtonListItem();
 			GroupControls.RadioButtonListItem radioButtonListItem6 = new GroupControls.RadioButtonListItem();
 			GroupControls.RadioButtonListItem radioButtonListItem7 = new GroupControls.RadioButtonListItem();
+			GroupControls.RadioButtonListItem radioButtonListItem8 = new GroupControls.RadioButtonListItem();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.radioButtonList1 = new GroupControls.RadioButtonList();
 			this.closeButton = new System.Windows.Forms.Button();
@@ -73,6 +74,7 @@
 			radioButtonListItem5.Text = "Wizard test";
 			radioButtonListItem6.Text = "MMC test";
 			radioButtonListItem7.Text = "Find Task";
+			radioButtonListItem8.Text = "Output XML";
 			this.radioButtonList1.Items.Add(radioButtonListItem1);
 			this.radioButtonList1.Items.Add(radioButtonListItem2);
 			this.radioButtonList1.Items.Add(radioButtonListItem3);
@@ -80,6 +82,7 @@
 			this.radioButtonList1.Items.Add(radioButtonListItem5);
 			this.radioButtonList1.Items.Add(radioButtonListItem6);
 			this.radioButtonList1.Items.Add(radioButtonListItem7);
+			this.radioButtonList1.Items.Add(radioButtonListItem8);
 			this.radioButtonList1.Location = new System.Drawing.Point(13, 13);
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 4;
@@ -142,14 +145,9 @@
 			// 
 			// taskServiceConnectDialog1
 			// 
-			this.taskServiceConnectDialog1.AutoSize = true;
 			this.taskServiceConnectDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskServiceConnectDialog1.ClientSize = new System.Drawing.Size(444, 181);
-			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskServiceConnectDialog1.Name = "TSConnectDlg";
 			this.taskServiceConnectDialog1.TaskService = this.ts;
-			this.taskServiceConnectDialog1.Text = "Select Computer";
-			this.taskServiceConnectDialog1.Visible = false;
 			// 
 			// Main
 			// 

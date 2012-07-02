@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -79,12 +80,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="V2\TaskSchedulerV2Interop.cs" />
     <Compile Include="Wildcard.cs" />
+    <Compile Include="XmlSerializationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="TaskService.nuspec" />
     <None Include="TaskService.snk" />
+    <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.it.resx">

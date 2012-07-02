@@ -485,7 +485,8 @@ namespace TestTaskService
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 				
-				tf.RegisterTaskDefinition("Test", td);
+				Task t = tf.RegisterTaskDefinition("Test", td);
+				WriteXml(t);
 
 				// Try copying it
 				TaskDefinition td2 = ts.NewTask();
@@ -552,6 +553,53 @@ namespace TestTaskService
 		{
 			if (t.TaskService.HighestSupportedVersion > new Version(1, 1))
 				t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
+		}
+
+		internal static void OutputXml(TaskService ts, System.IO.StringWriter output)
+		{
+			// Get the service on the local machine
+			try
+			{
+				TaskDefinition.GetV1SchemaFile(new System.Xml.Schema.XmlSchemaSet());
+
+				// Create a new task definition and assign properties
+				const string taskName = "Test";
+				TaskDefinition td = ts.NewTask();
+				td.Data = "Some data";
+				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
+				td.Settings.IdleSettings.RestartOnIdle = true;
+				td.RegistrationInfo.Author = "Me";
+				td.Triggers.Add(new BootTrigger());
+				td.Triggers.Add(new LogonTrigger());
+				td.Triggers.Add(new IdleTrigger());
+				TimeTrigger tt = (TimeTrigger)td.Triggers.Add(new TimeTrigger() { Enabled = false, EndBoundary = DateTime.Now.AddYears(1) });
+				tt.Repetition.Duration = TimeSpan.FromHours(4);
+				tt.Repetition.Interval = TimeSpan.FromHours(1);
+				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger(3) { Enabled = false });
+				dt.Repetition.Duration = TimeSpan.FromHours(24);
+				dt.Repetition.Interval = TimeSpan.FromHours(2);
+				td.Triggers.Add(new MonthlyDOWTrigger { DaysOfWeek = DaysOfTheWeek.AllDays, MonthsOfYear = MonthsOfTheYear.AllMonths, WeeksOfMonth = WhichWeek.FirstWeek, RunOnLastWeekOfMonth = true });
+				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new int[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
+				td.Triggers.Add(new WeeklyTrigger(DaysOfTheWeek.Saturday, 2));
+				td.Actions.Add(new ExecAction("notepad.exe"));
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				System.Threading.Thread.Sleep(1000);
+
+				// Serialize task and output
+				string xmlOutput = t.Xml;
+				output.Write(xmlOutput);
+
+				ts.RootFolder.DeleteTask(taskName);
+
+				ts.RootFolder.ImportTask(taskName, @"C:\Users\dahall\Desktop\Test2012_07_02_08_45_46.xml");
+
+				//ts.RootFolder.RegisterTask(taskName, xmlOutput, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				ts.RootFolder.DeleteTask(taskName);
+			}
+			catch (Exception ex)
+			{
+				output.WriteLine(ex.ToString());
+			}
 		}
 	}
 }

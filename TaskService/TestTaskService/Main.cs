@@ -49,6 +49,9 @@ namespace TestTaskService
 				case 6: // Find task
 					Program.FindTask(ts, output, textBox2.Text);
 					break;
+				case 7: // Output XML
+					Program.OutputXml(ts, output);
+					break;
 				default:
 					break;
 			}

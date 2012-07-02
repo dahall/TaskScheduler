@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Provides the methods that are used to add to, remove from, and get the triggers of a task.
 	/// </summary>
-	public sealed class TriggerCollection : IEnumerable<Trigger>, IDisposable
+	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class TriggerCollection : IEnumerable<Trigger>, IDisposable, IXmlSerializable
 	{
 		private V1Interop.ITask v1Task = null;
 		private V2Interop.ITaskDefinition v2Def = null;
@@ -278,6 +280,47 @@ namespace Microsoft.Win32.TaskScheduler
 			if (this.Count > 1)
 				return Properties.Resources.MultipleTriggers;
 			return string.Empty;
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Triggers", TaskDefinition.tns);
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "BootTrigger":
+						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Boot));
+						break;
+					case "IdleTrigger":
+						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Idle));
+						break;
+					case "TimeTrigger":
+						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Time));
+						break;
+					case "LogonTrigger":
+						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Logon));
+						break;
+					case "CalendarTrigger":
+						this.Add(CalendarTrigger.GetTriggerFromXml(reader));
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			foreach (var t in this)
+				XmlSerializationHelper.WriteObject(writer, t);
 		}
 	}
 }

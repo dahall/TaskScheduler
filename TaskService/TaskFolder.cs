@@ -197,7 +197,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Registers (creates) a new task in the folder using XML to define the task. Not available for Task Scheduler 1.0.
+		/// Registers (creates) a new task in the folder using XML to define the task.
 		/// </summary>
 		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="XmlText">An XML-formatted definition of the task.</param>
@@ -207,12 +207,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="sddl">The security descriptor associated with the registered task. You can specify the access control list (ACL) in the security descriptor for a task in order to allow or deny certain users and groups access to a task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
-		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
 		public Task RegisterTask(string Path, string XmlText, TaskCreation createType = TaskCreation.CreateOrUpdate, string UserId = null, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
 				return new Task(this.TaskService, v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
-			throw new NotV1SupportedException();
+
+			try
+			{
+				TaskDefinition td = this.TaskService.NewTask();
+				XmlSerializationHelper.ReadObjectFromXmlText(XmlText, td);
+				return this.RegisterTaskDefinition(Path, td, createType, UserId == null ? td.Principal.ToString() : UserId,
+					password, LogonType == TaskLogonType.S4U ? td.Principal.LogonType : LogonType, sddl);
+			}
+			catch
+			{
+				throw; // new NotV1SupportedException();
+			}
 		}
 
 		/// <summary>

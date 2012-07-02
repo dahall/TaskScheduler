@@ -1,6 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -98,8 +102,10 @@ namespace Microsoft.Win32.TaskScheduler
 	public enum TaskRunLevel
 	{
 		/// <summary>Tasks will be run with the least privileges.</summary>
+		[XmlEnum("LeastPrivilege")]
 		LUA,
 		/// <summary>Tasks will be run with the highest privileges.</summary>
+		[XmlEnum("HighestAvailable")]
 		Highest
 	}
 
@@ -249,6 +255,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.
 		/// </summary>
+		[DefaultValue(typeof(TimeSpan), "00:10:00")]
 		public TimeSpan IdleDuration
 		{
 			get
@@ -273,6 +280,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates whether the task is restarted when the computer cycles into an idle condition more than once.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool RestartOnIdle
 		{
 			get
@@ -299,6 +307,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will terminate the task if the idle condition ends before the task is completed.
 		/// </summary>
+		[DefaultValue(true)]
 		public bool StopOnIdleEnd
 		{
 			get
@@ -325,6 +334,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur.
 		/// </summary>
+		[DefaultValue(typeof(TimeSpan), "01:00:00")]
 		public TimeSpan WaitTimeout
 		{
 			get
@@ -360,6 +370,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the settings that the Task Scheduler service uses to obtain a network profile.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class NetworkSettings : IDisposable
 	{
 		private V2Interop.INetworkSettings v2Settings = null;
@@ -376,6 +387,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a GUID value that identifies a network profile.
 		/// </summary>
+		[DefaultValue(typeof(Guid), "00000000-0000-0000-0000-000000000000")]
 		public Guid Id
 		{
 			get
@@ -397,6 +409,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of a network profile. The name is used for display purposes.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Name
 		{
 			get
@@ -427,6 +440,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the methods to get information from and control a running task.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public sealed class RunningTask : Task
 	{
 		private TaskScheduler.V2Interop.IRunningTask v2RunningTask;
@@ -516,6 +530,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials that are used to register the task, and the properties that describe the task.
 	/// </summary>
+	[XmlType(IncludeInSchema = false)]
 	public class Task : IDisposable
 	{
 		internal V1Interop.ITask v1Task;
@@ -755,7 +770,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Task != null)
 					return v2Task.Xml;
 
-				throw new NotV1SupportedException();
+				return this.Definition.XmlText;
 			}
 		}
 
@@ -992,8 +1007,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Defines all the components of a task, such as the task settings, triggers, actions, and registration information.
 	/// </summary>
-	public sealed class TaskDefinition
+	[XmlRootAttribute("Task", Namespace = TaskDefinition.tns, IsNullable = false)]
+	[XmlSchemaProvider("GetV1SchemaFile")]
+	public sealed class TaskDefinition : IXmlSerializable
 	{
+		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
+
 		internal string v1Name = string.Empty;
 		internal V1Interop.ITask v1Task = null;
 		internal V2Interop.ITaskDefinition v2Def = null;
@@ -1018,6 +1037,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a collection of actions that are performed by the task.
 		/// </summary>
+		[XmlArrayItem(ElementName = "Exec", IsNullable = true, Type = typeof(ExecAction))]
+		[XmlArray]
 		public ActionCollection Actions
 		{
 			get
@@ -1110,6 +1131,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a collection of triggers that are used to start a task.
 		/// </summary>
+		[XmlArrayItem(ElementName = "BootTrigger", IsNullable = true, Type = typeof(BootTrigger))]
+		[XmlArrayItem(ElementName = "CalendarTrigger", IsNullable = true, Type = typeof(CalendarTrigger))]
+		[XmlArrayItem(ElementName = "IdleTrigger", IsNullable = true, Type = typeof(IdleTrigger))]
+		[XmlArrayItem(ElementName = "LogonTrigger", IsNullable = true, Type = typeof(LogonTrigger))]
+		[XmlArrayItem(ElementName = "TimeTrigger", IsNullable = true, Type = typeof(TimeTrigger))]
+		[XmlArray]
 		public TriggerCollection Triggers
 		{
 			get
@@ -1126,22 +1153,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the XML-formatted definition of the task. Not available on Task Scheduler 1.0.
+		/// Gets or sets the XML-formatted definition of the task.
 		/// </summary>
+		[XmlIgnore]
 		public string XmlText
 		{
 			get
 			{
 				if (v2Def != null)
 					return v2Def.XmlText;
-				throw new NotV1SupportedException();
+				return XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
 				if (v2Def != null)
 					v2Def.XmlText = value;
 				else
-					throw new NotV1SupportedException();
+					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
 			}
 		}
 
@@ -1157,6 +1185,28 @@ namespace Microsoft.Win32.TaskScheduler
 			actions = null;
 			if (v2Def != null) Marshal.ReleaseComObject(v2Def);
 			v1Task = null;
+		}
+
+		/// <summary>
+		/// Gets the Xml Schema file for V1 tasks.
+		/// </summary>
+		/// <param name="xs">The <see cref="System.Xml.Schema.XmlSchemaSet"/> for V1 tasks.</param>
+		/// <returns>An object containing the Xml Schema for V1 tasks.</returns>
+		public static XmlSchemaComplexType GetV1SchemaFile(XmlSchemaSet xs)
+		{
+			XmlSchema schema = null;
+			using (System.IO.Stream xsdFile = System.Reflection.Assembly.GetAssembly(typeof(TaskDefinition)).GetManifestResourceStream("Microsoft.Win32.TaskScheduler.V1.TaskSchedulerV1Schema.xsd"))
+			{
+				XmlSerializer schemaSerializer = new XmlSerializer(typeof(XmlSchema));
+				schema = (XmlSchema)schemaSerializer.Deserialize(System.Xml.XmlReader.Create(xsdFile));
+				xs.Add(schema);
+			}
+
+			// target namespace
+			XmlQualifiedName name = new XmlQualifiedName("taskType", tns);
+			XmlSchemaComplexType productType = (XmlSchemaComplexType)schema.SchemaTypes[name];
+
+			return productType;
 		}
 
 		internal void V1Save(string newName)
@@ -1187,12 +1237,35 @@ namespace Microsoft.Win32.TaskScheduler
 				iFile = null;
 			}
 		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Task", tns);
+
+			XmlSerializationHelper.ReadObjectProperties(reader, this);
+
+			reader.ReadEndElement();
+
+			if (this.Triggers.Count == 0 || this.Actions.Count != 1)
+				throw new XmlException("Invalid XML stream. Task element must include a Triggers and an Actions element to form a valid task.");
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			XmlSerializationHelper.WriteObjectProperties(writer, this);
+		}
 	}
 
 	/// <summary>
 	/// Provides the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
 	/// </summary>
-	public sealed class TaskPrincipal
+	[XmlRoot("Principals", Namespace = TaskDefinition.tns, IsNullable = true)]
+	public sealed class TaskPrincipal : IXmlSerializable
 	{
 		private const string localSystemAcct = "SYSTEM";
 		private V1Interop.ITask v1Task = null;
@@ -1215,6 +1288,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the principal that is displayed in the Task Scheduler UI.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlIgnore]
 		public string DisplayName
 		{
 			get
@@ -1235,6 +1310,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal. Setting this property to something other than a null or empty string, will set the <see cref="UserId"/> property to NULL and will set the <see cref="LogonType"/> property to TaskLogonType.Group;
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlIgnore]
 		public string GroupId
 		{
 			get
@@ -1265,6 +1342,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the principal.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlAttribute(AttributeName = "id", DataType = "ID")]
+		[XmlIgnore]
 		public string Id
 		{
 			get
@@ -1285,6 +1365,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the security logon method that is required to run the tasks that are associated with the principal.
 		/// </summary>
+		[DefaultValue(typeof(TaskLogonType), "None")]
 		public TaskLogonType LogonType
 		{
 			get
@@ -1322,6 +1403,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// One of the <see cref="TaskProcessTokenSidType"/> enumeration constants.
 		/// </value>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
+		[XmlIgnore]
 		private TaskProcessTokenSidType ProcessTokenSidType
 		{
 			get
@@ -1343,6 +1425,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
 		/// </summary>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
+		[XmlIgnore]
 		private TaskPrincipalPrivileges RequiredPrivileges
 		{
 			get
@@ -1356,6 +1439,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
 		/// </summary>
+		[DefaultValue(typeof(TaskRunLevel), "LUA")]
+		[XmlIgnore]
 		public TaskRunLevel RunLevel
 		{
 			get
@@ -1376,6 +1461,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the user identifier that is required to run the tasks that are associated with the principal. Setting this property to something other than a null or empty string, will set the <see cref="GroupId"/> property to NULL;
 		/// </summary>
+		[DefaultValue("")]
 		public string UserId
 		{
 			get
@@ -1431,6 +1517,42 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return this.LogonType == TaskLogonType.Group ? this.GroupId : this.UserId;
+		}
+
+		XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(XmlReader reader)
+		{
+			reader.ReadStartElement("Principals", TaskDefinition.tns);
+			reader.Read();
+			while (reader.MoveToContent() == XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "Principal":
+						reader.Read();
+						XmlSerializationHelper.ReadObjectProperties(reader, this);
+						reader.ReadEndElement();
+						break;
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(XmlWriter writer)
+		{
+			if (!string.IsNullOrEmpty(this.ToString()) || this.LogonType != TaskLogonType.None)
+			{
+				writer.WriteStartElement("Principal");
+				XmlSerializationHelper.WriteObjectProperties(writer, this);
+				writer.WriteEndElement();
+			}
 		}
 	}
 
@@ -1703,7 +1825,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the administrative information that can be used to describe the task. This information includes details such as a description of the task, the author of the task, the date the task is registered, and the security descriptor of the task.
 	/// </summary>
-	public sealed class TaskRegistrationInfo : IDisposable
+	[XmlRoot("RegistrationInfo", Namespace = TaskDefinition.tns, IsNullable = true)]
+	public sealed class TaskRegistrationInfo : IDisposable, IXmlSerializable
 	{
 		private TaskScheduler.V1Interop.ITask v1Task = null;
 		private TaskScheduler.V2Interop.IRegistrationInfo v2RegInfo = null;
@@ -1721,6 +1844,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the author of the task.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Author
 		{
 			get
@@ -1741,6 +1865,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the date and time when the task is registered.
 		/// </summary>
+		[DefaultValue(typeof(DateTime), "0001-01-01T00:00:00")]
+		[XmlIgnore]
 		public DateTime Date
 		{
 			get
@@ -1774,6 +1900,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the description of the task.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Description
 		{
 			get
@@ -1794,6 +1921,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets any additional documentation for the task.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Documentation
 		{
 			get
@@ -1815,6 +1943,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the security descriptor of the task.
 		/// </summary>
 		/// <value>The security descriptor.</value>
+		[XmlIgnore]
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
 			get
@@ -1830,6 +1959,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the security descriptor of the task.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlIgnore]
 		public string SecurityDescriptorSddlForm
 		{
 			get
@@ -1851,6 +1982,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets where the task originated from. For example, a task may originate from a component, service, application, or user.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlIgnore]
 		public string Source
 		{
 			get
@@ -1871,6 +2004,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the URI of the task.
 		/// </summary>
+		[DefaultValue(null)]
+		[XmlIgnore]
 		public Uri URI
 		{
 			get
@@ -1894,11 +2029,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the version number of the task.
 		/// </summary>
+		[DefaultValue(typeof(Version), "1.0")]
+		[XmlIgnore]
 		public Version Version
 		{
 			get
 			{
-				if (v2RegInfo != null)
+				if (v2RegInfo != null && v2RegInfo.Version != null)
 				{
 					try { return new Version(v2RegInfo.Version); }
 					catch { }
@@ -1915,22 +2052,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets an XML-formatted version of the registration information for the task. Not available for Task Scheduler 1.0.
+		/// Gets or sets an XML-formatted version of the registration information for the task.
 		/// </summary>
+		[XmlIgnore]
 		public string XmlText
 		{
 			get
 			{
 				if (v2RegInfo != null)
 					return v2RegInfo.XmlText;
-				throw new NotV1SupportedException();
+				return XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.XmlText = value;
 				else
-					throw new NotV1SupportedException();
+					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
 			}
 		}
 
@@ -1968,12 +2106,30 @@ namespace Microsoft.Win32.TaskScheduler
 			b.Serialize(stream, value);
 			v1Task.SetWorkItemData((ushort)stream.Length, stream.ToArray());
 		}
+
+		XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(XmlReader reader)
+		{
+			reader.ReadStartElement("RegistrationInfo", TaskDefinition.tns);
+			XmlSerializationHelper.ReadObjectProperties(reader, this);
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(XmlWriter writer)
+		{
+			XmlSerializationHelper.WriteObjectProperties(writer, this);
+		}
 	}
 
 	/// <summary>
 	/// Provides the settings that the Task Scheduler service uses to perform the task.
 	/// </summary>
-	public sealed class TaskSettings : IDisposable
+	[XmlRoot("Settings", Namespace = TaskDefinition.tns, IsNullable = true)]
+	public sealed class TaskSettings : IDisposable, IXmlSerializable
 	{
 		private IdleSettings idleSettings = null;
 		private NetworkSettings networkSettings = null;
@@ -1996,6 +2152,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.
 		/// </summary>
+		[DefaultValue(true)]
+		[XmlElement("AllowStartOnDemand")]
+		[XmlIgnore]
 		public bool AllowDemandStart
 		{
 			get
@@ -2016,6 +2175,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task may be terminated by using TerminateProcess.
 		/// </summary>
+		[DefaultValue(true)]
+		[XmlIgnore]
 		public bool AllowHardTerminate
 		{
 			get
@@ -2036,6 +2197,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets an integer value that indicates which version of Task Scheduler a task is compatible with.
 		/// </summary>
+		[XmlIgnore]
 		public TaskCompatibility Compatibility
 		{
 			get
@@ -2059,6 +2221,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>
 		/// For Task Scheduler 1.0, this property will return a TimeSpan of 1 second if the task is set to delete when done. For either version, TimeSpan.Zero will indicate that the task should not be deleted.
 		/// </remarks>
+		[DefaultValue(typeof(TimeSpan), "12:00:00")]
 		public TimeSpan DeleteExpiredTaskAfter
 		{
 			get
@@ -2085,6 +2248,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task will not be started if the computer is running on battery power.
 		/// </summary>
+		[DefaultValue(true)]
 		public bool DisallowStartIfOnBatteries
 		{
 			get
@@ -2111,6 +2275,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task will not be started if the task is triggered to run in a Remote Applications Integrated Locally (RAIL) session.
 		/// </summary>
+		[DefaultValue(false)]
+		[XmlIgnore]
 		public bool DisallowStartOnRemoteAppSession 
 		{
 			get
@@ -2131,6 +2297,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task is enabled. The task can be performed only when this setting is TRUE.
 		/// </summary>
+		[DefaultValue(true)]
 		public bool Enabled
 		{
 			get
@@ -2157,6 +2324,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time that is allowed to complete the task.
 		/// </summary>
+		[DefaultValue(typeof(TimeSpan), "72:00:00")]
 		public TimeSpan ExecutionTimeLimit
 		{
 			get
@@ -2177,6 +2345,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task will not be visible in the UI by default.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool Hidden
 		{
 			get
@@ -2221,6 +2390,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the policy that defines how the Task Scheduler handles multiple instances of the task.
 		/// </summary>
+		[DefaultValue(typeof(TaskInstancesPolicy), "IgnoreNew")]
+		[XmlIgnore]
 		public TaskInstancesPolicy MultipleInstances
 		{
 			get
@@ -2241,6 +2412,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of ITaskSettings is true and a network propfile is specified in the NetworkSettings property, then the task will run only if the specified network profile is available.
 		/// </summary>
+		[XmlIgnore]
 		public NetworkSettings NetworkSettings
 		{
 			get
@@ -2259,33 +2431,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the priority level of the task.
 		/// </summary>
+		//[XmlElement(DataType = "byte")]
+		[DefaultValue(typeof(System.Diagnostics.ProcessPriorityClass), "Normal")]
 		public System.Diagnostics.ProcessPriorityClass Priority
 		{
 			get
 			{
 				if (v2Settings != null)
 				{
-					switch (v2Settings.Priority)
-					{
-						case 0:
-							return System.Diagnostics.ProcessPriorityClass.RealTime;
-						case 1:
-							return System.Diagnostics.ProcessPriorityClass.High;
-						case 2:
-						case 3:
-							return System.Diagnostics.ProcessPriorityClass.AboveNormal;
-						case 7:
-						case 8:
-							return System.Diagnostics.ProcessPriorityClass.BelowNormal;
-						case 9:
-						case 10:
-							return System.Diagnostics.ProcessPriorityClass.Idle;
-						case 4:
-						case 5:
-						case 6:
-						default:
-							return System.Diagnostics.ProcessPriorityClass.Normal;
-					}
+					return GetPriorityFromInt(v2Settings.Priority);
 				}
 				return (System.Diagnostics.ProcessPriorityClass)v1Task.GetPriority();
 			}
@@ -2293,29 +2447,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 				{
-					int p = 7;
-					switch (value)
-					{
-						case System.Diagnostics.ProcessPriorityClass.AboveNormal:
-							p = 3;
-							break;
-						case System.Diagnostics.ProcessPriorityClass.High:
-							p = 1;
-							break;
-						case System.Diagnostics.ProcessPriorityClass.Idle:
-							p = 10;
-							break;
-						case System.Diagnostics.ProcessPriorityClass.Normal:
-							p = 5;
-							break;
-						case System.Diagnostics.ProcessPriorityClass.RealTime:
-							p = 0;
-							break;
-						case System.Diagnostics.ProcessPriorityClass.BelowNormal:
-						default:
-							break;
-					}
-					v2Settings.Priority = p;
+					v2Settings.Priority = GetPriorityAsInt(value);
 				}
 				else
 				{
@@ -2326,9 +2458,63 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private System.Diagnostics.ProcessPriorityClass GetPriorityFromInt(int value)
+		{
+			switch (value)
+			{
+				case 0:
+					return System.Diagnostics.ProcessPriorityClass.RealTime;
+				case 1:
+					return System.Diagnostics.ProcessPriorityClass.High;
+				case 2:
+				case 3:
+					return System.Diagnostics.ProcessPriorityClass.AboveNormal;
+				case 4:
+				case 5:
+				case 6:
+					return System.Diagnostics.ProcessPriorityClass.Normal;
+				case 7:
+				case 8:
+				default:
+					return System.Diagnostics.ProcessPriorityClass.BelowNormal;
+				case 9:
+				case 10:
+					return System.Diagnostics.ProcessPriorityClass.Idle;
+			}
+		}
+
+		private int GetPriorityAsInt(System.Diagnostics.ProcessPriorityClass value)
+		{
+			int p = 7;
+			switch (value)
+			{
+				case System.Diagnostics.ProcessPriorityClass.AboveNormal:
+					p = 3;
+					break;
+				case System.Diagnostics.ProcessPriorityClass.High:
+					p = 1;
+					break;
+				case System.Diagnostics.ProcessPriorityClass.Idle:
+					p = 10;
+					break;
+				case System.Diagnostics.ProcessPriorityClass.Normal:
+					p = 5;
+					break;
+				case System.Diagnostics.ProcessPriorityClass.RealTime:
+					p = 0;
+					break;
+				case System.Diagnostics.ProcessPriorityClass.BelowNormal:
+				default:
+					break;
+			}
+			return p;
+		}
+
 		/// <summary>
 		/// Gets or sets the number of times that the Task Scheduler will attempt to restart the task.
 		/// </summary>
+		[DefaultValue(0)]
+		[XmlIgnore]
 		public int RestartCount
 		{
 			get
@@ -2349,6 +2535,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that specifies how long the Task Scheduler will attempt to restart the task.
 		/// </summary>
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		[XmlIgnore]
 		public TimeSpan RestartInterval
 		{
 			get
@@ -2369,6 +2557,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the computer is in an idle condition.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool RunOnlyIfIdle
 		{
 			get
@@ -2395,6 +2584,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the user is logged on (v1.0 only)
 		/// </summary>
+		[XmlIgnore]
 		public bool RunOnlyIfLoggedOn
 		{
 			get
@@ -2421,6 +2611,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only when a network is available.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool RunOnlyIfNetworkAvailable
 		{
 			get
@@ -2447,6 +2638,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.
 		/// </summary>
+		[DefaultValue(false)]
+		[XmlIgnore]
 		public bool StartWhenAvailable
 		{
 			get
@@ -2467,6 +2660,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task will be stopped if the computer switches to battery power.
 		/// </summary>
+		[DefaultValue(true)]
 		public bool StopIfGoingOnBatteries
 		{
 			get
@@ -2493,6 +2687,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Unified Scheduling Engine will be utilized to run this task.
 		/// </summary>
+		[DefaultValue(false)]
+		[XmlIgnore]
 		public bool UseUnifiedSchedulingEngine
 		{
 			get
@@ -2513,6 +2709,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will wake the computer when it is time to run the task.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool WakeToRun
 		{
 			get
@@ -2539,20 +2736,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets an XML-formatted definition of the task settings.
 		/// </summary>
+		[XmlIgnore]
 		public string XmlText
 		{
 			get
 			{
 				if (v2Settings != null)
 					return v2Settings.XmlText;
-				throw new NotV1SupportedException();
+				return XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.XmlText = value;
 				else
-					throw new NotV1SupportedException();
+					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
 			}
 		}
 
@@ -2566,6 +2764,36 @@ namespace Microsoft.Win32.TaskScheduler
 			idleSettings = null;
 			networkSettings = null;
 			v1Task = null;
+		}
+
+		XmlSchema IXmlSerializable.GetSchema()
+		{
+			throw new NotImplementedException();
+		}
+
+		void IXmlSerializable.ReadXml(XmlReader reader)
+		{
+			reader.ReadStartElement("Settings", TaskDefinition.tns);
+			XmlSerializationHelper.ReadObjectProperties(reader, this, this.ConvertXmlProperty);
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(XmlWriter writer)
+		{
+			XmlSerializationHelper.WriteObjectProperties(writer, this, this.ConvertXmlProperty);
+		}
+
+		bool ConvertXmlProperty(System.Reflection.PropertyInfo pi, Object obj, ref Object value)
+		{
+			if (pi.Name == "Priority")
+			{
+				if (value.GetType() == typeof(int) || value.GetType() == typeof(System.Diagnostics.ProcessPriorityClass))
+					value = this.GetPriorityFromInt((int)value);
+				else
+					value = this.GetPriorityAsInt((System.Diagnostics.ProcessPriorityClass)value);
+				return true;
+			}
+			return false;
 		}
 	}
 }
