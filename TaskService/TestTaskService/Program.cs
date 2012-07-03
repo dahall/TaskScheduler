@@ -551,8 +551,7 @@ namespace TestTaskService
 
 		static void WriteXml(Task t)
 		{
-			if (t.TaskService.HighestSupportedVersion > new Version(1, 1))
-				t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
+			t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
 		}
 
 		internal static void OutputXml(TaskService ts, System.IO.StringWriter output)

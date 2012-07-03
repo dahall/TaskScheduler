@@ -472,6 +472,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the process ID for the engine (process) which is running the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public uint EnginePID
 		{
 			get
@@ -598,13 +599,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/*public Microsoft.Win32.TaskScheduler.InternalV2.IRunningTaskCollection GetInstances(int flags)
-		{
-			if (v2Task != null)
-				return v2Task.GetInstances(flags);
-			throw new NotV1SupportedException();
-		}*/
-
 		/// <summary>
 		/// Gets the time the registered task was last run.
 		/// </summary>
@@ -679,6 +673,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of times the registered task has missed a scheduled run.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public int NumberOfMissedRuns
 		{
 			get
@@ -761,7 +756,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the XML-formatted registration information for the registered task. Not available with Task Scheduler 1.0.
+		/// Gets the XML-formatted registration information for the registered task.
 		/// </summary>
 		public string Xml
 		{
@@ -788,13 +783,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Exports the task to the specified file in XML.
 		/// </summary>
 		/// <param name="outputFileName">Name of the output file.</param>
-		/// <exception cref="NotV1SupportedException">Exporting to an XML file is only supported under Task Scheduler 2.0.</exception>
 		public void Export(string outputFileName)
 		{
+			System.IO.File.WriteAllText(outputFileName, this.Xml, System.Text.Encoding.Unicode);
+		}
+
+		/// <summary>
+		/// Gets all instances of the currently running registered task.
+		/// </summary>
+		/// <returns>A <see cref="RunningTaskCollection"/> with all instances of current task.</returns>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		public RunningTaskCollection GetInstances()
+		{
 			if (v2Task != null)
-				System.IO.File.WriteAllText(outputFileName, v2Task.Xml, System.Text.Encoding.Unicode);
-			else
-				throw new NotV1SupportedException();
+				return new RunningTaskCollection(this.TaskService, v2Task.GetInstances(0));
+			throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -836,6 +839,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the task.</returns>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
 		{
 			if (v2Task != null)
@@ -881,6 +885,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="user">The user for which the task runs.</param>
 		/// <param name="parameters">The parameters used as values in the task actions.</param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task != null)
@@ -893,6 +898,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="sddlForm">The security descriptor for the task.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.AccessControlSections includeSections)
 		{
 			if (v2Task != null)
