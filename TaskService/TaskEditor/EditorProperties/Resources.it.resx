@@ -313,4 +313,7 @@ Azione: {3}</value>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>Il valore di intervallo di ripetizione deve essere inferiore o uguale al valore di durata ripetizione.</value>
   </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Per le opzioni scelte, una password per l'utente specificato deve essere fornita.</value>
+  </data>
 </root>

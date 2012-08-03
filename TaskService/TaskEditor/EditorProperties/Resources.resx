@@ -313,4 +313,7 @@ Action: {3}</value>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>The repetition interval value must be less than or equal to the repetition duration value.</value>
   </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>For the options selected, a password for the specified user must be provided.</value>
+  </data>
 </root>

@@ -911,6 +911,8 @@ namespace Microsoft.Win32.TaskScheduler
 			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
 				tabControl.TabPages.Add(historyTab);
 			v2 = taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0;
+			if (td != null)
+				td.Settings.Compatibility = v2 ? TaskCompatibility.V2 : TaskCompatibility.V1;
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
