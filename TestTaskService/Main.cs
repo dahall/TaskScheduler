@@ -9,6 +9,7 @@ namespace TestTaskService
 		public Main()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.Properties;
 			radioButtonList1.SelectedIndex = 0;
 		}
 

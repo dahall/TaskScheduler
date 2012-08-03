@@ -204,6 +204,12 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
+		/// <summary>
+		/// Handles the Click event of the okBtn control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+		/// <remarks>Changed in releaese 1.8.4 so that when a user cancels the password dialog, it no longer throws an exception but rather displays an error.</remarks>
 		private void okBtn_Click(object sender, System.EventArgs e)
 		{
 			if (this.TaskDefinition.Actions.Count == 0)
@@ -220,7 +226,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				if (this.Task != null)
+				if (this.Task != null && this.Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && this.Task.Definition.Principal.LogonType != TaskLogonType.Password)
 					this.Task.RegisterChanges();
 				else
 				{
@@ -231,7 +237,11 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						pwd = InvokeCredentialDialog(user);
 						if (pwd == null)
-							throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
+						{
+							//throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
+							MessageBox.Show(EditorProperties.Resources.Error_PasswordMustBeProvided, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+							return;
+						}
 					}
 					fld.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
 						user, pwd, this.TaskDefinition.Principal.LogonType);
