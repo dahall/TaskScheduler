@@ -88,6 +88,8 @@ namespace Microsoft.Win32.TaskScheduler
 		Logon = 9,
 		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
 		SessionStateChange = 11,
+		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
+		CustomTrigger = 12
 	}
 
 	/// <summary>Values for week of month (first, second, ..., last)</summary>

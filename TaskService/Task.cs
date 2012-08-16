@@ -18,7 +18,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>The task is compatible with Task Scheduler 1.0.</summary>
 		V1,
 		/// <summary>The task is compatible with Task Scheduler 2.0.</summary>
-		V2
+		V2,
+		/// <summary>The task is compatible with Task Scheduler 2.1.</summary>
+		V2_1,
+		/// <summary>The task is compatible with Task Scheduler 2.2.</summary>
+		V2_2
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
@@ -364,6 +368,93 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Settings != null)
 				Marshal.ReleaseComObject(v2Settings);
 			v1Task = null;
+		}
+	}
+
+	[XmlType(IncludeInSchema = false)]
+	public sealed class MaintenanceSettings : IDisposable
+	{
+		private V2Interop.IMaintenanceSettings v2Settings = null;
+
+		internal MaintenanceSettings(V2Interop.IMaintenanceSettings iSettings)
+		{
+			v2Settings = iSettings;
+		}
+
+		internal MaintenanceSettings()
+		{
+		}
+
+		/// <summary>
+		/// Gets or sets the maintenance deadline.
+		/// </summary>
+		[DefaultValue(null)]
+		public string Deadline
+		{
+			get
+			{
+				if (v2Settings != null)
+					return v2Settings.Deadline;
+				return null;
+			}
+			set
+			{
+				if (v2Settings != null)
+					v2Settings.Deadline = value;
+				else
+					throw new NotV1SupportedException();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a valud indicating if the the maintenance is exclusive.
+		/// </summary>
+		[DefaultValue(false)]
+		public bool Exclusive
+		{
+			get
+			{
+				if (v2Settings != null)
+					return v2Settings.Exclusive;
+				return false;
+			}
+			set
+			{
+				if (v2Settings != null)
+					v2Settings.Exclusive = value;
+				else
+					throw new NotV1SupportedException();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the maintenance period.
+		/// </summary>
+		[DefaultValue(null)]
+		public string Period
+		{
+			get
+			{
+				if (v2Settings != null)
+					return v2Settings.Period;
+				return null;
+			}
+			set
+			{
+				if (v2Settings != null)
+					v2Settings.Period = value;
+				else
+					throw new NotV1SupportedException();
+			}
+		}
+
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
+		public void Dispose()
+		{
+			if (v2Settings != null)
+				Marshal.ReleaseComObject(v2Settings);
 		}
 	}
 
@@ -2138,15 +2229,19 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TaskSettings : IDisposable, IXmlSerializable
 	{
 		private IdleSettings idleSettings = null;
+		private MaintenanceSettings maintenanceSettings = null;
 		private NetworkSettings networkSettings = null;
 		private TaskScheduler.V1Interop.ITask v1Task = null;
 		private TaskScheduler.V2Interop.ITaskSettings v2Settings = null;
 		private TaskScheduler.V2Interop.ITaskSettings2 v2Settings2 = null;
+		private TaskScheduler.V2Interop.ITaskSettings3 v2Settings3 = null;
 
 		internal TaskSettings(TaskScheduler.V2Interop.ITaskSettings iSettings)
 		{
 			v2Settings = iSettings;
 			try { v2Settings2 = (TaskScheduler.V2Interop.ITaskSettings2)v2Settings; }
+			catch { }
+			try { v2Settings3 = (TaskScheduler.V2Interop.ITaskSettings3)v2Settings; }
 			catch { }
 		}
 
@@ -2209,7 +2304,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Settings != null)
-					return ((int)v2Settings.Compatibility) >= 2 ? TaskCompatibility.V2 : v2Settings.Compatibility;
+					return v2Settings.Compatibility;
 				return TaskCompatibility.V1;
 			}
 			set
@@ -2289,12 +2384,16 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings2 != null)
 					return v2Settings2.DisallowStartOnRemoteAppSession;
+				if (v2Settings3 != null)
+					return v2Settings3.DisallowStartOnRemoteAppSession;
 				return false;
 			}
 			set
 			{
 				if (v2Settings2 != null)
 					v2Settings2.DisallowStartOnRemoteAppSession = value;
+				else if (v2Settings3 != null)
+					v2Settings3.DisallowStartOnRemoteAppSession = value;
 				else
 					throw new NotV1SupportedException();
 			}
@@ -2390,6 +2489,25 @@ namespace Microsoft.Win32.TaskScheduler
 						idleSettings = new IdleSettings(v1Task);
 				}
 				return idleSettings;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the maintenance settings object.
+		/// </summary>
+		[XmlIgnore]
+		public MaintenanceSettings MaintenanceSettings
+		{
+			get
+			{
+				if (maintenanceSettings == null)
+				{
+					if (v2Settings3 != null)
+						maintenanceSettings = new MaintenanceSettings(v2Settings3.MaintenanceSettings);
+					else
+						maintenanceSettings = new MaintenanceSettings();
+				}
+				return maintenanceSettings;
 			}
 		}
 
@@ -2701,12 +2819,38 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings2 != null)
 					return v2Settings2.UseUnifiedSchedulingEngine;
+				if (v2Settings3 != null)
+					return v2Settings3.UseUnifiedSchedulingEngine;
 				return false;
 			}
 			set
 			{
 				if (v2Settings2 != null)
 					v2Settings2.UseUnifiedSchedulingEngine = value;
+				else if (v2Settings3 != null)
+					v2Settings3.UseUnifiedSchedulingEngine = value;
+				else
+					throw new NotV1SupportedException();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a Boolean value that indicates that the task is volitile.
+		/// </summary>
+		[DefaultValue(false)]
+		[XmlIgnore]
+		public bool Volitile
+		{
+			get
+			{
+				if (v2Settings3 != null)
+					return v2Settings3.Volitile;
+				return false;
+			}
+			set
+			{
+				if (v2Settings3 != null)
+					v2Settings3.Volitile = value;
 				else
 					throw new NotV1SupportedException();
 			}

@@ -720,6 +720,29 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		bool UseUnifiedSchedulingEngine { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x1f)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x1f)] set; }
 	}
 
+	[ComImport, TypeLibType((short)0x10c0), Guid("0AD9D0D7-0C7F-4EBB-9A5F-D1C648DCA528"), System.Security.SuppressUnmanagedCodeSecurity]
+	internal interface ITaskSettings3 : ITaskSettings
+	{
+		[DispId(30)]
+		bool DisallowStartOnRemoteAppSession { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(30)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(30)] set; }
+		[DispId(31)]
+		bool UseUnifiedSchedulingEngine { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(31)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(31)] set; }
+		[DispId(32)]
+		IMaintenanceSettings MaintenanceSettings { [return: MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(32)] get; [param: In, MarshalAs(UnmanagedType.Interface)] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(32)] set; }
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(33)]
+		IMaintenanceSettings CreateMaintenanceSettings();
+		[DispId(34)]
+		bool Volitile { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(34)] get; [param: In] [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(34)] set; }
+	}
+
+	[ComImport, TypeLibType((short)0x10c0), Guid("A6024FA8-9652-4ADB-A6BF-5CFCD877A7BA"), System.Security.SuppressUnmanagedCodeSecurity]
+	internal interface IMaintenanceSettings
+	{
+		string Period { get; set; }
+		string Deadline { get; set; }
+		bool Exclusive { get; set; }
+	}
+
 	[ComImport, Guid("3E4C9351-D966-4B8B-BB87-CEBA68BB0107"), InterfaceType((short)1), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface ITaskVariables
 	{
