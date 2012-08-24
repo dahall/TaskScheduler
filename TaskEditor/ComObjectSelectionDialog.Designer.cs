@@ -37,6 +37,11 @@
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+			this.progressBar1 = new System.Windows.Forms.ProgressBar();
+			this.searchPanel = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.searchPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// okButton
@@ -56,6 +61,7 @@
 			// 
 			// listView1
 			// 
+			this.listView1.AllowColumnReorder = true;
 			resources.ApplyResources(this.listView1, "listView1");
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -63,7 +69,9 @@
             this.columnHeader3});
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
+			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
+			this.listView1.ShowGroups = false;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
 			this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
@@ -95,18 +103,45 @@
 			this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
 			this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
 			// 
+			// progressBar1
+			// 
+			resources.ApplyResources(this.progressBar1, "progressBar1");
+			this.progressBar1.Name = "progressBar1";
+			// 
+			// searchPanel
+			// 
+			this.searchPanel.Controls.Add(this.textBox1);
+			this.searchPanel.Controls.Add(this.label1);
+			resources.ApplyResources(this.searchPanel, "searchPanel");
+			this.searchPanel.Name = "searchPanel";
+			// 
+			// label1
+			// 
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
+			// textBox1
+			// 
+			resources.ApplyResources(this.textBox1, "textBox1");
+			this.textBox1.Name = "textBox1";
+			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+			// 
 			// ComObjectSelectionDialog
 			// 
 			this.AcceptButton = this.okButton;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
+			this.Controls.Add(this.searchPanel);
+			this.Controls.Add(this.progressBar1);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.okButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "ComObjectSelectionDialog";
 			this.Load += new System.EventHandler(this.ComObjectSelectionDialog_Load);
+			this.searchPanel.ResumeLayout(false);
+			this.searchPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -121,5 +156,9 @@
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
 		private System.ComponentModel.BackgroundWorker backgroundWorker2;
+		private System.Windows.Forms.ProgressBar progressBar1;
+		private System.Windows.Forms.Panel searchPanel;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Label label1;
 	}
 }

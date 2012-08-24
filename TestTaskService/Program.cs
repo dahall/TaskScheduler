@@ -208,19 +208,31 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				/*TaskDefinition td = ts.NewTask();
-				td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
-				td.Settings.WakeToRun = true;
-				td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
+				TaskDefinition td = ts.NewTask();
+				//td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Principal.UserId = "dahall";
+				if (ts.HighestSupportedVersion >= new Version(1, 4))
+				{
+					td.RegistrationInfo.Author = "Me";
+					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)";
+					td.Settings.AllowHardTerminate = false;
+					td.Settings.Compatibility = TaskCompatibility.V2_2;
+					td.Settings.UseUnifiedSchedulingEngine = true;
+					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(2);
+					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(14);
+				}
+				//td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);*/
-				Task t = ts.AddTask(taskName,
+				WriteXml(td, taskName);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+				/*Task t = ts.AddTask(taskName,
 					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Local) },
-					new ExecAction("notepad.exe"));
+					new ExecAction("notepad.exe"));*/
 				WriteXml(t);
 
 				// Edit task
-				TaskDefinition td = DisplayTask(t, true);
+				td = DisplayTask(t, true);
 
 				// Register then show task again
 				while (td != null)
@@ -288,6 +300,7 @@ namespace TestTaskService
 			Version ver = ts.HighestSupportedVersion;
 			bool isV12 = (ver >= new Version(1, 2));
 			bool isV13 = (ver >= new Version(1, 3));
+			bool isV14 = (ver >= new Version(1, 4));
 			output.WriteLine("Highest version: " + ver);
 			output.WriteLine("Server: {0} ({1}); User: {2}\\{3}", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected", ts.UserAccountDomain, ts.UserName);
 
@@ -347,7 +360,9 @@ namespace TestTaskService
 				try
 				{
 					const string testFolder = "David's TestFolder";
-					tf.CreateFolder(testFolder);
+					try { tf.CreateFolder(testFolder); }
+					catch (System.Runtime.InteropServices.COMException cex) { if (cex.ErrorCode != -2147024713) throw; }
+					catch { throw; }
 					TaskFolder sub = tf.SubFolders[testFolder];
 					output.WriteLine("\nSubfolder path: " + sub.Path);
 					ts.AddTask(testFolder + @"\MyTask", new LogonTrigger(), new ExecAction("notepad"));
@@ -367,8 +382,9 @@ namespace TestTaskService
 			{
 				TaskDefinition td = ts.NewTask();
 				td.Data = "Your data";
-				td.Principal.UserId = "SYSTEM";
-				td.Principal.LogonType = TaskLogonType.ServiceAccount;
+				//td.Principal.UserId = "SYSTEM";
+				//td.Principal.LogonType = TaskLogonType.ServiceAccount;
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				td.RegistrationInfo.Author = "dahall";
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
@@ -387,7 +403,8 @@ namespace TestTaskService
 				if (isV12)
 				{
 					td.Principal.RunLevel = TaskRunLevel.Highest; //.LUA;
-					//td.RegistrationInfo.SecurityDescriptorSddlForm = "O:COG:CGD::(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)";
+					td.Principal.Id = "Author";
+					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)";
 					td.RegistrationInfo.Source = "Test App";
 					td.RegistrationInfo.URI = new Uri("test://app");
 					td.RegistrationInfo.Version = new Version(0, 9);
@@ -404,18 +421,30 @@ namespace TestTaskService
 				}
 				if (isV13)
 				{
-					/*td.Principal.ProcessTokenSidType = TaskProcessTokenSidType.Unrestricted;
-					td.Principal.RequiredPrivileges.Add("SeBackupPrivilege");
-					td.Principal.RequiredPrivileges.Add("SeDebugPrivilege");
-					td.Principal.RequiredPrivileges.Add("SeImpersonatePrivilege");
-					output.Write("Priv: ");
-					foreach (string item in td.Principal.RequiredPrivileges)
-						output.Write(item + ", ");
-					output.WriteLine();*/
+					td.Settings.Compatibility = TaskCompatibility.V2_1;
 					td.Settings.DisallowStartOnRemoteAppSession = true;
-					td.Settings.UseUnifiedSchedulingEngine = true;
+					td.Settings.UseUnifiedSchedulingEngine = false;
+
+					/*td.Principal.ProcessTokenSidType = TaskProcessTokenSidType.Unrestricted;
+					td.Principal.RequiredPrivileges.Add(TaskPrincipalPrivilege.SeBackupPrivilege);
+					td.Principal.RequiredPrivileges.Add(TaskPrincipalPrivilege.SeDebugPrivilege);
+					td.Principal.RequiredPrivileges.Add(TaskPrincipalPrivilege.SeImpersonatePrivilege);
+					output.Write("Priv: ");
+					//output.Write(td.Principal.RequiredPrivileges[0]);
+					foreach (TaskPrincipalPrivilege item in td.Principal.RequiredPrivileges)
+						output.Write(item.ToString() + ", ");
+					output.WriteLine();*/
+				}
+				if (isV14)
+				{
+					td.Settings.Compatibility = TaskCompatibility.V2_2;
+					td.Settings.Volatile = true;
+					td.Settings.MaintenanceSettings.Exclusive = true;
+					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(5);
+					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);
 				}
 
+				// Setup Triggers
 				if (isV12)
 				{
 					BootTrigger bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
@@ -477,14 +506,19 @@ namespace TestTaskService
 				wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 				wTrigger.WeeksInterval = 3;
 
+				// Setup Actions
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 				if (isV12)
 				{
-					td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
+					td.Actions.Context = "Author";
+					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group)
+						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
 					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
-				
+
+				// Register task
+				WriteXml(td, "PreRegTest");
 				Task t = tf.RegisterTaskDefinition("Test", td);
 				WriteXml(t);
 
@@ -552,6 +586,11 @@ namespace TestTaskService
 		static void WriteXml(Task t)
 		{
 			t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
+		}
+
+		static void WriteXml(TaskDefinition td, string name)
+		{
+			System.IO.File.WriteAllText(System.IO.Path.Combine(System.IO.Path.GetTempPath(), name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"), td.XmlText, System.Text.Encoding.Unicode);
 		}
 
 		internal static void OutputXml(TaskService ts, System.IO.StringWriter output)

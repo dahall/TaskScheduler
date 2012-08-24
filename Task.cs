@@ -76,6 +76,80 @@ namespace Microsoft.Win32.TaskScheduler
 		InteractiveTokenOrPassword
 	}
 
+	public enum TaskPrincipalPrivilege
+	{
+		/// <summary>Required to create a primary token. User Right: Create a token object.</summary>
+		SeCreateTokenPrivilege,
+		/// <summary>Required to assign the primary token of a process. User Right: Replace a process-level token.</summary>
+		SeAssignPrimaryTokenPrivilege,
+		/// <summary>Required to lock physical pages in memory. User Right: Lock pages in memory. </summary>
+		SeLockMemoryPrivilege,
+		/// <summary>Required to increase the quota assigned to a process. User Right: Adjust memory quotas for a process.</summary>
+		SeIncreaseQuotaPrivilege,
+		/// <summary>Required to read unsolicited input from a terminal device. User Right: Not applicable.</summary>
+		SeUnsolicitedInputPrivilege,
+		/// <summary>Required to create a computer account. User Right: Add workstations to domain. </summary>
+		SeMachineAccountPrivilege,
+		/// <summary>This privilege identifies its holder as part of the trusted computer base. Some trusted protected subsystems are granted this privilege. User Right: Act as part of the operating system.</summary>
+		SeTcbPrivilege,
+		/// <summary>Required to perform a number of security-related functions, such as controlling and viewing audit messages. This privilege identifies its holder as a security operator. User Right: Manage auditing and the security log.</summary>
+		SeSecurityPrivilege,
+		/// <summary>Required to take ownership of an object without being granted discretionary access. This privilege allows the owner value to be set only to those values that the holder may legitimately assign as the owner of an object. User Right: Take ownership of files or other objects.</summary>
+		SeTakeOwnershipPrivilege,
+		/// <summary>Required to load or unload a device driver. User Right: Load and unload device drivers.</summary>
+		SeLoadDriverPrivilege,
+		/// <summary>Required to gather profiling information for the entire system. User Right: Profile system performance.</summary>
+		SeSystemProfilePrivilege,
+		/// <summary>Required to modify the system time. User Right: Change the system time. </summary>
+		SeSystemtimePrivilege,
+		/// <summary>Required to gather profiling information for a single process. User Right: Profile single process.</summary>
+		SeProfileSingleProcessPrivilege,
+		/// <summary>Required to increase the base priority of a process. User Right: Increase scheduling priority.</summary>
+		SeIncreaseBasePriorityPrivilege,
+		/// <summary>Required to create a paging file. User Right: Create a pagefile. </summary>
+		SeCreatePagefilePrivilege,
+		/// <summary>Required to create a permanent object. User Right: Create permanent shared objects.</summary>
+		SeCreatePermanentPrivilege,
+		/// <summary>Required to perform backup operations. This privilege causes the system to grant all read access control to any file, regardless of the access control list (ACL) specified for the file. Any access request other than read is still evaluated with the ACL. This privilege is required by the RegSaveKey and RegSaveKeyExfunctions. The following access rights are granted if this privilege is held: READ_CONTROL, ACCESS_SYSTEM_SECURITY, FILE_GENERIC_READ, FILE_TRAVERSE. User Right: Back up files and directories.</summary>
+		SeBackupPrivilege,
+		/// <summary>Required to perform restore operations. This privilege causes the system to grant all write access control to any file, regardless of the ACL specified for the file. Any access request other than write is still evaluated with the ACL. Additionally, this privilege enables you to set any valid user or group security identifier (SID) as the owner of a file. This privilege is required by the RegLoadKey function. The following access rights are granted if this privilege is held: WRITE_DAC, WRITE_OWNER, ACCESS_SYSTEM_SECURITY, FILE_GENERIC_WRITE, FILE_ADD_FILE, FILE_ADD_SUBDIRECTORY, DELETE. User Right: Restore files and directories.</summary>
+		SeRestorePrivilege,
+		/// <summary>Required to shut down a local system. User Right: Shut down the system. </summary>
+		SeShutdownPrivilege,
+		/// <summary>Required to debug and adjust the memory of a process owned by another account. User Right: Debug programs.</summary>
+		SeDebugPrivilege,
+		/// <summary>Required to generate audit-log entries. Give this privilege to secure servers. User Right: Generate security audits.</summary>
+		SeAuditPrivilege,
+		/// <summary>Required to modify the nonvolatile RAM of systems that use this type of memory to store configuration information. User Right: Modify firmware environment values.</summary>
+		SeSystemEnvironmentPrivilege,
+		/// <summary>Required to receive notifications of changes to files or directories. This privilege also causes the system to skip all traversal access checks. It is enabled by default for all users. User Right: Bypass traverse checking.</summary>
+		SeChangeNotifyPrivilege,
+		/// <summary>Required to shut down a system by using a network request. User Right: Force shutdown from a remote system.</summary>
+		SeRemoteShutdownPrivilege,
+		/// <summary>Required to undock a laptop. User Right: Remove computer from docking station. </summary>
+		SeUndockPrivilege,
+		/// <summary>Required for a domain controller to use the LDAP directory synchronization services. This privilege allows the holder to read all objects and properties in the directory, regardless of the protection on the objects and properties. By default, it is assigned to the Administrator and LocalSystem accounts on domain controllers. User Right: Synchronize directory service data.</summary>
+		SeSyncAgentPrivilege,
+		/// <summary>Required to mark user and computer accounts as trusted for delegation. User Right: Enable computer and user accounts to be trusted for delegation.</summary>
+		SeEnableDelegationPrivilege,
+		/// <summary>Required to enable volume management privileges. User Right: Manage the files on a volume.</summary>
+		SeManageVolumePrivilege,
+		/// <summary>Required to impersonate. User Right: Impersonate a client after authentication. Windows XP/2000: This privilege is not supported. Note that this value is supported starting with Windows Server 2003, Windows XP with SP2, and Windows 2000 with SP4.</summary>
+		SeImpersonatePrivilege,
+		/// <summary>Required to create named file mapping objects in the global namespace during Terminal Services sessions. This privilege is enabled by default for administrators, services, and the local system account. User Right: Create global objects. Windows XP/2000: This privilege is not supported. Note that this value is supported starting with Windows Server 2003, Windows XP with SP2, and Windows 2000 with SP4.</summary>
+		SeCreateGlobalPrivilege,
+		/// <summary>Required to access Credential Manager as a trusted caller. User Right: Access Credential Manager as a trusted caller.</summary>
+		SeTrustedCredManAccessPrivilege,
+		/// <summary>Required to modify the mandatory integrity level of an object. User Right: Modify an object label.</summary>
+		SeRelabelPrivilege,
+		/// <summary>Required to allocate more memory for applications that run in the context of users. User Right: Increase a process working set.</summary>
+		SeIncreaseWorkingSetPrivilege,
+		/// <summary>Required to adjust the time zone associated with the computer's internal clock. User Right: Change the time zone.</summary>
+		SeTimeZonePrivilege,
+		/// <summary>Required to create a symbolic link. User Right: Create symbolic links.</summary>
+		SeCreateSymbolicLinkPrivilege
+	}
+
 	/// <summary>Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of process SID in the IPrincipal2 interface.</summary>
 	public enum TaskProcessTokenSidType
 	{
@@ -371,43 +445,47 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	/// <summary>
+	/// Specifies the task settings the Task scheduler will use to start task during Automatic maintenance.
+	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	public sealed class MaintenanceSettings : IDisposable
 	{
 		private V2Interop.IMaintenanceSettings v2Settings = null;
 
-		internal MaintenanceSettings(V2Interop.IMaintenanceSettings iSettings)
+		internal MaintenanceSettings(V2Interop.ITaskSettings3 iSettings)
 		{
-			v2Settings = iSettings;
-		}
-
-		internal MaintenanceSettings()
-		{
+			if (iSettings != null)
+			{
+				v2Settings = iSettings.MaintenanceSettings;
+				if (v2Settings == null)
+					v2Settings = iSettings.CreateMaintenanceSettings();
+			}
 		}
 
 		/// <summary>
-		/// Gets or sets the maintenance deadline.
+		/// Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete during regular Automatic maintenance. The minimum value is one day. The value of the <see cref="Deadline"/> property should be greater than the value of the <see cref="Period"/> property. If the deadline is not specified the task will not be started during emergency Automatic maintenance. 
 		/// </summary>
-		[DefaultValue(null)]
-		public string Deadline
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		public TimeSpan Deadline
 		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.Deadline;
-				return null;
+					return Task.StringToTimeSpan(v2Settings.Deadline);
+				return TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Deadline = value;
+					v2Settings.Deadline = Task.TimeSpanToString(value);
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets a valud indicating if the the maintenance is exclusive.
+		/// Gets or sets a valud indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive mode. The exclusivity is guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If exclusivity is not specified, the task is started in parallel with other maintenance tasks.
 		/// </summary>
 		[DefaultValue(false)]
 		public bool Exclusive
@@ -423,28 +501,28 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.Exclusive = value;
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the maintenance period.
+		/// Gets or sets the amount of time the task needs to be started during Automatic maintenance. The minimum value is one minute.
 		/// </summary>
-		[DefaultValue(null)]
-		public string Period
+		[DefaultValue(typeof(TimeSpan), "00:00:00")]
+		public TimeSpan Period
 		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.Period;
-				return null;
+					return Task.StringToTimeSpan(v2Settings.Period);
+				return TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Period = value;
+					v2Settings.Period = Task.TimeSpanToString(value);
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
 		}
 
@@ -469,10 +547,6 @@ namespace Microsoft.Win32.TaskScheduler
 		internal NetworkSettings(V2Interop.INetworkSettings iSettings)
 		{
 			v2Settings = iSettings;
-		}
-
-		internal NetworkSettings()
-		{
 		}
 
 		/// <summary>
@@ -1501,7 +1575,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
 		[XmlIgnore]
-		private TaskProcessTokenSidType ProcessTokenSidType
+		public TaskProcessTokenSidType ProcessTokenSidType
 		{
 			get
 			{
@@ -1514,7 +1588,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Principal2 != null)
 					v2Principal2.ProcessTokenSidType = value;
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
 			}
 		}
 
@@ -1523,7 +1597,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
 		[XmlIgnore]
-		private TaskPrincipalPrivileges RequiredPrivileges
+		public TaskPrincipalPrivileges RequiredPrivileges
 		{
 			get
 			{
@@ -1656,7 +1730,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// List of security credentials for a principal under version 1.3 of the Task Scheduler. These security credentials define the security context for the tasks that are associated with the principal.
 	/// </summary>
-	public sealed class TaskPrincipalPrivileges : System.Collections.Generic.IList<string>
+	public sealed class TaskPrincipalPrivileges : System.Collections.Generic.IList<TaskPrincipalPrivilege>
 	{
 		private V2Interop.IPrincipal2 v2Principal2;
 
@@ -1672,11 +1746,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The index of <paramref name="item"/> if found in the list; otherwise, -1.
 		/// </returns>
-		public int IndexOf(string item)
+		public int IndexOf(TaskPrincipalPrivilege item)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (string.Compare(item, this[i], true) == 0)
+				if (item == this[i])
 					return i;
 			}
 			return -1;
@@ -1693,7 +1767,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.NotSupportedException">
 		/// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
 		///   </exception>
-		public void Insert(int index, string item)
+		public void Insert(int index, TaskPrincipalPrivilege item)
 		{
 			throw new NotImplementedException();
 		}
@@ -1726,12 +1800,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.NotSupportedException">
 		/// The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
 		///   </exception>
-		public string this[int index]
+		public TaskPrincipalPrivilege this[int index]
 		{
 			get
 			{
 				if (this.v2Principal2 != null)
-					return this.v2Principal2.GetRequiredPrivilege(index + 1);
+					return (TaskPrincipalPrivilege)Enum.Parse(typeof(TaskPrincipalPrivilege), v2Principal2[index + 1]);
 				throw new IndexOutOfRangeException();
 			}
 			set
@@ -1747,12 +1821,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.NotSupportedException">
 		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
 		///   </exception>
-		public void Add(string item)
+		public void Add(TaskPrincipalPrivilege item)
 		{
 			if (this.v2Principal2 != null)
-				this.v2Principal2.AddRequiredPrivilege(item);
+				this.v2Principal2.AddRequiredPrivilege(item.ToString());
 			else
-				throw new NotV1SupportedException();
+				throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
 		}
 
 		/// <summary>
@@ -1773,7 +1847,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
 		/// </returns>
-		public bool Contains(string item)
+		public bool Contains(TaskPrincipalPrivilege item)
 		{
 			return (this.IndexOf(item) != -1);
 		}
@@ -1783,7 +1857,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="array">The array.</param>
 		/// <param name="arrayIndex">Index of the array.</param>
-		public void CopyTo(string[] array, int arrayIndex)
+		public void CopyTo(TaskPrincipalPrivilege[] array, int arrayIndex)
 		{
 			var pEnum = GetEnumerator();
 			for (int i = arrayIndex; i < array.Length; i++)
@@ -1825,7 +1899,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.NotSupportedException">
 		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
 		///   </exception>
-		public bool Remove(string item)
+		public bool Remove(TaskPrincipalPrivilege item)
 		{
 			throw new NotImplementedException();
 		}
@@ -1836,7 +1910,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
 		/// </returns>
-		public System.Collections.Generic.IEnumerator<string> GetEnumerator()
+		public System.Collections.Generic.IEnumerator<TaskPrincipalPrivilege> GetEnumerator()
 		{
 			return new TaskPrincipalPrivilegesEnumerator(this.v2Principal2);
 		}
@@ -1849,11 +1923,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Enumerates the privileges set for a principal under version 1.3 of the Task Scheduler.
 		/// </summary>
-		public sealed class TaskPrincipalPrivilegesEnumerator : System.Collections.Generic.IEnumerator<string>
+		public sealed class TaskPrincipalPrivilegesEnumerator : System.Collections.Generic.IEnumerator<TaskPrincipalPrivilege>
 		{
 			private V2Interop.IPrincipal2 v2Principal2;
 			int cur;
-			string curString;
+			TaskPrincipalPrivilege curVal;
 
 			internal TaskPrincipalPrivilegesEnumerator(V2Interop.IPrincipal2 iPrincipal2 = null)
 			{
@@ -1867,9 +1941,9 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>
 			/// The element in the collection at the current position of the enumerator.
 			///   </returns>
-			public string Current
+			public TaskPrincipalPrivilege Current
 			{
-				get { return curString; }
+				get { return curVal; }
 			}
 
 			/// <summary>
@@ -1898,10 +1972,10 @@ namespace Microsoft.Win32.TaskScheduler
 				if (this.v2Principal2 != null && cur < v2Principal2.RequiredPrivilegeCount)
 				{
 					cur++;
-					curString = v2Principal2.GetRequiredPrivilege(cur);
+					curVal = (TaskPrincipalPrivilege)Enum.Parse(typeof(TaskPrincipalPrivilege), v2Principal2[cur]);
 					return true;
 				}
-				curString = null;
+				curVal = 0;
 				return false;
 			}
 
@@ -1914,7 +1988,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Reset()
 			{
 				cur = 0;
-				curString = null;
+				curVal = 0;
 			}
 		}
 	}
@@ -2395,7 +2469,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v2Settings3 != null)
 					v2Settings3.DisallowStartOnRemoteAppSession = value;
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
 			}
 		}
 
@@ -2493,7 +2567,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the maintenance settings object.
+		/// Gets or sets the information that the Task Scheduler uses during Automatic maintenance.
 		/// </summary>
 		[XmlIgnore]
 		public MaintenanceSettings MaintenanceSettings
@@ -2501,12 +2575,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (maintenanceSettings == null)
-				{
-					if (v2Settings3 != null)
-						maintenanceSettings = new MaintenanceSettings(v2Settings3.MaintenanceSettings);
-					else
-						maintenanceSettings = new MaintenanceSettings();
-				}
+					maintenanceSettings = new MaintenanceSettings(v2Settings3);
 				return maintenanceSettings;
 			}
 		}
@@ -2542,12 +2611,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (networkSettings == null)
-				{
-					if (v2Settings != null)
-						networkSettings = new NetworkSettings(v2Settings.NetworkSettings);
-					else
-						networkSettings = new NetworkSettings();
-				}
+					networkSettings = new NetworkSettings(v2Settings == null ? null : v2Settings.NetworkSettings);
 				return networkSettings;
 			}
 		}
@@ -2830,29 +2894,29 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v2Settings3 != null)
 					v2Settings3.UseUnifiedSchedulingEngine = value;
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets a Boolean value that indicates that the task is volitile.
+		/// Gets or sets a boolean value that indicates whether the task is automatically disabled every time Windows starts.
 		/// </summary>
 		[DefaultValue(false)]
 		[XmlIgnore]
-		public bool Volitile
+		public bool Volatile
 		{
 			get
 			{
 				if (v2Settings3 != null)
-					return v2Settings3.Volitile;
+					return v2Settings3.Volatile;
 				return false;
 			}
 			set
 			{
 				if (v2Settings3 != null)
-					v2Settings3.Volitile = value;
+					v2Settings3.Volatile = value;
 				else
-					throw new NotV1SupportedException();
+					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
 		}
 
