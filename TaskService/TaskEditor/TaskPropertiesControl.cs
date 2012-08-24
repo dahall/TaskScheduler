@@ -192,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 				td = value;
 				onAssignment = true;
 				SetVersionComboItems();
-				IsV2 = td.Settings.Compatibility == TaskCompatibility.V2;
+				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
 				tabControl.SelectedIndex = 0;
 
 				this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
@@ -302,15 +302,6 @@ namespace Microsoft.Win32.TaskScheduler
 			private set { service = value; }
 		}
 
-		private void SetVersionComboItems()
-		{
-			this.taskVersionCombo.Items.Clear();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
-			if (td.Settings.Compatibility == TaskCompatibility.V2 || (TaskService != null && TaskService.HighestSupportedVersion.Major > 1))
-				this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items1", System.Globalization.CultureInfo.CurrentUICulture));
-			this.taskVersionCombo.Items.Add(resources.GetString("taskVersionCombo.Items", System.Globalization.CultureInfo.CurrentUICulture));
-		}
-
 		private bool IsV2
 		{
 			get { return v2; }
@@ -319,7 +310,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2 != value || onAssignment)
 				{
 					v2 = value;
-					taskVersionCombo.SelectedIndex = v2 ? 0 : taskVersionCombo.Items.Count - 1;
+					if (taskVersionCombo.Items.Count > 0)
+						taskVersionCombo.SelectedIndex = v2 ? taskVersionCombo.Items.Count - 1 : 0;
 				}
 			}
 		}
@@ -717,6 +709,46 @@ namespace Microsoft.Win32.TaskScheduler
 			taskPrincipalText.Text = user;
 		}
 
+		private class ComboItem
+		{
+			public string Text;
+			public int Version;
+
+			public ComboItem(string text, int ver) { Text = text; Version = ver; }
+
+			public override string ToString() { return this.Text; }
+		}
+
+		private void SetVersionComboItems()
+		{
+			this.taskVersionCombo.BeginUpdate();
+			this.taskVersionCombo.Items.Clear();
+			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
+			if (versions.Length != 5)
+				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
+			int max = (TaskService == null) ? 4 : TaskService.HighestSupportedVersion.Minor;
+			switch (td.Settings.Compatibility)
+			{
+				case TaskCompatibility.AT:
+					this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
+					for (int i = 2; i <= max; i++)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
+					this.taskVersionCombo.SelectedIndex = 0;
+					break;
+				case TaskCompatibility.V1:
+					for (int i = 1; i <= max; i++)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
+					this.taskVersionCombo.SelectedIndex = 0;
+					break;
+				default:
+					for (int i = 2; i <= max; i++)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
+					this.taskVersionCombo.SelectedIndex = (int)td.Settings.Compatibility - 2;
+					break;
+			}
+			this.taskVersionCombo.EndUpdate();
+		}
+
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && v2)
@@ -910,9 +942,9 @@ namespace Microsoft.Win32.TaskScheduler
 				tabControl.TabPages.Remove(historyTab);
 			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
 				tabControl.TabPages.Add(historyTab);
-			v2 = taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0;
-			if (td != null)
-				td.Settings.Compatibility = v2 ? TaskCompatibility.V2 : TaskCompatibility.V1;
+			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
+			if (!onAssignment && v2 && td != null && taskVersionCombo.SelectedIndex != -1)
+				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
@@ -942,7 +974,7 @@ namespace Microsoft.Win32.TaskScheduler
 			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 			if (idx >= 0)
 			{
-				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility != TaskCompatibility.V2);
+				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2);
 				dlg.TargetServer = TaskService.TargetServer;
 				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
@@ -968,7 +1000,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerNewButton_Click(object sender, EventArgs e)
 		{
-			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility != TaskCompatibility.V2);
+			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility < TaskCompatibility.V2);
 			dlg.TargetServer = TaskService.TargetServer;
 			dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)

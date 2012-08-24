@@ -357,12 +357,6 @@
   <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="taskVersionCombo.Items" xml:space="preserve">
-    <value>Windows Server™ 2003, Windows® XP, or Windows® 2000</value>
-  </data>
-  <data name="taskVersionCombo.Items1" xml:space="preserve">
-    <value>Windows Vista™ or Windows Server™ 2008</value>
-  </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 324</value>
   </data>
@@ -466,7 +460,7 @@
     <value>9, 141</value>
   </data>
   <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 17</value>
+    <value>168, 19</value>
   </data>
   <data name="taskRunLevelCheck.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -496,7 +490,7 @@
     <value>27, 116</value>
   </data>
   <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 17</value>
+    <value>459, 19</value>
   </data>
   <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -526,7 +520,7 @@
     <value>9, 91</value>
   </data>
   <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 17</value>
+    <value>220, 19</value>
   </data>
   <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -556,7 +550,7 @@
     <value>9, 66</value>
   </data>
   <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 17</value>
+    <value>197, 19</value>
   </data>
   <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1174,7 +1168,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskStartIfConnectionCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 17</value>
+    <value>331, 19</value>
   </data>
   <data name="taskStartIfConnectionCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1231,7 +1225,7 @@
     <value>27, 47</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 17</value>
+    <value>273, 19</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1261,7 +1255,7 @@
     <value>6, 72</value>
   </data>
   <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
+    <value>211, 19</value>
   </data>
   <data name="taskWakeToRunCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1291,7 +1285,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 17</value>
+    <value>288, 19</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1351,7 +1345,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1372,7 +1366,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1390,7 +1384,7 @@
     <value>47, 104</value>
   </data>
   <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 17</value>
+    <value>189, 19</value>
   </data>
   <data name="taskRestartOnIdleCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1420,7 +1414,7 @@
     <value>27, 79</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 17</value>
+    <value>224, 19</value>
   </data>
   <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1480,7 +1474,7 @@
     <value>6, 22</value>
   </data>
   <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 17</value>
+    <value>259, 19</value>
   </data>
   <data name="taskIdleDurationCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1735,7 +1729,7 @@
     <value>6, 228</value>
   </data>
   <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 17</value>
+    <value>311, 19</value>
   </data>
   <data name="taskDeleteAfterCheck.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1765,7 +1759,7 @@
     <value>6, 198</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 17</value>
+    <value>364, 19</value>
   </data>
   <data name="taskAllowHardTerminateCheck.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1795,7 +1789,7 @@
     <value>6, 168</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 17</value>
+    <value>207, 19</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1825,7 +1819,7 @@
     <value>6, 108</value>
   </data>
   <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 17</value>
+    <value>174, 19</value>
   </data>
   <data name="taskRestartIntervalCheck.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1855,7 +1849,7 @@
     <value>6, 78</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 17</value>
+    <value>344, 19</value>
   </data>
   <data name="taskStartWhenAvailableCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1885,7 +1879,7 @@
     <value>6, 48</value>
   </data>
   <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 17</value>
+    <value>195, 19</value>
   </data>
   <data name="taskAllowDemandStartCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1948,7 +1942,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1969,7 +1963,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1990,7 +1984,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2047,7 +2041,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.3.16798, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Dialog that will enumerate and display a list of COM objects and allow for a single selection.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog that will enumerate and display a list of COM objects."), Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DesignTimeVisible(true)]
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
+	Description("Dialog that will enumerate and display a list of COM objects."),
+	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+	DesignTimeVisible(true)]
 	public partial class ComObjectSelectionDialog :
 #if DEBUG
 		Form
@@ -17,11 +20,11 @@ namespace Microsoft.Win32.TaskScheduler
 		DialogBase
 #endif
 	{
-		private const int chunk = 100;
+		private const int chunk = 200;
 
-		private Guid supportedInterface = Guid.Empty;
 		private System.Collections.Generic.Queue<Guid> guidsToValidate;
-private  bool loading;
+		private bool loading;
+		private Guid supportedInterface = Guid.Empty;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ComObjectSelectionDialog"/> class.
@@ -39,39 +42,29 @@ private  bool loading;
 		[Flags]
 		public enum SupportedServers
 		{
-			/// <summary>
-			/// In process
-			/// </summary>
+			/// <summary>In process</summary>
 			InProcess = 1,
-			/// <summary>
-			/// Out of process
-			/// </summary>
+			/// <summary>Out of process</summary>
 			OutOfProcess = 2,
-			/// <summary>
-			/// All server types
-			/// </summary>
+			/// <summary>All server types</summary>
 			All = 3
 		}
+
+		private delegate void ItemInvoke(Guid key);
 
 		/// <summary>
 		/// Gets or sets the CLSID.
 		/// </summary>
 		/// <value>The CLSID.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Guid CLSID
-		{
-			get; set;
-		}
+		public Guid CLSID { get; set; }
 
 		/// <summary>
 		/// Gets or sets the type of COM servers to display.
 		/// </summary>
 		/// <value>The type of the server.</value>
 		[Category("Data"), DefaultValue(typeof(SupportedServers), "All"), Description("The type of COM servers to display.")]
-		public SupportedServers ServerType
-		{
-			get; set;
-		}
+		public SupportedServers ServerType { get; set; }
 
 		/// <summary>
 		/// Gets or sets the COM interface that the selected item must support.
@@ -82,6 +75,31 @@ private  bool loading;
 		{
 			get { return supportedInterface; }
 			set { supportedInterface = value; }
+		}
+
+		private static bool SupportsInterface(Guid clsid, Guid iGuid)
+		{
+			if (iGuid == Guid.Empty)
+				return true;
+
+			object o = null;
+			IntPtr iu = IntPtr.Zero, ppv = IntPtr.Zero;
+			try
+			{
+				o = Activator.CreateInstance(Type.GetTypeFromCLSID(clsid, false));
+				iu = System.Runtime.InteropServices.Marshal.GetIUnknownForObject(o);
+				return 0 == System.Runtime.InteropServices.Marshal.QueryInterface(iu, ref iGuid, out ppv);
+			}
+			catch
+			{
+				return false;
+			}
+			finally
+			{
+				if (ppv != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(ppv);
+				if (iu != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(iu);
+				if (o != null) System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
+			}
 		}
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -158,10 +176,14 @@ private  bool loading;
 		{
 			ListViewItem[] items = e.UserState as ListViewItem[];
 			listView1.Items.AddRange(items);
+			progressBar1.Value = e.ProgressPercentage;
 		}
 
 		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
+			listView1.EndUpdate();
+			progressBar1.Hide();
+			searchPanel.Show();
 			loading = false;
 			/*if (supportedInterface != null && supportedInterface != Guid.Empty)
 				backgroundWorker2.RunWorkerAsync(listView1.Items);
@@ -188,24 +210,6 @@ private  bool loading;
 			}
 		}
 
-		private delegate void ItemInvoke(Guid key);
-
-		private void DisableItem(ListViewItem item)
-		{
-			if (item != null)
-			{
-				item.ForeColor = System.Drawing.SystemColors.GrayText;
-				item.Tag = false;
-			}
-		}
-
-		private void DisableKey(Guid key)
-		{
-			int i = listView1.Items.IndexOfKey(key.ToString("B").ToLower());
-			if (i != -1)
-				DisableItem(listView1.Items[i]);
-		}
-
 		private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			this.UseWaitCursor = false;
@@ -221,8 +225,28 @@ private  bool loading;
 		private void ComObjectSelectionDialog_Load(object sender, EventArgs e)
 		{
 			listView1.Items.Clear();
+			listView1.BeginUpdate();
+			progressBar1.Value = 0;
+			progressBar1.Show();
+			searchPanel.Hide();
 			backgroundWorker1.RunWorkerAsync();
 			this.UseWaitCursor = true;
+		}
+
+		private void DisableItem(ListViewItem item)
+		{
+			if (item != null)
+			{
+				item.ForeColor = System.Drawing.SystemColors.GrayText;
+				item.Tag = false;
+			}
+		}
+
+		private void DisableKey(Guid key)
+		{
+			int i = listView1.Items.IndexOfKey(key.ToString("B").ToLower());
+			if (i != -1)
+				DisableItem(listView1.Items[i]);
 		}
 
 		private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -249,28 +273,15 @@ private  bool loading;
 				this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
-		private static bool SupportsInterface(Guid clsid, Guid iGuid)
+		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
-			if (iGuid == Guid.Empty)
-				return true;
-
-			object o = null;
-			IntPtr iu = IntPtr.Zero, ppv = IntPtr.Zero;
-			try
+			ListViewItem res = listView1.FindItemWithText(textBox1.Text, true, listView1.TopItem.Index);
+			if (res == null)
+				res = listView1.FindItemWithText(textBox1.Text, true, 0);
+			if (res != null)
 			{
-				o = Activator.CreateInstance(Type.GetTypeFromCLSID(clsid, false));
-				iu = System.Runtime.InteropServices.Marshal.GetIUnknownForObject(o);
-				return 0 == System.Runtime.InteropServices.Marshal.QueryInterface(iu, ref iGuid, out ppv);
-			}
-			catch
-			{
-				return false;
-			}
-			finally
-			{
-				if (ppv != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(ppv);
-				if (iu != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(iu);
-				if (o != null) System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
+				res.Selected = true;
+				listView1.TopItem = res;
 			}
 		}
 
