@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMTask", "COMTask\COMTask.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor", "TaskEditor\TaskEditor.csproj", "{5279D487-59FA-4D01-9D7A-EA7387D8B67C}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSchedulerHelp\TaskSchedulerHelp.shfbproj", "{DE4DC8A8-9008-4769-A7C2-F52F4F733944}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
@@ -31,6 +33,9 @@ Global
 		SccProjectUniqueName5 = TaskEditor\\TaskEditor.csproj
 		SccProjectName5 = TaskEditor
 		SccLocalPath5 = TaskEditor
+		SccProjectUniqueName6 = TaskSchedulerHelp\\TaskSchedulerHelp.shfbproj
+		SccProjectName6 = TaskSchedulerHelp
+		SccLocalPath6 = TaskSchedulerHelp
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +60,8 @@ Global
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
