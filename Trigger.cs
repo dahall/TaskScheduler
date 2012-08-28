@@ -1155,31 +1155,35 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					using (System.Xml.XmlTextReader rdr = new System.Xml.XmlTextReader(str))
 					{
-						rdr.MoveToContent();
-						rdr.ReadStartElement("QueryList");
-						if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
+						try
 						{
-							string path = rdr.Value;
-							if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
+							rdr.MoveToContent();
+							rdr.ReadStartElement("QueryList");
+							if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
 							{
-								string content = rdr.ReadString();
-								System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content,
-									@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
-									System.Text.RegularExpressions.RegexOptions.IgnoreCase |
-									System.Text.RegularExpressions.RegexOptions.Compiled |
-									System.Text.RegularExpressions.RegexOptions.Singleline |
-									System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
-								if (m.Success)
+								string path = rdr.Value;
+								if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
 								{
-									log = path;
-									if (m.Groups["s"].Success)
-										source = m.Groups["s"].Value;
-									if (m.Groups["e"].Success)
-										eventId = Convert.ToInt32(m.Groups["e"].Value);
-									return true;
+									string content = rdr.ReadString();
+									System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content,
+										@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
+										System.Text.RegularExpressions.RegexOptions.IgnoreCase |
+										System.Text.RegularExpressions.RegexOptions.Compiled |
+										System.Text.RegularExpressions.RegexOptions.Singleline |
+										System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
+									if (m.Success)
+									{
+										log = path;
+										if (m.Groups["s"].Success)
+											source = m.Groups["s"].Value;
+										if (m.Groups["e"].Success)
+											eventId = Convert.ToInt32(m.Groups["e"].Value);
+										return true;
+									}
 								}
 							}
 						}
+						catch { }
 					}
 				}
 			}
@@ -2327,7 +2331,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger.GetType() == this.GetType() && !this.StateChangeIsSet())
 				this.StateChange = ((SessionStateChangeTrigger)sourceTrigger).StateChange;
 		}
 
@@ -2342,6 +2346,15 @@ namespace Microsoft.Win32.TaskScheduler
 			if (this.StateChange != TaskSessionStateChangeType.SessionLock && this.StateChange != TaskSessionStateChangeType.SessionUnlock)
 				user = string.Format(Properties.Resources.TriggerSessionUserSession, user);
 			return string.Format(str, user);
+		}
+
+		/// <summary>
+		/// Returns a value indicating if the StateChange property has been set.
+		/// </summary>
+		/// <returns>StateChange property has been set.</returns>
+		internal bool StateChangeIsSet()
+		{
+			return (v2Trigger != null || unboundValues.ContainsKey("StateChange"));
 		}
 	}
 
