@@ -535,7 +535,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				Trigger newTrigger = this.trigger;
+				Trigger newTrigger = null;
 				if (sender == schedOneRadio)
 				{
 					schedTabControl.SelectedTab = oneTimeTab;
@@ -561,10 +561,10 @@ namespace Microsoft.Win32.TaskScheduler
 					if (!onAssignment) return;
 				}
 
-				if (trigger != null && !onAssignment)
+				if (newTrigger != null && !onAssignment)
 				{
-					// Copy base trigger information over
-					newTrigger.CopyProperties(trigger);
+					if (trigger != null)
+						newTrigger.CopyProperties(trigger);
 					this.Trigger = newTrigger;
 				}
 			}
@@ -626,7 +626,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (triggerTypeCombo.SelectedValue == null)
 				return;
 
-			Trigger newTrigger = this.trigger;
+			Trigger newTrigger = null;
 			switch (TriggerView)
 			{
 				case TaskTriggerDisplayType.Schedule:
@@ -672,10 +672,10 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 
-			if (trigger != null && !onAssignment)
+			if (newTrigger != null && !onAssignment)
 			{
-				// Copy base trigger information over
-				newTrigger.CopyProperties(trigger);
+				if (trigger != null)
+					newTrigger.CopyProperties(trigger);
 				this.Trigger = newTrigger;
 			}
 		}
