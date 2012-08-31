@@ -320,4 +320,40 @@ Action: {3}</value>
     <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
     <comment>Listing of corresponding OS listing to each TaskCompatibility enum separated by '|' character.</comment>
   </data>
+  <data name="TimeSpanNotStarted" xml:space="preserve">
+    <value>Not started</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal" xml:space="preserve">
+    <value>Above normal</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal" xml:space="preserve">
+    <value>Below normal</value>
+  </data>
+  <data name="ProcessPriorityHigh" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="ProcessPriorityIdle" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="ProcessPriorityNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ProcessPriorityRealTime" xml:space="preserve">
+    <value>Real-time</value>
+  </data>
+  <data name="SIDTypeDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="SIDTypeNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SIDTypeUnrestricted" xml:space="preserve">
+    <value>Unrestricted</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
+    <value>Setting this value requires that the user account on the General tab be set to either 'NETWORK SERVICE' or 'LOCAL SERVICE'. Please change the user account first and then reset this property.</value>
+  </data>
+  <data name="UseUnifiedResetQuestion" xml:space="preserve">
+    <value>Setting this property will disable a number of other properties. Would you still like to proceed?</value>
+  </data>
 </root>

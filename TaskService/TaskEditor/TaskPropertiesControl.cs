@@ -21,9 +21,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private string runTimesTaskName = null;
 		private TaskService service = null;
 		private bool showErrors = true;
+		private bool showAddedPropertiesTab = true;
 		private bool showRunTimesTab = true;
 		private Task task = null;
 		private TaskDefinition td = null;
+		private TabPage tempAddedPropertiesTab = null;
 		private TabPage tempRunTimesTabPage = null;
 		private bool v2 = true;
 
@@ -54,6 +56,17 @@ namespace Microsoft.Win32.TaskScheduler
 			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
+
+			// Settings for addPropTab
+			long allVal;
+			ComboBoxExtension.InitializeFromEnum(principalSIDTypeCombo.Items, typeof(TaskProcessTokenSidType), EditorProperties.Resources.ResourceManager, "SIDType", out allVal);
+			ComboBoxExtension.InitializeFromEnum(taskPriorityCombo.Items, typeof(System.Diagnostics.ProcessPriorityClass), EditorProperties.Resources.ResourceManager, "ProcessPriority", out allVal);
+			principalReqPrivilegesDropDown.Sorted = true;
+			principalReqPrivilegesDropDown.InitializeFromEnum(typeof(TaskPrincipalPrivilege), EditorProperties.Resources.ResourceManager, "");
+			taskMaintenanceDeadlineCombo.Items.AddRange(new TimeSpan2[] { TimeSpan.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
+			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanNotStarted;
+			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
+			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 
 			Editable = false;
 		}
@@ -122,6 +135,36 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Additional' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Additional tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additional' tab is shown.")]
+		public bool ShowAddedPropertiesTab
+		{
+			get
+			{
+				return showAddedPropertiesTab;
+			}
+			set
+			{
+				if (value == showAddedPropertiesTab || this.DesignMode == true)
+					return;
+
+				if (value)
+				{
+					tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempAddedPropertiesTab);
+					tempAddedPropertiesTab = null;
+				}
+				else
+				{
+					tempAddedPropertiesTab = addPropTab;
+					tabControl.TabPages.Remove(addPropTab);
+				}
+				showAddedPropertiesTab = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether to show the 'Run Times' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Run Times tab; otherwise, <c>false</c>.</value>
@@ -139,7 +182,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				if (value)
 				{
-					tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempRunTimesTabPage);
+					tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + 1, tempRunTimesTabPage);
 					tempRunTimesTabPage = null;
 				}
 				else
@@ -264,6 +307,26 @@ namespace Microsoft.Win32.TaskScheduler
 				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
 				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
 				taskMultInstCombo.SelectedIndex = (int)td.Settings.MultipleInstances;
+
+				// Set Additional tab
+				taskEnabledCheck.Checked = td.Settings.Enabled;
+				taskPriorityCombo.SelectedIndex = taskPriorityCombo.Items.IndexOf((long)td.Settings.Priority);
+				taskDisallowStartOnRemoteAppSessionCheck.Checked = td.Settings.DisallowStartOnRemoteAppSession;
+				taskUseUnifiedSchedulingEngineCheck.Checked = td.Settings.UseUnifiedSchedulingEngine;
+				if (td.Settings.Compatibility >= TaskCompatibility.V2_1)
+				{
+					principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
+					principalReqPrivilegesDropDown.CheckedFlagValue = 0;
+					foreach (var s in td.Principal.RequiredPrivileges)
+						principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
+				}
+				if (td.Settings.Compatibility >= TaskCompatibility.V2_2)
+				{
+					taskVolatileCheck.Checked = td.Settings.Volatile;
+					taskMaintenanceDeadlineCombo.Value = td.Settings.MaintenanceSettings.Deadline;
+					taskMaintenancePeriodCombo.Value = td.Settings.MaintenanceSettings.Period;
+					taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
+				}
 
 				onAssignment = false;
 			}
@@ -943,6 +1006,8 @@ namespace Microsoft.Win32.TaskScheduler
 			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
 				tabControl.TabPages.Add(historyTab);
 			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
+			bool v2_1 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
+			bool v2_2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
 			if (!onAssignment && v2 && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
@@ -951,6 +1016,10 @@ namespace Microsoft.Win32.TaskScheduler
 			taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
 			taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
 			taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && v2;
+			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
+				principalReqPrivilegesDropDown.Enabled = editable && v2_1;
+			taskVolatileCheck.Enabled = taskMaintenanceDeadlineLabel.Enabled = taskMaintenanceDeadlineCombo.Enabled = 
+				taskMaintenanceExclusiveCheck.Enabled = taskMaintenancePeriodLabel.Enabled = taskMaintenancePeriodCombo.Enabled = editable && v2_2;
 		}
 
 		private void taskWakeToRunCheck_CheckedChanged(object sender, EventArgs e)
@@ -1038,6 +1107,167 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!alreadyOnAssigment)
 					onAssignment = false;
 			}
+		}
+
+		private void taskEnabledCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.Enabled = taskEnabledCheck.Checked;
+		}
+
+		private void taskPriorityCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value;
+		}
+
+		private void taskDisallowStartOnRemoteAppSessionCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.DisallowStartOnRemoteAppSession = taskDisallowStartOnRemoteAppSessionCheck.Checked;
+		}
+
+		private bool CanUseUnifiedSchedulingEngine()
+		{
+			bool bad = (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting ||
+				td.Settings.NetworkSettings.Id != Guid.Empty || !td.Settings.AllowHardTerminate || td.Actions.ContainsType(typeof(EmailAction)) ||
+				td.Actions.ContainsType(typeof(ShowMessageAction)) || td.Triggers.ContainsType(typeof(MonthlyTrigger)) || td.Triggers.ContainsType(typeof(MonthlyDOWTrigger)));
+			if (!bad)
+			{
+				foreach (Trigger t in td.Triggers)
+				{
+					if (t.ExecutionTimeLimit != TimeSpan.Zero)
+					{
+						bad = true;
+						break;
+					}
+					if (t is ICalendarTrigger && (t.Repetition.Duration != TimeSpan.Zero || t.Repetition.Interval != TimeSpan.Zero || t.Repetition.StopAtDurationEnd))
+					{
+						bad = true;
+						break;
+					}
+					if (t is EventTrigger && ((EventTrigger)t).ValueQueries.Count > 0)
+					{
+						bad = true;
+						break;
+					}
+				}
+			}
+			return !bad;
+		}
+
+		private void ResetForUnifiedSchedulingEngine()
+		{
+			if (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
+			{
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				SetUserControls(td.Principal.LogonType);
+			}
+			if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
+				taskMultInstCombo.SelectedIndex = (int)TaskInstancesPolicy.IgnoreNew;
+			taskStartIfConnectionCheck.Checked = false;
+			if (availableConnectionsCombo.Items.Count > 0)
+				availableConnectionsCombo.SelectedIndex = 0;
+			taskAllowHardTerminateCheck.Checked = true;
+			for (int i = td.Actions.Count - 1; i >= 0; i--)
+			{
+				if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
+				{
+					td.Actions.RemoveAt(i);
+					actionListView.Items.RemoveAt(i);
+				}
+			}
+			for (int i = td.Triggers.Count - 1; i >= 0; i--)
+			{
+				if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
+				{
+					td.Triggers.RemoveAt(i);
+					triggerListView.Items.RemoveAt(i);
+				}
+				else
+				{
+					Trigger t = td.Triggers[i];
+					t.ExecutionTimeLimit = TimeSpan.Zero;
+					if (t is ICalendarTrigger)
+					{
+						t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
+						t.Repetition.StopAtDurationEnd = false;
+					}
+					else if (t is EventTrigger)
+						((EventTrigger)t).ValueQueries.Clear();
+				}
+			}
+		}
+
+		private void taskUseUnifiedSchedulingEngineCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				if (taskUseUnifiedSchedulingEngineCheck.Checked)
+				{
+					if (!CanUseUnifiedSchedulingEngine())
+					{
+						if (MessageBox.Show(this, EditorProperties.Resources.UseUnifiedResetQuestion, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+							ResetForUnifiedSchedulingEngine();
+						else
+							taskUseUnifiedSchedulingEngineCheck.Checked = false;
+					}
+				}
+				td.Settings.UseUnifiedSchedulingEngine = taskUseUnifiedSchedulingEngineCheck.Checked;
+			}
+		}
+
+		private void principalSIDTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				string[] validUserIds = new string[] { "NETWORK SERVICE", "LOCAL SERVICE" };
+				if (principalSIDTypeCombo.SelectedIndex != (int)TaskProcessTokenSidType.Default)
+				{
+					if (Array.Find<string>(validUserIds, delegate(string id) { return id.Equals(td.Principal.UserId, StringComparison.InvariantCultureIgnoreCase); }) == null)
+					{
+						MessageBox.Show(this, EditorProperties.Resources.Error_PrincipalSidTypeInvalid, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)TaskProcessTokenSidType.Default);
+						return;
+					}
+				}
+				td.Principal.ProcessTokenSidType = (TaskProcessTokenSidType)principalSIDTypeCombo.SelectedIndex;
+			}
+			principalReqPrivilegesDropDown.Enabled = principalReqPrivilegesLabel.Enabled = editable && (principalSIDTypeCombo.SelectedIndex == (int)TaskProcessTokenSidType.Unrestricted);
+		}
+
+		private void principalReqPrivilegesDropDown_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				// TODO: Find a way to clear this list
+				foreach (var item in principalReqPrivilegesDropDown.SelectedItems)
+					td.Principal.RequiredPrivileges.Add((TaskPrincipalPrivilege)((long)item.Value));
+			}
+		}
+
+		private void taskVolatileCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.Volatile = taskVolatileCheck.Checked;
+		}
+
+		private void taskMaintenanceDeadlineCombo_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.MaintenanceSettings.Deadline = taskMaintenanceDeadlineCombo.Value;
+		}
+
+		private void taskMaintenancePeriodCombo_ValueChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.MaintenanceSettings.Period = taskMaintenancePeriodCombo.Value;
+		}
+
+		private void taskMaintenanceExclusiveCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.Settings.MaintenanceSettings.Exclusive = taskMaintenanceExclusiveCheck.Checked;
 		}
 	}
 }
