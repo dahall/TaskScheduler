@@ -101,6 +101,23 @@
 			this.taskDeleteAfterCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.addPropTab = new System.Windows.Forms.TabPage();
+			this.principalReqPrivilegesLabel = new System.Windows.Forms.Label();
+			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.taskPriorityCombo = new System.Windows.Forms.ComboBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
+			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
+			this.taskMaintenancePeriodCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskMaintenancePeriodLabel = new System.Windows.Forms.Label();
+			this.taskMaintenanceDeadlineCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskMaintenanceDeadlineLabel = new System.Windows.Forms.Label();
+			this.taskMaintenanceExclusiveCheck = new System.Windows.Forms.CheckBox();
+			this.taskVolatileCheck = new System.Windows.Forms.CheckBox();
+			this.taskUseUnifiedSchedulingEngineCheck = new System.Windows.Forms.CheckBox();
+			this.taskDisallowStartOnRemoteAppSessionCheck = new System.Windows.Forms.CheckBox();
+			this.taskEnabledCheck = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
 			this.runTimesTab = new System.Windows.Forms.TabPage();
 			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
 			this.runTimesErrorLabel = new System.Windows.Forms.Label();
@@ -115,6 +132,8 @@
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+			this.autoMaintGroup = new System.Windows.Forms.GroupBox();
+			this.secHardGroup = new System.Windows.Forms.GroupBox();
 			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
@@ -126,9 +145,12 @@
 			this.idleConditionGroupBox.SuspendLayout();
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
+			this.addPropTab.SuspendLayout();
 			this.runTimesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
+			this.autoMaintGroup.SuspendLayout();
+			this.secHardGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -138,6 +160,7 @@
 			this.tabControl.Controls.Add(this.actionsTab);
 			this.tabControl.Controls.Add(this.conditionsTab);
 			this.tabControl.Controls.Add(this.settingsTab);
+			this.tabControl.Controls.Add(this.addPropTab);
 			this.tabControl.Controls.Add(this.runTimesTab);
 			this.tabControl.Controls.Add(this.historyTab);
 			resources.ApplyResources(this.tabControl, "tabControl");
@@ -666,6 +689,123 @@
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
 			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
 			// 
+			// addPropTab
+			// 
+			this.addPropTab.Controls.Add(this.secHardGroup);
+			this.addPropTab.Controls.Add(this.autoMaintGroup);
+			this.addPropTab.Controls.Add(this.taskPriorityCombo);
+			this.addPropTab.Controls.Add(this.label8);
+			this.addPropTab.Controls.Add(this.taskVolatileCheck);
+			this.addPropTab.Controls.Add(this.taskUseUnifiedSchedulingEngineCheck);
+			this.addPropTab.Controls.Add(this.taskDisallowStartOnRemoteAppSessionCheck);
+			this.addPropTab.Controls.Add(this.taskEnabledCheck);
+			this.addPropTab.Controls.Add(this.label4);
+			resources.ApplyResources(this.addPropTab, "addPropTab");
+			this.addPropTab.Name = "addPropTab";
+			this.addPropTab.UseVisualStyleBackColor = true;
+			// 
+			// principalReqPrivilegesLabel
+			// 
+			resources.ApplyResources(this.principalReqPrivilegesLabel, "principalReqPrivilegesLabel");
+			this.principalReqPrivilegesLabel.Name = "principalReqPrivilegesLabel";
+			// 
+			// principalReqPrivilegesDropDown
+			// 
+			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
+			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
+			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
+			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
+			// 
+			// taskPriorityCombo
+			// 
+			this.taskPriorityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.taskPriorityCombo, "taskPriorityCombo");
+			this.taskPriorityCombo.Name = "taskPriorityCombo";
+			this.taskPriorityCombo.SelectedIndexChanged += new System.EventHandler(this.taskPriorityCombo_SelectedIndexChanged);
+			// 
+			// label8
+			// 
+			resources.ApplyResources(this.label8, "label8");
+			this.label8.Name = "label8";
+			// 
+			// principalSIDTypeCombo
+			// 
+			this.principalSIDTypeCombo.DisplayMember = "Text";
+			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
+			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
+			this.principalSIDTypeCombo.ValueMember = "Value";
+			this.principalSIDTypeCombo.SelectedIndexChanged += new System.EventHandler(this.principalSIDTypeCombo_SelectedIndexChanged);
+			// 
+			// principalSIDTypeLabel
+			// 
+			resources.ApplyResources(this.principalSIDTypeLabel, "principalSIDTypeLabel");
+			this.principalSIDTypeLabel.Name = "principalSIDTypeLabel";
+			// 
+			// taskMaintenancePeriodCombo
+			// 
+			resources.ApplyResources(this.taskMaintenancePeriodCombo, "taskMaintenancePeriodCombo");
+			this.taskMaintenancePeriodCombo.Name = "taskMaintenancePeriodCombo";
+			this.taskMaintenancePeriodCombo.ValueChanged += new System.EventHandler(this.taskMaintenancePeriodCombo_ValueChanged);
+			// 
+			// taskMaintenancePeriodLabel
+			// 
+			resources.ApplyResources(this.taskMaintenancePeriodLabel, "taskMaintenancePeriodLabel");
+			this.taskMaintenancePeriodLabel.Name = "taskMaintenancePeriodLabel";
+			// 
+			// taskMaintenanceDeadlineCombo
+			// 
+			resources.ApplyResources(this.taskMaintenanceDeadlineCombo, "taskMaintenanceDeadlineCombo");
+			this.taskMaintenanceDeadlineCombo.Name = "taskMaintenanceDeadlineCombo";
+			this.taskMaintenanceDeadlineCombo.ValueChanged += new System.EventHandler(this.taskMaintenanceDeadlineCombo_ValueChanged);
+			// 
+			// taskMaintenanceDeadlineLabel
+			// 
+			resources.ApplyResources(this.taskMaintenanceDeadlineLabel, "taskMaintenanceDeadlineLabel");
+			this.taskMaintenanceDeadlineLabel.Name = "taskMaintenanceDeadlineLabel";
+			// 
+			// taskMaintenanceExclusiveCheck
+			// 
+			resources.ApplyResources(this.taskMaintenanceExclusiveCheck, "taskMaintenanceExclusiveCheck");
+			this.taskMaintenanceExclusiveCheck.Name = "taskMaintenanceExclusiveCheck";
+			this.taskMaintenanceExclusiveCheck.UseVisualStyleBackColor = true;
+			this.taskMaintenanceExclusiveCheck.CheckedChanged += new System.EventHandler(this.taskMaintenanceExclusiveCheck_CheckedChanged);
+			// 
+			// taskVolatileCheck
+			// 
+			resources.ApplyResources(this.taskVolatileCheck, "taskVolatileCheck");
+			this.taskVolatileCheck.Name = "taskVolatileCheck";
+			this.taskVolatileCheck.UseVisualStyleBackColor = true;
+			this.taskVolatileCheck.CheckedChanged += new System.EventHandler(this.taskVolatileCheck_CheckedChanged);
+			// 
+			// taskUseUnifiedSchedulingEngineCheck
+			// 
+			resources.ApplyResources(this.taskUseUnifiedSchedulingEngineCheck, "taskUseUnifiedSchedulingEngineCheck");
+			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
+			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
+			this.taskUseUnifiedSchedulingEngineCheck.CheckedChanged += new System.EventHandler(this.taskUseUnifiedSchedulingEngineCheck_CheckedChanged);
+			// 
+			// taskDisallowStartOnRemoteAppSessionCheck
+			// 
+			resources.ApplyResources(this.taskDisallowStartOnRemoteAppSessionCheck, "taskDisallowStartOnRemoteAppSessionCheck");
+			this.taskDisallowStartOnRemoteAppSessionCheck.Name = "taskDisallowStartOnRemoteAppSessionCheck";
+			this.taskDisallowStartOnRemoteAppSessionCheck.UseVisualStyleBackColor = true;
+			this.taskDisallowStartOnRemoteAppSessionCheck.CheckedChanged += new System.EventHandler(this.taskDisallowStartOnRemoteAppSessionCheck_CheckedChanged);
+			// 
+			// taskEnabledCheck
+			// 
+			resources.ApplyResources(this.taskEnabledCheck, "taskEnabledCheck");
+			this.taskEnabledCheck.Name = "taskEnabledCheck";
+			this.taskEnabledCheck.UseVisualStyleBackColor = true;
+			this.taskEnabledCheck.CheckedChanged += new System.EventHandler(this.taskEnabledCheck_CheckedChanged);
+			// 
+			// label4
+			// 
+			resources.ApplyResources(this.label4, "label4");
+			this.label4.Name = "label4";
+			// 
 			// runTimesTab
 			// 
 			this.runTimesTab.Controls.Add(this.taskRunTimesControl1);
@@ -752,6 +892,27 @@
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
+			// autoMaintGroup
+			// 
+			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineCombo);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceExclusiveCheck);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineLabel);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodLabel);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodCombo);
+			this.autoMaintGroup.Name = "autoMaintGroup";
+			this.autoMaintGroup.TabStop = false;
+			// 
+			// secHardGroup
+			// 
+			resources.ApplyResources(this.secHardGroup, "secHardGroup");
+			this.secHardGroup.Controls.Add(this.principalSIDTypeLabel);
+			this.secHardGroup.Controls.Add(this.principalSIDTypeCombo);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesLabel);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesDropDown);
+			this.secHardGroup.Name = "secHardGroup";
+			this.secHardGroup.TabStop = false;
+			// 
 			// TaskPropertiesControl
 			// 
 			resources.ApplyResources(this, "$this");
@@ -776,10 +937,16 @@
 			this.settingsTab.ResumeLayout(false);
 			this.settingsTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
+			this.addPropTab.ResumeLayout(false);
+			this.addPropTab.PerformLayout();
 			this.runTimesTab.ResumeLayout(false);
 			this.runTimesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
+			this.autoMaintGroup.ResumeLayout(false);
+			this.autoMaintGroup.PerformLayout();
+			this.secHardGroup.ResumeLayout(false);
+			this.secHardGroup.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -872,5 +1039,24 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label1;
 		private TaskRunTimesControl taskRunTimesControl1;
+		private System.Windows.Forms.TabPage addPropTab;
+		private System.Windows.Forms.ComboBox principalSIDTypeCombo;
+		private System.Windows.Forms.Label principalSIDTypeLabel;
+		private System.Windows.Forms.TimeSpanPicker taskMaintenancePeriodCombo;
+		private System.Windows.Forms.Label taskMaintenancePeriodLabel;
+		private System.Windows.Forms.TimeSpanPicker taskMaintenanceDeadlineCombo;
+		private System.Windows.Forms.Label taskMaintenanceDeadlineLabel;
+		private System.Windows.Forms.CheckBox taskMaintenanceExclusiveCheck;
+		private System.Windows.Forms.CheckBox taskVolatileCheck;
+		private System.Windows.Forms.CheckBox taskUseUnifiedSchedulingEngineCheck;
+		private System.Windows.Forms.CheckBox taskDisallowStartOnRemoteAppSessionCheck;
+		private System.Windows.Forms.CheckBox taskEnabledCheck;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label principalReqPrivilegesLabel;
+		private DropDownCheckList principalReqPrivilegesDropDown;
+		private System.Windows.Forms.ComboBox taskPriorityCombo;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.GroupBox secHardGroup;
+		private System.Windows.Forms.GroupBox autoMaintGroup;
 	}
 }

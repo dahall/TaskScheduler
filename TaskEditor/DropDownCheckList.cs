@@ -156,6 +156,25 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether the items in the combo box are sorted.
+		/// </summary>
+		/// <returns>true if the combo box is sorted; otherwise, false. The default is false.</returns>
+		/// <exception cref="T:System.ArgumentException">
+		/// An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox"/> that is attached to a data source.
+		/// </exception>
+		/// <PermissionSet>
+		///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		///   </PermissionSet>
+		public new bool Sorted
+		{
+			get { return this.checkedListBox1.Sorted; }
+			set { this.checkedListBox1.Sorted = value; }
+		}
+
+		/// <summary>
 		/// Gets the check state of the specified item.
 		/// </summary>
 		/// <param name="index">The index of the item.</param>
@@ -197,8 +216,6 @@ namespace Microsoft.Win32.TaskScheduler
 				long val = Convert.ToInt64(vals.GetValue(i));
 				allVal |= val;
 				string text = TaskEnumGlobalizer.GetString(vals.GetValue(i));
-				//if (text != null)
-				//	text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
 				this.checkedListBox1.Items.Add(new DropDownCheckListItem(text, val));
 			}
 			if (!string.IsNullOrEmpty(this.CheckAllText))
@@ -313,7 +330,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// An item in a <see cref="DropDownCheckList"/>.
 	/// </summary>
-	public class DropDownCheckListItem
+	public class DropDownCheckListItem : IComparable
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DropDownCheckListItem"/> class.
@@ -413,6 +430,13 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			return this.Text;
 		}
+
+		public int CompareTo(object obj)
+		{
+			if (obj is DropDownCheckListItem || obj is string)
+				return Text.CompareTo(((DropDownCheckListItem)obj).Text);
+			return 1;
+		}
 	}
 
 	internal static class ComboBoxExtension
@@ -421,6 +445,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			list.Clear();
 			allVal = 0;
+			if (prefix == null) prefix = string.Empty;
 			Array vals = Enum.GetValues(enumType);
 			Array names = Enum.GetNames(enumType);
 			for (int i = 0; i < vals.Length; i++)
@@ -430,7 +455,7 @@ namespace Microsoft.Win32.TaskScheduler
 				string text = mgr.GetString(prefix + names.GetValue(i).ToString(), System.Globalization.CultureInfo.CurrentUICulture);
 				if (string.IsNullOrEmpty(text))
 					text = names.GetValue(i).ToString();
-				text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
+				//text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
 				list.Add(new DropDownCheckListItem(text, val));
 			}
 		}

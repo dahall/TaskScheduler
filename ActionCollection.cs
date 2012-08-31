@@ -76,6 +76,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the specified action type is contained in this collection.
+		/// </summary>
+		/// <param name="actionType">Type of the action.</param>
+		/// <returns>
+		///   <c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.
+		/// </returns>
+		public bool ContainsType(Type actionType)
+		{
+			foreach (Action a in this)
+				if (a.GetType() == actionType)
+					return true;
+			return false;
+		}
+
+		/// <summary>
 		/// Inserts an action at the specified index.
 		/// </summary>
 		/// <param name="index">The zero-based index at which action should be inserted.</param>

@@ -79,7 +79,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public enum TaskPrincipalPrivilege
 	{
 		/// <summary>Required to create a primary token. User Right: Create a token object.</summary>
-		SeCreateTokenPrivilege,
+		SeCreateTokenPrivilege = 1,
 		/// <summary>Required to assign the primary token of a process. User Right: Replace a process-level token.</summary>
 		SeAssignPrimaryTokenPrivilege,
 		/// <summary>Required to lock physical pages in memory. User Right: Lock pages in memory. </summary>

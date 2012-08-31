@@ -214,6 +214,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the specified trigger type is contained in this collection.
+		/// </summary>
+		/// <param name="actionType">Type of the trigger.</param>
+		/// <returns>
+		///   <c>true</c> if the specified trigger type is contained in this collection; otherwise, <c>false</c>.
+		/// </returns>
+		public bool ContainsType(Type triggerType)
+		{
+			foreach (Trigger t in this)
+				if (t.GetType() == triggerType)
+					return true;
+			return false;
+		}
+
+		/// <summary>
 		/// Gets a specified trigger from the collection.
 		/// </summary>
 		/// <param name="index">The index of the trigger to be retrieved.</param>

@@ -115,6 +115,11 @@ namespace Microsoft.Win32.TaskScheduler
 	#region Interfaces
 
 	/// <summary>
+	/// Interface that categorizes the trigger as a calendar trigger.
+	/// </summary>
+	public interface ICalendarTrigger { }
+
+	/// <summary>
 	/// Interface for triggers that support a delay.
 	/// </summary>
 	public interface ITriggerDelay
@@ -889,7 +894,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class DailyTrigger : Trigger, ITriggerDelay, IXmlSerializable
+	public sealed class DailyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="DailyTrigger"/>.
@@ -1374,7 +1379,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May through October.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class MonthlyDOWTrigger : Trigger, ITriggerDelay, IXmlSerializable
+	public sealed class MonthlyDOWTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.
@@ -1734,7 +1739,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class MonthlyTrigger : Trigger, ITriggerDelay, IXmlSerializable
+	public sealed class MonthlyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="MonthlyTrigger"/>.
@@ -2441,7 +2446,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class WeeklyTrigger : Trigger, ITriggerDelay, IXmlSerializable
+	public sealed class WeeklyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="WeeklyTrigger"/>.

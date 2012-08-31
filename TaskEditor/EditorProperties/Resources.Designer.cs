@@ -187,6 +187,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setting this value requires that the user account on the General tab be set to either &apos;NETWORK SERVICE&apos; or &apos;LOCAL SERVICE&apos;. Please change the user account first and then reset this property..
+        /// </summary>
+        internal static string Error_PrincipalSidTypeInvalid {
+            get {
+                return ResourceManager.GetString("Error_PrincipalSidTypeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The repetition interval value must be less than or equal to the repetition duration value..
         /// </summary>
         internal static string Error_RepetitionMoreThanDuration {
@@ -246,6 +255,87 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string NoUserSpecifiedText {
             get {
                 return ResourceManager.GetString("NoUserSpecifiedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Above normal.
+        /// </summary>
+        internal static string ProcessPriorityAboveNormal {
+            get {
+                return ResourceManager.GetString("ProcessPriorityAboveNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Below normal.
+        /// </summary>
+        internal static string ProcessPriorityBelowNormal {
+            get {
+                return ResourceManager.GetString("ProcessPriorityBelowNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        internal static string ProcessPriorityHigh {
+            get {
+                return ResourceManager.GetString("ProcessPriorityHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Idle.
+        /// </summary>
+        internal static string ProcessPriorityIdle {
+            get {
+                return ResourceManager.GetString("ProcessPriorityIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        internal static string ProcessPriorityNormal {
+            get {
+                return ResourceManager.GetString("ProcessPriorityNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real-time.
+        /// </summary>
+        internal static string ProcessPriorityRealTime {
+            get {
+                return ResourceManager.GetString("ProcessPriorityRealTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string SIDTypeDefault {
+            get {
+                return ResourceManager.GetString("SIDTypeDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string SIDTypeNone {
+            get {
+                return ResourceManager.GetString("SIDTypeNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unrestricted.
+        /// </summary>
+        internal static string SIDTypeUnrestricted {
+            get {
+                return ResourceManager.GetString("SIDTypeUnrestricted", resourceCulture);
             }
         }
         
@@ -318,6 +408,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string TimeSpanIndefinitely {
             get {
                 return ResourceManager.GetString("TimeSpanIndefinitely", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not started.
+        /// </summary>
+        internal static string TimeSpanNotStarted {
+            get {
+                return ResourceManager.GetString("TimeSpanNotStarted", resourceCulture);
             }
         }
         
@@ -435,6 +534,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string UserAuthenticationError {
             get {
                 return ResourceManager.GetString("UserAuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting this property will disable a number of other properties. Would you still like to proceed?.
+        /// </summary>
+        internal static string UseUnifiedResetQuestion {
+            get {
+                return ResourceManager.GetString("UseUnifiedResetQuestion", resourceCulture);
             }
         }
         
