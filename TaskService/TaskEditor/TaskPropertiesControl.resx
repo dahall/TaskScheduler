@@ -117,1194 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;taskNameLabel.Name" xml:space="preserve">
-    <value>taskNameLabel</value>
-  </data>
-  <data name="&gt;&gt;taskNameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskNameLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskNameLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.Name" xml:space="preserve">
-    <value>taskAuthorLabel</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Name" xml:space="preserve">
-    <value>taskDescLabel</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskNameText.Name" xml:space="preserve">
-    <value>taskNameText</value>
-  </data>
-  <data name="&gt;&gt;taskNameText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskNameText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskNameText.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.Name" xml:space="preserve">
-    <value>taskLocationText</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Name" xml:space="preserve">
-    <value>taskAuthorText</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Name" xml:space="preserve">
-    <value>taskDescText</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Name" xml:space="preserve">
-    <value>taskVersionCombo</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Name" xml:space="preserve">
-    <value>taskVersionLabel</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Name" xml:space="preserve">
-    <value>taskHiddenCheck</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="generalTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="generalTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="generalTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="generalTab.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="generalTab.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="&gt;&gt;generalTab.Name" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;generalTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;generalTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;generalTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;triggerDeleteButton.Name" xml:space="preserve">
-    <value>triggerDeleteButton</value>
-  </data>
-  <data name="&gt;&gt;triggerDeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;triggerDeleteButton.Parent" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;triggerDeleteButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;triggerEditButton.Name" xml:space="preserve">
-    <value>triggerEditButton</value>
-  </data>
-  <data name="&gt;&gt;triggerEditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;triggerEditButton.Parent" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;triggerEditButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;triggerNewButton.Name" xml:space="preserve">
-    <value>triggerNewButton</value>
-  </data>
-  <data name="&gt;&gt;triggerNewButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;triggerNewButton.Parent" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;triggerNewButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;triggerListView.Name" xml:space="preserve">
-    <value>triggerListView</value>
-  </data>
-  <data name="&gt;&gt;triggerListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;triggerListView.Parent" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;triggerListView.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskTriggerIntroLabel.Name" xml:space="preserve">
-    <value>taskTriggerIntroLabel</value>
-  </data>
-  <data name="&gt;&gt;taskTriggerIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskTriggerIntroLabel.Parent" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;taskTriggerIntroLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="triggersTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="triggersTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="triggersTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="triggersTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="triggersTab.Text" xml:space="preserve">
-    <value>Triggers</value>
-  </data>
-  <data name="&gt;&gt;triggersTab.Name" xml:space="preserve">
-    <value>triggersTab</value>
-  </data>
-  <data name="&gt;&gt;triggersTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;triggersTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;triggersTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;actionDownButton.Name" xml:space="preserve">
-    <value>actionDownButton</value>
-  </data>
-  <data name="&gt;&gt;actionDownButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionDownButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionDownButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;actionUpButton.Name" xml:space="preserve">
-    <value>actionUpButton</value>
-  </data>
-  <data name="&gt;&gt;actionUpButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionUpButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionUpButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;actionDeleteButton.Name" xml:space="preserve">
-    <value>actionDeleteButton</value>
-  </data>
-  <data name="&gt;&gt;actionDeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionDeleteButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionDeleteButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;actionEditButton.Name" xml:space="preserve">
-    <value>actionEditButton</value>
-  </data>
-  <data name="&gt;&gt;actionEditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionEditButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionEditButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;actionNewButton.Name" xml:space="preserve">
-    <value>actionNewButton</value>
-  </data>
-  <data name="&gt;&gt;actionNewButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionNewButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionNewButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;actionListView.Name" xml:space="preserve">
-    <value>actionListView</value>
-  </data>
-  <data name="&gt;&gt;actionListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionListView.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionListView.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;actionIntroLabel.Name" xml:space="preserve">
-    <value>actionIntroLabel</value>
-  </data>
-  <data name="&gt;&gt;actionIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionIntroLabel.Parent" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionIntroLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="actionsTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="actionsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="actionsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="actionsTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="actionsTab.Text" xml:space="preserve">
-    <value>Actions</value>
-  </data>
-  <data name="&gt;&gt;actionsTab.Name" xml:space="preserve">
-    <value>actionsTab</value>
-  </data>
-  <data name="&gt;&gt;actionsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionsTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;actionsTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Name" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Parent" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Name" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Parent" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Name" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Parent" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;conditionIntroLabel.Name" xml:space="preserve">
-    <value>conditionIntroLabel</value>
-  </data>
-  <data name="&gt;&gt;conditionIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;conditionIntroLabel.Parent" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;conditionIntroLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="conditionsTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="conditionsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="conditionsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="conditionsTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="conditionsTab.Text" xml:space="preserve">
-    <value>Conditions</value>
-  </data>
-  <data name="&gt;&gt;conditionsTab.Name" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;conditionsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;conditionsTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;conditionsTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Name" xml:space="preserve">
-    <value>taskRestartCountText</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Name" xml:space="preserve">
-    <value>taskMultInstCombo</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Name" xml:space="preserve">
-    <value>taskRunningRuleLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Name" xml:space="preserve">
-    <value>taskRestartAttemptTimesLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Name" xml:space="preserve">
-    <value>taskRestartCountLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Name" xml:space="preserve">
-    <value>taskDeleteAfterCheck</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Name" xml:space="preserve">
-    <value>taskAllowHardTerminateCheck</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
-    <value>taskExecutionTimeLimitCheck</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Name" xml:space="preserve">
-    <value>taskRestartIntervalCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Name" xml:space="preserve">
-    <value>taskStartWhenAvailableCheck</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;taskAllowDemandStartCheck.Name" xml:space="preserve">
-    <value>taskAllowDemandStartCheck</value>
-  </data>
-  <data name="&gt;&gt;taskAllowDemandStartCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAllowDemandStartCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskAllowDemandStartCheck.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;settingsIntroLabel.Name" xml:space="preserve">
-    <value>settingsIntroLabel</value>
-  </data>
-  <data name="&gt;&gt;settingsIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsIntroLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;settingsIntroLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Name" xml:space="preserve">
-    <value>taskDeleteAfterCombo</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Name" xml:space="preserve">
-    <value>taskExecutionTimeLimitCombo</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Name" xml:space="preserve">
-    <value>taskRestartIntervalCombo</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="settingsTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="settingsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="settingsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="settingsTab.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="settingsTab.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="&gt;&gt;settingsTab.Name" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;settingsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;settingsTab.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="secHardGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Name" xml:space="preserve">
-    <value>principalSIDTypeLabel</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Parent" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Name" xml:space="preserve">
-    <value>principalSIDTypeCombo</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Parent" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesLabel.Name" xml:space="preserve">
-    <value>principalReqPrivilegesLabel</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesLabel.Parent" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesDropDown.Name" xml:space="preserve">
-    <value>principalReqPrivilegesDropDown</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.26401, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;principalReqPrivilegesDropDown.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="secHardGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 173</value>
-  </data>
-  <data name="secHardGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 85</value>
-  </data>
-  <data name="secHardGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Security Hardening</value>
-  </data>
-  <data name="&gt;&gt;secHardGroup.Name" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;secHardGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;secHardGroup.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;secHardGroup.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="autoMaintGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Name" xml:space="preserve">
-    <value>taskMaintenanceDeadlineCombo</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineCombo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Name" xml:space="preserve">
-    <value>taskMaintenanceExclusiveCheck</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceExclusiveCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Name" xml:space="preserve">
-    <value>taskMaintenanceDeadlineLabel</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Name" xml:space="preserve">
-    <value>taskMaintenancePeriodLabel</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Name" xml:space="preserve">
-    <value>taskMaintenancePeriodCombo</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="autoMaintGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 264</value>
-  </data>
-  <data name="autoMaintGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 102</value>
-  </data>
-  <data name="autoMaintGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="autoMaintGroup.Text" xml:space="preserve">
-    <value>Automatic Maintenance</value>
-  </data>
-  <data name="&gt;&gt;autoMaintGroup.Name" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;autoMaintGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoMaintGroup.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;autoMaintGroup.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="taskPriorityCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 69</value>
-  </data>
-  <data name="taskPriorityCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 23</value>
-  </data>
-  <data name="taskPriorityCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskPriorityCombo.Name" xml:space="preserve">
-    <value>taskPriorityCombo</value>
-  </data>
-  <data name="&gt;&gt;taskPriorityCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskPriorityCombo.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;taskPriorityCombo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 15</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Priority &amp;Level:</value>
-  </data>
-  <data name="label8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="taskVolatileCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskVolatileCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskVolatileCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 148</value>
-  </data>
-  <data name="taskVolatileCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 19</value>
-  </data>
-  <data name="taskVolatileCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value>&amp;Automatically disable task every time Windows starts</value>
-  </data>
-  <data name="&gt;&gt;taskVolatileCheck.Name" xml:space="preserve">
-    <value>taskVolatileCheck</value>
-  </data>
-  <data name="&gt;&gt;taskVolatileCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskVolatileCheck.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;taskVolatileCheck.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 123</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>&amp;Use Unified Scheduling Engine</value>
-  </data>
-  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Name" xml:space="preserve">
-    <value>taskUseUnifiedSchedulingEngineCheck</value>
-  </data>
-  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 98</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 19</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>&amp;Disallow start if in a Remote Applications Integrated Locally (RAIL) session</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Name" xml:space="preserve">
-    <value>taskDisallowStartOnRemoteAppSessionCheck</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="taskEnabledCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskEnabledCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskEnabledCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
-  </data>
-  <data name="taskEnabledCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
-  </data>
-  <data name="taskEnabledCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="taskEnabledCheck.Text" xml:space="preserve">
-    <value>&amp;Enabled</value>
-  </data>
-  <data name="&gt;&gt;taskEnabledCheck.Name" xml:space="preserve">
-    <value>taskEnabledCheck</value>
-  </data>
-  <data name="&gt;&gt;taskEnabledCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskEnabledCheck.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;taskEnabledCheck.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Specify even more settings that affect the behavior of the task.</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="addPropTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="addPropTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="addPropTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="addPropTab.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="addPropTab.Text" xml:space="preserve">
-    <value>Additions</value>
-  </data>
-  <data name="&gt;&gt;addPropTab.Name" xml:space="preserve">
-    <value>addPropTab</value>
-  </data>
-  <data name="&gt;&gt;addPropTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addPropTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;addPropTab.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;taskRunTimesControl1.Name" xml:space="preserve">
-    <value>taskRunTimesControl1</value>
-  </data>
-  <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.26401, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
-    <value>runTimesTab</value>
-  </data>
-  <data name="&gt;&gt;taskRunTimesControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;runTimesErrorLabel.Name" xml:space="preserve">
-    <value>runTimesErrorLabel</value>
-  </data>
-  <data name="&gt;&gt;runTimesErrorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;runTimesErrorLabel.Parent" xml:space="preserve">
-    <value>runTimesTab</value>
-  </data>
-  <data name="&gt;&gt;runTimesErrorLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>runTimesTab</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>runTimesTab</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="runTimesTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="runTimesTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="runTimesTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="runTimesTab.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="runTimesTab.Text" xml:space="preserve">
-    <value>Run Times</value>
-  </data>
-  <data name="&gt;&gt;runTimesTab.Name" xml:space="preserve">
-    <value>runTimesTab</value>
-  </data>
-  <data name="&gt;&gt;runTimesTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;runTimesTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;runTimesTab.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Name" xml:space="preserve">
-    <value>historyListView</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Parent" xml:space="preserve">
-    <value>historyTab</value>
-  </data>
-  <data name="&gt;&gt;historyListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="historyTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="historyTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="historyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
-  </data>
-  <data name="historyTab.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="historyTab.Text" xml:space="preserve">
-    <value>History</value>
-  </data>
-  <data name="&gt;&gt;historyTab.Name" xml:space="preserve">
-    <value>historyTab</value>
-  </data>
-  <data name="&gt;&gt;historyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;historyTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;historyTab.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 400</value>
-  </data>
-  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="taskNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskNameLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 10</value>
   </data>
@@ -1629,114 +450,6 @@
   <data name="taskSecurityGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Name" xml:space="preserve">
-    <value>taskRunLevelCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
-    <value>taskLocalOnlyCheck</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
-    <value>taskLoggedOptionalRadio</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
-    <value>taskLoggedOnRadio</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Name" xml:space="preserve">
-    <value>taskPrincipalText</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
-    <value>changePrincipalButton</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
-    <value>taskUserAcctLabel</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 148</value>
-  </data>
-  <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 170</value>
-  </data>
-  <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
-    <value>Security options</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="taskRunLevelCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1941,6 +654,57 @@
   <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 148</value>
+  </data>
+  <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 170</value>
+  </data>
+  <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Security options</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
+    <value>taskSecurityGroupBox</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
+    <value>generalTab</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="generalTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="generalTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="generalTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="generalTab.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="generalTab.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="&gt;&gt;generalTab.Name" xml:space="preserve">
+    <value>generalTab</value>
+  </data>
+  <data name="&gt;&gt;generalTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;generalTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;generalTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="triggerDeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -2034,6 +798,24 @@
   <data name="triggerListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>315</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
   <data name="triggerListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
@@ -2054,24 +836,6 @@
   </data>
   <data name="&gt;&gt;triggerListView.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Trigger</value>
-  </data>
-  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
-    <value>95</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
-    <value>315</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
-    <value>74</value>
   </data>
   <data name="taskTriggerIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2102,6 +866,33 @@
   </data>
   <data name="&gt;&gt;taskTriggerIntroLabel.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="triggersTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="triggersTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="triggersTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="triggersTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="triggersTab.Text" xml:space="preserve">
+    <value>Triggers</value>
+  </data>
+  <data name="&gt;&gt;triggersTab.Name" xml:space="preserve">
+    <value>triggersTab</value>
+  </data>
+  <data name="&gt;&gt;triggersTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;triggersTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;triggersTab.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="actionDownButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2250,6 +1041,18 @@
   <data name="actionListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+    <value>112</value>
+  </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+    <value>290</value>
+  </data>
   <data name="actionListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
@@ -2270,18 +1073,6 @@
   </data>
   <data name="&gt;&gt;actionListView.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
-    <value>112</value>
-  </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
-    <value>290</value>
   </data>
   <data name="actionIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2313,56 +1104,35 @@
   <data name="&gt;&gt;actionIntroLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="actionsTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="actionsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="actionsTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="actionsTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="actionsTab.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="&gt;&gt;actionsTab.Name" xml:space="preserve">
+    <value>actionsTab</value>
+  </data>
+  <data name="&gt;&gt;actionsTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;actionsTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;actionsTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="networkConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Name" xml:space="preserve">
-    <value>availableConnectionsCombo</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;taskStartIfConnectionCheck.Name" xml:space="preserve">
-    <value>taskStartIfConnectionCheck</value>
-  </data>
-  <data name="&gt;&gt;taskStartIfConnectionCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskStartIfConnectionCheck.Parent" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskStartIfConnectionCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="networkConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 288</value>
-  </data>
-  <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 80</value>
-  </data>
-  <data name="networkConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="networkConditionGroupBox.Text" xml:space="preserve">
-    <value>Network</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Name" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.Parent" xml:space="preserve">
-    <value>conditionsTab</value>
-  </data>
-  <data name="&gt;&gt;networkConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="availableConnectionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2418,68 +1188,32 @@
   <data name="&gt;&gt;taskStartIfConnectionCheck.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="powerConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="networkConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 288</value>
   </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Name" xml:space="preserve">
-    <value>taskStopIfGoingOnBatteriesCheck</value>
+  <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 80</value>
   </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="networkConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
+  <data name="networkConditionGroupBox.Text" xml:space="preserve">
+    <value>Network</value>
   </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;networkConditionGroupBox.Name" xml:space="preserve">
+    <value>networkConditionGroupBox</value>
   </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
-    <value>taskWakeToRunCheck</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Name" xml:space="preserve">
-    <value>taskDisallowStartIfOnBatteriesCheck</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="powerConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 184</value>
-  </data>
-  <data name="powerConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 98</value>
-  </data>
-  <data name="powerConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="powerConditionGroupBox.Text" xml:space="preserve">
-    <value>Power</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Name" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;networkConditionGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;powerConditionGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;networkConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
   </data>
-  <data name="&gt;&gt;powerConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;networkConditionGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="powerConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2571,104 +1305,32 @@
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="idleConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="powerConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 184</value>
   </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Name" xml:space="preserve">
-    <value>taskIdleWaitTimeoutCombo</value>
+  <data name="powerConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 98</value>
   </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
-    <value>taskIdleDurationCombo</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Name" xml:space="preserve">
-    <value>taskRestartOnIdleCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.ZOrder" xml:space="preserve">
+  <data name="powerConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
-    <value>taskStopOnIdleEndCheck</value>
+  <data name="powerConditionGroupBox.Text" xml:space="preserve">
+    <value>Power</value>
   </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;powerConditionGroupBox.Name" xml:space="preserve">
+    <value>powerConditionGroupBox</value>
   </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Name" xml:space="preserve">
-    <value>taskIdleWaitTimeoutLabel</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCheck.Name" xml:space="preserve">
-    <value>taskIdleDurationCheck</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCheck.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 48</value>
-  </data>
-  <data name="idleConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 130</value>
-  </data>
-  <data name="idleConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>Idle</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Name" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;powerConditionGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;powerConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
   </data>
-  <data name="&gt;&gt;idleConditionGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;powerConditionGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="idleConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>372, 51</value>
@@ -2832,6 +1494,30 @@
   <data name="&gt;&gt;taskIdleDurationCheck.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="idleConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 130</value>
+  </data>
+  <data name="idleConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="&gt;&gt;idleConditionGroupBox.Name" xml:space="preserve">
+    <value>idleConditionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;idleConditionGroupBox.Parent" xml:space="preserve">
+    <value>conditionsTab</value>
+  </data>
+  <data name="&gt;&gt;idleConditionGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="conditionIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2862,6 +1548,33 @@
   <data name="&gt;&gt;conditionIntroLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="conditionsTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="conditionsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="conditionsTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="conditionsTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="conditionsTab.Text" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="&gt;&gt;conditionsTab.Name" xml:space="preserve">
+    <value>conditionsTab</value>
+  </data>
+  <data name="&gt;&gt;conditionsTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;conditionsTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;conditionsTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="taskRestartCountText.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 133</value>
   </data>
@@ -2882,18 +1595,6 @@
   </data>
   <data name="&gt;&gt;taskRestartCountText.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="taskMultInstCombo.Items" xml:space="preserve">
-    <value>Run a new instance in parallel</value>
-  </data>
-  <data name="taskMultInstCombo.Items1" xml:space="preserve">
-    <value>Queue a new instance</value>
-  </data>
-  <data name="taskMultInstCombo.Items2" xml:space="preserve">
-    <value>Do not start a new instance</value>
-  </data>
-  <data name="taskMultInstCombo.Items3" xml:space="preserve">
-    <value>Stop the existing instance</value>
   </data>
   <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 288</value>
@@ -3279,6 +1980,90 @@
   <data name="&gt;&gt;taskRestartIntervalCombo.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="settingsTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="settingsTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="settingsTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="settingsTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="settingsTab.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;settingsTab.Name" xml:space="preserve">
+    <value>settingsTab</value>
+  </data>
+  <data name="&gt;&gt;settingsTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;settingsTab.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="secHardGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="principalSIDTypeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="principalSIDTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="principalSIDTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 24</value>
+  </data>
+  <data name="principalSIDTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 15</value>
+  </data>
+  <data name="principalSIDTypeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Process &amp;Security Identify (SID) type:</value>
+  </data>
+  <data name="principalSIDTypeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeLabel.Name" xml:space="preserve">
+    <value>principalSIDTypeLabel</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeLabel.Parent" xml:space="preserve">
+    <value>secHardGroup</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 21</value>
+  </data>
+  <data name="principalSIDTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 23</value>
+  </data>
+  <data name="principalSIDTypeCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeCombo.Name" xml:space="preserve">
+    <value>principalSIDTypeCombo</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeCombo.Parent" xml:space="preserve">
+    <value>secHardGroup</value>
+  </data>
+  <data name="&gt;&gt;principalSIDTypeCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="principalReqPrivilegesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3322,7 +2107,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.26401, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.32573, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -3330,110 +2115,32 @@
   <data name="&gt;&gt;principalReqPrivilegesDropDown.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 21</value>
+  <data name="secHardGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 173</value>
   </data>
-  <data name="principalSIDTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 23</value>
+  <data name="secHardGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 85</value>
   </data>
-  <data name="principalSIDTypeCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="secHardGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Name" xml:space="preserve">
-    <value>principalSIDTypeCombo</value>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Security Hardening</value>
   </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;secHardGroup.Name" xml:space="preserve">
     <value>secHardGroup</value>
   </data>
-  <data name="&gt;&gt;principalSIDTypeCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;secHardGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="principalSIDTypeLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;secHardGroup.Parent" xml:space="preserve">
+    <value>addPropTab</value>
   </data>
-  <data name="principalSIDTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="principalSIDTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 24</value>
-  </data>
-  <data name="principalSIDTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 15</value>
-  </data>
-  <data name="principalSIDTypeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Process &amp;Security Identify (SID) type:</value>
-  </data>
-  <data name="principalSIDTypeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Name" xml:space="preserve">
-    <value>principalSIDTypeLabel</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.Parent" xml:space="preserve">
-    <value>secHardGroup</value>
-  </data>
-  <data name="&gt;&gt;principalSIDTypeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;secHardGroup.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="taskMaintenancePeriodCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 51</value>
-  </data>
-  <data name="taskMaintenancePeriodCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="taskMaintenancePeriodCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Name" xml:space="preserve">
-    <value>taskMaintenancePeriodCombo</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodCombo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 54</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 15</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
-    <value>During maintenance, start task every:</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Name" xml:space="preserve">
-    <value>taskMaintenancePeriodLabel</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenancePeriodLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="autoMaintGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskMaintenanceDeadlineCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>256, 22</value>
@@ -3455,36 +2162,6 @@
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 15</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value>If task fails to complete, restart after:</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Name" xml:space="preserve">
-    <value>taskMaintenanceDeadlineLabel</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Parent" xml:space="preserve">
-    <value>autoMaintGroup</value>
-  </data>
-  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3516,6 +2193,339 @@
   <data name="&gt;&gt;taskMaintenanceExclusiveCheck.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="taskMaintenanceDeadlineLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 15</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
+    <value>If task fails to complete, restart after:</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Name" xml:space="preserve">
+    <value>taskMaintenanceDeadlineLabel</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Parent" xml:space="preserve">
+    <value>autoMaintGroup</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenanceDeadlineLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 54</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 15</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
+    <value>During maintenance, start task every:</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodLabel.Name" xml:space="preserve">
+    <value>taskMaintenancePeriodLabel</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodLabel.Parent" xml:space="preserve">
+    <value>autoMaintGroup</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskMaintenancePeriodCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 51</value>
+  </data>
+  <data name="taskMaintenancePeriodCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskMaintenancePeriodCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodCombo.Name" xml:space="preserve">
+    <value>taskMaintenancePeriodCombo</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
+    <value>autoMaintGroup</value>
+  </data>
+  <data name="&gt;&gt;taskMaintenancePeriodCombo.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="autoMaintGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 264</value>
+  </data>
+  <data name="autoMaintGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 102</value>
+  </data>
+  <data name="autoMaintGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="autoMaintGroup.Text" xml:space="preserve">
+    <value>Automatic Maintenance</value>
+  </data>
+  <data name="&gt;&gt;autoMaintGroup.Name" xml:space="preserve">
+    <value>autoMaintGroup</value>
+  </data>
+  <data name="&gt;&gt;autoMaintGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoMaintGroup.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;autoMaintGroup.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskPriorityCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 69</value>
+  </data>
+  <data name="taskPriorityCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 23</value>
+  </data>
+  <data name="taskPriorityCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;taskPriorityCombo.Name" xml:space="preserve">
+    <value>taskPriorityCombo</value>
+  </data>
+  <data name="&gt;&gt;taskPriorityCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskPriorityCombo.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;taskPriorityCombo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 72</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 15</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Priority &amp;Level:</value>
+  </data>
+  <data name="label8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskVolatileCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskVolatileCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskVolatileCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 148</value>
+  </data>
+  <data name="taskVolatileCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 19</value>
+  </data>
+  <data name="taskVolatileCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="taskVolatileCheck.Text" xml:space="preserve">
+    <value>&amp;Automatically disable task every time Windows starts</value>
+  </data>
+  <data name="&gt;&gt;taskVolatileCheck.Name" xml:space="preserve">
+    <value>taskVolatileCheck</value>
+  </data>
+  <data name="&gt;&gt;taskVolatileCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskVolatileCheck.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;taskVolatileCheck.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 123</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
+    <value>&amp;Use Unified Scheduling Engine</value>
+  </data>
+  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Name" xml:space="preserve">
+    <value>taskUseUnifiedSchedulingEngineCheck</value>
+  </data>
+  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 98</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>414, 19</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>&amp;Disallow start if in a Remote Applications Integrated Locally (RAIL) session</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Name" xml:space="preserve">
+    <value>taskDisallowStartOnRemoteAppSessionCheck</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="taskEnabledCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskEnabledCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskEnabledCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 46</value>
+  </data>
+  <data name="taskEnabledCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="taskEnabledCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskEnabledCheck.Text" xml:space="preserve">
+    <value>&amp;Enabled</value>
+  </data>
+  <data name="&gt;&gt;taskEnabledCheck.Name" xml:space="preserve">
+    <value>taskEnabledCheck</value>
+  </data>
+  <data name="&gt;&gt;taskEnabledCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskEnabledCheck.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;taskEnabledCheck.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 10</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>605, 35</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Specify even more settings that affect the behavior of the task.</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="addPropTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="addPropTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="addPropTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="addPropTab.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="addPropTab.Text" xml:space="preserve">
+    <value>Additions</value>
+  </data>
+  <data name="&gt;&gt;addPropTab.Name" xml:space="preserve">
+    <value>addPropTab</value>
+  </data>
+  <data name="&gt;&gt;addPropTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addPropTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;addPropTab.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="taskRunTimesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -3538,7 +2548,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.26401, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.32573, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3633,29 +2643,35 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="runTimesTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="runTimesTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="runTimesTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="runTimesTab.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="runTimesTab.Text" xml:space="preserve">
+    <value>Run Times</value>
+  </data>
+  <data name="&gt;&gt;runTimesTab.Name" xml:space="preserve">
+    <value>runTimesTab</value>
+  </data>
+  <data name="&gt;&gt;runTimesTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;runTimesTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;runTimesTab.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="historyListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="historyListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="historyListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 365</value>
-  </data>
-  <data name="historyListView.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Name" xml:space="preserve">
-    <value>historyListView</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;historyListView.Parent" xml:space="preserve">
-    <value>historyTab</value>
-  </data>
-  <data name="&gt;&gt;historyListView.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="columnHeader6.Text" xml:space="preserve">
     <value>Level</value>
@@ -3692,6 +2708,78 @@
   </data>
   <data name="columnHeader11.Width" type="System.Int32, mscorlib">
     <value>95</value>
+  </data>
+  <data name="historyListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="historyListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 365</value>
+  </data>
+  <data name="historyListView.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;historyListView.Name" xml:space="preserve">
+    <value>historyListView</value>
+  </data>
+  <data name="&gt;&gt;historyListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;historyListView.Parent" xml:space="preserve">
+    <value>historyTab</value>
+  </data>
+  <data name="&gt;&gt;historyListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="historyTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="historyTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="historyTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 372</value>
+  </data>
+  <data name="historyTab.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="historyTab.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="&gt;&gt;historyTab.Name" xml:space="preserve">
+    <value>historyTab</value>
+  </data>
+  <data name="&gt;&gt;historyTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;historyTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;historyTab.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 400</value>
+  </data>
+  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="historyBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

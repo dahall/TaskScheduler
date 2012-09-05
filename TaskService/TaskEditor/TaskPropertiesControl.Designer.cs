@@ -102,17 +102,19 @@
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.addPropTab = new System.Windows.Forms.TabPage();
+			this.secHardGroup = new System.Windows.Forms.GroupBox();
+			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
+			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
 			this.principalReqPrivilegesLabel = new System.Windows.Forms.Label();
 			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.autoMaintGroup = new System.Windows.Forms.GroupBox();
+			this.taskMaintenanceDeadlineCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.taskMaintenanceExclusiveCheck = new System.Windows.Forms.CheckBox();
+			this.taskMaintenanceDeadlineLabel = new System.Windows.Forms.Label();
+			this.taskMaintenancePeriodLabel = new System.Windows.Forms.Label();
+			this.taskMaintenancePeriodCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskPriorityCombo = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
-			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
-			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
-			this.taskMaintenancePeriodCombo = new System.Windows.Forms.TimeSpanPicker();
-			this.taskMaintenancePeriodLabel = new System.Windows.Forms.Label();
-			this.taskMaintenanceDeadlineCombo = new System.Windows.Forms.TimeSpanPicker();
-			this.taskMaintenanceDeadlineLabel = new System.Windows.Forms.Label();
-			this.taskMaintenanceExclusiveCheck = new System.Windows.Forms.CheckBox();
 			this.taskVolatileCheck = new System.Windows.Forms.CheckBox();
 			this.taskUseUnifiedSchedulingEngineCheck = new System.Windows.Forms.CheckBox();
 			this.taskDisallowStartOnRemoteAppSessionCheck = new System.Windows.Forms.CheckBox();
@@ -132,8 +134,6 @@
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			this.autoMaintGroup = new System.Windows.Forms.GroupBox();
-			this.secHardGroup = new System.Windows.Forms.GroupBox();
 			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
@@ -146,11 +146,11 @@
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
 			this.addPropTab.SuspendLayout();
+			this.secHardGroup.SuspendLayout();
+			this.autoMaintGroup.SuspendLayout();
 			this.runTimesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
-			this.autoMaintGroup.SuspendLayout();
-			this.secHardGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -600,11 +600,6 @@
 			// 
 			this.taskMultInstCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.taskMultInstCombo.FormattingEnabled = true;
-			this.taskMultInstCombo.Items.AddRange(new object[] {
-            resources.GetString("taskMultInstCombo.Items"),
-            resources.GetString("taskMultInstCombo.Items1"),
-            resources.GetString("taskMultInstCombo.Items2"),
-            resources.GetString("taskMultInstCombo.Items3")});
 			resources.ApplyResources(this.taskMultInstCombo, "taskMultInstCombo");
 			this.taskMultInstCombo.Name = "taskMultInstCombo";
 			this.taskMultInstCombo.SelectedIndexChanged += new System.EventHandler(this.taskMultInstCombo_SelectedIndexChanged);
@@ -704,6 +699,30 @@
 			this.addPropTab.Name = "addPropTab";
 			this.addPropTab.UseVisualStyleBackColor = true;
 			// 
+			// secHardGroup
+			// 
+			resources.ApplyResources(this.secHardGroup, "secHardGroup");
+			this.secHardGroup.Controls.Add(this.principalSIDTypeLabel);
+			this.secHardGroup.Controls.Add(this.principalSIDTypeCombo);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesLabel);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesDropDown);
+			this.secHardGroup.Name = "secHardGroup";
+			this.secHardGroup.TabStop = false;
+			// 
+			// principalSIDTypeLabel
+			// 
+			resources.ApplyResources(this.principalSIDTypeLabel, "principalSIDTypeLabel");
+			this.principalSIDTypeLabel.Name = "principalSIDTypeLabel";
+			// 
+			// principalSIDTypeCombo
+			// 
+			this.principalSIDTypeCombo.DisplayMember = "Text";
+			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
+			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
+			this.principalSIDTypeCombo.ValueMember = "Value";
+			this.principalSIDTypeCombo.SelectedIndexChanged += new System.EventHandler(this.principalSIDTypeCombo_SelectedIndexChanged);
+			// 
 			// principalReqPrivilegesLabel
 			// 
 			resources.ApplyResources(this.principalReqPrivilegesLabel, "principalReqPrivilegesLabel");
@@ -718,6 +737,46 @@
 			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
 			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
 			// 
+			// autoMaintGroup
+			// 
+			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineCombo);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceExclusiveCheck);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineLabel);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodLabel);
+			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodCombo);
+			this.autoMaintGroup.Name = "autoMaintGroup";
+			this.autoMaintGroup.TabStop = false;
+			// 
+			// taskMaintenanceDeadlineCombo
+			// 
+			resources.ApplyResources(this.taskMaintenanceDeadlineCombo, "taskMaintenanceDeadlineCombo");
+			this.taskMaintenanceDeadlineCombo.Name = "taskMaintenanceDeadlineCombo";
+			this.taskMaintenanceDeadlineCombo.ValueChanged += new System.EventHandler(this.taskMaintenanceDeadlineCombo_ValueChanged);
+			// 
+			// taskMaintenanceExclusiveCheck
+			// 
+			resources.ApplyResources(this.taskMaintenanceExclusiveCheck, "taskMaintenanceExclusiveCheck");
+			this.taskMaintenanceExclusiveCheck.Name = "taskMaintenanceExclusiveCheck";
+			this.taskMaintenanceExclusiveCheck.UseVisualStyleBackColor = true;
+			this.taskMaintenanceExclusiveCheck.CheckedChanged += new System.EventHandler(this.taskMaintenanceExclusiveCheck_CheckedChanged);
+			// 
+			// taskMaintenanceDeadlineLabel
+			// 
+			resources.ApplyResources(this.taskMaintenanceDeadlineLabel, "taskMaintenanceDeadlineLabel");
+			this.taskMaintenanceDeadlineLabel.Name = "taskMaintenanceDeadlineLabel";
+			// 
+			// taskMaintenancePeriodLabel
+			// 
+			resources.ApplyResources(this.taskMaintenancePeriodLabel, "taskMaintenancePeriodLabel");
+			this.taskMaintenancePeriodLabel.Name = "taskMaintenancePeriodLabel";
+			// 
+			// taskMaintenancePeriodCombo
+			// 
+			resources.ApplyResources(this.taskMaintenancePeriodCombo, "taskMaintenancePeriodCombo");
+			this.taskMaintenancePeriodCombo.Name = "taskMaintenancePeriodCombo";
+			this.taskMaintenancePeriodCombo.ValueChanged += new System.EventHandler(this.taskMaintenancePeriodCombo_ValueChanged);
+			// 
 			// taskPriorityCombo
 			// 
 			this.taskPriorityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -729,49 +788,6 @@
 			// 
 			resources.ApplyResources(this.label8, "label8");
 			this.label8.Name = "label8";
-			// 
-			// principalSIDTypeCombo
-			// 
-			this.principalSIDTypeCombo.DisplayMember = "Text";
-			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
-			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
-			this.principalSIDTypeCombo.ValueMember = "Value";
-			this.principalSIDTypeCombo.SelectedIndexChanged += new System.EventHandler(this.principalSIDTypeCombo_SelectedIndexChanged);
-			// 
-			// principalSIDTypeLabel
-			// 
-			resources.ApplyResources(this.principalSIDTypeLabel, "principalSIDTypeLabel");
-			this.principalSIDTypeLabel.Name = "principalSIDTypeLabel";
-			// 
-			// taskMaintenancePeriodCombo
-			// 
-			resources.ApplyResources(this.taskMaintenancePeriodCombo, "taskMaintenancePeriodCombo");
-			this.taskMaintenancePeriodCombo.Name = "taskMaintenancePeriodCombo";
-			this.taskMaintenancePeriodCombo.ValueChanged += new System.EventHandler(this.taskMaintenancePeriodCombo_ValueChanged);
-			// 
-			// taskMaintenancePeriodLabel
-			// 
-			resources.ApplyResources(this.taskMaintenancePeriodLabel, "taskMaintenancePeriodLabel");
-			this.taskMaintenancePeriodLabel.Name = "taskMaintenancePeriodLabel";
-			// 
-			// taskMaintenanceDeadlineCombo
-			// 
-			resources.ApplyResources(this.taskMaintenanceDeadlineCombo, "taskMaintenanceDeadlineCombo");
-			this.taskMaintenanceDeadlineCombo.Name = "taskMaintenanceDeadlineCombo";
-			this.taskMaintenanceDeadlineCombo.ValueChanged += new System.EventHandler(this.taskMaintenanceDeadlineCombo_ValueChanged);
-			// 
-			// taskMaintenanceDeadlineLabel
-			// 
-			resources.ApplyResources(this.taskMaintenanceDeadlineLabel, "taskMaintenanceDeadlineLabel");
-			this.taskMaintenanceDeadlineLabel.Name = "taskMaintenanceDeadlineLabel";
-			// 
-			// taskMaintenanceExclusiveCheck
-			// 
-			resources.ApplyResources(this.taskMaintenanceExclusiveCheck, "taskMaintenanceExclusiveCheck");
-			this.taskMaintenanceExclusiveCheck.Name = "taskMaintenanceExclusiveCheck";
-			this.taskMaintenanceExclusiveCheck.UseVisualStyleBackColor = true;
-			this.taskMaintenanceExclusiveCheck.CheckedChanged += new System.EventHandler(this.taskMaintenanceExclusiveCheck_CheckedChanged);
 			// 
 			// taskVolatileCheck
 			// 
@@ -892,27 +908,6 @@
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
-			// autoMaintGroup
-			// 
-			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
-			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineCombo);
-			this.autoMaintGroup.Controls.Add(this.taskMaintenanceExclusiveCheck);
-			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineLabel);
-			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodLabel);
-			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodCombo);
-			this.autoMaintGroup.Name = "autoMaintGroup";
-			this.autoMaintGroup.TabStop = false;
-			// 
-			// secHardGroup
-			// 
-			resources.ApplyResources(this.secHardGroup, "secHardGroup");
-			this.secHardGroup.Controls.Add(this.principalSIDTypeLabel);
-			this.secHardGroup.Controls.Add(this.principalSIDTypeCombo);
-			this.secHardGroup.Controls.Add(this.principalReqPrivilegesLabel);
-			this.secHardGroup.Controls.Add(this.principalReqPrivilegesDropDown);
-			this.secHardGroup.Name = "secHardGroup";
-			this.secHardGroup.TabStop = false;
-			// 
 			// TaskPropertiesControl
 			// 
 			resources.ApplyResources(this, "$this");
@@ -939,14 +934,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
 			this.addPropTab.ResumeLayout(false);
 			this.addPropTab.PerformLayout();
+			this.secHardGroup.ResumeLayout(false);
+			this.secHardGroup.PerformLayout();
+			this.autoMaintGroup.ResumeLayout(false);
+			this.autoMaintGroup.PerformLayout();
 			this.runTimesTab.ResumeLayout(false);
 			this.runTimesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
-			this.autoMaintGroup.ResumeLayout(false);
-			this.autoMaintGroup.PerformLayout();
-			this.secHardGroup.ResumeLayout(false);
-			this.secHardGroup.PerformLayout();
 			this.ResumeLayout(false);
 
 		}

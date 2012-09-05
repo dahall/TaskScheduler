@@ -79,6 +79,42 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom handler.
+        /// </summary>
+        internal static string ActionTypeComHandler {
+            get {
+                return ResourceManager.GetString("ActionTypeComHandler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start a program.
+        /// </summary>
+        internal static string ActionTypeExecute {
+            get {
+                return ResourceManager.GetString("ActionTypeExecute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send an e-mail.
+        /// </summary>
+        internal static string ActionTypeSendEmail {
+            get {
+                return ResourceManager.GetString("ActionTypeSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display a message.
+        /// </summary>
+        internal static string ActionTypeShowMessage {
+            get {
+                return ResourceManager.GetString("ActionTypeShowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any connection.
         /// </summary>
         internal static string AnyConnection {
@@ -187,7 +223,7 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setting this value requires that the user account on the General tab be set to either &apos;NETWORK SERVICE&apos; or &apos;LOCAL SERVICE&apos;. Please change the user account first and then reset this property..
+        ///   Looks up a localized string similar to The user account on the General tab must be set to either &apos;NETWORK SERVICE&apos; or &apos;LOCAL SERVICE&apos; when the Process SID Type is set to &apos;Unrestricted&apos; on the Additions tab. You must either change the SID Type or set the user to one of the valid accounts..
         /// </summary>
         internal static string Error_PrincipalSidTypeInvalid {
             get {
@@ -354,6 +390,42 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string TaskEditDlgTitle {
             get {
                 return ResourceManager.GetString("TaskEditDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not start a new instance.
+        /// </summary>
+        internal static string TaskInstancesIgnoreNew {
+            get {
+                return ResourceManager.GetString("TaskInstancesIgnoreNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run a new instance in parallel.
+        /// </summary>
+        internal static string TaskInstancesParallel {
+            get {
+                return ResourceManager.GetString("TaskInstancesParallel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queue a new instance.
+        /// </summary>
+        internal static string TaskInstancesQueue {
+            get {
+                return ResourceManager.GetString("TaskInstancesQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop the existing instance.
+        /// </summary>
+        internal static string TaskInstancesStopExisting {
+            get {
+                return ResourceManager.GetString("TaskInstancesStopExisting", resourceCulture);
             }
         }
         

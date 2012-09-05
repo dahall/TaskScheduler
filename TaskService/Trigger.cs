@@ -2196,6 +2196,22 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Pattern != null) Marshal.ReleaseComObject(v2Pattern);
 		}
 
+		/// <summary>
+		/// Determines whether any properties for this <see cref="RepetitionPattern"/> have been set.
+		/// </summary>
+		/// <returns>
+		///   <c>true</c> if properties have been set; otherwise, <c>false</c>.
+		/// </returns>
+		public bool IsSet()
+		{
+			if (v2Pattern != null)
+				return v2Pattern.StopAtDurationEnd || !string.IsNullOrEmpty(v2Pattern.Duration) || !string.IsNullOrEmpty(v2Pattern.Interval);
+			else if (pTrigger != null)
+				return (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd ||
+					pTrigger.v1TriggerData.MinutesDuration > 0 || pTrigger.v1TriggerData.MinutesInterval > 0;
+			return false;
+		}
+
 		internal void Bind()
 		{
 			if (pTrigger.v1Trigger != null)
