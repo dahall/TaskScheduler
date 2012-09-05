@@ -1345,6 +1345,94 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine or if it contains unsupported properties.
+		/// </summary>
+		/// <param name="throwExceptionWithDetails">if set to <c>true</c> throws an <see cref="InvalidOperationException"/> with details about unsupported properties in the Data property of the exception.</param>
+		/// <returns><c>true</c> if this this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
+		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false)
+		{
+			InvalidOperationException ex = new InvalidOperationException() { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
+			bool bad = false;
+			if (this.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
+			{
+				bad = true;
+				if (!throwExceptionWithDetails) return false;
+				ex.Data.Add("Principal.LogonType", "== TaskLogonType.InteractiveTokenOrPassword");
+			}
+			if (this.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
+			{
+				bad = true;
+				if (!throwExceptionWithDetails) return false;
+				ex.Data.Add("Settings.MultipleInstances", "== TaskInstancesPolicy.StopExisting");
+			}
+			if (this.Settings.NetworkSettings.Id != Guid.Empty)
+			{
+				bad = true;
+				if (!throwExceptionWithDetails) return false;
+				ex.Data.Add("Settings.NetworkSettings.Id", "!= Guid.Empty");
+			}
+			if (!this.Settings.AllowHardTerminate)
+			{
+				bad = true;
+				if (!throwExceptionWithDetails) return false;
+				ex.Data.Add("Settings.AllowHardTerminate", "== false");
+			}
+			for (int i = 0; i < this.Actions.Count; i++)
+			{
+				Action a = this.Actions[i];
+				if (a is EmailAction)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Actions[{0}]", i), "== typeof(EmailAction)");
+				}
+				else if (a is ShowMessageAction)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Actions[{0}]", i), "== typeof(ShowMessageAction)");
+				}
+			}
+			for (int i = 0; i < this.Triggers.Count; i++)
+			{
+				Trigger t = this.Triggers[i];
+				if (t is MonthlyTrigger)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Triggers[{0}]", i), "== typeof(MonthlyTrigger)");
+				}
+				if (t is MonthlyDOWTrigger)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Triggers[{0}]", i), "== typeof(MonthlyDOWTrigger)");
+				}
+				if (t.ExecutionTimeLimit != TimeSpan.Zero)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Triggers[{0}].ExecutionTimeLimit", i), "!= TimeSpan.Zero");
+				}
+				if (t is ICalendarTrigger && t.Repetition.IsSet())
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Triggers[{0}].Repetition", i), "");
+				}
+				if (t is EventTrigger && ((EventTrigger)t).ValueQueries.Count > 0)
+				{
+					bad = true;
+					if (!throwExceptionWithDetails) return false;
+					ex.Data.Add(string.Format("Triggers[{0}].ValueQueries.Count", i), "!= 0");
+				}
+			}
+			if (throwExceptionWithDetails)
+				throw ex;
+			return !bad;
+		}
+
+		/// <summary>
 		/// Releases all resources used by this class.
 		/// </summary>
 		public void Dispose()

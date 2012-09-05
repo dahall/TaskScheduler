@@ -351,9 +351,33 @@ Action: {3}</value>
     <value>Unrestricted</value>
   </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
-    <value>Setting this value requires that the user account on the General tab be set to either 'NETWORK SERVICE' or 'LOCAL SERVICE'. Please change the user account first and then reset this property.</value>
+    <value>The user account on the General tab must be set to either 'NETWORK SERVICE' or 'LOCAL SERVICE' when the Process SID Type is set to 'Unrestricted' on the Additions tab. You must either change the SID Type or set the user to one of the valid accounts.</value>
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
     <value>Setting this property will disable a number of other properties. Would you still like to proceed?</value>
+  </data>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Custom handler</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Start a program</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>Send an e-mail</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Display a message</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew" xml:space="preserve">
+    <value>Do not start a new instance</value>
+  </data>
+  <data name="TaskInstancesParallel" xml:space="preserve">
+    <value>Run a new instance in parallel</value>
+  </data>
+  <data name="TaskInstancesQueue" xml:space="preserve">
+    <value>Queue a new instance</value>
+  </data>
+  <data name="TaskInstancesStopExisting" xml:space="preserve">
+    <value>Stop the existing instance</value>
   </data>
 </root>

@@ -212,15 +212,19 @@ namespace TestTaskService
 				//td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
 				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				td.Principal.UserId = "LOCAL SERVICE";
-				td.Settings.Compatibility = TaskCompatibility.V2_1;
-				if (ts.HighestSupportedVersion >= new Version(1, 4))
+				if (ts.HighestSupportedVersion >= new Version(1, 3))
 				{
+					td.Settings.Compatibility = TaskCompatibility.V2_1;
 					td.RegistrationInfo.Author = "Me";
 					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)";
 					td.Settings.AllowHardTerminate = false;
 					td.Settings.UseUnifiedSchedulingEngine = true;
-					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(2);
-					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(14);
+					if (ts.HighestSupportedVersion >= new Version(1, 4))
+					{
+						td.Settings.Compatibility = TaskCompatibility.V2_2;
+						td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(2);
+						td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(14);
+					}
 				}
 				//td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
 				td.Actions.Add(new ExecAction("notepad.exe"));

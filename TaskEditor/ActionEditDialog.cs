@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private Action action;
 		private bool isV2 = true;
+		private bool useUnifiedSchedulingEngine = false;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionEditDialog"/> class.
@@ -18,7 +19,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public ActionEditDialog()
 		{
 			InitializeComponent();
-			actionsCombo.SelectedIndex = 0;
+			ResetCombo();
 		}
 
 		/// <summary>
@@ -50,16 +51,16 @@ namespace Microsoft.Win32.TaskScheduler
 				try { action.Id = "test"; action.Id = id; SupportV1Only = false; }
 				catch { SupportV1Only = true; }
 
+				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)action.ActionType);
+
 				if (action is ExecAction)
 				{
-					actionsCombo.SelectedIndex = 0;
 					execProgText.Text = ((ExecAction)action).Path;
 					execArgText.Text = ((ExecAction)action).Arguments;
 					execDirText.Text = ((ExecAction)action).WorkingDirectory;
 				}
 				else if (action is EmailAction)
 				{
-					actionsCombo.SelectedIndex = 1;
 					emailFromText.Text = ((EmailAction)action).From;
 					emailToText.Text = ((EmailAction)action).To;
 					emailSubjectText.Text = ((EmailAction)action).Subject;
@@ -70,13 +71,11 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else if (action is ShowMessageAction)
 				{
-					actionsCombo.SelectedIndex = 2;
 					msgTitleText.Text = ((ShowMessageAction)action).Title;
 					msgMsgText.Text = ((ShowMessageAction)action).MessageBody;
 				}
 				else if (action is ComHandlerAction)
 				{
-					actionsCombo.SelectedIndex = 3;
 					ComCLSID = ((ComHandlerAction)action).ClassId;
 					comDataText.Text = ((ComHandlerAction)action).Data;
 				}
@@ -105,20 +104,26 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return !isV2; }
 			set
 			{
-				isV2 = !value;
-				if (!isV2 && actionsCombo.Items.Count > 1)
+				if (value == isV2)
 				{
-					actionsCombo.SelectedIndex = 0;
-					actionsCombo.Items.RemoveAt(3);
-					actionsCombo.Items.RemoveAt(2);
-					actionsCombo.Items.RemoveAt(1);
+					isV2 = !value;
+					ResetCombo();
 				}
-				else if (isV2 && actionsCombo.Items.Count < 4)
+			}
+		}
+
+		[DefaultValue(false), Category("Behavior")]
+		public bool UseUnifiedSchedulingEngine
+		{
+			get { return useUnifiedSchedulingEngine; }
+			set
+			{
+				if (!isV2 && value)
+					throw new NotSupportedException("Version 1.0 of the Task Scheduler library cannot use the Unified Scheduling Engine.");
+				if (value != useUnifiedSchedulingEngine)
 				{
-					System.Resources.ResourceManager rm = new System.Resources.ResourceManager(this.GetType());
-					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items1"));
-					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items2"));
-					actionsCombo.Items.Add(rm.GetString("actionsCombo.Items3"));
+					useUnifiedSchedulingEngine = value;
+					ResetCombo();
 				}
 			}
 		}
@@ -162,7 +167,22 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void actionsCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			settingsTabs.SelectedTab = settingsTabs.TabPages[actionsCombo.SelectedIndex];
+			switch ((TaskActionType)Convert.ToInt32(((DropDownCheckListItem)actionsCombo.SelectedItem).Value))
+			{
+				case TaskActionType.ComHandler:
+					settingsTabs.SelectedTab = comTab;
+					break;
+				case TaskActionType.SendEmail:
+					settingsTabs.SelectedTab = emailTab;
+					break;
+				case TaskActionType.ShowMessage:
+					settingsTabs.SelectedTab = messageTab;
+					break;
+				case TaskActionType.Execute:
+				default:
+					settingsTabs.SelectedTab = execTab;
+					break;
+			}
 			ValidateCurrentAction();
 		}
 
@@ -207,6 +227,27 @@ namespace Microsoft.Win32.TaskScheduler
 			UpdateAction();
 			DialogResult = DialogResult.OK;
 			Close();
+		}
+
+		private void ResetCombo()
+		{
+			actionsCombo.BeginUpdate();
+			actionsCombo.Items.Clear();
+			long allVal;
+			ComboBoxExtension.InitializeFromEnum(actionsCombo.Items, typeof(TaskActionType), EditorProperties.Resources.ResourceManager, "ActionType", out allVal);
+			if (!isV2)
+			{
+				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.ComHandler));
+				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.SendEmail));
+				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.ShowMessage));
+			}
+			else if (useUnifiedSchedulingEngine)
+			{
+				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.SendEmail));
+				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.ShowMessage));
+			}
+			actionsCombo.SelectedIndex = 0;
+			actionsCombo.EndUpdate();
 		}
 
 		private void UpdateAction()

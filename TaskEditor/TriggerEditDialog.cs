@@ -22,6 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool onAssignment = false;
 		private Trigger trigger;
 		private List<DropDownCheckListItem> triggerComboItems = new List<DropDownCheckListItem>(12);
+		private bool useUnifiedSchedulingEngine = false;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TriggerEditDialog"/> class.
@@ -100,32 +101,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				isV2 = !value;
-
-				// Setup list of triggers available
-				long allVal;
-				triggerComboItems.Clear();
-				ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out allVal);
-				if (!isV2)
-					triggerComboItems.RemoveRange(4, 6);
-				triggerTypeCombo.DataSource = null;
-				triggerTypeCombo.DisplayMember = "Text";
-				triggerTypeCombo.ValueMember = "Value";
-				triggerTypeCombo.DataSource = triggerComboItems;
-
-				// Enable/disable version specific features
-				stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = isV2;
-				delayCheckBox.Enabled = delaySpan.Enabled = isV2;
-				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
-
-				// Set date/time controls
-				schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
-				schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-				activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
-				expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
-
-				// Disable logon trigger options
-				foreach (Control c in logonTab.Controls)
-					c.Enabled = isV2;
+				ResetControls();
 			}
 		}
 
@@ -284,6 +260,22 @@ namespace Microsoft.Win32.TaskScheduler
 				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : trigger.StartBoundary;
 				enabledCheckBox.Checked = trigger.Enabled;
 				onAssignment = false;
+			}
+		}
+
+		[DefaultValue(false), Category("Behavior")]
+		public bool UseUnifiedSchedulingEngine
+		{
+			get { return useUnifiedSchedulingEngine; }
+			set
+			{
+				if (!isV2 && value)
+					throw new NotSupportedException("Version 1.0 of the Task Scheduler library cannot use the Unified Scheduling Engine.");
+				if (value != useUnifiedSchedulingEngine)
+				{
+					useUnifiedSchedulingEngine = value;
+					ResetControls();
+				}
 			}
 		}
 
@@ -529,6 +521,39 @@ namespace Microsoft.Win32.TaskScheduler
 					onAssignment = false;
 				}
 			}
+		}
+
+		private void ResetControls()
+		{
+			// Setup list of triggers available
+			long allVal;
+			triggerComboItems.Clear();
+			ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out allVal);
+			if (!isV2)
+				triggerComboItems.RemoveRange(4, 6);
+			triggerTypeCombo.BeginUpdate();
+			triggerTypeCombo.DataSource = null;
+			triggerTypeCombo.DisplayMember = "Text";
+			triggerTypeCombo.ValueMember = "Value";
+			triggerTypeCombo.DataSource = triggerComboItems;
+			triggerTypeCombo.EndUpdate();
+
+			// Enable/disable version specific features
+			stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+			monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
+			schedMonthlyRadio.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = 
+				repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = 
+				durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
+
+			// Set date/time controls
+			schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
+			schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+			activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+			expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
+
+			// Disable logon trigger options
+			foreach (Control c in logonTab.Controls)
+				c.Enabled = isV2;
 		}
 
 		private void schedOneRadio_CheckedChanged(object sender, EventArgs e)

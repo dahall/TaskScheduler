@@ -49,6 +49,7 @@ namespace Microsoft.Win32.TaskScheduler
 			actionUpButton.Image = bmpDn;
 			actionDownButton.Image = bmpUp;
 
+			long allVal;
 			taskIdleDurationCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
 			taskIdleWaitTimeoutCombo.FormattedZero = EditorProperties.Resources.TimeSpanDoNotWait;
 			taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
@@ -56,9 +57,9 @@ namespace Microsoft.Win32.TaskScheduler
 			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
+			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
 
 			// Settings for addPropTab
-			long allVal;
 			ComboBoxExtension.InitializeFromEnum(principalSIDTypeCombo.Items, typeof(TaskProcessTokenSidType), EditorProperties.Resources.ResourceManager, "SIDType", out allVal);
 			ComboBoxExtension.InitializeFromEnum(taskPriorityCombo.Items, typeof(System.Diagnostics.ProcessPriorityClass), EditorProperties.Resources.ResourceManager, "ProcessPriority", out allVal);
 			principalReqPrivilegesDropDown.Sorted = true;
@@ -285,9 +286,6 @@ namespace Microsoft.Win32.TaskScheduler
 				taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
 				taskStopIfGoingOnBatteriesCheck.Checked = td.Settings.StopIfGoingOnBatteries;
 				taskWakeToRunCheck.Checked = td.Settings.WakeToRun;
-				taskStartIfConnectionCheck.Enabled = editable;
-				taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
-				availableConnectionsCombo.Enabled = editable && td.Settings.RunOnlyIfNetworkAvailable;
 
 				// Set Settings tab
 				taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
@@ -306,7 +304,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
 				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
 				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
-				taskMultInstCombo.SelectedIndex = (int)td.Settings.MultipleInstances;
+				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 
 				// Set Additional tab
 				taskEnabledCheck.Checked = td.Settings.Enabled;
@@ -327,6 +325,7 @@ namespace Microsoft.Win32.TaskScheduler
 					taskMaintenancePeriodCombo.Value = td.Settings.MaintenanceSettings.Period;
 					taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
 				}
+				UpdateUnifiedSchedulingEngineControls();
 
 				onAssignment = false;
 			}
@@ -455,6 +454,7 @@ namespace Microsoft.Win32.TaskScheduler
 				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
 				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
 				dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
+				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					actionListView.Items.RemoveAt(idx);
@@ -480,6 +480,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
 			dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
+			dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				td.Actions.Add(dlg.Action);
@@ -612,6 +613,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			string acct = String.Empty;
 			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, ref this.flagExecutorIsGroup, ref this.flagExecutorIsServiceAccount))
+				return;
+
+			if (!ValidateAccountForSidType(acct))
 				return;
 
 			if (this.flagExecutorIsServiceAccount)
@@ -925,7 +929,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && v2)
-				td.Settings.MultipleInstances = (TaskInstancesPolicy)taskMultInstCombo.SelectedIndex;
+				td.Settings.MultipleInstances = (TaskInstancesPolicy)((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value;
 		}
 
 		private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
@@ -972,7 +976,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
 		{
-			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked;
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			if (!onAssignment)
 				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
 		}
@@ -1015,7 +1019,8 @@ namespace Microsoft.Win32.TaskScheduler
 			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
 			taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
 			taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
-			taskStartIfConnectionCheck.Enabled = availableConnectionsCombo.Enabled = editable && v2;
+			taskStartIfConnectionCheck.Enabled = editable && v2;
+			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
 				principalReqPrivilegesDropDown.Enabled = editable && v2_1;
 			taskVolatileCheck.Enabled = taskMaintenanceDeadlineLabel.Enabled = taskMaintenanceDeadlineCombo.Enabled = 
@@ -1044,6 +1049,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (idx >= 0)
 			{
 				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2);
+				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
 				dlg.TargetServer = TaskService.TargetServer;
 				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
 				if (dlg.ShowDialog() == DialogResult.OK)
@@ -1070,6 +1076,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void triggerNewButton_Click(object sender, EventArgs e)
 		{
 			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility < TaskCompatibility.V2);
+			dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
 			dlg.TargetServer = TaskService.TargetServer;
 			dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
 			if (dlg.ShowDialog() == DialogResult.OK)
@@ -1109,6 +1116,25 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private void UpdateUnifiedSchedulingEngineControls()
+		{
+			bool isSet = taskUseUnifiedSchedulingEngineCheck.Checked;
+			bool alreadyOnAssigment = onAssignment;
+			onAssignment = true;
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && !isSet;
+			taskAllowHardTerminateCheck.Enabled = editable && !isSet;
+			// Update Multiple Instances policy combo
+			taskMultInstCombo.BeginUpdate();
+			long allVal;
+			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
+			if (isSet)
+				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
+			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
+			taskMultInstCombo.EndUpdate();
+			if (!alreadyOnAssigment)
+				onAssignment = false;
+		}
+
 		private void taskEnabledCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -1127,35 +1153,6 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Settings.DisallowStartOnRemoteAppSession = taskDisallowStartOnRemoteAppSessionCheck.Checked;
 		}
 
-		private bool CanUseUnifiedSchedulingEngine()
-		{
-			bool bad = (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting ||
-				td.Settings.NetworkSettings.Id != Guid.Empty || !td.Settings.AllowHardTerminate || td.Actions.ContainsType(typeof(EmailAction)) ||
-				td.Actions.ContainsType(typeof(ShowMessageAction)) || td.Triggers.ContainsType(typeof(MonthlyTrigger)) || td.Triggers.ContainsType(typeof(MonthlyDOWTrigger)));
-			if (!bad)
-			{
-				foreach (Trigger t in td.Triggers)
-				{
-					if (t.ExecutionTimeLimit != TimeSpan.Zero)
-					{
-						bad = true;
-						break;
-					}
-					if (t is ICalendarTrigger && (t.Repetition.Duration != TimeSpan.Zero || t.Repetition.Interval != TimeSpan.Zero || t.Repetition.StopAtDurationEnd))
-					{
-						bad = true;
-						break;
-					}
-					if (t is EventTrigger && ((EventTrigger)t).ValueQueries.Count > 0)
-					{
-						bad = true;
-						break;
-					}
-				}
-			}
-			return !bad;
-		}
-
 		private void ResetForUnifiedSchedulingEngine()
 		{
 			if (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
@@ -1164,8 +1161,7 @@ namespace Microsoft.Win32.TaskScheduler
 				SetUserControls(td.Principal.LogonType);
 			}
 			if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
-				taskMultInstCombo.SelectedIndex = (int)TaskInstancesPolicy.IgnoreNew;
-			taskStartIfConnectionCheck.Checked = false;
+				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.IgnoreNew);
 			if (availableConnectionsCombo.Items.Count > 0)
 				availableConnectionsCombo.SelectedIndex = 0;
 			taskAllowHardTerminateCheck.Checked = true;
@@ -1205,7 +1201,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (taskUseUnifiedSchedulingEngineCheck.Checked)
 				{
-					if (!CanUseUnifiedSchedulingEngine())
+					if (!td.CanUseUnifiedSchedulingEngine())
 					{
 						if (MessageBox.Show(this, EditorProperties.Resources.UseUnifiedResetQuestion, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 							ResetForUnifiedSchedulingEngine();
@@ -1214,22 +1210,32 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 				}
 				td.Settings.UseUnifiedSchedulingEngine = taskUseUnifiedSchedulingEngineCheck.Checked;
+				UpdateUnifiedSchedulingEngineControls();
 			}
+		}
+
+		private bool ValidateAccountForSidType(string user)
+		{
+			string[] validUserIds = new string[] { "NETWORK SERVICE", "LOCAL SERVICE", "S-1-5-19", "S-1-5-20" };
+			if (principalSIDTypeCombo.SelectedIndex != (int)TaskProcessTokenSidType.Default)
+			{
+				if (Array.Find<string>(validUserIds, delegate(string id) { return id.Equals(user, StringComparison.InvariantCultureIgnoreCase); }) == null)
+				{
+					MessageBox.Show(this, EditorProperties.Resources.Error_PrincipalSidTypeInvalid, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return false;
+				}
+			}
+			return true;
 		}
 
 		private void principalSIDTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
 			{
-				string[] validUserIds = new string[] { "NETWORK SERVICE", "LOCAL SERVICE" };
-				if (principalSIDTypeCombo.SelectedIndex != (int)TaskProcessTokenSidType.Default)
+				if (!ValidateAccountForSidType(td.Principal.ToString()))
 				{
-					if (Array.Find<string>(validUserIds, delegate(string id) { return id.Equals(td.Principal.UserId, StringComparison.InvariantCultureIgnoreCase); }) == null)
-					{
-						MessageBox.Show(this, EditorProperties.Resources.Error_PrincipalSidTypeInvalid, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-						principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)TaskProcessTokenSidType.Default);
-						return;
-					}
+					principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)TaskProcessTokenSidType.Default);
+					return;
 				}
 				td.Principal.ProcessTokenSidType = (TaskProcessTokenSidType)principalSIDTypeCombo.SelectedIndex;
 			}
