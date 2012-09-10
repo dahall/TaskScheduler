@@ -344,7 +344,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				td = value;
 				onAssignment = true;
-				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2)) && td.Settings.Compatibility == TaskCompatibility.V2;
+				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2)) && td.Settings.Compatibility >= TaskCompatibility.V2;
 
 				// Set General tab
 				nameText.Text = task != null ? task.Name : string.Empty;

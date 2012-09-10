@@ -117,22 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="itemMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>683, 17</value>
-  </metadata>
-  <metadata name="taskEditDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="taskRunTimesDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>153, 17</value>
-  </metadata>
-  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>322, 17</value>
-  </metadata>
-  <metadata name="folderMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>568, 17</value>
-  </metadata>
-  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>458, 17</value>
-  </metadata>
+  <data name="AccessControlTypeAllow" xml:space="preserve">
+    <value>Allow</value>
+  </data>
+  <data name="AccessControlTypeDeny" xml:space="preserve">
+    <value>Deny</value>
+  </data>
+  <data name="FileSystemRightsFullControl" xml:space="preserve">
+    <value>Full control</value>
+  </data>
+  <data name="FileSystemRightsModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="FileSystemRightsRead" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="FileSystemRightsReadAndExecute" xml:space="preserve">
+    <value>Read &amp; execute</value>
+  </data>
+  <data name="FileSystemRightsSynchronize" xml:space="preserve">
+    <value>Synchronize</value>
+  </data>
+  <data name="FileSystemRightsWrite" xml:space="preserve">
+    <value>Write</value>
+  </data>
 </root>

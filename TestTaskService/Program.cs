@@ -216,7 +216,10 @@ namespace TestTaskService
 				{
 					td.Settings.Compatibility = TaskCompatibility.V2_1;
 					td.RegistrationInfo.Author = "Me";
-					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)";
+					td.RegistrationInfo.Documentation = "We rock";
+					td.RegistrationInfo.Source = "Home";
+					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FRFW;;;SY)(A;;FRFX;;;LS)";
+					td.RegistrationInfo.URI = new Uri("http://codeplex.com");
 					td.Settings.AllowHardTerminate = false;
 					td.Settings.UseUnifiedSchedulingEngine = true;
 					if (ts.HighestSupportedVersion >= new Version(1, 4))
@@ -233,7 +236,7 @@ namespace TestTaskService
 				/*Task t = ts.AddTask(taskName,
 					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Local) },
 					new ExecAction("notepad.exe"));*/
-				WriteXml(t);
+				//WriteXml(t);
 
 				// Edit task
 				td = DisplayTask(t, true);

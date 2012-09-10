@@ -205,6 +205,33 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SDDL must be in format defined at http://goo.gl/6au0V.
+        /// </summary>
+        internal static string Error_InvalidSddlFormat {
+            get {
+                return ResourceManager.GetString("Error_InvalidSddlFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URI is not in a correct format.
+        /// </summary>
+        internal static string Error_InvalidUriFormat {
+            get {
+                return ResourceManager.GetString("Error_InvalidUriFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version must be in the format major.minor[.build[.revision]]..
+        /// </summary>
+        internal static string Error_InvalidVersionFormat {
+            get {
+                return ResourceManager.GetString("Error_InvalidVersionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Running a task under a group user account is supported only on Windows Vista™ or later. To run a task under a group account, you must upgrade this task to a Windows Vista™ task..
         /// </summary>
         internal static string Error_NoGroupsUnderV1 {

@@ -30,6 +30,13 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.TaskListView = new Microsoft.Win32.TaskScheduler.TaskListView();
+			this.itemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.endToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.TaskPropertiesControl = new Microsoft.Win32.TaskScheduler.TaskPropertiesControl();
 			this.taskEditDialog1 = new Microsoft.Win32.TaskScheduler.TaskEditDialog();
@@ -38,16 +45,9 @@
 			this.folderMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.newFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.itemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.endToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-			this.folderMenu.SuspendLayout();
 			this.itemMenu.SuspendLayout();
+			this.folderMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// TaskListView
@@ -60,6 +60,59 @@
 			this.TaskListView.Size = new System.Drawing.Size(1085, 232);
 			this.TaskListView.TabIndex = 0;
 			this.TaskListView.TaskSelected += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs>(this.taskListView_TaskSelected);
+			// 
+			// itemMenu
+			// 
+			this.itemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runToolStripMenuItem,
+            this.endToolStripMenuItem,
+            this.disableToolStripMenuItem,
+            this.exportToolStripMenuItem,
+            this.propertiesToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+			this.itemMenu.Name = "itemMenu";
+			this.itemMenu.Size = new System.Drawing.Size(128, 136);
+			// 
+			// runToolStripMenuItem
+			// 
+			this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+			this.runToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.runToolStripMenuItem.Text = "Run";
+			this.runToolStripMenuItem.Click += new System.EventHandler(this.runMenu_Click);
+			// 
+			// endToolStripMenuItem
+			// 
+			this.endToolStripMenuItem.Name = "endToolStripMenuItem";
+			this.endToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.endToolStripMenuItem.Text = "End";
+			this.endToolStripMenuItem.Click += new System.EventHandler(this.endToolStripMenuItem_Click);
+			// 
+			// disableToolStripMenuItem
+			// 
+			this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+			this.disableToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.disableToolStripMenuItem.Text = "Disable";
+			// 
+			// exportToolStripMenuItem
+			// 
+			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.exportToolStripMenuItem.Text = "Export...";
+			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportTaskMenu_Click);
+			// 
+			// propertiesToolStripMenuItem
+			// 
+			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.propertiesToolStripMenuItem.Text = "Properties";
+			this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propMenu_Click);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.deleteToolStripMenuItem.Text = "Delete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteMenu_Click);
 			// 
 			// splitter1
 			// 
@@ -133,59 +186,6 @@
 			this.deleteFolderToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.deleteFolderToolStripMenuItem.Text = "Delete Folder";
 			// 
-			// itemMenu
-			// 
-			this.itemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem,
-            this.endToolStripMenuItem,
-            this.disableToolStripMenuItem,
-            this.exportToolStripMenuItem,
-            this.propertiesToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-			this.itemMenu.Name = "itemMenu";
-			this.itemMenu.Size = new System.Drawing.Size(153, 158);
-			// 
-			// runToolStripMenuItem
-			// 
-			this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-			this.runToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.runToolStripMenuItem.Text = "Run";
-			this.runToolStripMenuItem.Click += new System.EventHandler(this.runMenu_Click);
-			// 
-			// endToolStripMenuItem
-			// 
-			this.endToolStripMenuItem.Name = "endToolStripMenuItem";
-			this.endToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.endToolStripMenuItem.Text = "End";
-			this.endToolStripMenuItem.Click += new System.EventHandler(this.endToolStripMenuItem_Click);
-			// 
-			// disableToolStripMenuItem
-			// 
-			this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-			this.disableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.disableToolStripMenuItem.Text = "Disable";
-			// 
-			// exportToolStripMenuItem
-			// 
-			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.exportToolStripMenuItem.Text = "Export...";
-			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportTaskMenu_Click);
-			// 
-			// propertiesToolStripMenuItem
-			// 
-			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.propertiesToolStripMenuItem.Text = "Properties";
-			this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propMenu_Click);
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.deleteToolStripMenuItem.Text = "Delete";
-			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteMenu_Click);
-			// 
 			// imageList1
 			// 
 			this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -201,8 +201,8 @@
 			this.Controls.Add(this.TaskListView);
 			this.Name = "FolderPanel";
 			this.Size = new System.Drawing.Size(1085, 741);
-			this.folderMenu.ResumeLayout(false);
 			this.itemMenu.ResumeLayout(false);
+			this.folderMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

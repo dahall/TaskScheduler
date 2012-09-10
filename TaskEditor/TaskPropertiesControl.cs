@@ -22,10 +22,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private TaskService service = null;
 		private bool showErrors = true;
 		private bool showAddedPropertiesTab = true;
+		private bool showRegInfoTab = true;
 		private bool showRunTimesTab = true;
 		private Task task = null;
 		private TaskDefinition td = null;
 		private TabPage tempAddedPropertiesTab = null;
+		private TabPage tempRegInfoTab = null;
 		private TabPage tempRunTimesTabPage = null;
 		private bool v2 = true;
 
@@ -107,6 +109,14 @@ namespace Microsoft.Win32.TaskScheduler
 				foreach (Control ctrl in settingsTab.Controls)
 					ctrl.Enabled = value;
 
+				// Additions tab
+				foreach (Control ctrl in addPropTab.Controls)
+					ctrl.Enabled = value;
+
+				// Info tab
+				foreach (Control ctrl in regInfoTab.Controls)
+					ctrl.Enabled = value;
+
 				// If the task has already been set, then reset it to make sure all the items are enabled correctly
 				if (td != null)
 					this.TaskDefinition = td;
@@ -136,10 +146,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets a value indicating whether to show the 'Additional' tab.
+		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>
-		/// <value><c>true</c> if showing the Additional tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additional' tab is shown.")]
+		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
 		public bool ShowAddedPropertiesTab
 		{
 			get
@@ -148,20 +158,50 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (value == showAddedPropertiesTab || this.DesignMode == true)
-					return;
+				if (value != showAddedPropertiesTab)
+				{
+					if (value)
+					{
+						tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + (showRegInfoTab ? 2 : 1), tempAddedPropertiesTab);
+						tempAddedPropertiesTab = null;
+					}
+					else
+					{
+						tempAddedPropertiesTab = addPropTab;
+						tabControl.TabPages.Remove(addPropTab);
+					}
+					showAddedPropertiesTab = value;
+				}
+			}
+		}
 
-				if (value)
+		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Info' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		public bool ShowRegistrationInfoTab
+		{
+			get
+			{
+				return showRegInfoTab;
+			}
+			set
+			{
+				if (value != showRegInfoTab)
 				{
-					tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempAddedPropertiesTab);
-					tempAddedPropertiesTab = null;
+					if (value)
+					{
+						tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + 1, tempRegInfoTab);
+						tempRegInfoTab = null;
+					}
+					else
+					{
+						tempRegInfoTab = regInfoTab;
+						tabControl.TabPages.Remove(regInfoTab);
+					}
+					showRegInfoTab = value;
 				}
-				else
-				{
-					tempAddedPropertiesTab = addPropTab;
-					tabControl.TabPages.Remove(addPropTab);
-				}
-				showAddedPropertiesTab = value;
 			}
 		}
 
@@ -178,20 +218,20 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (value == showRunTimesTab || this.DesignMode == true)
-					return;
-
-				if (value)
+				if (value != showRunTimesTab)
 				{
-					tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + 1, tempRunTimesTabPage);
-					tempRunTimesTabPage = null;
+					if (value)
+					{
+						tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempRunTimesTabPage);
+						tempRunTimesTabPage = null;
+					}
+					else
+					{
+						tempRunTimesTabPage = runTimesTab;
+						tabControl.TabPages.Remove(runTimesTab);
+					}
+					showRunTimesTab = value;
 				}
-				else
-				{
-					tempRunTimesTabPage = runTimesTab;
-					tabControl.TabPages.Remove(runTimesTab);
-				}
-				showRunTimesTab = value;
 			}
 		}
 
@@ -305,6 +345,13 @@ namespace Microsoft.Win32.TaskScheduler
 				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
 				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
 				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
+
+				// Set Info tab
+				taskRegDocText.Text = td.RegistrationInfo.Documentation;
+				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
+				taskRegSourceText.Text = td.RegistrationInfo.Source;
+				taskRegURIText.Text = td.RegistrationInfo.URI != null ? td.RegistrationInfo.URI.ToString() : null;
+				taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
 
 				// Set Additional tab
 				taskEnabledCheck.Checked = td.Settings.Enabled;
@@ -568,6 +615,11 @@ namespace Microsoft.Win32.TaskScheduler
 			onAssignment = false;
 		}
 
+		private void generalTab_Enter(object sender, EventArgs e)
+		{
+			SetVersionComboItems();
+		}
+
 		private string GetTaskLocation()
 		{
 			if (task == null || TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) == 0)
@@ -784,16 +836,32 @@ namespace Microsoft.Win32.TaskScheduler
 			public ComboItem(string text, int ver) { Text = text; Version = ver; }
 
 			public override string ToString() { return this.Text; }
+
+			public override bool Equals(object obj)
+			{
+				if (obj is ComboItem)
+					return Version == ((ComboItem)obj).Version;
+				if (obj is int)
+					return Version == (int)obj;
+				return Text.CompareTo(obj.ToString()) == 0;
+			}
+
+			public override int GetHashCode()
+			{
+				return Version.GetHashCode();
+			}
 		}
 
 		private void SetVersionComboItems()
 		{
+			const int expectedVersions = 5;
+
 			this.taskVersionCombo.BeginUpdate();
 			this.taskVersionCombo.Items.Clear();
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
-			if (versions.Length != 5)
+			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
-			int max = (TaskService == null) ? 4 : TaskService.HighestSupportedVersion.Minor;
+			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.HighestSupportedVersion.Minor;
 			switch (td.Settings.Compatibility)
 			{
 				case TaskCompatibility.AT:
@@ -808,9 +876,9 @@ namespace Microsoft.Win32.TaskScheduler
 					this.taskVersionCombo.SelectedIndex = 0;
 					break;
 				default:
-					for (int i = 2; i <= max; i++)
+					for (int i = Math.Min((int)td.LowestSupportedVersion, (int)td.Settings.Compatibility); i <= max; i++)
 						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
-					this.taskVersionCombo.SelectedIndex = (int)td.Settings.Compatibility - 2;
+					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)td.Settings.Compatibility);
 					break;
 			}
 			this.taskVersionCombo.EndUpdate();
@@ -1274,6 +1342,77 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 				td.Settings.MaintenanceSettings.Exclusive = taskMaintenanceExclusiveCheck.Checked;
+		}
+
+		private void taskRegSourceText_Leave(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.Source = taskRegSourceText.TextLength > 0 ? taskRegSourceText.Text : null;
+		}
+
+		private void taskRegURIText_Validated(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.URI = taskRegURIText.TextLength > 0 ? new Uri(taskRegURIText.Text) : null;
+		}
+
+		private void taskRegVersionText_Validated(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.Version = taskRegVersionText.TextLength > 0 ? new Version(taskRegVersionText.Text) : null;
+		}
+
+		private void taskRegSDDLText_Validated(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.SecurityDescriptorSddlForm = taskRegSDDLText.TextLength > 0 ? taskRegSDDLText.Text : null;
+		}
+
+		private void taskRegSDDLBtn_Click(object sender, EventArgs e)
+		{
+			/*using (SecurityEditor.SecurityEditorDialog dlg = new SecurityEditor.SecurityEditorDialog()
+			{
+				ObjectName = this.TaskName, 
+				SecurityDescriptorSddlForm = td.RegistrationInfo.SecurityDescriptorSddlForm
+			})
+			{
+				if (dlg.ShowDialog(this) == DialogResult.OK)
+					td.RegistrationInfo.SecurityDescriptorSddlForm = dlg.SecurityDescriptorSddlForm;
+			}*/
+		}
+
+		private void taskRegDocText_Leave(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.Documentation = taskRegDocText.TextLength > 0 ? taskRegDocText.Text : null;
+		}
+
+		private void taskRegURIText_Validating(object sender, CancelEventArgs e)
+		{
+			e.Cancel = !ValidateText(taskRegURIText, 
+				delegate(string s) { return Uri.IsWellFormedUriString(s, UriKind.RelativeOrAbsolute); },
+				EditorProperties.Resources.Error_InvalidUriFormat);
+		}
+
+		private void taskRegVersionText_Validating(object sender, CancelEventArgs e)
+		{
+			e.Cancel = !ValidateText(taskRegVersionText,
+				delegate(string s) { return System.Text.RegularExpressions.Regex.IsMatch(s, @"^(\d+(\.\d+){0,2}(\.\d+))?$"); },
+				EditorProperties.Resources.Error_InvalidVersionFormat);
+		}
+
+		private void taskRegSDDLText_Validating(object sender, CancelEventArgs e)
+		{
+			e.Cancel = !ValidateText(taskRegSDDLText,
+				delegate(string s) { return System.Text.RegularExpressions.Regex.IsMatch(s, @"^(O:(?'owner'[A-Z]+?|S(-[0-9]+)+)?)?(G:(?'group'[A-Z]+?|S(-[0-9]+)+)?)?(D:(?'dacl'[A-Z]*(\([^\)]*\))*))?(S:(?'sacl'[A-Z]*(\([^\)]*\))*))?$"); },
+				EditorProperties.Resources.Error_InvalidSddlFormat);
+		}
+
+		private bool ValidateText(Control ctrl, Predicate<string> pred, string error)
+		{
+			bool valid = pred(ctrl.Text);
+			errorProvider.SetError(ctrl, valid ? string.Empty : error);
+			return valid;
 		}
 	}
 }

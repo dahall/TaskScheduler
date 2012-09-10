@@ -380,4 +380,13 @@ Action: {3}</value>
   <data name="TaskInstancesStopExisting" xml:space="preserve">
     <value>Stop the existing instance</value>
   </data>
+  <data name="Error_InvalidSddlFormat" xml:space="preserve">
+    <value>SDDL must be in format defined at http://goo.gl/6au0V</value>
+  </data>
+  <data name="Error_InvalidUriFormat" xml:space="preserve">
+    <value>URI is not in a correct format</value>
+  </data>
+  <data name="Error_InvalidVersionFormat" xml:space="preserve">
+    <value>Version must be in the format major.minor[.build[.revision]].</value>
+  </data>
 </root>
