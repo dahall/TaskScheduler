@@ -534,6 +534,11 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Settings != null)
 				Marshal.ReleaseComObject(v2Settings);
 		}
+
+		internal bool IsSet()
+		{
+			return (v2Settings != null && (v2Settings.Period != null || v2Settings.Deadline != null || v2Settings.Exclusive == true));
+		}
 	}
 
 	/// <summary>
@@ -599,6 +604,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Settings != null)
 				Marshal.ReleaseComObject(v2Settings);
+		}
+
+		internal bool IsSet()
+		{
+			return (v2Settings != null && (!string.IsNullOrEmpty(v2Settings.Id) || !string.IsNullOrEmpty(v2Settings.Name)));
 		}
 	}
 
@@ -1246,6 +1256,48 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the lowest supported version that supports the settings for this <see cref="TaskDefinition"/>.
+		/// </summary>
+		[XmlIgnore]
+		public TaskCompatibility LowestSupportedVersion
+		{
+			get
+			{
+				if (this.Settings.MaintenanceSettings.IsSet() ||
+					this.Settings.Volatile == true)
+					return TaskCompatibility.V2_2;
+
+				if (this.Principal.ProcessTokenSidType != TaskProcessTokenSidType.Default ||
+					this.Principal.RequiredPrivileges.Count > 0 ||
+					this.Settings.DisallowStartOnRemoteAppSession == true ||
+					this.Settings.UseUnifiedSchedulingEngine == true)
+					return TaskCompatibility.V2_1;
+
+				if (this.Principal.DisplayName != null ||
+					this.Principal.GroupId != null ||
+					//this.Principal.Id != null ||
+					(this.Principal.LogonType == TaskLogonType.Group || this.Principal.LogonType == TaskLogonType.None || this.Principal.LogonType == TaskLogonType.S4U) ||
+					this.Principal.RunLevel == TaskRunLevel.Highest ||
+					this.RegistrationInfo.SecurityDescriptorSddlForm != null ||
+					this.RegistrationInfo.Source != null ||
+					this.RegistrationInfo.URI != null ||
+					this.RegistrationInfo.Version != new Version(1, 0) ||
+					this.Settings.AllowDemandStart == false ||
+					this.Settings.AllowHardTerminate == false ||
+					this.Settings.MultipleInstances != TaskInstancesPolicy.IgnoreNew ||
+					this.Settings.NetworkSettings.IsSet() ||
+					this.Settings.RestartCount != 0 ||
+					this.Settings.RestartInterval != TimeSpan.Zero ||
+					this.Settings.StartWhenAvailable == true ||
+					this.Actions.ContainsType(typeof(EmailAction)) || this.Actions.ContainsType(typeof(ShowMessageAction)) || this.Actions.ContainsType(typeof(ComHandlerAction)) ||
+					this.Triggers.ContainsType(typeof(EventTrigger)) || this.Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || this.Triggers.ContainsType(typeof(RegistrationTrigger)))
+					return TaskCompatibility.V2;
+
+				return TaskCompatibility.V1;
+			}
+		}
+
+		/// <summary>
 		/// Gets the principal for the task that provides the security credentials for the task.
 		/// </summary>
 		public TaskPrincipal Principal
@@ -1662,7 +1714,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// One of the <see cref="TaskProcessTokenSidType"/> enumeration constants.
 		/// </value>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
-		[XmlIgnore]
+		[XmlIgnore, DefaultValue(typeof(TaskProcessTokenSidType), "Default")]
 		public TaskProcessTokenSidType ProcessTokenSidType
 		{
 			get
@@ -2144,7 +2196,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Date = value.ToString(Trigger.V2BoundaryDateFormat);
+					v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat);
 				else
 				{
 					string v1Path = Task.GetV1Path(v1Task);
@@ -2211,7 +2263,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				this.SecurityDescriptorSddlForm = value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All);
+				this.SecurityDescriptorSddlForm = value == null ? null : value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All);
 			}
 		}
 
@@ -2279,7 +2331,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.URI = value.ToString();
+					v2RegInfo.URI = value == null ? null : value.ToString();
 				else
 					throw new NotV1SupportedException();
 			}
@@ -2304,7 +2356,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Version = value.ToString();
+					v2RegInfo.Version = value == null ? null : value.ToString();
 				else
 					throw new NotV1SupportedException();
 			}

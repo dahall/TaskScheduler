@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskPropertiesControl));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.generalTab = new System.Windows.Forms.TabPage();
@@ -101,6 +102,18 @@
 			this.taskDeleteAfterCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
+			this.regInfoTab = new System.Windows.Forms.TabPage();
+			this.taskRegSDDLBtn = new System.Windows.Forms.Button();
+			this.taskRegSDDLLabel = new System.Windows.Forms.Label();
+			this.taskRegVersionLabel = new System.Windows.Forms.Label();
+			this.taskRegURILabel = new System.Windows.Forms.Label();
+			this.taskRegSourceLabel = new System.Windows.Forms.Label();
+			this.taskRegDocLabel = new System.Windows.Forms.Label();
+			this.taskRegSDDLText = new System.Windows.Forms.TextBox();
+			this.taskRegVersionText = new System.Windows.Forms.TextBox();
+			this.taskRegURIText = new System.Windows.Forms.TextBox();
+			this.taskRegSourceText = new System.Windows.Forms.TextBox();
+			this.taskRegDocText = new System.Windows.Forms.TextBox();
 			this.addPropTab = new System.Windows.Forms.TabPage();
 			this.secHardGroup = new System.Windows.Forms.GroupBox();
 			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
@@ -134,6 +147,7 @@
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
@@ -145,12 +159,14 @@
 			this.idleConditionGroupBox.SuspendLayout();
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
+			this.regInfoTab.SuspendLayout();
 			this.addPropTab.SuspendLayout();
 			this.secHardGroup.SuspendLayout();
 			this.autoMaintGroup.SuspendLayout();
 			this.runTimesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -160,6 +176,7 @@
 			this.tabControl.Controls.Add(this.actionsTab);
 			this.tabControl.Controls.Add(this.conditionsTab);
 			this.tabControl.Controls.Add(this.settingsTab);
+			this.tabControl.Controls.Add(this.regInfoTab);
 			this.tabControl.Controls.Add(this.addPropTab);
 			this.tabControl.Controls.Add(this.runTimesTab);
 			this.tabControl.Controls.Add(this.historyTab);
@@ -184,6 +201,7 @@
 			resources.ApplyResources(this.generalTab, "generalTab");
 			this.generalTab.Name = "generalTab";
 			this.generalTab.UseVisualStyleBackColor = true;
+			this.generalTab.Enter += new System.EventHandler(this.generalTab_Enter);
 			// 
 			// taskNameLabel
 			// 
@@ -684,6 +702,91 @@
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
 			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
 			// 
+			// regInfoTab
+			// 
+			this.regInfoTab.Controls.Add(this.taskRegSDDLLabel);
+			this.regInfoTab.Controls.Add(this.taskRegVersionLabel);
+			this.regInfoTab.Controls.Add(this.taskRegURILabel);
+			this.regInfoTab.Controls.Add(this.taskRegSourceLabel);
+			this.regInfoTab.Controls.Add(this.taskRegDocLabel);
+			this.regInfoTab.Controls.Add(this.taskRegSDDLText);
+			this.regInfoTab.Controls.Add(this.taskRegVersionText);
+			this.regInfoTab.Controls.Add(this.taskRegURIText);
+			this.regInfoTab.Controls.Add(this.taskRegSourceText);
+			this.regInfoTab.Controls.Add(this.taskRegDocText);
+			this.regInfoTab.Controls.Add(this.taskRegSDDLBtn);
+			resources.ApplyResources(this.regInfoTab, "regInfoTab");
+			this.regInfoTab.Name = "regInfoTab";
+			this.regInfoTab.UseVisualStyleBackColor = true;
+			// 
+			// taskRegSDDLBtn
+			// 
+			resources.ApplyResources(this.taskRegSDDLBtn, "taskRegSDDLBtn");
+			this.taskRegSDDLBtn.Name = "taskRegSDDLBtn";
+			this.taskRegSDDLBtn.UseVisualStyleBackColor = true;
+			this.taskRegSDDLBtn.Click += new System.EventHandler(this.taskRegSDDLBtn_Click);
+			// 
+			// taskRegSDDLLabel
+			// 
+			resources.ApplyResources(this.taskRegSDDLLabel, "taskRegSDDLLabel");
+			this.taskRegSDDLLabel.Name = "taskRegSDDLLabel";
+			// 
+			// taskRegVersionLabel
+			// 
+			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
+			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
+			// 
+			// taskRegURILabel
+			// 
+			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
+			this.taskRegURILabel.Name = "taskRegURILabel";
+			// 
+			// taskRegSourceLabel
+			// 
+			resources.ApplyResources(this.taskRegSourceLabel, "taskRegSourceLabel");
+			this.taskRegSourceLabel.Name = "taskRegSourceLabel";
+			// 
+			// taskRegDocLabel
+			// 
+			resources.ApplyResources(this.taskRegDocLabel, "taskRegDocLabel");
+			this.taskRegDocLabel.Name = "taskRegDocLabel";
+			// 
+			// taskRegSDDLText
+			// 
+			resources.ApplyResources(this.taskRegSDDLText, "taskRegSDDLText");
+			this.errorProvider.SetIconPadding(this.taskRegSDDLText, ((int)(resources.GetObject("taskRegSDDLText.IconPadding"))));
+			this.taskRegSDDLText.Name = "taskRegSDDLText";
+			this.taskRegSDDLText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegSDDLText_Validating);
+			this.taskRegSDDLText.Validated += new System.EventHandler(this.taskRegSDDLText_Validated);
+			// 
+			// taskRegVersionText
+			// 
+			resources.ApplyResources(this.taskRegVersionText, "taskRegVersionText");
+			this.errorProvider.SetIconPadding(this.taskRegVersionText, ((int)(resources.GetObject("taskRegVersionText.IconPadding"))));
+			this.taskRegVersionText.Name = "taskRegVersionText";
+			this.taskRegVersionText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegVersionText_Validating);
+			this.taskRegVersionText.Validated += new System.EventHandler(this.taskRegVersionText_Validated);
+			// 
+			// taskRegURIText
+			// 
+			resources.ApplyResources(this.taskRegURIText, "taskRegURIText");
+			this.errorProvider.SetIconPadding(this.taskRegURIText, ((int)(resources.GetObject("taskRegURIText.IconPadding"))));
+			this.taskRegURIText.Name = "taskRegURIText";
+			this.taskRegURIText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegURIText_Validating);
+			this.taskRegURIText.Validated += new System.EventHandler(this.taskRegURIText_Validated);
+			// 
+			// taskRegSourceText
+			// 
+			resources.ApplyResources(this.taskRegSourceText, "taskRegSourceText");
+			this.taskRegSourceText.Name = "taskRegSourceText";
+			this.taskRegSourceText.Leave += new System.EventHandler(this.taskRegSourceText_Leave);
+			// 
+			// taskRegDocText
+			// 
+			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
+			this.taskRegDocText.Name = "taskRegDocText";
+			this.taskRegDocText.Leave += new System.EventHandler(this.taskRegDocText_Leave);
+			// 
 			// addPropTab
 			// 
 			this.addPropTab.Controls.Add(this.secHardGroup);
@@ -908,6 +1011,10 @@
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
+			// errorProvider
+			// 
+			this.errorProvider.ContainerControl = this;
+			// 
 			// TaskPropertiesControl
 			// 
 			resources.ApplyResources(this, "$this");
@@ -932,6 +1039,8 @@
 			this.settingsTab.ResumeLayout(false);
 			this.settingsTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
+			this.regInfoTab.ResumeLayout(false);
+			this.regInfoTab.PerformLayout();
 			this.addPropTab.ResumeLayout(false);
 			this.addPropTab.PerformLayout();
 			this.secHardGroup.ResumeLayout(false);
@@ -942,6 +1051,7 @@
 			this.runTimesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1053,5 +1163,18 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.GroupBox secHardGroup;
 		private System.Windows.Forms.GroupBox autoMaintGroup;
+		private System.Windows.Forms.TabPage regInfoTab;
+		private System.Windows.Forms.Label taskRegURILabel;
+		private System.Windows.Forms.Label taskRegSourceLabel;
+		private System.Windows.Forms.Label taskRegDocLabel;
+		private System.Windows.Forms.TextBox taskRegURIText;
+		private System.Windows.Forms.TextBox taskRegSourceText;
+		private System.Windows.Forms.TextBox taskRegDocText;
+		private System.Windows.Forms.Label taskRegSDDLLabel;
+		private System.Windows.Forms.Label taskRegVersionLabel;
+		private System.Windows.Forms.TextBox taskRegSDDLText;
+		private System.Windows.Forms.TextBox taskRegVersionText;
+		private System.Windows.Forms.Button taskRegSDDLBtn;
+		private System.Windows.Forms.ErrorProvider errorProvider;
 	}
 }

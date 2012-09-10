@@ -76,6 +76,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool RegisterTaskOnAccept { get; set; }
 
 		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Additions' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
+		public bool ShowAddedPropertiesTab
+		{
+			get { return taskPropertiesControl1.ShowAddedPropertiesTab; }
+			set { taskPropertiesControl1.ShowAddedPropertiesTab = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether errors are shown in the UI.
 		/// </summary>
 		/// <value>
@@ -86,6 +97,17 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get { return taskPropertiesControl1.ShowErrors; }
 			set { taskPropertiesControl1.ShowErrors = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to show the 'Info' tab.
+		/// </summary>
+		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		public bool ShowRegistrationInfoTab
+		{
+			get { return taskPropertiesControl1.ShowRegistrationInfoTab; }
+			set { taskPropertiesControl1.ShowRegistrationInfoTab = value; }
 		}
 
 		/// <summary>
