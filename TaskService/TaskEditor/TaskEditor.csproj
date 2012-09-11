@@ -271,6 +271,13 @@
     </None>
     <None Include="TaskEditor.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ActionEditDialog.bmp" />
+    <Content Include="Dialog.bmp" />
+    <Content Include="TaskEditDialog.bmp" />
+    <Content Include="TaskSchedulerWizard.bmp" />
+    <Content Include="TriggerEditDialog.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

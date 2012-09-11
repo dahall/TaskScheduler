@@ -76,6 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
 		InteractiveTokenOrPassword
 	}
 
+	/// <summary>Defines which privileges must be required for a secured task.</summary>
 	public enum TaskPrincipalPrivilege
 	{
 		/// <summary>Required to create a primary token. User Right: Create a token object.</summary>

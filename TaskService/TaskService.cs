@@ -8,6 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides access to the Task Scheduler service for managing registered tasks.
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
+	[ToolboxItem(true), DefaultProperty("TargetServer")]
 	public sealed class TaskService : Component, IDisposable, ISupportInitialize
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));

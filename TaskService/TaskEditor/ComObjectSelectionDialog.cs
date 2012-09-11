@@ -9,7 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Dialog that will enumerate and display a list of COM objects and allow for a single selection.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
+	[ToolboxItem(true), System.Drawing.ToolboxBitmap("Dialog.bmp"), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
 	Description("Dialog that will enumerate and display a list of COM objects."),
 	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
 	DesignTimeVisible(true)]

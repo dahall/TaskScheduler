@@ -25,6 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Class to let the user browse for a folder.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap("Dialog.bmp"), Description("Dialog that browses network computers.")]
 	public class FolderBrowserDialog2 : CommonDialog
 	{
 		/// <summary>

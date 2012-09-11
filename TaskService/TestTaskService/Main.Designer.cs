@@ -58,7 +58,7 @@
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ReadOnly = true;
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox1.Size = new System.Drawing.Size(390, 128);
+			this.textBox1.Size = new System.Drawing.Size(393, 128);
 			this.textBox1.TabIndex = 3;
 			// 
 			// radioButtonList1
@@ -66,11 +66,11 @@
 			this.radioButtonList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonList1.AutoScroll = true;
-			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(390, 35);
+			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(393, 35);
 			radioButtonListItem1.Text = "Short test";
 			radioButtonListItem2.Text = "Long test";
 			radioButtonListItem3.Text = "Editor test";
-			radioButtonListItem4.Text = "Find Action";
+			radioButtonListItem4.Text = "Find Task Prop";
 			radioButtonListItem5.Text = "Wizard test";
 			radioButtonListItem6.Text = "MMC test";
 			radioButtonListItem7.Text = "Find Task";
@@ -87,14 +87,14 @@
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 4;
 			this.radioButtonList1.RepeatDirection = GroupControls.RepeatDirection.Horizontal;
-			this.radioButtonList1.Size = new System.Drawing.Size(390, 35);
+			this.radioButtonList1.Size = new System.Drawing.Size(393, 35);
 			this.radioButtonList1.TabIndex = 0;
 			// 
 			// closeButton
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(328, 222);
+			this.closeButton.Location = new System.Drawing.Point(331, 222);
 			this.closeButton.Name = "closeButton";
 			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 6;
@@ -105,7 +105,7 @@
 			// runButton
 			// 
 			this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.runButton.Location = new System.Drawing.Point(247, 222);
+			this.runButton.Location = new System.Drawing.Point(250, 222);
 			this.runButton.Name = "runButton";
 			this.runButton.Size = new System.Drawing.Size(75, 23);
 			this.runButton.TabIndex = 5;
@@ -128,7 +128,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox2.Location = new System.Drawing.Point(53, 62);
 			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(350, 20);
+			this.textBox2.Size = new System.Drawing.Size(353, 20);
 			this.textBox2.TabIndex = 2;
 			// 
 			// reconnectLink
@@ -145,9 +145,14 @@
 			// 
 			// taskServiceConnectDialog1
 			// 
+			this.taskServiceConnectDialog1.AutoSize = true;
 			this.taskServiceConnectDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.taskServiceConnectDialog1.ClientSize = new System.Drawing.Size(444, 181);
+			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskServiceConnectDialog1.Name = "TSConnectDlg";
 			this.taskServiceConnectDialog1.TaskService = this.ts;
+			this.taskServiceConnectDialog1.Text = "Select Computer";
+			this.taskServiceConnectDialog1.Visible = false;
 			// 
 			// Main
 			// 
@@ -155,7 +160,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(415, 257);
+			this.ClientSize = new System.Drawing.Size(418, 257);
 			this.Controls.Add(this.reconnectLink);
 			this.Controls.Add(this.textBox2);
 			this.Controls.Add(this.label1);

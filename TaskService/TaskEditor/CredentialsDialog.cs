@@ -11,7 +11,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Dialog box which prompts for user credentials using the Win32 CREDUI methods.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog that prompts the user for credentials."), Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DesignTimeVisible(true)]
+	[ToolboxItem(true), System.Drawing.ToolboxBitmap("Dialog.bmp"), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), 
+	DesignTimeVisible(true), Description("Dialog that prompts the user for credentials."), 
+	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	public class CredentialsDialog : CommonDialog
 	{
 		private const int maxStringLength = 100;

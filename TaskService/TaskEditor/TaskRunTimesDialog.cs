@@ -7,7 +7,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Dialog that will display the run times for a provided task.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog that will display the run times for a provided task."), Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DesignTimeVisible(true)]
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), System.Drawing.ToolboxBitmap("Dialog.bmp"),
+	DesignTimeVisible(true), Description("Dialog that will display the run times for a provided task."), 
+	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	public partial class TaskRunTimesDialog :
 #if DEBUG
 		Form

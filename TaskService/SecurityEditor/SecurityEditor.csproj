@@ -48,6 +48,10 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TaskEditor\DialogBase.cs">
+      <Link>DialogBase.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
