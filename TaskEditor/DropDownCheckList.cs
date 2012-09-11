@@ -431,7 +431,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return this.Text;
 		}
 
-		public int CompareTo(object obj)
+		int IComparable.CompareTo(object obj)
 		{
 			if (obj is DropDownCheckListItem || obj is string)
 				return Text.CompareTo(((DropDownCheckListItem)obj).Text);

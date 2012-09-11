@@ -8,7 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// An editor that handles all Task triggers.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task.")]
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task trigger.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	[DesignTimeVisible(true)]
 	public partial class TriggerEditDialog :
@@ -263,6 +263,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+		/// </summary>
+		/// <value>
+		/// 	<c>true</c> if using the Unified Scheduling Engine; otherwise, <c>false</c>.
+		/// </value>
 		[DefaultValue(false), Category("Behavior")]
 		public bool UseUnifiedSchedulingEngine
 		{

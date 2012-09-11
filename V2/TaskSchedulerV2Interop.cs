@@ -206,7 +206,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("248919AE-E345-4A6D-8AEB-E0D3165C904E"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	public interface IPrincipal2
+	internal interface IPrincipal2
 	{
 		TaskProcessTokenSidType ProcessTokenSidType { get; [param: In] set; }
 		int RequiredPrivilegeCount { get; }

@@ -10,6 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[System.Diagnostics.DebuggerStepThrough]
 	public abstract class TSNotSupportedException : Exception
 	{
+		/// <summary>Defines the minimum supported version for the action not allowed by this exception.</summary>
 		protected TaskCompatibility min;
 		private string myMessage;
 

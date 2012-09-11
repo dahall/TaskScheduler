@@ -52,7 +52,7 @@ namespace TestTaskService
 						EditorTest(ts, Console.Out);
 						break;
 					case 'F':
-						FindActionString(ts, Console.Out, newArgs[5]);
+						FindTaskWithProperty(ts, Console.Out, newArgs[5]);
 						Console.ReadKey();
 						break;
 					case 'S':
@@ -86,12 +86,12 @@ namespace TestTaskService
 			}
 		}
 
-		internal static void FindActionString(TaskService ts, System.IO.TextWriter output, params string[] arg)
+		internal static void FindTaskWithProperty(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			try
 			{
 				TaskFolder tf = ts.RootFolder;
-				FindActionStringInFolder(output, tf, arg[0]);
+				FindTaskWithPropertyInFolder(output, tf, arg[0]);
 			}
 			catch (Exception ex)
 			{
@@ -99,51 +99,40 @@ namespace TestTaskService
 			}
 		}
 
-		static void FindActionStringInFolder(System.IO.TextWriter output, TaskFolder tf, string arg)
+		static void FindTaskWithPropertyInFolder(System.IO.TextWriter output, TaskFolder tf, string arg, System.Text.RegularExpressions.Match match = null)
 		{
+			if (match == null)
+				match = System.Text.RegularExpressions.Regex.Match(arg, "(\\.?\\w+)*\\s*(==|!=)\\s*\\\"([^\"]*)\\\"");
+			if (!match.Success)
+				return;
+
 			foreach (Task t in tf.Tasks)
 			{
 				try
 				{
 					bool found = false;
-					foreach (var action in t.Definition.Actions)
+					System.Reflection.PropertyInfo pi;
+					Object lastObj = t;
+					int i;
+					for (i = 0; i < match.Groups[1].Captures.Count && lastObj != null; i++)
 					{
-						switch (action.ActionType)
+						string prop = match.Groups[1].Captures[i].Value.TrimStart('.');
+						pi = lastObj.GetType().GetProperty(prop);
+						if (pi == null)
 						{
-							case TaskActionType.ComHandler:
-								/*if (((ComHandlerAction)action).ClassId.ToString().IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((ComHandlerAction)action).Data.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)*/
-									//found = true;
-								output.WriteLine(" > " + action.ToString());
-								break;
-							case TaskActionType.Execute:
-								if (((ExecAction)action).Path.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((ExecAction)action).Arguments.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
-									found = true;
-								break;
-							case TaskActionType.SendEmail:
-								if (((EmailAction)action).Bcc.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).Body.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).Cc.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).From.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).ReplyTo.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).Server.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).Subject.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-									((EmailAction)action).To.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
-									found = true;
-									break;
-							case TaskActionType.ShowMessage:
-									if (((ShowMessageAction)action).MessageBody.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-										((ShowMessageAction)action).Title.IndexOf(arg, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
-										found = true;
-									break;
-							default:
-								break;
+							output.WriteLine("Unable to locate property {0}", prop);
+							return;
 						}
+						lastObj = pi.GetValue(lastObj, null);
 					}
-					if (found)
+					if (i == match.Groups[1].Captures.Count)
 					{
-						output.WriteLine("+ {0}, {1} ({2})", t.Name, t.Path, t.State);
+						string res = (lastObj == null) ? string.Empty : lastObj.ToString();
+						found = res.Equals(match.Groups[3].Value, StringComparison.InvariantCultureIgnoreCase);
+						if (match.Groups[2].Value == "!=")
+							found = !found;
+						if (found)
+							output.WriteLine("+ {0}, {1} ({2})\n\r== {3}", t.Name, t.Path, t.State, res);
 					}
 				}
 				catch { }
@@ -155,7 +144,7 @@ namespace TestTaskService
 				try
 				{
 					foreach (TaskFolder sf in tfs)
-						FindActionStringInFolder(output, sf, arg);
+						FindTaskWithPropertyInFolder(output, sf, arg, match);
 				}
 				catch (Exception ex)
 				{

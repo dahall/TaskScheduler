@@ -216,7 +216,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Determines whether the specified trigger type is contained in this collection.
 		/// </summary>
-		/// <param name="actionType">Type of the trigger.</param>
+		/// <param name="triggerType">Type of the trigger.</param>
 		/// <returns>
 		///   <c>true</c> if the specified trigger type is contained in this collection; otherwise, <c>false</c>.
 		/// </returns>
