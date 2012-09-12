@@ -174,6 +174,56 @@
     <Compile Include="TriggerEditDialog.Designer.cs">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIComponents\BaseTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\BaseTriggerUI.Designer.cs">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ComHandlerActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ComHandlerActionUI.Designer.cs">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\DailyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\DailyTriggerUI.Designer.cs">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\EmailActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\EmailActionUI.Designer.cs">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ExecActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ExecActionUI.Designer.cs">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\IActionHandler.cs" />
+    <Compile Include="UIComponents\ITriggerHandler.cs" />
+    <Compile Include="UIComponents\MonthlyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\MonthlyTriggerUI.Designer.cs">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ShowMessageActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ShowMessageActionUI.Designer.cs">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\WeeklyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\WeeklyTriggerUI.Designer.cs">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ActionEditDialog.it.resx">
@@ -256,6 +306,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\BaseTriggerUI.resx">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ComHandlerActionUI.resx">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EmailActionUI.resx">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ExecActionUI.resx">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

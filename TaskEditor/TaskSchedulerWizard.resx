@@ -126,10 +126,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="nameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 0</value>
+    <value>91, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 23</value>
+    <value>476, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameText.TabIndex" type="System.Int32, mscorlib">
@@ -151,13 +151,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="descText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 29</value>
+    <value>91, 33</value>
   </data>
   <data name="descText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 129</value>
+    <value>476, 148</value>
   </data>
   <data name="descText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -181,7 +181,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+    <value>3, 37</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 15</value>
@@ -235,7 +235,7 @@
     <value>3</value>
   </data>
   <data name="introPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="introPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -247,10 +247,7 @@
     <value>introPage</value>
   </data>
   <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="triggerSelectionList.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="triggerSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>473, 329</value>
@@ -268,7 +265,7 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="triggerSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="triggerSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -277,7 +274,7 @@
     <value>triggerSelectionList</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.1.20179, Culture=neutral, PublicKeyToken=null</value>
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.5.20798, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
   </data>
   <data name="&gt;&gt;triggerSelectionList.Parent" xml:space="preserve">
     <value>triggerSelectPage</value>
@@ -286,7 +283,7 @@
     <value>0</value>
   </data>
   <data name="triggerSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="triggerSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -298,142 +295,31 @@
     <value>triggerSelectPage</value>
   </data>
   <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="dailyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 0</value>
+  <data name="dailyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="dailyStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
+  <data name="dailyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
   </data>
-  <data name="dailyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
+  <data name="dailyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 55</value>
+  </data>
+  <data name="dailyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="dailyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;dailyTriggerUI1.Name" xml:space="preserve">
+    <value>dailyTriggerUI1</value>
   </data>
-  <data name="&gt;&gt;dailyStartTimePicker.Name" xml:space="preserve">
-    <value>dailyStartTimePicker</value>
+  <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="&gt;&gt;dailyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dailyStartTimePicker.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dailyTriggerUI1.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
   </data>
-  <data name="&gt;&gt;dailyStartTimePicker.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dailyTriggerUI1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>dailyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="dailyRecurNumUpDn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 29</value>
-  </data>
-  <data name="dailyRecurNumUpDn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 23</value>
-  </data>
-  <data name="dailyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurNumUpDn.Name" xml:space="preserve">
-    <value>dailyRecurNumUpDn</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurNumUpDn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurNumUpDn.Parent" xml:space="preserve">
-    <value>dailyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurNumUpDn.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dailyDaysLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dailyDaysLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dailyDaysLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 31</value>
-  </data>
-  <data name="dailyDaysLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 15</value>
-  </data>
-  <data name="dailyDaysLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>days</value>
-  </data>
-  <data name="&gt;&gt;dailyDaysLabel.Name" xml:space="preserve">
-    <value>dailyDaysLabel</value>
-  </data>
-  <data name="&gt;&gt;dailyDaysLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dailyDaysLabel.Parent" xml:space="preserve">
-    <value>dailyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;dailyDaysLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="dailyRecurLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dailyRecurLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dailyRecurLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
-  </data>
-  <data name="dailyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 15</value>
-  </data>
-  <data name="dailyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurLabel.Name" xml:space="preserve">
-    <value>dailyRecurLabel</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurLabel.Parent" xml:space="preserve">
-    <value>dailyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;dailyRecurLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="triggerPropText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -442,10 +328,10 @@
     <value>NoControl</value>
   </data>
   <data name="triggerPropText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 106</value>
+    <value>0, 122</value>
   </data>
   <data name="triggerPropText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 64</value>
+    <value>568, 74</value>
   </data>
   <data name="triggerPropText.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -466,10 +352,10 @@
     <value>False</value>
   </data>
   <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 32</value>
+    <value>150, 37</value>
   </data>
   <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 23</value>
+    <value>206, 23</value>
   </data>
   <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -478,7 +364,7 @@
     <value>durationSpan</value>
   </data>
   <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
     <value>triggerPropPage</value>
@@ -490,10 +376,10 @@
     <value>False</value>
   </data>
   <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 3</value>
+    <value>150, 3</value>
   </data>
   <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 23</value>
+    <value>206, 23</value>
   </data>
   <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -502,7 +388,7 @@
     <value>repeatSpan</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
     <value>triggerPropPage</value>
@@ -517,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 35</value>
+    <value>24, 40</value>
   </data>
   <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 15</value>
@@ -550,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 68</value>
+    <value>3, 78</value>
   </data>
   <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 19</value>
@@ -580,7 +466,7 @@
     <value>NoControl</value>
   </data>
   <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+    <value>3, 6</value>
   </data>
   <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
@@ -604,7 +490,7 @@
     <value>5</value>
   </data>
   <data name="triggerPropPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>572, 273</value>
   </data>
   <data name="triggerPropPage.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -616,10 +502,10 @@
     <value>triggerPropPage</value>
   </data>
   <data name="&gt;&gt;triggerPropPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="dailyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -631,10 +517,10 @@
     <value>dailyTriggerPage</value>
   </data>
   <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 0</value>
+    <value>50, 0</value>
   </data>
   <data name="oneTimeStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 23</value>
@@ -649,7 +535,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -664,7 +550,7 @@
     <value>NoControl</value>
   </data>
   <data name="oneTimeStartLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
+    <value>3, 5</value>
   </data>
   <data name="oneTimeStartLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 15</value>
@@ -688,7 +574,7 @@
     <value>1</value>
   </data>
   <data name="oneTimeTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="oneTimeTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -700,391 +586,34 @@
     <value>oneTimeTriggerPage</value>
   </data>
   <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="weeklyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 0</value>
+  <data name="weeklyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="weeklyStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
+  <data name="weeklyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 4</value>
   </data>
-  <data name="weeklyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="weeklyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 117</value>
   </data>
-  <data name="weeklyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;weeklyStartTimePicker.Name" xml:space="preserve">
-    <value>weeklyStartTimePicker</value>
-  </data>
-  <data name="&gt;&gt;weeklyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;weeklyStartTimePicker.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;weeklyStartTimePicker.ZOrder" xml:space="preserve">
+  <data name="weeklyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;weeklyTriggerUI1.Name" xml:space="preserve">
+    <value>weeklyTriggerUI1</value>
   </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
+  <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
+    <value>weeklyTriggerPage</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="weeklySunCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklySunCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklySunCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="weeklySunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 19</value>
-  </data>
-  <data name="weeklySunCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>Sunday</value>
-  </data>
-  <data name="&gt;&gt;weeklySunCheck.Name" xml:space="preserve">
-    <value>weeklySunCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklySunCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklySunCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklySunCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="weeklyMonCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyMonCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyMonCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 3</value>
-  </data>
-  <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 19</value>
-  </data>
-  <data name="weeklyMonCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>Monday</value>
-  </data>
-  <data name="&gt;&gt;weeklyMonCheck.Name" xml:space="preserve">
-    <value>weeklyMonCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklyMonCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyMonCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklyMonCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="weeklyTueCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyTueCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyTueCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 3</value>
-  </data>
-  <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 19</value>
-  </data>
-  <data name="weeklyTueCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>Tuesday</value>
-  </data>
-  <data name="&gt;&gt;weeklyTueCheck.Name" xml:space="preserve">
-    <value>weeklyTueCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklyTueCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyTueCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklyTueCheck.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="weeklyWedCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyWedCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyWedCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 3</value>
-  </data>
-  <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="weeklyWedCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>Wednesday</value>
-  </data>
-  <data name="&gt;&gt;weeklyWedCheck.Name" xml:space="preserve">
-    <value>weeklyWedCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklyWedCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyWedCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklyWedCheck.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="weeklyThuCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyThuCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyThuCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
-  </data>
-  <data name="weeklyThuCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 19</value>
-  </data>
-  <data name="weeklyThuCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>Thursday</value>
-  </data>
-  <data name="&gt;&gt;weeklyThuCheck.Name" xml:space="preserve">
-    <value>weeklyThuCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklyThuCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyThuCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklyThuCheck.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="weeklyFriCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyFriCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyFriCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 28</value>
-  </data>
-  <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 19</value>
-  </data>
-  <data name="weeklyFriCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>Friday</value>
-  </data>
-  <data name="&gt;&gt;weeklyFriCheck.Name" xml:space="preserve">
-    <value>weeklyFriCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklyFriCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyFriCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklyFriCheck.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="weeklySatCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklySatCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklySatCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 28</value>
-  </data>
-  <data name="weeklySatCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 19</value>
-  </data>
-  <data name="weeklySatCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>Saturday</value>
-  </data>
-  <data name="&gt;&gt;weeklySatCheck.Name" xml:space="preserve">
-    <value>weeklySatCheck</value>
-  </data>
-  <data name="&gt;&gt;weeklySatCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklySatCheck.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;weeklySatCheck.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 56</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 50</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="weeklySunCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyMonCheck" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklyTueCheck" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="weeklyWedCheck" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="weeklyThuCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="weeklyFriCheck" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="weeklySatCheck" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,25,Percent,25" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="weeklyRecurNumUpDn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 29</value>
-  </data>
-  <data name="weeklyRecurNumUpDn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 23</value>
-  </data>
-  <data name="weeklyRecurNumUpDn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurNumUpDn.Name" xml:space="preserve">
-    <value>weeklyRecurNumUpDn</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurNumUpDn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurNumUpDn.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurNumUpDn.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 31</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>weeks on:</value>
-  </data>
-  <data name="&gt;&gt;weeklyOnWeeksLabel.Name" xml:space="preserve">
-    <value>weeklyOnWeeksLabel</value>
-  </data>
-  <data name="&gt;&gt;weeklyOnWeeksLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyOnWeeksLabel.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;weeklyOnWeeksLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="weeklyRecurLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="weeklyRecurLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="weeklyRecurLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 31</value>
-  </data>
-  <data name="weeklyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 15</value>
-  </data>
-  <data name="weeklyRecurLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Recur every:</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurLabel.Name" xml:space="preserve">
-    <value>weeklyRecurLabel</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurLabel.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;weeklyRecurLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="weeklyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="weeklyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1096,238 +625,40 @@
     <value>weeklyTriggerPage</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 58</value>
+  <data name="monthlyTriggerUI1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="monthlyDaysDropDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 23</value>
+  <data name="monthlyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="monthlyDaysDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="monthlyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 4</value>
   </data>
-  <data name="&gt;&gt;monthlyDaysDropDown.Name" xml:space="preserve">
-    <value>monthlyDaysDropDown</value>
+  <data name="monthlyTriggerUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
+  <data name="monthlyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 112</value>
   </data>
-  <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyDaysDropDown.ZOrder" xml:space="preserve">
+  <data name="monthlyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="monthlyOnDOWDropDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 87</value>
+  <data name="&gt;&gt;monthlyTriggerUI1.Name" xml:space="preserve">
+    <value>monthlyTriggerUI1</value>
   </data>
-  <data name="monthlyOnDOWDropDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 23</value>
+  <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="monthlyOnDOWDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnDOWDropDown.Name" xml:space="preserve">
-    <value>monthlyOnDOWDropDown</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
+  <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
   </data>
-  <data name="&gt;&gt;monthlyOnDOWDropDown.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="monthlyOnWeekDropDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 87</value>
-  </data>
-  <data name="monthlyOnWeekDropDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
-  </data>
-  <data name="monthlyOnWeekDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnWeekDropDown.Name" xml:space="preserve">
-    <value>monthlyOnWeekDropDown</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnWeekDropDown.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="monthlyMonthsDropDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 29</value>
-  </data>
-  <data name="monthlyMonthsDropDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 23</value>
-  </data>
-  <data name="monthlyMonthsDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsDropDown.Name" xml:space="preserve">
-    <value>monthlyMonthsDropDown</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsDropDown.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="monthlyOnRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="monthlyOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="monthlyOnRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 88</value>
-  </data>
-  <data name="monthlyOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 19</value>
-  </data>
-  <data name="monthlyOnRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>On:</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnRadio.Name" xml:space="preserve">
-    <value>monthlyOnRadio</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnRadio.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyOnRadio.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="monthlyDaysRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="monthlyDaysRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="monthlyDaysRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 59</value>
-  </data>
-  <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 19</value>
-  </data>
-  <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>Days:</value>
-  </data>
-  <data name="&gt;&gt;monthlyDaysRadio.Name" xml:space="preserve">
-    <value>monthlyDaysRadio</value>
-  </data>
-  <data name="&gt;&gt;monthlyDaysRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;monthlyDaysRadio.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyDaysRadio.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="monthlyMonthsLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="monthlyMonthsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="monthlyMonthsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
-  </data>
-  <data name="monthlyMonthsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
-  </data>
-  <data name="monthlyMonthsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>Months:</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsLabel.Name" xml:space="preserve">
-    <value>monthlyMonthsLabel</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsLabel.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyMonthsLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="monthlyStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 0</value>
-  </data>
-  <data name="monthlyStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
-  </data>
-  <data name="monthlyStartTimePicker.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="monthlyStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;monthlyStartTimePicker.Name" xml:space="preserve">
-    <value>monthlyStartTimePicker</value>
-  </data>
-  <data name="&gt;&gt;monthlyStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.16143, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;monthlyStartTimePicker.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;monthlyStartTimePicker.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="monthlyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="monthlyTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1339,7 +670,7 @@
     <value>monthlyTriggerPage</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1375,10 +706,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="onEventIdText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 57</value>
+    <value>106, 66</value>
   </data>
   <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 23</value>
+    <value>380, 23</value>
   </data>
   <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1402,7 +733,7 @@
     <value>NoControl</value>
   </data>
   <data name="onEventSourceLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
+    <value>3, 36</value>
   </data>
   <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
@@ -1429,10 +760,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="onEventSourceCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 28</value>
+    <value>106, 32</value>
+  </data>
+  <data name="onEventSourceCombo.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>373, 0</value>
   </data>
   <data name="onEventSourceCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 23</value>
+    <value>373, 23</value>
   </data>
   <data name="onEventSourceCombo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1453,10 +787,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="onEventLogCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 0</value>
+    <value>106, 0</value>
+  </data>
+  <data name="onEventLogCombo.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>373, 0</value>
   </data>
   <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 23</value>
+    <value>373, 23</value>
   </data>
   <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1480,7 +817,7 @@
     <value>NoControl</value>
   </data>
   <data name="onEventIdLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 60</value>
+    <value>3, 69</value>
   </data>
   <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 15</value>
@@ -1504,7 +841,7 @@
     <value>5</value>
   </data>
   <data name="onEventTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="onEventTriggerPage.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1516,10 +853,7 @@
     <value>onEventTriggerPage</value>
   </data>
   <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="actionSelectionList.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>490, 120</value>
@@ -1534,7 +868,7 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>572, 280</value>
   </data>
   <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1543,7 +877,7 @@
     <value>actionSelectionList</value>
   </data>
   <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.1.20179, Culture=neutral, PublicKeyToken=null</value>
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.5.20798, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
   </data>
   <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
     <value>actionSelectPage</value>
@@ -1552,7 +886,7 @@
     <value>0</value>
   </data>
   <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>572, 280</value>
   </data>
   <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1564,199 +898,31 @@
     <value>actionSelectPage</value>
   </data>
   <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="execProgBrowseBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>367, 16</value>
-  </data>
-  <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 23</value>
-  </data>
-  <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
-  <data name="&gt;&gt;execProgBrowseBtn.Name" xml:space="preserve">
-    <value>execProgBrowseBtn</value>
-  </data>
-  <data name="&gt;&gt;execProgBrowseBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execProgBrowseBtn.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execProgBrowseBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="execDirText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 74</value>
-  </data>
-  <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 23</value>
-  </data>
-  <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;execDirText.Name" xml:space="preserve">
-    <value>execDirText</value>
-  </data>
-  <data name="&gt;&gt;execDirText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execDirText.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execDirText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="execArgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="execArgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 45</value>
-  </data>
-  <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 23</value>
-  </data>
-  <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;execArgText.Name" xml:space="preserve">
-    <value>execArgText</value>
-  </data>
-  <data name="&gt;&gt;execArgText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execArgText.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execArgText.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="execProgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="execProgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
-  </data>
-  <data name="execProgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>355, 23</value>
-  </data>
-  <data name="execProgText.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;execProgText.Name" xml:space="preserve">
-    <value>execProgText</value>
-  </data>
-  <data name="&gt;&gt;execProgText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execProgText.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execProgText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="execDirLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="execDirLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="execDirLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 77</value>
-  </data>
-  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 15</value>
-  </data>
-  <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="execDirLabel.Text" xml:space="preserve">
-    <value>Start in (optional):</value>
-  </data>
-  <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
-    <value>execDirLabel</value>
-  </data>
-  <data name="&gt;&gt;execDirLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execDirLabel.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execDirLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="execArgLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="execArgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="execArgLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 48</value>
-  </data>
-  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 15</value>
-  </data>
-  <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Add arguments (optional):</value>
-  </data>
-  <data name="&gt;&gt;execArgLabel.Name" xml:space="preserve">
-    <value>execArgLabel</value>
-  </data>
-  <data name="&gt;&gt;execArgLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execArgLabel.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;execArgLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="execProgLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="execProgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="execProgLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="execProgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 15</value>
+  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 102</value>
   </data>
-  <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="execProgLabel.Text" xml:space="preserve">
-    <value>Program/script:</value>
+  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
+    <value>execActionUI1</value>
   </data>
-  <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
-    <value>execProgLabel</value>
+  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="&gt;&gt;execProgLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execProgLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
     <value>runActionPage</value>
   </data>
-  <data name="&gt;&gt;execProgLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="taskLocalOnlyCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1765,7 +931,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskLocalOnlyCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 97</value>
+    <value>28, 112</value>
   </data>
   <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>459, 19</value>
@@ -1795,7 +961,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskLoggedOptionalRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
+    <value>7, 83</value>
   </data>
   <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 19</value>
@@ -1825,7 +991,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskLoggedOnRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 47</value>
+    <value>7, 54</value>
   </data>
   <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 19</value>
@@ -1852,10 +1018,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="taskPrincipalText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>7, 21</value>
   </data>
   <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 23</value>
+    <value>378, 23</value>
   </data>
   <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1879,10 +1045,10 @@
     <value>NoControl</value>
   </data>
   <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 15</value>
+    <value>393, 17</value>
   </data>
   <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 27</value>
+    <value>182, 31</value>
   </data>
   <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1933,7 +1099,7 @@
     <value>5</value>
   </data>
   <data name="secOptPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="secOptPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1945,10 +1111,10 @@
     <value>secOptPage</value>
   </data>
   <data name="&gt;&gt;secOptPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1960,388 +1126,34 @@
     <value>runActionPage</value>
   </data>
   <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="emailAttachementBrowseBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 166</value>
+  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 282</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
-  <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
-    <value>emailAttachementBrowseBtn</value>
-  </data>
-  <data name="&gt;&gt;emailAttachementBrowseBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailAttachementBrowseBtn.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailAttachementBrowseBtn.ZOrder" xml:space="preserve">
+  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="emailSMTPText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
+    <value>emailActionUI1</value>
   </data>
-  <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 203</value>
+  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 23</value>
-  </data>
-  <data name="emailSMTPText.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPText.Name" xml:space="preserve">
-    <value>emailSMTPText</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
     <value>emailActionPage</value>
   </data>
-  <data name="&gt;&gt;emailSMTPText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="emailSMTPLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="emailSMTPLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailSMTPLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 206</value>
-  </data>
-  <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 15</value>
-  </data>
-  <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value>SMTP server:</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
-    <value>emailSMTPLabel</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailSMTPLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="emailAttachmentText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 168</value>
-  </data>
-  <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 23</value>
-  </data>
-  <data name="emailAttachmentText.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentText.Name" xml:space="preserve">
-    <value>emailAttachmentText</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentText.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="emailAttachmentLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="emailAttachmentLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailAttachmentLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 171</value>
-  </data>
-  <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 15</value>
-  </data>
-  <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value>Attachment:</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
-    <value>emailAttachmentLabel</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailAttachmentLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 195</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 2</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="emailTextText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="emailTextText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 78</value>
-  </data>
-  <data name="emailTextText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 84</value>
-  </data>
-  <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;emailTextText.Name" xml:space="preserve">
-    <value>emailTextText</value>
-  </data>
-  <data name="&gt;&gt;emailTextText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailTextText.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailTextText.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="emailTextLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailTextLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailTextLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 81</value>
-  </data>
-  <data name="emailTextLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 15</value>
-  </data>
-  <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="emailTextLabel.Text" xml:space="preserve">
-    <value>Text:</value>
-  </data>
-  <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
-    <value>emailTextLabel</value>
-  </data>
-  <data name="&gt;&gt;emailTextLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailTextLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailTextLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="emailSubjectText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 52</value>
-  </data>
-  <data name="emailSubjectText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 23</value>
-  </data>
-  <data name="emailSubjectText.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectText.Name" xml:space="preserve">
-    <value>emailSubjectText</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectText.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectText.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="emailSubjectLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailSubjectLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailSubjectLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
-  </data>
-  <data name="emailSubjectLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 15</value>
-  </data>
-  <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value>Subject:</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
-    <value>emailSubjectLabel</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailSubjectLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="emailToText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 26</value>
-  </data>
-  <data name="emailToText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 23</value>
-  </data>
-  <data name="emailToText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;emailToText.Name" xml:space="preserve">
-    <value>emailToText</value>
-  </data>
-  <data name="&gt;&gt;emailToText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailToText.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailToText.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="emailToLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailToLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailToLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
-  </data>
-  <data name="emailToLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 15</value>
-  </data>
-  <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="emailToLabel.Text" xml:space="preserve">
-    <value>To:</value>
-  </data>
-  <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
-    <value>emailToLabel</value>
-  </data>
-  <data name="&gt;&gt;emailToLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailToLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailToLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="emailFromText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 0</value>
-  </data>
-  <data name="emailFromText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 23</value>
-  </data>
-  <data name="emailFromText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;emailFromText.Name" xml:space="preserve">
-    <value>emailFromText</value>
-  </data>
-  <data name="&gt;&gt;emailFromText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailFromText.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailFromText.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="emailFromLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="emailFromLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="emailFromLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="emailFromLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 15</value>
-  </data>
-  <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="emailFromLabel.Text" xml:space="preserve">
-    <value>From:</value>
-  </data>
-  <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
-    <value>emailFromLabel</value>
-  </data>
-  <data name="&gt;&gt;emailFromLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailFromLabel.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailFromLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
   </data>
   <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2353,148 +1165,34 @@
     <value>emailActionPage</value>
   </data>
   <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="msgMsgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="msgMsgText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 51</value>
-  </data>
-  <data name="msgMsgText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="msgMsgText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 180</value>
-  </data>
-  <data name="msgMsgText.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;msgMsgText.Name" xml:space="preserve">
-    <value>msgMsgText</value>
-  </data>
-  <data name="&gt;&gt;msgMsgText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;msgMsgText.Parent" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="&gt;&gt;msgMsgText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="msgMsgLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="msgMsgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="msgMsgLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 54</value>
-  </data>
-  <data name="msgMsgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 15</value>
-  </data>
-  <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value>Message:</value>
-  </data>
-  <data name="&gt;&gt;msgMsgLabel.Name" xml:space="preserve">
-    <value>msgMsgLabel</value>
-  </data>
-  <data name="&gt;&gt;msgMsgLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;msgMsgLabel.Parent" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="&gt;&gt;msgMsgLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="msgTitleText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 25</value>
-  </data>
-  <data name="msgTitleText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 23</value>
-  </data>
-  <data name="msgTitleText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;msgTitleText.Name" xml:space="preserve">
-    <value>msgTitleText</value>
-  </data>
-  <data name="&gt;&gt;msgTitleText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;msgTitleText.Parent" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="&gt;&gt;msgTitleText.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="msgTitleLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="msgTitleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="msgTitleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
-  </data>
-  <data name="msgTitleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 15</value>
-  </data>
-  <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value>Title:</value>
-  </data>
-  <data name="&gt;&gt;msgTitleLabel.Name" xml:space="preserve">
-    <value>msgTitleLabel</value>
-  </data>
-  <data name="&gt;&gt;msgTitleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;msgTitleLabel.Parent" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="&gt;&gt;msgTitleLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="msgIntroLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="msgIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="msgIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="msgIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 15</value>
+  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 256</value>
   </data>
-  <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value>This action displays a message box on the desktop.</value>
+  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
+    <value>showMessageActionUI1</value>
   </data>
-  <data name="&gt;&gt;msgIntroLabel.Name" xml:space="preserve">
-    <value>msgIntroLabel</value>
+  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28029, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="&gt;&gt;msgIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;msgIntroLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
     <value>msgActionPage</value>
   </data>
-  <data name="&gt;&gt;msgIntroLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>579, 297</value>
   </data>
   <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2506,7 +1204,7 @@
     <value>msgActionPage</value>
   </data>
   <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="sumText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2518,7 +1216,7 @@
     <value>True</value>
   </data>
   <data name="sumText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>484, 160</value>
+    <value>564, 184</value>
   </data>
   <data name="sumText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2545,7 +1243,7 @@
     <value>NoControl</value>
   </data>
   <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 173</value>
+    <value>3, 203</value>
   </data>
   <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 19</value>
@@ -2575,10 +1273,10 @@
     <value>NoControl</value>
   </data>
   <data name="summaryPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 222</value>
+    <value>0, 256</value>
   </data>
   <data name="summaryPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 15</value>
+    <value>572, 17</value>
   </data>
   <data name="summaryPrompt.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2599,7 +1297,7 @@
     <value>2</value>
   </data>
   <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 237</value>
+    <value>572, 273</value>
   </data>
   <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2611,10 +1309,10 @@
     <value>summaryPage</value>
   </data>
   <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>537, 391</value>
+    <value>626, 451</value>
   </data>
   <data name="wizardControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2626,7 +1324,7 @@
     <value>wizardControl1</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.1.4273.20551, Culture=neutral, PublicKeyToken=null</value>
+    <value>AeroWizard.WizardControl, AeroWizard, Version=1.2.1.42802, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2644,10 +1342,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>537, 391</value>
+    <value>626, 451</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3047,7 +1748,7 @@
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>477, 374</value>
+    <value>554, 426</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
     <value>openFileDialog1</value>
