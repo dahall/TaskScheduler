@@ -40,29 +40,11 @@
 			this.schedTabControl = new System.Windows.Forms.TabControl();
 			this.oneTimeTab = new System.Windows.Forms.TabPage();
 			this.dailyTab = new System.Windows.Forms.TabPage();
-			this.dailyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
-			this.dailyDaysLabel = new System.Windows.Forms.Label();
-			this.dailyRecurLabel = new System.Windows.Forms.Label();
+			this.dailyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI();
 			this.weeklyTab = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.weeklySunCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyMonCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyTueCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyWedCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyThuCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyFriCheck = new System.Windows.Forms.CheckBox();
-			this.weeklySatCheck = new System.Windows.Forms.CheckBox();
-			this.weeklyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
-			this.weeklyOnWeeksLabel = new System.Windows.Forms.Label();
-			this.weeklyRecurLabel = new System.Windows.Forms.Label();
+			this.weeklyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI();
 			this.monthlyTab = new System.Windows.Forms.TabPage();
-			this.monthlyOnRadio = new System.Windows.Forms.RadioButton();
-			this.monthlyDaysRadio = new System.Windows.Forms.RadioButton();
-			this.monthlyMonthsLabel = new System.Windows.Forms.Label();
-			this.monthlyDaysDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyOnDOWDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyOnWeekDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
-			this.monthlyMonthsDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.monthlyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI();
 			this.schedStartLabel = new System.Windows.Forms.Label();
 			this.schedMonthlyRadio = new System.Windows.Forms.RadioButton();
 			this.schedWeeklyRadio = new System.Windows.Forms.RadioButton();
@@ -116,10 +98,7 @@
 			this.schedGroup.SuspendLayout();
 			this.schedTabControl.SuspendLayout();
 			this.dailyTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).BeginInit();
 			this.weeklyTab.SuspendLayout();
-			this.tableLayoutPanel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.weeklyRecurNumUpDn)).BeginInit();
 			this.monthlyTab.SuspendLayout();
 			this.logonTab.SuspendLayout();
 			this.logonRemotePanel.SuspendLayout();
@@ -217,183 +196,43 @@
 			// 
 			// dailyTab
 			// 
-			this.dailyTab.Controls.Add(this.dailyRecurNumUpDn);
-			this.dailyTab.Controls.Add(this.dailyDaysLabel);
-			this.dailyTab.Controls.Add(this.dailyRecurLabel);
+			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
 			resources.ApplyResources(this.dailyTab, "dailyTab");
 			this.dailyTab.Name = "dailyTab";
 			this.dailyTab.UseVisualStyleBackColor = true;
 			// 
-			// dailyRecurNumUpDn
+			// dailyTriggerUI1
 			// 
-			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
-			this.dailyRecurNumUpDn.Name = "dailyRecurNumUpDn";
-			this.dailyRecurNumUpDn.ValueChanged += new System.EventHandler(this.dailyRecurNumUpDn_ValueChanged);
-			// 
-			// dailyDaysLabel
-			// 
-			resources.ApplyResources(this.dailyDaysLabel, "dailyDaysLabel");
-			this.dailyDaysLabel.Name = "dailyDaysLabel";
-			// 
-			// dailyRecurLabel
-			// 
-			resources.ApplyResources(this.dailyRecurLabel, "dailyRecurLabel");
-			this.dailyRecurLabel.Name = "dailyRecurLabel";
+			resources.ApplyResources(this.dailyTriggerUI1, "dailyTriggerUI1");
+			this.dailyTriggerUI1.Name = "dailyTriggerUI1";
+			this.dailyTriggerUI1.ShowStartBoundary = false;
 			// 
 			// weeklyTab
 			// 
-			this.weeklyTab.Controls.Add(this.tableLayoutPanel1);
-			this.weeklyTab.Controls.Add(this.weeklyRecurNumUpDn);
-			this.weeklyTab.Controls.Add(this.weeklyOnWeeksLabel);
-			this.weeklyTab.Controls.Add(this.weeklyRecurLabel);
+			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
 			resources.ApplyResources(this.weeklyTab, "weeklyTab");
 			this.weeklyTab.Name = "weeklyTab";
 			this.weeklyTab.UseVisualStyleBackColor = true;
 			// 
-			// tableLayoutPanel1
+			// weeklyTriggerUI1
 			// 
-			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.Controls.Add(this.weeklySunCheck, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.weeklyMonCheck, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.weeklyTueCheck, 2, 0);
-			this.tableLayoutPanel1.Controls.Add(this.weeklyWedCheck, 3, 0);
-			this.tableLayoutPanel1.Controls.Add(this.weeklyThuCheck, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.weeklyFriCheck, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.weeklySatCheck, 2, 1);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			// 
-			// weeklySunCheck
-			// 
-			resources.ApplyResources(this.weeklySunCheck, "weeklySunCheck");
-			this.weeklySunCheck.Name = "weeklySunCheck";
-			this.weeklySunCheck.UseVisualStyleBackColor = true;
-			this.weeklySunCheck.CheckedChanged += new System.EventHandler(this.weeklySunCheck_CheckedChanged);
-			// 
-			// weeklyMonCheck
-			// 
-			resources.ApplyResources(this.weeklyMonCheck, "weeklyMonCheck");
-			this.weeklyMonCheck.Name = "weeklyMonCheck";
-			this.weeklyMonCheck.UseVisualStyleBackColor = true;
-			this.weeklyMonCheck.CheckedChanged += new System.EventHandler(this.weeklyMonCheck_CheckedChanged);
-			// 
-			// weeklyTueCheck
-			// 
-			resources.ApplyResources(this.weeklyTueCheck, "weeklyTueCheck");
-			this.weeklyTueCheck.Name = "weeklyTueCheck";
-			this.weeklyTueCheck.UseVisualStyleBackColor = true;
-			this.weeklyTueCheck.CheckedChanged += new System.EventHandler(this.weeklyTueCheck_CheckedChanged);
-			// 
-			// weeklyWedCheck
-			// 
-			resources.ApplyResources(this.weeklyWedCheck, "weeklyWedCheck");
-			this.weeklyWedCheck.Name = "weeklyWedCheck";
-			this.weeklyWedCheck.UseVisualStyleBackColor = true;
-			this.weeklyWedCheck.CheckedChanged += new System.EventHandler(this.weeklyWedCheck_CheckedChanged);
-			// 
-			// weeklyThuCheck
-			// 
-			resources.ApplyResources(this.weeklyThuCheck, "weeklyThuCheck");
-			this.weeklyThuCheck.Name = "weeklyThuCheck";
-			this.weeklyThuCheck.UseVisualStyleBackColor = true;
-			this.weeklyThuCheck.CheckedChanged += new System.EventHandler(this.weeklyThuCheck_CheckedChanged);
-			// 
-			// weeklyFriCheck
-			// 
-			resources.ApplyResources(this.weeklyFriCheck, "weeklyFriCheck");
-			this.weeklyFriCheck.Name = "weeklyFriCheck";
-			this.weeklyFriCheck.UseVisualStyleBackColor = true;
-			this.weeklyFriCheck.CheckedChanged += new System.EventHandler(this.weeklyFriCheck_CheckedChanged);
-			// 
-			// weeklySatCheck
-			// 
-			resources.ApplyResources(this.weeklySatCheck, "weeklySatCheck");
-			this.weeklySatCheck.Name = "weeklySatCheck";
-			this.weeklySatCheck.UseVisualStyleBackColor = true;
-			this.weeklySatCheck.CheckedChanged += new System.EventHandler(this.weeklySatCheck_CheckedChanged);
-			// 
-			// weeklyRecurNumUpDn
-			// 
-			resources.ApplyResources(this.weeklyRecurNumUpDn, "weeklyRecurNumUpDn");
-			this.weeklyRecurNumUpDn.Name = "weeklyRecurNumUpDn";
-			this.weeklyRecurNumUpDn.ValueChanged += new System.EventHandler(this.weeklyRecurNumUpDn_ValueChanged);
-			// 
-			// weeklyOnWeeksLabel
-			// 
-			resources.ApplyResources(this.weeklyOnWeeksLabel, "weeklyOnWeeksLabel");
-			this.weeklyOnWeeksLabel.Name = "weeklyOnWeeksLabel";
-			// 
-			// weeklyRecurLabel
-			// 
-			resources.ApplyResources(this.weeklyRecurLabel, "weeklyRecurLabel");
-			this.weeklyRecurLabel.Name = "weeklyRecurLabel";
+			resources.ApplyResources(this.weeklyTriggerUI1, "weeklyTriggerUI1");
+			this.weeklyTriggerUI1.Name = "weeklyTriggerUI1";
+			this.weeklyTriggerUI1.ShowStartBoundary = false;
 			// 
 			// monthlyTab
 			// 
-			this.monthlyTab.Controls.Add(this.monthlyOnRadio);
-			this.monthlyTab.Controls.Add(this.monthlyDaysRadio);
-			this.monthlyTab.Controls.Add(this.monthlyMonthsLabel);
-			this.monthlyTab.Controls.Add(this.monthlyDaysDropDown);
-			this.monthlyTab.Controls.Add(this.monthlyOnDOWDropDown);
-			this.monthlyTab.Controls.Add(this.monthlyOnWeekDropDown);
-			this.monthlyTab.Controls.Add(this.monthlyMonthsDropDown);
+			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
 			resources.ApplyResources(this.monthlyTab, "monthlyTab");
 			this.monthlyTab.Name = "monthlyTab";
 			this.monthlyTab.UseVisualStyleBackColor = true;
 			// 
-			// monthlyOnRadio
+			// monthlyTriggerUI1
 			// 
-			resources.ApplyResources(this.monthlyOnRadio, "monthlyOnRadio");
-			this.monthlyOnRadio.Name = "monthlyOnRadio";
-			this.monthlyOnRadio.UseVisualStyleBackColor = true;
-			this.monthlyOnRadio.CheckedChanged += new System.EventHandler(this.monthlyDaysRadio_CheckedChanged);
-			// 
-			// monthlyDaysRadio
-			// 
-			resources.ApplyResources(this.monthlyDaysRadio, "monthlyDaysRadio");
-			this.monthlyDaysRadio.Name = "monthlyDaysRadio";
-			this.monthlyDaysRadio.UseVisualStyleBackColor = true;
-			this.monthlyDaysRadio.CheckedChanged += new System.EventHandler(this.monthlyDaysRadio_CheckedChanged);
-			// 
-			// monthlyMonthsLabel
-			// 
-			resources.ApplyResources(this.monthlyMonthsLabel, "monthlyMonthsLabel");
-			this.monthlyMonthsLabel.Name = "monthlyMonthsLabel";
-			// 
-			// monthlyDaysDropDown
-			// 
-			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
-			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
-			this.monthlyDaysDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyDaysDropDown_SelectedItemsChanged);
-			// 
-			// monthlyOnDOWDropDown
-			// 
-			this.monthlyOnDOWDropDown.BackColor = System.Drawing.Color.White;
-			resources.ApplyResources(this.monthlyOnDOWDropDown, "monthlyOnDOWDropDown");
-			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
-			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
-			this.monthlyOnDOWDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyOnDOWDropDown_SelectedItemsChanged);
-			// 
-			// monthlyOnWeekDropDown
-			// 
-			this.monthlyOnWeekDropDown.BackColor = System.Drawing.Color.White;
-			this.monthlyOnWeekDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
-			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
-			this.monthlyOnWeekDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyOnWeekDropDown_SelectedItemsChanged);
-			// 
-			// monthlyMonthsDropDown
-			// 
-			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
-			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
-			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
-			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
-			this.monthlyMonthsDropDown.SelectedItemsChanged += new System.EventHandler(this.monthlyMonthsDropDown_SelectedItemsChanged);
+			resources.ApplyResources(this.monthlyTriggerUI1, "monthlyTriggerUI1");
+			this.monthlyTriggerUI1.Name = "monthlyTriggerUI1";
+			this.monthlyTriggerUI1.ShowStartBoundary = false;
+			this.monthlyTriggerUI1.TriggerTypeChanged += new System.EventHandler(this.monthlyTriggerUI1_TriggerTypeChanged);
 			// 
 			// schedStartLabel
 			// 
@@ -751,15 +590,8 @@
 			this.schedGroup.ResumeLayout(false);
 			this.schedTabControl.ResumeLayout(false);
 			this.dailyTab.ResumeLayout(false);
-			this.dailyTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dailyRecurNumUpDn)).EndInit();
 			this.weeklyTab.ResumeLayout(false);
-			this.weeklyTab.PerformLayout();
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.weeklyRecurNumUpDn)).EndInit();
 			this.monthlyTab.ResumeLayout(false);
-			this.monthlyTab.PerformLayout();
 			this.logonTab.ResumeLayout(false);
 			this.logonTab.PerformLayout();
 			this.logonRemotePanel.ResumeLayout(false);
@@ -814,24 +646,9 @@
 		private System.Windows.Forms.TimeSpanPicker delaySpan;
 		private FullDateTimePicker expireDatePicker;
 		private FullDateTimePicker activateDatePicker;
-		private System.Windows.Forms.NumericUpDown dailyRecurNumUpDn;
-		private System.Windows.Forms.Label dailyDaysLabel;
-		private System.Windows.Forms.Label dailyRecurLabel;
 		private System.Windows.Forms.TimeSpanPicker stopIfRunsSpan;
 		private System.Windows.Forms.TimeSpanPicker durationSpan;
 		private System.Windows.Forms.TimeSpanPicker repeatSpan;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.CheckBox weeklySunCheck;
-		private System.Windows.Forms.CheckBox weeklyMonCheck;
-		private System.Windows.Forms.CheckBox weeklyTueCheck;
-		private System.Windows.Forms.CheckBox weeklyWedCheck;
-		private System.Windows.Forms.CheckBox weeklyThuCheck;
-		private System.Windows.Forms.CheckBox weeklyFriCheck;
-		private System.Windows.Forms.CheckBox weeklySatCheck;
-		private System.Windows.Forms.NumericUpDown weeklyRecurNumUpDn;
-		private System.Windows.Forms.Label weeklyOnWeeksLabel;
-		private System.Windows.Forms.Label weeklyRecurLabel;
-		private DropDownCheckList monthlyMonthsDropDown;
 		private System.Windows.Forms.Button logonChgUserBtn;
 		private System.Windows.Forms.Label logonUserLabel;
 		private System.Windows.Forms.RadioButton logonSpecUserRadio;
@@ -853,13 +670,10 @@
 		private System.Windows.Forms.RadioButton logonRemoteRadio;
 		private System.Windows.Forms.Button cancelBtn;
 		private System.Windows.Forms.Button okBtn;
-		private System.Windows.Forms.RadioButton monthlyOnRadio;
-		private System.Windows.Forms.RadioButton monthlyDaysRadio;
-		private DropDownCheckList monthlyDaysDropDown;
-		private DropDownCheckList monthlyOnDOWDropDown;
-		private DropDownCheckList monthlyOnWeekDropDown;
-		private System.Windows.Forms.Label monthlyMonthsLabel;
 		private System.Windows.Forms.Panel onEventBasicPanel;
 		private System.Windows.Forms.TextBox onEventCustomText;
+		private UIComponents.DailyTriggerUI dailyTriggerUI1;
+		private UIComponents.WeeklyTriggerUI weeklyTriggerUI1;
+		private UIComponents.MonthlyTriggerUI monthlyTriggerUI1;
 	}
 }

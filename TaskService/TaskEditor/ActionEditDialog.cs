@@ -15,6 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private Action action;
 		private bool isV2 = true;
 		private bool useUnifiedSchedulingEngine = false;
+		private UIComponents.IActionHandler curHandler = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionEditDialog"/> class.
@@ -55,33 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 				catch { SupportV1Only = true; }
 
 				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)action.ActionType);
-
-				if (action is ExecAction)
-				{
-					execProgText.Text = ((ExecAction)action).Path;
-					execArgText.Text = ((ExecAction)action).Arguments;
-					execDirText.Text = ((ExecAction)action).WorkingDirectory;
-				}
-				else if (action is EmailAction)
-				{
-					emailFromText.Text = ((EmailAction)action).From;
-					emailToText.Text = ((EmailAction)action).To;
-					emailSubjectText.Text = ((EmailAction)action).Subject;
-					emailTextText.Text = ((EmailAction)action).Body;
-					if (((EmailAction)action).Attachments != null && ((EmailAction)action).Attachments.Length > 0)
-						emailAttachmentText.Text = ((EmailAction)action).Attachments[0].ToString();
-					emailSMTPText.Text = ((EmailAction)action).Server;
-				}
-				else if (action is ShowMessageAction)
-				{
-					msgTitleText.Text = ((ShowMessageAction)action).Title;
-					msgMsgText.Text = ((ShowMessageAction)action).MessageBody;
-				}
-				else if (action is ComHandlerAction)
-				{
-					ComCLSID = ((ComHandlerAction)action).ClassId;
-					comDataText.Text = ((ComHandlerAction)action).Data;
-				}
+				curHandler.Action = action;
 				ValidateCurrentAction();
 			}
 		}
@@ -137,59 +112,26 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private Guid ComCLSID
-		{
-			get
-			{
-				string guid = toolTip.GetToolTip(comCLSIDText);
-				try { Guid g = new Guid(guid); return g; }
-				catch { }
-				return Guid.Empty;
-			}
-			set
-			{
-				if (value == Guid.Empty)
-				{
-					comCLSIDText.Clear();
-					toolTip.SetToolTip(comCLSIDText, null);
-				}
-				else
-				{
-					toolTip.SetToolTip(comCLSIDText, value.ToString());
-					comCLSIDText.Text = GetNameForCLSID(value);
-				}
-			}
-		}
-
-		internal static string GetNameForCLSID(Guid guid)
-		{
-			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
-			{
-				if (k != null)
-				{
-					using (RegistryKey k2 = k.OpenSubKey(guid.ToString("B"), false))
-						return k2 != null ? k2.GetValue(null) as string : null;
-				}
-			}
-			return null;
-		}
-
 		private void actionsCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			switch ((TaskActionType)Convert.ToInt32(((DropDownCheckListItem)actionsCombo.SelectedItem).Value))
 			{
 				case TaskActionType.ComHandler:
 					settingsTabs.SelectedTab = comTab;
+					curHandler = comHandlerActionUI1;
 					break;
 				case TaskActionType.SendEmail:
 					settingsTabs.SelectedTab = emailTab;
+					curHandler = emailActionUI1;
 					break;
 				case TaskActionType.ShowMessage:
 					settingsTabs.SelectedTab = messageTab;
+					curHandler = showMessageActionUI1;
 					break;
 				case TaskActionType.Execute:
 				default:
 					settingsTabs.SelectedTab = execTab;
+					curHandler = execActionUI1;
 					break;
 			}
 			ValidateCurrentAction();
@@ -199,31 +141,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			DialogResult = DialogResult.Cancel;
 			Close();
-		}
-
-		private void emailAttachementBrowseBtn_Click(object sender, EventArgs e)
-		{
-			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-				emailAttachmentText.Text = openFileDialog1.FileName;
-		}
-
-		private void execProgBrowseBtn_Click(object sender, EventArgs e)
-		{
-			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-				execProgText.Text = openFileDialog1.FileName;
-		}
-
-		private void getCLSIDButton_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				ComObjectSelectionDialog dlg = new ComObjectSelectionDialog();
-				dlg.SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04");
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-					ComCLSID = dlg.CLSID;
-			}
-			catch { }
-			ValidateCurrentAction();
 		}
 
 		private void keyField_TextChanged(object sender, EventArgs e)
@@ -261,54 +178,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void UpdateAction()
 		{
-			Action ret;
-			switch (actionsCombo.SelectedIndex)
-			{
-				case 0:
-				default:
-					ret = new ExecAction(execProgText.Text, null, null);
-					if (execArgText.TextLength > 0)
-						((ExecAction)ret).Arguments = execArgText.Text;
-					if (execDirText.TextLength > 0)
-						((ExecAction)ret).WorkingDirectory = execDirText.Text;
-					break;
-				case 1:
-					ret = new EmailAction(emailSubjectText.Text, emailFromText.Text,
-						emailToText.Text, emailTextText.Text, emailSMTPText.Text);
-					if (emailAttachmentText.TextLength > 0)
-						((EmailAction)ret).Attachments = new object[] { emailAttachmentText.Text };
-					break;
-				case 2:
-					ret = new ShowMessageAction(msgMsgText.Text, msgTitleText.Text);
-					break;
-				case 3:
-					ret = new ComHandlerAction(ComCLSID, comDataText.TextLength > 0 ? comDataText.Text : null);
-					break;
-			}
-			action = ret;
+			action = curHandler.Action;
 		}
 
 		private void ValidateCurrentAction()
 		{
-			bool isValid = false;
-			switch (settingsTabs.SelectedIndex)
-			{
-				case 0:
-				default:
-					isValid = execProgText.TextLength > 0;
-					break;
-				case 1:
-					isValid = emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
-						emailToText.TextLength > 0 && emailTextText.TextLength > 0 && emailSMTPText.TextLength > 0;
-					break;
-				case 2:
-					isValid = msgMsgText.TextLength > 0;
-					break;
-				case 3:
-					isValid = ComCLSID != null;
-					break;
-			}
-			okBtn.Enabled = isValid;
+			okBtn.Enabled = curHandler.IsActionValid();
 		}
 	}
 }

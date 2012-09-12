@@ -368,42 +368,17 @@ namespace Microsoft.Win32.TaskScheduler
 							SetTriggerListItem(AvailableWizardTriggers.Time);
 							break;
 						case TaskTriggerType.Daily:
-							dailyStartTimePicker.Value = trigger.StartBoundary;
-							dailyRecurNumUpDn.Value = ((DailyTrigger)trigger).DaysInterval;
+							dailyTriggerUI1.Trigger = trigger;
 							SetTriggerListItem(AvailableWizardTriggers.Daily);
 							break;
 						case TaskTriggerType.Weekly:
-							weeklyTriggerPage_Initialize(null, null);
-							weeklyStartTimePicker.Value = trigger.StartBoundary;
-							weeklyRecurNumUpDn.Value = ((WeeklyTrigger)trigger).WeeksInterval;
-							weeklySunCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Sunday) != 0;
-							weeklyMonCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Monday) != 0;
-							weeklyTueCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Tuesday) != 0;
-							weeklyWedCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Wednesday) != 0;
-							weeklyThuCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Thursday) != 0;
-							weeklyFriCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Friday) != 0;
-							weeklySatCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Saturday) != 0;
+							weeklyTriggerUI1.Trigger = trigger;
 							SetTriggerListItem(AvailableWizardTriggers.Weekly);
 							break;
 						case TaskTriggerType.Monthly:
-							monthlyTriggerPage_Initialize(null, null);
-							monthlyStartTimePicker.Value = trigger.StartBoundary;
-							monthlyDaysRadio.Checked = true;
-							monthlyDaysDropDown.CheckedFlagValue = 0L;
-							foreach (int i in ((MonthlyTrigger)trigger).DaysOfMonth)
-								monthlyDaysDropDown.SetItemChecked(i - 1, true);
-							monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyTrigger)trigger).MonthsOfYear;
-							monthlyDaysDropDown.SetItemChecked(31, ((MonthlyTrigger)trigger).RunOnLastDayOfMonth);
-							SetTriggerListItem(AvailableWizardTriggers.Monthly);
-							break;
 						case TaskTriggerType.MonthlyDOW:
-							monthlyStartTimePicker.Value = trigger.StartBoundary;
-							monthlyOnRadio.Checked = true;
-							monthlyOnDOWDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).DaysOfWeek;
-							monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).MonthsOfYear;
-							monthlyOnWeekDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).WeeksOfMonth;
-							monthlyOnWeekDropDown.SetItemChecked(4, ((MonthlyDOWTrigger)trigger).RunOnLastWeekOfMonth);
-							SetTriggerListItem(AvailableWizardTriggers.MonthlyDOW);
+							monthlyTriggerUI1.Trigger = trigger;
+							SetTriggerListItem(AvailableWizardTriggers.Monthly);
 							break;
 						case TaskTriggerType.Event:
 							string log, source; int? id;
@@ -441,26 +416,17 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (action is ExecAction)
 					{
-						execProgText.Text = ((ExecAction)action).Path;
-						execArgText.Text = ((ExecAction)action).Arguments;
-						execDirText.Text = ((ExecAction)action).WorkingDirectory;
+						execActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.Execute);
 					}
 					else if (action is EmailAction)
 					{
-						emailFromText.Text = ((EmailAction)action).From;
-						emailToText.Text = ((EmailAction)action).To;
-						emailSubjectText.Text = ((EmailAction)action).Subject;
-						emailTextText.Text = ((EmailAction)action).Body;
-						if (((EmailAction)action).Attachments != null && ((EmailAction)action).Attachments.Length > 0)
-							emailAttachmentText.Text = ((EmailAction)action).Attachments[0].ToString();
-						emailSMTPText.Text = ((EmailAction)action).Server;
+						emailActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.SendEmail);
 					}
 					else if (action is ShowMessageAction)
 					{
-						msgTitleText.Text = ((ShowMessageAction)action).Title;
-						msgMsgText.Text = ((ShowMessageAction)action).MessageBody;
+						showMessageActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.ShowMessage);
 					}
 				}
@@ -671,12 +637,6 @@ namespace Microsoft.Win32.TaskScheduler
 			SetUserControls(td.Principal.LogonType);
 		}
 
-		private void dailyTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			trigger.StartBoundary = dailyStartTimePicker.Value;
-			((DailyTrigger)trigger).DaysInterval = (short)dailyRecurNumUpDn.Value;
-		}
-
 		private void durationSpan_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -694,22 +654,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void emailActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			EmailAction ea = action as EmailAction;
-			if (emailAttachmentText.TextLength > 0)
-				ea.Attachments = new object[] { emailAttachmentText.Text };
-			else
-				ea.Attachments = null;
-			ea.From = emailFromText.Text;
-			ea.Server = emailSMTPText.Text;
-			ea.Subject = emailSubjectText.Text;
-			ea.Body = emailTextText.Text;
-			ea.To = emailToText.Text;
+			action = emailActionUI1.Action;
 		}
 
-		private void emailAttachementBrowseBtn_Click(object sender, System.EventArgs e)
+		private void emailActionUI1_KeyValueChanged(object sender, EventArgs e)
 		{
-			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-				emailAttachmentText.Text = openFileDialog1.FileName;
+			emailActionPage.AllowNext = emailActionUI1.IsActionValid();
 		}
 
 		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -717,10 +667,9 @@ namespace Microsoft.Win32.TaskScheduler
 			trigger.Enabled = enabledCheckBox.Checked;
 		}
 
-		private void execProgBrowseBtn_Click(object sender, System.EventArgs e)
+		private void execActionUI1_KeyValueChanged(object sender, EventArgs e)
 		{
-			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-				execProgText.Text = openFileDialog1.FileName;
+			runActionPage.AllowNext = execActionUI1.IsActionValid();
 		}
 
 		private string InvokeCredentialDialog(string userName)
@@ -734,64 +683,24 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		private void monthlyDaysRadio_CheckedChanged(object sender, System.EventArgs e)
+		private void monthlyTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
 		{
-			bool days = monthlyDaysRadio.Checked;
-			monthlyDaysDropDown.Enabled = days;
-			monthlyOnDOWDropDown.Enabled = monthlyOnWeekDropDown.Enabled = !days;
-		}
-
-		private void monthlyTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			if (monthlyDaysRadio.Checked)
+			if (!onAssignment)
 			{
-				trigger = new MonthlyTrigger() { MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue };
-				int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
-				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
-					days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
-				((MonthlyTrigger)trigger).DaysOfMonth = days;
-				if (days.Length == 0 || monthlyMonthsDropDown.CheckedFlagValue == 0)
-				{
-					e.Cancel = true;
-					MessageBox.Show(this, EditorProperties.Resources.WizardMonthlyTriggerInvalid, EditorProperties.Resources.WizardMonthlyTriggerErrorTitle);
-				}
+				Trigger newTrigger = null;
+				if (monthlyTriggerUI1.TriggerType == TaskTriggerType.Monthly)
+					newTrigger = new MonthlyTrigger();
+				else
+					newTrigger = new MonthlyDOWTrigger();
+				if (trigger != null)
+					newTrigger.CopyProperties(trigger);
+				monthlyTriggerUI1.Trigger = (trigger = newTrigger);
 			}
-			else
-			{
-				trigger = new MonthlyDOWTrigger() { MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue };
-				((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
-				((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
-				if (monthlyMonthsDropDown.CheckedFlagValue == 0 || monthlyOnWeekDropDown.CheckedFlagValue == 0 || monthlyOnDOWDropDown.CheckedFlagValue == 0)
-				{
-					e.Cancel = true;
-					MessageBox.Show(this, EditorProperties.Resources.WizardMonthlyDOWTriggerInvalid, EditorProperties.Resources.WizardMonthlyTriggerErrorTitle);
-				}
-			}
-			trigger.StartBoundary = monthlyStartTimePicker.Value;
-		}
-
-		private void monthlyTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
-		{
-			if (monthlyMonthsDropDown.Items.Count == 0)
-			{
-				monthlyMonthsDropDown.InitializeFromTaskEnum(typeof(MonthsOfTheYear));
-				monthlyMonthsDropDown.Items.RemoveAt(13);
-				monthlyDaysDropDown.InitializeFromRange(1, 31);
-				monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
-				monthlyDaysDropDown.MultiColumnList = true;
-				monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
-				monthlyOnWeekDropDown.Items.RemoveAt(5);
-				monthlyOnDOWDropDown.InitializeFromTaskEnum(typeof(DaysOfTheWeek));
-				monthlyOnDOWDropDown.Items.RemoveAt(8);
-			}
-			if (!monthlyDaysRadio.Checked && !monthlyOnRadio.Checked)
-				monthlyDaysRadio.Checked = true;
 		}
 
 		private void msgActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			((ShowMessageAction)action).Title = msgTitleText.Text;
-			((ShowMessageAction)action).MessageBody = msgMsgText.Text;
+			action = showMessageActionUI1.Action;
 		}
 
 		private void nameText_TextChanged(object sender, System.EventArgs e)
@@ -865,9 +774,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			((ExecAction)action).Path = execProgText.Text;
-			((ExecAction)action).Arguments = execArgText.Text;
-			((ExecAction)action).WorkingDirectory = execDirText.Text;
+			action = execActionUI1.Action;
 		}
 
 		private void secOptPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -1012,6 +919,11 @@ namespace Microsoft.Win32.TaskScheduler
 				taskPrincipalText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 		}
 
+		private void showMessageActionUI1_KeyValueChanged(object sender, EventArgs e)
+		{
+			msgActionPage.AllowNext = showMessageActionUI1.IsActionValid();
+		}
+
 		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
 			summaryPrompt.Visible = RegisterTaskOnFinish;
@@ -1078,26 +990,17 @@ namespace Microsoft.Win32.TaskScheduler
 				case AvailableWizardTriggers.Daily:
 					e.Page.NextPage = dailyTriggerPage;
 					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Daily)
-						trigger = new DailyTrigger();
-					dailyStartTimePicker.Value = trigger.StartBoundary;
+						dailyTriggerUI1.Trigger = (trigger = new DailyTrigger());
 					break;
 				case AvailableWizardTriggers.Weekly:
 					e.Page.NextPage = weeklyTriggerPage;
 					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Weekly)
-						trigger = new WeeklyTrigger();
-					weeklyStartTimePicker.Value = trigger.StartBoundary;
+						weeklyTriggerUI1.Trigger = (trigger = new WeeklyTrigger());
 					break;
 				case AvailableWizardTriggers.Monthly:
 					e.Page.NextPage = monthlyTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Monthly)
-						trigger = new MonthlyTrigger();
-					monthlyStartTimePicker.Value = trigger.StartBoundary;
-					break;
-				case AvailableWizardTriggers.MonthlyDOW:
-					e.Page.NextPage = monthlyTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.MonthlyDOW)
-						trigger = new MonthlyDOWTrigger();
-					monthlyStartTimePicker.Value = trigger.StartBoundary;
+					if (!hasValue || (this.trigger.TriggerType != TaskTriggerType.Monthly && this.trigger.TriggerType != TaskTriggerType.MonthlyDOW))
+						monthlyTriggerUI1.Trigger = (trigger = new MonthlyTrigger());
 					break;
 				case AvailableWizardTriggers.Idle:
 					e.Page.NextPage = actionSelectPage;
@@ -1144,25 +1047,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void weeklyTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			trigger.StartBoundary = weeklyStartTimePicker.Value;
-			((WeeklyTrigger)trigger).WeeksInterval = (short)weeklyRecurNumUpDn.Value;
-		}
-
-		private void weeklyTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
-		{
-			weeklySunCheck.Tag = DaysOfTheWeek.Sunday;
-			weeklyMonCheck.Tag = DaysOfTheWeek.Monday;
-			weeklyTueCheck.Tag = DaysOfTheWeek.Tuesday;
-			weeklyWedCheck.Tag = DaysOfTheWeek.Wednesday;
-			weeklyThuCheck.Tag = DaysOfTheWeek.Thursday;
-			weeklyFriCheck.Tag = DaysOfTheWeek.Friday;
-			weeklySatCheck.Tag = DaysOfTheWeek.Saturday;
-			if ((int)((WeeklyTrigger)trigger).DaysOfWeek == 0)
-				((WeeklyTrigger)trigger).DaysOfWeek = DaysOfTheWeek.Sunday;
-		}
-
 		private void wizardControl1_Finished(object sender, System.EventArgs e)
 		{
 			bool myTS = false;
@@ -1199,10 +1083,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (myTS)
 				this.TaskService = null;
-		}
-
-		private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
-		{
 		}
 	}
 }

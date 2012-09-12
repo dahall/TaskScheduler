@@ -43,16 +43,6 @@ namespace Microsoft.Win32.TaskScheduler
 			this.SupportV1Only = supportV1Only;
 
 			// Populate combo boxes
-			monthlyMonthsDropDown.InitializeFromTaskEnum(typeof(MonthsOfTheYear));
-			monthlyMonthsDropDown.Items.RemoveAt(13);
-			monthlyDaysDropDown.InitializeFromRange(1, 31);
-			monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
-			monthlyDaysDropDown.MultiColumnList = true;
-			monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
-			monthlyOnWeekDropDown.Items.RemoveAt(5);
-			monthlyOnDOWDropDown.InitializeFromTaskEnum(typeof(DaysOfTheWeek));
-			monthlyOnDOWDropDown.Items.RemoveAt(8);
-
 			delaySpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });
 			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
 			durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
@@ -139,38 +129,18 @@ namespace Microsoft.Win32.TaskScheduler
 					case TaskTriggerType.Daily:
 						schedDailyRadio.Checked = true;
 						SetSchedTrigger();
-						dailyRecurNumUpDn.Value = ((DailyTrigger)trigger).DaysInterval;
+						dailyTriggerUI1.Trigger = trigger;
 						break;
 					case TaskTriggerType.Weekly:
 						schedWeeklyRadio.Checked = true;
 						SetSchedTrigger();
-						weeklyRecurNumUpDn.Value = ((WeeklyTrigger)trigger).WeeksInterval;
-						weeklySunCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Sunday) != 0;
-						weeklyMonCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Monday) != 0;
-						weeklyTueCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Tuesday) != 0;
-						weeklyWedCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Wednesday) != 0;
-						weeklyThuCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Thursday) != 0;
-						weeklyFriCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Friday) != 0;
-						weeklySatCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Saturday) != 0;
+						weeklyTriggerUI1.Trigger = trigger;
 						break;
 					case TaskTriggerType.Monthly:
-						schedMonthlyRadio.Checked = true;
-						SetSchedTrigger();
-						monthlyDaysRadio.Checked = true;
-						monthlyDaysDropDown.CheckedFlagValue = 0L;
-						foreach (int i in ((MonthlyTrigger)trigger).DaysOfMonth)
-							monthlyDaysDropDown.SetItemChecked(i - 1, true);
-						monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyTrigger)trigger).MonthsOfYear;
-						monthlyDaysDropDown.SetItemChecked(31, ((MonthlyTrigger)trigger).RunOnLastDayOfMonth);
-						break;
 					case TaskTriggerType.MonthlyDOW:
 						schedMonthlyRadio.Checked = true;
 						SetSchedTrigger();
-						monthlyOnRadio.Checked = true;
-						monthlyOnDOWDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).DaysOfWeek;
-						monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).MonthsOfYear;
-						monthlyOnWeekDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).WeeksOfMonth;
-						monthlyOnWeekDropDown.SetItemChecked(4, ((MonthlyDOWTrigger)trigger).RunOnLastWeekOfMonth);
+						monthlyTriggerUI1.Trigger = trigger;
 						break;
 					case TaskTriggerType.Logon:
 						TriggerView = TaskTriggerDisplayType.Logon;
@@ -324,12 +294,6 @@ namespace Microsoft.Win32.TaskScheduler
 			Close();
 		}
 
-		private void dailyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((DailyTrigger)trigger).DaysInterval = Convert.ToInt16(dailyRecurNumUpDn.Value);
-		}
-
 		private void delayCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -415,58 +379,22 @@ namespace Microsoft.Win32.TaskScheduler
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
 		}
 
-		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
+		private void monthlyTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
 			{
-				int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
-				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
-					days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
-				((MonthlyTrigger)trigger).DaysOfMonth = days;
-			}
-		}
-
-		private void monthlyDaysRadio_CheckedChanged(object sender, EventArgs e)
-		{
-			bool days = monthlyDaysRadio.Checked;
-			monthlyDaysDropDown.Enabled = days;
-			monthlyOnDOWDropDown.Enabled = monthlyOnWeekDropDown.Enabled = !days;
-
-			Trigger newTrigger = null;
-			if (monthlyDaysRadio.Checked)
-				newTrigger = new MonthlyTrigger();
-			else if (monthlyOnRadio.Checked)
-				newTrigger = new MonthlyDOWTrigger();
-
-			if (newTrigger != null && !onAssignment)
-			{
-				if (trigger != null)
-					newTrigger.CopyProperties(trigger);
-				this.Trigger = newTrigger;
-			}
-		}
-
-		private void monthlyMonthsDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				if (monthlyDaysRadio.Checked)
-					((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+				Trigger newTrigger = null;
+				if (monthlyTriggerUI1.TriggerType == TaskTriggerType.Monthly)
+					newTrigger = new MonthlyTrigger();
 				else
-					((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+					newTrigger = new MonthlyDOWTrigger();
+				if (newTrigger != null)
+				{
+					if (trigger != null)
+						newTrigger.CopyProperties(trigger);
+					this.Trigger = newTrigger;
+				}
 			}
-		}
-
-		private void monthlyOnDOWDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((MonthlyDOWTrigger)trigger).DaysOfWeek = (DaysOfTheWeek)monthlyOnDOWDropDown.CheckedFlagValue;
-		}
-
-		private void monthlyOnWeekDropDown_SelectedItemsChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((MonthlyDOWTrigger)trigger).WeeksOfMonth = (WhichWeek)monthlyOnWeekDropDown.CheckedFlagValue;
 		}
 
 		private void okBtn_Click(object sender, EventArgs e)
@@ -546,7 +474,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Enable/disable version specific features
 			stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
-			monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !isV2;
+			dailyTriggerUI1.IsV2 = weeklyTriggerUI1.IsV2 = monthlyTriggerUI1.IsV2 = isV2;
 			schedMonthlyRadio.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = 
 				repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = 
 				durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
@@ -585,11 +513,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (sender == schedMonthlyRadio)
 				{
 					schedTabControl.SelectedTab = monthlyTab;
-					if (monthlyOnRadio.Checked)
-						monthlyDaysRadio_CheckedChanged(this, EventArgs.Empty);
-					else
-						monthlyDaysRadio.Checked = true;
-					if (!onAssignment) return;
+					monthlyTriggerUI1_TriggerTypeChanged(this, EventArgs.Empty);
 				}
 
 				if (newTrigger != null && !onAssignment)
@@ -611,25 +535,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			TriggerView = TaskTriggerDisplayType.Schedule;
 			schedStartDatePicker.Value = trigger.StartBoundary;
-		}
-
-		private void SetWeeklyDay(CheckBox cb, DaysOfTheWeek dow)
-		{
-			if (!onAssignment && cb != null )
-			{
-				var weeklyTrigger = (WeeklyTrigger)trigger;
-
-				if (cb.Checked)
-					weeklyTrigger.DaysOfWeek |= dow;
-				else
-				{
-					// Ensure that ONE day is always checked.
-					if (weeklyTrigger.DaysOfWeek == dow)
-						cb.Checked = true;
-					else
-						weeklyTrigger.DaysOfWeek &= ~dow;
-				}
-			}
 		}
 
 		private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -709,47 +614,6 @@ namespace Microsoft.Win32.TaskScheduler
 					newTrigger.CopyProperties(trigger);
 				this.Trigger = newTrigger;
 			}
-		}
-
-		private void weeklyFriCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Friday);
-		}
-
-		private void weeklyMonCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Monday);
-		}
-
-		private void weeklyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				((WeeklyTrigger)trigger).WeeksInterval = Convert.ToInt16(weeklyRecurNumUpDn.Value);
-		}
-
-		private void weeklySatCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
-		}
-
-		private void weeklySunCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Sunday);
-		}
-
-		private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Thursday);
-		}
-
-		private void weeklyTueCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Tuesday);
-		}
-
-		private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
 		}
 	}
 }

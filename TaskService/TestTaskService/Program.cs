@@ -168,8 +168,8 @@ namespace TestTaskService
 						new TaskEditDialog(t).ShowDialog();
 					else
 					{
-						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
-						wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly;
+						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage | TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
+						wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Daily | TaskSchedulerWizard.AvailableWizardTriggers.Time | TaskSchedulerWizard.AvailableWizardTriggers.Weekly | TaskSchedulerWizard.AvailableWizardTriggers.Monthly | TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW;
 						wiz.AllowEditorOnFinish = true;
 						wiz.EditorOnFinishText = "Show dialog";
 						wiz.TriggerPagePrompt = "When???";
@@ -182,7 +182,8 @@ namespace TestTaskService
 					}
 				}
 
-				ts.RootFolder.DeleteTask(wiz.Task.Path);
+				if (wiz.Task != null)
+					ts.RootFolder.DeleteTask(wiz.Task.Path);
 			}
 			catch (Exception ex)
 			{
