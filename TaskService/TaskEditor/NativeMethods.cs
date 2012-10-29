@@ -22,7 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return principal.IsInRole(0x220);
 			}
 
-			public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, ref bool isGroup, ref bool isService)
+			public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService)
 			{
 				CubicOrange.Windows.Forms.ActiveDirectory.DirectoryObjectPickerDialog dlg = new CubicOrange.Windows.Forms.ActiveDirectory.DirectoryObjectPickerDialog();
 				dlg.TargetComputer = targetComputerName;
@@ -36,6 +36,7 @@ namespace Microsoft.Win32.TaskScheduler
 						return true;
 					}
 				}
+				isGroup = isService = false;
 				return false;
 			}
 

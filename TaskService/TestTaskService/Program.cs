@@ -202,6 +202,9 @@ namespace TestTaskService
 				//td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
 				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				td.Principal.UserId = "LOCAL SERVICE";
+				td.Triggers.Add(new LogonTrigger());
+				td.Settings.DisallowStartIfOnBatteries = false;
+				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
 				if (ts.HighestSupportedVersion >= new Version(1, 3))
 				{
 					td.Settings.Compatibility = TaskCompatibility.V2_1;
@@ -256,32 +259,34 @@ namespace TestTaskService
 			{
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				Task t = ts.AddTask(taskName,
-					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Utc) },
-					new ExecAction("notepad.exe"));
+				TaskDefinition td = ts.NewTask();
+				td.Triggers.Add(new DailyTrigger(2));
+				td.Actions.Add(new ExecAction("notepad.exe"));
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
 
-				using (var taskEditDialog = new TaskEditDialog(t, true, true))
+				/*using (var taskEditDialog = new TaskEditDialog(t, true, true))
 				{
 					if (taskEditDialog.ShowDialog() == DialogResult.OK)
 					{
 						var t2 = taskEditDialog.Task;
 						output.WriteLine("Triggers: {0}", t2.Definition.Triggers);
 					}
-				}
+				}*/
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
-				TaskDefinition td = t.Definition;
+				td = t.Definition;
 				td.Triggers.Clear();
 				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
 				wt.DaysOfWeek = DaysOfTheWeek.Friday;
 
-				ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				System.Threading.Thread.Sleep(1000);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);
 				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
@@ -567,6 +572,7 @@ namespace TestTaskService
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = true;
+			editorForm.ShowRegistrationInfoTab = true;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 

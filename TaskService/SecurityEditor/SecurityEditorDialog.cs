@@ -24,6 +24,12 @@ namespace SecurityEditor
 		public SecurityEditorDialog()
 		{
 			InitializeComponent();
+			try
+			{
+				using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MMC\SnapIns\FX:{c7b8fb06-bfe1-4c2e-9217-7a69a95bbac4}"))
+					helpProvider1.HelpNamespace = key.GetValue("HelpTopic", string.Empty).ToString();
+			}
+			catch { }
 		}
 
 		public string ObjectName
@@ -48,6 +54,11 @@ namespace SecurityEditor
 				aclEditor2.ObjectSecurity = sec;
 				ownerEditor1.Identity = sec.GetOwner(typeof(NTAccount));
 			}
+		}
+
+		private void cancelBtn_Click(object sender, EventArgs e)
+		{
+			Close();
 		}
 
 		private void okBtn_Click(object sender, System.EventArgs e)

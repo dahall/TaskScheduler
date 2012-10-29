@@ -59,7 +59,7 @@
 			this.label2.Location = new System.Drawing.Point(4, 34);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(70, 13);
-			this.label2.TabIndex = 0;
+			this.label2.TabIndex = 7;
 			this.label2.Text = "Object name:";
 			// 
 			// objNameText
@@ -69,7 +69,7 @@
 			this.objNameText.Name = "objNameText";
 			this.objNameText.ReadOnly = true;
 			this.objNameText.Size = new System.Drawing.Size(323, 13);
-			this.objNameText.TabIndex = 1;
+			this.objNameText.TabIndex = 8;
 			// 
 			// label3
 			// 
@@ -77,7 +77,7 @@
 			this.label3.Location = new System.Drawing.Point(4, 65);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(94, 13);
-			this.label3.TabIndex = 0;
+			this.label3.TabIndex = 1;
 			this.label3.Text = "Permission entries:";
 			// 
 			// permissionsListView
@@ -90,8 +90,10 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+			this.permissionsListView.FullRowSelect = true;
 			this.permissionsListView.HideSelection = false;
 			this.permissionsListView.Location = new System.Drawing.Point(7, 82);
+			this.permissionsListView.MultiSelect = false;
 			this.permissionsListView.Name = "permissionsListView";
 			this.permissionsListView.Size = new System.Drawing.Size(566, 182);
 			this.permissionsListView.TabIndex = 2;
@@ -126,7 +128,7 @@
 			this.inheritedCheck.Location = new System.Drawing.Point(7, 301);
 			this.inheritedCheck.Name = "inheritedCheck";
 			this.inheritedCheck.Size = new System.Drawing.Size(283, 17);
-			this.inheritedCheck.TabIndex = 4;
+			this.inheritedCheck.TabIndex = 6;
 			this.inheritedCheck.Text = "Include inheritable permissions from this object\'s parent";
 			this.inheritedCheck.UseVisualStyleBackColor = true;
 			this.inheritedCheck.CheckedChanged += new System.EventHandler(this.inheritedCheck_CheckedChanged);
@@ -137,7 +139,7 @@
 			this.addButton.Location = new System.Drawing.Point(7, 270);
 			this.addButton.Name = "addButton";
 			this.addButton.Size = new System.Drawing.Size(81, 23);
-			this.addButton.TabIndex = 5;
+			this.addButton.TabIndex = 3;
 			this.addButton.Text = "Add...";
 			this.addButton.UseVisualStyleBackColor = true;
 			this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -149,7 +151,7 @@
 			this.editButton.Location = new System.Drawing.Point(94, 270);
 			this.editButton.Name = "editButton";
 			this.editButton.Size = new System.Drawing.Size(81, 23);
-			this.editButton.TabIndex = 5;
+			this.editButton.TabIndex = 4;
 			this.editButton.Text = "Edit...";
 			this.editButton.UseVisualStyleBackColor = true;
 			this.editButton.Click += new System.EventHandler(this.editButton_Click);

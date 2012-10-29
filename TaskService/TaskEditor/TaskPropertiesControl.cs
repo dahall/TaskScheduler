@@ -21,15 +21,13 @@ namespace Microsoft.Win32.TaskScheduler
 		private string runTimesTaskName = null;
 		private TaskService service = null;
 		private bool showErrors = true;
-		private bool showAddedPropertiesTab = true;
-		private bool showRegInfoTab = true;
+		private bool showAddedPropertiesTab = false;
+		private bool showRegInfoTab = false;
 		private bool showRunTimesTab = true;
 		private Task task = null;
 		private TaskDefinition td = null;
-		private TabPage tempAddedPropertiesTab = null;
-		private TabPage tempRegInfoTab = null;
-		private TabPage tempRunTimesTabPage = null;
 		private bool v2 = true;
+		private List<TabPage> tabPageGCPreventer = new List<TabPage>(10);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskPropertiesControl"/> class.
@@ -37,6 +35,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskPropertiesControl()
 		{
 			InitializeComponent();
+
+			// Push all tab pages into a list so they don't get garbage collected while not displayed
+			foreach (TabPage item in tabControl.TabPages)
+				tabPageGCPreventer.Add(item);
+
+			try
+			{
+				using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MMC\SnapIns\FX:{c7b8fb06-bfe1-4c2e-9217-7a69a95bbac4}"))
+					helpProvider.HelpNamespace = key.GetValue("HelpTopic", string.Empty).ToString();
+			}
+			catch { }
 
 			// Setup images on action up and down buttons
 			Bitmap bmpUp = new Bitmap(6, 3);
@@ -70,6 +79,12 @@ namespace Microsoft.Win32.TaskScheduler
 			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanNotStarted;
 			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
 			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
+			if (!showAddedPropertiesTab)
+				tabControl.TabPages.Remove(addPropTab);
+
+			// Settings for regInfoTab
+			if (!showRegInfoTab)
+				tabControl.TabPages.Remove(regInfoTab);
 
 			Editable = false;
 		}
@@ -149,7 +164,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
 		public bool ShowAddedPropertiesTab
 		{
 			get
@@ -162,12 +177,10 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value)
 					{
-						tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + (showRegInfoTab ? 2 : 1), tempAddedPropertiesTab);
-						tempAddedPropertiesTab = null;
+						InsertTab(tabControl.TabPages.IndexOf(settingsTab) + (showRegInfoTab ? 2 : 1), addPropTab);
 					}
 					else
 					{
-						tempAddedPropertiesTab = addPropTab;
 						tabControl.TabPages.Remove(addPropTab);
 					}
 					showAddedPropertiesTab = value;
@@ -179,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Info' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
 		public bool ShowRegistrationInfoTab
 		{
 			get
@@ -192,12 +205,10 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value)
 					{
-						tabControl.TabPages.Insert(tabControl.TabPages.IndexOf(settingsTab) + 1, tempRegInfoTab);
-						tempRegInfoTab = null;
+						InsertTab(tabControl.TabPages.IndexOf(settingsTab) + 1, regInfoTab);
 					}
 					else
 					{
-						tempRegInfoTab = regInfoTab;
 						tabControl.TabPages.Remove(regInfoTab);
 					}
 					showRegInfoTab = value;
@@ -222,12 +233,10 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value)
 					{
-						tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, tempRunTimesTabPage);
-						tempRunTimesTabPage = null;
+						InsertTab(tabControl.TabPages.Count - 1, runTimesTab);
 					}
 					else
 					{
-						tempRunTimesTabPage = runTimesTab;
 						tabControl.TabPages.Remove(runTimesTab);
 					}
 					showRunTimesTab = value;
@@ -648,7 +657,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (e.Result is ListViewItem[])
 				historyListView.Items.AddRange(e.Result as ListViewItem[]);
 			else if (e.Result is Exception && showErrors)
-				MessageBox.Show(string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void historyTab_Enter(object sender, EventArgs e)
@@ -661,10 +670,17 @@ namespace Microsoft.Win32.TaskScheduler
 			historyBackgroundWorker.RunWorkerAsync();
 		}
 
+		private void InsertTab(int idx, TabPage tab)
+		{
+			IntPtr h = this.tabControl.Handle;
+			if (!tab.IsHandleCreated) tab.CreateControl();
+			tabControl.TabPages.Insert(idx, tab);
+		}
+
 		private void InvokeObjectPicker(string targetComputerName)
 		{
 			string acct = String.Empty;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, ref this.flagExecutorIsGroup, ref this.flagExecutorIsServiceAccount))
+			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
@@ -674,7 +690,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!v2 && acct != "SYSTEM")
 				{
-					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.Error_NoGroupsUnderV1, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				this.flagExecutorIsGroup = false;
@@ -688,7 +704,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!v2)
 				{
-					MessageBox.Show(this, EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.Error_NoGroupsUnderV1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(this, EditorProperties.Resources.Error_NoGroupsUnderV1, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
 				td.Principal.GroupId = acct;
@@ -1284,14 +1300,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ValidateAccountForSidType(string user)
 		{
-			string[] validUserIds = new string[] { "NETWORK SERVICE", "LOCAL SERVICE", "S-1-5-19", "S-1-5-20" };
-			if (principalSIDTypeCombo.SelectedIndex != (int)TaskProcessTokenSidType.Default)
+			if (!TaskPrincipal.ValidateAccountForSidType(user, td.Principal.ProcessTokenSidType))
 			{
-				if (Array.Find<string>(validUserIds, delegate(string id) { return id.Equals(user, StringComparison.InvariantCultureIgnoreCase); }) == null)
-				{
-					MessageBox.Show(this, EditorProperties.Resources.Error_PrincipalSidTypeInvalid, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return false;
-				}
+				MessageBox.Show(this, EditorProperties.Resources.Error_PrincipalSidTypeInvalid, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
 			}
 			return true;
 		}

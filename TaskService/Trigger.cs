@@ -690,7 +690,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		private static Type timeSpan2Type = null;
-		private static bool foundTimeSpan2 = false;
+		private static bool? foundTimeSpan2 = null;
 
 		/// <summary>
 		/// Gets the best time span string.
@@ -700,10 +700,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private static string GetBestTimeSpanString(TimeSpan span)
 		{
 			// See if the TimeSpan2 assembly is accessible
-			if (!foundTimeSpan2)
+			if (!foundTimeSpan2.HasValue)
 			{
 				try
 				{
+					foundTimeSpan2 = false;
 					System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("TimeSpan2.dll");
 					if (asm != null)
 					{
@@ -716,7 +717,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			// If the TimeSpan2 assembly is available, try to call the ToString("f") method and return the result.
-			if (foundTimeSpan2 && timeSpan2Type != null)
+			if (foundTimeSpan2 == true && timeSpan2Type != null)
 			{
 				try
 				{

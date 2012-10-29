@@ -1521,6 +1521,46 @@ namespace Microsoft.Win32.TaskScheduler
 			return productType;
 		}
 
+		/// <summary>
+		/// Validates the current <see cref="TaskDefinition"/>.
+		/// </summary>
+		/// <param name="throwException">if set to <c>true</c> throw a <see cref="InvalidOperationException"/> with details about invalid properties.</param>
+		/// <returns><c>true</c> if current <see cref="TaskDefinition"/> is valid; <c>false</c> if not.</returns>
+		public bool Validate(bool throwException = false)
+		{
+			InvalidOperationException ex = new InvalidOperationException();
+			if (this.Settings.UseUnifiedSchedulingEngine)
+				try { CanUseUnifiedSchedulingEngine(throwException); }
+				catch (InvalidOperationException iox) { ex = iox; }
+			if (this.LowestSupportedVersion > this.Settings.Compatibility)
+				ex.Data.Add("Settings.Compatibility", "is lower than what is required for the currently set properties.");
+			if (this.Settings.StartWhenAvailable)
+			{
+				foreach (var trigger in this.Triggers)
+				{
+					if (!(trigger is ICalendarTrigger))
+						ex.Data.Add("Settings.StartWhenAvailable", "== true requires time-based triggers.");
+					else
+					{
+						if (trigger.Repetition.Duration != TimeSpan.Zero && trigger.EndBoundary == DateTime.MaxValue)
+							ex.Data.Add("Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
+					}
+				}
+			}
+			if (this.Settings.Compatibility < TaskCompatibility.V2)
+			{
+				foreach (var trigger in this.Triggers)
+				{
+					if (trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
+						ex.Data.Add("Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
+				}
+			}
+
+			if (throwException)
+				throw ex;
+			return ex.Data.Count == 0;
+		}
+
 		internal void V1Save(string newName)
 		{
 			if (v1Task != null)
@@ -1537,7 +1577,6 @@ namespace Microsoft.Win32.TaskScheduler
 						return;
 					}
 					catch { }
-
 				}
 
 				string path;
@@ -1829,6 +1868,23 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return this.LogonType == TaskLogonType.Group ? this.GroupId : this.UserId;
+		}
+
+		/// <summary>
+		/// Validates the supplied account against the supplied <see cref="TaskProcessTokenSidType"/>.
+		/// </summary>
+		/// <param name="acct">The user or group account name.</param>
+		/// <param name="sidType">The SID type for the process.</param>
+		/// <returns><c>true</c> if supplied account can be used for the supplied SID type.</returns>
+		public static bool ValidateAccountForSidType(string acct, TaskProcessTokenSidType sidType)
+		{
+			string[] validUserIds = new string[] { "NETWORK SERVICE", "LOCAL SERVICE", "S-1-5-19", "S-1-5-20" };
+			if (sidType != TaskProcessTokenSidType.Default)
+			{
+				if (Array.Find<string>(validUserIds, delegate(string id) { return id.Equals(acct, StringComparison.InvariantCultureIgnoreCase); }) == null)
+					return false;
+			}
+			return true;
 		}
 
 		XmlSchema IXmlSerializable.GetSchema()
