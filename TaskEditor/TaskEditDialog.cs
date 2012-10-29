@@ -79,7 +79,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
 		public bool ShowAddedPropertiesTab
 		{
 			get { return taskPropertiesControl1.ShowAddedPropertiesTab; }
@@ -103,7 +103,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Info' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
 		public bool ShowRegistrationInfoTab
 		{
 			get { return taskPropertiesControl1.ShowRegistrationInfoTab; }

@@ -23,6 +23,14 @@ namespace SecurityEditor
 			objNameText.BackColor = this.BackColor;
 		}
 
+		public RuleType Display { get; set; }
+
+		public string ObjectName
+		{
+			get { return objName; }
+			set { objName = value; objNameText.Text = objName; }
+		}
+
 		public FileSecurity ObjectSecurity
 		{
 			get { return sec; }
@@ -37,28 +45,13 @@ namespace SecurityEditor
 					{
 						AuthorizationRuleCollection coll = sec.GetAccessRules(true, true, typeof(NTAccount));
 						foreach (FileSystemAccessRule rule in coll)
-						{
-							string text = SecurityEditorDialog.GetLocalizedString(rule.AccessControlType);
-							FileSystemRights rights = rule.FileSystemRights;
-							if (rights != FileSystemRights.FullControl && (rights & FileSystemRights.Synchronize) != 0)
-								rights &= ~FileSystemRights.Synchronize;
-							permissionsListView.Items.Add(text).SubItems.AddRange(new string[] { 
-								rule.IdentityReference.Value,
-								SecurityEditorDialog.GetLocalizedString(rights),
-								string.Empty });
-						}
+							AddListItem(rule);
 					}
 					else
 					{
 						AuthorizationRuleCollection coll = sec.GetAuditRules(true, true, typeof(NTAccount));
 						foreach (FileSystemAuditRule rule in coll)
-						{
-							string text = SecurityEditorDialog.GetLocalizedString(rule.AuditFlags);
-							permissionsListView.Items.Add(text).SubItems.AddRange(new string[] { 
-								rule.IdentityReference.Value,
-								SecurityEditorDialog.GetLocalizedString(rule.FileSystemRights),
-								string.Empty });
-						}
+							AddListItem(rule);
 					}
 					permissionsListView.EndUpdate();
 				}
@@ -70,13 +63,33 @@ namespace SecurityEditor
 			}
 		}
 
-		public string ObjectName
-		{
-			get { return objName; }
-			set { objName = value; objNameText.Text = objName; }
-		}
+		public string TargetComputer { get; set; }
 
-		public RuleType Display { get; set; }
+		private void AddListItem(AuthorizationRule rule)
+		{
+			ListViewItem item;
+			if (rule is FileSystemAccessRule)
+			{
+				string text = SecurityEditorDialog.GetLocalizedString(((FileSystemAccessRule)rule).AccessControlType);
+				item = permissionsListView.Items.Add(text);
+				if (item.Index == 0) item.Selected = true;
+				item.SubItems.AddRange(new string[] { 
+					rule.IdentityReference.Value,
+					SecurityEditorDialog.GetLocalizedString(((FileSystemAccessRule)rule).FileSystemRights),
+					string.Empty });
+				item.Tag = rule;
+			}
+			else if (rule is FileSystemAuditRule)
+			{
+				string text = SecurityEditorDialog.GetLocalizedString(((FileSystemAuditRule)rule).AuditFlags);
+				item = permissionsListView.Items.Add(text);
+				item.SubItems.AddRange(new string[] { 
+					rule.IdentityReference.Value,
+					SecurityEditorDialog.GetLocalizedString(((FileSystemAuditRule)rule).FileSystemRights),
+					string.Empty });
+				item.Tag = rule;
+			}
+		}
 
 		private void permissionsListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -90,17 +103,51 @@ namespace SecurityEditor
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
+			string acctName = string.Empty; bool isGroup, isService;
+			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService))
+			{
+				AceEditor aed = new AceEditor() { ObjectName = this.objName };
+				if (Display == RuleType.Access)
+					aed.Rule = new FileSystemAccessRule(acctName, 0, AccessControlType.Allow);
+				else
+					aed.Rule = new FileSystemAuditRule(acctName, 0, AuditFlags.Success);
 
+				if (aed.ShowDialog(this) == DialogResult.OK)
+				{
+					if (Display == RuleType.Access)
+						sec.AddAccessRule(aed.Rule as FileSystemAccessRule);
+					else
+						sec.AddAuditRule(aed.Rule as FileSystemAuditRule);
+					AddListItem(aed.Rule);
+				}
+			}
 		}
 
 		private void editButton_Click(object sender, EventArgs e)
 		{
-
+			using (AceEditor aed = new AceEditor() { ObjectName = this.objName, Rule = permissionsListView.SelectedItems[0].Tag as AuthorizationRule })
+			{
+				if (aed.ShowDialog(this) == DialogResult.OK)
+				{
+					bool modified;
+					if (Display == RuleType.Access)
+						sec.ModifyAccessRule(AccessControlModification.Reset, aed.Rule as AccessRule, out modified);
+					else
+						sec.ModifyAuditRule(AccessControlModification.Reset, aed.Rule as AuditRule, out modified);
+					permissionsListView.Items.RemoveAt(permissionsListView.SelectedIndices[0]);
+					AddListItem(aed.Rule);
+				}
+			}
 		}
 
 		private void removeButton_Click(object sender, EventArgs e)
 		{
-
+			bool modified;
+			if (Display == RuleType.Access)
+				sec.ModifyAccessRule(AccessControlModification.RemoveAll, permissionsListView.SelectedItems[0].Tag as AccessRule, out modified);
+			else
+				sec.ModifyAuditRule(AccessControlModification.RemoveAll, permissionsListView.SelectedItems[0].Tag as AuditRule, out modified);
+			permissionsListView.Items.RemoveAt(permissionsListView.SelectedIndices[0]);
 		}
 
 		private void inheritedCheck_CheckedChanged(object sender, EventArgs e)

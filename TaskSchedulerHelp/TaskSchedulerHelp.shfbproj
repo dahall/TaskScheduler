@@ -17,8 +17,7 @@
     <!-- SHFB properties -->
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>TaskScheduler</HtmlHelpName>
-    <ProjectSummary>
-    </ProjectSummary>
+    <ProjectSummary>&amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttp://taskscheduler.codeplex.com&amp;quot%3b&amp;gt%3bhttp://taskscheduler.codeplex.com&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath>
@@ -30,7 +29,7 @@
     <WorkingPath>
     </WorkingPath>
     <FrameworkVersion>.NET 3.5</FrameworkVersion>
-    <HelpTitle>Task Scheduler Managed Class Library 1.8.2</HelpTitle>
+    <HelpTitle>Task Scheduler Managed Class Library 1.9.0</HelpTitle>
     <CopyrightText>Copyright Codeplex Community 2012</CopyrightText>
     <PresentationStyle>vs2010</PresentationStyle>
     <ComponentConfigurations>
@@ -129,11 +128,11 @@ Microsoft introduced version 2.0 (internally version 1.2) with a completely new 
       <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
       <NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
     </NamespaceSummaries>
-    <HelpFileVersion>1.8.2.0</HelpFileVersion>
+    <HelpFileVersion>1.9.0.0</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer</HelpFileFormat>
     <CopyrightHref>http://taskscheduler.codeplex.com/license</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceTitle>Task Scheduler Managed Class Library 1.8.2</RootNamespaceTitle>
+    <RootNamespaceTitle>Task Scheduler Managed Class Library</RootNamespaceTitle>
     <MSHelpViewerSdkLinkType>Id</MSHelpViewerSdkLinkType>
     <ProductTitle>
     </ProductTitle>
@@ -161,6 +160,10 @@ Microsoft introduced version 2.0 (internally version 1.2) with a completely new 
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CppCommentsFixup>False</CppCommentsFixup>
     <CleanIntermediates>True</CleanIntermediates>
+    <PlugInNamespaces>ms.vsipcc+, ms.vsexpresscc+</PlugInNamespaces>
+    <CollectionTocStyle>Hierarchical</CollectionTocStyle>
+    <MSHelp2SdkLinkType>Msdn</MSHelp2SdkLinkType>
+    <IncludeStopWordList>True</IncludeStopWordList>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
