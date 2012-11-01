@@ -638,36 +638,81 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
+			BackgroundWorker worker = sender as BackgroundWorker;
+
+			const int dumpMod = 20;
 			List<ListViewItem> c = new List<ListViewItem>(100);
 			try
 			{
 				TaskEventLog log = TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path);
+				int n = 0;
 				foreach (TaskEvent item in log)
-					c.Add(new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
-					item.TaskCategory, item.OpCode, item.ActivityId.ToString() }));
-				c.Reverse();
-				e.Result = c.ToArray();
+				{
+					if (worker.CancellationPending)
+					{
+						e.Cancel = true;
+						break;
+					}
+					else
+					{
+						c.Add(new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
+							item.TaskCategory, item.OpCode, item.ActivityId.ToString() }) { Tag = item });
+						if (++n % dumpMod == 0)
+						{
+							worker.ReportProgress(0, c.ToArray());
+							c.Clear();
+						}
+					}
+				}
+				worker.ReportProgress(0, c.ToArray());
 			}
 			catch (Exception ex) { e.Result = ex; }
+		}
+
+		private void historyBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			if (e.UserState is ListViewItem[])
+			{
+				historyListView.Items.AddRange(e.UserState as ListViewItem[]);
+				if (historyListView.Items.Count > 0 && historyListView.SelectedIndices.Count == 0)
+					historyListView.Items[0].Selected = true;
+			}
 		}
 
 		private void historyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			historyListView.Cursor = Cursors.Default;
-			if (e.Result is ListViewItem[])
-				historyListView.Items.AddRange(e.Result as ListViewItem[]);
-			else if (e.Result is Exception && showErrors)
+			if (e.Result is Exception && showErrors)
 				MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		private void histDetailHideBtn_Click(object sender, EventArgs e)
+		{
+			historyDetailPanel.Visible = false;
+		}
+
+		private void historyListView_DoubleClick(object sender, EventArgs e)
+		{
+			// TODO: Lauch dialog with event details
+		}
+
+		private void historyListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (historyListView.SelectedIndices.Count > 0)
+			{
+				historyDetailView.TaskEvent = historyListView.SelectedItems[0].Tag as TaskEvent;
+				historyDetailTitleText.Text = string.Format("Event {0}, TaskScheduler", ((TaskEvent)historyListView.SelectedItems[0].Tag).EventId);
+			}
+			else
+			{
+				historyDetailView.TaskEvent = null;
+				historyDetailTitleText.Text = string.Empty;
+			}
 		}
 
 		private void historyTab_Enter(object sender, EventArgs e)
 		{
-			if (task == null)
-				return;
-
-			historyListView.Items.Clear();
-			historyListView.Cursor = Cursors.WaitCursor;
-			historyBackgroundWorker.RunWorkerAsync();
+			// Moved to tabControl_IndexChanged
 		}
 
 		private void InsertTab(int idx, TabPage tab)
@@ -898,6 +943,22 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 			this.taskVersionCombo.EndUpdate();
+		}
+
+		private void tabControl_TabIndexChanged(object sender, EventArgs e)
+		{
+			if (task == null)
+				return;
+
+			if (tabControl.SelectedTab == historyTab)
+			{
+				historyListView.Items.Clear();
+				historyDetailView.TaskEvent = null;
+				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
+				historyListView.Cursor = Cursors.WaitCursor;
+				historyBackgroundWorker.RunWorkerAsync();
+				historyDetailPanel.Visible = true;
+			}
 		}
 
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)

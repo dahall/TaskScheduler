@@ -66,6 +66,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Win32.TaskScheduler, Version=1.9.0.20114, Culture=neutral, PublicKeyToken=0d013ddd5178a2ae, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -104,6 +105,12 @@
     </Compile>
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventViewerControl.Designer.cs">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
@@ -234,6 +241,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ActionEditDialog.zh-CN.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ComObjectSelectionDialog.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
@@ -242,6 +250,9 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.it.resx" />
+    <EmbeddedResource Include="EventViewerControl.resx">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
