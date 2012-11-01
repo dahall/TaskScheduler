@@ -12,6 +12,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskEvent(EventRecord rec)
 		{
 			this.EventId = rec.Id;
+			this.EventRecord = rec;
 			this.Version = rec.Version;
 			this.TaskCategory = rec.TaskDisplayName;
 			this.OpCode = rec.OpcodeDisplayName;
@@ -35,6 +36,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the event id.
 		/// </summary>
 		public int EventId
+		{
+			get; internal set;
+		}
+
+		/// <summary>
+		/// Gets the underlying <see cref="EventRecord"/>.
+		/// </summary>
+		public EventRecord EventRecord
 		{
 			get; internal set;
 		}
@@ -222,7 +231,7 @@ namespace Microsoft.Win32.TaskScheduler
 				"  </Query>" +
 				"</QueryList>";
 
-			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, string.Format(queryString, taskPath));
+			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, string.Format(queryString, taskPath)) { ReverseDirection = true };
 			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
 				q.Session = new EventLogSession(machineName);
 		}

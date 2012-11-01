@@ -140,6 +140,8 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.historyTab = new System.Windows.Forms.TabPage();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.historyListPanel = new System.Windows.Forms.Panel();
 			this.historyListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -147,6 +149,11 @@
 			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.splitter1 = new System.Windows.Forms.Splitter();
+			this.historyDetailPanel = new System.Windows.Forms.Panel();
+			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
+			this.historyDetailTitleText = new System.Windows.Forms.Label();
+			this.historyDetailHideBtn = new System.Windows.Forms.Button();
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
@@ -168,6 +175,9 @@
 			this.runTimesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
+			this.panel1.SuspendLayout();
+			this.historyListPanel.SuspendLayout();
+			this.historyDetailPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -186,6 +196,7 @@
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
 			this.helpProvider.SetShowHelp(this.tabControl, ((bool)(resources.GetObject("tabControl.ShowHelp"))));
+			this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_TabIndexChanged);
 			// 
 			// generalTab
 			// 
@@ -1081,7 +1092,7 @@
 			// 
 			// historyTab
 			// 
-			this.historyTab.Controls.Add(this.historyListView);
+			this.historyTab.Controls.Add(this.panel1);
 			this.helpProvider.SetHelpKeyword(this.historyTab, resources.GetString("historyTab.HelpKeyword"));
 			this.helpProvider.SetHelpNavigator(this.historyTab, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("historyTab.HelpNavigator"))));
 			resources.ApplyResources(this.historyTab, "historyTab");
@@ -1090,9 +1101,26 @@
 			this.historyTab.UseVisualStyleBackColor = true;
 			this.historyTab.Enter += new System.EventHandler(this.historyTab_Enter);
 			// 
+			// panel1
+			// 
+			resources.ApplyResources(this.panel1, "panel1");
+			this.panel1.Controls.Add(this.historyListPanel);
+			this.panel1.Controls.Add(this.splitter1);
+			this.panel1.Controls.Add(this.historyDetailPanel);
+			this.panel1.Name = "panel1";
+			this.helpProvider.SetShowHelp(this.panel1, ((bool)(resources.GetObject("panel1.ShowHelp"))));
+			// 
+			// historyListPanel
+			// 
+			this.historyListPanel.BackColor = System.Drawing.SystemColors.Control;
+			this.historyListPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.historyListPanel.Controls.Add(this.historyListView);
+			resources.ApplyResources(this.historyListPanel, "historyListPanel");
+			this.historyListPanel.Name = "historyListPanel";
+			this.helpProvider.SetShowHelp(this.historyListPanel, ((bool)(resources.GetObject("historyListPanel.ShowHelp"))));
+			// 
 			// historyListView
 			// 
-			resources.ApplyResources(this.historyListView, "historyListView");
 			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader7,
@@ -1100,6 +1128,7 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11});
+			resources.ApplyResources(this.historyListView, "historyListView");
 			this.historyListView.FullRowSelect = true;
 			this.historyListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.historyListView.HideSelection = false;
@@ -1107,6 +1136,8 @@
 			this.helpProvider.SetShowHelp(this.historyListView, ((bool)(resources.GetObject("historyListView.ShowHelp"))));
 			this.historyListView.UseCompatibleStateImageBehavior = false;
 			this.historyListView.View = System.Windows.Forms.View.Details;
+			this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historyListView_SelectedIndexChanged);
+			this.historyListView.DoubleClick += new System.EventHandler(this.historyListView_DoubleClick);
 			// 
 			// columnHeader6
 			// 
@@ -1132,9 +1163,54 @@
 			// 
 			resources.ApplyResources(this.columnHeader11, "columnHeader11");
 			// 
+			// splitter1
+			// 
+			resources.ApplyResources(this.splitter1, "splitter1");
+			this.splitter1.Name = "splitter1";
+			this.helpProvider.SetShowHelp(this.splitter1, ((bool)(resources.GetObject("splitter1.ShowHelp"))));
+			this.splitter1.TabStop = false;
+			// 
+			// historyDetailPanel
+			// 
+			this.historyDetailPanel.BackColor = System.Drawing.SystemColors.Control;
+			this.historyDetailPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.historyDetailPanel.Controls.Add(this.historyDetailView);
+			this.historyDetailPanel.Controls.Add(this.historyDetailTitleText);
+			this.historyDetailPanel.Controls.Add(this.historyDetailHideBtn);
+			resources.ApplyResources(this.historyDetailPanel, "historyDetailPanel");
+			this.historyDetailPanel.Name = "historyDetailPanel";
+			this.helpProvider.SetShowHelp(this.historyDetailPanel, ((bool)(resources.GetObject("historyDetailPanel.ShowHelp"))));
+			// 
+			// historyDetailView
+			// 
+			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
+			resources.ApplyResources(this.historyDetailView, "historyDetailView");
+			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
+			this.historyDetailView.Name = "historyDetailView";
+			this.helpProvider.SetShowHelp(this.historyDetailView, ((bool)(resources.GetObject("historyDetailView.ShowHelp"))));
+			this.historyDetailView.TaskEvent = null;
+			// 
+			// historyDetailTitleText
+			// 
+			resources.ApplyResources(this.historyDetailTitleText, "historyDetailTitleText");
+			this.historyDetailTitleText.Name = "historyDetailTitleText";
+			this.helpProvider.SetShowHelp(this.historyDetailTitleText, ((bool)(resources.GetObject("historyDetailTitleText.ShowHelp"))));
+			// 
+			// historyDetailHideBtn
+			// 
+			resources.ApplyResources(this.historyDetailHideBtn, "historyDetailHideBtn");
+			this.historyDetailHideBtn.FlatAppearance.BorderSize = 0;
+			this.historyDetailHideBtn.Name = "historyDetailHideBtn";
+			this.helpProvider.SetShowHelp(this.historyDetailHideBtn, ((bool)(resources.GetObject("historyDetailHideBtn.ShowHelp"))));
+			this.historyDetailHideBtn.UseVisualStyleBackColor = true;
+			this.historyDetailHideBtn.Click += new System.EventHandler(this.histDetailHideBtn_Click);
+			// 
 			// historyBackgroundWorker
 			// 
+			this.historyBackgroundWorker.WorkerReportsProgress = true;
+			this.historyBackgroundWorker.WorkerSupportsCancellation = true;
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
+			this.historyBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.historyBackgroundWorker_ProgressChanged);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
 			// errorProvider
@@ -1178,6 +1254,10 @@
 			this.runTimesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.historyListPanel.ResumeLayout(false);
+			this.historyDetailPanel.ResumeLayout(false);
+			this.historyDetailPanel.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
 			this.ResumeLayout(false);
 
@@ -1305,5 +1385,12 @@
 		private System.Windows.Forms.ErrorProvider errorProvider;
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel historyDetailPanel;
+		private System.Windows.Forms.Splitter splitter1;
+		private EventViewerControl historyDetailView;
+		private System.Windows.Forms.Label historyDetailTitleText;
+		private System.Windows.Forms.Button historyDetailHideBtn;
+		private System.Windows.Forms.Panel historyListPanel;
 	}
 }
