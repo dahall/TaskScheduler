@@ -66,7 +66,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Win32.TaskScheduler, Version=1.9.0.20114, Culture=neutral, PublicKeyToken=0d013ddd5178a2ae, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -106,6 +105,12 @@
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EventViewerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventViewerDialog.Designer.cs">
+      <DependentUpon>EventViewerDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +122,11 @@
     </Compile>
     <Compile Include="NetworkListManager.cs" />
     <Compile Include="NetworkProfile.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SystemEventEnumerator.cs" />
     <Compile Include="TaskEditDialog.cs">
       <SubType>Form</SubType>
@@ -253,11 +263,18 @@
     <EmbeddedResource Include="EventViewerControl.resx">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerDialog.resx">
+      <DependentUpon>EventViewerDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.zh-CN.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
@@ -271,6 +288,7 @@
     <EmbeddedResource Include="EditorProperties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
@@ -359,6 +377,32 @@
   <ItemGroup>
     <Content Include="ActionEditDialog.bmp" />
     <Content Include="Dialog.bmp" />
+    <None Include="Resources\verbose.ico" />
+    <None Include="Resources\auditFail.ico" />
+    <None Include="Resources\auditSuccess.ico" />
+    <None Include="Resources\critical.ico" />
+    <None Include="Resources\d.ico" />
+    <None Include="Resources\disable.ico" />
+    <None Include="Resources\enable.ico" />
+    <None Include="Resources\end.ico" />
+    <None Include="Resources\error.ico" />
+    <None Include="Resources\filter.ico" />
+    <None Include="Resources\helpBook.ico" />
+    <None Include="Resources\info.ico" />
+    <None Include="Resources\infoBubble.ico" />
+    <None Include="Resources\question.ico" />
+    <None Include="Resources\refresh.ico" />
+    <None Include="Resources\run.ico" />
+    <None Include="Resources\ts.ico" />
+    <None Include="Resources\tsFolderClosed.ico" />
+    <None Include="Resources\tsFolderOpen.ico" />
+    <None Include="Resources\tsList.ico" />
+    <None Include="Resources\tsNew.ico" />
+    <None Include="Resources\warning.ico" />
+    <None Include="Resources\createBasicTask.bmp" />
+    <None Include="Resources\empty.bmp" />
+    <None Include="Resources\filter.bmp" />
+    <None Include="Resources\undo.bmp" />
     <Content Include="TaskEditDialog.bmp" />
     <Content Include="TaskSchedulerWizard.bmp" />
     <Content Include="TriggerEditDialog.bmp" />

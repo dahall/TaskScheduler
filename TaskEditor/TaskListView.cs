@@ -17,6 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskListView()
 		{
 			InitializeComponent();
+			smallImageList.Images.Add(new System.Drawing.Icon(EditorProperties.Resources.ts, 0x10, 0x10));
 		}
 
 		/// <summary>
