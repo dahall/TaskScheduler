@@ -237,6 +237,33 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the total number of events for this task.
+		/// </summary>
+		public long Count
+		{
+			get
+			{
+				using (EventLogReader log = new EventLogReader(q))
+				{
+					long seed = 64L, l = 0L, h = seed;
+					while (log.ReadEvent() != null)
+						log.Seek(System.IO.SeekOrigin.Begin, l += seed);
+					bool foundLast = false;
+					while (l > 0L && h >= 1L)
+					{
+						if (foundLast)
+							l += (h /= 2L);
+						else
+							l -= (h /= 2L);
+						log.Seek(System.IO.SeekOrigin.Begin, l);
+						foundLast = (log.ReadEvent() != null);
+					}
+					return foundLast ? l : l - 1L;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
 		/// </summary>
 		/// <returns>
