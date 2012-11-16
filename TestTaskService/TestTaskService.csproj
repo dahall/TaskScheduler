@@ -52,6 +52,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -66,11 +67,11 @@
     <Compile Include="GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HideDetailControl.cs">
+    <Compile Include="HidableDetailPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HideDetailControlHolder.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="HidableDetailPanel.Designer.cs">
+      <DependentUpon>HidableDetailPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="HomePanel.cs">
       <SubType>UserControl</SubType>
@@ -112,6 +113,9 @@
     <EmbeddedResource Include="FolderPanel.resx">
       <DependentUpon>FolderPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HidableDetailPanel.resx">
+      <DependentUpon>HidableDetailPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomePanel.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +130,9 @@
     <EmbeddedResource Include="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ts.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

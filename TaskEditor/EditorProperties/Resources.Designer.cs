@@ -231,6 +231,16 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap downArrow {
+            get {
+                object obj = ResourceManager.GetObject("downArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap empty {
             get {
                 object obj = ResourceManager.GetObject("empty", resourceCulture);
@@ -481,6 +491,16 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minus {
+            get {
+                object obj = ResourceManager.GetObject("minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Never.
         /// </summary>
         internal static string Never {
@@ -495,6 +515,16 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string NoUserSpecifiedText {
             get {
                 return ResourceManager.GetString("NoUserSpecifiedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus {
+            get {
+                object obj = ResourceManager.GetObject("plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -845,6 +875,16 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tsBmp {
+            get {
+                object obj = ResourceManager.GetObject("tsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon tsFolderClosed {
@@ -890,6 +930,16 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static System.Drawing.Bitmap undo {
             get {
                 object obj = ResourceManager.GetObject("undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap upArrow {
+            get {
+                object obj = ResourceManager.GetObject("upArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
