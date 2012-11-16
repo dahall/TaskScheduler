@@ -192,6 +192,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			log.Seek(System.IO.SeekOrigin.Begin, 0L);
 		}
+
+		internal void Seek(EventBookmark bookmark, long offset = 0L)
+		{
+			log.Seek(bookmark, offset);
+		}
+
+		internal void Seek(System.IO.SeekOrigin origin, long offset)
+		{
+			log.Seek(origin, offset);
+		}
 	}
 
 	/// <summary>
@@ -232,6 +242,35 @@ namespace Microsoft.Win32.TaskScheduler
 				"</QueryList>";
 
 			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, string.Format(queryString, taskPath)) { ReverseDirection = true };
+			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
+				q.Session = new EventLogSession(machineName);
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskEventLog"/> class that looks at all task events from a specified time.
+		/// </summary>
+		/// <param name="startTime">The start time.</param>
+		/// <param name="machineName">Name of the machine (optional).</param>
+		public TaskEventLog(DateTime startTime, string machineName = null)
+		{
+			if (System.Environment.OSVersion.Version.Major < 6)
+				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
+
+			int[] numArray = new int[] { 100, 0x66, 0x67, 0x6b, 0x6c, 0x6d, 0x6f, 0x75, 0x76, 0x77, 120, 0x79, 0x7a, 0x7b, 0x7c, 0x7d };
+			System.Text.StringBuilder sb = new System.Text.StringBuilder();
+			sb.Append("*[System[(");
+			for (int i = 0; i < numArray.Length; i++)
+			{
+				sb.Append("EventID=");
+				sb.Append(numArray[i]);
+				if ((i + 1) < numArray.Length)
+					sb.Append(" or ");
+			}
+			sb.Append(") and TimeCreated[@SystemTime>='");
+			sb.Append(System.Xml.XmlConvert.ToString(startTime, System.Xml.XmlDateTimeSerializationMode.RoundtripKind));
+			sb.Append("']]]");
+
+			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, sb.ToString()) { ReverseDirection = true };
 			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
 				q.Session = new EventLogSession(machineName);
 		}

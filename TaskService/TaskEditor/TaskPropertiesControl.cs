@@ -654,7 +654,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			BackgroundWorker worker = sender as BackgroundWorker;
 
-			const int dumpMod = 20;
+			const int dumpMod = 64;
 			List<ListViewItem> c = new List<ListViewItem>(100);
 			try
 			{
@@ -721,7 +721,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (historyListView.SelectedIndices.Count > 0)
 			{
 				EventViewerDialog dlg = new EventViewerDialog();
-				dlg.Initialize(historyListView.SelectedItems[0].Tag as TaskEvent);
+				dlg.Initialize(historyListView.SelectedItems[0].Tag as TaskEvent, null); //TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path));
 				dlg.ShowDialog(this);
 			}
 		}

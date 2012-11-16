@@ -19,21 +19,39 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private TaskEvent curEvent;
+		private TaskEventEnumerator eventEnum;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EventViewerDialog"/> class.
 		/// </summary>
-		public EventViewerDialog()
+		/// <param name="taskEvent">The <see cref="TaskEvent"/> to show initially.</param>
+		/// <param name="log">The <see cref="TaskEventLog"/> for the task.</param>
+		public EventViewerDialog(TaskEvent taskEvent = null, TaskEventLog log = null)
 		{
 			InitializeComponent();
+			if (taskEvent != null)
+				Initialize(taskEvent, log);
 		}
 
 		/// <summary>
 		/// Initializes the dialog with the specified task event.
 		/// </summary>
-		/// <param name="taskEvent">The task event.</param>
-		public void Initialize(TaskEvent taskEvent)
+		/// <param name="taskEvent">The <see cref="TaskEvent"/> to show initially.</param>
+		/// <param name="log">The <see cref="TaskEventLog"/> for the task.</param>
+		public void Initialize(TaskEvent taskEvent, TaskEventLog log = null)
 		{
+			if (taskEvent == null)
+				throw new ArgumentNullException("taskEvent");
+
+			if (log != null)
+			{
+				eventEnum = log.GetEnumerator() as TaskEventEnumerator;
+				eventEnum.Seek(CurrentEvent.EventRecord.Bookmark);
+			}
+			else
+			{
+				eventEnum = null;
+			}
 			CurrentEvent = taskEvent;
 		}
 
@@ -45,6 +63,24 @@ namespace Microsoft.Win32.TaskScheduler
 				curEvent = value;
 				this.Text = string.Format(EditorProperties.Resources.EventPropertiesDialogTitle, curEvent.EventId);
 				eventViewerControl1.TaskEvent = curEvent;
+				SetButtonState();
+			}
+		}
+
+		private void SetButtonState()
+		{
+			if (eventEnum == null)
+			{
+				prevBtn.Enabled = nextBtn.Enabled = false;
+				prevBtn.Visible = nextBtn.Visible = false;
+			}
+			else
+			{
+				eventEnum.Seek(CurrentEvent.EventRecord.Bookmark, -1L);
+				prevBtn.Enabled = eventEnum.MoveNext();
+				eventEnum.Seek(CurrentEvent.EventRecord.Bookmark, 1L);
+				nextBtn.Enabled = eventEnum.MoveNext();
+				prevBtn.Visible = nextBtn.Visible = true;
 			}
 		}
 

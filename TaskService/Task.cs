@@ -776,6 +776,36 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether this task instance is active.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this task instance is active; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsActive
+		{
+			get
+			{
+				DateTime now = DateTime.Now;
+				if (this.Definition.Settings.Enabled)
+				{
+					int count = this.Definition.Triggers.Count;
+					for (int i = 0; i < count; i++)
+					{
+						Trigger trigger = this.Definition.Triggers[i];
+						if ((trigger.Enabled && (now >= trigger.StartBoundary)) && (now < trigger.EndBoundary))
+						{
+							if (!(trigger is ICalendarTrigger))
+								return true;
+							if (DateTime.MinValue != this.NextRunTime)
+								return true;
+						}
+					}
+				}
+				return false;
+			}
+		}
+
+		/// <summary>
 		/// Gets the time the registered task was last run.
 		/// </summary>
 		/// <value>Returns <see cref="DateTime.MinValue"/> if there are no prior run times.</value>

@@ -403,6 +403,11 @@
     <None Include="Resources\empty.bmp" />
     <None Include="Resources\filter.bmp" />
     <None Include="Resources\undo.bmp" />
+    <None Include="Resources\downArrow.bmp" />
+    <None Include="Resources\minus.bmp" />
+    <None Include="Resources\plus.bmp" />
+    <None Include="Resources\ts.bmp" />
+    <None Include="Resources\upArrow.bmp" />
     <Content Include="TaskEditDialog.bmp" />
     <Content Include="TaskSchedulerWizard.bmp" />
     <Content Include="TriggerEditDialog.bmp" />
