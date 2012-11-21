@@ -17,7 +17,6 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
-		private int historyEventCount = -1;
 		private bool onAssignment = false;
 		private string runTimesTaskName = null;
 		private TaskService service = null;
@@ -301,9 +300,6 @@ namespace Microsoft.Win32.TaskScheduler
 				taskLocationText.Text = GetTaskLocation();
 				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
 				taskDescText.Text = td.RegistrationInfo.Description;
-				taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
-				taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
-				taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && td.Principal.LogonType == TaskLogonType.S4U;
 				taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
 				taskHiddenCheck.Checked = td.Settings.Hidden;
 
@@ -604,19 +600,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void CancelHistoryBackgroundWorker(bool wait = false)
-		{
-			if (historyBackgroundWorker.IsBusy)
-			{
-				historyBackgroundWorker.CancelAsync();
-				if (wait)
-				{
-					while (historyBackgroundWorker.IsBusy)
-						System.Threading.Thread.Sleep(250);
-				}
-			}
-		}
-
 		private void changePrincipalButton_Click(object sender, EventArgs e)
 		{
 			InvokeObjectPicker(service.TargetServer);
@@ -650,144 +633,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return System.IO.Path.GetDirectoryName(task.Path);
 		}
 
-		private void historyBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-		{
-			BackgroundWorker worker = sender as BackgroundWorker;
-
-			const int dumpMod = 64;
-			List<ListViewItem> c = new List<ListViewItem>(100);
-			try
-			{
-				TaskEventLog log = TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path);
-				long cnt = log.Count;
-				int n = 0;
-				foreach (TaskEvent item in log)
-				{
-					if (worker.CancellationPending)
-					{
-						e.Cancel = true;
-						break;
-					}
-					else
-					{
-						c.Add(new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
-							item.TaskCategory, item.OpCode, item.ActivityId.ToString() }, item.EventRecord.Level.GetValueOrDefault(0)) { Tag = item });
-						if (++n % dumpMod == 0)
-						{
-							worker.ReportProgress(Convert.ToInt32(cnt), c.ToArray());
-							c.Clear();
-						}
-					}
-				}
-				worker.ReportProgress(n, c.ToArray());
-			}
-			catch (Exception ex) { e.Result = ex; }
-		}
-
-		private void historyBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			if (e.UserState is ListViewItem[])
-			{
-				HistoryHeaderUpdate(e.ProgressPercentage);
-				historyListView.Items.AddRange(e.UserState as ListViewItem[]);
-				if (historyListView.Items.Count > 0 && historyListView.SelectedIndices.Count == 0)
-					historyListView.Items[0].Selected = true;
-			}
-		}
-
-		private void historyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-		{
-			historyListView.Cursor = Cursors.Default;
-			if (!e.Cancelled && e.Result is Exception && showErrors)
-				MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
-
-		private void histDetailHideBtn_Click(object sender, EventArgs e)
-		{
-			historySplitContainer.Panel2Collapsed = true;
-		}
-
-		private void HistoryHeaderUpdate(int cnt)
-		{
-			if (historyEventCount != cnt)
-			{
-				historyEventCount = cnt;
-				historyHeader.Text = cnt == 0 ? string.Empty : string.Format(EditorProperties.Resources.HistoryHeader, cnt);
-			}
-		}
-
-		private void historyListView_DoubleClick(object sender, EventArgs e)
-		{
-			if (historyListView.SelectedIndices.Count > 0)
-			{
-				EventViewerDialog dlg = new EventViewerDialog();
-				dlg.Initialize(historyListView.SelectedItems[0].Tag as TaskEvent, null); //TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path));
-				dlg.ShowDialog(this);
-			}
-		}
-
-		private void historyListView_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
-		{
-
-		}
-
-		private void historyListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
-		{
-
-		}
-
-		private void historyListView_SearchForVirtualItem(object sender, SearchForVirtualItemEventArgs e)
-		{
-
-		}
-
-		private void historyListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (historyListView.SelectedIndices.Count > 0)
-			{
-				historyDetailView.TaskEvent = historyListView.SelectedItems[0].Tag as TaskEvent;
-				historyDetailTitleText.Text = string.Format(EditorProperties.Resources.EventDetailHeader, ((TaskEvent)historyListView.SelectedItems[0].Tag).EventId);
-			}
-			else
-			{
-				historyDetailView.TaskEvent = null;
-				historyDetailTitleText.Text = string.Empty;
-			}
-		}
-
 		private void historyTab_Enter(object sender, EventArgs e)
 		{
 			// Moved to historyTab_Intialize
-		}
-
-		private void historyTab_Intialize()
-		{
-			if (historyListImages.Images.Count == 0)
-			{
-				historyListImages.Images.Add(EditorProperties.Resources.empty, Color.FromArgb(0xff, 0, 0xff));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.critical, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.error, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.warning, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.info, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.verbose, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.auditSuccess, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.auditFail, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.filter, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.refresh, 0x10, 0x10));
-				historyListImages.Images.Add(new Icon(EditorProperties.Resources.end, 0x10, 0x10));
-				historyFilterIcon.ImageIndex = 8;
-				historyClearBtn.ImageIndex = 9;
-				historyStopStartBtn.ImageIndex = 10;
-			}
-			historyListView.Items.Clear();
-			historyDetailView.TaskEvent = null;
-			historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
-			HistoryHeaderUpdate(0);
-			historyEventCount = 0;
-			historyListView.Cursor = Cursors.WaitCursor;
-			CancelHistoryBackgroundWorker(true);
-			historyBackgroundWorker.RunWorkerAsync();
-			historySplitContainer.Panel2Collapsed = false;
 		}
 
 		private void InsertTab(int idx, TabPage tab)
@@ -799,8 +647,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void InvokeObjectPicker(string targetComputerName)
 		{
-			string acct = String.Empty;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount))
+			string acct = String.Empty, sid;
+			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount, out sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
@@ -909,6 +757,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetUserControls(TaskLogonType logonType)
 		{
+			bool prevOnAssignment = onAssignment;
+			onAssignment = true;
 			switch (logonType)
 			{
 				case TaskLogonType.InteractiveToken:
@@ -958,10 +808,15 @@ namespace Microsoft.Win32.TaskScheduler
 				taskLocalOnlyCheck.Enabled = editable && (task == null || v2);
 			}
 
+			taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
+			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
+			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
+
 			string user = td == null ? null : td.Principal.ToString();
 			if (string.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
+			onAssignment = prevOnAssignment;
 		}
 
 		private class ComboItem
@@ -1026,13 +881,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return;
 
 			if (tabControl.SelectedTab == historyTab)
-			{
-				historyTab_Intialize();
-			}
-			else
-			{
-				CancelHistoryBackgroundWorker();
-			}
+				taskHistoryControl1.Activate(this.task);
 		}
 
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
@@ -1141,7 +990,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
 		{
-			taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked;
+			taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked && !(flagExecutorIsGroup | flagExecutorIsServiceAccount);
 			taskLocalOnlyCheck_CheckedChanged(sender, e);
 		}
 

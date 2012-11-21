@@ -1865,8 +1865,8 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 					{
 						v2Principal.GroupId = null;
-						if (value.Contains(@"\") && !value.Contains(@"\\"))
-							value = value.Replace(@"\", @"\\");
+						//if (value.Contains(@"\") && !value.Contains(@"\\"))
+						//	value = value.Replace(@"\", @"\\");
 					}
 					v2Principal.UserId = value;
 				}

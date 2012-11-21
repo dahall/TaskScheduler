@@ -482,6 +482,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string LoadingPrompt {
+            get {
+                return ResourceManager.GetString("LoadingPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Local Machine.
         /// </summary>
         internal static string LocalMachine {
@@ -658,6 +667,42 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failure.
+        /// </summary>
+        internal static string TaskEventStatusFailure {
+            get {
+                return ResourceManager.GetString("TaskEventStatusFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Still running.
+        /// </summary>
+        internal static string TaskEventStatusStillRunning {
+            get {
+                return ResourceManager.GetString("TaskEventStatusStillRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string TaskEventStatusSuccess {
+            get {
+                return ResourceManager.GetString("TaskEventStatusSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminated.
+        /// </summary>
+        internal static string TaskEventStatusTerminated {
+            get {
+                return ResourceManager.GetString("TaskEventStatusTerminated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not start a new instance.
         /// </summary>
         internal static string TaskInstancesIgnoreNew {
@@ -816,6 +861,24 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string TriggerTypeRegistration {
             get {
                 return ResourceManager.GetString("TriggerTypeRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On connection to a remote user session.
+        /// </summary>
+        internal static string TriggerTypeRemoteConnect {
+            get {
+                return ResourceManager.GetString("TriggerTypeRemoteConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On disconnect from a remote user session.
+        /// </summary>
+        internal static string TriggerTypeRemoteDisconnect {
+            get {
+                return ResourceManager.GetString("TriggerTypeRemoteDisconnect", resourceCulture);
             }
         }
         

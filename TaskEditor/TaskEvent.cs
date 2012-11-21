@@ -7,7 +7,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Historical event information for a task.
 	/// </summary>
-	public sealed class TaskEvent
+	public sealed class TaskEvent : IComparable<TaskEvent>
 	{
 		internal TaskEvent(EventRecord rec)
 		{
@@ -22,6 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Level = rec.LevelDisplayName;
 			this.UserId = rec.UserId;
 			this.ProcessId = rec.ProcessId;
+			this.TaskPath = rec.Properties.Count > 0 ? rec.Properties[0].Value.ToString() : null;
 		}
 
 		/// <summary>
@@ -89,6 +90,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the task path.
+		/// </summary>
+		public string TaskPath
+		{
+			get; internal set;
+		}
+
+		/// <summary>
 		/// Gets the time created.
 		/// </summary>
 		public DateTime? TimeCreated
@@ -120,7 +129,26 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString()
 		{
-			return TaskCategory;
+			return EventRecord.FormatDescription();
+		}
+
+		/// <summary>
+		/// Compares the current object with another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.Zero This object is equal to other. Greater than zero This object is greater than other.
+		/// </returns>
+		public int CompareTo(TaskEvent other)
+		{
+			int i = this.TaskPath.CompareTo(other.TaskPath);
+			if (i == 0)
+			{
+				i = this.ActivityId.ToString().CompareTo(other.ActivityId.ToString());
+				if (i == 0)
+					i = Convert.ToInt32(this.RecordId - other.RecordId);
+			}
+			return i;
 		}
 	}
 
@@ -250,8 +278,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Initializes a new instance of the <see cref="TaskEventLog"/> class that looks at all task events from a specified time.
 		/// </summary>
 		/// <param name="startTime">The start time.</param>
+		/// <param name="taskName">Name of the task.</param>
 		/// <param name="machineName">Name of the machine (optional).</param>
-		public TaskEventLog(DateTime startTime, string machineName = null)
+		public TaskEventLog(DateTime startTime, string taskName = null, string machineName = null)
 		{
 			if (System.Environment.OSVersion.Version.Major < 6)
 				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
@@ -268,9 +297,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			sb.Append(") and TimeCreated[@SystemTime>='");
 			sb.Append(System.Xml.XmlConvert.ToString(startTime, System.Xml.XmlDateTimeSerializationMode.RoundtripKind));
-			sb.Append("']]]");
+			sb.Append("']]");
+			if (!string.IsNullOrEmpty(taskName))
+				sb.AppendFormat("and EventData[Data[@Name=\"TaskName\"]=\"{0}\"]", taskName);
+			sb.Append("]");
 
-			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, sb.ToString()) { ReverseDirection = true };
+			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, sb.ToString()) { ReverseDirection = false };
 			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
 				q.Session = new EventLogSession(machineName);
 		}
@@ -297,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 						log.Seek(System.IO.SeekOrigin.Begin, l);
 						foundLast = (log.ReadEvent() != null);
 					}
-					return foundLast ? l : l - 1L;
+					return foundLast ? l + 1L : l;
 				}
 			}
 		}
