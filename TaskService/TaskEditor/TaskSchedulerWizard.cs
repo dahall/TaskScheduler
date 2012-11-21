@@ -589,8 +589,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void changePrincipalButton_Click(object sender, EventArgs e)
 		{
-			string acct = String.Empty;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, TaskService.TargetServer, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount))
+			string acct = String.Empty, sid;
+			if (!NativeMethods.AccountUtils.SelectAccount(this, TaskService.TargetServer, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
 				return;
 
 			if (flagExecutorIsServiceAccount)

@@ -372,9 +372,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void logonChgUserBtn_Click(object sender, EventArgs e)
 		{
-			string acct = String.Empty;
+			string acct = String.Empty, sid;
 			bool isGroup, isService;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, null, ref acct, out isGroup, out isService))
+			if (!NativeMethods.AccountUtils.SelectAccount(this, null, ref acct, out isGroup, out isService, out sid))
 				return;
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
 		}

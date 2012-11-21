@@ -257,6 +257,11 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
+				// Look at some events
+				CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(DateTime.Now.Subtract(TimeSpan.FromDays(1)));
+				foreach (var item in log)
+					output.WriteLine("Task '{0}'; ActivityID:{1}; Start:{2}; End:{3}; Res:{4}; Trig:{5}.", item.TaskName, item.ActivityId, item.RunStart, item.RunEnd, item.RunResult, item.TriggeredBy);
+
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();

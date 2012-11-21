@@ -93,6 +93,7 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlProcessing.cs" />
+    <Compile Include="CorrelatedTaskEvent.cs" />
     <Compile Include="CredentialsDialog.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -148,6 +149,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskEvent.cs" />
+    <Compile Include="TaskHistoryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskHistoryControl.Designer.cs">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -292,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskHistoryControl.resx">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskListView.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>

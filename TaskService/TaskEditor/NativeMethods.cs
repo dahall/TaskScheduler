@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CubicOrange.Windows.Forms.ActiveDirectory;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
+using System.Collections;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -22,37 +24,39 @@ namespace Microsoft.Win32.TaskScheduler
 				return principal.IsInRole(0x220);
 			}
 
-			public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService)
+			public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService, out string sid)
 			{
-				CubicOrange.Windows.Forms.ActiveDirectory.DirectoryObjectPickerDialog dlg = new CubicOrange.Windows.Forms.ActiveDirectory.DirectoryObjectPickerDialog();
+				DirectoryObjectPickerDialog dlg = new DirectoryObjectPickerDialog();
 				dlg.TargetComputer = targetComputerName;
+				dlg.AllowedObjectTypes = ObjectTypes.BuiltInGroups | ObjectTypes.Groups | ObjectTypes.Users | ObjectTypes.WellKnownPrincipals;
+				dlg.AttributesToFetch.Add("objectSid");
+				dlg.MultiSelect = false;
+				dlg.SkipDomainControllerCheck = true;
 				if (dlg.ShowDialog(parent) == System.Windows.Forms.DialogResult.OK)
 				{
 					if (dlg.SelectedObject != null)
 					{
-						acctName = dlg.SelectedObject.Name;
+						try
+						{
+							if (!String.IsNullOrEmpty(dlg.SelectedObject.Upn))
+								acctName = NameTranslator.TranslateUpnToDownLevel(dlg.SelectedObject.Upn);
+							else
+								acctName = dlg.SelectedObject.Name;
+						}
+						catch
+						{
+							acctName = dlg.SelectedObject.Name;
+						}
+						sid = AttrToString(dlg.SelectedObject.FetchedAttributes[0]);
 						isGroup = dlg.SelectedObject.SchemaClassName.Equals("Group", StringComparison.OrdinalIgnoreCase);
 						isService = NativeMethods.AccountUtils.UserIsServiceAccount(acctName);
 						return true;
 					}
 				}
 				isGroup = isService = false;
+				sid = null;
 				return false;
 			}
-
-			/*public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, ref bool isGroup, ref bool isService)
-			{
-				NativeMethods.ObjectPicker dlg = new NativeMethods.ObjectPicker();
-				dlg.TargetComputer = targetComputerName;
-				if (dlg.ShowDialog(parent) == System.Windows.Forms.DialogResult.OK && dlg.Picks.Length > 0)
-				{
-					acctName = dlg.Picks[0].ObjectName;
-					isGroup = NativeMethods.ObjectPickerTypes.Group == dlg.Picks[0].ObjectType;
-					isService = NativeMethods.AccountUtils.UserIsServiceAccount(acctName);
-					return true;
-				}
-				return false;
-			}*/
 
 			public static bool UserIsServiceAccount(string userName)
 			{
@@ -76,12 +80,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			[DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-			internal static extern bool ConvertStringSidToSid([In, MarshalAs(UnmanagedType.LPTStr)] string pStringSid, ref IntPtr sid);
+			private static extern bool ConvertStringSidToSid([In, MarshalAs(UnmanagedType.LPTStr)] string pStringSid, ref IntPtr sid);
 
 			[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-			internal static extern bool LookupAccountSid(string systemName, byte[] accountSid, StringBuilder accountName, ref int nameLength, StringBuilder domainName, ref int domainLength, out int accountType);
+			private static extern bool LookupAccountSid(string systemName, byte[] accountSid, StringBuilder accountName, ref int nameLength, StringBuilder domainName, ref int domainLength, out int accountType);
 
-			internal static uint LookupAccountSid(SecurityIdentifier sid, out string accountName, out string domainName, out int use)
+			[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+			private static extern bool LookupAccountSid([In, MarshalAs(UnmanagedType.LPTStr)] string systemName, IntPtr sid, StringBuilder name, ref int cchName, StringBuilder referencedDomainName, ref int cchReferencedDomainName, out int use);
+
+			private static uint LookupAccountSid(SecurityIdentifier sid, out string accountName, out string domainName, out int use)
 			{
 				uint num = 0;
 				byte[] binaryForm = new byte[sid.BinaryLength];
@@ -97,6 +104,45 @@ namespace Microsoft.Win32.TaskScheduler
 				accountName = builder.ToString().TrimEnd(new char[] { '$' });
 				domainName = builder2.ToString();
 				return num;
+			}
+
+			private static string AttrToString(object attr)
+			{
+				object multivaluedAttribute = attr;
+				if (!(multivaluedAttribute is IEnumerable) || multivaluedAttribute is byte[] || multivaluedAttribute is string)
+					multivaluedAttribute = new Object[1] { multivaluedAttribute };
+
+				System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
+
+				foreach (object attribute in (IEnumerable)multivaluedAttribute)
+				{
+					if (attribute == null)
+					{
+						list.Add(string.Empty);
+					}
+					else if (attribute is byte[])
+					{
+						byte[] bytes = (byte[])attribute;
+						list.Add(BytesToString(bytes));
+					}
+					else
+					{
+						list.Add(attribute.ToString());
+					}
+				}
+
+				return string.Join("|", list.ToArray());
+			}
+
+			private static string BytesToString(byte[] bytes)
+			{
+				try { return new Guid(bytes).ToString("D"); }
+				catch { }
+
+				try { return new SecurityIdentifier(bytes, 0).ToString(); }
+				catch { }
+
+				return "0x" + BitConverter.ToString(bytes).Replace('-', ' ');
 			}
 
 			private static bool FindUserFromSid(IntPtr incomingSid, string computerName, ref string userName)
@@ -189,9 +235,6 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				return flag;
 			}
-
-			[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-			private static extern bool LookupAccountSid([In, MarshalAs(UnmanagedType.LPTStr)] string systemName, IntPtr sid, StringBuilder name, ref int cchName, StringBuilder referencedDomainName, ref int cchReferencedDomainName, out int use);
 		}
 	}
 }

@@ -76,9 +76,9 @@ namespace TestTaskService
 					break;
 			}
 			DateTime st = DateTime.Now.Subtract(span);
-			TaskEventLog log = new TaskEventLog(st);
+			CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st);
 			foreach (var t in log)
-				list.Add(new ListViewItem(new string[] { t.EventRecord.TaskDisplayName, "", "", "", "" }) { Tag = t });
+				list.Add(new ListViewItem(new string[] { t.TaskName, "", "", "", "" }) { Tag = t });
 			e.Result = list.ToArray();
 		}
 
