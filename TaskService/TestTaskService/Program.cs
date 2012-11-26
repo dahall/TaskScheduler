@@ -252,16 +252,50 @@ namespace TestTaskService
 			}
 		}
 
+		static void FindTaskWithComAction(System.IO.TextWriter output, TaskFolder tf)
+		{
+			foreach (Task t in tf.Tasks)
+			{
+				foreach (Microsoft.Win32.TaskScheduler.Action ac in t.Definition.Actions)
+				{
+					ComHandlerAction a = ac as ComHandlerAction;
+					if (a == null)
+						continue;
+					string name = null, model = null, path = null, asm = null;
+					try
+					{
+						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("CLSID\\" + a.ClassId.ToString("B"));
+						if (k == null)
+							k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("Wow6432Node\\CLSID\\" + a.ClassId.ToString("B"));
+						name = k.GetValue(null, "").ToString();
+						Microsoft.Win32.RegistryKey sk = k.OpenSubKey("InprocServer32");
+						path = sk.GetValue(null, "").ToString();
+						if (!string.IsNullOrEmpty(path))
+						{
+							try
+							{
+								System.Reflection.AssemblyName.GetAssemblyName(path);
+								asm = "Yes";
+							}
+							catch { asm = "No"; }
+						}
+						model = sk.GetValue("ThreadingModel", "").ToString();
+					}
+					catch { }
+					output.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}", t.Path, t.Name, a.ClassId, a.Data, name, path, model, asm);
+				}
+			}
+			foreach (var f in tf.SubFolders)
+			{
+				FindTaskWithComAction(output, f);
+			}
+		}
+
 		internal static void ShortTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			// Get the service on the local machine
 			try
 			{
-				// Look at some events
-				CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(DateTime.Now.Subtract(TimeSpan.FromDays(1)));
-				foreach (var item in log)
-					output.WriteLine("Task '{0}'; ActivityID:{1}; Start:{2}; End:{3}; Res:{4}; Trig:{5}.", item.TaskName, item.ActivityId, item.RunStart, item.RunEnd, item.RunResult, item.TriggeredBy);
-
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();

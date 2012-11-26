@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1197,9 +1197,6 @@
   <data name="monthlyOnRadio.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>在:</value>
-  </data>
   <data name="&gt;&gt;monthlyOnRadio.Name" xml:space="preserve">
     <value>monthlyOnRadio</value>
   </data>
@@ -1227,9 +1224,6 @@
   <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>日:</value>
-  </data>
   <data name="&gt;&gt;monthlyDaysRadio.Name" xml:space="preserve">
     <value>monthlyDaysRadio</value>
   </data>
@@ -1256,9 +1250,6 @@
   </data>
   <data name="monthlyMonthsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>月:</value>
   </data>
   <data name="&gt;&gt;monthlyMonthsLabel.Name" xml:space="preserve">
     <value>monthlyMonthsLabel</value>
@@ -3063,5 +3054,77 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.ZOrder">
+    <value></value>
   </data>
 </root>

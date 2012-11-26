@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1826,5 +1826,80 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="triggerTypeCombo.Items">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items1">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items2">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items3">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items4">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items5">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items6">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items7">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items8">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items9">
+    <value></value>
+  </data>
+  <data name="dailyDaysLabel.Text">
+    <value></value>
+  </data>
+  <data name="dailyRecurLabel.Text">
+    <value></value>
+  </data>
+  <data name="weeklySunCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyMonCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyTueCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyWedCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyThuCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyFriCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklySatCheck.Text">
+    <value></value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Text">
+    <value></value>
+  </data>
+  <data name="weeklyRecurLabel.Text">
+    <value></value>
+  </data>
+  <data name="monthlyDaysRadio.Text">
+    <value></value>
+  </data>
+  <data name="monthlyMonthsLabel.Text">
+    <value></value>
+  </data>
+  <data name="label9.Text">
+    <value></value>
+  </data>
+  <data name="monthlyOnRadio.Text">
+    <value></value>
   </data>
 </root>

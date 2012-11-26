@@ -136,27 +136,6 @@
   <data name="DOWAllDays" xml:space="preserve">
     <value>tutti i giorni</value>
   </data>
-  <data name="DOWFriday" xml:space="preserve">
-    <value>venerdì</value>
-  </data>
-  <data name="DOWMonday" xml:space="preserve">
-    <value>lunedì</value>
-  </data>
-  <data name="DOWSaturday" xml:space="preserve">
-    <value>sabato</value>
-  </data>
-  <data name="DOWSunday" xml:space="preserve">
-    <value>domenica</value>
-  </data>
-  <data name="DOWThursday" xml:space="preserve">
-    <value>giovedì</value>
-  </data>
-  <data name="DOWTuesday" xml:space="preserve">
-    <value>martedì</value>
-  </data>
-  <data name="DOWWednesday" xml:space="preserve">
-    <value>mercoledì</value>
-  </data>
   <data name="EmailAction" xml:space="preserve">
     <value>{1} {0}</value>
     <comment>0 = Subject; 1 = To; 2 = Cc, 3 = Bcc, 4 = From, 5 = ReplyTo, 6 = Body, 7 = Server, 8 = Id</comment>
@@ -173,42 +152,6 @@
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>tutti i mesi</value>
-  </data>
-  <data name="MOYApril" xml:space="preserve">
-    <value>aprile</value>
-  </data>
-  <data name="MOYAugust" xml:space="preserve">
-    <value>agosto</value>
-  </data>
-  <data name="MOYDecember" xml:space="preserve">
-    <value>dicembre</value>
-  </data>
-  <data name="MOYFebruary" xml:space="preserve">
-    <value>febbraio</value>
-  </data>
-  <data name="MOYJanuary" xml:space="preserve">
-    <value>gennaio</value>
-  </data>
-  <data name="MOYJuly" xml:space="preserve">
-    <value>luglio</value>
-  </data>
-  <data name="MOYJune" xml:space="preserve">
-    <value>giugno</value>
-  </data>
-  <data name="MOYMarch" xml:space="preserve">
-    <value>marzo</value>
-  </data>
-  <data name="MOYMay" xml:space="preserve">
-    <value>maggio</value>
-  </data>
-  <data name="MOYNovember" xml:space="preserve">
-    <value>novembre</value>
-  </data>
-  <data name="MOYOctober" xml:space="preserve">
-    <value>ottobre</value>
-  </data>
-  <data name="MOYSeptember" xml:space="preserve">
-    <value>settembre</value>
   </data>
   <data name="MultipleActions" xml:space="preserve">
     <value>Azioni multiple definite</value>
@@ -240,18 +183,6 @@
   </data>
   <data name="TriggerAnyUser" xml:space="preserve">
     <value>Qualsiasi utente</value>
-  </data>
-  <data name="TriggerBase1" xml:space="preserve">
-    <value>Dopo aver attivato, ripetere ogni</value>
-  </data>
-  <data name="TriggerBase2" xml:space="preserve">
-    <value>indefinitamente</value>
-  </data>
-  <data name="TriggerBase3" xml:space="preserve">
-    <value>per una durata di</value>
-  </data>
-  <data name="TriggerBase4" xml:space="preserve">
-    <value>Trigger scade</value>
   </data>
   <data name="TriggerBoot1" xml:space="preserve">
     <value>All'avvio del sistema</value>
@@ -387,5 +318,20 @@
   </data>
   <data name="WWThirdWeek" xml:space="preserve">
     <value>terza</value>
+  </data>
+  <data name="HyphenSeparator">
+    <value> - </value>
+  </data>
+  <data name="TriggerDuration0">
+    <value> indefinitamente</value>
+  </data>
+  <data name="TriggerDurationNot0">
+    <value> per una durata di {0}</value>
+  </data>
+  <data name="TriggerEndBoundary">
+    <value> Attivazione scade {0:G}.</value>
+  </data>
+  <data name="TriggerRepetition">
+    <value> Dopo aver attivato, ripetere ogni {0} {1}.</value>
   </data>
 </root>
