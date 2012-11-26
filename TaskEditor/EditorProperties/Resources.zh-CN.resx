@@ -316,4 +316,106 @@
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>對於所選擇的選項，為指定的用戶必須提供密碼</value>
   </data>
+  <data name="TaskCompatibility">
+    <value>AT service|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+  </data>
+  <data name="TimeSpanNotStarted">
+    <value>未开始</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal">
+    <value>以上正常</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal">
+    <value>下面正常</value>
+  </data>
+  <data name="ProcessPriorityHigh">
+    <value>高</value>
+  </data>
+  <data name="ProcessPriorityIdle">
+    <value>闲置</value>
+  </data>
+  <data name="ProcessPriorityNormal">
+    <value>正常</value>
+  </data>
+  <data name="ProcessPriorityRealTime">
+    <value>实时的</value>
+  </data>
+  <data name="SIDTypeDefault">
+    <value>默认</value>
+  </data>
+  <data name="SIDTypeNone">
+    <value>没有</value>
+  </data>
+  <data name="SIDTypeUnrestricted">
+    <value>无限制的</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid">
+    <value>必须设置为“常规”选项卡上的“网络服务”或“本地服务”的过程SID类型设置为“无限制”添加“选项卡上的用户帐户。您必须更改SID类型，或者设置用户的有效帐户。</value>
+  </data>
+  <data name="UseUnifiedResetQuestion">
+    <value>设置此属性将禁用一些其他属性。你仍然要继续吗？</value>
+  </data>
+  <data name="ActionTypeComHandler">
+    <value>自定义处理程序</value>
+  </data>
+  <data name="ActionTypeExecute">
+    <value>启动程序</value>
+  </data>
+  <data name="ActionTypeSendEmail">
+    <value>发送电\u200b\u200b子邮件</value>
+  </data>
+  <data name="ActionTypeShowMessage">
+    <value>显示一条消息，</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew">
+    <value>不启动一个新的实例</value>
+  </data>
+  <data name="TaskInstancesParallel">
+    <value>在平行运行的一个新实例</value>
+  </data>
+  <data name="TaskInstancesQueue">
+    <value>队列中的一个新实例</value>
+  </data>
+  <data name="TaskInstancesStopExisting">
+    <value>停止现有的实例</value>
+  </data>
+  <data name="Error_InvalidSddlFormat">
+    <value>，SDDL必须在定义的格式在http://goo.gl/6au0v</value>
+  </data>
+  <data name="Error_InvalidUriFormat">
+    <value>uri是不正确的格式</value>
+  </data>
+  <data name="Error_InvalidVersionFormat">
+    <value>的格式为major.minor版本必须是在建设[修订]。</value>
+  </data>
+  <data name="EventDetailHeader">
+    <value>事件{0}的TaskScheduler</value>
+  </data>
+  <data name="HistoryHeader">
+    <value>的事件数：{0}</value>
+  </data>
+  <data name="EventPropertiesDialogTitle">
+    <value>事件属性 - 事件{0}的TaskScheduler</value>
+  </data>
+  <data name="TaskEventStatusFailure">
+    <value>失败</value>
+  </data>
+  <data name="TaskEventStatusStillRunning">
+    <value>仍在运行</value>
+  </data>
+  <data name="TaskEventStatusSuccess">
+    <value>成功</value>
+  </data>
+  <data name="TaskEventStatusTerminated">
+    <value>终止</value>
+  </data>
+  <data name="TriggerTypeRemoteConnect">
+    <value>在连接到远程用户会话</value>
+  </data>
+  <data name="TriggerTypeRemoteDisconnect">
+    <value>从远程用户会话断开</value>
+  </data>
+  <data name="LoadingPrompt">
+    <value>载入中...</value>
+  </data>
 </root>

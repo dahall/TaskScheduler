@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1761,5 +1761,725 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dailyStartTimePicker.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyStartTimePicker.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyStartTimePicker.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyStartTimePicker.ZOrder">
+    <value></value>
+  </data>
+  <data name="label3.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label3.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label3.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label3.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurNumUpDn.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurNumUpDn.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurNumUpDn.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurNumUpDn.ZOrder">
+    <value></value>
+  </data>
+  <data name="dailyDaysLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyDaysLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyDaysLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyDaysLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyDaysLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="dailyRecurLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;dailyRecurLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyStartTimePicker.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyStartTimePicker.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyStartTimePicker.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyStartTimePicker.ZOrder">
+    <value></value>
+  </data>
+  <data name="label4.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label4.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label4.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label4.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklySunCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySunCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySunCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySunCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySunCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyMonCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyMonCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyMonCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyMonCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyMonCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyTueCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTueCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTueCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTueCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyTueCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyWedCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyWedCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyWedCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyWedCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyWedCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyThuCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyThuCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyThuCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyThuCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyThuCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyFriCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyFriCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyFriCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyFriCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyFriCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklySatCheck.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySatCheck.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySatCheck.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySatCheck.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklySatCheck.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurNumUpDn.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurNumUpDn.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurNumUpDn.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurNumUpDn.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyOnWeeksLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyOnWeeksLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyOnWeeksLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyOnWeeksLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="weeklyRecurLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;weeklyRecurLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyStartTimePicker.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyStartTimePicker.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyStartTimePicker.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;monthlyStartTimePicker.ZOrder">
+    <value></value>
+  </data>
+  <data name="label7.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label7.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label7.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label7.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder">
+    <value></value>
+  </data>
+  <data name="execProgBrowseBtn.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgBrowseBtn.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirText.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgText.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgText.ZOrder">
+    <value></value>
+  </data>
+  <data name="execDirLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execDirLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="execArgLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execArgLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="execProgLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;execProgLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailSMTPLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailAttachmentLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailTextLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailSubjectLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailToLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromText.ZOrder">
+    <value></value>
+  </data>
+  <data name="emailFromLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgText.ZOrder">
+    <value></value>
+  </data>
+  <data name="msgMsgLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgMsgLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleText.ZOrder">
+    <value></value>
+  </data>
+  <data name="msgTitleLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgTitleLabel.ZOrder">
+    <value></value>
+  </data>
+  <data name="msgIntroLabel.Text">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Name">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Type">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.Parent">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;msgIntroLabel.ZOrder">
+    <value></value>
   </data>
 </root>

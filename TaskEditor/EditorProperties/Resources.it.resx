@@ -316,4 +316,106 @@ Azione: {3}</value>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>Per le opzioni scelte, una password per l'utente specificato deve essere fornita.</value>
   </data>
+  <data name="TaskCompatibility">
+    <value>AT servizio|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+  </data>
+  <data name="TimeSpanNotStarted">
+    <value>Non avviato</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal">
+    <value>Sopra il normale</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal">
+    <value>Di sotto della norma</value>
+  </data>
+  <data name="ProcessPriorityHigh">
+    <value>Alto</value>
+  </data>
+  <data name="ProcessPriorityIdle">
+    <value>Minimo</value>
+  </data>
+  <data name="ProcessPriorityNormal">
+    <value>Normale</value>
+  </data>
+  <data name="ProcessPriorityRealTime">
+    <value>Tempo reale</value>
+  </data>
+  <data name="SIDTypeDefault">
+    <value>Difetto</value>
+  </data>
+  <data name="SIDTypeNone">
+    <value>Nessuno</value>
+  </data>
+  <data name="SIDTypeUnrestricted">
+    <value>Libero</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid">
+    <value>L&amp;#39;account utente nella scheda generale deve essere impostata su &amp;#39;servizio di rete&amp;#39; o &amp;#39;servizio locale&amp;#39; quando il tipo di processo di sid è impostato su &amp;#39;senza restrizioni&amp;#39; nella scheda aggiunte. è necessario modificare il tipo di sid o impostare l&amp;#39;utente a uno degli account validi.</value>
+  </data>
+  <data name="UseUnifiedResetQuestion">
+    <value>L&amp;#39;impostazione di questa proprietà consente di disattivare una serie di altre proprietà. Ti piace ancora di procedere?</value>
+  </data>
+  <data name="ActionTypeComHandler">
+    <value>Gestore personalizzato</value>
+  </data>
+  <data name="ActionTypeExecute">
+    <value>Avviare un programma</value>
+  </data>
+  <data name="ActionTypeSendEmail">
+    <value>Inviare una e-mail</value>
+  </data>
+  <data name="ActionTypeShowMessage">
+    <value>Visualizzare un messaggio</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew">
+    <value>Non avviare una nuova istanza</value>
+  </data>
+  <data name="TaskInstancesParallel">
+    <value>Eseguire una nuova istanza in parallelo</value>
+  </data>
+  <data name="TaskInstancesQueue">
+    <value>Coda di una nuova istanza</value>
+  </data>
+  <data name="TaskInstancesStopExisting">
+    <value>Arrestare l&amp;#39;istanza esistente</value>
+  </data>
+  <data name="Error_InvalidSddlFormat">
+    <value>SDDL si deve essere in formato definito a http://goo.gl/6au0v</value>
+  </data>
+  <data name="Error_InvalidUriFormat">
+    <value>URI non è in un formato corretto</value>
+  </data>
+  <data name="Error_InvalidVersionFormat">
+    <value>Versione deve essere nel formato major.minor[.costruire[.revisione]].</value>
+  </data>
+  <data name="EventDetailHeader">
+    <value>evento {0}, TaskScheduler</value>
+  </data>
+  <data name="HistoryHeader">
+    <value>Conto di eventi: {0}</value>
+  </data>
+  <data name="EventPropertiesDialogTitle">
+    <value>Proprietà di evento - Evento {0}, TaskScheduler</value>
+  </data>
+  <data name="TaskEventStatusFailure">
+    <value>Fallimento</value>
+  </data>
+  <data name="TaskEventStatusStillRunning">
+    <value>Ancora in esecuzione</value>
+  </data>
+  <data name="TaskEventStatusSuccess">
+    <value>Successo</value>
+  </data>
+  <data name="TaskEventStatusTerminated">
+    <value>Terminato</value>
+  </data>
+  <data name="TriggerTypeRemoteConnect">
+    <value>A connettersi da una sessione utente remoto</value>
+  </data>
+  <data name="TriggerTypeRemoteDisconnect">
+    <value>A disconnettersi da una sessione utente remoto</value>
+  </data>
+  <data name="LoadingPrompt">
+    <value>Loading ...</value>
+  </data>
 </root>
