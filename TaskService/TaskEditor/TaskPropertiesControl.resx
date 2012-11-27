@@ -258,6 +258,78 @@
   <data name="taskNameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>211, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>55</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 400</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
+    <value>columnHeader2</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
+    <value>columnHeader4</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
+    <value>columnHeader5</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
+    <value>errorProvider</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Name" xml:space="preserve">
+    <value>helpProvider</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TaskPropertiesControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="taskNameText.IconPadding" type="System.Int32, mscorlib">
+    <value>-18</value>
+  </data>
   <data name="taskNameText.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 7</value>
   </data>
@@ -2436,75 +2508,6 @@
   <data name="taskRegSDDLText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>211, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>55</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 400</value>
-  </data>
-  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
-    <value>columnHeader1</value>
-  </data>
-  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
-    <value>columnHeader2</value>
-  </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;helpProvider.Name" xml:space="preserve">
-    <value>helpProvider</value>
-  </data>
-  <data name="&gt;&gt;helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TaskPropertiesControl</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="taskRegSDDLText.IconPadding" type="System.Int32, mscorlib">
     <value>-18</value>
   </data>
@@ -2827,7 +2830,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.33367, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -3316,7 +3319,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.33367, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3459,6 +3462,9 @@
   <data name="taskHistoryControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 5</value>
   </data>
+  <data name="taskHistoryControl1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskHistoryControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>602, 360</value>
   </data>
@@ -3469,7 +3475,7 @@
     <value>taskHistoryControl1</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.33367, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Parent" xml:space="preserve">
     <value>historyTab</value>

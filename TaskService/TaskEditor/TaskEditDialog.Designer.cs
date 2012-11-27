@@ -28,46 +28,46 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
-            this.taskPropertiesControl1 = new Microsoft.Win32.TaskScheduler.TaskPropertiesControl();
-            this.cancelBtn = new System.Windows.Forms.Button();
-            this.okBtn = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // taskPropertiesControl1
-            // 
-            resources.ApplyResources(this.taskPropertiesControl1, "taskPropertiesControl1");
-            this.taskPropertiesControl1.MinimumSize = new System.Drawing.Size(544, 325);
-            this.taskPropertiesControl1.Name = "taskPropertiesControl1";
-            // 
-            // cancelBtn
-            // 
-            resources.ApplyResources(this.cancelBtn, "cancelBtn");
-            this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.UseVisualStyleBackColor = true;
-            // 
-            // okBtn
-            // 
-            resources.ApplyResources(this.okBtn, "okBtn");
-            this.okBtn.Name = "okBtn";
-            this.okBtn.UseVisualStyleBackColor = true;
-            this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
-            // 
-            // TaskEditDialog
-            // 
-            this.AcceptButton = this.okBtn;
-            resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancelBtn;
-            this.Controls.Add(this.cancelBtn);
-            this.Controls.Add(this.okBtn);
-            this.Controls.Add(this.taskPropertiesControl1);
-            this.MaximizeBox = false;
-            this.Name = "TaskEditDialog";
-            this.ShowIcon = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
+			this.taskPropertiesControl1 = new Microsoft.Win32.TaskScheduler.TaskPropertiesControl();
+			this.cancelBtn = new System.Windows.Forms.Button();
+			this.okBtn = new System.Windows.Forms.Button();
+			this.SuspendLayout();
+			// 
+			// taskPropertiesControl1
+			// 
+			resources.ApplyResources(this.taskPropertiesControl1, "taskPropertiesControl1");
+			this.taskPropertiesControl1.Name = "taskPropertiesControl1";
+			this.taskPropertiesControl1.ComponentError += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs>(this.taskPropertiesControl1_ComponentError);
+			// 
+			// cancelBtn
+			// 
+			resources.ApplyResources(this.cancelBtn, "cancelBtn");
+			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.cancelBtn.Name = "cancelBtn";
+			this.cancelBtn.UseVisualStyleBackColor = true;
+			// 
+			// okBtn
+			// 
+			resources.ApplyResources(this.okBtn, "okBtn");
+			this.okBtn.Name = "okBtn";
+			this.okBtn.UseVisualStyleBackColor = true;
+			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
+			// 
+			// TaskEditDialog
+			// 
+			this.AcceptButton = this.okBtn;
+			resources.ApplyResources(this, "$this");
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.cancelBtn;
+			this.Controls.Add(this.cancelBtn);
+			this.Controls.Add(this.okBtn);
+			this.Controls.Add(this.taskPropertiesControl1);
+			this.MaximizeBox = false;
+			this.Name = "TaskEditDialog";
+			this.ShowIcon = false;
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+			this.ResumeLayout(false);
 
 		}
 

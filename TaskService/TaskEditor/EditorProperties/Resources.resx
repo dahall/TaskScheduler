@@ -513,4 +513,7 @@ Action: {3}</value>
   <data name="LoadingPrompt" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value>Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name.</value>
+  </data>
 </root>

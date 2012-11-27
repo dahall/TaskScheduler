@@ -117,113 +117,116 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskPropertiesControl1.Name" xml:space="preserve">
-    <value>taskPropertiesControl1</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="taskPropertiesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+  <data name="taskPropertiesControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="taskPropertiesControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="taskPropertiesControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="taskPropertiesControl1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>544, 325</value>
+  </data>
+  <data name="taskPropertiesControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>625, 433</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskPropertiesControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="&gt;&gt;taskPropertiesControl1.Name" xml:space="preserve">
+    <value>taskPropertiesControl1</value>
   </data>
-  <data name="taskPropertiesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 433</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TaskEditDialog</value>
+  <data name="&gt;&gt;taskPropertiesControl1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34220, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>651, 493</value>
-  </data>
-  <data name="taskPropertiesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="taskPropertiesControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="taskPropertiesControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="taskPropertiesControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="&gt;&gt;taskPropertiesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.21005, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;taskPropertiesControl1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
-    <value>cancelBtn</value>
-  </data>
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="cancelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 453</value>
+  </data>
+  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
+    <value>cancelBtn</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 453</value>
-  </data>
-  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
+  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>455, 453</value>
   </data>
+  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
     <value>okBtn</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>651, 493</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -231,10 +234,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Task Properties</value>
   </data>
-  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TaskEditDialog</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

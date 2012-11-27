@@ -315,6 +315,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name..
+        /// </summary>
+        internal static string Error_InvalidNameFormat {
+            get {
+                return ResourceManager.GetString("Error_InvalidNameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SDDL must be in format defined at http://goo.gl/6au0V.
         /// </summary>
         internal static string Error_InvalidSddlFormat {

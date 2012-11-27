@@ -195,6 +195,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!titleSet)
 				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
+			this.okBtn.Enabled = false;
 			taskPropertiesControl1.Initialize(service, td);
 		}
 
@@ -283,6 +284,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskEditDialog));
 			return base.Text != resources.GetString("$this.Text");
+		}
+
+		private void taskPropertiesControl1_ComponentError(object sender, TaskPropertiesControl.ComponentErrorEventArgs e)
+		{
+			okBtn.Enabled = (e == TaskPropertiesControl.ComponentErrorEventArgs.Empty);
 		}
 
 		private bool ValidateOneTriggerExpires()
