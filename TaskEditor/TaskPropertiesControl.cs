@@ -17,6 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
+		private bool hasError = false;
 		private bool onAssignment = false;
 		private string runTimesTaskName = null;
 		private TaskService service = null;
@@ -90,6 +91,39 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Error thrown within the component.
+		/// </summary>
+		public class ComponentErrorEventArgs : EventArgs
+		{
+			/// <summary>
+			/// Empty arguments signifying that the error has been cleared.
+			/// </summary>
+			public static readonly new ComponentErrorEventArgs Empty = new ComponentErrorEventArgs();
+
+			internal ComponentErrorEventArgs(Exception ex = null, string err = null)
+			{
+				this.ThrownException = ex;
+				this.ErrorText = err;
+			}
+
+			/// <summary>
+			/// Gets the thrown exception on the error. This value may be null.
+			/// </summary>
+			public Exception ThrownException { get; private set; }
+
+			/// <summary>
+			/// Gets the text associated with the error event. This value may be null.
+			/// </summary>
+			public string ErrorText { get; private set; }
+		}
+
+		/// <summary>
+		/// Occurs when a component entry has an error.
+		/// </summary>
+		[Description("Occurs when a component entry has an error."), Category("Behavior")]
+		public event EventHandler<ComponentErrorEventArgs> ComponentError;
+
+		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="TaskPropertiesControl"/> is editable.
 		/// </summary>
 		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
@@ -138,6 +172,25 @@ namespace Microsoft.Win32.TaskScheduler
 
 				// Setup specific controls
 				taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance has error.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this instance has error; otherwise, <c>false</c>.
+		/// </value>
+		[Browsable(false), DefaultValue(false), Description("Indicates whether there is currently an error with one of the components."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool HasError
+		{
+			get
+			{
+				return hasError;
+			}
+			set
+			{
+				hasError = value;
 			}
 		}
 
@@ -469,6 +522,17 @@ namespace Microsoft.Win32.TaskScheduler
 				vals[i] = EditorProperties.Resources.ResourceManager.GetString(preface + vals[i], System.Globalization.CultureInfo.CurrentUICulture);
 			}
 			return string.Join(", ", vals);
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:ComponentError"/> event.
+		/// </summary>
+		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs"/> instance containing the event data.</param>
+		protected virtual void OnComponentError(ComponentErrorEventArgs e)
+		{
+			EventHandler<ComponentErrorEventArgs> handler = ComponentError;
+			if (handler != null)
+				handler(this, e);
 		}
 
 		private void actionDeleteButton_Click(object sender, EventArgs e)
@@ -853,7 +917,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
 			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.HighestSupportedVersion.Minor;
-			switch (td.Settings.Compatibility)
+			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			switch (comp)
 			{
 				case TaskCompatibility.AT:
 					this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
@@ -867,9 +932,9 @@ namespace Microsoft.Win32.TaskScheduler
 					this.taskVersionCombo.SelectedIndex = 0;
 					break;
 				default:
-					for (int i = Math.Min((int)td.LowestSupportedVersion, (int)td.Settings.Compatibility); i <= max; i++)
+					for (int i = Math.Min((int)td.LowestSupportedVersion, (int)comp); i <= max; i++)
 						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
-					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)td.Settings.Compatibility);
+					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)comp);
 					break;
 			}
 			this.taskVersionCombo.EndUpdate();
@@ -998,6 +1063,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment && v2)
 				td.Settings.MultipleInstances = (TaskInstancesPolicy)((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value;
+		}
+
+		private void TaskPropertiesControl_Load(object sender, EventArgs e)
+		{
+			generalTab.SelectNextControl(taskNameText.ReadOnly ? (Control)taskNameText : generalTab, true, true, true, false);
 		}
 
 		private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
@@ -1346,10 +1416,15 @@ namespace Microsoft.Win32.TaskScheduler
 				td.RegistrationInfo.Source = taskRegSourceText.TextLength > 0 ? taskRegSourceText.Text : null;
 		}
 
+		private void taskNameText_Validated(object sender, EventArgs e)
+		{
+
+		}
+
 		private void taskRegURIText_Validated(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.RegistrationInfo.URI = taskRegURIText.TextLength > 0 ? new Uri(taskRegURIText.Text) : null;
+				td.RegistrationInfo.URI = taskRegURIText.TextLength > 0 ? new Uri(taskRegURIText.Text, UriKind.RelativeOrAbsolute) : null;
 		}
 
 		private void taskRegVersionText_Validated(object sender, EventArgs e)
@@ -1383,6 +1458,14 @@ namespace Microsoft.Win32.TaskScheduler
 				td.RegistrationInfo.Documentation = taskRegDocText.TextLength > 0 ? taskRegDocText.Text : null;
 		}
 
+		private void taskNameText_Validating(object sender, CancelEventArgs e)
+		{
+			char[] inv = System.IO.Path.GetInvalidFileNameChars();
+			e.Cancel = !ValidateText(taskNameText,
+				delegate(string s) { return s.Length > 0 && s.IndexOfAny(inv) == -1; },
+				EditorProperties.Resources.Error_InvalidNameFormat);
+		}
+
 		private void taskRegURIText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegURIText, 
@@ -1408,6 +1491,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			bool valid = pred(ctrl.Text);
 			errorProvider.SetError(ctrl, valid ? string.Empty : error);
+			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, error));
+			hasError = valid;
 			return valid;
 		}
 	}

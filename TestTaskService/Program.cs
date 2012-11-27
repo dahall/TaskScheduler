@@ -196,6 +196,8 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
+				DisplayTask(ts, null, true);
+
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
@@ -611,6 +613,7 @@ namespace TestTaskService
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = true;
+			editorForm.ShowAddedPropertiesTab = true;
 			editorForm.ShowRegistrationInfoTab = true;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}

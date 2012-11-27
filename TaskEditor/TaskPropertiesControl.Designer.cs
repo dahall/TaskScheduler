@@ -120,7 +120,6 @@
 			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
 			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
 			this.principalReqPrivilegesLabel = new System.Windows.Forms.Label();
-			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.autoMaintGroup = new System.Windows.Forms.GroupBox();
 			this.taskMaintenanceDeadlineCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskMaintenanceExclusiveCheck = new System.Windows.Forms.CheckBox();
@@ -135,14 +134,15 @@
 			this.taskEnabledCheck = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.runTimesTab = new System.Windows.Forms.TabPage();
-			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
 			this.runTimesErrorLabel = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.historyTab = new System.Windows.Forms.TabPage();
-			this.taskHistoryControl1 = new Microsoft.Win32.TaskScheduler.TaskHistoryControl();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
+			this.taskHistoryControl1 = new Microsoft.Win32.TaskScheduler.TaskHistoryControl();
 			this.tabControl.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.taskSecurityGroupBox.SuspendLayout();
@@ -159,9 +159,9 @@
 			this.secHardGroup.SuspendLayout();
 			this.autoMaintGroup.SuspendLayout();
 			this.runTimesTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -230,9 +230,12 @@
 			// taskNameText
 			// 
 			resources.ApplyResources(this.taskNameText, "taskNameText");
+			this.errorProvider.SetIconPadding(this.taskNameText, ((int)(resources.GetObject("taskNameText.IconPadding"))));
 			this.taskNameText.Name = "taskNameText";
 			this.taskNameText.ReadOnly = true;
 			this.helpProvider.SetShowHelp(this.taskNameText, ((bool)(resources.GetObject("taskNameText.ShowHelp"))));
+			this.taskNameText.Validating += new System.ComponentModel.CancelEventHandler(this.taskNameText_Validating);
+			this.taskNameText.Validated += new System.EventHandler(this.taskNameText_Validated);
 			// 
 			// taskLocationText
 			// 
@@ -329,6 +332,7 @@
 			this.taskPrincipalText.Name = "taskPrincipalText";
 			this.taskPrincipalText.ReadOnly = true;
 			this.helpProvider.SetShowHelp(this.taskPrincipalText, ((bool)(resources.GetObject("taskPrincipalText.ShowHelp"))));
+			this.taskPrincipalText.TabStop = false;
 			// 
 			// changePrincipalButton
 			// 
@@ -928,16 +932,6 @@
 			this.principalReqPrivilegesLabel.Name = "principalReqPrivilegesLabel";
 			this.helpProvider.SetShowHelp(this.principalReqPrivilegesLabel, ((bool)(resources.GetObject("principalReqPrivilegesLabel.ShowHelp"))));
 			// 
-			// principalReqPrivilegesDropDown
-			// 
-			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
-			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
-			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
-			this.helpProvider.SetShowHelp(this.principalReqPrivilegesDropDown, ((bool)(resources.GetObject("principalReqPrivilegesDropDown.ShowHelp"))));
-			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
-			// 
 			// autoMaintGroup
 			// 
 			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
@@ -1049,12 +1043,6 @@
 			this.runTimesTab.Enter += new System.EventHandler(this.runTimesTab_Enter);
 			this.runTimesTab.Leave += new System.EventHandler(this.runTimesTab_Leave);
 			// 
-			// taskRunTimesControl1
-			// 
-			resources.ApplyResources(this.taskRunTimesControl1, "taskRunTimesControl1");
-			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
-			this.helpProvider.SetShowHelp(this.taskRunTimesControl1, ((bool)(resources.GetObject("taskRunTimesControl1.ShowHelp"))));
-			// 
 			// runTimesErrorLabel
 			// 
 			resources.ApplyResources(this.runTimesErrorLabel, "runTimesErrorLabel");
@@ -1084,14 +1072,31 @@
 			this.historyTab.UseVisualStyleBackColor = true;
 			this.historyTab.Enter += new System.EventHandler(this.historyTab_Enter);
 			// 
+			// errorProvider
+			// 
+			this.errorProvider.ContainerControl = this;
+			// 
+			// principalReqPrivilegesDropDown
+			// 
+			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
+			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
+			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
+			this.helpProvider.SetShowHelp(this.principalReqPrivilegesDropDown, ((bool)(resources.GetObject("principalReqPrivilegesDropDown.ShowHelp"))));
+			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
+			// 
+			// taskRunTimesControl1
+			// 
+			resources.ApplyResources(this.taskRunTimesControl1, "taskRunTimesControl1");
+			this.taskRunTimesControl1.Name = "taskRunTimesControl1";
+			this.helpProvider.SetShowHelp(this.taskRunTimesControl1, ((bool)(resources.GetObject("taskRunTimesControl1.ShowHelp"))));
+			// 
 			// taskHistoryControl1
 			// 
 			resources.ApplyResources(this.taskHistoryControl1, "taskHistoryControl1");
 			this.taskHistoryControl1.Name = "taskHistoryControl1";
-			// 
-			// errorProvider
-			// 
-			this.errorProvider.ContainerControl = this;
+			this.helpProvider.SetShowHelp(this.taskHistoryControl1, ((bool)(resources.GetObject("taskHistoryControl1.ShowHelp"))));
 			// 
 			// TaskPropertiesControl
 			// 
@@ -1101,6 +1106,7 @@
 			this.MinimumSize = new System.Drawing.Size(622, 400);
 			this.Name = "TaskPropertiesControl";
 			this.helpProvider.SetShowHelp(this, ((bool)(resources.GetObject("$this.ShowHelp"))));
+			this.Load += new System.EventHandler(this.TaskPropertiesControl_Load);
 			this.tabControl.ResumeLayout(false);
 			this.generalTab.ResumeLayout(false);
 			this.generalTab.PerformLayout();
@@ -1128,9 +1134,9 @@
 			this.autoMaintGroup.PerformLayout();
 			this.runTimesTab.ResumeLayout(false);
 			this.runTimesTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.historyTab.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
