@@ -10,10 +10,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Control which allows for the editing of all properties of a <see cref="TaskDefinition"/>.
 	/// </summary>
+	[Designer(typeof(Design.TaskPropertiesControlDesigner)), DesignTimeVisible(true)]
+	[DefaultProperty("AvailableTabs"), DefaultEvent("ComponentError")]
 	public partial class TaskPropertiesControl : UserControl
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
 
+		private AvailableTaskTabs availableTabs = AvailableTaskTabs.All;
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
@@ -22,13 +25,10 @@ namespace Microsoft.Win32.TaskScheduler
 		private string runTimesTaskName = null;
 		private TaskService service = null;
 		private bool showErrors = true;
-		private bool showAddedPropertiesTab = false;
-		private bool showRegInfoTab = false;
-		private bool showRunTimesTab = true;
+		private TabPage[] tabPages;
 		private Task task = null;
 		private TaskDefinition td = null;
 		private bool v2 = true;
-		private List<TabPage> tabPageGCPreventer = new List<TabPage>(10);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskPropertiesControl"/> class.
@@ -38,9 +38,11 @@ namespace Microsoft.Win32.TaskScheduler
 			InitializeComponent();
 
 			// Push all tab pages into a list so they don't get garbage collected while not displayed
-			foreach (TabPage item in tabControl.TabPages)
-				tabPageGCPreventer.Add(item);
+			tabPages = new TabPage[tabControl.TabPages.Count];
+			for (int i = 0; i < tabControl.TabPages.Count; i++)
+				tabPages[i] = tabControl.TabPages[i];
 
+			// Try to get the system help topic from the registry
 			try
 			{
 				using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MMC\SnapIns\FX:{c7b8fb06-bfe1-4c2e-9217-7a69a95bbac4}"))
@@ -48,23 +50,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			catch { }
 
-			// Setup images on action up and down buttons
-			Bitmap bmpUp = new Bitmap(6, 3);
-			using (Graphics g = Graphics.FromImage(bmpUp))
-			{
-				g.Clear(actionUpButton.BackColor);
-				using (SolidBrush b = new SolidBrush(SystemColors.ControlText))
-					g.FillPolygon(b, new Point[] { new Point(0, 0), new Point(6, 0), new Point(3, 3), new Point(2, 3) });
-			}
-			Bitmap bmpDn = (Bitmap)bmpUp.Clone();
-			bmpDn.RotateFlip(RotateFlipType.RotateNoneFlipY);
-			actionUpButton.Image = bmpDn;
-			actionDownButton.Image = bmpUp;
-
+			// Settings for conditionsTab
 			long allVal;
 			taskIdleDurationCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
 			taskIdleWaitTimeoutCombo.FormattedZero = EditorProperties.Resources.TimeSpanDoNotWait;
 			taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+
+			// Settings for settingsTab
 			taskRestartIntervalCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
 			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
@@ -80,12 +72,9 @@ namespace Microsoft.Win32.TaskScheduler
 			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanNotStarted;
 			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
 			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
-			if (!showAddedPropertiesTab)
-				tabControl.TabPages.Remove(addPropTab);
 
-			// Settings for regInfoTab
-			if (!showRegInfoTab)
-				tabControl.TabPages.Remove(regInfoTab);
+			// Settings for shown tabs
+			AvailableTabs = AvailableTaskTabs.Default;
 
 			Editable = false;
 		}
@@ -122,6 +111,36 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[Description("Occurs when a component entry has an error."), Category("Behavior")]
 		public event EventHandler<ComponentErrorEventArgs> ComponentError;
+
+		/// <summary>
+		/// Gets or sets the available tabs.
+		/// </summary>
+		/// <value>
+		/// The available tabs.
+		/// </value>
+		[DefaultValue(AvailableTaskTabs.Default), Category("Behavior"), Description("Determines which tabs are shown.")]
+		public AvailableTaskTabs AvailableTabs
+		{
+			get { return availableTabs; }
+			set
+			{
+				if (value != availableTabs)
+				{
+					System.Collections.BitArray rembits = new System.Collections.BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & availableTabs)));
+					System.Collections.BitArray addbits = new System.Collections.BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & value)));
+					for (int i = 0; i < tabPages.Length; i++)
+					{
+						if (rembits[i])
+							tabControl.TabPages.Remove(tabPages[i]);
+						if (addbits[i])
+							InsertTab(i);
+					}
+					availableTabs = value;
+					ValidateHistoryTab();
+					tabControl.SelectedIndex = FindFirstVisibleTab();
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="TaskPropertiesControl"/> is editable.
@@ -217,27 +236,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowAddedPropertiesTab
 		{
 			get
 			{
-				return showAddedPropertiesTab;
+				return (AvailableTabs & AvailableTaskTabs.Properties) != 0;
 			}
 			set
 			{
-				if (value != showAddedPropertiesTab)
-				{
-					if (value)
-					{
-						InsertTab(tabControl.TabPages.IndexOf(settingsTab) + (showRegInfoTab ? 2 : 1), addPropTab);
-					}
-					else
-					{
-						tabControl.TabPages.Remove(addPropTab);
-					}
-					showAddedPropertiesTab = value;
-				}
+				if (value)
+					AvailableTabs |= AvailableTaskTabs.Properties;
+				else
+					AvailableTabs &= ~AvailableTaskTabs.Properties;
 			}
 		}
 
@@ -245,27 +257,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Info' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRegistrationInfoTab
 		{
 			get
 			{
-				return showRegInfoTab;
+				return (AvailableTabs & AvailableTaskTabs.RegistrationInfo) != 0;
 			}
 			set
 			{
-				if (value != showRegInfoTab)
-				{
-					if (value)
-					{
-						InsertTab(tabControl.TabPages.IndexOf(settingsTab) + 1, regInfoTab);
-					}
-					else
-					{
-						tabControl.TabPages.Remove(regInfoTab);
-					}
-					showRegInfoTab = value;
-				}
+				if (value)
+					AvailableTabs |= AvailableTaskTabs.RegistrationInfo;
+				else
+					AvailableTabs &= ~AvailableTaskTabs.RegistrationInfo;
 			}
 		}
 
@@ -273,27 +278,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Run Times' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Run Times tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown.")]
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRunTimesTab
 		{
 			get
 			{
-				return showRunTimesTab;
+				return (AvailableTabs & AvailableTaskTabs.RunTimes) != 0;
 			}
 			set
 			{
-				if (value != showRunTimesTab)
-				{
-					if (value)
-					{
-						InsertTab(tabControl.TabPages.Count - 1, runTimesTab);
-					}
-					else
-					{
-						tabControl.TabPages.Remove(runTimesTab);
-					}
-					showRunTimesTab = value;
-				}
+				if (value)
+					AvailableTabs |= AvailableTaskTabs.RunTimes;
+				else
+					AvailableTabs &= ~AvailableTaskTabs.RunTimes;
 			}
 		}
 
@@ -345,6 +343,9 @@ namespace Microsoft.Win32.TaskScheduler
 				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
 				this.flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(service.UserName);
 				//this.flagExecutorIsTheMachineAdministrator = this.ExecutorIsTheMachineAdministrator(executor);
+
+				// Remove invalid tabs on new task
+				ValidateHistoryTab();
 
 				// Set General tab
 				SetUserControls(td.Principal.LogonType);
@@ -685,6 +686,18 @@ namespace Microsoft.Win32.TaskScheduler
 			onAssignment = false;
 		}
 
+		private int FindFirstVisibleTab(int startingIndex = -1)
+		{
+			int ins = -1;
+			for (int i = startingIndex + 1; i < tabPages.Length; i++)
+			{
+				ins = tabControl.TabPages.IndexOf(tabPages[i]);
+				if (ins != -1)
+					return ins;
+			}
+			return tabControl.TabCount;
+		}
+
 		private void generalTab_Enter(object sender, EventArgs e)
 		{
 			SetVersionComboItems();
@@ -702,11 +715,14 @@ namespace Microsoft.Win32.TaskScheduler
 			// Moved to historyTab_Intialize
 		}
 
-		private void InsertTab(int idx, TabPage tab)
+		private void InsertTab(int idx)
 		{
+			TabPage tab = tabPages[idx];
+			if (tabControl.TabPages.IndexOf(tab) != -1)
+				return;
 			IntPtr h = this.tabControl.Handle;
 			if (!tab.IsHandleCreated) tab.CreateControl();
-			tabControl.TabPages.Insert(idx, tab);
+			tabControl.TabPages.Insert(FindFirstVisibleTab(idx), tab);
 		}
 
 		private void InvokeObjectPicker(string targetComputerName)
@@ -981,7 +997,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskDescText_Leave(object sender, EventArgs e)
 		{
-			if (!onAssignment)
+			if (!onAssignment && td != null)
 				td.RegistrationInfo.Description = taskDescText.Text;
 		}
 
@@ -1067,7 +1083,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void TaskPropertiesControl_Load(object sender, EventArgs e)
 		{
-			generalTab.SelectNextControl(taskNameText.ReadOnly ? (Control)taskNameText : generalTab, true, true, true, false);
+			if ((availableTabs & AvailableTaskTabs.General) != 0)
+				generalTab.SelectNextControl(taskNameText.ReadOnly ? (Control)taskNameText : generalTab, true, true, true, false);
 		}
 
 		private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
@@ -1142,22 +1159,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			bool isVistaPlus = System.Environment.OSVersion.Version.Major >= 6;
-			if (tabControl.TabPages.Contains(historyTab) && !isVistaPlus)
-				tabControl.TabPages.Remove(historyTab);
-			else if (!tabControl.TabPages.Contains(historyTab) && isVistaPlus)
-				tabControl.TabPages.Add(historyTab);
 			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
 			bool v2_1 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
 			bool v2_2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
 			if (!onAssignment && v2 && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
-			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
-			taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
-			taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
-			taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
-			taskStartIfConnectionCheck.Enabled = editable && v2;
+				taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
+				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
+				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
+				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
+				taskStartIfConnectionCheck.Enabled = editable && v2;
 			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
 				principalReqPrivilegesDropDown.Enabled = editable && v2_1;
@@ -1362,6 +1374,17 @@ namespace Microsoft.Win32.TaskScheduler
 			return true;
 		}
 
+		private void ValidateHistoryTab()
+		{
+			if (!this.IsDesignMode() && (availableTabs & AvailableTaskTabs.History) != 0)
+			{
+				if (System.Environment.OSVersion.Version.Major < 6 || task == null)
+					tabControl.TabPages.Remove(historyTab);
+				else if (System.Environment.OSVersion.Version.Major >= 6 && task != null)
+					tabControl.TabPages.Add(historyTab);
+			}
+		}
+
 		private void principalSIDTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -1495,5 +1518,35 @@ namespace Microsoft.Win32.TaskScheduler
 			hasError = valid;
 			return valid;
 		}
+	}
+
+	/// <summary>
+	/// Flags representing tabs that can be visible on a <see cref="TaskPropertiesControl"/>.
+	/// </summary>
+	[Flags]
+	public enum AvailableTaskTabs
+	{
+		/// <summary>Displays General tab</summary>
+		General = 0x01,
+		/// <summary>Displays Triggers tab</summary>
+		Triggers = 0x02,
+		/// <summary>Displays Actions tab</summary>
+		Actions = 0x04,
+		/// <summary>Displays Conditions tab</summary>
+		Conditions = 0x08,
+		/// <summary>Displays Settings tab</summary>
+		Settings = 0x10,
+		/// <summary>Displays Info tab</summary>
+		RegistrationInfo = 0x20,
+		/// <summary>Displays Additional tab</summary>
+		Properties = 0x40,
+		/// <summary>Displays Run Times tab</summary>
+		RunTimes = 0x80,
+		/// <summary>Displays History tab</summary>
+		History = 0x100,
+		/// <summary>Displays General, Triggers, Actions, Conditions, Settings, Run Times and History tabs</summary>
+		Default = 0x19F,
+		/// <summary>Displays all tabs</summary>
+		All = 0x1FF
 	}
 }

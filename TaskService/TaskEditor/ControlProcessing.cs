@@ -15,6 +15,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public static bool IsDesignMode(this Control ctrl)
 		{
+			if (ctrl.Parent == null)
+				return true;
 			Control p = ctrl.Parent;
 			while (p != null)
 			{

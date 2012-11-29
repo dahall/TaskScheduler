@@ -12,6 +12,7 @@ namespace TestTaskService
 		public HomePanel()
 		{
 			InitializeComponent();
+			comboBox1.SelectedIndex = 0;
 		}
 
 		public TaskService TaskService
@@ -35,13 +36,27 @@ namespace TestTaskService
 			summaryLabel.Text = string.Format("Task Scheduler Summary (Last refreshed: {0:G})", now);
 			footerLabel.Text = string.Format("Last refreshed at {0:G}", now);
 
+			if (ts == null)
+				return;
+
 			// Update status list
-			statusListView.Items.Clear();
-			statusBackgroundWorker.RunWorkerAsync(comboBox1.SelectedIndex);
+			UpdateStatusList();
 
 			// Update active list
 			activeListView.Items.Clear();
+			activeListView.UseWaitCursor = true;
 			activeBackgroundWorker.RunWorkerAsync();
+		}
+
+		private void UpdateStatusList()
+		{
+			statusListView.Items.Clear();
+			statusListView.Groups.Clear();
+			statusListView.UseWaitCursor = true;
+			statusBackgroundWorker.CancelAsync();
+			while (statusBackgroundWorker.IsBusy)
+				System.Threading.Thread.Sleep(250);
+			statusBackgroundWorker.RunWorkerAsync(comboBox1.SelectedIndex);
 		}
 
 		public ContextMenuStrip MenuItems
@@ -76,15 +91,39 @@ namespace TestTaskService
 					break;
 			}
 			DateTime st = DateTime.Now.Subtract(span);
-			CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st);
+			CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st, null, ts.TargetServer);
 			foreach (var t in log)
-				list.Add(new ListViewItem(new string[] { t.TaskName, "", "", "", "" }) { Tag = t });
+			{
+				if (((System.ComponentModel.BackgroundWorker)sender).CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				list.Add(new ListViewItem(new string[] { t.TaskName, t.RunResult.ToString(), t.RunStart.ToString(), t.RunEnd.ToString(), t.TriggeredBy.ToString() }) { Tag = t });
+			}
 			e.Result = list.ToArray();
 		}
 
 		private void statusBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			statusListView.Items.AddRange(e.Result as ListViewItem[]);
+			ListViewItem[] items = e.Result as ListViewItem[];
+			if (items == null)
+				return;
+			ListViewGroup lvgroup = new ListViewGroup();
+			statusListView.UseWaitCursor = false;
+			statusListView.BeginUpdate();
+			for (int i = 0; i < items.Length; i++)
+			{
+				if (lvgroup.Header != items[i].Text)
+				{
+					lvgroup = new ListViewGroup(items[i].Text);
+					statusListView.Groups.Add(lvgroup);
+					lvgroup.SetCollapsible(true);
+				}
+				items[i].Group = lvgroup;
+				statusListView.Items.Add(items[i]);
+			}
+			statusListView.EndUpdate();
 		}
 
 		private void activeBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -101,7 +140,14 @@ namespace TestTaskService
 
 		private void activeBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
+			activeListView.UseWaitCursor = false;
 			activeListView.Items.AddRange(e.Result as ListViewItem[]);
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (ts != null)
+				UpdateStatusList();
 		}
 	}
 }

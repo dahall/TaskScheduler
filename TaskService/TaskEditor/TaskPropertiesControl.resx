@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="generalTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -130,7 +133,7 @@
     <value>3, 10</value>
   </data>
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>334, 17</value>
+    <value>140, 17</value>
   </metadata>
   <data name="taskNameLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +262,7 @@
     <value>Top, Left, Right</value>
   </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>211, 17</value>
+    <value>17, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -277,7 +280,7 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 400</value>
+    <value>549, 400</value>
   </data>
   <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
@@ -337,7 +340,7 @@
     <value>True</value>
   </data>
   <data name="taskNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>429, 23</value>
   </data>
   <data name="taskNameText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -373,7 +376,7 @@
     <value>True</value>
   </data>
   <data name="taskLocationText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 15</value>
+    <value>424, 15</value>
   </data>
   <data name="taskLocationText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -406,7 +409,7 @@
     <value>True</value>
   </data>
   <data name="taskAuthorText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 15</value>
+    <value>424, 15</value>
   </data>
   <data name="taskAuthorText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -424,10 +427,13 @@
     <value>6</value>
   </data>
   <data name="taskDescText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 81</value>
+  </data>
+  <data name="taskDescText.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 50</value>
   </data>
   <data name="taskDescText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -436,7 +442,7 @@
     <value>True</value>
   </data>
   <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 61</value>
+    <value>429, 61</value>
   </data>
   <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -454,16 +460,16 @@
     <value>7</value>
   </data>
   <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 324</value>
+    <value>168, 324</value>
   </data>
   <data name="taskVersionCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 23</value>
+    <value>367, 23</value>
   </data>
   <data name="taskVersionCombo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -481,7 +487,7 @@
     <value>8</value>
   </data>
   <data name="taskVersionLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="taskVersionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -490,7 +496,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 327</value>
+    <value>81, 327</value>
   </data>
   <data name="taskVersionLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -518,9 +524,6 @@
   </data>
   <data name="&gt;&gt;taskVersionLabel.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="taskHiddenCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
   </data>
   <data name="taskHiddenCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,7 +559,7 @@
     <value>10</value>
   </data>
   <data name="taskSecurityGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskRunLevelCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -700,7 +703,7 @@
     <value>True</value>
   </data>
   <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 23</value>
+    <value>319, 23</value>
   </data>
   <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -724,7 +727,7 @@
     <value>NoControl</value>
   </data>
   <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 34</value>
+    <value>334, 34</value>
   </data>
   <data name="changePrincipalButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -790,7 +793,7 @@
     <value>True</value>
   </data>
   <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 170</value>
+    <value>529, 170</value>
   </data>
   <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -826,7 +829,7 @@
     <value>True</value>
   </data>
   <data name="generalTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="generalTab.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -845,6 +848,9 @@
   </data>
   <data name="&gt;&gt;generalTab.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="triggersTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="triggerDeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -969,11 +975,14 @@
   <data name="triggerListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
+  <data name="triggerListView.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 100</value>
+  </data>
   <data name="triggerListView.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="triggerListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 285</value>
+    <value>529, 285</value>
   </data>
   <data name="triggerListView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1003,7 +1012,7 @@
     <value>True</value>
   </data>
   <data name="taskTriggerIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="taskTriggerIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1039,7 +1048,7 @@
     <value>True</value>
   </data>
   <data name="triggersTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="triggersTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1059,14 +1068,20 @@
   <data name="&gt;&gt;triggersTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="actionsTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="actionDownButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="actionDownButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Marlett, 14pt</value>
   </data>
   <data name="actionDownButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="actionDownButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>571, 142</value>
+    <value>498, 142</value>
   </data>
   <data name="actionDownButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1076,6 +1091,12 @@
   </data>
   <data name="actionDownButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="actionDownButton.Text" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="actionDownButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;actionDownButton.Name" xml:space="preserve">
     <value>actionDownButton</value>
@@ -1092,11 +1113,14 @@
   <data name="actionUpButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="actionUpButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Marlett, 14pt</value>
+  </data>
   <data name="actionUpButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="actionUpButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>571, 109</value>
+    <value>498, 109</value>
   </data>
   <data name="actionUpButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1106,6 +1130,12 @@
   </data>
   <data name="actionUpButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="actionUpButton.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="actionUpButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;actionUpButton.Name" xml:space="preserve">
     <value>actionUpButton</value>
@@ -1236,11 +1266,14 @@
   <data name="actionListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
+  <data name="actionListView.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 100</value>
+  </data>
   <data name="actionListView.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="actionListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>559, 285</value>
+    <value>486, 285</value>
   </data>
   <data name="actionListView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1270,7 +1303,7 @@
     <value>True</value>
   </data>
   <data name="actionIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="actionIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1306,7 +1339,7 @@
     <value>True</value>
   </data>
   <data name="actionsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="actionsTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1326,6 +1359,9 @@
   <data name="&gt;&gt;actionsTab.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="conditionsTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="networkConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -1339,7 +1375,7 @@
     <value>True</value>
   </data>
   <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 23</value>
+    <value>496, 23</value>
   </data>
   <data name="availableConnectionsCombo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1396,7 +1432,7 @@
     <value>True</value>
   </data>
   <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 80</value>
+    <value>529, 80</value>
   </data>
   <data name="networkConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1525,7 +1561,7 @@
     <value>True</value>
   </data>
   <data name="powerConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 98</value>
+    <value>529, 98</value>
   </data>
   <data name="powerConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1731,11 +1767,14 @@
   <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
+  <data name="idleConditionGroupBox.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>529, 0</value>
+  </data>
   <data name="idleConditionGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="idleConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 130</value>
+    <value>529, 130</value>
   </data>
   <data name="idleConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1768,7 +1807,7 @@
     <value>True</value>
   </data>
   <data name="conditionIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="conditionIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1804,7 +1843,7 @@
     <value>True</value>
   </data>
   <data name="conditionsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="conditionsTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1823,6 +1862,9 @@
   </data>
   <data name="&gt;&gt;conditionsTab.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="settingsTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="taskRestartCountText.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 133</value>
@@ -2182,7 +2224,7 @@
     <value>True</value>
   </data>
   <data name="settingsIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="settingsIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2290,7 +2332,7 @@
     <value>True</value>
   </data>
   <data name="settingsTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="settingsTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2310,6 +2352,12 @@
   <data name="&gt;&gt;settingsTab.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="regInfoTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2320,7 +2368,7 @@
     <value>True</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>535, 35</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2518,7 +2566,7 @@
     <value>True</value>
   </data>
   <data name="taskRegSDDLText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>429, 23</value>
   </data>
   <data name="taskRegSDDLText.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2548,7 +2596,7 @@
     <value>True</value>
   </data>
   <data name="taskRegVersionText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>429, 23</value>
   </data>
   <data name="taskRegVersionText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2578,7 +2626,7 @@
     <value>True</value>
   </data>
   <data name="taskRegURIText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>429, 23</value>
   </data>
   <data name="taskRegURIText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2605,7 +2653,7 @@
     <value>True</value>
   </data>
   <data name="taskRegSourceText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>429, 23</value>
   </data>
   <data name="taskRegSourceText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2628,6 +2676,9 @@
   <data name="taskRegDocText.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 164</value>
   </data>
+  <data name="taskRegDocText.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 50</value>
+  </data>
   <data name="taskRegDocText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2635,7 +2686,7 @@
     <value>True</value>
   </data>
   <data name="taskRegDocText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 158</value>
+    <value>429, 202</value>
   </data>
   <data name="taskRegDocText.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2659,7 +2710,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRegSDDLBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>501, 134</value>
+    <value>428, 134</value>
   </data>
   <data name="taskRegSDDLBtn.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2698,7 +2749,7 @@
     <value>True</value>
   </data>
   <data name="regInfoTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="regInfoTab.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2717,6 +2768,9 @@
   </data>
   <data name="&gt;&gt;regInfoTab.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="addPropTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="secHardGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2830,7 +2884,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.31069, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2841,11 +2895,14 @@
   <data name="secHardGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 173</value>
   </data>
+  <data name="secHardGroup.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>500, 0</value>
+  </data>
   <data name="secHardGroup.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="secHardGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 85</value>
+    <value>529, 85</value>
   </data>
   <data name="secHardGroup.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3022,7 +3079,7 @@
     <value>True</value>
   </data>
   <data name="autoMaintGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 102</value>
+    <value>529, 102</value>
   </data>
   <data name="autoMaintGroup.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3234,6 +3291,9 @@
   <data name="&gt;&gt;taskEnabledCheck.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3244,7 +3304,7 @@
     <value>True</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3274,7 +3334,7 @@
     <value>True</value>
   </data>
   <data name="addPropTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="addPropTab.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3294,23 +3354,23 @@
   <data name="&gt;&gt;addPropTab.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="runTimesTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskRunTimesControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="taskRunTimesControl1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRunTimesControl1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="taskRunTimesControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
+  </data>
+  <data name="taskRunTimesControl1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>300, 180</value>
   </data>
   <data name="taskRunTimesControl1.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskRunTimesControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 360</value>
+    <value>529, 360</value>
   </data>
   <data name="taskRunTimesControl1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3319,7 +3379,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.31069, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3340,7 +3400,7 @@
     <value>True</value>
   </data>
   <data name="runTimesErrorLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 67</value>
+    <value>488, 67</value>
   </data>
   <data name="runTimesErrorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3436,7 +3496,7 @@
     <value>True</value>
   </data>
   <data name="runTimesTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="runTimesTab.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3456,17 +3516,23 @@
   <data name="&gt;&gt;runTimesTab.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="historyTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskHistoryControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="taskHistoryControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 5</value>
   </data>
+  <data name="taskHistoryControl1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>500, 300</value>
+  </data>
   <data name="taskHistoryControl1.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskHistoryControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 360</value>
+    <value>529, 361</value>
   </data>
   <data name="taskHistoryControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3475,7 +3541,7 @@
     <value>taskHistoryControl1</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.34002, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=1.9.1.31069, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Parent" xml:space="preserve">
     <value>historyTab</value>
@@ -3499,7 +3565,7 @@
     <value>True</value>
   </data>
   <data name="historyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 372</value>
+    <value>541, 372</value>
   </data>
   <data name="historyTab.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3529,7 +3595,7 @@
     <value>True</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 400</value>
+    <value>549, 400</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

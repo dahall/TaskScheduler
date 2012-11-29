@@ -57,7 +57,7 @@
 			this.TaskListView.Location = new System.Drawing.Point(0, 0);
 			this.TaskListView.Name = "TaskListView";
 			this.TaskListView.SelectedIndex = -1;
-			this.TaskListView.Size = new System.Drawing.Size(1085, 232);
+			this.TaskListView.Size = new System.Drawing.Size(735, 232);
 			this.TaskListView.TabIndex = 0;
 			this.TaskListView.TaskSelected += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs>(this.taskListView_TaskSelected);
 			// 
@@ -119,7 +119,7 @@
 			this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.splitter1.Location = new System.Drawing.Point(0, 232);
 			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(1085, 3);
+			this.splitter1.Size = new System.Drawing.Size(735, 3);
 			this.splitter1.TabIndex = 1;
 			this.splitter1.TabStop = false;
 			// 
@@ -128,16 +128,15 @@
 			this.TaskPropertiesControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TaskPropertiesControl.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.TaskPropertiesControl.Location = new System.Drawing.Point(0, 235);
-			this.TaskPropertiesControl.MinimumSize = new System.Drawing.Size(622, 400);
 			this.TaskPropertiesControl.Name = "TaskPropertiesControl";
-			this.TaskPropertiesControl.Size = new System.Drawing.Size(1085, 506);
+			this.TaskPropertiesControl.Size = new System.Drawing.Size(735, 277);
 			this.TaskPropertiesControl.TabIndex = 2;
 			// 
 			// taskEditDialog1
 			// 
 			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskEditDialog1.ClientSize = new System.Drawing.Size(651, 493);
+			this.taskEditDialog1.ClientSize = new System.Drawing.Size(600, 462);
 			this.taskEditDialog1.Editable = true;
 			this.taskEditDialog1.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.taskEditDialog1.Location = new System.Drawing.Point(125, 125);
@@ -196,11 +195,12 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.Controls.Add(this.TaskPropertiesControl);
 			this.Controls.Add(this.splitter1);
 			this.Controls.Add(this.TaskListView);
 			this.Name = "FolderPanel";
-			this.Size = new System.Drawing.Size(1085, 741);
+			this.Size = new System.Drawing.Size(735, 512);
 			this.itemMenu.ResumeLayout(false);
 			this.folderMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
