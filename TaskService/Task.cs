@@ -1221,7 +1221,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlRootAttribute("Task", Namespace = TaskDefinition.tns, IsNullable = false)]
 	[XmlSchemaProvider("GetV1SchemaFile")]
-	public sealed class TaskDefinition : IXmlSerializable
+	public sealed class TaskDefinition : IDisposable, IXmlSerializable
 	{
 		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
 
@@ -1646,7 +1646,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
 	/// </summary>
 	[XmlRoot("Principals", Namespace = TaskDefinition.tns, IsNullable = true)]
-	public sealed class TaskPrincipal : IXmlSerializable
+	public sealed class TaskPrincipal : IDisposable, IXmlSerializable
 	{
 		private const string localSystemAcct = "SYSTEM";
 		private V1Interop.ITask v1Task = null;
