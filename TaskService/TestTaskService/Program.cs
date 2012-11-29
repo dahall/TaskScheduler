@@ -301,13 +301,15 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.Triggers.Add(new DailyTrigger(2));
-				td.Actions.Add(new ExecAction("notepad.exe"));
+				td.Triggers.Add(new TimeTrigger(DateTime.Now.AddSeconds(5)));
+				//td.Actions.Add(new ExecAction("notepad.exe"));
+				td.Actions.Add(new ComHandlerAction(new Guid("{CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734}"), "Data"));
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 
-				System.Threading.Thread.Sleep(1000);
+				System.Threading.Thread.Sleep(5000);
 				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+				DisplayTask(t, false);
 
 				/*using (var taskEditDialog = new TaskEditDialog(t, true, true))
 				{
@@ -316,7 +318,7 @@ namespace TestTaskService
 						var t2 = taskEditDialog.Task;
 						output.WriteLine("Triggers: {0}", t2.Definition.Triggers);
 					}
-				}*/
+				}
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
@@ -327,7 +329,7 @@ namespace TestTaskService
 				wt.DaysOfWeek = DaysOfTheWeek.Friday;
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);
+				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
 				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
@@ -624,8 +626,7 @@ namespace TestTaskService
 			editorForm.Editable = editable;
 			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = true;
-			editorForm.AvailableTabs = AvailableTaskTabs.History;
-			//editorForm.AvailableTabs = AvailableTaskTabs.General | AvailableTaskTabs.Triggers | AvailableTaskTabs.Actions | AvailableTaskTabs.Conditions | AvailableTaskTabs.Settings;
+			editorForm.AvailableTabs = AvailableTaskTabs.All;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
