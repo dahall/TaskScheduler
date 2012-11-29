@@ -30,42 +30,54 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TSMMCMockup));
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.actionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.mainToolStrip = new System.Windows.Forms.ToolStrip();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.TaskService = new Microsoft.Win32.TaskScheduler.TaskService();
 			this.taskServiceConnectDialog1 = new Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog();
 			this.actionToolStrip = new System.Windows.Forms.ToolStrip();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.libraryMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.connectToAnotherComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createBasicTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.displayAllRunningTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.newFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.taskEditDialog1 = new Microsoft.Win32.TaskScheduler.TaskEditDialog();
 			this.taskSchedulerWizard1 = new Microsoft.Win32.TaskScheduler.TaskSchedulerWizard();
-			this.menuStrip1.SuspendLayout();
+			this.itemMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.endToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TaskService)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			this.contextMenuStrip1.SuspendLayout();
+			this.libraryMenuStrip.SuspendLayout();
+			this.itemMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// menuStrip1
+			// mainMenuStrip
 			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actionToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1126, 24);
-			this.menuStrip1.TabIndex = 0;
-			this.menuStrip1.Text = "menuStrip1";
+			this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+			this.mainMenuStrip.Name = "mainMenuStrip";
+			this.mainMenuStrip.Size = new System.Drawing.Size(1126, 24);
+			this.mainMenuStrip.TabIndex = 0;
+			this.mainMenuStrip.Text = "mainMenuStrip";
 			// 
 			// actionToolStripMenuItem
 			// 
@@ -73,21 +85,21 @@
 			this.actionToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
 			this.actionToolStripMenuItem.Text = "Action";
 			// 
-			// toolStrip1
+			// mainToolStrip
 			// 
-			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(1126, 25);
-			this.toolStrip1.TabIndex = 1;
-			this.toolStrip1.Text = "toolStrip1";
+			this.mainToolStrip.Location = new System.Drawing.Point(0, 24);
+			this.mainToolStrip.Name = "mainToolStrip";
+			this.mainToolStrip.Size = new System.Drawing.Size(1126, 25);
+			this.mainToolStrip.TabIndex = 1;
+			this.mainToolStrip.Text = "mainToolStrip";
 			// 
-			// statusStrip1
+			// statusStrip
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 664);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(1126, 22);
-			this.statusStrip1.TabIndex = 2;
-			this.statusStrip1.Text = "statusStrip1";
+			this.statusStrip.Location = new System.Drawing.Point(0, 664);
+			this.statusStrip.Name = "statusStrip";
+			this.statusStrip.Size = new System.Drawing.Size(1126, 22);
+			this.statusStrip.TabIndex = 2;
+			this.statusStrip.Text = "statusStrip1";
 			// 
 			// imageList1
 			// 
@@ -127,7 +139,7 @@
 			// 
 			this.splitContainer1.Panel1.Controls.Add(this.treeView1);
 			this.splitContainer1.Size = new System.Drawing.Size(1100, 615);
-			this.splitContainer1.SplitterDistance = 366;
+			this.splitContainer1.SplitterDistance = 365;
 			this.splitContainer1.TabIndex = 6;
 			// 
 			// treeView1
@@ -143,22 +155,25 @@
 			this.treeView1.ShowLines = false;
 			this.treeView1.ShowPlusMinus = false;
 			this.treeView1.ShowRootLines = false;
-			this.treeView1.Size = new System.Drawing.Size(366, 615);
+			this.treeView1.Size = new System.Drawing.Size(365, 615);
 			this.treeView1.StateImageList = this.imageList1;
 			this.treeView1.TabIndex = 4;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
-			// contextMenuStrip1
+			// libraryMenuStrip
 			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.libraryMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectToAnotherComputerToolStripMenuItem,
             this.createBasicTaskToolStripMenuItem,
             this.createTaskToolStripMenuItem,
             this.importTaskToolStripMenuItem,
             this.displayAllRunningTasksToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.newFolderToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.refreshToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(242, 158);
+			this.libraryMenuStrip.Name = "contextMenuStrip1";
+			this.libraryMenuStrip.Size = new System.Drawing.Size(242, 170);
 			// 
 			// connectToAnotherComputerToolStripMenuItem
 			// 
@@ -196,6 +211,23 @@
 			this.displayAllRunningTasksToolStripMenuItem.Text = "Display All Running Tasks";
 			this.displayAllRunningTasksToolStripMenuItem.Click += new System.EventHandler(this.displayAllRunningTasksToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(238, 6);
+			// 
+			// newFolderToolStripMenuItem
+			// 
+			this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
+			this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+			this.newFolderToolStripMenuItem.Text = "New Folder...";
+			this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.newFolderToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(238, 6);
+			// 
 			// refreshToolStripMenuItem
 			// 
 			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
@@ -213,10 +245,10 @@
 			// 
 			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskEditDialog1.ClientSize = new System.Drawing.Size(651, 493);
+			this.taskEditDialog1.ClientSize = new System.Drawing.Size(600, 462);
 			this.taskEditDialog1.Editable = true;
 			this.taskEditDialog1.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.taskEditDialog1.Location = new System.Drawing.Point(50, 50);
+			this.taskEditDialog1.Location = new System.Drawing.Point(75, 75);
 			this.taskEditDialog1.MaximizeBox = false;
 			this.taskEditDialog1.Name = "TaskEditDialog";
 			this.taskEditDialog1.RegisterTaskOnAccept = true;
@@ -238,14 +270,75 @@
             | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot) 
             | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon) 
             | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange)));
-			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(537, 391);
+			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(538, 391);
+			this.taskSchedulerWizard1.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.taskSchedulerWizard1.Icon = ((System.Drawing.Icon)(resources.GetObject("taskSchedulerWizard1.Icon")));
-			this.taskSchedulerWizard1.Location = new System.Drawing.Point(75, 75);
+			this.taskSchedulerWizard1.Location = new System.Drawing.Point(50, 50);
 			this.taskSchedulerWizard1.MinimumSize = new System.Drawing.Size(477, 374);
 			this.taskSchedulerWizard1.Name = "TaskSchedulerWizard";
 			this.taskSchedulerWizard1.RegisterTaskOnFinish = true;
 			this.taskSchedulerWizard1.Title = "Create Task Wizard";
 			this.taskSchedulerWizard1.Visible = false;
+			// 
+			// itemMenuStrip
+			// 
+			this.itemMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runToolStripMenuItem,
+            this.endToolStripMenuItem,
+            this.disableToolStripMenuItem,
+            this.exportToolStripMenuItem,
+            this.propertiesToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.deleteToolStripMenuItem});
+			this.itemMenuStrip.Name = "itemMenuStrip";
+			this.itemMenuStrip.Size = new System.Drawing.Size(128, 142);
+			// 
+			// runToolStripMenuItem
+			// 
+			this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+			this.runToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.runToolStripMenuItem.Text = "Run";
+			this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+			// 
+			// endToolStripMenuItem
+			// 
+			this.endToolStripMenuItem.Name = "endToolStripMenuItem";
+			this.endToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.endToolStripMenuItem.Text = "End";
+			this.endToolStripMenuItem.Click += new System.EventHandler(this.endToolStripMenuItem_Click);
+			// 
+			// disableToolStripMenuItem
+			// 
+			this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+			this.disableToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.disableToolStripMenuItem.Text = "Disable";
+			this.disableToolStripMenuItem.Click += new System.EventHandler(this.disableToolStripMenuItem_Click);
+			// 
+			// exportToolStripMenuItem
+			// 
+			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.exportToolStripMenuItem.Text = "Export...";
+			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+			// 
+			// propertiesToolStripMenuItem
+			// 
+			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.propertiesToolStripMenuItem.Text = "Properties";
+			this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(124, 6);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.deleteToolStripMenuItem.Text = "Delete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
 			// TSMMCMockup
 			// 
@@ -254,20 +347,21 @@
 			this.ClientSize = new System.Drawing.Size(1126, 686);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.actionToolStrip);
-			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.toolStrip1);
-			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.statusStrip);
+			this.Controls.Add(this.mainToolStrip);
+			this.Controls.Add(this.mainMenuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MainMenuStrip = this.menuStrip1;
+			this.MainMenuStrip = this.mainMenuStrip;
 			this.Name = "TSMMCMockup";
 			this.Text = "Task Scheduler";
 			this.Load += new System.EventHandler(this.TSMMCMockup_Load);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.mainMenuStrip.ResumeLayout(false);
+			this.mainMenuStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TaskService)).EndInit();
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
-			this.contextMenuStrip1.ResumeLayout(false);
+			this.libraryMenuStrip.ResumeLayout(false);
+			this.itemMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -275,9 +369,9 @@
 
 		#endregion
 
-		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStrip toolStrip1;
-		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.MenuStrip mainMenuStrip;
+		private System.Windows.Forms.ToolStrip mainToolStrip;
+		private System.Windows.Forms.StatusStrip statusStrip;
 		private Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog taskServiceConnectDialog1;
 		private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem;
 		private System.Windows.Forms.ImageList imageList1;
@@ -286,7 +380,7 @@
 		private System.Windows.Forms.TreeView treeView1;
 		private Microsoft.Win32.TaskScheduler.TaskService TaskService;
 		private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem1;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ContextMenuStrip libraryMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem connectToAnotherComputerToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem createBasicTaskToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem createTaskToolStripMenuItem;
@@ -296,5 +390,16 @@
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private Microsoft.Win32.TaskScheduler.TaskEditDialog taskEditDialog1;
 		private Microsoft.Win32.TaskScheduler.TaskSchedulerWizard taskSchedulerWizard1;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem newFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ContextMenuStrip itemMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem endToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem disableToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 	}
 }

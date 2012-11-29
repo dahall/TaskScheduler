@@ -613,8 +613,7 @@ namespace TestTaskService
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = true;
-			editorForm.ShowAddedPropertiesTab = true;
-			editorForm.ShowRegistrationInfoTab = true;
+			editorForm.AvailableTabs = AvailableTaskTabs.All;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
@@ -625,6 +624,8 @@ namespace TestTaskService
 			editorForm.Editable = editable;
 			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = true;
+			editorForm.AvailableTabs = AvailableTaskTabs.History;
+			//editorForm.AvailableTabs = AvailableTaskTabs.General | AvailableTaskTabs.Triggers | AvailableTaskTabs.Actions | AvailableTaskTabs.Conditions | AvailableTaskTabs.Settings;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 

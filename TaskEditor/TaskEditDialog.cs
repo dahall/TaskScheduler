@@ -7,9 +7,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Dialog that allows tasks to be edited
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task.")]
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"), Description("Dialog allowing the editing of a task.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-	[DesignTimeVisible(true)]
+	[DefaultProperty("AvailableTabs"), DesignTimeVisible(true)]
 	public partial class TaskEditDialog :
 #if DEBUG
 		Form
@@ -58,6 +58,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the available tabs.
+		/// </summary>
+		/// <value>
+		/// The available tabs.
+		/// </value>
+		[DefaultValue(AvailableTaskTabs.Default), Category("Behavior"), Description("Determines which tabs are shown.")]
+		public AvailableTaskTabs AvailableTabs
+		{
+			get { return taskPropertiesControl1.AvailableTabs; }
+			set { taskPropertiesControl1.AvailableTabs = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="TaskEditDialog"/> is editable.
 		/// </summary>
 		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
@@ -79,7 +92,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Additions tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Additions' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowAddedPropertiesTab
 		{
 			get { return taskPropertiesControl1.ShowAddedPropertiesTab; }
@@ -103,7 +117,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Info' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Info tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown.")]
+		[DefaultValue(false), Category("Behavior"), Description("Determines whether the 'Info' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRegistrationInfoTab
 		{
 			get { return taskPropertiesControl1.ShowRegistrationInfoTab; }
@@ -114,7 +129,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to show the 'Run Times' tab.
 		/// </summary>
 		/// <value><c>true</c> if showing the Run Times tab; otherwise, <c>false</c>.</value>
-		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown.")]
+		[DefaultValue(true), Category("Behavior"), Description("Determines whether the 'Run Times' tab is shown."), Obsolete("Please use the AvailableTabs property.")]
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRunTimesTab
 		{
 			get { return taskPropertiesControl1.ShowRunTimesTab; }
