@@ -34,13 +34,6 @@
 			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
 			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.headerPanel = new System.Windows.Forms.Panel();
-			this.summaryLabel = new System.Windows.Forms.Label();
-			this.footerLabel = new System.Windows.Forms.Label();
-			this.refreshButton = new System.Windows.Forms.Button();
-			this.footerPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.statusBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			this.activeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.activePanel = new TestTaskService.HidableDetailPanel();
 			this.activeListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -62,12 +55,19 @@
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
+			this.headerPanel = new System.Windows.Forms.Panel();
+			this.summaryLabel = new System.Windows.Forms.Label();
+			this.footerLabel = new System.Windows.Forms.Label();
+			this.refreshButton = new System.Windows.Forms.Button();
+			this.footerPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.statusBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+			this.activeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.headerPanel.SuspendLayout();
-			this.footerPanel.SuspendLayout();
 			this.activePanel.DetailArea.SuspendLayout();
 			this.overviewPanel.DetailArea.SuspendLayout();
 			this.statusPanel.DetailArea.SuspendLayout();
+			this.headerPanel.SuspendLayout();
+			this.footerPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -93,80 +93,10 @@
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(670, 635);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
-			// headerPanel
-			// 
-			this.headerPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.headerPanel.Controls.Add(this.summaryLabel);
-			this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.headerPanel.Location = new System.Drawing.Point(0, 0);
-			this.headerPanel.Name = "headerPanel";
-			this.headerPanel.Size = new System.Drawing.Size(670, 30);
-			this.headerPanel.TabIndex = 3;
-			// 
-			// summaryLabel
-			// 
-			this.summaryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.summaryLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.summaryLabel.Location = new System.Drawing.Point(0, 0);
-			this.summaryLabel.Name = "summaryLabel";
-			this.summaryLabel.Padding = new System.Windows.Forms.Padding(6, 3, 3, 3);
-			this.summaryLabel.Size = new System.Drawing.Size(670, 30);
-			this.summaryLabel.TabIndex = 0;
-			this.summaryLabel.Text = "Summary";
-			this.summaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// footerLabel
-			// 
-			this.footerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.footerLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.footerLabel.Location = new System.Drawing.Point(3, 0);
-			this.footerLabel.Name = "footerLabel";
-			this.footerLabel.Padding = new System.Windows.Forms.Padding(6, 3, 3, 3);
-			this.footerLabel.Size = new System.Drawing.Size(571, 40);
-			this.footerLabel.TabIndex = 1;
-			this.footerLabel.Text = "Last refreshed:";
-			this.footerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// refreshButton
-			// 
-			this.refreshButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.refreshButton.Location = new System.Drawing.Point(580, 6);
-			this.refreshButton.Name = "refreshButton";
-			this.refreshButton.Size = new System.Drawing.Size(87, 27);
-			this.refreshButton.TabIndex = 2;
-			this.refreshButton.Text = "&Refresh";
-			this.refreshButton.UseVisualStyleBackColor = true;
-			this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-			// 
-			// footerPanel
-			// 
-			this.footerPanel.ColumnCount = 2;
-			this.footerPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.footerPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.footerPanel.Controls.Add(this.refreshButton, 1, 0);
-			this.footerPanel.Controls.Add(this.footerLabel, 0, 0);
-			this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.footerPanel.Location = new System.Drawing.Point(0, 665);
-			this.footerPanel.Name = "footerPanel";
-			this.footerPanel.RowCount = 1;
-			this.footerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.footerPanel.Size = new System.Drawing.Size(670, 40);
-			this.footerPanel.TabIndex = 5;
-			// 
-			// statusBackgroundWorker
-			// 
-			this.statusBackgroundWorker.WorkerSupportsCancellation = true;
-			this.statusBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.statusBackgroundWorker_DoWork);
-			this.statusBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statusBackgroundWorker_RunWorkerCompleted);
-			// 
-			// activeBackgroundWorker
-			// 
-			this.activeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.activeBackgroundWorker_DoWork);
-			this.activeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.activeBackgroundWorker_RunWorkerCompleted);
-			// 
 			// activePanel
 			// 
-			this.activePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.activePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// activePanel.DetailArea
 			// 
@@ -174,11 +104,10 @@
 			this.activePanel.DetailArea.Controls.Add(this.label6);
 			this.activePanel.DetailArea.Controls.Add(this.label5);
 			this.activePanel.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.activePanel.DetailArea.Location = new System.Drawing.Point(3, 31);
+			this.activePanel.DetailArea.Location = new System.Drawing.Point(3, 27);
 			this.activePanel.DetailArea.Name = "DetailArea";
-			this.activePanel.DetailArea.Size = new System.Drawing.Size(625, 267);
+			this.activePanel.DetailArea.Size = new System.Drawing.Size(625, 271);
 			this.activePanel.DetailArea.TabIndex = 1;
-			this.activePanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.activePanel.Location = new System.Drawing.Point(11, 483);
 			this.activePanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
 			this.activePanel.Name = "activePanel";
@@ -188,8 +117,7 @@
 			// 
 			// activeListView
 			// 
-			this.activeListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.activeListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.activeListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
@@ -246,18 +174,18 @@
 			// 
 			// overviewPanel
 			// 
-			this.overviewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.overviewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// overviewPanel.DetailArea
 			// 
 			this.overviewPanel.DetailArea.Controls.Add(this.label2);
 			this.overviewPanel.DetailArea.Controls.Add(this.label1);
 			this.overviewPanel.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.overviewPanel.DetailArea.Location = new System.Drawing.Point(3, 31);
+			this.overviewPanel.DetailArea.Location = new System.Drawing.Point(3, 27);
 			this.overviewPanel.DetailArea.Name = "DetailArea";
 			this.overviewPanel.DetailArea.Size = new System.Drawing.Size(625, 1038);
 			this.overviewPanel.DetailArea.TabIndex = 1;
-			this.overviewPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.overviewPanel.Location = new System.Drawing.Point(11, 11);
 			this.overviewPanel.Name = "overviewPanel";
 			this.overviewPanel.Size = new System.Drawing.Size(631, 133);
@@ -284,7 +212,8 @@
 			// 
 			// statusPanel
 			// 
-			this.statusPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.statusPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// statusPanel.DetailArea
 			// 
@@ -293,11 +222,10 @@
 			this.statusPanel.DetailArea.Controls.Add(this.label4);
 			this.statusPanel.DetailArea.Controls.Add(this.label3);
 			this.statusPanel.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.statusPanel.DetailArea.Location = new System.Drawing.Point(3, 31);
+			this.statusPanel.DetailArea.Location = new System.Drawing.Point(3, 27);
 			this.statusPanel.DetailArea.Name = "DetailArea";
-			this.statusPanel.DetailArea.Size = new System.Drawing.Size(625, 281);
+			this.statusPanel.DetailArea.Size = new System.Drawing.Size(625, 285);
 			this.statusPanel.DetailArea.TabIndex = 1;
-			this.statusPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.statusPanel.Location = new System.Drawing.Point(11, 156);
 			this.statusPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
 			this.statusPanel.Name = "statusPanel";
@@ -307,8 +235,7 @@
 			// 
 			// statusListView
 			// 
-			this.statusListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.statusListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.statusListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -390,6 +317,77 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Status of tasks that have started in the following time period:";
 			// 
+			// headerPanel
+			// 
+			this.headerPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.headerPanel.Controls.Add(this.summaryLabel);
+			this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.headerPanel.Location = new System.Drawing.Point(0, 0);
+			this.headerPanel.Name = "headerPanel";
+			this.headerPanel.Size = new System.Drawing.Size(670, 30);
+			this.headerPanel.TabIndex = 3;
+			// 
+			// summaryLabel
+			// 
+			this.summaryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.summaryLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.summaryLabel.Location = new System.Drawing.Point(0, 0);
+			this.summaryLabel.Name = "summaryLabel";
+			this.summaryLabel.Padding = new System.Windows.Forms.Padding(6, 3, 3, 3);
+			this.summaryLabel.Size = new System.Drawing.Size(670, 30);
+			this.summaryLabel.TabIndex = 0;
+			this.summaryLabel.Text = "Summary";
+			this.summaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// footerLabel
+			// 
+			this.footerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.footerLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.footerLabel.Location = new System.Drawing.Point(3, 0);
+			this.footerLabel.Name = "footerLabel";
+			this.footerLabel.Padding = new System.Windows.Forms.Padding(6, 3, 3, 3);
+			this.footerLabel.Size = new System.Drawing.Size(571, 40);
+			this.footerLabel.TabIndex = 1;
+			this.footerLabel.Text = "Last refreshed:";
+			this.footerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// refreshButton
+			// 
+			this.refreshButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.refreshButton.Location = new System.Drawing.Point(580, 6);
+			this.refreshButton.Name = "refreshButton";
+			this.refreshButton.Size = new System.Drawing.Size(87, 27);
+			this.refreshButton.TabIndex = 2;
+			this.refreshButton.Text = "&Refresh";
+			this.refreshButton.UseVisualStyleBackColor = true;
+			this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+			// 
+			// footerPanel
+			// 
+			this.footerPanel.ColumnCount = 2;
+			this.footerPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.footerPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.footerPanel.Controls.Add(this.refreshButton, 1, 0);
+			this.footerPanel.Controls.Add(this.footerLabel, 0, 0);
+			this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.footerPanel.Location = new System.Drawing.Point(0, 665);
+			this.footerPanel.Name = "footerPanel";
+			this.footerPanel.RowCount = 1;
+			this.footerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.footerPanel.Size = new System.Drawing.Size(670, 40);
+			this.footerPanel.TabIndex = 5;
+			// 
+			// statusBackgroundWorker
+			// 
+			this.statusBackgroundWorker.WorkerSupportsCancellation = true;
+			this.statusBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.statusBackgroundWorker_DoWork);
+			this.statusBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statusBackgroundWorker_RunWorkerCompleted);
+			// 
+			// activeBackgroundWorker
+			// 
+			this.activeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.activeBackgroundWorker_DoWork);
+			this.activeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.activeBackgroundWorker_RunWorkerCompleted);
+			// 
 			// HomePanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -402,13 +400,13 @@
 			this.Name = "HomePanel";
 			this.Size = new System.Drawing.Size(670, 705);
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.headerPanel.ResumeLayout(false);
-			this.footerPanel.ResumeLayout(false);
 			this.activePanel.DetailArea.ResumeLayout(false);
 			this.activePanel.DetailArea.PerformLayout();
 			this.overviewPanel.DetailArea.ResumeLayout(false);
 			this.statusPanel.DetailArea.ResumeLayout(false);
 			this.statusPanel.DetailArea.PerformLayout();
+			this.headerPanel.ResumeLayout(false);
+			this.footerPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

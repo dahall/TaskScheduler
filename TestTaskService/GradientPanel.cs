@@ -8,7 +8,7 @@ namespace TestTaskService
 	{
 		public GradientPanel()
 		{
-			this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+			this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ContainerControl | ControlStyles.ResizeRedraw, true);
 		}
 
 		// Methods
@@ -16,7 +16,7 @@ namespace TestTaskService
 		{
 			Brush brush = new LinearGradientBrush(base.Bounds, SystemColors.Control, SystemColors.ControlDark, LinearGradientMode.Vertical);
 			e.Graphics.FillRectangle(brush, base.Bounds);
-			e.Graphics.DrawRectangle(SystemPens.WindowFrame, Rectangle.Inflate(base.Bounds, -1, -1));
+			e.Graphics.DrawRectangle(SystemPens.WindowFrame, new Rectangle(base.Bounds.X, base.Bounds.Y, base.Width - 1, base.Height - 1));
 		}
 	}
 }

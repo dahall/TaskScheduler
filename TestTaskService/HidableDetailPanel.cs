@@ -6,7 +6,7 @@ using System.ComponentModel.Design;
 namespace TestTaskService
 {
 	[Designer(typeof(HidableDetailPanelDesigner))]
-	public partial class HidableDetailPanel : UserControl
+	public partial class HidableDetailPanel : Control
 	{
 		private const int headerHeight = 24;
 		private int defaultHeight = 100;
@@ -48,9 +48,11 @@ namespace TestTaskService
 			}
 		}
 
-		private void HidableDetailPanel_Load(object sender, EventArgs e)
+		protected override void OnResize(EventArgs e)
 		{
-			defaultHeight = this.Height;
+			base.OnResize(e);
+			if (!detailHidden)
+				defaultHeight = this.Height;
 		}
 	}
 
