@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler;
+using System.Drawing;
 
 namespace TestTaskService
 {
@@ -23,17 +24,12 @@ namespace TestTaskService
 
 		private void SetActionMenu(ContextMenuStrip menuItems)
 		{
-			ToolStripItemCollection coll = this.libraryMenuStrip.Items;
-			if (menuItems != null)
-				coll = menuItems.Items;
-			actionToolStripMenuItem.DropDownItems.Clear();
-			actionToolStripMenuItem.DropDownItems.AddRange(coll);
-			actionToolStrip.Items.Clear();
-			actionToolStrip.Items.AddRange(coll);
+			ToolStripManager.Merge(itemMenuStrip, menuItems);
 		}
 
 		private void ShowPanel(Control panel)
 		{
+			ToolStripManager.RevertMerge(itemMenuStrip);
 			if (curPanel != null)
 				curPanel.Hide();
 			curPanel = panel;
@@ -78,34 +74,30 @@ namespace TestTaskService
 
 		private void TSMMCMockup_Load(object sender, EventArgs e)
 		{
-			imageList1.Images.Add(Properties.Resources.Properties);
-			imageList1.Images.Add(Properties.Resources.TaskLibraryRootNode);
-			imageList1.Images.Add(Properties.Resources.Folder_16);
-			imageList1.Images.Add(Properties.Resources.ScheduledTaskWizard);
-			imageList1.Images.Add(Properties.Resources.CreateNewTask);
-			imageList1.Images.Add(Properties.Resources.ReviewRunningTasks);
-			imageList1.Images.Add(Properties.Resources.AdminLog);
-			imageList1.Images.Add(Properties.Resources.NewFolder);
-			imageList1.Images.Add(Properties.Resources.Refresh);
-			imageList1.Images.Add(Properties.Resources.RunNow);
-			imageList1.Images.Add(Properties.Resources.EndTask);
-			imageList1.Images.Add(Properties.Resources.Disable);
-			imageList1.Images.Add(Properties.Resources.DeleteTask);
-			imageList1.Images.Add(Properties.Resources.Help);
+			imageList1.Images.Add(new Bitmap(Properties.Resources.empty, 16, 16), System.Drawing.Color.FromArgb(0xff, 0, 0xff));
+			imageList1.Images.Add(new Icon(Properties.Resources.Properties, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.TaskLibraryRootNode, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.Folder_16, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.ScheduledTaskWizard, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.CreateNewTask, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.ReviewRunningTasks, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.AdminLog, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.NewFolder, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.Refresh, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.RunNow, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.EndTask, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.Disable, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.DeleteTask, 16, 16));
+			imageList1.Images.Add(new Icon(Properties.Resources.Help, 16, 16));
 
 			libraryMenuStrip.ImageList = imageList1;
-			createBasicTaskToolStripMenuItem.ImageIndex = 3;
-			createTaskToolStripMenuItem.ImageIndex = 4;
-			displayAllRunningTasksToolStripMenuItem.ImageIndex = 5;
-			newFolderToolStripMenuItem.ImageIndex = 7;
-			refreshToolStripMenuItem.ImageIndex = 8;
-
-			itemMenuStrip.ImageList = imageList1;
-			runToolStripMenuItem.ImageIndex = 9;
-			endToolStripMenuItem.ImageIndex = 10;
-			disableToolStripMenuItem.ImageIndex = 11;
-			propertiesToolStripMenuItem.ImageIndex = 0;
-			deleteToolStripMenuItem.ImageIndex = 12;
+			connectToAnotherComputerToolStripMenuItem.ImageIndex = 0;
+			createBasicTaskMenuItem.ImageIndex = 4;
+			createTaskMenuItem.ImageIndex = 5;
+			importTaskMenuItem.ImageIndex = 0;
+			displayAllRunningTasksMenuItem.ImageIndex = 6;
+			newFolderMenuItem.ImageIndex = 8;
+			refreshMenuItem.ImageIndex = 9;
 
 			RefreshList();
 		}
@@ -113,8 +105,8 @@ namespace TestTaskService
 		private void RefreshList()
 		{
 			treeView1.Nodes.Clear();
-			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 0, 0);
-			TreeNode p = n.Nodes.Add(null, "Task Scheduler Library", 1, 1);
+			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 1, 1);
+			TreeNode p = n.Nodes.Add(null, "Task Scheduler Library", 2, 2);
 			p.Tag = TaskService.RootFolder;
 			n.Expand();
 			LoadChildren(p);
@@ -125,7 +117,7 @@ namespace TestTaskService
 		{
 			foreach (var item in ((TaskFolder)p.Tag).SubFolders)
 			{
-				TreeNode n = p.Nodes.Add(null, item.Name, 2, 2);
+				TreeNode n = p.Nodes.Add(null, item.Name, 3, 3);
 				n.Tag = item;
 				LoadChildren(n);
 			}
@@ -137,18 +129,18 @@ namespace TestTaskService
 				RefreshList();
 		}
 
-		private void createBasicTaskMenu_Click(object sender, EventArgs e)
+		private void createBasicTaskMenuItem_Click(object sender, EventArgs e)
 		{
 			taskSchedulerWizard1.ShowDialog(this);
 		}
 
-		private void createTaskMenu_Click(object sender, EventArgs e)
+		private void createTaskMenuItem_Click(object sender, EventArgs e)
 		{
 			taskEditDialog1.Initialize(TaskService);
 			taskEditDialog1.ShowDialog(this);
 		}
 
-		private void importTaskMenu_Click(object sender, EventArgs e)
+		private void importTaskMenuItem_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
@@ -177,36 +169,6 @@ namespace TestTaskService
 		}
 
 		private void newFolderToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void runToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void endToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void disableToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}

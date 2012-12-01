@@ -64,6 +64,19 @@ namespace TestTaskService
 			get { return new ContextMenuStrip(); }
 		}
 
+		protected override void WndProc(ref Message m)
+		{
+			switch (m.Msg)
+			{
+				case 0x0202: // WM_LBUTTONUP
+					base.DefWndProc(ref m);
+					break;
+				default:
+					base.WndProc(ref m);
+					break;
+			}
+		}
+
 		private void refreshButton_Click(object sender, EventArgs e)
 		{
 			RefreshPanels();

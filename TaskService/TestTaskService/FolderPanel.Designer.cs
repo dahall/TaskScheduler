@@ -125,6 +125,14 @@
 			// 
 			// TaskPropertiesControl
 			// 
+			this.TaskPropertiesControl.AvailableTabs = ((Microsoft.Win32.TaskScheduler.AvailableTaskTabs)(((((((((Microsoft.Win32.TaskScheduler.AvailableTaskTabs.General | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Triggers) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Actions) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Conditions) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Settings) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RegistrationInfo) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Properties) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RunTimes) 
+            | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.History)));
 			this.TaskPropertiesControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TaskPropertiesControl.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.TaskPropertiesControl.Location = new System.Drawing.Point(0, 235);

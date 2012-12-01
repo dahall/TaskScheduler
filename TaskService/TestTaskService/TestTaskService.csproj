@@ -68,7 +68,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="HidableDetailPanel.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="HidableDetailPanel.Designer.cs">
       <DependentUpon>HidableDetailPanel.cs</DependentUpon>
@@ -135,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ts.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

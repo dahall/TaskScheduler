@@ -39,6 +39,7 @@
 			// 
 			// tableLayoutPanel
 			// 
+			this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
 			this.tableLayoutPanel.ColumnCount = 1;
 			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel.Controls.Add(this.headerPanel, 0, 0);
@@ -98,6 +99,7 @@
 			// 
 			// detailPanel
 			// 
+			this.detailPanel.BackColor = System.Drawing.Color.Transparent;
 			this.detailPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.detailPanel.Location = new System.Drawing.Point(3, 27);
 			this.detailPanel.Name = "detailPanel";
@@ -106,13 +108,8 @@
 			// 
 			// HidableDetailPanel
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.Controls.Add(this.tableLayoutPanel);
-			this.Name = "HidableDetailPanel";
 			this.Size = new System.Drawing.Size(516, 278);
-			this.Load += new System.EventHandler(this.HidableDetailPanel_Load);
 			this.tableLayoutPanel.ResumeLayout(false);
 			this.headerPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
