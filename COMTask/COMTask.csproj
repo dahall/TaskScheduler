@@ -42,7 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -52,17 +52,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskHandlerInterfaces.cs">
-      <Link>TaskHandlerInterfaces.cs</Link>
-    </Compile>
     <Compile Include="MyCOMTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskHandlerBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="COMTask.reg" />
     <None Include="COMTask.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -74,6 +71,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>regedit /s $(ProjectDir)\COMTask.reg</PostBuildEvent>
+    <PostBuildEvent>C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegSvcs.exe "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

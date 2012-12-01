@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>TaskSchedulerEditor</id>
-    <version>1.9.1</version>
+    <version>1.9.2</version>
     <title>Task Scheduler Managed Wrapper UI Library</title>
     <authors>David Hall</authors>
     <description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
@@ -12,7 +12,7 @@
     <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=taskscheduler&amp;DownloadId=104367&amp;Build=17672</iconUrl>
     <tags>task interop taskscheduler UI editor</tags>
     <dependencies>
-      <dependency id="TaskScheduler" version="[1.9.1]" />
+      <dependency id="TaskScheduler" version="[1.9.2]" />
       <dependency id="AeroWizard" version="[1.2.3]" />
       <dependency id="GroupControls" version="[1.3.6]" />
       <dependency id="TimeSpan2" version="[2.0.2]" />
