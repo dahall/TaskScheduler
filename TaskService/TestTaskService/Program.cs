@@ -303,11 +303,11 @@ namespace TestTaskService
 				TaskDefinition td = ts.NewTask();
 				td.Triggers.Add(new TimeTrigger(DateTime.Now.AddSeconds(5)));
 				//td.Actions.Add(new ExecAction("notepad.exe"));
-				td.Actions.Add(new ComHandlerAction(new Guid("{CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734}"), "Data"));
+				td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), "Data"));
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 
 				System.Threading.Thread.Sleep(5000);
-				output.WriteLine("LastTime & Result: {0} ({1})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
+				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
 				DisplayTask(t, false);
 
@@ -330,7 +330,7 @@ namespace TestTaskService
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
-				ts.RootFolder.DeleteTask(taskName);
+				//ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
 			{

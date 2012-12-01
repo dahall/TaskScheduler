@@ -1,4 +1,5 @@
 ﻿using System;
+using System.EnterpriseServices;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Timers;
@@ -8,6 +9,8 @@ namespace COMTask
 	/// <summary>
 	///  This task will write an entry to a log file every 5 seconds while active until 12 writes.
 	/// </summary>
+	[ObjectPooling(MinPoolSize = 2, MaxPoolSize = 10, CreationTimeout = 20)]
+	[Transaction(TransactionOption.Required)]
 	[ComVisible(true), Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ClassInterface(ClassInterfaceType.None)]
 	public class MyCOMTask : TaskHandlerBase
 	{
