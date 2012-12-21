@@ -12,6 +12,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public partial class TaskHistoryControl : UserControl
 	{
 		private long historyEventCount = 0;
+		private int selectedIndex = -1;
 		private Task task;
 		private SparseArray<ListViewItem> vcache = new SparseArray<ListViewItem>();
 		private TaskEventEnumerator vevEnum;
@@ -60,6 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 			historyListView.Cursor = Cursors.WaitCursor;
 			historyBackgroundWorker.RunWorkerAsync();
 			historyListView.Items.Clear();
+			selectedIndex = -1;
 			historyDetailView.TaskEvent = null;
 			historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 			historyHeader_Refresh(-1);
@@ -124,9 +126,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_DoubleClick(object sender, EventArgs e)
 		{
-			if (historyListView.SelectedIndices.Count > 0)
+			if (selectedIndex != -1)
 			{
-				ListViewItem lvi = vcache[historyListView.SelectedIndices[0]];
+				ListViewItem lvi = vcache[selectedIndex];
 				if (lvi != null)
 				{
 					EventViewerDialog dlg = new EventViewerDialog();
@@ -139,6 +141,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void historyListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
 			ListViewItem item = vcache[e.ItemIndex];
+			//System.Diagnostics.Debug.WriteLine(string.Format("RetrieveLVI: InCache={0}, Msg={1}", item!=null, Environment.StackTrace));
 			if (item == null && vevEnum != null)
 			{
 				vevEnum.Seek(System.IO.SeekOrigin.Begin, e.ItemIndex);
@@ -151,8 +154,11 @@ namespace Microsoft.Win32.TaskScheduler
 			if (item != null)
 			{
 				e.Item = item;
-				if (historyListView.SelectedIndices.Count == 0)
+				if (selectedIndex == -1)
+				{
 					e.Item.Selected = true;
+					SelectItemChanged(e.ItemIndex);
+				}
 			}
 		}
 
@@ -160,7 +166,23 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (historyListView.SelectedIndices.Count > 0)
 			{
-				ListViewItem lvi = vcache[historyListView.SelectedIndices[0]];
+				int newSelIdx = historyListView.SelectedIndices[0];
+				SelectItemChanged(newSelIdx);
+			}
+			else
+			{
+				selectedIndex = -1;
+				historyDetailView.TaskEvent = null;
+				historyDetailTitleText.Text = string.Empty;
+			}
+		}
+
+		private void SelectItemChanged(int newSelIdx)
+		{
+			if (selectedIndex != newSelIdx)
+			{
+				selectedIndex = newSelIdx;
+				ListViewItem lvi = vcache[selectedIndex];
 				if (lvi != null)
 				{
 					TaskEvent ev = lvi.Tag as TaskEvent;
@@ -168,10 +190,14 @@ namespace Microsoft.Win32.TaskScheduler
 					historyDetailTitleText.Text = ev == null ? string.Empty : string.Format(EditorProperties.Resources.EventDetailHeader, ev.EventId);
 				}
 			}
-			else
+		}
+
+		public class ListViewEx : ListView
+		{
+			protected override void WndProc(ref Message m)
 			{
-				historyDetailView.TaskEvent = null;
-				historyDetailTitleText.Text = string.Empty;
+				if (m.Msg != 0x0200)
+					base.WndProc(ref m);
 			}
 		}
 	}

@@ -30,7 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.historySplitContainer = new System.Windows.Forms.SplitContainer();
-			this.historyListView = new System.Windows.Forms.ListView();
+			this.historyListView = new ListViewEx();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -296,7 +296,7 @@
 		#endregion
 
 		private System.Windows.Forms.SplitContainer historySplitContainer;
-		private System.Windows.Forms.ListView historyListView;
+		private Microsoft.Win32.TaskScheduler.TaskHistoryControl.ListViewEx historyListView;
 		private System.Windows.Forms.ColumnHeader columnHeader6;
 		private System.Windows.Forms.ColumnHeader columnHeader7;
 		private System.Windows.Forms.ColumnHeader columnHeader8;

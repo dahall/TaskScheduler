@@ -377,10 +377,9 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set Conditions tab
 				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
 				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+				taskIdleDurationCheck.Checked = td.Settings.RunOnlyIfIdle;
 				taskIdleDurationCombo.Value = td.Settings.IdleSettings.IdleDuration;
 				taskIdleWaitTimeoutCombo.Value = td.Settings.IdleSettings.WaitTimeout;
-				taskIdleDurationCheck.Checked = td.Settings.IdleSettings.IdleDuration != TimeSpan.FromMinutes(10) ||
-					td.Settings.IdleSettings.WaitTimeout != TimeSpan.FromHours(1);
 				UpdateIdleSettingsControls();
 				taskDisallowStartIfOnBatteriesCheck.Checked = td.Settings.DisallowStartIfOnBatteries;
 				taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
@@ -1039,6 +1038,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				taskIdleDurationCombo.Value = TimeSpan.FromMinutes(10);
 				taskIdleWaitTimeoutCombo.Value = TimeSpan.FromHours(1);
+				td.Settings.RunOnlyIfIdle = taskIdleDurationCheck.Checked;
 //				if (taskIdleDurationCheck.Checked)
 //					td.Settings.IdleSettings.StopOnIdleEnd = true;
 			}
@@ -1240,30 +1240,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			bool isSet = taskIdleDurationCheck.Checked;
 			bool alreadyOnAssigment = onAssignment;
-			if (isSet)
-			{
-				taskIdleDurationCombo.Enabled = editable;
-				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = editable;
-				taskStopOnIdleEndCheck.Enabled = editable;
-				onAssignment = true;
-				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-				taskRestartOnIdleCheck.Enabled = editable && td.Settings.IdleSettings.StopOnIdleEnd;
-				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
-				if (!alreadyOnAssigment)
-					onAssignment = false;
-			}
-			else
-			{
-				taskIdleDurationCombo.Enabled = false;
-				taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = false;
-				onAssignment = true;
-				taskRestartOnIdleCheck.Enabled = false;
-				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle ? td.Settings.IdleSettings.RestartOnIdle : false;
-				taskStopOnIdleEndCheck.Enabled = false;
-				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-				if (!alreadyOnAssigment)
-					onAssignment = false;
-			}
+			bool idleEnabled = isSet ? editable : false;
+			taskIdleDurationCombo.Enabled = idleEnabled;
+			taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = idleEnabled;
+			taskStopOnIdleEndCheck.Enabled = idleEnabled;
+			taskRestartOnIdleCheck.Enabled = idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
+			onAssignment = true;
+			taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
+			taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
+			if (!alreadyOnAssigment)
+				onAssignment = false;
 		}
 
 		private void UpdateUnifiedSchedulingEngineControls()
