@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler;
 
 namespace SecurityEditor
 {
@@ -10,7 +11,7 @@ namespace SecurityEditor
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new SecurityEditorDialog() { ObjectName = "Test", SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FRFW;;;SY)(A;;FRFX;;;LS)" });
+			Application.Run(new TaskSDDLEditDialog() { TaskName = "Test", SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FRFW;;;SY)(A;;FRFX;;;LS)" });
 		}
 	}
 }

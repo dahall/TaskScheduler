@@ -48,6 +48,9 @@
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
+    <Reference Include="GroupControls">
+      <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -75,17 +78,18 @@
     <Compile Include="ACLEditor.Designer.cs">
       <DependentUpon>ACLEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckedColumnList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="OwnerEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="OwnerEditor.Designer.cs">
       <DependentUpon>OwnerEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermissionGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PermissionGrid.Designer.cs">
-      <DependentUpon>PermissionGrid.cs</DependentUpon>
+    <Compile Include="PermissionList.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,9 +120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OwnerEditor.resx">
       <DependentUpon>OwnerEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PermissionGrid.resx">
-      <DependentUpon>PermissionGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

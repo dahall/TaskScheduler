@@ -10,20 +10,14 @@ namespace SecurityEditor
 		private FileSecurity sec;
 		private string objName;
 
-		public enum RuleType
-		{
-			Access,
-			Audit
-		}
-
 		public ACLEditor()
 		{
 			InitializeComponent();
-			Display = RuleType.Access;
+			Display = SecurityRuleType.Access;
 			objNameText.BackColor = this.BackColor;
 		}
 
-		public RuleType Display { get; set; }
+		public SecurityRuleType Display { get; set; }
 
 		public string ObjectName
 		{
@@ -41,7 +35,7 @@ namespace SecurityEditor
 					sec = value;
 					permissionsListView.BeginUpdate();
 					permissionsListView.Items.Clear();
-					if (Display == RuleType.Access)
+					if (Display == SecurityRuleType.Access)
 					{
 						AuthorizationRuleCollection coll = sec.GetAccessRules(true, true, typeof(NTAccount));
 						foreach (FileSystemAccessRule rule in coll)
@@ -103,39 +97,46 @@ namespace SecurityEditor
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
-			string acctName = string.Empty; bool isGroup, isService;
-			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService))
+			string acctName = string.Empty, sid; bool isGroup, isService;
+			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
 			{
-				AceEditor aed = new AceEditor() { ObjectName = this.objName };
-				if (Display == RuleType.Access)
-					aed.Rule = new FileSystemAccessRule(acctName, 0, AccessControlType.Allow);
-				else
-					aed.Rule = new FileSystemAuditRule(acctName, 0, AuditFlags.Success);
-
-				if (aed.ShowDialog(this) == DialogResult.OK)
+				AceEditor aed = new AceEditor() { ObjectName = this.objName, ObjectSecurity = new FileSecurity() };
+				if (Display == SecurityRuleType.Access)
 				{
-					if (Display == RuleType.Access)
-						sec.AddAccessRule(aed.Rule as FileSystemAccessRule);
-					else
-						sec.AddAuditRule(aed.Rule as FileSystemAuditRule);
-					AddListItem(aed.Rule);
+					FileSystemAccessRule aRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Allow);
+					FileSystemAccessRule dRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Deny);
+					aed.ObjectSecurity.AddAccessRule(aRule);
+					aed.ObjectSecurity.AddAccessRule(dRule);
+					if (aed.ShowDialog(this) == DialogResult.OK)
+					{
+						if (aRule.FileSystemRights != 0)
+						{
+							sec.AddAccessRule(aRule);
+							AddListItem(aRule);
+						}
+						if (dRule.FileSystemRights != 0)
+						{
+							sec.AddAccessRule(dRule);
+							AddListItem(dRule);
+						}
+					}
 				}
 			}
 		}
 
 		private void editButton_Click(object sender, EventArgs e)
 		{
-			using (AceEditor aed = new AceEditor() { ObjectName = this.objName, Rule = permissionsListView.SelectedItems[0].Tag as AuthorizationRule })
+			using (AceEditor aed = new AceEditor() { ObjectName = this.objName, ObjectSecurity = sec })
 			{
 				if (aed.ShowDialog(this) == DialogResult.OK)
 				{
-					bool modified;
+					/*bool modified;
 					if (Display == RuleType.Access)
 						sec.ModifyAccessRule(AccessControlModification.Reset, aed.Rule as AccessRule, out modified);
 					else
 						sec.ModifyAuditRule(AccessControlModification.Reset, aed.Rule as AuditRule, out modified);
 					permissionsListView.Items.RemoveAt(permissionsListView.SelectedIndices[0]);
-					AddListItem(aed.Rule);
+					AddListItem(aed.Rule);*/
 				}
 			}
 		}
@@ -143,7 +144,7 @@ namespace SecurityEditor
 		private void removeButton_Click(object sender, EventArgs e)
 		{
 			bool modified;
-			if (Display == RuleType.Access)
+			if (Display == SecurityRuleType.Access)
 				sec.ModifyAccessRule(AccessControlModification.RemoveAll, permissionsListView.SelectedItems[0].Tag as AccessRule, out modified);
 			else
 				sec.ModifyAuditRule(AccessControlModification.RemoveAll, permissionsListView.SelectedItems[0].Tag as AuditRule, out modified);
@@ -153,6 +154,11 @@ namespace SecurityEditor
 		private void inheritedCheck_CheckedChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void permissionsListView_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			editButton_Click(sender, EventArgs.Empty);
 		}
 	}
 }
