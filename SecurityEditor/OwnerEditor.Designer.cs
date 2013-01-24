@@ -137,6 +137,7 @@
 			this.otherUserButton.TabIndex = 9;
 			this.otherUserButton.Text = "Other users or groups...";
 			this.otherUserButton.UseVisualStyleBackColor = true;
+			this.otherUserButton.Click += new System.EventHandler(this.otherUserButton_Click);
 			// 
 			// OwnerEditor
 			// 

@@ -48,10 +48,10 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(4, 4);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(519, 13);
+			this.label1.Size = new System.Drawing.Size(491, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "To view deails of a permission entry, double-click the entry. To modify permissio" +
-    "ns, click Change Permissions.";
+			this.label1.Text = "To view or edit deails for a permission entry, select the entry and the click Edi" +
+    "t or double-click the entry.";
 			// 
 			// label2
 			// 
@@ -101,6 +101,7 @@
 			this.permissionsListView.View = System.Windows.Forms.View.Details;
 			this.permissionsListView.SelectedIndexChanged += new System.EventHandler(this.permissionsListView_SelectedIndexChanged);
 			this.permissionsListView.SizeChanged += new System.EventHandler(this.permissionsListView_SizeChanged);
+			this.permissionsListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.permissionsListView_MouseDoubleClick);
 			// 
 			// columnHeader1
 			// 

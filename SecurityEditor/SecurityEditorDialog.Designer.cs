@@ -66,7 +66,7 @@
 			// 
 			// aclEditor1
 			// 
-			this.aclEditor1.Display = SecurityEditor.ACLEditor.RuleType.Access;
+			this.aclEditor1.Display = SecurityEditor.SecurityRuleType.Access;
 			resources.ApplyResources(this.aclEditor1, "aclEditor1");
 			this.aclEditor1.Name = "aclEditor1";
 			this.aclEditor1.ObjectName = null;
@@ -85,7 +85,7 @@
 			// 
 			// aclEditor2
 			// 
-			this.aclEditor2.Display = SecurityEditor.ACLEditor.RuleType.Audit;
+			this.aclEditor2.Display = SecurityEditor.SecurityRuleType.Audit;
 			resources.ApplyResources(this.aclEditor2, "aclEditor2");
 			this.aclEditor2.Name = "aclEditor2";
 			this.aclEditor2.ObjectName = null;

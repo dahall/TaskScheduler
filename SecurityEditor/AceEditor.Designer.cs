@@ -32,7 +32,6 @@
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.permissionGrid = new SecurityEditor.PermissionGrid();
 			this.noInheritCheck = new System.Windows.Forms.CheckBox();
 			this.applyToCombo = new System.Windows.Forms.ComboBox();
 			this.nameText = new System.Windows.Forms.TextBox();
@@ -41,6 +40,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.changeNameBtn = new System.Windows.Forms.Button();
 			this.clearAllBtn = new System.Windows.Forms.Button();
+			this.accessPermissionList1 = new SecurityEditor.PermissionList();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.SuspendLayout();
@@ -80,7 +80,7 @@
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.permissionGrid);
+			this.tabPage1.Controls.Add(this.accessPermissionList1);
 			this.tabPage1.Controls.Add(this.noInheritCheck);
 			this.tabPage1.Controls.Add(this.applyToCombo);
 			this.tabPage1.Controls.Add(this.nameText);
@@ -96,16 +96,6 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Object";
 			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// permissionGrid
-			// 
-			this.permissionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.permissionGrid.Location = new System.Drawing.Point(6, 100);
-			this.permissionGrid.Name = "permissionGrid";
-			this.permissionGrid.Size = new System.Drawing.Size(321, 199);
-			this.permissionGrid.TabIndex = 11;
 			// 
 			// noInheritCheck
 			// 
@@ -195,6 +185,16 @@
 			this.clearAllBtn.UseVisualStyleBackColor = true;
 			this.clearAllBtn.Click += new System.EventHandler(this.clearAllBtn_Click);
 			// 
+			// accessPermissionList1
+			// 
+			this.accessPermissionList1.BackColor = System.Drawing.SystemColors.Window;
+			this.accessPermissionList1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.accessPermissionList1.Location = new System.Drawing.Point(9, 101);
+			this.accessPermissionList1.Name = "accessPermissionList1";
+			this.accessPermissionList1.Padding = new System.Windows.Forms.Padding(2, 2, 0, 5);
+			this.accessPermissionList1.Size = new System.Drawing.Size(318, 198);
+			this.accessPermissionList1.TabIndex = 11;
+			// 
 			// AceEditor
 			// 
 			this.AcceptButton = this.okBtn;
@@ -228,6 +228,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button changeNameBtn;
 		private System.Windows.Forms.Button clearAllBtn;
-		private PermissionGrid permissionGrid;
+		private PermissionList accessPermissionList1;
 	}
 }
