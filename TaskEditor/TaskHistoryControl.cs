@@ -192,8 +192,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public class ListViewEx : ListView
+		/// <summary>
+		/// Specialized ListView that passes on MouseMove events
+		/// </summary>
+		private class ListViewEx : ListView
 		{
+			/// <summary>
+			/// Overrides <see cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)"/>.
+			/// </summary>
+			/// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
 			protected override void WndProc(ref Message m)
 			{
 				if (m.Msg != 0x0200)

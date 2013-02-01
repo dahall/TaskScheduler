@@ -1169,10 +1169,13 @@ namespace Microsoft.Win32.TaskScheduler
 				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
 				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
-				taskStartIfConnectionCheck.Enabled = editable && v2;
+				taskStartIfConnectionCheck.Enabled = taskRegSourceText.Enabled = taskRegURIText.Enabled =
+				taskRegVersionText.Enabled = taskRegSDDLText.Enabled = editable && v2;
 			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
-				principalReqPrivilegesDropDown.Enabled = editable && v2_1;
+				principalReqPrivilegesDropDown.Enabled = taskDisallowStartOnRemoteAppSessionCheck.Enabled =
+				taskUseUnifiedSchedulingEngineCheck.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesDropDown.Enabled =
+				editable && v2_1;
 			taskVolatileCheck.Enabled = taskMaintenanceDeadlineLabel.Enabled = taskMaintenanceDeadlineCombo.Enabled = 
 				taskMaintenanceExclusiveCheck.Enabled = taskMaintenancePeriodLabel.Enabled = taskMaintenancePeriodCombo.Enabled = editable && v2_2;
 		}

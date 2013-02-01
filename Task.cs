@@ -2499,10 +2499,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static void SetTaskData(V1Interop.ITask v1Task, object value)
 		{
-			System.Runtime.Serialization.Formatters.Binary.BinaryFormatter b = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-			System.IO.MemoryStream stream = new System.IO.MemoryStream();
-			b.Serialize(stream, value);
-			v1Task.SetWorkItemData((ushort)stream.Length, stream.ToArray());
+			if (value == null)
+				v1Task.SetWorkItemData(0, null);
+			else
+			{
+				System.Runtime.Serialization.Formatters.Binary.BinaryFormatter b = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+				System.IO.MemoryStream stream = new System.IO.MemoryStream();
+				b.Serialize(stream, value);
+				v1Task.SetWorkItemData((ushort)stream.Length, stream.ToArray());
+			}
 		}
 
 		XmlSchema IXmlSerializable.GetSchema()
@@ -2512,9 +2517,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
-			reader.ReadStartElement("RegistrationInfo", TaskDefinition.tns);
-			XmlSerializationHelper.ReadObjectProperties(reader, this);
-			reader.ReadEndElement();
+			if (!reader.IsEmptyElement)
+			{
+				reader.ReadStartElement("RegistrationInfo", TaskDefinition.tns);
+				XmlSerializationHelper.ReadObjectProperties(reader, this);
+				reader.ReadEndElement();
+			}
+			else
+				reader.Skip();
 		}
 
 		void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -3214,9 +3224,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
-			reader.ReadStartElement("Settings", TaskDefinition.tns);
-			XmlSerializationHelper.ReadObjectProperties(reader, this, this.ConvertXmlProperty);
-			reader.ReadEndElement();
+			if (!reader.IsEmptyElement)
+			{
+				reader.ReadStartElement("Settings", TaskDefinition.tns);
+				XmlSerializationHelper.ReadObjectProperties(reader, this, this.ConvertXmlProperty);
+				reader.ReadEndElement();
+			}
+			else
+				reader.Skip();
 		}
 
 		void IXmlSerializable.WriteXml(XmlWriter writer)

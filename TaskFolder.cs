@@ -258,6 +258,8 @@ namespace Microsoft.Win32.TaskScheduler
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
 			if (LogonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
 				LogonType = TaskLogonType.InteractiveToken;
+			if (string.IsNullOrEmpty(UserId))
+				UserId = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 			switch (LogonType)
 			{
 				case TaskLogonType.Group:

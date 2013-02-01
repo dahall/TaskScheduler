@@ -282,7 +282,7 @@ namespace Microsoft.Win32.TaskScheduler
 							return;
 						}
 					}
-					fld.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
+					this.Task = fld.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
 						user, pwd, this.TaskDefinition.Principal.LogonType);
 				}
 			}
