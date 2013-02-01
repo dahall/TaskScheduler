@@ -2244,9 +2244,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			reader.ReadStartElement("Repetition", TaskDefinition.tns);
-			XmlSerializationHelper.ReadObjectProperties(reader, this, this.ReadXmlConverter);
-			reader.ReadEndElement();
+			if (!reader.IsEmptyElement)
+			{
+				reader.ReadStartElement("Repetition", TaskDefinition.tns);
+				XmlSerializationHelper.ReadObjectProperties(reader, this, this.ReadXmlConverter);
+				reader.ReadEndElement();
+			}
+			else
+				reader.Skip();
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)

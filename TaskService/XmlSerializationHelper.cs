@@ -116,7 +116,8 @@ namespace Microsoft.Win32.TaskScheduler
 				return false;
 
 			object value = pi.GetValue(obj, null);
-			if (value.Equals(GetDefaultValue(pi)))
+			object defValue = GetDefaultValue(pi);
+			if ((value == null && defValue == null) || (value != null && value.Equals(defValue)))
 				return false;
 
 			Type propType = pi.PropertyType;
@@ -193,7 +194,7 @@ namespace Microsoft.Win32.TaskScheduler
 							output = XmlConvert.ToString((System.UInt64)value);
 							break;
 						default:
-							output = value.ToString();
+							output = value == null ? string.Empty : value.ToString();
 							break;
 					}
 					if (output != null)
@@ -301,12 +302,15 @@ namespace Microsoft.Win32.TaskScheduler
 				if (reader.LocalName != oName)
 					throw new XmlException("XML element name does not match object.");
 
-				reader.ReadStartElement();
-				reader.MoveToContent();
-
-				ReadObjectProperties(reader, obj, handler);
-
-				reader.ReadEndElement();
+				if (!reader.IsEmptyElement)
+				{
+					reader.ReadStartElement();
+					reader.MoveToContent();
+					ReadObjectProperties(reader, obj, handler);
+					reader.ReadEndElement();
+				}
+				else
+					reader.Skip();
 			}
 		}
 

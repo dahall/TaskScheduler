@@ -99,6 +99,7 @@
 			// 
 			// wizardControl1
 			// 
+			this.wizardControl1.ClassicStyle = AeroWizard.WizardClassicStyle.BasicStyle;
 			resources.ApplyResources(this.wizardControl1, "wizardControl1");
 			this.wizardControl1.Name = "wizardControl1";
 			this.wizardControl1.Pages.Add(this.introPage);

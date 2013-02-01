@@ -158,9 +158,7 @@ namespace TestTaskService
 			try
 			{
 				// Create a new task definition and assign properties
-				TaskSchedulerWizard wiz = new TaskSchedulerWizard(ts);
-				wiz.RegisterTaskOnFinish = true;
-				wiz.TaskFolder = @"\Microsoft";
+				TaskSchedulerWizard wiz = new TaskSchedulerWizard(ts, null, true) { TaskFolder = @"\Microsoft" };
 				if (wiz.ShowDialog() == DialogResult.OK)
 				{
 					Task t = wiz.Task;
@@ -193,56 +191,25 @@ namespace TestTaskService
 
 		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			// Get the service on the local machine
 			try
 			{
-				DisplayTask(ts, null, true);
-
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				//td.Settings.DeleteExpiredTaskAfter = new TimeSpan(7, 0, 0, 0, 0);
-				td.Principal.LogonType = TaskLogonType.ServiceAccount;
-				td.Principal.UserId = "LOCAL SERVICE";
-				td.Triggers.Add(new LogonTrigger());
-				td.Settings.DisallowStartIfOnBatteries = false;
-				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
-				if (ts.HighestSupportedVersion >= new Version(1, 3))
-				{
-					td.Settings.Compatibility = TaskCompatibility.V2_1;
-					td.RegistrationInfo.Author = "Me";
-					td.RegistrationInfo.Documentation = "We rock";
-					td.RegistrationInfo.Source = "Home";
-					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FRFW;;;SY)(A;;FRFX;;;LS)";
-					td.RegistrationInfo.URI = new Uri("http://codeplex.com");
-					td.Settings.AllowHardTerminate = false;
-					td.Settings.UseUnifiedSchedulingEngine = true;
-					if (ts.HighestSupportedVersion >= new Version(1, 4))
-					{
-						td.Settings.Compatibility = TaskCompatibility.V2_2;
-						td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(2);
-						td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(14);
-					}
-				}
-				//td.Triggers.Add(new TimeTrigger() { StartBoundary = DateTime.Now.AddHours(1), EndBoundary = DateTime.Now.AddHours(2) });
+				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2013, 1, 15, 9, 0, 0), EndBoundary = new DateTime(2013, 1, 22, 9, 0, 0) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				WriteXml(td, taskName);
+				//WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
-				/*Task t = ts.AddTask(taskName,
-					new DailyTrigger { StartBoundary = new DateTime(2012, 5, 1, 1, 0, 0, DateTimeKind.Local) },
-					new ExecAction("notepad.exe"));*/
+				output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
+					t.Name, t.Enabled, t.LastRunTime, t.State, t.IsActive, t.NextRunTime, t.LastRunTime, t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
 				//WriteXml(t);
 
-				// Edit task
-				td = DisplayTask(t, true);
-
 				// Register then show task again
-				while (td != null)
+				while (DisplayTask(ts.GetTask(taskName), true) != null)
 				{
-					//ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.Update, @"AMERICAS\Domain Users", null, TaskLogonType.Group, null);
-					t = ts.GetTask(taskName);
-					WriteXml(t);
-					td = DisplayTask(t, true);
+					Task t2 = editorForm.Task;
+					output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
+						t2.Name, t2.Enabled, t2.LastRunTime, t2.State, t2.IsActive, t2.NextRunTime, t2.LastRunTime, t2.Definition.Triggers[0].StartBoundary, t2.Definition.Triggers[0].EndBoundary);
 				}
 
 				// Remove the task we just created
@@ -301,10 +268,21 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.Triggers.Add(new TimeTrigger(DateTime.Now.AddSeconds(5)));
-				//td.Actions.Add(new ExecAction("notepad.exe"));
-				td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), "Data"));
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				td.RegistrationInfo.Description = "Does something";
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+
+				// Add a trigger that will fire the task at this time every other day
+				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				dt.Repetition.Duration = TimeSpan.FromHours(4);
+				dt.Repetition.Interval = TimeSpan.FromHours(1);
+
+				// Add a trigger that will fire every week on Friday
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
+
+				// Add an action that will launch Notepad whenever the trigger fires
+				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 
 				System.Threading.Thread.Sleep(5000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
@@ -630,14 +608,23 @@ namespace TestTaskService
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
-		static void WriteXml(Task t)
+		static string GetTempXmlFile(string taskName)
 		{
-			t.Export(System.IO.Path.Combine(System.IO.Path.GetTempPath(), t.Name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"));
+			return System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
 		}
 
-		static void WriteXml(TaskDefinition td, string name)
+		static string WriteXml(Task t)
 		{
-			System.IO.File.WriteAllText(System.IO.Path.Combine(System.IO.Path.GetTempPath(), name + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml"), td.XmlText, System.Text.Encoding.Unicode);
+			string fn = GetTempXmlFile(t.Name);
+			t.Export(fn);
+			return fn;
+		}
+
+		static string WriteXml(TaskDefinition td, string name)
+		{
+			string fn = GetTempXmlFile(name);
+			System.IO.File.WriteAllText(fn, td.XmlText, System.Text.Encoding.Unicode);
+			return fn;
 		}
 
 		internal static void OutputXml(TaskService ts, System.IO.StringWriter output)
@@ -673,10 +660,11 @@ namespace TestTaskService
 				// Serialize task and output
 				string xmlOutput = t.Xml;
 				output.Write(xmlOutput);
+				string fn = WriteXml(t);
 
 				ts.RootFolder.DeleteTask(taskName);
 
-				ts.RootFolder.ImportTask(taskName, @"C:\Users\dahall\Desktop\Test2012_07_02_08_45_46.xml");
+				ts.RootFolder.ImportTask(taskName, fn);
 
 				//ts.RootFolder.RegisterTask(taskName, xmlOutput, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 				ts.RootFolder.DeleteTask(taskName);

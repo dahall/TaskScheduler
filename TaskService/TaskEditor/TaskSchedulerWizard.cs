@@ -39,9 +39,6 @@ namespace Microsoft.Win32.TaskScheduler
 			wizardControl1.TitleIcon = this.Icon;
 			AllowEditorOnFinish = true;
 			RegisterTaskOnFinish = false;
-			SetupPages();
-			SetupTriggerList();
-			SetupActionList();
 			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
 			durationSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
 			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
@@ -430,6 +427,10 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 				}
 
+				SetupPages();
+				SetupTriggerList();
+				SetupActionList();
+
 				onAssignment = false;
 			}
 		}
@@ -510,16 +511,13 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			this.TaskService = service;
 			this.task = null;
-			if (!this.IsDesignMode())
+			if (td == null)
+				this.TaskDefinition = service.NewTask();
+			else
 			{
-				if (td == null)
-					this.TaskDefinition = service.NewTask();
-				else
-				{
-					if (td.Triggers.Count > 1)
-						throw new ArgumentException("Only tasks with a single trigger can be used to initialize the wizard.");
-					this.TaskDefinition = td;
-				}
+				if (td.Triggers.Count > 1)
+					throw new ArgumentException("Only tasks with a single trigger can be used to initialize the wizard.");
+				this.TaskDefinition = td;
 			}
 			this.wizardControl1.RestartPages();
 		}
@@ -912,10 +910,15 @@ namespace Microsoft.Win32.TaskScheduler
 				taskLoggedOptionalRadio.Enabled = true;
 				taskLocalOnlyCheck.Enabled = true && (task == null || IsV2);
 			}
-			if (task != null)
-				taskPrincipalText.Text = this.flagExecutorIsGroup ? td.Principal.GroupId : td.Principal.UserId;
-			else
-				taskPrincipalText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+			taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
+			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
+			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
+
+			string user = td == null ? null : td.Principal.ToString();
+			if (string.IsNullOrEmpty(user))
+				user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+			taskPrincipalText.Text = user;
 		}
 
 		private void showMessageActionUI1_KeyValueChanged(object sender, EventArgs e)
