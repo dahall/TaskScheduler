@@ -461,10 +461,10 @@ namespace TestTaskService
 				if (isV14)
 				{
 					td.Settings.Compatibility = TaskCompatibility.V2_2;
-					td.Settings.Volatile = true;
+					/*td.Settings.Volatile = true;
 					td.Settings.MaintenanceSettings.Exclusive = true;
 					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(5);
-					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);
+					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);*/
 				}
 
 				// Setup Triggers
