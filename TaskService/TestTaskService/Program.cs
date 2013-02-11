@@ -157,8 +157,41 @@ namespace TestTaskService
 		{
 			try
 			{
+				string FolderName = "My Folder";
+				bool v2 = ts.HighestSupportedVersion > new Version(1, 1);
+				var taskFolder = ts.RootFolder;
+				if (v2)
+				{
+					try
+					{
+						taskFolder = ts.GetFolder(FolderName);
+					}
+					catch (System.IO.FileNotFoundException)
+					{
+						taskFolder = ts.RootFolder.CreateFolder(FolderName);
+					}
+				}
+
+				using (var taskSchedulerWizard = new TaskSchedulerWizard())
+				{
+					var newTaskDefinition = ts.NewTask();
+					newTaskDefinition.Actions.Add(new ExecAction("notepad.exe"));
+					taskSchedulerWizard.Initialize(ts, newTaskDefinition);
+					taskSchedulerWizard.TaskFolder = FolderName;
+					taskSchedulerWizard.RegisterTaskOnFinish = true;
+					taskSchedulerWizard.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage |
+						TaskSchedulerWizard.AvailableWizardPages.SecurityPage |
+						TaskSchedulerWizard.AvailableWizardPages.SummaryPage |
+						TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage |
+						TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage;
+
+					if (taskSchedulerWizard.ShowDialog() == DialogResult.OK)
+						taskFolder.DeleteTask(taskSchedulerWizard.Task.Name);
+					//    _tlv.Tasks = taskFolder.Tasks;
+				}
+
 				// Create a new task definition and assign properties
-				TaskSchedulerWizard wiz = new TaskSchedulerWizard(ts, null, true) { TaskFolder = @"\Microsoft" };
+				/*TaskSchedulerWizard wiz = new TaskSchedulerWizard(ts, null, true) { TaskFolder = @"\Microsoft" };
 				if (wiz.ShowDialog() == DialogResult.OK)
 				{
 					Task t = wiz.Task;
@@ -181,7 +214,7 @@ namespace TestTaskService
 				}
 
 				if (wiz.Task != null)
-					ts.RootFolder.DeleteTask(wiz.Task.Path);
+					ts.RootFolder.DeleteTask(wiz.Task.Path);*/
 			}
 			catch (Exception ex)
 			{
