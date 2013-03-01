@@ -150,6 +150,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public abstract class Trigger : IDisposable, ICloneable
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
+        internal static readonly System.Globalization.CultureInfo DefaultDateCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
 
 		internal TaskTriggerType ttype;
 		internal V1Interop.ITaskTrigger v1Trigger = null;
@@ -242,13 +243,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary);
+                    return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary, DefaultDateCulture);
 				return (unboundValues!=null && unboundValues.ContainsKey("EndBoundary")) ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
 			}
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.EndBoundary = value == DateTime.MaxValue ? null : value.ToString(V2BoundaryDateFormat);
+					v2Trigger.EndBoundary = value == DateTime.MaxValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
 				else
 				{
 					v1TriggerData.EndDate = value;
@@ -358,7 +359,7 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 					else
 					{
-						DateTime ret = DateTime.Parse(v2Trigger.StartBoundary);
+                        DateTime ret = DateTime.Parse(v2Trigger.StartBoundary, DefaultDateCulture);
 						if (v2Trigger.StartBoundary.EndsWith("Z"))
 							ret = ret.ToUniversalTime();
 						return ret;
@@ -369,7 +370,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat);
+                    v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
 				else
 				{
 					v1TriggerData.BeginDate = value;
@@ -642,7 +643,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if ((key == "EndBoundary" && ((DateTime)o) == DateTime.MaxValue) || (key == "StartBoundary" && ((DateTime)o) == DateTime.MinValue))
 					o = null;
 				else
-					o = ((DateTime)o).ToString(V2BoundaryDateFormat);
+                    o = ((DateTime)o).ToString(V2BoundaryDateFormat, DefaultDateCulture);
 			}
 		}
 
