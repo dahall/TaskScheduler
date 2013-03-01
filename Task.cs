@@ -2272,7 +2272,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 				{
 					string d = v2RegInfo.Date;
-					return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d);
+                    return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d, Trigger.DefaultDateCulture);
 				}
 
 				string v1Path = Task.GetV1Path(v1Task);
@@ -2283,7 +2283,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat);
+                    v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
 				else
 				{
 					string v1Path = Task.GetV1Path(v1Task);
