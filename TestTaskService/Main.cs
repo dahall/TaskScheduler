@@ -9,7 +9,7 @@ namespace TestTaskService
 		public Main()
 		{
 			InitializeComponent();
-			this.Icon = Properties.Resources.Properties;
+			this.Icon = Properties.Resources.TaskScheduler;
 			radioButtonList1.SelectedIndex = 0;
 		}
 
