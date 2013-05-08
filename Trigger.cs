@@ -264,6 +264,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task Scheduler 1.0.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan ExecutionTimeLimit
@@ -290,6 +291,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public string Id
@@ -596,6 +598,40 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
+        /// <summary>
+        /// Creates the trigger from cron expression.
+        /// </summary>
+        /// <param name="cronExpr">The cron expression.</param>
+        /// <returns>A trigger which matches the intent of the cron expression.</returns>
+        /// <exception cref="System.ArgumentException">Supplied argument does not match known cron expression syntax;cronExpr</exception>
+        private static Trigger CreateTriggerFromCronExpression(string cronExpr)
+        {
+            var match = System.Text.RegularExpressions.Regex.Match(cronExpr,
+                "^\\s*($|#|\\w+\\s*=|(\\*(?:\\/\\d+)?|(?:[0-5]?\\d)(?:-(?:[0-" +
+                "5]?\\d)(?:\\/\\d+)?)?(?:,(?:[0-5]?\\d)(?:-(?:[0-5]?\\d)(?:\\/" +
+                "\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:[01]?\\d|2[0-3])(?:-(?:[0" +
+                "1]?\\d|2[0-3])(?:\\/\\d+)?)?(?:,(?:[01]?\\d|2[0-3])(?:-(?:[0" +
+                "1]?\\d|2[0-3])(?:\\/\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:0?[1-" +
+                "9]|[12]\\d|3[01])(?:-(?:0?[1-9]|[12]\\d|3[01])(?:\\/\\d+)?)?" +
+                "(?:,(?:0?[1-9]|[12]\\d|3[01])(?:-(?:0?[1-9]|[12]\\d|3[01])(?" +
+                ":\\/\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:[1-9]|1[012])(?:-(?:[" +
+                "1-9]|1[012])(?:\\/\\d+)?)?(?:,(?:[1-9]|1[012])(?:-(?:[1-9]|1" +
+                "[012])(?:\\/\\d+)?)?)*|jan|feb|mar|apr|may|jun|jul|aug|sep|o" +
+                "ct|nov|dec)\\s+(\\*(?:\\/\\d+)?|(?:[0-6])(?:-(?:[0-6])(?:\\/" +
+                "\\d+)?)?(?:,(?:[0-6])(?:-(?:[0-6])(?:\\/\\d+)?)?)*|mon|tue|w" +
+                "ed|thu|fri|sat|sun)\\s*|(@reboot|@yearly|@annually|@monthly|" +
+                "@weekly|@daily|@midnight|@hourly)\\s*)$",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase
+                | System.Text.RegularExpressions.RegexOptions.Singleline
+                | System.Text.RegularExpressions.RegexOptions.CultureInvariant
+                | System.Text.RegularExpressions.RegexOptions.Compiled);
+            if (!match.Success)
+                throw new ArgumentException("Supplied argument does not match known cron expression syntax", "cronExpr");
+            TaskTriggerType type = TaskTriggerType.Time;
+            Trigger res = CreateTrigger(type);
+            return res;
+        }
+
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
 			if (v1Trigger == null)
@@ -767,6 +803,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan Delay
@@ -950,6 +987,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RandomDelay
@@ -1313,6 +1351,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan Delay
@@ -1343,6 +1382,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <para>• NULL: The task is started when any user logs on to the computer.</para>
 		/// </summary>
 		/// <remarks>If you want a task to be triggered when any member of a group logs on to the computer rather than when a specific user logs on, then do not assign a value to the LogonTrigger.UserId property. Instead, create a logon trigger with an empty LogonTrigger.UserId property and assign a value to the principal for the task using the Principal.GroupId property.</remarks>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue((string)null)]
 		[XmlIgnore]
 		public string UserId
@@ -1468,6 +1508,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RandomDelay
@@ -1494,6 +1535,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task runs on the last week of the month.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool RunOnLastWeekOfMonth
@@ -1826,6 +1868,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RandomDelay
@@ -1852,6 +1895,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task runs on the last day of the month.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool RunOnLastDayOfMonth
@@ -2061,6 +2105,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan Delay
@@ -2113,6 +2158,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets how long the pattern is repeated.
 		/// </summary>
+		/// <value>
+		/// The duration that the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.
+		/// </value>
+		/// <remarks>If you specify a repetition duration for a task, you must also specify the repetition interval.</remarks>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Duration
 		{
@@ -2127,7 +2176,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Pattern != null)
+				{
+					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+						throw new ArgumentOutOfRangeException();
 					v2Pattern.Duration = Task.TimeSpanToString(value);
+				}
 				else if (pTrigger != null)
 				{
 					pTrigger.v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
@@ -2139,6 +2192,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time between each restart of the task.
 		/// </summary>
+		/// <value>
+		/// The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+		/// </value>
+		/// <remarks>If you specify a repetition duration for a task, you must also specify the repetition interval.</remarks>
+		/// <exception cref="System.ArgumentOutOfRangeException">The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Interval
 		{
@@ -2153,7 +2211,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Pattern != null)
+				{
+					if (value != TimeSpan.Zero && (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31)))
+						throw new ArgumentOutOfRangeException();
 					v2Pattern.Interval = Task.TimeSpanToString(value);
+				}
 				else if (pTrigger != null)
 				{
 					pTrigger.v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
@@ -2422,6 +2484,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RandomDelay
@@ -2527,6 +2590,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a delay time that is randomly added to the start time of the trigger.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RandomDelay

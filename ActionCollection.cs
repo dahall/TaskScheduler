@@ -168,6 +168,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the principal for the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[System.Xml.Serialization.XmlAttribute(AttributeName = "Context", DataType = "IDREF")]
 		public string Context
 		{
