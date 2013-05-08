@@ -305,7 +305,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetRightToLeft()
 		{
-			RightToLeft rightToLeftProperty = this.GetRightToLeftProperty();
+			RightToLeft rightToLeftProperty = this.RightToLeft;
 			this.dateTimePickerDate.RightToLeft = rightToLeftProperty;
 			this.dateTimePickerDate.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
 			this.dateTimePickerTime.RightToLeft = rightToLeftProperty;
