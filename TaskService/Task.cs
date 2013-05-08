@@ -334,6 +334,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.
 		/// </summary>
+		/// <value>
+		/// A value that indicates the amount of time that the computer must be in an idle state before the task is run. The minimum value is one minute. If this value is <c>TimeSpan.Zero</c>, then the delay will be set to the default of 10 minutes.
+		/// </value>
 		[DefaultValue(typeof(TimeSpan), "00:10:00")]
 		public TimeSpan IdleDuration
 		{
@@ -348,7 +351,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Settings != null)
+				{
+					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+						throw new ArgumentOutOfRangeException();
 					v2Settings.IdleDuration = Task.TimeSpanToString(value);
+				}
 				else
 				{
 					v1Task.SetIdleWait((ushort)this.WaitTimeout.TotalMinutes, (ushort)value.TotalMinutes);
@@ -411,8 +418,11 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur.
+		/// Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. If no value is specified for this property, then the Task Scheduler service will wait indefinitely for an idle condition to occur.
 		/// </summary>
+		/// <value>
+		/// A value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. The minimum time allowed is 1 minute. If this value is <c>TimeSpan.Zero</c>, then the delay will be set to the default of 1 hour.
+		/// </value>
 		[DefaultValue(typeof(TimeSpan), "01:00:00")]
 		public TimeSpan WaitTimeout
 		{
@@ -427,7 +437,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Settings != null)
+				{
+					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+						throw new ArgumentOutOfRangeException();
 					v2Settings.WaitTimeout = Task.TimeSpanToString(value);
+				}
 				else
 				{
 					v1Task.SetIdleWait((ushort)value.TotalMinutes, (ushort)this.IdleDuration.TotalMinutes);
@@ -467,6 +481,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete during regular Automatic maintenance. The minimum value is one day. The value of the <see cref="Deadline"/> property should be greater than the value of the <see cref="Period"/> property. If the deadline is not specified the task will not be started during emergency Automatic maintenance. 
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Deadline
 		{
@@ -488,6 +503,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a valud indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive mode. The exclusivity is guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If exclusivity is not specified, the task is started in parallel with other maintenance tasks.
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
 		[DefaultValue(false)]
 		public bool Exclusive
 		{
@@ -509,6 +525,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the amount of time the task needs to be started during Automatic maintenance. The minimum value is one minute.
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Period
 		{
@@ -558,6 +575,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a GUID value that identifies a network profile.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(Guid), "00000000-0000-0000-0000-000000000000")]
 		public Guid Id
 		{
@@ -580,6 +598,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of a network profile. The name is used for display purposes.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		public string Name
 		{
@@ -1669,6 +1688,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the principal that is displayed in the Task Scheduler UI.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public string DisplayName
@@ -1691,6 +1711,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal. Setting this property to something other than a null or empty string, will set the <see cref="UserId"/> property to NULL and will set the <see cref="LogonType"/> property to TaskLogonType.Group;
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public string GroupId
@@ -1723,6 +1744,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the principal.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlAttribute(AttributeName = "id", DataType = "ID")]
 		[XmlIgnore]
@@ -1746,6 +1768,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the security logon method that is required to run the tasks that are associated with the principal.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">TaskLogonType values of Group, None, or S4UNot are not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TaskLogonType), "None")]
 		public TaskLogonType LogonType
 		{
@@ -1784,6 +1807,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// One of the <see cref="TaskProcessTokenSidType"/> enumeration constants.
 		/// </value>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
+		/// <exception cref="NotSupportedPriorToException">Not supported under Task Scheduler versions prior to 2.1.</exception>
 		[XmlIgnore, DefaultValue(typeof(TaskProcessTokenSidType), "Default")]
 		public TaskProcessTokenSidType ProcessTokenSidType
 		{
@@ -1820,6 +1844,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TaskRunLevel), "LUA")]
 		[XmlIgnore]
 		public TaskRunLevel RunLevel
@@ -2263,6 +2288,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the date and time when the task is registered.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">This property cannot be set on an unregistered task under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(DateTime), "0001-01-01T00:00:00")]
 		[XmlIgnore]
 		public DateTime Date
@@ -2357,6 +2383,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the security descriptor of the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public string SecurityDescriptorSddlForm
@@ -2380,6 +2407,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets where the task originated from. For example, a task may originate from a component, service, application, or user.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public string Source
@@ -2402,6 +2430,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the URI of the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlIgnore]
 		public Uri URI
@@ -2427,6 +2456,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the version number of the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(Version), "1.0")]
 		[XmlIgnore]
 		public Version Version
@@ -2564,6 +2594,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(true)]
 		[XmlElement("AllowStartOnDemand")]
 		[XmlIgnore]
@@ -2587,6 +2618,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task may be terminated by using TerminateProcess.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(true)]
 		[XmlIgnore]
 		public bool AllowHardTerminate
@@ -2609,6 +2641,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets an integer value that indicates which version of Task Scheduler a task is compatible with.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[XmlIgnore]
 		public TaskCompatibility Compatibility
 		{
@@ -2628,10 +2661,13 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.
+		/// Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. If no value is specified for this property, then the Task Scheduler service will not delete the task.
 		/// </summary>
+		/// <value>
+		/// Gets and sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. For Task Scheduler 1.0, this property will return a TimeSpan of 1 second if the task is set to delete when done. For either version, TimeSpan.Zero will indicate that the task should not be deleted.
+		/// </value>
 		/// <remarks>
-		/// For Task Scheduler 1.0, this property will return a TimeSpan of 1 second if the task is set to delete when done. For either version, TimeSpan.Zero will indicate that the task should not be deleted.
+		/// A task expires after the end boundary has been exceeded for all triggers associated with the task. The end boundary for a trigger is specified by the <c>EndBoundary</c> property of all trigger types.
 		/// </remarks>
 		[DefaultValue(typeof(TimeSpan), "12:00:00")]
 		public TimeSpan DeleteExpiredTaskAfter
@@ -2687,6 +2723,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the task will not be started if the task is triggered to run in a Remote Applications Integrated Locally (RAIL) session.
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.1.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool DisallowStartOnRemoteAppSession 
@@ -2738,8 +2775,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the amount of time that is allowed to complete the task.
+		/// Gets or sets the amount of time that is allowed to complete the task. By default, a task will be stopped 72 hours after it starts to run.
 		/// </summary>
+		/// <value>
+		/// The amount of time that is allowed to complete the task. When this parameter is set to <see cref="TimeSpan.Zero"/>, the execution time limit is infinite.
+		/// </value>
+		/// <remarks>
+		/// If a task is started on demand, the ExecutionTimeLimit setting is bypassed. Therefore, a task that is started on demand will not be terminated if it exceeds the ExecutionTimeLimit.
+		/// </remarks>
 		[DefaultValue(typeof(TimeSpan), "72:00:00")]
 		public TimeSpan ExecutionTimeLimit
 		{
@@ -2820,6 +2863,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the policy that defines how the Task Scheduler handles multiple instances of the task.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TaskInstancesPolicy), "IgnoreNew")]
 		[XmlIgnore]
 		public TaskInstancesPolicy MultipleInstances
@@ -2856,7 +2900,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the priority level of the task.
 		/// </summary>
-		//[XmlElement(DataType = "byte")]
+		/// <value>
+		/// The priority.
+		/// </value>
+		/// <exception cref="NotV1SupportedException">Value set to AboveNormal or BelowNormal on Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(System.Diagnostics.ProcessPriorityClass), "Normal")]
 		public System.Diagnostics.ProcessPriorityClass Priority
 		{
@@ -2938,6 +2985,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the number of times that the Task Scheduler will attempt to restart the task.
 		/// </summary>
+		/// <value>
+		/// The number of times that the Task Scheduler will attempt to restart the task. If this property is set, the <see cref="RestartInterval"/> property must also be set.
+		/// </value>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(0)]
 		[XmlIgnore]
 		public int RestartCount
@@ -2960,6 +3011,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value that specifies how long the Task Scheduler will attempt to restart the task.
 		/// </summary>
+		/// <value>
+		/// A value that specifies how long the Task Scheduler will attempt to restart the task. If this property is set, the <see cref="RestartCount"/> property must also be set. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+		/// </value>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		[XmlIgnore]
 		public TimeSpan RestartInterval
@@ -3009,6 +3064,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the user is logged on (v1.0 only)
 		/// </summary>
+		/// <exception cref="NotV2SupportedException">Property set for a task on a Task Scheduler version other than 1.0.</exception>
 		[XmlIgnore]
 		public bool RunOnlyIfLoggedOn
 		{
@@ -3063,6 +3119,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool StartWhenAvailable
@@ -3112,6 +3169,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates that the Unified Scheduling Engine will be utilized to run this task.
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.1.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool UseUnifiedSchedulingEngine
@@ -3138,6 +3196,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a boolean value that indicates whether the task is automatically disabled every time Windows starts.
 		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
 		[DefaultValue(false)]
 		[XmlIgnore]
 		public bool Volatile

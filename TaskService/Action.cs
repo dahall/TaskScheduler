@@ -331,6 +331,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the identifier of the action.
 		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(null)]
 		[XmlAttribute(AttributeName = "id", DataType = "ID")]
 		[XmlIgnore]
