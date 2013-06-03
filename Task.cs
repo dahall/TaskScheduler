@@ -748,6 +748,20 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Task = iTask;
 		}
 
+		internal static Task CreateTask(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
+		{
+			try
+			{
+				Task t = new Task(svc, iTask);
+				string xml = iTask.Definition.XmlText;
+				return t;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
 		/// <summary>
 		/// Gets the definition of the task.
 		/// </summary>
@@ -2298,7 +2312,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 				{
 					string d = v2RegInfo.Date;
-                    return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d, Trigger.DefaultDateCulture);
+					return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d, Trigger.DefaultDateCulture);
 				}
 
 				string v1Path = Task.GetV1Path(v1Task);
@@ -2309,7 +2323,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2RegInfo != null)
-                    v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
+					v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
 				else
 				{
 					string v1Path = Task.GetV1Path(v1Task);
