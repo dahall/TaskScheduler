@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.ComponentModel.Design;
+using System.Windows.Forms;
 
 namespace TestTaskService
 {

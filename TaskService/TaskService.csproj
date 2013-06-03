@@ -61,6 +61,7 @@
     <Compile Include="Impersonation.cs" />
     <Compile Include="NamedValueCollection.cs" />
     <Compile Include="NotV1SupportedException.cs" />
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

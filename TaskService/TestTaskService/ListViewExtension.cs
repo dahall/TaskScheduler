@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32.CommCtrl;
+using System;
 using System.Reflection;
 using System.Windows.Forms;
-
-using Microsoft.Win32.CommCtrl;
-using System.Runtime.InteropServices;
 
 namespace TestTaskService
 {
