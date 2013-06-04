@@ -725,7 +725,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void InvokeObjectPicker(string targetComputerName)
 		{
 			string acct = String.Empty, sid;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount, out sid))
+			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount, out sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))

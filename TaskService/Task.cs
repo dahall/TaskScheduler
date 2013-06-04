@@ -748,6 +748,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Task = iTask;
 		}
 
+		// TODO: Create task and check validity of XML. If can be downcasted to earlier version, do it and expose TaskDefinition.
 		internal static Task CreateTask(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
 		{
 			try

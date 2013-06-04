@@ -98,7 +98,10 @@
     </Compile>
     <Compile Include="ControlProcessing.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
-    <Compile Include="CredentialsDialog.cs">
+    <Compile Include="HelperMethods.cs" />
+    <Compile Include="Native\ADVAPI32.cs" />
+    <Compile Include="Native\BROWSEINFO.cs" />
+    <Compile Include="Native\CredentialsDialog.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.cs">
@@ -122,9 +125,15 @@
     <Compile Include="EventViewerControl.Designer.cs">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="FolderBrowserDialog2.cs">
+    <Compile Include="Native\CREDUI.cs" />
+    <Compile Include="Native\FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Native\GDI32.cs" />
+    <Compile Include="Native\KERNEL32.cs" />
+    <Compile Include="Native\OLE32.cs" />
+    <Compile Include="Native\SHELL32.cs" />
+    <Compile Include="Native\USER32.cs" />
     <Compile Include="NetworkListManager.cs" />
     <Compile Include="NetworkProfile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -145,7 +154,7 @@
     <Compile Include="FullDateTimePicker.Designer.cs">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Native\AccountUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EditorProperties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
