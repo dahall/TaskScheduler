@@ -374,7 +374,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			string acct = String.Empty, sid;
 			bool isGroup, isService;
-			if (!NativeMethods.AccountUtils.SelectAccount(this, null, ref acct, out isGroup, out isService, out sid))
+			if (!HelperMethods.SelectAccount(this, null, ref acct, out isGroup, out isService, out sid))
 				return;
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
 		}

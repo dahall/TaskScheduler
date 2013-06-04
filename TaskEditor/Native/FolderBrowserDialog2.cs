@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Security;
 using System.Text;
-using System.Windows.Forms;
 
-namespace Microsoft.Win32.TaskScheduler
+namespace System.Windows.Forms
 {
 	/*/// <summary>
 	/// 
@@ -122,17 +120,6 @@ namespace Microsoft.Win32.TaskScheduler
 			BIF_BROWSEFORPRINTER = 0x2000,	// Browsing for Printers
 			BIF_BROWSEINCLUDEFILES = 0x4000,	// Browsing for Everything
 			BIF_SHAREABLE = 0x8000		// sharable resources displayed (remote shares, requires BIF_USENEWUI)
-		}
-
-		/// <summary>
-		/// Enumeration used when initializing the COM library
-		/// </summary>
-		private enum CoInit
-		{
-			MultiThreaded = 0x0,
-			ApartmentThreaded = 0x2,
-			DisableOLE1DDE = 0x4,
-			SpeedOverMemory = 0x8
 		}
 
 		#endregion Enumerations
@@ -278,13 +265,13 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override bool RunDialog(IntPtr parentWindowHandle)
 		{
 			// Make sure OLE is initialized. This is a prerequisite for calling SHBrowseForFolder.
-			UnsafeNativeMethods.OleInitialize(IntPtr.Zero);
+			NativeMethods.OleInitialize(IntPtr.Zero);
 
 			IntPtr rpidl = IntPtr.Zero;
-			UnsafeNativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, (int)this.RootFolder, out rpidl);
+			NativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, (int)this.RootFolder, out rpidl);
 			if (rpidl == IntPtr.Zero)
 			{
-				UnsafeNativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, 0, out rpidl);
+				NativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, 0, out rpidl);
 				if (rpidl == IntPtr.Zero)
 					throw new InvalidOperationException("No root folder specified for FolderBrowserDialog2.");
 			}
@@ -301,13 +288,13 @@ namespace Microsoft.Win32.TaskScheduler
 				browseInfoFlag |= BrowseInfoFlag.BIF_BROWSEINCLUDEFILES;
 			browseInfoFlag |= (BrowseInfoFlag)BrowserFlag;
 
-			BROWSEINFO bi;
+			NativeMethods.BROWSEINFO bi;
 			bi.hwndOwner = parentWindowHandle;
 			bi.pidlRoot = rpidl;
 			bi.pszDisplayName = new string('\0', 260);
 			bi.lpszTitle = Description;
 			bi.ulFlags = (uint)browseInfoFlag;
-			bi.lpfn = new BrowseCallBackProc(OnBrowseEvent);
+			bi.lpfn = new NativeMethods.BrowseCallBackProc(OnBrowseEvent);
 			bi.lParam = IntPtr.Zero;
 			bi.iImage = 0;
 
@@ -315,7 +302,7 @@ namespace Microsoft.Win32.TaskScheduler
 			IntPtr pidl = IntPtr.Zero;
 			try
 			{
-				pidl = UnsafeNativeMethods.SHBrowseForFolder(ref bi);
+				pidl = NativeMethods.SHBrowseForFolder(ref bi);
 				if (((browseInfoFlag & BrowseInfoFlag.BIF_BROWSEFORPRINTER) == BrowseInfoFlag.BIF_BROWSEFORPRINTER) ||
 					((browseInfoFlag & BrowseInfoFlag.BIF_BROWSEFORCOMPUTER) == BrowseInfoFlag.BIF_BROWSEFORCOMPUTER))
 				{
@@ -323,7 +310,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 				{
-					if (pidl == IntPtr.Zero || 0 == UnsafeNativeMethods.SHGetPathFromIDList(pidl, sb))
+					if (pidl == IntPtr.Zero || 0 == NativeMethods.SHGetPathFromIDList(pidl, sb))
 						return false;
 					this.SelectedPath = sb.ToString();
 				}
@@ -355,16 +342,16 @@ namespace Microsoft.Win32.TaskScheduler
 				case BrowseForFolderMessages.BFFM_INITIALIZED:
 					// Dialog is being initialized, so set the initial parameters
 					if (!String.IsNullOrEmpty(Caption))
-						UnsafeNativeMethods.SetWindowText(hwnd, Caption);
+						NativeMethods.SetWindowText(hwnd, Caption);
 
 					if (!String.IsNullOrEmpty(SelectedPath))
 					{
-						UnsafeNativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETEXPANDED, (IntPtr)1, SelectedPath);
-						UnsafeNativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETSELECTIONW, (IntPtr)1, SelectedPath);
+						NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETEXPANDED, (IntPtr)1, SelectedPath);
+						NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETSELECTIONW, (IntPtr)1, SelectedPath);
 					}
 
 					if (!String.IsNullOrEmpty(OkText))
-						UnsafeNativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETOKTEXT, (IntPtr)0, OkText);
+						NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETOKTEXT, (IntPtr)0, OkText);
 
 					if (this.Initialized != null)
 					{
@@ -378,7 +365,7 @@ namespace Microsoft.Win32.TaskScheduler
 					try
 					{
 						StringBuilder sb = new StringBuilder(260);
-						if (lParam == IntPtr.Zero || 0 == UnsafeNativeMethods.SHGetPathFromIDList(lParam, sb))
+						if (lParam == IntPtr.Zero || 0 == NativeMethods.SHGetPathFromIDList(lParam, sb))
 							return 0;
 						this.SelectedPath = sb.ToString();
 					}
@@ -419,7 +406,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="isEnabled">Whether or not the OK button should be enabled.</param>
 		private static void EnableOk(IntPtr hwnd, bool isEnabled)
 		{
-			UnsafeNativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_ENABLEOK, (IntPtr)0, isEnabled ? 1 : 0);
+			NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_ENABLEOK, (IntPtr)0, (IntPtr)(isEnabled ? 1 : 0));
 		}
 
 		/// <summary>
@@ -429,73 +416,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="statusText">The status text to set.</param>
 		private static void SetStatusText(IntPtr hwnd, string statusText)
 		{
-			UnsafeNativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETSTATUSTEXTW, (IntPtr)1, statusText);
+			NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETSTATUSTEXTW, (IntPtr)1, statusText);
 		}
 
 		#endregion Methods
-
-		#region Nested Types
-
-		/// <summary>
-		/// Structure used for the WIN32 API SHBrowseForFolder.
-		/// </summary>
-		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-		private struct BROWSEINFO
-		{
-			public IntPtr hwndOwner;
-			public IntPtr pidlRoot;
-			[MarshalAs(UnmanagedType.LPTStr)]
-			public string pszDisplayName;
-			[MarshalAs(UnmanagedType.LPTStr)]
-			public string lpszTitle;
-			public uint ulFlags;
-			public BrowseCallBackProc lpfn;
-			public IntPtr lParam;
-			public int iImage;
-		}
-
-		/// <summary>
-		/// Static class with P/Invoke signatures.
-		/// </summary>
-		[SuppressUnmanagedCodeSecurity]
-		private static class UnsafeNativeMethods
-		{
-			#region Methods
-
-			[DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-			public static extern IntPtr GetActiveWindow();
-
-			[DllImport("ole32.dll", ExactSpelling = true, SetLastError = false)]
-			public static extern void OleInitialize(IntPtr pvReserved);
-
-			[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
-			public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, int lParam);
-
-			[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
-			public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
-
-			[DllImport("user32.dll", CharSet = CharSet.Unicode)]
-			[return: MarshalAs(UnmanagedType.Bool)]
-			public static extern bool SetWindowText(IntPtr hWnd, [MarshalAs(UnmanagedType.LPWStr)] string lpString);
-
-			[DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
-			public static extern IntPtr SHBrowseForFolder(ref BROWSEINFO lpbi);
-
-			[DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
-			public static extern int SHGetSpecialFolderLocation(IntPtr hwndOwner, int nFolder, out IntPtr ppidl);
-
-			// Note that the BROWSEINFO object's pszDisplayName only gives you the name of the folder.
-			// To get the actual folderToSelect, you need to parse the returned PIDL
-			[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-			public static extern uint SHGetPathFromIDList(IntPtr pidl, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszPath);
-
-			[DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
-			public static extern int SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string pszName, IntPtr pbc, out IntPtr ppidl, uint sfgaoIn, out uint psfgaoOut);
-
-			#endregion Methods
-		}
-
-		#endregion Nested Types
 	}
 
 	/// <summary>

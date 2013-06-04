@@ -1,9 +1,8 @@
-﻿using Microsoft.Win32.CommCtrl;
-using System;
+﻿using System;
 using System.Reflection;
-using System.Windows.Forms;
+using Microsoft.Win32;
 
-namespace TestTaskService
+namespace System.Windows.Forms
 {
 	public static class ListViewGroupExtension
 	{
@@ -13,21 +12,21 @@ namespace TestTaskService
 		{
 			if (group == null)
 				throw new ArgumentNullException();
-			return GetState(group, ListViewGroupState.Normal | ListViewGroupState.Collapsed);
+			return GetState(group, NativeMethods.ListViewGroupState.Normal | NativeMethods.ListViewGroupState.Collapsed);
 		}
 
 		public static bool GetCollapsible(this ListViewGroup group)
 		{
 			if (group == null)
 				throw new ArgumentNullException();
-			return (IsWinVista() ? GetState(group, ListViewGroupState.Collapsible) : false);
+			return (IsWinVista() ? GetState(group, NativeMethods.ListViewGroupState.Collapsible) : false);
 		}
 
 		public static void SetCollapsed(this ListViewGroup group, bool value)
 		{
 			if (group == null)
 				throw new ArgumentNullException();
-			SetState(group, ListViewGroupState.Normal | ListViewGroupState.Collapsed, value);
+			SetState(group, NativeMethods.ListViewGroupState.Normal | NativeMethods.ListViewGroupState.Collapsed, value);
 		}
 
 		public static void SetCollapsible(this ListViewGroup group, bool value)
@@ -36,7 +35,7 @@ namespace TestTaskService
 				throw new ArgumentNullException();
 			if (!IsWinVista())
 				throw new PlatformNotSupportedException();
-			SetState(group, ListViewGroupState.Collapsible, value);
+			SetState(group, NativeMethods.ListViewGroupState.Collapsible, value);
 		}
 
 		public static void SetFooter(this ListViewGroup group, string footer = null, HorizontalAlignment footerAlignment = HorizontalAlignment.Left)
@@ -44,11 +43,11 @@ namespace TestTaskService
 			int groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(ListViewGroupMask.None))
+				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.Footer = footer;
 					lvgroup.SetAlignment(group.HeaderAlignment, footerAlignment);
-					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_SETGROUPINFO, groupId, lvgroup);
+					NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetGroupInfo, (IntPtr)groupId, lvgroup);
 				}
 			}
 		}
@@ -58,10 +57,10 @@ namespace TestTaskService
 			int groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(ListViewGroupMask.None))
+				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.Task = task;
-					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_SETGROUPINFO, groupId, lvgroup);
+					NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetGroupInfo, (IntPtr)groupId, lvgroup);
 				}
 			}
 		}
@@ -71,7 +70,7 @@ namespace TestTaskService
 			if (!group.ListView.IsHandleCreated)
 				throw new InvalidOperationException();
 			IntPtr lparam = (imageList == null) ? IntPtr.Zero : imageList.Handle;
-			NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_SETIMAGELIST, 3, lparam);
+			NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetImageList, (IntPtr)3, lparam);
 		}
 
 		public static void SetImage(this ListViewGroup group, int titleImageIndex, string descriptionTop = null, string descriptionBottom = null)
@@ -79,14 +78,14 @@ namespace TestTaskService
 			int groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(ListViewGroupMask.None))
+				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.TitleImageIndex = titleImageIndex;
 					if (descriptionBottom != null)
 						lvgroup.DescriptionBottom = descriptionBottom;
 					if (descriptionTop != null)
 						lvgroup.DescriptionTop = descriptionTop;
-					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_SETGROUPINFO, groupId, lvgroup);
+					NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetGroupInfo, (IntPtr)groupId, lvgroup);
 				}
 			}
 		}
@@ -98,12 +97,12 @@ namespace TestTaskService
 			return ((GroupIdProperty != null) ? ((int) GroupIdProperty.GetValue(group, null)) : -1);
 		}
 
-		private static bool GetState(ListViewGroup group, ListViewGroupState state)
+		private static bool GetState(ListViewGroup group, NativeMethods.ListViewGroupState state)
 		{
 			int groupId = GetGroupId(group);
 			if (groupId < 0)
 				return false;
-			return (NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_GETGROUPSTATE, groupId, new IntPtr((int)state)) & (int)state) != 0;
+			return (NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.GetGroupState, (IntPtr)groupId, new IntPtr((int)state)).ToInt32() & (int)state) != 0;
 		}
 
 		private static bool IsWinVista()
@@ -111,15 +110,15 @@ namespace TestTaskService
 			return System.Environment.OSVersion.Version.Major >= 6;
 		}
 
-		private static void SetState(ListViewGroup group, ListViewGroupState state, bool value)
+		private static void SetState(ListViewGroup group, NativeMethods.ListViewGroupState state, bool value)
 		{
 			int groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(ListViewGroupMask.State);
+				NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.State);
 				{
 					lvgroup.SetState(state, value);
-					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.LVM_SETGROUPINFO, groupId, lvgroup);
+					NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetGroupInfo, (IntPtr)groupId, lvgroup);
 				}
 			}
 		}

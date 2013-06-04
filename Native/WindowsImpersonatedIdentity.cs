@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace Microsoft.Win32.TaskScheduler
+namespace Microsoft.Win32
 {
 	/// <summary>
 	/// Impersonation of a user. Allows to execute code under another
@@ -27,14 +26,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="password">The password of the user to act as.</param>
 		public WindowsImpersonatedIdentity(string userName, string domainName, string password)
 		{
-			SafeTokenHandle token;
+			NativeMethods.SafeTokenHandle token;
 			if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(domainName) && string.IsNullOrEmpty(password))
 			{
 				identity = WindowsIdentity.GetCurrent();
 			}
 			else
 			{
-				if (LogonUser(userName, domainName, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out token) != 0)
+				if (NativeMethods.LogonUser(userName, domainName, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
 					using (token)
 					{
@@ -55,24 +54,6 @@ namespace Microsoft.Win32.TaskScheduler
 				impersonationContext.Undo();
 			if (identity != null)
 				identity.Dispose();
-		}
-
-		[DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-		private static extern int LogonUser(string lpszUserName, string lpszDomain, string lpszPassword,
-			int dwLogonType, int dwLogonProvider, out SafeTokenHandle phToken);
-
-		private sealed class SafeTokenHandle : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
-		{
-			private SafeTokenHandle() : base(true) { }
-
-			[DllImport("kernel32.dll"), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success), System.Security.SuppressUnmanagedCodeSecurity]
-			[return: MarshalAs(UnmanagedType.Bool)]
-			private static extern bool CloseHandle(IntPtr handle);
-
-			protected override bool ReleaseHandle()
-			{
-				return CloseHandle(handle);
-			}
 		}
 
 		private const int LOGON32_LOGON_INTERACTIVE = 2;

@@ -2,67 +2,74 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Microsoft.Win32.CommCtrl
+namespace Microsoft.Win32
 {
-	[Flags]
-	internal enum ListViewGroupMask : uint
+	internal static partial class NativeMethods
 	{
-		None = 0x00000000,
-		Header = 0x00000001,
-		Footer = 0x00000002,
-		State = 0x00000004,
-		Align = 0x00000008,
-		GroupId = 0x00000010,
-		Subtitle = 0x00000100,
-		Task = 0x00000200,
-		DescriptionTop = 0x00000400,
-		DescriptionBottom = 0x00000800,
-		TitleImage = 0x00001000,
-		ExtendedImage = 0x00002000,
-		Items = 0x00004000,
-		Subset = 0x00008000,
-		SubsetItems = 0x00010000,
+		[DllImport(USER32, SetLastError = true)]
+		internal static extern IntPtr SendMessage(IntPtr hWnd, uint message, IntPtr wParam, [In, Out] NativeMethods.LVGROUP group);
 	}
 
-	[Flags]
-	internal enum ListViewGroupState : uint
+	internal static partial class NativeMethods
 	{
-		Normal = 0x00000000,
-		Collapsed = 0x00000001,
-		Hidden = 0x00000002,
-		NoHeader = 0x00000004,
-		Collapsible = 0x00000008,
-		Focused = 0x00000010,
-		Selected = 0x00000020,
-		Subseted = 0x00000040,
-		SubsetLinkFocused = 0x00000080,
-	}
+		/// <summary>
+		/// LVM_ Messages for SendMessage
+		/// </summary>
+		public enum ListViewMessage : uint
+		{
+			First = 0x1000,
+			GetGroupCount = First + 152,
+			GetGroupInfo = First + 149,
+			GetGroupInfoByIndex = First + 153,
+			GetGroupState = First + 92,
+			InsertGroup = First + 145,
+			MoveGroup = First + 151,
+			MoveItemToGroup = First + 154,
+			RemoveGroup = First + 150,
+			SetGroupInfo = First + 147,
+			SetImageList = First + 3,
+			Update = First + 42,
+		}
 
-	internal static class NativeMethods
-	{
-		internal const int cbBuffer = 256;
-		internal const int LVM_FIRST = 0x1000;
-		internal const int LVM_GETGROUPCOUNT = LVM_FIRST + 152;
-		internal const int LVM_GETGROUPINFO = LVM_FIRST + 149;
-		internal const int LVM_GETGROUPINFOBYINDEX = LVM_FIRST + 153;
-		internal const int LVM_GETGROUPSTATE = LVM_FIRST + 92;
-		internal const int LVM_INSERTGROUP = LVM_FIRST + 145;
-		internal const int LVM_MOVEGROUP = LVM_FIRST + 151;
-		internal const int LVM_MOVEITEMTOGROUP = LVM_FIRST + 154;
-		internal const int LVM_REMOVEGROUP = LVM_FIRST + 150;
-		internal const int LVM_SETGROUPINFO = LVM_FIRST + 147;
-		internal const int LVM_SETIMAGELIST = LVM_FIRST + 3;
-		internal const int LVM_UPDATE = LVM_FIRST + 42;
+		[Flags]
+		public enum ListViewGroupMask : uint
+		{
+			None = 0x00000000,
+			Header = 0x00000001,
+			Footer = 0x00000002,
+			State = 0x00000004,
+			Align = 0x00000008,
+			GroupId = 0x00000010,
+			Subtitle = 0x00000100,
+			Task = 0x00000200,
+			DescriptionTop = 0x00000400,
+			DescriptionBottom = 0x00000800,
+			TitleImage = 0x00001000,
+			ExtendedImage = 0x00002000,
+			Items = 0x00004000,
+			Subset = 0x00008000,
+			SubsetItems = 0x00010000,
+		}
 
-		[DllImport("user32.dll", SetLastError = true)]
-		internal static extern int SendMessage(IntPtr window, int message, int wParam, [In, Out] LVGROUP group);
-
-		[DllImport("user32.dll", SetLastError = true)]
-		internal static extern int SendMessage(IntPtr window, int message, int wParam, IntPtr lParam);
+		[Flags]
+		public enum ListViewGroupState : uint
+		{
+			Normal = 0x00000000,
+			Collapsed = 0x00000001,
+			Hidden = 0x00000002,
+			NoHeader = 0x00000004,
+			Collapsible = 0x00000008,
+			Focused = 0x00000010,
+			Selected = 0x00000020,
+			Subseted = 0x00000040,
+			SubsetLinkFocused = 0x00000080,
+		}
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-		internal class LVGROUP : IDisposable
+		public class LVGROUP : IDisposable
 		{
+			internal const int cbBuffer = 256;
+
 			public int cbSize;
 			public ListViewGroupMask mask;
 			public IntPtr pszHeader;
