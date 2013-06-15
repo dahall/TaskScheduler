@@ -1075,7 +1075,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment && v2)
+			if (!onAssignment && v2 && td != null)
 				td.Settings.MultipleInstances = (TaskInstancesPolicy)((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value;
 		}
 
