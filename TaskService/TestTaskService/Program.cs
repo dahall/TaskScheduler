@@ -293,6 +293,49 @@ namespace TestTaskService
 			}
 		}
 
+		internal static void FluentTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
+		{
+			Task t = ts.Execute("notepad.exe").WithArguments(@"c:\temp\music.txt").Once().Starting(2013, 11, 11, 11, 0, 0).RepeatingEvery(TimeSpan.FromMinutes(5)).AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").Every(2).Days().Starting("12/25/2013 7:00pm").AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").Every(3).Weeks().AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").OnAll(DaysOfTheWeek.Monday).In(WhichWeek.FirstWeek).Of(MonthsOfTheYear.January).AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").InTheMonthOf(MonthsOfTheYear.January).OnTheDays(1, 3, 5).AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").OnBoot().AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").OnIdle().AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").OnStateChange(TaskSessionStateChangeType.ConsoleConnect).AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").AtLogonOf("AMERICAS\\dahall").AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").AtTaskRegistration().AsTask("Test");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
+		}
+
 		internal static void ShortTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			// Get the service on the local machine
