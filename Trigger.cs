@@ -147,10 +147,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="TriggerCollection.Add"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract class Trigger : IDisposable, ICloneable
+	public abstract partial class Trigger : IDisposable, ICloneable
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
-        internal static readonly System.Globalization.CultureInfo DefaultDateCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+		internal static readonly System.Globalization.CultureInfo DefaultDateCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
 
 		internal TaskTriggerType ttype;
 		internal V1Interop.ITaskTrigger v1Trigger = null;
@@ -243,7 +243,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Trigger != null)
-                    return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary, DefaultDateCulture);
+					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary, DefaultDateCulture);
 				return (unboundValues!=null && unboundValues.ContainsKey("EndBoundary")) ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
 			}
 			set
@@ -361,7 +361,7 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 					else
 					{
-                        DateTime ret = DateTime.Parse(v2Trigger.StartBoundary, DefaultDateCulture);
+						DateTime ret = DateTime.Parse(v2Trigger.StartBoundary, DefaultDateCulture);
 						if (v2Trigger.StartBoundary.EndsWith("Z"))
 							ret = ret.ToUniversalTime();
 						return ret;
@@ -372,7 +372,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
-                    v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
+					v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
 				else
 				{
 					v1TriggerData.BeginDate = value;
@@ -598,40 +598,6 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-        /// <summary>
-        /// Creates the trigger from cron expression.
-        /// </summary>
-        /// <param name="cronExpr">The cron expression.</param>
-        /// <returns>A trigger which matches the intent of the cron expression.</returns>
-        /// <exception cref="System.ArgumentException">Supplied argument does not match known cron expression syntax;cronExpr</exception>
-        private static Trigger CreateTriggerFromCronExpression(string cronExpr)
-        {
-            var match = System.Text.RegularExpressions.Regex.Match(cronExpr,
-                "^\\s*($|#|\\w+\\s*=|(\\*(?:\\/\\d+)?|(?:[0-5]?\\d)(?:-(?:[0-" +
-                "5]?\\d)(?:\\/\\d+)?)?(?:,(?:[0-5]?\\d)(?:-(?:[0-5]?\\d)(?:\\/" +
-                "\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:[01]?\\d|2[0-3])(?:-(?:[0" +
-                "1]?\\d|2[0-3])(?:\\/\\d+)?)?(?:,(?:[01]?\\d|2[0-3])(?:-(?:[0" +
-                "1]?\\d|2[0-3])(?:\\/\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:0?[1-" +
-                "9]|[12]\\d|3[01])(?:-(?:0?[1-9]|[12]\\d|3[01])(?:\\/\\d+)?)?" +
-                "(?:,(?:0?[1-9]|[12]\\d|3[01])(?:-(?:0?[1-9]|[12]\\d|3[01])(?" +
-                ":\\/\\d+)?)?)*)\\s+(\\*(?:\\/\\d+)?|(?:[1-9]|1[012])(?:-(?:[" +
-                "1-9]|1[012])(?:\\/\\d+)?)?(?:,(?:[1-9]|1[012])(?:-(?:[1-9]|1" +
-                "[012])(?:\\/\\d+)?)?)*|jan|feb|mar|apr|may|jun|jul|aug|sep|o" +
-                "ct|nov|dec)\\s+(\\*(?:\\/\\d+)?|(?:[0-6])(?:-(?:[0-6])(?:\\/" +
-                "\\d+)?)?(?:,(?:[0-6])(?:-(?:[0-6])(?:\\/\\d+)?)?)*|mon|tue|w" +
-                "ed|thu|fri|sat|sun)\\s*|(@reboot|@yearly|@annually|@monthly|" +
-                "@weekly|@daily|@midnight|@hourly)\\s*)$",
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase
-                | System.Text.RegularExpressions.RegexOptions.Singleline
-                | System.Text.RegularExpressions.RegexOptions.CultureInvariant
-                | System.Text.RegularExpressions.RegexOptions.Compiled);
-            if (!match.Success)
-                throw new ArgumentException("Supplied argument does not match known cron expression syntax", "cronExpr");
-            TaskTriggerType type = TaskTriggerType.Time;
-            Trigger res = CreateTrigger(type);
-            return res;
-        }
-
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
 			if (v1Trigger == null)
@@ -679,7 +645,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if ((key == "EndBoundary" && ((DateTime)o) == DateTime.MaxValue) || (key == "StartBoundary" && ((DateTime)o) == DateTime.MinValue))
 					o = null;
 				else
-                    o = ((DateTime)o).ToString(V2BoundaryDateFormat, DefaultDateCulture);
+					o = ((DateTime)o).ToString(V2BoundaryDateFormat, DefaultDateCulture);
 			}
 		}
 

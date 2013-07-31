@@ -9,7 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
 	[ToolboxItem(true), DefaultProperty("TargetServer")]
-	public sealed class TaskService : Component, IDisposable, ISupportInitialize
+	public sealed partial class TaskService : Component, IDisposable, ISupportInitialize
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 		internal static readonly Version v1Ver = new Version(1, 1);

@@ -49,6 +49,10 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NCrontab, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\NCrontab.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml" />
@@ -56,6 +60,9 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
+    <Compile Include="TaskServiceFluentExt.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CultureSwitcher.cs" />
     <Compile Include="EnumGlobalizer.cs" />
     <Compile Include="NamedValueCollection.cs" />
@@ -73,6 +80,9 @@
     <Compile Include="TaskCollection.cs" />
     <Compile Include="TaskFolderCollection.cs" />
     <Compile Include="TaskHandlerInterfaces.cs" />
+    <None Include="TaskServiceCronExt.cs">
+      <SubType>Component</SubType>
+    </None>
     <Compile Include="Trigger.cs" />
     <Compile Include="TriggerCollection.cs" />
     <Compile Include="V1\TaskSchedulerV1Interop.cs" />
