@@ -347,6 +347,9 @@ namespace TestTaskService
 				td.RegistrationInfo.Description = "Does something";
 				td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
+				// Add a cron trigger
+				td.Triggers.AddRange(Trigger.CreateTriggers("15 */6 */30 * *"));
+
 				// Add a trigger that will fire the task at this time every other day
 				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				dt.Repetition.Duration = TimeSpan.FromHours(4);

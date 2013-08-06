@@ -167,8 +167,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
 		/// <returns>Bound trigger.</returns>
+		/// <exception cref="System.ArgumentNullException"><c>unboundTrigger</c> is <c>null</c>.</exception>
 		public Trigger Add(Trigger unboundTrigger)
 		{
+			if (unboundTrigger == null)
+				throw new ArgumentNullException("unboundTrigger");
 			if (v2Def != null)
 				unboundTrigger.Bind(v2Def);
 			else
@@ -190,6 +193,19 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			return Trigger.CreateTrigger(v2Coll.Create(taskTriggerType));
+		}
+
+		/// <summary>
+		/// Adds a collection of unbound triggers to the end of the <see cref="TriggerCollection"/>.
+		/// </summary>
+		/// <param name="triggers">The triggers to be added to the end of the <see cref="TriggerCollection"/>. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
+		/// <exception cref="System.ArgumentNullException"><c>triggers</c> is <c>null</c>.</exception>
+		public void AddRange(IEnumerable<Trigger> triggers)
+		{
+			if (triggers == null)
+				throw new ArgumentNullException("triggers");
+			foreach (var item in triggers)
+				this.Add(item);
 		}
 
 		internal void Bind()
