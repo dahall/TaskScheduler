@@ -44,7 +44,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1Task != null)
 				return new V1TriggerEnumerator(v1Task);
-			return new V2TriggerEnumerator(v2Coll);
+			return new V2TriggerEnumerator(v2Coll, v2Def);
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -99,10 +99,12 @@ namespace Microsoft.Win32.TaskScheduler
 		internal sealed class V2TriggerEnumerator : IEnumerator<Trigger>
 		{
 			private System.Collections.IEnumerator iEnum;
+			private V2Interop.ITaskDefinition v2Def = null;
 
-			internal V2TriggerEnumerator(V2Interop.ITriggerCollection iColl)
+			internal V2TriggerEnumerator(V2Interop.ITriggerCollection iColl, V2Interop.ITaskDefinition iDef)
 			{
 				iEnum = iColl.GetEnumerator();
+				v2Def = iDef;
 			}
 
 			#region IEnumerator<Trigger> Members
@@ -111,7 +113,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				get
 				{
-					return Trigger.CreateTrigger((V2Interop.ITrigger)iEnum.Current);
+					return Trigger.CreateTrigger((V2Interop.ITrigger)iEnum.Current, v2Def);
 				}
 			}
 

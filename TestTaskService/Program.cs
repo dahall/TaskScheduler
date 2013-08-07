@@ -78,7 +78,20 @@ namespace TestTaskService
 				if (t == null)
 					output.WriteLine(string.Format("Task '{0}' not found.", arg[0]));
 				else
+				{
 					output.WriteLine(string.Format("Task '{0}' found. Created on {1:g} and last run on {2:g}.", t.Name, t.Definition.RegistrationInfo.Date, t.LastRunTime));
+					if (t.Definition.Triggers.ContainsType(typeof(CustomTrigger)))
+					{
+						foreach (var tr in t.Definition.Triggers)
+							if (tr.TriggerType == TaskTriggerType.Custom && ((CustomTrigger)tr).Properties.Count > 0)
+							{
+								output.WriteLine("Custom Trigger Properties:");
+								int i = 0;
+								foreach (var name in ((CustomTrigger)tr).Properties.Names)
+									output.WriteLine("{0}. {1} = {2}", ++i, name, ((CustomTrigger)tr).Properties[name]);
+							}
+					}
+				}
 			}
 			catch (Exception ex)
 			{

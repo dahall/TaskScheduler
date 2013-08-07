@@ -16,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal NamedValueCollection()
 		{
-			unboundDict = new Dictionary<string, string>(5); ;
+			unboundDict = new Dictionary<string, string>(5);
 		}
 
 		internal bool Bound
@@ -64,6 +64,44 @@ namespace Microsoft.Win32.TaskScheduler
 		public int Count
 		{
 			get { return v2Coll != null ? v2Coll.Count : unboundDict.Count; }
+		}
+
+		/// <summary>
+		/// Gets a collection of the names.
+		/// </summary>
+		/// <value>
+		/// The names.
+		/// </value>
+		public IEnumerable<string> Names
+		{
+			get
+			{
+				if (v2Coll == null)
+					return unboundDict.Keys;
+				List<string> ret = new List<string>(v2Coll.Count);
+				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+					ret.Add(item.Name);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// Gets a collection of the values.
+		/// </summary>
+		/// <value>
+		/// The values.
+		/// </value>
+		public IEnumerable<string> Values
+		{
+			get
+			{
+				if (v2Coll == null)
+					return unboundDict.Values;
+				List<string> ret = new List<string>(v2Coll.Count);
+				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+					ret.Add(item.Value);
+				return ret;
+			}
 		}
 
 		/// <summary>

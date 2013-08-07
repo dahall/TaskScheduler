@@ -411,7 +411,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A new <see cref="Trigger"/> that is an unbound copy of this instance.
 		/// </returns>
-		public object Clone()
+		public virtual object Clone()
 		{
 			Trigger ret = CreateTrigger(this.TriggerType);
 			ret.CopyProperties(this);
@@ -529,7 +529,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return t;
 		}
 
-		internal static Trigger CreateTrigger(V2Interop.ITrigger iTrigger)
+		internal static Trigger CreateTrigger(V2Interop.ITrigger iTrigger, V2Interop.ITaskDefinition iDef = null)
 		{
 			switch (iTrigger.Type)
 			{
@@ -556,7 +556,10 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerType.Weekly:
 					return new WeeklyTrigger((V2Interop.IWeeklyTrigger)iTrigger);
 				case TaskTriggerType.Custom:
-					return new CustomTrigger(iTrigger);
+					CustomTrigger ct = new CustomTrigger(iTrigger);
+					if (iDef != null)
+						ct.UpdateFromXml(iDef.XmlText);
+					return ct;
 				default:
 					break;
 			}
@@ -806,10 +809,14 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// Represents a custom trigger.
+	/// Represents a custom trigger. This class is based on undocumented features and may change.
 	/// </summary>
-	public sealed class CustomTrigger : Trigger
+	public sealed class CustomTrigger : Trigger, ITriggerDelay
 	{
+		private TimeSpan delay = TimeSpan.MinValue;
+		private string name = string.Empty;
+		private NamedValueCollection nvc = new NamedValueCollection();
+
 		internal CustomTrigger(V2Interop.ITrigger iTrigger)
 			: base(iTrigger)
 		{
@@ -821,7 +828,87 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			return Properties.Resources.TriggerCustom1;
+			return TaskScheduler.Properties.Resources.TriggerCustom1;
+		}
+
+		/// <summary>
+		/// Updates custom properties from XML provided by definition.
+		/// </summary>
+		/// <param name="xml">The XML from the TaskDefinition.</param>
+		internal void UpdateFromXml(string xml)
+		{
+			nvc.Clear();
+			try
+			{
+				var xmlDoc = new System.Xml.XmlDocument();
+				xmlDoc.LoadXml(xml);
+				var nsmgr = new System.Xml.XmlNamespaceManager(xmlDoc.NameTable);
+				nsmgr.AddNamespace("n", "http://schemas.microsoft.com/windows/2004/02/mit/task");
+				System.Xml.XmlNode elem = xmlDoc.DocumentElement.SelectSingleNode("n:Triggers/*[@id='" + base.Id + "']", nsmgr);
+				if (elem == null)
+				{
+					var nodes = xmlDoc.GetElementsByTagName("WnfStateChangeTrigger");
+					if (nodes != null && nodes.Count == 1)
+						elem = nodes[0];
+				}
+				if (elem != null)
+				{
+					name = elem.LocalName;
+					foreach (System.Xml.XmlNode node in elem.ChildNodes)
+					{
+						switch (node.LocalName)
+						{
+							case "Delay":
+								delay = Task.StringToTimeSpan(node.InnerText);
+								break;
+							case "StartBoundary":
+							case "Enabled":
+							case "EndBoundary":
+							case "ExecutionTimeLimit":
+								break;
+							default:
+								nvc.Add(node.LocalName, node.InnerText);
+								break;
+						}
+					}
+				}
+
+			}
+			catch { }
+		}
+
+		/// <summary>
+		/// Gets the properties from the Xml definition if possible.
+		/// </summary>
+		public NamedValueCollection Properties
+		{
+			get { return nvc; }
+		}
+
+		/// <summary>
+		/// Gets the name of the custom trigger type.
+		/// </summary>
+		/// <value>
+		/// The name of the XML element representing this custom trigger.
+		/// </value>
+		public string Name
+		{
+			get { return name; }
+		}
+
+		/// <summary>
+		/// Gets a value that indicates the amount of time between the trigger events and when the task is started.
+		/// </summary>
+		/// <exception cref="System.NotImplementedException">This value cannot be set.</exception>
+		public TimeSpan Delay { get { return delay; } set { throw new NotImplementedException(); } }
+
+		/// <summary>
+		/// Clones this instance.
+		/// </summary>
+		/// <exception cref="System.InvalidOperationException">CustomTrigger cannot be cloned due to OS restrictions.</exception>
+		public override object Clone()
+		{
+			throw new InvalidOperationException("CustomTrigger cannot be cloned due to OS restrictions.");
 		}
 	}
 
