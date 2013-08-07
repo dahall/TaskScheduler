@@ -76,7 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the error code.
 		/// </summary>
-		public int ErrorCode { get; internal set; }
+		public long ErrorCode { get; internal set; }
 
 		/// <summary>
 		/// Gets the underlying <see cref="EventRecord"/> instances.
@@ -198,7 +198,7 @@ namespace Microsoft.Win32.TaskScheduler
 							break;
 						case 103:
 							ce.SetCompletion(item.EventId, item.TimeCreated.Value);
-							ce.ErrorCode = Convert.ToInt32(item.EventRecord.Properties[3].Value);
+							ce.ErrorCode = Convert.ToInt64(item.EventRecord.Properties[3].Value);
 							break;
 						case 107:
 						case 108:

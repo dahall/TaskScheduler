@@ -100,6 +100,7 @@
 			// 
 			// activePanel.DetailArea
 			// 
+			this.activePanel.DetailArea.BackColor = System.Drawing.Color.Transparent;
 			this.activePanel.DetailArea.Controls.Add(this.activeListView);
 			this.activePanel.DetailArea.Controls.Add(this.label6);
 			this.activePanel.DetailArea.Controls.Add(this.label5);
@@ -161,6 +162,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(105, 15);
 			this.label6.TabIndex = 1;
+			this.label6.Tag = "Summary: {0} total";
 			this.label6.Text = "Summary: {0} total";
 			// 
 			// label5
@@ -179,6 +181,7 @@
 			// 
 			// overviewPanel.DetailArea
 			// 
+			this.overviewPanel.DetailArea.BackColor = System.Drawing.Color.Transparent;
 			this.overviewPanel.DetailArea.Controls.Add(this.label2);
 			this.overviewPanel.DetailArea.Controls.Add(this.label1);
 			this.overviewPanel.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -217,6 +220,7 @@
 			// 
 			// statusPanel.DetailArea
 			// 
+			this.statusPanel.DetailArea.BackColor = System.Drawing.Color.Transparent;
 			this.statusPanel.DetailArea.Controls.Add(this.statusListView);
 			this.statusPanel.DetailArea.Controls.Add(this.comboBox1);
 			this.statusPanel.DetailArea.Controls.Add(this.label4);
@@ -306,6 +310,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(372, 15);
 			this.label4.TabIndex = 0;
+			this.label4.Tag = "Summary: {0} total - {1} running, {2} succeeded, {3} stopped, {4} failed";
 			this.label4.Text = "Summary: {0} total - {1} running, {2} succeeded, {3} stopped, {4} failed";
 			// 
 			// label3

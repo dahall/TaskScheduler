@@ -407,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskRegDocText.Text = td.RegistrationInfo.Documentation;
 				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
 				taskRegSourceText.Text = td.RegistrationInfo.Source;
-				taskRegURIText.Text = td.RegistrationInfo.URI != null ? td.RegistrationInfo.URI.ToString() : null;
+				taskRegURIText.Text = td.RegistrationInfo.URI;
 				taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
 
 				// Set Additional tab
@@ -791,7 +791,8 @@ namespace Microsoft.Win32.TaskScheduler
 				ttd.Settings.Hidden = true;
 				ttd.Actions.Add(new ExecAction("rundll32.exe"));
 				foreach (Trigger tg in this.TaskDefinition.Triggers)
-					ttd.Triggers.Add((Trigger)tg.Clone());
+					if (tg.TriggerType != TaskTriggerType.Custom)
+						ttd.Triggers.Add((Trigger)tg.Clone());
 				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, ttd);
 				if (tempTask != null)
 				{
@@ -1199,6 +1200,12 @@ namespace Microsoft.Win32.TaskScheduler
 			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 			if (idx >= 0)
 			{
+				if (td.Triggers[idx].TriggerType == TaskTriggerType.Custom)
+				{
+					MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
+					return;
+				}
+
 				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2);
 				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
 				dlg.TargetServer = TaskService.TargetServer;
@@ -1434,7 +1441,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskRegURIText_Validated(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.RegistrationInfo.URI = taskRegURIText.TextLength > 0 ? new Uri(taskRegURIText.Text, UriKind.RelativeOrAbsolute) : null;
+				td.RegistrationInfo.URI = taskRegURIText.TextLength > 0 ? taskRegURIText.Text : null;
 		}
 
 		private void taskRegVersionText_Validated(object sender, EventArgs e)
@@ -1479,7 +1486,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskRegURIText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegURIText, 
-				delegate(string s) { return Uri.IsWellFormedUriString(s, UriKind.RelativeOrAbsolute); },
+				delegate(string s) { return true; },
 				EditorProperties.Resources.Error_InvalidUriFormat);
 		}
 

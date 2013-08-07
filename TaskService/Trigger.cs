@@ -89,7 +89,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
 		SessionStateChange = 11,
 		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
-		CustomTrigger = 12
+		Custom = 12
 	}
 
 	/// <summary>Values for week of month (first, second, ..., last)</summary>
@@ -555,6 +555,8 @@ namespace Microsoft.Win32.TaskScheduler
 					return new TimeTrigger((V2Interop.ITimeTrigger)iTrigger);
 				case TaskTriggerType.Weekly:
 					return new WeeklyTrigger((V2Interop.IWeeklyTrigger)iTrigger);
+				case TaskTriggerType.Custom:
+					return new CustomTrigger(iTrigger);
 				default:
 					break;
 			}
@@ -800,6 +802,26 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			return Properties.Resources.TriggerBoot1;
+		}
+	}
+
+	/// <summary>
+	/// Represents a custom trigger.
+	/// </summary>
+	public sealed class CustomTrigger : Trigger
+	{
+		internal CustomTrigger(V2Interop.ITrigger iTrigger)
+			: base(iTrigger)
+		{
+		}
+
+		/// <summary>
+		/// Gets the non-localized trigger string for V2 triggers.
+		/// </summary>
+		/// <returns>String describing the trigger.</returns>
+		protected override string V2GetTriggerString()
+		{
+			return Properties.Resources.TriggerCustom1;
 		}
 	}
 

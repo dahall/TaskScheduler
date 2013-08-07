@@ -389,7 +389,7 @@ Action: {3}</value>
   <data name="Error_InvalidVersionFormat" xml:space="preserve">
     <value>Version must be in the format major.minor[.build[.revision]].</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="auditFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\auditFail.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -515,5 +515,11 @@ Action: {3}</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
     <value>Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name.</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>This type of trigger cannot be edited in this tool.</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Custom Trigger</value>
   </data>
 </root>

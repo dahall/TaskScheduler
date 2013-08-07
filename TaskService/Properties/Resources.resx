@@ -190,6 +190,9 @@
   <data name="TriggerBoot1" xml:space="preserve">
     <value>At system startup</value>
   </data>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>Custom Trigger</value>
+  </data>
   <data name="TriggerDaily1" xml:space="preserve">
     <value>At {0:t} every day</value>
   </data>
@@ -277,6 +280,9 @@
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
     <value>At startup</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Custom Trigger</value>
   </data>
   <data name="TriggerTypeDaily" xml:space="preserve">
     <value>Daily</value>

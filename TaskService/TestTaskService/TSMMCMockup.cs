@@ -20,7 +20,7 @@ namespace TestTaskService
 		public TSMMCMockup()
 		{
 			InitializeComponent();
-            this.Icon = Properties.Resources.TaskScheduler;
+			this.Icon = Properties.Resources.TaskScheduler;
 		}
 
 		private void SetActionMenu(ContextMenuStrip menuItems)
@@ -174,9 +174,9 @@ namespace TestTaskService
 
 		}
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 	}
 }
