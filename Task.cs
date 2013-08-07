@@ -822,11 +822,9 @@ namespace Microsoft.Win32.TaskScheduler
 				DateTime now = DateTime.Now;
 				if (this.Definition.Settings.Enabled)
 				{
-					int count = this.Definition.Triggers.Count;
-					for (int i = 0; i < count; i++)
+					foreach (Trigger trigger in this.Definition.Triggers)
 					{
-						Trigger trigger = this.Definition.Triggers[i];
-						if ((trigger.Enabled && (now >= trigger.StartBoundary)) && (now < trigger.EndBoundary))
+						if ((trigger != null && trigger.Enabled && (now >= trigger.StartBoundary)) && (now < trigger.EndBoundary))
 						{
 							if (!(trigger is ICalendarTrigger))
 								return true;
@@ -2446,9 +2444,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the URI of the task.
 		/// </summary>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		/// <remarks><c>Note: </c>Breaking change in version 2.0. This property was previously of type <see cref="Uri"/>. It was found that in Windows 8,
+		/// many of the native tasks use this property in a string format rather than in a URI format.</remarks>
 		[DefaultValue(null)]
 		[XmlIgnore]
-		public Uri URI
+		public String URI
 		{
 			get
 			{
@@ -2457,12 +2457,12 @@ namespace Microsoft.Win32.TaskScheduler
 					uri = v2RegInfo.URI;
 				if (string.IsNullOrEmpty(uri))
 					return null;
-				return new Uri(uri);
+				return uri;
 			}
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.URI = value == null ? null : value.ToString();
+					v2RegInfo.URI = value;
 				else
 					throw new NotV1SupportedException();
 			}

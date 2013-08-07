@@ -508,7 +508,7 @@ namespace TestTaskService
 					td.Principal.Id = "Author";
 					td.RegistrationInfo.SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)";
 					td.RegistrationInfo.Source = "Test App";
-					td.RegistrationInfo.URI = new Uri("test://app");
+					td.RegistrationInfo.URI = "test://app";
 					td.RegistrationInfo.Version = new Version(0, 9);
 					td.Settings.AllowDemandStart = false;
 					td.Settings.AllowHardTerminate = false;

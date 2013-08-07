@@ -43,6 +43,12 @@ namespace TestTaskService
 			UpdateStatusList();
 
 			// Update active list
+			UpdateActiveList();
+		}
+
+		private void UpdateActiveList()
+		{
+			label6.Text = "Reading data...";
 			activeListView.Items.Clear();
 			activeListView.UseWaitCursor = true;
 			activeBackgroundWorker.RunWorkerAsync();
@@ -50,6 +56,7 @@ namespace TestTaskService
 
 		private void UpdateStatusList()
 		{
+			label4.Text = "Reading data...";
 			statusListView.Items.Clear();
 			statusListView.Groups.Clear();
 			statusListView.UseWaitCursor = true;
@@ -121,10 +128,13 @@ namespace TestTaskService
 		{
 			ListViewItem[] items = e.Result as ListViewItem[];
 			if (items == null)
+			{
+				label4.Text = "No results";
 				return;
+			}
 			ListViewGroup lvgroup = new ListViewGroup();
-			statusListView.UseWaitCursor = false;
 			statusListView.BeginUpdate();
+			int running = 0, succeeded = 0, stopped = 0, failed = 0;
 			for (int i = 0; i < items.Length; i++)
 			{
 				if (lvgroup.Header != items[i].Text)
@@ -135,8 +145,27 @@ namespace TestTaskService
 				}
 				items[i].Group = lvgroup;
 				statusListView.Items.Add(items[i]);
+				switch (((CorrelatedTaskEvent)items[i].Tag).RunResult)
+				{
+					case CorrelatedTaskEvent.Status.StillRunning:
+						running++;
+						break;
+					case CorrelatedTaskEvent.Status.Success:
+						succeeded++;
+						break;
+					case CorrelatedTaskEvent.Status.Failure:
+						failed++;
+						break;
+					case CorrelatedTaskEvent.Status.Terminated:
+						stopped++;
+						break;
+					default:
+						break;
+				}
 			}
 			statusListView.EndUpdate();
+			statusListView.UseWaitCursor = false;
+			label4.Text = string.Format(label4.Tag.ToString(), items.Length, running, succeeded, stopped, failed);
 		}
 
 		private void activeBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -155,6 +184,7 @@ namespace TestTaskService
 		{
 			activeListView.UseWaitCursor = false;
 			activeListView.Items.AddRange(e.Result as ListViewItem[]);
+			label6.Text = string.Format(label6.Tag.ToString(), activeListView.Items.Count);
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
