@@ -56,6 +56,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TimeSpan2\bin\Release\TimeSpan2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
@@ -91,12 +95,24 @@
     </Compile>
     <Compile Include="Native\ListView.cs" />
     <Compile Include="Native\USER32.cs" />
+    <Compile Include="NewFolderDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFolderDlg.Designer.cs">
+      <DependentUpon>NewFolderDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RunningTasksDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RunningTasksDlg.Designer.cs">
+      <DependentUpon>RunningTasksDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="TSMMCMockup.cs">
       <SubType>Form</SubType>
@@ -128,10 +144,16 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewFolderDlg.resx">
+      <DependentUpon>NewFolderDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RunningTasksDlg.resx">
+      <DependentUpon>RunningTasksDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>

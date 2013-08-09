@@ -8,7 +8,7 @@ namespace TestTaskService
 	public interface ISupportTasks
 	{
 		TaskService TaskService { get; set; }
-		ContextMenuStrip MenuItems { get; }
+		ToolStrip MenuItems { get; }
 	}
 
 	public partial class TSMMCMockup : Form
@@ -23,14 +23,25 @@ namespace TestTaskService
 			this.Icon = Properties.Resources.TaskScheduler;
 		}
 
-		private void SetActionMenu(ContextMenuStrip menuItems)
+		private void SetActionMenu(ToolStrip menuItems)
 		{
-			ToolStripManager.Merge(itemMenuStrip, menuItems);
+			if (menuItems == null)
+			{
+				itemPanel.Hide();
+			}
+			else
+			{
+				if (!itemPanel.DetailArea.Contains(menuItems))
+				{
+					itemPanel.DetailArea.Controls.Add(menuItems);
+					menuItems.Show();
+				}
+				itemPanel.Show();
+			}
 		}
 
 		private void ShowPanel(Control panel)
 		{
-			ToolStripManager.RevertMerge(itemMenuStrip);
 			if (curPanel != null)
 				curPanel.Hide();
 			curPanel = panel;
@@ -71,6 +82,8 @@ namespace TestTaskService
 				ShowHome();
 			else
 				ShowFolder(e.Node.Tag as TaskFolder);
+			newFolderMenuItem.Enabled = (e.Node.Tag != null);
+			delFolderMenuItem.Enabled = (e.Node.Parent != null && e.Node.Parent.Tag != null);
 		}
 
 		private void TSMMCMockup_Load(object sender, EventArgs e)
@@ -98,6 +111,7 @@ namespace TestTaskService
 			importTaskMenuItem.ImageIndex = 0;
 			displayAllRunningTasksMenuItem.ImageIndex = 6;
 			newFolderMenuItem.ImageIndex = 8;
+			delFolderMenuItem.ImageIndex = 11;
 			refreshMenuItem.ImageIndex = 9;
 
 			RefreshList();
@@ -161,7 +175,8 @@ namespace TestTaskService
 
 		private void displayAllRunningTasksToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			RunningTasksDlg dlg = new RunningTasksDlg(TaskService);
+			dlg.ShowDialog(this);
 		}
 
 		private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -171,7 +186,27 @@ namespace TestTaskService
 
 		private void newFolderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (treeView1.SelectedNode != null && treeView1.SelectedNode.Tag != null)
+			{
+				NewFolderDlg dlg = new NewFolderDlg();
+				if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				{
+					((TaskFolder)treeView1.SelectedNode.Tag).CreateFolder(dlg.FolderName); // Create folder under currently selected folder
+					RefreshList();
+				}
+			}
+		}
 
+		private void delFolderMenuItem_Click(object sender, EventArgs e)
+		{
+			if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent.Tag != null)
+			{
+				if (MessageBox.Show(this, "Do you want to delete this task folder?", "Task Scheduler", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+				{
+					((TaskFolder)treeView1.SelectedNode.Parent.Tag).DeleteFolder(((TaskFolder)treeView1.SelectedNode.Tag).Name);
+					RefreshList();
+				}
+			}
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)

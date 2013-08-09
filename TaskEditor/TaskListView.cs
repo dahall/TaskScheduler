@@ -26,6 +26,16 @@ namespace Microsoft.Win32.TaskScheduler
 		public event EventHandler<TaskSelectedEventArgs> TaskSelected;
 
 		/// <summary>
+		/// Gets or sets the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> associated with this control.
+		/// </summary>
+		/// <returns>The <see cref="T:System.Windows.Forms.ContextMenuStrip" /> for this control, or null if there is no <see cref="T:System.Windows.Forms.ContextMenuStrip" />. The default is null.</returns>
+		public override ContextMenuStrip ContextMenuStrip
+		{
+			get { return listView1.ContextMenuStrip; }
+			set { listView1.ContextMenuStrip = value; listView1.ContextMenuStrip.Opening += listView1ContextMenuStrip_Opening; }
+		}
+
+		/// <summary>
 		/// Gets or sets the zero-based index of the currently selected item in a <see cref="TaskListView"/>.
 		/// </summary>
 		/// <value>
@@ -73,6 +83,25 @@ namespace Microsoft.Win32.TaskScheduler
 			EventHandler<TaskSelectedEventArgs> handler = TaskSelected;
 			if (handler != null)
 				handler(this, e);
+		}
+
+		private void listView1ContextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			if (listView1.SelectedItems.Count <= 0)
+				e.Cancel = true;
+		}
+
+		private void listView1_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (this.ContextMenuStrip != null && e.Button == System.Windows.Forms.MouseButtons.Right)
+			{
+				ListViewItem item = listView1.GetItemAt(e.X, e.Y);
+				if (item != null)
+				{
+					item.Selected = true;
+					this.ContextMenuStrip.Show(listView1, e.Location);
+				}
+			}
 		}
 
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)

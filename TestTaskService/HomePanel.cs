@@ -66,9 +66,9 @@ namespace TestTaskService
 			statusBackgroundWorker.RunWorkerAsync(comboBox1.SelectedIndex);
 		}
 
-		public ContextMenuStrip MenuItems
+		public ToolStrip MenuItems
 		{
-			get { return new ContextMenuStrip(); }
+			get { return null; }
 		}
 
 		protected override void WndProc(ref Message m)

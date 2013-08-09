@@ -7,7 +7,6 @@ namespace TestTaskService
 	public partial class FolderPanel : UserControl, ISupportTasks
 	{
 		private Task selTask;
-		private bool itemMenuMerged = false;
 
 		public FolderPanel()
 		{
@@ -30,13 +29,13 @@ namespace TestTaskService
 			newFolderToolStripMenuItem.ImageIndex = 0;
 			deleteFolderToolStripMenuItem.ImageIndex = 1;
 
-			itemMenu.ImageList = imageList1;
-			runToolStripMenuItem.ImageIndex = 2;
-			endToolStripMenuItem.ImageIndex = 3;
-			disableToolStripMenuItem.ImageIndex = 4;
-			exportToolStripMenuItem.ImageIndex = 5;
-			propertiesToolStripMenuItem.ImageIndex = 6;
-			deleteToolStripMenuItem.ImageIndex = 7;
+			itemMenu.ImageList = itemMenuStrip.ImageList = imageList1;
+			runMenuItem.ImageIndex = runMenuItem2.ImageIndex = 2;
+			endMenuItem.ImageIndex = endMenuItem2.ImageIndex = 3;
+			disableMenuItem.ImageIndex = disableMenuItem2.ImageIndex = 4;
+			exportMenuItem.ImageIndex = exportMenuItem2.ImageIndex = 5;
+			propertiesMenuItem.ImageIndex = propertiesMenuItem2.ImageIndex = 6;
+			deleteMenuItem.ImageIndex = deleteMenuItem2.ImageIndex = 7;
 		}
 
 		public TaskCollection Tasks
@@ -54,6 +53,8 @@ namespace TestTaskService
 
 		private void taskListView_TaskSelected(object sender, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs e)
 		{
+			if (itemMenuStrip.Enabled != (e.Task != null))
+				itemMenuStrip.Enabled = (e.Task != null);
 			if (e.Task == null)
 			{
 				TaskPropertiesControl.Hide();
@@ -64,6 +65,9 @@ namespace TestTaskService
 				TaskPropertiesControl.Show();
 				TaskPropertiesControl.Initialize(e.Task);
 				selTask = e.Task;
+
+				endMenuItem.Enabled = endMenuItem2.Enabled = (selTask.State == TaskState.Running);
+				disableMenuItem.Enabled = disableMenuItem2.Enabled = (selTask.Enabled);
 			}
 		}
 
@@ -73,13 +77,18 @@ namespace TestTaskService
 				TaskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
 		}
 
-		private void endToolStripMenuItem_Click(object sender, EventArgs e)
+		private void disableMenu_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void endMenu_Click(object sender, EventArgs e)
 		{
 			if (selTask != null && MessageBox.Show("Do you want to end all instances of this task?", "Task Scheduler", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				selTask.Stop();
 		}
 
-		private void exportTaskMenu_Click(object sender, EventArgs e)
+		private void exportMenu_Click(object sender, EventArgs e)
 		{
 			if (selTask != null)
 				if (saveFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -103,22 +112,17 @@ namespace TestTaskService
 
 		public TaskService TaskService { get; set; }
 
-		public ContextMenuStrip MenuItems
+		public ToolStrip MenuItems
 		{
 			get
 			{
-				if (!itemMenuMerged && selTask != null)
-				{
-					ToolStripManager.Merge(folderMenu, itemMenu);
-					itemMenuMerged = true;
-				}
-				else if (itemMenuMerged && selTask == null)
-				{
-					ToolStripManager.RevertMerge(folderMenu, itemMenu);
-					itemMenuMerged = false;
-				}
-				return folderMenu;
+				return itemMenuStrip;
 			}
+		}
+
+		private void TaskListView_DoubleClick(object sender, EventArgs e)
+		{
+			propMenu_Click(sender, e);
 		}
 	}
 }
