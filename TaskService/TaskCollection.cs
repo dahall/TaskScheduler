@@ -158,41 +158,16 @@ namespace Microsoft.Win32.TaskScheduler
 				wienum.Reset();
 			}
 
-			internal string[] TaskNames
+			internal int Count
 			{
 				get
 				{
-					List<string> ret = new List<string>();
-					IntPtr names = IntPtr.Zero;
-					bool valid = false;
-					do
-					{
-						uint uFetched = 0;
-						try
-						{
-							wienum.Next(50, out names, out uFetched);
-							if (uFetched == 0)
-								break;
-
-							IntPtr cName = names;
-							for (uint i = 0; i < uFetched; cName = (IntPtr)((long)cName + Marshal.SizeOf(cName)), i++)
-							{
-								using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(cName)))
-								{
-									string tempStr = name.ToString();
-									if (tempStr.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
-										tempStr = tempStr.Remove(tempStr.Length - 4);
-									if (filter == null || filter.IsMatch(tempStr))
-										ret.Add(tempStr);
-								}
-							}
-						}
-						catch { }
-						finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
-					} while (!valid);
-
+					int i = 0;
 					Reset();
-					return ret.ToArray();
+					while (this.MoveNext())
+						i++;
+					Reset();
+					return i;
 				}
 			}
 		}
@@ -272,7 +247,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					V1TaskEnumerator v1te = new V1TaskEnumerator(this.svc, this.filter);
-					return v1te.TaskNames.Length;
+					return v1te.Count;
 				}
 				return i;
 			}

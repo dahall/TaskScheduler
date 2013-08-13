@@ -16,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <para>NOTE: This method is a work in progress and does not support all combinations of cron strings. Please test extensively before use.</para>
 		///   <para>Currently the cronString only supports numbers and not any of the weekday or month string. Please use numeric equivalent.</para>
 		/// </remarks>
-		public static Trigger[] CreateTriggers(string cronString)
+		public static Trigger[] FromCronFormat(string cronString)
 		{
 			CronExpression cron = new CronExpression();
 			cron.Parse(cronString);
