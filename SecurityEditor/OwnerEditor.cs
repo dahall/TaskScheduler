@@ -37,7 +37,7 @@ namespace SecurityEditor
 		private void otherUserButton_Click(object sender, EventArgs e)
 		{
 			string acctName = string.Empty, sid; bool isGroup, isService;
-			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
+			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
 			{
 
 			}
