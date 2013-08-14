@@ -82,7 +82,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void addBtn_Click(object sender, EventArgs e)
 		{
 			string acctName = string.Empty, sid; bool isGroup, isService;
-			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
+			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
 			{
 				FileSystemAccessRule aRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Allow);
 				FileSystemAccessRule dRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Deny);

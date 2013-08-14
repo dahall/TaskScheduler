@@ -38,7 +38,7 @@ namespace SecurityEditor
 		private void changeNameBtn_Click(object sender, System.EventArgs e)
 		{
 			string acctName = string.Empty, sid; bool isGroup, isService;
-			if (Microsoft.Win32.TaskScheduler.NativeMethods.AccountUtils.SelectAccount(this, null, ref acctName, out isGroup, out isService, out sid))
+			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, null, ref acctName, out isGroup, out isService, out sid))
 			{
 				nameText.Text = acctName;
 				accessPermissionList1.Initialize(sec, new System.Security.Principal.NTAccount(acctName), Display);

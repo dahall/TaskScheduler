@@ -83,8 +83,8 @@
       <Link>DialogBase.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\TaskEditor\NativeMethods.cs">
-      <Link>NativeMethods.cs</Link>
+    <Compile Include="..\TaskEditor\HelperMethods.cs">
+      <Link>HelperMethods.cs</Link>
     </Compile>
     <Compile Include="AceEditor.cs">
       <SubType>Form</SubType>
@@ -102,6 +102,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Enums.cs" />
+    <Compile Include="Native\AccountUtils.cs" />
+    <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="OwnerEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +174,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
