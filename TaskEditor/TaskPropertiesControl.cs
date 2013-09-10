@@ -523,9 +523,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:ComponentError"/> event.
+		/// Raises the <see cref="ComponentError" /> event.
 		/// </summary>
-		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs"/> instance containing the event data.</param>
+		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs" /> instance containing the event data.</param>
 		protected virtual void OnComponentError(ComponentErrorEventArgs e)
 		{
 			EventHandler<ComponentErrorEventArgs> handler = ComponentError;

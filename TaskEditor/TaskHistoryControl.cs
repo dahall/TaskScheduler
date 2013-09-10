@@ -38,6 +38,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Activates this instance. Call when the control receives initial focus or needs to refresh.
 		/// </summary>
+		/// <param name="t">The <see cref="Task"/> for which to get the history.</param>
 		public void Activate(Task t)
 		{
 			this.task = t;

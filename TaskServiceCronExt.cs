@@ -9,12 +9,30 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates a trigger using a cron string.
 		/// </summary>
-		/// <param name="cronString">String using cron defined syntax for specifying a time interval.</param>
+		/// <param name="cronString">String using cron defined syntax for specifying a time interval. See remarks for syntax.</param>
 		/// <returns>Array of <see cref="Trigger" /> representing the specified cron string.</returns>
 		/// <exception cref="System.NotImplementedException">Unsupported cron string.</exception>
 		/// <remarks>
-		///   <para>NOTE: This method is a work in progress and does not support all combinations of cron strings. Please test extensively before use.</para>
-		///   <para>Currently the cronString only supports numbers and not any of the weekday or month string. Please use numeric equivalent.</para>
+		///   <para>NOTE: This method does not support all combinations of cron strings. Please test extensively before use. Please post an issue with any syntax that should work, but doesn't.</para>
+		///   <para>Currently the cronString only supports numbers and not any of the weekday or month strings. Please use numeric equivalent.</para>
+		///   <para>This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated by white spaces:</para>
+		///   <code>
+		///   &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
+		///   </code>
+		///   <para>Each item has bounds as defined by the following:</para>
+		///   <code>
+		///   * * * * *
+		///   | | | | |
+		///   | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+		///   | | | +------ Month of the Year (range: 1-12)
+		///   | | +-------- Day of the Month  (range: 1-31)
+		///   | +---------- Hour              (range: 0-23)
+		///   +------------ Minute            (range: 0-59)
+		///   </code>
+		///   <para>Any of these 5 fields may be an asterisk (*). This would mean the entire range of possible values, i.e. each minute, each hour, etc.</para>
+		///   <para>Any of the first 4 fields can be a question mark ("?"). It stands for the current time, i.e. when a field is processed, the current time will be substituted for the question mark: minutes for Minute field, hour for Hour field, day of the month for Day of month field and month for Month field.</para>
+		///   <para>Any field may contain a list of values separated by commas, (e.g. 1,3,7) or a range of values (two integers separated by a hyphen, e.g. 1-5).</para>
+		///   <para>After an asterisk (*) or a range of values, you can use character / to specify that values are repeated over and over with a certain interval between them. For example, you can write "0-23/2" in Hour field to specify that some action should be performed every two hours (it will have the same effect as "0,2,4,6,8,10,12,14,16,18,20,22"); value "*/4" in Minute field means that the action should be performed every 4 minutes, "1-30/3"  means the same as "1,4,7,10,13,16,19,22,25,28".</para>
 		/// </remarks>
 		public static Trigger[] FromCronFormat(string cronString)
 		{
@@ -168,7 +186,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class CronExpression
 		{
-			public FieldVal[] Fields = new FieldVal[5];
+			private FieldVal[] Fields = new FieldVal[5];
 
 			public CronExpression() { }
 
@@ -239,6 +257,36 @@ namespace Microsoft.Win32.TaskScheduler
 						throw new ArgumentException("A crontab field value range must begin with a lower number");
 					res.range = true;
 					res.vals = new int[] { first, last };
+					res.Validate(cft);
+					return res;
+				}
+
+				// Check for "?" and substitute current time
+				if (str.Length == 1 && str[0] == '?')
+				{
+					DateTime now = DateTime.Now;
+					int nval = 0;
+					switch (cft)
+					{
+						case CronFieldType.Minutes:
+							nval = now.Minute;
+							break;
+						case CronFieldType.Hours:
+							nval = now.Hour;
+							break;
+						case CronFieldType.Days:
+							nval = now.Day;
+							break;
+						case CronFieldType.Months:
+							nval = now.Month;
+							break;
+						case CronFieldType.DaysOfWeek:
+							throw new ArgumentException("The fifth parameter representing the day of the week cannot be a '?'.");
+						default:
+							break;
+					}
+					res.vals = new int[] { nval };
+					res.step = 0;
 					res.Validate(cft);
 					return res;
 				}

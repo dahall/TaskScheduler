@@ -257,7 +257,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="name">Name of the task in regular expression form.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
-		/// <returns>A <see cref="T:Task[]"/> of all tasks matching <paramref name="name"/>.</returns>
+		/// <returns>An array of <see cref="T:Task"/> containing all tasks matching <paramref name="name"/>.</returns>
 		public Task[] FindAllTasks(System.Text.RegularExpressions.Regex name, bool searchAllFolders = true)
 		{
 			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
