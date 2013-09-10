@@ -905,6 +905,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Clones this instance.
 		/// </summary>
+		/// <returns>This method will always throw an exception.</returns>
 		/// <exception cref="System.InvalidOperationException">CustomTrigger cannot be cloned due to OS restrictions.</exception>
 		public override object Clone()
 		{

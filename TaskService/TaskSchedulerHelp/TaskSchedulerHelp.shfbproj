@@ -66,15 +66,23 @@
           <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" numberLines="false" outlining="false" keepSeeTags="false" tabSize="0" defaultTitle="true" />
         </component>
       </ComponentConfig>
-<ComponentConfig id="IntelliSense Component" enabled="True"><component id="IntelliSense Component" type="Microsoft.Ddue.Tools.IntelliSenseComponent" assembly="{@SandcastlePath}ProductionTools\BuildComponents.dll"><!-- Output options (optional)
+      <ComponentConfig id="IntelliSense Component" enabled="True">
+        <component id="IntelliSense Component" type="Microsoft.Ddue.Tools.IntelliSenseComponent" assembly="{@SandcastlePath}ProductionTools\BuildComponents.dll">
+          <!-- Output options (optional)
 					 Attributes:
 							Include Namespaces (false by default)
 							Namespaces filename ("Namespaces" if not specified or empty)
-							Directory (current folder if not specified or empty) --><output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}" /></component></ComponentConfig>
-<ComponentConfig id="API Token Resolution" enabled="True"><component id="API Token Resolution" type="Microsoft.Ddue.Tools.SharedContentComponent" assembly="{@SandcastlePath}ProductionTools\BuildComponents.dll">
+							Directory (current folder if not specified or empty) -->
+          <output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="API Token Resolution" enabled="True">
+        <component id="API Token Resolution" type="Microsoft.Ddue.Tools.SharedContentComponent" assembly="{@SandcastlePath}ProductionTools\BuildComponents.dll">
 
         {@TokenFiles}
-        <replace elements="/*//token" item="string(.)" /></component></ComponentConfig></ComponentConfigurations>
+        <replace elements="/*//token" item="string(.)" /></component>
+      </ComponentConfig>
+    </ComponentConfigurations>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\bin\Release\Microsoft.Win32.TaskScheduler.dll" />
       <DocumentationSource sourceFile="..\bin\Release\Microsoft.Win32.TaskScheduler.XML" />
@@ -83,11 +91,11 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
-      <NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
-    </NamespaceSummaries>
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
+<NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem></NamespaceSummaries>
     <HelpFileVersion>1.9.0.0</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer</HelpFileFormat>
     <CopyrightHref>http://taskscheduler.codeplex.com/license</CopyrightHref>
