@@ -748,13 +748,58 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Task = iTask;
 		}
 
-		// TODO: Create task and check validity of XML. If can be downcasted to earlier version, do it and expose TaskDefinition.
 		internal static Task CreateTask(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
 		{
 			try
 			{
 				Task t = new Task(svc, iTask);
 				string xml = iTask.Definition.XmlText;
+				System.Text.RegularExpressions.Match match = null;
+				if ((match = System.Text.RegularExpressions.Regex.Match(xml, "(?:\\<Task version=\"1\\.(\\d)\")")).Success)
+				{
+					Version xmlVer = new Version("1." + match.Groups[1].Value);
+					if (xmlVer > svc.HighestSupportedVersion)
+					{
+						int newMinor = xmlVer.Minor;
+						if (!xml.Contains("<Volatile>true") &&
+							!xml.Contains("<MaintenanceSettings>"))
+							newMinor = 3;
+						if (!xml.Contains("<UseUnifiedSchedulingEngine>true") &&
+							!xml.Contains("<DisallowStartOnRemoteAppSession>true") && 
+							!xml.Contains("<RequiredPrivileges>") &&
+							!xml.Contains("<ProcessTokenSidType>None") &&
+							!xml.Contains("<ProcessTokenSidType>Unrestricted"))
+							newMinor = 2;
+						if (!xml.Contains("<DisplayName>") &&
+							!xml.Contains("<GroupId>") && 
+							!xml.Contains("<RunLevel>") &&
+							!xml.Contains("<SecurityDescriptor>") &&
+							!xml.Contains("<Source>") &&
+							!xml.Contains("<URI>") &&
+							!xml.Contains("<AllowStartOnDemand>false") &&
+							!xml.Contains("<AllowHardTerminate>false") &&
+							!xml.Contains("<MultipleInstancesPolicy>") &&
+							!xml.Contains("<NetworkSettings>") &&
+							!xml.Contains("<StartWhenAvailable>") &&
+							!xml.Contains("<SendEmail>") &&
+							!xml.Contains("<ShowMessage>") &&
+							!xml.Contains("<ComHandler>") &&
+							!xml.Contains("<EventTrigger>") &&
+							!xml.Contains("<SessionStateChangeTrigger>") &&
+							!xml.Contains("<RegistrationTrigger>") &&
+							!xml.Contains("<RestartOnFailure>") &&
+							!xml.Contains("<LogonType>S4U"))
+							newMinor = 1;
+
+						if (newMinor != xmlVer.Minor)
+						{
+							xml = System.Text.RegularExpressions.Regex.Replace(xml, "\\<Task version=\"1\\.\\d\"", string.Format("<Task version=\"1.{0}\"", newMinor));
+							t.myTD = svc.NewTask();
+							t.myTD.XmlText = xml;
+							// TODO: If can be downcasted to earlier version, do it and expose TaskDefinition.
+						}
+					}
+				}
 				return t;
 			}
 			catch (Exception)

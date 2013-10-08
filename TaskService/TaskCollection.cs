@@ -187,7 +187,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public Task Current
 			{
-				get { return new Task(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
+				get { return Task.CreateTask(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
 			}
 
 			/// <summary>
