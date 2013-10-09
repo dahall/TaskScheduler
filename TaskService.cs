@@ -313,7 +313,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				V2Interop.IRegisteredTask iTask = GetTask(this.v2TaskService, taskPath);
 				if (iTask != null)
-					t = new Task(this, iTask);
+					t = Task.CreateTask(this, iTask);
 			}
 			else
 			{

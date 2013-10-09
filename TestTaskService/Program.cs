@@ -480,9 +480,16 @@ namespace TestTaskService
 					catch { throw; }
 					TaskFolder sub = tf.SubFolders[testFolder];
 					output.WriteLine("\nSubfolder path: " + sub.Path);
-					ts.AddTask(testFolder + @"\MyTask", new LogonTrigger(), new ExecAction("notepad"));
-					output.WriteLine(" - Tasks: " + sub.Tasks.Count.ToString());
-					sub.DeleteTask("MyTask");
+					try
+					{
+						ts.AddTask(testFolder + @"\MyTask", new DailyTrigger(), new ExecAction("notepad"));
+						output.WriteLine(" - Tasks: " + sub.Tasks.Count.ToString());
+						sub.DeleteTask("MyTask");
+					}
+					catch (Exception ex)
+					{
+						output.WriteLine(ex.ToString());
+					}
 					tf.DeleteFolder(testFolder);
 				}
 				catch (NotSupportedException) { }
@@ -499,7 +506,7 @@ namespace TestTaskService
 				td.Data = "Your data";
 				//td.Principal.UserId = "SYSTEM";
 				//td.Principal.LogonType = TaskLogonType.ServiceAccount;
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Principal.LogonType = TaskLogonType.S4U;
 				td.RegistrationInfo.Author = "dahall";
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
@@ -523,7 +530,7 @@ namespace TestTaskService
 					td.RegistrationInfo.Source = "Test App";
 					td.RegistrationInfo.URI = "test://app";
 					td.RegistrationInfo.Version = new Version(0, 9);
-					td.Settings.AllowDemandStart = false;
+					//td.Settings.AllowDemandStart = false;
 					td.Settings.AllowHardTerminate = false;
 					td.Settings.Compatibility = TaskCompatibility.V2;
 					td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromMinutes(1);
@@ -553,10 +560,10 @@ namespace TestTaskService
 				if (isV14)
 				{
 					td.Settings.Compatibility = TaskCompatibility.V2_2;
-					/*td.Settings.Volatile = true;
+					td.Settings.Volatile = true;
 					td.Settings.MaintenanceSettings.Exclusive = true;
 					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(5);
-					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);*/
+					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);
 				}
 
 				// Setup Triggers
@@ -572,9 +579,9 @@ namespace TestTaskService
 
 				if (isV12)
 				{
-					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
+					/*EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
-					eTrigger.ValueQueries.Add("Name", "Value");
+					eTrigger.ValueQueries.Add("Name", "Value");*/
 
 					td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
@@ -626,9 +633,9 @@ namespace TestTaskService
 				if (isV12)
 				{
 					td.Actions.Context = "Author";
-					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group)
+					/*if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group)
 						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
-					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));
+					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));*/
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 
