@@ -754,50 +754,45 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				Task t = new Task(svc, iTask);
 				string xml = iTask.Definition.XmlText;
-				System.Text.RegularExpressions.Match match = null;
-				if ((match = System.Text.RegularExpressions.Regex.Match(xml, "(?:\\<Task version=\"1\\.(\\d)\")")).Success)
+				DefDoc dd = new DefDoc(xml);
+				Version xmlVer = dd.Version;
+				if (xmlVer > svc.HighestSupportedVersion)
 				{
-					Version xmlVer = new Version("1." + match.Groups[1].Value);
-					if (xmlVer > svc.HighestSupportedVersion)
-					{
-						int newMinor = xmlVer.Minor;
-						if (!xml.Contains("<Volatile>true") &&
-							!xml.Contains("<MaintenanceSettings>"))
-							newMinor = 3;
-						if (!xml.Contains("<UseUnifiedSchedulingEngine>true") &&
-							!xml.Contains("<DisallowStartOnRemoteAppSession>true") && 
-							!xml.Contains("<RequiredPrivileges>") &&
-							!xml.Contains("<ProcessTokenSidType>None") &&
-							!xml.Contains("<ProcessTokenSidType>Unrestricted"))
-							newMinor = 2;
-						if (!xml.Contains("<DisplayName>") &&
-							!xml.Contains("<GroupId>") && 
-							!xml.Contains("<RunLevel>") &&
-							!xml.Contains("<SecurityDescriptor>") &&
-							!xml.Contains("<Source>") &&
-							!xml.Contains("<URI>") &&
-							!xml.Contains("<AllowStartOnDemand>false") &&
-							!xml.Contains("<AllowHardTerminate>false") &&
-							!xml.Contains("<MultipleInstancesPolicy>") &&
-							!xml.Contains("<NetworkSettings>") &&
-							!xml.Contains("<StartWhenAvailable>") &&
-							!xml.Contains("<SendEmail>") &&
-							!xml.Contains("<ShowMessage>") &&
-							!xml.Contains("<ComHandler>") &&
-							!xml.Contains("<EventTrigger>") &&
-							!xml.Contains("<SessionStateChangeTrigger>") &&
-							!xml.Contains("<RegistrationTrigger>") &&
-							!xml.Contains("<RestartOnFailure>") &&
-							!xml.Contains("<LogonType>S4U"))
-							newMinor = 1;
+					int newMinor = dd.Version.Minor;
+					if (!dd.Contains("Volatile", "false") &&
+						!dd.Contains("MaintenanceSettings"))
+						newMinor = 3;
+					if (!dd.Contains("UseUnifiedSchedulingEngine", "false") &&
+						!dd.Contains("DisallowStartOnRemoteAppSession", "false") && 
+						!dd.Contains("RequiredPrivileges") &&
+						!dd.Contains("ProcessTokenSidType", "Default"))
+						newMinor = 2;
+					if (!dd.Contains("DisplayName") &&
+						!dd.Contains("GroupId") && 
+						!dd.Contains("RunLevel") &&
+						!dd.Contains("SecurityDescriptor") &&
+						!dd.Contains("Source") &&
+						!dd.Contains("URI") &&
+						!dd.Contains("AllowStartOnDemand", "true") &&
+						!dd.Contains("AllowHardTerminate", "true") &&
+						!dd.Contains("MultipleInstancesPolicy", "IgnoreNew") &&
+						!dd.Contains("NetworkSettings") &&
+						!dd.Contains("StartWhenAvailable", "false") &&
+						!dd.Contains("SendEmail") &&
+						!dd.Contains("ShowMessage") &&
+						!dd.Contains("ComHandler") &&
+						!dd.Contains("EventTrigger") &&
+						!dd.Contains("SessionStateChangeTrigger") &&
+						!dd.Contains("RegistrationTrigger") &&
+						!dd.Contains("RestartOnFailure") &&
+						!dd.Contains("LogonType", "None"))
+						newMinor = 1;
 
-						if (newMinor != xmlVer.Minor)
-						{
-							xml = System.Text.RegularExpressions.Regex.Replace(xml, "\\<Task version=\"1\\.\\d\"", string.Format("<Task version=\"1.{0}\"", newMinor));
-							t.myTD = svc.NewTask();
-							t.myTD.XmlText = xml;
-							// TODO: If can be downcasted to earlier version, do it and expose TaskDefinition.
-						}
+					if (newMinor != xmlVer.Minor)
+					{
+						dd.Version = new Version(1, newMinor);
+						t.myTD = svc.NewTask();
+						t.myTD.XmlText = dd.Xml;
 					}
 				}
 				return t;
@@ -805,6 +800,60 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (Exception)
 			{
 				throw;
+			}
+		}
+
+		private class DefDoc
+		{
+			System.Xml.XmlDocument doc;
+
+			public DefDoc(string xml)
+			{
+				doc = new XmlDocument();
+				doc.LoadXml(xml);
+			}
+
+			public Version Version
+			{
+				get
+				{
+					try
+					{
+						return new Version(doc["Task"].Attributes["version"].Value);
+					}
+					catch
+					{
+						throw new InvalidOperationException("Task definition does not contain a version.");
+					}
+				}
+				set
+				{
+					doc["Task"].Attributes["version"].Value = value.ToString(2);
+				}
+			}
+
+			public string Xml
+			{
+				get
+				{
+					return doc.OuterXml;
+				}
+			}
+
+			public bool Contains(string tag, string defaultVal = null, bool removeIfFound = true)
+			{
+				var elems = doc.GetElementsByTagName(tag);
+				if (elems != null && elems.Count > 0)
+				{
+					var e = elems[0];
+					if (e.InnerText == defaultVal || e.InnerText == string.Empty)
+					{
+						e.ParentNode.RemoveChild(e);
+						return false;
+					}
+					return true;
+				}
+				return false;
 			}
 		}
 

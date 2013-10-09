@@ -291,7 +291,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 				{
 					if (filter == null)
-						return new Task(svc, v2Coll[++index]);
+						return Task.CreateTask(svc, v2Coll[++index]);
 					else
 					{
 						V2TaskEnumerator v2te = new V2TaskEnumerator(this.fld, this.v2Coll, this.filter);
@@ -321,7 +321,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return new Task(svc, v2Coll[name]);
+					return Task.CreateTask(svc, v2Coll[name]);
 
 				Task v1Task = svc.GetTask(name);
 				if (v1Task != null)
@@ -329,6 +329,24 @@ namespace Microsoft.Win32.TaskScheduler
 
 				throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		/// <summary>
+		/// Determines whether the specified task exists.
+		/// </summary>
+		/// <param name="taskName">The name of the task.</param>
+		/// <returns>true if task exists; otherwise, false.</returns>
+		public bool Exists(string taskName)
+		{
+			try
+			{
+				if (v2Coll != null)
+					return v2Coll[taskName] != null;
+
+				return svc.GetTask(taskName) != null;
+			}
+			catch { }
+			return false;
 		}
 	}
 

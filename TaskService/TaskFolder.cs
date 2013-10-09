@@ -48,12 +48,12 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return (v2Folder == null) ? @"\" : v2Folder.Path; }
 		}
 
-		/*public TaskFolder GetFolder(string Path)
+		internal TaskFolder GetFolder(string Path)
 		{
 			if (v2Folder != null)
-				return new TaskFolder(v2Folder.GetFolder(Path));
+				return new TaskFolder(this.TaskService, v2Folder.GetFolder(Path));
 			throw new NotV1SupportedException();
-		}*/
+		}
 
 		/// <summary>
 		/// Gets or sets the security descriptor of the task.
@@ -127,11 +127,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Deletes a subfolder from the parent folder. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="subFolderName">The name of the subfolder to be removed. The root task folder is specified with a backslash (\). This parameter can be a relative path to the folder you want to delete. An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the folder does not exist.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void DeleteFolder(string subFolderName)
+		public void DeleteFolder(string subFolderName, bool exceptionOnNotExists = true)
 		{
 			if (v2Folder != null)
-				v2Folder.DeleteFolder(subFolderName, 0);
+			{
+				try
+				{
+					v2Folder.DeleteFolder(subFolderName, 0);
+				}
+				catch (System.IO.FileNotFoundException)
+				{
+					if (exceptionOnNotExists)
+						throw;
+				}
+			}
 			else
 				throw new NotV1SupportedException();
 		}
@@ -140,15 +151,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Deletes a task from the folder.
 		/// </summary>
 		/// <param name="Name">The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
-		public void DeleteTask(string Name)
+		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the task does not exist.</param>
+		public void DeleteTask(string Name, bool exceptionOnNotExists = true)
 		{
-			if (v2Folder != null)
-				v2Folder.DeleteTask(Name, 0);
-			else
+			try
 			{
-				if (!Name.EndsWith(".job", StringComparison.CurrentCultureIgnoreCase))
-					Name += ".job";
-				v1List.Delete(Name);
+				if (v2Folder != null)
+					v2Folder.DeleteTask(Name, 0);
+				else
+				{
+					if (!Name.EndsWith(".job", StringComparison.CurrentCultureIgnoreCase))
+						Name += ".job";
+					v1List.Delete(Name);
+				}
+			}
+			catch (System.IO.FileNotFoundException)
+			{
+				if (exceptionOnNotExists)
+					throw;
 			}
 		}
 

@@ -107,17 +107,21 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/*
 		/// <summary>
-		/// Determines whether the collection contains a specific key and value.
+		/// Determines whether the specified folder exists.
 		/// </summary>
-		/// <param name="item">The TaskFolder to locate in the collection.</param>
-		/// <returns>true if item is found in the collection; otherwise, false.</returns>
-		public bool Contains(TaskFolder item)
+		/// <param name="path">The path of the folder.</param>
+		/// <returns>true if folder exists; otherwise, false.</returns>
+		public bool Exists(string path)
 		{
-			return IndexOf(item) != -1;
+			try
+			{
+				if (parent.GetFolder(path) != null)
+					return true;
+			}
+			catch { }
+			return false;
 		}
-		*/
 
 		/// <summary>
 		/// Copies the elements of the ICollection to an Array, starting at a particular Array index.
