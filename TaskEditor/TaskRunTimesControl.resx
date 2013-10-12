@@ -130,7 +130,7 @@
     <value>0, 53</value>
   </data>
   <data name="listBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 167</value>
+    <value>980, 827</value>
   </data>
   <data name="listBox1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -202,7 +202,7 @@
     <value>2</value>
   </data>
   <data name="endDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 26</value>
+    <value>43, 26</value>
   </data>
   <data name="endDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 20</value>
@@ -217,7 +217,7 @@
     <value>endDatePicker</value>
   </data>
   <data name="&gt;&gt;endDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.20781, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.20104, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;endDatePicker.Parent" xml:space="preserve">
     <value>$this</value>
@@ -226,7 +226,7 @@
     <value>3</value>
   </data>
   <data name="startDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 0</value>
+    <value>43, 0</value>
   </data>
   <data name="startDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 20</value>
@@ -241,7 +241,7 @@
     <value>startDatePicker</value>
   </data>
   <data name="&gt;&gt;startDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=1.7.4393.20781, Culture=neutral, PublicKeyToken=null</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.20104, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;startDatePicker.Parent" xml:space="preserve">
     <value>$this</value>
@@ -259,7 +259,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 220</value>
+    <value>490, 440</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TaskRunTimesControl</value>

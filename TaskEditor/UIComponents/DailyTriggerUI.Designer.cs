@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DailyTriggerUI));
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.dailyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
 			this.dailyDaysLabel = new System.Windows.Forms.Label();
@@ -38,52 +39,34 @@
 			// 
 			// panel2
 			// 
-			this.panel2.AutoSize = true;
-			this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			resources.ApplyResources(this.panel2, "panel2");
 			this.panel2.Controls.Add(this.dailyRecurNumUpDn);
 			this.panel2.Controls.Add(this.dailyDaysLabel);
 			this.panel2.Controls.Add(this.dailyRecurLabel);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel2.Location = new System.Drawing.Point(0, 26);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(539, 26);
-			this.panel2.TabIndex = 2;
 			// 
 			// dailyRecurNumUpDn
 			// 
-			this.dailyRecurNumUpDn.Location = new System.Drawing.Point(107, 0);
+			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
 			this.dailyRecurNumUpDn.Name = "dailyRecurNumUpDn";
-			this.dailyRecurNumUpDn.Size = new System.Drawing.Size(54, 23);
-			this.dailyRecurNumUpDn.TabIndex = 4;
 			this.dailyRecurNumUpDn.ValueChanged += new System.EventHandler(this.dailyRecurNumUpDn_ValueChanged);
 			// 
 			// dailyDaysLabel
 			// 
-			this.dailyDaysLabel.AutoSize = true;
-			this.dailyDaysLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.dailyDaysLabel.Location = new System.Drawing.Point(179, 2);
+			resources.ApplyResources(this.dailyDaysLabel, "dailyDaysLabel");
 			this.dailyDaysLabel.Name = "dailyDaysLabel";
-			this.dailyDaysLabel.Size = new System.Drawing.Size(31, 15);
-			this.dailyDaysLabel.TabIndex = 5;
-			this.dailyDaysLabel.Text = "days";
 			// 
 			// dailyRecurLabel
 			// 
-			this.dailyRecurLabel.AutoSize = true;
-			this.dailyRecurLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.dailyRecurLabel.Location = new System.Drawing.Point(4, 2);
+			resources.ApplyResources(this.dailyRecurLabel, "dailyRecurLabel");
 			this.dailyRecurLabel.Name = "dailyRecurLabel";
-			this.dailyRecurLabel.Size = new System.Drawing.Size(71, 15);
-			this.dailyRecurLabel.TabIndex = 3;
-			this.dailyRecurLabel.Text = "Recur every:";
 			// 
 			// DailyTriggerUI
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.panel2);
 			this.Name = "DailyTriggerUI";
-			this.Size = new System.Drawing.Size(539, 55);
 			this.Controls.SetChildIndex(this.panel2, 0);
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();

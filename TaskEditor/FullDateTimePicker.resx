@@ -196,7 +196,7 @@
     <value>3</value>
   </data>
   <data name="utcCheckBox.Text" xml:space="preserve">
-    <value>Synchronize across time zones</value>
+    <value>Synchroni&amp;ze across time zones</value>
   </data>
   <data name="&gt;&gt;utcCheckBox.Name" xml:space="preserve">
     <value>utcCheckBox</value>

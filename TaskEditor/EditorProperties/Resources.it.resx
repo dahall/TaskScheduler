@@ -168,11 +168,11 @@
     <value>Computer locale</value>
   </data>
   <data name="TaskEditDlgTitle" xml:space="preserve">
-    <value>{0} Compito ({1})</value>
+    <value>{0} Attività ({1})</value>
     <comment>0=Task name; 1=Machine</comment>
   </data>
   <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value>Invalido Trigger di Evento</value>
+    <value>Invalida attivazione di evento</value>
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
     <value>Come minimo, un registro deve essere selezionato.</value>
@@ -181,7 +181,7 @@
     <value>Ci deve essere almeno un mese, una settimana, e un giorno della settimana selezionata.</value>
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value>Invalido Trigger Mensile</value>
+    <value>Invalida attivazione mensile</value>
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
     <value>Ci deve essere almeno un mese e un giorno selezionato.</value>
@@ -199,16 +199,16 @@
     <value>Pianificatore per compiti</value>
   </data>
   <data name="CredentialPromptMessage" xml:space="preserve">
-    <value>Inserisci le informazioni sull'account utente per l'esecuzione di questo compito.</value>
+    <value>Inserisci le informazioni sull'account utente per l'esecuzione di questa attività.</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
     <value>Una password valida per l'account specificato non è stato fornito.</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
-    <value>Ci deve essere almeno una azione assegnata a questo compito.</value>
+    <value>Ci deve essere almeno una azione assegnata a questa attività.</value>
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value>Tempi di funzionamento per il compito ({0})</value>
+    <value>Tempi di funzionamento per l'attività ({0})</value>
   </data>
   <data name="LastResultSuccessful" xml:space="preserve">
     <value>L'operazione è stata completata con successo. (0x0)</value>
@@ -223,13 +223,13 @@
     <value>Nuova azione</value>
   </data>
   <data name="TriggerDlgEditCaption" xml:space="preserve">
-    <value>Modifica trigger</value>
+    <value>Modifica attivazione</value>
   </data>
   <data name="TriggerDlgNewCaption" xml:space="preserve">
-    <value>Nuova trigger</value>
+    <value>Nuova attivazione</value>
   </data>
   <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
-    <value>Se si desidera avere un compito cancellati automaticamente dopo viene eseguito, è necessario aggiungere almeno un trigger che ha una data di scadenza.</value>
+    <value>Se si desidera cancellare un'attività automaticamente dopo viene eseguito, è necessario aggiungere almeno un'attivazione che ha una data di scadenza.</value>
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
     <value>Selezionare un nuovo computer di destinazione:</value>
@@ -251,7 +251,7 @@
     <value>Impossibile recuperare la cronologia delle attività. Errore: {0}</value>
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
-    <value>L'esecuzione di un compito con un account utente del gruppo è supportato solo su Windows Vista ™ o versioni successive. Per eseguire un compito con un account di gruppo, è necessario aggiornare questo compito ad una delle applicazioni di Windows Vista ™.</value>
+    <value>L'esecuzione di un'attività con un account utente del gruppo è supportato solo su Windows Vista ™ o versioni successive. Per eseguire un'attività con un account di gruppo, è necessario aggiornare quest'attività ad una delle applicazioni di Windows Vista ™.</value>
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
     <value>Invia una e-mail utilizzando le informazioni fornite.</value>
@@ -260,7 +260,7 @@
     <value>Esegue un'operazione dal command-line.</value>
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
-    <value>Mostra un messaggio quando un compito viene attivato.</value>
+    <value>Mostra un messaggio quando un'attività viene attivato.</value>
   </data>
   <data name="WizActionTextExecute" xml:space="preserve">
     <value>Eseguire un programma</value>
@@ -272,7 +272,7 @@
     <value>Mostrare un messaggio</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value>Avvia un compito basato su un programma giornaliero. Per esempio, il compito inizia in un momento specifico ogni giorno, ogni giorno, ogni tre giorni, e così via.</value>
+    <value>Avvia un'attività basato su un programma giornaliero. Per esempio, l'attività inizia in un momento specifico ogni giorno, ogni giorno, ogni tre giorni, e così via.</value>
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Quotidiano</value>
@@ -284,19 +284,19 @@
     <value>Quando un determinato evento viene registrato</value>
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value>Avvia un compito basato su una pianificazione mensile. Per esempio, il compito inizia in giorni specifici della mesi specifici.</value>
+    <value>Avvia un'attività basato su una pianificazione mensile. Per esempio, l'attività inizia in giorni specifici della mesi specifici.</value>
   </data>
   <data name="WizTriggerTextMonthly" xml:space="preserve">
     <value>Mensile</value>
   </data>
   <data name="WizTriggerSubtextTime" xml:space="preserve">
-    <value>Avvia un compito a una data e un'ora specifiche.</value>
+    <value>Avvia un'attività a una data e un'ora specifiche.</value>
   </data>
   <data name="WizTriggerTextTime" xml:space="preserve">
     <value>Una volta</value>
   </data>
   <data name="WizTriggerSubtextWeekly" xml:space="preserve">
-    <value>Avvia un compito basato su una pianificazione settimanale. Per esempio, il compito inizia alle 08:00 in un giorno specifico della settimana, ogni settimana o ogni due settimane.</value>
+    <value>Avvia un'attività basata su una pianificazione settimanale. Per esempio, l'attività inizia alle 08:00 in un giorno specifico della settimana, ogni settimana o ogni due settimane.</value>
   </data>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
     <value>Settimanale</value>
@@ -306,7 +306,7 @@
 
 Descrizione: {1}
 
-Trigger: {2}
+Attivazione: {2}
 
 Azione: {3}</value>
   </data>
@@ -316,106 +316,115 @@ Azione: {3}</value>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>Per le opzioni scelte, una password per l'utente specificato deve essere fornita.</value>
   </data>
-  <data name="TaskCompatibility">
+  <data name="TaskCompatibility" xml:space="preserve">
     <value>AT servizio|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
   </data>
-  <data name="TimeSpanNotStarted">
+  <data name="TimeSpanNotStarted" xml:space="preserve">
     <value>Non avviato</value>
   </data>
-  <data name="ProcessPriorityAboveNormal">
+  <data name="ProcessPriorityAboveNormal" xml:space="preserve">
     <value>Sopra il normale</value>
   </data>
-  <data name="ProcessPriorityBelowNormal">
+  <data name="ProcessPriorityBelowNormal" xml:space="preserve">
     <value>Di sotto della norma</value>
   </data>
-  <data name="ProcessPriorityHigh">
+  <data name="ProcessPriorityHigh" xml:space="preserve">
     <value>Alto</value>
   </data>
-  <data name="ProcessPriorityIdle">
+  <data name="ProcessPriorityIdle" xml:space="preserve">
     <value>Minimo</value>
   </data>
-  <data name="ProcessPriorityNormal">
+  <data name="ProcessPriorityNormal" xml:space="preserve">
     <value>Normale</value>
   </data>
-  <data name="ProcessPriorityRealTime">
+  <data name="ProcessPriorityRealTime" xml:space="preserve">
     <value>Tempo reale</value>
   </data>
-  <data name="SIDTypeDefault">
+  <data name="SIDTypeDefault" xml:space="preserve">
     <value>Difetto</value>
   </data>
-  <data name="SIDTypeNone">
+  <data name="SIDTypeNone" xml:space="preserve">
     <value>Nessuno</value>
   </data>
-  <data name="SIDTypeUnrestricted">
+  <data name="SIDTypeUnrestricted" xml:space="preserve">
     <value>Libero</value>
   </data>
-  <data name="Error_PrincipalSidTypeInvalid">
+  <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
     <value>L&amp;#39;account utente nella scheda generale deve essere impostata su &amp;#39;servizio di rete&amp;#39; o &amp;#39;servizio locale&amp;#39; quando il tipo di processo di sid è impostato su &amp;#39;senza restrizioni&amp;#39; nella scheda aggiunte. è necessario modificare il tipo di sid o impostare l&amp;#39;utente a uno degli account validi.</value>
   </data>
-  <data name="UseUnifiedResetQuestion">
+  <data name="UseUnifiedResetQuestion" xml:space="preserve">
     <value>L&amp;#39;impostazione di questa proprietà consente di disattivare una serie di altre proprietà. Ti piace ancora di procedere?</value>
   </data>
-  <data name="ActionTypeComHandler">
+  <data name="ActionTypeComHandler" xml:space="preserve">
     <value>Gestore personalizzato</value>
   </data>
-  <data name="ActionTypeExecute">
+  <data name="ActionTypeExecute" xml:space="preserve">
     <value>Avviare un programma</value>
   </data>
-  <data name="ActionTypeSendEmail">
+  <data name="ActionTypeSendEmail" xml:space="preserve">
     <value>Inviare una e-mail</value>
   </data>
-  <data name="ActionTypeShowMessage">
+  <data name="ActionTypeShowMessage" xml:space="preserve">
     <value>Visualizzare un messaggio</value>
   </data>
-  <data name="TaskInstancesIgnoreNew">
+  <data name="TaskInstancesIgnoreNew" xml:space="preserve">
     <value>Non avviare una nuova istanza</value>
   </data>
-  <data name="TaskInstancesParallel">
+  <data name="TaskInstancesParallel" xml:space="preserve">
     <value>Eseguire una nuova istanza in parallelo</value>
   </data>
-  <data name="TaskInstancesQueue">
+  <data name="TaskInstancesQueue" xml:space="preserve">
     <value>Coda di una nuova istanza</value>
   </data>
-  <data name="TaskInstancesStopExisting">
+  <data name="TaskInstancesStopExisting" xml:space="preserve">
     <value>Arrestare l&amp;#39;istanza esistente</value>
   </data>
-  <data name="Error_InvalidSddlFormat">
+  <data name="Error_InvalidSddlFormat" xml:space="preserve">
     <value>SDDL si deve essere in formato definito a http://goo.gl/6au0v</value>
   </data>
-  <data name="Error_InvalidUriFormat">
+  <data name="Error_InvalidUriFormat" xml:space="preserve">
     <value>URI non è in un formato corretto</value>
   </data>
-  <data name="Error_InvalidVersionFormat">
+  <data name="Error_InvalidVersionFormat" xml:space="preserve">
     <value>Versione deve essere nel formato major.minor[.costruire[.revisione]].</value>
   </data>
-  <data name="EventDetailHeader">
+  <data name="EventDetailHeader" xml:space="preserve">
     <value>evento {0}, TaskScheduler</value>
   </data>
-  <data name="HistoryHeader">
+  <data name="HistoryHeader" xml:space="preserve">
     <value>Conto di eventi: {0}</value>
   </data>
-  <data name="EventPropertiesDialogTitle">
+  <data name="EventPropertiesDialogTitle" xml:space="preserve">
     <value>Proprietà di evento - Evento {0}, TaskScheduler</value>
   </data>
-  <data name="TaskEventStatusFailure">
+  <data name="TaskEventStatusFailure" xml:space="preserve">
     <value>Fallimento</value>
   </data>
-  <data name="TaskEventStatusStillRunning">
+  <data name="TaskEventStatusStillRunning" xml:space="preserve">
     <value>Ancora in esecuzione</value>
   </data>
-  <data name="TaskEventStatusSuccess">
+  <data name="TaskEventStatusSuccess" xml:space="preserve">
     <value>Successo</value>
   </data>
-  <data name="TaskEventStatusTerminated">
+  <data name="TaskEventStatusTerminated" xml:space="preserve">
     <value>Terminato</value>
   </data>
-  <data name="TriggerTypeRemoteConnect">
+  <data name="TriggerTypeRemoteConnect" xml:space="preserve">
     <value>A connettersi da una sessione utente remoto</value>
   </data>
-  <data name="TriggerTypeRemoteDisconnect">
+  <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
     <value>A disconnettersi da una sessione utente remoto</value>
   </data>
-  <data name="LoadingPrompt">
-    <value>Loading ...</value>
+  <data name="LoadingPrompt" xml:space="preserve">
+    <value>Caricando ...</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>Questo tipo di attivazione non può essere modificato in questo modo.</value>
+  </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value>Il nome dell'attività non è in un formato valido. Non sono ammessi caratteri in un nome di attività che sono invalidi in un nome di file.</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Attivazione personalizata</value>
   </data>
 </root>

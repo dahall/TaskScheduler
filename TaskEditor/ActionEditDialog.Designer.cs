@@ -60,12 +60,14 @@
 			// 
 			resources.ApplyResources(this.promptLabel, "promptLabel");
 			this.promptLabel.Name = "promptLabel";
+			this.toolTip.SetToolTip(this.promptLabel, resources.GetString("promptLabel.ToolTip"));
 			// 
 			// groupBox1
 			// 
 			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
+			this.toolTip.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
 			// 
 			// actionsCombo
 			// 
@@ -78,6 +80,7 @@
             resources.GetString("actionsCombo.Items2"),
             resources.GetString("actionsCombo.Items3")});
 			this.actionsCombo.Name = "actionsCombo";
+			this.toolTip.SetToolTip(this.actionsCombo, resources.GetString("actionsCombo.ToolTip"));
 			this.actionsCombo.SelectedIndexChanged += new System.EventHandler(this.actionsCombo_SelectedIndexChanged);
 			// 
 			// settingsGroup
@@ -86,6 +89,7 @@
 			this.settingsGroup.Controls.Add(this.settingsTabs);
 			this.settingsGroup.Name = "settingsGroup";
 			this.settingsGroup.TabStop = false;
+			this.toolTip.SetToolTip(this.settingsGroup, resources.GetString("settingsGroup.ToolTip"));
 			// 
 			// settingsTabs
 			// 
@@ -98,63 +102,73 @@
 			this.settingsTabs.SelectedIndex = 0;
 			this.settingsTabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.settingsTabs.TabStop = false;
+			this.toolTip.SetToolTip(this.settingsTabs, resources.GetString("settingsTabs.ToolTip"));
 			// 
 			// execTab
 			// 
-			this.execTab.Controls.Add(this.execActionUI1);
 			resources.ApplyResources(this.execTab, "execTab");
+			this.execTab.Controls.Add(this.execActionUI1);
 			this.execTab.Name = "execTab";
+			this.toolTip.SetToolTip(this.execTab, resources.GetString("execTab.ToolTip"));
 			this.execTab.UseVisualStyleBackColor = true;
 			// 
 			// execActionUI1
 			// 
 			resources.ApplyResources(this.execActionUI1, "execActionUI1");
 			this.execActionUI1.Name = "execActionUI1";
+			this.toolTip.SetToolTip(this.execActionUI1, resources.GetString("execActionUI1.ToolTip"));
 			this.execActionUI1.KeyValueChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// emailTab
 			// 
-			this.emailTab.Controls.Add(this.emailActionUI1);
 			resources.ApplyResources(this.emailTab, "emailTab");
+			this.emailTab.Controls.Add(this.emailActionUI1);
 			this.emailTab.Name = "emailTab";
+			this.toolTip.SetToolTip(this.emailTab, resources.GetString("emailTab.ToolTip"));
 			this.emailTab.UseVisualStyleBackColor = true;
 			// 
 			// emailActionUI1
 			// 
 			resources.ApplyResources(this.emailActionUI1, "emailActionUI1");
 			this.emailActionUI1.Name = "emailActionUI1";
+			this.toolTip.SetToolTip(this.emailActionUI1, resources.GetString("emailActionUI1.ToolTip"));
 			this.emailActionUI1.KeyValueChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// messageTab
 			// 
-			this.messageTab.Controls.Add(this.showMessageActionUI1);
 			resources.ApplyResources(this.messageTab, "messageTab");
+			this.messageTab.Controls.Add(this.showMessageActionUI1);
 			this.messageTab.Name = "messageTab";
+			this.toolTip.SetToolTip(this.messageTab, resources.GetString("messageTab.ToolTip"));
 			this.messageTab.UseVisualStyleBackColor = true;
 			// 
 			// showMessageActionUI1
 			// 
 			resources.ApplyResources(this.showMessageActionUI1, "showMessageActionUI1");
 			this.showMessageActionUI1.Name = "showMessageActionUI1";
+			this.toolTip.SetToolTip(this.showMessageActionUI1, resources.GetString("showMessageActionUI1.ToolTip"));
 			this.showMessageActionUI1.KeyValueChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// comTab
 			// 
-			this.comTab.Controls.Add(this.comHandlerActionUI1);
 			resources.ApplyResources(this.comTab, "comTab");
+			this.comTab.Controls.Add(this.comHandlerActionUI1);
 			this.comTab.Name = "comTab";
+			this.toolTip.SetToolTip(this.comTab, resources.GetString("comTab.ToolTip"));
 			this.comTab.UseVisualStyleBackColor = true;
 			// 
 			// comHandlerActionUI1
 			// 
 			resources.ApplyResources(this.comHandlerActionUI1, "comHandlerActionUI1");
 			this.comHandlerActionUI1.Name = "comHandlerActionUI1";
+			this.toolTip.SetToolTip(this.comHandlerActionUI1, resources.GetString("comHandlerActionUI1.ToolTip"));
 			this.comHandlerActionUI1.KeyValueChanged += new System.EventHandler(this.keyField_TextChanged);
 			// 
 			// okBtn
 			// 
 			resources.ApplyResources(this.okBtn, "okBtn");
 			this.okBtn.Name = "okBtn";
+			this.toolTip.SetToolTip(this.okBtn, resources.GetString("okBtn.ToolTip"));
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
@@ -163,6 +177,7 @@
 			resources.ApplyResources(this.cancelBtn, "cancelBtn");
 			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelBtn.Name = "cancelBtn";
+			this.toolTip.SetToolTip(this.cancelBtn, resources.GetString("cancelBtn.ToolTip"));
 			this.cancelBtn.UseVisualStyleBackColor = true;
 			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
@@ -170,10 +185,12 @@
 			// 
 			resources.ApplyResources(this.actionsLabel, "actionsLabel");
 			this.actionsLabel.Name = "actionsLabel";
+			this.toolTip.SetToolTip(this.actionsLabel, resources.GetString("actionsLabel.ToolTip"));
 			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
 			// 
 			// ActionEditDialog
 			// 
@@ -194,6 +211,7 @@
 			this.Name = "ActionEditDialog";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
+			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.settingsGroup.ResumeLayout(false);
 			this.settingsTabs.ResumeLayout(false);
 			this.execTab.ResumeLayout(false);

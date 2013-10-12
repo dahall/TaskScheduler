@@ -29,8 +29,9 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskHistoryControl));
 			this.historySplitContainer = new System.Windows.Forms.SplitContainer();
-			this.historyListView = new ListViewEx();
+			this.historyListView = new Microsoft.Win32.TaskScheduler.TaskHistoryControl.ListViewEx();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,11 +44,11 @@
 			this.historyListImages = new System.Windows.Forms.ImageList(this.components);
 			this.historyStopStartBtn = new System.Windows.Forms.Button();
 			this.historyFilterIcon = new System.Windows.Forms.Label();
+			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.historyDetailTitleText = new System.Windows.Forms.Label();
 			this.historyDetailHideBtn = new System.Windows.Forms.Button();
 			this.historyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
 			this.historySplitContainer.Panel1.SuspendLayout();
 			this.historySplitContainer.Panel2.SuspendLayout();
 			this.historySplitContainer.SuspendLayout();
@@ -57,29 +58,26 @@
 			// 
 			// historySplitContainer
 			// 
+			resources.ApplyResources(this.historySplitContainer, "historySplitContainer");
 			this.historySplitContainer.BackColor = System.Drawing.SystemColors.Control;
 			this.historySplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.historySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.historySplitContainer.Location = new System.Drawing.Point(0, 0);
 			this.historySplitContainer.Name = "historySplitContainer";
-			this.historySplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
 			// historySplitContainer.Panel1
 			// 
+			resources.ApplyResources(this.historySplitContainer.Panel1, "historySplitContainer.Panel1");
 			this.historySplitContainer.Panel1.Controls.Add(this.historyListView);
 			this.historySplitContainer.Panel1.Controls.Add(this.tableLayoutPanel1);
 			// 
 			// historySplitContainer.Panel2
 			// 
-			this.historySplitContainer.Panel2.AutoScroll = true;
+			resources.ApplyResources(this.historySplitContainer.Panel2, "historySplitContainer.Panel2");
 			this.historySplitContainer.Panel2.Controls.Add(this.historyDetailView);
 			this.historySplitContainer.Panel2.Controls.Add(this.tableLayoutPanel2);
-			this.historySplitContainer.Size = new System.Drawing.Size(602, 360);
-			this.historySplitContainer.SplitterDistance = 166;
-			this.historySplitContainer.TabIndex = 8;
 			// 
 			// historyListView
 			// 
+			resources.ApplyResources(this.historyListView, "historyListView");
 			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader7,
@@ -87,15 +85,11 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11});
-			this.historyListView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.historyListView.FullRowSelect = true;
 			this.historyListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.historyListView.HideSelection = false;
-			this.historyListView.Location = new System.Drawing.Point(0, 25);
 			this.historyListView.MultiSelect = false;
 			this.historyListView.Name = "historyListView";
-			this.historyListView.Size = new System.Drawing.Size(598, 137);
-			this.historyListView.TabIndex = 5;
 			this.historyListView.UseCompatibleStateImageBehavior = false;
 			this.historyListView.View = System.Windows.Forms.View.Details;
 			this.historyListView.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this.historyListView_CacheVirtualItems);
@@ -105,154 +99,95 @@
 			// 
 			// columnHeader6
 			// 
-			this.columnHeader6.Text = "Level";
-			this.columnHeader6.Width = 50;
+			resources.ApplyResources(this.columnHeader6, "columnHeader6");
 			// 
 			// columnHeader7
 			// 
-			this.columnHeader7.Text = "Date and Time";
-			this.columnHeader7.Width = 115;
+			resources.ApplyResources(this.columnHeader7, "columnHeader7");
 			// 
 			// columnHeader8
 			// 
-			this.columnHeader8.Text = "Event ID";
-			this.columnHeader8.Width = 73;
+			resources.ApplyResources(this.columnHeader8, "columnHeader8");
 			// 
 			// columnHeader9
 			// 
-			this.columnHeader9.Text = "Task Category";
-			this.columnHeader9.Width = 88;
+			resources.ApplyResources(this.columnHeader9, "columnHeader9");
 			// 
 			// columnHeader10
 			// 
-			this.columnHeader10.Text = "Operational Code";
-			this.columnHeader10.Width = 77;
+			resources.ApplyResources(this.columnHeader10, "columnHeader10");
 			// 
 			// columnHeader11
 			// 
-			this.columnHeader11.Text = "Correlation Id";
-			this.columnHeader11.Width = 95;
+			resources.ApplyResources(this.columnHeader11, "columnHeader11");
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 4;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.historyHeader, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.historyClearBtn, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.historyStopStartBtn, 3, 0);
 			this.tableLayoutPanel1.Controls.Add(this.historyFilterIcon, 0, 0);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(598, 25);
-			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// historyHeader
 			// 
-			this.historyHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyHeader.Location = new System.Drawing.Point(25, 0);
-			this.historyHeader.Margin = new System.Windows.Forms.Padding(0);
+			resources.ApplyResources(this.historyHeader, "historyHeader");
 			this.historyHeader.Name = "historyHeader";
-			this.historyHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.historyHeader.Size = new System.Drawing.Size(334, 19);
-			this.historyHeader.TabIndex = 0;
-			this.historyHeader.Text = "Number of events: X";
-			this.historyHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// historyClearBtn
 			// 
-			this.historyClearBtn.AutoSize = true;
+			resources.ApplyResources(this.historyClearBtn, "historyClearBtn");
 			this.historyClearBtn.FlatAppearance.BorderSize = 0;
-			this.historyClearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.historyClearBtn.ImageList = this.historyListImages;
-			this.historyClearBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyClearBtn.Location = new System.Drawing.Point(557, 0);
-			this.historyClearBtn.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.historyClearBtn.Name = "historyClearBtn";
-			this.historyClearBtn.Size = new System.Drawing.Size(19, 19);
-			this.historyClearBtn.TabIndex = 0;
 			this.historyClearBtn.UseVisualStyleBackColor = true;
-			this.historyClearBtn.Visible = false;
 			// 
 			// historyListImages
 			// 
 			this.historyListImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-			this.historyListImages.ImageSize = new System.Drawing.Size(16, 16);
+			resources.ApplyResources(this.historyListImages, "historyListImages");
 			this.historyListImages.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// historyStopStartBtn
 			// 
-			this.historyStopStartBtn.AutoSize = true;
+			resources.ApplyResources(this.historyStopStartBtn, "historyStopStartBtn");
 			this.historyStopStartBtn.FlatAppearance.BorderSize = 0;
-			this.historyStopStartBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.historyStopStartBtn.ImageList = this.historyListImages;
-			this.historyStopStartBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyStopStartBtn.Location = new System.Drawing.Point(579, 0);
-			this.historyStopStartBtn.Margin = new System.Windows.Forms.Padding(0);
 			this.historyStopStartBtn.Name = "historyStopStartBtn";
-			this.historyStopStartBtn.Size = new System.Drawing.Size(19, 19);
-			this.historyStopStartBtn.TabIndex = 0;
 			this.historyStopStartBtn.UseVisualStyleBackColor = true;
-			this.historyStopStartBtn.Visible = false;
 			// 
 			// historyFilterIcon
 			// 
-			this.historyFilterIcon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			resources.ApplyResources(this.historyFilterIcon, "historyFilterIcon");
 			this.historyFilterIcon.ImageList = this.historyListImages;
-			this.historyFilterIcon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyFilterIcon.Location = new System.Drawing.Point(3, 0);
 			this.historyFilterIcon.Name = "historyFilterIcon";
-			this.historyFilterIcon.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.historyFilterIcon.Size = new System.Drawing.Size(19, 19);
-			this.historyFilterIcon.TabIndex = 1;
+			// 
+			// historyDetailView
+			// 
+			resources.ApplyResources(this.historyDetailView, "historyDetailView");
+			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
+			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
+			this.historyDetailView.Name = "historyDetailView";
+			this.historyDetailView.TaskEvent = null;
 			// 
 			// tableLayoutPanel2
 			// 
-			this.tableLayoutPanel2.AutoSize = true;
-			this.tableLayoutPanel2.ColumnCount = 2;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
 			this.tableLayoutPanel2.Controls.Add(this.historyDetailTitleText, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.historyDetailHideBtn, 1, 0);
-			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-			this.tableLayoutPanel2.RowCount = 1;
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(598, 22);
-			this.tableLayoutPanel2.TabIndex = 3;
 			// 
 			// historyDetailTitleText
 			// 
-			this.historyDetailTitleText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyDetailTitleText.Location = new System.Drawing.Point(3, 0);
+			resources.ApplyResources(this.historyDetailTitleText, "historyDetailTitleText");
 			this.historyDetailTitleText.Name = "historyDetailTitleText";
-			this.historyDetailTitleText.Size = new System.Drawing.Size(400, 19);
-			this.historyDetailTitleText.TabIndex = 1;
-			this.historyDetailTitleText.Text = "Event 100, TaskScheduler";
-			this.historyDetailTitleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// historyDetailHideBtn
 			// 
-			this.historyDetailHideBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.historyDetailHideBtn, "historyDetailHideBtn");
 			this.historyDetailHideBtn.FlatAppearance.BorderSize = 0;
-			this.historyDetailHideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.historyDetailHideBtn.Font = new System.Drawing.Font("Marlett", 9F);
-			this.historyDetailHideBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.historyDetailHideBtn.Location = new System.Drawing.Point(579, 0);
-			this.historyDetailHideBtn.Margin = new System.Windows.Forms.Padding(0);
 			this.historyDetailHideBtn.Name = "historyDetailHideBtn";
-			this.historyDetailHideBtn.Size = new System.Drawing.Size(19, 19);
-			this.historyDetailHideBtn.TabIndex = 0;
-			this.historyDetailHideBtn.Text = "r";
 			this.historyDetailHideBtn.UseVisualStyleBackColor = true;
 			this.historyDetailHideBtn.Click += new System.EventHandler(this.histDetailHideBtn_Click);
 			// 
@@ -261,26 +196,12 @@
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
-			// historyDetailView
-			// 
-			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
-			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
-			this.historyDetailView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.historyDetailView.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.historyDetailView.Location = new System.Drawing.Point(0, 22);
-			this.historyDetailView.Name = "historyDetailView";
-			this.historyDetailView.Padding = new System.Windows.Forms.Padding(3);
-			this.historyDetailView.Size = new System.Drawing.Size(598, 164);
-			this.historyDetailView.TabIndex = 2;
-			this.historyDetailView.TaskEvent = null;
-			// 
 			// TaskHistoryControl
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.historySplitContainer);
 			this.Name = "TaskHistoryControl";
-			this.Size = new System.Drawing.Size(602, 360);
 			this.historySplitContainer.Panel1.ResumeLayout(false);
 			this.historySplitContainer.Panel1.PerformLayout();
 			this.historySplitContainer.Panel2.ResumeLayout(false);
