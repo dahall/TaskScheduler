@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyConnection" xml:space="preserve">
+    <value>Jede Verbindung</value>
+    <comment>Default item for displaying status of Networking setting</comment>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Deaktiviert</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Letzte</value>
+    <comment>Text for days of month drop down representing last day of specified month.</comment>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>Beim Start </value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>Bei einem Ereignis</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>Im Leerlauf</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>Bei Anmeldung</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>Bei Aufgabenerstellung/-änderung</value>
+  </data>
+  <data name="TriggerTypeSchedule" xml:space="preserve">
+    <value>Nach einem Zeitplan</value>
+  </data>
+  <data name="TriggerTypeSessionConnect" xml:space="preserve">
+    <value>Bei Verbingung einer Bentzersitzung</value>
+  </data>
+  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
+    <value>Bei Trennung von einer Benutzersitzung</value>
+  </data>
+  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
+    <value>Bei Arbeitsstationssperre</value>
+  </data>
+  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
+    <value>Beim Aufheben der Arbeitsstationssperre</value>
+  </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>Zeitzonenübergreifende Synch.</value>
+  </data>
+  <data name="LocalMachine" xml:space="preserve">
+    <value>Lokale Maschine</value>
+  </data>
+  <data name="TaskEditDlgTitle" xml:space="preserve">
+    <value>{0} Eigenschaften ({1})</value>
+    <comment>0=Task name; 1=Machine</comment>
+  </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>Ungültiger Ereignis-Trigger</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>Zumindest muss ein Protokoll ausgewählt werden.</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>Es muss mindestens einen Monat, eine Woche, und einen Wochentag ausgewählt werden.</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>Ungültiger monatlicher Trigger</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>Es muss mindestens einen Monat und einen Tag ausgewählt werden.</value>
+  </data>
+  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
+    <value>Diese COM-Klasse unterstützt die gewünschte Schnittstelle nicht.</value>
+  </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Aufrufen von CredUIConfirmCredentials ist mit Fehlercode: {0} fehlgeschlaen.</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Aufrufen von CredUIPromptForCredentials ist mit Fehlercode: {0} fehlgeschlaen.</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>Aufgabenplanner</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>Geben Sie Informationen zum Benutzerkonto für die Auführung dieser Aufgabe.</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>Ein gültiges Kennwort für das angegebene Konto war nicht vorgesehen.</value>
+  </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>Es muss mindestens eine Aktion zu dieser Aufgabe zugeordnet sein.</value>
+  </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>Aufgabenlautzeiten ({0})</value>
+  </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>Die Operation wurde erfolgreich abgeschlossen. (0x0)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>Aktion bearbeiten</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>Neue Aktion</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>Trigger bearbeiten</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>Neuer Trigger</value>
+  </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>Wenn Sie eine Aufgabe automatisch nach der Ausführung gelöscht haben wollen, müssen Sie mindestens einen Trigger, der ein Ablaufdatum hat, hinzufügen.</value>
+  </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>Einen neuen Zielcomputer auswähen:</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;keine&gt;</value>
+    <comment>Used when user is null in TaskServiceConnectDialog</comment>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>Nicht warten</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>Sofort</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>Sofort</value>
+  </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>Taskverlauf kann nicht abgeruft werden. Fehler: {0}</value>
+  </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>Ausführen einer Aufgabe unter einer Gruppe-Benutzerkonto wird nur unter Windows Vista™ oder höher unterstützt. Um eine Aufgabe im Rahmen einer Gruppenkonto ausführen, müssen Sie diese Aufgabe zu einem Windows Vista™ Task umwandeln.</value>
+  </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>Sendet eine E-Mail mit vorgesorget Informationen.</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>Führt eine Befehlszeile-Operation.</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>Zeigt eine Meldung, wenn eine Aufgabe aktiviert ist.</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>Programm starten</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>E-Mail senden</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>Meldung anzeigen</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>Startet eine Aufgabe auf einer täglichen Zeitplan. Zum Beispiel beginnt die Aufgabe zu einer bestimmten Zeit täglich, jeden zweiten Tag, jeden dritten Tag, und so weiter.</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>Täglich</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>Startet eine Aufgabe, wenn ein System-Ereignis eintritt.</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>Falls ein bestimmtes Ereignis protokoliert wird</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>Startet eine Aufgabe auf einem monatlichen Zeitplan. Zum Beispiel beginnt die Aufgabe an bestimmten Tagen bestimmten Monaten.</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>Startet eine Aufgabe zu einem bestimmten Datum und Uhrzeit.</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>Einmal</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>Startet eine Aufgabe auf einem wöchentlichen Zeitplan. Zum Beispiel beginnt die Aufgabe um 08:00 Uhr an einem bestimmten Tag der Woche jede Woche oder jede zweite Woche.</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>Wöchentlich</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>Name: {0}
+
+Beschreibung: {1}
+
+Trigger: {2}
+
+Aktion: {3}</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>Die Wiederholung-Intervallwert muss kleiner oder gleich als die Dauer der Wiederholungswert.</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Für die ausgewählte Optionen, ein Kennwort für den angegebenen Benutzer muss zur Verfügung gestellt werden.</value>
+  </data>
+  <data name="TaskCompatibility" xml:space="preserve">
+    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+    <comment>Listing of corresponding OS listing to each TaskCompatibility enum separated by '|' character.</comment>
+  </data>
+  <data name="TimeSpanNotStarted" xml:space="preserve">
+    <value>Noch nicht gestartet</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal" xml:space="preserve">
+    <value>Über normal</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal" xml:space="preserve">
+    <value>Unter normal</value>
+  </data>
+  <data name="ProcessPriorityHigh" xml:space="preserve">
+    <value>Hoch</value>
+  </data>
+  <data name="ProcessPriorityIdle" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="ProcessPriorityNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ProcessPriorityRealTime" xml:space="preserve">
+    <value>Echtzeit</value>
+  </data>
+  <data name="SIDTypeDefault" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="SIDTypeNone" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="SIDTypeUnrestricted" xml:space="preserve">
+    <value>Unbeschränkt</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
+    <value>Wenn der Prozess SID-Typ auf "eingeschränkt" auf der Registerkarte "Zugänge"  eingestellt ist, muss das Benutzerkonto auf der Registerkarte "Allgemein" entweder "NETZWERKDIENST" oder "LOCALER DIENST" sein. Sie müssen entweder die SID-Typ oder den Benutzer zu einer der gültigen Konten ändern.</value>
+  </data>
+  <data name="UseUnifiedResetQuestion" xml:space="preserve">
+    <value>Das Festlegen dieser Eigenschaft wird eine Reihe von anderen Eigenschaften deaktivieren. Würden Sie gerne noch fortfahren?</value>
+  </data>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Benutzerdefinierter Handler</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Programm starten</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>E-Mail senden</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Meldung anzeigen</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew" xml:space="preserve">
+    <value>Eine neue Instanz nicht ausführen</value>
+  </data>
+  <data name="TaskInstancesParallel" xml:space="preserve">
+    <value>Eine neue Instanz parallel ausführen</value>
+  </data>
+  <data name="TaskInstancesQueue" xml:space="preserve">
+    <value>Eine neue Instanz einreihen</value>
+  </data>
+  <data name="TaskInstancesStopExisting" xml:space="preserve">
+    <value>Die vorhandene Instanz stoppen</value>
+  </data>
+  <data name="Error_InvalidSddlFormat" xml:space="preserve">
+    <value>SDDL muss in einem Format definiert sein http://goo.gl/6au0V</value>
+  </data>
+  <data name="Error_InvalidUriFormat" xml:space="preserve">
+    <value>URI ist nicht in einem korrekten Format.</value>
+  </data>
+  <data name="Error_InvalidVersionFormat" xml:space="preserve">
+    <value>Version muss im folgenden Format sein major.minor[.build[.revision]].</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="auditFail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\auditFail.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="auditSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\auditSuccess.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="createBasicTask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\createBasicTask.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="critical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\critical.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disable.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\empty.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enable.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="end" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\end.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\error.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filter.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filterBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filter.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="helpBook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\helpBook.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="infoBubble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\infoBubble.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="run" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\run.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ts.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tsFolderClosed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tsFolderClosed.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tsFolderOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tsFolderOpen.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tsList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tsList.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tsNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tsNew.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warning.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="verbose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\verbose.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EventDetailHeader" xml:space="preserve">
+    <value>Ereignis {0}, TaskScheduler</value>
+  </data>
+  <data name="HistoryHeader" xml:space="preserve">
+    <value>Anzahl der Ereignisse: {0}</value>
+  </data>
+  <data name="EventPropertiesDialogTitle" xml:space="preserve">
+    <value>Ereigniseigenschaften - Ereignis {0}, TaskScheduler</value>
+  </data>
+  <data name="downArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\downArrow.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\plus.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ts.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="upArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\upArrow.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TaskEventStatusFailure" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="TaskEventStatusStillRunning" xml:space="preserve">
+    <value>Läuft noch</value>
+  </data>
+  <data name="TaskEventStatusSuccess" xml:space="preserve">
+    <value>Erfolg</value>
+  </data>
+  <data name="TaskEventStatusTerminated" xml:space="preserve">
+    <value>Abgebrochen</value>
+  </data>
+  <data name="TriggerTypeRemoteConnect" xml:space="preserve">
+    <value>Bei Verbindung vom Remotecomputer</value>
+  </data>
+  <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
+    <value>Bei Trennung vom Remotecomputer</value>
+  </data>
+  <data name="LoadingPrompt" xml:space="preserve">
+    <value>Wird geladen...</value>
+  </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value>Taskname ist nicht in einem güligen Format. Zeichen, die in einem Dateinamen nicht zugelassen sind, sind in einem Taskname nicht zugelassen.</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>Dieser Auslösemechanismus kann in diesem Werkzeug nicht bearbeitet werden.</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Benutzerdefinierter Trigger</value>
+  </data>
+</root>

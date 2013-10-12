@@ -166,7 +166,7 @@
     <value>9</value>
   </data>
   <data name="runButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="&gt;&gt;runButton.Name" xml:space="preserve">
     <value>runButton</value>

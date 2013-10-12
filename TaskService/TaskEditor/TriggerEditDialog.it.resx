@@ -117,135 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Inizia il compito:</value>
-  </data>
-  <data name="triggerTypeCombo.Items" xml:space="preserve">
-    <value>In base a una pianificazione</value>
-  </data>
-  <data name="triggerTypeCombo.Items1" xml:space="preserve">
-    <value>Al di accesso</value>
-  </data>
-  <data name="triggerTypeCombo.Items2" xml:space="preserve">
-    <value>In fase di avvio</value>
-  </data>
-  <data name="triggerTypeCombo.Items3" xml:space="preserve">
-    <value>Il minimo</value>
-  </data>
-  <data name="triggerTypeCombo.Items4" xml:space="preserve">
-    <value>In un caso</value>
-  </data>
-  <data name="triggerTypeCombo.Items5" xml:space="preserve">
-    <value>Al compito di creazione / modifica</value>
-  </data>
-  <data name="triggerTypeCombo.Items6" xml:space="preserve">
-    <value>Il collegamento alla sessione utente</value>
-  </data>
-  <data name="triggerTypeCombo.Items7" xml:space="preserve">
-    <value>Il disconnettersi dalla sessione utente</value>
-  </data>
-  <data name="triggerTypeCombo.Items8" xml:space="preserve">
-    <value>Sulla workstation bloccare</value>
-  </data>
-  <data name="triggerTypeCombo.Items9" xml:space="preserve">
-    <value>Sulla workstation sbloccare</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 22</value>
+  </data>
+  <data name="triggerTypeLabel.Text" xml:space="preserve">
+    <value>A&amp;vvia l'attività:</value>
+  </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 6</value>
   </data>
   <data name="oneTimeTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 87</value>
-  </data>
-  <data name="dailyDaysLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>giorni</value>
-  </data>
-  <data name="dailyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Ripetersi ogni:</value>
+    <value>408, 84</value>
   </data>
   <data name="dailyTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 87</value>
   </data>
-  <data name="weeklySunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>Domenica</value>
-  </data>
-  <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>Lunedi</value>
-  </data>
-  <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
-  </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>Martedì</value>
-  </data>
-  <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>Mercoledì</value>
-  </data>
-  <data name="weeklyThuCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
-  </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>Giovedi</value>
-  </data>
-  <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>Venerdì</value>
-  </data>
-  <data name="weeklySatCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>Sabato</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>settimane:</value>
-  </data>
-  <data name="weeklyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Ripetersi ogni:</value>
-  </data>
   <data name="weeklyTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 87</value>
-  </data>
-  <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 17</value>
-  </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>Giorni:</value>
-  </data>
-  <data name="monthlyMonthsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>Mesi:</value>
   </data>
   <data name="monthlyTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 87</value>
   </data>
   <data name="schedTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 96</value>
+    <value>416, 93</value>
   </data>
   <data name="schedGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 30</value>
@@ -257,133 +152,170 @@
     <value>93, 9</value>
   </data>
   <data name="schedStartLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>38, 15</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
     <value>Inizio:</value>
   </data>
   <data name="schedMonthlyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
+    <value>53, 19</value>
   </data>
   <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Mensile</value>
+    <value>&amp;Mese</value>
   </data>
   <data name="schedWeeklyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+    <value>78, 19</value>
   </data>
   <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Settimanale</value>
+    <value>Settim&amp;ana</value>
   </data>
   <data name="schedDailyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 17</value>
+    <value>61, 19</value>
   </data>
   <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Giornaliero</value>
+    <value>&amp;Giorno</value>
   </data>
   <data name="schedOneRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 17</value>
+    <value>75, 19</value>
   </data>
   <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>Una volta</value>
+    <value>&amp;Una volta</value>
   </data>
   <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 17</value>
+    <value>198, 19</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
-    <value>Connessione dal computer locale</value>
+    <value>Co&amp;nnessione da computer locale</value>
   </data>
   <data name="logonRemoteRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 17</value>
+    <value>206, 19</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Connessione dal computer remoto</value>
+    <value>C&amp;onnessione da computer remoto</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
     <value>Cambia utente o gruppo...</value>
   </data>
   <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 17</value>
+    <value>165, 19</value>
   </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Specifico utente o gruppo:</value>
+    <value>Utente &amp;specifico o gruppo:</value>
   </data>
   <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 17</value>
+    <value>109, 19</value>
   </data>
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
-    <value>Qualsiasi utente</value>
+    <value>&amp;Qualsiasi utente</value>
+  </data>
+  <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
   </data>
   <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 13</value>
+    <value>235, 15</value>
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>Ulteriori impostazioni non necessarie.</value>
+    <value>Nessuna impostazione aggiuntiva richiesta.</value>
+  </data>
+  <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>479, 13</value>
+    <value>614, 46</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Per modificare le condizioni di minimo, utilizzare la pagina Condizioni nel folio di Crea task o Proprietà.</value>
+    <value>Per cambiare le condizioni di inattività, utilizzare la scheda Condizioni nella pagina Crea attività o Proprietà attività.</value>
   </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+  <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
+  <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 15</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+  <data name="onEventLogLabel.Text" xml:space="preserve">
+    <value>&amp;Registro:</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Entra:</value>
+  <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 15</value>
+  </data>
+  <data name="onEventSourceLabel.Text" xml:space="preserve">
+    <value>Origi&amp;ne:</value>
+  </data>
+  <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 15</value>
+  </data>
+  <data name="onEventIdLabel.Text" xml:space="preserve">
+    <value>I&amp;D evento:</value>
+  </data>
+  <data name="eventCustomRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 19</value>
+  </data>
+  <data name="eventCustomRadio.Text" xml:space="preserve">
+    <value>&amp;Person.</value>
+  </data>
+  <data name="eventBasicRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 19</value>
+  </data>
+  <data name="eventBasicRadio.Text" xml:space="preserve">
+    <value>Di &amp;base</value>
+  </data>
+  <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
+  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 54</value>
+  </data>
+  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>per una durata di:</value>
+    <value>pe&amp;r una durata di:</value>
   </data>
   <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 17</value>
+    <value>408, 19</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Arrestare tutti i compiti di esecuzione alla fine del periodo di ripetizione</value>
-  </data>
-  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 17</value>
+    <value>Arresta tutte le attività di e&amp;secuzione al termine della durata di ripetizione</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Abilitato</value>
+    <value>A&amp;ttivato</value>
   </data>
   <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
+    <value>78, 19</value>
   </data>
   <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Scadenza:</value>
+    <value>Scade&amp;nza:</value>
   </data>
   <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 17</value>
+    <value>60, 19</value>
   </data>
   <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Attiva:</value>
+    <value>&amp;Attiva:</value>
   </data>
   <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 17</value>
+    <value>205, 19</value>
   </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Stop compito se si trova più di:</value>
+    <value>Arr&amp;esta attività eseguite per più di:</value>
   </data>
   <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 17</value>
+    <value>134, 19</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Ripetere ogni compito:</value>
+    <value>Ri&amp;peti ogni compito:</value>
   </data>
   <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 17</value>
+    <value>227, 19</value>
   </data>
   <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Ritardo compito fino a (ritardo casuale):</value>
+    <value>Ritardo attività &amp;fino a (ritardo casuale):</value>
   </data>
   <data name="advSettingsGroup.Text" xml:space="preserve">
     <value>Impostazioni avanzate</value>
@@ -391,808 +323,14 @@
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Annulla</value>
   </data>
-  <data name="&gt;&gt;triggerTypeLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeCombo.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeCombo.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeCombo.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;triggerTypeCombo.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;dailyTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedGroup.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="groupBox6.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox6.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.ZOrder">
-    <value></value>
-  </data>
-  <data name="logonUserLabel.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonUserLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonUserLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonUserLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonUserLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="logonTab.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;logonTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="startupTab.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;startupTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;label8.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;label8.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;label8.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder">
-    <value></value>
-  </data>
-  <data name="idleTab.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;idleTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;idleTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;idleTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;idleTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="onEventLogLabel.Text">
-    <value>Log:</value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.ZOrder">
-    <value></value>
-  </data>
-  <data name="onEventSourceLabel.Text">
-    <value>Fonte:</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.ZOrder">
-    <value></value>
-  </data>
-  <data name="onEventIdLabel.Text">
-    <value>ID evento:</value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventBasicPanel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventBasicPanel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventBasicPanel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventBasicPanel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventCustomText.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventCustomText.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventCustomText.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventCustomText.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox5.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox5.ZOrder">
-    <value></value>
-  </data>
-  <data name="eventCustomRadio.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventCustomRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventCustomRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventCustomRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventCustomRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="eventBasicRadio.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventBasicRadio.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventBasicRadio.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventBasicRadio.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;eventBasicRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="onEventTab.Text">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventTab.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventTab.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventTab.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;onEventTab.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationSpan.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delaySpan.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;durationLabel.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.ZOrder">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.ZOrder">
-    <value></value>
-  </data>
-  <data name="okBtn.Text">
-    <value>OK</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;okBtn.Type">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;okBtn.Parent">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;okBtn.ZOrder">
-    <value></value>
-  </data>
-  <data name="$this.Text">
-    <value>Nuovo trigger</value>
-  </data>
-  <data name="&gt;&gt;$this.Name">
-    <value></value>
-  </data>
-  <data name="&gt;&gt;$this.Type">
-    <value></value>
-  </data>
-  <data name="monthlyOnRadio.Text">
-    <value></value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Nuova attivazione</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Utente corrente&gt;</value>
   </data>
 </root>

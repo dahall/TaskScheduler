@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComHandlerActionUI));
 			this.getCLSIDButton = new System.Windows.Forms.Button();
 			this.comDataText = new System.Windows.Forms.TextBox();
 			this.comDataLabel = new System.Windows.Forms.Label();
@@ -40,69 +41,46 @@
 			// 
 			// getCLSIDButton
 			// 
-			this.getCLSIDButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.getCLSIDButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.getCLSIDButton.Location = new System.Drawing.Point(407, 25);
+			resources.ApplyResources(this.getCLSIDButton, "getCLSIDButton");
 			this.getCLSIDButton.Name = "getCLSIDButton";
-			this.getCLSIDButton.Size = new System.Drawing.Size(33, 25);
-			this.getCLSIDButton.TabIndex = 11;
-			this.getCLSIDButton.Text = "...";
+			this.toolTip.SetToolTip(this.getCLSIDButton, resources.GetString("getCLSIDButton.ToolTip"));
 			this.getCLSIDButton.UseVisualStyleBackColor = true;
 			this.getCLSIDButton.Click += new System.EventHandler(this.getCLSIDButton_Click);
 			// 
 			// comDataText
 			// 
-			this.comDataText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.comDataText.Location = new System.Drawing.Point(82, 55);
+			resources.ApplyResources(this.comDataText, "comDataText");
 			this.comDataText.Name = "comDataText";
-			this.comDataText.Size = new System.Drawing.Size(357, 23);
-			this.comDataText.TabIndex = 10;
+			this.toolTip.SetToolTip(this.comDataText, resources.GetString("comDataText.ToolTip"));
 			// 
 			// comDataLabel
 			// 
-			this.comDataLabel.AutoSize = true;
-			this.comDataLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.comDataLabel.Location = new System.Drawing.Point(-3, 58);
+			resources.ApplyResources(this.comDataLabel, "comDataLabel");
 			this.comDataLabel.Name = "comDataLabel";
-			this.comDataLabel.Size = new System.Drawing.Size(34, 15);
-			this.comDataLabel.TabIndex = 9;
-			this.comDataLabel.Text = "Data:";
+			this.toolTip.SetToolTip(this.comDataLabel, resources.GetString("comDataLabel.ToolTip"));
 			// 
 			// comCLSIDText
 			// 
-			this.comCLSIDText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.comCLSIDText.Location = new System.Drawing.Point(82, 26);
-			this.comCLSIDText.MinimumSize = new System.Drawing.Size(220, 4);
+			resources.ApplyResources(this.comCLSIDText, "comCLSIDText");
 			this.comCLSIDText.Name = "comCLSIDText";
 			this.comCLSIDText.ReadOnly = true;
-			this.comCLSIDText.Size = new System.Drawing.Size(319, 23);
-			this.comCLSIDText.TabIndex = 8;
+			this.toolTip.SetToolTip(this.comCLSIDText, resources.GetString("comCLSIDText.ToolTip"));
 			// 
 			// comCLSIDLabel
 			// 
-			this.comCLSIDLabel.AutoSize = true;
-			this.comCLSIDLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.comCLSIDLabel.Location = new System.Drawing.Point(-3, 29);
+			resources.ApplyResources(this.comCLSIDLabel, "comCLSIDLabel");
 			this.comCLSIDLabel.Name = "comCLSIDLabel";
-			this.comCLSIDLabel.Size = new System.Drawing.Size(76, 15);
-			this.comCLSIDLabel.TabIndex = 7;
-			this.comCLSIDLabel.Text = "COM Object:";
+			this.toolTip.SetToolTip(this.comCLSIDLabel, resources.GetString("comCLSIDLabel.ToolTip"));
 			// 
 			// comIntroLabel
 			// 
-			this.comIntroLabel.AutoSize = true;
-			this.comIntroLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.comIntroLabel.Location = new System.Drawing.Point(-3, 0);
+			resources.ApplyResources(this.comIntroLabel, "comIntroLabel");
 			this.comIntroLabel.Name = "comIntroLabel";
-			this.comIntroLabel.Size = new System.Drawing.Size(220, 15);
-			this.comIntroLabel.TabIndex = 6;
-			this.comIntroLabel.Text = "This action runs a custom COM handler.";
+			this.toolTip.SetToolTip(this.comIntroLabel, resources.GetString("comIntroLabel.ToolTip"));
 			// 
 			// ComHandlerActionUI
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.comDataText);
 			this.Controls.Add(this.getCLSIDButton);
@@ -110,10 +88,9 @@
 			this.Controls.Add(this.comIntroLabel);
 			this.Controls.Add(this.comCLSIDLabel);
 			this.Controls.Add(this.comCLSIDText);
-			this.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.MinimumSize = new System.Drawing.Size(343, 89);
 			this.Name = "ComHandlerActionUI";
-			this.Size = new System.Drawing.Size(439, 89);
+			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

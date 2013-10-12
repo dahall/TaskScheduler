@@ -116,16 +116,16 @@
 			// 
 			// triggerTypeCombo
 			// 
+			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.triggerTypeCombo.FormattingEnabled = true;
-			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.Name = "triggerTypeCombo";
 			this.triggerTypeCombo.SelectedValueChanged += new System.EventHandler(this.triggerTypeCombo_SelectedValueChanged);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.settingsTabControl);
 			resources.ApplyResources(this.groupBox1, "groupBox1");
+			this.groupBox1.Controls.Add(this.settingsTabControl);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
 			// 
@@ -144,6 +144,7 @@
 			// 
 			// scheduleTab
 			// 
+			resources.ApplyResources(this.scheduleTab, "scheduleTab");
 			this.scheduleTab.Controls.Add(this.schedStartDatePicker);
 			this.scheduleTab.Controls.Add(this.groupBox3);
 			this.scheduleTab.Controls.Add(this.schedGroup);
@@ -152,7 +153,6 @@
 			this.scheduleTab.Controls.Add(this.schedWeeklyRadio);
 			this.scheduleTab.Controls.Add(this.schedDailyRadio);
 			this.scheduleTab.Controls.Add(this.schedOneRadio);
-			resources.ApplyResources(this.scheduleTab, "scheduleTab");
 			this.scheduleTab.Name = "scheduleTab";
 			this.scheduleTab.UseVisualStyleBackColor = true;
 			// 
@@ -171,8 +171,8 @@
 			// 
 			// schedGroup
 			// 
-			this.schedGroup.Controls.Add(this.schedTabControl);
 			resources.ApplyResources(this.schedGroup, "schedGroup");
+			this.schedGroup.Controls.Add(this.schedTabControl);
 			this.schedGroup.Name = "schedGroup";
 			this.schedGroup.TabStop = false;
 			// 
@@ -196,8 +196,8 @@
 			// 
 			// dailyTab
 			// 
-			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
 			resources.ApplyResources(this.dailyTab, "dailyTab");
+			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
 			this.dailyTab.Name = "dailyTab";
 			this.dailyTab.UseVisualStyleBackColor = true;
 			// 
@@ -209,8 +209,8 @@
 			// 
 			// weeklyTab
 			// 
-			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
 			resources.ApplyResources(this.weeklyTab, "weeklyTab");
+			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
 			this.weeklyTab.Name = "weeklyTab";
 			this.weeklyTab.UseVisualStyleBackColor = true;
 			// 
@@ -222,8 +222,8 @@
 			// 
 			// monthlyTab
 			// 
-			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
 			resources.ApplyResources(this.monthlyTab, "monthlyTab");
+			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
 			this.monthlyTab.Name = "monthlyTab";
 			this.monthlyTab.UseVisualStyleBackColor = true;
 			// 
@@ -269,21 +269,21 @@
 			// 
 			// logonTab
 			// 
+			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Controls.Add(this.logonRemotePanel);
 			this.logonTab.Controls.Add(this.logonChgUserBtn);
 			this.logonTab.Controls.Add(this.logonUserLabel);
 			this.logonTab.Controls.Add(this.logonSpecUserRadio);
 			this.logonTab.Controls.Add(this.logonAnyUserRadio);
-			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Name = "logonTab";
 			this.logonTab.UseVisualStyleBackColor = true;
 			// 
 			// logonRemotePanel
 			// 
+			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Controls.Add(this.groupBox6);
 			this.logonRemotePanel.Controls.Add(this.logonLocalRadio);
 			this.logonRemotePanel.Controls.Add(this.logonRemoteRadio);
-			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Name = "logonRemotePanel";
 			// 
 			// groupBox6
@@ -332,8 +332,8 @@
 			// 
 			// startupTab
 			// 
-			this.startupTab.Controls.Add(this.startupIntroLabel);
 			resources.ApplyResources(this.startupTab, "startupTab");
+			this.startupTab.Controls.Add(this.startupIntroLabel);
 			this.startupTab.Name = "startupTab";
 			this.startupTab.UseVisualStyleBackColor = true;
 			// 
@@ -344,8 +344,8 @@
 			// 
 			// idleTab
 			// 
-			this.idleTab.Controls.Add(this.label8);
 			resources.ApplyResources(this.idleTab, "idleTab");
+			this.idleTab.Controls.Add(this.label8);
 			this.idleTab.Name = "idleTab";
 			this.idleTab.UseVisualStyleBackColor = true;
 			// 
@@ -356,24 +356,24 @@
 			// 
 			// onEventTab
 			// 
+			resources.ApplyResources(this.onEventTab, "onEventTab");
 			this.onEventTab.Controls.Add(this.onEventBasicPanel);
 			this.onEventTab.Controls.Add(this.onEventCustomText);
 			this.onEventTab.Controls.Add(this.groupBox5);
 			this.onEventTab.Controls.Add(this.eventCustomRadio);
 			this.onEventTab.Controls.Add(this.eventBasicRadio);
-			resources.ApplyResources(this.onEventTab, "onEventTab");
 			this.onEventTab.Name = "onEventTab";
 			this.onEventTab.UseVisualStyleBackColor = true;
 			// 
 			// onEventBasicPanel
 			// 
+			resources.ApplyResources(this.onEventBasicPanel, "onEventBasicPanel");
 			this.onEventBasicPanel.Controls.Add(this.onEventLogLabel);
 			this.onEventBasicPanel.Controls.Add(this.onEventIdText);
 			this.onEventBasicPanel.Controls.Add(this.onEventSourceLabel);
 			this.onEventBasicPanel.Controls.Add(this.onEventSourceCombo);
 			this.onEventBasicPanel.Controls.Add(this.onEventLogCombo);
 			this.onEventBasicPanel.Controls.Add(this.onEventIdLabel);
-			resources.ApplyResources(this.onEventBasicPanel, "onEventBasicPanel");
 			this.onEventBasicPanel.Name = "onEventBasicPanel";
 			// 
 			// onEventLogLabel
@@ -400,9 +400,9 @@
 			// 
 			// onEventLogCombo
 			// 
+			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
 			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.onEventLogCombo.FormattingEnabled = true;
-			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
 			this.onEventLogCombo.Name = "onEventLogCombo";
 			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
 			this.onEventLogCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
@@ -442,6 +442,7 @@
 			// 
 			// advSettingsGroup
 			// 
+			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsSpan);
 			this.advSettingsGroup.Controls.Add(this.durationSpan);
 			this.advSettingsGroup.Controls.Add(this.repeatSpan);
@@ -456,7 +457,6 @@
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsCheckBox);
 			this.advSettingsGroup.Controls.Add(this.repeatCheckBox);
 			this.advSettingsGroup.Controls.Add(this.delayCheckBox);
-			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Name = "advSettingsGroup";
 			this.advSettingsGroup.TabStop = false;
 			// 
@@ -599,7 +599,6 @@
 			this.startupTab.ResumeLayout(false);
 			this.startupTab.PerformLayout();
 			this.idleTab.ResumeLayout(false);
-			this.idleTab.PerformLayout();
 			this.onEventTab.ResumeLayout(false);
 			this.onEventTab.PerformLayout();
 			this.onEventBasicPanel.ResumeLayout(false);

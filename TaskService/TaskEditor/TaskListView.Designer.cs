@@ -44,6 +44,7 @@
 			// 
 			// listView1
 			// 
+			resources.ApplyResources(this.listView1, "listView1");
 			this.listView1.AllowColumnReorder = true;
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.name,
@@ -54,7 +55,6 @@
             this.lastRunResult,
             this.author,
             this.created});
-			resources.ApplyResources(this.listView1, "listView1");
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
 			this.listView1.MultiSelect = false;

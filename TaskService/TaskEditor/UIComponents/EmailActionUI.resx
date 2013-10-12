@@ -117,7 +117,421 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="emailAttachmentText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailToLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Name" xml:space="preserve">
+    <value>emailFromText</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="emailAttachementBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 214</value>
+  </data>
+  <data name="emailToLabel.Text" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 248</value>
+  </data>
+  <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;emailToText.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="emailTextLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="emailTextLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 93</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
+    <value>emailTextLabel</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>EmailActionUI</value>
+  </data>
+  <data name="emailTextText.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="emailTextText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailToLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="emailTextLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 15</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailSMTPLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 261</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
+    <value>emailSubjectLabel</value>
+  </data>
+  <data name="emailSMTPText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 23</value>
+  </data>
+  <data name="emailSMTPText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailSubjectLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="emailSubjectLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Name" xml:space="preserve">
+    <value>emailSubjectText</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailFromLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="emailSMTPLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 15</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
+    <value>emailAttachmentLabel</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
+    <value>emailAttachementBrowseBtn</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="emailFromLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="emailAttachmentLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="emailSMTPText.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="emailAttachmentLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 15</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 2</value>
+  </data>
+  <data name="emailTextLabel.Text" xml:space="preserve">
+    <value>Text:</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailFromText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 0</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailTextText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="emailFromText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 23</value>
+  </data>
+  <data name="emailSMTPLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
+    <value>openFileDialog1</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailAttachmentLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="emailSubjectText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 60</value>
+  </data>
+  <data name="emailFromLabel.Text" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="emailSubjectLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 15</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Name" xml:space="preserve">
+    <value>emailTextText</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;emailToText.Name" xml:space="preserve">
+    <value>emailToText</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailAttachmentText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 215</value>
+  </data>
+  <data name="emailTextText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 112</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailAttachmentLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 218</value>
+  </data>
+  <data name="emailFromText.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailAttachmentLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailAttachmentText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 23</value>
+  </data>
+  <data name="emailSubjectLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 63</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailToText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 23</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailTextLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
+    <value>emailSMTPLabel</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
+    <value>emailFromLabel</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailFromLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailAttachmentText.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailToLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 33</value>
+  </data>
+  <data name="emailFromText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailFromText.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="emailToLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 15</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="emailSMTPLabel.Text" xml:space="preserve">
+    <value>SMTP server:</value>
+  </data>
+  <data name="&gt;&gt;emailAttachementBrowseBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="emailToText.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="emailSMTPText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 257</value>
+  </data>
+  <data name="emailSubjectText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailTextText.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="emailToText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 30</value>
+  </data>
+  <data name="emailSMTPLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="emailTextText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 90</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="emailToText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailTextLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="emailFromLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 15</value>
+  </data>
+  <data name="emailSubjectLabel.Text" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="emailFromLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 3</value>
+  </data>
+  <data name="&gt;&gt;emailAttachmentText.Name" xml:space="preserve">
+    <value>emailAttachmentText</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailSMTPLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="emailSubjectText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 23</value>
+  </data>
+  <data name="&gt;&gt;emailSMTPText.Name" xml:space="preserve">
+    <value>emailSMTPText</value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 25</value>
+  </data>
+  <data name="emailAttachmentLabel.Text" xml:space="preserve">
+    <value>Attachment:</value>
+  </data>
+  <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
+    <value>emailToLabel</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>467, 282</value>
+  </data>
+  <data name="emailSubjectText.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>

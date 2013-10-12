@@ -132,9 +132,6 @@
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>取消</value>
-  </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
@@ -192,13 +189,16 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>269, 294</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>任务运行时间</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TaskRunTimesDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Task Run Times</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
   </data>
 </root>

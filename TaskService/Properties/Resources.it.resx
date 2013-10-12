@@ -157,7 +157,7 @@
     <value>Azioni multiple definite</value>
   </data>
   <data name="MultipleTriggers" xml:space="preserve">
-    <value>Trigger multiple definite</value>
+    <value>Attivazione multiple definite</value>
   </data>
   <data name="ShowMessageAction" xml:space="preserve">
     <value>{0}</value>
@@ -333,5 +333,11 @@
   </data>
   <data name="TriggerRepetition">
     <value> Dopo aver attivato, ripetere ogni {0} {1}.</value>
+  </data>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>Attivazione personalizata</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Attivazione personalizata</value>
   </data>
 </root>

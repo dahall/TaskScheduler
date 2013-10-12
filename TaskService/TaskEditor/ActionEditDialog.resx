@@ -117,452 +117,95 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="promptLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="settingsTabs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>470, 337</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="promptLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="promptLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
-  </data>
-  <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 15</value>
-  </data>
-  <data name="promptLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>You must specify what action this task will perform.</value>
-  </data>
-  <data name="&gt;&gt;promptLabel.Name" xml:space="preserve">
-    <value>promptLabel</value>
-  </data>
-  <data name="&gt;&gt;promptLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;promptLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;promptLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 46</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 2</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="actionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Start a program</value>
-  </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Send an e-mail</value>
-  </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Display a message</value>
-  </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Custom handler</value>
-  </data>
-  <data name="actionsCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 61</value>
-  </data>
-  <data name="actionsCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 23</value>
-  </data>
-  <data name="actionsCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;actionsCombo.Name" xml:space="preserve">
-    <value>actionsCombo</value>
-  </data>
-  <data name="&gt;&gt;actionsCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionsCombo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;actionsCombo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="settingsGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="settingsTabs.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
-    <value>Buttons</value>
-  </data>
-  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 110</value>
-  </data>
-  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
-    <value>execActionUI1</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28382, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
-    <value>execTab</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="execTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="execTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 328</value>
-  </data>
-  <data name="execTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;execTab.Name" xml:space="preserve">
-    <value>execTab</value>
-  </data>
-  <data name="&gt;&gt;execTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;execTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 244</value>
-  </data>
-  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
-    <value>emailActionUI1</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28382, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
-    <value>emailTab</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="emailTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 328</value>
-  </data>
-  <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Name" xml:space="preserve">
-    <value>emailTab</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;emailTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 261</value>
-  </data>
-  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
-    <value>showMessageActionUI1</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28382, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
-    <value>messageTab</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="messageTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 328</value>
-  </data>
-  <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Name" xml:space="preserve">
-    <value>messageTab</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="comHandlerActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="comHandlerActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="comHandlerActionUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>343, 89</value>
-  </data>
-  <data name="comHandlerActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 89</value>
-  </data>
-  <data name="comHandlerActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Name" xml:space="preserve">
-    <value>comHandlerActionUI1</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=1.8.4.28382, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
-    <value>comTab</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 328</value>
-  </data>
-  <data name="comTab.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;comTab.Name" xml:space="preserve">
-    <value>comTab</value>
-  </data>
-  <data name="&gt;&gt;comTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;comTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="settingsTabs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="settingsTabs.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 1</value>
-  </data>
   <data name="settingsTabs.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 19</value>
-  </data>
-  <data name="settingsTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 337</value>
-  </data>
-  <data name="settingsTabs.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.Name" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.Parent" xml:space="preserve">
-    <value>settingsGroup</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 92</value>
-  </data>
-  <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 359</value>
-  </data>
-  <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Name" xml:space="preserve">
-    <value>settingsGroup</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 460</value>
-  </data>
-  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
-  </data>
-  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
-    <value>okBtn</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="cancelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 460</value>
-  </data>
-  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
-  </data>
-  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
-    <value>cancelBtn</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="actionsLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="actionsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="actionsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 65</value>
-  </data>
-  <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 15</value>
-  </data>
-  <data name="actionsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Action:</value>
-  </data>
-  <data name="&gt;&gt;actionsLabel.Name" xml:space="preserve">
-    <value>actionsLabel</value>
-  </data>
-  <data name="&gt;&gt;actionsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;actionsLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;actionsLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>504, 501</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="comHandlerActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="execTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="comHandlerActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 89</value>
+  </data>
+  <data name="execTab.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="comTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="actionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;messageTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="emailTab.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;messageTab.Name" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
+    <value>openFileDialog1</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="actionsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -570,22 +213,430 @@
   <data name="$this.Text" xml:space="preserve">
     <value>New Action</value>
   </data>
-  <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
-    <value>openFileDialog1</value>
+  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;actionsCombo.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="actionsCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Name" xml:space="preserve">
+    <value>promptLabel</value>
+  </data>
+  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="comTab.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="actionsLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="messageTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="settingsGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Name" xml:space="preserve">
+    <value>settingsGroup</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="actionsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>
   </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
+    <value>emailActionUI1</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;emailTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="settingsTabs.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;actionsCombo.Name" xml:space="preserve">
+    <value>actionsCombo</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 92</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
+    <value>showMessageActionUI1</value>
+  </data>
+  <data name="emailActionUI1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
+    <value>okBtn</value>
+  </data>
+  <data name="actionsCombo.Items1" xml:space="preserve">
+    <value>Send an e-mail</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Name" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="comHandlerActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 15</value>
+  </data>
+  <data name="execTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="cancelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 110</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Parent" xml:space="preserve">
+    <value>settingsGroup</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ActionEditDialog</value>
   </data>
+  <data name="actionsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 65</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 244</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="settingsTabs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="showMessageActionUI1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>471, 2</value>
+  </data>
+  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="&gt;&gt;messageTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="actionsCombo.Items3" xml:space="preserve">
+    <value>Custom handler</value>
+  </data>
+  <data name="actionsCombo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 261</value>
+  </data>
+  <data name="messageTab.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 328</value>
+  </data>
+  <data name="promptLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="actionsCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 23</value>
+  </data>
+  <data name="okBtn.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="actionsLabel.Text" xml:space="preserve">
+    <value>Action:</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="settingsTabs.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
+    <value>Buttons</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>402, 460</value>
+  </data>
+  <data name="emailTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="actionsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;comTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;execTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="execTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="settingsTabs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="comHandlerActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="promptLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="comHandlerActionUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>343, 89</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Name" xml:space="preserve">
+    <value>comHandlerActionUI1</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 15</value>
+  </data>
+  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="promptLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 15</value>
+  </data>
+  <data name="actionsCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 61</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Name" xml:space="preserve">
+    <value>actionsLabel</value>
+  </data>
+  <data name="&gt;&gt;execTab.Parent" xml:space="preserve">
+    <value>settingsTabs</value>
+  </data>
+  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
+    <value>cancelBtn</value>
+  </data>
+  <data name="&gt;&gt;actionsLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;settingsGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
+    <value>execActionUI1</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 460</value>
+  </data>
+  <data name="&gt;&gt;execTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="&gt;&gt;promptLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="settingsGroup.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailTab.Name" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>504, 501</value>
+  </data>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="actionsCombo.Items2" xml:space="preserve">
+    <value>Display a message</value>
+  </data>
+  <data name="&gt;&gt;settingsTabs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;comTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="settingsTabs.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="promptLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="promptLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cancelBtn.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;comTab.Name" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="promptLabel.Text" xml:space="preserve">
+    <value>You must specify what action this task will perform.</value>
+  </data>
+  <data name="&gt;&gt;actionsCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>476, 359</value>
+  </data>
+  <data name="execActionUI1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;execTab.Name" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 46</value>
+  </data>
+  <data name="actionsCombo.Items" xml:space="preserve">
+    <value>Start a program</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comHandlerActionUI1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
 </root>

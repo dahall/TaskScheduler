@@ -117,4 +117,244 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="monthlyOnRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="monthlyOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="monthlyOnRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 59</value>
+  </data>
+  <data name="monthlyOnRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 19</value>
+  </data>
+  <data name="monthlyOnRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="monthlyOnRadio.Text" xml:space="preserve">
+    <value>On:</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Name" xml:space="preserve">
+    <value>monthlyOnRadio</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnRadio.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="monthlyDaysRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="monthlyDaysRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="monthlyDaysRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 30</value>
+  </data>
+  <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 19</value>
+  </data>
+  <data name="monthlyDaysRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="monthlyDaysRadio.Text" xml:space="preserve">
+    <value>Days:</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Name" xml:space="preserve">
+    <value>monthlyDaysRadio</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysRadio.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="monthlyMonthsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="monthlyMonthsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="monthlyMonthsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 3</value>
+  </data>
+  <data name="monthlyMonthsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 15</value>
+  </data>
+  <data name="monthlyMonthsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
+    <value>Months:</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Name" xml:space="preserve">
+    <value>monthlyMonthsLabel</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="monthlyDaysDropDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="monthlyDaysDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 29</value>
+  </data>
+  <data name="monthlyDaysDropDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 23</value>
+  </data>
+  <data name="monthlyDaysDropDown.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Name" xml:space="preserve">
+    <value>monthlyDaysDropDown</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyDaysDropDown.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Select all days&gt;</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 58</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 23</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Name" xml:space="preserve">
+    <value>monthlyOnDOWDropDown</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnDOWDropDown.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="monthlyOnWeekDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 58</value>
+  </data>
+  <data name="monthlyOnWeekDropDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 23</value>
+  </data>
+  <data name="monthlyOnWeekDropDown.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Name" xml:space="preserve">
+    <value>monthlyOnWeekDropDown</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyOnWeekDropDown.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="monthlyMonthsDropDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="monthlyMonthsDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Select all months&gt;</value>
+  </data>
+  <data name="monthlyMonthsDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 0</value>
+  </data>
+  <data name="monthlyMonthsDropDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 23</value>
+  </data>
+  <data name="monthlyMonthsDropDown.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Name" xml:space="preserve">
+    <value>monthlyMonthsDropDown</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;monthlyMonthsDropDown.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 29</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 84</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 112</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MonthlyTriggerUI</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.BaseTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.16682, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
 </root>
