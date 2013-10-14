@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;taskRegDocText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskDescText.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -134,6 +131,12 @@
   <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
   </data>
+  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskStartIfConnectionCheck.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 22</value>
@@ -144,8 +147,11 @@
   <data name="triggersTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;actionDeleteButton.Parent" xml:space="preserve">
-    <value>actionsTab</value>
+  <data name="taskDisallowStartIfOnBatteriesCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="principalReqPrivilegesDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>123, 50</value>
@@ -165,6 +171,9 @@
   <data name="&gt;&gt;taskRestartIntervalCheck.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="actionDownButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="taskRegDocText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -180,8 +189,8 @@
   <data name="taskRegVersionLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;triggersTab.Name" xml:space="preserve">
-    <value>triggersTab</value>
+  <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="taskRestartCountLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -252,6 +261,9 @@
   <data name="taskRegDocText.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="taskMaintenanceDeadlineLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -291,17 +303,11 @@
   <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
   </data>
-  <data name="principalSIDTypeCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
     <value>&amp;Use Unified Scheduling Engine</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="historyTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
     <value>times</value>
@@ -324,17 +330,20 @@
   <data name="historyTab.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="regInfoTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
+  <data name="powerConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 19</value>
   </data>
-  <data name="taskRunTimesControl1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="taskVersionCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="&gt;&gt;triggerNewButton.Name" xml:space="preserve">
     <value>triggerNewButton</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Idle</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesLabel.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -347,9 +356,6 @@
   </data>
   <data name="taskIdleDurationCombo.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
-    <value>generalTab</value>
   </data>
   <data name="&gt;&gt;actionListView.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -386,6 +392,9 @@
   </data>
   <data name="taskNameText.Text" xml:space="preserve">
     <value>Task Name</value>
+  </data>
+  <data name="taskLoggedOnRadio.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="regInfoTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>541, 372</value>
@@ -462,6 +471,9 @@
   <data name="taskStopOnIdleEndCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="&gt;&gt;taskAllowDemandStartCheck.Parent" xml:space="preserve">
+    <value>settingsTab</value>
+  </data>
   <data name="taskVersionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
@@ -479,9 +491,6 @@
   </data>
   <data name="&gt;&gt;taskRegURILabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="triggerDeleteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceExclusiveCheck.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -524,6 +533,9 @@
   </data>
   <data name="settingsIntroLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.Name" xml:space="preserve">
     <value>taskStartIfConnectionCheck</value>
@@ -603,9 +615,6 @@
   <data name="taskRestartIntervalCombo.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 23</value>
   </data>
-  <data name="&gt;&gt;triggersTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="taskRegURIText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -615,8 +624,8 @@
   <data name="&gt;&gt;actionDownButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
   </data>
-  <data name="actionNewButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="taskMaintenancePeriodLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>529, 80</value>
@@ -650,9 +659,6 @@
   </data>
   <data name="&gt;&gt;networkConditionGroupBox.Name" xml:space="preserve">
     <value>networkConditionGroupBox</value>
-  </data>
-  <data name="taskWakeToRunCheck.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;actionDownButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -777,6 +783,9 @@
   <data name="taskRegURILabel.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Name" xml:space="preserve">
     <value>taskExecutionTimeLimitCombo</value>
   </data>
@@ -815,9 +824,6 @@
   </data>
   <data name="taskRestartOnIdleCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="taskAllowDemandStartCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="&gt;&gt;taskRestartAttemptTimesLabel.Name" xml:space="preserve">
     <value>taskRestartAttemptTimesLabel</value>
@@ -894,9 +900,6 @@
   <data name="actionEditButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskAuthorText.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;secHardGroup.Name" xml:space="preserve">
     <value>secHardGroup</value>
   </data>
@@ -914,9 +917,6 @@
   </data>
   <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
-  </data>
-  <data name="runTimesTab.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="actionDownButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>498, 142</value>
@@ -987,8 +987,8 @@
   <data name="taskUseUnifiedSchedulingEngineCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>344, 19</value>
@@ -1004,6 +1004,12 @@
   </data>
   <data name="generalTab.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="taskDeleteAfterCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>334, 34</value>
   </data>
   <data name="&gt;&gt;taskDescText.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -1119,8 +1125,8 @@
   <data name="&gt;&gt;regInfoTab.Name" xml:space="preserve">
     <value>regInfoTab</value>
   </data>
-  <data name="powerConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="actionNewButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1128,20 +1134,20 @@
   <data name="taskRestartOnIdleCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="taskIdleWaitTimeoutLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 54</value>
-  </data>
   <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 148</value>
   </data>
   <data name="addPropTab.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
+  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 15</value>
+  </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Parent" xml:space="preserve">
     <value>powerConditionGroupBox</value>
   </data>
-  <data name="secHardGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 85</value>
+  <data name="taskRegDocLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 167</value>
   </data>
   <data name="&gt;&gt;triggerListView.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -1182,9 +1188,6 @@
   <data name="&gt;&gt;addPropTab.Name" xml:space="preserve">
     <value>addPropTab</value>
   </data>
-  <data name="taskIdleDurationCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="regInfoTab.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -1206,14 +1209,14 @@
   <data name="secHardGroup.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 0</value>
   </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Error:</value>
+  </data>
   <data name="taskRegVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 109</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>&amp;Wake the computer to run this task</value>
   </data>
   <data name="taskMultInstCombo.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1236,11 +1239,14 @@
   <data name="taskVolatileCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="&gt;&gt;taskRegDocText.Name" xml:space="preserve">
-    <value>taskRegDocText</value>
+  <data name="taskVolatileCheck.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="generalTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>541, 372</value>
+  </data>
+  <data name="actionNewButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="idleConditionGroupBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1260,8 +1266,8 @@
   <data name="taskVersionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Error" xml:space="preserve">
-    <value />
+  <data name="taskHiddenCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="networkConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 288</value>
@@ -1308,9 +1314,6 @@
   <data name="&gt;&gt;taskRestartOnIdleCheck.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="taskRestartIntervalCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="actionUpButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>498, 109</value>
   </data>
@@ -1334,6 +1337,9 @@
   </data>
   <data name="&gt;&gt;taskAuthorLabel.Parent" xml:space="preserve">
     <value>generalTab</value>
+  </data>
+  <data name="taskRegVersionLabel.Text" xml:space="preserve">
+    <value>&amp;Version:</value>
   </data>
   <data name="triggerListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1388,6 +1394,9 @@
   </data>
   <data name="taskRunTimesControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
+  </data>
+  <data name="&gt;&gt;triggersTab.Name" xml:space="preserve">
+    <value>triggersTab</value>
   </data>
   <data name="taskTriggerIntroLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1527,8 +1536,8 @@
   <data name="taskIdleWaitTimeoutCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;historyTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
+  <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1632,8 +1641,8 @@
   <data name="triggerEditButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="taskDisallowStartIfOnBatteriesCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="regInfoTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
   </data>
   <data name="taskVersionLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1725,8 +1734,8 @@
   <data name="taskRegURIText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
+  <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="actionListView.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>360, 100</value>
@@ -1779,20 +1788,20 @@
   <data name="&gt;&gt;settingsIntroLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="actionListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="triggerEditButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="taskRegURIText.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="taskLoggedOnRadio.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;taskRegVersionLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="taskRestartCountLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;taskRegSourceText.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;actionsTab.Name" xml:space="preserve">
     <value>actionsTab</value>
@@ -1809,14 +1818,14 @@
   <data name="regInfoTab.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;taskRegURIText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="taskRegSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 15</value>
   </data>
   <data name="taskRegSDDLLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
+  <data name="principalReqPrivilegesLabel.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="settingsIntroLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1854,8 +1863,8 @@
   <data name="actionIntroLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="taskRegVersionLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
+    <value>taskSecurityGroupBox</value>
   </data>
   <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
     <value>taskWakeToRunCheck</value>
@@ -1872,9 +1881,6 @@
   <data name="taskRegSDDLText.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="triggerListView.Size" type="System.Drawing.Size, System.Drawing">
     <value>529, 285</value>
   </data>
@@ -1889,6 +1895,9 @@
   </data>
   <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="conditionIntroLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
     <value>Hidd&amp;en</value>
@@ -1905,14 +1914,14 @@
   <data name="taskIdleDurationCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;taskTriggerIntroLabel.Name" xml:space="preserve">
-    <value>taskTriggerIntroLabel</value>
-  </data>
   <data name="taskRegURILabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;principalSIDTypeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="taskMultInstCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -2019,9 +2028,6 @@
   <data name="label8.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
   <data name="taskPriorityCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2085,9 +2091,6 @@
   <data name="regInfoTab.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
   <data name="conditionIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -2109,13 +2112,10 @@
   <data name="&gt;&gt;triggerListView.Name" xml:space="preserve">
     <value>triggerListView</value>
   </data>
-  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 15</value>
+  <data name="&gt;&gt;taskTriggerIntroLabel.Name" xml:space="preserve">
+    <value>taskTriggerIntroLabel</value>
   </data>
   <data name="taskLocationText.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
@@ -2141,9 +2141,6 @@
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Name" xml:space="preserve">
     <value>taskHistoryControl1</value>
-  </data>
-  <data name="&gt;&gt;taskRegVersionLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="taskDescLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2177,6 +2174,9 @@
   </data>
   <data name="taskMultInstCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
+  </data>
+  <data name="actionListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;taskRegDocText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2229,8 +2229,8 @@
   <data name="taskRegSourceLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="taskRegURILabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="taskAllowDemandStartCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="&gt;&gt;taskRestartAttemptTimesLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2280,11 +2280,11 @@
   <data name="triggersTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>Topic</value>
   </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
-    <value>taskExecutionTimeLimitCheck</value>
+  <data name="&gt;&gt;taskRegDocText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="taskRegSDDLBtn.Error" xml:space="preserve">
-    <value />
+  <data name="historyTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2367,9 +2367,6 @@
   <data name="taskRegSDDLBtn.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="taskEnabledCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
     <value>Do not store &amp;password. The task will only have access to local computer resources.</value>
   </data>
@@ -2399,6 +2396,9 @@
   </data>
   <data name="taskDescLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
+    <value>settingsTab</value>
   </data>
   <data name="&gt;&gt;conditionsTab.Name" xml:space="preserve">
     <value>conditionsTab</value>
@@ -2439,8 +2439,11 @@
   <data name="triggerEditButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskMaintenancePeriodLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="taskRegSDDLBtn.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;triggerNewButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskAuthorLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2458,7 +2461,7 @@
     <value>runTimesTab</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.18730, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.20104, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="taskRestartIntervalCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2478,7 +2481,7 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Details</value>
   </data>
-  <data name="conditionIntroLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="taskAuthorText.Error" xml:space="preserve">
     <value />
   </data>
   <data name="secHardGroup.IconPadding" type="System.Int32, mscorlib">
@@ -2501,6 +2504,9 @@
   </data>
   <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
     <value>taskStopOnIdleEndCheck</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;taskAuthorLabel.Name" xml:space="preserve">
     <value>taskAuthorLabel</value>
@@ -2568,8 +2574,8 @@
   <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
     <value>When you create a task, you can specify the conditions that will trigger the task.</value>
   </data>
-  <data name="actionNewButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
+  <data name="powerConditionGroupBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="taskTriggerIntroLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -2628,7 +2634,7 @@
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskIdleWaitTimeoutCombo.IconPadding" type="System.Int32, mscorlib">
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="taskRegSDDLLabel.TabIndex" type="System.Int32, mscorlib">
@@ -2645,9 +2651,6 @@
   </data>
   <data name="conditionsTab.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="taskLocalOnlyCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2712,9 +2715,6 @@
   <data name="conditionIntroLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskRunningRuleLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="settingsTab.HelpKeyword" xml:space="preserve">
     <value>/html/d758ff5d-27d3-4090-b1c2-14ecaa83ff12.htm</value>
   </data>
@@ -2756,9 +2756,6 @@
   </data>
   <data name="taskNameText.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;regInfoTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="principalSIDTypeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
@@ -2862,8 +2859,8 @@
   <data name="&gt;&gt;taskStartWhenAvailableCheck.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="triggerNewButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="taskMaintenancePeriodCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="taskRestartCountText.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -2876,6 +2873,9 @@
   </data>
   <data name="taskWakeToRunCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 19</value>
   </data>
   <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2925,6 +2925,9 @@
   <data name="taskRegSourceText.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="taskRestartCountLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
   </data>
@@ -2933,9 +2936,6 @@
   </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;regInfoTab.Parent" xml:space="preserve">
-    <value>tabControl</value>
   </data>
   <data name="taskRegURILabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -2967,11 +2967,17 @@
   <data name="principalSIDTypeCombo.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="taskRegURILabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="actionsTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="tabControl.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="networkConditionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3036,6 +3042,9 @@
   <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
     <value>496, 23</value>
   </data>
+  <data name="&gt;&gt;taskRegURIText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;taskNameText.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -3081,6 +3090,9 @@
   <data name="&gt;&gt;idleConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
   </data>
+  <data name="taskWakeToRunCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 72</value>
+  </data>
   <data name="taskRegVersionText.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
@@ -3114,11 +3126,11 @@
   <data name="taskHistoryControl1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
+  <data name="&gt;&gt;regInfoTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
   </data>
-  <data name="taskMaintenanceDeadlineLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>&amp;Wake the computer to run this task</value>
   </data>
   <data name="settingsTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3189,6 +3201,9 @@
   <data name="taskMaintenanceExclusiveCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="taskIdleDurationCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskVersionCombo.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -3240,8 +3255,8 @@
   <data name="taskRegURILabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="taskRestartIntervalCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;taskAuthorText.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -3288,8 +3303,8 @@
   <data name="taskRegURILabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
+  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
+    <value>taskIdleDurationCombo</value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -3308,9 +3323,6 @@
   </data>
   <data name="actionNewButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Stop if the comput&amp;er ceases to be idle</value>
   </data>
   <data name="addPropTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -3381,8 +3393,8 @@
   <data name="conditionIntroLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="runTimesTab.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="taskTriggerIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3410,6 +3422,9 @@
   </data>
   <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>376, 222</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
+    <value>settingsTab</value>
   </data>
   <data name="taskAllowDemandStartCheck.Error" xml:space="preserve">
     <value />
@@ -3453,9 +3468,6 @@
   <data name="taskMaintenancePeriodLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskRegSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 15</value>
-  </data>
   <data name="settingsIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -3483,8 +3495,8 @@
   <data name="taskSecurityGroupBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="&gt;&gt;taskRegSourceLabel.Name" xml:space="preserve">
-    <value>taskRegSourceLabel</value>
+  <data name="taskAuthorLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="taskRegSourceText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3492,8 +3504,8 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 15</value>
   </data>
-  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>If the running task does not end when requested, &amp;force it to stop</value>
+  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
+    <value>networkConditionGroupBox</value>
   </data>
   <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
     <value>taskLoggedOptionalRadio</value>
@@ -3519,9 +3531,6 @@
   <data name="taskUserAcctLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
-    <value>taskIdleDurationCombo</value>
-  </data>
   <data name="taskMaintenanceDeadlineLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 25</value>
   </data>
@@ -3531,8 +3540,8 @@
   <data name="settingsTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>541, 372</value>
   </data>
-  <data name="taskMultInstCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
+    <value>generalTab</value>
   </data>
   <data name="taskMaintenanceDeadlineCombo.Error" xml:space="preserve">
     <value />
@@ -3563,6 +3572,9 @@
   </data>
   <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
     <value>powerConditionGroupBox</value>
+  </data>
+  <data name="taskRestartCountText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 23</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Unable to show the run times for this task.</value>
@@ -3645,6 +3657,9 @@
   <data name="&gt;&gt;taskRegDocLabel.Name" xml:space="preserve">
     <value>taskRegDocLabel</value>
   </data>
+  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="taskRegSourceLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -3720,9 +3735,6 @@
   <data name="triggerNewButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
   <data name="addPropTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 24</value>
   </data>
@@ -3774,9 +3786,6 @@
   <data name="label8.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="taskHiddenCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
   <data name="taskStopOnIdleEndCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3819,9 +3828,6 @@
   <data name="&gt;&gt;taskVersionCombo.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
   <data name="actionUpButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -3846,8 +3852,8 @@
   <data name="conditionsTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="taskVersionCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="taskStartIfConnectionCheck.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>218, 21</value>
@@ -3861,8 +3867,8 @@
   <data name="taskNameText.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 23</value>
   </data>
-  <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>Idle</value>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Stop if the comput&amp;er ceases to be idle</value>
   </data>
   <data name="taskRunningRuleLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 264</value>
@@ -3879,8 +3885,8 @@
   <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="taskRegDocLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 167</value>
+  <data name="principalReqPrivilegesDropDown.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="actionIntroLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -3888,8 +3894,8 @@
   <data name="principalReqPrivilegesLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 34</value>
+  <data name="taskIdleDurationCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="autoMaintGroup.Error" xml:space="preserve">
     <value />
@@ -3918,9 +3924,6 @@
   <data name="&gt;&gt;taskRegSDDLLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;actionDownButton.Name" xml:space="preserve">
     <value>actionDownButton</value>
   </data>
@@ -3930,8 +3933,8 @@
   <data name="settingsIntroLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="&gt;&gt;powerConditionGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4101,9 +4104,6 @@
   <data name="taskDescText.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="principalReqPrivilegesLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="powerConditionGroupBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
@@ -4116,8 +4116,8 @@
   <data name="&gt;&gt;taskRegSourceText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
   </data>
-  <data name="taskDeleteAfterCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="triggerDeleteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Name" xml:space="preserve">
     <value>taskVersionCombo</value>
@@ -4155,11 +4155,20 @@
   <data name="taskRegVersionText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
+    <value>taskSecurityGroupBox</value>
+  </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="settingsTab.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;taskAuthorLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
+    <value>idleConditionGroupBox</value>
   </data>
   <data name="tabControl.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -4170,8 +4179,8 @@
   <data name="taskDescText.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="actionUpButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
+  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
+    <value>taskExecutionTimeLimitCheck</value>
   </data>
   <data name="taskRestartIntervalCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4215,6 +4224,9 @@
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
     <value>Start the task only if the &amp;computer is idle for:</value>
   </data>
+  <data name="triggerEditButton.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="taskHistoryControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -4248,8 +4260,8 @@
   <data name="triggerDeleteButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;triggerNewButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="secHardGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 85</value>
   </data>
   <data name="principalReqPrivilegesDropDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 23</value>
@@ -4275,8 +4287,8 @@
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
     <value>When running the task, use the following user account:</value>
   </data>
-  <data name="&gt;&gt;taskAllowDemandStartCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
+  <data name="&gt;&gt;taskRegSourceLabel.Name" xml:space="preserve">
+    <value>taskRegSourceLabel</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -4329,8 +4341,11 @@
   <data name="availableConnectionsCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;taskAuthorLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskLocationText.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="taskMaintenancePeriodCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -4413,8 +4428,8 @@
   <data name="&gt;&gt;actionEditButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="taskLocationText.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;actionDeleteButton.Parent" xml:space="preserve">
+    <value>actionsTab</value>
   </data>
   <data name="runTimesTab.Text" xml:space="preserve">
     <value>Run Times</value>
@@ -4426,7 +4441,7 @@
     <value />
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.18730, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.20104, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="triggerListView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4482,11 +4497,11 @@
   <data name="taskRestartOnIdleCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;historyTab.Parent" xml:space="preserve">
+    <value>tabControl</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Error:</value>
+  <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 19</value>
   </data>
   <data name="taskRegVersionText.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 106</value>
@@ -4518,14 +4533,11 @@
   <data name="actionUpButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>&amp;Version:</value>
+  <data name="taskRegVersionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="taskRestartCountText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="actionEditButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -4545,8 +4557,8 @@
   <data name="label8.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
+  <data name="&gt;&gt;regInfoTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskDeleteAfterCheck.Error" xml:space="preserve">
     <value />
@@ -4581,8 +4593,8 @@
   <data name="principalSIDTypeLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskMaintenancePeriodCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="taskRunningRuleLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -4595,9 +4607,6 @@
   </data>
   <data name="taskPrincipalText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="powerConditionGroupBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="&gt;&gt;settingsTab.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4632,8 +4641,8 @@
   <data name="label4.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="taskEnabledCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="idleConditionGroupBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -4644,8 +4653,8 @@
   <data name="&gt;&gt;taskWakeToRunCheck.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="taskIdleDurationCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="taskUserAcctLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -4686,8 +4695,8 @@
   <data name="principalReqPrivilegesDropDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 19</value>
+  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskRegSDDLBtn.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -4752,8 +4761,8 @@
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskWakeToRunCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
+  <data name="principalSIDTypeCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="taskRestartCountLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 138</value>
@@ -4878,8 +4887,8 @@
   <data name="taskUseUnifiedSchedulingEngineCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;taskRegSourceText.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="taskExecutionTimeLimitCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="regInfoTab.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
@@ -4965,14 +4974,11 @@
   <data name="taskVersionLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="principalReqPrivilegesDropDown.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="actionDownButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>If the running task does not end when requested, &amp;force it to stop</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCheck.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -4992,8 +4998,8 @@
   <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
   </data>
-  <data name="triggerEditButton.Error" xml:space="preserve">
-    <value />
+  <data name="taskWakeToRunCheck.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="taskRestartOnIdleCheck.Error" xml:space="preserve">
     <value />
@@ -5007,8 +5013,8 @@
   <data name="taskPriorityCombo.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskAuthorLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="taskHistoryControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 5</value>
   </data>
   <data name="conditionIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>532, 35</value>
@@ -5019,14 +5025,17 @@
   <data name="actionDeleteButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskHistoryControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 5</value>
+  <data name="triggerNewButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="conditionIntroLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;taskRegDocText.Name" xml:space="preserve">
+    <value>taskRegDocText</value>
   </data>
   <data name="label3.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -5115,8 +5124,8 @@
   <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 19</value>
   </data>
-  <data name="label1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5166,14 +5175,11 @@
   <data name="actionNewButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="taskRestartCountText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 23</value>
+  <data name="&gt;&gt;triggersTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="taskAuthorLabel.Error" xml:space="preserve">
     <value />
@@ -5193,8 +5199,8 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="triggerEditButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="taskLocalOnlyCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="principalReqPrivilegesDropDown.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -5210,9 +5216,6 @@
   </data>
   <data name="label4.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
-  </data>
-  <data name="taskIdleDurationCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="secHardGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 173</value>
@@ -5244,8 +5247,8 @@
   <data name="autoMaintGroup.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="taskRestartCountLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskDeleteAfterCombo.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -5292,11 +5295,11 @@
   <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 19</value>
   </data>
+  <data name="taskRunTimesControl1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="taskIdleDurationCombo.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 23</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="taskAllowDemandStartCheck.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
@@ -5304,8 +5307,8 @@
   <data name="taskRestartIntervalCombo.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="taskIdleDurationCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="taskIdleWaitTimeoutLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 54</value>
   </data>
   <data name="taskEnabledCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5326,7 +5329,7 @@
     <value>taskRunningRuleLabel</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.18730, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.20104, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRegURIText.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -5354,6 +5357,9 @@
   </data>
   <data name="taskRunningRuleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="actionUpButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5415,9 +5421,6 @@
   <data name="taskHiddenCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskStartIfConnectionCheck.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="taskTriggerIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>532, 35</value>
   </data>
@@ -5454,9 +5457,6 @@
   <data name="taskNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="taskVolatileCheck.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="taskStartWhenAvailableCheck.Error" xml:space="preserve">
     <value />
   </data>
@@ -5466,14 +5466,14 @@
   <data name="&gt;&gt;taskRegVersionText.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="actionEditButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="actionListView.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -5496,4 +5496,40 @@
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>140, 17</value>
   </metadata>
+  <data name="columnHeader10.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="columnHeader11.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="columnHeader6.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="columnHeader7.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="columnHeader8.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="columnHeader9.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskMultInstCombo.Items" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskMultInstCombo.Items1" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskMultInstCombo.Items2" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskMultInstCombo.Items3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskVersionCombo.Items" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="taskVersionCombo.Items1" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

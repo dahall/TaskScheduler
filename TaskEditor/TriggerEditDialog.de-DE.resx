@@ -274,4 +274,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Neuer Trigger</value>
   </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Aktuelle benutzer&gt;</value>
+  </data>
+  <data name="schedStartLabel.Text" xml:space="preserve">
+    <value>Anfang:</value>
+  </data>
 </root>
