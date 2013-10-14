@@ -342,6 +342,9 @@
     <EmbeddedResource Include="TaskListView.zh-CN.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.de-DE.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.it.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -416,6 +419,9 @@
     <EmbeddedResource Include="UIComponents\ComHandlerActionUI.resx">
       <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.de-DE.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\DailyTriggerUI.it.resx">
       <DependentUpon>DailyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,6 +440,9 @@
     <EmbeddedResource Include="UIComponents\ExecActionUI.resx">
       <DependentUpon>ExecActionUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.de-DE.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.it.resx">
       <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -445,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de-DE.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.it.resx">
       <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
