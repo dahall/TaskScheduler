@@ -147,7 +147,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="triggerTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -337,10 +337,10 @@
     <value>schedTabControl</value>
   </data>
   <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Name" xml:space="preserve">
     <value>weeklyTriggerUI1</value>
@@ -536,9 +536,6 @@
   </data>
   <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 6</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="logonTab.Text" xml:space="preserve">
     <value>tabPage2</value>
@@ -850,7 +847,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dailyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 102</value>
+    <value>483, 105</value>
   </data>
   <data name="activateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 23</value>
@@ -925,7 +922,7 @@
     <value>4</value>
   </data>
   <data name="weeklyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 102</value>
+    <value>483, 105</value>
   </data>
   <data name="weeklyTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
@@ -943,13 +940,13 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
   </data>
   <data name="monthlyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 102</value>
+    <value>483, 105</value>
   </data>
   <data name="logonSpecUserRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -964,7 +961,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="&gt;&gt;onEventIdLabel.Name" xml:space="preserve">
     <value>onEventIdLabel</value>
@@ -982,7 +979,7 @@
     <value>88, 15</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="settingsTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1039,7 +1036,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;schedMonthlyRadio.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1114,7 +1111,7 @@
     <value>12, 6</value>
   </data>
   <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="stopIfRunsCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1153,7 +1150,7 @@
     <value>4</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="startupIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1690,7 +1687,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.17192, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>

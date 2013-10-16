@@ -44,7 +44,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					foreach (int i in ((MonthlyTrigger)trigger).DaysOfMonth)
 						monthlyDaysDropDown.SetItemChecked(i - 1, true);
 					monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyTrigger)trigger).MonthsOfYear;
-					monthlyDaysDropDown.SetItemChecked(31, ((MonthlyTrigger)trigger).RunOnLastDayOfMonth);
+					if (IsV2)
+						monthlyDaysDropDown.SetItemChecked(31, ((MonthlyTrigger)trigger).RunOnLastDayOfMonth);
 				}
 				else if (trigger is MonthlyDOWTrigger)
 				{
@@ -65,7 +66,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		public override bool IsV2
 		{
 			get { return !monthlyOnWeekDropDown.AllowOnlyOneCheckedItem; }
-			set { monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !value; }
+			set
+			{
+				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !value;
+				if (!value)
+					monthlyDaysDropDown.Items.RemoveAt(31);
+				else if (monthlyDaysDropDown.Items.Count <= 31)
+					monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
+			}
 		}
 
 		[Browsable(false), DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -78,10 +86,17 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (!onAssignment)
 			{
-				int[] days = new int[monthlyDaysDropDown.SelectedItems.Length];
+				var days = new System.Collections.Generic.List<int>(31);
 				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
-					days[i] = (int)monthlyDaysDropDown.SelectedItems[i].Value;
-				((MonthlyTrigger)trigger).DaysOfMonth = days;
+				{
+					if ((int)monthlyDaysDropDown.SelectedItems[i].Value == 99)
+					{
+						if (IsV2) ((MonthlyTrigger)trigger).RunOnLastDayOfMonth = true;
+					}
+					else
+						days.Add((int)monthlyDaysDropDown.SelectedItems[i].Value);
+				}
+				((MonthlyTrigger)trigger).DaysOfMonth = days.ToArray();
 			}
 		}
 
