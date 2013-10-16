@@ -128,25 +128,25 @@
     <value>85, 6</value>
   </data>
   <data name="oneTimeTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 84</value>
+    <value>483, 84</value>
   </data>
   <data name="dailyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 87</value>
+    <value>508, 87</value>
   </data>
   <data name="weeklyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 87</value>
+    <value>508, 87</value>
   </data>
   <data name="monthlyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 87</value>
+    <value>508, 87</value>
   </data>
   <data name="schedTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 93</value>
+    <value>491, 93</value>
   </data>
   <data name="schedGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 30</value>
   </data>
   <data name="schedGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 115</value>
+    <value>497, 115</value>
   </data>
   <data name="schedStartLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>93, 9</value>
@@ -196,6 +196,12 @@
   <data name="logonChgUserBtn.Text" xml:space="preserve">
     <value>Cambia utente o gruppo...</value>
   </data>
+  <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 15</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Utente corrente&gt;</value>
+  </data>
   <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 19</value>
   </data>
@@ -208,17 +214,11 @@
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
     <value>&amp;Qualsiasi utente</value>
   </data>
-  <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
   <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 15</value>
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
     <value>Nessuna impostazione aggiuntiva richiesta.</value>
-  </data>
-  <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
@@ -229,9 +229,6 @@
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Per cambiare le condizioni di inattività, utilizzare la scheda Condizioni nella pagina Crea attività o Proprietà attività.</value>
-  </data>
-  <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
   </data>
   <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 15</value>
@@ -262,9 +259,6 @@
   </data>
   <data name="eventBasicRadio.Text" xml:space="preserve">
     <value>Di &amp;base</value>
-  </data>
-  <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Impostazioni</value>
@@ -323,14 +317,7 @@
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Annulla</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Nuova attivazione</value>
-  </data>
-  <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt;Utente corrente&gt;</value>
   </data>
 </root>
