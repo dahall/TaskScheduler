@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -122,7 +122,7 @@
     <value>37, 15</value>
   </data>
   <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>Na &amp; mich:</value>
+    <value>Na&amp;me:</value>
   </data>
   <data name="$this.Error" xml:space="preserve">
     <value></value>
@@ -131,7 +131,7 @@
     <value></value>
   </data>
   <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>&amp; Löschen</value>
+    <value>&amp;Löschen</value>
   </data>
   <data name="actionDownButton.Error" xml:space="preserve">
     <value></value>
@@ -143,13 +143,13 @@
     <value></value>
   </data>
   <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp; Bearbeiten...</value>
+    <value>&amp;Bearbeiten...</value>
   </data>
   <data name="actionIntroLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="actionIntroLabel.Text" xml:space="preserve">
-    <value>Wenn Sie eine Aufgabe erstellen, müssen Sie die Aktion angeben, die ausgeführt werden, wenn Ihre Aufgabe startet.</value>
+    <value>Wenn Sie eine Aufgabe erstellen, müssen Sie die Aktion angeben, die ausgeführt wird, wenn Ihre Aufgabe startet.</value>
   </data>
   <data name="actionListView.Error" xml:space="preserve">
     <value></value>
@@ -158,7 +158,7 @@
     <value></value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp; Neu...</value>
+    <value>&amp;Neu...</value>
   </data>
   <data name="actionsTab.Error" xml:space="preserve">
     <value></value>
@@ -188,7 +188,7 @@
     <value></value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>&amp; Benutzer oder Gruppe ändern...</value>
+    <value>&amp;Benutzer oder Gruppe ändern...</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>Trigger</value>
@@ -227,7 +227,7 @@
     <value></value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
-    <value>Geben Sie die Bedingungen, die. zusammen mit der Trigger bestimmen Sie, ob der Task ausgeführt werden soll. Der Task wird nicht ausgeführt, wenn eine angegebene Bedingung nicht wahr ist.</value>
+    <value>Geben Sie die Bedingungen an, die zusammen mit dem Trigger bestimmen, ob der Task ausgeführt werden soll. Der Task wird nicht ausgeführt, wenn eine angegebene Bedingung nicht erfüllt ist.</value>
   </data>
   <data name="conditionsTab.Error" xml:space="preserve">
     <value></value>
@@ -245,7 +245,7 @@
     <value></value>
   </data>
   <data name="historyTab.Text" xml:space="preserve">
-    <value>Geschichte</value>
+    <value>Verlauf</value>
   </data>
   <data name="idleConditionGroupBox.Error" xml:space="preserve">
     <value></value>
@@ -257,7 +257,7 @@
     <value></value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Nicht in der Lage, die Laufzeiten für diese Aufgabe zu zeigen.</value>
+    <value>Es ist nicht möglich die Laufzeiten für diese Aufgabe zu zeigen.</value>
   </data>
   <data name="label2.Error" xml:space="preserve">
     <value></value>
@@ -275,7 +275,7 @@
     <value></value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Geben Sie zusätzliche Sicherheit, Wartung und System-Feature Kompatibilitätseinstellungen für die Aufgabe.</value>
+    <value>Geben Sie zusätzliche Sicherheits-, Wartung- und System-Funktionskompatibilität Einstellungen für die Aufgabe.</value>
   </data>
   <data name="label5.Error" xml:space="preserve">
     <value></value>
@@ -287,7 +287,7 @@
     <value></value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>&amp; Ebene:</value>
+    <value>&amp;Ebene:</value>
   </data>
   <data name="networkConditionGroupBox.Error" xml:space="preserve">
     <value></value>
@@ -308,7 +308,7 @@
     <value></value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp; Erforderlichen Berechtigungen:</value>
+    <value>&amp;Erforderlichen Berechtigungen:</value>
   </data>
   <data name="principalSIDTypeCombo.Error" xml:space="preserve">
     <value></value>
@@ -317,7 +317,7 @@
     <value></value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Prozess &amp; identifizieren SID (Security) geben:</value>
+    <value>Prozess&amp;sicherheitsidentitätstyp (SID):</value>
   </data>
   <data name="regInfoTab.Error" xml:space="preserve">
     <value></value>
@@ -341,13 +341,13 @@
     <value></value>
   </data>
   <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Security Hardening</value>
+    <value>Verstärkung der Sicherheit</value>
   </data>
   <data name="settingsIntroLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="settingsIntroLabel.Text" xml:space="preserve">
-    <value>Geben Sie zusätzliche Einstellungen, die das Verhalten des Vorgangs auswirken.</value>
+    <value>Geben Sie zusätzliche Einstellungen an, die das Verhalten des Vorgangs auswirken.</value>
   </data>
   <data name="settingsTab.Error" xml:space="preserve">
     <value></value>
@@ -362,13 +362,13 @@
     <value></value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>A &amp; rogramm Aufgabe bei Bedarf ausgeführt werden</value>
+    <value>&amp;Aufgabe bei Bedarf ausgeführen lassen</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Wenn die laufende Aufgabe nicht beenden, wenn angefordert, &amp;, es zwingen zu stoppen</value>
+    <value>Wenn die laufende Aufgabe nicht beendet, &amp;zwinge sie zu stoppen</value>
   </data>
   <data name="taskAuthorLabel.Error" xml:space="preserve">
     <value></value>
@@ -383,7 +383,7 @@
     <value></value>
   </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Wenn der Vorgang nicht zu kandidieren, &amp; es nach dem Löschen:</value>
+    <value>Wenn es nicht geplant, die Aufgabe wieder auszuführen, &amp; lösche sie nach:</value>
   </data>
   <data name="taskDeleteAfterCombo.Error" xml:space="preserve">
     <value></value>
@@ -392,7 +392,7 @@
     <value></value>
   </data>
   <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>&amp; Beschreibung:</value>
+    <value>&amp;Beschreibung:</value>
   </data>
   <data name="taskDescText.Error" xml:space="preserve">
     <value></value>
@@ -401,25 +401,25 @@
     <value></value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Starten Sie den Task nur dann, wenn der Computer in AC &amp; macht ist</value>
+    <value>Starten Sie die Aufgabe nur dann, wenn der Computer in AC-&amp;Modus  ist</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>&amp; Start verweigern, wenn in einer Sitzung Remote Anwendungen integrierte lokale (Schiene)</value>
+    <value>&amp;Start nicht erlauben, wenn in einer Remote Applications Integrated Locally (RAIL) Sitzung</value>
   </data>
   <data name="taskEnabledCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
-    <value>&amp; Aktiviert</value>
+    <value>&amp;Aktiviert</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Stoppen Sie die tas &amp; k, wenn es länger läuft:</value>
+    <value>Stoppen Sie die Aufgabe, wenn es länger läuft als:</value>
   </data>
   <data name="taskExecutionTimeLimitCombo.Error" xml:space="preserve">
     <value></value>
@@ -428,7 +428,7 @@
     <value></value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Hidd &amp; de</value>
+    <value>Versteckt</value>
   </data>
   <data name="taskHistoryControl1.Error" xml:space="preserve">
     <value></value>
@@ -437,7 +437,7 @@
     <value></value>
   </data>
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Starten Sie den Task nur, wenn die &amp; Computer ist im Leerlauf:</value>
+    <value>Starten Sie die Aufgabe nur, wenn der &amp;Computer im Leerlauf ist:</value>
   </data>
   <data name="taskIdleDurationCombo.Error" xml:space="preserve">
     <value></value>
@@ -449,13 +449,13 @@
     <value></value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>W &amp; Ait für Leerlauf für:</value>
+    <value>W&amp;arte für Leerlauf für:</value>
   </data>
   <data name="taskLocalOnlyCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Speichern Sie nicht &amp; Kennwort. Die Aufgabe haben nur Zugriff auf lokale Computerressourcen.</value>
+    <value>Speichern Sie das &amp;Kennwort nicht. Die Aufgabe hat nur Zugriff auf lokale Computerressourcen.</value>
   </data>
   <data name="taskLocationText.Error" xml:space="preserve">
     <value></value>
@@ -464,13 +464,13 @@
     <value></value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp; Nur ausgeführt, wenn Benutzer angemeldet ist</value>
+    <value>&amp;Nur ausgeführt, wenn Benutzer angemeldet ist</value>
   </data>
   <data name="taskLoggedOptionalRadio.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Run &amp; ob Benutzer nicht angemeldet ist oder</value>
+    <value>Starten egal ob der Benutzer angemeldet ist oder nicht</value>
   </data>
   <data name="taskMaintenanceDeadlineCombo.Error" xml:space="preserve">
     <value></value>
@@ -479,13 +479,13 @@
     <value></value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value>Wenn die Aufgabe nicht abgeschlossen, nach neu starten:</value>
+    <value>Wenn die Aufgabe nicht abgeschlossen, starte sie neu nach:</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value>Start-Aufgabe im e &amp; Xclusive-Modus</value>
+    <value>Aufgabe starten im E&amp;xclusive-Modus</value>
   </data>
   <data name="taskMaintenancePeriodCombo.Error" xml:space="preserve">
     <value></value>
@@ -494,7 +494,7 @@
     <value></value>
   </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
-    <value>Bei der Wartung Task starten alle:</value>
+    <value>Bei Wartung, Aufgabe starten alle:</value>
   </data>
   <data name="taskMultInstCombo.Error" xml:space="preserve">
     <value></value>
@@ -518,7 +518,7 @@
     <value></value>
   </data>
   <data name="taskNameText.Text" xml:space="preserve">
-    <value>Task-Name</value>
+    <value>Aufgabenname</value>
   </data>
   <data name="taskPrincipalText.Error" xml:space="preserve">
     <value></value>
@@ -539,13 +539,13 @@
     <value></value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Bearbeiten Sie die Sicherheit...</value>
+    <value>Sicherheit bearbeiten...</value>
   </data>
   <data name="taskRegSDDLLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
-    <value>SE &amp; Identifi­kation:</value>
+    <value>Sicherheit:</value>
   </data>
   <data name="taskRegSDDLText.Error" xml:space="preserve">
     <value></value>
@@ -554,7 +554,7 @@
     <value></value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value>&amp; Quelle:</value>
+    <value>&amp;Quelle:</value>
   </data>
   <data name="taskRegSourceText.Error" xml:space="preserve">
     <value></value>
@@ -563,7 +563,7 @@
     <value></value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value>&amp; URI:</value>
+    <value>&amp;URI:</value>
   </data>
   <data name="taskRegURIText.Error" xml:space="preserve">
     <value></value>
@@ -572,7 +572,7 @@
     <value></value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>&amp; Version:</value>
+    <value>&amp;Version:</value>
   </data>
   <data name="taskRegVersionText.Error" xml:space="preserve">
     <value></value>
@@ -581,13 +581,13 @@
     <value></value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>Mal</value>
+    <value>Male</value>
   </data>
   <data name="taskRestartCountLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Versuchen, &amp; bis zu starten:</value>
+    <value>Versuche neuzustarten bis zu:</value>
   </data>
   <data name="taskRestartCountText.Error" xml:space="preserve">
     <value></value>
@@ -596,7 +596,7 @@
     <value></value>
   </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>Wenn die &amp; Aufgabe fehlschlägt, starten Sie alle:</value>
+    <value>Wenn die &amp;Aufgabe fehlschlägt, starte sie neu alle:</value>
   </data>
   <data name="taskRestartIntervalCombo.Error" xml:space="preserve">
     <value></value>
@@ -605,19 +605,19 @@
     <value></value>
   </data>
   <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Neu starten, wenn die Leerlauf-Res &amp; Umes</value>
+    <value>Neustarten, wenn immer noch im Leerlauf-Modus </value>
   </data>
   <data name="taskRunLevelCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Ausführung w &amp; Ith höchste Privilegien</value>
+    <value>Ausführung mit höchste Privilegien</value>
   </data>
   <data name="taskRunningRuleLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>Wenn die Aufgabe bereits ru &amp; Ning ist, gilt die folgende Regel:</value>
+    <value>Wenn die Aufgabe bereits läuft, gilt die folgende Regel:</value>
   </data>
   <data name="taskRunTimesControl1.Error" xml:space="preserve">
     <value></value>
@@ -632,25 +632,25 @@
     <value></value>
   </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Starten Sie Onl &amp; y, wenn die folgenden Netzwerkverbindung verfügbar ist:</value>
+    <value>Nur starten, wenn die folgenden Netzwerkverbindung verfügbar ist:</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Führen Sie die Aufgabe so schnell wie möglich nach einer &amp; geplanten Start fehlt</value>
+    <value>Die Aufgabe so schnell wie möglich ausführen, wenn ein geplantes Start verpasst wurde</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Stop schaltet der Computer zu &amp; Akku</value>
+    <value>Stop, wenn der Computer zu &amp;Akku-Modus schaltet</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Stop If den Comput &amp; er aufhört, untätig zu sein</value>
+    <value>Stop sobald der Computer nicht mehr im Leerlauf ist</value>
   </data>
   <data name="taskTriggerIntroLabel.Error" xml:space="preserve">
     <value></value>
@@ -668,7 +668,7 @@
     <value></value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>&amp; Verwendung Unified Planungsmodul</value>
+    <value>&amp;Verwendung Unified Planungsmodul</value>
   </data>
   <data name="taskVersionCombo.Error" xml:space="preserve">
     <value></value>
@@ -683,31 +683,31 @@
     <value></value>
   </data>
   <data name="taskVersionLabel.Text" xml:space="preserve">
-    <value>&amp; Für konfigurieren:</value>
+    <value>&amp;Konfigurieren für:</value>
   </data>
   <data name="taskVolatileCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value>&amp; Aufgabe automatisch zu deaktivieren, jedes Mal, wenn Windows gestartet wird</value>
+    <value>&amp;Aufgabe automatisch deaktivieren, jedes Mal Windows gestartet wird</value>
   </data>
   <data name="taskWakeToRunCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>&amp; Computer zum Ausführen dieser Aufgabe reaktivieren</value>
+    <value>&amp;Computer reaktivieren, um diese Aufgabe auszuführen</value>
   </data>
   <data name="triggerDeleteButton.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>&amp; Löschen</value>
+    <value>&amp;Löschen</value>
   </data>
   <data name="triggerEditButton.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>&amp; Bearbeiten...</value>
+    <value>&amp;Bearbeiten...</value>
   </data>
   <data name="triggerListView.Error" xml:space="preserve">
     <value></value>
@@ -716,7 +716,7 @@
     <value></value>
   </data>
   <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>&amp; Neu...</value>
+    <value>&amp;Neu...</value>
   </data>
   <data name="triggersTab.Error" xml:space="preserve">
     <value></value>
