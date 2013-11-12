@@ -11,7 +11,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			DirectoryObjectPickerDialog dlg = new DirectoryObjectPickerDialog();
 			dlg.TargetComputer = targetComputerName;
-			dlg.AllowedObjectTypes = ObjectTypes.BuiltInGroups | ObjectTypes.Groups | ObjectTypes.Users | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers; 
+			dlg.AllowedObjectTypes = ObjectTypes.Users; // | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
+			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups;
 			dlg.AttributesToFetch.Add("objectSid");
 			dlg.MultiSelect = false;
 			dlg.SkipDomainControllerCheck = true;

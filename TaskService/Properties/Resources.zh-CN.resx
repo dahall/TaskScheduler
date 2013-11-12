@@ -315,4 +315,10 @@
   <data name="WWThirdWeek" xml:space="preserve">
     <value>第三周</value>
   </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>定制触发器</value>
+  </data>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>定制触发器</value>
+  </data>
 </root>

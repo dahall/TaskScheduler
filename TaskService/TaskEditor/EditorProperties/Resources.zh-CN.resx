@@ -418,4 +418,16 @@
   <data name="LoadingPrompt">
     <value>载入中...</value>
   </data>
+  <data name="ChangeUserBtn" xml:space="preserve">
+    <value>更改用户或组...</value>
+  </data>
+  <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
+    <value>更改用户...</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>在此工具中，这种类型的触发器不能被编辑。</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>定制触发器</value>
+  </data>
 </root>

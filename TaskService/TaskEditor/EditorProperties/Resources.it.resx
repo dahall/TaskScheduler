@@ -427,4 +427,10 @@ Azione: {3}</value>
   <data name="TriggerTypeCustom" xml:space="preserve">
     <value>Attivazione personalizata</value>
   </data>
+  <data name="ChangeUserBtn" xml:space="preserve">
+    <value>&amp;Cambia utente o gruppo...</value>
+  </data>
+  <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
+    <value>&amp;Cambia utente...</value>
+  </data>
 </root>

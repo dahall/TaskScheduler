@@ -522,4 +522,10 @@ Aktion: {3}</value>
   <data name="TriggerTypeCustom" xml:space="preserve">
     <value>Benutzerdefinierter Trigger</value>
   </data>
+  <data name="ChangeUserBtn" xml:space="preserve">
+    <value>&amp;Benutzer oder Gruppe ändern...</value>
+  </data>
+  <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
+    <value>&amp;Benutzer ändern...</value>
+  </data>
 </root>
