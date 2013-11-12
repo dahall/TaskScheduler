@@ -894,6 +894,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (string.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
+			changePrincipalButton.Text = flagUserIsAnAdmin ? EditorProperties.Resources.ChangeUserBtn : EditorProperties.Resources.ChangeUserBtnNonAdmin;
 			onAssignment = prevOnAssignment;
 		}
 
