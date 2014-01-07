@@ -10,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	internal static class XmlSerializationHelper
 	{
-		private static object GetDefaultValue(PropertyInfo prop)
+		public static object GetDefaultValue(PropertyInfo prop)
 		{
 			var attributes = prop.GetCustomAttributes(typeof(DefaultValueAttribute), true);
 			if (attributes.Length > 0)
