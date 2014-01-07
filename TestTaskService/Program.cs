@@ -20,8 +20,8 @@ namespace TestTaskService
 				return;
 			}
 
-			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("it-IT");
-			System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("it-IT");
+			//System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("it-IT");
+			//System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("it-IT");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());
@@ -242,7 +242,7 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2013, 1, 15, 9, 0, 0), EndBoundary = new DateTime(2013, 1, 22, 9, 0, 0) });
+				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = new DateTime(2014, 1, 22, 9, 0, 0) });
 				td.Actions.Add(new ExecAction("notepad.exe"));
 				//WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
@@ -388,19 +388,20 @@ namespace TestTaskService
 						var t2 = taskEditDialog.Task;
 						output.WriteLine("Triggers: {0}", t2.Definition.Triggers);
 					}
-				}
+				}*/
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
 				td = t.Definition;
-				td.Triggers.Clear();
+				/*td.Triggers.Clear();
 				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
-				wt.DaysOfWeek = DaysOfTheWeek.Friday;
+				wt.DaysOfWeek = DaysOfTheWeek.Friday;*/
+				((ExecAction)td.Actions[0]).Path = "calc.exe";
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
-				//ts.RootFolder.DeleteTask(taskName);
+				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);
+				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
 			{

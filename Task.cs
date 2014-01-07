@@ -458,6 +458,48 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v2Settings);
 			v1Task = null;
 		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (v2Settings != null || v1Task != null)
+				return DebugHelper.GetDebugString(this);
+			return base.ToString();
+		}
+	}
+
+	internal static class DebugHelper
+	{
+		public static string GetDebugString(object inst)
+		{
+#if DEBUG
+			var sb = new System.Text.StringBuilder();
+			foreach (var pi in inst.GetType().GetProperties(System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.DeclaredOnly))
+			{
+				if (pi.Name.StartsWith("Xml"))
+					continue;
+				var outval = pi.GetValue(inst, null);
+				if (outval != null)
+				{
+					var defval = XmlSerializationHelper.GetDefaultValue(pi);
+					if (!outval.Equals(defval))
+					{
+						var s = string.Format("{0}:{1}", pi.Name, outval);
+						if (s.Length > 30) s = s.Remove(30);
+						sb.Append(s + "; ");
+					}
+				}
+			}
+			return sb.ToString();
+#else
+			return inst.GetType().ToString();
+#endif
+		}
 	}
 
 	/// <summary>
@@ -466,16 +508,14 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlType(IncludeInSchema = false)]
 	public sealed class MaintenanceSettings : IDisposable
 	{
-		private V2Interop.IMaintenanceSettings v2Settings = null;
+		private V2Interop.ITaskSettings3 iSettings = null;
+		private V2Interop.IMaintenanceSettings iMaintSettings = null;
 
-		internal MaintenanceSettings(V2Interop.ITaskSettings3 iSettings)
+		internal MaintenanceSettings(V2Interop.ITaskSettings3 iSettings3)
 		{
-			if (iSettings != null)
-			{
-				v2Settings = iSettings.MaintenanceSettings;
-				if (v2Settings == null)
-					v2Settings = iSettings.CreateMaintenanceSettings();
-			}
+			iSettings = iSettings3;
+			if (iSettings3 != null)
+				iMaintSettings = iSettings.MaintenanceSettings;
 		}
 
 		/// <summary>
@@ -487,14 +527,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Settings != null)
-					return Task.StringToTimeSpan(v2Settings.Deadline);
+				if (iMaintSettings != null)
+					return Task.StringToTimeSpan(iMaintSettings.Deadline);
 				return TimeSpan.Zero;
 			}
 			set
 			{
-				if (v2Settings != null)
-					v2Settings.Deadline = Task.TimeSpanToString(value);
+				if (iSettings != null)
+				{
+					if (iMaintSettings == null && value != TimeSpan.Zero)
+						iMaintSettings = iSettings.CreateMaintenanceSettings();
+					if (iMaintSettings != null)
+						iMaintSettings.Deadline = Task.TimeSpanToString(value);
+				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
@@ -509,14 +554,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Settings != null)
-					return v2Settings.Exclusive;
+				if (iMaintSettings != null)
+					return iMaintSettings.Exclusive;
 				return false;
 			}
 			set
 			{
-				if (v2Settings != null)
-					v2Settings.Exclusive = value;
+				if (iSettings != null)
+				{
+					if (iMaintSettings == null && value != false)
+						iMaintSettings = iSettings.CreateMaintenanceSettings();
+					if (iMaintSettings != null)
+						iMaintSettings.Exclusive = value;
+				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
@@ -531,14 +581,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Settings != null)
-					return Task.StringToTimeSpan(v2Settings.Period);
+				if (iMaintSettings != null)
+					return Task.StringToTimeSpan(iMaintSettings.Period);
 				return TimeSpan.Zero;
 			}
 			set
 			{
-				if (v2Settings != null)
-					v2Settings.Period = Task.TimeSpanToString(value);
+				if (iSettings != null)
+				{
+					if (iMaintSettings == null && value != TimeSpan.Zero)
+						iMaintSettings = iSettings.CreateMaintenanceSettings();
+					if (iMaintSettings != null)
+						iMaintSettings.Period = Task.TimeSpanToString(value);
+				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
 			}
@@ -549,13 +604,26 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void Dispose()
 		{
-			if (v2Settings != null)
-				Marshal.ReleaseComObject(v2Settings);
+			if (iMaintSettings != null)
+				Marshal.ReleaseComObject(iMaintSettings);
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (iMaintSettings != null)
+				return DebugHelper.GetDebugString(this);
+			return base.ToString();
 		}
 
 		internal bool IsSet()
 		{
-			return (v2Settings != null && (v2Settings.Period != null || v2Settings.Deadline != null || v2Settings.Exclusive == true));
+			return (iMaintSettings != null && (iMaintSettings.Period != null || iMaintSettings.Deadline != null || iMaintSettings.Exclusive == true));
 		}
 	}
 
@@ -629,6 +697,19 @@ namespace Microsoft.Win32.TaskScheduler
 		internal bool IsSet()
 		{
 			return (v2Settings != null && (!string.IsNullOrEmpty(v2Settings.Id) || !string.IsNullOrEmpty(v2Settings.Name)));
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (v2Settings != null)
+				return DebugHelper.GetDebugString(this);
+			return base.ToString();
 		}
 	}
 
@@ -1146,22 +1227,33 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskScheduler.V1Interop.SystemTime stStart = new TaskScheduler.V1Interop.SystemTime(start);
 			TaskScheduler.V1Interop.SystemTime stEnd = new TaskScheduler.V1Interop.SystemTime(end);
 			IntPtr runTimes = IntPtr.Zero, st;
-			if (v2Task != null)
-				v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
-			else
+			DateTime[] ret = new DateTime[0];
+			try
 			{
-				ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
-				v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
-				count = count1;
+				if (v2Task != null)
+					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
+				else
+				{
+					ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
+					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
+					count = count1;
+				}
+				ret = new DateTime[count];
+				int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
+				for (int i = 0; i < count; i++)
+				{
+					st = new IntPtr(runTimes.ToInt64() + (i * stSize));
+					ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
+				}
 			}
-			DateTime[] ret = new DateTime[count];
-			int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
-			for (int i = 0; i < count; i++)
+			catch (Exception ex)
 			{
-				st = new IntPtr(runTimes.ToInt64() + (i * stSize));
-				ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
+				System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes failed: Error {0}.", ex));
 			}
-			Marshal.FreeCoTaskMem(runTimes);
+			finally
+			{
+				Marshal.FreeCoTaskMem(runTimes);
+			}
 			System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes ({0}): Returned {1} items from {2} to {3}.", v2Task != null ? "V2" : "V1", count, stStart, stEnd));
 			return ret;
 		}
@@ -2619,6 +2711,19 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v2RegInfo);
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (v2RegInfo != null || v1Task != null)
+				return DebugHelper.GetDebugString(this);
+			return base.ToString();
+		}
+
 		internal static object GetTaskData(V1Interop.ITask v1Task)
 		{
 			ushort DataLen;
@@ -3383,6 +3488,19 @@ namespace Microsoft.Win32.TaskScheduler
 			idleSettings = null;
 			networkSettings = null;
 			v1Task = null;
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (v2Settings != null || v1Task != null)
+				return DebugHelper.GetDebugString(this);
+			return base.ToString();
 		}
 
 		XmlSchema IXmlSerializable.GetSchema()
