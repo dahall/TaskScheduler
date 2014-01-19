@@ -468,7 +468,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Specifies a repetion interval for the trigger.
 			/// </summary>
-			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse"/>.</param>
+			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
 			public TriggerBuilder RepeatingEvery(string span)
 			{
@@ -490,7 +490,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Specifies the maximum amount of time to repeat the execution of a trigger.
 			/// </summary>
-			/// <param name="span">The duration span string. Must be parsable by <see cref="TimeSpan.Parse"/>.</param>
+			/// <param name="span">The duration span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
 			public TriggerBuilder RunningAtMostFor(string span)
 			{
