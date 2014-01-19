@@ -23,5 +23,9 @@
     <file src="bin\Release\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\3.5" />
     <file src="bin\Release\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\3.5" />
     <file src="bin\Release\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\3.5" />
+	<file src="bin4\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\4" />
+	<file src="bin4\Release\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\4" />
+	<file src="bin4\Release\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\4" />
+	<file src="bin4\Release\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\4" />
   </files>
 </package>
