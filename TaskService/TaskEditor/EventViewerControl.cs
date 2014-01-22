@@ -8,13 +8,15 @@ using System.Xml.Xsl;
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
-	/// Control that displays a <see cref="TaskEvent"/>.
+	/// Control that displays a TaskEvent.
 	/// </summary>
 	internal partial class EventViewerControl : UserControl
 	{
+#if NET_35_OR_GREATER
 		private TaskEvent taskEvent;
 		private string tmpXmlFile, tmpHtmlFile;
 		private XslCompiledTransform xslt;
+#endif
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EventViewerControl"/> class.
@@ -24,6 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 			InitializeComponent();
 		}
 
+#if NET_35_OR_GREATER
 		/// <summary>
 		/// Gets or sets the task event.
 		/// </summary>
@@ -74,6 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Available tabs within the control
@@ -98,14 +102,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public new void Dispose()
 		{
 			base.Dispose();
+#if NET_35_OR_GREATER
 			if (tmpXmlFile != null)
 				File.Delete(tmpXmlFile);
 			if (tmpHtmlFile != null)
 				File.Delete(tmpHtmlFile);
+#endif
 		}
 
 		private void ShowHtml()
 		{
+#if NET_35_OR_GREATER
 			const string htmlFmt = "<html><body><b><font color=\"{2}\">{0}</font></b><br/>{1}</body></html>";
 			if (!string.IsNullOrEmpty(taskEvent.EventRecord.ToXml()))
 			{
@@ -147,6 +154,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				this.htmlText.DocumentText = string.Empty;
 			}
+#endif
 		}
 
 		private string GetTempFile(string ext)
@@ -159,6 +167,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ShowXml()
 		{
+#if NET_35_OR_GREATER
 			if (!string.IsNullOrEmpty(taskEvent.EventRecord.ToXml()))
 			{
 				if (tmpXmlFile == null)
@@ -172,12 +181,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				this.htmlText.DocumentText = string.Empty;
 			}
+#endif
 		}
 
 		private void infoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
+#if NET_35_OR_GREATER
 			const string fmt = @"http://www.bing.com/search?q=%22Microsoft-Windows-TaskScheduler%22+%22Event+ID+{0}%22";
 			System.Diagnostics.Process.Start(string.Format(fmt, taskEvent.EventId));
+#endif
 		}
 
 		private void textViewRadio_CheckedChanged(object sender, System.EventArgs e)

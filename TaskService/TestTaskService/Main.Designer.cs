@@ -1,4 +1,6 @@
-﻿namespace TestTaskService
+﻿extern alias GrpCtrl;
+
+namespace TestTaskService
 {
 	partial class Main
 	{
@@ -28,16 +30,16 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			GroupControls.RadioButtonListItem radioButtonListItem1 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem2 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem3 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem4 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem5 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem6 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem7 = new GroupControls.RadioButtonListItem();
-			GroupControls.RadioButtonListItem radioButtonListItem8 = new GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem1 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem2 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem3 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem4 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem5 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem6 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem7 = new GrpCtrl::GroupControls.RadioButtonListItem();
+			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem8 = new GrpCtrl::GroupControls.RadioButtonListItem();
 			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.radioButtonList1 = new GroupControls.RadioButtonList();
+			this.radioButtonList1 = new GrpCtrl::GroupControls.RadioButtonList();
 			this.closeButton = new System.Windows.Forms.Button();
 			this.runButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
@@ -86,7 +88,7 @@
 			this.radioButtonList1.Location = new System.Drawing.Point(13, 13);
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 4;
-			this.radioButtonList1.RepeatDirection = GroupControls.RepeatDirection.Horizontal;
+			this.radioButtonList1.RepeatDirection = GrpCtrl::GroupControls.RepeatDirection.Horizontal;
 			this.radioButtonList1.Size = new System.Drawing.Size(393, 35);
 			this.radioButtonList1.TabIndex = 0;
 			// 
@@ -179,7 +181,7 @@
 		#endregion
 
 		private System.Windows.Forms.TextBox textBox1;
-		private GroupControls.RadioButtonList radioButtonList1;
+		private GrpCtrl::GroupControls.RadioButtonList radioButtonList1;
 		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.Button runButton;
 		private System.Windows.Forms.Label label1;

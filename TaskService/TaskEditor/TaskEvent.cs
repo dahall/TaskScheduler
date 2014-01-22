@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET_35_OR_GREATER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 
@@ -357,3 +358,4 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 }
+#endif
