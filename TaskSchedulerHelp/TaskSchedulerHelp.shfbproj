@@ -30,9 +30,9 @@
     </SandcastlePath>
     <WorkingPath>
     </WorkingPath>
-    <FrameworkVersion>.NET Framework 3.5</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
     <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-    <CopyrightText>&amp;#169%3b 2013 Codeplex Community. All rights reserved.</CopyrightText>
+    <CopyrightText>&amp;#169%3b 2014 Codeplex Community. All rights reserved.</CopyrightText>
     <PresentationStyle>VS2010</PresentationStyle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
@@ -84,10 +84,10 @@
       </ComponentConfig>
     </ComponentConfigurations>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\bin\Release\Microsoft.Win32.TaskScheduler.dll" />
-      <DocumentationSource sourceFile="..\bin\Release\Microsoft.Win32.TaskScheduler.XML" />
-      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\Microsoft.Win32.TaskSchedulerEditor.dll" />
-      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\Microsoft.Win32.TaskSchedulerEditor.XML" />
+      <DocumentationSource sourceFile="..\bin\Release\v4.0\Microsoft.Win32.TaskScheduler.dll" />
+      <DocumentationSource sourceFile="..\bin\Release\v4.0\Microsoft.Win32.TaskScheduler.XML" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.dll" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.XML" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
