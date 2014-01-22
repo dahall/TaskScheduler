@@ -1,4 +1,6 @@
-﻿using System;
+﻿extern alias GrpCtrlDLL;
+extern alias WizDLL;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -537,7 +539,7 @@ namespace Microsoft.Win32.TaskScheduler
 			actionSelectPage.AllowNext = (actionSelectionList.SelectedIndex >= 0);
 		}
 
-		private void actionSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void actionSelectPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			bool hasValue = (this.action != null);
 			AvailableWizardActions selAct = (AvailableWizardActions)actionSelectionList.SelectedItem.Tag;
@@ -566,7 +568,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void AddActionToSelectionList(AvailableWizardActions action)
 		{
-			this.actionSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
+			this.actionSelectionList.Items.Add(new GrpCtrlDLL::GroupControls.RadioButtonListItem()
 			{
 				Text = TaskPropertiesControl.BuildEnumString("WizActionText", action),
 				Subtext = TaskPropertiesControl.BuildEnumString("WizActionSubtext", action),
@@ -576,7 +578,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void AddTriggerToSelectionList(AvailableWizardTriggers trig)
 		{
-			this.triggerSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
+			this.triggerSelectionList.Items.Add(new GrpCtrlDLL::GroupControls.RadioButtonListItem()
 			{
 				Text = TaskPropertiesControl.BuildEnumString("WizTriggerText", trig),
 				Subtext = TaskPropertiesControl.BuildEnumString("WizTriggerSubtext", trig),
@@ -649,7 +651,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void emailActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void emailActionPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			action = emailActionUI1.Action;
 		}
@@ -695,7 +697,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void msgActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void msgActionPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			action = showMessageActionUI1.Action;
 		}
@@ -705,7 +707,7 @@ namespace Microsoft.Win32.TaskScheduler
 			introPage.AllowNext = nameText.TextLength > 0;
 		}
 
-		private void oneTimeTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void oneTimeTriggerPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			trigger.StartBoundary = oneTimeStartTimePicker.Value;
 		}
@@ -716,7 +718,7 @@ namespace Microsoft.Win32.TaskScheduler
 			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(null, onEventLogCombo.Text));
 		}
 
-		private void onEventTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void onEventTriggerPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			if (onEventLogCombo.Text.Length > 0)
 			{
@@ -731,7 +733,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void onEventTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		private void onEventTriggerPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
 		{
 			if (onEventLogCombo.Items.Count == 0)
 				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(null));
@@ -769,12 +771,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void runActionPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			action = execActionUI1.Action;
 		}
 
-		private void secOptPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void secOptPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			string user = this.TaskDefinition.Principal.UserId;
 			Password = null;
@@ -801,7 +803,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private bool SetPage(AeroWizard.WizardPage page, int flag, int flagSet)
+		private bool SetPage(WizDLL::AeroWizard.WizardPage page, int flag, int flagSet)
 		{
 			bool set = (flagSet & flag) == flag;
 			page.Suppress = !set;
@@ -926,7 +928,7 @@ namespace Microsoft.Win32.TaskScheduler
 			msgActionPage.AllowNext = showMessageActionUI1.IsActionValid();
 		}
 
-		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		private void summaryPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
 		{
 			summaryPrompt.Visible = RegisterTaskOnFinish;
 			if (SummaryRegistrationNotice != null)
@@ -961,7 +963,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskLocalOnlyCheck_CheckedChanged(sender, e);
 		}
 
-		private void triggerPropPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		private void triggerPropPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
 		{
 			if (this.TriggerPropertiesInstructions != null)
 				triggerPropText.Text = this.TriggerPropertiesInstructions;
@@ -972,7 +974,7 @@ namespace Microsoft.Win32.TaskScheduler
 			triggerSelectPage.AllowNext = (triggerSelectionList.SelectedIndex >= 0);
 		}
 
-		private void triggerSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void triggerSelectPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			bool hasValue = (this.trigger != null);
 			AvailableWizardTriggers selTrig = (AvailableWizardTriggers)triggerSelectionList.SelectedItem.Tag;
@@ -1025,7 +1027,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void triggerSelectPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+		private void triggerSelectPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
 		{
 			if (this.TriggerPagePrompt != null)
 				this.triggerSelectPage.Text = this.TriggerPagePrompt;

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -21,13 +21,14 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -37,12 +38,22 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <DefineConstants>TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
+    <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
+    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
@@ -54,30 +65,32 @@
     <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AeroWizard, Version=1.0.3687.1219, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AeroWizard">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AeroWizard\bin\Release\AeroWizard.dll</HintPath>
+      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
+      <Aliases>WizDLL</Aliases>
     </Reference>
-    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.0.3664.29139, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls, Version=1.0.3630.42707, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GroupControls">
+      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
+      <Aliases>GrpCtrlDLL</Aliases>
+    </Reference>
+    <Reference Include="Microsoft.Win32.TaskScheduler">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
+      <HintPath>..\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TimeSpan2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TimeSpan2">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TimeSpan2\bin\Release\TimeSpan2.dll</HintPath>
+      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +111,7 @@
     </Compile>
     <Compile Include="ControlProcessing.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
+    <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\BROWSEINFO.cs" />
@@ -113,10 +127,10 @@
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EventViewerDialog.cs">
+    <Compile Include="EventViewerDialog.cs" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EventViewerDialog.Designer.cs">
+    <Compile Include="EventViewerDialog.Designer.cs" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
       <DependentUpon>EventViewerDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EventViewerControl.cs">
@@ -294,7 +308,7 @@
     <EmbeddedResource Include="EventViewerControl.resx">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EventViewerDialog.resx">
+    <EmbeddedResource Include="EventViewerDialog.resx" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
       <DependentUpon>EventViewerDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
@@ -466,12 +480,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskService.csproj">
-      <Project>{81B5ABCC-6909-483D-8BB3-84B52E3C7043}</Project>
-      <Name>TaskService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
@@ -528,4 +536,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
+    <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
+  </Target>
 </Project>

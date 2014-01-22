@@ -169,7 +169,6 @@
 			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
 			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
 			this.historyDetailView.Name = "historyDetailView";
-			this.historyDetailView.TaskEvent = null;
 			// 
 			// tableLayoutPanel2
 			// 

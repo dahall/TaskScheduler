@@ -6,12 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService.csproj", "{81B5ABCC-6909-483D-8BB3-84B52E3C7043}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskService", "TestTaskService\TestTaskService.csproj", "{207F8F60-0A74-4959-8623-5D258EB133EB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5279D487-59FA-4D01-9D7A-EA7387D8B67C} = {5279D487-59FA-4D01-9D7A-EA7387D8B67C}
+		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VBTestTaskService", "VBTestTaskService\VBTestTaskService.vbproj", "{8C410535-95B6-434B-A03D-1359884D0410}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMTask", "COMTask\COMTask.csproj", "{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor", "TaskEditor\TaskEditor.csproj", "{5279D487-59FA-4D01-9D7A-EA7387D8B67C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
+	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSchedulerHelp\TaskSchedulerHelp.shfbproj", "{DE4DC8A8-9008-4769-A7C2-F52F4F733944}"
 EndProject
@@ -19,13 +26,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityEditor", "SecurityE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskServiceExecutor", "TaskServiceExecutor\TaskServiceExecutor.csproj", "{BB5F9CFB-668A-46ED-B904-3B5744389F87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService NET4", "TaskService NET4.csproj", "{873CBA09-0AB9-462B-817D-CF1687CB4A6E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor NET4", "TaskEditor\TaskEditor NET4.csproj", "{DCC9754C-9D72-4BE6-B180-C1FD033F0400}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
@@ -52,11 +55,6 @@ Global
 		SccProjectUniqueName8 = TaskServiceExecutor\\TaskServiceExecutor.csproj
 		SccProjectName8 = TaskServiceExecutor
 		SccLocalPath8 = TaskServiceExecutor
-		SccProjectUniqueName9 = TaskService\u0020NET4.csproj
-		SccLocalPath9 = .
-		SccProjectUniqueName10 = TaskEditor\\TaskEditor\u0020NET4.csproj
-		SccProjectName10 = TaskEditor
-		SccLocalPath10 = TaskEditor
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,12 +85,6 @@ Global
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{873CBA09-0AB9-462B-817D-CF1687CB4A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{873CBA09-0AB9-462B-817D-CF1687CB4A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{873CBA09-0AB9-462B-817D-CF1687CB4A6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCC9754C-9D72-4BE6-B180-C1FD033F0400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCC9754C-9D72-4BE6-B180-C1FD033F0400}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCC9754C-9D72-4BE6-B180-C1FD033F0400}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

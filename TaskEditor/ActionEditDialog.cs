@@ -10,7 +10,12 @@ namespace Microsoft.Win32.TaskScheduler
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task action.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	[DesignTimeVisible(true)]
-	public partial class ActionEditDialog : Form
+	public partial class ActionEditDialog :
+#if DEBUG
+		Form
+#else
+		DialogBase
+#endif
 	{
 		private Action action;
 		private bool isV2 = true;

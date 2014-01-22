@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias GrpCtrlDLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -12,11 +13,13 @@ namespace Microsoft.Win32.TaskScheduler
 	public partial class TaskHistoryControl : UserControl
 	{
 		private long historyEventCount = 0;
-		private int selectedIndex = -1;
 		private Task task;
-		private SparseArray<ListViewItem> vcache = new SparseArray<ListViewItem>();
+#if NET_35_OR_GREATER
+		private int selectedIndex = -1;
+		private GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
 		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
+#endif
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskHistoryControl"/> class.
@@ -62,21 +65,25 @@ namespace Microsoft.Win32.TaskScheduler
 			historyListView.Cursor = Cursors.WaitCursor;
 			historyBackgroundWorker.RunWorkerAsync();
 			historyListView.Items.Clear();
-			selectedIndex = -1;
-			historyDetailView.TaskEvent = null;
 			historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 			historyHeader_Refresh(-1);
 			historyEventCount = 0;
 			historySplitContainer.Panel2Collapsed = false;
+#if NET_35_OR_GREATER
+			historyDetailView.TaskEvent = null;
+			selectedIndex = -1;
 			vlog = new TaskEventLog(task.TaskService.TargetServer, task.Path);
 			vevEnum = vlog.GetEnumerator() as TaskEventEnumerator;
+#endif
 		}
 
+#if NET_35_OR_GREATER
 		private ListViewItem BuildItem(TaskEvent item)
 		{
 			return new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
 				item.TaskCategory, item.OpCode, item.ActivityId.ToString() }, item.EventRecord.Level.GetValueOrDefault(0)) { Tag = item };
 		}
+#endif
 
 		private void histDetailHideBtn_Click(object sender, EventArgs e)
 		{
@@ -87,8 +94,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
+#if NET_35_OR_GREATER
 				TaskEventLog log = new TaskEventLog(task.TaskService.TargetServer, task.Path);
 				e.Result = log.Count;
+#endif
 			}
 			catch (Exception ex) { e.Result = ex; }
 		}
@@ -116,6 +125,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
 		{
+#if NET_35_OR_GREATER
 			if (vcache[e.StartIndex] == null && vevEnum != null)
 			{
 				vevEnum.Seek(System.IO.SeekOrigin.Begin, e.StartIndex);
@@ -123,10 +133,12 @@ namespace Microsoft.Win32.TaskScheduler
 				while (vevEnum.MoveNext() && n <= e.EndIndex)
 					vcache[n++] = BuildItem(vevEnum.Current);
 			}
+#endif
 		}
 
 		private void historyListView_DoubleClick(object sender, EventArgs e)
 		{
+#if NET_35_OR_GREATER
 			if (selectedIndex != -1)
 			{
 				ListViewItem lvi = vcache[selectedIndex];
@@ -137,10 +149,12 @@ namespace Microsoft.Win32.TaskScheduler
 					dlg.ShowDialog(this);
 				}
 			}
+#endif
 		}
 
 		private void historyListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
+#if NET_35_OR_GREATER
 			ListViewItem item = vcache[e.ItemIndex];
 			//System.Diagnostics.Debug.WriteLine(string.Format("RetrieveLVI: InCache={0}, Msg={1}", item!=null, Environment.StackTrace));
 			if (item == null && vevEnum != null)
@@ -161,10 +175,12 @@ namespace Microsoft.Win32.TaskScheduler
 					SelectItemChanged(e.ItemIndex);
 				}
 			}
+#endif
 		}
 
 		private void historyListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
+#if NET_35_OR_GREATER
 			if (historyListView.SelectedIndices.Count > 0)
 			{
 				int newSelIdx = historyListView.SelectedIndices[0];
@@ -176,10 +192,12 @@ namespace Microsoft.Win32.TaskScheduler
 				historyDetailView.TaskEvent = null;
 				historyDetailTitleText.Text = string.Empty;
 			}
+#endif
 		}
 
 		private void SelectItemChanged(int newSelIdx)
 		{
+#if NET_35_OR_GREATER
 			if (selectedIndex != newSelIdx)
 			{
 				selectedIndex = newSelIdx;
@@ -191,6 +209,7 @@ namespace Microsoft.Win32.TaskScheduler
 					historyDetailTitleText.Text = ev == null ? string.Empty : string.Format(EditorProperties.Resources.EventDetailHeader, ev.EventId);
 				}
 			}
+#endif
 		}
 
 		/// <summary>

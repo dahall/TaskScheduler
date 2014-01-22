@@ -111,6 +111,7 @@ namespace TestTaskService
 					break;
 			}
 			DateTime st = DateTime.Now.Subtract(span);
+#if NET_35_OR_GREATER
 			CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st, null, ts.TargetServer);
 			foreach (var t in log)
 			{
@@ -121,6 +122,7 @@ namespace TestTaskService
 				}
 				list.Add(new ListViewItem(new string[] { t.TaskName, t.RunResult.ToString(), t.RunStart.ToString(), t.RunEnd.ToString(), t.TriggeredBy.ToString() }) { Tag = t });
 			}
+#endif
 			e.Result = list.ToArray();
 		}
 
@@ -145,6 +147,7 @@ namespace TestTaskService
 				}
 				items[i].Group = lvgroup;
 				statusListView.Items.Add(items[i]);
+#if NET_35_OR_GREATER
 				switch (((CorrelatedTaskEvent)items[i].Tag).RunResult)
 				{
 					case CorrelatedTaskEvent.Status.StillRunning:
@@ -162,6 +165,7 @@ namespace TestTaskService
 					default:
 						break;
 				}
+#endif
 			}
 			statusListView.EndUpdate();
 			statusListView.UseWaitCursor = false;
