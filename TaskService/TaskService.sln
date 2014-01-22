@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor", "TaskEditor\Ta
 	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSchedulerHelp\TaskSchedulerHelp.shfbproj", "{DE4DC8A8-9008-4769-A7C2-F52F4F733944}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5279D487-59FA-4D01-9D7A-EA7387D8B67C} = {5279D487-59FA-4D01-9D7A-EA7387D8B67C}
+		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityEditor", "SecurityEditor\SecurityEditor.csproj", "{31FC9051-D954-4F35-AB09-BBABB391549E}"
 EndProject
