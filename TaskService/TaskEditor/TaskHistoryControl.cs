@@ -67,7 +67,6 @@ namespace Microsoft.Win32.TaskScheduler
 			historyListView.Items.Clear();
 			historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 			historyHeader_Refresh(-1);
-			historyEventCount = 0;
 			historySplitContainer.Panel2Collapsed = false;
 #if NET_35_OR_GREATER
 			historyDetailView.TaskEvent = null;
@@ -97,6 +96,8 @@ namespace Microsoft.Win32.TaskScheduler
 #if NET_35_OR_GREATER
 				TaskEventLog log = new TaskEventLog(task.TaskService.TargetServer, task.Path);
 				e.Result = log.Count;
+#else
+				e.Result = new PlatformNotSupportedException(EditorProperties.Resources.Error_EventsNotSupported);
 #endif
 			}
 			catch (Exception ex) { e.Result = ex; }
@@ -110,8 +111,12 @@ namespace Microsoft.Win32.TaskScheduler
 				historyListView.VirtualListSize = (int)Math.Min(Int32.MaxValue, (long)e.Result);
 				historyHeader_Refresh((long)e.Result);
 			}
-			if (e.Result is Exception && ShowErrors)
-				MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			else
+			{
+				historyHeader_Refresh(0L);
+				if (e.Result is Exception && ShowErrors)
+					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void historyHeader_Refresh(long cnt)

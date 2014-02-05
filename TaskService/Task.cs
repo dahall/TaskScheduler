@@ -15,13 +15,13 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		/// <summary>The task is compatible with the AT command.</summary>
 		AT,
-		/// <summary>The task is compatible with Task Scheduler 1.0.</summary>
+		/// <summary>The task is compatible with Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
 		V1,
-		/// <summary>The task is compatible with Task Scheduler 2.0.</summary>
+		/// <summary>The task is compatible with Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
 		V2,
-		/// <summary>The task is compatible with Task Scheduler 2.1.</summary>
+		/// <summary>The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
 		V2_1,
-		/// <summary>The task is compatible with Task Scheduler 2.2.</summary>
+		/// <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
 		V2_2
 	}
 
@@ -186,6 +186,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Tasks will be run with the highest privileges.</summary>
 		[XmlEnum("HighestAvailable")]
 		Highest
+	}
+
+	/// <summary>
+	/// Defines the sections of the security descriptor to apply or retrieve when calling related methods.
+	/// </summary>
+	[Flags]
+	public enum TaskSecurityDescriptorSections
+	{
+		///<summary>Specifies the owner identifier.</summary>
+		Owner = 1,
+		///<summary>Specifies the primary group identifier.</summary>
+		Group = 2,
+		///<summary>Specifies the discretionary access control list (DACL).</summary>
+		DiscretionaryAcl = 4,
+		/// <summary>Specifies all applicable sections (Owner, Group and DiscretionaryAcl).</summary>
+		All = 7,
+		/// <summary>Prevents the Task Scheduler from adding the allow access-control entry (ACE) for the new context principal and does not remove the ACE from the old context principal.</summary>
+		DontAddPrincipalAce = 0x10
 	}
 
 	/// <summary>Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify the type of state change in the SessionStateChangeTrigger.</summary>
@@ -1119,12 +1137,13 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				string sddl = GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All);
+				string sddl = GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.All);
 				return new System.Security.AccessControl.RawSecurityDescriptor(sddl);
 			}
 			set
 			{
-				SetSecurityDescriptorSddlForm(value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All), System.Security.AccessControl.AccessControlSections.All);
+				var all = System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group | System.Security.AccessControl.AccessControlSections.Access;
+				SetSecurityDescriptorSddlForm(value.GetSddlForm(all), TaskSecurityDescriptorSections.All);
 			}
 		}
 
@@ -1258,13 +1277,25 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret;
 		}
 
+		internal static System.Security.AccessControl.AccessControlSections TOACS(TaskSecurityDescriptorSections si)
+		{
+			System.Security.AccessControl.AccessControlSections ret = 0;
+			if ((si & TaskSecurityDescriptorSections.DiscretionaryAcl) != 0)
+				ret &= System.Security.AccessControl.AccessControlSections.Access;
+			if ((si & TaskSecurityDescriptorSections.Group) != 0)
+				ret &= System.Security.AccessControl.AccessControlSections.Group;
+			if ((si & TaskSecurityDescriptorSections.Owner) != 0)
+				ret &= System.Security.AccessControl.AccessControlSections.Owner;
+			return ret;
+		}
+
 		/// <summary>
 		/// Gets the security descriptor for the task. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the task.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
+		public string GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections includeSections)
 		{
 			if (v2Task != null)
 				return v2Task.GetSecurityDescriptor((int)includeSections);
@@ -1323,12 +1354,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sddlForm">The security descriptor for the task.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.AccessControlSections includeSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSecurityDescriptorSections includeSections)
 		{
 			if (v2Task != null)
 				v2Task.SetSecurityDescriptor(sddlForm, (int)includeSections);
-
-			throw new NotV1SupportedException();
+			else
+				throw new NotV1SupportedException();
 		}
 
 		/// <summary>
@@ -1434,6 +1465,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+	public class TaskCompatibilityEntry
+	{
+		internal TaskCompatibilityEntry(TaskCompatibility comp, string prop, string reason)
+		{
+			this.CompatibilityLevel = comp;
+			this.Property = prop;
+			this.Reason = reason;
+		}
+
+		public TaskCompatibility CompatibilityLevel { get; private set; }
+		public string Property { get; private set; }
+		public string Reason { get; private set; }
+	}
+
 	/// <summary>
 	/// Defines all the components of a task, such as the task settings, triggers, actions, and registration information.
 	/// </summary>
@@ -1512,37 +1557,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (this.Settings.MaintenanceSettings.IsSet() ||
-					this.Settings.Volatile == true)
-					return TaskCompatibility.V2_2;
-
-				if (this.Principal.ProcessTokenSidType != TaskProcessTokenSidType.Default ||
-					this.Principal.RequiredPrivileges.Count > 0 ||
-					this.Settings.DisallowStartOnRemoteAppSession == true ||
-					this.Settings.UseUnifiedSchedulingEngine == true)
-					return TaskCompatibility.V2_1;
-
-				if (this.Principal.DisplayName != null ||
-					this.Principal.GroupId != null ||
-					//this.Principal.Id != null ||
-					(this.Principal.LogonType == TaskLogonType.Group || this.Principal.LogonType == TaskLogonType.None || this.Principal.LogonType == TaskLogonType.S4U) ||
-					this.Principal.RunLevel == TaskRunLevel.Highest ||
-					this.RegistrationInfo.SecurityDescriptorSddlForm != null ||
-					this.RegistrationInfo.Source != null ||
-					this.RegistrationInfo.URI != null ||
-					this.RegistrationInfo.Version != new Version(1, 0) ||
-					this.Settings.AllowDemandStart == false ||
-					this.Settings.AllowHardTerminate == false ||
-					this.Settings.MultipleInstances != TaskInstancesPolicy.IgnoreNew ||
-					this.Settings.NetworkSettings.IsSet() ||
-					this.Settings.RestartCount != 0 ||
-					this.Settings.RestartInterval != TimeSpan.Zero ||
-					this.Settings.StartWhenAvailable == true ||
-					this.Actions.ContainsType(typeof(EmailAction)) || this.Actions.ContainsType(typeof(ShowMessageAction)) || this.Actions.ContainsType(typeof(ComHandlerAction)) ||
-					this.Triggers.ContainsType(typeof(EventTrigger)) || this.Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || this.Triggers.ContainsType(typeof(RegistrationTrigger)))
-					return TaskCompatibility.V2;
-
-				return TaskCompatibility.V1;
+				return GetLowestSupportedVersion(null);
 			}
 		}
 
@@ -1779,9 +1794,15 @@ namespace Microsoft.Win32.TaskScheduler
 			InvalidOperationException ex = new InvalidOperationException();
 			if (this.Settings.UseUnifiedSchedulingEngine)
 				try { CanUseUnifiedSchedulingEngine(throwException); }
-				catch (InvalidOperationException iox) { ex = iox; }
-			if (this.LowestSupportedVersion > this.Settings.Compatibility)
-				ex.Data.Add("Settings.Compatibility", "is lower than what is required for the currently set properties.");
+				catch (InvalidOperationException iox)
+				{
+					foreach (System.Collections.DictionaryEntry kvp in iox.Data)
+						ex.Data.Add((kvp.Key is ICloneable) ? ((ICloneable)(kvp.Key)).Clone() : kvp.Key, (kvp.Value is ICloneable) ? ((ICloneable)(kvp.Value)).Clone() : kvp.Value);
+				}
+			var list = new System.Collections.Generic.List<TaskCompatibilityEntry>();
+			if (GetLowestSupportedVersion(list) > this.Settings.Compatibility)
+				foreach (var item in list)
+					ex.Data.Add(item.Property, item.Reason);
 			if (this.Settings.StartWhenAvailable)
 			{
 				foreach (var trigger in this.Triggers)
@@ -1804,7 +1825,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 
-			if (throwException)
+			if (throwException && ex.Data.Count > 0)
 				throw ex;
 			return ex.Data.Count == 0;
 		}
@@ -1835,6 +1856,74 @@ namespace Microsoft.Win32.TaskScheduler
 				iFile.Save(path, true);
 				iFile = null;
 			}
+		}
+
+		/// <summary>
+		/// Gets the lowest supported version.
+		/// </summary>
+		/// <param name="outputList">The output list.</param>
+		/// <returns></returns>
+		private TaskCompatibility GetLowestSupportedVersion(System.Collections.Generic.IList<TaskCompatibilityEntry> outputList = null)
+		{
+			TaskCompatibility res = TaskCompatibility.V1;
+			var list = new System.Collections.Generic.List<TaskCompatibilityEntry>();
+
+			if (this.Principal.DisplayName != null)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Principal.DisplayName", "cannot have a value.")); }
+			if (this.Principal.GroupId != null)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Principal.GroupId", "cannot have a value.")); }
+				//this.Principal.Id != null ||
+			if ((this.Principal.LogonType == TaskLogonType.Group || this.Principal.LogonType == TaskLogonType.None || this.Principal.LogonType == TaskLogonType.S4U))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Principal.LogonType", "cannot be Group, None or S4U.")); }
+			if (this.Principal.RunLevel == TaskRunLevel.Highest)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Principal.RunLevel", "cannot be set to Highest.")); }
+			if (this.RegistrationInfo.SecurityDescriptorSddlForm != null)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "RegistrationInfo.SecurityDescriptorSddlForm", "cannot have a value.")); }
+			if (this.RegistrationInfo.Source != null)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "RegistrationInfo.Source", "cannot have a value.")); }
+			if (this.RegistrationInfo.URI != null)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "RegistrationInfo.URI", "cannot have a value.")); }
+			if (this.RegistrationInfo.Version != new Version(1, 0))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "RegistrationInfo.Version", "cannot be set or equal 1.0.")); }
+			if (this.Settings.AllowDemandStart == false)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.AllowDemandStart", "must be true.")); }
+			if (this.Settings.AllowHardTerminate == false)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.AllowHardTerminate", "must be true.")); }
+			if (this.Settings.MultipleInstances != TaskInstancesPolicy.IgnoreNew)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.MultipleInstances", "must be set to IgnoreNew.")); }
+			if (this.Settings.NetworkSettings.IsSet())
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.NetworkSetting", "cannot have a value.")); }
+			if (this.Settings.RestartCount != 0)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartCount", "must be 0.")); }
+			if (this.Settings.RestartInterval != TimeSpan.Zero)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartInterval", "must be 0 (TimeSpan.Zero).")); }
+			if (this.Settings.StartWhenAvailable == true)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.StartWhenAvailable", "must be false.")); }
+			if (this.Actions.ContainsType(typeof(EmailAction)) || this.Actions.ContainsType(typeof(ShowMessageAction)) || this.Actions.ContainsType(typeof(ComHandlerAction)))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Actions", "may only contain ExecAction types.")); }
+			if (this.Triggers.ContainsType(typeof(EventTrigger)) || this.Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || this.Triggers.ContainsType(typeof(RegistrationTrigger)))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger types.")); }
+			
+			if (this.Principal.ProcessTokenSidType != TaskProcessTokenSidType.Default)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Principal.ProcessTokenSidType", "must be Default.")); }
+			if (this.Principal.RequiredPrivileges.Count > 0)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Principal.RequiredPrivileges", "must be empty.")); }
+			if (this.Settings.DisallowStartOnRemoteAppSession == true)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Settings.DisallowStartOnRemoteAppSession", "must be false.")); }
+			if (this.Settings.UseUnifiedSchedulingEngine == true)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Settings.UseUnifiedSchedulingEngine", "must be false.")); }
+
+			if (this.Settings.MaintenanceSettings.IsSet())
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_2, "this.Settings.MaintenanceSettings", "must have no values set.")); }
+			if (this.Settings.Volatile == true)
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_2, " this.Settings.Volatile", "must be false.")); }
+
+			foreach (var item in list)
+			{
+				if (res < item.CompatibilityLevel) res = item.CompatibilityLevel;
+				if (outputList != null) outputList.Add(item);
+			}
+			return res;
 		}
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
@@ -2783,6 +2872,8 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Settings", Namespace = TaskDefinition.tns, IsNullable = true)]
 	public sealed class TaskSettings : IDisposable, IXmlSerializable
 	{
+		private const uint InfiniteRunTimeV1 = 0xFFFFFFFF;
+
 		private IdleSettings idleSettings = null;
 		private MaintenanceSettings maintenanceSettings = null;
 		private NetworkSettings networkSettings = null;
@@ -2870,7 +2961,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Settings != null)
 					v2Settings.Compatibility = value;
 				else
-					throw new NotV1SupportedException();
+					if (value != TaskCompatibility.V1)
+						throw new NotV1SupportedException();
 			}
 		}
 
@@ -3004,14 +3096,24 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return Task.StringToTimeSpan(v2Settings.ExecutionTimeLimit);
-				return TimeSpan.FromMilliseconds(v1Task.GetMaxRunTime());
+				uint ms = v1Task.GetMaxRunTime();
+				return ms == InfiniteRunTimeV1 ? TimeSpan.Zero : TimeSpan.FromMilliseconds(ms);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.ExecutionTimeLimit = value == TimeSpan.Zero ? "PT0S" : Task.TimeSpanToString(value);
 				else
-					v1Task.SetMaxRunTime(Convert.ToUInt32(value.TotalMilliseconds));
+				{
+					// Due to a bug introduced in Vista, and propogated to Windows 7, setting the
+					// MaxRunTime to INFINITE results in the task only running for 72 hours. For
+					// these operating systems, setting the RunTime to "INFINITE - 1" gets the
+					// desired behavior of allowing an "infinite" run of the task.
+					uint ms = value == TimeSpan.Zero ? InfiniteRunTimeV1 : Convert.ToUInt32(value.TotalMilliseconds);
+					v1Task.SetMaxRunTime(ms);
+					if (value == TimeSpan.Zero && v1Task.GetMaxRunTime() != InfiniteRunTimeV1)
+						v1Task.SetMaxRunTime(InfiniteRunTimeV1 - 1);
+				}
 			}
 		}
 

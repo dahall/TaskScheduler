@@ -18,7 +18,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public TaskRunTimesControl()
 		{
+			initializing = true;
 			InitializeComponent();
+			initializing = false;
 		}
 
 		/// <summary>

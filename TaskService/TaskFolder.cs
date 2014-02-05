@@ -63,11 +63,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				return GetSecurityDescriptor(System.Security.AccessControl.AccessControlSections.All);
+				return GetSecurityDescriptor(TaskSecurityDescriptorSections.All);
 			}
 			set
 			{
-				SetSecurityDescriptor(value, System.Security.AccessControl.AccessControlSections.All);
+				SetSecurityDescriptor(value, TaskSecurityDescriptorSections.All);
 			}
 		}
 
@@ -177,7 +177,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
-		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(System.Security.AccessControl.AccessControlSections includeSections)
+		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(TaskSecurityDescriptorSections includeSections)
 		{
 			return new System.Security.AccessControl.RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
 		}
@@ -188,7 +188,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections includeSections)
+		public string GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections includeSections)
 		{
 			if (v2Folder != null)
 				return v2Folder.GetSecurityDescriptor((int)includeSections);
@@ -351,9 +351,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="sd">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
-		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.AccessControlSections includeSections)
+		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, TaskSecurityDescriptorSections includeSections)
 		{
-			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm(includeSections), includeSections);
+			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm(Task.TOACS(includeSections)), includeSections);
 		}
 
 		/// <summary>
@@ -362,7 +362,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sddlForm">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.AccessControlSections includeSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSecurityDescriptorSections includeSections)
 		{
 			if (v2Folder != null)
 				v2Folder.SetSecurityDescriptor(sddlForm, (int)includeSections);

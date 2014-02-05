@@ -56,10 +56,10 @@
       <Aliases>GrpCtrl</Aliases>
     </Reference>
     <Reference Include="Microsoft.Win32.TaskScheduler">
-      <HintPath>..\bin\Release\$(TargetFrameworkVersion)\Microsoft.Win32.TaskScheduler.dll</HintPath>
+      <HintPath>..\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.TaskSchedulerEditor">
-      <HintPath>..\TaskEditor\bin\Release\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.dll</HintPath>
+      <HintPath>..\TaskEditor\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

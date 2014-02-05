@@ -263,6 +263,12 @@ namespace Microsoft.Win32.TaskScheduler
 				return;
 			}
 
+			if (this.TaskDefinition.LowestSupportedVersion > this.TaskDefinition.Settings.Compatibility)
+			{
+				MessageBox.Show(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			if (RegisterTaskOnAccept)
 			{
 				if (this.Task != null && this.Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && this.Task.Definition.Principal.LogonType != TaskLogonType.Password)

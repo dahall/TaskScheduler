@@ -528,4 +528,13 @@ Action: {3}</value>
   <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
     <value>Change User...</value>
   </data>
+  <data name="Error_EventsNotSupported" xml:space="preserve">
+    <value>Task events and history are not supported on .NET versions prior to 3.5.</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
+    <value>The following property settings cannot be used with the selected compatibility setting:</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
+    <value>Some settings are incompatible with this selection.</value>
+  </data>
 </root>
