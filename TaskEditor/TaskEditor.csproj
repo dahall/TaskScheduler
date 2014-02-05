@@ -86,6 +86,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TimeSpan2">
@@ -111,10 +112,14 @@
     </Compile>
     <Compile Include="ControlProcessing.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
+    <Compile Include="Native\DisabledItemComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\BROWSEINFO.cs" />
+    <Compile Include="Native\ComboBox.cs" />
     <Compile Include="Native\CredentialsDialog.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -145,11 +150,18 @@
     </Compile>
     <Compile Include="Native\GDI32.cs" />
     <Compile Include="Native\KERNEL32.cs" />
+    <Compile Include="Native\MapWindowPoints.cs" />
     <Compile Include="Native\OLE32.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SafeHandles.cs" />
     <Compile Include="Native\SHELL32.cs" />
     <Compile Include="Native\USER32.cs" />
+    <Compile Include="Native\Util.cs" />
+    <Compile Include="Native\UXTHEME.cs" />
+    <Compile Include="Native\VisualStylesRendererExtension.cs" />
     <Compile Include="NetworkListManager.cs" />
     <Compile Include="NetworkProfile.cs" />
+    <None Include="ComputerInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

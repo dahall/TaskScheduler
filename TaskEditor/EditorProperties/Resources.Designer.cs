@@ -342,6 +342,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task events and history are not supported on .NET versions prior to 3.5..
+        /// </summary>
+        internal static string Error_EventsNotSupported {
+            get {
+                return ResourceManager.GetString("Error_EventsNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name..
         /// </summary>
         internal static string Error_InvalidNameFormat {
@@ -419,6 +428,24 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string Error_TaskDeleteMustHaveExpiringTrigger {
             get {
                 return ResourceManager.GetString("Error_TaskDeleteMustHaveExpiringTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following property settings cannot be used with the selected compatibility setting:.
+        /// </summary>
+        internal static string Error_TaskPropertiesIncompatible {
+            get {
+                return ResourceManager.GetString("Error_TaskPropertiesIncompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some settings are incompatible with this selection..
+        /// </summary>
+        internal static string Error_TaskPropertiesIncompatibleSimple {
+            get {
+                return ResourceManager.GetString("Error_TaskPropertiesIncompatibleSimple", resourceCulture);
             }
         }
         

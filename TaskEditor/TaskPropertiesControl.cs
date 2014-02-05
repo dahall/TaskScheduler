@@ -476,8 +476,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2 != value || onAssignment)
 				{
 					v2 = value;
-					if (taskVersionCombo.Items.Count > 0)
-						taskVersionCombo.SelectedIndex = v2 ? taskVersionCombo.Items.Count - 1 : 0;
+					if (taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0)
+						taskVersionCombo.SelectedIndex = 1;
 				}
 			}
 		}
@@ -898,14 +898,19 @@ namespace Microsoft.Win32.TaskScheduler
 			onAssignment = prevOnAssignment;
 		}
 
-		private class ComboItem
+		private class ComboItem : IEnableable
 		{
+			private bool enabled;
 			public string Text;
 			public int Version;
 
-			public ComboItem(string text, int ver) { Text = text; Version = ver; }
+			public ComboItem(string text, int ver, bool enabled = true) { Text = text; Version = ver; this.enabled = enabled; }
 
-			public override string ToString() { return this.Text; }
+			public bool Enabled
+			{
+				get { return enabled; }
+				set { enabled = value; }
+			}
 
 			public override bool Equals(object obj)
 			{
@@ -920,6 +925,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				return Version.GetHashCode();
 			}
+
+			public override string ToString() { return this.Text; }
 		}
 
 		private void SetVersionComboItems()
@@ -933,22 +940,17 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
 			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.HighestSupportedVersion.Minor;
 			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
 			switch (comp)
 			{
 				case TaskCompatibility.AT:
-					this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
-					for (int i = 2; i <= max; i++)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
-					this.taskVersionCombo.SelectedIndex = 0;
-					break;
-				case TaskCompatibility.V1:
-					for (int i = 1; i <= max; i++)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
-					this.taskVersionCombo.SelectedIndex = 0;
+					for (int i = max; i > 1; i--)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
 					break;
 				default:
-					for (int i = Math.Min((int)td.LowestSupportedVersion, (int)comp); i <= max; i++)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i));
+					for (int i = max; i > 0; i--)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
 					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)comp);
 					break;
 			}
@@ -1157,13 +1159,45 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private void taskVersionCombo_GotFocus(object sender, EventArgs e)
+		{
+			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
+			for (int i = 0; i < taskVersionCombo.Items.Count; i++)
+			{
+				var ci = (ComboItem)taskVersionCombo.Items[i];
+				ci.Enabled = ci.Version > (int)lowestComp;
+			}
+		}
+
 		private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
 			bool v2_1 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
 			bool v2_2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
-			if (!onAssignment && v2 && td != null && taskVersionCombo.SelectedIndex != -1)
+			TaskCompatibility priorSetting = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
+			try
+			{
+				if (td != null)
+					td.Validate(true);
+			}
+			catch (InvalidOperationException ex)
+			{
+				var msg = new System.Text.StringBuilder();
+				if (showErrors)
+				{
+					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
+					foreach (var item in ex.Data.Keys)
+						msg.AppendLine(string.Format("- {0} {1}", item, ex.Data[item]));
+				}
+				else
+					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
+				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)priorSetting);
+				return;
+			}
 			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
 				taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =

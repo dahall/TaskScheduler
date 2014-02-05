@@ -40,7 +40,7 @@
 			this.taskLocationText = new System.Windows.Forms.Label();
 			this.taskAuthorText = new System.Windows.Forms.Label();
 			this.taskDescText = new System.Windows.Forms.TextBox();
-			this.taskVersionCombo = new System.Windows.Forms.ComboBox();
+			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
 			this.taskVersionLabel = new System.Windows.Forms.Label();
 			this.taskHiddenCheck = new System.Windows.Forms.CheckBox();
 			this.taskSecurityGroupBox = new System.Windows.Forms.GroupBox();
@@ -316,7 +316,6 @@
 			// taskVersionCombo
 			// 
 			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
-			this.taskVersionCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.errorProvider.SetError(this.taskVersionCombo, resources.GetString("taskVersionCombo.Error"));
 			this.helpProvider.SetHelpKeyword(this.taskVersionCombo, resources.GetString("taskVersionCombo.HelpKeyword"));
 			this.helpProvider.SetHelpNavigator(this.taskVersionCombo, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("taskVersionCombo.HelpNavigator"))));
@@ -325,6 +324,7 @@
 			this.errorProvider.SetIconPadding(this.taskVersionCombo, ((int)(resources.GetObject("taskVersionCombo.IconPadding"))));
 			this.taskVersionCombo.Name = "taskVersionCombo";
 			this.helpProvider.SetShowHelp(this.taskVersionCombo, ((bool)(resources.GetObject("taskVersionCombo.ShowHelp"))));
+			this.taskVersionCombo.GotFocus += new System.EventHandler(this.taskVersionCombo_GotFocus);
 			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
 			// 
 			// taskVersionLabel
@@ -535,9 +535,9 @@
 			// 
 			resources.ApplyResources(this.triggerListView, "triggerListView");
 			this.triggerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+			this.columnHeader1,
+			this.columnHeader2,
+			this.columnHeader3});
 			this.errorProvider.SetError(this.triggerListView, resources.GetString("triggerListView.Error"));
 			this.triggerListView.FullRowSelect = true;
 			this.triggerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -672,8 +672,8 @@
 			// 
 			resources.ApplyResources(this.actionListView, "actionListView");
 			this.actionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5});
+			this.columnHeader4,
+			this.columnHeader5});
 			this.errorProvider.SetError(this.actionListView, resources.GetString("actionListView.Error"));
 			this.actionListView.FullRowSelect = true;
 			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -1787,7 +1787,7 @@
 		private System.Windows.Forms.CheckBox taskLocalOnlyCheck;
 		private System.Windows.Forms.RadioButton taskLoggedOptionalRadio;
 		private System.Windows.Forms.RadioButton taskLoggedOnRadio;
-		private System.Windows.Forms.ComboBox taskVersionCombo;
+		private System.Windows.Forms.DisabledItemComboBox taskVersionCombo;
 		private System.Windows.Forms.Label taskVersionLabel;
 		private System.Windows.Forms.CheckBox taskHiddenCheck;
 		private System.Windows.Forms.CheckBox taskRunLevelCheck;

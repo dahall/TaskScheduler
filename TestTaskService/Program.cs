@@ -358,49 +358,48 @@ namespace TestTaskService
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Does something";
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
+				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 				// Add a cron trigger
 				td.Triggers.AddRange(Trigger.FromCronFormat("15 */6 */30 * *"));
 
 				// Add a trigger that will fire the task at this time every other day
-				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				dt.Repetition.Duration = TimeSpan.FromHours(4);
 				dt.Repetition.Interval = TimeSpan.FromHours(1);
 
 				// Add a trigger that will fire every week on Friday
-				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
 
 				// Add an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
+				/*try { output.WriteLine("SDDL: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.All)); } catch { }
+				try { output.WriteLine("-Own: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Owner)); } catch { }
+				t.SetSecurityDescriptorSddlForm("O:AO", TaskSecurityDescriptorSections.Owner);
+				try { output.WriteLine("-Own: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Owner)); } catch { }
+				try { output.WriteLine("-Grp: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Group)); } catch { }
+				try { output.WriteLine("-DACL: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.DiscretionaryAcl)); } catch { }
+				try { output.WriteLine("-DAPA: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.DontAddPrincipalAce)); } catch { }*/
 
-				System.Threading.Thread.Sleep(5000);
+				/*System.Threading.Thread.Sleep(5000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
-				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);*/
 				DisplayTask(t, false);
-
-				/*using (var taskEditDialog = new TaskEditDialog(t, true, true))
-				{
-					if (taskEditDialog.ShowDialog() == DialogResult.OK)
-					{
-						var t2 = taskEditDialog.Task;
-						output.WriteLine("Triggers: {0}", t2.Definition.Triggers);
-					}
-				}*/
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
-				td = t.Definition;
+				//td = t.Definition;
 				/*td.Triggers.Clear();
 				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
-				wt.DaysOfWeek = DaysOfTheWeek.Friday;*/
+				wt.DaysOfWeek = DaysOfTheWeek.Friday;
 				((ExecAction)td.Actions[0]).Path = "calc.exe";
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);
+				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
 				ts.RootFolder.DeleteTask(taskName);
 			}
 			catch (Exception ex)
