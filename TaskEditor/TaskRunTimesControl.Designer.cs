@@ -34,10 +34,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.endDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.startDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listBox1
 			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.listBox1, 2);
 			resources.ApplyResources(this.listBox1, "listBox1");
 			this.listBox1.FormatString = "F";
 			this.listBox1.FormattingEnabled = true;
@@ -52,6 +55,7 @@
 			// 
 			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
+			this.label1.Click += new System.EventHandler(this.label1_Click);
 			// 
 			// endDatePicker
 			// 
@@ -65,18 +69,26 @@
 			this.startDatePicker.Name = "startDatePicker";
 			this.startDatePicker.ValueChanged += new System.EventHandler(this.dateValueChanged);
 			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.endDatePicker, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.startDatePicker, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			// 
 			// TaskRunTimesControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			this.Controls.Add(this.tableLayoutPanel1);
 			resources.ApplyResources(this, "$this");
-			this.Controls.Add(this.listBox1);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.endDatePicker);
-			this.Controls.Add(this.startDatePicker);
+			this.MinimumSize = new System.Drawing.Size(251, 75);
 			this.Name = "TaskRunTimesControl";
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -87,5 +99,6 @@
 		private System.Windows.Forms.Label label1;
 		private FullDateTimePicker endDatePicker;
 		private FullDateTimePicker startDatePicker;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }

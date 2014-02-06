@@ -127,5 +127,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			return startDatePicker.ShouldSerializeValue();
 		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

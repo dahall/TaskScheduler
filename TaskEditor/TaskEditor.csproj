@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -77,10 +77,6 @@
     <Reference Include="GroupControls">
       <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
       <Aliases>GrpCtrlDLL</Aliases>
-    </Reference>
-    <Reference Include="Microsoft.Win32.TaskScheduler">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -535,6 +531,12 @@
     <Content Include="TaskEditDialog.bmp" />
     <Content Include="TaskSchedulerWizard.bmp" />
     <Content Include="TriggerEditDialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskService.csproj">
+      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Name>TaskService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

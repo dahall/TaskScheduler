@@ -564,7 +564,7 @@ namespace System.Windows.Forms
 
 			protected override void WndProc(ref Message m)
 			{
-				if (m.Msg == 0x0202 || m.Msg == 0x0201) /* WM_LBUTTONUP or WM_LBUTTONDOWN */
+				if (m.Msg == 0x0202 || m.Msg == 0x0201 || m.Msg == 0x0203) /* WM_LBUTTONUP or WM_LBUTTONDOWN or WM_LBUTTONDBLCLK */
 				{
 					int idx = IndexFromPoint(NativeMethods.Util.SignedLOWORD(m.LParam), NativeMethods.Util.SignedHIWORD(m.LParam));
 					if (idx >= 0 && !Parent.IsItemEnabled(idx))
