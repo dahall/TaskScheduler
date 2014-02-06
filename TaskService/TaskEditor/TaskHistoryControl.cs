@@ -16,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private Task task;
 #if NET_35_OR_GREATER
 		private int selectedIndex = -1;
-		private GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
+		private GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem> vcache;
 		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
 #endif
@@ -71,6 +71,7 @@ namespace Microsoft.Win32.TaskScheduler
 #if NET_35_OR_GREATER
 			historyDetailView.TaskEvent = null;
 			selectedIndex = -1;
+			vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
 			vlog = new TaskEventLog(task.TaskService.TargetServer, task.Path);
 			vevEnum = vlog.GetEnumerator() as TaskEventEnumerator;
 #endif

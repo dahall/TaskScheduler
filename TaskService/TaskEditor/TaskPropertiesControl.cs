@@ -1166,7 +1166,7 @@ namespace Microsoft.Win32.TaskScheduler
 			for (int i = 0; i < taskVersionCombo.Items.Count; i++)
 			{
 				var ci = (ComboItem)taskVersionCombo.Items[i];
-				ci.Enabled = ci.Version > (int)lowestComp;
+				ci.Enabled = ci.Version >= (int)lowestComp;
 			}
 		}
 

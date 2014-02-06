@@ -105,7 +105,6 @@ namespace Microsoft.Win32.TaskScheduler
 			// wizardControl1
 			// 
 			resources.ApplyResources(this.wizardControl1, "wizardControl1");
-			this.wizardControl1.ClassicStyle = WizDLL::AeroWizard.WizardClassicStyle.Automatic;
 			this.wizardControl1.Name = "wizardControl1";
 			this.wizardControl1.Pages.Add(this.introPage);
 			this.wizardControl1.Pages.Add(this.triggerSelectPage);
