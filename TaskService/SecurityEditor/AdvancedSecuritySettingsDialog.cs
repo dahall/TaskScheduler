@@ -10,7 +10,7 @@ namespace SecurityEditor
 	Description("Dialog that allows editing of a Security Descriptor."),
 	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
 	DesignTimeVisible(true)]
-	public partial class SecurityEditorDialog :
+	public partial class AdvancedSecuritySettingsDialog :
 #if DEBUG
 		Form
 #else
@@ -21,7 +21,7 @@ namespace SecurityEditor
 		private string sd;
 		private FileSecurity sec = new FileSecurity();
 
-		public SecurityEditorDialog()
+		public AdvancedSecuritySettingsDialog()
 		{
 			InitializeComponent();
 			try
@@ -30,6 +30,19 @@ namespace SecurityEditor
 					helpProvider1.HelpNamespace = key.GetValue("HelpTopic", string.Empty).ToString();
 			}
 			catch { }
+			Editable = false;
+		}
+
+		[DefaultValue(false)]
+		public bool Editable
+		{
+			get { return permEditor.Editable; }
+			set
+			{
+				permEditor.Editable = audEditor.Editable = value;
+				audHeaderLayoutPanel.Visible = audEditor.Visible = value;
+				notEditableLayoutPanel.Visible = !value;
+			}
 		}
 
 		public string ObjectName
@@ -38,7 +51,6 @@ namespace SecurityEditor
 			set
 			{
 				objName = value;
-				aclEditor1.ObjectName = aclEditor2.ObjectName = ownerEditor1.ObjectName = value;
 			}
 		}
 
@@ -50,10 +62,21 @@ namespace SecurityEditor
 				sd = value;
 				sec.SetSecurityDescriptorSddlForm(sd);
 
-				aclEditor1.ObjectSecurity = sec;
-				aclEditor2.ObjectSecurity = sec;
-				ownerEditor1.Identity = sec.GetOwner(typeof(NTAccount));
+				permEditor.ObjectSecurity = sec;
+				audEditor.ObjectSecurity = sec;
+				ownerText.Text = new AccountInfo((SecurityIdentifier)sec.GetOwner(typeof(SecurityIdentifier))).ToString();
 			}
+		}
+
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
+			if (!this.IsDesignMode())
+			{
+				audContinueBtn.SetElevationRequiredState(true);
+			}
+			var parentBackColor = this.GetTrueParentBackColor();
+			objNameText.BackColor = ownerText.BackColor = intLevelText.BackColor = parentBackColor;
 		}
 
 		private void cancelBtn_Click(object sender, EventArgs e)

@@ -6,14 +6,14 @@ namespace SecurityEditor
 	internal partial class AceEditor : Form
 	{
 		private string objName;
-		private FileSecurity sec;
+		private NativeObjectSecurity sec;
 
 		public AceEditor()
 		{
 			InitializeComponent();
 		}
 
-		public FileSecurity ObjectSecurity
+		public NativeObjectSecurity ObjectSecurity
 		{
 			get { return sec; }
 			set
@@ -40,8 +40,9 @@ namespace SecurityEditor
 			string acctName = string.Empty, sid; bool isGroup, isService;
 			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, null, ref acctName, out isGroup, out isService, out sid))
 			{
+				var si = new System.Security.Principal.SecurityIdentifier(sid);
 				nameText.Text = acctName;
-				accessPermissionList1.Initialize(sec, new System.Security.Principal.NTAccount(acctName), Display);
+				accessPermissionList1.Initialize(sec, si, Display);
 			}
 		}
 

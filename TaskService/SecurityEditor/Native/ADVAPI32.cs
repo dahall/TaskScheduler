@@ -16,10 +16,10 @@ namespace Microsoft.Win32
 		public static extern int LogonUser(string lpszUserName, string lpszDomain, string lpszPassword, int dwLogonType, int dwLogonProvider, out SafeTokenHandle phToken);
 
 		[DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = true)]
-		public static extern bool LookupAccountSid(string systemName, byte[] accountSid, StringBuilder accountName, ref int nameLength, StringBuilder domainName, ref int domainLength, out int accountType);
+		public static extern bool LookupAccountSid([In, MarshalAs(UnmanagedType.LPTStr)] string systemName, byte[] accountSid, StringBuilder accountName, ref int nameLength, StringBuilder domainName, ref int domainLength, out SidNameUse accountType);
 
 		[DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = true)]
-		public static extern bool LookupAccountSid([In, MarshalAs(UnmanagedType.LPTStr)] string systemName, IntPtr sid, StringBuilder name, ref int cchName, StringBuilder referencedDomainName, ref int cchReferencedDomainName, out int use);
+		public static extern bool LookupAccountSid([In, MarshalAs(UnmanagedType.LPTStr)] string systemName, IntPtr sid, StringBuilder name, ref int cchName, StringBuilder referencedDomainName, ref int cchReferencedDomainName, out SidNameUse use);
 
 		public sealed class SafeTokenHandle : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
 		{
@@ -33,6 +33,20 @@ namespace Microsoft.Win32
 			{
 				return CloseHandle(handle);
 			}
+		}
+
+		public enum SidNameUse
+		{
+			User = 1,
+			Group,
+			Domain,
+			Alias,
+			WellKnownGroup,
+			DeletedAccount,
+			Invalid,
+			Unknown,
+			Computer,
+			Label
 		}
 	}
 }

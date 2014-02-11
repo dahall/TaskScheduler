@@ -68,6 +68,17 @@ namespace SecurityEditor
 			get { return items; }
 		}
 
+		protected override ControlListBase.PaintBackgroundMethod BackgroundRenderer
+		{
+			get { return this.RenderBackground; }
+		}
+
+		private void RenderBackground(Graphics g, Rectangle bounds, Control childControl)
+		{
+			using (var bb = new SolidBrush(this.BackColor))
+				g.FillRectangle(bb, bounds);
+		}
+
 		/// <summary>
 		/// Gets the base list of items.
 		/// </summary>

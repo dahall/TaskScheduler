@@ -45,16 +45,16 @@ namespace Microsoft.Win32
 				return (0 == num);
 			}
 
-			private static uint LookupAccountSid(SecurityIdentifier sid, out string accountName, out string domainName, out int use)
+			public static uint LookupAccountSid(SecurityIdentifier sid, out string accountName, out string domainName, out SidNameUse use, string systemName = null)
 			{
 				uint num = 0;
 				byte[] binaryForm = new byte[sid.BinaryLength];
 				sid.GetBinaryForm(binaryForm, 0);
-				int capacity = 0x44;
-				int num3 = 0x44;
+				int capacity = 0x100;
+				int num3 = 0x100;
 				StringBuilder builder = new StringBuilder(capacity);
 				StringBuilder builder2 = new StringBuilder(num3);
-				if (!NativeMethods.LookupAccountSid(null, binaryForm, builder, ref capacity, builder2, ref num3, out use))
+				if (!NativeMethods.LookupAccountSid(systemName, binaryForm, builder, ref capacity, builder2, ref num3, out use))
 				{
 					num = (uint)Marshal.GetLastWin32Error();
 				}
@@ -65,7 +65,7 @@ namespace Microsoft.Win32
 
 			private static bool FindUserFromSid(IntPtr incomingSid, string computerName, ref string userName)
 			{
-				int num3;
+				SidNameUse num3;
 				bool flag = false;
 				int cchName = 0;
 				int cchReferencedDomainName = 0;
@@ -144,14 +144,9 @@ namespace Microsoft.Win32
 				return str;
 			}
 
-			private static bool IsUserFromUse(int use)
+			private static bool IsUserFromUse(SidNameUse use)
 			{
-				bool flag = false;
-				if (use == 1)
-				{
-					flag = true;
-				}
-				return flag;
+				return (use == SidNameUse.User);
 			}
 		}
 	}

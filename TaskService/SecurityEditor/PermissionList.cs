@@ -7,8 +7,8 @@ namespace SecurityEditor
 {
 	public class PermissionList : CheckedColumnList
 	{
-		private FileSecurity acl;
-		private NTAccount id;
+		private NativeObjectSecurity acl;
+		private SecurityIdentifier id;
 		private CheckedColumnListItem[] items;
 		private SecurityRuleType rType;
 
@@ -36,7 +36,7 @@ namespace SecurityEditor
 			get { return base.Items; }
 		}
 
-		internal void Initialize(FileSecurity acl, NTAccount id, SecurityRuleType rType)
+		internal void Initialize(NativeObjectSecurity acl, SecurityIdentifier id, SecurityRuleType rType)
 		{
 			this.acl = acl;
 			this.id = id;
@@ -46,7 +46,7 @@ namespace SecurityEditor
 			// Apply applicable ACEs
 			if (rType == SecurityRuleType.Access)
 			{
-				foreach (FileSystemAccessRule rule in acl.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)))
+				foreach (FileSystemAccessRule rule in acl.GetAccessRules(true, true, typeof(SecurityIdentifier)))
 				{
 					if (rule.IdentityReference.Equals(id))
 					{
@@ -63,7 +63,7 @@ namespace SecurityEditor
 			}
 			else
 			{
-				foreach (FileSystemAuditRule rule in acl.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount)))
+				foreach (FileSystemAuditRule rule in acl.GetAuditRules(true, true, typeof(SecurityIdentifier)))
 				{
 					if (rule.IdentityReference.Equals(id))
 					{
