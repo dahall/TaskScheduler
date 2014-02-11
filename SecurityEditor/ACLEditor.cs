@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Windows.Forms;
@@ -7,25 +8,33 @@ namespace SecurityEditor
 {
 	internal partial class ACLEditor : UserControl
 	{
-		private FileSecurity sec;
-		private string objName;
+		private NativeObjectSecurity sec;
+		private bool editable;
 
 		public ACLEditor()
 		{
 			InitializeComponent();
 			Display = SecurityRuleType.Access;
-			objNameText.BackColor = this.BackColor;
+			Editable = false;
 		}
 
 		public SecurityRuleType Display { get; set; }
 
-		public string ObjectName
+		[DefaultValue(false)]
+		public bool Editable
 		{
-			get { return objName; }
-			set { objName = value; objNameText.Text = objName; }
+			get { return editable; }
+			set
+			{
+				editable = value;
+				addBtn.Visible = removeBtn.Visible = value;
+				chgPermBtn.Visible = !value;
+			}
 		}
 
-		public FileSecurity ObjectSecurity
+		public string ObjectName { get; set; }
+
+		public NativeObjectSecurity ObjectSecurity
 		{
 			get { return sec; }
 			set
@@ -59,27 +68,37 @@ namespace SecurityEditor
 
 		public string TargetComputer { get; set; }
 
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
+			if (!this.IsDesignMode())
+				chgPermBtn.SetElevationRequiredState(true);
+		}
+
 		private void AddListItem(AuthorizationRule rule)
 		{
+			var ai = new AccountInfo((SecurityIdentifier)rule.IdentityReference.Translate(typeof(SecurityIdentifier)), this.TargetComputer);
 			ListViewItem item;
-			if (rule is FileSystemAccessRule)
+			if (rule is AccessRule)
 			{
-				string text = SecurityEditorDialog.GetLocalizedString(((FileSystemAccessRule)rule).AccessControlType);
-				item = permissionsListView.Items.Add(text);
+				string text = AdvancedSecuritySettingsDialog.GetLocalizedString(((FileSystemAccessRule)rule).AccessControlType);
+				item = permissionsListView.Items.Add("", ai.use == Microsoft.Win32.NativeMethods.SidNameUse.User ? 0 : 1);
 				if (item.Index == 0) item.Selected = true;
-				item.SubItems.AddRange(new string[] { 
-					rule.IdentityReference.Value,
-					SecurityEditorDialog.GetLocalizedString(((FileSystemAccessRule)rule).FileSystemRights),
+				item.SubItems.AddRange(new string[] {
+					text,
+					ai.ToString(),
+					AdvancedSecuritySettingsDialog.GetLocalizedString(((FileSystemAccessRule)rule).FileSystemRights),
 					string.Empty });
 				item.Tag = rule;
 			}
-			else if (rule is FileSystemAuditRule)
+			else if (rule is AuditRule)
 			{
-				string text = SecurityEditorDialog.GetLocalizedString(((FileSystemAuditRule)rule).AuditFlags);
-				item = permissionsListView.Items.Add(text);
+				string text = AdvancedSecuritySettingsDialog.GetLocalizedString(((FileSystemAuditRule)rule).AuditFlags);
+				item = permissionsListView.Items.Add("", ai.use == Microsoft.Win32.NativeMethods.SidNameUse.User ? 0 : 1);
 				item.SubItems.AddRange(new string[] { 
-					rule.IdentityReference.Value,
-					SecurityEditorDialog.GetLocalizedString(((FileSystemAuditRule)rule).FileSystemRights),
+					text,
+					ai.ToString(),
+					AdvancedSecuritySettingsDialog.GetLocalizedString(((FileSystemAuditRule)rule).FileSystemRights),
 					string.Empty });
 				item.Tag = rule;
 			}
@@ -87,7 +106,7 @@ namespace SecurityEditor
 
 		private void permissionsListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			editButton.Enabled = removeButton.Enabled = (permissionsListView.SelectedIndices.Count > 0);
+			viewBtn.Enabled = removeBtn.Enabled = (permissionsListView.SelectedIndices.Count > 0);
 		}
 
 		private void permissionsListView_SizeChanged(object sender, EventArgs e)
@@ -98,25 +117,26 @@ namespace SecurityEditor
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			string acctName = string.Empty, sid; bool isGroup, isService;
+			bool modified;
 			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out sid))
 			{
-				AceEditor aed = new AceEditor() { ObjectName = this.objName, ObjectSecurity = new FileSecurity() };
+				AceEditor aed = new AceEditor() { ObjectName = this.ObjectName, ObjectSecurity = new FileSecurity() };
 				if (Display == SecurityRuleType.Access)
 				{
 					FileSystemAccessRule aRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Allow);
 					FileSystemAccessRule dRule = new FileSystemAccessRule(new SecurityIdentifier(sid), 0, AccessControlType.Deny);
-					aed.ObjectSecurity.AddAccessRule(aRule);
-					aed.ObjectSecurity.AddAccessRule(dRule);
+					aed.ObjectSecurity.ModifyAccessRule(AccessControlModification.Add, aRule, out modified);
+					aed.ObjectSecurity.ModifyAccessRule(AccessControlModification.Add, dRule, out modified);
 					if (aed.ShowDialog(this) == DialogResult.OK)
 					{
 						if (aRule.FileSystemRights != 0)
 						{
-							sec.AddAccessRule(aRule);
+							sec.ModifyAccessRule(AccessControlModification.Add, aRule, out modified);
 							AddListItem(aRule);
 						}
 						if (dRule.FileSystemRights != 0)
 						{
-							sec.AddAccessRule(dRule);
+							sec.ModifyAccessRule(AccessControlModification.Add, dRule, out modified);
 							AddListItem(dRule);
 						}
 					}
@@ -126,7 +146,7 @@ namespace SecurityEditor
 
 		private void editButton_Click(object sender, EventArgs e)
 		{
-			using (AceEditor aed = new AceEditor() { ObjectName = this.objName, ObjectSecurity = sec })
+			using (AceEditor aed = new AceEditor() { ObjectName = this.ObjectName, ObjectSecurity = sec })
 			{
 				if (aed.ShowDialog(this) == DialogResult.OK)
 				{

@@ -11,7 +11,14 @@ namespace SecurityEditor
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new TaskSDDLEditDialog() { TaskName = "Test", SecurityDescriptorSddlForm = "D:P(A;;FA;;;BA)(A;;FRFW;;;SY)(A;;FRFX;;;LS)" });
+			//using (TaskService ts = new TaskService())
+			{
+				var dlg = new SecurityPropertiesDialog();
+				//dlg.Initialize(ts.AddTask("Test", new TimeTrigger(DateTime.Now.AddDays(1)), new ExecAction("notepad.exe")));
+				dlg.Initialize(new System.IO.FileInfo(@"C:\RAT2Llog.txt"), false);
+				Application.Run(dlg);
+				//ts.RootFolder.DeleteTask("Test");
+			}
 		}
 	}
 }

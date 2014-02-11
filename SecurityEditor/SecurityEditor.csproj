@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SecurityEditor</RootNamespace>
     <AssemblyName>SecurityEditor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -62,11 +62,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
-      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.2.4395.25898, Culture=neutral, PublicKeyToken=4d9365c354fd6f36, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls">
-      <HintPath>..\..\GroupControls\bin\Release\GroupControls.dll</HintPath>
+    <Reference Include="GroupControls, Version=1.3.8.28617, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GroupControls\bin\Release\v4.0\GroupControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,6 +88,7 @@
     <Compile Include="..\TaskEditor\HelperMethods.cs">
       <Link>HelperMethods.cs</Link>
     </Compile>
+    <Compile Include="AccountInfo.cs" />
     <Compile Include="AceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,14 +104,13 @@
     <Compile Include="CheckedColumnList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ControlExtension.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Native\AccountUtils.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
-    <Compile Include="OwnerEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OwnerEditor.Designer.cs">
-      <DependentUpon>OwnerEditor.cs</DependentUpon>
+    <Compile Include="Native\ButtonExtension.cs" />
+    <Compile Include="Native\CommandLink.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="PermissionList.cs">
       <SubType>Component</SubType>
@@ -120,18 +122,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SecurityEditorDialog.cs">
+    <Compile Include="AdvancedSecuritySettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SecurityEditorDialog.Designer.cs">
-      <DependentUpon>SecurityEditorDialog.cs</DependentUpon>
+    <Compile Include="AdvancedSecuritySettingsDialog.Designer.cs">
+      <DependentUpon>AdvancedSecuritySettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskSDDLEditDialog.cs">
+    <Compile Include="SecurityProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SecurityProperties.Designer.cs">
+      <DependentUpon>SecurityProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityPropertiesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaskSDDLEditDialog.Designer.cs">
-      <DependentUpon>TaskSDDLEditDialog.cs</DependentUpon>
+    <Compile Include="SecurityPropertiesDialog.Designer.cs">
+      <DependentUpon>SecurityPropertiesDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskSecurity.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AceEditor.resx">
@@ -140,21 +149,22 @@
     <EmbeddedResource Include="ACLEditor.resx">
       <DependentUpon>ACLEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OwnerEditor.resx">
-      <DependentUpon>OwnerEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SecurityEditorDialog.resx">
-      <DependentUpon>SecurityEditorDialog.cs</DependentUpon>
+    <EmbeddedResource Include="AdvancedSecuritySettingsDialog.resx">
+      <DependentUpon>AdvancedSecuritySettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskSDDLEditDialog.resx">
-      <DependentUpon>TaskSDDLEditDialog.cs</DependentUpon>
+    <EmbeddedResource Include="SecurityProperties.resx">
+      <DependentUpon>SecurityProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecurityPropertiesDialog.resx">
+      <DependentUpon>SecurityPropertiesDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="SecurityEditor.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +184,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TaskService.csproj">
+      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Name>TaskService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
