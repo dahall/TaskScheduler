@@ -46,7 +46,7 @@ namespace SecurityEditor
 			// Apply applicable ACEs
 			if (rType == SecurityRuleType.Access)
 			{
-				foreach (FileSystemAccessRule rule in acl.GetAccessRules(true, true, typeof(SecurityIdentifier)))
+				foreach (AccessRule rule in acl.GetAccessRules(true, true, typeof(SecurityIdentifier)))
 				{
 					if (rule.IdentityReference.Equals(id))
 					{
@@ -63,7 +63,7 @@ namespace SecurityEditor
 			}
 			else
 			{
-				foreach (FileSystemAuditRule rule in acl.GetAuditRules(true, true, typeof(SecurityIdentifier)))
+				foreach (AuditRule rule in acl.GetAuditRules(true, true, typeof(SecurityIdentifier)))
 				{
 					if (rule.IdentityReference.Equals(id))
 					{
@@ -85,26 +85,10 @@ namespace SecurityEditor
 
 		internal void ResetList(SecurityRuleType ruleType)
 		{
-			if (ruleType == SecurityRuleType.Access)
-			{
-				items = new CheckedColumnListItem[6];
-				items[0] = new CheckedColumnListItem("Full control", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.FullControl };
-				items[1] = new CheckedColumnListItem("Modify", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Modify };
-				items[2] = new CheckedColumnListItem(@"Read & execute", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.ReadAndExecute };
-				items[3] = new CheckedColumnListItem("Read", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Read };
-				items[4] = new CheckedColumnListItem("Write", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Write };
-				items[5] = new CheckedColumnListItem("Special permissions", CheckState.UncheckedDisabled, CheckState.UncheckedDisabled);
-			}
-			else
-			{
-				items = new CheckedColumnListItem[6];
-				items[0] = new CheckedColumnListItem("Full control", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.FullControl };
-				items[1] = new CheckedColumnListItem("Modify", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Modify };
-				items[2] = new CheckedColumnListItem(@"Read & execute", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.ReadAndExecute };
-				items[3] = new CheckedColumnListItem("Read", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Read };
-				items[4] = new CheckedColumnListItem("Write", CheckState.Unchecked, CheckState.Unchecked) { Tag = FileSystemRights.Write };
-				items[5] = new CheckedColumnListItem("Special permissions", CheckState.UncheckedDisabled, CheckState.UncheckedDisabled);
-			}
+			var vals = System.Enum.GetValues(acl.AccessRightType);
+			items = new CheckedColumnListItem[vals.Length];
+			for (int i = 0; i < vals.Length; i++)
+				items[i] = new CheckedColumnListItem(System.Enum.GetName(acl.AccessRightType, vals.GetValue(i)), CheckState.Unchecked, CheckState.Unchecked) { Tag = vals.GetValue(i) };
 		}
 
 		protected override void OnItemChanged(CheckedColumnList.ItemChangedEventArgs e)
