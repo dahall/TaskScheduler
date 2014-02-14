@@ -16,7 +16,7 @@ namespace SecurityEditor
 		private bool editable;
 		private string name = "";
 		private string sddl;
-		private FileSecurity sec;
+		private NativeObjectSecurity sec;
 
 		public SecurityProperties()
 		{
@@ -50,18 +50,15 @@ namespace SecurityEditor
 			}
 		}
 
-		[DefaultValue((string)null)]
-		public string SecurityDescriptorSddlForm
+		[DefaultValue(null)]
+		public NativeObjectSecurity ObjectSecurity
 		{
-			get { return sddl; }
+			get { return sec; }
 			set
 			{
-				if (!this.DesignMode && sddl != value)
+				if (!this.DesignMode)
 				{
-					sddl = value;
-					sec = new FileSecurity();
-					if (!string.IsNullOrWhiteSpace(value))
-						sec.SetSecurityDescriptorSddlForm(value, AccessControlSections.All);
+					sec = value;
 					UpdateUI();
 				}
 			}
@@ -75,7 +72,7 @@ namespace SecurityEditor
 			if (nameLookUpper.IsBusy)
 				nameLookUpper.CancelAsync();
 			var list = new System.Collections.Generic.List<SecurityIdentifier>();
-			foreach (FileSystemAccessRule rule in sec.GetAccessRules(true, true, typeof(SecurityIdentifier)))
+			foreach (AccessRule rule in sec.GetAccessRules(true, true, typeof(SecurityIdentifier)))
 			{
 				if (list.Find(delegate(SecurityIdentifier s) { return s.Equals(rule.IdentityReference); }) == null)
 					list.Add((SecurityIdentifier)rule.IdentityReference);
@@ -105,31 +102,17 @@ namespace SecurityEditor
 			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out ssid))
 			{
 				SecurityIdentifier sid = new SecurityIdentifier(ssid);
-				FileSystemAccessRule aRule = new FileSystemAccessRule(sid, FileSystemRights.ReadAndExecute, AccessControlType.Allow);
-				sec.AddAccessRule(aRule);
+				bool modified;
+				AccessRule aRule = sec.AccessRuleFactory(sid, int.MaxValue, false, InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow);
+				sec.ModifyAccessRule(AccessControlModification.Add, aRule, out modified);
 				var lvi = BuildUserItem(sid);
 				if (!this.userList.Items.ContainsKey(lvi.Text))
 					this.userList.Items.Add(lvi);
-				/*var aed = new AceEditor();
-				aed.ObjectSecurity.AddAccessRule(aRule);
-				aed.ObjectSecurity.AddAccessRule(dRule);
+				var aed = new AceEditor() { ObjectName = this.ObjectName, ObjectSecurity = this.ObjectSecurity };
 				if (aed.ShowDialog(this) == DialogResult.OK)
 				{
-					if (aRule.FileSystemRights != 0)
-					{
-						sec.AddAccessRule(aRule);
-						var s = aRule.IdentityReference.Value;
-						if (!this.userList.Items.ContainsKey(s))
-							this.userList.Items.Add(BuildUserItem(s));
-					}
-					if (dRule.FileSystemRights != 0)
-					{
-						sec.AddAccessRule(dRule);
-						var s = dRule.IdentityReference.Value;
-						if (!this.userList.Items.ContainsKey(s))
-							this.userList.Items.Add(BuildUserItem(s));
-					}
-				}*/
+					// TODO: Figure out what to do if cancelled
+				}
 			}
 		}
 
@@ -170,7 +153,8 @@ namespace SecurityEditor
 
 		private void removeBtn_Click(object sender, EventArgs e)
 		{
-			sec.RemoveAccessRuleAll(new FileSystemAccessRule(curUser, FileSystemRights.FullControl, AccessControlType.Allow));
+			bool modified;
+			sec.ModifyAccessRule(AccessControlModification.Remove, (AccessRule)userList.SelectedItems[0].Tag, out modified);
 			int curSel = userList.SelectedIndices[0];
 			if (userList.Items.Count > 1)
 			{
@@ -203,21 +187,21 @@ namespace SecurityEditor
 		{
 			using (var dlg = new SecurityPropertiesDialog())
 			{
-				dlg.Initialize(this.ObjectName, this.SecurityDescriptorSddlForm, this.TargetComputer, true);
+				dlg.Initialize(this.ObjectName, this.ObjectSecurity, this.TargetComputer, true);
 				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{
-					this.SecurityDescriptorSddlForm = dlg.secProps.SecurityDescriptorSddlForm;
+					this.ObjectSecurity = dlg.secProps.ObjectSecurity;
 				}
 			}
 		}
 
 		private void advancedBtn_Click(object sender, EventArgs e)
 		{
-			using (var dlg = new AdvancedSecuritySettingsDialog() { Editable = false, ObjectName = this.ObjectName, SecurityDescriptorSddlForm = this.SecurityDescriptorSddlForm })
+			using (var dlg = new AdvancedSecuritySettingsDialog() { Editable = false, ObjectName = this.ObjectName, ObjectSecurity = this.ObjectSecurity })
 			{
 				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{
-					this.SecurityDescriptorSddlForm = dlg.SecurityDescriptorSddlForm;
+					this.ObjectSecurity = dlg.ObjectSecurity;
 				}
 			}
 		}

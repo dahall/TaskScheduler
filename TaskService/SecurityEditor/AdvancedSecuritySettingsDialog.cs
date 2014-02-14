@@ -17,9 +17,8 @@ namespace SecurityEditor
 		DialogBase
 #endif
 	{
-		private string objName;
-		private string sd;
-		private FileSecurity sec = new FileSecurity();
+		private string objName = string.Empty;
+		private NativeObjectSecurity sec;
 
 		public AdvancedSecuritySettingsDialog()
 		{
@@ -45,26 +44,54 @@ namespace SecurityEditor
 			}
 		}
 
+		[DefaultValue("")]
 		public string ObjectName
 		{
 			get { return objName; }
 			set
 			{
 				objName = value;
+				this.objNameText.Text = objName;
 			}
 		}
 
-		public string SecurityDescriptorSddlForm
+		public void Initialize(System.IO.FileInfo file, bool editable = true)
 		{
-			get { return sd; }
+			this.Initialize(file.FullName, file.GetAccessControl(), null, editable);
+		}
+
+		public void Initialize(string objName, System.Security.AccessControl.NativeObjectSecurity objSec, string targetComputer = null, bool editable = true)
+		{
+			this.ObjectName = objName;
+			sec = objSec;
+			this.TargetComputer = targetComputer;
+			this.Editable = editable;
+		}
+
+		public void Initialize(Microsoft.Win32.TaskScheduler.Task task, bool editable = true)
+		{
+			this.Initialize(task.Name, new TaskSecurity(task), task.TaskService.TargetServer, editable);
+		}
+
+		public NativeObjectSecurity ObjectSecurity
+		{
+			get { return sec; }
 			set
 			{
-				sd = value;
-				sec.SetSecurityDescriptorSddlForm(sd);
-
+				sec = value;
 				permEditor.ObjectSecurity = sec;
 				audEditor.ObjectSecurity = sec;
 				ownerText.Text = new AccountInfo((SecurityIdentifier)sec.GetOwner(typeof(SecurityIdentifier))).ToString();
+			}
+		}
+
+		public string TargetComputer
+		{
+			get { return permEditor.TargetComputer; }
+			set
+			{
+				permEditor.TargetComputer = value;
+				audEditor.TargetComputer = value;
 			}
 		}
 
@@ -86,7 +113,7 @@ namespace SecurityEditor
 
 		private void okBtn_Click(object sender, System.EventArgs e)
 		{
-			sd = sec.GetSecurityDescriptorSddlForm(AccessControlSections.All);
+			// TODO: Gather sections and create new "sec"
 			Close();
 		}
 

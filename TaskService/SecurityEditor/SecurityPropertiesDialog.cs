@@ -23,31 +23,26 @@ namespace SecurityEditor
 
 		public void Initialize(System.IO.FileInfo file, bool editable = true)
 		{
-			this.Initialize(file.FullName, file.GetAccessControl().GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All), null, editable);
+			this.Initialize(file.FullName, file.GetAccessControl(), null, editable);
 		}
 
-		public void Initialize(string objName, System.Security.AccessControl.NativeObjectSecurity objSec, string targetComputer = null, bool editable = true)
+		public void Initialize(string objectName, System.Security.AccessControl.NativeObjectSecurity objSec, string targetComputer = null, bool editable = true)
 		{
-			this.Initialize(objName, objSec.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All), targetComputer, editable);
+			secProps.ObjectName = objectName;
+			secProps.TargetComputer = targetComputer;
+			secProps.ObjectSecurity = objSec;
+			this.Editable = editable;
 		}
 
 		public void Initialize(Microsoft.Win32.TaskScheduler.Task task, bool editable = true)
 		{
-			this.Initialize(task.Name, task.GetSecurityDescriptorSddlForm(Microsoft.Win32.TaskScheduler.TaskSecurityDescriptorSections.All), task.TaskService.TargetServer, editable);
+			this.Initialize(task.Name, new System.Security.AccessControl.TaskSecurity(task), task.TaskService.TargetServer, editable);
 		}
 
-		public void Initialize(string objectName, string sddl, string targetComputer = null, bool editable = true)
+		public System.Security.AccessControl.NativeObjectSecurity ObjectSecurity
 		{
-			secProps.ObjectName = objectName;
-			secProps.TargetComputer = targetComputer;
-			secProps.SecurityDescriptorSddlForm = sddl;
-			this.Editable = editable;
-		}
-
-		public string SecurityDescriptorSddlForm
-		{
-			get { return secProps.SecurityDescriptorSddlForm; }
-			set { secProps.SecurityDescriptorSddlForm = value; }
+			get { return secProps.ObjectSecurity; }
+			set { secProps.ObjectSecurity = value; }
 		}
 
 		private void okBtn_Click(object sender, System.EventArgs e)

@@ -64,7 +64,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e)
 		{
-
+			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
 		}
 
 		private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e)

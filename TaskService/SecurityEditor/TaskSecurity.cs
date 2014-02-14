@@ -121,8 +121,18 @@ namespace System.Security.AccessControl
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskSecurity"/> class.
 		/// </summary>
-		public TaskSecurity() : base(true, ResourceType.KernelObject)
+		public TaskSecurity() : base(true, ResourceType.ProviderDefined)
 		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskSecurity"/> class.
+		/// </summary>
+		/// <param name="task">The task.</param>
+		public TaskSecurity(Microsoft.Win32.TaskScheduler.Task task)
+			: this(task.Name, AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
+		{
+			this.SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(Microsoft.Win32.TaskScheduler.TaskSecurityDescriptorSections.All));
 		}
 
 		/// <summary>

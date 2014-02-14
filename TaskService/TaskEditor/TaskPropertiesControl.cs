@@ -383,6 +383,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
 				taskStopIfGoingOnBatteriesCheck.Checked = td.Settings.StopIfGoingOnBatteries;
 				taskWakeToRunCheck.Checked = td.Settings.WakeToRun;
+				taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
 
 				// Set Settings tab
 				taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
@@ -1284,9 +1285,8 @@ namespace Microsoft.Win32.TaskScheduler
 			bool isSet = taskIdleDurationCheck.Checked;
 			bool alreadyOnAssigment = onAssignment;
 			bool idleEnabled = isSet ? editable : false;
-			taskIdleDurationCombo.Enabled = idleEnabled;
-			taskIdleWaitTimeoutLabel.Enabled = taskIdleWaitTimeoutCombo.Enabled = idleEnabled;
-			taskStopOnIdleEndCheck.Enabled = idleEnabled;
+			taskIdleDurationCombo.Enabled = taskIdleWaitTimeoutLabel.Enabled = 
+				taskIdleWaitTimeoutCombo.Enabled = taskStopOnIdleEndCheck.Enabled = idleEnabled;
 			taskRestartOnIdleCheck.Enabled = idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
 			onAssignment = true;
 			taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;

@@ -10,12 +10,12 @@ namespace System.Windows.Forms
 			{
 				const uint BCM_SETSHIELD = 0x160C;    //Elevated button
 				btn.FlatStyle = FlatStyle.System;
-				SendMessage(btn.Handle, BCM_SETSHIELD, IntPtr.Zero, required ? new IntPtr(0xFFFFFFFF) : IntPtr.Zero);
+				SendMessage(btn.Handle, BCM_SETSHIELD, IntPtr.Zero, required ? new IntPtr(-1) : IntPtr.Zero);
 				btn.Invalidate();
 			}
 		}
 
-		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = false)]
+		[DllImport("user32.dll")]
 		private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 	}
 }
