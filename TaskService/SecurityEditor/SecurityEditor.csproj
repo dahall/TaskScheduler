@@ -88,6 +88,7 @@
     <Compile Include="..\TaskEditor\HelperMethods.cs">
       <Link>HelperMethods.cs</Link>
     </Compile>
+    <Compile Include="AccessRights.cs" />
     <Compile Include="AccountInfo.cs" />
     <Compile Include="AceEditor.cs">
       <SubType>Form</SubType>
@@ -101,10 +102,16 @@
     <Compile Include="ACLEditor.Designer.cs">
       <DependentUpon>ACLEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="BorderedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CheckedColumnList.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ControlExtension.cs" />
+    <Compile Include="DisplayOnlyTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="Native\AccountUtils.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
@@ -128,6 +135,13 @@
     <Compile Include="AdvancedSecuritySettingsDialog.Designer.cs">
       <DependentUpon>AdvancedSecuritySettingsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="RuleEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RuleEditor.Designer.cs">
+      <DependentUpon>RuleEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecuredObject.cs" />
     <Compile Include="SecurityProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,7 +154,6 @@
     <Compile Include="SecurityPropertiesDialog.Designer.cs">
       <DependentUpon>SecurityPropertiesDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskSecurity.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AceEditor.resx">
@@ -155,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancedSecuritySettingsDialog.resx">
       <DependentUpon>AdvancedSecuritySettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RuleEditor.resx">
+      <DependentUpon>RuleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SecurityProperties.resx">
       <DependentUpon>SecurityProperties.cs</DependentUpon>
@@ -189,6 +205,15 @@
       <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
       <Name>TaskService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Information.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Group.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

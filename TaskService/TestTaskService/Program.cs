@@ -349,11 +349,23 @@ namespace TestTaskService
 			ts.RootFolder.DeleteTask(t.Name);
 		}
 
+		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction)
+		{
+			fldAction(fld);
+			foreach (var task in fld.Tasks)
+				taskAction(task);
+			foreach (var sfld in fld.SubFolders)
+				FolderTaskAction(sfld, fldAction, taskAction);
+		}
+
 		internal static void ShortTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			// Get the service on the local machine
 			try
 			{
+				FolderTaskAction(ts.RootFolder, delegate(TaskFolder fld) { output.WriteLine("{0}: {1}", fld.Name, fld.GetSecurityDescriptorSddlForm()); }, delegate(Task at) { output.WriteLine("  {0}: {1}", at.Name, at.GetSecurityDescriptorSddlForm()); });
+				return;
+
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
@@ -376,13 +388,6 @@ namespace TestTaskService
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
-				/*try { output.WriteLine("SDDL: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.All)); } catch { }
-				try { output.WriteLine("-Own: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Owner)); } catch { }
-				t.SetSecurityDescriptorSddlForm("O:AO", TaskSecurityDescriptorSections.Owner);
-				try { output.WriteLine("-Own: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Owner)); } catch { }
-				try { output.WriteLine("-Grp: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.Group)); } catch { }
-				try { output.WriteLine("-DACL: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.DiscretionaryAcl)); } catch { }
-				try { output.WriteLine("-DAPA: " + t.GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.DontAddPrincipalAce)); } catch { }*/
 
 				/*System.Threading.Thread.Sleep(5000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);

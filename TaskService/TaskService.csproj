@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
+    <Compile Include="TaskSecurity.cs" />
     <Compile Include="TaskServiceFluentExt.cs">
       <SubType>Component</SubType>
     </Compile>

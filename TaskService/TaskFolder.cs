@@ -59,15 +59,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the security descriptor of the task.
 		/// </summary>
 		/// <value>The security descriptor.</value>
+		[Obsolete("This property will be removed in deference to the GetAccessControl, GetSecurityDescriptorSddlForm, SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
 			get
 			{
-				return GetSecurityDescriptor(TaskSecurityDescriptorSections.All);
+				return GetSecurityDescriptor(Task.defaultSecurityInfosSections);
 			}
 			set
 			{
-				SetSecurityDescriptor(value, TaskSecurityDescriptorSections.All);
+				SetSecurityDescriptor(value, Task.defaultSecurityInfosSections);
 			}
 		}
 
@@ -104,9 +105,23 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="sd">The security descriptor associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
+		[Obsolete("This method will be removed in deference to the CreateFolder(string, TaskSecurity) method.")]
 		public TaskFolder CreateFolder(string subFolderName, System.Security.AccessControl.GenericSecurityDescriptor sd)
 		{
-			return this.CreateFolder(subFolderName, sd.GetSddlForm(System.Security.AccessControl.AccessControlSections.All));
+			return this.CreateFolder(subFolderName, sd == null ? null : sd.GetSddlForm(Task.defaultAccessControlSections));
+		}
+
+		/// <summary>
+		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
+		/// </summary>
+		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="folderSecurity">The task security associated with the folder.</param>
+		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
+		public TaskFolder CreateFolder(string subFolderName, TaskSecurity folderSecurity)
+		{
+			if (folderSecurity == null)
+				throw new ArgumentNullException();
+			return this.CreateFolder(subFolderName, folderSecurity.GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections));
 		}
 
 		/// <summary>
@@ -173,11 +188,31 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="TaskFolder"/> object.
+		/// </summary>
+		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
+		public TaskSecurity GetAccessControl()
+		{
+			return GetAccessControl(Task.defaultAccessControlSections);
+		}
+
+		/// <summary>
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task folder described by the current <see cref="TaskFolder"/> object.
+		/// </summary>
+		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
+		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
+		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections)
+		{
+			return new TaskSecurity(this, includeSections);
+		}
+
+		/// <summary>
 		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
-		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(TaskSecurityDescriptorSections includeSections)
+		[Obsolete("This method will be removed in deference to the GetAccessControl and GetSecurityDescriptorSddlForm methods.")]
+		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			return new System.Security.AccessControl.RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
 		}
@@ -188,7 +223,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections includeSections)
+		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			if (v2Folder != null)
 				return v2Folder.GetSecurityDescriptor((int)includeSections);
@@ -347,13 +382,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Applies access control list (ACL) entries described by a <see cref="TaskSecurity"/> object to the file described by the current <see cref="TaskFolder"/> object.
+		/// </summary>
+		/// <param name="taskSecurity">A <see cref="TaskSecurity"/> object that describes an access control list (ACL) entry to apply to the current folder.</param>
+		public void SetAccessControl(TaskSecurity taskSecurity)
+		{
+			taskSecurity.Persist(this);
+		}
+
+		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="sd">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
-		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, TaskSecurityDescriptorSections includeSections)
+		[Obsolete("This method will be removed in deference to the SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
+		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
-			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm(Task.TOACS(includeSections)), includeSections);
+			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections), includeSections);
 		}
 
 		/// <summary>
@@ -362,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sddlForm">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSecurityDescriptorSections includeSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			if (v2Folder != null)
 				v2Folder.SetSecurityDescriptor(sddlForm, (int)includeSections);

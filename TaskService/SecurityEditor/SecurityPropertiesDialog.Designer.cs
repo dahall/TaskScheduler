@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityPropertiesDialog));
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.secTabPage = new System.Windows.Forms.TabPage();
 			this.secProps = new SecurityEditor.SecurityProperties();
@@ -43,105 +44,62 @@
 			// tabControl1
 			// 
 			this.tabControl1.Controls.Add(this.secTabPage);
-			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl1.Location = new System.Drawing.Point(7, 7);
+			resources.ApplyResources(this.tabControl1, "tabControl1");
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(430, 492);
-			this.tabControl1.TabIndex = 1;
 			// 
 			// secTabPage
 			// 
 			this.secTabPage.Controls.Add(this.secProps);
-			this.secTabPage.Location = new System.Drawing.Point(4, 22);
+			resources.ApplyResources(this.secTabPage, "secTabPage");
 			this.secTabPage.Name = "secTabPage";
-			this.secTabPage.Padding = new System.Windows.Forms.Padding(7);
-			this.secTabPage.Size = new System.Drawing.Size(422, 466);
-			this.secTabPage.TabIndex = 1;
-			this.secTabPage.Text = "Security";
 			this.secTabPage.UseVisualStyleBackColor = true;
 			// 
 			// secProps
 			// 
-			this.secProps.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.secProps.Location = new System.Drawing.Point(7, 7);
+			resources.ApplyResources(this.secProps, "secProps");
 			this.secProps.Name = "secProps";
-			this.secProps.Size = new System.Drawing.Size(408, 452);
-			this.secProps.TabIndex = 0;
+			this.secProps.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.secProps_PropertyChanged);
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 3;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.applyBtn, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.cancelBtn, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.okBtn, 0, 0);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 499);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(430, 29);
-			this.tableLayoutPanel1.TabIndex = 2;
 			// 
 			// applyBtn
 			// 
-			this.applyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.applyBtn.Enabled = false;
-			this.applyBtn.Location = new System.Drawing.Point(354, 7);
-			this.applyBtn.Margin = new System.Windows.Forms.Padding(6, 7, 1, 0);
+			resources.ApplyResources(this.applyBtn, "applyBtn");
 			this.applyBtn.Name = "applyBtn";
-			this.applyBtn.Size = new System.Drawing.Size(75, 22);
-			this.applyBtn.TabIndex = 2;
-			this.applyBtn.Text = "&Apply";
 			this.applyBtn.UseVisualStyleBackColor = true;
 			this.applyBtn.Click += new System.EventHandler(this.applyBtn_Click);
 			// 
 			// cancelBtn
 			// 
-			this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.cancelBtn, "cancelBtn");
 			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelBtn.Location = new System.Drawing.Point(273, 7);
-			this.cancelBtn.Margin = new System.Windows.Forms.Padding(6, 7, 0, 0);
 			this.cancelBtn.Name = "cancelBtn";
-			this.cancelBtn.Size = new System.Drawing.Size(75, 22);
-			this.cancelBtn.TabIndex = 1;
-			this.cancelBtn.Text = "Cancel";
 			this.cancelBtn.UseVisualStyleBackColor = true;
 			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
 			// okBtn
 			// 
-			this.okBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.okBtn.Location = new System.Drawing.Point(192, 7);
-			this.okBtn.Margin = new System.Windows.Forms.Padding(6, 7, 0, 0);
+			resources.ApplyResources(this.okBtn, "okBtn");
 			this.okBtn.Name = "okBtn";
-			this.okBtn.Size = new System.Drawing.Size(75, 22);
-			this.okBtn.TabIndex = 0;
-			this.okBtn.Text = "OK";
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
 			// SecurityPropertiesDialog
 			// 
 			this.AcceptButton = this.okBtn;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
-			this.ClientSize = new System.Drawing.Size(444, 535);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.MaximumSize = new System.Drawing.Size(460, 574);
-			this.MinimumSize = new System.Drawing.Size(376, 458);
 			this.Name = "SecurityPropertiesDialog";
-			this.Padding = new System.Windows.Forms.Padding(7);
-			this.Text = "SecurityPropertiesDialog";
 			this.tabControl1.ResumeLayout(false);
 			this.secTabPage.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);

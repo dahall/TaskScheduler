@@ -245,8 +245,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="taskPath">The task path. This can be retrieved using the <see cref="Task.Path"/> property.</param>
 		/// <exception cref="NotSupportedException">Thrown when instantiated on an OS prior to Windows Vista.</exception>
-		public TaskEventLog(string taskPath)
-			: this(".", taskPath)
+		public TaskEventLog(string taskPath) : this(".", taskPath)
 		{
 		}
 
@@ -256,11 +255,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="machineName">Name of the machine.</param>
 		/// <param name="taskPath">The task path. This can be retrieved using the <see cref="Task.Path"/> property.</param>
 		/// <exception cref="NotSupportedException">Thrown when instantiated on an OS prior to Windows Vista.</exception>
-		public TaskEventLog(string machineName, string taskPath)
+		public TaskEventLog(string machineName, string taskPath, string domain = null, string user = null, string password = null)
 		{
-			if (System.Environment.OSVersion.Version.Major < 6)
-				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
-
 			const string queryString =
 				"<QueryList>" +
 				"  <Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
@@ -270,9 +266,7 @@ namespace Microsoft.Win32.TaskScheduler
 				"  </Query>" +
 				"</QueryList>";
 
-			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, string.Format(queryString, taskPath)) { ReverseDirection = true };
-			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
-				q.Session = new EventLogSession(machineName);
+			Initialize(machineName, string.Format(queryString, taskPath), true, domain, user, password);
 		}
 
 		/// <summary>
@@ -281,11 +275,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="startTime">The start time.</param>
 		/// <param name="taskName">Name of the task.</param>
 		/// <param name="machineName">Name of the machine (optional).</param>
-		public TaskEventLog(DateTime startTime, string taskName = null, string machineName = null)
+		public TaskEventLog(DateTime startTime, string taskName = null, string machineName = null, string domain = null, string user = null, string password = null)
 		{
-			if (System.Environment.OSVersion.Version.Major < 6)
-				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
-
 			int[] numArray = new int[] { 100, 0x66, 0x67, 0x6b, 0x6c, 0x6d, 0x6f, 0x75, 0x76, 0x77, 120, 0x79, 0x7a, 0x7b, 0x7c, 0x7d };
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 			sb.Append("*[System[(");
@@ -303,9 +294,26 @@ namespace Microsoft.Win32.TaskScheduler
 				sb.AppendFormat("and EventData[Data[@Name=\"TaskName\"]=\"{0}\"]", taskName);
 			sb.Append("]");
 
-			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, sb.ToString()) { ReverseDirection = false };
+			Initialize(machineName, sb.ToString(), false, domain, user, password);
+		}
+
+		private void Initialize(string machineName, string query, bool revDir, string domain = null, string user = null, string password = null)
+		{
+			if (System.Environment.OSVersion.Version.Major < 6)
+				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
+
+			System.Security.SecureString spwd = null;
+			if (password != null)
+			{
+				spwd = new System.Security.SecureString();
+				int l = password.Length;
+				foreach (char c in password.ToCharArray(0, l))
+					spwd.AppendChar(c);
+			}
+
+			q = new EventLogQuery("Microsoft-Windows-TaskScheduler/Operational", PathType.LogName, query) { ReverseDirection = revDir };
 			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
-				q.Session = new EventLogSession(machineName);
+				q.Session = new EventLogSession(machineName, domain, user, spwd, SessionAuthentication.Default);
 		}
 
 		/// <summary>

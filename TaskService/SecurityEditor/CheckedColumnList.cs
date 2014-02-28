@@ -283,7 +283,7 @@ namespace SecurityEditor
 		protected override void OnPaint(PaintEventArgs pe)
 		{
 			textBrush = null;
-			textBrush = new SolidBrush(this.Enabled ? this.ForeColor : SystemColors.GrayText);
+			textBrush = new SolidBrush(this.ForeColor); //new SolidBrush(this.Enabled ? this.ForeColor : SystemColors.GrayText);
 			base.OnPaint(pe);
 		}
 
@@ -309,18 +309,29 @@ namespace SecurityEditor
 				if (state != CheckState.NotAvailable)
 				{
 					System.Windows.Forms.VisualStyles.CheckBoxState cbs = ((int)state % 3 == 1) ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal : System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
-					if (!this.Enabled || (int)state / 3 == 0)
+					if ((int)state / 3 == 0)
 						cbs += 3;
 					//else if (idx == PressingItem)
 					//	cbs += 2;
 					else if (hoverItem.Equals(index, i))
 						cbs++;
-					CheckBoxRenderer.DrawCheckBox(g, pt, cbs);
-					if (this.Focused && focusItem.Equals(index, i))
+					if (this.Enabled)
 					{
-						Rectangle fr = new Rectangle(pt, chkSize);
-						fr.Inflate(2, 2);
-						ControlPaint.DrawFocusRectangle(g, fr);
+						CheckBoxRenderer.DrawCheckBox(g, pt, cbs);
+						if (this.Focused && focusItem.Equals(index, i))
+						{
+							Rectangle fr = new Rectangle(pt, chkSize);
+							fr.Inflate(2, 2);
+							ControlPaint.DrawFocusRectangle(g, fr);
+						}
+					}
+					else
+					{
+						if (cbs >= System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal)
+						{
+							var vsr = new System.Windows.Forms.VisualStyles.VisualStyleRenderer("MENU", 11, cbs == System.Windows.Forms.VisualStyles.CheckBoxState.CheckedDisabled ? 2 : 1);
+							vsr.DrawBackground(g, Rectangle.Inflate(new Rectangle(pt, chkSize), 2, 2));
+						}
 					}
 				}
 				pt.X += colWidth;

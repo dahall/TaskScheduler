@@ -163,14 +163,15 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Defines how a task is run.</summary>
+	[Flags]
 	public enum TaskRunFlags
 	{
+		/// <summary>The task is run with all flags ignored.</summary>
+		NoFlags = 0,
 		/// <summary>The task is run as the user who is calling the Run method.</summary>
 		AsSelf = 1,
 		/// <summary>The task is run regardless of constraints such as "do not run on batteries" or "run only if idle".</summary>
 		IgnoreConstraints = 2,
-		/// <summary>The task is run with all flags ignored.</summary>
-		NoFlags = 0,
 		/// <summary>The task is run using a terminal server session identifier.</summary>
 		UseSessionId = 4,
 		/// <summary>The task is run using a security identifier.</summary>
@@ -186,24 +187,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Tasks will be run with the highest privileges.</summary>
 		[XmlEnum("HighestAvailable")]
 		Highest
-	}
-
-	/// <summary>
-	/// Defines the sections of the security descriptor to apply or retrieve when calling related methods.
-	/// </summary>
-	[Flags]
-	public enum TaskSecurityDescriptorSections
-	{
-		///<summary>Specifies the owner identifier.</summary>
-		Owner = 1,
-		///<summary>Specifies the primary group identifier.</summary>
-		Group = 2,
-		///<summary>Specifies the discretionary access control list (DACL).</summary>
-		DiscretionaryAcl = 4,
-		/// <summary>Specifies all applicable sections (Owner, Group and DiscretionaryAcl).</summary>
-		All = 7,
-		/// <summary>Prevents the Task Scheduler from adding the allow access-control entry (ACE) for the new context principal and does not remove the ACE from the old context principal.</summary>
-		DontAddPrincipalAce = 0x10
 	}
 
 	/// <summary>Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify the type of state change in the SessionStateChangeTrigger.</summary>
@@ -832,6 +815,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static readonly DateTime v2InvalidDate = new DateTime(1899, 12, 30);
 
+		internal const System.Security.AccessControl.AccessControlSections defaultAccessControlSections = System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group | System.Security.AccessControl.AccessControlSections.Access;
+		internal const System.Security.AccessControl.SecurityInfos defaultSecurityInfosSections = System.Security.AccessControl.SecurityInfos.Owner | System.Security.AccessControl.SecurityInfos.Group | System.Security.AccessControl.SecurityInfos.DiscretionaryAcl;
+
 		private V2Interop.IRegisteredTask v2Task;
 		private TaskDefinition myTD;
 
@@ -1133,17 +1119,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the security descriptor for the task.
 		/// </summary>
 		/// <value>The security descriptor.</value>
+		[Obsolete("This property will be removed in deference to the GetAccessControl, GetSecurityDescriptorSddlForm, SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
 			get
 			{
-				string sddl = GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections.All);
+				string sddl = GetSecurityDescriptorSddlForm();
 				return new System.Security.AccessControl.RawSecurityDescriptor(sddl);
 			}
 			set
 			{
-				var all = System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group | System.Security.AccessControl.AccessControlSections.Access;
-				SetSecurityDescriptorSddlForm(value.GetSddlForm(all), TaskSecurityDescriptorSections.All);
+				SetSecurityDescriptorSddlForm(value.GetSddlForm(Task.defaultAccessControlSections));
 			}
 		}
 
@@ -1221,6 +1207,25 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="Task"/> object.
+		/// </summary>
+		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current task.</returns>
+		public TaskSecurity GetAccessControl()
+		{
+			return GetAccessControl(Task.defaultAccessControlSections);
+		}
+
+		/// <summary>
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="Task"/> object.
+		/// </summary>
+		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
+		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current task.</returns>
+		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections)
+		{
+			return new TaskSecurity(this, includeSections);
+		}
+
+		/// <summary>
 		/// Gets all instances of the currently running registered task.
 		/// </summary>
 		/// <returns>A <see cref="RunningTaskCollection"/> with all instances of current task.</returns>
@@ -1277,25 +1282,13 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret;
 		}
 
-		internal static System.Security.AccessControl.AccessControlSections TOACS(TaskSecurityDescriptorSections si)
-		{
-			System.Security.AccessControl.AccessControlSections ret = 0;
-			if ((si & TaskSecurityDescriptorSections.DiscretionaryAcl) != 0)
-				ret &= System.Security.AccessControl.AccessControlSections.Access;
-			if ((si & TaskSecurityDescriptorSections.Group) != 0)
-				ret &= System.Security.AccessControl.AccessControlSections.Group;
-			if ((si & TaskSecurityDescriptorSections.Owner) != 0)
-				ret &= System.Security.AccessControl.AccessControlSections.Owner;
-			return ret;
-		}
-
 		/// <summary>
 		/// Gets the security descriptor for the task. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the task.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(TaskSecurityDescriptorSections includeSections)
+		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			if (v2Task != null)
 				return v2Task.GetSecurityDescriptor((int)includeSections);
@@ -1349,12 +1342,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Applies access control list (ACL) entries described by a <see cref="TaskSecurity"/> object to the file described by the current <see cref="Task"/> object.
+		/// </summary>
+		/// <param name="taskSecurity">A <see cref="TaskSecurity"/> object that describes an access control list (ACL) entry to apply to the current task.</param>
+		public void SetAccessControl(TaskSecurity taskSecurity)
+		{
+			taskSecurity.Persist(this);
+		}
+
+		/// <summary>
 		/// Sets the security descriptor for the task. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="sddlForm">The security descriptor for the task.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSecurityDescriptorSections includeSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			if (v2Task != null)
 				v2Task.SetSecurityDescriptor(sddlForm, (int)includeSections);
@@ -1384,7 +1386,7 @@ namespace Microsoft.Win32.TaskScheduler
 							if (mi != null)
 							{
 								object r = mi.Invoke(o, null);
-								int ir = Convert.ToInt32(r);
+								int ir = System.Convert.ToInt32(r);
 								return ir == 1;
 							}
 						}
@@ -2664,7 +2666,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				this.SecurityDescriptorSddlForm = value == null ? null : value.GetSddlForm(System.Security.AccessControl.AccessControlSections.All);
+				this.SecurityDescriptorSddlForm = value == null ? null : value.GetSddlForm(Task.defaultAccessControlSections);
 			}
 		}
 

@@ -36,6 +36,7 @@
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.userImageList = new System.Windows.Forms.ImageList(this.components);
 			this.addBtn = new System.Windows.Forms.Button();
 			this.viewBtn = new System.Windows.Forms.Button();
@@ -53,165 +54,102 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4});
-			this.permissionsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.columnHeader4,
+            this.columnHeader5});
+			resources.ApplyResources(this.permissionsListView, "permissionsListView");
 			this.permissionsListView.FullRowSelect = true;
 			this.permissionsListView.HideSelection = false;
-			this.permissionsListView.Location = new System.Drawing.Point(1, 1);
 			this.permissionsListView.MultiSelect = false;
 			this.permissionsListView.Name = "permissionsListView";
-			this.permissionsListView.Size = new System.Drawing.Size(572, 158);
 			this.permissionsListView.SmallImageList = this.userImageList;
-			this.permissionsListView.TabIndex = 1;
 			this.permissionsListView.UseCompatibleStateImageBehavior = false;
 			this.permissionsListView.View = System.Windows.Forms.View.Details;
 			this.permissionsListView.SelectedIndexChanged += new System.EventHandler(this.permissionsListView_SelectedIndexChanged);
-			this.permissionsListView.SizeChanged += new System.EventHandler(this.permissionsListView_SizeChanged);
 			this.permissionsListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.permissionsListView_MouseDoubleClick);
 			// 
 			// imageColHdr
 			// 
-			this.imageColHdr.Text = " ";
-			this.imageColHdr.Width = 20;
+			resources.ApplyResources(this.imageColHdr, "imageColHdr");
 			// 
 			// columnHeader1
 			// 
-			this.columnHeader1.Text = "Type";
+			resources.ApplyResources(this.columnHeader1, "columnHeader1");
 			// 
 			// columnHeader2
 			// 
-			this.columnHeader2.Text = "Principal";
-			this.columnHeader2.Width = 202;
+			resources.ApplyResources(this.columnHeader2, "columnHeader2");
 			// 
 			// columnHeader3
 			// 
-			this.columnHeader3.Text = "Access";
-			this.columnHeader3.Width = 117;
+			resources.ApplyResources(this.columnHeader3, "columnHeader3");
 			// 
 			// columnHeader4
 			// 
-			this.columnHeader4.Text = "Inherited from";
-			this.columnHeader4.Width = 182;
+			resources.ApplyResources(this.columnHeader4, "columnHeader4");
+			// 
+			// columnHeader5
+			// 
+			resources.ApplyResources(this.columnHeader5, "columnHeader5");
 			// 
 			// userImageList
 			// 
-			this.userImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("userImageList.ImageStream")));
+			this.userImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+			resources.ApplyResources(this.userImageList, "userImageList");
 			this.userImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.userImageList.Images.SetKeyName(0, "dsuiext_4099.ico");
-			this.userImageList.Images.SetKeyName(1, "dsuiext_4108.ico");
 			// 
 			// addBtn
 			// 
-			this.addBtn.AutoSize = true;
-			this.addBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.addBtn.Dock = System.Windows.Forms.DockStyle.Left;
-			this.addBtn.Location = new System.Drawing.Point(0, 10);
-			this.addBtn.Margin = new System.Windows.Forms.Padding(0, 10, 6, 0);
-			this.addBtn.MinimumSize = new System.Drawing.Size(74, 0);
+			resources.ApplyResources(this.addBtn, "addBtn");
 			this.addBtn.Name = "addBtn";
-			this.addBtn.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.addBtn.Size = new System.Drawing.Size(74, 23);
-			this.addBtn.TabIndex = 2;
-			this.addBtn.Text = "A&dd...";
 			this.addBtn.UseVisualStyleBackColor = true;
 			this.addBtn.Click += new System.EventHandler(this.addButton_Click);
 			// 
 			// viewBtn
 			// 
-			this.viewBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.viewBtn.AutoSize = true;
-			this.viewBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.viewBtn.Enabled = false;
-			this.viewBtn.Location = new System.Drawing.Point(285, 10);
-			this.viewBtn.Margin = new System.Windows.Forms.Padding(0, 10, 6, 0);
-			this.viewBtn.MinimumSize = new System.Drawing.Size(74, 0);
+			resources.ApplyResources(this.viewBtn, "viewBtn");
 			this.viewBtn.Name = "viewBtn";
-			this.viewBtn.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.viewBtn.Size = new System.Drawing.Size(74, 23);
-			this.viewBtn.TabIndex = 4;
-			this.viewBtn.Text = "&View";
 			this.viewBtn.UseVisualStyleBackColor = true;
-			this.viewBtn.Click += new System.EventHandler(this.editButton_Click);
+			this.viewBtn.Click += new System.EventHandler(this.viewBtn_Click);
 			// 
 			// removeBtn
 			// 
-			this.removeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.removeBtn.AutoSize = true;
-			this.removeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.removeBtn.Enabled = false;
-			this.removeBtn.Location = new System.Drawing.Point(80, 10);
-			this.removeBtn.Margin = new System.Windows.Forms.Padding(0, 10, 6, 0);
-			this.removeBtn.MinimumSize = new System.Drawing.Size(74, 0);
+			resources.ApplyResources(this.removeBtn, "removeBtn");
 			this.removeBtn.Name = "removeBtn";
-			this.removeBtn.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.removeBtn.Size = new System.Drawing.Size(74, 23);
-			this.removeBtn.TabIndex = 3;
-			this.removeBtn.Text = "&Remove";
 			this.removeBtn.UseVisualStyleBackColor = true;
 			this.removeBtn.Click += new System.EventHandler(this.removeButton_Click);
 			// 
 			// noInheritBtn
 			// 
-			this.noInheritBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.noInheritBtn.AutoSize = true;
-			this.noInheritBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			resources.ApplyResources(this.noInheritBtn, "noInheritBtn");
 			this.tableLayoutPanel1.SetColumnSpan(this.noInheritBtn, 4);
-			this.noInheritBtn.Enabled = false;
-			this.noInheritBtn.Location = new System.Drawing.Point(0, 43);
-			this.noInheritBtn.Margin = new System.Windows.Forms.Padding(0, 10, 6, 0);
 			this.noInheritBtn.Name = "noInheritBtn";
-			this.noInheritBtn.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.noInheritBtn.Size = new System.Drawing.Size(115, 23);
-			this.noInheritBtn.TabIndex = 5;
-			this.noInheritBtn.Text = "Disable &inheritance";
 			this.noInheritBtn.UseVisualStyleBackColor = true;
+			this.noInheritBtn.Click += new System.EventHandler(this.noInheritBtn_Click);
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 4;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.chgPermBtn, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.removeBtn, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.addBtn, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.viewBtn, 3, 0);
 			this.tableLayoutPanel1.Controls.Add(this.noInheritBtn, 0, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 159);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 66);
-			this.tableLayoutPanel1.TabIndex = 6;
 			// 
 			// chgPermBtn
 			// 
-			this.chgPermBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.chgPermBtn.AutoSize = true;
-			this.chgPermBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.chgPermBtn.Location = new System.Drawing.Point(160, 10);
-			this.chgPermBtn.Margin = new System.Windows.Forms.Padding(0, 10, 6, 0);
+			resources.ApplyResources(this.chgPermBtn, "chgPermBtn");
 			this.chgPermBtn.Name = "chgPermBtn";
-			this.chgPermBtn.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.chgPermBtn.Size = new System.Drawing.Size(119, 23);
-			this.chgPermBtn.TabIndex = 2;
-			this.chgPermBtn.Text = "&Change permissions";
 			this.chgPermBtn.UseVisualStyleBackColor = true;
-			this.chgPermBtn.Click += new System.EventHandler(this.addButton_Click);
+			this.chgPermBtn.Click += new System.EventHandler(this.chgPermBtn_Click);
 			// 
 			// ACLEditor
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.permissionsListView);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "ACLEditor";
-			this.Padding = new System.Windows.Forms.Padding(1);
-			this.Size = new System.Drawing.Size(574, 226);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
@@ -234,5 +172,6 @@
 		private System.Windows.Forms.Button chgPermBtn;
 		private System.Windows.Forms.ImageList userImageList;
 		private System.Windows.Forms.ColumnHeader imageColHdr;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
 	}
 }
