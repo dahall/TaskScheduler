@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>350</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="userList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="userList.LabelWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="userList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
+  </data>
+  <data name="userList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 122</value>
+  </data>
   <metadata name="userImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -124,49 +145,759 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADs
-        CAAAAk1TRnQBSQFMAgEBAgEAASABAAEgAQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
-        AwABEAMAAQEBAAEgBgABECoAAzQBVAFaAVcBVgHCAZYBgQFoAfcBuAGXAXAB/wGqAYoBZQH/AWMBXgFX
-        AdUDOgFiMAADNQFWAVoBVwFWAb0BdgFoAV8B4wF1AWYBXQHjAVoCVgG+Ay0BRpQAAzgBXAHGAZ4BcAH/
-        Ae4BygG7Af8B0gGsAYUB/wHaAbQBjgH/AdoBtAGOAf8B0QGqAYUB/wHGAZ8BdAH/AcoBogF2Af8BVwJU
-        Ab0kAAMvAUoB1QGoAXgB/wHsAccBsgH/AdYBrwGJAf8B2wG0AZAB/wHTAa4BiQH/AccBogF2Af8B2gGu
-        AYQB/wM6AWKMAAMtAUYB2QGwAYcB/wHNAakBggH/AfkB3gHaAf8B1AGuAYYB/wHiAbwBlgH/AeIBvAGW
-        Af8B2gG4AZQB/wHLAacBggH/AcIBmwFxAf8BWAFXAVQBywMMARAQAAMBAQIDAQECAwABAQQAAekBuwGN
-        Af8BwAGgAXYB/wHxAdYB0AH/AdkBsQGLAf8B6AHCAZsB/wHgAb0BmgH/AdABrAGIAf8ByQGhAXUB/wM+
-        AWyMAANAAW8B1QGuAYcB/wHVAbQBjwH/AfoB5QHhAf8B1gGuAYUB/wHoAcIBnAH/AesBxQGgAf8B4AG/
-        AZ8B/wHQAa0BiQH/AcMBnQFyAf8DTAGTAwQBBggAAU4BUQFQAZ8BRQGVAWwB/wFPAaUBeAH/AUgBowF0
-        Af8BdgGqAY4B/wEpAXQBTQH8AdkBqQF7Af8BzQGtAYoB/wH0AeoB5wH/AdkBswGKAf8B8AHKAacB/wHo
-        AcgBqAH/AdQBtAGRAf8BzQGkAXUB/wMPARSMAAMUARwB4gG1AY4B/wHnAcQBoAH/AegB2QHSAf8B7wHT
-        AbwB/wHnAcEBmgH/Ae0BzAGqAf8B5QHIAawB/wHSAbIBjQH/AcgBnwFzAf8DDwEUCAADGgEkAWoBvwGZ
-        Af8BXAGrAYYB/wFgAa4BigH/AUwBpAF3Af8BwgG7AbAB/wFEAagBgAH/Ab0BpQF1Af8B8wHOAaoB/wHG
-        AcIBvwH/AdwBywG6Af8B7gHEAZoB/wHlAcMBpQH/AdEBrgGKAf8BlQF+AWQB8ZQAAekBtgGMAf8B+QHU
-        Aa0B/wGTAZkBnwH/AYMBlAGpAf8B7QHCAZYB/wHjAb4BlwH/AdwBuwGZAf8BzgGoAYMB/wGhAYMBYwH3
-        DAADCwEPAY4B1gG0Af8BbgG+AZgB/wFrAbsBlQH/AXABvAGUAf8B0AHYAcQB/wFZAbIBiAH/AT4BlgFw
-        Af8BrgGYAX0B6wEsAVUBggH/ARQBQwF0Af8BjAGIAXsB/wHkAbkBkAH/AXgBbQFhAdqbAAEBAfkBxgGY
-        Af8BPwFgAYYB/wEsAVIBeQH/ASIBUQGDAf8B0gGpAYAB/wHcAbUBjAH/AWwBZAFdAc8UAAGWAd4BvAH/
-        AXEBvwGbAf8BawG/AZQB/wGMAa8BuwH/AXkBmAGXAf8BTwGeAXUB/wFXAaUBdAH/AVEBXAFlAdQBMAFW
-        AYEB/wEjAUgBbQH/ASoBWAGMAf8DMQFOoAABSwFWAV8B2AErAVMBegH/AScBTQFyAf8BJgFNAXQB/wFj
-        AW8BcwH/AxwBJxgAAwIBAwF0AcEBowH9AVABlwFwAf8BYgGJAb0B/wFVAYUBkAH/AUkBaAFVAewDOAFc
-        AUoBbwGgAf8BSwFxAZwB/wFGAWsBlAH/AVQBXgFqAd2gAAMiATIBQwFqAZQB/wFDAWkBkwH/ATwBYQGL
-        Af8BKAFPAXUB/wMiATIgAAMDAQQBLwFdAWwB/wFoAZEBuwH/AVoBYwFsAdUBUAFTAVUBxgM4AV0BaAGS
-        AbgB/wFnAZEBtwH/AVABdgGgAf8BMAFcAYoB/wMkATacAAFdAWQBawHNAV0BhwGtAf8BWgGEAaoB/wFO
-        AXQBngH/AUYBagGTAf8DOgFgIAABSwGLAaUB/wFRAXgBmQH/AZABuAHdAf8BiQGwAdYB/wFCAWsBjQH/
-        AUUCRgF/AZkBuwHgAf8BgAGnAc0B/wFgAYsBtQH/AT8BTQFdAf8DVAHdnAABagGNAasB+QF0AZ4BxAH/
-        AXABmgHBAf8BXgGIAa4B/wFJAXABmgH/ASsBUgF5Af8DAAEBHAABVgGfAbYB/wGeAcAB6QH/Aa0B0wH1
-        Af8BlwG+AeYB/wFWAV0BYwHXAzUBVQGoAdEB+gH/AZgBvwHlAf8BYwGYAcsB/wE2ATMBMQH/AUoCSwHv
-        nAABfAGcAcEB/AGdAb8B4QH/AYgBrAHTAf8BZwGSAbcB/wFJAWMBgQH/AjcBNgH/A0cBghwAAWMBrAHD
-        Af8BsgHSAfEB/wHaAfgB/gH/AZwBwwHqAf8BVAFYAWAB0QMfAS0BdAF2AXUB/wN3Af8BXAFaAVcB/wFQ
-        Ak8B/wNUAaacAAFsAXQBfAHVAacBywHwAf8BlgG4AdwB/wFwAZoBwQH/AUUBVwFrAf8CNwE2Af8DTQGR
-        HAABWQFhAWUBxwFRAZYBpgH/AT4BdAGRAf8BeAGkAcYB/wFJAVYBYQHmBAADJgE4A2gB3QNfAfsDUwGq
-        oAADNwFbAW0BcAFyAf8BaAFrAW8B/wFZAVwBXgH/AVUBVAFSAf8DPgH/AxQBHBwAAwUBBwHWA/8BngHb
-        AeoB/wF6AcUB0gH/AWoBugHQAf8DPgFrtAADdQHpA3EB/wNnAf8DUwH/A1IB7SgAAyMBMwMfASz/AKkA
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACw
+        CAAAAk1TRnQBSQFMAgEBAgEAAaABAAGgAQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABEAMAAQEBAAEgBgABECoAAzQBVAFZAlcBwgF9AW0BaAH3AbgBlwFgAf8BqgGKAVUB/wJeAVoB1QM6
+        AWIwAAM1AVYBWgJXAb0DXwHjAl8BXQHjAVkCVgG+Ay0BRpQAAzgBXAHGAZ4BYAH/Ae4BygG7Af8B0gGs
+        AYUB/wHaAbQBjgH/AdoBtAGOAf8B0QGqAYUB/wHGAZ8BZAH/AcoBogFmAf8DVwG9JAADLwFKAdUBqAFo
+        Af8B7AHHAbIB/wHWAa8BiQH/AdsBtAGQAf8B0wGuAYkB/wHHAaIBZgH/AdoBrgGEAf8DOgFijAADLQFG
+        AdkBsAGHAf8BzQGpAYIB/wH5Ad4B2gH/AdQBrgGGAf8B4gG8AZYB/wHiAbwBlgH/AdoBuAGUAf8BywGn
+        AYIB/wHCAZsBYQH/A1gBywMMARAQAAMBAQIDAQECAwABAQQAAekBuwGNAf8BwAGgAWYB/wHxAdYB0AH/
+        AdkBsQGLAf8B6AHCAZsB/wHgAb0BmgH/AdABrAGIAf8ByQGhAWUB/wM+AWyMAANAAW8B1QGuAYcB/wHV
+        AbQBjwH/AfoB5QHhAf8B1gGuAYUB/wHoAcIBnAH/AesBxQGgAf8B4AG/AZ8B/wHQAa0BiQH/AcMBnQFi
+        Af8DTAGTAwQBBggAAVABUQFQAZ8BNQGVAVwB/wE/AaUBaAH/ATgBowFkAf8BZgGqAY4B/wErAWQBNgH8
+        AdkBqQFrAf8BzQGtAYoB/wH0AeoB5wH/AdkBswGKAf8B8AHKAacB/wHoAcgBqAH/AdQBtAGRAf8BzQGk
+        AWUB/wMPARSMAAMUARwB4gG1AY4B/wHnAcQBoAH/AegB2QHSAf8B7wHTAbwB/wHnAcEBmgH/Ae0BzAGq
+        Af8B5QHIAawB/wHSAbIBjQH/AcgBnwFjAf8DDwEUCAADGgEkAVoBvwGZAf8BTAGrAYYB/wFQAa4BigH/
+        ATwBpAFnAf8BwgG7AbAB/wE0AagBgAH/Ab0BpQFlAf8B8wHOAaoB/wHGAcIBvwH/AdwBywG6Af8B7gHE
+        AZoB/wHlAcMBpQH/AdEBrgGKAf8BaQJkAfGUAAHpAbYBjAH/AfkB1AGtAf8BkwGZAZ8B/wGDAZQBqQH/
+        Ae0BwgGWAf8B4wG+AZcB/wHcAbsBmQH/Ac4BqAGDAf8BgQFtAWMB9wwAAwsBDwGOAdYBtAH/AV4BvgGY
+        Af8BWwG7AZUB/wFgAbwBlAH/AdAB2AHEAf8BSQGyAYgB/wEuAZYBYAH/AWgBZgFgAesBHAFFAYIB/wEE
+        ATMBZAH/AYwBiAFrAf8B5AG5AZAB/wNhAdqbAAEBAfkBxgGYAf8BLwFQAYYB/wEcAUIBaQH/ARIBQQGD
+        Af8B0gGpAYAB/wHcAbUBjAH/A1wBzxQAAZYB3gG8Af8BYQG/AZsB/wFbAb8BlAH/AYwBrwG7Af8BaQGY
+        AZcB/wE/AZ4BZQH/AUcBpQFkAf8CXAFgAdQBIAFGAYEB/wETATgBXQH/ARoBSAGMAf8DMQFOoAACWgFe
+        AdgBGwFDAWoB/wEXAT0BYgH/ARYBPQFkAf8BUwFfAWMB/wMcAScYAAMCAQMBVAGvAaMB/QFAAZcBYAH/
+        AVIBiQG9Af8BRQGFAZAB/wFZAWQBWQHsAzgBXAE6AV8BoAH/ATsBYQGcAf8BNgFbAZQB/wFYAl4B3aAA
+        AyIBMgEzAVoBlAH/ATMBWQGTAf8BLAFRAYsB/wEYAT8BZQH/AyIBMiAAAwMBBAEfAU0BXAH/AVgBkQG7
+        Af8BWgJeAdUDWAHGAzgBXQFYAZIBuAH/AVcBkQG3Af8BQAFmAaAB/wEgAUwBigH/AyQBNpwAA1wBzQFN
+        AYcBrQH/AUoBhAGqAf8BPgFkAZ4B/wE2AVoBkwH/AzoBYCAAATsBiwGlAf8BQQFoAZkB/wGQAbgB3QH/
+        AYkBsAHWAf8BMgFbAY0B/wFFAkYBfwGZAbsB4AH/AYABpwHNAf8BUAGLAbUB/wEvAT0BTQH/A1gB3ZwA
+        AWoBegGHAfkBZAGeAcQB/wFgAZoBwQH/AU4BiAGuAf8BOQFgAZoB/wEbAUIBaQH/AwABARwAAUYBnwG2
+        Af8BngHAAekB/wGtAdMB9QH/AZcBvgHmAf8BWQJdAdcDNQFVAagB0QH6Af8BmAG/AeUB/wFTAZgBywH/
+        ASYBIwEhAf8DWAHvnAABbAF4AZsB/AGdAb8B4QH/AYgBrAHTAf8BVwGSAbcB/wE5AVMBgQH/AicBJgH/
+        A0cBghwAAVMBrAHDAf8BsgHSAfEB/wHaAfgB/gH/AZwBwwHqAf8CWAFcAdEDHwEtAWQBZgFlAf8DZwH/
+        AUwBSgFHAf8BQAI/Af8DVAGmnAADXgHVAacBywHwAf8BlgG4AdwB/wFgAZoBwQH/ATUBRwFbAf8CJwEm
+        Af8DTQGRHAADWQHHAUEBlgGmAf8BLgFkAZEB/wFoAaQBxgH/AlgBYQHmBAADJgE4A14B3QNfAfsDUwGq
+        oAADNwFbAV0BYAFiAf8BWAFbAV8B/wFJAUwBTgH/AUUBRAFCAf8DLgH/AxQBHBwAAwUBBwHWA/8BngHb
+        AeoB/wFqAcUB0gH/AVoBugHQAf8DPgFrtAADYgHpA2EB/wNXAf8DQwH/A10B7SgAAyMBMwMfASz/AKkA
         AUIBTQE+BwABPgMAASgDAAFAAwABEAMAAQEBAAEBBQABgBcAA/8BAAH8AQcB/wGBBAAB8AEDAf4FAAHg
         AQEB4gUAAeABAQGABQAB4AEDAQABAQQAAfABBwEAAQMEAAHwAQ8BgAEHBAAB+AEfAYABDwQAAfABPwHA
         AQcEAAHwAT8BwAEHBAAB8AEfAcABBwQAAfABHwHAAQcEAAHwAR8BwQEPBAAB8AEfAcAB/wQAAfgBPwHz
         Af8EAAT/BAAL
 </value>
   </data>
-  <metadata name="nameLookUpper.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="userList.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;userList.Name" xml:space="preserve">
+    <value>userList</value>
+  </data>
+  <data name="&gt;&gt;userList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userList.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;userList.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Group or user names:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="removeBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="removeBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="removeBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 3</value>
+  </data>
+  <data name="removeBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 22</value>
+  </data>
+  <data name="removeBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="removeBtn.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="&gt;&gt;removeBtn.Name" xml:space="preserve">
+    <value>removeBtn</value>
+  </data>
+  <data name="&gt;&gt;removeBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;removeBtn.Parent" xml:space="preserve">
+    <value>addRemoveLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;removeBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="addBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="addBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 3</value>
+  </data>
+  <data name="addBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 22</value>
+  </data>
+  <data name="addBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="addBtn.Text" xml:space="preserve">
+    <value>Add...</value>
+  </data>
+  <data name="&gt;&gt;addBtn.Name" xml:space="preserve">
+    <value>addBtn</value>
+  </data>
+  <data name="&gt;&gt;addBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addBtn.Parent" xml:space="preserve">
+    <value>addRemoveLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;addBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="permissionsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="permissionsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="permissionsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="permissionsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="permissionsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="permissionsLabel.Text" xml:space="preserve">
+    <value>Permissions:</value>
+  </data>
+  <data name="permissionsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomLeft</value>
+  </data>
+  <data name="&gt;&gt;permissionsLabel.Name" xml:space="preserve">
+    <value>permissionsLabel</value>
+  </data>
+  <data name="&gt;&gt;permissionsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;permissionsLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;permissionsLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 9</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Allow</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 9</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Deny</value>
+  </data>
+  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="objNameText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 3</value>
+  </data>
+  <data name="objNameText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="objNameText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="objNameText.Text" xml:space="preserve">
+    <value>&lt;Empty&gt;</value>
+  </data>
+  <data name="&gt;&gt;objNameText.Name" xml:space="preserve">
+    <value>objNameText</value>
+  </data>
+  <data name="&gt;&gt;objNameText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DisplayOnlyTextBox, SecurityEditor, Version=2.1.0.22222, Culture=neutral, PublicKeyToken=e5294862af64dfe6</value>
+  </data>
+  <data name="&gt;&gt;objNameText.Parent" xml:space="preserve">
+    <value>nameLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;objNameText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 11</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Object name:</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>nameLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="advSettingsLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="advSettingsLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="advancedBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="advancedBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 3</value>
+  </data>
+  <data name="advancedBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="advancedBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="advancedBtn.Text" xml:space="preserve">
+    <value>&amp;Advanced</value>
+  </data>
+  <data name="&gt;&gt;advancedBtn.Name" xml:space="preserve">
+    <value>advancedBtn</value>
+  </data>
+  <data name="&gt;&gt;advancedBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;advancedBtn.Parent" xml:space="preserve">
+    <value>advSettingsLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;advancedBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 6</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 26</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>For special permissions or advanced settings, click Advanced.</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>advSettingsLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="advSettingsLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="advSettingsLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 403</value>
+  </data>
+  <data name="advSettingsLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="advSettingsLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="advSettingsLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 35</value>
+  </data>
+  <data name="advSettingsLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;advSettingsLayoutPanel.Name" xml:space="preserve">
+    <value>advSettingsLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;advSettingsLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;advSettingsLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;advSettingsLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="advSettingsLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="advancedBtn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="editPermLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="editPermLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="editBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="editBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 3</value>
+  </data>
+  <data name="editBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="editBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="editBtn.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="&gt;&gt;editBtn.Name" xml:space="preserve">
+    <value>editBtn</value>
+  </data>
+  <data name="&gt;&gt;editBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editBtn.Parent" xml:space="preserve">
+    <value>editPermLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;editBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>To change permissions, click Edit.</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>editPermLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="editPermLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="editPermLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 196</value>
+  </data>
+  <data name="editPermLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="editPermLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="editPermLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 28</value>
+  </data>
+  <data name="editPermLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;editPermLayoutPanel.Name" xml:space="preserve">
+    <value>editPermLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;editPermLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editPermLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;editPermLayoutPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="editPermLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="editBtn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="permissionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>353, 113</value>
+  </data>
+  <data name="permissionList.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="permissionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="permissionList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 249</value>
+  </data>
+  <data name="permissionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 5, 0, 5</value>
+  </data>
+  <data name="permissionList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 151</value>
+  </data>
+  <data name="permissionList.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;permissionList.Name" xml:space="preserve">
+    <value>permissionList</value>
+  </data>
+  <data name="&gt;&gt;permissionList.Type" xml:space="preserve">
+    <value>SecurityEditor.PermissionList, SecurityEditor, Version=2.1.0.22222, Culture=neutral, PublicKeyToken=e5294862af64dfe6</value>
+  </data>
+  <data name="&gt;&gt;permissionList.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;permissionList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nameLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nameLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="nameLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="nameLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="nameLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="nameLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="nameLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 27</value>
+  </data>
+  <data name="nameLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="nameLayoutPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;nameLayoutPanel.Name" xml:space="preserve">
+    <value>nameLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;nameLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nameLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;nameLayoutPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nameLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="objNameText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="addRemoveLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="addRemoveLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="addRemoveLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="addRemoveLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 168</value>
+  </data>
+  <data name="addRemoveLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="addRemoveLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="addRemoveLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 28</value>
+  </data>
+  <data name="addRemoveLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;addRemoveLayoutPanel.Name" xml:space="preserve">
+    <value>addRemoveLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;addRemoveLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addRemoveLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;addRemoveLayoutPanel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="addRemoveLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="addBtn" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="removeBtn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel5.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 224</value>
+  </data>
+  <data name="tableLayoutPanel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 22</value>
+  </data>
+  <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="permissionsLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,53,Absolute,53" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="learnAboutLink.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="learnAboutLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 444</value>
+  </data>
+  <data name="learnAboutLink.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 3, 0</value>
+  </data>
+  <data name="learnAboutLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 13</value>
+  </data>
+  <data name="learnAboutLink.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="learnAboutLink.Text" xml:space="preserve">
+    <value>Learn about access control and permissions</value>
+  </data>
+  <data name="&gt;&gt;learnAboutLink.Name" xml:space="preserve">
+    <value>learnAboutLink</value>
+  </data>
+  <data name="&gt;&gt;learnAboutLink.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;learnAboutLink.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;learnAboutLink.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 458</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="advSettingsLayoutPanel" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="editPermLayoutPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="permissionList" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nameLayoutPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="userList" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="addRemoveLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel5" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="learnAboutLink" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,45,AutoSize,0,AutoSize,0,AutoSize,0,Percent,55,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>144, 17</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>TableOfContents</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 458</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userImageList.Name" xml:space="preserve">
+    <value>userImageList</value>
+  </data>
+  <data name="&gt;&gt;userImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Name" xml:space="preserve">
+    <value>helpProvider</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SecurityProperties</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

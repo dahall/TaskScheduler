@@ -1199,8 +1199,7 @@ namespace Microsoft.Win32.TaskScheduler
 				this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)priorSetting);
 				return;
 			}
-			taskRestartOnIdleCheck.Enabled = taskRunLevelCheck.Enabled =
-				taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
+			taskRunLevelCheck.Enabled = taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
 				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
@@ -1282,17 +1281,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void UpdateIdleSettingsControls()
 		{
-			bool isSet = taskIdleDurationCheck.Checked;
-			bool alreadyOnAssigment = onAssignment;
-			bool idleEnabled = isSet ? editable : false;
+			bool idleEnabled = taskIdleDurationCheck.Checked ? editable : false;
 			taskIdleDurationCombo.Enabled = taskIdleWaitTimeoutLabel.Enabled = 
 				taskIdleWaitTimeoutCombo.Enabled = taskStopOnIdleEndCheck.Enabled = idleEnabled;
-			taskRestartOnIdleCheck.Enabled = idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
-			onAssignment = true;
-			taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-			taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
-			if (!alreadyOnAssigment)
-				onAssignment = false;
+			taskRestartOnIdleCheck.Enabled = v2 && idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
 		}
 
 		private void UpdateUnifiedSchedulingEngineControls()

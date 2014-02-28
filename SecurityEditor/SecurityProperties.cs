@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Windows.Forms;
@@ -15,14 +14,21 @@ namespace SecurityEditor
 		private SecurityIdentifier curUser = null;
 		private bool editable;
 		private string name = "";
-		private string sddl;
-		private NativeObjectSecurity sec;
+		private CommonObjectSecurity sec;
 
 		public SecurityProperties()
 		{
 			InitializeComponent();
+			userImageList.Images.Add(Properties.Resources.User);
+			userImageList.Images.Add(Properties.Resources.Group);
 			Editable = false;
+			helpProvider.HelpNamespace = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Help", "mui", System.Globalization.CultureInfo.CurrentUICulture.LCID.ToString(), "aclui.chm");
 		}
+
+		/// <summary>
+		/// Occurs when any value on this control changes
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		[DefaultValue(false)]
 		public bool Editable
@@ -32,6 +38,7 @@ namespace SecurityEditor
 			{
 				this.addRemoveLayoutPanel.Visible = value;
 				this.editPermLayoutPanel.Visible = this.advSettingsLayoutPanel.Visible = !value;
+				this.permissionList.Enabled = value;
 				editable = value;
 			}
 		}
@@ -46,12 +53,13 @@ namespace SecurityEditor
 				{
 					name = value;
 					this.objNameText.Text = name;
+					this.nameLayoutPanel.Visible = this.objNameText.TextLength > 0;
 				}
 			}
 		}
 
-		[DefaultValue(null)]
-		public NativeObjectSecurity ObjectSecurity
+		[DefaultValue(null), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public CommonObjectSecurity ObjectSecurity
 		{
 			get { return sec; }
 			set
@@ -67,19 +75,59 @@ namespace SecurityEditor
 		[DefaultValue((string)null)]
 		public string TargetComputer { get; set; }
 
-		private void UpdateUI()
+		/// <summary>
+		/// Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" /> event.
+		/// </summary>
+		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+		protected override void OnHandleCreated(EventArgs e)
 		{
-			if (nameLookUpper.IsBusy)
-				nameLookUpper.CancelAsync();
-			var list = new System.Collections.Generic.List<SecurityIdentifier>();
-			foreach (AccessRule rule in sec.GetAccessRules(true, true, typeof(SecurityIdentifier)))
+			base.OnHandleCreated(e);
+			if (!this.IsDesignMode())
+				editBtn.SetElevationRequiredState(true);
+			//var parentBackColor = this.GetTrueParentBackColor();
+			//objNameText.BackColor = parentBackColor;
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:PropertyChanged" /> event.
+		/// </summary>
+		/// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+		protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+		{
+			var h = this.PropertyChanged;
+			if (h != null)
+				h(this, e);
+		}
+
+		private void addBtn_Click(object sender, EventArgs e)
+		{
+			string acctName = string.Empty, ssid; bool isGroup, isService;
+			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out ssid))
 			{
-				if (list.Find(delegate(SecurityIdentifier s) { return s.Equals(rule.IdentityReference); }) == null)
-					list.Add((SecurityIdentifier)rule.IdentityReference);
+				SecurityIdentifier sid = new SecurityIdentifier(ssid);
+				bool modified;
+				AccessRule aRule = sec.AccessRuleFactory(sid, int.MaxValue, false, InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow);
+				sec.ModifyAccessRule(AccessControlModification.Add, aRule, out modified);
+				var lvi = BuildUserItem(sid);
+				if (!this.userList.Items.ContainsKey(lvi.Text))
+				{
+					lvi = this.userList.Items.Add(lvi);
+					lvi.Selected = true;
+					OnPropertyChanged(new PropertyChangedEventArgs("AccessRule"));
+				}
 			}
-			this.userList.Items.Clear();
-			this.userList.Items.AddRange(list.ConvertAll<ListViewItem>(BuildUserItem).ToArray());
-			//nameLookUpper.RunWorkerAsync(list.ToArray());
+		}
+
+		private void advancedBtn_Click(object sender, EventArgs e)
+		{
+			using (var dlg = new AdvancedSecuritySettingsDialog())
+			{
+				dlg.Initialize(ObjectSecurity, ObjectName, TargetComputer, false);
+				if (dlg.ShowDialog(this) == DialogResult.OK)
+				{
+					this.ObjectSecurity = dlg.ObjectSecurity;
+				}
+			}
 		}
 
 		private ListViewItem BuildUserItem(SecurityIdentifier s)
@@ -96,59 +144,33 @@ namespace SecurityEditor
 			return new ListViewItem(s.Value, iconIndex) { Tag = s };
 		}
 
-		private void addBtn_Click(object sender, EventArgs e)
+		private void editBtn_Click(object sender, EventArgs e)
 		{
-			string acctName = string.Empty, ssid; bool isGroup, isService;
-			if (Microsoft.Win32.TaskScheduler.HelperMethods.SelectAccount(this, this.TargetComputer, ref acctName, out isGroup, out isService, out ssid))
+			using (var dlg = new SecurityPropertiesDialog())
 			{
-				SecurityIdentifier sid = new SecurityIdentifier(ssid);
-				bool modified;
-				AccessRule aRule = sec.AccessRuleFactory(sid, int.MaxValue, false, InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow);
-				sec.ModifyAccessRule(AccessControlModification.Add, aRule, out modified);
-				var lvi = BuildUserItem(sid);
-				if (!this.userList.Items.ContainsKey(lvi.Text))
-					this.userList.Items.Add(lvi);
-				var aed = new AceEditor() { ObjectName = this.ObjectName, ObjectSecurity = this.ObjectSecurity };
-				if (aed.ShowDialog(this) == DialogResult.OK)
+				dlg.Initialize(this.ObjectSecurity, this.ObjectName, this.TargetComputer, true);
+				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{
-					// TODO: Figure out what to do if cancelled
+					this.ObjectSecurity = dlg.secProps.ObjectSecurity;
 				}
 			}
 		}
 
-		protected override void OnHandleCreated(EventArgs e)
+		private void learnAboutLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			base.OnHandleCreated(e);
-			if (!this.IsDesignMode())
-				editBtn.SetElevationRequiredState(true);
-			var parentBackColor = this.GetTrueParentBackColor();
-			objNameText.BackColor = parentBackColor;
+			this.OnHelpRequested(new HelpEventArgs(System.Drawing.Point.Empty));
 		}
 
-		protected override void OnHandleDestroyed(EventArgs e)
+		private void permissionList_ItemChanged(object sender, CheckedColumnList.ItemChangedEventArgs e)
 		{
-			if (nameLookUpper.IsBusy)
-				nameLookUpper.CancelAsync();
+			OnPropertyChanged(new PropertyChangedEventArgs("PermissionList"));
 		}
 
-		private void nameLookUpper_DoWork(object sender, DoWorkEventArgs e)
+		private void permissionList_SizeChanged(object sender, EventArgs e)
 		{
-			SecurityIdentifier[] sids = (SecurityIdentifier[])e.Argument;
-			for (int i = 0; i < sids.Length; i++)
-			{
-				if (nameLookUpper.CancellationPending)
-					break;
-				string name = sids[i].Translate(typeof(NTAccount)).Value;
-				if (!nameLookUpper.CancellationPending)
-					nameLookUpper.ReportProgress(i, name);
-			}
-			e.Cancel = true;
-		}
-
-		private void nameLookUpper_ProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			userList.Items[e.ProgressPercentage].Tag = userList.Items[e.ProgressPercentage].Text;
-			userList.Items[e.ProgressPercentage].Text = e.UserState.ToString();
+			var margin = tableLayoutPanel5.Margin;
+			margin.Right = permissionList.VerticalScroll.Visible ? 3 + SystemInformation.VerticalScrollBarWidth : 3;
+			tableLayoutPanel5.Margin = margin;
 		}
 
 		private void removeBtn_Click(object sender, EventArgs e)
@@ -166,6 +188,21 @@ namespace SecurityEditor
 			userList.Items.RemoveAt(curSel);
 		}
 
+		private void UpdateUI()
+		{
+			var list = new System.Collections.Generic.List<SecurityIdentifier>();
+			foreach (AccessRule rule in sec.GetAccessRules(true, true, typeof(SecurityIdentifier)))
+			{
+				if (list.Find(delegate(SecurityIdentifier s) { return s.Equals(rule.IdentityReference); }) == null)
+					list.Add((SecurityIdentifier)rule.IdentityReference);
+			}
+			this.userList.Items.Clear();
+			this.userList.Items.AddRange(list.ConvertAll<ListViewItem>(BuildUserItem).ToArray());
+			this.permissionList.Initialize(sec);
+			if (list.Count > 0)
+				this.userList.Items[0].Selected = true;
+		}
+
 		private void userList_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (userList.SelectedIndices.Count > 0)
@@ -173,49 +210,19 @@ namespace SecurityEditor
 				removeBtn.Enabled = true;
 				var s = userList.SelectedItems[0].Tag;
 				curUser = s is AccountInfo ? ((AccountInfo)s).sid : (SecurityIdentifier)s;
-				permissionList.Initialize(sec, curUser, SecurityEditor.SecurityRuleType.Access);
+				permissionList.CurrentSid = curUser;
 			}
 			else
 			{
 				curUser = null;
 				removeBtn.Enabled = false;
-				permissionList.ResetList(SecurityEditor.SecurityRuleType.Access);
+				permissionList.CurrentSid = null;
 			}
 		}
 
-		private void editBtn_Click(object sender, EventArgs e)
+		private void userList_SizeChanged(object sender, EventArgs e)
 		{
-			using (var dlg = new SecurityPropertiesDialog())
-			{
-				dlg.Initialize(this.ObjectName, this.ObjectSecurity, this.TargetComputer, true);
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-				{
-					this.ObjectSecurity = dlg.secProps.ObjectSecurity;
-				}
-			}
-		}
-
-		private void advancedBtn_Click(object sender, EventArgs e)
-		{
-			using (var dlg = new AdvancedSecuritySettingsDialog() { Editable = false, ObjectName = this.ObjectName, ObjectSecurity = this.ObjectSecurity })
-			{
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-				{
-					this.ObjectSecurity = dlg.ObjectSecurity;
-				}
-			}
-		}
-
-		private void learnAboutLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-
-		}
-
-		private void permissionList_SizeChanged(object sender, EventArgs e)
-		{
-			var margin = tableLayoutPanel5.Margin;
-			margin.Right = permissionList.VerticalScroll.Visible ? 3 + SystemInformation.VerticalScrollBarWidth : 3;
-			tableLayoutPanel5.Margin = margin;
+			columnHeader1.Width = userList.ClientRectangle.Width - 1;
 		}
 	}
 }

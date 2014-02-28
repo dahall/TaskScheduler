@@ -1,13 +1,31 @@
 ﻿using System.ComponentModel;
+using System.Security.AccessControl;
 using System.Windows.Forms;
 
 namespace SecurityEditor
 {
-	public partial class SecurityPropertiesDialog : Form
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
+	Description("Dialog that allows editing of a Security Descriptor."),
+	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+	DesignTimeVisible(true)]
+	public partial class SecurityPropertiesDialog :
+#if DEBUG
+		Form
+#else
+		DialogBase
+#endif
 	{
+		private SecuredObject so;
+
 		public SecurityPropertiesDialog()
 		{
 			InitializeComponent();
+		}
+
+		[DefaultValue(false), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool Dirty
+		{
+			get { return applyBtn.Enabled; }
 		}
 
 		[DefaultValue(false)]
@@ -21,28 +39,37 @@ namespace SecurityEditor
 			}
 		}
 
-		public void Initialize(System.IO.FileInfo file, bool editable = true)
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public System.Security.AccessControl.CommonObjectSecurity ObjectSecurity
 		{
-			this.Initialize(file.FullName, file.GetAccessControl(), null, editable);
+			get { return secProps.ObjectSecurity; }
+			set { secProps.ObjectSecurity = value; }
 		}
 
-		public void Initialize(string objectName, System.Security.AccessControl.NativeObjectSecurity objSec, string targetComputer = null, bool editable = true)
+		public void Initialize(object obj, bool editable = true)
 		{
+			so = new SecuredObject(obj);
+			Initialize(so.ObjectSecurity, so.DisplayName, so.TargetServer, editable);
+		}
+
+		public void Initialize(CommonObjectSecurity objSec, string objectName = null, string targetComputer = null, bool editable = true)
+		{
+			so = new SecuredObject(objSec);
 			secProps.ObjectName = objectName;
 			secProps.TargetComputer = targetComputer;
 			secProps.ObjectSecurity = objSec;
 			this.Editable = editable;
 		}
 
-		public void Initialize(Microsoft.Win32.TaskScheduler.Task task, bool editable = true)
+		private void applyBtn_Click(object sender, System.EventArgs e)
 		{
-			this.Initialize(task.Name, new System.Security.AccessControl.TaskSecurity(task), task.TaskService.TargetServer, editable);
+			so.Persist();
+			applyBtn.Enabled = false;
 		}
 
-		public System.Security.AccessControl.NativeObjectSecurity ObjectSecurity
+		private void cancelBtn_Click(object sender, System.EventArgs e)
 		{
-			get { return secProps.ObjectSecurity; }
-			set { secProps.ObjectSecurity = value; }
+			Close();
 		}
 
 		private void okBtn_Click(object sender, System.EventArgs e)
@@ -51,14 +78,9 @@ namespace SecurityEditor
 			Close();
 		}
 
-		private void cancelBtn_Click(object sender, System.EventArgs e)
+		private void secProps_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			Close();
-		}
-
-		private void applyBtn_Click(object sender, System.EventArgs e)
-		{
-
+			applyBtn.Enabled = true;
 		}
 	}
 }

@@ -6,19 +6,20 @@ namespace SecurityEditor
 	internal partial class AceEditor : Form
 	{
 		private string objName;
-		private NativeObjectSecurity sec;
+		private CommonObjectSecurity sec;
 
 		public AceEditor()
 		{
 			InitializeComponent();
 		}
 
-		public NativeObjectSecurity ObjectSecurity
+		public CommonObjectSecurity ObjectSecurity
 		{
 			get { return sec; }
 			set
 			{
 				sec = value;
+				accessPermissionList1.Initialize(sec);
 			}
 		}
 
@@ -42,7 +43,7 @@ namespace SecurityEditor
 			{
 				var si = new System.Security.Principal.SecurityIdentifier(sid);
 				nameText.Text = acctName;
-				accessPermissionList1.Initialize(sec, si, Display);
+				accessPermissionList1.CurrentSid = si;
 			}
 		}
 

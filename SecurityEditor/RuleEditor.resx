@@ -117,68 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessControlTypeAllow" xml:space="preserve">
-    <value>Allow</value>
-  </data>
-  <data name="AccessControlTypeDeny" xml:space="preserve">
-    <value>Deny</value>
-  </data>
-  <data name="FileSystem" xml:space="preserve">
-    <value>This folder only</value>
-  </data>
-  <data name="FileSystemCI" xml:space="preserve">
-    <value>This folder and subfolders</value>
-  </data>
-  <data name="FileSystemCIOI" xml:space="preserve">
-    <value>This folder, subfolders and files</value>
-  </data>
-  <data name="FileSystemIOCI" xml:space="preserve">
-    <value>Subfolders only</value>
-  </data>
-  <data name="FileSystemIOCIOI" xml:space="preserve">
-    <value>Subfolders and files only</value>
-  </data>
-  <data name="FileSystemIOOI" xml:space="preserve">
-    <value>Files only</value>
-  </data>
-  <data name="FileSystemOI" xml:space="preserve">
-    <value>This folder and files</value>
-  </data>
-  <data name="FileSystemRightsFullControl" xml:space="preserve">
-    <value>Full control</value>
-  </data>
-  <data name="FileSystemRightsModify" xml:space="preserve">
-    <value>Modify</value>
-  </data>
-  <data name="FileSystemRightsRead" xml:space="preserve">
-    <value>Read</value>
-  </data>
-  <data name="FileSystemRightsReadAndExecute" xml:space="preserve">
-    <value>Read &amp; execute</value>
-  </data>
-  <data name="FileSystemRightsReadWriteExecute" xml:space="preserve">
-    <value>Read, write &amp; execute</value>
-  </data>
-  <data name="FileSystemRightsSynchronize" xml:space="preserve">
-    <value>Synchronize</value>
-  </data>
-  <data name="FileSystemRightsWrite" xml:space="preserve">
-    <value>Write</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Group" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\group.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\information.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Special" xml:space="preserve">
-    <value>Special</value>
-  </data>
-  <data name="SpecialPermissions" xml:space="preserve">
-    <value>Special permissions</value>
-  </data>
-  <data name="User" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\user.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
