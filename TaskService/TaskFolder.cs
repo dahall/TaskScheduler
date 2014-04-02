@@ -309,19 +309,29 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="Task" /> instance that represents the new task.
 		/// </returns>
-		/// <exception cref="NotV1SupportedException">
-		/// This LogonType is not supported on Task Scheduler 1.0.
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// Path;Task names may not include any characters which are invalid for file names.
+		/// or
+		/// Path;Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.
+		/// </exception>
+		/// <exception cref="NotV1SupportedException">This LogonType is not supported on Task Scheduler 1.0.
 		/// or
 		/// Security settings are not available on Task Scheduler 1.0.
 		/// or
 		/// Registration triggers are not available on Task Scheduler 1.0.
 		/// or
-		/// Xml validation not available on Task Scheduler 1.0.
-		/// </exception>
+		/// Xml validation not available on Task Scheduler 1.0.</exception>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
 				return new Task(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
+
+			// Check for V1 invalid task names
+			string invChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+			if (System.Text.RegularExpressions.Regex.IsMatch(Path, @"[" + invChars + @"]"))
+				throw new ArgumentOutOfRangeException("Path", "Task names may not include any characters which are invalid for file names.");
+			if (System.Text.RegularExpressions.Regex.IsMatch(Path, @"\.[^" + invChars + @"]{0,3}\z"))
+				throw new ArgumentOutOfRangeException("Path", "Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.");
 
 			// Adds ability to set a password for a V1 task. Provided by Arcao.
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
