@@ -59,7 +59,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="identity">The user or group the rule applies to. Must be of type <see cref="SecurityIdentifier"/> or a type such as <see cref="NTAccount"/> that can be converted to type <see cref="SecurityIdentifier"/>.</param>
 		/// <param name="eventRights">A bitwise combination of <see cref="TaskRights"/> values specifying the rights allowed or denied.</param>
 		/// <param name="type">One of the <see cref="AccessControlType"/> values specifying whether the rights are allowed or denied.</param>
-		[TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
 		public TaskAccessRule(IdentityReference identity, TaskRights eventRights, AccessControlType type)
 			: this(identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
 		{
@@ -76,7 +75,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 		}
 
-		[TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
 		internal TaskAccessRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
 			: base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
 		{
@@ -105,13 +103,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="identity">The user or group the rule applies to. Must be of type <see cref="SecurityIdentifier"/> or a type such as <see cref="NTAccount"/> that can be converted to type <see cref="SecurityIdentifier"/>.</param>
 		/// <param name="eventRights">A bitwise combination of <see cref="TaskRights"/> values specifying the kinds of access to audit.</param>
 		/// <param name="type">A bitwise combination of <see cref="AuditFlags"/> values specifying whether to audit success, failure, or both.</param>
-		[TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
 		public TaskAuditRule(IdentityReference identity, TaskRights eventRights, AuditFlags flags)
 			: this(identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
 		{
 		}
 
-		[TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
 		internal TaskAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
 			: base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
 		{

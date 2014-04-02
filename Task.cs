@@ -1248,35 +1248,25 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			const ushort TASK_MAX_RUN_TIMES = 1440;
 
-			TaskScheduler.V1Interop.SystemTime stStart = new TaskScheduler.V1Interop.SystemTime(start);
-			TaskScheduler.V1Interop.SystemTime stEnd = new TaskScheduler.V1Interop.SystemTime(end);
-			IntPtr runTimes = IntPtr.Zero, st;
+			TaskScheduler.V1Interop.SystemTime stStart = start;
+			TaskScheduler.V1Interop.SystemTime stEnd = end;
+			TaskScheduler.V1Interop.SystemTime[] runTimes;
 			DateTime[] ret = new DateTime[0];
 			try
 			{
 				if (v2Task != null)
-					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
+					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, out runTimes);
 				else
 				{
 					ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
-					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
+					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, out runTimes);
 					count = count1;
 				}
-				ret = new DateTime[count];
-				int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
-				for (int i = 0; i < count; i++)
-				{
-					st = new IntPtr(runTimes.ToInt64() + (i * stSize));
-					ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
-				}
+				ret = Array.ConvertAll<TaskScheduler.V1Interop.SystemTime, DateTime>(runTimes, delegate(TaskScheduler.V1Interop.SystemTime st) { return st; });
 			}
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes failed: Error {0}.", ex));
-			}
-			finally
-			{
-				Marshal.FreeCoTaskMem(runTimes);
 			}
 			System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes ({0}): Returned {1} items from {2} to {3}.", v2Task != null ? "V2" : "V1", count, stStart, stEnd));
 			return ret;
@@ -2817,13 +2807,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static object GetTaskData(V1Interop.ITask v1Task)
 		{
-			ushort DataLen;
-			IntPtr Data;
 			try
 			{
-				v1Task.GetWorkItemData(out DataLen, out Data);
-				byte[] bytes = new byte[DataLen];
-				Marshal.Copy(Data, bytes, 0, DataLen);
+				ushort DataLen;
+				byte[] bytes;
+				v1Task.GetWorkItemData(out DataLen, out bytes);
 				System.IO.MemoryStream stream = new System.IO.MemoryStream(bytes, false);
 				System.Runtime.Serialization.Formatters.Binary.BinaryFormatter b = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 				return b.Deserialize(stream);

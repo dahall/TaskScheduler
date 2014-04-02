@@ -359,6 +359,8 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 			return new DateTime(st.Year, st.Month, st.Day, st.Hour, st.Minute, st.Second, st.Milliseconds, DateTimeKind.Local);
 		}
 
+		public static implicit operator SystemTime(DateTime dt) { return new SystemTime(dt); }
+
 		public static bool operator ==(SystemTime s1, SystemTime s2)
 		{
 			return (s1.Year == s2.Year && s1.Month == s2.Month && s1.Day == s2.Day && s1.Hour == s2.Hour && s1.Minute == s2.Minute && s1.Second == s2.Second && s1.Milliseconds == s2.Milliseconds);
@@ -418,7 +420,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	internal interface IEnumWorkItems
 	{
 		[PreserveSig()]
-		int Next([In] uint RequestCount, [Out] out System.IntPtr Names, [Out] out uint Fetched);
+		int Next([In] uint RequestCount, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.LPWStr, SizeParamIndex=2)] out string[] Names, [Out] out uint Fetched);
 		void Skip([In] uint Count);
 		void Reset();
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -474,7 +476,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		[return: MarshalAs(UnmanagedType.Interface)]
 		ITaskTrigger GetTrigger([In] ushort TriggerIndex);
 		CoTaskMemString GetTriggerString([In] ushort TriggerIndex);
-		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] ref SystemTime End, ref ushort Count, [In, Out] ref System.IntPtr TaskTimes);
+		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] ref SystemTime End, ref ushort Count, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStruct, SizeParamIndex = 2)] out SystemTime[] TaskTimes);
 		[return: MarshalAs(UnmanagedType.Struct)]
 		SystemTime GetNextRunTime();
 		void SetIdleWait([In] ushort IdleMinutes, [In] ushort DeadlineMinutes);
@@ -491,7 +493,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		void SetCreator([In, MarshalAs(UnmanagedType.LPWStr)] string Creator);
 		CoTaskMemString GetCreator();
 		void SetWorkItemData([In] ushort DataLen, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0, ArraySubType = UnmanagedType.U1)] byte[] Data);
-		void GetWorkItemData([Out] out ushort DataLen, [Out] out System.IntPtr Data);
+		void GetWorkItemData(out ushort DataLen, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1, SizeParamIndex = 0)] out byte[] Data);
 		void SetErrorRetryCount([In] ushort RetryCount);
 		ushort GetErrorRetryCount();
 		void SetErrorRetryInterval([In] ushort RetryInterval);
