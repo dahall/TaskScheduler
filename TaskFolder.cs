@@ -199,7 +199,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task folder described by the current <see cref="TaskFolder"/> object.
 		/// </summary>
-		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
+		/// <param name="includeSections">One of the <see cref="System.Security.AccessControl.AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
 		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections)
 		{
@@ -268,7 +268,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task RegisterTask(string Path, string XmlText, TaskCreation createType = TaskCreation.CreateOrUpdate, string UserId = null, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
-				return new Task(this.TaskService, v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
+				return Task.CreateTask(this.TaskService, v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
 
 			try
 			{
@@ -324,7 +324,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
-				return new Task(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
+				return Task.CreateTask(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
 
 			// Check for V1 invalid task names
 			string invChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));

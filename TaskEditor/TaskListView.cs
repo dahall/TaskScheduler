@@ -115,14 +115,16 @@ namespace Microsoft.Win32.TaskScheduler
 		private ListViewItem LVIFromTask(Task task)
 		{
 			bool disabled = task.State == TaskState.Disabled;
+			TaskDefinition td = null;
+			try { td = task.Definition; } catch { }
 			ListViewItem lvi = new ListViewItem(new string[] {
 				task.Name,
 				TaskEnumGlobalizer.GetString(task.State),
-				task.Definition.Triggers.ToString(),
+				td == null ? "" : task.Definition.Triggers.ToString(),
 				disabled || task.NextRunTime < DateTime.Now ? string.Empty : task.NextRunTime.ToString("G"),
 				task.LastRunTime == DateTime.MinValue ? EditorProperties.Resources.Never :  task.LastRunTime.ToString("G"),
 				task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult),
-				task.Definition.RegistrationInfo.Author,
+				td == null ? "" : task.Definition.RegistrationInfo.Author,
 				string.Empty
 				}, 0);
 			return lvi;

@@ -55,7 +55,9 @@ namespace TestTaskService
 		{
 			if (itemMenuStrip.Enabled != (e.Task != null))
 				itemMenuStrip.Enabled = (e.Task != null);
-			if (e.Task == null)
+			bool hasValidTask = true;
+			try { var d = e.Task.Definition; } catch { hasValidTask = false; }
+			if (!hasValidTask)
 			{
 				TaskPropertiesControl.Hide();
 				selTask = null;

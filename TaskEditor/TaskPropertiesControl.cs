@@ -14,6 +14,8 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
 
+		private static SecEdShim secEd = SecEdShim.GetNew();
+
 		private AvailableTaskTabs availableTabs = AvailableTaskTabs.All;
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
@@ -71,10 +73,18 @@ namespace Microsoft.Win32.TaskScheduler
 			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
 			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 
+			// Settings for infoTab
+			if (secEd != null)
+			{
+				taskRegSDDLText.Width = taskRegSDDLText.Width - taskRegSDDLBtn.Width - 7;
+				taskRegSDDLBtn.Visible = true;
+			}
+
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
 
-			Editable = false;
+			// Initialize all the controls as not editable
+			InitControls(false);
 		}
 
 		/// <summary>
@@ -150,45 +160,14 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return editable; }
 			set
 			{
-				editable = value;
+				if (value && task != null && task.ReadOnly)
+					value = false;
 
-				// General tab
-				taskDescText.ReadOnly = !value;
-				changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = value;
-				SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
-
-				// Triggers tab
-				triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = value;
-				triggerListView.Enabled = value;
-
-				// Actions tab
-				actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = value;
-				actionListView.Enabled = actionUpButton.Visible = actionDownButton.Visible = value;
-
-				// Conditions tab
-				foreach (Control ctrl in conditionsTab.Controls)
-					foreach (Control sub in ctrl.Controls)
-						if (sub is CheckBox || sub is ComboBox)
-							sub.Enabled = value;
-
-				// Settings tab
-				foreach (Control ctrl in settingsTab.Controls)
-					ctrl.Enabled = value;
-
-				// Additions tab
-				foreach (Control ctrl in addPropTab.Controls)
-					ctrl.Enabled = value;
-
-				// Info tab
-				foreach (Control ctrl in regInfoTab.Controls)
-					ctrl.Enabled = value;
-
-				// If the task has already been set, then reset it to make sure all the items are enabled correctly
-				if (td != null)
-					this.TaskDefinition = td;
-
-				// Setup specific controls
-				taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
+				if (editable != value)
+				{
+					editable = value;
+					InitControls(value);
+				}
 			}
 		}
 
@@ -310,6 +289,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (task != null)
 				{
 					TaskService = task.TaskService;
+					if (task.ReadOnly)
+						this.Editable = false;
 					TaskDefinition = task.Definition;
 				}
 			}
@@ -713,6 +694,47 @@ namespace Microsoft.Win32.TaskScheduler
 			// Moved to historyTab_Intialize
 		}
 
+		private void InitControls(bool editable)
+		{
+			// General tab
+			taskDescText.ReadOnly = !editable;
+			changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = editable;
+			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
+
+			// Triggers tab
+			triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = editable;
+			triggerListView.Enabled = editable;
+
+			// Actions tab
+			actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editable;
+			actionListView.Enabled = actionUpButton.Visible = actionDownButton.Visible = editable;
+
+			// Conditions tab
+			foreach (Control ctrl in conditionsTab.Controls)
+				foreach (Control sub in ctrl.Controls)
+					if (sub is CheckBox || sub is ComboBox)
+						sub.Enabled = editable;
+
+			// Settings tab
+			foreach (Control ctrl in settingsTab.Controls)
+				ctrl.Enabled = editable;
+
+			// Additions tab
+			foreach (Control ctrl in addPropTab.Controls)
+				ctrl.Enabled = editable;
+
+			// Info tab
+			foreach (Control ctrl in regInfoTab.Controls)
+				ctrl.Enabled = editable;
+
+			// If the task has already been set, then reset it to make sure all the items are enabled correctly
+			if (td != null)
+				this.TaskDefinition = td;
+
+			// Setup specific controls
+			taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
+		}
+
 		private void InsertTab(int idx)
 		{
 			TabPage tab = tabPages[idx];
@@ -939,7 +961,7 @@ namespace Microsoft.Win32.TaskScheduler
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
-			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.HighestSupportedVersion.Minor;
+			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
 			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
 			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
 			switch (comp)
@@ -1181,7 +1203,7 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
 			try
 			{
-				if (td != null)
+				if (!onAssignment && td != null)
 					td.Validate(true);
 			}
 			catch (InvalidOperationException ex)
@@ -1485,15 +1507,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskRegSDDLBtn_Click(object sender, EventArgs e)
 		{
-			/*using (SecurityEditor.SecurityEditorDialog dlg = new SecurityEditor.SecurityEditorDialog()
+			secEd.Initialize(this.Task);
+			if (secEd.ShowDialog(this) == DialogResult.OK)
 			{
-				ObjectName = this.TaskName, 
-				SecurityDescriptorSddlForm = td.RegistrationInfo.SecurityDescriptorSddlForm
-			})
-			{
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-					td.RegistrationInfo.SecurityDescriptorSddlForm = dlg.SecurityDescriptorSddlForm;
-			}*/
+				td.RegistrationInfo.SecurityDescriptorSddlForm = secEd.SecurityDescriptorSddlForm;
+				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
+			}
 		}
 
 		private void taskRegDocText_Leave(object sender, EventArgs e)

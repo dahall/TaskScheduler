@@ -250,10 +250,13 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskEventLog"/> class.
+		/// Initializes a new instance of the <see cref="TaskEventLog" /> class.
 		/// </summary>
 		/// <param name="machineName">Name of the machine.</param>
-		/// <param name="taskPath">The task path. This can be retrieved using the <see cref="Task.Path"/> property.</param>
+		/// <param name="taskPath">The task path. This can be retrieved using the <see cref="Task.Path" /> property.</param>
+		/// <param name="domain">The domain.</param>
+		/// <param name="user">The user.</param>
+		/// <param name="password">The password.</param>
 		/// <exception cref="NotSupportedException">Thrown when instantiated on an OS prior to Windows Vista.</exception>
 		public TaskEventLog(string machineName, string taskPath, string domain = null, string user = null, string password = null)
 		{
@@ -270,11 +273,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskEventLog"/> class that looks at all task events from a specified time.
+		/// Initializes a new instance of the <see cref="TaskEventLog" /> class that looks at all task events from a specified time.
 		/// </summary>
 		/// <param name="startTime">The start time.</param>
 		/// <param name="taskName">Name of the task.</param>
 		/// <param name="machineName">Name of the machine (optional).</param>
+		/// <param name="domain">The domain.</param>
+		/// <param name="user">The user.</param>
+		/// <param name="password">The password.</param>
 		public TaskEventLog(DateTime startTime, string taskName = null, string machineName = null, string domain = null, string user = null, string password = null)
 		{
 			int[] numArray = new int[] { 100, 0x66, 0x67, 0x6b, 0x6c, 0x6d, 0x6f, 0x75, 0x76, 0x77, 120, 0x79, 0x7a, 0x7b, 0x7c, 0x7d };

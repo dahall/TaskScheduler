@@ -112,27 +112,27 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="generalTab.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="taskNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskNameLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 10</value>
   </data>
-  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>140, 17</value>
   </metadata>
   <data name="taskNameLabel.ShowHelp" type="System.Boolean, mscorlib">
@@ -151,7 +151,7 @@
     <value>taskNameLabel</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -184,7 +184,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -217,7 +217,7 @@
     <value>taskAuthorLabel</value>
   </data>
   <data name="&gt;&gt;taskAuthorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskAuthorLabel.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -250,7 +250,7 @@
     <value>taskDescLabel</value>
   </data>
   <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDescLabel.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -261,13 +261,13 @@
   <data name="taskNameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>55</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -286,49 +286,49 @@
     <value>columnHeader1</value>
   </data>
   <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
   <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
   <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
     <value>columnHeader4</value>
   </data>
   <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
     <value>columnHeader5</value>
   </data>
   <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
     <value>errorProvider</value>
   </data>
   <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpProvider.Name" xml:space="preserve">
     <value>helpProvider</value>
   </data>
   <data name="&gt;&gt;helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TaskPropertiesControl</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="taskNameText.IconPadding" type="System.Int32, mscorlib">
     <value>-18</value>
@@ -352,7 +352,7 @@
     <value>taskNameText</value>
   </data>
   <data name="&gt;&gt;taskNameText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskNameText.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -385,7 +385,7 @@
     <value>taskLocationText</value>
   </data>
   <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskLocationText.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -418,7 +418,7 @@
     <value>taskAuthorText</value>
   </data>
   <data name="&gt;&gt;taskAuthorText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskAuthorText.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -442,7 +442,7 @@
     <value>True</value>
   </data>
   <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 61</value>
+    <value>429, 78</value>
   </data>
   <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -451,7 +451,7 @@
     <value>taskDescText</value>
   </data>
   <data name="&gt;&gt;taskDescText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDescText.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -463,7 +463,7 @@
     <value>Top, Right</value>
   </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 324</value>
+    <value>168, 341</value>
   </data>
   <data name="taskVersionCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +478,7 @@
     <value>taskVersionCombo</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.22732, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -496,7 +496,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 327</value>
+    <value>81, 344</value>
   </data>
   <data name="taskVersionLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -517,7 +517,7 @@
     <value>taskVersionLabel</value>
   </data>
   <data name="&gt;&gt;taskVersionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskVersionLabel.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -532,7 +532,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskHiddenCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 326</value>
+    <value>6, 343</value>
   </data>
   <data name="taskHiddenCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -550,7 +550,7 @@
     <value>taskHiddenCheck</value>
   </data>
   <data name="&gt;&gt;taskHiddenCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -586,7 +586,7 @@
     <value>taskRunLevelCheck</value>
   </data>
   <data name="&gt;&gt;taskRunLevelCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -619,7 +619,7 @@
     <value>taskLocalOnlyCheck</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -652,7 +652,7 @@
     <value>taskLoggedOptionalRadio</value>
   </data>
   <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -685,7 +685,7 @@
     <value>taskLoggedOnRadio</value>
   </data>
   <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -712,7 +712,7 @@
     <value>taskPrincipalText</value>
   </data>
   <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -727,13 +727,13 @@
     <value>NoControl</value>
   </data>
   <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 34</value>
+    <value>334, 36</value>
   </data>
   <data name="changePrincipalButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 27</value>
+    <value>184, 25</value>
   </data>
   <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -745,7 +745,7 @@
     <value>changePrincipalButton</value>
   </data>
   <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -778,7 +778,7 @@
     <value>taskUserAcctLabel</value>
   </data>
   <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
     <value>taskSecurityGroupBox</value>
@@ -787,7 +787,7 @@
     <value>6</value>
   </data>
   <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 148</value>
+    <value>6, 165</value>
   </data>
   <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -805,7 +805,7 @@
     <value>taskSecurityGroupBox</value>
   </data>
   <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -841,7 +841,7 @@
     <value>generalTab</value>
   </data>
   <data name="&gt;&gt;generalTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;generalTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -859,7 +859,7 @@
     <value>NoControl</value>
   </data>
   <data name="triggerDeleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 341</value>
+    <value>174, 341</value>
   </data>
   <data name="triggerDeleteButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -877,7 +877,7 @@
     <value>triggerDeleteButton</value>
   </data>
   <data name="&gt;&gt;triggerDeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerDeleteButton.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -892,7 +892,7 @@
     <value>NoControl</value>
   </data>
   <data name="triggerEditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 341</value>
+    <value>90, 341</value>
   </data>
   <data name="triggerEditButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -910,7 +910,7 @@
     <value>triggerEditButton</value>
   </data>
   <data name="&gt;&gt;triggerEditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerEditButton.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -943,7 +943,7 @@
     <value>triggerNewButton</value>
   </data>
   <data name="&gt;&gt;triggerNewButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerNewButton.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -991,7 +991,7 @@
     <value>triggerListView</value>
   </data>
   <data name="&gt;&gt;triggerListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerListView.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -1024,7 +1024,7 @@
     <value>taskTriggerIntroLabel</value>
   </data>
   <data name="&gt;&gt;taskTriggerIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskTriggerIntroLabel.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -1060,7 +1060,7 @@
     <value>triggersTab</value>
   </data>
   <data name="&gt;&gt;triggersTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggersTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -1102,7 +1102,7 @@
     <value>actionDownButton</value>
   </data>
   <data name="&gt;&gt;actionDownButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionDownButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1141,7 +1141,7 @@
     <value>actionUpButton</value>
   </data>
   <data name="&gt;&gt;actionUpButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionUpButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1174,7 +1174,7 @@
     <value>actionDeleteButton</value>
   </data>
   <data name="&gt;&gt;actionDeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionDeleteButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1207,7 +1207,7 @@
     <value>actionEditButton</value>
   </data>
   <data name="&gt;&gt;actionEditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionEditButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1240,7 +1240,7 @@
     <value>actionNewButton</value>
   </data>
   <data name="&gt;&gt;actionNewButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionNewButton.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1282,7 +1282,7 @@
     <value>actionListView</value>
   </data>
   <data name="&gt;&gt;actionListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionListView.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1315,7 +1315,7 @@
     <value>actionIntroLabel</value>
   </data>
   <data name="&gt;&gt;actionIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionIntroLabel.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -1351,7 +1351,7 @@
     <value>actionsTab</value>
   </data>
   <data name="&gt;&gt;actionsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;actionsTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -1369,13 +1369,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="availableConnectionsCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 47</value>
+    <value>25, 47</value>
   </data>
   <data name="availableConnectionsCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 23</value>
+    <value>498, 23</value>
   </data>
   <data name="availableConnectionsCombo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1384,7 +1384,7 @@
     <value>availableConnectionsCombo</value>
   </data>
   <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
     <value>networkConditionGroupBox</value>
@@ -1417,7 +1417,7 @@
     <value>taskStartIfConnectionCheck</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.Parent" xml:space="preserve">
     <value>networkConditionGroupBox</value>
@@ -1444,7 +1444,7 @@
     <value>networkConditionGroupBox</value>
   </data>
   <data name="&gt;&gt;networkConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;networkConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
@@ -1462,7 +1462,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 47</value>
+    <value>25, 47</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1480,7 +1480,7 @@
     <value>taskStopIfGoingOnBatteriesCheck</value>
   </data>
   <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
     <value>powerConditionGroupBox</value>
@@ -1513,7 +1513,7 @@
     <value>taskWakeToRunCheck</value>
   </data>
   <data name="&gt;&gt;taskWakeToRunCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskWakeToRunCheck.Parent" xml:space="preserve">
     <value>powerConditionGroupBox</value>
@@ -1546,7 +1546,7 @@
     <value>taskDisallowStartIfOnBatteriesCheck</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Parent" xml:space="preserve">
     <value>powerConditionGroupBox</value>
@@ -1573,7 +1573,7 @@
     <value>powerConditionGroupBox</value>
   </data>
   <data name="&gt;&gt;powerConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;powerConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
@@ -1585,7 +1585,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 51</value>
+    <value>288, 51</value>
   </data>
   <data name="taskIdleWaitTimeoutCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1600,7 +1600,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1609,7 +1609,7 @@
     <value>0</value>
   </data>
   <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 21</value>
+    <value>288, 21</value>
   </data>
   <data name="taskIdleDurationCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1624,7 +1624,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1639,7 +1639,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRestartOnIdleCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 104</value>
+    <value>45, 104</value>
   </data>
   <data name="taskRestartOnIdleCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1657,7 +1657,7 @@
     <value>taskRestartOnIdleCheck</value>
   </data>
   <data name="&gt;&gt;taskRestartOnIdleCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRestartOnIdleCheck.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1672,7 +1672,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 79</value>
+    <value>25, 79</value>
   </data>
   <data name="taskStopOnIdleEndCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1690,7 +1690,7 @@
     <value>taskStopOnIdleEndCheck</value>
   </data>
   <data name="&gt;&gt;taskStopOnIdleEndCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1723,7 +1723,7 @@
     <value>taskIdleWaitTimeoutLabel</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1756,7 +1756,7 @@
     <value>taskIdleDurationCheck</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCheck.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1786,7 +1786,7 @@
     <value>idleConditionGroupBox</value>
   </data>
   <data name="&gt;&gt;idleConditionGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;idleConditionGroupBox.Parent" xml:space="preserve">
     <value>conditionsTab</value>
@@ -1819,7 +1819,7 @@
     <value>conditionIntroLabel</value>
   </data>
   <data name="&gt;&gt;conditionIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;conditionIntroLabel.Parent" xml:space="preserve">
     <value>conditionsTab</value>
@@ -1855,7 +1855,7 @@
     <value>conditionsTab</value>
   </data>
   <data name="&gt;&gt;conditionsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;conditionsTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -1882,7 +1882,7 @@
     <value>taskRestartCountText</value>
   </data>
   <data name="&gt;&gt;taskRestartCountText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRestartCountText.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1906,7 +1906,7 @@
     <value>taskMultInstCombo</value>
   </data>
   <data name="&gt;&gt;taskMultInstCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskMultInstCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1939,7 +1939,7 @@
     <value>taskRunningRuleLabel</value>
   </data>
   <data name="&gt;&gt;taskRunningRuleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRunningRuleLabel.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1972,7 +1972,7 @@
     <value>taskRestartAttemptTimesLabel</value>
   </data>
   <data name="&gt;&gt;taskRestartAttemptTimesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRestartAttemptTimesLabel.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2005,7 +2005,7 @@
     <value>taskRestartCountLabel</value>
   </data>
   <data name="&gt;&gt;taskRestartCountLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2038,7 +2038,7 @@
     <value>taskDeleteAfterCheck</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2071,7 +2071,7 @@
     <value>taskAllowHardTerminateCheck</value>
   </data>
   <data name="&gt;&gt;taskAllowHardTerminateCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskAllowHardTerminateCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2104,7 +2104,7 @@
     <value>taskExecutionTimeLimitCheck</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2137,7 +2137,7 @@
     <value>taskRestartIntervalCheck</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2170,7 +2170,7 @@
     <value>taskStartWhenAvailableCheck</value>
   </data>
   <data name="&gt;&gt;taskStartWhenAvailableCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStartWhenAvailableCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2203,7 +2203,7 @@
     <value>taskAllowDemandStartCheck</value>
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2236,7 +2236,7 @@
     <value>settingsIntroLabel</value>
   </data>
   <data name="&gt;&gt;settingsIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;settingsIntroLabel.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2260,7 +2260,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2284,7 +2284,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2308,7 +2308,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2344,7 +2344,7 @@
     <value>settingsTab</value>
   </data>
   <data name="&gt;&gt;settingsTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;settingsTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -2368,7 +2368,7 @@
     <value>True</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>535, 35</value>
+    <value>532, 35</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2380,7 +2380,7 @@
     <value>label5</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2413,7 +2413,7 @@
     <value>taskRegSDDLLabel</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLLabel.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2446,7 +2446,7 @@
     <value>taskRegVersionLabel</value>
   </data>
   <data name="&gt;&gt;taskRegVersionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegVersionLabel.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2479,7 +2479,7 @@
     <value>taskRegURILabel</value>
   </data>
   <data name="&gt;&gt;taskRegURILabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegURILabel.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2512,7 +2512,7 @@
     <value>taskRegSourceLabel</value>
   </data>
   <data name="&gt;&gt;taskRegSourceLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegSourceLabel.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2545,7 +2545,7 @@
     <value>taskRegDocLabel</value>
   </data>
   <data name="&gt;&gt;taskRegDocLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegDocLabel.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2575,7 +2575,7 @@
     <value>taskRegSDDLText</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2605,7 +2605,7 @@
     <value>taskRegVersionText</value>
   </data>
   <data name="&gt;&gt;taskRegVersionText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegVersionText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2635,7 +2635,7 @@
     <value>taskRegURIText</value>
   </data>
   <data name="&gt;&gt;taskRegURIText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegURIText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2662,7 +2662,7 @@
     <value>taskRegSourceText</value>
   </data>
   <data name="&gt;&gt;taskRegSourceText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegSourceText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2686,7 +2686,7 @@
     <value>True</value>
   </data>
   <data name="taskRegDocText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 204</value>
+    <value>429, 202</value>
   </data>
   <data name="taskRegDocText.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2695,7 +2695,7 @@
     <value>taskRegDocText</value>
   </data>
   <data name="&gt;&gt;taskRegDocText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegDocText.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2710,7 +2710,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRegSDDLBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 134</value>
+    <value>428, 135</value>
   </data>
   <data name="taskRegSDDLBtn.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2731,7 +2731,7 @@
     <value>taskRegSDDLBtn</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskRegSDDLBtn.Parent" xml:space="preserve">
     <value>regInfoTab</value>
@@ -2761,7 +2761,7 @@
     <value>regInfoTab</value>
   </data>
   <data name="&gt;&gt;regInfoTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;regInfoTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -2803,7 +2803,7 @@
     <value>principalSIDTypeLabel</value>
   </data>
   <data name="&gt;&gt;principalSIDTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;principalSIDTypeLabel.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2827,7 +2827,7 @@
     <value>principalSIDTypeCombo</value>
   </data>
   <data name="&gt;&gt;principalSIDTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;principalSIDTypeCombo.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2860,7 +2860,7 @@
     <value>principalReqPrivilegesLabel</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesLabel.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2884,7 +2884,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.22732, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2914,7 +2914,7 @@
     <value>secHardGroup</value>
   </data>
   <data name="&gt;&gt;secHardGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;secHardGroup.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -2941,7 +2941,7 @@
     <value>taskMaintenanceDeadlineCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -2974,7 +2974,7 @@
     <value>taskMaintenanceExclusiveCheck</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceExclusiveCheck.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3007,7 +3007,7 @@
     <value>taskMaintenanceDeadlineLabel</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineLabel.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3040,7 +3040,7 @@
     <value>taskMaintenancePeriodLabel</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodLabel.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3064,7 +3064,7 @@
     <value>taskMaintenancePeriodCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31390, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3091,7 +3091,7 @@
     <value>autoMaintGroup</value>
   </data>
   <data name="&gt;&gt;autoMaintGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;autoMaintGroup.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3115,7 +3115,7 @@
     <value>taskPriorityCombo</value>
   </data>
   <data name="&gt;&gt;taskPriorityCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskPriorityCombo.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3151,7 +3151,7 @@
     <value>label8</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3184,7 +3184,7 @@
     <value>taskVolatileCheck</value>
   </data>
   <data name="&gt;&gt;taskVolatileCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskVolatileCheck.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3217,7 +3217,7 @@
     <value>taskUseUnifiedSchedulingEngineCheck</value>
   </data>
   <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3250,7 +3250,7 @@
     <value>taskDisallowStartOnRemoteAppSessionCheck</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3283,7 +3283,7 @@
     <value>taskEnabledCheck</value>
   </data>
   <data name="&gt;&gt;taskEnabledCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskEnabledCheck.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3316,7 +3316,7 @@
     <value>label4</value>
   </data>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>addPropTab</value>
@@ -3346,7 +3346,7 @@
     <value>addPropTab</value>
   </data>
   <data name="&gt;&gt;addPropTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;addPropTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -3362,6 +3362,9 @@
   </data>
   <data name="taskRunTimesControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
+  </data>
+  <data name="taskRunTimesControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="taskRunTimesControl1.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>300, 180</value>
@@ -3382,7 +3385,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.22732, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3415,7 +3418,7 @@
     <value>runTimesErrorLabel</value>
   </data>
   <data name="&gt;&gt;runTimesErrorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;runTimesErrorLabel.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3448,7 +3451,7 @@
     <value>label3</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3481,7 +3484,7 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3511,7 +3514,7 @@
     <value>runTimesTab</value>
   </data>
   <data name="&gt;&gt;runTimesTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;runTimesTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -3535,7 +3538,7 @@
     <value>True</value>
   </data>
   <data name="taskHistoryControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 363</value>
+    <value>529, 361</value>
   </data>
   <data name="taskHistoryControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3544,7 +3547,7 @@
     <value>taskHistoryControl1</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.22732, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Parent" xml:space="preserve">
     <value>historyTab</value>
@@ -3580,7 +3583,7 @@
     <value>historyTab</value>
   </data>
   <data name="&gt;&gt;historyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;historyTab.Parent" xml:space="preserve">
     <value>tabControl</value>
@@ -3607,7 +3610,7 @@
     <value>tabControl</value>
   </data>
   <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
     <value>$this</value>

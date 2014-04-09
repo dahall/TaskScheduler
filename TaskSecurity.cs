@@ -98,11 +98,11 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TaskAuditRule : AuditRule
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskAuditRule"/> class, specifying the user or group to audit, the rights to audit, and whether to audit success, failure, or both.
+		/// Initializes a new instance of the <see cref="TaskAuditRule" /> class, specifying the user or group to audit, the rights to audit, and whether to audit success, failure, or both.
 		/// </summary>
-		/// <param name="identity">The user or group the rule applies to. Must be of type <see cref="SecurityIdentifier"/> or a type such as <see cref="NTAccount"/> that can be converted to type <see cref="SecurityIdentifier"/>.</param>
-		/// <param name="eventRights">A bitwise combination of <see cref="TaskRights"/> values specifying the kinds of access to audit.</param>
-		/// <param name="type">A bitwise combination of <see cref="AuditFlags"/> values specifying whether to audit success, failure, or both.</param>
+		/// <param name="identity">The user or group the rule applies to. Must be of type <see cref="SecurityIdentifier" /> or a type such as <see cref="NTAccount" /> that can be converted to type <see cref="SecurityIdentifier" />.</param>
+		/// <param name="eventRights">A bitwise combination of <see cref="TaskRights" /> values specifying the kinds of access to audit.</param>
+		/// <param name="flags">The audit flags.</param>
 		public TaskAuditRule(IdentityReference identity, TaskRights eventRights, AuditFlags flags)
 			: this(identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
 		{
@@ -148,10 +148,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <item><description>Low-level tasks that are normally performed by the resource manager.</description></item>
 	/// <item><description>Adding or removing access control entries in ways that do not maintain the canonical ordering.</description></item>
 	/// </list>
-	/// <para>To modify Windows access control security for a task, use the <see cref="Task.GetAccessControl"/> method to get the TaskSecurity object. Modify the security object by adding and removing rules, and then use the <see cref="Task.SetAccessControl"/> method to reattach it. </para>
+	/// <para>To modify Windows access control security for a task, use the <see cref="Task.GetAccessControl()"/> method to get the TaskSecurity object. Modify the security object by adding and removing rules, and then use the <see cref="Task.SetAccessControl"/> method to reattach it. </para>
 	/// <para>Important: Changes you make to a TaskSecurity object do not affect the access levels of the task until you call the <see cref="Task.SetAccessControl"/> method to assign the altered security object to the task.</para>
-	/// <para>To copy access control security from one task to another, use the <see cref="Task.GetAccessControl"/> method to get a TaskSecurity object representing the access and audit rules for the first task, then use the <see cref="Task.SetAccessControl"/> method, or a constructor that accepts a TaskSecurity object, to assign those rules to the second task.</para>
-	/// <para>Users with an investment in the security descriptor definition language (SDDL) can use the <see cref="SetSecurityDescriptorSddlForm"/> method to set access rules for a task, and the <see cref="GetSecurityDescriptorSddlForm"/> method to obtain a string that represents the access rules in SDDL format. This is not recommended for new development.</para>
+	/// <para>To copy access control security from one task to another, use the <see cref="Task.GetAccessControl()"/> method to get a TaskSecurity object representing the access and audit rules for the first task, then use the <see cref="Task.SetAccessControl"/> method, or a constructor that accepts a TaskSecurity object, to assign those rules to the second task.</para>
+	/// <para>Users with an investment in the security descriptor definition language (SDDL) can use the <see cref="Task.SetSecurityDescriptorSddlForm"/> method to set access rules for a task, and the <see cref="Task.GetSecurityDescriptorSddlForm"/> method to obtain a string that represents the access rules in SDDL format. This is not recommended for new development.</para>
 	/// </remarks>
 	public sealed class TaskSecurity : CommonObjectSecurity
 	{
@@ -164,9 +164,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskSecurity"/> class with the specified sections of the access control security rules from the specified task.
+		/// Initializes a new instance of the <see cref="TaskSecurity" /> class with the specified sections of the access control security rules from the specified task.
 		/// </summary>
 		/// <param name="task">The task.</param>
+		/// <param name="sections">The sections of the ACL to retrieve.</param>
 		public TaskSecurity(Task task, AccessControlSections sections = System.Security.AccessControl.AccessControlSections.Access | System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group)
 			: base(false)
 		{
@@ -174,9 +175,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskSecurity"/> class with the specified sections of the access control security rules from the specified task.
+		/// Initializes a new instance of the <see cref="TaskSecurity" /> class with the specified sections of the access control security rules from the specified task.
 		/// </summary>
-		/// <param name="task">The task.</param>
+		/// <param name="folder">The folder.</param>
+		/// <param name="sections">The sections of the ACL to retrieve.</param>
 		public TaskSecurity(TaskFolder folder, AccessControlSections sections = System.Security.AccessControl.AccessControlSections.Access | System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group)
 			: base(false)
 		{
@@ -420,10 +422,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Saves the specified sections of the security descriptor associated with this <see cref="TaskSecurity"/> object to permanent storage. We recommend that the values of the <paramref name="includeSections"/> parameters passed to the constructor and persist methods be identical.
+		/// Saves the specified sections of the security descriptor associated with this <see cref="TaskSecurity" /> object to permanent storage. We recommend that the values of the <paramref name="includeSections" /> parameters passed to the constructor and persist methods be identical.
 		/// </summary>
-		/// <param name="task">The task used to retrieve the persisted information.</param>
-		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
+		/// <param name="folder">The task folder used to retrieve the persisted information.</param>
+		/// <param name="includeSections">One of the <see cref="AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
 		[SecurityCritical]
 		internal void Persist(TaskFolder folder, AccessControlSections includeSections = AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
 		{
@@ -442,6 +444,12 @@ namespace Microsoft.Win32.TaskScheduler
 				base.WriteUnlock();
 			}
 		}
+
+		/// <summary>
+		/// Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object to permanent storage. We recommend that the values of the <paramref name="includeSections" /> parameters passed to the constructor and persist methods be identical. For more information, see Remarks.
+		/// </summary>
+		/// <param name="name">The name used to retrieve the persisted information.</param>
+		/// <param name="includeSections">One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
 		protected override void Persist(string name, AccessControlSections includeSections = AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
 		{
 			using (var ts = new TaskService())

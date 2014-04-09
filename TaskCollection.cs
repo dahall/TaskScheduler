@@ -204,16 +204,12 @@ namespace Microsoft.Win32.TaskScheduler
 			public bool MoveNext()
 			{
 				bool hasNext = iEnum.MoveNext();
-				if (!hasNext)
-					return false;
-
-				while (hasNext && filter != null)
+				while (hasNext)
 				{
-					if (filter.IsMatch(this.Current.Name))
+					if (filter == null || filter.IsMatch(((TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current).Name))
 						break;
 					hasNext = iEnum.MoveNext();
 				}
-
 				return hasNext;
 			}
 
@@ -233,14 +229,9 @@ namespace Microsoft.Win32.TaskScheduler
 				int i = 0;
 				if (v2Coll != null)
 				{
-					if (filter == null)
-						return v2Coll.Count;
-					else
-					{
-						V2TaskEnumerator v2te = new V2TaskEnumerator(this.fld, this.v2Coll, this.filter);
-						while (v2te.MoveNext())
-							i++;
-					}
+					V2TaskEnumerator v2te = new V2TaskEnumerator(this.fld, this.v2Coll, this.filter);
+					while (v2te.MoveNext())
+						i++;
 				}
 				else
 				{
@@ -286,25 +277,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				int i = 0;
-				if (v2Coll != null)
-				{
-					if (filter == null)
-						return Task.CreateTask(svc, v2Coll[++index]);
-					else
-					{
-						V2TaskEnumerator v2te = new V2TaskEnumerator(this.fld, this.v2Coll, this.filter);
-						while (v2te.MoveNext())
-							if (i++ == index)
-								return v2te.Current;
-					}
-				}
-				else
-				{
-					V1TaskEnumerator v1te = new V1TaskEnumerator(this.svc, this.filter);
-					while (v1te.MoveNext())
-						if (i++ == index)
-							return v1te.Current;
-				}
+				var te = GetEnumerator();
+				while (te.MoveNext())
+					if (i++ == index)
+						return te.Current;
 				throw new ArgumentOutOfRangeException();
 			}
 		}

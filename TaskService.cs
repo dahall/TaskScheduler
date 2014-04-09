@@ -36,6 +36,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public TaskService()
 		{
+			this.AllowReadOnlyTasks = false;
 			ResetHighestSupportedVersion();
 			Connect();
 		}
@@ -51,6 +52,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskService(string targetServer, string userName = null, string accountDomain = null, string password = null, bool forceV1 = false)
 		{
 			this.BeginInit();
+			this.AllowReadOnlyTasks = false;
 			this.TargetServer = targetServer;
 			this.UserName = userName;
 			this.UserAccountDomain = accountDomain;
@@ -59,6 +61,13 @@ namespace Microsoft.Win32.TaskScheduler
 			ResetHighestSupportedVersion();
 			this.EndInit();
 		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.
+		/// </summary>
+		/// <value><c>true</c> if allow read only tasks; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Behavior"), Description("Allow tasks from later OS versions with new properties to be retrieved as read only tasks.")]
+		public bool AllowReadOnlyTasks { get; set; }
 
 		/// <summary>
 		/// Gets a Boolean value that indicates if you are connected to the Task Scheduler service.
@@ -125,6 +134,18 @@ namespace Microsoft.Win32.TaskScheduler
 					Connect();
 				}
 			}
+		}
+
+		/// <summary>
+		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibilty level higher than this version.
+		/// </summary>
+		/// <value>
+		/// The library version.
+		/// </value>
+		[Browsable(false)]
+		public static Version LibraryVersion
+		{
+			get { return new Version(1, Task.GetOSLibraryMinorVersion()); }
 		}
 
 		/// <summary>

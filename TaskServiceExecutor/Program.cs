@@ -47,9 +47,18 @@ namespace TaskServiceExecutor
 								Uri url = new Uri(server);
 								SmtpClient SmtpServer = new SmtpClient(url.AbsolutePath);
 								SmtpServer.Port = url.IsDefaultPort ? 25 : url.Port;
-								SmtpServer.UseDefaultCredentials = true;
-								//SmtpServer.Credentials = WindowsCredentials new System.Net.NetworkCredential(System);
-								//SmtpServer.EnableSsl = true;
+								try
+								{
+									string user = url.UserInfo;
+									if (!string.IsNullOrEmpty(user))
+									{
+										string[] parts = user.Split(':');
+										SmtpServer.Credentials = new System.Net.NetworkCredential(parts.Length > 0 ? parts[0] : string.Empty, parts.Length > 1 ? parts[1] : string.Empty);
+									}
+								}
+								catch {}
+								SmtpServer.UseDefaultCredentials = (SmtpServer.Credentials == null);
+								SmtpServer.EnableSsl = url.Scheme == "https";
 								SmtpServer.Send(mail);
 
 								return 0;
