@@ -26,13 +26,11 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSc
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityEditor", "SecurityEditor\SecurityEditor.csproj", "{31FC9051-D954-4F35-AB09-BBABB391549E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskServiceExecutor", "TaskServiceExecutor\TaskServiceExecutor.csproj", "{BB5F9CFB-668A-46ED-B904-3B5744389F87}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
@@ -53,12 +51,9 @@ Global
 		SccProjectUniqueName6 = TaskSchedulerHelp\\TaskSchedulerHelp.shfbproj
 		SccProjectName6 = TaskSchedulerHelp
 		SccLocalPath6 = TaskSchedulerHelp
-		SccProjectUniqueName7 = SecurityEditor\\SecurityEditor.csproj
-		SccProjectName7 = SecurityEditor
-		SccLocalPath7 = SecurityEditor
-		SccProjectUniqueName8 = TaskServiceExecutor\\TaskServiceExecutor.csproj
-		SccProjectName8 = TaskServiceExecutor
-		SccLocalPath8 = TaskServiceExecutor
+		SccProjectUniqueName7 = TaskServiceExecutor\\TaskServiceExecutor.csproj
+		SccProjectName7 = TaskServiceExecutor
+		SccLocalPath7 = TaskServiceExecutor
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,9 +78,6 @@ Global
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31FC9051-D954-4F35-AB09-BBABB391549E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31FC9051-D954-4F35-AB09-BBABB391549E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31FC9051-D954-4F35-AB09-BBABB391549E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5F9CFB-668A-46ED-B904-3B5744389F87}.Release|Any CPU.ActiveCfg = Release|Any CPU

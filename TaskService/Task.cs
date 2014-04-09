@@ -814,6 +814,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal V1Interop.ITask v1Task;
 
 		private static readonly DateTime v2InvalidDate = new DateTime(1899, 12, 30);
+		private static readonly int osLibMinorVer = GetOSLibraryMinorVersion();
 
 		internal const System.Security.AccessControl.AccessControlSections defaultAccessControlSections = System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group | System.Security.AccessControl.AccessControlSections.Access;
 		internal const System.Security.AccessControl.SecurityInfos defaultSecurityInfosSections = System.Security.AccessControl.SecurityInfos.Owner | System.Security.AccessControl.SecurityInfos.Group | System.Security.AccessControl.SecurityInfos.DiscretionaryAcl;
@@ -825,121 +826,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			this.TaskService = svc;
 			v1Task = iTask;
+			this.ReadOnly = false;
 		}
 
-		internal Task(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
+		internal Task(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask, TaskScheduler.V2Interop.ITaskDefinition iDef = null)
 		{
 			this.TaskService = svc;
 			v2Task = iTask;
-		}
-
-		internal static Task CreateTask(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
-		{
-			try
-			{
-				Task t = new Task(svc, iTask);
-				string xml = iTask.Definition.XmlText;
-				DefDoc dd = new DefDoc(xml);
-				Version xmlVer = dd.Version;
-				if (xmlVer > svc.HighestSupportedVersion)
-				{
-					int newMinor = dd.Version.Minor;
-					if (!dd.Contains("Volatile", "false") &&
-						!dd.Contains("MaintenanceSettings"))
-						newMinor = 3;
-					if (!dd.Contains("UseUnifiedSchedulingEngine", "false") &&
-						!dd.Contains("DisallowStartOnRemoteAppSession", "false") && 
-						!dd.Contains("RequiredPrivileges") &&
-						!dd.Contains("ProcessTokenSidType", "Default"))
-						newMinor = 2;
-					if (!dd.Contains("DisplayName") &&
-						!dd.Contains("GroupId") && 
-						!dd.Contains("RunLevel") &&
-						!dd.Contains("SecurityDescriptor") &&
-						!dd.Contains("Source") &&
-						!dd.Contains("URI") &&
-						!dd.Contains("AllowStartOnDemand", "true") &&
-						!dd.Contains("AllowHardTerminate", "true") &&
-						!dd.Contains("MultipleInstancesPolicy", "IgnoreNew") &&
-						!dd.Contains("NetworkSettings") &&
-						!dd.Contains("StartWhenAvailable", "false") &&
-						!dd.Contains("SendEmail") &&
-						!dd.Contains("ShowMessage") &&
-						!dd.Contains("ComHandler") &&
-						!dd.Contains("EventTrigger") &&
-						!dd.Contains("SessionStateChangeTrigger") &&
-						!dd.Contains("RegistrationTrigger") &&
-						!dd.Contains("RestartOnFailure") &&
-						!dd.Contains("LogonType", "None"))
-						newMinor = 1;
-
-					if (newMinor != xmlVer.Minor)
-					{
-						dd.Version = new Version(1, newMinor);
-						t.myTD = svc.NewTask();
-						t.myTD.XmlText = dd.Xml;
-					}
-				}
-				return t;
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
-
-		private class DefDoc
-		{
-			System.Xml.XmlDocument doc;
-
-			public DefDoc(string xml)
-			{
-				doc = new XmlDocument();
-				doc.LoadXml(xml);
-			}
-
-			public Version Version
-			{
-				get
-				{
-					try
-					{
-						return new Version(doc["Task"].Attributes["version"].Value);
-					}
-					catch
-					{
-						throw new InvalidOperationException("Task definition does not contain a version.");
-					}
-				}
-				set
-				{
-					doc["Task"].Attributes["version"].Value = value.ToString(2);
-				}
-			}
-
-			public string Xml
-			{
-				get
-				{
-					return doc.OuterXml;
-				}
-			}
-
-			public bool Contains(string tag, string defaultVal = null, bool removeIfFound = true)
-			{
-				var elems = doc.GetElementsByTagName(tag);
-				if (elems != null && elems.Count > 0)
-				{
-					var e = elems[0];
-					if (e.InnerText == defaultVal || e.InnerText == string.Empty)
-					{
-						e.ParentNode.RemoveChild(e);
-						return false;
-					}
-					return true;
-				}
-				return false;
-			}
+			if (iDef != null)
+				myTD = new TaskDefinition(iDef);
+			this.ReadOnly = false;
 		}
 
 		/// <summary>
@@ -952,7 +848,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (myTD == null)
 				{
 					if (v2Task != null)
-						myTD = new TaskDefinition(v2Task.Definition);
+						myTD = new TaskDefinition(GetV2Definition(this.TaskService, v2Task, true));
 					else
 						myTD = new TaskDefinition(v1Task, this.Name);
 				}
@@ -1116,6 +1012,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether this task is read only. Only available if <see cref="Microsoft.Win32.TaskScheduler.TaskService.AllowReadOnlyTasks"/> is <c>true</c>.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if read only; otherwise, <c>false</c>.
+		/// </value>
+		public bool ReadOnly { get; internal set; }
+
+		/// <summary>
 		/// Gets or sets the security descriptor for the task.
 		/// </summary>
 		/// <value>The security descriptor.</value>
@@ -1218,7 +1122,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="Task"/> object.
 		/// </summary>
-		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
+		/// <param name="includeSections">One of the <see cref="System.Security.AccessControl.AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current task.</returns>
 		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections)
 		{
@@ -1427,6 +1331,34 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Task = iTask;
 		}
 
+		internal static Task CreateTask(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask, bool throwError = false)
+		{
+			var iDef = GetV2Definition(svc, iTask, throwError);
+			if (iDef == null && svc.AllowReadOnlyTasks)
+			{
+				iDef = GetV2StrippedDefinition(svc, iTask);
+				return new Task(svc, iTask, iDef) { ReadOnly = true };
+			}
+			return new Task(svc, iTask, iDef);
+		}
+
+		internal static int GetOSLibraryMinorVersion()
+		{
+			if (Environment.OSVersion.Version.Major == 6)
+			{
+				switch (Environment.OSVersion.Version.Minor)
+				{
+					case 0:
+						return 2;
+					case 1:
+						return 3;
+					default:
+						return 4;
+				}
+			}
+			return 1;
+		}
+
 		internal static string GetV1Path(V1Interop.ITask v1Task)
 		{
 			string fileName = string.Empty;
@@ -1442,6 +1374,136 @@ namespace Microsoft.Win32.TaskScheduler
 			return fileName;
 		}
 
+		/// <summary>
+		/// Gets the ITaskDefinition for a V2 task and prevents the errors that come when connecting remotely to a higher version of the Task Scheduler.
+		/// </summary>
+		/// <param name="svc">The local task service.</param>
+		/// <param name="iTask">The task instance.</param>
+		/// <param name="throwError">if set to <c>true</c> this method will throw an exception if unable to get the task definition.</param>
+		/// <returns>
+		/// A valid ITaskDefinition that should not throw errors on the local instance.
+		/// </returns>
+		/// <exception cref="System.InvalidOperationException">Unable to get a compatible task definition for this version of the library.</exception>
+		internal static TaskScheduler.V2Interop.ITaskDefinition GetV2Definition(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask, bool throwError = false)
+		{
+			DefDoc dd = new DefDoc(iTask.Xml);
+			Version xmlVer = dd.Version;
+			try
+			{
+				if (xmlVer.Minor > osLibMinorVer)
+				{
+					int newMinor = xmlVer.Minor;
+					if (!dd.Contains("Volatile", "false", true) &&
+						!dd.Contains("MaintenanceSettings"))
+						newMinor = 3;
+					if (!dd.Contains("UseUnifiedSchedulingEngine", "false", true) &&
+						!dd.Contains("DisallowStartOnRemoteAppSession", "false", true) &&
+						!dd.Contains("RequiredPrivileges") &&
+						!dd.Contains("ProcessTokenSidType", "Default", true))
+						newMinor = 2;
+					if (!dd.Contains("DisplayName") &&
+						!dd.Contains("GroupId") &&
+						!dd.Contains("RunLevel", "LeastPrivilege", true) &&
+						!dd.Contains("SecurityDescriptor") &&
+						!dd.Contains("Source") &&
+						!dd.Contains("URI") &&
+						!dd.Contains("AllowStartOnDemand", "true", true) &&
+						!dd.Contains("AllowHardTerminate", "true", true) &&
+						!dd.Contains("MultipleInstancesPolicy", "IgnoreNew", true) &&
+						!dd.Contains("NetworkSettings") &&
+						!dd.Contains("StartWhenAvailable", "false", true) &&
+						!dd.Contains("SendEmail") &&
+						!dd.Contains("ShowMessage") &&
+						!dd.Contains("ComHandler") &&
+						!dd.Contains("EventTrigger") &&
+						!dd.Contains("SessionStateChangeTrigger") &&
+						!dd.Contains("RegistrationTrigger") &&
+						!dd.Contains("RestartOnFailure") &&
+						!dd.Contains("LogonType", "None", true))
+						newMinor = 1;
+
+					if (newMinor > osLibMinorVer && throwError)
+						throw new InvalidOperationException(string.Format("The current version of the native library (1.{0}) does not support the original or minimum version of the \"{1}\" task ({2}/1.{3})", osLibMinorVer, iTask.Name, xmlVer, newMinor));
+
+					if (newMinor != xmlVer.Minor)
+					{
+						dd.Version = new Version(1, newMinor);
+						TaskScheduler.V2Interop.ITaskDefinition def = svc.v2TaskService.NewTask(0);
+						def.XmlText = dd.Xml;
+						return def;
+					}
+				}
+				return iTask.Definition;
+			}
+			catch (COMException comEx)
+			{
+				if (throwError)
+				{
+					if ((uint)comEx.ErrorCode == 0x80041318 && xmlVer.Minor != osLibMinorVer) // Incorrect XML value
+						throw new InvalidOperationException(string.Format("The current version of the native library (1.{0}) does not support the version of the \"{1}\" task ({2})", osLibMinorVer, iTask.Name, xmlVer));
+					throw;
+				}
+			}
+			catch
+			{
+				if (throwError)
+					throw;
+			}
+			return null;
+		}
+
+		internal static TaskScheduler.V2Interop.ITaskDefinition GetV2StrippedDefinition(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
+		{
+			DefDoc dd = new DefDoc(iTask.Xml);
+			Version xmlVer = dd.Version;
+			if (xmlVer.Minor > osLibMinorVer)
+			{
+				if (osLibMinorVer < 4)
+				{
+					dd.RemoveTag("Volatile");
+					dd.RemoveTag("MaintenanceSettings");
+				}
+				if (osLibMinorVer < 3)
+				{
+					dd.RemoveTag("UseUnifiedSchedulingEngine");
+					dd.RemoveTag("DisallowStartOnRemoteAppSession");
+					dd.RemoveTag("RequiredPrivileges");
+					dd.RemoveTag("ProcessTokenSidType");
+				}
+				if (osLibMinorVer < 2)
+				{
+					dd.RemoveTag("DisplayName");
+					dd.RemoveTag("GroupId");
+					dd.RemoveTag("RunLevel");
+					dd.RemoveTag("SecurityDescriptor");
+					dd.RemoveTag("Source");
+					dd.RemoveTag("URI");
+					dd.RemoveTag("AllowStartOnDemand");
+					dd.RemoveTag("AllowHardTerminate");
+					dd.RemoveTag("MultipleInstancesPolicy");
+					dd.RemoveTag("NetworkSettings");
+					dd.RemoveTag("StartWhenAvailable");
+					dd.RemoveTag("SendEmail");
+					dd.RemoveTag("ShowMessage");
+					dd.RemoveTag("ComHandler");
+					dd.RemoveTag("EventTrigger");
+					dd.RemoveTag("SessionStateChangeTrigger");
+					dd.RemoveTag("RegistrationTrigger");
+					dd.RemoveTag("RestartOnFailure");
+					dd.RemoveTag("LogonType");
+				}
+				dd.Version = new Version(1, osLibMinorVer);
+				TaskScheduler.V2Interop.ITaskDefinition def = svc.v2TaskService.NewTask(0);
+#if DEBUG
+				string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), string.Format("TS_Stripped_Def_{0}-{1}_{2}.xml", xmlVer.Minor, osLibMinorVer, iTask.Name));
+				System.IO.File.WriteAllText(path, dd.Xml, System.Text.Encoding.Unicode);
+#endif
+				def.XmlText = dd.Xml;
+				return def;
+			}
+			return iTask.Definition;
+		}
+
 		internal static TimeSpan StringToTimeSpan(string input)
 		{
 			if (!string.IsNullOrEmpty(input))
@@ -1455,8 +1517,75 @@ namespace Microsoft.Win32.TaskScheduler
 				try { return System.Xml.XmlConvert.ToString(span); } catch { }
 			return null;
 		}
+
+		private class DefDoc
+		{
+			System.Xml.XmlDocument doc;
+
+			public DefDoc(string xml)
+			{
+				doc = new XmlDocument();
+				doc.LoadXml(xml);
+			}
+
+			public Version Version
+			{
+				get
+				{
+					try
+					{
+						return new Version(doc["Task"].Attributes["version"].Value);
+					}
+					catch
+					{
+						throw new InvalidOperationException("Task definition does not contain a version.");
+					}
+				}
+				set
+				{
+					doc["Task"].Attributes["version"].Value = value.ToString(2);
+				}
+			}
+
+			public string Xml
+			{
+				get
+				{
+					return doc.OuterXml;
+				}
+			}
+
+			public bool Contains(string tag, string defaultVal = null, bool removeIfFound = false)
+			{
+				var elems = doc.GetElementsByTagName(tag);
+				if (elems != null && elems.Count > 0)
+				{
+					var e = elems[0];
+					if (e.InnerText == defaultVal && removeIfFound)
+					{
+						e.ParentNode.RemoveChild(e);
+						return false;
+					}
+					return true;
+				}
+				return false;
+			}
+
+			public void RemoveTag(string tag)
+			{
+				var elems = doc.GetElementsByTagName(tag);
+				if (elems != null && elems.Count > 0)
+				{
+					var e = elems[0];
+					e.ParentNode.RemoveChild(e);
+				}
+			}
+		}
 	}
 
+	/// <summary>
+	/// Contains information about the compatibility of the current configuration with a specified version.
+	/// </summary>
 	public class TaskCompatibilityEntry
 	{
 		internal TaskCompatibilityEntry(TaskCompatibility comp, string prop, string reason)
@@ -1466,8 +1595,28 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Reason = reason;
 		}
 
+		/// <summary>
+		/// Gets the compatibility level.
+		/// </summary>
+		/// <value>
+		/// The compatibility level.
+		/// </value>
 		public TaskCompatibility CompatibilityLevel { get; private set; }
+
+		/// <summary>
+		/// Gets the property name with the incompatibility.
+		/// </summary>
+		/// <value>
+		/// The property name.
+		/// </value>
 		public string Property { get; private set; }
+
+		/// <summary>
+		/// Gets the reason for the imcompatibility.
+		/// </summary>
+		/// <value>
+		/// The reason.
+		/// </value>
 		public string Reason { get; private set; }
 	}
 
@@ -1665,25 +1814,25 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
-				ex.Data.Add("Principal.LogonType", "== TaskLogonType.InteractiveTokenOrPassword");
+				TryAdd(ex.Data, "Principal.LogonType", "== TaskLogonType.InteractiveTokenOrPassword");
 			}
 			if (this.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
-				ex.Data.Add("Settings.MultipleInstances", "== TaskInstancesPolicy.StopExisting");
+				TryAdd(ex.Data, "Settings.MultipleInstances", "== TaskInstancesPolicy.StopExisting");
 			}
 			if (this.Settings.NetworkSettings.Id != Guid.Empty)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
-				ex.Data.Add("Settings.NetworkSettings.Id", "!= Guid.Empty");
+				TryAdd(ex.Data, "Settings.NetworkSettings.Id", "!= Guid.Empty");
 			}
 			if (!this.Settings.AllowHardTerminate)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
-				ex.Data.Add("Settings.AllowHardTerminate", "== false");
+				TryAdd(ex.Data, "Settings.AllowHardTerminate", "== false");
 			}
 			for (int i = 0; i < this.Actions.Count; i++)
 			{
@@ -1692,13 +1841,13 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Actions[{0}]", i), "== typeof(EmailAction)");
+					TryAdd(ex.Data, string.Format("Actions[{0}]", i), "== typeof(EmailAction)");
 				}
 				else if (a is ShowMessageAction)
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Actions[{0}]", i), "== typeof(ShowMessageAction)");
+					TryAdd(ex.Data, string.Format("Actions[{0}]", i), "== typeof(ShowMessageAction)");
 				}
 			}
 			for (int i = 0; i < this.Triggers.Count; i++)
@@ -1708,31 +1857,31 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Triggers[{0}]", i), "== typeof(MonthlyTrigger)");
+					TryAdd(ex.Data, string.Format("Triggers[{0}]", i), "== typeof(MonthlyTrigger)");
 				}
 				if (t is MonthlyDOWTrigger)
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Triggers[{0}]", i), "== typeof(MonthlyDOWTrigger)");
+					TryAdd(ex.Data, string.Format("Triggers[{0}]", i), "== typeof(MonthlyDOWTrigger)");
 				}
 				if (t.ExecutionTimeLimit != TimeSpan.Zero)
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Triggers[{0}].ExecutionTimeLimit", i), "!= TimeSpan.Zero");
+					TryAdd(ex.Data, string.Format("Triggers[{0}].ExecutionTimeLimit", i), "!= TimeSpan.Zero");
 				}
 				if (t is ICalendarTrigger && t.Repetition.IsSet())
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Triggers[{0}].Repetition", i), "");
+					TryAdd(ex.Data, string.Format("Triggers[{0}].Repetition", i), "");
 				}
 				if (t is EventTrigger && ((EventTrigger)t).ValueQueries.Count > 0)
 				{
 					bad = true;
 					if (!throwExceptionWithDetails) return false;
-					ex.Data.Add(string.Format("Triggers[{0}].ValueQueries.Count", i), "!= 0");
+					TryAdd(ex.Data, string.Format("Triggers[{0}].ValueQueries.Count", i), "!= 0");
 				}
 			}
 			if (throwExceptionWithDetails)
@@ -1789,22 +1938,22 @@ namespace Microsoft.Win32.TaskScheduler
 				catch (InvalidOperationException iox)
 				{
 					foreach (System.Collections.DictionaryEntry kvp in iox.Data)
-						ex.Data.Add((kvp.Key is ICloneable) ? ((ICloneable)(kvp.Key)).Clone() : kvp.Key, (kvp.Value is ICloneable) ? ((ICloneable)(kvp.Value)).Clone() : kvp.Value);
+						TryAdd(ex.Data, (kvp.Key is ICloneable) ? ((ICloneable)(kvp.Key)).Clone() : kvp.Key, (kvp.Value is ICloneable) ? ((ICloneable)(kvp.Value)).Clone() : kvp.Value);
 				}
 			var list = new System.Collections.Generic.List<TaskCompatibilityEntry>();
 			if (GetLowestSupportedVersion(list) > this.Settings.Compatibility)
 				foreach (var item in list)
-					ex.Data.Add(item.Property, item.Reason);
+					TryAdd(ex.Data, item.Property, item.Reason);
 			if (this.Settings.StartWhenAvailable)
 			{
 				foreach (var trigger in this.Triggers)
 				{
-					if (!(trigger is ICalendarTrigger))
-						ex.Data.Add("Settings.StartWhenAvailable", "== true requires time-based triggers.");
-					else
+					//if (!(trigger is ICalendarTrigger))
+					//	TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based triggers.");
+					//else
 					{
 						if (trigger.Repetition.Duration != TimeSpan.Zero && trigger.EndBoundary == DateTime.MaxValue)
-							ex.Data.Add("Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
+							TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
 					}
 				}
 			}
@@ -1813,13 +1962,19 @@ namespace Microsoft.Win32.TaskScheduler
 				foreach (var trigger in this.Triggers)
 				{
 					if (trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
-						ex.Data.Add("Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
+						TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
 				}
 			}
 
 			if (throwException && ex.Data.Count > 0)
 				throw ex;
 			return ex.Data.Count == 0;
+		}
+
+		static void TryAdd(System.Collections.IDictionary d, object k, object v)
+		{
+			if (!d.Contains(k))
+				d.Add(k, v);
 		}
 
 		internal void V1Save(string newName)

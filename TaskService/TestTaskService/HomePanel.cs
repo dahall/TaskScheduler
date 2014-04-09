@@ -178,8 +178,12 @@ namespace TestTaskService
 			{
 				List<ListViewItem> list = new List<ListViewItem>();
 				foreach (var t in lts.FindAllTasks(null))
-					if (t.IsActive)
-						list.Add(new ListViewItem(new string[] { t.Name, t.NextRunTime.ToString("G"), t.Definition.Triggers.ToString(), t.Path }) { Tag = t });
+					try
+					{
+						if (t.IsActive)
+							list.Add(new ListViewItem(new string[] { t.Name, t.NextRunTime.ToString("G"), t.Definition.Triggers.ToString(), t.Path }) { Tag = t });
+					}
+					catch { }
 				e.Result = list.ToArray();
 			}
 		}

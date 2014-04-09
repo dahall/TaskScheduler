@@ -119,6 +119,7 @@ namespace TestTaskService
 
 		private void RefreshList()
 		{
+			TaskService.AllowReadOnlyTasks = true;
 			treeView1.Nodes.Clear();
 			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 1, 1);
 			TreeNode p = n.Nodes.Add(null, "Task Scheduler Library", 2, 2);
