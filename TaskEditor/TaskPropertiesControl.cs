@@ -710,22 +710,16 @@ namespace Microsoft.Win32.TaskScheduler
 			actionListView.Enabled = actionUpButton.Visible = actionDownButton.Visible = editable;
 
 			// Conditions tab
-			foreach (Control ctrl in conditionsTab.Controls)
-				foreach (Control sub in ctrl.Controls)
-					if (sub is CheckBox || sub is ComboBox)
-						sub.Enabled = editable;
+			conditionsTab.EnableChildren(editable);
 
 			// Settings tab
-			foreach (Control ctrl in settingsTab.Controls)
-				ctrl.Enabled = editable;
-
-			// Additions tab
-			foreach (Control ctrl in addPropTab.Controls)
-				ctrl.Enabled = editable;
+			settingsTab.EnableChildren(editable);
 
 			// Info tab
-			foreach (Control ctrl in regInfoTab.Controls)
-				ctrl.Enabled = editable;
+			regInfoTab.EnableChildren(editable);
+
+			// Additions tab
+			addPropTab.EnableChildren(editable);
 
 			// If the task has already been set, then reset it to make sure all the items are enabled correctly
 			if (td != null)

@@ -537,4 +537,7 @@ Action: {3}</value>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
     <value>Some settings are incompatible with this selection.</value>
   </data>
+  <data name="LastResultRunning" xml:space="preserve">
+    <value>The task is currently running. (0x{0:X})</value>
+  </data>
 </root>
