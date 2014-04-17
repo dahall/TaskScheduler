@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -91,7 +91,6 @@
     <Compile Include="XmlSerializationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="TaskService.nuspec" />
     <None Include="TaskService.snk" />

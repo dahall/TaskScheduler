@@ -8,8 +8,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides access to the Task Scheduler service for managing registered tasks.
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
-	[ToolboxItem(true), DefaultProperty("TargetServer")]
-	public sealed partial class TaskService : Component, IDisposable, ISupportInitialize
+	[ToolboxItem(true), DefaultProperty("TargetServer"), Serializable]
+	public sealed partial class TaskService : Component, IDisposable, ISupportInitialize, System.Runtime.Serialization.ISerializable
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 		internal static readonly Version v1Ver = new Version(1, 1);
@@ -58,6 +58,19 @@ namespace Microsoft.Win32.TaskScheduler
 			this.UserAccountDomain = accountDomain;
 			this.UserPassword = password;
 			this.forceV1 = forceV1;
+			ResetHighestSupportedVersion();
+			this.EndInit();
+		}
+
+		private TaskService(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+		{
+			this.BeginInit();
+			this.AllowReadOnlyTasks = false;
+			this.TargetServer = (string)info.GetValue("TargetServer", typeof(string));
+			this.UserName = (string)info.GetValue("UserName", typeof(string));
+			this.UserAccountDomain = (string)info.GetValue("UserAccountDomain", typeof(string));
+			this.UserPassword = (string)info.GetValue("UserPassword", typeof(string));
+			this.forceV1 = (bool)info.GetValue("forceV1", typeof(bool));
 			ResetHighestSupportedVersion();
 			this.EndInit();
 		}
@@ -274,6 +287,21 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+		/// <returns>
+		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+		/// </returns>
+		public override bool Equals(object obj)
+		{
+			TaskService tsobj = obj as TaskService;
+			if (tsobj != null)
+				return tsobj.TargetServer == this.TargetServer && tsobj.UserAccountDomain == this.UserAccountDomain && tsobj.UserName == this.UserName && tsobj.UserPassword == this.UserPassword && tsobj.forceV1 == this.forceV1;
+			return base.Equals(obj);
+		}
+
+		/// <summary>
 		/// Finds all tasks matching a name or standard wildcards.
 		/// </summary>
 		/// <param name="name">Name of the task in regular expression form.</param>
@@ -310,6 +338,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskFolder GetFolder(string folderName)
 		{
 			return v2TaskService != null ? new TaskFolder(this, v2TaskService.GetFolder(folderName)) : new TaskFolder(this);
+		}
+
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
+		/// <returns>
+		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+		/// </returns>
+		public override int GetHashCode()
+		{
+			return new { A = this.TargetServer, B = this.UserAccountDomain, C = this.UserName, D = this.UserPassword, E = this.forceV1 }.GetHashCode();
 		}
 
 		/// <summary>
@@ -479,6 +518,8 @@ namespace Microsoft.Win32.TaskScheduler
 							if (targetServer.Equals(Environment.MachineName, StringComparison.CurrentCultureIgnoreCase))
 								targetServer = null;
 						}
+						else
+							targetServer = null;
 						v2TaskService.Connect(targetServer, userName, userDomain, userPassword);
 						targetServer = v2TaskService.TargetServer;
 						userName = v2TaskService.ConnectedUser;
@@ -531,6 +572,15 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 			return false;
+		}
+
+		void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+		{
+			info.AddValue("TargetServer", this.TargetServer, typeof(string));
+			info.AddValue("UserName", this.UserName, typeof(string));
+			info.AddValue("UserAccountDomain", this.UserAccountDomain, typeof(string));
+			info.AddValue("UserPassword", this.UserPassword, typeof(string));
+			info.AddValue("forceV1", this.forceV1, typeof(bool));
 		}
 
 		private Version GetV2Version()

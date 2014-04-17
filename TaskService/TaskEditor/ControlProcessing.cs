@@ -4,6 +4,16 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	internal static class ControlProcessing
 	{
+		public static void EnableChildren(this Control ctl, bool enabled)
+		{
+			foreach (Control sub in ctl.Controls)
+			{
+				if (sub is ButtonBase || sub is ListControl || sub is TextBoxBase)
+					sub.Enabled = enabled;
+				sub.EnableChildren(enabled);
+			}
+		}
+
 		public static RightToLeft GetRightToLeftProperty(this Control ctl)
 		{
 			if (ctl.RightToLeft == RightToLeft.Inherit)

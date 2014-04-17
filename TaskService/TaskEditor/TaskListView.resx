@@ -117,154 +117,154 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="name.Width" type="System.Int32, mscorlib">
     <value>84</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1035, 232</value>
+  <data name="status.Text" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="status.Width" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
-  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
-    <value>listView1</value>
+  <data name="triggers.Text" xml:space="preserve">
+    <value>Triggers</value>
+  </data>
+  <data name="triggers.Width" type="System.Int32, mscorlib">
+    <value>384</value>
+  </data>
+  <data name="nextRunTime.Text" xml:space="preserve">
+    <value>Next Run Time</value>
+  </data>
+  <data name="nextRunTime.Width" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <data name="lastRunTime.Text" xml:space="preserve">
+    <value>Last Run Time</value>
+  </data>
+  <data name="lastRunTime.Width" type="System.Int32, mscorlib">
+    <value>112</value>
+  </data>
+  <data name="lastRunResult.Text" xml:space="preserve">
+    <value>Last Run Result</value>
+  </data>
+  <data name="lastRunResult.Width" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <data name="author.Text" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="author.Width" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="created.Text" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="created.Width" type="System.Int32, mscorlib">
+    <value>84</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="listView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1035, 232</value>
-  </data>
-  <data name="triggers.Text" xml:space="preserve">
-    <value>Triggers</value>
-  </data>
-  <data name="&gt;&gt;created.Name" xml:space="preserve">
-    <value>created</value>
-  </data>
-  <data name="&gt;&gt;status.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="listView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;triggers.Name" xml:space="preserve">
-    <value>triggers</value>
+  <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1035, 232</value>
+  </data>
+  <metadata name="smallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="smallImageList.ImageSize" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
   </data>
   <data name="listView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
+    <value>listView1</value>
+  </data>
   <data name="&gt;&gt;listView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="created.Text" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="&gt;&gt;triggers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="status.Width" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="&gt;&gt;status.Name" xml:space="preserve">
-    <value>status</value>
-  </data>
-  <data name="created.Width" type="System.Int32, mscorlib">
-    <value>84</value>
-  </data>
-  <data name="triggers.Width" type="System.Int32, mscorlib">
-    <value>384</value>
-  </data>
-  <data name="&gt;&gt;created.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="status.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="lastRunResult.Width" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
-  <data name="&gt;&gt;author.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nextRunTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lastRunTime.Width" type="System.Int32, mscorlib">
-    <value>112</value>
-  </data>
-  <data name="&gt;&gt;name.Name" xml:space="preserve">
-    <value>name</value>
-  </data>
-  <data name="name.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="lastRunTime.Text" xml:space="preserve">
-    <value>Last Run Time</value>
-  </data>
-  <data name="&gt;&gt;lastRunResult.Name" xml:space="preserve">
-    <value>lastRunResult</value>
-  </data>
-  <data name="lastRunResult.Text" xml:space="preserve">
-    <value>Last Run Result</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TaskListView</value>
-  </data>
-  <data name="smallImageList.ImageSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="&gt;&gt;lastRunTime.Name" xml:space="preserve">
-    <value>lastRunTime</value>
-  </data>
-  <data name="&gt;&gt;smallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="nextRunTime.Width" type="System.Int32, mscorlib">
-    <value>107</value>
-  </data>
-  <data name="&gt;&gt;name.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;smallImageList.Name" xml:space="preserve">
-    <value>smallImageList</value>
-  </data>
-  <data name="nextRunTime.Text" xml:space="preserve">
-    <value>Next Run Time</value>
-  </data>
-  <data name="author.Width" type="System.Int32, mscorlib">
-    <value>77</value>
-  </data>
-  <data name="&gt;&gt;lastRunResult.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="author.Text" xml:space="preserve">
-    <value>Author</value>
   </data>
   <data name="&gt;&gt;listView1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1035, 232</value>
+  </data>
+  <data name="&gt;&gt;name.Name" xml:space="preserve">
+    <value>name</value>
+  </data>
+  <data name="&gt;&gt;name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;status.Name" xml:space="preserve">
+    <value>status</value>
+  </data>
+  <data name="&gt;&gt;status.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;triggers.Name" xml:space="preserve">
+    <value>triggers</value>
+  </data>
+  <data name="&gt;&gt;triggers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nextRunTime.Name" xml:space="preserve">
+    <value>nextRunTime</value>
+  </data>
+  <data name="&gt;&gt;nextRunTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lastRunTime.Name" xml:space="preserve">
+    <value>lastRunTime</value>
+  </data>
   <data name="&gt;&gt;lastRunTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lastRunResult.Name" xml:space="preserve">
+    <value>lastRunResult</value>
+  </data>
+  <data name="&gt;&gt;lastRunResult.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;author.Name" xml:space="preserve">
     <value>author</value>
   </data>
-  <data name="&gt;&gt;nextRunTime.Name" xml:space="preserve">
-    <value>nextRunTime</value>
+  <data name="&gt;&gt;author.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="smallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="&gt;&gt;created.Name" xml:space="preserve">
+    <value>created</value>
+  </data>
+  <data name="&gt;&gt;created.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;smallImageList.Name" xml:space="preserve">
+    <value>smallImageList</value>
+  </data>
+  <data name="&gt;&gt;smallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TaskListView</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

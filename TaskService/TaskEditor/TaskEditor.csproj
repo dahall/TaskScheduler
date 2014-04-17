@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -108,6 +108,12 @@
     </Compile>
     <Compile Include="ControlProcessing.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
+    <Compile Include="ListColumnEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListColumnEditor.Designer.cs">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Native\DisabledItemComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -325,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.zh-CN.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListColumnEditor.resx">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

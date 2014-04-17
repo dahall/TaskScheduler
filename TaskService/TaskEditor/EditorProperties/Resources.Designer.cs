@@ -536,6 +536,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The task is currently running. (0x{0:X}).
+        /// </summary>
+        internal static string LastResultRunning {
+            get {
+                return ResourceManager.GetString("LastResultRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The operation completed successfully. (0x0).
         /// </summary>
         internal static string LastResultSuccessful {

@@ -32,7 +32,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public override ContextMenuStrip ContextMenuStrip
 		{
 			get { return listView1.ContextMenuStrip; }
-			set { listView1.ContextMenuStrip = value; listView1.ContextMenuStrip.Opening += listView1ContextMenuStrip_Opening; }
+			set
+			{
+				if (listView1.ContextMenuStrip != value)
+				{
+					if (listView1.ContextMenuStrip != null)
+						listView1.ContextMenuStrip.Opening -= listView1ContextMenuStrip_Opening;
+					listView1.ContextMenuStrip = value;
+					if (value != null)
+						listView1.ContextMenuStrip.Opening += listView1ContextMenuStrip_Opening;
+				}
+			}
 		}
 
 		/// <summary>
@@ -67,11 +77,25 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				coll = value;
+				listView1.BeginUpdate();
 				listView1.Items.Clear();
 				if (coll != null)
 					foreach (var item in coll)
 						listView1.Items.Add(LVIFromTask(item));
+				listView1.EndUpdate();
 			}
+		}
+
+		/// <summary>
+		/// Retrieves the item at the specified location.
+		/// </summary>
+		/// <param name="x">The x-coordinate of the location to search for an item (expressed in client coordinates).</param>
+		/// <param name="y">The y-coordinate of the location to search for an item (expressed in client coordinates).</param>
+		/// <returns>A <see cref="Task"/> that represents the item at the specified position. If there is no item at the specified location, the method returns <c>null</c>.</returns>
+		public Task GetItemAt(int x, int y)
+		{
+			ListViewItem item = listView1.GetItemAt(x, y);
+			return item == null ? null : (Task)item.Tag;
 		}
 
 		/// <summary>
@@ -99,7 +123,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (item != null)
 				{
 					item.Selected = true;
-					this.ContextMenuStrip.Show(listView1, e.Location);
+					if (this.ContextMenuStrip != null)
+						this.ContextMenuStrip.Show(listView1, e.Location);
 				}
 			}
 		}
@@ -108,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			Task t = null;
 			if (listView1.SelectedIndices.Count == 1)
-				t = coll[listView1.SelectedItems[0].Text];
+				t = (Task)listView1.SelectedItems[0].Tag;
 			OnTaskSelected(new TaskSelectedEventArgs(t));
 		}
 
@@ -123,10 +148,10 @@ namespace Microsoft.Win32.TaskScheduler
 				td == null ? "" : task.Definition.Triggers.ToString(),
 				disabled || task.NextRunTime < DateTime.Now ? string.Empty : task.NextRunTime.ToString("G"),
 				task.LastRunTime == DateTime.MinValue ? EditorProperties.Resources.Never :  task.LastRunTime.ToString("G"),
-				task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult),
+				task.LastRunTime == DateTime.MinValue ? string.Empty : task.State == TaskState.Running ? string.Format(EditorProperties.Resources.LastResultRunning, task.LastTaskResult) : ((task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult))),
 				td == null ? "" : task.Definition.RegistrationInfo.Author,
 				string.Empty
-				}, 0);
+				}, 0) { Tag = task };
 			return lvi;
 		}
 
@@ -140,20 +165,22 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			public static new readonly TaskSelectedEventArgs Empty = new TaskSelectedEventArgs();
 
-			/// <summary>
-			/// Gets or sets the task.
-			/// </summary>
-			/// <value>The task.</value>
-			public Task Task { get; set; }
+			private TaskSelectedEventArgs() : base() { }
 
 			/// <summary>
 			/// Initializes a new instance of the <see cref="TaskSelectedEventArgs"/> class.
 			/// </summary>
 			/// <param name="task">The task.</param>
-			public TaskSelectedEventArgs(Task task = null)
+			internal TaskSelectedEventArgs(Task task = null)
 			{
 				this.Task = task;
 			}
+
+			/// <summary>
+			/// Gets the task.
+			/// </summary>
+			/// <value>The task.</value>
+			public Task Task { get; private set; }
 		}
 	}
 }

@@ -1166,7 +1166,8 @@ namespace Microsoft.Win32.TaskScheduler
 					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, out runTimes);
 					count = count1;
 				}
-				ret = Array.ConvertAll<TaskScheduler.V1Interop.SystemTime, DateTime>(runTimes, delegate(TaskScheduler.V1Interop.SystemTime st) { return st; });
+				if (count > 0)
+					ret = Array.ConvertAll<TaskScheduler.V1Interop.SystemTime, DateTime>(runTimes, delegate(TaskScheduler.V1Interop.SystemTime st) { return st; });
 			}
 			catch (Exception ex)
 			{
@@ -2288,7 +2289,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.RunLevel;
-				return TaskRunLevel.Highest;
+				return TaskRunLevel.LUA;
 			}
 			set
 			{

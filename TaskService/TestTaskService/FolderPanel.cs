@@ -45,9 +45,9 @@ namespace TestTaskService
 			{
 				this.TaskListView.Tasks = value;
 				if (value.Count > 0)
-					TaskListView.SelectedIndex = 0;
+					this.TaskListView.SelectedIndex = 0;
 				else
-					taskListView_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);
+					taskListView_TaskSelected(null, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs.Empty);
 			}
 		}
 
