@@ -15,7 +15,7 @@ namespace TestTaskService
 			if (args.Length > 0 && char.ToUpper(args[0][0]) == 'C')
 			{
 				string[] newArgs = new string[args.Length - 1];
-				args.CopyTo(newArgs, 1);
+				Array.Copy(args, 1, newArgs, 0, newArgs.Length);
 				ConsoleMain(newArgs);
 				return;
 			}
@@ -363,13 +363,10 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
-				FolderTaskAction(ts.RootFolder, delegate(TaskFolder fld) { output.WriteLine("{0}: {1}", fld.Name, fld.GetSecurityDescriptorSddlForm()); }, delegate(Task at) { output.WriteLine("  {0}: {1}", at.Name, at.GetSecurityDescriptorSddlForm()); });
-				return;
-
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "Does something";
+				td.RegistrationInfo.Documentation = "Does something";
 				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
@@ -387,12 +384,12 @@ namespace TestTaskService
 				// Add an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", "I3>kimberlya", TaskLogonType.Password);
 
-				/*System.Threading.Thread.Sleep(5000);
+				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
-				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);*/
-				DisplayTask(t, false);
+				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+				//DisplayTask(t, false);
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
@@ -417,7 +414,7 @@ namespace TestTaskService
 		{
 			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-			Version ver = ts.HighestSupportedVersion;
+			Version ver = TaskService.LibraryVersion;
 			bool isV12 = (ver >= new Version(1, 2));
 			bool isV13 = (ver >= new Version(1, 3));
 			bool isV14 = (ver >= new Version(1, 4));
