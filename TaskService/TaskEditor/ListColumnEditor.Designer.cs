@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListColumnEditor));
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
 			this.upBtn = new System.Windows.Forms.Button();
@@ -44,135 +45,90 @@
 			// 
 			// cancelBtn
 			// 
-			this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.cancelBtn, "cancelBtn");
 			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelBtn.Location = new System.Drawing.Point(467, 236);
 			this.cancelBtn.Name = "cancelBtn";
-			this.cancelBtn.Size = new System.Drawing.Size(75, 23);
-			this.cancelBtn.TabIndex = 0;
-			this.cancelBtn.Text = "Cancel";
 			this.cancelBtn.UseVisualStyleBackColor = true;
 			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
 			// okBtn
 			// 
-			this.okBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.okBtn.Location = new System.Drawing.Point(386, 236);
+			resources.ApplyResources(this.okBtn, "okBtn");
 			this.okBtn.Name = "okBtn";
-			this.okBtn.Size = new System.Drawing.Size(75, 23);
-			this.okBtn.TabIndex = 0;
-			this.okBtn.Text = "OK";
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
 			// upBtn
 			// 
-			this.upBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.upBtn.Location = new System.Drawing.Point(467, 90);
+			resources.ApplyResources(this.upBtn, "upBtn");
 			this.upBtn.Name = "upBtn";
-			this.upBtn.Size = new System.Drawing.Size(75, 23);
-			this.upBtn.TabIndex = 0;
-			this.upBtn.Text = "M&ove Up";
 			this.upBtn.UseVisualStyleBackColor = true;
 			this.upBtn.Click += new System.EventHandler(this.upBtn_Click);
 			// 
 			// downBtn
 			// 
-			this.downBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.downBtn.Location = new System.Drawing.Point(467, 119);
+			resources.ApplyResources(this.downBtn, "downBtn");
 			this.downBtn.Name = "downBtn";
-			this.downBtn.Size = new System.Drawing.Size(75, 23);
-			this.downBtn.TabIndex = 0;
-			this.downBtn.Text = "Mo&ve Down";
 			this.downBtn.UseVisualStyleBackColor = true;
 			this.downBtn.Click += new System.EventHandler(this.downBtn_Click);
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(13, 13);
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(95, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "&Available columns:";
 			// 
 			// availColsListBox
 			// 
-			this.availColsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+			resources.ApplyResources(this.availColsListBox, "availColsListBox");
 			this.availColsListBox.FormattingEnabled = true;
-			this.availColsListBox.Location = new System.Drawing.Point(13, 30);
 			this.availColsListBox.Name = "availColsListBox";
-			this.availColsListBox.Size = new System.Drawing.Size(170, 186);
-			this.availColsListBox.TabIndex = 2;
 			this.availColsListBox.SelectedIndexChanged += new System.EventHandler(this.availColsListBox_SelectedIndexChanged);
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(291, 13);
+			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(98, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Display&ed columns:";
 			// 
 			// dispColsListBox
 			// 
-			this.dispColsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+			resources.ApplyResources(this.dispColsListBox, "dispColsListBox");
 			this.dispColsListBox.FormattingEnabled = true;
-			this.dispColsListBox.Location = new System.Drawing.Point(291, 30);
 			this.dispColsListBox.Name = "dispColsListBox";
-			this.dispColsListBox.Size = new System.Drawing.Size(170, 186);
-			this.dispColsListBox.TabIndex = 2;
 			this.dispColsListBox.SelectedIndexChanged += new System.EventHandler(this.dispColsListBox_SelectedIndexChanged);
 			// 
 			// addBtn
 			// 
-			this.addBtn.Location = new System.Drawing.Point(189, 90);
+			resources.ApplyResources(this.addBtn, "addBtn");
 			this.addBtn.Name = "addBtn";
-			this.addBtn.Size = new System.Drawing.Size(96, 23);
-			this.addBtn.TabIndex = 0;
-			this.addBtn.Text = "A&dd ->";
 			this.addBtn.UseVisualStyleBackColor = true;
 			this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
 			// 
 			// remBtn
 			// 
-			this.remBtn.Location = new System.Drawing.Point(189, 119);
+			resources.ApplyResources(this.remBtn, "remBtn");
 			this.remBtn.Name = "remBtn";
-			this.remBtn.Size = new System.Drawing.Size(96, 23);
-			this.remBtn.TabIndex = 0;
-			this.remBtn.Text = "<- &Remove";
 			this.remBtn.UseVisualStyleBackColor = true;
 			this.remBtn.Click += new System.EventHandler(this.remBtn_Click);
 			// 
 			// restoreBtn
 			// 
-			this.restoreBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.restoreBtn.Location = new System.Drawing.Point(189, 193);
+			resources.ApplyResources(this.restoreBtn, "restoreBtn");
 			this.restoreBtn.Name = "restoreBtn";
-			this.restoreBtn.Size = new System.Drawing.Size(96, 23);
-			this.restoreBtn.TabIndex = 0;
-			this.restoreBtn.Text = "Re&store Defaults";
 			this.restoreBtn.UseVisualStyleBackColor = true;
 			this.restoreBtn.Click += new System.EventHandler(this.restoreBtn_Click);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Location = new System.Drawing.Point(13, 228);
+			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(529, 2);
-			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
 			// 
 			// ListColumnEditor
 			// 
 			this.AcceptButton = this.okBtn;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
-			this.ClientSize = new System.Drawing.Size(554, 271);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.dispColsListBox);
 			this.Controls.Add(this.label2);
@@ -187,7 +143,6 @@
 			this.Controls.Add(this.cancelBtn);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "ListColumnEditor";
-			this.Text = "Add/Remove Columns";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

@@ -307,7 +307,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="LogonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="sddl">The security descriptor associated with the registered task. You can specify the access control list (ACL) in the security descriptor for a task in order to allow or deny certain users and groups access to a task.</param>
 		/// <returns>
-		/// A <see cref="Task" /> instance that represents the new task.
+		/// A <see cref="Task" /> instance that represents the new task. This will return <c>null</c> if <paramref name="createType"/> is set to <c>ValidateOnly</c> and there are no validation errors.
 		/// </returns>
 		/// <exception cref="System.ArgumentOutOfRangeException">
 		/// Path;Task names may not include any characters which are invalid for file names.
@@ -324,7 +324,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
-				return Task.CreateTask(this.TaskService, v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl));
+			{
+				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl);
+				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
+					return null;
+				return Task.CreateTask(this.TaskService, iRegTask);
+			}
 
 			// Check for V1 invalid task names
 			string invChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));

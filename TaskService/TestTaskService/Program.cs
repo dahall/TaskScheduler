@@ -384,7 +384,7 @@ namespace TestTaskService
 				// Add an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", "I3>kimberlya", TaskLogonType.Password);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
 
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
