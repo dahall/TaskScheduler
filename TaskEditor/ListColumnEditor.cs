@@ -38,7 +38,9 @@ namespace Microsoft.Win32.TaskScheduler
 			defCols = (string[])defaultColumns.Clone();
 			this.DisplayedColumns = (string[])displayedColumns.Clone();
 			availColsListBox.Items.AddRange(GetAvailableColumns(columns, displayedColumns));
+			availColsListBox_SelectedIndexChanged(null, EventArgs.Empty);
 			dispColsListBox.Items.AddRange(displayedColumns);
+			dispColsListBox_SelectedIndexChanged(null, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -62,13 +64,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void addBtn_Click(object sender, EventArgs e)
 		{
-			dispColsListBox.Items.Add(availColsListBox.SelectedItem.ToString());
+			int idx = dispColsListBox.Items.Add(availColsListBox.SelectedItem.ToString());
 			availColsListBox.Items.RemoveAt(availColsListBox.SelectedIndex);
+			dispColsListBox.SelectedIndex = idx;
 		}
 
 		private void remBtn_Click(object sender, EventArgs e)
 		{
-			availColsListBox.Items.Add(dispColsListBox.SelectedItem.ToString());
+			int idx = availColsListBox.Items.Add(dispColsListBox.SelectedItem.ToString());
+			dispColsListBox.Items.RemoveAt(dispColsListBox.SelectedIndex);
+			availColsListBox.SelectedIndex = idx;
 		}
 
 		private void upBtn_Click(object sender, EventArgs e)
@@ -77,6 +82,7 @@ namespace Microsoft.Win32.TaskScheduler
 			int newIdx = dispColsListBox.SelectedIndex - 1;
 			dispColsListBox.Items.RemoveAt(dispColsListBox.SelectedIndex);
 			dispColsListBox.Items.Insert(newIdx, val);
+			dispColsListBox.SelectedIndex = newIdx;
 		}
 
 		private void downBtn_Click(object sender, EventArgs e)
@@ -85,6 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 			int newIdx = dispColsListBox.SelectedIndex + 1;
 			dispColsListBox.Items.RemoveAt(dispColsListBox.SelectedIndex);
 			dispColsListBox.Items.Insert(newIdx, val);
+			dispColsListBox.SelectedIndex = newIdx;
 		}
 
 		private void restoreBtn_Click(object sender, EventArgs e)
@@ -93,11 +100,13 @@ namespace Microsoft.Win32.TaskScheduler
 			availColsListBox.Items.Clear();
 			availColsListBox.Items.AddRange(GetAvailableColumns(cols, defCols));
 			availColsListBox.EndUpdate();
+			availColsListBox_SelectedIndexChanged(null, EventArgs.Empty);
 
 			dispColsListBox.BeginUpdate();
 			dispColsListBox.Items.Clear();
 			dispColsListBox.Items.AddRange(defCols);
 			dispColsListBox.EndUpdate();
+			dispColsListBox_SelectedIndexChanged(null, EventArgs.Empty);
 		}
 
 		private void okBtn_Click(object sender, EventArgs e)
@@ -125,6 +134,27 @@ namespace Microsoft.Win32.TaskScheduler
 			remBtn.Enabled = validSel;
 			upBtn.Enabled = validSel && dispColsListBox.SelectedIndex > 0;
 			downBtn.Enabled = validSel && dispColsListBox.Items.Count > 1 && dispColsListBox.SelectedIndex < (dispColsListBox.Items.Count - 1);
+		}
+
+		private void dispColsListBox_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (this.dispColsListBox.SelectedItem == null) return;
+			this.dispColsListBox.DoDragDrop(this.dispColsListBox.SelectedItem, DragDropEffects.Move);
+		}
+
+		private void dispColsListBox_DragOver(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Move;
+		}
+
+		private void dispColsListBox_DragDrop(object sender, DragEventArgs e)
+		{
+			Point point = dispColsListBox.PointToClient(new Point(e.X, e.Y));
+			int index = this.dispColsListBox.IndexFromPoint(point);
+			if (index < 0) index = this.dispColsListBox.Items.Count - 1;
+			object data = e.Data.GetData(typeof(string));
+			this.dispColsListBox.Items.Remove(data);
+			this.dispColsListBox.Items.Insert(index, data);
 		}
 	}
 }
