@@ -885,6 +885,27 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets an instance of the parent folder.
+		/// </summary>
+		/// <value>
+		/// A <see cref="TaskFolder"/> object representing the parent folder of this task.
+		/// </value>
+		public TaskFolder Folder
+		{
+			get
+			{
+				if (v2Task == null)
+					return this.TaskService.RootFolder;
+
+				string path = v2Task.Path;
+				string parentPath = System.IO.Path.GetDirectoryName(path);
+				if (string.IsNullOrEmpty(parentPath))
+					return null;
+				return this.TaskService.GetFolder(parentPath);
+			}
+		}
+
+		/// <summary>
 		/// Gets a value indicating whether this task instance is active.
 		/// </summary>
 		/// <value>

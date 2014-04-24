@@ -15,9 +15,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Specifies the right to exert full control over a task folder or task, and to modify access control and audit rules. This value represents the right to do anything with a task and is the combination of all rights in this enumeration.</summary>
 		FullControl = 0x1f01ff,
 		/// <summary>Specifies the right to create tasks and folders, and to add or remove data from tasks. This right includes the following rights: .</summary>
-		Write = 0x116,
+		Write = 0x120116,
 		/// <summary>Specifies the right to open and copy folders or tasks as read-only. This right includes the following rights: .</summary>
-		Read = 0x20089,
+		Read = 0x120089,
+		/// <summary>Specifies the right run tasks. This right includes the following rights: .</summary>
+		Execute = 0x120089,
 		/// <summary>The right to wait on a task.</summary>
 		Synchronize = 0x100000,
 		/// <summary>The right to change the owner of a task.</summary>
@@ -28,24 +30,24 @@ namespace Microsoft.Win32.TaskScheduler
 		ReadPermissions = 0x20000,
 		/// <summary>The right to delete a folder or task.</summary>
 		Delete = 0x10000,
-		/// <summary>Unknown100</summary>
-		Unknown100 = 0x100,
-		/// <summary>Unknown080</summary>
-		Unknown080 = 0x80,
-		/// <summary>Unknown040</summary>
-		Unknown040 = 0x40,
-		/// <summary>Unknown020</summary>
-		Unknown020 = 0x20,
-		/// <summary>Unknown010</summary>
-		Unknown010 = 0x10,
-		/// <summary>Unknown008</summary>
-		Unknown008 = 8,
-		/// <summary>Unknown004</summary>
-		Unknown004 = 4,
-		/// <summary>Unknown002</summary>
-		Unknown002 = 2,
-		/// <summary>Unknown001</summary>
-		Unknown001 = 1,
+		/// <summary>Specifies the right to open and write file system attributes to a folder or file. This does not include the ability to write data, extended attributes, or access and audit rules.</summary>
+		WriteAttributes = 0x100,
+		/// <summary>Specifies the right to open and copy file system attributes from a folder or task. For example, this value specifies the right to view the file creation or modified date. This does not include the right to read data, extended file system attributes, or access and audit rules.</summary>
+		ReadAttributes = 0x80,
+		/// <summary>Specifies the right to delete a folder and any tasks contained within that folder.</summary>
+		DeleteChild = 0x40,
+		/// <summary>Specifies the right to run a task.</summary>
+		ExecuteFile = 0x20,
+		/// <summary>Specifies the right to open and write extended file system attributes to a folder or file. This does not include the ability to write data, attributes, or access and audit rules.</summary>
+		WriteExtendedAttributes = 0x10,
+		/// <summary>Specifies the right to open and copy extended system attributes from a folder or task. For example, this value specifies the right to view author and content information. This does not include the right to read data, system attributes, or access and audit rules.</summary>
+		ReadExtendedAttributes = 8,
+		/// <summary>Specifies the right to append data to the end of a file.</summary>
+		AppendData = 4,
+		/// <summary>Specifies the right to open and write to a file or folder. This does not include the right to open and write file system attributes, extended file system attributes, or access and audit rules.</summary>
+		WriteData = 2,
+		/// <summary>Specifies the right to open and copy a task or folder. This does not include the right to read file system attributes, extended file system attributes, or access and audit rules.</summary>
+		ReadData = 1,
 	}
 
 	/// <summary>
