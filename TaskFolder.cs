@@ -41,6 +41,28 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the parent folder of this folder.
+		/// </summary>
+		/// <value>
+		/// The parent folder, or <c>null</c> if this folder is the root folder.
+		/// </value>
+		public TaskFolder Parent
+		{
+			get
+			{
+				// V1 only has the root folder
+				if (v2Folder == null)
+					return null;
+
+				string path = v2Folder.Path;
+				string parentPath = System.IO.Path.GetDirectoryName(path);
+				if (string.IsNullOrEmpty(parentPath))
+					return null;
+				return this.TaskService.GetFolder(parentPath);
+			}
+		}
+
+		/// <summary>
 		/// Gets the path to where the folder is stored.
 		/// </summary>
 		public string Path

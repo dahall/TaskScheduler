@@ -349,13 +349,13 @@ namespace TestTaskService
 			ts.RootFolder.DeleteTask(t.Name);
 		}
 
-		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction)
+		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction, int level = 0)
 		{
 			fldAction(fld);
 			foreach (var task in fld.Tasks)
 				taskAction(task);
 			foreach (var sfld in fld.SubFolders)
-				FolderTaskAction(sfld, fldAction, taskAction);
+				FolderTaskAction(sfld, fldAction, taskAction, level + 1);
 		}
 
 		internal static void ShortTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
@@ -363,6 +363,10 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
+				/*Action<string> d = delegate(string s) { var ar = s.Split('|'); foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(ar[2], @"\(A;(?<Flag>\w*);(?<Right>\w*);(?<Guid>\w*);(?<OIGuid>\w*);(?<Acct>[\w\-\d]*)(?:;[^\)]*)?\)")) output.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", ar[0], ar[1], m.Groups["Flag"], m.Groups["Right"], m.Groups["Guid"], m.Groups["OIGuid"], m.Groups["Acct"]); };
+				FolderTaskAction(ts.RootFolder, delegate(TaskFolder f) { d("F|" + f.Name + "|" + f.GetSecurityDescriptorSddlForm()); }, delegate(Task s) { d("T|" + s.Name + "|" + s.GetSecurityDescriptorSddlForm()); });
+				return;*/
+
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
