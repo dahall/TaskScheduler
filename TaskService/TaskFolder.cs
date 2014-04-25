@@ -347,6 +347,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Folder != null)
 			{
+				if (TaskService.LibraryVersion.Minor > 3)
+					definition.Actions.ConvertUnsupportedActions();
 				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl);
 				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
 					return null;

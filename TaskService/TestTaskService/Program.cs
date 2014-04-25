@@ -385,15 +385,24 @@ namespace TestTaskService
 				// Add a trigger that will fire every week on Friday
 				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
 
+				ShowMessageAction sm = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
+				sm.Title = "title";
+				sm.MessageBody = "body";
+
+				EmailAction ma = new EmailAction("Subject", "x@x.com", "y@y.com; z@z.com", "Body", "mail.google.com") { Bcc = "c@c.com", Cc = "b@b.com" };
+				ma.Attachments = new object[] { @"C:\RAT2Llog.txt" };
+				ma.HeaderFields.Add("N1", "V1");
+				ma.HeaderFields.Add("N2", "V2");
+				td.Actions.Add(ma);
 				// Add an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
-
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
+				output.WriteLine(td.XmlText);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
 
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-				//DisplayTask(t, false);
+				DisplayTask(t, true);
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
