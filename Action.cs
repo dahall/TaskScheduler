@@ -41,6 +41,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
 		{
 			V2Interop.IActionCollection iActions = iTaskDef.Actions;
+
 			switch (this.GetType().Name)
 			{
 				case "ComHandlerAction":
@@ -201,6 +202,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
+	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ComHandlerAction : Action
 	{
 		/// <summary>
@@ -272,7 +274,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that executes a command-line operation.
 	/// </summary>
-	[XmlRoot("Exec", Namespace = "http://schemas.microsoft.com/windows/2004/02/mit/task", IsNullable = false)]
+	[XmlRoot("Exec", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ExecAction : Action
 	{
 		private V1Interop.ITask v1Task;
@@ -452,10 +454,23 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
+	/// An interface that exposes the ability to convert an actions functionality to a PowerShell script.
+	/// </summary>
+	public interface IBindAsExecAction
+	{
+		/// <summary>
+		/// Gets the PowerShell script for an action.
+		/// </summary>
+		/// <returns>Single line PowerShell script string.</returns>
+		string GetPowerShellCommand();
+	}
+
+	/// <summary>
 	/// Represents an action that sends an e-mail.
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
-	public sealed class EmailAction : Action
+	[XmlRoot("SendEmail", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class EmailAction : Action, IBindAsExecAction
 	{
 		/// <summary>
 		/// Creates an unbound instance of <see cref="EmailAction"/>.
@@ -567,6 +582,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the header information in the e-mail message to send.
 		/// </summary>
+		[XmlArray]
+		[XmlArrayItem("HeaderField", typeof(NameValuePair))]
 		public NamedValueCollection HeaderFields
 		{
 			get
@@ -595,10 +612,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets an array of attachments that is sent with the e-mail.
 		/// </summary>
+		[XmlArray("Attachments", IsNullable=true)]
+		[XmlArrayItem(typeof(string), ElementName = "File")]
 		public object[] Attachments
 		{
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Attachments") ? (object[])unboundValues["Attachments"] : null) : ((V2Interop.IEmailAction)iAction).Attachments; }
-			set { if (iAction == null) unboundValues["Attachments"] = value; else ((V2Interop.IEmailAction)iAction).Attachments = value; }
+			set
+			{
+				if (value != null && value.Length > 8)
+					throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
+				if (iAction == null)
+					unboundValues["Attachments"] = value;
+				else
+					((V2Interop.IEmailAction)iAction).Attachments = value;
+			}
 		}
 
 		/// <summary>
@@ -633,13 +660,71 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			return string.Format(Properties.Resources.EmailAction, this.Subject, this.To, this.Cc, this.Bcc, this.From, this.ReplyTo, this.Body, this.Server, this.Id);
 		}
+
+		string IBindAsExecAction.GetPowerShellCommand()
+		{
+			// Send-MailMessage [-To] <String[]> [-Subject] <String> [[-Body] <String> ] [[-SmtpServer] <String> ] -From <String> [-Attachments <String[]> ]
+			//    [-Bcc <String[]> ] [-BodyAsHtml] [-Cc <String[]> ] [-Credential <PSCredential> ] [-DeliveryNotificationOption <DeliveryNotificationOptions> ]
+			//    [-Encoding <Encoding> ] [-Port <Int32> ] [-Priority <MailPriority> ] [-UseSsl] [ <CommonParameters>]
+			var sb = new System.Text.StringBuilder();
+			sb.AppendFormat("Send-MailMessage -From \"{0}\" -Subject \"{1}\" -SmtpServer \"{2}\"", this.From, this.Subject, this.Server);
+			if (!string.IsNullOrEmpty(this.To))
+				sb.AppendFormat(" -To {0}", ToPS(this.To));
+			if (!string.IsNullOrEmpty(this.Cc))
+				sb.AppendFormat(" -Cc {0}", ToPS(this.Cc));
+			if (!string.IsNullOrEmpty(this.Bcc))
+				sb.AppendFormat(" -Bcc {0}", ToPS(this.Bcc));
+			if (!string.IsNullOrEmpty(this.Body))
+				sb.AppendFormat(" -Body \"{0}\"", this.Body);
+			if (this.Attachments != null && this.Attachments.Length > 0)
+				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, delegate(object o) { return o.ToString(); })));
+			return sb.ToString();
+		}
+
+		internal static string ToPS(string input, char delimeter = ';')
+		{
+			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeter), delegate(string i) { return i.Trim(); }));
+		}
+
+		internal static string ToPS(string[] input)
+		{
+			return string.Join(", ", Array.ConvertAll<string, string>(input, delegate(string i) { return string.Concat("\"", i.Trim(), "\""); }));
+		}
+
+		internal static Action FromPowerShellCommand(string p)
+		{
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From ""(?<from>[^""]+)"" -Subject ""(?<subject>[^""]+)"" -SmtpServer ""(?<server>[^""]+)""(?: -To (?<to>""[^""]+""(?:, ""[^""]+"")*))?(?: -Cc (?<cc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Bcc (?<bcc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Body ""(?<body>[^""]+)"")?(?: -Attachments (?<att>""[^""]+""(?:, ""[^""]+"")*))?\s*$");
+			if (match.Success)
+			{
+				EmailAction action = new EmailAction(match.Groups["subject"].Value, match.Groups["from"].Value, FromPS(match.Groups["to"]), FromPS(match.Groups["body"]), match.Groups["server"].Value)
+					{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
+				if (match.Groups["att"].Success)
+					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), delegate(string s) { return s; });
+				return action;
+			}
+			return null;
+		}
+
+		private static string[] FromPS(string p)
+		{
+			var list = p.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+			return Array.ConvertAll<string, string>(list, delegate(string i) { return i.Trim('\"'); });
+		}
+
+		private static string FromPS(System.Text.RegularExpressions.Group g, string delimeter = ";")
+		{
+			if (g.Success)
+				return string.Join(delimeter, FromPS(g.Value));
+			return null;
+		}
 	}
 
 	/// <summary>
 	/// Represents an action that shows a message box when a task is activated.
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
-	public sealed class ShowMessageAction : Action
+	[XmlRoot("ShowMessage", Namespace = TaskDefinition.tns, IsNullable = false)]
+	public sealed class ShowMessageAction : Action, IBindAsExecAction
 	{
 		/// <summary>
 		/// Creates a new unbound instance of <see cref="ShowMessageAction"/>.
@@ -704,6 +789,30 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return string.Format(Properties.Resources.ShowMessageAction, this.Title, this.MessageBody, this.Id);
+		}
+
+		string IBindAsExecAction.GetPowerShellCommand()
+		{
+			// [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Your_Desired_Message','Your_Desired_Title')
+			var sb = new System.Text.StringBuilder("[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('");
+			sb.Append(this.MessageBody);
+			if (this.Title != null)
+			{
+				sb.Append("','");
+				sb.Append(this.Title);
+			}
+			sb.Append("')");
+			return sb.ToString();
+		}
+
+		internal static Action FromPowerShellCommand(string p)
+		{
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[System.Reflection.Assembly\]::LoadWithPartialName\('System.Windows.Forms'\); \[System.Windows.Forms.MessageBox\]::Show\('(?<msg>[^']+)(?:','(?<t>[^']+))?'\)$");
+			if (match.Success)
+			{
+				return new ShowMessageAction(match.Groups["msg"].Value, match.Groups["t"].Success ? match.Groups["t"].Value : null);
+			}
+			return null;
 		}
 	}
 }

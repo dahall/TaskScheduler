@@ -4,5 +4,5 @@
 [assembly: AssemblyCompany("CodePlex Community")]
 [assembly: AssemblyProduct("TaskService")]
 [assembly: AssemblyCopyright("Copyright © 2014")]
-[assembly: AssemblyVersion("2.1.1.*")]
-[assembly: AssemblyFileVersion("2.1.1.0")]
+[assembly: AssemblyVersion("2.2.0.*")]
+[assembly: AssemblyFileVersion("2.2.0.0")]

@@ -25,7 +25,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				Action ret = new EmailAction(emailSubjectText.Text, emailFromText.Text,
 					emailToText.Text, emailTextText.Text, emailSMTPText.Text);
 				if (emailAttachmentText.TextLength > 0)
-					((EmailAction)ret).Attachments = new object[] { emailAttachmentText.Text };
+					((EmailAction)ret).Attachments = new string[] { emailAttachmentText.Text };
 				return ret;
 			}
 			set
