@@ -980,7 +980,12 @@ namespace Microsoft.Win32.TaskScheduler
 				return;
 
 			if (tabControl.SelectedTab == historyTab)
-				taskHistoryControl1.Activate(this.task);
+			{
+				if (taskHistoryControl1.Task == null)
+					taskHistoryControl1.Task = this.task;
+				else
+					taskHistoryControl1.RefreshHistory();
+			}
 		}
 
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)

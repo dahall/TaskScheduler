@@ -57,12 +57,6 @@ namespace Microsoft.Win32.TaskScheduler
 			this.monthlyTriggerPage = new WizDLL::AeroWizard.WizardPage();
 			this.monthlyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI();
 			this.onEventTriggerPage = new WizDLL::AeroWizard.WizardPage();
-			this.onEventLogLabel = new System.Windows.Forms.Label();
-			this.onEventIdText = new System.Windows.Forms.TextBox();
-			this.onEventSourceLabel = new System.Windows.Forms.Label();
-			this.onEventSourceCombo = new System.Windows.Forms.ComboBox();
-			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
-			this.onEventIdLabel = new System.Windows.Forms.Label();
 			this.actionSelectPage = new WizDLL::AeroWizard.WizardPage();
 			this.actionSelectionList = new GrpCtrlDLL::GroupControls.RadioButtonList();
 			this.runActionPage = new WizDLL::AeroWizard.WizardPage();
@@ -83,6 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.openDlgAfterCheck = new System.Windows.Forms.CheckBox();
 			this.summaryPrompt = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
 			this.introPage.SuspendLayout();
 			this.triggerSelectPage.SuspendLayout();
@@ -124,13 +119,13 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// introPage
 			// 
-			resources.ApplyResources(this.introPage, "introPage");
 			this.introPage.AllowNext = false;
 			this.introPage.Controls.Add(this.nameText);
 			this.introPage.Controls.Add(this.descText);
 			this.introPage.Controls.Add(this.label2);
 			this.introPage.Controls.Add(this.label1);
 			this.introPage.Name = "introPage";
+			resources.ApplyResources(this.introPage, "introPage");
 			// 
 			// nameText
 			// 
@@ -155,10 +150,10 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// triggerSelectPage
 			// 
-			resources.ApplyResources(this.triggerSelectPage, "triggerSelectPage");
 			this.triggerSelectPage.AllowNext = false;
 			this.triggerSelectPage.Controls.Add(this.triggerSelectionList);
 			this.triggerSelectPage.Name = "triggerSelectPage";
+			resources.ApplyResources(this.triggerSelectPage, "triggerSelectPage");
 			this.triggerSelectPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.triggerSelectPage_Commit);
 			this.triggerSelectPage.Initialize += new System.EventHandler<WizDLL::AeroWizard.WizardPageInitEventArgs>(this.triggerSelectPage_Initialize);
 			// 
@@ -171,10 +166,10 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// dailyTriggerPage
 			// 
-			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			this.dailyTriggerPage.Controls.Add(this.dailyTriggerUI1);
 			this.dailyTriggerPage.Name = "dailyTriggerPage";
 			this.dailyTriggerPage.NextPage = this.triggerPropPage;
+			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			// 
 			// dailyTriggerUI1
 			// 
@@ -183,7 +178,6 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// triggerPropPage
 			// 
-			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
 			this.triggerPropPage.Controls.Add(this.triggerPropText);
 			this.triggerPropPage.Controls.Add(this.durationSpan);
 			this.triggerPropPage.Controls.Add(this.repeatSpan);
@@ -191,6 +185,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.triggerPropPage.Controls.Add(this.enabledCheckBox);
 			this.triggerPropPage.Controls.Add(this.repeatCheckBox);
 			this.triggerPropPage.Name = "triggerPropPage";
+			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
 			this.triggerPropPage.Initialize += new System.EventHandler<WizDLL::AeroWizard.WizardPageInitEventArgs>(this.triggerPropPage_Initialize);
 			// 
 			// triggerPropText
@@ -231,11 +226,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// oneTimeTriggerPage
 			// 
-			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartTimePicker);
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartLabel);
 			this.oneTimeTriggerPage.Name = "oneTimeTriggerPage";
 			this.oneTimeTriggerPage.NextPage = this.triggerPropPage;
+			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.oneTimeTriggerPage_Commit);
 			// 
 			// oneTimeStartTimePicker
@@ -251,10 +246,10 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// weeklyTriggerPage
 			// 
-			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			this.weeklyTriggerPage.Controls.Add(this.weeklyTriggerUI1);
 			this.weeklyTriggerPage.Name = "weeklyTriggerPage";
 			this.weeklyTriggerPage.NextPage = this.triggerPropPage;
+			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			// 
 			// weeklyTriggerUI1
 			// 
@@ -263,10 +258,10 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// monthlyTriggerPage
 			// 
-			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			this.monthlyTriggerPage.Controls.Add(this.monthlyTriggerUI1);
 			this.monthlyTriggerPage.Name = "monthlyTriggerPage";
 			this.monthlyTriggerPage.NextPage = this.triggerPropPage;
+			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			// 
 			// monthlyTriggerUI1
 			// 
@@ -276,57 +271,18 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// onEventTriggerPage
 			// 
-			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
-			this.onEventTriggerPage.Controls.Add(this.onEventLogLabel);
-			this.onEventTriggerPage.Controls.Add(this.onEventIdText);
-			this.onEventTriggerPage.Controls.Add(this.onEventSourceLabel);
-			this.onEventTriggerPage.Controls.Add(this.onEventSourceCombo);
-			this.onEventTriggerPage.Controls.Add(this.onEventLogCombo);
-			this.onEventTriggerPage.Controls.Add(this.onEventIdLabel);
+			this.onEventTriggerPage.Controls.Add(this.eventTriggerUI1);
 			this.onEventTriggerPage.Name = "onEventTriggerPage";
 			this.onEventTriggerPage.NextPage = this.triggerPropPage;
+			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
-			this.onEventTriggerPage.Initialize += new System.EventHandler<WizDLL::AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
-			// 
-			// onEventLogLabel
-			// 
-			resources.ApplyResources(this.onEventLogLabel, "onEventLogLabel");
-			this.onEventLogLabel.Name = "onEventLogLabel";
-			// 
-			// onEventIdText
-			// 
-			resources.ApplyResources(this.onEventIdText, "onEventIdText");
-			this.onEventIdText.Name = "onEventIdText";
-			// 
-			// onEventSourceLabel
-			// 
-			resources.ApplyResources(this.onEventSourceLabel, "onEventSourceLabel");
-			this.onEventSourceLabel.Name = "onEventSourceLabel";
-			// 
-			// onEventSourceCombo
-			// 
-			resources.ApplyResources(this.onEventSourceCombo, "onEventSourceCombo");
-			this.onEventSourceCombo.Name = "onEventSourceCombo";
-			// 
-			// onEventLogCombo
-			// 
-			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
-			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.onEventLogCombo.FormattingEnabled = true;
-			this.onEventLogCombo.Name = "onEventLogCombo";
-			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
-			// 
-			// onEventIdLabel
-			// 
-			resources.ApplyResources(this.onEventIdLabel, "onEventIdLabel");
-			this.onEventIdLabel.Name = "onEventIdLabel";
 			// 
 			// actionSelectPage
 			// 
-			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
 			this.actionSelectPage.AllowNext = false;
 			this.actionSelectPage.Controls.Add(this.actionSelectionList);
 			this.actionSelectPage.Name = "actionSelectPage";
+			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
 			this.actionSelectPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.actionSelectPage_Commit);
 			// 
 			// actionSelectionList
@@ -338,11 +294,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// runActionPage
 			// 
-			resources.ApplyResources(this.runActionPage, "runActionPage");
 			this.runActionPage.AllowNext = false;
 			this.runActionPage.Controls.Add(this.execActionUI1);
 			this.runActionPage.Name = "runActionPage";
 			this.runActionPage.NextPage = this.secOptPage;
+			resources.ApplyResources(this.runActionPage, "runActionPage");
 			this.runActionPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.runActionPage_Commit);
 			// 
 			// execActionUI1
@@ -353,7 +309,6 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// secOptPage
 			// 
-			resources.ApplyResources(this.secOptPage, "secOptPage");
 			this.secOptPage.Controls.Add(this.taskLocalOnlyCheck);
 			this.secOptPage.Controls.Add(this.taskLoggedOptionalRadio);
 			this.secOptPage.Controls.Add(this.taskLoggedOnRadio);
@@ -361,6 +316,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.secOptPage.Controls.Add(this.changePrincipalButton);
 			this.secOptPage.Controls.Add(this.taskUserAcctLabel);
 			this.secOptPage.Name = "secOptPage";
+			resources.ApplyResources(this.secOptPage, "secOptPage");
 			this.secOptPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.secOptPage_Commit);
 			// 
 			// taskLocalOnlyCheck
@@ -406,11 +362,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// emailActionPage
 			// 
-			resources.ApplyResources(this.emailActionPage, "emailActionPage");
 			this.emailActionPage.AllowNext = false;
 			this.emailActionPage.Controls.Add(this.emailActionUI1);
 			this.emailActionPage.Name = "emailActionPage";
 			this.emailActionPage.NextPage = this.secOptPage;
+			resources.ApplyResources(this.emailActionPage, "emailActionPage");
 			this.emailActionPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.emailActionPage_Commit);
 			// 
 			// emailActionUI1
@@ -421,11 +377,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// msgActionPage
 			// 
-			resources.ApplyResources(this.msgActionPage, "msgActionPage");
 			this.msgActionPage.AllowNext = false;
 			this.msgActionPage.Controls.Add(this.showMessageActionUI1);
 			this.msgActionPage.Name = "msgActionPage";
 			this.msgActionPage.NextPage = this.secOptPage;
+			resources.ApplyResources(this.msgActionPage, "msgActionPage");
 			this.msgActionPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.msgActionPage_Commit);
 			// 
 			// showMessageActionUI1
@@ -436,12 +392,12 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// summaryPage
 			// 
-			resources.ApplyResources(this.summaryPage, "summaryPage");
 			this.summaryPage.Controls.Add(this.sumText);
 			this.summaryPage.Controls.Add(this.openDlgAfterCheck);
 			this.summaryPage.Controls.Add(this.summaryPrompt);
 			this.summaryPage.IsFinishPage = true;
 			this.summaryPage.Name = "summaryPage";
+			resources.ApplyResources(this.summaryPage, "summaryPage");
 			this.summaryPage.Initialize += new System.EventHandler<WizDLL::AeroWizard.WizardPageInitEventArgs>(this.summaryPage_Initialize);
 			// 
 			// sumText
@@ -466,6 +422,11 @@ namespace Microsoft.Win32.TaskScheduler
 			this.openFileDialog1.FileName = "openFileDialog";
 			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
 			// 
+			// eventTriggerUI1
+			// 
+			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
+			this.eventTriggerUI1.Name = "eventTriggerUI1";
+			// 
 			// TaskSchedulerWizard
 			// 
 			resources.ApplyResources(this, "$this");
@@ -486,7 +447,6 @@ namespace Microsoft.Win32.TaskScheduler
 			this.weeklyTriggerPage.ResumeLayout(false);
 			this.monthlyTriggerPage.ResumeLayout(false);
 			this.onEventTriggerPage.ResumeLayout(false);
-			this.onEventTriggerPage.PerformLayout();
 			this.actionSelectPage.ResumeLayout(false);
 			this.actionSelectPage.PerformLayout();
 			this.actionSelectionList.ResumeLayout(true);
@@ -527,12 +487,6 @@ namespace Microsoft.Win32.TaskScheduler
 		private System.Windows.Forms.TextBox nameText;
 		private System.Windows.Forms.Label oneTimeStartLabel;
 		private FullDateTimePicker oneTimeStartTimePicker;
-		private System.Windows.Forms.Label onEventLogLabel;
-		private System.Windows.Forms.TextBox onEventIdText;
-		private System.Windows.Forms.Label onEventSourceLabel;
-		private System.Windows.Forms.ComboBox onEventSourceCombo;
-		private System.Windows.Forms.ComboBox onEventLogCombo;
-		private System.Windows.Forms.Label onEventIdLabel;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private WizDLL::AeroWizard.WizardPage secOptPage;
 		private System.Windows.Forms.CheckBox taskLocalOnlyCheck;
@@ -554,6 +508,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private UIComponents.DailyTriggerUI dailyTriggerUI1;
 		private UIComponents.WeeklyTriggerUI weeklyTriggerUI1;
 		private UIComponents.MonthlyTriggerUI monthlyTriggerUI1;
+		private UIComponents.EventTriggerUI eventTriggerUI1;
 
 	}
 }

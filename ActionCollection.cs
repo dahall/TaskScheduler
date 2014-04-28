@@ -120,7 +120,7 @@ namespace Microsoft.Win32.TaskScheduler
 			for (int i = 0; i < this.Count; i++)
 			{
 				ExecAction action = this[i] as ExecAction;
-				if (action != null && action.Arguments.Contains(ScriptIdentifer))
+				if (action != null && action.Arguments != null && action.Arguments.Contains(ScriptIdentifer))
 				{
 					var match = System.Text.RegularExpressions.Regex.Match(action.Arguments, @"<# " + ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
 					if (match.Success)

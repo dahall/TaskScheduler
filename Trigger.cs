@@ -1260,6 +1260,36 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Builds an event log XML query string based on the input parameters.
+		/// </summary>
+		/// <param name="log">The event's log.</param>
+		/// <param name="source">The event's source. Can be <c>null</c>.</param>
+		/// <param name="eventId">The event's id. Can be <c>null</c>.</param>
+		/// <returns>XML query string.</returns>
+		/// <exception cref="System.ArgumentNullException">log</exception>
+		public static string BuildQuery(string log, string source, int? eventId)
+		{
+			StringBuilder sb = new StringBuilder();
+			if (string.IsNullOrEmpty(log))
+				throw new ArgumentNullException("log");
+			sb.AppendFormat("<QueryList><Query Id=\"0\" Path=\"{0}\"><Select Path=\"{0}\">*", log);
+			bool hasSource = !string.IsNullOrEmpty(source), hasId = eventId.HasValue;
+			if (hasSource || hasId)
+			{
+				sb.Append("[System[");
+				if (hasSource)
+					sb.AppendFormat("Provider[@Name='{0}']", source);
+				if (hasSource && hasId)
+					sb.Append(" and ");
+				if (hasId)
+					sb.AppendFormat("EventID={0}", eventId.Value);
+				sb.Append("]]");
+			}
+			sb.Append("</Select></Query></QueryList>");
+			return sb.ToString();
+		}
+
+		/// <summary>
 		/// Gets basic event information.
 		/// </summary>
 		/// <param name="log">The event's log.</param>
@@ -1276,6 +1306,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					using (System.Xml.XmlTextReader rdr = new System.Xml.XmlTextReader(str))
 					{
+						rdr.WhitespaceHandling = System.Xml.WhitespaceHandling.None;
 						try
 						{
 							rdr.MoveToContent();
@@ -1319,25 +1350,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="eventId">The event's id. Can be <c>null</c>.</param>
 		public void SetBasic(string log, string source, int? eventId)
 		{
-			StringBuilder sb = new StringBuilder();
-			if (string.IsNullOrEmpty(log))
-				throw new ArgumentNullException("log");
-			sb.AppendFormat("<QueryList><Query Id=\"0\" Path=\"{0}\"><Select Path=\"{0}\">*", log);
-			bool hasSource = !string.IsNullOrEmpty(source), hasId = eventId.HasValue;
-			if (hasSource || hasId)
-			{
-				sb.Append("[System[");
-				if (hasSource)
-					sb.AppendFormat("Provider[@Name='{0}']", source);
-				if (hasSource && hasId)
-					sb.Append(" and ");
-				if (hasId)
-					sb.AppendFormat("EventID={0}", eventId.Value);
-				sb.Append("]]");
-			}
-			sb.Append("</Select></Query></QueryList>");
 			this.ValueQueries.Clear();
-			this.Subscription = sb.ToString();
+			this.Subscription = BuildQuery(log, source, eventId);
 		}
 
 		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)

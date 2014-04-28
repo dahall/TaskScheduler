@@ -153,24 +153,8 @@ namespace Microsoft.Win32.TaskScheduler
 						break;
 					case TaskTriggerType.Event:
 						TriggerView = TaskTriggerDisplayType.Event;
-						string log, source; int? id;
-						bool basic = ((EventTrigger)trigger).GetBasic(out log, out source, out id);
-						if (!basic)
-						{
-							string sub = ((EventTrigger)trigger).Subscription;
-							if (!string.IsNullOrEmpty(sub))
-								onEventCustomText.Text = sub;
-							else
-								basic = true;
-						}
-						if (basic)
-						{
-							onEventLogCombo.Text = log;
-							onEventSourceCombo.Text = source;
-							onEventIdText.Text = id.HasValue ? id.Value.ToString() : string.Empty;
-						}
-						eventBasicRadio.Checked = basic;
-						eventCustomRadio.Checked = !basic;
+						eventTriggerUI1.TargetServer = TargetServer;
+						eventTriggerUI1.Trigger = trigger;
 						break;
 					case TaskTriggerType.Registration:
 						TriggerView = TaskTriggerDisplayType.Registration;
@@ -329,14 +313,6 @@ namespace Microsoft.Win32.TaskScheduler
 			trigger.Enabled = enabledCheckBox.Checked;
 		}
 
-		private void eventBasicRadio_CheckedChanged(object sender, EventArgs e)
-		{
-			bool basic = eventBasicRadio.Checked || !eventCustomRadio.Checked;
-			onEventBasicPanel.Visible = basic;
-			onEventCustomText.Visible = !basic;
-			InitializeEventLogList();
-		}
-
 		private void expireCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			expireDatePicker.Enabled = expireCheckBox.Checked;
@@ -353,14 +329,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment && expireCheckBox.Checked)
 				trigger.EndBoundary = expireDatePicker.Value;
-		}
-
-		private void InitializeEventLogList()
-		{
-			if (eventBasicRadio.Checked && onEventLogCombo.Items.Count == 0)
-			{
-				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(TargetServer));
-			}
 		}
 
 		private void logonAnyUserRadio_CheckedChanged(object sender, EventArgs e)
@@ -401,28 +369,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			DialogResult = DialogResult.OK;
 			Close();
-		}
-
-		private void onEventCustomText_Leave(object sender, EventArgs e)
-		{
-			((EventTrigger)trigger).Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
-		}
-
-		private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
-		}
-
-		private void onEventTextBox_Leave(object sender, EventArgs e)
-		{
-			EventTrigger et = trigger as EventTrigger;
-			if (et != null && onEventLogCombo.Text.Length > 0)
-			{
-				int rid;
-				int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
-				et.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
-			}
 		}
 
 		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -591,7 +537,6 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerDisplayType.Event:
 					settingsTabControl.SelectedTab = onEventTab;
 					if (!onAssignment) newTrigger = new EventTrigger();
-					InitializeEventLogList();
 					break;
 				case TaskTriggerDisplayType.Registration:
 					settingsTabControl.SelectedTab = startupTab;

@@ -15,7 +15,11 @@ namespace Microsoft.Win32.TaskScheduler
 			try
 			{
 				using (EventLogSession session = isLocal ? new EventLogSession() : new EventLogSession(computerName))
-					return new List<string>(session.GetLogNames()).ToArray();
+				{
+					var l = new List<string>(session.GetLogNames());
+					l.Sort();
+					return l.ToArray();
+				}
 			}
 			catch {}
 #endif

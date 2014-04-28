@@ -379,12 +379,8 @@ namespace Microsoft.Win32.TaskScheduler
 							SetTriggerListItem(AvailableWizardTriggers.Monthly);
 							break;
 						case TaskTriggerType.Event:
-							string log, source; int? id;
-							((EventTrigger)trigger).GetBasic(out log, out source, out id);
-							onEventTriggerPage_Initialize(null, null);
-							onEventLogCombo.Text = log;
-							onEventSourceCombo.Text = source;
-							onEventIdText.Text = id.HasValue ? id.Value.ToString() : string.Empty;
+							eventTriggerUI1.TargetServer = this.TaskService.TargetServer;
+							eventTriggerUI1.Trigger = trigger;
 							SetTriggerListItem(AvailableWizardTriggers.Event);
 							break;
 						default:
@@ -712,31 +708,9 @@ namespace Microsoft.Win32.TaskScheduler
 			trigger.StartBoundary = oneTimeStartTimePicker.Value;
 		}
 
-		private void onEventLogCombo_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(null, onEventLogCombo.Text));
-		}
-
 		private void onEventTriggerPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			if (onEventLogCombo.Text.Length > 0)
-			{
-				int rid;
-				int? id = onEventIdText.TextLength == 0 ? null : (int.TryParse(onEventIdText.Text, out rid) ? (int?)rid : null);
-				((EventTrigger)trigger).SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, id);
-			}
-			else
-			{
-				e.Cancel = true;
-				MessageBox.Show(this, EditorProperties.Resources.WizardEventTriggerInvalid, EditorProperties.Resources.WizardEventTriggerErrorTitle);
-			}
-		}
-
-		private void onEventTriggerPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
-		{
-			if (onEventLogCombo.Items.Count == 0)
-				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(null));
+			trigger = eventTriggerUI1.Trigger;
 		}
 
 		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)

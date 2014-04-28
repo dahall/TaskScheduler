@@ -242,9 +242,12 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
 				TaskDefinition td = ts.NewTask();
-				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
+				//eTrig.ValueQueries.Add("Name", "Value");
+				td.Triggers.Add(eTrig);
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				//WriteXml(td, taskName);
+				WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
 				output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 					t.Name, t.Enabled, t.LastRunTime, t.State, t.IsActive, t.NextRunTime, t.LastRunTime, t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);

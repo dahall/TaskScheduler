@@ -112,478 +112,1102 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 23</value>
-  </data>
-  <data name="wizardControl1.Title" xml:space="preserve">
-    <value>Create Task Wizard</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="oneTimeStartLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="weeklyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a weekly trigger</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
-    <value>taskLoggedOnRadio</value>
-  </data>
-  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerPage.Name" xml:space="preserve">
-    <value>dailyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.8.27120, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openDlgAfterCheck.Name" xml:space="preserve">
-    <value>openDlgAfterCheck</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
-    <value>oneTimeTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardControl, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;secOptPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;wizardControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Name" xml:space="preserve">
-    <value>durationLabel</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="oneTimeTriggerPage.Text" xml:space="preserve">
-    <value>Setup a one time trigger</value>
-  </data>
-  <data name="sumText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerPage.Name" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="openFileDialog1.Filter" xml:space="preserve">
-    <value>All files|*.*</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;summaryPage.Name" xml:space="preserve">
-    <value>summaryPage</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dailyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>539, 55</value>
-  </data>
-  <data name="monthlyTriggerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="onEventIdText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 66</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
-    <value>execActionUI1</value>
-  </data>
-  <data name="&gt;&gt;descText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="triggerPropText.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="weeklyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="nameText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Name" xml:space="preserve">
-    <value>weeklyTriggerUI1</value>
-  </data>
-  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
-    <value>taskUserAcctLabel</value>
-  </data>
-  <data name="onEventIdLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;introPage.Name" xml:space="preserve">
-    <value>introPage</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 83</value>
-  </data>
-  <data name="monthlyTriggerUI1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="oneTimeStartLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;descText.Name" xml:space="preserve">
-    <value>descText</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="onEventIdLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="triggerSelectPage.Text" xml:space="preserve">
-    <value>Choose what triggers the task</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
-  </data>
-  <data name="summaryPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 17</value>
-  </data>
-  <data name="triggerSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 0, 0</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectionList.Name" xml:space="preserve">
-    <value>triggerSelectionList</value>
-  </data>
-  <data name="&gt;&gt;sumText.Name" xml:space="preserve">
-    <value>sumText</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="wizardControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="nameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="nameText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 0</value>
   </data>
   <data name="nameText.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 23</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="nameText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="weeklyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="sumText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="introPage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectionList.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 15</value>
-  </data>
-  <data name="oneTimeTriggerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Source:</value>
-  </data>
-  <data name="monthlyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="&gt;&gt;msgActionPage.Name" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="summaryPrompt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="dailyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartLabel.Parent" xml:space="preserve">
-    <value>oneTimeTriggerPage</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="summaryPrompt.Text" xml:space="preserve">
-    <value>When you click Finish, the new task will be created and added to your Windows schedule.</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
-    <value>monthlyTriggerPage</value>
-  </data>
-  <data name="triggerPropText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 23</value>
-  </data>
-  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 17</value>
-  </data>
-  <data name="summaryPage.Text" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 112</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="onEventSourceLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;sumText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;summaryPrompt.Name" xml:space="preserve">
-    <value>summaryPrompt</value>
-  </data>
-  <data name="&gt;&gt;descText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 37</value>
-  </data>
-  <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openDlgAfterCheck.Parent" xml:space="preserve">
-    <value>summaryPage</value>
-  </data>
-  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 256</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
-  </data>
-  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLoggedOnRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
+  <data name="&gt;&gt;nameText.Name" xml:space="preserve">
+    <value>nameText</value>
   </data>
   <data name="&gt;&gt;nameText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;triggerPropText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;nameText.Parent" xml:space="preserve">
+    <value>introPage</value>
   </data>
-  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  <data name="&gt;&gt;nameText.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
+  <data name="descText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
-    <value>repeatSpan</value>
+  <data name="descText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 33</value>
   </data>
-  <data name="dailyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="descText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;onEventLogCombo.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
+  <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>476, 148</value>
   </data>
-  <data name="oneTimeStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
+  <data name="descText.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;descText.Name" xml:space="preserve">
+    <value>descText</value>
+  </data>
+  <data name="&gt;&gt;descText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;descText.Parent" xml:space="preserve">
+    <value>introPage</value>
+  </data>
+  <data name="&gt;&gt;descText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="onEventLogCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 37</value>
   </data>
-  <data name="taskLocalOnlyCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 15</value>
   </data>
-  <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTriggerPage.Name" xml:space="preserve">
-    <value>oneTimeTriggerPage</value>
-  </data>
-  <data name="openDlgAfterCheck.Text" xml:space="preserve">
-    <value>Open the Properties dialog for this task when I click Finish</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>introPage</value>
-  </data>
-  <data name="&gt;&gt;triggerPropText.Name" xml:space="preserve">
-    <value>triggerPropText</value>
-  </data>
-  <data name="oneTimeStartLabel.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartTimePicker.Name" xml:space="preserve">
-    <value>oneTimeStartTimePicker</value>
-  </data>
-  <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
-  </data>
-  <data name="taskLocalOnlyCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Name" xml:space="preserve">
-    <value>onEventLogLabel</value>
-  </data>
-  <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repeat task every:</value>
-  </data>
-  <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="taskLoggedOptionalRadio.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label2.Text" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>introPage</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 23</value>
-  </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Log:</value>
-  </data>
-  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 23</value>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 15</value>
   </data>
-  <data name="oneTimeStartLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="taskPrincipalText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Task Name:</value>
   </data>
-  <data name="oneTimeStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
-  <data name="onEventLogLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>introPage</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="introPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="introPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="introPage.Text" xml:space="preserve">
+    <value>Create a task</value>
+  </data>
+  <data name="&gt;&gt;introPage.Name" xml:space="preserve">
+    <value>introPage</value>
+  </data>
+  <data name="&gt;&gt;introPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="triggerSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>473, 329</value>
+  </data>
+  <data name="triggerSelectionList.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="triggerSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="triggerSelectionList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="triggerSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="triggerSelectionList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="triggerSelectionList.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectionList.Name" xml:space="preserve">
+    <value>triggerSelectionList</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectionList.Type" xml:space="preserve">
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.9.31754, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectionList.Parent" xml:space="preserve">
+    <value>triggerSelectPage</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectionList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="triggerSelectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="triggerSelectPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="triggerSelectPage.Text" xml:space="preserve">
+    <value>Choose what triggers the task</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectPage.Name" xml:space="preserve">
+    <value>triggerSelectPage</value>
+  </data>
+  <data name="&gt;&gt;triggerSelectPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="dailyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dailyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="dailyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 55</value>
+  </data>
+  <data name="dailyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.Name" xml:space="preserve">
+    <value>dailyTriggerUI1</value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
   </data>
-  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 282</value>
+  <data name="&gt;&gt;dailyTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Do not store password. The task will only have access to local computer resources.</value>
+  <data name="triggerPropText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="triggerPropText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="triggerPropText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 122</value>
+  </data>
+  <data name="triggerPropText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 74</value>
+  </data>
+  <data name="triggerPropText.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;triggerPropText.Name" xml:space="preserve">
+    <value>triggerPropText</value>
+  </data>
+  <data name="&gt;&gt;triggerPropText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;triggerPropText.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;triggerPropText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 37</value>
+  </data>
+  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 23</value>
+  </data>
+  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
+    <value>durationSpan</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 3</value>
+  </data>
+  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 23</value>
+  </data>
+  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
+    <value>repeatSpan</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="durationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 40</value>
+  </data>
+  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 15</value>
+  </data>
+  <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>for a duration of:</value>
+  </data>
+  <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Name" xml:space="preserve">
+    <value>durationLabel</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 78</value>
+  </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
+    <value>enabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Repeat task every:</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
+    <value>repeatCheckBox</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="triggerPropPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="triggerPropPage.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="triggerPropPage.Text" xml:space="preserve">
+    <value>Trigger properties</value>
+  </data>
+  <data name="&gt;&gt;triggerPropPage.Name" xml:space="preserve">
+    <value>triggerPropPage</value>
+  </data>
+  <data name="&gt;&gt;triggerPropPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="dailyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="dailyTriggerPage.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="dailyTriggerPage.Text" xml:space="preserve">
+    <value>Setup a daily trigger</value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerPage.Name" xml:space="preserve">
+    <value>dailyTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;dailyTriggerPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 0</value>
+  </data>
+  <data name="oneTimeStartTimePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 23</value>
+  </data>
+  <data name="oneTimeStartTimePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="oneTimeStartTimePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="&gt;&gt;oneTimeStartTimePicker.Name" xml:space="preserve">
+    <value>oneTimeStartTimePicker</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
+    <value>oneTimeTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartTimePicker.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="oneTimeStartLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="oneTimeStartLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="oneTimeStartLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="oneTimeStartLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 15</value>
+  </data>
+  <data name="oneTimeStartLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="oneTimeStartLabel.Text" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartLabel.Name" xml:space="preserve">
+    <value>oneTimeStartLabel</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartLabel.Parent" xml:space="preserve">
+    <value>oneTimeTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;oneTimeStartLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="oneTimeTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="oneTimeTriggerPage.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="oneTimeTriggerPage.Text" xml:space="preserve">
+    <value>Setup a one time trigger</value>
+  </data>
+  <data name="&gt;&gt;oneTimeTriggerPage.Name" xml:space="preserve">
+    <value>oneTimeTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="weeklyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="weeklyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 4</value>
+  </data>
+  <data name="weeklyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 117</value>
+  </data>
+  <data name="weeklyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Name" xml:space="preserve">
+    <value>weeklyTriggerUI1</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
+    <value>weeklyTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="weeklyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="weeklyTriggerPage.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="weeklyTriggerPage.Text" xml:space="preserve">
+    <value>Setup a weekly trigger</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerPage.Name" xml:space="preserve">
+    <value>weeklyTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="monthlyTriggerUI1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="monthlyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="onEventLogCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 0</value>
+  <data name="monthlyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 4</value>
+  </data>
+  <data name="monthlyTriggerUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="monthlyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 112</value>
+  </data>
+  <data name="monthlyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Name" xml:space="preserve">
+    <value>monthlyTriggerUI1</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
+    <value>monthlyTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="monthlyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="monthlyTriggerPage.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="monthlyTriggerPage.Text" xml:space="preserve">
+    <value>Setup a monthly trigger</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerPage.Name" xml:space="preserve">
+    <value>monthlyTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="eventTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="eventTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>573, 290</value>
+  </data>
+  <data name="eventTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Name" xml:space="preserve">
+    <value>eventTriggerUI1</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
+    <value>onEventTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="onEventTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 296</value>
+  </data>
+  <data name="onEventTriggerPage.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="onEventTriggerPage.Text" xml:space="preserve">
+    <value>Setup a trigger on a system event</value>
+  </data>
+  <data name="&gt;&gt;onEventTriggerPage.Name" xml:space="preserve">
+    <value>onEventTriggerPage</value>
+  </data>
+  <data name="&gt;&gt;onEventTriggerPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>490, 120</value>
+  </data>
+  <data name="actionSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="actionSelectionList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="actionSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>572, 280</value>
+  </data>
+  <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Name" xml:space="preserve">
+    <value>actionSelectionList</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Type" xml:space="preserve">
+    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.9.31754, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
+    <value>actionSelectPage</value>
+  </data>
+  <data name="&gt;&gt;actionSelectionList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>572, 280</value>
+  </data>
+  <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="actionSelectPage.Text" xml:space="preserve">
+    <value>Choose the action to perform</value>
+  </data>
+  <data name="&gt;&gt;actionSelectPage.Name" xml:space="preserve">
+    <value>actionSelectPage</value>
+  </data>
+  <data name="&gt;&gt;actionSelectPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 102</value>
+  </data>
+  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
+    <value>execActionUI1</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
+    <value>runActionPage</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskLocalOnlyCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLocalOnlyCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 112</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 19</value>
+  </data>
+  <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Do not store password. The task will only have access to local computer resources.</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
+    <value>taskLocalOnlyCheck</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 83</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 19</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Run whether user is logged on or not</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
+    <value>taskLoggedOptionalRadio</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskLoggedOnRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLoggedOnRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 54</value>
+  </data>
+  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 19</value>
+  </data>
+  <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Run only when user is logged on</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
+    <value>taskLoggedOnRadio</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskPrincipalText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskPrincipalText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 21</value>
+  </data>
+  <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 23</value>
+  </data>
+  <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Name" xml:space="preserve">
+    <value>taskPrincipalText</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="changePrincipalButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="changePrincipalButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>393, 17</value>
+  </data>
+  <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 31</value>
+  </data>
+  <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Change User or Group...</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
+    <value>changePrincipalButton</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskUserAcctLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskUserAcctLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 15</value>
+  </data>
+  <data name="taskUserAcctLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>When running the task, use the following user account:</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
+    <value>taskUserAcctLabel</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="secOptPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 297</value>
+  </data>
+  <data name="secOptPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="secOptPage.Text" xml:space="preserve">
+    <value>Security Options</value>
+  </data>
+  <data name="&gt;&gt;secOptPage.Name" xml:space="preserve">
+    <value>secOptPage</value>
+  </data>
+  <data name="&gt;&gt;secOptPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 297</value>
+  </data>
+  <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="runActionPage.Text" xml:space="preserve">
+    <value>Setup a program to run</value>
+  </data>
+  <data name="&gt;&gt;runActionPage.Name" xml:space="preserve">
+    <value>runActionPage</value>
+  </data>
+  <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 282</value>
+  </data>
+  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
+    <value>emailActionUI1</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
+    <value>emailActionPage</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 297</value>
+  </data>
+  <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="emailActionPage.Text" xml:space="preserve">
+    <value>Setup an email message to send</value>
+  </data>
+  <data name="&gt;&gt;emailActionPage.Name" xml:space="preserve">
+    <value>emailActionPage</value>
+  </data>
+  <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 256</value>
+  </data>
+  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
+    <value>showMessageActionUI1</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
+    <value>msgActionPage</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 297</value>
+  </data>
+  <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="msgActionPage.Text" xml:space="preserve">
+    <value>Setup a message to display</value>
+  </data>
+  <data name="&gt;&gt;msgActionPage.Name" xml:space="preserve">
+    <value>msgActionPage</value>
+  </data>
+  <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="sumText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="sumText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="sumText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sumText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>564, 184</value>
+  </data>
+  <data name="sumText.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;sumText.Name" xml:space="preserve">
+    <value>sumText</value>
+  </data>
+  <data name="&gt;&gt;sumText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sumText.Parent" xml:space="preserve">
+    <value>summaryPage</value>
+  </data>
+  <data name="&gt;&gt;sumText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="openDlgAfterCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="openDlgAfterCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="openDlgAfterCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 203</value>
+  </data>
+  <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 19</value>
+  </data>
+  <data name="openDlgAfterCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="openDlgAfterCheck.Text" xml:space="preserve">
+    <value>Open the Properties dialog for this task when I click Finish</value>
+  </data>
+  <data name="&gt;&gt;openDlgAfterCheck.Name" xml:space="preserve">
+    <value>openDlgAfterCheck</value>
+  </data>
+  <data name="&gt;&gt;openDlgAfterCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openDlgAfterCheck.Parent" xml:space="preserve">
+    <value>summaryPage</value>
+  </data>
+  <data name="&gt;&gt;openDlgAfterCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="summaryPrompt.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="summaryPrompt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="summaryPrompt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 256</value>
+  </data>
+  <data name="summaryPrompt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>572, 17</value>
+  </data>
+  <data name="summaryPrompt.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="summaryPrompt.Text" xml:space="preserve">
+    <value>When you click Finish, the new task will be created and added to your Windows schedule.</value>
+  </data>
+  <data name="&gt;&gt;summaryPrompt.Name" xml:space="preserve">
+    <value>summaryPrompt</value>
+  </data>
+  <data name="&gt;&gt;summaryPrompt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;summaryPrompt.Parent" xml:space="preserve">
+    <value>summaryPage</value>
+  </data>
+  <data name="&gt;&gt;summaryPrompt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>572, 273</value>
+  </data>
+  <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="summaryPage.Text" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="&gt;&gt;summaryPage.Name" xml:space="preserve">
+    <value>summaryPage</value>
+  </data>
+  <data name="&gt;&gt;summaryPage.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>626, 451</value>
+  </data>
+  <data name="wizardControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="wizardControl1.Title" xml:space="preserve">
+    <value>Create Task Wizard</value>
+  </data>
+  <data name="&gt;&gt;wizardControl1.Name" xml:space="preserve">
+    <value>wizardControl1</value>
+  </data>
+  <data name="&gt;&gt;wizardControl1.Type" xml:space="preserve">
+    <value>AeroWizard.WizardControl, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  </data>
+  <data name="&gt;&gt;wizardControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;wizardControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>All files|*.*</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>626, 451</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -982,784 +1606,19 @@
         rEEAAKxBAACsQQAArEEAAKxBgAGsQYABrEHAA6xB4AesQfgfrEE=
 </value>
   </data>
-  <data name="taskUserAcctLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dailyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a daily trigger</value>
-  </data>
-  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="triggerPropText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 122</value>
-  </data>
-  <data name="monthlyTriggerUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="onEventSourceCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;introPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Task Name:</value>
-  </data>
-  <data name="monthlyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 112</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="taskUserAcctLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 15</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 280</value>
-  </data>
-  <data name="changePrincipalButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="oneTimeStartLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
-  </data>
-  <data name="taskLoggedOnRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 54</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartTimePicker.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="durationLabel.Text" xml:space="preserve">
-    <value>for a duration of:</value>
-  </data>
-  <data name="&gt;&gt;msgActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.Name" xml:space="preserve">
-    <value>onEventSourceLabel</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Change User or Group...</value>
-  </data>
-  <data name="changePrincipalButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;nameText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="runActionPage.Text" xml:space="preserve">
-    <value>Setup a program to run</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>554, 426</value>
-  </data>
-  <data name="&gt;&gt;triggerPropText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Name" xml:space="preserve">
-    <value>onEventIdLabel</value>
-  </data>
-  <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;actionSelectPage.Name" xml:space="preserve">
-    <value>actionSelectPage</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="introPage.Text" xml:space="preserve">
-    <value>Create a task</value>
-  </data>
-  <data name="openDlgAfterCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;onEventTriggerPage.Name" xml:space="preserve">
-    <value>onEventTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>Event ID:</value>
-  </data>
-  <data name="&gt;&gt;emailActionPage.Name" xml:space="preserve">
-    <value>emailActionPage</value>
-  </data>
-  <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 19</value>
-  </data>
-  <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="emailActionPage.Text" xml:space="preserve">
-    <value>Setup an email message to send</value>
-  </data>
-  <data name="weeklyTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="onEventIdLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Description:</value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Name" xml:space="preserve">
-    <value>onEventIdText</value>
-  </data>
-  <data name="nameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 0</value>
-  </data>
-  <data name="summaryPrompt.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
-    <value>taskLocalOnlyCheck</value>
-  </data>
-  <data name="actionSelectPage.Text" xml:space="preserve">
-    <value>Choose the action to perform</value>
-  </data>
-  <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;onEventIdText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectPage.Name" xml:space="preserve">
-    <value>triggerSelectPage</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="triggerPropText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 74</value>
-  </data>
-  <data name="oneTimeStartTimePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="descText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 148</value>
-  </data>
-  <data name="&gt;&gt;openDlgAfterCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="triggerSelectionList.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTriggerPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 19</value>
-  </data>
-  <data name="&gt;&gt;nameText.Parent" xml:space="preserve">
-    <value>introPage</value>
-  </data>
-  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 78</value>
-  </data>
-  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 15</value>
-  </data>
-  <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 15</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 19</value>
-  </data>
-  <data name="triggerSelectionList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openDlgAfterCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
-    <value>emailActionUI1</value>
-  </data>
-  <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="weeklyTriggerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;actionSelectionList.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;triggerPropPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="taskPrincipalText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 21</value>
-  </data>
-  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="triggerSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="&gt;&gt;descText.Parent" xml:space="preserve">
-    <value>introPage</value>
-  </data>
-  <data name="weeklyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 4</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 19</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
-    <value>showMessageActionUI1</value>
-  </data>
-  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="durationLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="triggerSelectionList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Run only when user is logged on</value>
-  </data>
-  <data name="triggerPropText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="onEventIdLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 69</value>
-  </data>
-  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="descText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>introPage</value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TaskSchedulerWizard</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerPage.Name" xml:space="preserve">
-    <value>weeklyTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;secOptPage.Name" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 203</value>
-  </data>
-  <data name="&gt;&gt;runActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
-    <value>enabledCheckBox</value>
-  </data>
-  <data name="dailyTriggerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;triggerPropText.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="triggerSelectionList.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;actionSelectionList.Parent" xml:space="preserve">
-    <value>actionSelectPage</value>
-  </data>
-  <data name="openDlgAfterCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="openDlgAfterCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="secOptPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Name" xml:space="preserve">
-    <value>onEventSourceCombo</value>
-  </data>
-  <data name="monthlyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 4</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 15</value>
-  </data>
-  <data name="onEventSourceLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 36</value>
-  </data>
-  <data name="&gt;&gt;triggerPropPage.Name" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="onEventTriggerPage.Text" xml:space="preserve">
-    <value>Setup a trigger on a system event</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 37</value>
-  </data>
-  <data name="introPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 296</value>
-  </data>
-  <data name="&gt;&gt;onEventSourceCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
-    <value>triggerPropPage</value>
-  </data>
-  <data name="onEventLogLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="actionSelectionList.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 0, 0</value>
-  </data>
-  <data name="&gt;&gt;summaryPrompt.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;sumText.Parent" xml:space="preserve">
-    <value>summaryPage</value>
-  </data>
-  <data name="oneTimeStartTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 0</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="triggerPropPage.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="onEventSourceCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
-    <value>repeatCheckBox</value>
-  </data>
-  <data name="&gt;&gt;summaryPrompt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="nameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="oneTimeTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="dailyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
-  </data>
-  <data name="triggerSelectPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="wizardControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 451</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
-    <value>taskLoggedOptionalRadio</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
-    <value>msgActionPage</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="onEventLogLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Name" xml:space="preserve">
-    <value>taskPrincipalText</value>
-  </data>
-  <data name="onEventSourceLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="actionSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>490, 120</value>
-  </data>
-  <data name="&gt;&gt;sumText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 19</value>
-  </data>
-  <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="onEventTriggerPage.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="triggerPropPage.Text" xml:space="preserve">
-    <value>Trigger properties</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;summaryPrompt.Parent" xml:space="preserve">
-    <value>summaryPage</value>
-  </data>
-  <data name="&gt;&gt;oneTimeStartLabel.Name" xml:space="preserve">
-    <value>oneTimeStartLabel</value>
-  </data>
-  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="onEventSourceCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 32</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
     <value>openFileDialog1</value>
   </data>
-  <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
-    <value>changePrincipalButton</value>
+  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
-    <value>emailActionPage</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TaskSchedulerWizard</value>
   </data>
-  <data name="sumText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 15</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectionList.Parent" xml:space="preserve">
-    <value>triggerSelectPage</value>
-  </data>
-  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="taskLoggedOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="secOptPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="triggerSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="taskUserAcctLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="wizardControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;nameText.Name" xml:space="preserve">
-    <value>nameText</value>
-  </data>
-  <data name="secOptPage.Text" xml:space="preserve">
-    <value>Security Options</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Name" xml:space="preserve">
-    <value>monthlyTriggerUI1</value>
-  </data>
-  <data name="triggerSelectionList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>473, 329</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>626, 451</value>
-  </data>
-  <data name="weeklyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>539, 117</value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="sumText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="descText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 33</value>
-  </data>
-  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 40</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
-    <value>durationSpan</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 273</value>
-  </data>
-  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="&gt;&gt;triggerSelectionList.Type" xml:space="preserve">
-    <value>GroupControls.RadioButtonList, GroupControls, Version=1.3.8.27120, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f</value>
-  </data>
-  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 23</value>
-  </data>
-  <data name="&gt;&gt;runActionPage.Name" xml:space="preserve">
-    <value>runActionPage</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="onEventTriggerPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
-  </data>
-  <data name="wizardControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="monthlyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="onEventSourceCombo.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>373, 0</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Run whether user is logged on or not</value>
-  </data>
-  <data name="onEventSourceLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 102</value>
-  </data>
-  <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;emailActionPage.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=1.2.7.15309, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
-  </data>
-  <data name="&gt;&gt;onEventLogLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="actionSelectionList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="descText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 3</value>
-  </data>
-  <data name="sumText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 184</value>
-  </data>
-  <data name="onEventIdText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="monthlyTriggerPage.Text" xml:space="preserve">
-    <value>Setup a monthly trigger</value>
-  </data>
-  <data name="msgActionPage.Text" xml:space="preserve">
-    <value>Setup a message to display</value>
-  </data>
-  <data name="&gt;&gt;onEventIdLabel.Parent" xml:space="preserve">
-    <value>onEventTriggerPage</value>
-  </data>
-  <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 31</value>
-  </data>
-  <data name="&gt;&gt;actionSelectionList.Name" xml:space="preserve">
-    <value>actionSelectionList</value>
-  </data>
-  <data name="summaryPrompt.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>When running the task, use the following user account:</value>
-  </data>
-  <data name="summaryPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 256</value>
-  </data>
-  <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 280</value>
-  </data>
-  <data name="onEventLogCombo.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>373, 0</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Name" xml:space="preserve">
-    <value>dailyTriggerUI1</value>
-  </data>
-  <data name="triggerPropPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 273</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.0.0.29923, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;wizardControl1.Name" xml:space="preserve">
-    <value>wizardControl1</value>
-  </data>
-  <data name="openDlgAfterCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
-    <value>secOptPage</value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.2.14660, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Name" xml:space="preserve">
-    <value>onEventLogCombo</value>
-  </data>
-  <data name="descText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="onEventSourceCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 23</value>
-  </data>
-  <data name="oneTimeStartLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>
