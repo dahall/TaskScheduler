@@ -357,6 +357,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public IEnumerator<TaskEvent> GetEnumerator()
 		{
+			return GetEnumerator(false);
+		}
+
+		/// <summary>
+		/// Returns an enumerator that iterates through the collection.
+		/// </summary>
+		/// <param name="reverse">if set to <c>true</c> [reverse].</param>
+		/// <returns>
+		/// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+		/// </returns>
+		public IEnumerator<TaskEvent> GetEnumerator(bool reverse)
+		{
+			q.ReverseDirection = !reverse;
 			return new TaskEventEnumerator(new EventLogReader(q));
 		}
 

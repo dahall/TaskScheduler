@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -264,6 +264,12 @@
     <Compile Include="UIComponents\EmailActionUI.Designer.cs">
       <DependentUpon>EmailActionUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIComponents\EventTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\EventTriggerUI.Designer.cs">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIComponents\ExecActionUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -466,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\EmailActionUI.resx">
       <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EventTriggerUI.resx">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ExecActionUI.it.resx">
       <DependentUpon>ExecActionUI.cs</DependentUpon>
