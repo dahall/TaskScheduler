@@ -131,7 +131,7 @@ namespace Microsoft.Win32
 				return userName;
 			}
 
-			private static string FormattedUserNameFromStringSid(string incomingSid, string computerName)
+			public static string FormattedUserNameFromStringSid(string incomingSid, string computerName)
 			{
 				string str = string.Empty;
 				IntPtr zero = IntPtr.Zero;

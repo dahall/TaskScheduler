@@ -20,8 +20,8 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private Action action;
-		private AvailableWizardActions availActions = (AvailableWizardActions)0xD;
-		private AvailableWizardPages availPages = (AvailableWizardPages)0x3F;
+		private AvailableWizardActions availActions = (AvailableWizardActions)0xC1;
+		private AvailableWizardPages availPages = (AvailableWizardPages)0xFF;
 		private AvailableWizardTriggers availTriggers = (AvailableWizardTriggers)0x7FF;
 		private bool flagExecutorIsGroup, flagExecutorIsServiceAccount;
 		private bool IsV2 = true;
@@ -80,11 +80,11 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is provided, find its associated application and launch the application with the document.</summary>
 			Execute = 0x1,
 			/*/// <summary>This action fires a handler.</summary>
-			ComHandler = 0x2,*/
+			ComHandler = 0x20,*/
 			/// <summary>This action sends and e-mail.</summary>
-			SendEmail = 0x4,
+			SendEmail = 0x40,
 			/// <summary>This action shows a message box.</summary>
-			ShowMessage = 0x8
+			ShowMessage = 0x80
 		}
 
 		/// <summary>
@@ -98,13 +98,17 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>Displays the security options page with user and password options.</summary>
 			SecurityPage = 0x10,
 			/// <summary>Displays trigger selection page.</summary>
-			TriggerSelectPage = 0x2,
+			TriggerSelectPage = 0x42,
 			/// <summary>Displays generic trigger properties page.</summary>
 			TriggerPropertiesPage = 0x20,
 			/// <summary>Displays action selection page.</summary>
-			ActionSelectPage = 0x4,
+			ActionSelectPage = 0x84,
 			/// <summary>Displays the summary page.</summary>
-			SummaryPage = 0x8
+			SummaryPage = 0x8,
+			/// <summary>Displays a page to edit the selected trigger.</summary>
+			TriggerEditPage = 0x40,
+			/// <summary>Displays a page to edit the selected action.</summary>
+			ActionEditPage = 0x80
 		}
 
 		/// <summary>
@@ -152,7 +156,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The available actions.
 		/// </value>
-		[DefaultValue((AvailableWizardActions)0xD)]
+		[DefaultValue((AvailableWizardActions)0xC1)]
 		public AvailableWizardActions AvailableActions
 		{
 			get { return availActions; }
@@ -172,7 +176,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The available pages.
 		/// </value>
-		[DefaultValue((AvailableWizardPages)0x3F)]
+		[DefaultValue((AvailableWizardPages)0xFF)]
 		public AvailableWizardPages AvailablePages
 		{
 			get { return availPages; }
@@ -184,12 +188,18 @@ namespace Microsoft.Win32.TaskScheduler
 					SetupPages();
 					if ((availPages & AvailableWizardPages.TriggerSelectPage) != AvailableWizardPages.TriggerSelectPage)
 					{
-						availTriggers = 0;
+						if (td != null && td.Triggers.Count > 0 && (availPages & AvailableWizardPages.TriggerEditPage) == AvailableWizardPages.TriggerEditPage)
+							availTriggers = (AvailableWizardTriggers)(1 << (int)td.Triggers[0].TriggerType);
+						else
+							availTriggers = 0;
 						SetupTriggerList();
 					}
 					if ((availPages & AvailableWizardPages.ActionSelectPage) != AvailableWizardPages.ActionSelectPage)
 					{
-						availActions = 0;
+						if (td != null && td.Actions.Count > 0 && (availPages & AvailableWizardPages.ActionEditPage) == AvailableWizardPages.ActionEditPage)
+							availActions = (AvailableWizardActions)(1 << (int)td.Actions[0].ActionType);
+						else
+							availActions = 0;
 						SetupActionList();
 					}
 				}

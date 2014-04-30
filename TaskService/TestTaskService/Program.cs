@@ -239,8 +239,9 @@ namespace TestTaskService
 		{
 			try
 			{
-				// Create a new task definition and assign properties
 				const string taskName = "Test";
+
+				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
 				EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);

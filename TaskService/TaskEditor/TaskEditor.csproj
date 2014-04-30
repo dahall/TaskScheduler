@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -152,6 +152,10 @@
     </Compile>
     <Compile Include="Native\GDI32.cs" />
     <Compile Include="Native\KERNEL32.cs" />
+    <Compile Include="Native\ListView.cs" />
+    <Compile Include="Native\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Native\MapWindowPoints.cs" />
     <Compile Include="Native\OLE32.cs" />
     <Compile Include="Native\RECT.cs" />

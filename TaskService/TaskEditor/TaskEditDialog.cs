@@ -209,6 +209,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
+			if (service == null)
+				throw new ArgumentNullException("service");
 			if (!titleSet)
 				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
 			this.okBtn.Enabled = false;
@@ -221,6 +223,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
+			if (task == null)
+				throw new ArgumentNullException("task");
 			if (!titleSet)
 				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
 			taskPropertiesControl1.Initialize(task);

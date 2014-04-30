@@ -31,20 +31,12 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskHistoryControl));
 			this.historySplitContainer = new System.Windows.Forms.SplitContainer();
-			this.historyListView = new Microsoft.Win32.TaskScheduler.TaskHistoryControl.ListViewEx();
-			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyListImages = new System.Windows.Forms.ImageList(this.components);
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.historyHeader = new System.Windows.Forms.Label();
 			this.historyClearBtn = new System.Windows.Forms.Button();
 			this.refreshBtn = new System.Windows.Forms.Button();
 			this.historyFilterIcon = new System.Windows.Forms.Label();
-			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.historyDetailTitleText = new System.Windows.Forms.Label();
 			this.historyDetailHideBtn = new System.Windows.Forms.Button();
@@ -57,10 +49,28 @@
 			this.columnContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addremoveColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sortEventsByThisColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.removeSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupEventsByThisColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.removeGroupingOfEventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.columnContextMenuBreak = new System.Windows.Forms.ToolStripSeparator();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.sorterBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).BeginInit();
+			this.expandAllGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.collapseAllGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.historyListView = new System.Windows.Forms.ListViewEx();
+			this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
 			this.historySplitContainer.Panel1.SuspendLayout();
 			this.historySplitContainer.Panel2.SuspendLayout();
 			this.historySplitContainer.SuspendLayout();
@@ -87,58 +97,6 @@
 			resources.ApplyResources(this.historySplitContainer.Panel2, "historySplitContainer.Panel2");
 			this.historySplitContainer.Panel2.Controls.Add(this.historyDetailView);
 			this.historySplitContainer.Panel2.Controls.Add(this.tableLayoutPanel2);
-			// 
-			// historyListView
-			// 
-			this.historyListView.ColumnContextMenuStrip = null;
-			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11});
-			resources.ApplyResources(this.historyListView, "historyListView");
-			this.historyListView.FullRowSelect = true;
-			this.historyListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.historyListView.HideSelection = false;
-			this.historyListView.LastColumnClicked = -1;
-			this.historyListView.MultiSelect = false;
-			this.historyListView.Name = "historyListView";
-			this.historyListView.OwnerDraw = true;
-			this.historyListView.SmallImageList = this.historyListImages;
-			this.historyListView.UseCompatibleStateImageBehavior = false;
-			this.historyListView.View = System.Windows.Forms.View.Details;
-			this.historyListView.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this.historyListView_CacheVirtualItems);
-			this.historyListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.historyListView_ColumnClick);
-			this.historyListView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.historyListView_RetrieveVirtualItem);
-			this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historyListView_SelectedIndexChanged);
-			this.historyListView.DoubleClick += new System.EventHandler(this.historyListView_DoubleClick);
-			this.historyListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.historyListView_MouseClick);
-			// 
-			// columnHeader6
-			// 
-			resources.ApplyResources(this.columnHeader6, "columnHeader6");
-			// 
-			// columnHeader7
-			// 
-			resources.ApplyResources(this.columnHeader7, "columnHeader7");
-			// 
-			// columnHeader8
-			// 
-			resources.ApplyResources(this.columnHeader8, "columnHeader8");
-			// 
-			// columnHeader9
-			// 
-			resources.ApplyResources(this.columnHeader9, "columnHeader9");
-			// 
-			// columnHeader10
-			// 
-			resources.ApplyResources(this.columnHeader10, "columnHeader10");
-			// 
-			// columnHeader11
-			// 
-			resources.ApplyResources(this.columnHeader11, "columnHeader11");
 			// 
 			// historyListImages
 			// 
@@ -182,14 +140,6 @@
 			this.historyFilterIcon.ImageList = this.historyListImages;
 			this.historyFilterIcon.Name = "historyFilterIcon";
 			// 
-			// historyDetailView
-			// 
-			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
-			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
-			resources.ApplyResources(this.historyDetailView, "historyDetailView");
-			this.historyDetailView.Name = "historyDetailView";
-			this.historyDetailView.TaskEvent = null;
-			// 
 			// tableLayoutPanel2
 			// 
 			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
@@ -212,7 +162,9 @@
 			// 
 			// historyBackgroundWorker
 			// 
+			this.historyBackgroundWorker.WorkerReportsProgress = true;
 			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
+			this.historyBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.historyBackgroundWorker_ProgressChanged);
 			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
 			// 
 			// listContextMenu
@@ -254,7 +206,12 @@
 			this.columnContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addremoveColumnsToolStripMenuItem,
             this.sortEventsByThisColumnToolStripMenuItem,
-            this.groupEventsByThisColumnToolStripMenuItem});
+            this.removeSortingToolStripMenuItem,
+            this.groupEventsByThisColumnToolStripMenuItem,
+            this.removeGroupingOfEventsToolStripMenuItem,
+            this.expandAllGroupsToolStripMenuItem,
+            this.collapseAllGroupsToolStripMenuItem,
+            this.columnContextMenuBreak});
 			this.columnContextMenu.Name = "columnContextMenu";
 			resources.ApplyResources(this.columnContextMenu, "columnContextMenu");
 			// 
@@ -270,20 +227,138 @@
 			resources.ApplyResources(this.sortEventsByThisColumnToolStripMenuItem, "sortEventsByThisColumnToolStripMenuItem");
 			this.sortEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.sortEventsByThisColumnToolStripMenuItem_Click);
 			// 
+			// removeSortingToolStripMenuItem
+			// 
+			this.removeSortingToolStripMenuItem.Name = "removeSortingToolStripMenuItem";
+			resources.ApplyResources(this.removeSortingToolStripMenuItem, "removeSortingToolStripMenuItem");
+			this.removeSortingToolStripMenuItem.Click += new System.EventHandler(this.removeSortingToolStripMenuItem_Click);
+			// 
 			// groupEventsByThisColumnToolStripMenuItem
 			// 
 			this.groupEventsByThisColumnToolStripMenuItem.Name = "groupEventsByThisColumnToolStripMenuItem";
 			resources.ApplyResources(this.groupEventsByThisColumnToolStripMenuItem, "groupEventsByThisColumnToolStripMenuItem");
 			this.groupEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.groupEventsByThisColumnToolStripMenuItem_Click);
 			// 
+			// removeGroupingOfEventsToolStripMenuItem
+			// 
+			this.removeGroupingOfEventsToolStripMenuItem.Name = "removeGroupingOfEventsToolStripMenuItem";
+			resources.ApplyResources(this.removeGroupingOfEventsToolStripMenuItem, "removeGroupingOfEventsToolStripMenuItem");
+			this.removeGroupingOfEventsToolStripMenuItem.Click += new System.EventHandler(this.removeGroupingOfEventsToolStripMenuItem_Click);
+			// 
+			// columnContextMenuBreak
+			// 
+			this.columnContextMenuBreak.Name = "columnContextMenuBreak";
+			resources.ApplyResources(this.columnContextMenuBreak, "columnContextMenuBreak");
+			// 
 			// saveFileDialog
 			// 
 			resources.ApplyResources(this.saveFileDialog, "saveFileDialog");
 			// 
-			// sorterBackgroundWorker
+			// expandAllGroupsToolStripMenuItem
 			// 
-			this.sorterBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sorterBackgroundWorker_DoWork);
-			this.sorterBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.sorterBackgroundWorker_RunWorkerCompleted);
+			this.expandAllGroupsToolStripMenuItem.Name = "expandAllGroupsToolStripMenuItem";
+			resources.ApplyResources(this.expandAllGroupsToolStripMenuItem, "expandAllGroupsToolStripMenuItem");
+			this.expandAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.expandAllGroupsToolStripMenuItem_Click);
+			// 
+			// collapseAllGroupsToolStripMenuItem
+			// 
+			this.collapseAllGroupsToolStripMenuItem.Name = "collapseAllGroupsToolStripMenuItem";
+			resources.ApplyResources(this.collapseAllGroupsToolStripMenuItem, "collapseAllGroupsToolStripMenuItem");
+			this.collapseAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.collapseAllGroupsToolStripMenuItem_Click);
+			// 
+			// historyListView
+			// 
+			this.historyListView.AllowColumnReorder = true;
+			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader0,
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+			resources.ApplyResources(this.historyListView, "historyListView");
+			this.historyListView.FullRowSelect = true;
+			this.historyListView.HideSelection = false;
+			this.historyListView.MultiSelect = false;
+			this.historyListView.Name = "historyListView";
+			this.historyListView.OwnerDraw = true;
+			this.historyListView.SmallImageList = this.historyListImages;
+			this.historyListView.UseCompatibleStateImageBehavior = false;
+			this.historyListView.View = System.Windows.Forms.View.Details;
+			this.historyListView.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this.historyListView_CacheVirtualItems);
+			this.historyListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.historyListView_ColumnClick);
+			this.historyListView.ColumnReordered += new System.Windows.Forms.ColumnReorderedEventHandler(this.historyListView_ColumnReordered);
+			this.historyListView.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.historyListView_ColumnWidthChanged);
+			this.historyListView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.historyListView_RetrieveVirtualItem);
+			this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historyListView_SelectedIndexChanged);
+			this.historyListView.DoubleClick += new System.EventHandler(this.historyListView_DoubleClick);
+			this.historyListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.historyListView_MouseClick);
+			// 
+			// columnHeader0
+			// 
+			resources.ApplyResources(this.columnHeader0, "columnHeader0");
+			// 
+			// columnHeader1
+			// 
+			resources.ApplyResources(this.columnHeader1, "columnHeader1");
+			// 
+			// columnHeader2
+			// 
+			resources.ApplyResources(this.columnHeader2, "columnHeader2");
+			// 
+			// columnHeader3
+			// 
+			resources.ApplyResources(this.columnHeader3, "columnHeader3");
+			// 
+			// columnHeader4
+			// 
+			resources.ApplyResources(this.columnHeader4, "columnHeader4");
+			// 
+			// columnHeader5
+			// 
+			resources.ApplyResources(this.columnHeader5, "columnHeader5");
+			// 
+			// columnHeader6
+			// 
+			resources.ApplyResources(this.columnHeader6, "columnHeader6");
+			// 
+			// columnHeader7
+			// 
+			resources.ApplyResources(this.columnHeader7, "columnHeader7");
+			// 
+			// columnHeader8
+			// 
+			resources.ApplyResources(this.columnHeader8, "columnHeader8");
+			// 
+			// columnHeader9
+			// 
+			resources.ApplyResources(this.columnHeader9, "columnHeader9");
+			// 
+			// columnHeader10
+			// 
+			resources.ApplyResources(this.columnHeader10, "columnHeader10");
+			// 
+			// columnHeader11
+			// 
+			resources.ApplyResources(this.columnHeader11, "columnHeader11");
+			// 
+			// columnHeader12
+			// 
+			resources.ApplyResources(this.columnHeader12, "columnHeader12");
+			// 
+			// historyDetailView
+			// 
+			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
+			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
+			resources.ApplyResources(this.historyDetailView, "historyDetailView");
+			this.historyDetailView.Name = "historyDetailView";
 			// 
 			// TaskHistoryControl
 			// 
@@ -295,7 +370,6 @@
 			this.historySplitContainer.Panel1.PerformLayout();
 			this.historySplitContainer.Panel2.ResumeLayout(false);
 			this.historySplitContainer.Panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).EndInit();
 			this.historySplitContainer.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
@@ -309,13 +383,13 @@
 		#endregion
 
 		private System.Windows.Forms.SplitContainer historySplitContainer;
-		private Microsoft.Win32.TaskScheduler.TaskHistoryControl.ListViewEx historyListView;
-		private System.Windows.Forms.ColumnHeader columnHeader6;
-		private System.Windows.Forms.ColumnHeader columnHeader7;
-		private System.Windows.Forms.ColumnHeader columnHeader8;
-		private System.Windows.Forms.ColumnHeader columnHeader9;
-		private System.Windows.Forms.ColumnHeader columnHeader10;
-		private System.Windows.Forms.ColumnHeader columnHeader11;
+		private System.Windows.Forms.ListViewEx historyListView;
+		private System.Windows.Forms.ColumnHeader columnHeader0;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label historyHeader;
 		private System.Windows.Forms.Button historyClearBtn;
@@ -337,6 +411,17 @@
 		private System.Windows.Forms.ToolStripMenuItem sortEventsByThisColumnToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem groupEventsByThisColumnToolStripMenuItem;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
-		private System.ComponentModel.BackgroundWorker sorterBackgroundWorker;
+		private System.Windows.Forms.ColumnHeader columnHeader6;
+		private System.Windows.Forms.ColumnHeader columnHeader7;
+		private System.Windows.Forms.ColumnHeader columnHeader8;
+		private System.Windows.Forms.ColumnHeader columnHeader9;
+		private System.Windows.Forms.ColumnHeader columnHeader10;
+		private System.Windows.Forms.ColumnHeader columnHeader11;
+		private System.Windows.Forms.ColumnHeader columnHeader12;
+		private System.Windows.Forms.ToolStripSeparator columnContextMenuBreak;
+		private System.Windows.Forms.ToolStripMenuItem removeSortingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem removeGroupingOfEventsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem expandAllGroupsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem collapseAllGroupsToolStripMenuItem;
 	}
 }

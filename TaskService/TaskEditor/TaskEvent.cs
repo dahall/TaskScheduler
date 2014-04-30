@@ -156,7 +156,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// An enumerator over a task's history of events.
 	/// </summary>
-	public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>
+	public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>, IDisposable
 	{
 		private EventRecord curRec;
 		private EventLogReader log;
@@ -193,6 +193,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void Dispose()
 		{
+			log.CancelReading();
 			log.Dispose();
 			log = null;
 		}

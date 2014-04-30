@@ -17,10 +17,9 @@ namespace Microsoft.Win32.TaskScheduler
 		private Task task;
 #if NET_35_OR_GREATER
 		private int selectedIndex = -1;
-		private GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
+		private IList<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
 		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
-		private int sortedColumn = -1;
 #endif
 
 		/// <summary>
@@ -74,7 +73,7 @@ namespace Microsoft.Win32.TaskScheduler
 				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 				historySplitContainer.Panel2Collapsed = false;
 #if NET_35_OR_GREATER
-				vlog = new TaskEventLog(task.TaskService.TargetServer, task.Path);
+				vlog = CreateLogInstance();
 #endif
 				RefreshHistory();
 			}
@@ -93,22 +92,72 @@ namespace Microsoft.Win32.TaskScheduler
 		public void RefreshHistory()
 		{
 			historyListView.Cursor = Cursors.WaitCursor;
-			historyListView.Items.Clear();
+			historyListView.VirtualListSize = 0;
+			historyListView.Refresh();
 			historyHeader_Refresh(-1);
 #if NET_35_OR_GREATER
 			historyDetailView.TaskEvent = null;
 			selectedIndex = -1;
 			vcache.Clear();
-			vevEnum = vlog.GetEnumerator() as TaskEventEnumerator;
 #endif
 			historyBackgroundWorker.RunWorkerAsync();
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:System.Windows.Forms.UserControl.Load" /> event.
+		/// </summary>
+		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			// TODO: Read last status from user options
+			// Get column names and add them to the context menu
+			var c = historyListView.Columns;
+			int insIdx = columnContextMenu.Items.IndexOf(columnContextMenuBreak);
+			for (int i = 0; i < c.Count; i++)
+			{
+				var tsi = new ToolStripMenuItem(c[i].Text, null, columnContextMenuColumnHeaderItem_onClick) { Checked = c[i].Width > 0, Tag = c[i].Index };
+				columnContextMenu.Items.Insert(++insIdx, tsi);
+			}
 		}
 
 #if NET_35_OR_GREATER
 		private ListViewItem BuildItem(TaskEvent item)
 		{
 			return new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
-				item.TaskCategory, item.OpCode, item.ActivityId.ToString() }, item.EventRecord.Level.GetValueOrDefault(0)) { Tag = item };
+				item.TaskCategory, item.OpCode, item.ActivityId.ToString(), string.Join<string>(", ", item.EventRecord.KeywordsDisplayNames), "TaskScheduler",
+				item.UserId.Translate(typeof(System.Security.Principal.NTAccount)).ToString(), item.EventRecord.LogName, 
+				item.EventRecord.MachineName, item.ProcessId.ToString(), item.EventRecord.ThreadId.ToString() },
+				item.EventRecord.Level.GetValueOrDefault(0)) { Tag = item };
+		}
+#endif
+
+		private void columnContextMenuColumnHeaderItem_onClick(object sender, EventArgs e)
+		{
+			ToolStripMenuItem item = (ToolStripMenuItem)sender;
+			int cIndex = (int)item.Tag;
+			item.Checked = !item.Checked;
+			if (item.Checked)
+			{
+				historyListView.Columns[cIndex].Width = 100; // TODO: Be more acurate here and get a good standard width
+			}
+			else
+				historyListView.Columns[cIndex].Width = 0;
+			PersistColumnSettings();
+		}
+
+#if NET_35_OR_GREATER
+		private TaskEventLog CreateLogInstance()
+		{
+			return new TaskEventLog(task.TaskService.TargetServer, task.Path);
+		}
+
+		private void FetchEnumEvents(int startIndex, int endIndex)
+		{
+			int n = startIndex;
+			vevEnum.Seek(System.IO.SeekOrigin.Begin, n);
+			while (vevEnum.MoveNext() && n <= endIndex)
+				vcache[n++] = BuildItem(vevEnum.Current);
 		}
 #endif
 
@@ -122,8 +171,19 @@ namespace Microsoft.Win32.TaskScheduler
 			try
 			{
 #if NET_35_OR_GREATER
-				TaskEventLog log = new TaskEventLog(task.TaskService.TargetServer, task.Path);
-				e.Result = log.Count;
+				TaskEventLog log = CreateLogInstance();
+				if (!lvwColumnSorter.Group && lvwColumnSorter.SortColumn == 1)
+				{
+					e.Result = null;
+				}
+				else
+				{
+					List<TaskEvent> eList = new List<TaskEvent>(log);
+					List<ListViewItem> list = eList.ConvertAll<ListViewItem>(delegate(TaskEvent te) { return BuildItem(te); });
+					list.Sort(lvwColumnSorter);
+					e.Result = list;
+				}
+				((BackgroundWorker)sender).ReportProgress(100, log.Count);
 #else
 				e.Result = new PlatformNotSupportedException(EditorProperties.Resources.Error_EventsNotSupported);
 #endif
@@ -131,20 +191,64 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (Exception ex) { e.Result = ex; }
 		}
 
+		private void historyBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			if (e.UserState is long)
+			{
+				historyListView.VirtualListSize = (int)Math.Min(Int32.MaxValue, (long)e.UserState);
+				historyHeader_Refresh((long)e.UserState);
+			}
+		}
+
 		private void historyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			historyListView.Cursor = Cursors.Default;
-			if (e.Result is long)
+			historyListView.BeginUpdate();
+			if (e.Result is Exception)
 			{
-				historyListView.VirtualListSize = (int)Math.Min(Int32.MaxValue, (long)e.Result);
-				historyHeader_Refresh((long)e.Result);
+				historyHeader_Refresh(0L);
+				if (ShowErrors)
+					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+#if NET_35_OR_GREATER
+			else if (e.Result == null)
+			{
+				historyListView.VirtualMode = true;
+				vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
+				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
 			}
 			else
 			{
-				historyHeader_Refresh(0L);
-				if (e.Result is Exception && ShowErrors)
-					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				historyListView.VirtualMode = false;
+				vevEnum = null;
+				vcache = (IList<ListViewItem>)e.Result;
+				historyListView.Items.AddRange(((List<ListViewItem>)e.Result).ToArray());
+				if (lvwColumnSorter.Group)
+					SetupGroups();
+				else
+					historyListView.ShowGroups = false;
 			}
+#endif
+			historyListView.EndUpdate();
+		}
+
+		private void SetupGroups()
+		{
+			historyListView.Groups.Clear();
+			int col = lvwColumnSorter.SortColumn;
+			ListViewGroupEx g = new ListViewGroupEx();
+			for (int i = 0; i < historyListView.Items.Count; i++)
+			{
+				var lvi = historyListView.Items[i];
+				string cText = lvi.SubItems[col].Text;
+				if (cText != g.Header)
+				{
+					g = historyListView.Groups.Add(cText);
+					g.Collapsed = false;
+				}
+				g.Items.Add(lvi);
+			}
+			historyListView.ShowGroups = true;
 		}
 
 		private void historyHeader_Refresh(long cnt)
@@ -159,43 +263,27 @@ namespace Microsoft.Win32.TaskScheduler
 		private void historyListView_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
 		{
 #if NET_35_OR_GREATER
-			if (vcache[e.StartIndex] == null)
+			if (vcache[e.StartIndex] == null && vevEnum != null)
 			{
-				if (lvwColumnSorter.SortColumn == 0)
-				{
-					if (vevEnum == null)
-						vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Descending) as TaskEventEnumerator;
-					if (vevEnum != null)
-					{
-						vevEnum.Seek(System.IO.SeekOrigin.Begin, e.StartIndex);
-						int n = e.StartIndex;
-						while (vevEnum.MoveNext() && n <= e.EndIndex)
-							vcache[n++] = BuildItem(vevEnum.Current);
-					}
-				}
-				else
-				{
-
-				}
+				FetchEnumEvents(e.StartIndex, e.EndIndex);
 			}
 #endif
 		}
 
 		private void historyListView_ColumnClick(object sender, ColumnClickEventArgs e)
 		{
-			historyListView.Clear();
-			vcache.Clear();
-			if (e.Column == lvwColumnSorter.SortColumn)
-			{
-				// Reverse the current sort direction for this column.
-				lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-			}
-			else
-			{
-				// Set the column number that is to be sorted; default to ascending.
-				lvwColumnSorter.SortColumn = e.Column;
-				lvwColumnSorter.Order = SortOrder.Ascending;
-			}
+			lvwColumnSorter.ResortOnColumn(e.Column);
+			RefreshHistory();
+		}
+
+		private void historyListView_ColumnReordered(object sender, ColumnReorderedEventArgs e)
+		{
+			PersistColumnSettings();
+		}
+
+		private void historyListView_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+		{
+			PersistColumnSettings();
 		}
 
 		private void historyListView_DoubleClick(object sender, EventArgs e)
@@ -217,12 +305,9 @@ namespace Microsoft.Win32.TaskScheduler
 		private void historyListView_MouseClick(object sender, MouseEventArgs e)
 		{
 			var lvi = historyListView.GetItemAt(e.X, e.Y);
-			if (lvi != null)
+			if (lvi != null && e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-				if (e.Button == System.Windows.Forms.MouseButtons.Right)
-				{
-					listContextMenu.Show(historyListView, e.Location);
-				}
+				listContextMenu.Show(historyListView, e.Location);
 			}
 		}
 
@@ -233,12 +318,8 @@ namespace Microsoft.Win32.TaskScheduler
 			//System.Diagnostics.Debug.WriteLine(string.Format("RetrieveLVI: InCache={0}, Msg={1}", item!=null, Environment.StackTrace));
 			if (item == null && vevEnum != null)
 			{
-				vevEnum.Seek(System.IO.SeekOrigin.Begin, e.ItemIndex);
-				if (vevEnum.MoveNext())
-				{
-					item = BuildItem(vevEnum.Current);
-					vcache[e.ItemIndex] = item;
-				}
+				FetchEnumEvents(e.ItemIndex, e.ItemIndex);
+				item = vcache[e.ItemIndex];
 			}
 			if (item != null)
 			{
@@ -254,7 +335,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-#if NET_35_OR_GREATER
 			if (historyListView.SelectedIndices.Count > 0)
 			{
 				int newSelIdx = historyListView.SelectedIndices[0];
@@ -262,30 +342,19 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
+#if NET_35_OR_GREATER
 				selectedIndex = -1;
 				historyDetailView.TaskEvent = null;
+#endif
 				historyDetailTitleText.Text = string.Empty;
 			}
-#endif
 		}
 
-		private void sorterBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+		private void PersistColumnSettings()
 		{
-			TaskEventLog log = new TaskEventLog(task.TaskService.TargetServer, task.Path);
-			List<TaskEvent> eList = new List<TaskEvent>(log);
-			List<ListViewItem> list = eList.ConvertAll<ListViewItem>(delegate(TaskEvent te) { return BuildItem(te); });
-			list.Sort(lvwColumnSorter);
-			e.Result = list;
+			// TODO: Figure out how to persist column settings
 		}
-
-		private void sorterBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-			vcache.Clear();
-			List<ListViewItem> list = (List<ListViewItem>)e.Result;
-			for (int i = 0; i < list.Count; i++)
-				vcache.Add(list[i]);
-		}
-
+		
 		private void SelectItemChanged(int newSelIdx)
 		{
 #if NET_35_OR_GREATER
@@ -315,23 +384,27 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void attachTaskToThisEventToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+#if NET_35_OR_GREATER
 			if (selectedIndex != -1)
 			{
 				var taskEvent = (TaskEvent)vcache[selectedIndex].Tag;
 				if (taskEvent != null)
 				{
-					using (var wiz = new TaskSchedulerWizard())
+					var td = task.TaskService.NewTask();
+					var eventId = taskEvent.EventId;
+					td.Triggers.Add(new EventTrigger("Microsoft-Windows-TaskScheduler/Operational", "TaskScheduler", eventId));
+					td.Actions.Add(new ExecAction());
+					using (var wiz = new TaskSchedulerWizard(task.TaskService, td, true))
 					{
-						var td = task.TaskService.NewTask();
-						var eventId = taskEvent.EventId;
-						td.Triggers.Add(new EventTrigger("Microsoft-Windows-TaskScheduler/Operational", "TaskScheduler", eventId));
-						td.Actions.Add(new ExecAction());
-						wiz.Initialize(task.TaskService, td);
+						wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Event;
+						wiz.AvailableActions = TaskSchedulerWizard.AvailableWizardActions.Execute;
+						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage | TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage | TaskSchedulerWizard.AvailableWizardPages.ActionEditPage;
 						wiz.TaskName = string.Format("Microsoft-Windows-TaskScheduler_Operational_Microsoft-Windows-TaskScheduler_{0}", eventId);
 						wiz.ShowDialog(this);
 					}
 				}
 			}
+#endif
 		}
 
 		private void saveAllEventsAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -342,14 +415,28 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private static Converter<ColumnHeader, string> cdel = delegate(ColumnHeader c) { return c.Text; };
+
+		private static List<ColumnHeader> GetColumnHeaderList(ListView.ColumnHeaderCollection col)
+		{
+			var l = new List<ColumnHeader>(col.Count);
+			for (int i = 0; i < col.Count; i++)
+				l.Add(col[i]);
+			return l;
+		}
+
+		private static List<string> GetColumnHeaderTextList(ListView.ColumnHeaderCollection col)
+		{
+			return GetColumnHeaderList(col).ConvertAll<string>(cdel);
+		}
+
 		private void addremoveColumnsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var cols = new string[historyListView.Columns.Count];
-			for (int i = 0; i < historyListView.Columns.Count; i++)
-				cols[i] = historyListView.Columns[i].Text;
-			// TODO: Get current columns in order
-			var curCols = cols;
-			using (ListColumnEditor colEd = new ListColumnEditor(cols, cols, curCols))
+			var cols = GetColumnHeaderList(historyListView.Columns);
+			var allHeaders = cols.ConvertAll<string>(cdel).ToArray();
+			var shownHeaders = cols.FindAll(delegate(ColumnHeader c) { return c.Width > 0; });
+			shownHeaders.Sort(delegate(ColumnHeader a, ColumnHeader b) { return a.DisplayIndex.CompareTo(b.DisplayIndex); });
+			using (ListColumnEditor colEd = new ListColumnEditor(allHeaders, allHeaders, shownHeaders.ConvertAll<string>(cdel).ToArray()))
 			{
 				if (colEd.ShowDialog(this) == DialogResult.OK)
 				{
@@ -361,16 +448,58 @@ namespace Microsoft.Win32.TaskScheduler
 		private void sortEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(historyListView.LastColumnClicked));
+			removeSortingToolStripMenuItem.Visible = true;
+		}
+
+		private void removeSortingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(1));
+			removeSortingToolStripMenuItem.Visible = false;
 		}
 
 		private void groupEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// TODO:
+			lvwColumnSorter.Group = true;
+#if NET_35_OR_GREATER
+			if (lvwColumnSorter.SortColumn != historyListView.LastColumnClicked || vevEnum != null)
+				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(historyListView.LastColumnClicked));
+			else
+				SetupGroups();
+#endif
+			groupEventsByThisColumnToolStripMenuItem.Visible = false;
+			removeGroupingOfEventsToolStripMenuItem.Visible = expandAllGroupsToolStripMenuItem.Visible = collapseAllGroupsToolStripMenuItem.Visible = true;
+		}
+
+		private void removeGroupingOfEventsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			lvwColumnSorter.Group = false;
+			groupEventsByThisColumnToolStripMenuItem.Visible = true;
+			removeGroupingOfEventsToolStripMenuItem.Visible = expandAllGroupsToolStripMenuItem.Visible = collapseAllGroupsToolStripMenuItem.Visible = false;
+		}
+
+		private void expandAllGroupsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (var item in historyListView.Groups)
+				item.Collapsed = false;
+		}
+
+		private void collapseAllGroupsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (var item in historyListView.Groups)
+				item.Collapsed = true;
 		}
 
 		internal class ListViewColumnSorter : IComparer<ListViewItem>, System.Collections.IComparer
 		{
 			private System.Collections.CaseInsensitiveComparer ObjectCompare = new System.Collections.CaseInsensitiveComparer(System.Globalization.CultureInfo.InvariantCulture);
+
+			public ListViewColumnSorter()
+			{
+				Group = false;
+				NewSortSameColumn = false;
+				Order = SortOrder.Descending;
+				SortColumn = 1;
+			}
 
 			public int Compare(ListViewItem listviewX, ListViewItem listviewY)
 			{
@@ -392,6 +521,23 @@ namespace Microsoft.Win32.TaskScheduler
 				return 0;
 			}
 
+			public void ResortOnColumn(int column)
+			{
+				if (column == this.SortColumn)
+				{
+					// Reverse the current sort direction for this column.
+					this.Order = this.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+					this.NewSortSameColumn = true;
+				}
+				else
+				{
+					// Set the column number that is to be sorted; default to ascending.
+					this.SortColumn = column;
+					this.Order = SortOrder.Ascending;
+					this.NewSortSameColumn = false;
+				}
+			}
+
 			int System.Collections.IComparer.Compare(object x, object y)
 			{
 				if (x is ListViewItem && y is ListViewItem)
@@ -399,71 +545,13 @@ namespace Microsoft.Win32.TaskScheduler
 				return ObjectCompare.Compare(x, y);
 			}
 
-			public int SortColumn { get; set; }
+			public bool NewSortSameColumn { get; set; }
 
 			public SortOrder Order { get; set; }
-		}
 
-		/// <summary>
-		/// Specialized ListView that passes on MouseMove events
-		/// </summary>
-		private class ListViewEx : ListView
-		{
-			Dictionary<int, Rectangle> columns = new Dictionary<int, Rectangle>();
+			public int SortColumn { get; set; }
 
-			public ListViewEx()
-			{
-				OwnerDraw = true;//This will help the OnDrawColumnHeader be called.
-				LastColumnClicked = -1;
-			}
-
-			public ContextMenuStrip ColumnContextMenuStrip { get; set; }
-
-			public int LastColumnClicked { get; set; }
-
-			protected override void OnDrawItem(DrawListViewItemEventArgs e)
-			{
-				e.DrawDefault = true;
-				base.OnDrawItem(e);
-			}
-
-			protected override void OnDrawSubItem(DrawListViewSubItemEventArgs e)
-			{
-				e.DrawDefault = true;
-				base.OnDrawSubItem(e);
-			}
-
-			protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)
-			{
-				columns[e.ColumnIndex] = RectangleToScreen(e.Bounds);
-				e.DrawDefault = true;
-				base.OnDrawColumnHeader(e);
-			}
-
-			/// <summary>
-			/// Overrides <see cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)"/>.
-			/// </summary>
-			/// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
-			protected override void WndProc(ref Message m)
-			{
-				if (m.Msg == 0x7b)//WM_CONTEXTMENU
-				{
-					int lp = m.LParam.ToInt32();
-					Point pt = new Point(((lp << 16) >> 16), lp >> 16);
-					foreach (KeyValuePair<int, Rectangle> p in columns)
-					{
-						if (p.Value.Contains(pt))
-						{
-							LastColumnClicked = p.Key;
-							if (ColumnContextMenuStrip != null)
-								ColumnContextMenuStrip.Show(pt);
-							break;
-						}
-					}
-				}
-				if (m.Msg != 0x0200)
-					base.WndProc(ref m);
-			}
+			public bool Group { get; set; }
 		}
 	}
 }
