@@ -313,7 +313,7 @@
     <value>dailyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Parent" xml:space="preserve">
     <value>dailyTriggerPage</value>
@@ -535,7 +535,7 @@
     <value>oneTimeStartTimePicker</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;oneTimeStartTimePicker.Parent" xml:space="preserve">
     <value>oneTimeTriggerPage</value>
@@ -604,7 +604,7 @@
     <value>weeklyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
     <value>weeklyTriggerPage</value>
@@ -649,7 +649,7 @@
     <value>monthlyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
     <value>monthlyTriggerPage</value>
@@ -681,6 +681,9 @@
   <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="eventTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>516, 96</value>
+  </data>
   <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
     <value>573, 290</value>
   </data>
@@ -691,7 +694,7 @@
     <value>eventTriggerUI1</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
     <value>onEventTriggerPage</value>
@@ -727,7 +730,7 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="actionSelectionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 280</value>
+    <value>579, 296</value>
   </data>
   <data name="actionSelectionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -745,7 +748,7 @@
     <value>0</value>
   </data>
   <data name="actionSelectPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 280</value>
+    <value>579, 296</value>
   </data>
   <data name="actionSelectPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -775,7 +778,7 @@
     <value>execActionUI1</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
     <value>runActionPage</value>
@@ -958,7 +961,7 @@
     <value>5</value>
   </data>
   <data name="secOptPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
+    <value>579, 296</value>
   </data>
   <data name="secOptPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -973,7 +976,7 @@
     <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.18140, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="runActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
+    <value>579, 296</value>
   </data>
   <data name="runActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -994,7 +997,7 @@
     <value>3, 0</value>
   </data>
   <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 282</value>
+    <value>432, 282</value>
   </data>
   <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1003,7 +1006,7 @@
     <value>emailActionUI1</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
     <value>emailActionPage</value>
@@ -1012,7 +1015,7 @@
     <value>0</value>
   </data>
   <data name="emailActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
+    <value>579, 296</value>
   </data>
   <data name="emailActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1042,7 +1045,7 @@
     <value>showMessageActionUI1</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.17036, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.37567, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
     <value>msgActionPage</value>
@@ -1051,7 +1054,7 @@
     <value>0</value>
   </data>
   <data name="msgActionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 297</value>
+    <value>579, 296</value>
   </data>
   <data name="msgActionPage.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1075,7 +1078,7 @@
     <value>True</value>
   </data>
   <data name="sumText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 184</value>
+    <value>571, 207</value>
   </data>
   <data name="sumText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1102,7 +1105,7 @@
     <value>NoControl</value>
   </data>
   <data name="openDlgAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 203</value>
+    <value>3, 226</value>
   </data>
   <data name="openDlgAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 19</value>
@@ -1132,10 +1135,10 @@
     <value>NoControl</value>
   </data>
   <data name="summaryPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 256</value>
+    <value>0, 279</value>
   </data>
   <data name="summaryPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 17</value>
+    <value>579, 17</value>
   </data>
   <data name="summaryPrompt.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1156,7 +1159,7 @@
     <value>2</value>
   </data>
   <data name="summaryPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 273</value>
+    <value>579, 296</value>
   </data>
   <data name="summaryPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

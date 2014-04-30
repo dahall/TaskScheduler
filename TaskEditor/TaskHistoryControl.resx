@@ -128,42 +128,84 @@
   <data name="historySplitContainer.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="columnHeader6.Text" xml:space="preserve">
+  <data name="columnHeader0.Text" xml:space="preserve">
     <value>Level</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader0.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="columnHeader7.Text" xml:space="preserve">
+  <data name="columnHeader1.Text" xml:space="preserve">
     <value>Date and Time</value>
   </data>
-  <data name="columnHeader7.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
-  <data name="columnHeader8.Text" xml:space="preserve">
+  <data name="columnHeader2.Text" xml:space="preserve">
     <value>Event ID</value>
   </data>
-  <data name="columnHeader8.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
     <value>73</value>
   </data>
-  <data name="columnHeader9.Text" xml:space="preserve">
+  <data name="columnHeader3.Text" xml:space="preserve">
     <value>Task Category</value>
   </data>
-  <data name="columnHeader9.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
     <value>88</value>
   </data>
-  <data name="columnHeader10.Text" xml:space="preserve">
+  <data name="columnHeader4.Text" xml:space="preserve">
     <value>Operational Code</value>
   </data>
-  <data name="columnHeader10.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
-  <data name="columnHeader11.Text" xml:space="preserve">
+  <data name="columnHeader5.Text" xml:space="preserve">
     <value>Correlation Id</value>
   </data>
-  <data name="columnHeader11.Width" type="System.Int32, mscorlib">
+  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
     <value>95</value>
+  </data>
+  <data name="columnHeader6.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader7.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="columnHeader7.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader8.Text" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="columnHeader8.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader9.Text" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="columnHeader9.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader10.Text" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="columnHeader10.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader11.Text" xml:space="preserve">
+    <value>Process ID</value>
+  </data>
+  <data name="columnHeader11.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader12.Text" xml:space="preserve">
+    <value>Thread ID</value>
+  </data>
+  <data name="columnHeader12.Width" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="historyListView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -187,7 +229,7 @@
     <value>historyListView</value>
   </data>
   <data name="&gt;&gt;historyListView.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl+ListViewEx, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25245, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>System.Windows.Forms.ListViewEx, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.34092, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;historyListView.Parent" xml:space="preserve">
     <value>historySplitContainer.Panel1</value>
@@ -409,7 +451,7 @@
     <value>historyDetailView</value>
   </data>
   <data name="&gt;&gt;historyDetailView.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.EventViewerControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25245, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.EventViewerControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.34092, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;historyDetailView.Parent" xml:space="preserve">
     <value>historySplitContainer.Panel2</value>
@@ -582,9 +624,6 @@
   <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
     <value>Attach task to this event</value>
   </data>
-  <data name="attachTaskToThisEventToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="saveAllEventsAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 22</value>
   </data>
@@ -621,7 +660,13 @@
   <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
     <value>Sort events by this column</value>
   </data>
-  <data name="sortEventsByThisColumnToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+  <data name="removeSortingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Remove sorting</value>
+  </data>
+  <data name="removeSortingToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="groupEventsByThisColumnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -630,11 +675,38 @@
   <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
     <value>Group events by this column</value>
   </data>
-  <data name="groupEventsByThisColumnToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+  <data name="removeGroupingOfEventsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Remove grouping of events</value>
+  </data>
+  <data name="removeGroupingOfEventsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="expandAllGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Expand all groups</value>
+  </data>
+  <data name="expandAllGroupsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="collapseAllGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Collapse all groups</value>
+  </data>
+  <data name="collapseAllGroupsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="columnContextMenuBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 6</value>
+  </data>
   <data name="columnContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 70</value>
+    <value>227, 186</value>
   </data>
   <data name="&gt;&gt;columnContextMenu.Name" xml:space="preserve">
     <value>columnContextMenu</value>
@@ -648,9 +720,6 @@
   <data name="saveFileDialog.Filter" xml:space="preserve">
     <value>Event Files (*.evtx)|*.evtx|Xml (Xml File) (*.xml)|*.xml|Text (Tab Delimited) (*.txt)|*.txt|CSV (Comma Separated) (*.csv)|*.csv</value>
   </data>
-  <metadata name="sorterBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>793, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -659,42 +728,6 @@
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>602, 360</value>
-  </data>
-  <data name="&gt;&gt;columnHeader6.Name" xml:space="preserve">
-    <value>columnHeader6</value>
-  </data>
-  <data name="&gt;&gt;columnHeader6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader7.Name" xml:space="preserve">
-    <value>columnHeader7</value>
-  </data>
-  <data name="&gt;&gt;columnHeader7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader8.Name" xml:space="preserve">
-    <value>columnHeader8</value>
-  </data>
-  <data name="&gt;&gt;columnHeader8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader9.Name" xml:space="preserve">
-    <value>columnHeader9</value>
-  </data>
-  <data name="&gt;&gt;columnHeader9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader10.Name" xml:space="preserve">
-    <value>columnHeader10</value>
-  </data>
-  <data name="&gt;&gt;columnHeader10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader11.Name" xml:space="preserve">
-    <value>columnHeader11</value>
-  </data>
-  <data name="&gt;&gt;columnHeader11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;historyListImages.Name" xml:space="preserve">
     <value>historyListImages</value>
@@ -744,11 +777,29 @@
   <data name="&gt;&gt;sortEventsByThisColumnToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;removeSortingToolStripMenuItem.Name" xml:space="preserve">
+    <value>removeSortingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;removeSortingToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;groupEventsByThisColumnToolStripMenuItem.Name" xml:space="preserve">
     <value>groupEventsByThisColumnToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;groupEventsByThisColumnToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;removeGroupingOfEventsToolStripMenuItem.Name" xml:space="preserve">
+    <value>removeGroupingOfEventsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;removeGroupingOfEventsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnContextMenuBreak.Name" xml:space="preserve">
+    <value>columnContextMenuBreak</value>
+  </data>
+  <data name="&gt;&gt;columnContextMenuBreak.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveFileDialog.Name" xml:space="preserve">
     <value>saveFileDialog</value>
@@ -756,11 +807,95 @@
   <data name="&gt;&gt;saveFileDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;sorterBackgroundWorker.Name" xml:space="preserve">
-    <value>sorterBackgroundWorker</value>
+  <data name="&gt;&gt;expandAllGroupsToolStripMenuItem.Name" xml:space="preserve">
+    <value>expandAllGroupsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;sorterBackgroundWorker.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;expandAllGroupsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;collapseAllGroupsToolStripMenuItem.Name" xml:space="preserve">
+    <value>collapseAllGroupsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;collapseAllGroupsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader0.Name" xml:space="preserve">
+    <value>columnHeader0</value>
+  </data>
+  <data name="&gt;&gt;columnHeader0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
+    <value>columnHeader2</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
+    <value>columnHeader4</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
+    <value>columnHeader5</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader6.Name" xml:space="preserve">
+    <value>columnHeader6</value>
+  </data>
+  <data name="&gt;&gt;columnHeader6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader7.Name" xml:space="preserve">
+    <value>columnHeader7</value>
+  </data>
+  <data name="&gt;&gt;columnHeader7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader8.Name" xml:space="preserve">
+    <value>columnHeader8</value>
+  </data>
+  <data name="&gt;&gt;columnHeader8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader9.Name" xml:space="preserve">
+    <value>columnHeader9</value>
+  </data>
+  <data name="&gt;&gt;columnHeader9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader10.Name" xml:space="preserve">
+    <value>columnHeader10</value>
+  </data>
+  <data name="&gt;&gt;columnHeader10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader11.Name" xml:space="preserve">
+    <value>columnHeader11</value>
+  </data>
+  <data name="&gt;&gt;columnHeader11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader12.Name" xml:space="preserve">
+    <value>columnHeader12</value>
+  </data>
+  <data name="&gt;&gt;columnHeader12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TaskHistoryControl</value>

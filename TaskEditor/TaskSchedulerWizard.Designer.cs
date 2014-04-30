@@ -32,6 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskSchedulerWizard));
+			Microsoft.Win32.TaskScheduler.EventTrigger eventTrigger1 = new Microsoft.Win32.TaskScheduler.EventTrigger();
 			this.wizardControl1 = new WizDLL::AeroWizard.WizardControl();
 			this.introPage = new WizDLL::AeroWizard.WizardPage();
 			this.nameText = new System.Windows.Forms.TextBox();
@@ -57,6 +58,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.monthlyTriggerPage = new WizDLL::AeroWizard.WizardPage();
 			this.monthlyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI();
 			this.onEventTriggerPage = new WizDLL::AeroWizard.WizardPage();
+			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
 			this.actionSelectPage = new WizDLL::AeroWizard.WizardPage();
 			this.actionSelectionList = new GrpCtrlDLL::GroupControls.RadioButtonList();
 			this.runActionPage = new WizDLL::AeroWizard.WizardPage();
@@ -77,7 +79,6 @@ namespace Microsoft.Win32.TaskScheduler
 			this.openDlgAfterCheck = new System.Windows.Forms.CheckBox();
 			this.summaryPrompt = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
 			this.introPage.SuspendLayout();
 			this.triggerSelectPage.SuspendLayout();
@@ -277,6 +278,15 @@ namespace Microsoft.Win32.TaskScheduler
 			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
 			// 
+			// eventTriggerUI1
+			// 
+			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
+			this.eventTriggerUI1.Name = "eventTriggerUI1";
+			eventTrigger1.Enabled = true;
+			eventTrigger1.StartBoundary = new System.DateTime(2014, 4, 28, 22, 12, 8, 427);
+			eventTrigger1.Subscription = "";
+			this.eventTriggerUI1.Trigger = eventTrigger1;
+			// 
 			// actionSelectPage
 			// 
 			this.actionSelectPage.AllowNext = false;
@@ -421,11 +431,6 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			this.openFileDialog1.FileName = "openFileDialog";
 			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
-			// 
-			// eventTriggerUI1
-			// 
-			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
-			this.eventTriggerUI1.Name = "eventTriggerUI1";
 			// 
 			// TaskSchedulerWizard
 			// 
