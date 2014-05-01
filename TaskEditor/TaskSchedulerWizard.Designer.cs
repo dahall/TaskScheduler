@@ -169,7 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			this.dailyTriggerPage.Controls.Add(this.dailyTriggerUI1);
 			this.dailyTriggerPage.Name = "dailyTriggerPage";
-			this.dailyTriggerPage.NextPage = this.triggerPropPage;
+			this.dailyTriggerPage.NextPage = this.oneTimeTriggerPage;
 			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			// 
 			// dailyTriggerUI1
@@ -230,7 +230,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartTimePicker);
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartLabel);
 			this.oneTimeTriggerPage.Name = "oneTimeTriggerPage";
-			this.oneTimeTriggerPage.NextPage = this.triggerPropPage;
+			this.oneTimeTriggerPage.NextPage = this.weeklyTriggerPage;
 			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.oneTimeTriggerPage_Commit);
 			// 
@@ -249,7 +249,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			this.weeklyTriggerPage.Controls.Add(this.weeklyTriggerUI1);
 			this.weeklyTriggerPage.Name = "weeklyTriggerPage";
-			this.weeklyTriggerPage.NextPage = this.triggerPropPage;
+			this.weeklyTriggerPage.NextPage = this.monthlyTriggerPage;
 			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			// 
 			// weeklyTriggerUI1
@@ -261,7 +261,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			this.monthlyTriggerPage.Controls.Add(this.monthlyTriggerUI1);
 			this.monthlyTriggerPage.Name = "monthlyTriggerPage";
-			this.monthlyTriggerPage.NextPage = this.triggerPropPage;
+			this.monthlyTriggerPage.NextPage = this.onEventTriggerPage;
 			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			// 
 			// monthlyTriggerUI1
@@ -307,7 +307,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.runActionPage.AllowNext = false;
 			this.runActionPage.Controls.Add(this.execActionUI1);
 			this.runActionPage.Name = "runActionPage";
-			this.runActionPage.NextPage = this.secOptPage;
+			this.runActionPage.NextPage = this.emailActionPage;
 			resources.ApplyResources(this.runActionPage, "runActionPage");
 			this.runActionPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.runActionPage_Commit);
 			// 
@@ -375,7 +375,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.emailActionPage.AllowNext = false;
 			this.emailActionPage.Controls.Add(this.emailActionUI1);
 			this.emailActionPage.Name = "emailActionPage";
-			this.emailActionPage.NextPage = this.secOptPage;
+			this.emailActionPage.NextPage = this.msgActionPage;
 			resources.ApplyResources(this.emailActionPage, "emailActionPage");
 			this.emailActionPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.emailActionPage_Commit);
 			// 

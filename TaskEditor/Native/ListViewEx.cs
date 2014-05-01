@@ -33,7 +33,7 @@ namespace System.Windows.Forms
 				if (value != collapsible)
 				{
 					collapsible = value;
-					SetAllGroupState(NativeMethods.ListViewGroupState.Collapsible, collapsible);
+					SetAllGroupState(NativeMethods.ListViewGroupState.Collapsible | NativeMethods.ListViewGroupState.Normal, collapsible);
 				}
 			}
 		}
@@ -177,8 +177,8 @@ namespace System.Windows.Forms
 				case 0x0200: // WM_MOUSEMOVE
 					break;
 				case 0x0202: // WM_LBUTTONUP
-					base.DefWndProc(ref m);
-					break;
+					//base.DefWndProc(ref m);
+					//break;
 				default:
 					base.WndProc(ref m);
 					break;
@@ -426,8 +426,8 @@ namespace System.Windows.Forms
 
 		public bool Collapsed
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Collapsed, ref this.collapsed); }
-			set { SetState(NativeMethods.ListViewGroupState.Collapsed, value, ref this.collapsed); }
+			get { return GetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, ref this.collapsed); }
+			set { SetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, value, ref this.collapsed); }
 		}
 
 		public bool Hidden
@@ -442,11 +442,11 @@ namespace System.Windows.Forms
 			set { SetState(NativeMethods.ListViewGroupState.NoHeader, value, ref this.noheader); }
 		}
 
-		/*public bool Collapsible
+		public bool Collapsible
 		{
 			get { return GetState(NativeMethods.ListViewGroupState.Collapsible, ref this.collapsible); }
 			set { SetState(NativeMethods.ListViewGroupState.Collapsible, value, ref this.collapsible); }
-		}*/
+		}
 
 		public bool Focused
 		{
@@ -458,6 +458,18 @@ namespace System.Windows.Forms
 		{
 			get { return GetState(NativeMethods.ListViewGroupState.Selected, ref this.selected); }
 			set { SetState(NativeMethods.ListViewGroupState.Selected, value, ref this.selected); }
+		}
+
+		public bool Subseted
+		{
+			get { return GetState(NativeMethods.ListViewGroupState.Subseted, ref this.subseted); }
+			set { SetState(NativeMethods.ListViewGroupState.Subseted, value, ref this.subseted); }
+		}
+
+		public bool SubsetLinkFocused
+		{
+			get { return GetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, ref this.subsetlinkfocused); }
+			set { SetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, value, ref this.subsetlinkfocused); }
 		}
 
 		private void SetState(NativeMethods.ListViewGroupState item, bool on, ref bool? localVar)

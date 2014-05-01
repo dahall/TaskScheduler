@@ -1175,24 +1175,33 @@ namespace Microsoft.Win32.TaskScheduler
 
 			TaskScheduler.V1Interop.SystemTime stStart = start;
 			TaskScheduler.V1Interop.SystemTime stEnd = end;
-			TaskScheduler.V1Interop.SystemTime[] runTimes;
+			IntPtr runTimes = IntPtr.Zero, st;
 			DateTime[] ret = new DateTime[0];
 			try
 			{
 				if (v2Task != null)
-					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, out runTimes);
+					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
 				else
 				{
 					ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
-					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, out runTimes);
+					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
 					count = count1;
 				}
-				if (count > 0)
-					ret = Array.ConvertAll<TaskScheduler.V1Interop.SystemTime, DateTime>(runTimes, delegate(TaskScheduler.V1Interop.SystemTime st) { return st; });
+				ret = new DateTime[count];
+				int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
+				for (int i = 0; i < count; i++)
+				{
+					st = new IntPtr(runTimes.ToInt64() + (i * stSize));
+					ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
+				}
 			}
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes failed: Error {0}.", ex));
+			}
+			finally
+			{
+				Marshal.FreeCoTaskMem(runTimes);
 			}
 			System.Diagnostics.Debug.WriteLine(string.Format("Task.GetRunTimes ({0}): Returned {1} items from {2} to {3}.", v2Task != null ? "V2" : "V1", count, stStart, stEnd));
 			return ret;

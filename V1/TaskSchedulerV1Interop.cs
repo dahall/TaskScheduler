@@ -476,7 +476,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		[return: MarshalAs(UnmanagedType.Interface)]
 		ITaskTrigger GetTrigger([In] ushort TriggerIndex);
 		CoTaskMemString GetTriggerString([In] ushort TriggerIndex);
-		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] ref SystemTime End, ref ushort Count, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStruct, SizeParamIndex = 2)] out SystemTime[] TaskTimes);
+		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] ref SystemTime End, ref ushort Count, [In, Out] ref System.IntPtr TaskTimes);
 		[return: MarshalAs(UnmanagedType.Struct)]
 		SystemTime GetNextRunTime();
 		void SetIdleWait([In] ushort IdleMinutes, [In] ushort DeadlineMinutes);
