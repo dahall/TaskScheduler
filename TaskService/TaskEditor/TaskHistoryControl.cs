@@ -89,6 +89,9 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Task = t;
 		}
 
+		/// <summary>
+		/// Refreshes the history list of the control using current sorting and grouping settings.
+		/// </summary>
 		public void RefreshHistory()
 		{
 			historyListView.Cursor = Cursors.WaitCursor;
@@ -244,6 +247,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (cText != g.Header)
 				{
 					g = historyListView.Groups.Add(cText);
+					g.Collapsible = true;
 					g.Collapsed = false;
 				}
 				g.Items.Add(lvi);

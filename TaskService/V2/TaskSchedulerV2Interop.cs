@@ -238,7 +238,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		void SetSecurityDescriptor([In, MarshalAs(UnmanagedType.BStr)] string sddl, [In] int flags);
 		void Stop(int flags);
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), TypeLibFunc((short)0x41), DispId(0x60020011)]
-		void GetRunTimes([In] ref Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstStart, [In] ref Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstEnd, [In, Out] ref uint pCount, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStruct, SizeParamIndex = 2)] out Microsoft.Win32.TaskScheduler.V1Interop.SystemTime[] pRunTimes);
+		void GetRunTimes([In] ref Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstStart, [In] ref Microsoft.Win32.TaskScheduler.V1Interop.SystemTime pstEnd, [In, Out] ref uint pCount, [In, Out] ref IntPtr pRunTimes);
 	}
 
 	[ComImport, Guid("86627EB4-42A7-41E4-A4D9-AC33A72F2D52"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]

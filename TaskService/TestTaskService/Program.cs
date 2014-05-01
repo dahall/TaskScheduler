@@ -243,15 +243,18 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
-				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
-				EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
+				td.RegistrationInfo.Description = "Test for XP SP3";
+				td.RegistrationInfo.Author = "incaunu";
+				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				//EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 				//eTrig.ValueQueries.Add("Name", "Value");
-				td.Triggers.Add(eTrig);
-				td.Actions.Add(new ExecAction("notepad.exe"));
-				WriteXml(td, taskName);
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+				//td.Triggers.Add(eTrig);
+				td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
+				//WriteXml(td, taskName);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				System.Converter<DateTime, string> d = delegate(DateTime ints) { return ints == DateTime.MinValue ? "Never" : ints.ToString(); };
 				output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
-					t.Name, t.Enabled, t.LastRunTime, t.State, t.IsActive, t.NextRunTime, t.LastRunTime, t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
+					t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
 				//WriteXml(t);
 
 				// Register then show task again

@@ -370,6 +370,7 @@ namespace System.Windows.Forms
 			tr.Inflate(0, -2);
 			tr.Offset(1, 0);*/
 			Rectangle br = cbi.rcButton;
+			bool vsSuccess = false;
 			if (VisualStyleRenderer.IsSupported && Application.RenderWithVisualStyles)
 			{
 				/*Rectangle r = Rectangle.Inflate(this.ClientRectangle, 1, 1);
@@ -381,23 +382,29 @@ namespace System.Windows.Forms
 				}
 				else*/
 				{
-					var vr = new VisualStyleRenderer("COMBOBOX", this.DropDownStyle == ComboBoxStyle.DropDownList ? 5 : 4, (int)state);
-					vr.DrawParentBackground(e.Graphics, this.ClientRectangle, this);
-					vr.DrawBackground(e.Graphics, this.ClientRectangle);
-					if (this.DropDownStyle != ComboBoxStyle.DropDownList) br.Inflate(1, 1);
-					Rectangle cr = this.DropDownStyle == ComboBoxStyle.DropDownList ? Rectangle.Inflate(br, -1, -1) : br;
-					vr.SetParameters("COMBOBOX", 7, (int)(br.Contains(this.PointToClient(Cursor.Position)) ? state : ComboBoxState.Normal));
-					vr.DrawBackground(e.Graphics, br, cr);
-					if (this.Focused && State != ComboBoxState.Pressed)
+					try
 					{
-						Size sz = TextRenderer.MeasureText(e.Graphics, "Wg", this.Font, tr.Size, TextFormatFlags.Default);
-						Rectangle fr = Rectangle.Inflate(tr, 0, ((sz.Height - tr.Height) / 2) + 1);
-						ControlPaint.DrawFocusRectangle(e.Graphics, fr);
+						var vr = new VisualStyleRenderer("Combobox", this.DropDownStyle == ComboBoxStyle.DropDownList ? 5 : 4, (int)state);
+						vr.DrawParentBackground(e.Graphics, this.ClientRectangle, this);
+						vr.DrawBackground(e.Graphics, this.ClientRectangle);
+						if (this.DropDownStyle != ComboBoxStyle.DropDownList) br.Inflate(1, 1);
+						Rectangle cr = this.DropDownStyle == ComboBoxStyle.DropDownList ? Rectangle.Inflate(br, -1, -1) : br;
+						vr.SetParameters("Combobox", 7, (int)(br.Contains(this.PointToClient(Cursor.Position)) ? state : ComboBoxState.Normal));
+						vr.DrawBackground(e.Graphics, br, cr);
+						if (this.Focused && State != ComboBoxState.Pressed)
+						{
+							Size sz = TextRenderer.MeasureText(e.Graphics, "Wg", this.Font, tr.Size, TextFormatFlags.Default);
+							Rectangle fr = Rectangle.Inflate(tr, 0, ((sz.Height - tr.Height) / 2) + 1);
+							ControlPaint.DrawFocusRectangle(e.Graphics, fr);
+						}
+						TextRenderer.DrawText(e.Graphics, itemText, this.Font, tr, this.ForeColor, tff);
+						vsSuccess = true;
 					}
-					TextRenderer.DrawText(e.Graphics, itemText, this.Font, tr, this.ForeColor, tff);
+					catch { }
 				}
 			}
-			else
+
+			if (!vsSuccess)
 			{
 				ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, Border3DStyle.Sunken);
 				ControlPaint.DrawComboButton(e.Graphics, br, this.Enabled ? (state == ComboBoxState.Pressed ? ButtonState.Pushed : ButtonState.Normal) : ButtonState.Inactive);
