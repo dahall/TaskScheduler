@@ -570,6 +570,8 @@ namespace Microsoft.Win32.TaskScheduler
 					e.Cancel = true;
 					break;
 			}
+			if (e.Page.NextPage != null)
+				e.Page.NextPage.NextPage = secOptPage;
 		}
 
 		private void AddActionToSelectionList(AvailableWizardActions action)
@@ -1009,6 +1011,8 @@ namespace Microsoft.Win32.TaskScheduler
 					e.Cancel = true;
 					break;
 			}
+			if (e.Page.NextPage != actionSelectPage && e.Page.NextPage != null)
+				e.Page.NextPage.NextPage = actionSelectPage;
 		}
 
 		private void triggerSelectPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)

@@ -192,11 +192,14 @@ namespace TestTaskService
 					taskSchedulerWizard.Initialize(ts, newTaskDefinition);
 					taskSchedulerWizard.TaskFolder = FolderName;
 					taskSchedulerWizard.RegisterTaskOnFinish = true;
+					taskSchedulerWizard.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Event;
 					taskSchedulerWizard.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage |
-						TaskSchedulerWizard.AvailableWizardPages.SecurityPage |
-						TaskSchedulerWizard.AvailableWizardPages.SummaryPage |
-						TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage |
-						TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage;
+						//TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage |
+						TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage |
+						//TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage |
+						TaskSchedulerWizard.AvailableWizardPages.ActionEditPage |
+						//TaskSchedulerWizard.AvailableWizardPages.SecurityPage |
+						TaskSchedulerWizard.AvailableWizardPages.SummaryPage;
 
 					if (taskSchedulerWizard.ShowDialog() == DialogResult.OK)
 						taskFolder.DeleteTask(taskSchedulerWizard.Task.Name);
