@@ -76,6 +76,7 @@
 			// 
 			resources.ApplyResources(this.onEventSourceCombo, "onEventSourceCombo");
 			this.onEventSourceCombo.Name = "onEventSourceCombo";
+			this.onEventSourceCombo.SelectedIndexChanged += new System.EventHandler(this.onEventTextBox_Leave);
 			this.onEventSourceCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventLogCombo

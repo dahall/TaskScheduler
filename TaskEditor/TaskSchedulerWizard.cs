@@ -188,16 +188,22 @@ namespace Microsoft.Win32.TaskScheduler
 					SetupPages();
 					if ((availPages & AvailableWizardPages.TriggerSelectPage) != AvailableWizardPages.TriggerSelectPage)
 					{
-						if (td != null && td.Triggers.Count > 0 && (availPages & AvailableWizardPages.TriggerEditPage) == AvailableWizardPages.TriggerEditPage)
-							availTriggers = (AvailableWizardTriggers)(1 << (int)td.Triggers[0].TriggerType);
+						if (td != null && (availPages & AvailableWizardPages.TriggerEditPage) == AvailableWizardPages.TriggerEditPage)
+						{
+							if (td.Triggers.Count > 0)
+								availTriggers = (AvailableWizardTriggers)(1 << (int)td.Triggers[0].TriggerType);
+						}
 						else
 							availTriggers = 0;
 						SetupTriggerList();
 					}
 					if ((availPages & AvailableWizardPages.ActionSelectPage) != AvailableWizardPages.ActionSelectPage)
 					{
-						if (td != null && td.Actions.Count > 0 && (availPages & AvailableWizardPages.ActionEditPage) == AvailableWizardPages.ActionEditPage)
-							availActions = (AvailableWizardActions)(1 << (int)td.Actions[0].ActionType);
+						if (td != null && (availPages & AvailableWizardPages.ActionEditPage) == AvailableWizardPages.ActionEditPage)
+						{
+							if (td.Actions.Count > 0)
+								availActions = (AvailableWizardActions)(1 << (int)td.Actions[0].ActionType);
+						}
 						else
 							availActions = 0;
 						SetupActionList();
@@ -723,6 +729,20 @@ namespace Microsoft.Win32.TaskScheduler
 		private void onEventTriggerPage_Commit(object sender, WizDLL::AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			trigger = eventTriggerUI1.Trigger;
+		}
+
+		private void onEventTriggerPage_Initialize(object sender, WizDLL::AeroWizard.WizardPageInitEventArgs e)
+		{
+			if (eventTriggerUI1.Trigger == null)
+				eventTriggerUI1.Trigger = new EventTrigger();
+			if (System.Environment.Version.Major < 4)
+				onEventTriggerPage.AllowNext = true;
+		}
+
+		void eventTriggerUI1_TriggerChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (eventTriggerUI1.IsTriggerValid())
+				onEventTriggerPage.AllowNext = true;
 		}
 
 		private void repeatCheckBox_CheckedChanged(object sender, EventArgs e)
