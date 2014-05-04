@@ -272,20 +272,19 @@ namespace Microsoft.Win32.TaskScheduler
 			// 
 			// onEventTriggerPage
 			// 
+			this.onEventTriggerPage.AllowNext = false;
 			this.onEventTriggerPage.Controls.Add(this.eventTriggerUI1);
 			this.onEventTriggerPage.Name = "onEventTriggerPage";
 			this.onEventTriggerPage.NextPage = this.triggerPropPage;
 			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.Commit += new System.EventHandler<WizDLL::AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
+			this.onEventTriggerPage.Initialize += new System.EventHandler<WizDLL::AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
 			// 
 			// eventTriggerUI1
 			// 
 			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
 			this.eventTriggerUI1.Name = "eventTriggerUI1";
-			eventTrigger1.Enabled = true;
-			eventTrigger1.StartBoundary = new System.DateTime(2014, 4, 28, 22, 12, 8, 427);
-			eventTrigger1.Subscription = "";
-			this.eventTriggerUI1.Trigger = eventTrigger1;
+			this.eventTriggerUI1.TriggerChanged += new System.ComponentModel.PropertyChangedEventHandler(this.eventTriggerUI1_TriggerChanged);
 			// 
 			// actionSelectPage
 			// 

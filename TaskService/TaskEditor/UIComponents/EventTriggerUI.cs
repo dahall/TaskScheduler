@@ -10,18 +10,26 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		protected bool onAssignment = false;
 		protected EventTrigger trigger;
 
+		public event PropertyChangedEventHandler TriggerChanged;
+
 		public EventTriggerUI()
 		{
 			InitializeComponent();
+			if (System.Environment.Version.Major < 4)
+			{
+				eventBasicRadio.Enabled = false;
+				eventCustomRadio.Checked = true;
+				this.onEventCustomText.Text = GetFormattedXmlString(EventTrigger.BuildQuery("System", null, null));
+			}
 		}
 
-		[Browsable(false), DefaultValue(null)]
+		[Browsable(false), DefaultValue(null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public virtual string TargetServer { get; set; }
 
-		[Browsable(false), DefaultValue(null)]
+		[Browsable(false), DefaultValue(null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public virtual Trigger Trigger
 		{
-			get { if (trigger == null) trigger = new EventTrigger() { Subscription = onEventCustomText.Text }; return trigger; }
+			get { if (trigger != null) trigger.Subscription = onEventCustomText.Text; return trigger; }
 			set
 			{
 				if (!(value is EventTrigger))
@@ -30,20 +38,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				onAssignment = true;
 				trigger = (EventTrigger)value;
 
-				InitializeEventLogList();
-				UpdateCustomText();
-				eventBasicRadio.Checked = TrySetBasic();
+				if (System.Environment.Version.Major >= 4)
+				{
+					InitializeEventLogList();
+					UpdateCustomText();
+					eventBasicRadio.Checked = TrySetBasic();
+				}
 			}
 		}
 
-		[DefaultValue(true)]
+		[DefaultValue(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public virtual bool IsV2
 		{
 			get { return isV2; }
 			set { isV2 = value; }
 		}
 
-		public virtual bool IsTriggerValid() { return true; }
+		public virtual bool IsTriggerValid() { return onEventCustomText.TextLength > 0; }
 
 		/// <summary>
 		/// Raises the <see cref="E:System.Windows.Forms.Control.Enter" /> event.
@@ -53,6 +64,15 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			base.OnEnter(e);
 			InitializeEventLogList();
+		}
+
+		protected virtual void OnTriggerChanged(PropertyChangedEventArgs e)
+		{
+			if (TriggerChanged != null)
+			{
+				var ev = this.TriggerChanged;
+				ev(this, e);
+			}
 		}
 
 		private static string GetFormattedXmlString(string xml)
@@ -105,6 +125,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			trigger.Subscription = onEventCustomText.TextLength > 0 ? onEventCustomText.Text : null;
 			TrySetBasic();
+			OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 		}
 
 		private void onEventIdText_KeyPress(object sender, KeyPressEventArgs e)
@@ -124,6 +145,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			onEventSourceCombo.Items.Clear();
 			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
 			UpdateCustomText();
+			OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 		}
 
 		private void onEventTextBox_Leave(object sender, EventArgs e)
@@ -133,6 +155,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				if (trigger != null)
 					trigger.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, this.EventId);
 				UpdateCustomText();
+				OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 			}
 		}
 
