@@ -408,6 +408,7 @@ namespace TestTaskService
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 				output.WriteLine(td.XmlText);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
+				t.Enabled = false;
 
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
