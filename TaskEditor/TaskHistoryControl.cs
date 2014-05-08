@@ -15,12 +15,10 @@ namespace Microsoft.Win32.TaskScheduler
 		private long historyEventCount = 0;
 		private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 		private Task task;
-#if NET_35_OR_GREATER
 		private int selectedIndex = -1;
 		private IList<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
 		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
-#endif
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskHistoryControl"/> class.
@@ -72,9 +70,7 @@ namespace Microsoft.Win32.TaskScheduler
 				this.task = value;
 				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 				historySplitContainer.Panel2Collapsed = false;
-#if NET_35_OR_GREATER
 				vlog = CreateLogInstance();
-#endif
 				RefreshHistory();
 			}
 		}
@@ -98,11 +94,9 @@ namespace Microsoft.Win32.TaskScheduler
 			historyListView.VirtualListSize = 0;
 			historyListView.Refresh();
 			historyHeader_Refresh(-1);
-#if NET_35_OR_GREATER
 			historyDetailView.TaskEvent = null;
 			selectedIndex = -1;
 			vcache.Clear();
-#endif
 			historyBackgroundWorker.RunWorkerAsync();
 		}
 
@@ -124,16 +118,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-#if NET_35_OR_GREATER
 		private ListViewItem BuildItem(TaskEvent item)
 		{
+			var kwds = new List<string>(item.EventRecord.KeywordsDisplayNames);
 			return new ListViewItem(new string[] { item.Level, item.TimeCreated.ToString(), item.EventId.ToString(),
-				item.TaskCategory, item.OpCode, item.ActivityId.ToString(), string.Join<string>(", ", item.EventRecord.KeywordsDisplayNames), "TaskScheduler",
+				item.TaskCategory, item.OpCode, item.ActivityId.ToString(), string.Join(", ", kwds.ToArray()), "TaskScheduler",
 				item.UserId.Translate(typeof(System.Security.Principal.NTAccount)).ToString(), item.EventRecord.LogName, 
 				item.EventRecord.MachineName, item.ProcessId.ToString(), item.EventRecord.ThreadId.ToString() },
 				item.EventRecord.Level.GetValueOrDefault(0)) { Tag = item };
 		}
-#endif
 
 		private void columnContextMenuColumnHeaderItem_onClick(object sender, EventArgs e)
 		{
@@ -149,7 +142,6 @@ namespace Microsoft.Win32.TaskScheduler
 			PersistColumnSettings();
 		}
 
-#if NET_35_OR_GREATER
 		private TaskEventLog CreateLogInstance()
 		{
 			return new TaskEventLog(task.TaskService.TargetServer, task.Path);
@@ -162,7 +154,6 @@ namespace Microsoft.Win32.TaskScheduler
 			while (vevEnum.MoveNext() && n <= endIndex)
 				vcache[n++] = BuildItem(vevEnum.Current);
 		}
-#endif
 
 		private void histDetailHideBtn_Click(object sender, EventArgs e)
 		{
@@ -173,7 +164,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-#if NET_35_OR_GREATER
 				TaskEventLog log = CreateLogInstance();
 				if (!lvwColumnSorter.Group && lvwColumnSorter.SortColumn == 1)
 				{
@@ -187,9 +177,6 @@ namespace Microsoft.Win32.TaskScheduler
 					e.Result = list;
 				}
 				((BackgroundWorker)sender).ReportProgress(100, log.Count);
-#else
-				e.Result = new PlatformNotSupportedException(EditorProperties.Resources.Error_EventsNotSupported);
-#endif
 			}
 			catch (Exception ex) { e.Result = ex; }
 		}
@@ -213,7 +200,6 @@ namespace Microsoft.Win32.TaskScheduler
 				if (ShowErrors)
 					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-#if NET_35_OR_GREATER
 			else if (e.Result == null)
 			{
 				historyListView.VirtualMode = true;
@@ -231,7 +217,6 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					historyListView.ShowGroups = false;
 			}
-#endif
 			historyListView.EndUpdate();
 		}
 
@@ -266,12 +251,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
 		{
-#if NET_35_OR_GREATER
 			if (vcache[e.StartIndex] == null && vevEnum != null)
 			{
 				FetchEnumEvents(e.StartIndex, e.EndIndex);
 			}
-#endif
 		}
 
 		private void historyListView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -292,7 +275,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_DoubleClick(object sender, EventArgs e)
 		{
-#if NET_35_OR_GREATER
 			if (selectedIndex != -1)
 			{
 				ListViewItem lvi = vcache[selectedIndex];
@@ -303,7 +285,6 @@ namespace Microsoft.Win32.TaskScheduler
 					dlg.ShowDialog(this);
 				}
 			}
-#endif
 		}
 
 		private void historyListView_MouseClick(object sender, MouseEventArgs e)
@@ -317,7 +298,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
-#if NET_35_OR_GREATER
 			ListViewItem item = vcache[e.ItemIndex];
 			//System.Diagnostics.Debug.WriteLine(string.Format("RetrieveLVI: InCache={0}, Msg={1}", item!=null, Environment.StackTrace));
 			if (item == null && vevEnum != null)
@@ -334,7 +314,6 @@ namespace Microsoft.Win32.TaskScheduler
 					SelectItemChanged(e.ItemIndex);
 				}
 			}
-#endif
 		}
 
 		private void historyListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -346,10 +325,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-#if NET_35_OR_GREATER
 				selectedIndex = -1;
 				historyDetailView.TaskEvent = null;
-#endif
 				historyDetailTitleText.Text = string.Empty;
 			}
 		}
@@ -361,7 +338,6 @@ namespace Microsoft.Win32.TaskScheduler
 		
 		private void SelectItemChanged(int newSelIdx)
 		{
-#if NET_35_OR_GREATER
 			if (selectedIndex != newSelIdx)
 			{
 				selectedIndex = newSelIdx;
@@ -373,7 +349,6 @@ namespace Microsoft.Win32.TaskScheduler
 					historyDetailTitleText.Text = ev == null ? string.Empty : string.Format(EditorProperties.Resources.EventDetailHeader, ev.EventId);
 				}
 			}
-#endif
 		}
 
 		private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,7 +363,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void attachTaskToThisEventToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-#if NET_35_OR_GREATER
 			if (selectedIndex != -1)
 			{
 				var taskEvent = (TaskEvent)vcache[selectedIndex].Tag;
@@ -408,7 +382,6 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 				}
 			}
-#endif
 		}
 
 		private void saveAllEventsAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -464,12 +437,10 @@ namespace Microsoft.Win32.TaskScheduler
 		private void groupEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			lvwColumnSorter.Group = true;
-#if NET_35_OR_GREATER
 			if (lvwColumnSorter.SortColumn != historyListView.LastColumnClicked || vevEnum != null)
 				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(historyListView.LastColumnClicked));
 			else
 				SetupGroups();
-#endif
 			groupEventsByThisColumnToolStripMenuItem.Visible = false;
 			removeGroupingOfEventsToolStripMenuItem.Visible = expandAllGroupsToolStripMenuItem.Visible = collapseAllGroupsToolStripMenuItem.Visible = true;
 		}

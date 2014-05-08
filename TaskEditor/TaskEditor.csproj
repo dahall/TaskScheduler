@@ -134,10 +134,10 @@
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EventViewerDialog.cs" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
+    <Compile Include="EventViewerDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EventViewerDialog.Designer.cs" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
+    <Compile Include="EventViewerDialog.Designer.cs">
       <DependentUpon>EventViewerDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EventViewerControl.cs">
@@ -147,6 +147,7 @@
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Native\CREDUI.cs" />
+    <Compile Include="Native\EventLog.cs" />
     <Compile Include="Native\FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -333,7 +334,7 @@
     <EmbeddedResource Include="EventViewerControl.resx">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EventViewerDialog.resx" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">
+    <EmbeddedResource Include="EventViewerDialog.resx">
       <DependentUpon>EventViewerDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">

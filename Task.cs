@@ -859,7 +859,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates if the registered task is enabled.
 		/// </summary>
-		/// <remarks>As of version 1.8.1, under V1 systems (prior to Vista), this method will immediately set the enabled property and re-save the current task. If changes have been made to the <see cref="TaskDefinition"/>, then those changes will be saved.</remarks>
+		/// <remarks>As of version 1.8.1, under V1 systems (prior to Vista), this property will immediately update the Disabled state and re-save the current task. If changes have been made to the <see cref="TaskDefinition"/>, then those changes will be saved.</remarks>
 		public bool Enabled
 		{
 			get
