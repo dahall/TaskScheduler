@@ -92,7 +92,7 @@ namespace System.Windows.Forms
 			try
 			{
 				if (0 != SendMessage(NativeMethods.ListViewMessage.GetGroupInfoByIndex, base.Groups.IndexOf(group), mgroup))
-					return mgroup.iGroupId;
+					return mgroup.ID;
 			}
 			catch { }
 			return -1;
@@ -215,7 +215,7 @@ namespace System.Windows.Forms
 
 		private int SendMessage(NativeMethods.ListViewMessage msg, int wParam, NativeMethods.LVGROUP group)
 		{
-			return NativeMethods.SendMessage(this.Handle, (uint)msg, (IntPtr)wParam, group).ToInt32();
+			return NativeMethods.SendMessage(this.Handle, msg, wParam, group).ToInt32();
 		}
 
 		private void SetAllGroupState(NativeMethods.ListViewGroupState state, bool on = true)

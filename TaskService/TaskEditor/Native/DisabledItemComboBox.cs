@@ -157,7 +157,8 @@ namespace System.Windows.Forms
 					}
 					else
 					{
-						e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
+						using (var bb = new SolidBrush(e.BackColor))
+							e.Graphics.FillRectangle(bb, e.Bounds);
 					}
 					TextRenderer.DrawText(e.Graphics, itemString, e.Font, Rectangle.Inflate(e.Bounds, -2, 0), iEnabled ? (/*e.Index == this.SelectedIndex ? SystemColors.HighlightText :*/ e.ForeColor) : SystemColors.GrayText, tff);
 				}
@@ -272,9 +273,6 @@ namespace System.Windows.Forms
 			base.OnMouseMove(e);
 			if (State != ComboBoxState.Pressed)
 				State = ComboBoxState.Hot;
-			/*Point pt = NativeMethods.MapPointToClient(dropDownWindow, Cursor.Position);
-			int idx = this.dropDownWindow.IndexFromPoint(pt.X, pt.Y);
-			System.Windows.Forms.Cursor.Current = (idx >= 0 && !IsItemEnabled(idx)) ? Cursors.No : Cursors.Default;*/
 		}
 
 		/// <summary>
@@ -406,6 +404,7 @@ namespace System.Windows.Forms
 
 			if (!vsSuccess)
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("CR:{0};ClR:{1};Foc:{2};St:{3};Tx:{4}", ClientRectangle, e.ClipRectangle, this.Focused, state, itemText));
 				ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, Border3DStyle.Sunken);
 				ControlPaint.DrawComboButton(e.Graphics, br, this.Enabled ? (state == ComboBoxState.Pressed ? ButtonState.Pushed : ButtonState.Normal) : ButtonState.Inactive);
 				using (var bb = new SolidBrush(this.BackColor))

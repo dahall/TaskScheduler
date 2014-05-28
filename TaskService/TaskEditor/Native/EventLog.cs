@@ -19,13 +19,13 @@ using System.Text;
 
 namespace System.Diagnostics.Eventing.Reader
 {
-	public enum PathType
+	internal enum PathType
 	{
 		FilePath = 2,
 		LogName = 1
 	}
 
-	public enum SessionAuthentication
+	internal enum SessionAuthentication
 	{
 		Default,
 		Negotiate,
@@ -33,6 +33,9 @@ namespace System.Diagnostics.Eventing.Reader
 		Ntlm
 	}
 
+	/// <summary>
+	/// Represents a placeholder (bookmark) within an event stream. You can use the placeholder to mark a position and return to this position in a stream of events. An instance of this object can be obtained from an EventRecord object, in which case it corresponds to the position of that event record.
+	/// </summary>
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public class EventBookmark : ISerializable
 	{
@@ -49,6 +52,11 @@ namespace System.Diagnostics.Eventing.Reader
 			this.bookmark = bookmarkText;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventBookmark"/> class.
+		/// </summary>
+		/// <param name="info">The information.</param>
+		/// <param name="context">The context.</param>
 		protected EventBookmark(SerializationInfo info, StreamingContext context)
 		{
 			if (info == null)
@@ -73,6 +81,11 @@ namespace System.Diagnostics.Eventing.Reader
 			this.GetObjectData(info, context);
 		}
 
+		/// <summary>
+		/// Gets the object data.
+		/// </summary>
+		/// <param name="info">The information.</param>
+		/// <param name="context">The context.</param>
 		[SecurityCritical, SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
 		protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
@@ -84,8 +97,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Represents a keyword for an event. Keywords are defined in an event provider and are used to group the event with other similar events (based on the usage of the events).
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventKeyword
+	internal sealed class EventKeyword
 	{
 		// Fields
 		private bool dataReady;
@@ -114,6 +130,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			get
@@ -123,6 +145,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public string Name
 		{
 			get
@@ -132,6 +160,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the value.
+		/// </summary>
+		/// <value>
+		/// The value.
+		/// </value>
 		public long Value
 		{
 			get
@@ -167,8 +201,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains an event level that is defined in an event provider. The level signifies the severity of the event.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventLevel
+	internal sealed class EventLevel
 	{
 		// Fields
 		private bool dataReady;
@@ -197,6 +234,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			get
@@ -206,6 +249,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public string Name
 		{
 			get
@@ -215,6 +264,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the value.
+		/// </summary>
+		/// <value>
+		/// The value.
+		/// </value>
 		public int Value
 		{
 			get
@@ -251,7 +306,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogException : Exception, ISerializable
+	internal class EventLogException : Exception, ISerializable
 	{
 		// Fields
 		private int errorCode;
@@ -336,8 +391,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Allows you to access the run-time properties of active event logs and event log files. These properties include the number of events in the log, the size of the log, a value that determines whether the log is full, and the last time the log was written to or accessed.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventLogInformation
+	internal sealed class EventLogInformation
 	{
 		// Fields
 		private DateTime? creationTime;
@@ -374,6 +432,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the attributes.
+		/// </summary>
+		/// <value>
+		/// The attributes.
+		/// </value>
 		public int? Attributes
 		{
 			get
@@ -382,6 +446,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the creation time.
+		/// </summary>
+		/// <value>
+		/// The creation time.
+		/// </value>
 		public DateTime? CreationTime
 		{
 			get
@@ -390,6 +460,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the size of the file.
+		/// </summary>
+		/// <value>
+		/// The size of the file.
+		/// </value>
 		public long? FileSize
 		{
 			get
@@ -398,6 +474,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the is log full.
+		/// </summary>
+		/// <value>
+		/// The is log full.
+		/// </value>
 		public bool? IsLogFull
 		{
 			get
@@ -406,6 +488,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the last access time.
+		/// </summary>
+		/// <value>
+		/// The last access time.
+		/// </value>
 		public DateTime? LastAccessTime
 		{
 			get
@@ -414,6 +502,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the last write time.
+		/// </summary>
+		/// <value>
+		/// The last write time.
+		/// </value>
 		public DateTime? LastWriteTime
 		{
 			get
@@ -422,6 +516,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the oldest record number.
+		/// </summary>
+		/// <value>
+		/// The oldest record number.
+		/// </value>
 		public long? OldestRecordNumber
 		{
 			get
@@ -430,6 +530,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the record count.
+		/// </summary>
+		/// <value>
+		/// The record count.
+		/// </value>
 		public long? RecordCount
 		{
 			get
@@ -440,7 +546,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogInvalidDataException : EventLogException
+	internal class EventLogInvalidDataException : EventLogException
 	{
 		// Methods
 		public EventLogInvalidDataException()
@@ -467,8 +573,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Represents a link between an event provider and an event log that the provider publishes events into. This object cannot be instantiated.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventLogLink
+	internal sealed class EventLogLink
 	{
 		// Fields
 		private uint channelId;
@@ -498,6 +607,12 @@ namespace System.Diagnostics.Eventing.Reader
 			this.syncObject = new object();
 		}
 
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			get
@@ -507,6 +622,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets a value indicating whether this instance is imported.
+		/// </summary>
+		/// <value>
+		/// 	<c>true</c> if this instance is imported; otherwise, <c>false</c>.
+		/// </value>
 		public bool IsImported
 		{
 			get
@@ -516,6 +637,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
 		public string LogName
 		{
 			get
@@ -565,7 +692,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogNotFoundException : EventLogException
+	internal class EventLogNotFoundException : EventLogException
 	{
 		// Methods
 		public EventLogNotFoundException()
@@ -592,6 +719,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains an array of strings that represent XPath queries for elements in the XML representation of an event, which is based on the Event Schema. The queries in this object are used to extract values from the event.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public class EventLogPropertySelector : IDisposable
 	{
@@ -599,6 +729,10 @@ namespace System.Diagnostics.Eventing.Reader
 		private EventLogHandle renderContextHandleValues;
 
 		// Methods
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogPropertySelector"/> class.
+		/// </summary>
+		/// <param name="propertyQueries">The property queries.</param>
 		[SecurityCritical]
 		public EventLogPropertySelector(IEnumerable<string> propertyQueries)
 		{
@@ -630,12 +764,19 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		[SecurityTreatAsSafe, SecurityCritical]
 		protected virtual void Dispose(bool disposing)
 		{
@@ -651,7 +792,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogProviderDisabledException : EventLogException
+	internal class EventLogProviderDisabledException : EventLogException
 	{
 		// Methods
 		public EventLogProviderDisabledException()
@@ -678,7 +819,7 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
-	public class EventLogQuery
+	internal class EventLogQuery
 	{
 		// Fields
 		private string path;
@@ -776,7 +917,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true), HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogReader : IDisposable
+	internal class EventLogReader : IDisposable
 	{
 		// Fields
 		private int batchSize;
@@ -1067,7 +1208,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogReadingException : EventLogException
+	internal class EventLogReadingException : EventLogException
 	{
 		// Methods
 		public EventLogReadingException()
@@ -1095,7 +1236,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventLogRecord : EventRecord
+	internal class EventLogRecord : EventRecord
 	{
 		[SecurityTreatAsSafe]
 		internal EventLogRecord(EventLogHandle handle, EventLogSession session, ProviderMetadataCachedInformation cachedMetadataInfo)
@@ -1104,7 +1245,7 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
-	public class EventLogSession : IDisposable
+	internal class EventLogSession : IDisposable
 	{
 		internal EventLogHandle renderContextHandleSystem;
 
@@ -1375,8 +1516,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains the status code or error code for a specific event log. This status can be used to determine if the event log is available for an operation.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventLogStatus
+	internal sealed class EventLogStatus
 	{
 		// Fields
 		private string channelName;
@@ -1391,6 +1535,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
 		public string LogName
 		{
 			get
@@ -1399,6 +1549,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the status code.
+		/// </summary>
+		/// <value>
+		/// The status code.
+		/// </value>
 		public int StatusCode
 		{
 			get
@@ -1408,8 +1564,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains the metadata (properties and settings) for an event that is defined in an event provider. 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventMetadata
+	internal sealed class EventMetadata
 	{
 		// Fields
 		private byte channelId;
@@ -1440,6 +1599,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the description.
+		/// </summary>
+		/// <value>
+		/// The description.
+		/// </value>
 		public string Description
 		{
 			get
@@ -1448,6 +1613,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
 		public long Id
 		{
 			get
@@ -1456,6 +1627,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the keywords.
+		/// </summary>
+		/// <value>
+		/// The keywords.
+		/// </value>
 		public IEnumerable<EventKeyword> Keywords
 		{
 			get
@@ -1475,6 +1652,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the level.
+		/// </summary>
+		/// <value>
+		/// The level.
+		/// </value>
 		public EventLevel Level
 		{
 			get
@@ -1483,6 +1666,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the log link.
+		/// </summary>
+		/// <value>
+		/// The log link.
+		/// </value>
 		public EventLogLink LogLink
 		{
 			get
@@ -1491,6 +1680,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the opcode.
+		/// </summary>
+		/// <value>
+		/// The opcode.
+		/// </value>
 		public EventOpcode Opcode
 		{
 			get
@@ -1499,6 +1694,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the task.
+		/// </summary>
+		/// <value>
+		/// The task.
+		/// </value>
 		public EventTask Task
 		{
 			get
@@ -1507,6 +1708,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the template.
+		/// </summary>
+		/// <value>
+		/// The template.
+		/// </value>
 		public string Template
 		{
 			get
@@ -1515,6 +1722,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the version.
+		/// </summary>
+		/// <value>
+		/// The version.
+		/// </value>
 		public byte Version
 		{
 			get
@@ -1524,8 +1737,11 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventOpcode
+	internal sealed class EventOpcode
 	{
 		// Fields
 		private bool dataReady;
@@ -1605,6 +1821,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains the value of an event property that is specified by the event provider when the event is published. 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public sealed class EventProperty
 	{
@@ -1618,6 +1837,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the value.
+		/// </summary>
+		/// <value>
+		/// The value.
+		/// </value>
 		public object Value
 		{
 			get
@@ -1627,6 +1852,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Contains the properties of an event instance for an event that is received from an EventLogReader object. The event properties provide information about the event such as the name of the computer where the event was logged and the time that the event was created. 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public class EventRecord : IDisposable
 	{
@@ -1664,6 +1892,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the activity identifier.
+		/// </summary>
+		/// <value>
+		/// The activity identifier.
+		/// </value>
 		public virtual Guid? ActivityId
 		{
 			get
@@ -1673,6 +1907,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the bookmark.
+		/// </summary>
+		/// <value>
+		/// The bookmark.
+		/// </value>
 		public virtual EventBookmark Bookmark
 		{
 			[SecurityTreatAsSafe, SecurityCritical]
@@ -1685,6 +1925,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the container log.
+		/// </summary>
+		/// <value>
+		/// The container log.
+		/// </value>
 		public string ContainerLog
 		{
 			get
@@ -1704,6 +1950,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
 		public virtual int Id
 		{
 			get
@@ -1719,6 +1971,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the keywords.
+		/// </summary>
+		/// <value>
+		/// The keywords.
+		/// </value>
 		public virtual long? Keywords
 		{
 			get
@@ -1733,6 +1991,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the keywords display names.
+		/// </summary>
+		/// <value>
+		/// The keywords display names.
+		/// </value>
 		public virtual IEnumerable<string> KeywordsDisplayNames
 		{
 			get
@@ -1752,6 +2016,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the level.
+		/// </summary>
+		/// <value>
+		/// The level.
+		/// </value>
 		public virtual byte? Level
 		{
 			get
@@ -1761,6 +2031,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the display name of the level.
+		/// </summary>
+		/// <value>
+		/// The display name of the level.
+		/// </value>
 		public virtual string LevelDisplayName
 		{
 			get
@@ -1781,6 +2057,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
 		public virtual string LogName
 		{
 			get
@@ -1790,6 +2072,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the machine.
+		/// </summary>
+		/// <value>
+		/// The name of the machine.
+		/// </value>
 		public virtual string MachineName
 		{
 			get
@@ -1799,6 +2087,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the matched query ids.
+		/// </summary>
+		/// <value>
+		/// The matched query ids.
+		/// </value>
 		public IEnumerable<int> MatchedQueryIds
 		{
 			get
@@ -1818,6 +2112,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the opcode.
+		/// </summary>
+		/// <value>
+		/// The opcode.
+		/// </value>
 		public virtual short? Opcode
 		{
 			get
@@ -1833,6 +2133,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the display name of the opcode.
+		/// </summary>
+		/// <value>
+		/// The display name of the opcode.
+		/// </value>
 		public virtual string OpcodeDisplayName
 		{
 			get
@@ -1849,6 +2155,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the process identifier.
+		/// </summary>
+		/// <value>
+		/// The process identifier.
+		/// </value>
 		public virtual int? ProcessId
 		{
 			get
@@ -1863,6 +2175,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the properties.
+		/// </summary>
+		/// <value>
+		/// The properties.
+		/// </value>
 		public virtual IList<EventProperty> Properties
 		{
 			get
@@ -1878,6 +2196,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider identifier.
+		/// </summary>
+		/// <value>
+		/// The provider identifier.
+		/// </value>
 		public virtual Guid? ProviderId
 		{
 			get
@@ -1887,6 +2211,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the provider.
+		/// </summary>
+		/// <value>
+		/// The name of the provider.
+		/// </value>
 		public virtual string ProviderName
 		{
 			get
@@ -1896,6 +2226,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the qualifiers.
+		/// </summary>
+		/// <value>
+		/// The qualifiers.
+		/// </value>
 		public virtual int? Qualifiers
 		{
 			get
@@ -1911,6 +2247,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the record identifier.
+		/// </summary>
+		/// <value>
+		/// The record identifier.
+		/// </value>
 		public virtual long? RecordId
 		{
 			get
@@ -1925,6 +2267,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the related activity identifier.
+		/// </summary>
+		/// <value>
+		/// The related activity identifier.
+		/// </value>
 		public virtual Guid? RelatedActivityId
 		{
 			get
@@ -1934,6 +2282,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the task.
+		/// </summary>
+		/// <value>
+		/// The task.
+		/// </value>
 		public virtual int? Task
 		{
 			get
@@ -1949,6 +2303,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the display name of the task.
+		/// </summary>
+		/// <value>
+		/// The display name of the task.
+		/// </value>
 		public virtual string TaskDisplayName
 		{
 			get
@@ -1969,6 +2329,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the thread identifier.
+		/// </summary>
+		/// <value>
+		/// The thread identifier.
+		/// </value>
 		public virtual int? ThreadId
 		{
 			get
@@ -1983,6 +2349,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the time created.
+		/// </summary>
+		/// <value>
+		/// The time created.
+		/// </value>
 		public virtual DateTime? TimeCreated
 		{
 			get
@@ -1992,6 +2364,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the user identifier.
+		/// </summary>
+		/// <value>
+		/// The user identifier.
+		/// </value>
 		public virtual SecurityIdentifier UserId
 		{
 			get
@@ -2001,6 +2379,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the version.
+		/// </summary>
+		/// <value>
+		/// The version.
+		/// </value>
 		public virtual byte? Version
 		{
 			get
@@ -2019,17 +2403,29 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <returns></returns>
 		public virtual string FormatDescription()
 		{
 			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle);
 		}
 
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <param name="values">The values.</param>
+		/// <returns></returns>
 		public virtual string FormatDescription(IEnumerable<object> values)
 		{
 			if (values == null)
@@ -2050,6 +2446,11 @@ namespace System.Diagnostics.Eventing.Reader
 			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle, array);
 		}
 
+		/// <summary>
+		/// Gets the property values.
+		/// </summary>
+		/// <param name="propertySelector">The property selector.</param>
+		/// <returns></returns>
 		public IList<object> GetPropertyValues(EventLogPropertySelector propertySelector)
 		{
 			if (propertySelector == null)
@@ -2059,6 +2460,10 @@ namespace System.Diagnostics.Eventing.Reader
 			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, this.handle);
 		}
 
+		/// <summary>
+		/// To the XML.
+		/// </summary>
+		/// <returns></returns>
 		[SecurityTreatAsSafe, SecurityCritical]
 		public virtual string ToXml()
 		{
@@ -2094,6 +2499,10 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		[SecurityTreatAsSafe, SecurityCritical]
 		protected virtual void Dispose(bool disposing)
 		{
@@ -2115,7 +2524,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public sealed class EventTask
+	internal sealed class EventTask
 	{
 		// Fields
 		private bool dataReady;
@@ -2209,7 +2618,7 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class ProviderMetadata : IDisposable
+	internal class ProviderMetadata : IDisposable
 	{
 		// Fields
 		private IList<EventLogLink> channelReferences;
@@ -4626,7 +5035,7 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 		// Nested Types
 		[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-		public class SystemProperties
+		internal class SystemProperties
 		{
 			// Fields
 			public Guid? ActivityId = null;
