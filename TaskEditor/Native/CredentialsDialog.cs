@@ -87,7 +87,7 @@ namespace System.Windows.Forms
 		/// Gets or sets a boolean indicating if the save check box was checked
 		/// </summary>
 		/// <remarks>
-		/// Only valid if <see cref="CredentialsDialog.Options"/> has the <see cref="CredentialsDialogOptions.DoNotPersist"/> flag set.
+		/// Only valid if <see cref="CredentialsDialog.Options"/> has the <see cref="CredentialsDialogOptions.DoNotPersist"/> newDS set.
 		/// </remarks>
 		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates if the save check box is checked.")]
 		public bool SaveChecked { get; set; }

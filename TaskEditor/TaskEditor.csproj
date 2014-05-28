@@ -147,11 +147,13 @@
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Native\CREDUI.cs" />
+    <Compile Include="Native\EnumUtil.cs" />
     <Compile Include="Native\EventLog.cs" />
     <Compile Include="Native\FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Native\GDI32.cs" />
+    <Compile Include="Native\InteropUtil.cs" />
     <Compile Include="Native\KERNEL32.cs" />
     <Compile Include="Native\ListView.cs" />
     <Compile Include="Native\ListViewEx.cs">
@@ -162,6 +164,7 @@
     <Compile Include="Native\RECT.cs" />
     <Compile Include="Native\SafeHandles.cs" />
     <Compile Include="Native\SHELL32.cs" />
+    <Compile Include="Native\SIZE.cs" />
     <Compile Include="Native\USER32.cs" />
     <Compile Include="Native\Util.cs" />
     <Compile Include="Native\UXTHEME.cs" />

@@ -1,4 +1,5 @@
 ﻿// Requires Gdi\Rect.cs
+#define UXTHEME
 
 using System;
 using System.Drawing;

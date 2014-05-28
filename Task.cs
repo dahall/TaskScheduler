@@ -1173,9 +1173,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			const ushort TASK_MAX_RUN_TIMES = 1440;
 
-			TaskScheduler.V1Interop.SystemTime stStart = start;
-			TaskScheduler.V1Interop.SystemTime stEnd = end;
-			IntPtr runTimes = IntPtr.Zero, st;
+			Microsoft.Win32.NativeMethods.SYSTEMTIME stStart = start;
+			Microsoft.Win32.NativeMethods.SYSTEMTIME stEnd = end;
+			IntPtr runTimes = IntPtr.Zero;
 			DateTime[] ret = new DateTime[0];
 			try
 			{
@@ -1187,13 +1187,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
 					count = count1;
 				}
-				ret = new DateTime[count];
-				int stSize = Marshal.SizeOf(typeof(TaskScheduler.V1Interop.SystemTime));
-				for (int i = 0; i < count; i++)
-				{
-					st = new IntPtr(runTimes.ToInt64() + (i * stSize));
-					ret[i] = (TaskScheduler.V1Interop.SystemTime)Marshal.PtrToStructure(st, typeof(TaskScheduler.V1Interop.SystemTime));
-				}
+				ret = InteropUtil.ToArray<Microsoft.Win32.NativeMethods.SYSTEMTIME, DateTime>(runTimes, (int)count);
 			}
 			catch (Exception ex)
 			{

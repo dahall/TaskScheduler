@@ -45,7 +45,7 @@ namespace Microsoft.Win32
 			BIF_RETURNONLYFSDIRS = 0x0001,	// For finding a folder to start document searching
 			BIF_DONTGOBELOWDOMAIN = 0x0002,	// For starting the Find Computer
 			BIF_STATUSTEXT = 0x0004,	// Top of the dialog has 2 lines of okText for BROWSEINFO.lpszTitle and
-			// one line if this flag is set.  Passing the statusMessage
+			// one line if this newDS is set.  Passing the statusMessage
 			// BFFM_SETSTATUSTEXTA to the hwnd can set the rest of the okText.
 			// This is not used with BIF_USENEWUI and BROWSEINFO.lpszTitle gets
 			// all three lines of okText.

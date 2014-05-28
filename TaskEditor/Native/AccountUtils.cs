@@ -1,6 +1,5 @@
 ﻿//using CubicOrange.Windows.Forms.ActiveDirectory;
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -131,7 +130,7 @@ namespace Microsoft.Win32
 				return userName;
 			}
 
-			public static string FormattedUserNameFromStringSid(string incomingSid, string computerName)
+			private static string FormattedUserNameFromStringSid(string incomingSid, string computerName)
 			{
 				string str = string.Empty;
 				IntPtr zero = IntPtr.Zero;

@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
+    <Compile Include="Native\InteropUtil.cs" />
+    <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="TaskSecurity.cs" />
     <Compile Include="TaskServiceFluentExt.cs">
       <SubType>Component</SubType>
