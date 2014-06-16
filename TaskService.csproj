@@ -66,7 +66,6 @@
     <Compile Include="CultureSwitcher.cs" />
     <Compile Include="EnumGlobalizer.cs" />
     <Compile Include="NamedValueCollection.cs" />
-    <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\WindowsImpersonatedIdentity.cs" />
     <Compile Include="NotV1SupportedException.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />

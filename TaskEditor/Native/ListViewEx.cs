@@ -13,15 +13,12 @@ namespace System.Windows.Forms
 	internal class ListViewEx : ListView
 	{
 		private bool collapsible = false;
-		Dictionary<int, Rectangle> columnRects = new Dictionary<int, Rectangle>();
 		private bool disposingImageList = false;
 		private ListViewGroupCollectionEx groups;
 		private ImageList imageListGroup;
 
 		public ListViewEx() : base()
 		{
-			OwnerDraw = true;//This will help the OnDrawColumnHeader be called.
-			LastColumnClicked = -1;
 		}
 
 		[DefaultValue(false), Category("Behavior")]
@@ -78,12 +75,19 @@ namespace System.Windows.Forms
 			}
 		}
 
-		[DefaultValue(-1), Browsable(false)]
-		public int LastColumnClicked { get; private set; }
-
 		internal ListViewGroupCollection BaseGroups
 		{
 			get { return base.Groups; }
+		}
+
+		internal IntPtr HeaderHandle
+		{
+			get
+			{
+				if (this.IsHandleCreated)
+					return NativeMethods.SendMessage(this.Handle, (uint)NativeMethods.ListViewMessage.GetHeader, IntPtr.Zero, IntPtr.Zero);
+				return IntPtr.Zero;
+			}
 		}
 
 		internal int GetGroupId(ListViewGroup group)
@@ -123,25 +127,6 @@ namespace System.Windows.Forms
 				base.Invalidate();
 		}
 
-		protected override void OnDrawItem(DrawListViewItemEventArgs e)
-		{
-			e.DrawDefault = true;
-			base.OnDrawItem(e);
-		}
-
-		protected override void OnDrawSubItem(DrawListViewSubItemEventArgs e)
-		{
-			e.DrawDefault = true;
-			base.OnDrawSubItem(e);
-		}
-
-		protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)
-		{
-			columnRects[e.ColumnIndex] = RectangleToScreen(e.Bounds);
-			e.DrawDefault = true;
-			base.OnDrawColumnHeader(e);
-		}
-
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
@@ -152,37 +137,56 @@ namespace System.Windows.Forms
 			}
 		}
 
+		private void WmReflectNotify(ref Message m)
+		{
+			var nm = (NativeMethods.NMHDR)m.GetLParam(typeof(NativeMethods.NMHDR));
+			if (nm.code == (int)NativeMethods.ListViewNotifications.ColumnDropDown)
+			{
+				var nmlv = (NativeMethods.NMLISTVIEW)m.GetLParam(typeof(NativeMethods.NMLISTVIEW));
+				var iCol = nmlv.iSubItem;
+				NativeMethods.RECT rc = new NativeMethods.RECT();
+				NativeMethods.SendMessage(HeaderHandle, (uint)NativeMethods.HeaderMessage.GetItemDropDownRect, (IntPtr)iCol, ref rc);
+				if (this.ColumnContextMenuStrip != null)
+				{
+					this.ColumnContextMenuStrip.Tag = iCol;
+					this.ColumnContextMenuStrip.Show(this, rc.X, rc.Bottom);
+				}
+			}
+		}
+
 		[System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.LinkDemand, Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
 			switch (m.Msg)
 			{
 				case 0x7b: //WM_CONTEXTMENU
-				{
-					int lp = m.LParam.ToInt32();
-					Point pt = new Point(((lp << 16) >> 16), lp >> 16);
-					foreach (KeyValuePair<int, Rectangle> p in columnRects)
 					{
-						if (p.Value.Contains(pt))
+						int lp = m.LParam.ToInt32();
+						Point pt = new Point(((lp << 16) >> 16), lp >> 16);
+						IntPtr hHdr = HeaderHandle;
+						if (0 != NativeMethods.MapWindowPoints(IntPtr.Zero, hHdr, ref pt, 1))
 						{
-							LastColumnClicked = p.Key;
-							if (ColumnContextMenuStrip != null)
-								ColumnContextMenuStrip.Show(pt);
-							break;
+							var hti = new NativeMethods.HDHITTESTINFO(pt);
+							int item = NativeMethods.SendMessage(hHdr, NativeMethods.HeaderMessage.HitTest, 0, hti).ToInt32();
+							if (item != -1)
+							{
+								if (ColumnContextMenuStrip != null)
+									ColumnContextMenuStrip.Show(pt);
+							}
 						}
 					}
-				}
-				break;
-
-				case 0x0200: // WM_MOUSEMOVE
 					break;
+
+				case 0x204E: // WM_NOTIFY
+					WmReflectNotify(ref m);
+					break;
+				case 0x0200: // WM_MOUSEMOVE
+					return;
 				case 0x0202: // WM_LBUTTONUP
-					//base.DefWndProc(ref m);
-					//break;
 				default:
-					base.WndProc(ref m);
 					break;
 			}
+			base.WndProc(ref m);
 		}
 
 		private void DetachImageList(object sender, EventArgs e)
@@ -242,6 +246,36 @@ namespace System.Windows.Forms
 			NativeMethods.LVGROUP mgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.State);
 			mgroup.SetState(item, value);
 			SendMessage(NativeMethods.ListViewMessage.SetGroupInfo, GetGroupId(group), mgroup);
+		}
+
+		public void SetSortIcon(int columnIndex, SortOrder order)
+		{
+			IntPtr columnHeader = this.HeaderHandle;
+
+			for (int columnNumber = 0; columnNumber <= this.Columns.Count - 1; columnNumber++)
+			{
+				// Get current listview column info
+				var lvcol = new NativeMethods.LVCOLUMN(NativeMethods.ListViewColumMask.Fmt);
+				NativeMethods.SendMessage(this.Handle, NativeMethods.ListViewMessage.GetColumn, columnNumber, lvcol);
+
+				// Get current header info
+				var hditem = new NativeMethods.HDITEM(NativeMethods.HeaderItemMask.Format | NativeMethods.HeaderItemMask.DISetItem);
+				NativeMethods.SendMessage(columnHeader, NativeMethods.HeaderMessage.GetItem, columnNumber, hditem);
+
+				// Update header with column info
+				hditem.Format |= (NativeMethods.HeaderItemFormat)((uint)lvcol.Format & 0x1001803);
+				if ((lvcol.Format & NativeMethods.ListViewColumnFormat.NoTitle) == 0)
+					hditem.ShowText = true;
+
+				// Set header image info
+				if (!(order == SortOrder.None) && columnNumber == columnIndex)
+					hditem.ImageDisplay = (order == System.Windows.Forms.SortOrder.Descending) ? NativeMethods.HeaderItemImageDisplay.DownArrow : NativeMethods.HeaderItemImageDisplay.UpArrow;
+				else
+					hditem.ImageDisplay = NativeMethods.HeaderItemImageDisplay.None;
+
+				// Update header
+				NativeMethods.SendMessage(columnHeader, NativeMethods.HeaderMessage.SetItem, columnNumber, hditem);
+			}
 		}
 
 		private void UpdateListViewItemsLocations()
