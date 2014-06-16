@@ -202,6 +202,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else if (e.Result == null)
 			{
+				historyListView.Items.Clear();
 				historyListView.VirtualMode = true;
 				vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
 				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
@@ -260,6 +261,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void historyListView_ColumnClick(object sender, ColumnClickEventArgs e)
 		{
 			lvwColumnSorter.ResortOnColumn(e.Column);
+			historyListView.SetSortIcon(lvwColumnSorter.SortColumn, lvwColumnSorter.Order);
 			RefreshHistory();
 		}
 
@@ -298,7 +300,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
-			ListViewItem item = vcache[e.ItemIndex];
+			ListViewItem item = (e.ItemIndex >= 0 && e.ItemIndex < vcache.Count) ? vcache[e.ItemIndex] : null;
 			//System.Diagnostics.Debug.WriteLine(string.Format("RetrieveLVI: InCache={0}, Msg={1}", item!=null, Environment.StackTrace));
 			if (item == null && vevEnum != null)
 			{
@@ -424,7 +426,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void sortEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(historyListView.LastColumnClicked));
+			int col = (int)this.columnContextMenu.Tag;
+			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
 			removeSortingToolStripMenuItem.Visible = true;
 		}
 
@@ -436,9 +439,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void groupEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			int col = (int)this.columnContextMenu.Tag;
 			lvwColumnSorter.Group = true;
-			if (lvwColumnSorter.SortColumn != historyListView.LastColumnClicked || vevEnum != null)
-				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(historyListView.LastColumnClicked));
+			if (lvwColumnSorter.SortColumn != col || vevEnum != null)
+				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
 			else
 				SetupGroups();
 			groupEventsByThisColumnToolStripMenuItem.Visible = false;

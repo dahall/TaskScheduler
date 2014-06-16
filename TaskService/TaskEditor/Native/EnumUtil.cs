@@ -42,7 +42,7 @@ namespace System
 			return (Convert.ToInt64(flags) & flagValue) == flagValue;
 		}
 
-		public static void SetFlags<T>(this T flags, T flag, bool set = true) where T : struct, IConvertible
+		public static void SetFlags<T>(ref T flags, T flag, bool set = true) where T : struct, IConvertible
 		{
 			CheckIsEnum<T>(true);
 			long flagsValue = Convert.ToInt64(flags);
@@ -54,9 +54,16 @@ namespace System
 			flags = (T)Enum.ToObject(typeof(T), flagsValue);
 		}
 
-		public static void ClearFlags<T>(this T flags, T flag) where T : struct, IConvertible
+		public static T SetFlags<T>(this T flags, T flag, bool set = true) where T : struct, IConvertible
 		{
-			flags.SetFlags(flag, false);
+			T ret = flags;
+			SetFlags<T>(ref ret, flag, set);
+			return ret;
+		}
+
+		public static T ClearFlags<T>(this T flags, T flag) where T : struct, IConvertible
+		{
+			return flags.SetFlags(flag, false);
 		}
 
 		public static IEnumerable<T> GetFlags<T>(this T value) where T : struct, IConvertible

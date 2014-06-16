@@ -288,7 +288,6 @@
 			this.historyListView.HideSelection = false;
 			this.historyListView.MultiSelect = false;
 			this.historyListView.Name = "historyListView";
-			this.historyListView.OwnerDraw = true;
 			this.historyListView.SmallImageList = this.historyListImages;
 			this.historyListView.UseCompatibleStateImageBehavior = false;
 			this.historyListView.View = System.Windows.Forms.View.Details;
