@@ -548,16 +548,18 @@ namespace Microsoft.Win32.TaskScheduler
 			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
 			if (idx >= 0)
 			{
-				ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action);
-				if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
-				dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
-				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-				if (dlg.ShowDialog() == DialogResult.OK)
+				using (ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action))
 				{
-					actionListView.Items.RemoveAt(idx);
-					td.Actions[idx] = dlg.Action;
-					AddActionToList(dlg.Action, idx);
-					actionListView.Items[idx].Selected = true;
+					if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
+					dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
+					dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
+					if (dlg.ShowDialog() == DialogResult.OK)
+					{
+						actionListView.Items.RemoveAt(idx);
+						td.Actions[idx] = dlg.Action;
+						AddActionToList(dlg.Action, idx);
+						actionListView.Items[idx].Selected = true;
+					}
 				}
 			}
 		}
@@ -575,14 +577,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
-			ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 };
-			dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
-			dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-			if (dlg.ShowDialog() == DialogResult.OK)
+			using (ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 })
 			{
-				td.Actions.Add(dlg.Action);
-				AddActionToList(dlg.Action, -1);
-				SetActionButtonState();
+				dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
+				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					td.Actions.Add(dlg.Action);
+					AddActionToList(dlg.Action, -1);
+					SetActionButtonState();
+				}
 			}
 		}
 
@@ -633,8 +637,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (availableConnectionsCombo.SelectedIndex > 0)
 				{
-					td.Settings.NetworkSettings.Id = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
-					td.Settings.NetworkSettings.Name = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
+					td.Settings.NetworkSettings.Id = ((Microsoft.Win32.NativeMethods.NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
+					td.Settings.NetworkSettings.Name = ((Microsoft.Win32.NativeMethods.NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
 				}
 				else
 				{
@@ -655,7 +659,7 @@ namespace Microsoft.Win32.TaskScheduler
 			availableConnectionsCombo.BeginUpdate();
 			availableConnectionsCombo.Items.Clear();
 			availableConnectionsCombo.Items.Add(EditorProperties.Resources.AnyConnection);
-			availableConnectionsCombo.Items.AddRange(NetworkProfile.GetAllLocalProfiles());
+			availableConnectionsCombo.Items.AddRange(Microsoft.Win32.NativeMethods.NetworkProfile.GetAllLocalProfiles());
 			availableConnectionsCombo.EndUpdate();
 			onAssignment = true;
 			if (task == null || td.Settings.NetworkSettings.Id == Guid.Empty)
@@ -1262,16 +1266,18 @@ namespace Microsoft.Win32.TaskScheduler
 					return;
 				}
 
-				TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2);
-				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-				dlg.TargetServer = TaskService.TargetServer;
-				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
-				if (dlg.ShowDialog() == DialogResult.OK)
+				using (TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2))
 				{
-					triggerListView.Items.RemoveAt(idx);
-					td.Triggers[idx] = dlg.Trigger;
-					AddTriggerToList(dlg.Trigger, idx);
-					triggerListView.Items[idx].Selected = true;
+					dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
+					dlg.TargetServer = TaskService.TargetServer;
+					dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
+					if (dlg.ShowDialog() == DialogResult.OK)
+					{
+						triggerListView.Items.RemoveAt(idx);
+						td.Triggers[idx] = dlg.Trigger;
+						AddTriggerToList(dlg.Trigger, idx);
+						triggerListView.Items[idx].Selected = true;
+					}
 				}
 			}
 		}
@@ -1289,14 +1295,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerNewButton_Click(object sender, EventArgs e)
 		{
-			TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility < TaskCompatibility.V2);
-			dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-			dlg.TargetServer = TaskService.TargetServer;
-			dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
-			if (dlg.ShowDialog() == DialogResult.OK)
+			using (TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility < TaskCompatibility.V2))
 			{
-				td.Triggers.Add(dlg.Trigger);
-				AddTriggerToList(dlg.Trigger, -1);
+				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
+				dlg.TargetServer = TaskService.TargetServer;
+				dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					td.Triggers.Add(dlg.Trigger);
+					AddTriggerToList(dlg.Trigger, -1);
+				}
 			}
 		}
 

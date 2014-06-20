@@ -1,5 +1,4 @@
-﻿extern alias GrpCtrlDLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -16,7 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 		private Task task;
 		private int selectedIndex = -1;
-		private IList<ListViewItem> vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
+		private IList<ListViewItem> vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
 		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
 
@@ -204,7 +203,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				historyListView.Items.Clear();
 				historyListView.VirtualMode = true;
-				vcache = new GrpCtrlDLL::System.Collections.Generic.SparseArray<ListViewItem>();
+				vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
 				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
 			}
 			else
