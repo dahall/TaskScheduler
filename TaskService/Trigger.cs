@@ -147,7 +147,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="TriggerCollection.Add"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract partial class Trigger : IDisposable, ICloneable
+	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 		internal static readonly System.Globalization.CultureInfo DefaultDateCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
@@ -449,6 +449,55 @@ namespace Microsoft.Win32.TaskScheduler
 				Marshal.ReleaseComObject(v2Trigger);
 			if (v1Trigger != null)
 				Marshal.ReleaseComObject(v1Trigger);
+		}
+
+		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+		/// <returns>
+		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+		/// </returns>
+		public override bool Equals(object obj)
+		{
+			if (obj is Trigger)
+				return this.Equals((Trigger)obj);
+			return base.Equals(obj);
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public virtual bool Equals(Trigger other)
+		{
+			bool ret = this.TriggerType == other.TriggerType && this.Enabled == other.Enabled && this.EndBoundary == other.EndBoundary &&
+				this.ExecutionTimeLimit == other.ExecutionTimeLimit && this.Id == other.Id && this.Repetition.Equals(other.Repetition) &&
+				this.StartBoundary == other.StartBoundary;
+			if (other is ITriggerDelay && this is ITriggerDelay)
+				try { ret = ret && ((ITriggerDelay)this).Delay == ((ITriggerDelay)other).Delay; }
+				catch { }
+			if (other is ITriggerUserId && this is ITriggerUserId)
+				try { ret = ret && ((ITriggerUserId)this).UserId == ((ITriggerUserId)other).UserId; }
+				catch { }
+			return ret;
+		}
+
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
+		/// <returns>
+		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+		/// </returns>
+		public override int GetHashCode()
+		{
+			return new { A = this.TriggerType, B = this.Enabled, C = this.EndBoundary, D = this.ExecutionTimeLimit, E = this.Id,
+						 F = this.Repetition, G = this.StartBoundary,
+						 H = this is ITriggerDelay ? ((ITriggerDelay)this).Delay : TimeSpan.Zero,
+						 I = this is ITriggerUserId ? ((ITriggerUserId)this).UserId : null }.GetHashCode();
 		}
 
 		/// <summary>
@@ -1111,6 +1160,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.DaysInterval == ((DailyTrigger)other).DaysInterval;
+		}
+
+		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
@@ -1257,6 +1318,18 @@ namespace Microsoft.Win32.TaskScheduler
 				this.Subscription = ((EventTrigger)sourceTrigger).Subscription;
 				((EventTrigger)sourceTrigger).ValueQueries.CopyTo(this.ValueQueries);
 			}
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.Subscription == ((EventTrigger)other).Subscription;
 		}
 
 		/// <summary>
@@ -1720,6 +1793,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.DaysOfWeek == ((MonthlyDOWTrigger)other).DaysOfWeek &&
+				this.MonthsOfYear == ((MonthlyDOWTrigger)other).MonthsOfYear && this.WeeksOfMonth == ((MonthlyDOWTrigger)other).WeeksOfMonth &&
+				(this.v1Trigger == null && this.RunOnLastWeekOfMonth == ((MonthlyDOWTrigger)other).RunOnLastWeekOfMonth);
+		}
+
+		/// <summary>
 		/// Reads the subclass XML for V1 streams.
 		/// </summary>
 		/// <param name="reader">The reader.</param>
@@ -2035,6 +2122,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.DaysOfMonth == ((MonthlyTrigger)other).DaysOfMonth && this.MonthsOfYear == ((MonthlyTrigger)other).MonthsOfYear &&
+				(this.v1Trigger == null && this.RunOnLastDayOfMonth == ((MonthlyTrigger)other).RunOnLastDayOfMonth);
+		}
+
+		/// <summary>
 		/// Converts an array of bit indices into a mask with bits  turned ON at every index
 		/// contained in the array.  Indices must be from 1 to 32 and bits are numbered the same.
 		/// </summary>
@@ -2233,7 +2333,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
 	/// </summary>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
-	public sealed class RepetitionPattern : IDisposable, IXmlSerializable
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
 	{
 		private Trigger pTrigger;
 		private V2Interop.IRepetitionPattern v2Pattern = null;
@@ -2348,6 +2448,43 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Dispose()
 		{
 			if (v2Pattern != null) Marshal.ReleaseComObject(v2Pattern);
+		}
+
+		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+		/// <returns>
+		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+		/// </returns>
+		public override bool Equals(object obj)
+		{
+			if (obj is RepetitionPattern)
+				return Equals((RepetitionPattern)obj);
+			return base.Equals(obj);
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public bool Equals(RepetitionPattern other)
+		{
+			return this.Duration == other.Duration && this.Interval == other.Interval && this.StopAtDurationEnd == other.StopAtDurationEnd;
+		}
+
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
+		/// <returns>
+		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+		/// </returns>
+		public override int GetHashCode()
+		{
+			return new { A = this.Duration, B = this.Interval, C = this.StopAtDurationEnd }.GetHashCode();
 		}
 
 		/// <summary>
@@ -2513,6 +2650,18 @@ namespace Microsoft.Win32.TaskScheduler
 			base.CopyProperties(sourceTrigger);
 			if (sourceTrigger.GetType() == this.GetType() && !this.StateChangeIsSet())
 				this.StateChange = ((SessionStateChangeTrigger)sourceTrigger).StateChange;
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.StateChange == ((SessionStateChangeTrigger)other).StateChange;
 		}
 
 		/// <summary>
@@ -2753,6 +2902,18 @@ namespace Microsoft.Win32.TaskScheduler
 				this.DaysOfWeek = ((WeeklyTrigger)sourceTrigger).DaysOfWeek;
 				this.WeeksInterval = ((WeeklyTrigger)sourceTrigger).WeeksInterval;
 			}
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Trigger other)
+		{
+			return base.Equals(other) && this.DaysOfWeek == ((WeeklyTrigger)other).DaysOfWeek && this.WeeksInterval == ((WeeklyTrigger)other).WeeksInterval;
 		}
 
 		/// <summary>

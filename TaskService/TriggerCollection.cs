@@ -9,7 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides the methods that are used to add to, remove from, and get the triggers of a task.
 	/// </summary>
 	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class TriggerCollection : IEnumerable<Trigger>, IDisposable, IXmlSerializable
+	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable
 	{
 		private V1Interop.ITask v1Task = null;
 		private V2Interop.ITaskDefinition v2Def = null;
@@ -231,6 +231,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <returns>
+		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+		/// </returns>
+		public bool Contains(Trigger item)
+		{
+			return IndexOf(item) >= 0;
+		}
+
+		/// <summary>
 		/// Determines whether the specified trigger type is contained in this collection.
 		/// </summary>
 		/// <param name="triggerType">Type of the trigger.</param>
@@ -243,6 +255,26 @@ namespace Microsoft.Win32.TaskScheduler
 				if (t.GetType() == triggerType)
 					return true;
 			return false;
+		}
+
+		/// <summary>
+		/// Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1" /> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="Array"/> must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+		/// <exception cref="System.ArgumentNullException"><paramref name="array"/> is null.</exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
+		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1" /> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.</exception>
+		public void CopyTo(Trigger[] array, int arrayIndex)
+		{
+			if (array == null)
+				throw new ArgumentNullException();
+			if (arrayIndex < 0)
+				throw new ArgumentOutOfRangeException();
+			if (this.Count > (array.Length - arrayIndex))
+				throw new ArgumentException();
+			for (int i = 0; i < this.Count; i++)
+				array[arrayIndex + i] = (Trigger)this[i].Clone();
 		}
 
 		/// <summary>
@@ -268,6 +300,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
+		/// <returns>
+		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// </returns>
+		public int IndexOf(Trigger item)
+		{
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (this[i].Equals(item))
+					return i;
+			}
+			return -1;
+		}
+
+		/// <summary>
 		/// Inserts an trigger at the specified index.
 		/// </summary>
 		/// <param name="index">The zero-based index at which trigger should be inserted.</param>
@@ -282,6 +331,28 @@ namespace Microsoft.Win32.TaskScheduler
 			Add(trigger);
 			for (int k = 0; k < pushItems.Length; k++)
 				Add(pushItems[k]);
+		}
+
+		/// <summary>
+		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// </summary>
+		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <returns>
+		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// </returns>
+		public bool Remove(Trigger item)
+		{
+			int idx = IndexOf(item);
+			if (idx != -1)
+			{
+				try
+				{
+					RemoveAt(idx);
+					return true;
+				}
+				catch { }
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -353,6 +424,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			foreach (var t in this)
 				XmlSerializationHelper.WriteObject(writer, t);
+		}
+
+		void ICollection<Trigger>.Add(Trigger item)
+		{
+			this.Add(item);
+		}
+
+		bool ICollection<Trigger>.IsReadOnly
+		{
+			get { return false; }
 		}
 	}
 }

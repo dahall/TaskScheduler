@@ -10,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	/// <remarks>A Task Scheduler 1.0 task can only contain a single <see cref="ExecAction"/>.</remarks>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class ActionCollection : IEnumerable<Action>, IDisposable, IXmlSerializable
+	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable
 	{
 		private V1Interop.ITask v1Task;
 		private V2Interop.ITaskDefinition v2Def;
@@ -78,6 +78,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <returns>
+		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+		/// </returns>
+		public bool Contains(Action item)
+		{
+			return IndexOf(item) >= 0;
+		}
+
+		/// <summary>
 		/// Determines whether the specified action type is contained in this collection.
 		/// </summary>
 		/// <param name="actionType">Type of the action.</param>
@@ -90,6 +102,26 @@ namespace Microsoft.Win32.TaskScheduler
 				if (a.GetType() == actionType)
 					return true;
 			return false;
+		}
+
+		/// <summary>
+		/// Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1" /> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="Array"/> must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+		/// <exception cref="System.ArgumentNullException"><paramref name="array"/> is null.</exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
+		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1" /> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.</exception>
+		public void CopyTo(Action[] array, int arrayIndex)
+		{
+			if (array == null)
+				throw new ArgumentNullException();
+			if (arrayIndex < 0)
+				throw new ArgumentOutOfRangeException();
+			if (this.Count > (array.Length - arrayIndex))
+				throw new ArgumentException();
+			for (int i = 0; i < this.Count; i++)
+				array[arrayIndex + i] = (Action)this[i].Clone();
 		}
 
 		private const string ScriptIdentifer = "TSML_20140424";
@@ -138,6 +170,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
+		/// </summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
+		/// <returns>
+		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// </returns>
+		public int IndexOf(Action item)
+		{
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (this[i].Equals(item))
+					return i;
+			}
+			return -1;
+		}
+
+		/// <summary>
 		/// Inserts an action at the specified index.
 		/// </summary>
 		/// <param name="index">The zero-based index at which action should be inserted.</param>
@@ -155,6 +204,28 @@ namespace Microsoft.Win32.TaskScheduler
 			Add(action);
 			for (int k = 0; k < pushItems.Length; k++)
 				Add(pushItems[k]);
+		}
+
+		/// <summary>
+		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// </summary>
+		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <returns>
+		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// </returns>
+		public bool Remove(Action item)
+		{
+			int idx = IndexOf(item);
+			if (idx != -1)
+			{
+				try
+				{
+					RemoveAt(idx);
+					return true;
+				}
+				catch { }
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -379,6 +450,16 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
 			}
+		}
+
+		void ICollection<Action>.Add(Action item)
+		{
+			this.Add(item);
+		}
+
+		bool ICollection<Action>.IsReadOnly
+		{
+			get { return false; }
 		}
 	}
 }

@@ -5,7 +5,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides the methods that are used to register (create) tasks in the folder, remove tasks from the folder, and create or remove subfolders from the folder.
 	/// </summary>
-	public sealed class TaskFolder : IDisposable
+	public sealed class TaskFolder : IDisposable, IComparable<TaskFolder>
 	{
 		V1Interop.ITaskScheduler v1List = null;
 		V2Interop.ITaskFolder v2Folder = null;
@@ -84,6 +84,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Obsolete("This property will be removed in deference to the GetAccessControl, GetSecurityDescriptorSddlForm, SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
+#pragma warning disable 0618
 			get
 			{
 				return GetSecurityDescriptor(Task.defaultSecurityInfosSections);
@@ -92,6 +93,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				SetSecurityDescriptor(value, Task.defaultSecurityInfosSections);
 			}
+#pragma warning restore 0618
 		}
 
 		/// <summary>
@@ -120,6 +122,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The task service.</value>
 		public TaskService TaskService { get; private set; }
+
+		/// <summary>
+		/// Compares the current object with another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
+		/// </returns>
+		int IComparable<TaskFolder>.CompareTo(TaskFolder other)
+		{
+			return string.Compare(this.Path, other.Path, true);
+		}
 
 		/// <summary>
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
@@ -210,6 +224,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+		/// <returns>
+		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+		/// </returns>
+		public override bool Equals(object obj)
+		{
+			if (obj is TaskFolder)
+			{
+				TaskFolder val = obj as TaskFolder;
+				return this.Path == val.Path && this.TaskService.TargetServer == val.TaskService.TargetServer && this.GetSecurityDescriptorSddlForm() == val.GetSecurityDescriptorSddlForm();
+			}
+			return false;
+		}
+
+		/// <summary>
 		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="TaskFolder"/> object.
 		/// </summary>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
@@ -226,6 +257,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections)
 		{
 			return new TaskSecurity(this, includeSections);
+		}
+
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
+		/// <returns>
+		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+		/// </returns>
+		public override int GetHashCode()
+		{
+			return new { A = this.Path, B = this.TaskService.TargetServer, C = this.GetSecurityDescriptorSddlForm() }.GetHashCode();
 		}
 
 		/// <summary>

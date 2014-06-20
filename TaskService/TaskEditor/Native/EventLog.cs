@@ -33,6 +33,28 @@ namespace System.Diagnostics.Eventing.Reader
 		Ntlm
 	}
 
+	internal enum EventLogIsolation
+	{
+		Application,
+		System,
+		Custom
+	}
+
+	internal enum EventLogMode
+	{
+		Circular,
+		AutoBackup,
+		Retain
+	}
+
+	internal enum EventLogType
+	{
+		Administrative,
+		Operational,
+		Analytical,
+		Debug
+	}
+
 	/// <summary>
 	/// Represents a placeholder (bookmark) within an event stream. You can use the placeholder to mark a position and return to this position in a stream of events. An instance of this object can be obtained from an EventRecord object, in which case it corresponds to the position of that event record.
 	/// </summary>
@@ -301,6 +323,282 @@ namespace System.Diagnostics.Eventing.Reader
 						}
 					}
 				}
+			}
+		}
+	}
+
+	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
+	internal class EventLogConfiguration : IDisposable
+	{
+		private string channelName;
+		private EventLogHandle handle;
+		private EventLogSession session;
+
+		public EventLogConfiguration(string logName) : this(logName, null) { }
+
+		[SecurityCritical]
+		public EventLogConfiguration(string logName, EventLogSession session)
+		{
+			this.handle = EventLogHandle.Zero;
+			EventLogPermissionHolder.GetEventLogPermission().Demand();
+			if (session == null)
+			{
+				session = EventLogSession.GlobalSession;
+			}
+			this.session = session;
+			this.channelName = logName;
+			this.handle = NativeWrapper.EvtOpenChannelConfig(this.session.Handle, this.channelName, 0);
+		}
+
+		public void Dispose()
+		{
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		[SecuritySafeCritical]
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				EventLogPermissionHolder.GetEventLogPermission().Demand();
+			}
+			if ((this.handle != null) && !this.handle.IsInvalid)
+			{
+				this.handle.Dispose();
+			}
+		}
+
+		public void SaveChanges()
+		{
+			NativeWrapper.EvtSaveChannelConfig(this.handle, 0);
+		}
+
+		// Properties
+		public bool IsClassicLog
+		{
+			get
+			{
+				return (bool)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigClassicEventlog);
+			}
+		}
+
+		public bool IsEnabled
+		{
+			get
+			{
+				return (bool)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled);
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled, value);
+			}
+		}
+
+		public string LogFilePath
+		{
+			get
+			{
+				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath);
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath, value);
+			}
+		}
+
+		public EventLogIsolation LogIsolation
+		{
+			get
+			{
+				return (EventLogIsolation)((uint)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigIsolation));
+			}
+		}
+
+		public EventLogMode LogMode
+		{
+			get
+			{
+				object obj2 = NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention);
+				object obj3 = NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup);
+				bool flag = (obj2 != null) && ((bool)obj2);
+				if ((obj3 != null) && ((bool)obj3))
+				{
+					return EventLogMode.AutoBackup;
+				}
+				if (flag)
+				{
+					return EventLogMode.Retain;
+				}
+				return EventLogMode.Circular;
+			}
+			set
+			{
+				switch (value)
+				{
+					case EventLogMode.Circular:
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, false);
+						return;
+					case EventLogMode.AutoBackup:
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, true);
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
+						return;
+					case EventLogMode.Retain:
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
+						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
+						return;
+				}
+			}
+		}
+
+		public string LogName
+		{
+			get
+			{
+				return this.channelName;
+			}
+		}
+
+		public EventLogType LogType
+		{
+			get
+			{
+				return (EventLogType)((uint)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigType));
+			}
+		}
+
+		public long MaximumSizeInBytes
+		{
+			get
+			{
+				return (long)((ulong)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize));
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize, value);
+			}
+		}
+
+		public string OwningProviderName
+		{
+			get
+			{
+				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigOwningPublisher);
+			}
+		}
+
+		public int? ProviderBufferSize
+		{
+			get
+			{
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigBufferSize);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new int?((int)nullable.GetValueOrDefault());
+			}
+		}
+
+		public Guid? ProviderControlGuid
+		{
+			get
+			{
+				return (Guid?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigControlGuid);
+			}
+		}
+
+		public long? ProviderKeywords
+		{
+			get
+			{
+				ulong? nullable = (ulong?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new long?((long)nullable.GetValueOrDefault());
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords, value);
+			}
+		}
+
+		public int? ProviderLatency
+		{
+			get
+			{
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLatency);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new int?((int)nullable.GetValueOrDefault());
+			}
+		}
+
+		public int? ProviderLevel
+		{
+			get
+			{
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new int?((int)nullable.GetValueOrDefault());
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel, value);
+			}
+		}
+
+		public int? ProviderMaximumNumberOfBuffers
+		{
+			get
+			{
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMaxBuffers);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new int?((int)nullable.GetValueOrDefault());
+			}
+		}
+
+		public int? ProviderMinimumNumberOfBuffers
+		{
+			get
+			{
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMinBuffers);
+				if (!nullable.HasValue)
+				{
+					return null;
+				}
+				return new int?((int)nullable.GetValueOrDefault());
+			}
+		}
+
+		public IEnumerable<string> ProviderNames
+		{
+			get
+			{
+				return (string[])NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublisherList);
+			}
+		}
+
+		public string SecurityDescriptor
+		{
+			get
+			{
+				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess);
+			}
+			set
+			{
+				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess, value);
 			}
 		}
 	}

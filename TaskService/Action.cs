@@ -25,7 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class that provides the common properties that are inherited by all action objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
-	public abstract class Action : IDisposable, ICloneable
+	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>
 	{
 		internal V2Interop.IAction iAction = null;
 
@@ -101,6 +101,43 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (iAction != null)
 				Marshal.ReleaseComObject(iAction);
+		}
+
+		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+		/// <returns>
+		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+		/// </returns>
+		public override bool Equals(object obj)
+		{
+			if (obj is Action)
+				return this.Equals((Action)obj);
+			return base.Equals(obj);
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public virtual bool Equals(Action other)
+		{
+			return this.ActionType == other.ActionType && this.Id == other.Id;
+		}
+
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
+		/// <returns>
+		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+		/// </returns>
+		public override int GetHashCode()
+		{
+			return new { A = this.ActionType, B = this.Id }.GetHashCode();
 		}
 
 		/// <summary>
@@ -259,6 +296,18 @@ namespace Microsoft.Win32.TaskScheduler
 				this.ClassId = ((ComHandlerAction)sourceAction).ClassId;
 				this.Data = ((ComHandlerAction)sourceAction).Data;
 			}
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Action other)
+		{
+			return base.Equals(other) && this.ClassId == ((ComHandlerAction)other).ClassId && this.Data == ((ComHandlerAction)other).Data;
 		}
 
 		/// <summary>
@@ -441,6 +490,18 @@ namespace Microsoft.Win32.TaskScheduler
 				this.Arguments = ((ExecAction)sourceAction).Arguments;
 				this.WorkingDirectory = ((ExecAction)sourceAction).WorkingDirectory;
 			}
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Action other)
+		{
+			return base.Equals(other) && this.Path == ((ExecAction)other).Path && this.Arguments == ((ExecAction)other).Arguments && this.WorkingDirectory == ((ExecAction)other).WorkingDirectory;
 		}
 
 		/// <summary>
@@ -653,6 +714,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Action other)
+		{
+			return base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
+		}
+
+		/// <summary>
 		/// Gets a string representation of the <see cref="EmailAction"/>.
 		/// </summary>
 		/// <returns>String represention this action.</returns>
@@ -780,6 +853,18 @@ namespace Microsoft.Win32.TaskScheduler
 				this.Title = ((ShowMessageAction)sourceAction).Title;
 				this.MessageBody = ((ShowMessageAction)sourceAction).MessageBody;
 			}
+		}
+
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+		/// </returns>
+		public override bool Equals(Action other)
+		{
+			return base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
 		}
 
 		/// <summary>
