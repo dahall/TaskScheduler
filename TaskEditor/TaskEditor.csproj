@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -67,17 +67,17 @@
   <ItemGroup>
     <Reference Include="AeroWizard">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AeroWizard\bin\Release\v4.0\AeroWizard.dll</HintPath>
+      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
       <Aliases>global</Aliases>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls">
       <SpecificVersion>False</SpecificVersion>
       <!--<HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>-->
-      <HintPath>..\..\GroupControls\bin\Release\v4.0\GroupControls.dll</HintPath>
+      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
       <Aliases>global</Aliases>
     </Reference>
     <Reference Include="System" />
@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TimeSpan2">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TimeSpan2\bin\Release\v4.0\TimeSpan2.dll</HintPath>
+      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

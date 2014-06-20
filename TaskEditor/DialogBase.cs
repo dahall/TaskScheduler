@@ -1097,14 +1097,10 @@ namespace System.Windows.Forms
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Obsolete("This property has been deprecated. Use the AutoScaleMode property instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
 		public new bool AutoScale
 		{
-			get
-			{
-				return base.AutoScale;
-			}
-			set
-			{
-				base.AutoScale = value;
-			}
+#pragma warning disable 0618
+			get { return base.AutoScale; }
+			set { base.AutoScale = value; }
+#pragma warning restore 0618
 		}
 
 		/// <summary>
