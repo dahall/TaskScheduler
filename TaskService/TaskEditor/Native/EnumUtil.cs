@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace System
 {
-	public static class EnumUtil
+	internal static class EnumUtil
 	{
 		private static void CheckIsEnum<T>(bool checkHasFlags = false)
 		{

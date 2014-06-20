@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TriggerEditDialog));
-			Microsoft.Win32.TaskScheduler.EventTrigger eventTrigger1 = new Microsoft.Win32.TaskScheduler.EventTrigger();
 			this.triggerTypeLabel = new System.Windows.Forms.Label();
 			this.triggerTypeCombo = new System.Windows.Forms.ComboBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -355,10 +354,6 @@
 			// 
 			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
 			this.eventTriggerUI1.Name = "eventTriggerUI1";
-			eventTrigger1.Enabled = true;
-			eventTrigger1.StartBoundary = new System.DateTime(2014, 4, 28, 15, 22, 0, 164);
-			eventTrigger1.Subscription = "";
-			this.eventTriggerUI1.Trigger = eventTrigger1;
 			// 
 			// advSettingsGroup
 			// 

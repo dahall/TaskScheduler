@@ -144,7 +144,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void cancelBtn_Click(object sender, EventArgs e)
 		{
-			DialogResult = DialogResult.Cancel;
 			Close();
 		}
 
@@ -156,7 +155,6 @@ namespace Microsoft.Win32.TaskScheduler
 		private void okBtn_Click(object sender, EventArgs e)
 		{
 			UpdateAction();
-			DialogResult = DialogResult.OK;
 			Close();
 		}
 

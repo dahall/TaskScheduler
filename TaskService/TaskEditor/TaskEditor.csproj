@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -67,16 +67,18 @@
   <ItemGroup>
     <Reference Include="AeroWizard">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
-      <Aliases>WizDLL</Aliases>
+      <HintPath>..\..\AeroWizard\bin\Release\v4.0\AeroWizard.dll</HintPath>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls">
-      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrlDLL</Aliases>
+      <SpecificVersion>False</SpecificVersion>
+      <!--<HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>-->
+      <HintPath>..\..\GroupControls\bin\Release\v4.0\GroupControls.dll</HintPath>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,7 +89,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TimeSpan2">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
+      <HintPath>..\..\TimeSpan2\bin\Release\v4.0\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -106,8 +108,11 @@
     <Compile Include="ComObjectSelectionDialog.Designer.cs">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlProcessing.cs" />
+    <Compile Include="Native\ControlExtension.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
+    <Compile Include="DialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ListColumnEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +122,7 @@
     <Compile Include="Native\DisabledItemComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
+    <Compile Include="Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\BROWSEINFO.cs" />
@@ -127,9 +132,6 @@
     </Compile>
     <Compile Include="CustomComboBox.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DialogBase.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
@@ -171,8 +173,8 @@
     <Compile Include="Native\Util.cs" />
     <Compile Include="Native\UXTHEME.cs" />
     <Compile Include="Native\VisualStylesRendererExtension.cs" />
-    <Compile Include="NetworkListManager.cs" />
-    <Compile Include="NetworkProfile.cs" />
+    <Compile Include="Native\NetworkListManager.cs" />
+    <Compile Include="Native\NetworkProfile.cs" />
     <None Include="ComputerInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -181,6 +183,12 @@
     </Compile>
     <Compile Include="SecEdShim.cs" />
     <Compile Include="SystemEventEnumerator.cs" />
+    <Compile Include="TaskBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskBrowserDialog.Designer.cs">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -354,6 +362,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskBrowserDialog.resx">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.it.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
