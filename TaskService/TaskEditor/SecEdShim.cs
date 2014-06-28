@@ -16,16 +16,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-				System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("SecurityEditor.dll");
-				if (asm != null)
+				dlgType = ReflectionHelper.LoadType("Community.Windows.Forms.AccessControlEditorDialog", "SecurityEditor.dll");
+				if (dlgType != null)
 				{
-					dlgType = asm.GetType("Community.Windows.Forms.AccessControlEditorDialog", false, false);
-					if (dlgType != null)
-					{
-						initMI = dlgType.GetMethod("Initialize", new Type[] { typeof(object) });
-						showDlgMI = dlgType.GetMethod("ShowDialog", new Type[] { typeof(System.Windows.Forms.IWin32Window) });
-						sddlPI = dlgType.GetProperty("SDDL", typeof(string));
-					}
+					initMI = dlgType.GetMethod("Initialize", new Type[] { typeof(object) });
+					showDlgMI = dlgType.GetMethod("ShowDialog", new Type[] { typeof(System.Windows.Forms.IWin32Window) });
+					sddlPI = dlgType.GetProperty("SDDL", typeof(string));
 				}
 			}
 			catch { dlgType = null; }

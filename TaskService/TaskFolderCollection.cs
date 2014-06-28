@@ -81,7 +81,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-		/// <exception cref="System.NotImplementedException">This action is technically unfeasable due to limitations of the underlying library. Use the <see cref="M:TaskFolder.CreateFolder"/> instead.</exception>
+		/// <exception cref="System.NotImplementedException">This action is technically unfeasable due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string)"/> instead.</exception>
 		public void Add(TaskFolder item)
 		{
 			throw new NotImplementedException();

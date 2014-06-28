@@ -762,13 +762,9 @@ namespace Microsoft.Win32.TaskScheduler
 				try
 				{
 					foundTimeSpan2 = false;
-					System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("TimeSpan2.dll");
-					if (asm != null)
-					{
-						timeSpan2Type = asm.GetType("System.TimeSpan2", false, false);
-						if (timeSpan2Type != null)
-							foundTimeSpan2 = true;
-					}
+					timeSpan2Type = System.Reflection.ReflectionHelper.LoadType("System.TimeSpan2", "TimeSpan2.dll");
+					if (timeSpan2Type != null)
+						foundTimeSpan2 = true;
 				}
 				catch { }
 			}
@@ -778,17 +774,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					object o = Activator.CreateInstance(timeSpan2Type, span);
-					if (o != null)
-					{
-						System.Reflection.MethodInfo mi = timeSpan2Type.GetMethod("ToString", new Type[] { typeof(string) });
-						if (mi != null)
-						{
-							object r = mi.Invoke(o, new object[] { "f" });
-							if (r != null)
-								return r.ToString();
-						}
-					}
+					return System.Reflection.ReflectionHelper.InvokeMethod<string>(timeSpan2Type, new object[] { span }, "ToString", "f");
 				}
 				catch { }
 			}
