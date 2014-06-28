@@ -96,6 +96,9 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\ReflectionHelper.cs">
+      <Link>ReflectionHelper.cs</Link>
+    </Compile>
     <Compile Include="ActionEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1292,25 +1292,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-				System.Reflection.Assembly asm = System.Reflection.Assembly.LoadFrom("Microsoft.Win32.TaskSchedulerEditor.dll");
-				if (asm != null)
-				{
-					Type t = asm.GetType("Microsoft.Win32.TaskScheduler.TaskEditDialog", false, false);
-					if (t != null)
-					{
-						object o = Activator.CreateInstance(t, this, true, true);
-						if (o != null)
-						{
-							System.Reflection.MethodInfo mi = t.GetMethod("ShowDialog", Type.EmptyTypes);
-							if (mi != null)
-							{
-								object r = mi.Invoke(o, null);
-								int ir = System.Convert.ToInt32(r);
-								return ir == 1;
-							}
-						}
-					}
-				}
+				Type t = System.Reflection.ReflectionHelper.LoadType("Microsoft.Win32.TaskScheduler.TaskEditDialog", "Microsoft.Win32.TaskSchedulerEditor.dll");
+				if (t != null)
+					return System.Reflection.ReflectionHelper.InvokeMethod<int>(t, new object[] { this, true, true }, "ShowDialog") == 1;
 			}
 			catch { }
 			return false;
