@@ -148,7 +148,7 @@
     <comment>0 = Executable Path; 1 = Arguments; 2 = WorkingDirectory; 3 = Id</comment>
   </data>
   <data name="ListSeparator" xml:space="preserve">
-    <value>, </value>
+    <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>tutti i mesi</value>
@@ -320,19 +320,19 @@
     <value>terza</value>
   </data>
   <data name="HyphenSeparator">
-    <value> - </value>
+    <value>-</value>
   </data>
   <data name="TriggerDuration0">
-    <value> indefinitamente</value>
+    <value>indefinitamente</value>
   </data>
   <data name="TriggerDurationNot0">
-    <value> per una durata di {0}</value>
+    <value>per una durata di {0}</value>
   </data>
   <data name="TriggerEndBoundary">
-    <value> Attivazione scade {0:G}.</value>
+    <value>Attivazione scade {0:G}.</value>
   </data>
   <data name="TriggerRepetition">
-    <value> Dopo aver attivato, ripetere ogni {0} {1}.</value>
+    <value>Dopo aver attivato, ripetere ogni {0} {1}.</value>
   </data>
   <data name="TriggerCustom1" xml:space="preserve">
     <value>Attivazione personalizata</value>

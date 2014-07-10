@@ -132,7 +132,7 @@
     <comment>Text for days of month drop down representing last day of specified month.</comment>
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>Beim Start </value>
+    <value>Beim Start</value>
   </data>
   <data name="TriggerTypeEvent" xml:space="preserve">
     <value>Bei einem Ereignis</value>
@@ -527,5 +527,17 @@ Aktion: {3}</value>
   </data>
   <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
     <value>&amp;Benutzer ändern...</value>
+  </data>
+  <data name="Error_EventsNotSupported" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="LastResultRunning" xml:space="preserve">
+    <value></value>
   </data>
 </root>

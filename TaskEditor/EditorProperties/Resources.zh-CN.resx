@@ -430,4 +430,19 @@
   <data name="TriggerTypeCustom" xml:space="preserve">
     <value>定制触发器</value>
   </data>
+  <data name="Error_EventsNotSupported" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="LastResultRunning" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

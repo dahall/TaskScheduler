@@ -112,84 +112,168 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="columnHeader6.Text" xml:space="preserve">
-    <value>&amp;Parole chiave:</value>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Démarrer un programme</value>
   </data>
-  <data name="columnHeader7.Text" xml:space="preserve">
-    <value>Origine</value>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>Envoyer un courrier électronique</value>
   </data>
-  <data name="columnHeader8.Text" xml:space="preserve">
-    <value>Utente</value>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Afficher un message</value>
   </data>
-  <data name="columnHeader9.Text" xml:space="preserve">
-    <value>Log.</value>
+  <data name="ComHandlerAction" xml:space="preserve">
+    <value>{0}</value>
   </data>
-  <data name="columnHeader10.Text" xml:space="preserve">
-    <value>Computer</value>
+  <data name="DOWAllDays" xml:space="preserve">
+    <value>Tous les jours</value>
   </data>
-  <data name="columnHeader11.Text" xml:space="preserve">
-    <value>ID processo</value>
+  <data name="EmailAction" xml:space="preserve">
+    <value>{1} {0}</value>
   </data>
-  <data name="addremoveColumnsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Aggiungi/Rimuovi colonne...</value>
+  <data name="EndSentence" xml:space="preserve">
+    <value>.</value>
   </data>
-  <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
-    <value>Associa attività all'evento...</value>
+  <data name="ExecAction" xml:space="preserve">
+    <value>{0} {1}</value>
   </data>
-  <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Comprimi tutti i gruppi</value>
+  <data name="HyphenSeparator" xml:space="preserve">
+    <value>-</value>
   </data>
-  <data name="columnHeader0.Text" xml:space="preserve">
-    <value>Livello</value>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>,</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Data e ora</value>
+  <data name="MOYAllMonths" xml:space="preserve">
+    <value>Chaque mois</value>
   </data>
-  <data name="columnHeader12.Text" xml:space="preserve">
-    <value>ID thread</value>
+  <data name="MultipleActions" xml:space="preserve">
+    <value>Plusieurs actions définies.</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>ID evento:</value>
+  <data name="MultipleTriggers" xml:space="preserve">
+    <value>Plusieurs déclencheurs sont définis.</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Categoria attività</value>
+  <data name="ShowMessageAction" xml:space="preserve">
+    <value>{0}</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Codice operativo</value>
+  <data name="TaskDefaultPrincipal" xml:space="preserve">
+    <value>auteur</value>
   </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
-    <value>ID correlazione</value>
+  <data name="TaskStateDisabled" xml:space="preserve">
+    <value>désactivé</value>
   </data>
-  <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Proprietà evento</value>
+  <data name="TaskStateQueued" xml:space="preserve">
+    <value>En attente</value>
   </data>
-  <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Espandi tutti i gruppi</value>
+  <data name="TaskStateReady" xml:space="preserve">
+    <value>Prêt</value>
   </data>
-  <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Raggruppa gli eventi in base a questa colonna</value>
+  <data name="TaskStateRunning" xml:space="preserve">
+    <value>En cours d'exécution</value>
   </data>
-  <data name="historyHeader.Text" xml:space="preserve">
-    <value>Numero di eventi: X</value>
+  <data name="TaskStateUnknown" xml:space="preserve">
+    <value>Inconnu</value>
   </data>
-  <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
-    <value>Aggiorna</value>
+  <data name="TriggerAnyUser" xml:space="preserve">
+    <value>Tout utilisateur</value>
   </data>
-  <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Separa eventi</value>
+  <data name="TriggerBoot1" xml:space="preserve">
+    <value>Au démarrage du système</value>
   </data>
-  <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Annulla ordinamento</value>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>Personnaliser le déclencheur</value>
   </data>
-  <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Salva tutti gli eventi con nome...</value>
+  <data name="TriggerDuration0" xml:space="preserve">
+    <value>Indéfiniment</value>
   </data>
-  <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ordina gli eventi in base a questa colonna</value>
+  <data name="TriggerEvent1" xml:space="preserve">
+    <value>Filtre d’événement personnalisé</value>
+  </data>
+  <data name="TriggerEventBasic2" xml:space="preserve">
+    <value>, Source : {0}</value>
+  </data>
+  <data name="TriggerIdle1" xml:space="preserve">
+    <value>Lorsque l’ordinateur est inactif</value>
+  </data>
+  <data name="TriggerLogon1" xml:space="preserve">
+    <value>À l’ouverture de session de {0}</value>
+  </data>
+  <data name="TriggerRegistration1" xml:space="preserve">
+    <value>Lors de la création ou de la modification de la tâche</value>
+  </data>
+  <data name="TriggerSessionSessionLock" xml:space="preserve">
+    <value>Lors du verrouillage de la station de travail de {0}.</value>
+  </data>
+  <data name="TriggerSessionSessionUnlock" xml:space="preserve">
+    <value>Lors du déverrouillage de la station de travail de {0}.</value>
+  </data>
+  <data name="TriggerSessionUserSession" xml:space="preserve">
+    <value>Session utilisateur de {0}.</value>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>Au démarrage</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Personnaliser le déclencheur</value>
+  </data>
+  <data name="TriggerTypeDaily" xml:space="preserve">
+    <value>Tous les jours</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>Sur un événement</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>Après une période d'inactivité</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>À l’ouverture de session</value>
+  </data>
+  <data name="TriggerTypeMonthly" xml:space="preserve">
+    <value>Tous les mois</value>
+  </data>
+  <data name="TriggerTypeMonthlyDOW" xml:space="preserve">
+    <value>Tous les mois</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>Lors de la création/modification de la tâche</value>
+  </data>
+  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
+    <value>Au changement de statut</value>
+  </data>
+  <data name="TriggerTypeTime" xml:space="preserve">
+    <value>Une fois</value>
+  </data>
+  <data name="TriggerTypeWeekly" xml:space="preserve">
+    <value>Hebdomadaire</value>
+  </data>
+  <data name="TriggerWeekly1Week" xml:space="preserve">
+    <value>À {0:t} chaque {1} de chaque semaine, à partir du {0:d}</value>
+  </data>
+  <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
+    <value>À {0:t} chaque {1} de chaque {2} semaines, à partir du {0:d}</value>
+  </data>
+  <data name="WWAllWeeks" xml:space="preserve">
+    <value>Toutes les</value>
+  </data>
+  <data name="WWFifthWeek" xml:space="preserve">
+    <value>Cinquième</value>
+  </data>
+  <data name="WWFirstWeek" xml:space="preserve">
+    <value>Premier</value>
+  </data>
+  <data name="WWFourthWeek" xml:space="preserve">
+    <value>Quatrième</value>
+  </data>
+  <data name="WWLastWeek" xml:space="preserve">
+    <value>Dernier</value>
+  </data>
+  <data name="WWSecondWeek" xml:space="preserve">
+    <value>Seconde</value>
+  </data>
+  <data name="WWThirdWeek" xml:space="preserve">
+    <value>Troisième</value>
   </data>
 </root>

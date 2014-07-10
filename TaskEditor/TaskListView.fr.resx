@@ -112,34 +112,33 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
+  <data name="author.Text" xml:space="preserve">
+    <value>Auteur</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
+  <data name="created.Text" xml:space="preserve">
+    <value>Créé</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
+  <data name="lastRunResult.Text" xml:space="preserve">
+    <value>Résultat de la dernière exécution</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
+  <data name="lastRunTime.Text" xml:space="preserve">
+    <value>Heure de la dernière exécution</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
+  <data name="name.Text" xml:space="preserve">
+    <value>Nom</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+  <data name="nextRunTime.Text" xml:space="preserve">
+    <value>Heure de la prochaine exécution</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+  <data name="status.Text" xml:space="preserve">
+    <value>État</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="triggers.Text" xml:space="preserve">
+    <value>&amp;Déclencheurs</value>
   </data>
 </root>

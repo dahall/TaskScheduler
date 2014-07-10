@@ -3127,4 +3127,16 @@
   <data name="&gt;&gt;showMessageActionUI1.ZOrder">
     <value></value>
   </data>
+  <data name="wizardControl1.BackButtonToolTipText" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="wizardControl1.CancelButtonText" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="wizardControl1.FinishButtonText" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="wizardControl1.NextButtonText" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

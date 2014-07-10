@@ -6,7 +6,7 @@ namespace Microsoft.Win32
 	internal static partial class NativeMethods
 	{
 		[StructLayout(LayoutKind.Sequential, Pack = 2)]
-		internal struct SYSTEMTIME
+		internal struct SYSTEMTIME : IConvertible
 		{
 			public ushort Year;
 			public ushort Month;
@@ -75,17 +75,104 @@ namespace Microsoft.Win32
 			{
 				if (obj is SYSTEMTIME)
 					return ((SYSTEMTIME)obj) == this;
+				if (obj is DateTime)
+					return ((DateTime)this).Equals(obj);
 				return base.Equals(obj);
 			}
 
 			public override int GetHashCode()
 			{
-				return base.GetHashCode();
+				return ((DateTime)this).GetHashCode();
 			}
 
 			public override string ToString()
 			{
 				return ((DateTime)this).ToString();
+			}
+
+			TypeCode IConvertible.GetTypeCode()
+			{
+				return ((IConvertible)(DateTime)this).GetTypeCode();
+			}
+
+			bool IConvertible.ToBoolean(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToBoolean(provider);
+			}
+
+			byte IConvertible.ToByte(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToByte(provider);
+			}
+
+			char IConvertible.ToChar(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToChar(provider);
+			}
+
+			DateTime IConvertible.ToDateTime(IFormatProvider provider)
+			{
+				return (DateTime)this;
+			}
+
+			decimal IConvertible.ToDecimal(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToDecimal(provider);
+			}
+
+			double IConvertible.ToDouble(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToDouble(provider);
+			}
+
+			short IConvertible.ToInt16(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToInt16(provider);
+			}
+
+			int IConvertible.ToInt32(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToInt32(provider);
+			}
+
+			long IConvertible.ToInt64(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToInt64(provider);
+			}
+
+			sbyte IConvertible.ToSByte(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToSByte(provider);
+			}
+
+			float IConvertible.ToSingle(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToSingle(provider);
+			}
+
+			string IConvertible.ToString(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToString(provider);
+			}
+
+			object IConvertible.ToType(Type conversionType, IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToType(conversionType, provider);
+			}
+
+			ushort IConvertible.ToUInt16(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToUInt16(provider);
+			}
+
+			uint IConvertible.ToUInt32(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToUInt32(provider);
+			}
+
+			ulong IConvertible.ToUInt64(IFormatProvider provider)
+			{
+				return ((IConvertible)(DateTime)this).ToUInt64(provider);
 			}
 		}
 	}

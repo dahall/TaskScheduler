@@ -148,10 +148,10 @@
     <comment>0 = Executable Path; 1 = Arguments; 2 = WorkingDirectory; 3 = Id</comment>
   </data>
   <data name="HyphenSeparator" xml:space="preserve">
-    <value> -</value>
+    <value>-</value>
   </data>
   <data name="ListSeparator" xml:space="preserve">
-    <value>, </value>
+    <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>every month</value>
@@ -200,14 +200,14 @@
     <value>At {0:t} every {1} days</value>
   </data>
   <data name="TriggerDuration0" xml:space="preserve">
-    <value> indefinitely</value>
+    <value>indefinitely</value>
   </data>
   <data name="TriggerDurationNot0" xml:space="preserve">
-    <value> for a duration of {0}</value>
+    <value>for a duration of {0}</value>
     <comment>0 = Duration</comment>
   </data>
   <data name="TriggerEndBoundary" xml:space="preserve">
-    <value> Trigger expires at {0:G}.</value>
+    <value>Trigger expires at {0:G}.</value>
     <comment>0 = EndBoundary</comment>
   </data>
   <data name="TriggerEvent1" xml:space="preserve">
@@ -243,7 +243,7 @@
     <value>When the task is created or modified</value>
   </data>
   <data name="TriggerRepetition" xml:space="preserve">
-    <value> After triggered, repeat every {0}{1}.</value>
+    <value>After triggered, repeat every {0}{1}.</value>
     <comment>0 = Interval; 1= Duration string</comment>
   </data>
   <data name="TriggerSessionConsoleConnect" xml:space="preserve">

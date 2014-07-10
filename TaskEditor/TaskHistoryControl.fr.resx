@@ -112,34 +112,84 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
+  <data name="addremoveColumnsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ajouter/Supprimer des colonnes</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
+  <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
+    <value>Joindre une tâche à cet événement...</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
+  <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Réduire tous les groupes</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+  <data name="columnHeader0.Text" xml:space="preserve">
+    <value>Niveau</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+    <value>Date et heure</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="columnHeader10.Text" xml:space="preserve">
+    <value>Ordinateur</value>
+  </data>
+  <data name="columnHeader11.Text" xml:space="preserve">
+    <value>ID de processus</value>
+  </data>
+  <data name="columnHeader12.Text" xml:space="preserve">
+    <value>ID de thread</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>ID d'événement</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Catégorie de la tâche :</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Code opérationnel</value>
+  </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>ID de corrélation</value>
+  </data>
+  <data name="columnHeader6.Text" xml:space="preserve">
+    <value>&amp;Mots clés :</value>
+  </data>
+  <data name="columnHeader7.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="columnHeader8.Text" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="columnHeader9.Text" xml:space="preserve">
+    <value>Journal :</value>
+  </data>
+  <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Propriétés de l'événement</value>
+  </data>
+  <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Développer tous les groupes</value>
+  </data>
+  <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Grouper les événements en fonction de cette colonne.</value>
+  </data>
+  <data name="historyHeader.Text" xml:space="preserve">
+    <value>Nombre d'événements: X</value>
+  </data>
+  <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Annuler le regroupement des événements</value>
+  </data>
+  <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Annuler le tri</value>
+  </data>
+  <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enregistrer tous les événements sous...</value>
+  </data>
+  <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trier les événements par cette colonne.</value>
   </data>
 </root>

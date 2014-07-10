@@ -218,6 +218,7 @@ namespace Microsoft.Win32.TaskScheduler
 					historyListView.ShowGroups = false;
 			}
 			historyListView.EndUpdate();
+			historyListView.Focus();
 		}
 
 		private void SetupGroups()
@@ -309,11 +310,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (item != null)
 			{
 				e.Item = item;
-				if (selectedIndex == -1)
-				{
-					e.Item.Selected = true;
-					SelectItemChanged(e.ItemIndex);
-				}
+				if (historyListView.SelectedIndices.Count == 0)
+					historyListView.SelectedIndices.Add(e.ItemIndex);
 			}
 		}
 

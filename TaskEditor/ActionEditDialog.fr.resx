@@ -112,34 +112,39 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+    <value>Nouvelle action</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+  <data name="actionsCombo.Items" xml:space="preserve">
+    <value>Démarrer un programme</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="actionsCombo.Items1" xml:space="preserve">
+    <value>Envoyer un courrier électronique</value>
+  </data>
+  <data name="actionsCombo.Items2" xml:space="preserve">
+    <value>Afficher un message</value>
+  </data>
+  <data name="actionsCombo.Items3" xml:space="preserve">
+    <value>Gestionnaire personnalisé</value>
+  </data>
+  <data name="actionsLabel.Text" xml:space="preserve">
+    <value>Action:</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="promptLabel.Text" xml:space="preserve">
+    <value>Vous devez spécifier l’action que cette tâche effectuera.</value>
+  </data>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>Paramètres</value>
   </data>
 </root>

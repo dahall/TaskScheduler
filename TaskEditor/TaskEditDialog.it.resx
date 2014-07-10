@@ -123,4 +123,7 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Proprietà attività</value>
   </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value></value>
+  </data>
 </root>
