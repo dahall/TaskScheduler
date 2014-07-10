@@ -280,4 +280,97 @@
   <data name="schedStartLabel.Text" xml:space="preserve">
     <value>Anfang:</value>
   </data>
+  <data name="dailyDaysLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="dailyRecurLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="idleTab.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="logonTab.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="monthlyDaysRadio.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="monthlyOnRadio.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="onEventTab.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="startupTab.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items1" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items2" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items4" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items5" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items6" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items7" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items8" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="triggerTypeCombo.Items9" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyFriCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyMonCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyRecurLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklySatCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklySunCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyThuCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyTueCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="weeklyWedCheck.Text" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

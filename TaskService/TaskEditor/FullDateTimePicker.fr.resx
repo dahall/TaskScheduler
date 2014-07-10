@@ -112,34 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
-  </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="utcCheckBox.Text" xml:space="preserve">
+    <value>Synch. fuseaux horaires</value>
   </data>
 </root>

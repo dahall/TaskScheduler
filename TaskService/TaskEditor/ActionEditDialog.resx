@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -587,5 +587,110 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="actionsCombo.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="actionsLabel.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="cancelBtn.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="comHandlerActionUI1.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="comTab.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailActionUI1.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailTab.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execActionUI1.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execTab.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="messageTab.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="okBtn.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="promptLabel.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="settingsGroup.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="settingsTabs.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="showMessageActionUI1.ToolTip" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="comCLSIDLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="comDataLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="comIntroLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailAttachmentLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailFromLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailSMTPLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailSubjectLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailTextLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="emailToLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execDirLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execProgBrowseBtn.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="execProgLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="msgIntroLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="msgMsgLabel.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="msgTitleLabel.Text" xml:space="preserve">
+    <value></value>
   </data>
 </root>

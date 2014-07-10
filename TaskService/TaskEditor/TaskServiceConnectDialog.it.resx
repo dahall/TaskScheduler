@@ -127,7 +127,7 @@
     <value>Sfoglia...</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Seleziona il computer si desidera gestire: </value>
+    <value>Seleziona il computer si desidera gestire:</value>
   </data>
   <data name="localComputerRadio.Text" xml:space="preserve">
     <value>Computure locale</value>

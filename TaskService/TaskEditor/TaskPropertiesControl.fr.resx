@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="actionDeleteButton.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="actionDownButton.Text" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="actionEditButton.Text" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="actionIntroLabel.Text" xml:space="preserve">
+    <value>Lorsque vous créez une tâche, vous devez spécifier l’action qui se produira au démarrage de la tâche.</value>
+  </data>
+  <data name="actionNewButton.Text" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="actionsTab.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="actionUpButton.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="addPropTab.Text" xml:space="preserve">
+    <value>Ajouts</value>
+  </data>
+  <data name="autoMaintGroup.Text" xml:space="preserve">
+    <value>Maintenance automatique</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Utilisateur ou groupe...</value>
+  </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Déclencheur</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>État :</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="conditionsTab.Text" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="generalTab.Text" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="historyTab.Text" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Inactif</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Emplacement :</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Niveau de priorité :</value>
+  </data>
+  <data name="networkConditionGroupBox.Text" xml:space="preserve">
+    <value>Réseau</value>
+  </data>
+  <data name="powerConditionGroupBox.Text" xml:space="preserve">
+    <value>PUISSANCE</value>
+  </data>
+  <data name="regInfoTab.Text" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="runTimesErrorLabel.Text" xml:space="preserve">
+    <value>Texte d'erreur</value>
+  </data>
+  <data name="settingsIntroLabel.Text" xml:space="preserve">
+    <value>Spécifiez d’autres paramètres influant sur le comportement de la tâche.</value>
+  </data>
+  <data name="settingsTab.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Si la tâche ne se termine pas au moment demandé, forcer son arrêt</value>
+  </data>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Supprimer la tâche si son exécution n’est plus planifiée après :</value>
+  </data>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Ne démarrer la tâche que si l’ordinateur est relié au secteur</value>
+  </data>
+  <data name="taskEnabledCheck.Text" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Ne démarrer la tâche que si l’ordinateur est inactif pendant :</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Ne pas enregistrer le mot de passe. Cette tâche n’a accès qu’aux ressources de l’ordinateur local.</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>N’exécuter que si un utilisateur a ouvert une session</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Exécuter même si aucun utilisateur n’a ouvert de session</value>
+  </data>
+  <data name="taskNameLabel.Text" xml:space="preserve">
+    <value>No&amp;m :</value>
+  </data>
+  <data name="taskNameText.Text" xml:space="preserve">
+    <value>Nom de la tâche</value>
+  </data>
+  <data name="taskRegDocLabel.Text" xml:space="preserve">
+    <value>Documentation :</value>
+  </data>
+  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
+    <value>Modifier la sécurité</value>
+  </data>
+  <data name="taskRegSourceLabel.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="taskRegURILabel.Text" xml:space="preserve">
+    <value>URI :</value>
+  </data>
+  <data name="taskRegVersionLabel.Text" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>fois</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>Si la tâche échoue, recommencer tous les :</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Options de sécurité</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Exécuter la tâche dès que possible si un démarrage planifié est manqué</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Arrêter si l’ordinateur passe en alimentation par batterie</value>
+  </data>
+  <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
+    <value>Lorsque vous créez une tâche, vous pouvez spécifier les conditions qui la déclenchent.</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Utiliser le compte d’utilisateur suivant pour exécuter cette tâche : </value>
+  </data>
+  <data name="taskVersionLabel.Text" xml:space="preserve">
+    <value>Configurer pour :</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Sortir l’ordinateur du mode veille pour exécuter cette tâche</value>
+  </data>
+  <data name="triggerDeleteButton.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="triggerEditButton.Text" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="triggerNewButton.Text" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="triggersTab.Text" xml:space="preserve">
+    <value>&amp;Déclencheurs...</value>
+  </data>
+</root>

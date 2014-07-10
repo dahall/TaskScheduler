@@ -148,10 +148,10 @@
     <comment>0 = Executable Path; 1 = Arguments; 2 = WorkingDirectory; 3 = Id</comment>
   </data>
   <data name="HyphenSeparator" xml:space="preserve">
-    <value> -</value>
+    <value>-</value>
   </data>
   <data name="ListSeparator" xml:space="preserve">
-    <value>, </value>
+    <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>jeden Monat</value>

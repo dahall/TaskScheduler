@@ -133,6 +133,9 @@
     <EmbeddedResource Include="HidableDetailPanel.resx">
       <DependentUpon>HidableDetailPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HomePanel.fr.resx">
+      <DependentUpon>HomePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomePanel.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>

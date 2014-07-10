@@ -57,7 +57,7 @@ namespace System.Runtime.InteropServices
 			return false;
 		}
 
-		public static T[] ToArray<S, T>(IntPtr ptr, int count)
+		public static T[] ToArray<S, T>(IntPtr ptr, int count) where S : IConvertible
 		{
 			IntPtr tempPtr;
 			T[] ret = new T[count];
@@ -71,7 +71,7 @@ namespace System.Runtime.InteropServices
 			return ret;
 		}
 
-		public static T[] ToArray<T>(IntPtr ptr, int count)
+		public static T[] ToArray<T>(IntPtr ptr, int count) where T : IConvertible
 		{
 			return ToArray<T, T>(ptr, count);
 		}

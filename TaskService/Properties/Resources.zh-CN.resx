@@ -145,10 +145,10 @@
     <value>{0} {1}</value>
   </data>
   <data name="HyphenSeparator" xml:space="preserve">
-    <value> - </value>
+    <value>-</value>
   </data>
   <data name="ListSeparator" xml:space="preserve">
-    <value>, </value>
+    <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>每月</value>

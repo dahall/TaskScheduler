@@ -142,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  -.
+        ///   Looks up a localized string similar to -.
         /// </summary>
         internal static string HyphenSeparator {
             get {
@@ -151,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to , .
+        ///   Looks up a localized string similar to ,.
         /// </summary>
         internal static string ListSeparator {
             get {
@@ -295,7 +295,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  indefinitely.
+        ///   Looks up a localized string similar to indefinitely.
         /// </summary>
         internal static string TriggerDuration0 {
             get {
@@ -304,7 +304,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  for a duration of {0}.
+        ///   Looks up a localized string similar to for a duration of {0}.
         /// </summary>
         internal static string TriggerDurationNot0 {
             get {
@@ -313,7 +313,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Trigger expires at {0:G}..
+        ///   Looks up a localized string similar to Trigger expires at {0:G}..
         /// </summary>
         internal static string TriggerEndBoundary {
             get {
@@ -403,7 +403,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  After triggered, repeat every {0}{1}..
+        ///   Looks up a localized string similar to After triggered, repeat every {0}{1}..
         /// </summary>
         internal static string TriggerRepetition {
             get {

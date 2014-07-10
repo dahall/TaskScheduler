@@ -112,34 +112,102 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+    <value>Nouveau déclencheur</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Activer</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="advSettingsGroup.Text" xml:space="preserve">
+    <value>Paramètres avancés</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="delayCheckBox.Text" xml:space="preserve">
+    <value>Report maximal de la tâche (aléatoire) :</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>pour une durée de :</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Expirée</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="idleTab.Text" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Pour modifier les conditions d’inactivité, utilisez la page Conditions dans la feuille Créer une tâche ou Propriétés de la tâche.</value>
+  </data>
+  <data name="logonAnyUserRadio.Text" xml:space="preserve">
+    <value>Tout utilisateur</value>
+  </data>
+  <data name="logonChgUserBtn.Text" xml:space="preserve">
+    <value>Utilisateur ou groupe...</value>
+  </data>
+  <data name="logonLocalRadio.Text" xml:space="preserve">
+    <value>Connexion depuis l’ordinateur local</value>
+  </data>
+  <data name="logonRemoteRadio.Text" xml:space="preserve">
+    <value>Connexion depuis l’ordinateur distant</value>
+  </data>
+  <data name="logonSpecUserRadio.Text" xml:space="preserve">
+    <value>Utilisateur ou groupe spécifique :</value>
+  </data>
+  <data name="logonTab.Text" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>Utilisateur actuel</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="onEventTab.Text" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Répéter la tâche toutes les :</value>
+  </data>
+  <data name="schedDailyRadio.Text" xml:space="preserve">
+    <value>Tous les jours</value>
+  </data>
+  <data name="schedMonthlyRadio.Text" xml:space="preserve">
+    <value>Tous les mois</value>
+  </data>
+  <data name="schedOneRadio.Text" xml:space="preserve">
+    <value>Une fois</value>
+  </data>
+  <data name="schedStartLabel.Text" xml:space="preserve">
+    <value>Démarrer</value>
+  </data>
+  <data name="schedWeeklyRadio.Text" xml:space="preserve">
+    <value>Hebdomadaire</value>
+  </data>
+  <data name="startupIntroLabel.Text" xml:space="preserve">
+    <value>Aucun autre paramètre n’est requis.</value>
+  </data>
+  <data name="startupTab.Text" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
+    <value>Arrêter toutes les tâches à l’issue de la durée de répétition</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
+    <value>Arrêter la tâche si elle s’exécute plus de :</value>
+  </data>
+  <data name="triggerTypeLabel.Text" xml:space="preserve">
+    <value>Commencer la tâche :</value>
   </data>
 </root>

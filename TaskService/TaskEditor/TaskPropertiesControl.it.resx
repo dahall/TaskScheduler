@@ -407,8 +407,7 @@
     <value>408, 23</value>
   </data>
   <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Protezione avanzata
-</value>
+    <value>Protezione avanzata</value>
   </data>
   <data name="taskMaintenanceDeadlineCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 22</value>
@@ -465,8 +464,7 @@
     <value>&amp;Attivato</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Specificare il sistema, sicurezza e manutenzione caratteristica compatibilità impostazioni aggiuntive per l'attività.
-</value>
+    <value>Specificare il sistema, sicurezza e manutenzione caratteristica compatibilità impostazioni aggiuntive per l'attività.</value>
   </data>
   <data name="addPropTab.Text" xml:space="preserve">
     <value>Aggiunte</value>

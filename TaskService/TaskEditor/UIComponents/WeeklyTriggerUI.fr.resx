@@ -112,34 +112,36 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
+  <data name="weeklyFriCheck.Text" xml:space="preserve">
+    <value>Vendredi</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
+  <data name="weeklyMonCheck.Text" xml:space="preserve">
+    <value>Lundi</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
+  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
+    <value>semaines le :</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
+  <data name="weeklyRecurLabel.Text" xml:space="preserve">
+    <value>Répéter tous les :</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
+  <data name="weeklySatCheck.Text" xml:space="preserve">
+    <value>Samedi</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+  <data name="weeklySunCheck.Text" xml:space="preserve">
+    <value>Dimanche</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+  <data name="weeklyThuCheck.Text" xml:space="preserve">
+    <value>Jeudi</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="weeklyTueCheck.Text" xml:space="preserve">
+    <value>Mardi</value>
+  </data>
+  <data name="weeklyWedCheck.Text" xml:space="preserve">
+    <value>Mercredi</value>
   </data>
 </root>

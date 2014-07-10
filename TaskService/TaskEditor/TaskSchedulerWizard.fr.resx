@@ -112,34 +112,63 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Annulla</value>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Utilisateur ou groupe...</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Oggetto COM</value>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>pour une durée de :</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Percorso</value>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Activé</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 15</value>
+  <data name="introPage.Text" xml:space="preserve">
+    <value>Créer une tâche.</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Cerca:</value>
+    <value>Nom de la tâche</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Selezionare l'oggetto COM</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+  <data name="oneTimeStartLabel.Text" xml:space="preserve">
+    <value>Démarrer</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+  <data name="openDlgAfterCheck.Text" xml:space="preserve">
+    <value>Ouvrir les propriétés de cette tâche quand j’aurai cliqué sur Terminer</value>
+  </data>
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>Tous les fichiers (*.*)</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Répéter la tâche toutes les :</value>
+  </data>
+  <data name="secOptPage.Text" xml:space="preserve">
+    <value>Options de sécurité</value>
+  </data>
+  <data name="summaryPage.Text" xml:space="preserve">
+    <value>Résumé</value>
+  </data>
+  <data name="summaryPrompt.Text" xml:space="preserve">
+    <value>Cliquez sur Terminer pour créer la tâche et l'ajouter à votre planification Windows. </value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Ne pas enregistrer le mot de passe. Cette tâche n’a accès qu’aux ressources de l’ordinateur local.</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>N’exécuter que si un utilisateur a ouvert une session</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Exécuter même si aucun utilisateur n’a ouvert de session</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Utiliser le compte d’utilisateur suivant pour exécuter cette tâche : </value>
+  </data>
+  <data name="wizardControl1.Title" xml:space="preserve">
+    <value>Assistant Création de tâches</value>
   </data>
 </root>
