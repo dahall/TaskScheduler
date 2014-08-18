@@ -1314,6 +1314,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Stops the registered task immediately.
 		/// </summary>
+		/// <remarks>
+		/// <para>The <c>Stop</c> method stops all instances of the task.</para>
+		/// <para>System account users can stop a task, users with Administrator group privileges can stop a task, and if a user has rights to execute and read a task, then the user can stop the task. A user can stop the task instances that are running under the same credentials as the user account. In all other cases, the user is denied access to stop the task.</para>
+		/// </remarks>
 		public void Stop()
 		{
 			if (v2Task != null)
@@ -2084,7 +2088,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
@@ -2388,7 +2392,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(XmlReader reader)
@@ -2999,7 +3003,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(XmlReader reader)
@@ -3761,7 +3765,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(XmlReader reader)

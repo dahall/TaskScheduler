@@ -33,6 +33,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a <see cref="IEnumerator{T}"/> which enumerates all the tasks in this and all subfolders.
+		/// </summary>
+		/// <value>
+		/// A <see cref="IEnumerator{T}"/> for all <see cref="Task"/> instances.
+		/// </value>
+		public System.Collections.Generic.IEnumerable<Task> AllTasks
+		{
+			get { return EnumerateFolderTasks(this); }
+		}
+
+		/// <summary>
 		/// Gets the name that is used to identify the folder that contains a task.
 		/// </summary>
 		public string Name
@@ -505,6 +516,27 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString()
 		{
 			return this.Path;
+		}
+
+		/// <summary>
+		/// Enumerates the tasks in the specified folder and its child folders.
+		/// </summary>
+		/// <param name="folder">The folder in which to start enumeration.</param>
+		/// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the tasks.</returns>
+		private static System.Collections.Generic.IEnumerable<Task> EnumerateFolderTasks(TaskFolder folder)
+		{
+			foreach (var task in folder.Tasks)
+			{
+				yield return task;
+			}
+
+			foreach (var sfld in folder.SubFolders)
+			{
+				foreach (var task in EnumerateFolderTasks(sfld))
+				{
+					yield return task;
+				}
+			}
 		}
 	}
 }

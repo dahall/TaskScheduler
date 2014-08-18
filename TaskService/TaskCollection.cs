@@ -63,7 +63,6 @@ namespace Microsoft.Win32.TaskScheduler
 			private TaskService svc;
 			private V1Interop.IEnumWorkItems wienum = null;
 			private V1Interop.ITaskScheduler m_ts = null;
-			private Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 			private string curItem = null;
 			private Regex filter;
 
@@ -91,7 +90,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			internal V1Interop.ITask ICurrent
 			{
-				get { return m_ts.Activate(curItem, ref ITaskGuid); }
+				get { return TaskService.GetTask(m_ts, curItem); }
 			}
 
 			/// <summary>
@@ -114,22 +113,24 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>true if next task found, false if no more tasks.</returns>
 			public bool MoveNext()
 			{
+				IntPtr names = IntPtr.Zero;
 				bool valid = false;
 				do
 				{
 					curItem = null;
+					uint uFetched = 0;
 					try
 					{
-						string[] names;
-						uint uFetched;
 						wienum.Next(1, out names, out uFetched);
-						if (uFetched < 1)
+						if (uFetched != 1)
 							break;
-						curItem = names[0];
+						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
+							curItem = name.ToString();
 						if (curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
 							curItem = curItem.Remove(curItem.Length - 4);
 					}
 					catch { }
+					finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
 
 					// If name doesn't match filter, look for next item
 					if (filter != null)

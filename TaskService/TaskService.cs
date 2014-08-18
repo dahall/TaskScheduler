@@ -13,6 +13,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 		internal static readonly Version v1Ver = new Version(1, 1);
+		internal static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
 		internal V2Interop.TaskSchedulerClass v2TaskService = null;
@@ -81,6 +82,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value><c>true</c> if allow read only tasks; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Allow tasks from later OS versions with new properties to be retrieved as read only tasks.")]
 		public bool AllowReadOnlyTasks { get; set; }
+
+		/// <summary>
+		/// Gets a <see cref="IEnumerator{T}"/> which enumerates all the tasks in all folders.
+		/// </summary>
+		/// <value>
+		/// A <see cref="IEnumerator{T}"/> for all <see cref="Task"/> instances.
+		/// </value>
+		public System.Collections.Generic.IEnumerable<Task> AllTasks
+		{
+			get { return this.RootFolder.AllTasks; }
+		}
 
 		/// <summary>
 		/// Gets a Boolean value that indicates if you are connected to the Task Scheduler service.
@@ -461,9 +473,22 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
 		{
-			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
-			try { return iSvc.Activate(name, ref ITaskGuid); } catch {}
-			return null;
+			try
+			{
+				return iSvc.Activate(name, ref ITaskGuid);
+			}
+			catch (System.UnauthorizedAccessException)
+			{
+				// TODO: Take ownership of the file and try again
+				throw;
+			}
+			catch (System.ArgumentException)
+			{
+				if (name == null || name.EndsWith(".job"))
+					throw;
+				return iSvc.Activate(name + ".job", ref ITaskGuid);
+			}
+			catch { throw; }
 		}
 
 		/// <summary>
