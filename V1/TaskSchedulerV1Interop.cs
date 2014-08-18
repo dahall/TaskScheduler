@@ -336,7 +336,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	internal interface IEnumWorkItems
 	{
 		[PreserveSig()]
-		int Next([In] uint RequestCount, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.LPWStr, SizeParamIndex=2)] out string[] Names, [Out] out uint Fetched);
+		int Next([In] uint RequestCount, [Out] out System.IntPtr Names, [Out] out uint Fetched);
 		void Skip([In] uint Count);
 		void Reset();
 		[return: MarshalAs(UnmanagedType.Interface)]

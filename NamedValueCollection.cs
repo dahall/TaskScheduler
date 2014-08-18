@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Pair of name and value.
 	/// </summary>
-	public class NameValuePair
+	public class NameValuePair : IXmlSerializable
 	{
 		private V2Interop.ITaskNamedValuePair v2Pair = null;
 		private string name, value;
@@ -24,6 +25,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal NameValuePair(string name, string value)
 		{
+			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(value))
+				throw new ArgumentException("Both name and value must be non-empty strings.");
 			this.name = name; this.value = value;
 		}
 
@@ -36,7 +39,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Name
 		{
 			get { return v2Pair == null ? this.name : v2Pair.Name; }
-			set { if (v2Pair == null) this.name = value; else v2Pair.Name = value; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException("Name"); if (v2Pair == null) this.name = value; else v2Pair.Name = value; }
 		}
 
 		/// <summary>
@@ -48,7 +51,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Value
 		{
 			get { return v2Pair == null ? this.value : v2Pair.Value; }
-			set { if (v2Pair == null) this.value = value; else v2Pair.Value = value; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException("Value"); if (v2Pair == null) this.value = value; else v2Pair.Value = value; }
 		}
 
 		/// <summary>
@@ -75,7 +78,39 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override int GetHashCode()
 		{
-			return base.GetHashCode();
+			return new { A = Name, B = Value }.GetHashCode();
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			return string.Format("{0}={1}", this.Name, this.Value);
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+		{
+			return null;
+		}
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			if (reader.MoveToContent() == System.Xml.XmlNodeType.Element && reader.LocalName == "Value")
+			{
+				this.Name = reader.GetAttribute("name");
+				this.Value = reader.ReadString();
+				reader.Read();
+			}
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			writer.WriteAttributeString("name", this.Name);
+			writer.WriteString(this.Value);
 		}
 	}
 

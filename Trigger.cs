@@ -915,6 +915,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the properties from the Xml definition if possible.
 		/// </summary>
+		[XmlArray, XmlArrayItem("Property")]
 		public NamedValueCollection Properties
 		{
 			get { return nvc; }
@@ -1170,7 +1171,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void ReadMyXml(System.Xml.XmlReader reader)
@@ -1277,6 +1278,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from the subscription query specified in the Subscription property. The name of the query can be used as a variable in the message of a <see cref="ShowMessageAction"/> action.
 		/// </summary>
+		[XmlArray]
+		[XmlArrayItem("Value", typeof(NameValuePair))]
 		public NamedValueCollection ValueQueries
 		{
 			get
@@ -1928,7 +1931,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
@@ -2245,7 +2248,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
@@ -2505,7 +2508,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		bool ReadXmlConverter(System.Reflection.PropertyInfo pi, Object obj, ref Object value)
@@ -2974,7 +2977,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
 		{
-			throw new NotImplementedException();
+			return null;
 		}
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
