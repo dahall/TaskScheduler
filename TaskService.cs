@@ -473,6 +473,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
 		{
+			if (string.IsNullOrEmpty(name))
+				throw new ArgumentNullException("name");
 			try
 			{
 				return iSvc.Activate(name, ref ITaskGuid);
@@ -484,8 +486,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			catch (System.ArgumentException)
 			{
-				if (name == null || name.EndsWith(".job"))
-					throw;
 				return iSvc.Activate(name + ".job", ref ITaskGuid);
 			}
 			catch { throw; }

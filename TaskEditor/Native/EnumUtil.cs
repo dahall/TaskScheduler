@@ -6,7 +6,7 @@ namespace System
 {
 	internal static class EnumUtil
 	{
-		private static void CheckIsEnum<T>(bool checkHasFlags = false)
+		public static void CheckIsEnum<T>(bool checkHasFlags = false)
 		{
 			if (!typeof(T).IsEnum)
 				throw new ArgumentException(string.Format("Type '{0}' is not an enum", typeof(T).FullName));
@@ -14,7 +14,7 @@ namespace System
 				throw new ArgumentException(string.Format("Type '{0}' doesn't have the 'Flags' attribute", typeof(T).FullName));
 		}
 
-		private static bool IsFlags<T>()
+		public static bool IsFlags<T>()
 		{
 			return Attribute.IsDefined(typeof(T), typeof(FlagsAttribute));
 		}

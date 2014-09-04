@@ -35,11 +35,8 @@ namespace Microsoft.Win32
 			{
 				if (NativeMethods.LogonUser(userName, domainName, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
-					using (token)
-					{
-						identity = new WindowsIdentity(token.DangerousGetHandle());
-						impersonationContext = identity.Impersonate();
-					}
+					identity = new WindowsIdentity(token.DangerousGetHandle());
+					impersonationContext = identity.Impersonate();
 				}
 				else
 				{
