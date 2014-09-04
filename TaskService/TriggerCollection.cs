@@ -300,6 +300,50 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a specified trigger from the collection.
+		/// </summary>
+		/// <value>
+		/// The <see cref="Trigger"/>.
+		/// </value>
+		/// <param name="triggerId">The id (<see cref="Trigger.Id" />) of the trigger to be retrieved.</param>
+		/// <returns>
+		/// Specialized <see cref="Trigger" /> instance.
+		/// </returns>
+		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
+		/// <exception cref="System.NullReferenceException"></exception>
+		/// <exception cref="System.InvalidOperationException">Mismatching Id for trigger and lookup.</exception>
+		public Trigger this[string triggerId]
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(triggerId))
+					throw new ArgumentNullException(triggerId);
+				foreach (Trigger t in this)
+					if (string.Equals(t.Id, triggerId))
+						return t;
+				throw new ArgumentOutOfRangeException(triggerId);
+			}
+			set
+			{
+				if (value == null)
+					throw new NullReferenceException();
+				if (string.IsNullOrEmpty(triggerId))
+					throw new ArgumentNullException(triggerId);
+				if (triggerId != value.Id)
+					throw new InvalidOperationException("Mismatching Id for trigger and lookup.");
+				int index = IndexOf(triggerId);
+				if (index >= 0)
+				{
+					RemoveAt(index);
+					Insert(index, value);
+				}
+				else
+					Add(value);
+			}
+		}
+
+		/// <summary>
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
 		/// </summary>
 		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
@@ -311,6 +355,25 @@ namespace Microsoft.Win32.TaskScheduler
 			for (int i = 0; i < this.Count; i++)
 			{
 				if (this[i].Equals(item))
+					return i;
+			}
+			return -1;
+		}
+
+		/// <summary>
+		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
+		/// </summary>
+		/// <param name="triggerId">The id (<see cref="Trigger.Id"/>) of the trigger to be retrieved.</param>
+		/// <returns>
+		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// </returns>
+		public int IndexOf(string triggerId)
+		{
+			if (string.IsNullOrEmpty(triggerId))
+				throw new ArgumentNullException(triggerId);
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (string.Equals(this[i].Id, triggerId))
 					return i;
 			}
 			return -1;

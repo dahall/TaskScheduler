@@ -54,6 +54,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Adds an <see cref="ExecAction"/> to the task.
+		/// </summary>
+		/// <param name="path">Path to an executable file.</param>
+		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
+		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
+		/// <returns>The bound <see cref="ExecAction"/> that was added to the collection.</returns>
+		public ExecAction Add(string path, string arguments = null, string workingDirectory = null)
+		{
+			return (ExecAction)this.Add(new ExecAction(path, arguments, workingDirectory));
+		}
+
+		/// <summary>
 		/// Adds a new <see cref="Action"/> instance to the task.
 		/// </summary>
 		/// <param name="actionType">Type of task to be created</param>
@@ -187,6 +199,25 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
+		/// </summary>
+		/// <param name="actionId">The id (<see cref="Action.Id"/>) of the action to be retrieved.</param>
+		/// <returns>
+		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// </returns>
+		public int IndexOf(string actionId)
+		{
+			if (string.IsNullOrEmpty(actionId))
+				throw new ArgumentNullException(actionId);
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (string.Equals(this[i].Id, actionId))
+					return i;
+			}
+			return -1;
+		}
+
+		/// <summary>
 		/// Inserts an action at the specified index.
 		/// </summary>
 		/// <param name="index">The zero-based index at which action should be inserted.</param>
@@ -280,6 +311,50 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new ArgumentOutOfRangeException("index", index, "Index is not a valid index in the ActionCollection");
 				RemoveAt(index);
 				Insert(index, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a specified action from the collection.
+		/// </summary>
+		/// <value>
+		/// The <see cref="Action"/>.
+		/// </value>
+		/// <param name="actionId">The id (<see cref="Action.Id" />) of the action to be retrieved.</param>
+		/// <returns>
+		/// Specialized <see cref="Action" /> instance.
+		/// </returns>
+		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
+		/// <exception cref="System.NullReferenceException"></exception>
+		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
+		public Action this[string actionId]
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(actionId);
+				foreach (Action t in this)
+					if (string.Equals(t.Id, actionId))
+						return t;
+				throw new ArgumentOutOfRangeException(actionId);
+			}
+			set
+			{
+				if (value == null)
+					throw new NullReferenceException();
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(actionId);
+				if (actionId != value.Id)
+					throw new InvalidOperationException("Mismatching Id for action and lookup.");
+				int index = IndexOf(actionId);
+				if (index >= 0)
+				{
+					RemoveAt(index);
+					Insert(index, value);
+				}
+				else
+					Add(value);
 			}
 		}
 
