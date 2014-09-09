@@ -342,6 +342,24 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unrecognized text found in query XML..
+        /// </summary>
+        internal static string Error_EventFilterBadQuery {
+            get {
+                return ResourceManager.GetString("Error_EventFilterBadQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offending text: &apos;{0}&apos;.
+        /// </summary>
+        internal static string Error_EventFilterBadQueryText {
+            get {
+                return ResourceManager.GetString("Error_EventFilterBadQueryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task events and history are not supported on .NET versions prior to 3.5..
         /// </summary>
         internal static string Error_EventsNotSupported {
@@ -351,11 +369,29 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid ID range pattern.
+        /// </summary>
+        internal static string Error_EventTriggerIDInvalid {
+            get {
+                return ResourceManager.GetString("Error_EventTriggerIDInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name..
         /// </summary>
         internal static string Error_InvalidNameFormat {
             get {
                 return ResourceManager.GetString("Error_InvalidNameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dropped content must be text or a file containing a valid Xml query..
+        /// </summary>
+        internal static string Error_InvalidQueryFormat {
+            get {
+                return ResourceManager.GetString("Error_InvalidQueryFormat", resourceCulture);
             }
         }
         
@@ -459,11 +495,254 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;All Keywords&gt;.
+        /// </summary>
+        internal static string EventKeywordsAll {
+            get {
+                return ResourceManager.GetString("EventKeywordsAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audit Failure.
+        /// </summary>
+        internal static string EventKeywordsAuditFailure {
+            get {
+                return ResourceManager.GetString("EventKeywordsAuditFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audit Success.
+        /// </summary>
+        internal static string EventKeywordsAuditSuccess {
+            get {
+                return ResourceManager.GetString("EventKeywordsAuditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correlation Hint.
+        /// </summary>
+        internal static string EventKeywordsCorrelationHint2 {
+            get {
+                return ResourceManager.GetString("EventKeywordsCorrelationHint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classic.
+        /// </summary>
+        internal static string EventKeywordsEventLogClassic {
+            get {
+                return ResourceManager.GetString("EventKeywordsEventLogClassic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Time.
+        /// </summary>
+        internal static string EventKeywordsResponseTime {
+            get {
+                return ResourceManager.GetString("EventKeywordsResponseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQM.
+        /// </summary>
+        internal static string EventKeywordsSqm {
+            get {
+                return ResourceManager.GetString("EventKeywordsSqm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WDI Context.
+        /// </summary>
+        internal static string EventKeywordsWdiContext {
+            get {
+                return ResourceManager.GetString("EventKeywordsWdiContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WDI Diag.
+        /// </summary>
+        internal static string EventKeywordsWdiDiagnostic {
+            get {
+                return ResourceManager.GetString("EventKeywordsWdiDiagnostic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Applications and Services Logs.
+        /// </summary>
+        internal static string EventLogParentApps {
+            get {
+                return ResourceManager.GetString("EventLogParentApps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Logs.
+        /// </summary>
+        internal static string EventLogParentStandard {
+            get {
+                return ResourceManager.GetString("EventLogParentStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;All Logs&gt;.
+        /// </summary>
+        internal static string EventLogsAll {
+            get {
+                return ResourceManager.GetString("EventLogsAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last 12 hours.
+        /// </summary>
+        internal static string EventLogTime12Hours {
+            get {
+                return ResourceManager.GetString("EventLogTime12Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last 30 days.
+        /// </summary>
+        internal static string EventLogTime30Days {
+            get {
+                return ResourceManager.GetString("EventLogTime30Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any time.
+        /// </summary>
+        internal static string EventLogTimeAnyTime {
+            get {
+                return ResourceManager.GetString("EventLogTimeAnyTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom range....
+        /// </summary>
+        internal static string EventLogTimeCustom {
+            get {
+                return ResourceManager.GetString("EventLogTimeCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Events from {0}.
+        /// </summary>
+        internal static string EventLogTimeCustomFrom {
+            get {
+                return ResourceManager.GetString("EventLogTimeCustomFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From {0} to {1}.
+        /// </summary>
+        internal static string EventLogTimeCustomFromTo {
+            get {
+                return ResourceManager.GetString("EventLogTimeCustomFromTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Events up to {1}.
+        /// </summary>
+        internal static string EventLogTimeCustomTo {
+            get {
+                return ResourceManager.GetString("EventLogTimeCustomTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last 24 hours.
+        /// </summary>
+        internal static string EventLogTimeDay {
+            get {
+                return ResourceManager.GetString("EventLogTimeDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last hour.
+        /// </summary>
+        internal static string EventLogTimeHour {
+            get {
+                return ResourceManager.GetString("EventLogTimeHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last 7 days.
+        /// </summary>
+        internal static string EventLogTimeWeek {
+            get {
+                return ResourceManager.GetString("EventLogTimeWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event Properties - Event {0}, TaskScheduler.
         /// </summary>
         internal static string EventPropertiesDialogTitle {
             get {
                 return ResourceManager.GetString("EventPropertiesDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;All Sources&gt;.
+        /// </summary>
+        internal static string EventSourcesAll {
+            get {
+                return ResourceManager.GetString("EventSourcesAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;All Task Categories&gt;.
+        /// </summary>
+        internal static string EventTasksAll {
+            get {
+                return ResourceManager.GetString("EventTasksAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you choose to manually edit the query, you will no longer be able to modify the query using the controls on the Filter tab. Would you like to continue?.
+        /// </summary>
+        internal static string EventTriggerFilterGoManualPrompt {
+            get {
+                return ResourceManager.GetString("EventTriggerFilterGoManualPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to use the Filter tab to edit the query ? This will result in manual changes made to the query being discarded..
+        /// </summary>
+        internal static string EventTriggerFilterUseFormPrompt {
+            get {
+                return ResourceManager.GetString("EventTriggerFilterUseFormPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event Viewer.
+        /// </summary>
+        internal static string EventViewerDialogTitle {
+            get {
+                return ResourceManager.GetString("EventViewerDialogTitle", resourceCulture);
             }
         }
         

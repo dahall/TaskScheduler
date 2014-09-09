@@ -222,11 +222,21 @@ namespace Microsoft.Win32.TaskScheduler
 			log.Seek(System.IO.SeekOrigin.Begin, 0L);
 		}
 
+		/// <summary>
+		/// Seeks the specified bookmark.
+		/// </summary>
+		/// <param name="bookmark">The bookmark.</param>
+		/// <param name="offset">The offset.</param>
 		public void Seek(EventBookmark bookmark, long offset = 0L)
 		{
 			log.Seek(bookmark, offset);
 		}
 
+		/// <summary>
+		/// Seeks the specified origin.
+		/// </summary>
+		/// <param name="origin">The origin.</param>
+		/// <param name="offset">The offset.</param>
 		public void Seek(System.IO.SeekOrigin origin, long offset)
 		{
 			log.Seek(origin, offset);

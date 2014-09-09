@@ -5,7 +5,6 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Compares two arrays to see if the values inside of the array are the same. This is
 	/// dependent on the type contained in the array having a valid Equals() override.
 	/// </summary>
-	/// <typeparam name="T">The type of data stored in the array</typeparam>
 	internal static class ArrayComparer
 	{
 		public static IEnumerable<TResult> Cast<TResult>(this System.Collections.IEnumerable source)

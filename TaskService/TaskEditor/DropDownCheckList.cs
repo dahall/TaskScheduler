@@ -11,6 +11,8 @@ namespace Microsoft.Win32.TaskScheduler
 	public partial class DropDownCheckList : CustomComboBox
 	{
 		private System.Windows.Forms.CheckedListBox checkedListBox1;
+		private int lastCheckHash = 0;
+		private Timer onCheckTimer;
 		private bool privateSet = false;
 
 		/// <summary>
@@ -18,6 +20,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public DropDownCheckList()
 		{
+			this.onCheckTimer = new Timer { Interval = 150 };
+			this.onCheckTimer.Tick += onCheckTimer_Tick;
 			this.checkedListBox1 = new System.Windows.Forms.CheckedListBox()
 			{
 				BorderStyle = System.Windows.Forms.BorderStyle.None,
@@ -42,9 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value indicating whether to allow only one checked item.
 		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if allowing only one checked item; otherwise, <c>false</c>.
-		/// </value>
+		/// <value><c>true</c> if allowing only one checked item; otherwise, <c>false</c>.</value>
 		[Category("Behavior"), DefaultValue(false)]
 		public bool AllowOnlyOneCheckedItem { get; set; }
 
@@ -53,10 +55,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The text.</value>
 		[DefaultValue((string)null), Category("Appearance"), Localizable(true)]
-		public string CheckAllText
-		{
-			get; set;
-		}
+		public string CheckAllText { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logical AND value of all checked items.
@@ -96,7 +95,7 @@ namespace Microsoft.Win32.TaskScheduler
 						this.checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
 				}
 				privateSet = false;
-				UpdateText();
+				CheckedItemsChanged();
 			}
 		}
 
@@ -109,7 +108,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new bool FormattingEnabled
 		{
-			get { return base.FormattingEnabled;  }
+			get { return base.FormattingEnabled; }
 			set { base.FormattingEnabled = value; }
 		}
 
@@ -167,11 +166,35 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
 		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   </PermissionSet>
+		/// </PermissionSet>
 		public new bool Sorted
 		{
 			get { return this.checkedListBox1.Sorted; }
 			set { this.checkedListBox1.Sorted = value; }
+		}
+
+		/// <summary>
+		/// Checks the matching items.
+		/// </summary>
+		/// <param name="match">The match.</param>
+		/// <param name="keepExisting">if set to <c>true</c> keep existing checked items.</param>
+		public void CheckItems(Predicate<object> match, bool keepExisting = false)
+		{
+			for (int i = 0; i < this.checkedListBox1.Items.Count; i++)
+			{
+				if (match == null || match(this.checkedListBox1.Items[i]))
+					this.SetItemChecked(i, true);
+				else if (!keepExisting)
+					this.SetItemChecked(i, false);
+			}
+		}
+
+		/// <summary>
+		/// Unchecks all items.
+		/// </summary>
+		public void UncheckAllItems()
+		{
+			CheckItems(o => false);
 		}
 
 		/// <summary>
@@ -189,17 +212,36 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="enumType">The enumerated type.</param>
 		/// <param name="mgr">The <see cref="System.Resources.ResourceManager"/> that holds the display text for each enumerated value.</param>
-		/// <param name="prefix">The prefix used in front of the enumeration value to pull from the resource file.</param>
-		public void InitializeFromEnum(Type enumType, System.Resources.ResourceManager mgr, string prefix)
+		/// <param name="prefix">(Optional) The prefix used in front of the enumeration value to pull from the resource file. If <c>null</c>, then this value defaults to the name of the enumerated type specified by <paramref name="enumType"/>.</param>
+		/// <param name="exclude">(Optional) The excluded items from the enumerated type.</param>
+		public void InitializeFromEnum(Type enumType, System.Resources.ResourceManager mgr, string prefix = null, string[] exclude = null)
 		{
 			if (!enumType.IsEnum)
 				throw new ArgumentException("Specified type is not an enumeration.", "enumType");
 			if (mgr == null)
 				throw new ArgumentNullException("mgr", "A valid ResourceManager instance must be provided.");
 			long allVal;
-			ComboBoxExtension.InitializeFromEnum(this.checkedListBox1.Items, enumType, mgr, prefix, out allVal);
+			this.checkedListBox1.BeginUpdate();
+			ComboBoxExtension.InitializeFromEnum(this.checkedListBox1.Items, enumType, mgr, prefix, out allVal, exclude);
 			if (!string.IsNullOrEmpty(this.CheckAllText))
 				this.checkedListBox1.Items.Insert(0, new DropDownCheckListItem(this.CheckAllText, allVal));
+			this.checkedListBox1.EndUpdate();
+		}
+
+		/// <summary>
+		/// Initializes the check list from an enumerated type and sets its initial checks.
+		/// </summary>
+		/// <typeparam name="T">Enumerated type used to set the items.</typeparam>
+		/// <param name="val">The flag value used to check the items.</param>
+		/// <param name="mgr">The <see cref="System.Resources.ResourceManager"/> that holds the display text for each enumerated value.</param>
+		/// <param name="prefix">(Optional) The prefix used in front of the enumeration value to pull from the resource file. If <c>null</c>, then this value defaults to the name of the enumerated type specified by <typeparamref name="T"/>.</param>
+		/// <param name="exclude">(Optional) The excluded items from the enumerated type.</param>
+		public void InitializeAndSet<T>(T val, System.Resources.ResourceManager mgr, string prefix = null, T[] exclude = null) where T: struct, IConvertible
+		{
+			EnumUtil.CheckIsEnum<T>(true);
+			string[] excl = exclude == null ? null : Array.ConvertAll<T, string>(exclude, t => t.ToString());
+			this.InitializeFromEnum(typeof(T), mgr, prefix, excl);
+			this.CheckedFlagValue = Convert.ToInt64(val);
 		}
 
 		/// <summary>
@@ -208,6 +250,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="enumType">The enumerated type.</param>
 		public void InitializeFromTaskEnum(Type enumType)
 		{
+			this.checkedListBox1.BeginUpdate();
 			this.checkedListBox1.Items.Clear();
 			long allVal = 0;
 			Array vals = Enum.GetValues(enumType);
@@ -220,6 +263,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (!string.IsNullOrEmpty(this.CheckAllText))
 				this.checkedListBox1.Items.Insert(0, new DropDownCheckListItem(this.CheckAllText, allVal));
+			this.checkedListBox1.EndUpdate();
 		}
 
 		/// <summary>
@@ -229,6 +273,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void RemoveItem(int index)
 		{
 			this.checkedListBox1.Items.RemoveAt(index);
+			CheckedItemsChanged();
 		}
 
 		/// <summary>
@@ -238,8 +283,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="value">Checked if set to <c>true</c>; otherwise unchecked.</param>
 		public void SetItemChecked(int index, bool value)
 		{
-			this.checkedListBox1.SetItemChecked(index, value);
-			UpdateText();
+			if (this.GetItemChecked(index) != value)
+			{
+				this.checkedListBox1.SetItemChecked(index, value);
+				CheckedItemsChanged();
+			}
 		}
 
 		/// <summary>
@@ -247,48 +295,72 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void UpdateText()
 		{
-			List<string> items = new List<string>(this.checkedListBox1.CheckedItems.Count);
-			foreach (var item in this.checkedListBox1.CheckedItems)
-				items.Add(item.ToString());
-			if (!string.IsNullOrEmpty(CheckAllText) && items.Count > 0 && items[0] == CheckAllText) items.RemoveAt(0);
-			string newText = string.Join(", ", items.ToArray());
-			if (newText != this.Text)
+			bool hasCheckAll = !string.IsNullOrEmpty(CheckAllText);
+			if (hasCheckAll && this.checkedListBox1.Items.Count == this.checkedListBox1.CheckedItems.Count)
+				this.Text = this.CheckAllText;
+			else
 			{
-				this.Text = newText;
-				OnSelectedItemsChanged(EventArgs.Empty);
+				var items = new List<string>(this.checkedListBox1.CheckedItems.Count);
+				for (int i = 0; i < this.checkedListBox1.CheckedItems.Count; i++)
+				{
+					object ci = this.checkedListBox1.CheckedItems[i];
+					if (!hasCheckAll || ci.ToString() != this.CheckAllText)
+						items.Add(ci.ToString());
+				}
+				this.Text = string.Join(", ", items.ToArray());
 			}
 		}
 
 		internal void InitializeFromRange(int start, int end)
 		{
 			privateSet = true;
+			this.checkedListBox1.BeginUpdate();
 			this.checkedListBox1.Items.Clear();
 			for (int i = start; i <= end; i++)
-			{
 				this.checkedListBox1.Items.Add(new DropDownCheckListItem(i));
-			}
+			this.checkedListBox1.EndUpdate();
 			privateSet = false;
 		}
 
 		/// <summary>
-		/// Raises the <see cref="System.Windows.Forms.ComboBox.DropDownClosed"/> event.
+		/// Raises the <see cref="E:DropDown" /> event.
 		/// </summary>
-		/// <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-		protected override void OnDropDownClosed(EventArgs e)
+		/// <param name="args">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+		protected override void OnDropDown(EventArgs args)
 		{
-			base.OnDropDownClosed(e);
-			UpdateText();
+			base.OnDropDown(args);
+			CheckedItemsChanged();
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:DropDownClosed" /> event.
+		/// </summary>
+		/// <param name="args">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+		protected override void OnDropDownClosed(EventArgs args)
+		{
+			base.OnDropDownClosed(args);
+			CheckedItemsChanged();
 		}
 
 		/// <summary>
 		/// Raises the <see cref="SelectedItemsChanged"/> event.
 		/// </summary>
-		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-		protected virtual void OnSelectedItemsChanged(EventArgs eventArgs)
+		protected virtual void OnSelectedItemsChanged()
 		{
 			EventHandler h = this.SelectedItemsChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
+		}
+
+		private void CheckedItemsChanged()
+		{
+			int newHash = this.checkedListBox1.CheckedItems.OfType<DropDownCheckListItem>().GetItemHashCode();
+			if (lastCheckHash != newHash)
+			{
+				lastCheckHash = newHash;
+				UpdateText();
+				OnSelectedItemsChanged();
+			}
 		}
 
 		void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -298,10 +370,10 @@ namespace Microsoft.Win32.TaskScheduler
 				privateSet = true;
 				if (e.Index == 0 && !string.IsNullOrEmpty(CheckAllText) && this.checkedListBox1.Items.Count > 1)
 				{
-					bool chk = !GetItemChecked(0);
-					if (!chk) this.checkedListBox1.SetItemChecked(1, true);
+					bool chk = e.NewValue == CheckState.Checked;
+					if (!chk && AllowOnlyOneCheckedItem) this.SetItemChecked(1, true);
 					for (int i = chk ? 1 : 2; i < this.checkedListBox1.Items.Count; i++)
-						this.checkedListBox1.SetItemChecked(i, chk);
+						this.SetItemChecked(i, chk);
 				}
 				else
 				{
@@ -310,20 +382,29 @@ namespace Microsoft.Win32.TaskScheduler
 						if (e.NewValue == CheckState.Checked)
 						{
 							foreach (var i in this.checkedListBox1.CheckedIndices)
-								this.checkedListBox1.SetItemChecked((int)i, false);
+								this.SetItemChecked((int)i, false);
 						}
 						else
 							e.NewValue = CheckState.Checked;
 					}
 					else
 					{
-						if (e.NewValue == CheckState.Unchecked && this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index)
-							e.NewValue = CheckState.Checked;
+						if (this.checkedListBox1.IsHandleCreated)
+							this.BeginInvoke((MethodInvoker)(() => CheckedItemsChanged()));
+						//onCheckTimer.Start();
+						//if (e.NewValue == CheckState.Unchecked && this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index)
+						//	e.NewValue = CheckState.Checked;
 					}
 				}
 				privateSet = false;
 			}
 			//base.PreventPopupHide = this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index && e.NewValue == CheckState.Unchecked;
+		}
+
+		void onCheckTimer_Tick(object sender, EventArgs e)
+		{
+			onCheckTimer.Stop();
+			CheckedItemsChanged();
 		}
 	}
 
@@ -335,28 +416,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DropDownCheckListItem"/> class.
 		/// </summary>
-		public DropDownCheckListItem()
-			: this(string.Empty, null)
-		{
-		}
+		public DropDownCheckListItem() : this(string.Empty, null) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DropDownCheckListItem"/> class.
 		/// </summary>
 		/// <param name="value">The value.</param>
-		public DropDownCheckListItem(object value)
-			: this(value.ToString(), value)
-		{
-		}
+		public DropDownCheckListItem(object value) : this(value.ToString(), value) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DropDownCheckListItem"/> class.
 		/// </summary>
 		/// <param name="text">The text.</param>
-		public DropDownCheckListItem(string text)
-			: this(text, text)
-		{
-		}
+		public DropDownCheckListItem(string text) : this(text, text) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DropDownCheckListItem"/> class.
@@ -372,21 +444,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the text.
 		/// </summary>
 		/// <value>The text.</value>
-		public string Text
-		{
-			get;
-			set;
-		}
+		public string Text { get; set; }
 
 		/// <summary>
 		/// Gets or sets the value.
 		/// </summary>
 		/// <value>The value.</value>
-		public object Value
-		{
-			get;
-			set;
-		}
+		public object Value { get; set; }
 
 		/// <summary>
 		/// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -417,7 +481,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override int GetHashCode()
 		{
-			return Text.GetHashCode();
+			return new { Text, Value }.GetHashCode();
 		}
 
 		/// <summary>
@@ -441,22 +505,25 @@ namespace Microsoft.Win32.TaskScheduler
 
 	internal static class ComboBoxExtension
 	{
-		public static void InitializeFromEnum(System.Collections.IList list, Type enumType, System.Resources.ResourceManager mgr, string prefix, out long allVal)
+		public static void InitializeFromEnum(System.Collections.IList list, Type enumType, System.Resources.ResourceManager mgr, string prefix, out long allVal, string[] exclude = null)
 		{
 			list.Clear();
 			allVal = 0;
 			if (prefix == null) prefix = string.Empty;
 			Array vals = Enum.GetValues(enumType);
-			Array names = Enum.GetNames(enumType);
+			string[] names = Enum.GetNames(enumType);
 			for (int i = 0; i < vals.Length; i++)
 			{
 				long val = Convert.ToInt64(vals.GetValue(i));
-				allVal |= val;
-				string text = mgr.GetString(prefix + names.GetValue(i).ToString(), System.Globalization.CultureInfo.CurrentUICulture);
-				if (string.IsNullOrEmpty(text))
-					text = names.GetValue(i).ToString();
-				//text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
-				list.Add(new DropDownCheckListItem(text, val));
+				if (exclude == null || Array.IndexOf<string>(exclude, names[i]) == -1)
+				{
+					allVal |= val;
+					string text = mgr.GetString(prefix + names[i], System.Globalization.CultureInfo.CurrentUICulture);
+					if (string.IsNullOrEmpty(text))
+						text = names[i];
+					//text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
+					list.Add(new DropDownCheckListItem(text, val));
+				}
 			}
 		}
 	}

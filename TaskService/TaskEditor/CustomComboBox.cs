@@ -32,6 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private const uint WM_LBUTTONDOWN = 0x0201;
 		private const uint WM_REFLECT = WM_USER + 0x1C00;
 		private const uint WM_USER = 0x0400;
+		private const int maxItemLen = 1024;
 
 		private static DateTime m_sShowTime = DateTime.Now;
 
@@ -62,6 +63,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Automatic focus timer helps make sure drop-down control is focused for user input upon drop-down.</summary>
 		Timer m_timerAutoFocus;
 
+		ToolTip m_toolTip;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CustomComboBox"/> class.
 		/// </summary>
@@ -72,6 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 			base.Items.Add(String.Empty);
 			m_sizeCombo = new Size(base.DropDownWidth, base.DropDownHeight);
 			m_popupCtrl.Closing += new ToolStripDropDownClosingEventHandler(m_dropDown_Closing);
+			m_toolTip = new ToolTip() { StripAmpersands = true };
 		}
 
 		/// <summary>
@@ -578,7 +582,21 @@ namespace Microsoft.Win32.TaskScheduler
 		public new string Text
 		{
 			get { return base.Items.Count == 0 ? string.Empty : base.Items[0].ToString(); }
-			set { if (base.Items.Count == 0) base.Items.Add(value); else base.Items[0] = value; base.SelectedIndex = 0; }
+			set
+			{
+				// Get toolTip value
+				var items = value.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+				if (items.Length > 0)
+					m_toolTip.SetToolTip(this, string.Join("\r\n", items));
+				// Limit length and then set 0 item to value so it displays
+				if (value != null && value.Length > maxItemLen)
+					value = value.Substring(0, maxItemLen);
+				if (base.Items.Count == 0)
+					base.Items.Add(value);
+				else if (!Equals(value, base.Items[0]))
+					base.Items[0] = value;
+				base.SelectedIndex = 0;
+			}
 		}
 
 		/// <summary>
@@ -684,13 +702,16 @@ namespace Microsoft.Win32.TaskScheduler
 		protected virtual void AssignControl(Control control)
 		{
 			// If specified control is different then...
-			if (control != DropDownControl)
+			if (control != m_dropDownCtrl)
 			{
 				// Preserve original container size.
 				m_sizeOriginal = control.Size;
 
 				// Reference the user-specified drop down control.
 				m_dropDownCtrl = control;
+
+				this.Controls.Remove(m_dropDownCtrl);
+				this.Controls.Add(control);
 			}
 		}
 
@@ -755,6 +776,17 @@ namespace Microsoft.Win32.TaskScheduler
 			EventHandler eventHandler = this.DropDownClosed;
 			if (eventHandler != null)
 				this.DropDownClosed(this, args);
+		}
+
+		/// <summary>
+		/// Raises the <see cref="E:FontChanged"/> event.
+		/// </summary>
+		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+		protected override void OnFontChanged(EventArgs e)
+		{
+			base.OnFontChanged(e);
+			if (this.DropDownControl != null)
+				this.DropDownControl.Font = this.Font;
 		}
 
 		/// <summary>

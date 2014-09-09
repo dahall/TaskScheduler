@@ -203,7 +203,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="actionId">The id (<see cref="Action.Id"/>) of the action to be retrieved.</param>
 		/// <returns>
-		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// The index of <paramref name="actionId" /> if found in the list; otherwise, -1.
 		/// </returns>
 		public int IndexOf(string actionId)
 		{

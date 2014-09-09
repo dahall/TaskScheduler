@@ -1,10 +1,9 @@
 ﻿//using CubicOrange.Windows.Forms.ActiveDirectory;
 using System;
 using System.ComponentModel;
-using System.Globalization;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Text;
 
 namespace Microsoft.Win32
 {
@@ -12,7 +11,80 @@ namespace Microsoft.Win32
 	{
 		public static partial class AccountUtils
 		{
-			private static string systemAccount, networkServiceAccount, localServiceAccount;
+			/// <summary> 
+			/// The function checks whether the primary access token of the process belongs  
+			/// to user account that is a member of the local Administrators group, even if  
+			/// it currently is not elevated. 
+			/// </summary> 
+			/// <returns> 
+			/// Returns true if the primary access token of the process belongs to user  
+			/// account that is a member of the local Administrators group. Returns false  
+			/// if the token does not. 
+			/// </returns> 
+			/// <exception cref="System.ComponentModel.Win32Exception"> 
+			/// When any native Windows API call fails, the function throws a Win32Exception  
+			/// with the last error code. 
+			/// </exception> 
+			public static bool IsUserInAdminGroup()
+			{
+				bool fInAdminGroup = false;
+				SafeTokenHandle hTokenToCheck = null;
+
+				// Open the access token of the current process for query and duplicate.
+				SafeTokenHandle hToken = SafeTokenHandle.FromCurrentProcess(AccessTypes.TokenQuery | AccessTypes.TokenDuplicate);
+
+				// Determine whether system is running Windows Vista or later operating  
+				// systems (major version >= 6) because they support linked tokens, but  
+				// previous versions (major version < 6) do not. 
+				if (Environment.OSVersion.Version.Major >= 6)
+				{
+					// Running Windows Vista or later (major version >= 6).  
+					// Determine token type: limited, elevated, or default.  
+
+					// Marshal the TOKEN_ELEVATION_TYPE enum from native to .NET. 
+					TOKEN_ELEVATION_TYPE elevType = hToken.GetInfo<TOKEN_ELEVATION_TYPE>(TOKEN_INFORMATION_CLASS.TokenElevationType);
+
+					// If limited, get the linked elevated token for further check. 
+					if (elevType == TOKEN_ELEVATION_TYPE.Limited)
+					{
+						// Marshal the linked token value from native to .NET. 
+						IntPtr hLinkedToken = hToken.GetInfo<IntPtr>(TOKEN_INFORMATION_CLASS.TokenLinkedToken);
+						hTokenToCheck = new SafeTokenHandle(hLinkedToken);
+					}
+				}
+
+				// CheckTokenMembership requires an impersonation token. If we just got  
+				// a linked token, it already is an impersonation token.  If we did not  
+				// get a linked token, duplicate the original into an impersonation  
+				// token for CheckTokenMembership. 
+				if (hTokenToCheck == null)
+				{
+					if (!NativeMethods.DuplicateToken(hToken, SECURITY_IMPERSONATION_LEVEL.Identification, out hTokenToCheck))
+						throw new Win32Exception();
+				}
+
+				// Check if the token to be checked contains admin SID. 
+				WindowsIdentity id = new WindowsIdentity(hTokenToCheck.DangerousGetHandle());
+				WindowsPrincipal principal = new WindowsPrincipal(id);
+				fInAdminGroup = principal.IsInRole(WindowsBuiltInRole.Administrator);
+
+				return fInAdminGroup;
+			}
+
+			/*public static void ElevateApplication()
+			{
+				if (!CurrentUserIsAdmin(null))
+				{
+					// Launch itself as administrator 
+					ProcessStartInfo proc = new ProcessStartInfo(System.Windows.Forms.Application.ExecutablePath) { UseShellExecute = true, WorkingDirectory = Environment.CurrentDirectory, Verb = "runas" };
+					try
+					{
+						Process.Start(proc);
+						System.Windows.Forms.Application.Exit();
+					}
+					catch { }
+				}
+			}*/
 
 			public static bool CurrentUserIsAdmin(string computerName)
 			{
@@ -20,88 +92,76 @@ namespace Microsoft.Win32
 					return true;
 
 				WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-				return principal.IsInRole(0x220);
+				return principal.IsInRole(WindowsBuiltInRole.Administrator);
 			}
 
 			public static bool UserIsServiceAccount(string userName)
 			{
-				if (((systemAccount == null) || (networkServiceAccount == null)) || (localServiceAccount == null))
+				if (string.IsNullOrEmpty(userName))
+					userName = WindowsIdentity.GetCurrent().Name;
+				NTAccount acct = new NTAccount(userName);
+				try
 				{
-					systemAccount = FormattedUserNameFromStringSid("S-1-5-18", null);
-					networkServiceAccount = FormattedUserNameFromStringSid("S-1-5-20", null);
-					localServiceAccount = FormattedUserNameFromStringSid("S-1-5-19", null);
+					SecurityIdentifier si = (SecurityIdentifier)acct.Translate(typeof(SecurityIdentifier));
+					return (si.IsWellKnown(WellKnownSidType.LocalSystemSid) || si.IsWellKnown(WellKnownSidType.NetworkServiceSid) || si.IsWellKnown(WellKnownSidType.LocalServiceSid));
 				}
-
-				int num = string.Compare(userName, systemAccount, StringComparison.CurrentCultureIgnoreCase);
-				if (num != 0)
-				{
-					num = string.Compare(userName, networkServiceAccount, StringComparison.CurrentCultureIgnoreCase);
-				}
-				if (num != 0)
-				{
-					num = string.Compare(userName, localServiceAccount, StringComparison.CurrentCultureIgnoreCase);
-				}
-				return (0 == num);
+				catch { }
+				return false;
 			}
 
-			private static uint LookupAccountSid(SecurityIdentifier sid, out string accountName, out string domainName, out int use)
+			public static string SidStringFromUserName(string userName)
 			{
-				uint num = 0;
-				byte[] binaryForm = new byte[sid.BinaryLength];
-				sid.GetBinaryForm(binaryForm, 0);
-				int capacity = 0x44;
-				int num3 = 0x44;
-				StringBuilder builder = new StringBuilder(capacity);
-				StringBuilder builder2 = new StringBuilder(num3);
-				if (!NativeMethods.LookupAccountSid(null, binaryForm, builder, ref capacity, builder2, ref num3, out use))
+				NTAccount acct = new NTAccount(userName);
+				try
 				{
-					num = (uint)Marshal.GetLastWin32Error();
+					SecurityIdentifier si = (SecurityIdentifier)acct.Translate(typeof(SecurityIdentifier));
+					return si.ToString();
 				}
-				accountName = builder.ToString().TrimEnd(new char[] { '$' });
-				domainName = builder2.ToString();
-				return num;
+				catch { }
+				return null;
+			}
+
+			public static string UserNameFromSidString(string sid)
+			{
+				try
+				{
+					SecurityIdentifier si = new SecurityIdentifier(sid);
+					NTAccount acct = (NTAccount)si.Translate(typeof(NTAccount));
+					return acct.Value;
+				}
+				catch { }
+				return null;
+			}
+
+			/*private static bool LookupAccountSid(string computerName, IntPtr sid, out string accountName, out string domainName, out SID_NAME_USE use)
+			{
+				int anLen = 0x100;
+				int dnLen = 0x100;
+				StringBuilder acctName = new StringBuilder(anLen);
+				StringBuilder domName = new StringBuilder(dnLen);
+				if (NativeMethods.LookupAccountSid(computerName, sid, acctName, ref anLen, domName, ref dnLen, out use))
+				{
+					accountName = acctName.ToString().TrimEnd('$');
+					domainName = domName.ToString();
+					return true;
+				}
+				accountName = domainName = null;
+				return false;
 			}
 
 			private static bool FindUserFromSid(IntPtr incomingSid, string computerName, ref string userName)
 			{
-				int num3;
-				bool flag = false;
-				int cchName = 0;
-				int cchReferencedDomainName = 0;
-				StringBuilder referencedDomainName = new StringBuilder();
-				int error = 0;
-				StringBuilder name = new StringBuilder();
-				if (!NativeMethods.LookupAccountSid(computerName, incomingSid, name, ref cchName, referencedDomainName, ref cchReferencedDomainName, out num3))
-				{
-					error = Marshal.GetLastWin32Error();
-					if (0x7a != error)
-					{
-						throw new Win32Exception(error);
-					}
-				}
-				if ((error == 0) || (0x7a == error))
-				{
-					referencedDomainName = new StringBuilder(cchReferencedDomainName);
-					name = new StringBuilder(cchName);
-					if (!NativeMethods.LookupAccountSid(computerName, incomingSid, name, ref cchName, referencedDomainName, ref cchReferencedDomainName, out num3))
-					{
-						throw new Win32Exception(Marshal.GetLastWin32Error());
-					}
-					flag = IsUserFromUse(num3);
-					if (userName == null)
-					{
-						return flag;
-					}
-					if (0 < cchReferencedDomainName)
-					{
-						userName = referencedDomainName.ToString();
-					}
-					else
-					{
-						userName = computerName;
-					}
-					userName = string.Format((IFormatProvider)CultureInfo.CurrentCulture.GetFormat(typeof(string)), "{0}\\{1}", new object[] { userName, name });
-				}
+				SID_NAME_USE use;
+				string acctName, domainName;
+				if (!LookupAccountSid(computerName, incomingSid, out acctName, out domainName, out use))
+					throw new Win32Exception();
+				bool flag = use == SID_NAME_USE.SidTypeUser;
+				if (userName == null)
+					return flag;
+
+				if (!string.IsNullOrEmpty(domainName))
+					domainName = computerName;
+				userName = string.Format("{0}\\{1}", domainName, acctName);
 				return flag;
 			}
 
@@ -141,17 +201,7 @@ namespace Microsoft.Win32
 				str = FormattedUserNameFromSid(zero, computerName);
 				Marshal.FreeHGlobal(zero);
 				return str;
-			}
-
-			private static bool IsUserFromUse(int use)
-			{
-				bool flag = false;
-				if (use == 1)
-				{
-					flag = true;
-				}
-				return flag;
-			}
+			}*/
 		}
 	}
 }

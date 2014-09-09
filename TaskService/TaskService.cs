@@ -84,10 +84,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool AllowReadOnlyTasks { get; set; }
 
 		/// <summary>
-		/// Gets a <see cref="IEnumerator{T}"/> which enumerates all the tasks in all folders.
+		/// Gets a <see cref="System.Collections.Generic.IEnumerator{T}" /> which enumerates all the tasks in all folders.
 		/// </summary>
 		/// <value>
-		/// A <see cref="IEnumerator{T}"/> for all <see cref="Task"/> instances.
+		/// A <see cref="System.Collections.Generic.IEnumerator{T}" /> for all <see cref="Task" /> instances.
 		/// </value>
 		public System.Collections.Generic.IEnumerable<Task> AllTasks
 		{

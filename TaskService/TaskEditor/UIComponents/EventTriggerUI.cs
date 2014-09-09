@@ -15,12 +15,6 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		public EventTriggerUI()
 		{
 			InitializeComponent();
-			if (System.Environment.Version.Major < 4)
-			{
-				eventBasicRadio.Enabled = false;
-				eventCustomRadio.Checked = true;
-				this.onEventCustomText.Text = GetFormattedXmlString(EventTrigger.BuildQuery("System", null, null));
-			}
 		}
 
 		[Browsable(false), DefaultValue(null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -38,12 +32,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				onAssignment = true;
 				trigger = (EventTrigger)value;
 
-				if (System.Environment.Version.Major >= 4)
-				{
-					InitializeEventLogList();
-					UpdateCustomText();
-					eventBasicRadio.Checked = TrySetBasic();
-				}
+				InitializeEventLogList();
+				UpdateCustomText();
+				eventBasicRadio.Checked = TrySetBasic();
 			}
 		}
 
@@ -97,7 +88,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			bool basic = eventBasicRadio.Checked || !eventCustomRadio.Checked;
 			onEventBasicPanel.Visible = basic;
-			onEventCustomText.Visible = !basic;
+			onEventCustomPanel.Visible = !basic;
 		}
 
 		private int? EventId
@@ -143,7 +134,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventSources(TargetServer, onEventLogCombo.Text));
+			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventProviders(TargetServer, onEventLogCombo.Text));
 			UpdateCustomText();
 			OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 		}
@@ -192,6 +183,18 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			string xml = trigger == null ? EventTrigger.BuildQuery(onEventLogCombo.Text, 
 				onEventSourceCombo.Text.Length == 0 ? null : onEventSourceCombo.Text, this.EventId) : trigger.Subscription;
 			onEventCustomText.Text = GetFormattedXmlString(xml);
+		}
+
+		private void editBtn_Click(object sender, EventArgs e)
+		{
+			using (var dlg = new EventActionFilterEditor(onEventCustomText.Text))
+			{
+				if (dlg.ShowDialog(this) == DialogResult.OK)
+				{
+					onEventCustomText.Text = dlg.Subscription;
+					eventBasicRadio.Enabled = TrySetBasic();
+				}
+			}
 		}
 	}
 }
