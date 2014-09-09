@@ -53,18 +53,18 @@ namespace TestTaskService
 						break;
 					case 'F':
 						FindTaskWithProperty(ts, Console.Out, newArgs[5]);
-						Console.ReadKey();
+						Console.Read();
 						break;
 					case 'S':
 						ShortTest(ts, Console.Out);
-						Console.ReadKey();
+						Console.Read();
 						break;
 					case 'M':
 						MMCTest(ts, Console.Out);
 						break;
 					default:
 						LongTest(ts, Console.Out);
-						Console.ReadKey();
+						Console.Read();
 						break;
 				}
 			}
@@ -248,17 +248,19 @@ namespace TestTaskService
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Test for XP SP3";
 				td.RegistrationInfo.Author = "incaunu";
-				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
-				//EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
-				//eTrig.ValueQueries.Add("Name", "Value");
-				//td.Triggers.Add(eTrig);
-				td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
+				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
+				eTrig.ValueQueries.Add("Name", "Value");
+				td.Triggers.Add(eTrig);
+				//td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
+				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com", "How you been?", "smtp.codeplex.com"));
+				ea.HeaderFields.Add("reply-to", "dh@mail.com");
 				//WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 				System.Converter<DateTime, string> d = delegate(DateTime ints) { return ints == DateTime.MinValue ? "Never" : ints.ToString(); };
 				output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 					t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
-				//WriteXml(t);
+				WriteXml(t);
 
 				// Register then show task again
 				while (DisplayTask(ts.GetTask(taskName), true) != null)
@@ -373,6 +375,19 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
+				string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
+					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>" +
+					"</Query></QueryList>";
+				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Security\">" +
+					"<Select Path=\"Security\">*[System[(Computer='dahall1') and (Level=1) and (band(Keywords,36028797018963968)) and (EventID=45 or (EventID &gt;= 10 and EventID &lt;= 99)) and Security[@UserID='S-1-5-21-839522115-1383384898-515967899-301783'] and TimeCreated[timediff(@SystemTime) &lt;= 43200000]]]</Select>" +
+					"<Suppress Path=\"Security\">*[System[(EventID=78)]]</Suppress>" +
+					"</Query></QueryList>";*/
+				using (var ed = new EventActionFilterEditor() { Subscription = sub })
+				{
+					ed.ShowDialog();
+				}
+				return;
+
 				/*Action<string> d = delegate(string s) { var ar = s.Split('|'); foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(ar[2], @"\(A;(?<Flag>\w*);(?<Right>\w*);(?<Guid>\w*);(?<OIGuid>\w*);(?<Acct>[\w\-\d]*)(?:;[^\)]*)?\)")) output.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", ar[0], ar[1], m.Groups["Flag"], m.Groups["Right"], m.Groups["Guid"], m.Groups["OIGuid"], m.Groups["Acct"]); };
 				FolderTaskAction(ts.RootFolder, delegate(TaskFolder f) { d("F|" + f.Name + "|" + f.GetSecurityDescriptorSddlForm()); }, delegate(Task s) { d("T|" + s.Name + "|" + s.GetSecurityDescriptorSddlForm()); });
 				return;*/

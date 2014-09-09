@@ -365,7 +365,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="triggerId">The id (<see cref="Trigger.Id"/>) of the trigger to be retrieved.</param>
 		/// <returns>
-		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
+		/// The index of <paramref name="triggerId" /> if found in the list; otherwise, -1.
 		/// </returns>
 		public int IndexOf(string triggerId)
 		{

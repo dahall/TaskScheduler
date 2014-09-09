@@ -40,7 +40,10 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.eventCustomRadio = new System.Windows.Forms.RadioButton();
 			this.eventBasicRadio = new System.Windows.Forms.RadioButton();
+			this.onEventCustomPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.editBtn = new System.Windows.Forms.Button();
 			this.onEventBasicPanel.SuspendLayout();
+			this.onEventCustomPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// onEventBasicPanel
@@ -122,12 +125,26 @@
 			this.eventBasicRadio.UseVisualStyleBackColor = true;
 			this.eventBasicRadio.CheckedChanged += new System.EventHandler(this.eventBasicRadio_CheckedChanged);
 			// 
+			// onEventCustomPanel
+			// 
+			resources.ApplyResources(this.onEventCustomPanel, "onEventCustomPanel");
+			this.onEventCustomPanel.Controls.Add(this.onEventCustomText, 0, 0);
+			this.onEventCustomPanel.Controls.Add(this.editBtn, 0, 1);
+			this.onEventCustomPanel.Name = "onEventCustomPanel";
+			// 
+			// editBtn
+			// 
+			resources.ApplyResources(this.editBtn, "editBtn");
+			this.editBtn.Name = "editBtn";
+			this.editBtn.UseVisualStyleBackColor = true;
+			this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
+			// 
 			// EventTriggerUI
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.onEventCustomPanel);
 			this.Controls.Add(this.onEventBasicPanel);
-			this.Controls.Add(this.onEventCustomText);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.eventCustomRadio);
 			this.Controls.Add(this.eventBasicRadio);
@@ -135,6 +152,8 @@
 			this.Name = "EventTriggerUI";
 			this.onEventBasicPanel.ResumeLayout(false);
 			this.onEventBasicPanel.PerformLayout();
+			this.onEventCustomPanel.ResumeLayout(false);
+			this.onEventCustomPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -153,5 +172,7 @@
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.RadioButton eventCustomRadio;
 		private System.Windows.Forms.RadioButton eventBasicRadio;
+		private System.Windows.Forms.TableLayoutPanel onEventCustomPanel;
+		private System.Windows.Forms.Button editBtn;
 	}
 }

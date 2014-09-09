@@ -56,6 +56,25 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	/// <summary>
+	/// Defines the standard keywords that are attached to events by the event provider. For more information about keywords, see <see cref="/>EventKeyword.
+	/// </summary>
+	[Flags]
+	public enum StandardEventKeywords : long
+	{
+		AuditFailure =     0x10000000000000L,
+		AuditSuccess =     0x20000000000000L,
+		[Obsolete("Incorrect value: use CorrelationHint2 instead", false)]
+		CorrelationHint =  0x10000000000000L,
+		CorrelationHint2 = 0x40000000000000L,
+		EventLogClassic =  0x80000000000000L,
+		None =             0L,
+		ResponseTime =     0x01000000000000L,
+		Sqm =              0x08000000000000L,
+		WdiContext =       0x02000000000000L,
+		WdiDiagnostic =    0x04000000000000L
+	}
+
+	/// <summary>
 	/// Represents a placeholder (bookmark) within an event stream. You can use the placeholder to mark a position and return to this position in a stream of events. An instance of this object can be obtained from an EventRecord object, in which case it corresponds to the position of that event record.
 	/// </summary>
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]

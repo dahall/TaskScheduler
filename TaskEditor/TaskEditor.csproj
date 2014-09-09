@@ -105,12 +105,29 @@
     <Compile Include="ActionEditDialog.Designer.cs">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArrayComparer.cs" />
     <Compile Include="ComObjectSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ComObjectSelectionDialog.Designer.cs">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DropDownCheckTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterEditor.Designer.cs">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventActionFilterTimeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterTimeEditor.Designer.cs">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventQueryList.cs" />
     <Compile Include="Native\ControlExtension.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
     <Compile Include="DialogBase.cs">
@@ -153,7 +170,6 @@
     </Compile>
     <Compile Include="Native\CREDUI.cs" />
     <Compile Include="Native\EnumUtil.cs" />
-    <Compile Include="Native\EventLog.cs" />
     <Compile Include="Native\FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -211,7 +227,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskHistoryControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -346,10 +361,18 @@
     <EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorProperties\Resources.de-DE.resx" />
+    <EmbeddedResource Include="EditorProperties\Resources.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.fr.resx" />
     <EmbeddedResource Include="EditorProperties\Resources.it.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterEditor.resx">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterTimeEditor.resx">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventViewerControl.fr.resx">
       <DependentUpon>EventViewerControl.cs</DependentUpon>

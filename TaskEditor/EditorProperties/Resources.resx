@@ -714,4 +714,97 @@ Action: {3}</value>
         AAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAD8AwAA
 </value>
   </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>Invalid ID range pattern</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>If you choose to manually edit the query, you will no longer be able to modify the query using the controls on the Filter tab. Would you like to continue?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>Do you want to use the Filter tab to edit the query ? This will result in manual changes made to the query being discarded.</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>Last 12 hours</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>Any time</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>Custom range...</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>All Events from {0}</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>From {0} to {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>All Events up to {1}</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>Last 24 hours</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>Last hour</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>Audit Failure</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>Audit Success</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>Correlation Hint</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>Response Time</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>SQM</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>WDI Context</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>WDI Diag</value>
+  </data>
+  <data name="EventKeywordsAll" xml:space="preserve">
+    <value>&lt;All Keywords&gt;</value>
+  </data>
+  <data name="EventTasksAll" xml:space="preserve">
+    <value>&lt;All Task Categories&gt;</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>Event Viewer</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>Applications and Services Logs</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Windows Logs</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>Dropped content must be text or a file containing a valid Xml query.</value>
+  </data>
+  <data name="EventLogsAll" xml:space="preserve">
+    <value>&lt;All Logs&gt;</value>
+  </data>
+  <data name="EventSourcesAll" xml:space="preserve">
+    <value>&lt;All Sources&gt;</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>Unrecognized text found in query XML.</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>Offending text: '{0}'</value>
+  </data>
 </root>

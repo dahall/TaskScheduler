@@ -19,58 +19,151 @@ using System.Text;
 
 namespace System.Diagnostics.Eventing.Reader
 {
+	/// <summary>
+	/// PathType
+	/// </summary>
 	public enum PathType
 	{
+		/// <summary>
+		/// The file path
+		/// </summary>
 		FilePath = 2,
+		/// <summary>
+		/// The log name
+		/// </summary>
 		LogName = 1
 	}
 
+	/// <summary>
+	/// SessionAuthentication
+	/// </summary>
 	public enum SessionAuthentication
 	{
+		/// <summary>
+		/// The default
+		/// </summary>
 		Default,
+		/// <summary>
+		/// The negotiate
+		/// </summary>
 		Negotiate,
+		/// <summary>
+		/// The kerberos
+		/// </summary>
 		Kerberos,
+		/// <summary>
+		/// The NTLM
+		/// </summary>
 		Ntlm
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum EventLogIsolation
 	{
+		/// <summary>
+		/// The application
+		/// </summary>
 		Application,
+		/// <summary>
+		/// The system
+		/// </summary>
 		System,
+		/// <summary>
+		/// The custom
+		/// </summary>
 		Custom
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum EventLogMode
 	{
+		/// <summary>
+		/// The circular
+		/// </summary>
 		Circular,
+		/// <summary>
+		/// The automatic backup
+		/// </summary>
 		AutoBackup,
+		/// <summary>
+		/// The retain
+		/// </summary>
 		Retain
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum EventLogType
 	{
+		/// <summary>
+		/// The administrative
+		/// </summary>
 		Administrative,
+		/// <summary>
+		/// The operational
+		/// </summary>
 		Operational,
+		/// <summary>
+		/// The analytical
+		/// </summary>
 		Analytical,
+		/// <summary>
+		/// The debug
+		/// </summary>
 		Debug
 	}
 
 	/// <summary>
-	/// Defines the standard keywords that are attached to events by the event provider. For more information about keywords, see <see cref="/>EventKeyword.
+	/// Defines the standard keywords that are attached to events by the event provider. For more information about keywords, see <see cref="EventKeyword"/>.
 	/// </summary>
 	[Flags]
 	public enum StandardEventKeywords : long
 	{
+		/// <summary>
+		/// The audit failure
+		/// </summary>
 		AuditFailure =     0x10000000000000L,
+		/// <summary>
+		/// The audit success
+		/// </summary>
 		AuditSuccess =     0x20000000000000L,
+		/// <summary>
+		/// The correlation hint
+		/// </summary>
 		[Obsolete("Incorrect value: use CorrelationHint2 instead", false)]
 		CorrelationHint =  0x10000000000000L,
+		/// <summary>
+		/// The correlation hint2
+		/// </summary>
 		CorrelationHint2 = 0x40000000000000L,
+		/// <summary>
+		/// The event log classic
+		/// </summary>
 		EventLogClassic =  0x80000000000000L,
+		/// <summary>
+		/// The none
+		/// </summary>
 		None =             0L,
+		/// <summary>
+		/// The response time
+		/// </summary>
 		ResponseTime =     0x01000000000000L,
+		/// <summary>
+		/// The SQM
+		/// </summary>
 		Sqm =              0x08000000000000L,
+		/// <summary>
+		/// The wdi context
+		/// </summary>
 		WdiContext =       0x02000000000000L,
+		/// <summary>
+		/// The wdi diagnostic
+		/// </summary>
 		WdiDiagnostic =    0x04000000000000L
 	}
 
@@ -346,6 +439,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// EventLogConfiguration
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public class EventLogConfiguration : IDisposable
 	{
@@ -353,8 +449,17 @@ namespace System.Diagnostics.Eventing.Reader
 		private EventLogHandle handle;
 		private EventLogSession session;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogConfiguration"/> class.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
 		public EventLogConfiguration(string logName) : this(logName, null) { }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogConfiguration"/> class.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
+		/// <param name="session">The session.</param>
 		[SecurityCritical]
 		public EventLogConfiguration(string logName, EventLogSession session)
 		{
@@ -369,12 +474,19 @@ namespace System.Diagnostics.Eventing.Reader
 			this.handle = NativeWrapper.EvtOpenChannelConfig(this.session.Handle, this.channelName, 0);
 		}
 
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		[SecuritySafeCritical]
 		protected virtual void Dispose(bool disposing)
 		{
@@ -388,12 +500,21 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Saves the changes.
+		/// </summary>
 		public void SaveChanges()
 		{
 			NativeWrapper.EvtSaveChannelConfig(this.handle, 0);
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets a value indicating whether this instance is classic log.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this instance is classic log; otherwise, <c>false</c>.
+		/// </value>
 		public bool IsClassicLog
 		{
 			get
@@ -402,6 +523,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is enabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this instance is enabled; otherwise, <c>false</c>.
+		/// </value>
 		public bool IsEnabled
 		{
 			get
@@ -414,6 +541,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the log file path.
+		/// </summary>
+		/// <value>
+		/// The log file path.
+		/// </value>
 		public string LogFilePath
 		{
 			get
@@ -426,6 +559,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the log isolation.
+		/// </summary>
+		/// <value>
+		/// The log isolation.
+		/// </value>
 		public EventLogIsolation LogIsolation
 		{
 			get
@@ -434,6 +573,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the log mode.
+		/// </summary>
+		/// <value>
+		/// The log mode.
+		/// </value>
 		public EventLogMode LogMode
 		{
 			get
@@ -471,6 +616,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
 		public string LogName
 		{
 			get
@@ -479,6 +630,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the log.
+		/// </summary>
+		/// <value>
+		/// The type of the log.
+		/// </value>
 		public EventLogType LogType
 		{
 			get
@@ -487,6 +644,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the maximum size in bytes.
+		/// </summary>
+		/// <value>
+		/// The maximum size in bytes.
+		/// </value>
 		public long MaximumSizeInBytes
 		{
 			get
@@ -499,6 +662,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the owning provider.
+		/// </summary>
+		/// <value>
+		/// The name of the owning provider.
+		/// </value>
 		public string OwningProviderName
 		{
 			get
@@ -507,6 +676,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the size of the provider buffer.
+		/// </summary>
+		/// <value>
+		/// The size of the provider buffer.
+		/// </value>
 		public int? ProviderBufferSize
 		{
 			get
@@ -520,6 +695,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider control unique identifier.
+		/// </summary>
+		/// <value>
+		/// The provider control unique identifier.
+		/// </value>
 		public Guid? ProviderControlGuid
 		{
 			get
@@ -528,6 +709,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the provider keywords.
+		/// </summary>
+		/// <value>
+		/// The provider keywords.
+		/// </value>
 		public long? ProviderKeywords
 		{
 			get
@@ -545,6 +732,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider latency.
+		/// </summary>
+		/// <value>
+		/// The provider latency.
+		/// </value>
 		public int? ProviderLatency
 		{
 			get
@@ -558,6 +751,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the provider level.
+		/// </summary>
+		/// <value>
+		/// The provider level.
+		/// </value>
 		public int? ProviderLevel
 		{
 			get
@@ -575,6 +774,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider maximum number of buffers.
+		/// </summary>
+		/// <value>
+		/// The provider maximum number of buffers.
+		/// </value>
 		public int? ProviderMaximumNumberOfBuffers
 		{
 			get
@@ -588,6 +793,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider minimum number of buffers.
+		/// </summary>
+		/// <value>
+		/// The provider minimum number of buffers.
+		/// </value>
 		public int? ProviderMinimumNumberOfBuffers
 		{
 			get
@@ -601,6 +812,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider names.
+		/// </summary>
+		/// <value>
+		/// The provider names.
+		/// </value>
 		public IEnumerable<string> ProviderNames
 		{
 			get
@@ -609,6 +826,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the security descriptor.
+		/// </summary>
+		/// <value>
+		/// The security descriptor.
+		/// </value>
 		public string SecurityDescriptor
 		{
 			get
@@ -1562,6 +1785,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class EventLogSession : IDisposable
 	{
 		internal EventLogHandle renderContextHandleSystem;
@@ -1580,6 +1806,9 @@ namespace System.Diagnostics.Eventing.Reader
 		private string user;
 
 		// Methods
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogSession"/> class.
+		/// </summary>
 		[SecurityCritical]
 		public EventLogSession()
 		{
@@ -1590,11 +1819,23 @@ namespace System.Diagnostics.Eventing.Reader
 			this.syncObject = new object();
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogSession"/> class.
+		/// </summary>
+		/// <param name="server">The server.</param>
 		public EventLogSession(string server)
 			: this(server, null, null, null, SessionAuthentication.Default)
 		{
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogSession"/> class.
+		/// </summary>
+		/// <param name="server">The server.</param>
+		/// <param name="domain">The domain.</param>
+		/// <param name="user">The user.</param>
+		/// <param name="password">The password.</param>
+		/// <param name="logOnType">Type of the log on.</param>
 		[SecurityCritical]
 		public EventLogSession(string server, string domain, string user, SecureString password, SessionAuthentication logOnType)
 		{
@@ -1632,6 +1873,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the global session.
+		/// </summary>
+		/// <value>
+		/// The global session.
+		/// </value>
 		public static EventLogSession GlobalSession
 		{
 			get
@@ -1648,16 +1895,29 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Cancels the current operations.
+		/// </summary>
 		public void CancelCurrentOperations()
 		{
 			NativeWrapper.EvtCancel(this.handle);
 		}
 
+		/// <summary>
+		/// Clears the log.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
 		public void ClearLog(string logName)
 		{
 			this.ClearLog(logName, null);
 		}
 
+		/// <summary>
+		/// Clears the log.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
+		/// <param name="backupPath">The backup path.</param>
+		/// <exception cref="System.ArgumentNullException">logName</exception>
 		public void ClearLog(string logName, string backupPath)
 		{
 			if (logName == null)
@@ -1667,17 +1927,41 @@ namespace System.Diagnostics.Eventing.Reader
 			NativeWrapper.EvtClearLog(this.Handle, logName, backupPath, 0);
 		}
 
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Exports the log.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		/// <param name="pathType">Type of the path.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="targetFilePath">The target file path.</param>
 		public void ExportLog(string path, PathType pathType, string query, string targetFilePath)
 		{
 			this.ExportLog(path, pathType, query, targetFilePath, false);
 		}
 
+		/// <summary>
+		/// Exports the log.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		/// <param name="pathType">Type of the path.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="targetFilePath">The target file path.</param>
+		/// <param name="tolerateQueryErrors">if set to <c>true</c> [tolerate query errors].</param>
+		/// <exception cref="System.ArgumentNullException">
+		/// path
+		/// or
+		/// targetFilePath
+		/// </exception>
+		/// <exception cref="System.ArgumentOutOfRangeException">pathType</exception>
 		public void ExportLog(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors)
 		{
 			UnsafeNativeMethods.EvtExportLogFlags evtExportLogChannelPath;
@@ -1712,11 +1996,27 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Exports the log and messages.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		/// <param name="pathType">Type of the path.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="targetFilePath">The target file path.</param>
 		public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath)
 		{
 			this.ExportLogAndMessages(path, pathType, query, targetFilePath, false, CultureInfo.CurrentCulture);
 		}
 
+		/// <summary>
+		/// Exports the log and messages.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		/// <param name="pathType">Type of the path.</param>
+		/// <param name="query">The query.</param>
+		/// <param name="targetFilePath">The target file path.</param>
+		/// <param name="tolerateQueryErrors">if set to <c>true</c> [tolerate query errors].</param>
+		/// <param name="targetCultureInfo">The target culture information.</param>
 		public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors, CultureInfo targetCultureInfo)
 		{
 			if (targetCultureInfo == null)
@@ -1727,6 +2027,13 @@ namespace System.Diagnostics.Eventing.Reader
 			NativeWrapper.EvtArchiveExportedLog(this.Handle, targetFilePath, targetCultureInfo.LCID, 0);
 		}
 
+		/// <summary>
+		/// Gets the log information.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
+		/// <param name="pathType">Type of the path.</param>
+		/// <returns></returns>
+		/// <exception cref="System.ArgumentNullException">logName</exception>
 		public EventLogInformation GetLogInformation(string logName, PathType pathType)
 		{
 			if (logName == null)
@@ -1736,6 +2043,10 @@ namespace System.Diagnostics.Eventing.Reader
 			return new EventLogInformation(this, logName, pathType);
 		}
 
+		/// <summary>
+		/// Gets the log names.
+		/// </summary>
+		/// <returns></returns>
 		[SecurityCritical]
 		public IEnumerable<string> GetLogNames()
 		{
@@ -1757,6 +2068,10 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the provider names.
+		/// </summary>
+		/// <returns></returns>
 		[SecurityCritical]
 		public IEnumerable<string> GetProviderNames()
 		{
@@ -1807,6 +2122,11 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		/// <exception cref="System.InvalidOperationException"></exception>
 		[SecurityTreatAsSafe, SecurityCritical]
 		protected virtual void Dispose(bool disposing)
 		{
@@ -2087,6 +2407,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			get
@@ -2096,6 +2422,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public string Name
 		{
 			get
@@ -2105,6 +2437,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the value.
+		/// </summary>
+		/// <value>
+		/// The value.
+		/// </value>
 		public int Value
 		{
 			get
@@ -2840,6 +3178,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public sealed class EventTask
 	{
@@ -2872,6 +3213,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			get
@@ -2881,6 +3228,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the event unique identifier.
+		/// </summary>
+		/// <value>
+		/// The event unique identifier.
+		/// </value>
 		public Guid EventGuid
 		{
 			get
@@ -2890,6 +3243,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public string Name
 		{
 			get
@@ -2899,6 +3258,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the value.
+		/// </summary>
+		/// <value>
+		/// The value.
+		/// </value>
 		public int Value
 		{
 			get
@@ -2934,6 +3299,9 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public class ProviderMetadata : IDisposable
 	{
@@ -2957,11 +3325,21 @@ namespace System.Diagnostics.Eventing.Reader
 		private IList<EventTask> tasks;
 
 		// Methods
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProviderMetadata"/> class.
+		/// </summary>
+		/// <param name="providerName">Name of the provider.</param>
 		public ProviderMetadata(string providerName)
 			: this(providerName, null, null, null)
 		{
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProviderMetadata"/> class.
+		/// </summary>
+		/// <param name="providerName">Name of the provider.</param>
+		/// <param name="session">The session.</param>
+		/// <param name="targetCultureInfo">The target culture information.</param>
 		public ProviderMetadata(string providerName, EventLogSession session, CultureInfo targetCultureInfo)
 			: this(providerName, session, targetCultureInfo, null)
 		{
@@ -2999,6 +3377,12 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		// Properties
+		/// <summary>
+		/// Gets the display name.
+		/// </summary>
+		/// <value>
+		/// The display name.
+		/// </value>
 		public string DisplayName
 		{
 			[SecurityCritical]
@@ -3014,6 +3398,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the events.
+		/// </summary>
+		/// <value>
+		/// The events.
+		/// </value>
 		public IEnumerable<EventMetadata> Events
 		{
 			[SecurityCritical]
@@ -3059,6 +3449,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the help link.
+		/// </summary>
+		/// <value>
+		/// The help link.
+		/// </value>
 		public Uri HelpLink
 		{
 			get
@@ -3072,6 +3468,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
 		public Guid Id
 		{
 			get
@@ -3080,6 +3482,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the keywords.
+		/// </summary>
+		/// <value>
+		/// The keywords.
+		/// </value>
 		public IList<EventKeyword> Keywords
 		{
 			get
@@ -3096,6 +3504,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the levels.
+		/// </summary>
+		/// <value>
+		/// The levels.
+		/// </value>
 		public IList<EventLevel> Levels
 		{
 			get
@@ -3112,6 +3526,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the log links.
+		/// </summary>
+		/// <value>
+		/// The log links.
+		/// </value>
 		public IList<EventLogLink> LogLinks
 		{
 			[SecurityCritical]
@@ -3196,6 +3616,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the message file path.
+		/// </summary>
+		/// <value>
+		/// The message file path.
+		/// </value>
 		public string MessageFilePath
 		{
 			get
@@ -3204,6 +3630,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public string Name
 		{
 			get
@@ -3212,6 +3644,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the opcodes.
+		/// </summary>
+		/// <value>
+		/// The opcodes.
+		/// </value>
 		public IList<EventOpcode> Opcodes
 		{
 			get
@@ -3228,6 +3666,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the parameter file path.
+		/// </summary>
+		/// <value>
+		/// The parameter file path.
+		/// </value>
 		public string ParameterFilePath
 		{
 			get
@@ -3236,6 +3680,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the resource file path.
+		/// </summary>
+		/// <value>
+		/// The resource file path.
+		/// </value>
 		public string ResourceFilePath
 		{
 			get
@@ -3244,6 +3694,12 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Gets the tasks.
+		/// </summary>
+		/// <value>
+		/// The tasks.
+		/// </value>
 		public IList<EventTask> Tasks
 		{
 			get
@@ -3276,6 +3732,9 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
@@ -3505,6 +3964,10 @@ namespace System.Diagnostics.Eventing.Reader
 			return obj2;
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		[SecurityCritical, SecurityTreatAsSafe]
 		protected virtual void Dispose(bool disposing)
 		{
