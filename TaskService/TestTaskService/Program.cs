@@ -453,7 +453,7 @@ namespace TestTaskService
 		{
 			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-			Version ver = TaskService.LibraryVersion;
+			Version ver = ts.HighestSupportedVersion;
 			bool isV12 = (ver >= new Version(1, 2));
 			bool isV13 = (ver >= new Version(1, 3));
 			bool isV14 = (ver >= new Version(1, 4));
@@ -547,7 +547,8 @@ namespace TestTaskService
 				td.Data = "Your data";
 				//td.Principal.UserId = "SYSTEM";
 				//td.Principal.LogonType = TaskLogonType.ServiceAccount;
-				td.Principal.LogonType = TaskLogonType.S4U;
+				if (isV12)
+					td.Principal.LogonType = TaskLogonType.S4U;
 				td.RegistrationInfo.Author = "dahall";
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
@@ -602,9 +603,12 @@ namespace TestTaskService
 				{
 					td.Settings.Compatibility = TaskCompatibility.V2_2;
 					td.Settings.Volatile = true;
-					td.Settings.MaintenanceSettings.Exclusive = true;
-					td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(5);
-					td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);
+					if (td.Principal.LogonType == TaskLogonType.ServiceAccount)
+					{
+						td.Settings.MaintenanceSettings.Exclusive = true;
+						td.Settings.MaintenanceSettings.Period = TimeSpan.FromDays(5);
+						td.Settings.MaintenanceSettings.Deadline = TimeSpan.FromDays(15);
+					}
 				}
 
 				// Setup Triggers
@@ -614,15 +618,14 @@ namespace TestTaskService
 					if (isV12) bTrigger.Delay = TimeSpan.FromMinutes(5);
 				}
 
-				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
-				dTrigger.DaysInterval = 2;
+				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				if (isV12) dTrigger.RandomDelay = TimeSpan.FromHours(2);
 
 				if (isV12)
 				{
-					/*EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
+					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
-					eTrigger.ValueQueries.Add("Name", "Value");*/
+					eTrigger.ValueQueries.Add("Name", "Value");
 
 					td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
@@ -674,14 +677,17 @@ namespace TestTaskService
 				if (isV12)
 				{
 					td.Actions.Context = "Author";
-					/*if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group)
+					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group || td.Principal.LogonType == TaskLogonType.S4U)
 						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
-					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com"));*/
+					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { "c:\\findout.txt" } });
+					var email = (EmailAction)td.Actions["Email"];
+					email.HeaderFields.Add("Precedence", "bulk");
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 
-				// Register task
+				// Validate and Register task
 				WriteXml(td, "PreRegTest");
+				td.Validate(true);
 				Task t = tf.RegisterTaskDefinition("Test", td);
 				WriteXml(t);
 
