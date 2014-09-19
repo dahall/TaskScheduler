@@ -65,10 +65,9 @@
     <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AeroWizard">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AeroWizard, Version=2.0.4.20024, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
-      <Aliases>global</Aliases>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>

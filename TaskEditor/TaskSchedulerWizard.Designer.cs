@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskSchedulerWizard));
-			Microsoft.Win32.TaskScheduler.EventTrigger eventTrigger1 = new Microsoft.Win32.TaskScheduler.EventTrigger();
 			this.wizardControl1 = new AeroWizard.WizardControl();
 			this.introPage = new AeroWizard.WizardPage();
 			this.nameText = new System.Windows.Forms.TextBox();
@@ -40,13 +39,6 @@
 			this.triggerSelectionList = new GroupControls.RadioButtonList();
 			this.dailyTriggerPage = new AeroWizard.WizardPage();
 			this.dailyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI();
-			this.triggerPropPage = new AeroWizard.WizardPage();
-			this.triggerPropText = new System.Windows.Forms.Label();
-			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
-			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
-			this.durationLabel = new System.Windows.Forms.Label();
-			this.enabledCheckBox = new System.Windows.Forms.CheckBox();
-			this.repeatCheckBox = new System.Windows.Forms.CheckBox();
 			this.oneTimeTriggerPage = new AeroWizard.WizardPage();
 			this.oneTimeStartTimePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
 			this.oneTimeStartLabel = new System.Windows.Forms.Label();
@@ -56,10 +48,21 @@
 			this.monthlyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI();
 			this.onEventTriggerPage = new AeroWizard.WizardPage();
 			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
+			this.triggerPropPage = new AeroWizard.WizardPage();
+			this.triggerPropText = new System.Windows.Forms.Label();
+			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.durationLabel = new System.Windows.Forms.Label();
+			this.enabledCheckBox = new System.Windows.Forms.CheckBox();
+			this.repeatCheckBox = new System.Windows.Forms.CheckBox();
 			this.actionSelectPage = new AeroWizard.WizardPage();
 			this.actionSelectionList = new GroupControls.RadioButtonList();
 			this.runActionPage = new AeroWizard.WizardPage();
 			this.execActionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI();
+			this.emailActionPage = new AeroWizard.WizardPage();
+			this.emailActionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI();
+			this.msgActionPage = new AeroWizard.WizardPage();
+			this.showMessageActionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI();
 			this.secOptPage = new AeroWizard.WizardPage();
 			this.taskLocalOnlyCheck = new System.Windows.Forms.CheckBox();
 			this.taskLoggedOptionalRadio = new System.Windows.Forms.RadioButton();
@@ -67,10 +70,6 @@
 			this.taskPrincipalText = new System.Windows.Forms.TextBox();
 			this.changePrincipalButton = new System.Windows.Forms.Button();
 			this.taskUserAcctLabel = new System.Windows.Forms.Label();
-			this.emailActionPage = new AeroWizard.WizardPage();
-			this.emailActionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI();
-			this.msgActionPage = new AeroWizard.WizardPage();
-			this.showMessageActionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI();
 			this.summaryPage = new AeroWizard.WizardPage();
 			this.sumText = new System.Windows.Forms.TextBox();
 			this.openDlgAfterCheck = new System.Windows.Forms.CheckBox();
@@ -81,17 +80,17 @@
 			this.triggerSelectPage.SuspendLayout();
 			this.triggerSelectionList.SuspendLayout();
 			this.dailyTriggerPage.SuspendLayout();
-			this.triggerPropPage.SuspendLayout();
 			this.oneTimeTriggerPage.SuspendLayout();
 			this.weeklyTriggerPage.SuspendLayout();
 			this.monthlyTriggerPage.SuspendLayout();
 			this.onEventTriggerPage.SuspendLayout();
+			this.triggerPropPage.SuspendLayout();
 			this.actionSelectPage.SuspendLayout();
 			this.actionSelectionList.SuspendLayout();
 			this.runActionPage.SuspendLayout();
-			this.secOptPage.SuspendLayout();
 			this.emailActionPage.SuspendLayout();
 			this.msgActionPage.SuspendLayout();
+			this.secOptPage.SuspendLayout();
 			this.summaryPage.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -174,54 +173,6 @@
 			resources.ApplyResources(this.dailyTriggerUI1, "dailyTriggerUI1");
 			this.dailyTriggerUI1.Name = "dailyTriggerUI1";
 			// 
-			// triggerPropPage
-			// 
-			this.triggerPropPage.Controls.Add(this.triggerPropText);
-			this.triggerPropPage.Controls.Add(this.durationSpan);
-			this.triggerPropPage.Controls.Add(this.repeatSpan);
-			this.triggerPropPage.Controls.Add(this.durationLabel);
-			this.triggerPropPage.Controls.Add(this.enabledCheckBox);
-			this.triggerPropPage.Controls.Add(this.repeatCheckBox);
-			this.triggerPropPage.Name = "triggerPropPage";
-			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
-			this.triggerPropPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.triggerPropPage_Initialize);
-			// 
-			// triggerPropText
-			// 
-			resources.ApplyResources(this.triggerPropText, "triggerPropText");
-			this.triggerPropText.Name = "triggerPropText";
-			// 
-			// durationSpan
-			// 
-			resources.ApplyResources(this.durationSpan, "durationSpan");
-			this.durationSpan.Name = "durationSpan";
-			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
-			// 
-			// repeatSpan
-			// 
-			resources.ApplyResources(this.repeatSpan, "repeatSpan");
-			this.repeatSpan.Name = "repeatSpan";
-			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
-			// 
-			// durationLabel
-			// 
-			resources.ApplyResources(this.durationLabel, "durationLabel");
-			this.durationLabel.Name = "durationLabel";
-			// 
-			// enabledCheckBox
-			// 
-			resources.ApplyResources(this.enabledCheckBox, "enabledCheckBox");
-			this.enabledCheckBox.Name = "enabledCheckBox";
-			this.enabledCheckBox.UseVisualStyleBackColor = true;
-			this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
-			// 
-			// repeatCheckBox
-			// 
-			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
-			this.repeatCheckBox.Name = "repeatCheckBox";
-			this.repeatCheckBox.UseVisualStyleBackColor = true;
-			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
-			// 
 			// oneTimeTriggerPage
 			// 
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartTimePicker);
@@ -283,6 +234,54 @@
 			this.eventTriggerUI1.Name = "eventTriggerUI1";
 			this.eventTriggerUI1.TriggerChanged += new System.ComponentModel.PropertyChangedEventHandler(this.eventTriggerUI1_TriggerChanged);
 			// 
+			// triggerPropPage
+			// 
+			this.triggerPropPage.Controls.Add(this.triggerPropText);
+			this.triggerPropPage.Controls.Add(this.durationSpan);
+			this.triggerPropPage.Controls.Add(this.repeatSpan);
+			this.triggerPropPage.Controls.Add(this.durationLabel);
+			this.triggerPropPage.Controls.Add(this.enabledCheckBox);
+			this.triggerPropPage.Controls.Add(this.repeatCheckBox);
+			this.triggerPropPage.Name = "triggerPropPage";
+			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
+			this.triggerPropPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.triggerPropPage_Initialize);
+			// 
+			// triggerPropText
+			// 
+			resources.ApplyResources(this.triggerPropText, "triggerPropText");
+			this.triggerPropText.Name = "triggerPropText";
+			// 
+			// durationSpan
+			// 
+			resources.ApplyResources(this.durationSpan, "durationSpan");
+			this.durationSpan.Name = "durationSpan";
+			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
+			// 
+			// repeatSpan
+			// 
+			resources.ApplyResources(this.repeatSpan, "repeatSpan");
+			this.repeatSpan.Name = "repeatSpan";
+			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
+			// 
+			// durationLabel
+			// 
+			resources.ApplyResources(this.durationLabel, "durationLabel");
+			this.durationLabel.Name = "durationLabel";
+			// 
+			// enabledCheckBox
+			// 
+			resources.ApplyResources(this.enabledCheckBox, "enabledCheckBox");
+			this.enabledCheckBox.Name = "enabledCheckBox";
+			this.enabledCheckBox.UseVisualStyleBackColor = true;
+			this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
+			// 
+			// repeatCheckBox
+			// 
+			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
+			this.repeatCheckBox.Name = "repeatCheckBox";
+			this.repeatCheckBox.UseVisualStyleBackColor = true;
+			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
+			// 
 			// actionSelectPage
 			// 
 			this.actionSelectPage.AllowNext = false;
@@ -312,6 +311,36 @@
 			resources.ApplyResources(this.execActionUI1, "execActionUI1");
 			this.execActionUI1.Name = "execActionUI1";
 			this.execActionUI1.KeyValueChanged += new System.EventHandler(this.execActionUI1_KeyValueChanged);
+			// 
+			// emailActionPage
+			// 
+			this.emailActionPage.AllowNext = false;
+			this.emailActionPage.Controls.Add(this.emailActionUI1);
+			this.emailActionPage.Name = "emailActionPage";
+			this.emailActionPage.NextPage = this.msgActionPage;
+			resources.ApplyResources(this.emailActionPage, "emailActionPage");
+			this.emailActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.emailActionPage_Commit);
+			// 
+			// emailActionUI1
+			// 
+			resources.ApplyResources(this.emailActionUI1, "emailActionUI1");
+			this.emailActionUI1.Name = "emailActionUI1";
+			this.emailActionUI1.KeyValueChanged += new System.EventHandler(this.emailActionUI1_KeyValueChanged);
+			// 
+			// msgActionPage
+			// 
+			this.msgActionPage.AllowNext = false;
+			this.msgActionPage.Controls.Add(this.showMessageActionUI1);
+			this.msgActionPage.Name = "msgActionPage";
+			this.msgActionPage.NextPage = this.secOptPage;
+			resources.ApplyResources(this.msgActionPage, "msgActionPage");
+			this.msgActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.msgActionPage_Commit);
+			// 
+			// showMessageActionUI1
+			// 
+			resources.ApplyResources(this.showMessageActionUI1, "showMessageActionUI1");
+			this.showMessageActionUI1.Name = "showMessageActionUI1";
+			this.showMessageActionUI1.KeyValueChanged += new System.EventHandler(this.showMessageActionUI1_KeyValueChanged);
 			// 
 			// secOptPage
 			// 
@@ -366,36 +395,6 @@
 			resources.ApplyResources(this.taskUserAcctLabel, "taskUserAcctLabel");
 			this.taskUserAcctLabel.Name = "taskUserAcctLabel";
 			// 
-			// emailActionPage
-			// 
-			this.emailActionPage.AllowNext = false;
-			this.emailActionPage.Controls.Add(this.emailActionUI1);
-			this.emailActionPage.Name = "emailActionPage";
-			this.emailActionPage.NextPage = this.msgActionPage;
-			resources.ApplyResources(this.emailActionPage, "emailActionPage");
-			this.emailActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.emailActionPage_Commit);
-			// 
-			// emailActionUI1
-			// 
-			resources.ApplyResources(this.emailActionUI1, "emailActionUI1");
-			this.emailActionUI1.Name = "emailActionUI1";
-			this.emailActionUI1.KeyValueChanged += new System.EventHandler(this.emailActionUI1_KeyValueChanged);
-			// 
-			// msgActionPage
-			// 
-			this.msgActionPage.AllowNext = false;
-			this.msgActionPage.Controls.Add(this.showMessageActionUI1);
-			this.msgActionPage.Name = "msgActionPage";
-			this.msgActionPage.NextPage = this.secOptPage;
-			resources.ApplyResources(this.msgActionPage, "msgActionPage");
-			this.msgActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.msgActionPage_Commit);
-			// 
-			// showMessageActionUI1
-			// 
-			resources.ApplyResources(this.showMessageActionUI1, "showMessageActionUI1");
-			this.showMessageActionUI1.Name = "showMessageActionUI1";
-			this.showMessageActionUI1.KeyValueChanged += new System.EventHandler(this.showMessageActionUI1_KeyValueChanged);
-			// 
 			// summaryPage
 			// 
 			this.summaryPage.Controls.Add(this.sumText);
@@ -441,21 +440,21 @@
 			this.triggerSelectPage.ResumeLayout(false);
 			this.triggerSelectionList.ResumeLayout(true);
 			this.dailyTriggerPage.ResumeLayout(false);
-			this.triggerPropPage.ResumeLayout(false);
-			this.triggerPropPage.PerformLayout();
 			this.oneTimeTriggerPage.ResumeLayout(false);
 			this.oneTimeTriggerPage.PerformLayout();
 			this.weeklyTriggerPage.ResumeLayout(false);
 			this.monthlyTriggerPage.ResumeLayout(false);
 			this.onEventTriggerPage.ResumeLayout(false);
+			this.triggerPropPage.ResumeLayout(false);
+			this.triggerPropPage.PerformLayout();
 			this.actionSelectPage.ResumeLayout(false);
 			this.actionSelectPage.PerformLayout();
 			this.actionSelectionList.ResumeLayout(true);
 			this.runActionPage.ResumeLayout(false);
-			this.secOptPage.ResumeLayout(false);
-			this.secOptPage.PerformLayout();
 			this.emailActionPage.ResumeLayout(false);
 			this.msgActionPage.ResumeLayout(false);
+			this.secOptPage.ResumeLayout(false);
+			this.secOptPage.PerformLayout();
 			this.summaryPage.ResumeLayout(false);
 			this.summaryPage.PerformLayout();
 			this.ResumeLayout(false);
