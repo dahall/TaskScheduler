@@ -501,6 +501,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Sets the repetition.
+		/// </summary>
+		/// <param name="interval">The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</param>
+		/// <param name="duration">The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.</param>
+		/// <param name="stopAtDurationEnd">if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
+		public void SetRepetition(TimeSpan interval, TimeSpan duration, bool stopAtDurationEnd = true)
+		{
+			this.Repetition.Duration = duration;
+			this.Repetition.Interval = interval;
+			this.Repetition.StopAtDurationEnd = stopAtDurationEnd;
+		}
+
+		/// <summary>
 		/// Returns a string representing this trigger.
 		/// </summary>
 		/// <returns>String value of trigger.</returns>
