@@ -320,7 +320,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (eventIDs != null && eventIDs.Length > 0)
 			{
 				if (sb.Length > 1) sb.Append(AND);
-				sb.AppendFormat("({0})", string.Join(OR, Array.ConvertAll<int, string>(eventIDs, i => i.ToString())));
+				sb.AppendFormat("({0})", string.Join(OR, Array.ConvertAll<int, string>(eventIDs, i => string.Format("EventID={0}", i))));
 			}
 			if (startTime.HasValue)
 			{
@@ -329,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (sb.Length > 1)
 			{
-				sb.Insert(0, "[System[");
+				sb.Insert(1, "[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and ");
 				sb.Append("]");
 			}
 			if (!string.IsNullOrEmpty(taskName))
@@ -337,8 +337,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (sb.Length == 1)
 					sb.Append("[");
 				else
-					sb.Append(AND);
-				sb.AppendFormat("EventData[Data[@Name=\"TaskName\"]=\"{0}\"]", taskName);
+					sb.Append("]" + AND + "*[");
+				sb.AppendFormat("EventData[Data[@Name='TaskName']='{0}']", taskName);
 			}
 			if (sb.Length > 1)
 				sb.Append("]");
