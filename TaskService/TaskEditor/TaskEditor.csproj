@@ -114,6 +114,12 @@
     <Compile Include="DropDownCheckTree.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EventActionFilterDataEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterDataEditor.Designer.cs">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventActionFilterEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +372,9 @@
     <EmbeddedResource Include="EditorProperties\Resources.fr.resx" />
     <EmbeddedResource Include="EditorProperties\Resources.it.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterDataEditor.resx">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterEditor.resx">
       <DependentUpon>EventActionFilterEditor.cs</DependentUpon>

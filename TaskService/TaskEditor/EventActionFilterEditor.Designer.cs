@@ -62,6 +62,7 @@
 			this.categoryCombo = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.keywordsCombo = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.eventIDsText = new System.Windows.Forms.TextBox();
+			this.dataBtn = new System.Windows.Forms.Button();
 			this.xmlTab = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
@@ -142,6 +143,7 @@
 			this.tableLayoutPanel2.Controls.Add(this.categoryCombo, 1, 6);
 			this.tableLayoutPanel2.Controls.Add(this.keywordsCombo, 1, 7);
 			this.tableLayoutPanel2.Controls.Add(this.eventIDsText, 1, 5);
+			this.tableLayoutPanel2.Controls.Add(this.dataBtn, 0, 10);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			// 
 			// label2
@@ -326,6 +328,13 @@
 			this.eventIDsText.Enter += new System.EventHandler(this.nullableText_Enter);
 			this.eventIDsText.Leave += new System.EventHandler(this.nullableText_Leave);
 			// 
+			// dataBtn
+			// 
+			resources.ApplyResources(this.dataBtn, "dataBtn");
+			this.dataBtn.Name = "dataBtn";
+			this.dataBtn.UseVisualStyleBackColor = true;
+			this.dataBtn.Click += new System.EventHandler(this.dataBtn_Click);
+			// 
 			// xmlTab
 			// 
 			this.xmlTab.Controls.Add(this.tableLayoutPanel4);
@@ -450,5 +459,6 @@
 		private System.Windows.Forms.TextBox queryText;
 		private System.Windows.Forms.ErrorProvider errorProvider;
 		private System.Windows.Forms.CheckBox wrapCheckBox;
+		private System.Windows.Forms.Button dataBtn;
 	}
 }

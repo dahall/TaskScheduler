@@ -111,6 +111,12 @@ namespace Microsoft.Win32.TaskScheduler.Events
 			public List<string> Computers = new List<string>();
 
 			/// <summary>
+			/// The data items (e.g. TaskName) that are being requested
+			/// </summary>
+			[XmlIgnore]
+			public Dictionary<string, string> Data = new Dictionary<string, string>();
+
+			/// <summary>
 			/// The ids
 			/// </summary>
 			[XmlIgnore]
@@ -397,7 +403,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				private const string user = @"Security\s*\[\s*(?:@UserID\s*=\s*'(?<str>[^']+)')\s*\]";
 				private const string OR = " or ";
 				private const string AND = " and ";
-				private const string outerValue = @"^\s*\*\s*(?:\[\s*System\s*\[(.*)\]\s*\]\s*)?$";
+				private const string eventData = @"\s*Data\s*\[\s*@Name\s*=\s*'(?<key>[^']*)'\s*\]\s*=\s*'(?<val>[^']*)'\s*(?:and\s*)?";
 
 				/// <summary>
 				/// Initializes a new instance of the <see cref="CSelect"/> class.
@@ -417,27 +423,36 @@ namespace Microsoft.Win32.TaskScheduler.Events
 
 				private void CheckSelectValue(string value)
 				{
-					string inner = InnerValue(value);
-					if (inner == null) return;
-					string newVal = Regex.Replace(inner, string.Join("|", new string[] { computer, evidrange, evid, keyword, level, prov, tasks, user, time2dates, timedate2end, timestart2date, timediff, AND, @"\s*\(\s*\)\s*", @"\s+" }), string.Empty, RegexOptions.IgnoreCase);
+					string[] inner = InnerValue(value);
+					if (inner[0] == null && inner[1] == null) return;
+					string newVal = Regex.Replace(inner[0], string.Join("|", new string[] { computer, evidrange, evid, keyword, level, prov, tasks, user, time2dates, timedate2end, timestart2date, timediff, AND, @"\s*\(\s*\)\s*", @"\s+" }), string.Empty, RegexOptions.IgnoreCase);
 					newVal = Regex.Replace(newVal, @"\s*\(\s*(?:or\s*)*\)\s*", string.Empty, RegexOptions.IgnoreCase);
+					ThrowIfBadXml(value, newVal, "Select");
+					newVal = Regex.Replace(inner[1], eventData, string.Empty, RegexOptions.IgnoreCase);
 					ThrowIfBadXml(value, newVal, "Select");
 				}
 
 				private void CheckSuppressValue(string value)
 				{
-					string inner = InnerValue(value);
-					if (inner == null) return;
-					string newVal = Regex.Replace(inner, evid, string.Empty, RegexOptions.IgnoreCase);
+					string[] inner = InnerValue(value);
+					if (inner[0] == null) return;
+					string newVal = Regex.Replace(inner[0], evid, string.Empty, RegexOptions.IgnoreCase);
 					ThrowIfBadXml(value, newVal, "Suppress");
 				}
 
-				private string InnerValue(string value)
+				private string[] InnerValue(string value)
 				{
-					Match m = Regex.Match(value, outerValue, RegexOptions.IgnoreCase);
-					if (m.Success && m.Groups.Count > 1)
-						return m.Groups[1].Value;
-					return null;
+					string[] ret = new string[] { null, null };
+					var r = new Regex(@"^\s*\*\s*(?:\[\s*System\s*\[(?<sys>.*)\]\s*\]\s*)?(?:and\s*)?(?:\*\s*\[\s*EventData\s*\[(?<data>.*)\]\s*\]\s*)?$", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.RightToLeft);
+					Match m = r.Match(value);
+					if (m.Success)
+					{
+						if (m.Groups["sys"].Success)
+							ret[0] = m.Groups["sys"].Value;
+						if (m.Groups["data"].Success)
+							ret[1] = m.Groups["data"].Value;
+					}
+					return ret;
 				}
 
 				private void ThrowIfBadXml(string value, string xtraXml, string parentNode)
@@ -519,6 +534,17 @@ namespace Microsoft.Win32.TaskScheduler.Events
 							sb.Insert(1, "[System[");
 							sb.Append("]]");
 						}
+						if (IsSelect && this.Parent.Data.Count > 0)
+						{
+							if (sb.Length > 1)
+								sb.Append(AND + "*");
+							sb.Append("[EventData[");
+							var dataItems = new List<string>();
+							foreach (var kv in this.Parent.Data)
+								dataItems.Add(string.Format("Data[@Name='{0}']='{1}'", kv.Key, kv.Value));
+							sb.Append(string.Join(AND, dataItems.ToArray()));
+							sb.Append("]]");
+						}
 						return sb.ToString();
 					}
 					set
@@ -573,6 +599,13 @@ namespace Microsoft.Win32.TaskScheduler.Events
 								}
 								if (s.HasValue || e.HasValue)
 									this.Parent.Times = new CTimeCreated(s, e);
+							}
+							// Data value
+							var regex = new Regex(eventData, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+							foreach (Match m in regex.Matches(value))
+							{
+								if (m.Groups["key"].Success && m.Groups["val"].Success)
+									this.Parent.Data.Add(m.Groups["key"].Value, m.Groups["val"].Value);
 							}
 						}
 						else
