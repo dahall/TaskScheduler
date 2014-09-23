@@ -112,6 +112,18 @@ namespace Microsoft.Win32.TaskScheduler
 			ResetFilterControls();
 		}
 
+		private void dataBtn_Click(object sender, EventArgs e)
+		{
+			using (var dlg = new EventActionFilterDataEditor())
+			{
+				dlg.DataItems = new Dictionary<string, string>(ql.Query.Data);
+				if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				{
+					ql.Query.Data = new Dictionary<string, string>(dlg.DataItems);
+				}
+			}
+		}
+
 		private void editManuallyCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			if (internalSet)

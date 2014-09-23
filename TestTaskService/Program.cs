@@ -376,7 +376,10 @@ namespace TestTaskService
 			try
 			{
 				string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
-					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>" +
+					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
+					"*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
+					"*[EventData[Data[@Name='TaskName']='\\Maint' and Data[@Name='EventCode']='0']]" +
+					"</Select>" +
 					"</Query></QueryList>";
 				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Security\">" +
 					"<Select Path=\"Security\">*[System[(Computer='dahall1') and (Level=1) and (band(Keywords,36028797018963968)) and (EventID=45 or (EventID &gt;= 10 and EventID &lt;= 99)) and Security[@UserID='S-1-5-21-839522115-1383384898-515967899-301783'] and TimeCreated[timediff(@SystemTime) &lt;= 43200000]]]</Select>" +
