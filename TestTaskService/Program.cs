@@ -246,15 +246,16 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "Test for XP SP3";
-				td.RegistrationInfo.Author = "incaunu";
-				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
-				EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
+				/*td.RegistrationInfo.Description = "Test for XP SP3";
+				td.RegistrationInfo.Author = "incaunu";*/
+				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 				eTrig.ValueQueries.Add("Name", "Value");
-				td.Triggers.Add(eTrig);
+				td.Triggers.Add(eTrig);*/
 				//td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
-				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com", "How you been?", "smtp.codeplex.com"));
+				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
 				ea.HeaderFields.Add("reply-to", "dh@mail.com");
+				ea.Attachments = new object[] { @"C:\findout.txt", @"C:\RAT2Llog.txt" };
 				//WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 				System.Converter<DateTime, string> d = delegate(DateTime ints) { return ints == DateTime.MinValue ? "Never" : ints.ToString(); };
@@ -375,21 +376,17 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
-				string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
+				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
 					"*[EventData[Data[@Name='TaskName']='\\Maint' and Data[@Name='EventCode']='0']]" +
 					"</Select>" +
 					"</Query></QueryList>";
-				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Security\">" +
-					"<Select Path=\"Security\">*[System[(Computer='dahall1') and (Level=1) and (band(Keywords,36028797018963968)) and (EventID=45 or (EventID &gt;= 10 and EventID &lt;= 99)) and Security[@UserID='S-1-5-21-839522115-1383384898-515967899-301783'] and TimeCreated[timediff(@SystemTime) &lt;= 43200000]]]</Select>" +
-					"<Suppress Path=\"Security\">*[System[(EventID=78)]]</Suppress>" +
-					"</Query></QueryList>";*/
 				using (var ed = new EventActionFilterEditor() { Subscription = sub })
 				{
 					ed.ShowDialog();
 				}
-				return;
+				return;*/
 
 				/*Action<string> d = delegate(string s) { var ar = s.Split('|'); foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(ar[2], @"\(A;(?<Flag>\w*);(?<Right>\w*);(?<Guid>\w*);(?<OIGuid>\w*);(?<Acct>[\w\-\d]*)(?:;[^\)]*)?\)")) output.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", ar[0], ar[1], m.Groups["Flag"], m.Groups["Right"], m.Groups["Guid"], m.Groups["OIGuid"], m.Groups["Acct"]); };
 				FolderTaskAction(ts.RootFolder, delegate(TaskFolder f) { d("F|" + f.Name + "|" + f.GetSecurityDescriptorSddlForm()); }, delegate(Task s) { d("T|" + s.Name + "|" + s.GetSecurityDescriptorSddlForm()); });

@@ -14,7 +14,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void emailAttachementBrowseBtn_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-				emailAttachmentText.Text = openFileDialog1.FileName;
+				emailAttachmentText.Text = string.Join(";", openFileDialog1.FileNames);
 		}
 
 		[System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -25,7 +25,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				Action ret = new EmailAction(emailSubjectText.Text, emailFromText.Text,
 					emailToText.Text, emailTextText.Text, emailSMTPText.Text);
 				if (emailAttachmentText.TextLength > 0)
-					((EmailAction)ret).Attachments = new string[] { emailAttachmentText.Text };
+					((EmailAction)ret).Attachments = Array.ConvertAll<string, object>(emailAttachmentText.Text.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries), s => s);
 				return ret;
 			}
 			set
@@ -35,7 +35,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				emailSubjectText.Text = ((EmailAction)value).Subject;
 				emailTextText.Text = ((EmailAction)value).Body;
 				if (((EmailAction)value).Attachments != null && ((EmailAction)value).Attachments.Length > 0)
-					emailAttachmentText.Text = ((EmailAction)value).Attachments[0].ToString();
+					emailAttachmentText.Text = string.Join(";", Array.ConvertAll<object, string>(((EmailAction)value).Attachments, o => (string)o));
 				emailSMTPText.Text = ((EmailAction)value).Server;
 			}
 		}
