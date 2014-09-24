@@ -403,7 +403,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to After triggered, repeat every {0}{1}..
+        ///   Looks up a localized string similar to After triggered, repeat every {0} {1}..
         /// </summary>
         internal static string TriggerRepetition {
             get {
