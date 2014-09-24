@@ -243,7 +243,7 @@
     <value>Bei Aufgabenerstellung oder -modifizierung</value>
   </data>
   <data name="TriggerRepetition" xml:space="preserve">
-    <value>Nach Auslösung, alle {0}{1} wiederholen</value>
+    <value>Nach Auslösung, alle {0} {1} wiederholen</value>
     <comment>0 = Interval; 1= Duration string</comment>
   </data>
   <data name="TriggerSessionConsoleConnect" xml:space="preserve">
