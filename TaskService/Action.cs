@@ -671,7 +671,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets an array of attachments that is sent with the e-mail.
+		/// Gets or sets an array of file paths to be sent as attachments with the e-mail. Each item must be a <see cref="System.String"/> value containing a path to file.
 		/// </summary>
 		[XmlArray("Attachments", IsNullable=true)]
 		[XmlArrayItem(typeof(string), ElementName = "File")]
@@ -680,10 +680,21 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return (iAction == null) ? (unboundValues.ContainsKey("Attachments") ? (object[])unboundValues["Attachments"] : null) : ((V2Interop.IEmailAction)iAction).Attachments; }
 			set
 			{
-				if (value != null && value.Length > 8)
-					throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
+				if (value != null)
+				{
+					if (value.Length > 8)
+						throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
+					foreach (var o in value)
+						if (!(o is string) || !System.IO.File.Exists((string)o))
+							throw new ArgumentException("Each value of the array must contain a valid file reference.", "Attachments");
+				}
 				if (iAction == null)
-					unboundValues["Attachments"] = value;
+				{
+					if (value == null || value.Length == 0)
+						unboundValues.Remove("Attachments");
+					else
+						unboundValues["Attachments"] = value;
+				}
 				else
 					((V2Interop.IEmailAction)iAction).Attachments = value;
 			}
@@ -734,45 +745,79 @@ namespace Microsoft.Win32.TaskScheduler
 			return string.Format(Properties.Resources.EmailAction, this.Subject, this.To, this.Cc, this.Bcc, this.From, this.ReplyTo, this.Body, this.Server, this.Id);
 		}
 
+		private static string FromUTF8(string s)
+		{
+			byte[] bytes = System.Text.Encoding.UTF8.GetBytes(s);
+			return System.Text.Encoding.Default.GetString(bytes);
+		}
+
+		private static string ToUTF8(string s)
+		{
+			byte[] bytes = System.Text.Encoding.Default.GetBytes(s);
+			return System.Text.Encoding.UTF8.GetString(bytes);
+		}
+
 		string IBindAsExecAction.GetPowerShellCommand()
 		{
 			// Send-MailMessage [-To] <String[]> [-Subject] <String> [[-Body] <String> ] [[-SmtpServer] <String> ] -From <String> [-Attachments <String[]> ]
 			//    [-Bcc <String[]> ] [-BodyAsHtml] [-Cc <String[]> ] [-Credential <PSCredential> ] [-DeliveryNotificationOption <DeliveryNotificationOptions> ]
 			//    [-Encoding <Encoding> ] [-Port <Int32> ] [-Priority <MailPriority> ] [-UseSsl] [ <CommonParameters>]
+			bool bodyIsHtml = this.Body != null && this.Body.Trim().StartsWith("<") && this.Body.Trim().EndsWith(">");
 			var sb = new System.Text.StringBuilder();
-			sb.AppendFormat("Send-MailMessage -From \"{0}\" -Subject \"{1}\" -SmtpServer \"{2}\"", this.From, this.Subject, this.Server);
+			sb.AppendFormat("Send-MailMessage -From \"{0}\" -Subject \"{1}\" -SmtpServer \"{2}\" -Encoding [System.Text.Encoding]::UTF8", this.From, ToUTF8(this.Subject), this.Server);
 			if (!string.IsNullOrEmpty(this.To))
 				sb.AppendFormat(" -To {0}", ToPS(this.To));
 			if (!string.IsNullOrEmpty(this.Cc))
 				sb.AppendFormat(" -Cc {0}", ToPS(this.Cc));
 			if (!string.IsNullOrEmpty(this.Bcc))
 				sb.AppendFormat(" -Bcc {0}", ToPS(this.Bcc));
+			if (bodyIsHtml)
+				sb.Append(" -BodyAsHtml");
 			if (!string.IsNullOrEmpty(this.Body))
-				sb.AppendFormat(" -Body \"{0}\"", this.Body);
+				sb.AppendFormat(" -Body \"{0}\"", ToUTF8(this.Body));
 			if (this.Attachments != null && this.Attachments.Length > 0)
-				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, delegate(object o) { return o.ToString(); })));
+				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, o => o.ToString())));
 			return sb.ToString();
+
+			/*var msg = new System.Net.Mail.MailMessage(this.From, this.To, this.Subject, this.Body);
+			if (!string.IsNullOrEmpty(this.Bcc))
+				msg.Bcc.Add(this.Bcc);
+			if (!string.IsNullOrEmpty(this.Cc))
+				msg.CC.Add(this.Cc);
+			if (!string.IsNullOrEmpty(this.ReplyTo))
+				msg.ReplyTo = new System.Net.Mail.MailAddress(this.ReplyTo);
+			if (this.Attachments != null && this.Attachments.Length > 0)
+				foreach (string s in this.Attachments)
+					msg.Attachments.Add(new System.Net.Mail.Attachment(s));
+			if (this.nvc != null)
+				foreach (var ha in this.HeaderFields)
+					msg.Headers.Add(ha.Name, ha.Value);
+			var client = new System.Net.Mail.SmtpClient(this.Server);
+			client.Send(msg);*/
 		}
 
-		internal static string ToPS(string input, char delimeter = ';')
+		internal static string ToPS(string input, char[] delimeters = null)
 		{
-			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeter), delegate(string i) { return i.Trim(); }));
+			if (delimeters == null)
+				delimeters = new char[] { ';', ',' };
+			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeters), i => i.Trim()));
 		}
 
 		internal static string ToPS(string[] input)
 		{
-			return string.Join(", ", Array.ConvertAll<string, string>(input, delegate(string i) { return string.Concat("\"", i.Trim(), "\""); }));
+			return string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("\"", i.Trim(), "\"")));
 		}
 
 		internal static Action FromPowerShellCommand(string p)
 		{
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From ""(?<from>[^""]+)"" -Subject ""(?<subject>[^""]+)"" -SmtpServer ""(?<server>[^""]+)""(?: -To (?<to>""[^""]+""(?:, ""[^""]+"")*))?(?: -Cc (?<cc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Bcc (?<bcc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Body ""(?<body>[^""]+)"")?(?: -Attachments (?<att>""[^""]+""(?:, ""[^""]+"")*))?\s*$");
+
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From ""(?<from>[^""]+)"" -Subject ""(?<subject>[^""]+)"" -SmtpServer ""(?<server>[^""]+)""(?: -Encoding \[System.Text.Encoding\]::UTF8)?(?: -To (?<to>""[^""]+""(?:, ""[^""]+"")*))?(?: -Cc (?<cc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Bcc (?<bcc>""[^""]+""(?:, ""[^""]+"")*))?(?:(?: -BodyAsHtml)? -Body ""(?<body>[^""]+)"")?(?: -Attachments (?<att>""[^""]+""(?:, ""[^""]+"")*))?\s*$");
 			if (match.Success)
 			{
-				EmailAction action = new EmailAction(match.Groups["subject"].Value, match.Groups["from"].Value, FromPS(match.Groups["to"]), FromPS(match.Groups["body"]), match.Groups["server"].Value)
+				EmailAction action = new EmailAction(FromUTF8(match.Groups["subject"].Value), match.Groups["from"].Value, FromPS(match.Groups["to"]), FromUTF8(match.Groups["body"].Value), match.Groups["server"].Value)
 					{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
 				if (match.Groups["att"].Success)
-					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), delegate(string s) { return s; });
+					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
 				return action;
 			}
 			return null;
@@ -781,7 +826,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private static string[] FromPS(string p)
 		{
 			var list = p.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
-			return Array.ConvertAll<string, string>(list, delegate(string i) { return i.Trim('\"'); });
+			return Array.ConvertAll<string, string>(list, i => i.Trim('\"'));
 		}
 
 		private static string FromPS(System.Text.RegularExpressions.Group g, string delimeter = ";")
