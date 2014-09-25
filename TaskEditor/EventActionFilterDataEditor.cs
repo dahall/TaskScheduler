@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	public partial class EventActionFilterDataEditor : Form
+	internal partial class EventActionFilterDataEditor : Form
 	{
 		private DataSet ds = new DataSet();
 		private DataTable dt;
@@ -47,10 +47,6 @@ namespace Microsoft.Win32.TaskScheduler
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			Close();
-		}
-
-		private void EventActionFilterDataEditor_Load(object sender, EventArgs e)
-		{
 		}
 	}
 }

@@ -275,6 +275,14 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the name of the object referred to by <see cref="ClassId"/>.
+		/// </summary>
+		public string ClassName
+		{
+			get { return GetNameForCLSID(this.ClassId); }
+		}
+
+		/// <summary>
 		/// Gets or sets additional data that is associated with the handler.
 		/// </summary>
 		[DefaultValue(null)]
@@ -316,7 +324,25 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String represention this action.</returns>
 		public override string ToString()
 		{
-			return string.Format(Properties.Resources.ComHandlerAction, this.ClassId, this.Data, this.Id);
+			return string.Format(Properties.Resources.ComHandlerAction, this.ClassId, this.Data, this.Id, this.ClassName);
+		}
+
+		/// <summary>
+		/// Gets the name for CLSID.
+		/// </summary>
+		/// <param name="guid">The unique identifier.</param>
+		/// <returns></returns>
+		internal static string GetNameForCLSID(Guid guid)
+		{
+			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
+			{
+				if (k != null)
+				{
+					using (RegistryKey k2 = k.OpenSubKey(guid.ToString("B"), false))
+						return k2 != null ? k2.GetValue(null) as string : null;
+				}
+			}
+			return null;
 		}
 	}
 
@@ -764,7 +790,7 @@ namespace Microsoft.Win32.TaskScheduler
 			//    [-Encoding <Encoding> ] [-Port <Int32> ] [-Priority <MailPriority> ] [-UseSsl] [ <CommonParameters>]
 			bool bodyIsHtml = this.Body != null && this.Body.Trim().StartsWith("<") && this.Body.Trim().EndsWith(">");
 			var sb = new System.Text.StringBuilder();
-			sb.AppendFormat("Send-MailMessage -From \"{0}\" -Subject \"{1}\" -SmtpServer \"{2}\" -Encoding [System.Text.Encoding]::UTF8", this.From, ToUTF8(this.Subject), this.Server);
+			sb.AppendFormat("Send-MailMessage -From '{0}' -Subject '{1}' -SmtpServer '{2}' -Encoding UTF8", Prep(this.From), ToUTF8(Prep(this.Subject)), Prep(this.Server));
 			if (!string.IsNullOrEmpty(this.To))
 				sb.AppendFormat(" -To {0}", ToPS(this.To));
 			if (!string.IsNullOrEmpty(this.Cc))
@@ -774,9 +800,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (bodyIsHtml)
 				sb.Append(" -BodyAsHtml");
 			if (!string.IsNullOrEmpty(this.Body))
-				sb.AppendFormat(" -Body \"{0}\"", ToUTF8(this.Body));
+				sb.AppendFormat(" -Body '{0}'", ToUTF8(Prep(this.Body)));
 			if (this.Attachments != null && this.Attachments.Length > 0)
-				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, o => o.ToString())));
+				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, o => Prep(o.ToString()))));
 			return sb.ToString();
 
 			/*var msg = new System.Net.Mail.MailMessage(this.From, this.To, this.Subject, this.Body);
@@ -796,25 +822,30 @@ namespace Microsoft.Win32.TaskScheduler
 			client.Send(msg);*/
 		}
 
-		internal static string ToPS(string input, char[] delimeters = null)
+		private static string Prep(string s)
+		{
+			return s.Replace("'", "''");
+		}
+
+		private static string ToPS(string input, char[] delimeters = null)
 		{
 			if (delimeters == null)
 				delimeters = new char[] { ';', ',' };
-			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeters), i => i.Trim()));
+			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeters), i => Prep(i.Trim())));
 		}
 
-		internal static string ToPS(string[] input)
+		private static string ToPS(string[] input)
 		{
-			return string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("\"", i.Trim(), "\"")));
+			return string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("'", i.Trim(), "'")));
 		}
 
 		internal static Action FromPowerShellCommand(string p)
 		{
 
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From ""(?<from>[^""]+)"" -Subject ""(?<subject>[^""]+)"" -SmtpServer ""(?<server>[^""]+)""(?: -Encoding \[System.Text.Encoding\]::UTF8)?(?: -To (?<to>""[^""]+""(?:, ""[^""]+"")*))?(?: -Cc (?<cc>""[^""]+""(?:, ""[^""]+"")*))?(?: -Bcc (?<bcc>""[^""]+""(?:, ""[^""]+"")*))?(?:(?: -BodyAsHtml)? -Body ""(?<body>[^""]+)"")?(?: -Attachments (?<att>""[^""]+""(?:, ""[^""]+"")*))?\s*$");
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From '(?<from>(?:[^']|'')*)' -Subject '(?<subject>(?:[^']|'')*)' -SmtpServer '(?<server>(?:[^']|'')*)'(?: -Encoding UTF8)?(?: -To (?<to>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Cc (?<cc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Bcc (?<bcc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?:(?: -BodyAsHtml)? -Body '(?<body>(?:[^']|'')*)')?(?: -Attachments (?<att>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?\s*$");
 			if (match.Success)
 			{
-				EmailAction action = new EmailAction(FromUTF8(match.Groups["subject"].Value), match.Groups["from"].Value, FromPS(match.Groups["to"]), FromUTF8(match.Groups["body"].Value), match.Groups["server"].Value)
+				EmailAction action = new EmailAction(UnPrep(FromUTF8(match.Groups["subject"].Value)), UnPrep(match.Groups["from"].Value), FromPS(match.Groups["to"]), UnPrep(FromUTF8(match.Groups["body"].Value)), UnPrep(match.Groups["server"].Value))
 					{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
 				if (match.Groups["att"].Success)
 					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
@@ -823,10 +854,15 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
+		private static string UnPrep(string s)
+		{
+			return s.Replace("''", "'");
+		}
+
 		private static string[] FromPS(string p)
 		{
 			var list = p.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
-			return Array.ConvertAll<string, string>(list, i => i.Trim('\"'));
+			return Array.ConvertAll<string, string>(list, i => UnPrep(i).Trim('\''));
 		}
 
 		private static string FromPS(System.Text.RegularExpressions.Group g, string delimeter = ";")
@@ -925,11 +961,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			// [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Your_Desired_Message','Your_Desired_Title')
 			var sb = new System.Text.StringBuilder("[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('");
-			sb.Append(this.MessageBody);
+			sb.Append(this.MessageBody.Replace("'", "''"));
 			if (this.Title != null)
 			{
 				sb.Append("','");
-				sb.Append(this.Title);
+				sb.Append(this.Title.Replace("'", "''"));
 			}
 			sb.Append("')");
 			return sb.ToString();
@@ -937,10 +973,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static Action FromPowerShellCommand(string p)
 		{
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[System.Reflection.Assembly\]::LoadWithPartialName\('System.Windows.Forms'\); \[System.Windows.Forms.MessageBox\]::Show\('(?<msg>[^']+)(?:','(?<t>[^']+))?'\)$");
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[System.Reflection.Assembly\]::LoadWithPartialName\('System.Windows.Forms'\); \[System.Windows.Forms.MessageBox\]::Show\('(?<msg>(?:[^']|'')*)'(?:,'(?<t>(?:[^']|'')*)')?\)$");
 			if (match.Success)
 			{
-				return new ShowMessageAction(match.Groups["msg"].Value, match.Groups["t"].Success ? match.Groups["t"].Value : null);
+				return new ShowMessageAction(match.Groups["msg"].Value.Replace("''", "'"), match.Groups["t"].Success ? match.Groups["t"].Value.Replace("''", "'") : null);
 			}
 			return null;
 		}

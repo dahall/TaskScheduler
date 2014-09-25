@@ -143,7 +143,7 @@ namespace Microsoft.Win32.TaskScheduler
 #if DEBUG
 			const string PowerShellArgFormat = "-NoExit -Command \"& {{<# {0}:{1} #> {2}}}\"";
 #else
-			const string PowerShellArgFormat = "-NoLogo -WindowStyle Hidden -Command \"& {{<# {0}:{1} #> {2}}}\"";
+			const string PowerShellArgFormat = "-NoLogo -NonInteractive -WindowStyle Hidden -Command \"& {{<# {0}:{1} #> {2}}}\"";
 #endif
 			const string PowerShellPath = "powershell";
 

@@ -130,8 +130,8 @@
     <value>Display a message</value>
   </data>
   <data name="ComHandlerAction" xml:space="preserve">
-    <value>{0}</value>
-    <comment>0 = Class GUID; 1 = Data; 2 = Id</comment>
+    <value>{3} {0:P}</value>
+    <comment>0 = Class GUID; 1 = Data; 2 = Id; 3 = Name</comment>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
     <value>every day</value>

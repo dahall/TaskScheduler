@@ -103,7 +103,6 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "EventActionFilterDataEditor";
 			this.ShowInTaskbar = false;
-			this.Load += new System.EventHandler(this.EventActionFilterDataEditor_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);

@@ -32,7 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			InitializeComponent();
 			CLSID = Guid.Empty;
-			ServerType = SupportedServers.All;
+			ServerType = SupportedServers.InProcess;
 		}
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the type of COM servers to display.
 		/// </summary>
 		/// <value>The type of the server.</value>
-		[Category("Data"), DefaultValue(typeof(SupportedServers), "All"), Description("The type of COM servers to display.")]
+		[Category("Data"), DefaultValue(typeof(SupportedServers), "InProcess"), Description("The type of COM servers to display.")]
 		public SupportedServers ServerType { get; set; }
 
 		/// <summary>
