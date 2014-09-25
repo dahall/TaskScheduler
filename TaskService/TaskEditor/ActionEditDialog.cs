@@ -160,6 +160,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetCombo()
 		{
+			int curType = actionsCombo.SelectedIndex == -1 ? -1 : Convert.ToInt32(((DropDownCheckListItem)actionsCombo.SelectedItem).Value);
 			actionsCombo.BeginUpdate();
 			actionsCombo.Items.Clear();
 			long allVal;
@@ -175,7 +176,10 @@ namespace Microsoft.Win32.TaskScheduler
 				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.SendEmail));
 				actionsCombo.Items.RemoveAt(actionsCombo.Items.IndexOf((long)TaskActionType.ShowMessage));
 			}
-			actionsCombo.SelectedIndex = 0;
+			if (curType > -1)
+				curType = actionsCombo.Items.IndexOf((long)curType);
+			if (curType == -1) curType = 0;
+			actionsCombo.SelectedIndex = curType;
 			actionsCombo.EndUpdate();
 		}
 

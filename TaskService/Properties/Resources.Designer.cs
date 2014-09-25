@@ -97,7 +97,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}.
+        ///   Looks up a localized string similar to {3} {0:P}.
         /// </summary>
         internal static string ComHandlerAction {
             get {

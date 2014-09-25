@@ -6,7 +6,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class EventActionFilterTimeEditor : Form
+	internal partial class EventActionFilterTimeEditor : Form
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EventActionFilterTimeEditor"/> class.
