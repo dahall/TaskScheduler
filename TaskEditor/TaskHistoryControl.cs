@@ -61,6 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The task whose history is displayed.
 		/// </value>
+		[DefaultValue(null), Browsable(false)]
 		public Task Task
 		{
 			get { return this.task; }
@@ -69,7 +70,8 @@ namespace Microsoft.Win32.TaskScheduler
 				this.task = value;
 				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 				historySplitContainer.Panel2Collapsed = false;
-				vlog = CreateLogInstance();
+				if (value != null)
+					vlog = CreateLogInstance();
 				RefreshHistory();
 			}
 		}

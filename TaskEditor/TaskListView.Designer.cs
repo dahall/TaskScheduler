@@ -60,6 +60,7 @@
 			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
 			this.listView1.ShowGroups = false;
+			this.listView1.ShowItemToolTips = true;
 			this.listView1.SmallImageList = this.smallImageList;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
