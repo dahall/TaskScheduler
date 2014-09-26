@@ -478,7 +478,7 @@
     <value>taskVersionCombo</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.2.27005, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -859,7 +859,7 @@
     <value>NoControl</value>
   </data>
   <data name="triggerDeleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 341</value>
+    <value>174, 339</value>
   </data>
   <data name="triggerDeleteButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -892,7 +892,7 @@
     <value>NoControl</value>
   </data>
   <data name="triggerEditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 341</value>
+    <value>90, 339</value>
   </data>
   <data name="triggerEditButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -925,7 +925,7 @@
     <value>NoControl</value>
   </data>
   <data name="triggerNewButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 341</value>
+    <value>6, 339</value>
   </data>
   <data name="triggerNewButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -982,7 +982,7 @@
     <value>True</value>
   </data>
   <data name="triggerListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 287</value>
+    <value>529, 285</value>
   </data>
   <data name="triggerListView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1156,7 +1156,7 @@
     <value>NoControl</value>
   </data>
   <data name="actionDeleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 341</value>
+    <value>174, 339</value>
   </data>
   <data name="actionDeleteButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1189,7 +1189,7 @@
     <value>NoControl</value>
   </data>
   <data name="actionEditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 341</value>
+    <value>90, 339</value>
   </data>
   <data name="actionEditButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1222,7 +1222,7 @@
     <value>NoControl</value>
   </data>
   <data name="actionNewButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 341</value>
+    <value>6, 339</value>
   </data>
   <data name="actionNewButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1273,7 +1273,7 @@
     <value>True</value>
   </data>
   <data name="actionListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>486, 287</value>
+    <value>486, 285</value>
   </data>
   <data name="actionListView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1600,7 +1600,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1624,7 +1624,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -2260,7 +2260,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2284,7 +2284,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2308,7 +2308,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2884,7 +2884,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.2.27005, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -2941,7 +2941,7 @@
     <value>taskMaintenanceDeadlineCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3064,7 +3064,7 @@
     <value>taskMaintenancePeriodCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.3.31389, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -3385,7 +3385,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.2.27005, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3547,7 +3547,7 @@
     <value>taskHistoryControl1</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.1.0.25442, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.2.27005, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Parent" xml:space="preserve">
     <value>historyTab</value>
@@ -3617,362 +3617,5 @@
   </data>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="$this.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionDeleteButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionDownButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionEditButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionListView.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionNewButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionUpButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="addPropTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="autoMaintGroup.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="availableConnectionsCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="changePrincipalButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader10.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader11.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader6.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader7.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader8.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="columnHeader9.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="conditionIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="conditionsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="generalTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="historyTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="idleConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label4.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label5.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label8.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="networkConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="powerConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalReqPrivilegesDropDown.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalReqPrivilegesLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalSIDTypeCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalSIDTypeLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="regInfoTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="runTimesErrorLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="runTimesTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="secHardGroup.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="settingsIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="settingsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="tabControl.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAllowDemandStartCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAuthorLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAuthorText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDeleteAfterCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDeleteAfterCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDescLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDescText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDisallowStartIfOnBatteriesCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskEnabledCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskHiddenCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskHistoryControl1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleDurationCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleDurationCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleWaitTimeoutCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLocalOnlyCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLocationText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLoggedOnRadio.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenanceDeadlineCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenanceExclusiveCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenancePeriodCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMultInstCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMultInstCombo.Items" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMultInstCombo.Items1" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMultInstCombo.Items2" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMultInstCombo.Items3" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskNameLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskNameText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskPrincipalText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskPriorityCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegDocLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegDocText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSDDLBtn.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSDDLLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSDDLText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSourceLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSourceText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegURILabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegURIText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegVersionLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegVersionText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartCountLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartCountText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartIntervalCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartIntervalCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunLevelCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunningRuleLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunTimesControl1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskSecurityGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStartIfConnectionCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskTriggerIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskUserAcctLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVersionCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVersionCombo.Items" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVersionCombo.Items1" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVersionLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVolatileCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskWakeToRunCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerDeleteButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerEditButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerListView.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerNewButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggersTab.Error" xml:space="preserve">
-    <value></value>
   </data>
 </root>

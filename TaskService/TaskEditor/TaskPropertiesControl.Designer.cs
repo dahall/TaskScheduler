@@ -398,6 +398,7 @@
 			this.triggerListView.HideSelection = false;
 			this.triggerListView.Name = "triggerListView";
 			this.helpProvider.SetShowHelp(this.triggerListView, ((bool)(resources.GetObject("triggerListView.ShowHelp"))));
+			this.triggerListView.ShowItemToolTips = true;
 			this.triggerListView.UseCompatibleStateImageBehavior = false;
 			this.triggerListView.View = System.Windows.Forms.View.Details;
 			this.triggerListView.SelectedIndexChanged += new System.EventHandler(this.triggerListView_SelectedIndexChanged);
@@ -488,6 +489,7 @@
 			this.actionListView.HideSelection = false;
 			this.actionListView.Name = "actionListView";
 			this.helpProvider.SetShowHelp(this.actionListView, ((bool)(resources.GetObject("actionListView.ShowHelp"))));
+			this.actionListView.ShowItemToolTips = true;
 			this.actionListView.UseCompatibleStateImageBehavior = false;
 			this.actionListView.View = System.Windows.Forms.View.Details;
 			this.actionListView.SelectedIndexChanged += new System.EventHandler(this.actionListView_SelectedIndexChanged);
@@ -1077,12 +1079,6 @@
 			this.label1.Name = "label1";
 			this.helpProvider.SetShowHelp(this.label1, ((bool)(resources.GetObject("label1.ShowHelp"))));
 			// 
-			// taskHistoryControl1
-			// 
-			resources.ApplyResources(this.taskHistoryControl1, "taskHistoryControl1");
-			this.taskHistoryControl1.Name = "taskHistoryControl1";
-			this.helpProvider.SetShowHelp(this.taskHistoryControl1, ((bool)(resources.GetObject("taskHistoryControl1.ShowHelp"))));
-			// 
 			// historyTab
 			// 
 			resources.ApplyResources(this.historyTab, "historyTab");
@@ -1093,6 +1089,12 @@
 			this.helpProvider.SetShowHelp(this.historyTab, ((bool)(resources.GetObject("historyTab.ShowHelp"))));
 			this.historyTab.UseVisualStyleBackColor = true;
 			this.historyTab.Enter += new System.EventHandler(this.historyTab_Enter);
+			// 
+			// taskHistoryControl1
+			// 
+			resources.ApplyResources(this.taskHistoryControl1, "taskHistoryControl1");
+			this.taskHistoryControl1.Name = "taskHistoryControl1";
+			this.helpProvider.SetShowHelp(this.taskHistoryControl1, ((bool)(resources.GetObject("taskHistoryControl1.ShowHelp"))));
 			// 
 			// errorProvider
 			// 
