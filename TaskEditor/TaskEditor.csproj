@@ -200,6 +200,30 @@
     <Compile Include="Native\NetworkListManager.cs" />
     <Compile Include="Native\NetworkProfile.cs" />
     <None Include="ComputerInfo.cs" />
+    <Compile Include="OptionPanels\GeneralOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\GeneralOptionPanel.Designer.cs">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanel.Designer.cs">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanelHeaderLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanelHeaderLabel.Designer.cs">
+      <DependentUpon>OptionPanelHeaderLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\TriggersOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\TriggersOptionPanel.Designer.cs">
+      <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -243,6 +267,12 @@
     </Compile>
     <Compile Include="TaskListView.Designer.cs">
       <DependentUpon>TaskListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskOptionsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskOptionsEditor.Designer.cs">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskPropertiesControl.cs">
       <SubType>UserControl</SubType>
@@ -409,6 +439,15 @@
     <EmbeddedResource Include="ListColumnEditor.resx">
       <DependentUpon>ListColumnEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.resx">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.resx">
+      <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -459,6 +498,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskListView.zh-CN.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskOptionsEditor.resx">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.de-DE.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
