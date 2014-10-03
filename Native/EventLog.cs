@@ -1775,13 +1775,659 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 	}
 
+	/// <summary>
+	/// Enables you to read events from an event log based on an event query. The events that are read by this object are returned as EventRecord objects.
+	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	internal class EventLogRecord : EventRecord
+	public class EventLogRecord : EventRecord
 	{
+		private const int SYSTEM_PROPERTY_COUNT = 0x12;
+
+		private ProviderMetadataCachedInformation cachedMetadataInformation;
+		private string containerChannel;
+		[SecurityTreatAsSafe]
+		private EventLogHandle handle;
+		private IEnumerable<string> keywordsNames;
+		private string levelName;
+		private bool levelNameReady;
+		private int[] matchedQueryIds;
+		private string opcodeName;
+		private bool opcodeNameReady;
+		private EventLogSession session;
+		private object syncObject;
+		private NativeWrapper.SystemProperties systemProperties;
+		private string taskName;
+		private bool taskNameReady;
+
 		[SecurityTreatAsSafe]
 		internal EventLogRecord(EventLogHandle handle, EventLogSession session, ProviderMetadataCachedInformation cachedMetadataInfo)
-			: base(handle, session, cachedMetadataInfo)
 		{
+			this.cachedMetadataInformation = cachedMetadataInfo;
+			this.handle = handle;
+			this.session = session;
+			this.systemProperties = new NativeWrapper.SystemProperties();
+			this.syncObject = new object();
+		}
+
+		/// <summary>
+		/// Gets the activity identifier.
+		/// </summary>
+		/// <value>
+		/// The activity identifier.
+		/// </value>
+		public override Guid? ActivityId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.ActivityId;
+			}
+		}
+
+		/// <summary>
+		/// Gets the bookmark.
+		/// </summary>
+		/// <value>
+		/// The bookmark.
+		/// </value>
+		public override EventBookmark Bookmark
+		{
+			[SecurityTreatAsSafe, SecurityCritical]
+			get
+			{
+				EventLogPermissionHolder.GetEventLogPermission().Demand();
+				EventLogHandle bookmark = NativeWrapper.EvtCreateBookmark(null);
+				NativeWrapper.EvtUpdateBookmark(bookmark, this.handle);
+				return new EventBookmark(NativeWrapper.EvtRenderBookmark(bookmark));
+			}
+		}
+
+		/// <summary>
+		/// Gets the container log.
+		/// </summary>
+		/// <value>
+		/// The container log.
+		/// </value>
+		public string ContainerLog
+		{
+			get
+			{
+				if (this.containerChannel != null)
+				{
+					return this.containerChannel;
+				}
+				lock (this.syncObject)
+				{
+					if (this.containerChannel == null)
+					{
+						this.containerChannel = (string)NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath);
+					}
+					return this.containerChannel;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
+		public override int Id
+		{
+			get
+			{
+				this.PrepareSystemData();
+				ushort? id = this.systemProperties.Id;
+				int? nullable3 = id.HasValue ? new int?(id.GetValueOrDefault()) : null;
+				if (!nullable3.HasValue)
+				{
+					return 0;
+				}
+				return this.systemProperties.Id.Value;
+			}
+		}
+
+		/// <summary>
+		/// Gets the keywords.
+		/// </summary>
+		/// <value>
+		/// The keywords.
+		/// </value>
+		public override long? Keywords
+		{
+			get
+			{
+				this.PrepareSystemData();
+				ulong? keywords = this.systemProperties.Keywords;
+				if (!keywords.HasValue)
+				{
+					return null;
+				}
+				return (long)(keywords.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the keywords display names.
+		/// </summary>
+		/// <value>
+		/// The keywords display names.
+		/// </value>
+		public override IEnumerable<string> KeywordsDisplayNames
+		{
+			get
+			{
+				if (this.keywordsNames != null)
+				{
+					return this.keywordsNames;
+				}
+				lock (this.syncObject)
+				{
+					if (this.keywordsNames == null)
+					{
+						this.keywordsNames = this.cachedMetadataInformation.GetKeywordDisplayNames(this.ProviderName, this.handle);
+					}
+					return this.keywordsNames;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the level.
+		/// </summary>
+		/// <value>
+		/// The level.
+		/// </value>
+		public override byte? Level
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.Level;
+			}
+		}
+
+		/// <summary>
+		/// Gets the display name of the level.
+		/// </summary>
+		/// <value>
+		/// The display name of the level.
+		/// </value>
+		public override string LevelDisplayName
+		{
+			get
+			{
+				if (this.levelNameReady)
+				{
+					return this.levelName;
+				}
+				lock (this.syncObject)
+				{
+					if (!this.levelNameReady)
+					{
+						this.levelNameReady = true;
+						this.levelName = this.cachedMetadataInformation.GetLevelDisplayName(this.ProviderName, this.handle);
+					}
+					return this.levelName;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
+		public override string LogName
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.ChannelName;
+			}
+		}
+
+		/// <summary>
+		/// Gets the name of the machine.
+		/// </summary>
+		/// <value>
+		/// The name of the machine.
+		/// </value>
+		public override string MachineName
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.ComputerName;
+			}
+		}
+
+		/// <summary>
+		/// Gets the matched query ids.
+		/// </summary>
+		/// <value>
+		/// The matched query ids.
+		/// </value>
+		public IEnumerable<int> MatchedQueryIds
+		{
+			get
+			{
+				if (this.matchedQueryIds != null)
+				{
+					return this.matchedQueryIds;
+				}
+				lock (this.syncObject)
+				{
+					if (this.matchedQueryIds == null)
+					{
+						this.matchedQueryIds = (int[])NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs);
+					}
+					return this.matchedQueryIds;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the opcode.
+		/// </summary>
+		/// <value>
+		/// The opcode.
+		/// </value>
+		public override short? Opcode
+		{
+			get
+			{
+				this.PrepareSystemData();
+				byte? opcode = this.systemProperties.Opcode;
+				ushort? nullable3 = opcode.HasValue ? new ushort?(opcode.GetValueOrDefault()) : null;
+				if (!nullable3.HasValue)
+				{
+					return null;
+				}
+				return new short?((short)nullable3.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the display name of the opcode.
+		/// </summary>
+		/// <value>
+		/// The display name of the opcode.
+		/// </value>
+		public override string OpcodeDisplayName
+		{
+			get
+			{
+				lock (this.syncObject)
+				{
+					if (!this.opcodeNameReady)
+					{
+						this.opcodeNameReady = true;
+						this.opcodeName = this.cachedMetadataInformation.GetOpcodeDisplayName(this.ProviderName, this.handle);
+					}
+					return this.opcodeName;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the process identifier.
+		/// </summary>
+		/// <value>
+		/// The process identifier.
+		/// </value>
+		public override int? ProcessId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				uint? processId = this.systemProperties.ProcessId;
+				if (!processId.HasValue)
+				{
+					return null;
+				}
+				return (int)processId.GetValueOrDefault();
+			}
+		}
+
+		/// <summary>
+		/// Gets the properties.
+		/// </summary>
+		/// <value>
+		/// The properties.
+		/// </value>
+		public override IList<EventProperty> Properties
+		{
+			get
+			{
+				this.session.SetupUserContext();
+				IList<object> list = NativeWrapper.EvtRenderBufferWithContextUserOrValues(this.session.renderContextHandleUser, this.handle);
+				List<EventProperty> list2 = new List<EventProperty>();
+				foreach (object obj2 in list)
+				{
+					list2.Add(new EventProperty(obj2));
+				}
+				return list2;
+			}
+		}
+
+		/// <summary>
+		/// Gets the provider identifier.
+		/// </summary>
+		/// <value>
+		/// The provider identifier.
+		/// </value>
+		public override Guid? ProviderId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.ProviderId;
+			}
+		}
+
+		/// <summary>
+		/// Gets the name of the provider.
+		/// </summary>
+		/// <value>
+		/// The name of the provider.
+		/// </value>
+		public override string ProviderName
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.ProviderName;
+			}
+		}
+
+		/// <summary>
+		/// Gets the qualifiers.
+		/// </summary>
+		/// <value>
+		/// The qualifiers.
+		/// </value>
+		public override int? Qualifiers
+		{
+			get
+			{
+				this.PrepareSystemData();
+				ushort? qualifiers = this.systemProperties.Qualifiers;
+				uint? nullable3 = qualifiers.HasValue ? new uint?(qualifiers.GetValueOrDefault()) : null;
+				if (!nullable3.HasValue)
+				{
+					return null;
+				}
+				return (int)(nullable3.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the record identifier.
+		/// </summary>
+		/// <value>
+		/// The record identifier.
+		/// </value>
+		public override long? RecordId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				ulong? recordId = this.systemProperties.RecordId;
+				if (!recordId.HasValue)
+				{
+					return null;
+				}
+				return (long)(recordId.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the related activity identifier.
+		/// </summary>
+		/// <value>
+		/// The related activity identifier.
+		/// </value>
+		public override Guid? RelatedActivityId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.RelatedActivityId;
+			}
+		}
+
+		/// <summary>
+		/// Gets the task.
+		/// </summary>
+		/// <value>
+		/// The task.
+		/// </value>
+		public override int? Task
+		{
+			get
+			{
+				this.PrepareSystemData();
+				ushort? task = this.systemProperties.Task;
+				uint? nullable3 = task.HasValue ? new uint?(task.GetValueOrDefault()) : null;
+				if (!nullable3.HasValue)
+				{
+					return null;
+				}
+				return (int)(nullable3.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the display name of the task.
+		/// </summary>
+		/// <value>
+		/// The display name of the task.
+		/// </value>
+		public override string TaskDisplayName
+		{
+			get
+			{
+				if (this.taskNameReady)
+				{
+					return this.taskName;
+				}
+				lock (this.syncObject)
+				{
+					if (!this.taskNameReady)
+					{
+						this.taskNameReady = true;
+						this.taskName = this.cachedMetadataInformation.GetTaskDisplayName(this.ProviderName, this.handle);
+					}
+					return this.taskName;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the thread identifier.
+		/// </summary>
+		/// <value>
+		/// The thread identifier.
+		/// </value>
+		public override int? ThreadId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				uint? threadId = this.systemProperties.ThreadId;
+				if (!threadId.HasValue)
+				{
+					return null;
+				}
+				return (int)(threadId.GetValueOrDefault());
+			}
+		}
+
+		/// <summary>
+		/// Gets the time created.
+		/// </summary>
+		/// <value>
+		/// The time created.
+		/// </value>
+		public override DateTime? TimeCreated
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.TimeCreated;
+			}
+		}
+
+		/// <summary>
+		/// Gets the user identifier.
+		/// </summary>
+		/// <value>
+		/// The user identifier.
+		/// </value>
+		public override SecurityIdentifier UserId
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.UserId;
+			}
+		}
+
+		/// <summary>
+		/// Gets the version.
+		/// </summary>
+		/// <value>
+		/// The version.
+		/// </value>
+		public override byte? Version
+		{
+			get
+			{
+				this.PrepareSystemData();
+				return this.systemProperties.Version;
+			}
+		}
+
+		internal EventLogHandle Handle
+		{
+			[SecurityTreatAsSafe]
+			get
+			{
+				return this.handle;
+			}
+		}
+
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <returns></returns>
+		public override string FormatDescription()
+		{
+			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle);
+		}
+
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <param name="values">The values.</param>
+		/// <returns></returns>
+		public override string FormatDescription(IEnumerable<object> values)
+		{
+			if (values == null)
+			{
+				return this.FormatDescription();
+			}
+			string[] array = new string[0];
+			int index = 0;
+			foreach (object obj2 in values)
+			{
+				if (array.Length == index)
+				{
+					Array.Resize<string>(ref array, index + 1);
+				}
+				array[index] = obj2.ToString();
+				index++;
+			}
+			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle, array);
+		}
+
+		/// <summary>
+		/// Gets the property values.
+		/// </summary>
+		/// <param name="propertySelector">The property selector.</param>
+		/// <returns></returns>
+		public IList<object> GetPropertyValues(EventLogPropertySelector propertySelector)
+		{
+			if (propertySelector == null)
+			{
+				throw new ArgumentNullException("propertySelector");
+			}
+			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, this.handle);
+		}
+
+		/// <summary>
+		/// To the XML.
+		/// </summary>
+		/// <returns></returns>
+		[SecurityTreatAsSafe, SecurityCritical]
+		public override string ToXml()
+		{
+			EventLogPermissionHolder.GetEventLogPermission().Demand();
+			StringBuilder buffer = new StringBuilder(0x7d0);
+			NativeWrapper.EvtRender(EventLogHandle.Zero, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventXml, buffer);
+			return buffer.ToString();
+		}
+
+		[SecurityCritical]
+		internal static EventLogHandle GetBookmarkHandleFromBookmark(EventBookmark bookmark)
+		{
+			if (bookmark == null)
+			{
+				return EventLogHandle.Zero;
+			}
+			return NativeWrapper.EvtCreateBookmark(bookmark.BookmarkText);
+		}
+
+		internal void PrepareSystemData()
+		{
+			if (!this.systemProperties.filled)
+			{
+				this.session.SetupSystemContext();
+				lock (this.syncObject)
+				{
+					if (!this.systemProperties.filled)
+					{
+						NativeWrapper.EvtRenderBufferWithContextSystem(this.session.renderContextHandleSystem, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues, this.systemProperties, 0x12);
+						this.systemProperties.filled = true;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		[SecurityTreatAsSafe, SecurityCritical]
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (disposing)
+				{
+					EventLogPermissionHolder.GetEventLogPermission().Demand();
+				}
+				if ((this.handle != null) && !this.handle.IsInvalid)
+				{
+					this.handle.Dispose();
+				}
+			}
+			finally
+			{
+			}
 		}
 	}
 
@@ -2510,552 +3156,13 @@ namespace System.Diagnostics.Eventing.Reader
 	/// <summary>
 	/// Contains the properties of an event instance for an event that is received from an EventLogReader object. The event properties provide information about the event such as the name of the computer where the event was logged and the time that the event was created. 
 	/// </summary>
-	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-	public class EventRecord : IDisposable
+	public abstract class EventRecord : IDisposable
 	{
-		private const int SYSTEM_PROPERTY_COUNT = 0x12;
-
-		// Fields
-		private ProviderMetadataCachedInformation cachedMetadataInformation;
-
-		private string containerChannel;
-
-		[SecurityTreatAsSafe]
-		private EventLogHandle handle;
-
-		private IEnumerable<string> keywordsNames;
-		private string levelName;
-		private bool levelNameReady;
-		private int[] matchedQueryIds;
-		private string opcodeName;
-		private bool opcodeNameReady;
-		private EventLogSession session;
-		private object syncObject;
-		private NativeWrapper.SystemProperties systemProperties;
-		private string taskName;
-		private bool taskNameReady;
-
-		// Methods
-		[SecurityTreatAsSafe]
-		internal EventRecord(EventLogHandle handle, EventLogSession session, ProviderMetadataCachedInformation cachedMetadataInfo)
-		{
-			this.cachedMetadataInformation = cachedMetadataInfo;
-			this.handle = handle;
-			this.session = session;
-			this.systemProperties = new NativeWrapper.SystemProperties();
-			this.syncObject = new object();
-		}
-
-		// Properties
 		/// <summary>
-		/// Gets the activity identifier.
+		/// Initializes a new instance of the <see cref="EventRecord"/> class.
 		/// </summary>
-		/// <value>
-		/// The activity identifier.
-		/// </value>
-		public virtual Guid? ActivityId
+		protected EventRecord()
 		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.ActivityId;
-			}
-		}
-
-		/// <summary>
-		/// Gets the bookmark.
-		/// </summary>
-		/// <value>
-		/// The bookmark.
-		/// </value>
-		public virtual EventBookmark Bookmark
-		{
-			[SecurityTreatAsSafe, SecurityCritical]
-			get
-			{
-				EventLogPermissionHolder.GetEventLogPermission().Demand();
-				EventLogHandle bookmark = NativeWrapper.EvtCreateBookmark(null);
-				NativeWrapper.EvtUpdateBookmark(bookmark, this.handle);
-				return new EventBookmark(NativeWrapper.EvtRenderBookmark(bookmark));
-			}
-		}
-
-		/// <summary>
-		/// Gets the container log.
-		/// </summary>
-		/// <value>
-		/// The container log.
-		/// </value>
-		public string ContainerLog
-		{
-			get
-			{
-				if (this.containerChannel != null)
-				{
-					return this.containerChannel;
-				}
-				lock (this.syncObject)
-				{
-					if (this.containerChannel == null)
-					{
-						this.containerChannel = (string)NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath);
-					}
-					return this.containerChannel;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the identifier.
-		/// </summary>
-		/// <value>
-		/// The identifier.
-		/// </value>
-		public virtual int Id
-		{
-			get
-			{
-				this.PrepareSystemData();
-				ushort? id = this.systemProperties.Id;
-				int? nullable3 = id.HasValue ? new int?(id.GetValueOrDefault()) : null;
-				if (!nullable3.HasValue)
-				{
-					return 0;
-				}
-				return this.systemProperties.Id.Value;
-			}
-		}
-
-		/// <summary>
-		/// Gets the keywords.
-		/// </summary>
-		/// <value>
-		/// The keywords.
-		/// </value>
-		public virtual long? Keywords
-		{
-			get
-			{
-				this.PrepareSystemData();
-				ulong? keywords = this.systemProperties.Keywords;
-				if (!keywords.HasValue)
-				{
-					return null;
-				}
-				return (long)(keywords.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the keywords display names.
-		/// </summary>
-		/// <value>
-		/// The keywords display names.
-		/// </value>
-		public virtual IEnumerable<string> KeywordsDisplayNames
-		{
-			get
-			{
-				if (this.keywordsNames != null)
-				{
-					return this.keywordsNames;
-				}
-				lock (this.syncObject)
-				{
-					if (this.keywordsNames == null)
-					{
-						this.keywordsNames = this.cachedMetadataInformation.GetKeywordDisplayNames(this.ProviderName, this.handle);
-					}
-					return this.keywordsNames;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the level.
-		/// </summary>
-		/// <value>
-		/// The level.
-		/// </value>
-		public virtual byte? Level
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.Level;
-			}
-		}
-
-		/// <summary>
-		/// Gets the display name of the level.
-		/// </summary>
-		/// <value>
-		/// The display name of the level.
-		/// </value>
-		public virtual string LevelDisplayName
-		{
-			get
-			{
-				if (this.levelNameReady)
-				{
-					return this.levelName;
-				}
-				lock (this.syncObject)
-				{
-					if (!this.levelNameReady)
-					{
-						this.levelNameReady = true;
-						this.levelName = this.cachedMetadataInformation.GetLevelDisplayName(this.ProviderName, this.handle);
-					}
-					return this.levelName;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the name of the log.
-		/// </summary>
-		/// <value>
-		/// The name of the log.
-		/// </value>
-		public virtual string LogName
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.ChannelName;
-			}
-		}
-
-		/// <summary>
-		/// Gets the name of the machine.
-		/// </summary>
-		/// <value>
-		/// The name of the machine.
-		/// </value>
-		public virtual string MachineName
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.ComputerName;
-			}
-		}
-
-		/// <summary>
-		/// Gets the matched query ids.
-		/// </summary>
-		/// <value>
-		/// The matched query ids.
-		/// </value>
-		public IEnumerable<int> MatchedQueryIds
-		{
-			get
-			{
-				if (this.matchedQueryIds != null)
-				{
-					return this.matchedQueryIds;
-				}
-				lock (this.syncObject)
-				{
-					if (this.matchedQueryIds == null)
-					{
-						this.matchedQueryIds = (int[])NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs);
-					}
-					return this.matchedQueryIds;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the opcode.
-		/// </summary>
-		/// <value>
-		/// The opcode.
-		/// </value>
-		public virtual short? Opcode
-		{
-			get
-			{
-				this.PrepareSystemData();
-				byte? opcode = this.systemProperties.Opcode;
-				ushort? nullable3 = opcode.HasValue ? new ushort?(opcode.GetValueOrDefault()) : null;
-				if (!nullable3.HasValue)
-				{
-					return null;
-				}
-				return new short?((short)nullable3.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the display name of the opcode.
-		/// </summary>
-		/// <value>
-		/// The display name of the opcode.
-		/// </value>
-		public virtual string OpcodeDisplayName
-		{
-			get
-			{
-				lock (this.syncObject)
-				{
-					if (!this.opcodeNameReady)
-					{
-						this.opcodeNameReady = true;
-						this.opcodeName = this.cachedMetadataInformation.GetOpcodeDisplayName(this.ProviderName, this.handle);
-					}
-					return this.opcodeName;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the process identifier.
-		/// </summary>
-		/// <value>
-		/// The process identifier.
-		/// </value>
-		public virtual int? ProcessId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				uint? processId = this.systemProperties.ProcessId;
-				if (!processId.HasValue)
-				{
-					return null;
-				}
-				return (int)processId.GetValueOrDefault();
-			}
-		}
-
-		/// <summary>
-		/// Gets the properties.
-		/// </summary>
-		/// <value>
-		/// The properties.
-		/// </value>
-		public virtual IList<EventProperty> Properties
-		{
-			get
-			{
-				this.session.SetupUserContext();
-				IList<object> list = NativeWrapper.EvtRenderBufferWithContextUserOrValues(this.session.renderContextHandleUser, this.handle);
-				List<EventProperty> list2 = new List<EventProperty>();
-				foreach (object obj2 in list)
-				{
-					list2.Add(new EventProperty(obj2));
-				}
-				return list2;
-			}
-		}
-
-		/// <summary>
-		/// Gets the provider identifier.
-		/// </summary>
-		/// <value>
-		/// The provider identifier.
-		/// </value>
-		public virtual Guid? ProviderId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.ProviderId;
-			}
-		}
-
-		/// <summary>
-		/// Gets the name of the provider.
-		/// </summary>
-		/// <value>
-		/// The name of the provider.
-		/// </value>
-		public virtual string ProviderName
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.ProviderName;
-			}
-		}
-
-		/// <summary>
-		/// Gets the qualifiers.
-		/// </summary>
-		/// <value>
-		/// The qualifiers.
-		/// </value>
-		public virtual int? Qualifiers
-		{
-			get
-			{
-				this.PrepareSystemData();
-				ushort? qualifiers = this.systemProperties.Qualifiers;
-				uint? nullable3 = qualifiers.HasValue ? new uint?(qualifiers.GetValueOrDefault()) : null;
-				if (!nullable3.HasValue)
-				{
-					return null;
-				}
-				return (int)(nullable3.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the record identifier.
-		/// </summary>
-		/// <value>
-		/// The record identifier.
-		/// </value>
-		public virtual long? RecordId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				ulong? recordId = this.systemProperties.RecordId;
-				if (!recordId.HasValue)
-				{
-					return null;
-				}
-				return (long)(recordId.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the related activity identifier.
-		/// </summary>
-		/// <value>
-		/// The related activity identifier.
-		/// </value>
-		public virtual Guid? RelatedActivityId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.RelatedActivityId;
-			}
-		}
-
-		/// <summary>
-		/// Gets the task.
-		/// </summary>
-		/// <value>
-		/// The task.
-		/// </value>
-		public virtual int? Task
-		{
-			get
-			{
-				this.PrepareSystemData();
-				ushort? task = this.systemProperties.Task;
-				uint? nullable3 = task.HasValue ? new uint?(task.GetValueOrDefault()) : null;
-				if (!nullable3.HasValue)
-				{
-					return null;
-				}
-				return (int)(nullable3.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the display name of the task.
-		/// </summary>
-		/// <value>
-		/// The display name of the task.
-		/// </value>
-		public virtual string TaskDisplayName
-		{
-			get
-			{
-				if (this.taskNameReady)
-				{
-					return this.taskName;
-				}
-				lock (this.syncObject)
-				{
-					if (!this.taskNameReady)
-					{
-						this.taskNameReady = true;
-						this.taskName = this.cachedMetadataInformation.GetTaskDisplayName(this.ProviderName, this.handle);
-					}
-					return this.taskName;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the thread identifier.
-		/// </summary>
-		/// <value>
-		/// The thread identifier.
-		/// </value>
-		public virtual int? ThreadId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				uint? threadId = this.systemProperties.ThreadId;
-				if (!threadId.HasValue)
-				{
-					return null;
-				}
-				return (int)(threadId.GetValueOrDefault());
-			}
-		}
-
-		/// <summary>
-		/// Gets the time created.
-		/// </summary>
-		/// <value>
-		/// The time created.
-		/// </value>
-		public virtual DateTime? TimeCreated
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.TimeCreated;
-			}
-		}
-
-		/// <summary>
-		/// Gets the user identifier.
-		/// </summary>
-		/// <value>
-		/// The user identifier.
-		/// </value>
-		public virtual SecurityIdentifier UserId
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.UserId;
-			}
-		}
-
-		/// <summary>
-		/// Gets the version.
-		/// </summary>
-		/// <value>
-		/// The version.
-		/// </value>
-		public virtual byte? Version
-		{
-			get
-			{
-				this.PrepareSystemData();
-				return this.systemProperties.Version;
-			}
-		}
-
-		internal EventLogHandle Handle
-		{
-			[SecurityTreatAsSafe]
-			get
-			{
-				return this.handle;
-			}
 		}
 
 		/// <summary>
@@ -3068,114 +3175,210 @@ namespace System.Diagnostics.Eventing.Reader
 		}
 
 		/// <summary>
-		/// Formats the description.
-		/// </summary>
-		/// <returns></returns>
-		public virtual string FormatDescription()
-		{
-			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle);
-		}
-
-		/// <summary>
-		/// Formats the description.
-		/// </summary>
-		/// <param name="values">The values.</param>
-		/// <returns></returns>
-		public virtual string FormatDescription(IEnumerable<object> values)
-		{
-			if (values == null)
-			{
-				return this.FormatDescription();
-			}
-			string[] array = new string[0];
-			int index = 0;
-			foreach (object obj2 in values)
-			{
-				if (array.Length == index)
-				{
-					Array.Resize<string>(ref array, index + 1);
-				}
-				array[index] = obj2.ToString();
-				index++;
-			}
-			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle, array);
-		}
-
-		/// <summary>
-		/// Gets the property values.
-		/// </summary>
-		/// <param name="propertySelector">The property selector.</param>
-		/// <returns></returns>
-		public IList<object> GetPropertyValues(EventLogPropertySelector propertySelector)
-		{
-			if (propertySelector == null)
-			{
-				throw new ArgumentNullException("propertySelector");
-			}
-			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, this.handle);
-		}
-
-		/// <summary>
-		/// To the XML.
-		/// </summary>
-		/// <returns></returns>
-		[SecurityTreatAsSafe, SecurityCritical]
-		public virtual string ToXml()
-		{
-			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			StringBuilder buffer = new StringBuilder(0x7d0);
-			NativeWrapper.EvtRender(EventLogHandle.Zero, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventXml, buffer);
-			return buffer.ToString();
-		}
-
-		[SecurityCritical]
-		internal static EventLogHandle GetBookmarkHandleFromBookmark(EventBookmark bookmark)
-		{
-			if (bookmark == null)
-			{
-				return EventLogHandle.Zero;
-			}
-			return NativeWrapper.EvtCreateBookmark(bookmark.BookmarkText);
-		}
-
-		internal void PrepareSystemData()
-		{
-			if (!this.systemProperties.filled)
-			{
-				this.session.SetupSystemContext();
-				lock (this.syncObject)
-				{
-					if (!this.systemProperties.filled)
-					{
-						NativeWrapper.EvtRenderBufferWithContextSystem(this.session.renderContextHandleSystem, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues, this.systemProperties, 0x12);
-						this.systemProperties.filled = true;
-					}
-				}
-			}
-		}
-
-		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		[SecurityTreatAsSafe, SecurityCritical]
 		protected virtual void Dispose(bool disposing)
 		{
-			try
-			{
-				if (disposing)
-				{
-					EventLogPermissionHolder.GetEventLogPermission().Demand();
-				}
-				if ((this.handle != null) && !this.handle.IsInvalid)
-				{
-					this.handle.Dispose();
-				}
-			}
-			finally
-			{
-			}
 		}
+
+		public abstract string FormatDescription();
+
+		public abstract string FormatDescription(IEnumerable<object> values);
+
+		public abstract string ToXml();
+
+		/// <summary>
+		/// Gets the activity identifier.
+		/// </summary>
+		/// <value>
+		/// The activity identifier.
+		/// </value>
+		public abstract Guid? ActivityId { get; }
+
+		/// <summary>
+		/// Gets the bookmark.
+		/// </summary>
+		/// <value>
+		/// The bookmark.
+		/// </value>
+		public abstract EventBookmark Bookmark { get; }
+
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
+		public abstract int Id { get; }
+
+		/// <summary>
+		/// Gets the keywords.
+		/// </summary>
+		/// <value>
+		/// The keywords.
+		/// </value>
+		public abstract long? Keywords { get; }
+
+		/// <summary>
+		/// Gets the keywords display names.
+		/// </summary>
+		/// <value>
+		/// The keywords display names.
+		/// </value>
+		public abstract IEnumerable<string> KeywordsDisplayNames { get; }
+
+		/// <summary>
+		/// Gets the level.
+		/// </summary>
+		/// <value>
+		/// The level.
+		/// </value>
+		public abstract byte? Level { get; }
+
+		/// <summary>
+		/// Gets the display name of the level.
+		/// </summary>
+		/// <value>
+		/// The display name of the level.
+		/// </value>
+		public abstract string LevelDisplayName { get; }
+
+		/// <summary>
+		/// Gets the name of the log.
+		/// </summary>
+		/// <value>
+		/// The name of the log.
+		/// </value>
+		public abstract string LogName { get; }
+
+		/// <summary>
+		/// Gets the name of the machine.
+		/// </summary>
+		/// <value>
+		/// The name of the machine.
+		/// </value>
+		public abstract string MachineName { get; }
+
+		/// <summary>
+		/// Gets the opcode.
+		/// </summary>
+		/// <value>
+		/// The opcode.
+		/// </value>
+		public abstract short? Opcode { get; }
+
+		/// <summary>
+		/// Gets the display name of the opcode.
+		/// </summary>
+		/// <value>
+		/// The display name of the opcode.
+		/// </value>
+		public abstract string OpcodeDisplayName { get; }
+
+		/// <summary>
+		/// Gets the process identifier.
+		/// </summary>
+		/// <value>
+		/// The process identifier.
+		/// </value>
+		public abstract int? ProcessId { get; }
+
+		/// <summary>
+		/// Gets the properties.
+		/// </summary>
+		/// <value>
+		/// The properties.
+		/// </value>
+		public abstract IList<EventProperty> Properties { get; }
+
+		/// <summary>
+		/// Gets the provider identifier.
+		/// </summary>
+		/// <value>
+		/// The provider identifier.
+		/// </value>
+		public abstract Guid? ProviderId { get; }
+
+		/// <summary>
+		/// Gets the name of the provider.
+		/// </summary>
+		/// <value>
+		/// The name of the provider.
+		/// </value>
+		public abstract string ProviderName { get; }
+
+		/// <summary>
+		/// Gets the qualifiers.
+		/// </summary>
+		/// <value>
+		/// The qualifiers.
+		/// </value>
+		public abstract int? Qualifiers { get; }
+
+		/// <summary>
+		/// Gets the record identifier.
+		/// </summary>
+		/// <value>
+		/// The record identifier.
+		/// </value>
+		public abstract long? RecordId { get; }
+
+		/// <summary>
+		/// Gets the related activity identifier.
+		/// </summary>
+		/// <value>
+		/// The related activity identifier.
+		/// </value>
+		public abstract Guid? RelatedActivityId { get; }
+
+		/// <summary>
+		/// Gets the task.
+		/// </summary>
+		/// <value>
+		/// The task.
+		/// </value>
+		public abstract int? Task { get; }
+
+		/// <summary>
+		/// Gets the display name of the task.
+		/// </summary>
+		/// <value>
+		/// The display name of the task.
+		/// </value>
+		public abstract string TaskDisplayName { get; }
+
+		/// <summary>
+		/// Gets the thread identifier.
+		/// </summary>
+		/// <value>
+		/// The thread identifier.
+		/// </value>
+		public abstract int? ThreadId { get; }
+
+		/// <summary>
+		/// Gets the time created.
+		/// </summary>
+		/// <value>
+		/// The time created.
+		/// </value>
+		public abstract DateTime? TimeCreated { get; }
+
+		/// <summary>
+		/// Gets the user identifier.
+		/// </summary>
+		/// <value>
+		/// The user identifier.
+		/// </value>
+		public abstract SecurityIdentifier UserId { get; }
+
+		/// <summary>
+		/// Gets the version.
+		/// </summary>
+		/// <value>
+		/// The version.
+		/// </value>
+		public abstract byte? Version { get; }
 	}
 
 	/// <summary>

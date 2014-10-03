@@ -711,6 +711,7 @@ namespace TestTaskService
 				return;
 			}
 
+			// Display results
 			Task runningTask = tf.Tasks["Test"];
 			output.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
 			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
@@ -726,6 +727,12 @@ namespace TestTaskService
 			output.WriteLine("\nNew task actions:");
 			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
 				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
+
+			// Loop through event logs for this task and find action completed events newest to oldest
+			output.WriteLine("\nTask history enumeration:");
+			TaskEventLog log = new TaskEventLog(@"\Maint", new int[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
+			foreach (TaskEvent ev in log)
+				output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.GetDataValue("ActionName"), ev.TimeCreated.Value, ev.GetDataValue("ResultCode"));
 
 			DisplayTask(runningTask, true);
 			tf.DeleteTask("Test");
