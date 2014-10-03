@@ -34,6 +34,23 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the data value from the task specific event data item list.
+		/// </summary>
+		/// <param name="name">The name of the data element.</param>
+		/// <returns>Contents of the requested data element if found. <c>null</c> if no value found.</returns>
+		public string GetDataValue(string name)
+		{
+			var propsel = new System.Diagnostics.Eventing.Reader.EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", name) });
+			try
+			{
+				var logEventProps = ((EventLogRecord)this.EventRecord).GetPropertyValues(propsel);
+				return logEventProps[0].ToString();
+			}
+			catch { }
+			return null;
+		}
+
+		/// <summary>
 		/// Gets the event id.
 		/// </summary>
 		public int EventId
@@ -392,6 +409,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether to enumerate in reverse when calling the default enumerator (typically with foreach statement).
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if <see cref="GetEnumerator"/> enumerates in reverse (newest to oldest) by default; otherwise, <c>false</c> to enumerate oldest to newest.
+		/// </value>
+		[System.ComponentModel.DefaultValue(false)]
+		public bool EnumerateInReverse { get; set; }
+
+		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
 		/// </summary>
 		/// <returns>
@@ -399,13 +425,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public IEnumerator<TaskEvent> GetEnumerator()
 		{
-			return GetEnumerator(false);
+			return GetEnumerator(EnumerateInReverse);
 		}
 
 		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
 		/// </summary>
-		/// <param name="reverse">if set to <c>true</c> [reverse].</param>
+		/// <param name="reverse">if set to <c>true</c> reverse.</param>
 		/// <returns>
 		/// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
 		/// </returns>
