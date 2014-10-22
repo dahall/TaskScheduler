@@ -30,243 +30,191 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralOptionPanel));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.taskRegVersionLabel = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.taskAuthorText = new System.Windows.Forms.TextBox();
 			this.taskRegSourceLabel = new System.Windows.Forms.Label();
 			this.taskRegURILabel = new System.Windows.Forms.Label();
 			this.taskRegVersionText = new System.Windows.Forms.TextBox();
 			this.taskRegURIText = new System.Windows.Forms.TextBox();
 			this.taskRegSourceText = new System.Windows.Forms.TextBox();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
-			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.taskNameText = new System.Windows.Forms.TextBox();
+			this.taskDescText = new System.Windows.Forms.TextBox();
+			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.taskEnabledCheck = new System.Windows.Forms.CheckBox();
+			this.taskHiddenCheck = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel2, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 37);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 4;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(401, 235);
-			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// optionPanelHeaderLabel2
+			// 
+			resources.ApplyResources(this.optionPanelHeaderLabel2, "optionPanelHeaderLabel2");
+			this.optionPanelHeaderLabel2.Name = "optionPanelHeaderLabel2";
 			// 
 			// tableLayoutPanel3
 			// 
-			this.tableLayoutPanel3.AutoSize = true;
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
 			this.tableLayoutPanel3.Controls.Add(this.taskRegVersionLabel, 0, 3);
 			this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.textBox3, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.taskAuthorText, 1, 0);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegSourceLabel, 0, 1);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegURILabel, 0, 2);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegVersionText, 1, 3);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegURIText, 1, 2);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegSourceText, 1, 1);
-			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 131);
-			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(7, 0, 0, 0);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 4;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(394, 104);
-			this.tableLayoutPanel3.TabIndex = 3;
 			// 
 			// taskRegVersionLabel
 			// 
-			this.taskRegVersionLabel.AutoSize = true;
-			this.taskRegVersionLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRegVersionLabel.Location = new System.Drawing.Point(0, 84);
-			this.taskRegVersionLabel.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
 			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
-			this.taskRegVersionLabel.Size = new System.Drawing.Size(45, 13);
-			this.taskRegVersionLabel.TabIndex = 10;
-			this.taskRegVersionLabel.Text = "&Version:";
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(0, 6);
-			this.label3.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.label3, "label3");
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(41, 13);
-			this.label3.TabIndex = 0;
-			this.label3.Text = "&Author:";
 			// 
-			// textBox3
+			// taskAuthorText
 			// 
-			this.textBox3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.textBox3.Location = new System.Drawing.Point(52, 3);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(339, 20);
-			this.textBox3.TabIndex = 2;
+			resources.ApplyResources(this.taskAuthorText, "taskAuthorText");
+			this.taskAuthorText.Name = "taskAuthorText";
+			this.taskAuthorText.ReadOnly = true;
 			// 
 			// taskRegSourceLabel
 			// 
-			this.taskRegSourceLabel.AutoSize = true;
-			this.taskRegSourceLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRegSourceLabel.Location = new System.Drawing.Point(0, 32);
-			this.taskRegSourceLabel.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.taskRegSourceLabel, "taskRegSourceLabel");
 			this.taskRegSourceLabel.Name = "taskRegSourceLabel";
-			this.taskRegSourceLabel.Size = new System.Drawing.Size(44, 13);
-			this.taskRegSourceLabel.TabIndex = 6;
-			this.taskRegSourceLabel.Text = "&Source:";
 			// 
 			// taskRegURILabel
 			// 
-			this.taskRegURILabel.AutoSize = true;
-			this.taskRegURILabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRegURILabel.Location = new System.Drawing.Point(0, 58);
-			this.taskRegURILabel.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
 			this.taskRegURILabel.Name = "taskRegURILabel";
-			this.taskRegURILabel.Size = new System.Drawing.Size(29, 13);
-			this.taskRegURILabel.TabIndex = 8;
-			this.taskRegURILabel.Text = "&URI:";
 			// 
 			// taskRegVersionText
 			// 
-			this.taskRegVersionText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskRegVersionText.Location = new System.Drawing.Point(52, 81);
+			resources.ApplyResources(this.taskRegVersionText, "taskRegVersionText");
 			this.taskRegVersionText.Name = "taskRegVersionText";
-			this.taskRegVersionText.Size = new System.Drawing.Size(339, 20);
-			this.taskRegVersionText.TabIndex = 11;
+			this.taskRegVersionText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegVersionText_Validating);
+			this.taskRegVersionText.Validated += new System.EventHandler(this.taskRegVersionText_Validated);
 			// 
 			// taskRegURIText
 			// 
-			this.taskRegURIText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskRegURIText.Location = new System.Drawing.Point(52, 55);
+			resources.ApplyResources(this.taskRegURIText, "taskRegURIText");
 			this.taskRegURIText.Name = "taskRegURIText";
-			this.taskRegURIText.Size = new System.Drawing.Size(339, 20);
-			this.taskRegURIText.TabIndex = 9;
+			this.taskRegURIText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegURIText_Validating);
+			this.taskRegURIText.Validated += new System.EventHandler(this.taskRegURIText_Validated);
 			// 
 			// taskRegSourceText
 			// 
-			this.taskRegSourceText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskRegSourceText.Location = new System.Drawing.Point(52, 29);
+			resources.ApplyResources(this.taskRegSourceText, "taskRegSourceText");
 			this.taskRegSourceText.Name = "taskRegSourceText";
-			this.taskRegSourceText.Size = new System.Drawing.Size(339, 20);
-			this.taskRegSourceText.TabIndex = 7;
+			this.taskRegSourceText.Leave += new System.EventHandler(this.taskRegSourceText_Leave);
 			// 
 			// optionPanelHeaderLabel1
 			// 
-			this.optionPanelHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
-			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+			resources.ApplyResources(this.optionPanelHeaderLabel1, "optionPanelHeaderLabel1");
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(401, 23);
-			this.optionPanelHeaderLabel1.TabIndex = 0;
-			this.optionPanelHeaderLabel1.Text = "Overview";
-			// 
-			// optionPanelHeaderLabel2
-			// 
-			this.optionPanelHeaderLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel2.Location = new System.Drawing.Point(0, 105);
-			this.optionPanelHeaderLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
-			this.optionPanelHeaderLabel2.Name = "optionPanelHeaderLabel2";
-			this.optionPanelHeaderLabel2.Size = new System.Drawing.Size(401, 23);
-			this.optionPanelHeaderLabel2.TabIndex = 1;
-			this.optionPanelHeaderLabel2.Text = "Details";
 			// 
 			// tableLayoutPanel2
 			// 
-			this.tableLayoutPanel2.AutoSize = true;
-			this.tableLayoutPanel2.ColumnCount = 2;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
 			this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
-			this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
-			this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 1);
-			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(7, 26);
-			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(7, 0, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.taskNameText, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.taskDescText, 1, 1);
+			this.tableLayoutPanel2.Controls.Add(this.taskVersionCombo, 1, 2);
+			this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 3);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 2;
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(394, 79);
-			this.tableLayoutPanel2.TabIndex = 2;
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(0, 6);
-			this.label1.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(38, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "&Name:";
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(0, 32);
-			this.label2.Margin = new System.Windows.Forms.Padding(0, 6, 4, 0);
+			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(63, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "&Description:";
 			// 
-			// textBox1
+			// taskNameText
 			// 
-			this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.textBox1.Location = new System.Drawing.Point(70, 3);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(321, 20);
-			this.textBox1.TabIndex = 2;
+			resources.ApplyResources(this.taskNameText, "taskNameText");
+			this.taskNameText.Name = "taskNameText";
+			this.taskNameText.Validating += new System.ComponentModel.CancelEventHandler(this.taskNameText_Validating);
 			// 
-			// textBox2
+			// taskDescText
 			// 
-			this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.textBox2.Location = new System.Drawing.Point(70, 29);
-			this.textBox2.Multiline = true;
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(321, 47);
-			this.textBox2.TabIndex = 2;
+			resources.ApplyResources(this.taskDescText, "taskDescText");
+			this.taskDescText.Name = "taskDescText";
+			this.taskDescText.Leave += new System.EventHandler(this.taskDescText_Leave);
+			// 
+			// taskVersionCombo
+			// 
+			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
+			this.taskVersionCombo.Name = "taskVersionCombo";
+			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
+			// 
+			// label4
+			// 
+			resources.ApplyResources(this.label4, "label4");
+			this.label4.Name = "label4";
+			// 
+			// flowLayoutPanel1
+			// 
+			resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+			this.tableLayoutPanel2.SetColumnSpan(this.flowLayoutPanel1, 2);
+			this.flowLayoutPanel1.Controls.Add(this.taskEnabledCheck);
+			this.flowLayoutPanel1.Controls.Add(this.taskHiddenCheck);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			// 
+			// taskEnabledCheck
+			// 
+			resources.ApplyResources(this.taskEnabledCheck, "taskEnabledCheck");
+			this.taskEnabledCheck.Name = "taskEnabledCheck";
+			this.taskEnabledCheck.UseVisualStyleBackColor = true;
+			this.taskEnabledCheck.CheckedChanged += new System.EventHandler(this.taskEnabledCheck_CheckedChanged);
+			// 
+			// taskHiddenCheck
+			// 
+			resources.ApplyResources(this.taskHiddenCheck, "taskHiddenCheck");
+			this.taskHiddenCheck.Name = "taskHiddenCheck";
+			this.taskHiddenCheck.UseVisualStyleBackColor = true;
+			this.taskHiddenCheck.CheckedChanged += new System.EventHandler(this.taskHiddenCheck_CheckedChanged);
 			// 
 			// GeneralOptionPanel
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
 			this.Name = "GeneralOptionPanel";
-			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.tableLayoutPanel3.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -279,17 +227,22 @@
 		private OptionPanelHeaderLabel optionPanelHeaderLabel2;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.TextBox taskAuthorText;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.TextBox taskNameText;
+		private System.Windows.Forms.TextBox taskDescText;
 		private System.Windows.Forms.Label taskRegVersionLabel;
 		private System.Windows.Forms.Label taskRegSourceLabel;
 		private System.Windows.Forms.Label taskRegURILabel;
 		private System.Windows.Forms.TextBox taskRegVersionText;
 		private System.Windows.Forms.TextBox taskRegURIText;
 		private System.Windows.Forms.TextBox taskRegSourceText;
+		private System.Windows.Forms.DisabledItemComboBox taskVersionCombo;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.CheckBox taskEnabledCheck;
+		private System.Windows.Forms.CheckBox taskHiddenCheck;
 	}
 }

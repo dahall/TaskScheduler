@@ -38,6 +38,198 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="name">The name of the data element.</param>
 		/// <returns>Contents of the requested data element if found. <c>null</c> if no value found.</returns>
+		/// <remarks>
+		/// <list type="table">
+		/// <listheader><term>EventID</term><description>Possible elements</description></listheader>
+		/// <item><term>100 - Task Started</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserContext</term><description>User account.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>101 - Task Start Failed Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserContext</term><description>User account.</description></item>
+		/// <item><term>ResultCode</term><description>Error code for failure.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>102 - Task Completed</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserContext</term><description>User account.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>103 - Task Failure Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserContext</term><description>User account.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// <item><term>ResultCode</term><description>Error code for failure.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>106 - Task Registered Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserContext</term><description>User account.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>107 - Time Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>108 - Event Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>109 - Task Registration Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>110 - Task Run Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>111 - Task Termination Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>114 - Missed Task Launch Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>117 - Idle Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>118 - Boot Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>119 - Logon Trigger Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserName</term><description>User account.</description></item>
+		/// <item><term>InstanceId</term><description>Task instance identifier.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>126 - Failed Task Restart Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ResultCode</term><description>Error code for failure.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>129 - Created Task Process Event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>Path</term><description>Task engine.</description></item>
+		/// <item><term>ProcessID</term><description>Process ID.</description></item>
+		/// <item><term>Priority</term><description>Process priority.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>135 - Task Not Started Without Idle</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>140 - Task Updated</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserName</term><description>User account.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>141 - Task deleted</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserName</term><description>User account.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>142 - Task disabled</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>UserName</term><description>User account.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>200 - Action start</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ActionName</term><description>Path of executable.</description></item>
+		/// <item><term>TaskInstanceId</term><description>Task instance ID.</description></item>
+		/// <item><term>EnginePID</term><description>Engine process ID.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>201 - Action success</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ActionName</term><description>Path of executable.</description></item>
+		/// <item><term>TaskInstanceId</term><description>Task instance ID.</description></item>
+		/// <item><term>ResultCode</term><description>Executable result code.</description></item>
+		/// <item><term>EnginePID</term><description>Engine process ID.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>202 - Action failure</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ActionName</term><description>Path of executable.</description></item>
+		/// <item><term>TaskInstanceId</term><description>Task instance ID.</description></item>
+		/// <item><term>ResultCode</term><description>Executable result code.</description></item>
+		/// <item><term>EnginePID</term><description>Engine process ID.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>203 - Action launch failure</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ActionName</term><description>Path of executable.</description></item>
+		/// <item><term>TaskInstanceId</term><description>Task instance ID.</description></item>
+		/// <item><term>ResultCode</term><description>Executable result code.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>204 - Action launch failure</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskName</term><description>Full path of task.</description></item>
+		/// <item><term>ActionName</term><description>Path of executable.</description></item>
+		/// <item><term>TaskInstanceId</term><description>Task instance ID.</description></item>
+		/// <item><term>ResultCode</term><description>Executable result code.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>301 - Task engine exit event</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskEngineName</term><description>Permissions and priority for engine process.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>310 - Task engine process started</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskEngineName</term><description>Permissions and priority for engine process.</description></item>
+		/// <item><term>Command</term><description>Engine path.</description></item>
+		/// <item><term>ProcessID</term><description>Process ID.</description></item>
+		/// <item><term>ThreadID</term><description>Thread ID.</description></item>
+		/// </list></description>
+		/// </item>
+		/// <item><term>314 - Task engine idle</term>
+		/// <description><list type="bullet">
+		/// <item><term>TaskEngineName</term><description>Permissions and priority for engine process.</description></item>
+		/// </list></description>
+		/// </item>
+		/// </list>
+		/// </remarks>
 		public string GetDataValue(string name)
 		{
 			var propsel = new System.Diagnostics.Eventing.Reader.EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", name) });
@@ -303,7 +495,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="password">The password.</param>
 		public TaskEventLog(DateTime startTime, string taskName = null, string machineName = null, string domain = null, string user = null, string password = null)
 		{
-			int[] numArray = new int[] { 100, 0x66, 0x67, 0x6b, 0x6c, 0x6d, 0x6f, 0x75, 0x76, 0x77, 120, 0x79, 0x7a, 0x7b, 0x7c, 0x7d };
+			int[] numArray = new int[] { 100, 102, 103, 107, 108, 109, 111, 117, 118, 119, 120, 121, 122, 123, 124, 125 };
 			Initialize(machineName, BuildQuery(taskName, numArray, startTime), false, domain, user, password);
 		}
 
@@ -412,7 +604,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a value indicating whether to enumerate in reverse when calling the default enumerator (typically with foreach statement).
 		/// </summary>
 		/// <value>
-		///   <c>true</c> if <see cref="GetEnumerator"/> enumerates in reverse (newest to oldest) by default; otherwise, <c>false</c> to enumerate oldest to newest.
+		///   <c>true</c> if enumerates in reverse (newest to oldest) by default; otherwise, <c>false</c> to enumerate oldest to newest.
 		/// </value>
 		[System.ComponentModel.DefaultValue(false)]
 		public bool EnumerateInReverse { get; set; }
