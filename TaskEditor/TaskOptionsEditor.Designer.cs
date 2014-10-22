@@ -38,10 +38,15 @@
 			this.triggersItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionsItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bodyPanel = new System.Windows.Forms.Panel();
+			this.panelHeading = new System.Windows.Forms.TableLayoutPanel();
+			this.panelTitleLabel = new System.Windows.Forms.Label();
+			this.panelImage = new System.Windows.Forms.Label();
 			this.splitterPanel = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuPanel.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			this.bodyPanel.SuspendLayout();
+			this.panelHeading.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -111,8 +116,26 @@
 			// 
 			this.bodyPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.bodyPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.bodyPanel.Controls.Add(this.panelHeading);
 			resources.ApplyResources(this.bodyPanel, "bodyPanel");
 			this.bodyPanel.Name = "bodyPanel";
+			// 
+			// panelHeading
+			// 
+			resources.ApplyResources(this.panelHeading, "panelHeading");
+			this.panelHeading.Controls.Add(this.panelTitleLabel, 1, 0);
+			this.panelHeading.Controls.Add(this.panelImage, 0, 0);
+			this.panelHeading.Name = "panelHeading";
+			// 
+			// panelTitleLabel
+			// 
+			resources.ApplyResources(this.panelTitleLabel, "panelTitleLabel");
+			this.panelTitleLabel.Name = "panelTitleLabel";
+			// 
+			// panelImage
+			// 
+			resources.ApplyResources(this.panelImage, "panelImage");
+			this.panelImage.Name = "panelImage";
 			// 
 			// splitterPanel
 			// 
@@ -136,11 +159,15 @@
 			this.Name = "TaskOptionsEditor";
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.TaskOptionsEditor_HelpButtonClicked);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.menuPanel.ResumeLayout(false);
 			this.menuPanel.PerformLayout();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.bodyPanel.ResumeLayout(false);
+			this.bodyPanel.PerformLayout();
+			this.panelHeading.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -158,5 +185,8 @@
 		private System.Windows.Forms.ToolStripMenuItem actionsItem;
 		private System.Windows.Forms.Panel bodyPanel;
 		private System.Windows.Forms.Panel splitterPanel;
+		private System.Windows.Forms.TableLayoutPanel panelHeading;
+		private System.Windows.Forms.Label panelTitleLabel;
+		private System.Windows.Forms.Label panelImage;
 	}
 }

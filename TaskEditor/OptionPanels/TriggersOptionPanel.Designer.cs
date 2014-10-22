@@ -31,13 +31,13 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.triggerEditButton = new System.Windows.Forms.Button();
+			this.triggerNewButton = new System.Windows.Forms.Button();
 			this.triggerListView = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.triggerDeleteButton = new System.Windows.Forms.Button();
-			this.triggerEditButton = new System.Windows.Forms.Button();
-			this.triggerNewButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
@@ -50,21 +50,22 @@
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 37);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(401, 267);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(425, 261);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// optionPanelHeaderLabel1
 			// 
 			this.optionPanelHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
-			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 5);
+			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(401, 23);
+			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(425, 23);
 			this.optionPanelHeaderLabel1.TabIndex = 0;
 			this.optionPanelHeaderLabel1.Text = "Add, remove and change triggers";
 			// 
@@ -75,19 +76,45 @@
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.Controls.Add(this.triggerDeleteButton, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.triggerEditButton, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.triggerNewButton, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.triggerListView, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.triggerDeleteButton, 2, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(7, 28);
-			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(7, 0, 0, 0);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 33);
+			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(9, 0, 0, 0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(394, 239);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(416, 228);
 			this.tableLayoutPanel2.TabIndex = 1;
+			// 
+			// triggerEditButton
+			// 
+			this.triggerEditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.triggerEditButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.triggerEditButton.Location = new System.Drawing.Point(83, 205);
+			this.triggerEditButton.Margin = new System.Windows.Forms.Padding(0, 5, 5, 0);
+			this.triggerEditButton.Name = "triggerEditButton";
+			this.triggerEditButton.Size = new System.Drawing.Size(78, 23);
+			this.triggerEditButton.TabIndex = 6;
+			this.triggerEditButton.Text = "&Edit...";
+			this.triggerEditButton.UseVisualStyleBackColor = true;
+			this.triggerEditButton.Click += new System.EventHandler(this.triggerEditButton_Click);
+			// 
+			// triggerNewButton
+			// 
+			this.triggerNewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.triggerNewButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.triggerNewButton.Location = new System.Drawing.Point(0, 205);
+			this.triggerNewButton.Margin = new System.Windows.Forms.Padding(0, 5, 5, 0);
+			this.triggerNewButton.Name = "triggerNewButton";
+			this.triggerNewButton.Size = new System.Drawing.Size(78, 23);
+			this.triggerNewButton.TabIndex = 5;
+			this.triggerNewButton.Text = "&New...";
+			this.triggerNewButton.UseVisualStyleBackColor = true;
+			this.triggerNewButton.Click += new System.EventHandler(this.triggerNewButton_Click);
 			// 
 			// triggerListView
 			// 
@@ -104,10 +131,12 @@
 			this.triggerListView.Margin = new System.Windows.Forms.Padding(0);
 			this.triggerListView.Name = "triggerListView";
 			this.triggerListView.ShowItemToolTips = true;
-			this.triggerListView.Size = new System.Drawing.Size(394, 211);
+			this.triggerListView.Size = new System.Drawing.Size(416, 200);
 			this.triggerListView.TabIndex = 2;
 			this.triggerListView.UseCompatibleStateImageBehavior = false;
 			this.triggerListView.View = System.Windows.Forms.View.Details;
+			this.triggerListView.SelectedIndexChanged += new System.EventHandler(this.triggerListView_SelectedIndexChanged);
+			this.triggerListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.triggerListView_MouseDoubleClick);
 			// 
 			// columnHeader1
 			// 
@@ -128,44 +157,21 @@
 			// 
 			this.triggerDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.triggerDeleteButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.triggerDeleteButton.Location = new System.Drawing.Point(0, 216);
+			this.triggerDeleteButton.Location = new System.Drawing.Point(166, 205);
 			this.triggerDeleteButton.Margin = new System.Windows.Forms.Padding(0, 5, 5, 0);
 			this.triggerDeleteButton.Name = "triggerDeleteButton";
 			this.triggerDeleteButton.Size = new System.Drawing.Size(78, 23);
 			this.triggerDeleteButton.TabIndex = 7;
 			this.triggerDeleteButton.Text = "&Delete";
 			this.triggerDeleteButton.UseVisualStyleBackColor = true;
-			// 
-			// triggerEditButton
-			// 
-			this.triggerEditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.triggerEditButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.triggerEditButton.Location = new System.Drawing.Point(166, 216);
-			this.triggerEditButton.Margin = new System.Windows.Forms.Padding(0, 5, 5, 0);
-			this.triggerEditButton.Name = "triggerEditButton";
-			this.triggerEditButton.Size = new System.Drawing.Size(78, 23);
-			this.triggerEditButton.TabIndex = 6;
-			this.triggerEditButton.Text = "&Edit...";
-			this.triggerEditButton.UseVisualStyleBackColor = true;
-			// 
-			// triggerNewButton
-			// 
-			this.triggerNewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.triggerNewButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.triggerNewButton.Location = new System.Drawing.Point(83, 216);
-			this.triggerNewButton.Margin = new System.Windows.Forms.Padding(0, 5, 5, 0);
-			this.triggerNewButton.Name = "triggerNewButton";
-			this.triggerNewButton.Size = new System.Drawing.Size(78, 23);
-			this.triggerNewButton.TabIndex = 5;
-			this.triggerNewButton.Text = "&New...";
-			this.triggerNewButton.UseVisualStyleBackColor = true;
+			this.triggerDeleteButton.Click += new System.EventHandler(this.triggerDeleteButton_Click);
 			// 
 			// TriggersOptionPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "TriggersOptionPanel";
-			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
+			this.Title = "Trigger Options";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);

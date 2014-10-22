@@ -4,37 +4,49 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
-	public partial class OptionPanel : UserControl
+	
+#if DEBUG
+	internal partial class OptionPanel : UserControl
+#else
+	internal abstract partial class OptionPanel : UserControl
+#endif
 	{
+		protected bool onAssignment = false;
+		protected TaskOptionsEditor parent;
+
 		public OptionPanel()
 		{
 			InitializeComponent();
 		}
 
-		[Browsable(true), DefaultValue((string)null), Category("Appearance")]
+		[Browsable(true), DefaultValue(null), Category("Appearance"), Localizable(true), Bindable(true)]
+		public Image Image { get; set; }
+
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), EditorBrowsable(EditorBrowsableState.Never)]
 		public override string Text
 		{
-			get { return panelTitleLabel.Text; }
-			set { panelTitleLabel.Text = value; }
+			get { return base.Text; }
+			set { base.Text = value; }
 		}
 
-		[Browsable(true), DefaultValue(null), Category("Appearance")]
-		public Image Image
+		[Browsable(true), DefaultValue((string)null), Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[Localizable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+		public string Title { get; set; }
+
+		internal TaskDefinition td { get { return parent.TaskDefinition; } }
+
+		public void Initialize(TaskOptionsEditor editor)
 		{
-			get { return panelImage.Image; }
-			set { panelImage.Image = value; }
+			parent = editor;
+			onAssignment = true;
+			InitializePanel();
+			onAssignment = false;
 		}
 
-		public virtual TaskDefinition TaskDefintion
-		{
-			get { return null; }
-			set { }
-		}
-
-		public virtual bool Editable
-		{
-			get { return true; }
-			set { }
-		}
+#if DEBUG
+		protected virtual void InitializePanel() { }
+#else
+		protected abstract void InitializePanel();
+#endif
 	}
 }

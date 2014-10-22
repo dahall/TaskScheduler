@@ -236,13 +236,13 @@ namespace Microsoft.Win32.TaskScheduler
 				EditorProperties.Resources.LocalMachine : service.TargetServer;
 		}
 
-		private string InvokeCredentialDialog(string userName)
+		internal static string InvokeCredentialDialog(string userName, IWin32Window owner)
 		{
 			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName,
 				EditorProperties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
 			dlg.ValidatePassword = true;
-			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
+			if (dlg.ShowDialog(owner) == DialogResult.OK)
 				return dlg.Password;
 			return null;
 		}
@@ -284,7 +284,7 @@ namespace Microsoft.Win32.TaskScheduler
 					TaskFolder fld = this.TaskService.GetFolder(this.TaskFolder);
 					if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 					{
-						pwd = InvokeCredentialDialog(user);
+						pwd = InvokeCredentialDialog(user, this);
 						if (pwd == null)
 						{
 							//throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
@@ -319,7 +319,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ValidateOneTriggerExpires()
 		{
-			foreach (var tr in this.TaskDefinition.Triggers)
+			return ValidateOneTriggerExpires(this.TaskDefinition.Triggers);
+		}
+
+		internal static bool ValidateOneTriggerExpires(System.Collections.Generic.IEnumerable<Trigger> triggers)
+		{
+			foreach (var tr in triggers)
 			{
 				if (tr.EndBoundary != DateTime.MaxValue)
 					return true;

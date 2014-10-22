@@ -130,13 +130,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 5</value>
+    <value>418, 6</value>
   </data>
   <data name="cancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 0</value>
+    <value>0, 6, 0, 0</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>87, 27</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -160,13 +160,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 5</value>
+    <value>325, 6</value>
   </data>
   <data name="okButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 5, 0</value>
+    <value>0, 6, 6, 0</value>
   </data>
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>87, 27</value>
   </data>
   <data name="okButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -190,13 +190,13 @@
     <value>Bottom</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 457</value>
+    <value>8, 420</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 28</value>
+    <value>505, 33</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -240,8 +240,11 @@
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 2, 0, 2</value>
+  </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 104</value>
+    <value>119, 85</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -262,10 +265,10 @@
     <value>Left</value>
   </data>
   <data name="menuPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
+    <value>8, 8</value>
   </data>
   <data name="menuPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 450</value>
+    <value>121, 412</value>
   </data>
   <data name="menuPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -282,17 +285,116 @@
   <data name="&gt;&gt;menuPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="panelHeading.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelHeading.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="panelTitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelTitleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 6</value>
+  </data>
+  <data name="panelTitleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 0, 0</value>
+  </data>
+  <data name="panelTitleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 37</value>
+  </data>
+  <data name="panelTitleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="panelTitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;panelTitleLabel.Name" xml:space="preserve">
+    <value>panelTitleLabel</value>
+  </data>
+  <data name="&gt;&gt;panelTitleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelTitleLabel.Parent" xml:space="preserve">
+    <value>panelHeading</value>
+  </data>
+  <data name="&gt;&gt;panelTitleLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="panelImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="panelImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 37</value>
+  </data>
+  <data name="panelImage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelImage.Name" xml:space="preserve">
+    <value>panelImage</value>
+  </data>
+  <data name="&gt;&gt;panelImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelImage.Parent" xml:space="preserve">
+    <value>panelHeading</value>
+  </data>
+  <data name="&gt;&gt;panelImage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelHeading.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelHeading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 6</value>
+  </data>
+  <data name="panelHeading.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="panelHeading.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 6</value>
+  </data>
+  <data name="panelHeading.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelHeading.Size" type="System.Drawing.Size, System.Drawing">
+    <value>348, 49</value>
+  </data>
+  <data name="panelHeading.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelHeading.Name" xml:space="preserve">
+    <value>panelHeading</value>
+  </data>
+  <data name="&gt;&gt;panelHeading.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelHeading.Parent" xml:space="preserve">
+    <value>bodyPanel</value>
+  </data>
+  <data name="&gt;&gt;panelHeading.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelHeading.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelTitleLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panelImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="bodyPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="bodyPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 7</value>
+    <value>135, 8</value>
   </data>
   <data name="bodyPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
+  <data name="bodyPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 6, 14, 6</value>
+  </data>
   <data name="bodyPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 450</value>
+    <value>378, 412</value>
   </data>
   <data name="bodyPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -313,10 +415,10 @@
     <value>Left</value>
   </data>
   <data name="splitterPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 7</value>
+    <value>129, 8</value>
   </data>
   <data name="splitterPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5, 450</value>
+    <value>6, 412</value>
   </data>
   <data name="splitterPanel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -337,19 +439,22 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>580, 492</value>
+    <value>521, 461</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 7, 7, 7</value>
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Dialog</value>
+    <value>Task Options</value>
   </data>
   <data name="&gt;&gt;generalItem.Name" xml:space="preserve">
     <value>generalItem</value>

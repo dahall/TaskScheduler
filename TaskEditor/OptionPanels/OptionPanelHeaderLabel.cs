@@ -25,9 +25,9 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		protected override void OnPaint(PaintEventArgs pe)
 		{
 			base.OnPaint(pe);
-			pe.Graphics.FillRectangle(SystemBrushes.Control, this.Bounds);
-			pe.Graphics.DrawLine(SystemPens.ControlDark, this.Bounds.X, this.Bounds.Bottom - 1, this.Bounds.Right, this.Bounds.Bottom - 1);
-			pe.Graphics.DrawString(this.Text, this.Font, SystemBrushes.ControlDark, Rectangle.Inflate(this.Bounds, -4, 0), sf);
+			pe.Graphics.FillRectangle(SystemBrushes.Control, this.ClientRectangle);
+			pe.Graphics.DrawLine(SystemPens.ControlDark, this.ClientRectangle.X, this.ClientRectangle.Bottom - 1, this.ClientRectangle.Right, this.ClientRectangle.Bottom - 1);
+			pe.Graphics.DrawString(this.Text, this.Font, SystemBrushes.ControlDarkDark, Rectangle.Inflate(this.ClientRectangle, -4, 0), sf);
 		}
 	}
 }

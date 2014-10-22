@@ -376,11 +376,6 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
-				using (var dlg = new TaskOptionsEditor())
-				{
-					dlg.Initialize(ts, ts.NewTask());
-					dlg.ShowDialog();
-				}
 				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
@@ -433,7 +428,12 @@ namespace TestTaskService
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
-				DisplayTask(t, true);
+				//DisplayTask(t, true);
+				using (var dlg = new TaskOptionsEditor { Editable = true })
+				{
+					dlg.Initialize(t);
+					dlg.ShowDialog();
+				}
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);

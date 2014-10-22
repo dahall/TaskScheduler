@@ -3182,10 +3182,23 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 		}
 
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <returns></returns>
 		public abstract string FormatDescription();
 
+		/// <summary>
+		/// Formats the description.
+		/// </summary>
+		/// <param name="values">The values.</param>
+		/// <returns></returns>
 		public abstract string FormatDescription(IEnumerable<object> values);
 
+		/// <summary>
+		/// To the XML.
+		/// </summary>
+		/// <returns></returns>
 		public abstract string ToXml();
 
 		/// <summary>

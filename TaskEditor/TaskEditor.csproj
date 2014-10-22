@@ -111,6 +111,9 @@
     <Compile Include="ComObjectSelectionDialog.Designer.cs">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReorderableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DropDownCheckTree.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -200,6 +203,12 @@
     <Compile Include="Native\NetworkListManager.cs" />
     <Compile Include="Native\NetworkProfile.cs" />
     <None Include="ComputerInfo.cs" />
+    <Compile Include="OptionPanels\ActionsOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\ActionsOptionPanel.Designer.cs">
+      <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionPanels\GeneralOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -438,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListColumnEditor.resx">
       <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.resx">
+      <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.resx">
       <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
