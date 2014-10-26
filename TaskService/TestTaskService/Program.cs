@@ -238,6 +238,36 @@ namespace TestTaskService
 			}
 		}
 
+		internal class TemporaryScopedFile : IDisposable
+		{
+			private string fn;
+
+			public TemporaryScopedFile()
+			{
+				fn = System.IO.Path.GetTempFileName();
+			}
+
+			public TemporaryScopedFile(string ext, string fileName = null, string content = null)
+			{
+				fn = System.IO.Path.Combine(System.IO.Path.GetTempPath(), String.Concat(Guid.NewGuid().ToString(), ".", ext));
+				using (var f = System.IO.File.CreateText(fn))
+				{
+					if (content != null)
+						f.Write(content);
+				}
+			}
+
+			public void Dispose()
+			{
+				if (System.IO.File.Exists(fn))
+					System.IO.File.Delete(fn);
+			}
+
+			public override string ToString() { return fn; }
+
+			public static implicit operator string(TemporaryScopedFile tsf) { return tsf.ToString(); }
+		}
+
 		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
 			try
@@ -255,7 +285,7 @@ namespace TestTaskService
 				//td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
 				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
 				ea.HeaderFields.Add("reply-to", "dh@mail.com");
-				ea.Attachments = new object[] { @"C:\findout.txt", @"C:\RAT2Llog.txt" };
+				ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
 				//WriteXml(td, taskName);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 				System.Converter<DateTime, string> d = delegate(DateTime ints) { return ints == DateTime.MinValue ? "Never" : ints.ToString(); };
@@ -415,7 +445,7 @@ namespace TestTaskService
 				sm.MessageBody = "body";
 
 				EmailAction ma = new EmailAction("Subject", "x@x.com", "y@y.com; z@z.com", "Body", "mail.google.com") { Bcc = "c@c.com", Cc = "b@b.com" };
-				ma.Attachments = new object[] { @"C:\RAT2Llog.txt" };
+				ma.Attachments = new object[] { (string)new TemporaryScopedFile() };
 				ma.HeaderFields.Add("N1", "V1");
 				ma.HeaderFields.Add("N2", "V2");
 				td.Actions.Add(ma);
@@ -684,7 +714,7 @@ namespace TestTaskService
 					td.Actions.Context = "Author";
 					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group || td.Principal.LogonType == TaskLogonType.S4U)
 						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
-					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { "c:\\findout.txt" } });
+					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { (string)new TemporaryScopedFile() } });
 					var email = (EmailAction)td.Actions["Email"];
 					email.HeaderFields.Add("Precedence", "bulk");
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));

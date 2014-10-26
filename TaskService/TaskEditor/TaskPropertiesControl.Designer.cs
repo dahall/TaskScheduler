@@ -52,23 +52,10 @@
 			this.changePrincipalButton = new System.Windows.Forms.Button();
 			this.taskUserAcctLabel = new System.Windows.Forms.Label();
 			this.triggersTab = new System.Windows.Forms.TabPage();
-			this.triggerDeleteButton = new System.Windows.Forms.Button();
-			this.triggerEditButton = new System.Windows.Forms.Button();
-			this.triggerNewButton = new System.Windows.Forms.Button();
-			this.triggerListView = new System.Windows.Forms.ListView();
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.triggerCollectionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI();
 			this.taskTriggerIntroLabel = new System.Windows.Forms.Label();
 			this.actionsTab = new System.Windows.Forms.TabPage();
-			this.actionDownButton = new System.Windows.Forms.Button();
-			this.actionUpButton = new System.Windows.Forms.Button();
-			this.actionDeleteButton = new System.Windows.Forms.Button();
-			this.actionEditButton = new System.Windows.Forms.Button();
-			this.actionNewButton = new System.Windows.Forms.Button();
-			this.actionListView = new System.Windows.Forms.ListView();
-			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.actionCollectionUI = new Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI();
 			this.actionIntroLabel = new System.Windows.Forms.Label();
 			this.conditionsTab = new System.Windows.Forms.TabPage();
 			this.networkConditionGroupBox = new System.Windows.Forms.GroupBox();
@@ -103,36 +90,38 @@
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.regInfoTab = new System.Windows.Forms.TabPage();
-			this.label5 = new System.Windows.Forms.Label();
-			this.taskRegSDDLLabel = new System.Windows.Forms.Label();
-			this.taskRegVersionLabel = new System.Windows.Forms.Label();
-			this.taskRegURILabel = new System.Windows.Forms.Label();
-			this.taskRegSourceLabel = new System.Windows.Forms.Label();
-			this.taskRegDocLabel = new System.Windows.Forms.Label();
-			this.taskRegSDDLText = new System.Windows.Forms.TextBox();
+			this.taskRegLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.taskRegVersionText = new System.Windows.Forms.TextBox();
 			this.taskRegURIText = new System.Windows.Forms.TextBox();
 			this.taskRegSourceText = new System.Windows.Forms.TextBox();
 			this.taskRegDocText = new System.Windows.Forms.TextBox();
+			this.taskRegSourceLabel = new System.Windows.Forms.Label();
+			this.taskRegURILabel = new System.Windows.Forms.Label();
+			this.taskRegDocLabel = new System.Windows.Forms.Label();
+			this.taskRegSDDLLabel = new System.Windows.Forms.Label();
+			this.taskRegSDDLText = new System.Windows.Forms.TextBox();
+			this.taskRegVersionLabel = new System.Windows.Forms.Label();
 			this.taskRegSDDLBtn = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
 			this.addPropTab = new System.Windows.Forms.TabPage();
-			this.secHardGroup = new System.Windows.Forms.GroupBox();
-			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
-			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
-			this.principalReqPrivilegesLabel = new System.Windows.Forms.Label();
-			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.autoMaintGroup = new System.Windows.Forms.GroupBox();
 			this.taskMaintenanceDeadlineCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskMaintenanceExclusiveCheck = new System.Windows.Forms.CheckBox();
 			this.taskMaintenanceDeadlineLabel = new System.Windows.Forms.Label();
 			this.taskMaintenancePeriodLabel = new System.Windows.Forms.Label();
 			this.taskMaintenancePeriodCombo = new System.Windows.Forms.TimeSpanPicker();
-			this.taskPriorityCombo = new System.Windows.Forms.ComboBox();
-			this.label8 = new System.Windows.Forms.Label();
-			this.taskVolatileCheck = new System.Windows.Forms.CheckBox();
-			this.taskUseUnifiedSchedulingEngineCheck = new System.Windows.Forms.CheckBox();
-			this.taskDisallowStartOnRemoteAppSessionCheck = new System.Windows.Forms.CheckBox();
+			this.secHardGroup = new System.Windows.Forms.GroupBox();
+			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
+			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
+			this.principalReqPrivilegesLabel = new System.Windows.Forms.Label();
+			this.principalReqPrivilegesDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.taskEnabledCheck = new System.Windows.Forms.CheckBox();
+			this.taskDisallowStartOnRemoteAppSessionCheck = new System.Windows.Forms.CheckBox();
+			this.taskUseUnifiedSchedulingEngineCheck = new System.Windows.Forms.CheckBox();
+			this.taskPriorityCombo = new System.Windows.Forms.ComboBox();
+			this.taskVolatileCheck = new System.Windows.Forms.CheckBox();
+			this.label8 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.runTimesTab = new System.Windows.Forms.TabPage();
 			this.taskRunTimesControl1 = new Microsoft.Win32.TaskScheduler.TaskRunTimesControl();
@@ -155,9 +144,11 @@
 			this.settingsTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).BeginInit();
 			this.regInfoTab.SuspendLayout();
+			this.taskRegLayoutPanel.SuspendLayout();
 			this.addPropTab.SuspendLayout();
-			this.secHardGroup.SuspendLayout();
 			this.autoMaintGroup.SuspendLayout();
+			this.secHardGroup.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.runTimesTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).BeginInit();
 			this.historyTab.SuspendLayout();
@@ -351,10 +342,7 @@
 			// triggersTab
 			// 
 			resources.ApplyResources(this.triggersTab, "triggersTab");
-			this.triggersTab.Controls.Add(this.triggerDeleteButton);
-			this.triggersTab.Controls.Add(this.triggerEditButton);
-			this.triggersTab.Controls.Add(this.triggerNewButton);
-			this.triggersTab.Controls.Add(this.triggerListView);
+			this.triggersTab.Controls.Add(this.triggerCollectionUI1);
 			this.triggersTab.Controls.Add(this.taskTriggerIntroLabel);
 			this.helpProvider.SetHelpKeyword(this.triggersTab, resources.GetString("triggersTab.HelpKeyword"));
 			this.helpProvider.SetHelpNavigator(this.triggersTab, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("triggersTab.HelpNavigator"))));
@@ -362,59 +350,10 @@
 			this.helpProvider.SetShowHelp(this.triggersTab, ((bool)(resources.GetObject("triggersTab.ShowHelp"))));
 			this.triggersTab.UseVisualStyleBackColor = true;
 			// 
-			// triggerDeleteButton
+			// triggerCollectionUI1
 			// 
-			resources.ApplyResources(this.triggerDeleteButton, "triggerDeleteButton");
-			this.triggerDeleteButton.Name = "triggerDeleteButton";
-			this.helpProvider.SetShowHelp(this.triggerDeleteButton, ((bool)(resources.GetObject("triggerDeleteButton.ShowHelp"))));
-			this.triggerDeleteButton.UseVisualStyleBackColor = true;
-			this.triggerDeleteButton.Click += new System.EventHandler(this.triggerDeleteButton_Click);
-			// 
-			// triggerEditButton
-			// 
-			resources.ApplyResources(this.triggerEditButton, "triggerEditButton");
-			this.triggerEditButton.Name = "triggerEditButton";
-			this.helpProvider.SetShowHelp(this.triggerEditButton, ((bool)(resources.GetObject("triggerEditButton.ShowHelp"))));
-			this.triggerEditButton.UseVisualStyleBackColor = true;
-			this.triggerEditButton.Click += new System.EventHandler(this.triggerEditButton_Click);
-			// 
-			// triggerNewButton
-			// 
-			resources.ApplyResources(this.triggerNewButton, "triggerNewButton");
-			this.triggerNewButton.Name = "triggerNewButton";
-			this.helpProvider.SetShowHelp(this.triggerNewButton, ((bool)(resources.GetObject("triggerNewButton.ShowHelp"))));
-			this.triggerNewButton.UseVisualStyleBackColor = true;
-			this.triggerNewButton.Click += new System.EventHandler(this.triggerNewButton_Click);
-			// 
-			// triggerListView
-			// 
-			resources.ApplyResources(this.triggerListView, "triggerListView");
-			this.triggerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-			this.triggerListView.FullRowSelect = true;
-			this.triggerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.triggerListView.HideSelection = false;
-			this.triggerListView.Name = "triggerListView";
-			this.helpProvider.SetShowHelp(this.triggerListView, ((bool)(resources.GetObject("triggerListView.ShowHelp"))));
-			this.triggerListView.ShowItemToolTips = true;
-			this.triggerListView.UseCompatibleStateImageBehavior = false;
-			this.triggerListView.View = System.Windows.Forms.View.Details;
-			this.triggerListView.SelectedIndexChanged += new System.EventHandler(this.triggerListView_SelectedIndexChanged);
-			this.triggerListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.triggerListView_MouseDoubleClick);
-			// 
-			// columnHeader1
-			// 
-			resources.ApplyResources(this.columnHeader1, "columnHeader1");
-			// 
-			// columnHeader2
-			// 
-			resources.ApplyResources(this.columnHeader2, "columnHeader2");
-			// 
-			// columnHeader3
-			// 
-			resources.ApplyResources(this.columnHeader3, "columnHeader3");
+			resources.ApplyResources(this.triggerCollectionUI1, "triggerCollectionUI1");
+			this.triggerCollectionUI1.Name = "triggerCollectionUI1";
 			// 
 			// taskTriggerIntroLabel
 			// 
@@ -425,12 +364,7 @@
 			// actionsTab
 			// 
 			resources.ApplyResources(this.actionsTab, "actionsTab");
-			this.actionsTab.Controls.Add(this.actionDownButton);
-			this.actionsTab.Controls.Add(this.actionUpButton);
-			this.actionsTab.Controls.Add(this.actionDeleteButton);
-			this.actionsTab.Controls.Add(this.actionEditButton);
-			this.actionsTab.Controls.Add(this.actionNewButton);
-			this.actionsTab.Controls.Add(this.actionListView);
+			this.actionsTab.Controls.Add(this.actionCollectionUI);
 			this.actionsTab.Controls.Add(this.actionIntroLabel);
 			this.helpProvider.SetHelpKeyword(this.actionsTab, resources.GetString("actionsTab.HelpKeyword"));
 			this.helpProvider.SetHelpNavigator(this.actionsTab, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("actionsTab.HelpNavigator"))));
@@ -438,70 +372,10 @@
 			this.helpProvider.SetShowHelp(this.actionsTab, ((bool)(resources.GetObject("actionsTab.ShowHelp"))));
 			this.actionsTab.UseVisualStyleBackColor = true;
 			// 
-			// actionDownButton
+			// actionCollectionUI
 			// 
-			resources.ApplyResources(this.actionDownButton, "actionDownButton");
-			this.actionDownButton.Name = "actionDownButton";
-			this.helpProvider.SetShowHelp(this.actionDownButton, ((bool)(resources.GetObject("actionDownButton.ShowHelp"))));
-			this.actionDownButton.UseVisualStyleBackColor = true;
-			this.actionDownButton.Click += new System.EventHandler(this.actionDownButton_Click);
-			// 
-			// actionUpButton
-			// 
-			resources.ApplyResources(this.actionUpButton, "actionUpButton");
-			this.actionUpButton.Name = "actionUpButton";
-			this.helpProvider.SetShowHelp(this.actionUpButton, ((bool)(resources.GetObject("actionUpButton.ShowHelp"))));
-			this.actionUpButton.UseVisualStyleBackColor = true;
-			this.actionUpButton.Click += new System.EventHandler(this.actionUpButton_Click);
-			// 
-			// actionDeleteButton
-			// 
-			resources.ApplyResources(this.actionDeleteButton, "actionDeleteButton");
-			this.actionDeleteButton.Name = "actionDeleteButton";
-			this.helpProvider.SetShowHelp(this.actionDeleteButton, ((bool)(resources.GetObject("actionDeleteButton.ShowHelp"))));
-			this.actionDeleteButton.UseVisualStyleBackColor = true;
-			this.actionDeleteButton.Click += new System.EventHandler(this.actionDeleteButton_Click);
-			// 
-			// actionEditButton
-			// 
-			resources.ApplyResources(this.actionEditButton, "actionEditButton");
-			this.actionEditButton.Name = "actionEditButton";
-			this.helpProvider.SetShowHelp(this.actionEditButton, ((bool)(resources.GetObject("actionEditButton.ShowHelp"))));
-			this.actionEditButton.UseVisualStyleBackColor = true;
-			this.actionEditButton.Click += new System.EventHandler(this.actionEditButton_Click);
-			// 
-			// actionNewButton
-			// 
-			resources.ApplyResources(this.actionNewButton, "actionNewButton");
-			this.actionNewButton.Name = "actionNewButton";
-			this.helpProvider.SetShowHelp(this.actionNewButton, ((bool)(resources.GetObject("actionNewButton.ShowHelp"))));
-			this.actionNewButton.UseVisualStyleBackColor = true;
-			this.actionNewButton.Click += new System.EventHandler(this.actionNewButton_Click);
-			// 
-			// actionListView
-			// 
-			resources.ApplyResources(this.actionListView, "actionListView");
-			this.actionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5});
-			this.actionListView.FullRowSelect = true;
-			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.actionListView.HideSelection = false;
-			this.actionListView.Name = "actionListView";
-			this.helpProvider.SetShowHelp(this.actionListView, ((bool)(resources.GetObject("actionListView.ShowHelp"))));
-			this.actionListView.ShowItemToolTips = true;
-			this.actionListView.UseCompatibleStateImageBehavior = false;
-			this.actionListView.View = System.Windows.Forms.View.Details;
-			this.actionListView.SelectedIndexChanged += new System.EventHandler(this.actionListView_SelectedIndexChanged);
-			this.actionListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.actionListView_MouseDoubleClick);
-			// 
-			// columnHeader4
-			// 
-			resources.ApplyResources(this.columnHeader4, "columnHeader4");
-			// 
-			// columnHeader5
-			// 
-			resources.ApplyResources(this.columnHeader5, "columnHeader5");
+			resources.ApplyResources(this.actionCollectionUI, "actionCollectionUI");
+			this.actionCollectionUI.Name = "actionCollectionUI";
 			// 
 			// actionIntroLabel
 			// 
@@ -525,9 +399,9 @@
 			// 
 			// networkConditionGroupBox
 			// 
-			resources.ApplyResources(this.networkConditionGroupBox, "networkConditionGroupBox");
 			this.networkConditionGroupBox.Controls.Add(this.availableConnectionsCombo);
 			this.networkConditionGroupBox.Controls.Add(this.taskStartIfConnectionCheck);
+			resources.ApplyResources(this.networkConditionGroupBox, "networkConditionGroupBox");
 			this.networkConditionGroupBox.Name = "networkConditionGroupBox";
 			this.helpProvider.SetShowHelp(this.networkConditionGroupBox, ((bool)(resources.GetObject("networkConditionGroupBox.ShowHelp"))));
 			this.networkConditionGroupBox.TabStop = false;
@@ -551,10 +425,10 @@
 			// 
 			// powerConditionGroupBox
 			// 
-			resources.ApplyResources(this.powerConditionGroupBox, "powerConditionGroupBox");
 			this.powerConditionGroupBox.Controls.Add(this.taskStopIfGoingOnBatteriesCheck);
 			this.powerConditionGroupBox.Controls.Add(this.taskWakeToRunCheck);
 			this.powerConditionGroupBox.Controls.Add(this.taskDisallowStartIfOnBatteriesCheck);
+			resources.ApplyResources(this.powerConditionGroupBox, "powerConditionGroupBox");
 			this.powerConditionGroupBox.Name = "powerConditionGroupBox";
 			this.helpProvider.SetShowHelp(this.powerConditionGroupBox, ((bool)(resources.GetObject("powerConditionGroupBox.ShowHelp"))));
 			this.powerConditionGroupBox.TabStop = false;
@@ -585,13 +459,13 @@
 			// 
 			// idleConditionGroupBox
 			// 
-			resources.ApplyResources(this.idleConditionGroupBox, "idleConditionGroupBox");
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleWaitTimeoutCombo);
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCombo);
 			this.idleConditionGroupBox.Controls.Add(this.taskRestartOnIdleCheck);
 			this.idleConditionGroupBox.Controls.Add(this.taskStopOnIdleEndCheck);
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleWaitTimeoutLabel);
 			this.idleConditionGroupBox.Controls.Add(this.taskIdleDurationCheck);
+			resources.ApplyResources(this.idleConditionGroupBox, "idleConditionGroupBox");
 			this.idleConditionGroupBox.Name = "idleConditionGroupBox";
 			this.helpProvider.SetShowHelp(this.idleConditionGroupBox, ((bool)(resources.GetObject("idleConditionGroupBox.ShowHelp"))));
 			this.idleConditionGroupBox.TabStop = false;
@@ -784,45 +658,63 @@
 			// regInfoTab
 			// 
 			resources.ApplyResources(this.regInfoTab, "regInfoTab");
+			this.regInfoTab.Controls.Add(this.taskRegLayoutPanel);
 			this.regInfoTab.Controls.Add(this.label5);
-			this.regInfoTab.Controls.Add(this.taskRegSDDLLabel);
-			this.regInfoTab.Controls.Add(this.taskRegVersionLabel);
-			this.regInfoTab.Controls.Add(this.taskRegURILabel);
-			this.regInfoTab.Controls.Add(this.taskRegSourceLabel);
-			this.regInfoTab.Controls.Add(this.taskRegDocLabel);
-			this.regInfoTab.Controls.Add(this.taskRegSDDLText);
-			this.regInfoTab.Controls.Add(this.taskRegVersionText);
-			this.regInfoTab.Controls.Add(this.taskRegURIText);
-			this.regInfoTab.Controls.Add(this.taskRegSourceText);
-			this.regInfoTab.Controls.Add(this.taskRegDocText);
-			this.regInfoTab.Controls.Add(this.taskRegSDDLBtn);
 			this.regInfoTab.Name = "regInfoTab";
 			this.helpProvider.SetShowHelp(this.regInfoTab, ((bool)(resources.GetObject("regInfoTab.ShowHelp"))));
 			this.regInfoTab.UseVisualStyleBackColor = true;
 			// 
-			// label5
+			// taskRegLayoutPanel
 			// 
-			resources.ApplyResources(this.label5, "label5");
-			this.label5.Name = "label5";
-			this.helpProvider.SetShowHelp(this.label5, ((bool)(resources.GetObject("label5.ShowHelp"))));
+			resources.ApplyResources(this.taskRegLayoutPanel, "tableLayoutPanel1");
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegSourceLabel, 0, 0);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegURILabel, 0, 1);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegDocText, 1, 4);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegDocLabel, 0, 4);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegSDDLLabel, 0, 3);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegSourceText, 1, 0);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegURIText, 1, 1);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegVersionText, 1, 2);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegSDDLText, 1, 3);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegVersionLabel, 0, 2);
+			this.taskRegLayoutPanel.Controls.Add(this.taskRegSDDLBtn, 2, 3);
+			this.taskRegLayoutPanel.Name = "tableLayoutPanel1";
 			// 
-			// taskRegSDDLLabel
+			// taskRegVersionText
 			// 
-			resources.ApplyResources(this.taskRegSDDLLabel, "taskRegSDDLLabel");
-			this.taskRegSDDLLabel.Name = "taskRegSDDLLabel";
-			this.helpProvider.SetShowHelp(this.taskRegSDDLLabel, ((bool)(resources.GetObject("taskRegSDDLLabel.ShowHelp"))));
+			resources.ApplyResources(this.taskRegVersionText, "taskRegVersionText");
+			this.taskRegLayoutPanel.SetColumnSpan(this.taskRegVersionText, 2);
+			this.errorProvider.SetIconPadding(this.taskRegVersionText, ((int)(resources.GetObject("taskRegVersionText.IconPadding"))));
+			this.taskRegVersionText.Name = "taskRegVersionText";
+			this.helpProvider.SetShowHelp(this.taskRegVersionText, ((bool)(resources.GetObject("taskRegVersionText.ShowHelp"))));
+			this.taskRegVersionText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegVersionText_Validating);
+			this.taskRegVersionText.Validated += new System.EventHandler(this.taskRegVersionText_Validated);
 			// 
-			// taskRegVersionLabel
+			// taskRegURIText
 			// 
-			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
-			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
-			this.helpProvider.SetShowHelp(this.taskRegVersionLabel, ((bool)(resources.GetObject("taskRegVersionLabel.ShowHelp"))));
+			resources.ApplyResources(this.taskRegURIText, "taskRegURIText");
+			this.taskRegLayoutPanel.SetColumnSpan(this.taskRegURIText, 2);
+			this.errorProvider.SetIconPadding(this.taskRegURIText, ((int)(resources.GetObject("taskRegURIText.IconPadding"))));
+			this.taskRegURIText.Name = "taskRegURIText";
+			this.helpProvider.SetShowHelp(this.taskRegURIText, ((bool)(resources.GetObject("taskRegURIText.ShowHelp"))));
+			this.taskRegURIText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegURIText_Validating);
+			this.taskRegURIText.Validated += new System.EventHandler(this.taskRegURIText_Validated);
 			// 
-			// taskRegURILabel
+			// taskRegSourceText
 			// 
-			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
-			this.taskRegURILabel.Name = "taskRegURILabel";
-			this.helpProvider.SetShowHelp(this.taskRegURILabel, ((bool)(resources.GetObject("taskRegURILabel.ShowHelp"))));
+			resources.ApplyResources(this.taskRegSourceText, "taskRegSourceText");
+			this.taskRegLayoutPanel.SetColumnSpan(this.taskRegSourceText, 2);
+			this.taskRegSourceText.Name = "taskRegSourceText";
+			this.helpProvider.SetShowHelp(this.taskRegSourceText, ((bool)(resources.GetObject("taskRegSourceText.ShowHelp"))));
+			this.taskRegSourceText.Leave += new System.EventHandler(this.taskRegSourceText_Leave);
+			// 
+			// taskRegDocText
+			// 
+			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
+			this.taskRegLayoutPanel.SetColumnSpan(this.taskRegDocText, 2);
+			this.taskRegDocText.Name = "taskRegDocText";
+			this.helpProvider.SetShowHelp(this.taskRegDocText, ((bool)(resources.GetObject("taskRegDocText.ShowHelp"))));
+			this.taskRegDocText.Leave += new System.EventHandler(this.taskRegDocText_Leave);
 			// 
 			// taskRegSourceLabel
 			// 
@@ -830,11 +722,23 @@
 			this.taskRegSourceLabel.Name = "taskRegSourceLabel";
 			this.helpProvider.SetShowHelp(this.taskRegSourceLabel, ((bool)(resources.GetObject("taskRegSourceLabel.ShowHelp"))));
 			// 
+			// taskRegURILabel
+			// 
+			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
+			this.taskRegURILabel.Name = "taskRegURILabel";
+			this.helpProvider.SetShowHelp(this.taskRegURILabel, ((bool)(resources.GetObject("taskRegURILabel.ShowHelp"))));
+			// 
 			// taskRegDocLabel
 			// 
 			resources.ApplyResources(this.taskRegDocLabel, "taskRegDocLabel");
 			this.taskRegDocLabel.Name = "taskRegDocLabel";
 			this.helpProvider.SetShowHelp(this.taskRegDocLabel, ((bool)(resources.GetObject("taskRegDocLabel.ShowHelp"))));
+			// 
+			// taskRegSDDLLabel
+			// 
+			resources.ApplyResources(this.taskRegSDDLLabel, "taskRegSDDLLabel");
+			this.taskRegSDDLLabel.Name = "taskRegSDDLLabel";
+			this.helpProvider.SetShowHelp(this.taskRegSDDLLabel, ((bool)(resources.GetObject("taskRegSDDLLabel.ShowHelp"))));
 			// 
 			// taskRegSDDLText
 			// 
@@ -845,37 +749,11 @@
 			this.taskRegSDDLText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegSDDLText_Validating);
 			this.taskRegSDDLText.Validated += new System.EventHandler(this.taskRegSDDLText_Validated);
 			// 
-			// taskRegVersionText
+			// taskRegVersionLabel
 			// 
-			resources.ApplyResources(this.taskRegVersionText, "taskRegVersionText");
-			this.errorProvider.SetIconPadding(this.taskRegVersionText, ((int)(resources.GetObject("taskRegVersionText.IconPadding"))));
-			this.taskRegVersionText.Name = "taskRegVersionText";
-			this.helpProvider.SetShowHelp(this.taskRegVersionText, ((bool)(resources.GetObject("taskRegVersionText.ShowHelp"))));
-			this.taskRegVersionText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegVersionText_Validating);
-			this.taskRegVersionText.Validated += new System.EventHandler(this.taskRegVersionText_Validated);
-			// 
-			// taskRegURIText
-			// 
-			resources.ApplyResources(this.taskRegURIText, "taskRegURIText");
-			this.errorProvider.SetIconPadding(this.taskRegURIText, ((int)(resources.GetObject("taskRegURIText.IconPadding"))));
-			this.taskRegURIText.Name = "taskRegURIText";
-			this.helpProvider.SetShowHelp(this.taskRegURIText, ((bool)(resources.GetObject("taskRegURIText.ShowHelp"))));
-			this.taskRegURIText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegURIText_Validating);
-			this.taskRegURIText.Validated += new System.EventHandler(this.taskRegURIText_Validated);
-			// 
-			// taskRegSourceText
-			// 
-			resources.ApplyResources(this.taskRegSourceText, "taskRegSourceText");
-			this.taskRegSourceText.Name = "taskRegSourceText";
-			this.helpProvider.SetShowHelp(this.taskRegSourceText, ((bool)(resources.GetObject("taskRegSourceText.ShowHelp"))));
-			this.taskRegSourceText.Leave += new System.EventHandler(this.taskRegSourceText_Leave);
-			// 
-			// taskRegDocText
-			// 
-			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
-			this.taskRegDocText.Name = "taskRegDocText";
-			this.helpProvider.SetShowHelp(this.taskRegDocText, ((bool)(resources.GetObject("taskRegDocText.ShowHelp"))));
-			this.taskRegDocText.Leave += new System.EventHandler(this.taskRegDocText_Leave);
+			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
+			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
+			this.helpProvider.SetShowHelp(this.taskRegVersionLabel, ((bool)(resources.GetObject("taskRegVersionLabel.ShowHelp"))));
 			// 
 			// taskRegSDDLBtn
 			// 
@@ -885,73 +763,31 @@
 			this.taskRegSDDLBtn.UseVisualStyleBackColor = true;
 			this.taskRegSDDLBtn.Click += new System.EventHandler(this.taskRegSDDLBtn_Click);
 			// 
+			// label5
+			// 
+			resources.ApplyResources(this.label5, "label5");
+			this.label5.Name = "label5";
+			this.helpProvider.SetShowHelp(this.label5, ((bool)(resources.GetObject("label5.ShowHelp"))));
+			// 
 			// addPropTab
 			// 
 			resources.ApplyResources(this.addPropTab, "addPropTab");
-			this.addPropTab.Controls.Add(this.secHardGroup);
 			this.addPropTab.Controls.Add(this.autoMaintGroup);
-			this.addPropTab.Controls.Add(this.taskPriorityCombo);
-			this.addPropTab.Controls.Add(this.label8);
-			this.addPropTab.Controls.Add(this.taskVolatileCheck);
-			this.addPropTab.Controls.Add(this.taskUseUnifiedSchedulingEngineCheck);
-			this.addPropTab.Controls.Add(this.taskDisallowStartOnRemoteAppSessionCheck);
-			this.addPropTab.Controls.Add(this.taskEnabledCheck);
+			this.addPropTab.Controls.Add(this.secHardGroup);
+			this.addPropTab.Controls.Add(this.panel1);
 			this.addPropTab.Controls.Add(this.label4);
 			this.addPropTab.Name = "addPropTab";
 			this.helpProvider.SetShowHelp(this.addPropTab, ((bool)(resources.GetObject("addPropTab.ShowHelp"))));
 			this.addPropTab.UseVisualStyleBackColor = true;
 			// 
-			// secHardGroup
-			// 
-			resources.ApplyResources(this.secHardGroup, "secHardGroup");
-			this.secHardGroup.Controls.Add(this.principalSIDTypeLabel);
-			this.secHardGroup.Controls.Add(this.principalSIDTypeCombo);
-			this.secHardGroup.Controls.Add(this.principalReqPrivilegesLabel);
-			this.secHardGroup.Controls.Add(this.principalReqPrivilegesDropDown);
-			this.secHardGroup.Name = "secHardGroup";
-			this.helpProvider.SetShowHelp(this.secHardGroup, ((bool)(resources.GetObject("secHardGroup.ShowHelp"))));
-			this.secHardGroup.TabStop = false;
-			// 
-			// principalSIDTypeLabel
-			// 
-			resources.ApplyResources(this.principalSIDTypeLabel, "principalSIDTypeLabel");
-			this.principalSIDTypeLabel.Name = "principalSIDTypeLabel";
-			this.helpProvider.SetShowHelp(this.principalSIDTypeLabel, ((bool)(resources.GetObject("principalSIDTypeLabel.ShowHelp"))));
-			// 
-			// principalSIDTypeCombo
-			// 
-			this.principalSIDTypeCombo.DisplayMember = "Text";
-			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
-			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
-			this.helpProvider.SetShowHelp(this.principalSIDTypeCombo, ((bool)(resources.GetObject("principalSIDTypeCombo.ShowHelp"))));
-			this.principalSIDTypeCombo.ValueMember = "Value";
-			this.principalSIDTypeCombo.SelectedIndexChanged += new System.EventHandler(this.principalSIDTypeCombo_SelectedIndexChanged);
-			// 
-			// principalReqPrivilegesLabel
-			// 
-			resources.ApplyResources(this.principalReqPrivilegesLabel, "principalReqPrivilegesLabel");
-			this.principalReqPrivilegesLabel.Name = "principalReqPrivilegesLabel";
-			this.helpProvider.SetShowHelp(this.principalReqPrivilegesLabel, ((bool)(resources.GetObject("principalReqPrivilegesLabel.ShowHelp"))));
-			// 
-			// principalReqPrivilegesDropDown
-			// 
-			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
-			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
-			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
-			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
-			this.helpProvider.SetShowHelp(this.principalReqPrivilegesDropDown, ((bool)(resources.GetObject("principalReqPrivilegesDropDown.ShowHelp"))));
-			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
-			// 
 			// autoMaintGroup
 			// 
-			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
 			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineCombo);
 			this.autoMaintGroup.Controls.Add(this.taskMaintenanceExclusiveCheck);
 			this.autoMaintGroup.Controls.Add(this.taskMaintenanceDeadlineLabel);
 			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodLabel);
 			this.autoMaintGroup.Controls.Add(this.taskMaintenancePeriodCombo);
+			resources.ApplyResources(this.autoMaintGroup, "autoMaintGroup");
 			this.autoMaintGroup.Name = "autoMaintGroup";
 			this.helpProvider.SetShowHelp(this.autoMaintGroup, ((bool)(resources.GetObject("autoMaintGroup.ShowHelp"))));
 			this.autoMaintGroup.TabStop = false;
@@ -990,35 +826,67 @@
 			this.helpProvider.SetShowHelp(this.taskMaintenancePeriodCombo, ((bool)(resources.GetObject("taskMaintenancePeriodCombo.ShowHelp"))));
 			this.taskMaintenancePeriodCombo.ValueChanged += new System.EventHandler(this.taskMaintenancePeriodCombo_ValueChanged);
 			// 
-			// taskPriorityCombo
+			// secHardGroup
 			// 
-			this.taskPriorityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			resources.ApplyResources(this.taskPriorityCombo, "taskPriorityCombo");
-			this.taskPriorityCombo.Name = "taskPriorityCombo";
-			this.helpProvider.SetShowHelp(this.taskPriorityCombo, ((bool)(resources.GetObject("taskPriorityCombo.ShowHelp"))));
-			this.taskPriorityCombo.SelectedIndexChanged += new System.EventHandler(this.taskPriorityCombo_SelectedIndexChanged);
+			this.secHardGroup.Controls.Add(this.principalSIDTypeLabel);
+			this.secHardGroup.Controls.Add(this.principalSIDTypeCombo);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesLabel);
+			this.secHardGroup.Controls.Add(this.principalReqPrivilegesDropDown);
+			resources.ApplyResources(this.secHardGroup, "secHardGroup");
+			this.secHardGroup.Name = "secHardGroup";
+			this.helpProvider.SetShowHelp(this.secHardGroup, ((bool)(resources.GetObject("secHardGroup.ShowHelp"))));
+			this.secHardGroup.TabStop = false;
 			// 
-			// label8
+			// principalSIDTypeLabel
 			// 
-			resources.ApplyResources(this.label8, "label8");
-			this.label8.Name = "label8";
-			this.helpProvider.SetShowHelp(this.label8, ((bool)(resources.GetObject("label8.ShowHelp"))));
+			resources.ApplyResources(this.principalSIDTypeLabel, "principalSIDTypeLabel");
+			this.principalSIDTypeLabel.Name = "principalSIDTypeLabel";
+			this.helpProvider.SetShowHelp(this.principalSIDTypeLabel, ((bool)(resources.GetObject("principalSIDTypeLabel.ShowHelp"))));
 			// 
-			// taskVolatileCheck
+			// principalSIDTypeCombo
 			// 
-			resources.ApplyResources(this.taskVolatileCheck, "taskVolatileCheck");
-			this.taskVolatileCheck.Name = "taskVolatileCheck";
-			this.helpProvider.SetShowHelp(this.taskVolatileCheck, ((bool)(resources.GetObject("taskVolatileCheck.ShowHelp"))));
-			this.taskVolatileCheck.UseVisualStyleBackColor = true;
-			this.taskVolatileCheck.CheckedChanged += new System.EventHandler(this.taskVolatileCheck_CheckedChanged);
+			this.principalSIDTypeCombo.DisplayMember = "Text";
+			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
+			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
+			this.helpProvider.SetShowHelp(this.principalSIDTypeCombo, ((bool)(resources.GetObject("principalSIDTypeCombo.ShowHelp"))));
+			this.principalSIDTypeCombo.ValueMember = "Value";
+			this.principalSIDTypeCombo.SelectedIndexChanged += new System.EventHandler(this.principalSIDTypeCombo_SelectedIndexChanged);
 			// 
-			// taskUseUnifiedSchedulingEngineCheck
+			// principalReqPrivilegesLabel
 			// 
-			resources.ApplyResources(this.taskUseUnifiedSchedulingEngineCheck, "taskUseUnifiedSchedulingEngineCheck");
-			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
-			this.helpProvider.SetShowHelp(this.taskUseUnifiedSchedulingEngineCheck, ((bool)(resources.GetObject("taskUseUnifiedSchedulingEngineCheck.ShowHelp"))));
-			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
-			this.taskUseUnifiedSchedulingEngineCheck.CheckedChanged += new System.EventHandler(this.taskUseUnifiedSchedulingEngineCheck_CheckedChanged);
+			resources.ApplyResources(this.principalReqPrivilegesLabel, "principalReqPrivilegesLabel");
+			this.principalReqPrivilegesLabel.Name = "principalReqPrivilegesLabel";
+			this.helpProvider.SetShowHelp(this.principalReqPrivilegesLabel, ((bool)(resources.GetObject("principalReqPrivilegesLabel.ShowHelp"))));
+			// 
+			// principalReqPrivilegesDropDown
+			// 
+			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
+			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
+			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
+			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
+			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
+			this.helpProvider.SetShowHelp(this.principalReqPrivilegesDropDown, ((bool)(resources.GetObject("principalReqPrivilegesDropDown.ShowHelp"))));
+			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.taskEnabledCheck);
+			this.panel1.Controls.Add(this.taskDisallowStartOnRemoteAppSessionCheck);
+			this.panel1.Controls.Add(this.taskUseUnifiedSchedulingEngineCheck);
+			this.panel1.Controls.Add(this.taskPriorityCombo);
+			this.panel1.Controls.Add(this.taskVolatileCheck);
+			this.panel1.Controls.Add(this.label8);
+			resources.ApplyResources(this.panel1, "panel1");
+			this.panel1.Name = "panel1";
+			// 
+			// taskEnabledCheck
+			// 
+			resources.ApplyResources(this.taskEnabledCheck, "taskEnabledCheck");
+			this.taskEnabledCheck.Name = "taskEnabledCheck";
+			this.helpProvider.SetShowHelp(this.taskEnabledCheck, ((bool)(resources.GetObject("taskEnabledCheck.ShowHelp"))));
+			this.taskEnabledCheck.UseVisualStyleBackColor = true;
+			this.taskEnabledCheck.CheckedChanged += new System.EventHandler(this.taskEnabledCheck_CheckedChanged);
 			// 
 			// taskDisallowStartOnRemoteAppSessionCheck
 			// 
@@ -1028,13 +896,35 @@
 			this.taskDisallowStartOnRemoteAppSessionCheck.UseVisualStyleBackColor = true;
 			this.taskDisallowStartOnRemoteAppSessionCheck.CheckedChanged += new System.EventHandler(this.taskDisallowStartOnRemoteAppSessionCheck_CheckedChanged);
 			// 
-			// taskEnabledCheck
+			// taskUseUnifiedSchedulingEngineCheck
 			// 
-			resources.ApplyResources(this.taskEnabledCheck, "taskEnabledCheck");
-			this.taskEnabledCheck.Name = "taskEnabledCheck";
-			this.helpProvider.SetShowHelp(this.taskEnabledCheck, ((bool)(resources.GetObject("taskEnabledCheck.ShowHelp"))));
-			this.taskEnabledCheck.UseVisualStyleBackColor = true;
-			this.taskEnabledCheck.CheckedChanged += new System.EventHandler(this.taskEnabledCheck_CheckedChanged);
+			resources.ApplyResources(this.taskUseUnifiedSchedulingEngineCheck, "taskUseUnifiedSchedulingEngineCheck");
+			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
+			this.helpProvider.SetShowHelp(this.taskUseUnifiedSchedulingEngineCheck, ((bool)(resources.GetObject("taskUseUnifiedSchedulingEngineCheck.ShowHelp"))));
+			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
+			this.taskUseUnifiedSchedulingEngineCheck.CheckedChanged += new System.EventHandler(this.taskUseUnifiedSchedulingEngineCheck_CheckedChanged);
+			// 
+			// taskPriorityCombo
+			// 
+			this.taskPriorityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.taskPriorityCombo, "taskPriorityCombo");
+			this.taskPriorityCombo.Name = "taskPriorityCombo";
+			this.helpProvider.SetShowHelp(this.taskPriorityCombo, ((bool)(resources.GetObject("taskPriorityCombo.ShowHelp"))));
+			this.taskPriorityCombo.SelectedIndexChanged += new System.EventHandler(this.taskPriorityCombo_SelectedIndexChanged);
+			// 
+			// taskVolatileCheck
+			// 
+			resources.ApplyResources(this.taskVolatileCheck, "taskVolatileCheck");
+			this.taskVolatileCheck.Name = "taskVolatileCheck";
+			this.helpProvider.SetShowHelp(this.taskVolatileCheck, ((bool)(resources.GetObject("taskVolatileCheck.ShowHelp"))));
+			this.taskVolatileCheck.UseVisualStyleBackColor = true;
+			this.taskVolatileCheck.CheckedChanged += new System.EventHandler(this.taskVolatileCheck_CheckedChanged);
+			// 
+			// label8
+			// 
+			resources.ApplyResources(this.label8, "label8");
+			this.label8.Name = "label8";
+			this.helpProvider.SetShowHelp(this.label8, ((bool)(resources.GetObject("label8.ShowHelp"))));
 			// 
 			// label4
 			// 
@@ -1126,13 +1016,15 @@
 			this.settingsTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRestartCountText)).EndInit();
 			this.regInfoTab.ResumeLayout(false);
-			this.regInfoTab.PerformLayout();
+			this.taskRegLayoutPanel.ResumeLayout(false);
+			this.taskRegLayoutPanel.PerformLayout();
 			this.addPropTab.ResumeLayout(false);
-			this.addPropTab.PerformLayout();
-			this.secHardGroup.ResumeLayout(false);
-			this.secHardGroup.PerformLayout();
 			this.autoMaintGroup.ResumeLayout(false);
 			this.autoMaintGroup.PerformLayout();
+			this.secHardGroup.ResumeLayout(false);
+			this.secHardGroup.PerformLayout();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.runTimesTab.ResumeLayout(false);
 			this.runTimesTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskRunTimesControl1)).EndInit();
@@ -1162,23 +1054,8 @@
 		private System.Windows.Forms.Label taskVersionLabel;
 		private System.Windows.Forms.CheckBox taskHiddenCheck;
 		private System.Windows.Forms.CheckBox taskRunLevelCheck;
-		private System.Windows.Forms.Button triggerDeleteButton;
-		private System.Windows.Forms.Button triggerEditButton;
-		private System.Windows.Forms.Button triggerNewButton;
-		private System.Windows.Forms.ListView triggerListView;
-		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.ColumnHeader columnHeader2;
-		private System.Windows.Forms.ColumnHeader columnHeader3;
 		private System.Windows.Forms.Label taskTriggerIntroLabel;
-		private System.Windows.Forms.Button actionDeleteButton;
-		private System.Windows.Forms.Button actionEditButton;
-		private System.Windows.Forms.Button actionNewButton;
-		private System.Windows.Forms.ListView actionListView;
-		private System.Windows.Forms.ColumnHeader columnHeader4;
-		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.Label actionIntroLabel;
-		private System.Windows.Forms.Button actionUpButton;
-		private System.Windows.Forms.Button actionDownButton;
 		private System.Windows.Forms.Label conditionIntroLabel;
 		private System.Windows.Forms.Label taskNameLabel;
 		private System.Windows.Forms.Label taskAuthorLabel;
@@ -1257,5 +1134,9 @@
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.Label label5;
 		private TaskHistoryControl taskHistoryControl1;
+		private UIComponents.ActionCollectionUI actionCollectionUI;
+		private UIComponents.TriggerCollectionUI triggerCollectionUI1;
+		private System.Windows.Forms.TableLayoutPanel taskRegLayoutPanel;
+		private System.Windows.Forms.Panel panel1;
 	}
 }

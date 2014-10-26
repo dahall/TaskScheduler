@@ -44,7 +44,7 @@
 		/// <typeparam name="T">The <see cref="Control"/> based <see cref="Type"/> of the parent control to retrieve.</typeparam>
 		/// <param name="ctrl">This control.</param>
 		/// <returns>The parent control matching T or null if not found.</returns>
-		public static T GetParent<T>(this Control ctrl) where T : Control, new()
+		public static T GetParent<T>(this Control ctrl) where T : class
 		{
 			Control p = ctrl.Parent;
 			while (p != null & !(p is T))

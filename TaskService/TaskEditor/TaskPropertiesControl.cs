@@ -10,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[Designer(typeof(Design.TaskPropertiesControlDesigner)), DesignTimeVisible(true)]
 	[DefaultProperty("AvailableTabs"), DefaultEvent("ComponentError")]
-	public partial class TaskPropertiesControl : UserControl
+	public partial class TaskPropertiesControl : UserControl, ITaskEditor
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
 
@@ -75,10 +75,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Settings for infoTab
 			if (secEd != null)
-			{
-				taskRegSDDLText.Width = taskRegSDDLText.Width - taskRegSDDLBtn.Width - 7;
 				taskRegSDDLBtn.Visible = true;
-			}
+			else
+				taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, 2);
 
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
@@ -337,21 +336,10 @@ namespace Microsoft.Win32.TaskScheduler
 				taskHiddenCheck.Checked = td.Settings.Hidden;
 
 				// Set Triggers tab
-				triggerListView.Items.Clear();
-				foreach (Trigger tr in td.Triggers)
-				{
-					AddTriggerToList(tr, -1);
-				}
-				SetTriggerButtonState();
+				triggerCollectionUI1.RefreshState();
 
 				// Set Actions tab
-				actionListView.Items.Clear();
-				if (td.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
-				{
-					foreach (Action act in td.Actions)
-						AddActionToList(act, -1);
-				}
-				SetActionButtonState();
+				actionCollectionUI.RefreshState();
 
 				// Set Conditions tab
 				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
@@ -450,10 +438,16 @@ namespace Microsoft.Win32.TaskScheduler
 			private set { service = value; }
 		}
 
-		private bool IsV2
+		/// <summary>
+		/// Gets or sets a value indicating whether this task definition is v2.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this task definition is v2; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsV2
 		{
 			get { return v2; }
-			set
+			private set
 			{
 				if (v2 != value || onAssignment)
 				{
@@ -513,122 +507,6 @@ namespace Microsoft.Win32.TaskScheduler
 			EventHandler<ComponentErrorEventArgs> handler = ComponentError;
 			if (handler != null)
 				handler(this, e);
-		}
-
-		private void actionDeleteButton_Click(object sender, EventArgs e)
-		{
-			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				td.Actions.RemoveAt(idx);
-				actionListView.Items.RemoveAt(idx);
-				SetActionButtonState();
-			}
-		}
-
-		private void actionDownButton_Click(object sender, EventArgs e)
-		{
-			if ((this.actionListView.SelectedIndices.Count == 1) && (this.actionListView.SelectedIndices[0] != (this.actionListView.Items.Count - 1)))
-			{
-				int index = actionListView.SelectedIndices[0];
-				actionListView.BeginUpdate();
-				ListViewItem lvi = this.actionListView.Items[index];
-				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
-				actionListView.Items.RemoveAt(index);
-				td.Actions.RemoveAt(index);
-				actionListView.Items.Insert(index + 1, lvi);
-				td.Actions.Insert(index + 1, aTemp as Action);
-				lvi.Tag = aTemp;
-				actionListView.EndUpdate();
-			}
-		}
-
-		private void actionEditButton_Click(object sender, EventArgs e)
-		{
-			int idx = actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				using (ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action))
-				{
-					if (!v2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
-					dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
-					dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-					if (dlg.ShowDialog() == DialogResult.OK)
-					{
-						actionListView.Items.RemoveAt(idx);
-						td.Actions[idx] = dlg.Action;
-						AddActionToList(dlg.Action, idx);
-						actionListView.Items[idx].Selected = true;
-					}
-				}
-			}
-		}
-
-		private void actionListView_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			if (editable)
-				actionEditButton_Click(sender, EventArgs.Empty);
-		}
-
-		private void actionListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			SetActionButtonState();
-		}
-
-		private void actionNewButton_Click(object sender, EventArgs e)
-		{
-			using (ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !v2 })
-			{
-				dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
-				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					td.Actions.Add(dlg.Action);
-					AddActionToList(dlg.Action, -1);
-					SetActionButtonState();
-				}
-			}
-		}
-
-		private void actionUpButton_Click(object sender, EventArgs e)
-		{
-			if ((this.actionListView.SelectedIndices.Count == 1) && (this.actionListView.SelectedIndices[0] != 0))
-			{
-				int index = actionListView.SelectedIndices[0];
-				actionListView.BeginUpdate();
-				ListViewItem lvi = this.actionListView.Items[index];
-				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
-				actionListView.Items.RemoveAt(index);
-				td.Actions.RemoveAt(index);
-				actionListView.Items.Insert(index - 1, lvi);
-				td.Actions.Insert(index - 1, aTemp);
-				lvi.Tag = aTemp;
-				actionListView.EndUpdate();
-			}
-		}
-
-		private void AddActionToList(Action act, int index)
-		{
-			ListViewItem lvi = new ListViewItem(new string[] {
-					TaskEnumGlobalizer.GetString(act.ActionType),
-					act.ToString() }) { Tag = act };
-			if (index < 0)
-				actionListView.Items.Add(lvi);
-			else
-				actionListView.Items.Insert(index, lvi);
-		}
-
-		private void AddTriggerToList(Trigger tr, int index)
-		{
-			ListViewItem lvi = new ListViewItem(new string[] {
-					TaskEnumGlobalizer.GetString(tr.TriggerType),
-					tr.ToString(),
-					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
-				});
-			if (index < 0)
-				triggerListView.Items.Add(lvi);
-			else
-				triggerListView.Items.Insert(index, lvi);
 		}
 
 		private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -706,12 +584,10 @@ namespace Microsoft.Win32.TaskScheduler
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
 
 			// Triggers tab
-			triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = editable;
-			triggerListView.Enabled = editable;
+			triggerCollectionUI1.RefreshState();
 
 			// Actions tab
-			actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editable;
-			actionListView.Enabled = actionUpButton.Visible = actionDownButton.Visible = editable;
+			actionCollectionUI.RefreshState();
 
 			// Conditions tab
 			conditionsTab.EnableChildren(editable);
@@ -839,19 +715,6 @@ namespace Microsoft.Win32.TaskScheduler
 				taskRunTimesControl1.Task = null;
 			}
 			runTimesTaskName = null;
-		}
-
-		private void SetActionButtonState()
-		{
-			actionUpButton.Enabled = actionDownButton.Enabled = actionListView.Items.Count > 1;
-			actionNewButton.Enabled = editable && (v2 || actionListView.Items.Count == 0);
-			actionEditButton.Enabled = actionDeleteButton.Enabled = editable && actionListView.Items.Count > 0 && actionListView.SelectedIndices.Count > 0;
-		}
-
-		private void SetTriggerButtonState()
-		{
-			triggerNewButton.Enabled = editable;
-			triggerEditButton.Enabled = triggerDeleteButton.Enabled = editable && triggerListView.Items.Count > 0 && triggerListView.SelectedIndices.Count > 0;
 		}
 
 		private void SetUserControls(TaskLogonType logonType)
@@ -1245,69 +1108,6 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Settings.WakeToRun = taskWakeToRunCheck.Checked;
 		}
 
-		private void triggerDeleteButton_Click(object sender, EventArgs e)
-		{
-			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				td.Triggers.RemoveAt(idx);
-				triggerListView.Items.RemoveAt(idx);
-			}
-		}
-
-		private void triggerEditButton_Click(object sender, EventArgs e)
-		{
-			int idx = triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
-			if (idx >= 0)
-			{
-				if (td.Triggers[idx].TriggerType == TaskTriggerType.Custom)
-				{
-					MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
-					return;
-				}
-
-				using (TriggerEditDialog dlg = new TriggerEditDialog(td.Triggers[idx], td.Settings.Compatibility < TaskCompatibility.V2))
-				{
-					dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-					dlg.TargetServer = TaskService.TargetServer;
-					dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
-					if (dlg.ShowDialog() == DialogResult.OK)
-					{
-						triggerListView.Items.RemoveAt(idx);
-						td.Triggers[idx] = dlg.Trigger;
-						AddTriggerToList(dlg.Trigger, idx);
-						triggerListView.Items[idx].Selected = true;
-					}
-				}
-			}
-		}
-
-		private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			if (editable)
-				triggerEditButton_Click(sender, EventArgs.Empty);
-		}
-
-		private void triggerListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			SetTriggerButtonState();
-		}
-
-		private void triggerNewButton_Click(object sender, EventArgs e)
-		{
-			using (TriggerEditDialog dlg = new TriggerEditDialog(null, td.Settings.Compatibility < TaskCompatibility.V2))
-			{
-				dlg.UseUnifiedSchedulingEngine = td.Settings.UseUnifiedSchedulingEngine;
-				dlg.TargetServer = TaskService.TargetServer;
-				dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					td.Triggers.Add(dlg.Trigger);
-					AddTriggerToList(dlg.Trigger, -1);
-				}
-			}
-		}
-
 		private void UpdateIdleSettingsControls()
 		{
 			bool idleEnabled = taskIdleDurationCheck.Checked ? editable : false;
@@ -1370,7 +1170,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
 				{
 					td.Actions.RemoveAt(i);
-					actionListView.Items.RemoveAt(i);
+					actionCollectionUI.RefreshState();
 				}
 			}
 			for (int i = td.Triggers.Count - 1; i >= 0; i--)
@@ -1378,7 +1178,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
 				{
 					td.Triggers.RemoveAt(i);
-					triggerListView.Items.RemoveAt(i);
+					triggerCollectionUI1.RefreshState();
 				}
 				else
 				{
