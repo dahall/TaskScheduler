@@ -9,13 +9,14 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"), Description("Dialog allowing the editing of a task.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-	[DefaultProperty("AvailableTabs"), DesignTimeVisible(true)]
+	[DefaultProperty("Editable"), DesignTimeVisible(true)]
 	public partial class TaskOptionsEditor :
 #if DEBUG
 		Form
 #else
 		DialogBase
 #endif
+		, ITaskEditor
 	{
 		private OptionPanels.OptionPanel curPanel;
 		private System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel> panels = new System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel>(10);
@@ -232,7 +233,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		///   <c>true</c> if this task definition is v2; otherwise, <c>false</c>.
 		/// </value>
-		internal bool IsV2 { get; set; }
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool IsV2 { get; private set; }
 
 		/// <summary>
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.

@@ -111,6 +111,7 @@
     <Compile Include="ComObjectSelectionDialog.Designer.cs">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditorInterfaces.cs" />
     <Compile Include="ReorderableListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -320,6 +321,12 @@
     <Compile Include="TriggerEditDialog.Designer.cs">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIComponents\ActionCollectionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ActionCollectionUI.Designer.cs">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIComponents\BaseTriggerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -369,6 +376,12 @@
     </Compile>
     <Compile Include="UIComponents\ShowMessageActionUI.Designer.cs">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\TriggerCollectionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\TriggerCollectionUI.Designer.cs">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UIComponents\WeeklyTriggerUI.cs">
       <SubType>UserControl</SubType>
@@ -598,6 +611,9 @@
     <EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ActionCollectionUI.resx">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\BaseTriggerUI.fr.resx">
       <DependentUpon>BaseTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -672,6 +688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\TriggerCollectionUI.resx">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de-DE.resx">
       <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
