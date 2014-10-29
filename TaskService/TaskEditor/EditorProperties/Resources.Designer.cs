@@ -88,11 +88,31 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ActionTypeComHandlerImage {
+            get {
+                object obj = ResourceManager.GetObject("ActionTypeComHandlerImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start a program.
         /// </summary>
         internal static string ActionTypeExecute {
             get {
                 return ResourceManager.GetString("ActionTypeExecute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ActionTypeExecuteImage {
+            get {
+                object obj = ResourceManager.GetObject("ActionTypeExecuteImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -106,11 +126,31 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ActionTypeSendEmailImage {
+            get {
+                object obj = ResourceManager.GetObject("ActionTypeSendEmailImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display a message.
         /// </summary>
         internal static string ActionTypeShowMessage {
             get {
                 return ResourceManager.GetString("ActionTypeShowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ActionTypeShowMessageImage {
+            get {
+                object obj = ResourceManager.GetObject("ActionTypeShowMessageImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1190,11 +1230,41 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeBootImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeBootImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Trigger.
         /// </summary>
         internal static string TriggerTypeCustom {
             get {
                 return ResourceManager.GetString("TriggerTypeCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeCustomImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeCustomImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeDailyImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeDailyImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1208,11 +1278,31 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeEventImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeEventImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On idle.
         /// </summary>
         internal static string TriggerTypeIdle {
             get {
                 return ResourceManager.GetString("TriggerTypeIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeIdleImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeIdleImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1226,11 +1316,51 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeLogonImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeLogonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeMonthlyDOWImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeMonthlyDOWImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeMonthlyImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeMonthlyImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At task creation/modification.
         /// </summary>
         internal static string TriggerTypeRegistration {
             get {
                 return ResourceManager.GetString("TriggerTypeRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeRegistrationImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeRegistrationImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1276,6 +1406,46 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         internal static string TriggerTypeSessionDisconnect {
             get {
                 return ResourceManager.GetString("TriggerTypeSessionDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeSessionStateChangeImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeSessionStateChangeImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeStateDisabled {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeStateDisabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeTimeImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeTimeImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TriggerTypeWeeklyImage {
+            get {
+                object obj = ResourceManager.GetObject("TriggerTypeWeeklyImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

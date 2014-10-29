@@ -807,4 +807,55 @@ Action: {3}</value>
   <data name="Error_EventFilterBadQueryText" xml:space="preserve">
     <value>Offending text: '{0}'</value>
   </data>
+  <data name="ActionTypeComHandlerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTypeComHandler.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTypeExecuteImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTypeExecute.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTypeSendEmailImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTypeSendEmail.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActionTypeShowMessageImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ActionTypeShowMessage.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeBootImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeBoot.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeDailyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeDaily.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeEventImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeEvent.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeIdleImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeIdle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeLogonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeLogon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeMonthlyDOWImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeMonthlyDOW.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeMonthlyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeMonthly.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeRegistrationImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeRegistration.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeSessionStateChangeImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeSessionStateChange.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeStateDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeStateDisabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeTimeImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeTime.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeCustomImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeUnknown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TriggerTypeWeeklyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TriggerTypeWeekly.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

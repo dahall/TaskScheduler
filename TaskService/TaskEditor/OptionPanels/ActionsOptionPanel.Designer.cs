@@ -71,6 +71,7 @@
 			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
 			this.actionCollectionUI1.Size = new System.Drawing.Size(319, 185);
 			this.actionCollectionUI1.TabIndex = 1;
+			this.actionCollectionUI1.UseModernUI = true;
 			// 
 			// ActionsOptionPanel
 			// 

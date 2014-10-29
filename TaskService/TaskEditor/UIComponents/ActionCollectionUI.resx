@@ -124,16 +124,16 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
+  <data name="actionColumnHeader.Text" xml:space="preserve">
     <value>Action</value>
   </data>
-  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+  <data name="actionColumnHeader.Width" type="System.Int32, mscorlib">
     <value>112</value>
   </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
+  <data name="detailsColumnHeader.Text" xml:space="preserve">
     <value>Details</value>
   </data>
-  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+  <data name="detailsColumnHeader.Width" type="System.Int32, mscorlib">
     <value>247</value>
   </data>
   <metadata name="contextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -183,6 +183,12 @@
   <data name="actionListView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <metadata name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>141, 17</value>
+  </metadata>
+  <data name="imageList.ImageSize" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
+  </data>
   <data name="actionListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -199,7 +205,7 @@
     <value>actionListView</value>
   </data>
   <data name="&gt;&gt;actionListView.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.ReorderableListView, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.40087, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.ReorderableListView, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.37120, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;actionListView.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -459,16 +465,16 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>304, 173</value>
   </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
+  <data name="&gt;&gt;actionColumnHeader.Name" xml:space="preserve">
+    <value>actionColumnHeader</value>
   </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+  <data name="&gt;&gt;actionColumnHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
+  <data name="&gt;&gt;detailsColumnHeader.Name" xml:space="preserve">
+    <value>detailsColumnHeader</value>
   </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+  <data name="&gt;&gt;detailsColumnHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;newActionToolStripMenuItem.Name" xml:space="preserve">
@@ -500,6 +506,12 @@
   </data>
   <data name="&gt;&gt;moveDownToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imageList.Name" xml:space="preserve">
+    <value>imageList</value>
+  </data>
+  <data name="&gt;&gt;imageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ActionCollectionUI</value>
