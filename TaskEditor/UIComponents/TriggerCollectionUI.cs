@@ -1,15 +1,55 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
 	public partial class TriggerCollectionUI : UserControl, ITaskEditorUIElement
 	{
+		int disabledOverlayImageIndex = -1;
 		ITaskDefinitionEditor editor;
+		bool modern;
 
 		public TriggerCollectionUI()
 		{
 			InitializeComponent();
+		}
+
+		[DefaultValue(false), Category("Appearance")]
+		public bool UseModernUI
+		{
+			get { return modern; }
+			set
+			{
+				if (modern != value)
+				{
+					modern = value;
+					if (!this.DesignMode && value && imageList.Images.Count == 0)
+						InitializeModernImages();
+					RefreshState();
+				}
+			}
+		}
+
+		private void InitializeModernImages()
+		{
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeEventImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeTimeImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeDailyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeWeeklyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyDOWImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeIdleImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeRegistrationImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeBootImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent); // Added to make enum int line up
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeSessionStateChangeImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeCustomImage, Color.Transparent);
+			disabledOverlayImageIndex = imageList.Images.Add(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
+			NativeMethods.ImageList_SetOverlayImage(imageList.Handle, disabledOverlayImageIndex, 1);
 		}
 
 		private int SelectedIndex { get { return triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1; } }
@@ -22,11 +62,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = editor.Editable;
 				triggerListView.Enabled = editor.Editable;
+				triggerListView.BeginUpdate();
 				triggerListView.Items.Clear();
+				triggerListView.View = modern ? View.Tile : View.Details;
 				foreach (Trigger tr in editor.TaskDefinition.Triggers)
 				{
 					AddTriggerToList(tr, -1);
 				}
+				if (modern)
+				{
+					triggerListView.AdjustTileToWidth();
+				}
+				else
+				{
+					triggerListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+					triggerListView.AdjustColumnToFill();
+				}
+				triggerListView.EndUpdate();
 				SetTriggerButtonState();
 			}
 		}
@@ -40,21 +92,29 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void AddTriggerToList(Trigger tr, int index)
 		{
+			int imgIdx = (int)tr.TriggerType;
+			string txt = tr.ToString();
 			ListViewItem lvi = new ListViewItem(new string[] {
-					TaskEnumGlobalizer.GetString(tr.TriggerType),
-					tr.ToString(),
+					TaskEnumGlobalizer.GetString(tr.TriggerType), txt,
 					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
-				});
+				}, imgIdx) { Tag = tr, ToolTipText = txt };
 			if (index < 0)
-				triggerListView.Items.Add(lvi);
+				lvi = triggerListView.Items.Add(lvi);
 			else
-				triggerListView.Items.Insert(index, lvi);
+				lvi = triggerListView.Items.Insert(index, lvi);
+			if (modern)
+			{
+				var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new int[] { 1 } };
+				if (!tr.Enabled)
+					nlvi.OverlayImageIndex = 1;
+				NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
+			}
 		}
 
 		private void SetTriggerButtonState()
 		{
-			triggerNewButton.Enabled = editor.Editable;
-			triggerEditButton.Enabled = triggerDeleteButton.Enabled = editor.Editable && SelectedIndex > -1;
+			triggerNewButton.Enabled = newTriggerToolStripMenuItem.Visible = editor.Editable;
+			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editor.Editable && SelectedIndex > -1;
 		}
 
 		private void triggerDeleteButton_Click(object sender, EventArgs e)
@@ -107,7 +167,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void triggerListView_SizeChanged(object sender, EventArgs e)
 		{
-			triggerListView.AdjustColumnToFill(1);
+			if (modern)
+				triggerListView.AdjustTileToWidth();
+			else
+				triggerListView.AdjustColumnToFill(1);
 		}
 
 		private void triggerNewButton_Click(object sender, EventArgs e)

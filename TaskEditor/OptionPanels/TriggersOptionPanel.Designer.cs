@@ -69,6 +69,7 @@
 			this.triggerCollectionUI1.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
 			this.triggerCollectionUI1.Size = new System.Drawing.Size(277, 202);
 			this.triggerCollectionUI1.TabIndex = 1;
+			this.triggerCollectionUI1.UseModernUI = true;
 			// 
 			// TriggersOptionPanel
 			// 

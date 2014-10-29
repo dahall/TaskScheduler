@@ -430,15 +430,15 @@ namespace TestTaskService
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 				// Add a cron trigger
-				td.Triggers.AddRange(Trigger.FromCronFormat("15 */6 */30 * *"));
+				//td.Triggers.AddRange(Trigger.FromCronFormat("15 */6 */30 * *"));
 
 				// Add a trigger that will fire the task at this time every other day
-				/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				dt.Repetition.Duration = TimeSpan.FromHours(4);
 				dt.Repetition.Interval = TimeSpan.FromHours(1);
 
 				// Add a trigger that will fire every week on Friday
-				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday });*/
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false });
 
 				ShowMessageAction sm = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
 				sm.Title = "title";

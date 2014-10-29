@@ -32,14 +32,15 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionCollectionUI));
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.actionListView = new Microsoft.Win32.TaskScheduler.ReorderableListView();
-			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.actionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.detailsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.newActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.actionNewButton = new System.Windows.Forms.Button();
 			this.actionDeleteButton = new System.Windows.Forms.Button();
 			this.actionEditButton = new System.Windows.Forms.Button();
@@ -64,14 +65,15 @@
 			// actionListView
 			// 
 			this.actionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5});
+            this.actionColumnHeader,
+            this.detailsColumnHeader});
 			this.tableLayoutPanel2.SetColumnSpan(this.actionListView, 3);
 			this.actionListView.ContextMenuStrip = this.contextMenu;
 			resources.ApplyResources(this.actionListView, "actionListView");
 			this.actionListView.FullRowSelect = true;
 			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.actionListView.HideSelection = false;
+			this.actionListView.LargeImageList = this.imageList;
 			this.actionListView.Name = "actionListView";
 			this.actionListView.ShowItemToolTips = true;
 			this.actionListView.UseCompatibleStateImageBehavior = false;
@@ -81,13 +83,13 @@
 			this.actionListView.SizeChanged += new System.EventHandler(this.actionListView_SizeChanged);
 			this.actionListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.actionListView_MouseDoubleClick);
 			// 
-			// columnHeader4
+			// actionColumnHeader
 			// 
-			resources.ApplyResources(this.columnHeader4, "columnHeader4");
+			resources.ApplyResources(this.actionColumnHeader, "actionColumnHeader");
 			// 
-			// columnHeader5
+			// detailsColumnHeader
 			// 
-			resources.ApplyResources(this.columnHeader5, "columnHeader5");
+			resources.ApplyResources(this.detailsColumnHeader, "detailsColumnHeader");
 			// 
 			// contextMenu
 			// 
@@ -129,6 +131,12 @@
 			this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
 			resources.ApplyResources(this.moveDownToolStripMenuItem, "moveDownToolStripMenuItem");
 			this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.actionDownButton_Click);
+			// 
+			// imageList
+			// 
+			this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+			resources.ApplyResources(this.imageList, "imageList");
+			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// actionNewButton
 			// 
@@ -192,8 +200,8 @@
 
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private ReorderableListView actionListView;
-		private System.Windows.Forms.ColumnHeader columnHeader4;
-		private System.Windows.Forms.ColumnHeader columnHeader5;
+		private System.Windows.Forms.ColumnHeader actionColumnHeader;
+		private System.Windows.Forms.ColumnHeader detailsColumnHeader;
 		private System.Windows.Forms.Button actionNewButton;
 		private System.Windows.Forms.Button actionDeleteButton;
 		private System.Windows.Forms.Button actionEditButton;
@@ -206,5 +214,6 @@
 		private System.Windows.Forms.ToolStripMenuItem editActionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
+		private System.Windows.Forms.ImageList imageList;
 	}
 }

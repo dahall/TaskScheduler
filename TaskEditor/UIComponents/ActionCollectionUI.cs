@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
@@ -6,10 +8,35 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 	public partial class ActionCollectionUI : UserControl, ITaskEditorUIElement
 	{
 		ITaskDefinitionEditor editor;
+		bool modern = false;
 
 		public ActionCollectionUI()
 		{
 			InitializeComponent();
+		}
+
+		[DefaultValue(false), Category("Appearance")]
+		public bool UseModernUI
+		{
+			get { return modern;}
+			set
+			{
+				if (modern != value)
+				{
+					modern = value;
+					if (!this.DesignMode && value && imageList.Images.Count == 0)
+						InitializeModernImages();
+					RefreshState();
+				}
+			}
+		}
+
+		private void InitializeModernImages()
+		{
+			imageList.Images.Add(EditorProperties.Resources.ActionTypeExecuteImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.ActionTypeComHandlerImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.ActionTypeSendEmailImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.ActionTypeShowMessageImage, Color.Transparent);
 		}
 
 		private int SelectedIndex { get { return actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1; } }
@@ -20,13 +47,26 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				editor = this.GetParent<ITaskDefinitionEditor>();
 			if (editor != null && editor.TaskDefinition != null)
 			{
+				actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editor.Editable;
 				actionListView.Enabled = editor.Editable;
+				actionListView.BeginUpdate();
+				actionListView.View = modern ? View.Tile : View.Details;
 				actionListView.Items.Clear();
 				if (editor.TaskDefinition.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
 				{
 					foreach (Action act in editor.TaskDefinition.Actions)
 						AddActionToList(act, -1);
 				}
+				if (modern)
+				{
+					actionListView.AdjustTileToWidth();
+				}
+				else
+				{
+					actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+					actionListView.AdjustColumnToFill();
+				}
+				actionListView.EndUpdate();
 				SetActionButtonState();
 			}
 		}
@@ -107,7 +147,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void actionListView_SizeChanged(object sender, EventArgs e)
 		{
-			actionListView.AdjustColumnToFill();
+			if (modern)
+				actionListView.AdjustTileToWidth();
+			else
+				actionListView.AdjustColumnToFill();
 		}
 
 		private void actionNewButton_Click(object sender, EventArgs e)
@@ -144,9 +187,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void AddActionToList(Action act, int index)
 		{
+			int imgIdx = (int)act.ActionType;
+			if (imgIdx > 0) imgIdx -= 4;
+			string txt = act.ToString();
 			ListViewItem lvi = new ListViewItem(new string[] {
 					TaskEnumGlobalizer.GetString(act.ActionType),
-					act.ToString() }) { Tag = act };
+					txt }, imgIdx) { Tag = act, ToolTipText = txt };
 			if (index < 0)
 				actionListView.Items.Add(lvi);
 			else
@@ -192,6 +238,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			// If there is any width remaining, that will be the width of the last column.
 			if (nWidth > 0)
 				lvw.Columns[idx].Width = nWidth;
+		}
+
+		public static void AdjustTileToWidth(this ListView lvw)
+		{
+			lvw.TileSize = new Size(lvw.ClientSize.Width, 32);
 		}
 	}
 }

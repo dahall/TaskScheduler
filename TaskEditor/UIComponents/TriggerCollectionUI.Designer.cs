@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TriggerCollectionUI));
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.triggerEditButton = new System.Windows.Forms.Button();
@@ -36,8 +37,14 @@
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.newTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.triggerDeleteButton = new System.Windows.Forms.Button();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.tableLayoutPanel2.SuspendLayout();
+			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel2
@@ -70,10 +77,12 @@
             this.columnHeader2,
             this.columnHeader3});
 			this.tableLayoutPanel2.SetColumnSpan(this.triggerListView, 3);
+			this.triggerListView.ContextMenuStrip = this.contextMenu;
 			resources.ApplyResources(this.triggerListView, "triggerListView");
 			this.triggerListView.FullRowSelect = true;
 			this.triggerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.triggerListView.HideSelection = false;
+			this.triggerListView.LargeImageList = this.imageList;
 			this.triggerListView.Name = "triggerListView";
 			this.triggerListView.ShowItemToolTips = true;
 			this.triggerListView.UseCompatibleStateImageBehavior = false;
@@ -94,12 +103,42 @@
 			// 
 			resources.ApplyResources(this.columnHeader3, "columnHeader3");
 			// 
+			// contextMenu
+			// 
+			this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newTriggerToolStripMenuItem,
+            this.deleteTriggerToolStripMenuItem,
+            this.editTriggerToolStripMenuItem});
+			this.contextMenu.Name = "contextMenuStrip1";
+			resources.ApplyResources(this.contextMenu, "contextMenu");
+			// 
+			// newTriggerToolStripMenuItem
+			// 
+			this.newTriggerToolStripMenuItem.Name = "newTriggerToolStripMenuItem";
+			resources.ApplyResources(this.newTriggerToolStripMenuItem, "newTriggerToolStripMenuItem");
+			// 
+			// deleteTriggerToolStripMenuItem
+			// 
+			this.deleteTriggerToolStripMenuItem.Name = "deleteTriggerToolStripMenuItem";
+			resources.ApplyResources(this.deleteTriggerToolStripMenuItem, "deleteTriggerToolStripMenuItem");
+			// 
+			// editTriggerToolStripMenuItem
+			// 
+			this.editTriggerToolStripMenuItem.Name = "editTriggerToolStripMenuItem";
+			resources.ApplyResources(this.editTriggerToolStripMenuItem, "editTriggerToolStripMenuItem");
+			// 
 			// triggerDeleteButton
 			// 
 			resources.ApplyResources(this.triggerDeleteButton, "triggerDeleteButton");
 			this.triggerDeleteButton.Name = "triggerDeleteButton";
 			this.triggerDeleteButton.UseVisualStyleBackColor = true;
 			this.triggerDeleteButton.Click += new System.EventHandler(this.triggerDeleteButton_Click);
+			// 
+			// imageList
+			// 
+			this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+			resources.ApplyResources(this.imageList, "imageList");
+			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// TriggerCollectionUI
 			// 
@@ -108,6 +147,7 @@
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.Name = "TriggerCollectionUI";
 			this.tableLayoutPanel2.ResumeLayout(false);
+			this.contextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -123,5 +163,10 @@
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
 		private System.Windows.Forms.Button triggerDeleteButton;
+		private System.Windows.Forms.ContextMenuStrip contextMenu;
+		private System.Windows.Forms.ToolStripMenuItem newTriggerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteTriggerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem editTriggerToolStripMenuItem;
+		private System.Windows.Forms.ImageList imageList;
 	}
 }

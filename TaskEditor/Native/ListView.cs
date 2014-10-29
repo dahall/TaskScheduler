@@ -394,8 +394,8 @@ namespace Microsoft.Win32
 			DropHilited = 0x0008,
 			Glow = 0x0010,
 			//Activating = 0x0020,
-			//OverlayMask = 0x0F00,
-			//StateImageMask = 0xF000,
+			OverlayMask = 0x0F00,
+			StateImageMask = 0xF000,
 			All = 0xFFFFFFFF
 		}
 
@@ -954,6 +954,12 @@ namespace Microsoft.Win32
 		{
 			public uint columnIndex;
 			public ListViewColumnFormat format;
+
+			public LVTILECOLUMNINFO(uint colIdx, ListViewColumnFormat fmt = 0)
+			{
+				columnIndex = colIdx;
+				format = fmt;
+			}
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -987,11 +993,16 @@ namespace Microsoft.Win32
 				this.stateMask = stateMask;
 			}
 
-			public LVITEM(int item, int subitem = 0, string text = null)
+			public LVITEM(int item, int subitem, string text)
 			{
 				iItem = item;
 				iSubItem = subitem;
 				this.Text = text;
+			}
+
+			public LVITEM(int item)
+			{
+				iItem = item;
 			}
 
 			public int GroupId
@@ -1073,6 +1084,33 @@ namespace Microsoft.Win32
 				}
 			}
 
+			public int[] VisibleTileColumns
+			{
+				get
+				{
+					var cols = new int[cColumns];
+					Marshal.Copy(this.puColumns, cols, 0, (int)cColumns);
+					return cols;
+				}
+				set
+				{
+					if (value == null)
+						value = new int[0];
+					this.cColumns = (uint)value.Length;
+					if (value.Length > 0)
+					{
+						this.puColumns = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
+						Marshal.Copy(value, 0, this.puColumns, (int)cColumns);
+						mask.SetFlags(ListViewItemMask.Columns, true);
+					}
+					else
+					{
+						this.puColumns = IntPtr.Zero;
+						mask.SetFlags(ListViewItemMask.Columns, false);
+					}
+				}
+			}
+
 			public ListViewItemState GetState()
 			{
 				return (ListViewItemState)(this.state & 0x000000FF);
@@ -1100,6 +1138,7 @@ namespace Microsoft.Win32
 					if (value > 15)
 						throw new ArgumentOutOfRangeException("OverlayImageIndex", "Overlay image index must be between 0 and 15");
 					this.mask |= ListViewItemMask.State;
+					this.stateMask |= ListViewItemState.OverlayMask;
 					this.state = (value << 8) | (this.state & 0xFFFFF0FF);
 				}
 			}
@@ -1112,6 +1151,7 @@ namespace Microsoft.Win32
 					if (value > 15)
 						throw new ArgumentOutOfRangeException("StateImageIndex", "State image index must be between 0 and 15");
 					this.mask |= ListViewItemMask.State;
+					this.stateMask |= ListViewItemState.StateImageMask;
 					this.state = (value << 12) | (this.state & 0xFFFF0FFF);
 				}
 			}

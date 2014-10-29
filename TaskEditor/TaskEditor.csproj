@@ -112,6 +112,7 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EditorInterfaces.cs" />
+    <Compile Include="Native\ImageList.cs" />
     <Compile Include="ReorderableListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -746,6 +747,23 @@
     <None Include="Resources\plus.bmp" />
     <None Include="Resources\ts.bmp" />
     <None Include="Resources\upArrow.bmp" />
+    <None Include="Resources\ActionTypeComHandler.png" />
+    <None Include="Resources\ActionTypeExecute.png" />
+    <None Include="Resources\ActionTypeSendEmail.png" />
+    <None Include="Resources\ActionTypeShowMessage.png" />
+    <None Include="Resources\TriggerTypeBoot.png" />
+    <None Include="Resources\TriggerTypeDaily.png" />
+    <None Include="Resources\TriggerTypeEvent.png" />
+    <None Include="Resources\TriggerTypeIdle.png" />
+    <None Include="Resources\TriggerTypeLogon.png" />
+    <None Include="Resources\TriggerTypeMonthly.png" />
+    <None Include="Resources\TriggerTypeMonthlyDOW.png" />
+    <None Include="Resources\TriggerTypeRegistration.png" />
+    <None Include="Resources\TriggerTypeSessionStateChange.png" />
+    <None Include="Resources\TriggerTypeStateDisabled.png" />
+    <None Include="Resources\TriggerTypeTime.png" />
+    <None Include="Resources\TriggerTypeUnknown.png" />
+    <None Include="Resources\TriggerTypeWeekly.png" />
     <Content Include="TaskEditDialog.bmp" />
     <Content Include="TaskSchedulerWizard.bmp" />
     <Content Include="TriggerEditDialog.bmp" />
