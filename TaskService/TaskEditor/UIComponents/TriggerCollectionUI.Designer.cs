@@ -41,8 +41,10 @@
 			this.newTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editTriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.triggerDeleteButton = new System.Windows.Forms.Button();
+			this.enableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
+			this.triggerDeleteButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.contextMenu.SuspendLayout();
 			this.SuspendLayout();
@@ -108,8 +110,11 @@
 			this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTriggerToolStripMenuItem,
             this.deleteTriggerToolStripMenuItem,
-            this.editTriggerToolStripMenuItem});
+            this.editTriggerToolStripMenuItem,
+            this.enableToolStripMenuItem,
+            this.disableToolStripMenuItem});
 			this.contextMenu.Name = "contextMenuStrip1";
+			this.contextMenu.ShowImageMargin = false;
 			resources.ApplyResources(this.contextMenu, "contextMenu");
 			// 
 			// newTriggerToolStripMenuItem
@@ -127,18 +132,30 @@
 			this.editTriggerToolStripMenuItem.Name = "editTriggerToolStripMenuItem";
 			resources.ApplyResources(this.editTriggerToolStripMenuItem, "editTriggerToolStripMenuItem");
 			// 
-			// triggerDeleteButton
+			// enableToolStripMenuItem
 			// 
-			resources.ApplyResources(this.triggerDeleteButton, "triggerDeleteButton");
-			this.triggerDeleteButton.Name = "triggerDeleteButton";
-			this.triggerDeleteButton.UseVisualStyleBackColor = true;
-			this.triggerDeleteButton.Click += new System.EventHandler(this.triggerDeleteButton_Click);
+			this.enableToolStripMenuItem.Name = "enableToolStripMenuItem";
+			resources.ApplyResources(this.enableToolStripMenuItem, "enableToolStripMenuItem");
+			this.enableToolStripMenuItem.Click += new System.EventHandler(this.enableToolStripMenuItem_Click);
+			// 
+			// disableToolStripMenuItem
+			// 
+			this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+			resources.ApplyResources(this.disableToolStripMenuItem, "disableToolStripMenuItem");
+			this.disableToolStripMenuItem.Click += new System.EventHandler(this.enableToolStripMenuItem_Click);
 			// 
 			// imageList
 			// 
 			this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
 			resources.ApplyResources(this.imageList, "imageList");
 			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+			// 
+			// triggerDeleteButton
+			// 
+			resources.ApplyResources(this.triggerDeleteButton, "triggerDeleteButton");
+			this.triggerDeleteButton.Name = "triggerDeleteButton";
+			this.triggerDeleteButton.UseVisualStyleBackColor = true;
+			this.triggerDeleteButton.Click += new System.EventHandler(this.triggerDeleteButton_Click);
 			// 
 			// TriggerCollectionUI
 			// 
@@ -168,5 +185,7 @@
 		private System.Windows.Forms.ToolStripMenuItem deleteTriggerToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem editTriggerToolStripMenuItem;
 		private System.Windows.Forms.ImageList imageList;
+		private System.Windows.Forms.ToolStripMenuItem enableToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem disableToolStripMenuItem;
 	}
 }

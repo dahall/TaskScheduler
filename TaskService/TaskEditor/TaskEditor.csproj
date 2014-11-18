@@ -113,6 +113,22 @@
     </Compile>
     <Compile Include="EditorInterfaces.cs" />
     <Compile Include="Native\ImageList.cs" />
+    <Compile Include="Native\ImageListExtension.cs" />
+    <Compile Include="OptionPanels\SecurityOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\SecurityOptionPanel.Designer.cs">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\StartupOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\StartupOptionPanel.Designer.cs">
+      <DependentUpon>StartupOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\WrappingControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReorderableListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -465,11 +481,17 @@
     <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.resx">
       <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.resx">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.resx">
       <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
       <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\StartupOptionPanel.resx">
+      <DependentUpon>StartupOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.resx">
       <DependentUpon>TriggersOptionPanel.cs</DependentUpon>

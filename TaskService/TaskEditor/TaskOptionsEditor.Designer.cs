@@ -37,11 +37,14 @@
 			this.generalItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.triggersItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionsItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.securityItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bodyPanel = new System.Windows.Forms.Panel();
 			this.panelHeading = new System.Windows.Forms.TableLayoutPanel();
 			this.panelTitleLabel = new System.Windows.Forms.Label();
 			this.panelImage = new System.Windows.Forms.Label();
 			this.splitterPanel = new System.Windows.Forms.Panel();
+			this.startupItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.runItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuPanel.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
@@ -85,7 +88,10 @@
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalItem,
             this.triggersItem,
-            this.actionsItem});
+            this.actionsItem,
+            this.securityItem,
+            this.startupItem,
+            this.runItem});
 			this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
 			resources.ApplyResources(this.menuStrip1, "menuStrip1");
 			this.menuStrip1.Name = "menuStrip1";
@@ -111,6 +117,13 @@
 			this.actionsItem.Padding = new System.Windows.Forms.Padding(4);
 			resources.ApplyResources(this.actionsItem, "actionsItem");
 			this.actionsItem.Click += new System.EventHandler(this.menuItem_Click);
+			// 
+			// securityItem
+			// 
+			this.securityItem.Name = "securityItem";
+			this.securityItem.Padding = new System.Windows.Forms.Padding(4);
+			resources.ApplyResources(this.securityItem, "securityItem");
+			this.securityItem.Click += new System.EventHandler(this.menuItem_Click);
 			// 
 			// bodyPanel
 			// 
@@ -141,6 +154,20 @@
 			// 
 			resources.ApplyResources(this.splitterPanel, "splitterPanel");
 			this.splitterPanel.Name = "splitterPanel";
+			// 
+			// startupItem
+			// 
+			this.startupItem.Name = "startupItem";
+			this.startupItem.Padding = new System.Windows.Forms.Padding(4);
+			resources.ApplyResources(this.startupItem, "startupItem");
+			this.startupItem.Click += new System.EventHandler(this.menuItem_Click);
+			// 
+			// runItem
+			// 
+			this.runItem.Name = "runItem";
+			this.runItem.Padding = new System.Windows.Forms.Padding(4);
+			resources.ApplyResources(this.runItem, "runItem");
+			this.runItem.Click += new System.EventHandler(this.menuItem_Click);
 			// 
 			// TaskOptionsEditor
 			// 
@@ -188,5 +215,8 @@
 		private System.Windows.Forms.TableLayoutPanel panelHeading;
 		private System.Windows.Forms.Label panelTitleLabel;
 		private System.Windows.Forms.Label panelImage;
+		private System.Windows.Forms.ToolStripMenuItem securityItem;
+		private System.Windows.Forms.ToolStripMenuItem startupItem;
+		private System.Windows.Forms.ToolStripMenuItem runItem;
 	}
 }

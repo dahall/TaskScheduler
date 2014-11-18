@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Security.Principal;
 using System.Windows.Forms;
+
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
 	internal partial class GeneralOptionPanel : Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel
@@ -25,6 +25,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskRegSourceText.Text = td.RegistrationInfo.Source;
 			taskRegURIText.Text = td.RegistrationInfo.URI;
 			taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
+			taskRegDocText.Text = td.RegistrationInfo.Documentation;
 		}
 
 		private void SetVersionComboItems()
@@ -79,6 +80,12 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			e.Cancel = !ValidateText(taskNameText,
 				delegate(string s) { return s.Length > 0 && s.IndexOfAny(inv) == -1; },
 				EditorProperties.Resources.Error_InvalidNameFormat);
+		}
+
+		private void taskRegDocText_Leave(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				td.RegistrationInfo.Documentation = taskRegDocText.TextLength > 0 ? taskRegDocText.Text : null;
 		}
 
 		private void taskRegSourceText_Leave(object sender, EventArgs e)

@@ -273,6 +273,30 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Adds or updates an Automatic Maintenance Task on the connected machine.
+		/// </summary>
+		/// <param name="taskPathAndName">Name of the task with full path.</param>
+		/// <param name="period">The amount of time the task needs once executed during regular Automatic maintenance.</param>
+		/// <param name="deadline">The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete during regular Automatic Maintenance.</param>
+		/// <param name="executablePath">The path to an executable file.</param>
+		/// <param name="arguments">The arguments associated with the command-line operation.</param>
+		/// <param name="workingDirectory">The directory that contains either the executable file or the files that are used by the executable file.</param>
+		/// <returns>A <see cref="Task" /> instance of the Automatic Maintenance Task.</returns>
+		/// <exception cref="System.InvalidOperationException">Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.</exception>
+		public Task AddAutomaticMaintenanceTask(string taskPathAndName, TimeSpan period, TimeSpan deadline, string executablePath, string arguments = null, string workingDirectory = null)
+		{
+			if (this.HighestSupportedVersion.Minor < 4)
+				throw new InvalidOperationException("Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.");
+			TaskDefinition td = NewTask();
+			td.Settings.UseUnifiedSchedulingEngine = true;
+			td.Settings.MaintenanceSettings.Period = period;
+			td.Settings.MaintenanceSettings.Deadline = deadline;
+			td.Actions.Add(executablePath, arguments, workingDirectory);
+			// The task needs to grant explicit FRFX to LOCAL SERVICE (A;;FRFX;;;LS)
+			return RootFolder.RegisterTaskDefinition(taskPathAndName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken, "D:P(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)");
+		}
+
+		/// <summary>
 		/// Creates a new task, registers the taks, and returns the instance.
 		/// </summary>
 		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
@@ -628,7 +652,26 @@ namespace Microsoft.Win32.TaskScheduler
 			if (this.Connected)
 				this.maxVer = v2TaskService != null ? GetV2Version() : v1Ver;
 			else
-				this.maxVer = hasV2 ? (Environment.OSVersion.Version.Minor > 0 ? new Version(1, 3) : new Version(1, 2)) : v1Ver;
+			{
+				if (!hasV2)
+					this.maxVer = v1Ver;
+				else if (Environment.OSVersion.Version.Major == 6)
+				{
+					switch (Environment.OSVersion.Version.Minor)
+					{
+						case 0:
+							this.maxVer = new Version(1, 2);
+							break;
+						case 1:
+							this.maxVer = new Version(1, 3);
+							break;
+						case 2:
+						case 3:
+							this.maxVer = new Version(1, 4);
+							break;
+					}
+				}
+			}
 		}
 
 		private bool ShouldSerializeHighestSupportedVersion()

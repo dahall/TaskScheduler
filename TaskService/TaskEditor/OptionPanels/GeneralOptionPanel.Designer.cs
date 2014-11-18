@@ -32,6 +32,8 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.taskRegDocText = new System.Windows.Forms.TextBox();
+			this.taskRegDocLabel = new System.Windows.Forms.Label();
 			this.taskRegVersionLabel = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.taskAuthorText = new System.Windows.Forms.TextBox();
@@ -74,6 +76,8 @@
 			// tableLayoutPanel3
 			// 
 			resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+			this.tableLayoutPanel3.Controls.Add(this.taskRegDocText, 1, 4);
+			this.tableLayoutPanel3.Controls.Add(this.taskRegDocLabel, 0, 4);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegVersionLabel, 0, 3);
 			this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
 			this.tableLayoutPanel3.Controls.Add(this.taskAuthorText, 1, 0);
@@ -83,6 +87,17 @@
 			this.tableLayoutPanel3.Controls.Add(this.taskRegURIText, 1, 2);
 			this.tableLayoutPanel3.Controls.Add(this.taskRegSourceText, 1, 1);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			// 
+			// taskRegDocText
+			// 
+			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
+			this.taskRegDocText.Name = "taskRegDocText";
+			this.taskRegDocText.Leave += new System.EventHandler(this.taskRegDocText_Leave);
+			// 
+			// taskRegDocLabel
+			// 
+			resources.ApplyResources(this.taskRegDocLabel, "taskRegDocLabel");
+			this.taskRegDocLabel.Name = "taskRegDocLabel";
 			// 
 			// taskRegVersionLabel
 			// 
@@ -244,5 +259,7 @@
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.CheckBox taskEnabledCheck;
 		private System.Windows.Forms.CheckBox taskHiddenCheck;
+		private System.Windows.Forms.Label taskRegDocLabel;
+		private System.Windows.Forms.TextBox taskRegDocText;
 	}
 }
