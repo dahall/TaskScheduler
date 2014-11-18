@@ -32,6 +32,9 @@ namespace Microsoft.Win32.TaskScheduler
 			panels.Add(generalItem, new OptionPanels.GeneralOptionPanel());
 			panels.Add(triggersItem, new OptionPanels.TriggersOptionPanel());
 			panels.Add(actionsItem, new OptionPanels.ActionsOptionPanel());
+			panels.Add(securityItem, new OptionPanels.SecurityOptionPanel());
+			panels.Add(startupItem, new OptionPanels.StartupOptionPanel());
+			//panels.Add(runItem, new OptionPanels.RuntimeOptionPanel());
 			UpdateTitleFont();
 		}
 
@@ -263,6 +266,10 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Task = task;
 		}
 
+		/// <summary>
+		/// Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event when the <see cref="P:System.Windows.Forms.Control.Font" /> property value of the control's container changes.
+		/// </summary>
+		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
 		protected override void OnParentFontChanged(EventArgs e)
 		{
 			base.OnParentFontChanged(e);

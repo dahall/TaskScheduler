@@ -9,9 +9,11 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService, out string sid)
 		{
-			DirectoryObjectPickerDialog dlg = new DirectoryObjectPickerDialog() { TargetComputer = targetComputerName, MultiSelect = false, SkipDomainControllerCheck = true };
+			Locations l = Locations.EnterpriseDomain | Locations.ExternalDomain | Locations.GlobalCatalog | Locations.JoinedDomain | Locations.LocalComputer;
+			DirectoryObjectPickerDialog dlg = new DirectoryObjectPickerDialog() { TargetComputer = targetComputerName, MultiSelect = false, SkipDomainControllerCheck = true, AllowedLocations = l, DefaultLocations = l };
 			dlg.AllowedObjectTypes = ObjectTypes.Users; // | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
 			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups;
+			dlg.DefaultObjectTypes = dlg.AllowedObjectTypes;
 			dlg.AttributesToFetch.Add("objectSid");
 			if (dlg.ShowDialog(parent) == System.Windows.Forms.DialogResult.OK)
 			{

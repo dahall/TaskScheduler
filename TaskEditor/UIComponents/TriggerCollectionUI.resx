@@ -214,25 +214,37 @@
     <value>17, 17</value>
   </metadata>
   <data name="newTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>127, 22</value>
   </data>
   <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>New Trigger...</value>
   </data>
   <data name="deleteTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>127, 22</value>
   </data>
   <data name="deleteTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Trigger</value>
   </data>
   <data name="editTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>127, 22</value>
   </data>
   <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit Trigger...</value>
   </data>
+  <data name="enableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 22</value>
+  </data>
+  <data name="enableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="disableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 22</value>
+  </data>
+  <data name="disableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Disable</value>
+  </data>
   <data name="contextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 70</value>
+    <value>128, 136</value>
   </data>
   <data name="&gt;&gt;contextMenu.Name" xml:space="preserve">
     <value>contextMenu</value>
@@ -379,6 +391,18 @@
     <value>editTriggerToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;editTriggerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enableToolStripMenuItem.Name" xml:space="preserve">
+    <value>enableToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;enableToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;disableToolStripMenuItem.Name" xml:space="preserve">
+    <value>disableToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;disableToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imageList.Name" xml:space="preserve">

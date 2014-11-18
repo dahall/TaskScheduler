@@ -6,7 +6,7 @@ using Microsoft.Win32;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
-	public partial class TriggerCollectionUI : UserControl, ITaskEditorUIElement
+	internal partial class TriggerCollectionUI : UserControl, ITaskEditorUIElement
 	{
 		int disabledOverlayImageIndex = -1;
 		ITaskDefinitionEditor editor;
@@ -48,8 +48,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent); // Added to make enum int line up
 			imageList.Images.Add(EditorProperties.Resources.TriggerTypeSessionStateChangeImage, Color.Transparent);
 			imageList.Images.Add(EditorProperties.Resources.TriggerTypeCustomImage, Color.Transparent);
-			disabledOverlayImageIndex = imageList.Images.Add(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
-			NativeMethods.ImageList_SetOverlayImage(imageList.Handle, disabledOverlayImageIndex, 1);
+			disabledOverlayImageIndex = imageList.AddOverlay(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
 		}
 
 		private int SelectedIndex { get { return triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1; } }
@@ -71,11 +70,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				}
 				if (modern)
 				{
+					triggerListView.Alignment = ListViewAlignment.Left;
 					triggerListView.AdjustTileToWidth();
+					var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { MaxTextLines = 1 };
+					NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
+					NativeMethods.SendMessage(triggerListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else
 				{
-					triggerListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+					if (triggerListView.Items.Count > 0)
+						triggerListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 					triggerListView.AdjustColumnToFill();
 				}
 				triggerListView.EndUpdate();
@@ -113,8 +117,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void SetTriggerButtonState()
 		{
+			int idx = SelectedIndex;
 			triggerNewButton.Enabled = newTriggerToolStripMenuItem.Visible = editor.Editable;
-			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editor.Editable && SelectedIndex > -1;
+			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editor.Editable && idx > -1;
+			if (idx >= 0)
+				enableToolStripMenuItem.Visible = !(disableToolStripMenuItem.Visible = editor.TaskDefinition.Triggers[idx].Enabled);
 		}
 
 		private void triggerDeleteButton_Click(object sender, EventArgs e)
@@ -185,6 +192,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					editor.TaskDefinition.Triggers.Add(dlg.Trigger);
 					AddTriggerToList(dlg.Trigger, -1);
 				}
+			}
+		}
+
+		private void enableToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			int i = SelectedIndex;
+			if (i >= 0)
+			{
+				editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;
+				this.RefreshState();
 			}
 		}
 	}

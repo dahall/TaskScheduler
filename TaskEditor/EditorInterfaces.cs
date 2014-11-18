@@ -2,6 +2,9 @@
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	/// <summary>
+	/// Represents a UI element that can edit tasks and their settings
+	/// </summary>
 	public interface ITaskEditor : ITaskDefinitionEditor
 	{
 		/// <summary>
@@ -26,6 +29,9 @@ namespace Microsoft.Win32.TaskScheduler
 		string TaskName { get; set; }
 	}
 
+	/// <summary>
+	/// Represents a UI element that can edit task settings
+	/// </summary>
 	public interface ITaskDefinitionEditor
 	{
 		/// <summary>
@@ -67,8 +73,14 @@ namespace Microsoft.Win32.TaskScheduler
 		bool IsV2 { get; }
 	}
 
+	/// <summary>
+	/// Represents a UI element that can must be forced to refresh its state
+	/// </summary>
 	public interface ITaskEditorUIElement
 	{
+		/// <summary>
+		/// Refreshes the state of the elements within the control using values set within the control.
+		/// </summary>
 		void RefreshState();
 	}
 }

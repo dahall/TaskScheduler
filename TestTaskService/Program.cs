@@ -440,15 +440,20 @@ namespace TestTaskService
 				// Add a trigger that will fire every week on Friday
 				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false });
 
-				ShowMessageAction sm = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
-				sm.Title = "title";
-				sm.MessageBody = "body";
+				// Add message and email actions
+				if (ts.HighestSupportedVersion >= new Version(1, 2))
+				{
+					ShowMessageAction sm = (ShowMessageAction)td.Actions.AddNew(TaskActionType.ShowMessage);
+					sm.Title = "title";
+					sm.MessageBody = "body";
 
-				EmailAction ma = new EmailAction("Subject", "x@x.com", "y@y.com; z@z.com", "Body", "mail.google.com") { Bcc = "c@c.com", Cc = "b@b.com" };
-				ma.Attachments = new object[] { (string)new TemporaryScopedFile() };
-				ma.HeaderFields.Add("N1", "V1");
-				ma.HeaderFields.Add("N2", "V2");
-				td.Actions.Add(ma);
+					EmailAction ma = new EmailAction("Subject", "x@x.com", "y@y.com; z@z.com", "Body", "mail.google.com") { Bcc = "c@c.com", Cc = "b@b.com" };
+					ma.Attachments = new object[] { (string)new TemporaryScopedFile() };
+					ma.HeaderFields.Add("N1", "V1");
+					ma.HeaderFields.Add("N2", "V2");
+					td.Actions.Add(ma);
+				}
+
 				// Add an action that will launch Notepad whenever the trigger fires
 				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 				output.WriteLine(td.XmlText);
@@ -759,10 +764,13 @@ namespace TestTaskService
 				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
 			// Loop through event logs for this task and find action completed events newest to oldest
-			output.WriteLine("\nTask history enumeration:");
-			TaskEventLog log = new TaskEventLog(@"\Maint", new int[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
-			foreach (TaskEvent ev in log)
-				output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.GetDataValue("ActionName"), ev.TimeCreated.Value, ev.GetDataValue("ResultCode"));
+			if (isV12)
+			{
+				output.WriteLine("\nTask history enumeration:");
+				TaskEventLog log = new TaskEventLog(@"\Maint", new int[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
+				foreach (TaskEvent ev in log)
+					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.GetDataValue("ActionName"), ev.TimeCreated.Value, ev.GetDataValue("ResultCode"));
+			}
 
 			DisplayTask(runningTask, true);
 			tf.DeleteTask("Test");

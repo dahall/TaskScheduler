@@ -73,12 +73,6 @@ namespace Microsoft.Win32.TaskScheduler
 			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
 			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 
-			// Settings for infoTab
-			if (secEd != null)
-				taskRegSDDLBtn.Visible = true;
-			else
-				taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, 2);
-
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
 
@@ -376,6 +370,10 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set Info tab
 				taskRegDocText.Text = td.RegistrationInfo.Documentation;
 				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
+				if (secEd != null && IsV2)
+					taskRegSDDLBtn.Visible = true;
+				else
+					taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, 2);
 				taskRegSourceText.Text = td.RegistrationInfo.Source;
 				taskRegURIText.Text = td.RegistrationInfo.URI;
 				taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();

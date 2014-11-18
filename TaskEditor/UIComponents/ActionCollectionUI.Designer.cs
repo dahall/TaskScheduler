@@ -100,6 +100,7 @@
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
 			this.contextMenu.Name = "contextMenuStrip1";
+			this.contextMenu.ShowImageMargin = false;
 			resources.ApplyResources(this.contextMenu, "contextMenu");
 			// 
 			// newActionToolStripMenuItem

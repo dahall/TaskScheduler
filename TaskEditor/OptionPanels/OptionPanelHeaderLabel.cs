@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
-	public partial class OptionPanelHeaderLabel : Control
+	internal partial class OptionPanelHeaderLabel : Control
 	{
 		static StringFormat sf = new StringFormat() { LineAlignment = StringAlignment.Center };
 

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
-	public partial class ActionCollectionUI : UserControl, ITaskEditorUIElement
+	internal partial class ActionCollectionUI : UserControl, ITaskEditorUIElement
 	{
 		ITaskDefinitionEditor editor;
 		bool modern = false;
@@ -59,11 +59,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				}
 				if (modern)
 				{
+					actionListView.Alignment = ListViewAlignment.Left;
 					actionListView.AdjustTileToWidth();
+					var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { MaxTextLines = 1 };
+					NativeMethods.SendMessage(actionListView.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
+					NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else
 				{
-					actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+					if (actionListView.Items.Count > 0)
+						actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 					actionListView.AdjustColumnToFill();
 				}
 				actionListView.EndUpdate();
@@ -242,7 +247,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		public static void AdjustTileToWidth(this ListView lvw)
 		{
-			lvw.TileSize = new Size(lvw.ClientSize.Width, 32);
+			using (Graphics g = lvw.CreateGraphics())
+				lvw.TileSize = new Size(lvw.ClientSize.Width, Math.Max(lvw.LargeImageList.ImageSize.Height, TextRenderer.MeasureText(g, "W\rg", lvw.Font).Height));
+			//var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { TileWidth = lvw.ClientSize.Width };
+			//NativeMethods.SendMessage(lvw.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
+			//NativeMethods.SendMessage(lvw.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 		}
 	}
 }
