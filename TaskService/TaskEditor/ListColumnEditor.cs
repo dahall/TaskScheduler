@@ -14,6 +14,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"), Description("Dialog allowing the selections of columns for a list.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	[DefaultProperty("DisplayedColumns"), DesignTimeVisible(true)]
+	[ToolboxBitmap(typeof(ListColumnEditor), "Dialog")]
 	public partial class ListColumnEditor :
 #if DEBUG
 		Form

@@ -23,7 +23,7 @@ namespace System.Windows.Forms
 	/// <summary>
 	/// Class to let the user browse for a folder.
 	/// </summary>
-	[System.Drawing.ToolboxBitmap("Dialog.bmp"), Description("Dialog that browses network computers.")]
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Dialog"), Description("Dialog that browses network computers.")]
 	public class FolderBrowserDialog2 : CommonDialog
 	{
 		/// <summary>

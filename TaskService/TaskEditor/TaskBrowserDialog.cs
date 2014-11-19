@@ -8,6 +8,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// A dialog for selecting tasks or task folders.
 	/// </summary>
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"), Description("Dialog allowing the browsing of all tasks on the specified machine.")]
+	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
 	public partial class TaskBrowserDialog :
 #if DEBUG
 		Form

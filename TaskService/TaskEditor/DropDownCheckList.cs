@@ -8,6 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// A check list in a drop down combo box.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public partial class DropDownCheckList : CustomComboBox
 	{
 		private System.Windows.Forms.CheckedListBox checkedListBox1;

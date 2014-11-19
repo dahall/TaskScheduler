@@ -9,6 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Split-panel that displays a list of all events associated with a task with a hidable detail pane.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "TaskControl")]
 	public partial class TaskHistoryControl : UserControl
 	{
 		private long historyEventCount = 0;

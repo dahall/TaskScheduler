@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the viewing of a task event.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	[DesignTimeVisible(true)]
+	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
 	public partial class EventViewerDialog :
 #if DEBUG
 		Form

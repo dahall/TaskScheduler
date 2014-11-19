@@ -736,8 +736,6 @@
     <None Include="TaskEditor.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ActionEditDialog.bmp" />
-    <Content Include="Dialog.bmp" />
     <None Include="Resources\verbose.ico" />
     <None Include="Resources\auditFail.ico" />
     <None Include="Resources\auditSuccess.ico" />
@@ -786,15 +784,24 @@
     <None Include="Resources\TriggerTypeTime.png" />
     <None Include="Resources\TriggerTypeUnknown.png" />
     <None Include="Resources\TriggerTypeWeekly.png" />
-    <Content Include="TaskEditDialog.bmp" />
-    <Content Include="TaskSchedulerWizard.bmp" />
-    <Content Include="TriggerEditDialog.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskService.csproj">
       <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
       <Name>TaskService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TaskDialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TaskControl.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
