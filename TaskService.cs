@@ -8,7 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides access to the Task Scheduler service for managing registered tasks.
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
-	[ToolboxItem(true), DefaultProperty("TargetServer"), Serializable]
+	[ToolboxItem(true), Serializable]
 	public sealed partial class TaskService : Component, IDisposable, ISupportInitialize, System.Runtime.Serialization.ISerializable
 	{
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
@@ -89,6 +89,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// A <see cref="System.Collections.Generic.IEnumerator{T}" /> for all <see cref="Task" /> instances.
 		/// </value>
+		[Browsable(false)]
 		public System.Collections.Generic.IEnumerable<Task> AllTasks
 		{
 			get { return this.RootFolder.AllTasks; }

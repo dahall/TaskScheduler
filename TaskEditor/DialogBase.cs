@@ -6,6 +6,7 @@ namespace System.Windows.Forms
 	/// <summary>
 	/// Abstract form that hides all events and properties that aren't essential for a dialog.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(DialogBase), "TaskDialog")]
 	public abstract class DialogBase : Form
 	{
 		/// <summary>

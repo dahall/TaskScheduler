@@ -10,6 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"), Description("Dialog allowing the editing of a task.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	[DefaultProperty("Editable"), DesignTimeVisible(true)]
+	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
 	public partial class TaskOptionsEditor :
 #if DEBUG
 		Form

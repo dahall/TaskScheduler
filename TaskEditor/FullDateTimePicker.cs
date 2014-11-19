@@ -25,6 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// A single control that can represent a full date and time.
 	/// </summary>
 	[DefaultEvent("ValueChanged"), DefaultProperty("Value"), DefaultBindingProperty("Value")]
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public partial class FullDateTimePicker : UserControl
 	{
 		private DateTime currentValue;

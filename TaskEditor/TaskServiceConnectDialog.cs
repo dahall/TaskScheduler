@@ -7,10 +7,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Dialog box to set the properties of a TaskService.
 	/// </summary>
-	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), System.Drawing.ToolboxBitmap("Dialog.bmp"),
+	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
 	Description("Dialog box to set the properties of a TaskService."),
 	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
 	DesignTimeVisible(true), DefaultProperty("TaskService")]
+	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
 	public partial class TaskServiceConnectDialog :
 #if DEBUG
 		Form

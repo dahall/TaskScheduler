@@ -18,6 +18,7 @@ namespace System.Windows.Forms
 	/// <summary>
 	/// A version of <see cref="ComboBox"/> that allows for disabled items.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public class DisabledItemComboBox : ComboBox
 	{
 		private const TextFormatFlags tff = TextFormatFlags.Default | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;

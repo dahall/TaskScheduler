@@ -7,6 +7,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Displays a <see cref="TaskCollection"/> in a <see cref="ListView"/> control. Mimics list in MMC.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "TaskControl")]
 	public partial class TaskListView : UserControl
 	{
 		private TaskCollection coll;

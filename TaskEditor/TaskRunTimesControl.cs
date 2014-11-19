@@ -7,6 +7,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Control that will display the run times for a provided task.
 	/// </summary>
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "TaskControl")]
 	public partial class TaskRunTimesControl : UserControl, ISupportInitialize
 	{
 		private bool initializing = false;

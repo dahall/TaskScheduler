@@ -10,6 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[Designer(typeof(Design.TaskPropertiesControlDesigner)), DesignTimeVisible(true)]
 	[DefaultProperty("AvailableTabs"), DefaultEvent("ComponentError")]
+	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "TaskControl")]
 	public partial class TaskPropertiesControl : UserControl, ITaskEditor
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
