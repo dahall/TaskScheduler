@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService.csproj", "{81B5ABCC-6909-483D-8BB3-84B52E3C7043}"
 EndProject
@@ -26,9 +26,11 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSc
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITaskHandler COM Server Project Template", "ITaskHandler COM Server Project Template\ITaskHandler COM Server Project Template.csproj", "{601FB415-6066-47F7-9549-938AC0C40396}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
@@ -49,6 +51,9 @@ Global
 		SccProjectUniqueName6 = TaskSchedulerHelp\\TaskSchedulerHelp.shfbproj
 		SccProjectName6 = TaskSchedulerHelp
 		SccLocalPath6 = TaskSchedulerHelp
+		SccProjectUniqueName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template\\ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template.csproj
+		SccProjectName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
+		SccLocalPath7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +118,14 @@ Global
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|x86.ActiveCfg = Release|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{601FB415-6066-47F7-9549-938AC0C40396}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

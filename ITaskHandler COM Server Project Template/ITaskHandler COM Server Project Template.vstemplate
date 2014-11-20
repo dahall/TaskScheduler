@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>ITaskHandler COM Server</Name>
+    <Description>Implements a COM Server that can be used by the Windows Task Scheduler.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>b048f07b-d518-4942-b905-b2375185e1ed</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <ProvideDefaultName>false</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="$safeprojectname$.snk">ITaskHandler COM Server Project Template.snk</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">TaskHandler1.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="TaskHandlerBase.cs">TaskHandlerBase.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

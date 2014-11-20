@@ -38,18 +38,27 @@
 			this.triggersItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionsItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.securityItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.startupItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.runItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bodyPanel = new System.Windows.Forms.Panel();
 			this.panelHeading = new System.Windows.Forms.TableLayoutPanel();
 			this.panelTitleLabel = new System.Windows.Forms.Label();
 			this.panelImage = new System.Windows.Forms.Label();
 			this.splitterPanel = new System.Windows.Forms.Panel();
-			this.startupItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.runItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.taskNameText = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuPanel.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.bodyPanel.SuspendLayout();
 			this.panelHeading.SuspendLayout();
+			this.panel1.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -125,6 +134,20 @@
 			resources.ApplyResources(this.securityItem, "securityItem");
 			this.securityItem.Click += new System.EventHandler(this.menuItem_Click);
 			// 
+			// startupItem
+			// 
+			this.startupItem.Name = "startupItem";
+			this.startupItem.Padding = new System.Windows.Forms.Padding(4);
+			resources.ApplyResources(this.startupItem, "startupItem");
+			this.startupItem.Click += new System.EventHandler(this.menuItem_Click);
+			// 
+			// runItem
+			// 
+			this.runItem.Name = "runItem";
+			this.runItem.Padding = new System.Windows.Forms.Padding(4);
+			resources.ApplyResources(this.runItem, "runItem");
+			this.runItem.Click += new System.EventHandler(this.menuItem_Click);
+			// 
 			// bodyPanel
 			// 
 			this.bodyPanel.BackColor = System.Drawing.SystemColors.Window;
@@ -155,19 +178,47 @@
 			resources.ApplyResources(this.splitterPanel, "splitterPanel");
 			this.splitterPanel.Name = "splitterPanel";
 			// 
-			// startupItem
+			// panel1
 			// 
-			this.startupItem.Name = "startupItem";
-			this.startupItem.Padding = new System.Windows.Forms.Padding(4);
-			resources.ApplyResources(this.startupItem, "startupItem");
-			this.startupItem.Click += new System.EventHandler(this.menuItem_Click);
+			resources.ApplyResources(this.panel1, "panel1");
+			this.panel1.BackColor = System.Drawing.SystemColors.Window;
+			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.tableLayoutPanel2);
+			this.panel1.Name = "panel1";
 			// 
-			// runItem
+			// tableLayoutPanel2
 			// 
-			this.runItem.Name = "runItem";
-			this.runItem.Padding = new System.Windows.Forms.Padding(4);
-			resources.ApplyResources(this.runItem, "runItem");
-			this.runItem.Click += new System.EventHandler(this.menuItem_Click);
+			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+			this.tableLayoutPanel2.Controls.Add(this.taskVersionCombo, 1, 1);
+			this.tableLayoutPanel2.Controls.Add(this.taskNameText, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.label4, 0, 1);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			// 
+			// panel2
+			// 
+			resources.ApplyResources(this.panel2, "panel2");
+			this.panel2.Name = "panel2";
+			// 
+			// label1
+			// 
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
+			// taskNameText
+			// 
+			resources.ApplyResources(this.taskNameText, "taskNameText");
+			this.taskNameText.Name = "taskNameText";
+			// 
+			// label4
+			// 
+			resources.ApplyResources(this.label4, "label4");
+			this.label4.Name = "label4";
+			// 
+			// taskVersionCombo
+			// 
+			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
+			this.taskVersionCombo.Name = "taskVersionCombo";
 			// 
 			// TaskOptionsEditor
 			// 
@@ -177,6 +228,8 @@
 			this.CancelButton = this.cancelButton;
 			this.ControlBox = false;
 			this.Controls.Add(this.bodyPanel);
+			this.Controls.Add(this.panel2);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.splitterPanel);
 			this.Controls.Add(this.menuPanel);
 			this.Controls.Add(this.tableLayoutPanel1);
@@ -195,6 +248,10 @@
 			this.bodyPanel.ResumeLayout(false);
 			this.bodyPanel.PerformLayout();
 			this.panelHeading.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
+			this.tableLayoutPanel2.ResumeLayout(false);
+			this.tableLayoutPanel2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -218,5 +275,12 @@
 		private System.Windows.Forms.ToolStripMenuItem securityItem;
 		private System.Windows.Forms.ToolStripMenuItem startupItem;
 		private System.Windows.Forms.ToolStripMenuItem runItem;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.TextBox taskNameText;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.DisabledItemComboBox taskVersionCombo;
 	}
 }
