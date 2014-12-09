@@ -484,6 +484,14 @@ namespace Microsoft.Win32.TaskScheduler
 			this.Task = task;
 		}
 
+		/// <summary>
+		/// Reinitializes all the controls based on current <see cref="TaskDefinition" /> values.
+		/// </summary>
+		public void ReinitializeControls()
+		{
+			this.TaskDefinition = td;
+		}
+
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
 			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);

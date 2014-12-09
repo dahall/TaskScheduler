@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -20,6 +21,8 @@ namespace Microsoft.Win32.TaskScheduler
 		, ITaskEditor
 	{
 		private OptionPanels.OptionPanel curPanel;
+		private bool editable, onAssignment;
+		private int hoverIndex = -1;
 		private System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel> panels = new System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel>(10);
 		private Task task;
 		private TaskScheduler.TaskDefinition td;
@@ -35,7 +38,7 @@ namespace Microsoft.Win32.TaskScheduler
 			panels.Add(actionsItem, new OptionPanels.ActionsOptionPanel());
 			panels.Add(securityItem, new OptionPanels.SecurityOptionPanel());
 			panels.Add(startupItem, new OptionPanels.StartupOptionPanel());
-			//panels.Add(runItem, new OptionPanels.RuntimeOptionPanel());
+			panels.Add(runItem, new OptionPanels.RuntimeOptionPanel());
 			UpdateTitleFont();
 		}
 
@@ -44,7 +47,27 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Determines whether the task can be edited.")]
-		public bool Editable { get; set; }
+		public bool Editable
+		{
+			get { return editable; }
+			set
+			{
+				if (editable != value)
+				{
+					editable = value;
+					ReinitializeControls();
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this task definition is v2.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this task definition is v2; otherwise, <c>false</c>.
+		/// </value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool IsV2 { get; private set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to register task when Accept (Ok) button pressed.
@@ -102,111 +125,13 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value == null)
 					throw new ArgumentNullException("TaskDefinition cannot be set to null.");
 
+				onAssignment = true;
 				td = value;
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
-				/*
-				onAssignment = true;
+				taskNameText.Text = this.Task != null ? this.Task.Name : string.Empty;
 				SetVersionComboItems();
-				tabControl.SelectedIndex = 0;
-
-				this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
-				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
-				this.flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(service.UserName);
-				//this.flagExecutorIsTheMachineAdministrator = this.ExecutorIsTheMachineAdministrator(executor);
-
-				// Remove invalid tabs on new task
-				ValidateHistoryTab();
-
-				// Set General tab
-				SetUserControls(td.Principal.LogonType);
-				taskNameText.Text = task != null ? task.Name : string.Empty;
-				taskNameText.ReadOnly = !(task == null && editable);
-				taskLocationText.Text = GetTaskLocation();
-				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
-				taskDescText.Text = td.RegistrationInfo.Description;
-				taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
-				taskHiddenCheck.Checked = td.Settings.Hidden;
-
-				// Set Triggers tab
-				triggerListView.Items.Clear();
-				foreach (Trigger tr in td.Triggers)
-				{
-					AddTriggerToList(tr, -1);
-				}
-				SetTriggerButtonState();
-
-				// Set Actions tab
-				actionListView.Items.Clear();
-				if (td.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
-				{
-					foreach (Action act in td.Actions)
-						AddActionToList(act, -1);
-				}
-				SetActionButtonState();
-
-				// Set Conditions tab
-				taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
-				taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
-				taskIdleDurationCheck.Checked = td.Settings.RunOnlyIfIdle;
-				taskIdleDurationCombo.Value = td.Settings.IdleSettings.IdleDuration;
-				taskIdleWaitTimeoutCombo.Value = td.Settings.IdleSettings.WaitTimeout;
-				UpdateIdleSettingsControls();
-				taskDisallowStartIfOnBatteriesCheck.Checked = td.Settings.DisallowStartIfOnBatteries;
-				taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
-				taskStopIfGoingOnBatteriesCheck.Checked = td.Settings.StopIfGoingOnBatteries;
-				taskWakeToRunCheck.Checked = td.Settings.WakeToRun;
-				taskStartIfConnectionCheck.Checked = td.Settings.RunOnlyIfNetworkAvailable;
-
-				// Set Settings tab
-				taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
-				taskStartWhenAvailableCheck.Checked = td.Settings.StartWhenAvailable;
-				taskRestartIntervalCheck.Checked = td.Settings.RestartInterval != TimeSpan.Zero;
-				taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
-				if (taskRestartIntervalCheck.Checked)
-				{
-					taskRestartIntervalCombo.Value = td.Settings.RestartInterval;
-					taskRestartCountText.Value = td.Settings.RestartCount;
-				}
-				taskExecutionTimeLimitCheck.Checked = td.Settings.ExecutionTimeLimit != TimeSpan.Zero;
-				taskExecutionTimeLimitCombo.Enabled = editable && taskExecutionTimeLimitCheck.Checked;
-				taskExecutionTimeLimitCombo.Value = td.Settings.ExecutionTimeLimit;
-				taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
-				taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
-				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
-				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
-				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
-
-				// Set Info tab
-				taskRegDocText.Text = td.RegistrationInfo.Documentation;
-				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
-				taskRegSourceText.Text = td.RegistrationInfo.Source;
-				taskRegURIText.Text = td.RegistrationInfo.URI;
-				taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
-
-				// Set Additional tab
-				taskEnabledCheck.Checked = td.Settings.Enabled;
-				taskPriorityCombo.SelectedIndex = taskPriorityCombo.Items.IndexOf((long)td.Settings.Priority);
-				taskDisallowStartOnRemoteAppSessionCheck.Checked = td.Settings.DisallowStartOnRemoteAppSession;
-				taskUseUnifiedSchedulingEngineCheck.Checked = td.Settings.UseUnifiedSchedulingEngine;
-				if (td.Settings.Compatibility >= TaskCompatibility.V2_1)
-				{
-					principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
-					principalReqPrivilegesDropDown.CheckedFlagValue = 0;
-					foreach (var s in td.Principal.RequiredPrivileges)
-						principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
-				}
-				if (td.Settings.Compatibility >= TaskCompatibility.V2_2)
-				{
-					taskVolatileCheck.Checked = td.Settings.Volatile;
-					taskMaintenanceDeadlineCombo.Value = td.Settings.MaintenanceSettings.Deadline;
-					taskMaintenancePeriodCombo.Value = td.Settings.MaintenanceSettings.Period;
-					taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
-				}
-				UpdateUnifiedSchedulingEngineControls();
+				ReinitializeControls();
 				onAssignment = false;
-				*/
-				if (curPanel != null)
-					curPanel.Initialize(this);
 			}
 		}
 
@@ -230,15 +155,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The task service.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskService TaskService { get; set; }
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this task definition is v2.
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if this task definition is v2; otherwise, <c>false</c>.
-		/// </value>
-		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public bool IsV2 { get; private set; }
 
 		/// <summary>
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
@@ -268,6 +184,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Reinitializes all the controls based on current <see cref="TaskDefinition" /> values.
+		/// </summary>
+		public void ReinitializeControls()
+		{
+			taskNameText.ReadOnly = !(this.Task == null && this.Editable);
+			taskVersionCombo.Enabled = this.Editable;
+			if (curPanel == null && td != null)
+				//this.menuList.Items[0].PerformClick();
+				this.menuList.SelectedIndex = 0;
+			if (curPanel != null)
+				curPanel.Initialize(this);
+		}
+
+		/// <summary>
 		/// Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event when the <see cref="P:System.Windows.Forms.Control.Font" /> property value of the control's container changes.
 		/// </summary>
 		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
@@ -275,11 +205,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			base.OnParentFontChanged(e);
 			UpdateTitleFont();
-		}
-
-		private void UpdateTitleFont()
-		{
-			this.panelTitleLabel.Font = new System.Drawing.Font(this.Font.FontFamily, this.Font.Size + 1, System.Drawing.FontStyle.Regular, this.Font.Unit);
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
@@ -298,6 +223,7 @@ namespace Microsoft.Win32.TaskScheduler
 					panel.Dock = DockStyle.Fill;
 					this.panelTitleLabel.Text = panel.Title;
 					this.panelImage.Image = panel.Image;
+					this.panelImage.Visible = panel.Image != null;
 					if (curPanel != null)
 						this.bodyPanel.Controls.Remove(curPanel);
 					this.bodyPanel.Controls.Add(panel);
@@ -308,6 +234,70 @@ namespace Microsoft.Win32.TaskScheduler
 					this.bodyPanel.ResumeLayout();
 				}
 			}
+		}
+
+		private void menuList_DrawItem(object sender, DrawItemEventArgs e)
+		{
+			Color sel = SystemColors.ControlLight;
+			Color hot = LightenColor(SystemColors.ControlLight, 50);
+
+			Color fc = this.ForeColor;
+			Color bc = SystemColors.Window;
+			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+				bc = sel;
+			if (e.Index == hoverIndex)
+				bc = hot;
+			if ((e.State & DrawItemState.Grayed) == DrawItemState.Grayed)
+				fc = SystemColors.GrayText;
+			using (Brush bgb = new SolidBrush(bc))
+				e.Graphics.FillRectangle(bgb, e.Bounds);
+			TextRenderer.DrawText(e.Graphics, menuList.Items[e.Index].ToString(), this.Font, AdjustRect(e.Bounds, 4, 0, -4, 0), fc, bc, TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter);
+			if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+				using (Pen bgb = new Pen(sel))
+					e.Graphics.DrawRectangle(bgb, AdjustRect(e.Bounds, 0, 0, -1, -1));
+		}
+
+		private static Color LightenColor(Color colorIn, int percent)
+		{
+			if (percent < 0 || percent > 100)
+				throw new ArgumentOutOfRangeException("percent");
+
+			return Color.FromArgb(colorIn.A, colorIn.R + (int)(((255f - colorIn.R) / 100f) * percent), 
+				colorIn.G + (int)(((255f - colorIn.G) / 100f) * percent), colorIn.B + (int)(((255f - colorIn.B) / 100f) * percent));
+		}
+
+		private static Rectangle AdjustRect(Rectangle rect, int x, int y = 0, int w = 0, int h = 0)
+		{
+			return new Rectangle(rect.X + x, rect.Y + y, rect.Width + w, rect.Height + h);
+		}
+
+		private void menuList_MeasureItem(object sender, MeasureItemEventArgs e)
+		{
+			e.ItemHeight *= 2;
+		}
+
+		private void menuList_MouseMove(object sender, MouseEventArgs e)
+		{
+			int index = menuList.IndexFromPoint(e.Location);
+			if (index != hoverIndex)
+			{
+				hoverIndex = index;
+				menuList.Invalidate();
+			}
+		}
+
+		private void menuList_MouseLeave(object sender, EventArgs e)
+		{
+			if (hoverIndex > -1)
+			{
+				hoverIndex = -1;
+				menuList.Invalidate();
+			}
+		}
+
+		private void menuList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			menuItem_Click(menuList.SelectedItem as ToolStripMenuItem, EventArgs.Empty);
 		}
 
 		private void okButton_Click(object sender, EventArgs e)
@@ -357,9 +347,120 @@ namespace Microsoft.Win32.TaskScheduler
 			Close();
 		}
 
+		private void SetVersionComboItems()
+		{
+			const int expectedVersions = 5;
+
+			this.taskVersionCombo.BeginUpdate();
+			this.taskVersionCombo.Items.Clear();
+			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
+			if (versions.Length != expectedVersions)
+				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
+			int max = (this.TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
+			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
+			switch (comp)
+			{
+				case TaskCompatibility.AT:
+					for (int i = max; i > 1; i--)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
+					break;
+				default:
+					for (int i = max; i > 0; i--)
+						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)comp);
+					break;
+			}
+			this.taskVersionCombo.EndUpdate();
+		}
+
+		private void taskNameText_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			char[] inv = System.IO.Path.GetInvalidFileNameChars();
+			e.Cancel = !ValidateText(taskNameText,
+				delegate(string s) { return s.Length > 0 && s.IndexOfAny(inv) == -1; },
+				EditorProperties.Resources.Error_InvalidNameFormat);
+		}
+
 		private void TaskOptionsEditor_HelpButtonClicked(object sender, CancelEventArgs e)
 		{
 
+		}
+
+		private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			IsV2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
+			TaskCompatibility priorSetting = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
+				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
+			try
+			{
+				if (!onAssignment && td != null)
+				{
+					td.Validate(true);
+					ReinitializeControls();
+				}
+			}
+			catch (InvalidOperationException ex)
+			{
+				var msg = new System.Text.StringBuilder();
+				if (this.ShowErrors)
+				{
+					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
+					foreach (var item in ex.Data.Keys)
+						msg.AppendLine(string.Format("- {0} {1}", item, ex.Data[item]));
+				}
+				else
+					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
+				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)priorSetting);
+				return;
+			}
+		}
+
+		private void UpdateTitleFont()
+		{
+			this.panelTitleLabel.Font = new System.Drawing.Font(this.Font.FontFamily, this.Font.Size + 1, System.Drawing.FontStyle.Bold, this.Font.Unit);
+		}
+
+		private bool ValidateText(Control ctrl, Predicate<string> pred, string error)
+		{
+			bool valid = pred(ctrl.Text);
+			//errorProvider.SetError(ctrl, valid ? string.Empty : error);
+			//OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, error));
+			//hasError = valid;
+			return valid;
+		}
+
+		private class ComboItem : IEnableable
+		{
+			public string Text;
+			public int Version;
+			private bool enabled;
+			public ComboItem(string text, int ver, bool enabled = true) { Text = text; Version = ver; this.enabled = enabled; }
+
+			public bool Enabled
+			{
+				get { return enabled; }
+				set { enabled = value; }
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is ComboItem)
+					return Version == ((ComboItem)obj).Version;
+				if (obj is int)
+					return Version == (int)obj;
+				return Text.CompareTo(obj.ToString()) == 0;
+			}
+
+			public override int GetHashCode()
+			{
+				return Version.GetHashCode();
+			}
+
+			public override string ToString() { return this.Text; }
 		}
 	}
 }

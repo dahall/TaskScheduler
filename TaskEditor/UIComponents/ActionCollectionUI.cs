@@ -61,8 +61,6 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				{
 					actionListView.Alignment = ListViewAlignment.Left;
 					actionListView.AdjustTileToWidth();
-					var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { MaxTextLines = 1 };
-					NativeMethods.SendMessage(actionListView.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
 					NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else
@@ -245,10 +243,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				lvw.Columns[idx].Width = nWidth;
 		}
 
-		public static void AdjustTileToWidth(this ListView lvw)
+		public static void AdjustTileToWidth(this ListView lvw, int maxLines = 1, int iconSpacing = 4)
 		{
+			const string str = "Wg";
+			var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { IconTextSpacing = iconSpacing, MaxTextLines = maxLines };
+			var sb = new System.Text.StringBuilder(str);
+			for (int i = 0; i < maxLines; i++)
+				sb.Append("\r" + str);
 			using (Graphics g = lvw.CreateGraphics())
-				lvw.TileSize = new Size(lvw.ClientSize.Width, Math.Max(lvw.LargeImageList.ImageSize.Height, TextRenderer.MeasureText(g, "W\rg", lvw.Font).Height));
+				lvTVInfo.TileSize = new Size(lvw.ClientSize.Width, Math.Max(lvw.LargeImageList.ImageSize.Height, TextRenderer.MeasureText(g, sb.ToString(), lvw.Font).Height));
+			NativeMethods.SendMessage(lvw.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
 			//var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { TileWidth = lvw.ClientSize.Width };
 			//NativeMethods.SendMessage(lvw.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
 			//NativeMethods.SendMessage(lvw.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));

@@ -1069,6 +1069,8 @@ namespace Microsoft.Win32.TaskScheduler
 					return v2Task.State;
 
 				V1Reactivate();
+				if (!this.Enabled)
+					return TaskState.Disabled;
 				switch (v1Task.GetStatus())
 				{
 					case V1Interop.TaskStatus.Ready:

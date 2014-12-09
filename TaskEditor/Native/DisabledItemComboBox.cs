@@ -406,10 +406,11 @@ namespace System.Windows.Forms
 			if (!vsSuccess)
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("CR:{0};ClR:{1};Foc:{2};St:{3};Tx:{4}", ClientRectangle, e.ClipRectangle, this.Focused, state, itemText));
+				e.Graphics.Clear(this.BackColor);
 				ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, Border3DStyle.Sunken);
 				ControlPaint.DrawComboButton(e.Graphics, br, this.Enabled ? (state == ComboBoxState.Pressed ? ButtonState.Pushed : ButtonState.Normal) : ButtonState.Inactive);
-				using (var bb = new SolidBrush(this.BackColor))
-					e.Graphics.FillRectangle(bb, tr);
+				//using (var bb = new SolidBrush(this.BackColor))
+				//	e.Graphics.FillRectangle(bb, tr);
 				if (this.Focused)
 				{
 					Size sz = TextRenderer.MeasureText(e.Graphics, "Wg", this.Font, tr.Size, TextFormatFlags.Default);

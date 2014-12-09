@@ -950,18 +950,6 @@ namespace Microsoft.Win32
 			public int iGroup;
 		}
 
-		public struct LVTILECOLUMNINFO
-		{
-			public uint columnIndex;
-			public ListViewColumnFormat format;
-
-			public LVTILECOLUMNINFO(uint colIdx, ListViewColumnFormat fmt = 0)
-			{
-				columnIndex = colIdx;
-				format = fmt;
-			}
-		}
-
 		[StructLayout(LayoutKind.Sequential)]
 		public class LVITEM : IDisposable
 		{
@@ -1168,6 +1156,19 @@ namespace Microsoft.Win32
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
+		public struct LVTILECOLUMNINFO
+		{
+			public uint columnIndex;
+			public ListViewColumnFormat format;
+
+			public LVTILECOLUMNINFO(uint colIdx, ListViewColumnFormat fmt = 0)
+			{
+				columnIndex = colIdx;
+				format = fmt;
+			}
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
 		public class LVTILEVIEWINFO
 		{
 			private uint cbSize = ((uint)Marshal.SizeOf(typeof(NativeMethods.LVTILEVIEWINFO)));
@@ -1185,7 +1186,7 @@ namespace Microsoft.Win32
 			public bool AutoSize
 			{
 				get { return dwFlags.IsFlagSet(ListViewTileViewFlag.Autosize); }
-				set { dwFlags = ListViewTileViewFlag.Autosize; dwMask |= ListViewTileViewMask.TileSize; sizeTile.height = sizeTile.width = 0; }
+				set { dwFlags = value ? ListViewTileViewFlag.Autosize : ListViewTileViewFlag.FixedSize; dwMask |= ListViewTileViewMask.TileSize; sizeTile.height = sizeTile.width = 0; }
 			}
 
 			public System.Drawing.Size TileSize
@@ -1216,6 +1217,12 @@ namespace Microsoft.Win32
 			{
 				get { return new Padding(rcLabelMargin.Left, rcLabelMargin.Top, rcLabelMargin.Right, rcLabelMargin.Bottom); }
 				set { rcLabelMargin = new RECT(value.Left, value.Top, value.Right, value.Bottom); dwMask |= ListViewTileViewMask.LabelMargin; }
+			}
+
+			public int IconTextSpacing
+			{
+				get { return rcLabelMargin.Left; }
+				set { rcLabelMargin.Left = value; dwMask |= ListViewTileViewMask.LabelMargin; }
 			}
 		}
 

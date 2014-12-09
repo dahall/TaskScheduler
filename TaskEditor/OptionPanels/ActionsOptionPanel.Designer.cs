@@ -47,38 +47,38 @@
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(319, 218);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(372, 262);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
 			// optionPanelHeaderLabel1
 			// 
 			this.optionPanelHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 5);
-			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
+			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 6);
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(319, 23);
+			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(372, 23);
 			this.optionPanelHeaderLabel1.TabIndex = 0;
 			this.optionPanelHeaderLabel1.Text = "Add, remove and change actions";
 			// 
 			// actionCollectionUI1
 			// 
 			this.actionCollectionUI1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.actionCollectionUI1.Location = new System.Drawing.Point(0, 33);
+			this.actionCollectionUI1.Location = new System.Drawing.Point(0, 29);
 			this.actionCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
-			this.actionCollectionUI1.MinimumSize = new System.Drawing.Size(276, 103);
+			this.actionCollectionUI1.MinimumSize = new System.Drawing.Size(322, 119);
 			this.actionCollectionUI1.Name = "actionCollectionUI1";
-			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
-			this.actionCollectionUI1.Size = new System.Drawing.Size(319, 185);
+			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.actionCollectionUI1.Size = new System.Drawing.Size(372, 233);
 			this.actionCollectionUI1.TabIndex = 1;
 			this.actionCollectionUI1.UseModernUI = true;
 			// 
 			// ActionsOptionPanel
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "ActionsOptionPanel";
-			this.Size = new System.Drawing.Size(319, 317);
+			this.Size = new System.Drawing.Size(372, 366);
 			this.Title = "Task Actions";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);

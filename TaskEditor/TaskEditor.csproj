@@ -120,6 +120,12 @@
     <Compile Include="OptionPanels\SecurityOptionPanel.Designer.cs">
       <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionPanels\RuntimeOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\RuntimeOptionPanel.Designer.cs">
+      <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionPanels\StartupOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -489,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
       <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\RuntimeOptionPanel.resx">
+      <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\StartupOptionPanel.resx">
       <DependentUpon>StartupOptionPanel.cs</DependentUpon>
