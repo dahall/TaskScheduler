@@ -115,7 +115,7 @@ namespace TestTaskService
 		static void FindTaskWithPropertyInFolder(System.IO.TextWriter output, TaskFolder tf, string arg, System.Text.RegularExpressions.Match match = null)
 		{
 			if (match == null)
-				match = System.Text.RegularExpressions.Regex.Match(arg, "(\\.?\\w+)*\\s*(==|!=)\\s*\\\"([^\"]*)\\\"");
+				match = System.Text.RegularExpressions.Regex.Match(arg, "^(\\.?\\w+)+\\s*(==|!=)\\s*\\\"([^\"]*)\\\"$");
 			if (!match.Success)
 				return;
 
@@ -145,7 +145,7 @@ namespace TestTaskService
 						if (match.Groups[2].Value == "!=")
 							found = !found;
 						if (found)
-							output.WriteLine("+ {0}, {1} ({2})\n\r== {3}", t.Name, t.Path, t.State, res);
+							output.WriteLine("+ {1} ({2})({4})\n\r== {3}", t.Name, t.Path, t.State, res, t.Definition.Settings.Compatibility);
 					}
 				}
 				catch { }

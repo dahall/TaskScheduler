@@ -22,6 +22,10 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		protected override void InitializePanel()
 		{
 			var v2_1 = td.Settings.Compatibility >= TaskCompatibility.V2_1;
+			taskRunLevelCheck.Enabled = taskRegSDDLText.Enabled = parent.Editable && parent.IsV2;
+			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = parent.Editable && v2_1;
+			principalReqPrivilegesLabel.Enabled = principalReqPrivilegesDropDown.Enabled = false;
+			taskRegSDDLBtn.Visible = (secEd != null && parent.IsV2);
 			if (v2_1)
 			{
 				principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
@@ -30,12 +34,12 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 					principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
 			}
 			taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
-			taskRunLevelCheck.Enabled = principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled =
-				principalReqPrivilegesDropDown.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesDropDown.Enabled =
-				taskRegSDDLText.Enabled = parent.Editable && v2_1;
-			taskRegSDDLBtn.Visible = (secEd != null && parent.IsV2);
 			this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
+			string sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
+			if (string.IsNullOrEmpty(sddl) && parent.Task != null)
+				sddl = parent.Task.GetSecurityDescriptorSddlForm();
+			taskRegSDDLText.Text = sddl;
 		}
 
 		private void InvokeObjectPicker(string targetComputerName)

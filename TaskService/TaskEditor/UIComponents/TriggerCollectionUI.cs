@@ -72,8 +72,6 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				{
 					triggerListView.Alignment = ListViewAlignment.Left;
 					triggerListView.AdjustTileToWidth();
-					var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { MaxTextLines = 1 };
-					NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
 					NativeMethods.SendMessage(triggerListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else

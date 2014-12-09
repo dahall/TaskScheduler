@@ -71,6 +71,11 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <c>true</c> if this task definition is v2; otherwise, <c>false</c>.
 		/// </value>
 		bool IsV2 { get; }
+
+		/// <summary>
+		/// Reinitializes all the controls based on current <see cref="TaskDefinition"/> values.
+		/// </summary>
+		void ReinitializeControls();
 	}
 
 	/// <summary>

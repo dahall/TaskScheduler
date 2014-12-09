@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
@@ -28,6 +22,13 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		protected override void InitializePanel()
 		{
+			bool editable = parent.Editable;
+			bool v2 = parent.IsV2;
+			taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
+			taskStartIfConnectionCheck.Enabled = editable && v2;
+			availableConnectionsCombo.Enabled = editable && v2 && td.Settings.RunOnlyIfNetworkAvailable && !td.Settings.UseUnifiedSchedulingEngine;
+			taskDisallowStartOnRemoteAppSessionCheck.Enabled = editable && td.Settings.Compatibility >= TaskCompatibility.V2_1;
+
 			taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
 			taskStopOnIdleEndCheck.Checked = td.Settings.IdleSettings.StopOnIdleEnd;
 			taskIdleDurationCheck.Checked = td.Settings.RunOnlyIfIdle;
@@ -44,13 +45,6 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				availableConnectionsCombo.SelectedIndex = 0;
 			else
 				availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Id;
-
-			bool editable = parent.Editable;
-			bool v2 = parent.IsV2;
-			taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
-			taskStartIfConnectionCheck.Enabled = editable && v2;
-			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !td.Settings.UseUnifiedSchedulingEngine;
-			taskDisallowStartOnRemoteAppSessionCheck.Enabled = editable && td.Settings.Compatibility >= TaskCompatibility.V2_1;
 		}
 
 		private void taskDisallowStartIfOnBatteriesCheck_CheckedChanged(object sender, EventArgs e)

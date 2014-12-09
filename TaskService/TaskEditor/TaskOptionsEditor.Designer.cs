@@ -33,7 +33,7 @@
 			this.cancelButton = new System.Windows.Forms.Button();
 			this.okButton = new System.Windows.Forms.Button();
 			this.menuPanel = new System.Windows.Forms.Panel();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.menuList = new System.Windows.Forms.ListBox();
 			this.generalItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.triggersItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionsItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,14 +47,13 @@
 			this.splitterPanel = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.taskNameText = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.panel2 = new System.Windows.Forms.Panel();
 			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuPanel.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			this.bodyPanel.SuspendLayout();
 			this.panelHeading.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -88,23 +87,28 @@
 			// 
 			this.menuPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.menuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.menuPanel.Controls.Add(this.menuStrip1);
+			this.menuPanel.Controls.Add(this.menuList);
 			resources.ApplyResources(this.menuPanel, "menuPanel");
 			this.menuPanel.Name = "menuPanel";
 			// 
-			// menuStrip1
+			// menuList
 			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.menuList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.menuList, "menuList");
+			this.menuList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.menuList.Items.AddRange(new object[] {
             this.generalItem,
             this.triggersItem,
             this.actionsItem,
             this.securityItem,
             this.startupItem,
             this.runItem});
-			this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
-			resources.ApplyResources(this.menuStrip1, "menuStrip1");
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.ShowItemToolTips = true;
+			this.menuList.Name = "menuList";
+			this.menuList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.menuList_DrawItem);
+			this.menuList.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.menuList_MeasureItem);
+			this.menuList.SelectedIndexChanged += new System.EventHandler(this.menuList_SelectedIndexChanged);
+			this.menuList.MouseLeave += new System.EventHandler(this.menuList_MouseLeave);
+			this.menuList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuList_MouseMove);
 			// 
 			// generalItem
 			// 
@@ -166,6 +170,7 @@
 			// panelTitleLabel
 			// 
 			resources.ApplyResources(this.panelTitleLabel, "panelTitleLabel");
+			this.panelTitleLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.panelTitleLabel.Name = "panelTitleLabel";
 			// 
 			// panelImage
@@ -195,30 +200,32 @@
 			this.tableLayoutPanel2.Controls.Add(this.label4, 0, 1);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			// 
-			// panel2
+			// taskNameText
 			// 
-			resources.ApplyResources(this.panel2, "panel2");
-			this.panel2.Name = "panel2";
+			resources.ApplyResources(this.taskNameText, "taskNameText");
+			this.taskNameText.Name = "taskNameText";
+			this.taskNameText.Validating += new System.ComponentModel.CancelEventHandler(this.taskNameText_Validating);
 			// 
 			// label1
 			// 
 			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
 			// 
-			// taskNameText
-			// 
-			resources.ApplyResources(this.taskNameText, "taskNameText");
-			this.taskNameText.Name = "taskNameText";
-			// 
 			// label4
 			// 
 			resources.ApplyResources(this.label4, "label4");
 			this.label4.Name = "label4";
 			// 
+			// panel2
+			// 
+			resources.ApplyResources(this.panel2, "panel2");
+			this.panel2.Name = "panel2";
+			// 
 			// taskVersionCombo
 			// 
 			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
 			this.taskVersionCombo.Name = "taskVersionCombo";
+			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
 			// 
 			// TaskOptionsEditor
 			// 
@@ -233,7 +240,6 @@
 			this.Controls.Add(this.splitterPanel);
 			this.Controls.Add(this.menuPanel);
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "TaskOptionsEditor";
@@ -242,9 +248,6 @@
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.TaskOptionsEditor_HelpButtonClicked);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.menuPanel.ResumeLayout(false);
-			this.menuPanel.PerformLayout();
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
 			this.bodyPanel.ResumeLayout(false);
 			this.bodyPanel.PerformLayout();
 			this.panelHeading.ResumeLayout(false);
@@ -263,18 +266,18 @@
 		private System.Windows.Forms.Button cancelButton;
 		private System.Windows.Forms.Button okButton;
 		private System.Windows.Forms.Panel menuPanel;
-		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ListBox menuList;
 		private System.Windows.Forms.ToolStripMenuItem generalItem;
 		private System.Windows.Forms.ToolStripMenuItem triggersItem;
 		private System.Windows.Forms.ToolStripMenuItem actionsItem;
+		private System.Windows.Forms.ToolStripMenuItem securityItem;
+		private System.Windows.Forms.ToolStripMenuItem startupItem;
+		private System.Windows.Forms.ToolStripMenuItem runItem;
 		private System.Windows.Forms.Panel bodyPanel;
 		private System.Windows.Forms.Panel splitterPanel;
 		private System.Windows.Forms.TableLayoutPanel panelHeading;
 		private System.Windows.Forms.Label panelTitleLabel;
 		private System.Windows.Forms.Label panelImage;
-		private System.Windows.Forms.ToolStripMenuItem securityItem;
-		private System.Windows.Forms.ToolStripMenuItem startupItem;
-		private System.Windows.Forms.ToolStripMenuItem runItem;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Panel panel2;

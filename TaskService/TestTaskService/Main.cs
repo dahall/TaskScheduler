@@ -38,8 +38,8 @@ namespace TestTaskService
 					Program.EditorTest(ts, output);
 					break;
 				case 3: // Find action
-					//Program.FindTaskWithProperty(ts, output, textBox2.Text);
-					Program.FluentTest(ts, output);
+					Program.FindTaskWithProperty(ts, output, textBox2.Text);
+					//Program.FluentTest(ts, output);
 					break;
 				case 4: // Wiz
 					Program.WizardTest(ts, output);
