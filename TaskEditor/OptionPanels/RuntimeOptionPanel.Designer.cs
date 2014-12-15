@@ -33,17 +33,17 @@
 			this.taskPriorityCombo = new System.Windows.Forms.ComboBox();
 			this.taskRunningRuleLabel = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
-			this.taskDeleteAfterCheck = new System.Windows.Forms.CheckBox();
+			this.taskDeleteAfterCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.taskRestartCountLabel = new System.Windows.Forms.Label();
-			this.taskAllowHardTerminateCheck = new System.Windows.Forms.CheckBox();
-			this.taskExecutionTimeLimitCheck = new System.Windows.Forms.CheckBox();
+			this.taskAllowHardTerminateCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
+			this.taskExecutionTimeLimitCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.taskDeleteAfterCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
-			this.taskRestartIntervalCheck = new System.Windows.Forms.CheckBox();
+			this.taskRestartIntervalCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.taskExecutionTimeLimitCombo = new System.Windows.Forms.TimeSpanPicker();
 			this.taskRestartIntervalCombo = new System.Windows.Forms.TimeSpanPicker();
-			this.taskAllowDemandStartCheck = new System.Windows.Forms.CheckBox();
-			this.taskStartWhenAvailableCheck = new System.Windows.Forms.CheckBox();
+			this.taskAllowDemandStartCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
+			this.taskStartWhenAvailableCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.taskRestartCountText = new System.Windows.Forms.NumericUpDown();
 			this.taskRestartAttemptTimesLabel = new System.Windows.Forms.Label();
@@ -92,7 +92,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(342, 320);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(381, 331);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// taskMultInstCombo
@@ -102,10 +102,10 @@
 			this.tableLayoutPanel1.SetColumnSpan(this.taskMultInstCombo, 2);
 			this.taskMultInstCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.taskMultInstCombo.FormattingEnabled = true;
-			this.taskMultInstCombo.Location = new System.Drawing.Point(10, 244);
-			this.taskMultInstCombo.Margin = new System.Windows.Forms.Padding(10, 3, 0, 3);
+			this.taskMultInstCombo.Location = new System.Drawing.Point(7, 255);
+			this.taskMultInstCombo.Margin = new System.Windows.Forms.Padding(7, 3, 0, 3);
 			this.taskMultInstCombo.Name = "taskMultInstCombo";
-			this.taskMultInstCombo.Size = new System.Drawing.Size(332, 23);
+			this.taskMultInstCombo.Size = new System.Drawing.Size(374, 23);
 			this.taskMultInstCombo.TabIndex = 14;
 			this.taskMultInstCombo.SelectedIndexChanged += new System.EventHandler(this.taskMultInstCombo_SelectedIndexChanged);
 			// 
@@ -115,10 +115,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel1.SetColumnSpan(this.taskPriorityCombo, 2);
 			this.taskPriorityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.taskPriorityCombo.Location = new System.Drawing.Point(10, 294);
-			this.taskPriorityCombo.Margin = new System.Windows.Forms.Padding(10, 3, 0, 3);
+			this.taskPriorityCombo.Location = new System.Drawing.Point(7, 305);
+			this.taskPriorityCombo.Margin = new System.Windows.Forms.Padding(7, 3, 0, 3);
 			this.taskPriorityCombo.Name = "taskPriorityCombo";
-			this.taskPriorityCombo.Size = new System.Drawing.Size(332, 23);
+			this.taskPriorityCombo.Size = new System.Drawing.Size(374, 23);
 			this.taskPriorityCombo.TabIndex = 3;
 			this.taskPriorityCombo.SelectedIndexChanged += new System.EventHandler(this.taskPriorityCombo_SelectedIndexChanged);
 			// 
@@ -128,11 +128,10 @@
 			this.taskRunningRuleLabel.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.taskRunningRuleLabel, 2);
 			this.taskRunningRuleLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRunningRuleLabel.Location = new System.Drawing.Point(0, 223);
-			this.taskRunningRuleLabel.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskRunningRuleLabel.Location = new System.Drawing.Point(5, 234);
+			this.taskRunningRuleLabel.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
 			this.taskRunningRuleLabel.Name = "taskRunningRuleLabel";
-			this.taskRunningRuleLabel.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskRunningRuleLabel.Size = new System.Drawing.Size(339, 15);
+			this.taskRunningRuleLabel.Size = new System.Drawing.Size(373, 15);
 			this.taskRunningRuleLabel.TabIndex = 13;
 			this.taskRunningRuleLabel.Text = "If the task is already ru&nning, then the following rule applies:";
 			// 
@@ -141,11 +140,10 @@
 			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label8.AutoSize = true;
 			this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label8.Location = new System.Drawing.Point(0, 273);
-			this.label8.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.label8.Location = new System.Drawing.Point(5, 284);
+			this.label8.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
 			this.label8.Name = "label8";
-			this.label8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.label8.Size = new System.Drawing.Size(181, 15);
+			this.label8.Size = new System.Drawing.Size(215, 15);
 			this.label8.TabIndex = 2;
 			this.label8.Text = "Priority &Level:";
 			// 
@@ -154,11 +152,10 @@
 			this.taskDeleteAfterCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.taskDeleteAfterCheck.AutoSize = true;
 			this.taskDeleteAfterCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskDeleteAfterCheck.Location = new System.Drawing.Point(0, 196);
-			this.taskDeleteAfterCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskDeleteAfterCheck.Location = new System.Drawing.Point(7, 194);
+			this.taskDeleteAfterCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskDeleteAfterCheck.Name = "taskDeleteAfterCheck";
-			this.taskDeleteAfterCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskDeleteAfterCheck.Size = new System.Drawing.Size(181, 19);
+			this.taskDeleteAfterCheck.Size = new System.Drawing.Size(213, 34);
 			this.taskDeleteAfterCheck.TabIndex = 11;
 			this.taskDeleteAfterCheck.Text = "If the task is not scheduled to run again, &delete it after:";
 			this.taskDeleteAfterCheck.UseVisualStyleBackColor = true;
@@ -169,11 +166,11 @@
 			this.taskRestartCountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.taskRestartCountLabel.AutoSize = true;
 			this.taskRestartCountLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRestartCountLabel.Location = new System.Drawing.Point(0, 115);
-			this.taskRestartCountLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+			this.taskRestartCountLabel.Location = new System.Drawing.Point(7, 115);
+			this.taskRestartCountLabel.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
 			this.taskRestartCountLabel.Name = "taskRestartCountLabel";
-			this.taskRestartCountLabel.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskRestartCountLabel.Size = new System.Drawing.Size(181, 15);
+			this.taskRestartCountLabel.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+			this.taskRestartCountLabel.Size = new System.Drawing.Size(213, 15);
 			this.taskRestartCountLabel.TabIndex = 5;
 			this.taskRestartCountLabel.Text = "Attempt &restart up to:";
 			// 
@@ -183,11 +180,10 @@
 			this.taskAllowHardTerminateCheck.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.taskAllowHardTerminateCheck, 2);
 			this.taskAllowHardTerminateCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskAllowHardTerminateCheck.Location = new System.Drawing.Point(0, 169);
-			this.taskAllowHardTerminateCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskAllowHardTerminateCheck.Location = new System.Drawing.Point(7, 169);
+			this.taskAllowHardTerminateCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskAllowHardTerminateCheck.Name = "taskAllowHardTerminateCheck";
-			this.taskAllowHardTerminateCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskAllowHardTerminateCheck.Size = new System.Drawing.Size(339, 19);
+			this.taskAllowHardTerminateCheck.Size = new System.Drawing.Size(371, 19);
 			this.taskAllowHardTerminateCheck.TabIndex = 10;
 			this.taskAllowHardTerminateCheck.Text = "If the running task does not end when requested, &force it to stop";
 			this.taskAllowHardTerminateCheck.UseVisualStyleBackColor = true;
@@ -198,20 +194,18 @@
 			this.taskExecutionTimeLimitCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.taskExecutionTimeLimitCheck.AutoSize = true;
 			this.taskExecutionTimeLimitCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskExecutionTimeLimitCheck.Location = new System.Drawing.Point(0, 142);
-			this.taskExecutionTimeLimitCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskExecutionTimeLimitCheck.Location = new System.Drawing.Point(7, 142);
+			this.taskExecutionTimeLimitCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskExecutionTimeLimitCheck.Name = "taskExecutionTimeLimitCheck";
-			this.taskExecutionTimeLimitCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskExecutionTimeLimitCheck.Size = new System.Drawing.Size(181, 19);
+			this.taskExecutionTimeLimitCheck.Size = new System.Drawing.Size(213, 19);
 			this.taskExecutionTimeLimitCheck.TabIndex = 8;
 			this.taskExecutionTimeLimitCheck.Text = "Stop the tas&k if it runs longer than:";
 			this.taskExecutionTimeLimitCheck.UseVisualStyleBackColor = true;
 			// 
 			// taskDeleteAfterCombo
 			// 
-			this.taskDeleteAfterCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskDeleteAfterCombo.Location = new System.Drawing.Point(187, 194);
+			this.taskDeleteAfterCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.taskDeleteAfterCombo.Location = new System.Drawing.Point(226, 199);
 			this.taskDeleteAfterCombo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
 			this.taskDeleteAfterCombo.Size = new System.Drawing.Size(155, 23);
@@ -226,7 +220,7 @@
 			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
 			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 6);
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(342, 23);
+			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(381, 23);
 			this.optionPanelHeaderLabel1.TabIndex = 0;
 			this.optionPanelHeaderLabel1.Text = "Options";
 			// 
@@ -235,11 +229,10 @@
 			this.taskRestartIntervalCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.taskRestartIntervalCheck.AutoSize = true;
 			this.taskRestartIntervalCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRestartIntervalCheck.Location = new System.Drawing.Point(0, 84);
-			this.taskRestartIntervalCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskRestartIntervalCheck.Location = new System.Drawing.Point(7, 84);
+			this.taskRestartIntervalCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskRestartIntervalCheck.Name = "taskRestartIntervalCheck";
-			this.taskRestartIntervalCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskRestartIntervalCheck.Size = new System.Drawing.Size(181, 19);
+			this.taskRestartIntervalCheck.Size = new System.Drawing.Size(213, 19);
 			this.taskRestartIntervalCheck.TabIndex = 3;
 			this.taskRestartIntervalCheck.Text = "If the &task fails, restart every:";
 			this.taskRestartIntervalCheck.UseVisualStyleBackColor = true;
@@ -247,9 +240,8 @@
 			// 
 			// taskExecutionTimeLimitCombo
 			// 
-			this.taskExecutionTimeLimitCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskExecutionTimeLimitCombo.Location = new System.Drawing.Point(187, 140);
+			this.taskExecutionTimeLimitCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.taskExecutionTimeLimitCombo.Location = new System.Drawing.Point(226, 140);
 			this.taskExecutionTimeLimitCombo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.taskExecutionTimeLimitCombo.Name = "taskExecutionTimeLimitCombo";
 			this.taskExecutionTimeLimitCombo.Size = new System.Drawing.Size(155, 23);
@@ -258,9 +250,8 @@
 			// 
 			// taskRestartIntervalCombo
 			// 
-			this.taskRestartIntervalCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskRestartIntervalCombo.Location = new System.Drawing.Point(187, 82);
+			this.taskRestartIntervalCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.taskRestartIntervalCombo.Location = new System.Drawing.Point(226, 82);
 			this.taskRestartIntervalCombo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
 			this.taskRestartIntervalCombo.Size = new System.Drawing.Size(155, 23);
@@ -273,11 +264,10 @@
 			this.taskAllowDemandStartCheck.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.taskAllowDemandStartCheck, 2);
 			this.taskAllowDemandStartCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskAllowDemandStartCheck.Location = new System.Drawing.Point(0, 32);
-			this.taskAllowDemandStartCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskAllowDemandStartCheck.Location = new System.Drawing.Point(7, 32);
+			this.taskAllowDemandStartCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskAllowDemandStartCheck.Name = "taskAllowDemandStartCheck";
-			this.taskAllowDemandStartCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskAllowDemandStartCheck.Size = new System.Drawing.Size(339, 19);
+			this.taskAllowDemandStartCheck.Size = new System.Drawing.Size(371, 19);
 			this.taskAllowDemandStartCheck.TabIndex = 1;
 			this.taskAllowDemandStartCheck.Text = "A&llow task to be run on demand";
 			this.taskAllowDemandStartCheck.UseVisualStyleBackColor = true;
@@ -289,11 +279,10 @@
 			this.taskStartWhenAvailableCheck.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.taskStartWhenAvailableCheck, 2);
 			this.taskStartWhenAvailableCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskStartWhenAvailableCheck.Location = new System.Drawing.Point(0, 57);
-			this.taskStartWhenAvailableCheck.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			this.taskStartWhenAvailableCheck.Location = new System.Drawing.Point(7, 57);
+			this.taskStartWhenAvailableCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskStartWhenAvailableCheck.Name = "taskStartWhenAvailableCheck";
-			this.taskStartWhenAvailableCheck.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.taskStartWhenAvailableCheck.Size = new System.Drawing.Size(339, 19);
+			this.taskStartWhenAvailableCheck.Size = new System.Drawing.Size(371, 19);
 			this.taskStartWhenAvailableCheck.TabIndex = 2;
 			this.taskStartWhenAvailableCheck.Text = "Run task as soon as possible after a &scheduled start is missed";
 			this.taskStartWhenAvailableCheck.UseVisualStyleBackColor = true;
@@ -305,7 +294,7 @@
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.Controls.Add(this.taskRestartCountText);
 			this.flowLayoutPanel1.Controls.Add(this.taskRestartAttemptTimesLabel);
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(184, 108);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(223, 108);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(158, 29);
@@ -336,7 +325,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "RuntimeOptionPanel";
-			this.Size = new System.Drawing.Size(342, 412);
+			this.Size = new System.Drawing.Size(381, 412);
 			this.Title = "Run-time Options";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
@@ -353,16 +342,16 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private OptionPanelHeaderLabel optionPanelHeaderLabel1;
 		private System.Windows.Forms.HelpProvider helpProvider;
-		private System.Windows.Forms.CheckBox taskAllowDemandStartCheck;
-		private System.Windows.Forms.CheckBox taskStartWhenAvailableCheck;
-		private System.Windows.Forms.CheckBox taskRestartIntervalCheck;
+		private WrappingCheckBox taskAllowDemandStartCheck;
+		private WrappingCheckBox taskStartWhenAvailableCheck;
+		private WrappingCheckBox taskRestartIntervalCheck;
 		private System.Windows.Forms.TimeSpanPicker taskRestartIntervalCombo;
 		private System.Windows.Forms.Label taskRestartCountLabel;
 		private System.Windows.Forms.NumericUpDown taskRestartCountText;
-		private System.Windows.Forms.CheckBox taskExecutionTimeLimitCheck;
+		private WrappingCheckBox taskExecutionTimeLimitCheck;
 		private System.Windows.Forms.TimeSpanPicker taskExecutionTimeLimitCombo;
-		private System.Windows.Forms.CheckBox taskAllowHardTerminateCheck;
-		private System.Windows.Forms.CheckBox taskDeleteAfterCheck;
+		private WrappingCheckBox taskAllowHardTerminateCheck;
+		private WrappingCheckBox taskDeleteAfterCheck;
 		private System.Windows.Forms.TimeSpanPicker taskDeleteAfterCombo;
 		private System.Windows.Forms.Label taskRunningRuleLabel;
 		private System.Windows.Forms.ComboBox taskMultInstCombo;

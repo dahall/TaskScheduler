@@ -101,7 +101,37 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 					if (!td.CanUseUnifiedSchedulingEngine())
 					{
 						if (MessageBox.Show(this, EditorProperties.Resources.UseUnifiedResetQuestion, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-							ResetForUnifiedSchedulingEngine();
+						{
+							if (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
+								td.Principal.LogonType = TaskLogonType.InteractiveToken;
+							if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
+								td.Settings.MultipleInstances = TaskInstancesPolicy.IgnoreNew;
+							td.Settings.AllowHardTerminate = true;
+							for (int i = td.Actions.Count - 1; i >= 0; i--)
+							{
+								if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
+									td.Actions.RemoveAt(i);
+							}
+							for (int i = td.Triggers.Count - 1; i >= 0; i--)
+							{
+								if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
+								{
+									td.Triggers.RemoveAt(i);
+								}
+								else
+								{
+									Trigger t = td.Triggers[i];
+									t.ExecutionTimeLimit = TimeSpan.Zero;
+									if (t is ICalendarTrigger)
+									{
+										t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
+										t.Repetition.StopAtDurationEnd = false;
+									}
+									else if (t is EventTrigger)
+										((EventTrigger)t).ValueQueries.Clear();
+								}
+							}
+						}
 						else
 							taskUseUnifiedSchedulingEngineCheck.Checked = false;
 					}
@@ -115,66 +145,6 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		{
 			if (!onAssignment)
 				td.Settings.Volatile = taskVolatileCheck.Checked;
-		}
-
-		private void ResetForUnifiedSchedulingEngine()
-		{
-			/*if (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
-			{
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
-				SetUserControls(td.Principal.LogonType);
-			}
-			if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
-				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.IgnoreNew);
-			if (availableConnectionsCombo.Items.Count > 0)
-				availableConnectionsCombo.SelectedIndex = 0;
-			taskAllowHardTerminateCheck.Checked = true;
-			for (int i = td.Actions.Count - 1; i >= 0; i--)
-			{
-				if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
-				{
-					td.Actions.RemoveAt(i);
-					actionCollectionUI.RefreshState();
-				}
-			}
-			for (int i = td.Triggers.Count - 1; i >= 0; i--)
-			{
-				if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
-				{
-					td.Triggers.RemoveAt(i);
-					triggerCollectionUI1.RefreshState();
-				}
-				else
-				{
-					Trigger t = td.Triggers[i];
-					t.ExecutionTimeLimit = TimeSpan.Zero;
-					if (t is ICalendarTrigger)
-					{
-						t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
-						t.Repetition.StopAtDurationEnd = false;
-					}
-					else if (t is EventTrigger)
-						((EventTrigger)t).ValueQueries.Clear();
-				}
-			}*/
-		}
-
-		private void UpdateUnifiedSchedulingEngineControls()
-		{
-			/*bool isSet = taskUseUnifiedSchedulingEngineCheck.Checked;
-			bool alreadyOnAssigment = onAssignment;
-			onAssignment = true;
-			taskAllowHardTerminateCheck.Enabled = editable && !isSet;
-			// Update Multiple Instances policy combo
-			taskMultInstCombo.BeginUpdate();
-			long allVal;
-			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
-			if (isSet)
-				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
-			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
-			taskMultInstCombo.EndUpdate();
-			if (!alreadyOnAssigment)
-				onAssignment = false;*/
 		}
 	}
 }

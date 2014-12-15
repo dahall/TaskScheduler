@@ -36,14 +36,14 @@
 			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.taskLocalOnlyCheck = new System.Windows.Forms.CheckBox();
+			this.taskLocalOnlyCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.taskLoggedOptionalRadio = new System.Windows.Forms.RadioButton();
 			this.taskLoggedOnRadio = new System.Windows.Forms.RadioButton();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.changePrincipalButton = new System.Windows.Forms.Button();
 			this.taskPrincipalText = new System.Windows.Forms.TextBox();
 			this.taskUserAcctLabel = new System.Windows.Forms.Label();
-			this.taskRunLevelCheck = new System.Windows.Forms.CheckBox();
+			this.taskRunLevelCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.principalSIDTypeCombo = new System.Windows.Forms.ComboBox();
 			this.principalSIDTypeLabel = new System.Windows.Forms.Label();
@@ -238,8 +238,8 @@
 		private OptionPanelHeaderLabel optionPanelHeaderLabel1;
 		private OptionPanelHeaderLabel optionPanelHeaderLabel2;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-		private System.Windows.Forms.CheckBox taskRunLevelCheck;
-		private System.Windows.Forms.CheckBox taskLocalOnlyCheck;
+		private WrappingCheckBox taskRunLevelCheck;
+		private WrappingCheckBox taskLocalOnlyCheck;
 		private System.Windows.Forms.RadioButton taskLoggedOptionalRadio;
 		private System.Windows.Forms.RadioButton taskLoggedOnRadio;
 		private System.Windows.Forms.TextBox taskPrincipalText;
