@@ -31,27 +31,27 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralOptionPanel));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.taskRegDocText = new System.Windows.Forms.TextBox();
-			this.taskRegDocLabel = new System.Windows.Forms.Label();
-			this.taskRegVersionLabel = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.taskAuthorText = new System.Windows.Forms.TextBox();
-			this.taskRegSourceLabel = new System.Windows.Forms.Label();
-			this.taskRegURILabel = new System.Windows.Forms.Label();
-			this.taskRegVersionText = new System.Windows.Forms.TextBox();
-			this.taskRegURIText = new System.Windows.Forms.TextBox();
-			this.taskRegSourceText = new System.Windows.Forms.TextBox();
-			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
-			this.label2 = new System.Windows.Forms.Label();
 			this.taskDescText = new System.Windows.Forms.TextBox();
+			this.taskRegVersionText = new System.Windows.Forms.TextBox();
+			this.taskUseUnifiedSchedulingEngineCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
+			this.taskRegURIText = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.taskRegSourceText = new System.Windows.Forms.TextBox();
+			this.taskAuthorText = new System.Windows.Forms.TextBox();
+			this.taskRegDocLabel = new System.Windows.Forms.Label();
+			this.optionPanelHeaderLabel2 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
+			this.taskRegVersionLabel = new System.Windows.Forms.Label();
+			this.taskVolatileCheck = new Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox();
+			this.taskRegURILabel = new System.Windows.Forms.Label();
+			this.taskRegSourceLabel = new System.Windows.Forms.Label();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.taskEnabledCheck = new System.Windows.Forms.CheckBox();
 			this.taskHiddenCheck = new System.Windows.Forms.CheckBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-			this.taskUseUnifiedSchedulingEngineCheck = new System.Windows.Forms.CheckBox();
-			this.taskVolatileCheck = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -79,48 +79,17 @@
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
-			// optionPanelHeaderLabel2
-			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel2, 2);
-			resources.ApplyResources(this.optionPanelHeaderLabel2, "optionPanelHeaderLabel2");
-			this.optionPanelHeaderLabel2.Name = "optionPanelHeaderLabel2";
-			// 
 			// taskRegDocText
 			// 
 			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
 			this.taskRegDocText.Name = "taskRegDocText";
 			this.taskRegDocText.Leave += new System.EventHandler(this.taskRegDocText_Leave);
 			// 
-			// taskRegDocLabel
+			// taskDescText
 			// 
-			resources.ApplyResources(this.taskRegDocLabel, "taskRegDocLabel");
-			this.taskRegDocLabel.Name = "taskRegDocLabel";
-			// 
-			// taskRegVersionLabel
-			// 
-			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
-			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
-			// 
-			// label3
-			// 
-			resources.ApplyResources(this.label3, "label3");
-			this.label3.Name = "label3";
-			// 
-			// taskAuthorText
-			// 
-			resources.ApplyResources(this.taskAuthorText, "taskAuthorText");
-			this.taskAuthorText.Name = "taskAuthorText";
-			this.taskAuthorText.ReadOnly = true;
-			// 
-			// taskRegSourceLabel
-			// 
-			resources.ApplyResources(this.taskRegSourceLabel, "taskRegSourceLabel");
-			this.taskRegSourceLabel.Name = "taskRegSourceLabel";
-			// 
-			// taskRegURILabel
-			// 
-			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
-			this.taskRegURILabel.Name = "taskRegURILabel";
+			resources.ApplyResources(this.taskDescText, "taskDescText");
+			this.taskDescText.Name = "taskDescText";
+			this.taskDescText.Leave += new System.EventHandler(this.taskDescText_Leave);
 			// 
 			// taskRegVersionText
 			// 
@@ -129,6 +98,14 @@
 			this.taskRegVersionText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegVersionText_Validating);
 			this.taskRegVersionText.Validated += new System.EventHandler(this.taskRegVersionText_Validated);
 			// 
+			// taskUseUnifiedSchedulingEngineCheck
+			// 
+			resources.ApplyResources(this.taskUseUnifiedSchedulingEngineCheck, "taskUseUnifiedSchedulingEngineCheck");
+			this.tableLayoutPanel1.SetColumnSpan(this.taskUseUnifiedSchedulingEngineCheck, 2);
+			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
+			this.helpProvider.SetShowHelp(this.taskUseUnifiedSchedulingEngineCheck, ((bool)(resources.GetObject("taskUseUnifiedSchedulingEngineCheck.ShowHelp"))));
+			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
+			// 
 			// taskRegURIText
 			// 
 			resources.ApplyResources(this.taskRegURIText, "taskRegURIText");
@@ -136,28 +113,55 @@
 			this.taskRegURIText.Validating += new System.ComponentModel.CancelEventHandler(this.taskRegURIText_Validating);
 			this.taskRegURIText.Validated += new System.EventHandler(this.taskRegURIText_Validated);
 			// 
+			// label2
+			// 
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Name = "label2";
+			// 
 			// taskRegSourceText
 			// 
 			resources.ApplyResources(this.taskRegSourceText, "taskRegSourceText");
 			this.taskRegSourceText.Name = "taskRegSourceText";
 			this.taskRegSourceText.Leave += new System.EventHandler(this.taskRegSourceText_Leave);
 			// 
-			// optionPanelHeaderLabel1
+			// taskAuthorText
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel1, 2);
-			resources.ApplyResources(this.optionPanelHeaderLabel1, "optionPanelHeaderLabel1");
-			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
+			resources.ApplyResources(this.taskAuthorText, "taskAuthorText");
+			this.taskAuthorText.Name = "taskAuthorText";
+			this.taskAuthorText.ReadOnly = true;
 			// 
-			// label2
+			// taskRegDocLabel
 			// 
-			resources.ApplyResources(this.label2, "label2");
-			this.label2.Name = "label2";
+			resources.ApplyResources(this.taskRegDocLabel, "taskRegDocLabel");
+			this.taskRegDocLabel.Name = "taskRegDocLabel";
 			// 
-			// taskDescText
+			// optionPanelHeaderLabel2
 			// 
-			resources.ApplyResources(this.taskDescText, "taskDescText");
-			this.taskDescText.Name = "taskDescText";
-			this.taskDescText.Leave += new System.EventHandler(this.taskDescText_Leave);
+			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel2, 2);
+			resources.ApplyResources(this.optionPanelHeaderLabel2, "optionPanelHeaderLabel2");
+			this.optionPanelHeaderLabel2.Name = "optionPanelHeaderLabel2";
+			// 
+			// taskRegVersionLabel
+			// 
+			resources.ApplyResources(this.taskRegVersionLabel, "taskRegVersionLabel");
+			this.taskRegVersionLabel.Name = "taskRegVersionLabel";
+			// 
+			// taskVolatileCheck
+			// 
+			resources.ApplyResources(this.taskVolatileCheck, "taskVolatileCheck");
+			this.tableLayoutPanel1.SetColumnSpan(this.taskVolatileCheck, 2);
+			this.taskVolatileCheck.Name = "taskVolatileCheck";
+			this.taskVolatileCheck.UseVisualStyleBackColor = true;
+			// 
+			// taskRegURILabel
+			// 
+			resources.ApplyResources(this.taskRegURILabel, "taskRegURILabel");
+			this.taskRegURILabel.Name = "taskRegURILabel";
+			// 
+			// taskRegSourceLabel
+			// 
+			resources.ApplyResources(this.taskRegSourceLabel, "taskRegSourceLabel");
+			this.taskRegSourceLabel.Name = "taskRegSourceLabel";
 			// 
 			// flowLayoutPanel1
 			// 
@@ -181,24 +185,20 @@
 			this.taskHiddenCheck.UseVisualStyleBackColor = true;
 			this.taskHiddenCheck.CheckedChanged += new System.EventHandler(this.taskHiddenCheck_CheckedChanged);
 			// 
+			// label3
+			// 
+			resources.ApplyResources(this.label3, "label3");
+			this.label3.Name = "label3";
+			// 
+			// optionPanelHeaderLabel1
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel1, 2);
+			resources.ApplyResources(this.optionPanelHeaderLabel1, "optionPanelHeaderLabel1");
+			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
+			// 
 			// errorProvider
 			// 
 			this.errorProvider.ContainerControl = this;
-			// 
-			// taskUseUnifiedSchedulingEngineCheck
-			// 
-			resources.ApplyResources(this.taskUseUnifiedSchedulingEngineCheck, "taskUseUnifiedSchedulingEngineCheck");
-			this.tableLayoutPanel1.SetColumnSpan(this.taskUseUnifiedSchedulingEngineCheck, 2);
-			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
-			this.helpProvider.SetShowHelp(this.taskUseUnifiedSchedulingEngineCheck, ((bool)(resources.GetObject("taskUseUnifiedSchedulingEngineCheck.ShowHelp"))));
-			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
-			// 
-			// taskVolatileCheck
-			// 
-			resources.ApplyResources(this.taskVolatileCheck, "taskVolatileCheck");
-			this.tableLayoutPanel1.SetColumnSpan(this.taskVolatileCheck, 2);
-			this.taskVolatileCheck.Name = "taskVolatileCheck";
-			this.taskVolatileCheck.UseVisualStyleBackColor = true;
 			// 
 			// GeneralOptionPanel
 			// 
@@ -235,9 +235,9 @@
 		private System.Windows.Forms.CheckBox taskHiddenCheck;
 		private System.Windows.Forms.Label taskRegDocLabel;
 		private System.Windows.Forms.TextBox taskRegDocText;
-		private System.Windows.Forms.CheckBox taskUseUnifiedSchedulingEngineCheck;
+		private WrappingCheckBox taskUseUnifiedSchedulingEngineCheck;
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.ErrorProvider errorProvider;
-		private System.Windows.Forms.CheckBox taskVolatileCheck;
+		private WrappingCheckBox taskVolatileCheck;
 	}
 }

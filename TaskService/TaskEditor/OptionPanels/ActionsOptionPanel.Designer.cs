@@ -68,7 +68,7 @@
 			this.actionCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
 			this.actionCollectionUI1.MinimumSize = new System.Drawing.Size(322, 119);
 			this.actionCollectionUI1.Name = "actionCollectionUI1";
-			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
 			this.actionCollectionUI1.Size = new System.Drawing.Size(372, 233);
 			this.actionCollectionUI1.TabIndex = 1;
 			this.actionCollectionUI1.UseModernUI = true;

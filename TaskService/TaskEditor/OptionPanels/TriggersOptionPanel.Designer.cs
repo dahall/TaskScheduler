@@ -67,7 +67,7 @@
 			this.triggerCollectionUI1.Location = new System.Drawing.Point(0, 29);
 			this.triggerCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
 			this.triggerCollectionUI1.Name = "triggerCollectionUI1";
-			this.triggerCollectionUI1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.triggerCollectionUI1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
 			this.triggerCollectionUI1.Size = new System.Drawing.Size(330, 233);
 			this.triggerCollectionUI1.TabIndex = 1;
 			this.triggerCollectionUI1.UseModernUI = true;

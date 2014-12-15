@@ -7,6 +7,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		public RuntimeOptionPanel()
 		{
 			InitializeComponent();
+			long allVal;
+			ComboBoxExtension.InitializeFromEnum(taskPriorityCombo.Items, typeof(System.Diagnostics.ProcessPriorityClass), EditorProperties.Resources.ResourceManager, "ProcessPriority", out allVal);
 		}
 
 		protected override void InitializePanel()
@@ -17,10 +19,21 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
 				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
-				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
-				editable && v2;
+				taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = editable && v2;
+			taskAllowHardTerminateCheck.Enabled = editable && v2 && !td.Settings.UseUnifiedSchedulingEngine;
 
 			taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
+
+			// Update Multiple Instances policy combo
+			taskMultInstCombo.BeginUpdate();
+			long allVal;
+			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
+			if (td.Settings.UseUnifiedSchedulingEngine)
+				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
+			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
+			taskMultInstCombo.EndUpdate();
+
+			taskPriorityCombo.SelectedIndex = taskPriorityCombo.Items.IndexOf((long)td.Settings.Priority);
 		}
 
 		private void taskAllowDemandStartCheck_CheckedChanged(object sender, EventArgs e)
@@ -80,7 +93,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void taskPriorityCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
+			if (!onAssignment)
+				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value;
 		}
 
 		private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
