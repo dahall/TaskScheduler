@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskOptionsEditor));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.cancelButton = new System.Windows.Forms.Button();
@@ -47,17 +48,19 @@
 			this.splitterPanel = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
 			this.taskNameText = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
+			this.menuItemsContainer = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuPanel.SuspendLayout();
 			this.bodyPanel.SuspendLayout();
 			this.panelHeading.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.menuItemsContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -96,13 +99,6 @@
 			this.menuList.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.menuList, "menuList");
 			this.menuList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.menuList.Items.AddRange(new object[] {
-            this.generalItem,
-            this.triggersItem,
-            this.actionsItem,
-            this.securityItem,
-            this.startupItem,
-            this.runItem});
 			this.menuList.Name = "menuList";
 			this.menuList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.menuList_DrawItem);
 			this.menuList.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.menuList_MeasureItem);
@@ -200,6 +196,12 @@
 			this.tableLayoutPanel2.Controls.Add(this.label4, 0, 1);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			// 
+			// taskVersionCombo
+			// 
+			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
+			this.taskVersionCombo.Name = "taskVersionCombo";
+			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
+			// 
 			// taskNameText
 			// 
 			resources.ApplyResources(this.taskNameText, "taskNameText");
@@ -221,11 +223,17 @@
 			resources.ApplyResources(this.panel2, "panel2");
 			this.panel2.Name = "panel2";
 			// 
-			// taskVersionCombo
+			// menuItemsContainer
 			// 
-			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
-			this.taskVersionCombo.Name = "taskVersionCombo";
-			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
+			this.menuItemsContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.generalItem,
+			this.triggersItem,
+			this.actionsItem,
+			this.securityItem,
+			this.startupItem,
+			this.runItem});
+			this.menuItemsContainer.Name = "menuItemsContainer";
+			resources.ApplyResources(this.menuItemsContainer, "menuItemsContainer");
 			// 
 			// TaskOptionsEditor
 			// 
@@ -255,6 +263,7 @@
 			this.panel1.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
+			this.menuItemsContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -285,5 +294,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.DisabledItemComboBox taskVersionCombo;
+		private System.Windows.Forms.ContextMenuStrip menuItemsContainer;
 	}
 }

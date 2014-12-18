@@ -231,7 +231,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskPropertiesControl1.Initialize(task);
 		}
 
-		private string GetServerString(TaskService service)
+		internal static string GetServerString(TaskService service)
 		{
 			return service.TargetServer == null || Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
 				EditorProperties.Resources.LocalMachine : service.TargetServer;
