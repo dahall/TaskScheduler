@@ -76,12 +76,29 @@ namespace TestTaskService
 		private void deleteMenu_Click(object sender, EventArgs e)
 		{
 			if (selTask != null)
-				TaskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
+			{
+				try
+				{
+					TaskService.GetFolder(System.IO.Path.GetDirectoryName(selTask.Path)).DeleteTask(selTask.Name);
+				}
+				catch (System.IO.FileNotFoundException)
+				{
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				TaskListView.Refresh();
+			}
 		}
 
 		private void disableMenu_Click(object sender, EventArgs e)
 		{
-
+			if (selTask != null)
+			{
+				selTask.Enabled = !selTask.Enabled;
+				TaskListView.Refresh();
+			}
 		}
 
 		private void endMenu_Click(object sender, EventArgs e)
@@ -116,10 +133,7 @@ namespace TestTaskService
 
 		public ToolStrip MenuItems
 		{
-			get
-			{
-				return itemMenuStrip;
-			}
+			get { return itemMenuStrip; }
 		}
 
 		private void TaskListView_DoubleClick(object sender, EventArgs e)

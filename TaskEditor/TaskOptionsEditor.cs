@@ -26,6 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel> panels = new System.Collections.Generic.Dictionary<ToolStripMenuItem, OptionPanels.OptionPanel>(10);
 		private Task task;
 		private TaskScheduler.TaskDefinition td;
+		private bool titleSet;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskOptionsEditor"/> class.
@@ -39,7 +40,36 @@ namespace Microsoft.Win32.TaskScheduler
 			panels.Add(securityItem, new OptionPanels.SecurityOptionPanel());
 			panels.Add(startupItem, new OptionPanels.StartupOptionPanel());
 			panels.Add(runItem, new OptionPanels.RuntimeOptionPanel());
+			foreach (var p in menuItemsContainer.Items)
+				menuList.Items.Add(p);
 			UpdateTitleFont();
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskOptionsEditor"/> class.
+		/// </summary>
+		/// <param name="task">The task.</param>
+		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		public TaskOptionsEditor(Task task, bool editable = true, bool registerOnAccept = true) : this()
+		{
+			this.Editable = editable;
+			this.Initialize(task);
+			this.RegisterTaskOnAccept = registerOnAccept;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskOptionsEditor"/> class.
+		/// </summary>
+		/// <param name="service">A <see cref="TaskService"/> instance.</param>
+		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		public TaskOptionsEditor(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true) : this()
+		{
+			this.Editable = editable;
+			this.Initialize(service, td);
+			this.RegisterTaskOnAccept = registerOnAccept;
 		}
 
 		/// <summary>
@@ -157,12 +187,27 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskService TaskService { get; set; }
 
 		/// <summary>
+		/// Gets or sets the title.
+		/// </summary>
+		/// <value>The title.</value>
+		[Category("Appearance"), Description("A string to display in the title bar of the dialog box."), Localizable(true)]
+		public string Title
+		{
+			get { return base.Text; }
+			set { base.Text = value; titleSet = true; }
+		}
+
+		/// <summary>
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
+			if (service == null)
+				throw new ArgumentNullException("service");
+			if (!titleSet)
+				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", TaskEditDialog.GetServerString(service));
 			this.TaskService = service;
 			this.task = null;
 			if (!this.IsDesignMode())
@@ -180,6 +225,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
+			if (task == null)
+				throw new ArgumentNullException("task");
+			if (!titleSet)
+				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, TaskEditDialog.GetServerString(task.TaskService));
 			this.Task = task;
 		}
 
@@ -345,6 +394,18 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			this.DialogResult = DialogResult.OK;
 			Close();
+		}
+
+		private void ResetTitle()
+		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskOptionsEditor));
+			base.Text = resources.GetString("$this.Text");
+		}
+
+		private bool ShouldSerializeTitle()
+		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskOptionsEditor));
+			return base.Text != resources.GetString("$this.Text");
 		}
 
 		private void SetVersionComboItems()
