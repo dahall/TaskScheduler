@@ -65,6 +65,9 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.onEventTab = new System.Windows.Forms.TabPage();
 			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
+			this.customTab = new System.Windows.Forms.TabPage();
+			this.customNameText = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.advSettingsGroup = new System.Windows.Forms.GroupBox();
 			this.stopIfRunsSpan = new System.Windows.Forms.TimeSpanPicker();
 			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
@@ -82,6 +85,9 @@
 			this.delayCheckBox = new System.Windows.Forms.CheckBox();
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
+			this.customPropsListView = new System.Windows.Forms.ListView();
+			this.propNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.propValCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
@@ -95,6 +101,7 @@
 			this.startupTab.SuspendLayout();
 			this.idleTab.SuspendLayout();
 			this.onEventTab.SuspendLayout();
+			this.customTab.SuspendLayout();
 			this.advSettingsGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -126,6 +133,7 @@
 			this.settingsTabControl.Controls.Add(this.startupTab);
 			this.settingsTabControl.Controls.Add(this.idleTab);
 			this.settingsTabControl.Controls.Add(this.onEventTab);
+			this.settingsTabControl.Controls.Add(this.customTab);
 			this.settingsTabControl.Name = "settingsTabControl";
 			this.settingsTabControl.SelectedIndex = 0;
 			this.settingsTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -355,6 +363,26 @@
 			resources.ApplyResources(this.eventTriggerUI1, "eventTriggerUI1");
 			this.eventTriggerUI1.Name = "eventTriggerUI1";
 			// 
+			// customTab
+			// 
+			this.customTab.Controls.Add(this.customPropsListView);
+			this.customTab.Controls.Add(this.customNameText);
+			this.customTab.Controls.Add(this.label1);
+			resources.ApplyResources(this.customTab, "customTab");
+			this.customTab.Name = "customTab";
+			this.customTab.UseVisualStyleBackColor = true;
+			// 
+			// customNameText
+			// 
+			resources.ApplyResources(this.customNameText, "customNameText");
+			this.customNameText.Name = "customNameText";
+			this.customNameText.ReadOnly = true;
+			// 
+			// label1
+			// 
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
 			// advSettingsGroup
 			// 
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsSpan);
@@ -482,6 +510,28 @@
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
+			// customPropsListView
+			// 
+			this.customPropsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.propNameCol,
+            this.propValCol});
+			this.customPropsListView.FullRowSelect = true;
+			this.customPropsListView.GridLines = true;
+			this.customPropsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			resources.ApplyResources(this.customPropsListView, "customPropsListView");
+			this.customPropsListView.MultiSelect = false;
+			this.customPropsListView.Name = "customPropsListView";
+			this.customPropsListView.UseCompatibleStateImageBehavior = false;
+			this.customPropsListView.View = System.Windows.Forms.View.Details;
+			// 
+			// propNameCol
+			// 
+			resources.ApplyResources(this.propNameCol, "propNameCol");
+			// 
+			// propValCol
+			// 
+			resources.ApplyResources(this.propValCol, "propValCol");
+			// 
 			// TriggerEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
@@ -516,6 +566,8 @@
 			this.idleTab.ResumeLayout(false);
 			this.idleTab.PerformLayout();
 			this.onEventTab.ResumeLayout(false);
+			this.customTab.ResumeLayout(false);
+			this.customTab.PerformLayout();
 			this.advSettingsGroup.ResumeLayout(false);
 			this.advSettingsGroup.PerformLayout();
 			this.ResumeLayout(false);
@@ -577,5 +629,11 @@
 		private UIComponents.WeeklyTriggerUI weeklyTriggerUI1;
 		private UIComponents.MonthlyTriggerUI monthlyTriggerUI1;
 		private UIComponents.EventTriggerUI eventTriggerUI1;
+		private System.Windows.Forms.TabPage customTab;
+		private System.Windows.Forms.TextBox customNameText;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ListView customPropsListView;
+		private System.Windows.Forms.ColumnHeader propNameCol;
+		private System.Windows.Forms.ColumnHeader propValCol;
 	}
 }

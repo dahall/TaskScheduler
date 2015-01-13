@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionDlgEditCaption" xml:space="preserve">
     <value>Modifier l'action</value>
@@ -139,7 +139,7 @@
     <value>N'importe quelle connexion</value>
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="ChangeUserBtn" xml:space="preserve">
     <value>Utilisateur ou groupe...</value>
@@ -148,7 +148,7 @@
     <value>Changer d'utilisateur</value>
   </data>
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="CredentialPromptMessage" xml:space="preserve">
     <value>Entrez les informations du compte d’utilisateur pour l’exécution de cette tâche.</value>
@@ -166,37 +166,37 @@
     <value>Ce type de déclencheur ne peut pas être modifié dans cet outil.</value>
   </data>
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_CredUIConfirmFailed" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_CredUIPromptFailed" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_InvalidSddlFormat" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_InvalidUriFormat" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_InvalidVersionFormat" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
     <value>L’exécution d’une tâche sous un compte d’utilisateur de groupe est prise en charge uniquement sur Windows Vista™ ou une version ultérieure. Pour exécuter une tâche sous un compte de groupe, vous devez mettre à niveau cette tâche vers une tâche Windows Vista™.</value>
   </data>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>La valeur de l’intervalle de répétition doit être inférieure ou égale à la valeur de la durée de répétition.</value>
@@ -205,10 +205,10 @@
     <value>Si vous voulez qu’une tâche soit supprimée automatiquement après son exécution, vous devez ajouter au moins un déclencheur qui a une date d’expiration.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="EventDetailHeader" xml:space="preserve">
     <value>Planificateur de tâches</value>
@@ -268,7 +268,7 @@
     <value>Non restreint</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value></value>
+    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
   </data>
   <data name="TaskEditDlgTitle" xml:space="preserve">
     <value>Propriétés de {0} ({1})</value>
@@ -298,10 +298,10 @@
     <value>Arrêter l’instance existante</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="TaskSchedulerName" xml:space="preserve">
     <value>Planificateur de tâches</value>
@@ -364,19 +364,19 @@
     <value>Au déverrouillage de la station de travail</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizActionSubtextExecute" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizActionTextExecute" xml:space="preserve">
     <value>Exécuter un programme</value>
@@ -388,37 +388,37 @@
     <value>Afficher un message</value>
   </data>
   <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
     <value>Nom : {0}Description : {1}Déclencheur : {2}Action : {3}</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizTriggerSubtextEvent" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizTriggerSubtextTime" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizTriggerSubtextWeekly" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Tous les jours</value>

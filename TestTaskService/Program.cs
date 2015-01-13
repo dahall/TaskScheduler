@@ -83,13 +83,16 @@ namespace TestTaskService
 					if (t.Definition.Triggers.ContainsType(typeof(CustomTrigger)))
 					{
 						foreach (var tr in t.Definition.Triggers)
-							if (tr.TriggerType == TaskTriggerType.Custom && ((CustomTrigger)tr).Properties.Count > 0)
+						{
+							CustomTrigger ct = tr as CustomTrigger;
+							if (ct != null && ct.Properties.Count > 0)
 							{
 								output.WriteLine("Custom Trigger Properties:");
 								int i = 0;
-								foreach (var name in ((CustomTrigger)tr).Properties.Names)
-									output.WriteLine("{0}. {1} = {2}", ++i, name, ((CustomTrigger)tr).Properties[name]);
+								foreach (var name in ct.Properties.Names)
+									output.WriteLine("{0}. {1} = {2}", ++i, name, ct.Properties[name]);
 							}
+						}
 					}
 				}
 			}
@@ -394,9 +397,11 @@ namespace TestTaskService
 
 		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction, int level = 0)
 		{
-			fldAction(fld);
-			foreach (var task in fld.Tasks)
-				taskAction(task);
+			if (fldAction != null)
+				fldAction(fld);
+			if (taskAction != null)
+				foreach (var task in fld.Tasks)
+					taskAction(task);
 			foreach (var sfld in fld.SubFolders)
 				FolderTaskAction(sfld, fldAction, taskAction, level + 1);
 		}
@@ -421,6 +426,8 @@ namespace TestTaskService
 				/*Action<string> d = delegate(string s) { var ar = s.Split('|'); foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(ar[2], @"\(A;(?<Flag>\w*);(?<Right>\w*);(?<Guid>\w*);(?<OIGuid>\w*);(?<Acct>[\w\-\d]*)(?:;[^\)]*)?\)")) output.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", ar[0], ar[1], m.Groups["Flag"], m.Groups["Right"], m.Groups["Guid"], m.Groups["OIGuid"], m.Groups["Acct"]); };
 				FolderTaskAction(ts.RootFolder, delegate(TaskFolder f) { d("F|" + f.Name + "|" + f.GetSecurityDescriptorSddlForm()); }, delegate(Task s) { d("T|" + s.Name + "|" + s.GetSecurityDescriptorSddlForm()); });
 				return;*/
+
+				//FolderTaskAction(ts.RootFolder, null, delegate(Task tsk) { if (tsk.Definition.Triggers.ContainsType(typeof(CustomTrigger))) output.WriteLine(tsk.Path); });
 
 				// Create a new task definition and assign properties
 				const string taskName = "Test";

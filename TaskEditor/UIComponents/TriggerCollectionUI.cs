@@ -137,11 +137,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			int idx = SelectedIndex;
 			if (idx >= 0)
 			{
-				if (editor.TaskDefinition.Triggers[idx].TriggerType == TaskTriggerType.Custom)
+				/*if (editor.TaskDefinition.Triggers[idx].TriggerType == TaskTriggerType.Custom)
 				{
 					MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
 					return;
-				}
+				}*/
 
 				using (TriggerEditDialog dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
 				{

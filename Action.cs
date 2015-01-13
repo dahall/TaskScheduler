@@ -352,6 +352,14 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Exec", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ExecAction : Action
 	{
+#if DEBUG
+		internal const string PowerShellArgFormat = "-NoExit -Command \"& {{<# {0}:{1} #> {2}}}\"";
+#else
+		internal const string PowerShellArgFormat = "-NoLogo -NonInteractive -WindowStyle Hidden -Command \"& {{<# {0}:{1} #> {2}}}\"";
+#endif
+		internal const string PowerShellPath = "powershell";
+		internal const string ScriptIdentifer = "TSML_20140424";
+
 		private V1Interop.ITask v1Task;
 
 		/// <summary>
@@ -403,6 +411,16 @@ namespace Microsoft.Win32.TaskScheduler
 			o = null;
 			unboundValues.TryGetValue("WorkingDirectory", out o);
 			v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
+		}
+
+		internal static string BuildPowerShellCmd(string actionType, string cmd)
+		{
+			return string.Format(PowerShellArgFormat, ScriptIdentifer, actionType, cmd);
+		}
+
+		internal static ExecAction AsPowerShellCmd(string actionType, string cmd)
+		{
+			return new ExecAction(PowerShellPath, BuildPowerShellCmd(actionType, cmd));
 		}
 
 		/// <summary>
@@ -501,6 +519,17 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					unboundValues["WorkingDirectory"] = value;
 			}
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether this instance is a powershell command.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this instance is a powershell command; otherwise, <c>false</c>.
+		/// </value>
+		internal bool IsPowerShellCmd
+		{
+			get { return this.Path != null && (this.Path.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) || this.Path.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase)); }
 		}
 
 		/// <summary>

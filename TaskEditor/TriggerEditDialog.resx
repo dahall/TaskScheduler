@@ -112,23 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="triggerTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="triggerTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 9</value>
   </data>
   <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="triggerTypeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -139,7 +139,7 @@
     <value>triggerTypeLabel</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -160,7 +160,7 @@
     <value>triggerTypeCombo</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Parent" xml:space="preserve">
     <value>$this</value>
@@ -187,7 +187,7 @@
     <value>schedStartDatePicker</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -208,7 +208,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -235,7 +235,7 @@
     <value>oneTimeTab</value>
   </data>
   <data name="&gt;&gt;oneTimeTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;oneTimeTab.Parent" xml:space="preserve">
     <value>schedTabControl</value>
@@ -259,7 +259,7 @@
     <value>dailyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Parent" xml:space="preserve">
     <value>dailyTab</value>
@@ -283,7 +283,7 @@
     <value>dailyTab</value>
   </data>
   <data name="&gt;&gt;dailyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dailyTab.Parent" xml:space="preserve">
     <value>schedTabControl</value>
@@ -307,7 +307,7 @@
     <value>weeklyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
     <value>weeklyTab</value>
@@ -328,7 +328,7 @@
     <value>weeklyTab</value>
   </data>
   <data name="&gt;&gt;weeklyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;weeklyTab.Parent" xml:space="preserve">
     <value>schedTabControl</value>
@@ -358,7 +358,7 @@
     <value>monthlyTriggerUI1</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
     <value>monthlyTab</value>
@@ -379,7 +379,7 @@
     <value>monthlyTab</value>
   </data>
   <data name="&gt;&gt;monthlyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;monthlyTab.Parent" xml:space="preserve">
     <value>schedTabControl</value>
@@ -406,7 +406,7 @@
     <value>schedTabControl</value>
   </data>
   <data name="&gt;&gt;schedTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedTabControl.Parent" xml:space="preserve">
     <value>schedGroup</value>
@@ -427,7 +427,7 @@
     <value>schedGroup</value>
   </data>
   <data name="&gt;&gt;schedGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedGroup.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -457,7 +457,7 @@
     <value>schedStartLabel</value>
   </data>
   <data name="&gt;&gt;schedStartLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedStartLabel.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -487,7 +487,7 @@
     <value>schedMonthlyRadio</value>
   </data>
   <data name="&gt;&gt;schedMonthlyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedMonthlyRadio.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -517,7 +517,7 @@
     <value>schedWeeklyRadio</value>
   </data>
   <data name="&gt;&gt;schedWeeklyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedWeeklyRadio.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -547,7 +547,7 @@
     <value>schedDailyRadio</value>
   </data>
   <data name="&gt;&gt;schedDailyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedDailyRadio.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -577,7 +577,7 @@
     <value>schedOneRadio</value>
   </data>
   <data name="&gt;&gt;schedOneRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;schedOneRadio.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -601,7 +601,7 @@
     <value>scheduleTab</value>
   </data>
   <data name="&gt;&gt;scheduleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;scheduleTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -625,7 +625,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -655,7 +655,7 @@
     <value>logonLocalRadio</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -685,7 +685,7 @@
     <value>logonRemoteRadio</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -706,7 +706,7 @@
     <value>logonRemotePanel</value>
   </data>
   <data name="&gt;&gt;logonRemotePanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonRemotePanel.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -733,7 +733,7 @@
     <value>logonChgUserBtn</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -763,7 +763,7 @@
     <value>logonUserLabel</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -793,7 +793,7 @@
     <value>logonSpecUserRadio</value>
   </data>
   <data name="&gt;&gt;logonSpecUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonSpecUserRadio.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -823,7 +823,7 @@
     <value>logonAnyUserRadio</value>
   </data>
   <data name="&gt;&gt;logonAnyUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonAnyUserRadio.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -843,14 +843,11 @@
   <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="logonTab.Text" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
   <data name="&gt;&gt;logonTab.Name" xml:space="preserve">
     <value>logonTab</value>
   </data>
   <data name="&gt;&gt;logonTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -880,7 +877,7 @@
     <value>startupIntroLabel</value>
   </data>
   <data name="&gt;&gt;startupIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;startupIntroLabel.Parent" xml:space="preserve">
     <value>startupTab</value>
@@ -897,14 +894,11 @@
   <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="startupTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
   <data name="&gt;&gt;startupTab.Name" xml:space="preserve">
     <value>startupTab</value>
   </data>
   <data name="&gt;&gt;startupTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;startupTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -934,7 +928,7 @@
     <value>label8</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>idleTab</value>
@@ -951,14 +945,11 @@
   <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="idleTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
   <data name="&gt;&gt;idleTab.Name" xml:space="preserve">
     <value>idleTab</value>
   </data>
   <data name="&gt;&gt;idleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;idleTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -988,7 +979,7 @@
     <value>eventTriggerUI1</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
     <value>onEventTab</value>
@@ -1000,25 +991,124 @@
     <value>4, 5</value>
   </data>
   <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="onEventTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;onEventTab.Name" xml:space="preserve">
     <value>onEventTab</value>
   </data>
   <data name="&gt;&gt;onEventTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onEventTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
   </data>
   <data name="&gt;&gt;onEventTab.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="propNameCol.Width" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="propValCol.Width" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="customPropsListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 34</value>
+  </data>
+  <data name="customPropsListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 135</value>
+  </data>
+  <data name="customPropsListView.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Name" xml:space="preserve">
+    <value>customPropsListView</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="customNameText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 4</value>
+  </data>
+  <data name="customNameText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 23</value>
+  </data>
+  <data name="customNameText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Name" xml:space="preserve">
+    <value>customNameText</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customNameText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 7</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 15</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="customTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="customTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 172</value>
+  </data>
+  <data name="customTab.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;customTab.Name" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;customTab.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="settingsTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1039,7 +1129,7 @@
     <value>settingsTabControl</value>
   </data>
   <data name="&gt;&gt;settingsTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;settingsTabControl.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1063,7 +1153,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1087,7 +1177,7 @@
     <value>stopIfRunsSpan</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1111,7 +1201,7 @@
     <value>durationSpan</value>
   </data>
   <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1135,7 +1225,7 @@
     <value>repeatSpan</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1159,7 +1249,7 @@
     <value>delaySpan</value>
   </data>
   <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27428, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1186,7 +1276,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1213,7 +1303,7 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.0.25787, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1243,7 +1333,7 @@
     <value>durationLabel</value>
   </data>
   <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1273,7 +1363,7 @@
     <value>stopAfterDurationCheckBox</value>
   </data>
   <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1303,7 +1393,7 @@
     <value>enabledCheckBox</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1333,7 +1423,7 @@
     <value>expireCheckBox</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1363,7 +1453,7 @@
     <value>activateCheckBox</value>
   </data>
   <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1393,7 +1483,7 @@
     <value>stopIfRunsCheckBox</value>
   </data>
   <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1423,7 +1513,7 @@
     <value>repeatCheckBox</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1453,7 +1543,7 @@
     <value>delayCheckBox</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1477,7 +1567,7 @@
     <value>advSettingsGroup</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1507,7 +1597,7 @@
     <value>cancelBtn</value>
   </data>
   <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1537,7 +1627,7 @@
     <value>okBtn</value>
   </data>
   <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1545,7 +1635,7 @@
   <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -1566,100 +1656,22 @@
   <data name="$this.Text" xml:space="preserve">
     <value>New Trigger</value>
   </data>
+  <data name="&gt;&gt;propNameCol.Name" xml:space="preserve">
+    <value>propNameCol</value>
+  </data>
+  <data name="&gt;&gt;propNameCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;propValCol.Name" xml:space="preserve">
+    <value>propValCol</value>
+  </data>
+  <data name="&gt;&gt;propValCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TriggerEditDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="eventBasicRadio.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items1" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items2" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items3" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items4" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items5" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items6" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items7" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items8" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items9" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -1949,37 +1949,35 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			InvalidOperationException ex = new InvalidOperationException();
 			if (this.Settings.UseUnifiedSchedulingEngine)
+			{
 				try { CanUseUnifiedSchedulingEngine(throwException); }
 				catch (InvalidOperationException iox)
 				{
 					foreach (System.Collections.DictionaryEntry kvp in iox.Data)
 						TryAdd(ex.Data, (kvp.Key is ICloneable) ? ((ICloneable)(kvp.Key)).Clone() : kvp.Key, (kvp.Value is ICloneable) ? ((ICloneable)(kvp.Value)).Clone() : kvp.Value);
 				}
+			}
+
 			var list = new System.Collections.Generic.List<TaskCompatibilityEntry>();
 			if (GetLowestSupportedVersion(list) > this.Settings.Compatibility)
 				foreach (var item in list)
 					TryAdd(ex.Data, item.Property, item.Reason);
-			if (this.Settings.StartWhenAvailable)
+
+			bool startWhenAvailable = this.Settings.StartWhenAvailable;
+			bool delOldTask = this.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+			bool v1 = this.Settings.Compatibility < TaskCompatibility.V2;
+			bool hasEndBound = false;
+			foreach (var trigger in this.Triggers)
 			{
-				foreach (var trigger in this.Triggers)
-				{
-					//if (!(trigger is ICalendarTrigger))
-					//	TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based triggers.");
-					//else
-					{
-						if (trigger.Repetition.Duration != TimeSpan.Zero && trigger.EndBoundary == DateTime.MaxValue)
-							TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
-					}
-				}
+				if (startWhenAvailable && trigger.Repetition.Duration != TimeSpan.Zero && trigger.EndBoundary == DateTime.MaxValue)
+					TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
+				if (v1 && trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
+					TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
+				if (delOldTask && trigger.EndBoundary != DateTime.MaxValue)
+					hasEndBound = true;
 			}
-			if (this.Settings.Compatibility < TaskCompatibility.V2)
-			{
-				foreach (var trigger in this.Triggers)
-				{
-					if (trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
-						TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
-				}
-			}
+			if (delOldTask && !hasEndBound)
+				TryAdd(ex.Data, "Settings.DeleteExpiredTaskAfter", "!= TimeSpan.Zero requires at least one trigger with an end boundary.");
 
 			if (throwException && ex.Data.Count > 0)
 				throw ex;
