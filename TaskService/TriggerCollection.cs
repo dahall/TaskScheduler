@@ -287,7 +287,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return Trigger.CreateTrigger(v2Coll[++index]);
+					return Trigger.CreateTrigger(v2Coll[++index], this.v2Def);
 				return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index));
 			}
 			set

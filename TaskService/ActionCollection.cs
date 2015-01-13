@@ -25,8 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
-			if (TaskService.LibraryVersion.Minor > 3)
-				UnconvertUnsupportedActions();
+			UnconvertUnsupportedActions();
 		}
 
 		/// <summary>
@@ -136,46 +135,43 @@ namespace Microsoft.Win32.TaskScheduler
 				array[arrayIndex + i] = (Action)this[i].Clone();
 		}
 
-		private const string ScriptIdentifer = "TSML_20140424";
-
 		internal void ConvertUnsupportedActions()
 		{
-#if DEBUG
-			const string PowerShellArgFormat = "-NoExit -Command \"& {{<# {0}:{1} #> {2}}}\"";
-#else
-			const string PowerShellArgFormat = "-NoLogo -NonInteractive -WindowStyle Hidden -Command \"& {{<# {0}:{1} #> {2}}}\"";
-#endif
-			const string PowerShellPath = "powershell";
-
-			for (int i = 0; i < this.Count; i++)
+			if (TaskService.LibraryVersion.Minor > 3)
 			{
-				Action action = this[i];
-				if (action is IBindAsExecAction)
+				for (int i = 0; i < this.Count; i++)
 				{
-					string args = string.Format(PowerShellArgFormat, ScriptIdentifer, action.ActionType, ((IBindAsExecAction)action).GetPowerShellCommand());
-					ExecAction newAction = new ExecAction(PowerShellPath, args);
-					this[i] = newAction;
+					Action action = this[i];
+					var bindable = action as IBindAsExecAction;
+					if (bindable != null)
+					{
+						string cmd = bindable.GetPowerShellCommand();
+						this[i] = ExecAction.AsPowerShellCmd(action.ActionType.ToString(), cmd);
+					}
 				}
 			}
 		}
 
 		internal void UnconvertUnsupportedActions()
 		{
-			for (int i = 0; i < this.Count; i++)
+			if (TaskService.LibraryVersion.Minor > 3)
 			{
-				ExecAction action = this[i] as ExecAction;
-				if (action != null && action.Arguments != null && action.Arguments.Contains(ScriptIdentifer))
+				for (int i = 0; i < this.Count; i++)
 				{
-					var match = System.Text.RegularExpressions.Regex.Match(action.Arguments, @"<# " + ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
-					if (match.Success)
+					ExecAction action = this[i] as ExecAction;
+					if (action != null && action.Arguments != null && action.Arguments.Contains(ExecAction.ScriptIdentifer))
 					{
-						Action newAction = null;
-						if (match.Groups["type"].Value == "SendEmail")
-							newAction = EmailAction.FromPowerShellCommand(match.Groups["cmd"].Value);
-						else if (match.Groups["type"].Value == "ShowMessage")
-							newAction = ShowMessageAction.FromPowerShellCommand(match.Groups["cmd"].Value);
-						if (newAction != null)
-							this[i] = newAction;
+						var match = System.Text.RegularExpressions.Regex.Match(action.Arguments, @"<# " + ExecAction.ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
+						if (match.Success)
+						{
+							Action newAction = null;
+							if (match.Groups["type"].Value == "SendEmail")
+								newAction = EmailAction.FromPowerShellCommand(match.Groups["cmd"].Value);
+							else if (match.Groups["type"].Value == "ShowMessage")
+								newAction = ShowMessageAction.FromPowerShellCommand(match.Groups["cmd"].Value);
+							if (newAction != null)
+								this[i] = newAction;
+						}
 					}
 				}
 			}

@@ -79,6 +79,8 @@ namespace Microsoft.Win32.TaskScheduler
 			WorkstationLock = 117,
 			/// <summary>Triggers the task on workstation unlock. Version 1.2 only.</summary>
 			WorkstationUnlock = 118,
+			/// <summary>Triggers the task on a custom event. Version 1.2 only.</summary>
+			Custom = 120,
 		}
 
 		/// <summary>
@@ -120,7 +122,14 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				onAssignment = true;
-				trigger = value.Clone() as Trigger;
+				if (value is CustomTrigger)
+				{
+					trigger = value;
+				}
+				else
+				{
+					trigger = value.Clone() as Trigger;
+				}
 				switch (trigger.TriggerType)
 				{
 					case TaskTriggerType.Time:
@@ -167,6 +176,13 @@ namespace Microsoft.Win32.TaskScheduler
 						logonRemoteRadio.Checked = (((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteConnect || ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteDisconnect);
 						logonLocalRadio.Checked = !logonRemoteRadio.Checked;
 						break;
+					case TaskTriggerType.Custom:
+						TriggerView = TaskTriggerDisplayType.Custom;
+						customNameText.Text = ((CustomTrigger)trigger).Name;
+						customPropsListView.Items.Clear();
+						foreach (var nvpair in ((CustomTrigger)trigger).Properties)
+							customPropsListView.Items.Add(new ListViewItem(new string[] { nvpair.Name, nvpair.Value }));
+						break;
 					default:
 						break;
 				}
@@ -207,13 +223,17 @@ namespace Microsoft.Win32.TaskScheduler
 				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
 				if (TriggerView != TaskTriggerDisplayType.Schedule)
 				{
-					activateCheckBox.Checked = activateDatePicker.Enabled = trigger.StartBoundary != DateTime.MinValue;
+					activateDatePicker.Enabled = activateCheckBox.Checked = trigger.StartBoundary != DateTime.MinValue;
 					if (activateCheckBox.Checked)
 						activateDatePicker.Value = trigger.StartBoundary;
 				}
 				expireCheckBox.Checked = expireDatePicker.Enabled = trigger.EndBoundary != DateTime.MaxValue;
 				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : trigger.StartBoundary;
 				enabledCheckBox.Checked = trigger.Enabled;
+
+				if (value is CustomTrigger)
+					advSettingsGroup.EnableChildren(false);
+
 				onAssignment = false;
 			}
 		}
@@ -235,7 +255,9 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value != useUnifiedSchedulingEngine)
 				{
 					useUnifiedSchedulingEngine = value;
-					ResetControls();
+					schedMonthlyRadio.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled =
+						repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled =
+						durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
 				}
 			}
 		}
@@ -411,7 +433,7 @@ namespace Microsoft.Win32.TaskScheduler
 			triggerComboItems.Clear();
 			ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out allVal);
 			if (!isV2)
-				triggerComboItems.RemoveRange(4, 6);
+				triggerComboItems.RemoveRange(4, 7);
 			triggerTypeCombo.BeginUpdate();
 			triggerTypeCombo.DataSource = null;
 			triggerTypeCombo.DisplayMember = "Text";
@@ -422,9 +444,6 @@ namespace Microsoft.Win32.TaskScheduler
 			// Enable/disable version specific features
 			stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
 			dailyTriggerUI1.IsV2 = weeklyTriggerUI1.IsV2 = monthlyTriggerUI1.IsV2 = isV2;
-			schedMonthlyRadio.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = 
-				repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = 
-				durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
 
 			// Set date/time controls
 			schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
@@ -551,6 +570,10 @@ namespace Microsoft.Win32.TaskScheduler
 					settingsTabControl.SelectedTab = logonTab;
 					if (!onAssignment)
 						newTrigger = new SessionStateChangeTrigger() { StateChange = (TaskSessionStateChangeType)(TriggerView - 110) };
+					break;
+				case TaskTriggerDisplayType.Custom:
+					settingsTabControl.SelectedTab = customTab;
+					triggerTypeCombo.Enabled = okBtn.Enabled = false;
 					break;
 			}
 

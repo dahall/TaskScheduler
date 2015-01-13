@@ -14,6 +14,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 		internal static readonly Version v1Ver = new Version(1, 1);
 		internal static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
 		internal V2Interop.TaskSchedulerClass v2TaskService = null;
@@ -476,6 +477,27 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (System.Environment.UserInteractive)
 				System.Diagnostics.Process.Start("control.exe", "schedtasks");
+		}
+
+		internal static bool SystemSupportsPowerShellActions(string server = null)
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(server))
+				{
+					// Check to see if the COM server is registered on the local machine.
+					using (var key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(@"TaskSchedulerPowerShellAction.PSTaskHandler\CLSID"))
+					{
+						return true;
+					}
+				}
+				else
+				{
+					// TODO: Try and create a remote instance of the COM server.
+				}
+			}
+			catch { }
+			return false;
 		}
 
 		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)
