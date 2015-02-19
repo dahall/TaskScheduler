@@ -57,6 +57,14 @@ namespace System.Runtime.InteropServices
 			return false;
 		}
 
+		/// <summary>
+		/// Converts an <see cref="IntPtr"/> that points to a C-style array into a CLI array.
+		/// </summary>
+		/// <typeparam name="S">Type of native structure used by the C-style array.</typeparam>
+		/// <typeparam name="T">Output type for the CLI array. <typeparamref name="S"/> must be able to convert to <typeparamref name="T"/>.</typeparam>
+		/// <param name="ptr">The <see cref="IntPtr"/> pointing to the native array.</param>
+		/// <param name="count">The number of items in the native array.</param>
+		/// <returns>An array of type <typeparamref name="T"/> containing the converted elements of the native array.</returns>
 		public static T[] ToArray<S, T>(IntPtr ptr, int count) where S : IConvertible
 		{
 			IntPtr tempPtr;
@@ -71,9 +79,24 @@ namespace System.Runtime.InteropServices
 			return ret;
 		}
 
-		public static T[] ToArray<T>(IntPtr ptr, int count) where T : IConvertible
+		/// <summary>
+		/// Converts an <see cref="IntPtr"/> that points to a C-style array into a CLI array.
+		/// </summary>
+		/// <typeparam name="T">Type of native structure used by the C-style array.</typeparam>
+		/// <param name="ptr">The <see cref="IntPtr"/> pointing to the native array.</param>
+		/// <param name="count">The number of items in the native array.</param>
+		/// <returns>An array of type <typeparamref name="T"/> containing the elements of the native array.</returns>
+		public static T[] ToArray<T>(IntPtr ptr, int count)
 		{
-			return ToArray<T, T>(ptr, count);
+			IntPtr tempPtr;
+			T[] ret = new T[count];
+			int stSize = Marshal.SizeOf(typeof(T));
+			for (int i = 0; i < count; i++)
+			{
+				tempPtr = new IntPtr(ptr.ToInt64() + (i * stSize));
+				ret[i] = ToStructure<T>(tempPtr);
+			}
+			return ret;
 		}
 	}
 }
