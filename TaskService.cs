@@ -16,6 +16,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
+		private static TaskService instance;
+
 		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
 		internal V2Interop.TaskSchedulerClass v2TaskService = null;
 
@@ -220,6 +222,22 @@ namespace Microsoft.Win32.TaskScheduler
 					userDomain = value;
 					Connect();
 				}
+			}
+		}
+
+		/// <summary>
+		/// Gets a local instance of the <see cref="TaskService"/> using the current user's credentials.
+		/// </summary>
+		/// <value>
+		/// Local user <see cref="TaskService"/> instance.
+		/// </value>
+		public static TaskService Instance
+		{
+			get
+			{
+				if (instance == null)
+					instance = new TaskService();
+				return instance;
 			}
 		}
 
