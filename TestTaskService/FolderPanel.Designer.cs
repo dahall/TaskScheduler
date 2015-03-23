@@ -257,7 +257,7 @@
 			this.TaskListView.Size = new System.Drawing.Size(735, 232);
 			this.TaskListView.TabIndex = 0;
 			this.TaskListView.TaskSelected += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs>(this.taskListView_TaskSelected);
-			this.TaskListView.DoubleClick += new System.EventHandler(this.TaskListView_DoubleClick);
+			this.TaskListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskListView_MouseDoubleClick);
 			// 
 			// taskEditDialog1
 			// 
@@ -280,7 +280,7 @@
 			// 
 			this.taskRunTimesDialog1.AutoSize = true;
 			this.taskRunTimesDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskRunTimesDialog1.ClientSize = new System.Drawing.Size(269, 294);
+			this.taskRunTimesDialog1.ClientSize = new System.Drawing.Size(347, 294);
 			this.taskRunTimesDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskRunTimesDialog1.Location = new System.Drawing.Point(75, 75);
 			this.taskRunTimesDialog1.Name = "TaskRunTimesDialog";

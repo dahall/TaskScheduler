@@ -34,7 +34,15 @@ namespace Microsoft.Win32
 		/// <param name="hMem"></param>
 		/// <returns></returns>
 		[DllImport(KERNEL32, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool GlobalUnlock(IntPtr hMem);
+
+		[DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern IntPtr LoadLibrary(string filename);
+
+		[DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool FreeLibrary(IntPtr lib);
 
 		public partial class SafeTokenHandle : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
 		{
