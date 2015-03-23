@@ -899,8 +899,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 				string path = v2Task.Path;
 				string parentPath = System.IO.Path.GetDirectoryName(path);
-				if (string.IsNullOrEmpty(parentPath))
-					return null;
+				if (string.IsNullOrEmpty(parentPath) || parentPath == @"\")
+					return this.TaskService.RootFolder;
 				return this.TaskService.GetFolder(parentPath);
 			}
 		}

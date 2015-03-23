@@ -51,6 +51,11 @@ namespace TestTaskService
 			}
 		}
 
+		private void TaskListView_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			propMenu_Click(TaskListView, e);
+		}
+
 		private void taskListView_TaskSelected(object sender, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs e)
 		{
 			if (itemMenuStrip.Enabled != (e.Task != null))
@@ -68,6 +73,7 @@ namespace TestTaskService
 				TaskPropertiesControl.Initialize(e.Task);
 				selTask = e.Task;
 
+				runMenuItem.Enabled = runMenuItem2.Enabled = (selTask.Definition.Settings.AllowDemandStart);
 				endMenuItem.Enabled = endMenuItem2.Enabled = (selTask.State == TaskState.Running);
 				disableMenuItem.Enabled = disableMenuItem2.Enabled = (selTask.Enabled);
 			}
@@ -110,8 +116,11 @@ namespace TestTaskService
 		private void exportMenu_Click(object sender, EventArgs e)
 		{
 			if (selTask != null)
+			{
+				saveFileDialog1.FileName = selTask.Name;
 				if (saveFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 					selTask.Export(saveFileDialog1.FileName);
+			}
 		}
 
 		private void propMenu_Click(object sender, EventArgs e)
@@ -134,11 +143,6 @@ namespace TestTaskService
 		public ToolStrip MenuItems
 		{
 			get { return itemMenuStrip; }
-		}
-
-		private void TaskListView_DoubleClick(object sender, EventArgs e)
-		{
-			propMenu_Click(sender, e);
 		}
 	}
 }

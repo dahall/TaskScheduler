@@ -116,6 +116,11 @@ namespace Microsoft.Win32.TaskScheduler
 				e.Cancel = true;
 		}
 
+		private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			OnMouseDoubleClick(e);
+		}
+
 		private void listView1_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (this.ContextMenuStrip != null && e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -128,6 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 						this.ContextMenuStrip.Show(listView1, e.Location);
 				}
 			}
+			OnMouseClick(e);
 		}
 
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)

@@ -664,6 +664,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
+		[System.Security.SecurityCritical]
 		void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
 		{
 			info.AddValue("TargetServer", this.TargetServer, typeof(string));

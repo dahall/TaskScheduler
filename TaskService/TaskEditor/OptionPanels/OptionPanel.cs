@@ -4,12 +4,11 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
-	
-#if DEBUG
-	internal partial class OptionPanel : UserControl
-#else
-	internal abstract partial class OptionPanel : UserControl
+	internal
+#if !DEBUG
+	abstract
 #endif
+	partial class OptionPanel : UserControl
 	{
 		protected bool onAssignment = false;
 		protected TaskOptionsEditor parent;

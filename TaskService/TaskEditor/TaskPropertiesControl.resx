@@ -1273,7 +1273,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1297,7 +1297,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1942,7 +1942,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1966,7 +1966,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1990,7 +1990,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2524,7 +2524,7 @@
     <value>taskMaintenanceDeadlineCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -2647,7 +2647,7 @@
     <value>taskMaintenancePeriodCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.5.29948, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
