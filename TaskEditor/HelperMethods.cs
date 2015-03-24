@@ -15,7 +15,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups;
 			dlg.DefaultObjectTypes = dlg.AllowedObjectTypes;
 			dlg.AttributesToFetch.Add("objectSid");
-			if (dlg.ShowDialog(parent) == System.Windows.Forms.DialogResult.OK)
+			System.Windows.Forms.DialogResult res = System.Windows.Forms.DialogResult.None;
+			try { res = dlg.ShowDialog(parent); } catch { }
+			if (res == System.Windows.Forms.DialogResult.OK)
 			{
 				if (dlg.SelectedObject != null)
 				{
