@@ -19,13 +19,17 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\v2.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\2" />
-    <file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\2" />
-    <file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\2" />
-    <file src="bin\Release\v2.0\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\2" />
-    <file src="bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\4" />
-    <file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\4" />
-    <file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\4" />
-    <file src="bin\Release\v4.0\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\4" />
+    <file src="bin\Release\v2.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net20" />
+    <file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net20" />
+    <file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net20" />
+    <file src="bin\Release\v2.0\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net20" />
+    <file src="bin\Release\v3.5\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net35" />
+    <file src="bin\Release\v3.5\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net35" />
+    <file src="bin\Release\v3.5\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net35" />
+    <file src="bin\Release\v3.5\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net35" />
+    <file src="bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net40" />
+    <file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net40" />
+    <file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net40" />
+    <file src="bin\Release\v4.0\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net40" />
   </files>
 </package>
