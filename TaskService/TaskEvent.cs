@@ -232,7 +232,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </remarks>
 		public string GetDataValue(string name)
 		{
-			var propsel = new System.Diagnostics.Eventing.Reader.EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", name) });
+			var propsel = new EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", name) });
 			try
 			{
 				var logEventProps = ((EventLogRecord)this.EventRecord).GetPropertyValues(propsel);
