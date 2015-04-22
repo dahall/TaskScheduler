@@ -822,19 +822,19 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetVersionComboItems()
 		{
-			const int expectedVersions = 5;
+			const int expectedVersions = 6;
 
 			this.taskVersionCombo.BeginUpdate();
 			this.taskVersionCombo.Items.Clear();
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
+			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
 			if (Environment.OSVersion.Version >= new Version(6, 2))
 			{
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-					versions[expectedVersions - 1] = key.GetValue("ProductName", Environment.OSVersion).ToString();
+					versions[max] = key.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
-			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
 			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
 			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
 			switch (comp)

@@ -12,6 +12,12 @@ namespace TestTaskService
 			radioButtonList1.SelectedIndex = 0;
 		}
 
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			this.Text = string.Format("{0} - {1}", this.Text, Environment.OSVersion.Version);
+		}
+
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			Close();
