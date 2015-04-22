@@ -395,7 +395,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// or
 		/// Registration triggers are not available on Task Scheduler 1.0.
 		/// or
-		/// Xml validation not available on Task Scheduler 1.0.</exception>
+		/// XML validation not available on Task Scheduler 1.0.</exception>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
@@ -465,7 +465,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskCreation.IgnoreRegistrationTriggers:
 					throw new NotV1SupportedException("Registration triggers are not available on Task Scheduler 1.0.");
 				case TaskCreation.ValidateOnly:
-					throw new NotV1SupportedException("Xml validation not available on Task Scheduler 1.0.");
+					throw new NotV1SupportedException("XML validation not available on Task Scheduler 1.0.");
 				default:
 					break;
 			}

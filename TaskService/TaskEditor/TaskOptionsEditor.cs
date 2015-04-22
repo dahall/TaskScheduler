@@ -50,7 +50,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="task">The task.</param>
 		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
-		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
 		public TaskOptionsEditor(Task task, bool editable = true, bool registerOnAccept = true) : this()
 		{
 			this.Editable = editable;
@@ -64,7 +64,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
-		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when Ok is pressed.</param>
+		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
 		public TaskOptionsEditor(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true) : this()
 		{
 			this.Editable = editable;
@@ -100,7 +100,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool IsV2 { get; private set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether to register task when Accept (Ok) button pressed.
+		/// Gets or sets a value indicating whether to register task when Accept (OK) button pressed.
 		/// </summary>
 		/// <value><c>true</c> if updated task is to be registered; otherwise, <c>false</c>.</value>
 		[Category("Behavior"), DefaultValue(false)]

@@ -159,7 +159,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 			public List<CSuppress> Suppress = new List<CSuppress>();
 
 			/// <summary>
-			/// The suppressed i ds
+			/// The suppressed ids
 			/// </summary>
 			[XmlIgnore]
 			public List<CID> SuppressedIDs = new List<CID>();

@@ -1190,7 +1190,7 @@ namespace Microsoft.Win32.TaskScheduler
 				// Resize drop-down to fit its contents.
 				ResizeFromContent(width);
 
-				// If client area was enlarged using the minimum width paramater, then the hosted
+				// If client area was enlarged using the minimum width parameter, then the hosted
 				// control must also be enlarged.
 				if (m_refreshSize)
 					RecalculateHostedControlLayout();

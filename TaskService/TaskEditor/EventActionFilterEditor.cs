@@ -533,7 +533,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		#region Static Constuctor and Methods
+		#region Static Constructor and Methods
 
 		private static System.Text.RegularExpressions.Regex IDRegex;
 		private static StringNode Logs;

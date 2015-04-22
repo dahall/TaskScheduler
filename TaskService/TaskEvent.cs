@@ -503,7 +503,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Initializes a new instance of the <see cref="TaskEventLog"/> class.
 		/// </summary>
 		/// <param name="taskName">Name of the task.</param>
-		/// <param name="eventIDs">The event i ds.</param>
+		/// <param name="eventIDs">The event ids.</param>
 		/// <param name="startTime">The start time.</param>
 		/// <param name="machineName">Name of the machine (optional).</param>
 		/// <param name="domain">The domain.</param>

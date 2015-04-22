@@ -137,7 +137,7 @@ namespace Microsoft.Win32.TaskScheduler
 			item.Checked = !item.Checked;
 			if (item.Checked)
 			{
-				historyListView.Columns[cIndex].Width = 100; // TODO: Be more acurate here and get a good standard width
+				historyListView.Columns[cIndex].Width = 100; // TODO: Be more accurate here and get a good standard width
 			}
 			else
 				historyListView.Columns[cIndex].Width = 0;

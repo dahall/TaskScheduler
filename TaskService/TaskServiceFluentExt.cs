@@ -455,7 +455,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Specifies a repetion interval for the trigger.
+			/// Specifies a repetition interval for the trigger.
 			/// </summary>
 			/// <param name="span">The interval span.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
@@ -466,7 +466,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Specifies a repetion interval for the trigger.
+			/// Specifies a repetition interval for the trigger.
 			/// </summary>
 			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
@@ -502,7 +502,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Assigns the name of the task and registers it.
 			/// </summary>
 			/// <param name="name">The name.</param>
-			/// <returns>A registerd <see cref="Task"/> instance.</returns>
+			/// <returns>A registered <see cref="Task"/> instance.</returns>
 			public Task AsTask(string name)
 			{
 				return tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);

@@ -926,7 +926,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the properties from the Xml definition if possible.
+		/// Gets the properties from the XML definition if possible.
 		/// </summary>
 		[XmlArray, XmlArrayItem("Property")]
 		public NamedValueCollection Properties
@@ -2141,7 +2141,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// contained in the array.  Indices must be from 1 to 32 and bits are numbered the same.
 		/// </summary>
 		/// <param name="indices">An array with an element for each bit of the mask which is ON.</param>
-		/// <returns>An interger to be interpreted as a mask.</returns>
+		/// <returns>An integer to be interpreted as a mask.</returns>
 		internal static int IndicesToMask(int[] indices)
 		{
 			int mask = 0;
@@ -2157,7 +2157,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Convert an integer representing a mask to an array where each element contains the index
 		/// of a bit that is ON in the mask.  Bits are considered to number from 1 to 32.
 		/// </summary>
-		/// <param name="mask">An interger to be interpreted as a mask.</param>
+		/// <param name="mask">An integer to be interpreted as a mask.</param>
 		/// <returns>An array with an element for each bit of the mask which is ON.</returns>
 		internal static int[] MaskToIndices(int mask)
 		{
