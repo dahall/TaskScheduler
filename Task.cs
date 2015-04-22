@@ -22,7 +22,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
 		V2_1,
 		/// <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
-		V2_2
+		V2_2,
+		/// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		V2_3,
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
@@ -547,7 +549,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets a valud indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive mode. The exclusivity is guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If exclusivity is not specified, the task is started in parallel with other maintenance tasks.
+		/// Gets or sets a value indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive mode. The exclusivity is guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If exclusivity is not specified, the task is started in parallel with other maintenance tasks.
 		/// </summary>
 		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
 		[DefaultValue(false)]
@@ -1288,7 +1290,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Dynamically tries to load the assembly for the editor and displays it as editable for this task.
 		/// </summary>
-		/// <returns><c>true</c> if editor returns with Ok response; <c>false</c> otherwise.</returns>
+		/// <returns><c>true</c> if editor returns with OK response; <c>false</c> otherwise.</returns>
 		/// <remarks>The Microsoft.Win32.TaskSchedulerEditor.dll assembly must reside in the same directory as the Microsoft.Win32.TaskScheduler.dll or in the GAC.</remarks>
 		public bool ShowEditor()
 		{
@@ -1368,6 +1370,10 @@ namespace Microsoft.Win32.TaskScheduler
 					case 1:
 						return 3;
 					default:
+						// TODO: Hack to determine if this is Windows 10. Needs to be corrected once gold.
+						using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
+							if (Convert.ToInt32(key.GetValue("CurrentMajorVersionNumber", 0)) == 10)
+								return 5;
 						return 4;
 				}
 			}
@@ -1627,7 +1633,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Property { get; private set; }
 
 		/// <summary>
-		/// Gets the reason for the imcompatibility.
+		/// Gets the reason for the incompatibility.
 		/// </summary>
 		/// <value>
 		/// The reason.
@@ -1820,7 +1826,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Determines whether this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine or if it contains unsupported properties.
 		/// </summary>
 		/// <param name="throwExceptionWithDetails">if set to <c>true</c> throws an <see cref="InvalidOperationException"/> with details about unsupported properties in the Data property of the exception.</param>
-		/// <returns><c>true</c> if this this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
+		/// <returns><c>true</c> if this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
 		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false)
 		{
 			InvalidOperationException ex = new InvalidOperationException() { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
@@ -3263,7 +3269,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.ExecutionTimeLimit = value == TimeSpan.Zero ? "PT0S" : Task.TimeSpanToString(value);
 				else
 				{
-					// Due to a bug introduced in Vista, and propogated to Windows 7, setting the
+					// Due to a bug introduced in Vista, and propagated to Windows 7, setting the
 					// MaxRunTime to INFINITE results in the task only running for 72 hours. For
 					// these operating systems, setting the RunTime to "INFINITE - 1" gets the
 					// desired behavior of allowing an "infinite" run of the task.
@@ -3358,7 +3364,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of ITaskSettings is true and a network propfile is specified in the NetworkSettings property, then the task will run only if the specified network profile is available.
+		/// Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of ITaskSettings is true and a network profile is specified in the NetworkSettings property, then the task will run only if the specified network profile is available.
 		/// </summary>
 		[XmlIgnore]
 		public NetworkSettings NetworkSettings

@@ -317,7 +317,7 @@ Action: {3}</value>
     <value>For the options selected, a password for the specified user must be provided.</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8 or 8.1, Windows Server™ 2012|Windows®10</value>
     <comment>Listing of corresponding OS listing to each TaskCompatibility enum separated by '|' character.</comment>
   </data>
   <data name="TimeSpanNotStarted" xml:space="preserve">
