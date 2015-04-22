@@ -112,7 +112,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[Browsable(false)]
 		[DefaultValue((string)null)]
-		[Obsolete("This property has been superceded by the UserAccountDomin property and may not be available in future releases.")]
+		[Obsolete("This property has been superseded by the UserAccountDomin property and may not be available in future releases.")]
 		public string ConnectedDomain
 		{
 			get
@@ -131,7 +131,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[Browsable(false)]
 		[DefaultValue((string)null)]
-		[Obsolete("This property has been superceded by the UserName property and may not be available in future releases.")]
+		[Obsolete("This property has been superseded by the UserName property and may not be available in future releases.")]
 		public string ConnectedUser
 		{
 			get
@@ -166,7 +166,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibilty level higher than this version.
+		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher than this version.
 		/// </summary>
 		/// <value>
 		/// The library version.
@@ -317,7 +317,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Creates a new task, registers the taks, and returns the instance.
+		/// Creates a new task, registers the task, and returns the instance.
 		/// </summary>
 		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>

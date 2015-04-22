@@ -268,7 +268,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Removes the specifed item from the check list.
+		/// Removes the specified item from the check list.
 		/// </summary>
 		/// <param name="index">The index of the item to remove.</param>
 		public void RemoveItem(int index)

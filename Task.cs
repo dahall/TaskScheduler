@@ -1925,10 +1925,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the Xml Schema file for V1 tasks.
+		/// Gets the XML Schema file for V1 tasks.
 		/// </summary>
 		/// <param name="xs">The <see cref="System.Xml.Schema.XmlSchemaSet"/> for V1 tasks.</param>
-		/// <returns>An object containing the Xml Schema for V1 tasks.</returns>
+		/// <returns>An object containing the XML Schema for V1 tasks.</returns>
 		public static XmlSchemaComplexType GetV1SchemaFile(XmlSchemaSet xs)
 		{
 			XmlSchema schema = null;

@@ -19,10 +19,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Converts a wildcard to a regex.
+		/// Converts a wildcard to a regular expression.
 		/// </summary>
 		/// <param name="pattern">The wildcard pattern to convert.</param>
-		/// <returns>A regex equivalent of the given wildcard.</returns>
+		/// <returns>A regular expression equivalent of the given wildcard.</returns>
 		public static string WildcardToRegex(string pattern)
 		{
 			string s = "^" + Regex.Escape(pattern) + "$"; s = Regex.Replace(s, @"(?<!\\)\\\*", @".*"); // Negative Lookbehind
