@@ -782,7 +782,7 @@
     <value></value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value></value>
+    <value>&amp;URI:</value>
   </data>
   <data name="taskRegURIText.Error" xml:space="preserve">
     <value></value>

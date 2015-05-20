@@ -192,4 +192,13 @@
   <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
     <value>Ordina gli eventi in base a questa colonna</value>
   </data>
+  <data name="historyDetailTitleText.Text" xml:space="preserve">
+    <value>Evento 100, TaskScheduler</value>
+  </data>
+  <data name="saveFileDialog.Filter" xml:space="preserve">
+    <value>File dell'evento (*.evtx)|*. evtx|XML (Xml File) (*. Xml)|*. Xml|Testo (delimitato da tabulazione) (*. txt)|*. txt|CSV (delimitato da virgole) (*. csv)|*. csv</value>
+  </data>
+  <data name="historyDetailHideBtn.Text" xml:space="preserve">
+    <value>r</value>
+  </data>
 </root>

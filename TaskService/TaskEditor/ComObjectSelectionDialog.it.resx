@@ -137,9 +137,9 @@
     <value>Selezionare l'oggetto COM</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value></value>
+    <value>CLSID</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value></value>
+    <value>OK</value>
   </data>
 </root>

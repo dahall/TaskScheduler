@@ -58,6 +58,7 @@ namespace TestTaskService
 					break;
 				case 7: // Output XML
 					Program.OutputXml(ts, output);
+					Program.OutputJson(ts, output);
 					break;
 				default:
 					break;

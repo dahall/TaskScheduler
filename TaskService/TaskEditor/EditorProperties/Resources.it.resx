@@ -317,7 +317,7 @@ Azione: {3}</value>
     <value>Per le opzioni scelte, una password per l'utente specificato deve essere fornita.</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value>AT servizio|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+    <value>AT servizio|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
   </data>
   <data name="TimeSpanNotStarted" xml:space="preserve">
     <value>Non avviato</value>
@@ -434,15 +434,108 @@ Azione: {3}</value>
     <value>&amp;Cambia utente...</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value></value>
+    <value>Storia e eventi d'attività non sono supportati nelle versioni di .NET 3.5 prima di.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value></value>
+    <value>Le seguenti impostazioni di proprietà non possono essere utilizzate con l'impostazione di compatibilità selezionati:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value></value>
+    <value>Alcune impostazioni sono incompatibili con questa selezione.</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
-    <value></value>
+    <value>L'attività è attualmente in esecuzione. (0x{0:X})</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>Testo non riconosciuta trovato nella query XML.</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>Offendere il testo: '{0}'</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>Modello di gamma ID non valido</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>Contenuto eliminato deve essere testo o un file contenente una query Xml valida.</value>
+  </data>
+  <data name="EventKeywordsAll" xml:space="preserve">
+    <value>&lt;Tutte le parole chiave&gt;</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>Mancata revisione</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>Successo di audit</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>Suggerimento di correlazione</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>Classico</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>Tempo di risposta</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>Registri applicazioni e servizi</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Registri di Windows</value>
+  </data>
+  <data name="EventLogsAll" xml:space="preserve">
+    <value>&lt;Tutti i registri&gt;</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>Ultime 12 ore</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>Ultimi 30 giorni</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>Qualsiasi momento</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>Gamma personalizzata...</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>Tutti gli eventi da {0}</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>Da {0} di {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>Tutti gli eventi fino a {1}</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>Ultime 24 ore</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>Ultima ora</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>Ultimi 7 giorni</value>
+  </data>
+  <data name="EventSourcesAll" xml:space="preserve">
+    <value>&lt;Tutte le origini&gt;</value>
+  </data>
+  <data name="EventTasksAll" xml:space="preserve">
+    <value>&lt;Tutte le categorie di attività&gt;</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>Se si sceglie di modificare manualmente la query, non sarà in grado di modificare la query utilizzando i controlli sulla scheda filtro. Continua?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>Si desidera utilizzare la scheda filtro per modificare la query? Questo si tradurrà in manuale delle modifiche apportate alla query vengano eliminate.</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>Visualizzatore eventi</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>SQM</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>Contesto WDI</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>Diagnositico WDI</value>
   </data>
 </root>
