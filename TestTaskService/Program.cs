@@ -839,6 +839,39 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
+				string fn = null;
+				using (var tt = new TempTask(ts, taskName))
+				{
+					System.Threading.Thread.Sleep(1000);
+
+					// Serialize task and output
+					string xmlOutput = tt.Task.Xml;
+					output.Write(xmlOutput);
+					fn = WriteXml(tt);
+				}
+
+				if (fn != null)
+					ts.RootFolder.ImportTask(taskName, fn);
+				ts.RootFolder.DeleteTask(taskName);
+			}
+			catch (Exception ex)
+			{
+				output.WriteLine(ex.ToString());
+			}
+		}
+
+		private class TempTask : IDisposable
+		{
+			TaskService ts;
+			string taskName;
+
+			public Task Task { get; set; }
+
+			public TempTask(TaskService ts, string taskName)
+			{
+				this.ts = ts;
+				this.taskName = taskName;
+
 				TaskDefinition td = ts.NewTask();
 				td.Data = "Some data";
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
@@ -857,25 +890,37 @@ namespace TestTaskService
 				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new int[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
 				td.Triggers.Add(new WeeklyTrigger(DaysOfTheWeek.Saturday, 2));
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				System.Threading.Thread.Sleep(1000);
+				this.Task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+			}
 
-				// Serialize task and output
-				string xmlOutput = t.Xml;
-				output.Write(xmlOutput);
-				string fn = WriteXml(t);
+			public static implicit operator Task(TempTask tt) { return tt.Task; }
 
+			public void Dispose()
+			{
 				ts.RootFolder.DeleteTask(taskName);
+			}
+		}
 
-				ts.RootFolder.ImportTask(taskName, fn);
-
-				//ts.RootFolder.RegisterTask(taskName, xmlOutput, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				ts.RootFolder.DeleteTask(taskName);
+		internal static void OutputJson(TaskService ts, System.IO.StringWriter output)
+		{
+#if NET_35_OR_GREATER
+			try
+			{
+				using (var tt = new TempTask(ts, "Temp"))
+				{
+					/*var ms = new System.IO.MemoryStream();
+					var js = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(TaskDefinition));
+					js.WriteObject(ms, tt.Task.Definition);
+					ms.Position = 0;
+					var sr = new System.IO.StreamReader(ms);
+					output.WriteLine(sr.ReadToEnd());*/
+				}
 			}
 			catch (Exception ex)
 			{
 				output.WriteLine(ex.ToString());
 			}
+#endif // NET_35_OR_GREATER
 		}
 	}
 }

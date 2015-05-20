@@ -268,7 +268,7 @@
     <value>Non restreint</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+    <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
   </data>
   <data name="TaskEditDlgTitle" xml:space="preserve">
     <value>Propriétés de {0} ({1})</value>

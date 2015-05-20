@@ -206,6 +206,6 @@
     <value>Seleziona &amp;tutto</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value></value>
+    <value>&amp;OpCode:</value>
   </data>
 </root>

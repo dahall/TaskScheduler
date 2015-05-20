@@ -1,834 +1,867 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProductVersion>9.0.30729</ProductVersion>
-		<SchemaVersion>2.0</SchemaVersion>
-		<ProjectGuid>{5279D487-59FA-4D01-9D7A-EA7387D8B67C}</ProjectGuid>
-		<OutputType>Library</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
-		<RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
-		<AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-		<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-		<FileAlignment>512</FileAlignment>
-		<SccProjectName>SAK</SccProjectName>
-		<SccLocalPath>SAK</SccLocalPath>
-		<SccAuxPath>SAK</SccAuxPath>
-		<SccProvider>SAK</SccProvider>
-		<FileUpgradeFlags>
-		</FileUpgradeFlags>
-		<UpgradeBackupLocation>
-		</UpgradeBackupLocation>
-		<OldToolsVersion>3.5</OldToolsVersion>
-		<TargetFrameworkProfile />
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-		<DefineConstants>TRACE;DEBUG;</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-		<DocumentationFile>
-		</DocumentationFile>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>pdbonly</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-		<DefineConstants>TRACE;</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
-		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-	</PropertyGroup>
-	<PropertyGroup>
-		<!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
-		<!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
-		<DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-		<DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-		<DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
-		<DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-		<DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
-		<DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup>
-		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-	</PropertyGroup>
-	<PropertyGroup>
-		<SignAssembly>true</SignAssembly>
-	</PropertyGroup>
-	<PropertyGroup>
-		<AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
-	</PropertyGroup>
-	<ItemGroup>
-		<Reference Include="AeroWizard">
-			<HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-		</Reference>
-		<Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
-		</Reference>
-		<Reference Include="GroupControls">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
-			<Aliases>global</Aliases>
-		</Reference>
-		<Reference Include="System" />
-		<Reference Include="System.Data" />
-		<Reference Include="System.Design" />
-		<Reference Include="System.Drawing" />
-		<Reference Include="System.Windows.Forms" />
-		<Reference Include="System.Xml" />
-		<Reference Include="TimeSpan2">
-			<HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Aliases>global</Aliases>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="..\Properties\SharedAssemblyInfo.cs">
-			<Link>Properties\SharedAssemblyInfo.cs</Link>
-		</Compile>
-		<Compile Include="..\ReflectionHelper.cs">
-			<Link>ReflectionHelper.cs</Link>
-		</Compile>
-		<Compile Include="ActionEditDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="ActionEditDialog.Designer.cs">
-			<DependentUpon>ActionEditDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="ArrayComparer.cs" />
-		<Compile Include="ComObjectSelectionDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="ComObjectSelectionDialog.Designer.cs">
-			<DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="EditorInterfaces.cs" />
-		<Compile Include="Native\ImageList.cs" />
-		<Compile Include="Native\ImageListExtension.cs" />
-		<Compile Include="Native\NativeResource.cs" />
-		<Compile Include="OptionPanels\SecurityOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\SecurityOptionPanel.Designer.cs">
-			<DependentUpon>SecurityOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\RuntimeOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\RuntimeOptionPanel.Designer.cs">
-			<DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\StartupOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\StartupOptionPanel.Designer.cs">
-			<DependentUpon>StartupOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\WrappingControls.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="ReorderableListView.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="DropDownCheckTree.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="EventActionFilterDataEditor.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="EventActionFilterDataEditor.Designer.cs">
-			<DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
-		</Compile>
-		<Compile Include="EventActionFilterEditor.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="EventActionFilterEditor.Designer.cs">
-			<DependentUpon>EventActionFilterEditor.cs</DependentUpon>
-		</Compile>
-		<Compile Include="EventActionFilterTimeEditor.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="EventActionFilterTimeEditor.Designer.cs">
-			<DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
-		</Compile>
-		<Compile Include="EventQueryList.cs" />
-		<Compile Include="Native\ControlExtension.cs" />
-		<Compile Include="CorrelatedTaskEvent.cs" />
-		<Compile Include="DialogBase.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="ListColumnEditor.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="ListColumnEditor.Designer.cs">
-			<DependentUpon>ListColumnEditor.cs</DependentUpon>
-		</Compile>
-		<Compile Include="Native\DisabledItemComboBox.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="Native\ExtensionAttributeFor.NET_2.0.cs" />
-		<Compile Include="HelperMethods.cs" />
-		<Compile Include="Native\ADVAPI32.cs" />
-		<Compile Include="Native\BROWSEINFO.cs" />
-		<Compile Include="Native\ComboBox.cs" />
-		<Compile Include="Native\CredentialsDialog.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="CustomComboBox.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="DropDownCheckList.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="EventViewerDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="EventViewerDialog.Designer.cs">
-			<DependentUpon>EventViewerDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="EventViewerControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="EventViewerControl.Designer.cs">
-			<DependentUpon>EventViewerControl.cs</DependentUpon>
-		</Compile>
-		<Compile Include="Native\CREDUI.cs" />
-		<Compile Include="Native\EnumUtil.cs" />
-		<Compile Include="Native\FolderBrowserDialog2.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="Native\GDI32.cs" />
-		<Compile Include="Native\Header.cs" />
-		<Compile Include="Native\InteropUtil.cs" />
-		<Compile Include="Native\KERNEL32.cs" />
-		<Compile Include="Native\ListView.cs" />
-		<Compile Include="Native\ListViewEx.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="Native\MapWindowPoints.cs" />
-		<Compile Include="Native\OLE32.cs" />
-		<Compile Include="Native\RECT.cs" />
-		<Compile Include="Native\SafeHandles.cs" />
-		<Compile Include="Native\SHELL32.cs" />
-		<Compile Include="Native\SIZE.cs" />
-		<Compile Include="Native\SYSTEMTIME.cs" />
-		<Compile Include="Native\USER32.cs" />
-		<Compile Include="Native\Util.cs" />
-		<Compile Include="Native\UXTHEME.cs" />
-		<Compile Include="Native\VisualStylesRendererExtension.cs" />
-		<Compile Include="Native\NetworkListManager.cs" />
-		<Compile Include="Native\NetworkProfile.cs" />
-		<None Include="ComputerInfo.cs" />
-		<Compile Include="OptionPanels\ActionsOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\ActionsOptionPanel.Designer.cs">
-			<DependentUpon>ActionsOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\GeneralOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\GeneralOptionPanel.Designer.cs">
-			<DependentUpon>GeneralOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\OptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\OptionPanel.Designer.cs">
-			<DependentUpon>OptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\OptionPanelHeaderLabel.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\OptionPanelHeaderLabel.Designer.cs">
-			<DependentUpon>OptionPanelHeaderLabel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="OptionPanels\TriggersOptionPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="OptionPanels\TriggersOptionPanel.Designer.cs">
-			<DependentUpon>TriggersOptionPanel.cs</DependentUpon>
-		</Compile>
-		<Compile Include="Properties\Resources.Designer.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>Resources.resx</DependentUpon>
-		</Compile>
-		<Compile Include="SecEdShim.cs" />
-		<Compile Include="SystemEventEnumerator.cs" />
-		<Compile Include="TaskBrowserDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskBrowserDialog.Designer.cs">
-			<DependentUpon>TaskBrowserDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskEditDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskEditDialog.Designer.cs">
-			<DependentUpon>TaskEditDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="FullDateTimePicker.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="FullDateTimePicker.Designer.cs">
-			<DependentUpon>FullDateTimePicker.cs</DependentUpon>
-		</Compile>
-		<Compile Include="Native\AccountUtils.cs" />
-		<Compile Include="Properties\AssemblyInfo.cs" />
-		<Compile Include="EditorProperties\Resources.Designer.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>Resources.resx</DependentUpon>
-		</Compile>
-		<Compile Include="TaskHistoryControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="TaskHistoryControl.Designer.cs">
-			<DependentUpon>TaskHistoryControl.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskListView.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="TaskListView.Designer.cs">
-			<DependentUpon>TaskListView.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskOptionsEditor.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskOptionsEditor.Designer.cs">
-			<DependentUpon>TaskOptionsEditor.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskPropertiesControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="TaskPropertiesControl.Designer.cs">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskRunTimesControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="TaskRunTimesControl.Designer.cs">
-			<DependentUpon>TaskRunTimesControl.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskRunTimesDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskRunTimesDialog.Designer.cs">
-			<DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskSchedulerWizard.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskSchedulerWizard.Designer.cs">
-			<DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskServiceConnectDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TaskServiceConnectDialog.Designer.cs">
-			<DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TimeSpanExtension.cs" />
-		<Compile Include="TriggerEditDialog.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TriggerEditDialog.Designer.cs">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\ActionCollectionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\ActionCollectionUI.Designer.cs">
-			<DependentUpon>ActionCollectionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\BaseTriggerUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\BaseTriggerUI.Designer.cs">
-			<DependentUpon>BaseTriggerUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\ComHandlerActionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\ComHandlerActionUI.Designer.cs">
-			<DependentUpon>ComHandlerActionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\DailyTriggerUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\DailyTriggerUI.Designer.cs">
-			<DependentUpon>DailyTriggerUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\EmailActionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\EmailActionUI.Designer.cs">
-			<DependentUpon>EmailActionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\EventTriggerUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\EventTriggerUI.Designer.cs">
-			<DependentUpon>EventTriggerUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\ExecActionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\ExecActionUI.Designer.cs">
-			<DependentUpon>ExecActionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\IActionHandler.cs" />
-		<Compile Include="UIComponents\ITriggerHandler.cs" />
-		<Compile Include="UIComponents\MonthlyTriggerUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\MonthlyTriggerUI.Designer.cs">
-			<DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\ShowMessageActionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\ShowMessageActionUI.Designer.cs">
-			<DependentUpon>ShowMessageActionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\TriggerCollectionUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\TriggerCollectionUI.Designer.cs">
-			<DependentUpon>TriggerCollectionUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="UIComponents\WeeklyTriggerUI.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Include="UIComponents\WeeklyTriggerUI.Designer.cs">
-			<DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
-		</Compile>
-		<Compile Include="TaskPropertiesControlDesigner.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="ActionEditDialog.fr.resx">
-			<DependentUpon>ActionEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ActionEditDialog.it.resx">
-			<DependentUpon>ActionEditDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ActionEditDialog.resx">
-			<DependentUpon>ActionEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ActionEditDialog.zh-CN.resx">
-			<DependentUpon>ActionEditDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ComObjectSelectionDialog.fr.resx">
-			<DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ComObjectSelectionDialog.it.resx">
-			<DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ComObjectSelectionDialog.resx">
-			<DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
-			<DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EditorProperties\Resources.de-DE.resx">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EditorProperties\Resources.fr.resx" />
-		<EmbeddedResource Include="EditorProperties\Resources.it.resx">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventActionFilterDataEditor.resx">
-			<DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventActionFilterEditor.resx">
-			<DependentUpon>EventActionFilterEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventActionFilterTimeEditor.resx">
-			<DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventViewerControl.fr.resx">
-			<DependentUpon>EventViewerControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventViewerControl.it.resx">
-			<DependentUpon>EventViewerControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventViewerControl.resx">
-			<DependentUpon>EventViewerControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EventViewerDialog.resx">
-			<DependentUpon>EventViewerDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="FullDateTimePicker.fr.resx">
-			<DependentUpon>FullDateTimePicker.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
-			<DependentUpon>FullDateTimePicker.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EditorProperties\Resources.zh-CN.resx">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ListColumnEditor.fr.resx">
-			<DependentUpon>ListColumnEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="ListColumnEditor.resx">
-			<DependentUpon>ListColumnEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\ActionsOptionPanel.resx">
-			<DependentUpon>ActionsOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\OptionPanel.resx">
-			<DependentUpon>OptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\SecurityOptionPanel.resx">
-			<DependentUpon>SecurityOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\GeneralOptionPanel.resx">
-			<DependentUpon>GeneralOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\RuntimeOptionPanel.resx">
-			<DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\StartupOptionPanel.resx">
-			<DependentUpon>StartupOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="OptionPanels\TriggersOptionPanel.resx">
-			<DependentUpon>TriggersOptionPanel.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Properties\Resources.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskBrowserDialog.resx">
-			<DependentUpon>TaskBrowserDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskEditDialog.fr.resx">
-			<DependentUpon>TaskEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskEditDialog.it.resx">
-			<DependentUpon>TaskEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskEditDialog.resx">
-			<DependentUpon>TaskEditDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="FullDateTimePicker.it.resx">
-			<DependentUpon>FullDateTimePicker.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="FullDateTimePicker.resx">
-			<DependentUpon>FullDateTimePicker.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="EditorProperties\Resources.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
-			<DependentUpon>TaskEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskHistoryControl.fr.resx">
-			<DependentUpon>TaskHistoryControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskHistoryControl.it.resx">
-			<DependentUpon>TaskHistoryControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskHistoryControl.resx">
-			<DependentUpon>TaskHistoryControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskListView.fr.resx">
-			<DependentUpon>TaskListView.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskListView.it.resx">
-			<DependentUpon>TaskListView.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskListView.resx">
-			<DependentUpon>TaskListView.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskListView.zh-CN.resx">
-			<DependentUpon>TaskListView.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskOptionsEditor.resx">
-			<DependentUpon>TaskOptionsEditor.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskPropertiesControl.de-DE.resx">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskPropertiesControl.fr.resx">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskPropertiesControl.it.resx">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskPropertiesControl.resx">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskPropertiesControl.zh-CN.resx">
-			<DependentUpon>TaskPropertiesControl.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesControl.fr.resx">
-			<DependentUpon>TaskRunTimesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesControl.it.resx">
-			<DependentUpon>TaskRunTimesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesControl.resx">
-			<DependentUpon>TaskRunTimesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesControl.zh-CN.resx">
-			<DependentUpon>TaskRunTimesControl.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesDialog.fr.resx">
-			<DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesDialog.it.resx">
-			<DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesDialog.resx">
-			<DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskRunTimesDialog.zh-CN.resx">
-			<DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskSchedulerWizard.fr.resx">
-			<DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskSchedulerWizard.it.resx">
-			<DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskSchedulerWizard.resx">
-			<DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskSchedulerWizard.zh-CN.resx">
-			<DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskServiceConnectDialog.fr.resx">
-			<DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskServiceConnectDialog.it.resx">
-			<DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskServiceConnectDialog.resx">
-			<DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TaskServiceConnectDialog.zh-CN.resx">
-			<DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TriggerEditDialog.de-DE.resx">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TriggerEditDialog.fr.resx">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TriggerEditDialog.it.resx">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TriggerEditDialog.resx">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
-			<DependentUpon>TriggerEditDialog.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ActionCollectionUI.resx">
-			<DependentUpon>ActionCollectionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\BaseTriggerUI.fr.resx">
-			<DependentUpon>BaseTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\BaseTriggerUI.it.resx">
-			<DependentUpon>BaseTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\BaseTriggerUI.resx">
-			<DependentUpon>BaseTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ComHandlerActionUI.fr.resx">
-			<DependentUpon>ComHandlerActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ComHandlerActionUI.it.resx">
-			<DependentUpon>ComHandlerActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ComHandlerActionUI.resx">
-			<DependentUpon>ComHandlerActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\DailyTriggerUI.de-DE.resx">
-			<DependentUpon>DailyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\DailyTriggerUI.fr.resx">
-			<DependentUpon>DailyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\DailyTriggerUI.it.resx">
-			<DependentUpon>DailyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\DailyTriggerUI.resx">
-			<DependentUpon>DailyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\EmailActionUI.fr.resx">
-			<DependentUpon>EmailActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\EmailActionUI.it.resx">
-			<DependentUpon>EmailActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\EmailActionUI.resx">
-			<DependentUpon>EmailActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\EventTriggerUI.fr.resx">
-			<DependentUpon>EventTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\EventTriggerUI.resx">
-			<DependentUpon>EventTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ExecActionUI.fr.resx">
-			<DependentUpon>ExecActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ExecActionUI.it.resx">
-			<DependentUpon>ExecActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ExecActionUI.resx">
-			<DependentUpon>ExecActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\MonthlyTriggerUI.de-DE.resx">
-			<DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\MonthlyTriggerUI.fr.resx">
-			<DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\MonthlyTriggerUI.it.resx">
-			<DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\MonthlyTriggerUI.resx">
-			<DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ShowMessageActionUI.fr.resx">
-			<DependentUpon>ShowMessageActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ShowMessageActionUI.it.resx">
-			<DependentUpon>ShowMessageActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
-			<DependentUpon>ShowMessageActionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\TriggerCollectionUI.resx">
-			<DependentUpon>TriggerCollectionUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de-DE.resx">
-			<DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\WeeklyTriggerUI.fr.resx">
-			<DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\WeeklyTriggerUI.it.resx">
-			<DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Include="UIComponents\WeeklyTriggerUI.resx">
-			<DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
-		</EmbeddedResource>
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="ClassDiagram.cd" />
-		<None Include="TaskEditor.nuspec">
-			<SubType>Designer</SubType>
-		</None>
-		<None Include="TaskEditor.snk" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="Resources\verbose.ico" />
-		<None Include="Resources\auditFail.ico" />
-		<None Include="Resources\auditSuccess.ico" />
-		<None Include="Resources\critical.ico" />
-		<None Include="Resources\d.ico" />
-		<None Include="Resources\disable.ico" />
-		<None Include="Resources\enable.ico" />
-		<None Include="Resources\end.ico" />
-		<None Include="Resources\error.ico" />
-		<None Include="Resources\filter.ico" />
-		<None Include="Resources\helpBook.ico" />
-		<None Include="Resources\info.ico" />
-		<None Include="Resources\infoBubble.ico" />
-		<None Include="Resources\question.ico" />
-		<None Include="Resources\refresh.ico" />
-		<None Include="Resources\run.ico" />
-		<None Include="Resources\ts.ico" />
-		<None Include="Resources\tsFolderClosed.ico" />
-		<None Include="Resources\tsFolderOpen.ico" />
-		<None Include="Resources\tsList.ico" />
-		<None Include="Resources\tsNew.ico" />
-		<None Include="Resources\warning.ico" />
-		<None Include="Resources\createBasicTask.bmp" />
-		<None Include="Resources\empty.bmp" />
-		<None Include="Resources\filter.bmp" />
-		<None Include="Resources\undo.bmp" />
-		<None Include="Resources\downArrow.bmp" />
-		<None Include="Resources\minus.bmp" />
-		<None Include="Resources\plus.bmp" />
-		<None Include="Resources\ts.bmp" />
-		<None Include="Resources\upArrow.bmp" />
-		<None Include="Resources\ActionTypeComHandler.png" />
-		<None Include="Resources\ActionTypeExecute.png" />
-		<None Include="Resources\ActionTypeSendEmail.png" />
-		<None Include="Resources\ActionTypeShowMessage.png" />
-		<None Include="Resources\TriggerTypeBoot.png" />
-		<None Include="Resources\TriggerTypeDaily.png" />
-		<None Include="Resources\TriggerTypeEvent.png" />
-		<None Include="Resources\TriggerTypeIdle.png" />
-		<None Include="Resources\TriggerTypeLogon.png" />
-		<None Include="Resources\TriggerTypeMonthly.png" />
-		<None Include="Resources\TriggerTypeMonthlyDOW.png" />
-		<None Include="Resources\TriggerTypeRegistration.png" />
-		<None Include="Resources\TriggerTypeSessionStateChange.png" />
-		<None Include="Resources\TriggerTypeStateDisabled.png" />
-		<None Include="Resources\TriggerTypeTime.png" />
-		<None Include="Resources\TriggerTypeUnknown.png" />
-		<None Include="Resources\TriggerTypeWeekly.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\TaskService.csproj">
-			<Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
-			<Name>TaskService</Name>
-		</ProjectReference>
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="TaskDialog.bmp" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="Dialog.bmp" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="Control.bmp" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="TaskControl.bmp" />
-	</ItemGroup>
-	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-	<PropertyGroup>
-		<PostBuildEvent>
-		</PostBuildEvent>
-	</PropertyGroup>
-	<!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-	   Other similar extension points exist, see Microsoft.Common.targets.
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5279D487-59FA-4D01-9D7A-EA7387D8B67C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
+    <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <DefineConstants>TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
+    <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
+    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AeroWizard">
+      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="GroupControls">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
+      <Aliases>global</Aliases>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TimeSpan2">
+      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Aliases>global</Aliases>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\ReflectionHelper.cs">
+      <Link>ReflectionHelper.cs</Link>
+    </Compile>
+    <Compile Include="ActionEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionEditDialog.Designer.cs">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArrayComparer.cs" />
+    <Compile Include="ComObjectSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComObjectSelectionDialog.Designer.cs">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorInterfaces.cs" />
+    <Compile Include="Native\ImageList.cs" />
+    <Compile Include="Native\ImageListExtension.cs" />
+    <Compile Include="Native\NativeResource.cs" />
+    <Compile Include="OptionPanels\SecurityOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\SecurityOptionPanel.Designer.cs">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\RuntimeOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\RuntimeOptionPanel.Designer.cs">
+      <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\StartupOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\StartupOptionPanel.Designer.cs">
+      <DependentUpon>StartupOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\WrappingControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReorderableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DropDownCheckTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterDataEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterDataEditor.Designer.cs">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventActionFilterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterEditor.Designer.cs">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventActionFilterTimeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventActionFilterTimeEditor.Designer.cs">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventQueryList.cs" />
+    <Compile Include="Native\ControlExtension.cs" />
+    <Compile Include="CorrelatedTaskEvent.cs" />
+    <Compile Include="DialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListColumnEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListColumnEditor.Designer.cs">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Native\DisabledItemComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Native\ExtensionAttributeFor.NET_2.0.cs" />
+    <Compile Include="HelperMethods.cs" />
+    <Compile Include="Native\ADVAPI32.cs" />
+    <Compile Include="Native\BROWSEINFO.cs" />
+    <Compile Include="Native\ComboBox.cs" />
+    <Compile Include="Native\CredentialsDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DropDownCheckList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventViewerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventViewerDialog.Designer.cs">
+      <DependentUpon>EventViewerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventViewerControl.Designer.cs">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Native\CREDUI.cs" />
+    <Compile Include="Native\EnumUtil.cs" />
+    <Compile Include="Native\FolderBrowserDialog2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Native\GDI32.cs" />
+    <Compile Include="Native\Header.cs" />
+    <Compile Include="Native\InteropUtil.cs" />
+    <Compile Include="Native\KERNEL32.cs" />
+    <Compile Include="Native\ListView.cs" />
+    <Compile Include="Native\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Native\MapWindowPoints.cs" />
+    <Compile Include="Native\OLE32.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SafeHandles.cs" />
+    <Compile Include="Native\SHELL32.cs" />
+    <Compile Include="Native\SIZE.cs" />
+    <Compile Include="Native\SYSTEMTIME.cs" />
+    <Compile Include="Native\USER32.cs" />
+    <Compile Include="Native\Util.cs" />
+    <Compile Include="Native\UXTHEME.cs" />
+    <Compile Include="Native\VisualStylesRendererExtension.cs" />
+    <Compile Include="Native\NetworkListManager.cs" />
+    <Compile Include="Native\NetworkProfile.cs" />
+    <None Include="ComputerInfo.cs" />
+    <Compile Include="OptionPanels\ActionsOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\ActionsOptionPanel.Designer.cs">
+      <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\GeneralOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\GeneralOptionPanel.Designer.cs">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanel.Designer.cs">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanelHeaderLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\OptionPanelHeaderLabel.Designer.cs">
+      <DependentUpon>OptionPanelHeaderLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanels\TriggersOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionPanels\TriggersOptionPanel.Designer.cs">
+      <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SecEdShim.cs" />
+    <Compile Include="SystemEventEnumerator.cs" />
+    <Compile Include="TaskBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskBrowserDialog.Designer.cs">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskEditDialog.Designer.cs">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FullDateTimePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FullDateTimePicker.Designer.cs">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Native\AccountUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EditorProperties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TaskHistoryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskHistoryControl.Designer.cs">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskListView.Designer.cs">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskOptionsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskOptionsEditor.Designer.cs">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskPropertiesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskPropertiesControl.Designer.cs">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunTimesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskRunTimesControl.Designer.cs">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunTimesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskRunTimesDialog.Designer.cs">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskSchedulerWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskSchedulerWizard.Designer.cs">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskServiceConnectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskServiceConnectDialog.Designer.cs">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSpanExtension.cs" />
+    <Compile Include="TriggerEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TriggerEditDialog.Designer.cs">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ActionCollectionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ActionCollectionUI.Designer.cs">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\BaseTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\BaseTriggerUI.Designer.cs">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ComHandlerActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ComHandlerActionUI.Designer.cs">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\DailyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\DailyTriggerUI.Designer.cs">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\EmailActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\EmailActionUI.Designer.cs">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\EventTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\EventTriggerUI.Designer.cs">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ExecActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ExecActionUI.Designer.cs">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\IActionHandler.cs" />
+    <Compile Include="UIComponents\ITriggerHandler.cs" />
+    <Compile Include="UIComponents\MonthlyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\MonthlyTriggerUI.Designer.cs">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\ShowMessageActionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\ShowMessageActionUI.Designer.cs">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\TriggerCollectionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\TriggerCollectionUI.Designer.cs">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\WeeklyTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\WeeklyTriggerUI.Designer.cs">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskPropertiesControlDesigner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ActionEditDialog.fr.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionEditDialog.it.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionEditDialog.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionEditDialog.zh-CN.resx">
+      <DependentUpon>ActionEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.fr.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.it.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorProperties\Resources.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorProperties\Resources.fr.resx" />
+    <EmbeddedResource Include="EditorProperties\Resources.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterDataEditor.it.resx">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterDataEditor.resx">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterEditor.it.resx">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterEditor.resx">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterTimeEditor.it.resx">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterTimeEditor.resx">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerControl.fr.resx">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerControl.it.resx">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerControl.resx">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerDialog.resx">
+      <DependentUpon>EventViewerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.fr.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.zh-CN.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorProperties\Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListColumnEditor.fr.resx">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListColumnEditor.it.resx">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListColumnEditor.resx">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.resx">
+      <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.it.resx">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
+      <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.it.resx">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.resx">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.resx">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\RuntimeOptionPanel.resx">
+      <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\StartupOptionPanel.resx">
+      <DependentUpon>StartupOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.resx">
+      <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskBrowserDialog.it.resx">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskBrowserDialog.resx">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.fr.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.it.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.it.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorProperties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskHistoryControl.fr.resx">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskHistoryControl.it.resx">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskHistoryControl.resx">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.fr.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.it.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.zh-CN.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskOptionsEditor.it.resx">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskOptionsEditor.resx">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.de-DE.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.fr.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.it.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskPropertiesControl.zh-CN.resx">
+      <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.fr.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.it.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.zh-CN.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesDialog.fr.resx">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesDialog.it.resx">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesDialog.resx">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesDialog.zh-CN.resx">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.fr.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.it.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.zh-CN.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.fr.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.it.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.zh-CN.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.de-DE.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.fr.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.it.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
+      <DependentUpon>TriggerEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ActionCollectionUI.it.resx">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ActionCollectionUI.resx">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\BaseTriggerUI.fr.resx">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\BaseTriggerUI.it.resx">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\BaseTriggerUI.resx">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ComHandlerActionUI.fr.resx">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ComHandlerActionUI.it.resx">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ComHandlerActionUI.resx">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.de-DE.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.fr.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.it.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.resx">
+      <DependentUpon>DailyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EmailActionUI.fr.resx">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EmailActionUI.it.resx">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EmailActionUI.resx">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EventTriggerUI.fr.resx">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EventTriggerUI.it.resx">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EventTriggerUI.resx">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ExecActionUI.fr.resx">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ExecActionUI.it.resx">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ExecActionUI.resx">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.de-DE.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.fr.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.it.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.resx">
+      <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ShowMessageActionUI.fr.resx">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ShowMessageActionUI.it.resx">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\TriggerCollectionUI.it.resx">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\TriggerCollectionUI.resx">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de-DE.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.fr.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.it.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.resx">
+      <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="TaskEditor.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TaskEditor.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verbose.ico" />
+    <None Include="Resources\auditFail.ico" />
+    <None Include="Resources\auditSuccess.ico" />
+    <None Include="Resources\critical.ico" />
+    <None Include="Resources\d.ico" />
+    <None Include="Resources\disable.ico" />
+    <None Include="Resources\enable.ico" />
+    <None Include="Resources\end.ico" />
+    <None Include="Resources\error.ico" />
+    <None Include="Resources\filter.ico" />
+    <None Include="Resources\helpBook.ico" />
+    <None Include="Resources\info.ico" />
+    <None Include="Resources\infoBubble.ico" />
+    <None Include="Resources\question.ico" />
+    <None Include="Resources\refresh.ico" />
+    <None Include="Resources\run.ico" />
+    <None Include="Resources\ts.ico" />
+    <None Include="Resources\tsFolderClosed.ico" />
+    <None Include="Resources\tsFolderOpen.ico" />
+    <None Include="Resources\tsList.ico" />
+    <None Include="Resources\tsNew.ico" />
+    <None Include="Resources\warning.ico" />
+    <None Include="Resources\createBasicTask.bmp" />
+    <None Include="Resources\empty.bmp" />
+    <None Include="Resources\filter.bmp" />
+    <None Include="Resources\undo.bmp" />
+    <None Include="Resources\downArrow.bmp" />
+    <None Include="Resources\minus.bmp" />
+    <None Include="Resources\plus.bmp" />
+    <None Include="Resources\ts.bmp" />
+    <None Include="Resources\upArrow.bmp" />
+    <None Include="Resources\ActionTypeComHandler.png" />
+    <None Include="Resources\ActionTypeExecute.png" />
+    <None Include="Resources\ActionTypeSendEmail.png" />
+    <None Include="Resources\ActionTypeShowMessage.png" />
+    <None Include="Resources\TriggerTypeBoot.png" />
+    <None Include="Resources\TriggerTypeDaily.png" />
+    <None Include="Resources\TriggerTypeEvent.png" />
+    <None Include="Resources\TriggerTypeIdle.png" />
+    <None Include="Resources\TriggerTypeLogon.png" />
+    <None Include="Resources\TriggerTypeMonthly.png" />
+    <None Include="Resources\TriggerTypeMonthlyDOW.png" />
+    <None Include="Resources\TriggerTypeRegistration.png" />
+    <None Include="Resources\TriggerTypeSessionStateChange.png" />
+    <None Include="Resources\TriggerTypeStateDisabled.png" />
+    <None Include="Resources\TriggerTypeTime.png" />
+    <None Include="Resources\TriggerTypeUnknown.png" />
+    <None Include="Resources\TriggerTypeWeekly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskService.csproj">
+      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Name>TaskService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TaskDialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TaskControl.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-	<Target Name="AfterBuild">
-		<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
-		<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-		<!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
-	</Target>
+  <Target Name="AfterBuild">
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />
+    <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
+  </Target>
 </Project>

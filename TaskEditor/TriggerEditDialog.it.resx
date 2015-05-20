@@ -348,7 +348,7 @@
     <value></value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value></value>
+    <value>OK</value>
   </data>
   <data name="onEventTab.Text" xml:space="preserve">
     <value></value>
@@ -412,5 +412,14 @@
   </data>
   <data name="weeklyWedCheck.Text" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nome:</value>
+  </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>Proprietà</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>Valore</value>
   </data>
 </root>

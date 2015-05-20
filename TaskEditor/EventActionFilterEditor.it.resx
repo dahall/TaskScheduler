@@ -112,151 +112,96 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 15</value>
+  <data name="bySourceRadio.Text" xml:space="preserve">
+    <value>Da &amp;origine</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Specificare l'azione che eseguirà questa attività.</value>
-  </data>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Avviare un programma</value>
-  </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Invia una e-mail</value>
-  </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Visualizzare un messaggio</value>
-  </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Custom gestore</value>
-  </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Impostazioni</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Annulla</value>
-  </data>
-  <data name="actionsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 15</value>
-  </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Operazione:</value>
+  <data name="byLogRadio.Text" xml:space="preserve">
+    <value>Di &amp;log</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Nuova azione</value>
+    <value>Modifica filtro eventi</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Annulla</value>
   </data>
-  <data name="actionsCombo.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="computerText.Text" xml:space="preserve">
+    <value>&lt;Tutti i Computer&gt;</value>
   </data>
-  <data name="actionsLabel.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Origini &amp;evento:</value>
   </data>
-  <data name="cancelBtn.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>I registri &amp;eventi:</value>
   </data>
-  <data name="comCLSIDLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Per fornire un filtro eventi in forma di XPath, cliccare il checkbox "Modifica una query manualmente" qui sotto.</value>
   </data>
-  <data name="comDataLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="infoLevelCheckBox.Text" xml:space="preserve">
+    <value>&amp;Informazioni</value>
   </data>
-  <data name="comHandlerActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="filterTab.Text" xml:space="preserve">
+    <value>Filtro</value>
   </data>
-  <data name="comIntroLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="eventIDsText.Text" xml:space="preserve">
+    <value>&lt;Tutti gli Id Evento&gt;</value>
   </data>
-  <data name="comTab.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="editManuallyCheckBox.Text" xml:space="preserve">
+    <value>Modifica una &amp;query manualmente</value>
   </data>
-  <data name="emailActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="dataBtn.Text" xml:space="preserve">
+    <value>&amp;Filtri di dati...</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value></value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Livello di evento:</value>
   </data>
-  <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>&amp;Utente:</value>
   </data>
-  <data name="emailFromLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Parole c&amp;hiave:</value>
   </data>
-  <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="label7.Text" xml:space="preserve">
+    <value>&amp;Categoria attività:</value>
   </data>
-  <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value></value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>&amp;Evento include/esclude gli ID: ID inserire numeri e/o intervalli di ID separati da virgole. Per escludere i criteri, tipo un meno cantare prima. Per esempio 1,3,5-99-76</value>
   </data>
-  <data name="emailTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailTextLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailToLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execDirLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execProgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="getCLSIDButton.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="messageTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="okBtn.Text" xml:space="preserve">
+  <data name="okButton.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="okBtn.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="userText.Text" xml:space="preserve">
+    <value>&lt; Tutti gli Utenti &gt;</value>
   </data>
-  <data name="promptLabel.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="warningLevelCheckBox.Text" xml:space="preserve">
+    <value>&amp;Avviso</value>
   </data>
-  <data name="settingsGroup.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="wrapCheckBox.Text" xml:space="preserve">
+    <value>&amp;Avvolgere testo</value>
   </data>
-  <data name="settingsTabs.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="xmlTab.Text" xml:space="preserve">
+    <value>XML</value>
   </data>
-  <data name="showMessageActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
+  <data name="errorLevelCheckBox.Text" xml:space="preserve">
+    <value>E&amp;rrore</value>
+  </data>
+  <data name="criticalLevelCheckBox.Text" xml:space="preserve">
+    <value>Critica &amp; l</value>
+  </data>
+  <data name="clearButton.Text" xml:space="preserve">
+    <value>Cancell&amp;a</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Com&amp;puter:</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Re&amp;gistrati:</value>
+  </data>
+  <data name="verboseLevelCheckBox.Text" xml:space="preserve">
+    <value>Ver&amp;boso</value>
   </data>
 </root>

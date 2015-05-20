@@ -317,7 +317,7 @@
     <value>對於所選擇的選項，為指定的用戶必須提供密碼</value>
   </data>
   <data name="TaskCompatibility">
-    <value>AT service|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012</value>
+    <value>AT service|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
   </data>
   <data name="TimeSpanNotStarted">
     <value>未开始</value>
