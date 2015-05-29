@@ -112,23 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="triggerTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="triggerTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 9</value>
   </data>
   <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="triggerTypeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -139,7 +139,7 @@
     <value>triggerTypeLabel</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -160,7 +160,7 @@
     <value>triggerTypeCombo</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Parent" xml:space="preserve">
     <value>$this</value>
@@ -171,419 +171,35 @@
   <data name="settingsTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>Buttons</value>
   </data>
-  <data name="schedStartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 7</value>
+  <data name="calendarTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="schedStartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
-  </data>
-  <data name="schedStartDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="schedStartDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Name" xml:space="preserve">
-    <value>schedStartDatePicker</value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedStartDatePicker.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 7</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>2, 153</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="schedTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
-    <value>Buttons</value>
-  </data>
-  <data name="oneTimeTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="oneTimeTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="oneTimeTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 102</value>
-  </data>
-  <data name="oneTimeTab.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Name" xml:space="preserve">
-    <value>oneTimeTab</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.Parent" xml:space="preserve">
-    <value>schedTabControl</value>
-  </data>
-  <data name="&gt;&gt;oneTimeTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dailyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="calendarTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="dailyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="calendarTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
-  <data name="dailyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 55</value>
+  <data name="calendarTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>512, 161</value>
   </data>
-  <data name="dailyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+  <data name="calendarTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>612, 162</value>
+  </data>
+  <data name="calendarTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Name" xml:space="preserve">
-    <value>dailyTriggerUI1</value>
+  <data name="&gt;&gt;calendarTriggerUI1.Name" xml:space="preserve">
+    <value>calendarTriggerUI1</value>
   </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="&gt;&gt;dailyTriggerUI1.Parent" xml:space="preserve">
-    <value>dailyTab</value>
-  </data>
-  <data name="&gt;&gt;dailyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dailyTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="dailyTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="dailyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 105</value>
-  </data>
-  <data name="dailyTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Name" xml:space="preserve">
-    <value>dailyTab</value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dailyTab.Parent" xml:space="preserve">
-    <value>schedTabControl</value>
-  </data>
-  <data name="&gt;&gt;dailyTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="weeklyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="weeklyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="weeklyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 99</value>
-  </data>
-  <data name="weeklyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Name" xml:space="preserve">
-    <value>weeklyTriggerUI1</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.Parent" xml:space="preserve">
-    <value>weeklyTab</value>
-  </data>
-  <data name="&gt;&gt;weeklyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="weeklyTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="weeklyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 105</value>
-  </data>
-  <data name="weeklyTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Name" xml:space="preserve">
-    <value>weeklyTab</value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.Parent" xml:space="preserve">
-    <value>schedTabControl</value>
-  </data>
-  <data name="&gt;&gt;weeklyTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="monthlyTriggerUI1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="monthlyTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="monthlyTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="monthlyTriggerUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="monthlyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 91</value>
-  </data>
-  <data name="monthlyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Name" xml:space="preserve">
-    <value>monthlyTriggerUI1</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.Parent" xml:space="preserve">
-    <value>monthlyTab</value>
-  </data>
-  <data name="&gt;&gt;monthlyTriggerUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="monthlyTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="monthlyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 105</value>
-  </data>
-  <data name="monthlyTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Name" xml:space="preserve">
-    <value>monthlyTab</value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.Parent" xml:space="preserve">
-    <value>schedTabControl</value>
-  </data>
-  <data name="&gt;&gt;monthlyTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="schedTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="schedTabControl.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 1</value>
-  </data>
-  <data name="schedTabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
-  </data>
-  <data name="schedTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 111</value>
-  </data>
-  <data name="schedTabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Name" xml:space="preserve">
-    <value>schedTabControl</value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.Parent" xml:space="preserve">
-    <value>schedGroup</value>
-  </data>
-  <data name="&gt;&gt;schedTabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="schedGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 36</value>
-  </data>
-  <data name="schedGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 133</value>
-  </data>
-  <data name="schedGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Name" xml:space="preserve">
-    <value>schedGroup</value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedGroup.Parent" xml:space="preserve">
+  <data name="&gt;&gt;calendarTriggerUI1.Parent" xml:space="preserve">
     <value>scheduleTab</value>
   </data>
-  <data name="&gt;&gt;schedGroup.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="schedStartLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedStartLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="schedStartLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 10</value>
-  </data>
-  <data name="schedStartLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
-  </data>
-  <data name="schedStartLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Name" xml:space="preserve">
-    <value>schedStartLabel</value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedStartLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="schedMonthlyRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedMonthlyRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="schedMonthlyRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 83</value>
-  </data>
-  <data name="schedMonthlyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 19</value>
-  </data>
-  <data name="schedMonthlyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Monthly</value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Name" xml:space="preserve">
-    <value>schedMonthlyRadio</value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedMonthlyRadio.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="schedWeeklyRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedWeeklyRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="schedWeeklyRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 58</value>
-  </data>
-  <data name="schedWeeklyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 19</value>
-  </data>
-  <data name="schedWeeklyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Weekly</value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Name" xml:space="preserve">
-    <value>schedWeeklyRadio</value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedWeeklyRadio.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="schedDailyRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedDailyRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="schedDailyRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 33</value>
-  </data>
-  <data name="schedDailyRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 19</value>
-  </data>
-  <data name="schedDailyRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Daily</value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Name" xml:space="preserve">
-    <value>schedDailyRadio</value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedDailyRadio.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="schedOneRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="schedOneRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="schedOneRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 8</value>
-  </data>
-  <data name="schedOneRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 19</value>
-  </data>
-  <data name="schedOneRadio.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;calendarTriggerUI1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>One time</value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Name" xml:space="preserve">
-    <value>schedOneRadio</value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="&gt;&gt;schedOneRadio.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="scheduleTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
@@ -601,7 +217,7 @@
     <value>scheduleTab</value>
   </data>
   <data name="&gt;&gt;scheduleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;scheduleTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -625,7 +241,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -655,7 +271,7 @@
     <value>logonLocalRadio</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -685,7 +301,7 @@
     <value>logonRemoteRadio</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
@@ -694,7 +310,7 @@
     <value>2</value>
   </data>
   <data name="logonRemotePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 66</value>
+    <value>4, 67</value>
   </data>
   <data name="logonRemotePanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>604, 98</value>
@@ -706,7 +322,7 @@
     <value>logonRemotePanel</value>
   </data>
   <data name="&gt;&gt;logonRemotePanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonRemotePanel.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -718,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonChgUserBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 32</value>
+    <value>390, 33</value>
   </data>
   <data name="logonChgUserBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 27</value>
@@ -733,7 +349,7 @@
     <value>logonChgUserBtn</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -748,7 +364,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonUserLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 38</value>
+    <value>183, 39</value>
   </data>
   <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 15</value>
@@ -763,7 +379,7 @@
     <value>logonUserLabel</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -778,7 +394,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonSpecUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 36</value>
+    <value>7, 37</value>
   </data>
   <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 19</value>
@@ -793,7 +409,7 @@
     <value>logonSpecUserRadio</value>
   </data>
   <data name="&gt;&gt;logonSpecUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonSpecUserRadio.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -808,7 +424,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonAnyUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
+    <value>7, 9</value>
   </data>
   <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 19</value>
@@ -823,7 +439,7 @@
     <value>logonAnyUserRadio</value>
   </data>
   <data name="&gt;&gt;logonAnyUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonAnyUserRadio.Parent" xml:space="preserve">
     <value>logonTab</value>
@@ -838,7 +454,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>624, 172</value>
   </data>
   <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -847,7 +463,7 @@
     <value>logonTab</value>
   </data>
   <data name="&gt;&gt;logonTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -862,7 +478,7 @@
     <value>NoControl</value>
   </data>
   <data name="startupIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+    <value>4, 5</value>
   </data>
   <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 15</value>
@@ -877,7 +493,7 @@
     <value>startupIntroLabel</value>
   </data>
   <data name="&gt;&gt;startupIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;startupIntroLabel.Parent" xml:space="preserve">
     <value>startupTab</value>
@@ -889,7 +505,7 @@
     <value>4, 5</value>
   </data>
   <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>624, 172</value>
   </data>
   <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -898,7 +514,7 @@
     <value>startupTab</value>
   </data>
   <data name="&gt;&gt;startupTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;startupTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -913,7 +529,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>4, 4</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>503, 15</value>
@@ -928,7 +544,7 @@
     <value>label8</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>idleTab</value>
@@ -940,7 +556,7 @@
     <value>4, 5</value>
   </data>
   <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>624, 172</value>
   </data>
   <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -949,7 +565,7 @@
     <value>idleTab</value>
   </data>
   <data name="&gt;&gt;idleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;idleTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -964,13 +580,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 5</value>
+    <value>4, 6</value>
   </data>
   <data name="eventTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>516, 96</value>
   </data>
   <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 171</value>
+    <value>622, 158</value>
   </data>
   <data name="eventTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -979,7 +595,7 @@
     <value>eventTriggerUI1</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
     <value>onEventTab</value>
@@ -991,7 +607,7 @@
     <value>4, 5</value>
   </data>
   <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>624, 172</value>
   </data>
   <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1000,7 +616,7 @@
     <value>onEventTab</value>
   </data>
   <data name="&gt;&gt;onEventTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onEventTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -1021,7 +637,7 @@
     <value>113</value>
   </data>
   <data name="customPropsListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>7, 36</value>
   </data>
   <data name="customPropsListView.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 135</value>
@@ -1033,7 +649,7 @@
     <value>customPropsListView</value>
   </data>
   <data name="&gt;&gt;customPropsListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customPropsListView.Parent" xml:space="preserve">
     <value>customTab</value>
@@ -1042,7 +658,7 @@
     <value>0</value>
   </data>
   <data name="customNameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 4</value>
+    <value>61, 6</value>
   </data>
   <data name="customNameText.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 23</value>
@@ -1054,7 +670,7 @@
     <value>customNameText</value>
   </data>
   <data name="&gt;&gt;customNameText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customNameText.Parent" xml:space="preserve">
     <value>customTab</value>
@@ -1065,8 +681,11 @@
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 7</value>
+    <value>4, 9</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 15</value>
@@ -1081,7 +700,7 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>customTab</value>
@@ -1102,7 +721,7 @@
     <value>customTab</value>
   </data>
   <data name="&gt;&gt;customTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customTab.Parent" xml:space="preserve">
     <value>settingsTabControl</value>
@@ -1129,7 +748,7 @@
     <value>settingsTabControl</value>
   </data>
   <data name="&gt;&gt;settingsTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;settingsTabControl.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1153,7 +772,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1177,7 +796,7 @@
     <value>stopIfRunsSpan</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.7.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1201,7 +820,7 @@
     <value>durationSpan</value>
   </data>
   <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.7.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1225,7 +844,7 @@
     <value>repeatSpan</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.7.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1249,7 +868,7 @@
     <value>delaySpan</value>
   </data>
   <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.4.27427, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.7.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
   </data>
   <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1276,7 +895,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1303,7 +922,7 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.0.25977, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.3.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1333,7 +952,7 @@
     <value>durationLabel</value>
   </data>
   <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1363,7 +982,7 @@
     <value>stopAfterDurationCheckBox</value>
   </data>
   <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1393,7 +1012,7 @@
     <value>enabledCheckBox</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1423,7 +1042,7 @@
     <value>expireCheckBox</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1453,7 +1072,7 @@
     <value>activateCheckBox</value>
   </data>
   <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1483,7 +1102,7 @@
     <value>stopIfRunsCheckBox</value>
   </data>
   <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1513,7 +1132,7 @@
     <value>repeatCheckBox</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1543,7 +1162,7 @@
     <value>delayCheckBox</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -1567,7 +1186,7 @@
     <value>advSettingsGroup</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1597,7 +1216,7 @@
     <value>cancelBtn</value>
   </data>
   <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1627,7 +1246,7 @@
     <value>okBtn</value>
   </data>
   <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1635,7 +1254,7 @@
   <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -1660,18 +1279,18 @@
     <value>propNameCol</value>
   </data>
   <data name="&gt;&gt;propNameCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;propValCol.Name" xml:space="preserve">
     <value>propValCol</value>
   </data>
   <data name="&gt;&gt;propValCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TriggerEditDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

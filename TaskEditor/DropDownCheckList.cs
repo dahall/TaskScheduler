@@ -81,6 +81,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				privateSet = true;
+				this.checkedListBox1.BeginUpdate();
 				for (int i = 0; i < checkedListBox1.Items.Count; i++)
 				{
 					long? val = null;
@@ -95,6 +96,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						this.checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
 				}
+				this.checkedListBox1.EndUpdate();
 				privateSet = false;
 				CheckedItemsChanged();
 			}
@@ -133,6 +135,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return this.checkedListBox1.MultiColumn; }
 			set { this.checkedListBox1.MultiColumn = value; }
 		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether at least one item must be checked.
+		/// </summary>
+		/// <value><c>true</c> if at least one item must be checked; otherwise, <c>false</c>.</value>
+		[Category("Behavior"), DefaultValue(false)]
+		public bool RequireAtLeastOneCheckedItem { get; set; }
 
 		/// <summary>
 		/// Gets the selected items.
@@ -369,18 +378,24 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!privateSet)
 			{
 				privateSet = true;
-				if (e.Index == 0 && !string.IsNullOrEmpty(CheckAllText) && this.checkedListBox1.Items.Count > 1)
+				bool hasCheckAll = !string.IsNullOrEmpty(CheckAllText);
+				bool chk = e.NewValue == CheckState.Checked;
+				this.checkedListBox1.BeginUpdate();
+				if (e.Index == 0 && hasCheckAll && this.checkedListBox1.Items.Count > 1)
 				{
-					bool chk = e.NewValue == CheckState.Checked;
-					if (!chk && AllowOnlyOneCheckedItem) this.SetItemChecked(1, true);
-					for (int i = chk ? 1 : 2; i < this.checkedListBox1.Items.Count; i++)
+					for (int i = 1; i < this.checkedListBox1.Items.Count; i++)
 						this.SetItemChecked(i, chk);
+					if (!chk && RequireAtLeastOneCheckedItem)
+					{
+						this.SetItemChecked(0, false);
+						this.SetItemChecked(1, true);
+					}
 				}
 				else
 				{
 					if (AllowOnlyOneCheckedItem)
 					{
-						if (e.NewValue == CheckState.Checked)
+						if (chk)
 						{
 							foreach (var i in this.checkedListBox1.CheckedIndices)
 								this.SetItemChecked((int)i, false);
@@ -390,13 +405,26 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 					else
 					{
+						if (!chk && RequireAtLeastOneCheckedItem && this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index)
+							e.NewValue = CheckState.Checked;
+						if (hasCheckAll)
+						{
+							if (!chk && this.GetItemChecked(0))
+								this.SetItemChecked(0, false);
+							else if (chk && !this.GetItemChecked(0))
+							{
+								bool allChecked = true;
+								for (int i = 1; i < this.checkedListBox1.Items.Count; i++)
+									if (i != e.Index && !this.GetItemChecked(i)) { allChecked = false; break; }
+								if (allChecked)
+									this.SetItemChecked(0, true);
+							}
+						}
 						if (this.checkedListBox1.IsHandleCreated)
 							this.BeginInvoke((MethodInvoker)(() => CheckedItemsChanged()));
-						//onCheckTimer.Start();
-						//if (e.NewValue == CheckState.Unchecked && this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index)
-						//	e.NewValue = CheckState.Checked;
 					}
 				}
+				this.checkedListBox1.EndUpdate();
 				privateSet = false;
 			}
 			//base.PreventPopupHide = this.checkedListBox1.CheckedIndices.Count == 1 && this.checkedListBox1.CheckedIndices[0] == e.Index && e.NewValue == CheckState.Unchecked;

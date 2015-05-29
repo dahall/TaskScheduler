@@ -1792,6 +1792,8 @@ namespace Microsoft.Win32.TaskScheduler
 				try { this.RunOnLastWeekOfMonth = ((MonthlyDOWTrigger)sourceTrigger).RunOnLastWeekOfMonth; } catch { }
 				this.WeeksOfMonth = ((MonthlyDOWTrigger)sourceTrigger).WeeksOfMonth;
 			}
+			if (sourceTrigger.TriggerType == TaskTriggerType.Monthly)
+				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
 		}
 
 		/// <summary>
@@ -2121,6 +2123,8 @@ namespace Microsoft.Win32.TaskScheduler
 				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
 				try { this.RunOnLastDayOfMonth = ((MonthlyTrigger)sourceTrigger).RunOnLastDayOfMonth; } catch { }
 			}
+			if (sourceTrigger.TriggerType == TaskTriggerType.MonthlyDOW)
+				this.MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
 		}
 
 		/// <summary>
@@ -2692,7 +2696,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task at a specific date and time.
 	/// </summary>
-	public sealed class TimeTrigger : Trigger, ITriggerDelay
+	public sealed class TimeTrigger : Trigger, ITriggerDelay, ICalendarTrigger
 	{
 		/// <summary>
 		/// Creates an unbound instance of a <see cref="TimeTrigger"/>.
