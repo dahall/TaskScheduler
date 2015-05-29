@@ -21,6 +21,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private bool isV2;
 		private bool onAssignment = false;
+		private bool showCustom = false;
 		private Trigger trigger;
 		private List<DropDownCheckListItem> triggerComboItems = new List<DropDownCheckListItem>(12);
 		private bool useUnifiedSchedulingEngine = false;
@@ -41,6 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			InitializeComponent();
 
+			showCustom = trigger != null && (trigger.TriggerType == TaskTriggerType.Custom);
 			this.SupportV1Only = supportV1Only;
 
 			// Populate combo boxes
@@ -133,24 +135,12 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (trigger.TriggerType)
 				{
 					case TaskTriggerType.Time:
-						schedOneRadio.Checked = true;
-						SetSchedTrigger();
-						break;
 					case TaskTriggerType.Daily:
-						schedDailyRadio.Checked = true;
-						SetSchedTrigger();
-						dailyTriggerUI1.Trigger = trigger;
-						break;
 					case TaskTriggerType.Weekly:
-						schedWeeklyRadio.Checked = true;
-						SetSchedTrigger();
-						weeklyTriggerUI1.Trigger = trigger;
-						break;
 					case TaskTriggerType.Monthly:
 					case TaskTriggerType.MonthlyDOW:
-						schedMonthlyRadio.Checked = true;
-						SetSchedTrigger();
-						monthlyTriggerUI1.Trigger = trigger;
+						TriggerView = TaskTriggerDisplayType.Schedule;
+						calendarTriggerUI1.Trigger = trigger;
 						break;
 					case TaskTriggerType.Logon:
 						TriggerView = TaskTriggerDisplayType.Logon;
@@ -223,7 +213,8 @@ namespace Microsoft.Win32.TaskScheduler
 				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
 				if (TriggerView != TaskTriggerDisplayType.Schedule)
 				{
-					activateDatePicker.Enabled = activateCheckBox.Checked = trigger.StartBoundary != DateTime.MinValue;
+					activateCheckBox.Checked = trigger.StartBoundary != DateTime.MinValue;
+					activateDatePicker.Enabled = activateCheckBox.Checked && TriggerView != TaskTriggerDisplayType.Custom;
 					if (activateCheckBox.Checked)
 						activateDatePicker.Value = trigger.StartBoundary;
 				}
@@ -255,7 +246,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value != useUnifiedSchedulingEngine)
 				{
 					useUnifiedSchedulingEngine = value;
-					schedMonthlyRadio.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled =
+					calendarTriggerUI1.UseUnifiedSchedulingEngine = value;
+					stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled =
 						repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled =
 						durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
 				}
@@ -293,6 +285,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 				trigger.StartBoundary = activateDatePicker.Value;
+		}
+
+		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
+		{
+			trigger = calendarTriggerUI1.Trigger;
 		}
 
 		private void cancelBtn_Click(object sender, EventArgs e)
@@ -370,24 +367,6 @@ namespace Microsoft.Win32.TaskScheduler
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
 		}
 
-		private void monthlyTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				Trigger newTrigger = null;
-				if (monthlyTriggerUI1.TriggerType == TaskTriggerType.Monthly)
-					newTrigger = new MonthlyTrigger();
-				else
-					newTrigger = new MonthlyDOWTrigger();
-				if (newTrigger != null)
-				{
-					if (trigger != null)
-						newTrigger.CopyProperties(trigger);
-					this.Trigger = newTrigger;
-				}
-			}
-		}
-
 		private void okBtn_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
@@ -434,6 +413,8 @@ namespace Microsoft.Win32.TaskScheduler
 			ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out allVal);
 			if (!isV2)
 				triggerComboItems.RemoveRange(4, 7);
+			if (!showCustom)
+				triggerComboItems.RemoveAt(triggerComboItems.Count - 1);
 			triggerTypeCombo.BeginUpdate();
 			triggerTypeCombo.DataSource = null;
 			triggerTypeCombo.DisplayMember = "Text";
@@ -442,65 +423,17 @@ namespace Microsoft.Win32.TaskScheduler
 			triggerTypeCombo.EndUpdate();
 
 			// Enable/disable version specific features
+			calendarTriggerUI1.IsV2 = isV2;
 			stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
-			dailyTriggerUI1.IsV2 = weeklyTriggerUI1.IsV2 = monthlyTriggerUI1.IsV2 = isV2;
 
 			// Set date/time controls
-			schedStartDatePicker.UTCPrompt = activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
-			schedStartDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
+			activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
 			activateDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.ShortTime;
 			expireDatePicker.TimeFormat = (isV2) ? FullDateTimePickerTimeFormat.LongTime : FullDateTimePickerTimeFormat.Hidden;
 
 			// Disable logon trigger options
 			foreach (Control c in logonTab.Controls)
 				c.Enabled = isV2;
-		}
-
-		private void schedOneRadio_CheckedChanged(object sender, EventArgs e)
-		{
-			if (((RadioButton)sender).Checked)
-			{
-				Trigger newTrigger = null;
-				if (sender == schedOneRadio)
-				{
-					schedTabControl.SelectedTab = oneTimeTab;
-					if (!onAssignment) newTrigger = new TimeTrigger();
-				}
-				else if (sender == schedDailyRadio)
-				{
-					schedTabControl.SelectedTab = dailyTab;
-					if (!onAssignment) newTrigger = new DailyTrigger();
-				}
-				else if (sender == schedWeeklyRadio)
-				{
-					schedTabControl.SelectedTab = weeklyTab;
-					if (!onAssignment) newTrigger = new WeeklyTrigger();
-				}
-				else if (sender == schedMonthlyRadio)
-				{
-					schedTabControl.SelectedTab = monthlyTab;
-					monthlyTriggerUI1_TriggerTypeChanged(this, EventArgs.Empty);
-				}
-
-				if (newTrigger != null && !onAssignment)
-				{
-					if (trigger != null)
-						newTrigger.CopyProperties(trigger);
-					this.Trigger = newTrigger;
-				}
-			}
-		}
-
-		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-				trigger.StartBoundary = schedStartDatePicker.Value;
-		}
-
-		private void SetSchedTrigger()
-		{
-			TriggerView = TaskTriggerDisplayType.Schedule;
-			schedStartDatePicker.Value = trigger.StartBoundary;
 		}
 
 		private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -534,12 +467,6 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerDisplayType.Schedule:
 				default:
 					settingsTabControl.SelectedTab = scheduleTab;
-					if (!onAssignment)
-					{
-						schedOneRadio.Checked = schedMonthlyRadio.Checked = schedDailyRadio.Checked = schedWeeklyRadio.Checked = false;
-						schedOneRadio.Checked = true;
-						return;
-					}
 					break;
 				case TaskTriggerDisplayType.Logon:
 					logonRemotePanel.Visible = false;

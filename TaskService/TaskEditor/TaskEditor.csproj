@@ -356,6 +356,12 @@
     <Compile Include="UIComponents\BaseTriggerUI.Designer.cs">
       <DependentUpon>BaseTriggerUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIComponents\CalendarTriggerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\CalendarTriggerUI.Designer.cs">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIComponents\ComHandlerActionUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -683,6 +689,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\BaseTriggerUI.resx">
       <DependentUpon>BaseTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.de-DE.resx">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.fr.resx">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.it.resx">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.resx">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.zh-CN.resx">
+      <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ComHandlerActionUI.fr.resx">
       <DependentUpon>ComHandlerActionUI.cs</DependentUpon>

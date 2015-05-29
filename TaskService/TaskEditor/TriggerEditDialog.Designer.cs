@@ -34,22 +34,7 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.settingsTabControl = new System.Windows.Forms.TabControl();
 			this.scheduleTab = new System.Windows.Forms.TabPage();
-			this.schedStartDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.schedGroup = new System.Windows.Forms.GroupBox();
-			this.schedTabControl = new System.Windows.Forms.TabControl();
-			this.oneTimeTab = new System.Windows.Forms.TabPage();
-			this.dailyTab = new System.Windows.Forms.TabPage();
-			this.dailyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI();
-			this.weeklyTab = new System.Windows.Forms.TabPage();
-			this.weeklyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI();
-			this.monthlyTab = new System.Windows.Forms.TabPage();
-			this.monthlyTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI();
-			this.schedStartLabel = new System.Windows.Forms.Label();
-			this.schedMonthlyRadio = new System.Windows.Forms.RadioButton();
-			this.schedWeeklyRadio = new System.Windows.Forms.RadioButton();
-			this.schedDailyRadio = new System.Windows.Forms.RadioButton();
-			this.schedOneRadio = new System.Windows.Forms.RadioButton();
+			this.calendarTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI();
 			this.logonTab = new System.Windows.Forms.TabPage();
 			this.logonRemotePanel = new System.Windows.Forms.Panel();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -66,6 +51,9 @@
 			this.onEventTab = new System.Windows.Forms.TabPage();
 			this.eventTriggerUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI();
 			this.customTab = new System.Windows.Forms.TabPage();
+			this.customPropsListView = new System.Windows.Forms.ListView();
+			this.propNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.propValCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.customNameText = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.advSettingsGroup = new System.Windows.Forms.GroupBox();
@@ -85,17 +73,9 @@
 			this.delayCheckBox = new System.Windows.Forms.CheckBox();
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
-			this.customPropsListView = new System.Windows.Forms.ListView();
-			this.propNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.propValCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
-			this.schedGroup.SuspendLayout();
-			this.schedTabControl.SuspendLayout();
-			this.dailyTab.SuspendLayout();
-			this.weeklyTab.SuspendLayout();
-			this.monthlyTab.SuspendLayout();
 			this.logonTab.SuspendLayout();
 			this.logonRemotePanel.SuspendLayout();
 			this.startupTab.SuspendLayout();
@@ -141,128 +121,18 @@
 			// 
 			// scheduleTab
 			// 
-			this.scheduleTab.Controls.Add(this.schedStartDatePicker);
-			this.scheduleTab.Controls.Add(this.groupBox3);
-			this.scheduleTab.Controls.Add(this.schedGroup);
-			this.scheduleTab.Controls.Add(this.schedStartLabel);
-			this.scheduleTab.Controls.Add(this.schedMonthlyRadio);
-			this.scheduleTab.Controls.Add(this.schedWeeklyRadio);
-			this.scheduleTab.Controls.Add(this.schedDailyRadio);
-			this.scheduleTab.Controls.Add(this.schedOneRadio);
+			this.scheduleTab.Controls.Add(this.calendarTriggerUI1);
 			resources.ApplyResources(this.scheduleTab, "scheduleTab");
 			this.scheduleTab.Name = "scheduleTab";
 			this.scheduleTab.UseVisualStyleBackColor = true;
 			// 
-			// schedStartDatePicker
+			// calendarTriggerUI1
 			// 
-			resources.ApplyResources(this.schedStartDatePicker, "schedStartDatePicker");
-			this.schedStartDatePicker.Name = "schedStartDatePicker";
-			this.schedStartDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 46, 672);
-			this.schedStartDatePicker.ValueChanged += new System.EventHandler(this.schedStartDatePicker_ValueChanged);
-			// 
-			// groupBox3
-			// 
-			resources.ApplyResources(this.groupBox3, "groupBox3");
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.TabStop = false;
-			// 
-			// schedGroup
-			// 
-			this.schedGroup.Controls.Add(this.schedTabControl);
-			resources.ApplyResources(this.schedGroup, "schedGroup");
-			this.schedGroup.Name = "schedGroup";
-			this.schedGroup.TabStop = false;
-			// 
-			// schedTabControl
-			// 
-			resources.ApplyResources(this.schedTabControl, "schedTabControl");
-			this.schedTabControl.Controls.Add(this.oneTimeTab);
-			this.schedTabControl.Controls.Add(this.dailyTab);
-			this.schedTabControl.Controls.Add(this.weeklyTab);
-			this.schedTabControl.Controls.Add(this.monthlyTab);
-			this.schedTabControl.Name = "schedTabControl";
-			this.schedTabControl.SelectedIndex = 0;
-			this.schedTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-			this.schedTabControl.TabStop = false;
-			// 
-			// oneTimeTab
-			// 
-			resources.ApplyResources(this.oneTimeTab, "oneTimeTab");
-			this.oneTimeTab.Name = "oneTimeTab";
-			this.oneTimeTab.UseVisualStyleBackColor = true;
-			// 
-			// dailyTab
-			// 
-			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
-			resources.ApplyResources(this.dailyTab, "dailyTab");
-			this.dailyTab.Name = "dailyTab";
-			this.dailyTab.UseVisualStyleBackColor = true;
-			// 
-			// dailyTriggerUI1
-			// 
-			resources.ApplyResources(this.dailyTriggerUI1, "dailyTriggerUI1");
-			this.dailyTriggerUI1.Name = "dailyTriggerUI1";
-			this.dailyTriggerUI1.ShowStartBoundary = false;
-			// 
-			// weeklyTab
-			// 
-			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
-			resources.ApplyResources(this.weeklyTab, "weeklyTab");
-			this.weeklyTab.Name = "weeklyTab";
-			this.weeklyTab.UseVisualStyleBackColor = true;
-			// 
-			// weeklyTriggerUI1
-			// 
-			resources.ApplyResources(this.weeklyTriggerUI1, "weeklyTriggerUI1");
-			this.weeklyTriggerUI1.Name = "weeklyTriggerUI1";
-			this.weeklyTriggerUI1.ShowStartBoundary = false;
-			// 
-			// monthlyTab
-			// 
-			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
-			resources.ApplyResources(this.monthlyTab, "monthlyTab");
-			this.monthlyTab.Name = "monthlyTab";
-			this.monthlyTab.UseVisualStyleBackColor = true;
-			// 
-			// monthlyTriggerUI1
-			// 
-			resources.ApplyResources(this.monthlyTriggerUI1, "monthlyTriggerUI1");
-			this.monthlyTriggerUI1.Name = "monthlyTriggerUI1";
-			this.monthlyTriggerUI1.ShowStartBoundary = false;
-			this.monthlyTriggerUI1.TriggerTypeChanged += new System.EventHandler(this.monthlyTriggerUI1_TriggerTypeChanged);
-			// 
-			// schedStartLabel
-			// 
-			resources.ApplyResources(this.schedStartLabel, "schedStartLabel");
-			this.schedStartLabel.Name = "schedStartLabel";
-			// 
-			// schedMonthlyRadio
-			// 
-			resources.ApplyResources(this.schedMonthlyRadio, "schedMonthlyRadio");
-			this.schedMonthlyRadio.Name = "schedMonthlyRadio";
-			this.schedMonthlyRadio.UseVisualStyleBackColor = true;
-			this.schedMonthlyRadio.CheckedChanged += new System.EventHandler(this.schedOneRadio_CheckedChanged);
-			// 
-			// schedWeeklyRadio
-			// 
-			resources.ApplyResources(this.schedWeeklyRadio, "schedWeeklyRadio");
-			this.schedWeeklyRadio.Name = "schedWeeklyRadio";
-			this.schedWeeklyRadio.UseVisualStyleBackColor = true;
-			this.schedWeeklyRadio.CheckedChanged += new System.EventHandler(this.schedOneRadio_CheckedChanged);
-			// 
-			// schedDailyRadio
-			// 
-			resources.ApplyResources(this.schedDailyRadio, "schedDailyRadio");
-			this.schedDailyRadio.Name = "schedDailyRadio";
-			this.schedDailyRadio.UseVisualStyleBackColor = true;
-			this.schedDailyRadio.CheckedChanged += new System.EventHandler(this.schedOneRadio_CheckedChanged);
-			// 
-			// schedOneRadio
-			// 
-			resources.ApplyResources(this.schedOneRadio, "schedOneRadio");
-			this.schedOneRadio.Name = "schedOneRadio";
-			this.schedOneRadio.UseVisualStyleBackColor = true;
-			this.schedOneRadio.CheckedChanged += new System.EventHandler(this.schedOneRadio_CheckedChanged);
+			resources.ApplyResources(this.calendarTriggerUI1, "calendarTriggerUI1");
+			this.calendarTriggerUI1.IsV2 = false;
+			this.calendarTriggerUI1.Name = "calendarTriggerUI1";
+			this.calendarTriggerUI1.ShowStartBoundary = false;
+			this.calendarTriggerUI1.TriggerTypeChanged += new System.EventHandler(this.calendarTriggerUI1_TriggerTypeChanged);
 			// 
 			// logonTab
 			// 
@@ -371,6 +241,28 @@
 			resources.ApplyResources(this.customTab, "customTab");
 			this.customTab.Name = "customTab";
 			this.customTab.UseVisualStyleBackColor = true;
+			// 
+			// customPropsListView
+			// 
+			this.customPropsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.propNameCol,
+            this.propValCol});
+			this.customPropsListView.FullRowSelect = true;
+			this.customPropsListView.GridLines = true;
+			this.customPropsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			resources.ApplyResources(this.customPropsListView, "customPropsListView");
+			this.customPropsListView.MultiSelect = false;
+			this.customPropsListView.Name = "customPropsListView";
+			this.customPropsListView.UseCompatibleStateImageBehavior = false;
+			this.customPropsListView.View = System.Windows.Forms.View.Details;
+			// 
+			// propNameCol
+			// 
+			resources.ApplyResources(this.propNameCol, "propNameCol");
+			// 
+			// propValCol
+			// 
+			resources.ApplyResources(this.propValCol, "propValCol");
 			// 
 			// customNameText
 			// 
@@ -510,28 +402,6 @@
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
-			// customPropsListView
-			// 
-			this.customPropsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.propNameCol,
-            this.propValCol});
-			this.customPropsListView.FullRowSelect = true;
-			this.customPropsListView.GridLines = true;
-			this.customPropsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			resources.ApplyResources(this.customPropsListView, "customPropsListView");
-			this.customPropsListView.MultiSelect = false;
-			this.customPropsListView.Name = "customPropsListView";
-			this.customPropsListView.UseCompatibleStateImageBehavior = false;
-			this.customPropsListView.View = System.Windows.Forms.View.Details;
-			// 
-			// propNameCol
-			// 
-			resources.ApplyResources(this.propNameCol, "propNameCol");
-			// 
-			// propValCol
-			// 
-			resources.ApplyResources(this.propValCol, "propValCol");
-			// 
 			// TriggerEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
@@ -551,12 +421,6 @@
 			this.groupBox1.ResumeLayout(false);
 			this.settingsTabControl.ResumeLayout(false);
 			this.scheduleTab.ResumeLayout(false);
-			this.scheduleTab.PerformLayout();
-			this.schedGroup.ResumeLayout(false);
-			this.schedTabControl.ResumeLayout(false);
-			this.dailyTab.ResumeLayout(false);
-			this.weeklyTab.ResumeLayout(false);
-			this.monthlyTab.ResumeLayout(false);
 			this.logonTab.ResumeLayout(false);
 			this.logonTab.PerformLayout();
 			this.logonRemotePanel.ResumeLayout(false);
@@ -582,21 +446,9 @@
 		private System.Windows.Forms.TabControl settingsTabControl;
 		private System.Windows.Forms.TabPage scheduleTab;
 		private System.Windows.Forms.TabPage logonTab;
-		private System.Windows.Forms.RadioButton schedOneRadio;
-		private System.Windows.Forms.Label schedStartLabel;
-		private System.Windows.Forms.RadioButton schedMonthlyRadio;
-		private System.Windows.Forms.RadioButton schedWeeklyRadio;
-		private System.Windows.Forms.RadioButton schedDailyRadio;
-		private System.Windows.Forms.GroupBox schedGroup;
-		private System.Windows.Forms.TabControl schedTabControl;
-		private System.Windows.Forms.TabPage oneTimeTab;
-		private System.Windows.Forms.TabPage dailyTab;
-		private System.Windows.Forms.TabPage weeklyTab;
-		private System.Windows.Forms.TabPage monthlyTab;
 		private System.Windows.Forms.TabPage startupTab;
 		private System.Windows.Forms.TabPage idleTab;
 		private System.Windows.Forms.TabPage onEventTab;
-		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.GroupBox advSettingsGroup;
 		private System.Windows.Forms.CheckBox delayCheckBox;
 		private System.Windows.Forms.CheckBox stopAfterDurationCheckBox;
@@ -606,7 +458,6 @@
 		private System.Windows.Forms.CheckBox expireCheckBox;
 		private System.Windows.Forms.CheckBox activateCheckBox;
 		private System.Windows.Forms.Label durationLabel;
-		private FullDateTimePicker schedStartDatePicker;
 		private System.Windows.Forms.TimeSpanPicker delaySpan;
 		private FullDateTimePicker expireDatePicker;
 		private FullDateTimePicker activateDatePicker;
@@ -625,9 +476,6 @@
 		private System.Windows.Forms.RadioButton logonRemoteRadio;
 		private System.Windows.Forms.Button cancelBtn;
 		private System.Windows.Forms.Button okBtn;
-		private UIComponents.DailyTriggerUI dailyTriggerUI1;
-		private UIComponents.WeeklyTriggerUI weeklyTriggerUI1;
-		private UIComponents.MonthlyTriggerUI monthlyTriggerUI1;
 		private UIComponents.EventTriggerUI eventTriggerUI1;
 		private System.Windows.Forms.TabPage customTab;
 		private System.Windows.Forms.TextBox customNameText;
@@ -635,5 +483,6 @@
 		private System.Windows.Forms.ListView customPropsListView;
 		private System.Windows.Forms.ColumnHeader propNameCol;
 		private System.Windows.Forms.ColumnHeader propValCol;
+		private Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI calendarTriggerUI1;
 	}
 }

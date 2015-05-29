@@ -67,6 +67,7 @@
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
+			this.monthlyDaysDropDown.RequireAtLeastOneCheckedItem = true;
 			this.monthlyDaysDropDown.SelectedIndexChanged += new System.EventHandler(this.monthlyDaysDropDown_SelectedItemsChanged);
 			// 
 			// monthlyOnDOWDropDown
@@ -76,6 +77,7 @@
 			this.monthlyOnDOWDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyOnDOWDropDown.DropSize = new System.Drawing.Size(121, 106);
 			this.monthlyOnDOWDropDown.Name = "monthlyOnDOWDropDown";
+			this.monthlyOnDOWDropDown.RequireAtLeastOneCheckedItem = true;
 			this.monthlyOnDOWDropDown.SelectedIndexChanged += new System.EventHandler(this.monthlyOnDOWDropDown_SelectedItemsChanged);
 			// 
 			// monthlyOnWeekDropDown
@@ -94,6 +96,7 @@
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
+			this.monthlyMonthsDropDown.RequireAtLeastOneCheckedItem = true;
 			this.monthlyMonthsDropDown.SelectedIndexChanged += new System.EventHandler(this.monthlyMonthsDropDown_SelectedItemsChanged);
 			// 
 			// panel2
