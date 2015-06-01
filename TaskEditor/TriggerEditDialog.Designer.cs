@@ -129,9 +129,7 @@
 			// calendarTriggerUI1
 			// 
 			resources.ApplyResources(this.calendarTriggerUI1, "calendarTriggerUI1");
-			this.calendarTriggerUI1.IsV2 = false;
 			this.calendarTriggerUI1.Name = "calendarTriggerUI1";
-			this.calendarTriggerUI1.ShowStartBoundary = false;
 			this.calendarTriggerUI1.TriggerTypeChanged += new System.EventHandler(this.calendarTriggerUI1_TriggerTypeChanged);
 			// 
 			// logonTab

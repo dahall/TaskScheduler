@@ -454,7 +454,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -505,7 +505,7 @@
     <value>4, 5</value>
   </data>
   <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -556,7 +556,7 @@
     <value>4, 5</value>
   </data>
   <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -607,7 +607,7 @@
     <value>4, 5</value>
   </data>
   <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -712,7 +712,7 @@
     <value>4, 5</value>
   </data>
   <data name="customTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>624, 175</value>
   </data>
   <data name="customTab.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

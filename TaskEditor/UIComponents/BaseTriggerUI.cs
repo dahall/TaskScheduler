@@ -28,14 +28,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		[DefaultValue(true)]
+		[DefaultValue(true), Category("Behavior"), Description("Indicates whether this editor supports a V1 or V2 trigger.")]
 		public virtual bool IsV2
 		{
 			get { return isV2; }
 			set { isV2 = value; }
 		}
 
-		[DefaultValue(true)]
+		[DefaultValue(true), Category("Appearance"), Description("Indicates whether to show the start boundary")]
 		public virtual bool ShowStartBoundary
 		{
 			get { return showStart; }
