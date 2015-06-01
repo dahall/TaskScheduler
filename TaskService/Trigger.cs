@@ -424,6 +424,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceTrigger">The source <see cref="Trigger"/>.</param>
 		public virtual void CopyProperties(Trigger sourceTrigger)
 		{
+			if (sourceTrigger == null)
+				return;
 			this.Enabled = sourceTrigger.Enabled;
 			this.EndBoundary = sourceTrigger.EndBoundary;
 			try { this.ExecutionTimeLimit = sourceTrigger.ExecutionTimeLimit; }
@@ -1153,7 +1155,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
 			{
 				this.DaysInterval = ((DailyTrigger)sourceTrigger).DaysInterval;
 			}
@@ -1315,7 +1317,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
 			{
 				this.Subscription = ((EventTrigger)sourceTrigger).Subscription;
 				((EventTrigger)sourceTrigger).ValueQueries.CopyTo(this.ValueQueries);
@@ -1785,14 +1787,14 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
 			{
 				this.DaysOfWeek = ((MonthlyDOWTrigger)sourceTrigger).DaysOfWeek;
 				this.MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
 				try { this.RunOnLastWeekOfMonth = ((MonthlyDOWTrigger)sourceTrigger).RunOnLastWeekOfMonth; } catch { }
 				this.WeeksOfMonth = ((MonthlyDOWTrigger)sourceTrigger).WeeksOfMonth;
 			}
-			if (sourceTrigger.TriggerType == TaskTriggerType.Monthly)
+			if (sourceTrigger != null && sourceTrigger.TriggerType == TaskTriggerType.Monthly)
 				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
 		}
 
@@ -2117,13 +2119,13 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
 			{
 				this.DaysOfMonth = ((MonthlyTrigger)sourceTrigger).DaysOfMonth;
 				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
 				try { this.RunOnLastDayOfMonth = ((MonthlyTrigger)sourceTrigger).RunOnLastDayOfMonth; } catch { }
 			}
-			if (sourceTrigger.TriggerType == TaskTriggerType.MonthlyDOW)
+			if (sourceTrigger != null && sourceTrigger.TriggerType == TaskTriggerType.MonthlyDOW)
 				this.MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
 		}
 
@@ -2654,7 +2656,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType() && !this.StateChangeIsSet())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType() && !this.StateChangeIsSet())
 				this.StateChange = ((SessionStateChangeTrigger)sourceTrigger).StateChange;
 		}
 
@@ -2903,7 +2905,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
 			{
 				this.DaysOfWeek = ((WeeklyTrigger)sourceTrigger).DaysOfWeek;
 				this.WeeksInterval = ((WeeklyTrigger)sourceTrigger).WeeksInterval;

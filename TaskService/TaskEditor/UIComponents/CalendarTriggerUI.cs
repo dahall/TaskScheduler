@@ -46,8 +46,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		/// <value>
 		///   <c>true</c> to display the start boundary control; otherwise, <c>false</c>.
 		/// </value>
-		[DefaultValue(true), Category("Appearance"), Description("Indicates whether to show the start boundary")]
-		public bool ShowStartBoundary
+		[DefaultValue(false), Category("Appearance"), Description("Indicates whether to show the start boundary")]
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		bool ITriggerHandler.ShowStartBoundary
 		{
 			get { return this.dailyTriggerUI1.ShowStartBoundary; }
 			set { this.dailyTriggerUI1.ShowStartBoundary = this.monthlyTriggerUI1.ShowStartBoundary = this.weeklyTriggerUI1.ShowStartBoundary = value; }
@@ -77,6 +78,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 			set
 			{
+				if (value == null)
+					throw new ArgumentNullException();
 				onAssignment = true;
 				schedStartDatePicker.Value = value.StartBoundary;
 				switch (value.TriggerType)
@@ -131,7 +134,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		/// </summary>
 		/// <returns><c>true</c></returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public bool IsTriggerValid()
+		bool ITriggerHandler.IsTriggerValid()
 		{
 			return true;
 		}
@@ -152,9 +155,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				Trigger newT;
 				if (monthlyTriggerUI1.TriggerType == TaskTriggerType.Monthly)
-					(newT = new MonthlyTrigger()).CopyProperties(Trigger);
+					(newT = new MonthlyTrigger()).CopyProperties(this.Trigger);
 				else
-					(newT = new MonthlyDOWTrigger()).CopyProperties(Trigger);
+					(newT = new MonthlyDOWTrigger()).CopyProperties(this.Trigger);
 				monthlyTriggerUI1.Trigger = newT;
 				schedTabControl.SelectedTab = monthlyTab;
 				OnTriggerTypeChanged();
@@ -180,19 +183,19 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				if (sender == schedOneRadio)
 				{
 					if (!onAssignment)
-						(timeTrigger = new TimeTrigger()).CopyProperties(Trigger);
+						(timeTrigger = new TimeTrigger()).CopyProperties(this.Trigger);
 					schedTabControl.SelectedTab = oneTimeTab;
 				}
 				else if (sender == schedDailyRadio)
 				{
 					if (!onAssignment)
-						(dailyTriggerUI1.Trigger = new DailyTrigger()).CopyProperties(Trigger);
+						(dailyTriggerUI1.Trigger = new DailyTrigger()).CopyProperties(this.Trigger);
 					schedTabControl.SelectedTab = dailyTab;
 				}
 				else if (sender == schedWeeklyRadio)
 				{
 					if (!onAssignment)
-						(weeklyTriggerUI1.Trigger = new WeeklyTrigger()).CopyProperties(Trigger);
+						(weeklyTriggerUI1.Trigger = new WeeklyTrigger()).CopyProperties(this.Trigger);
 					schedTabControl.SelectedTab = weeklyTab;
 				}
 				else if (sender == schedMonthlyRadio)
@@ -206,8 +209,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment)
-				Trigger.StartBoundary = schedStartDatePicker.Value;
+			if (!onAssignment && this.Trigger != null)
+				this.Trigger.StartBoundary = schedStartDatePicker.Value;
 		}
 	}
 }

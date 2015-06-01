@@ -467,6 +467,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerDisplayType.Schedule:
 				default:
 					settingsTabControl.SelectedTab = scheduleTab;
+					if (!onAssignment) newTrigger = new TimeTrigger();
 					break;
 				case TaskTriggerDisplayType.Logon:
 					logonRemotePanel.Visible = false;
