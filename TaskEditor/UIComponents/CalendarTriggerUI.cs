@@ -158,6 +158,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					(newT = new MonthlyTrigger()).CopyProperties(this.Trigger);
 				else
 					(newT = new MonthlyDOWTrigger()).CopyProperties(this.Trigger);
+				if (this.Trigger == null)
+					newT.StartBoundary = schedStartDatePicker.Value;
 				monthlyTriggerUI1.Trigger = newT;
 				schedTabControl.SelectedTab = monthlyTab;
 				OnTriggerTypeChanged();
@@ -180,6 +182,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (((RadioButton)sender).Checked)
 			{
+				bool nullTrigger = this.Trigger == null;
 				if (sender == schedOneRadio)
 				{
 					if (!onAssignment)
@@ -202,6 +205,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				{
 					monthlyTriggerUI1_TriggerTypeChanged(this, EventArgs.Empty);
 				}
+				if (nullTrigger)
+					this.Trigger.StartBoundary = schedStartDatePicker.Value;
 				if (!onAssignment && sender != schedMonthlyRadio)
 					OnTriggerTypeChanged();
 			}
