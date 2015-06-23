@@ -216,10 +216,10 @@ namespace Microsoft.Win32.TaskScheduler
 					activateCheckBox.Checked = trigger.StartBoundary != DateTime.MinValue;
 					activateDatePicker.Enabled = activateCheckBox.Checked && TriggerView != TaskTriggerDisplayType.Custom;
 					if (activateCheckBox.Checked)
-						activateDatePicker.Value = trigger.StartBoundary;
+						activateDatePicker.Value = MaxDate(trigger.StartBoundary, DateTimePicker.MinimumDateTime);
 				}
 				expireCheckBox.Checked = expireDatePicker.Enabled = trigger.EndBoundary != DateTime.MaxValue;
-				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : trigger.StartBoundary;
+				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : MaxDate(trigger.StartBoundary, DateTime.Now);
 				enabledCheckBox.Checked = trigger.Enabled;
 
 				if (value is CustomTrigger)
@@ -227,6 +227,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 				onAssignment = false;
 			}
+		}
+
+		private static DateTime MaxDate(DateTime dt1, DateTime dt2)
+		{
+			return (dt1 >= dt2) ? dt1 : dt2;
 		}
 
 		/// <summary>
@@ -338,7 +343,7 @@ namespace Microsoft.Win32.TaskScheduler
 			expireDatePicker.Enabled = expireCheckBox.Checked;
 			if (!onAssignment)
 			{
-				if (expireCheckBox.Checked)
+				if (expireCheckBox.Checked && expireDatePicker.Value != DateTimePicker.MinimumDateTime)
 					trigger.EndBoundary = expireDatePicker.Value;
 				else
 					trigger.EndBoundary = DateTime.MaxValue;
@@ -348,7 +353,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && expireCheckBox.Checked)
-				trigger.EndBoundary = expireDatePicker.Value;
+				trigger.EndBoundary = (expireDatePicker.Value == DateTimePicker.MinimumDateTime || expireDatePicker.Value != DateTimePicker.MaximumDateTime) ? DateTime.MaxValue : expireDatePicker.Value;
 		}
 
 		private void logonAnyUserRadio_CheckedChanged(object sender, EventArgs e)
