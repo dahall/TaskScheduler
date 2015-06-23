@@ -514,6 +514,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (trigger != null)
 					newTrigger.CopyProperties(trigger);
+				if (newTrigger is ICalendarTrigger && newTrigger.StartBoundary == DateTime.MinValue)
+					newTrigger.StartBoundary = DateTime.Now;
 				this.Trigger = newTrigger;
 			}
 		}
