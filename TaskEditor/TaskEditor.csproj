@@ -453,7 +453,7 @@
     <EmbeddedResource Include="ComObjectSelectionDialog.zh-CN.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorProperties\Resources.de-DE.resx">
+    <EmbeddedResource Include="EditorProperties\Resources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.es.resx" />
@@ -636,7 +636,7 @@
     <EmbeddedResource Include="TaskOptionsEditor.resx">
       <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskPropertiesControl.de-DE.resx">
+    <EmbeddedResource Include="TaskPropertiesControl.de.resx">
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskPropertiesControl.es.resx">
@@ -719,7 +719,7 @@
     <EmbeddedResource Include="TaskServiceConnectDialog.zh-CN.resx">
       <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TriggerEditDialog.de-DE.resx">
+    <EmbeddedResource Include="TriggerEditDialog.de.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TriggerEditDialog.es.resx">
@@ -760,7 +760,7 @@
     <EmbeddedResource Include="UIComponents\BaseTriggerUI.resx">
       <DependentUpon>BaseTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.de-DE.resx">
+    <EmbeddedResource Include="UIComponents\CalendarTriggerUI.de.resx">
       <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\CalendarTriggerUI.es.resx">
@@ -790,7 +790,7 @@
     <EmbeddedResource Include="UIComponents\ComHandlerActionUI.resx">
       <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIComponents\DailyTriggerUI.de-DE.resx">
+    <EmbeddedResource Include="UIComponents\DailyTriggerUI.de.resx">
       <DependentUpon>DailyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\DailyTriggerUI.es.resx">
@@ -841,7 +841,7 @@
     <EmbeddedResource Include="UIComponents\ExecActionUI.resx">
       <DependentUpon>ExecActionUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.de-DE.resx">
+    <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.de.resx">
       <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.es.resx">
@@ -877,7 +877,7 @@
     <EmbeddedResource Include="UIComponents\TriggerCollectionUI.resx">
       <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de-DE.resx">
+    <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.de.resx">
       <DependentUpon>WeeklyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\WeeklyTriggerUI.es.resx">
