@@ -15,7 +15,7 @@
       <dependency id="TaskScheduler" version="[2.3.3]" />
       <dependency id="AeroWizard" version="[2.0.10]" />
       <dependency id="GroupControls" version="[1.4.3]" />
-      <dependency id="TimeSpan2" version="[2.0.7]" />
+      <dependency id="TimeSpan2" version="[2.0.8]" />
     </dependencies>
   </metadata>
   <files>

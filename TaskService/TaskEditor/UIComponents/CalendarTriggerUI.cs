@@ -81,7 +81,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				if (value == null)
 					throw new ArgumentNullException();
 				onAssignment = true;
-				schedStartDatePicker.Value = value.StartBoundary;
+				schedStartDatePicker.Value = value.StartBoundary == DateTime.MinValue ? DateTime.Now : value.StartBoundary;
 				switch (value.TriggerType)
 				{
 					case TaskTriggerType.Daily:

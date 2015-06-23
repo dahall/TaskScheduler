@@ -111,6 +111,7 @@
     <None Include="TaskService.nuspec" />
     <None Include="TaskService.snk" />
     <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
+    <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd">
       <SubType>Designer</SubType>
