@@ -340,7 +340,7 @@
     <value>13</value>
   </data>
   <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5 </value>
+    <value>5</value>
   </data>
   <data name="actionUpButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

@@ -121,13 +121,13 @@
     <value>Elegir la acción a realizar</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Cambiar de usuario o el grupo...</value>
+    <value>Cambiar usuario o grupo...</value>
   </data>
   <data name="dailyTriggerPage.Text" xml:space="preserve">
-    <value>Configurar una activación diaria</value>
+    <value>Configurar un desencadenador diario</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>para una duración de:</value>
+    <value>durante:</value>
   </data>
   <data name="emailActionPage.Text" xml:space="preserve">
     <value>Configurar un mensaje de correo electrónico para enviar</value>
@@ -139,7 +139,7 @@
     <value>Crear una tarea</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Nombre de la tarea:</value>
+    <value>Nombre de tarea:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Descripción:</value>
@@ -154,19 +154,19 @@
     <value>Inicio:</value>
   </data>
   <data name="oneTimeTriggerPage.Text" xml:space="preserve">
-    <value>Configuración de un disparador de tiempo</value>
+    <value>Configurar un desencadenador de tiempo</value>
   </data>
   <data name="onEventTriggerPage.Text" xml:space="preserve">
     <value>Configurar un desencadenador en un evento del sistema</value>
   </data>
   <data name="openDlgAfterCheck.Text" xml:space="preserve">
-    <value>Abrir el cuadro de diálogo Propiedades para esta tarea cuando yo haga clic en finalizar</value>
+    <value>Abrir el diálogo Propiedades para esta tarea al hacer clic en Finalizar</value>
   </data>
   <data name="openFileDialog1.Filter" xml:space="preserve">
-    <value>Todos files| *. *</value>
+    <value>Todos los archivos (*.*)|*.*</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Tarea de repetir cada:</value>
+    <value>Repetir cada:</value>
   </data>
   <data name="runActionPage.Text" xml:space="preserve">
     <value>Configuración de un programa a ejecutar</value>
@@ -178,30 +178,30 @@
     <value>Resumen</value>
   </data>
   <data name="summaryPrompt.Text" xml:space="preserve">
-    <value>Cuando haga clic en finalizar, la nueva tarea será creada y añadida a su calendario de Windows.</value>
+    <value>Al hacer clic en Finalizar, la nueva tarea se creará y se agregará a su programación de Windows. </value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>No guarde la contraseña. La tarea sólo tendrá acceso a los recursos del equipo local.</value>
+    <value>No almacenar contraseña. La tarea solo tendrá acceso a los recursos del equipo local.</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Ejecutar sólo cuando el usuario está logueado</value>
+    <value>Ejecutar sólo cuando el usuario haya iniciado sesión</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Ejecutar si usuario está logueado o no</value>
+    <value>Ejecutar tanto si un usuario inició sesión como si no</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>Cuando se ejecuta la tarea, utilice la siguiente cuenta:</value>
+    <value>Al ejecutar la tarea, usar esta cuenta de usuario: </value>
   </data>
   <data name="triggerPropPage.Text" xml:space="preserve">
-    <value>Propiedades de gatillo</value>
+    <value>Propiedades del desencadenador</value>
   </data>
   <data name="triggerSelectPage.Text" xml:space="preserve">
-    <value>Elegir lo que provoca la tarea</value>
+    <value>Elegir el desencadenador que provoca la tarea</value>
   </data>
   <data name="weeklyTriggerPage.Text" xml:space="preserve">
     <value>Configurar un desencadenador semanal</value>
   </data>
   <data name="wizardControl1.Title" xml:space="preserve">
-    <value>Crear a Asistente para tareas de</value>
+    <value>Asistente para crear tareas</value>
   </data>
 </root>

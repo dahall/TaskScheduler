@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Rango de medida</value>
+    <value>(Intervalo personalizado)</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Cancelar</value>
@@ -127,10 +127,10 @@
     <value>Primer evento</value>
   </data>
   <data name="fromCombo.Items1" xml:space="preserve">
-    <value>Eventos en</value>
+    <value>Eventos el</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Introduzca un intervalo de fechas personalizado para tu filtro:</value>
+    <value>Especifique un intervalo de fechas personalizado para el filtro.</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>De:</value>
@@ -145,6 +145,6 @@
     <value>Último evento</value>
   </data>
   <data name="toCombo.Items1" xml:space="preserve">
-    <value>Eventos en</value>
+    <value>Eventos el</value>
   </data>
 </root>

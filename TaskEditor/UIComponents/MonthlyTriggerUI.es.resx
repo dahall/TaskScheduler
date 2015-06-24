@@ -121,15 +121,15 @@
     <value>Días:</value>
   </data>
   <data name="monthlyMonthsDropDown.CheckAllText" xml:space="preserve">
-    <value>&lt; Selecciona todos los meses &gt;</value>
+    <value>&lt;Seleccionar todos los meses&gt;</value>
   </data>
   <data name="monthlyMonthsLabel.Text" xml:space="preserve">
     <value>Meses:</value>
   </data>
   <data name="monthlyOnDOWDropDown.CheckAllText" xml:space="preserve">
-    <value>&lt; Selecciona todos los días &gt;</value>
+    <value>&lt;Seleccionar todos los días&gt;</value>
   </data>
   <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>En:</value>
+    <value>Activado:</value>
   </data>
 </root>

@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="editBtn.Text" xml:space="preserve">
-    <value>&amp;Editar filtro de sucesos...</value>
+    <value>&amp;Editar filtro de eventos...</value>
   </data>
   <data name="eventBasicRadio.Text" xml:space="preserve">
     <value>Básico</value>
   </data>
   <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value>Custom</value>
+    <value>Personalizado</value>
   </data>
   <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>ID de evento:</value>
+    <value>Id. de evento:</value>
   </data>
   <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Registro de:</value>
+    <value>Registro:</value>
   </data>
   <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Fuente:</value>
+    <value>Origen:</value>
   </data>
 </root>

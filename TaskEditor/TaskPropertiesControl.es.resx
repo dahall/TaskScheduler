@@ -118,10 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="actionIntroLabel.Text" xml:space="preserve">
-    <value>Cuando creas una tarea, debe especificar la acción que ocurrirá cuando comienza su tarea.</value>
-  </data>
-  <data name="actionsTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/a7df21e3-cdd6-450D-94e8-58579cb7be04.htm</value>
+    <value>Al crear una tarea, debe especificar la acción que se producirá cuando se inicie la tarea.</value>
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
     <value>Acciones</value>
@@ -133,34 +130,25 @@
     <value>Mantenimiento automático</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Cambio y usuario o grupo...</value>
+    <value>Cambiar usuario o grupo...</value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
-    <value>Especificar las condiciones que. junto con el gatillo y determine si debe ejecutar la tarea. La tarea no se ejecutará si cualquier condición especificada no es cierto.</value>
-  </data>
-  <data name="conditionsTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/687d6377-ee3a-404c-B211-a7b36e3dd619.htm</value>
+    <value>Especificar las condiciones que junto con el desencadenador, determinan si la tarea debe ejecutarse. La tarea no se ejecutará si cualquier condición especificada no se cumple.</value>
   </data>
   <data name="conditionsTab.Text" xml:space="preserve">
     <value>Condiciones</value>
   </data>
-  <data name="generalTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/a922c2b5-6a43-4503-ab7f-4f3d77b3cc8a.htm</value>
-  </data>
   <data name="generalTab.Text" xml:space="preserve">
     <value>General</value>
-  </data>
-  <data name="historyTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/8eda9018-6ee6-4a72-b2a4-bdcee28e2828.htm</value>
   </data>
   <data name="historyTab.Text" xml:space="preserve">
     <value>Historia</value>
   </data>
   <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>De ralentí</value>
+    <value>Inactivo</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>No se puede mostrar los tiempos de ejecución para esta tarea.</value>
+    <value>No se pueden mostrar los tiempos de ejecución de ésta tarea.</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Ubicación:</value>
@@ -169,13 +157,13 @@
     <value>Error:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Especificar adicional de seguridad, mantenimiento y sistema de configuración de compatibilidad de función de la tarea.</value>
+    <value>Especificar la seguridad adicional, mantenimiento y sistema de configuración de compatibilidad de función para la tarea.</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Especificar la información de registro para la tarea.</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Nivel y de prioridad:</value>
+    <value>Nivel de &amp;prioridad:</value>
   </data>
   <data name="networkConditionGroupBox.Text" xml:space="preserve">
     <value>Red</value>
@@ -184,7 +172,7 @@
     <value>Potencia</value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp;Requied privilegios:</value>
+    <value>&amp;Privilegios necesarios:</value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
     <value>Proceso y tipo de identificación de seguridad (SID):</value>
@@ -202,82 +190,79 @@
     <value>Endurecimiento de la seguridad</value>
   </data>
   <data name="settingsIntroLabel.Text" xml:space="preserve">
-    <value>Especifique las opciones adicionales que afectan el comportamiento de la tarea.</value>
-  </data>
-  <data name="settingsTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/d758ff5d-27d3-4090-b1c2-14ecaa83ff12.htm</value>
+    <value>Especifique la configuración adicional que afecta al comportamiento de la tarea.</value>
   </data>
   <data name="settingsTab.Text" xml:space="preserve">
     <value>Configuración</value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>&amp;Permitir que la tarea se ejecute a petición</value>
+    <value>&amp;Permitir que la tarea se ejecute a petición del usuario</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Si la tarea corriente no termina cuando pidió y obligarla a dejar de</value>
+    <value>Hacer que la tarea en ejecución se detenga si no finaliza cuando se solicite</value>
   </data>
   <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Autor:</value>
+    <value>Autor</value>
   </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Si la tarea no está programada para funcionar otra vez y borrarlo después de:</value>
+    <value>Eliminar la tarea si no está programada para ejecutarse de nuevo después de:</value>
   </data>
   <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>&amp;Descripción:</value>
+    <value>Descripción</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Iniciar la tarea sólo si el equipo es el AC y la potencia</value>
+    <value>Iniciar la tarea sólo si el equipo está conectado a la corriente alterna</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>&amp;No permitir Inicio si en una sesión remota aplicaciones integrada localmente (carril)</value>
+    <value>No permitir inicio de sesión dentro de aplicaciones remotas integradas localmente (RAIL)</value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
     <value>&amp;Habilitado</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Detener el tas y k si se ejecuta más de:</value>
+    <value>Detener la tarea si se ejecuta durante más de:</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Hidd y en</value>
+    <value>Oculto</value>
   </data>
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Iniciar el solamente si de la tarea del y equipo está inactivo durante:</value>
+    <value>Iniciar la tarea sólo si el equipo está inactivo durante:</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>W y ait para ociosa para:</value>
+    <value>Esperar a que esté inactivo durante:</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>No almacene y la contraseña. La tarea sólo tendrá acceso a los recursos del equipo local.</value>
+    <value>No almacenar contraseña. La tarea solo tendrá acceso a los recursos del equipo local.</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp;Ejecutar solo cuando el usuario haya iniciado sesión</value>
+    <value>Ejecutar sólo cuando el usuario haya iniciado sesión</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Ejecutar y si usuario está logueado o no</value>
+    <value>Ejecutar tanto si un usuario inició sesión como si no</value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value>Si la tarea no termine, reiniciar después de:</value>
+    <value>Si la tarea no termina, reiniciar después de:</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value>Iniciar la tarea en modo e &amp; xclusive</value>
+    <value>Iniciar la tarea en modo &amp;exclusivo</value>
   </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
     <value>Durante el mantenimiento, iniciar tarea cada:</value>
   </data>
   <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>Na &amp; me:</value>
+    <value>No&amp;mbre:</value>
   </data>
   <data name="taskNameText.Text" xml:space="preserve">
-    <value>Nombre de la tarea</value>
+    <value>Nombre de tarea</value>
   </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value>&amp;Documentación:</value>
+    <value>Documentación:</value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Editar seguridad...</value>
+    <value>Modificar seguridad...</value>
   </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
-    <value>Se &amp; curity:</value>
+    <value>Se&amp;guridad:</value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
     <value>&amp;Origen:</value>
@@ -289,46 +274,46 @@
     <value>&amp;Versión:</value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>tiempos de</value>
+    <value>veces</value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Tentativa y reiniciar hasta:</value>
+    <value> Intento de reinicio hasta:</value>
   </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>Si el y la tarea falla, reinicie cada:</value>
+    <value>Si la tarea no se ejecuta, reiniciarla cada:</value>
   </data>
   <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Reiniciar si la res estado inactivo y umes</value>
+    <value>Reiniciar si el estado de inactividad se reanuda</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Ejecutar ith de w &amp; privilegios más altos</value>
+    <value>Ejecutar con los privilegios más altos</value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>Si la tarea ya es ru y rea, entonces se aplica la siguiente regla:</value>
+    <value>Aplicar la siguiente regla si la tarea ya está en ejecución:</value>
   </data>
   <data name="taskSecurityGroupBox.Text" xml:space="preserve">
     <value>Opciones de seguridad</value>
   </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Iniciar onl y y si la conexión de red siguientes está disponible:</value>
+    <value>Iniciar sólo si la siguiente conexión de red está disponible:</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Ejecutar la tarea tan pronto como sea posible tras un &amp; inicio programada se pierde</value>
+    <value>Ejecutar la tarea de inmediato si se pasó por alto algún inicio programado</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Parada si el equipo cambia a y la energía de la batería</value>
+    <value>Detener si el equipo empieza a usar la batería</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>If pare el comput y er deja de ser ocioso</value>
+    <value>Detener si el equipo deja de estar inactivo</value>
   </data>
   <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
-    <value>Cuando creas una tarea, puede especificar las condiciones que se activarán la tarea.</value>
+    <value>Cuando se crea una tarea, se pueden especificar las condiciones que la activarán.</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>Cuando se ejecuta la tarea, utilice la siguiente cuenta:</value>
+    <value>Al ejecutar la tarea, usar esta cuenta de usuario:</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>&amp;Uso unificado motor de programación</value>
+    <value>&amp;Usar motor unificado de programación</value>
   </data>
   <data name="taskVersionLabel.Text" xml:space="preserve">
     <value>&amp;Configurar para:</value>
@@ -337,12 +322,9 @@
     <value>&amp;Desactivar automáticamente la tarea cada vez que inicia Windows</value>
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>Y despertar el equipo para ejecutar esta tarea</value>
-  </data>
-  <data name="triggersTab.HelpKeyword" xml:space="preserve">
-    <value>/HTML/04ea6e78-1d5c-464d-8ba2-b6a441adbdd7.htm</value>
+    <value>Activar el equipo para realizar esta tarea.</value>
   </data>
   <data name="triggersTab.Text" xml:space="preserve">
-    <value>Factores desencadenantes</value>
+    <value>Desencadenadores</value>
   </data>
 </root>

@@ -121,36 +121,36 @@
     <value>Acción</value>
   </data>
   <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>&amp;Eliminar</value>
+    <value>Eliminar</value>
   </data>
   <data name="actionDownButton.Text" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Editar...</value>
+    <value>&amp;Editar</value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nueva...</value>
+    <value>&amp;Nueva</value>
   </data>
   <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5 </value>
+    <value>5</value>
   </data>
   <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eliminar la acción</value>
+    <value>Eliminar acción</value>
   </data>
   <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Datos de</value>
+    <value>Detalles</value>
   </data>
   <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Editar acción...</value>
+    <value>Editar acción…</value>
   </data>
   <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mover hacia abajo</value>
+    <value>Bajar</value>
   </data>
   <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mover hacia arriba</value>
+    <value>Subir</value>
   </data>
   <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nueva acción...</value>
+    <value>Nueva acción…</value>
   </data>
 </root>

@@ -121,7 +121,7 @@
     <value>Seguridad de la tarea</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Cambio y usuario o grupo...</value>
+    <value>Cambiar &amp;usuario o grupo...</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Seguridad de tiempo de ejecución</value>
@@ -130,27 +130,27 @@
     <value>Derechos de acceso</value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp;Requied privilegios:</value>
+    <value>&amp;Privilegios necesarios:</value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
     <value>Proceso y tipo de identificación de seguridad (SID):</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>No almacene y la contraseña. La tarea sólo tendrá acceso a los recursos del equipo local.</value>
+    <value>No almacenar &amp;contraseña. La tarea solo tendrá acceso a los recursos del equipo local.</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp;Ejecutar solo cuando el usuario haya iniciado sesión</value>
+    <value>&amp;Ejecutar sólo cuando el usuario haya iniciado sesión</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Ejecutar y si usuario está logueado o no</value>
+    <value>Ejecutar &amp;tanto si un usuario inició sesión como si no</value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Editar seguridad...</value>
+    <value>Modificar seguridad...</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Ejecutar ith de w &amp; privilegios más altos</value>
+    <value>Ejecutar c&amp;on los privilegios más altos</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>Cuando se ejecuta la tarea, utilice la siguiente cuenta:</value>
+    <value>Al ejecutar la tarea, usar esta cuenta de usuario:</value>
   </data>
 </root>

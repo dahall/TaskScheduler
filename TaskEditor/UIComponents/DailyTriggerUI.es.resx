@@ -121,6 +121,6 @@
     <value>días</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Se repiten cada:</value>
+    <value>Repetir cada:</value>
   </data>
 </root>

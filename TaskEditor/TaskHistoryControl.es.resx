@@ -133,22 +133,22 @@
     <value>Fecha y hora</value>
   </data>
   <data name="columnHeader10.Text" xml:space="preserve">
-    <value>Computadora</value>
+    <value>Equipo</value>
   </data>
   <data name="columnHeader11.Text" xml:space="preserve">
-    <value>ID. de proceso</value>
+    <value>Id. de proceso</value>
   </data>
   <data name="columnHeader12.Text" xml:space="preserve">
-    <value>Identificador del thread</value>
+    <value>Id. de subproceso</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
-    <value>ID de evento</value>
+    <value>Id. de evento</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Categoría de tareas</value>
+    <value>Categoría de la tarea</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Código operacional</value>
+    <value>Código operativo</value>
   </data>
   <data name="columnHeader5.Text" xml:space="preserve">
     <value>Id. de correlación</value>
@@ -157,7 +157,7 @@
     <value>Palabras clave</value>
   </data>
   <data name="columnHeader7.Text" xml:space="preserve">
-    <value>Fuente</value>
+    <value>Origen</value>
   </data>
   <data name="columnHeader8.Text" xml:space="preserve">
     <value>Usuario</value>
@@ -166,13 +166,13 @@
     <value>Registro</value>
   </data>
   <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Propiedades de eventos</value>
+    <value>Propiedades de evento</value>
   </data>
   <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
     <value>Expandir todos los grupos</value>
   </data>
   <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Grupo eventos por esta columna</value>
+    <value>Agrupar eventos por esta columna.</value>
   </data>
   <data name="historyDetailHideBtn.Text" xml:space="preserve">
     <value>r</value>
@@ -184,21 +184,21 @@
     <value>Número de eventos: X</value>
   </data>
   <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
-    <value>Actualización</value>
+    <value>Actualizar</value>
   </data>
   <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eliminar grupo de eventos</value>
+    <value>Quita una agrupación de eventos.</value>
   </data>
   <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Quitar selección</value>
+    <value>Quitar orden</value>
   </data>
   <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Guardar todos los eventos como...</value>
   </data>
   <data name="saveFileDialog.Filter" xml:space="preserve">
-    <value>Archivos del evento (*.evtx) | *. evtx| XML (Xml File) (*.xml) | *. xml| Texto (delimitado por tabulaciones) (*.txt) | *. txt| CSV (separado por comas) (*.csv) | * CSV</value>
+    <value>Archivos de evento (*.evtx)|*. evtx|XML (Xml File) (*.xml)|*. xml|Texto (delimitado por tabulaciones) (*.txt)|*. txt|CSV (separado por comas) (*.csv)|*.csv</value>
   </data>
   <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eventos de la clase por esta columna</value>
+    <value>Ordenar eventos por esta columna</value>
   </data>
 </root>

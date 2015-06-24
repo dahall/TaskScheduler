@@ -148,6 +148,6 @@
     <value>Inicio</value>
   </data>
   <data name="triggersItem.Text" xml:space="preserve">
-    <value>Factores desencadenantes</value>
+    <value>Desencadenadores</value>
   </data>
 </root>
