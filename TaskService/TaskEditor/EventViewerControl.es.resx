@@ -121,31 +121,31 @@
     <value>&amp;Copiar</value>
   </data>
   <data name="infoLink.Text" xml:space="preserve">
-    <value>Ayuda en línea de registro de eventos</value>
+    <value>Ayuda Registro de eventos</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Más información de y:</value>
+    <value>Más información:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>&amp;Origen:</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
-    <value>Tarea Categor &amp; y:</value>
+    <value>C&amp;ategoría de la tarea:</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
-    <value>Logge y d:</value>
+    <value>Registra&amp;do:</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
-    <value>Cálculo y r:</value>
+    <value>E&amp;quipo:</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>&amp;Palabras:</value>
+    <value>Palabras &amp;clave:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>&amp;Operación:</value>
+    <value>Código de &amp;operación:</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
-    <value>Registro Na &amp; me:</value>
+    <value>No&amp;mbre de registro:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>&amp;Usuario:</value>
@@ -154,21 +154,21 @@
     <value>&amp;Nivel:</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>ID de &amp;evento:</value>
+    <value>Id. de &amp;evento:</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Seleccionar &amp; todo</value>
+    <value>Seleccion&amp;ar todo</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>Datos de</value>
+    <value>Detalles</value>
   </data>
   <data name="textViewRadio.Text" xml:space="preserve">
-    <value>Frie y ndly vistas</value>
+    <value>&amp;Vista descriptiva</value>
   </data>
   <data name="xmlViewRadio.Text" xml:space="preserve">
-    <value>&amp;Vista XML</value>
+    <value>Vista &amp;XML</value>
   </data>
 </root>

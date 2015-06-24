@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Diario</value>
+    <value>Diariamente</value>
   </data>
   <data name="schedMonthlyRadio.Text" xml:space="preserve">
     <value>Mensual</value>
@@ -130,6 +130,6 @@
     <value>Inicio:</value>
   </data>
   <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Semanal</value>
+    <value>Semanalmente</value>
   </data>
 </root>

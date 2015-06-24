@@ -124,21 +124,21 @@
     <value>Creado</value>
   </data>
   <data name="lastRunResult.Text" xml:space="preserve">
-    <value>Último resultado ejecución</value>
+    <value>Resultado de última ejecución</value>
   </data>
   <data name="lastRunTime.Text" xml:space="preserve">
-    <value>Último tiempo de ejecución</value>
+    <value>Hora de última ejecución</value>
   </data>
   <data name="name.Text" xml:space="preserve">
     <value>Nombre</value>
   </data>
   <data name="nextRunTime.Text" xml:space="preserve">
-    <value>Tiempo de ejecución siguiente</value>
+    <value>Hora de próxima ejecución</value>
   </data>
   <data name="status.Text" xml:space="preserve">
     <value>Estado</value>
   </data>
   <data name="triggers.Text" xml:space="preserve">
-    <value>Factores desencadenantes</value>
+    <value>Desencadenadores</value>
   </data>
 </root>

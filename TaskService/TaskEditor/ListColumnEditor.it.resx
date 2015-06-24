@@ -144,4 +144,7 @@
   <data name="upBtn.Text" xml:space="preserve">
     <value>S&amp;alire</value>
   </data>
+  <data name="restoreBtn.Text" xml:space="preserve">
+    <value>Ripri&amp;stina predefiniti</value>
+  </data>
 </root>

@@ -130,7 +130,7 @@
     <value>显示一条消息</value>
   </data>
   <data name="ComHandlerAction" xml:space="preserve">
-    <value>{0}</value>
+    <value>{3} {0:P}</value>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
     <value>每天</value>

@@ -127,24 +127,24 @@
     <value>Cancelar</value>
   </data>
   <data name="downBtn.Text" xml:space="preserve">
-    <value>MO y ve hacia abajo</value>
+    <value>&amp;Bajar</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>&amp;Columnas disponibles:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Columnas de pantalla &amp; ed:</value>
+    <value>Columnas mostradas:</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>Aceptar</value>
   </data>
   <data name="remBtn.Text" xml:space="preserve">
-    <value>&lt;- &amp;Eliminar</value>
+    <value>&lt;- &amp;Quitar</value>
   </data>
   <data name="restoreBtn.Text" xml:space="preserve">
-    <value>Re y almacene valores predeterminados</value>
+    <value>Re&amp;staurar predeterminados</value>
   </data>
   <data name="upBtn.Text" xml:space="preserve">
-    <value>M y ove hasta</value>
+    <value>&amp;Subir</value>
   </data>
 </root>

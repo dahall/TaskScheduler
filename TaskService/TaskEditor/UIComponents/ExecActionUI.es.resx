@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Agregue los argumentos (opcionales):</value>
+    <value>Agregar argumentos (opcional):</value>
   </data>
   <data name="execDirLabel.Text" xml:space="preserve">
     <value>Iniciar en (opcional):</value>
   </data>
   <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>Buscar...</value>
+    <value>Examinar...</value>
   </data>
   <data name="execProgLabel.Text" xml:space="preserve">
-    <value>Programa/script:</value>
+    <value>Programa o script:</value>
   </data>
 </root>

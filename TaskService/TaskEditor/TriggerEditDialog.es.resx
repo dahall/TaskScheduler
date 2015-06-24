@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Nuevo gatillo</value>
+    <value>Nuevo desencadenador</value>
   </data>
   <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Activar:</value>
+    <value>Activar</value>
   </data>
   <data name="advSettingsGroup.Text" xml:space="preserve">
     <value>Configuración avanzada</value>
@@ -130,46 +130,43 @@
     <value>Cancelar</value>
   </data>
   <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Tareas de demora de hasta (retraso aleatorio):</value>
+    <value>Retraso máx. (retraso aleatorio):</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>para una duración de:</value>
+    <value>durante:</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
     <value>Habilitado</value>
   </data>
   <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Expira:</value>
+    <value>Expirar</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Configuración</value>
   </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Nombre:</value>
+    <value>Nombre</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Para cambiar condiciones de ralentí, utilice la página de condiciones en hoja de propiedades de tarea o crear tarea.</value>
+    <value>Para cambiar las condiciones de inactividad, use la página Condiciones en el diálogo Crear tarea o en la hoja de propiedades de tarea .</value>
   </data>
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
     <value>Cualquier usuario</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Cambiar de usuario o el grupo...</value>
+    <value>Cambiar usuario o grupo...</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
-    <value>Conexión del equipo local</value>
+    <value>Conexión desde un equipo local</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Conexión desde el equipo remoto</value>
+    <value>Conexión desde un equipo remoto</value>
   </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Usuario específico o Grupo:</value>
+    <value>Grupo o usuario específico:</value>
   </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt; Usuario actual &gt;</value>
+    <value>Usuario actual</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>Aceptar</value>
@@ -178,21 +175,24 @@
     <value>Propiedad</value>
   </data>
   <data name="propValCol.Text" xml:space="preserve">
-    <value>Valor</value>
+    <value>Valor:</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Tarea de repetir cada:</value>
+    <value>Repetir cada:</value>
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>No hay ningún ajuste adicional necesaria.</value>
+    <value>No es necesario definir valores de configuración adicionales.</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Detener todas las tareas en ejecución al final de la duración de la repetición</value>
+    <value>Detener todas las tareas en ejecución al final de la duración de repetición</value>
   </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Detener la tarea si se ejecuta más de:</value>
+    <value>Detener la tarea si se ejecuta durante más de:</value>
   </data>
   <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Comenzar la tarea:</value>
+    <value>Iniciar la tarea:</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>groupBox6</value>
   </data>
 </root>

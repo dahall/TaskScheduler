@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Gatillo</value>
+    <value>Desencadenador</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Datos de</value>
+    <value>Detalles</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Estado</value>
+    <value>Estado:</value>
   </data>
   <data name="deleteTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Eliminar desencadenador</value>
   </data>
   <data name="disableToolStripMenuItem.Text" xml:space="preserve">
-    <value>Desactivar</value>
+    <value>Deshabilitar</value>
   </data>
   <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Editar el gatillo...</value>
+    <value>Editar desencadenador</value>
   </data>
   <data name="enableToolStripMenuItem.Text" xml:space="preserve">
-    <value>Permiten</value>
+    <value>Habilitar</value>
   </data>
   <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nuevo gatillo...</value>
+    <value>Nuevo desencadenador</value>
   </data>
   <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>&amp;Eliminar</value>
+    <value>Eliminar</value>
   </data>
   <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>&amp;Editar...</value>
+    <value>Editar</value>
   </data>
   <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>&amp;Nueva...</value>
+    <value>Nuevo</value>
   </data>
 </root>

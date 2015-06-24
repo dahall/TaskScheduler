@@ -133,7 +133,7 @@
     <value>Ruta de acceso</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Búsqueda de:</value>
+    <value>Buscar:</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
     <value>Aceptar</value>

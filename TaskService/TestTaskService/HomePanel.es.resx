@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>Puede utilizar a programador de tareas para crear y administrar tareas comunes que el ordenador se lleva a cabo automáticamente en los horarios que especifique. Para comenzar, haga clic en un comando en el menú Acción.
+    <value>Puede utilizar el programador de tareas para crear y administrar tareas comunes que el ordenador llevará a cabo automáticamente en los horarios que especifíque. Para comenzar, haga clic en el menú Acción.
 
-Las tareas se almacenan en carpetas en la biblioteca del programador de tareas. Para ver o realizar una operación en una tarea individual, seleccione la tarea en el la biblioteca del programador de tareas y haga clic en un comando en el menú Acción.</value>
+Las tareas se almacenan en carpetas en la biblioteca del programador de tareas. Para ver o realizar una operación en una tarea individual, seleccione la tarea en el la biblioteca del programador de tareas y haga clic el menú Acción.</value>
   </data>
 </root>
