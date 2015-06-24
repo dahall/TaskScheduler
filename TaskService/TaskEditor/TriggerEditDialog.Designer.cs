@@ -92,16 +92,16 @@
 			// 
 			// triggerTypeCombo
 			// 
+			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.triggerTypeCombo.FormattingEnabled = true;
-			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.Name = "triggerTypeCombo";
 			this.triggerTypeCombo.SelectedValueChanged += new System.EventHandler(this.triggerTypeCombo_SelectedValueChanged);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.settingsTabControl);
 			resources.ApplyResources(this.groupBox1, "groupBox1");
+			this.groupBox1.Controls.Add(this.settingsTabControl);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
 			// 
@@ -121,8 +121,8 @@
 			// 
 			// scheduleTab
 			// 
-			this.scheduleTab.Controls.Add(this.calendarTriggerUI1);
 			resources.ApplyResources(this.scheduleTab, "scheduleTab");
+			this.scheduleTab.Controls.Add(this.calendarTriggerUI1);
 			this.scheduleTab.Name = "scheduleTab";
 			this.scheduleTab.UseVisualStyleBackColor = true;
 			// 
@@ -134,21 +134,21 @@
 			// 
 			// logonTab
 			// 
+			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Controls.Add(this.logonRemotePanel);
 			this.logonTab.Controls.Add(this.logonChgUserBtn);
 			this.logonTab.Controls.Add(this.logonUserLabel);
 			this.logonTab.Controls.Add(this.logonSpecUserRadio);
 			this.logonTab.Controls.Add(this.logonAnyUserRadio);
-			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Name = "logonTab";
 			this.logonTab.UseVisualStyleBackColor = true;
 			// 
 			// logonRemotePanel
 			// 
+			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Controls.Add(this.groupBox6);
 			this.logonRemotePanel.Controls.Add(this.logonLocalRadio);
 			this.logonRemotePanel.Controls.Add(this.logonRemoteRadio);
-			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Name = "logonRemotePanel";
 			// 
 			// groupBox6
@@ -197,8 +197,8 @@
 			// 
 			// startupTab
 			// 
-			this.startupTab.Controls.Add(this.startupIntroLabel);
 			resources.ApplyResources(this.startupTab, "startupTab");
+			this.startupTab.Controls.Add(this.startupIntroLabel);
 			this.startupTab.Name = "startupTab";
 			this.startupTab.UseVisualStyleBackColor = true;
 			// 
@@ -209,8 +209,8 @@
 			// 
 			// idleTab
 			// 
-			this.idleTab.Controls.Add(this.label8);
 			resources.ApplyResources(this.idleTab, "idleTab");
+			this.idleTab.Controls.Add(this.label8);
 			this.idleTab.Name = "idleTab";
 			this.idleTab.UseVisualStyleBackColor = true;
 			// 
@@ -221,8 +221,8 @@
 			// 
 			// onEventTab
 			// 
-			this.onEventTab.Controls.Add(this.eventTriggerUI1);
 			resources.ApplyResources(this.onEventTab, "onEventTab");
+			this.onEventTab.Controls.Add(this.eventTriggerUI1);
 			this.onEventTab.Name = "onEventTab";
 			this.onEventTab.UseVisualStyleBackColor = true;
 			// 
@@ -233,22 +233,22 @@
 			// 
 			// customTab
 			// 
+			resources.ApplyResources(this.customTab, "customTab");
 			this.customTab.Controls.Add(this.customPropsListView);
 			this.customTab.Controls.Add(this.customNameText);
 			this.customTab.Controls.Add(this.label1);
-			resources.ApplyResources(this.customTab, "customTab");
 			this.customTab.Name = "customTab";
 			this.customTab.UseVisualStyleBackColor = true;
 			// 
 			// customPropsListView
 			// 
+			resources.ApplyResources(this.customPropsListView, "customPropsListView");
 			this.customPropsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.propNameCol,
             this.propValCol});
 			this.customPropsListView.FullRowSelect = true;
 			this.customPropsListView.GridLines = true;
 			this.customPropsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			resources.ApplyResources(this.customPropsListView, "customPropsListView");
 			this.customPropsListView.MultiSelect = false;
 			this.customPropsListView.Name = "customPropsListView";
 			this.customPropsListView.UseCompatibleStateImageBehavior = false;
@@ -275,6 +275,7 @@
 			// 
 			// advSettingsGroup
 			// 
+			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsSpan);
 			this.advSettingsGroup.Controls.Add(this.durationSpan);
 			this.advSettingsGroup.Controls.Add(this.repeatSpan);
@@ -289,7 +290,6 @@
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsCheckBox);
 			this.advSettingsGroup.Controls.Add(this.repeatCheckBox);
 			this.advSettingsGroup.Controls.Add(this.delayCheckBox);
-			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Name = "advSettingsGroup";
 			this.advSettingsGroup.TabStop = false;
 			// 

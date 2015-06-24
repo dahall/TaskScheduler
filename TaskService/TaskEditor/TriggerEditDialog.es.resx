@@ -117,59 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Nuevo desencadenador</value>
+  <data name="triggerTypeLabel.Text" xml:space="preserve">
+    <value>Iniciar la tarea:</value>
   </data>
-  <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Activar</value>
-  </data>
-  <data name="advSettingsGroup.Text" xml:space="preserve">
-    <value>Configuración avanzada</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Cancelar</value>
-  </data>
-  <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Retraso máx. (retraso aleatorio):</value>
-  </data>
-  <data name="durationLabel.Text" xml:space="preserve">
-    <value>durante:</value>
-  </data>
-  <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Habilitado</value>
-  </data>
-  <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Expirar</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Configuración</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Para cambiar las condiciones de inactividad, use la página Condiciones en el diálogo Crear tarea o en la hoja de propiedades de tarea .</value>
-  </data>
-  <data name="logonAnyUserRadio.Text" xml:space="preserve">
-    <value>Cualquier usuario</value>
-  </data>
-  <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Cambiar usuario o grupo...</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 19</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
     <value>Conexión desde un equipo local</value>
   </data>
+  <data name="logonRemoteRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 19</value>
+  </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
     <value>Conexión desde un equipo remoto</value>
   </data>
-  <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Grupo o usuario específico:</value>
+  <data name="logonChgUserBtn.Text" xml:space="preserve">
+    <value>Cambiar usuario o grupo...</value>
+  </data>
+  <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 15</value>
   </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
     <value>Usuario actual</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>Aceptar</value>
+  <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 19</value>
+  </data>
+  <data name="logonSpecUserRadio.Text" xml:space="preserve">
+    <value>Grupo o usuario específico:</value>
+  </data>
+  <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 19</value>
+  </data>
+  <data name="logonAnyUserRadio.Text" xml:space="preserve">
+    <value>Cualquier usuario</value>
+  </data>
+  <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 15</value>
+  </data>
+  <data name="startupIntroLabel.Text" xml:space="preserve">
+    <value>No es necesario definir valores de configuración adicionales.</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>711, 15</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Para cambiar las condiciones de inactividad, use la página Condiciones en el diálogo Crear tarea o en la hoja de propiedades de tarea .</value>
+  </data>
+  <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 152</value>
   </data>
   <data name="propNameCol.Text" xml:space="preserve">
     <value>Propiedad</value>
@@ -177,22 +175,70 @@
   <data name="propValCol.Text" xml:space="preserve">
     <value>Valor:</value>
   </data>
-  <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repetir cada:</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 15</value>
   </data>
-  <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>No es necesario definir valores de configuración adicionales.</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>durante:</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 19</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
     <value>Detener todas las tareas en ejecución al final de la duración de repetición</value>
   </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 19</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 19</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Expirar</value>
+  </data>
+  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 19</value>
+  </data>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Activar</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 19</value>
+  </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
     <value>Detener la tarea si se ejecuta durante más de:</value>
   </data>
-  <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Iniciar la tarea:</value>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 19</value>
   </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>groupBox6</value>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Repetir cada:</value>
+  </data>
+  <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 19</value>
+  </data>
+  <data name="delayCheckBox.Text" xml:space="preserve">
+    <value>Retraso máx. (retraso aleatorio):</value>
+  </data>
+  <data name="advSettingsGroup.Text" xml:space="preserve">
+    <value>Configuración avanzada</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Nuevo desencadenador</value>
   </data>
 </root>

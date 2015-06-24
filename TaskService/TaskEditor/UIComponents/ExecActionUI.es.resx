@@ -117,14 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Agregar argumentos (opcional):</value>
+  <data name="execProgBrowseBtn.Text" xml:space="preserve">
+    <value>Examinar...</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 78</value>
+  </data>
+  <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 23</value>
+  </data>
+  <data name="execArgText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 48</value>
+  </data>
+  <data name="execArgText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 23</value>
+  </data>
+  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 15</value>
   </data>
   <data name="execDirLabel.Text" xml:space="preserve">
     <value>Iniciar en (opcional):</value>
   </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>Examinar...</value>
+  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 15</value>
+  </data>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value>Agregar argumentos (opcional):</value>
+  </data>
+  <data name="execProgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 15</value>
   </data>
   <data name="execProgLabel.Text" xml:space="preserve">
     <value>Programa o script:</value>

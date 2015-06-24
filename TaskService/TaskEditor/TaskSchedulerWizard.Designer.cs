@@ -116,13 +116,13 @@
 			// 
 			// introPage
 			// 
+			resources.ApplyResources(this.introPage, "introPage");
 			this.introPage.AllowNext = false;
 			this.introPage.Controls.Add(this.nameText);
 			this.introPage.Controls.Add(this.descText);
 			this.introPage.Controls.Add(this.label2);
 			this.introPage.Controls.Add(this.label1);
 			this.introPage.Name = "introPage";
-			resources.ApplyResources(this.introPage, "introPage");
 			// 
 			// nameText
 			// 
@@ -147,10 +147,10 @@
 			// 
 			// triggerSelectPage
 			// 
+			resources.ApplyResources(this.triggerSelectPage, "triggerSelectPage");
 			this.triggerSelectPage.AllowNext = false;
 			this.triggerSelectPage.Controls.Add(this.triggerSelectionList);
 			this.triggerSelectPage.Name = "triggerSelectPage";
-			resources.ApplyResources(this.triggerSelectPage, "triggerSelectPage");
 			this.triggerSelectPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.triggerSelectPage_Commit);
 			this.triggerSelectPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.triggerSelectPage_Initialize);
 			// 
@@ -163,10 +163,10 @@
 			// 
 			// dailyTriggerPage
 			// 
+			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			this.dailyTriggerPage.Controls.Add(this.dailyTriggerUI1);
 			this.dailyTriggerPage.Name = "dailyTriggerPage";
 			this.dailyTriggerPage.NextPage = this.oneTimeTriggerPage;
-			resources.ApplyResources(this.dailyTriggerPage, "dailyTriggerPage");
 			// 
 			// dailyTriggerUI1
 			// 
@@ -175,11 +175,11 @@
 			// 
 			// oneTimeTriggerPage
 			// 
+			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartTimePicker);
 			this.oneTimeTriggerPage.Controls.Add(this.oneTimeStartLabel);
 			this.oneTimeTriggerPage.Name = "oneTimeTriggerPage";
 			this.oneTimeTriggerPage.NextPage = this.weeklyTriggerPage;
-			resources.ApplyResources(this.oneTimeTriggerPage, "oneTimeTriggerPage");
 			this.oneTimeTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.oneTimeTriggerPage_Commit);
 			// 
 			// oneTimeStartTimePicker
@@ -195,10 +195,10 @@
 			// 
 			// weeklyTriggerPage
 			// 
+			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			this.weeklyTriggerPage.Controls.Add(this.weeklyTriggerUI1);
 			this.weeklyTriggerPage.Name = "weeklyTriggerPage";
 			this.weeklyTriggerPage.NextPage = this.monthlyTriggerPage;
-			resources.ApplyResources(this.weeklyTriggerPage, "weeklyTriggerPage");
 			// 
 			// weeklyTriggerUI1
 			// 
@@ -207,10 +207,10 @@
 			// 
 			// monthlyTriggerPage
 			// 
+			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			this.monthlyTriggerPage.Controls.Add(this.monthlyTriggerUI1);
 			this.monthlyTriggerPage.Name = "monthlyTriggerPage";
 			this.monthlyTriggerPage.NextPage = this.onEventTriggerPage;
-			resources.ApplyResources(this.monthlyTriggerPage, "monthlyTriggerPage");
 			// 
 			// monthlyTriggerUI1
 			// 
@@ -220,11 +220,11 @@
 			// 
 			// onEventTriggerPage
 			// 
+			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.AllowNext = false;
 			this.onEventTriggerPage.Controls.Add(this.eventTriggerUI1);
 			this.onEventTriggerPage.Name = "onEventTriggerPage";
 			this.onEventTriggerPage.NextPage = this.triggerPropPage;
-			resources.ApplyResources(this.onEventTriggerPage, "onEventTriggerPage");
 			this.onEventTriggerPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.onEventTriggerPage_Commit);
 			this.onEventTriggerPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.onEventTriggerPage_Initialize);
 			// 
@@ -236,6 +236,7 @@
 			// 
 			// triggerPropPage
 			// 
+			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
 			this.triggerPropPage.Controls.Add(this.triggerPropText);
 			this.triggerPropPage.Controls.Add(this.durationSpan);
 			this.triggerPropPage.Controls.Add(this.repeatSpan);
@@ -243,7 +244,6 @@
 			this.triggerPropPage.Controls.Add(this.enabledCheckBox);
 			this.triggerPropPage.Controls.Add(this.repeatCheckBox);
 			this.triggerPropPage.Name = "triggerPropPage";
-			resources.ApplyResources(this.triggerPropPage, "triggerPropPage");
 			this.triggerPropPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.triggerPropPage_Initialize);
 			// 
 			// triggerPropText
@@ -284,10 +284,10 @@
 			// 
 			// actionSelectPage
 			// 
+			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
 			this.actionSelectPage.AllowNext = false;
 			this.actionSelectPage.Controls.Add(this.actionSelectionList);
 			this.actionSelectPage.Name = "actionSelectPage";
-			resources.ApplyResources(this.actionSelectPage, "actionSelectPage");
 			this.actionSelectPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.actionSelectPage_Commit);
 			// 
 			// actionSelectionList
@@ -299,11 +299,11 @@
 			// 
 			// runActionPage
 			// 
+			resources.ApplyResources(this.runActionPage, "runActionPage");
 			this.runActionPage.AllowNext = false;
 			this.runActionPage.Controls.Add(this.execActionUI1);
 			this.runActionPage.Name = "runActionPage";
 			this.runActionPage.NextPage = this.emailActionPage;
-			resources.ApplyResources(this.runActionPage, "runActionPage");
 			this.runActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.runActionPage_Commit);
 			// 
 			// execActionUI1
@@ -314,11 +314,11 @@
 			// 
 			// emailActionPage
 			// 
+			resources.ApplyResources(this.emailActionPage, "emailActionPage");
 			this.emailActionPage.AllowNext = false;
 			this.emailActionPage.Controls.Add(this.emailActionUI1);
 			this.emailActionPage.Name = "emailActionPage";
 			this.emailActionPage.NextPage = this.msgActionPage;
-			resources.ApplyResources(this.emailActionPage, "emailActionPage");
 			this.emailActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.emailActionPage_Commit);
 			// 
 			// emailActionUI1
@@ -329,11 +329,11 @@
 			// 
 			// msgActionPage
 			// 
+			resources.ApplyResources(this.msgActionPage, "msgActionPage");
 			this.msgActionPage.AllowNext = false;
 			this.msgActionPage.Controls.Add(this.showMessageActionUI1);
 			this.msgActionPage.Name = "msgActionPage";
 			this.msgActionPage.NextPage = this.secOptPage;
-			resources.ApplyResources(this.msgActionPage, "msgActionPage");
 			this.msgActionPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.msgActionPage_Commit);
 			// 
 			// showMessageActionUI1
@@ -344,6 +344,7 @@
 			// 
 			// secOptPage
 			// 
+			resources.ApplyResources(this.secOptPage, "secOptPage");
 			this.secOptPage.Controls.Add(this.taskLocalOnlyCheck);
 			this.secOptPage.Controls.Add(this.taskLoggedOptionalRadio);
 			this.secOptPage.Controls.Add(this.taskLoggedOnRadio);
@@ -351,7 +352,6 @@
 			this.secOptPage.Controls.Add(this.changePrincipalButton);
 			this.secOptPage.Controls.Add(this.taskUserAcctLabel);
 			this.secOptPage.Name = "secOptPage";
-			resources.ApplyResources(this.secOptPage, "secOptPage");
 			this.secOptPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.secOptPage_Commit);
 			// 
 			// taskLocalOnlyCheck
@@ -397,12 +397,12 @@
 			// 
 			// summaryPage
 			// 
+			resources.ApplyResources(this.summaryPage, "summaryPage");
 			this.summaryPage.Controls.Add(this.sumText);
 			this.summaryPage.Controls.Add(this.openDlgAfterCheck);
 			this.summaryPage.Controls.Add(this.summaryPrompt);
 			this.summaryPage.IsFinishPage = true;
 			this.summaryPage.Name = "summaryPage";
-			resources.ApplyResources(this.summaryPage, "summaryPage");
 			this.summaryPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.summaryPage_Initialize);
 			// 
 			// sumText
