@@ -135,6 +135,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			onEventSourceCombo.Items.Clear();
 			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventProviders(TargetServer, onEventLogCombo.Text));
+			onEventSourceCombo.SelectedIndex = onEventSourceCombo.Items.Count > 0 ? 0 : -1;
 			UpdateCustomText();
 			OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 		}

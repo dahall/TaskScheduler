@@ -117,20 +117,162 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="taskNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 15</value>
+  </data>
+  <data name="taskNameLabel.Text" xml:space="preserve">
+    <value>No&amp;mbre:</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 15</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Ubicación:</value>
+  </data>
+  <data name="taskAuthorLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 15</value>
+  </data>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="taskDescLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 15</value>
+  </data>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="taskNameText.Text" xml:space="preserve">
+    <value>Nombre de tarea</value>
+  </data>
+  <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 341</value>
+  </data>
+  <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 24</value>
+  </data>
+  <data name="taskVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 15</value>
+  </data>
+  <data name="taskVersionLabel.Text" xml:space="preserve">
+    <value>&amp;Configurar para:</value>
+  </data>
+  <data name="taskHiddenCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 19</value>
+  </data>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Oculto</value>
+  </data>
+  <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 19</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Ejecutar con los privilegios más altos</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>473, 19</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>No almacenar contraseña. La tarea solo tendrá acceso a los recursos del equipo local.</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 19</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Ejecutar tanto si un usuario inició sesión como si no</value>
+  </data>
+  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 19</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Ejecutar sólo cuando el usuario haya iniciado sesión</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Cambiar usuario o grupo...</value>
+  </data>
+  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 15</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Al ejecutar la tarea, usar esta cuenta de usuario:</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Opciones de seguridad</value>
+  </data>
+  <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
+    <value>Cuando se crea una tarea, se pueden especificar las condiciones que la activarán.</value>
+  </data>
+  <data name="triggersTab.Text" xml:space="preserve">
+    <value>Desencadenadores</value>
+  </data>
   <data name="actionIntroLabel.Text" xml:space="preserve">
     <value>Al crear una tarea, debe especificar la acción que se producirá cuando se inicie la tarea.</value>
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
     <value>Acciones</value>
   </data>
-  <data name="addPropTab.Text" xml:space="preserve">
-    <value>Adiciones</value>
+  <data name="taskStartIfConnectionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 19</value>
   </data>
-  <data name="autoMaintGroup.Text" xml:space="preserve">
-    <value>Mantenimiento automático</value>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Iniciar sólo si la siguiente conexión de red está disponible:</value>
   </data>
-  <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Cambiar usuario o grupo...</value>
+  <data name="networkConditionGroupBox.Text" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 19</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Detener si el equipo empieza a usar la batería</value>
+  </data>
+  <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 19</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Activar el equipo para realizar esta tarea.</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 19</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Iniciar la tarea sólo si el equipo está conectado a la corriente alterna</value>
+  </data>
+  <data name="powerConditionGroupBox.Text" xml:space="preserve">
+    <value>Potencia</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 51</value>
+  </data>
+  <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 21</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 19</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Reiniciar si el estado de inactividad se reanuda</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 19</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Detener si el equipo deja de estar inactivo</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 15</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>Esperar a que esté inactivo durante:</value>
+  </data>
+  <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 19</value>
+  </data>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Iniciar la tarea sólo si el equipo está inactivo durante:</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Inactivo</value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
     <value>Especificar las condiciones que junto con el desencadenador, determinan si la tarea debe ejecutarse. La tarea no se ejecutará si cualquier condición especificada no se cumple.</value>
@@ -138,193 +280,223 @@
   <data name="conditionsTab.Text" xml:space="preserve">
     <value>Condiciones</value>
   </data>
-  <data name="generalTab.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="taskRestartCountText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 136</value>
   </data>
-  <data name="historyTab.Text" xml:space="preserve">
-    <value>Historia</value>
-  </data>
-  <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>Inactivo</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>No se pueden mostrar los tiempos de ejecución de ésta tarea.</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Ubicación:</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Error:</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Especificar la seguridad adicional, mantenimiento y sistema de configuración de compatibilidad de función para la tarea.</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Especificar la información de registro para la tarea.</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Nivel de &amp;prioridad:</value>
-  </data>
-  <data name="networkConditionGroupBox.Text" xml:space="preserve">
-    <value>Red</value>
-  </data>
-  <data name="powerConditionGroupBox.Text" xml:space="preserve">
-    <value>Potencia</value>
-  </data>
-  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp;Privilegios necesarios:</value>
-  </data>
-  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Proceso y tipo de identificación de seguridad (SID):</value>
-  </data>
-  <data name="regInfoTab.Text" xml:space="preserve">
-    <value>Información</value>
-  </data>
-  <data name="runTimesErrorLabel.Text" xml:space="preserve">
-    <value>(texto de error)</value>
-  </data>
-  <data name="runTimesTab.Text" xml:space="preserve">
-    <value>Tiempos de ejecución</value>
-  </data>
-  <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Endurecimiento de la seguridad</value>
-  </data>
-  <data name="settingsIntroLabel.Text" xml:space="preserve">
-    <value>Especifique la configuración adicional que afecta al comportamiento de la tarea.</value>
-  </data>
-  <data name="settingsTab.Text" xml:space="preserve">
-    <value>Configuración</value>
-  </data>
-  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>&amp;Permitir que la tarea se ejecute a petición del usuario</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Hacer que la tarea en ejecución se detenga si no finaliza cuando se solicite</value>
-  </data>
-  <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Autor</value>
-  </data>
-  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Eliminar la tarea si no está programada para ejecutarse de nuevo después de:</value>
-  </data>
-  <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>Descripción</value>
-  </data>
-  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Iniciar la tarea sólo si el equipo está conectado a la corriente alterna</value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>No permitir inicio de sesión dentro de aplicaciones remotas integradas localmente (RAIL)</value>
-  </data>
-  <data name="taskEnabledCheck.Text" xml:space="preserve">
-    <value>&amp;Habilitado</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Detener la tarea si se ejecuta durante más de:</value>
-  </data>
-  <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Oculto</value>
-  </data>
-  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Iniciar la tarea sólo si el equipo está inactivo durante:</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>Esperar a que esté inactivo durante:</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>No almacenar contraseña. La tarea solo tendrá acceso a los recursos del equipo local.</value>
-  </data>
-  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Ejecutar sólo cuando el usuario haya iniciado sesión</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Ejecutar tanto si un usuario inició sesión como si no</value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value>Si la tarea no termina, reiniciar después de:</value>
-  </data>
-  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value>Iniciar la tarea en modo &amp;exclusivo</value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
-    <value>Durante el mantenimiento, iniciar tarea cada:</value>
-  </data>
-  <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>No&amp;mbre:</value>
-  </data>
-  <data name="taskNameText.Text" xml:space="preserve">
-    <value>Nombre de tarea</value>
-  </data>
-  <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value>Documentación:</value>
-  </data>
-  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Modificar seguridad...</value>
-  </data>
-  <data name="taskRegSDDLLabel.Text" xml:space="preserve">
-    <value>Se&amp;guridad:</value>
-  </data>
-  <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value>&amp;Origen:</value>
-  </data>
-  <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value>&amp;URI:</value>
-  </data>
-  <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>&amp;Versión:</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>veces</value>
-  </data>
-  <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value> Intento de reinicio hasta:</value>
-  </data>
-  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>Si la tarea no se ejecuta, reiniciarla cada:</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Reiniciar si el estado de inactividad se reanuda</value>
-  </data>
-  <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Ejecutar con los privilegios más altos</value>
+  <data name="taskRunningRuleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 15</value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
     <value>Aplicar la siguiente regla si la tarea ya está en ejecución:</value>
   </data>
-  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
-    <value>Opciones de seguridad</value>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>veces</value>
   </data>
-  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Iniciar sólo si la siguiente conexión de red está disponible:</value>
+  <data name="taskRestartCountLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 15</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value> Intento de reinicio hasta:</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 19</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Eliminar la tarea si no está programada para ejecutarse de nuevo después de:</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 19</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Hacer que la tarea en ejecución se detenga si no finaliza cuando se solicite</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 19</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Detener la tarea si se ejecuta durante más de:</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 19</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>Si la tarea no se ejecuta, reiniciarla cada:</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 19</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
     <value>Ejecutar la tarea de inmediato si se pasó por alto algún inicio programado</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Detener si el equipo empieza a usar la batería</value>
+  <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 19</value>
   </data>
-  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Detener si el equipo deja de estar inactivo</value>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>&amp;Permitir que la tarea se ejecute a petición del usuario</value>
   </data>
-  <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
-    <value>Cuando se crea una tarea, se pueden especificar las condiciones que la activarán.</value>
+  <data name="settingsIntroLabel.Text" xml:space="preserve">
+    <value>Especifique la configuración adicional que afecta al comportamiento de la tarea.</value>
   </data>
-  <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>Al ejecutar la tarea, usar esta cuenta de usuario:</value>
+  <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 226</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 166</value>
+  </data>
+  <data name="taskRestartIntervalCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 106</value>
+  </data>
+  <data name="settingsTab.Text" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="taskRegSourceLabel.Text" xml:space="preserve">
+    <value>&amp;Origen:</value>
+  </data>
+  <data name="taskRegDocText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 119</value>
+  </data>
+  <data name="taskRegDocText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 207</value>
+  </data>
+  <data name="taskRegDocLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 21</value>
+  </data>
+  <data name="taskRegDocLabel.Text" xml:space="preserve">
+    <value>Documentación:</value>
+  </data>
+  <data name="taskRegSDDLLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="taskRegSDDLLabel.Text" xml:space="preserve">
+    <value>Se&amp;guridad:</value>
+  </data>
+  <data name="taskRegSourceText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 3</value>
+  </data>
+  <data name="taskRegSourceText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 23</value>
+  </data>
+  <data name="taskRegURIText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 32</value>
+  </data>
+  <data name="taskRegURIText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 23</value>
+  </data>
+  <data name="taskRegVersionText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 61</value>
+  </data>
+  <data name="taskRegVersionText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 23</value>
+  </data>
+  <data name="taskRegSDDLText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 90</value>
+  </data>
+  <data name="taskRegSDDLText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 23</value>
+  </data>
+  <data name="taskRegVersionLabel.Text" xml:space="preserve">
+    <value>&amp;Versión:</value>
+  </data>
+  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
+    <value>Modificar seguridad...</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Especificar la información de registro para la tarea.</value>
+  </data>
+  <data name="regInfoTab.Text" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 19</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
+    <value>Iniciar la tarea en modo &amp;exclusivo</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 15</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
+    <value>Si la tarea no termina, reiniciar después de:</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 15</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
+    <value>Durante el mantenimiento, iniciar tarea cada:</value>
+  </data>
+  <data name="autoMaintGroup.Text" xml:space="preserve">
+    <value>Mantenimiento automático</value>
+  </data>
+  <data name="principalSIDTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 15</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Proceso y tipo de id. de seguridad (SID):</value>
+  </data>
+  <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 21</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 15</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>&amp;Privilegios necesarios:</value>
+  </data>
+  <data name="principalReqPrivilegesDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 50</value>
+  </data>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Endurecimiento de la seguridad</value>
+  </data>
+  <data name="taskEnabledCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 19</value>
+  </data>
+  <data name="taskEnabledCheck.Text" xml:space="preserve">
+    <value>&amp;Habilitado</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>494, 19</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>No permitir inicio de sesión dentro de aplicaciones remotas integradas localmente (RAIL)</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 19</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
     <value>&amp;Usar motor unificado de programación</value>
   </data>
-  <data name="taskVersionLabel.Text" xml:space="preserve">
-    <value>&amp;Configurar para:</value>
+  <data name="taskVolatileCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 19</value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
     <value>&amp;Desactivar automáticamente la tarea cada vez que inicia Windows</value>
   </data>
-  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>Activar el equipo para realizar esta tarea.</value>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 15</value>
   </data>
-  <data name="triggersTab.Text" xml:space="preserve">
-    <value>Desencadenadores</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Nivel de &amp;prioridad:</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Especificar la seguridad adicional, mantenimiento y sistema de configuración de compatibilidad de función para la tarea.</value>
+  </data>
+  <data name="addPropTab.Text" xml:space="preserve">
+    <value>Adiciones</value>
+  </data>
+  <data name="runTimesErrorLabel.Text" xml:space="preserve">
+    <value>(texto de error)</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 15</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>No se pueden mostrar los tiempos de ejecución de ésta tarea.</value>
+  </data>
+  <data name="runTimesTab.Text" xml:space="preserve">
+    <value>Tiempos de ejecución</value>
+  </data>
+  <data name="historyTab.Text" xml:space="preserve">
+    <value>Historia</value>
   </data>
 </root>

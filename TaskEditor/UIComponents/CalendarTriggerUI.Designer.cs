@@ -92,8 +92,8 @@
 			// 
 			// dailyTab
 			// 
-			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
 			resources.ApplyResources(this.dailyTab, "dailyTab");
+			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
 			this.dailyTab.Name = "dailyTab";
 			this.dailyTab.UseVisualStyleBackColor = true;
 			// 
@@ -105,8 +105,8 @@
 			// 
 			// weeklyTab
 			// 
-			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
 			resources.ApplyResources(this.weeklyTab, "weeklyTab");
+			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
 			this.weeklyTab.Name = "weeklyTab";
 			this.weeklyTab.UseVisualStyleBackColor = true;
 			// 
@@ -118,8 +118,8 @@
 			// 
 			// monthlyTab
 			// 
-			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
 			resources.ApplyResources(this.monthlyTab, "monthlyTab");
+			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
 			this.monthlyTab.Name = "monthlyTab";
 			this.monthlyTab.UseVisualStyleBackColor = true;
 			// 

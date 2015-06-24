@@ -1377,6 +1377,11 @@ namespace Microsoft.Win32.TaskScheduler
 			hasError = valid;
 			return valid;
 		}
+
+		private void taskHistoryControl1_Load(object sender, EventArgs e)
+		{
+
+		}
 	}
 
 	/// <summary>

@@ -39,22 +39,25 @@ namespace Microsoft.Win32.TaskScheduler
 						using (EventLogConfiguration ec = new EventLogConfiguration(log, session))
 							names = ec.ProviderNames;
 					}
-					if (names != null && getDisplayName)
+					if (names != null)
 					{
 						var ret = new List<string>(names);
 						ret.Sort();
-						for (int i = 0; i < ret.Count; i++)
+						if (getDisplayName)
 						{
-							string dn = ret[i];
-							try
+							for (int i = 0; i < ret.Count; i++)
 							{
-								var md = new ProviderMetadata(ret[i], session, System.Globalization.CultureInfo.CurrentUICulture);
-								if (!string.IsNullOrEmpty(md.DisplayName)) dn = md.DisplayName;
-								var spl = dn.Split('-');
-								dn = spl[spl.Length - 1];
+								string dn = ret[i];
+								try
+								{
+									var md = new ProviderMetadata(ret[i], session, System.Globalization.CultureInfo.CurrentUICulture);
+									if (!string.IsNullOrEmpty(md.DisplayName)) dn = md.DisplayName;
+									var spl = dn.Split('-');
+									dn = spl[spl.Length - 1];
+								}
+								catch { }
+								ret[i] = string.Concat(ret[i], "|", dn);
 							}
-							catch { }
-							ret[i] = string.Concat(ret[i], "|", dn);
 						}
 						return ret.ToArray();
 						//return new List<string>(names).ToArray();

@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="execDirText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -133,25 +133,18 @@
   <data name="&gt;&gt;execArgText.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 23</value>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value>Add arguments (optional):</value>
   </data>
   <data name="&gt;&gt;execProgBrowseBtn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 15</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="execProgBrowseBtn.Text" xml:space="preserve">
     <value>Browse...</value>
-  </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Add arguments (optional):</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ExecActionUI</value>
@@ -159,6 +152,7 @@
   <data name="&gt;&gt;execDirText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="execDirLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>-3, 82</value>
   </data>
@@ -166,10 +160,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;execProgText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="execArgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -183,17 +180,14 @@
   <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;execDirText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;execArgText.Name" xml:space="preserve">
     <value>execArgText</value>
   </data>
   <data name="execProgBrowseBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 25</value>
   </data>
-  <data name="&gt;&gt;execProgLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
+    <value>execProgLabel</value>
   </data>
   <data name="execArgText.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -204,11 +198,8 @@
   <data name="&gt;&gt;execProgText.Name" xml:space="preserve">
     <value>execProgText</value>
   </data>
-  <data name="&gt;&gt;execDirText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;execArgLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="execProgBrowseBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -217,7 +208,7 @@
     <value>7, 15</value>
   </data>
   <data name="&gt;&gt;execDirLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;execProgText.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -225,14 +216,17 @@
   <data name="execProgText.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 18</value>
   </data>
-  <data name="execProgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 15</value>
   </data>
   <data name="&gt;&gt;execProgBrowseBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="execProgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;execDirText.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
     <value>openFileDialog1</value>
@@ -243,11 +237,8 @@
   <data name="&gt;&gt;execArgLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
-    <value>execProgLabel</value>
-  </data>
   <data name="&gt;&gt;execArgText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;execProgText.Parent" xml:space="preserve">
     <value>$this</value>
@@ -270,14 +261,20 @@
   <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="execArgLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 15</value>
+  <data name="&gt;&gt;execProgLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="execDirText.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 78</value>
+  </data>
+  <data name="execProgText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="execProgLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>-3, 0</value>
@@ -309,17 +306,20 @@
   <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
     <value>execDirLabel</value>
   </data>
+  <data name="execDirText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 23</value>
+  </data>
   <data name="&gt;&gt;execProgBrowseBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="execDirLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 15</value>
   </data>
   <data name="execDirText.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="&gt;&gt;execProgLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="execArgLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>-3, 52</value>
@@ -330,13 +330,13 @@
   <data name="execProgBrowseBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>321, 17</value>
   </data>
-  <data name="execProgLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;execDirText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>
