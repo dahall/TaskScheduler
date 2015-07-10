@@ -430,17 +430,53 @@ namespace TestTaskService
 				//FolderTaskAction(ts.RootFolder, null, delegate(Task tsk) { if (tsk.Definition.Triggers.ContainsType(typeof(CustomTrigger))) output.WriteLine(tsk.Path); });
 
 				// Create a new task definition and assign properties
-				const string taskName = "Test";
+				const string taskName = "TesterTask";
+
 				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Documentation = "Does something";
-				td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
+				td.RegistrationInfo.Description = "some description";
+				td.Principal.LogonType = TaskLogonType.InteractiveToken;
+
+				//var computerSystemClass = new ManagementClass("Win32_ComputerSystem");
+				//var computerSystems = computerSystemClass.GetInstances();
+				//var enumerator = computerSystems.GetEnumerator();
+				//while (enumerator.MoveNext())
+				//{
+				//	var computerSystem = enumerator.Current;
+				td.Principal.UserId = "dahall"; // (string)computerSystem["UserName"];
+				//}
+
+				td.Actions.Add(new ExecAction("cmd.exe", "-someparameter"));
+
+				// Create Trigger
+				var trigger = new RegistrationTrigger { Enabled = true };
+				trigger.Delay = TimeSpan.FromSeconds(8);
+				trigger.EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20);
+				td.Triggers.Add(trigger);
+
+				td.Principal.RunLevel = TaskRunLevel.LUA;
+
+				td.Settings.StartWhenAvailable = true;
+				td.Settings.Hidden = false;
+				td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
+				td.Settings.DisallowStartIfOnBatteries = false;
+				td.Settings.StopIfGoingOnBatteries = false;
+				td.Settings.IdleSettings.StopOnIdleEnd = false;
+				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(40);
+
+				ts.RootFolder.DeleteFolder("TesterFolder", false);
+				TaskFolder testFolder = ts.RootFolder.CreateFolder("TesterFolder", null, false);
+				var t = testFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+
+				//TaskDefinition td = ts.NewTask();
+				//td.RegistrationInfo.Documentation = "Does something";
+				//td.Settings.ExecutionTimeLimit = TimeSpan.Zero;
 				//td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
 				// Add a cron trigger
 				//td.Triggers.AddRange(Trigger.FromCronFormat("15 */6 */30 * *"));
 
 				// Add a trigger that will fire the task at this time every other day
-				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				/*DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				dt.Repetition.Duration = TimeSpan.FromHours(4);
 				dt.Repetition.Interval = TimeSpan.FromHours(1);
 
@@ -466,16 +502,16 @@ namespace TestTaskService
 				output.WriteLine(td.XmlText);
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
 				t.Enabled = false;
-
+				*/
 				System.Threading.Thread.Sleep(1000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
 				//DisplayTask(t, true);
-				using (var dlg = new TaskOptionsEditor { Editable = true })
+				/*using (var dlg = new TaskOptionsEditor { Editable = true })
 				{
 					dlg.Initialize(t);
 					dlg.ShowDialog();
-				}
+				}*/
 
 				// Retrieve the task, add a trigger and save it.
 				//t = ts.GetTask(taskName);
@@ -488,7 +524,8 @@ namespace TestTaskService
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
-				ts.RootFolder.DeleteTask(taskName);
+				//testFolder.DeleteTask(taskName);
+				//ts.RootFolder.DeleteFolder("TesterFolder", false);
 			}
 			catch (Exception ex)
 			{

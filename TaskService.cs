@@ -389,11 +389,26 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="folderName">The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <returns><see cref="TaskFolder"/> instance for the requested folder.</returns>
-		/// <exception cref="Exception">Requested folder was not found.</exception>
 		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
 		public TaskFolder GetFolder(string folderName)
 		{
-			return v2TaskService != null ? new TaskFolder(this, v2TaskService.GetFolder(folderName)) : new TaskFolder(this);
+			TaskFolder f = null;
+			if (v2TaskService != null)
+			{
+				try
+				{
+					var ifld = v2TaskService.GetFolder(folderName);
+					if (ifld != null)
+						f = new TaskFolder(this, ifld);
+				}
+				catch (System.IO.DirectoryNotFoundException) { }
+				catch (System.IO.FileNotFoundException) { }
+			}
+			else if (folderName == @"\")
+				f = new TaskFolder(this);
+			else
+				throw new NotV1SupportedException("Folder other than the root (\\) was requested on a system only supporting Task Scheduler 1.0.");
+			return f;
 		}
 
 		/// <summary>

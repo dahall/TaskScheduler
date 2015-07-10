@@ -208,6 +208,18 @@ namespace Microsoft.Win32.TaskScheduler
 		SessionUnlock = 8
 	}
 
+	/// <summary>
+	/// Options for use when calling the SetSecurityDescriptorSddlForm methods.
+	/// </summary>
+	[Flags]
+	public enum TaskSetSecurityOptions
+	{
+		/// <summary>No special handling.</summary>
+		None = 0,
+		/// <summary>The Task Scheduler service is prevented from adding the allow access-control entry (ACE) for the context principal.</summary>
+		DontAddPrincipalAce = 0x10,
+	}
+
 	/***** WAITING TO DETERMINE USE CASE *****
 	/// <summary>
 	/// Success and error codes that some methods will expose through <see cref="COMExcpetion"/>.
@@ -1277,12 +1289,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Sets the security descriptor for the task. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="sddlForm">The security descriptor for the task.</param>
-		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
+		/// <param name="options">Flags that specify how to set the security descriptor.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSetSecurityOptions options = TaskSetSecurityOptions.None)
 		{
 			if (v2Task != null)
-				v2Task.SetSecurityDescriptor(sddlForm, (int)includeSections);
+				v2Task.SetSecurityDescriptor(sddlForm, (int)options);
 			else
 				throw new NotV1SupportedException();
 		}
@@ -1407,10 +1419,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.InvalidOperationException">Unable to get a compatible task definition for this version of the library.</exception>
 		internal static TaskScheduler.V2Interop.ITaskDefinition GetV2Definition(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask, bool throwError = false)
 		{
-			DefDoc dd = new DefDoc(iTask.Xml);
-			Version xmlVer = dd.Version;
+			Version xmlVer = new Version();
 			try
 			{
+				DefDoc dd = new DefDoc(iTask.Xml);
+				xmlVer = dd.Version;
 				if (xmlVer.Minor > osLibMinorVer)
 				{
 					int newMinor = xmlVer.Minor;

@@ -86,6 +86,11 @@ namespace TestTaskService
 			delFolderMenuItem.Enabled = (e.Node.Parent != null && e.Node.Parent.Tag != null);
 		}
 
+		private void treeView1_HandleCreated(object sender, System.EventArgs e)
+		{
+			treeView1.SetExplorerTheme();
+		}
+
 		private void TSMMCMockup_Load(object sender, EventArgs e)
 		{
 			imageList1.Images.Add(new Bitmap(Properties.Resources.empty, 16, 16), System.Drawing.Color.FromArgb(0xff, 0, 0xff));

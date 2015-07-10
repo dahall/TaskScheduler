@@ -170,10 +170,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="task">The task.</param>
 		/// <param name="sections">The sections of the ACL to retrieve.</param>
-		public TaskSecurity(Task task, AccessControlSections sections = System.Security.AccessControl.AccessControlSections.Access | System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group)
+		public TaskSecurity(Task task, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			this.SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)));
+			this.SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
 		}
 
 		/// <summary>
@@ -181,10 +181,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="folder">The folder.</param>
 		/// <param name="sections">The sections of the ACL to retrieve.</param>
-		public TaskSecurity(TaskFolder folder, AccessControlSections sections = System.Security.AccessControl.AccessControlSections.Access | System.Security.AccessControl.AccessControlSections.Owner | System.Security.AccessControl.AccessControlSections.Group)
+		public TaskSecurity(TaskFolder folder, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			this.SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)));
+			this.SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
 		}
 
 		/// <summary>
@@ -349,6 +349,17 @@ namespace Microsoft.Win32.TaskScheduler
 			base.SetAuditRule(rule);
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			return this.GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections);
+		}
+
 		internal static System.Security.AccessControl.SecurityInfos Convert(System.Security.AccessControl.AccessControlSections si)
 		{
 			System.Security.AccessControl.SecurityInfos ret = 0;
@@ -405,7 +416,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">The task used to retrieve the persisted information.</param>
 		/// <param name="includeSections">One of the <see cref="AccessControlSections"/> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
 		[SecurityCritical]
-		internal void Persist(Task task, AccessControlSections includeSections = AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
+		internal void Persist(Task task, AccessControlSections includeSections = Task.defaultAccessControlSections)
 		{
 			base.WriteLock();
 			try
@@ -413,7 +424,7 @@ namespace Microsoft.Win32.TaskScheduler
 				AccessControlSections accessControlSectionsFromChanges = this.GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
-					task.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(includeSections), TaskSecurity.Convert(includeSections));
+					task.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
 					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
 				}
 			}
@@ -429,7 +440,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="folder">The task folder used to retrieve the persisted information.</param>
 		/// <param name="includeSections">One of the <see cref="AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
 		[SecurityCritical]
-		internal void Persist(TaskFolder folder, AccessControlSections includeSections = AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
+		internal void Persist(TaskFolder folder, AccessControlSections includeSections = Task.defaultAccessControlSections)
 		{
 			base.WriteLock();
 			try
@@ -437,7 +448,7 @@ namespace Microsoft.Win32.TaskScheduler
 				AccessControlSections accessControlSectionsFromChanges = this.GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
-					folder.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(includeSections), TaskSecurity.Convert(includeSections));
+					folder.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
 					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
 				}
 			}
@@ -452,7 +463,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="name">The name used to retrieve the persisted information.</param>
 		/// <param name="includeSections">One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
-		protected override void Persist(string name, AccessControlSections includeSections = AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner)
+		protected override void Persist(string name, AccessControlSections includeSections = Task.defaultAccessControlSections)
 		{
 			using (var ts = new TaskService())
 			{

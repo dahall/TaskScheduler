@@ -109,7 +109,11 @@
     <Compile Include="HomePanel.Designer.cs">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\ListViewGroupExtension.cs" />
+    <Compile Include="Native\ControlExtension.cs" />
+    <Compile Include="Native\EnumUtil.cs" />
+    <Compile Include="Native\Header.cs" />
+    <Compile Include="Native\InteropUtil.cs" />
+    <Compile Include="Native\ListViewExtensions.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +121,12 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Native\ListView.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SIZE.cs" />
+    <Compile Include="Native\SYSTEMTIME.cs" />
+    <Compile Include="Native\TreeViewExtension.cs" />
     <Compile Include="Native\USER32.cs" />
+    <Compile Include="Native\UXTHEME.cs" />
     <Compile Include="NewFolderDlg.cs">
       <SubType>Form</SubType>
     </Compile>
