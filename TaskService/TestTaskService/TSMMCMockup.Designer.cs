@@ -186,6 +186,7 @@
 			this.treeView1.StateImageList = this.imageList1;
 			this.treeView1.TabIndex = 4;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+			this.treeView1.HandleCreated += new System.EventHandler(this.treeView1_HandleCreated);
 			// 
 			// openFileDialog1
 			// 

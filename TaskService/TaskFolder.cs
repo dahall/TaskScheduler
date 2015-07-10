@@ -174,14 +174,49 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
 		/// </summary>
-		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder" /> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="sddlForm">The security descriptor associated with the folder.</param>
-		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
-		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public TaskFolder CreateFolder(string subFolderName, string sddlForm = null)
+		/// <param name="exceptionOnExists">Set this value to false to avoid having an exception called if the folder already exists.</param>
+		/// <returns>A <see cref="TaskFolder" /> instance that represents the new subfolder.</returns>
+		/// <exception cref="System.Security.SecurityException">Security descriptor mismatch between specified credentials and credentials on existing folder by same name.</exception>
+		/// <exception cref="System.ArgumentException">Invalid SDDL form.</exception>
+		/// <exception cref="Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		public TaskFolder CreateFolder(string subFolderName, string sddlForm = null, bool exceptionOnExists = true)
 		{
 			if (v2Folder != null)
-				return new TaskFolder(this.TaskService, v2Folder.CreateFolder(subFolderName, sddlForm));
+			{
+				V2Interop.ITaskFolder ifld = null;
+				try { ifld = v2Folder.CreateFolder(subFolderName, sddlForm); }
+				catch (System.Runtime.InteropServices.COMException ce)
+				{
+					int serr = ce.ErrorCode & 0x0000FFFF;
+					if (serr == 0xb7) // ERROR_ALREADY_EXISTS
+					{
+						if (exceptionOnExists) throw;
+						try
+						{
+							ifld = v2Folder.GetFolder(subFolderName);
+							if (ifld != null && sddlForm != null && sddlForm.Trim().Length > 0)
+							{
+								string sd = ifld.GetSecurityDescriptor((int)Task.defaultSecurityInfosSections);
+								if (string.Compare(sddlForm, sd, true) != 0)
+									throw new System.Security.SecurityException("Security descriptor mismatch between specified credentials and credentials on existing folder by same name.");
+							}
+						}
+						catch
+						{
+							if (ifld != null)
+								System.Runtime.InteropServices.Marshal.ReleaseComObject(ifld);
+							throw;
+						}
+					}
+					else if (serr == 0x534 || serr == 0x538 || serr == 0x539 || serr == 0x53A || serr == 0x519 || serr == 0x57)
+						throw new ArgumentException("Invalid SDDL form", "sddlForm", ce);
+					else
+						throw;
+				}
+				return new TaskFolder(this.TaskService, ifld);
+			}
 			throw new NotV1SupportedException();
 		}
 
@@ -190,7 +225,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="subFolderName">The name of the subfolder to be removed. The root task folder is specified with a backslash (\). This parameter can be a relative path to the folder you want to delete. An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the folder does not exist.</param>
-		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		/// <exception cref="Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public void DeleteFolder(string subFolderName, bool exceptionOnNotExists = true)
 		{
 			if (v2Folder != null)
@@ -199,9 +234,9 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					v2Folder.DeleteFolder(subFolderName, 0);
 				}
-				catch (System.IO.FileNotFoundException)
+				catch (Exception e)
 				{
-					if (exceptionOnNotExists)
+					if (!(e is System.IO.FileNotFoundException || e is System.IO.DirectoryNotFoundException) || exceptionOnNotExists)
 						throw;
 				}
 			}
@@ -489,19 +524,19 @@ namespace Microsoft.Win32.TaskScheduler
 		[Obsolete("This method will be removed in deference to the SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
 		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
-			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections), includeSections);
+			this.SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections));
 		}
 
 		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.
 		/// </summary>
 		/// <param name="sddlForm">The security descriptor for the folder.</param>
-		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
+		/// <param name="options">Flags that specify how to set the security descriptor.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
+		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSetSecurityOptions options = TaskSetSecurityOptions.None)
 		{
 			if (v2Folder != null)
-				v2Folder.SetSecurityDescriptor(sddlForm, (int)includeSections);
+				v2Folder.SetSecurityDescriptor(sddlForm, (int)options);
 			else
 				throw new NotV1SupportedException();
 		}
