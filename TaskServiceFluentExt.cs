@@ -9,10 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="path">The path of the program to run.</param>
 		/// <returns>An <see cref="Fluent.ActionBuilder"/> instance.</returns>
-		public Fluent.ActionBuilder Execute(string path)
-		{
-			return new Fluent.ActionBuilder(new Fluent.BuilderInfo(this), path);
-		}
+		public Fluent.ActionBuilder Execute(string path) => new Fluent.ActionBuilder(new Fluent.BuilderInfo(this), path);
 	}
 
 	namespace Fluent
@@ -44,7 +41,7 @@ namespace Microsoft.Win32.TaskScheduler
 				tb = taskBuilder;
 			}
 
-			internal TaskDefinition TaskDef { get { return tb.td; } }
+			internal TaskDefinition TaskDef => tb.td;
 		}
 
 		/// <summary>
@@ -85,57 +82,39 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="num">The interval of days or weeks.</param>
 			/// <returns><see cref="IntervalTriggerBuilder" /> instance.</returns>
-			public IntervalTriggerBuilder Every(short num)
-			{
-				return new IntervalTriggerBuilder(tb, num);
-			}
+			public IntervalTriggerBuilder Every(short num) => new IntervalTriggerBuilder(tb, num);
 
 			/// <summary>
 			/// Adds a trigger that executes monthly on certain days of the week.
 			/// </summary>
 			/// <param name="dow">The days of the week on which to run.</param>
 			/// <returns><see cref="MonthlyDOWTriggerBuilder" /> instance.</returns>
-			public MonthlyDOWTriggerBuilder OnAll(DaysOfTheWeek dow)
-			{
-				return new MonthlyDOWTriggerBuilder(tb, dow);
-			}
+			public MonthlyDOWTriggerBuilder OnAll(DaysOfTheWeek dow) => new MonthlyDOWTriggerBuilder(tb, dow);
 
 			/// <summary>
 			/// Adds a trigger that executes monthly on specific days.
 			/// </summary>
 			/// <param name="moy">The months of the year in which to run.</param>
 			/// <returns><see cref="MonthlyTriggerBuilder" /> instance.</returns>
-			public MonthlyTriggerBuilder InTheMonthOf(MonthsOfTheYear moy)
-			{
-				return new MonthlyTriggerBuilder(tb, moy);
-			}
+			public MonthlyTriggerBuilder InTheMonthOf(MonthsOfTheYear moy) => new MonthlyTriggerBuilder(tb, moy);
 
 			/// <summary>
 			/// Adds a trigger that executes once at a specific time.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder Once()
-			{
-				return new TriggerBuilder(tb, TaskTriggerType.Time);
-			}
+			public TriggerBuilder Once() => new TriggerBuilder(tb, TaskTriggerType.Time);
 
 			/// <summary>
 			/// Adds a trigger that executes at system startup.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder OnBoot()
-			{
-				return new TriggerBuilder(tb, TaskTriggerType.Boot);
-			}
+			public TriggerBuilder OnBoot() => new TriggerBuilder(tb, TaskTriggerType.Boot);
 
 			/// <summary>
 			/// Adds a trigger that executes when system is idle.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder OnIdle()
-			{
-				return new TriggerBuilder(tb, TaskTriggerType.Idle);
-			}
+			public TriggerBuilder OnIdle() => new TriggerBuilder(tb, TaskTriggerType.Idle);
 
 			/// <summary>
 			/// Adds a trigger that executes once at specified state change.
@@ -155,10 +134,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Adds a trigger that executes at logon of all users.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder AtLogon()
-			{
-				return new TriggerBuilder(tb, TaskTriggerType.Logon);
-			}
+			public TriggerBuilder AtLogon() => new TriggerBuilder(tb, TaskTriggerType.Logon);
 
 			/// <summary>
 			/// Adds a trigger that executes at logon of a specific user.
@@ -176,10 +152,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Adds a trigger that executes at task registration.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder AtTaskRegistration()
-			{
-				return new TriggerBuilder(tb, TaskTriggerType.Registration);
-			}
+			public TriggerBuilder AtTaskRegistration() => new TriggerBuilder(tb, TaskTriggerType.Registration);
 		}
 
 		/// <summary>
@@ -192,7 +165,7 @@ namespace Microsoft.Win32.TaskScheduler
 			internal MonthlyTriggerBuilder(BuilderInfo taskBuilder, MonthsOfTheYear moy)
 				: base(taskBuilder)
 			{
-				this.trb = new TriggerBuilder(taskBuilder, moy);
+				trb = new TriggerBuilder(taskBuilder, moy);
 			}
 
 			/// <summary>
@@ -219,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 			internal MonthlyDOWTriggerBuilder(BuilderInfo taskBuilder, DaysOfTheWeek dow)
 				: base(taskBuilder)
 			{
-				this.trb = new TriggerBuilder(taskBuilder, dow);
+				trb = new TriggerBuilder(taskBuilder, dow);
 			}
 
 			/// <summary>
@@ -291,19 +264,13 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Specifies that an Every target uses days as the interval.
 			/// </summary>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder Days()
-			{
-				return new TriggerBuilder(tb) { trigger = TaskDef.Triggers.Add(new DailyTrigger(this.interval)) };
-			}
+			public TriggerBuilder Days() => new TriggerBuilder(tb) { trigger = TaskDef.Triggers.Add(new DailyTrigger(interval)) };
 
 			/// <summary>
 			/// Specifies that an Every target uses weeks as the interval.
 			/// </summary>
 			/// <returns><see cref="WeeklyTriggerBuilder" /> instance.</returns>
-			public WeeklyTriggerBuilder Weeks()
-			{
-				return new WeeklyTriggerBuilder(tb, interval);
-			}
+			public WeeklyTriggerBuilder Weeks() => new WeeklyTriggerBuilder(tb, interval);
 		}
 
 		/// <summary>
@@ -503,10 +470,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="name">The name.</param>
 			/// <returns>A registered <see cref="Task"/> instance.</returns>
-			public Task AsTask(string name)
-			{
-				return tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
-			}
+			public Task AsTask(string name) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
 		}
 	}
 }

@@ -181,7 +181,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (bookmarkText == null)
 			{
-				throw new ArgumentNullException("bookmarkText");
+				throw new ArgumentNullException(nameof(bookmarkText));
 			}
 			this.bookmark = bookmarkText;
 		}
@@ -195,7 +195,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (info == null)
 			{
-				throw new ArgumentNullException("info");
+				throw new ArgumentNullException(nameof(info));
 			}
 			this.bookmark = info.GetString("BookmarkText");
 		}
@@ -225,7 +225,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (info == null)
 			{
-				throw new ArgumentNullException("info");
+				throw new ArgumentNullException(nameof(info));
 			}
 			info.AddValue("BookmarkText", this.bookmark);
 		}
@@ -891,7 +891,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (info == null)
 			{
-				throw new ArgumentNullException("info");
+				throw new ArgumentNullException(nameof(info));
 			}
 			info.AddValue("errorCode", this.errorCode);
 			base.GetObjectData(info, context);
@@ -1280,7 +1280,7 @@ namespace System.Diagnostics.Eventing.Reader
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			if (propertyQueries == null)
 			{
-				throw new ArgumentNullException("propertyQueries");
+				throw new ArgumentNullException(nameof(propertyQueries));
 			}
 			ICollection<string> is2 = propertyQueries as ICollection<string>;
 			if (is2 != null)
@@ -1385,7 +1385,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				if (path == null)
 				{
-					throw new ArgumentNullException("path");
+					throw new ArgumentNullException(nameof(path));
 				}
 			}
 			else
@@ -1486,7 +1486,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (eventQuery == null)
 			{
-				throw new ArgumentNullException("eventQuery");
+				throw new ArgumentNullException(nameof(eventQuery));
 			}
 			string logfile = null;
 			if (eventQuery.ThePathType == PathType.FilePath)
@@ -1542,7 +1542,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				if (value < 1)
 				{
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(nameof(value));
 				}
 				this.batchSize = value;
 			}
@@ -1626,7 +1626,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (bookmark == null)
 			{
-				throw new ArgumentNullException("bookmark");
+				throw new ArgumentNullException(nameof(bookmark));
 			}
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			this.SeekReset();
@@ -2363,7 +2363,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (propertySelector == null)
 			{
-				throw new ArgumentNullException("propertySelector");
+				throw new ArgumentNullException(nameof(propertySelector));
 			}
 			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, this.handle);
 		}
@@ -2568,7 +2568,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (logName == null)
 			{
-				throw new ArgumentNullException("logName");
+				throw new ArgumentNullException(nameof(logName));
 			}
 			NativeWrapper.EvtClearLog(this.Handle, logName, backupPath, 0);
 		}
@@ -2613,11 +2613,11 @@ namespace System.Diagnostics.Eventing.Reader
 			UnsafeNativeMethods.EvtExportLogFlags evtExportLogChannelPath;
 			if (path == null)
 			{
-				throw new ArgumentNullException("path");
+				throw new ArgumentNullException(nameof(path));
 			}
 			if (targetFilePath == null)
 			{
-				throw new ArgumentNullException("targetFilePath");
+				throw new ArgumentNullException(nameof(targetFilePath));
 			}
 			switch (pathType)
 			{
@@ -2630,7 +2630,7 @@ namespace System.Diagnostics.Eventing.Reader
 					break;
 
 				default:
-					throw new ArgumentOutOfRangeException("pathType");
+					throw new ArgumentOutOfRangeException(nameof(pathType));
 			}
 			if (!tolerateQueryErrors)
 			{
@@ -2684,7 +2684,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (logName == null)
 			{
-				throw new ArgumentNullException("logName");
+				throw new ArgumentNullException(nameof(logName));
 			}
 			return new EventLogInformation(this, logName, pathType);
 		}

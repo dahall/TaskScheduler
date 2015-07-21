@@ -187,7 +187,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/*if (supportedInterface != null && supportedInterface != Guid.Empty)
 				backgroundWorker2.RunWorkerAsync(listView1.Items);
 			else*/
-				this.UseWaitCursor = false;
+			UseWaitCursor = false;
 		}
 
 		private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
@@ -204,14 +204,14 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					Guid g = guidsToValidate.Dequeue();
 					if (!SupportsInterface(g, supportedInterface))
-						this.Invoke(new ItemInvoke(DisableKey), g);
+						Invoke(new ItemInvoke(DisableKey), g);
 				}
 			}
 		}
 
 		private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			this.UseWaitCursor = false;
+			UseWaitCursor = false;
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
@@ -229,7 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 			progressBar1.Show();
 			searchPanel.Hide();
 			backgroundWorker1.RunWorkerAsync();
-			this.UseWaitCursor = true;
+			UseWaitCursor = true;
 		}
 
 		private void DisableItem(ListViewItem item)
@@ -269,7 +269,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!SupportsInterface(CLSID, supportedInterface))
 				MessageBox.Show(this, EditorProperties.Resources.ComObjectDoesNotSupportInterfaceErrorMessage, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			else
-				this.DialogResult = System.Windows.Forms.DialogResult.OK;
+				DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void textBox1_TextChanged(object sender, EventArgs e)
@@ -293,10 +293,7 @@ namespace Microsoft.Win32.TaskScheduler
 				col = column;
 			}
 
-			public int Compare(object x, object y)
-			{
-				return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
-			}
+			public int Compare(object x, object y) => String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
 		}
 	}
 }

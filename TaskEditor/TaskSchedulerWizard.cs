@@ -37,7 +37,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSchedulerWizard()
 		{
 			InitializeComponent();
-			wizardControl1.TitleIcon = this.Icon;
+			wizardControl1.TitleIcon = Icon;
 			AllowEditorOnFinish = true;
 			RegisterTaskOnFinish = false;
 			repeatSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1) });
@@ -394,7 +394,7 @@ namespace Microsoft.Win32.TaskScheduler
 							SetTriggerListItem(AvailableWizardTriggers.Monthly);
 							break;
 						case TaskTriggerType.Event:
-							eventTriggerUI1.TargetServer = this.TaskService.TargetServer;
+							eventTriggerUI1.TargetServer = TaskService.TargetServer;
 							eventTriggerUI1.Trigger = trigger;
 							SetTriggerListItem(AvailableWizardTriggers.Event);
 							break;
@@ -522,17 +522,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
-			this.TaskService = service;
-			this.task = null;
+			TaskService = service;
+			task = null;
 			if (td == null)
-				this.TaskDefinition = service.NewTask();
+				TaskDefinition = service.NewTask();
 			else
 			{
 				if (td.Triggers.Count > 1)
 					throw new ArgumentException("Only tasks with a single trigger can be used to initialize the wizard.");
-				this.TaskDefinition = td;
+				TaskDefinition = td;
 			}
-			this.wizardControl1.RestartPages();
+			wizardControl1.RestartPages();
 		}
 
 		/// <summary>
@@ -541,8 +541,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
-			this.Task = task;
-			this.wizardControl1.RestartPages();
+			Task = task;
+			wizardControl1.RestartPages();
 		}
 
 		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -552,23 +552,23 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void actionSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			bool hasValue = (this.action != null);
+			bool hasValue = (action != null);
 			AvailableWizardActions selAct = (AvailableWizardActions)actionSelectionList.SelectedItem.Tag;
 			switch (selAct)
 			{
 				case AvailableWizardActions.Execute:
 					e.Page.NextPage = runActionPage;
-					if (!hasValue || this.action.ActionType != TaskActionType.Execute)
+					if (!hasValue || action.ActionType != TaskActionType.Execute)
 						action = new ExecAction();
 					break;
 				case AvailableWizardActions.SendEmail:
 					e.Page.NextPage = emailActionPage;
-					if (!hasValue || this.action.ActionType != TaskActionType.SendEmail)
+					if (!hasValue || action.ActionType != TaskActionType.SendEmail)
 						action = new EmailAction();
 					break;
 				case AvailableWizardActions.ShowMessage:
 					e.Page.NextPage = msgActionPage;
-					if (!hasValue || this.action.ActionType != TaskActionType.ShowMessage)
+					if (!hasValue || action.ActionType != TaskActionType.ShowMessage)
 						action = new ShowMessageAction();
 					break;
 				default:
@@ -581,7 +581,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void AddActionToSelectionList(AvailableWizardActions action)
 		{
-			this.actionSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
+			actionSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
 			{
 				Text = TaskPropertiesControl.BuildEnumString("WizActionText", action),
 				Subtext = TaskPropertiesControl.BuildEnumString("WizActionSubtext", action),
@@ -591,7 +591,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void AddTriggerToSelectionList(AvailableWizardTriggers trig)
 		{
-			this.triggerSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
+			triggerSelectionList.Items.Add(new GroupControls.RadioButtonListItem()
 			{
 				Text = TaskPropertiesControl.BuildEnumString("WizTriggerText", trig),
 				Subtext = TaskPropertiesControl.BuildEnumString("WizTriggerSubtext", trig),
@@ -690,7 +690,7 @@ namespace Microsoft.Win32.TaskScheduler
 				EditorProperties.Resources.CredentialPromptMessage, userName);
 			dlg.Options |= CredentialsDialogOptions.Persist;
 			dlg.ValidatePassword = true;
-			if (dlg.ShowDialog(this.ParentForm) == DialogResult.OK)
+			if (dlg.ShowDialog(ParentForm) == DialogResult.OK)
 				return dlg.Password;
 			return null;
 		}
@@ -783,9 +783,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void secOptPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			string user = this.TaskDefinition.Principal.UserId;
+			string user = TaskDefinition.Principal.UserId;
 			Password = null;
-			if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+			if (TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 			{
 				Password = InvokeCredentialDialog(user);
 				if (Password == null)
@@ -872,40 +872,40 @@ namespace Microsoft.Win32.TaskScheduler
 			switch (logonType)
 			{
 				case TaskLogonType.InteractiveToken:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 				case TaskLogonType.Group:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = true;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = true;
 					break;
 				case TaskLogonType.ServiceAccount:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = true;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = true;
+					flagExecutorIsGroup = false;
 					break;
 				default:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 			}
 
-			if (this.flagExecutorIsServiceAccount)
+			if (flagExecutorIsServiceAccount)
 			{
 				taskLoggedOnRadio.Enabled = false;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagExecutorIsGroup)
+			else if (flagExecutorIsGroup)
 			{
 				taskLoggedOnRadio.Enabled = true;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagRunOnlyWhenUserIsLoggedOn)
+			else if (flagRunOnlyWhenUserIsLoggedOn)
 			{
 				taskLoggedOnRadio.Enabled = true;
 				taskLoggedOptionalRadio.Enabled = true;
@@ -970,8 +970,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerPropPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
-			if (this.TriggerPropertiesInstructions != null)
-				triggerPropText.Text = this.TriggerPropertiesInstructions;
+			if (TriggerPropertiesInstructions != null)
+				triggerPropText.Text = TriggerPropertiesInstructions;
 		}
 
 		private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -981,49 +981,49 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			bool hasValue = (this.trigger != null);
+			bool hasValue = (trigger != null);
 			AvailableWizardTriggers selTrig = (AvailableWizardTriggers)triggerSelectionList.SelectedItem.Tag;
 			switch (selTrig)
 			{
 				case AvailableWizardTriggers.Event:
 					e.Page.NextPage = onEventTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Event)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Event)
 						trigger = new EventTrigger();
 					break;
 				case AvailableWizardTriggers.Time:
 					e.Page.NextPage = oneTimeTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Time)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Time)
 						trigger = new TimeTrigger();
 					oneTimeStartTimePicker.Value = trigger.StartBoundary;
 					break;
 				case AvailableWizardTriggers.Daily:
 					e.Page.NextPage = dailyTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Daily)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Daily)
 						dailyTriggerUI1.Trigger = (trigger = new DailyTrigger());
 					break;
 				case AvailableWizardTriggers.Weekly:
 					e.Page.NextPage = weeklyTriggerPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Weekly)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Weekly)
 						weeklyTriggerUI1.Trigger = (trigger = new WeeklyTrigger());
 					break;
 				case AvailableWizardTriggers.Monthly:
 					e.Page.NextPage = monthlyTriggerPage;
-					if (!hasValue || (this.trigger.TriggerType != TaskTriggerType.Monthly && this.trigger.TriggerType != TaskTriggerType.MonthlyDOW))
+					if (!hasValue || (trigger.TriggerType != TaskTriggerType.Monthly && trigger.TriggerType != TaskTriggerType.MonthlyDOW))
 						monthlyTriggerUI1.Trigger = (trigger = new MonthlyTrigger());
 					break;
 				case AvailableWizardTriggers.Idle:
 					e.Page.NextPage = actionSelectPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Idle)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Idle)
 						trigger = new IdleTrigger();
 					break;
 				case AvailableWizardTriggers.Boot:
 					e.Page.NextPage = actionSelectPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Boot)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Boot)
 						trigger = new BootTrigger();
 					break;
 				case AvailableWizardTriggers.Logon:
 					e.Page.NextPage = actionSelectPage;
-					if (!hasValue || this.trigger.TriggerType != TaskTriggerType.Logon)
+					if (!hasValue || trigger.TriggerType != TaskTriggerType.Logon)
 						trigger = new LogonTrigger();
 					break;
 				default:
@@ -1036,8 +1036,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerSelectPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
-			if (this.TriggerPagePrompt != null)
-				this.triggerSelectPage.Text = this.TriggerPagePrompt;
+			if (TriggerPagePrompt != null)
+				triggerSelectPage.Text = TriggerPagePrompt;
 		}
 
 		private void weeklyCheck_CheckedChanged(object sender, System.EventArgs e)
@@ -1062,9 +1062,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			bool myTS = false;
 
-			if (this.TaskService == null)
+			if (TaskService == null)
 			{
-				this.TaskService = new TaskService();
+				TaskService = new TaskService();
 				myTS = true;
 			}
 
@@ -1078,22 +1078,22 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				TaskEditDialog dlg = new TaskEditDialog();
 				dlg.Editable = true;
-				dlg.Initialize(this.TaskService, td);
+				dlg.Initialize(TaskService, td);
 				dlg.RegisterTaskOnAccept = false;
 				dlg.TaskName = TaskName;
-				if (dlg.ShowDialog(this.ParentForm) == System.Windows.Forms.DialogResult.OK)
-					this.td = dlg.TaskDefinition;
+				if (dlg.ShowDialog(ParentForm) == System.Windows.Forms.DialogResult.OK)
+					td = dlg.TaskDefinition;
 			}
 			if (RegisterTaskOnFinish)
 			{
-				TaskFolder fld = this.TaskService.RootFolder;
-				if (!string.IsNullOrEmpty(this.TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) != 0)
-					fld = this.TaskService.GetFolder(this.TaskFolder);
+				TaskFolder fld = TaskService.RootFolder;
+				if (!string.IsNullOrEmpty(TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) != 0)
+					fld = TaskService.GetFolder(TaskFolder);
 				task = fld.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate, td.Principal.ToString(), Password, td.Principal.LogonType);
 			}
 
 			if (myTS)
-				this.TaskService = null;
+				TaskService = null;
 		}
 	}
 }

@@ -61,10 +61,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 		/// </summary>
 		/// <param name="xml">The XML.</param>
 		/// <returns></returns>
-		public static EventQuery Deserialize(string xml)
-		{
-			return QLSerializer.Deserialize(xml);
-		}
+		public static EventQuery Deserialize(string xml) => QLSerializer.Deserialize(xml);
 
 		/// <summary>
 		/// Serializes the specified q.
@@ -79,11 +76,11 @@ namespace Microsoft.Win32.TaskScheduler.Events
 
 		internal void FinalizeObject()
 		{
-			this.Query.Suppress.Clear();
-			if (this.Query.SuppressedIDs.Count > 0)
+			Query.Suppress.Clear();
+			if (Query.SuppressedIDs.Count > 0)
 			{
-				foreach (var i in this.Query.Select)
-					this.Query.Suppress.Add(new CQuery.CSuppress(this.Query, i.Path));
+				foreach (var i in Query.Select)
+					Query.Suppress.Add(new CQuery.CSuppress(Query, i.Path));
 			}
 		}
 
@@ -199,7 +196,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 					for (int i = 0; i < IDs.Count; i++)
 						output[i] = IDs[i].Text;
 					for (int i = 0; i < SuppressedIDs.Count; i++)
-						output[i + IDs.Count] = string.Format("{0}", SuppressedIDs[i].Text);
+						output[i + IDs.Count] = SuppressedIDs[i].Text;
 					return string.Join(",", output);
 				}
 				set
@@ -230,8 +227,8 @@ namespace Microsoft.Win32.TaskScheduler.Events
 			/// <param name="path">The path.</param>
 			public void AddPath(string path)
 			{
-				this.Path = path;
-				this.Select.Add(new CSelect(this, path));
+				Path = path;
+				Select.Add(new CSelect(this, path));
 			}
 
 			/// <summary>
@@ -240,9 +237,9 @@ namespace Microsoft.Win32.TaskScheduler.Events
 			/// <param name="computers">The computers.</param>
 			public void AddValidatedComputers(string computers)
 			{
-				this.Computers.Clear();
+				Computers.Clear();
 				// TODO: Validate items
-				this.Computers.AddRange(computers.Replace(" ", "").Split(',', ';'));
+				Computers.AddRange(computers.Replace(" ", "").Split(',', ';'));
 			}
 
 			/// <summary>
@@ -255,13 +252,10 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				string sid = NativeMethods.AccountUtils.SidStringFromUserName(user);
 				if (sid == null)
 					throw new System.Security.Principal.IdentityNotMappedException();
-				this.User = sid;
+				User = sid;
 			}
 
-			System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-			{
-				return null;
-			}
+			System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 			void IXmlSerializable.ReadXml(XmlReader reader)
 			{
@@ -277,13 +271,13 @@ namespace Microsoft.Win32.TaskScheduler.Events
 							{
 								CSelect sel = new CSelect(this, null);
 								sel.ReadXml(reader);
-								this.Select.Add(sel);
+								Select.Add(sel);
 							}
 							else
 							{
 								CSuppress sup = new CSuppress(this, null);
 								sup.ReadXml(reader);
-								this.Suppress.Add(sup);
+								Suppress.Add(sup);
 							}
 						}
 					}
@@ -345,8 +339,8 @@ namespace Microsoft.Win32.TaskScheduler.Events
 					get
 					{
 						if (high == -1)
-							return string.Format("{0}", low);
-						return string.Format("{0}-{1}", low, high);
+							return $"{low}";
+						return $"{low}-{high}";
 					}
 				}
 
@@ -359,8 +353,8 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				public override string ToString()
 				{
 					if (high == -1)
-						return string.Format("EventID={0}", low);
-					return string.Format("(EventID >= {0} and EventID <= {1})", low, high);
+						return $"EventID={low}";
+					return $"(EventID >= {low} and EventID <= {high})";
 				}
 			}
 
@@ -459,7 +453,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				{
 					if (Regex.Replace(xtraXml, @"\s+", string.Empty).Length > 0)
 					{
-						var exc = new InvalidOperationException(string.Format("Invalid value for {0} node.", parentNode));
+						var exc = new InvalidOperationException($"Invalid value for {parentNode} node.");
 						exc.Data.Add("Remaining text", xtraXml);
 						var idx = value.IndexOf(xtraXml);
 						if (idx > -1)
@@ -483,50 +477,50 @@ namespace Microsoft.Win32.TaskScheduler.Events
 						sb.Append("*");
 						if (IsSelect)
 						{
-							if (this.Parent.Providers.Count > 0)
-								sb.AppendFormat("Provider[{0}]", string.Join(OR, this.Parent.Providers.ConvertAll<string>(s => string.Format("@Name='{0}'", s)).ToArray()));
-							if (this.Parent.Computers.Count > 0)
+							if (Parent.Providers.Count > 0)
+								sb.AppendFormat("Provider[{0}]", string.Join(OR, Parent.Providers.ConvertAll<string>(s => $"@Name='{s}'").ToArray()));
+							if (Parent.Computers.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, this.Parent.Computers.ConvertAll<string>(i => string.Format("Computer='{0}'", i)).ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Computers.ConvertAll<string>(i => "Computer='{i}'").ToArray()));
 							}
-							if (this.Parent.Levels.Count > 0)
+							if (Parent.Levels.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, this.Parent.Levels.ConvertAll<string>(i => string.Format("Level={0}", i)).ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Levels.ConvertAll<string>(i => "Level={i}").ToArray()));
 							}
-							if (this.Parent.Tasks.Count > 0)
+							if (Parent.Tasks.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, this.Parent.Tasks.ConvertAll<string>(i => string.Format("Task={0}", i)).ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Tasks.ConvertAll<string>(i => "Task={i}").ToArray()));
 							}
-							if (this.Parent.Keywords != 0)
+							if (Parent.Keywords != 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("(band(Keywords,{0}))", this.Parent.Keywords);
+								sb.AppendFormat("(band(Keywords,{0}))", Parent.Keywords);
 							}
-							if (this.Parent.IDs.Count > 0)
+							if (Parent.IDs.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, this.Parent.IDs.ConvertAll<string>(i => i.ToString()).ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.IDs.ConvertAll<string>(i => i.ToString()).ToArray()));
 							}
-							if (!string.IsNullOrEmpty(this.Parent.User))
+							if (!string.IsNullOrEmpty(Parent.User))
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("Security[@UserID='{0}']", this.Parent.User);
+								sb.AppendFormat("Security[@UserID='{0}']", Parent.User);
 							}
-							if (this.Parent.Times != null && ((this.Parent.Times.span.HasValue && this.Parent.Times.span.Value != TimeSpan.Zero) || this.Parent.Times.HasDates))
+							if (Parent.Times != null && ((Parent.Times.span.HasValue && Parent.Times.span.Value != TimeSpan.Zero) || Parent.Times.HasDates))
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("TimeCreated[{0}]", this.Parent.Times);
+								sb.AppendFormat("TimeCreated[{0}]", Parent.Times);
 							}
 						}
 						else
 						{
-							if (this.Parent.SuppressedIDs.Count > 0)
+							if (Parent.SuppressedIDs.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, this.Parent.SuppressedIDs.ConvertAll<string>(i => i.ToString()).ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.SuppressedIDs.ConvertAll<string>(i => i.ToString()).ToArray()));
 							}
 						}
 						if (sb.Length > 1)
@@ -534,14 +528,14 @@ namespace Microsoft.Win32.TaskScheduler.Events
 							sb.Insert(1, "[System[");
 							sb.Append("]]");
 						}
-						if (IsSelect && this.Parent.Data.Count > 0)
+						if (IsSelect && Parent.Data.Count > 0)
 						{
 							if (sb.Length > 1)
 								sb.Append(AND + "*");
 							sb.Append("[EventData[");
 							var dataItems = new List<string>();
-							foreach (var kv in this.Parent.Data)
-								dataItems.Add(string.Format("Data[@Name='{0}']='{1}'", kv.Key, kv.Value));
+							foreach (var kv in Parent.Data)
+								dataItems.Add($"Data[@Name='{kv.Key}']='{kv.Value}'");
 							sb.Append(string.Join(AND, dataItems.ToArray()));
 							sb.Append("]]");
 						}
@@ -554,28 +548,28 @@ namespace Microsoft.Win32.TaskScheduler.Events
 							CheckSelectValue(value);
 
 							// Providers
-							this.Parent.Providers.AddRange(GetParsedValue(prov, value).ConvertAll(o => (string)o));
+							Parent.Providers.AddRange(GetParsedValue(prov, value).ConvertAll(o => (string)o));
 							// Levels
-							this.Parent.Levels.AddRange(GetParsedValue(level, value).ConvertAll(o => (int)o));
+							Parent.Levels.AddRange(GetParsedValue(level, value).ConvertAll(o => (int)o));
 							// IDs
-							this.Parent.IDs.AddRange(GetParsedValue(evid, value).ConvertAll(o => new CID((int)o)));
+							Parent.IDs.AddRange(GetParsedValue(evid, value).ConvertAll(o => new CID((int)o)));
 							var idr = GetParsedValue(evidrange, value);
 							for (int i = 0; i < idr.Count; i += 2)
-								this.Parent.IDs.Add(new CID((int)idr[i], (int)idr[i + 1]));
+								Parent.IDs.Add(new CID((int)idr[i], (int)idr[i + 1]));
 							// Tasks
-							this.Parent.Tasks.AddRange(GetParsedValue(tasks, value).ConvertAll(o => (int)o));
+							Parent.Tasks.AddRange(GetParsedValue(tasks, value).ConvertAll(o => (int)o));
 							// Keywords
 							var k = GetParsedValue(keyword, value);
-							if (k.Count > 0) this.Parent.Keywords = (long)k[0];
+							if (k.Count > 0) Parent.Keywords = (long)k[0];
 							// Users
 							var u = GetParsedValue(user, value);
-							if (u.Count > 0) this.Parent.User = NativeMethods.AccountUtils.UserNameFromSidString((string)u[0]);
+							if (u.Count > 0) Parent.User = NativeMethods.AccountUtils.UserNameFromSidString((string)u[0]);
 							// Computers
-							this.Parent.Computers.AddRange(GetParsedValue(computer, value).ConvertAll(o => (string)o));
+							Parent.Computers.AddRange(GetParsedValue(computer, value).ConvertAll(o => (string)o));
 							// Times
 							var tc = GetParsedValue(timediff, value);
 							if (tc.Count > 0)
-								this.Parent.Times = new CTimeCreated(TimeSpan.FromMilliseconds((long)tc[0]));
+								Parent.Times = new CTimeCreated(TimeSpan.FromMilliseconds((long)tc[0]));
 							else
 							{
 								DateTime? s = null, e = null;
@@ -598,26 +592,26 @@ namespace Microsoft.Win32.TaskScheduler.Events
 									}
 								}
 								if (s.HasValue || e.HasValue)
-									this.Parent.Times = new CTimeCreated(s, e);
+									Parent.Times = new CTimeCreated(s, e);
 							}
 							// Data value
 							var regex = new Regex(eventData, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 							foreach (Match m in regex.Matches(value))
 							{
 								if (m.Groups["key"].Success && m.Groups["val"].Success)
-									this.Parent.Data.Add(m.Groups["key"].Value, m.Groups["val"].Value);
+									Parent.Data.Add(m.Groups["key"].Value, m.Groups["val"].Value);
 							}
 						}
 						else
 						{
 							CheckSuppressValue(value);
 							// SuppressedIDs
-							this.Parent.SuppressedIDs.AddRange(GetParsedValue(evid, value).ConvertAll(o => new CID(-(int)o)));
+							Parent.SuppressedIDs.AddRange(GetParsedValue(evid, value).ConvertAll(o => new CID(-(int)o)));
 						}
 					}
 				}
 
-				System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() { return null; }
+				System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 				/// <summary>
 				/// Generates an object from its XML representation.
@@ -628,9 +622,9 @@ namespace Microsoft.Win32.TaskScheduler.Events
 					if (reader.MoveToContent() == XmlNodeType.Element)
 					{
 						if (reader.LocalName == "Suppress")
-							this.IsSelect = false;
-						this.Path = reader["Path"];
-						this.Value = reader.ReadString();
+							IsSelect = false;
+						Path = reader["Path"];
+						Value = reader.ReadString();
 						reader.ReadEndElement();
 					}
 				}
@@ -641,8 +635,8 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				/// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
 				public void WriteXml(XmlWriter writer)
 				{
-					writer.WriteAttributeString("Path", this.Path);
-					writer.WriteString(this.Value);
+					writer.WriteAttributeString("Path", Path);
+					writer.WriteString(Value);
 				}
 
 				private List<object> GetParsedValue(string regexPattern, string input)
@@ -754,7 +748,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				/// <value>
 				///   <c>true</c> if this instance has dates; otherwise, <c>false</c>.
 				/// </value>
-				public bool HasDates { get { return !span.HasValue; } }
+				public bool HasDates => !span.HasValue;
 
 				/// <summary>
 				/// Returns a <see cref="System.String" /> that represents this instance.
@@ -764,15 +758,15 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				/// </returns>
 				public override string ToString()
 				{
-					if (this.span.HasValue)
+					if (span.HasValue)
 					{
-						if (this.span.Value != TimeSpan.Zero && this.span.Value != TimeSpan.MaxValue)
-							return string.Format("timediff(@SystemTime) <= {0}", span.Value.TotalMilliseconds);
+						if (span.Value != TimeSpan.Zero && span.Value != TimeSpan.MaxValue)
+							return $"timediff(@SystemTime) <= {span.Value.TotalMilliseconds}";
 					}
 					else
 					{
-						string d1 = low.HasValue ? string.Format("@SystemTime >= '{0}'", low.Value) : null;
-						string d2 = high.HasValue ? string.Format("@SystemTime <= '{0}'", high.Value) : null;
+						string d1 = low.HasValue ? $"@SystemTime >= '{low.Value}'" : null;
+						string d2 = high.HasValue ? $"@SystemTime <= '{high.Value}'" : null;
 						if (low.HasValue && !high.HasValue)
 							return d1;
 						else if (!low.HasValue && high.HasValue)
@@ -800,15 +794,9 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				ser = new XmlSerializer(typeof(T));
 			}
 
-			public T Deserialize(string xml)
-			{
-				return this.Deserialize(XmlReader.Create(new System.IO.StringReader(xml)));
-			}
+			public T Deserialize(string xml) => Deserialize(XmlReader.Create(new System.IO.StringReader(xml)));
 
-			public T Deserialize(XmlReader reader)
-			{
-				return (T)ser.Deserialize(reader);
-			}
+			public T Deserialize(XmlReader reader) => (T)ser.Deserialize(reader);
 
 			public string Serialize(T obj)
 			{

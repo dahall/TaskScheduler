@@ -49,7 +49,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public virtual bool IsTriggerValid() { return true; }
+		public virtual bool IsTriggerValid() => true;
 
 		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
 		{

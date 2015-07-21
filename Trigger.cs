@@ -180,21 +180,21 @@ namespace Microsoft.Win32.TaskScheduler
 		internal Trigger(V2Interop.ITrigger iTrigger)
 		{
 			v2Trigger = iTrigger;
-			this.ttype = iTrigger.Type;
+			ttype = iTrigger.Type;
 			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
-				this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+				StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
 		internal Trigger(TaskTriggerType triggerType)
 		{
-			this.ttype = triggerType;
+			ttype = triggerType;
 			unboundValues = new Dictionary<string, object>();
 
 			v1TriggerData.TriggerSize = (ushort)Marshal.SizeOf(typeof(V1Interop.TaskTrigger));
-			try { v1TriggerData.Type = ConvertToV1TriggerType(this.ttype); }
+			try { v1TriggerData.Type = ConvertToV1TriggerType(ttype); }
 			catch { }
 
-			this.StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+			StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
 		/// <summary>
@@ -389,10 +389,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The <see cref="TaskTriggerType"/> of the trigger.</value>
 		[XmlIgnore]
-		public TaskTriggerType TriggerType
-		{
-			get { return ttype; }
-		}
+		public TaskTriggerType TriggerType => ttype;
 
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
 		internal virtual bool Bound
@@ -413,7 +410,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public virtual object Clone()
 		{
-			Trigger ret = CreateTrigger(this.TriggerType);
+			Trigger ret = CreateTrigger(TriggerType);
 			ret.CopyProperties(this);
 			return ret;
 		}
@@ -426,14 +423,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (sourceTrigger == null)
 				return;
-			this.Enabled = sourceTrigger.Enabled;
-			this.EndBoundary = sourceTrigger.EndBoundary;
-			try { this.ExecutionTimeLimit = sourceTrigger.ExecutionTimeLimit; }
+			Enabled = sourceTrigger.Enabled;
+			EndBoundary = sourceTrigger.EndBoundary;
+			try { ExecutionTimeLimit = sourceTrigger.ExecutionTimeLimit; }
 			catch { }
-			this.Repetition.Duration = sourceTrigger.Repetition.Duration;
-			this.Repetition.Interval = sourceTrigger.Repetition.Interval;
-			this.Repetition.StopAtDurationEnd = sourceTrigger.Repetition.StopAtDurationEnd;
-			this.StartBoundary = sourceTrigger.StartBoundary;
+			Repetition.Duration = sourceTrigger.Repetition.Duration;
+			Repetition.Interval = sourceTrigger.Repetition.Interval;
+			Repetition.StopAtDurationEnd = sourceTrigger.Repetition.StopAtDurationEnd;
+			StartBoundary = sourceTrigger.StartBoundary;
 			if (sourceTrigger is ITriggerDelay && this is ITriggerDelay)
 				try { ((ITriggerDelay)this).Delay = ((ITriggerDelay)sourceTrigger).Delay; }
 				catch { }
@@ -463,7 +460,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override bool Equals(object obj)
 		{
 			if (obj is Trigger)
-				return this.Equals((Trigger)obj);
+				return Equals((Trigger)obj);
 			return base.Equals(obj);
 		}
 
@@ -476,9 +473,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public virtual bool Equals(Trigger other)
 		{
-			bool ret = this.TriggerType == other.TriggerType && this.Enabled == other.Enabled && this.EndBoundary == other.EndBoundary &&
-				this.ExecutionTimeLimit == other.ExecutionTimeLimit && this.Id == other.Id && this.Repetition.Equals(other.Repetition) &&
-				this.StartBoundary == other.StartBoundary;
+			bool ret = TriggerType == other.TriggerType && Enabled == other.Enabled && EndBoundary == other.EndBoundary &&
+				ExecutionTimeLimit == other.ExecutionTimeLimit && Id == other.Id && Repetition.Equals(other.Repetition) &&
+				StartBoundary == other.StartBoundary;
 			if (other is ITriggerDelay && this is ITriggerDelay)
 				try { ret = ret && ((ITriggerDelay)this).Delay == ((ITriggerDelay)other).Delay; }
 				catch { }
@@ -494,13 +491,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 		/// </returns>
-		public override int GetHashCode()
+		public override int GetHashCode() => new
 		{
-			return new { A = this.TriggerType, B = this.Enabled, C = this.EndBoundary, D = this.ExecutionTimeLimit, E = this.Id,
-						 F = this.Repetition, G = this.StartBoundary,
-						 H = this is ITriggerDelay ? ((ITriggerDelay)this).Delay : TimeSpan.Zero,
-						 I = this is ITriggerUserId ? ((ITriggerUserId)this).UserId : null }.GetHashCode();
-		}
+			A = TriggerType,
+			B = Enabled,
+			C = EndBoundary,
+			D = ExecutionTimeLimit,
+			E = Id,
+			F = Repetition,
+			G = StartBoundary,
+			H = this is ITriggerDelay ? ((ITriggerDelay)this).Delay : TimeSpan.Zero,
+			I = this is ITriggerUserId ? ((ITriggerUserId)this).UserId : null
+		}.GetHashCode();
 
 		/// <summary>
 		/// Sets the repetition.
@@ -510,9 +512,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="stopAtDurationEnd">if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
 		public void SetRepetition(TimeSpan interval, TimeSpan duration, bool stopAtDurationEnd = true)
 		{
-			this.Repetition.Duration = duration;
-			this.Repetition.Interval = interval;
-			this.Repetition.StopAtDurationEnd = stopAtDurationEnd;
+			Repetition.Duration = duration;
+			Repetition.Interval = interval;
+			Repetition.StopAtDurationEnd = stopAtDurationEnd;
 		}
 
 		/// <summary>
@@ -534,7 +536,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public virtual string ToString(System.Globalization.CultureInfo culture)
 		{
 			using (new CultureSwitcher(culture))
-				return this.ToString();
+				return ToString();
 		}
 
 		internal static TaskTriggerType ConvertFromV1TriggerType(V1Interop.TaskTriggerType v1Type)
@@ -553,10 +555,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return (V1Interop.TaskTriggerType)v1tt;
 		}
 
-		internal static Trigger CreateTrigger(V1Interop.ITaskTrigger trigger)
-		{
-			return CreateTrigger(trigger, trigger.GetTrigger().Type);
-		}
+		internal static Trigger CreateTrigger(V1Interop.ITaskTrigger trigger) => CreateTrigger(trigger, trigger.GetTrigger().Type);
 
 		internal static Trigger CreateTrigger(V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType triggerType)
 		{
@@ -696,8 +695,8 @@ namespace Microsoft.Win32.TaskScheduler
 			unboundValues.Clear();
 			unboundValues = null;
 
-			this.repititionPattern = new RepetitionPattern(this);
-			this.repititionPattern.Bind();
+			repititionPattern = new RepetitionPattern(this);
+			repititionPattern.Bind();
 		}
 
 		/// <summary>
@@ -732,30 +731,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected virtual string V2GetTriggerString()
-		{
-			return string.Empty;
-		}
+		protected virtual string V2GetTriggerString() => string.Empty;
 
-		internal static DateTime AdjustToLocal(DateTime dt)
-		{
-			return dt.Kind == DateTimeKind.Utc ? dt.ToLocalTime() : dt;
-		}
+		internal static DateTime AdjustToLocal(DateTime dt) => dt.Kind == DateTimeKind.Utc ? dt.ToLocalTime() : dt;
 
 		private string V2BaseTriggerString()
 		{
 			StringBuilder ret = new StringBuilder();
-			if (this.Repetition.Interval != TimeSpan.Zero)
+			if (Repetition.Interval != TimeSpan.Zero)
 			{
 				string sduration = string.Empty;
-				if (this.Repetition.Duration == TimeSpan.Zero)
+				if (Repetition.Duration == TimeSpan.Zero)
 					sduration = Properties.Resources.TriggerDuration0;
 				else
-					sduration = string.Format(Properties.Resources.TriggerDurationNot0, GetBestTimeSpanString(this.Repetition.Duration));
-				ret.AppendFormat(Properties.Resources.TriggerRepetition, GetBestTimeSpanString(this.Repetition.Interval), sduration);
+					sduration = string.Format(Properties.Resources.TriggerDurationNot0, GetBestTimeSpanString(Repetition.Duration));
+				ret.AppendFormat(Properties.Resources.TriggerRepetition, GetBestTimeSpanString(Repetition.Interval), sduration);
 			}
-			if (this.EndBoundary != DateTime.MaxValue)
-				ret.AppendFormat(Properties.Resources.TriggerEndBoundary, AdjustToLocal(this.EndBoundary));
+			if (EndBoundary != DateTime.MaxValue)
+				ret.AppendFormat(Properties.Resources.TriggerEndBoundary, AdjustToLocal(EndBoundary));
 			if (ret.Length > 0)
 				ret.Insert(0, Properties.Resources.HyphenSeparator);
 			return ret.ToString();
@@ -852,10 +845,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected override string V2GetTriggerString()
-		{
-			return Properties.Resources.TriggerBoot1;
-		}
+		protected override string V2GetTriggerString() => Properties.Resources.TriggerBoot1;
 	}
 
 	/// <summary>
@@ -876,10 +866,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected override string V2GetTriggerString()
-		{
-			return TaskScheduler.Properties.Resources.TriggerCustom1;
-		}
+		protected override string V2GetTriggerString() => TaskScheduler.Properties.Resources.TriggerCustom1;
 
 		/// <summary>
 		/// Updates custom properties from XML provided by definition.
@@ -931,10 +918,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the properties from the XML definition if possible.
 		/// </summary>
 		[XmlArray, XmlArrayItem("Property")]
-		public NamedValueCollection Properties
-		{
-			get { return nvc; }
-		}
+		public NamedValueCollection Properties => nvc;
 
 		/// <summary>
 		/// Gets the name of the custom trigger type.
@@ -942,10 +926,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The name of the XML element representing this custom trigger.
 		/// </value>
-		public string Name
-		{
-			get { return name; }
-		}
+		public string Name => name;
 
 		/// <summary>
 		/// Gets a value that indicates the amount of time between the trigger events and when the task is started.
@@ -1069,7 +1050,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public DailyTrigger(short daysInterval = 1)
 			: base(TaskTriggerType.Daily)
 		{
-			this.DaysInterval = daysInterval;
+			DaysInterval = daysInterval;
 		}
 
 		internal DailyTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -1144,8 +1125,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The delay duration.</value>
 		TimeSpan ITriggerDelay.Delay
 		{
-			get { return this.RandomDelay; }
-			set { this.RandomDelay = value; }
+			get { return RandomDelay; }
+			set { RandomDelay = value; }
 		}
 
 		/// <summary>
@@ -1155,9 +1136,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType())
 			{
-				this.DaysInterval = ((DailyTrigger)sourceTrigger).DaysInterval;
+				DaysInterval = ((DailyTrigger)sourceTrigger).DaysInterval;
 			}
 		}
 
@@ -1168,10 +1149,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.DaysInterval == ((DailyTrigger)other).DaysInterval;
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && DaysInterval == ((DailyTrigger)other).DaysInterval;
 
 		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
@@ -1179,43 +1157,40 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			if (this.DaysInterval == 1)
-				return string.Format(Properties.Resources.TriggerDaily1, AdjustToLocal(this.StartBoundary));
-			return string.Format(Properties.Resources.TriggerDaily2, AdjustToLocal(this.StartBoundary), this.DaysInterval);
+			if (DaysInterval == 1)
+				return string.Format(Properties.Resources.TriggerDaily1, AdjustToLocal(StartBoundary));
+			return string.Format(Properties.Resources.TriggerDaily2, AdjustToLocal(StartBoundary), DaysInterval);
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void ReadMyXml(System.Xml.XmlReader reader)
 		{
 			reader.ReadStartElement("ScheduleByDay");
 			if (reader.MoveToContent() == System.Xml.XmlNodeType.Element && reader.LocalName == "DaysInterval")
-				this.DaysInterval = (short)reader.ReadElementContentAs(typeof(short), null);
+				DaysInterval = (short)reader.ReadElementContentAs(typeof(short), null);
 			reader.Read();
 			reader.ReadEndElement();
 		}
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+			CalendarTrigger.ReadXml(reader, this, ReadMyXml);
 		}
 
 		void WriteMyXml(System.Xml.XmlWriter writer)
 		{
-			if (this.DaysInterval != 1)
+			if (DaysInterval != 1)
 			{
 				writer.WriteStartElement("ScheduleByDay");
-				writer.WriteElementString("DaysInterval", this.DaysInterval.ToString());
+				writer.WriteElementString("DaysInterval", DaysInterval.ToString());
 				writer.WriteEndElement();
 			}
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+			CalendarTrigger.WriteXml(writer, this, WriteMyXml);
 		}
 	}
 
@@ -1317,10 +1292,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType())
 			{
-				this.Subscription = ((EventTrigger)sourceTrigger).Subscription;
-				((EventTrigger)sourceTrigger).ValueQueries.CopyTo(this.ValueQueries);
+				Subscription = ((EventTrigger)sourceTrigger).Subscription;
+				((EventTrigger)sourceTrigger).ValueQueries.CopyTo(ValueQueries);
 			}
 		}
 
@@ -1331,10 +1306,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.Subscription == ((EventTrigger)other).Subscription;
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && Subscription == ((EventTrigger)other).Subscription;
 
 		/// <summary>
 		/// Builds an event log XML query string based on the input parameters.
@@ -1348,7 +1320,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			StringBuilder sb = new StringBuilder();
 			if (string.IsNullOrEmpty(log))
-				throw new ArgumentNullException("log");
+				throw new ArgumentNullException(nameof(log));
 			sb.AppendFormat("<QueryList><Query Id=\"0\" Path=\"{0}\"><Select Path=\"{0}\">*", log);
 			bool hasSource = !string.IsNullOrEmpty(source), hasId = eventId.HasValue;
 			if (hasSource || hasId)
@@ -1377,9 +1349,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			log = source = null;
 			eventId = null;
-			if (!string.IsNullOrEmpty(this.Subscription))
+			if (!string.IsNullOrEmpty(Subscription))
 			{
-				using (System.IO.MemoryStream str = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(this.Subscription)))
+				using (System.IO.MemoryStream str = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(Subscription)))
 				{
 					using (System.Xml.XmlTextReader rdr = new System.Xml.XmlTextReader(str))
 					{
@@ -1427,8 +1399,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="eventId">The event's id. Can be <c>null</c>.</param>
 		public void SetBasic(string log, string source, int? eventId)
 		{
-			this.ValueQueries.Clear();
-			this.Subscription = BuildQuery(log, source, eventId);
+			ValueQueries.Clear();
+			Subscription = BuildQuery(log, source, eventId);
 		}
 
 		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
@@ -1445,7 +1417,7 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			string log, source; int? id;
-			if (this.GetBasic(out log, out source, out id))
+			if (GetBasic(out log, out source, out id))
 			{
 				StringBuilder sb = new StringBuilder();
 				sb.AppendFormat(Properties.Resources.TriggerEventBasic1, log);
@@ -1486,10 +1458,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected override string V2GetTriggerString()
-		{
-			return Properties.Resources.TriggerIdle1;
-		}
+		protected override string V2GetTriggerString() => Properties.Resources.TriggerIdle1;
 	}
 
 	/// <summary>
@@ -1579,7 +1548,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string user = string.IsNullOrEmpty(this.UserId) ? Properties.Resources.TriggerAnyUser : this.UserId;
+			string user = string.IsNullOrEmpty(UserId) ? Properties.Resources.TriggerAnyUser : UserId;
 			return string.Format(Properties.Resources.TriggerLogon1, user);
 		}
 	}
@@ -1599,9 +1568,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public MonthlyDOWTrigger(DaysOfTheWeek daysOfWeek = DaysOfTheWeek.Sunday, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths, WhichWeek weeksOfMonth = WhichWeek.FirstWeek)
 			: base(TaskTriggerType.MonthlyDOW)
 		{
-			this.DaysOfWeek = daysOfWeek;
-			this.MonthsOfYear = monthsOfYear;
-			this.WeeksOfMonth = weeksOfMonth;
+			DaysOfWeek = daysOfWeek;
+			MonthsOfYear = monthsOfYear;
+			WeeksOfMonth = weeksOfMonth;
 		}
 
 		internal MonthlyDOWTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -1776,8 +1745,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The delay duration.</value>
 		TimeSpan ITriggerDelay.Delay
 		{
-			get { return this.RandomDelay; }
-			set { this.RandomDelay = value; }
+			get { return RandomDelay; }
+			set { RandomDelay = value; }
 		}
 
 		/// <summary>
@@ -1787,15 +1756,15 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType())
 			{
-				this.DaysOfWeek = ((MonthlyDOWTrigger)sourceTrigger).DaysOfWeek;
-				this.MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
-				try { this.RunOnLastWeekOfMonth = ((MonthlyDOWTrigger)sourceTrigger).RunOnLastWeekOfMonth; } catch { }
-				this.WeeksOfMonth = ((MonthlyDOWTrigger)sourceTrigger).WeeksOfMonth;
+				DaysOfWeek = ((MonthlyDOWTrigger)sourceTrigger).DaysOfWeek;
+				MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
+				try { RunOnLastWeekOfMonth = ((MonthlyDOWTrigger)sourceTrigger).RunOnLastWeekOfMonth; } catch { }
+				WeeksOfMonth = ((MonthlyDOWTrigger)sourceTrigger).WeeksOfMonth;
 			}
 			if (sourceTrigger != null && sourceTrigger.TriggerType == TaskTriggerType.Monthly)
-				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
+				MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
 		}
 
 		/// <summary>
@@ -1805,12 +1774,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.DaysOfWeek == ((MonthlyDOWTrigger)other).DaysOfWeek &&
-				this.MonthsOfYear == ((MonthlyDOWTrigger)other).MonthsOfYear && this.WeeksOfMonth == ((MonthlyDOWTrigger)other).WeeksOfMonth &&
-				(this.v1Trigger == null && this.RunOnLastWeekOfMonth == ((MonthlyDOWTrigger)other).RunOnLastWeekOfMonth);
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && DaysOfWeek == ((MonthlyDOWTrigger)other).DaysOfWeek &&
+				MonthsOfYear == ((MonthlyDOWTrigger)other).MonthsOfYear && WeeksOfMonth == ((MonthlyDOWTrigger)other).WeeksOfMonth &&
+				(v1Trigger == null && RunOnLastWeekOfMonth == ((MonthlyDOWTrigger)other).RunOnLastWeekOfMonth);
 
 		/// <summary>
 		/// Reads the subclass XML for V1 streams.
@@ -1831,22 +1797,22 @@ namespace Microsoft.Win32.TaskScheduler
 							{
 								string wk = reader.ReadElementContentAsString();
 								if (wk == "Last")
-									this.WeeksOfMonth = WhichWeek.LastWeek;
+									WeeksOfMonth = WhichWeek.LastWeek;
 								else
 								{
 									switch (Int32.Parse(wk))
 									{
 										case 1:
-											this.WeeksOfMonth = WhichWeek.FirstWeek;
+											WeeksOfMonth = WhichWeek.FirstWeek;
 											break;
 										case 2:
-											this.WeeksOfMonth = WhichWeek.SecondWeek;
+											WeeksOfMonth = WhichWeek.SecondWeek;
 											break;
 										case 3:
-											this.WeeksOfMonth = WhichWeek.ThirdWeek;
+											WeeksOfMonth = WhichWeek.ThirdWeek;
 											break;
 										case 4:
-											this.WeeksOfMonth = WhichWeek.FourthWeek;
+											WeeksOfMonth = WhichWeek.FourthWeek;
 											break;
 										default:
 											throw new System.Xml.XmlException("Week element must contain a 1-4 or Last as content.");
@@ -1858,12 +1824,12 @@ namespace Microsoft.Win32.TaskScheduler
 						break;
 					case "DaysOfWeek":
 						reader.Read();
-						this.DaysOfWeek = 0;
+						DaysOfWeek = 0;
 						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 						{
 							try
 							{
-								this.DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
+								DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
 							}
 							catch
 							{
@@ -1875,12 +1841,12 @@ namespace Microsoft.Win32.TaskScheduler
 						break;
 					case "Months":
 						reader.Read();
-						this.MonthsOfYear = 0;
+						MonthsOfYear = 0;
 						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 						{
 							try
 							{
-								this.MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
+								MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
 							}
 							catch
 							{
@@ -1904,10 +1870,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string ww = TaskEnumGlobalizer.GetString(this.WeeksOfMonth);
-			string days = TaskEnumGlobalizer.GetString(this.DaysOfWeek);
-			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
-			return string.Format(Properties.Resources.TriggerMonthlyDOW1, AdjustToLocal(this.StartBoundary), ww, days, months);
+			string ww = TaskEnumGlobalizer.GetString(WeeksOfMonth);
+			string days = TaskEnumGlobalizer.GetString(DaysOfWeek);
+			string months = TaskEnumGlobalizer.GetString(MonthsOfYear);
+			return string.Format(Properties.Resources.TriggerMonthlyDOW1, AdjustToLocal(StartBoundary), ww, days, months);
 		}
 
 		/// <summary>
@@ -1919,46 +1885,43 @@ namespace Microsoft.Win32.TaskScheduler
 			writer.WriteStartElement("ScheduleByMonthDayOfWeek");
 
 			writer.WriteStartElement("Weeks");
-			if ((this.WeeksOfMonth & WhichWeek.FirstWeek) == WhichWeek.FirstWeek)
+			if ((WeeksOfMonth & WhichWeek.FirstWeek) == WhichWeek.FirstWeek)
 				writer.WriteElementString("Week", "1");
-			if ((this.WeeksOfMonth & WhichWeek.SecondWeek) == WhichWeek.SecondWeek)
+			if ((WeeksOfMonth & WhichWeek.SecondWeek) == WhichWeek.SecondWeek)
 				writer.WriteElementString("Week", "2");
-			if ((this.WeeksOfMonth & WhichWeek.ThirdWeek) == WhichWeek.ThirdWeek)
+			if ((WeeksOfMonth & WhichWeek.ThirdWeek) == WhichWeek.ThirdWeek)
 				writer.WriteElementString("Week", "3");
-			if ((this.WeeksOfMonth & WhichWeek.FourthWeek) == WhichWeek.FourthWeek)
+			if ((WeeksOfMonth & WhichWeek.FourthWeek) == WhichWeek.FourthWeek)
 				writer.WriteElementString("Week", "4");
-			if ((this.WeeksOfMonth & WhichWeek.LastWeek) == WhichWeek.LastWeek)
+			if ((WeeksOfMonth & WhichWeek.LastWeek) == WhichWeek.LastWeek)
 				writer.WriteElementString("Week", "Last");
 			writer.WriteEndElement();
 
 			writer.WriteStartElement("DaysOfWeek");
 			foreach (DaysOfTheWeek e in Enum.GetValues(typeof(DaysOfTheWeek)))
-				if (e != DaysOfTheWeek.AllDays && (this.DaysOfWeek & e) == e)
+				if (e != DaysOfTheWeek.AllDays && (DaysOfWeek & e) == e)
 					writer.WriteElementString(e.ToString(), null);
 			writer.WriteEndElement();
 
 			writer.WriteStartElement("Months");
 			foreach (MonthsOfTheYear e in Enum.GetValues(typeof(MonthsOfTheYear)))
-				if (e != MonthsOfTheYear.AllMonths && (this.MonthsOfYear & e) == e)
+				if (e != MonthsOfTheYear.AllMonths && (MonthsOfYear & e) == e)
 					writer.WriteElementString(e.ToString(), null);
 			writer.WriteEndElement();
 
 			writer.WriteEndElement();
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+			CalendarTrigger.ReadXml(reader, this, ReadMyXml);
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+			CalendarTrigger.WriteXml(writer, this, WriteMyXml);
 		}
 	}
 
@@ -1976,8 +1939,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public MonthlyTrigger(int dayOfMonth = 1, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths)
 			: base(TaskTriggerType.Monthly)
 		{
-			this.DaysOfMonth = new int[] { dayOfMonth };
-			this.MonthsOfYear = monthsOfYear;
+			DaysOfMonth = new int[] { dayOfMonth };
+			MonthsOfYear = monthsOfYear;
 		}
 
 		internal MonthlyTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -2108,8 +2071,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The delay duration.</value>
 		TimeSpan ITriggerDelay.Delay
 		{
-			get { return this.RandomDelay; }
-			set { this.RandomDelay = value; }
+			get { return RandomDelay; }
+			set { RandomDelay = value; }
 		}
 
 		/// <summary>
@@ -2119,14 +2082,14 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType())
 			{
-				this.DaysOfMonth = ((MonthlyTrigger)sourceTrigger).DaysOfMonth;
-				this.MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
-				try { this.RunOnLastDayOfMonth = ((MonthlyTrigger)sourceTrigger).RunOnLastDayOfMonth; } catch { }
+				DaysOfMonth = ((MonthlyTrigger)sourceTrigger).DaysOfMonth;
+				MonthsOfYear = ((MonthlyTrigger)sourceTrigger).MonthsOfYear;
+				try { RunOnLastDayOfMonth = ((MonthlyTrigger)sourceTrigger).RunOnLastDayOfMonth; } catch { }
 			}
 			if (sourceTrigger != null && sourceTrigger.TriggerType == TaskTriggerType.MonthlyDOW)
-				this.MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
+				MonthsOfYear = ((MonthlyDOWTrigger)sourceTrigger).MonthsOfYear;
 		}
 
 		/// <summary>
@@ -2136,11 +2099,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.DaysOfMonth == ((MonthlyTrigger)other).DaysOfMonth && this.MonthsOfYear == ((MonthlyTrigger)other).MonthsOfYear &&
-				(this.v1Trigger == null && this.RunOnLastDayOfMonth == ((MonthlyTrigger)other).RunOnLastDayOfMonth);
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && DaysOfMonth == ((MonthlyTrigger)other).DaysOfMonth && MonthsOfYear == ((MonthlyTrigger)other).MonthsOfYear &&
+				(v1Trigger == null && RunOnLastDayOfMonth == ((MonthlyTrigger)other).RunOnLastDayOfMonth);
 
 		/// <summary>
 		/// Converts an array of bit indices into a mask with bits  turned ON at every index
@@ -2208,17 +2168,17 @@ namespace Microsoft.Win32.TaskScheduler
 								}
 							}
 						}
-						this.DaysOfMonth = days.ToArray();
+						DaysOfMonth = days.ToArray();
 						reader.ReadEndElement();
 						break;
 					case "Months":
 						reader.Read();
-						this.MonthsOfYear = 0;
+						MonthsOfYear = 0;
 						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 						{
 							try
 							{
-								this.MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
+								MonthsOfYear |= (MonthsOfTheYear)Enum.Parse(typeof(MonthsOfTheYear), reader.LocalName);
 							}
 							catch
 							{
@@ -2242,9 +2202,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string days = string.Join(Properties.Resources.ListSeparator, Array.ConvertAll(this.DaysOfMonth, delegate(int i) { return i.ToString(); }));
-			string months = TaskEnumGlobalizer.GetString(this.MonthsOfYear);
-			return string.Format(Properties.Resources.TriggerMonthly1, AdjustToLocal(this.StartBoundary), days, months);
+			string days = string.Join(Properties.Resources.ListSeparator, Array.ConvertAll(DaysOfMonth, delegate(int i) { return i.ToString(); }));
+			string months = TaskEnumGlobalizer.GetString(MonthsOfYear);
+			return string.Format(Properties.Resources.TriggerMonthly1, AdjustToLocal(StartBoundary), days, months);
 		}
 
 		void WriteMyXml(System.Xml.XmlWriter writer)
@@ -2252,32 +2212,29 @@ namespace Microsoft.Win32.TaskScheduler
 			writer.WriteStartElement("ScheduleByMonth");
 
 			writer.WriteStartElement("DaysOfMonth");
-			foreach (var day in this.DaysOfMonth)
+			foreach (var day in DaysOfMonth)
 				writer.WriteElementString("Day", day.ToString());
 			writer.WriteEndElement();
 
 			writer.WriteStartElement("Months");
 			foreach (MonthsOfTheYear e in Enum.GetValues(typeof(MonthsOfTheYear)))
-				if (e != MonthsOfTheYear.AllMonths && (this.MonthsOfYear & e) == e)
+				if (e != MonthsOfTheYear.AllMonths && (MonthsOfYear & e) == e)
 					writer.WriteElementString(e.ToString(), null);
 			writer.WriteEndElement();
 
 			writer.WriteEndElement();
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+			CalendarTrigger.ReadXml(reader, this, ReadMyXml);
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+			CalendarTrigger.WriteXml(writer, this, WriteMyXml);
 		}
 	}
 
@@ -2331,10 +2288,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected override string V2GetTriggerString()
-		{
-			return Properties.Resources.TriggerRegistration1;
-		}
+		protected override string V2GetTriggerString() => Properties.Resources.TriggerRegistration1;
 	}
 
 	/// <summary>
@@ -2376,7 +2330,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Pattern != null)
 				{
 					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
-						throw new ArgumentOutOfRangeException();
+						throw new ArgumentOutOfRangeException(nameof(Duration));
 					v2Pattern.Duration = Task.TimeSpanToString(value);
 				}
 				else if (pTrigger != null)
@@ -2411,7 +2365,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Pattern != null)
 				{
 					if (value != TimeSpan.Zero && (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31)))
-						throw new ArgumentOutOfRangeException();
+						throw new ArgumentOutOfRangeException(nameof(Interval));
 					v2Pattern.Interval = Task.TimeSpanToString(value);
 				}
 				else if (pTrigger != null)
@@ -2479,10 +2433,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public bool Equals(RepetitionPattern other)
-		{
-			return this.Duration == other.Duration && this.Interval == other.Interval && this.StopAtDurationEnd == other.StopAtDurationEnd;
-		}
+		public bool Equals(RepetitionPattern other) => Duration == other.Duration && Interval == other.Interval && StopAtDurationEnd == other.StopAtDurationEnd;
 
 		/// <summary>
 		/// Returns a hash code for this instance.
@@ -2490,10 +2441,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 		/// </returns>
-		public override int GetHashCode()
-		{
-			return new { A = this.Duration, B = this.Interval, C = this.StopAtDurationEnd }.GetHashCode();
-		}
+		public override int GetHashCode() => new { A = Duration, B = Interval, C = StopAtDurationEnd }.GetHashCode();
 
 		/// <summary>
 		/// Determines whether any properties for this <see cref="RepetitionPattern"/> have been set.
@@ -2518,24 +2466,21 @@ namespace Microsoft.Win32.TaskScheduler
 			else if (pTrigger.v2Trigger != null)
 			{
 				if (pTrigger.v1TriggerData.MinutesInterval != 0)
-					v2Pattern.Interval = string.Format("PT{0}M", pTrigger.v1TriggerData.MinutesInterval);
+					v2Pattern.Interval = $"PT{pTrigger.v1TriggerData.MinutesInterval}M";
 				if (pTrigger.v1TriggerData.MinutesDuration != 0)
-					v2Pattern.Duration = string.Format("PT{0}M", pTrigger.v1TriggerData.MinutesDuration);
+					v2Pattern.Duration = $"PT{pTrigger.v1TriggerData.MinutesDuration}M";
 				v2Pattern.StopAtDurationEnd = (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 			}
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		bool ReadXmlConverter(System.Reflection.PropertyInfo pi, Object obj, ref Object value)
 		{
 			if (pi.Name == "Interval")
 			{
-				if (value is TimeSpan && !((TimeSpan)value).Equals(TimeSpan.Zero) && this.Duration <= (TimeSpan)value)
-					this.Duration = ((TimeSpan)value).Add(TimeSpan.FromMinutes(1));
+				if (value is TimeSpan && !((TimeSpan)value).Equals(TimeSpan.Zero) && Duration <= (TimeSpan)value)
+					Duration = ((TimeSpan)value).Add(TimeSpan.FromMinutes(1));
 			}
 			return false;
 		}
@@ -2545,7 +2490,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!reader.IsEmptyElement)
 			{
 				reader.ReadStartElement("Repetition", TaskDefinition.tns);
-				XmlSerializationHelper.ReadObjectProperties(reader, this, this.ReadXmlConverter);
+				XmlSerializationHelper.ReadObjectProperties(reader, this, ReadXmlConverter);
 				reader.ReadEndElement();
 			}
 			else
@@ -2578,7 +2523,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="stateChange">The state change.</param>
 		public SessionStateChangeTrigger(TaskSessionStateChangeType stateChange) : this()
 		{
-			this.StateChange = stateChange;
+			StateChange = stateChange;
 		}
 
 		internal SessionStateChangeTrigger(V2Interop.ITrigger iTrigger)
@@ -2656,8 +2601,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType() && !this.StateChangeIsSet())
-				this.StateChange = ((SessionStateChangeTrigger)sourceTrigger).StateChange;
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType() && !StateChangeIsSet())
+				StateChange = ((SessionStateChangeTrigger)sourceTrigger).StateChange;
 		}
 
 		/// <summary>
@@ -2667,10 +2612,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.StateChange == ((SessionStateChangeTrigger)other).StateChange;
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && StateChange == ((SessionStateChangeTrigger)other).StateChange;
 
 		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
@@ -2678,9 +2620,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string str = Properties.Resources.ResourceManager.GetString("TriggerSession" + this.StateChange.ToString());
-			string user = string.IsNullOrEmpty(this.UserId) ? Properties.Resources.TriggerAnyUser : this.UserId;
-			if (this.StateChange != TaskSessionStateChangeType.SessionLock && this.StateChange != TaskSessionStateChangeType.SessionUnlock)
+			string str = Properties.Resources.ResourceManager.GetString("TriggerSession" + StateChange.ToString());
+			string user = string.IsNullOrEmpty(UserId) ? Properties.Resources.TriggerAnyUser : UserId;
+			if (StateChange != TaskSessionStateChangeType.SessionLock && StateChange != TaskSessionStateChangeType.SessionUnlock)
 				user = string.Format(Properties.Resources.TriggerSessionUserSession, user);
 			return string.Format(str, user);
 		}
@@ -2689,10 +2631,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Returns a value indicating if the StateChange property has been set.
 		/// </summary>
 		/// <returns>StateChange property has been set.</returns>
-		internal bool StateChangeIsSet()
-		{
-			return (v2Trigger != null || unboundValues.ContainsKey("StateChange"));
-		}
+		internal bool StateChangeIsSet() => (v2Trigger != null || unboundValues.ContainsKey("StateChange"));
 	}
 
 	/// <summary>
@@ -2715,7 +2654,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TimeTrigger(DateTime startBoundary)
 			: base(TaskTriggerType.Time)
 		{
-			this.StartBoundary = startBoundary;
+			StartBoundary = startBoundary;
 		}
 
 		internal TimeTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -2761,18 +2700,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The delay duration.</value>
 		TimeSpan ITriggerDelay.Delay
 		{
-			get { return this.RandomDelay; }
-			set { this.RandomDelay = value; }
+			get { return RandomDelay; }
+			set { RandomDelay = value; }
 		}
 
 		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
-		protected override string V2GetTriggerString()
-		{
-			return string.Format(Properties.Resources.TriggerTime1, AdjustToLocal(this.StartBoundary));
-		}
+		protected override string V2GetTriggerString() => string.Format(Properties.Resources.TriggerTime1, AdjustToLocal(StartBoundary));
 	}
 
 	/// <summary>
@@ -2789,8 +2725,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public WeeklyTrigger(DaysOfTheWeek daysOfWeek = DaysOfTheWeek.Sunday, short weeksInterval = 1)
 			: base(TaskTriggerType.Weekly)
 		{
-			this.DaysOfWeek = daysOfWeek;
-			this.WeeksInterval = weeksInterval;
+			DaysOfWeek = daysOfWeek;
+			WeeksInterval = weeksInterval;
 		}
 
 		internal WeeklyTrigger(V1Interop.ITaskTrigger iTrigger)
@@ -2894,8 +2830,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The delay duration.</value>
 		TimeSpan ITriggerDelay.Delay
 		{
-			get { return this.RandomDelay; }
-			set { this.RandomDelay = value; }
+			get { return RandomDelay; }
+			set { RandomDelay = value; }
 		}
 
 		/// <summary>
@@ -2905,10 +2841,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public override void CopyProperties(Trigger sourceTrigger)
 		{
 			base.CopyProperties(sourceTrigger);
-			if (sourceTrigger != null && sourceTrigger.GetType() == this.GetType())
+			if (sourceTrigger != null && sourceTrigger.GetType() == GetType())
 			{
-				this.DaysOfWeek = ((WeeklyTrigger)sourceTrigger).DaysOfWeek;
-				this.WeeksInterval = ((WeeklyTrigger)sourceTrigger).WeeksInterval;
+				DaysOfWeek = ((WeeklyTrigger)sourceTrigger).DaysOfWeek;
+				WeeksInterval = ((WeeklyTrigger)sourceTrigger).WeeksInterval;
 			}
 		}
 
@@ -2919,10 +2855,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other)
-		{
-			return base.Equals(other) && this.DaysOfWeek == ((WeeklyTrigger)other).DaysOfWeek && this.WeeksInterval == ((WeeklyTrigger)other).WeeksInterval;
-		}
+		public override bool Equals(Trigger other) => base.Equals(other) && DaysOfWeek == ((WeeklyTrigger)other).DaysOfWeek && WeeksInterval == ((WeeklyTrigger)other).WeeksInterval;
 
 		/// <summary>
 		/// Reads the subclass XML for V1 streams.
@@ -2936,16 +2869,16 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (reader.LocalName)
 				{
 					case "WeeksInterval":
-						this.WeeksInterval = (short)reader.ReadElementContentAsInt();
+						WeeksInterval = (short)reader.ReadElementContentAsInt();
 						break;
 					case "DaysOfWeek":
 						reader.Read();
-						this.DaysOfWeek = 0;
+						DaysOfWeek = 0;
 						while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 						{
 							try
 							{
-								this.DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
+								DaysOfWeek |= (DaysOfTheWeek)Enum.Parse(typeof(DaysOfTheWeek), reader.LocalName);
 							}
 							catch
 							{
@@ -2969,9 +2902,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString()
 		{
-			string days = TaskEnumGlobalizer.GetString(this.DaysOfWeek);
-			return string.Format(this.WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
-				AdjustToLocal(this.StartBoundary), days, this.WeeksInterval);
+			string days = TaskEnumGlobalizer.GetString(DaysOfWeek);
+			return string.Format(WeeksInterval == 1 ? Properties.Resources.TriggerWeekly1Week : Properties.Resources.TriggerWeeklyMultWeeks,
+				AdjustToLocal(StartBoundary), days, WeeksInterval);
 		}
 
 		/// <summary>
@@ -2982,31 +2915,28 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			writer.WriteStartElement("ScheduleByWeek");
 
-			if (this.WeeksInterval != 1)
-				writer.WriteElementString("WeeksInterval", this.WeeksInterval.ToString());
+			if (WeeksInterval != 1)
+				writer.WriteElementString("WeeksInterval", WeeksInterval.ToString());
 
 			writer.WriteStartElement("DaysOfWeek");
 			foreach (DaysOfTheWeek e in Enum.GetValues(typeof(DaysOfTheWeek)))
-				if (e != DaysOfTheWeek.AllDays && (this.DaysOfWeek & e) == e)
+				if (e != DaysOfTheWeek.AllDays && (DaysOfWeek & e) == e)
 					writer.WriteElementString(e.ToString(), null);
 			writer.WriteEndElement();
 
 			writer.WriteEndElement();
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			CalendarTrigger.ReadXml(reader, this, this.ReadMyXml);
+			CalendarTrigger.ReadXml(reader, this, ReadMyXml);
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			CalendarTrigger.WriteXml(writer, this, this.WriteMyXml);
+			CalendarTrigger.WriteXml(writer, this, WriteMyXml);
 		}
 	}
 }

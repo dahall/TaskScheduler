@@ -26,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskHistoryControl()
 		{
 			InitializeComponent();
-			this.ShowErrors = true;
+			ShowErrors = true;
 			historyListView.ListViewItemSorter = lvwColumnSorter;
 			historyListView.VirtualMode = true;
 			historyListView.ColumnContextMenuStrip = columnContextMenu;
@@ -65,10 +65,10 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null), Browsable(false)]
 		public Task Task
 		{
-			get { return this.task; }
+			get { return task; }
 			set
 			{
-				this.task = value;
+				task = value;
 				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 				historySplitContainer.Panel2Collapsed = false;
 				if (value != null)
@@ -84,7 +84,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Obsolete("The Activate method is being deprecated. Use the Task property instead.")]
 		public void Activate(Task t)
 		{
-			this.Task = t;
+			Task = t;
 		}
 
 		/// <summary>
@@ -144,10 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 			PersistColumnSettings();
 		}
 
-		private TaskEventLog CreateLogInstance()
-		{
-			return new TaskEventLog(task.TaskService.TargetServer, task.Path);
-		}
+		private TaskEventLog CreateLogInstance() => new TaskEventLog(task.TaskService.TargetServer, task.Path);
 
 		private void FetchEnumEvents(int startIndex, int endIndex)
 		{
@@ -355,7 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.RefreshHistory();
+			RefreshHistory();
 		}
 
 		private void eventPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -379,7 +376,7 @@ namespace Microsoft.Win32.TaskScheduler
 						wiz.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Event;
 						wiz.AvailableActions = TaskSchedulerWizard.AvailableWizardActions.Execute;
 						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage | TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage | TaskSchedulerWizard.AvailableWizardPages.ActionEditPage;
-						wiz.TaskName = string.Format("Microsoft-Windows-TaskScheduler_Operational_Microsoft-Windows-TaskScheduler_{0}", eventId);
+						wiz.TaskName = $"Microsoft-Windows-TaskScheduler_Operational_Microsoft-Windows-TaskScheduler_{eventId}";
 						wiz.ShowDialog(this);
 					}
 				}
@@ -404,10 +401,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return l;
 		}
 
-		private static List<string> GetColumnHeaderTextList(ListView.ColumnHeaderCollection col)
-		{
-			return GetColumnHeaderList(col).ConvertAll<string>(cdel);
-		}
+		private static List<string> GetColumnHeaderTextList(ListView.ColumnHeaderCollection col) => GetColumnHeaderList(col).ConvertAll<string>(cdel);
 
 		private void addremoveColumnsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -426,7 +420,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void sortEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int col = (int)this.columnContextMenu.Tag;
+			int col = (int)columnContextMenu.Tag;
 			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
 			removeSortingToolStripMenuItem.Visible = true;
 		}
@@ -439,7 +433,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void groupEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int col = (int)this.columnContextMenu.Tag;
+			int col = (int)columnContextMenu.Tag;
 			lvwColumnSorter.Group = true;
 			if (lvwColumnSorter.SortColumn != col || vevEnum != null)
 				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
@@ -502,18 +496,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public void ResortOnColumn(int column)
 			{
-				if (column == this.SortColumn)
+				if (column == SortColumn)
 				{
 					// Reverse the current sort direction for this column.
-					this.Order = this.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-					this.NewSortSameColumn = true;
+					Order = Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+					NewSortSameColumn = true;
 				}
 				else
 				{
 					// Set the column number that is to be sorted; default to ascending.
-					this.SortColumn = column;
-					this.Order = SortOrder.Ascending;
-					this.NewSortSameColumn = false;
+					SortColumn = column;
+					Order = SortOrder.Ascending;
+					NewSortSameColumn = false;
 				}
 			}
 

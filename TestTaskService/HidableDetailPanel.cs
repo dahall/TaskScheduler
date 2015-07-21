@@ -27,23 +27,20 @@ namespace TestTaskService
 		}
 
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content), Browsable(false)]
-		public Panel DetailArea
-		{
-			get { return detailPanel; }
-		}
+		public Panel DetailArea => detailPanel;
 
 		private void hideButton_Click(object sender, EventArgs e)
 		{
 			if (detailHidden)
 			{
 				detailHidden = !detailHidden;
-				this.Height = defaultHeight;
+				Height = defaultHeight;
 				hideButton.Text = "5";
 			}
 			else
 			{
 				detailHidden = !detailHidden;
-				this.Height = headerHeight;
+				Height = headerHeight;
 				hideButton.Text = "6";
 			}
 		}
@@ -52,7 +49,7 @@ namespace TestTaskService
 		{
 			base.OnResize(e);
 			if (!detailHidden)
-				defaultHeight = this.Height;
+				defaultHeight = Height;
 		}
 	}
 
@@ -75,10 +72,10 @@ namespace TestTaskService
 		{
 			base.Initialize(component);
 
-			if (this.Control is HidableDetailPanel)
-				this.EnableDesignMode(((HidableDetailPanel)this.Control).DetailArea, "DetailArea");
+			if (Control is HidableDetailPanel)
+				EnableDesignMode(((HidableDetailPanel)Control).DetailArea, "DetailArea");
 
-			DesignerActionService service = this.GetService(typeof(DesignerActionService)) as DesignerActionService;
+			DesignerActionService service = GetService(typeof(DesignerActionService)) as DesignerActionService;
 			if (service != null)
 				service.Remove(component);
 		}

@@ -61,9 +61,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal CorrelatedTaskEvent(Guid activityId, string taskName)
 		{
-			this.ActivityId = activityId;
-			this.TaskName = taskName;
-			this.TriggeredBy = TriggerType.Event;
+			ActivityId = activityId;
+			TaskName = taskName;
+			TriggeredBy = TriggerType.Event;
 		}
 
 		/// <summary>
@@ -82,10 +82,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the underlying <see cref="EventRecord"/> instances.
 		/// </summary>
-		public IList<EventRecord> EventRecords
-		{
-			get { return records; }
-		}
+		public IList<EventRecord> EventRecords => records;
 
 		/// <summary>
 		/// Gets the task name.
@@ -133,24 +130,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="System.String"/> that represents this instance.
 		/// </returns>
-		public override string ToString()
-		{
-			return TaskName + ActivityId.ToString("D");
-		}
+		public override string ToString() => TaskName + ActivityId.ToString("D");
 
 		internal void SetCompletion(int code, DateTime end)
 		{
-			this.RunEnd = end;
+			RunEnd = end;
 			switch (code)
 			{
 				case 102:
-					this.RunResult = Status.Success;
+					RunResult = Status.Success;
 					break;
 				case 103:
-					this.RunResult = Status.Failure;
+					RunResult = Status.Failure;
 					break;
 				case 111:
-					this.RunResult = Status.Terminated;
+					RunResult = Status.Terminated;
 					break;
 				default:
 					break;
@@ -169,7 +163,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal CorrelatedTaskEventEnumerator(TaskEventLog log)
 		{
 			this.log = log;
-			this.query = log.OrderBy(ev => ev).GroupBy(ev => ev.ActivityId.GetValueOrDefault(Guid.Empty), ev => ev).GetEnumerator();
+			query = log.OrderBy(ev => ev).GroupBy(ev => ev.ActivityId.GetValueOrDefault(Guid.Empty), ev => ev).GetEnumerator();
 		}
 
 		/// <summary>
@@ -229,18 +223,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The element in the collection at the current position of the enumerator.
 		///   </returns>
-		object System.Collections.IEnumerator.Current
-		{
-			get { return this.Current; }
-		}
+		object System.Collections.IEnumerator.Current => Current;
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
 		public void Dispose()
 		{
-			this.query.Dispose();
-			this.log = null;
+			query.Dispose();
+			log = null;
 		}
 
 		/// <summary>
@@ -252,10 +243,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.InvalidOperationException">
 		/// The collection was modified after the enumerator was created.
 		///   </exception>
-		public bool MoveNext()
-		{
-			return query.MoveNext();
-		}
+		public bool MoveNext() => query.MoveNext();
 
 		/// <summary>
 		/// Sets the enumerator to its initial position, which is before the first element in the collection.
@@ -293,10 +281,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
 		/// </returns>
-		public IEnumerator<CorrelatedTaskEvent> GetEnumerator()
-		{
-			return new CorrelatedTaskEventEnumerator(taskLog);
-		}
+		public IEnumerator<CorrelatedTaskEvent> GetEnumerator() => new CorrelatedTaskEventEnumerator(taskLog);
 
 		/// <summary>
 		/// Returns an enumerator that iterates through a collection.
@@ -304,10 +289,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
 		/// </returns>
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 }
 #endif

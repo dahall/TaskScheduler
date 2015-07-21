@@ -42,7 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(TaskEvent taskEvent, TaskEventLog log = null)
 		{
 			if (taskEvent == null)
-				throw new ArgumentNullException("taskEvent");
+				throw new ArgumentNullException(nameof(taskEvent));
 
 			if (log != null)
 			{
@@ -62,7 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				curEvent = value;
-				this.Text = string.Format(EditorProperties.Resources.EventPropertiesDialogTitle, curEvent.EventId);
+				Text = string.Format(EditorProperties.Resources.EventPropertiesDialogTitle, curEvent.EventId);
 				eventViewerControl1.TaskEvent = curEvent;
 				SetButtonState();
 			}

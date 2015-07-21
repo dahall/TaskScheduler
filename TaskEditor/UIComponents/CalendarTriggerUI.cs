@@ -50,8 +50,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		bool ITriggerHandler.ShowStartBoundary
 		{
-			get { return this.dailyTriggerUI1.ShowStartBoundary; }
-			set { this.dailyTriggerUI1.ShowStartBoundary = this.monthlyTriggerUI1.ShowStartBoundary = this.weeklyTriggerUI1.ShowStartBoundary = value; }
+			get { return dailyTriggerUI1.ShowStartBoundary; }
+			set { dailyTriggerUI1.ShowStartBoundary = monthlyTriggerUI1.ShowStartBoundary = weeklyTriggerUI1.ShowStartBoundary = value; }
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			get
 			{
-				switch (this.schedTabControl.SelectedTab.Name)
+				switch (schedTabControl.SelectedTab.Name)
 				{
 					case "dailyTab":
 						return dailyTriggerUI1.Trigger;
@@ -134,17 +134,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		/// </summary>
 		/// <returns><c>true</c></returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		bool ITriggerHandler.IsTriggerValid()
-		{
-			return true;
-		}
+		bool ITriggerHandler.IsTriggerValid() => true;
 
 		/// <summary>
 		/// Called when the trigger type has changed.
 		/// </summary>
 		protected void OnTriggerTypeChanged()
 		{
-			var h = this.TriggerTypeChanged;
+			var h = TriggerTypeChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
 		}
@@ -155,10 +152,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				Trigger newT;
 				if (monthlyTriggerUI1.TriggerType == TaskTriggerType.Monthly)
-					(newT = new MonthlyTrigger()).CopyProperties(this.Trigger);
+					(newT = new MonthlyTrigger()).CopyProperties(Trigger);
 				else
-					(newT = new MonthlyDOWTrigger()).CopyProperties(this.Trigger);
-				if (this.Trigger == null)
+					(newT = new MonthlyDOWTrigger()).CopyProperties(Trigger);
+				if (Trigger == null)
 					newT.StartBoundary = schedStartDatePicker.Value;
 				monthlyTriggerUI1.Trigger = newT;
 				schedTabControl.SelectedTab = monthlyTab;
@@ -182,23 +179,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (((RadioButton)sender).Checked)
 			{
-				bool nullTrigger = this.Trigger == null;
+				bool nullTrigger = Trigger == null;
 				if (sender == schedOneRadio)
 				{
 					if (!onAssignment)
-						(timeTrigger = new TimeTrigger()).CopyProperties(this.Trigger);
+						(timeTrigger = new TimeTrigger()).CopyProperties(Trigger);
 					schedTabControl.SelectedTab = oneTimeTab;
 				}
 				else if (sender == schedDailyRadio)
 				{
 					if (!onAssignment)
-						(dailyTriggerUI1.Trigger = new DailyTrigger()).CopyProperties(this.Trigger);
+						(dailyTriggerUI1.Trigger = new DailyTrigger()).CopyProperties(Trigger);
 					schedTabControl.SelectedTab = dailyTab;
 				}
 				else if (sender == schedWeeklyRadio)
 				{
 					if (!onAssignment)
-						(weeklyTriggerUI1.Trigger = new WeeklyTrigger()).CopyProperties(this.Trigger);
+						(weeklyTriggerUI1.Trigger = new WeeklyTrigger()).CopyProperties(Trigger);
 					schedTabControl.SelectedTab = weeklyTab;
 				}
 				else if (sender == schedMonthlyRadio)
@@ -206,7 +203,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					monthlyTriggerUI1_TriggerTypeChanged(this, EventArgs.Empty);
 				}
 				if (nullTrigger)
-					this.Trigger.StartBoundary = schedStartDatePicker.Value;
+					Trigger.StartBoundary = schedStartDatePicker.Value;
 				if (!onAssignment && sender != schedMonthlyRadio)
 					OnTriggerTypeChanged();
 			}
@@ -214,8 +211,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment && this.Trigger != null)
-				this.Trigger.StartBoundary = schedStartDatePicker.Value;
+			if (!onAssignment && Trigger != null)
+				Trigger.StartBoundary = schedStartDatePicker.Value;
 		}
 	}
 }

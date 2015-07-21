@@ -56,19 +56,10 @@ namespace Microsoft.Win32
 		private const int LOGON32_LOGON_INTERACTIVE = 2;
 		private const int LOGON32_PROVIDER_DEFAULT = 0;
 
-		public string AuthenticationType
-		{
-			get { return identity == null ? null : identity.AuthenticationType; }
-		}
+		public string AuthenticationType => identity == null ? null : identity.AuthenticationType;
 
-		public bool IsAuthenticated
-		{
-			get { return identity == null ? false : identity.IsAuthenticated; }
-		}
+		public bool IsAuthenticated => identity == null ? false : identity.IsAuthenticated;
 
-		public string Name
-		{
-			get { return identity == null ? null : identity.Name; }
-		}
+		public string Name => identity == null ? null : identity.Name;
 	}
 }

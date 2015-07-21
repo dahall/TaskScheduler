@@ -14,25 +14,25 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		public WrappingCheckBox()
 		{
-			this.TextChanged += (o, e) => CacheTextSize();
-			this.FontChanged += (o, e) => CacheTextSize();
+			TextChanged += (o, e) => CacheTextSize();
+			FontChanged += (o, e) => CacheTextSize();
 		}
 
 		private void CacheTextSize()
 		{
-			cachedSizeOfOneLineOfText = TextRenderer.MeasureText(this.Text, this.Font, MaxSize, TextFormatFlags.WordBreak);
+			cachedSizeOfOneLineOfText = TextRenderer.MeasureText(Text, Font, MaxSize, TextFormatFlags.WordBreak);
 		}
 
 		public override Size GetPreferredSize(Size proposedSize)
 		{
 			Size prefSize = base.GetPreferredSize(proposedSize);
-			if ((prefSize.Width > proposedSize.Width) && (!String.IsNullOrEmpty(this.Text) && !(proposedSize.Width.Equals(Int32.MaxValue) || proposedSize.Height.Equals(Int32.MaxValue))))
+			if ((prefSize.Width > proposedSize.Width) && (!String.IsNullOrEmpty(Text) && !(proposedSize.Width.Equals(Int32.MaxValue) || proposedSize.Height.Equals(Int32.MaxValue))))
 			{
 				// we have the possiblility of wrapping... back out the single line of text
 				Size bordersAndPadding = prefSize - cachedSizeOfOneLineOfText;
 				// add back in the text size, subtract baseprefsize.width and 3 from proposed size width so they wrap properly
 				Size newConstraints = proposedSize - bordersAndPadding - new Size(3, 0);
-				prefSize = bordersAndPadding + TextRenderer.MeasureText(this.Text, this.Font, newConstraints, TextFormatFlags.WordBreak);
+				prefSize = bordersAndPadding + TextRenderer.MeasureText(Text, Font, newConstraints, TextFormatFlags.WordBreak);
 			}
 			return prefSize;
 		}
@@ -45,28 +45,28 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		public WrappingRadioButton()
 		{
-			this.TextChanged += (o, e) => CacheTextSize();
-			this.FontChanged += (o, e) => CacheTextSize();
+			TextChanged += (o, e) => CacheTextSize();
+			FontChanged += (o, e) => CacheTextSize();
 		}
 
 		private void CacheTextSize()
 		{
-			if (String.IsNullOrEmpty(this.Text))
+			if (String.IsNullOrEmpty(Text))
 				cachedSizeOfOneLineOfText = System.Drawing.Size.Empty;
 			else
-				cachedSizeOfOneLineOfText = TextRenderer.MeasureText(this.Text, this.Font, MaxSize, TextFormatFlags.WordBreak);
+				cachedSizeOfOneLineOfText = TextRenderer.MeasureText(Text, Font, MaxSize, TextFormatFlags.WordBreak);
 		}
 
 		public override Size GetPreferredSize(Size proposedSize)
 		{
 			Size prefSize = base.GetPreferredSize(proposedSize);
-			if ((prefSize.Width > proposedSize.Width) && (!String.IsNullOrEmpty(this.Text) && !proposedSize.Width.Equals(Int32.MaxValue) || !proposedSize.Height.Equals(Int32.MaxValue)))
+			if ((prefSize.Width > proposedSize.Width) && (!String.IsNullOrEmpty(Text) && !proposedSize.Width.Equals(Int32.MaxValue) || !proposedSize.Height.Equals(Int32.MaxValue)))
 			{
 				// we have the possiblility of wrapping... back out the single line of text
 				Size bordersAndPadding = prefSize - cachedSizeOfOneLineOfText;
 				// add back in the text size, subtract baseprefsize.width and 3 from proposed size width so they wrap properly
 				Size newConstraints = proposedSize - bordersAndPadding - new Size(3, 0);
-				prefSize = bordersAndPadding + TextRenderer.MeasureText(this.Text, this.Font, newConstraints, TextFormatFlags.WordBreak);
+				prefSize = bordersAndPadding + TextRenderer.MeasureText(Text, Font, newConstraints, TextFormatFlags.WordBreak);
 			}
 			return prefSize;
 		}

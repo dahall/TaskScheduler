@@ -56,7 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="eventSubscription">The event query XML used to initialize the dialog.</param>
 		public EventActionFilterEditor(string eventSubscription) : this()
 		{
-			this.Subscription = eventSubscription;
+			Subscription = eventSubscription;
 		}
 
 		/// <summary>
@@ -366,13 +366,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
-			if (this.tabControl.SelectedTab == xmlTab)
+			if (tabControl.SelectedTab == xmlTab)
 			{
 				if (!UpdateQLFromText())
 					return;
 			}
-			this.subscription = EventQuery.Serialize(ql);
-			this.DialogResult = System.Windows.Forms.DialogResult.OK;
+			subscription = EventQuery.Serialize(ql);
+			DialogResult = System.Windows.Forms.DialogResult.OK;
 			Close();
 		}
 
@@ -418,8 +418,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void radio_CheckedChanged(object sender, EventArgs e)
 		{
-			this.eventLogCombo.Enabled = this.byLogRadio.Checked || this.eventLogCombo.CheckedItems.Count > 0;
-			this.eventSourceCombo.Enabled = this.bySourceRadio.Checked || this.eventSourceCombo.SelectedItems.Length > 0;
+			eventLogCombo.Enabled = byLogRadio.Checked || eventLogCombo.CheckedItems.Count > 0;
+			eventSourceCombo.Enabled = bySourceRadio.Checked || eventSourceCombo.SelectedItems.Length > 0;
 		}
 
 		private void ResetFilterControls()
@@ -492,7 +492,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public TimeSpan DiffTime;
 			public string Text;
 
-			public override string ToString() { return Text; }
+			public override string ToString() => Text;
 		}
 
 		private class StringNode
@@ -507,20 +507,14 @@ namespace Microsoft.Win32.TaskScheduler
 				Path = path;
 			}
 
-			internal StringNode LastChild
-			{
-				get { return (Nodes.Count == 0) ? null : Nodes[Nodes.Count - 1]; }
-			}
+			internal StringNode LastChild => (Nodes.Count == 0) ? null : Nodes[Nodes.Count - 1];
 
-			public static implicit operator string(StringNode n)
-			{
-				return n.Text;
-			}
+			public static implicit operator string (StringNode n) => n.Text;
 
 			public void UpdateTreeView(TreeNodeCollection nodes)
 			{
 				nodes.Clear();
-				UpdateNodes(this.Nodes, nodes);
+				UpdateNodes(Nodes, nodes);
 			}
 
 			private static void UpdateNodes(System.Collections.Generic.List<StringNode> nodes, TreeNodeCollection coll)

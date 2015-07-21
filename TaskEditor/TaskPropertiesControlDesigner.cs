@@ -24,7 +24,7 @@ namespace Microsoft.Win32.TaskScheduler.Design
 		public override void Initialize(System.ComponentModel.IComponent component)
 		{
 			base.Initialize(component);
-			DesignerActionService service = this.GetService(typeof(DesignerActionService)) as DesignerActionService;
+			DesignerActionService service = GetService(typeof(DesignerActionService)) as DesignerActionService;
 			if (service != null)
 				service.Remove(component);
 		}
@@ -46,26 +46,23 @@ namespace Microsoft.Win32.TaskScheduler.Design
 
 			public AvailableTaskTabs AvailableTabs
 			{
-				get { return this.Control.AvailableTabs; }
+				get { return Control.AvailableTabs; }
 				set { SetProperty("AvailableTabs", value); }
 			}
 
 			public bool Editable
 			{
-				get { return this.Control.Editable; }
+				get { return Control.Editable; }
 				set { SetProperty("Editable", value); }
 			}
 
 			public bool ShowErrors
 			{
-				get { return this.Control.ShowErrors; }
+				get { return Control.ShowErrors; }
 				set { SetProperty("ShowErrors", value); }
 			}
 
-			private TaskPropertiesControl Control
-			{
-				get { return this.Component as TaskPropertiesControl; }
-			}
+			private TaskPropertiesControl Control => Component as TaskPropertiesControl;
 
 			public override DesignerActionItemCollection GetSortedActionItems()
 			{
@@ -79,9 +76,9 @@ namespace Microsoft.Win32.TaskScheduler.Design
 
 			private void SetProperty(string propertyName, object value)
 			{
-				PropertyDescriptor property = TypeDescriptor.GetProperties(this.Control)[propertyName];
+				PropertyDescriptor property = TypeDescriptor.GetProperties(Control)[propertyName];
 				if (property != null)
-					property.SetValue(this.Control, value);
+					property.SetValue(Control, value);
 			}
 		}
 	}

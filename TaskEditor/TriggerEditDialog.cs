@@ -43,7 +43,7 @@ namespace Microsoft.Win32.TaskScheduler
 			InitializeComponent();
 
 			showCustom = trigger != null && (trigger.TriggerType == TaskTriggerType.Custom);
-			this.SupportV1Only = supportV1Only;
+			SupportV1Only = supportV1Only;
 
 			// Populate combo boxes
 			delaySpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });
@@ -53,9 +53,9 @@ namespace Microsoft.Win32.TaskScheduler
 			stopIfRunsSpan.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 
 			if (trigger != null)
-				this.Trigger = trigger;
+				Trigger = trigger;
 			else
-				this.Trigger = new TimeTrigger();
+				Trigger = new TimeTrigger();
 		}
 
 		/// <summary>Defines the type of triggers that can be used by tasks.</summary>
@@ -229,10 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private static DateTime MaxDate(DateTime dt1, DateTime dt2)
-		{
-			return (dt1 >= dt2) ? dt1 : dt2;
-		}
+		private static DateTime MaxDate(DateTime dt1, DateTime dt2) => (dt1 >= dt2) ? dt1 : dt2;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
@@ -516,7 +513,7 @@ namespace Microsoft.Win32.TaskScheduler
 					newTrigger.CopyProperties(trigger);
 				if (newTrigger is ICalendarTrigger && newTrigger.StartBoundary == DateTime.MinValue)
 					newTrigger.StartBoundary = DateTime.Now;
-				this.Trigger = newTrigger;
+				Trigger = newTrigger;
 			}
 		}
 	}

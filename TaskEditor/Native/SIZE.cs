@@ -13,23 +13,14 @@ namespace Microsoft.Win32
 
 			public SIZE(int w, int h)
 			{
-				this.width = w; this.height = h;
+				width = w; height = h;
 			}
 
-			public Size ToSize()
-			{
-				return this;
-			}
+			public Size ToSize() => this;
 
-			public static implicit operator Size(SIZE s)
-			{
-				return new Size(s.width, s.height);
-			}
+			public static implicit operator Size(SIZE s) => new Size(s.width, s.height);
 
-			public static implicit operator SIZE(Size s)
-			{
-				return new SIZE(s.Width, s.Height);
-			}
+			public static implicit operator SIZE(Size s) => new SIZE(s.Width, s.Height);
 		}
 	}
 }

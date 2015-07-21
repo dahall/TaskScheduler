@@ -161,7 +161,7 @@ namespace Microsoft.Win32
 
 				if (!string.IsNullOrEmpty(domainName))
 					domainName = computerName;
-				userName = string.Format("{0}\\{1}", domainName, acctName);
+				userName = $"{domainName}\\{acctName}";
 				return flag;
 			}
 

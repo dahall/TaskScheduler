@@ -5,10 +5,7 @@ namespace System.Runtime.InteropServices
 	{
 		internal const int cbBuffer = 256;
 
-		public static T ToStructure<T>(this IntPtr ptr)
-		{
-			return (T)Marshal.PtrToStructure(ptr, typeof(T));
-		}
+		public static T ToStructure<T>(this IntPtr ptr) => (T)Marshal.PtrToStructure(ptr, typeof(T));
 
 		public static IntPtr StructureToPtr(object value)
 		{
@@ -34,10 +31,7 @@ namespace System.Runtime.InteropServices
 			}
 		}
 
-		public static string GetString(IntPtr pString)
-		{
-			return Marshal.PtrToStringUni(pString);
-		}
+		public static string GetString(IntPtr pString) => Marshal.PtrToStringUni(pString);
 
 		public static bool SetString(ref IntPtr ptr, ref uint size, string value = null)
 		{

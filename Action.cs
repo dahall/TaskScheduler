@@ -32,7 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>List of unbound values when working with Actions not associated with a registered task.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
-		internal virtual bool Bound { get { return this.iAction != null; } }
+		internal virtual bool Bound => iAction != null;
 
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
@@ -42,7 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			V2Interop.IActionCollection iActions = iTaskDef.Actions;
 
-			switch (this.GetType().Name)
+			switch (GetType().Name)
 			{
 				case "ComHandlerAction":
 					iAction = iActions.Create(TaskActionType.ComHandler);
@@ -80,7 +80,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public object Clone()
 		{
-			Action ret = CreateAction(this.ActionType);
+			Action ret = CreateAction(ActionType);
 			ret.CopyProperties(this);
 			return ret;
 		}
@@ -91,7 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
 		protected virtual void CopyProperties(Action sourceAction)
 		{
-			this.Id = sourceAction.Id;
+			Id = sourceAction.Id;
 		}
 
 		/// <summary>
@@ -113,7 +113,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override bool Equals(object obj)
 		{
 			if (obj is Action)
-				return this.Equals((Action)obj);
+				return Equals((Action)obj);
 			return base.Equals(obj);
 		}
 
@@ -124,10 +124,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public virtual bool Equals(Action other)
-		{
-			return this.ActionType == other.ActionType && this.Id == other.Id;
-		}
+		public virtual bool Equals(Action other) => ActionType == other.ActionType && Id == other.Id;
 
 		/// <summary>
 		/// Returns a hash code for this instance.
@@ -135,10 +132,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 		/// </returns>
-		public override int GetHashCode()
-		{
-			return new { A = this.ActionType, B = this.Id }.GetHashCode();
-		}
+		public override int GetHashCode() => new { A = ActionType, B = Id }.GetHashCode();
 
 		/// <summary>
 		/// Gets the type of the action.
@@ -168,18 +162,15 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlAttribute(AttributeName = "id", DataType = "ID")]
 		public virtual string Id
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null) : this.iAction.Id; }
-			set { if (iAction == null) unboundValues["Id"] = value; else this.iAction.Id = value; }
+			get { return (iAction == null) ? (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null) : iAction.Id; }
+			set { if (iAction == null) unboundValues["Id"] = value; else iAction.Id = value; }
 		}
 
 		/// <summary>
 		/// Returns the action Id.
 		/// </summary>
 		/// <returns>String representation of action.</returns>
-		public override string ToString()
-		{
-			return this.Id;
-		}
+		public override string ToString() => Id;
 
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this action.
@@ -189,7 +180,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public virtual string ToString(System.Globalization.CultureInfo culture)
 		{
 			using (new CultureSwitcher(culture))
-				return this.ToString();
+				return ToString();
 		}
 
 		/// <summary>
@@ -256,8 +247,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="data">Addition data associated with the handler.</param>
 		public ComHandlerAction(Guid classId, string data)
 		{
-			this.ClassId = classId;
-			this.Data = data;
+			ClassId = classId;
+			Data = data;
 		}
 
 		internal ComHandlerAction(V2Interop.IComHandlerAction action)
@@ -277,10 +268,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the name of the object referred to by <see cref="ClassId"/>.
 		/// </summary>
-		public string ClassName
-		{
-			get { return GetNameForCLSID(this.ClassId); }
-		}
+		public string ClassName => GetNameForCLSID(ClassId);
 
 		/// <summary>
 		/// Gets or sets additional data that is associated with the handler.
@@ -298,11 +286,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
 		protected override void CopyProperties(Action sourceAction)
 		{
-			if (sourceAction.GetType() == this.GetType())
+			if (sourceAction.GetType() == GetType())
 			{
 				base.CopyProperties(sourceAction);
-				this.ClassId = ((ComHandlerAction)sourceAction).ClassId;
-				this.Data = ((ComHandlerAction)sourceAction).Data;
+				ClassId = ((ComHandlerAction)sourceAction).ClassId;
+				Data = ((ComHandlerAction)sourceAction).Data;
 			}
 		}
 
@@ -313,19 +301,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Action other)
-		{
-			return base.Equals(other) && this.ClassId == ((ComHandlerAction)other).ClassId && this.Data == ((ComHandlerAction)other).Data;
-		}
+		public override bool Equals(Action other) => base.Equals(other) && ClassId == ((ComHandlerAction)other).ClassId && Data == ((ComHandlerAction)other).Data;
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="ComHandlerAction"/>.
 		/// </summary>
 		/// <returns>String representation of this action.</returns>
-		public override string ToString()
-		{
-			return string.Format(Properties.Resources.ComHandlerAction, this.ClassId, this.Data, this.Id, this.ClassName);
-		}
+		public override string ToString() => string.Format(Properties.Resources.ComHandlerAction, ClassId, Data, Id, ClassName);
 
 		/// <summary>
 		/// Gets the name for CLSID.
@@ -375,9 +357,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
 		public ExecAction(string path, string arguments = null, string workingDirectory = null)
 		{
-			this.Path = path;
-			this.Arguments = arguments;
-			this.WorkingDirectory = workingDirectory;
+			Path = path;
+			Arguments = arguments;
+			WorkingDirectory = workingDirectory;
 		}
 
 		internal ExecAction(V1Interop.ITask task)
@@ -413,15 +395,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
 		}
 
-		internal static string BuildPowerShellCmd(string actionType, string cmd)
-		{
-			return string.Format(PowerShellArgFormat, ScriptIdentifer, actionType, cmd);
-		}
+		internal static string BuildPowerShellCmd(string actionType, string cmd) => string.Format(PowerShellArgFormat, ScriptIdentifer, actionType, cmd);
 
-		internal static ExecAction AsPowerShellCmd(string actionType, string cmd)
-		{
-			return new ExecAction(PowerShellPath, BuildPowerShellCmd(actionType, cmd));
-		}
+		internal static ExecAction AsPowerShellCmd(string actionType, string cmd) => new ExecAction(PowerShellPath, BuildPowerShellCmd(actionType, cmd));
 
 		/// <summary>
 		/// Gets or sets the identifier of the action.
@@ -527,10 +503,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// <c>true</c> if this instance is a powershell command; otherwise, <c>false</c>.
 		/// </value>
-		internal bool IsPowerShellCmd
-		{
-			get { return this.Path != null && (this.Path.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) || this.Path.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase)); }
-		}
+		internal bool IsPowerShellCmd => Path != null && (Path.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) || Path.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase));
 
 		/// <summary>
 		/// Copies the properties from another <see cref="Action"/> the current instance.
@@ -538,12 +511,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
 		protected override void CopyProperties(Action sourceAction)
 		{
-			if (sourceAction.GetType() == this.GetType())
+			if (sourceAction.GetType() == GetType())
 			{
 				base.CopyProperties(sourceAction);
-				this.Path = ((ExecAction)sourceAction).Path;
-				this.Arguments = ((ExecAction)sourceAction).Arguments;
-				this.WorkingDirectory = ((ExecAction)sourceAction).WorkingDirectory;
+				Path = ((ExecAction)sourceAction).Path;
+				Arguments = ((ExecAction)sourceAction).Arguments;
+				WorkingDirectory = ((ExecAction)sourceAction).WorkingDirectory;
 			}
 		}
 
@@ -554,19 +527,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Action other)
-		{
-			return base.Equals(other) && this.Path == ((ExecAction)other).Path && this.Arguments == ((ExecAction)other).Arguments && this.WorkingDirectory == ((ExecAction)other).WorkingDirectory;
-		}
+		public override bool Equals(Action other) => base.Equals(other) && Path == ((ExecAction)other).Path && Arguments == ((ExecAction)other).Arguments && WorkingDirectory == ((ExecAction)other).WorkingDirectory;
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="ExecAction"/>.
 		/// </summary>
 		/// <returns>String representation of this action.</returns>
-		public override string ToString()
-		{
-			return string.Format(Properties.Resources.ExecAction, this.Path, this.Arguments, this.WorkingDirectory, this.Id);
-		}
+		public override string ToString() => string.Format(Properties.Resources.ExecAction, Path, Arguments, WorkingDirectory, Id);
 	}
 
 	/// <summary>
@@ -605,11 +572,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="mailServer">Name of the server that you use to send e-mail from.</param>
 		public EmailAction(string subject, string from, string to, string body, string mailServer)
 		{
-			this.Subject = subject;
-			this.From = from;
-			this.To = to;
-			this.Body = body;
-			this.Server = mailServer;
+			Subject = subject;
+			From = from;
+			To = to;
+			Body = body;
+			Server = mailServer;
 		}
 
 		internal EmailAction(V2Interop.IEmailAction action)
@@ -741,7 +708,7 @@ namespace Microsoft.Win32.TaskScheduler
 						throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
 					foreach (var o in value)
 						if (!(o is string) || !System.IO.File.Exists((string)o))
-							throw new ArgumentException("Each value of the array must contain a valid file reference.", "Attachments");
+							throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
 				}
 				if (iAction == null)
 				{
@@ -761,21 +728,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
 		protected override void CopyProperties(Action sourceAction)
 		{
-			if (sourceAction.GetType() == this.GetType())
+			if (sourceAction.GetType() == GetType())
 			{
 				base.CopyProperties(sourceAction);
 				if (((EmailAction)sourceAction).Attachments != null)
-					this.Attachments = (object[])((EmailAction)sourceAction).Attachments.Clone();
-				this.Bcc = ((EmailAction)sourceAction).Bcc;
-				this.Body = ((EmailAction)sourceAction).Body;
-				this.Cc = ((EmailAction)sourceAction).Cc;
-				this.From = ((EmailAction)sourceAction).From;
+					Attachments = (object[])((EmailAction)sourceAction).Attachments.Clone();
+				Bcc = ((EmailAction)sourceAction).Bcc;
+				Body = ((EmailAction)sourceAction).Body;
+				Cc = ((EmailAction)sourceAction).Cc;
+				From = ((EmailAction)sourceAction).From;
 				if (((EmailAction)sourceAction).nvc != null)
-					((EmailAction)sourceAction).HeaderFields.CopyTo(this.HeaderFields);
-				this.ReplyTo = ((EmailAction)sourceAction).ReplyTo;
-				this.Server = ((EmailAction)sourceAction).Server;
-				this.Subject = ((EmailAction)sourceAction).Subject;
-				this.To = ((EmailAction)sourceAction).To;
+					((EmailAction)sourceAction).HeaderFields.CopyTo(HeaderFields);
+				ReplyTo = ((EmailAction)sourceAction).ReplyTo;
+				Server = ((EmailAction)sourceAction).Server;
+				Subject = ((EmailAction)sourceAction).Subject;
+				To = ((EmailAction)sourceAction).To;
 			}
 		}
 
@@ -786,19 +753,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Action other)
-		{
-			return base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
-		}
+		public override bool Equals(Action other) => base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="EmailAction"/>.
 		/// </summary>
 		/// <returns>String representation of this action.</returns>
-		public override string ToString()
-		{
-			return string.Format(Properties.Resources.EmailAction, this.Subject, this.To, this.Cc, this.Bcc, this.From, this.ReplyTo, this.Body, this.Server, this.Id);
-		}
+		public override string ToString() => string.Format(Properties.Resources.EmailAction, Subject, To, Cc, Bcc, From, ReplyTo, Body, Server, Id);
 
 		private static string FromUTF8(string s)
 		{
@@ -817,21 +778,21 @@ namespace Microsoft.Win32.TaskScheduler
 			// Send-MailMessage [-To] <String[]> [-Subject] <String> [[-Body] <String> ] [[-SmtpServer] <String> ] -From <String> [-Attachments <String[]> ]
 			//    [-Bcc <String[]> ] [-BodyAsHtml] [-Cc <String[]> ] [-Credential <PSCredential> ] [-DeliveryNotificationOption <DeliveryNotificationOptions> ]
 			//    [-Encoding <Encoding> ] [-Port <Int32> ] [-Priority <MailPriority> ] [-UseSsl] [ <CommonParameters>]
-			bool bodyIsHtml = this.Body != null && this.Body.Trim().StartsWith("<") && this.Body.Trim().EndsWith(">");
+			bool bodyIsHtml = Body != null && Body.Trim().StartsWith("<") && Body.Trim().EndsWith(">");
 			var sb = new System.Text.StringBuilder();
-			sb.AppendFormat("Send-MailMessage -From '{0}' -Subject '{1}' -SmtpServer '{2}' -Encoding UTF8", Prep(this.From), ToUTF8(Prep(this.Subject)), Prep(this.Server));
-			if (!string.IsNullOrEmpty(this.To))
-				sb.AppendFormat(" -To {0}", ToPS(this.To));
-			if (!string.IsNullOrEmpty(this.Cc))
-				sb.AppendFormat(" -Cc {0}", ToPS(this.Cc));
-			if (!string.IsNullOrEmpty(this.Bcc))
-				sb.AppendFormat(" -Bcc {0}", ToPS(this.Bcc));
+			sb.AppendFormat("Send-MailMessage -From '{0}' -Subject '{1}' -SmtpServer '{2}' -Encoding UTF8", Prep(From), ToUTF8(Prep(Subject)), Prep(Server));
+			if (!string.IsNullOrEmpty(To))
+				sb.AppendFormat(" -To {0}", ToPS(To));
+			if (!string.IsNullOrEmpty(Cc))
+				sb.AppendFormat(" -Cc {0}", ToPS(Cc));
+			if (!string.IsNullOrEmpty(Bcc))
+				sb.AppendFormat(" -Bcc {0}", ToPS(Bcc));
 			if (bodyIsHtml)
 				sb.Append(" -BodyAsHtml");
-			if (!string.IsNullOrEmpty(this.Body))
-				sb.AppendFormat(" -Body '{0}'", ToUTF8(Prep(this.Body)));
-			if (this.Attachments != null && this.Attachments.Length > 0)
-				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(this.Attachments, o => Prep(o.ToString()))));
+			if (!string.IsNullOrEmpty(Body))
+				sb.AppendFormat(" -Body '{0}'", ToUTF8(Prep(Body)));
+			if (Attachments != null && Attachments.Length > 0)
+				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(Attachments, o => Prep(o.ToString()))));
 			return sb.ToString();
 
 			/*var msg = new System.Net.Mail.MailMessage(this.From, this.To, this.Subject, this.Body);
@@ -851,10 +812,7 @@ namespace Microsoft.Win32.TaskScheduler
 			client.Send(msg);*/
 		}
 
-		private static string Prep(string s)
-		{
-			return s.Replace("'", "''");
-		}
+		private static string Prep(string s) => s.Replace("'", "''");
 
 		private static string ToPS(string input, char[] delimeters = null)
 		{
@@ -863,10 +821,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeters), i => Prep(i.Trim())));
 		}
 
-		private static string ToPS(string[] input)
-		{
-			return string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("'", i.Trim(), "'")));
-		}
+		private static string ToPS(string[] input) => string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("'", i.Trim(), "'")));
 
 		internal static Action FromPowerShellCommand(string p)
 		{
@@ -883,10 +838,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		private static string UnPrep(string s)
-		{
-			return s.Replace("''", "'");
-		}
+		private static string UnPrep(string s) => s.Replace("''", "'");
 
 		private static string[] FromPS(string p)
 		{
@@ -923,8 +875,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="title">Title of the message box.</param>
 		public ShowMessageAction(string messageBody, string title)
 		{
-			this.MessageBody = messageBody;
-			this.Title = title;
+			MessageBody = messageBody;
+			Title = title;
 		}
 
 		internal ShowMessageAction(V2Interop.IShowMessageAction action)
@@ -957,11 +909,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
 		protected override void CopyProperties(Action sourceAction)
 		{
-			if (sourceAction.GetType() == this.GetType())
+			if (sourceAction.GetType() == GetType())
 			{
 				base.CopyProperties(sourceAction);
-				this.Title = ((ShowMessageAction)sourceAction).Title;
-				this.MessageBody = ((ShowMessageAction)sourceAction).MessageBody;
+				Title = ((ShowMessageAction)sourceAction).Title;
+				MessageBody = ((ShowMessageAction)sourceAction).MessageBody;
 			}
 		}
 
@@ -972,29 +924,23 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Action other)
-		{
-			return base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
-		}
+		public override bool Equals(Action other) => base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="ShowMessageAction"/>.
 		/// </summary>
 		/// <returns>String representation of this action.</returns>
-		public override string ToString()
-		{
-			return string.Format(Properties.Resources.ShowMessageAction, this.Title, this.MessageBody, this.Id);
-		}
+		public override string ToString() => string.Format(Properties.Resources.ShowMessageAction, Title, MessageBody, Id);
 
 		string IBindAsExecAction.GetPowerShellCommand()
 		{
 			// [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Your_Desired_Message','Your_Desired_Title')
 			var sb = new System.Text.StringBuilder("[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('");
-			sb.Append(this.MessageBody.Replace("'", "''"));
-			if (this.Title != null)
+			sb.Append(MessageBody.Replace("'", "''"));
+			if (Title != null)
 			{
 				sb.Append("','");
-				sb.Append(this.Title.Replace("'", "''"));
+				sb.Append(Title.Replace("'", "''"));
 			}
 			sb.Append("')");
 			return sb.ToString();

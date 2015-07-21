@@ -23,10 +23,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private class ListViewIndexComparer : System.Collections.IComparer
 		{
-			public int Compare(object x, object y)
-			{
-				return ((ListViewItem)x).Index - ((ListViewItem)y).Index;
-			}
+			public int Compare(object x, object y) => ((ListViewItem)x).Index - ((ListViewItem)y).Index;
 		}
 
 		public event EventHandler<ListViewReorderedEventArgs> Reordered;
@@ -35,9 +32,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public ReorderableListView() : base()
 		{
-			this.AllowRowReorder = true;
-			this.MultiSelect = false;
-			this.ListViewItemSorter = new ListViewIndexComparer();
+			AllowRowReorder = true;
+			MultiSelect = false;
+			ListViewItemSorter = new ListViewIndexComparer();
 		}
 
 		[DefaultValue(true)]
@@ -50,10 +47,10 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(true), Category("Behavior")]
 		public bool AllowRowReorder
 		{
-			get { return this.allowRowReorder; }
+			get { return allowRowReorder; }
 			set
 			{
-				this.allowRowReorder = value;
+				allowRowReorder = value;
 				base.AllowDrop = value;
 			}
 		}
@@ -75,7 +72,7 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override void OnDragDrop(DragEventArgs e)
 		{
 			base.OnDragDrop(e);
-			if (this.AllowRowReorder && base.SelectedItems.Count > 0)
+			if (AllowRowReorder && base.SelectedItems.Count > 0)
 			{
 				// Retrieve the index of the insertion mark; 
 				int targetIndex = base.InsertionMark.Index;
@@ -124,7 +121,7 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override void OnDragEnter(DragEventArgs e)
 		{
 			base.OnDragEnter(e);
-			if (this.AllowRowReorder && e.Data.GetDataPresent(typeof(ListViewItem)))
+			if (AllowRowReorder && e.Data.GetDataPresent(typeof(ListViewItem)))
 				e.Effect = e.AllowedEffect; // DragDropEffects.Move;
 		}
 
@@ -136,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		protected override void OnDragOver(DragEventArgs e)
 		{
-			if (this.AllowRowReorder && e.Data.GetDataPresent(typeof(ListViewItem)))
+			if (AllowRowReorder && e.Data.GetDataPresent(typeof(ListViewItem)))
 			{
 				Point cp = base.PointToClient(new Point(e.X, e.Y));
 				int targetIndex = base.InsertionMark.NearestIndex(cp);
@@ -171,13 +168,13 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override void OnItemDrag(ItemDragEventArgs e)
 		{
 			base.OnItemDrag(e);
-			if (this.AllowRowReorder)
+			if (AllowRowReorder)
 				base.DoDragDrop(e.Item, DragDropEffects.Move);
 		}
 
 		protected virtual void OnReordered(ListViewReorderedEventArgs e)
 		{
-			var h = this.Reordered;
+			var h = Reordered;
 			if (h != null)
 				h(this, e);
 		}

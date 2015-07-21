@@ -268,49 +268,44 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime BeginDate
 		{
-			get { return new DateTime(this.BeginYear, this.BeginMonth, this.BeginDay, this.StartHour, this.StartMinute, 0, DateTimeKind.Unspecified); }
+			get { return new DateTime(BeginYear, BeginMonth, BeginDay, StartHour, StartMinute, 0, DateTimeKind.Unspecified); }
 			set
 			{
 				if (value != DateTime.MinValue)
 				{
 					DateTime local = value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value;
-					this.BeginYear = (ushort)local.Year;
-					this.BeginMonth = (ushort)local.Month;
-					this.BeginDay = (ushort)local.Day;
-					this.StartHour = (ushort)local.Hour;
-					this.StartMinute = (ushort)local.Minute;
+					BeginYear = (ushort)local.Year;
+					BeginMonth = (ushort)local.Month;
+					BeginDay = (ushort)local.Day;
+					StartHour = (ushort)local.Hour;
+					StartMinute = (ushort)local.Minute;
 				}
 				else
-					this.BeginYear = this.BeginMonth = this.BeginDay = this.StartHour = this.StartMinute = 0;
+					BeginYear = BeginMonth = BeginDay = StartHour = StartMinute = 0;
 			}
 		}
 
 		public DateTime EndDate
 		{
-			get { return this.EndYear == 0 ? DateTime.MaxValue : new DateTime(this.EndYear, this.EndMonth, this.EndDay); }
+			get { return EndYear == 0 ? DateTime.MaxValue : new DateTime(EndYear, EndMonth, EndDay); }
 			set
 			{
 				if (value != DateTime.MaxValue)
 				{
-					this.EndYear = (ushort)value.Year;
-					this.EndMonth = (ushort)value.Month;
-					this.EndDay = (ushort)value.Day;
-					this.Flags |= TaskTriggerFlags.HasEndDate;
+					EndYear = (ushort)value.Year;
+					EndMonth = (ushort)value.Month;
+					EndDay = (ushort)value.Day;
+					Flags |= TaskTriggerFlags.HasEndDate;
 				}
 				else
 				{
-					this.EndYear = this.EndMonth = this.EndDay = 0;
-					this.Flags &= ~TaskTriggerFlags.HasEndDate;
+					EndYear = EndMonth = EndDay = 0;
+					Flags &= ~TaskTriggerFlags.HasEndDate;
 				}
 			}
 		}
 
-		public override string ToString()
-		{
-			return string.Format("Trigger Type: {6};\n> Start: {0}; End: {1};\n> DurMin: {4}; DurItv: {5};\n>",
-				this.BeginDate, (this.EndYear == 0 ? "null" : this.EndDate.ToString()), this.Data, this.Flags,
-				this.MinutesDuration, this.MinutesInterval, this.Type);
-		}
+		public override string ToString() => $"Trigger Type: {Type};\n> Start: {BeginDate}; End: {(EndYear == 0 ? "null" : EndDate.ToString())};\n> DurMin: {MinutesDuration}; DurItv: {MinutesInterval};\n>";
 	}
 
 	#endregion
@@ -458,25 +453,16 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		public CoTaskMemString(IntPtr handle) : this() { base.SetHandle(handle); }
 		public CoTaskMemString(string text) : this() { base.SetHandle(Marshal.StringToCoTaskMemUni(text)); }
 
-		public static implicit operator string(CoTaskMemString cmem)
-		{
-			return cmem.ToString();
-		}
+		public static implicit operator string (CoTaskMemString cmem) => cmem.ToString();
 
-		public override bool IsInvalid
-		{
-			get { return (this.handle == null || this.handle == IntPtr.Zero); }
-		}
+		public override bool IsInvalid => (handle == null || handle == IntPtr.Zero);
 
 		protected override bool ReleaseHandle()
 		{
-			Marshal.FreeCoTaskMem(this.handle);
+			Marshal.FreeCoTaskMem(handle);
 			return true;
 		}
 
-		public override string ToString()
-		{
-			return Marshal.PtrToStringUni(this.handle);
-		}
+		public override string ToString() => Marshal.PtrToStringUni(handle);
 	}
 }

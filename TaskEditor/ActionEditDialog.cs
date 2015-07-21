@@ -38,7 +38,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="action">The action.</param>
 		public ActionEditDialog(Action action) : this()
 		{
-			this.Action = action;
+			Action = action;
 		}
 
 		/// <summary>

@@ -193,13 +193,13 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Parse(string cronString)
 			{
 				if (cronString == null)
-					throw new ArgumentNullException("cronString");
+					throw new ArgumentNullException(nameof(cronString));
 
 				var tokens = cronString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 				if (tokens.Length != 5)
 				{
-					throw new ArgumentException(string.Format("'{0}' is not a valid crontab expression. It must contain at least 5 components of a schedule "
-						+ "(in the sequence of minutes, hours, days, months, days of week).", cronString));
+					throw new ArgumentException($"'{cronString}' is not a valid crontab expression. It must contain at least 5 components of a schedule "
+						+ "(in the sequence of minutes, hours, days, months, days of week).");
 				}
 
 				// min, hr, days, months, daysOfWeek
@@ -209,18 +209,18 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 
-			public FieldVal Minutes { get { return Fields[0]; } }
-			public FieldVal Hours { get { return Fields[1]; } }
-			public FieldVal Days { get { return Fields[2]; } }
-			public FieldVal Months { get { return Fields[3]; } }
-			public FieldVal DOW { get { return Fields[4]; } }
+			public FieldVal Minutes => Fields[0];
+			public FieldVal Hours => Fields[1];
+			public FieldVal Days => Fields[2];
+			public FieldVal Months => Fields[3];
+			public FieldVal DOW => Fields[4];
 
 			private FieldVal ParseCronField(string str, CronFieldType cft)
 			{
 				FieldVal res = new FieldVal();
 
 				if (string.IsNullOrEmpty(str))
-					throw new ArgumentNullException("A crontab field value cannot be empty.");
+					throw new ArgumentNullException(nameof(str), "A crontab field value cannot be empty.");
 
 				// Look first for a list of values (e.g. 1,2,3).
 				if (str.IndexOf(",") > 0)
@@ -300,10 +300,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return res;
 			}
 
-			private static int ParseInt(string str)
-			{
-				return int.Parse(str.Trim());
-			}
+			private static int ParseInt(string str) => int.Parse(str.Trim());
 
 			public enum CronFieldType { Minutes, Hours, Days, Months, DaysOfWeek };
 
@@ -313,7 +310,7 @@ namespace Microsoft.Win32.TaskScheduler
 				public bool repeating, range;
 				public int step;
 
-				public bool IsEvery { get { return step == 1 && repeating; } }
+				public bool IsEvery => step == 1 && repeating;
 
 				public bool Validate(CronFieldType cft)
 				{

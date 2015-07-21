@@ -45,7 +45,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					comCLSIDText.Text = GetNameForCLSID(value);
 				}
 
-				EventHandler h = this.KeyValueChanged;
+				EventHandler h = KeyValueChanged;
 				if (h != null)
 					h(this, EventArgs.Empty);
 			}
@@ -78,10 +78,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool IsActionValid()
-		{
-			return ComCLSID != null;
-		}
+		public bool IsActionValid() => ComCLSID != null;
 
 		public event EventHandler KeyValueChanged;
 	}

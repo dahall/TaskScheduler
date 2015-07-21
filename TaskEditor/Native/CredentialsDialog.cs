@@ -33,10 +33,10 @@ namespace System.Windows.Forms
 		/// <param name="options">The options.</param>
 		public CredentialsDialog(string caption = null, string message = null, string userName = null, CredentialsDialogOptions options = CredentialsDialogOptions.Default) : this()
 		{
-			this.Caption = caption;
-			this.Message = message;
-			this.UserName = userName;
-			this.Options = options;
+			Caption = caption;
+			Message = message;
+			UserName = userName;
+			Options = options;
 		}
 
 		/// <summary>
@@ -129,10 +129,7 @@ namespace System.Windows.Forms
 		/// Gets a default value for the target.
 		/// </summary>
 		/// <value>The default target.</value>
-		private string DefaultTarget
-		{
-			get { return Environment.UserDomainName; }
-		}
+		private string DefaultTarget => Environment.UserDomainName;
 
 		/// <summary>
 		/// Confirms the credentials.
@@ -140,9 +137,9 @@ namespace System.Windows.Forms
 		/// <param name="storedCredentials">If set to <c>true</c> the credentials are stored in the credential manager.</param>
 		public void ConfirmCredentials(bool storedCredentials)
 		{
-			NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIConfirmCredentials(this.Target, storedCredentials);
+			NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIConfirmCredentials(Target, storedCredentials);
 			if (ret != NativeMethods.CredUIReturnCodes.NO_ERROR && ret != NativeMethods.CredUIReturnCodes.ERROR_INVALID_PARAMETER)
-				throw new InvalidOperationException(string.Format("Unable to confirm credentials. Error: 0x{0:X}", ret));
+				throw new InvalidOperationException($"Unable to confirm credentials. Error: 0x{ret:X}");
 		}
 
 		/// <summary>
@@ -150,10 +147,10 @@ namespace System.Windows.Forms
 		/// </summary>
 		public override void Reset()
 		{
-			this.Target = this.UserName = this.Caption = this.Message = this.Password = null;
-			this.Banner = null;
-			this.EncryptPassword = this.SaveChecked = false;
-			this.Options = CredentialsDialogOptions.Default;
+			Target = UserName = Caption = Message = Password = null;
+			Banner = null;
+			EncryptPassword = SaveChecked = false;
+			Options = CredentialsDialogOptions.Default;
 		}
 
 		private bool IsValidPassword(string userName, string password)
@@ -180,20 +177,20 @@ namespace System.Windows.Forms
 		/// </returns>
 		protected override bool RunDialog(IntPtr parentWindowHandle)
 		{
-			NativeMethods.CREDUI_INFO info = new NativeMethods.CREDUI_INFO(parentWindowHandle, this.Caption, this.Message, this.Banner);
+			NativeMethods.CREDUI_INFO info = new NativeMethods.CREDUI_INFO(parentWindowHandle, Caption, Message, Banner);
 			try
 			{
-				StringBuilder userName = new StringBuilder(this.UserName, maxStringLength);
+				StringBuilder userName = new StringBuilder(UserName, maxStringLength);
 				StringBuilder password = new StringBuilder(maxStringLength);
-				bool save = this.SaveChecked;
+				bool save = SaveChecked;
 
-				if (string.IsNullOrEmpty(this.Target)) this.Target = this.DefaultTarget;
-				NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIPromptForCredentials(ref info, this.Target, IntPtr.Zero,
-					this.AuthenticationError, userName, maxStringLength, password, maxStringLength, ref save, this.Options);
+				if (string.IsNullOrEmpty(Target)) Target = DefaultTarget;
+				NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIPromptForCredentials(ref info, Target, IntPtr.Zero,
+					AuthenticationError, userName, maxStringLength, password, maxStringLength, ref save, Options);
 				switch (ret)
 				{
 					case NativeMethods.CredUIReturnCodes.NO_ERROR:
-						if (this.ValidatePassword && !IsValidPassword(userName.ToString(), password.ToString()))
+						if (ValidatePassword && !IsValidPassword(userName.ToString(), password.ToString()))
 							return false;
 						/*if (save)
 						{
@@ -208,26 +205,26 @@ namespace System.Windows.Forms
 					case NativeMethods.CredUIReturnCodes.ERROR_CANCELLED:
 						return false;
 					default:
-						throw new InvalidOperationException(string.Format("Unknown error in CredentialsDialog. Error: 0x{0:X}", ret));
+						throw new InvalidOperationException($"Unknown error in CredentialsDialog. Error: 0x{ret:X}");
 				}
 
-				if (this.EncryptPassword)
+				if (EncryptPassword)
 				{
 					// Convert the password to a SecureString
 					SecureString newPassword = StringBuilderToSecureString(password);
 
 					// Clear the old password and set the new one (read-only)
-					if (this.SecurePassword != null)
-						this.SecurePassword.Dispose();
+					if (SecurePassword != null)
+						SecurePassword.Dispose();
 					newPassword.MakeReadOnly();
-					this.SecurePassword = newPassword;
+					SecurePassword = newPassword;
 				}
 				else
-					this.Password = password.ToString();
+					Password = password.ToString();
 
 				// Update other properties
-				this.UserName = userName.ToString();
-				this.SaveChecked = save;
+				UserName = userName.ToString();
+				SaveChecked = save;
 				return true;
 			}
 			finally

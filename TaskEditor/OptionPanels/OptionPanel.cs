@@ -32,7 +32,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		[Localizable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
 		public string Title { get; set; }
 
-		internal TaskDefinition td { get { return parent.TaskDefinition; } }
+		internal TaskDefinition td => parent.TaskDefinition;
 
 		public void Initialize(TaskOptionsEditor editor)
 		{

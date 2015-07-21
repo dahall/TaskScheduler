@@ -58,7 +58,7 @@ namespace COMTask
 					using (StreamWriter wri = File.AppendText(file))
 						wri.WriteLine("Log entry {0}", DateTime.Now);
 
-					this.StatusHandler.UpdateStatus((short)(++writeCount / 12), string.Format("Log file started at {0}", lastWriteTime));
+					StatusHandler.UpdateStatus((short)(++writeCount / 12), $"Log file started at {lastWriteTime}");
 				}
 				catch { }
 			}
@@ -67,7 +67,7 @@ namespace COMTask
 			{
 				timer.Enabled = false;
 				writeCount = 0;
-				this.StatusHandler.TaskCompleted(0);
+				StatusHandler.TaskCompleted(0);
 			}
 		}
 	}

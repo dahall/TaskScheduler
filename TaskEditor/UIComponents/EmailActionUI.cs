@@ -40,17 +40,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool IsActionValid()
-		{
-			return emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
+		public bool IsActionValid() => emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
 				emailToText.TextLength > 0 && emailTextText.TextLength > 0 && emailSMTPText.TextLength > 0;
-		}
 
 		public event EventHandler KeyValueChanged;
 
 		private void keyField_TextChanged(object sender, EventArgs e)
 		{
-			EventHandler h = this.KeyValueChanged;
+			EventHandler h = KeyValueChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
 		}

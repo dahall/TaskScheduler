@@ -38,9 +38,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskEditDialog(Task task, bool editable = true, bool registerOnAccept = true)
 		{
 			InitializeComponent();
-			this.Editable = editable;
-			this.Initialize(task);
-			this.RegisterTaskOnAccept = registerOnAccept;
+			Editable = editable;
+			Initialize(task);
+			RegisterTaskOnAccept = registerOnAccept;
 		}
 
 		/// <summary>
@@ -53,9 +53,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskEditDialog(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true)
 		{
 			InitializeComponent();
-			this.Editable = editable;
-			this.Initialize(service, td);
-			this.RegisterTaskOnAccept = registerOnAccept;
+			Editable = editable;
+			Initialize(service, td);
+			RegisterTaskOnAccept = registerOnAccept;
 		}
 
 		/// <summary>
@@ -154,10 +154,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The task definition.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public TaskDefinition TaskDefinition
-		{
-			get { return taskPropertiesControl1.TaskDefinition; }
-		}
+		public TaskDefinition TaskDefinition => taskPropertiesControl1.TaskDefinition;
 
 		/// <summary>
 		/// Gets or sets the folder for the task. If control is initialized with a <see cref="Task"/>, this value will be set to the folder of the registered task.
@@ -211,10 +208,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
 			if (service == null)
-				throw new ArgumentNullException("service");
+				throw new ArgumentNullException(nameof(service));
 			if (!titleSet)
-				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
-			this.okBtn.Enabled = false;
+				Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
+			okBtn.Enabled = false;
 			taskPropertiesControl1.Initialize(service, td);
 		}
 
@@ -225,17 +222,14 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(Task task)
 		{
 			if (task == null)
-				throw new ArgumentNullException("task");
+				throw new ArgumentNullException(nameof(task));
 			if (!titleSet)
-				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
+				Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, GetServerString(task.TaskService));
 			taskPropertiesControl1.Initialize(task);
 		}
 
-		internal static string GetServerString(TaskService service)
-		{
-			return service.TargetServer == null || Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
+		internal static string GetServerString(TaskService service) => service.TargetServer == null || Environment.MachineName.Equals(service.TargetServer, StringComparison.CurrentCultureIgnoreCase) ?
 				EditorProperties.Resources.LocalMachine : service.TargetServer;
-		}
 
 		internal static string InvokeCredentialDialog(string userName, IWin32Window owner)
 		{
@@ -256,19 +250,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>Changed in release 1.8.4 so that when a user cancels the password dialog, it no longer throws an exception but rather displays an error.</remarks>
 		private void okBtn_Click(object sender, System.EventArgs e)
 		{
-			if (this.TaskDefinition.Actions.Count == 0)
+			if (TaskDefinition.Actions.Count == 0)
 			{
 				MessageBox.Show(EditorProperties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			if (this.TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !ValidateOneTriggerExpires())
+			if (TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !ValidateOneTriggerExpires())
 			{
 				MessageBox.Show(EditorProperties.Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			if (this.TaskDefinition.LowestSupportedVersion > this.TaskDefinition.Settings.Compatibility)
+			if (TaskDefinition.LowestSupportedVersion > TaskDefinition.Settings.Compatibility)
 			{
 				MessageBox.Show(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -276,14 +270,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				if (this.Task != null && this.Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && this.Task.Definition.Principal.LogonType != TaskLogonType.Password)
-					this.Task.RegisterChanges();
+				if (Task != null && Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && Task.Definition.Principal.LogonType != TaskLogonType.Password)
+					Task.RegisterChanges();
 				else
 				{
-					string user = this.TaskDefinition.Principal.ToString();
+					string user = TaskDefinition.Principal.ToString();
 					string pwd = null;
-					TaskFolder fld = this.TaskService.GetFolder(this.TaskFolder);
-					if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+					TaskFolder fld = TaskService.GetFolder(TaskFolder);
+					if (TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 					{
 						pwd = InvokeCredentialDialog(user, this);
 						if (pwd == null)
@@ -293,11 +287,11 @@ namespace Microsoft.Win32.TaskScheduler
 							return;
 						}
 					}
-					this.Task = fld.RegisterTaskDefinition(this.taskPropertiesControl1.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-						user, pwd, this.TaskDefinition.Principal.LogonType);
+					Task = fld.RegisterTaskDefinition(taskPropertiesControl1.TaskName, TaskDefinition, TaskCreation.CreateOrUpdate,
+						user, pwd, TaskDefinition.Principal.LogonType);
 				}
 			}
-			this.DialogResult = DialogResult.OK;
+			DialogResult = DialogResult.OK;
 			Close();
 		}
 
@@ -318,10 +312,7 @@ namespace Microsoft.Win32.TaskScheduler
 			okBtn.Enabled = (e == TaskPropertiesControl.ComponentErrorEventArgs.Empty);
 		}
 
-		private bool ValidateOneTriggerExpires()
-		{
-			return ValidateOneTriggerExpires(this.TaskDefinition.Triggers);
-		}
+		private bool ValidateOneTriggerExpires() => ValidateOneTriggerExpires(TaskDefinition.Triggers);
 
 		internal static bool ValidateOneTriggerExpires(System.Collections.Generic.IEnumerable<Trigger> triggers)
 		{

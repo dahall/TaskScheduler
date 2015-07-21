@@ -18,21 +18,21 @@ namespace Microsoft.Win32
 
 			private NetworkProfile(string guid, string name)
 			{
-				this.Name = name;
-				this.Id = new Guid(guid);
+				Name = name;
+				Id = new Guid(guid);
 			}
 
 			/// <summary>
 			/// Gets the name of the profile.
 			/// </summary>
 			/// <value>The name.</value>
-			public string Name { get; private set; }
+			public string Name { get; }
 
 			/// <summary>
 			/// Gets the GUID of the profile.
 			/// </summary>
 			/// <value>The id.</value>
-			public Guid Id { get; private set; }
+			public Guid Id { get; }
 
 			/// <summary>
 			/// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -47,9 +47,9 @@ namespace Microsoft.Win32
 			public override bool Equals(object obj)
 			{
 				if (obj is NetworkProfile)
-					return ((NetworkProfile)obj).Id == this.Id;
+					return ((NetworkProfile)obj).Id == Id;
 				else if (obj is Guid)
-					return ((Guid)obj) == this.Id;
+					return ((Guid)obj) == Id;
 				return false;
 			}
 
@@ -59,10 +59,7 @@ namespace Microsoft.Win32
 			/// <returns>
 			/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 			/// </returns>
-			public override int GetHashCode()
-			{
-				return Id.GetHashCode();
-			}
+			public override int GetHashCode() => Id.GetHashCode();
 
 			/// <summary>
 			/// Returns a <see cref="System.String"/> that represents this instance.
@@ -70,10 +67,7 @@ namespace Microsoft.Win32
 			/// <returns>
 			/// A <see cref="System.String"/> that represents this instance.
 			/// </returns>
-			public override string ToString()
-			{
-				return this.Name;
-			}
+			public override string ToString() => Name;
 
 			/// <summary>
 			/// Gets all local profiles.

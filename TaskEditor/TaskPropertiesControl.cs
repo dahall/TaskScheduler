@@ -21,11 +21,8 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool editable = false;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
-		private bool hasError = false;
 		private bool onAssignment = false;
 		private string runTimesTaskName = null;
-		private TaskService service = null;
-		private bool showErrors = true;
 		private TabPage[] tabPages;
 		private Task task = null;
 		private TaskDefinition td = null;
@@ -93,19 +90,19 @@ namespace Microsoft.Win32.TaskScheduler
 
 			internal ComponentErrorEventArgs(Exception ex = null, string err = null)
 			{
-				this.ThrownException = ex;
-				this.ErrorText = err;
+				ThrownException = ex;
+				ErrorText = err;
 			}
 
 			/// <summary>
 			/// Gets the thrown exception on the error. This value may be null.
 			/// </summary>
-			public Exception ThrownException { get; private set; }
+			public Exception ThrownException { get; }
 
 			/// <summary>
 			/// Gets the text associated with the error event. This value may be null.
 			/// </summary>
-			public string ErrorText { get; private set; }
+			public string ErrorText { get; }
 		}
 
 		/// <summary>
@@ -172,17 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <c>true</c> if this instance has error; otherwise, <c>false</c>.
 		/// </value>
 		[Browsable(false), DefaultValue(false), Description("Indicates whether there is currently an error with one of the components."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public bool HasError
-		{
-			get
-			{
-				return hasError;
-			}
-			set
-			{
-				hasError = value;
-			}
-		}
+		public bool HasError { get; set; } = false;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether errors are shown in the UI.
@@ -191,17 +178,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <c>true</c> if errors are shown; otherwise, <c>false</c>.
 		/// </value>
 		[DefaultValue(true), Category("Behavior"), Description("Determines whether errors are shown in the UI.")]
-		public bool ShowErrors
-		{
-			get
-			{
-				return showErrors;
-			}
-			set
-			{
-				showErrors = value;
-			}
-		}
+		public bool ShowErrors { get; set; } = true;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
@@ -284,7 +261,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					TaskService = task.TaskService;
 					if (task.ReadOnly)
-						this.Editable = false;
+						Editable = false;
 					TaskDefinition = task.Definition;
 				}
 			}
@@ -300,7 +277,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return td; }
 			private set
 			{
-				if (service == null)
+				if (TaskService == null)
 					throw new ArgumentNullException("TaskDefinition cannot be set until TaskService has been set with a valid object.");
 
 				if (value == null)
@@ -312,9 +289,9 @@ namespace Microsoft.Win32.TaskScheduler
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
 				tabControl.SelectedIndex = 0;
 
-				this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(service.TargetServer);
+				flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(TaskService.TargetServer);
 				//this.flagExecutorIsCurrentUser = this.UserIsExecutor(td.Principal.UserId);
-				this.flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(service.UserName);
+				flagExecutorIsServiceAccount = NativeMethods.AccountUtils.UserIsServiceAccount(TaskService.UserName);
 				//this.flagExecutorIsTheMachineAdministrator = this.ExecutorIsTheMachineAdministrator(executor);
 
 				// Remove invalid tabs on new task
@@ -322,7 +299,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				// Set General tab
 				SetUserControls(td.Principal.LogonType);
-				taskNameText.Text = task != null ? task.Name : string.Empty;
+				taskNameText.Text = task?.Name ?? string.Empty;
 				taskNameText.ReadOnly = !(task == null && editable);
 				taskLocationText.Text = GetTaskLocation();
 				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
@@ -431,11 +408,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The task service.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public TaskService TaskService
-		{
-			get { return service; }
-			private set { service = value; }
-		}
+		public TaskService TaskService { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this task definition is v2.
@@ -464,14 +437,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
-			this.TaskService = service;
-			this.task = null;
+			TaskService = service;
+			task = null;
 			if (!this.IsDesignMode())
 			{
 				if (td == null)
-					this.TaskDefinition = service.NewTask();
+					TaskDefinition = service.NewTask();
 				else
-					this.TaskDefinition = td;
+					TaskDefinition = td;
 			}
 		}
 
@@ -481,7 +454,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
-			this.Task = task;
+			Task = task;
 		}
 
 		/// <summary>
@@ -489,7 +462,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void ReinitializeControls()
 		{
-			this.TaskDefinition = td;
+			TaskDefinition = td;
 		}
 
 		internal static string BuildEnumString(string preface, object enumValue)
@@ -511,9 +484,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs" /> instance containing the event data.</param>
 		protected virtual void OnComponentError(ComponentErrorEventArgs e)
 		{
-			EventHandler<ComponentErrorEventArgs> handler = ComponentError;
-			if (handler != null)
-				handler(this, e);
+			ComponentError?.Invoke(this, e);
 		}
 
 		private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -535,7 +506,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void changePrincipalButton_Click(object sender, EventArgs e)
 		{
-			InvokeObjectPicker(service.TargetServer);
+			InvokeObjectPicker(TaskService.TargetServer);
 		}
 
 		private void conditionsTab_Enter(object sender, EventArgs e)
@@ -588,7 +559,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// General tab
 			taskDescText.ReadOnly = !editable;
 			changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = editable;
-			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
+			SetUserControls(td?.Principal.LogonType ?? TaskLogonType.InteractiveTokenOrPassword);
 
 			// Triggers tab
 			triggerCollectionUI1.RefreshState();
@@ -610,7 +581,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// If the task has already been set, then reset it to make sure all the items are enabled correctly
 			if (td != null)
-				this.TaskDefinition = td;
+				TaskDefinition = td;
 
 			// Setup specific controls
 			taskVersionCombo_SelectedIndexChanged(null, EventArgs.Empty);
@@ -621,7 +592,7 @@ namespace Microsoft.Win32.TaskScheduler
 			TabPage tab = tabPages[idx];
 			if (tabControl.TabPages.IndexOf(tab) != -1)
 				return;
-			IntPtr h = this.tabControl.Handle;
+			IntPtr h = tabControl.Handle;
 			if (!tab.IsHandleCreated) tab.CreateControl();
 			tabControl.TabPages.Insert(FindFirstVisibleTab(idx), tab);
 		}
@@ -629,27 +600,27 @@ namespace Microsoft.Win32.TaskScheduler
 		private void InvokeObjectPicker(string targetComputerName)
 		{
 			string acct = String.Empty, sid;
-			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount, out sid))
+			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
 				return;
 
-			if (this.flagExecutorIsServiceAccount)
+			if (flagExecutorIsServiceAccount)
 			{
 				if (!v2 && acct != "SYSTEM")
 				{
 					MessageBox.Show(this, EditorProperties.Resources.Error_NoGroupsUnderV1, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
-				this.flagExecutorIsGroup = false;
+				flagExecutorIsGroup = false;
 				if (v2)
 					td.Principal.GroupId = null;
 				td.Principal.UserId = acct;
 				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				//this.flagExecutorIsCurrentUser = false;
 			}
-			else if (this.flagExecutorIsGroup)
+			else if (flagExecutorIsGroup)
 			{
 				if (!v2)
 				{
@@ -689,15 +660,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				// Create a temporary task using current definition
 				runTimesTaskName = runTimesTempTaskPrefix + Guid.NewGuid().ToString();
-				TaskDefinition ttd = service.NewTask();
+				TaskDefinition ttd = TaskService.NewTask();
 				//this.TaskDefinition.Principal.CopyTo(ttd.Principal);
 				ttd.Settings.Enabled = false;
 				ttd.Settings.Hidden = true;
 				ttd.Actions.Add(new ExecAction("rundll32.exe"));
-				foreach (Trigger tg in this.TaskDefinition.Triggers)
+				foreach (Trigger tg in TaskDefinition.Triggers)
 					if (tg.TriggerType != TaskTriggerType.Custom)
 						ttd.Triggers.Add((Trigger)tg.Clone());
-				tempTask = service.RootFolder.RegisterTaskDefinition(runTimesTaskName, ttd);
+				tempTask = TaskService.RootFolder.RegisterTaskDefinition(runTimesTaskName, ttd);
 				if (tempTask != null)
 				{
 					taskRunTimesControl1.Show();
@@ -709,7 +680,7 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (Exception ex)
 			{
 				// On error, post and delete temporary task
-				runTimesErrorLabel.Text = showErrors ? ex.ToString() : null;
+				runTimesErrorLabel.Text = ShowErrors ? ex.ToString() : null;
 				taskRunTimesControl1.Hide();
 			}
 		}
@@ -718,7 +689,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (taskRunTimesControl1.Task != null)
 			{
-				service.RootFolder.DeleteTask(runTimesTaskName);
+				TaskService.RootFolder.DeleteTask(runTimesTaskName);
 				taskRunTimesControl1.Task = null;
 			}
 			runTimesTaskName = null;
@@ -731,40 +702,40 @@ namespace Microsoft.Win32.TaskScheduler
 			switch (logonType)
 			{
 				case TaskLogonType.InteractiveToken:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 				case TaskLogonType.Group:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = true;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = true;
 					break;
 				case TaskLogonType.ServiceAccount:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = true;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = true;
+					flagExecutorIsGroup = false;
 					break;
 				default:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 			}
 
-			if (this.flagExecutorIsServiceAccount)
+			if (flagExecutorIsServiceAccount)
 			{
 				taskLoggedOnRadio.Enabled = false;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagExecutorIsGroup)
+			else if (flagExecutorIsGroup)
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagRunOnlyWhenUserIsLoggedOn)
+			else if (flagRunOnlyWhenUserIsLoggedOn)
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = editable;
@@ -791,17 +762,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class ComboItem : IEnableable
 		{
-			private bool enabled;
 			public string Text;
 			public int Version;
 
-			public ComboItem(string text, int ver, bool enabled = true) { Text = text; Version = ver; this.enabled = enabled; }
+			public ComboItem(string text, int ver, bool enabled = true) { Text = text; Version = ver; Enabled = enabled; }
 
-			public bool Enabled
-			{
-				get { return enabled; }
-				set { enabled = value; }
-			}
+			public bool Enabled { get; set; }
 
 			public override bool Equals(object obj)
 			{
@@ -812,20 +778,17 @@ namespace Microsoft.Win32.TaskScheduler
 				return Text.CompareTo(obj.ToString()) == 0;
 			}
 
-			public override int GetHashCode()
-			{
-				return Version.GetHashCode();
-			}
+			public override int GetHashCode() => Version.GetHashCode();
 
-			public override string ToString() { return this.Text; }
+			public override string ToString() => Text;
 		}
 
 		private void SetVersionComboItems()
 		{
 			const int expectedVersions = 6;
 
-			this.taskVersionCombo.BeginUpdate();
-			this.taskVersionCombo.Items.Clear();
+			taskVersionCombo.BeginUpdate();
+			taskVersionCombo.Items.Clear();
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
@@ -835,22 +798,22 @@ namespace Microsoft.Win32.TaskScheduler
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
 					versions[max] = key.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
-			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
-			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
+			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
+			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
 			switch (comp)
 			{
 				case TaskCompatibility.AT:
 					for (int i = max; i > 1; i--)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
-					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
+						taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
 					break;
 				default:
 					for (int i = max; i > 0; i--)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
-					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)comp);
+						taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)comp);
 					break;
 			}
-			this.taskVersionCombo.EndUpdate();
+			taskVersionCombo.EndUpdate();
 		}
 
 		private void tabControl_TabIndexChanged(object sender, EventArgs e)
@@ -861,7 +824,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (tabControl.SelectedTab == historyTab)
 			{
 				if (taskHistoryControl1.Task == null)
-					taskHistoryControl1.Task = this.task;
+					taskHistoryControl1.Task = task;
 				else
 					taskHistoryControl1.RefreshHistory();
 			}
@@ -1062,8 +1025,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskVersionCombo_GotFocus(object sender, EventArgs e)
 		{
-			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
-			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
+			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
+			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
 			for (int i = 0; i < taskVersionCombo.Items.Count; i++)
 			{
 				var ci = (ComboItem)taskVersionCombo.Items[i];
@@ -1076,7 +1039,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
 			bool v2_1 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
 			bool v2_2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
-			TaskCompatibility priorSetting = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
+			TaskCompatibility priorSetting = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
 			try
@@ -1087,16 +1050,16 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (InvalidOperationException ex)
 			{
 				var msg = new System.Text.StringBuilder();
-				if (showErrors)
+				if (ShowErrors)
 				{
 					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
 					foreach (var item in ex.Data.Keys)
-						msg.AppendLine(string.Format("- {0} {1}", item, ex.Data[item]));
+						msg.AppendLine($"- {item} {ex.Data[item]}");
 				}
 				else
 					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
 				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)priorSetting);
+				taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
 				return;
 			}
 			taskRunLevelCheck.Enabled = taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
@@ -1326,7 +1289,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskRegSDDLBtn_Click(object sender, EventArgs e)
 		{
-			secEd.Initialize(this.Task);
+			secEd.Initialize(Task);
 			if (secEd.ShowDialog(this) == DialogResult.OK)
 			{
 				td.RegistrationInfo.SecurityDescriptorSddlForm = secEd.SecurityDescriptorSddlForm;
@@ -1344,28 +1307,28 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			char[] inv = System.IO.Path.GetInvalidFileNameChars();
 			e.Cancel = !ValidateText(taskNameText,
-				delegate(string s) { return s.Length > 0 && s.IndexOfAny(inv) == -1; },
+				s => s.Length > 0 && s.IndexOfAny(inv) == -1,
 				EditorProperties.Resources.Error_InvalidNameFormat);
 		}
 
 		private void taskRegURIText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegURIText, 
-				delegate(string s) { return true; },
+				s => true,
 				EditorProperties.Resources.Error_InvalidUriFormat);
 		}
 
 		private void taskRegVersionText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegVersionText,
-				delegate(string s) { return System.Text.RegularExpressions.Regex.IsMatch(s, @"^(\d+(\.\d+){0,2}(\.\d+))?$"); },
+				s => System.Text.RegularExpressions.Regex.IsMatch(s, @"^(\d+(\.\d+){0,2}(\.\d+))?$"),
 				EditorProperties.Resources.Error_InvalidVersionFormat);
 		}
 
 		private void taskRegSDDLText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegSDDLText,
-				delegate(string s) { return System.Text.RegularExpressions.Regex.IsMatch(s, @"^(O:(?'owner'[A-Z]+?|S(-[0-9]+)+)?)?(G:(?'group'[A-Z]+?|S(-[0-9]+)+)?)?(D:(?'dacl'[A-Z]*(\([^\)]*\))*))?(S:(?'sacl'[A-Z]*(\([^\)]*\))*))?$"); },
+				s => System.Text.RegularExpressions.Regex.IsMatch(s, @"^(O:(?'owner'[A-Z]+?|S(-[0-9]+)+)?)?(G:(?'group'[A-Z]+?|S(-[0-9]+)+)?)?(D:(?'dacl'[A-Z]*(\([^\)]*\))*))?(S:(?'sacl'[A-Z]*(\([^\)]*\))*))?$"),
 				EditorProperties.Resources.Error_InvalidSddlFormat);
 		}
 
@@ -1374,7 +1337,7 @@ namespace Microsoft.Win32.TaskScheduler
 			bool valid = pred(ctrl.Text);
 			errorProvider.SetError(ctrl, valid ? string.Empty : error);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, error));
-			hasError = valid;
+			HasError = valid;
 			return valid;
 		}
 

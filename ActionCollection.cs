@@ -59,10 +59,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
 		/// <returns>The bound <see cref="ExecAction"/> that was added to the collection.</returns>
-		public ExecAction Add(string path, string arguments = null, string workingDirectory = null)
-		{
-			return (ExecAction)this.Add(new ExecAction(path, arguments, workingDirectory));
-		}
+		public ExecAction Add(string path, string arguments = null, string workingDirectory = null) => (ExecAction)Add(new ExecAction(path, arguments, workingDirectory));
 
 		/// <summary>
 		/// Adds a new <see cref="Action"/> instance to the task.
@@ -95,10 +92,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Action item)
-		{
-			return IndexOf(item) >= 0;
-		}
+		public bool Contains(Action item) => IndexOf(item) >= 0;
 
 		/// <summary>
 		/// Determines whether the specified action type is contained in this collection.
@@ -126,12 +120,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public void CopyTo(Action[] array, int arrayIndex)
 		{
 			if (array == null)
-				throw new ArgumentNullException();
+				throw new ArgumentNullException(nameof(array));
 			if (arrayIndex < 0)
-				throw new ArgumentOutOfRangeException();
-			if (this.Count > (array.Length - arrayIndex))
-				throw new ArgumentException();
-			for (int i = 0; i < this.Count; i++)
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+			if (Count > (array.Length - arrayIndex))
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+			for (int i = 0; i < Count; i++)
 				array[arrayIndex + i] = (Action)this[i].Clone();
 		}
 
@@ -139,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (TaskService.LibraryVersion.Minor > 3)
 			{
-				for (int i = 0; i < this.Count; i++)
+				for (int i = 0; i < Count; i++)
 				{
 					Action action = this[i];
 					var bindable = action as IBindAsExecAction;
@@ -156,7 +150,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (TaskService.LibraryVersion.Minor > 3)
 			{
-				for (int i = 0; i < this.Count; i++)
+				for (int i = 0; i < Count; i++)
 				{
 					ExecAction action = this[i] as ExecAction;
 					if (action != null && action.Arguments != null && action.Arguments.Contains(ExecAction.ScriptIdentifer))
@@ -186,7 +180,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public int IndexOf(Action item)
 		{
-			for (int i = 0; i < this.Count; i++)
+			for (int i = 0; i < Count; i++)
 			{
 				if (this[i].Equals(item))
 					return i;
@@ -204,8 +198,8 @@ namespace Microsoft.Win32.TaskScheduler
 		public int IndexOf(string actionId)
 		{
 			if (string.IsNullOrEmpty(actionId))
-				throw new ArgumentNullException(actionId);
-			for (int i = 0; i < this.Count; i++)
+				throw new ArgumentNullException(nameof(actionId));
+			for (int i = 0; i < Count; i++)
 			{
 				if (string.Equals(this[i].Id, actionId))
 					return i;
@@ -220,13 +214,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="action">The action to insert into the list.</param>
 		public void Insert(int index, Action action)
 		{
-			if (v2Coll == null && this.Count > 0)
+			if (v2Coll == null && Count > 0)
 				throw new NotV1SupportedException("Only a single action is allowed.");
 
-			Action[] pushItems = new Action[this.Count - index];
-			for (int i = index; i < this.Count; i++)
+			Action[] pushItems = new Action[Count - index];
+			for (int i = index; i < Count; i++)
 				pushItems[i - index] = (Action)this[i].Clone();
-			for (int j = this.Count - 1; j >= index; j--)
+			for (int j = Count - 1; j >= index; j--)
 				RemoveAt(j);
 			Add(action);
 			for (int k = 0; k < pushItems.Length; k++)
@@ -262,8 +256,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
 		public void RemoveAt(int index)
 		{
-			if (index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Failed to remove action. Index out of range.");
+			if (index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Failed to remove action. Index out of range.");
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
 			else if (index == 0)
@@ -280,9 +274,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString()
 		{
-			if (this.Count == 1)
+			if (Count == 1)
 				return this[0].ToString();
-			if (this.Count > 1)
+			if (Count > 1)
 				return Properties.Resources.MultipleActions;
 			return string.Empty;
 		}
@@ -303,8 +297,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (this.Count <= index)
-					throw new ArgumentOutOfRangeException("index", index, "Index is not a valid index in the ActionCollection");
+				if (Count <= index)
+					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
 				RemoveAt(index);
 				Insert(index, value);
 			}
@@ -417,13 +411,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 				return new Enumerator(this);
-			return new Enumerator(this.v1Task);
+			return new Enumerator(v1Task);
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		internal class Enumerator : IEnumerator<Action>
 		{
@@ -469,10 +460,7 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Enum = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			public bool MoveNext()
 			{
@@ -489,10 +477,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
@@ -503,7 +488,7 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (reader.LocalName)
 				{
 					case "Exec":
-						newAction = this.AddNew(TaskActionType.Execute);
+						newAction = AddNew(TaskActionType.Execute);
 						break;
 					default:
 						reader.Skip();
@@ -517,7 +502,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			if (this.Count > 0)
+			if (Count > 0)
 			{
 				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
 			}
@@ -525,12 +510,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void ICollection<Action>.Add(Action item)
 		{
-			this.Add(item);
+			Add(item);
 		}
 
-		bool ICollection<Action>.IsReadOnly
-		{
-			get { return false; }
-		}
+		bool ICollection<Action>.IsReadOnly => false;
 	}
 }

@@ -37,7 +37,7 @@ namespace Microsoft.Win32.TaskScheduler
 			InitializeComponent();
 			cols = (string[])columns.Clone();
 			defCols = (string[])defaultColumns.Clone();
-			this.DisplayedColumns = (string[])displayedColumns.Clone();
+			DisplayedColumns = (string[])displayedColumns.Clone();
 			availColsListBox.Items.AddRange(GetAvailableColumns(columns, displayedColumns));
 			availColsListBox_SelectedIndexChanged(null, EventArgs.Empty);
 			dispColsListBox.Items.AddRange(displayedColumns);
@@ -115,7 +115,7 @@ namespace Microsoft.Win32.TaskScheduler
 			string[] res = new string[dispColsListBox.Items.Count];
 			for (int i = 0; i < dispColsListBox.Items.Count; i++)
 				res[i] = dispColsListBox.Items[i].ToString();
-			this.DisplayedColumns = res;
+			DisplayedColumns = res;
 			Close();
 		}
 
@@ -139,8 +139,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void dispColsListBox_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (this.dispColsListBox.SelectedItem == null) return;
-			this.dispColsListBox.DoDragDrop(this.dispColsListBox.SelectedItem, DragDropEffects.Move);
+			if (dispColsListBox.SelectedItem == null) return;
+			dispColsListBox.DoDragDrop(dispColsListBox.SelectedItem, DragDropEffects.Move);
 		}
 
 		private void dispColsListBox_DragOver(object sender, DragEventArgs e)
@@ -151,11 +151,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private void dispColsListBox_DragDrop(object sender, DragEventArgs e)
 		{
 			Point point = dispColsListBox.PointToClient(new Point(e.X, e.Y));
-			int index = this.dispColsListBox.IndexFromPoint(point);
-			if (index < 0) index = this.dispColsListBox.Items.Count - 1;
+			int index = dispColsListBox.IndexFromPoint(point);
+			if (index < 0) index = dispColsListBox.Items.Count - 1;
 			object data = e.Data.GetData(typeof(string));
-			this.dispColsListBox.Items.Remove(data);
-			this.dispColsListBox.Items.Insert(index, data);
+			dispColsListBox.Items.Remove(data);
+			dispColsListBox.Items.Insert(index, data);
 		}
 	}
 }

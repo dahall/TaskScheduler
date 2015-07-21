@@ -23,26 +23,20 @@ namespace Microsoft.Win32
 			public static COMBOBOXINFO FromComboBox(System.Windows.Forms.ComboBox cb)
 			{
 				if (!cb.IsHandleCreated)
-					throw new ArgumentException("ComboBox must have its handle created.", "cb");
+					throw new ArgumentException("ComboBox must have its handle created.", nameof(cb));
 
 				var cbi = new COMBOBOXINFO() { cbSize = Marshal.SizeOf(typeof(COMBOBOXINFO)) };
 				GetComboBoxInfo(cb.Handle, ref cbi);
 				return cbi;
 			}
 
-			public bool Invisible
-			{
-				get { return (buttonState & ComboBoxButtonState.Invisible) == ComboBoxButtonState.Invisible; }
-			}
+			public bool Invisible => (buttonState & ComboBoxButtonState.Invisible) == ComboBoxButtonState.Invisible;
 
-			public bool Pressed
-			{
-				get { return (buttonState & ComboBoxButtonState.Pressed) == ComboBoxButtonState.Pressed; }
-			}
+			public bool Pressed => (buttonState & ComboBoxButtonState.Pressed) == ComboBoxButtonState.Pressed;
 
-			public System.Drawing.Rectangle ItemRectangle { get { return rcItem; } }
+			public System.Drawing.Rectangle ItemRectangle => rcItem;
 
-			public System.Drawing.Rectangle ButtonRectangle { get { return rcButton; } }
+			public System.Drawing.Rectangle ButtonRectangle => rcButton;
 		}
 
 		public enum ComboBoxButtonState

@@ -249,7 +249,7 @@ namespace Microsoft.Win32
 				Privileges.Attributes = attribute;
 			}
 
-			public static uint SizeInBytes { get { return (uint)Marshal.SizeOf(typeof(TOKEN_PRIVILEGES)); } }
+			public static uint SizeInBytes => (uint)Marshal.SizeOf(typeof(TOKEN_PRIVILEGES));
 		}
 
 		public partial class SafeTokenHandle
@@ -326,10 +326,7 @@ namespace Microsoft.Win32
 				}
 			}
 
-			public static SafeTokenHandle FromCurrentThread(AccessTypes desiredAccess = AccessTypes.TokenDuplicate, bool openAsSelf = true)
-			{
-				return FromThread(NativeMethods.GetCurrentThread(), desiredAccess, openAsSelf);
-			}
+			public static SafeTokenHandle FromCurrentThread(AccessTypes desiredAccess = AccessTypes.TokenDuplicate, bool openAsSelf = true) => FromThread(NativeMethods.GetCurrentThread(), desiredAccess, openAsSelf);
 
 			public static SafeTokenHandle FromProcess(IntPtr hProcess, AccessTypes desiredAccess = AccessTypes.TokenDuplicate)
 			{

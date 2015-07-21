@@ -251,10 +251,10 @@ namespace System.Windows.Forms
 		/// </summary>
 		public override void Reset()
 		{
-			this.BrowserFlag = 0;
-			this.Caption = this.Description = this.OkText = this.SelectedPath = string.Empty;
-			this.RootFolder = (Environment.SpecialFolder)0;
-			this.ShowFiles = this.ShowFolderPathEditBox = this.ShowNewFolderButton = false;
+			BrowserFlag = 0;
+			Caption = Description = OkText = SelectedPath = string.Empty;
+			RootFolder = (Environment.SpecialFolder)0;
+			ShowFiles = ShowFolderPathEditBox = ShowNewFolderButton = false;
 		}
 
 		/// <summary>
@@ -268,7 +268,7 @@ namespace System.Windows.Forms
 			NativeMethods.OleInitialize(IntPtr.Zero);
 
 			IntPtr rpidl = IntPtr.Zero;
-			NativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, (int)this.RootFolder, out rpidl);
+			NativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, (int)RootFolder, out rpidl);
 			if (rpidl == IntPtr.Zero)
 			{
 				NativeMethods.SHGetSpecialFolderLocation(parentWindowHandle, 0, out rpidl);
@@ -306,13 +306,13 @@ namespace System.Windows.Forms
 				if (((browseInfoFlag & BrowseInfoFlag.BIF_BROWSEFORPRINTER) == BrowseInfoFlag.BIF_BROWSEFORPRINTER) ||
 					((browseInfoFlag & BrowseInfoFlag.BIF_BROWSEFORCOMPUTER) == BrowseInfoFlag.BIF_BROWSEFORCOMPUTER))
 				{
-					this.SelectedPath = bi.pszDisplayName;
+					SelectedPath = bi.pszDisplayName;
 				}
 				else
 				{
 					if (pidl == IntPtr.Zero || 0 == NativeMethods.SHGetPathFromIDList(pidl, sb))
 						return false;
-					this.SelectedPath = sb.ToString();
+					SelectedPath = sb.ToString();
 				}
 				return true;
 			}
@@ -353,9 +353,9 @@ namespace System.Windows.Forms
 					if (!String.IsNullOrEmpty(OkText))
 						NativeMethods.SendMessage(hwnd, (uint)BrowseForFolderMessages.BFFM_SETOKTEXT, (IntPtr)0, OkText);
 
-					if (this.Initialized != null)
+					if (Initialized != null)
 					{
-						EventHandler<FolderBrowserDialogInitializedEventArgs> h = this.Initialized;
+						EventHandler<FolderBrowserDialogInitializedEventArgs> h = Initialized;
 						h(this, new FolderBrowserDialogInitializedEventArgs(hwnd));
 					}
 
@@ -367,19 +367,19 @@ namespace System.Windows.Forms
 						StringBuilder sb = new StringBuilder(260);
 						if (lParam == IntPtr.Zero || 0 == NativeMethods.SHGetPathFromIDList(lParam, sb))
 							return 0;
-						this.SelectedPath = sb.ToString();
+						SelectedPath = sb.ToString();
 					}
 					catch { return 0; }
-					if (this.SelectedPathChanged != null)
+					if (SelectedPathChanged != null)
 					{
-						PropertyChangedEventHandler h = this.SelectedPathChanged;
+						PropertyChangedEventHandler h = SelectedPathChanged;
 						h(this, new PropertyChangedEventArgs("SelectedPath"));
 					}
 					return 0;
 
 				case BrowseForFolderMessages.BFFM_VALIDATEFAILEDA:
 				case BrowseForFolderMessages.BFFM_VALIDATEFAILEDW:
-					if (this.InvalidFolderSelected != null)
+					if (InvalidFolderSelected != null)
 					{
 						string folderName;
 						if (messsage == BrowseForFolderMessages.BFFM_VALIDATEFAILEDA)
@@ -387,7 +387,7 @@ namespace System.Windows.Forms
 						else
 							folderName = Marshal.PtrToStringUni(lParam);
 
-						EventHandler<InvalidFolderEventArgs> h = this.InvalidFolderSelected;
+						EventHandler<InvalidFolderEventArgs> h = InvalidFolderSelected;
 						InvalidFolderEventArgs e = new InvalidFolderEventArgs(folderName, true);
 						h(this, e);
 						return (e.DismissDialog ? 0 : 1);
@@ -446,7 +446,7 @@ namespace System.Windows.Forms
 		/// <summary>
 		/// Gets the name of the invalid folder.
 		/// </summary>
-		public string FolderName { get; private set; }
+		public string FolderName { get; }
 	}
 
 	/// <summary>

@@ -82,7 +82,7 @@ namespace Microsoft.Win32.TaskScheduler
 				listView1.Items.Clear();
 				if (coll != null)
 					foreach (var item in coll)
-						listView1.Items.Add(LVIFromTask(item));
+						try { listView1.Items.Add(LVIFromTask(item)); } catch { }
 				listView1.EndUpdate();
 			}
 		}
@@ -123,14 +123,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void listView1_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (this.ContextMenuStrip != null && e.Button == System.Windows.Forms.MouseButtons.Right)
+			if (ContextMenuStrip != null && e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
 				ListViewItem item = listView1.GetItemAt(e.X, e.Y);
 				if (item != null)
 				{
 					item.Selected = true;
-					if (this.ContextMenuStrip != null)
-						this.ContextMenuStrip.Show(listView1, e.Location);
+					if (ContextMenuStrip != null)
+						ContextMenuStrip.Show(listView1, e.Location);
 				}
 			}
 			OnMouseClick(e);
@@ -180,14 +180,14 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <param name="task">The task.</param>
 			internal TaskSelectedEventArgs(Task task = null)
 			{
-				this.Task = task;
+				Task = task;
 			}
 
 			/// <summary>
 			/// Gets the task.
 			/// </summary>
 			/// <value>The task.</value>
-			public Task Task { get; private set; }
+			public Task Task { get; }
 		}
 	}
 }

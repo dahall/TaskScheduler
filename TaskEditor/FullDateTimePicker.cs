@@ -105,9 +105,9 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if ((value == null) || (value.Length == 0))
-					this.ResetValue();
+					ResetValue();
 				else
-					this.Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentCulture);
+					Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentCulture);
 			}
 		}
 
@@ -196,18 +196,18 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				return this.currentValue;
+				return currentValue;
 			}
 			set
 			{
-				bool newVal = this.currentValue != value;
-				if (newVal || !this.userHasSetValue)
+				bool newVal = currentValue != value;
+				if (newVal || !userHasSetValue)
 				{
-					this.currentValue = value;
-					this.userHasSetValue = true;
-					this.initializing = true;
-					this.DataToControls();
-					this.initializing = false;
+					currentValue = value;
+					userHasSetValue = true;
+					initializing = true;
+					DataToControls();
+					initializing = false;
 					if (newVal)
 						OnValueChanged(EventArgs.Empty);
 				}
@@ -219,15 +219,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if value is UTC; otherwise, <c>false</c>.</value>
 		[Browsable(false)]
-		public bool ValueIsUTC
-		{
-			get { return this.currentValue.Kind == DateTimeKind.Utc; }
-		}
+		public bool ValueIsUTC => currentValue.Kind == DateTimeKind.Utc;
 
-		internal bool ShouldSerializeValue()
-		{
-			return this.userHasSetValue;
-		}
+		internal bool ShouldSerializeValue() => userHasSetValue;
 
 		/// <summary>
 		/// Raises the <see cref="ValueChanged"/> event.
@@ -235,7 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected virtual void OnValueChanged(EventArgs eventArgs)
 		{
-			EventHandler h = this.ValueChanged;
+			EventHandler h = ValueChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
 		}
@@ -245,47 +239,47 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		protected void SelectDate()
 		{
-			this.dateTimePickerDate.Select();
+			dateTimePickerDate.Select();
 		}
 
 		private void ControlsToData()
 		{
-			DateTime time = this.dateTimePickerDate.Value;
+			DateTime time = dateTimePickerDate.Value;
 			if (timeFormat != FullDateTimePickerTimeFormat.Hidden)
-				time += this.dateTimePickerTime.Value.TimeOfDay;
+				time += dateTimePickerTime.Value.TimeOfDay;
 			if (!utcCheckBox.Checked)
-				this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
+				currentValue = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
 			else
 			{
-				if (this.currentValue.Kind == DateTimeKind.Unspecified)
+				if (currentValue.Kind == DateTimeKind.Unspecified)
 				{
 					switch (utcBehavior)
 					{
 						case FieldConversionUtcCheckBehavior.ConvertLocalToUtc:
-							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
+							currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
 							break;
 						case FieldConversionUtcCheckBehavior.AssumeUtc:
-							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
+							currentValue = DateTime.SpecifyKind(time, DateTimeKind.Utc);
 							break;
 						case FieldConversionUtcCheckBehavior.AssumeLocal:
-							this.currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
+							currentValue = DateTime.SpecifyKind(time, DateTimeKind.Local);
 							break;
 						default:
 							break;
 					}
 				}
 				else
-					this.currentValue = DateTime.SpecifyKind(time, currentValue.Kind);
+					currentValue = DateTime.SpecifyKind(time, currentValue.Kind);
 			}
 		}
 
 		private void DataToControls()
 		{
-			DateTime displayTime = this.currentValue.Kind == DateTimeKind.Utc ? this.currentValue.ToLocalTime() : this.currentValue;
-			this.dateTimePickerDate.Value = displayTime.Date;
-			this.dateTimePickerTime.Value = displayTime;
+			DateTime displayTime = currentValue.Kind == DateTimeKind.Utc ? currentValue.ToLocalTime() : currentValue;
+			dateTimePickerDate.Value = displayTime.Date;
+			dateTimePickerTime.Value = displayTime;
 			if (!string.IsNullOrEmpty(utcPrompt))
-				this.utcCheckBox.Checked = this.currentValue.Kind != DateTimeKind.Unspecified;
+				utcCheckBox.Checked = currentValue.Kind != DateTimeKind.Unspecified;
 		}
 
 		private void FullDateTimePicker_Load(object sender, EventArgs e)
@@ -300,17 +294,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetValue()
 		{
-			this.Value = DateTime.Now;
-			this.userHasSetValue = false;
+			Value = DateTime.Now;
+			userHasSetValue = false;
 		}
 
 		private void SetRightToLeft()
 		{
-			RightToLeft rightToLeftProperty = this.RightToLeft;
-			this.dateTimePickerDate.RightToLeft = rightToLeftProperty;
-			this.dateTimePickerDate.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
-			this.dateTimePickerTime.RightToLeft = rightToLeftProperty;
-			this.dateTimePickerTime.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
+			RightToLeft rightToLeftProperty = RightToLeft;
+			dateTimePickerDate.RightToLeft = rightToLeftProperty;
+			dateTimePickerDate.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
+			dateTimePickerTime.RightToLeft = rightToLeftProperty;
+			dateTimePickerTime.RightToLeftLayout = rightToLeftProperty == RightToLeft.Yes;
 		}
 
 		private void subControl_ValueChanged(object sender, EventArgs e)

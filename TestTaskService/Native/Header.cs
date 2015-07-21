@@ -149,9 +149,9 @@ namespace Microsoft.Win32
 				pt_x = pt.X; pt_y = pt.Y;
 			}
 
-			public HeaderHitTestFlag Flags { get { return flags; } }
+			public HeaderHitTestFlag Flags => flags;
 
-			public int ItemIndex { get { return iItem; } }
+			public int ItemIndex => iItem;
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -181,7 +181,7 @@ namespace Microsoft.Win32
 
 			public HDITEM(string text = null)
 			{
-				this.Text = text;
+				Text = text;
 			}
 
 			public System.Drawing.Bitmap Bitmap
@@ -205,13 +205,13 @@ namespace Microsoft.Win32
 					switch (type)
 					{
 						case 0: // HDFT_ISSTRING
-							return Marshal.PtrToStringAuto(this.pvFilter);
+							return Marshal.PtrToStringAuto(pvFilter);
 
 						case 1: // HDFT_ISNUMBER
-							return this.pvFilter.ToInt32();
+							return pvFilter.ToInt32();
 
 						case 2: // HDFT_ISDATE
-							return (DateTime)this.pvFilter.ToStructure<SYSTEMTIME>();
+							return (DateTime)pvFilter.ToStructure<SYSTEMTIME>();
 
 						case 0x8000: // HDFT_HASNOVALUE
 							return null;
@@ -225,19 +225,19 @@ namespace Microsoft.Win32
 					if (value == null)
 					{
 						type = 0x8000;
-						Marshal.FreeHGlobal(this.pvFilter);
-						this.pvFilter = IntPtr.Zero;
+						Marshal.FreeHGlobal(pvFilter);
+						pvFilter = IntPtr.Zero;
 					}
 					else
 					{
 						if (value is DateTime) value = (SYSTEMTIME)value;
 
 						if (value is string)
-							this.pvFilter = Marshal.StringToHGlobalUni((string)value);
+							pvFilter = Marshal.StringToHGlobalUni((string)value);
 						else if (value is int)
-							this.pvFilter = new IntPtr((int)value);
+							pvFilter = new IntPtr((int)value);
 						else if (value is SYSTEMTIME)
-							this.pvFilter = InteropUtil.StructureToPtr(value);
+							pvFilter = InteropUtil.StructureToPtr(value);
 						else
 							throw new ArgumentException("Value must be a string, integer, DateTime or SYSTEMTIME");
 					}
@@ -367,7 +367,7 @@ namespace Microsoft.Win32
 			{
 				InteropUtil.FreeString(ref pszText, ref cchTextMax);
 				if (mask.IsFlagSet(HeaderItemMask.Filter) && (type == 0 || type == 2))
-					Marshal.FreeHGlobal(this.pvFilter);
+					Marshal.FreeHGlobal(pvFilter);
 			}
 		}
 
@@ -383,10 +383,7 @@ namespace Microsoft.Win32
 				pwpos = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(WINDOWPOS)));
 			}
 
-			public WINDOWPOS Position
-			{
-				get { return pwpos.ToStructure<WINDOWPOS>(); }
-			}
+			public WINDOWPOS Position => pwpos.ToStructure<WINDOWPOS>();
 
 			public void Dispose()
 			{

@@ -1494,13 +1494,7 @@ namespace System.Windows.Forms
 		/// A <see cref="T:System.Windows.Forms.ControlBindingsCollection"/> that contains the <see cref="T:System.Windows.Forms.Binding"/> objects for the control.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public new ControlBindingsCollection DataBindings
-		{
-			get
-			{
-				return base.DataBindings;
-			}
-		}
+		public new ControlBindingsCollection DataBindings => base.DataBindings;
 
 		/// <summary>
 		/// Gets or sets which control borders are docked to its parent control and determines how a control is resized with its parent.
@@ -1533,13 +1527,7 @@ namespace System.Windows.Forms
 		/// A <see cref="T:System.Windows.Forms.ScrollableControl.DockPaddingEdges"/> that represents the padding for all the edges of a docked control.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public new ScrollableControl.DockPaddingEdges DockPadding
-		{
-			get
-			{
-				return base.DockPadding;
-			}
-		}
+		public new ScrollableControl.DockPaddingEdges DockPadding => base.DockPadding;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the control can respond to user interaction.

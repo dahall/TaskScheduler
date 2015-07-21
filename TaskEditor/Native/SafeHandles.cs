@@ -82,15 +82,9 @@ namespace Microsoft.Win32
 			}
 		}
 
-		public override bool IsInvalid
-		{
-			get { return base.handle == IntPtr.Zero; }
-		}
+		public override bool IsInvalid => base.handle == IntPtr.Zero;
 
-		public static implicit operator IntPtr(SafeGDIHandle h)
-		{
-			return h.DangerousGetHandle();
-		}
+		public static implicit operator IntPtr(SafeGDIHandle h) => h.DangerousGetHandle();
 
 		protected override bool ReleaseHandle()
 		{

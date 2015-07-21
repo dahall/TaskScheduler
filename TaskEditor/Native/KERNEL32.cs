@@ -53,10 +53,7 @@ namespace Microsoft.Win32
 				SetHandle(handle);
 			}
 
-			protected override bool ReleaseHandle()
-			{
-				return CloseHandle(handle);
-			}
+			protected override bool ReleaseHandle() => CloseHandle(handle);
 		}
 	}
 }

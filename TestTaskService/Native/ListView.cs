@@ -511,26 +511,26 @@ namespace Microsoft.Win32
 
 			public LVBKIMAGE(System.Drawing.Bitmap bmp, bool isWatermark, bool isWatermarkAlphaBlended)
 			{
-				this.Bitmap = bmp;
-				this.ulFlags = isWatermark ? ListViewBkImageFlag.TypeWatermark : ListViewBkImageFlag.SourceHbitmap;
+				Bitmap = bmp;
+				ulFlags = isWatermark ? ListViewBkImageFlag.TypeWatermark : ListViewBkImageFlag.SourceHbitmap;
 				if (isWatermark && isWatermarkAlphaBlended)
-					this.ulFlags |= ListViewBkImageFlag.FlagAlphaBlend;
+					ulFlags |= ListViewBkImageFlag.FlagAlphaBlend;
 			}
 
 			public LVBKIMAGE(System.Drawing.Bitmap bmp, bool isTiled)
 			{
-				this.Bitmap = bmp;
-				this.ulFlags = ListViewBkImageFlag.SourceHbitmap;
+				Bitmap = bmp;
+				ulFlags = ListViewBkImageFlag.SourceHbitmap;
 				if (isTiled)
-					this.ulFlags |= ListViewBkImageFlag.StyleTile;
+					ulFlags |= ListViewBkImageFlag.StyleTile;
 			}
 
 			public LVBKIMAGE(string url, bool isTiled)
 			{
-				this.Url = url;
-				this.ulFlags = ListViewBkImageFlag.SourceUrl;
+				Url = url;
+				ulFlags = ListViewBkImageFlag.SourceUrl;
 				if (isTiled)
-					this.ulFlags |= ListViewBkImageFlag.StyleTile;
+					ulFlags |= ListViewBkImageFlag.StyleTile;
 			}
 
 			public LVBKIMAGE() : this(ListViewBkImageFlag.SourceNone) { }
@@ -670,7 +670,7 @@ namespace Microsoft.Win32
 			public LVFINDINFO(IntPtr lParam)
 			{
 				flags = ListViewFindInfoFlag.Param;
-				this.psz = null;
+				psz = null;
 				this.lParam = lParam;
 				ptX = ptY = vkDirection = 0;
 			}
@@ -714,7 +714,7 @@ namespace Microsoft.Win32
 
 			public LVGROUP(ListViewGroup grp) : this(ListViewGroupMask.Header | ListViewGroupMask.GroupId | ListViewGroupMask.Align, grp.Header)
 			{
-				this.SetAlignment(grp.HeaderAlignment, HorizontalAlignment.Left);
+				SetAlignment(grp.HeaderAlignment, HorizontalAlignment.Left);
 			}
 
 			/*public LVGROUP(ListViewGroupEx grp)
@@ -749,7 +749,7 @@ namespace Microsoft.Win32
 				this.mask = mask;
 
 				if (header != null)
-					this.Header = header;
+					Header = header;
 				else if ((mask & ListViewGroupMask.Header) != 0)
 					InteropUtil.AllocString(ref pszHeader, ref cchHeader);
 
@@ -805,27 +805,21 @@ namespace Microsoft.Win32
 				set { iExtendedImage = value; mask |= ListViewGroupMask.ExtendedImage; }
 			}
 
-			public int FirstItem
-			{
-				get { return iFirstItem; }
-			}
+			public int FirstItem => iFirstItem;
 
-			public uint ItemCount
-			{
-				get { return cItems; }
-			}
+			public uint ItemCount => cItems;
 
 			public void GetAlignment(out HorizontalAlignment header, out HorizontalAlignment footer)
 			{
-				header = ((this.uAlign & 2) != 0) ? HorizontalAlignment.Center : ((this.uAlign & 4) != 0) ? HorizontalAlignment.Right : HorizontalAlignment.Left;
-				footer = ((this.uAlign & 0x10) != 0) ? HorizontalAlignment.Center : ((this.uAlign & 0x20) != 0) ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+				header = ((uAlign & 2) != 0) ? HorizontalAlignment.Center : ((uAlign & 4) != 0) ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+				footer = ((uAlign & 0x10) != 0) ? HorizontalAlignment.Center : ((uAlign & 0x20) != 0) ? HorizontalAlignment.Right : HorizontalAlignment.Left;
 			}
 
 			public void SetAlignment(HorizontalAlignment header, HorizontalAlignment footer)
 			{
-				this.uAlign = (uint)(footer == HorizontalAlignment.Left ? 8 : (footer == HorizontalAlignment.Center ? 0x10 : 0x20)) |
+				uAlign = (uint)(footer == HorizontalAlignment.Left ? 8 : (footer == HorizontalAlignment.Center ? 0x10 : 0x20)) |
 					(uint)(header == HorizontalAlignment.Left ? 1 : (header == HorizontalAlignment.Center ? 2 : 4));
-				this.mask |= ListViewGroupMask.Align;
+				mask |= ListViewGroupMask.Align;
 			}
 
 			public string Header
@@ -858,8 +852,8 @@ namespace Microsoft.Win32
 
 			public void SetState(ListViewGroupState state, bool on = true)
 			{
-				this.mask |= ListViewGroupMask.State;
-				this.stateMask |= state;
+				mask |= ListViewGroupMask.State;
+				stateMask |= state;
 				EnumUtil.SetFlags(ref this.state, state, on);
 			}
 		}
@@ -887,7 +881,7 @@ namespace Microsoft.Win32
 
 			public LVGROUPMETRICS(System.Windows.Forms.Padding padding)
 			{
-				this.Padding = padding;
+				Padding = padding;
 			}
 
 			public LVGROUPMETRICS(int left, int top, int right, int bottom)
@@ -928,10 +922,10 @@ namespace Microsoft.Win32
 				pt_x = pt.X; pt_y = pt.Y;
 			}
 
-			public ListViewHitTestFlag Flags { get { return flags; } }
-			public int ItemIndex { get { return iItem; } }
-			public int SubitemIndex { get { return iSubItem; } }
-			public int GroupIndex { get { return iGroup; } }
+			public ListViewHitTestFlag Flags => flags;
+			public int ItemIndex => iItem;
+			public int SubitemIndex => iSubItem;
+			public int GroupIndex => iGroup;
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -997,7 +991,7 @@ namespace Microsoft.Win32
 			{
 				iItem = item;
 				iSubItem = subitem;
-				this.Text = text;
+				Text = text;
 			}
 
 			public LVITEM(int item)
@@ -1039,12 +1033,12 @@ namespace Microsoft.Win32
 			{
 				get
 				{
-					var ret = new LVTILECOLUMNINFO[this.cColumns];
+					var ret = new LVTILECOLUMNINFO[cColumns];
 					var cols = new int[cColumns];
 					var fmts = new int[cColumns];
-					Marshal.Copy(this.puColumns, cols, 0, (int)cColumns);
-					if (this.piColFmt != IntPtr.Zero)
-						Marshal.Copy(this.piColFmt, fmts, 0, (int)cColumns);
+					Marshal.Copy(puColumns, cols, 0, (int)cColumns);
+					if (piColFmt != IntPtr.Zero)
+						Marshal.Copy(piColFmt, fmts, 0, (int)cColumns);
 					for (int i = 0; i < cColumns; i++)
 						ret[i] = new LVTILECOLUMNINFO() { columnIndex = (uint)cols[i], format = (ListViewColumnFormat)fmts[i] };
 					return ret;
@@ -1053,7 +1047,7 @@ namespace Microsoft.Win32
 				{
 					if (value == null)
 						throw new ArgumentNullException();
-					this.cColumns = (uint)value.Length;
+					cColumns = (uint)value.Length;
 					if (value.Length > 0)
 					{
 						var cols = new int[cColumns];
@@ -1065,20 +1059,20 @@ namespace Microsoft.Win32
 							fmts[i] = (int)value[i].format;
 							if (fmts[i] != 0) hasFmts = true;
 						}
-						this.puColumns = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
-						Marshal.Copy(cols, 0, this.puColumns, (int)cColumns);
+						puColumns = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
+						Marshal.Copy(cols, 0, puColumns, (int)cColumns);
 						EnumUtil.SetFlags(ref mask, ListViewItemMask.Columns, true);
 						if (hasFmts)
 						{
-							this.piColFmt = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
-							Marshal.Copy(fmts, 0, this.piColFmt, (int)cColumns);
+							piColFmt = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
+							Marshal.Copy(fmts, 0, piColFmt, (int)cColumns);
 							EnumUtil.SetFlags(ref mask, ListViewItemMask.ColFmt, true);
 						}
 					}
 					else
 					{
-						this.puColumns = IntPtr.Zero;
-						this.piColFmt = IntPtr.Zero;
+						puColumns = IntPtr.Zero;
+						piColFmt = IntPtr.Zero;
 						EnumUtil.SetFlags(ref mask, ListViewItemMask.ColFmt | ListViewItemMask.Columns, false);
 					}
 				}
@@ -1089,42 +1083,36 @@ namespace Microsoft.Win32
 				get
 				{
 					var cols = new int[cColumns];
-					Marshal.Copy(this.puColumns, cols, 0, (int)cColumns);
+					Marshal.Copy(puColumns, cols, 0, (int)cColumns);
 					return cols;
 				}
 				set
 				{
 					if (value == null)
 						value = new int[0];
-					this.cColumns = (uint)value.Length;
+					cColumns = (uint)value.Length;
 					if (value.Length > 0)
 					{
-						this.puColumns = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
-						Marshal.Copy(value, 0, this.puColumns, (int)cColumns);
+						puColumns = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * (int)cColumns);
+						Marshal.Copy(value, 0, puColumns, (int)cColumns);
 						mask.SetFlags(ListViewItemMask.Columns, true);
 					}
 					else
 					{
-						this.puColumns = IntPtr.Zero;
+						puColumns = IntPtr.Zero;
 						mask.SetFlags(ListViewItemMask.Columns, false);
 					}
 				}
 			}
 
-			public ListViewItemState GetState()
-			{
-				return (ListViewItemState)(this.state & 0x000000FF);
-			}
+			public ListViewItemState GetState() => (ListViewItemState)(state & 0x000000FF);
 
-			public bool GetState(ListViewItemState state)
-			{
-				return ((ListViewItemState)this.state).IsFlagSet(state);
-			}
+			public bool GetState(ListViewItemState state) => ((ListViewItemState)this.state).IsFlagSet(state);
 
 			public void SetState(ListViewItemState state, bool on = true)
 			{
-				this.mask |= ListViewItemMask.State;
-				this.stateMask |= state;
+				mask |= ListViewItemMask.State;
+				stateMask |= state;
 				ListViewItemState tempState = GetState();
 				EnumUtil.SetFlags(ref tempState, state, on);
 				this.state = (uint)tempState | (this.state & 0xFFFFFF00);
@@ -1132,34 +1120,31 @@ namespace Microsoft.Win32
 
 			public uint OverlayImageIndex
 			{
-				get { return (this.state & 0x00000F00) >> 8; }
+				get { return (state & 0x00000F00) >> 8; }
 				set
 				{
 					if (value > 15)
 						throw new ArgumentOutOfRangeException("OverlayImageIndex", "Overlay image index must be between 0 and 15");
-					this.mask |= ListViewItemMask.State;
-					this.stateMask |= ListViewItemState.OverlayMask;
-					this.state = (value << 8) | (this.state & 0xFFFFF0FF);
+					mask |= ListViewItemMask.State;
+					stateMask |= ListViewItemState.OverlayMask;
+					state = (value << 8) | (state & 0xFFFFF0FF);
 				}
 			}
 
 			public uint StateImageIndex
 			{
-				get { return (this.state & 0x0000F000) >> 12; }
+				get { return (state & 0x0000F000) >> 12; }
 				set
 				{
 					if (value > 15)
 						throw new ArgumentOutOfRangeException("StateImageIndex", "State image index must be between 0 and 15");
-					this.mask |= ListViewItemMask.State;
-					this.stateMask |= ListViewItemState.StateImageMask;
-					this.state = (value << 12) | (this.state & 0xFFFF0FFF);
+					mask |= ListViewItemMask.State;
+					stateMask |= ListViewItemState.StateImageMask;
+					state = (value << 12) | (state & 0xFFFF0FFF);
 				}
 			}
 
-			public override string ToString()
-			{
-				return ("LVITEM: pszText = " + this.Text + ", iItem = " + this.iItem.ToString(CultureInfo.InvariantCulture) + ", iSubItem = " + this.iSubItem.ToString(CultureInfo.InvariantCulture) + ", state = " + this.state.ToString(CultureInfo.InvariantCulture) + ", iGroupId = " + this.iGroupId.ToString(CultureInfo.InvariantCulture) + ", cColumns = " + this.cColumns.ToString(CultureInfo.InvariantCulture));
-			}
+			public override string ToString() => ("LVITEM: pszText = " + Text + ", iItem = " + iItem.ToString(CultureInfo.InvariantCulture) + ", iSubItem = " + iSubItem.ToString(CultureInfo.InvariantCulture) + ", state = " + state.ToString(CultureInfo.InvariantCulture) + ", iGroupId = " + iGroupId.ToString(CultureInfo.InvariantCulture) + ", cColumns = " + cColumns.ToString(CultureInfo.InvariantCulture));
 
 			void IDisposable.Dispose()
 			{
