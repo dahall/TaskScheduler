@@ -100,6 +100,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Called to stop the COM handler.
 		/// </summary>
 		/// <returns>The return code that the Task Schedule will raise as an event when the COM handler action is completed. Return 0 on success.</returns>
-		public virtual int Stop() { return 0; }
+		public virtual int Stop() => 0;
 	}
 }

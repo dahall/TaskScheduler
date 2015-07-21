@@ -77,10 +77,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		}
 
 		[Browsable(false), DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-		public TaskTriggerType TriggerType
-		{
-			get { return monthlyDaysRadio.Checked ? TaskTriggerType.Monthly : TaskTriggerType.MonthlyDOW; }
-		}
+		public TaskTriggerType TriggerType => monthlyDaysRadio.Checked ? TaskTriggerType.Monthly : TaskTriggerType.MonthlyDOW;
 
 		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
 		{

@@ -20,7 +20,7 @@ namespace TestTaskService
 		public TSMMCMockup()
 		{
 			InitializeComponent();
-			this.Icon = Properties.Resources.TaskScheduler;
+			Icon = Properties.Resources.TaskScheduler;
 		}
 
 		private void SetActionMenu(ToolStrip menuItems)
@@ -47,7 +47,7 @@ namespace TestTaskService
 			curPanel = panel;
 			if (panel is ISupportTasks)
 			{
-				((ISupportTasks)panel).TaskService = this.TaskService;
+				((ISupportTasks)panel).TaskService = TaskService;
 				SetActionMenu(((ISupportTasks)panel).MenuItems);
 			}
 			panel.Show();

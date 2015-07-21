@@ -47,10 +47,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return new V2TriggerEnumerator(v2Coll, v2Def);
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
 		{
@@ -62,13 +59,7 @@ namespace Microsoft.Win32.TaskScheduler
 				iTask = task;
 			}
 
-			public Trigger Current
-			{
-				get
-				{
-					return Trigger.CreateTrigger(iTask.GetTrigger((ushort)curItem));
-				}
-			}
+			public Trigger Current => Trigger.CreateTrigger(iTask.GetTrigger((ushort)curItem));
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -78,10 +69,7 @@ namespace Microsoft.Win32.TaskScheduler
 				iTask = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			public bool MoveNext()
 			{
@@ -109,13 +97,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			#region IEnumerator<Trigger> Members
 
-			public Trigger Current
-			{
-				get
-				{
-					return Trigger.CreateTrigger((V2Interop.ITrigger)iEnum.Current, v2Def);
-				}
-			}
+			public Trigger Current => Trigger.CreateTrigger((V2Interop.ITrigger)iEnum.Current, v2Def);
 
 			#endregion
 
@@ -133,15 +115,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 			#region IEnumerator Members
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
-			public bool MoveNext()
-			{
-				return iEnum.MoveNext();
-			}
+			public bool MoveNext() => iEnum.MoveNext();
 
 			public void Reset()
 			{
@@ -173,7 +149,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Trigger Add(Trigger unboundTrigger)
 		{
 			if (unboundTrigger == null)
-				throw new ArgumentNullException("unboundTrigger");
+				throw new ArgumentNullException(nameof(unboundTrigger));
 			if (v2Def != null)
 				unboundTrigger.Bind(v2Def);
 			else
@@ -205,9 +181,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public void AddRange(IEnumerable<Trigger> triggers)
 		{
 			if (triggers == null)
-				throw new ArgumentNullException("triggers");
+				throw new ArgumentNullException(nameof(triggers));
 			foreach (var item in triggers)
-				this.Add(item);
+				Add(item);
 		}
 
 		internal void Bind()
@@ -225,7 +201,7 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Coll.Clear();
 			else
 			{
-				for (int i = this.Count - 1; i >= 0; i--)
+				for (int i = Count - 1; i >= 0; i--)
 					RemoveAt(i);
 			}
 		}
@@ -237,10 +213,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Trigger item)
-		{
-			return IndexOf(item) >= 0;
-		}
+		public bool Contains(Trigger item) => IndexOf(item) >= 0;
 
 		/// <summary>
 		/// Determines whether the specified trigger type is contained in this collection.
@@ -271,9 +244,9 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentNullException();
 			if (arrayIndex < 0)
 				throw new ArgumentOutOfRangeException();
-			if (this.Count > (array.Length - arrayIndex))
+			if (Count > (array.Length - arrayIndex))
 				throw new ArgumentException();
-			for (int i = 0; i < this.Count; i++)
+			for (int i = 0; i < Count; i++)
 				array[arrayIndex + i] = (Trigger)this[i].Clone();
 		}
 
@@ -287,13 +260,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll != null)
-					return Trigger.CreateTrigger(v2Coll[++index], this.v2Def);
+					return Trigger.CreateTrigger(v2Coll[++index], v2Def);
 				return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index));
 			}
 			set
 			{
-				if (this.Count <= index)
-					throw new ArgumentOutOfRangeException("index", index, "Index is not a valid index in the TriggerCollection");
+				if (Count <= index)
+					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the TriggerCollection");
 				RemoveAt(index);
 				Insert(index, value);
 			}
@@ -352,7 +325,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public int IndexOf(Trigger item)
 		{
-			for (int i = 0; i < this.Count; i++)
+			for (int i = 0; i < Count; i++)
 			{
 				if (this[i].Equals(item))
 					return i;
@@ -371,7 +344,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (string.IsNullOrEmpty(triggerId))
 				throw new ArgumentNullException(triggerId);
-			for (int i = 0; i < this.Count; i++)
+			for (int i = 0; i < Count; i++)
 			{
 				if (string.Equals(this[i].Id, triggerId))
 					return i;
@@ -386,10 +359,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="trigger">The trigger to insert into the list.</param>
 		public void Insert(int index, Trigger trigger)
 		{
-			Trigger[] pushItems = new Trigger[this.Count - index];
-			for (int i = index; i < this.Count; i++)
+			Trigger[] pushItems = new Trigger[Count - index];
+			for (int i = index; i < Count; i++)
 				pushItems[i - index] = (Trigger)this[i].Clone();
-			for (int j = this.Count - 1; j >= index; j--)
+			for (int j = Count - 1; j >= index; j--)
 				RemoveAt(j);
 			Add(trigger);
 			for (int k = 0; k < pushItems.Length; k++)
@@ -425,8 +398,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
 		public void RemoveAt(int index)
 		{
-			if (index >= this.Count)
-				throw new ArgumentOutOfRangeException("index", index, "Failed to remove Trigger. Index out of range.");
+			if (index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index), index, "Failed to remove Trigger. Index out of range.");
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
 			else
@@ -441,17 +414,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString()
 		{
-			if (this.Count == 1)
+			if (Count == 1)
 				return this[0].ToString();
-			if (this.Count > 1)
+			if (Count > 1)
 				return Properties.Resources.MultipleTriggers;
 			return string.Empty;
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
@@ -461,19 +431,19 @@ namespace Microsoft.Win32.TaskScheduler
 				switch (reader.LocalName)
 				{
 					case "BootTrigger":
-						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Boot));
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Boot));
 						break;
 					case "IdleTrigger":
-						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Idle));
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Idle));
 						break;
 					case "TimeTrigger":
-						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Time));
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Time));
 						break;
 					case "LogonTrigger":
-						XmlSerializationHelper.ReadObject(reader, this.AddNew(TaskTriggerType.Logon));
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Logon));
 						break;
 					case "CalendarTrigger":
-						this.Add(CalendarTrigger.GetTriggerFromXml(reader));
+						Add(CalendarTrigger.GetTriggerFromXml(reader));
 						break;
 					default:
 						reader.Skip();
@@ -491,12 +461,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void ICollection<Trigger>.Add(Trigger item)
 		{
-			this.Add(item);
+			Add(item);
 		}
 
-		bool ICollection<Trigger>.IsReadOnly
-		{
-			get { return false; }
-		}
+		bool ICollection<Trigger>.IsReadOnly => false;
 	}
 }

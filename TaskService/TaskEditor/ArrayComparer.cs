@@ -10,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static IEnumerable<TResult> Cast<TResult>(this System.Collections.IEnumerable source)
 		{
 			if (source == null)
-				throw new System.ArgumentNullException("source");
+				throw new System.ArgumentNullException(nameof(source));
 			if (default(TResult) != null && source is IEnumerable<TResult>)
 				return source as IEnumerable<TResult>;
 			return CastImpl<TResult>(source);
@@ -25,7 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static IEnumerable<TResult> OfType<TResult>(this System.Collections.IEnumerable source)
 		{
 			if (source == null)
-				throw new System.ArgumentNullException("source");
+				throw new System.ArgumentNullException(nameof(source));
 			if (default(TResult) != null && source is IEnumerable<TResult>)
 				return source as IEnumerable<TResult>;
 			return OfTypeImpl<TResult>(source);
@@ -70,10 +70,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="firstArray">The first array to compare.</param>
 		/// <param name="secondArray">The second array to compare.</param>
 		/// <returns>True if <paramref name="firstArray"/> and <paramref name="secondArray"/> have equal contents.</returns>
-		public static bool Equals<T>(this T[] firstArray, T[] secondArray)
-		{
-			return Equals(firstArray as IList<T>, secondArray as IList<T>);
-		}
+		public static bool Equals<T>(this T[] firstArray, T[] secondArray) => Equals(firstArray as IList<T>, secondArray as IList<T>);
 
 		/// <summary>
 		/// Compares the contents of both lists to see if they are equal. This depends on <typeparam name="T"/> having a valid override for Equals().

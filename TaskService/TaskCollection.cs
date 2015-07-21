@@ -20,14 +20,14 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskCollection(TaskService svc, Regex filter = null)
 		{
 			this.svc = svc;
-			this.Filter = filter;
+			Filter = filter;
 			v1TS = svc.v1TaskScheduler;
 		}
 
 		internal TaskCollection(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null)
 		{
-			this.svc = folder.TaskService;
-			this.Filter = filter;
+			svc = folder.TaskService;
+			Filter = filter;
 			fld = folder;
 			v2Coll = iTaskColl;
 		}
@@ -53,10 +53,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return new V2TaskEnumerator(fld, v2Coll, filter);
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		internal class V1TaskEnumerator : IEnumerator<Task>, IDisposable
 		{
@@ -83,15 +80,9 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Retrieves the current task.  See <see cref="System.Collections.IEnumerator.Current"/> for more information.
 			/// </summary>
-			public Microsoft.Win32.TaskScheduler.Task Current
-			{
-				get { return new Task(svc, this.ICurrent); }
-			}
+			public Microsoft.Win32.TaskScheduler.Task Current => new Task(svc, ICurrent);
 
-			internal V1Interop.ITask ICurrent
-			{
-				get { return TaskService.GetTask(m_ts, curItem); }
-			}
+			internal V1Interop.ITask ICurrent => TaskService.GetTask(m_ts, curItem);
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -102,10 +93,7 @@ namespace Microsoft.Win32.TaskScheduler
 				m_ts = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			/// <summary>
 			/// Moves to the next task. See MoveNext for more information.
@@ -140,7 +128,7 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 
 					V1Interop.ITask itask = null;
-					try { itask = this.ICurrent; valid = true; }
+					try { itask = ICurrent; valid = true; }
 					catch { valid = false; }
 					finally { itask = null; }
 				} while (!valid);
@@ -163,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					int i = 0;
 					Reset();
-					while (this.MoveNext())
+					while (MoveNext())
 						i++;
 					Reset();
 					return i;
@@ -179,15 +167,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 			internal V2TaskEnumerator(TaskFolder folder, TaskScheduler.V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null)
 			{
-				this.fld = folder;
-				this.iEnum = iTaskColl.GetEnumerator();
+				fld = folder;
+				iEnum = iTaskColl.GetEnumerator();
 				this.filter = filter;
 			}
 
-			public Task Current
-			{
-				get { return Task.CreateTask(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current); }
-			}
+			public Task Current => Task.CreateTask(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current);
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -197,10 +182,7 @@ namespace Microsoft.Win32.TaskScheduler
 				iEnum = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			public bool MoveNext()
 			{
@@ -230,13 +212,13 @@ namespace Microsoft.Win32.TaskScheduler
 				int i = 0;
 				if (v2Coll != null)
 				{
-					V2TaskEnumerator v2te = new V2TaskEnumerator(this.fld, this.v2Coll, this.filter);
+					V2TaskEnumerator v2te = new V2TaskEnumerator(fld, v2Coll, filter);
 					while (v2te.MoveNext())
 						i++;
 				}
 				else
 				{
-					V1TaskEnumerator v1te = new V1TaskEnumerator(this.svc, this.filter);
+					V1TaskEnumerator v1te = new V1TaskEnumerator(svc, filter);
 					return v1te.Count;
 				}
 				return i;
@@ -282,7 +264,7 @@ namespace Microsoft.Win32.TaskScheduler
 				while (te.MoveNext())
 					if (i++ == index)
 						return te.Current;
-				throw new ArgumentOutOfRangeException();
+				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
 
@@ -302,7 +284,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v1Task != null)
 					return v1Task;
 
-				throw new ArgumentOutOfRangeException();
+				throw new ArgumentOutOfRangeException(nameof(name));
 			}
 		}
 
@@ -370,10 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return new V1RunningTaskEnumerator(svc);
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		internal class V1RunningTaskEnumerator : IEnumerator<RunningTask>
 		{
@@ -392,15 +371,12 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (tEnum.Current.State == TaskState.Running)
 						return true;
-					return this.MoveNext();
+					return MoveNext();
 				}
 				return false;
 			}
 
-			public RunningTask Current
-			{
-				get { return new RunningTask(svc, tEnum.ICurrent); }
-			}
+			public RunningTask Current => new RunningTask(svc, tEnum.ICurrent);
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -410,10 +386,7 @@ namespace Microsoft.Win32.TaskScheduler
 				tEnum.Dispose();
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			public void Reset()
 			{
@@ -455,15 +428,9 @@ namespace Microsoft.Win32.TaskScheduler
 				iEnum = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
-			public bool MoveNext()
-			{
-				return iEnum.MoveNext();
-			}
+			public bool MoveNext() => iEnum.MoveNext();
 
 			public void Reset()
 			{
@@ -508,7 +475,7 @@ namespace Microsoft.Win32.TaskScheduler
 				while (v1te.MoveNext())
 					if (i++ == index)
 						return v1te.Current;
-				throw new ArgumentOutOfRangeException();
+				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
 	}

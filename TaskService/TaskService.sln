@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService.csproj", "{81B5ABCC-6909-483D-8BB3-84B52E3C7043}"
 EndProject
@@ -31,35 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskSchedulerPowerShellAction", "TaskSchedulerPowerShellAction\TaskSchedulerPowerShellAction.csproj", "{A0272287-8996-4D01-B78F-2AA9CC984907}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = TaskService.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = TestTaskService\\TestTaskService.csproj
-		SccProjectName2 = TestTaskService
-		SccLocalPath2 = TestTaskService
-		SccProjectUniqueName3 = VBTestTaskService\\VBTestTaskService.vbproj
-		SccProjectName3 = VBTestTaskService
-		SccLocalPath3 = VBTestTaskService
-		SccProjectUniqueName4 = COMTask\\COMTask.csproj
-		SccProjectName4 = COMTask
-		SccLocalPath4 = COMTask
-		SccProjectUniqueName5 = TaskEditor\\TaskEditor.csproj
-		SccProjectName5 = TaskEditor
-		SccLocalPath5 = TaskEditor
-		SccProjectUniqueName6 = TaskSchedulerHelp\\TaskSchedulerHelp.shfbproj
-		SccProjectName6 = TaskSchedulerHelp
-		SccLocalPath6 = TaskSchedulerHelp
-		SccProjectUniqueName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template\\ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template.csproj
-		SccProjectName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
-		SccLocalPath7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
-		SccProjectUniqueName8 = TaskSchedulerPowerShellAction\\TaskSchedulerPowerShellAction.csproj
-		SccProjectName8 = TaskSchedulerPowerShellAction
-		SccLocalPath8 = TaskSchedulerPowerShellAction
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -142,6 +113,35 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TaskService.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = TestTaskService\\TestTaskService.csproj
+		SccProjectName2 = TestTaskService
+		SccLocalPath2 = TestTaskService
+		SccProjectUniqueName3 = VBTestTaskService\\VBTestTaskService.vbproj
+		SccProjectName3 = VBTestTaskService
+		SccLocalPath3 = VBTestTaskService
+		SccProjectUniqueName4 = COMTask\\COMTask.csproj
+		SccProjectName4 = COMTask
+		SccLocalPath4 = COMTask
+		SccProjectUniqueName5 = TaskEditor\\TaskEditor.csproj
+		SccProjectName5 = TaskEditor
+		SccLocalPath5 = TaskEditor
+		SccProjectUniqueName6 = TaskSchedulerHelp\\TaskSchedulerHelp.shfbproj
+		SccProjectName6 = TaskSchedulerHelp
+		SccLocalPath6 = TaskSchedulerHelp
+		SccProjectUniqueName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template\\ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template.csproj
+		SccProjectName7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
+		SccLocalPath7 = ITaskHandler\u0020COM\u0020Server\u0020Project\u0020Template
+		SccProjectUniqueName8 = TaskSchedulerPowerShellAction\\TaskSchedulerPowerShellAction.csproj
+		SccProjectName8 = TaskSchedulerPowerShellAction
+		SccLocalPath8 = TaskSchedulerPowerShellAction
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TaskService1.vsmdi

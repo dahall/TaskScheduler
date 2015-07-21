@@ -46,19 +46,19 @@ namespace System.Windows.Forms
 			{
 				if (imageListGroup != value)
 				{
-					if (this.imageListGroup != null)
+					if (imageListGroup != null)
 					{
-						this.imageListGroup.RecreateHandle -= this.GroupImageListRecreateHandle;
-						this.imageListGroup.Disposed -= this.DetachImageList;
+						imageListGroup.RecreateHandle -= GroupImageListRecreateHandle;
+						imageListGroup.Disposed -= DetachImageList;
 					}
-					this.imageListGroup = value;
+					imageListGroup = value;
 					if (value != null)
 					{
-						value.RecreateHandle += this.GroupImageListRecreateHandle;
-						value.Disposed += this.DetachImageList;
+						value.RecreateHandle += GroupImageListRecreateHandle;
+						value.Disposed += DetachImageList;
 					}
 					GroupImageListRecreateHandle(imageListGroup, EventArgs.Empty);
-					if (!this.disposingImageList)
+					if (!disposingImageList)
 						UpdateListViewItemsLocations();
 				}
 			}
@@ -69,23 +69,20 @@ namespace System.Windows.Forms
 		{
 			get
 			{
-				if (this.groups == null)
-					this.groups = new ListViewGroupCollectionEx(this);
-				return this.groups;
+				if (groups == null)
+					groups = new ListViewGroupCollectionEx(this);
+				return groups;
 			}
 		}
 
-		internal ListViewGroupCollection BaseGroups
-		{
-			get { return base.Groups; }
-		}
+		internal ListViewGroupCollection BaseGroups => base.Groups;
 
 		internal IntPtr HeaderHandle
 		{
 			get
 			{
-				if (this.IsHandleCreated)
-					return NativeMethods.SendMessage(this.Handle, (uint)NativeMethods.ListViewMessage.GetHeader, IntPtr.Zero, IntPtr.Zero);
+				if (IsHandleCreated)
+					return NativeMethods.SendMessage(Handle, (uint)NativeMethods.ListViewMessage.GetHeader, IntPtr.Zero, IntPtr.Zero);
 				return IntPtr.Zero;
 			}
 		}
@@ -102,14 +99,11 @@ namespace System.Windows.Forms
 			return -1;
 		}
 
-		internal NativeMethods.ListViewGroupState GetGroupState(ListViewGroup group, NativeMethods.ListViewGroupState stateMask = (NativeMethods.ListViewGroupState)0xFF)
-		{
-			return (NativeMethods.ListViewGroupState)SendMessage(NativeMethods.ListViewMessage.GetGroupState, GetGroupId(group), new IntPtr((int)stateMask));
-		}
+		internal NativeMethods.ListViewGroupState GetGroupState(ListViewGroup group, NativeMethods.ListViewGroupState stateMask = (NativeMethods.ListViewGroupState)0xFF) => (NativeMethods.ListViewGroupState)SendMessage(NativeMethods.ListViewMessage.GetGroupState, GetGroupId(group), new IntPtr((int)stateMask));
 
 		internal void RecreateHandleInternal()
 		{
-			if (base.IsHandleCreated && (this.StateImageList != null))
+			if (base.IsHandleCreated && (StateImageList != null))
 			{
 				SendMessage(NativeMethods.ListViewMessage.Update, -1, IntPtr.Zero);
 			}
@@ -130,10 +124,10 @@ namespace System.Windows.Forms
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
-			if (this.groups != null)
+			if (groups != null)
 			{
-				for (int i = 0; i < this.groups.Count; i++)
-					UpdateGroupNative(this.groups[i], false);
+				for (int i = 0; i < groups.Count; i++)
+					UpdateGroupNative(groups[i], false);
 			}
 		}
 
@@ -146,10 +140,10 @@ namespace System.Windows.Forms
 				var iCol = nmlv.iSubItem;
 				NativeMethods.RECT rc = new NativeMethods.RECT();
 				NativeMethods.SendMessage(HeaderHandle, (uint)NativeMethods.HeaderMessage.GetItemDropDownRect, (IntPtr)iCol, ref rc);
-				if (this.ColumnContextMenuStrip != null)
+				if (ColumnContextMenuStrip != null)
 				{
-					this.ColumnContextMenuStrip.Tag = iCol;
-					this.ColumnContextMenuStrip.Show(this, rc.X, rc.Bottom);
+					ColumnContextMenuStrip.Tag = iCol;
+					ColumnContextMenuStrip.Show(this, rc.X, rc.Bottom);
 				}
 			}
 		}
@@ -191,36 +185,30 @@ namespace System.Windows.Forms
 
 		private void DetachImageList(object sender, EventArgs e)
 		{
-			this.disposingImageList = true;
+			disposingImageList = true;
 			try
 			{
-				this.GroupHeaderImageList = null;
+				GroupHeaderImageList = null;
 			}
 			finally
 			{
-				this.disposingImageList = false;
+				disposingImageList = false;
 			}
-			this.UpdateListViewItemsLocations();
+			UpdateListViewItemsLocations();
 		}
 
 		private void GroupImageListRecreateHandle(object sender, EventArgs e)
 		{
 			if (base.IsHandleCreated)
 			{
-				IntPtr lparam = (this.GroupHeaderImageList == null) ? IntPtr.Zero : this.GroupHeaderImageList.Handle;
+				IntPtr lparam = (GroupHeaderImageList == null) ? IntPtr.Zero : GroupHeaderImageList.Handle;
 				SendMessage(NativeMethods.ListViewMessage.SetImageList, 3, lparam);
 			}
 		}
 
-		private int SendMessage(NativeMethods.ListViewMessage msg, int wParam, IntPtr lParam)
-		{
-			return NativeMethods.SendMessage(this.Handle, (uint)msg, (IntPtr)wParam, lParam).ToInt32();
-		}
+		private int SendMessage(NativeMethods.ListViewMessage msg, int wParam, IntPtr lParam) => NativeMethods.SendMessage(Handle, (uint)msg, (IntPtr)wParam, lParam).ToInt32();
 
-		private int SendMessage(NativeMethods.ListViewMessage msg, int wParam, NativeMethods.LVGROUP group)
-		{
-			return NativeMethods.SendMessage(this.Handle, msg, wParam, group).ToInt32();
-		}
+		private int SendMessage(NativeMethods.ListViewMessage msg, int wParam, NativeMethods.LVGROUP group) => NativeMethods.SendMessage(Handle, msg, wParam, group).ToInt32();
 
 		private void SetAllGroupState(NativeMethods.ListViewGroupState state, bool on = true)
 		{
@@ -228,7 +216,7 @@ namespace System.Windows.Forms
 			group.SetState(state, on);
 			//group.Subtitle = "Dog";
 
-			foreach (ListViewGroup g in this.BaseGroups)
+			foreach (ListViewGroup g in BaseGroups)
 				SendMessage(NativeMethods.ListViewMessage.SetGroupInfo, GetGroupId(g), group);
 
 			using (NativeMethods.LVGROUP grp = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.Subtitle))
@@ -250,13 +238,13 @@ namespace System.Windows.Forms
 
 		public void SetSortIcon(int columnIndex, SortOrder order)
 		{
-			IntPtr columnHeader = this.HeaderHandle;
+			IntPtr columnHeader = HeaderHandle;
 
-			for (int columnNumber = 0; columnNumber <= this.Columns.Count - 1; columnNumber++)
+			for (int columnNumber = 0; columnNumber <= Columns.Count - 1; columnNumber++)
 			{
 				// Get current listview column info
 				var lvcol = new NativeMethods.LVCOLUMN(NativeMethods.ListViewColumMask.Fmt);
-				NativeMethods.SendMessage(this.Handle, NativeMethods.ListViewMessage.GetColumn, columnNumber, lvcol);
+				NativeMethods.SendMessage(Handle, NativeMethods.ListViewMessage.GetColumn, columnNumber, lvcol);
 
 				// Get current header info
 				var hditem = new NativeMethods.HDITEM(NativeMethods.HeaderItemMask.Format | NativeMethods.HeaderItemMask.DISetItem);
@@ -280,16 +268,16 @@ namespace System.Windows.Forms
 
 		private void UpdateListViewItemsLocations()
 		{
-			if (((!this.VirtualMode && base.IsHandleCreated) && this.AutoArrange))
+			if (((!VirtualMode && base.IsHandleCreated) && AutoArrange))
 			{
 				try
 				{
-					this.BeginUpdate();
+					BeginUpdate();
 					SendMessage(NativeMethods.ListViewMessage.Update, -1, IntPtr.Zero);
 				}
 				finally
 				{
-					this.EndUpdate();
+					EndUpdate();
 				}
 			}
 		}
@@ -307,15 +295,9 @@ namespace System.Windows.Forms
 			this.listView = listView;
 		}
 
-		public int Count
-		{
-			get { return list.Count; }
-		}
+		public int Count => list.Count;
 
-		public bool IsReadOnly
-		{
-			get { return false; }
-		}
+		public bool IsReadOnly => false;
 
 		public ListViewGroupEx this[int index]
 		{
@@ -327,9 +309,9 @@ namespace System.Windows.Forms
 		{
 			get
 			{
-				if (this.list != null)
+				if (list != null)
 				{
-					for (int i = 0; i < this.list.Count; i++)
+					for (int i = 0; i < list.Count; i++)
 					{
 						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentCulture) == 0)
 						{
@@ -342,9 +324,9 @@ namespace System.Windows.Forms
 			set
 			{
 				int num = -1;
-				if (this.list != null)
+				if (list != null)
 				{
-					for (int i = 0; i < this.list.Count; i++)
+					for (int i = 0; i < list.Count; i++)
 					{
 						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentCulture) == 0)
 						{
@@ -354,7 +336,7 @@ namespace System.Windows.Forms
 					}
 					if (num != -1)
 					{
-						this.list[num] = value;
+						list[num] = value;
 					}
 				}
 			}
@@ -369,24 +351,24 @@ namespace System.Windows.Forms
 		public ListViewGroupEx Add(string header)
 		{
 			var ret = new ListViewGroupEx(header);
-			this.Add(ret);
+			Add(ret);
 			return ret;
 		}
 
 		public void AddRange(IEnumerable<ListViewGroupEx> items)
 		{
-			this.listView.BeginUpdate();
+			listView.BeginUpdate();
 			foreach (var item in items)
-				this.Add(item);
-			this.listView.EndUpdate();
+				Add(item);
+			listView.EndUpdate();
 		}
 
 		public void AddRange(IEnumerable<string> items)
 		{
-			this.listView.BeginUpdate();
+			listView.BeginUpdate();
 			foreach (var item in items)
-				this.Add(item);
-			this.listView.EndUpdate();
+				Add(item);
+			listView.EndUpdate();
 		}
 
 		public void Clear()
@@ -395,25 +377,16 @@ namespace System.Windows.Forms
 			list.Clear();
 		}
 
-		public bool Contains(ListViewGroupEx item)
-		{
-			return list.Contains(item);
-		}
+		public bool Contains(ListViewGroupEx item) => list.Contains(item);
 
 		public void CopyTo(ListViewGroupEx[] array, int arrayIndex)
 		{
 			list.CopyTo(array, arrayIndex);
 		}
 
-		public System.Collections.Generic.IEnumerator<ListViewGroupEx> GetEnumerator()
-		{
-			return list.GetEnumerator();
-		}
+		public System.Collections.Generic.IEnumerator<ListViewGroupEx> GetEnumerator() => list.GetEnumerator();
 
-		public int IndexOf(ListViewGroupEx item)
-		{
-			return list.IndexOf(item);
-		}
+		public int IndexOf(ListViewGroupEx item) => list.IndexOf(item);
 
 		public void Insert(int index, ListViewGroupEx item)
 		{
@@ -432,10 +405,7 @@ namespace System.Windows.Forms
 			Remove(this[index]);
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 
 	[Serializable, ToolboxItem(false), DesignTimeVisible(false), DefaultProperty("Header"), TypeConverter(typeof(ListViewGroupExConverter))]
@@ -460,64 +430,64 @@ namespace System.Windows.Forms
 
 		public bool Collapsed
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, ref this.collapsed); }
-			set { SetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, value, ref this.collapsed); }
+			get { return GetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, ref collapsed); }
+			set { SetState(NativeMethods.ListViewGroupState.Collapsed | NativeMethods.ListViewGroupState.Normal, value, ref collapsed); }
 		}
 
 		public bool Hidden
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Hidden, ref this.hidden); }
-			set { SetState(NativeMethods.ListViewGroupState.Hidden, value, ref this.hidden); }
+			get { return GetState(NativeMethods.ListViewGroupState.Hidden, ref hidden); }
+			set { SetState(NativeMethods.ListViewGroupState.Hidden, value, ref hidden); }
 		}
 
 		public bool NoHeader
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.NoHeader, ref this.noheader); }
-			set { SetState(NativeMethods.ListViewGroupState.NoHeader, value, ref this.noheader); }
+			get { return GetState(NativeMethods.ListViewGroupState.NoHeader, ref noheader); }
+			set { SetState(NativeMethods.ListViewGroupState.NoHeader, value, ref noheader); }
 		}
 
 		public bool Collapsible
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Collapsible, ref this.collapsible); }
-			set { SetState(NativeMethods.ListViewGroupState.Collapsible, value, ref this.collapsible); }
+			get { return GetState(NativeMethods.ListViewGroupState.Collapsible, ref collapsible); }
+			set { SetState(NativeMethods.ListViewGroupState.Collapsible, value, ref collapsible); }
 		}
 
 		public bool Focused
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Focused, ref this.focused); }
-			set { SetState(NativeMethods.ListViewGroupState.Focused, value, ref this.focused); }
+			get { return GetState(NativeMethods.ListViewGroupState.Focused, ref focused); }
+			set { SetState(NativeMethods.ListViewGroupState.Focused, value, ref focused); }
 		}
 
 		public bool Selected
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Selected, ref this.selected); }
-			set { SetState(NativeMethods.ListViewGroupState.Selected, value, ref this.selected); }
+			get { return GetState(NativeMethods.ListViewGroupState.Selected, ref selected); }
+			set { SetState(NativeMethods.ListViewGroupState.Selected, value, ref selected); }
 		}
 
 		public bool Subseted
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.Subseted, ref this.subseted); }
-			set { SetState(NativeMethods.ListViewGroupState.Subseted, value, ref this.subseted); }
+			get { return GetState(NativeMethods.ListViewGroupState.Subseted, ref subseted); }
+			set { SetState(NativeMethods.ListViewGroupState.Subseted, value, ref subseted); }
 		}
 
 		public bool SubsetLinkFocused
 		{
-			get { return GetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, ref this.subsetlinkfocused); }
-			set { SetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, value, ref this.subsetlinkfocused); }
+			get { return GetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, ref subsetlinkfocused); }
+			set { SetState(NativeMethods.ListViewGroupState.SubsetLinkFocused, value, ref subsetlinkfocused); }
 		}
 
 		private void SetState(NativeMethods.ListViewGroupState item, bool on, ref bool? localVar)
 		{
-			if (this.ListView != null)
-				this.ListView.SetGroupState(this, item, on);
+			if (ListView != null)
+				ListView.SetGroupState(this, item, on);
 			localVar = on;
 		}
 
 		private bool GetState(NativeMethods.ListViewGroupState item, ref bool? localVar)
 		{
-			if (this.ListView != null)
+			if (ListView != null)
 			{
-				NativeMethods.ListViewGroupState s = this.ListView.GetGroupState(this, item);
+				NativeMethods.ListViewGroupState s = ListView.GetGroupState(this, item);
 				localVar = ((s & item) != 0);
 			}
 			return localVar.GetValueOrDefault(false);
@@ -531,9 +501,9 @@ namespace System.Windows.Forms
 			{
 				if (descBottom != value)
 				{
-					this.descBottom = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					descBottom = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -546,9 +516,9 @@ namespace System.Windows.Forms
 			{
 				if (descTop != value)
 				{
-					this.descTop = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					descTop = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -561,9 +531,9 @@ namespace System.Windows.Forms
 			{
 				if (footer != value)
 				{
-					this.footer = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					footer = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -576,9 +546,9 @@ namespace System.Windows.Forms
 			{
 				if (footerAlign != value)
 				{
-					this.footerAlign = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					footerAlign = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -608,16 +578,10 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable(false)]
-		public ListView.ListViewItemCollection Items
-		{
-			get { return baseGroup.Items; }
-		}
+		public ListView.ListViewItemCollection Items => baseGroup.Items;
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-		public ListViewEx ListView
-		{
-			get { return baseGroup.ListView as ListViewEx; }
-		}
+		public ListViewEx ListView => baseGroup.ListView as ListViewEx;
 
 		[DefaultValue(""), Category("Behavior"), Browsable(true)]
 		public string Name
@@ -634,9 +598,9 @@ namespace System.Windows.Forms
 			{
 				if (subtitle != value)
 				{
-					this.subtitle = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					subtitle = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -656,9 +620,9 @@ namespace System.Windows.Forms
 			{
 				if (task != value)
 				{
-					this.task = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					task = value;
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
@@ -671,16 +635,13 @@ namespace System.Windows.Forms
 				if (titleImageIndex != value)
 				{
 					titleImageIndex = value;
-					if (this.ListView != null)
-						this.ListView.UpdateGroupNative(this);
+					if (ListView != null)
+						ListView.UpdateGroupNative(this);
 				}
 			}
 		}
-		
-		public static implicit operator ListViewGroup(ListViewGroupEx x)
-		{
-			return x.baseGroup;
-		}
+
+		public static implicit operator ListViewGroup(ListViewGroupEx x) => x.baseGroup;
 
 		internal void GetSetState(out NativeMethods.ListViewGroupState m, out NativeMethods.ListViewGroupState s)
 		{
@@ -709,16 +670,16 @@ namespace System.Windows.Forms
 
 		public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
 		{
-			this.editValue = value;
+			editValue = value;
 			object obj2 = base.EditValue(context, provider, value);
-			this.editValue = null;
+			editValue = null;
 			return obj2;
 		}
 
 		protected override object CreateInstance(Type itemType)
 		{
 			ListViewGroupEx group = (ListViewGroupEx)base.CreateInstance(itemType);
-			group.Name = this.CreateListViewGroupName((ListViewGroupCollectionEx)this.editValue);
+			group.Name = CreateListViewGroupName((ListViewGroupCollectionEx)editValue);
 			return group;
 		}
 
@@ -748,15 +709,9 @@ namespace System.Windows.Forms
 
 	internal class ListViewGroupExConverter : TypeConverter
 	{
-		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-		{
-			return ((((sourceType == typeof(string)) && (context != null)) && (context.Instance is ListViewItem)) || base.CanConvertFrom(context, sourceType));
-		}
+		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => ((((sourceType == typeof(string)) && (context != null)) && (context.Instance is ListViewItem)) || base.CanConvertFrom(context, sourceType));
 
-		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-		{
-			return ((destinationType == typeof(InstanceDescriptor)) || ((((destinationType == typeof(string)) && (context != null)) && (context.Instance is ListViewItem)) || base.CanConvertTo(context, destinationType)));
-		}
+		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) => ((destinationType == typeof(InstanceDescriptor)) || ((((destinationType == typeof(string)) && (context != null)) && (context.Instance is ListViewItem)) || base.CanConvertTo(context, destinationType)));
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
@@ -789,7 +744,7 @@ namespace System.Windows.Forms
 		{
 			if (destinationType == null)
 			{
-				throw new ArgumentNullException("destinationType");
+				throw new ArgumentNullException(nameof(destinationType));
 			}
 			if ((destinationType == typeof(InstanceDescriptor)) && (value is ListViewGroupEx))
 			{
@@ -826,14 +781,8 @@ namespace System.Windows.Forms
 			return null;
 		}
 
-		public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-		{
-			return true;
-		}
+		public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) => true;
 
-		public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-		{
-			return true;
-		}
+		public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;
 	}
 }

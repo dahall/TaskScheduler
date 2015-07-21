@@ -34,10 +34,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool IsActionValid()
-		{
-			return execProgText.TextLength > 0;
-		}
+		public bool IsActionValid() => execProgText.TextLength > 0;
 
 		private void execProgBrowseBtn_Click(object sender, EventArgs e)
 		{
@@ -47,7 +44,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void execProgText_TextChanged(object sender, EventArgs e)
 		{
-			EventHandler h = this.KeyValueChanged;
+			EventHandler h = KeyValueChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
 		}

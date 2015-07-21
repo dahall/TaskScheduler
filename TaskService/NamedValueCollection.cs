@@ -38,8 +38,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		public string Name
 		{
-			get { return v2Pair == null ? this.name : v2Pair.Name; }
-			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException("Name"); if (v2Pair == null) this.name = value; else v2Pair.Name = value; }
+			get { return v2Pair == null ? name : v2Pair.Name; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Name)); if (v2Pair == null) name = value; else v2Pair.Name = value; }
 		}
 
 		/// <summary>
@@ -50,8 +50,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		public string Value
 		{
-			get { return v2Pair == null ? this.value : v2Pair.Value; }
-			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException("Value"); if (v2Pair == null) this.value = value; else v2Pair.Value = value; }
+			get { return v2Pair == null ? value : v2Pair.Value; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Value)); if (v2Pair == null) this.value = value; else v2Pair.Value = value; }
 		}
 
 		/// <summary>
@@ -64,9 +64,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public override bool Equals(object obj)
 		{
 			if (obj is NameValuePair)
-				return ((NameValuePair)obj).Name == this.Name && ((NameValuePair)obj).Value == this.Value;
+				return ((NameValuePair)obj).Name == Name && ((NameValuePair)obj).Value == Value;
 			if (obj is V2Interop.ITaskNamedValuePair)
-				return ((V2Interop.ITaskNamedValuePair)obj).Name == this.Name && ((V2Interop.ITaskNamedValuePair)obj).Value == this.Value;
+				return ((V2Interop.ITaskNamedValuePair)obj).Name == Name && ((V2Interop.ITaskNamedValuePair)obj).Value == Value;
 			return base.Equals(obj);
 		}
 
@@ -76,10 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 		/// </returns>
-		public override int GetHashCode()
-		{
-			return new { A = Name, B = Value }.GetHashCode();
-		}
+		public override int GetHashCode() => new { A = Name, B = Value }.GetHashCode();
 
 		/// <summary>
 		/// Returns a <see cref="System.String" /> that represents this instance.
@@ -87,30 +84,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="System.String" /> that represents this instance.
 		/// </returns>
-		public override string ToString()
-		{
-			return string.Format("{0}={1}", this.Name, this.Value);
-		}
+		public override string ToString() => $"{Name}={Value}";
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
-		{
-			return null;
-		}
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
 			if (reader.MoveToContent() == System.Xml.XmlNodeType.Element && reader.LocalName == "Value")
 			{
-				this.Name = reader.GetAttribute("name");
-				this.Value = reader.ReadString();
+				Name = reader.GetAttribute("name");
+				Value = reader.ReadString();
 				reader.Read();
 			}
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			writer.WriteAttributeString("name", this.Name);
-			writer.WriteString(this.Value);
+			writer.WriteAttributeString("name", Name);
+			writer.WriteString(Value);
 		}
 	}
 
@@ -129,10 +120,7 @@ namespace Microsoft.Win32.TaskScheduler
 			unboundDict = new List<NameValuePair>(5);
 		}
 
-		internal bool Bound
-		{
-			get { return v2Coll != null; }
-		}
+		internal bool Bound => v2Coll != null;
 
 		internal void Bind(V2Interop.ITaskNamedValueCollection iTaskNamedValueCollection)
 		{
@@ -150,7 +138,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 			{
-				for (int i = 1; i <= this.Count; i++)
+				for (int i = 1; i <= Count; i++)
 					destCollection.Add(v2Coll[i].Name, v2Coll[i].Value);
 			}
 			else
@@ -171,10 +159,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of items in the collection.
 		/// </summary>
-		public int Count
-		{
-			get { return v2Coll != null ? v2Coll.Count : unboundDict.Count; }
-		}
+		public int Count => v2Coll != null ? v2Coll.Count : unboundDict.Count;
 
 		/// <summary>
 		/// Gets a collection of the names.
@@ -261,7 +246,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
 		public void Add(NameValuePair item)
 		{
-			this.Add(item.Name, item.Value);
+			Add(item.Name, item.Value);
 		}
 
 		/// <summary>
@@ -318,10 +303,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the collection enumerator for the name-value collection.
 		/// </summary>
 		/// <returns>An <see cref="System.Collections.IEnumerator"/> for the collection.</returns>
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		bool ICollection<NameValuePair>.Contains(NameValuePair item)
 		{
@@ -342,16 +324,13 @@ namespace Microsoft.Win32.TaskScheduler
 				if (array.Length - arrayIndex < v2Coll.Count)
 					throw new ArgumentException("Items in collection exceed available items in destination array.");
 				if (arrayIndex < 0)
-					throw new ArgumentException("Array index must be 0 or greater.", "arrayIndex");
+					throw new ArgumentException("Array index must be 0 or greater.", nameof(arrayIndex));
 				for (int i = 0; i < v2Coll.Count; i++)
 					array[i + arrayIndex] = new NameValuePair(v2Coll[i]);
 			}
 		}
 
-		bool ICollection<NameValuePair>.IsReadOnly
-		{
-			get { return false; }
-		}
+		bool ICollection<NameValuePair>.IsReadOnly => false;
 
 		bool ICollection<NameValuePair>.Remove(NameValuePair item)
 		{
@@ -375,28 +354,19 @@ namespace Microsoft.Win32.TaskScheduler
 
 			internal INVCEnumerator(V2Interop.ITaskNamedValueCollection v2Coll)
 			{
-				this.v2CollEnum = v2Coll.GetEnumerator();
+				v2CollEnum = v2Coll.GetEnumerator();
 			}
 
-			public NameValuePair Current
-			{
-				get { return new NameValuePair(v2CollEnum.Current as V2Interop.ITaskNamedValuePair); }
-			}
+			public NameValuePair Current => new NameValuePair(v2CollEnum.Current as V2Interop.ITaskNamedValuePair);
 
 			void IDisposable.Dispose()
 			{
 				v2CollEnum = null;
 			}
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
-			bool System.Collections.IEnumerator.MoveNext()
-			{
-				return v2CollEnum.MoveNext();
-			}
+			bool System.Collections.IEnumerator.MoveNext() => v2CollEnum.MoveNext();
 
 			void System.Collections.IEnumerator.Reset()
 			{

@@ -88,10 +88,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// A bitwise combination of <see cref="TaskRights"/> values indicating the rights allowed or denied by the access rule.
 		/// </value>
-		public TaskRights TaskRights
-		{
-			get { return (TaskRights)base.AccessMask; }
-		}
+		public TaskRights TaskRights => (TaskRights)base.AccessMask;
 	}
 
 	/// <summary>
@@ -122,10 +119,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// A bitwise combination of <see cref="TaskRights"/> values that indicates the rights affected by the audit rule.
 		/// </value>
 		/// <remarks><see cref="TaskAuditRule"/> objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of AuditFlags values, but you cannot modify an existing audit rule.</remarks>
-		public TaskRights TaskRights
-		{
-			get { return (TaskRights)base.AccessMask; }
-		}
+		public TaskRights TaskRights => (TaskRights)base.AccessMask;
 	}
 
 	/// <summary>
@@ -173,7 +167,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSecurity(Task task, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			this.SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
+			SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
 		}
 
 		/// <summary>
@@ -184,35 +178,26 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSecurity(TaskFolder folder, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			this.SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
+			SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
 		}
 
 		/// <summary>
 		/// Gets the enumeration that the <see cref="TaskSecurity"/> class uses to represent access rights.
 		/// </summary>
 		/// <returns>A <see cref="Type"/> object representing the <see cref="TaskRights"/> enumeration.</returns>
-		public override Type AccessRightType
-		{
-			get { return typeof(TaskRights); }
-		}
+		public override Type AccessRightType => typeof(TaskRights);
 
 		/// <summary>
 		/// Gets the type that the TaskSecurity class uses to represent access rules.
 		/// </summary>
 		/// <returns>A <see cref="Type"/> object representing the <see cref="TaskAccessRule"/> class.</returns>
-		public override Type AccessRuleType
-		{
-			get { return typeof(TaskAccessRule); }
-		}
+		public override Type AccessRuleType => typeof(TaskAccessRule);
 
 		/// <summary>
 		/// Gets the type that the TaskSecurity class uses to represent audit rules.
 		/// </summary>
 		/// <returns>A <see cref="Type"/> object representing the <see cref="TaskAuditRule"/> class.</returns>
-		public override Type AuditRuleType
-		{
-			get { return typeof(TaskAuditRule); }
-		}
+		public override Type AuditRuleType => typeof(TaskAuditRule);
 
 		/// <summary>
 		/// Creates a new access control rule for the specified user, with the specified access rights, access control, and flags.
@@ -226,10 +211,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The <see cref="T:System.Security.AccessControl.AccessRule" /> object that this method creates.
 		/// </returns>
-		public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
-		{
-			return new TaskAccessRule(identityReference, (TaskRights)accessMask, type);
-		}
+		public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type) => new TaskAccessRule(identityReference, (TaskRights)accessMask, type);
 
 		/// <summary>
 		/// Searches for a matching rule with which the new rule can be merged. If none are found, adds the new rule.
@@ -261,20 +243,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="TaskAuditRule"/> object representing the specified audit rule for the specified user. The return type of the method is the base class, <see cref="AuditRule"/>, but the return value can be cast safely to the derived class.
 		/// </returns>
-		public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-		{
-			return new TaskAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
-		}
+		public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags) => new TaskAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
 
 		/// <summary>
 		/// Searches for an access control rule with the same user and <see cref="AccessControlType"/> (allow or deny) as the specified rule, and with compatible inheritance and propagation flags; if such a rule is found, the rights contained in the specified access rule are removed from it.
 		/// </summary>
 		/// <param name="rule">A <see cref="TaskAccessRule"/> that specifies the user and <see cref="AccessControlType"/> to search for, and a set of inheritance and propagation flags that a matching rule, if found, must be compatible with. Specifies the rights to remove from the compatible rule, if found.</param>
 		/// <returns><c>true</c> if a compatible rule is found; otherwise <c>false</c>.</returns>
-		public bool RemoveAccessRule(TaskAccessRule rule)
-		{
-			return base.RemoveAccessRule(rule);
-		}
+		public bool RemoveAccessRule(TaskAccessRule rule) => base.RemoveAccessRule(rule);
 
 		/// <summary>
 		/// Searches for all access control rules with the same user and <see cref="AccessControlType"/> (allow or deny) as the specified rule and, if found, removes them.
@@ -299,10 +275,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="rule">A <see cref="TaskAuditRule"/> that specifies the user to search for, and a set of inheritance and propagation flags that a matching rule, if found, must be compatible with. Specifies the rights to remove from the compatible rule, if found.</param>
 		/// <returns><c>true</c> if a compatible rule is found; otherwise <c>false</c>.</returns>
-		public bool RemoveAuditRule(TaskAuditRule rule)
-		{
-			return base.RemoveAuditRule(rule);
-		}
+		public bool RemoveAuditRule(TaskAuditRule rule) => base.RemoveAuditRule(rule);
 
 		/// <summary>
 		/// Searches for all audit rules with the same user as the specified rule and, if found, removes them.
@@ -355,10 +328,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="System.String" /> that represents this instance.
 		/// </returns>
-		public override string ToString()
-		{
-			return this.GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections);
-		}
+		public override string ToString() => GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections);
 
 		internal static System.Security.AccessControl.SecurityInfos Convert(System.Security.AccessControl.AccessControlSections si)
 		{
@@ -421,10 +391,10 @@ namespace Microsoft.Win32.TaskScheduler
 			base.WriteLock();
 			try
 			{
-				AccessControlSections accessControlSectionsFromChanges = this.GetAccessControlSectionsFromChanges();
+				AccessControlSections accessControlSectionsFromChanges = GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
-					task.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
+					task.SetSecurityDescriptorSddlForm(GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
 					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
 				}
 			}
@@ -445,10 +415,10 @@ namespace Microsoft.Win32.TaskScheduler
 			base.WriteLock();
 			try
 			{
-				AccessControlSections accessControlSectionsFromChanges = this.GetAccessControlSectionsFromChanges();
+				AccessControlSections accessControlSectionsFromChanges = GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
-					folder.SetSecurityDescriptorSddlForm(this.GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
+					folder.SetSecurityDescriptorSddlForm(GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
 					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
 				}
 			}

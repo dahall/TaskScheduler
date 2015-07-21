@@ -58,10 +58,7 @@ namespace Microsoft.Win32
 		[DllImport(USER32, CharSet = CharSet.Unicode, SetLastError = false)]
 		public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
-		public static IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam = 0)
-		{
-			return SendMessage(hWnd, Msg, wParam, 0);
-		}
+		public static IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam = 0) => SendMessage(hWnd, Msg, wParam, 0);
 
 		[DllImport(USER32, CharSet = CharSet.Unicode, SetLastError = false)]
 		public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, ref RECT rect);
@@ -195,10 +192,7 @@ namespace Microsoft.Win32
 			public IntPtr idFrom;
 			public int code;
 
-			public override string ToString()
-			{
-				return string.Format("hwndFrom:{0}; idFrom:{1}; code:{2}", hwndFrom, idFrom, code);
-			}
+			public override string ToString() => $"hwndFrom:{hwndFrom}; idFrom:{idFrom}; code:{code}";
 		}
 	}
 }

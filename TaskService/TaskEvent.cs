@@ -11,18 +11,18 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal TaskEvent(EventRecord rec)
 		{
-			this.EventId = rec.Id;
-			this.EventRecord = rec;
-			this.Version = rec.Version;
-			this.TaskCategory = rec.TaskDisplayName;
-			this.OpCode = rec.OpcodeDisplayName;
-			this.TimeCreated = rec.TimeCreated;
-			this.RecordId = rec.RecordId;
-			this.ActivityId = rec.ActivityId;
-			this.Level = rec.LevelDisplayName;
-			this.UserId = rec.UserId;
-			this.ProcessId = rec.ProcessId;
-			this.TaskPath = rec.Properties.Count > 0 ? rec.Properties[0].Value.ToString() : null;
+			EventId = rec.Id;
+			EventRecord = rec;
+			Version = rec.Version;
+			TaskCategory = rec.TaskDisplayName;
+			OpCode = rec.OpcodeDisplayName;
+			TimeCreated = rec.TimeCreated;
+			RecordId = rec.RecordId;
+			ActivityId = rec.ActivityId;
+			Level = rec.LevelDisplayName;
+			UserId = rec.UserId;
+			ProcessId = rec.ProcessId;
+			TaskPath = rec.Properties.Count > 0 ? rec.Properties[0].Value.ToString() : null;
 		}
 
 		/// <summary>
@@ -235,7 +235,7 @@ namespace Microsoft.Win32.TaskScheduler
 			var propsel = new EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", name) });
 			try
 			{
-				var logEventProps = ((EventLogRecord)this.EventRecord).GetPropertyValues(propsel);
+				var logEventProps = ((EventLogRecord)EventRecord).GetPropertyValues(propsel);
 				return logEventProps[0].ToString();
 			}
 			catch { }
@@ -336,10 +336,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="System.String"/> that represents this instance.
 		/// </returns>
-		public override string ToString()
-		{
-			return EventRecord.FormatDescription();
-		}
+		public override string ToString() => EventRecord.FormatDescription();
 
 		/// <summary>
 		/// Compares the current object with another object of the same type.
@@ -350,12 +347,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public int CompareTo(TaskEvent other)
 		{
-			int i = this.TaskPath.CompareTo(other.TaskPath);
+			int i = TaskPath.CompareTo(other.TaskPath);
 			if (i == 0)
 			{
-				i = this.ActivityId.ToString().CompareTo(other.ActivityId.ToString());
+				i = ActivityId.ToString().CompareTo(other.ActivityId.ToString());
 				if (i == 0)
-					i = Convert.ToInt32(this.RecordId - other.RecordId);
+					i = Convert.ToInt32(RecordId - other.RecordId);
 			}
 			return i;
 		}
@@ -380,10 +377,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The element in the collection at the current position of the enumerator.
 		///   </returns>
-		public TaskEvent Current
-		{
-			get { return new TaskEvent(curRec); }
-		}
+		public TaskEvent Current => new TaskEvent(curRec);
 
 		/// <summary>
 		/// Gets the element in the collection at the current position of the enumerator.
@@ -391,10 +385,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The element in the collection at the current position of the enumerator.
 		///   </returns>
-		object System.Collections.IEnumerator.Current
-		{
-			get { return this.Current; }
-		}
+		object System.Collections.IEnumerator.Current => Current;
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -415,10 +406,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="T:System.InvalidOperationException">
 		/// The collection was modified after the enumerator was created.
 		///   </exception>
-		public bool MoveNext()
-		{
-			return (curRec = log.ReadEvent()) != null;
-		}
+		public bool MoveNext() => (curRec = log.ReadEvent()) != null;
 
 		/// <summary>
 		/// Sets the enumerator to its initial position, which is before the first element in the collection.
@@ -529,7 +517,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (eventIDs != null && eventIDs.Length > 0)
 			{
 				if (sb.Length > 1) sb.Append(AND);
-				sb.AppendFormat("({0})", string.Join(OR, Array.ConvertAll<int, string>(eventIDs, i => string.Format("EventID={0}", i))));
+				sb.AppendFormat("({0})", string.Join(OR, Array.ConvertAll(eventIDs, i => $"EventID={i}")));
 			}
 			if (startTime.HasValue)
 			{
@@ -615,10 +603,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
 		/// </returns>
-		public IEnumerator<TaskEvent> GetEnumerator()
-		{
-			return GetEnumerator(EnumerateInReverse);
-		}
+		public IEnumerator<TaskEvent> GetEnumerator() => GetEnumerator(EnumerateInReverse);
 
 		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
@@ -639,9 +624,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
 		/// </returns>
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 }

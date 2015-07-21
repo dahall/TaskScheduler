@@ -35,42 +35,42 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return taskEvent; }
 			set
 			{
-				this.taskEvent = value;
+				taskEvent = value;
 				if (value != null)
 				{
-					this.computerText.Text = taskEvent.EventRecord.MachineName;
-					this.detailsText.Text = taskEvent.EventRecord.FormatDescription();
-					this.eventIdText.Text = taskEvent.EventRecord.Id.ToString();
+					computerText.Text = taskEvent.EventRecord.MachineName;
+					detailsText.Text = taskEvent.EventRecord.FormatDescription();
+					eventIdText.Text = taskEvent.EventRecord.Id.ToString();
 					System.Collections.Generic.List<string> keywords = new System.Collections.Generic.List<string>();
 					foreach (string s in taskEvent.EventRecord.KeywordsDisplayNames)
 						keywords.Add(s);
-					this.keywordsText.Text = string.Join(", ", keywords.ToArray());
-					this.levelText.Text = taskEvent.EventRecord.LevelDisplayName;
-					this.loggedText.Text = taskEvent.EventRecord.TimeCreated.Value.ToString("G");
-					this.logNameText.Text = taskEvent.EventRecord.LogName;
-					this.opCodeText.Text = string.Format("{0} ({1})", taskEvent.EventRecord.OpcodeDisplayName, taskEvent.EventRecord.Opcode);
-					this.sourceText.Text = "TaskScheduler";
-					this.taskCategoryText.Text = taskEvent.TaskCategory;
-					this.userText.Text = taskEvent.UserId.Translate(typeof(System.Security.Principal.NTAccount)).Value;
-					if (this.textViewRadio.Checked)
+					keywordsText.Text = string.Join(", ", keywords.ToArray());
+					levelText.Text = taskEvent.EventRecord.LevelDisplayName;
+					loggedText.Text = taskEvent.EventRecord.TimeCreated.Value.ToString("G");
+					logNameText.Text = taskEvent.EventRecord.LogName;
+					opCodeText.Text = $"{taskEvent.EventRecord.OpcodeDisplayName} ({taskEvent.EventRecord.Opcode})";
+					sourceText.Text = "TaskScheduler";
+					taskCategoryText.Text = taskEvent.TaskCategory;
+					userText.Text = taskEvent.UserId.Translate(typeof(System.Security.Principal.NTAccount)).Value;
+					if (textViewRadio.Checked)
 						ShowHtml();
 					else
 						ShowXml();
 				}
 				else
 				{
-					this.computerText.Clear();
-					this.detailsText.Clear();
-					this.eventIdText.Clear();
-					this.htmlText.DocumentText = string.Empty;
-					this.keywordsText.Clear();
-					this.levelText.Clear();
-					this.loggedText.Clear();
-					this.logNameText.Clear();
-					this.opCodeText.Clear();
-					this.sourceText.Clear();
-					this.taskCategoryText.Clear();
-					this.userText.Clear();
+					computerText.Clear();
+					detailsText.Clear();
+					eventIdText.Clear();
+					htmlText.DocumentText = string.Empty;
+					keywordsText.Clear();
+					levelText.Clear();
+					loggedText.Clear();
+					logNameText.Clear();
+					opCodeText.Clear();
+					sourceText.Clear();
+					taskCategoryText.Clear();
+					userText.Clear();
 				}
 			}
 		}
@@ -111,41 +111,41 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					if (this.xslt == null)
+					if (xslt == null)
 					{
 						xslt = new XslCompiledTransform();
-						this.xslt.Load(Environment.GetFolderPath(Environment.SpecialFolder.System) + Path.DirectorySeparatorChar + "EventViewer_EventDetails.xsl");
+						xslt.Load(Environment.GetFolderPath(Environment.SpecialFolder.System) + Path.DirectorySeparatorChar + "EventViewer_EventDetails.xsl");
 					}
 					XmlDocument document = new XmlDocument();
 					document.LoadXml(taskEvent.EventRecord.ToXml());
 					if (tmpHtmlFile == null)
-						this.tmpHtmlFile = GetTempFile("html");
-					StreamWriter writer = File.CreateText(this.tmpHtmlFile);
-					this.xslt.Transform((System.Xml.XPath.IXPathNavigable)document, null, (TextWriter)writer);
+						tmpHtmlFile = GetTempFile("html");
+					StreamWriter writer = File.CreateText(tmpHtmlFile);
+					xslt.Transform((System.Xml.XPath.IXPathNavigable)document, null, (TextWriter)writer);
 					writer.Close();
-					this.htmlText.Navigate(this.tmpHtmlFile);
+					htmlText.Navigate(tmpHtmlFile);
 				}
 				catch (FileNotFoundException)
 				{
-					this.xslt = null;
-					this.htmlText.DocumentText = string.Format(htmlFmt, "EventProperties_XSLT_not_found", "", "red");
+					xslt = null;
+					htmlText.DocumentText = string.Format(htmlFmt, "EventProperties_XSLT_not_found", "", "red");
 				}
 				catch (XsltException)
 				{
-					this.xslt = null;
-					this.htmlText.DocumentText = string.Format(htmlFmt, "EventProperties_XSLT_error", "", "red");
+					xslt = null;
+					htmlText.DocumentText = string.Format(htmlFmt, "EventProperties_XSLT_error", "", "red");
 				}
 				catch (XmlException)
 				{
-					this.xslt = null;
+					xslt = null;
 					UnicodeEncoding encoding = new UnicodeEncoding();
 					byte[] bytes = encoding.GetBytes(string.Format(htmlFmt, "InvalidEventXml", taskEvent.EventRecord.ToXml(), "black"));
-					this.htmlText.DocumentText = encoding.GetString(bytes);
+					htmlText.DocumentText = encoding.GetString(bytes);
 				}
 			}
 			else
 			{
-				this.htmlText.DocumentText = string.Empty;
+				htmlText.DocumentText = string.Empty;
 			}
 		}
 
@@ -162,15 +162,15 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!string.IsNullOrEmpty(taskEvent.EventRecord.ToXml()))
 			{
 				if (tmpXmlFile == null)
-					this.tmpXmlFile = GetTempFile("xml");
+					tmpXmlFile = GetTempFile("xml");
 				XmlDocument document = new XmlDocument();
 				document.LoadXml(taskEvent.EventRecord.ToXml());
-				document.Save(this.tmpXmlFile);
-				this.htmlText.Navigate(this.tmpXmlFile);
+				document.Save(tmpXmlFile);
+				htmlText.Navigate(tmpXmlFile);
 			}
 			else
 			{
-				this.htmlText.DocumentText = string.Empty;
+				htmlText.DocumentText = string.Empty;
 			}
 		}
 
@@ -192,12 +192,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.htmlText.Document.ExecCommand("Copy", false, null);
+			htmlText.Document.ExecCommand("Copy", false, null);
 		}
 
 		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			this.htmlText.Document.ExecCommand("SelectAll", false, null);
+			htmlText.Document.ExecCommand("SelectAll", false, null);
 		}
 	}
 }

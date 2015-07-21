@@ -19,7 +19,7 @@ namespace System.Windows.Forms
 		public static int SetImageIndexAsOverlay(this ImageList imageList, int imageIndex)
 		{
 			if (imageIndex < 0 || imageIndex >= imageList.Images.Count)
-				throw new ArgumentOutOfRangeException("imageIndex");
+				throw new ArgumentOutOfRangeException(nameof(imageIndex));
 			List<int> vals;
 			if (!imageListOverlays.TryGetValue(imageList, out vals))
 			{

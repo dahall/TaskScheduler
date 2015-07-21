@@ -8,7 +8,7 @@ namespace TestTaskService
 	{
 		public GradientPanel()
 		{
-			this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ContainerControl | ControlStyles.ResizeRedraw, true);
+			SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ContainerControl | ControlStyles.ResizeRedraw, true);
 		}
 
 		// Methods

@@ -76,10 +76,10 @@ namespace TestTaskService
 			{
 				Task t = ts.FindTask(arg[0]);
 				if (t == null)
-					output.WriteLine(string.Format("Task '{0}' not found.", arg[0]));
+					output.WriteLine($"Task '{arg[0]}' not found.");
 				else
 				{
-					output.WriteLine(string.Format("Task '{0}' found. Created on {1:g} and last run on {2:g}.", t.Name, t.Definition.RegistrationInfo.Date, t.LastRunTime));
+					output.WriteLine($"Task '{t.Name}' found. Created on {t.Definition.RegistrationInfo.Date:g} and last run on {t.LastRunTime:g}.");
 					if (t.Definition.Triggers.ContainsType(typeof(CustomTrigger)))
 					{
 						foreach (var tr in t.Definition.Triggers)
@@ -266,9 +266,9 @@ namespace TestTaskService
 					System.IO.File.Delete(fn);
 			}
 
-			public override string ToString() { return fn; }
+			public override string ToString() => fn;
 
-			public static implicit operator string(TemporaryScopedFile tsf) { return tsf.ToString(); }
+			public static implicit operator string (TemporaryScopedFile tsf) => tsf.ToString();
 		}
 
 		internal static void EditorTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
@@ -430,41 +430,25 @@ namespace TestTaskService
 				//FolderTaskAction(ts.RootFolder, null, delegate(Task tsk) { if (tsk.Definition.Triggers.ContainsType(typeof(CustomTrigger))) output.WriteLine(tsk.Path); });
 
 				// Create a new task definition and assign properties
-				const string taskName = "TesterTask";
+				string[] names = arg[0].Split('\\');
+				string taskName = names.Length == 1 ? names[0] : names[1]; // "TesterTask";
+				string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
 
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "some description";
-				td.Principal.LogonType = TaskLogonType.InteractiveToken;
 
-				//var computerSystemClass = new ManagementClass("Win32_ComputerSystem");
-				//var computerSystems = computerSystemClass.GetInstances();
-				//var enumerator = computerSystems.GetEnumerator();
-				//while (enumerator.MoveNext())
-				//{
-				//	var computerSystem = enumerator.Current;
-				td.Principal.UserId = "dahall"; // (string)computerSystem["UserName"];
-				//}
+				td.Actions.Add("cmd.exe", "-someparameter");
 
-				td.Actions.Add(new ExecAction("cmd.exe", "-someparameter"));
-
-				// Create Trigger
-				var trigger = new RegistrationTrigger { Enabled = true };
-				trigger.Delay = TimeSpan.FromSeconds(8);
-				trigger.EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20);
-				td.Triggers.Add(trigger);
-
-				td.Principal.RunLevel = TaskRunLevel.LUA;
+				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
 
 				td.Settings.StartWhenAvailable = true;
-				td.Settings.Hidden = false;
 				td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
 				td.Settings.DisallowStartIfOnBatteries = false;
 				td.Settings.StopIfGoingOnBatteries = false;
 				td.Settings.IdleSettings.StopOnIdleEnd = false;
-				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(40);
+				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
-				ts.RootFolder.DeleteFolder("TesterFolder", false);
-				TaskFolder testFolder = ts.RootFolder.CreateFolder("TesterFolder", null, false);
+				TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
 				var t = testFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
 
 				//TaskDefinition td = ts.NewTask();
@@ -503,9 +487,10 @@ namespace TestTaskService
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
 				t.Enabled = false;
 				*/
-				System.Threading.Thread.Sleep(1000);
+				System.Threading.Thread.Sleep(15000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
-				output.WriteLine("NextRunTime: {0:g}", t.NextRunTime);
+				output.WriteLine("NextRunTime: {0}", t.NextRunTime == DateTime.MinValue ? "None" : t.NextRunTime.ToString("g"));
+				System.Threading.Thread.Sleep(10000);
 				//DisplayTask(t, true);
 				/*using (var dlg = new TaskOptionsEditor { Editable = true })
 				{
@@ -524,8 +509,9 @@ namespace TestTaskService
 
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
-				//testFolder.DeleteTask(taskName);
-				//ts.RootFolder.DeleteFolder("TesterFolder", false);
+				testFolder.DeleteTask(taskName);
+				//ts.RootFolder.DeleteFolder(taskFolder, false);
+				output.WriteLine("Task removed.");
 			}
 			catch (Exception ex)
 			{
@@ -772,7 +758,7 @@ namespace TestTaskService
 				// Validate and Register task
 				WriteXml(td, "PreRegTest");
 				td.Validate(true);
-				Task t = tf.RegisterTaskDefinition("Test", td);
+				Task t = tf.RegisterTaskDefinition("Test1", td);
 				WriteXml(t);
 
 				// Try copying it
@@ -791,7 +777,7 @@ namespace TestTaskService
 			}
 
 			// Display results
-			Task runningTask = tf.Tasks["Test"];
+			Task runningTask = tf.Tasks["Test1"];
 			output.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
 			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
 			if (times.Length > 0)
@@ -817,7 +803,7 @@ namespace TestTaskService
 			}
 
 			DisplayTask(runningTask, true);
-			tf.DeleteTask("Test");
+			tf.DeleteTask("Test1");
 		}
 
 		internal static void MMCTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
@@ -848,10 +834,7 @@ namespace TestTaskService
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
-		static string GetTempXmlFile(string taskName)
-		{
-			return System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
-		}
+		static string GetTempXmlFile(string taskName) => System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
 
 		static string WriteXml(Task t)
 		{
@@ -927,10 +910,10 @@ namespace TestTaskService
 				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new int[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
 				td.Triggers.Add(new WeeklyTrigger(DaysOfTheWeek.Saturday, 2));
 				td.Actions.Add(new ExecAction("notepad.exe"));
-				this.Task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				Task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 			}
 
-			public static implicit operator Task(TempTask tt) { return tt.Task; }
+			public static implicit operator Task(TempTask tt) => tt.Task;
 
 			public void Dispose()
 			{

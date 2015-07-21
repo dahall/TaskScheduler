@@ -9,15 +9,12 @@ namespace System
 		private static void CheckIsEnum<T>(bool checkHasFlags = false)
 		{
 			if (!typeof(T).IsEnum)
-				throw new ArgumentException(string.Format("Type '{0}' is not an enum", typeof(T).FullName));
+				throw new ArgumentException($"Type '{typeof(T).FullName}' is not an enum");
 			if (checkHasFlags && !IsFlags<T>())
-				throw new ArgumentException(string.Format("Type '{0}' doesn't have the 'Flags' attribute", typeof(T).FullName));
+				throw new ArgumentException($"Type '{typeof(T).FullName}' doesn't have the 'Flags' attribute");
 		}
 
-		private static bool IsFlags<T>()
-		{
-			return Attribute.IsDefined(typeof(T), typeof(FlagsAttribute));
-		}
+		private static bool IsFlags<T>() => Attribute.IsDefined(typeof(T), typeof(FlagsAttribute));
 
 		public static void CheckHasValue<T>(T value, string argName = null)
 		{
@@ -61,10 +58,7 @@ namespace System
 			return ret;
 		}
 
-		public static T ClearFlags<T>(this T flags, T flag) where T : struct, IConvertible
-		{
-			return flags.SetFlags(flag, false);
-		}
+		public static T ClearFlags<T>(this T flags, T flag) where T : struct, IConvertible => flags.SetFlags(flag, false);
 
 		public static IEnumerable<T> GetFlags<T>(this T value) where T : struct, IConvertible
 		{

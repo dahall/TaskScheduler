@@ -53,10 +53,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return GetPropertyValue(attr, property, ref outVal);
 		}
 
-		private static bool IsStandardType(Type type)
-		{
-			return type.IsPrimitive || type == typeof(DateTime) || type == typeof(DateTimeOffset) || type == typeof(Decimal) || type == typeof(Guid) || type == typeof(TimeSpan) || type == typeof(string) || type.IsEnum;
-		}
+		private static bool IsStandardType(Type type) => type.IsPrimitive || type == typeof(DateTime) || type == typeof(DateTimeOffset) || type == typeof(Decimal) || type == typeof(Guid) || type == typeof(TimeSpan) || type == typeof(string) || type.IsEnum;
 
 		private static bool HasMembers(object obj)
 		{
@@ -287,7 +284,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static void ReadObject(XmlReader reader, object obj, PropertyConversionHandler handler = null)
 		{
 			if (obj == null)
-				throw new ArgumentNullException("obj");
+				throw new ArgumentNullException(nameof(obj));
 
 			reader.MoveToContent();
 

@@ -35,13 +35,13 @@ namespace Microsoft.Win32
 			{
 				string[] parts = resourceReference.Split(',');
 				if (parts.Length != 2)
-					throw new ArgumentException("Invalid string format.", "resourceReference");
+					throw new ArgumentException("Invalid string format.", nameof(resourceReference));
 				int id;
 				if (!int.TryParse(parts[1], out id))
-					throw new ArgumentException("Invalid resource identifier.", "resourceReference");
+					throw new ArgumentException("Invalid resource identifier.", nameof(resourceReference));
 				string fn;
 				try { fn = System.Environment.ExpandEnvironmentVariables(parts[0]); }
-				catch (Exception ex) { throw new ArgumentException("Invalid file name part.", "resourceReference", ex); }
+				catch (Exception ex) { throw new ArgumentException("Invalid file name part.", nameof(resourceReference), ex); }
 				using (var nr = new NativeResource(fn))
 					return nr.GetString(id);
 			}

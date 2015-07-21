@@ -34,7 +34,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 					principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
 			}
 			taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
-			this.flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
+			flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
 			string sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
 			if (string.IsNullOrEmpty(sddl) && parent.Task != null)
@@ -46,27 +46,27 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		{
 			bool v2 = parent.IsV2;
 			string acct = String.Empty, sid;
-			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out this.flagExecutorIsGroup, out this.flagExecutorIsServiceAccount, out sid))
+			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
 				return;
 
-			if (this.flagExecutorIsServiceAccount)
+			if (flagExecutorIsServiceAccount)
 			{
 				if (!v2 && acct != "SYSTEM")
 				{
 					MessageBox.Show(this, EditorProperties.Resources.Error_NoGroupsUnderV1, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					return;
 				}
-				this.flagExecutorIsGroup = false;
+				flagExecutorIsGroup = false;
 				if (v2)
 					td.Principal.GroupId = null;
 				td.Principal.UserId = acct;
 				td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				//this.flagExecutorIsCurrentUser = false;
 			}
-			else if (this.flagExecutorIsGroup)
+			else if (flagExecutorIsGroup)
 			{
 				if (!v2)
 				{
@@ -133,40 +133,40 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			switch (logonType)
 			{
 				case TaskLogonType.InteractiveToken:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 				case TaskLogonType.Group:
-					this.flagRunOnlyWhenUserIsLoggedOn = true;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = true;
+					flagRunOnlyWhenUserIsLoggedOn = true;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = true;
 					break;
 				case TaskLogonType.ServiceAccount:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = true;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = true;
+					flagExecutorIsGroup = false;
 					break;
 				default:
-					this.flagRunOnlyWhenUserIsLoggedOn = false;
-					this.flagExecutorIsServiceAccount = false;
-					this.flagExecutorIsGroup = false;
+					flagRunOnlyWhenUserIsLoggedOn = false;
+					flagExecutorIsServiceAccount = false;
+					flagExecutorIsGroup = false;
 					break;
 			}
 
-			if (this.flagExecutorIsServiceAccount)
+			if (flagExecutorIsServiceAccount)
 			{
 				taskLoggedOnRadio.Enabled = false;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagExecutorIsGroup)
+			else if (flagExecutorIsGroup)
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}
-			else if (this.flagRunOnlyWhenUserIsLoggedOn)
+			else if (flagRunOnlyWhenUserIsLoggedOn)
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = editable;

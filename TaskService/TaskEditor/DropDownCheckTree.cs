@@ -21,7 +21,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public DropDownCheckTree()
 		{
-			this.checkedTreeView = new System.Windows.Forms.TreeView()
+			checkedTreeView = new System.Windows.Forms.TreeView()
 			{
 				BorderStyle = System.Windows.Forms.BorderStyle.None,
 				CheckBoxes = true,
@@ -31,8 +31,8 @@ namespace Microsoft.Win32.TaskScheduler
 				Tag = this,
 				Visible = false
 			};
-			this.checkedTreeView.AfterCheck += checkedTreeView_ItemCheck;
-			base.DropDownControl = this.checkedTreeView;
+			checkedTreeView.AfterCheck += checkedTreeView_ItemCheck;
+			base.DropDownControl = checkedTreeView;
 			base.DropSize = new System.Drawing.Size(base.DropDownWidth, 400);
 		}
 
@@ -56,10 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The checked items.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public List<TreeNode> CheckedItems
-		{
-			get { return this.checkedItems; }
-		}
+		public List<TreeNode> CheckedItems => checkedItems;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether formatting is applied to the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property of the <see cref="T:System.Windows.Forms.ListControl"/>.
@@ -79,10 +76,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The items.</value>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content), Category("Data")]
-		public new TreeNodeCollection Items
-		{
-			get { return this.checkedTreeView.Nodes; }
-		}
+		public new TreeNodeCollection Items => checkedTreeView.Nodes;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the items in the combo box are sorted.
@@ -99,8 +93,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </PermissionSet>
 		public new bool Sorted
 		{
-			get { return this.checkedTreeView.Sorted; }
-			set { this.checkedTreeView.Sorted = value; }
+			get { return checkedTreeView.Sorted; }
+			set { checkedTreeView.Sorted = value; }
 		}
 
 		/// <summary>
@@ -110,7 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="keepExisting">if set to <c>true</c> keep existing checked items.</param>
 		public void CheckItems(Predicate<string> match, bool keepExisting = false)
 		{
-			ForEachChildNode(this.checkedTreeView.Nodes, n => { if (match == null || match(n.Name)) n.Checked = true; else if (!keepExisting) n.Checked = false; });
+			ForEachChildNode(checkedTreeView.Nodes, n => { if (match == null || match(n.Name)) n.Checked = true; else if (!keepExisting) n.Checked = false; });
 			UpdateText();
 		}
 
@@ -146,19 +140,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void UpdateText()
 		{
-			if (this.checkedItems.Count == 0)
+			if (checkedItems.Count == 0)
 			{
-				this.Text = string.Empty;
+				Text = string.Empty;
 			}
 			else
 			{
-				if (this.checkedItems.Count == this.checkedTreeView.GetNodeCount(true) && this.CheckAllText != null)
-					this.Text = this.CheckAllText;
+				if (checkedItems.Count == checkedTreeView.GetNodeCount(true) && CheckAllText != null)
+					Text = CheckAllText;
 				else
 				{
-					var selNodes = this.checkedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll<string>(t => (string)t.Name);
+					var selNodes = checkedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll<string>(t => (string)t.Name);
 					selNodes.Sort();
-					this.Text = string.Join(", ", selNodes.ToArray());
+					Text = string.Join(", ", selNodes.ToArray());
 				}
 			}
 		}
@@ -188,7 +182,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		protected virtual void OnSelectedItemsChanged()
 		{
-			EventHandler h = this.SelectedItemsChanged;
+			EventHandler h = SelectedItemsChanged;
 			if (h != null)
 				h(this, EventArgs.Empty);
 		}
@@ -213,9 +207,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			// Update checked items list
 			if (e.Node.Checked)
-				this.checkedItems.Add(e.Node);
+				checkedItems.Add(e.Node);
 			else
-				this.checkedItems.Remove(e.Node);
+				checkedItems.Remove(e.Node);
 
 			// Update parent and children checks appropriately
 			if (!updatingChecks)

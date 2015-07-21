@@ -33,8 +33,8 @@ namespace TestTaskService
 			DateTime now = DateTime.Now;
 
 			// Update summary
-			summaryLabel.Text = string.Format("Task Scheduler Summary (Last refreshed: {0:G})", now);
-			footerLabel.Text = string.Format("Last refreshed at {0:G}", now);
+			summaryLabel.Text = $"Task Scheduler Summary (Last refreshed: {now:G})";
+			footerLabel.Text = $"Last refreshed at {now:G}";
 
 			if (ts == null)
 				return;
@@ -66,10 +66,7 @@ namespace TestTaskService
 			statusBackgroundWorker.RunWorkerAsync(comboBox1.SelectedIndex);
 		}
 
-		public ToolStrip MenuItems
-		{
-			get { return null; }
-		}
+		public ToolStrip MenuItems => null;
 
 		protected override void WndProc(ref Message m)
 		{

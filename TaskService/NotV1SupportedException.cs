@@ -20,7 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 			StackTrace stackTrace = new StackTrace();
 			StackFrame stackFrame = stackTrace.GetFrame(2);
 			MethodBase methodBase = stackFrame.GetMethod();
-			myMessage = string.Format("{0}.{1} is not supported on {2}", methodBase.DeclaringType.Name, methodBase.Name, this.LibName);
+			myMessage = $"{methodBase.DeclaringType.Name}.{methodBase.Name} is not supported on {LibName}";
 		}
 
 		internal TSNotSupportedException(string message, TaskCompatibility minComp)
@@ -32,15 +32,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a message that describes the current exception.
 		/// </summary>
-		public override string Message
-		{
-			get { return myMessage; }
-		}
+		public override string Message => myMessage;
 
 		/// <summary>
 		/// Gets the minimum supported TaskScheduler version required for this method or property.
 		/// </summary>
-		public TaskCompatibility MinimumSupportedVersion { get { return min;  } }
+		public TaskCompatibility MinimumSupportedVersion => min;
 
 		internal abstract string LibName { get; }
 	}
@@ -53,7 +50,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal NotV1SupportedException() : base(TaskCompatibility.V2) { }
 		internal NotV1SupportedException(string message) : base(message, TaskCompatibility.V2) { }
-		internal override string LibName { get { return "Task Scheduler 1.0"; } }
+		internal override string LibName => "Task Scheduler 1.0";
 	}
 
 	/// <summary>
@@ -64,7 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal NotV2SupportedException() : base(TaskCompatibility.V1) { }
 		internal NotV2SupportedException(string message) : base(message, TaskCompatibility.V1) { }
-		internal override string LibName { get { return "Task Scheduler 2.0 (1.2)"; } }
+		internal override string LibName => "Task Scheduler 2.0 (1.2)";
 	}
 
 
@@ -75,7 +72,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public class NotSupportedPriorToException : TSNotSupportedException
 	{
 		internal NotSupportedPriorToException(TaskCompatibility supportedVersion) : base(supportedVersion) { }
-		internal override string LibName { get { return string.Format("Task Scheduler versions prior to 2.{0} (1.{1})", ((int)min) - 2, (int)min); } }
+		internal override string LibName => $"Task Scheduler versions prior to 2.{((int)min) - 2} (1.{(int)min})";
 	}
 
 }

@@ -82,14 +82,8 @@ namespace Microsoft.Win32.TaskScheduler
 			taskRunTimesControl1.Initialize(task, startDate, endDate);
 		}
 
-		private bool ShouldSerializeEndDate()
-		{
-			return taskRunTimesControl1.ShouldSerializeEndDate();
-		}
+		private bool ShouldSerializeEndDate() => taskRunTimesControl1.ShouldSerializeEndDate();
 
-		private bool ShouldSerializeStartDate()
-		{
-			return taskRunTimesControl1.ShouldSerializeStartDate();
-		}
+		private bool ShouldSerializeStartDate() => taskRunTimesControl1.ShouldSerializeStartDate();
 	}
 }

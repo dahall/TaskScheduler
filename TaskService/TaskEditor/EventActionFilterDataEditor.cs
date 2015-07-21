@@ -16,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 			dt = ds.Tables.Add("Main");
 			dt.Columns.Add("Name", typeof(string));
 			dt.Columns.Add("Value", typeof(string));
-			this.dataGridView1.DataSource = dt;
+			dataGridView1.DataSource = dt;
 		}
 
 		public IDictionary<string, string> DataItems
@@ -33,7 +33,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				this.dt.Clear();
+				dt.Clear();
 				foreach (string key in value.Keys)
 					dt.Rows.Add(key, value[key]);
 			}

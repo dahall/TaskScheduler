@@ -54,10 +54,7 @@ namespace Microsoft.Win32
 		[DllImport(USER32, CharSet = CharSet.Unicode, SetLastError = false)]
 		public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
-		public static IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam = 0)
-		{
-			return SendMessage(hWnd, Msg, wParam, 0);
-		}
+		public static IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam = 0) => SendMessage(hWnd, Msg, wParam, 0);
 
 		[DllImport(USER32, CharSet = CharSet.Unicode, SetLastError = false)]
 		public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, ref RECT rect);

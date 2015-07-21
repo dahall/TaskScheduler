@@ -43,9 +43,9 @@ namespace TestTaskService
 			get { return TaskListView.Tasks; } 
 			set
 			{
-				this.TaskListView.Tasks = value;
+				TaskListView.Tasks = value;
 				if (value.Count > 0)
-					this.TaskListView.SelectedIndex = 0;
+					TaskListView.SelectedIndex = 0;
 				else
 					taskListView_TaskSelected(null, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs.Empty);
 			}
@@ -140,9 +140,6 @@ namespace TestTaskService
 
 		public TaskService TaskService { get; set; }
 
-		public ToolStrip MenuItems
-		{
-			get { return itemMenuStrip; }
-		}
+		public ToolStrip MenuItems => itemMenuStrip;
 	}
 }

@@ -128,7 +128,7 @@ namespace System.Windows.Forms
 		public static void SetColumnDropDown(this ListView listView, int columnIndex, bool enable)
 		{
 			if (((columnIndex < 0) || ((columnIndex >= 0) && (listView.Columns == null))) || (columnIndex >= listView.Columns.Count))
-				throw new ArgumentOutOfRangeException("columnIndex");
+				throw new ArgumentOutOfRangeException(nameof(columnIndex));
 
 			if (listView.IsHandleCreated)
 			{
@@ -146,9 +146,9 @@ namespace System.Windows.Forms
 		public static void SetOverlayImage(this ListViewItem lvi, int imageIndex)
 		{
 			if (imageIndex < 1 || imageIndex > 15)
-				throw new ArgumentOutOfRangeException("imageIndex");
+				throw new ArgumentOutOfRangeException(nameof(imageIndex));
 			if (lvi.ListView == null)
-				throw new ArgumentNullException("lvi", "ListViewItem must be attached to a valid ListView.");
+				throw new ArgumentNullException(nameof(lvi), "ListViewItem must be attached to a valid ListView.");
 			NativeMethods.LVITEM nItem = new NativeMethods.LVITEM(lvi.Index);
 			nItem.OverlayImageIndex = (uint)imageIndex;
 			if (NativeMethods.SendMessage(lvi.ListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nItem).ToInt32() == 0)
@@ -252,10 +252,7 @@ namespace System.Windows.Forms
 			return (NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.GetGroupState, (IntPtr)groupId, new IntPtr((int)state)).ToInt32() & (int)state) != 0;
 		}
 
-		private static bool IsWinVista()
-		{
-			return System.Environment.OSVersion.Version.Major >= 6;
-		}
+		private static bool IsWinVista() => System.Environment.OSVersion.Version.Major >= 6;
 
 		private static void SetState(ListViewGroup group, NativeMethods.ListViewGroupState state, bool value)
 		{

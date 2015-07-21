@@ -51,17 +51,11 @@ namespace Microsoft.Win32
 				return new DateTime(st.Year, st.Month, st.Day, st.Hour, st.Minute, st.Second, st.Milliseconds, DateTimeKind.Local);
 			}
 
-			public static implicit operator SYSTEMTIME(DateTime dt) { return new SYSTEMTIME(dt); }
+			public static implicit operator SYSTEMTIME(DateTime dt) => new SYSTEMTIME(dt);
 
-			public static bool operator ==(SYSTEMTIME s1, SYSTEMTIME s2)
-			{
-				return (s1.Year == s2.Year && s1.Month == s2.Month && s1.Day == s2.Day && s1.Hour == s2.Hour && s1.Minute == s2.Minute && s1.Second == s2.Second && s1.Milliseconds == s2.Milliseconds);
-			}
+			public static bool operator ==(SYSTEMTIME s1, SYSTEMTIME s2) => (s1.Year == s2.Year && s1.Month == s2.Month && s1.Day == s2.Day && s1.Hour == s2.Hour && s1.Minute == s2.Minute && s1.Second == s2.Second && s1.Milliseconds == s2.Milliseconds);
 
-			public static bool operator !=(SYSTEMTIME s1, SYSTEMTIME s2)
-			{
-				return !(s1 == s2);
-			}
+			public static bool operator !=(SYSTEMTIME s1, SYSTEMTIME s2) => !(s1 == s2);
 
 			public static readonly SYSTEMTIME MinValue, MaxValue;
 
@@ -78,15 +72,9 @@ namespace Microsoft.Win32
 				return base.Equals(obj);
 			}
 
-			public override int GetHashCode()
-			{
-				return base.GetHashCode();
-			}
+			public override int GetHashCode() => base.GetHashCode();
 
-			public override string ToString()
-			{
-				return ((DateTime)this).ToString();
-			}
+			public override string ToString() => ((DateTime)this).ToString();
 		}
 	}
 }

@@ -34,20 +34,14 @@ namespace Microsoft.Win32.TaskScheduler
 			dlg = Activator.CreateInstance(dlgType);
 		}
 
-		public string SecurityDescriptorSddlForm
-		{
-			get { return sddlPI.GetValue(dlg, null).ToString(); }
-		}
+		public string SecurityDescriptorSddlForm => sddlPI.GetValue(dlg, null).ToString();
 
 		public void Initialize(object taskObj)
 		{
 			initMI.Invoke(dlg, new object[] { taskObj });
 		}
 
-		public System.Windows.Forms.DialogResult ShowDialog(System.Windows.Forms.IWin32Window owner)
-		{
-			return (System.Windows.Forms.DialogResult)showDlgMI.Invoke(dlg, new object[] { owner });
-		}
+		public System.Windows.Forms.DialogResult ShowDialog(System.Windows.Forms.IWin32Window owner) => (System.Windows.Forms.DialogResult)showDlgMI.Invoke(dlg, new object[] { owner });
 
 		public static SecEdShim GetNew()
 		{
@@ -56,6 +50,6 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		public static bool IsValid { get { return dlgType != null; } }
+		public static bool IsValid => dlgType != null;
 	}
 }

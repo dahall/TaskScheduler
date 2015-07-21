@@ -45,7 +45,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			set { isV2 = value; }
 		}
 
-		public virtual bool IsTriggerValid() { return onEventCustomText.TextLength > 0; }
+		public virtual bool IsTriggerValid() => onEventCustomText.TextLength > 0;
 
 		/// <summary>
 		/// Raises the <see cref="E:System.Windows.Forms.Control.Enter" /> event.
@@ -61,7 +61,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (TriggerChanged != null)
 			{
-				var ev = this.TriggerChanged;
+				var ev = TriggerChanged;
 				ev(this, e);
 			}
 		}
@@ -145,7 +145,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (onEventLogCombo.Text.Length > 0)
 			{
 				if (trigger != null)
-					trigger.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, this.EventId);
+					trigger.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, EventId);
 				UpdateCustomText();
 				OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 			}
@@ -173,7 +173,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				onEventLogCombo.Text = log;
 				onEventSourceCombo.Text = source;
-				this.EventId = id;
+				EventId = id;
 			}
 
 			return basic;
@@ -182,7 +182,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void UpdateCustomText()
 		{
 			string xml = trigger == null ? EventTrigger.BuildQuery(onEventLogCombo.Text, 
-				onEventSourceCombo.Text.Length == 0 ? null : onEventSourceCombo.Text, this.EventId) : trigger.Subscription;
+				onEventSourceCombo.Text.Length == 0 ? null : onEventSourceCombo.Text, EventId) : trigger.Subscription;
 			onEventCustomText.Text = GetFormattedXmlString(xml);
 		}
 

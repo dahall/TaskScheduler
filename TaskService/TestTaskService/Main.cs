@@ -8,14 +8,14 @@ namespace TestTaskService
 		public Main()
 		{
 			InitializeComponent();
-			this.Icon = Properties.Resources.TaskScheduler;
+			Icon = Properties.Resources.TaskScheduler;
 			radioButtonList1.SelectedIndex = 0;
 		}
 
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
-			this.Text = string.Format("{0} - {1}", this.Text, Environment.OSVersion.Version);
+			Text = $"{Text} - {Environment.OSVersion.Version}";
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace TestTaskService
 			switch (radioButtonList1.SelectedIndex)
 			{
 				case 0: // Short
-					Program.ShortTest(ts, output);
+					Program.ShortTest(ts, output, textBox2.Text);
 					break;
 				case 1: // Long
 					Program.LongTest(ts, output, textBox2.Text);

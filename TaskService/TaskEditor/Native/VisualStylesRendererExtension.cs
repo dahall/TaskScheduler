@@ -20,10 +20,7 @@ namespace System.Windows.Forms.VisualStyles
 			TransitionDuration = 6000
 		}
 
-		public static int[] GetIntegerList(this VisualStyleRenderer rnd, IntegerListProperty prop)
-		{
-			return NativeMethods.GetThemeIntList(rnd.Handle, rnd.Part, rnd.State, (int)prop);
-		}
+		public static int[] GetIntegerList(this VisualStyleRenderer rnd, IntegerListProperty prop) => NativeMethods.GetThemeIntList(rnd.Handle, rnd.Part, rnd.State, (int)prop);
 
 		public static System.Windows.Forms.Padding GetMargins2(this VisualStyleRenderer rnd, IDeviceContext dc, MarginProperty prop)
 		{

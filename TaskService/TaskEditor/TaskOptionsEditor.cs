@@ -53,9 +53,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
 		public TaskOptionsEditor(Task task, bool editable = true, bool registerOnAccept = true) : this()
 		{
-			this.Editable = editable;
-			this.Initialize(task);
-			this.RegisterTaskOnAccept = registerOnAccept;
+			Editable = editable;
+			Initialize(task);
+			RegisterTaskOnAccept = registerOnAccept;
 		}
 
 		/// <summary>
@@ -67,9 +67,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
 		public TaskOptionsEditor(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true) : this()
 		{
-			this.Editable = editable;
-			this.Initialize(service, td);
-			this.RegisterTaskOnAccept = registerOnAccept;
+			Editable = editable;
+			Initialize(service, td);
+			RegisterTaskOnAccept = registerOnAccept;
 		}
 
 		/// <summary>
@@ -133,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					TaskService = task.TaskService;
 					if (task.ReadOnly)
-						this.Editable = false;
+						Editable = false;
 					TaskDefinition = task.Definition;
 				}
 			}
@@ -158,7 +158,7 @@ namespace Microsoft.Win32.TaskScheduler
 				onAssignment = true;
 				td = value;
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
-				taskNameText.Text = this.Task != null ? this.Task.Name : string.Empty;
+				taskNameText.Text = Task != null ? Task.Name : string.Empty;
 				SetVersionComboItems();
 				ReinitializeControls();
 				onAssignment = false;
@@ -205,17 +205,17 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(TaskService service, TaskDefinition td = null)
 		{
 			if (service == null)
-				throw new ArgumentNullException("service");
+				throw new ArgumentNullException(nameof(service));
 			if (!titleSet)
-				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", TaskEditDialog.GetServerString(service));
-			this.TaskService = service;
-			this.task = null;
+				Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", TaskEditDialog.GetServerString(service));
+			TaskService = service;
+			task = null;
 			if (!this.IsDesignMode())
 			{
 				if (td == null)
-					this.TaskDefinition = service.NewTask();
+					TaskDefinition = service.NewTask();
 				else
-					this.TaskDefinition = td;
+					TaskDefinition = td;
 			}
 		}
 
@@ -226,10 +226,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(Task task)
 		{
 			if (task == null)
-				throw new ArgumentNullException("task");
+				throw new ArgumentNullException(nameof(task));
 			if (!titleSet)
-				this.Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, TaskEditDialog.GetServerString(task.TaskService));
-			this.Task = task;
+				Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, task.Name, TaskEditDialog.GetServerString(task.TaskService));
+			Task = task;
 		}
 
 		/// <summary>
@@ -237,11 +237,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void ReinitializeControls()
 		{
-			taskNameText.ReadOnly = !(this.Task == null && this.Editable);
-			taskVersionCombo.Enabled = this.Editable;
+			taskNameText.ReadOnly = !(Task == null && Editable);
+			taskVersionCombo.Enabled = Editable;
 			if (curPanel == null && td != null)
 				//this.menuList.Items[0].PerformClick();
-				this.menuList.SelectedIndex = 0;
+				menuList.SelectedIndex = 0;
 			if (curPanel != null)
 				curPanel.Initialize(this);
 		}
@@ -268,19 +268,19 @@ namespace Microsoft.Win32.TaskScheduler
 				OptionPanels.OptionPanel panel = null;
 				if (panels.TryGetValue((ToolStripMenuItem)sender, out panel))
 				{
-					this.bodyPanel.SuspendLayout();
+					bodyPanel.SuspendLayout();
 					panel.Dock = DockStyle.Fill;
-					this.panelTitleLabel.Text = panel.Title;
-					this.panelImage.Image = panel.Image;
-					this.panelImage.Visible = panel.Image != null;
+					panelTitleLabel.Text = panel.Title;
+					panelImage.Image = panel.Image;
+					panelImage.Visible = panel.Image != null;
 					if (curPanel != null)
-						this.bodyPanel.Controls.Remove(curPanel);
-					this.bodyPanel.Controls.Add(panel);
-					this.bodyPanel.Controls.SetChildIndex(panel, 0);
+						bodyPanel.Controls.Remove(curPanel);
+					bodyPanel.Controls.Add(panel);
+					bodyPanel.Controls.SetChildIndex(panel, 0);
 					curPanel = panel;
 					if (td != null)
 						panel.Initialize(this);
-					this.bodyPanel.ResumeLayout();
+					bodyPanel.ResumeLayout();
 				}
 			}
 		}
@@ -290,7 +290,7 @@ namespace Microsoft.Win32.TaskScheduler
 			Color sel = SystemColors.ControlLight;
 			Color hot = LightenColor(SystemColors.ControlLight, 50);
 
-			Color fc = this.ForeColor;
+			Color fc = ForeColor;
 			Color bc = SystemColors.Window;
 			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
 				bc = sel;
@@ -300,7 +300,7 @@ namespace Microsoft.Win32.TaskScheduler
 				fc = SystemColors.GrayText;
 			using (Brush bgb = new SolidBrush(bc))
 				e.Graphics.FillRectangle(bgb, e.Bounds);
-			TextRenderer.DrawText(e.Graphics, menuList.Items[e.Index].ToString(), this.Font, AdjustRect(e.Bounds, 4, 0, -4, 0), fc, bc, TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter);
+			TextRenderer.DrawText(e.Graphics, menuList.Items[e.Index].ToString(), Font, AdjustRect(e.Bounds, 4, 0, -4, 0), fc, bc, TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter);
 			if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
 				using (Pen bgb = new Pen(sel))
 					e.Graphics.DrawRectangle(bgb, AdjustRect(e.Bounds, 0, 0, -1, -1));
@@ -309,16 +309,13 @@ namespace Microsoft.Win32.TaskScheduler
 		private static Color LightenColor(Color colorIn, int percent)
 		{
 			if (percent < 0 || percent > 100)
-				throw new ArgumentOutOfRangeException("percent");
+				throw new ArgumentOutOfRangeException(nameof(percent));
 
 			return Color.FromArgb(colorIn.A, colorIn.R + (int)(((255f - colorIn.R) / 100f) * percent), 
 				colorIn.G + (int)(((255f - colorIn.G) / 100f) * percent), colorIn.B + (int)(((255f - colorIn.B) / 100f) * percent));
 		}
 
-		private static Rectangle AdjustRect(Rectangle rect, int x, int y = 0, int w = 0, int h = 0)
-		{
-			return new Rectangle(rect.X + x, rect.Y + y, rect.Width + w, rect.Height + h);
-		}
+		private static Rectangle AdjustRect(Rectangle rect, int x, int y = 0, int w = 0, int h = 0) => new Rectangle(rect.X + x, rect.Y + y, rect.Width + w, rect.Height + h);
 
 		private void menuList_MeasureItem(object sender, MeasureItemEventArgs e)
 		{
@@ -351,19 +348,19 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
-			if (this.TaskDefinition.Actions.Count == 0)
+			if (TaskDefinition.Actions.Count == 0)
 			{
 				MessageBox.Show(EditorProperties.Resources.TaskMustHaveActionsError, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			if (this.TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !TaskEditDialog.ValidateOneTriggerExpires(this.TaskDefinition.Triggers))
+			if (TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !TaskEditDialog.ValidateOneTriggerExpires(TaskDefinition.Triggers))
 			{
 				MessageBox.Show(EditorProperties.Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			if (this.TaskDefinition.LowestSupportedVersion > this.TaskDefinition.Settings.Compatibility)
+			if (TaskDefinition.LowestSupportedVersion > TaskDefinition.Settings.Compatibility)
 			{
 				MessageBox.Show(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -371,14 +368,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				if (this.Task != null && this.Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && this.Task.Definition.Principal.LogonType != TaskLogonType.Password)
-					this.Task.RegisterChanges();
+				if (Task != null && Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && Task.Definition.Principal.LogonType != TaskLogonType.Password)
+					Task.RegisterChanges();
 				else
 				{
-					string user = this.TaskDefinition.Principal.ToString();
+					string user = TaskDefinition.Principal.ToString();
 					string pwd = null;
-					TaskFolder fld = this.TaskService.GetFolder(this.TaskFolder);
-					if (this.TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || this.TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+					TaskFolder fld = TaskService.GetFolder(TaskFolder);
+					if (TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 					{
 						pwd = TaskEditDialog.InvokeCredentialDialog(user, this);
 						if (pwd == null)
@@ -388,11 +385,11 @@ namespace Microsoft.Win32.TaskScheduler
 							return;
 						}
 					}
-					this.Task = fld.RegisterTaskDefinition(this.TaskName, this.TaskDefinition, TaskCreation.CreateOrUpdate,
-						user, pwd, this.TaskDefinition.Principal.LogonType);
+					Task = fld.RegisterTaskDefinition(TaskName, TaskDefinition, TaskCreation.CreateOrUpdate,
+						user, pwd, TaskDefinition.Principal.LogonType);
 				}
 			}
-			this.DialogResult = DialogResult.OK;
+			DialogResult = DialogResult.OK;
 			Close();
 		}
 
@@ -412,8 +409,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			const int expectedVersions = 5;
 
-			this.taskVersionCombo.BeginUpdate();
-			this.taskVersionCombo.Items.Clear();
+			taskVersionCombo.BeginUpdate();
+			taskVersionCombo.Items.Clear();
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
@@ -422,23 +419,23 @@ namespace Microsoft.Win32.TaskScheduler
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
 					versions[expectedVersions - 1] = key.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
-			int max = (this.TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
+			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
 			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
 			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
 			switch (comp)
 			{
 				case TaskCompatibility.AT:
 					for (int i = max; i > 1; i--)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
-					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
+						taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.Add(new ComboItem(versions[0], 0));
 					break;
 				default:
 					for (int i = max; i > 0; i--)
-						this.taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
-					this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)comp);
+						taskVersionCombo.Items.Add(new ComboItem(versions[i], i, comp >= lowestComp));
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)comp);
 					break;
 			}
-			this.taskVersionCombo.EndUpdate();
+			taskVersionCombo.EndUpdate();
 		}
 
 		private void taskNameText_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -471,23 +468,23 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (InvalidOperationException ex)
 			{
 				var msg = new System.Text.StringBuilder();
-				if (this.ShowErrors)
+				if (ShowErrors)
 				{
 					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
 					foreach (var item in ex.Data.Keys)
-						msg.AppendLine(string.Format("- {0} {1}", item, ex.Data[item]));
+						msg.AppendLine($"- {item} {ex.Data[item]}");
 				}
 				else
 					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
 				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				this.taskVersionCombo.SelectedIndex = this.taskVersionCombo.Items.IndexOf((int)priorSetting);
+				taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
 				return;
 			}
 		}
 
 		private void UpdateTitleFont()
 		{
-			this.panelTitleLabel.Font = new System.Drawing.Font(this.Font.FontFamily, this.Font.Size + 1, System.Drawing.FontStyle.Bold, this.Font.Unit);
+			panelTitleLabel.Font = new System.Drawing.Font(Font.FontFamily, Font.Size + 1, System.Drawing.FontStyle.Bold, Font.Unit);
 		}
 
 		private bool ValidateText(Control ctrl, Predicate<string> pred, string error)
@@ -521,12 +518,9 @@ namespace Microsoft.Win32.TaskScheduler
 				return Text.CompareTo(obj.ToString()) == 0;
 			}
 
-			public override int GetHashCode()
-			{
-				return Version.GetHashCode();
-			}
+			public override int GetHashCode() => Version.GetHashCode();
 
-			public override string ToString() { return this.Text; }
+			public override string ToString() => Text;
 		}
 	}
 }

@@ -151,8 +151,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Custom Drop-Down"), Description("Indicates if drop-down is resizable."), DefaultValue(true)]
 		public bool AllowResizeDropDown
 		{
-			get { return this.m_bIsResizable; }
-			set { this.m_bIsResizable = value; }
+			get { return m_bIsResizable; }
+			set { m_bIsResizable = value; }
 		}
 
 		/// <summary>
@@ -233,12 +233,12 @@ namespace Microsoft.Win32.TaskScheduler
 		DefaultValue(SizeMode.UseComboSize)]
 		public SizeMode DropDownSizeMode
 		{
-			get { return this.m_sizeMode; }
+			get { return m_sizeMode; }
 			set
 			{
-				if (value != this.m_sizeMode)
+				if (value != m_sizeMode)
 				{
-					this.m_sizeMode = value;
+					m_sizeMode = value;
 					AutoSizeDropDown();
 				}
 			}
@@ -338,10 +338,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// 	<c>true</c> if this instance is dropped down; otherwise, <c>false</c>.
 		/// </value>
 		[Browsable(false)]
-		public bool IsDroppedDown
-		{
-			get { return this.m_bDroppedDown /*&& m_popupCtrl.Visible*/; }
-		}
+		public bool IsDroppedDown => m_bDroppedDown /*&& m_popupCtrl.Visible*/;
 
 		/// <summary>
 		/// Gets or sets the height of an item in the combo box.
@@ -378,10 +375,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Browsable(false),
 		ReadOnly(true)]
-		public new ObjectCollection Items
-		{
-			get { return base.Items; }
-		}
+		public new ObjectCollection Items => base.Items;
 
 		/// <summary>
 		/// Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox"/>.
@@ -633,7 +627,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (m_timerAutoFocus != null && m_timerAutoFocus.Enabled)
 					m_timerAutoFocus.Enabled = false;
 
-				this.Focus();
+				Focus();
 
 				// Raise drop-down closed event.
 				OnDropDownClosed(EventArgs.Empty);
@@ -671,8 +665,8 @@ namespace Microsoft.Win32.TaskScheduler
 				Point location = PointToScreen(new Point(0, Height));
 
 				// Actually show popup.
-				PopupResizeMode resizeMode = (this.m_bIsResizable ? PopupResizeMode.BottomRight : PopupResizeMode.None);
-				m_popupCtrl.Show(this.DropDownControl, location.X, location.Y, Width, Height, resizeMode);
+				PopupResizeMode resizeMode = (m_bIsResizable ? PopupResizeMode.BottomRight : PopupResizeMode.None);
+				m_popupCtrl.Show(DropDownControl, location.X, location.Y, Width, Height, resizeMode);
 				m_bDroppedDown = true;
 
 				m_popupCtrl.PopupControlHost = this;
@@ -690,10 +684,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal static uint HIWORD(int n)
-		{
-			return (uint)(n >> 16) & 0xffff;
-		}
+		internal static uint HIWORD(int n) => (uint)(n >> 16) & 0xffff;
 
 		/// <summary>
 		/// Assigns control to custom drop-down area of combo box.
@@ -710,8 +701,8 @@ namespace Microsoft.Win32.TaskScheduler
 				// Reference the user-specified drop down control.
 				m_dropDownCtrl = control;
 
-				this.Controls.Remove(m_dropDownCtrl);
-				this.Controls.Add(control);
+				Controls.Remove(m_dropDownCtrl);
+				Controls.Add(control);
 			}
 		}
 
@@ -762,9 +753,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDown(EventArgs args)
 		{
-			EventHandler eventHandler = this.DropDown;
+			EventHandler eventHandler = DropDown;
 			if (eventHandler != null)
-				this.DropDown(this, args);
+				DropDown(this, args);
 		}
 
 		/// <summary>
@@ -773,9 +764,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDownClosed(EventArgs args)
 		{
-			EventHandler eventHandler = this.DropDownClosed;
+			EventHandler eventHandler = DropDownClosed;
 			if (eventHandler != null)
-				this.DropDownClosed(this, args);
+				DropDownClosed(this, args);
 		}
 
 		/// <summary>
@@ -785,8 +776,8 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override void OnFontChanged(EventArgs e)
 		{
 			base.OnFontChanged(e);
-			if (this.DropDownControl != null)
-				this.DropDownControl.Font = this.Font;
+			if (DropDownControl != null)
+				DropDownControl.Font = Font;
 		}
 
 		/// <summary>
@@ -857,10 +848,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 			}
 
-			private static Bitmap GripBitmap
-			{
-				get { return m_sGripBitmap; }
-			}
+			private static Bitmap GripBitmap => m_sGripBitmap;
 
 			public static void RefreshSystemColors(Graphics g, Size size)
 			{
@@ -941,25 +929,22 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public bool AutoResetWhenClosed
 			{
-				get { return this.m_autoReset; }
-				set { this.m_autoReset = value; }
+				get { return m_autoReset; }
+				set { m_autoReset = value; }
 			}
 
-			public Control Control
-			{
-				get { return (this.m_host != null) ? this.m_host.Control : null; }
-			}
+			public Control Control => (m_host != null) ? m_host.Control : null;
 
 			public Padding Margin
 			{
-				get { return this.m_margin; }
-				set { this.m_margin = value; }
+				get { return m_margin; }
+				set { m_margin = value; }
 			}
 
 			public Padding Padding
 			{
-				get { return this.m_padding; }
-				set { this.m_padding = value; }
+				get { return m_padding; }
+				set { m_padding = value; }
 			}
 
 			/// <summary>
@@ -971,10 +956,7 @@ namespace Microsoft.Win32.TaskScheduler
 				set;
 			}
 
-			public bool Visible
-			{
-				get { return (this.m_dropDown != null && this.m_dropDown.Visible) ? true : false; }
-			}
+			public bool Visible => (m_dropDown != null && m_dropDown.Visible) ? true : false;
 
 			public void Hide()
 			{
@@ -1118,26 +1100,17 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			protected Rectangle GripBounds
 			{
-				get { return this.m_gripBounds; }
-				set { this.m_gripBounds = value; }
+				get { return m_gripBounds; }
+				set { m_gripBounds = value; }
 			}
 
 			/// <summary>
 			/// Indicates when a grip box is shown.
 			/// </summary>
-			protected bool IsGripShown
-			{
-				get
-				{
-					return (ResizeMode == PopupResizeMode.TopLeft || ResizeMode == PopupResizeMode.TopRight ||
+			protected bool IsGripShown => (ResizeMode == PopupResizeMode.TopLeft || ResizeMode == PopupResizeMode.TopRight ||
 							ResizeMode == PopupResizeMode.BottomLeft || ResizeMode == PopupResizeMode.BottomRight);
-				}
-			}
 
-			public bool CompareResizeMode(PopupResizeMode resizeMode)
-			{
-				return (ResizeMode & resizeMode) == resizeMode;
-			}
+			public bool CompareResizeMode(PopupResizeMode resizeMode) => (ResizeMode & resizeMode) == resizeMode;
 
 			public Control GetHostedControl()
 			{
@@ -1156,10 +1129,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <param name="m">The message.</param>
 			/// <returns>true, if the WndProc method from the base class shouldn't be invoked.</returns>
 			[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-			public bool ProcessGrip(ref Message m)
-			{
-				return ProcessGrip(ref m, true);
-			}
+			public bool ProcessGrip(ref Message m) => ProcessGrip(ref m, true);
 
 			public new void Show(int x, int y)
 			{
@@ -1214,25 +1184,13 @@ namespace Microsoft.Win32.TaskScheduler
 				hostedControl.SizeChanged += hostedControl_SizeChanged;
 			}
 
-			protected static int HIWORD(int n)
-			{
-				return (n >> 16) & 0xffff;
-			}
+			protected static int HIWORD(int n) => (n >> 16) & 0xffff;
 
-			protected static int HIWORD(IntPtr n)
-			{
-				return HIWORD(unchecked((int)(long)n));
-			}
+			protected static int HIWORD(IntPtr n) => HIWORD(unchecked((int)(long)n));
 
-			protected static int LOWORD(int n)
-			{
-				return n & 0xffff;
-			}
+			protected static int LOWORD(int n) => n & 0xffff;
 
-			protected static int LOWORD(IntPtr n)
-			{
-				return LOWORD(unchecked((int)(long)n));
-			}
+			protected static int LOWORD(IntPtr n) => LOWORD(unchecked((int)(long)n));
 
 			protected void hostedControl_SizeChanged(object sender, EventArgs e)
 			{

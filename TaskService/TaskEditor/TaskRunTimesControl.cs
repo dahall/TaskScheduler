@@ -60,7 +60,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				task = value;
-				this.Text = task == null ? null : string.Format(EditorProperties.Resources.TaskRunTimesDialogTitle, value.Name);
+				Text = task == null ? null : string.Format(EditorProperties.Resources.TaskRunTimesDialogTitle, value.Name);
 				isTemp = task == null ? false : task.Name.StartsWith(TaskPropertiesControl.runTimesTempTaskPrefix) && task.Name.Length == (TaskPropertiesControl.runTimesTempTaskPrefix.Length + Guid.NewGuid().ToString().Length);
 				if (!initializing)
 					Fetch();
@@ -94,10 +94,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			BeginInit();
 			if (startDate.HasValue)
-				this.StartDate = startDate.Value;
+				StartDate = startDate.Value;
 			if (endDate.HasValue)
-				this.EndDate = endDate.Value;
-			this.Task = task;
+				EndDate = endDate.Value;
+			Task = task;
 			EndInit();
 		}
 
@@ -114,20 +114,14 @@ namespace Microsoft.Win32.TaskScheduler
 			else
 			{
 				if (isTemp) task.Enabled = true;
-				listBox1.DataSource = task.GetRunTimes(this.StartDate, this.EndDate);
+				listBox1.DataSource = task.GetRunTimes(StartDate, EndDate);
 				if (isTemp) task.Enabled = false;
 			}
 		}
 
-		internal bool ShouldSerializeEndDate()
-		{
-			return endDatePicker.ShouldSerializeValue();
-		}
+		internal bool ShouldSerializeEndDate() => endDatePicker.ShouldSerializeValue();
 
-		internal bool ShouldSerializeStartDate()
-		{
-			return startDatePicker.ShouldSerializeValue();
-		}
+		internal bool ShouldSerializeStartDate() => startDatePicker.ShouldSerializeValue();
 
 		private void label1_Click(object sender, EventArgs e)
 		{

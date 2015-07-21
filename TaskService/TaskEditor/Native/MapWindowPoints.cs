@@ -11,10 +11,7 @@ namespace Microsoft.Win32
 		[DllImport("user32", ExactSpelling = true, SetLastError = true)]
 		internal static extern int MapWindowPoints(IntPtr hWndFrom, IntPtr hWndTo, [In, Out] ref System.Drawing.Point pt, [MarshalAs(UnmanagedType.U4)] int cPoints);
 
-		public static System.Drawing.Point MapPointToClient(this System.Windows.Forms.IWin32Window ctrl, System.Drawing.Point pt)
-		{
-			return MapPoint(null, pt, ctrl);
-		}
+		public static System.Drawing.Point MapPointToClient(this System.Windows.Forms.IWin32Window ctrl, System.Drawing.Point pt) => MapPoint(null, pt, ctrl);
 
 		public static System.Drawing.Point MapPoint(this System.Windows.Forms.IWin32Window ctrl, System.Drawing.Point pt, System.Windows.Forms.IWin32Window newWin = null)
 		{

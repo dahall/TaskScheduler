@@ -32,18 +32,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of items in the collection.
 		/// </summary>
-		public int Count
-		{
-			get { return (v2FolderList != null) ? v2FolderList.Count : v1FolderList.Length; }
-		}
+		public int Count => (v2FolderList != null) ? v2FolderList.Count : v1FolderList.Length;
 
 		/// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
 		/// </summary>
-		bool ICollection<TaskFolder>.IsReadOnly
-		{
-			get { return false; }
-		}
+		bool ICollection<TaskFolder>.IsReadOnly => false;
 
 		/// <summary>
 		/// Gets the specified folder from the collection.
@@ -73,7 +67,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return new TaskFolder(parent.TaskService, v2FolderList[path]);
 				if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
 					return v1FolderList[0];
-				throw new ArgumentException("Path not found");
+				throw new ArgumentException("Path not found", nameof(path));
 			}
 		}
 
@@ -81,7 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-		/// <exception cref="System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string)"/> instead.</exception>
+		/// <exception cref="System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string, bool)"/> instead.</exception>
 		public void Add(TaskFolder item)
 		{
 			throw new NotImplementedException();
@@ -126,11 +120,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
 		public void CopyTo(TaskFolder[] array, int arrayIndex)
 		{
-			if (arrayIndex < 0) throw new ArgumentOutOfRangeException();
-			if (array == null) throw new ArgumentNullException();
+			if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+			if (array == null) throw new ArgumentNullException(nameof(array));
 			if (v2FolderList != null)
 			{
-				if (arrayIndex + this.Count > array.Length)
+				if (arrayIndex + Count > array.Length)
 					throw new ArgumentException();
 				foreach (TaskScheduler.V2Interop.ITaskFolder f in v2FolderList)
 					array[arrayIndex++] = new TaskFolder(parent.TaskService, f);
@@ -179,8 +173,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Enumerated list of items in the collection.</returns>
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
-			TaskFolder[] eArray = new TaskFolder[this.Count];
-			this.CopyTo(eArray, 0);
+			TaskFolder[] eArray = new TaskFolder[Count];
+			CopyTo(eArray, 0);
 			return new TaskFolderEnumerator(eArray);
 		}
 
@@ -246,10 +240,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		private class TaskFolderEnumerator : IEnumerator<TaskFolder>
 		{
@@ -262,15 +253,9 @@ namespace Microsoft.Win32.TaskScheduler
 				iEnum = f.GetEnumerator();
 			}
 
-			public TaskFolder Current
-			{
-				get { return iEnum.Current as TaskFolder; }
-			}
+			public TaskFolder Current => iEnum.Current as TaskFolder;
 
-			object System.Collections.IEnumerator.Current
-			{
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => Current;
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -279,10 +264,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 			}
 
-			public bool MoveNext()
-			{
-				return iEnum.MoveNext();
-			}
+			public bool MoveNext() => iEnum.MoveNext();
 
 			public void Reset()
 			{

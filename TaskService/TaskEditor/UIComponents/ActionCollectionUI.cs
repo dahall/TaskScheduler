@@ -24,7 +24,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				if (modern != value)
 				{
 					modern = value;
-					if (!this.DesignMode && value && imageList.Images.Count == 0)
+					if (!DesignMode && value && imageList.Images.Count == 0)
 						InitializeModernImages();
 					RefreshState();
 				}
@@ -39,7 +39,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			imageList.Images.Add(EditorProperties.Resources.ActionTypeShowMessageImage, Color.Transparent);
 		}
 
-		private int SelectedIndex { get { return actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1; } }
+		private int SelectedIndex => actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
 
 		public void RefreshState()
 		{
@@ -95,10 +95,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void actionDownButton_Click(object sender, EventArgs e)
 		{
 			int index = SelectedIndex;
-			if (index > -1 && index < this.actionListView.Items.Count - 1)
+			if (index > -1 && index < actionListView.Items.Count - 1)
 			{
 				actionListView.BeginUpdate();
-				ListViewItem lvi = this.actionListView.Items[index];
+				ListViewItem lvi = actionListView.Items[index];
 				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
 				actionListView.Items.RemoveAt(index);
 				editor.TaskDefinition.Actions.RemoveAt(index);
@@ -177,7 +177,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (index > 0)
 			{
 				actionListView.BeginUpdate();
-				ListViewItem lvi = this.actionListView.Items[index];
+				ListViewItem lvi = actionListView.Items[index];
 				Action aTemp = ((Action)lvi.Tag).Clone() as Action;
 				actionListView.Items.RemoveAt(index);
 				editor.TaskDefinition.Actions.RemoveAt(index);
@@ -204,7 +204,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void SetActionButtonState()
 		{
-			bool editable = this.editor.Editable;
+			bool editable = editor.Editable;
 			int selectedIndex = SelectedIndex;
 			upDownTableLayoutPanel.Visible = moveUpToolStripMenuItem.Visible = moveDownToolStripMenuItem.Visible = editable;
 			if (editable)

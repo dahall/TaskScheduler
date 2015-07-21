@@ -80,24 +80,24 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				this.ts = value;
+				ts = value;
 				if (value != null && !this.IsDesignMode())
 				{
-					this.TargetServer = value.TargetServer;
-					this.User = value.UserName;
-					this.Domain = value.UserAccountDomain;
-					this.Password = value.UserPassword;
-					this.v1Check.Checked = this.ForceV1 = value.HighestSupportedVersion <= new Version(1, 1);
+					TargetServer = value.TargetServer;
+					User = value.UserName;
+					Domain = value.UserAccountDomain;
+					Password = value.UserPassword;
+					v1Check.Checked = ForceV1 = value.HighestSupportedVersion <= new Version(1, 1);
 
-					if (this.TargetServer == null && this.User == null)
+					if (TargetServer == null && User == null)
 					{
-						this.localComputerRadio.Checked = true;
+						localComputerRadio.Checked = true;
 					}
 					else
 					{
-						this.remoteComputerText.Text = this.TargetServer;
-						SetUserText(string.Concat(this.Domain, @"\", this.User));
-						this.remoteComputerRadio.Checked = true;
+						remoteComputerText.Text = TargetServer;
+						SetUserText(string.Concat(Domain, @"\", User));
+						remoteComputerRadio.Checked = true;
 					}
 				}
 			}
@@ -123,7 +123,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string GetLocalizedResourceString(string resourceName)
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(this.GetType());
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(GetType());
 			return resources.GetString(resourceName);
 		}
 
@@ -136,16 +136,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			bool success = true;
 			ts.BeginInit();
-			ts.TargetServer = this.TargetServer;
-			ts.UserName = this.User;
-			ts.UserAccountDomain = this.Domain;
-			ts.UserPassword = this.Password;
-			ts.HighestSupportedVersion = new Version(1, this.ForceV1 ? 1 : 2);
+			ts.TargetServer = TargetServer;
+			ts.UserName = User;
+			ts.UserAccountDomain = Domain;
+			ts.UserPassword = Password;
+			ts.HighestSupportedVersion = new Version(1, ForceV1 ? 1 : 2);
 			try { ts.EndInit(); }
 			catch (Exception ex) { success = false; MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 			if (success)
 			{
-				this.DialogResult = System.Windows.Forms.DialogResult.OK;
+				DialogResult = System.Windows.Forms.DialogResult.OK;
 				Close();
 			}
 		}
@@ -160,31 +160,28 @@ namespace Microsoft.Win32.TaskScheduler
 			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
 		}
 
-		private bool ShouldSerializeTitle()
-		{
-			return base.Text != GetLocalizedResourceString("$this.Text");
-		}
+		private bool ShouldSerializeTitle() => base.Text != GetLocalizedResourceString("$this.Text");
 
 		private void setUserBtn_Click(object sender, EventArgs e)
 		{
 			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName);
-			if (this.TargetServer != null)
-				dlg.Target = this.TargetServer;
+			if (TargetServer != null)
+				dlg.Target = TargetServer;
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
 				SetUserText(dlg.UserName);
 				string[] userParts = dlg.UserName.Split('\\');
 				if (userParts.Length == 1)
 				{
-					this.Domain = this.TargetServer;
-					this.User = userParts[0];
+					Domain = TargetServer;
+					User = userParts[0];
 				}
 				else if (userParts.Length == 2)
 				{
-					this.Domain = userParts[0];
-					this.User = userParts[1];
+					Domain = userParts[0];
+					User = userParts[1];
 				}
-				this.Password = dlg.Password;
+				Password = dlg.Password;
 			}
 		}
 
@@ -195,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 			setUserBtn.Enabled = !localComputerRadio.Checked && otherUserCheckbox.Checked;
 			if (localComputerRadio.Checked)
 			{
-				this.TargetServer = this.User = this.Domain = this.Password = null;
+				TargetServer = User = Domain = Password = null;
 				SetUserText(null);
 				remoteComputerText.Clear();
 			}
@@ -205,9 +202,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			FolderBrowserDialog2 dlg = FolderBrowserDialog2.ComputerBrowser;
 			dlg.Description = EditorProperties.Resources.BrowseForTargetServerPrompt;
-			dlg.SelectedPath = this.TargetServer == null ? Environment.MachineName : this.TargetServer;
+			dlg.SelectedPath = TargetServer == null ? Environment.MachineName : TargetServer;
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-				this.TargetServer = this.remoteComputerText.Text = dlg.SelectedPath;
+				TargetServer = remoteComputerText.Text = dlg.SelectedPath;
 		}
 
 		private void otherUserCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -218,12 +215,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private void remoteComputerText_TextChanged(object sender, EventArgs e)
 		{
 			runButton.Enabled = remoteComputerText.TextLength > 0;
-			this.TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
+			TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
 		}
 
 		private void v1Check_CheckedChanged(object sender, EventArgs e)
 		{
-			this.ForceV1 = v1Check.Checked;
+			ForceV1 = v1Check.Checked;
 		}
 	}
 }

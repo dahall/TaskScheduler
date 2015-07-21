@@ -26,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				if (modern != value)
 				{
 					modern = value;
-					if (!this.DesignMode && value && imageList.Images.Count == 0)
+					if (!DesignMode && value && imageList.Images.Count == 0)
 						InitializeModernImages();
 					RefreshState();
 				}
@@ -51,7 +51,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			disabledOverlayImageIndex = imageList.AddOverlay(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
 		}
 
-		private int SelectedIndex { get { return triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1; } }
+		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 
 		public void RefreshState()
 		{
@@ -199,7 +199,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (i >= 0)
 			{
 				editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;
-				this.RefreshState();
+				RefreshState();
 			}
 		}
 	}

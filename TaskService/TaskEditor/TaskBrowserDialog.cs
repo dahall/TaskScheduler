@@ -70,7 +70,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!string.Equals(path, value, StringComparison.InvariantCultureIgnoreCase))
 				{
 					path = value;
-					if (this.treeView.Nodes.Count > 0)
+					if (treeView.Nodes.Count > 0)
 						SelectNodeByKey(path);
 				}
 			}
@@ -83,10 +83,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The type of the selected path.
 		/// </value>
 		[Browsable(false)]
-		public Type SelectedPathType
-		{
-			get { return pathType; }
-		}
+		public Type SelectedPathType => pathType;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to show tasks along with the folders.
@@ -129,14 +126,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void RefreshList()
 		{
-			string curPath = treeView.SelectedNode == null ? this.SelectedPath : treeView.SelectedNode.Name;
-			this.TaskService.AllowReadOnlyTasks = true;
+			string curPath = treeView.SelectedNode == null ? SelectedPath : treeView.SelectedNode.Name;
+			TaskService.AllowReadOnlyTasks = true;
 			treeView.Nodes.Clear();
 			loadingLabel.Visible = true;
 			treeView.UseWaitCursor = true;
 			treeView.BeginUpdate();
-			TreeNode n = treeView.Nodes.Add(@"\", string.Format("Task Scheduler Library ({0})", this.TaskService.TargetServer == null || this.TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : this.TaskService.TargetServer), 0, 0);
-			n.Tag = this.TaskService.RootFolder;
+			TreeNode n = treeView.Nodes.Add(@"\", string.Format("Task Scheduler Library ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 0, 0);
+			n.Tag = TaskService.RootFolder;
 			n.Expand();
 			LoadChildren(n);
 			loadingLabel.Visible = false;
@@ -179,24 +176,21 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetDescription()
 		{
-			var rm = new System.Resources.ResourceManager(this.GetType());
-			this.Description = rm.GetString("descLabel.Text");
+			var rm = new System.Resources.ResourceManager(GetType());
+			Description = rm.GetString("descLabel.Text");
 		}
 
 		private bool ShouldSerializeDescription()
 		{
-			var rm = new System.Resources.ResourceManager(this.GetType());
-			return !string.Equals(this.Description, rm.GetString("descLabel.Text"));
+			var rm = new System.Resources.ResourceManager(GetType());
+			return !string.Equals(Description, rm.GetString("descLabel.Text"));
 		}
 
-		private bool ShouldSerializeTaskService()
-		{
-			return !internalSetTS;
-		}
+		private bool ShouldSerializeTaskService() => !internalSetTS;
 
 		private void TaskBrowserDialog_Load(object sender, EventArgs e)
 		{
-			if (this.TaskService == null)
+			if (TaskService == null)
 			{
 				TaskService = new TaskService();
 				internalSetTS = true;
