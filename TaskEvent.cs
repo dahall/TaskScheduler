@@ -589,6 +589,30 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="TaskEventLog" /> is enabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if enabled; otherwise, <c>false</c>.
+		/// </value>
+		public bool Enabled
+		{
+			get
+			{
+				if (System.Environment.OSVersion.Version.Major < 6)
+					return false;
+				using (var cfg = new EventLogConfiguration(TSEventLogPath, q.Session))
+					return cfg.IsEnabled;
+			}
+			set
+			{
+				if (System.Environment.OSVersion.Version.Major < 6)
+					throw new NotSupportedException("Task history not available on systems prior to Windows Vista and Windows Server 2008.");
+				using (var cfg = new EventLogConfiguration(TSEventLogPath, q.Session))
+					cfg.IsEnabled = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether to enumerate in reverse when calling the default enumerator (typically with foreach statement).
 		/// </summary>
 		/// <value>
