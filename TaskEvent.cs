@@ -608,7 +608,13 @@ namespace Microsoft.Win32.TaskScheduler
 				if (System.Environment.OSVersion.Version.Major < 6)
 					throw new NotSupportedException("Task history not available on systems prior to Windows Vista and Windows Server 2008.");
 				using (var cfg = new EventLogConfiguration(TSEventLogPath, q.Session))
-					cfg.IsEnabled = value;
+				{
+					if (cfg.IsEnabled != value)
+					{
+						cfg.IsEnabled = value;
+						cfg.SaveChanges();
+					}
+				}
 			}
 		}
 

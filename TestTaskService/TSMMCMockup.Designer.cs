@@ -48,7 +48,6 @@
 			this.taskSchedulerWizard1 = new Microsoft.Win32.TaskScheduler.TaskSchedulerWizard();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.hidableDetailPanel1 = new TestTaskService.HidableDetailPanel();
 			this.libraryMenuStrip = new System.Windows.Forms.ToolStrip();
 			this.connectToAnotherComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +55,8 @@
 			this.createTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.displayAllRunningTasksMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.disableHistoryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.enableHistoryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.newFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.delFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +64,10 @@
 			this.refreshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.itemPanel = new TestTaskService.HidableDetailPanel();
 			this.itemMenuStrip = new System.Windows.Forms.ToolStrip();
+			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TaskService)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -76,9 +79,9 @@
 			// mainMenuStrip
 			// 
 			this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.fileToolStripMenuItem,
-			this.actionToolStripMenuItem,
-			this.viewToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.actionToolStripMenuItem,
+            this.viewToolStripMenuItem});
 			this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.mainMenuStrip.Name = "mainMenuStrip";
 			this.mainMenuStrip.Size = new System.Drawing.Size(1126, 24);
@@ -88,7 +91,7 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
@@ -110,7 +113,7 @@
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.showHiddenTasksToolStripMenuItem});
+            this.showHiddenTasksToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "View";
@@ -153,7 +156,6 @@
 			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskServiceConnectDialog1.Location = new System.Drawing.Point(200, 200);
 			this.taskServiceConnectDialog1.Name = "TaskServiceConnectDialog";
-			this.taskServiceConnectDialog1.TaskService = this.TaskService;
 			this.taskServiceConnectDialog1.Text = "Select Computer";
 			this.taskServiceConnectDialog1.Visible = false;
 			// 
@@ -214,15 +216,15 @@
 			// taskSchedulerWizard1
 			// 
 			this.taskSchedulerWizard1.AvailableTriggers = ((Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers)(((((((((((Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Event | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Time) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Daily) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Weekly) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Monthly) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Idle) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Registration) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange)));
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Daily) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Weekly) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Monthly) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Idle) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Registration) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange)));
 			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(538, 391);
 			this.taskSchedulerWizard1.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.taskSchedulerWizard1.Icon = ((System.Drawing.Icon)(resources.GetObject("taskSchedulerWizard1.Icon")));
@@ -260,16 +262,6 @@
 			this.label1.Text = "Actions";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// splitter1
-			// 
-			this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.splitter1.Location = new System.Drawing.Point(923, 24);
-			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(3, 640);
-			this.splitter1.TabIndex = 8;
-			this.splitter1.TabStop = false;
-			// 
 			// hidableDetailPanel1
 			// 
 			this.hidableDetailPanel1.BackColor = System.Drawing.SystemColors.Window;
@@ -295,20 +287,22 @@
 			this.libraryMenuStrip.BackColor = System.Drawing.SystemColors.Window;
 			this.libraryMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.libraryMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.connectToAnotherComputerToolStripMenuItem,
-			this.createBasicTaskMenuItem,
-			this.createTaskMenuItem,
-			this.importTaskMenuItem,
-			this.displayAllRunningTasksMenuItem,
-			this.toolStripSeparator1,
-			this.newFolderMenuItem,
-			this.delFolderMenuItem,
-			this.toolStripSeparator2,
-			this.refreshMenuItem});
+            this.connectToAnotherComputerToolStripMenuItem,
+            this.createBasicTaskMenuItem,
+            this.createTaskMenuItem,
+            this.importTaskMenuItem,
+            this.displayAllRunningTasksMenuItem,
+            this.disableHistoryMenuItem,
+            this.enableHistoryMenuItem,
+            this.toolStripSeparator1,
+            this.newFolderMenuItem,
+            this.delFolderMenuItem,
+            this.toolStripSeparator2,
+            this.refreshMenuItem});
 			this.libraryMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
 			this.libraryMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.libraryMenuStrip.Name = "libraryMenuStrip";
-			this.libraryMenuStrip.Size = new System.Drawing.Size(188, 182);
+			this.libraryMenuStrip.Size = new System.Drawing.Size(188, 277);
 			this.libraryMenuStrip.TabIndex = 0;
 			// 
 			// connectToAnotherComputerToolStripMenuItem
@@ -360,6 +354,28 @@
 			this.displayAllRunningTasksMenuItem.Text = "Display All Running Tasks";
 			this.displayAllRunningTasksMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.displayAllRunningTasksMenuItem.Click += new System.EventHandler(this.displayAllRunningTasksToolStripMenuItem_Click);
+			// 
+			// disableHistoryMenuItem
+			// 
+			this.disableHistoryMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.disableHistoryMenuItem.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
+			this.disableHistoryMenuItem.Name = "disableHistoryMenuItem";
+			this.disableHistoryMenuItem.Size = new System.Drawing.Size(186, 19);
+			this.disableHistoryMenuItem.Text = "Disable All Tasks History";
+			this.disableHistoryMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.disableHistoryMenuItem.Visible = false;
+			this.disableHistoryMenuItem.Click += new System.EventHandler(this.enableHistoryMenuItem_Click);
+			// 
+			// enableHistoryMenuItem
+			// 
+			this.enableHistoryMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.enableHistoryMenuItem.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
+			this.enableHistoryMenuItem.Name = "enableHistoryMenuItem";
+			this.enableHistoryMenuItem.Size = new System.Drawing.Size(186, 19);
+			this.enableHistoryMenuItem.Text = "Enable All Tasks History";
+			this.enableHistoryMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.enableHistoryMenuItem.Visible = false;
+			this.enableHistoryMenuItem.Click += new System.EventHandler(this.enableHistoryMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -433,6 +449,16 @@
 			this.itemMenuStrip.Size = new System.Drawing.Size(188, 102);
 			this.itemMenuStrip.TabIndex = 1;
 			// 
+			// splitter1
+			// 
+			this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.splitter1.Location = new System.Drawing.Point(923, 24);
+			this.splitter1.Name = "splitter1";
+			this.splitter1.Size = new System.Drawing.Size(3, 640);
+			this.splitter1.TabIndex = 8;
+			this.splitter1.TabStop = false;
+			// 
 			// TSMMCMockup
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,8 +468,8 @@
 			this.Controls.Add(this.splitter1);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.statusStrip);
-			this.Controls.Add(this.mainToolStrip);
 			this.Controls.Add(this.mainMenuStrip);
+			this.Controls.Add(this.mainToolStrip);
 			this.MainMenuStrip = this.mainMenuStrip;
 			this.Name = "TSMMCMockup";
 			this.Text = "Task Scheduler";
@@ -452,6 +478,7 @@
 			this.mainMenuStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.TaskService)).EndInit();
 			this.splitContainer1.Panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.hidableDetailPanel1.DetailArea.ResumeLayout(false);
@@ -500,5 +527,7 @@
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem showHiddenTasksToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem delFolderMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem disableHistoryMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem enableHistoryMenuItem;
 	}
 }

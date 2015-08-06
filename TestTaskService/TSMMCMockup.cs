@@ -115,6 +115,9 @@ namespace TestTaskService
 			createTaskMenuItem.ImageIndex = 5;
 			importTaskMenuItem.ImageIndex = 0;
 			displayAllRunningTasksMenuItem.ImageIndex = 6;
+			enableHistoryMenuItem.ImageIndex = 7;
+			disableHistoryMenuItem.ImageIndex = 7;
+			EnableTaskLog();
 			newFolderMenuItem.ImageIndex = 8;
 			delFolderMenuItem.ImageIndex = 11;
 			refreshMenuItem.ImageIndex = 9;
@@ -218,6 +221,21 @@ namespace TestTaskService
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Close();
+		}
+
+		private void enableHistoryMenuItem_Click(object sender, EventArgs e)
+		{
+			EnableTaskLog(true);
+		}
+
+		private void EnableTaskLog(bool toggle = false)
+		{
+			var log = TaskService.GetEventLog();
+			if (toggle)
+				log.Enabled = !log.Enabled;
+			bool logEnabled = log.Enabled;
+			enableHistoryMenuItem.Visible = !logEnabled;
+			disableHistoryMenuItem.Visible = logEnabled;
 		}
 	}
 }
