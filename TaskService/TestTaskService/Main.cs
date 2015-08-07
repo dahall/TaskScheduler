@@ -54,7 +54,8 @@ namespace TestTaskService
 					Program.MMCTest(ts, output);
 					break;
 				case 6: // Find task
-					Program.FindTask(ts, output, textBox2.Text);
+					//Program.FindTask(ts, output, textBox2.Text);
+					new ScriptTestDlg() { TaskService = ts }.ShowDialog(this);
 					break;
 				case 7: // Output XML
 					Program.OutputXml(ts, output);
