@@ -63,6 +63,7 @@
       <Aliases>GrpCtrl</Aliases>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -146,6 +147,12 @@
     <Compile Include="RunningTasksDlg.Designer.cs">
       <DependentUpon>RunningTasksDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScriptTestDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptTestDlg.Designer.cs">
+      <DependentUpon>ScriptTestDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSMMCMockup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RunningTasksDlg.resx">
       <DependentUpon>RunningTasksDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScriptTestDlg.resx">
+      <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>

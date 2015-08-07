@@ -75,7 +75,7 @@ namespace TestTaskService
 			radioButtonListItem4.Text = "Find Task Prop";
 			radioButtonListItem5.Text = "Wizard test";
 			radioButtonListItem6.Text = "MMC test";
-			radioButtonListItem7.Text = "Find Task";
+			radioButtonListItem7.Text = "Run Code";
 			radioButtonListItem8.Text = "Output XML";
 			this.radioButtonList1.Items.Add(radioButtonListItem1);
 			this.radioButtonList1.Items.Add(radioButtonListItem2);
