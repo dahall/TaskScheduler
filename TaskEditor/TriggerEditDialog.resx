@@ -466,7 +466,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -706,7 +706,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -853,7 +853,7 @@
     <value>4, 9</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="startupIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1102,7 +1102,7 @@
     <value>4, 67</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 23</value>
