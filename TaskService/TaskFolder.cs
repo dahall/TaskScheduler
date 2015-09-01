@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -400,6 +401,24 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Folder != null)
 			{
 				definition.Actions.ConvertUnsupportedActions();
+				// Check for unsupported combinations and provide informational exceptions
+				UserId = UserId ?? definition.Principal.UserId;
+				if (LogonType == TaskLogonType.ServiceAccount)
+				{
+					if (string.IsNullOrEmpty(UserId) || !IsServiceAccount(UserId))
+						throw new ArgumentException("A valid system account name must be supplied for TaskLogonType.ServiceAccount. Valid entries are \"NT AUTHORITY\\SYSTEM\", \"SYSTEM\", \"NT AUTHORITY\\LOCALSERVICE\", or \"NT AUTHORITY\\NETWORKSERVICE\".", nameof(UserId));
+					if (password != null)
+						throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
+				}
+				else if ((LogonType == TaskLogonType.Password || LogonType == TaskLogonType.InteractiveTokenOrPassword ||
+					(LogonType == TaskLogonType.S4U && !WindowsIdentity.GetCurrent().Equals(new WindowsIdentity(UserId)))) && password == null)
+				{
+					throw new ArgumentException("A password must be supplied when specifying TaskLogonType.Password or TaskLogonType.InteractiveTokenOrPassword or TaskLogonType.S4U from another account.", nameof(password));
+				}
+				else if (LogonType == TaskLogonType.Group && password != null)
+				{
+					throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
+				}
 				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl);
 				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
 					return null;
@@ -532,6 +551,18 @@ namespace Microsoft.Win32.TaskScheduler
 					yield return task;
 				}
 			}
+		}
+
+		private static bool IsServiceAccount(string userId)
+		{
+			NTAccount acct = new NTAccount(userId);
+			try
+			{
+				SecurityIdentifier si = (SecurityIdentifier)acct.Translate(typeof(SecurityIdentifier));
+				return (si.IsWellKnown(WellKnownSidType.LocalSystemSid) || si.IsWellKnown(WellKnownSidType.NetworkServiceSid) || si.IsWellKnown(WellKnownSidType.LocalServiceSid));
+			}
+			catch { }
+			return false;
 		}
 	}
 }

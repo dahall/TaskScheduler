@@ -2314,7 +2314,7 @@
     <value>runTimesTab</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="taskRunTimesControl1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2836,7 +2836,7 @@
     <value>4</value>
   </data>
   <data name="&gt;&gt;triggerCollectionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="taskRegSourceLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -4105,7 +4105,7 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;actionCollectionUI.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4174,7 +4174,7 @@
     <value />
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="taskAllowHardTerminateCheck.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -4774,7 +4774,7 @@
     <value>3</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="taskStopOnIdleEndCheck.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -5011,7 +5011,7 @@
     <value>Top</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.4.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRegURIText.ZOrder" xml:space="preserve">
     <value>6</value>

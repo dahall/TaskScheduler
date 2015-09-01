@@ -495,6 +495,15 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Diagnostics.Process.Start("control.exe", "schedtasks");
 		}
 
+		/// <summary>
+		/// Gets a formatted string that tells the Task Scheduler to retrieve a string from a resource .dll file.
+		/// </summary>
+		/// <param name="dllPath">The path to the .dll file that contains the resource.</param>
+		/// <param name="resourceId">The identifier for the resource text (typically a negative number).</param>
+		/// <returns>A string in the format of $(@ [dllPath], [resourceId]).</returns>
+		/// <example>For example, the setting this property value to $(@ %SystemRoot%\System32\ResourceName.dll, -101) will set the property to the value of the resource text with an identifier equal to -101 in the %SystemRoot%\System32\ResourceName.dll file.</example>
+		public static string GetDllResourceString(string dllPath, int resourceId) => $"$(@ {dllPath}, {resourceId})";
+
 		internal static bool SystemSupportsPowerShellActions(string server = null)
 		{
 			try
