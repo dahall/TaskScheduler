@@ -279,19 +279,21 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
-				/*td.RegistrationInfo.Description = "Test for XP SP3";
-				td.RegistrationInfo.Author = "incaunu";*/
+				td.RegistrationInfo.Description = "Test for editor";
+				td.RegistrationInfo.Author = "incaunu";
 				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
 				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 				eTrig.ValueQueries.Add("Name", "Value");
 				td.Triggers.Add(eTrig);*/
-				//td.Actions.Add(new ExecAction("cmd.exe", "/c \"date /t > c:\\cmd.txt\""));
+				td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
 				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
 				ea.HeaderFields.Add("reply-to", "dh@mail.com");
 				ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
 				//WriteXml(td, taskName);
+				using (var op = new TaskOptionsEditor(ts, td, true, false))
+					if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				System.Converter<DateTime, string> d = delegate(DateTime ints) { return ints == DateTime.MinValue ? "Never" : ints.ToString(); };
+				System.Converter<DateTime, string> d = ints => ints == DateTime.MinValue ? "Never" : ints.ToString();
 				output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 					t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
 				WriteXml(t);

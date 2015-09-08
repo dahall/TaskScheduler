@@ -407,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetVersionComboItems()
 		{
-			const int expectedVersions = 5;
+			const int expectedVersions = 6;
 
 			taskVersionCombo.BeginUpdate();
 			taskVersionCombo.Items.Clear();

@@ -92,9 +92,7 @@
 		/// <returns><c>true</c> if in design mode; otherwise, <c>false</c>.</returns>
 		public static bool IsDesignMode(this Control ctrl)
 		{
-			if (ctrl.Parent == null)
-				return true;
-			Control p = ctrl.Parent;
+			Control p = ctrl;
 			while (p != null)
 			{
 				var site = p.Site;

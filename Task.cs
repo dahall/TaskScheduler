@@ -1947,6 +1947,13 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 
+			if (Settings.Compatibility >= TaskCompatibility.V2_2)
+			{
+				var PT1D = TimeSpan.FromDays(1);
+				if (Settings.MaintenanceSettings.IsSet() && (Settings.MaintenanceSettings.Period < PT1D || Settings.MaintenanceSettings.Deadline < PT1D || Settings.MaintenanceSettings.Deadline <= Settings.MaintenanceSettings.Period))
+					TryAdd(ex.Data, "Settings.MaintenanceSettings", "Period or Deadline must be at least 1 day and Deadline must be greater than Period.");
+			}
+
 			var list = new System.Collections.Generic.List<TaskCompatibilityEntry>();
 			if (GetLowestSupportedVersion(list) > Settings.Compatibility)
 				foreach (var item in list)
@@ -3084,7 +3091,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. If no value is specified for this property, then the Task Scheduler service will not delete the task.
 		/// </summary>
 		/// <value>
-		/// Gets and sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. For Task Scheduler 1.0, this property will return a TimeSpan of 1 second if the task is set to delete when done. For either version, TimeSpan.Zero will indicate that the task should not be deleted.
+		/// Gets and sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. A TimeSpan value of 1 second indicates the task is set to delete when done. A value of TimeSpan.Zero indicates that the task should not be deleted.
 		/// </value>
 		/// <remarks>
 		/// A task expires after the end boundary has been exceeded for all triggers associated with the task. The end boundary for a trigger is specified by the <c>EndBoundary</c> property of all trigger types.
@@ -3095,13 +3102,18 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Settings != null)
-					return Task.StringToTimeSpan(v2Settings.DeleteExpiredTaskAfter);
+					return v2Settings.DeleteExpiredTaskAfter == "PT0S" ? TimeSpan.FromSeconds(1) : Task.StringToTimeSpan(v2Settings.DeleteExpiredTaskAfter);
 				return (v1Task.GetFlags() & V1Interop.TaskFlags.DeleteWhenDone) == V1Interop.TaskFlags.DeleteWhenDone ? TimeSpan.FromSeconds(1) : TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.DeleteExpiredTaskAfter = Task.TimeSpanToString(value);
+				{
+					if (value == TimeSpan.FromSeconds(1))
+						v2Settings.DeleteExpiredTaskAfter = "PT0S";
+					else
+						v2Settings.DeleteExpiredTaskAfter = Task.TimeSpanToString(value);
+				}
 				else
 				{
 					V1Interop.TaskFlags flags = v1Task.GetFlags();

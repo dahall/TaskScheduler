@@ -66,7 +66,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		private void taskRegURIText_Validating(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegURIText,
-				delegate(string s) { return true; },
+				s => Uri.IsWellFormedUriString(s, UriKind.RelativeOrAbsolute),
 				EditorProperties.Resources.Error_InvalidUriFormat);
 		}
 

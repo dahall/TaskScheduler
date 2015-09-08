@@ -205,7 +205,7 @@
 			// taskDeleteAfterCombo
 			// 
 			this.taskDeleteAfterCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskDeleteAfterCombo.Location = new System.Drawing.Point(226, 199);
+			this.taskDeleteAfterCombo.Location = new System.Drawing.Point(226, 200);
 			this.taskDeleteAfterCombo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
 			this.taskDeleteAfterCombo.Size = new System.Drawing.Size(155, 23);
