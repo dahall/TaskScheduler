@@ -15,6 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
 
+		private static TimeSpan2 PT1D = TimeSpan2.FromDays(1);
 		private static SecEdShim secEd = SecEdShim.GetNew();
 
 		private AvailableTaskTabs availableTabs = AvailableTaskTabs.All;
@@ -66,10 +67,10 @@ namespace Microsoft.Win32.TaskScheduler
 			ComboBoxExtension.InitializeFromEnum(taskPriorityCombo.Items, typeof(System.Diagnostics.ProcessPriorityClass), EditorProperties.Resources.ResourceManager, "ProcessPriority", out allVal);
 			principalReqPrivilegesDropDown.Sorted = true;
 			principalReqPrivilegesDropDown.InitializeFromEnum(typeof(TaskPrincipalPrivilege), EditorProperties.Resources.ResourceManager, "");
-			taskMaintenanceDeadlineCombo.Items.AddRange(new TimeSpan2[] { TimeSpan.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
-			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanNotStarted;
-			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(15), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(7) });
-			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
+			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanUnset;
+			taskMaintenanceDeadlineCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
+			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanUnset;
+			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
 
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
@@ -342,7 +343,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
 				taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
 				taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
-				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter;
+				taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter == TimeSpan.FromSeconds(1) ? TimeSpan.Zero : td.Settings.DeleteExpiredTaskAfter;
 				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 
 				// Set Info tab
@@ -361,20 +362,14 @@ namespace Microsoft.Win32.TaskScheduler
 				taskPriorityCombo.SelectedIndex = taskPriorityCombo.Items.IndexOf((long)td.Settings.Priority);
 				taskDisallowStartOnRemoteAppSessionCheck.Checked = td.Settings.DisallowStartOnRemoteAppSession;
 				taskUseUnifiedSchedulingEngineCheck.Checked = td.Settings.UseUnifiedSchedulingEngine;
-				if (td.Settings.Compatibility >= TaskCompatibility.V2_1)
-				{
-					principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
-					principalReqPrivilegesDropDown.CheckedFlagValue = 0;
-					foreach (var s in td.Principal.RequiredPrivileges)
-						principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
-				}
-				if (td.Settings.Compatibility >= TaskCompatibility.V2_2)
-				{
-					taskVolatileCheck.Checked = td.Settings.Volatile;
-					taskMaintenanceDeadlineCombo.Value = td.Settings.MaintenanceSettings.Deadline;
-					taskMaintenancePeriodCombo.Value = td.Settings.MaintenanceSettings.Period;
-					taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
-				}
+				principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
+				principalReqPrivilegesDropDown.CheckedFlagValue = 0;
+				foreach (var s in td.Principal.RequiredPrivileges)
+					principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
+				taskVolatileCheck.Checked = td.Settings.Volatile;
+				taskMaintenanceDeadlineCombo.Value = td.Settings.MaintenanceSettings.Deadline;
+				taskMaintenancePeriodCombo.Value = td.Settings.MaintenanceSettings.Period;
+				taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
 				UpdateUnifiedSchedulingEngineControls();
 
 				onAssignment = false;
@@ -857,7 +852,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskDeleteAfterCombo_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCombo.Value;
+				td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCheck.Checked ? (taskDeleteAfterCombo.Value == TimeSpan2.Zero ? TimeSpan.FromSeconds(1) : (TimeSpan)taskDeleteAfterCombo.Value) : TimeSpan.Zero;
 		}
 
 		private void taskDescText_Leave(object sender, EventArgs e)
@@ -1063,11 +1058,11 @@ namespace Microsoft.Win32.TaskScheduler
 				return;
 			}
 			taskRunLevelCheck.Enabled = taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
-				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
-				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
+				taskRestartIntervalCheck.Enabled = taskRestartAttemptTimesLabel.Enabled = 
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
 				taskStartIfConnectionCheck.Enabled = taskRegSourceText.Enabled = taskRegURIText.Enabled =
 				taskRegVersionText.Enabled = taskRegSDDLText.Enabled = editable && v2;
+			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = v2 && editable && taskRestartIntervalCheck.Checked;
 			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
 				principalReqPrivilegesDropDown.Enabled = taskDisallowStartOnRemoteAppSessionCheck.Enabled =
@@ -1119,7 +1114,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskPriorityCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value;
+				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)Convert.ToInt32(((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value);
 		}
 
 		private void taskDisallowStartOnRemoteAppSessionCheck_CheckedChanged(object sender, EventArgs e)
@@ -1240,16 +1235,50 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Settings.Volatile = taskVolatileCheck.Checked;
 		}
 
+		private void taskMaintenanceDeadlineCombo_Validated(object sender, EventArgs e)
+		{
+			td.Settings.MaintenanceSettings.Deadline = taskMaintenanceDeadlineCombo.Value;
+		}
+
+		private void taskMaintenanceDeadlineCombo_Validating(object sender, CancelEventArgs e)
+		{
+			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenanceDeadlineCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value);
+			errorProvider.SetError(taskMaintenanceDeadlineCombo, valid ? string.Empty : EditorProperties.Resources.Error_MaintenanceDeadlineLimit);
+			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, EditorProperties.Resources.Error_MaintenanceDeadlineLimit));
+			HasError = valid;
+			e.Cancel = !valid;
+		}
+
 		private void taskMaintenanceDeadlineCombo_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.MaintenanceSettings.Deadline = taskMaintenanceDeadlineCombo.Value;
+			{
+				if (taskMaintenanceDeadlineCombo.Value != TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero)
+					taskMaintenancePeriodCombo.Value = taskMaintenanceDeadlineCombo.Value <= TimeSpan2.FromDays(2) ? PT1D : taskMaintenanceDeadlineCombo.Value - TimeSpan2.FromDays(1);
+			}
+		}
+
+		private void taskMaintenancePeriodCombo_Validated(object sender, EventArgs e)
+		{
+			td.Settings.MaintenanceSettings.Period = taskMaintenancePeriodCombo.Value;
+		}
+
+		private void taskMaintenancePeriodCombo_Validating(object sender, CancelEventArgs e)
+		{
+			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenancePeriodCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value);
+			errorProvider.SetError(taskMaintenancePeriodCombo, valid ? string.Empty : EditorProperties.Resources.Error_MaintenanceDeadlineLimit);
+			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, EditorProperties.Resources.Error_MaintenanceDeadlineLimit));
+			HasError = valid;
+			e.Cancel = !valid;
 		}
 
 		private void taskMaintenancePeriodCombo_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.MaintenanceSettings.Period = taskMaintenancePeriodCombo.Value;
+			{
+				if (taskMaintenancePeriodCombo.Value != TimeSpan2.Zero && taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero)
+					taskMaintenanceDeadlineCombo.Value = taskMaintenancePeriodCombo.Value + TimeSpan2.FromDays(1);
+			}
 		}
 
 		private void taskMaintenanceExclusiveCheck_CheckedChanged(object sender, EventArgs e)
@@ -1314,7 +1343,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskRegURIText_Validating(object sender, CancelEventArgs e)
 		{
 			e.Cancel = !ValidateText(taskRegURIText, 
-				s => true,
+				s => Uri.IsWellFormedUriString(s, UriKind.RelativeOrAbsolute),
 				EditorProperties.Resources.Error_InvalidUriFormat);
 		}
 

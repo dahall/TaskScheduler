@@ -26,13 +26,10 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = parent.Editable && v2_1;
 			principalReqPrivilegesLabel.Enabled = principalReqPrivilegesDropDown.Enabled = false;
 			taskRegSDDLBtn.Visible = (secEd != null && parent.IsV2);
-			if (v2_1)
-			{
-				principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
-				principalReqPrivilegesDropDown.CheckedFlagValue = 0;
-				foreach (var s in td.Principal.RequiredPrivileges)
-					principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
-			}
+			principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)td.Principal.ProcessTokenSidType);
+			principalReqPrivilegesDropDown.CheckedFlagValue = 0;
+			foreach (var s in td.Principal.RequiredPrivileges)
+				principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
 			taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
 			flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);

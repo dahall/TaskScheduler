@@ -9,6 +9,10 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			InitializeComponent();
 			long allVal;
 			ComboBoxExtension.InitializeFromEnum(taskPriorityCombo.Items, typeof(System.Diagnostics.ProcessPriorityClass), EditorProperties.Resources.ResourceManager, "ProcessPriority", out allVal);
+			taskRestartIntervalCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
+			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
+			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
 		}
 
 		protected override void InitializePanel()
@@ -17,8 +21,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			bool v2 = parent.IsV2;
 
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
-				taskRestartIntervalCheck.Enabled = taskRestartIntervalCombo.Enabled =
-				taskRestartCountLabel.Enabled = taskRestartAttemptTimesLabel.Enabled = taskRestartCountText.Enabled =
+				taskRestartIntervalCheck.Enabled = taskRestartAttemptTimesLabel.Enabled = 
 				taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = editable && v2;
 			taskAllowHardTerminateCheck.Enabled = editable && v2 && !td.Settings.UseUnifiedSchedulingEngine;
 
@@ -32,6 +35,24 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
 			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 			taskMultInstCombo.EndUpdate();
+
+			taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
+			taskStartWhenAvailableCheck.Checked = td.Settings.StartWhenAvailable;
+			taskRestartIntervalCheck.Checked = td.Settings.RestartInterval != TimeSpan.Zero;
+			taskRestartIntervalCheck_CheckedChanged(null, EventArgs.Empty);
+			if (taskRestartIntervalCheck.Checked)
+			{
+				taskRestartIntervalCombo.Value = td.Settings.RestartInterval;
+				taskRestartCountText.Value = td.Settings.RestartCount;
+			}
+			taskExecutionTimeLimitCheck.Checked = td.Settings.ExecutionTimeLimit != TimeSpan.Zero;
+			taskExecutionTimeLimitCombo.Enabled = editable && taskExecutionTimeLimitCheck.Checked;
+			taskExecutionTimeLimitCombo.Value = td.Settings.ExecutionTimeLimit;
+			taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
+			taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+			taskDeleteAfterCombo.Enabled = v2 && editable && taskDeleteAfterCheck.Checked;
+			taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter == TimeSpan.FromSeconds(1) ? TimeSpan.Zero : td.Settings.DeleteExpiredTaskAfter;
+			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 
 			taskPriorityCombo.SelectedIndex = taskPriorityCombo.Items.IndexOf((long)td.Settings.Priority);
 		}
@@ -63,7 +84,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		private void taskDeleteAfterCombo_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCombo.Value;
+				td.Settings.DeleteExpiredTaskAfter = taskDeleteAfterCheck.Checked ? (taskDeleteAfterCombo.Value == TimeSpan2.Zero ? TimeSpan.FromSeconds(1) : (TimeSpan)taskDeleteAfterCombo.Value) : TimeSpan.Zero;
 		}
 
 		private void taskExecutionTimeLimitCheck_CheckedChanged(object sender, EventArgs e)
@@ -94,7 +115,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		private void taskPriorityCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value;
+				td.Settings.Priority = (System.Diagnostics.ProcessPriorityClass)Convert.ToInt32(((DropDownCheckListItem)taskPriorityCombo.SelectedItem).Value);
 		}
 
 		private void taskRestartCountText_ValueChanged(object sender, EventArgs e)
@@ -118,7 +139,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 					taskRestartCountText.Value = 0;
 				}
 			}
-			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = parent.Editable && taskRestartIntervalCheck.Checked;
+			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = parent.IsV2 && parent.Editable && taskRestartIntervalCheck.Checked;
 		}
 
 		private void taskRestartIntervalCombo_ValueChanged(object sender, EventArgs e)
