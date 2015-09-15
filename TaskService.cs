@@ -393,7 +393,7 @@ namespace Microsoft.Win32.TaskScheduler
 				catch (System.IO.DirectoryNotFoundException) { }
 				catch (System.IO.FileNotFoundException) { }
 			}
-			else if (folderName == @"\")
+			else if (folderName == @"\" || string.IsNullOrEmpty(folderName))
 				f = new TaskFolder(this);
 			else
 				throw new NotV1SupportedException("Folder other than the root (\\) was requested on a system only supporting Task Scheduler 1.0.");
