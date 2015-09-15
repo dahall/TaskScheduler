@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Abstract class for throwing a method specific exception.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough]
-	public abstract class TSNotSupportedException : Exception
+	[System.Diagnostics.DebuggerStepThrough, Serializable]
+	public abstract class TSNotSupportedException : Exception, ISerializable
 	{
 		/// <summary>Defines the minimum supported version for the action not allowed by this exception.</summary>
 		protected TaskCompatibility min;
 		private string myMessage;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TSNotSupportedException"/> class.
+		/// </summary>
+		/// <param name="serializationInfo">The serialization information.</param>
+		/// <param name="streamingContext">The streaming context.</param>
+		protected TSNotSupportedException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+			: base(serializationInfo, streamingContext)
+		{
+		}
 
 		internal TSNotSupportedException(TaskCompatibility minComp)
 		{
@@ -40,12 +53,26 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskCompatibility MinimumSupportedVersion => min;
 
 		internal abstract string LibName { get; }
+
+		/// <summary>
+		/// Gets the object data.
+		/// </summary>
+		/// <param name="info">The information.</param>
+		/// <param name="context">The context.</param>
+		[SecurityCritical, SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+				throw new ArgumentNullException(nameof(info));
+			info.AddValue("min", min);
+			base.GetObjectData(info, context);
+		}
 	}
 
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler 1.0.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough]
+	[System.Diagnostics.DebuggerStepThrough, Serializable]
 	public class NotV1SupportedException : TSNotSupportedException
 	{
 		internal NotV1SupportedException() : base(TaskCompatibility.V2) { }
@@ -56,7 +83,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler 2.0.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough]
+	[System.Diagnostics.DebuggerStepThrough, Serializable]
 	public class NotV2SupportedException : TSNotSupportedException
 	{
 		internal NotV2SupportedException() : base(TaskCompatibility.V1) { }
@@ -68,7 +95,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler versions prior to the one specified.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough]
+	[System.Diagnostics.DebuggerStepThrough, Serializable]
 	public class NotSupportedPriorToException : TSNotSupportedException
 	{
 		internal NotSupportedPriorToException(TaskCompatibility supportedVersion) : base(supportedVersion) { }
