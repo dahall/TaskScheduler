@@ -1224,7 +1224,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (Definition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || Definition.Principal.LogonType == TaskLogonType.Password)
 				throw new System.Security.SecurityException("Tasks which have been registered previously with stored passwords must use the TaskFolder.RegisterTaskDefinition method for updates.");
-			TaskService.GetFolder(System.IO.Path.GetDirectoryName(Path)).RegisterTaskDefinition(Name, Definition);
+			if (v2Task != null)
+				TaskService.GetFolder(System.IO.Path.GetDirectoryName(Path)).RegisterTaskDefinition(Name, Definition);
+			else
+				TaskService.RootFolder.RegisterTaskDefinition(Name, Definition);
 		}
 
 		/// <summary>
