@@ -432,9 +432,9 @@ namespace TestTaskService
 				//FolderTaskAction(ts.RootFolder, null, delegate(Task tsk) { if (tsk.Definition.Triggers.ContainsType(typeof(CustomTrigger))) output.WriteLine(tsk.Path); });
 
 				// Create a new task definition and assign properties
-				string[] names = arg[0].Split('\\');
-				string taskName = names.Length == 1 ? names[0] : names[1]; // "TesterTask";
-				string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
+				//string[] names = arg[0].Split('\\');
+				string taskName = "TesterTask";
+				//string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
 
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "some description";
@@ -443,15 +443,15 @@ namespace TestTaskService
 
 				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
 
-				td.Settings.StartWhenAvailable = true;
-				td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
+				//td.Settings.StartWhenAvailable = true;
+				//td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
 				td.Settings.DisallowStartIfOnBatteries = false;
 				td.Settings.StopIfGoingOnBatteries = false;
 				td.Settings.IdleSettings.StopOnIdleEnd = false;
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
-				TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
-				var t = testFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
+				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";
@@ -489,10 +489,10 @@ namespace TestTaskService
 				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "username", "password", TaskLogonType.Password);
 				t.Enabled = false;
 				*/
-				System.Threading.Thread.Sleep(15000);
+				//System.Threading.Thread.Sleep(15000);
 				output.WriteLine("LastTime & Result: {0} ({1:x})", t.LastRunTime == DateTime.MinValue ? "Never" : t.LastRunTime.ToString("g"), t.LastTaskResult);
 				output.WriteLine("NextRunTime: {0}", t.NextRunTime == DateTime.MinValue ? "None" : t.NextRunTime.ToString("g"));
-				System.Threading.Thread.Sleep(10000);
+				//System.Threading.Thread.Sleep(10000);
 				//DisplayTask(t, true);
 				/*using (var dlg = new TaskOptionsEditor { Editable = true })
 				{
@@ -501,17 +501,17 @@ namespace TestTaskService
 				}*/
 
 				// Retrieve the task, add a trigger and save it.
-				//t = ts.GetTask(taskName);
+				t = ts.GetTask(taskName);
 				//ts.RootFolder.DeleteTask(taskName);
-				//td = t.Definition;
-				/*td.Triggers.Clear();
+				td = t.Definition;
+				td.Triggers.Clear();
 				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
 				wt.DaysOfWeek = DaysOfTheWeek.Friday;
 				((ExecAction)td.Actions[0]).Path = "calc.exe";
-
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				t.RegisterChanges();
+				/*t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 				output.WriteLine("Principal: {1}; Triggers: {0}", t.Definition.Triggers, t.Definition.Principal);*/
-				testFolder.DeleteTask(taskName);
+				ts.RootFolder.DeleteTask(taskName);
 				//ts.RootFolder.DeleteFolder(taskFolder, false);
 				output.WriteLine("Task removed.");
 			}

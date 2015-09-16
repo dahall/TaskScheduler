@@ -292,7 +292,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return Action.CreateAction(v2Coll[++index]);
 				if (index == 0)
-					return new ExecAction(v1Task.GetApplicationName(), v1Task.GetParameters(), v1Task.GetWorkingDirectory());
+					return new ExecAction(v1Task);
 				throw new ArgumentOutOfRangeException();
 			}
 			set
