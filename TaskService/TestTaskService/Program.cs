@@ -441,7 +441,8 @@ namespace TestTaskService
 
 				td.Actions.Add("cmd.exe", "-someparameter");
 
-				td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
+				//td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
+				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false, EndBoundary = DateTime.Today.AddDays(30) });
 
 				//td.Settings.StartWhenAvailable = true;
 				//td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
@@ -451,7 +452,10 @@ namespace TestTaskService
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
 				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
-				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
+				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.S4U);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "dahall", null, TaskLogonType.S4U);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", null, TaskLogonType.S4U);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\kialla", null, TaskLogonType.S4U);
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";

@@ -398,20 +398,25 @@ namespace Microsoft.Win32.TaskScheduler
 		/// XML validation not available on Task Scheduler 1.0.</exception>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
+			User user = new User(UserId);
 			if (v2Folder != null)
 			{
 				definition.Actions.ConvertUnsupportedActions();
 				// Check for unsupported combinations and provide informational exceptions
-				UserId = UserId ?? definition.Principal.UserId;
+				if (UserId == null)
+				{
+					UserId = definition.Principal.UserId;
+					user = new User(UserId);
+				}
 				if (LogonType == TaskLogonType.ServiceAccount)
 				{
-					if (string.IsNullOrEmpty(UserId) || !IsServiceAccount(UserId))
+					if (string.IsNullOrEmpty(UserId) || user.IsServiceAccount)
 						throw new ArgumentException("A valid system account name must be supplied for TaskLogonType.ServiceAccount. Valid entries are \"NT AUTHORITY\\SYSTEM\", \"SYSTEM\", \"NT AUTHORITY\\LOCALSERVICE\", or \"NT AUTHORITY\\NETWORKSERVICE\".", nameof(UserId));
 					if (password != null)
 						throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
 				}
 				else if ((LogonType == TaskLogonType.Password || LogonType == TaskLogonType.InteractiveTokenOrPassword ||
-					(LogonType == TaskLogonType.S4U && !WindowsIdentity.GetCurrent().Equals(new WindowsIdentity(UserId)))) && password == null)
+					(LogonType == TaskLogonType.S4U && UserId != null && !user.IsCurrent)) && password == null)
 				{
 					throw new ArgumentException("A password must be supplied when specifying TaskLogonType.Password or TaskLogonType.InteractiveTokenOrPassword or TaskLogonType.S4U from another account.", nameof(password));
 				}
@@ -419,7 +424,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
 				}
-				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId, password, LogonType, sddl);
+				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId ?? user.Name, password, LogonType, sddl);
 				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
 					return null;
 				return Task.CreateTask(TaskService, iRegTask);
@@ -436,8 +441,6 @@ namespace Microsoft.Win32.TaskScheduler
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
 			if (LogonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
 				LogonType = TaskLogonType.InteractiveToken;
-			if (string.IsNullOrEmpty(UserId))
-				UserId = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 			switch (LogonType)
 			{
 				case TaskLogonType.Group:
@@ -446,22 +449,20 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException("This LogonType is not supported on Task Scheduler 1.0.");
 				case TaskLogonType.InteractiveToken:
 					flags |= (V1Interop.TaskFlags.RunOnlyIfLoggedOn | V1Interop.TaskFlags.Interactive);
-					if (String.IsNullOrEmpty(UserId))
-						UserId = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-					definition.v1Task.SetAccountInformation(UserId, IntPtr.Zero);
+					definition.v1Task.SetAccountInformation(user.Name, IntPtr.Zero);
 					break;
 				case TaskLogonType.ServiceAccount:
 					flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(UserId) || UserId.Equals("SYSTEM", StringComparison.CurrentCultureIgnoreCase)) ? String.Empty : UserId, IntPtr.Zero);
+					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(UserId) || user.IsSystem) ? String.Empty : user.Name, IntPtr.Zero);
 					break;
 				case TaskLogonType.InteractiveTokenOrPassword:
 					flags |= V1Interop.TaskFlags.Interactive;
 					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
-						definition.v1Task.SetAccountInformation(UserId, cpwd.DangerousGetHandle());
+						definition.v1Task.SetAccountInformation(user.Name, cpwd.DangerousGetHandle());
 					break;
 				case TaskLogonType.Password:
 					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
-						definition.v1Task.SetAccountInformation(UserId, cpwd.DangerousGetHandle());
+						definition.v1Task.SetAccountInformation(user.Name, cpwd.DangerousGetHandle());
 					break;
 				default:
 					break;
@@ -551,18 +552,6 @@ namespace Microsoft.Win32.TaskScheduler
 					yield return task;
 				}
 			}
-		}
-
-		private static bool IsServiceAccount(string userId)
-		{
-			NTAccount acct = new NTAccount(userId);
-			try
-			{
-				SecurityIdentifier si = (SecurityIdentifier)acct.Translate(typeof(SecurityIdentifier));
-				return (si.IsWellKnown(WellKnownSidType.LocalSystemSid) || si.IsWellKnown(WellKnownSidType.NetworkServiceSid) || si.IsWellKnown(WellKnownSidType.LocalServiceSid));
-			}
-			catch { }
-			return false;
 		}
 	}
 }
