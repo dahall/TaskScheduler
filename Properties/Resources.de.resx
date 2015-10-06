@@ -343,4 +343,10 @@
   <data name="WWThirdWeek" xml:space="preserve">
     <value>Dritte</value>
   </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>für {0}</value>
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>Alle {0} {1}.</value>
+  </data>
 </root>

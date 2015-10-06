@@ -211,10 +211,10 @@
     <value />
   </data>
   <data name="EventDetailHeader" xml:space="preserve">
-    <value>Planificateur de tâches</value>
+    <value>{0}, Planificateur de tâches</value>
   </data>
   <data name="EventPropertiesDialogTitle" xml:space="preserve">
-    <value>Propriétés de l'événement</value>
+    <value>Propriétés de l'événement - événement {0}, Planificateur de tâches</value>
   </data>
   <data name="HistoryHeader" xml:space="preserve">
     <value>Nombre d’événements : {0}</value>
@@ -298,10 +298,10 @@
     <value>Arrêter l’instance existante</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
-    <value />
+    <value>Il doit y avoir au moins une action attribuée à cette tâche.</value>
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value />
+    <value>Exécuter la tâche fois ({0})</value>
   </data>
   <data name="TaskSchedulerName" xml:space="preserve">
     <value>Planificateur de tâches</value>
@@ -403,7 +403,13 @@
     <value />
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
-    <value>Nom : {0}Description : {1}Déclencheur : {2}Action : {3}</value>
+    <value>Nom : {0}
+
+Description : {1}
+
+Déclencheur : {2}
+
+Action : {3}</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
     <value />
@@ -434,5 +440,8 @@
   </data>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
     <value>Hebdomadaire</value>
+  </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>Non défini</value>
   </data>
 </root>

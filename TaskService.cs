@@ -5,6 +5,45 @@ using System.Runtime.InteropServices;
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
+	/// Quick simple trigger types for the <see cref="TaskService.AddTask(string, QuickTriggerType, string, string, string, string, TaskLogonType)"/> method.
+	/// </summary>
+	public enum QuickTriggerType
+	{
+		/// <summary>
+		/// At boot.
+		/// </summary>
+		Boot,
+		/// <summary>
+		/// On system idle.
+		/// </summary>
+		Idle,
+		/// <summary>
+		/// At logon of any user.
+		/// </summary>
+		Logon,
+		/// <summary>
+		/// When the task is registered.
+		/// </summary>
+		TaskRegistration,
+		/// <summary>
+		/// Hourly, starting now.
+		/// </summary>
+		Hourly,
+		/// <summary>
+		/// Daily, starting now.
+		/// </summary>
+		Daily,
+		/// <summary>
+		/// Weekly, starting now.
+		/// </summary>
+		Weekly,
+		/// <summary>
+		/// Monthly, starting now.
+		/// </summary>
+		Monthly
+	}
+
+	/// <summary>
 	/// Provides access to the Task Scheduler service for managing registered tasks.
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
@@ -319,6 +358,63 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Create an action that will launch Notepad whenever the trigger fires
 			td.Actions.Add(action);
+
+			// Register the task in the root folder
+			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);
+		}
+
+		/// <summary>
+		/// Creates a new task, registers the task, and returns the instance.
+		/// </summary>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="trigger">The <see cref="Trigger" /> to determine when to run the task.</param>
+		/// <param name="exePath">The executable path.</param>
+		/// <param name="arguments">The arguments (optional). Value can be NULL.</param>
+		/// <param name="UserId">The user credentials used to register the task.</param>
+		/// <param name="Password">The password for the userId used to register the task.</param>
+		/// <param name="LogonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+		/// <returns>
+		/// A <see cref="Task" /> instance of the registered task.
+		/// </returns>
+		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken)
+		{
+			TaskDefinition td = NewTask();
+
+			// Create a trigger based on quick trigger
+			switch (trigger)
+			{
+				case QuickTriggerType.Boot:
+					td.Triggers.Add(new BootTrigger());
+					break;
+				case QuickTriggerType.Idle:
+					td.Triggers.Add(new IdleTrigger());
+					break;
+				case QuickTriggerType.Logon:
+					td.Triggers.Add(new LogonTrigger());
+					break;
+				case QuickTriggerType.TaskRegistration:
+					td.Triggers.Add(new RegistrationTrigger());
+					break;
+				case QuickTriggerType.Hourly:
+					var dt = new DailyTrigger();
+					dt.SetRepetition(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false);
+                    td.Triggers.Add(dt);
+					break;
+				case QuickTriggerType.Daily:
+					td.Triggers.Add(new DailyTrigger());
+					break;
+				case QuickTriggerType.Weekly:
+					td.Triggers.Add(new WeeklyTrigger());
+					break;
+				case QuickTriggerType.Monthly:
+					td.Triggers.Add(new MonthlyTrigger());
+					break;
+				default:
+					break;
+			}
+
+			// Create an action that will launch Notepad whenever the trigger fires
+			td.Actions.Add(exePath, arguments);
 
 			// Register the task in the root folder
 			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);

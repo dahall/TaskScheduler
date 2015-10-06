@@ -130,7 +130,7 @@
     <value>{3} {0:P}</value>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
-    <value>Tous les jours</value>
+    <value>tous les jours</value>
   </data>
   <data name="EmailAction" xml:space="preserve">
     <value>{1} {0}</value>
@@ -148,7 +148,7 @@
     <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
-    <value>Chaque mois</value>
+    <value>chaque mois</value>
   </data>
   <data name="MultipleActions" xml:space="preserve">
     <value>Plusieurs actions définies.</value>
@@ -160,10 +160,10 @@
     <value>{0}</value>
   </data>
   <data name="TaskDefaultPrincipal" xml:space="preserve">
-    <value>auteur</value>
+    <value>Auteur</value>
   </data>
   <data name="TaskStateDisabled" xml:space="preserve">
-    <value>désactivé</value>
+    <value>Désactivé</value>
   </data>
   <data name="TaskStateQueued" xml:space="preserve">
     <value>En attente</value>
@@ -211,7 +211,7 @@
     <value>Lors du déverrouillage de la station de travail de {0}.</value>
   </data>
   <data name="TriggerSessionUserSession" xml:space="preserve">
-    <value>Session utilisateur de {0}.</value>
+    <value>session utilisateur de {0}</value>
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
     <value>Au démarrage</value>
@@ -256,24 +256,75 @@
     <value>À {0:t} chaque {1} de chaque {2} semaines, à partir du {0:d}</value>
   </data>
   <data name="WWAllWeeks" xml:space="preserve">
-    <value>Toutes les</value>
+    <value>toutes les</value>
   </data>
   <data name="WWFifthWeek" xml:space="preserve">
-    <value>Cinquième</value>
+    <value>cinquième</value>
   </data>
   <data name="WWFirstWeek" xml:space="preserve">
-    <value>Premier</value>
+    <value>premier</value>
   </data>
   <data name="WWFourthWeek" xml:space="preserve">
-    <value>Quatrième</value>
+    <value>quatrième</value>
   </data>
   <data name="WWLastWeek" xml:space="preserve">
-    <value>Dernier</value>
+    <value>dernier</value>
   </data>
   <data name="WWSecondWeek" xml:space="preserve">
-    <value>Seconde</value>
+    <value>deuxième</value>
   </data>
   <data name="WWThirdWeek" xml:space="preserve">
-    <value>Troisième</value>
+    <value>troisième</value>
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>pour {0}</value>
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>Chaque {0} {1}.</value>
+  </data>
+  <data name="TriggerRepetition" xml:space="preserve">
+    <value>Après déclenché, répéter chaque les {0} {1}.</value>
+  </data>
+  <data name="TriggerDurationNot0" xml:space="preserve">
+    <value>pour une durée de {0}</value>
+  </data>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Appeler un objet COM</value>
+  </data>
+  <data name="TriggerDaily1" xml:space="preserve">
+    <value>À {0} tous les jours</value>
+  </data>
+  <data name="TriggerDaily2" xml:space="preserve">
+    <value>À {0} tous les {1} jours</value>
+  </data>
+  <data name="TriggerEndBoundary" xml:space="preserve">
+    <value>Déclencheur expire à {0:G}.</value>
+  </data>
+  <data name="TriggerMonthly1" xml:space="preserve">
+    <value>À {0:t} le jour {1} de {2}, à compter du {0:d}.</value>
+  </data>
+  <data name="TriggerMonthlyDOW1" xml:space="preserve">
+    <value>À {0:t} sur {1} {2} de chaque {3}, à partir du {0:d}.</value>
+  </data>
+  <data name="TriggerTime1" xml:space="preserve">
+    <value>À {0:t} le {0:d}</value>
+  </data>
+  <data name="TriggerEventBasic1" xml:space="preserve">
+    <value>Lors de l'événement - Journal: {0}</value>
+  </data>
+  <data name="TriggerEventBasic3" xml:space="preserve">
+    <value>, ID d'événement: {0}</value>
+  </data>
+  <data name="TriggerSessionConsoleConnect" xml:space="preserve">
+    <value>Lors de la connexion locale à {0}.</value>
+  </data>
+  <data name="TriggerSessionRemoteConnect" xml:space="preserve">
+    <value>Lors de la connexion à distance à {0}.</value>
+  </data>
+  <data name="TriggerSessionConsoleDisconnect" xml:space="preserve">
+    <value>Sur l’ordinateur local, se déconnecter de {0}.</value>
+  </data>
+  <data name="TriggerSessionRemoteDisconnect" xml:space="preserve">
+    <value>Sur l’ordinateur distant, se déconnecter de {0}.</value>
   </data>
 </root>

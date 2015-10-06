@@ -534,4 +534,7 @@ Acción : {3}</value>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
     <value>Semanalmente</value>
   </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>Sin establecer</value>
+  </data>
 </root>

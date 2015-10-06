@@ -321,4 +321,10 @@
   <data name="TriggerCustom1" xml:space="preserve">
     <value>定制触发器</value>
   </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>每隔{0}{1}</value>
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>{0}</value>
+  </data>
 </root>

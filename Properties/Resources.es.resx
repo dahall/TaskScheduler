@@ -133,7 +133,7 @@
     <value>{3} {0:P}</value>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
-    <value>Todos los días</value>
+    <value>todos los días</value>
   </data>
   <data name="EmailAction" xml:space="preserve">
     <value>{1} {0}</value>
@@ -320,5 +320,11 @@
   </data>
   <data name="WWThirdWeek" xml:space="preserve">
     <value>tercer</value>
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>Cada {0} {1}.</value>
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>para {0}</value>
   </data>
 </root>

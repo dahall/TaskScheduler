@@ -279,9 +279,6 @@
     <value>Mensile</value>
   </data>
   <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>At task creation/modification</value>
-  </data>
-  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
     <value>Alla creazione / modifica di attività</value>
   </data>
   <data name="TriggerTypeTime" xml:space="preserve">
@@ -295,7 +292,7 @@
     <comment>0 = StartBoundary; 1 = list of Week Days</comment>
   </data>
   <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
-    <value>A {0: t} ogni {1} di {2} ogni settimana, a partire {0: d}</value>
+    <value>A {0:t} ogni {1} di {2} ogni settimana, a partire {0:d}</value>
     <comment>0 = StartBoundary; 1 = list of Week Days; 2 = WeekInterval</comment>
   </data>
   <data name="WWAllWeeks" xml:space="preserve">
@@ -339,5 +336,14 @@
   </data>
   <data name="TriggerTypeCustom" xml:space="preserve">
     <value>Attivazione personalizata</value>
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>Ogni {0} {1}.</value>
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>per {0}</value>
+  </data>
+  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
+    <value>Sul cambiamento di stato</value>
   </data>
 </root>

@@ -540,4 +540,7 @@ Aktion: {3}</value>
   <data name="LastResultRunning" xml:space="preserve">
     <value></value>
   </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>
