@@ -538,4 +538,7 @@ Azione: {3}</value>
   <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
     <value>Diagnositico WDI</value>
   </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>Annulla impostazione</value>
+  </data>
 </root>

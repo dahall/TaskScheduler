@@ -445,4 +445,7 @@
   <data name="LastResultRunning" xml:space="preserve">
     <value></value>
   </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>未设置</value>
+  </data>
 </root>

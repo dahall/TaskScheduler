@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Serialization;
@@ -762,7 +763,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="span">The <see cref="TimeSpan"/> to display.</param>
 		/// <returns>Either the full string representation created by TimeSpan2 or the default TimeSpan representation.</returns>
-		private static string GetBestTimeSpanString(TimeSpan span)
+		internal static string GetBestTimeSpanString(TimeSpan span)
 		{
 			// See if the TimeSpan2 assembly is accessible
 			if (!foundTimeSpan2.HasValue)
@@ -2295,6 +2296,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
 	/// </summary>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
+	[TypeConverter(typeof(RepetitionPatternConverter))]
 	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
 	{
 		private Trigger pTrigger;
@@ -2500,6 +2502,44 @@ namespace Microsoft.Win32.TaskScheduler
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
 			XmlSerializationHelper.WriteObjectProperties(writer, this);
+		}
+	}
+
+	internal sealed class RepetitionPatternConverter : TypeConverter
+	{
+		/*public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+		{
+			return base.CanConvertFrom(context, sourceType);
+		}
+
+		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+		{
+			return base.ConvertFrom(context, culture, value);
+		}*/
+
+		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+		{
+			return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
+		}
+
+		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			var rp = (RepetitionPattern)value;
+			if (destinationType == typeof(string))
+			{
+				if (rp.Interval != TimeSpan.Zero)
+				{
+					string sduration = string.Empty;
+					if (rp.Duration == TimeSpan.Zero)
+						sduration = Properties.Resources.TriggerDuration0;
+					else
+						sduration = string.Format(Properties.Resources.TriggerDurationNot0Short, Trigger.GetBestTimeSpanString(rp.Duration));
+					return string.Format(Properties.Resources.TriggerRepetitionShort, Trigger.GetBestTimeSpanString(rp.Interval), sduration);
+				}
+				else
+					return "";
+			}
+			return base.ConvertTo(context, culture, value, destinationType);
 		}
 	}
 
