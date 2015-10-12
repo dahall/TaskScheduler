@@ -808,7 +808,12 @@ namespace TestTaskService
 					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.GetDataValue("ActionName"), ev.TimeCreated.Value, ev.GetDataValue("ResultCode"));
 			}
 
+			// Show on traditional editor
 			DisplayTask(runningTask, true);
+
+			// Show on new editor
+			new TaskOptionsEditor(runningTask).ShowDialog();
+
 			tf.DeleteTask("Test1");
 		}
 
@@ -824,7 +829,7 @@ namespace TestTaskService
 				editorForm = new TaskEditDialog();
 			editorForm.Editable = editable;
 			editorForm.Initialize(t);
-			editorForm.RegisterTaskOnAccept = true;
+			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
@@ -835,7 +840,7 @@ namespace TestTaskService
 				editorForm = new TaskEditDialog();
 			editorForm.Editable = editable;
 			editorForm.Initialize(ts, td);
-			editorForm.RegisterTaskOnAccept = true;
+			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
 			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}

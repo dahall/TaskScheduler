@@ -108,7 +108,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Contains a collection of name-value pairs.
 	/// </summary>
-	public sealed class NamedValueCollection : IDisposable, ICollection<NameValuePair>
+	public sealed class NamedValueCollection : IDisposable, ICollection<NameValuePair>, IDictionary<string, string>
 	{
 		private V2Interop.ITaskNamedValueCollection v2Coll = null;
 		private List<NameValuePair> unboundDict = null;
@@ -172,7 +172,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll == null)
-					return unboundDict.ConvertAll<string>(delegate(NameValuePair p) { return p.Name; });
+					return unboundDict.ConvertAll<string>(p => p.Name);
 
 				List<string> ret = new List<string>(v2Coll.Count);
 				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
@@ -192,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Coll == null)
-					return unboundDict.ConvertAll<string>(delegate(NameValuePair p) { return p.Value; });
+					return unboundDict.ConvertAll<string>(p => p.Value);
 
 				List<string> ret = new List<string>(v2Coll.Count);
 				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
@@ -217,26 +217,44 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the value of the item with the specified key.
+		/// Gets the value of the item with the specified name.
 		/// </summary>
-		/// <param name="key">Key to get the value for.</param>
-		/// <returns>Value for the key, or null if not found.</returns>
-		public string this[string key]
+		/// <param name="name">Name to get the value for.</param>
+		/// <returns>Value for the name, or null if not found.</returns>
+		public string this[string name]
 		{
 			get
 			{
-				if (v2Coll != null)
+				string ret;
+				TryGetValue(name, out ret);
+				return ret;
+			}
+			set
+			{
+				if (v2Coll == null)
 				{
-					foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
-					{
-						if (string.Compare(item.Name, key, false) == 0)
-							return item.Value;
-					}
-					return null;
+					int idx = unboundDict.FindIndex(p => p.Name == name);
+					var nvp = new NameValuePair(name, value);
+					if (idx == -1)
+						unboundDict.Add(nvp);
+					else
+						unboundDict[idx] = nvp;
 				}
-
-				var nvp = unboundDict.Find(delegate(NameValuePair p) { return p.Name == key; });
-				return nvp == null ? null : nvp.Value;
+				else
+				{
+					var array = new KeyValuePair<string, string>[Count];
+					((ICollection<KeyValuePair<string, string>>)this).CopyTo(array, 0);
+					int idx = Array.FindIndex(array, p => p.Key == name);
+					if (idx == -1)
+						v2Coll.Create(name, value);
+					else
+					{
+						array[idx] = new KeyValuePair<string, string>(name, value);
+						v2Coll.Clear();
+						for (int i = 0; i < array.Length; i++)
+							v2Coll.Create(array[i].Key, array[i].Value);
+					}
+				}
 			}
 		}
 
@@ -263,18 +281,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Removes a selected name-value pair from the collection.
-		/// </summary>
-		/// <param name="index">Index of the pair to remove.</param>
-		public void RemoveAt(int index)
-		{
-			if (v2Coll != null)
-				v2Coll.Remove(index);
-			else
-				unboundDict.RemoveAt(index);
-		}
-
-		/// <summary>
 		/// Clears the entire collection of name-value pairs.
 		/// </summary>
 		public void Clear()
@@ -297,6 +303,71 @@ namespace Microsoft.Win32.TaskScheduler
 				return unboundDict.GetEnumerator();
 
 			return new INVCEnumerator(v2Coll);
+		}
+
+		/// <summary>
+		/// Removes the name-value pair with the specified key from the collection.
+		/// </summary>
+		/// <param name="name">The name associated with a value in a name-value pair.</param>
+		/// <returns></returns>
+		public bool Remove(string name)
+		{
+			if (v2Coll == null)
+			{
+				int idx = unboundDict.FindIndex(p => p.Name == name);
+				if (idx != -1)
+					unboundDict.RemoveAt(idx);
+				return (idx != -1);
+			}
+
+			for (int i = 0; i < v2Coll.Count; i++)
+			{
+				if (name == v2Coll[i].Name)
+				{
+					v2Coll.Remove(i);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Removes a selected name-value pair from the collection.
+		/// </summary>
+		/// <param name="index">Index of the pair to remove.</param>
+		public void RemoveAt(int index)
+		{
+			if (v2Coll != null)
+				v2Coll.Remove(index);
+			else
+				unboundDict.RemoveAt(index);
+		}
+
+		/// <summary>
+		/// Gets the value associated with the specified name.
+		/// </summary>
+		/// <param name="name">The name whose value to get.</param>
+		/// <param name="value">When this method returns, the value associated with the specified name, if the name is found; otherwise, <c>null</c>. This parameter is passed uninitialized.</param>
+		/// <returns><c>true</c> if the collection contains an element with the specified name; otherwise, <c>false</c>.</returns>
+		public bool TryGetValue(string name, out string value)
+		{
+			if (v2Coll != null)
+			{
+				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+				{
+					if (string.Compare(item.Name, name, false) == 0)
+					{
+						value = item.Value;
+						return true;
+					}
+				}
+				value = null;
+				return false;
+			}
+
+			var nvp = unboundDict.Find(p => p.Name == name);
+			value = nvp?.Value;
+			return nvp != null;
 		}
 
 		/// <summary>
@@ -332,6 +403,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		bool ICollection<NameValuePair>.IsReadOnly => false;
 
+		ICollection<string> IDictionary<string, string>.Keys => Names;
+
+		bool ICollection<KeyValuePair<string, string>>.IsReadOnly => false;
+
 		bool ICollection<NameValuePair>.Remove(NameValuePair item)
 		{
 			if (v2Coll == null)
@@ -346,6 +421,33 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 			return false;
+		}
+
+		bool IDictionary<string, string>.ContainsKey(string key) => Names.Contains(key);
+
+		void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> item)
+		{
+			Add(item.Key, item.Value);
+		}
+
+		bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> item) =>
+			((ICollection<NameValuePair>)this).Contains(new NameValuePair(item.Key, item.Value));
+
+		void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
+		{
+			if (array.Length < Count + arrayIndex)
+				throw new ArgumentOutOfRangeException(nameof(array), "Array has insufficient capacity to support copy.");
+			foreach (var item in ((IEnumerable<KeyValuePair<string, string>>)this))
+				array[arrayIndex++] = item;
+		}
+
+		bool ICollection<KeyValuePair<string, string>>.Remove(KeyValuePair<string, string> item) =>
+			((ICollection<NameValuePair>)this).Remove(new NameValuePair(item.Key, item.Value));
+
+		IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+		{
+			foreach (var nvp in this)
+				yield return new KeyValuePair<string, string>(nvp.Name, nvp.Value);
 		}
 
 		private class INVCEnumerator : IEnumerator<NameValuePair>

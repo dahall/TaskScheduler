@@ -2517,10 +2517,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return base.ConvertFrom(context, culture, value);
 		}*/
 
-		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-		{
-			return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
-		}
+		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
+			destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
 
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
 		{

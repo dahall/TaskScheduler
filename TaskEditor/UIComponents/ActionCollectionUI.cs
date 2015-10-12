@@ -59,12 +59,13 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				}
 				if (modern)
 				{
-					actionListView.Alignment = ListViewAlignment.Left;
+					actionListView.Alignment = ListViewAlignment.Top;
 					actionListView.AdjustTileToWidth();
 					NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else
 				{
+					actionListView.Alignment = ListViewAlignment.Top;
 					if (actionListView.Items.Count > 0)
 						actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 					actionListView.AdjustColumnToFill();
