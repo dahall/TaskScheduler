@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -9,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides the methods that are used to add to, remove from, and get the triggers of a task.
 	/// </summary>
 	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable
+	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList
 	{
 		private V1Interop.ITask v1Task = null;
 		private V2Interop.ITaskDefinition v2Def = null;
@@ -464,6 +465,47 @@ namespace Microsoft.Win32.TaskScheduler
 			Add(item);
 		}
 
+		int IList.Add(object value)
+		{
+			Add((Trigger)value);
+			return Count - 1;
+		}
+
+		bool IList.Contains(object value) => Contains((Trigger)value);
+
+		int IList.IndexOf(object value) => IndexOf((Trigger)value);
+
+		void IList.Insert(int index, object value)
+		{
+			Insert(index, (Trigger)value);
+		}
+
+		void IList.Remove(object value)
+		{
+			Remove((Trigger)value);
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			var src = new Trigger[Count];
+			CopyTo(src, 0);
+			Array.Copy(src, 0, array, index, Count);
+		}
+
 		bool ICollection<Trigger>.IsReadOnly => false;
+
+		bool IList.IsReadOnly => false;
+
+		bool IList.IsFixedSize => false;
+
+		object ICollection.SyncRoot => this;
+
+		bool ICollection.IsSynchronized => false;
+
+		object IList.this[int index]
+		{
+			get { return this[index]; } 
+			set { this[index] = (Trigger)value; }
+		}
 	}
 }

@@ -410,7 +410,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				if (LogonType == TaskLogonType.ServiceAccount)
 				{
-					if (string.IsNullOrEmpty(UserId) || user.IsServiceAccount)
+					if (string.IsNullOrEmpty(UserId) || !user.IsServiceAccount)
 						throw new ArgumentException("A valid system account name must be supplied for TaskLogonType.ServiceAccount. Valid entries are \"NT AUTHORITY\\SYSTEM\", \"SYSTEM\", \"NT AUTHORITY\\LOCALSERVICE\", or \"NT AUTHORITY\\NETWORKSERVICE\".", nameof(UserId));
 					if (password != null)
 						throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
