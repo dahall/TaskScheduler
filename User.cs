@@ -9,13 +9,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public User(string userName = null)
 		{
-			if (userName != null && userName.Contains("\\"))
+			var cur = WindowsIdentity.GetCurrent();
+			if (userName == null || cur.Name.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
 			{
-				using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
+				acct = cur;
+			}
+            else if (userName != null && userName.Contains("\\"))
+			{
+                using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
 					acct = new WindowsIdentity(ds.CrackName(userName));
 			}
 			else
-				acct = userName == null ? WindowsIdentity.GetCurrent() : new WindowsIdentity(userName);
+				acct = new WindowsIdentity(userName);
 		}
 
 		internal User(WindowsIdentity wid)

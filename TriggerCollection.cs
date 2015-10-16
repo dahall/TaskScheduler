@@ -13,8 +13,8 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList
 	{
 		private V1Interop.ITask v1Task = null;
-		private V2Interop.ITaskDefinition v2Def = null;
 		private V2Interop.ITriggerCollection v2Coll = null;
+		private V2Interop.ITaskDefinition v2Def = null;
 
 		internal TriggerCollection(V1Interop.ITask iTask)
 		{
@@ -28,107 +28,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Releases all resources used by this class.
-		/// </summary>
-		public void Dispose()
-		{
-			if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
-			v2Def = null;
-			v1Task = null;
-		}
-
-		/// <summary>
-		/// Gets the collection enumerator for this collection.
-		/// </summary>
-		/// <returns>The <see cref="IEnumerator{T}"/> for this collection.</returns>
-		public IEnumerator<Trigger> GetEnumerator()
-		{
-			if (v1Task != null)
-				return new V1TriggerEnumerator(v1Task);
-			return new V2TriggerEnumerator(v2Coll, v2Def);
-		}
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-
-		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
-		{
-			private V1Interop.ITask iTask;
-			private short curItem = -1;
-
-			internal V1TriggerEnumerator(V1Interop.ITask task)
-			{
-				iTask = task;
-			}
-
-			public Trigger Current => Trigger.CreateTrigger(iTask.GetTrigger((ushort)curItem));
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
-			{
-				iTask = null;
-			}
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			public bool MoveNext()
-			{
-				if (++curItem >= iTask.GetTriggerCount())
-					return false;
-				return true;
-			}
-
-			public void Reset()
-			{
-				curItem = -1;
-			}
-		}
-
-		internal sealed class V2TriggerEnumerator : IEnumerator<Trigger>
-		{
-			private System.Collections.IEnumerator iEnum;
-			private V2Interop.ITaskDefinition v2Def = null;
-
-			internal V2TriggerEnumerator(V2Interop.ITriggerCollection iColl, V2Interop.ITaskDefinition iDef)
-			{
-				iEnum = iColl.GetEnumerator();
-				v2Def = iDef;
-			}
-
-			#region IEnumerator<Trigger> Members
-
-			public Trigger Current => Trigger.CreateTrigger((V2Interop.ITrigger)iEnum.Current, v2Def);
-
-			#endregion
-
-			#region IDisposable Members
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
-			{
-				iEnum = null;
-			}
-
-			#endregion
-
-			#region IEnumerator Members
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			public bool MoveNext() => iEnum.MoveNext();
-
-			public void Reset()
-			{
-				iEnum.Reset();
-			}
-
-			#endregion
-		}
-
-		/// <summary>
 		/// Gets the number of triggers in the collection.
 		/// </summary>
 		public int Count
@@ -138,6 +37,88 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return v2Coll.Count;
 				return (int)v1Task.GetTriggerCount();
+			}
+		}
+
+		bool ICollection.IsSynchronized => false;
+
+		object ICollection.SyncRoot => this;
+
+		bool ICollection<Trigger>.IsReadOnly => false;
+
+		bool IList.IsFixedSize => false;
+
+		bool IList.IsReadOnly => false;
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { this[index] = (Trigger)value; }
+		}
+
+		/// <summary>
+		/// Gets or sets a specified trigger from the collection.
+		/// </summary>
+		/// <value>
+		/// The <see cref="Trigger"/>.
+		/// </value>
+		/// <param name="triggerId">The id (<see cref="Trigger.Id" />) of the trigger to be retrieved.</param>
+		/// <returns>
+		/// Specialized <see cref="Trigger" /> instance.
+		/// </returns>
+		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
+		/// <exception cref="System.NullReferenceException"></exception>
+		/// <exception cref="System.InvalidOperationException">Mismatching Id for trigger and lookup.</exception>
+		public Trigger this[string triggerId]
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(triggerId))
+					throw new ArgumentNullException(nameof(triggerId));
+				foreach (Trigger t in this)
+					if (string.Equals(t.Id, triggerId))
+						return t;
+				throw new ArgumentOutOfRangeException(nameof(triggerId));
+			}
+			set
+			{
+				if (value == null)
+					throw new NullReferenceException();
+				if (string.IsNullOrEmpty(triggerId))
+					throw new ArgumentNullException(nameof(triggerId));
+				if (triggerId != value.Id)
+					throw new InvalidOperationException("Mismatching Id for trigger and lookup.");
+				int index = IndexOf(triggerId);
+				if (index >= 0)
+				{
+					RemoveAt(index);
+					Insert(index, value);
+				}
+				else
+					Add(value);
+			}
+		}
+
+		/// <summary>
+		/// Gets a specified trigger from the collection.
+		/// </summary>
+		/// <param name="index">The index of the trigger to be retrieved.</param>
+		/// <returns>Specialized <see cref="Trigger"/> instance.</returns>
+		public Trigger this[int index]
+		{
+			get
+			{
+				if (v2Coll != null)
+					return Trigger.CreateTrigger(v2Coll[++index], v2Def);
+				return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index));
+			}
+			set
+			{
+				if (Count <= index)
+					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the TriggerCollection");
+				Insert(index, value);
+				RemoveAt(index + 1);
 			}
 		}
 
@@ -178,19 +159,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Adds a collection of unbound triggers to the end of the <see cref="TriggerCollection"/>.
 		/// </summary>
 		/// <param name="triggers">The triggers to be added to the end of the <see cref="TriggerCollection"/>. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
-		/// <exception cref="System.ArgumentNullException"><c>triggers</c> is <c>null</c>.</exception>
+		/// <exception cref="System.ArgumentNullException"><paramref name="triggers"/> is <c>null</c>.</exception>
 		public void AddRange(IEnumerable<Trigger> triggers)
 		{
 			if (triggers == null)
 				throw new ArgumentNullException(nameof(triggers));
 			foreach (var item in triggers)
 				Add(item);
-		}
-
-		internal void Bind()
-		{
-			foreach (Trigger t in this)
-				t.SetV1TriggerData();
 		}
 
 		/// <summary>
@@ -214,7 +189,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Trigger item) => IndexOf(item) >= 0;
+		public bool Contains(Trigger item) => Find(a => a.Equals(item)) != null;
 
 		/// <summary>
 		/// Determines whether the specified trigger type is contained in this collection.
@@ -223,98 +198,138 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		///   <c>true</c> if the specified trigger type is contained in this collection; otherwise, <c>false</c>.
 		/// </returns>
-		public bool ContainsType(Type triggerType)
-		{
-			foreach (Trigger t in this)
-				if (t.GetType() == triggerType)
-					return true;
-			return false;
-		}
+		public bool ContainsType(Type triggerType) => Find(a => a.GetType() == triggerType) != null;
 
 		/// <summary>
 		/// Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1" /> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
 		/// </summary>
 		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="Array"/> must have zero-based indexing.</param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-		/// <exception cref="System.ArgumentNullException"><paramref name="array"/> is null.</exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
-		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1" /> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.</exception>
 		public void CopyTo(Trigger[] array, int arrayIndex)
 		{
+			CopyTo(0, array, arrayIndex, Count);
+		}
+
+		/// <summary>
+		/// Copies the elements of the <see cref="TriggerCollection" /> to an <see cref="T:Trigger[]" />, starting at a particular <see cref="T:Trigger[]" /> index.
+		/// </summary>
+		/// <param name="index">The zero-based index in the source at which copying begins.</param>
+		/// <param name="array">The <see cref="T:Trigger[]" /> that is the destination of the elements copied from <see cref="TriggerCollection" />. The <see cref="T:Trigger[]" /> must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="T:Trigger[]" /> at which copying begins.</param>
+		/// <param name="count">The number of elements to copy.</param>
+		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>
+		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="TriggerCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
+		public void CopyTo(int index, Trigger[] array, int arrayIndex, int count)
+		{
 			if (array == null)
-				throw new ArgumentNullException();
+				throw new ArgumentNullException(nameof(array));
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index));
 			if (arrayIndex < 0)
-				throw new ArgumentOutOfRangeException();
-			if (Count > (array.Length - arrayIndex))
-				throw new ArgumentException();
-			for (int i = 0; i < Count; i++)
-				array[arrayIndex + i] = (Trigger)this[i].Clone();
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+			if (count < 0 || count > (Count - index))
+				throw new ArgumentOutOfRangeException(nameof(count));
+			if ((Count - index) > (array.Length - arrayIndex))
+				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+			for (int i = 0; i < count; i++)
+				array[arrayIndex + i] = (Trigger)this[index + i].Clone();
 		}
 
 		/// <summary>
-		/// Gets a specified trigger from the collection.
+		/// Releases all resources used by this class.
 		/// </summary>
-		/// <param name="index">The index of the trigger to be retrieved.</param>
-		/// <returns>Specialized <see cref="Trigger"/> instance.</returns>
-		public Trigger this[int index]
+		public void Dispose()
 		{
-			get
-			{
-				if (v2Coll != null)
-					return Trigger.CreateTrigger(v2Coll[++index], v2Def);
-				return Trigger.CreateTrigger(v1Task.GetTrigger((ushort)index));
-			}
-			set
-			{
-				if (Count <= index)
-					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the TriggerCollection");
-				RemoveAt(index);
-				Insert(index, value);
-			}
+			if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
+			v2Def = null;
+			v1Task = null;
 		}
 
 		/// <summary>
-		/// Gets or sets a specified trigger from the collection.
+		/// Searches for an <see cref="Trigger"/> that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
 		/// </summary>
-		/// <value>
-		/// The <see cref="Trigger"/>.
-		/// </value>
-		/// <param name="triggerId">The id (<see cref="Trigger.Id" />) of the trigger to be retrieved.</param>
-		/// <returns>
-		/// Specialized <see cref="Trigger" /> instance.
-		/// </returns>
-		/// <exception cref="System.ArgumentNullException"></exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
-		/// <exception cref="System.NullReferenceException"></exception>
-		/// <exception cref="System.InvalidOperationException">Mismatching Id for trigger and lookup.</exception>
-		public Trigger this[string triggerId]
+		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the <see cref="Trigger"/> to search for.</param>
+		/// <returns>The first <see cref="Trigger"/> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
+		public Trigger Find(Predicate<Trigger> match)
 		{
-			get
-			{
-				if (string.IsNullOrEmpty(triggerId))
-					throw new ArgumentNullException(triggerId);
-				foreach (Trigger t in this)
-					if (string.Equals(t.Id, triggerId))
-						return t;
-				throw new ArgumentOutOfRangeException(triggerId);
-			}
-			set
-			{
-				if (value == null)
-					throw new NullReferenceException();
-				if (string.IsNullOrEmpty(triggerId))
-					throw new ArgumentNullException(triggerId);
-				if (triggerId != value.Id)
-					throw new InvalidOperationException("Mismatching Id for trigger and lookup.");
-				int index = IndexOf(triggerId);
-				if (index >= 0)
-				{
-					RemoveAt(index);
-					Insert(index, value);
-				}
-				else
-					Add(value);
-			}
+			if (match == null)
+				throw new ArgumentNullException(nameof(match));
+			foreach (var item in this)
+				if (match(item)) return item;
+			return null;
+		}
+
+		/// <summary>
+		/// Searches for an <see cref="Trigger"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
+		/// </summary>
+		/// <param name="startIndex">The zero-based starting index of the search.</param>
+		/// <param name="count">The number of elements in the collection to search.</param>
+		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the element to search for.</param>
+		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		public int FindIndexOf(int startIndex, int count, Predicate<Trigger> match)
+		{
+			if (startIndex < 0 || startIndex >= Count)
+				throw new ArgumentOutOfRangeException(nameof(startIndex));
+			if (startIndex + count > Count)
+				throw new ArgumentOutOfRangeException(nameof(count));
+			if (match == null)
+				throw new ArgumentNullException(nameof(match));
+			for (int i = startIndex; i < startIndex + count; i++)
+				if (match(this[i])) return i;
+			return -1;
+		}
+
+		/// <summary>
+		/// Searches for an <see cref="Trigger"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection.
+		/// </summary>
+		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the element to search for.</param>
+		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		public int FindIndexOf(Predicate<Trigger> match) => FindIndexOf(0, Count, match);
+
+		/// <summary>
+		/// Gets the collection enumerator for this collection.
+		/// </summary>
+		/// <returns>The <see cref="IEnumerator{T}"/> for this collection.</returns>
+		public IEnumerator<Trigger> GetEnumerator()
+		{
+			if (v1Task != null)
+				return new V1TriggerEnumerator(v1Task);
+			return new ComEnumerator<Trigger, V2Interop.ITriggerCollection>(v2Coll, o => Trigger.CreateTrigger((V2Interop.ITrigger)o, v2Def));
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			if (array != null && array.Rank != 1)
+				throw new RankException("Multi-dimensional arrays are not supported.");
+			var src = new Trigger[Count];
+			CopyTo(src, 0);
+			Array.Copy(src, 0, array, index, Count);
+		}
+
+		void ICollection<Trigger>.Add(Trigger item)
+		{
+			Add(item);
+		}
+
+		int IList.Add(object value)
+		{
+			Add((Trigger)value);
+			return Count - 1;
+		}
+
+		bool IList.Contains(object value) => Contains((Trigger)value);
+
+		int IList.IndexOf(object value) => IndexOf((Trigger)value);
+
+		void IList.Insert(int index, object value)
+		{
+			Insert(index, (Trigger)value);
+		}
+
+		void IList.Remove(object value)
+		{
+			Remove((Trigger)value);
 		}
 
 		/// <summary>
@@ -324,15 +339,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
 		/// </returns>
-		public int IndexOf(Trigger item)
-		{
-			for (int i = 0; i < Count; i++)
-			{
-				if (this[i].Equals(item))
-					return i;
-			}
-			return -1;
-		}
+		public int IndexOf(Trigger item) => FindIndexOf(a => a.Equals(item));
 
 		/// <summary>
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
@@ -345,12 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (string.IsNullOrEmpty(triggerId))
 				throw new ArgumentNullException(triggerId);
-			for (int i = 0; i < Count; i++)
-			{
-				if (string.Equals(this[i].Id, triggerId))
-					return i;
-			}
-			return -1;
+			return FindIndexOf(a => string.Equals(a.Id, triggerId));
 		}
 
 		/// <summary>
@@ -360,14 +362,61 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="trigger">The trigger to insert into the list.</param>
 		public void Insert(int index, Trigger trigger)
 		{
+			if (trigger == null)
+				throw new ArgumentNullException(nameof(trigger));
+			if (index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index));
+
 			Trigger[] pushItems = new Trigger[Count - index];
-			for (int i = index; i < Count; i++)
-				pushItems[i - index] = (Trigger)this[i].Clone();
+			CopyTo(index, pushItems, 0, Count - index);
 			for (int j = Count - 1; j >= index; j--)
 				RemoveAt(j);
 			Add(trigger);
 			for (int k = 0; k < pushItems.Length; k++)
 				Add(pushItems[k]);
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Triggers", TaskDefinition.tns);
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{
+					case "BootTrigger":
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Boot));
+						break;
+
+					case "IdleTrigger":
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Idle));
+						break;
+
+					case "TimeTrigger":
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Time));
+						break;
+
+					case "LogonTrigger":
+						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Logon));
+						break;
+
+					case "CalendarTrigger":
+						Add(CalendarTrigger.GetTriggerFromXml(reader));
+						break;
+
+					default:
+						reader.Skip();
+						break;
+				}
+			}
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			foreach (var t in this)
+				XmlSerializationHelper.WriteObject(writer, t);
 		}
 
 		/// <summary>
@@ -407,6 +456,19 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Task.DeleteTrigger((ushort)index); //Remove the trigger from the Task Scheduler
 		}
 
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+		/// <summary>
+		/// Copies the elements of the <see cref="TriggerCollection"/> to a new array.
+		/// </summary>
+		/// <returns>An array containing copies of the elements of the <see cref="TriggerCollection"/>.</returns>
+		public Trigger[] ToArray()
+		{
+			var ret = new Trigger[Count];
+			CopyTo(ret, 0);
+			return ret;
+		}
+
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents the triggers in this collection.
 		/// </summary>
@@ -422,90 +484,40 @@ namespace Microsoft.Win32.TaskScheduler
 			return string.Empty;
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
-
-		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		internal void Bind()
 		{
-			reader.ReadStartElement("Triggers", TaskDefinition.tns);
-			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			foreach (Trigger t in this)
+				t.SetV1TriggerData();
+		}
+
+		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
+		{
+			private short curItem = -1;
+			private V1Interop.ITask iTask;
+
+			internal V1TriggerEnumerator(V1Interop.ITask task)
 			{
-				switch (reader.LocalName)
-				{
-					case "BootTrigger":
-						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Boot));
-						break;
-					case "IdleTrigger":
-						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Idle));
-						break;
-					case "TimeTrigger":
-						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Time));
-						break;
-					case "LogonTrigger":
-						XmlSerializationHelper.ReadObject(reader, AddNew(TaskTriggerType.Logon));
-						break;
-					case "CalendarTrigger":
-						Add(CalendarTrigger.GetTriggerFromXml(reader));
-						break;
-					default:
-						reader.Skip();
-						break;
-				}
+				iTask = task;
 			}
-			reader.ReadEndElement();
-		}
 
-		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
-		{
-			foreach (var t in this)
-				XmlSerializationHelper.WriteObject(writer, t);
-		}
+			public Trigger Current => Trigger.CreateTrigger(iTask.GetTrigger((ushort)curItem));
 
-		void ICollection<Trigger>.Add(Trigger item)
-		{
-			Add(item);
-		}
+			object System.Collections.IEnumerator.Current => Current;
 
-		int IList.Add(object value)
-		{
-			Add((Trigger)value);
-			return Count - 1;
-		}
+			/// <summary>
+			/// Releases all resources used by this class.
+			/// </summary>
+			public void Dispose()
+			{
+				iTask = null;
+			}
 
-		bool IList.Contains(object value) => Contains((Trigger)value);
+			public bool MoveNext() => (++curItem < iTask.GetTriggerCount());
 
-		int IList.IndexOf(object value) => IndexOf((Trigger)value);
-
-		void IList.Insert(int index, object value)
-		{
-			Insert(index, (Trigger)value);
-		}
-
-		void IList.Remove(object value)
-		{
-			Remove((Trigger)value);
-		}
-
-		void ICollection.CopyTo(Array array, int index)
-		{
-			var src = new Trigger[Count];
-			CopyTo(src, 0);
-			Array.Copy(src, 0, array, index, Count);
-		}
-
-		bool ICollection<Trigger>.IsReadOnly => false;
-
-		bool IList.IsReadOnly => false;
-
-		bool IList.IsFixedSize => false;
-
-		object ICollection.SyncRoot => this;
-
-		bool ICollection.IsSynchronized => false;
-
-		object IList.this[int index]
-		{
-			get { return this[index]; } 
-			set { this[index] = (Trigger)value; }
+			public void Reset()
+			{
+				curItem = -1;
+			}
 		}
 	}
 }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32.TaskScheduler.V2Interop;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using Microsoft.Win32.TaskScheduler.V2Interop;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -85,15 +86,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The type of the action.</value>
 		[XmlIgnore]
-		public TaskActionType ActionType
-		{
-			get
-			{
-				if (iAction != null)
-					return iAction.Type;
-				return InternalActionType;
-			}
-		}
+		public TaskActionType ActionType => iAction?.Type ?? InternalActionType;
 
 		/// <summary>
 		/// Gets or sets the identifier of the action.
@@ -102,8 +95,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlAttribute(AttributeName = "id", DataType = "ID")]
 		public virtual string Id
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null) : iAction.Id; }
-			set { if (iAction == null) unboundValues["Id"] = value; else iAction.Id = value; }
+			get { return GetProperty<string, IAction>(nameof(Id)); }
+			set { SetProperty<string, IAction>(nameof(Id), value); }
 		}
 
 		internal virtual bool Bound => iAction != null;
@@ -196,7 +189,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static Action CreateAction(V2Interop.IAction iAction)
 		{
 			Type t = GetObjectType(iAction.Type);
-			return Activator.CreateInstance(t, System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, new object[] { iAction }, null) as Action;
+			return Activator.CreateInstance(t, BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { iAction }, null) as Action;
 		}
 
 		internal static Type GetObjectType(TaskActionType actionType)
@@ -226,17 +219,34 @@ namespace Microsoft.Win32.TaskScheduler
 			Marshal.ReleaseComObject(iActions);
 			foreach (string key in unboundValues.Keys)
 			{
-				try
-				{
-					iAction.GetType().InvokeMember(key, System.Reflection.BindingFlags.SetProperty, null, iAction, new object[] { unboundValues[key] });
-				}
-				catch (System.Reflection.TargetInvocationException tie) { throw tie.InnerException; }
+				try { ReflectionHelper.SetProperty(iAction, key, unboundValues[key]); }
+				catch (TargetInvocationException tie) { throw tie.InnerException; }
 				catch { }
 			}
 			unboundValues.Clear();
 		}
 
 		internal abstract void CreateV2Action(V2Interop.IActionCollection iActions);
+
+		internal T GetProperty<T, B>(string propName, T defaultValue = default(T))
+		{
+			if (iAction == null)
+				return (unboundValues.ContainsKey(propName)) ? (T)unboundValues[propName] : defaultValue;
+			return ReflectionHelper.GetProperty((B)iAction, propName, defaultValue);
+		}
+
+		internal void SetProperty<T, B>(string propName, T value)
+		{
+			if (iAction == null)
+			{
+				if (Equals(value, default(T)))
+					unboundValues.Remove(propName);
+				else
+					unboundValues[propName] = value;
+			}
+			else
+				ReflectionHelper.SetProperty((B)iAction, propName, value);
+		}
 
 		/// <summary>
 		/// Copies the properties from another <see cref="Action"/> the current instance.
@@ -278,8 +288,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public Guid ClassId
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("ClassId") ? (Guid)unboundValues["ClassId"] : Guid.Empty) : new Guid(((V2Interop.IComHandlerAction)iAction).ClassId); }
-			set { if (iAction == null) unboundValues["ClassId"] = value.ToString(); else ((V2Interop.IComHandlerAction)iAction).ClassId = value.ToString(); }
+			get { return new Guid(GetProperty<string, IComHandlerAction>(nameof(ClassId), Guid.Empty.ToString())); }
+			set { SetProperty<string, IComHandlerAction>(nameof(ClassId), value.ToString()); }
 		}
 
 		/// <summary>
@@ -293,8 +303,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string Data
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Data") ? (string)unboundValues["Data"] : null) : ((V2Interop.IComHandlerAction)iAction).Data; }
-			set { if (iAction == null) unboundValues["Data"] = value; else ((V2Interop.IComHandlerAction)iAction).Data = value; }
+			get { return GetProperty<string, IComHandlerAction>(nameof(Data)); }
+			set { SetProperty<string, IComHandlerAction>(nameof(Data), value); }
 		}
 
 		internal override TaskActionType InternalActionType => TaskActionType.ComHandler;
@@ -359,6 +369,8 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("SendEmail", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class EmailAction : Action, IBindAsExecAction
 	{
+		const string ImportanceHeader = "Importance";
+
 		private NamedValueCollection nvc = null;
 
 		/// <summary>
@@ -390,9 +402,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlArray("Attachments", IsNullable = true)]
 		[XmlArrayItem(typeof(string), ElementName = "File")]
+		[DefaultValue(null)]
 		public object[] Attachments
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Attachments") ? (object[])unboundValues["Attachments"] : null) : ((V2Interop.IEmailAction)iAction).Attachments; }
+			get { return GetProperty<object[], IEmailAction>(nameof(Attachments)); }
 			set
 			{
 				if (value != null)
@@ -403,15 +416,10 @@ namespace Microsoft.Win32.TaskScheduler
 						if (!(o is string) || !System.IO.File.Exists((string)o))
 							throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
 				}
-				if (iAction == null)
-				{
-					if (value == null || value.Length == 0)
-						unboundValues.Remove("Attachments");
-					else
-						unboundValues["Attachments"] = value;
-				}
+				if (iAction == null && (value == null || value.Length == 0))
+					unboundValues.Remove(nameof(Attachments));
 				else
-					((V2Interop.IEmailAction)iAction).Attachments = value;
+					SetProperty<object[], IEmailAction>(nameof(Attachments), value);
 			}
 		}
 
@@ -421,8 +429,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string Bcc
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Bcc") ? (string)unboundValues["Bcc"] : null) : ((V2Interop.IEmailAction)iAction).Bcc; }
-			set { if (iAction == null) unboundValues["Bcc"] = value; else ((V2Interop.IEmailAction)iAction).Bcc = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(Bcc)); }
+			set { SetProperty<string, IEmailAction>(nameof(Bcc), value); }
 		}
 
 		/// <summary>
@@ -431,8 +439,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string Body
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Body") ? (string)unboundValues["Body"] : null) : ((V2Interop.IEmailAction)iAction).Body; }
-			set { if (iAction == null) unboundValues["Body"] = value; else ((V2Interop.IEmailAction)iAction).Body = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(Body)); }
+			set { SetProperty<string, IEmailAction>(nameof(Body), value); }
 		}
 
 		/// <summary>
@@ -441,8 +449,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string Cc
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Cc") ? (string)unboundValues["Cc"] : null) : ((V2Interop.IEmailAction)iAction).Cc; }
-			set { if (iAction == null) unboundValues["Cc"] = value; else ((V2Interop.IEmailAction)iAction).Cc = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(Cc)); }
+			set { SetProperty<string, IEmailAction>(nameof(Cc), value); }
 		}
 
 		/// <summary>
@@ -451,8 +459,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string From
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("From") ? (string)unboundValues["From"] : null) : ((V2Interop.IEmailAction)iAction).From; }
-			set { if (iAction == null) unboundValues["From"] = value; else ((V2Interop.IEmailAction)iAction).From = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(From)); }
+			set { SetProperty<string, IEmailAction>(nameof(From), value); }
 		}
 
 		/// <summary>
@@ -476,22 +484,50 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the priority of the e-mail message.
+		/// </summary>
+		/// <value>
+		/// A <see cref="System.Net.Mail.MailPriority"/> that contains the priority of this message.
+		/// </value>
+		[XmlIgnore]
+		[DefaultValue(typeof(System.Net.Mail.MailPriority), "Normal")]
+		public System.Net.Mail.MailPriority Priority
+		{
+			get
+			{
+				string s;
+				System.Net.Mail.MailPriority res = System.Net.Mail.MailPriority.Normal;
+				if (nvc != null && HeaderFields.TryGetValue(ImportanceHeader, out s))
+				{
+					try { res = (System.Net.Mail.MailPriority)Enum.Parse(typeof(System.Net.Mail.MailPriority), s, true); }
+					catch { }
+				}
+				return res;
+			}
+			set
+			{
+				HeaderFields[ImportanceHeader] = value.ToString();
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the e-mail address that you want to reply to.
 		/// </summary>
 		[DefaultValue(null)]
 		public string ReplyTo
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("ReplyTo") ? (string)unboundValues["ReplyTo"] : null) : ((V2Interop.IEmailAction)iAction).ReplyTo; }
-			set { if (iAction == null) unboundValues["ReplyTo"] = value; else ((V2Interop.IEmailAction)iAction).ReplyTo = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(ReplyTo)); }
+			set { SetProperty<string, IEmailAction>(nameof(ReplyTo), value); }
 		}
 
 		/// <summary>
 		/// Gets or sets the name of the server that you use to send e-mail from.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Server
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Server") ? (string)unboundValues["Server"] : null) : ((V2Interop.IEmailAction)iAction).Server; }
-			set { if (iAction == null) unboundValues["Server"] = value; else ((V2Interop.IEmailAction)iAction).Server = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(Server)); }
+			set { SetProperty<string, IEmailAction>(nameof(Server), value); }
 		}
 
 		/// <summary>
@@ -500,8 +536,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string Subject
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Subject") ? (string)unboundValues["Subject"] : null) : ((V2Interop.IEmailAction)iAction).Subject; }
-			set { if (iAction == null) unboundValues["Subject"] = value; else ((V2Interop.IEmailAction)iAction).Subject = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(Subject)); }
+			set { SetProperty<string, IEmailAction>(nameof(Subject), value); }
 		}
 
 		/// <summary>
@@ -510,8 +546,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null)]
 		public string To
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("To") ? (string)unboundValues["To"] : null) : ((V2Interop.IEmailAction)iAction).To; }
-			set { if (iAction == null) unboundValues["To"] = value; else ((V2Interop.IEmailAction)iAction).To = value; }
+			get { return GetProperty<string, IEmailAction>(nameof(To)); }
+			set { SetProperty<string, IEmailAction>(nameof(To), value); }
 		}
 
 		internal override TaskActionType InternalActionType => TaskActionType.SendEmail;
@@ -545,6 +581,16 @@ namespace Microsoft.Win32.TaskScheduler
 				sb.AppendFormat(" -Body '{0}'", ToUTF8(Prep(Body)));
 			if (Attachments != null && Attachments.Length > 0)
 				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(Attachments, o => Prep(o.ToString()))));
+			var hdr = new List<string>(HeaderFields.Names);
+			if (hdr.Contains(ImportanceHeader))
+			{
+				var p = Priority;
+				if (p != System.Net.Mail.MailPriority.Normal)
+					sb.Append($" -Priority {p.ToString()}");
+				hdr.Remove(ImportanceHeader);
+			}
+			if (hdr.Count > 0)
+				throw new InvalidOperationException("Under Windows 8 and later, EmailAction objects are converted to PowerShell. This action contains headers that are not supported.");
 			return sb.ToString();
 
 			/*var msg = new System.Net.Mail.MailMessage(this.From, this.To, this.Subject, this.Body);
@@ -572,13 +618,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static Action FromPowerShellCommand(string p)
 		{
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From '(?<from>(?:[^']|'')*)' -Subject '(?<subject>(?:[^']|'')*)' -SmtpServer '(?<server>(?:[^']|'')*)'(?: -Encoding UTF8)?(?: -To (?<to>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Cc (?<cc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Bcc (?<bcc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?:(?: -BodyAsHtml)? -Body '(?<body>(?:[^']|'')*)')?(?: -Attachments (?<att>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?\s*$");
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From '(?<from>(?:[^']|'')*)' -Subject '(?<subject>(?:[^']|'')*)' -SmtpServer '(?<server>(?:[^']|'')*)'(?: -Encoding UTF8)?(?: -To (?<to>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Cc (?<cc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Bcc (?<bcc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?:(?: -BodyAsHtml)? -Body '(?<body>(?:[^']|'')*)')?(?: -Attachments (?<att>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Priority (?<imp>High|Normal|Low))?\s*$");
 			if (match.Success)
 			{
 				EmailAction action = new EmailAction(UnPrep(FromUTF8(match.Groups["subject"].Value)), UnPrep(match.Groups["from"].Value), FromPS(match.Groups["to"]), UnPrep(FromUTF8(match.Groups["body"].Value)), UnPrep(match.Groups["server"].Value))
 				{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
 				if (match.Groups["att"].Success)
 					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
+				if (match.Groups["imp"].Success)
+					action.HeaderFields[ImportanceHeader] = match.Groups["imp"].Value;
 				return action;
 			}
 			return null;
@@ -634,7 +682,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return System.Text.Encoding.Default.GetString(bytes);
 		}
 
-		private static string Prep(string s) => s.Replace("'", "''");
+		private static string Prep(string s) => s?.Replace("'", "''");
 
 		private static string ToPS(string input, char[] delimeters = null)
 		{
@@ -647,11 +695,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static string ToUTF8(string s)
 		{
+			if (s == null) return null;
 			byte[] bytes = System.Text.Encoding.Default.GetBytes(s);
 			return System.Text.Encoding.UTF8.GetString(bytes);
 		}
 
-		private static string UnPrep(string s) => s.Replace("''", "'");
+		private static string UnPrep(string s) => s?.Replace("''", "'");
 
 		internal override void CreateV2Action(IActionCollection iActions)
 		{
@@ -710,18 +759,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v1Task != null)
 					return v1Task.GetParameters();
-				if (iAction != null)
-					return ((V2Interop.IExecAction)iAction).Arguments;
-				return unboundValues.ContainsKey("Arguments") ? (string)unboundValues["Arguments"] : null;
+				return GetProperty<string, IExecAction>(nameof(Arguments), "");
 			}
 			set
 			{
 				if (v1Task != null)
 					v1Task.SetParameters(value);
-				else if (iAction != null)
-					((V2Interop.IExecAction)iAction).Arguments = value;
 				else
-					unboundValues["Arguments"] = value;
+					SetProperty<string, IExecAction>(nameof(Arguments), value);
 			}
 		}
 
@@ -752,24 +797,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the path to an executable file.
 		/// </summary>
 		[XmlElement("Command")]
+		[DefaultValue("")]
 		public string Path
 		{
 			get
 			{
 				if (v1Task != null)
 					return v1Task.GetApplicationName();
-				if (iAction != null)
-					return ((V2Interop.IExecAction)iAction).Path;
-				return unboundValues.ContainsKey("Path") ? (string)unboundValues["Path"] : null;
+				return GetProperty<string, IExecAction>(nameof(Path), "");
 			}
 			set
 			{
 				if (v1Task != null)
 					v1Task.SetApplicationName(value);
-				else if (iAction != null)
-					((V2Interop.IExecAction)iAction).Path = value;
 				else
-					unboundValues["Path"] = value;
+					SetProperty<string, IExecAction>(nameof(Path), value);
 			}
 		}
 
@@ -783,18 +825,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v1Task != null)
 					return v1Task.GetWorkingDirectory();
-				if (iAction != null)
-					return ((V2Interop.IExecAction)iAction).WorkingDirectory;
-				return unboundValues.ContainsKey("WorkingDirectory") ? (string)unboundValues["WorkingDirectory"] : null;
+				return GetProperty<string, IExecAction>(nameof(WorkingDirectory), "");
 			}
 			set
 			{
 				if (v1Task != null)
 					v1Task.SetWorkingDirectory(value);
-				else if (iAction != null)
-					((V2Interop.IExecAction)iAction).WorkingDirectory = value;
 				else
-					unboundValues["WorkingDirectory"] = value;
+					SetProperty<string, IExecAction>(nameof(WorkingDirectory), value);
 			}
 		}
 
@@ -1003,19 +1041,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the message text that is displayed in the body of the message box.
 		/// </summary>
 		[XmlElement("Body")]
+		[DefaultValue(null)]
 		public string MessageBody
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("MessageBody") ? (string)unboundValues["MessageBody"] : null) : ((V2Interop.IShowMessageAction)iAction).MessageBody; }
-			set { if (iAction == null) unboundValues["MessageBody"] = value; else ((V2Interop.IShowMessageAction)iAction).MessageBody = value; }
+			get { return GetProperty<string, IShowMessageAction>(nameof(MessageBody)); }
+			set { SetProperty<string, IShowMessageAction>(nameof(MessageBody), value); }
 		}
 
 		/// <summary>
 		/// Gets or sets the title of the message box.
 		/// </summary>
+		[DefaultValue(null)]
 		public string Title
 		{
-			get { return (iAction == null) ? (unboundValues.ContainsKey("Title") ? (string)unboundValues["Title"] : null) : ((V2Interop.IShowMessageAction)iAction).Title; }
-			set { if (iAction == null) unboundValues["Title"] = value; else ((V2Interop.IShowMessageAction)iAction).Title = value; }
+			get { return GetProperty<string, IShowMessageAction>(nameof(Title)); }
+			set { SetProperty<string, IShowMessageAction>(nameof(Title), value); }
 		}
 
 		internal override TaskActionType InternalActionType => TaskActionType.ShowMessage;

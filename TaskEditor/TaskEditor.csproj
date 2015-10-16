@@ -91,6 +91,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Native\ADVAPI32.cs">
+      <Link>Native\ADVAPI32.cs</Link>
+    </Compile>
+    <Compile Include="..\Native\InteropUtil.cs">
+      <Link>Native\InteropUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\Native\KERNEL32.cs">
+      <Link>Native\KERNEL32.cs</Link>
+    </Compile>
+    <Compile Include="..\Native\SYSTEMTIME.cs">
+      <Link>Native\SYSTEMTIME.cs</Link>
+    </Compile>
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -135,9 +147,7 @@
     <Compile Include="OptionPanels\WrappingControls.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReorderableListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ReorderableListView.cs" />
     <Compile Include="DropDownCheckTree.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -176,7 +186,6 @@
     </Compile>
     <Compile Include="Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="HelperMethods.cs" />
-    <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\BROWSEINFO.cs" />
     <Compile Include="Native\ComboBox.cs" />
     <Compile Include="Native\CredentialsDialog.cs">
@@ -207,8 +216,6 @@
     </Compile>
     <Compile Include="Native\GDI32.cs" />
     <Compile Include="Native\Header.cs" />
-    <Compile Include="Native\InteropUtil.cs" />
-    <Compile Include="Native\KERNEL32.cs" />
     <Compile Include="Native\ListView.cs" />
     <Compile Include="Native\ListViewEx.cs">
       <SubType>Component</SubType>
@@ -219,7 +226,6 @@
     <Compile Include="Native\SafeHandles.cs" />
     <Compile Include="Native\SHELL32.cs" />
     <Compile Include="Native\SIZE.cs" />
-    <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="Native\USER32.cs" />
     <Compile Include="Native\Util.cs" />
     <Compile Include="Native\UXTHEME.cs" />

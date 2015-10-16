@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -13,8 +14,8 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
 	{
 		private V1Interop.ITask v1Task;
-		private V2Interop.ITaskDefinition v2Def;
 		private V2Interop.IActionCollection v2Coll;
+		private V2Interop.ITaskDefinition v2Def;
 
 		internal ActionCollection(V1Interop.ITask task)
 		{
@@ -26,73 +27,6 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
 			UnconvertUnsupportedActions();
-		}
-
-		/// <summary>
-		/// Gets or sets a an action at the specified index.
-		/// </summary>
-		/// <value>The zero-based index of the action to get or set.</value>
-		public Action this[int index]
-		{
-			get
-			{
-				if (v2Coll != null)
-					return Action.CreateAction(v2Coll[++index]);
-				if (index == 0)
-					return new ExecAction(v1Task);
-				throw new ArgumentOutOfRangeException();
-			}
-			set
-			{
-				if (Count <= index)
-					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
-				RemoveAt(index);
-				Insert(index, value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets a specified action from the collection.
-		/// </summary>
-		/// <value>
-		/// The <see cref="Action"/>.
-		/// </value>
-		/// <param name="actionId">The id (<see cref="Action.Id" />) of the action to be retrieved.</param>
-		/// <returns>
-		/// Specialized <see cref="Action" /> instance.
-		/// </returns>
-		/// <exception cref="System.ArgumentNullException"></exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
-		/// <exception cref="System.NullReferenceException"></exception>
-		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
-		public Action this[string actionId]
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(actionId))
-					throw new ArgumentNullException(actionId);
-				foreach (Action t in this)
-					if (string.Equals(t.Id, actionId))
-						return t;
-				throw new ArgumentOutOfRangeException(actionId);
-			}
-			set
-			{
-				if (value == null)
-					throw new NullReferenceException();
-				if (string.IsNullOrEmpty(actionId))
-					throw new ArgumentNullException(actionId);
-				if (actionId != value.Id)
-					throw new InvalidOperationException("Mismatching Id for action and lookup.");
-				int index = IndexOf(actionId);
-				if (index >= 0)
-				{
-					RemoveAt(index);
-					Insert(index, value);
-				}
-				else
-					Add(value);
-			}
 		}
 
 		/// <summary>
@@ -130,6 +64,16 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		bool ICollection.IsSynchronized => false;
+
+		object ICollection.SyncRoot => this;
+
+		bool ICollection<Action>.IsReadOnly => false;
+
+		bool IList.IsFixedSize => false;
+
+		bool IList.IsReadOnly => false;
+
 		/// <summary>
 		/// Gets or sets an XML-formatted version of the collection.
 		/// </summary>
@@ -150,14 +94,74 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Releases all resources used by this class.
-		/// </summary>
-		public void Dispose()
+		object IList.this[int index]
 		{
-			v1Task = null;
-			v2Def = null;
-			v2Coll = null;
+			get { return this[index]; }
+			set { this[index] = (Action)value; }
+		}
+
+		/// <summary>
+		/// Gets or sets a an action at the specified index.
+		/// </summary>
+		/// <value>The zero-based index of the action to get or set.</value>
+		public Action this[int index]
+		{
+			get
+			{
+				if (v2Coll != null)
+					return Action.CreateAction(v2Coll[++index]);
+				if (index == 0)
+					return new ExecAction(v1Task);
+				throw new ArgumentOutOfRangeException();
+			}
+			set
+			{
+				if (Count <= index)
+					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
+				Insert(index, value);
+				RemoveAt(index + 1);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a specified action from the collection.
+		/// </summary>
+		/// <value>
+		/// The <see cref="Action"/>.
+		/// </value>
+		/// <param name="actionId">The id (<see cref="Action.Id" />) of the action to be retrieved.</param>
+		/// <returns>
+		/// Specialized <see cref="Action" /> instance.
+		/// </returns>
+		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
+		/// <exception cref="System.NullReferenceException"></exception>
+		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
+		public Action this[string actionId]
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(nameof(actionId));
+				var t = Find(a => string.Equals(a.Id, actionId));
+				if (t != null)
+					return t;
+				throw new ArgumentOutOfRangeException(nameof(actionId));
+			}
+			set
+			{
+				if (value == null)
+					throw new NullReferenceException();
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(nameof(actionId));
+				if (actionId != value.Id)
+					throw new InvalidOperationException("Mismatching Id for action and lookup.");
+				int index = IndexOf(actionId);
+				if (index >= 0)
+					this[index] = value;
+				else
+					Add(value);
+			}
 		}
 
 		/// <summary>
@@ -167,6 +171,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>The bound <see cref="Action"/> that was added to the collection.</returns>
 		public Action Add(Action action)
 		{
+			if (action == null)
+				throw new ArgumentNullException(nameof(action));
 			if (v2Def != null)
 				action.Bind(v2Def);
 			else
@@ -181,7 +187,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
 		/// <returns>The bound <see cref="ExecAction"/> that was added to the collection.</returns>
-		public ExecAction Add(string path, string arguments = null, string workingDirectory = null) => (ExecAction)Add(new ExecAction(path, arguments, workingDirectory));
+		public ExecAction Add(string path, string arguments = null, string workingDirectory = null) =>
+			(ExecAction)Add(new ExecAction(path, arguments, workingDirectory));
 
 		/// <summary>
 		/// Adds a new <see cref="Action"/> instance to the task.
@@ -194,6 +201,26 @@ namespace Microsoft.Win32.TaskScheduler
 				return new ExecAction(v1Task);
 
 			return Action.CreateAction(v2Coll.Create(actionType));
+		}
+
+		/// <summary>
+		/// Adds a collection of actions to the end of the <see cref="ActionCollection" />.
+		/// </summary>
+		/// <param name="actions">The actions to be added to the end of the <see cref="ActionCollection" />. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="actions" /> is <c>null</c>.</exception>
+		public void AddRange(IEnumerable<Action> actions)
+		{
+			if (actions == null)
+				throw new ArgumentNullException(nameof(actions));
+			if (v1Task != null && Count > 0)
+				throw new System.InvalidOperationException("Cannot add more than one action to a V1 task.");
+			int i = 0;
+			foreach (var item in actions)
+			{
+				if (v1Task != null && ++i > 1)
+					throw new System.InvalidOperationException("Cannot add more than one action to a V1 task.");
+				Add(item);
+			}
 		}
 
 		/// <summary>
@@ -214,7 +241,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Action item) => IndexOf(item) >= 0;
+		public bool Contains(Action item) => Find(a => a.Equals(item)) != null;
 
 		/// <summary>
 		/// Determines whether the specified action type is contained in this collection.
@@ -223,33 +250,94 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		///   <c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.
 		/// </returns>
-		public bool ContainsType(Type actionType)
+		public bool ContainsType(Type actionType) => Find(a => a.GetType() == actionType) != null;
+
+		/// <summary>
+		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="T:Action[]" />, starting at a particular <see cref="T:Action[]" /> index.
+		/// </summary>
+		/// <param name="array">The <see cref="T:Action[]" /> that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="T:Action[]" /> must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="T:Action[]" /> at which copying begins.</param>
+		public void CopyTo(Action[] array, int arrayIndex)
 		{
-			foreach (Action a in this)
-				if (a.GetType() == actionType)
-					return true;
-			return false;
+			CopyTo(0, array, arrayIndex, Count);
 		}
 
 		/// <summary>
-		/// Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1" /> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="T:Action[]" />, starting at a particular <see cref="T:Action[]" /> index.
 		/// </summary>
-		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="Array"/> must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-		/// <exception cref="System.ArgumentNullException"><paramref name="array"/> is null.</exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
-		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1" /> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.</exception>
-		public void CopyTo(Action[] array, int arrayIndex)
+		/// <param name="index">The zero-based index in the source at which copying begins.</param>
+		/// <param name="array">The <see cref="T:Action[]" /> that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="T:Action[]" /> must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="T:Action[]" /> at which copying begins.</param>
+		/// <param name="count">The number of elements to copy.</param>
+		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>
+		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="ActionCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
+		public void CopyTo(int index, Action[] array, int arrayIndex, int count)
 		{
 			if (array == null)
 				throw new ArgumentNullException(nameof(array));
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index));
 			if (arrayIndex < 0)
 				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-			if (Count > (array.Length - arrayIndex))
+			if (count < 0 || count > (Count - index))
+				throw new ArgumentOutOfRangeException(nameof(count));
+			if ((Count - index) > (array.Length - arrayIndex))
 				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-			for (int i = 0; i < Count; i++)
-				array[arrayIndex + i] = (Action)this[i].Clone();
+			for (int i = 0; i < count; i++)
+				array[arrayIndex + i] = (Action)this[index + i].Clone();
 		}
+
+		/// <summary>
+		/// Releases all resources used by this class.
+		/// </summary>
+		public void Dispose()
+		{
+			v1Task = null;
+			v2Def = null;
+			if (v2Coll != null) Marshal.ReleaseComObject(v2Coll);
+		}
+
+		/// <summary>
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+		/// </summary>
+		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the <see cref="Action"/> to search for.</param>
+		/// <returns>The first <see cref="Action"/> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
+		public Action Find(Predicate<Action> match)
+		{
+			if (match == null)
+				throw new ArgumentNullException(nameof(match));
+			foreach (var item in this)
+				if (match(item)) return item;
+			return null;
+		}
+
+		/// <summary>
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
+		/// </summary>
+		/// <param name="startIndex">The zero-based starting index of the search.</param>
+		/// <param name="count">The number of elements in the collection to search.</param>
+		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
+		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		public int FindIndexOf(int startIndex, int count, Predicate<Action> match)
+		{
+			if (startIndex < 0 || startIndex >= Count)
+				throw new ArgumentOutOfRangeException(nameof(startIndex));
+			if (startIndex + count > Count)
+				throw new ArgumentOutOfRangeException(nameof(count));
+			if (match == null)
+				throw new ArgumentNullException(nameof(match));
+			for (int i = startIndex; i < startIndex + count; i++)
+				if (match(this[i])) return i;
+			return -1;
+		}
+
+		/// <summary>
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection.
+		/// </summary>
+		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
+		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		public int FindIndexOf(Predicate<Action> match) => FindIndexOf(0, Count, match);
 
 		/// <summary>
 		/// Retrieves an enumeration of each of the actions.
@@ -258,8 +346,42 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<Action> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new Enumerator(this);
-			return new Enumerator(v1Task);
+				return new ComEnumerator<Action, V2Interop.IActionCollection>(v2Coll, o => Action.CreateAction(o as V2Interop.IAction));
+			return new V1ActionEnumerator(v1Task);
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			if (array != null && array.Rank != 1)
+				throw new RankException("Multi-dimensional arrays are not supported.");
+			Action[] src = new Action[Count];
+			CopyTo(src, 0);
+			Array.Copy(src, 0, array, index, Count);
+		}
+
+		void ICollection<Action>.Add(Action item)
+		{
+			Add(item);
+		}
+
+		int IList.Add(object value)
+		{
+			Add((Action)value);
+			return Count - 1;
+		}
+
+		bool IList.Contains(object value) => Contains((Action)value);
+
+		int IList.IndexOf(object value) => IndexOf((Action)value);
+
+		void IList.Insert(int index, object value)
+		{
+			Insert(index, (Action)value);
+		}
+
+		void IList.Remove(object value)
+		{
+			Remove((Action)value);
 		}
 
 		/// <summary>
@@ -269,15 +391,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
 		/// </returns>
-		public int IndexOf(Action item)
-		{
-			for (int i = 0; i < Count; i++)
-			{
-				if (this[i].Equals(item))
-					return i;
-			}
-			return -1;
-		}
+		public int IndexOf(Action item) => FindIndexOf(a => a.Equals(item));
 
 		/// <summary>
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
@@ -290,12 +404,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (string.IsNullOrEmpty(actionId))
 				throw new ArgumentNullException(nameof(actionId));
-			for (int i = 0; i < Count; i++)
-			{
-				if (string.Equals(this[i].Id, actionId))
-					return i;
-			}
-			return -1;
+			return FindIndexOf(a => string.Equals(a.Id, actionId));
 		}
 
 		/// <summary>
@@ -307,15 +416,50 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll == null && Count > 0)
 				throw new NotV1SupportedException("Only a single action is allowed.");
+			if (action == null)
+				throw new ArgumentNullException(nameof(action));
+			if (index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index));
 
 			Action[] pushItems = new Action[Count - index];
-			for (int i = index; i < Count; i++)
-				pushItems[i - index] = (Action)this[i].Clone();
+			CopyTo(index, pushItems, 0, Count - index);
 			for (int j = Count - 1; j >= index; j--)
 				RemoveAt(j);
 			Add(action);
 			for (int k = 0; k < pushItems.Length; k++)
 				Add(pushItems[k]);
+		}
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement("Actions", TaskDefinition.tns);
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				Action newAction = null;
+				switch (reader.LocalName)
+				{
+					case "Exec":
+						newAction = AddNew(TaskActionType.Execute);
+						break;
+
+					default:
+						reader.Skip();
+						break;
+				}
+				if (newAction != null)
+					XmlSerializationHelper.ReadObject(reader, newAction);
+			}
+			reader.ReadEndElement();
+		}
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			if (Count > 0)
+			{
+				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
+			}
 		}
 
 		/// <summary>
@@ -355,6 +499,19 @@ namespace Microsoft.Win32.TaskScheduler
 				Add(new ExecAction());
 			else
 				throw new NotV1SupportedException("There can be only a single action and it cannot be removed.");
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+		/// <summary>
+		/// Copies the elements of the <see cref="ActionCollection"/> to a new array.
+		/// </summary>
+		/// <returns>An array containing copies of the elements of the <see cref="ActionCollection"/>.</returns>
+		public Action[] ToArray()
+		{
+			var ret = new Action[Count];
+			CopyTo(ret, 0);
+			return ret;
 		}
 
 		/// <summary>
@@ -418,40 +575,27 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal class Enumerator : IEnumerator<Action>
+		internal class V1ActionEnumerator : IEnumerator<Action>, IDisposable
 		{
-			private V1Interop.ITask v1Task;
 			private int v1Pos = -1;
-			private IEnumerator v2Enum;
-			private ActionCollection parent;
+			private V1Interop.ITask v1Task;
 
-			internal Enumerator(V1Interop.ITask task)
+			internal V1ActionEnumerator(V1Interop.ITask task) : base()
 			{
 				v1Task = task;
-			}
-
-			internal Enumerator(ActionCollection iColl)
-			{
-				parent = iColl;
-				if (iColl.v2Coll != null)
-					v2Enum = iColl.v2Coll.GetEnumerator();
 			}
 
 			public Action Current
 			{
 				get
 				{
-					if (v2Enum != null)
-					{
-						V2Interop.IAction iAction = v2Enum.Current as V2Interop.IAction;
-						if (iAction != null)
-							return Action.CreateAction(iAction);
-					}
 					if (v1Pos == 0)
 						return new ExecAction(v1Task.GetApplicationName(), v1Task.GetParameters(), v1Task.GetWorkingDirectory());
 					throw new InvalidOperationException();
 				}
 			}
+
+			object IEnumerator.Current => Current;
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -459,107 +603,14 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Dispose()
 			{
 				v1Task = null;
-				v2Enum = null;
 			}
 
-			object System.Collections.IEnumerator.Current => Current;
-
-			public bool MoveNext()
-			{
-				if (v2Enum != null)
-					return v2Enum.MoveNext();
-				return ++v1Pos == 0;
-			}
+			public bool MoveNext() => ++v1Pos == 0;
 
 			public void Reset()
 			{
-				if (v2Enum != null)
-					v2Enum.Reset();
 				v1Pos = -1;
 			}
-		}
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
-
-		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
-		{
-			reader.ReadStartElement("Actions", TaskDefinition.tns);
-			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
-			{
-				Action newAction = null;
-				switch (reader.LocalName)
-				{
-					case "Exec":
-						newAction = AddNew(TaskActionType.Execute);
-						break;
-					default:
-						reader.Skip();
-						break;
-				}
-				if (newAction != null)
-					XmlSerializationHelper.ReadObject(reader, newAction);
-			}
-			reader.ReadEndElement();
-		}
-
-		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
-		{
-			if (Count > 0)
-			{
-				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
-			}
-		}
-
-		bool ICollection<Action>.IsReadOnly => false;
-
-		void ICollection<Action>.Add(Action item)
-		{
-			Add(item);
-		}
-
-		object ICollection.SyncRoot => this;
-
-		bool ICollection.IsSynchronized => false;
-
-		void ICollection.CopyTo(Array array, int index)
-		{
-			if (array != null && array.Rank != 1)
-				throw new RankException("Multi-dimensional arrays are not supported.");
-			Action[] src = new Action[Count];
-			CopyTo(src, 0);
-			Array.Copy(src, 0, array, index, Count);
-		}
-
-		bool IList.IsReadOnly => false;
-
-		bool IList.IsFixedSize => false;
-
-		object IList.this[int index]
-		{
-			get { return this[index]; }
-			set { this[index] = (Action)value; }
-		}
-
-		int IList.Add(object value)
-		{
-			Add((Action)value);
-			return Count - 1;
-		}
-
-		bool IList.Contains(object value) => Contains((Action)value);
-
-		int IList.IndexOf(object value) => IndexOf((Action)value);
-
-		void IList.Insert(int index, object value)
-		{
-			Insert(index, (Action)value);
-		}
-
-		void IList.Remove(object value)
-		{
-			Remove((Action)value);
 		}
 	}
 }

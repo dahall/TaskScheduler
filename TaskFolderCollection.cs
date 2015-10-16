@@ -173,9 +173,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Enumerated list of items in the collection.</returns>
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
-			TaskFolder[] eArray = new TaskFolder[Count];
-			CopyTo(eArray, 0);
-			return new TaskFolderEnumerator(eArray);
+			if (v2FolderList != null)
+				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder, V2Interop.ITaskFolderCollection>(v2FolderList, o => new TaskFolder(parent.TaskService, (V2Interop.ITaskFolder)o));
+			return Array.AsReadOnly(v1FolderList).GetEnumerator();
 		}
 
 		/*
@@ -241,35 +241,5 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-
-		private class TaskFolderEnumerator : IEnumerator<TaskFolder>
-		{
-			private TaskFolder[] folders = null;
-			private System.Collections.IEnumerator iEnum = null;
-
-			internal TaskFolderEnumerator(TaskFolder[] f)
-			{
-				folders = f;
-				iEnum = f.GetEnumerator();
-			}
-
-			public TaskFolder Current => iEnum.Current as TaskFolder;
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
-			{
-			}
-
-			public bool MoveNext() => iEnum.MoveNext();
-
-			public void Reset()
-			{
-				iEnum.Reset();
-			}
-		}
 	}
 }
