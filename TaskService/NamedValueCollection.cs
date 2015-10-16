@@ -302,7 +302,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.GetEnumerator();
 
-			return new INVCEnumerator(v2Coll);
+			return new ComEnumerator<NameValuePair, V2Interop.ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((V2Interop.ITaskNamedValuePair)o));
 		}
 
 		/// <summary>
@@ -448,32 +448,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			foreach (var nvp in this)
 				yield return new KeyValuePair<string, string>(nvp.Name, nvp.Value);
-		}
-
-		private class INVCEnumerator : IEnumerator<NameValuePair>
-		{
-			private System.Collections.IEnumerator v2CollEnum;
-
-			internal INVCEnumerator(V2Interop.ITaskNamedValueCollection v2Coll)
-			{
-				v2CollEnum = v2Coll.GetEnumerator();
-			}
-
-			public NameValuePair Current => new NameValuePair(v2CollEnum.Current as V2Interop.ITaskNamedValuePair);
-
-			void IDisposable.Dispose()
-			{
-				v2CollEnum = null;
-			}
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			bool System.Collections.IEnumerator.MoveNext() => v2CollEnum.MoveNext();
-
-			void System.Collections.IEnumerator.Reset()
-			{
-				v2CollEnum.Reset();
-			}
 		}
 	}
 }

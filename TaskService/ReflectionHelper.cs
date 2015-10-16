@@ -64,5 +64,21 @@
 			}
 			return default(T);
 		}
+
+		public static T GetProperty<T>(object obj, string propName, T defaultValue = default(T))
+		{
+			if (obj != null)
+			{
+				try { return (T)Convert.ChangeType(obj.GetType().InvokeMember(propName, BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, obj, null, null), typeof(T)); }
+				catch { }
+			}
+			return defaultValue;
+		}
+
+		public static void SetProperty<T>(object obj, string propName, T value)
+		{
+			try { obj?.GetType().InvokeMember(propName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, obj, new object[] { value }, null); }
+			catch { }
+		}
 	}
 }

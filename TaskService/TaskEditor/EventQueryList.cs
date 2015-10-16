@@ -419,10 +419,16 @@ namespace Microsoft.Win32.TaskScheduler.Events
 				{
 					string[] inner = InnerValue(value);
 					if (inner[0] == null && inner[1] == null) return;
-					string newVal = Regex.Replace(inner[0], string.Join("|", new string[] { computer, evidrange, evid, keyword, level, prov, tasks, user, time2dates, timedate2end, timestart2date, timediff, AND, @"\s*\(\s*\)\s*", @"\s+" }), string.Empty, RegexOptions.IgnoreCase);
-					newVal = Regex.Replace(newVal, @"\s*\(\s*(?:or\s*)*\)\s*", string.Empty, RegexOptions.IgnoreCase);
-					ThrowIfBadXml(value, newVal, "Select");
-					newVal = Regex.Replace(inner[1], eventData, string.Empty, RegexOptions.IgnoreCase);
+					string newVal = null;
+					if (inner[0] != null)
+					{
+						newVal = Regex.Replace(inner[0], string.Join("|", new string[] { computer, evidrange, evid, keyword, level, prov, tasks, user, time2dates, timedate2end, timestart2date, timediff, AND, @"\s*\(\s*\)\s*", @"\s+" }), string.Empty, RegexOptions.IgnoreCase);
+						if (newVal != null)
+							newVal = Regex.Replace(newVal, @"\s*\(\s*(?:or\s*)*\)\s*", string.Empty, RegexOptions.IgnoreCase);
+						ThrowIfBadXml(value, newVal, "Select");
+					}
+					if (inner[1] != null)
+						newVal = Regex.Replace(inner[1], eventData, string.Empty, RegexOptions.IgnoreCase);
 					ThrowIfBadXml(value, newVal, "Select");
 				}
 
@@ -482,17 +488,17 @@ namespace Microsoft.Win32.TaskScheduler.Events
 							if (Parent.Computers.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, Parent.Computers.ConvertAll<string>(i => "Computer='{i}'").ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Computers.ConvertAll<string>(i => $"Computer='{i}'").ToArray()));
 							}
 							if (Parent.Levels.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, Parent.Levels.ConvertAll<string>(i => "Level={i}").ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Levels.ConvertAll<string>(i => $"Level={i}").ToArray()));
 							}
 							if (Parent.Tasks.Count > 0)
 							{
 								if (sb.Length > 1) sb.Append(AND);
-								sb.AppendFormat("({0})", string.Join(OR, Parent.Tasks.ConvertAll<string>(i => "Task={i}").ToArray()));
+								sb.AppendFormat("({0})", string.Join(OR, Parent.Tasks.ConvertAll<string>(i => $"Task={i}").ToArray()));
 							}
 							if (Parent.Keywords != 0)
 							{

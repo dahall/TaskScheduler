@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler.V2Interop;
 
 namespace TestTaskService
 {
@@ -287,7 +288,7 @@ namespace TestTaskService
 				td.Triggers.Add(eTrig);*/
 				td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
 				EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
-				ea.HeaderFields.Add("reply-to", "dh@mail.com");
+				//ea.HeaderFields.Add("reply-to", "dh@mail.com");
 				ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
 				//WriteXml(td, taskName);
 				using (var op = new TaskOptionsEditor(ts, td, true, false))
@@ -702,6 +703,7 @@ namespace TestTaskService
 					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
 					eTrigger.ValueQueries.Add("Name", "Value");
+					eTrigger.ValueQueries["Name"] = "NewValue";
 
 					td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
@@ -755,9 +757,13 @@ namespace TestTaskService
 					td.Actions.Context = "Author";
 					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group || td.Principal.LogonType == TaskLogonType.S4U)
 						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
-					td.Actions.Add(new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { (string)new TemporaryScopedFile() } });
-					var email = (EmailAction)td.Actions["Email"];
-					email.HeaderFields.Add("Precedence", "bulk");
+					var email = new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { (string)new TemporaryScopedFile() } };
+					email.Priority = System.Net.Mail.MailPriority.High;
+					td.Actions.Add(email);
+					email = (EmailAction)td.Actions["Email"];
+					email.To = "user@t2.com";
+					//email.HeaderFields.Add("Precedence", "bulk");
+					//email.HeaderFields["Importance"] = "low";
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
 
@@ -769,10 +775,8 @@ namespace TestTaskService
 
 				// Try copying it
 				TaskDefinition td2 = ts.NewTask();
-				foreach (Trigger tg in td.Triggers)
-					td2.Triggers.Add((Trigger)tg.Clone());
-				foreach (Microsoft.Win32.TaskScheduler.Action a in td.Actions)
-					td2.Actions.Add((Microsoft.Win32.TaskScheduler.Action)a.Clone());
+				td2.Triggers.AddRange(td.Triggers.ToArray());
+				td2.Actions.AddRange(td.Actions.ToArray());
 				tf.RegisterTaskDefinition("Test2", td2, TaskCreation.CreateOrUpdate, user, null, TaskLogonType.InteractiveToken, null);
 				tf.DeleteTask("Test2");
 			}

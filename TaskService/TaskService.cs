@@ -398,7 +398,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case QuickTriggerType.Hourly:
 					var dt = new DailyTrigger();
 					dt.SetRepetition(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false);
-                    td.Triggers.Add(dt);
+					td.Triggers.Add(dt);
 					break;
 				case QuickTriggerType.Daily:
 					td.Triggers.Add(new DailyTrigger());

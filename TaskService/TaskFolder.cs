@@ -398,16 +398,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// XML validation not available on Task Scheduler 1.0.</exception>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
+			UserId = UserId ?? definition.Principal.UserId;
 			User user = new User(UserId);
 			if (v2Folder != null)
 			{
 				definition.Actions.ConvertUnsupportedActions();
-				// Check for unsupported combinations and provide informational exceptions
-				if (UserId == null)
-				{
-					UserId = definition.Principal.UserId;
-					user = new User(UserId);
-				}
 				if (LogonType == TaskLogonType.ServiceAccount)
 				{
 					if (string.IsNullOrEmpty(UserId) || !user.IsServiceAccount)

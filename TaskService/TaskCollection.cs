@@ -159,46 +159,26 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal class V2TaskEnumerator : IEnumerator<Task>, IDisposable
+		internal class V2TaskEnumerator : ComEnumerator<Task, V2Interop.IRegisteredTaskCollection>
 		{
-			private System.Collections.IEnumerator iEnum;
-			private TaskFolder fld;
 			private Regex filter;
 
-			internal V2TaskEnumerator(TaskFolder folder, TaskScheduler.V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null)
+			internal V2TaskEnumerator(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null) :
+				base(iTaskColl, o => Task.CreateTask(folder.TaskService, (V2Interop.IRegisteredTask)o))
 			{
-				fld = folder;
-				iEnum = iTaskColl.GetEnumerator();
 				this.filter = filter;
 			}
 
-			public Task Current => Task.CreateTask(fld.TaskService, (TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current);
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
+			public override bool MoveNext()
 			{
-				iEnum = null;
-			}
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			public bool MoveNext()
-			{
-				bool hasNext = iEnum.MoveNext();
+				bool hasNext = base.MoveNext();
 				while (hasNext)
 				{
-					if (filter == null || filter.IsMatch(((TaskScheduler.V2Interop.IRegisteredTask)iEnum.Current).Name))
+					if (filter == null || filter.IsMatch(((V2Interop.IRegisteredTask)iEnum.Current).Name))
 						break;
-					hasNext = iEnum.MoveNext();
+					hasNext = base.MoveNext();
 				}
 				return hasNext;
-			}
-
-			public void Reset()
-			{
-				iEnum.Reset();
 			}
 		}
 
@@ -348,7 +328,13 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<RunningTask> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new RunningTaskEnumerator(svc, v2Coll);
+				return new ComEnumerator<RunningTask, V2Interop.IRunningTaskCollection>(v2Coll, o =>
+				{
+					var irt = (V2Interop.IRunningTask)o;
+					V2Interop.IRegisteredTask task = null;
+					try { task = TaskService.GetTask(svc.v2TaskService, irt.Path); } catch { }
+					return task == null ? null : new RunningTask(svc, task, irt);
+				});
 			return new V1RunningTaskEnumerator(svc);
 		}
 
@@ -391,50 +377,6 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Reset()
 			{
 				tEnum.Reset();
-			}
-		}
-
-		internal class RunningTaskEnumerator : IEnumerator<RunningTask>, IDisposable
-		{
-			private TaskService svc;
-			private V2Interop.ITaskService v2Svc = null;
-			private System.Collections.IEnumerator iEnum;
-
-			internal RunningTaskEnumerator(TaskService svc, V2Interop.IRunningTaskCollection iTaskColl)
-			{
-				this.svc = svc;
-				v2Svc = svc.v2TaskService;
-				iEnum = iTaskColl.GetEnumerator();
-			}
-
-			public RunningTask Current
-			{
-				get
-				{
-					V2Interop.IRunningTask irt = (V2Interop.IRunningTask)iEnum.Current;
-					V2Interop.IRegisteredTask task = null;
-					try { task = TaskService.GetTask(v2Svc, irt.Path); } catch { }
-					if (task == null) return null;
-					return new RunningTask(svc, task, irt);
-				}
-			}
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
-			{
-				v2Svc = null;
-				iEnum = null;
-			}
-
-			object System.Collections.IEnumerator.Current => Current;
-
-			public bool MoveNext() => iEnum.MoveNext();
-
-			public void Reset()
-			{
-				iEnum.Reset();
 			}
 		}
 

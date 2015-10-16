@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace System.Runtime.InteropServices
 {
@@ -91,6 +93,51 @@ namespace System.Runtime.InteropServices
 				ret[i] = ToStructure<T>(tempPtr);
 			}
 			return ret;
+		}
+	}
+
+	public class ComEnumerator<T, E> : IEnumerator<T>, IDisposable where E : IEnumerable where T : class
+	{
+		protected IEnumerator iEnum;
+		private Converter<object, T> conv;
+
+		public ComEnumerator()
+		{
+			iEnum = null;
+			conv = DefaultConverter;
+		}
+
+		public ComEnumerator(E collection, Converter<object, T> converter = null)
+		{
+			if (collection == null)
+				throw new ArgumentNullException(nameof(collection));
+			iEnum = collection.GetEnumerator();
+			conv = converter == null ? DefaultConverter : converter;
+		}
+
+		object IEnumerator.Current => Current;
+
+		public virtual T Current => conv(iEnum?.Current);
+
+		protected bool HasEnum => iEnum != null;
+
+		private T DefaultConverter(object o)
+		{
+			if (o == null)
+				return default(T);
+			return (T)Activator.CreateInstance(typeof(T), Reflection.BindingFlags.CreateInstance | Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Public, null, new object[] { o }, null);
+		}
+
+		public virtual void Dispose()
+		{
+			iEnum = null;
+		}
+
+		public virtual bool MoveNext() => iEnum?.MoveNext() ?? false;
+
+		public virtual void Reset()
+		{
+			iEnum?.Reset();
 		}
 	}
 }

@@ -211,7 +211,7 @@ namespace Microsoft.Win32
 							return pvFilter.ToInt32();
 
 						case 2: // HDFT_ISDATE
-							return (DateTime)pvFilter.ToStructure<SYSTEMTIME>();
+							return (DateTime)InteropUtil.ToStructure<SYSTEMTIME>(pvFilter);
 
 						case 0x8000: // HDFT_HASNOVALUE
 							return null;
@@ -383,7 +383,7 @@ namespace Microsoft.Win32
 				pwpos = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(WINDOWPOS)));
 			}
 
-			public WINDOWPOS Position => pwpos.ToStructure<WINDOWPOS>();
+			public WINDOWPOS Position => InteropUtil.ToStructure<WINDOWPOS>(pwpos);
 
 			public void Dispose()
 			{
