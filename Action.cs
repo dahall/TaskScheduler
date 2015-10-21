@@ -263,7 +263,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class ComHandlerAction : Action
+	public class ComHandlerAction : Action
 	{
 		/// <summary>
 		/// Creates an unbound instance of <see cref="ComHandlerAction"/>.
@@ -712,7 +712,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents an action that executes a command-line operation.
 	/// </summary>
 	[XmlRoot("Exec", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class ExecAction : Action
+	public class ExecAction : Action
 	{
 #if DEBUG
 		internal const string PowerShellArgFormat = "-NoExit -Command \"& {{<# {0}:{1} #> {2}}}\"";
@@ -927,7 +927,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// An action that will run a windowless PowerShell script command.
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
-	internal sealed class PowerShellAction : Action, IExtendExecAction
+	internal sealed class PowerShellAction : ExecAction
 	{
 		private const string PowerShellActionType = "CustomPS";
 
@@ -942,6 +942,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="command">The PowerShell command.</param>
 		public PowerShellAction(string command)
 		{
+			Command = command;
 		}
 
 		/// <summary>
@@ -950,14 +951,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The PowerShell command.
 		/// </value>
-		public string Command { get; set; }
+		public string Command
+		{
+			get
+			{
+				return null;
+			}
+			set
+			{
 
-		/// <summary>
-		/// Gets or sets the directory for this command.
-		/// </summary>
-		public string WorkingDirectory { get; set; }
+			}
+		}
 
-		internal override TaskActionType InternalActionType => TaskActionType.Execute;
+		private new string Arguments { get; }
+
+		private new string Path { get; }
 
 		/// <summary>
 		/// Indicates whether the current object is equal to another object of the same type.
@@ -992,23 +1000,6 @@ namespace Microsoft.Win32.TaskScheduler
 		internal override void CreateV2Action(IActionCollection iActions)
 		{
 			iAction = iActions.Create(TaskActionType.Execute);
-		}
-
-		void IExtendExecAction.FromExecAction(ExecAction execAction)
-		{
-			if (execAction == null)
-				throw new ArgumentNullException(nameof(execAction));
-			var cmds = execAction.GetPowerShellCmd();
-			if (cmds == null)
-				throw new ArgumentException("Unable to convert to PowerShellAction from ExecAction.", nameof(execAction));
-			Command = cmds[1];
-			WorkingDirectory = execAction.WorkingDirectory;
-		}
-
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Language", "CSE0003:Use expression-bodied members", Justification = "<Pending>")]
-		ExecAction IExtendExecAction.ToExecAction()
-		{
-			return new ExecAction() { Path = ExecAction.PowerShellPath, Arguments = ExecAction.BuildPowerShellCmd(PowerShellActionType, Command), WorkingDirectory = WorkingDirectory };
 		}
 	}*/
 
