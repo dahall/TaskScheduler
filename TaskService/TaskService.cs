@@ -617,17 +617,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler" /> interface.
 		/// </summary>
 		/// <param name="clsid">The CLSID of the COM object.</param>
+		/// <param name="onComplete">The action to run on thread completion.</param>
 		/// <param name="data">An optional string passed to the COM object at startup.</param>
 		/// <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
 		/// <param name="onUpdate">An optional <see cref="ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="ITaskHandlerStatus.UpdateStatus(short, string)" /> method.</param>
-		/// <returns>
-		/// The value set by the COM object via a call to the <see cref="ITaskHandlerStatus.TaskCompleted(int)" /> method.
-		/// </returns>
 		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null)
 		{
 			new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start();
 		}
 
+		/// <summary>
+		/// Delegate for methods that support update calls during COM handler execution.
+		/// </summary>
+		/// <param name="percentage">The percentage of completion (0 to 100).</param>
+		/// <param name="message">An optional message.</param>
 		public delegate void ComHandlerUpdate(short percentage, string message);
 
 		private class ComHandlerThread

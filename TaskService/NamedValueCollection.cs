@@ -15,6 +15,9 @@ namespace Microsoft.Win32.TaskScheduler
 		private V2Interop.ITaskNamedValuePair v2Pair = null;
 		private string name, value;
 
+		/// <summary>
+		/// Occurs when a property has changed.
+		/// </summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
@@ -150,7 +153,14 @@ namespace Microsoft.Win32.TaskScheduler
 		private V2Interop.ITaskNamedValueCollection v2Coll = null;
 		private List<NameValuePair> unboundDict = null;
 
+		/// <summary>
+		/// Occurs when the collection has changed.
+		/// </summary>
 		public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+		/// <summary>
+		/// Occurs when a property has changed.
+		/// </summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		internal NamedValueCollection(V2Interop.ITaskNamedValueCollection iColl) { v2Coll = iColl; }

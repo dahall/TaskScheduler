@@ -96,7 +96,7 @@ namespace System.Runtime.InteropServices
 		}
 	}
 
-	public class ComEnumerator<T, E> : IEnumerator<T>, IDisposable where E : IEnumerable where T : class
+	internal class ComEnumerator<T, E> : IEnumerator<T>, IDisposable where E : IEnumerable where T : class
 	{
 		protected IEnumerator iEnum;
 		private Converter<object, T> conv;
