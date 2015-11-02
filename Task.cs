@@ -493,6 +493,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 	internal static class DebugHelper
 	{
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Language", "CSE0003:Use expression-bodied members", Justification = "<Pending>")]
 		public static string GetDebugString(object inst)
 		{
 #if DEBUG

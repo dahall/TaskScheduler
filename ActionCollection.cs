@@ -105,6 +105,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		bool IList.IsReadOnly => false;
 
+		/// <summary>
+		/// Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="ExecAction"/> instances.
+		/// </summary>
+		/// <value>
+		/// The PowerShell platform options.
+		/// </value>
 		[DefaultValue(typeof(PowerShellActionPlatformOption), "Version2")]
 		public PowerShellActionPlatformOption PowerShellConversion
 		{
