@@ -62,6 +62,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt; 2.0 " />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,8 @@
     <Compile Include="Native\InteropUtil.cs" />
     <Compile Include="Native\KERNEL32.cs" />
     <Compile Include="Native\NTDSAPI.cs" />
+    <Compile Include="Native\System.Collections.Specialized.Net20.cs" />
+    <Compile Include="Native\System.Runtime.Serialization.Net20.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="TaskEvent.cs" />
@@ -118,6 +121,9 @@
     <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="V2\TaskSchedulerV2Schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.it.resx">
