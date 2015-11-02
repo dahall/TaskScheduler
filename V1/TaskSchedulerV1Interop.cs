@@ -404,7 +404,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		void SetCreator([In, MarshalAs(UnmanagedType.LPWStr)] string Creator);
 		CoTaskMemString GetCreator();
 		void SetWorkItemData([In] ushort DataLen, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0, ArraySubType = UnmanagedType.U1)] byte[] Data);
-		void GetWorkItemData(out ushort DataLen, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1, SizeParamIndex = 0)] out byte[] Data);
+		void GetWorkItemData(out ushort DataLen, [Out] out IntPtr Data);
 		void SetErrorRetryCount([In] ushort RetryCount);
 		ushort GetErrorRetryCount();
 		void SetErrorRetryInterval([In] ushort RetryInterval);

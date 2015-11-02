@@ -110,14 +110,15 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		private bool SetActionEditDialogV1 => (!editor.IsV2 && (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) == 0);
+
 		private void actionEditButton_Click(object sender, EventArgs e)
 		{
 			int idx = SelectedIndex;
 			if (idx >= 0)
 			{
-				using (ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action))
+				using (ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action) { SupportV1Only = SetActionEditDialogV1 })
 				{
-					if (!editor.IsV2 && !dlg.SupportV1Only) dlg.SupportV1Only = true;
 					dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
 					dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
 					if (dlg.ShowDialog() == DialogResult.OK)
@@ -159,7 +160,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
-			using (ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = !editor.IsV2 })
+			using (ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = SetActionEditDialogV1 })
 			{
 				dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
 				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
@@ -213,7 +214,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionUpButton.Enabled = moveUpToolStripMenuItem.Visible = selectedIndex > 0;
 				actionDownButton.Enabled = moveDownToolStripMenuItem.Visible = selectedIndex > -1 && selectedIndex < actionListView.Items.Count - 1;
 			}
-			actionNewButton.Enabled = newActionToolStripMenuItem.Visible = editable && (editor.IsV2 || actionListView.Items.Count == 0);
+			actionNewButton.Enabled = newActionToolStripMenuItem.Visible = editable && (editor.IsV2 || actionListView.Items.Count == 0 || (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0);
 			actionEditButton.Enabled = actionDeleteButton.Enabled = editActionToolStripMenuItem.Visible = deleteActionToolStripMenuItem.Visible = editable && selectedIndex > -1;
 		}
 	}

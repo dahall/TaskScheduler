@@ -40,6 +40,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		public bool AllowRun { get; set; }
+
 		public bool IsActionValid() => emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
 				emailToText.TextLength > 0 && emailTextText.TextLength > 0 && emailSMTPText.TextLength > 0;
 

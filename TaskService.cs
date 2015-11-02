@@ -573,13 +573,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
 		public TaskDefinition NewTaskFromFile(string xmlFile)
 		{
-			if (v2TaskService != null)
-			{
-				TaskDefinition td = new TaskDefinition(v2TaskService.NewTask(0));
-				td.XmlText = System.IO.File.ReadAllText(xmlFile);
-				return td;
-			}
-			throw new NotV1SupportedException();
+			TaskDefinition td = NewTask();
+			td.XmlText = System.IO.File.ReadAllText(xmlFile);
+			return td;
 		}
 
 		/// <summary>
@@ -599,6 +595,116 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A string in the format of $(@ [dllPath], [resourceId]).</returns>
 		/// <example>For example, the setting this property value to $(@ %SystemRoot%\System32\ResourceName.dll, -101) will set the property to the value of the resource text with an identifier equal to -101 in the %SystemRoot%\System32\ResourceName.dll file.</example>
 		public static string GetDllResourceString(string dllPath, int resourceId) => $"$(@ {dllPath}, {resourceId})";
+
+		/// <summary>
+		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler" /> interface.
+		/// </summary>
+		/// <param name="clsid">The CLSID of the COM object.</param>
+		/// <param name="data">An optional string passed to the COM object at startup.</param>
+		/// <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
+		/// <param name="onUpdate">An optional <see cref="ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="ITaskHandlerStatus.UpdateStatus(short, string)" /> method.</param>
+		/// <returns>
+		/// The value set by the COM object via a call to the <see cref="ITaskHandlerStatus.TaskCompleted(int)" /> method.
+		/// </returns>
+		public static int RunComHandlerAction(Guid clsid, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null)
+		{
+			var thread = new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, null);
+			thread.Start().Join();
+			return thread.ReturnCode;
+		}
+
+		/// <summary>
+		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler" /> interface.
+		/// </summary>
+		/// <param name="clsid">The CLSID of the COM object.</param>
+		/// <param name="data">An optional string passed to the COM object at startup.</param>
+		/// <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
+		/// <param name="onUpdate">An optional <see cref="ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="ITaskHandlerStatus.UpdateStatus(short, string)" /> method.</param>
+		/// <returns>
+		/// The value set by the COM object via a call to the <see cref="ITaskHandlerStatus.TaskCompleted(int)" /> method.
+		/// </returns>
+		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null)
+		{
+			new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start();
+		}
+
+		public delegate void ComHandlerUpdate(short percentage, string message);
+
+		private class ComHandlerThread
+		{
+			Type objType;
+			string Data;
+			int Timeout;
+			TaskHandlerStatus status;
+			public int ReturnCode;
+			System.Threading.AutoResetEvent completed = new System.Threading.AutoResetEvent(false);
+
+			public ComHandlerThread(Guid clsid, string data, int millisecondsTimeout, ComHandlerUpdate onUpdate, Action<int> onComplete)
+			{
+				objType = Type.GetTypeFromCLSID(clsid, true);
+				Data = data;
+				Timeout = millisecondsTimeout;
+				status = new TaskHandlerStatus(i => { completed.Set(); onComplete?.Invoke(i); }, onUpdate);
+			}
+
+			public System.Threading.Thread Start()
+			{
+				var t = new System.Threading.Thread(ThreadProc);
+				t.Start();
+				return t;
+			}
+
+			private void ThreadProc()
+			{
+				completed.Reset();
+				var obj = Activator.CreateInstance(objType);
+				var taskHandler = (ITaskHandler)obj;
+				try
+				{
+					if (taskHandler != null)
+					{
+						taskHandler.Start(status, Data);
+						completed.WaitOne(Timeout);
+						taskHandler.Stop(out ReturnCode);
+					}
+				}
+				finally
+				{
+					if (taskHandler != null)
+					{
+						Marshal.ReleaseComObject(taskHandler);
+						taskHandler = null;
+					}
+					if (obj != null)
+					{
+						Marshal.ReleaseComObject(obj);
+						obj = null;
+					}
+				}
+			}
+
+			private class TaskHandlerStatus : ITaskHandlerStatus
+			{
+				Action<int> OnCompleted;
+				ComHandlerUpdate OnUpdate;
+
+				public TaskHandlerStatus(Action<int> onCompleted, ComHandlerUpdate onUpdate)
+				{
+					OnCompleted = onCompleted;
+					OnUpdate = onUpdate;
+				}
+
+				public void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode)
+				{
+					OnCompleted?.Invoke(taskErrCode);
+				}
+
+				public void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage)
+				{
+					OnUpdate?.Invoke(percentComplete, statusMessage);
+				}
+			}
+		}
 
 		internal static bool SystemSupportsPowerShellActions(string server = null)
 		{

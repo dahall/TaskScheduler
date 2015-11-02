@@ -939,7 +939,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && v2 && td != null)
-				td.Settings.MultipleInstances = (TaskInstancesPolicy)((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value;
+				td.Settings.MultipleInstances = (TaskInstancesPolicy)Convert.ToInt32(((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value);
 		}
 
 		private void TaskPropertiesControl_Load(object sender, EventArgs e)
@@ -1037,31 +1037,34 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskCompatibility priorSetting = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
-			try
+
+			if ((onAssignment && task == null) || (sender != null && td != null && priorSetting > td.Settings.Compatibility))
 			{
-				if (!onAssignment && td != null)
-					td.Validate(true);
-			}
-			catch (InvalidOperationException ex)
-			{
-				var msg = new System.Text.StringBuilder();
-				if (ShowErrors)
+				try
 				{
-					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
-					foreach (var item in ex.Data.Keys)
-						msg.AppendLine($"- {item} {ex.Data[item]}");
+					if (!onAssignment && td != null)
+						td.Validate(true);
 				}
-				else
-					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
-				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
-				return;
+				catch (InvalidOperationException ex)
+				{
+					var msg = new System.Text.StringBuilder();
+					if (ShowErrors)
+					{
+						msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
+						foreach (var item in ex.Data.Keys)
+							msg.AppendLine($"- {item} {ex.Data[item]}");
+					}
+					else
+						msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
+					MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
+					return;
+				}
 			}
 			taskRunLevelCheck.Enabled = taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 				taskRestartIntervalCheck.Enabled = taskRestartAttemptTimesLabel.Enabled = 
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
-				taskStartIfConnectionCheck.Enabled = taskRegSourceText.Enabled = taskRegURIText.Enabled =
-				taskRegVersionText.Enabled = taskRegSDDLText.Enabled = editable && v2;
+				taskStartIfConnectionCheck.Enabled = taskRegSDDLText.Enabled = editable && v2;
 			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = v2 && editable && taskRestartIntervalCheck.Checked;
 			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 

@@ -76,6 +76,7 @@
 	<xs:complexType name="triggersType">
 		<xs:group ref="triggerGroup" minOccurs="0" maxOccurs="48"/>
 	</xs:complexType>
+	
 	<xs:group name="triggerGroup">
 		<xs:choice>
 			<xs:element name="BootTrigger"               type="bootTriggerType"               minOccurs="0" />
@@ -86,6 +87,7 @@
 			<xs:element name="LogonTrigger"              type="logonTriggerType"              minOccurs="0" />
 			<xs:element name="SessionStateChangeTrigger" type="sessionStateChangeTriggerType" minOccurs="0" />
 			<xs:element name="CalendarTrigger"           type="calendarTriggerType"           minOccurs="0" />
+			<xs:element name="WnfStateChangeTrigger"     type="customTriggerType"             minOccurs="0" />
 		</xs:choice>
 	</xs:group>
 
@@ -129,6 +131,17 @@
 			<xs:extension base="triggerBaseType">
 				<xs:sequence>
 					<xs:element name="Delay"        type="xs:duration" default="PT0M" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- CustomTrigger -->
+	<xs:complexType name="customTriggerType">
+		<xs:complexContent>
+			<xs:extension base="triggerBaseType">
+				<xs:sequence>
+					<xs:any minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -380,6 +393,28 @@
 			<xs:element name="UseUnifiedSchedulingEngine"       type="xs:boolean"                   default="false"     minOccurs="0" />
 			<xs:element name="Volatile"                         type="xs:boolean"                   default="false"     minOccurs="0" />
 			<xs:element name="DisallowStartOnRemoteAppSession"  type="xs:boolean"                   default="false"     minOccurs="0" />
+			<xs:element name="MaintenanceSettings"              type="maintenanceSettingsType"                          minOccurs="0" />
+		</xs:all>
+	</xs:complexType>
+	
+	<!-- MaintenanceSettings -->
+	<xs:complexType name="maintenanceSettingsType">
+		<xs:all>
+			<xs:element name="Period" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:duration">
+						<xs:minInclusive value="P1D" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Deadline" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:duration">
+						<xs:minInclusive value="P1D" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Exclusive" type="xs:boolean" maxOccurs="1" minOccurs="1" />
 		</xs:all>
 	</xs:complexType>
 
@@ -456,7 +491,7 @@
 	<xs:simpleType name="dataType">
 		<xs:restriction base="xs:string" />
 	</xs:simpleType>
-
+	
 	<!-- Principals -->
 	<xs:complexType name="principalsType">
 		<xs:sequence>
@@ -477,6 +512,7 @@
 		</xs:all>
 		<xs:attribute name="id" type="xs:ID" use="optional" />
 	</xs:complexType>
+	
 	<xs:simpleType name="logonType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="S4U" />
@@ -554,6 +590,7 @@
 		</xs:sequence>
 		<xs:attribute name="Context" type="xs:IDREF" use="optional" />
 	</xs:complexType>
+	
 	<xs:group name="actionGroup">
 		<xs:choice>
 			<xs:element name="Exec"          type="execType" />

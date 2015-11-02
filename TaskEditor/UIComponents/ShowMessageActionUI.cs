@@ -25,6 +25,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		public bool AllowRun { get; set; }
+
 		public bool IsActionValid() => msgMsgText.TextLength > 0;
 
 		public event EventHandler KeyValueChanged;

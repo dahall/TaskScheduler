@@ -100,5 +100,26 @@ namespace System
 			}
 			return null;
 		}
+
+		/// <summary>
+		/// Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object or returns the value of <paramref name="defaultVal"/>. If <paramref name="defaultVal"/> is undefined, it returns the first declared item in the enumerated type.
+		/// </summary>
+		/// <typeparam name="TEnum">The enumeration type to which to convert <paramref name="value"/>.</typeparam>
+		/// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+		/// <param name="ignoreCase"><c>true</c> to ignore case; <c>false</c> to consider case.</param>
+		/// <param name="defaultVal">The default value.</param>
+		/// <returns>An object of type <typeparamref name="TEnum"/> whose value is represented by value.</returns>
+		public static TEnum TryParse<TEnum>(string value, bool ignoreCase = false, TEnum defaultVal = default(TEnum)) where TEnum : struct, IConvertible
+		{
+			CheckIsEnum<TEnum>();
+			try { return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase); } catch { }
+			if (!Enum.IsDefined(typeof(TEnum), defaultVal))
+			{
+				var v = Enum.GetValues(typeof(TEnum));
+				if (v != null && v.Length > 0)
+					return (TEnum)v.GetValue(0);
+			}
+			return defaultVal;
+		}
 	}
 }

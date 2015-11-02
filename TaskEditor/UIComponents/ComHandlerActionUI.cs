@@ -27,10 +27,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			get
 			{
-				string guid = toolTip.GetToolTip(comCLSIDText);
-				try { Guid g = new Guid(guid); return g; }
-				catch { }
-				return Guid.Empty;
+				try { return new Guid(toolTip.GetToolTip(comCLSIDText)); }
+				catch { return Guid.Empty; }
 			}
 			set
 			{
@@ -42,12 +40,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				else
 				{
 					toolTip.SetToolTip(comCLSIDText, value.ToString());
-					comCLSIDText.Text = GetNameForCLSID(value);
+					comCLSIDText.Text = GetNameForCLSID(value) ?? value.ToString();
 				}
 
-				EventHandler h = KeyValueChanged;
-				if (h != null)
-					h(this, EventArgs.Empty);
+				KeyValueChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -78,7 +74,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool IsActionValid() => ComCLSID != null;
+		public bool AllowRun { get; set; }
+
+		public bool IsActionValid() => ComCLSID != Guid.Empty;
 
 		public event EventHandler KeyValueChanged;
 	}

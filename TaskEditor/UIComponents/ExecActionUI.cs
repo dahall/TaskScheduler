@@ -34,6 +34,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		public bool AllowRun { get; set; }
+
 		public bool IsActionValid() => execProgText.TextLength > 0;
 
 		private void execProgBrowseBtn_Click(object sender, EventArgs e)

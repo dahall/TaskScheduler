@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
@@ -8,10 +10,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Pair of name and value.
 	/// </summary>
-	public class NameValuePair : IXmlSerializable
+	public class NameValuePair : IXmlSerializable, INotifyPropertyChanged, ICloneable
 	{
 		private V2Interop.ITaskNamedValuePair v2Pair = null;
 		private string name, value;
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NameValuePair"/> class.
@@ -30,6 +34,9 @@ namespace Microsoft.Win32.TaskScheduler
 			this.name = name; this.value = value;
 		}
 
+		[XmlIgnore]
+		internal bool AttributedXmlFormat { get; set; } = true;
+
 		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
@@ -39,7 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Name
 		{
 			get { return v2Pair == null ? name : v2Pair.Name; }
-			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Name)); if (v2Pair == null) name = value; else v2Pair.Name = value; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Name)); if (v2Pair == null) name = value; else v2Pair.Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name))); }
 		}
 
 		/// <summary>
@@ -51,8 +58,16 @@ namespace Microsoft.Win32.TaskScheduler
 		public string Value
 		{
 			get { return v2Pair == null ? value : v2Pair.Value; }
-			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Value)); if (v2Pair == null) this.value = value; else v2Pair.Value = value; }
+			set { if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Value)); if (v2Pair == null) this.value = value; else v2Pair.Value = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value))); }
 		}
+
+		/// <summary>
+		/// Clones this instance.
+		/// </summary>
+		/// <returns></returns>
+		public NameValuePair Clone() => new NameValuePair(this.Name, this.Value);
+
+		object ICloneable.Clone() => Clone();
 
 		/// <summary>
 		/// Determines whether the specified <see cref="System.Object"/>, is equal to this instance.
@@ -86,6 +101,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString() => $"{Name}={Value}";
 
+		/// <summary>
+		/// Implements the operator implicit NameValuePair.
+		/// </summary>
+		/// <param name="kvp">The KeyValuePair.</param>
+		/// <returns>
+		/// The result of the operator.
+		/// </returns>
+		public static implicit operator NameValuePair(KeyValuePair<string, string> kvp) => new NameValuePair(kvp.Key, kvp.Value);
+
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
@@ -96,22 +120,38 @@ namespace Microsoft.Win32.TaskScheduler
 				Value = reader.ReadString();
 				reader.Read();
 			}
+			else
+			{
+				reader.ReadStartElement();
+				XmlSerializationHelper.ReadObjectProperties(reader, this);
+				reader.ReadEndElement();
+			}
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			writer.WriteAttributeString("name", Name);
-			writer.WriteString(Value);
+			if (AttributedXmlFormat)
+			{
+				writer.WriteAttributeString("name", Name);
+				writer.WriteString(Value);
+			}
+			else
+			{
+				XmlSerializationHelper.WriteObjectProperties(writer, this);
+			}
 		}
 	}
 
 	/// <summary>
 	/// Contains a collection of name-value pairs.
 	/// </summary>
-	public sealed class NamedValueCollection : IDisposable, ICollection<NameValuePair>, IDictionary<string, string>
+	public sealed class NamedValueCollection : IDisposable, ICollection<NameValuePair>, IDictionary<string, string>, INotifyCollectionChanged, INotifyPropertyChanged
 	{
 		private V2Interop.ITaskNamedValueCollection v2Coll = null;
 		private List<NameValuePair> unboundDict = null;
+
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		internal NamedValueCollection(V2Interop.ITaskNamedValueCollection iColl) { v2Coll = iColl; }
 
@@ -121,6 +161,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		internal bool Bound => v2Coll != null;
+
+		[XmlIgnore]
+		internal bool AttributedXmlFormat { get; set; } = true;
 
 		internal void Bind(V2Interop.ITaskNamedValueCollection iTaskNamedValueCollection)
 		{
@@ -231,30 +274,40 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
+				int idx = -1;
+				NameValuePair old = null;
+				NameValuePair nvp = new NameValuePair(name, value);
 				if (v2Coll == null)
 				{
-					int idx = unboundDict.FindIndex(p => p.Name == name);
-					var nvp = new NameValuePair(name, value);
+					idx = unboundDict.FindIndex(p => p.Name == name);
 					if (idx == -1)
 						unboundDict.Add(nvp);
 					else
+					{
+						old = unboundDict[idx];
 						unboundDict[idx] = nvp;
+					}
 				}
 				else
 				{
 					var array = new KeyValuePair<string, string>[Count];
 					((ICollection<KeyValuePair<string, string>>)this).CopyTo(array, 0);
-					int idx = Array.FindIndex(array, p => p.Key == name);
+					idx = Array.FindIndex(array, p => p.Key == name);
 					if (idx == -1)
 						v2Coll.Create(name, value);
 					else
 					{
+						old = array[idx];
 						array[idx] = new KeyValuePair<string, string>(name, value);
 						v2Coll.Clear();
 						for (int i = 0; i < array.Length; i++)
 							v2Coll.Create(array[i].Key, array[i].Value);
 					}
 				}
+				if (idx == -1)
+					OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, nvp));
+				else
+					OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, nvp, old, idx));
 			}
 		}
 
@@ -264,7 +317,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
 		public void Add(NameValuePair item)
 		{
-			Add(item.Name, item.Value);
+			if (v2Coll != null)
+				v2Coll.Create(item.Name, item.Value);
+			else
+				unboundDict.Add(item);
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
 		}
 
 		/// <summary>
@@ -274,10 +331,23 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="Value">The value associated with a name in a name-value pair.</param>
 		public void Add(string Name, string Value)
 		{
+			Add(new NameValuePair(Name, Value));
+		}
+
+		/// <summary>
+		/// Adds the elements of the specified collection to the end of <see cref="NamedValueCollection"/>.
+		/// </summary>
+		/// <param name="items">The collection of whose elements should be added to the end of <see cref="NamedValueCollection"/>.</param>
+		public void AddRange(IEnumerable<NameValuePair> items)
+		{
 			if (v2Coll != null)
-				v2Coll.Create(Name, Value);
+			{
+				foreach (var item in items)
+					v2Coll.Create(item.Name, item.Value);
+			}
 			else
-				unboundDict.Add(new NameValuePair(Name, Value));
+				unboundDict.AddRange(items);
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
 		}
 
 		/// <summary>
@@ -289,6 +359,9 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Coll.Clear();
 			else
 				unboundDict.Clear();
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
 
 		/// <summary>
@@ -305,6 +378,13 @@ namespace Microsoft.Win32.TaskScheduler
 			return new ComEnumerator<NameValuePair, V2Interop.ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((V2Interop.ITaskNamedValuePair)o));
 		}
 
+		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+		{
+			foreach (NameValuePair item in e.NewItems)
+				item.AttributedXmlFormat = AttributedXmlFormat;
+			CollectionChanged?.Invoke(this, e);
+		}
+
 		/// <summary>
 		/// Removes the name-value pair with the specified key from the collection.
 		/// </summary>
@@ -312,20 +392,39 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns></returns>
 		public bool Remove(string name)
 		{
-			if (v2Coll == null)
+			int i = -1;
+			NameValuePair nvp = null;
+			try
 			{
-				int idx = unboundDict.FindIndex(p => p.Name == name);
-				if (idx != -1)
-					unboundDict.RemoveAt(idx);
-				return (idx != -1);
-			}
-
-			for (int i = 0; i < v2Coll.Count; i++)
-			{
-				if (name == v2Coll[i].Name)
+				if (v2Coll == null)
 				{
-					v2Coll.Remove(i);
-					return true;
+					i = unboundDict.FindIndex(p => p.Name == name);
+					if (i != -1)
+					{
+						nvp = unboundDict[i];
+						unboundDict.RemoveAt(i);
+					}
+					return (i != -1);
+				}
+
+				for (i = 0; i < v2Coll.Count; i++)
+				{
+					if (name == v2Coll[i].Name)
+					{
+						nvp = new NameValuePair(v2Coll[i]).Clone();
+						v2Coll.Remove(i);
+						return true;
+					}
+				}
+				i = -1;
+			}
+			finally
+			{
+				if (i != -1)
+				{
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+					OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, nvp, i));
 				}
 			}
 			return false;
@@ -337,10 +436,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="index">Index of the pair to remove.</param>
 		public void RemoveAt(int index)
 		{
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException(nameof(index));
+			NameValuePair nvp;
 			if (v2Coll != null)
+			{
+				nvp = new NameValuePair(v2Coll[index]).Clone();
 				v2Coll.Remove(index);
+			}
 			else
+			{
+				nvp = unboundDict[index];
 				unboundDict.RemoveAt(index);
+			}
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, nvp, index));
 		}
 
 		/// <summary>
@@ -409,15 +520,29 @@ namespace Microsoft.Win32.TaskScheduler
 
 		bool ICollection<NameValuePair>.Remove(NameValuePair item)
 		{
-			if (v2Coll == null)
-				return unboundDict.Remove(item);
-
-			for (int i = 0; i < v2Coll.Count; i++)
+			int i = -1;
+			try
 			{
-				if (item.Equals(v2Coll[i]))
+				if (v2Coll == null && (i = unboundDict.IndexOf(item)) != -1)
+					return unboundDict.Remove(item);
+
+				for (i = 0; i < v2Coll.Count; i++)
 				{
-					v2Coll.Remove(i);
-					return true;
+					if (item.Equals(v2Coll[i]))
+					{
+						v2Coll.Remove(i);
+						return true;
+					}
+				}
+				i = -1;
+			}
+			finally
+			{
+				if (i != -1)
+				{
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+					OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, i));
 				}
 			}
 			return false;

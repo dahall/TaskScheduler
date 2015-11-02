@@ -156,6 +156,7 @@
 			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.taskServiceConnectDialog1.Location = new System.Drawing.Point(200, 200);
 			this.taskServiceConnectDialog1.Name = "TaskServiceConnectDialog";
+			this.taskServiceConnectDialog1.TaskService = this.TaskService;
 			this.taskServiceConnectDialog1.Text = "Select Computer";
 			this.taskServiceConnectDialog1.Visible = false;
 			// 
