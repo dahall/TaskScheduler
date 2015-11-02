@@ -380,7 +380,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			reader.ReadStartElement("Triggers", TaskDefinition.tns);
+			reader.ReadStartElement(XmlSerializationHelper.GetElementName(this), TaskDefinition.tns);
 			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 			{
 				switch (reader.LocalName)

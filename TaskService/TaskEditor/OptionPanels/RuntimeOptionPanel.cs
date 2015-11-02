@@ -109,7 +109,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		private void taskMultInstCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && parent.IsV2 && td != null)
-				td.Settings.MultipleInstances = (TaskInstancesPolicy)((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value;
+				td.Settings.MultipleInstances = (TaskInstancesPolicy)Convert.ToInt32(((DropDownCheckListItem)taskMultInstCombo.SelectedItem).Value);
 		}
 
 		private void taskPriorityCombo_SelectedIndexChanged(object sender, EventArgs e)

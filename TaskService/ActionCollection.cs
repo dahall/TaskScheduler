@@ -1,68 +1,99 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
+	/// Options for when to convert actions to PowerShell equivalents.
+	/// </summary>
+	[Flags]
+	public enum PowerShellActionPlatformOption
+	{
+		/// <summary>
+		/// Never convert any actions to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities are found.
+		/// </summary>
+		Never = 0,
+		/// <summary>
+		/// Convert actions under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types.
+		/// If not specified, only a single <see cref="ExecAction"/> is supported. Developer must ensure that PowerShell v2 or higher is installed on the target computer.
+		/// </summary>
+		Version1 = 1,
+		/// <summary>
+		/// Convert all <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references to their PowerShell equivalents on systems on or after Windows 8 / Server 2012.
+		/// </summary>
+		Version2 = 2,
+		/// <summary>
+		/// Convert all actions regardless of version or operating system.
+		/// </summary>
+		All = 3
+	}
+
+	/// <summary>
 	/// Collection that contains the actions that are performed by the task.
 	/// </summary>
-	/// <remarks>A Task Scheduler 1.0 task can only contain a single <see cref="ExecAction"/>.</remarks>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
 	{
+		private List<Action> v1Actions;
 		private V1Interop.ITask v1Task;
 		private V2Interop.IActionCollection v2Coll;
 		private V2Interop.ITaskDefinition v2Def;
+		private PowerShellActionPlatformOption psConvert = PowerShellActionPlatformOption.Version2;
+		private static readonly string psV2IdRegex = $"(?:; )?{nameof(PowerShellConversion)}=(?<v>0|1)";
 
 		internal ActionCollection(V1Interop.ITask task)
 		{
 			v1Task = task;
+			v1Actions = GetV1Actions();
+			PowerShellConversion = Action.TryParse(TaskDefinition.V1GetDataItem(v1Task, nameof(PowerShellConversion)), psConvert | PowerShellActionPlatformOption.Version2);
 		}
 
 		internal ActionCollection(V2Interop.ITaskDefinition iTaskDef)
 		{
 			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
+			System.Text.RegularExpressions.Match match;
+			if (iTaskDef.Data != null && (match = System.Text.RegularExpressions.Regex.Match(iTaskDef.Data, psV2IdRegex)).Success)
+			{
+				bool on = bool.Parse(match.Groups["v"].Value);
+				if (on)
+					psConvert |= PowerShellActionPlatformOption.Version2;
+				else
+					psConvert &= ~PowerShellActionPlatformOption.Version2;
+			}
 			UnconvertUnsupportedActions();
 		}
 
 		/// <summary>
 		/// Gets or sets the identifier of the principal for the task.
 		/// </summary>
-		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		[System.Xml.Serialization.XmlAttribute(AttributeName = "Context", DataType = "IDREF")]
+		[XmlAttribute]
+		[DefaultValue(null)]
 		public string Context
 		{
 			get
 			{
 				if (v2Coll != null)
 					return v2Coll.Context;
-				return string.Empty;
+				return TaskDefinition.V1GetDataItem(v1Task, "ActionCollectionContext");
 			}
 			set
 			{
 				if (v2Coll != null)
 					v2Coll.Context = value;
 				else
-					throw new NotV1SupportedException();
+					TaskDefinition.V1SetDataItem(v1Task, "ActionCollectionContext", value);
 			}
 		}
 
 		/// <summary>
 		/// Gets the number of actions in the collection.
 		/// </summary>
-		public int Count
-		{
-			get
-			{
-				if (v2Coll != null)
-					return v2Coll.Count;
-				return ((string)v1Task.GetApplicationName()).Length == 0 ? 0 : 1;
-			}
-		}
+		public int Count => (v2Coll != null) ? v2Coll.Count : v1Actions.Count;
 
 		bool ICollection.IsSynchronized => false;
 
@@ -73,6 +104,32 @@ namespace Microsoft.Win32.TaskScheduler
 		bool IList.IsFixedSize => false;
 
 		bool IList.IsReadOnly => false;
+
+		[DefaultValue(typeof(PowerShellActionPlatformOption), "Version2")]
+		public PowerShellActionPlatformOption PowerShellConversion
+		{
+			get { return psConvert; }
+			set
+			{
+				if (psConvert != value)
+				{
+					psConvert = value;
+					if (v1Task != null)
+						TaskDefinition.V1SetDataItem(v1Task, nameof(PowerShellConversion), value.ToString());
+					if (v2Def != null)
+					{
+						if (!string.IsNullOrEmpty(v2Def.Data))
+							v2Def.Data = System.Text.RegularExpressions.Regex.Replace(v2Def.Data, psV2IdRegex, "");
+						if (!SupportV2Conversion)
+							v2Def.Data = string.Format("{0}; {1}=0", v2Def.Data, nameof(PowerShellConversion));
+					}
+				}
+			}
+		}
+
+		private bool SupportV1Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0;
+
+		private bool SupportV2Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version2) != 0;
 
 		/// <summary>
 		/// Gets or sets an XML-formatted version of the collection.
@@ -110,16 +167,32 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return Action.CreateAction(v2Coll[++index]);
-				if (index == 0)
-					return new ExecAction(v1Task);
+				if (v1Task != null)
+				{
+					if (SupportV1Conversion)
+						return v1Actions[index];
+					else
+					{
+						if (index == 0)
+							return v1Actions[0];
+					}
+				}
 				throw new ArgumentOutOfRangeException();
 			}
 			set
 			{
 				if (Count <= index)
 					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
-				Insert(index, value);
-				RemoveAt(index + 1);
+				if (v2Coll != null)
+				{
+					Insert(index, value);
+					RemoveAt(index + 1);
+				}
+				else
+				{
+					v1Actions[index] = value;
+					SaveV1Actions();
+				}
 			}
 		}
 
@@ -154,9 +227,8 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NullReferenceException();
 				if (string.IsNullOrEmpty(actionId))
 					throw new ArgumentNullException(nameof(actionId));
-				if (actionId != value.Id)
-					throw new InvalidOperationException("Mismatching Id for action and lookup.");
 				int index = IndexOf(actionId);
+				value.Id = actionId;
 				if (index >= 0)
 					this[index] = value;
 				else
@@ -176,7 +248,12 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Def != null)
 				action.Bind(v2Def);
 			else
-				action.Bind(v1Task);
+			{
+				if (!SupportV1Conversion && (v1Actions.Count >= 1 || !(action is ExecAction)))
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				v1Actions.Add(action);
+				SaveV1Actions();
+			}
 			return action;
 		}
 
@@ -198,8 +275,11 @@ namespace Microsoft.Win32.TaskScheduler
 		public Action AddNew(TaskActionType actionType)
 		{
 			if (v1Task != null)
-				return new ExecAction(v1Task);
-
+			{
+				if (!SupportV1Conversion && (v1Actions.Count >= 1 || actionType != TaskActionType.Execute))
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				return Action.CreateAction(v1Task);
+			}
 			return Action.CreateAction(v2Coll.Create(actionType));
 		}
 
@@ -212,14 +292,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (actions == null)
 				throw new ArgumentNullException(nameof(actions));
-			if (v1Task != null && Count > 0)
-				throw new System.InvalidOperationException("Cannot add more than one action to a V1 task.");
-			int i = 0;
-			foreach (var item in actions)
+			if (v1Task != null)
 			{
-				if (v1Task != null && ++i > 1)
-					throw new System.InvalidOperationException("Cannot add more than one action to a V1 task.");
-				Add(item);
+				List<Action> list = new List<Action>(actions);
+				bool at = list.Count == 1 && list[0].ActionType == TaskActionType.Execute;
+				if (!SupportV1Conversion && ((v1Actions.Count + list.Count) > 1 || !at))
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				v1Actions.AddRange(actions);
+				SaveV1Actions();
+			}
+			else
+			{
+				foreach (var item in actions)
+					Add(item);
 			}
 		}
 
@@ -231,7 +316,10 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll != null)
 				v2Coll.Clear();
 			else
-				Add(new ExecAction());
+			{
+				v1Actions.Clear();
+				SaveV1Actions();
+			}
 		}
 
 		/// <summary>
@@ -347,7 +435,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 				return new ComEnumerator<Action, V2Interop.IActionCollection>(v2Coll, o => Action.CreateAction(o as V2Interop.IAction));
-			return new V1ActionEnumerator(v1Task);
+			return v1Actions.GetEnumerator();
 		}
 
 		void ICollection.CopyTo(Array array, int index)
@@ -363,6 +451,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			Add(item);
 		}
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 		int IList.Add(object value)
 		{
@@ -414,52 +504,54 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="action">The action to insert into the list.</param>
 		public void Insert(int index, Action action)
 		{
-			if (v2Coll == null && Count > 0)
-				throw new NotV1SupportedException("Only a single action is allowed.");
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
-			if (index >= Count)
+			if (index < 0 || index > Count)
 				throw new ArgumentOutOfRangeException(nameof(index));
 
-			Action[] pushItems = new Action[Count - index];
-			CopyTo(index, pushItems, 0, Count - index);
-			for (int j = Count - 1; j >= index; j--)
-				RemoveAt(j);
-			Add(action);
-			for (int k = 0; k < pushItems.Length; k++)
-				Add(pushItems[k]);
+			if (v2Coll != null)
+			{
+				Action[] pushItems = new Action[Count - index];
+				if (Count != index)
+				{
+					CopyTo(index, pushItems, 0, Count - index);
+					for (int j = Count - 1; j >= index; j--)
+						RemoveAt(j);
+				}
+				Add(action);
+				if (Count != index)
+					for (int k = 0; k < pushItems.Length; k++)
+						Add(pushItems[k]);
+			}
+			else
+			{
+				if (!SupportV1Conversion && (index > 0 || !(action is ExecAction)))
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				v1Actions.Insert(index, action);
+				SaveV1Actions();
+			}
 		}
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
 		{
-			reader.ReadStartElement("Actions", TaskDefinition.tns);
+			reader.ReadStartElement(XmlSerializationHelper.GetElementName(this), TaskDefinition.tns);
+			Context = reader.GetAttribute("Context");
 			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 			{
-				Action newAction = null;
-				switch (reader.LocalName)
-				{
-					case "Exec":
-						newAction = AddNew(TaskActionType.Execute);
-						break;
-
-					default:
-						reader.Skip();
-						break;
-				}
-				if (newAction != null)
-					XmlSerializationHelper.ReadObject(reader, newAction);
+				Action a = Action.CreateAction(Action.TryParse(reader.LocalName, TaskActionType.Execute));
+				XmlSerializationHelper.ReadObject(reader, a);
+				this.Add(a);
 			}
 			reader.ReadEndElement();
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
 		{
-			if (Count > 0)
-			{
-				XmlSerializationHelper.WriteObject(writer, this[0] as ExecAction);
-			}
+			// TODO:FIX if (!string.IsNullOrEmpty(Context)) writer.WriteAttributeString("Context", Context);
+			foreach (var item in this)
+				XmlSerializationHelper.WriteObject(writer, item);
 		}
 
 		/// <summary>
@@ -495,13 +587,12 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(index), index, "Failed to remove action. Index out of range.");
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
-			else if (index == 0)
-				Add(new ExecAction());
 			else
-				throw new NotV1SupportedException("There can be only a single action and it cannot be removed.");
+			{
+				v1Actions.RemoveAt(index);
+				SaveV1Actions();
+			}
 		}
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		/// <summary>
 		/// Copies the elements of the <see cref="ActionCollection"/> to a new array.
@@ -531,85 +622,98 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal void ConvertUnsupportedActions()
 		{
-			for (int i = 0; i < Count; i++)
+			if (TaskService.LibraryVersion.Minor > 3 && SupportV2Conversion)
 			{
-				Action action = this[i];
-				var bindable = action as IBindAsExecAction;
-				if (TaskService.LibraryVersion.Minor > 3 && bindable != null)
+				for (int i = 0; i < Count; i++)
 				{
-					string cmd = bindable.GetPowerShellCommand();
-					this[i] = ExecAction.AsPowerShellCmd(action.ActionType.ToString(), cmd);
+					Action action = this[i];
+					var bindable = action as IBindAsExecAction;
+					if (bindable != null && !(action is ComHandlerAction))
+						this[i] = ExecAction.ConvertToPowerShellAction(action);
 				}
-				/*else if (action is IExtendExecAction)
-				{
-					this[i] = ((IExtendExecAction)action).ToExecAction();
-				}*/
 			}
 		}
 
-		internal void UnconvertUnsupportedActions()
+		private void UnconvertUnsupportedActions()
 		{
-			for (int i = 0; i < Count; i++)
+			if (TaskService.LibraryVersion.Minor > 3)
 			{
-				ExecAction action = this[i] as ExecAction;
-				if (action != null)
+				for (int i = 0; i < Count; i++)
 				{
-					if (TaskService.LibraryVersion.Minor > 3)
+					ExecAction action = this[i] as ExecAction;
+					if (action != null)
 					{
-						var match = action.GetPowerShellCmd();
-						if (match != null)
-						{
-							Action newAction = null;
-							if (match[0] == "SendEmail")
-								newAction = EmailAction.FromPowerShellCommand(match[1]);
-							else if (match[0] == "ShowMessage")
-								newAction = ShowMessageAction.FromPowerShellCommand(match[1]);
-							if (newAction != null)
-							{
-								this[i] = newAction;
-								continue;
-							}
-						}
+						Action newAction = Action.ConvertFromPowerShellAction(action);
+						if (newAction != null)
+							this[i] = newAction;
 					}
 				}
 			}
 		}
 
-		internal class V1ActionEnumerator : IEnumerator<Action>, IDisposable
+		private List<Action> GetV1Actions()
 		{
-			private int v1Pos = -1;
-			private V1Interop.ITask v1Task;
-
-			internal V1ActionEnumerator(V1Interop.ITask task) : base()
+			List<Action> ret = new List<Action>();
+			if (v1Task != null && TaskDefinition.V1GetDataItem(v1Task, "ActionType") != "EMPTY")
 			{
-				v1Task = task;
-			}
-
-			public Action Current
-			{
-				get
+				var exec = new ExecAction(v1Task);
+				var items = exec.ParsePowerShellItems();
+				if (items != null && items.Length == 2)
 				{
-					if (v1Pos == 0)
-						return new ExecAction(v1Task.GetApplicationName(), v1Task.GetParameters(), v1Task.GetWorkingDirectory());
-					throw new InvalidOperationException();
+					if (items[0] == "MULTIPLE")
+					{
+						PowerShellConversion |= PowerShellActionPlatformOption.Version1;
+						var mc = System.Text.RegularExpressions.Regex.Matches(items[1], @"<# (?<id>\w+):(?<t>\w+) #>\s*(?<c>[^<#]*)\s*");
+						foreach (System.Text.RegularExpressions.Match ms in mc)
+						{
+							var a = Action.ActionFromScript(ms.Groups["t"].Value, ms.Groups["c"].Value);
+							if (a != null)
+							{
+								if (ms.Groups["id"].Value != "NO_ID")
+									a.Id = ms.Groups["id"].Value;
+								ret.Add(a);
+							}
+						}
+					}
+					else
+						ret.Add(ExecAction.ConvertFromPowerShellAction(exec));
 				}
 			}
+			return ret;
+		}
 
-			object IEnumerator.Current => Current;
-
-			/// <summary>
-			/// Releases all resources used by this class.
-			/// </summary>
-			public void Dispose()
+		private void SaveV1Actions()
+		{
+			if (v1Task == null)
+				throw new ArgumentNullException(nameof(v1Task));
+			if (v1Actions.Count == 0)
 			{
-				v1Task = null;
+				v1Task.SetApplicationName(null);
+				v1Task.SetParameters(null);
+				v1Task.SetWorkingDirectory(null);
+				TaskDefinition.V1SetDataItem(v1Task, "ActionId", null);
+				TaskDefinition.V1SetDataItem(v1Task, "ActionType", "EMPTY");
 			}
-
-			public bool MoveNext() => ++v1Pos == 0;
-
-			public void Reset()
+			else if (v1Actions.Count == 1)
 			{
-				v1Pos = -1;
+				if (!SupportV1Conversion && v1Actions[0].ActionType != TaskActionType.Execute)
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				v1Actions[0].Bind(v1Task);
+			}
+			else
+			{
+				if (!SupportV1Conversion)
+					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				// Build list of internal PowerShell scripts
+				var sb = new System.Text.StringBuilder();
+				foreach (var item in v1Actions)
+					sb.Append($"<# {item.Id ?? "NO_ID"}:{item.ActionType} #> {item.GetPowerShellCommand()} ");
+
+				// Build and save PS ExecAction
+				var ea = ExecAction.CreatePowerShellAction("MULTIPLE", sb.ToString());
+				ea.Bind(v1Task);
+				TaskDefinition.V1SetDataItem(v1Task, "ActionId", null);
+				TaskDefinition.V1SetDataItem(v1Task, "ActionType", "MULTIPLE");
 			}
 		}
 	}

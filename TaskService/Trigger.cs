@@ -2381,6 +2381,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
 		/// </summary>
+		[DefaultValue(false)]
 		public bool StopAtDurationEnd
 		{
 			get
@@ -2491,7 +2492,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!reader.IsEmptyElement)
 			{
-				reader.ReadStartElement("Repetition", TaskDefinition.tns);
+				reader.ReadStartElement(XmlSerializationHelper.GetElementName(this), TaskDefinition.tns);
 				XmlSerializationHelper.ReadObjectProperties(reader, this, ReadXmlConverter);
 				reader.ReadEndElement();
 			}

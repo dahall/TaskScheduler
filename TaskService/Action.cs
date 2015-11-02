@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -14,9 +16,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <remarks>
 	/// The action type is defined when the action is created and cannot be changed later. See <see cref="ActionCollection.AddNew"/>.
 	/// </remarks>
+	[DataContract(Name = "TaskActionType", Namespace = TaskDefinition.tns)]
 	public enum TaskActionType
 	{
 		/// <summary>This action fires a handler.</summary>
+		[EnumMember]
 		ComHandler = 5,
 
 		/// <summary>
@@ -24,12 +28,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// launch an executable, or, if the name of a document is provided, find its associated
 		/// application and launch the application with the document.
 		/// </summary>
+		[EnumMember]
 		Execute = 0,
 
 		/// <summary>This action sends and e-mail.</summary>
+		[EnumMember]
 		SendEmail = 6,
 
 		/// <summary>This action shows a message box.</summary>
+		[EnumMember]
 		ShowMessage = 7
 	}
 
@@ -38,38 +45,16 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	internal interface IBindAsExecAction
 	{
-		/// <summary>
-		/// Gets the PowerShell script for an action.
-		/// </summary>
-		/// <returns>Single line PowerShell script string.</returns>
-		string GetPowerShellCommand();
 	}
-
-	/*/// <summary>
-	/// An interface that exposes the ability for an action derivative to convert itself to and from and ExecAction.
-	/// </summary>
-	internal interface IExtendExecAction
-	{
-		/// <summary>
-		/// Converts this action to an <see cref="ExecAction"/>.
-		/// </summary>
-		/// <returns>New <see cref="ExecAction"/> whose properties are set in such as way as to indicate it as this type.</returns>
-		ExecAction ToExecAction();
-
-		/// <summary>
-		/// Initializes this action from an <see cref="ExecAction" />.
-		/// </summary>
-		/// <param name="execAction">The <see cref="ExecAction" /> to use for initialization of this type.</param>
-		void FromExecAction(ExecAction execAction);
-	}*/
 
 	/// <summary>
 	/// Abstract base class that provides the common properties that are inherited by all action
 	/// objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
-	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>
+	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged
 	{
-		internal V2Interop.IAction iAction = null;
+		internal IAction iAction = null;
+		internal V1Interop.ITask v1Task;
 
 		/// <summary>List of unbound values when working with Actions not associated with a registered task.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
@@ -80,6 +65,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			iAction = action;
 		}
+
+		internal Action(V1Interop.ITask iTask)
+		{
+			v1Task = iTask;
+		}
+
+		/// <summary>
+		/// Occurs when a property value changes.
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
 		/// Gets the type of the action.
@@ -92,14 +87,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the identifier of the action.
 		/// </summary>
 		[DefaultValue(null)]
-		[XmlAttribute(AttributeName = "id", DataType = "ID")]
+		[XmlAttribute(AttributeName = "id")]
 		public virtual string Id
 		{
 			get { return GetProperty<string, IAction>(nameof(Id)); }
 			set { SetProperty<string, IAction>(nameof(Id), value); }
 		}
-
-		internal virtual bool Bound => iAction != null;
 
 		internal abstract TaskActionType InternalActionType { get; }
 
@@ -108,7 +101,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="actionType">Type of the action to instantiate.</param>
 		/// <returns><see cref="Action"/> of specified type.</returns>
-		[Obsolete("Given the expansion to allow for custom Actions, this method no longer is guaranteed to return a valid object.", true)]
 		public static Action CreateAction(TaskActionType actionType) => Activator.CreateInstance(GetObjectType(actionType)) as Action;
 
 		/// <summary>
@@ -119,7 +111,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public object Clone()
 		{
-			Action ret = Activator.CreateInstance(GetType()) as Action;
+			Action ret = CreateAction(ActionType);
 			ret.CopyProperties(this);
 			return ret;
 		}
@@ -181,12 +173,47 @@ namespace Microsoft.Win32.TaskScheduler
 				return ToString();
 		}
 
+		internal static Action ActionFromScript(string actionType, string script)
+		{
+			TaskActionType tat = TryParse(actionType, TaskActionType.Execute);
+			Type t = GetObjectType(tat);
+			return (Action)t.InvokeMember("FromPowerShellCommand", BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, new object[] { script });
+		}
+
+		internal static Action ConvertFromPowerShellAction(ExecAction execAction)
+		{
+			var psi = execAction.ParsePowerShellItems();
+			if (psi != null && psi.Length == 2)
+			{
+				var a = ActionFromScript(psi[0], psi[1]);
+				if (a != null)
+				{
+					a.v1Task = execAction.v1Task;
+					a.iAction = execAction.iAction;
+					return a;
+				}
+			}
+			return null;
+		}
+
+		/// <summary>
+		/// Creates a specialized class from a defined interface.
+		/// </summary>
+		/// <param name="iTask">Version 1.0 interface.</param>
+		/// <returns>Specialized action class</returns>
+		internal static Action CreateAction(V1Interop.ITask iTask)
+		{
+			ExecAction tempAction = new ExecAction(iTask);
+			Action a = ConvertFromPowerShellAction(tempAction);
+			return a ?? tempAction;
+		}
+
 		/// <summary>
 		/// Creates a specialized class from a defined interface.
 		/// </summary>
 		/// <param name="iAction">Version 2.0 Action interface.</param>
 		/// <returns>Specialized action class</returns>
-		internal static Action CreateAction(V2Interop.IAction iAction)
+		internal static Action CreateAction(IAction iAction)
 		{
 			Type t = GetObjectType(iAction.Type);
 			return Activator.CreateInstance(t, BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { iAction }, null) as Action;
@@ -198,18 +225,42 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				case TaskActionType.ComHandler:
 					return typeof(ComHandlerAction);
+
 				case TaskActionType.SendEmail:
 					return typeof(EmailAction);
+
 				case TaskActionType.ShowMessage:
 					return typeof(ShowMessageAction);
+
 				case TaskActionType.Execute:
 				default:
 					return typeof(ExecAction);
 			}
 		}
 
+		internal static T TryParse<T>(string val, T defaultVal)
+		{
+			T ret = defaultVal;
+			try { ret = (T)Enum.Parse(typeof(T), val); } catch { }
+			return ret;
+		}
+
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
+			if (Id != null)
+				TaskDefinition.V1SetDataItem(iTask, "ActionId", Id);
+			IBindAsExecAction bindable = this as IBindAsExecAction;
+			if (bindable != null)
+				TaskDefinition.V1SetDataItem(iTask, "ActionType", this.InternalActionType.ToString());
+			object o = null;
+			unboundValues.TryGetValue("Path", out o);
+			iTask.SetApplicationName(bindable != null ? ExecAction.PowerShellPath : o?.ToString() ?? string.Empty);
+			o = null;
+			unboundValues.TryGetValue("Arguments", out o);
+			iTask.SetParameters(bindable != null ? ExecAction.BuildPowerShellCmd(this.ActionType.ToString(), GetPowerShellCommand()) : o?.ToString() ?? string.Empty);
+			o = null;
+			unboundValues.TryGetValue("WorkingDirectory", out o);
+			iTask.SetWorkingDirectory(o?.ToString() ?? string.Empty);
 		}
 
 		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
@@ -228,11 +279,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal abstract void CreateV2Action(V2Interop.IActionCollection iActions);
 
+		internal abstract string GetPowerShellCommand();
+
 		internal T GetProperty<T, B>(string propName, T defaultValue = default(T))
 		{
 			if (iAction == null)
 				return (unboundValues.ContainsKey(propName)) ? (T)unboundValues[propName] : defaultValue;
 			return ReflectionHelper.GetProperty((B)iAction, propName, defaultValue);
+		}
+
+		internal void OnPropertyChanged(string propName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 		}
 
 		internal void SetProperty<T, B>(string propName, T value)
@@ -246,6 +304,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 				ReflectionHelper.SetProperty((B)iAction, propName, value);
+			OnPropertyChanged(propName);
 		}
 
 		/// <summary>
@@ -261,9 +320,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
 	/// </summary>
-	[XmlType(IncludeInSchema = false)]
+	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public class ComHandlerAction : Action
+	[DataContract(Name = "ComHandler", Namespace = TaskDefinition.tns)]
+	public class ComHandlerAction : Action, IBindAsExecAction
 	{
 		/// <summary>
 		/// Creates an unbound instance of <see cref="ComHandlerAction"/>.
@@ -281,7 +341,9 @@ namespace Microsoft.Win32.TaskScheduler
 			Data = data;
 		}
 
-		internal ComHandlerAction(V2Interop.IAction action) : base(action) { }
+		internal ComHandlerAction(V1Interop.ITask task) : base(task) { }
+
+		internal ComHandlerAction(IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the identifier of the handler class.
@@ -324,6 +386,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String representation of this action.</returns>
 		public override string ToString() => string.Format(Properties.Resources.ComHandlerAction, ClassId, Data, Id, ClassName);
 
+		internal static Action FromPowerShellCommand(string p)
+		{
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[Reflection.Assembly\]::LoadFile\('(?:[^']*)'\); \[Microsoft.Win32.TaskScheduler.TaskService\]::RunComHandlerAction\(\[GUID\]\('(?<g>[^']*)'\), '(?<d>[^']*)'\);?\s*$");
+			return (match.Success) ? new ComHandlerAction(new Guid(match.Groups["g"].Value), match.Groups["d"].Value.Replace("''", "'")) : null;
+		}
+
 		/// <summary>
 		/// Gets the name for CLSID.
 		/// </summary>
@@ -342,6 +410,19 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
+		internal override void CreateV2Action(IActionCollection iActions)
+		{
+			iAction = iActions.Create(TaskActionType.ComHandler);
+		}
+
+		internal override string GetPowerShellCommand()
+		{
+			var sb = new System.Text.StringBuilder();
+			sb.Append($"[Reflection.Assembly]::LoadFile('{System.Reflection.Assembly.GetExecutingAssembly().Location}'); ");
+			sb.Append($"[Microsoft.Win32.TaskScheduler.TaskService]::RunComHandlerAction([GUID]('{ClassId.ToString("D")}'), '{Data?.Replace("'", "''") ?? string.Empty}'); ");
+			return sb.ToString();
+		}
+
 		/// <summary>
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
@@ -355,21 +436,16 @@ namespace Microsoft.Win32.TaskScheduler
 				Data = ((ComHandlerAction)sourceAction).Data;
 			}
 		}
-
-		internal override void CreateV2Action(IActionCollection iActions)
-		{
-			iAction = iActions.Create(TaskActionType.ComHandler);
-		}
 	}
 
 	/// <summary>
 	/// Represents an action that sends an e-mail.
 	/// </summary>
-	[XmlType(IncludeInSchema = false)]
+	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("SendEmail", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class EmailAction : Action, IBindAsExecAction
 	{
-		const string ImportanceHeader = "Importance";
+		private const string ImportanceHeader = "Importance";
 
 		private NamedValueCollection nvc = null;
 
@@ -395,13 +471,15 @@ namespace Microsoft.Win32.TaskScheduler
 			Server = mailServer;
 		}
 
-		internal EmailAction(V2Interop.IAction action) : base(action) { }
+		internal EmailAction(V1Interop.ITask task) : base(task) { }
+
+		internal EmailAction(IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets an array of file paths to be sent as attachments with the e-mail. Each item must be a <see cref="System.String"/> value containing a path to file.
 		/// </summary>
 		[XmlArray("Attachments", IsNullable = true)]
-		[XmlArrayItem(typeof(string), ElementName = "File")]
+		[XmlArrayItem("File", typeof(string))]
 		[DefaultValue(null)]
 		public object[] Attachments
 		{
@@ -417,7 +495,10 @@ namespace Microsoft.Win32.TaskScheduler
 							throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
 				}
 				if (iAction == null && (value == null || value.Length == 0))
+				{
 					unboundValues.Remove(nameof(Attachments));
+					OnPropertyChanged(nameof(Attachments));
+				}
 				else
 					SetProperty<object[], IEmailAction>(nameof(Attachments), value);
 			}
@@ -478,6 +559,8 @@ namespace Microsoft.Win32.TaskScheduler
 						nvc = new NamedValueCollection(((V2Interop.IEmailAction)iAction).HeaderFields);
 					else
 						nvc = new NamedValueCollection();
+					nvc.AttributedXmlFormat = false;
+					nvc.CollectionChanged += (o, e) => OnPropertyChanged(nameof(HeaderFields));
 				}
 				return nvc;
 			}
@@ -496,13 +579,9 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				string s;
-				System.Net.Mail.MailPriority res = System.Net.Mail.MailPriority.Normal;
 				if (nvc != null && HeaderFields.TryGetValue(ImportanceHeader, out s))
-				{
-					try { res = (System.Net.Mail.MailPriority)Enum.Parse(typeof(System.Net.Mail.MailPriority), s, true); }
-					catch { }
-				}
-				return res;
+					return TryParse(s, System.Net.Mail.MailPriority.Normal);
+				return System.Net.Mail.MailPriority.Normal;
 			}
 			set
 			{
@@ -559,9 +638,43 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		public override bool Equals(Action other) => base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
+		public override bool Equals(Action other) => base.Equals(other) && GetPowerShellCommand() == GetPowerShellCommand();
 
-		string IBindAsExecAction.GetPowerShellCommand()
+		/// <summary>
+		/// Gets a string representation of the <see cref="EmailAction"/>.
+		/// </summary>
+		/// <returns>String representation of this action.</returns>
+		public override string ToString() => string.Format(Properties.Resources.EmailAction, Subject, To, Cc, Bcc, From, ReplyTo, Body, Server, Id);
+
+		internal static Action FromPowerShellCommand(string p)
+		{
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From '(?<from>(?:[^']|'')*)' -Subject '(?<subject>(?:[^']|'')*)' -SmtpServer '(?<server>(?:[^']|'')*)'(?: -Encoding UTF8)?(?: -To (?<to>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Cc (?<cc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Bcc (?<bcc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?:(?: -BodyAsHtml)? -Body '(?<body>(?:[^']|'')*)')?(?: -Attachments (?<att>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Priority (?<imp>High|Normal|Low))?;?\s*$");
+			if (match.Success)
+			{
+				EmailAction action = new EmailAction(UnPrep(FromUTF8(match.Groups["subject"].Value)), UnPrep(match.Groups["from"].Value), FromPS(match.Groups["to"]), UnPrep(FromUTF8(match.Groups["body"].Value)), UnPrep(match.Groups["server"].Value))
+				{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
+				if (match.Groups["att"].Success)
+					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
+				if (match.Groups["imp"].Success)
+					action.HeaderFields[ImportanceHeader] = match.Groups["imp"].Value;
+				return action;
+			}
+			return null;
+		}
+
+		internal override void Bind(ITaskDefinition iTaskDef)
+		{
+			base.Bind(iTaskDef);
+			if (nvc != null)
+				nvc.Bind(((V2Interop.IEmailAction)iAction).HeaderFields);
+		}
+
+		internal override void CreateV2Action(IActionCollection iActions)
+		{
+			iAction = iActions.Create(TaskActionType.SendEmail);
+		}
+
+		internal override string GetPowerShellCommand()
 		{
 			// Send-MailMessage [-To] <String[]> [-Subject] <String> [[-Body] <String> ] [[-SmtpServer] <String> ] -From <String> [-Attachments <String[]> ]
 			//    [-Bcc <String[]> ] [-BodyAsHtml] [-Cc <String[]> ] [-Credential <PSCredential> ] [-DeliveryNotificationOption <DeliveryNotificationOptions> ]
@@ -591,6 +704,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (hdr.Count > 0)
 				throw new InvalidOperationException("Under Windows 8 and later, EmailAction objects are converted to PowerShell. This action contains headers that are not supported.");
+			sb.Append("; ");
 			return sb.ToString();
 
 			/*var msg = new System.Net.Mail.MailMessage(this.From, this.To, this.Subject, this.Body);
@@ -608,35 +722,6 @@ namespace Microsoft.Win32.TaskScheduler
 					msg.Headers.Add(ha.Name, ha.Value);
 			var client = new System.Net.Mail.SmtpClient(this.Server);
 			client.Send(msg);*/
-		}
-
-		/// <summary>
-		/// Gets a string representation of the <see cref="EmailAction"/>.
-		/// </summary>
-		/// <returns>String representation of this action.</returns>
-		public override string ToString() => string.Format(Properties.Resources.EmailAction, Subject, To, Cc, Bcc, From, ReplyTo, Body, Server, Id);
-
-		internal static Action FromPowerShellCommand(string p)
-		{
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^Send-MailMessage -From '(?<from>(?:[^']|'')*)' -Subject '(?<subject>(?:[^']|'')*)' -SmtpServer '(?<server>(?:[^']|'')*)'(?: -Encoding UTF8)?(?: -To (?<to>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Cc (?<cc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Bcc (?<bcc>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?:(?: -BodyAsHtml)? -Body '(?<body>(?:[^']|'')*)')?(?: -Attachments (?<att>'(?:(?:[^']|'')*)'(?:, '(?:(?:[^']|'')*)')*))?(?: -Priority (?<imp>High|Normal|Low))?\s*$");
-			if (match.Success)
-			{
-				EmailAction action = new EmailAction(UnPrep(FromUTF8(match.Groups["subject"].Value)), UnPrep(match.Groups["from"].Value), FromPS(match.Groups["to"]), UnPrep(FromUTF8(match.Groups["body"].Value)), UnPrep(match.Groups["server"].Value))
-				{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
-				if (match.Groups["att"].Success)
-					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
-				if (match.Groups["imp"].Success)
-					action.HeaderFields[ImportanceHeader] = match.Groups["imp"].Value;
-				return action;
-			}
-			return null;
-		}
-
-		internal override void Bind(Microsoft.Win32.TaskScheduler.V2Interop.ITaskDefinition iTaskDef)
-		{
-			base.Bind(iTaskDef);
-			if (nvc != null)
-				nvc.Bind(((V2Interop.IEmailAction)iAction).HeaderFields);
 		}
 
 		/// <summary>
@@ -701,11 +786,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		private static string UnPrep(string s) => s?.Replace("''", "'");
-
-		internal override void CreateV2Action(IActionCollection iActions)
-		{
-			iAction = iActions.Create(TaskActionType.SendEmail);
-		}
 	}
 
 	/// <summary>
@@ -721,8 +801,6 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 		internal const string PowerShellPath = "powershell";
 		internal const string ScriptIdentifer = "TSML_20140424";
-
-		private V1Interop.ITask v1Task;
 
 		/// <summary>
 		/// Creates a new instance of an <see cref="ExecAction"/> that can be added to <see cref="TaskDefinition.Actions"/>.
@@ -742,12 +820,9 @@ namespace Microsoft.Win32.TaskScheduler
 			WorkingDirectory = workingDirectory;
 		}
 
-		internal ExecAction(V1Interop.ITask task)
-		{
-			v1Task = task;
-		}
+		internal ExecAction(V1Interop.ITask task) : base(task) { }
 
-		internal ExecAction(V2Interop.IAction action) : base(action) { }
+		internal ExecAction(IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the arguments associated with the command-line operation.
@@ -767,29 +842,6 @@ namespace Microsoft.Win32.TaskScheduler
 					v1Task.SetParameters(value);
 				else
 					SetProperty<string, IExecAction>(nameof(Arguments), value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the identifier of the action.
-		/// </summary>
-		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		[DefaultValue(null)]
-		[XmlAttribute(AttributeName = "id", DataType = "ID")]
-		[XmlIgnore]
-		public override string Id
-		{
-			get
-			{
-				if (v1Task != null)
-					return System.IO.Path.GetFileNameWithoutExtension(Task.GetV1Path(v1Task)) + "_Action";
-				return base.Id;
-			}
-			set
-			{
-				if (v1Task != null)
-					throw new NotV1SupportedException();
-				base.Id = value;
 			}
 		}
 
@@ -836,33 +888,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal override bool Bound
-		{
-			get
-			{
-				if (v1Task != null)
-					return true;
-				return base.Bound;
-			}
-		}
-
 		internal override TaskActionType InternalActionType => TaskActionType.Execute;
-
-		/// <summary>
-		/// Gets a value indicating whether this instance is a PowerShell command.
-		/// </summary>
-		/// <value>
-		/// <c>true</c> if this instance is a PowerShell command; otherwise, <c>false</c>.
-		/// </value>
-		internal bool IsPowerShellCmd => Path != null && (Path.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) || Path.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase));
 
 		/// <summary>
 		/// Indicates whether the current object is equal to another object of the same type.
 		/// </summary>
 		/// <param name="other">An object to compare with this object.</param>
-		/// <returns>
-		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-		/// </returns>
+		/// <returns><c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
 		public override bool Equals(Action other) => base.Equals(other) && Path == ((ExecAction)other).Path && Arguments == ((ExecAction)other).Arguments && WorkingDirectory == ((ExecAction)other).WorkingDirectory;
 
 		/// <summary>
@@ -871,35 +903,43 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>String representation of this action.</returns>
 		public override string ToString() => string.Format(Properties.Resources.ExecAction, Path, Arguments, WorkingDirectory, Id);
 
-		internal string[] GetPowerShellCmd()
-		{
-			if (IsPowerShellCmd)
-			{
-				if (Arguments != null && Arguments.Contains(ExecAction.ScriptIdentifer))
-				{
-					var match = System.Text.RegularExpressions.Regex.Match(Arguments, @"<# " + ExecAction.ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
-					if (match.Success)
-						return new string[] { match.Groups["type"].Value, match.Groups["cmd"].Value };
-				}
-			}
-			return null;
-		}
-
-		internal static ExecAction AsPowerShellCmd(string actionType, string cmd) => new ExecAction(PowerShellPath, BuildPowerShellCmd(actionType, cmd));
-
 		internal static string BuildPowerShellCmd(string actionType, string cmd) => string.Format(PowerShellArgFormat, ScriptIdentifer, actionType, cmd);
 
-		internal override void Bind(V1Interop.ITask v1Task)
+		internal static ExecAction ConvertToPowerShellAction(Action action) => CreatePowerShellAction(action.ActionType.ToString(), action.GetPowerShellCommand());
+
+		internal static ExecAction CreatePowerShellAction(string actionType, string cmd) => new ExecAction(PowerShellPath, BuildPowerShellCmd(actionType, cmd));
+
+		internal static Action FromPowerShellCommand(string p)
 		{
-			object o = null;
-			unboundValues.TryGetValue("Path", out o);
-			v1Task.SetApplicationName(o == null ? string.Empty : o.ToString());
-			o = null;
-			unboundValues.TryGetValue("Arguments", out o);
-			v1Task.SetParameters(o == null ? string.Empty : o.ToString());
-			o = null;
-			unboundValues.TryGetValue("WorkingDirectory", out o);
-			v1Task.SetWorkingDirectory(o == null ? string.Empty : o.ToString());
+			var match = System.Text.RegularExpressions.Regex.Match(p, "^Start-Process -FilePath '(?<p>[^']*)'(?: -ArgumentList '(?<a>[^']*)')?(?: -WorkingDirectory '(?<d>[^']*)')?;?\\s*$");
+			return (match.Success) ? new ExecAction(match.Groups["p"].Value, match.Groups["a"].Success ? match.Groups["a"].Value.Replace("''", "'") : null, match.Groups["d"].Success ? match.Groups["d"].Value : null) : null;
+		}
+
+		internal override void CreateV2Action(IActionCollection iActions)
+		{
+			iAction = iActions.Create(TaskActionType.Execute);
+		}
+
+		internal override string GetPowerShellCommand()
+		{
+			var sb = new System.Text.StringBuilder($"Start-Process -FilePath '{Path}'");
+			if (!string.IsNullOrEmpty(Arguments))
+				sb.Append($" -ArgumentList '{Arguments?.Replace("'", "''")}'");
+			if (!string.IsNullOrEmpty(WorkingDirectory))
+				sb.Append($" -WorkingDirectory '{WorkingDirectory}'");
+			return sb.Append("; ").ToString();
+		}
+
+		internal string[] ParsePowerShellItems()
+		{
+			if ((Path?.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) ?? false) ||
+				(Path?.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase) ?? false) || (Arguments?.Contains(ScriptIdentifer) ?? false))
+			{
+				var match = System.Text.RegularExpressions.Regex.Match(Arguments, @"<# " + ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
+				if (match.Success)
+					return new string[] { match.Groups["type"].Value, match.Groups["cmd"].Value };
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -916,97 +956,12 @@ namespace Microsoft.Win32.TaskScheduler
 				WorkingDirectory = ((ExecAction)sourceAction).WorkingDirectory;
 			}
 		}
-
-		internal override void CreateV2Action(IActionCollection iActions)
-		{
-			iAction = iActions.Create(TaskActionType.Execute);
-		}
 	}
-
-	/*/// <summary>
-	/// An action that will run a windowless PowerShell script command.
-	/// </summary>
-	[XmlType(IncludeInSchema = false)]
-	internal sealed class PowerShellAction : ExecAction
-	{
-		private const string PowerShellActionType = "CustomPS";
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PowerShellAction" /> class.
-		/// </summary>
-		public PowerShellAction() { }
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PowerShellAction" /> class.
-		/// </summary>
-		/// <param name="command">The PowerShell command.</param>
-		public PowerShellAction(string command)
-		{
-			Command = command;
-		}
-
-		/// <summary>
-		/// Gets or sets the PowerShell command.
-		/// </summary>
-		/// <value>
-		/// The PowerShell command.
-		/// </value>
-		public string Command
-		{
-			get
-			{
-				return null;
-			}
-			set
-			{
-
-			}
-		}
-
-		private new string Arguments { get; }
-
-		private new string Path { get; }
-
-		/// <summary>
-		/// Indicates whether the current object is equal to another object of the same type.
-		/// </summary>
-		/// <param name="other">An object to compare with this object.</param>
-		/// <returns>
-		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-		/// </returns>
-		public override bool Equals(Action other) =>
-			base.Equals(other) && Command == ((PowerShellAction)other).Command && WorkingDirectory == ((PowerShellAction)other).WorkingDirectory;
-
-		/// <summary>
-		/// Gets a string representation of the <see cref="PowerShellAction"/>.
-		/// </summary>
-		/// <returns>String representation of this action.</returns>
-		public override string ToString() => Command;
-
-		/// <summary>
-		/// Copies the properties from another <see cref="Action"/> the current instance.
-		/// </summary>
-		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected override void CopyProperties(Action sourceAction)
-		{
-			if (sourceAction.GetType() == GetType())
-			{
-				base.CopyProperties(sourceAction);
-				Command = ((PowerShellAction)sourceAction).Command;
-				WorkingDirectory = ((PowerShellAction)sourceAction).WorkingDirectory;
-			}
-		}
-
-		internal override void CreateV2Action(IActionCollection iActions)
-		{
-			iAction = iActions.Create(TaskActionType.Execute);
-		}
-	}*/
 
 	/// <summary>
 	/// Represents an action that shows a message box when a task is activated.
 	/// </summary>
-	[XmlType(IncludeInSchema = false)]
+	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ShowMessage", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ShowMessageAction : Action, IBindAsExecAction
 	{
@@ -1026,7 +981,9 @@ namespace Microsoft.Win32.TaskScheduler
 			Title = title;
 		}
 
-		internal ShowMessageAction(V2Interop.IAction action) : base(action) { }
+		internal ShowMessageAction(V1Interop.ITask task) : base(task) { }
+
+		internal ShowMessageAction(IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the message text that is displayed in the body of the message box.
@@ -1058,21 +1015,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		public override bool Equals(Action other) => base.Equals(other) && (this as IBindAsExecAction).GetPowerShellCommand() == (other as IBindAsExecAction).GetPowerShellCommand();
-
-		string IBindAsExecAction.GetPowerShellCommand()
-		{
-			// [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Your_Desired_Message','Your_Desired_Title')
-			var sb = new System.Text.StringBuilder("[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('");
-			sb.Append(MessageBody.Replace("'", "''"));
-			if (Title != null)
-			{
-				sb.Append("','");
-				sb.Append(Title.Replace("'", "''"));
-			}
-			sb.Append("')");
-			return sb.ToString();
-		}
+		public override bool Equals(Action other) => base.Equals(other) && string.Equals(this.Title, (other as ShowMessageAction)?.Title) && string.Equals(this.MessageBody, (other as ShowMessageAction)?.MessageBody);
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="ShowMessageAction"/>.
@@ -1082,12 +1025,27 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static Action FromPowerShellCommand(string p)
 		{
-			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[System.Reflection.Assembly\]::LoadWithPartialName\('System.Windows.Forms'\); \[System.Windows.Forms.MessageBox\]::Show\('(?<msg>(?:[^']|'')*)'(?:,'(?<t>(?:[^']|'')*)')?\)$");
-			if (match.Success)
+			var match = System.Text.RegularExpressions.Regex.Match(p, @"^\[System.Reflection.Assembly\]::LoadWithPartialName\('System.Windows.Forms'\); \[System.Windows.Forms.MessageBox\]::Show\('(?<msg>(?:[^']|'')*)'(?:,'(?<t>(?:[^']|'')*)')?\);?\s*$");
+			return (match.Success) ? new ShowMessageAction(match.Groups["msg"].Value.Replace("''", "'"), match.Groups["t"].Success ? match.Groups["t"].Value.Replace("''", "'") : null) : null;
+		}
+
+		internal override void CreateV2Action(IActionCollection iActions)
+		{
+			iAction = iActions.Create(TaskActionType.ShowMessage);
+		}
+
+		internal override string GetPowerShellCommand()
+		{
+			// [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Your_Desired_Message','Your_Desired_Title');
+			var sb = new System.Text.StringBuilder("[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('");
+			sb.Append(MessageBody.Replace("'", "''"));
+			if (Title != null)
 			{
-				return new ShowMessageAction(match.Groups["msg"].Value.Replace("''", "'"), match.Groups["t"].Success ? match.Groups["t"].Value.Replace("''", "'") : null);
+				sb.Append("','");
+				sb.Append(Title.Replace("'", "''"));
 			}
-			return null;
+			sb.Append("'); ");
+			return sb.ToString();
 		}
 
 		/// <summary>
@@ -1102,11 +1060,6 @@ namespace Microsoft.Win32.TaskScheduler
 				Title = ((ShowMessageAction)sourceAction).Title;
 				MessageBody = ((ShowMessageAction)sourceAction).MessageBody;
 			}
-		}
-
-		internal override void CreateV2Action(IActionCollection iActions)
-		{
-			iAction = iActions.Create(TaskActionType.ShowMessage);
 		}
 	}
 }

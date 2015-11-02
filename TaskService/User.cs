@@ -14,9 +14,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				acct = cur;
 			}
-            else if (userName != null && userName.Contains("\\"))
+			else if (userName != null && userName.Contains("\\"))
 			{
-                using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
+				using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
 					acct = new WindowsIdentity(ds.CrackName(userName));
 			}
 			else

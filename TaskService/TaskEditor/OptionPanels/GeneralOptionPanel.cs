@@ -15,7 +15,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		{
 			taskDescText.ReadOnly = !parent.Editable;
 			taskHiddenCheck.Enabled = taskEnabledCheck.Enabled = parent.Editable;
-			taskRegSourceText.ReadOnly = taskRegURIText.ReadOnly = taskRegVersionText.ReadOnly = !(parent.Editable && parent.IsV2);
+			taskRegSourceText.ReadOnly = taskRegURIText.ReadOnly = taskRegVersionText.ReadOnly = !parent.Editable;
 
 			taskDescText.Text = td.RegistrationInfo.Description;
 			taskEnabledCheck.Checked = td.Settings.Enabled;

@@ -457,28 +457,32 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskCompatibility priorSetting = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
 			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
-			try
+
+			if ((onAssignment && task == null) || (sender != null && td != null && priorSetting > td.Settings.Compatibility))
 			{
-				if (!onAssignment && td != null)
+				try
 				{
-					td.Validate(true);
-					ReinitializeControls();
+					if (!onAssignment && td != null)
+					{
+						td.Validate(true);
+						ReinitializeControls();
+					}
 				}
-			}
-			catch (InvalidOperationException ex)
-			{
-				var msg = new System.Text.StringBuilder();
-				if (ShowErrors)
+				catch (InvalidOperationException ex)
 				{
-					msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
-					foreach (var item in ex.Data.Keys)
-						msg.AppendLine($"- {item} {ex.Data[item]}");
+					var msg = new System.Text.StringBuilder();
+					if (ShowErrors)
+					{
+						msg.AppendLine(EditorProperties.Resources.Error_TaskPropertiesIncompatible);
+						foreach (var item in ex.Data.Keys)
+							msg.AppendLine($"- {item} {ex.Data[item]}");
+					}
+					else
+						msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
+					MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
+					return;
 				}
-				else
-					msg.Append(EditorProperties.Resources.Error_TaskPropertiesIncompatibleSimple);
-				MessageBox.Show(this, msg.ToString(), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
-				return;
 			}
 		}
 

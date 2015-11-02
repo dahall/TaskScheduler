@@ -55,17 +55,20 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				action = value;
-
-				// Try and determine if this is a V1 task
-				string id = action.Id;
-				try { action.Id = "test"; action.Id = id; SupportV1Only = false; }
-				catch { SupportV1Only = true; }
-
 				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)action.ActionType);
 				curHandler.Action = action;
 				ValidateCurrentAction();
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to show a button allowing the action to be run in real time.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if allow run; otherwise, <c>false</c>.
+		/// </value>
+		[DefaultValue(false), Category("Behavior")]
+		public bool AllowRun { get; set; } = false;
 
 		/// <summary>
 		/// Gets or sets the prompt text at the top of the dialog.
@@ -140,6 +143,7 @@ namespace Microsoft.Win32.TaskScheduler
 					curHandler = execActionUI1;
 					break;
 			}
+			curHandler.AllowRun = AllowRun;
 			ValidateCurrentAction();
 		}
 

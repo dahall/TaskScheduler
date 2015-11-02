@@ -19,6 +19,7 @@ namespace COMTask
 		private DateTime lastWriteTime = DateTime.MinValue;
 		private byte writeCount = 0;
 		private const string file = @"C:\TaskLog.txt";
+		private int maxCount = 10;
 
 		public MyCOMTask()
 		{
@@ -29,6 +30,7 @@ namespace COMTask
 		public override void Start(string data)
 		{
 			lastWriteTime = DateTime.Now;
+			int.TryParse(data, out maxCount);
 			timer_Elapsed(null, null);
 			timer.Enabled = true;
 		}
@@ -51,19 +53,19 @@ namespace COMTask
 
 		void timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			if (writeCount < 12)
+			if (writeCount < maxCount)
 			{
 				try
 				{
 					using (StreamWriter wri = File.AppendText(file))
 						wri.WriteLine("Log entry {0}", DateTime.Now);
 
-					StatusHandler.UpdateStatus((short)(++writeCount / 12), $"Log file started at {lastWriteTime}");
+					StatusHandler.UpdateStatus((short)(++writeCount * 100 / maxCount), $"Log file started at {lastWriteTime}");
 				}
 				catch { }
 			}
 
-			if (writeCount >= 12)
+			if (writeCount >= maxCount)
 			{
 				timer.Enabled = false;
 				writeCount = 0;
