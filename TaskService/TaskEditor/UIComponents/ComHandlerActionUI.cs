@@ -74,7 +74,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool AllowRun { get; set; }
+		public void Run()
+		{
+			//var dlg = new ActionEditDialog();
+			//dlg.Show(this);
+			//TaskService.RunComHandlerActionAsync(ComCLSID, i => { dlg?.Close(); dlg = null; }, comDataText.Text, -1, (i, m) => { if (dlg != null) { dlg.Text = m; } });
+		}
 
 		public bool IsActionValid() => ComCLSID != Guid.Empty;
 

@@ -117,1180 +117,1231 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;propNameCol.Name" xml:space="preserve">
-    <value>propNameCol</value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="calendarTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Name" xml:space="preserve">
-    <value>activateDatePicker</value>
-  </data>
-  <data name="&gt;&gt;logonTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
-  <data name="&gt;&gt;idleTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="durationLabel.Text" xml:space="preserve">
-    <value>for a duration of:</value>
-  </data>
   <data name="triggerTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="logonLocalRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="logonAnyUserRadio.Text" xml:space="preserve">
-    <value>Any user</value>
-  </data>
-  <data name="activateDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="stopIfRunsSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="advSettingsGroup.Text" xml:space="preserve">
-    <value>Advanced Settings</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="logonLocalRadio.Text" xml:space="preserve">
-    <value>Connection from local computer</value>
-  </data>
-  <data name="expireDatePicker.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="customNameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 6</value>
+  <data name="triggerTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
   </data>
-  <data name="&gt;&gt;startupTab.Name" xml:space="preserve">
-    <value>startupTab</value>
+  <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
   </data>
-  <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;logonUserLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;onEventTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Name" xml:space="preserve">
-    <value>stopIfRunsSpan</value>
-  </data>
-  <data name="&gt;&gt;idleTab.Name" xml:space="preserve">
-    <value>idleTab</value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calendarTriggerUI1.ZOrder" xml:space="preserve">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="triggerTypeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 203</value>
-  </data>
-  <data name="&gt;&gt;customNameText.Parent" xml:space="preserve">
-    <value>customTab</value>
-  </data>
-  <data name="logonRemoteRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
-    <value>logonRemotePanel</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Name" xml:space="preserve">
-    <value>expireDatePicker</value>
-  </data>
-  <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>No additional settings required.</value>
-  </data>
-  <data name="logonChgUserBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 33</value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.Name" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
-  <data name="advSettingsGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 244</value>
-  </data>
-  <data name="calendarTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 162</value>
   </data>
   <data name="triggerTypeLabel.Text" xml:space="preserve">
     <value>Begin the task:</value>
   </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Parent" xml:space="preserve">
-    <value>logonTab</value>
-  </data>
-  <data name="&gt;&gt;propValCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
-  <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
-  <data name="&gt;&gt;customTab.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="logonRemoteRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>New Trigger</value>
-  </data>
-  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
-  </data>
-  <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 19</value>
-  </data>
-  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 489</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 117</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="delaySpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="logonChgUserBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;triggerTypeCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="startupIntroLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="logonUserLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="cancelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Change User or Group...</value>
-  </data>
-  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="customTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="&gt;&gt;settingsTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;startupTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;onEventTab.Name" xml:space="preserve">
-    <value>onEventTab</value>
-  </data>
-  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;triggerTypeLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="logonSpecUserRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="delaySpan.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Name" xml:space="preserve">
-    <value>logonAnyUserRadio</value>
-  </data>
-  <data name="eventTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="logonAnyUserRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="propValCol.Width" type="System.Int32, mscorlib">
-    <value>113</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="stopIfRunsSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 114</value>
-  </data>
-  <data name="triggerTypeCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="delayCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 6</value>
-  </data>
-  <data name="propValCol.Text" xml:space="preserve">
-    <value>Value</value>
+  <data name="&gt;&gt;triggerTypeLabel.Name" xml:space="preserve">
+    <value>triggerTypeLabel</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="triggerTypeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="stopIfRunsCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 19</value>
-  </data>
-  <data name="triggerTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
-  </data>
-  <data name="logonLocalRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.Name" xml:space="preserve">
-    <value>logonChgUserBtn</value>
-  </data>
-  <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Activate:</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="eventTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.Parent" xml:space="preserve">
-    <value>logonTab</value>
-  </data>
-  <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 2</value>
-  </data>
-  <data name="logonSpecUserRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.Name" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;customNameText.Name" xml:space="preserve">
-    <value>customNameText</value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="logonLocalRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 36</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 52</value>
-  </data>
-  <data name="delaySpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 23</value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.Name" xml:space="preserve">
-    <value>logonRemoteRadio</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="stopIfRunsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;customTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="logonRemoteRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;customPropsListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Stop task if it runs longer than:</value>
-  </data>
-  <data name="&gt;&gt;customPropsListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="propNameCol.Text" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.8.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="logonChgUserBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 27</value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Name" xml:space="preserve">
-    <value>startupIntroLabel</value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>customTab</value>
-  </data>
-  <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 155</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="settingsTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="activateCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 23</value>
-  </data>
-  <data name="&gt;&gt;triggerTypeLabel.Name" xml:space="preserve">
-    <value>triggerTypeLabel</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 6</value>
-  </data>
-  <data name="customPropsListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 36</value>
-  </data>
-  <data name="&gt;&gt;logonRemoteRadio.Parent" xml:space="preserve">
-    <value>logonRemotePanel</value>
-  </data>
-  <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 19</value>
-  </data>
-  <data name="expireCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 178</value>
-  </data>
-  <data name="scheduleTab.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="delayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 23</value>
-  </data>
-  <data name="customNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 23</value>
-  </data>
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;advSettingsGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="logonTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="advSettingsGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="scheduleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
-  </data>
-  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="expireDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 174</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;triggerTypeLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="logonTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Name" xml:space="preserve">
-    <value>stopAfterDurationCheckBox</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="activateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
-  </data>
-  <data name="logonUserLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Name" xml:space="preserve">
-    <value>scheduleTab</value>
-  </data>
-  <data name="calendarTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>512, 161</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Name:</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 15</value>
-  </data>
-  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;triggerTypeLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 35</value>
+  <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 6</value>
   </data>
-  <data name="&gt;&gt;logonUserLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="triggerTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 23</value>
   </data>
-  <data name="logonRemoteRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 19</value>
-  </data>
-  <data name="scheduleTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="startupIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
-    <value>okBtn</value>
-  </data>
-  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>566, 489</value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.8.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="logonSpecUserRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
-  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
-  </data>
-  <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 15</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>503, 15</value>
-  </data>
-  <data name="settingsTabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
-  </data>
-  <data name="logonAnyUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 9</value>
-  </data>
-  <data name="&gt;&gt;calendarTriggerUI1.Name" xml:space="preserve">
-    <value>calendarTriggerUI1</value>
+  <data name="triggerTypeCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Name" xml:space="preserve">
     <value>triggerTypeCombo</value>
   </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="startupTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="customPropsListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 135</value>
-  </data>
-  <data name="calendarTriggerUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;onEventTab.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="activateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 145</value>
-  </data>
-  <data name="&gt;&gt;customPropsListView.Parent" xml:space="preserve">
-    <value>customTab</value>
-  </data>
-  <data name="customPropsListView.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBox6.Name" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>To change idle conditions, use the Conditions page in the Create Task or task Properties sheet.</value>
-  </data>
-  <data name="settingsTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
-    <value>Buttons</value>
-  </data>
-  <data name="&gt;&gt;customTab.Name" xml:space="preserve">
-    <value>customTab</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Name" xml:space="preserve">
-    <value>activateCheckBox</value>
-  </data>
-  <data name="logonSpecUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 37</value>
-  </data>
-  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
-    <value>repeatSpan</value>
-  </data>
-  <data name="logonUserLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 39</value>
-  </data>
-  <data name="logonRemotePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 98</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.8.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 208</value>
-  </data>
-  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Stop all running tasks at end of repetition duration</value>
-  </data>
-  <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Name" xml:space="preserve">
-    <value>stopIfRunsCheckBox</value>
-  </data>
-  <data name="&gt;&gt;logonAnyUserRadio.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="calendarTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="&gt;&gt;triggerTypeCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="customTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
-  </data>
-  <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Delay task for up to (random delay):</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 9</value>
-  </data>
-  <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="startupIntroLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="activateDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="activateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;logonTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;idleTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
-  </data>
-  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 27</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="settingsTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 181</value>
-  </data>
   <data name="&gt;&gt;triggerTypeCombo.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
-  <data name="onEventTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
+  <data name="settingsTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
+    <value>Buttons</value>
   </data>
-  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="calendarTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
-    <value>cancelBtn</value>
+  <data name="calendarTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="idleTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
+  <data name="calendarTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
-  <data name="&gt;&gt;logonTab.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="calendarTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>512, 161</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="calendarTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>612, 162</value>
   </data>
-  <data name="startupIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="logonRemoteRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Name" xml:space="preserve">
-    <value>expireCheckBox</value>
-  </data>
-  <data name="logonAnyUserRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;delayCheckBox.Name" xml:space="preserve">
-    <value>delayCheckBox</value>
-  </data>
-  <data name="&gt;&gt;eventTriggerUI1.ZOrder" xml:space="preserve">
+  <data name="calendarTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
-    <value>enabledCheckBox</value>
+  <data name="&gt;&gt;calendarTriggerUI1.Name" xml:space="preserve">
+    <value>calendarTriggerUI1</value>
   </data>
-  <data name="stopAfterDurationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
-  <data name="&gt;&gt;logonRemotePanel.Name" xml:space="preserve">
-    <value>logonRemotePanel</value>
+  <data name="&gt;&gt;calendarTriggerUI1.Parent" xml:space="preserve">
+    <value>scheduleTab</value>
   </data>
-  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="activateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 149</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Name" xml:space="preserve">
-    <value>delaySpan</value>
-  </data>
-  <data name="expireDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="settingsTabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
-  </data>
-  <data name="&gt;&gt;propValCol.Name" xml:space="preserve">
-    <value>propValCol</value>
-  </data>
-  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;scheduleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="customNameText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;customPropsListView.Name" xml:space="preserve">
-    <value>customPropsListView</value>
-  </data>
-  <data name="&gt;&gt;eventTriggerUI1.Name" xml:space="preserve">
-    <value>eventTriggerUI1</value>
-  </data>
-  <data name="&gt;&gt;logonChgUserBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="propNameCol.Width" type="System.Int32, mscorlib">
-    <value>108</value>
-  </data>
-  <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Expire:</value>
+  <data name="&gt;&gt;calendarTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="scheduleTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
   </data>
+  <data name="scheduleTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="scheduleTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 172</value>
+  </data>
+  <data name="scheduleTab.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;scheduleTab.Name" xml:space="preserve">
+    <value>scheduleTab</value>
+  </data>
+  <data name="&gt;&gt;scheduleTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;scheduleTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;scheduleTab.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 2</value>
+  </data>
+  <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Name" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
+    <value>logonRemotePanel</value>
+  </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="delayCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="logonLocalRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="logonLocalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="logonLocalRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
   </data>
-  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 52</value>
+  <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 19</value>
   </data>
-  <data name="&gt;&gt;durationLabel.Name" xml:space="preserve">
-    <value>durationLabel</value>
+  <data name="logonLocalRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;logonChgUserBtn.Parent" xml:space="preserve">
-    <value>logonTab</value>
+  <data name="logonLocalRadio.Text" xml:space="preserve">
+    <value>Connection from local computer</value>
   </data>
-  <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repeat task every:</value>
+  <data name="&gt;&gt;logonLocalRadio.Name" xml:space="preserve">
+    <value>logonLocalRadio</value>
+  </data>
+  <data name="&gt;&gt;logonLocalRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonLocalRadio.Parent" xml:space="preserve">
     <value>logonRemotePanel</value>
   </data>
-  <data name="&gt;&gt;onEventTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TriggerEditDialog</value>
-  </data>
-  <data name="&gt;&gt;propNameCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 19</value>
-  </data>
-  <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;logonLocalRadio.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="logonUserLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="logonRemoteRadio.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="delaySpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 21</value>
+  <data name="logonRemoteRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
-    <value>repeatCheckBox</value>
+  <data name="logonRemoteRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
   </data>
-  <data name="delayCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="logonRemoteRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 19</value>
   </data>
-  <data name="&gt;&gt;startupTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;startupIntroLabel.Parent" xml:space="preserve">
-    <value>startupTab</value>
-  </data>
-  <data name="&gt;&gt;logonSpecUserRadio.Name" xml:space="preserve">
-    <value>logonSpecUserRadio</value>
-  </data>
-  <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="customTab.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;customNameText.ZOrder" xml:space="preserve">
+  <data name="logonRemoteRadio.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt;Current user&gt;</value>
+  <data name="logonRemoteRadio.Text" xml:space="preserve">
+    <value>Connection from remote computer</value>
   </data>
-  <data name="&gt;&gt;expireCheckBox.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;logonRemoteRadio.Name" xml:space="preserve">
+    <value>logonRemoteRadio</value>
   </data>
-  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 19</value>
+  <data name="&gt;&gt;logonRemoteRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logonRemoteRadio.Parent" xml:space="preserve">
+    <value>logonRemotePanel</value>
   </data>
   <data name="&gt;&gt;logonRemoteRadio.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="logonRemotePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 67</value>
   </data>
-  <data name="stopIfRunsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="logonRemotePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>604, 98</value>
   </data>
-  <data name="&gt;&gt;settingsTabControl.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="logonRemotePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;logonRemotePanel.Name" xml:space="preserve">
+    <value>logonRemotePanel</value>
   </data>
-  <data name="&gt;&gt;logonUserLabel.Name" xml:space="preserve">
-    <value>logonUserLabel</value>
+  <data name="&gt;&gt;logonRemotePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 15</value>
+  <data name="&gt;&gt;logonRemotePanel.Parent" xml:space="preserve">
+    <value>logonTab</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;logonRemotePanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="logonChgUserBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="logonLocalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="logonChgUserBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 33</value>
   </data>
-  <data name="logonRemotePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 67</value>
+  <data name="logonChgUserBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 27</value>
   </data>
-  <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 23</value>
-  </data>
-  <data name="&gt;&gt;logonLocalRadio.Name" xml:space="preserve">
-    <value>logonLocalRadio</value>
-  </data>
-  <data name="stopIfRunsSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="logonRemotePanel.TabIndex" type="System.Int32, mscorlib">
+  <data name="logonChgUserBtn.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="eventTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>516, 96</value>
+  <data name="logonChgUserBtn.Text" xml:space="preserve">
+    <value>Change User or Group...</value>
   </data>
-  <data name="&gt;&gt;logonSpecUserRadio.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="calendarTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="eventTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
-  </data>
-  <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Specific user or group:</value>
-  </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>groupBox6</value>
+  <data name="&gt;&gt;logonChgUserBtn.Name" xml:space="preserve">
+    <value>logonChgUserBtn</value>
   </data>
   <data name="&gt;&gt;logonChgUserBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 19</value>
-  </data>
-  <data name="expireCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>665, 528</value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 54</value>
-  </data>
-  <data name="&gt;&gt;logonRemotePanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;logonChgUserBtn.Parent" xml:space="preserve">
     <value>logonTab</value>
   </data>
-  <data name="&gt;&gt;logonRemotePanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;logonChgUserBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
-    <value>durationSpan</value>
-  </data>
-  <data name="logonAnyUserRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="expireCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 85</value>
-  </data>
-  <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
-    <value>onEventTab</value>
-  </data>
-  <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>idleTab</value>
-  </data>
-  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 19</value>
-  </data>
-  <data name="activateCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="expireCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="logonUserLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="settingsTabControl.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 1</value>
-  </data>
-  <data name="&gt;&gt;logonTab.Name" xml:space="preserve">
-    <value>logonTab</value>
-  </data>
-  <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
-  </data>
-  <data name="activateDatePicker.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="logonUserLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="advSettingsGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 238</value>
+  <data name="logonUserLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 39</value>
+  </data>
+  <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 15</value>
+  </data>
+  <data name="logonUserLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Current user&gt;</value>
+  </data>
+  <data name="&gt;&gt;logonUserLabel.Name" xml:space="preserve">
+    <value>logonUserLabel</value>
+  </data>
+  <data name="&gt;&gt;logonUserLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logonUserLabel.Parent" xml:space="preserve">
     <value>logonTab</value>
   </data>
+  <data name="&gt;&gt;logonUserLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="logonSpecUserRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="logonSpecUserRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="logonSpecUserRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 37</value>
+  </data>
+  <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 19</value>
+  </data>
+  <data name="logonSpecUserRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="logonSpecUserRadio.Text" xml:space="preserve">
+    <value>Specific user or group:</value>
+  </data>
+  <data name="&gt;&gt;logonSpecUserRadio.Name" xml:space="preserve">
+    <value>logonSpecUserRadio</value>
+  </data>
+  <data name="&gt;&gt;logonSpecUserRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logonSpecUserRadio.Parent" xml:space="preserve">
+    <value>logonTab</value>
+  </data>
+  <data name="&gt;&gt;logonSpecUserRadio.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="logonAnyUserRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="logonAnyUserRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="logonAnyUserRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 9</value>
+  </data>
+  <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 19</value>
+  </data>
+  <data name="logonAnyUserRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonAnyUserRadio.Text" xml:space="preserve">
+    <value>Any user</value>
+  </data>
+  <data name="&gt;&gt;logonAnyUserRadio.Name" xml:space="preserve">
+    <value>logonAnyUserRadio</value>
+  </data>
+  <data name="&gt;&gt;logonAnyUserRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logonAnyUserRadio.Parent" xml:space="preserve">
+    <value>logonTab</value>
+  </data>
+  <data name="&gt;&gt;logonAnyUserRadio.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="logonTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="logonTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;logonTab.Name" xml:space="preserve">
+    <value>logonTab</value>
+  </data>
+  <data name="&gt;&gt;logonTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logonTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;logonTab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="startupIntroLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="startupIntroLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="startupIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 15</value>
+  </data>
+  <data name="startupIntroLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="startupIntroLabel.Text" xml:space="preserve">
+    <value>No additional settings required.</value>
+  </data>
+  <data name="&gt;&gt;startupIntroLabel.Name" xml:space="preserve">
+    <value>startupIntroLabel</value>
+  </data>
+  <data name="&gt;&gt;startupIntroLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;startupIntroLabel.Parent" xml:space="preserve">
+    <value>startupTab</value>
+  </data>
+  <data name="&gt;&gt;startupIntroLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="startupTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;startupTab.Name" xml:space="preserve">
+    <value>startupTab</value>
+  </data>
+  <data name="&gt;&gt;startupTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;startupTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;startupTab.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>503, 15</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>To change idle conditions, use the Conditions page in the Create Task or task Properties sheet.</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>idleTab</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="idleTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;idleTab.Name" xml:space="preserve">
+    <value>idleTab</value>
+  </data>
+  <data name="&gt;&gt;idleTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;idleTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;idleTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="eventTriggerUI1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="eventTriggerUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 6</value>
+  </data>
+  <data name="eventTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>516, 96</value>
+  </data>
+  <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 149</value>
+  </data>
+  <data name="eventTriggerUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Name" xml:space="preserve">
+    <value>eventTriggerUI1</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
+    <value>onEventTab</value>
+  </data>
+  <data name="&gt;&gt;eventTriggerUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="onEventTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;onEventTab.Name" xml:space="preserve">
+    <value>onEventTab</value>
+  </data>
+  <data name="&gt;&gt;onEventTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onEventTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;onEventTab.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="propNameCol.Width" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="propValCol.Width" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="customPropsListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 36</value>
+  </data>
+  <data name="customPropsListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 135</value>
+  </data>
+  <data name="customPropsListView.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Name" xml:space="preserve">
+    <value>customPropsListView</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customPropsListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="customNameText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 6</value>
+  </data>
+  <data name="customNameText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 23</value>
+  </data>
+  <data name="customNameText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Name" xml:space="preserve">
+    <value>customNameText</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customNameText.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customNameText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 9</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 15</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="customTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="customTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 175</value>
+  </data>
+  <data name="customTab.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;customTab.Name" xml:space="preserve">
+    <value>customTab</value>
+  </data>
+  <data name="&gt;&gt;customTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customTab.Parent" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;customTab.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="settingsTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="settingsTabControl.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="settingsTabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
+  </data>
+  <data name="settingsTabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 181</value>
+  </data>
+  <data name="settingsTabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;settingsTabControl.Name" xml:space="preserve">
+    <value>settingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;settingsTabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsTabControl.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
   <data name="&gt;&gt;settingsTabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 35</value>
   </data>
-  <data name="expireDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>638, 203</value>
   </data>
-  <data name="&gt;&gt;advSettingsGroup.ZOrder" xml:space="preserve">
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 19</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="&gt;&gt;logonRemoteRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
-  <data name="expireDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 23</value>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
+  <data name="stopIfRunsSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="stopIfRunsSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 114</value>
+  </data>
+  <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 23</value>
+  </data>
+  <data name="stopIfRunsSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Name" xml:space="preserve">
+    <value>stopIfRunsSpan</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
   </data>
   <data name="&gt;&gt;stopIfRunsSpan.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="triggerTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 23</value>
+  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;customNameText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>474, 52</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
+    <value>durationSpan</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 52</value>
+  </data>
+  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
+    <value>repeatSpan</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;advSettingsGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="delaySpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;startupTab.Parent" xml:space="preserve">
-    <value>settingsTabControl</value>
+  <data name="delaySpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 21</value>
   </data>
-  <data name="&gt;&gt;calendarTriggerUI1.Parent" xml:space="preserve">
-    <value>scheduleTab</value>
+  <data name="delaySpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 23</value>
   </data>
-  <data name="&gt;&gt;delayCheckBox.Type" xml:space="preserve">
+  <data name="delaySpan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Name" xml:space="preserve">
+    <value>delaySpan</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="expireDatePicker.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="expireDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 174</value>
+  </data>
+  <data name="expireDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 23</value>
+  </data>
+  <data name="expireDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="expireDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="&gt;&gt;expireDatePicker.Name" xml:space="preserve">
+    <value>expireDatePicker</value>
+  </data>
+  <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;expireDatePicker.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="activateDatePicker.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="activateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 145</value>
+  </data>
+  <data name="activateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 23</value>
+  </data>
+  <data name="activateDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="activateDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="&gt;&gt;activateDatePicker.Name" xml:space="preserve">
+    <value>activateDatePicker</value>
+  </data>
+  <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;activateDatePicker.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 54</value>
+  </data>
+  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>for a duration of:</value>
+  </data>
+  <data name="durationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Name" xml:space="preserve">
+    <value>durationLabel</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 85</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 19</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
+    <value>Stop all running tasks at end of repetition duration</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Name" xml:space="preserve">
+    <value>stopAfterDurationCheckBox</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 208</value>
+  </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
+    <value>enabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="expireCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="expireCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="expireCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 178</value>
+  </data>
+  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 19</value>
+  </data>
+  <data name="expireCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Expire:</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Name" xml:space="preserve">
+    <value>expireCheckBox</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="activateCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="activateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="activateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 149</value>
+  </data>
+  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 19</value>
+  </data>
+  <data name="activateCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Activate:</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Name" xml:space="preserve">
+    <value>activateCheckBox</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="stopIfRunsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="stopIfRunsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 117</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="stopIfRunsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
+    <value>Stop task if it runs longer than:</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Name" xml:space="preserve">
+    <value>stopIfRunsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 54</value>
+  </data>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Repeat task every:</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
+    <value>repeatCheckBox</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
   </data>
-  <data name="&gt;&gt;idleTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.0.8.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  <data name="delayCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;scheduleTab.ZOrder" xml:space="preserve">
+  <data name="delayCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="delayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 23</value>
+  </data>
+  <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 19</value>
+  </data>
+  <data name="delayCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Connection from remote computer</value>
+  <data name="delayCheckBox.Text" xml:space="preserve">
+    <value>Delay task for up to (random delay):</value>
+  </data>
+  <data name="&gt;&gt;delayCheckBox.Name" xml:space="preserve">
+    <value>delayCheckBox</value>
+  </data>
+  <data name="&gt;&gt;delayCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;delayCheckBox.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;delayCheckBox.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="advSettingsGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 244</value>
+  </data>
+  <data name="advSettingsGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>638, 238</value>
+  </data>
+  <data name="advSettingsGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="advSettingsGroup.Text" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <data name="&gt;&gt;advSettingsGroup.Name" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;advSettingsGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;advSettingsGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;advSettingsGroup.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="cancelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 489</value>
+  </data>
+  <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Name" xml:space="preserve">
+    <value>cancelBtn</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="okBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>473, 489</value>
+  </data>
+  <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 27</value>
+  </data>
+  <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Name" xml:space="preserve">
+    <value>okBtn</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;okBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="triggerIdText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>553, 6</value>
+  </data>
+  <data name="triggerIdText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="triggerIdText.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;triggerIdText.Name" xml:space="preserve">
+    <value>triggerIdText</value>
+  </data>
+  <data name="&gt;&gt;triggerIdText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;triggerIdText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;triggerIdText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>511, 9</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 22</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>665, 528</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>New Trigger</value>
+  </data>
+  <data name="&gt;&gt;propNameCol.Name" xml:space="preserve">
+    <value>propNameCol</value>
+  </data>
+  <data name="&gt;&gt;propNameCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;propValCol.Name" xml:space="preserve">
+    <value>propValCol</value>
+  </data>
+  <data name="&gt;&gt;propValCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TriggerEditDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

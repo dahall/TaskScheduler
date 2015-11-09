@@ -73,6 +73,8 @@
 			this.delayCheckBox = new System.Windows.Forms.CheckBox();
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
+			this.triggerIdText = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
@@ -92,16 +94,16 @@
 			// 
 			// triggerTypeCombo
 			// 
-			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.triggerTypeCombo.FormattingEnabled = true;
+			resources.ApplyResources(this.triggerTypeCombo, "triggerTypeCombo");
 			this.triggerTypeCombo.Name = "triggerTypeCombo";
 			this.triggerTypeCombo.SelectedValueChanged += new System.EventHandler(this.triggerTypeCombo_SelectedValueChanged);
 			// 
 			// groupBox1
 			// 
-			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Controls.Add(this.settingsTabControl);
+			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
 			// 
@@ -121,8 +123,8 @@
 			// 
 			// scheduleTab
 			// 
-			resources.ApplyResources(this.scheduleTab, "scheduleTab");
 			this.scheduleTab.Controls.Add(this.calendarTriggerUI1);
+			resources.ApplyResources(this.scheduleTab, "scheduleTab");
 			this.scheduleTab.Name = "scheduleTab";
 			this.scheduleTab.UseVisualStyleBackColor = true;
 			// 
@@ -134,21 +136,21 @@
 			// 
 			// logonTab
 			// 
-			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Controls.Add(this.logonRemotePanel);
 			this.logonTab.Controls.Add(this.logonChgUserBtn);
 			this.logonTab.Controls.Add(this.logonUserLabel);
 			this.logonTab.Controls.Add(this.logonSpecUserRadio);
 			this.logonTab.Controls.Add(this.logonAnyUserRadio);
+			resources.ApplyResources(this.logonTab, "logonTab");
 			this.logonTab.Name = "logonTab";
 			this.logonTab.UseVisualStyleBackColor = true;
 			// 
 			// logonRemotePanel
 			// 
-			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Controls.Add(this.groupBox6);
 			this.logonRemotePanel.Controls.Add(this.logonLocalRadio);
 			this.logonRemotePanel.Controls.Add(this.logonRemoteRadio);
+			resources.ApplyResources(this.logonRemotePanel, "logonRemotePanel");
 			this.logonRemotePanel.Name = "logonRemotePanel";
 			// 
 			// groupBox6
@@ -197,8 +199,8 @@
 			// 
 			// startupTab
 			// 
-			resources.ApplyResources(this.startupTab, "startupTab");
 			this.startupTab.Controls.Add(this.startupIntroLabel);
+			resources.ApplyResources(this.startupTab, "startupTab");
 			this.startupTab.Name = "startupTab";
 			this.startupTab.UseVisualStyleBackColor = true;
 			// 
@@ -209,8 +211,8 @@
 			// 
 			// idleTab
 			// 
-			resources.ApplyResources(this.idleTab, "idleTab");
 			this.idleTab.Controls.Add(this.label8);
+			resources.ApplyResources(this.idleTab, "idleTab");
 			this.idleTab.Name = "idleTab";
 			this.idleTab.UseVisualStyleBackColor = true;
 			// 
@@ -221,8 +223,8 @@
 			// 
 			// onEventTab
 			// 
-			resources.ApplyResources(this.onEventTab, "onEventTab");
 			this.onEventTab.Controls.Add(this.eventTriggerUI1);
+			resources.ApplyResources(this.onEventTab, "onEventTab");
 			this.onEventTab.Name = "onEventTab";
 			this.onEventTab.UseVisualStyleBackColor = true;
 			// 
@@ -233,22 +235,22 @@
 			// 
 			// customTab
 			// 
-			resources.ApplyResources(this.customTab, "customTab");
 			this.customTab.Controls.Add(this.customPropsListView);
 			this.customTab.Controls.Add(this.customNameText);
 			this.customTab.Controls.Add(this.label1);
+			resources.ApplyResources(this.customTab, "customTab");
 			this.customTab.Name = "customTab";
 			this.customTab.UseVisualStyleBackColor = true;
 			// 
 			// customPropsListView
 			// 
-			resources.ApplyResources(this.customPropsListView, "customPropsListView");
 			this.customPropsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.propNameCol,
             this.propValCol});
 			this.customPropsListView.FullRowSelect = true;
 			this.customPropsListView.GridLines = true;
 			this.customPropsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			resources.ApplyResources(this.customPropsListView, "customPropsListView");
 			this.customPropsListView.MultiSelect = false;
 			this.customPropsListView.Name = "customPropsListView";
 			this.customPropsListView.UseCompatibleStateImageBehavior = false;
@@ -275,7 +277,6 @@
 			// 
 			// advSettingsGroup
 			// 
-			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsSpan);
 			this.advSettingsGroup.Controls.Add(this.durationSpan);
 			this.advSettingsGroup.Controls.Add(this.repeatSpan);
@@ -290,6 +291,7 @@
 			this.advSettingsGroup.Controls.Add(this.stopIfRunsCheckBox);
 			this.advSettingsGroup.Controls.Add(this.repeatCheckBox);
 			this.advSettingsGroup.Controls.Add(this.delayCheckBox);
+			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
 			this.advSettingsGroup.Name = "advSettingsGroup";
 			this.advSettingsGroup.TabStop = false;
 			// 
@@ -400,17 +402,30 @@
 			this.okBtn.UseVisualStyleBackColor = true;
 			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
+			// triggerIdText
+			// 
+			resources.ApplyResources(this.triggerIdText, "triggerIdText");
+			this.triggerIdText.Name = "triggerIdText";
+			this.triggerIdText.TextChanged += new System.EventHandler(this.triggerIdText_TextChanged);
+			// 
+			// label2
+			// 
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Name = "label2";
+			// 
 			// TriggerEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
+			this.Controls.Add(this.triggerIdText);
 			this.Controls.Add(this.cancelBtn);
 			this.Controls.Add(this.okBtn);
 			this.Controls.Add(this.advSettingsGroup);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.triggerTypeCombo);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.triggerTypeLabel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "TriggerEditDialog";
@@ -433,6 +448,7 @@
 			this.advSettingsGroup.ResumeLayout(false);
 			this.advSettingsGroup.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -482,5 +498,7 @@
 		private System.Windows.Forms.ColumnHeader propNameCol;
 		private System.Windows.Forms.ColumnHeader propValCol;
 		private Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI calendarTriggerUI1;
+		private System.Windows.Forms.TextBox triggerIdText;
+		private System.Windows.Forms.Label label2;
 	}
 }

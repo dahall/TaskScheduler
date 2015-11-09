@@ -48,6 +48,9 @@
 			this.actionsLabel = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.actionIdText = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.runActionBtn = new System.Windows.Forms.Button();
 			this.settingsGroup.SuspendLayout();
 			this.settingsTabs.SuspendLayout();
 			this.execTab.SuspendLayout();
@@ -176,13 +179,35 @@
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
 			// 
+			// actionIdText
+			// 
+			resources.ApplyResources(this.actionIdText, "actionIdText");
+			this.actionIdText.Name = "actionIdText";
+			this.actionIdText.TextChanged += new System.EventHandler(this.actionIdText_TextChanged);
+			// 
+			// label2
+			// 
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Name = "label2";
+			// 
+			// runActionBtn
+			// 
+			resources.ApplyResources(this.runActionBtn, "runActionBtn");
+			this.runActionBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.runActionBtn.Name = "runActionBtn";
+			this.runActionBtn.UseVisualStyleBackColor = true;
+			this.runActionBtn.Click += new System.EventHandler(this.runActionBtn_Click);
+			// 
 			// ActionEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
+			this.Controls.Add(this.actionIdText);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.cancelBtn);
+			this.Controls.Add(this.runActionBtn);
 			this.Controls.Add(this.okBtn);
 			this.Controls.Add(this.settingsGroup);
 			this.Controls.Add(this.actionsCombo);
@@ -226,5 +251,8 @@
 		private UIComponents.ComHandlerActionUI comHandlerActionUI1;
 		private UIComponents.EmailActionUI emailActionUI1;
 		private UIComponents.ShowMessageActionUI showMessageActionUI1;
+		private System.Windows.Forms.TextBox actionIdText;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button runActionBtn;
 	}
 }

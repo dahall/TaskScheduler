@@ -19,7 +19,9 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private Action action;
+		private bool allowRun = false;
 		private bool isV2 = true;
+		private bool onAssignment = false;
 		private bool useUnifiedSchedulingEngine = false;
 		private UIComponents.IActionHandler curHandler = null;
 
@@ -48,16 +50,15 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(null), Browsable(false)]
 		public Action Action
 		{
-			get
-			{
-				return action;
-			}
+			get { return action; }
 			set
 			{
+				onAssignment = true;
 				action = value;
 				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)action.ActionType);
+				actionIdText.Text = action.Id;
 				curHandler.Action = action;
-				ValidateCurrentAction();
+				onAssignment = false;
 			}
 		}
 
@@ -68,7 +69,11 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <c>true</c> if allow run; otherwise, <c>false</c>.
 		/// </value>
 		[DefaultValue(false), Category("Behavior")]
-		public bool AllowRun { get; set; } = false;
+		public bool AllowRun
+		{
+			get { return allowRun; }
+			set { allowRun = value; runActionBtn.Visible = value; }
+		}
 
 		/// <summary>
 		/// Gets or sets the prompt text at the top of the dialog.
@@ -143,7 +148,6 @@ namespace Microsoft.Win32.TaskScheduler
 					curHandler = execActionUI1;
 					break;
 			}
-			curHandler.AllowRun = AllowRun;
 			ValidateCurrentAction();
 		}
 
@@ -186,16 +190,29 @@ namespace Microsoft.Win32.TaskScheduler
 			if (curType == -1) curType = 0;
 			actionsCombo.SelectedIndex = curType;
 			actionsCombo.EndUpdate();
+			runActionBtn.Visible = AllowRun;
 		}
 
 		private void UpdateAction()
 		{
 			action = curHandler.Action;
+			actionIdText_TextChanged(null, EventArgs.Empty);
 		}
 
 		private void ValidateCurrentAction()
 		{
 			okBtn.Enabled = curHandler.IsActionValid();
+		}
+
+		private void actionIdText_TextChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+				action.Id = actionIdText.TextLength == 0 ? null : actionIdText.Text;
+		}
+
+		private void runActionBtn_Click(object sender, EventArgs e)
+		{
+			curHandler.Run();
 		}
 	}
 }

@@ -440,8 +440,8 @@ namespace TestTaskService
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "some description";
 
-				//td.Actions.Add("cmd.exe", "-someparameter");
-				td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
+				td.Actions.Add("cmd.exe", "-someparameter");
+				//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
 
 				//td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
 				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false, EndBoundary = DateTime.Today.AddDays(30) });
@@ -454,10 +454,11 @@ namespace TestTaskService
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
 				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
-				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, null, null, TaskLogonType.InteractiveToken);
-				//t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "dahall", null, TaskLogonType.S4U);
-				//t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", null, TaskLogonType.S4U);
-				//t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\kialla", null, TaskLogonType.S4U);
+				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "Everyone", null, TaskLogonType.Group);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", null, TaskLogonType.S4U);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "david.a.hall@hpe.com", null, TaskLogonType.S4U);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";

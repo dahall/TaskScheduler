@@ -207,6 +207,7 @@ namespace Microsoft.Win32.TaskScheduler
 				repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = hasRep;
 				if (isV2)
 				{
+					triggerIdText.Text = trigger.Id;
 					stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
 					stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
 				}
@@ -426,7 +427,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Enable/disable version specific features
 			calendarTriggerUI1.IsV2 = isV2;
-			stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+			triggerIdText.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
 
 			// Set date/time controls
 			activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
@@ -456,6 +457,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 				trigger.ExecutionTimeLimit = stopIfRunsSpan.Value;
+		}
+
+		private void triggerIdText_TextChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment && isV2)
+				trigger.Id = triggerIdText.TextLength == 0 ? null : triggerIdText.Text;
 		}
 
 		private void triggerTypeCombo_SelectedValueChanged(object sender, EventArgs e)
