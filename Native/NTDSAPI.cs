@@ -142,7 +142,7 @@ namespace Microsoft.Win32
 			/// <param name="formatOffered">Format of the names</param>
 			/// <param name="formatDesired">Desired format for the names</param>
 			/// <returns>The crack result</returns>
-			public DS_NAME_RESULT_ITEM[] CrackNames(string[] names = null, DS_NAME_FLAGS flags = DS_NAME_FLAGS.DS_NAME_NO_FLAGS, DS_NAME_FORMAT formatOffered = DS_NAME_FORMAT.DS_NT4_ACCOUNT_NAME, DS_NAME_FORMAT formatDesired = DS_NAME_FORMAT.DS_USER_PRINCIPAL_NAME)
+			public DS_NAME_RESULT_ITEM[] CrackNames(string[] names = null, DS_NAME_FLAGS flags = DS_NAME_FLAGS.DS_NAME_NO_FLAGS, DS_NAME_FORMAT formatOffered = DS_NAME_FORMAT.DS_UNKNOWN_NAME, DS_NAME_FORMAT formatDesired = DS_NAME_FORMAT.DS_USER_PRINCIPAL_NAME)
 			{
 				IntPtr pResult;
 				uint err = DsCrackNames(handle, flags, formatOffered, formatDesired, (uint)((names == null) ? 0 : names.Length), names, out pResult);

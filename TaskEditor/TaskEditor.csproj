@@ -439,6 +439,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ActionEditDialog.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ActionEditDialog.zh-CN.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
@@ -706,6 +707,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskSchedulerWizard.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskSchedulerWizard.zh-CN.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
@@ -780,6 +782,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\CalendarTriggerUI.resx">
       <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\CalendarTriggerUI.zh-CN.resx">
       <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
@@ -861,6 +864,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\MonthlyTriggerUI.resx">
       <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ShowMessageActionUI.es.resx">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>

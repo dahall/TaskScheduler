@@ -25,7 +25,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool AllowRun { get; set; }
+		public void Run()
+		{
+
+		}
 
 		public bool IsActionValid() => msgMsgText.TextLength > 0;
 

@@ -6,6 +6,7 @@ namespace Microsoft.Win32.TaskScheduler
 	internal class User : IEquatable<User>, IDisposable
 	{
 		private WindowsIdentity acct;
+		private SecurityIdentifier sid;
 
 		public User(string userName = null)
 		{
@@ -13,14 +14,25 @@ namespace Microsoft.Win32.TaskScheduler
 			if (userName == null || cur.Name.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
 			{
 				acct = cur;
+				sid = acct.User;
 			}
-			else if (userName != null && userName.Contains("\\"))
+			else if (userName != null && (userName.Contains("\\") || !userName.Contains("@")))
 			{
 				using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
-					acct = new WindowsIdentity(ds.CrackName(userName));
+				{
+					try { acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User; }
+					catch (System.Security.SecurityException)
+					{
+						NTAccount ntacct = new NTAccount(userName);
+						sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier));
+						acct = null;
+					}
+				}
 			}
 			else
+			{
 				acct = new WindowsIdentity(userName);
+			}
 		}
 
 		internal User(WindowsIdentity wid)
@@ -30,9 +42,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public static User Current => new User(WindowsIdentity.GetCurrent());
 
-		public bool IsAdmin => new WindowsPrincipal(acct).IsInRole(WindowsBuiltInRole.Administrator);
+		public bool IsAdmin => acct != null ? new WindowsPrincipal(acct).IsInRole(WindowsBuiltInRole.Administrator) : false;
 
-		public bool IsCurrent => acct.User.Equals(WindowsIdentity.GetCurrent().User);
+		public bool IsCurrent => acct?.User.Equals(WindowsIdentity.GetCurrent().User) ?? false;
 
 		public bool IsServiceAccount
 		{
@@ -40,19 +52,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					SecurityIdentifier si = acct.User;
-					return (si.IsWellKnown(WellKnownSidType.LocalSystemSid) || si.IsWellKnown(WellKnownSidType.NetworkServiceSid) || si.IsWellKnown(WellKnownSidType.LocalServiceSid));
+					return (sid.IsWellKnown(WellKnownSidType.LocalSystemSid) || sid.IsWellKnown(WellKnownSidType.NetworkServiceSid) || sid.IsWellKnown(WellKnownSidType.LocalServiceSid));
 				}
 				catch { }
 				return false;
 			}
 		}
 
-		public bool IsSystem => acct.IsSystem;
+		public bool IsSystem => acct?.IsSystem ?? false;
 
-		public string Name => acct.Name;
+		public string Name => acct != null ? acct.Name : ((NTAccount)sid.Translate(typeof(NTAccount))).Value;
 
-		public string SidString => acct.User.ToString();
+		public string SidString => sid.ToString();
 
 		public static User FromSidString(string sid)
 		{
@@ -63,7 +74,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public void Dispose()
 		{
-			acct.Dispose();
+			if (acct != null)
+				acct.Dispose();
 		}
 
 		public override bool Equals(object obj)
@@ -73,7 +85,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return this.Equals(user);
 			WindowsIdentity wid = obj as WindowsIdentity;
 			if (wid != null)
-				return acct.User.Equals(wid.User);
+				return sid.Equals(wid.User);
 			try
 			{
 				string un = obj as string;
@@ -84,8 +96,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return base.Equals(obj);
 		}
 
-		public bool Equals(User other) => (other != null) ? acct.User.Equals(other.acct.User) : false;
+		public bool Equals(User other) => (other != null) ? sid.Equals(other.sid) : false;
 
-		public override int GetHashCode() => acct.User.GetHashCode();
+		public override int GetHashCode() => sid.GetHashCode();
 	}
 }

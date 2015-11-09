@@ -368,8 +368,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="definition">The <see cref="TaskDefinition"/> of the registered task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition) => RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate,
-				definition.Principal.LogonType == TaskLogonType.Group ? definition.Principal.GroupId : definition.Principal.UserId,
-				null, definition.Principal.LogonType, null);
+				definition.Principal.ToString(), null, definition.Principal.LogonType, null);
 
 		/// <summary>
 		/// Registers (creates) a task in a specified location using a <see cref="TaskDefinition" /> instance to define a task.

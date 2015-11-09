@@ -5,6 +5,6 @@
 		event System.EventHandler KeyValueChanged;
 		Action Action { get; set; }
 		bool IsActionValid();
-		bool AllowRun { get; set; }
+		void Run();
 	}
 }
