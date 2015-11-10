@@ -455,10 +455,8 @@ namespace TestTaskService
 
 				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
 				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "Everyone", null, TaskLogonType.Group);
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "AMERICAS\\dahall", null, TaskLogonType.S4U);
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "david.a.hall@hpe.com", null, TaskLogonType.S4U);
 				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";

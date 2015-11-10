@@ -16,22 +16,25 @@ namespace Microsoft.Win32.TaskScheduler
 				acct = cur;
 				sid = acct.User;
 			}
-			else if (userName != null && (userName.Contains("\\") || !userName.Contains("@")))
+			else if (userName != null && userName.Contains("\\"))
 			{
 				using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
-				{
-					try { acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User; }
-					catch (System.Security.SecurityException)
-					{
-						NTAccount ntacct = new NTAccount(userName);
-						sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier));
-						acct = null;
-					}
-				}
+					try { acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User; } catch { }
 			}
-			else
+
+			if (acct == null)
 			{
-				acct = new WindowsIdentity(userName);
+				if (userName.Contains("@"))
+				{
+					acct = new WindowsIdentity(userName);
+					sid = acct.User;
+				}
+
+				if (acct == null)
+				{
+					NTAccount ntacct = new NTAccount(userName);
+					sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier));
+				}
 			}
 		}
 
