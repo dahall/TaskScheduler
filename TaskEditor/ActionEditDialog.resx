@@ -331,7 +331,7 @@
     <value>execActionUI1</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
     <value>execTab</value>
@@ -379,7 +379,7 @@
     <value>execActionUI1</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
     <value>execTab</value>
@@ -391,7 +391,7 @@
     <value>emailActionUI1</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
     <value>emailTab</value>
@@ -436,7 +436,7 @@
     <value>emailActionUI1</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
     <value>emailTab</value>
@@ -448,7 +448,7 @@
     <value>showMessageActionUI1</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
     <value>messageTab</value>
@@ -493,7 +493,7 @@
     <value>showMessageActionUI1</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
     <value>messageTab</value>
@@ -505,7 +505,7 @@
     <value>comHandlerActionUI1</value>
   </data>
   <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
     <value>comTab</value>
@@ -553,7 +553,7 @@
     <value>comHandlerActionUI1</value>
   </data>
   <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.2.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.3.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
     <value>comTab</value>
