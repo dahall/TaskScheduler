@@ -16,11 +16,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <remarks>
 	/// The action type is defined when the action is created and cannot be changed later. See <see cref="ActionCollection.AddNew"/>.
 	/// </remarks>
-	[DataContract(Name = "TaskActionType", Namespace = TaskDefinition.tns)]
 	public enum TaskActionType
 	{
 		/// <summary>This action fires a handler.</summary>
-		[EnumMember]
 		ComHandler = 5,
 
 		/// <summary>
@@ -28,15 +26,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// launch an executable, or, if the name of a document is provided, find its associated
 		/// application and launch the application with the document.
 		/// </summary>
-		[EnumMember]
 		Execute = 0,
 
 		/// <summary>This action sends and e-mail.</summary>
-		[EnumMember]
 		SendEmail = 6,
 
 		/// <summary>This action shows a message box.</summary>
-		[EnumMember]
 		ShowMessage = 7
 	}
 
@@ -322,7 +317,6 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
-	[DataContract(Name = "ComHandler", Namespace = TaskDefinition.tns)]
 	public class ComHandlerAction : Action, IBindAsExecAction
 	{
 		/// <summary>

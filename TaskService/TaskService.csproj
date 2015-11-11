@@ -74,7 +74,6 @@
     <Compile Include="Native\KERNEL32.cs" />
     <Compile Include="Native\NTDSAPI.cs" />
     <Compile Include="Native\System.Collections.Specialized.Net20.cs" />
-    <Compile Include="Native\System.Runtime.Serialization.Net20.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="TaskEvent.cs" />
