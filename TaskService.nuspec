@@ -2,7 +2,7 @@
 <package>
   <metadata>
 	<id>TaskScheduler</id>
-	<version>2.5.3</version>
+	<version>2.5.4</version>
 	<title>Task Scheduler Managed Wrapper</title>
 	<authors>David Hall</authors>
 	<description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</description>
