@@ -770,7 +770,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:FontChanged"/> event.
+		/// Raises the <see cref="Control.FontChanged"/> event.
 		/// </summary>
 		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
 		protected override void OnFontChanged(EventArgs e)

@@ -327,7 +327,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:DropDown" /> event.
+		/// Raises the <see cref="CustomComboBox.DropDown" /> event.
 		/// </summary>
 		/// <param name="args">The <see cref="System.EventArgs" /> instance containing the event data.</param>
 		protected override void OnDropDown(EventArgs args)
@@ -337,7 +337,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:DropDownClosed" /> event.
+		/// Raises the <see cref="CustomComboBox.DropDownClosed" /> event.
 		/// </summary>
 		/// <param name="args">The <see cref="System.EventArgs" /> instance containing the event data.</param>
 		protected override void OnDropDownClosed(EventArgs args)

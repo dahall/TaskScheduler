@@ -118,7 +118,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task GetItemAt(int x, int y) => (Task)listView1.GetItemAt(x, y)?.Tag;
 
 		/// <summary>
-		/// Raises the <see cref="E:HandleDestroyed" /> event.
+		/// Raises the <see cref="Control.HandleDestroyed" /> event.
 		/// </summary>
 		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
 		protected override void OnHandleDestroyed(EventArgs e)
