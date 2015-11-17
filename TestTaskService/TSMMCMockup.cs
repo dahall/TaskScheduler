@@ -72,7 +72,7 @@ namespace TestTaskService
 				splitContainer1.Panel2.Controls.Add(folderPanel);
 				folderPanel.Dock = DockStyle.Fill;
 			}
-			folderPanel.Tasks = folder.Tasks;
+			folderPanel.TaskFolder = folder;
 			ShowPanel(folderPanel);
 		}
 

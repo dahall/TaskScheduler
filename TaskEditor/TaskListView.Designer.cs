@@ -30,7 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskListView));
-			this.listView1 = new System.Windows.Forms.ListView();
+			this.listView1 = new System.Windows.Forms.ListViewEx();
 			this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.triggers = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -64,6 +64,7 @@
 			this.listView1.SmallImageList = this.smallImageList;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
+			this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
 			this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
 			this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
 			this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -118,7 +119,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.ListViewEx listView1;
 		private System.Windows.Forms.ColumnHeader name;
 		private System.Windows.Forms.ColumnHeader status;
 		private System.Windows.Forms.ColumnHeader triggers;

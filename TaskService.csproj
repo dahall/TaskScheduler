@@ -77,6 +77,7 @@
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="TaskEvent.cs" />
+    <Compile Include="TaskEventWatcher.cs" />
     <Compile Include="TaskSecurity.cs" />
     <Compile Include="TaskServiceFluentExt.cs">
       <SubType>Component</SubType>

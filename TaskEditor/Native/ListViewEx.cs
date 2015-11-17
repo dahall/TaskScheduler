@@ -140,6 +140,7 @@ namespace System.Windows.Forms
 				var iCol = nmlv.iSubItem;
 				NativeMethods.RECT rc = new NativeMethods.RECT();
 				NativeMethods.SendMessage(HeaderHandle, (uint)NativeMethods.HeaderMessage.GetItemDropDownRect, (IntPtr)iCol, ref rc);
+				rc = RectangleToClient(rc);
 				if (ColumnContextMenuStrip != null)
 				{
 					ColumnContextMenuStrip.Tag = iCol;
@@ -157,16 +158,14 @@ namespace System.Windows.Forms
 					{
 						int lp = m.LParam.ToInt32();
 						Point pt = new Point(((lp << 16) >> 16), lp >> 16);
+						pt = PointToClient(pt);
 						IntPtr hHdr = HeaderHandle;
-						if (0 != NativeMethods.MapWindowPoints(IntPtr.Zero, hHdr, ref pt, 1))
+						var hti = new NativeMethods.HDHITTESTINFO(pt);
+						int item = NativeMethods.SendMessage(hHdr, NativeMethods.HeaderMessage.HitTest, 0, hti).ToInt32();
+						if (item != -1)
 						{
-							var hti = new NativeMethods.HDHITTESTINFO(pt);
-							int item = NativeMethods.SendMessage(hHdr, NativeMethods.HeaderMessage.HitTest, 0, hti).ToInt32();
-							if (item != -1)
-							{
-								if (ColumnContextMenuStrip != null)
-									ColumnContextMenuStrip.Show(pt);
-							}
+							if (ColumnContextMenuStrip != null)
+								ColumnContextMenuStrip.Show(this, pt);
 						}
 					}
 					break;

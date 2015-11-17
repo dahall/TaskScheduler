@@ -817,7 +817,7 @@ namespace TestTaskService
 				output.WriteLine("\nTask history enumeration:");
 				TaskEventLog log = new TaskEventLog(@"\Maint", new int[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
 				foreach (TaskEvent ev in log)
-					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.GetDataValue("ActionName"), ev.TimeCreated.Value, ev.GetDataValue("ResultCode"));
+					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.DataValues["ActionName"], ev.TimeCreated.Value, ev.DataValues["ResultCode"]);
 			}
 
 			// Run ComHandler

@@ -17,7 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private Task task;
 		private int selectedIndex = -1;
 		private IList<ListViewItem> vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
-		private TaskEventEnumerator vevEnum;
+		private TaskEventLog.TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace Microsoft.Win32.TaskScheduler
 				historyListView.Items.Clear();
 				historyListView.VirtualMode = true;
 				vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
-				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
+				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventLog.TaskEventEnumerator;
 			}
 			else
 			{
@@ -420,9 +420,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void sortEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int col = (int)columnContextMenu.Tag;
-			historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
-			removeSortingToolStripMenuItem.Visible = true;
+			ToolStripMenuItem item = sender as ToolStripMenuItem;
+			if (item != null)
+			{
+				int col = (int)item.Tag;
+				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
+				removeSortingToolStripMenuItem.Visible = true;
+			}
 		}
 
 		private void removeSortingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -433,14 +437,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void groupEventsByThisColumnToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int col = (int)columnContextMenu.Tag;
-			lvwColumnSorter.Group = true;
-			if (lvwColumnSorter.SortColumn != col || vevEnum != null)
-				historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
-			else
-				SetupGroups();
-			groupEventsByThisColumnToolStripMenuItem.Visible = false;
-			removeGroupingOfEventsToolStripMenuItem.Visible = expandAllGroupsToolStripMenuItem.Visible = collapseAllGroupsToolStripMenuItem.Visible = true;
+			ToolStripMenuItem item = sender as ToolStripMenuItem;
+			if (item != null)
+			{
+				int col = (int)item.Tag;
+				lvwColumnSorter.Group = true;
+				if (lvwColumnSorter.SortColumn != col || vevEnum != null)
+					historyListView_ColumnClick(historyListView, new ColumnClickEventArgs(col));
+				else
+					SetupGroups();
+				groupEventsByThisColumnToolStripMenuItem.Visible = false;
+				removeGroupingOfEventsToolStripMenuItem.Visible = expandAllGroupsToolStripMenuItem.Visible = collapseAllGroupsToolStripMenuItem.Visible = true;
+			}
 		}
 
 		private void removeGroupingOfEventsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -460,71 +468,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			foreach (var item in historyListView.Groups)
 				item.Collapsed = true;
-		}
-
-		internal class ListViewColumnSorter : IComparer<ListViewItem>, System.Collections.IComparer
-		{
-			private System.Collections.CaseInsensitiveComparer ObjectCompare = new System.Collections.CaseInsensitiveComparer(System.Globalization.CultureInfo.InvariantCulture);
-
-			public ListViewColumnSorter()
-			{
-				Group = false;
-				NewSortSameColumn = false;
-				Order = SortOrder.Descending;
-				SortColumn = 1;
-			}
-
-			public int Compare(ListViewItem listviewX, ListViewItem listviewY)
-			{
-				// Compare the two items
-				int compareResult = ObjectCompare.Compare(listviewX.SubItems[SortColumn].Text, listviewY.SubItems[SortColumn].Text);
-
-				// Calculate correct return value based on object comparison
-				if (Order == SortOrder.Ascending)
-				{
-					// Ascending sort is selected, return normal result of compare operation
-					return compareResult;
-				}
-				else if (Order == SortOrder.Descending)
-				{
-					// Descending sort is selected, return negative result of compare operation
-					return (-compareResult);
-				}
-				// Return '0' to indicate they are equal
-				return 0;
-			}
-
-			public void ResortOnColumn(int column)
-			{
-				if (column == SortColumn)
-				{
-					// Reverse the current sort direction for this column.
-					Order = Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-					NewSortSameColumn = true;
-				}
-				else
-				{
-					// Set the column number that is to be sorted; default to ascending.
-					SortColumn = column;
-					Order = SortOrder.Ascending;
-					NewSortSameColumn = false;
-				}
-			}
-
-			int System.Collections.IComparer.Compare(object x, object y)
-			{
-				if (x is ListViewItem && y is ListViewItem)
-					return Compare((ListViewItem)x, (ListViewItem)y);
-				return ObjectCompare.Compare(x, y);
-			}
-
-			public bool NewSortSameColumn { get; set; }
-
-			public SortOrder Order { get; set; }
-
-			public int SortColumn { get; set; }
-
-			public bool Group { get; set; }
 		}
 	}
 }

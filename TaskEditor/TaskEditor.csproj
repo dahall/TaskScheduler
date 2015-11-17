@@ -123,6 +123,7 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EditorInterfaces.cs" />
+    <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Native\ImageList.cs" />
     <Compile Include="Native\ImageListExtension.cs" />
     <Compile Include="Native\NativeResource.cs" />
