@@ -52,7 +52,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// Watches system events related to tasks and issues a <see cref="E:TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
+	/// Watches system events related to tasks and issues a <see cref="TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
 	/// </summary>
 	[DefaultEvent(nameof(TaskEventWatcher.EventRecorded)), DefaultProperty(nameof(TaskEventWatcher.Folder))]
 	public class TaskEventWatcher : Component, ISupportInitialize
@@ -582,7 +582,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Gets or sets an optional array of event identifiers to use when filtering those events that will fire a <see cref="E:TaskEventWatcher.EventRecorded"/> event.
+			/// Gets or sets an optional array of event identifiers to use when filtering those events that will fire a <see cref="TaskEventWatcher.EventRecorded"/> event.
 			/// </summary>
 			/// <value>
 			/// The array of event identifier filters. All know task event identifiers are declared in the <see cref="StandardTaskEventId"/> enumeration.
@@ -602,7 +602,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
-			/// Gets or sets an optional array of event levels to use when filtering those events that will fire a <see cref="E:TaskEventWatcher.EventRecorded"/> event.
+			/// Gets or sets an optional array of event levels to use when filtering those events that will fire a <see cref="TaskEventWatcher.EventRecorded"/> event.
 			/// </summary>
 			/// <value>
 			/// The array of event levels. While event providers can define custom levels, most will use integers defined in the <see cref="StandardEventLevel"/> enumeration.

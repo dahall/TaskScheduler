@@ -67,7 +67,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Clones this instance.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>A copy of an unbound <see cref="NameValuePair"/>.</returns>
 		public NameValuePair Clone() => new NameValuePair(this.Name, this.Value);
 
 		object ICloneable.Clone() => Clone();
@@ -399,7 +399,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Removes the name-value pair with the specified key from the collection.
 		/// </summary>
 		/// <param name="name">The name associated with a value in a name-value pair.</param>
-		/// <returns></returns>
+		/// <returns><c>true</c> if item successfully removed; <c>false</c> otherwise.</returns>
 		public bool Remove(string name)
 		{
 			int i = -1;
