@@ -38,13 +38,13 @@ namespace TestTaskService
 			deleteMenuItem.ImageIndex = deleteMenuItem2.ImageIndex = 7;
 		}
 
-		public TaskCollection Tasks
+		public TaskFolder TaskFolder
 		{
-			get { return TaskListView.Tasks; } 
+			get { return TaskListView.Folder; } 
 			set
 			{
-				TaskListView.Tasks = value;
-				if (value.Count > 0)
+				TaskListView.Folder = value;
+				if (value.Tasks.Count > 0)
 					TaskListView.SelectedIndex = 0;
 				else
 					taskListView_TaskSelected(null, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs.Empty);

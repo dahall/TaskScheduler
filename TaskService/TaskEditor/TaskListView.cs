@@ -11,6 +11,9 @@ namespace Microsoft.Win32.TaskScheduler
 	public partial class TaskListView : UserControl
 	{
 		private TaskCollection coll;
+		private TaskFolder folder;
+		private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+		private TaskEventWatcher watcher;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskListView"/> class.
@@ -19,6 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			InitializeComponent();
 			smallImageList.Images.Add(new System.Drawing.Icon(EditorProperties.Resources.ts, 0x10, 0x10));
+			listView1.ListViewItemSorter = lvwColumnSorter;
 		}
 
 		/// <summary>
@@ -47,6 +51,25 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the folder from which to display the tasks.
+		/// </summary>
+		/// <value>The task folder.</value>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), RefreshProperties(RefreshProperties.All)]
+		public TaskFolder Folder
+		{
+			get { return folder; }
+			set
+			{
+				TearDownWatcher();
+				folder = value;
+				coll = value.Tasks;
+				lvwColumnSorter.ResortOnColumn(0);
+				RefreshItems();
+				SetupWatcher(folder);
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the zero-based index of the currently selected item in a <see cref="TaskListView"/>.
 		/// </summary>
 		/// <value>
@@ -54,10 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		public int SelectedIndex
 		{
-			get
-			{
-				return listView1.SelectedIndices.Count == 0 ? -1 : listView1.SelectedIndices[0];
-			}
+			get { return listView1.SelectedIndices.Count == 0 ? -1 : listView1.SelectedIndices[0]; }
 			set
 			{
 				foreach (int i in listView1.SelectedIndices)
@@ -68,7 +88,9 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the tasks.
+		/// Gets or sets the tasks. When setting, be aware that if the collection is empty, the list
+		/// will not be updated with newly added tasks. For a list view that is self-updating, this
+		/// value must already contain tasks or use the <see cref="Folder"/> property.
 		/// </summary>
 		/// <value>The tasks.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), RefreshProperties(RefreshProperties.All)]
@@ -77,13 +99,13 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return coll; }
 			set
 			{
+				TearDownWatcher();
+				folder = null;
 				coll = value;
-				listView1.BeginUpdate();
-				listView1.Items.Clear();
-				if (coll != null)
-					foreach (var item in coll)
-						try { listView1.Items.Add(LVIFromTask(item)); } catch { }
-				listView1.EndUpdate();
+				lvwColumnSorter.ResortOnColumn(0);
+				RefreshItems();
+				if (value.Count > 0)
+					SetupWatcher(value[0].Folder);
 			}
 		}
 
@@ -93,10 +115,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="x">The x-coordinate of the location to search for an item (expressed in client coordinates).</param>
 		/// <param name="y">The y-coordinate of the location to search for an item (expressed in client coordinates).</param>
 		/// <returns>A <see cref="Task"/> that represents the item at the specified position. If there is no item at the specified location, the method returns <c>null</c>.</returns>
-		public Task GetItemAt(int x, int y)
+		public Task GetItemAt(int x, int y) => (Task)listView1.GetItemAt(x, y)?.Tag;
+
+		/// <summary>
+		/// Raises the <see cref="E:HandleDestroyed" /> event.
+		/// </summary>
+		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+		protected override void OnHandleDestroyed(EventArgs e)
 		{
-			ListViewItem item = listView1.GetItemAt(x, y);
-			return item == null ? null : (Task)item.Tag;
+			TearDownWatcher();
+			base.OnHandleDestroyed(e);
 		}
 
 		/// <summary>
@@ -105,9 +133,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="e">The <see cref="Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs"/> instance containing the event data.</param>
 		protected virtual void OnTaskSelected(TaskSelectedEventArgs e)
 		{
-			EventHandler<TaskSelectedEventArgs> handler = TaskSelected;
-			if (handler != null)
-				handler(this, e);
+			TaskSelected?.Invoke(this, e);
+		}
+
+		private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+		{
+			lvwColumnSorter.ResortOnColumn(e.Column);
+			listView1.SetSortIcon(lvwColumnSorter.SortColumn, lvwColumnSorter.Order);
+			RefreshItems();
 		}
 
 		private void listView1ContextMenuStrip_Opening(object sender, CancelEventArgs e)
@@ -144,12 +177,14 @@ namespace Microsoft.Win32.TaskScheduler
 			OnTaskSelected(new TaskSelectedEventArgs(t));
 		}
 
-		private ListViewItem LVIFromTask(Task task)
+		private ListViewItem LVIFromTask(Task task) => new ListViewItem(LVIItemsFromTask(task), 0) { Tag = task };
+
+		private string[] LVIItemsFromTask(Task task)
 		{
 			bool disabled = task.State == TaskState.Disabled;
 			TaskDefinition td = null;
 			try { td = task.Definition; } catch { }
-			ListViewItem lvi = new ListViewItem(new string[] {
+			return new string[] {
 				task.Name,
 				TaskEnumGlobalizer.GetString(task.State),
 				td == null ? "" : task.Definition.Triggers.ToString(),
@@ -158,8 +193,81 @@ namespace Microsoft.Win32.TaskScheduler
 				task.LastRunTime == DateTime.MinValue ? string.Empty : task.State == TaskState.Running ? string.Format(EditorProperties.Resources.LastResultRunning, task.LastTaskResult) : ((task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult))),
 				td == null ? "" : task.Definition.RegistrationInfo.Author,
 				string.Empty
-				}, 0) { Tag = task };
-			return lvi;
+				};
+		}
+
+		private void RefreshItems()
+		{
+			if (watcher != null) watcher.Enabled = false;
+			listView1.BeginUpdate();
+			listView1.Items.Clear();
+			if (coll != null)
+				foreach (var item in coll)
+					try { listView1.Items.Add(LVIFromTask(item)); } catch { }
+			listView1.EndUpdate();
+			listView1.Sort();
+			if (watcher != null) watcher.Enabled = true;
+		}
+
+		private void RefreshLVI(int index)
+		{
+			try
+			{
+				var lvi = listView1.Items[index];
+				var si = LVIItemsFromTask(lvi.Tag as Task);
+				for (int i = 0; i < si.Length; i++)
+					lvi.SubItems[i].Text = si[i];
+			}
+			catch { }
+		}
+
+		private void SetupWatcher(TaskFolder tf)
+		{
+			if (tf != null)
+			{
+				watcher = new TaskEventWatcher(tf) { SynchronizingObject = this };
+				watcher.EventRecorded += Watcher_EventRecorded;
+				watcher.Enabled = true;
+			}
+		}
+
+		private void TearDownWatcher()
+		{
+			if (watcher != null)
+			{
+				watcher.EventRecorded -= Watcher_EventRecorded;
+				watcher.Enabled = false;
+				watcher = null;
+			}
+		}
+
+		private void Watcher_EventRecorded(object sender, TaskEventArgs e)
+		{
+			int idx = IndexOfTask(e.TaskName);
+			if (idx != -1)
+			{
+				if (e.TaskEvent.StandardEventId == StandardTaskEventId.TaskDeleted)
+					listView1.Items.RemoveAt(idx);
+				else
+					RefreshLVI(idx);
+			}
+			else
+			{
+				var t = e.Task;
+				if (t != null)
+				{
+					listView1.Items.Add(LVIFromTask(t));
+					listView1.Sort();
+				}
+			}
+		}
+
+		private int IndexOfTask(string name)
+		{
+			for (int i = 0; i < listView1.Items.Count; i++)
+				if (string.Compare(listView1.Items[i].Text, name, true) == 0)
+					return i;
+			return -1;
 		}
 
 		/// <summary>

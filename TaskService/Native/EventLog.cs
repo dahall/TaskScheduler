@@ -16,6 +16,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
 
 namespace System.Diagnostics.Eventing.Reader
 {
@@ -183,7 +184,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(bookmarkText));
 			}
-			this.bookmark = bookmarkText;
+			bookmark = bookmarkText;
 		}
 
 		/// <summary>
@@ -197,22 +198,16 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(info));
 			}
-			this.bookmark = info.GetString("BookmarkText");
+			bookmark = info.GetString("BookmarkText");
 		}
 
 		// Properties
-		internal string BookmarkText
-		{
-			get
-			{
-				return this.bookmark;
-			}
-		}
+		internal string BookmarkText => bookmark;
 
 		[SecurityCritical, SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
 		{
-			this.GetObjectData(info, context);
+			GetObjectData(info, context);
 		}
 
 		/// <summary>
@@ -227,7 +222,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(info));
 			}
-			info.AddValue("BookmarkText", this.bookmark);
+			info.AddValue("BookmarkText", bookmark);
 		}
 	}
 
@@ -251,7 +246,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.value = value;
 			this.pmReference = pmReference;
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		internal EventKeyword(string name, long value, string displayName)
@@ -259,8 +254,8 @@ namespace System.Diagnostics.Eventing.Reader
 			this.value = value;
 			this.name = name;
 			this.displayName = displayName;
-			this.dataReady = true;
-			this.syncObject = new object();
+			dataReady = true;
+			syncObject = new object();
 		}
 
 		// Properties
@@ -274,8 +269,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.displayName;
+				PrepareData();
+				return displayName;
 			}
 		}
 
@@ -289,8 +284,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.name;
+				PrepareData();
+				return name;
 			}
 		}
 
@@ -300,32 +295,26 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The value.
 		/// </value>
-		public long Value
-		{
-			get
-			{
-				return this.value;
-			}
-		}
+		public long Value => value;
 
 		internal void PrepareData()
 		{
-			if (!this.dataReady)
+			if (!dataReady)
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.dataReady)
+					if (!dataReady)
 					{
-						IEnumerable<EventKeyword> keywords = this.pmReference.Keywords;
-						this.name = null;
-						this.displayName = null;
-						this.dataReady = true;
+						IEnumerable<EventKeyword> keywords = pmReference.Keywords;
+						name = null;
+						displayName = null;
+						dataReady = true;
 						foreach (EventKeyword keyword in keywords)
 						{
-							if (keyword.Value == this.value)
+							if (keyword.Value == value)
 							{
-								this.name = keyword.Name;
-								this.displayName = keyword.DisplayName;
+								name = keyword.Name;
+								displayName = keyword.DisplayName;
 								break;
 							}
 						}
@@ -355,7 +344,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.value = value;
 			this.pmReference = pmReference;
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		internal EventLevel(string name, int value, string displayName)
@@ -363,8 +352,8 @@ namespace System.Diagnostics.Eventing.Reader
 			this.value = value;
 			this.name = name;
 			this.displayName = displayName;
-			this.dataReady = true;
-			this.syncObject = new object();
+			dataReady = true;
+			syncObject = new object();
 		}
 
 		// Properties
@@ -378,8 +367,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.displayName;
+				PrepareData();
+				return displayName;
 			}
 		}
 
@@ -393,8 +382,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.name;
+				PrepareData();
+				return name;
 			}
 		}
 
@@ -404,32 +393,26 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The value.
 		/// </value>
-		public int Value
-		{
-			get
-			{
-				return this.value;
-			}
-		}
+		public int Value => value;
 
 		internal void PrepareData()
 		{
-			if (!this.dataReady)
+			if (!dataReady)
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.dataReady)
+					if (!dataReady)
 					{
-						IEnumerable<EventLevel> levels = this.pmReference.Levels;
-						this.name = null;
-						this.displayName = null;
-						this.dataReady = true;
+						IEnumerable<EventLevel> levels = pmReference.Levels;
+						name = null;
+						displayName = null;
+						dataReady = true;
 						foreach (EventLevel level in levels)
 						{
-							if (level.Value == this.value)
+							if (level.Value == value)
 							{
-								this.name = level.Name;
-								this.displayName = level.DisplayName;
+								name = level.Name;
+								displayName = level.DisplayName;
 								break;
 							}
 						}
@@ -463,15 +446,15 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityCritical]
 		public EventLogConfiguration(string logName, EventLogSession session)
 		{
-			this.handle = EventLogHandle.Zero;
+			handle = EventLogHandle.Zero;
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			if (session == null)
 			{
 				session = EventLogSession.GlobalSession;
 			}
 			this.session = session;
-			this.channelName = logName;
-			this.handle = NativeWrapper.EvtOpenChannelConfig(this.session.Handle, this.channelName, 0);
+			channelName = logName;
+			handle = NativeWrapper.EvtOpenChannelConfig(this.session.Handle, channelName, 0);
 		}
 
 		/// <summary>
@@ -479,7 +462,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -494,9 +477,9 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 			}
-			if ((this.handle != null) && !this.handle.IsInvalid)
+			if ((handle != null) && !handle.IsInvalid)
 			{
-				this.handle.Dispose();
+				handle.Dispose();
 			}
 		}
 
@@ -505,7 +488,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// </summary>
 		public void SaveChanges()
 		{
-			NativeWrapper.EvtSaveChannelConfig(this.handle, 0);
+			NativeWrapper.EvtSaveChannelConfig(handle, 0);
 		}
 
 		// Properties
@@ -515,13 +498,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// <c>true</c> if this instance is classic log; otherwise, <c>false</c>.
 		/// </value>
-		public bool IsClassicLog
-		{
-			get
-			{
-				return (bool)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigClassicEventlog);
-			}
-		}
+		public bool IsClassicLog => (bool)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigClassicEventlog);
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is enabled.
@@ -533,11 +510,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return (bool)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled);
+				return (bool)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled);
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled, value);
 			}
 		}
 
@@ -551,11 +528,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath);
+				return (string)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath);
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath, value);
 			}
 		}
 
@@ -565,13 +542,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The log isolation.
 		/// </value>
-		public EventLogIsolation LogIsolation
-		{
-			get
-			{
-				return (EventLogIsolation)((uint)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigIsolation));
-			}
-		}
+		public EventLogIsolation LogIsolation => (EventLogIsolation)((uint)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigIsolation));
 
 		/// <summary>
 		/// Gets or sets the log mode.
@@ -583,8 +554,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				object obj2 = NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention);
-				object obj3 = NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup);
+				object obj2 = NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention);
+				object obj3 = NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup);
 				bool flag = (obj2 != null) && ((bool)obj2);
 				if ((obj3 != null) && ((bool)obj3))
 				{
@@ -601,16 +572,16 @@ namespace System.Diagnostics.Eventing.Reader
 				switch (value)
 				{
 					case EventLogMode.Circular:
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, false);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, false);
 						return;
 					case EventLogMode.AutoBackup:
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, true);
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, true);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
 						return;
 					case EventLogMode.Retain:
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
-						NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup, false);
+						NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention, true);
 						return;
 				}
 			}
@@ -622,13 +593,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The name of the log.
 		/// </value>
-		public string LogName
-		{
-			get
-			{
-				return this.channelName;
-			}
-		}
+		public string LogName => channelName;
 
 		/// <summary>
 		/// Gets the type of the log.
@@ -636,13 +601,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The type of the log.
 		/// </value>
-		public EventLogType LogType
-		{
-			get
-			{
-				return (EventLogType)((uint)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigType));
-			}
-		}
+		public EventLogType LogType => (EventLogType)((uint)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigType));
 
 		/// <summary>
 		/// Gets or sets the maximum size in bytes.
@@ -654,11 +613,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return (long)((ulong)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize));
+				return (long)((ulong)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize));
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize, value);
 			}
 		}
 
@@ -668,13 +627,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The name of the owning provider.
 		/// </value>
-		public string OwningProviderName
-		{
-			get
-			{
-				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigOwningPublisher);
-			}
-		}
+		public string OwningProviderName => (string)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigOwningPublisher);
 
 		/// <summary>
 		/// Gets the size of the provider buffer.
@@ -686,7 +639,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigBufferSize);
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigBufferSize);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -701,13 +654,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The provider control unique identifier.
 		/// </value>
-		public Guid? ProviderControlGuid
-		{
-			get
-			{
-				return (Guid?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigControlGuid);
-			}
-		}
+		public Guid? ProviderControlGuid => (Guid?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigControlGuid);
 
 		/// <summary>
 		/// Gets or sets the provider keywords.
@@ -719,7 +666,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				ulong? nullable = (ulong?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords);
+				ulong? nullable = (ulong?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -728,7 +675,7 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords, value);
 			}
 		}
 
@@ -742,7 +689,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLatency);
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLatency);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -761,7 +708,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel);
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -770,7 +717,7 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel, value);
 			}
 		}
 
@@ -784,7 +731,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMaxBuffers);
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMaxBuffers);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -803,7 +750,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMinBuffers);
+				uint? nullable = (uint?)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigMinBuffers);
 				if (!nullable.HasValue)
 				{
 					return null;
@@ -818,13 +765,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The provider names.
 		/// </value>
-		public IEnumerable<string> ProviderNames
-		{
-			get
-			{
-				return (string[])NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublisherList);
-			}
-		}
+		public IEnumerable<string> ProviderNames => (string[])NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublisherList);
 
 		/// <summary>
 		/// Gets or sets the security descriptor.
@@ -836,11 +777,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return (string)NativeWrapper.EvtGetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess);
+				return (string)NativeWrapper.EvtGetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess);
 			}
 			set
 			{
-				NativeWrapper.EvtSetChannelConfigProperty(this.handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess, value);
+				NativeWrapper.EvtSetChannelConfigProperty(handle, UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess, value);
 			}
 		}
 	}
@@ -881,7 +822,7 @@ namespace System.Diagnostics.Eventing.Reader
 			get
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
-				Win32Exception exception = new Win32Exception(this.errorCode);
+				Win32Exception exception = new Win32Exception(errorCode);
 				return exception.Message;
 			}
 		}
@@ -893,7 +834,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(info));
 			}
-			info.AddValue("errorCode", this.errorCode);
+			info.AddValue("errorCode", errorCode);
 			base.GetObjectData(info, context);
 		}
 
@@ -956,18 +897,18 @@ namespace System.Diagnostics.Eventing.Reader
 			EventLogHandle handle = NativeWrapper.EvtOpenLog(session.Handle, channelName, pathType);
 			using (handle)
 			{
-				this.creationTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime);
-				this.lastAccessTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime);
-				this.lastWriteTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime);
+				creationTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime);
+				lastAccessTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime);
+				lastWriteTime = (DateTime?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime);
 				ulong? nullable = (ulong?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFileSize);
-				this.fileSize = nullable.HasValue ? (long?)(nullable.GetValueOrDefault()) : null;
+				fileSize = nullable.HasValue ? (long?)(nullable.GetValueOrDefault()) : null;
 				uint? nullable3 = (uint?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogAttributes);
-				this.fileAttributes = nullable3.HasValue ? (int?)(nullable3.GetValueOrDefault()) : null;
+				fileAttributes = nullable3.HasValue ? (int?)(nullable3.GetValueOrDefault()) : null;
 				ulong? nullable5 = (ulong?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogNumberOfLogRecords);
-				this.recordCount = nullable5.HasValue ? (long?)(nullable5.GetValueOrDefault()) : null;
+				recordCount = nullable5.HasValue ? (long?)(nullable5.GetValueOrDefault()) : null;
 				ulong? nullable7 = (ulong?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogOldestRecordNumber);
-				this.oldestRecordNumber = nullable7.HasValue ? (long?)(nullable7.GetValueOrDefault()) : null;
-				this.isLogFull = (bool?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull);
+				oldestRecordNumber = nullable7.HasValue ? (long?)(nullable7.GetValueOrDefault()) : null;
+				isLogFull = (bool?)NativeWrapper.EvtGetLogInfo(handle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull);
 			}
 		}
 
@@ -978,13 +919,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The attributes.
 		/// </value>
-		public int? Attributes
-		{
-			get
-			{
-				return this.fileAttributes;
-			}
-		}
+		public int? Attributes => fileAttributes;
 
 		/// <summary>
 		/// Gets the creation time.
@@ -992,13 +927,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The creation time.
 		/// </value>
-		public DateTime? CreationTime
-		{
-			get
-			{
-				return this.creationTime;
-			}
-		}
+		public DateTime? CreationTime => creationTime;
 
 		/// <summary>
 		/// Gets the size of the file.
@@ -1006,13 +935,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The size of the file.
 		/// </value>
-		public long? FileSize
-		{
-			get
-			{
-				return this.fileSize;
-			}
-		}
+		public long? FileSize => fileSize;
 
 		/// <summary>
 		/// Gets the is log full.
@@ -1020,13 +943,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The is log full.
 		/// </value>
-		public bool? IsLogFull
-		{
-			get
-			{
-				return this.isLogFull;
-			}
-		}
+		public bool? IsLogFull => isLogFull;
 
 		/// <summary>
 		/// Gets the last access time.
@@ -1034,13 +951,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The last access time.
 		/// </value>
-		public DateTime? LastAccessTime
-		{
-			get
-			{
-				return this.lastAccessTime;
-			}
-		}
+		public DateTime? LastAccessTime => lastAccessTime;
 
 		/// <summary>
 		/// Gets the last write time.
@@ -1048,13 +959,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The last write time.
 		/// </value>
-		public DateTime? LastWriteTime
-		{
-			get
-			{
-				return this.lastWriteTime;
-			}
-		}
+		public DateTime? LastWriteTime => lastWriteTime;
 
 		/// <summary>
 		/// Gets the oldest record number.
@@ -1062,13 +967,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The oldest record number.
 		/// </value>
-		public long? OldestRecordNumber
-		{
-			get
-			{
-				return this.oldestRecordNumber;
-			}
-		}
+		public long? OldestRecordNumber => oldestRecordNumber;
 
 		/// <summary>
 		/// Gets the record count.
@@ -1076,13 +975,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The record count.
 		/// </value>
-		public long? RecordCount
-		{
-			get
-			{
-				return this.recordCount;
-			}
-		}
+		public long? RecordCount => recordCount;
 	}
 
 	[Serializable, HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
@@ -1134,7 +1027,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.channelId = channelId;
 			this.pmReference = pmReference;
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		internal EventLogLink(string channelName, bool isImported, string displayName, uint channelId)
@@ -1143,8 +1036,8 @@ namespace System.Diagnostics.Eventing.Reader
 			this.isImported = isImported;
 			this.displayName = displayName;
 			this.channelId = channelId;
-			this.dataReady = true;
-			this.syncObject = new object();
+			dataReady = true;
+			syncObject = new object();
 		}
 
 		/// <summary>
@@ -1157,8 +1050,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.displayName;
+				PrepareData();
+				return displayName;
 			}
 		}
 
@@ -1172,8 +1065,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.isImported;
+				PrepareData();
+				return isImported;
 			}
 		}
 
@@ -1187,41 +1080,35 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.channelName;
+				PrepareData();
+				return channelName;
 			}
 		}
 
 		// Properties
-		internal uint ChannelId
-		{
-			get
-			{
-				return this.channelId;
-			}
-		}
+		internal uint ChannelId => channelId;
 
 		private void PrepareData()
 		{
-			if (!this.dataReady)
+			if (!dataReady)
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.dataReady)
+					if (!dataReady)
 					{
-						IEnumerable<EventLogLink> logLinks = this.pmReference.LogLinks;
-						this.channelName = null;
-						this.isImported = false;
-						this.displayName = null;
-						this.dataReady = true;
+						IEnumerable<EventLogLink> logLinks = pmReference.LogLinks;
+						channelName = null;
+						isImported = false;
+						displayName = null;
+						dataReady = true;
 						foreach (EventLogLink link in logLinks)
 						{
-							if (link.ChannelId == this.channelId)
+							if (link.ChannelId == channelId)
 							{
-								this.channelName = link.LogName;
-								this.isImported = link.IsImported;
-								this.displayName = link.DisplayName;
-								this.dataReady = true;
+								channelName = link.LogName;
+								isImported = link.IsImported;
+								displayName = link.DisplayName;
+								dataReady = true;
 								break;
 							}
 						}
@@ -1292,24 +1179,18 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				strArray = new List<string>(propertyQueries).ToArray();
 			}
-			this.renderContextHandleValues = NativeWrapper.EvtCreateRenderContext(strArray.Length, strArray, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextValues);
+			renderContextHandleValues = NativeWrapper.EvtCreateRenderContext(strArray.Length, strArray, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextValues);
 		}
 
 		// Properties
-		internal EventLogHandle Handle
-		{
-			get
-			{
-				return this.renderContextHandleValues;
-			}
-		}
+		internal EventLogHandle Handle => renderContextHandleValues;
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -1324,9 +1205,9 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 			}
-			if ((this.renderContextHandleValues != null) && !this.renderContextHandleValues.IsInvalid)
+			if ((renderContextHandleValues != null) && !renderContextHandleValues.IsInvalid)
 			{
-				this.renderContextHandleValues.Dispose();
+				renderContextHandleValues.Dispose();
 			}
 		}
 	}
@@ -1378,7 +1259,7 @@ namespace System.Diagnostics.Eventing.Reader
 
 		public EventLogQuery(string path, PathType pathType, string query)
 		{
-			this.session = EventLogSession.GlobalSession;
+			session = EventLogSession.GlobalSession;
 			this.path = path;
 			this.pathType = pathType;
 			if (query == null)
@@ -1398,11 +1279,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return this.reverseDirection;
+				return reverseDirection;
 			}
 			set
 			{
-				this.reverseDirection = value;
+				reverseDirection = value;
 			}
 		}
 
@@ -1410,11 +1291,11 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return this.session;
+				return session;
 			}
 			set
 			{
-				this.session = value;
+				session = value;
 			}
 		}
 
@@ -1422,38 +1303,20 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return this.tolerateErrors;
+				return tolerateErrors;
 			}
 			set
 			{
-				this.tolerateErrors = value;
+				tolerateErrors = value;
 			}
 		}
 
 		// Properties
-		internal string Path
-		{
-			get
-			{
-				return this.path;
-			}
-		}
+		internal string Path => path;
 
-		internal string Query
-		{
-			get
-			{
-				return this.query;
-			}
-		}
+		internal string Query => query;
 
-		internal PathType ThePathType
-		{
-			get
-			{
-				return this.pathType;
-			}
-		}
+		internal PathType ThePathType => pathType;
 	}
 
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true), HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
@@ -1493,10 +1356,10 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				logfile = eventQuery.Path;
 			}
-			this.cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, logfile, 50);
+			cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, logfile, 50);
 			this.eventQuery = eventQuery;
-			this.batchSize = 0x40;
-			this.eventsBuffer = new IntPtr[this.batchSize];
+			batchSize = 0x40;
+			eventsBuffer = new IntPtr[batchSize];
 			int flags = 0;
 			if (this.eventQuery.ThePathType == PathType.LogName)
 			{
@@ -1515,13 +1378,13 @@ namespace System.Diagnostics.Eventing.Reader
 				flags |= 0x1000;
 			}
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			this.handle = NativeWrapper.EvtQuery(this.eventQuery.Session.Handle, this.eventQuery.Path, this.eventQuery.Query, flags);
+			handle = NativeWrapper.EvtQuery(this.eventQuery.Session.Handle, this.eventQuery.Path, this.eventQuery.Query, flags);
 			EventLogHandle bookmarkHandleFromBookmark = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark);
 			if (!bookmarkHandleFromBookmark.IsInvalid)
 			{
 				using (bookmarkHandleFromBookmark)
 				{
-					NativeWrapper.EvtSeek(this.handle, 1L, bookmarkHandleFromBookmark, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
+					NativeWrapper.EvtSeek(handle, 1L, bookmarkHandleFromBookmark, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
 				}
 			}
 		}
@@ -1536,7 +1399,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				return this.batchSize;
+				return batchSize;
 			}
 			set
 			{
@@ -1544,7 +1407,7 @@ namespace System.Diagnostics.Eventing.Reader
 				{
 					throw new ArgumentOutOfRangeException(nameof(value));
 				}
-				this.batchSize = value;
+				batchSize = value;
 			}
 		}
 
@@ -1580,45 +1443,42 @@ namespace System.Diagnostics.Eventing.Reader
 
 		public void CancelReading()
 		{
-			NativeWrapper.EvtCancel(this.handle);
+			NativeWrapper.EvtCancel(handle);
 		}
 
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
-		public EventRecord ReadEvent()
-		{
-			return this.ReadEvent(TimeSpan.MaxValue);
-		}
+		public EventRecord ReadEvent() => ReadEvent(TimeSpan.MaxValue);
 
 		[SecurityCritical]
 		public EventRecord ReadEvent(TimeSpan timeout)
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			if (this.isEof)
+			if (isEof)
 			{
 				throw new InvalidOperationException();
 			}
-			if (this.currentIndex >= this.eventCount)
+			if (currentIndex >= eventCount)
 			{
-				this.GetNextBatch(timeout);
-				if (this.currentIndex >= this.eventCount)
+				GetNextBatch(timeout);
+				if (currentIndex >= eventCount)
 				{
-					this.isEof = true;
+					isEof = true;
 					return null;
 				}
 			}
-			EventLogRecord record = new EventLogRecord(new EventLogHandle(this.eventsBuffer[this.currentIndex], true), this.eventQuery.Session, this.cachedMetadataInformation);
-			this.currentIndex++;
+			EventLogRecord record = new EventLogRecord(new EventLogHandle(eventsBuffer[currentIndex], true), eventQuery.Session, cachedMetadataInformation);
+			currentIndex++;
 			return record;
 		}
 
 		public void Seek(EventBookmark bookmark)
 		{
-			this.Seek(bookmark, 0L);
+			Seek(bookmark, 0L);
 		}
 
 		[SecurityCritical]
@@ -1629,7 +1489,7 @@ namespace System.Diagnostics.Eventing.Reader
 				throw new ArgumentNullException(nameof(bookmark));
 			}
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			this.SeekReset();
+			SeekReset();
 			using (EventLogHandle handle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark))
 			{
 				NativeWrapper.EvtSeek(this.handle, offset, handle, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
@@ -1643,38 +1503,38 @@ namespace System.Diagnostics.Eventing.Reader
 			switch (origin)
 			{
 				case SeekOrigin.Begin:
-					this.SeekReset();
-					NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst);
+					SeekReset();
+					NativeWrapper.EvtSeek(handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst);
 					return;
 
 				case SeekOrigin.Current:
 					if (offset < 0L)
 					{
-						if ((this.currentIndex + offset) >= 0L)
+						if ((currentIndex + offset) >= 0L)
 						{
-							this.SeekCommon(offset);
+							SeekCommon(offset);
 						}
 						else
 						{
-							this.SeekCommon(offset);
+							SeekCommon(offset);
 						}
 						return;
 					}
-					if ((this.currentIndex + offset) >= this.eventCount)
+					if ((currentIndex + offset) >= eventCount)
 					{
-						this.SeekCommon(offset);
+						SeekCommon(offset);
 						return;
 					}
-					for (int i = this.currentIndex; i < (this.currentIndex + offset); i++)
+					for (int i = currentIndex; i < (currentIndex + offset); i++)
 					{
-						NativeWrapper.EvtClose(this.eventsBuffer[i]);
+						NativeWrapper.EvtClose(eventsBuffer[i]);
 					}
-					this.currentIndex += (int)offset;
+					currentIndex += (int)offset;
 					return;
 
 				case SeekOrigin.End:
-					this.SeekReset();
-					NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast);
+					SeekReset();
+					NativeWrapper.EvtSeek(handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast);
 					return;
 			}
 		}
@@ -1682,22 +1542,22 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityCritical]
 		internal void SeekCommon(long offset)
 		{
-			offset -= this.eventCount - this.currentIndex;
-			this.SeekReset();
-			NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent);
+			offset -= eventCount - currentIndex;
+			SeekReset();
+			NativeWrapper.EvtSeek(handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent);
 		}
 
 		[SecurityCritical]
 		internal void SeekReset()
 		{
-			while (this.currentIndex < this.eventCount)
+			while (currentIndex < eventCount)
 			{
-				NativeWrapper.EvtClose(this.eventsBuffer[this.currentIndex]);
-				this.currentIndex++;
+				NativeWrapper.EvtClose(eventsBuffer[currentIndex]);
+				currentIndex++;
 			}
-			this.currentIndex = 0;
-			this.eventCount = 0;
-			this.isEof = false;
+			currentIndex = 0;
+			eventCount = 0;
+			isEof = false;
 		}
 
 		[SecurityCritical, SecurityTreatAsSafe]
@@ -1707,14 +1567,14 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 			}
-			while (this.currentIndex < this.eventCount)
+			while (currentIndex < eventCount)
 			{
-				NativeWrapper.EvtClose(this.eventsBuffer[this.currentIndex]);
-				this.currentIndex++;
+				NativeWrapper.EvtClose(eventsBuffer[currentIndex]);
+				currentIndex++;
 			}
-			if ((this.handle != null) && !this.handle.IsInvalid)
+			if ((handle != null) && !handle.IsInvalid)
 			{
-				this.handle.Dispose();
+				handle.Dispose();
 			}
 		}
 
@@ -1730,19 +1590,19 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				totalMilliseconds = (int)ts.TotalMilliseconds;
 			}
-			if (this.batchSize != this.eventsBuffer.Length)
+			if (batchSize != eventsBuffer.Length)
 			{
-				this.eventsBuffer = new IntPtr[this.batchSize];
+				eventsBuffer = new IntPtr[batchSize];
 			}
 			int returned = 0;
-			if (!NativeWrapper.EvtNext(this.handle, this.batchSize, this.eventsBuffer, totalMilliseconds, 0, ref returned))
+			if (!NativeWrapper.EvtNext(handle, batchSize, eventsBuffer, totalMilliseconds, 0, ref returned))
 			{
-				this.eventCount = 0;
-				this.currentIndex = 0;
+				eventCount = 0;
+				currentIndex = 0;
 				return false;
 			}
-			this.currentIndex = 0;
-			this.eventCount = returned;
+			currentIndex = 0;
+			eventCount = returned;
 			return true;
 		}
 	}
@@ -1802,11 +1662,11 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityTreatAsSafe]
 		internal EventLogRecord(EventLogHandle handle, EventLogSession session, ProviderMetadataCachedInformation cachedMetadataInfo)
 		{
-			this.cachedMetadataInformation = cachedMetadataInfo;
+			cachedMetadataInformation = cachedMetadataInfo;
 			this.handle = handle;
 			this.session = session;
-			this.systemProperties = new NativeWrapper.SystemProperties();
-			this.syncObject = new object();
+			systemProperties = new NativeWrapper.SystemProperties();
+			syncObject = new object();
 		}
 
 		/// <summary>
@@ -1819,8 +1679,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.ActivityId;
+				PrepareSystemData();
+				return systemProperties.ActivityId;
 			}
 		}
 
@@ -1837,7 +1697,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 				EventLogHandle bookmark = NativeWrapper.EvtCreateBookmark(null);
-				NativeWrapper.EvtUpdateBookmark(bookmark, this.handle);
+				NativeWrapper.EvtUpdateBookmark(bookmark, handle);
 				return new EventBookmark(NativeWrapper.EvtRenderBookmark(bookmark));
 			}
 		}
@@ -1852,17 +1712,17 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				if (this.containerChannel != null)
+				if (containerChannel != null)
 				{
-					return this.containerChannel;
+					return containerChannel;
 				}
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.containerChannel == null)
+					if (containerChannel == null)
 					{
-						this.containerChannel = (string)NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath);
+						containerChannel = (string)NativeWrapper.EvtGetEventInfo(Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath);
 					}
-					return this.containerChannel;
+					return containerChannel;
 				}
 			}
 		}
@@ -1877,14 +1737,14 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				ushort? id = this.systemProperties.Id;
+				PrepareSystemData();
+				ushort? id = systemProperties.Id;
 				int? nullable3 = id.HasValue ? new int?(id.GetValueOrDefault()) : null;
 				if (!nullable3.HasValue)
 				{
 					return 0;
 				}
-				return this.systemProperties.Id.Value;
+				return systemProperties.Id.Value;
 			}
 		}
 
@@ -1898,8 +1758,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				ulong? keywords = this.systemProperties.Keywords;
+				PrepareSystemData();
+				ulong? keywords = systemProperties.Keywords;
 				if (!keywords.HasValue)
 				{
 					return null;
@@ -1918,17 +1778,17 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				if (this.keywordsNames != null)
+				if (keywordsNames != null)
 				{
-					return this.keywordsNames;
+					return keywordsNames;
 				}
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.keywordsNames == null)
+					if (keywordsNames == null)
 					{
-						this.keywordsNames = this.cachedMetadataInformation.GetKeywordDisplayNames(this.ProviderName, this.handle);
+						keywordsNames = cachedMetadataInformation.GetKeywordDisplayNames(ProviderName, handle);
 					}
-					return this.keywordsNames;
+					return keywordsNames;
 				}
 			}
 		}
@@ -1943,8 +1803,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.Level;
+				PrepareSystemData();
+				return systemProperties.Level;
 			}
 		}
 
@@ -1958,18 +1818,18 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				if (this.levelNameReady)
+				if (levelNameReady)
 				{
-					return this.levelName;
+					return levelName;
 				}
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.levelNameReady)
+					if (!levelNameReady)
 					{
-						this.levelNameReady = true;
-						this.levelName = this.cachedMetadataInformation.GetLevelDisplayName(this.ProviderName, this.handle);
+						levelNameReady = true;
+						levelName = cachedMetadataInformation.GetLevelDisplayName(ProviderName, handle);
 					}
-					return this.levelName;
+					return levelName;
 				}
 			}
 		}
@@ -1984,8 +1844,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.ChannelName;
+				PrepareSystemData();
+				return systemProperties.ChannelName;
 			}
 		}
 
@@ -1999,8 +1859,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.ComputerName;
+				PrepareSystemData();
+				return systemProperties.ComputerName;
 			}
 		}
 
@@ -2014,17 +1874,17 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				if (this.matchedQueryIds != null)
+				if (matchedQueryIds != null)
 				{
-					return this.matchedQueryIds;
+					return matchedQueryIds;
 				}
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.matchedQueryIds == null)
+					if (matchedQueryIds == null)
 					{
-						this.matchedQueryIds = (int[])NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs);
+						matchedQueryIds = (int[])NativeWrapper.EvtGetEventInfo(Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs);
 					}
-					return this.matchedQueryIds;
+					return matchedQueryIds;
 				}
 			}
 		}
@@ -2039,8 +1899,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				byte? opcode = this.systemProperties.Opcode;
+				PrepareSystemData();
+				byte? opcode = systemProperties.Opcode;
 				ushort? nullable3 = opcode.HasValue ? new ushort?(opcode.GetValueOrDefault()) : null;
 				if (!nullable3.HasValue)
 				{
@@ -2060,14 +1920,14 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.opcodeNameReady)
+					if (!opcodeNameReady)
 					{
-						this.opcodeNameReady = true;
-						this.opcodeName = this.cachedMetadataInformation.GetOpcodeDisplayName(this.ProviderName, this.handle);
+						opcodeNameReady = true;
+						opcodeName = cachedMetadataInformation.GetOpcodeDisplayName(ProviderName, handle);
 					}
-					return this.opcodeName;
+					return opcodeName;
 				}
 			}
 		}
@@ -2082,8 +1942,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				uint? processId = this.systemProperties.ProcessId;
+				PrepareSystemData();
+				uint? processId = systemProperties.ProcessId;
 				if (!processId.HasValue)
 				{
 					return null;
@@ -2102,8 +1962,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.session.SetupUserContext();
-				IList<object> list = NativeWrapper.EvtRenderBufferWithContextUserOrValues(this.session.renderContextHandleUser, this.handle);
+				session.SetupUserContext();
+				IList<object> list = NativeWrapper.EvtRenderBufferWithContextUserOrValues(session.renderContextHandleUser, handle);
 				List<EventProperty> list2 = new List<EventProperty>();
 				foreach (object obj2 in list)
 				{
@@ -2123,8 +1983,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.ProviderId;
+				PrepareSystemData();
+				return systemProperties.ProviderId;
 			}
 		}
 
@@ -2138,8 +1998,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.ProviderName;
+				PrepareSystemData();
+				return systemProperties.ProviderName;
 			}
 		}
 
@@ -2153,8 +2013,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				ushort? qualifiers = this.systemProperties.Qualifiers;
+				PrepareSystemData();
+				ushort? qualifiers = systemProperties.Qualifiers;
 				uint? nullable3 = qualifiers.HasValue ? new uint?(qualifiers.GetValueOrDefault()) : null;
 				if (!nullable3.HasValue)
 				{
@@ -2174,8 +2034,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				ulong? recordId = this.systemProperties.RecordId;
+				PrepareSystemData();
+				ulong? recordId = systemProperties.RecordId;
 				if (!recordId.HasValue)
 				{
 					return null;
@@ -2194,8 +2054,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.RelatedActivityId;
+				PrepareSystemData();
+				return systemProperties.RelatedActivityId;
 			}
 		}
 
@@ -2209,8 +2069,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				ushort? task = this.systemProperties.Task;
+				PrepareSystemData();
+				ushort? task = systemProperties.Task;
 				uint? nullable3 = task.HasValue ? new uint?(task.GetValueOrDefault()) : null;
 				if (!nullable3.HasValue)
 				{
@@ -2230,18 +2090,18 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				if (this.taskNameReady)
+				if (taskNameReady)
 				{
-					return this.taskName;
+					return taskName;
 				}
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (!this.taskNameReady)
+					if (!taskNameReady)
 					{
-						this.taskNameReady = true;
-						this.taskName = this.cachedMetadataInformation.GetTaskDisplayName(this.ProviderName, this.handle);
+						taskNameReady = true;
+						taskName = cachedMetadataInformation.GetTaskDisplayName(ProviderName, handle);
 					}
-					return this.taskName;
+					return taskName;
 				}
 			}
 		}
@@ -2256,8 +2116,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				uint? threadId = this.systemProperties.ThreadId;
+				PrepareSystemData();
+				uint? threadId = systemProperties.ThreadId;
 				if (!threadId.HasValue)
 				{
 					return null;
@@ -2276,8 +2136,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.TimeCreated;
+				PrepareSystemData();
+				return systemProperties.TimeCreated;
 			}
 		}
 
@@ -2291,8 +2151,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.UserId;
+				PrepareSystemData();
+				return systemProperties.UserId;
 			}
 		}
 
@@ -2306,8 +2166,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareSystemData();
-				return this.systemProperties.Version;
+				PrepareSystemData();
+				return systemProperties.Version;
 			}
 		}
 
@@ -2316,7 +2176,7 @@ namespace System.Diagnostics.Eventing.Reader
 			[SecurityTreatAsSafe]
 			get
 			{
-				return this.handle;
+				return handle;
 			}
 		}
 
@@ -2324,10 +2184,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// Formats the description.
 		/// </summary>
 		/// <returns></returns>
-		public override string FormatDescription()
-		{
-			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle);
-		}
+		public override string FormatDescription() => cachedMetadataInformation.GetFormatDescription(ProviderName, handle);
 
 		/// <summary>
 		/// Formats the description.
@@ -2338,7 +2195,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			if (values == null)
 			{
-				return this.FormatDescription();
+				return FormatDescription();
 			}
 			string[] array = new string[0];
 			int index = 0;
@@ -2351,7 +2208,7 @@ namespace System.Diagnostics.Eventing.Reader
 				array[index] = obj2.ToString();
 				index++;
 			}
-			return this.cachedMetadataInformation.GetFormatDescription(this.ProviderName, this.handle, array);
+			return cachedMetadataInformation.GetFormatDescription(ProviderName, handle, array);
 		}
 
 		/// <summary>
@@ -2365,7 +2222,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(propertySelector));
 			}
-			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, this.handle);
+			return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, handle);
 		}
 
 		/// <summary>
@@ -2377,7 +2234,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			StringBuilder buffer = new StringBuilder(0x7d0);
-			NativeWrapper.EvtRender(EventLogHandle.Zero, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventXml, buffer);
+			NativeWrapper.EvtRender(EventLogHandle.Zero, handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventXml, buffer);
 			return buffer.ToString();
 		}
 
@@ -2393,15 +2250,15 @@ namespace System.Diagnostics.Eventing.Reader
 
 		internal void PrepareSystemData()
 		{
-			if (!this.systemProperties.filled)
+			if (!systemProperties.filled)
 			{
-				this.session.SetupSystemContext();
-				lock (this.syncObject)
+				session.SetupSystemContext();
+				lock (syncObject)
 				{
-					if (!this.systemProperties.filled)
+					if (!systemProperties.filled)
 					{
-						NativeWrapper.EvtRenderBufferWithContextSystem(this.session.renderContextHandleSystem, this.handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues, this.systemProperties, 0x12);
-						this.systemProperties.filled = true;
+						NativeWrapper.EvtRenderBufferWithContextSystem(session.renderContextHandleSystem, handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues, systemProperties, 0x12);
+						systemProperties.filled = true;
 					}
 				}
 			}
@@ -2420,9 +2277,9 @@ namespace System.Diagnostics.Eventing.Reader
 				{
 					EventLogPermissionHolder.GetEventLogPermission().Demand();
 				}
-				if ((this.handle != null) && !this.handle.IsInvalid)
+				if ((handle != null) && !handle.IsInvalid)
 				{
-					this.handle.Dispose();
+					handle.Dispose();
 				}
 			}
 			finally
@@ -2458,11 +2315,11 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityCritical]
 		public EventLogSession()
 		{
-			this.renderContextHandleSystem = EventLogHandle.Zero;
-			this.renderContextHandleUser = EventLogHandle.Zero;
-			this.handle = EventLogHandle.Zero;
+			renderContextHandleSystem = EventLogHandle.Zero;
+			renderContextHandleUser = EventLogHandle.Zero;
+			handle = EventLogHandle.Zero;
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		/// <summary>
@@ -2485,15 +2342,15 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityCritical]
 		public EventLogSession(string server, string domain, string user, SecureString password, SessionAuthentication logOnType)
 		{
-			this.renderContextHandleSystem = EventLogHandle.Zero;
-			this.renderContextHandleUser = EventLogHandle.Zero;
-			this.handle = EventLogHandle.Zero;
+			renderContextHandleSystem = EventLogHandle.Zero;
+			renderContextHandleUser = EventLogHandle.Zero;
+			handle = EventLogHandle.Zero;
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			if (server == null)
 			{
 				server = "localhost";
 			}
-			this.syncObject = new object();
+			syncObject = new object();
 			this.server = server;
 			this.domain = domain;
 			this.user = user;
@@ -2510,7 +2367,7 @@ namespace System.Diagnostics.Eventing.Reader
 				{
 					login.Password.SetMemory(Marshal.SecureStringToCoTaskMemUnicode(password));
 				}
-				this.handle = NativeWrapper.EvtOpenSession(UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin, ref login, 0, 0);
+				handle = NativeWrapper.EvtOpenSession(UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin, ref login, 0, 0);
 			}
 			finally
 			{
@@ -2525,28 +2382,16 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The global session.
 		/// </value>
-		public static EventLogSession GlobalSession
-		{
-			get
-			{
-				return globalSession;
-			}
-		}
+		public static EventLogSession GlobalSession => globalSession;
 
-		internal EventLogHandle Handle
-		{
-			get
-			{
-				return this.handle;
-			}
-		}
+		internal EventLogHandle Handle => handle;
 
 		/// <summary>
 		/// Cancels the current operations.
 		/// </summary>
 		public void CancelCurrentOperations()
 		{
-			NativeWrapper.EvtCancel(this.handle);
+			NativeWrapper.EvtCancel(handle);
 		}
 
 		/// <summary>
@@ -2555,7 +2400,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <param name="logName">Name of the log.</param>
 		public void ClearLog(string logName)
 		{
-			this.ClearLog(logName, null);
+			ClearLog(logName, null);
 		}
 
 		/// <summary>
@@ -2570,7 +2415,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				throw new ArgumentNullException(nameof(logName));
 			}
-			NativeWrapper.EvtClearLog(this.Handle, logName, backupPath, 0);
+			NativeWrapper.EvtClearLog(Handle, logName, backupPath, 0);
 		}
 
 		/// <summary>
@@ -2578,7 +2423,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -2591,7 +2436,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <param name="targetFilePath">The target file path.</param>
 		public void ExportLog(string path, PathType pathType, string query, string targetFilePath)
 		{
-			this.ExportLog(path, pathType, query, targetFilePath, false);
+			ExportLog(path, pathType, query, targetFilePath, false);
 		}
 
 		/// <summary>
@@ -2634,11 +2479,11 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			if (!tolerateQueryErrors)
 			{
-				NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, (int)evtExportLogChannelPath);
+				NativeWrapper.EvtExportLog(Handle, path, query, targetFilePath, (int)evtExportLogChannelPath);
 			}
 			else
 			{
-				NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, ((int)evtExportLogChannelPath) | 0x1000);
+				NativeWrapper.EvtExportLog(Handle, path, query, targetFilePath, ((int)evtExportLogChannelPath) | 0x1000);
 			}
 		}
 
@@ -2651,7 +2496,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <param name="targetFilePath">The target file path.</param>
 		public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath)
 		{
-			this.ExportLogAndMessages(path, pathType, query, targetFilePath, false, CultureInfo.CurrentCulture);
+			ExportLogAndMessages(path, pathType, query, targetFilePath, false, CultureInfo.CurrentCulture);
 		}
 
 		/// <summary>
@@ -2669,8 +2514,8 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				targetCultureInfo = CultureInfo.CurrentCulture;
 			}
-			this.ExportLog(path, pathType, query, targetFilePath, tolerateQueryErrors);
-			NativeWrapper.EvtArchiveExportedLog(this.Handle, targetFilePath, targetCultureInfo.LCID, 0);
+			ExportLog(path, pathType, query, targetFilePath, tolerateQueryErrors);
+			NativeWrapper.EvtArchiveExportedLog(Handle, targetFilePath, targetCultureInfo.LCID, 0);
 		}
 
 		/// <summary>
@@ -2698,7 +2543,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			List<string> list = new List<string>(100);
-			using (EventLogHandle handle = NativeWrapper.EvtOpenChannelEnum(this.Handle, 0))
+			using (EventLogHandle handle = NativeWrapper.EvtOpenChannelEnum(Handle, 0))
 			{
 				bool finish = false;
 				do
@@ -2723,7 +2568,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			List<string> list = new List<string>(100);
-			using (EventLogHandle handle = NativeWrapper.EvtOpenProviderEnum(this.Handle, 0))
+			using (EventLogHandle handle = NativeWrapper.EvtOpenProviderEnum(Handle, 0))
 			{
 				bool finish = false;
 				do
@@ -2743,13 +2588,13 @@ namespace System.Diagnostics.Eventing.Reader
 		internal void SetupSystemContext()
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			if (this.renderContextHandleSystem.IsInvalid)
+			if (renderContextHandleSystem.IsInvalid)
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.renderContextHandleSystem.IsInvalid)
+					if (renderContextHandleSystem.IsInvalid)
 					{
-						this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem);
+						renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem);
 					}
 				}
 			}
@@ -2759,11 +2604,11 @@ namespace System.Diagnostics.Eventing.Reader
 		internal void SetupUserContext()
 		{
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
-			lock (this.syncObject)
+			lock (syncObject)
 			{
-				if (this.renderContextHandleUser.IsInvalid)
+				if (renderContextHandleUser.IsInvalid)
 				{
-					this.renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser);
+					renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser);
 				}
 			}
 		}
@@ -2784,17 +2629,17 @@ namespace System.Diagnostics.Eventing.Reader
 				}
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 			}
-			if ((this.renderContextHandleSystem != null) && !this.renderContextHandleSystem.IsInvalid)
+			if ((renderContextHandleSystem != null) && !renderContextHandleSystem.IsInvalid)
 			{
-				this.renderContextHandleSystem.Dispose();
+				renderContextHandleSystem.Dispose();
 			}
-			if ((this.renderContextHandleUser != null) && !this.renderContextHandleUser.IsInvalid)
+			if ((renderContextHandleUser != null) && !renderContextHandleUser.IsInvalid)
 			{
-				this.renderContextHandleUser.Dispose();
+				renderContextHandleUser.Dispose();
 			}
-			if ((this.handle != null) && !this.handle.IsInvalid)
+			if ((handle != null) && !handle.IsInvalid)
 			{
-				this.handle.Dispose();
+				handle.Dispose();
 			}
 		}
 	}
@@ -2824,13 +2669,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The name of the log.
 		/// </value>
-		public string LogName
-		{
-			get
-			{
-				return this.channelName;
-			}
-		}
+		public string LogName => channelName;
 
 		/// <summary>
 		/// Gets the status code.
@@ -2838,19 +2677,339 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The status code.
 		/// </value>
-		public int StatusCode
+		public int StatusCode => win32ErrorCode;
+	}
+
+	/// <summary> 
+	/// Used for subscribing to event record notifications from event log.
+	/// </summary> 
+	[System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
+	internal class EventLogWatcher : IDisposable
+	{
+		/// <summary>
+		/// Occurs when [event record written].
+		/// </summary>
+		public event EventHandler<EventRecordWrittenEventArgs> EventRecordWritten;
+
+		private EventLogQuery eventQuery;
+		private EventBookmark bookmark;
+		private bool readExistingEvents;
+
+		private EventLogHandle handle;
+		private IntPtr[] eventsBuffer;
+		private int numEventsInBuffer;
+		private bool isSubscribing;
+		private int callbackThreadId;
+
+		AutoResetEvent subscriptionWaitHandle;
+		AutoResetEvent unregisterDoneHandle;
+		RegisteredWaitHandle registeredWaitHandle;
+
+		/// <summary>
+		/// Maintains cached display / metadata information returned from
+		/// EventRecords that were obtained from this reader. 
+		/// </summary>
+		ProviderMetadataCachedInformation cachedMetadataInformation;
+
+		EventLogException asyncException;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogWatcher"/> class.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		public EventLogWatcher(string path)
+			: this(new EventLogQuery(path, PathType.LogName), null, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogWatcher"/> class.
+		/// </summary>
+		/// <param name="eventQuery">The event query.</param>
+		public EventLogWatcher(EventLogQuery eventQuery)
+			: this(eventQuery, null, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogWatcher"/> class.
+		/// </summary>
+		/// <param name="eventQuery">The event query.</param>
+		/// <param name="bookmark">The bookmark.</param>
+		public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark)
+			: this(eventQuery, bookmark, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EventLogWatcher"/> class.
+		/// </summary>
+		/// <param name="eventQuery">The event query.</param>
+		/// <param name="bookmark">The bookmark.</param>
+		/// <param name="readExistingEvents">if set to <c>true</c> [read existing events].</param>
+		/// <exception cref="System.ArgumentNullException">eventQuery</exception>
+		/// <exception cref="System.InvalidOperationException"></exception>
+		public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark, bool readExistingEvents)
+		{
+
+			if (eventQuery == null)
+				throw new ArgumentNullException(nameof(eventQuery));
+
+			if (bookmark != null)
+				readExistingEvents = false;
+
+			//explicit data
+			this.eventQuery = eventQuery;
+			this.readExistingEvents = readExistingEvents;
+
+			if (this.eventQuery.ReverseDirection)
+				throw new InvalidOperationException();
+
+			eventsBuffer = new IntPtr[64];
+			cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, null, 50);
+			this.bookmark = bookmark;
+		}
+
+		public bool Enabled
 		{
 			get
 			{
-				return this.win32ErrorCode;
+				return isSubscribing;
 			}
+			set
+			{
+				if (value && !isSubscribing)
+				{
+					StartSubscribing();
+				}
+				else if (!value && isSubscribing)
+				{
+					StopSubscribing();
+				}
+			}
+		}
+
+		[System.Security.SecuritySafeCritical]
+		internal void StopSubscribing()
+		{
+
+			EventLogPermissionHolder.GetEventLogPermission().Demand();
+
+			// 
+			// need to set isSubscribing to false before waiting for completion of callback.
+			// 
+			isSubscribing = false;
+
+			if (registeredWaitHandle != null)
+			{
+
+				registeredWaitHandle.Unregister(unregisterDoneHandle);
+
+				if (callbackThreadId != Thread.CurrentThread.ManagedThreadId)
+				{
+					//
+					// not calling Stop from within callback - wait for 
+					// any outstanding callbacks to complete.
+					//
+					if (unregisterDoneHandle != null)
+						unregisterDoneHandle.WaitOne();
+				}
+
+				registeredWaitHandle = null;
+			}
+
+			if (unregisterDoneHandle != null)
+			{
+				unregisterDoneHandle.Close();
+				unregisterDoneHandle = null;
+			}
+
+			if (subscriptionWaitHandle != null)
+			{
+				subscriptionWaitHandle.Close();
+				subscriptionWaitHandle = null;
+			}
+
+			for (int i = 0; i < numEventsInBuffer; i++)
+			{
+
+				if (eventsBuffer[i] != IntPtr.Zero)
+				{
+					NativeWrapper.EvtClose(eventsBuffer[i]);
+					eventsBuffer[i] = IntPtr.Zero;
+				}
+			}
+
+			numEventsInBuffer = 0;
+
+			if (handle != null && !handle.IsInvalid)
+				handle.Dispose();
+		}
+
+		[System.Security.SecuritySafeCritical]
+		internal void StartSubscribing()
+		{
+
+			if (isSubscribing)
+				throw new InvalidOperationException();
+
+			int flag = 0;
+			if (bookmark != null)
+				flag |= (int)UnsafeNativeMethods.EvtSubscribeFlags.EvtSubscribeStartAfterBookmark;
+			else if (readExistingEvents)
+				flag |= (int)UnsafeNativeMethods.EvtSubscribeFlags.EvtSubscribeStartAtOldestRecord;
+			else
+				flag |= (int)UnsafeNativeMethods.EvtSubscribeFlags.EvtSubscribeToFutureEvents;
+
+			if (eventQuery.TolerateQueryErrors)
+				flag |= (int)UnsafeNativeMethods.EvtSubscribeFlags.EvtSubscribeTolerateQueryErrors;
+
+			EventLogPermissionHolder.GetEventLogPermission().Demand();
+
+			callbackThreadId = -1;
+			unregisterDoneHandle = new AutoResetEvent(false);
+			subscriptionWaitHandle = new AutoResetEvent(false);
+
+			EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark);
+
+			using (bookmarkHandle)
+			{
+
+				handle = NativeWrapper.EvtSubscribe(eventQuery.Session.Handle,
+					subscriptionWaitHandle.SafeWaitHandle,
+					eventQuery.Path,
+					eventQuery.Query,
+					bookmarkHandle,
+					IntPtr.Zero,
+					IntPtr.Zero,
+					flag);
+			}
+
+			isSubscribing = true;
+
+			RequestEvents();
+
+			registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+				subscriptionWaitHandle,
+				new WaitOrTimerCallback(SubscribedEventsAvailableCallback),
+				null,
+				-1,
+				false);
+		}
+
+		internal void SubscribedEventsAvailableCallback(object state, bool timedOut)
+		{
+			callbackThreadId = Thread.CurrentThread.ManagedThreadId;
+			try
+			{
+				RequestEvents();
+			}
+			finally
+			{
+				callbackThreadId = -1;
+			}
+		}
+
+		[System.Security.SecuritySafeCritical]
+		private void RequestEvents()
+		{
+
+			EventLogPermissionHolder.GetEventLogPermission().Demand();
+
+			asyncException = null;
+			Debug.Assert(numEventsInBuffer == 0);
+
+			bool results = false;
+
+			do
+			{
+
+				if (!isSubscribing)
+					break;
+
+				try
+				{
+
+					results = NativeWrapper.EvtNext(handle, eventsBuffer.Length, eventsBuffer, 0, 0, ref numEventsInBuffer);
+
+					if (!results)
+						return;
+				}
+				catch (EventLogException e)
+				{
+					asyncException = e;
+				}
+
+				HandleEventsRequestCompletion();
+
+			} while (results);
+		}
+
+		private void IssueCallback(EventRecordWrittenEventArgs eventArgs)
+		{
+
+			if (EventRecordWritten != null)
+			{
+				EventRecordWritten(this, eventArgs);
+			}
+		}
+
+		// marked as SecurityCritical because allocates SafeHandles.
+		[System.Security.SecurityCritical]
+		private void HandleEventsRequestCompletion()
+		{
+
+			if (asyncException != null)
+			{
+				EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(asyncException);
+				IssueCallback(args);
+			}
+
+			for (int i = 0; i < numEventsInBuffer; i++)
+			{
+				if (!isSubscribing)
+					break;
+				EventLogRecord record = new EventLogRecord(new EventLogHandle(eventsBuffer[i], true), eventQuery.Session, cachedMetadataInformation);
+				EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(record);
+				eventsBuffer[i] = IntPtr.Zero;  // user is responsible for calling Dispose().
+				IssueCallback(args);
+			}
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		[System.Security.SecuritySafeCritical]
+		protected virtual void Dispose(bool disposing)
+		{
+
+			if (disposing)
+			{
+				StopSubscribing();
+				return;
+			}
+
+			for (int i = 0; i < numEventsInBuffer; i++)
+			{
+
+				if (eventsBuffer[i] != IntPtr.Zero)
+				{
+					NativeWrapper.EvtClose(eventsBuffer[i]);
+					eventsBuffer[i] = IntPtr.Zero;
+				}
+			}
+
+			numEventsInBuffer = 0;
 		}
 	}
 
 	/// <summary>
 	/// Contains the metadata (properties and settings) for an event that is defined in an event provider. 
 	/// </summary>
-	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
+[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
 	public sealed class EventMetadata
 	{
 		// Fields
@@ -2888,13 +3047,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The description.
 		/// </value>
-		public string Description
-		{
-			get
-			{
-				return this.description;
-			}
-		}
+		public string Description => description;
 
 		/// <summary>
 		/// Gets the identifier.
@@ -2902,13 +3055,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The identifier.
 		/// </value>
-		public long Id
-		{
-			get
-			{
-				return this.id;
-			}
-		}
+		public long Id => id;
 
 		/// <summary>
 		/// Gets the keywords.
@@ -2927,7 +3074,7 @@ namespace System.Diagnostics.Eventing.Reader
 				{
 					if ((keywords & num2) > 0L)
 					{
-						list.Add(new EventKeyword((long)num2, this.pmReference));
+						list.Add(new EventKeyword((long)num2, pmReference));
 					}
 					num2 = num2 >> 1;
 				}
@@ -2941,13 +3088,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The level.
 		/// </value>
-		public EventLevel Level
-		{
-			get
-			{
-				return new EventLevel(this.level, this.pmReference);
-			}
-		}
+		public EventLevel Level => new EventLevel(level, pmReference);
 
 		/// <summary>
 		/// Gets the log link.
@@ -2955,13 +3096,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The log link.
 		/// </value>
-		public EventLogLink LogLink
-		{
-			get
-			{
-				return new EventLogLink(this.channelId, this.pmReference);
-			}
-		}
+		public EventLogLink LogLink => new EventLogLink(channelId, pmReference);
 
 		/// <summary>
 		/// Gets the opcode.
@@ -2969,13 +3104,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The opcode.
 		/// </value>
-		public EventOpcode Opcode
-		{
-			get
-			{
-				return new EventOpcode(this.opcode, this.pmReference);
-			}
-		}
+		public EventOpcode Opcode => new EventOpcode(opcode, pmReference);
 
 		/// <summary>
 		/// Gets the task.
@@ -2983,13 +3112,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The task.
 		/// </value>
-		public EventTask Task
-		{
-			get
-			{
-				return new EventTask(this.task, this.pmReference);
-			}
-		}
+		public EventTask Task => new EventTask(task, pmReference);
 
 		/// <summary>
 		/// Gets the template.
@@ -2997,13 +3120,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The template.
 		/// </value>
-		public string Template
-		{
-			get
-			{
-				return this.template;
-			}
-		}
+		public string Template => template;
 
 		/// <summary>
 		/// Gets the version.
@@ -3011,13 +3128,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The version.
 		/// </value>
-		public byte Version
-		{
-			get
-			{
-				return this.version;
-			}
-		}
+		public byte Version => version;
 	}
 
 	/// <summary>
@@ -3040,7 +3151,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.value = value;
 			this.pmReference = pmReference;
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		internal EventOpcode(string name, int value, string displayName)
@@ -3048,8 +3159,8 @@ namespace System.Diagnostics.Eventing.Reader
 			this.value = value;
 			this.name = name;
 			this.displayName = displayName;
-			this.dataReady = true;
-			this.syncObject = new object();
+			dataReady = true;
+			syncObject = new object();
 		}
 
 		// Properties
@@ -3063,8 +3174,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.displayName;
+				PrepareData();
+				return displayName;
 			}
 		}
 
@@ -3078,8 +3189,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.name;
+				PrepareData();
+				return name;
 			}
 		}
 
@@ -3089,31 +3200,25 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The value.
 		/// </value>
-		public int Value
-		{
-			get
-			{
-				return this.value;
-			}
-		}
+		public int Value => value;
 
 		internal void PrepareData()
 		{
-			lock (this.syncObject)
+			lock (syncObject)
 			{
-				if (!this.dataReady)
+				if (!dataReady)
 				{
-					IEnumerable<EventOpcode> opcodes = this.pmReference.Opcodes;
-					this.name = null;
-					this.displayName = null;
-					this.dataReady = true;
+					IEnumerable<EventOpcode> opcodes = pmReference.Opcodes;
+					name = null;
+					displayName = null;
+					dataReady = true;
 					foreach (EventOpcode opcode in opcodes)
 					{
-						if (opcode.Value == this.value)
+						if (opcode.Value == value)
 						{
-							this.name = opcode.Name;
-							this.displayName = opcode.DisplayName;
-							this.dataReady = true;
+							name = opcode.Name;
+							displayName = opcode.DisplayName;
+							dataReady = true;
 							break;
 						}
 					}
@@ -3144,13 +3249,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The value.
 		/// </value>
-		public object Value
-		{
-			get
-			{
-				return this.value;
-			}
-		}
+		public object Value => value;
 	}
 
 	/// <summary>
@@ -3170,7 +3269,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -3395,6 +3494,33 @@ namespace System.Diagnostics.Eventing.Reader
 	}
 
 	/// <summary>
+	/// the custom event handler args. 
+	/// </summary> 
+	[System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
+	public sealed class EventRecordWrittenEventArgs : EventArgs
+	{
+
+		private EventRecord record;
+		private Exception exception;
+
+		internal EventRecordWrittenEventArgs(EventLogRecord record) { this.record = record; }
+		internal EventRecordWrittenEventArgs(EventLogException exception) { this.exception = exception; }
+
+		/// <summary>
+		/// The EventRecord being notified. 
+		/// NOTE: If non null, then caller is required to call Dispose().
+		/// </summary>
+		public EventRecord EventRecord => record;
+
+		/// <summary> 
+		/// If any error occurred during subscription, this will be non-null.
+		/// After a notification containing an exception, no more notifications will 
+		/// be made for this subscription.
+		/// </summary>
+		public Exception EventException => exception;
+	}
+
+	/// <summary>
 	/// 
 	/// </summary>
 	[HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
@@ -3415,7 +3541,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.value = value;
 			this.pmReference = pmReference;
-			this.syncObject = new object();
+			syncObject = new object();
 		}
 
 		internal EventTask(string name, int value, string displayName, Guid guid)
@@ -3424,8 +3550,8 @@ namespace System.Diagnostics.Eventing.Reader
 			this.name = name;
 			this.displayName = displayName;
 			this.guid = guid;
-			this.dataReady = true;
-			this.syncObject = new object();
+			dataReady = true;
+			syncObject = new object();
 		}
 
 		// Properties
@@ -3439,8 +3565,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.displayName;
+				PrepareData();
+				return displayName;
 			}
 		}
 
@@ -3454,8 +3580,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.guid;
+				PrepareData();
+				return guid;
 			}
 		}
 
@@ -3469,8 +3595,8 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				this.PrepareData();
-				return this.name;
+				PrepareData();
+				return name;
 			}
 		}
 
@@ -3480,33 +3606,27 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The value.
 		/// </value>
-		public int Value
-		{
-			get
-			{
-				return this.value;
-			}
-		}
+		public int Value => value;
 
 		internal void PrepareData()
 		{
-			lock (this.syncObject)
+			lock (syncObject)
 			{
-				if (!this.dataReady)
+				if (!dataReady)
 				{
-					IEnumerable<EventTask> tasks = this.pmReference.Tasks;
-					this.name = null;
-					this.displayName = null;
-					this.guid = Guid.Empty;
-					this.dataReady = true;
+					IEnumerable<EventTask> tasks = pmReference.Tasks;
+					name = null;
+					displayName = null;
+					guid = Guid.Empty;
+					dataReady = true;
 					foreach (EventTask task in tasks)
 					{
-						if (task.Value == this.value)
+						if (task.Value == value)
 						{
-							this.name = task.Name;
-							this.displayName = task.DisplayName;
-							this.guid = task.EventGuid;
-							this.dataReady = true;
+							name = task.Name;
+							displayName = task.DisplayName;
+							guid = task.EventGuid;
+							dataReady = true;
 							break;
 						}
 					}
@@ -3564,8 +3684,8 @@ namespace System.Diagnostics.Eventing.Reader
 		[SecurityCritical, SecurityTreatAsSafe]
 		internal ProviderMetadata(string providerName, EventLogSession session, CultureInfo targetCultureInfo, string logFilePath)
 		{
-			this.handle = EventLogHandle.Zero;
-			this.defaultProviderHandle = EventLogHandle.Zero;
+			handle = EventLogHandle.Zero;
+			defaultProviderHandle = EventLogHandle.Zero;
 			EventLogPermissionHolder.GetEventLogPermission().Demand();
 			if (targetCultureInfo == null)
 			{
@@ -3577,10 +3697,10 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			this.session = session;
 			this.providerName = providerName;
-			this.cultureInfo = targetCultureInfo;
+			cultureInfo = targetCultureInfo;
 			this.logFilePath = logFilePath;
-			this.handle = NativeWrapper.EvtOpenProviderMetadata(this.session.Handle, this.providerName, this.logFilePath, this.cultureInfo.LCID, 0);
-			this.syncObject = new object();
+			handle = NativeWrapper.EvtOpenProviderMetadata(this.session.Handle, this.providerName, this.logFilePath, cultureInfo.LCID, 0);
+			syncObject = new object();
 		}
 
 		// Nested Types
@@ -3604,13 +3724,13 @@ namespace System.Diagnostics.Eventing.Reader
 			[SecurityCritical]
 			get
 			{
-				uint providerMessageID = this.ProviderMessageID;
+				uint providerMessageID = ProviderMessageID;
 				if (providerMessageID == uint.MaxValue)
 				{
 					return null;
 				}
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
-				return NativeWrapper.EvtFormatMessage(this.handle, providerMessageID);
+				return NativeWrapper.EvtFormatMessage(handle, providerMessageID);
 			}
 		}
 
@@ -3627,7 +3747,7 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 				List<EventMetadata> list = new List<EventMetadata>();
-				EventLogHandle eventMetadataEnum = NativeWrapper.EvtOpenEventMetadataEnum(this.handle, 0);
+				EventLogHandle eventMetadataEnum = NativeWrapper.EvtOpenEventMetadataEnum(handle, 0);
 				using (eventMetadataEnum)
 				{
 					EventLogHandle handle2;
@@ -3653,7 +3773,7 @@ namespace System.Diagnostics.Eventing.Reader
 							}
 							else
 							{
-								str2 = NativeWrapper.EvtFormatMessage(this.handle, (uint)num8);
+								str2 = NativeWrapper.EvtFormatMessage(handle, (uint)num8);
 							}
 							EventMetadata item = new EventMetadata(id, version, channelId, level, opcode, task, keywords, template, str2, this);
 							list.Add(item);
@@ -3675,7 +3795,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				string uriString = (string)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataHelpLink);
+				string uriString = (string)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataHelpLink);
 				if ((uriString != null) && (uriString.Length != 0))
 				{
 					return new Uri(uriString);
@@ -3690,13 +3810,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The identifier.
 		/// </value>
-		public Guid Id
-		{
-			get
-			{
-				return (Guid)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherGuid);
-			}
-		}
+		public Guid Id => (Guid)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherGuid);
 
 		/// <summary>
 		/// Gets the keywords.
@@ -3708,15 +3822,15 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.keywords != null)
+					if (keywords != null)
 					{
-						return this.keywords;
+						return keywords;
 					}
-					this.keywords = ((List<EventKeyword>)this.GetProviderListProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords)).AsReadOnly();
+					keywords = ((List<EventKeyword>)GetProviderListProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords)).AsReadOnly();
 				}
-				return this.keywords;
+				return keywords;
 			}
 		}
 
@@ -3730,15 +3844,15 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.levels != null)
+					if (levels != null)
 					{
-						return this.levels;
+						return levels;
 					}
-					this.levels = ((List<EventLevel>)this.GetProviderListProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels)).AsReadOnly();
+					levels = ((List<EventLevel>)GetProviderListProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels)).AsReadOnly();
 				}
-				return this.levels;
+				return levels;
 			}
 		}
 
@@ -3757,14 +3871,14 @@ namespace System.Diagnostics.Eventing.Reader
 				EventLogHandle zero = EventLogHandle.Zero;
 				try
 				{
-					lock (this.syncObject)
+					lock (syncObject)
 					{
 						if (this.channelReferences != null)
 						{
 							return this.channelReferences;
 						}
 						EventLogPermissionHolder.GetEventLogPermission().Demand();
-						zero = NativeWrapper.EvtGetPublisherMetadataPropertyHandle(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferences);
+						zero = NativeWrapper.EvtGetPublisherMetadataPropertyHandle(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferences);
 						int capacity = NativeWrapper.EvtGetObjectArraySize(zero);
 						List<EventLogLink> list = new List<EventLogLink>(capacity);
 						for (int i = 0; i < capacity; i++)
@@ -3789,7 +3903,7 @@ namespace System.Diagnostics.Eventing.Reader
 							}
 							else
 							{
-								str2 = NativeWrapper.EvtFormatMessage(this.handle, (uint)num5);
+								str2 = NativeWrapper.EvtFormatMessage(handle, (uint)num5);
 							}
 							if ((str2 == null) && flag)
 							{
@@ -3811,11 +3925,11 @@ namespace System.Diagnostics.Eventing.Reader
 								}
 								if (num5 != -1)
 								{
-									if (this.defaultProviderHandle.IsInvalid)
+									if (defaultProviderHandle.IsInvalid)
 									{
-										this.defaultProviderHandle = NativeWrapper.EvtOpenProviderMetadata(this.session.Handle, null, null, this.cultureInfo.LCID, 0);
+										defaultProviderHandle = NativeWrapper.EvtOpenProviderMetadata(session.Handle, null, null, cultureInfo.LCID, 0);
 									}
-									str2 = NativeWrapper.EvtFormatMessage(this.defaultProviderHandle, (uint)num5);
+									str2 = NativeWrapper.EvtFormatMessage(defaultProviderHandle, (uint)num5);
 								}
 							}
 							list.Add(new EventLogLink(strA, flag, str2, channelId));
@@ -3838,13 +3952,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The message file path.
 		/// </value>
-		public string MessageFilePath
-		{
-			get
-			{
-				return (string)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataMessageFilePath);
-			}
-		}
+		public string MessageFilePath => (string)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataMessageFilePath);
 
 		/// <summary>
 		/// Gets the name.
@@ -3852,13 +3960,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The name.
 		/// </value>
-		public string Name
-		{
-			get
-			{
-				return this.providerName;
-			}
-		}
+		public string Name => providerName;
 
 		/// <summary>
 		/// Gets the opcodes.
@@ -3870,15 +3972,15 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.opcodes != null)
+					if (opcodes != null)
 					{
-						return this.opcodes;
+						return opcodes;
 					}
-					this.opcodes = ((List<EventOpcode>)this.GetProviderListProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes)).AsReadOnly();
+					opcodes = ((List<EventOpcode>)GetProviderListProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes)).AsReadOnly();
 				}
-				return this.opcodes;
+				return opcodes;
 			}
 		}
 
@@ -3888,13 +3990,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The parameter file path.
 		/// </value>
-		public string ParameterFilePath
-		{
-			get
-			{
-				return (string)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataParameterFilePath);
-			}
-		}
+		public string ParameterFilePath => (string)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataParameterFilePath);
 
 		/// <summary>
 		/// Gets the resource file path.
@@ -3902,13 +3998,7 @@ namespace System.Diagnostics.Eventing.Reader
 		/// <value>
 		/// The resource file path.
 		/// </value>
-		public string ResourceFilePath
-		{
-			get
-			{
-				return (string)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataResourceFilePath);
-			}
-		}
+		public string ResourceFilePath => (string)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataResourceFilePath);
 
 		/// <summary>
 		/// Gets the tasks.
@@ -3920,58 +4010,46 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			get
 			{
-				lock (this.syncObject)
+				lock (syncObject)
 				{
-					if (this.tasks != null)
+					if (tasks != null)
 					{
-						return this.tasks;
+						return tasks;
 					}
-					this.tasks = ((List<EventTask>)this.GetProviderListProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks)).AsReadOnly();
+					tasks = ((List<EventTask>)GetProviderListProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks)).AsReadOnly();
 				}
-				return this.tasks;
+				return tasks;
 			}
 		}
 
-		internal EventLogHandle Handle
-		{
-			get
-			{
-				return this.handle;
-			}
-		}
+		internal EventLogHandle Handle => handle;
 
-		private uint ProviderMessageID
-		{
-			get
-			{
-				return (uint)NativeWrapper.EvtGetPublisherMetadataProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherMessageID);
-			}
-		}
+		private uint ProviderMessageID => (uint)NativeWrapper.EvtGetPublisherMetadataProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherMessageID);
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
 		internal void CheckReleased()
 		{
-			lock (this.syncObject)
+			lock (syncObject)
 			{
-				this.GetProviderListProperty(this.handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks);
+				GetProviderListProperty(handle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks);
 			}
 		}
 
 		internal string FindStandardKeywordDisplayName(string name, long value)
 		{
-			if (this.standardKeywords == null)
+			if (standardKeywords == null)
 			{
-				this.standardKeywords = (List<EventKeyword>)this.GetProviderListProperty(this.defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords);
+				standardKeywords = (List<EventKeyword>)GetProviderListProperty(defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords);
 			}
-			foreach (EventKeyword keyword in this.standardKeywords)
+			foreach (EventKeyword keyword in standardKeywords)
 			{
 				if ((keyword.Name == name) && (keyword.Value == value))
 				{
@@ -3983,11 +4061,11 @@ namespace System.Diagnostics.Eventing.Reader
 
 		internal string FindStandardLevelDisplayName(string name, uint value)
 		{
-			if (this.standardLevels == null)
+			if (standardLevels == null)
 			{
-				this.standardLevels = (List<EventLevel>)this.GetProviderListProperty(this.defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels);
+				standardLevels = (List<EventLevel>)GetProviderListProperty(defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels);
 			}
-			foreach (EventLevel level in this.standardLevels)
+			foreach (EventLevel level in standardLevels)
 			{
 				if ((level.Name == name) && (level.Value == value))
 				{
@@ -3999,11 +4077,11 @@ namespace System.Diagnostics.Eventing.Reader
 
 		internal string FindStandardOpcodeDisplayName(string name, uint value)
 		{
-			if (this.standardOpcodes == null)
+			if (standardOpcodes == null)
 			{
-				this.standardOpcodes = (List<EventOpcode>)this.GetProviderListProperty(this.defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes);
+				standardOpcodes = (List<EventOpcode>)GetProviderListProperty(defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes);
 			}
-			foreach (EventOpcode opcode in this.standardOpcodes)
+			foreach (EventOpcode opcode in standardOpcodes)
 			{
 				if ((opcode.Name == name) && (opcode.Value == value))
 				{
@@ -4015,11 +4093,11 @@ namespace System.Diagnostics.Eventing.Reader
 
 		internal string FindStandardTaskDisplayName(string name, uint value)
 		{
-			if (this.standardTasks == null)
+			if (standardTasks == null)
 			{
-				this.standardTasks = (List<EventTask>)this.GetProviderListProperty(this.defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks);
+				standardTasks = (List<EventTask>)GetProviderListProperty(defaultProviderHandle, UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks);
 			}
-			foreach (EventTask task in this.standardTasks)
+			foreach (EventTask task in standardTasks)
 			{
 				if ((task.Name == name) && (task.Value == value))
 				{
@@ -4101,28 +4179,28 @@ namespace System.Diagnostics.Eventing.Reader
 					string displayName = null;
 					if (num5 == -1)
 					{
-						if (providerHandle != this.defaultProviderHandle)
+						if (providerHandle != defaultProviderHandle)
 						{
-							if (this.defaultProviderHandle.IsInvalid)
+							if (defaultProviderHandle.IsInvalid)
 							{
-								this.defaultProviderHandle = NativeWrapper.EvtOpenProviderMetadata(this.session.Handle, null, null, this.cultureInfo.LCID, 0);
+								defaultProviderHandle = NativeWrapper.EvtOpenProviderMetadata(session.Handle, null, null, cultureInfo.LCID, 0);
 							}
 							switch (opcode)
 							{
 								case ObjectTypeName.Level:
-									displayName = this.FindStandardLevelDisplayName(name, num3);
+									displayName = FindStandardLevelDisplayName(name, num3);
 									goto Label_01BA;
 
 								case ObjectTypeName.Opcode:
-									displayName = this.FindStandardOpcodeDisplayName(name, num3 >> 0x10);
+									displayName = FindStandardOpcodeDisplayName(name, num3 >> 0x10);
 									goto Label_01BA;
 
 								case ObjectTypeName.Task:
-									displayName = this.FindStandardTaskDisplayName(name, num3);
+									displayName = FindStandardTaskDisplayName(name, num3);
 									goto Label_01BA;
 
 								case ObjectTypeName.Keyword:
-									displayName = this.FindStandardKeywordDisplayName(name, num4);
+									displayName = FindStandardKeywordDisplayName(name, num4);
 									goto Label_01BA;
 							}
 							displayName = null;
@@ -4191,9 +4269,9 @@ namespace System.Diagnostics.Eventing.Reader
 			{
 				EventLogPermissionHolder.GetEventLogPermission().Demand();
 			}
-			if ((this.handle != null) && !this.handle.IsInvalid)
+			if ((handle != null) && !handle.IsInvalid)
 			{
-				this.handle.Dispose();
+				handle.Dispose();
 			}
 		}
 	}
@@ -4207,13 +4285,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 		}
 
-		public static CoTaskMemSafeHandle Zero
-		{
-			get
-			{
-				return new CoTaskMemSafeHandle();
-			}
-		}
+		public static CoTaskMemSafeHandle Zero => new CoTaskMemSafeHandle();
 
 		// Properties
 		public override bool IsInvalid
@@ -4228,10 +4300,7 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
-		internal IntPtr GetMemory()
-		{
-			return base.handle;
-		}
+		internal IntPtr GetMemory() => base.handle;
 
 		internal void SetMemory(IntPtr handle)
 		{
@@ -4261,13 +4330,7 @@ namespace System.Diagnostics.Eventing.Reader
 			base.SetHandle(handle);
 		}
 
-		public static CoTaskMemUnicodeSafeHandle Zero
-		{
-			get
-			{
-				return new CoTaskMemUnicodeSafeHandle();
-			}
-		}
+		public static CoTaskMemUnicodeSafeHandle Zero => new CoTaskMemUnicodeSafeHandle();
 
 		// Properties
 		public override bool IsInvalid
@@ -4282,10 +4345,7 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 		}
 
-		internal IntPtr GetMemory()
-		{
-			return base.handle;
-		}
+		internal IntPtr GetMemory() => base.handle;
 
 		internal void SetMemory(IntPtr handle)
 		{
@@ -4314,13 +4374,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 		}
 
-		public static EventLogHandle Zero
-		{
-			get
-			{
-				return new EventLogHandle();
-			}
-		}
+		public static EventLogHandle Zero => new EventLogHandle();
 
 		// Properties
 		public override bool IsInvalid
@@ -4368,7 +4422,7 @@ namespace System.Diagnostics.Eventing.Reader
 		{
 			this.session = session;
 			this.logfile = logfile;
-			this.cache = new Dictionary<ProviderMetadataId, CacheItem>();
+			cache = new Dictionary<ProviderMetadataId, CacheItem>();
 			this.maximumCacheSize = maximumCacheSize;
 		}
 
@@ -4381,7 +4435,7 @@ namespace System.Diagnostics.Eventing.Reader
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
 				try
 				{
-					str = NativeWrapper.EvtFormatMessageRenderName(this.GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageEvent);
+					str = NativeWrapper.EvtFormatMessageRenderName(GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageEvent);
 				}
 				catch (EventLogNotFoundException)
 				{
@@ -4397,7 +4451,7 @@ namespace System.Diagnostics.Eventing.Reader
 			lock (this)
 			{
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
-				ProviderMetadata providerMetadata = this.GetProviderMetadata(key);
+				ProviderMetadata providerMetadata = GetProviderMetadata(key);
 				try
 				{
 					str = NativeWrapper.EvtFormatMessageFormatDescription(providerMetadata.Handle, eventHandle, values);
@@ -4416,7 +4470,7 @@ namespace System.Diagnostics.Eventing.Reader
 			lock (this)
 			{
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
-				return NativeWrapper.EvtFormatMessageRenderKeywords(this.GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageKeyword);
+				return NativeWrapper.EvtFormatMessageRenderKeywords(GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageKeyword);
 			}
 		}
 
@@ -4426,7 +4480,7 @@ namespace System.Diagnostics.Eventing.Reader
 			lock (this)
 			{
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
-				return NativeWrapper.EvtFormatMessageRenderName(this.GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageLevel);
+				return NativeWrapper.EvtFormatMessageRenderName(GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageLevel);
 			}
 		}
 
@@ -4436,7 +4490,7 @@ namespace System.Diagnostics.Eventing.Reader
 			lock (this)
 			{
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
-				return NativeWrapper.EvtFormatMessageRenderName(this.GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageOpcode);
+				return NativeWrapper.EvtFormatMessageRenderName(GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageOpcode);
 			}
 		}
 
@@ -4446,7 +4500,7 @@ namespace System.Diagnostics.Eventing.Reader
 			lock (this)
 			{
 				ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
-				return NativeWrapper.EvtFormatMessageRenderName(this.GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageTask);
+				return NativeWrapper.EvtFormatMessageRenderName(GetProviderMetadata(key).Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageTask);
 			}
 		}
 
@@ -4457,20 +4511,20 @@ namespace System.Diagnostics.Eventing.Reader
 
 		private void AddCacheEntry(ProviderMetadataId key, ProviderMetadata pm)
 		{
-			if (this.IsCacheFull())
+			if (IsCacheFull())
 			{
-				this.FlushOldestEntry();
+				FlushOldestEntry();
 			}
 			CacheItem item = new CacheItem(pm);
-			this.cache.Add(key, item);
+			cache.Add(key, item);
 		}
 
 		private void DeleteCacheEntry(ProviderMetadataId key)
 		{
-			if (this.IsProviderinCache(key))
+			if (IsProviderinCache(key))
 			{
-				CacheItem item = this.cache[key];
-				this.cache.Remove(key);
+				CacheItem item = cache[key];
+				cache.Remove(key);
 				item.ProviderMetadata.Dispose();
 			}
 		}
@@ -4480,7 +4534,7 @@ namespace System.Diagnostics.Eventing.Reader
 			double totalMilliseconds = -10.0;
 			DateTime now = DateTime.Now;
 			ProviderMetadataId key = null;
-			foreach (KeyValuePair<ProviderMetadataId, CacheItem> pair in this.cache)
+			foreach (KeyValuePair<ProviderMetadataId, CacheItem> pair in cache)
 			{
 				TimeSpan span = now.Subtract(pair.Value.TheTime);
 				if (span.TotalMilliseconds >= totalMilliseconds)
@@ -4491,27 +4545,27 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			if (key != null)
 			{
-				this.DeleteCacheEntry(key);
+				DeleteCacheEntry(key);
 			}
 		}
 
 		private ProviderMetadata GetProviderMetadata(ProviderMetadataId key)
 		{
-			if (!this.IsProviderinCache(key))
+			if (!IsProviderinCache(key))
 			{
 				ProviderMetadata metadata;
 				try
 				{
-					metadata = new ProviderMetadata(key.ProviderName, this.session, key.TheCultureInfo, this.logfile);
+					metadata = new ProviderMetadata(key.ProviderName, session, key.TheCultureInfo, logfile);
 				}
 				catch (EventLogNotFoundException)
 				{
-					metadata = new ProviderMetadata(key.ProviderName, this.session, key.TheCultureInfo);
+					metadata = new ProviderMetadata(key.ProviderName, session, key.TheCultureInfo);
 				}
-				this.AddCacheEntry(key, metadata);
+				AddCacheEntry(key, metadata);
 				return metadata;
 			}
-			CacheItem cacheItem = this.cache[key];
+			CacheItem cacheItem = cache[key];
 			ProviderMetadata providerMetadata = cacheItem.ProviderMetadata;
 			try
 			{
@@ -4520,29 +4574,23 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 			catch (EventLogException)
 			{
-				this.DeleteCacheEntry(key);
+				DeleteCacheEntry(key);
 				try
 				{
-					providerMetadata = new ProviderMetadata(key.ProviderName, this.session, key.TheCultureInfo, this.logfile);
+					providerMetadata = new ProviderMetadata(key.ProviderName, session, key.TheCultureInfo, logfile);
 				}
 				catch (EventLogNotFoundException)
 				{
-					providerMetadata = new ProviderMetadata(key.ProviderName, this.session, key.TheCultureInfo);
+					providerMetadata = new ProviderMetadata(key.ProviderName, session, key.TheCultureInfo);
 				}
-				this.AddCacheEntry(key, providerMetadata);
+				AddCacheEntry(key, providerMetadata);
 			}
 			return providerMetadata;
 		}
 
-		private bool IsCacheFull()
-		{
-			return (this.cache.Count == this.maximumCacheSize);
-		}
+		private bool IsCacheFull() => (cache.Count == maximumCacheSize);
 
-		private bool IsProviderinCache(ProviderMetadataId key)
-		{
-			return this.cache.ContainsKey(key);
-		}
+		private bool IsProviderinCache(ProviderMetadataId key) => cache.ContainsKey(key);
 
 		// Nested Types
 		private class CacheItem
@@ -4556,27 +4604,21 @@ namespace System.Diagnostics.Eventing.Reader
 			public CacheItem(ProviderMetadata pm)
 			{
 				this.pm = pm;
-				this.theTime = DateTime.Now;
+				theTime = DateTime.Now;
 			}
 
 			// Properties
-			public ProviderMetadata ProviderMetadata
-			{
-				get
-				{
-					return this.pm;
-				}
-			}
+			public ProviderMetadata ProviderMetadata => pm;
 
 			public DateTime TheTime
 			{
 				get
 				{
-					return this.theTime;
+					return theTime;
 				}
 				set
 				{
-					this.theTime = value;
+					theTime = value;
 				}
 			}
 		}
@@ -4596,21 +4638,9 @@ namespace System.Diagnostics.Eventing.Reader
 			}
 
 			// Properties
-			public string ProviderName
-			{
-				get
-				{
-					return this.providerName;
-				}
-			}
+			public string ProviderName => providerName;
 
-			public CultureInfo TheCultureInfo
-			{
-				get
-				{
-					return this.cultureInfo;
-				}
-			}
+			public CultureInfo TheCultureInfo => cultureInfo;
 
 			public override bool Equals(object obj)
 			{
@@ -4619,13 +4649,10 @@ namespace System.Diagnostics.Eventing.Reader
 				{
 					return false;
 				}
-				return (this.providerName.Equals(id.providerName) && (this.cultureInfo == id.cultureInfo));
+				return (providerName.Equals(id.providerName) && (cultureInfo == id.cultureInfo));
 			}
 
-			public override int GetHashCode()
-			{
-				return (this.providerName.GetHashCode() ^ this.cultureInfo.GetHashCode());
-			}
+			public override int GetHashCode() => (providerName.GetHashCode() ^ cultureInfo.GetHashCode());
 		}
 	}
 	internal class NativeWrapper
@@ -6201,6 +6228,16 @@ namespace System.Diagnostics.Eventing.Reader
 			EvtSeekRelativeToFirst = 1,
 			EvtSeekRelativeToLast = 2,
 			EvtSeekStrict = 0x10000
+		}
+
+		[Flags]
+		internal enum EvtSubscribeFlags
+		{
+			EvtSubscribeToFutureEvents = 1,
+			EvtSubscribeStartAtOldestRecord = 2,
+			EvtSubscribeStartAfterBookmark = 3,
+			EvtSubscribeTolerateQueryErrors = 0x1000,
+			EvtSubscribeStrict = 0x10000
 		}
 
 		internal enum EvtVariantType

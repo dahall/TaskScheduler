@@ -153,6 +153,12 @@
     <Compile Include="ScriptTestDlg.Designer.cs">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskEventViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskEventViewer.Designer.cs">
+      <DependentUpon>TaskEventViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSMMCMockup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScriptTestDlg.resx">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEventViewer.resx">
+      <DependentUpon>TaskEventViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>

@@ -20,7 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private TaskEvent curEvent;
-		private TaskEventEnumerator eventEnum;
+		private TaskEventLog.TaskEventEnumerator eventEnum;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EventViewerDialog"/> class.
@@ -46,7 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (log != null)
 			{
-				eventEnum = log.GetEnumerator() as TaskEventEnumerator;
+				eventEnum = log.GetEnumerator() as TaskEventLog.TaskEventEnumerator;
 				eventEnum.Seek(CurrentEvent.EventRecord.Bookmark);
 			}
 			else

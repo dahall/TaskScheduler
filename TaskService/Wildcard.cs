@@ -25,11 +25,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A regular expression equivalent of the given wildcard.</returns>
 		public static string WildcardToRegex(string pattern)
 		{
-			string s = "^" + Regex.Escape(pattern) + "$"; s = Regex.Replace(s, @"(?<!\\)\\\*", @".*"); // Negative Lookbehind
+			string s = Regex.Escape(pattern);
+			s = Regex.Replace(Regex.Escape(pattern), @"(?<!\\)\\\*", @".*"); // Negative Lookbehind
 			s = Regex.Replace(s, @"\\\\\\\*", @"\*");
 			s = Regex.Replace(s, @"(?<!\\)\\\?", @".");  // Negative Lookbehind
 			s = Regex.Replace(s, @"\\\\\\\?", @"\?");
-			return Regex.Replace(s, @"\\\\\\\\", @"\\"); 
+			return string.Concat("^", Regex.Replace(s, @"\\\\\\\\", @"\\"), "$");
 		}
 	}
 }
