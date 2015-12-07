@@ -390,8 +390,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
 		{
-			foreach (NameValuePair item in e.NewItems)
-				item.AttributedXmlFormat = AttributedXmlFormat;
+			if (e.NewItems != null)
+				foreach (NameValuePair item in e.NewItems)
+					item.AttributedXmlFormat = AttributedXmlFormat;
 			CollectionChanged?.Invoke(this, e);
 		}
 

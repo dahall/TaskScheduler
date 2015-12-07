@@ -31,52 +31,80 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComHandlerActionUI));
 			this.getCLSIDButton = new System.Windows.Forms.Button();
+			this.clsidMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.lookupCLSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.manuallyEnterCLSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.comDataText = new System.Windows.Forms.TextBox();
 			this.comDataLabel = new System.Windows.Forms.Label();
 			this.comCLSIDText = new System.Windows.Forms.TextBox();
 			this.comCLSIDLabel = new System.Windows.Forms.Label();
 			this.comIntroLabel = new System.Windows.Forms.Label();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+			this.clsidMenuStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// getCLSIDButton
 			// 
 			resources.ApplyResources(this.getCLSIDButton, "getCLSIDButton");
+			this.getCLSIDButton.CausesValidation = false;
+			this.getCLSIDButton.ContextMenuStrip = this.clsidMenuStrip;
 			this.getCLSIDButton.Name = "getCLSIDButton";
-			this.toolTip.SetToolTip(this.getCLSIDButton, resources.GetString("getCLSIDButton.ToolTip"));
 			this.getCLSIDButton.UseVisualStyleBackColor = true;
 			this.getCLSIDButton.Click += new System.EventHandler(this.getCLSIDButton_Click);
+			// 
+			// clsidMenuStrip
+			// 
+			this.clsidMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lookupCLSIDToolStripMenuItem,
+            this.manuallyEnterCLSIDToolStripMenuItem});
+			this.clsidMenuStrip.Name = "clsidMenuStrip";
+			this.clsidMenuStrip.ShowImageMargin = false;
+			resources.ApplyResources(this.clsidMenuStrip, "clsidMenuStrip");
+			// 
+			// lookupCLSIDToolStripMenuItem
+			// 
+			this.lookupCLSIDToolStripMenuItem.Name = "lookupCLSIDToolStripMenuItem";
+			resources.ApplyResources(this.lookupCLSIDToolStripMenuItem, "lookupCLSIDToolStripMenuItem");
+			this.lookupCLSIDToolStripMenuItem.Click += new System.EventHandler(this.lookupCLSIDToolStripMenuItem_Click);
+			// 
+			// manuallyEnterCLSIDToolStripMenuItem
+			// 
+			this.manuallyEnterCLSIDToolStripMenuItem.Name = "manuallyEnterCLSIDToolStripMenuItem";
+			resources.ApplyResources(this.manuallyEnterCLSIDToolStripMenuItem, "manuallyEnterCLSIDToolStripMenuItem");
+			this.manuallyEnterCLSIDToolStripMenuItem.Click += new System.EventHandler(this.manuallyEnterCLSIDToolStripMenuItem_Click);
 			// 
 			// comDataText
 			// 
 			resources.ApplyResources(this.comDataText, "comDataText");
 			this.comDataText.Name = "comDataText";
-			this.toolTip.SetToolTip(this.comDataText, resources.GetString("comDataText.ToolTip"));
 			// 
 			// comDataLabel
 			// 
 			resources.ApplyResources(this.comDataLabel, "comDataLabel");
 			this.comDataLabel.Name = "comDataLabel";
-			this.toolTip.SetToolTip(this.comDataLabel, resources.GetString("comDataLabel.ToolTip"));
 			// 
 			// comCLSIDText
 			// 
 			resources.ApplyResources(this.comCLSIDText, "comCLSIDText");
 			this.comCLSIDText.Name = "comCLSIDText";
 			this.comCLSIDText.ReadOnly = true;
-			this.toolTip.SetToolTip(this.comCLSIDText, resources.GetString("comCLSIDText.ToolTip"));
+			this.comCLSIDText.Validating += new System.ComponentModel.CancelEventHandler(this.comCLSIDText_Validating);
 			// 
 			// comCLSIDLabel
 			// 
 			resources.ApplyResources(this.comCLSIDLabel, "comCLSIDLabel");
 			this.comCLSIDLabel.Name = "comCLSIDLabel";
-			this.toolTip.SetToolTip(this.comCLSIDLabel, resources.GetString("comCLSIDLabel.ToolTip"));
 			// 
 			// comIntroLabel
 			// 
 			resources.ApplyResources(this.comIntroLabel, "comIntroLabel");
 			this.comIntroLabel.Name = "comIntroLabel";
-			this.toolTip.SetToolTip(this.comIntroLabel, resources.GetString("comIntroLabel.ToolTip"));
+			// 
+			// errorProvider
+			// 
+			this.errorProvider.ContainerControl = this;
 			// 
 			// ComHandlerActionUI
 			// 
@@ -90,7 +118,8 @@
 			this.Controls.Add(this.comCLSIDText);
 			this.MinimumSize = new System.Drawing.Size(343, 89);
 			this.Name = "ComHandlerActionUI";
-			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
+			this.clsidMenuStrip.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -105,5 +134,9 @@
 		private System.Windows.Forms.Label comCLSIDLabel;
 		private System.Windows.Forms.Label comIntroLabel;
 		private System.Windows.Forms.ToolTip toolTip;
+		private System.Windows.Forms.ContextMenuStrip clsidMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem lookupCLSIDToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem manuallyEnterCLSIDToolStripMenuItem;
+		private System.Windows.Forms.ErrorProvider errorProvider;
 	}
 }

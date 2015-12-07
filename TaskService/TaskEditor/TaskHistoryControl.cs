@@ -17,7 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private Task task;
 		private int selectedIndex = -1;
 		private IList<ListViewItem> vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
-		private TaskEventLog.TaskEventEnumerator vevEnum;
+		private TaskEventEnumerator vevEnum;
 		private TaskEventLog vlog;
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace Microsoft.Win32.TaskScheduler
 				historyListView.Items.Clear();
 				historyListView.VirtualMode = true;
 				vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
-				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventLog.TaskEventEnumerator;
+				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
 			}
 			else
 			{

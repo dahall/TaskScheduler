@@ -279,28 +279,29 @@ namespace TestTaskService
 				const string taskName = "Test";
 
 				// Create a new task definition and assign properties
-				//TaskDefinition td = ts.NewTask();
-				//td.RegistrationInfo.Description = "Test for editor";
-				//td.RegistrationInfo.Author = "incaunu";
-				//td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
+				TaskDefinition td = ts.NewTask();
+				td.RegistrationInfo.Description = "Test for editor";
+				td.RegistrationInfo.Author = "incaunu";
+				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
 				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 				eTrig.ValueQueries.Add("Name", "Value");
 				td.Triggers.Add(eTrig);*/
-				//td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
+				td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
+				td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
 				//EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
 				//ea.HeaderFields.Add("reply-to", "dh@mail.com");
 				//ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
 				//WriteXml(td, taskName);
 				//using (var op = new TaskOptionsEditor(t, true, false))
 				//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
-				//Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
 				//System.Converter<DateTime, string> d = ints => ints == DateTime.MinValue ? "Never" : ints.ToString();
 				//output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 				//	t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
 				//WriteXml(t);
 
 				// Register then show task again
-				while (DisplayTask(ts.GetTask("Maint"), true) != null)
+				while (DisplayTask(t, true) != null)
 				{
 					Task t2 = editorForm.Task;
 					output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
@@ -444,19 +445,19 @@ namespace TestTaskService
 				//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
 
 				//td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromSeconds(8), EndBoundary = DateTime.Now + TimeSpan.FromSeconds(20) });
-				td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false, EndBoundary = DateTime.Today.AddDays(30) });
+				//td.Triggers.Add(new WeeklyTrigger { StartBoundary = DateTime.Today + TimeSpan.FromHours(2), DaysOfWeek = DaysOfTheWeek.Friday, Enabled = false, EndBoundary = DateTime.Today.AddDays(30) });
 
 				//td.Settings.StartWhenAvailable = true;
 				//td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
 				td.Settings.DisallowStartIfOnBatteries = false;
 				td.Settings.StopIfGoingOnBatteries = false;
-				td.Settings.IdleSettings.StopOnIdleEnd = false;
-				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
+				//td.Settings.IdleSettings.StopOnIdleEnd = false;
+				//td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
 				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
-				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "Everyone", null, TaskLogonType.Group);
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				//var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "Everyone", null, TaskLogonType.Group);
+				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				//t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";

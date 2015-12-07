@@ -213,44 +213,44 @@
   <data name="settingsGroup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;settingsTabs.Name" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.Parent" xml:space="preserve">
-    <value>settingsGroup</value>
-  </data>
-  <data name="&gt;&gt;settingsTabs.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 92</value>
-  </data>
-  <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 359</value>
-  </data>
-  <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Name" xml:space="preserve">
-    <value>settingsGroup</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;settingsGroup.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="settingsTabs.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>Buttons</value>
+  </data>
+  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 110</value>
+  </data>
+  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
+    <value>execActionUI1</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
+    <value>execTab</value>
+  </data>
+  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="execTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="execTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 328</value>
+  </data>
+  <data name="execTab.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;execTab.Name" xml:space="preserve">
     <value>execTab</value>
@@ -264,6 +264,39 @@
   <data name="&gt;&gt;execTab.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 244</value>
+  </data>
+  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
+    <value>emailActionUI1</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
+    <value>emailTab</value>
+  </data>
+  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="emailTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;emailTab.Name" xml:space="preserve">
     <value>emailTab</value>
   </data>
@@ -276,6 +309,39 @@
   <data name="&gt;&gt;emailTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 261</value>
+  </data>
+  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
+    <value>showMessageActionUI1</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
+    <value>messageTab</value>
+  </data>
+  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="messageTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;messageTab.Name" xml:space="preserve">
     <value>messageTab</value>
   </data>
@@ -287,6 +353,42 @@
   </data>
   <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="comHandlerActionUI1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="comHandlerActionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="comHandlerActionUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>343, 89</value>
+  </data>
+  <data name="comHandlerActionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 89</value>
+  </data>
+  <data name="comHandlerActionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Name" xml:space="preserve">
+    <value>comHandlerActionUI1</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
+    <value>comTab</value>
+  </data>
+  <data name="&gt;&gt;comHandlerActionUI1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 331</value>
+  </data>
+  <data name="comTab.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;comTab.Name" xml:space="preserve">
     <value>comTab</value>
@@ -327,239 +429,29 @@
   <data name="&gt;&gt;settingsTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
-    <value>execActionUI1</value>
+  <data name="settingsGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 92</value>
   </data>
-  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  <data name="settingsGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>476, 359</value>
   </data>
-  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
-    <value>execTab</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="execTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="execTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="execTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 328</value>
-  </data>
-  <data name="execTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;execTab.Name" xml:space="preserve">
-    <value>execTab</value>
-  </data>
-  <data name="&gt;&gt;execTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;execTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;execTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="execActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="execActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="execActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 110</value>
-  </data>
-  <data name="execActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Name" xml:space="preserve">
-    <value>execActionUI1</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ExecActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.Parent" xml:space="preserve">
-    <value>execTab</value>
-  </data>
-  <data name="&gt;&gt;execActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
-    <value>emailActionUI1</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
-    <value>emailTab</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="emailTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="emailTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 331</value>
-  </data>
-  <data name="emailTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Name" xml:space="preserve">
-    <value>emailTab</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;emailTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;emailTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="emailActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="emailActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="emailActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 244</value>
-  </data>
-  <data name="emailActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Name" xml:space="preserve">
-    <value>emailActionUI1</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EmailActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.Parent" xml:space="preserve">
-    <value>emailTab</value>
-  </data>
-  <data name="&gt;&gt;emailActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
-    <value>showMessageActionUI1</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
-    <value>messageTab</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="messageTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="messageTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 331</value>
-  </data>
-  <data name="messageTab.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Name" xml:space="preserve">
-    <value>messageTab</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;messageTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
-  </data>
-  <data name="&gt;&gt;messageTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="showMessageActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="showMessageActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="showMessageActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 261</value>
-  </data>
-  <data name="showMessageActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Name" xml:space="preserve">
-    <value>showMessageActionUI1</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ShowMessageActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.Parent" xml:space="preserve">
-    <value>messageTab</value>
-  </data>
-  <data name="&gt;&gt;showMessageActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Name" xml:space="preserve">
-    <value>comHandlerActionUI1</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
-    <value>comTab</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="comTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="comTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 331</value>
-  </data>
-  <data name="comTab.TabIndex" type="System.Int32, mscorlib">
+  <data name="settingsGroup.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;comTab.Name" xml:space="preserve">
-    <value>comTab</value>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="&gt;&gt;comTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;settingsGroup.Name" xml:space="preserve">
+    <value>settingsGroup</value>
   </data>
-  <data name="&gt;&gt;comTab.Parent" xml:space="preserve">
-    <value>settingsTabs</value>
+  <data name="&gt;&gt;settingsGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comTab.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;settingsGroup.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="comHandlerActionUI1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="comHandlerActionUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="comHandlerActionUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>343, 89</value>
-  </data>
-  <data name="comHandlerActionUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 89</value>
-  </data>
-  <data name="comHandlerActionUI1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Name" xml:space="preserve">
-    <value>comHandlerActionUI1</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ComHandlerActionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.Parent" xml:space="preserve">
-    <value>comTab</value>
-  </data>
-  <data name="&gt;&gt;comHandlerActionUI1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;settingsGroup.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>

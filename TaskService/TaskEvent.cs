@@ -516,6 +516,88 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
+	/// An enumerator over a task's history of events.
+	/// </summary>
+	public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>, IDisposable
+	{
+		private EventRecord curRec;
+		private EventLogReader log;
+
+		internal TaskEventEnumerator(EventLogReader log)
+		{
+			this.log = log;
+		}
+
+		/// <summary>
+		/// Gets the element in the collection at the current position of the enumerator.
+		/// </summary>
+		/// <returns>
+		/// The element in the collection at the current position of the enumerator.
+		///   </returns>
+		public TaskEvent Current => new TaskEvent(curRec);
+
+		/// <summary>
+		/// Gets the element in the collection at the current position of the enumerator.
+		/// </summary>
+		/// <returns>
+		/// The element in the collection at the current position of the enumerator.
+		///   </returns>
+		object System.Collections.IEnumerator.Current => Current;
+
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		public void Dispose()
+		{
+			log.CancelReading();
+			log.Dispose();
+			log = null;
+		}
+
+		/// <summary>
+		/// Advances the enumerator to the next element of the collection.
+		/// </summary>
+		/// <returns>
+		/// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+		/// </returns>
+		/// <exception cref="T:System.InvalidOperationException">
+		/// The collection was modified after the enumerator was created.
+		///   </exception>
+		public bool MoveNext() => (curRec = log.ReadEvent()) != null;
+
+		/// <summary>
+		/// Sets the enumerator to its initial position, which is before the first element in the collection.
+		/// </summary>
+		/// <exception cref="T:System.InvalidOperationException">
+		/// The collection was modified after the enumerator was created.
+		///   </exception>
+		public void Reset()
+		{
+			log.Seek(System.IO.SeekOrigin.Begin, 0L);
+		}
+
+		/// <summary>
+		/// Seeks the specified bookmark.
+		/// </summary>
+		/// <param name="bookmark">The bookmark.</param>
+		/// <param name="offset">The offset.</param>
+		public void Seek(EventBookmark bookmark, long offset = 0L)
+		{
+			log.Seek(bookmark, offset);
+		}
+
+		/// <summary>
+		/// Seeks the specified origin.
+		/// </summary>
+		/// <param name="origin">The origin.</param>
+		/// <param name="offset">The offset.</param>
+		public void Seek(System.IO.SeekOrigin origin, long offset)
+		{
+			log.Seek(origin, offset);
+		}
+	}
+
+	/// <summary>
 	/// Historical event log for a task. Only available for Windows Vista and Windows Server 2008 and later systems.
 	/// </summary>
 	public sealed class TaskEventLog : IEnumerable<TaskEvent>
@@ -729,16 +811,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
 		/// </returns>
-		public IEnumerator<TaskEvent> GetEnumerator() => GetEnumerator(EnumerateInReverse);
+		IEnumerator<TaskEvent> IEnumerable<TaskEvent>.GetEnumerator() => GetEnumerator(EnumerateInReverse);
 
 		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
 		/// </summary>
 		/// <param name="reverse">if set to <c>true</c> reverse.</param>
 		/// <returns>
-		/// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+		/// A <see cref="TaskEventEnumerator" /> that can be used to iterate through the collection.
 		/// </returns>
-		public IEnumerator<TaskEvent> GetEnumerator(bool reverse)
+		public TaskEventEnumerator GetEnumerator(bool reverse = false)
 		{
 			q.ReverseDirection = !reverse;
 			return new TaskEventEnumerator(new EventLogReader(q));
@@ -753,87 +835,5 @@ namespace Microsoft.Win32.TaskScheduler
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
 		internal EventLogQuery Query => q;
-
-		/// <summary>
-		/// An enumerator over a task's history of events.
-		/// </summary>
-		public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>, IDisposable
-		{
-			private EventRecord curRec;
-			private EventLogReader log;
-
-			internal TaskEventEnumerator(EventLogReader log)
-			{
-				this.log = log;
-			}
-
-			/// <summary>
-			/// Gets the element in the collection at the current position of the enumerator.
-			/// </summary>
-			/// <returns>
-			/// The element in the collection at the current position of the enumerator.
-			///   </returns>
-			public TaskEvent Current => new TaskEvent(curRec);
-
-			/// <summary>
-			/// Gets the element in the collection at the current position of the enumerator.
-			/// </summary>
-			/// <returns>
-			/// The element in the collection at the current position of the enumerator.
-			///   </returns>
-			object System.Collections.IEnumerator.Current => Current;
-
-			/// <summary>
-			/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-			/// </summary>
-			public void Dispose()
-			{
-				log.CancelReading();
-				log.Dispose();
-				log = null;
-			}
-
-			/// <summary>
-			/// Advances the enumerator to the next element of the collection.
-			/// </summary>
-			/// <returns>
-			/// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
-			/// </returns>
-			/// <exception cref="T:System.InvalidOperationException">
-			/// The collection was modified after the enumerator was created.
-			///   </exception>
-			public bool MoveNext() => (curRec = log.ReadEvent()) != null;
-
-			/// <summary>
-			/// Sets the enumerator to its initial position, which is before the first element in the collection.
-			/// </summary>
-			/// <exception cref="T:System.InvalidOperationException">
-			/// The collection was modified after the enumerator was created.
-			///   </exception>
-			public void Reset()
-			{
-				log.Seek(System.IO.SeekOrigin.Begin, 0L);
-			}
-
-			/// <summary>
-			/// Seeks the specified bookmark.
-			/// </summary>
-			/// <param name="bookmark">The bookmark.</param>
-			/// <param name="offset">The offset.</param>
-			public void Seek(EventBookmark bookmark, long offset = 0L)
-			{
-				log.Seek(bookmark, offset);
-			}
-
-			/// <summary>
-			/// Seeks the specified origin.
-			/// </summary>
-			/// <param name="origin">The origin.</param>
-			/// <param name="offset">The offset.</param>
-			public void Seek(System.IO.SeekOrigin origin, long offset)
-			{
-				log.Seek(origin, offset);
-			}
-		}
 	}
 }

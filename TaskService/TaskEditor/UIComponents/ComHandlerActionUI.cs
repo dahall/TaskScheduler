@@ -9,18 +9,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		public ComHandlerActionUI()
 		{
 			InitializeComponent();
+			errorProvider.SetIconPadding(comCLSIDText, -18);
 		}
 
-		private void getCLSIDButton_Click(object sender, EventArgs e)
+		public event EventHandler KeyValueChanged;
+
+		[System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+		public Action Action
 		{
-			try
+			get
 			{
-				ComObjectSelectionDialog dlg = new ComObjectSelectionDialog();
-				dlg.SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04");
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-					ComCLSID = dlg.CLSID;
+				return new ComHandlerAction(ComCLSID, comDataText.TextLength > 0 ? comDataText.Text : null);
 			}
-			catch { }
+			set
+			{
+				ComCLSID = ((ComHandlerAction)value).ClassId;
+				comDataText.Text = ((ComHandlerAction)value).Data;
+			}
 		}
 
 		private Guid ComCLSID
@@ -47,6 +52,15 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		public bool IsActionValid() => ComCLSID != Guid.Empty;
+
+		public void Run()
+		{
+			//var dlg = new ActionEditDialog();
+			//dlg.Show(this);
+			//TaskService.RunComHandlerActionAsync(ComCLSID, i => { dlg?.Close(); dlg = null; }, comDataText.Text, -1, (i, m) => { if (dlg != null) { dlg.Text = m; } });
+		}
+
 		internal static string GetNameForCLSID(Guid guid)
 		{
 			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
@@ -60,29 +74,44 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			return null;
 		}
 
-		[System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-		public Action Action
+		private void comCLSIDText_Validating(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			get
+			if (comCLSIDText.ReadOnly && comCLSIDText.TextLength == 0)
+				return;
+
+			Guid? og = null;
+			try { og = new Guid(comCLSIDText.Text); } catch { }
+			if (og.HasValue)
 			{
-				return new ComHandlerAction(ComCLSID, comDataText.TextLength > 0 ? comDataText.Text : null);
+				errorProvider.SetError(comCLSIDText, "");
 			}
-			set
+			else
 			{
-				ComCLSID = ((ComHandlerAction)value).ClassId;
-				comDataText.Text = ((ComHandlerAction)value).Data;
+				errorProvider.SetError(comCLSIDText, "Invalid GUID format for CLSID");
+				e.Cancel = true;
 			}
 		}
 
-		public void Run()
+		private void getCLSIDButton_Click(object sender, EventArgs e)
 		{
-			//var dlg = new ActionEditDialog();
-			//dlg.Show(this);
-			//TaskService.RunComHandlerActionAsync(ComCLSID, i => { dlg?.Close(); dlg = null; }, comDataText.Text, -1, (i, m) => { if (dlg != null) { dlg.Text = m; } });
+			clsidMenuStrip.Show(getCLSIDButton, new System.Drawing.Point(0, getCLSIDButton.Height));
 		}
 
-		public bool IsActionValid() => ComCLSID != Guid.Empty;
+		private void lookupCLSIDToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				ComObjectSelectionDialog dlg = new ComObjectSelectionDialog();
+				dlg.SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04");
+				if (dlg.ShowDialog(this) == DialogResult.OK)
+					ComCLSID = dlg.CLSID;
+			}
+			catch { }
+		}
 
-		public event EventHandler KeyValueChanged;
+		private void manuallyEnterCLSIDToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			comCLSIDText.ReadOnly = false;
+		}
 	}
 }

@@ -165,6 +165,7 @@
 			// cancelBtn
 			// 
 			resources.ApplyResources(this.cancelBtn, "cancelBtn");
+			this.cancelBtn.CausesValidation = false;
 			this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelBtn.Name = "cancelBtn";
 			this.cancelBtn.UseVisualStyleBackColor = true;
