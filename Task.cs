@@ -932,11 +932,11 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					foreach (Trigger trigger in Definition.Triggers)
 					{
-						if ((trigger != null && trigger.Enabled && (now >= trigger.StartBoundary)) && (now < trigger.EndBoundary))
+						if (trigger != null && trigger.Enabled && (now >= trigger.StartBoundary && now <= trigger.EndBoundary))
 						{
 							if (!(trigger is ICalendarTrigger))
 								return true;
-							if (DateTime.MinValue != NextRunTime)
+							if (DateTime.MinValue != NextRunTime || (trigger is TimeTrigger))
 								return true;
 						}
 					}

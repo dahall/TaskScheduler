@@ -449,6 +449,20 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Finds all tasks matching a name or standard wildcards.
+		/// </summary>
+		/// <param name="filter">The filter used to determine tasks to select.</param>
+		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
+		/// <returns>An array of <see cref="Task" /> containing all tasks matching <paramref name="name" />.</returns>
+		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true)
+		{
+			if (filter == null) filter = t => true;
+			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
+			FindTaskInFolder(RootFolder, filter, ref results, searchAllFolders);
+			return results.ToArray();
+		}
+
+		/// <summary>
 		/// Finds a task given a name and standard wildcards.
 		/// </summary>
 		/// <param name="name">The task name. This can include the wildcards * or ?.</param>
@@ -870,6 +884,38 @@ namespace Microsoft.Win32.TaskScheduler
 				foreach (var f in fld.SubFolders)
 				{
 					if (FindTaskInFolder(f, taskName, ref results, recurse))
+						return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Finds the task in folder.
+		/// </summary>
+		/// <param name="fld">The folder.</param>
+		/// <param name="filter">The filter to use when looking for tasks.</param>
+		/// <param name="results">The results.</param>
+		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
+		/// <returns>True if any tasks are found, False if not.</returns>
+		private bool FindTaskInFolder(TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
+		{
+			foreach (Task t in fld.GetTasks(null))
+				try
+				{
+					if (filter(t))
+						results.Add(t);
+				}
+				catch
+				{
+					System.Diagnostics.Debug.WriteLine($"Unable to evaluate filter for task '{t.Path}'.");
+				}
+
+			if (recurse)
+			{
+				foreach (var f in fld.SubFolders)
+				{
+					if (FindTaskInFolder(f, filter, ref results, recurse))
 						return true;
 				}
 			}

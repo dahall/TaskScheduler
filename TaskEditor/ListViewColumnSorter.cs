@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 
-namespace Microsoft.Win32.TaskScheduler
+namespace System.Windows.Forms
 {
 	internal class ListViewColumnSorter : IComparer<ListViewItem>, System.Collections.IComparer
 	{
@@ -55,10 +54,24 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public bool NewSortSameColumn { get; set; } = false;
 
-		public SortOrder Order { get; set; } = SortOrder.Descending;
+		public SortOrder Order { get; set; } = SortOrder.None;
 
-		public int SortColumn { get; set; } = 1;
+		/// <summary>
+		/// Gets or sets column to sort on.
+		/// </summary>
+		/// <value>
+		/// The sort column.
+		/// </value>
+		public int SortColumn { get; set; } = 0;
 
 		public bool Group { get; set; } = false;
+
+		public void Reset()
+		{
+			Group = false;
+			SortColumn = 0;
+			Order = SortOrder.Descending;
+			NewSortSameColumn = false;
+		}
 	}
 }

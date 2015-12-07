@@ -121,7 +121,7 @@
     <value>schedGroup</value>
   </data>
   <data name="&gt;&gt;dailyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.DailyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;schedDailyRadio.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -156,7 +156,7 @@
     <value>Monthly</value>
   </data>
   <data name="&gt;&gt;weeklyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.WeeklyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="schedStartDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -418,7 +418,7 @@
     <value>413, 55</value>
   </data>
   <data name="&gt;&gt;schedStartDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="oneTimeTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 102</value>
@@ -463,7 +463,7 @@
     <value>34, 15</value>
   </data>
   <data name="&gt;&gt;monthlyTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.MonthlyTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;schedOneRadio.ZOrder" xml:space="preserve">
     <value>7</value>

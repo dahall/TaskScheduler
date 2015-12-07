@@ -62,7 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public bool IsSystem => acct?.IsSystem ?? false;
+		public bool IsSystem => sid.IsWellKnown(WellKnownSidType.LocalSystemSid);
 
 		public string Name => acct != null ? acct.Name : ((NTAccount)sid.Translate(typeof(NTAccount))).Value;
 

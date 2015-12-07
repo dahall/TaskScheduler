@@ -174,15 +174,34 @@ namespace TestTaskService
 			using (TaskService lts = new TaskService(ts.TargetServer, ts.UserName, ts.UserAccountDomain, ts.UserPassword, ts.HighestSupportedVersion.Minor == 1))
 			{
 				List<ListViewItem> list = new List<ListViewItem>();
-				foreach (var t in lts.FindAllTasks(null))
+				foreach (var t in lts.FindAllTasks(x => x.IsActive))
 					try
 					{
-						if (t.IsActive)
-							list.Add(new ListViewItem(new string[] { t.Name, t.NextRunTime.ToString("G"), t.Definition.Triggers.ToString(), t.Path }) { Tag = t });
+						DateTime next = t.NextRunTime;
+						list.Add(new ListViewItem(new string[] { t.Name, next == DateTime.MinValue ? "" : next.ToString("G"), t.Definition.Triggers.ToString(), t.Folder.Path }) { Tag = t });
 					}
-					catch { }
+					catch
+					{
+						System.Diagnostics.Debug.WriteLine($"Unable to insert task '{t.Path}' into active task list.");
+					}
+				list.Sort(ActiveTaskSorter);
 				e.Result = list.ToArray();
 			}
+		}
+
+		private static int ActiveTaskSorter(ListViewItem al, ListViewItem bl)
+		{
+			Task a = al.Tag as Task, b = bl.Tag as Task;
+			DateTime an = DateTime.MinValue, bn = DateTime.MinValue;
+			bool ax = a == null || (an = a.NextRunTime) == DateTime.MinValue;
+			bool bx = b == null || (bn = b.NextRunTime) == DateTime.MinValue;
+			if (ax && !bx)
+				return -1;
+			if (!ax && bx)
+				return 1;
+			if (ax && bx)
+				return string.Compare(a?.Name, b?.Name, StringComparison.CurrentCulture);
+			return DateTime.Compare(an, bn);
 		}
 
 		private void activeBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

@@ -174,9 +174,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		protected virtual void OnReordered(ListViewReorderedEventArgs e)
 		{
-			var h = Reordered;
-			if (h != null)
-				h(this, e);
+			Reordered?.Invoke(this, e);
 		}
 	}
 }
