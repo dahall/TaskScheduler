@@ -33,7 +33,7 @@ namespace Microsoft.Win32
 			}
 			else
 			{
-				if (NativeMethods.LogonUser(userName, domainName, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out token) != 0)
+				if (NativeMethods.LogonUser(userName, domainName, password, LOGON_TYPE_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
 					identity = new WindowsIdentity(token.DangerousGetHandle());
 					impersonationContext = identity.Impersonate();
@@ -53,6 +53,7 @@ namespace Microsoft.Win32
 				identity.Dispose();
 		}
 
+		private const int LOGON_TYPE_NEW_CREDENTIALS = 9;
 		private const int LOGON32_LOGON_INTERACTIVE = 2;
 		private const int LOGON32_PROVIDER_DEFAULT = 0;
 
