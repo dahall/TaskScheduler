@@ -453,7 +453,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="filter">The filter used to determine tasks to select.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
-		/// <returns>An array of <see cref="Task" /> containing all tasks matching <paramref name="name" />.</returns>
+		/// <returns>An array of <see cref="Task" /> containing all tasks matching <paramref name="filter" />.</returns>
 		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true)
 		{
 			if (filter == null) filter = t => true;

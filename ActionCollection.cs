@@ -664,9 +664,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var exec = new ExecAction(v1Task);
 				var items = exec.ParsePowerShellItems();
-				if (items != null && items.Length == 2)
+				if (items != null)
 				{
-					if (items[0] == "MULTIPLE")
+					if (items.Length == 2 && items[0] == "MULTIPLE")
 					{
 						PowerShellConversion |= PowerShellActionPlatformOption.Version1;
 						var mc = System.Text.RegularExpressions.Regex.Matches(items[1], @"<# (?<id>\w+):(?<t>\w+) #>\s*(?<c>[^<#]*)\s*");
@@ -684,6 +684,10 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						ret.Add(ExecAction.ConvertFromPowerShellAction(exec));
 				}
+				else if (!string.IsNullOrEmpty(exec.Path))
+				{
+					ret.Add(exec);
+				}
 			}
 			return ret;
 		}
@@ -694,9 +698,9 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentNullException(nameof(v1Task));
 			if (v1Actions.Count == 0)
 			{
-				v1Task.SetApplicationName(null);
-				v1Task.SetParameters(null);
-				v1Task.SetWorkingDirectory(null);
+				v1Task.SetApplicationName(string.Empty);
+				v1Task.SetParameters(string.Empty);
+				v1Task.SetWorkingDirectory(string.Empty);
 				TaskDefinition.V1SetDataItem(v1Task, "ActionId", null);
 				TaskDefinition.V1SetDataItem(v1Task, "ActionType", "EMPTY");
 			}
