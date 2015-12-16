@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService.csproj", "{81B5ABCC-6909-483D-8BB3-84B52E3C7043}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITaskHandler COM Server Project Template", "ITaskHandler COM Server Project Template\ITaskHandler COM Server Project Template.csproj", "{601FB415-6066-47F7-9549-938AC0C40396}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskSchedulerPowerShellAction", "TaskSchedulerPowerShellAction\TaskSchedulerPowerShellAction.csproj", "{A0272287-8996-4D01-B78F-2AA9CC984907}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskSchedulerConfig", "TaskSchedulerConfig\TaskSchedulerConfig.csproj", "{464AE5DD-6049-4A73-B07C-10CC1E3742F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,12 +112,24 @@ Global
 		{A0272287-8996-4D01-B78F-2AA9CC984907}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A0272287-8996-4D01-B78F-2AA9CC984907}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A0272287-8996-4D01-B78F-2AA9CC984907}.Release|x86.ActiveCfg = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
 		SccLocalPath0 = .
@@ -142,6 +156,9 @@ Global
 		SccProjectUniqueName8 = TaskSchedulerPowerShellAction\\TaskSchedulerPowerShellAction.csproj
 		SccProjectName8 = TaskSchedulerPowerShellAction
 		SccLocalPath8 = TaskSchedulerPowerShellAction
+		SccProjectUniqueName9 = TaskSchedulerConfig\\TaskSchedulerConfig.csproj
+		SccProjectName9 = TaskSchedulerConfig
+		SccLocalPath9 = TaskSchedulerConfig
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TaskService1.vsmdi

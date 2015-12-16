@@ -926,8 +926,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal string[] ParsePowerShellItems()
 		{
-			if ((Path?.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) ?? false) ||
-				(Path?.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase) ?? false) || (Arguments?.Contains(ScriptIdentifer) ?? false))
+			if (((Path?.EndsWith(PowerShellPath, StringComparison.InvariantCultureIgnoreCase) ?? false) ||
+				(Path?.EndsWith(PowerShellPath + ".exe", StringComparison.InvariantCultureIgnoreCase) ?? false)) && (Arguments?.Contains(ScriptIdentifer) ?? false))
 			{
 				var match = System.Text.RegularExpressions.Regex.Match(Arguments, @"<# " + ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
 				if (match.Success)

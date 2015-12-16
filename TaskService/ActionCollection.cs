@@ -708,6 +708,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!SupportV1Conversion && v1Actions[0].ActionType != TaskActionType.Execute)
 					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
+				TaskDefinition.V1SetDataItem(v1Task, "ActionType", null);
 				v1Actions[0].Bind(v1Task);
 			}
 			else

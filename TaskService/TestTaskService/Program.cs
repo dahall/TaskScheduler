@@ -786,6 +786,16 @@ namespace TestTaskService
 				Task t2 = tf.RegisterTaskDefinition("Test2", td2, TaskCreation.CreateOrUpdate, user, null, TaskLogonType.InteractiveToken, null);
 				WriteXml(t2.Definition, "ReRegTest");
 				tf.DeleteTask("Test2");
+
+				/*// Create raw task for V1 test with cleared and added actions
+				td2 = ts.NewTask();
+				td2.Actions.Clear();
+				System.Diagnostics.Debug.Assert(td2.Actions.Count == 0);
+				td2.Triggers.Add(new TimeTrigger(DateTime.Now.AddDays(1)));
+				td2.Actions.Add("calc");
+				System.Diagnostics.Debug.Assert(td2.Actions.Count == 1);
+				t2 = tf.RegisterTaskDefinition("Test2", td2);
+				tf.DeleteTask("Test2");*/
 			}
 			catch (Exception ex)
 			{
@@ -795,6 +805,10 @@ namespace TestTaskService
 
 			// Display results
 			Task runningTask = tf.Tasks["Test1"];
+			if (isV12 || (runningTask.Definition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0)
+				System.Diagnostics.Debug.Assert(runningTask.Definition.Actions.Count == 4);
+			else
+				System.Diagnostics.Debug.Assert(runningTask.Definition.Actions.Count == 1);
 			WriteXml(runningTask.Definition, "RunRegTest");
 			output.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
 			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
