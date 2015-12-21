@@ -293,7 +293,7 @@ namespace TestTaskService
 				//WriteXml(td, taskName);
 				//using (var op = new TaskOptionsEditor(t, true, false))
 				//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td); //, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
 				//System.Converter<DateTime, string> d = ints => ints == DateTime.MinValue ? "Never" : ints.ToString();
 				//output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 				//	t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
@@ -414,6 +414,7 @@ namespace TestTaskService
 			// Get the service on the local machine
 			try
 			{
+
 				/*string sub = "<QueryList><Query Id=\"0\" Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"<Select Path=\"Microsoft-Windows-TaskScheduler/Operational\">" +
 					"*[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and (Computer='dahall1') and (Level=0 or Level=4) and (Task=100 or Task=101) and (EventID=129) and Security[@UserID='AMERICAS\\dahall'] and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]" +
@@ -435,6 +436,7 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				//string[] names = arg[0].Split('\\');
 				string taskName = "TesterTask";
+
 				//string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
 
 				TaskDefinition td = ts.NewTask();

@@ -42,7 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			InitializeComponent();
 			dateTimePickerTime.Format = DateTimePickerFormat.Custom;
-			dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongTimePattern;
+			dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.LongTimePattern;
 			ResetValue();
 		}
 
@@ -107,7 +107,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if ((value == null) || (value.Length == 0))
 					ResetValue();
 				else
-					Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentCulture);
+					Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentUICulture);
 			}
 		}
 
@@ -129,7 +129,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						case FullDateTimePickerTimeFormat.ShortTime:
 							dateTimePickerTime.Format = DateTimePickerFormat.Custom;
-							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortTimePattern;
+							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortTimePattern;
 							dateTimePickerTime.Visible = true;
 							break;
 						case FullDateTimePickerTimeFormat.Hidden:
@@ -139,7 +139,7 @@ namespace Microsoft.Win32.TaskScheduler
 						case FullDateTimePickerTimeFormat.LongTime:
 						default:
 							dateTimePickerTime.Format = DateTimePickerFormat.Custom;
-							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongTimePattern;
+							dateTimePickerTime.CustomFormat = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.LongTimePattern;
 							dateTimePickerTime.Visible = true;
 							break;
 					}

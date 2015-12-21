@@ -17,23 +17,13 @@ namespace TaskSchedulerConfig
 				string svr;
 				bool hasV2 = TaskService.Instance.HighestSupportedVersion > new Version(1, 1);
 
-				if (!string.IsNullOrEmpty(pArgs.server))
-				{
-					svr = pArgs.server;
-					Console.WriteLine($"Connecting to {pArgs.server}...");
-				}
-				else
-				{
-					svr = "(local)";
-				}
-
-				var vldr = new Validator(pArgs.server);
+				var localVldr = new Validator(null);
 
 				if (pArgs.report)
 				{
-					var r = new Reporter(vldr);
+					var r = new Reporter(localVldr);
 					Console.WriteLine();
-					Console.WriteLine($"Configuration report for {svr}:");
+					Console.WriteLine($"Configuration report for local computer:");
 					Console.WriteLine($"========================================");
 					Console.WriteLine();
 					Console.WriteLine($"General Information");
@@ -50,11 +40,39 @@ namespace TaskSchedulerConfig
 						Console.WriteLine($"--------------------------------");
 						ConsoleWriteLines(r.V2());
 					}
+
+
+					if (!string.IsNullOrEmpty(pArgs.server))
+					{
+						svr = pArgs.server;
+						var rVldr = new Validator(svr);
+						Console.WriteLine($"Connecting to {svr}...");
+
+						var rr = new Reporter(rVldr);
+						Console.WriteLine();
+						Console.WriteLine($"Configuration report for local computer:");
+						Console.WriteLine($"========================================");
+						Console.WriteLine();
+						Console.WriteLine($"General Information");
+						Console.WriteLine($"-------------------");
+						ConsoleWriteLines(rr.General());
+						Console.WriteLine();
+						Console.WriteLine($"Version 1 (XP/Server 2000)");
+						Console.WriteLine($"--------------------------");
+						ConsoleWriteLines(rr.V1());
+						if (hasV2)
+						{
+							Console.WriteLine();
+							Console.WriteLine($"Version 2 (Vista/2003 and later)");
+							Console.WriteLine($"--------------------------------");
+							ConsoleWriteLines(rr.V2());
+						}
+					}
 				}
 
 				if (pArgs.fix)
 				{
-					Console.WriteLine($"Repairing {svr}...");
+					Console.WriteLine($"Repairing local computer...");
 				}
 			}
 
