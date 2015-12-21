@@ -98,6 +98,7 @@ namespace TaskSchedulerConfig
 					}
 					else
 					{
+						ret.Add("File and Printer Sharing", Firewall.IsRuleGroupCurrentlyEnabled("File and Printer Sharing"));
 						ret.Add("Remote Scheduled Tasks Management", Firewall.IsRuleGroupCurrentlyEnabled("Remote Scheduled Tasks Management"));
 					}
 				}

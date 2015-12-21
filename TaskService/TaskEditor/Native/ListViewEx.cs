@@ -312,7 +312,7 @@ namespace System.Windows.Forms
 				{
 					for (int i = 0; i < list.Count; i++)
 					{
-						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentCulture) == 0)
+						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentUICulture) == 0)
 						{
 							return this[i];
 						}
@@ -327,7 +327,7 @@ namespace System.Windows.Forms
 				{
 					for (int i = 0; i < list.Count; i++)
 					{
-						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentCulture) == 0)
+						if (string.Compare(key, this[i].Name, false, System.Globalization.CultureInfo.CurrentUICulture) == 0)
 						{
 							num = i;
 							break;
@@ -696,11 +696,11 @@ namespace System.Windows.Forms
 				str = str.Substring(0, str.Length - 1);
 			}
 			int num = 1;
-			string str2 = str + num.ToString(System.Globalization.CultureInfo.CurrentCulture);
+			string str2 = str + num.ToString(System.Globalization.CultureInfo.CurrentUICulture);
 			while (lvgCollection[str2] != null)
 			{
 				num++;
-				str2 = str + num.ToString(System.Globalization.CultureInfo.CurrentCulture);
+				str2 = str + num.ToString(System.Globalization.CultureInfo.CurrentUICulture);
 			}
 			return str2;
 		}

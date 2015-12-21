@@ -77,14 +77,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskEventWatcher"/> class watching only
+		/// Initializes a new instance of the <see cref="TaskEventWatcher" /> class watching only
 		/// those events for the task with the provided path on the local machine.
 		/// </summary>
 		/// <param name="taskPath">The full path (folders and name) of the task to watch.</param>
+		/// <param name="taskService">The task service.</param>
 		/// <exception cref="System.ArgumentException">$Invalid task name: {taskPath}</exception>
-		public TaskEventWatcher(string taskPath) : this()
+		public TaskEventWatcher(string taskPath, TaskService taskService = null) : this(taskService ?? TaskService.Instance)
 		{
-			InitTaskPath(taskPath);
+			InitTask(taskPath);
 		}
 
 		/// <summary>
@@ -113,7 +114,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (taskFolder == null)
 				throw new ArgumentNullException(nameof(taskFolder));
-			InitTaskFolder(taskFolder, taskFilter, includeSubfolders);
+			InitTask(taskFolder, taskFilter, includeSubfolders);
 		}
 
 		/// <summary>
@@ -122,9 +123,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="folder">The task folder to watch.</param>
 		/// <param name="taskFilter">The filter for task names using standard file system wildcards. Use "*" to include all tasks.</param>
 		/// <param name="includeSubfolders">if set to <c>true</c> include events from tasks subfolders.</param>
-		public TaskEventWatcher(string folder, string taskFilter, bool includeSubfolders) : this()
+		/// <param name="taskService">The task service.</param>
+		public TaskEventWatcher(string folder, string taskFilter, bool includeSubfolders, TaskService taskService = null) : this(taskService ?? TaskService.Instance)
 		{
-			InitTaskFolder(folder, taskFilter, includeSubfolders);
+			InitTask(folder, taskFilter, includeSubfolders);
 		}
 
 		/// <summary>
@@ -137,7 +139,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="password">The password for the user.</param>
 		public TaskEventWatcher(string machineName, string taskPath, string domain = null, string user = null, string password = null) : this(new TaskService(machineName, user, domain, password))
 		{
-			InitTaskPath(taskPath);
+			InitTask(taskPath);
 		}
 
 		/// <summary>
@@ -152,7 +154,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="password">The password for the user.</param>
 		public TaskEventWatcher(string machineName, string folder, string taskFilter = "*", bool includeSubfolders = false, string domain = null, string user = null, string password = null) : this(new TaskService(machineName, user, domain, password))
 		{
-			InitTaskFolder(folder, taskFilter, includeSubfolders);
+			InitTask(folder, taskFilter, includeSubfolders);
 		}
 
 		private TaskEventWatcher(TaskService ts)
@@ -447,27 +449,24 @@ namespace Microsoft.Win32.TaskScheduler
 			Folder = task.Folder.Path;
 		}
 
-		private void InitTaskFolder(TaskFolder taskFolder, string taskFilter, bool includeSubfolders)
+		private void InitTask(TaskFolder taskFolder, string taskFilter, bool includeSubfolders)
 		{
 			this.includeSubfolders = includeSubfolders;
 			Filter.TaskName = taskFilter;
 			Folder = taskFolder.Path;
 		}
 
-		private void InitTaskFolder(string taskFolder, string taskFilter, bool includeSubfolders)
+		private void InitTask(string taskFolder, string taskFilter, bool includeSubfolders)
 		{
-			TaskFolder fld;
-			if ((fld = TaskService.GetFolder(taskFolder)) == null)
-				throw new ArgumentException($"Invalid task folder name: {taskFolder}");
-			InitTaskFolder(fld, taskFilter, includeSubfolders);
+			this.includeSubfolders = includeSubfolders;
+			Filter.TaskName = taskFilter;
+			Folder = taskFolder;
 		}
 
-		private void InitTaskPath(string taskPath)
+		private void InitTask(string taskPath)
 		{
-			Task task;
-			if ((task = TaskService.GetTask(taskPath)) == null)
-				throw new ArgumentException($"Invalid task name: {taskPath}");
-			InitTask(task);
+			Filter.TaskName = System.IO.Path.GetFileNameWithoutExtension(taskPath);
+			Folder = System.IO.Path.GetDirectoryName(taskPath);
 		}
 
 		private bool IsSuspended()

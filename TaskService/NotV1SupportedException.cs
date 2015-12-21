@@ -84,7 +84,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="streamingContext">The streaming context.</param>
 		protected NotV1SupportedException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext) { }
 		internal NotV1SupportedException() : base(TaskCompatibility.V2) { }
-		internal NotV1SupportedException(string message) : base(message, TaskCompatibility.V2) { }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="NotV1SupportedException" /> class.
+		/// </summary>
+		/// <param name="message">The message.</param>
+		public NotV1SupportedException(string message) : base(message, TaskCompatibility.V2) { }
 		internal override string LibName => "Task Scheduler 1.0";
 	}
 

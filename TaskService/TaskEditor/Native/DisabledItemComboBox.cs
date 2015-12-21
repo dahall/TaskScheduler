@@ -506,7 +506,7 @@ namespace System.Windows.Forms
 				for (int i = (startIndex + 1) % Items.Count; num2 < Items.Count; i = (i + 1) % Items.Count)
 				{
 					num2++;
-					if (IsItemEnabled(i) && string.Compare(str, 0, GetItemText(Items[i]), 0, length, true, System.Globalization.CultureInfo.CurrentCulture) == 0)
+					if (IsItemEnabled(i) && string.Compare(str, 0, GetItemText(Items[i]), 0, length, true, System.Globalization.CultureInfo.CurrentUICulture) == 0)
 						return i;
 				}
 			}
