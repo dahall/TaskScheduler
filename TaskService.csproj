@@ -62,6 +62,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt; 2.0 " />
     <Reference Include="System.Xml" />
   </ItemGroup>

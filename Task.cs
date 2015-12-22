@@ -2803,8 +2803,6 @@ namespace Microsoft.Win32.TaskScheduler
 					string v1Path = Task.GetV1Path(v1Task);
 					if (!string.IsNullOrEmpty(v1Path) && System.IO.File.Exists(v1Path))
 						System.IO.File.SetLastWriteTime(v1Path, value);
-					else
-						throw new NotV1SupportedException("This property cannot be set on an unregistered task.");
 				}
 			}
 		}
