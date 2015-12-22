@@ -440,8 +440,8 @@ namespace TestTaskService
 				//string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
 
 				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "some description";
-
+				//td.RegistrationInfo.Description = "some description";
+				td.Triggers.Add(new DailyTrigger(1));
 				td.Actions.Add("cmd.exe", "-someparameter");
 				//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
 
@@ -450,15 +450,19 @@ namespace TestTaskService
 
 				//td.Settings.StartWhenAvailable = true;
 				//td.Settings.MultipleInstances = TaskInstancesPolicy.StopExisting;
-				td.Settings.DisallowStartIfOnBatteries = false;
-				td.Settings.StopIfGoingOnBatteries = false;
+				//td.Settings.DisallowStartIfOnBatteries = false;
+				//td.Settings.StopIfGoingOnBatteries = false;
 				//td.Settings.IdleSettings.StopOnIdleEnd = false;
 				//td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromSeconds(5);
 
 				//TaskFolder testFolder = ts.RootFolder.CreateFolder(taskFolder, null, false);
 				//var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "Everyone", null, TaskLogonType.Group);
-				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				//t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				//var t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				var t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
+				var xml = t.Xml;
+
+				var td2 = ts.NewTask();
+				td2.XmlText = xml;
 
 				//TaskDefinition td = ts.NewTask();
 				//td.RegistrationInfo.Documentation = "Does something";

@@ -338,6 +338,7 @@
     <Compile Include="TaskSchedulerWizard.Designer.cs">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskServiceComponentDesigner.cs" />
     <Compile Include="TaskServiceConnectDialog.cs">
       <SubType>Form</SubType>
     </Compile>

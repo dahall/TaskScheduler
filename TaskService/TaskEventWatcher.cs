@@ -55,16 +55,19 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Watches system events related to tasks and issues a <see cref="TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
 	/// </summary>
 	[DefaultEvent(nameof(TaskEventWatcher.EventRecorded)), DefaultProperty(nameof(TaskEventWatcher.Folder))]
+	[Designer(typeof(Design.TaskEventWatcherDesigner))]
+	[ToolboxItem(true), Serializable]
 	public class TaskEventWatcher : Component, ISupportInitialize
 	{
 		private const string root = "\\";
 		private const string star = "*";
 
 		private bool disposed;
-		private bool enabled;
+		private bool enabled = false;
 		private string folder = root;
 		private bool includeSubfolders;
 		private bool initializing;
+		private TaskService ts;
 		private EventLogWatcher watcher;
 		private ISynchronizeInvoke synchronizingObject;
 
@@ -183,6 +186,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (enabled != value)
 				{
+					System.Diagnostics.Debug.WriteLine($"TaskEventWather: Set {nameof(Enabled)} = {value}");
 					enabled = value;
 					if (!IsSuspended())
 					{
@@ -250,24 +254,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets an <see cref="ISite"/> for the TaskEventWatcher.
-		/// </summary>
-		/// <value>
-		/// The site.
-		/// </value>
-		[Browsable(false)]
-		public override ISite Site
-		{
-			get { return base.Site; }
-			set
-			{
-				base.Site = value;
-				if (Site != null && Site.DesignMode)
-					Enabled = true;
-			}
-		}
-
-		/// <summary>
 		/// Gets or sets the synchronizing object.
 		/// </summary>
 		/// <value>
@@ -292,10 +278,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
 		/// </summary>
-		[Category("Connection"), DefaultValue((string)null), Description("The name of the computer to connect to.")]
+		[Category("Connection"), Description("The name of the computer to connect to."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string TargetServer
 		{
-			get { return ShouldSerializeTargetServer() ? TaskService.TargetServer : null; }
+			get { return TaskService.TargetServer; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -308,13 +294,27 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the <see cref="TaskService"/> instance associated with this event watcher. Setting this value
+		/// will override any values set for <see cref="TargetServer"/>, <see cref="UserAccountDomain"/>,
+		/// <see cref="UserName"/>, and <see cref="UserPassword"/> and set them to those values in the supplied
+		/// <see cref="TaskService"/> instance.
+		/// </summary>
+		/// <value>The TaskService.</value>
+		[Category("Data"), Description("The TaskService for this event watcher.")]
+		public TaskService TaskService
+		{
+			get { return ts; }
+			set { ts = value; Restart(); }
+		}
+
+		/// <summary>
 		/// Gets or sets the user account domain to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user account domain.</value>
-		[Category("Connection"), DefaultValue((string)null), Description("The user account domain to be used when connecting.")]
+		[Category("Connection"), Description("The user account domain to be used when connecting."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string UserAccountDomain
 		{
-			get { return ShouldSerializeUserAccountDomain() ? TaskService.UserAccountDomain : null; }
+			get { return TaskService.UserAccountDomain; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -330,10 +330,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user name.</value>
-		[Category("Connection"), DefaultValue((string)null), Description("The user name to be used when connecting.")]
+		[Category("Connection"), Description("The user name to be used when connecting."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string UserName
 		{
-			get { return ShouldSerializeUserName() ? TaskService.UserName : null; }
+			get { return TaskService.UserName; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -349,7 +349,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user password to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user password.</value>
-		[Category("Connection"), DefaultValue((string)null), Description("The user password to be used when connecting.")]
+		[Category("Connection"), Description("The user password to be used when connecting."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string UserPassword
 		{
 			get { return TaskService.UserPassword; }
@@ -365,14 +365,6 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the task service.
-		/// </summary>
-		/// <value>
-		/// The task service.
-		/// </value>
-		internal TaskService TaskService { get; set; }
-
-		/// <summary>
 		/// Gets a value indicating if watching is available.
 		/// </summary>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -383,11 +375,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void BeginInit()
 		{
+			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(BeginInit)}");
+			initializing = true;
 			bool enabled = this.enabled;
 			StopRaisingEvents();
 			this.enabled = enabled;
 			TaskService.BeginInit();
-			initializing = true;
 		}
 
 		/// <summary>
@@ -395,6 +388,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void EndInit()
 		{
+			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(EndInit)}");
 			initializing = false;
 			TaskService.EndInit();
 			if (enabled)
@@ -486,10 +480,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private void ResetTaskService() { ts = TaskService.Instance; }
+
 		private void Restart()
 		{
 			if (!IsSuspended() && enabled)
 			{
+				System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(Restart)}");
 				StopRaisingEvents();
 				StartRaisingEvents();
 			}
@@ -510,11 +507,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ShouldSerializeFilter() => Filter.ShouldSerialize();
 
-		private bool ShouldSerializeTargetServer() => TaskService.TargetServer != null && !TaskService.TargetServer.Trim('\\').Equals(System.Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
-
-		private bool ShouldSerializeUserAccountDomain() => TaskService.UserAccountDomain != null && !TaskService.UserAccountDomain.Equals(System.Environment.UserDomainName, StringComparison.InvariantCultureIgnoreCase);
-
-		private bool ShouldSerializeUserName() => TaskService.UserName != null && !TaskService.UserName.Equals(System.Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
+		private bool ShouldSerializeTaskService() => TaskService != Microsoft.Win32.TaskScheduler.TaskService.Instance;
 
 		private void StartRaisingEvents()
 		{
@@ -523,6 +516,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (!IsSuspended())
 			{
+				System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(StartRaisingEvents)}");
 				enabled = true;
 				SetupWatcher();
 				watcher.Enabled = true;
@@ -537,6 +531,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void StopRaisingEvents()
 		{
+			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(StopRaisingEvents)}");
 			if (IsSuspended())
 				enabled = false;
 			else if (!IsHandleInvalid)
@@ -652,6 +647,27 @@ namespace Microsoft.Win32.TaskScheduler
 			public override string ToString() => filter + (levels == null ? "" : " +levels") + (ids == null ? "" : " +id's");
 
 			internal bool ShouldSerialize() => ids != null || levels != null || filter != star;
+		}
+	}
+
+	namespace Design
+	{
+		internal class TaskEventWatcherDesigner : ComponentDesigner
+		{
+			public override void InitializeNewComponent(System.Collections.IDictionary defaultValues)
+			{
+				base.InitializeNewComponent(defaultValues);
+				var refs = GetService(typeof(IReferenceService)) as IReferenceService;
+				var tsColl = refs?.GetReferences(typeof(TaskService));
+				System.Diagnostics.Debug.Assert(refs != null && tsColl != null && tsColl.Length > 0, "Designer couldn't find host, reference service, or existing TaskService.");
+				if (tsColl != null && tsColl.Length > 0)
+				{
+					TaskEventWatcher tsComp = Component as TaskEventWatcher;
+					TaskService ts = tsColl[0] as TaskService;
+					if (tsComp != null)
+						tsComp.TaskService = ts;
+				}
+			}
 		}
 	}
 }

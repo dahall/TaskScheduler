@@ -1181,12 +1181,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void WriteMyXml(System.Xml.XmlWriter writer)
 		{
-			if (DaysInterval != 1)
-			{
-				writer.WriteStartElement("ScheduleByDay");
-				writer.WriteElementString("DaysInterval", DaysInterval.ToString());
-				writer.WriteEndElement();
-			}
+			writer.WriteStartElement("ScheduleByDay");
+			writer.WriteElementString("DaysInterval", DaysInterval.ToString());
+			writer.WriteEndElement();
 		}
 
 		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
