@@ -1168,6 +1168,29 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the last registration time, looking first at the <see cref="TaskDefinition.RegistrationInfo.Date"/> value and
+		/// then looking for the most recent registration event in the Event Log.
+		/// </summary>
+		/// <returns><see cref="DateTime"/> of the last registration or <see cref="DateTime.MinValue"/> if no value can be found.</returns>
+		public DateTime GetLastRegistrationTime()
+		{
+			DateTime ret = Definition.RegistrationInfo.Date;
+			if (ret == DateTime.MinValue)
+			{
+				TaskEventLog log = new TaskEventLog(Path, new int[] { (int)StandardTaskEventId.JobRegistered }, null, TaskService.TargetServer, TaskService.UserAccountDomain, TaskService.UserName, TaskService.UserPassword);
+				if (log.Enabled)
+				{
+					foreach (var item in log)
+					{
+						if (item.TimeCreated.HasValue)
+							return item.TimeCreated.Value;
+					}
+				}
+			}
+			return ret;
+		}
+
+		/// <summary>
 		/// Gets the times that the registered task is scheduled to run during a specified time.
 		/// </summary>
 		/// <param name="start">The starting time for the query.</param>
@@ -2785,19 +2808,22 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 				{
-					string d = v2RegInfo.Date;
-					return string.IsNullOrEmpty(d) ? DateTime.MinValue : DateTime.Parse(d, Trigger.DefaultDateCulture);
+					DateTime ret;
+					if (DateTime.TryParse(v2RegInfo.Date, Trigger.DefaultDateCulture, System.Globalization.DateTimeStyles.AssumeLocal, out ret))
+						return ret;
 				}
-
-				string v1Path = Task.GetV1Path(v1Task);
-				if (!string.IsNullOrEmpty(v1Path) && System.IO.File.Exists(v1Path))
-					return System.IO.File.GetLastWriteTime(v1Path);
+				else
+				{
+					string v1Path = Task.GetV1Path(v1Task);
+					if (!string.IsNullOrEmpty(v1Path) && System.IO.File.Exists(v1Path))
+						return System.IO.File.GetLastWriteTime(v1Path);
+				}
 				return DateTime.MinValue;
 			}
 			set
 			{
 				if (v2RegInfo != null)
-					v2RegInfo.Date = value == null ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
+					v2RegInfo.Date = value == DateTime.MinValue ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
 				else
 				{
 					string v1Path = Task.GetV1Path(v1Task);
@@ -2816,7 +2842,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2RegInfo != null)
-					return v2RegInfo.Description;
+					return FixCrLf(v2RegInfo.Description);
 				return v1Task.GetComment();
 			}
 			set
@@ -2837,7 +2863,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2RegInfo != null)
-					return v2RegInfo.Documentation;
+					return FixCrLf(v2RegInfo.Documentation);
 				return TaskDefinition.V1GetDataItem(v1Task, nameof(Documentation));
 			}
 			set
@@ -2856,14 +2882,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
-			get
-			{
-				return new System.Security.AccessControl.RawSecurityDescriptor(SecurityDescriptorSddlForm);
-			}
-			set
-			{
-				SecurityDescriptorSddlForm = value == null ? null : value.GetSddlForm(Task.defaultAccessControlSections);
-			}
+			get { return new System.Security.AccessControl.RawSecurityDescriptor(SecurityDescriptorSddlForm); }
+			set { SecurityDescriptorSddlForm = value?.GetSddlForm(Task.defaultAccessControlSections); }
 		}
 
 		/// <summary>
@@ -3008,6 +3028,8 @@ namespace Microsoft.Win32.TaskScheduler
 				return DebugHelper.GetDebugString(this);
 			return base.ToString();
 		}
+
+		internal static string FixCrLf(string text) => text == null ? null : System.Text.RegularExpressions.Regex.Replace(text, "\r?\n", "\r\n");
 
 		XmlSchema IXmlSerializable.GetSchema() => null;
 

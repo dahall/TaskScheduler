@@ -418,6 +418,8 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
 				}
+				// The following line compensates for an omission in the native library that never actually sets the registration date (thanks ixm7).
+				if (definition.RegistrationInfo.Date == DateTime.MinValue) definition.RegistrationInfo.Date = DateTime.Now;
 				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId ?? user.Name, password, LogonType, sddl);
 				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
 					return null;

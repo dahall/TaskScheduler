@@ -242,6 +242,9 @@
 			// 
 			// taskDescText
 			// 
+			this.taskDescText.AcceptsReturn = true;
+			this.taskDescText.AcceptsTab = true;
+			this.taskDescText.AllowDrop = true;
 			resources.ApplyResources(this.taskDescText, "taskDescText");
 			this.taskDescText.Name = "taskDescText";
 			this.helpProvider.SetShowHelp(this.taskDescText, ((bool)(resources.GetObject("taskDescText.ShowHelp"))));
@@ -697,6 +700,9 @@
 			// 
 			// taskRegDocText
 			// 
+			this.taskRegDocText.AcceptsReturn = true;
+			this.taskRegDocText.AcceptsTab = true;
+			this.taskRegDocText.AllowDrop = true;
 			resources.ApplyResources(this.taskRegDocText, "taskRegDocText");
 			this.taskRegLayoutPanel.SetColumnSpan(this.taskRegDocText, 2);
 			this.taskRegDocText.Name = "taskRegDocText";
