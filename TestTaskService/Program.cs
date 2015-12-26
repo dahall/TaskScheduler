@@ -279,7 +279,7 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "Test for editor";
+				td.RegistrationInfo.Description = "Test for editor\r\n\r\nLine 2";
 				td.RegistrationInfo.Author = "incaunu";
 				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
 				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
@@ -302,9 +302,9 @@ namespace TestTaskService
 				// Register then show task again
 				while (DisplayTask(t, true) != null)
 				{
-					Task t2 = editorForm.Task;
-					output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
-						t2.Name, t2.Enabled, t2.LastRunTime, t2.State, t2.IsActive, t2.NextRunTime, t2.LastRunTime, t2.Definition.Triggers[0].StartBoundary, t2.Definition.Triggers[0].EndBoundary);
+					t = editorForm.Task;
+					output.Write($"***********************\r\nName: {t.Name}\r\nEnabled: {t.Enabled}\r\nLastRunTime: {t.LastRunTime}\r\nState: {t.State}\r\nIsActive: {t.IsActive}\r\nRegistered: {t.GetLastRegistrationTime()}\r\n" +
+						$"NextRunTime: {t.NextRunTime}\r\nShouldHaveRun: {t.LastRunTime}\r\nTriggerStart: {t.Definition.Triggers[0].StartBoundary}\r\nTriggerEnd: {t.Definition.Triggers[0].EndBoundary}\r\n");
 				}
 
 				// Remove the task we just created
