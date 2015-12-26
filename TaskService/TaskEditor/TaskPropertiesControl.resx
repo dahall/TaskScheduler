@@ -448,7 +448,7 @@
     <value>taskVersionCombo</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>System.Windows.Forms.DisabledItemComboBox</value>
   </data>
   <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
     <value>generalTab</value>
@@ -850,7 +850,7 @@
     <value>triggerCollectionUI1</value>
   </data>
   <data name="&gt;&gt;triggerCollectionUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI</value>
   </data>
   <data name="&gt;&gt;triggerCollectionUI1.Parent" xml:space="preserve">
     <value>triggersTab</value>
@@ -961,7 +961,7 @@
     <value>actionCollectionUI</value>
   </data>
   <data name="&gt;&gt;actionCollectionUI.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI</value>
   </data>
   <data name="&gt;&gt;actionCollectionUI.Parent" xml:space="preserve">
     <value>actionsTab</value>
@@ -2803,7 +2803,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>secHardGroup</value>
@@ -3160,7 +3160,7 @@
     <value>taskRunTimesControl1</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskRunTimesControl</value>
   </data>
   <data name="&gt;&gt;taskRunTimesControl1.Parent" xml:space="preserve">
     <value>runTimesTab</value>
@@ -3325,7 +3325,7 @@
     <value>taskHistoryControl1</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.8.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskHistoryControl</value>
   </data>
   <data name="&gt;&gt;taskHistoryControl1.Parent" xml:space="preserve">
     <value>historyTab</value>
