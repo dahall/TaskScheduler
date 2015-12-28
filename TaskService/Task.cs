@@ -1168,7 +1168,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the last registration time, looking first at the <see cref="TaskDefinition.RegistrationInfo.Date"/> value and
+		/// Gets the last registration time, looking first at the <see cref="TaskRegistrationInfo.Date"/> value and
 		/// then looking for the most recent registration event in the Event Log.
 		/// </summary>
 		/// <returns><see cref="DateTime"/> of the last registration or <see cref="DateTime.MinValue"/> if no value can be found.</returns>

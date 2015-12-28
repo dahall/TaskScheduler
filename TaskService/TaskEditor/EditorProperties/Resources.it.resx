@@ -541,4 +541,13 @@ Azione: {3}</value>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Annulla impostazione</value>
   </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>Il periodo di che un'attività può utilizzare o il termine minimo è di 1 giorno. La data di scadenza deve essere anche maggiore del periodo.</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>Il valore di durata di ripetizione deve essere 1 minuto o maggior.</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>Il valore di intervallo di ripetizione deve essere 1 minuto o maggior e minore o uguale a 31 giorni.</value>
+  </data>
 </root>

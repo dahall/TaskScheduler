@@ -320,6 +320,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 			{
+				if (durationSpan.Value < TimeSpan2.FromMinutes(1))
+				{
+					MessageBox.Show(this, EditorProperties.Resources.Error_RepetitionDurationOutOfRange, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					durationSpan.Value = TimeSpan.FromMinutes(1);
+					return;
+				}
 				trigger.Repetition.Duration = durationSpan.Value;
 				if (trigger.Repetition.Duration < trigger.Repetition.Interval && trigger.Repetition.Duration != TimeSpan.Zero)
 				{
@@ -389,7 +395,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					trigger.Repetition.Duration = trigger.Repetition.Interval = TimeSpan.Zero;
 				}
-				repeatSpan.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = repeatCheckBox.Checked;
+				repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = repeatCheckBox.Checked;
 			}
 		}
 
@@ -397,11 +403,18 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 			{
-				trigger.Repetition.Interval = repeatSpan.Value;
-				if (trigger.Repetition.Duration < trigger.Repetition.Interval && trigger.Repetition.Duration != TimeSpan.Zero)
+				TimeSpan value = repeatSpan.Value;
+				if (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31))
+				{
+					MessageBox.Show(this, EditorProperties.Resources.Error_RepetitionIntervalOutOfRange, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					repeatSpan.Value = value < TimeSpan.FromMinutes(1) ? TimeSpan.FromMinutes(1) : TimeSpan.FromDays(31);
+					return;
+				}
+				trigger.Repetition.Interval = value;
+				if (trigger.Repetition.Duration < value && trigger.Repetition.Duration != TimeSpan.Zero)
 				{
 					onAssignment = true;
-					durationSpan.Value = trigger.Repetition.Interval + TimeSpan.FromMinutes(1);
+					durationSpan.Value = value + TimeSpan.FromMinutes(1);
 					trigger.Repetition.Duration = durationSpan.Value;
 					onAssignment = false;
 				}
