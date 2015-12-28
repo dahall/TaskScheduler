@@ -499,6 +499,24 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The repetition duration value must be 1 minute or greater..
+        /// </summary>
+        internal static string Error_RepetitionDurationOutOfRange {
+            get {
+                return ResourceManager.GetString("Error_RepetitionDurationOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The repetition interval value must be 1 minute or greater and less than or equal to 31 days..
+        /// </summary>
+        internal static string Error_RepetitionIntervalOutOfRange {
+            get {
+                return ResourceManager.GetString("Error_RepetitionIntervalOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The repetition interval value must be less than or equal to the repetition duration value..
         /// </summary>
         internal static string Error_RepetitionMoreThanDuration {

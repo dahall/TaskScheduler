@@ -864,4 +864,10 @@ Action: {3}</value>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Unset</value>
   </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>The repetition duration value must be 1 minute or greater.</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>The repetition interval value must be 1 minute or greater and less than or equal to 31 days.</value>
+  </data>
 </root>

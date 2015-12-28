@@ -226,7 +226,7 @@
     <value>Evento {0}, TaskScheduler</value>
   </data>
   <data name="EventKeywordsAll" xml:space="preserve">
-    <value>Todas las palabras clave</value>
+    <value>&lt;Todas las palabras clave&gt;</value>
   </data>
   <data name="EventKeywordsAuditFailure" xml:space="preserve">
     <value>Error de auditoría </value>
@@ -295,7 +295,7 @@
     <value>Propiedades de eventos - evento {0}, TaskScheduler</value>
   </data>
   <data name="EventSourcesAll" xml:space="preserve">
-    <value>Todos los orígenes</value>
+    <value>&lt;Todos los orígenes&gt;</value>
   </data>
   <data name="EventTasksAll" xml:space="preserve">
     <value>&lt;Todas las categorías de tareas&gt;</value>
@@ -536,5 +536,14 @@ Acción : {3}</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Sin establecer</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>El plazo mínimo o periodo de que una tarea puede utilizar es 1 día. El plazo también debe ser mayor que en el periodo.</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>El valor de duración de la repetición debe ser 1 minuto o más.</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>El valor de intervalo de repetición debe ser 1 minuto o mayor y menor o igual a 31 días.</value>
   </data>
 </root>

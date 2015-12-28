@@ -529,18 +529,42 @@ Aktion: {3}</value>
     <value>&amp;Benutzer ändern...</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value></value>
+    <value>Task-Veranstaltungen und Geschichte sind auf NET-Versionen vor 3.5 nicht unterstützt.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value></value>
+    <value>Die folgenden Eigenschafteneinstellungen nicht mit der gewählten Einstellung verwendet werden:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value></value>
+    <value>Einige Einstellungen sind nicht kompatibel mit dieser Auswahl.</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
-    <value></value>
+    <value>Die Aufgabe wird derzeit ausgeführt. (0x{0:X})</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Löschen</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>Ungültige ID Bereich Muster</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>Letzte 12 Stunden</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>Jeder Zeit</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>Benutzerdefinierter Bereich</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>Alle Veranstaltungen von {0}</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>Das Wiederholungsintervall Wert muss 1 Minute oder länger und weniger als oder gleich zu 31 Tagen sein.</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>Die Wiederholung Dauer Wert muss 1 Minute oder länger sein.</value>
   </data>
 </root>

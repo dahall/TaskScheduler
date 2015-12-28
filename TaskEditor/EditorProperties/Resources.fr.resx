@@ -139,7 +139,7 @@
     <value>N'importe quelle connexion</value>
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
-    <value />
+    <value>Sélectionnez un ordinateur cible nouvelle:</value>
   </data>
   <data name="ChangeUserBtn" xml:space="preserve">
     <value>Utilisateur ou groupe...</value>
@@ -148,7 +148,7 @@
     <value>Changer d'utilisateur</value>
   </data>
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
-    <value />
+    <value>Cette classe de COM ne supporte pas l'interface requise.</value>
   </data>
   <data name="CredentialPromptMessage" xml:space="preserve">
     <value>Entrez les informations du compte d’utilisateur pour l’exécution de cette tâche.</value>
@@ -166,37 +166,37 @@
     <value>Ce type de déclencheur ne peut pas être modifié dans cet outil.</value>
   </data>
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
-    <value />
+    <value>Impossible de récupérer l'historique des tâches. Erreur: {0}</value>
   </data>
   <data name="Error_CredUIConfirmFailed" xml:space="preserve">
-    <value />
+    <value>Appel à CredUIConfirmCredentials a échoué avec le code d'erreur: {0}</value>
   </data>
   <data name="Error_CredUIPromptFailed" xml:space="preserve">
-    <value />
+    <value>Appel à CredUIPromptForCredentials a échoué avec le code d'erreur: {0}</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value />
+    <value>Événements de la tâche et l'histoire ne reposent pas sur les versions de .NET avant 3.5.</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
-    <value />
+    <value>Nom de la tâche n'est pas dans un format valide. Les caractères non autorisés dans un nom de fichier ne sont pas autorisés dans un nom de la tâche.</value>
   </data>
   <data name="Error_InvalidSddlFormat" xml:space="preserve">
-    <value />
+    <value>SDDL doit être au format défini au http://goo.gl/6au0V</value>
   </data>
   <data name="Error_InvalidUriFormat" xml:space="preserve">
-    <value />
+    <value>URI n'est pas dans un format correct</value>
   </data>
   <data name="Error_InvalidVersionFormat" xml:space="preserve">
-    <value />
+    <value>Version doit être dans le format major.minor[.build].revision]].</value>
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
     <value>L’exécution d’une tâche sous un compte d’utilisateur de groupe est prise en charge uniquement sur Windows Vista™ ou une version ultérieure. Pour exécuter une tâche sous un compte de groupe, vous devez mettre à niveau cette tâche vers une tâche Windows Vista™.</value>
   </data>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value />
+    <value>Pour les options choisies, un mot de passe pour l'utilisateur spécifié doit être fournie.</value>
   </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
-    <value />
+    <value>Le compte d'utilisateur sous l'onglet général doit être défini à « SERVICE réseau » ou « SERVICE réseau » lorsque le processus SID Type a la valeur « Unrestricted » sous l'onglet Compléments. Vous devez modifier le Type de SID ou définir l'utilisateur à l'un des comptes valides.</value>
   </data>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>La valeur de l’intervalle de répétition doit être inférieure ou égale à la valeur de la durée de répétition.</value>
@@ -205,10 +205,10 @@
     <value>Si vous voulez qu’une tâche soit supprimée automatiquement après son exécution, vous devez ajouter au moins un déclencheur qui a une date d’expiration.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value />
+    <value>Les paramètres de propriété suivants ne peut pas être utilisés avec le paramètre de compatibilité sélectionnée:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value />
+    <value>Certains paramètres ne sont pas compatibles avec cette sélection.</value>
   </data>
   <data name="EventDetailHeader" xml:space="preserve">
     <value>{0}, Planificateur de tâches</value>
@@ -364,19 +364,19 @@
     <value>Au déverrouillage de la station de travail</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
-    <value />
+    <value>Un mot de passe du compte spécifié n'a pas été fourni.</value>
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
-    <value />
+    <value>La définition de cette propriété désactive un certain nombre d'autres propriétés. Souhaitez-vous toujours aller de l'avant?</value>
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
-    <value />
+    <value>Envoie un courrier électronique à l'aide fournie informations.</value>
   </data>
   <data name="WizActionSubtextExecute" xml:space="preserve">
-    <value />
+    <value>Exécute une opération de ligne de commande.</value>
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
-    <value />
+    <value>Affiche un message lorsqu'une tâche est activée.</value>
   </data>
   <data name="WizActionTextExecute" xml:space="preserve">
     <value>Exécuter un programme</value>
@@ -388,19 +388,19 @@
     <value>Afficher un message</value>
   </data>
   <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value />
+    <value>Evénement invalide</value>
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value />
+    <value>Au moins un journal doit être sélectionné.</value>
   </data>
   <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value />
+    <value>Il doit y avoir au moins un mois, une semaine et un jour de la semaine sélectionné.</value>
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value />
+    <value>Déclencheur mensuel non valide</value>
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value />
+    <value>Il doit être au moins un mois et un jour sélectionné.</value>
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
     <value>Nom : {0}
@@ -412,19 +412,19 @@ Déclencheur : {2}
 Action : {3}</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value />
+    <value>Commence une tâche, basé sur un horaire quotidien. Par exemple, la tâche démarre à une heure précise tous les jours, tous les autres jours, tous les trois jours, et ainsi de suite.</value>
   </data>
   <data name="WizTriggerSubtextEvent" xml:space="preserve">
-    <value />
+    <value>Commence une tâche lorsqu'un événement système se produit.</value>
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value />
+    <value>Commence une tâche basée sur un calendrier mensuel. Par exemple, la tâche démarre certains jours du mois spécifiques.</value>
   </data>
   <data name="WizTriggerSubtextTime" xml:space="preserve">
-    <value />
+    <value>Commence une tâche à une date précise et le temps.</value>
   </data>
   <data name="WizTriggerSubtextWeekly" xml:space="preserve">
-    <value />
+    <value>Commence une tâche basée sur un calendrier hebdomadaire. Par exemple, la tâche démarre à 08:00 un jour de la semaine chaque semaine ou toutes les deux semaines.</value>
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Tous les jours</value>
@@ -443,5 +443,95 @@ Action : {3}</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Non défini</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>Modèle de gamme ID non valide</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>Si vous choisissez de modifier manuellement la requête, vous ne serez n'est plus en mesure de modifier la requête en utilisant les contrôles de l'onglet filtre vous souhaitez continuer?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>Vous voulez utiliser l'onglet filtre pour modifier la requête ? Cela se traduira par des modifications manuelles pries la requête soient mis au rebut.</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>12 dernières heures</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>Les 30 derniers jours</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>N'importe quel moment</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>Gamme personnalisée...</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>Tous les événements de {0}</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>De {0} {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>Tous les événements jusqu'à {1}</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>Dernières 24 heures</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>Heure</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>7 Derniers Jours</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>Échec de la vérification</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>Audit des succès</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>Classique</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>Indice de corrélation</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>Temps de réponse</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>SQM</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>WDI Contexte</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>WDI Diag</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>Observateur d'événements</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>Applications et Services Logs</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Journaux de Windows</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>Chute de contenu doit être texte ou un fichier contenant une requête Xml valide.</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>Méconnu le texte de requête XML.</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>Offenser le texte: « {0} »</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>La période que peut utiliser une tâche ou un délai minimal est de 1 jour. La date limite doit aussi être supérieure à la durée.</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>La valeur de durée de répétition doit être 1 minute ou plus.</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>La valeur d'intervalle de répétition doit être 1 minute ou supérieure et inférieure ou égale à 31 jours.</value>
   </data>
 </root>

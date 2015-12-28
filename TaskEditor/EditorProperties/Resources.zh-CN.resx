@@ -431,21 +431,111 @@
     <value>定制触发器</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value></value>
+    <value>上之前 3.5 的.NET 版本不支持任务事件及历史。</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
-    <value></value>
+    <value>任务名称不是有效格式。任务名称中不允许不允许在文件名中的字符。</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value></value>
+    <value>以下属性设置不能用选定的兼容性设置:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value></value>
+    <value>某些设置不符合此选择。</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
-    <value></value>
+    <value>当前正在运行的任务。(0x{0:x})</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>未设置</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>无效的 ID 范围模式</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>如果您选择手动编辑查询，您将不再能够修改该查询使用筛选器选项卡上的控件，您要继续吗?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>你想要使用筛选器选项卡来编辑查询吗?这将导致查询被丢弃的手动更改。</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>12小时</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>最近30天</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>任何时间</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>自定义范围</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>查看所有线索，从</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>从 {0} 到 {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>所有事件到 {1}</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>最后 24 小时</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>最后一个小时</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>最近7天</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>审核失败</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>审核成功</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>经典</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>关联</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>回應時間</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>平方米</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>背景</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>WDI Diag</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>事件查看器</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>应用程序和服务日志</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Windows 日志</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>首字下沉的内容必须是文本或包含一个有效的 Xml 查询文件。</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>无法识别的文本在查询 XML 中找到。</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>冒犯文本: '{0}'</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>最低期限或任务可以使用的期限是 1 天。截止日期也必须大于期。</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>重复持续时间值必须是 1 分钟或更高版本。</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>重复时间间隔值必须是 1 分钟或更高版本和小于或等于 31 天。</value>
   </data>
 </root>
