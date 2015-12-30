@@ -22,26 +22,24 @@ namespace TestTaskService
 		[Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public override string Text
 		{
-			get { return headerTitle.Text; }
-			set { headerTitle.Text = value; }
+			get { return headerPanel.Text; }
+			set { headerPanel.Text = value; }
 		}
 
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content), Browsable(false)]
 		public Panel DetailArea => detailPanel;
 
-		private void hideButton_Click(object sender, EventArgs e)
+		private void headerPanel_CheckedChanged(object sender, EventArgs e)
 		{
 			if (detailHidden)
 			{
 				detailHidden = !detailHidden;
 				Height = defaultHeight;
-				hideButton.Text = "5";
 			}
 			else
 			{
 				detailHidden = !detailHidden;
 				Height = headerHeight;
-				hideButton.Text = "6";
 			}
 		}
 

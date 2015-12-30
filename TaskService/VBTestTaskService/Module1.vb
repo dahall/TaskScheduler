@@ -13,9 +13,12 @@ Module Module1
 			Dim t As Task = ts.AddTask(taskName, New TimeTrigger(DateTime.Now + TimeSpan.FromHours(1)),
 				New ExecAction("notepad.exe", "c:\test.log", "C:\"))
 
-			' Edit task and re-register if user clicks Ok
-			Dim editorForm As New TaskEditDialog(t)
-			editorForm.ShowDialog()
+			' Edit task and re-register if user clicks OK
+			Dim regTask As Task = Nothing
+			Dim editorForm As New TaskEditDialog(t, True, True) With {.Title = "Edit Task"}
+			If editorForm.ShowDialog() = Windows.Forms.DialogResult.OK Then
+				regTask = editorForm.Task
+			End If
 
 			' Remove the task we just created
 			ts.RootFolder.DeleteTask(taskName)
