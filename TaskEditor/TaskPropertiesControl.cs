@@ -299,6 +299,7 @@ namespace Microsoft.Win32.TaskScheduler
 				ValidateHistoryTab();
 
 				// Set General tab
+				if (td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				SetUserControls(td.Principal.LogonType);
 				taskNameText.Text = task?.Name ?? string.Empty;
 				taskNameText.ReadOnly = !(task == null && editable);

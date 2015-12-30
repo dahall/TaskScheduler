@@ -293,18 +293,19 @@ namespace TestTaskService
 				//WriteXml(td, taskName);
 				//using (var op = new TaskOptionsEditor(t, true, false))
 				//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
-				Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
+				//Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
 				//System.Converter<DateTime, string> d = ints => ints == DateTime.MinValue ? "Never" : ints.ToString();
 				//output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
 				//	t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
 				//WriteXml(t);
 
 				// Register then show task again
-				while (DisplayTask(t, true) != null)
+				while (DisplayTask(ts, td, true) != null)
 				{
-					t = editorForm.Task;
+					Task t = editorForm.Task;
 					output.Write($"***********************\r\nName: {t.Name}\r\nEnabled: {t.Enabled}\r\nLastRunTime: {t.LastRunTime}\r\nState: {t.State}\r\nIsActive: {t.IsActive}\r\nRegistered: {t.GetLastRegistrationTime()}\r\n" +
 						$"NextRunTime: {t.NextRunTime}\r\nShouldHaveRun: {t.LastRunTime}\r\nTriggerStart: {t.Definition.Triggers[0].StartBoundary}\r\nTriggerEnd: {t.Definition.Triggers[0].EndBoundary}\r\n");
+					td = t.Definition;
 				}
 
 				// Remove the task we just created
