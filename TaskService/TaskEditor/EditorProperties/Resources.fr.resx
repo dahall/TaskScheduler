@@ -192,9 +192,6 @@
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
     <value>L’exécution d’une tâche sous un compte d’utilisateur de groupe est prise en charge uniquement sur Windows Vista™ ou une version ultérieure. Pour exécuter une tâche sous un compte de groupe, vous devez mettre à niveau cette tâche vers une tâche Windows Vista™.</value>
   </data>
-  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Pour les options choisies, un mot de passe pour l'utilisateur spécifié doit être fournie.</value>
-  </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
     <value>Le compte d'utilisateur sous l'onglet général doit être défini à « SERVICE réseau » ou « SERVICE réseau » lorsque le processus SID Type a la valeur « Unrestricted » sous l'onglet Compléments. Vous devez modifier le Type de SID ou définir l'utilisateur à l'un des comptes valides.</value>
   </data>
@@ -533,5 +530,8 @@ Action : {3}</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
     <value>La valeur d'intervalle de répétition doit être 1 minute ou supérieure et inférieure ou égale à 31 jours.</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Planificateur de tâches ne peut pas créer la tâche. Ne connaît pas le compte d'utilisateur, le mot de passe est incorrect ou le compte d'utilisateur n'a pas l'autorisation pour créer cette tâche.</value>
   </data>
 </root>

@@ -313,9 +313,6 @@
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>重复的间隔值必须少于等于重复的持续值</value>
   </data>
-  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>對於所選擇的選項，為指定的用戶必須提供密碼</value>
-  </data>
   <data name="TaskCompatibility">
     <value>AT service|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
   </data>
@@ -537,5 +534,8 @@
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
     <value>重复时间间隔值必须是 1 分钟或更高版本和小于或等于 31 天。</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>任务计划程序无法创建任务。用户帐户是未知的，密码不正确，或者用户帐户没有权限来创建此任务。</value>
   </data>
 </root>

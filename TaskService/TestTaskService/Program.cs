@@ -280,7 +280,7 @@ namespace TestTaskService
 				// Create a new task definition and assign properties
 				TaskDefinition td = ts.NewTask();
 				td.RegistrationInfo.Description = "Test for editor\r\n\r\nLine 2";
-				td.RegistrationInfo.Author = "incaunu";
+				//td.RegistrationInfo.Author = "incaunu";
 				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
 				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 				eTrig.ValueQueries.Add("Name", "Value");
@@ -294,22 +294,25 @@ namespace TestTaskService
 				//using (var op = new TaskOptionsEditor(t, true, false))
 				//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
 				//Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
-				//System.Converter<DateTime, string> d = ints => ints == DateTime.MinValue ? "Never" : ints.ToString();
-				//output.Write("***********************\r\nName: {0}\r\nEnabled: {1}\r\nLastRunTime: {2}\r\nState: {3}\r\nIsActive: {4}\r\nNextRunTime: {5}\r\nShouldHaveRun: {6}\r\nTriggerStart: {7}\r\nTriggerEnd: {8}\r\n",
-				//	t.Name, t.Enabled, d(t.LastRunTime), t.State, t.IsActive, t.NextRunTime, d(t.LastRunTime), t.Definition.Triggers[0].StartBoundary, t.Definition.Triggers[0].EndBoundary);
+				System.Converter<DateTime, string> d = dt => (dt == DateTime.MinValue || dt == DateTime.MaxValue) ? "Never" : dt.ToString();
 				//WriteXml(t);
 
 				// Register then show task again
-				while (DisplayTask(ts, td, true) != null)
+				if (DisplayTask(ts, null, true) != null)
 				{
 					Task t = editorForm.Task;
-					output.Write($"***********************\r\nName: {t.Name}\r\nEnabled: {t.Enabled}\r\nLastRunTime: {t.LastRunTime}\r\nState: {t.State}\r\nIsActive: {t.IsActive}\r\nRegistered: {t.GetLastRegistrationTime()}\r\n" +
-						$"NextRunTime: {t.NextRunTime}\r\nShouldHaveRun: {t.LastRunTime}\r\nTriggerStart: {t.Definition.Triggers[0].StartBoundary}\r\nTriggerEnd: {t.Definition.Triggers[0].EndBoundary}\r\n");
-					td = t.Definition;
+					while (DisplayTask(t, true) != null)
+					{
+						t = editorForm.Task;
+						output.Write($"***********************\r\nName: {t.Name}\r\nEnabled: {t.Enabled}\r\nLastRunTime: {d(t.LastRunTime)}\r\nState: {t.State}\r\nIsActive: {t.IsActive}\r\n" +
+							$"Registered: {t.GetLastRegistrationTime()}\r\nNextRunTime: {d(t.NextRunTime)}\r\n");
+						if (t.Definition.Triggers.Count > 0)
+							output.Write($"TriggerStart: {d(t.Definition.Triggers[0].StartBoundary)}\r\nTriggerEnd: {d(t.Definition.Triggers[0].EndBoundary)}\r\n");
+					}
 				}
 
 				// Remove the task we just created
-				ts.RootFolder.DeleteTask(taskName);
+				ts.RootFolder.DeleteTask(taskName, false);
 			}
 			catch (Exception ex)
 			{

@@ -313,9 +313,6 @@ Azione: {3}</value>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>Il valore di intervallo di ripetizione deve essere inferiore o uguale al valore di durata ripetizione.</value>
   </data>
-  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Per le opzioni scelte, una password per l'utente specificato deve essere fornita.</value>
-  </data>
   <data name="TaskCompatibility" xml:space="preserve">
     <value>AT servizio|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
   </data>
@@ -549,5 +546,8 @@ Azione: {3}</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
     <value>Il valore di intervallo di ripetizione deve essere 1 minuto o maggior e minore o uguale a 31 giorni.</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Utilità di pianificazione non può creare l'attività. L'account utente è sconosciuto, la password non è corretta o l'account utente non dispone dell'autorizzazione per creare questa attività.</value>
   </data>
 </root>

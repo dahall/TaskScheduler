@@ -481,7 +481,7 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For the options selected, a password for the specified user must be provided..
+        ///   Looks up a localized string similar to Task Scheduler cannot create the task. The user account is unknown, the password is incorrect, or the user account does not have permission to create this task..
         /// </summary>
         internal static string Error_PasswordMustBeProvided {
             get {

@@ -313,9 +313,6 @@ Aktion: {3}</value>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
     <value>Die Wiederholung-Intervallwert muss kleiner oder gleich als die Dauer der Wiederholungswert.</value>
   </data>
-  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Für die ausgewählte Optionen, ein Kennwort für den angegebenen Benutzer muss zur Verfügung gestellt werden.</value>
-  </data>
   <data name="TaskCompatibility" xml:space="preserve">
     <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
     <comment>Listing of corresponding OS listing to each TaskCompatibility enum separated by '|' character.</comment>
@@ -566,5 +563,74 @@ Aktion: {3}</value>
   </data>
   <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
     <value>Die Wiederholung Dauer Wert muss 1 Minute oder länger sein.</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Aufgabenplanung kann nicht die Aufgabe erstellt werden. Das Benutzerkonto ist nicht bekannt, das Kennwort ist falsch oder das Benutzerkonto ist nicht berechtigt, diese Aufgabe zu erstellen.</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>Wenn Sie die Abfrage manuell bearbeiten möchten, werden Sie nicht mehr in der Lage, ändern Sie die Abfrage mit den Steuerelementen auf die Registerkarte "Filter" möchten Sie fortfahren?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>Möchten Sie die Registerkarte Filter verwenden, um die Abfrage zu bearbeiten? Manuelle Änderungen an der Abfrage verworfen wird daraufhin wird.</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>Von {0} bis {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>Alle Veranstaltungen bis zu {1}</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>Letzte Stunde</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>Letzten 7 Tage</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>Überwachungsfehler</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>Überwachen Sie Erfolg</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>Ein Klassiker</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>Korrelation-Hinweis</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>Reaktionszeit</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>SQM</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>WDI Kontext</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>WDI Diag</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>Ereignisanzeige</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>Anwendungs und Dienstprotokolle</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Windows Protokolle</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>Abgelegte Inhalte muss Text oder eine Datei mit einer gültigen Xml-Abfrage sein.</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>Nicht erkannter Text in XML-Abfrage gefunden.</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>Text zu beleidigen: "{0}"</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>Die minimale Frist oder Periode, die eine Aufgabe verwenden kann ist 1 Tag. Die Frist muss auch den Zeitraum größer sein.</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>24 Stunden</value>
   </data>
 </root>
