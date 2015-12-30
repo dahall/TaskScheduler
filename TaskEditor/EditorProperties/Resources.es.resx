@@ -204,9 +204,6 @@
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
     <value>Ejecutar una tarea con una cuenta de usuario de grupo se admite solo en Windows Vista™ o posterior. Para ejecutar una tarea con una cuenta de grupo, debe actualizar la tarea a una tarea de Windows Vista™.</value>
   </data>
-  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Para las opciones seleccionadas, se debe proporcionar una contraseña para el usuario especificado.</value>
-  </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
     <value>La cuenta de usuario en la ficha General debe establecerse en 'Servicio de red' o 'Servicio LOCAL' cuando el proceso de SID Type es 'Ilimitado' en la ficha complementos. Debe cambiar el SID Type o establecer el usuario en una de las cuentas válidas.</value>
   </data>
@@ -545,5 +542,8 @@ Acción : {3}</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
     <value>El valor de intervalo de repetición debe ser 1 minuto o mayor y menor o igual a 31 días.</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Programador de tareas no puede crear la tarea. Se desconoce la cuenta de usuario, la contraseña es incorrecta, o la cuenta de usuario no tiene permiso para crear esta tarea.</value>
   </data>
 </root>

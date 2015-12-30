@@ -304,7 +304,9 @@ namespace Microsoft.Win32.TaskScheduler
 				taskNameText.Text = task?.Name ?? string.Empty;
 				taskNameText.ReadOnly = !(task == null && editable);
 				taskLocationText.Text = GetTaskLocation();
-				taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
+				if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
+					td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
+				taskAuthorText.Text = td.RegistrationInfo.Author;
 				taskDescText.Text = td.RegistrationInfo.Description;
 				taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
 				taskHiddenCheck.Checked = td.Settings.Hidden;

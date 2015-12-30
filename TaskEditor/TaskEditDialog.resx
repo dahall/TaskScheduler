@@ -145,7 +145,7 @@
     <value>taskPropertiesControl1</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.10.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.TaskPropertiesControl</value>
   </data>
   <data name="&gt;&gt;taskPropertiesControl1.Parent" xml:space="preserve">
     <value>$this</value>
