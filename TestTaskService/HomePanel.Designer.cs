@@ -60,8 +60,6 @@
 			this.footerLabel = new System.Windows.Forms.Label();
 			this.refreshButton = new System.Windows.Forms.Button();
 			this.footerPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.statusBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-			this.activeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.activePanel.DetailArea.SuspendLayout();
 			this.overviewPanel.DetailArea.SuspendLayout();
@@ -382,17 +380,6 @@
 			this.footerPanel.Size = new System.Drawing.Size(670, 40);
 			this.footerPanel.TabIndex = 5;
 			// 
-			// statusBackgroundWorker
-			// 
-			this.statusBackgroundWorker.WorkerSupportsCancellation = true;
-			this.statusBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.statusBackgroundWorker_DoWork);
-			this.statusBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statusBackgroundWorker_RunWorkerCompleted);
-			// 
-			// activeBackgroundWorker
-			// 
-			this.activeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.activeBackgroundWorker_DoWork);
-			this.activeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.activeBackgroundWorker_RunWorkerCompleted);
-			// 
 			// HomePanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -446,7 +433,5 @@
 		private System.Windows.Forms.ComboBox comboBox1;
 		public System.Windows.Forms.Label summaryLabel;
 		public System.Windows.Forms.Label footerLabel;
-		private System.ComponentModel.BackgroundWorker statusBackgroundWorker;
-		private System.ComponentModel.BackgroundWorker activeBackgroundWorker;
 	}
 }
