@@ -20,7 +20,9 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskDescText.Text = td.RegistrationInfo.Description;
 			taskEnabledCheck.Checked = td.Settings.Enabled;
 			taskHiddenCheck.Checked = td.Settings.Hidden;
-			taskAuthorText.Text = string.IsNullOrEmpty(td.RegistrationInfo.Author) ? WindowsIdentity.GetCurrent().Name : td.RegistrationInfo.Author;
+			if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
+				td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
+			taskAuthorText.Text = td.RegistrationInfo.Author;
 			taskRegSourceText.Text = td.RegistrationInfo.Source;
 			taskRegURIText.Text = td.RegistrationInfo.URI;
 			taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
