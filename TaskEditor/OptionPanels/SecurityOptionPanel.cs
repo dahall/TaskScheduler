@@ -32,6 +32,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				principalReqPrivilegesDropDown.SetItemChecked(principalReqPrivilegesDropDown.Items.IndexOf(s.ToString()), true);
 			taskRunLevelCheck.Checked = td.Principal.RunLevel == TaskRunLevel.Highest;
 			flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
+			if (td != null && td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
 			string sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
 			if (string.IsNullOrEmpty(sddl) && parent.Task != null)
