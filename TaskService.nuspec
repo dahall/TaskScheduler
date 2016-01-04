@@ -27,6 +27,7 @@
 	<file src="bin\Release\v4.0\**\Microsoft.Win32.TaskScheduler.resources.dll" target="lib\net40" />
 	<file src="*.cs" target="src" />
 	<file src="Native\*.cs" target="src\Native" />
+	<file src="Properties\*.cs" target="src\Properties" />
 	<file src="V1\*.cs" target="src\V1" />
 	<file src="V2\*.cs" target="src\V2" />
   </files>
