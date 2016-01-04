@@ -13,7 +13,7 @@
 	<tags>task interop taskscheduler UI editor</tags>
 	<dependencies>
 	  <dependency id="TaskScheduler" version="[2.5.11]" />
-	  <dependency id="AeroWizard" version="[2.1.1]" />
+	  <dependency id="AeroWizard" version="[2.1.2]" />
 	  <dependency id="GroupControls" version="[1.5.0]" />
 	  <dependency id="TimeSpan2" version="[2.1.1]" />
 	</dependencies>

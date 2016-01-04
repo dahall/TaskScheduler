@@ -320,7 +320,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 			{
-				if (durationSpan.Value < TimeSpan2.FromMinutes(1))
+				if (durationSpan.Value < TimeSpan2.FromMinutes(1) && durationSpan.Value != TimeSpan2.Zero)
 				{
 					MessageBox.Show(this, EditorProperties.Resources.Error_RepetitionDurationOutOfRange, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					durationSpan.Value = TimeSpan.FromMinutes(1);
