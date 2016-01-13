@@ -243,10 +243,10 @@ namespace Microsoft.Win32.TaskScheduler
 		internal virtual void Bind(V1Interop.ITask iTask)
 		{
 			if (Id != null)
-				TaskDefinition.V1SetDataItem(iTask, "ActionId", Id);
+				iTask.SetDataItem("ActionId", Id);
 			IBindAsExecAction bindable = this as IBindAsExecAction;
 			if (bindable != null)
-				TaskDefinition.V1SetDataItem(iTask, "ActionType", this.InternalActionType.ToString());
+				iTask.SetDataItem("ActionType", this.InternalActionType.ToString());
 			object o = null;
 			unboundValues.TryGetValue("Path", out o);
 			iTask.SetApplicationName(bindable != null ? ExecAction.PowerShellPath : o?.ToString() ?? string.Empty);

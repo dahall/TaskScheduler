@@ -83,6 +83,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the maximum history count. Use -1 for infinite or to retrieve all items.
+		/// </summary>
+		/// <value>
+		/// The maximum history count.
+		/// </value>
+		[DefaultValue(-1), Category("Behavior"), Description("Determines maximum number of history items to retrieve.")]
+		public int MaxHistoryCount
+		{
+			get { return taskPropertiesControl1.MaxHistoryCount; }
+			set { taskPropertiesControl1.MaxHistoryCount = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether to register task when Accept (OK) button pressed.
 		/// </summary>
 		/// <value><c>true</c> if updated task is to be registered; otherwise, <c>false</c>.</value>

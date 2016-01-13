@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -10,12 +11,25 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class TaskEventArgs : EventArgs
 	{
-		private TaskService taskSvc;
+		private Task task;
+		private TaskService taskService;
 
 		internal TaskEventArgs(TaskEvent evt, TaskService ts = null)
 		{
 			TaskEvent = evt;
-			taskSvc = ts;
+			TaskPath = evt.TaskPath;
+			taskService = ts;
+		}
+
+		internal TaskEventArgs(Task task)
+		{
+			this.task = task;
+			TaskPath = task.Path;
+		}
+
+		internal TaskEventArgs(string taskPath)
+		{
+			TaskPath = taskPath;
 		}
 
 		/// <summary>
@@ -24,7 +38,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The task or <c>null</c> if unable to retrieve.
 		/// </value>
-		public Task Task => taskSvc?.GetTask(TaskPath);
+		public Task Task
+		{
+			get { if (task != null) return task; else try { return taskService?.GetTask(TaskPath); } catch { return null; } }
+		}
 
 		/// <summary>
 		/// Gets the <see cref="TaskEvent"/>.
@@ -35,12 +52,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskEvent TaskEvent { get; }
 
 		/// <summary>
-		/// Gets the task nane.
+		/// Gets the task name.
 		/// </summary>
 		/// <value>
 		/// The task name.
 		/// </value>
-		public string TaskName => System.IO.Path.GetFileName(TaskEvent.TaskPath);
+		public string TaskName => System.IO.Path.GetFileName(TaskPath);
 
 		/// <summary>
 		/// Gets the task path.
@@ -48,7 +65,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The task path.
 		/// </value>
-		public string TaskPath => TaskEvent.TaskPath;
+		public string TaskPath { get; }
 	}
 
 	/// <summary>
@@ -68,6 +85,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool includeSubfolders;
 		private bool initializing;
 		private TaskService ts;
+		private System.IO.FileSystemWatcher v1watcher;
 		private EventLogWatcher watcher;
 		private ISynchronizeInvoke synchronizingObject;
 
@@ -368,7 +386,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets a value indicating if watching is available.
 		/// </summary>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		private bool IsHandleInvalid => watcher == null;
+		private bool IsHandleInvalid => IsV1 ? v1watcher == null : watcher == null;
+
+		private bool IsV1 => Environment.OSVersion.Version.Major < 6;
 
 		/// <summary>
 		/// Signals the object that initialization is starting.
@@ -472,11 +492,24 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ReleaseWatcher()
 		{
-			if (watcher != null)
+			if (IsV1)
 			{
-				watcher.Enabled = false;
-				watcher.EventRecordWritten -= Watcher_EventRecordWritten;
-				watcher = null;
+				if (v1watcher != null)
+				{
+					v1watcher.EnableRaisingEvents = false;
+					v1watcher.Changed -= Watcher_DirectoryChanged;
+					v1watcher.Deleted -= Watcher_DirectoryChanged;
+					v1watcher = null;
+				}
+			}
+			else
+			{
+				if (watcher != null)
+				{
+					watcher.Enabled = false;
+					watcher.EventRecordWritten -= Watcher_EventRecordWritten;
+					watcher = null;
+				}
 			}
 		}
 
@@ -497,17 +530,28 @@ namespace Microsoft.Win32.TaskScheduler
 			ReleaseWatcher();
 			string taskPath = null;
 			if (Filter.Wildcard == null)
-				taskPath = System.IO.Path.Combine(folder, Filter.TaskName);
-			var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.Now, TargetServer, UserAccountDomain, UserName, UserPassword);
-			log.Query.ReverseDirection = false;
-			watcher = new EventLogWatcher(log.Query);
-			log = null;
-			watcher.EventRecordWritten += Watcher_EventRecordWritten;
+				taskPath = Path.Combine(folder, Filter.TaskName);
+			if (IsV1)
+			{
+				var di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.System));
+				string dir = Path.Combine(di.Parent.FullName, "Tasks");
+				v1watcher = new FileSystemWatcher(dir) { Filter = "*.job", NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite };
+				v1watcher.Changed += Watcher_DirectoryChanged;
+				v1watcher.Deleted += Watcher_DirectoryChanged;
+			}
+			else
+			{
+				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.Now, TargetServer, UserAccountDomain, UserName, UserPassword);
+				log.Query.ReverseDirection = false;
+				watcher = new EventLogWatcher(log.Query);
+				log = null;
+				watcher.EventRecordWritten += Watcher_EventRecordWritten;
+			}
 		}
 
 		private bool ShouldSerializeFilter() => Filter.ShouldSerialize();
 
-		private bool ShouldSerializeTaskService() => TaskService != Microsoft.Win32.TaskScheduler.TaskService.Instance;
+		private bool ShouldSerializeTaskService() => TaskService != TaskService.Instance;
 
 		private void StartRaisingEvents()
 		{
@@ -519,7 +563,10 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(StartRaisingEvents)}");
 				enabled = true;
 				SetupWatcher();
-				watcher.Enabled = true;
+				if (IsV1)
+					try { v1watcher.EnableRaisingEvents = true; } catch { }
+				else
+					try { watcher.Enabled = true; } catch { }
 			}
 		}
 
@@ -538,14 +585,21 @@ namespace Microsoft.Win32.TaskScheduler
 				StopListening();
 		}
 
+		private void Watcher_DirectoryChanged(object sender, FileSystemEventArgs e)
+		{
+			Task task = null;
+			try { task = TaskService.GetTask(Path.GetFileNameWithoutExtension(e.Name)); } catch { }
+			OnEventRecorded(this, task != null ? new TaskEventArgs(task) : new TaskEventArgs(e.Name));
+		}
+
 		private void Watcher_EventRecordWritten(object sender, EventRecordWrittenEventArgs e)
 		{
 			var taskEvent = new TaskEvent(e.EventRecord);
 			System.Diagnostics.Debug.WriteLine("Task event: " + taskEvent.ToString());
 
 			// Get the task name and folder
-			string name = System.IO.Path.GetFileNameWithoutExtension(taskEvent.TaskPath);
-			string fld = System.IO.Path.GetDirectoryName(taskEvent.TaskPath);
+			string name = Path.GetFileNameWithoutExtension(taskEvent.TaskPath);
+			string fld = Path.GetDirectoryName(taskEvent.TaskPath);
 
 			// Check folder and name filters
 			if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))

@@ -180,52 +180,53 @@ namespace TestTaskService
 		{
 			currentEventTaskId = null;
 			ListViewItemEventArgs e = state as ListViewItemEventArgs;
-			if (e.Cancelled) return;
-			if (e.Items == null || e.Items.Length == 0)
+			if (e.Error != null || e.Cancelled || e.Items == null || e.Items.Length == 0)
 			{
 				label4.Text = "No results";
-				return;
 			}
-#if NET_35_OR_GREATER
-			ListViewGroup lvgroup = new ListViewGroup();
-			statusListView.BeginUpdate();
-			int running = 0, succeeded = 0, stopped = 0, failed = 0;
-			for (int i = 0; i < e.Items.Length; i++)
+			else
 			{
-				if (lvgroup.Header != e.Items[i].Text)
+#if NET_35_OR_GREATER
+				ListViewGroup lvgroup = new ListViewGroup();
+				statusListView.BeginUpdate();
+				int running = 0, succeeded = 0, stopped = 0, failed = 0;
+				for (int i = 0; i < e.Items.Length; i++)
 				{
-					lvgroup = new ListViewGroup(e.Items[i].Text);
-					statusListView.Groups.Add(lvgroup);
-					lvgroup.SetCollapsible(true);
+					if (lvgroup.Header != e.Items[i].Text)
+					{
+						lvgroup = new ListViewGroup(e.Items[i].Text);
+						statusListView.Groups.Add(lvgroup);
+						lvgroup.SetCollapsible(true);
+					}
+					e.Items[i].Group = lvgroup;
+					statusListView.Items.Add(e.Items[i]);
+					switch (((CorrelatedTaskEvent)e.Items[i].Tag).RunResult)
+					{
+						case CorrelatedTaskEvent.Status.StillRunning:
+							running++;
+							break;
+
+						case CorrelatedTaskEvent.Status.Success:
+							succeeded++;
+							break;
+
+						case CorrelatedTaskEvent.Status.Failure:
+							failed++;
+							break;
+
+						case CorrelatedTaskEvent.Status.Terminated:
+							stopped++;
+							break;
+
+						default:
+							break;
+					}
 				}
-				e.Items[i].Group = lvgroup;
-				statusListView.Items.Add(e.Items[i]);
-				switch (((CorrelatedTaskEvent)e.Items[i].Tag).RunResult)
-				{
-					case CorrelatedTaskEvent.Status.StillRunning:
-						running++;
-						break;
-
-					case CorrelatedTaskEvent.Status.Success:
-						succeeded++;
-						break;
-
-					case CorrelatedTaskEvent.Status.Failure:
-						failed++;
-						break;
-
-					case CorrelatedTaskEvent.Status.Terminated:
-						stopped++;
-						break;
-
-					default:
-						break;
-				}
-			}
-			statusListView.EndUpdate();
-			statusListView.UseWaitCursor = false;
-			label4.Text = string.Format(label4.Tag.ToString(), e.Items.Length, running, succeeded, stopped, failed);
+				statusListView.EndUpdate();
+				label4.Text = string.Format(label4.Tag.ToString(), e.Items.Length, running, succeeded, stopped, failed);
 #endif
+			}
+			statusListView.UseWaitCursor = false;
 		}
 
 		private void EventStatusDoWork(TimeSpan span, AsyncOperation asyncOp)
@@ -235,23 +236,26 @@ namespace TestTaskService
 
 			if (!IsTaskCanceled(asyncOp.UserSuppliedState))
 			{
+#if NET_35_OR_GREATER
 				try
 				{
-					DateTime st = DateTime.Now.Subtract(span);
-#if NET_35_OR_GREATER
-					CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st, null, ts.TargetServer);
-					foreach (var t in log)
+					if (Environment.OSVersion.Version.Major > 5)
 					{
-						if (IsTaskCanceled(asyncOp.UserSuppliedState))
-							break;
-						list.Add(new ListViewItem(new string[] { t.TaskName, t.RunResult.ToString(), t.RunStart.ToString(), t.RunEnd.ToString(), t.TriggeredBy.ToString() }) { Tag = t });
+						DateTime st = DateTime.Now.Subtract(span);
+						CorrelatedTaskEventLog log = new CorrelatedTaskEventLog(st, null, ts.TargetServer);
+						foreach (var t in log)
+						{
+							if (IsTaskCanceled(asyncOp.UserSuppliedState))
+								break;
+							list.Add(new ListViewItem(new string[] { t.TaskName, t.RunResult.ToString(), t.RunStart.ToString(), t.RunEnd.ToString(), t.TriggeredBy.ToString() }) { Tag = t });
+						}
 					}
-#endif
 				}
 				catch (Exception ex)
 				{
 					e = ex;
 				}
+#endif
 			}
 
 			EventStatusSignalCompletion(list.ToArray(), e, IsTaskCanceled(asyncOp.UserSuppliedState), asyncOp);

@@ -50,6 +50,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets the maximum query count. Use -1 for all or infinite.
+		/// </summary>
+		/// <value>
+		/// The maximum query count.
+		/// </value>
+		[DefaultValue(-1), Category("Behavior"), Description("Determines maximum number of history items to retrieve.")]
+		public int MaxQueryCount { get; set; } = -1;
+
+		/// <summary>
 		/// Gets or sets a value indicating whether errors are shown in the UI.
 		/// </summary>
 		/// <value><c>true</c> if errors are shown; otherwise, <c>false</c>.</value>
@@ -163,19 +172,32 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-				TaskEventLog log = CreateLogInstance();
 				if (!lvwColumnSorter.Group && lvwColumnSorter.SortColumn == 1)
 				{
 					e.Result = null;
+					((BackgroundWorker)sender).ReportProgress(100, vlog.Count);
 				}
 				else
 				{
-					List<TaskEvent> eList = new List<TaskEvent>(log);
-					List<ListViewItem> list = eList.ConvertAll<ListViewItem>(delegate(TaskEvent te) { return BuildItem(te); });
+					TaskEventLog log = CreateLogInstance();
+					List<ListViewItem> list;
+					if (MaxQueryCount == -1)
+						list = new List<TaskEvent>(log).ConvertAll(te => BuildItem(te));
+					else
+					{
+						list = new List<ListViewItem>();
+						int i = 0;
+						foreach (var te in log)
+						{
+							if (++i > MaxQueryCount)
+								break;
+							list.Add(BuildItem(te));
+						}
+					}
 					list.Sort(lvwColumnSorter);
 					e.Result = list;
+					((BackgroundWorker)sender).ReportProgress(100, log.Count);
 				}
-				((BackgroundWorker)sender).ReportProgress(100, log.Count);
 			}
 			catch (Exception ex) { e.Result = ex; }
 		}
@@ -203,7 +225,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				historyListView.Items.Clear();
 				historyListView.VirtualMode = true;
-				vcache = new System.Collections.Generic.SparseArray<ListViewItem>();
+				vcache = new SparseArray<ListViewItem>();
 				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending) as TaskEventEnumerator;
 			}
 			else

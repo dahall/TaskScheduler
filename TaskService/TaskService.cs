@@ -764,6 +764,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
 		{
+			name = name.TrimStart('\\');
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
 			try
@@ -790,12 +791,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2TaskService != null)
 			{
-				Marshal.ReleaseComObject(v2TaskService);
+				try { Marshal.ReleaseComObject(v2TaskService); } catch { }
 				v2TaskService = null;
 			}
 			if (v1TaskScheduler != null)
 			{
-				Marshal.ReleaseComObject(v1TaskScheduler);
+				try { Marshal.ReleaseComObject(v1TaskScheduler); } catch { }
 				v1TaskScheduler = null;
 			}
 			if (v1Impersonation != null)
@@ -819,8 +820,7 @@ namespace Microsoft.Win32.TaskScheduler
 				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
 				{
 					// Clear stuff if already connected
-					if (v2TaskService != null || v1TaskScheduler != null)
-						Dispose(true);
+					Dispose(true);
 
 					if (hasV2 && !forceV1)
 					{

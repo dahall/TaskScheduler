@@ -47,7 +47,7 @@ namespace TestTaskService
 			curPanel = panel;
 			if (panel is ISupportTasks)
 			{
-				((ISupportTasks)panel).TaskService = TaskService;
+				((ISupportTasks)panel).TaskService = taskService;
 				SetActionMenu(((ISupportTasks)panel).MenuItems);
 			}
 			panel.Show();
@@ -127,13 +127,14 @@ namespace TestTaskService
 
 		private void RefreshList()
 		{
-			TaskService.AllowReadOnlyTasks = true;
+			taskService.AllowReadOnlyTasks = true;
 			treeView1.Nodes.Clear();
-			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", TaskService.TargetServer == null || TaskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : TaskService.TargetServer), 1, 1);
+			TreeNode n = treeView1.Nodes.Add(null, string.Format("Task Scheduler ({0})", taskService.TargetServer == null || taskService.TargetServer.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase) ? "Local" : taskService.TargetServer), 1, 1);
 			TreeNode p = n.Nodes.Add(null, "Task Scheduler Library", 2, 2);
-			p.Tag = TaskService.RootFolder;
+			p.Tag = taskService.RootFolder;
 			n.Expand();
-			LoadChildren(p);
+			if (taskService.HighestSupportedVersion > new Version(1, 1))
+				LoadChildren(p);
 			treeView1.SelectedNode = n;
 		}
 
@@ -149,29 +150,31 @@ namespace TestTaskService
 
 		private void connectToAnotherComputerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (taskServiceConnectDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			taskServiceConnectDialog1.TaskService = taskService;
+			if (taskServiceConnectDialog1.ShowDialog(this) == DialogResult.OK)
 				RefreshList();
 		}
 
 		private void createBasicTaskMenuItem_Click(object sender, EventArgs e)
 		{
+			taskSchedulerWizard1.Initialize(taskService);
 			taskSchedulerWizard1.ShowDialog(this);
 		}
 
 		private void createTaskMenuItem_Click(object sender, EventArgs e)
 		{
-			taskEditDialog1.Initialize(TaskService);
+			taskEditDialog1.Initialize(taskService);
 			taskEditDialog1.ShowDialog(this);
 		}
 
 		private void importTaskMenuItem_Click(object sender, EventArgs e)
 		{
-			if (openFileDialog1.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
 			{
 				try
 				{
-					TaskDefinition td = TaskService.NewTaskFromFile(openFileDialog1.FileName);
-					taskEditDialog1.Initialize(TaskService, td);
+					TaskDefinition td = taskService.NewTaskFromFile(openFileDialog1.FileName);
+					taskEditDialog1.Initialize(taskService, td);
 					taskEditDialog1.TaskName = System.IO.Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
 					taskEditDialog1.ShowDialog(this);
 				}
@@ -184,7 +187,7 @@ namespace TestTaskService
 
 		private void displayAllRunningTasksToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			RunningTasksDlg dlg = new RunningTasksDlg(TaskService);
+			RunningTasksDlg dlg = new RunningTasksDlg(taskService);
 			dlg.ShowDialog(this);
 		}
 
@@ -198,7 +201,7 @@ namespace TestTaskService
 			if (treeView1.SelectedNode != null && treeView1.SelectedNode.Tag != null)
 			{
 				NewFolderDlg dlg = new NewFolderDlg();
-				if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{
 					((TaskFolder)treeView1.SelectedNode.Tag).CreateFolder(dlg.FolderName); // Create folder under currently selected folder
 					RefreshList();
@@ -210,7 +213,7 @@ namespace TestTaskService
 		{
 			if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent.Tag != null)
 			{
-				if (MessageBox.Show(this, "Do you want to delete this task folder?", "Task Scheduler", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+				if (MessageBox.Show(this, "Do you want to delete this task folder?", "Task Scheduler", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
 				{
 					((TaskFolder)treeView1.SelectedNode.Parent.Tag).DeleteFolder(((TaskFolder)treeView1.SelectedNode.Tag).Name);
 					RefreshList();
@@ -230,12 +233,21 @@ namespace TestTaskService
 
 		private void EnableTaskLog(bool toggle = false)
 		{
-			var log = TaskService.GetEventLog();
-			if (toggle)
-				log.Enabled = !log.Enabled;
-			bool logEnabled = log.Enabled;
-			enableHistoryMenuItem.Visible = !logEnabled;
-			disableHistoryMenuItem.Visible = logEnabled;
+			try
+			{
+				TaskEventLog log = null;
+				try { log = taskService.GetEventLog(); } catch { }
+				if (log != null && toggle)
+					log.Enabled = !log.Enabled;
+				bool logEnabled = log != null && log.Enabled;
+				enableHistoryMenuItem.Visible = !logEnabled;
+				disableHistoryMenuItem.Visible = logEnabled;
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error: " + ex.ToString());
+			}
 		}
 	}
 }

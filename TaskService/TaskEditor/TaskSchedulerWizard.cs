@@ -525,7 +525,10 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskService = service;
 			task = null;
 			if (td == null)
+			{
 				TaskDefinition = service.NewTask();
+				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2));
+			}
 			else
 			{
 				if (td.Triggers.Count > 1)
@@ -1081,7 +1084,7 @@ namespace Microsoft.Win32.TaskScheduler
 				dlg.Initialize(TaskService, td);
 				dlg.RegisterTaskOnAccept = false;
 				dlg.TaskName = TaskName;
-				if (dlg.ShowDialog(ParentForm) == System.Windows.Forms.DialogResult.OK)
+				if (dlg.ShowDialog(ParentForm) == DialogResult.OK)
 					td = dlg.TaskDefinition;
 			}
 			if (RegisterTaskOnFinish)
