@@ -53,10 +53,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DefaultValue((Task)null)]
 		public Task Task
 		{
-			get
-			{
-				return task;
-			}
+			get { return task; }
 			set
 			{
 				task = value;
@@ -122,10 +119,5 @@ namespace Microsoft.Win32.TaskScheduler
 		internal bool ShouldSerializeEndDate() => endDatePicker.ShouldSerializeValue();
 
 		internal bool ShouldSerializeStartDate() => startDatePicker.ShouldSerializeValue();
-
-		private void label1_Click(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

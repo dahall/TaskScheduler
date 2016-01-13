@@ -117,7 +117,7 @@ namespace Microsoft.Win32.TaskScheduler
 			using (var dlg = new EventActionFilterDataEditor())
 			{
 				dlg.DataItems = new Dictionary<string, string>(ql.Query.Data);
-				if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{
 					ql.Query.Data = new Dictionary<string, string>(dlg.DataItems);
 				}
@@ -325,7 +325,7 @@ namespace Microsoft.Win32.TaskScheduler
 					using (var dlg = new EventActionFilterTimeEditor())
 					{
 						if (ql.Query.Times != null && ql.Query.Times.HasDates) { dlg.FromDateTime = ql.Query.Times.low; dlg.ToDateTime = ql.Query.Times.high; }
-						if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+						if (dlg.ShowDialog(this) == DialogResult.OK)
 						{
 							ql.Query.Times = new EventQuery.CQuery.CTimeCreated(dlg.FromDateTime, dlg.ToDateTime);
 							InitLogTime(ql.Query.Times);
@@ -372,7 +372,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return;
 			}
 			subscription = EventQuery.Serialize(ql);
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+			DialogResult = DialogResult.OK;
 			Close();
 		}
 

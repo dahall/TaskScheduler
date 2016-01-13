@@ -78,6 +78,7 @@
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="ResourceReferenceValue.cs" />
+    <Compile Include="TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskEventWatcher.cs" />
     <Compile Include="TaskSecurity.cs" />

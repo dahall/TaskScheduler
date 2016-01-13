@@ -246,17 +246,16 @@ namespace Microsoft.Win32.TaskScheduler
 			int idx = IndexOfTask(e.TaskName);
 			if (idx != -1)
 			{
-				if (e.TaskEvent.StandardEventId == StandardTaskEventId.TaskDeleted)
+				if (e.Task == null || (e.TaskEvent != null && e.TaskEvent.StandardEventId == StandardTaskEventId.TaskDeleted))
 					listView1.Items.RemoveAt(idx);
 				else
 					RefreshLVI(idx);
 			}
 			else
 			{
-				var t = e.Task;
-				if (t != null)
+				if (e.Task != null)
 				{
-					listView1.Items.Add(LVIFromTask(t));
+					listView1.Items.Add(LVIFromTask(e.Task));
 					listView1.Sort();
 				}
 			}

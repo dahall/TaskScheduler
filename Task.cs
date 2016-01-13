@@ -391,20 +391,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.RestartOnIdle;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.RestartOnIdleResume) == V1Interop.TaskFlags.RestartOnIdleResume;
+				return v1Task.HasFlags(V1Interop.TaskFlags.RestartOnIdleResume);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.RestartOnIdle = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.RestartOnIdleResume);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.RestartOnIdleResume);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.RestartOnIdleResume, value);
 			}
 		}
 
@@ -418,20 +412,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.StopOnIdleEnd;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.KillOnIdleEnd) == V1Interop.TaskFlags.KillOnIdleEnd;
+				return v1Task.HasFlags(V1Interop.TaskFlags.KillOnIdleEnd);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.StopOnIdleEnd = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.KillOnIdleEnd);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.KillOnIdleEnd);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.KillOnIdleEnd, value);
 			}
 		}
 
@@ -878,7 +866,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Task != null)
 					return v2Task.Enabled;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.Disabled) != V1Interop.TaskFlags.Disabled;
+				return Definition.Settings.Enabled;
 			}
 			set
 			{
@@ -886,11 +874,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Task.Enabled = value;
 				else
 				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (!value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.Disabled);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.Disabled);
+					Definition.Settings.Enabled = value;
 					Definition.V1Save(null);
 				}
 			}
@@ -1040,7 +1024,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Task != null)
 					return v2Task.Path;
-				return GetV1Path(v1Task);
+				return "\\" + Name; // GetV1Path(v1Task);
 			}
 		}
 
@@ -1722,14 +1706,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Def != null)
 					return v2Def.Data;
-				return V1GetDataItem(v1Task, nameof(Data));
+				return v1Task.GetDataItem(nameof(Data));
 			}
 			set
 			{
 				if (v2Def != null)
 					v2Def.Data = value;
 				else
-					V1SetDataItem(v1Task, nameof(Data), value);
+					v1Task.SetDataItem(nameof(Data), value);
 			}
 		}
 
@@ -2019,20 +2003,6 @@ namespace Microsoft.Win32.TaskScheduler
 				d.Add(k, v);
 		}
 
-		internal static string V1GetDataItem(V1Interop.ITask v1Task, string name)
-		{
-			string ret = null;
-			GetV1TaskDataDictionary(v1Task).TryGetValue(name, out ret);
-			return ret;
-		}
-
-		internal static void V1SetDataItem(V1Interop.ITask v1Task, string name, string value)
-		{
-			var d = GetV1TaskDataDictionary(v1Task);
-			d[name] = value;
-			SetV1TaskData(v1Task, d);
-		}
-
 		internal void V1Save(string newName)
 		{
 			if (v1Task != null)
@@ -2129,7 +2099,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return res;
 		}
 
-		private static System.Collections.Generic.Dictionary<string, string> GetV1TaskDataDictionary(V1Interop.ITask v1Task)
+		internal static System.Collections.Generic.Dictionary<string, string> GetV1TaskDataDictionary(V1Interop.ITask v1Task)
 		{
 			System.Collections.Generic.Dictionary<string, string> dict;
 			object o = GetV1TaskData(v1Task);
@@ -2168,7 +2138,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		private static void SetV1TaskData(V1Interop.ITask v1Task, object value)
+		internal static void SetV1TaskData(V1Interop.ITask v1Task, object value)
 		{
 			if (value == null)
 				v1Task.SetWorkItemData(0, null);
@@ -2234,14 +2204,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.DisplayName;
-				return TaskDefinition.V1GetDataItem(v1Task, "PrincipalDisplayName");
+				return v1Task.GetDataItem("PrincipalDisplayName");
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.DisplayName = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, "PrincipalDisplayName", value);
+					v1Task.SetDataItem("PrincipalDisplayName", value);
 			}
 		}
 
@@ -2290,14 +2260,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.Id;
-				return TaskDefinition.V1GetDataItem(v1Task, "PrincipalId");
+				return v1Task.GetDataItem("PrincipalId");
 			}
 			set
 			{
 				if (v2Principal != null)
 					v2Principal.Id = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, "PrincipalId", value);
+					v1Task.SetDataItem("PrincipalId", value);
 			}
 		}
 
@@ -2314,7 +2284,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v2Principal.LogonType;
 				if (UserId == localSystemAcct)
 					return TaskLogonType.ServiceAccount;
-				if ((v1Task.GetFlags() & V1Interop.TaskFlags.RunOnlyIfLoggedOn) == V1Interop.TaskFlags.RunOnlyIfLoggedOn)
+				if (v1Task.HasFlags(V1Interop.TaskFlags.RunOnlyIfLoggedOn))
 					return TaskLogonType.InteractiveToken;
 				return TaskLogonType.InteractiveTokenOrPassword;
 			}
@@ -2326,12 +2296,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value == TaskLogonType.Group || value == TaskLogonType.None || value == TaskLogonType.S4U)
 						throw new NotV1SupportedException();
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value == TaskLogonType.InteractiveToken)
-						flags |= V1Interop.TaskFlags.RunOnlyIfLoggedOn;
-					else
-						flags &= ~(V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-					v1Task.SetFlags(flags);
+					v1Task.SetFlags(V1Interop.TaskFlags.RunOnlyIfLoggedOn, value == TaskLogonType.InteractiveToken);
 				}
 			}
 		}
@@ -2529,9 +2494,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.
 		/// </summary>
 		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
-		/// <returns>
-		/// The index of <paramref name="item"/> if found in the list; otherwise, -1.
-		/// </returns>
+		/// <returns>The index of <paramref name="item"/> if found in the list; otherwise, -1.</returns>
 		public int IndexOf(TaskPrincipalPrivilege item)
 		{
 			for (int i = 0; i < Count; i++)
@@ -2547,13 +2510,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
 		/// <param name="item">The object to insert into the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
-		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
-		///   </exception>
-		///   
-		/// <exception cref="T:System.NotSupportedException">
-		/// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
-		///   </exception>
-		public void Insert(int index, TaskPrincipalPrivilege item)
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.</exception>
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.</exception>
+		void System.Collections.Generic.IList<TaskPrincipalPrivilege>.Insert(int index, TaskPrincipalPrivilege item)
 		{
 			throw new NotImplementedException();
 		}
@@ -2562,13 +2521,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Removes the <see cref="T:System.Collections.Generic.IList`1"/> item at the specified index.
 		/// </summary>
 		/// <param name="index">The zero-based index of the item to remove.</param>
-		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
-		///   </exception>
-		///   
-		/// <exception cref="T:System.NotSupportedException">
-		/// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
-		///   </exception>
-		public void RemoveAt(int index)
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.</exception>
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.</exception>
+		void System.Collections.Generic.IList<TaskPrincipalPrivilege>.RemoveAt(int index)
 		{
 			throw new NotImplementedException();
 		}
@@ -2576,16 +2531,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the element at the specified index.
 		/// </summary>
-		/// <returns>
-		/// The element at the specified index.
-		///   </returns>
-		///   
-		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
-		///   </exception>
-		///   
-		/// <exception cref="T:System.NotSupportedException">
-		/// The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
-		///   </exception>
+		/// <returns>The element at the specified index.</returns>
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.</exception>
+		/// <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.</exception>
 		public TaskPrincipalPrivilege this[int index]
 		{
 			get
@@ -2594,19 +2542,14 @@ namespace Microsoft.Win32.TaskScheduler
 					return (TaskPrincipalPrivilege)Enum.Parse(typeof(TaskPrincipalPrivilege), v2Principal2[index + 1]);
 				throw new IndexOutOfRangeException();
 			}
-			set
-			{
-				throw new NotImplementedException();
-			}
+			set { throw new NotImplementedException(); }
 		}
 
 		/// <summary>
 		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-		/// <exception cref="T:System.NotSupportedException">
-		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
-		///   </exception>
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
 		public void Add(TaskPrincipalPrivilege item)
 		{
 			if (v2Principal2 != null)
@@ -2618,10 +2561,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </summary>
-		/// <exception cref="T:System.NotSupportedException">
-		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
-		///   </exception>
-		public void Clear()
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+		void System.Collections.Generic.ICollection<TaskPrincipalPrivilege>.Clear()
 		{
 			throw new NotImplementedException();
 		}
@@ -2630,9 +2571,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
 		/// </summary>
 		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-		/// <returns>
-		/// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
-		/// </returns>
+		/// <returns>true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.</returns>
 		public bool Contains(TaskPrincipalPrivilege item) => (IndexOf(item) != -1);
 
 		/// <summary>
@@ -2654,29 +2593,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </summary>
-		/// <returns>
-		/// The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
-		///   </returns>
+		/// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
 		public int Count => (v2Principal2 != null) ? (int)v2Principal2.RequiredPrivilegeCount : 0;
 
 		/// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
 		/// </summary>
-		/// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
-		///   </returns>
+		/// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
 		public bool IsReadOnly => false;
 
 		/// <summary>
 		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </summary>
 		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-		/// <returns>
-		/// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
-		/// </returns>
-		/// <exception cref="T:System.NotSupportedException">
-		/// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
-		///   </exception>
-		public bool Remove(TaskPrincipalPrivilege item)
+		/// <returns>true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+		bool System.Collections.Generic.ICollection<TaskPrincipalPrivilege>.Remove(TaskPrincipalPrivilege item)
 		{
 			throw new NotImplementedException();
 		}
@@ -2684,9 +2616,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Returns an enumerator that iterates through the collection.
 		/// </summary>
-		/// <returns>
-		/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-		/// </returns>
+		/// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.</returns>
 		public System.Collections.Generic.IEnumerator<TaskPrincipalPrivilege> GetEnumerator() => new TaskPrincipalPrivilegesEnumerator(v2Principal2);
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
@@ -2696,9 +2626,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public sealed class TaskPrincipalPrivilegesEnumerator : System.Collections.Generic.IEnumerator<TaskPrincipalPrivilege>
 		{
+			private int cur;
 			private V2Interop.IPrincipal2 v2Principal2;
-			int cur;
-			TaskPrincipalPrivilege curVal;
 
 			internal TaskPrincipalPrivilegesEnumerator(V2Interop.IPrincipal2 iPrincipal2 = null)
 			{
@@ -2709,51 +2638,41 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Gets the element in the collection at the current position of the enumerator.
 			/// </summary>
-			/// <returns>
-			/// The element in the collection at the current position of the enumerator.
-			///   </returns>
-			public TaskPrincipalPrivilege Current => curVal;
-
-			/// <summary>
-			/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-			/// </summary>
-			public void Dispose()
-			{
-			}
+			/// <returns>The element in the collection at the current position of the enumerator.</returns>
+			public TaskPrincipalPrivilege Current { get; private set; }
 
 			object System.Collections.IEnumerator.Current => Current;
 
 			/// <summary>
+			/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+			/// </summary>
+			public void Dispose() { }
+
+			/// <summary>
 			/// Advances the enumerator to the next element of the collection.
 			/// </summary>
-			/// <returns>
-			/// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
-			/// </returns>
-			/// <exception cref="T:System.InvalidOperationException">
-			/// The collection was modified after the enumerator was created.
-			///   </exception>
+			/// <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
+			/// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
 			public bool MoveNext()
 			{
 				if (v2Principal2 != null && cur < v2Principal2.RequiredPrivilegeCount)
 				{
 					cur++;
-					curVal = (TaskPrincipalPrivilege)Enum.Parse(typeof(TaskPrincipalPrivilege), v2Principal2[cur]);
+					Current = (TaskPrincipalPrivilege)Enum.Parse(typeof(TaskPrincipalPrivilege), v2Principal2[cur]);
 					return true;
 				}
-				curVal = 0;
+				Current = 0;
 				return false;
 			}
 
 			/// <summary>
 			/// Sets the enumerator to its initial position, which is before the first element in the collection.
 			/// </summary>
-			/// <exception cref="T:System.InvalidOperationException">
-			/// The collection was modified after the enumerator was created.
-			///   </exception>
+			/// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
 			public void Reset()
 			{
 				cur = 0;
-				curVal = 0;
+				Current = 0;
 			}
 		}
 	}
@@ -2864,14 +2783,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 					return FixCrLf(v2RegInfo.Documentation);
-				return TaskDefinition.V1GetDataItem(v1Task, nameof(Documentation));
+				return v1Task.GetDataItem(nameof(Documentation));
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.Documentation = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, nameof(Documentation), value);
+					v1Task.SetDataItem(nameof(Documentation), value);
 			}
 		}
 
@@ -2920,14 +2839,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2RegInfo != null)
 					return v2RegInfo.Source;
-				return TaskDefinition.V1GetDataItem(v1Task, nameof(Source));
+				return v1Task.GetDataItem(nameof(Source));
 			}
 			set
 			{
 				if (v2RegInfo != null)
 					v2RegInfo.Source = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, nameof(Source), value);
+					v1Task.SetDataItem(nameof(Source), value);
 			}
 		}
 
@@ -2945,7 +2864,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 					uri = v2RegInfo.URI;
 				else
-					uri = TaskDefinition.V1GetDataItem(v1Task, nameof(URI));
+					uri = v1Task.GetDataItem(nameof(URI));
 				if (string.IsNullOrEmpty(uri))
 					return null;
 				return uri;
@@ -2955,7 +2874,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 					v2RegInfo.URI = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, nameof(URI), value);
+					v1Task.SetDataItem(nameof(URI), value);
 			}
 		}
 
@@ -2971,7 +2890,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 					sver = v2RegInfo.Version;
 				else
-					sver = TaskDefinition.V1GetDataItem(v1Task, nameof(Version));
+					sver = v1Task.GetDataItem(nameof(Version));
 				try { return new Version(sver); }
 				catch { }
 				return new Version(1, 0);
@@ -2981,7 +2900,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2RegInfo != null)
 					v2RegInfo.Version = value == null ? null : value.ToString();
 				else
-					TaskDefinition.V1SetDataItem(v1Task, nameof(Version), value.ToString());
+					v1Task.SetDataItem(nameof(Version), value.ToString());
 			}
 		}
 
@@ -3180,25 +3099,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.DeleteExpiredTaskAfter == "PT0S" ? TimeSpan.FromSeconds(1) : Task.StringToTimeSpan(v2Settings.DeleteExpiredTaskAfter);
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.DeleteWhenDone) == V1Interop.TaskFlags.DeleteWhenDone ? TimeSpan.FromSeconds(1) : TimeSpan.Zero;
+				return v1Task.HasFlags(V1Interop.TaskFlags.DeleteWhenDone) ? TimeSpan.FromSeconds(1) : TimeSpan.Zero;
 			}
 			set
 			{
 				if (v2Settings != null)
-				{
-					if (value == TimeSpan.FromSeconds(1))
-						v2Settings.DeleteExpiredTaskAfter = "PT0S";
-					else
-						v2Settings.DeleteExpiredTaskAfter = Task.TimeSpanToString(value);
-				}
+					v2Settings.DeleteExpiredTaskAfter = value == TimeSpan.FromSeconds(1) ? "PT0S" : Task.TimeSpanToString(value);
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value >= TimeSpan.FromSeconds(1))
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.DeleteWhenDone);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.DeleteWhenDone);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.DeleteWhenDone, value >= TimeSpan.FromSeconds(1));
 			}
 		}
 
@@ -3212,20 +3120,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.DisallowStartIfOnBatteries;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.DontStartIfOnBatteries) == V1Interop.TaskFlags.DontStartIfOnBatteries;
+				return v1Task.HasFlags(V1Interop.TaskFlags.DontStartIfOnBatteries);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.DisallowStartIfOnBatteries = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.DontStartIfOnBatteries);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.DontStartIfOnBatteries);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.DontStartIfOnBatteries, value);
 			}
 		}
 
@@ -3266,20 +3168,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.Enabled;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.Disabled) != V1Interop.TaskFlags.Disabled;
+				return !v1Task.HasFlags(V1Interop.TaskFlags.Disabled);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.Enabled = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (!value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.Disabled);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.Disabled);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.Disabled, !value);
 			}
 		}
 
@@ -3330,20 +3226,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.Hidden;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.Hidden) == V1Interop.TaskFlags.Hidden;
+				return v1Task.HasFlags(V1Interop.TaskFlags.Hidden);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.Hidden = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.Hidden);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.Hidden);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.Hidden, value);
 			}
 		}
 
@@ -3563,20 +3453,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.RunOnlyIfIdle;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.StartOnlyIfIdle) == V1Interop.TaskFlags.StartOnlyIfIdle;
+				return v1Task.HasFlags(V1Interop.TaskFlags.StartOnlyIfIdle);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.RunOnlyIfIdle = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.StartOnlyIfIdle);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.StartOnlyIfIdle);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.StartOnlyIfIdle, value);
 			}
 		}
 
@@ -3591,18 +3475,12 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return true;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.RunOnlyIfLoggedOn) == V1Interop.TaskFlags.RunOnlyIfLoggedOn;
+				return v1Task.HasFlags(V1Interop.TaskFlags.RunOnlyIfLoggedOn);
 			}
 			set
 			{
 				if (v1Task != null)
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.RunOnlyIfLoggedOn, value);
 				else if (v2Settings != null)
 					throw new NotV2SupportedException("Task Scheduler 2.0 (1.2) does not support setting this property. You must use an InteractiveToken in order to have the task run in the current user session.");
 			}
@@ -3618,20 +3496,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.RunOnlyIfNetworkAvailable;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.RunIfConnectedToInternet) == V1Interop.TaskFlags.RunIfConnectedToInternet;
+				return v1Task.HasFlags(V1Interop.TaskFlags.RunIfConnectedToInternet);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.RunOnlyIfNetworkAvailable = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.RunIfConnectedToInternet);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.RunIfConnectedToInternet);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.RunIfConnectedToInternet, value);
 			}
 		}
 
@@ -3668,20 +3540,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.StopIfGoingOnBatteries;
-				return (v1Task.GetFlags() & V1Interop.TaskFlags.KillIfGoingOnBatteries) == V1Interop.TaskFlags.KillIfGoingOnBatteries;
+				return v1Task.HasFlags(V1Interop.TaskFlags.KillIfGoingOnBatteries);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.StopIfGoingOnBatteries = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.KillIfGoingOnBatteries);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.KillIfGoingOnBatteries);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.KillIfGoingOnBatteries, value);
 			}
 		}
 
@@ -3745,20 +3611,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return v2Settings.WakeToRun;
-				return ((v1Task.GetFlags() & V1Interop.TaskFlags.SystemRequired) == V1Interop.TaskFlags.SystemRequired);
+				return v1Task.HasFlags(V1Interop.TaskFlags.SystemRequired);
 			}
 			set
 			{
 				if (v2Settings != null)
 					v2Settings.WakeToRun = value;
 				else
-				{
-					V1Interop.TaskFlags flags = v1Task.GetFlags();
-					if (value)
-						v1Task.SetFlags(flags |= V1Interop.TaskFlags.SystemRequired);
-					else
-						v1Task.SetFlags(flags &= ~V1Interop.TaskFlags.SystemRequired);
-				}
+					v1Task.SetFlags(V1Interop.TaskFlags.SystemRequired, value);
 			}
 		}
 
@@ -3838,6 +3698,34 @@ namespace Microsoft.Win32.TaskScheduler
 				return true;
 			}
 			return false;
+		}
+	}
+
+	internal static class TSInteropExt
+	{
+		public static string GetDataItem(this V1Interop.ITask v1Task, string name)
+		{
+			string ret = null;
+			TaskDefinition.GetV1TaskDataDictionary(v1Task).TryGetValue(name, out ret);
+			return ret;
+		}
+
+		public static void SetDataItem(this V1Interop.ITask v1Task, string name, string value)
+		{
+			var d = TaskDefinition.GetV1TaskDataDictionary(v1Task);
+			d[name] = value;
+			TaskDefinition.SetV1TaskData(v1Task, d);
+		}
+
+		public static bool HasFlags(this V1Interop.ITask v1Task, V1Interop.TaskFlags flags) => (v1Task.GetFlags() & flags) == flags;
+
+		public static void SetFlags(this V1Interop.ITask v1Task, V1Interop.TaskFlags flags, bool value = true)
+		{
+			V1Interop.TaskFlags f = v1Task.GetFlags();
+			if (value)
+				v1Task.SetFlags(f |= flags);
+			else
+				v1Task.SetFlags(f &= ~flags);
 		}
 	}
 }

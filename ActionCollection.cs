@@ -49,7 +49,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v1Task = task;
 			v1Actions = GetV1Actions();
-			PowerShellConversion = Action.TryParse(TaskDefinition.V1GetDataItem(v1Task, nameof(PowerShellConversion)), psConvert | PowerShellActionPlatformOption.Version2);
+			PowerShellConversion = Action.TryParse(v1Task.GetDataItem(nameof(PowerShellConversion)), psConvert | PowerShellActionPlatformOption.Version2);
 		}
 
 		internal ActionCollection(V2Interop.ITaskDefinition iTaskDef)
@@ -79,14 +79,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return v2Coll.Context;
-				return TaskDefinition.V1GetDataItem(v1Task, "ActionCollectionContext");
+				return v1Task.GetDataItem("ActionCollectionContext");
 			}
 			set
 			{
 				if (v2Coll != null)
 					v2Coll.Context = value;
 				else
-					TaskDefinition.V1SetDataItem(v1Task, "ActionCollectionContext", value);
+					v1Task.SetDataItem("ActionCollectionContext", value);
 			}
 		}
 
@@ -121,7 +121,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					psConvert = value;
 					if (v1Task != null)
-						TaskDefinition.V1SetDataItem(v1Task, nameof(PowerShellConversion), value.ToString());
+						v1Task.SetDataItem(nameof(PowerShellConversion), value.ToString());
 					if (v2Def != null)
 					{
 						if (!string.IsNullOrEmpty(v2Def.Data))
@@ -660,7 +660,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private List<Action> GetV1Actions()
 		{
 			List<Action> ret = new List<Action>();
-			if (v1Task != null && TaskDefinition.V1GetDataItem(v1Task, "ActionType") != "EMPTY")
+			if (v1Task != null && v1Task.GetDataItem("ActionType") != "EMPTY")
 			{
 				var exec = new ExecAction(v1Task);
 				var items = exec.ParsePowerShellItems();
@@ -701,14 +701,14 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Task.SetApplicationName(string.Empty);
 				v1Task.SetParameters(string.Empty);
 				v1Task.SetWorkingDirectory(string.Empty);
-				TaskDefinition.V1SetDataItem(v1Task, "ActionId", null);
-				TaskDefinition.V1SetDataItem(v1Task, "ActionType", "EMPTY");
+				v1Task.SetDataItem("ActionId", null);
+				v1Task.SetDataItem("ActionType", "EMPTY");
 			}
 			else if (v1Actions.Count == 1)
 			{
 				if (!SupportV1Conversion && v1Actions[0].ActionType != TaskActionType.Execute)
 					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
-				TaskDefinition.V1SetDataItem(v1Task, "ActionType", null);
+				v1Task.SetDataItem("ActionType", null);
 				v1Actions[0].Bind(v1Task);
 			}
 			else
@@ -723,8 +723,8 @@ namespace Microsoft.Win32.TaskScheduler
 				// Build and save PS ExecAction
 				var ea = ExecAction.CreatePowerShellAction("MULTIPLE", sb.ToString());
 				ea.Bind(v1Task);
-				TaskDefinition.V1SetDataItem(v1Task, "ActionId", null);
-				TaskDefinition.V1SetDataItem(v1Task, "ActionType", "MULTIPLE");
+				v1Task.SetDataItem("ActionId", null);
+				v1Task.SetDataItem("ActionType", "MULTIPLE");
 			}
 		}
 	}

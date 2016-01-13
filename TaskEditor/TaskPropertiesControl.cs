@@ -173,6 +173,19 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool HasError { get; set; } = false;
 
 		/// <summary>
+		/// Gets or sets the maximum history count. Use -1 for infinite or to retrieve all items.
+		/// </summary>
+		/// <value>
+		/// The maximum history count.
+		/// </value>
+		[DefaultValue(-1), Category("Behavior"), Description("Determines maximum number of history items to retrieve.")]
+		public int MaxHistoryCount
+		{
+			get { return taskHistoryControl1.MaxQueryCount; }
+			set { taskHistoryControl1.MaxQueryCount = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether errors are shown in the UI.
 		/// </summary>
 		/// <value>
@@ -287,7 +300,8 @@ namespace Microsoft.Win32.TaskScheduler
 				td = value;
 				onAssignment = true;
 				SetVersionComboItems();
-				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
+				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= new Version(1, 2);
+
 				tabControl.SelectedIndex = 0;
 
 				flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(TaskService.TargetServer);
@@ -440,7 +454,12 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!this.IsDesignMode())
 			{
 				if (td == null)
-					TaskDefinition = service.NewTask();
+				{
+					var temp = service.NewTask();
+					if (service.HighestSupportedVersion == new Version(1, 1))
+						temp.Settings.Compatibility = TaskCompatibility.V1;
+					TaskDefinition = temp;
+				}
 				else
 					TaskDefinition = td;
 			}
@@ -685,10 +704,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void runTimesTab_Leave(object sender, EventArgs e)
 		{
-			if (taskRunTimesControl1.Task != null)
+			if (runTimesTaskName != null)
 			{
-				TaskService.RootFolder.DeleteTask(runTimesTaskName);
 				taskRunTimesControl1.Task = null;
+				TaskService.RootFolder.DeleteTask(runTimesTaskName, false);
 			}
 			runTimesTaskName = null;
 		}
@@ -743,7 +762,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = editable;
-				taskLocalOnlyCheck.Enabled = editable && (task == null || v2);
+				taskLocalOnlyCheck.Enabled = editable && v2;
 			}
 
 			taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
@@ -790,11 +809,11 @@ namespace Microsoft.Win32.TaskScheduler
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
-			int max = (TaskService == null) ? expectedVersions - 1 : TaskService.LibraryVersion.Minor;
+			int max = (TaskService == null) ? expectedVersions - 1 : Math.Min(TaskService.LibraryVersion.Minor, TaskService.HighestSupportedVersion.Minor);
 			if (Environment.OSVersion.Version >= new Version(6, 2))
 			{
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-					versions[max] = key.GetValue("ProductName", Environment.OSVersion).ToString();
+					versions[TaskService.LibraryVersion.Minor] = key.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
 			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
@@ -935,7 +954,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
 		{
-			taskLocalOnlyCheck.Enabled = editable && (task == null || v2) && taskLoggedOptionalRadio.Checked && !(flagExecutorIsGroup | flagExecutorIsServiceAccount);
+			taskLocalOnlyCheck.Enabled = editable && v2 && taskLoggedOptionalRadio.Checked && !(flagExecutorIsGroup | flagExecutorIsServiceAccount);
 			taskLocalOnlyCheck_CheckedChanged(sender, e);
 		}
 

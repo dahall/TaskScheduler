@@ -269,7 +269,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!SupportsInterface(CLSID, supportedInterface))
 				MessageBox.Show(this, EditorProperties.Resources.ComObjectDoesNotSupportInterfaceErrorMessage, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			else
-				DialogResult = System.Windows.Forms.DialogResult.OK;
+				DialogResult = DialogResult.OK;
 		}
 
 		private void textBox1_TextChanged(object sender, EventArgs e)

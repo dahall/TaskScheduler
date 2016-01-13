@@ -257,7 +257,7 @@
 			this.TaskListView.Size = new System.Drawing.Size(735, 232);
 			this.TaskListView.TabIndex = 0;
 			this.TaskListView.TaskSelected += new System.EventHandler<Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs>(this.taskListView_TaskSelected);
-			this.TaskListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskListView_MouseDoubleClick);
+			this.TaskListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.taskListView_MouseDoubleClick);
 			// 
 			// taskEditDialog1
 			// 

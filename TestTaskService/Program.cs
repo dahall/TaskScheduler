@@ -870,7 +870,7 @@ namespace TestTaskService
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
-			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
+			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
 		static TaskDefinition DisplayTask(TaskService ts, TaskDefinition td, bool editable)
@@ -881,7 +881,7 @@ namespace TestTaskService
 			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
-			return (editorForm.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? editorForm.TaskDefinition : null;
+			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
 		static string GetTempXmlFile(string taskName) => System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
