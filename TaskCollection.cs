@@ -73,7 +73,7 @@ namespace Microsoft.Win32.TaskScheduler
 				this.svc = svc;
 				this.filter = filter;
 				m_ts = svc.v1TaskScheduler;
-				wienum = m_ts.Enum();
+				wienum = m_ts?.Enum();
 				Reset();
 			}
 
@@ -109,7 +109,7 @@ namespace Microsoft.Win32.TaskScheduler
 					uint uFetched = 0;
 					try
 					{
-						wienum.Next(1, out names, out uFetched);
+						wienum?.Next(1, out names, out uFetched);
 						if (uFetched != 1)
 							break;
 						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
@@ -142,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Reset()
 			{
 				curItem = null;
-				wienum.Reset();
+				wienum?.Reset();
 			}
 
 			internal int Count

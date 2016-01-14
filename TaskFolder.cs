@@ -106,8 +106,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2Folder != null)
-					return new TaskFolderCollection(this, v2Folder.GetFolders(0));
+				try
+				{
+					if (v2Folder != null)
+						return new TaskFolderCollection(this, v2Folder.GetFolders(0));
+				} catch { }
 				return new TaskFolderCollection();
 			}
 		}
