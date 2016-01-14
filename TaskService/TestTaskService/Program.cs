@@ -549,15 +549,19 @@ namespace TestTaskService
 			output.WriteLine("Server: {0} ({1}); User: {2}\\{3}", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected", ts.UserAccountDomain, ts.UserName);
 
 			output.WriteLine("Running tasks:");
-			foreach (RunningTask rt in ts.GetRunningTasks(true))
+			try
 			{
-				if (rt != null)
+				foreach (RunningTask rt in ts.GetRunningTasks(true))
 				{
-					output.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
-					if (ver.Minor > 0)
-						output.WriteLine("  Current Action: " + rt.CurrentAction);
+					if (rt != null)
+					{
+						output.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
+						if (ver.Minor > 0)
+							output.WriteLine("  Current Action: " + rt.CurrentAction);
+					}
 				}
 			}
+			catch (Exception ex) { output.WriteLine("  " + ex.Message); }
 
 			string filter = arg.Length > 0 ? arg[0] : string.Empty;
 			TaskFolder tf = ts.RootFolder;

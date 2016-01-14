@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 using CommandLine;
 using Microsoft.Win32.TaskScheduler;
 
@@ -10,6 +8,13 @@ namespace TaskSchedulerConfig
 	class Program
 	{
 		static void Main(string[] args)
+		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new Main());
+		}
+
+		static void ConsoleMain(string[] args)
 		{
 			var pArgs = new ProgramArguments();
 			if (Parser.ParseArgumentsWithUsage(args, pArgs))

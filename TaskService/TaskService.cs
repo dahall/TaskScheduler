@@ -523,7 +523,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="includeHidden">True to include hidden tasks.</param>
 		/// <returns><see cref="RunningTaskCollection"/> instance with the list of running tasks.</returns>
-		public RunningTaskCollection GetRunningTasks(bool includeHidden = true) => v2TaskService != null ? new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)) : new RunningTaskCollection(this);
+		public RunningTaskCollection GetRunningTasks(bool includeHidden = true)
+		{
+			if (v2TaskService != null)
+				try { return new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)); } catch { }
+			return new RunningTaskCollection(this);
+		}
 
 		/// <summary>
 		/// Gets the task with the specified path.
