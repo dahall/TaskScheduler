@@ -261,6 +261,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
 		{
 			V2Interop.IActionCollection iActions = iTaskDef.Actions;
+			if (iActions.Count >= ActionCollection.MaxActions)
+				throw new ArgumentOutOfRangeException(nameof(iTaskDef), "A maximum of 32 actions is allowed within a single task.");
 			CreateV2Action(iActions);
 			Marshal.ReleaseComObject(iActions);
 			foreach (string key in unboundValues.Keys)

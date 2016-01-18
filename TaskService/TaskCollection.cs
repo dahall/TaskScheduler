@@ -285,6 +285,8 @@ namespace Microsoft.Win32.TaskScheduler
 			catch { }
 			return false;
 		}
+
+		public override string ToString() => $"TaskCollection; Count: {Count}";
 	}
 
 	/// <summary>
@@ -420,6 +422,7 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
+		public override string ToString() => $"RunningTaskCollection; Count: {Count}";
 	}
 
 }

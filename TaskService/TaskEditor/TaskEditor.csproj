@@ -124,9 +124,11 @@
     </Compile>
     <Compile Include="EditorInterfaces.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
+    <Compile Include="Native\GenericSafeHandle.cs" />
     <Compile Include="Native\ImageList.cs" />
     <Compile Include="Native\ImageListExtension.cs" />
     <Compile Include="Native\NativeResource.cs" />
+    <Compile Include="Native\SafeHGlobalHandle.cs" />
     <Compile Include="OptionPanels\SecurityOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

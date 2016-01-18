@@ -31,56 +31,48 @@ namespace System.Windows.Forms
 		/// <param name="message">The message.</param>
 		/// <param name="userName">Name of the user.</param>
 		/// <param name="options">The options.</param>
-		public CredentialsDialog(string caption = null, string message = null, string userName = null, CredentialsDialogOptions options = CredentialsDialogOptions.Default) : this()
+		public CredentialsDialog(string caption = null, string message = null, string userName = null) : this()
 		{
 			Caption = caption;
 			Message = message;
 			UserName = userName;
-			Options = options;
 		}
 
 		/// <summary>
 		/// Gets or sets the Windows Error Code that caused this credential dialog to appear, if applicable.
 		/// </summary>
-		[System.ComponentModel.DefaultValue(0), Category("Data"), Description("Windows Error Code that caused this credential dialog")]
+		[DefaultValue(0), Category("Data"), Description("Windows Error Code that caused this credential dialog")]
 		public int AuthenticationError { get; set; }
 
 		/// <summary>
-		/// Gets or sets the image to display as the banner for the dialog
+		/// Gets or sets the image to display as the banner for the dialog. Only visible on Windows XP and earlier systems.
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Image to display in dialog banner")]
+		[DefaultValue((string)null), Category("Appearance"), Description("Image to display in dialog banner")]
 		public Bitmap Banner { get; set; }
 
 		/// <summary>
 		/// Gets or sets the caption for the dialog
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Caption to display for dialog")]
+		[DefaultValue((string)null), Category("Appearance"), Description("Caption to display for dialog")]
 		public string Caption { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether to encrypt password.
 		/// </summary>
 		/// <value><c>true</c> if password is to be encrypted; otherwise, <c>false</c>.</value>
-		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates whether to encrypt password")]
+		[DefaultValue(false), Category("Behavior"), Description("Indicates whether to encrypt password")]
 		public bool EncryptPassword { get; set; }
 
 		/// <summary>
 		/// Gets or sets the message to display on the dialog
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null), Category("Appearance"), Description("Message to display in the dialog")]
+		[DefaultValue((string)null), Category("Appearance"), Description("Message to display in the dialog")]
 		public string Message { get; set; }
-
-		/// <summary>
-		/// Gets or sets the options for the dialog.
-		/// </summary>
-		/// <value>The options.</value>
-		[System.ComponentModel.DefaultValue(typeof(CredentialsDialogOptions), "Default"), Category("Behavior"), Description("Options for the dialog")]
-		public CredentialsDialogOptions Options { get; set; }
 
 		/// <summary>
 		/// Gets the password entered by the user
 		/// </summary>
-		[System.ComponentModel.DefaultValue((string)null), Browsable(false)]
+		[DefaultValue((string)null), Browsable(false)]
 		public string Password { get; private set; }
 
 		/// <summary>
@@ -89,13 +81,13 @@ namespace System.Windows.Forms
 		/// <remarks>
 		/// Only valid if <see cref="CredentialsDialog.Options"/> has the <see cref="CredentialsDialogOptions.DoNotPersist"/> newDS set.
 		/// </remarks>
-		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates if the save check box is checked.")]
+		[DefaultValue(false), Category("Behavior"), Description("Indicates if the save check box is checked.")]
 		public bool SaveChecked { get; set; }
 
 		/// <summary>
 		/// Gets the password entered by the user using an encrypted string
 		/// </summary>
-		[System.ComponentModel.DefaultValue(null), Browsable(false)]
+		[DefaultValue(null), Browsable(false)]
 		public SecureString SecurePassword { get; private set; }
 
 		/// <summary>
@@ -104,7 +96,7 @@ namespace System.Windows.Forms
 		/// <remarks>
 		/// This value is used as a key to store the credentials if persisted
 		/// </remarks>
-		[System.ComponentModel.DefaultValue((string)null), Category("Data"), Description("Target for the credentials")]
+		[DefaultValue((string)null), Category("Data"), Description("Target for the credentials")]
 		public string Target { get; set; }
 
 		/// <summary>
@@ -113,7 +105,7 @@ namespace System.Windows.Forms
 		/// <remarks>
 		/// If non-empty before calling <see cref="RunDialog"/>, this value will be displayed in the dialog
 		/// </remarks>
-		[System.ComponentModel.DefaultValue((string)null), Category("Data"), Description("User name displayed in the dialog")]
+		[DefaultValue((string)null), Category("Data"), Description("User name displayed in the dialog")]
 		public string UserName { get; set; }
 
 		/// <summary>
@@ -122,7 +114,7 @@ namespace System.Windows.Forms
 		/// <value>
 		///   <c>true</c> if the password should be validated; otherwise, <c>false</c>.
 		/// </value>
-		[System.ComponentModel.DefaultValue(false), Category("Behavior"), Description("Indicates if the password should be validated before returning.")]
+		[DefaultValue(false), Category("Behavior"), Description("Indicates if the password should be validated before returning.")]
 		public bool ValidatePassword { get; set; }
 
 		/// <summary>
@@ -138,7 +130,7 @@ namespace System.Windows.Forms
 		public void ConfirmCredentials(bool storedCredentials)
 		{
 			NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIConfirmCredentials(Target, storedCredentials);
-			if (ret != NativeMethods.CredUIReturnCodes.NO_ERROR && ret != NativeMethods.CredUIReturnCodes.ERROR_INVALID_PARAMETER)
+			if (ret != NativeMethods.CredUIReturnCodes.Success && ret != NativeMethods.CredUIReturnCodes.InvalidParameter)
 				throw new InvalidOperationException($"Unable to confirm credentials. Error: 0x{ret:X}");
 		}
 
@@ -150,7 +142,6 @@ namespace System.Windows.Forms
 			Target = UserName = Caption = Message = Password = null;
 			Banner = null;
 			EncryptPassword = SaveChecked = false;
-			Options = CredentialsDialogOptions.Default;
 		}
 
 		private bool IsValidPassword(string userName, string password)
@@ -180,52 +171,99 @@ namespace System.Windows.Forms
 			NativeMethods.CREDUI_INFO info = new NativeMethods.CREDUI_INFO(parentWindowHandle, Caption, Message, Banner);
 			try
 			{
-				StringBuilder userName = new StringBuilder(UserName, maxStringLength);
-				StringBuilder password = new StringBuilder(maxStringLength);
-				bool save = SaveChecked;
-
-				if (string.IsNullOrEmpty(Target)) Target = DefaultTarget;
-				NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIPromptForCredentials(ref info, Target, IntPtr.Zero,
-					AuthenticationError, userName, maxStringLength, password, maxStringLength, ref save, Options);
-				switch (ret)
+				if (Environment.OSVersion.Version.Major <= 5)
 				{
-					case NativeMethods.CredUIReturnCodes.NO_ERROR:
-						if (ValidatePassword && !IsValidPassword(userName.ToString(), password.ToString()))
-							return false;
-						/*if (save)
-						{
-							CredUIReturnCodes cret = CredUIConfirmCredentials(this.Target, false);
-							if (cret != CredUIReturnCodes.NO_ERROR && cret != CredUIReturnCodes.ERROR_INVALID_PARAMETER)
-							{
-								this.Options |= CredentialsDialogOptions.IncorrectPassword;
+					StringBuilder userName = new StringBuilder(UserName, maxStringLength);
+					StringBuilder password = new StringBuilder(maxStringLength);
+					bool save = SaveChecked;
+
+					if (string.IsNullOrEmpty(Target)) Target = DefaultTarget;
+					NativeMethods.CredUIReturnCodes ret = NativeMethods.CredUIPromptForCredentials(ref info, Target, IntPtr.Zero,
+						AuthenticationError, userName, maxStringLength, password, maxStringLength, ref save, 
+						NativeMethods.CredentialsDialogOptions.Default | (SaveChecked ? NativeMethods.CredentialsDialogOptions.ShowSaveCheckBox : 0));
+					switch (ret)
+					{
+						case NativeMethods.CredUIReturnCodes.Success:
+							if (ValidatePassword && !IsValidPassword(userName.ToString(), password.ToString()))
 								return false;
-							}
-						}*/
-						break;
-					case NativeMethods.CredUIReturnCodes.ERROR_CANCELLED:
-						return false;
-					default:
-						throw new InvalidOperationException($"Unknown error in CredentialsDialog. Error: 0x{ret:X}");
-				}
+							/*if (save)
+							{
+								CredUIReturnCodes cret = CredUIConfirmCredentials(this.Target, false);
+								if (cret != CredUIReturnCodes.NO_ERROR && cret != CredUIReturnCodes.ERROR_INVALID_PARAMETER)
+								{
+									this.Options |= CredentialsDialogOptions.IncorrectPassword;
+									return false;
+								}
+							}*/
+							break;
+						case NativeMethods.CredUIReturnCodes.Cancelled:
+							return false;
+						default:
+							throw new InvalidOperationException($"Unknown error in CredentialsDialog. Error: 0x{ret:X}");
+					}
 
-				if (EncryptPassword)
-				{
-					// Convert the password to a SecureString
-					SecureString newPassword = StringBuilderToSecureString(password);
+					if (EncryptPassword)
+					{
+						// Convert the password to a SecureString
+						SecureString newPassword = StringBuilderToSecureString(password);
 
-					// Clear the old password and set the new one (read-only)
-					if (SecurePassword != null)
-						SecurePassword.Dispose();
-					newPassword.MakeReadOnly();
-					SecurePassword = newPassword;
+						// Clear the old password and set the new one (read-only)
+						if (SecurePassword != null)
+							SecurePassword.Dispose();
+						newPassword.MakeReadOnly();
+						SecurePassword = newPassword;
+					}
+					else
+						Password = password.ToString();
+
+					// Update other properties
+					UserName = userName.ToString();
+					SaveChecked = save;
+					return true;
 				}
 				else
-					Password = password.ToString();
+				{
+					NativeMethods.WindowsCredentialsDialogOptions flag = NativeMethods.WindowsCredentialsDialogOptions.Generic;
+					if (SaveChecked)
+						flag |= NativeMethods.WindowsCredentialsDialogOptions.ShowSaveCheckBox;
 
-				// Update other properties
-				UserName = userName.ToString();
-				SaveChecked = save;
-				return true;
+					NativeMethods.AuthenticationBuffer buf = null;
+					if (EncryptPassword && SecurePassword != null)
+						buf = new NativeMethods.AuthenticationBuffer(UserName.ToSecureString(), SecurePassword);
+					else
+						buf = new NativeMethods.AuthenticationBuffer(UserName, Password);
+
+					IntPtr outAuthBuffer = IntPtr.Zero;
+					uint outAuthBufferSize = 0, authPackage = 0;
+					bool save = SaveChecked;
+					var retVal = NativeMethods.CredUIPromptForWindowsCredentials(ref info, 0, ref authPackage,
+						buf, (uint)buf.Size, out outAuthBuffer, out outAuthBufferSize, ref save, flag);
+					var outAuth = new NativeMethods.AuthenticationBuffer(outAuthBuffer, (int)outAuthBufferSize);
+
+					if (retVal == NativeMethods.CredUIReturnCodes.Cancelled)
+						return false;
+					if (retVal != NativeMethods.CredUIReturnCodes.Success)
+						throw new Win32Exception((int)retVal);
+
+					SaveChecked = save;
+					if (EncryptPassword)
+					{
+						SecureString u, d, p;
+						outAuth.UnPack(true, out u, out d, out p);
+						Password = null;
+						SecurePassword = p;
+						UserName = $"{d.ToInsecureString()}\\{u.ToInsecureString()}".TrimStart('\\');
+					}
+					else
+					{
+						string u, d, p;
+						outAuth.UnPack(true, out u, out d, out p);
+						Password = p;
+						SecurePassword = null;
+						UserName = $"{d}\\{u}".TrimStart('\\');
+					}
+					return true;
+				}
 			}
 			finally
 			{
