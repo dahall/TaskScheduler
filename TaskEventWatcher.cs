@@ -72,7 +72,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Watches system events related to tasks and issues a <see cref="TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
 	/// </summary>
 	[DefaultEvent(nameof(TaskEventWatcher.EventRecorded)), DefaultProperty(nameof(TaskEventWatcher.Folder))]
+#if DESIGNER
 	[Designer(typeof(Design.TaskEventWatcherDesigner))]
+#endif
 	[ToolboxItem(true), Serializable]
 	public class TaskEventWatcher : Component, ISupportInitialize
 	{
@@ -704,14 +706,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 	}
 
+#if DESIGNER
 	namespace Design
 	{
 		internal class TaskEventWatcherDesigner : ComponentDesigner
 		{
-			public override void InitializeNewComponent(System.Collections.IDictionary defaultValues)
+			public override void InitializeNewComponent(IDictionary defaultValues)
 			{
 				base.InitializeNewComponent(defaultValues);
-				var refs = GetService(typeof(IReferenceService)) as IReferenceService;
+				var refs = GetService<IReferenceService>();
 				var tsColl = refs?.GetReferences(typeof(TaskService));
 				System.Diagnostics.Debug.Assert(refs != null && tsColl != null && tsColl.Length > 0, "Designer couldn't find host, reference service, or existing TaskService.");
 				if (tsColl != null && tsColl.Length > 0)
@@ -722,6 +725,9 @@ namespace Microsoft.Win32.TaskScheduler
 						tsComp.TaskService = ts;
 				}
 			}
+
+			protected virtual T GetService<T>() => (T)Component?.Site?.GetService(typeof(T));
 		}
 	}
+#endif
 }

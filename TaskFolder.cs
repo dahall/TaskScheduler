@@ -400,6 +400,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// XML validation not available on Task Scheduler 1.0.</exception>
 		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
 		{
+			if (definition.Actions.Count < 1 || definition.Actions.Count > 32)
+			{
+				throw new ArgumentOutOfRangeException(nameof(definition.Actions), "A task must be registered with at least one action and no more than 32 actions.");
+			}
 			UserId = UserId ?? definition.Principal.UserId;
 			User user = new User(UserId);
 			if (v2Folder != null)

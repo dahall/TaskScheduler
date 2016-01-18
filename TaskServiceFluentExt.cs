@@ -466,6 +466,16 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			/// <summary>
+			/// Determines whether this trigger is disabled.
+			/// </summary>
+			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
+			public TriggerBuilder IsDisabled()
+			{
+				trigger.Enabled = false;
+				return this;
+			}
+
+			/// <summary>
 			/// Assigns the name of the task and registers it.
 			/// </summary>
 			/// <param name="name">The name.</param>

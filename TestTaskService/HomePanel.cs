@@ -69,7 +69,7 @@ namespace TestTaskService
 
 		private static int ActiveTaskSorter(ListViewItem al, ListViewItem bl)
 		{
-			Task a = al.Tag as Task, b = bl.Tag as Task;
+			Task a = al?.Tag as Task, b = bl?.Tag as Task;
 			DateTime an = DateTime.MinValue, bn = DateTime.MinValue;
 			bool ax = a == null || (an = a.NextRunTime) == DateTime.MinValue;
 			bool bx = b == null || (bn = b.NextRunTime) == DateTime.MinValue;

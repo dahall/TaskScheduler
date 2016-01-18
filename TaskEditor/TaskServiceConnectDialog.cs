@@ -120,10 +120,47 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), Description("The user's username."), DefaultValue((string)null)]
 		public string User { get; set; }
 
+		private void computerBrowseBtn_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog2 dlg = FolderBrowserDialog2.ComputerBrowser;
+			dlg.Description = EditorProperties.Resources.BrowseForTargetServerPrompt;
+			dlg.SelectedPath = TargetServer == null ? Environment.MachineName : TargetServer;
+			if (dlg.ShowDialog(this) == DialogResult.OK)
+				TargetServer = remoteComputerText.Text = dlg.SelectedPath;
+		}
+
+		private void computerRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			runButton.Enabled = (localComputerRadio.Checked || remoteComputerText.TextLength > 0);
+			remoteComputerText.Enabled = computerBrowseBtn.Enabled = otherUserCheckbox.Enabled = !localComputerRadio.Checked;
+			setUserBtn.Enabled = !localComputerRadio.Checked && otherUserCheckbox.Checked;
+			if (localComputerRadio.Checked)
+			{
+				TargetServer = User = Domain = Password = null;
+				SetUserText(null);
+				remoteComputerText.Clear();
+			}
+			else
+				remoteComputerText.Focus();
+		}
+
 		private string GetLocalizedResourceString(string resourceName)
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(GetType());
+			ComponentResourceManager resources = new ComponentResourceManager(GetType());
 			return resources.GetString(resourceName);
+		}
+
+		private void otherUserCheckbox_CheckedChanged(object sender, EventArgs e)
+		{
+			setUserBtn.Enabled = otherUserCheckbox.Checked;
+			if (otherUserCheckbox.Checked && string.IsNullOrEmpty(User))
+				setUserBtn_Click(sender, e);
+		}
+
+		private void remoteComputerText_TextChanged(object sender, EventArgs e)
+		{
+			runButton.Enabled = remoteComputerText.TextLength > 0;
+			TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
 		}
 
 		private void ResetTitle()
@@ -144,29 +181,17 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (Exception ex) { success = false; MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 			if (success)
 			{
-				DialogResult = System.Windows.Forms.DialogResult.OK;
+				DialogResult = DialogResult.OK;
 				Close();
 			}
 		}
-
-		private void SetUserText(string value)
-		{
-			if (String.IsNullOrEmpty(value))
-			{
-				value = EditorProperties.Resources.NoUserSpecifiedText;
-				otherUserCheckbox.Checked = false;
-			}
-			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
-		}
-
-		private bool ShouldSerializeTitle() => base.Text != GetLocalizedResourceString("$this.Text");
 
 		private void setUserBtn_Click(object sender, EventArgs e)
 		{
 			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName);
 			if (TargetServer != null)
 				dlg.Target = TargetServer;
-			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			if (dlg.ShowDialog(this) == DialogResult.OK)
 			{
 				SetUserText(dlg.UserName);
 				string[] userParts = dlg.UserName.Split('\\');
@@ -184,38 +209,17 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void computerRadio_CheckedChanged(object sender, EventArgs e)
+		private void SetUserText(string value)
 		{
-			runButton.Enabled = (localComputerRadio.Checked || remoteComputerText.TextLength > 0);
-			remoteComputerText.Enabled = computerBrowseBtn.Enabled = otherUserCheckbox.Enabled = !localComputerRadio.Checked;
-			setUserBtn.Enabled = !localComputerRadio.Checked && otherUserCheckbox.Checked;
-			if (localComputerRadio.Checked)
+			if (String.IsNullOrEmpty(value))
 			{
-				TargetServer = User = Domain = Password = null;
-				SetUserText(null);
-				remoteComputerText.Clear();
+				value = EditorProperties.Resources.NoUserSpecifiedText;
+				otherUserCheckbox.Checked = false;
 			}
+			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
 		}
 
-		private void computerBrowseBtn_Click(object sender, EventArgs e)
-		{
-			FolderBrowserDialog2 dlg = FolderBrowserDialog2.ComputerBrowser;
-			dlg.Description = EditorProperties.Resources.BrowseForTargetServerPrompt;
-			dlg.SelectedPath = TargetServer == null ? Environment.MachineName : TargetServer;
-			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-				TargetServer = remoteComputerText.Text = dlg.SelectedPath;
-		}
-
-		private void otherUserCheckbox_CheckedChanged(object sender, EventArgs e)
-		{
-			setUserBtn.Enabled = otherUserCheckbox.Checked;
-		}
-
-		private void remoteComputerText_TextChanged(object sender, EventArgs e)
-		{
-			runButton.Enabled = remoteComputerText.TextLength > 0;
-			TargetServer = remoteComputerText.TextLength > 0 ? remoteComputerText.Text : null;
-		}
+		private bool ShouldSerializeTitle() => base.Text != GetLocalizedResourceString("$this.Text");
 
 		private void v1Check_CheckedChanged(object sender, EventArgs e)
 		{

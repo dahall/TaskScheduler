@@ -22,7 +22,7 @@ namespace TestTaskService
 			set
 			{
 				TaskListView.Folder = value;
-				if (value.Tasks.Count > 0)
+				if (TaskListView.Tasks.Count > 0)
 					TaskListView.SelectedIndex = 0;
 				else
 					taskListView_TaskSelected(null, TaskListView.TaskSelectedEventArgs.Empty);

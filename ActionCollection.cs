@@ -38,6 +38,8 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
 	{
+		internal const int MaxActions = 32;
+
 		private List<Action> v1Actions;
 		private V1Interop.ITask v1Task;
 		private V2Interop.IActionCollection v2Coll;
@@ -280,6 +282,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Specialized <see cref="Action"/> instance.</returns>
 		public Action AddNew(TaskActionType actionType)
 		{
+			if (Count >= MaxActions)
+				throw new ArgumentOutOfRangeException(nameof(actionType), "A maximum of 32 actions is allowed within a single task.");
 			if (v1Task != null)
 			{
 				if (!SupportV1Conversion && (v1Actions.Count >= 1 || actionType != TaskActionType.Execute))
