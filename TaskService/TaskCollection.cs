@@ -286,6 +286,12 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
 		public override string ToString() => $"TaskCollection; Count: {Count}";
 	}
 
@@ -422,6 +428,12 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String" /> that represents this instance.
+		/// </returns>
 		public override string ToString() => $"RunningTaskCollection; Count: {Count}";
 	}
 

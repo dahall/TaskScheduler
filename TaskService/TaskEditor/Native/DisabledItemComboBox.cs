@@ -403,7 +403,8 @@ namespace System.Windows.Forms
 			if (!vsSuccess)
 			{
 				System.Diagnostics.Debug.WriteLine($"CR:{ClientRectangle};ClR:{e.ClipRectangle};Foc:{Focused};St:{state};Tx:{itemText}");
-				e.Graphics.Clear(BackColor);
+				var bgc = Enabled ? BackColor : SystemColors.Control;
+				e.Graphics.Clear(bgc);
 				ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.Sunken);
 				ControlPaint.DrawComboButton(e.Graphics, br, Enabled ? (state == ComboBoxState.Pressed ? ButtonState.Pushed : ButtonState.Normal) : ButtonState.Inactive);
 				//using (var bb = new SolidBrush(this.BackColor))
@@ -415,7 +416,7 @@ namespace System.Windows.Forms
 					e.Graphics.FillRectangle(SystemBrushes.Highlight, fr);
 					ControlPaint.DrawFocusRectangle(e.Graphics, fr); //, this.ForeColor, SystemColors.Highlight);
 				}
-				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, Focused ? SystemColors.HighlightText : ForeColor, tff);
+				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, Focused ? SystemColors.HighlightText : ForeColor, bgc, tff);
 			}
 		}
 

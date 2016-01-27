@@ -571,7 +571,7 @@ namespace TestTaskService
 			{
 				try
 				{
-					output.WriteLine("+ {0}, {1} ({2}) - {3}", t.Name, t.Definition.RegistrationInfo.Author, t.State, t.Definition.Settings.Compatibility);
+					output.WriteLine("+ {0}, {1} ({2}) - {3}; Actions:{4}; Triggers:{5}", t.Name, t.Definition.RegistrationInfo.Author, t.State, t.Definition.Settings.Compatibility, t.Definition.Actions.Count, t.Definition.Triggers.Count);
 					foreach (Trigger trg in t.Definition.Triggers)
 						output.WriteLine(" + {0}", trg);
 					foreach (var act in t.Definition.Actions)

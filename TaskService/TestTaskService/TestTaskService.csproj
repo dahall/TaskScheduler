@@ -68,16 +68,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TaskEditor">
-      <HintPath>..\TaskEditor\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Aliases>global</Aliases>
-    </Reference>
-    <Reference Include="TaskService">
-      <HintPath>..\bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskScheduler.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Aliases>global</Aliases>
-    </Reference>
     <Reference Include="TimeSpan2">
       <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -144,6 +134,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="RunningTasksDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +156,12 @@
     </Compile>
     <Compile Include="TaskEventViewer.Designer.cs">
       <DependentUpon>TaskEventViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskWatcherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskWatcherForm.designer.cs">
+      <DependentUpon>TaskWatcherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TSMMCMockup.cs">
       <SubType>Form</SubType>
@@ -208,6 +209,9 @@
     <EmbeddedResource Include="TaskEventViewer.resx">
       <DependentUpon>TaskEventViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskWatcherForm.resx">
+      <DependentUpon>TaskWatcherForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +220,10 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\ts.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +231,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PanelHeaderArrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskEditor\TaskEditor.csproj">
+      <Project>{5279d487-59fa-4d01-9d7a-ea7387d8b67c}</Project>
+      <Name>TaskEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskService.csproj">
+      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Name>TaskService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

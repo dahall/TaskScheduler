@@ -45,7 +45,6 @@ namespace TestTaskService
 					break;
 				case 3: // Find action
 					Program.FindTaskWithProperty(ts, output, textBox2.Text);
-					//Program.FluentTest(ts, output);
 					break;
 				case 4: // Wiz
 					Program.WizardTest(ts, output);
@@ -54,13 +53,25 @@ namespace TestTaskService
 					Program.MMCTest(ts, output);
 					break;
 				case 6: // Find task
-					//Program.FindTask(ts, output, textBox2.Text);
-					//new ScriptTestDlg() { TaskService = ts }.ShowDialog(this);
-					new TaskEventViewer().ShowDialog(this);
+					Program.FindTask(ts, output, textBox2.Text);
 					break;
 				case 7: // Output XML
 					Program.OutputXml(ts, output);
+					break;
+				case 8: // Output JSON
 					Program.OutputJson(ts, output);
+					break;
+				case 9: // Task Event Viewer
+					new TaskEventViewer().ShowDialog(this);
+					break;
+				case 10: // Task Watcher Form
+					new TaskWatcherForm().ShowDialog(this);
+					break;
+				case 11: // Run Code
+					new ScriptTestDlg() { TaskService = ts }.ShowDialog(this);
+					break;
+				case 12: // Fluent
+					Program.FluentTest(ts, output);
 					break;
 				default:
 					break;
