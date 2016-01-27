@@ -88,7 +88,6 @@ namespace System.Runtime.InteropServices
 		/// </summary>
 		/// <typeparam name="T">Native structure type</typeparam>
 		/// <param name="values">Collection of structure objects</param>
-		/// <param name="count">Number of elements in the collection</param>
 		/// <returns>SafeHGlobalHandle object to an native (unmanaged) array of structures</returns>
 		public static SafeHGlobalHandle AllocHGlobal<T>(ICollection<T> values) where T : struct
 		{
@@ -107,9 +106,8 @@ namespace System.Runtime.InteropServices
 		/// <typeparam name="T">Type of the trailing array of structures</typeparam>
 		/// <param name="prefixBytes">Number of bytes preceding the trailing array of structures</param>
 		/// <param name="values">Collection of structure objects</param>
-		/// <param name="count"></param>
-		/// <returns>SafeHGlobalHandle object to an native (unmanaged) structure
-		/// with a trail array of structures</returns>
+		/// <param name="count">Number of items in <paramref name="values"/>.</param>
+		/// <returns>SafeHGlobalHandle object to an native (unmanaged) structure with a trail array of structures</returns>
 		public static SafeHGlobalHandle AllocHGlobal<T>(int prefixBytes, IEnumerable<T> values, int count) where T : struct
 		{
 			Debug.Assert(typeof(T).StructLayoutAttribute.Value == LayoutKind.Sequential);

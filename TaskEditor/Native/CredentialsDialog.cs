@@ -30,7 +30,6 @@ namespace System.Windows.Forms
 		/// <param name="caption">The caption.</param>
 		/// <param name="message">The message.</param>
 		/// <param name="userName">Name of the user.</param>
-		/// <param name="options">The options.</param>
 		public CredentialsDialog(string caption = null, string message = null, string userName = null) : this()
 		{
 			Caption = caption;
@@ -78,9 +77,6 @@ namespace System.Windows.Forms
 		/// <summary>
 		/// Gets or sets a boolean indicating if the save check box was checked
 		/// </summary>
-		/// <remarks>
-		/// Only valid if <see cref="CredentialsDialog.Options"/> has the <see cref="CredentialsDialogOptions.DoNotPersist"/> newDS set.
-		/// </remarks>
 		[DefaultValue(false), Category("Behavior"), Description("Indicates if the save check box is checked.")]
 		public bool SaveChecked { get; set; }
 

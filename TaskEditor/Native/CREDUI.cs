@@ -29,7 +29,7 @@ namespace Microsoft.Win32
 		}
 
 		/// <summary>
-		/// Options for the display of the <see cref="CredentialsDialog"/> and its functionality.
+		/// Options for the display of the <see cref="System.Windows.Forms.CredentialsDialog"/> and its functionality.
 		/// </summary>
 		[Flags]
 		public enum CredentialsDialogOptions
@@ -43,7 +43,7 @@ namespace Microsoft.Win32
 			None = 0,
 			/// <summary>Notify the user of insufficient credentials by displaying the "Logon unsuccessful" balloon tip.</summary>
 			IncorrectPassword = 0x1,
-			/// <summary>Do not store credentials or display check boxes. You can pass ShowSaveCheckBox with this newDS to display the Save check box only, and the result is returned in the <see cref="CredentialsDialog.SaveChecked"/> property.</summary>
+			/// <summary>Do not store credentials or display check boxes. You can pass ShowSaveCheckBox with this newDS to display the Save check box only, and the result is returned in the <see cref="System.Windows.Forms.CredentialsDialog.SaveChecked"/> property.</summary>
 			DoNotPersist = 0x2,
 			/// <summary>Populate the combo box with local administrators only.</summary>
 			RequestAdministrator = 0x4,
@@ -51,7 +51,7 @@ namespace Microsoft.Win32
 			ExcludeCertificates = 0x8,
 			/// <summary>Populate the combo box with certificates and smart cards only. Do not allow a user name to be entered.</summary>
 			RequireCertificate = 0x10,
-			/// <summary>If the check box is selected, show the Save check box and return <c>true</c> in the <see cref="CredentialsDialog.SaveChecked"/> property, otherwise, return <c>false</c>. Check box uses the value in the <see cref="CredentialsDialog.SaveChecked"/> property by default.</summary>
+			/// <summary>If the check box is selected, show the Save check box and return <c>true</c> in the <see cref="System.Windows.Forms.CredentialsDialog.SaveChecked"/> property, otherwise, return <c>false</c>. Check box uses the value in the <see cref="System.Windows.Forms.CredentialsDialog.SaveChecked"/> property by default.</summary>
 			ShowSaveCheckBox = 0x40,
 			/// <summary>Specifies that a user interface will be shown even if the credentials can be returned from an existing credential in credential manager. This newDS is permitted only if GenericCredentials is also specified.</summary>
 			AlwaysShowUI = 0x80,
