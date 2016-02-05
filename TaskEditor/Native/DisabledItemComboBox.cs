@@ -416,7 +416,7 @@ namespace System.Windows.Forms
 					e.Graphics.FillRectangle(SystemBrushes.Highlight, fr);
 					ControlPaint.DrawFocusRectangle(e.Graphics, fr); //, this.ForeColor, SystemColors.Highlight);
 				}
-				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, Focused ? SystemColors.HighlightText : ForeColor, bgc, tff);
+				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, Focused ? SystemColors.HighlightText : (Enabled ? ForeColor : SystemColors.GrayText), bgc, tff);
 			}
 		}
 

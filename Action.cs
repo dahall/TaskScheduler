@@ -444,6 +444,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private const string ImportanceHeader = "Importance";
 
 		private NamedValueCollection nvc = null;
+		private bool validateAttachments = true;
 
 		/// <summary>
 		/// Creates an unbound instance of <see cref="EmailAction"/>.
@@ -486,9 +487,12 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value.Length > 8)
 						throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
-					foreach (var o in value)
-						if (!(o is string) || !System.IO.File.Exists((string)o))
-							throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
+					if (validateAttachments)
+					{
+						foreach (var o in value)
+							if (!(o is string) || !System.IO.File.Exists((string)o))
+								throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
+					}
 				}
 				if (iAction == null && (value == null || value.Length == 0))
 				{
@@ -649,8 +653,10 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				EmailAction action = new EmailAction(UnPrep(FromUTF8(match.Groups["subject"].Value)), UnPrep(match.Groups["from"].Value), FromPS(match.Groups["to"]), UnPrep(FromUTF8(match.Groups["body"].Value)), UnPrep(match.Groups["server"].Value))
 				{ Cc = FromPS(match.Groups["cc"]), Bcc = FromPS(match.Groups["bcc"]) };
+				action.validateAttachments = false;
 				if (match.Groups["att"].Success)
 					action.Attachments = Array.ConvertAll<string, object>(FromPS(match.Groups["att"].Value), s => s);
+				action.validateAttachments = true;
 				if (match.Groups["imp"].Success)
 					action.HeaderFields[ImportanceHeader] = match.Groups["imp"].Value;
 				return action;
