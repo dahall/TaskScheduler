@@ -42,10 +42,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AeroWizard, Version=2.1.2.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.1.2\lib\net40\AeroWizard.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,6 +64,9 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="CommandLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Configurer.cs" />
     <Compile Include="Firewall.cs" />
     <Compile Include="Main.cs">
@@ -66,6 +74,12 @@
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProblemItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProblemItem.Designer.cs">
+      <DependentUpon>ProblemItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,9 +90,16 @@
     </Compile>
     <Compile Include="Reporter.cs" />
     <Compile Include="Validator.cs" />
+    <Compile Include="WizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WizardForm.Designer.cs">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskService.csproj">
@@ -90,10 +111,34 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProblemItem.resx">
+      <DependentUpon>ProblemItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="WizardForm.resx">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restarrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selarrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tsnew.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

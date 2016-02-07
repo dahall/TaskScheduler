@@ -79,6 +79,7 @@ namespace TaskSchedulerConfig
 			if (v2)
 			{
 				AddLocalItem(Res.GroupV2, Res.FirewallRuleEnabled, Res.RemoteTaskManagementRule, v.Firewall.Rules[Firewall.Rule.RemoteTaskManagement], fixer.EnableFirewallRule, Firewall.Rule.RemoteTaskManagement);
+				AddLocalItem(Res.GroupV2, Res.RemoteRegistryServiceRunning, null, v.RemoteRegistryServiceRunning, fixer.RunRemoteRegistryService);
 			}
 
 			bool hasError = false;

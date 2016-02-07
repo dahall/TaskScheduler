@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.ServiceProcess;
 
 namespace TaskSchedulerConfig
 {
-	class Validator
+	class Validator : IDisposable
 	{
 		private WindowsIdentity id;
 		private SecurityIdentifier sid;
 		private WindowsPrincipal prin;
+		private string server = null;
+		private Firewall fw = null;
+		private ServiceController sc = null;
 
-		public Validator(string svr)
+		public Validator(string svr = null)
 		{
-			Firewall = new Firewall(svr);
+			server = svr;
 			id = WindowsIdentity.GetCurrent();
 			sid = new SecurityIdentifier(id.User.Value);
 			prin = new WindowsPrincipal(id);
@@ -37,8 +40,18 @@ namespace TaskSchedulerConfig
 			}
 		}
 
-		public Firewall Firewall { get; }
+		public Firewall Firewall => fw ?? (fw = new Firewall(server));
+
+		public ServiceController RemoteRegistryService => sc ?? (sc = new ServiceController("RemoteRegistry", server ?? "."));
 
 		public string User => id.Name;
+
+		public bool RemoteRegistryServiceRunning => RemoteRegistryService.Status == ServiceControllerStatus.Running;
+
+		void IDisposable.Dispose()
+		{
+			if (sc != null) { sc.Close(); sc = null; }
+			if (fw != null) { fw = null; }
+		}
 	}
 }
