@@ -2,7 +2,7 @@
 
 namespace TaskSchedulerConfig
 {
-	class Firewall
+	class Firewall : IDisposable
 	{
 		internal static bool OldFirewall = Environment.OSVersion.Version.Major == 5;
 
@@ -58,9 +58,9 @@ namespace TaskSchedulerConfig
 			}
 		}
 
-		public RulesContainer Rules { get; }
+		public RulesContainer Rules { get; private set; }
 
-		public dynamic Instance { get; }
+		public dynamic Instance { get; private set; }
 
 		public class RulesContainer
 		{
@@ -128,6 +128,12 @@ namespace TaskSchedulerConfig
 					}
 				}
 			}
+		}
+
+		public void Dispose()
+		{
+			Rules = null;
+			Instance = null;
 		}
 	}
 }
