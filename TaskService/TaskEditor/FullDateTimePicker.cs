@@ -107,7 +107,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if ((value == null) || (value.Length == 0))
 					ResetValue();
 				else
-					Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentUICulture);
+					try { Value = DateTime.Parse(value, System.Globalization.CultureInfo.CurrentUICulture); } catch { }
 			}
 		}
 
@@ -194,10 +194,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), RefreshProperties(RefreshProperties.All), Bindable(true), Description("The full date and time.")]
 		public DateTime Value
 		{
-			get
-			{
-				return currentValue;
-			}
+			get { return userHasSetValue ? currentValue : DateTimePicker.MinimumDateTime; }
 			set
 			{
 				bool newVal = currentValue != value;
@@ -229,9 +226,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected virtual void OnValueChanged(EventArgs eventArgs)
 		{
-			EventHandler h = ValueChanged;
-			if (h != null)
-				h(this, EventArgs.Empty);
+			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -294,8 +289,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetValue()
 		{
-			Value = DateTime.Now;
+			currentValue = DateTime.Now;
 			userHasSetValue = false;
+			DataToControls();
 		}
 
 		private void SetRightToLeft()

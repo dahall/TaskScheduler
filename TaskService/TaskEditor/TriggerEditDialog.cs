@@ -19,6 +19,7 @@ namespace Microsoft.Win32.TaskScheduler
 		DialogBase
 #endif
 	{
+		private DateTime initialStartBoundary = DateTime.MinValue;
 		private bool isV2;
 		private bool onAssignment = false;
 		private bool showCustom = false;
@@ -55,7 +56,10 @@ namespace Microsoft.Win32.TaskScheduler
 			if (trigger != null)
 				Trigger = trigger;
 			else
+			{
 				Trigger = new TimeTrigger();
+				initialStartBoundary = DateTime.MinValue;
+			}
 		}
 
 		/// <summary>Defines the type of triggers that can be used by tasks.</summary>
@@ -132,6 +136,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					trigger = value.Clone() as Trigger;
 				}
+				initialStartBoundary = trigger.StartBoundary;
 				switch (trigger.TriggerType)
 				{
 					case TaskTriggerType.Time:
@@ -211,14 +216,14 @@ namespace Microsoft.Win32.TaskScheduler
 					stopIfRunsSpan.Value = trigger.ExecutionTimeLimit;
 					stopIfRunsCheckBox.Enabled = stopIfRunsCheckBox.Checked = stopIfRunsSpan.Enabled = trigger.ExecutionTimeLimit != TimeSpan.Zero;
 				}
-				activateCheckBox.Visible = activateDatePicker.Visible = TriggerView != TaskTriggerDisplayType.Schedule;
-				if (TriggerView != TaskTriggerDisplayType.Schedule)
-				{
-					activateCheckBox.Checked = trigger.StartBoundary != DateTime.MinValue;
-					activateDatePicker.Enabled = activateCheckBox.Checked && TriggerView != TaskTriggerDisplayType.Custom;
-					if (activateCheckBox.Checked)
-						activateDatePicker.Value = MaxDate(trigger.StartBoundary, DateTimePicker.MinimumDateTime);
-				}
+				bool showActivate = TriggerView != TaskTriggerDisplayType.Schedule;
+				activateCheckBox.Visible = activateDatePicker.Visible = showActivate;
+				activateCheckBox.Checked = showActivate && trigger.StartBoundary != DateTime.MinValue;
+				activateDatePicker.Enabled = showActivate && activateCheckBox.Checked && TriggerView != TaskTriggerDisplayType.Custom;
+				if (activateCheckBox.Checked)
+					activateDatePicker.Value = MaxDate(trigger.StartBoundary, DateTimePicker.MinimumDateTime);
+				else
+					activateDatePicker.Value = DateTime.Now;
 				expireCheckBox.Checked = expireDatePicker.Enabled = trigger.EndBoundary != DateTime.MaxValue;
 				expireDatePicker.Value = expireCheckBox.Checked ? trigger.EndBoundary : MaxDate(trigger.StartBoundary, DateTime.Now);
 				enabledCheckBox.Checked = trigger.Enabled;
@@ -277,10 +282,11 @@ namespace Microsoft.Win32.TaskScheduler
 			activateDatePicker.Enabled = activateCheckBox.Checked;
 			if (!onAssignment)
 			{
-				if (expireCheckBox.Checked)
+				if (activateCheckBox.Checked)
 					trigger.StartBoundary = activateDatePicker.Value;
 				else
 					trigger.StartBoundary = DateTime.MinValue;
+				initialStartBoundary = trigger.StartBoundary;
 			}
 		}
 
@@ -531,8 +537,13 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (trigger != null)
 					newTrigger.CopyProperties(trigger);
-				if (newTrigger is ICalendarTrigger && newTrigger.StartBoundary == DateTime.MinValue)
-					newTrigger.StartBoundary = DateTime.Now;
+				if (newTrigger is ICalendarTrigger)
+				{
+					if (newTrigger.StartBoundary == DateTime.MinValue)
+						newTrigger.StartBoundary = DateTime.Now;
+				}
+				else
+					newTrigger.StartBoundary = initialStartBoundary;
 				Trigger = newTrigger;
 			}
 		}
