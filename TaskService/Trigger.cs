@@ -182,7 +182,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v2Trigger = iTrigger;
 			ttype = iTrigger.Type;
-			if (string.IsNullOrEmpty(v2Trigger.StartBoundary))
+			if (string.IsNullOrEmpty(v2Trigger.StartBoundary) && this is ICalendarTrigger)
 				StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
@@ -195,7 +195,8 @@ namespace Microsoft.Win32.TaskScheduler
 			try { v1TriggerData.Type = ConvertToV1TriggerType(ttype); }
 			catch { }
 
-			StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+			if (this is ICalendarTrigger)
+				StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
 		/// <summary>
