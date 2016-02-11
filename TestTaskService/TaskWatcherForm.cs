@@ -65,7 +65,7 @@ namespace TestTaskService
 
 		private void taskEventWatcher_EventRecorded(object sender, Microsoft.Win32.TaskScheduler.TaskEventArgs e)
 		{
-			outputList.Items.Insert(0, $"{e.TaskEvent.EventId}: {e.TaskEvent}");
+			outputList.Items.Insert(0, $"{e?.TaskEvent?.EventId}: {e?.TaskEvent}");
 		}
 
 		private void folderButton_Click(object sender, EventArgs e)

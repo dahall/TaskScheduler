@@ -340,6 +340,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Historical event information for a task.
 	/// </summary>
+	/// <remarks>
+	/// For events on systems prior to Windows Vista, this class will only have information for the TaskPath, TimeCreated and EventId properties.
+	/// </remarks>
 	public sealed class TaskEvent : IComparable<TaskEvent>
 	{
 		internal TaskEvent(EventRecord rec)
@@ -355,17 +358,24 @@ namespace Microsoft.Win32.TaskScheduler
 			Level = rec.LevelDisplayName;
 			UserId = rec.UserId;
 			ProcessId = rec.ProcessId;
-			TaskPath = rec.Properties.Count > 0 ? rec.Properties[0].Value.ToString() : null;
+			TaskPath = rec.Properties.Count > 0 ? rec.Properties[0]?.Value?.ToString() : null;
 			DataValues = new EventDataValues(rec as EventLogRecord);
+		}
+		
+		internal TaskEvent(string taskPath, StandardTaskEventId id, DateTime time)
+		{
+			EventId = (int)id;
+			TaskPath = taskPath;
+			TimeCreated = time;
 		}
 
 		/// <summary>
-		/// Gets the activity id.
+		/// Gets the activity id. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public Guid? ActivityId { get; internal set; }
 
 		/// <summary>
-		/// An indexer that gets the value of each of the data item values.
+		/// An indexer that gets the value of each of the data item values. This value is <c>null</c> for V1 events.
 		/// </summary>
 		/// <value>
 		/// The data values.
@@ -378,7 +388,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public int EventId { get; internal set; }
 
 		/// <summary>
-		/// Gets the underlying <see cref="EventRecord"/>.
+		/// Gets the underlying <see cref="EventRecord"/>. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public EventRecord EventRecord { get; internal set; }
 
@@ -399,27 +409,27 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the level.
+		/// Gets the level. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public string Level { get; internal set; }
 
 		/// <summary>
-		/// Gets the op code.
+		/// Gets the op code. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public string OpCode { get; internal set; }
 
 		/// <summary>
-		/// Gets the process id.
+		/// Gets the process id. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public int? ProcessId { get; internal set; }
 
 		/// <summary>
-		/// Gets the record id.
+		/// Gets the record id. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public long? RecordId { get; internal set; }
 
 		/// <summary>
-		/// Gets the task category.
+		/// Gets the task category. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public string TaskCategory { get; internal set; }
 
@@ -434,12 +444,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public DateTime? TimeCreated { get; internal set; }
 
 		/// <summary>
-		/// Gets the user id.
+		/// Gets the user id. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public System.Security.Principal.SecurityIdentifier UserId { get; internal set; }
 
 		/// <summary>
-		/// Gets the version.
+		/// Gets the version. This value is <c>null</c> for V1 events.
 		/// </summary>
 		public byte? Version { get; internal set; }
 
@@ -449,7 +459,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="name">The name of the data element.</param>
 		/// <returns>Contents of the requested data element if found. <c>null</c> if no value found.</returns>
 		[Obsolete("Use the DataVales property instead.")]
-		public string GetDataValue(string name) => this.DataValues[name];
+		public string GetDataValue(string name) => DataValues?[name];
 
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this instance.
@@ -457,7 +467,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="System.String"/> that represents this instance.
 		/// </returns>
-		public override string ToString() => EventRecord.FormatDescription();
+		public override string ToString() => EventRecord?.FormatDescription() ?? TaskPath;
 
 		/// <summary>
 		/// Compares the current object with another object of the same type.
@@ -469,7 +479,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public int CompareTo(TaskEvent other)
 		{
 			int i = TaskPath.CompareTo(other.TaskPath);
-			if (i == 0)
+			if (i == 0 && EventRecord != null)
 			{
 				i = ActivityId.ToString().CompareTo(other.ActivityId.ToString());
 				if (i == 0)

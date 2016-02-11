@@ -11,7 +11,6 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public class TaskEventArgs : EventArgs
 	{
-		private Task task;
 		private TaskService taskService;
 
 		internal TaskEventArgs(TaskEvent evt, TaskService ts = null)
@@ -19,17 +18,6 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskEvent = evt;
 			TaskPath = evt.TaskPath;
 			taskService = ts;
-		}
-
-		internal TaskEventArgs(Task task)
-		{
-			this.task = task;
-			TaskPath = task.Path;
-		}
-
-		internal TaskEventArgs(string taskPath)
-		{
-			TaskPath = taskPath;
 		}
 
 		/// <summary>
@@ -40,7 +28,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </value>
 		public Task Task
 		{
-			get { if (task != null) return task; else try { return taskService?.GetTask(TaskPath); } catch { return null; } }
+			get { try { return taskService?.GetTask(TaskPath); } catch { return null; } }
 		}
 
 		/// <summary>
@@ -81,11 +69,15 @@ namespace Microsoft.Win32.TaskScheduler
 		private const string root = "\\";
 		private const string star = "*";
 
+		private static TimeSpan MaxV1EventLapse = TimeSpan.FromSeconds(1);
+
 		private bool disposed;
 		private bool enabled = false;
 		private string folder = root;
 		private bool includeSubfolders;
 		private bool initializing;
+		private StandardTaskEventId lastId = 0;
+		private DateTime lastIdTime = DateTime.MinValue;
 		private TaskService ts;
 		private System.IO.FileSystemWatcher v1watcher;
 		private EventLogWatcher watcher;
@@ -500,7 +492,9 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					v1watcher.EnableRaisingEvents = false;
 					v1watcher.Changed -= Watcher_DirectoryChanged;
+					v1watcher.Created -= Watcher_DirectoryChanged;
 					v1watcher.Deleted -= Watcher_DirectoryChanged;
+					v1watcher.Renamed -= Watcher_DirectoryChanged;
 					v1watcher = null;
 				}
 			}
@@ -537,9 +531,11 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.System));
 				string dir = Path.Combine(di.Parent.FullName, "Tasks");
-				v1watcher = new FileSystemWatcher(dir) { Filter = "*.job", NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite };
+				v1watcher = new FileSystemWatcher(dir, "*.job") { NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.Attributes };
 				v1watcher.Changed += Watcher_DirectoryChanged;
+				v1watcher.Created += Watcher_DirectoryChanged;
 				v1watcher.Deleted += Watcher_DirectoryChanged;
+				v1watcher.Renamed += Watcher_DirectoryChanged;
 			}
 			else
 			{
@@ -589,29 +585,48 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void Watcher_DirectoryChanged(object sender, FileSystemEventArgs e)
 		{
-			Task task = null;
-			try { task = TaskService.GetTask(Path.GetFileNameWithoutExtension(e.Name)); } catch { }
-			OnEventRecorded(this, task != null ? new TaskEventArgs(task) : new TaskEventArgs(e.Name));
+			StandardTaskEventId id = StandardTaskEventId.TaskUpdated;
+			if (e.ChangeType == WatcherChangeTypes.Deleted)
+				id = StandardTaskEventId.TaskDeleted;
+			else if (e.ChangeType == WatcherChangeTypes.Created)
+				id = StandardTaskEventId.JobRegistered;
+			if (lastId != id || DateTime.Now.Subtract(lastIdTime) > MaxV1EventLapse)
+			{
+				OnEventRecorded(this, new TaskEventArgs(new TaskEvent(Path.Combine("\\", e.Name.Replace(".job", "")), id, DateTime.Now), TaskService));
+				lastId = id;
+				lastIdTime = DateTime.Now;
+			}
 		}
 
 		private void Watcher_EventRecordWritten(object sender, EventRecordWrittenEventArgs e)
 		{
-			var taskEvent = new TaskEvent(e.EventRecord);
-			System.Diagnostics.Debug.WriteLine("Task event: " + taskEvent.ToString());
+			try
+			{
+				var taskEvent = new TaskEvent(e.EventRecord);
+				System.Diagnostics.Debug.WriteLine("Task event: " + taskEvent.ToString());
 
-			// Get the task name and folder
-			string name = Path.GetFileNameWithoutExtension(taskEvent.TaskPath);
-			string fld = Path.GetDirectoryName(taskEvent.TaskPath);
+				// Get the task name and folder
+				if (!string.IsNullOrEmpty(taskEvent.TaskPath))
+				{
+					int cpos = taskEvent.TaskPath.LastIndexOf('\\');
+					string name = taskEvent.TaskPath.Substring(cpos + 1);
+					string fld = taskEvent.TaskPath.Substring(0, cpos + 1);
 
-			// Check folder and name filters
-			if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
-				return;
-			if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
-				return;
-			if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
-				return;
+					// Check folder and name filters
+					if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
+						return;
+					if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
+						return;
+					if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
+						return;
 
-			OnEventRecorded(this, new TaskEventArgs(taskEvent, TaskService));
+					OnEventRecorded(this, new TaskEventArgs(taskEvent, TaskService));
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"{nameof(Watcher_EventRecordWritten)} has failed. Error: {ex.ToString()}");
+			}
 		}
 
 		/// <summary>
