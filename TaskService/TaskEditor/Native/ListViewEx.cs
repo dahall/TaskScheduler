@@ -179,7 +179,7 @@ namespace System.Windows.Forms
 				default:
 					break;
 			}
-			base.WndProc(ref m);
+			try { base.WndProc(ref m); } catch { }
 		}
 
 		private void DetachImageList(object sender, EventArgs e)

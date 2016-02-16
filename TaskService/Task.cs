@@ -2072,8 +2072,22 @@ namespace Microsoft.Win32.TaskScheduler
 				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartInterval", "must be 0 (TimeSpan.Zero).")); }
 			if (Settings.StartWhenAvailable == true)
 				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.StartWhenAvailable", "must be false.")); }
-			//if (Actions.ContainsType(typeof(EmailAction)) || Actions.ContainsType(typeof(ShowMessageAction)) || Actions.ContainsType(typeof(ComHandlerAction)))
-			//	{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Actions", "may only contain ExecAction types.")); }
+
+			if ((Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != PowerShellActionPlatformOption.Version1 && (Actions.ContainsType(typeof(EmailAction)) || Actions.ContainsType(typeof(ShowMessageAction)) || Actions.ContainsType(typeof(ComHandlerAction))))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Actions", "may only contain ExecAction types unless Actions.PowerShellConversion includes Version1.")); }
+			if ((Actions.PowerShellConversion & PowerShellActionPlatformOption.Version2) != PowerShellActionPlatformOption.Version2 && (Actions.ContainsType(typeof(EmailAction)) || Actions.ContainsType(typeof(ShowMessageAction))))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Actions", "may only contain ExecAction and ComHanlderAction types unless Actions.PowerShellConversion includes Version2.")); }
+
+			if (null != Triggers.Find(t => (t is ITriggerDelay && ((ITriggerDelay)t).Delay != TimeSpan.Zero)))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain delays.")); }
+			if (null != Triggers.Find(t => t.ExecutionTimeLimit != TimeSpan.Zero || t.Id != null))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain an ExecutionTimeLimit or Id.")); }
+			if (null != Triggers.Find(t => (t is LogonTrigger && ((LogonTrigger)t).UserId != null)))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a LogonTrigger with a UserId.")); }
+			if (null != Triggers.Find(t => (t is MonthlyDOWTrigger && ((MonthlyDOWTrigger)t).RunOnLastWeekOfMonth) || (t is MonthlyDOWTrigger && ((((MonthlyDOWTrigger)t).WeeksOfMonth & (((MonthlyDOWTrigger)t).WeeksOfMonth - 1)) != 0))))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyDOWTrigger with RunOnLastWeekOfMonth set or multiple WeeksOfMonth.")); }
+			if (null != Triggers.Find(t => (t is MonthlyTrigger && ((MonthlyTrigger)t).RunOnLastDayOfMonth)))
+				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyTrigger with RunOnLastDayOfMonth set.")); }
 			if (Triggers.ContainsType(typeof(EventTrigger)) || Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || Triggers.ContainsType(typeof(RegistrationTrigger)))
 				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger types.")); }
 			

@@ -213,13 +213,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
+			if (e.Cancelled || !IsHandleCreated)
+				return;
 			historyListView.Cursor = Cursors.Default;
 			historyListView.BeginUpdate();
-			if (e.Result is Exception)
+			if (e.Error != null || e.Result is Exception)
 			{
 				historyHeader_Refresh(0L);
-				if (ShowErrors)
-					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, ((Exception)e.Result).Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				var exc = (e.Result as Exception) ?? e.Error;
+				if (exc != null && ShowErrors)
+					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, exc.Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			else if (e.Result == null)
 			{

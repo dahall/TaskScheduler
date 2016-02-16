@@ -47,6 +47,7 @@
 			this.upDownTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.actionUpButton = new System.Windows.Forms.Button();
 			this.actionDownButton = new System.Windows.Forms.Button();
+			this.allowPowerShellConvCheck = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.contextMenu.SuspendLayout();
 			this.upDownTableLayoutPanel.SuspendLayout();
@@ -56,10 +57,11 @@
 			// 
 			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
 			this.tableLayoutPanel2.Controls.Add(this.actionListView, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.actionNewButton, 0, 1);
-			this.tableLayoutPanel2.Controls.Add(this.actionDeleteButton, 2, 1);
-			this.tableLayoutPanel2.Controls.Add(this.actionEditButton, 1, 1);
+			this.tableLayoutPanel2.Controls.Add(this.actionNewButton, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.actionDeleteButton, 2, 2);
+			this.tableLayoutPanel2.Controls.Add(this.actionEditButton, 1, 2);
 			this.tableLayoutPanel2.Controls.Add(this.upDownTableLayoutPanel, 3, 0);
+			this.tableLayoutPanel2.Controls.Add(this.allowPowerShellConvCheck, 0, 1);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			// 
 			// actionListView
@@ -181,6 +183,14 @@
 			this.actionDownButton.UseVisualStyleBackColor = true;
 			this.actionDownButton.Click += new System.EventHandler(this.actionDownButton_Click);
 			// 
+			// allowPowerShellConvCheck
+			// 
+			resources.ApplyResources(this.allowPowerShellConvCheck, "allowPowerShellConvCheck");
+			this.tableLayoutPanel2.SetColumnSpan(this.allowPowerShellConvCheck, 3);
+			this.allowPowerShellConvCheck.Name = "allowPowerShellConvCheck";
+			this.allowPowerShellConvCheck.UseVisualStyleBackColor = true;
+			this.allowPowerShellConvCheck.CheckedChanged += new System.EventHandler(this.allowPowerShellConvCheck_CheckedChanged);
+			// 
 			// ActionCollectionUI
 			// 
 			resources.ApplyResources(this, "$this");
@@ -216,5 +226,6 @@
 		private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
 		private System.Windows.Forms.ImageList imageList;
+		private System.Windows.Forms.CheckBox allowPowerShellConvCheck;
 	}
 }
