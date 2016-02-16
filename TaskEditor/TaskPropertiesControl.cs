@@ -817,6 +817,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
+			if (lowestComp == TaskCompatibility.V1 && task != null && task.Folder.Path != "\\")
+				lowestComp = TaskCompatibility.V2;
 			switch (comp)
 			{
 				case TaskCompatibility.AT:

@@ -48,7 +48,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (editor != null && editor.TaskDefinition != null)
 			{
 				actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editor.Editable;
-				actionListView.Enabled = editor.Editable;
+				actionListView.Enabled = allowPowerShellConvCheck.Enabled = editor.Editable;
+				allowPowerShellConvCheck.Checked = (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) == PowerShellActionPlatformOption.Version1;
 				actionListView.BeginUpdate();
 				actionListView.View = modern ? View.Tile : View.Details;
 				actionListView.Items.Clear();
@@ -202,6 +203,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionListView.Items.Add(lvi);
 			else
 				actionListView.Items.Insert(index, lvi);
+		}
+
+		private void allowPowerShellConvCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			editor.TaskDefinition.Actions.PowerShellConversion = allowPowerShellConvCheck.Checked ? PowerShellActionPlatformOption.All : PowerShellActionPlatformOption.Version2;
 		}
 
 		private void SetActionButtonState()
