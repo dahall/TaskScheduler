@@ -1873,7 +1873,14 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			for (int i = 0; i < Triggers.Count; i++)
 			{
-				Trigger t = Triggers[i];
+				Trigger t = null;
+				try { t = Triggers[i]; }
+				catch
+				{
+					if (!throwExceptionWithDetails) return false;
+					TryAdd(ex.Data, $"Triggers[{i}]", "is irretrievable.");
+					continue;
+				}
 				if (t is MonthlyTrigger)
 				{
 					bad = true;
@@ -1980,8 +1987,15 @@ namespace Microsoft.Win32.TaskScheduler
 			bool delOldTask = Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
 			bool v1 = Settings.Compatibility < TaskCompatibility.V2;
 			bool hasEndBound = false;
-			foreach (var trigger in Triggers)
+			for (int i = 0; i < Triggers.Count; i++)
 			{
+				Trigger trigger = null;
+				try { trigger = Triggers[i]; }
+				catch
+				{
+					TryAdd(ex.Data, $"Triggers[{i}]", "is irretrievable.");
+					continue;
+				}
 				if (startWhenAvailable && trigger.Repetition.Duration != TimeSpan.Zero && trigger.EndBoundary == DateTime.MaxValue)
 					TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
 				if (v1 && trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
@@ -2078,18 +2092,25 @@ namespace Microsoft.Win32.TaskScheduler
 			if ((Actions.PowerShellConversion & PowerShellActionPlatformOption.Version2) != PowerShellActionPlatformOption.Version2 && (Actions.ContainsType(typeof(EmailAction)) || Actions.ContainsType(typeof(ShowMessageAction))))
 				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Actions", "may only contain ExecAction and ComHanlderAction types unless Actions.PowerShellConversion includes Version2.")); }
 
-			if (null != Triggers.Find(t => (t is ITriggerDelay && ((ITriggerDelay)t).Delay != TimeSpan.Zero)))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain delays.")); }
-			if (null != Triggers.Find(t => t.ExecutionTimeLimit != TimeSpan.Zero || t.Id != null))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain an ExecutionTimeLimit or Id.")); }
-			if (null != Triggers.Find(t => (t is LogonTrigger && ((LogonTrigger)t).UserId != null)))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a LogonTrigger with a UserId.")); }
-			if (null != Triggers.Find(t => (t is MonthlyDOWTrigger && ((MonthlyDOWTrigger)t).RunOnLastWeekOfMonth) || (t is MonthlyDOWTrigger && ((((MonthlyDOWTrigger)t).WeeksOfMonth & (((MonthlyDOWTrigger)t).WeeksOfMonth - 1)) != 0))))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyDOWTrigger with RunOnLastWeekOfMonth set or multiple WeeksOfMonth.")); }
-			if (null != Triggers.Find(t => (t is MonthlyTrigger && ((MonthlyTrigger)t).RunOnLastDayOfMonth)))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyTrigger with RunOnLastDayOfMonth set.")); }
-			if (Triggers.ContainsType(typeof(EventTrigger)) || Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || Triggers.ContainsType(typeof(RegistrationTrigger)))
-				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger types.")); }
+			try
+			{
+				if (null != Triggers.Find(t => (t is ITriggerDelay && ((ITriggerDelay)t).Delay != TimeSpan.Zero)))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain delays.")); }
+				if (null != Triggers.Find(t => t.ExecutionTimeLimit != TimeSpan.Zero || t.Id != null))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain an ExecutionTimeLimit or Id.")); }
+				if (null != Triggers.Find(t => (t is LogonTrigger && ((LogonTrigger)t).UserId != null)))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a LogonTrigger with a UserId.")); }
+				if (null != Triggers.Find(t => (t is MonthlyDOWTrigger && ((MonthlyDOWTrigger)t).RunOnLastWeekOfMonth) || (t is MonthlyDOWTrigger && ((((MonthlyDOWTrigger)t).WeeksOfMonth & (((MonthlyDOWTrigger)t).WeeksOfMonth - 1)) != 0))))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyDOWTrigger with RunOnLastWeekOfMonth set or multiple WeeksOfMonth.")); }
+				if (null != Triggers.Find(t => (t is MonthlyTrigger && ((MonthlyTrigger)t).RunOnLastDayOfMonth)))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyTrigger with RunOnLastDayOfMonth set.")); }
+				if (Triggers.ContainsType(typeof(EventTrigger)) || Triggers.ContainsType(typeof(SessionStateChangeTrigger)) || Triggers.ContainsType(typeof(RegistrationTrigger)))
+					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger types.")); }
+			}
+			catch
+			{
+				list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain Custom triggers."));
+			}
 			
 			if (Principal.ProcessTokenSidType != TaskProcessTokenSidType.Default)
 				{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2_1, "Principal.ProcessTokenSidType", "must be Default.")); }

@@ -179,7 +179,7 @@ namespace System.Windows.Forms
 				default:
 					break;
 			}
-			try { base.WndProc(ref m); } catch { }
+			try { base.WndProc(ref m); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"ListViewEx WndProc Error: {m} - {ex}"); }
 		}
 
 		private void DetachImageList(object sender, EventArgs e)
