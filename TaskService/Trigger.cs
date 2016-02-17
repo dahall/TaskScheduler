@@ -619,7 +619,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerType.Custom:
 					CustomTrigger ct = new CustomTrigger(iTrigger);
 					if (iDef != null)
-						ct.UpdateFromXml(iDef.XmlText);
+						try { ct.UpdateFromXml(iDef.XmlText); } catch { }
 					return ct;
 				default:
 					break;
