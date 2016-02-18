@@ -282,14 +282,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				if (Task != null && Task.Definition.Principal.LogonType != TaskLogonType.InteractiveTokenOrPassword && Task.Definition.Principal.LogonType != TaskLogonType.Password)
+				if (Task != null && !Task.Definition.Principal.RequiresPassword())
 					Task.RegisterChanges();
 				else
 				{
 					string user = TaskDefinition.Principal.ToString();
 					string pwd = null;
 					TaskFolder fld = TaskService.GetFolder(TaskFolder);
-					if (TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || TaskDefinition.Principal.LogonType == TaskLogonType.Password)
+					if (TaskDefinition.Principal.RequiresPassword())
 					{
 						pwd = InvokeCredentialDialog(user, this);
 						if (pwd == null)

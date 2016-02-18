@@ -204,12 +204,9 @@ namespace Microsoft.Win32
 
 			public AuthenticationBuffer(string userName, string password)
 			{
-				if (userName != null && password != null)
-				{
-					var pUserName = new SafeCoTaskMemString(userName);
-					var pPassword = new SafeCoTaskMemString(password);
-					Init(0, pUserName, pPassword);
-				}
+				var pUserName = new SafeCoTaskMemString(userName ?? "");
+				var pPassword = new SafeCoTaskMemString(password ?? "");
+				Init(0, pUserName, pPassword);
 			}
 
 			public AuthenticationBuffer(SecureString userName, SecureString password)
@@ -231,7 +228,7 @@ namespace Microsoft.Win32
 
 			private void Init(int flags, SafeCoTaskMemString pUserName, SafeCoTaskMemString pPassword)
 			{
-				if (CredPackAuthenticationBuffer(flags, pUserName, pPassword, IntPtr.Zero, ref bufferSize))
+				if (!CredPackAuthenticationBuffer(flags, pUserName, pPassword, IntPtr.Zero, ref bufferSize) && Marshal.GetLastWin32Error() == 122) /*ERROR_INSUFFICIENT_BUFFER*/
 				{
 					buffer = Marshal.AllocCoTaskMem(bufferSize);
 					if (!CredPackAuthenticationBuffer(flags, pUserName, pPassword, buffer, ref bufferSize))

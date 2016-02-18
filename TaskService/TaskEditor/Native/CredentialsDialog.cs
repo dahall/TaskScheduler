@@ -257,6 +257,8 @@ namespace System.Windows.Forms
 						Password = p;
 						SecurePassword = null;
 						UserName = $"{d}\\{u}".TrimStart('\\');
+						if (ValidatePassword && !IsValidPassword(UserName, Password))
+							return false;
 					}
 					return true;
 				}
