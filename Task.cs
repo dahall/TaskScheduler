@@ -2451,6 +2451,13 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether current Principal settings require a password to be provided.
+		/// </summary>
+		/// <value><c>true</c> if settings requires a password to be provided; otherwise, <c>false</c>.</value>
+		public bool RequiresPassword() => LogonType == TaskLogonType.InteractiveTokenOrPassword ||
+			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null);
+
+		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this instance.
 		/// </summary>
 		/// <returns>
