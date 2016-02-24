@@ -174,7 +174,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			{
 				taskLoggedOnRadio.Enabled = editable;
 				taskLoggedOptionalRadio.Enabled = editable;
-				taskLocalOnlyCheck.Enabled = editable && (parent.Task == null || parent.IsV2);
+				taskLocalOnlyCheck.Enabled = editable && parent.IsV2;
 			}
 
 			taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
@@ -203,7 +203,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void taskLoggedOptionalRadio_CheckedChanged(object sender, EventArgs e)
 		{
-			taskLocalOnlyCheck.Enabled = parent.Editable && (parent.Task == null || parent.IsV2) && taskLoggedOptionalRadio.Checked && !(flagExecutorIsGroup | flagExecutorIsServiceAccount);
+			taskLocalOnlyCheck.Enabled = parent.Editable && parent.IsV2 && taskLoggedOptionalRadio.Checked && !(flagExecutorIsGroup | flagExecutorIsServiceAccount);
 			taskLocalOnlyCheck_CheckedChanged(sender, e);
 		}
 
