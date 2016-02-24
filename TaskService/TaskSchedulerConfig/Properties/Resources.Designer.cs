@@ -61,6 +61,16 @@ namespace TaskSchedulerConfig.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Detected {
+            get {
+                object obj = ResourceManager.GetObject("Detected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File and Printer Sharing.
         /// </summary>
         internal static string FileAndPrinterSharingRule {
@@ -84,6 +94,16 @@ namespace TaskSchedulerConfig.Properties {
         internal static string FirewallRuleEnabled {
             get {
                 return ResourceManager.GetString("FirewallRuleEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Fixed {
+            get {
+                object obj = ResourceManager.GetObject("Fixed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -120,6 +140,16 @@ namespace TaskSchedulerConfig.Properties {
         internal static System.Drawing.Bitmap Minus {
             get {
                 object obj = ResourceManager.GetObject("Minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NotFixed {
+            get {
+                object obj = ResourceManager.GetObject("NotFixed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

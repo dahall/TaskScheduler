@@ -17,14 +17,15 @@ namespace TaskSchedulerConfig
 			InitializeComponent();
 		}
 
-		private void AddLocalItem(string group, string text, object o = null, bool success = true, Predicate<object> fix = null, object fixParam = null)
+		private void AddLocalItem(string group, string text, object o = null, bool success = true, Predicate<object> fix = null, object fixParam = null, string tooltip = null)
 		{
-			ListViewGroup g;
-			if (!groups.TryGetValue(group, out g))
+			ListViewGroup g = null;
+			if (!string.IsNullOrEmpty(group) && !groups.TryGetValue(group, out g))
 				groups.Add(group, g = localConfigList.Groups.Add(group, group));
 			var i = new ListViewItem(string.Format(text, o), success ? 1 : 0);
 			if (fix != null)
 				i.Tag = new FixInfo(fix, fixParam);
+			i.ToolTipText = tooltip;
 			localConfigList.Items.Add(i);
 			i.Group = g;
 		}
@@ -65,8 +66,15 @@ namespace TaskSchedulerConfig
 		private void retestBtn_Click(object sender, EventArgs e)
 		{
 			localConfigList.Items.Clear();
+			Predicate<Diagnostics.Diagnostic> c = d => { try { return !d.Troubleshooter(null); } catch { return false; } };
+			Predicate<Diagnostics.Diagnostic> f = d => { try { d.Resolution.Resolver(null); return !d.Troubleshooter(null); } catch { return false; } };
 
-			bool v2 = Environment.OSVersion.Version.Major > 5;
+			foreach (var d in new Diagnostics(null))
+			{
+				AddLocalItem(null, d.Name, null, c(d), o => f(d), null, d.Description);
+			}
+
+			/*bool v2 = Environment.OSVersion.Version.Major > 5;
 
 			AddLocalItem(Res.GroupGeneral, Res.UserIsAdmin, v.User, v.UserIsAdmin);
 			AddLocalItem(Res.GroupGeneral, Res.UserIsServerOperator, v.User, v.UserIsServerOperator);
@@ -80,7 +88,7 @@ namespace TaskSchedulerConfig
 			{
 				AddLocalItem(Res.GroupV2, Res.FirewallRuleEnabled, Res.RemoteTaskManagementRule, v.Firewall.Rules[Firewall.Rule.RemoteTaskManagement], fixer.EnableFirewallRule, Firewall.Rule.RemoteTaskManagement);
 				AddLocalItem(Res.GroupV2, Res.RemoteRegistryServiceRunning, null, v.RemoteRegistryServiceRunning, fixer.RunRemoteRegistryService);
-			}
+			}*/
 
 			bool hasError = false;
 			foreach (ListViewItem item in localConfigList.Items)

@@ -11,7 +11,7 @@ namespace TaskSchedulerConfig
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Main());
+			Application.Run(new WizardForm());
 		}
 
 		static void ConsoleMain(string[] args)

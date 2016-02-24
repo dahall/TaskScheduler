@@ -68,7 +68,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Configurer.cs" />
+    <Compile Include="Diagnostic.cs" />
     <Compile Include="Firewall.cs" />
+    <Compile Include="InteropUtil.cs" />
+    <Compile Include="LocalSecurityPolicy.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +92,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Reporter.cs" />
+    <Compile Include="UAC.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="WizardForm.cs">
       <SubType>Form</SubType>
@@ -138,6 +142,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tsnew.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\109_AllAnnotations_Default_16x16_72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\109_AllAnnotations_Error_16x16_72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\109_AllAnnotations_Warning_16x16_72.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
