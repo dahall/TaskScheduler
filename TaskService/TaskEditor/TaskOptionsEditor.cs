@@ -157,7 +157,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				onAssignment = true;
 				td = value;
-				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2;
+				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= new Version(1, 2);
 				taskNameText.Text = Task != null ? Task.Name : string.Empty;
 				SetVersionComboItems();
 				ReinitializeControls();
@@ -214,8 +214,10 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (td == null)
 				{
-					TaskDefinition = service.NewTask();
-					IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2));
+					var temp = service.NewTask();
+					if (service.HighestSupportedVersion == new Version(1, 1))
+						temp.Settings.Compatibility = TaskCompatibility.V1;
+					TaskDefinition = temp;
 				}
 				else
 					TaskDefinition = td;
@@ -418,13 +420,15 @@ namespace Microsoft.Win32.TaskScheduler
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
 			int max = (TaskService == null) ? expectedVersions - 1 : Math.Min(TaskService.LibraryVersion.Minor, TaskService.HighestSupportedVersion.Minor);
-			if (Environment.OSVersion.Version >= new Version(6,2))
+			if (Environment.OSVersion.Version >= new Version(6, 2))
 			{
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
 					versions[TaskService.LibraryVersion.Minor] = key.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
-			TaskCompatibility comp = (td != null) ? td.Settings.Compatibility : TaskCompatibility.V1;
-			TaskCompatibility lowestComp = (td != null) ? td.LowestSupportedVersion : TaskCompatibility.V1;
+			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
+			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
+			if (lowestComp == TaskCompatibility.V1 && task != null && task.Folder.Path != "\\")
+				lowestComp = TaskCompatibility.V2;
 			switch (comp)
 			{
 				case TaskCompatibility.AT:
