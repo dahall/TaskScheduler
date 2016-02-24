@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
+using System.Linq;
 using System.Security.Permissions;
+using System.Security.Policy;
 using System.Security.Principal;
 using System.ServiceProcess;
 
@@ -9,7 +12,7 @@ namespace TaskSchedulerConfig
 	class Validator : IDisposable
 	{
 		private WindowsIdentity id;
-		private SecurityIdentifier sid;
+		public SecurityIdentifier sid;
 		private WindowsPrincipal prin;
 		private string server = null;
 		private Firewall fw = null;
@@ -44,6 +47,8 @@ namespace TaskSchedulerConfig
 
 		public ServiceController RemoteRegistryService => sc ?? (sc = new ServiceController("RemoteRegistry", server ?? "."));
 
+		public string Server => server;
+
 		public string User => id.Name;
 
 		public bool RemoteRegistryServiceRunning => RemoteRegistryService.Status == ServiceControllerStatus.Running;
@@ -53,5 +58,9 @@ namespace TaskSchedulerConfig
 			if (sc != null) { sc.Close(); sc = null; }
 			if (fw != null) { fw = null; }
 		}
+
+		public bool UserHasRight(string privName) => new LocalSecurity(Server).UserAccountRights(User)[privName];
+
+		public void GrantUserRight(string privName) { new LocalSecurity(Server).UserAccountRights(User)[privName] = true; }
 	}
 }
