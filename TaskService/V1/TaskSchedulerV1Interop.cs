@@ -268,7 +268,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime BeginDate
 		{
-			get { return new DateTime(BeginYear, BeginMonth, BeginDay, StartHour, StartMinute, 0, DateTimeKind.Unspecified); }
+			get { try { return BeginYear == 0 ? DateTime.MinValue : new DateTime(BeginYear, BeginMonth, BeginDay, StartHour, StartMinute, 0, DateTimeKind.Unspecified); } catch { return DateTime.MinValue; } }
 			set
 			{
 				if (value != DateTime.MinValue)
@@ -287,7 +287,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public DateTime EndDate
 		{
-			get { return EndYear == 0 ? DateTime.MaxValue : new DateTime(EndYear, EndMonth, EndDay); }
+			get { try { return EndYear == 0 ? DateTime.MaxValue : new DateTime(EndYear, EndMonth, EndDay); } catch { return DateTime.MaxValue; } }
 			set
 			{
 				if (value != DateTime.MaxValue)

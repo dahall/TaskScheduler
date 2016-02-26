@@ -159,7 +159,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal V2Interop.ITrigger v2Trigger = null;
 
 		/// <summary>In testing and may change. Do not use until officially introduced into library.</summary>
-		protected Dictionary<string, object> unboundValues;
+		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
 		private RepetitionPattern repititionPattern = null;
 
@@ -189,7 +189,6 @@ namespace Microsoft.Win32.TaskScheduler
 		internal Trigger(TaskTriggerType triggerType)
 		{
 			ttype = triggerType;
-			unboundValues = new Dictionary<string, object>();
 
 			v1TriggerData.TriggerSize = (ushort)Marshal.SizeOf(typeof(V1Interop.TaskTrigger));
 			try { v1TriggerData.Type = ConvertToV1TriggerType(ttype); }
@@ -720,6 +719,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
 				throw new ArgumentException("Trigger.Repetition.Interval must be less than Trigger.Repetition.Duration under Task Scheduler 1.0.");
+			if (v1TriggerData.BeginDate == DateTime.MinValue)
+				v1TriggerData.BeginDate = DateTime.Now;
 			if (v1Trigger != null)
 				v1Trigger.SetTrigger(ref v1TriggerData);
 			System.Diagnostics.Debug.WriteLine(v1TriggerData);
