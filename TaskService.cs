@@ -546,6 +546,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
+				taskPath = System.IO.Path.GetFileNameWithoutExtension(taskPath);
 				V1Interop.ITask iTask = GetTask(v1TaskScheduler, taskPath);
 				if (iTask != null)
 					t = new Task(this, iTask);
@@ -769,7 +770,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
 		{
-			name = name.TrimStart('\\');
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
 			try

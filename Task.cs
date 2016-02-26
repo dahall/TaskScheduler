@@ -1351,7 +1351,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal void V1Reactivate()
 		{
-			V1Interop.ITask iTask = TaskService.GetTask(TaskService.v1TaskScheduler, GetV1Path(v1Task));
+			V1Interop.ITask iTask = TaskService.GetTask(TaskService.v1TaskScheduler, Name);
 			if (iTask != null)
 				v1Task = iTask;
 		}
@@ -2455,7 +2455,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if settings requires a password to be provided; otherwise, <c>false</c>.</value>
 		public bool RequiresPassword() => LogonType == TaskLogonType.InteractiveTokenOrPassword ||
-			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null);
+			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null && string.Compare(UserId, System.Security.Principal.WindowsIdentity.GetCurrent().Name) != 0);
 
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this instance.
