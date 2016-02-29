@@ -2455,7 +2455,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if settings requires a password to be provided; otherwise, <c>false</c>.</value>
 		public bool RequiresPassword() => LogonType == TaskLogonType.InteractiveTokenOrPassword ||
-			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null && string.Compare(UserId, System.Security.Principal.WindowsIdentity.GetCurrent().Name) != 0);
+			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null && string.Compare(UserId, System.Security.Principal.WindowsIdentity.GetCurrent().Name, true) != 0);
 
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this instance.
