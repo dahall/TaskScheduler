@@ -51,6 +51,10 @@ namespace TaskSchedulerConfig
 
 		public string User => id.Name;
 
+		public LocalSecurity.Rights UserRights => new LocalSecurity(Server).UserAccountRights(User);
+
+		public LocalSecurity.SystemAccess UserAccessRights => new LocalSecurity(Server).UserSystemAccess(User);
+
 		public bool RemoteRegistryServiceRunning => RemoteRegistryService.Status == ServiceControllerStatus.Running;
 
 		void IDisposable.Dispose()
@@ -58,9 +62,5 @@ namespace TaskSchedulerConfig
 			if (sc != null) { sc.Close(); sc = null; }
 			if (fw != null) { fw = null; }
 		}
-
-		public bool UserHasRight(string privName) => new LocalSecurity(Server).UserAccountRights(User)[privName];
-
-		public void GrantUserRight(string privName) { new LocalSecurity(Server).UserAccountRights(User)[privName] = true; }
 	}
 }

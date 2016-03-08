@@ -67,23 +67,12 @@
     <Compile Include="CommandLink.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Configurer.cs" />
+    <Compile Include="FileSystemRights.cs" />
+    <Compile Include="ServiceHelper.cs" />
     <Compile Include="Diagnostic.cs" />
     <Compile Include="Firewall.cs" />
     <Compile Include="InteropUtil.cs" />
     <Compile Include="LocalSecurityPolicy.cs" />
-    <Compile Include="Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProblemItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ProblemItem.Designer.cs">
-      <DependentUpon>ProblemItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -111,12 +100,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProblemItem.resx">
-      <DependentUpon>ProblemItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -151,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\109_AllAnnotations_Warning_16x16_72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Play_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
