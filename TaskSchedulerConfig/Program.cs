@@ -19,7 +19,7 @@ namespace TaskSchedulerConfig
 			var pArgs = new ProgramArguments();
 			if (Parser.ParseArgumentsWithUsage(args, pArgs))
 			{
-				string svr;
+				/*string svr;
 				bool hasV2 = TaskService.Instance.HighestSupportedVersion > new Version(1, 1);
 
 				var localVldr = new Validator(null);
@@ -78,7 +78,7 @@ namespace TaskSchedulerConfig
 				if (pArgs.fix)
 				{
 					Console.WriteLine($"Repairing local computer...");
-				}
+				}*/
 			}
 
 			Console.ReadKey();

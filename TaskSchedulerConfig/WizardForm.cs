@@ -51,6 +51,7 @@ namespace TaskSchedulerConfig
 		// ********* DETECT Page *************
 		private void scanLocal_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
+			diags = new Diagnostics(null);
 			localScanner.RunWorkerAsync();
 		}
 
@@ -79,37 +80,81 @@ namespace TaskSchedulerConfig
 		private void completeWithProbWizPg_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
 			// Fill out list box based on diagnostics
-			var items = new List<LBItem>();
+			var items = new List<Control>();
 			foreach (var diag in diags.Issues)
-				items.Add(new LBStatusItem(diag));
+				items.Add(MakeStatusItem(diag));
 			if (autofix && items.Count > 0)
-				items.Insert(0, new LBTitleItem("Issues found"));
-			listBox1.Items.Clear();
+				items.Insert(0, MakeTitleItem("Issues found"));
+			issueList.Controls.Clear();
+			items.Reverse();
 			if (items.Count > 0)
-				listBox1.Items.AddRange(items.ToArray());
+				issueList.Controls.AddRange(items.ToArray());
 			else
 				wizardControl1.NextPage(completeNoProbWizPg);
+		}
+
+		private Control MakeStatusItem(Diagnostics.Diagnostic diag, bool indented = true)
+		{
+			var status = ItemStatus.Detected;
+			if (diag.HasIssue.HasValue && !diag.HasIssue.Value)
+				status = ItemStatus.Checked;
+			else
+			{
+				if (diag.Resolved.HasValue)
+				{
+					if (diag.Resolved.Value)
+						status = ItemStatus.Fixed;
+				}
+				else
+				{
+					if (diag.Resolution.RequiresConsent || diag.Resolution.RequiresElevation)
+						status = ItemStatus.NotFixed;
+					else
+						status = ItemStatus.None;
+				}
+			}
+			return MakeStatusItem(diag.Name, diag.Description, status, indented);
 		}
 
 		// ********* REPORT Page *************
 		private void reportWizPg_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
-			var items = new List<LBItem>();
+			var items = new List<Control>();
 			foreach (var diag in diags.Issues)
-				items.Add(new LBReportItem(diag));
+				items.Add(MakeReportItem(diag));
 			if (items.Count > 0)
-				items.Insert(0, new LBTitleItem("Issues found"));
+				items.Insert(0, MakeTitleItem("Issues found"));
 			int iPos = items.Count;
 			foreach (var diag in diags.NonIsseus)
-				items.Add(new LBStatusItem(diag, false));
+				items.Add(MakeStatusItem(diag, false));
 			if (items.Count > iPos)
-			{
-				items.Insert(iPos, new LBTitleItem("Issues checked"));
-				items.Insert(iPos, new LBTitleItem(" "));
-			}
-			localConfigList.Items.Clear();
+				items.Insert(iPos, MakeTitleItem("\r\nIssues checked"));
+			localConfigList.Controls.Clear();
+			items.Reverse();
 			if (items.Count > 0)
-				localConfigList.Items.AddRange(items.ToArray());
+				localConfigList.Controls.AddRange(items.ToArray());
+		}
+
+		private Control MakeReportItem(Diagnostics.Diagnostic diag)
+		{
+			var c = MakeStatusItem(diag, false) as TableLayoutPanel;
+			c.RowCount = 2;
+			c.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+			c.Controls.Add(MakeLabel(diag.Resolution.Name, diag.Resolution.Description, true), 0, 1);
+			string resText;
+			bool canRun = false;
+			if (diag.Resolved.HasValue)
+				resText = diag.Resolved.Value ? "Completed" : "Issue not present";
+			else
+			{
+				resText = diag.Resolution.RequiresConsent ? "Requires consent" : "Not run";
+				if (diag.Resolution.RequiresConsent && (!diag.Resolution.RequiresElevation || isElevated))
+					canRun = true;
+			}
+			c.Controls.Add(MakeLabel(resText, null, false, false, true), 1, 1);
+			if (canRun)
+				c.Controls.Add(MakeIcon(Properties.Resources.Run, "Click here to run the repair", diag), 2, 1);
+			return c;
 		}
 
 		// ********* REMOTE SERVER Page *************
@@ -122,9 +167,9 @@ namespace TaskSchedulerConfig
 		private void localScanner_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			object defParam = null;
-			diags = new Diagnostics(e.Argument?.ToString());
 			e.Result = diags;
-			diags.ShowMessage += (o, m) => localScanner.ReportProgress(0, m.Message);
+			var rp = new EventHandler<Diagnostics.ShowMessageEventArgs>((o, m) => localScanner.ReportProgress(0, m.Message));
+			diags.ShowMessage += rp;
 			foreach (var d in diags)
 			{
 				if (d.Condition(defParam))
@@ -140,6 +185,7 @@ namespace TaskSchedulerConfig
 					}
 				}
 			}
+			diags.ShowMessage -= rp;
 		}
 
 		private void localScanner_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -180,7 +226,7 @@ namespace TaskSchedulerConfig
 
 		}
 
-		private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+		/*private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
 		{
 			((sender as ListBox)?.Items[e.Index] as LBItem)?.DrawItem(e);
 		}
@@ -189,9 +235,136 @@ namespace TaskSchedulerConfig
 		{
 			var lb = sender as ListBox;
 			(lb?.Items[e.Index] as LBItem)?.MeasureItem(e, lb?.Font);
+		}*/
+
+		private Control MakeTitleItem(string text, string tooltip = null)
+		{
+			var c = MakeTableItem(1, 1);
+			c.Controls.Add(MakeLabel(text, tooltip, false, true, false), 0, 0);
+			return c;
 		}
 
-		private abstract class LBItem
+		private enum ItemStatus { None, Fixed, Detected, NotFixed, Checked }
+
+		private Control MakeStatusItem(string text, string tooltip, ItemStatus status, bool indented = false)
+		{
+			var c = MakeTableItem(1, 3);
+			c.ColumnStyles[1] = new ColumnStyle(SizeType.Absolute, 100);
+			c.ColumnStyles[2] = new ColumnStyle(SizeType.AutoSize);
+			c.Controls.Add(MakeLabel(text, tooltip, indented), 0, 0);
+			c.Controls.Add(MakeStatusLabel(status), 1, 0);
+			c.Controls.Add(MakeStatusIcon(status), 2, 0);
+			return c;
+		}
+
+		private Control MakeStatusIcon(ItemStatus status)
+		{
+			Image img = Properties.Resources.NotFixed;
+			if (status == ItemStatus.Checked || status == ItemStatus.Fixed)
+				img = Properties.Resources.Fixed;
+			if (status == ItemStatus.Detected)
+				img = Properties.Resources.Detected;
+			return MakeIcon(img);
+		}
+
+		private Control MakeStatusLabel(ItemStatus status)
+		{
+			string text;
+			switch (status)
+			{
+				case ItemStatus.Fixed:
+					text = "Fixed"; break;
+				case ItemStatus.Detected:
+					text = "Detected"; break;
+				case ItemStatus.NotFixed:
+					text = "Not fixed"; break;
+				case ItemStatus.Checked:
+					text = "Checked"; break;
+				default:
+					text = "Unknown"; break;
+			}
+			return MakeLabel(text);
+		}
+
+		private Label MakeLabel(string text, string tooltip = null, bool indented = false, bool bold = false, bool ital = false)
+		{
+			var fs = FontStyle.Regular;
+			if (bold) fs |= FontStyle.Bold;
+			if (ital) fs |= FontStyle.Italic;
+			var l = new Label
+			{
+				Anchor = AnchorStyles.Left | AnchorStyles.Right,
+				AutoSize = true,
+				Font = new Font(wizardControl1.Font, fs),
+				Margin = new Padding(0),
+				Padding = new Padding(indented ? 12 : 0, 2, 0, 2),
+				Text = text,
+			};
+			if (tooltip != null)
+				toolTip1.SetToolTip(l, tooltip);
+			return l;
+		}
+
+		private TableLayoutPanel MakeTableItem(int rows = 1, int cols = 1)
+		{
+			var c = new TableLayoutPanel
+			{
+				AutoSize = true,
+				AutoSizeMode = AutoSizeMode.GrowAndShrink,
+				ColumnCount = cols,
+				Dock = DockStyle.Top,
+				Margin = new Padding(0),
+				RowCount = rows,
+			};
+			for (int i = 0; i < cols; i++)
+				c.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+			for (int i = 0; i < rows; i++)
+				c.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+			return c;
+		}
+
+		private PictureBox MakeIcon(Image image, string tooltip = null, Diagnostics.Diagnostic diag = null)
+		{
+			var p = new PictureBox
+			{
+				Anchor = AnchorStyles.Right,
+				Image = image,
+				Margin = new Padding(4, 2, 10, 2),
+				Size = new Size(16, 16),
+				TabStop = false,
+			};
+			if (tooltip != null)
+				toolTip1.SetToolTip(p, tooltip);
+			if (diag?.Resolution.Resolver != null)
+				p.Click += (s, e) => PromptAndRun(s, diag);
+			return p;
+		}
+
+		private void PromptAndRun(object sender, Diagnostics.Diagnostic diag)
+		{
+			var p = sender as PictureBox;
+			if (p?.Tag == null && diag.Resolution.Resolver != null && MessageBox.Show(this, $"Execute the following patch?\n\n{diag.Resolution.Name}", "Apply Fix", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+			{
+				diag.Resolution.Resolver?.Invoke(null);
+				if (!diag.Troubleshooter(null))
+				{
+					if (p != null)
+					{
+						p.Image = Properties.Resources.Fixed;
+						p.Tag = 0;
+						var t = p.Parent as TableLayoutPanel;
+						if (t != null)
+						{
+							var l = t.GetControlFromPosition(1, 1) as Label;
+							if (l != null)
+								l.Text = "Fixed";
+						}
+					}
+				}
+			}
+		}
+
+		/*private abstract class LBItem
 		{
 			public const int lrPad = 10;
 			public const int tbPad = 2;
@@ -372,10 +545,21 @@ namespace TaskSchedulerConfig
 
 			public override void MeasureItem(MeasureItemEventArgs e, Font font)
 			{
+				var m1 = new MeasureItemEventArgs(e.Graphics, e.Index, e.ItemHeight);
+				//TroubleLine.MeasureItem(m1, font);
+				var m2 = new MeasureItemEventArgs(e.Graphics, e.Index, e.ItemHeight);
+				//RepairLine.MeasureItem(m2, font);
+				e.ItemHeight = m1.ItemHeight + m2.ItemHeight;
 			}
 
 			public override void DrawItem(DrawItemEventArgs e)
 			{
+				var m1 = new MeasureItemEventArgs(e.Graphics, e.Index, e.Bounds.Height);
+				//TroubleLine.MeasureItem(m1, e.Font);
+				var r = e.Bounds; r.Height = m1.ItemHeight;
+				//TroubleLine.DrawItem(new DrawItemEventArgs(e.Graphics, e.Font, r, e.Index, e.State, e.ForeColor, e.BackColor));
+				r.Y += m1.ItemHeight; r.Height = e.Bounds.Height - m1.ItemHeight;
+				//RepairLine.DrawItem(new DrawItemEventArgs(e.Graphics, e.Font, r, e.Index, e.State, e.ForeColor, e.BackColor));
 			}
 		}
 
@@ -406,6 +590,6 @@ namespace TaskSchedulerConfig
 				r.Y += m1.ItemHeight; r.Height = e.Bounds.Height - m1.ItemHeight;
 				RepairLine.DrawItem(new DrawItemEventArgs(e.Graphics, e.Font, r, e.Index, e.State, e.ForeColor, e.BackColor));
 			}
-		}
+		}*/
 	}
 }

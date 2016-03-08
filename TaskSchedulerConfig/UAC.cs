@@ -266,8 +266,10 @@ namespace CSUACSelfElevation
 
 		public static bool IsUacEnabled()
 		{
+			if (System.Environment.OSVersion.Version.Major < 6)
+				return true;
 			using (var uacKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", false))
-				return uacKey.GetValue("EnableLUA").Equals(1);
+				return uacKey.GetValue("EnableLUA", 0).Equals(1);
 		}
 
 		/// <summary>

@@ -18,7 +18,7 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "User has insufficient permissions to schedule V1 tasks",
+				Name = "V1 Local Access: User has insufficient permissions to schedule tasks",
 				Description = "To schedule a V1 task, the current user must be a member of the Administrators, Backup Operators, or Server Operators group on the local computer.",
 				Troubleshooter = o => !(v.UserIsAdmin || v.UserIsBackupOperator || v.UserIsServerOperator),
 				Resolution = new Resolution
@@ -33,7 +33,7 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "Firewall is not enabled",
+				Name = "V1 Remote Access: Firewall is not enabled",
 				Description = "Firewall must be enabled on local system.",
 				Troubleshooter = o => !v.Firewall.Enabled,
 				Resolution = new Resolution
@@ -47,7 +47,7 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "\"File and Printer Sharing\" rule on the firewall is not enabled",
+				Name = "V1 Remote Access: \"File and Printer Sharing\" rule on the firewall is not enabled",
 				Description = "The \"File and Printer Sharing\" rule must be enabled in order for the Task Scheduler V1 to share its information with other computers.",
 				Troubleshooter = o => !v.Firewall.Rules[Firewall.Rule.FileAndPrinterSharing],
 				Resolution = new Resolution
@@ -61,7 +61,7 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "Invalid permissions on the \"%windir%\\Tasks\" directory",
+				Name = "V1 Local Access: Invalid permissions on the \"%windir%\\Tasks\" directory",
 				Description = "Permissions on the \"%windir%\\Tasks\" directory do not allow V1 tasks to be created or edited by the current user",
 				Troubleshooter = CheckTasksDirPerms,
 				Resolution = new Resolution
@@ -79,22 +79,24 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "User has insufficient permissions to schedule V2 tasks",
+				Name = "V2 Local Access: User has insufficient permissions to schedule tasks",
 				Description = "To schedule a V2 task, the current user must have \"Log on as a batch job\" and \"Log on as a service\" privileges.",
-				Troubleshooter = o => !v.UserHasRight(LocalSecurityAccountPrivileges.LogonAsBatchJob),
+				//Troubleshooter = o => !v.UserRights[LocalSecurityAccountPrivileges.LogonAsBatchJob],
+				RequiresElevation = true,
+				Troubleshooter = o => !v.UserAccessRights[LocalSecurity.LsaSecurityAccessRights.BatchLogon],
 				Resolution = new Resolution
 				{
 					Name = "Grant user \"Log on as a batch job\" right",
 					Description = "Adding the \"Log on as a batch job\" right to the user will give it the right to schedule a V2 task on this and other computers.",
 					RequiresConsent = true,
 					RequiresElevation = true,
-					Resolver = o => v.GrantUserRight(LocalSecurityAccountPrivileges.LogonAsBatchJob)
+					Resolver = o => v.UserAccessRights[LocalSecurity.LsaSecurityAccessRights.BatchLogon] = true,
 				}
 			});
 
 			Add(new Diagnostic
 			{
-				Name = "\"Remote Task Management\" rule on the firewall is not enabled",
+				Name = "V2 Remote Access: \"Remote Task Management\" rule on the firewall is not enabled",
 				Description = "The \"Remote Task Management\" rule must be enabled in order for the Task Scheduler V2 to share its information with other computers.",
 				Troubleshooter = o => !v.Firewall.Rules[Firewall.Rule.RemoteTaskManagement],
 				Resolution = new Resolution
@@ -108,7 +110,7 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
-				Name = "\"Remote Registry\" service is not running",
+				Name = "V2 Remote Access: \"Remote Registry\" service is not running",
 				Description = "The \"Remote Registry\" service must be running in order for the Task Scheduler V1 to connect to this computer.",
 				Troubleshooter = o => !v.RemoteRegistryServiceRunning,
 				Resolution = new Resolution
@@ -147,6 +149,18 @@ namespace TaskSchedulerConfig
 			}
 		}
 
+		public IEnumerable<Diagnostic> UnRun
+		{
+			get
+			{
+				foreach (var item in this)
+				{
+					if (item.Condition(null) && !item.HasIssue.HasValue)
+						yield return item;
+				}
+			}
+		}
+
 		private void ShowThisMessage(string s) { ShowMessage?.Invoke(this, new ShowMessageEventArgs(s)); }
 
 		private void AddUserRole(object role)
@@ -157,26 +171,14 @@ namespace TaskSchedulerConfig
 		private bool CheckTasksDirPerms(object obj)
 		{
 			ShowThisMessage("Checking permissions on \\Windows\\Tasks folder...");
-			string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Tasks");
-			return DirectoryHasPermission(dir, FileSystemRights.FullControl);
+			var dir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Tasks"));
+			return !DirectoryHasPermission(dir, FileSystemRights.FullControl);
 		}
 
-		private static bool DirectoryHasPermission(string DirectoryPath, FileSystemRights AccessRight)
+		private static bool DirectoryHasPermission(DirectoryInfo DirectoryPath, FileSystemRights AccessRight)
 		{
-			if (string.IsNullOrEmpty(DirectoryPath)) return false;
-
-			try
-			{
-				AuthorizationRuleCollection rules = Directory.GetAccessControl(DirectoryPath).GetAccessRules(true, true, typeof(SecurityIdentifier));
-				WindowsIdentity identity = WindowsIdentity.GetCurrent();
-
-				foreach (FileSystemAccessRule rule in rules)
-				{
-					if (identity.Groups.Contains(rule.IdentityReference) && (AccessRight & rule.FileSystemRights) == AccessRight && rule.AccessControlType == AccessControlType.Allow)
-						return true;
-				}
-			}
-			catch { }
+			if (DirectoryPath != null)
+				try { return (DirectoryPath.GetEffectiveRights(WindowsIdentity.GetCurrent()) & AccessRight) == AccessRight; } catch { }
 			return false;
 		}
 
