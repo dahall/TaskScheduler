@@ -107,9 +107,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void InitializeEventLogList()
 		{
 			if (onEventLogCombo.Items.Count == 0)
-			{
-				onEventLogCombo.Items.AddRange(SystemEventEnumerator.GetEventLogs(TargetServer));
-			}
+				onEventLogCombo.DataSource = SystemEventEnumerator.GetEventLogDisplayObjects(TargetServer);
 		}
 
 		private void onEventCustomText_Leave(object sender, EventArgs e)
@@ -134,7 +132,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void onEventLogCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			onEventSourceCombo.Items.Clear();
-			onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventProviders(TargetServer, onEventLogCombo.Text));
+			if (onEventLogCombo.SelectedIndex != -1)
+				onEventSourceCombo.Items.AddRange(SystemEventEnumerator.GetEventProviders(TargetServer, (string)onEventLogCombo.SelectedValue).ToArray());
 			onEventSourceCombo.SelectedIndex = onEventSourceCombo.Items.Count > 0 ? 0 : -1;
 			UpdateCustomText();
 			OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
@@ -145,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (onEventLogCombo.Text.Length > 0)
 			{
 				if (trigger != null)
-					trigger.SetBasic(onEventLogCombo.Text, onEventSourceCombo.Text, EventId);
+					trigger.SetBasic((string)onEventLogCombo.SelectedValue, onEventSourceCombo.Text, EventId);
 				UpdateCustomText();
 				OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
 			}
@@ -171,7 +170,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				basic = true;
 			if (basic)
 			{
-				onEventLogCombo.Text = log;
+				if (log != null)
+					onEventLogCombo.SelectedValue = log;
+				else
+					onEventLogCombo.SelectedIndex = -1;
 				onEventSourceCombo.Text = source;
 				EventId = id;
 			}
@@ -181,7 +183,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void UpdateCustomText()
 		{
-			string xml = trigger == null ? EventTrigger.BuildQuery(onEventLogCombo.Text, 
+			string xml = trigger == null ? EventTrigger.BuildQuery((string)onEventLogCombo.SelectedValue, 
 				onEventSourceCombo.Text.Length == 0 ? null : onEventSourceCombo.Text, EventId) : trigger.Subscription;
 			onEventCustomText.Text = GetFormattedXmlString(xml);
 		}

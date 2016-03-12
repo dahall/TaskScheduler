@@ -10,11 +10,29 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public partial class EventActionFilterEditor : Form
 	{
+		private static System.Text.RegularExpressions.Regex IDRegex;
+		private static StringNode Logs;
+		private static LogTimeItem[] LogTimeBaseItems;
+		private static List<string> Providers;
+
 		private bool internalSet = false;
 		private int lastLogTimeComboIndex;
 		private EventQuery ql = new EventQuery();
 		private bool queryTextIsDirty;
 		private string subscription;
+
+		static EventActionFilterEditor()
+		{
+			IDRegex = new System.Text.RegularExpressions.Regex(@"^-?\d+(-\d+)?(,-?\d+(-\d+)?)*$", System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.CultureInvariant | System.Text.RegularExpressions.RegexOptions.Singleline);
+			LogTimeBaseItems = new LogTimeItem[7];
+			LogTimeBaseItems[0] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeAnyTime, DiffTime = TimeSpan.Zero };
+			LogTimeBaseItems[1] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeHour, DiffTime = TimeSpan.FromHours(1) };
+			LogTimeBaseItems[2] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime12Hours, DiffTime = TimeSpan.FromHours(12) };
+			LogTimeBaseItems[3] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeDay, DiffTime = TimeSpan.FromHours(24) };
+			LogTimeBaseItems[4] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeWeek, DiffTime = TimeSpan.FromDays(7) };
+			LogTimeBaseItems[5] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime30Days, DiffTime = TimeSpan.FromDays(30) };
+			LogTimeBaseItems[6] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeCustom };
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EventActionFilterEditor"/> class.
@@ -89,6 +107,63 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 				}
 			}
+		}
+
+		private static void UpdateLogList(TreeNodeCollection nodes, string targetServer = null)
+		{
+			if (Logs == null)
+			{
+				Logs = new StringNode(null);
+				// Add standard nodes
+				StringNode std = new StringNode(EditorProperties.Resources.EventLogParentStandard);
+				string[] stdLogs = new string[] { "Application", "Security", "Setup", "System", "ForwardedEvents" };
+				foreach (string s in stdLogs)
+					std.Nodes.Add(new StringNode(s, s));
+				std.LastChild.Text = "Forwarded Events";
+				Logs.Nodes.Add(std);
+				// Get all event logs and remove standard ones
+				var list = SystemEventEnumerator.GetEventLogStrings(targetServer);
+				foreach (string s in stdLogs)
+					list.Remove(s);
+				// Add app nodes
+				StringNode lastParent = null, curCompare = null, appNode = new StringNode(EditorProperties.Resources.EventLogParentApps);
+				Logs.Nodes.Add(appNode);
+				int max = 0;
+				var partList = list.ConvertAll(s => { var a = s.Split('-', '/', '\\'); max = Math.Max(max, a.Length); return a; });
+				//partList.Sort((a, b) => string.Compare(a[0], b[0]));
+				for (int i = 0; i < partList.Count; i++)
+				{
+					lastParent = appNode;
+					for (int j = 0; j < partList[i].Length; j++)
+					{
+						if (curCompare != null && string.Compare(curCompare, partList[i][j], true) == 0)
+						{
+							lastParent = curCompare;
+							curCompare = curCompare.LastChild;
+						}
+						else
+						{
+							var sn = new StringNode(partList[i][j]);
+							if (j == partList[i].Length - 1)
+								sn.Path = list[i];
+							lastParent.Nodes.Add(sn);
+							lastParent = sn;
+						}
+					}
+					curCompare = appNode.LastChild;
+				}
+			}
+			Logs.UpdateTreeView(nodes);
+		}
+
+		private static void UpdateProviderList(CheckedListBox.ObjectCollection items, string targetServer = null)
+		{
+			if (Providers == null)
+			{
+				Providers = SystemEventEnumerator.GetEventProviders(targetServer, null, true);
+			}
+			items.Clear();
+			items.AddRange(Providers.ConvertAll<DropDownCheckListItem>(s => { var p = s.Split('|'); return new DropDownCheckListItem(p[1], p[0]); }).ToArray());
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
@@ -497,7 +572,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class StringNode
 		{
-			public System.Collections.Generic.List<StringNode> Nodes = new System.Collections.Generic.List<StringNode>(0);
+			public List<StringNode> Nodes = new List<StringNode>(0);
 			public string Path;
 			public string Text;
 
@@ -509,101 +584,28 @@ namespace Microsoft.Win32.TaskScheduler
 
 			internal StringNode LastChild => (Nodes.Count == 0) ? null : Nodes[Nodes.Count - 1];
 
-			public static implicit operator string (StringNode n) => n.Text;
+			public static implicit operator string(StringNode n) => n.Text;
 
 			public void UpdateTreeView(TreeNodeCollection nodes)
 			{
 				nodes.Clear();
 				UpdateNodes(Nodes, nodes);
+				foreach (TreeNode n in nodes)
+					n.Expand();
 			}
 
-			private static void UpdateNodes(System.Collections.Generic.List<StringNode> nodes, TreeNodeCollection coll)
+			private static void UpdateNodes(List<StringNode> nodes, TreeNodeCollection coll)
 			{
 				foreach (var item in nodes)
 				{
-					var n = DropDownCheckTree.AddValue(coll, item.Text, item.Path);
-					UpdateNodes(item.Nodes, n.Nodes);
-				}
-			}
-		}
-
-		#region Static Constructor and Methods
-
-		private static System.Text.RegularExpressions.Regex IDRegex;
-		private static StringNode Logs;
-		private static LogTimeItem[] LogTimeBaseItems;
-		private static List<string> Providers;
-
-		static EventActionFilterEditor()
-		{
-			IDRegex = new System.Text.RegularExpressions.Regex(@"^-?\d+(-\d+)?(,-?\d+(-\d+)?)*$", System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.CultureInvariant | System.Text.RegularExpressions.RegexOptions.Singleline);
-			LogTimeBaseItems = new LogTimeItem[7];
-			LogTimeBaseItems[0] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeAnyTime, DiffTime = TimeSpan.Zero };
-			LogTimeBaseItems[1] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeHour, DiffTime = TimeSpan.FromHours(1) };
-			LogTimeBaseItems[2] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime12Hours, DiffTime = TimeSpan.FromHours(12) };
-			LogTimeBaseItems[3] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeDay, DiffTime = TimeSpan.FromHours(24) };
-			LogTimeBaseItems[4] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeWeek, DiffTime = TimeSpan.FromDays(7) };
-			LogTimeBaseItems[5] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime30Days, DiffTime = TimeSpan.FromDays(30) };
-			LogTimeBaseItems[6] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeCustom };
-		}
-
-		private static void UpdateLogList(TreeNodeCollection nodes, string targetServer = null)
-		{
-			if (Logs == null)
-			{
-				Logs = new StringNode(null);
-				// Add standard nodes
-				StringNode std = new StringNode(EditorProperties.Resources.EventLogParentStandard);
-				string[] stdLogs = new string[] { "Application", "Security", "Setup", "System", "ForwardedEvents" };
-				foreach (string s in stdLogs)
-					std.Nodes.Add(new StringNode(s, s));
-				std.LastChild.Text = "Forwarded Events";
-				Logs.Nodes.Add(std);
-				// Get all event logs and remove standard ones
-				var list = new List<string>(SystemEventEnumerator.GetEventLogs(targetServer));
-				list.Sort();
-				foreach (string s in stdLogs)
-					list.Remove(s);
-				// Add app nodes
-				StringNode lastParent = null, curCompare = null, appNode = new StringNode(EditorProperties.Resources.EventLogParentApps);
-				Logs.Nodes.Add(appNode);
-				int max = 0;
-				var partList = list.ConvertAll<string[]>(delegate(string s) { var a = s.Split('-', '/', '\\'); max = Math.Max(max, a.Length); return a; });
-				for (int i = 0; i < partList.Count; i++)
-				{
-					lastParent = appNode;
-					for (int j = 0; j < partList[i].Length; j++)
+					try
 					{
-						if (curCompare != null && string.Compare(curCompare, partList[i][j], true) == 0)
-						{
-							lastParent = curCompare;
-							curCompare = curCompare.LastChild;
-						}
-						else
-						{
-							var sn = new StringNode(partList[i][j]);
-							if (j == partList[i].Length - 1)
-								sn.Path = list[i];
-							lastParent.Nodes.Add(sn);
-							lastParent = sn;
-						}
+						var n = DropDownCheckTree.AddValue(coll, item.Text, item.Path);
+						UpdateNodes(item.Nodes, n.Nodes);
 					}
-					curCompare = appNode.LastChild;
+					catch (Exception e) { System.Diagnostics.Debug.WriteLine($"Unable to add node '{item.Text}': {e.Message}"); }
 				}
 			}
-			Logs.UpdateTreeView(nodes);
 		}
-
-		private static void UpdateProviderList(CheckedListBox.ObjectCollection items, string targetServer = null)
-		{
-			if (Providers == null)
-			{
-				Providers = new System.Collections.Generic.List<string>(SystemEventEnumerator.GetEventProviders(targetServer, null, true));
-			}
-			items.Clear();
-			items.AddRange(Providers.ConvertAll<DropDownCheckListItem>(s => { var p = s.Split('|'); return new DropDownCheckListItem(p[1], p[0]); }).ToArray());
-		}
-
-		#endregion Static Constuctor and Methods
 	}
 }
