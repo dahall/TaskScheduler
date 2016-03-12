@@ -85,10 +85,12 @@
 			// onEventLogCombo
 			// 
 			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
+			this.onEventLogCombo.DisplayMember = "Text";
 			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.onEventLogCombo.FormattingEnabled = true;
 			this.onEventLogCombo.Name = "onEventLogCombo";
 			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
+			this.onEventLogCombo.ValueMember = "Value";
 			// 
 			// onEventIdLabel
 			// 
