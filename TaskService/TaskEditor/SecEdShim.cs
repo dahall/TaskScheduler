@@ -8,7 +8,7 @@ namespace Microsoft.Win32.TaskScheduler
 	class SecEdShim
 	{
 		static Type dlgType;
-		static MethodInfo initMI, showDlgMI;
+		static MethodInfo initMI, init2MI, showDlgMI;
 		static PropertyInfo sddlPI;
 		object dlg;
 
@@ -20,6 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (dlgType != null)
 				{
 					initMI = dlgType.GetMethod("Initialize", new Type[] { typeof(object) });
+					init2MI = dlgType.GetMethod("Initialize", new Type[] { typeof(string), typeof(string), typeof(bool), typeof(System.Security.AccessControl.ResourceType), typeof(byte[]), typeof(string) });
 					showDlgMI = dlgType.GetMethod("ShowDialog", new Type[] { typeof(System.Windows.Forms.IWin32Window) });
 					sddlPI = dlgType.GetProperty("SDDL", typeof(string));
 				}
@@ -39,6 +40,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Initialize(object taskObj)
 		{
 			initMI.Invoke(dlg, new object[] { taskObj });
+		}
+
+		public void Initialize(string displayName, bool isContainer, string targetServer, TaskSecurity taskSecurity)
+		{
+			var rt = (System.Security.AccessControl.ResourceType)99;
+			init2MI.Invoke(dlg, new object[] { displayName, displayName, isContainer, rt, taskSecurity.GetSecurityDescriptorBinaryForm(), targetServer });
 		}
 
 		public System.Windows.Forms.DialogResult ShowDialog(System.Windows.Forms.IWin32Window owner) => (System.Windows.Forms.DialogResult)showDlgMI.Invoke(dlg, new object[] { owner });

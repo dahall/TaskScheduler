@@ -167,7 +167,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSecurity(Task task, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
+			SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(Convert(sections)), sections);
 		}
 
 		/// <summary>
@@ -178,7 +178,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskSecurity(TaskFolder folder, AccessControlSections sections = Task.defaultAccessControlSections)
 			: base(false)
 		{
-			SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(TaskSecurity.Convert(sections)), sections);
+			SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(Convert(sections)), sections);
 		}
 
 		/// <summary>
@@ -198,6 +198,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <returns>A <see cref="Type"/> object representing the <see cref="TaskAuditRule"/> class.</returns>
 		public override Type AuditRuleType => typeof(TaskAuditRule);
+
+		/// <summary>
+		/// Gets a <see cref="TaskSecurity"/> object that represent the default access rights.
+		/// </summary>
+		/// <value>The default task security.</value>
+		public static TaskSecurity DefaultTaskSecurity
+		{
+			get
+			{
+				var ret = new TaskSecurity();
+				ret.AddAccessRule(new TaskAccessRule(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null), TaskRights.FullControl, AccessControlType.Allow));
+				ret.AddAccessRule(new TaskAccessRule(new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null), TaskRights.Read | TaskRights.Write | TaskRights.Execute, AccessControlType.Allow));
+				ret.AddAccessRule(new TaskAccessRule(new SecurityIdentifier(WellKnownSidType.LocalServiceSid, null), TaskRights.Read, AccessControlType.Allow));
+				ret.AddAccessRule(new TaskAccessRule(new SecurityIdentifier(WellKnownSidType.AuthenticatedUserSid, null), TaskRights.Read, AccessControlType.Allow));
+				ret.AddAccessRule(new TaskAccessRule(new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null), TaskRights.Read, AccessControlType.Allow));
+				return ret;
+			}
+		}
 
 		/// <summary>
 		/// Creates a new access control rule for the specified user, with the specified access rights, access control, and flags.
@@ -330,31 +348,31 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString() => GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections);
 
-		internal static System.Security.AccessControl.SecurityInfos Convert(System.Security.AccessControl.AccessControlSections si)
+		internal static System.Security.AccessControl.SecurityInfos Convert(AccessControlSections si)
 		{
 			System.Security.AccessControl.SecurityInfos ret = 0;
-			if ((si & System.Security.AccessControl.AccessControlSections.Audit) != 0)
-				ret |= System.Security.AccessControl.SecurityInfos.SystemAcl;
-			if ((si & System.Security.AccessControl.AccessControlSections.Access) != 0)
-				ret |= System.Security.AccessControl.SecurityInfos.DiscretionaryAcl;
-			if ((si & System.Security.AccessControl.AccessControlSections.Group) != 0)
-				ret |= System.Security.AccessControl.SecurityInfos.Group;
-			if ((si & System.Security.AccessControl.AccessControlSections.Owner) != 0)
-				ret |= System.Security.AccessControl.SecurityInfos.Owner;
+			if ((si & AccessControlSections.Audit) != 0)
+				ret |= SecurityInfos.SystemAcl;
+			if ((si & AccessControlSections.Access) != 0)
+				ret |= SecurityInfos.DiscretionaryAcl;
+			if ((si & AccessControlSections.Group) != 0)
+				ret |= SecurityInfos.Group;
+			if ((si & AccessControlSections.Owner) != 0)
+				ret |= SecurityInfos.Owner;
 			return ret;
 		}
 
-		internal static System.Security.AccessControl.AccessControlSections Convert(System.Security.AccessControl.SecurityInfos si)
+		internal static AccessControlSections Convert(System.Security.AccessControl.SecurityInfos si)
 		{
-			System.Security.AccessControl.AccessControlSections ret = System.Security.AccessControl.AccessControlSections.None;
-			if ((si & System.Security.AccessControl.SecurityInfos.SystemAcl) != 0)
-				ret |= System.Security.AccessControl.AccessControlSections.Audit;
-			if ((si & System.Security.AccessControl.SecurityInfos.DiscretionaryAcl) != 0)
-				ret |= System.Security.AccessControl.AccessControlSections.Access;
-			if ((si & System.Security.AccessControl.SecurityInfos.Group) != 0)
-				ret |= System.Security.AccessControl.AccessControlSections.Group;
-			if ((si & System.Security.AccessControl.SecurityInfos.Owner) != 0)
-				ret |= System.Security.AccessControl.AccessControlSections.Owner;
+			AccessControlSections ret = AccessControlSections.None;
+			if ((si & SecurityInfos.SystemAcl) != 0)
+				ret |= AccessControlSections.Audit;
+			if ((si & SecurityInfos.DiscretionaryAcl) != 0)
+				ret |= AccessControlSections.Access;
+			if ((si & SecurityInfos.Group) != 0)
+				ret |= AccessControlSections.Group;
+			if ((si & SecurityInfos.Owner) != 0)
+				ret |= AccessControlSections.Owner;
 			return ret;
 		}
 

@@ -21,10 +21,10 @@
 	<file src="bin\Release\v3.5\*.pdb" target="lib\net35" />
 	<file src="bin\Release\v3.5\*.xml" target="lib\net35" />
 	<file src="bin\Release\v3.5\**\Microsoft.Win32.TaskScheduler.resources.dll" target="lib\net35" />
-	<file src="bin\Release\v4.0\*.dll" target="lib\net40" />
-	<file src="bin\Release\v4.0\*.pdb" target="lib\net40" />
-	<file src="bin\Release\v4.0\*.xml" target="lib\net40" />
-	<file src="bin\Release\v4.0\**\Microsoft.Win32.TaskScheduler.resources.dll" target="lib\net40" />
+	<file src="bin\Release\v4.5.2\*.dll" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\*.pdb" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\*.xml" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\**\Microsoft.Win32.TaskScheduler.resources.dll" target="lib\net45" />
 	<file src="*.cs" target="src" />
 	<file src="Native\*.cs" target="src\Native" />
 	<file src="Properties\*.cs" target="src\Properties" />
