@@ -27,10 +27,10 @@
 	<file src="bin\Release\v3.5\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net35" />
 	<file src="bin\Release\v3.5\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net35" />
 	<file src="bin\Release\v3.5\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net35" />
-	<file src="bin\Release\v4.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net40" />
-	<file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net40" />
-	<file src="bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net40" />
-	<file src="bin\Release\v4.0\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net40" />
+	<file src="bin\Release\v4.5.2\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net45" />
+	<file src="bin\Release\v4.5.2\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net45" />
 	<file src="*.cs" target="src" />
 	<file src="EditorProperties\*.cs" target="src\EditorProperties" />
 	<file src="Native\*.cs" target="src\Native" />

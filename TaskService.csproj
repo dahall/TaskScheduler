@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -155,7 +155,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.5.2 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />
   </Target>
 </Project>

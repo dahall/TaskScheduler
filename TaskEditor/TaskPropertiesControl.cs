@@ -1345,7 +1345,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskRegSDDLBtn_Click(object sender, EventArgs e)
 		{
-			secEd.Initialize(Task);
+			if (Task != null)
+				secEd.Initialize(Task);
+			else
+			{
+				TaskSecurity tsec = TaskSecurity.DefaultTaskSecurity;
+				if (taskRegSDDLText.TextLength > 0) { tsec = new TaskSecurity(); tsec.SetSecurityDescriptorSddlForm(taskRegSDDLText.Text); }
+				secEd.Initialize(TaskName, false, TaskService.TargetServer, tsec);
+			}
 			if (secEd.ShowDialog(this) == DialogResult.OK)
 			{
 				td.RegistrationInfo.SecurityDescriptorSddlForm = secEd.SecurityDescriptorSddlForm;
