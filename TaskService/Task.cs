@@ -1244,34 +1244,73 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Runs the registered task immediately.
 		/// </summary>
-		/// <param name="parameters">The parameters used as values in the task actions.</param>
+		/// <param name="parameters">
+		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
+		/// <para>
+		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
+		/// <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// </para>
+		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
 		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
 			{
-				if (parameters != null && parameters.Length > 32)
+				if (parameters.Length > 32)
 					throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 values is allowed.");
-				return new RunningTask(TaskService, v2Task, v2Task.Run(parameters));
+				var irt = v2Task.Run(parameters.Length == 0 ? null : parameters);
+				return irt != null ? new RunningTask(TaskService, v2Task, irt) : null;
 			}
 
 			v1Task.Run();
 			return new RunningTask(TaskService, v1Task);
 		}
 
-		/// <summary>
-		/// Runs the registered task immediately using specified flags and a session identifier.
-		/// </summary>
+		/// <summary>Runs the registered task immediately using specified flags and a session identifier.</summary>
 		/// <param name="flags">Defines how the task is run.</param>
-		/// <param name="sessionID">The terminal server session in which you want to start the task.</param>
+		/// <param name="sessionID">
+		/// <para>The terminal server session in which you want to start the task.</para>
+		/// <para>
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is not passed into the <paramref name="flags"/> parameter, then the value specified
+		/// in this parameter is ignored.If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the flags parameter and the sessionID
+		/// value is less than or equal to 0, then an invalid argument error will be returned.
+		/// </para>
+		/// <para>
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID value is a
+		/// valid session ID greater than 0 and if no value is specified for the user parameter, then the Task Scheduler service will try to start the
+		/// task interactively as the user who is logged on to the specified session.
+		/// </para>
+		/// <para>
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID value is a
+		/// valid session ID greater than 0 and if a user is specified in the user parameter, then the Task Scheduler service will try to start the
+		/// task interactively as the user who is specified in the user parameter.
+		/// </para>
+		/// </param>
 		/// <param name="user">The user for which the task runs.</param>
-		/// <param name="parameters">The parameters used as values in the task actions.</param>
+		/// <param name="parameters">
+		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
+		/// <para>
+		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
+		/// <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// </para>
+		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		/// <remarks>
+		/// <para>
+		/// This method will return without error, but the task will not run if the AllowDemandStart property of ITaskSettings is set to false for the task.
+		/// </para>
+		/// <para>If RunEx is invoked from a disabled task, it will return <c>null</c> and the task will not be run.</para>
+		/// </remarks>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task != null)
-				return new RunningTask(TaskService, v2Task, v2Task.RunEx(parameters, (int)flags, sessionID, user));
+			{
+				if (parameters.Length > 32)
+					throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 parameters can be supplied to RunEx.");
+				var irt = v2Task.RunEx((parameters.Length == 0) ? null : parameters, (int)flags, sessionID, user);
+				return irt != null ? new RunningTask(TaskService, v2Task, irt) : null;
+			}
 			throw new NotV1SupportedException();
 		}
 
@@ -1326,12 +1365,14 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new NotV2SupportedException();
 		}
 
-		/// <summary>
-		/// Stops the registered task immediately.
-		/// </summary>
+		/// <summary>Stops the registered task immediately.</summary>
 		/// <remarks>
 		/// <para>The <c>Stop</c> method stops all instances of the task.</para>
-		/// <para>System account users can stop a task, users with Administrator group privileges can stop a task, and if a user has rights to execute and read a task, then the user can stop the task. A user can stop the task instances that are running under the same credentials as the user account. In all other cases, the user is denied access to stop the task.</para>
+		/// <para>
+		/// System account users can stop a task, users with Administrator group privileges can stop a task, and if a user has rights to execute and
+		/// read a task, then the user can stop the task. A user can stop the task instances that are running under the same credentials as the user
+		/// account. In all other cases, the user is denied access to stop the task.
+		/// </para>
 		/// </remarks>
 		public void Stop()
 		{

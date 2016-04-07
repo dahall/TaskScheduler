@@ -416,11 +416,11 @@ namespace Microsoft.Win32.TaskScheduler
 					if (password != null)
 						throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
 				}
-				else if ((LogonType == TaskLogonType.Password || LogonType == TaskLogonType.InteractiveTokenOrPassword ||
+				/*else if ((LogonType == TaskLogonType.Password || LogonType == TaskLogonType.InteractiveTokenOrPassword ||
 					(LogonType == TaskLogonType.S4U && UserId != null && !user.IsCurrent)) && password == null)
 				{
 					throw new ArgumentException("A password must be supplied when specifying TaskLogonType.Password or TaskLogonType.InteractiveTokenOrPassword or TaskLogonType.S4U from another account.", nameof(password));
-				}
+				}*/
 				else if (LogonType == TaskLogonType.Group && password != null)
 				{
 					throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
