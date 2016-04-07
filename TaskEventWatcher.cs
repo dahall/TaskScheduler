@@ -670,7 +670,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// Gets or sets an optional array of event levels to use when filtering those events that will fire a <see cref="TaskEventWatcher.EventRecorded"/> event.
 			/// </summary>
 			/// <value>
-			/// The array of event levels. While event providers can define custom levels, most will use integers defined in the <see cref="System.Diagnostics.Eventing.Reader.StandardEventLevel"/> enumeration.
+			/// The array of event levels. While event providers can define custom levels, most will use integers defined in the <see cref="StandardEventLevel"/> enumeration.
 			/// </value>
 			[DefaultValue(null), Category("Filter"), Description("An array of event levels to use when filtering.")]
 			public int[] EventLevels
