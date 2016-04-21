@@ -11,7 +11,7 @@ namespace System.Windows.Forms
 		public int Compare(ListViewItem listviewX, ListViewItem listviewY)
 		{
 			// Compare the two items
-			int compareResult = ObjectCompare.Compare(listviewX.SubItems[SortColumn].Text, listviewY.SubItems[SortColumn].Text);
+			int compareResult = ObjectCompare.Compare(listviewX.SubItems[SortColumn].Tag ?? listviewX.SubItems[SortColumn].Text, listviewY.SubItems[SortColumn].Tag ?? listviewY.SubItems[SortColumn].Text);
 
 			// Calculate correct return value based on object comparison
 			if (Order == SortOrder.Ascending)

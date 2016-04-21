@@ -9,6 +9,7 @@ namespace System.Windows.Forms
 	/// <summary>
 	/// Dialog box which prompts for user credentials using the Win32 CREDUI methods.
 	/// </summary>
+	/// <seealso cref="System.Windows.Forms.CommonDialog" />
 	[ToolboxItem(true), System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Dialog"), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), 
 	DesignTimeVisible(true), Description("Dialog that prompts the user for credentials."), 
 	Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
@@ -61,6 +62,11 @@ namespace System.Windows.Forms
 		/// <value><c>true</c> if password is to be encrypted; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Indicates whether to encrypt password")]
 		public bool EncryptPassword { get; set; }
+
+		/// <summary>Gets or sets a value indicating whether to force XP style dialog even on newer systems.</summary>
+		/// <value><c>true</c> if forcing to pre-Vista style; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Indicates whether to force XP style dialog even on newer systems.")]
+		public bool ForcePreVistaStyle { get; set; }
 
 		/// <summary>
 		/// Gets or sets the message to display on the dialog
@@ -167,7 +173,7 @@ namespace System.Windows.Forms
 			NativeMethods.CREDUI_INFO info = new NativeMethods.CREDUI_INFO(parentWindowHandle, Caption, Message, Banner);
 			try
 			{
-				if (Environment.OSVersion.Version.Major <= 5)
+				if (Environment.OSVersion.Version.Major <= 5 || ForcePreVistaStyle)
 				{
 					StringBuilder userName = new StringBuilder(UserName, maxStringLength);
 					StringBuilder password = new StringBuilder(maxStringLength);

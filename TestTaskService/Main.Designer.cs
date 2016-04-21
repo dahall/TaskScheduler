@@ -48,10 +48,10 @@ namespace TestTaskService
 			this.closeButton = new System.Windows.Forms.Button();
 			this.runButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.reconnectLink = new System.Windows.Forms.LinkLabel();
 			this.ts = new Microsoft.Win32.TaskScheduler.TaskService();
 			this.taskServiceConnectDialog1 = new Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog();
+			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.radioButtonList1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.ts)).BeginInit();
 			this.SuspendLayout();
@@ -59,8 +59,8 @@ namespace TestTaskService
 			// textBox1
 			// 
 			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.Location = new System.Drawing.Point(13, 115);
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
@@ -72,7 +72,7 @@ namespace TestTaskService
 			// radioButtonList1
 			// 
 			this.radioButtonList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(496, 70);
 			radioButtonListItem1.Text = "Short test*";
 			radioButtonListItem2.Text = "Long test*";
@@ -88,19 +88,19 @@ namespace TestTaskService
 			radioButtonListItem12.Text = "Run code";
 			radioButtonListItem13.Text = "Fluent test";
 			this.radioButtonList1.Items.AddRange(new GrpCtrl::GroupControls.RadioButtonListItem[] {
-            radioButtonListItem1,
-            radioButtonListItem2,
-            radioButtonListItem3,
-            radioButtonListItem4,
-            radioButtonListItem5,
-            radioButtonListItem6,
-            radioButtonListItem7,
-            radioButtonListItem8,
-            radioButtonListItem9,
-            radioButtonListItem10,
-            radioButtonListItem11,
-            radioButtonListItem12,
-            radioButtonListItem13});
+			radioButtonListItem1,
+			radioButtonListItem2,
+			radioButtonListItem3,
+			radioButtonListItem4,
+			radioButtonListItem5,
+			radioButtonListItem6,
+			radioButtonListItem7,
+			radioButtonListItem8,
+			radioButtonListItem9,
+			radioButtonListItem10,
+			radioButtonListItem11,
+			radioButtonListItem12,
+			radioButtonListItem13});
 			this.radioButtonList1.Location = new System.Drawing.Point(13, 13);
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 4;
@@ -140,15 +140,6 @@ namespace TestTaskService
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Input:";
 			// 
-			// textBox2
-			// 
-			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox2.Location = new System.Drawing.Point(53, 89);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(456, 20);
-			this.textBox2.TabIndex = 2;
-			// 
 			// reconnectLink
 			// 
 			this.reconnectLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -172,6 +163,17 @@ namespace TestTaskService
 			this.taskServiceConnectDialog1.TaskService = this.ts;
 			this.taskServiceConnectDialog1.Text = "Select Computer";
 			this.taskServiceConnectDialog1.Visible = false;
+			// 
+			// textBox2
+			// 
+			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TestTaskService.Properties.Settings.Default, "MainInput", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.textBox2.Location = new System.Drawing.Point(53, 89);
+			this.textBox2.Name = "textBox2";
+			this.textBox2.Size = new System.Drawing.Size(456, 20);
+			this.textBox2.TabIndex = 2;
+			this.textBox2.Text = global::TestTaskService.Properties.Settings.Default.MainInput;
 			// 
 			// Main
 			// 

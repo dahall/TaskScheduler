@@ -68,6 +68,7 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -80,9 +81,9 @@
 			// mainMenuStrip
 			// 
 			this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.fileToolStripMenuItem,
-			this.actionToolStripMenuItem,
-			this.viewToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.actionToolStripMenuItem,
+            this.viewToolStripMenuItem});
 			this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.mainMenuStrip.Name = "mainMenuStrip";
 			this.mainMenuStrip.Size = new System.Drawing.Size(1126, 24);
@@ -92,7 +93,7 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
@@ -114,7 +115,7 @@
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.showHiddenTasksToolStripMenuItem});
+            this.showHiddenTasksToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "View";
@@ -218,15 +219,15 @@
 			// taskSchedulerWizard1
 			// 
 			this.taskSchedulerWizard1.AvailableTriggers = ((Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers)(((((((((((Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Event | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Time) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Daily) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Weekly) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Monthly) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Idle) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Registration) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon) 
-			| Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange)));
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Daily) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Weekly) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Monthly) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Idle) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Registration) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon) 
+            | Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange)));
 			this.taskSchedulerWizard1.ClientSize = new System.Drawing.Size(538, 391);
 			this.taskSchedulerWizard1.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.taskSchedulerWizard1.Icon = ((System.Drawing.Icon)(resources.GetObject("taskSchedulerWizard1.Icon")));
@@ -270,7 +271,7 @@
 			// 
 			// hidableDetailPanel1.DetailArea
 			// 
-			this.hidableDetailPanel1.DetailArea.BackColor = System.Drawing.Color.Transparent;
+			this.hidableDetailPanel1.DetailArea.BackColor = System.Drawing.SystemColors.Window;
 			this.hidableDetailPanel1.DetailArea.Controls.Add(this.libraryMenuStrip);
 			this.hidableDetailPanel1.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.hidableDetailPanel1.DetailArea.Location = new System.Drawing.Point(3, 27);
@@ -289,18 +290,18 @@
 			this.libraryMenuStrip.BackColor = System.Drawing.SystemColors.Window;
 			this.libraryMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.libraryMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.connectToAnotherComputerToolStripMenuItem,
-			this.createBasicTaskMenuItem,
-			this.createTaskMenuItem,
-			this.importTaskMenuItem,
-			this.displayAllRunningTasksMenuItem,
-			this.disableHistoryMenuItem,
-			this.enableHistoryMenuItem,
-			this.toolStripSeparator1,
-			this.newFolderMenuItem,
-			this.delFolderMenuItem,
-			this.toolStripSeparator2,
-			this.refreshMenuItem});
+            this.connectToAnotherComputerToolStripMenuItem,
+            this.createBasicTaskMenuItem,
+            this.createTaskMenuItem,
+            this.importTaskMenuItem,
+            this.displayAllRunningTasksMenuItem,
+            this.disableHistoryMenuItem,
+            this.enableHistoryMenuItem,
+            this.toolStripSeparator1,
+            this.newFolderMenuItem,
+            this.delFolderMenuItem,
+            this.toolStripSeparator2,
+            this.refreshMenuItem});
 			this.libraryMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
 			this.libraryMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.libraryMenuStrip.Name = "libraryMenuStrip";
@@ -362,7 +363,7 @@
 			this.disableHistoryMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.disableHistoryMenuItem.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
 			this.disableHistoryMenuItem.Name = "disableHistoryMenuItem";
-			this.disableHistoryMenuItem.Size = new System.Drawing.Size(186, 19);
+			this.disableHistoryMenuItem.Size = new System.Drawing.Size(178, 19);
 			this.disableHistoryMenuItem.Text = "Disable All Tasks History";
 			this.disableHistoryMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.disableHistoryMenuItem.Visible = false;
@@ -373,7 +374,7 @@
 			this.enableHistoryMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.enableHistoryMenuItem.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
 			this.enableHistoryMenuItem.Name = "enableHistoryMenuItem";
-			this.enableHistoryMenuItem.Size = new System.Drawing.Size(186, 19);
+			this.enableHistoryMenuItem.Size = new System.Drawing.Size(178, 19);
 			this.enableHistoryMenuItem.Text = "Enable All Tasks History";
 			this.enableHistoryMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.enableHistoryMenuItem.Visible = false;
@@ -427,7 +428,7 @@
 			// 
 			// itemPanel.DetailArea
 			// 
-			this.itemPanel.DetailArea.BackColor = System.Drawing.Color.Transparent;
+			this.itemPanel.DetailArea.BackColor = System.Drawing.SystemColors.Window;
 			this.itemPanel.DetailArea.Controls.Add(this.itemMenuStrip);
 			this.itemPanel.DetailArea.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.itemPanel.DetailArea.Location = new System.Drawing.Point(3, 27);
@@ -490,6 +491,7 @@
 			this.mainMenuStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).EndInit();
 			this.splitContainer1.Panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.hidableDetailPanel1.DetailArea.ResumeLayout(false);

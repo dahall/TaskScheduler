@@ -161,7 +161,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return availActions; }
 			set
 			{
-				if (value != availActions && ((availPages & AvailableWizardPages.ActionSelectPage) == AvailableWizardPages.ActionSelectPage))
+				if (value != availActions)
 				{
 					availActions = value;
 					SetupActionList();
@@ -223,7 +223,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return availTriggers; }
 			set
 			{
-				if (value != availTriggers && ((availPages & AvailableWizardPages.TriggerSelectPage) == AvailableWizardPages.TriggerSelectPage))
+				if (value != availTriggers)
 				{
 					availTriggers = value;
 					SetupTriggerList();
@@ -360,7 +360,7 @@ namespace Microsoft.Win32.TaskScheduler
 				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2)) && td.Settings.Compatibility >= TaskCompatibility.V2;
 
 				// Set General tab
-				nameText.Text = task != null ? task.Name : string.Empty;
+				if (task != null) nameText.Text = task.Name;
 				descText.Text = td.RegistrationInfo.Description;
 				SetUserControls(td.Principal.LogonType);
 				taskLoggedOnRadio.Checked = flagRunOnlyWhenUserIsLoggedOn;
@@ -372,49 +372,51 @@ namespace Microsoft.Win32.TaskScheduler
 					trigger = (Trigger)td.Triggers[0].Clone();
 				else
 					trigger = new TimeTrigger();
-				if (availTriggers > 0)
+				switch (trigger.TriggerType)
 				{
-					switch (trigger.TriggerType)
-					{
-						case TaskTriggerType.Time:
-							oneTimeStartTimePicker.Value = trigger.StartBoundary;
-							SetTriggerListItem(AvailableWizardTriggers.Time);
-							break;
-						case TaskTriggerType.Daily:
-							dailyTriggerUI1.Trigger = trigger;
-							SetTriggerListItem(AvailableWizardTriggers.Daily);
-							break;
-						case TaskTriggerType.Weekly:
-							weeklyTriggerUI1.Trigger = trigger;
-							SetTriggerListItem(AvailableWizardTriggers.Weekly);
-							break;
-						case TaskTriggerType.Monthly:
-						case TaskTriggerType.MonthlyDOW:
-							monthlyTriggerUI1.Trigger = trigger;
-							SetTriggerListItem(AvailableWizardTriggers.Monthly);
-							break;
-						case TaskTriggerType.Event:
-							eventTriggerUI1.TargetServer = TaskService.TargetServer;
-							eventTriggerUI1.Trigger = trigger;
-							SetTriggerListItem(AvailableWizardTriggers.Event);
-							break;
-						default:
-							break;
-					}
-
-					bool hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
-					if (!hasRep)
-					{
-						durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
-					}
-					else
-					{
-						durationSpan.Value = trigger.Repetition.Duration;
-						repeatSpan.Value = trigger.Repetition.Interval;
-					}
-					repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = hasRep;
-					enabledCheckBox.Checked = trigger.Enabled;
+					case TaskTriggerType.Time:
+						oneTimeStartTimePicker.Value = trigger.StartBoundary;
+						SetTriggerListItem(AvailableWizardTriggers.Time);
+						availTriggers |= AvailableWizardTriggers.Time;
+						break;
+					case TaskTriggerType.Daily:
+						dailyTriggerUI1.Trigger = trigger;
+						SetTriggerListItem(AvailableWizardTriggers.Daily);
+						availTriggers |= AvailableWizardTriggers.Daily;
+						break;
+					case TaskTriggerType.Weekly:
+						weeklyTriggerUI1.Trigger = trigger;
+						SetTriggerListItem(AvailableWizardTriggers.Weekly);
+						availTriggers |= AvailableWizardTriggers.Weekly;
+						break;
+					case TaskTriggerType.Monthly:
+					case TaskTriggerType.MonthlyDOW:
+						monthlyTriggerUI1.Trigger = trigger;
+						SetTriggerListItem(AvailableWizardTriggers.Monthly);
+						availTriggers |= AvailableWizardTriggers.Monthly;
+						break;
+					case TaskTriggerType.Event:
+						eventTriggerUI1.TargetServer = TaskService.TargetServer;
+						eventTriggerUI1.Trigger = trigger;
+						SetTriggerListItem(AvailableWizardTriggers.Event);
+						availTriggers |= AvailableWizardTriggers.Event;
+						break;
+					default:
+						break;
 				}
+
+				bool hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
+				if (!hasRep)
+				{
+					durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
+				}
+				else
+				{
+					durationSpan.Value = trigger.Repetition.Duration;
+					repeatSpan.Value = trigger.Repetition.Interval;
+				}
+				repeatCheckBox.Checked = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = hasRep;
+				enabledCheckBox.Checked = trigger.Enabled;
 
 				// Setup action values
 				if (td.Actions.Count > 0)
@@ -427,16 +429,19 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						execActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.Execute);
+						availActions |= AvailableWizardActions.Execute;
 					}
 					else if (action is EmailAction)
 					{
 						emailActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.SendEmail);
+						availActions |= AvailableWizardActions.SendEmail;
 					}
 					else if (action is ShowMessageAction)
 					{
 						showMessageActionUI1.Action = action;
 						SetActionListItem(AvailableWizardActions.ShowMessage);
+						availActions |= AvailableWizardActions.ShowMessage;
 					}
 				}
 

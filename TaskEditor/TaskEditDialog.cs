@@ -188,7 +188,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public string TaskName
 		{
 			get { return taskPropertiesControl1.TaskName; }
-			set { taskPropertiesControl1.TaskName = value; }
+			set { taskPropertiesControl1.TaskName = value; okBtn.Enabled = IsValidTaskName(value); }
 		}
 
 		/// <summary>
@@ -253,6 +253,8 @@ namespace Microsoft.Win32.TaskScheduler
 				return dlg.Password;
 			return null;
 		}
+
+		private static bool IsValidTaskName(string name) => !string.IsNullOrEmpty(name) && name.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) == -1;
 
 		/// <summary>
 		/// Handles the Click event of the okBtn control.

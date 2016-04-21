@@ -195,9 +195,9 @@ namespace TestTaskService
 					taskSchedulerWizard.Initialize(ts, newTaskDefinition);
 					taskSchedulerWizard.TaskFolder = FolderName;
 					taskSchedulerWizard.RegisterTaskOnFinish = true;
-					taskSchedulerWizard.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Event;
+					taskSchedulerWizard.AvailableTriggers = TaskSchedulerWizard.AvailableWizardTriggers.Event | TaskSchedulerWizard.AvailableWizardTriggers.Logon;
 					taskSchedulerWizard.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage |
-						//TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage |
+						TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage |
 						TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage |
 						//TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage |
 						TaskSchedulerWizard.AvailableWizardPages.ActionEditPage |

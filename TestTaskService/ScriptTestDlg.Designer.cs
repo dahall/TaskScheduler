@@ -67,16 +67,17 @@
 			// 
 			this.codeEditor.AcceptsTab = true;
 			this.codeEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.codeEditor.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TestTaskService.Properties.Settings.Default, "TestCodeText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.codeEditor.DetectUrls = false;
 			this.codeEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.codeEditor.EnableAutoDragDrop = true;
 			this.codeEditor.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.codeEditor.HideSelection = false;
 			this.codeEditor.Location = new System.Drawing.Point(0, 0);
 			this.codeEditor.Name = "codeEditor";
-			this.codeEditor.ShortcutsEnabled = false;
 			this.codeEditor.Size = new System.Drawing.Size(650, 455);
 			this.codeEditor.TabIndex = 0;
-			this.codeEditor.Text = "output.WriteLine(ts.HighestSupportedVersion);";
+			this.codeEditor.Text = global::TestTaskService.Properties.Settings.Default.TestCodeText;
 			this.codeEditor.WordWrap = false;
 			// 
 			// closeBtn
@@ -193,7 +194,7 @@
 			this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
 			this.newToolStripMenuItem.Text = "&New";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
@@ -203,14 +204,14 @@
 			this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
 			this.openToolStripMenuItem.Text = "&Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this.toolStripSeparator.Name = "toolStripSeparator";
-			this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -218,21 +219,21 @@
 			this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
 			this.saveToolStripMenuItem.Text = "&Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// saveAsToolStripMenuItem
 			// 
 			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
 			this.saveAsToolStripMenuItem.Text = "Save &As";
 			this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
 			this.toolStripSeparator1.Visible = false;
 			// 
 			// printToolStripMenuItem
@@ -241,7 +242,7 @@
 			this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.printToolStripMenuItem.Name = "printToolStripMenuItem";
 			this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
 			this.printToolStripMenuItem.Text = "&Print";
 			this.printToolStripMenuItem.Visible = false;
 			this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);

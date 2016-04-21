@@ -30,9 +30,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					throw new ArgumentException("Trigger property value on EventTriggerUI must be an EventTrigger.");
 
 				onAssignment = true;
-				trigger = (EventTrigger)value;
-
 				InitializeEventLogList();
+				trigger = (EventTrigger)value;
 				UpdateCustomText();
 				eventBasicRadio.Checked = TrySetBasic();
 			}
@@ -106,7 +105,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void InitializeEventLogList()
 		{
-			if (onEventLogCombo.Items.Count == 0)
+			if (onEventLogCombo.DataSource == null)
 				onEventLogCombo.DataSource = SystemEventEnumerator.GetEventLogDisplayObjects(TargetServer);
 		}
 
@@ -143,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (onEventLogCombo.Text.Length > 0)
 			{
-				if (trigger != null)
+				if (trigger != null && !onAssignment)
 					trigger.SetBasic((string)onEventLogCombo.SelectedValue, onEventSourceCombo.Text, EventId);
 				UpdateCustomText();
 				OnTriggerChanged(new PropertyChangedEventArgs("Trigger"));
