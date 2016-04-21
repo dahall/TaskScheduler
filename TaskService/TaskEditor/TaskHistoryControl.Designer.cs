@@ -31,12 +31,27 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskHistoryControl));
 			this.historySplitContainer = new System.Windows.Forms.SplitContainer();
+			this.historyListView = new System.Windows.Forms.ListViewEx();
+			this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.historyListImages = new System.Windows.Forms.ImageList(this.components);
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.historyHeader = new System.Windows.Forms.Label();
 			this.historyClearBtn = new System.Windows.Forms.Button();
 			this.refreshBtn = new System.Windows.Forms.Button();
 			this.historyFilterIcon = new System.Windows.Forms.Label();
+			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.historyDetailTitleText = new System.Windows.Forms.Label();
 			this.historyDetailHideBtn = new System.Windows.Forms.Button();
@@ -52,25 +67,11 @@
 			this.removeSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupEventsByThisColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeGroupingOfEventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.columnContextMenuBreak = new System.Windows.Forms.ToolStripSeparator();
-			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.expandAllGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.collapseAllGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.historyListView = new System.Windows.Forms.ListViewEx();
-			this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.historyDetailView = new Microsoft.Win32.TaskScheduler.EventViewerControl();
+			this.columnContextMenuBreak = new System.Windows.Forms.ToolStripSeparator();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).BeginInit();
 			this.historySplitContainer.Panel1.SuspendLayout();
 			this.historySplitContainer.Panel2.SuspendLayout();
 			this.historySplitContainer.SuspendLayout();
@@ -98,192 +99,23 @@
 			this.historySplitContainer.Panel2.Controls.Add(this.historyDetailView);
 			this.historySplitContainer.Panel2.Controls.Add(this.tableLayoutPanel2);
 			// 
-			// historyListImages
-			// 
-			this.historyListImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-			resources.ApplyResources(this.historyListImages, "historyListImages");
-			this.historyListImages.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// tableLayoutPanel1
-			// 
-			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.Controls.Add(this.historyHeader, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.historyClearBtn, 2, 0);
-			this.tableLayoutPanel1.Controls.Add(this.refreshBtn, 3, 0);
-			this.tableLayoutPanel1.Controls.Add(this.historyFilterIcon, 0, 0);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			// 
-			// historyHeader
-			// 
-			resources.ApplyResources(this.historyHeader, "historyHeader");
-			this.historyHeader.Name = "historyHeader";
-			// 
-			// historyClearBtn
-			// 
-			resources.ApplyResources(this.historyClearBtn, "historyClearBtn");
-			this.historyClearBtn.FlatAppearance.BorderSize = 0;
-			this.historyClearBtn.ImageList = this.historyListImages;
-			this.historyClearBtn.Name = "historyClearBtn";
-			this.historyClearBtn.UseVisualStyleBackColor = true;
-			// 
-			// refreshBtn
-			// 
-			resources.ApplyResources(this.refreshBtn, "refreshBtn");
-			this.refreshBtn.FlatAppearance.BorderSize = 0;
-			this.refreshBtn.ImageList = this.historyListImages;
-			this.refreshBtn.Name = "refreshBtn";
-			this.refreshBtn.UseVisualStyleBackColor = true;
-			// 
-			// historyFilterIcon
-			// 
-			resources.ApplyResources(this.historyFilterIcon, "historyFilterIcon");
-			this.historyFilterIcon.ImageList = this.historyListImages;
-			this.historyFilterIcon.Name = "historyFilterIcon";
-			// 
-			// tableLayoutPanel2
-			// 
-			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-			this.tableLayoutPanel2.Controls.Add(this.historyDetailTitleText, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.historyDetailHideBtn, 1, 0);
-			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			// 
-			// historyDetailTitleText
-			// 
-			resources.ApplyResources(this.historyDetailTitleText, "historyDetailTitleText");
-			this.historyDetailTitleText.Name = "historyDetailTitleText";
-			// 
-			// historyDetailHideBtn
-			// 
-			resources.ApplyResources(this.historyDetailHideBtn, "historyDetailHideBtn");
-			this.historyDetailHideBtn.FlatAppearance.BorderSize = 0;
-			this.historyDetailHideBtn.Name = "historyDetailHideBtn";
-			this.historyDetailHideBtn.UseVisualStyleBackColor = true;
-			this.historyDetailHideBtn.Click += new System.EventHandler(this.histDetailHideBtn_Click);
-			// 
-			// historyBackgroundWorker
-			// 
-			this.historyBackgroundWorker.WorkerReportsProgress = true;
-			this.historyBackgroundWorker.WorkerSupportsCancellation = true;
-			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
-			this.historyBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.historyBackgroundWorker_ProgressChanged);
-			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
-			// 
-			// listContextMenu
-			// 
-			this.listContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.refreshToolStripMenuItem,
-			this.eventPropertiesToolStripMenuItem,
-			this.attachTaskToThisEventToolStripMenuItem,
-			this.saveAllEventsAsToolStripMenuItem});
-			this.listContextMenu.Name = "listContextMenu";
-			resources.ApplyResources(this.listContextMenu, "listContextMenu");
-			// 
-			// refreshToolStripMenuItem
-			// 
-			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-			resources.ApplyResources(this.refreshToolStripMenuItem, "refreshToolStripMenuItem");
-			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
-			// 
-			// eventPropertiesToolStripMenuItem
-			// 
-			this.eventPropertiesToolStripMenuItem.Name = "eventPropertiesToolStripMenuItem";
-			resources.ApplyResources(this.eventPropertiesToolStripMenuItem, "eventPropertiesToolStripMenuItem");
-			this.eventPropertiesToolStripMenuItem.Click += new System.EventHandler(this.eventPropertiesToolStripMenuItem_Click);
-			// 
-			// attachTaskToThisEventToolStripMenuItem
-			// 
-			this.attachTaskToThisEventToolStripMenuItem.Name = "attachTaskToThisEventToolStripMenuItem";
-			resources.ApplyResources(this.attachTaskToThisEventToolStripMenuItem, "attachTaskToThisEventToolStripMenuItem");
-			this.attachTaskToThisEventToolStripMenuItem.Click += new System.EventHandler(this.attachTaskToThisEventToolStripMenuItem_Click);
-			// 
-			// saveAllEventsAsToolStripMenuItem
-			// 
-			this.saveAllEventsAsToolStripMenuItem.Name = "saveAllEventsAsToolStripMenuItem";
-			resources.ApplyResources(this.saveAllEventsAsToolStripMenuItem, "saveAllEventsAsToolStripMenuItem");
-			this.saveAllEventsAsToolStripMenuItem.Click += new System.EventHandler(this.saveAllEventsAsToolStripMenuItem_Click);
-			// 
-			// columnContextMenu
-			// 
-			this.columnContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.addremoveColumnsToolStripMenuItem,
-			this.sortEventsByThisColumnToolStripMenuItem,
-			this.removeSortingToolStripMenuItem,
-			this.groupEventsByThisColumnToolStripMenuItem,
-			this.removeGroupingOfEventsToolStripMenuItem,
-			this.expandAllGroupsToolStripMenuItem,
-			this.collapseAllGroupsToolStripMenuItem,
-			this.columnContextMenuBreak});
-			this.columnContextMenu.Name = "columnContextMenu";
-			resources.ApplyResources(this.columnContextMenu, "columnContextMenu");
-			// 
-			// addremoveColumnsToolStripMenuItem
-			// 
-			this.addremoveColumnsToolStripMenuItem.Name = "addremoveColumnsToolStripMenuItem";
-			resources.ApplyResources(this.addremoveColumnsToolStripMenuItem, "addremoveColumnsToolStripMenuItem");
-			this.addremoveColumnsToolStripMenuItem.Click += new System.EventHandler(this.addremoveColumnsToolStripMenuItem_Click);
-			// 
-			// sortEventsByThisColumnToolStripMenuItem
-			// 
-			this.sortEventsByThisColumnToolStripMenuItem.Name = "sortEventsByThisColumnToolStripMenuItem";
-			resources.ApplyResources(this.sortEventsByThisColumnToolStripMenuItem, "sortEventsByThisColumnToolStripMenuItem");
-			this.sortEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.sortEventsByThisColumnToolStripMenuItem_Click);
-			// 
-			// removeSortingToolStripMenuItem
-			// 
-			this.removeSortingToolStripMenuItem.Name = "removeSortingToolStripMenuItem";
-			resources.ApplyResources(this.removeSortingToolStripMenuItem, "removeSortingToolStripMenuItem");
-			this.removeSortingToolStripMenuItem.Click += new System.EventHandler(this.removeSortingToolStripMenuItem_Click);
-			// 
-			// groupEventsByThisColumnToolStripMenuItem
-			// 
-			this.groupEventsByThisColumnToolStripMenuItem.Name = "groupEventsByThisColumnToolStripMenuItem";
-			resources.ApplyResources(this.groupEventsByThisColumnToolStripMenuItem, "groupEventsByThisColumnToolStripMenuItem");
-			this.groupEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.groupEventsByThisColumnToolStripMenuItem_Click);
-			// 
-			// removeGroupingOfEventsToolStripMenuItem
-			// 
-			this.removeGroupingOfEventsToolStripMenuItem.Name = "removeGroupingOfEventsToolStripMenuItem";
-			resources.ApplyResources(this.removeGroupingOfEventsToolStripMenuItem, "removeGroupingOfEventsToolStripMenuItem");
-			this.removeGroupingOfEventsToolStripMenuItem.Click += new System.EventHandler(this.removeGroupingOfEventsToolStripMenuItem_Click);
-			// 
-			// columnContextMenuBreak
-			// 
-			this.columnContextMenuBreak.Name = "columnContextMenuBreak";
-			resources.ApplyResources(this.columnContextMenuBreak, "columnContextMenuBreak");
-			// 
-			// saveFileDialog
-			// 
-			resources.ApplyResources(this.saveFileDialog, "saveFileDialog");
-			// 
-			// expandAllGroupsToolStripMenuItem
-			// 
-			this.expandAllGroupsToolStripMenuItem.Name = "expandAllGroupsToolStripMenuItem";
-			resources.ApplyResources(this.expandAllGroupsToolStripMenuItem, "expandAllGroupsToolStripMenuItem");
-			this.expandAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.expandAllGroupsToolStripMenuItem_Click);
-			// 
-			// collapseAllGroupsToolStripMenuItem
-			// 
-			this.collapseAllGroupsToolStripMenuItem.Name = "collapseAllGroupsToolStripMenuItem";
-			resources.ApplyResources(this.collapseAllGroupsToolStripMenuItem, "collapseAllGroupsToolStripMenuItem");
-			this.collapseAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.collapseAllGroupsToolStripMenuItem_Click);
-			// 
 			// historyListView
 			// 
 			this.historyListView.AllowColumnReorder = true;
 			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-			this.columnHeader0,
-			this.columnHeader1,
-			this.columnHeader2,
-			this.columnHeader3,
-			this.columnHeader4,
-			this.columnHeader5,
-			this.columnHeader6,
-			this.columnHeader7,
-			this.columnHeader8,
-			this.columnHeader9,
-			this.columnHeader10,
-			this.columnHeader11,
-			this.columnHeader12});
+            this.columnHeader0,
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
 			resources.ApplyResources(this.historyListView, "historyListView");
 			this.historyListView.FullRowSelect = true;
 			this.historyListView.HideSelection = false;
@@ -353,12 +185,182 @@
 			// 
 			resources.ApplyResources(this.columnHeader12, "columnHeader12");
 			// 
+			// historyListImages
+			// 
+			this.historyListImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+			resources.ApplyResources(this.historyListImages, "historyListImages");
+			this.historyListImages.TransparentColor = System.Drawing.Color.Transparent;
+			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.historyHeader, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.historyClearBtn, 2, 0);
+			this.tableLayoutPanel1.Controls.Add(this.refreshBtn, 3, 0);
+			this.tableLayoutPanel1.Controls.Add(this.historyFilterIcon, 0, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			// 
+			// historyHeader
+			// 
+			resources.ApplyResources(this.historyHeader, "historyHeader");
+			this.historyHeader.Name = "historyHeader";
+			// 
+			// historyClearBtn
+			// 
+			resources.ApplyResources(this.historyClearBtn, "historyClearBtn");
+			this.historyClearBtn.FlatAppearance.BorderSize = 0;
+			this.historyClearBtn.ImageList = this.historyListImages;
+			this.historyClearBtn.Name = "historyClearBtn";
+			this.historyClearBtn.UseVisualStyleBackColor = true;
+			// 
+			// refreshBtn
+			// 
+			resources.ApplyResources(this.refreshBtn, "refreshBtn");
+			this.refreshBtn.FlatAppearance.BorderSize = 0;
+			this.refreshBtn.ImageList = this.historyListImages;
+			this.refreshBtn.Name = "refreshBtn";
+			this.refreshBtn.UseVisualStyleBackColor = true;
+			// 
+			// historyFilterIcon
+			// 
+			resources.ApplyResources(this.historyFilterIcon, "historyFilterIcon");
+			this.historyFilterIcon.ImageList = this.historyListImages;
+			this.historyFilterIcon.Name = "historyFilterIcon";
+			// 
 			// historyDetailView
 			// 
 			this.historyDetailView.ActiveTab = Microsoft.Win32.TaskScheduler.EventViewerControl.EventViewerActiveTab.General;
 			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
 			resources.ApplyResources(this.historyDetailView, "historyDetailView");
 			this.historyDetailView.Name = "historyDetailView";
+			this.historyDetailView.TaskEvent = null;
+			// 
+			// tableLayoutPanel2
+			// 
+			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+			this.tableLayoutPanel2.Controls.Add(this.historyDetailTitleText, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.historyDetailHideBtn, 1, 0);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			// 
+			// historyDetailTitleText
+			// 
+			resources.ApplyResources(this.historyDetailTitleText, "historyDetailTitleText");
+			this.historyDetailTitleText.Name = "historyDetailTitleText";
+			// 
+			// historyDetailHideBtn
+			// 
+			resources.ApplyResources(this.historyDetailHideBtn, "historyDetailHideBtn");
+			this.historyDetailHideBtn.FlatAppearance.BorderSize = 0;
+			this.historyDetailHideBtn.Name = "historyDetailHideBtn";
+			this.historyDetailHideBtn.UseVisualStyleBackColor = true;
+			this.historyDetailHideBtn.Click += new System.EventHandler(this.histDetailHideBtn_Click);
+			// 
+			// historyBackgroundWorker
+			// 
+			this.historyBackgroundWorker.WorkerReportsProgress = true;
+			this.historyBackgroundWorker.WorkerSupportsCancellation = true;
+			this.historyBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.historyBackgroundWorker_DoWork);
+			this.historyBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.historyBackgroundWorker_ProgressChanged);
+			this.historyBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.historyBackgroundWorker_RunWorkerCompleted);
+			// 
+			// listContextMenu
+			// 
+			this.listContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem,
+            this.eventPropertiesToolStripMenuItem,
+            this.attachTaskToThisEventToolStripMenuItem,
+            this.saveAllEventsAsToolStripMenuItem});
+			this.listContextMenu.Name = "listContextMenu";
+			resources.ApplyResources(this.listContextMenu, "listContextMenu");
+			// 
+			// refreshToolStripMenuItem
+			// 
+			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+			resources.ApplyResources(this.refreshToolStripMenuItem, "refreshToolStripMenuItem");
+			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+			// 
+			// eventPropertiesToolStripMenuItem
+			// 
+			this.eventPropertiesToolStripMenuItem.Name = "eventPropertiesToolStripMenuItem";
+			resources.ApplyResources(this.eventPropertiesToolStripMenuItem, "eventPropertiesToolStripMenuItem");
+			this.eventPropertiesToolStripMenuItem.Click += new System.EventHandler(this.eventPropertiesToolStripMenuItem_Click);
+			// 
+			// attachTaskToThisEventToolStripMenuItem
+			// 
+			this.attachTaskToThisEventToolStripMenuItem.Name = "attachTaskToThisEventToolStripMenuItem";
+			resources.ApplyResources(this.attachTaskToThisEventToolStripMenuItem, "attachTaskToThisEventToolStripMenuItem");
+			this.attachTaskToThisEventToolStripMenuItem.Click += new System.EventHandler(this.attachTaskToThisEventToolStripMenuItem_Click);
+			// 
+			// saveAllEventsAsToolStripMenuItem
+			// 
+			this.saveAllEventsAsToolStripMenuItem.Name = "saveAllEventsAsToolStripMenuItem";
+			resources.ApplyResources(this.saveAllEventsAsToolStripMenuItem, "saveAllEventsAsToolStripMenuItem");
+			this.saveAllEventsAsToolStripMenuItem.Click += new System.EventHandler(this.saveAllEventsAsToolStripMenuItem_Click);
+			// 
+			// columnContextMenu
+			// 
+			this.columnContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addremoveColumnsToolStripMenuItem,
+            this.sortEventsByThisColumnToolStripMenuItem,
+            this.removeSortingToolStripMenuItem,
+            this.groupEventsByThisColumnToolStripMenuItem,
+            this.removeGroupingOfEventsToolStripMenuItem,
+            this.expandAllGroupsToolStripMenuItem,
+            this.collapseAllGroupsToolStripMenuItem,
+            this.columnContextMenuBreak});
+			this.columnContextMenu.Name = "columnContextMenu";
+			resources.ApplyResources(this.columnContextMenu, "columnContextMenu");
+			// 
+			// addremoveColumnsToolStripMenuItem
+			// 
+			this.addremoveColumnsToolStripMenuItem.Name = "addremoveColumnsToolStripMenuItem";
+			resources.ApplyResources(this.addremoveColumnsToolStripMenuItem, "addremoveColumnsToolStripMenuItem");
+			this.addremoveColumnsToolStripMenuItem.Click += new System.EventHandler(this.addremoveColumnsToolStripMenuItem_Click);
+			// 
+			// sortEventsByThisColumnToolStripMenuItem
+			// 
+			this.sortEventsByThisColumnToolStripMenuItem.Name = "sortEventsByThisColumnToolStripMenuItem";
+			resources.ApplyResources(this.sortEventsByThisColumnToolStripMenuItem, "sortEventsByThisColumnToolStripMenuItem");
+			this.sortEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.sortEventsByThisColumnToolStripMenuItem_Click);
+			// 
+			// removeSortingToolStripMenuItem
+			// 
+			this.removeSortingToolStripMenuItem.Name = "removeSortingToolStripMenuItem";
+			resources.ApplyResources(this.removeSortingToolStripMenuItem, "removeSortingToolStripMenuItem");
+			this.removeSortingToolStripMenuItem.Click += new System.EventHandler(this.removeSortingToolStripMenuItem_Click);
+			// 
+			// groupEventsByThisColumnToolStripMenuItem
+			// 
+			this.groupEventsByThisColumnToolStripMenuItem.Name = "groupEventsByThisColumnToolStripMenuItem";
+			resources.ApplyResources(this.groupEventsByThisColumnToolStripMenuItem, "groupEventsByThisColumnToolStripMenuItem");
+			this.groupEventsByThisColumnToolStripMenuItem.Click += new System.EventHandler(this.groupEventsByThisColumnToolStripMenuItem_Click);
+			// 
+			// removeGroupingOfEventsToolStripMenuItem
+			// 
+			this.removeGroupingOfEventsToolStripMenuItem.Name = "removeGroupingOfEventsToolStripMenuItem";
+			resources.ApplyResources(this.removeGroupingOfEventsToolStripMenuItem, "removeGroupingOfEventsToolStripMenuItem");
+			this.removeGroupingOfEventsToolStripMenuItem.Click += new System.EventHandler(this.removeGroupingOfEventsToolStripMenuItem_Click);
+			// 
+			// expandAllGroupsToolStripMenuItem
+			// 
+			this.expandAllGroupsToolStripMenuItem.Name = "expandAllGroupsToolStripMenuItem";
+			resources.ApplyResources(this.expandAllGroupsToolStripMenuItem, "expandAllGroupsToolStripMenuItem");
+			this.expandAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.expandAllGroupsToolStripMenuItem_Click);
+			// 
+			// collapseAllGroupsToolStripMenuItem
+			// 
+			this.collapseAllGroupsToolStripMenuItem.Name = "collapseAllGroupsToolStripMenuItem";
+			resources.ApplyResources(this.collapseAllGroupsToolStripMenuItem, "collapseAllGroupsToolStripMenuItem");
+			this.collapseAllGroupsToolStripMenuItem.Click += new System.EventHandler(this.collapseAllGroupsToolStripMenuItem_Click);
+			// 
+			// columnContextMenuBreak
+			// 
+			this.columnContextMenuBreak.Name = "columnContextMenuBreak";
+			resources.ApplyResources(this.columnContextMenuBreak, "columnContextMenuBreak");
+			// 
+			// saveFileDialog
+			// 
+			resources.ApplyResources(this.saveFileDialog, "saveFileDialog");
 			// 
 			// TaskHistoryControl
 			// 
@@ -370,6 +372,7 @@
 			this.historySplitContainer.Panel1.PerformLayout();
 			this.historySplitContainer.Panel2.ResumeLayout(false);
 			this.historySplitContainer.Panel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).EndInit();
 			this.historySplitContainer.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();

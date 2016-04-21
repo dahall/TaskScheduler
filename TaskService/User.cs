@@ -18,8 +18,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else if (userName != null && userName.Contains("\\"))
 			{
-				using (var ds = new Microsoft.Win32.NativeMethods.DsHandle())
-					try { acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User; } catch { }
+				try
+				{
+					using (var ds = new Microsoft.Win32.NativeMethods.DomainService())
+						acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User;
+				} catch { }
 			}
 
 			if (acct == null)
@@ -55,18 +58,18 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					return (sid.IsWellKnown(WellKnownSidType.LocalSystemSid) || sid.IsWellKnown(WellKnownSidType.NetworkServiceSid) || sid.IsWellKnown(WellKnownSidType.LocalServiceSid));
+					return (sid != null && (sid.IsWellKnown(WellKnownSidType.LocalSystemSid) || sid.IsWellKnown(WellKnownSidType.NetworkServiceSid) || sid.IsWellKnown(WellKnownSidType.LocalServiceSid)));
 				}
 				catch { }
 				return false;
 			}
 		}
 
-		public bool IsSystem => sid.IsWellKnown(WellKnownSidType.LocalSystemSid);
+		public bool IsSystem => sid != null && sid.IsWellKnown(WellKnownSidType.LocalSystemSid);
 
-		public string Name => acct != null ? acct.Name : ((NTAccount)sid.Translate(typeof(NTAccount))).Value;
+		public string Name => acct?.Name ?? ((NTAccount)sid?.Translate(typeof(NTAccount)))?.Value;
 
-		public string SidString => sid.ToString();
+		public string SidString => sid?.ToString();
 
 		public static User FromSidString(string sid)
 		{
@@ -87,7 +90,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (user != null)
 				return this.Equals(user);
 			WindowsIdentity wid = obj as WindowsIdentity;
-			if (wid != null)
+			if (wid != null && sid != null)
 				return sid.Equals(wid.User);
 			try
 			{
@@ -99,8 +102,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return base.Equals(obj);
 		}
 
-		public bool Equals(User other) => (other != null) ? sid.Equals(other.sid) : false;
+		public bool Equals(User other) => (other != null && sid != null) ? sid.Equals(other.sid) : false;
 
-		public override int GetHashCode() => sid.GetHashCode();
+		public override int GetHashCode() => sid?.GetHashCode() ?? 0;
 	}
 }

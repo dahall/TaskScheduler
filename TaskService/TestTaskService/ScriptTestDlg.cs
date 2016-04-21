@@ -42,7 +42,7 @@ namespace TestTaskService
 					foreach (string s in validExts)
 						if (string.Compare(s, ext, true) == 0)
 							return f;
-                }
+				}
 			}
 			return null;
 		}
@@ -119,11 +119,11 @@ namespace TestTaskService
 			{
 				Dictionary<string, string> providerOptions = new Dictionary<string, string> { {"CompilerVersion", "v4.0"} };
 				provider = new CSharpCodeProvider(providerOptions);
-				compilerParams = new CompilerParameters(new string[] { "System.dll", "System.Xml.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
+				compilerParams = new CompilerParameters(new string[] { "System.dll", "System.Xml.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
 			}
 
 			string code = String.Concat(@"using System; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
-            CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, code);
+			CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, code);
 			if (results.Errors.Count != 0)
 			{
 				string[] strArr = new string[results.Output.Count];

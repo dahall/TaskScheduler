@@ -82,5 +82,29 @@ namespace TestTaskService.Properties {
                 this["LevelsFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("output.WriteLine(ts.HighestSupportedVersion);")]
+        public string TestCodeText {
+            get {
+                return ((string)(this["TestCodeText"]));
+            }
+            set {
+                this["TestCodeText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MainInput {
+            get {
+                return ((string)(this["MainInput"]));
+            }
+            set {
+                this["MainInput"] = value;
+            }
+        }
     }
 }

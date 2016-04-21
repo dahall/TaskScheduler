@@ -280,6 +280,32 @@ namespace System.Windows.Forms
 				}
 			}
 		}
+		public void SetExplorerTheme(bool on = true)
+		{
+			if (Environment.OSVersion.Version.Major > 5)
+			{
+				NativeMethods.SetWindowTheme(Handle, on ? "explorer" : null, null);
+				SendMessage(NativeMethods.ListViewMessage.SetExtendedListViewStyle, (int)NativeMethods.ListViewStyleEx.DoubleBuffer, on ? (IntPtr)NativeMethods.ListViewStyleEx.DoubleBuffer : IntPtr.Zero);
+			}
+		}
+
+		public IEnumerable<ListViewItem> EnumItems
+		{
+			get
+			{
+				foreach (ListViewItem item in Items)
+					yield return item;
+			}
+		}
+
+		public IEnumerable<ListViewGroup> EnumGroups
+		{
+			get
+			{
+				foreach (ListViewGroup item in Groups)
+					yield return item;
+			}
+		}
 	}
 
 	[ListBindable(false)]

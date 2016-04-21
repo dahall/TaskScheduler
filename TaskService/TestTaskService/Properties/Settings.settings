@@ -1,23 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-	<Profiles>
-		<Profile Name="(Default)" />
-	</Profiles>
-	<Settings>
-		<Setting Name="WatchFolder" Type="System.Boolean" Scope="User">
-			<Value Profile="(Default)">True</Value>
-		</Setting>
-		<Setting Name="Folder" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-		<Setting Name="TaskFilter" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-		<Setting Name="IDsFilter" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-		<Setting Name="LevelsFilter" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-	</Settings>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TestTaskService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WatchFolder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Folder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TaskFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IDsFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LevelsFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TestCodeText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">output.WriteLine(ts.HighestSupportedVersion);</Value>
+    </Setting>
+    <Setting Name="MainInput" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
 </SettingsFile>

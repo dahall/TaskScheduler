@@ -171,6 +171,10 @@ namespace Microsoft.Win32
 		public static extern void GetThemeTransitionDuration(IntPtr hTheme, int iPartId, int iStateIdFrom, int iStateIdTo,
 			int iPropId, ref UInt32 pdwDuration);
 
+		[DllImport(UXTHEME, ExactSpelling = true, PreserveSig = false, CharSet = CharSet.Unicode)]
+		[System.Security.SecurityCritical]
+		public static extern void SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
+
 		[DllImport(UXTHEME, ExactSpelling = true, PreserveSig = false)]
 		public static extern void SetWindowThemeAttribute(IntPtr hWnd, WindowThemeAttributeType wtype, 
 			ref WTA_OPTIONS attributes, int size);
