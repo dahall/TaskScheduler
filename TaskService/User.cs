@@ -36,7 +36,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (acct == null)
 				{
 					NTAccount ntacct = new NTAccount(userName);
-					sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier));
+					try { sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier)); } catch { }
 				}
 			}
 		}

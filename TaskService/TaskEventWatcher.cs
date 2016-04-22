@@ -235,9 +235,11 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (string.IsNullOrEmpty(value))
 					value = root;
+				if (!value.EndsWith("\\"))
+					value += "\\";
 				if (string.Compare(folder, value, StringComparison.OrdinalIgnoreCase) != 0)
 				{
-					if ((base.DesignMode && (value.IndexOfAny(new char[] { '*', '?' }) != -1 || value.IndexOfAny(System.IO.Path.GetInvalidPathChars()) != -1)) || (TaskService.GetFolder(value) == null))
+					if ((base.DesignMode && (value.IndexOfAny(new char[] { '*', '?' }) != -1 || value.IndexOfAny(Path.GetInvalidPathChars()) != -1)) || (TaskService.GetFolder(value == root ? value : value.TrimEnd('\\')) == null))
 						throw new ArgumentException($"Invalid folder name: {value}");
 
 					folder = value;
@@ -613,12 +615,15 @@ namespace Microsoft.Win32.TaskScheduler
 					string fld = taskEvent.TaskPath.Substring(0, cpos + 1);
 
 					// Check folder and name filters
-					if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
-						return;
-					if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
-						return;
-					if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
-						return;
+					if (!string.IsNullOrEmpty(Filter.TaskName) && string.Compare(Filter.TaskName, taskEvent.TaskPath, StringComparison.OrdinalIgnoreCase) != 0)
+					{
+						if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
+							return;
+						if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
+							return;
+						if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
+							return;
+					}
 
 					OnEventRecorded(this, new TaskEventArgs(taskEvent, TaskService));
 				}

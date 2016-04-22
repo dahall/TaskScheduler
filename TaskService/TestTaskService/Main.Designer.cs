@@ -42,7 +42,6 @@ namespace TestTaskService
 			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem10 = new GrpCtrl::GroupControls.RadioButtonListItem();
 			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem11 = new GrpCtrl::GroupControls.RadioButtonListItem();
 			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem12 = new GrpCtrl::GroupControls.RadioButtonListItem();
-			GrpCtrl::GroupControls.RadioButtonListItem radioButtonListItem13 = new GrpCtrl::GroupControls.RadioButtonListItem();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.radioButtonList1 = new GrpCtrl::GroupControls.RadioButtonList();
 			this.closeButton = new System.Windows.Forms.Button();
@@ -73,7 +72,7 @@ namespace TestTaskService
 			// 
 			this.radioButtonList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
-			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(496, 70);
+			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(496, 51);
 			radioButtonListItem1.Text = "Short test*";
 			radioButtonListItem2.Text = "Long test*";
 			radioButtonListItem3.Text = "Editor test";
@@ -83,10 +82,9 @@ namespace TestTaskService
 			radioButtonListItem7.Text = "Find Task*";
 			radioButtonListItem8.Text = "Output XML";
 			radioButtonListItem9.Text = "Output JSON";
-			radioButtonListItem10.Text = "View Task Events";
-			radioButtonListItem11.Text = "Watch Task Events";
-			radioButtonListItem12.Text = "Run code";
-			radioButtonListItem13.Text = "Fluent test";
+			radioButtonListItem10.Text = "Watch Task Events";
+			radioButtonListItem11.Text = "Run code";
+			radioButtonListItem12.Text = "Fluent test";
 			this.radioButtonList1.Items.AddRange(new GrpCtrl::GroupControls.RadioButtonListItem[] {
 			radioButtonListItem1,
 			radioButtonListItem2,
@@ -99,13 +97,12 @@ namespace TestTaskService
 			radioButtonListItem9,
 			radioButtonListItem10,
 			radioButtonListItem11,
-			radioButtonListItem12,
-			radioButtonListItem13});
+			radioButtonListItem12});
 			this.radioButtonList1.Location = new System.Drawing.Point(13, 13);
 			this.radioButtonList1.Name = "radioButtonList1";
 			this.radioButtonList1.RepeatColumns = 4;
 			this.radioButtonList1.RepeatDirection = GrpCtrl::GroupControls.RepeatDirection.Horizontal;
-			this.radioButtonList1.Size = new System.Drawing.Size(496, 70);
+			this.radioButtonList1.Size = new System.Drawing.Size(496, 51);
 			this.radioButtonList1.TabIndex = 0;
 			// 
 			// closeButton
