@@ -61,16 +61,13 @@ namespace TestTaskService
 				case 8: // Output JSON
 					Program.OutputJson(ts, output);
 					break;
-				case 9: // Task Event Viewer
-					new TaskEventViewer().ShowDialog(this);
-					break;
-				case 10: // Task Watcher Form
+				case 9: // Task Watcher Form
 					new TaskWatcherForm().ShowDialog(this);
 					break;
-				case 11: // Run Code
+				case 10: // Run Code
 					new ScriptTestDlg() { TaskService = ts }.ShowDialog(this);
 					break;
-				case 12: // Fluent
+				case 11: // Fluent
 					Program.FluentTest(ts, output);
 					break;
 				default:
