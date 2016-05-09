@@ -26,9 +26,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		protected void OnTriggerTypeChanged()
 		{
-			EventHandler temp = TriggerTypeChanged;
-			if (temp != null)
-				temp(this, new EventArgs());
+			TriggerTypeChanged?.Invoke(this, new EventArgs());
 		}
 
 		public override Trigger Trigger
@@ -84,16 +82,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (!onAssignment)
 			{
 				var days = new System.Collections.Generic.List<int>(31);
+				bool runOnLastDay = false;
 				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
 				{
 					if ((int)monthlyDaysDropDown.SelectedItems[i].Value == 99)
-					{
-						if (IsV2) ((MonthlyTrigger)trigger).RunOnLastDayOfMonth = true;
-					}
+						runOnLastDay = true;
 					else
 						days.Add((int)monthlyDaysDropDown.SelectedItems[i].Value);
 				}
 				((MonthlyTrigger)trigger).DaysOfMonth = days.ToArray();
+				if (IsV2) ((MonthlyTrigger)trigger).RunOnLastDayOfMonth = runOnLastDay;
 			}
 		}
 

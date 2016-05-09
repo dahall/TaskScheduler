@@ -2182,6 +2182,8 @@ namespace Microsoft.Win32.TaskScheduler
 		protected override string V2GetTriggerString()
 		{
 			string days = string.Join(Properties.Resources.ListSeparator, Array.ConvertAll(DaysOfMonth, delegate(int i) { return i.ToString(); }));
+			if (RunOnLastDayOfMonth)
+				days += (days.Length == 0 ? "" : Properties.Resources.ListSeparator) + Properties.Resources.WWLastWeek;
 			string months = TaskEnumGlobalizer.GetString(MonthsOfYear);
 			return string.Format(Properties.Resources.TriggerMonthly1, AdjustToLocal(StartBoundary), days, months);
 		}
@@ -2484,16 +2486,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 	internal sealed class RepetitionPatternConverter : TypeConverter
 	{
-		/*public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-		{
-			return base.CanConvertFrom(context, sourceType);
-		}
-
-		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			return base.ConvertFrom(context, culture, value);
-		}*/
-
 		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
 			destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
 

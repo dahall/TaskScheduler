@@ -117,6 +117,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="Task"/> that represents the item at the specified position. If there is no item at the specified location, the method returns <c>null</c>.</returns>
 		public Task GetItemAt(int x, int y) => (Task)listView1.GetItemAt(x, y)?.Tag;
 
+		/// <summary>
+		/// Raises the <see cref="E:HandleCreated" /> event.
+		/// </summary>
+		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			listView1.SetExplorerTheme(true);
