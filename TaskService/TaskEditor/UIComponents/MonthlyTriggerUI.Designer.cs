@@ -87,6 +87,7 @@
 			this.monthlyOnWeekDropDown.DropSize = new System.Drawing.Size(121, 106);
 			resources.ApplyResources(this.monthlyOnWeekDropDown, "monthlyOnWeekDropDown");
 			this.monthlyOnWeekDropDown.Name = "monthlyOnWeekDropDown";
+			this.monthlyOnWeekDropDown.RequireAtLeastOneCheckedItem = true;
 			this.monthlyOnWeekDropDown.SelectedIndexChanged += new System.EventHandler(this.monthlyOnWeekDropDown_SelectedItemsChanged);
 			// 
 			// monthlyMonthsDropDown

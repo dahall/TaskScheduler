@@ -48,8 +48,24 @@
 			// dailyRecurNumUpDn
 			// 
 			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
+			this.dailyRecurNumUpDn.Maximum = new decimal(new int[] {
+            32676,
+            0,
+            0,
+            0});
+			this.dailyRecurNumUpDn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.dailyRecurNumUpDn.Name = "dailyRecurNumUpDn";
+			this.dailyRecurNumUpDn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.dailyRecurNumUpDn.ValueChanged += new System.EventHandler(this.dailyRecurNumUpDn_ValueChanged);
+			this.dailyRecurNumUpDn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dailyRecurNumUpDn_KeyPress);
 			// 
 			// dailyDaysLabel
 			// 

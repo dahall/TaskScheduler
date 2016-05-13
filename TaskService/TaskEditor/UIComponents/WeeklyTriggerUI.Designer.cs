@@ -110,8 +110,24 @@
 			// weeklyRecurNumUpDn
 			// 
 			resources.ApplyResources(this.weeklyRecurNumUpDn, "weeklyRecurNumUpDn");
+			this.weeklyRecurNumUpDn.Maximum = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+			this.weeklyRecurNumUpDn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.weeklyRecurNumUpDn.Name = "weeklyRecurNumUpDn";
+			this.weeklyRecurNumUpDn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.weeklyRecurNumUpDn.ValueChanged += new System.EventHandler(this.weeklyRecurNumUpDn_ValueChanged);
+			this.weeklyRecurNumUpDn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weeklyRecurNumUpDn_KeyPress);
 			// 
 			// weeklyOnWeeksLabel
 			// 

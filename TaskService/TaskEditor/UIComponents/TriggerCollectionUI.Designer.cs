@@ -85,6 +85,7 @@
 			this.triggerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.triggerListView.HideSelection = false;
 			this.triggerListView.LargeImageList = this.imageList;
+			this.triggerListView.MultiSelect = false;
 			this.triggerListView.Name = "triggerListView";
 			this.triggerListView.ShowItemToolTips = true;
 			this.triggerListView.UseCompatibleStateImageBehavior = false;

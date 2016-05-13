@@ -87,5 +87,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (!onAssignment)
 				((WeeklyTrigger)trigger).WeeksInterval = Convert.ToInt16(weeklyRecurNumUpDn.Value);
 		}
+
+		private void weeklyRecurNumUpDn_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar.ToString() == System.Globalization.CultureInfo.CurrentUICulture.NumberFormat.NegativeSign)
+				e.Handled = true;
+		}
 	}
 }

@@ -22,8 +22,15 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void dailyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
 		{
+			System.Diagnostics.Debug.WriteIf(!onAssignment, $"DaysInterval: {Convert.ToInt16(dailyRecurNumUpDn.Value)}");
 			if (!onAssignment)
 				((DailyTrigger)trigger).DaysInterval = Convert.ToInt16(dailyRecurNumUpDn.Value);
+		}
+
+		private void dailyRecurNumUpDn_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		{
+			if (e.KeyChar.ToString() == System.Globalization.CultureInfo.CurrentUICulture.NumberFormat.NegativeSign)
+				e.Handled = true;
 		}
 	}
 }

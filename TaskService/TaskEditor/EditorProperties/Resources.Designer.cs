@@ -445,6 +445,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid duration value..
+        /// </summary>
+        internal static string Error_InvalidSpanValue {
+            get {
+                return ResourceManager.GetString("Error_InvalidSpanValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to URI is not in a correct format.
         /// </summary>
         internal static string Error_InvalidUriFormat {

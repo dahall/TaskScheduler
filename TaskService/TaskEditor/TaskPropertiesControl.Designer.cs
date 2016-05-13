@@ -481,6 +481,7 @@
 			this.taskIdleWaitTimeoutCombo.Name = "taskIdleWaitTimeoutCombo";
 			this.helpProvider.SetShowHelp(this.taskIdleWaitTimeoutCombo, ((bool)(resources.GetObject("taskIdleWaitTimeoutCombo.ShowHelp"))));
 			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleWaitTimeoutCombo_ValueChanged);
+			this.taskIdleWaitTimeoutCombo.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// taskIdleDurationCombo
 			// 
@@ -488,6 +489,7 @@
 			this.taskIdleDurationCombo.Name = "taskIdleDurationCombo";
 			this.helpProvider.SetShowHelp(this.taskIdleDurationCombo, ((bool)(resources.GetObject("taskIdleDurationCombo.ShowHelp"))));
 			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskIdleDurationCombo_ValueChanged);
+			this.taskIdleDurationCombo.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// taskRestartOnIdleCheck
 			// 
@@ -645,6 +647,7 @@
 			this.taskDeleteAfterCombo.Name = "taskDeleteAfterCombo";
 			this.helpProvider.SetShowHelp(this.taskDeleteAfterCombo, ((bool)(resources.GetObject("taskDeleteAfterCombo.ShowHelp"))));
 			this.taskDeleteAfterCombo.ValueChanged += new System.EventHandler(this.taskDeleteAfterCombo_ValueChanged);
+			this.taskDeleteAfterCombo.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// taskExecutionTimeLimitCombo
 			// 
@@ -652,6 +655,7 @@
 			this.taskExecutionTimeLimitCombo.Name = "taskExecutionTimeLimitCombo";
 			this.helpProvider.SetShowHelp(this.taskExecutionTimeLimitCombo, ((bool)(resources.GetObject("taskExecutionTimeLimitCombo.ShowHelp"))));
 			this.taskExecutionTimeLimitCombo.ValueChanged += new System.EventHandler(this.taskExecutionTimeLimitCombo_ValueChanged);
+			this.taskExecutionTimeLimitCombo.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// taskRestartIntervalCombo
 			// 
@@ -659,6 +663,7 @@
 			this.taskRestartIntervalCombo.Name = "taskRestartIntervalCombo";
 			this.helpProvider.SetShowHelp(this.taskRestartIntervalCombo, ((bool)(resources.GetObject("taskRestartIntervalCombo.ShowHelp"))));
 			this.taskRestartIntervalCombo.ValueChanged += new System.EventHandler(this.taskRestartIntervalCombo_ValueChanged);
+			this.taskRestartIntervalCombo.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// regInfoTab
 			// 

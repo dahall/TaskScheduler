@@ -633,4 +633,7 @@ Aktion: {3}</value>
   <data name="EventLogTimeDay" xml:space="preserve">
     <value>24 Stunden</value>
   </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>Ungültige Dauerwert.!</value>
+  </data>
 </root>

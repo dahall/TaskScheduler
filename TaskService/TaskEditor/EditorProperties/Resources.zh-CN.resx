@@ -538,4 +538,7 @@
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>任务计划程序无法创建任务。用户帐户是未知的，密码不正确，或者用户帐户没有权限来创建此任务。</value>
   </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>无效的工期值。 ！</value>
+  </data>
 </root>

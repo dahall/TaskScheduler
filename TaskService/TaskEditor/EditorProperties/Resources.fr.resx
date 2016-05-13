@@ -534,4 +534,7 @@ Action : {3}</value>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>Planificateur de tâches ne peut pas créer la tâche. Ne connaît pas le compte d'utilisateur, le mot de passe est incorrect ou le compte d'utilisateur n'a pas l'autorisation pour créer cette tâche.</value>
   </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>Durée non valide valeur. !</value>
+  </data>
 </root>

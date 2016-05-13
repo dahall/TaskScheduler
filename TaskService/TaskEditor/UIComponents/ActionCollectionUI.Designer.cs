@@ -76,6 +76,7 @@
 			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.actionListView.HideSelection = false;
 			this.actionListView.LargeImageList = this.imageList;
+			this.actionListView.MultiSelect = false;
 			this.actionListView.Name = "actionListView";
 			this.actionListView.ShowItemToolTips = true;
 			this.actionListView.UseCompatibleStateImageBehavior = false;
