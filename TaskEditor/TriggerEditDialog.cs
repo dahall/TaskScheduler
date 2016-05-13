@@ -283,7 +283,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!onAssignment)
 			{
 				if (activateCheckBox.Checked)
-					trigger.StartBoundary = activateDatePicker.Value;
+					trigger.StartBoundary = activateDatePicker.Value == DateTimePicker.MinimumDateTime ? DateTime.MinValue : activateDatePicker.Value;
 				else
 					trigger.StartBoundary = DateTime.MinValue;
 				initialStartBoundary = trigger.StartBoundary;
@@ -293,7 +293,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void activateDatePicker_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
-				trigger.StartBoundary = activateDatePicker.Value;
+				trigger.StartBoundary = activateDatePicker.Value == DateTimePicker.MinimumDateTime ? DateTime.MinValue : activateDatePicker.Value;
 		}
 
 		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
@@ -456,6 +456,14 @@ namespace Microsoft.Win32.TaskScheduler
 			// Disable logon trigger options
 			foreach (Control c in logonTab.Controls)
 				c.Enabled = isV2;
+		}
+
+		private void span_Validating(object sender, CancelEventArgs e)
+		{
+			var pkr = sender as TimeSpanPicker;
+			bool valid = pkr != null && pkr.Enabled && pkr.IsTextValid;
+			e.Cancel = !valid;
+			errorProvider.SetError(pkr, valid ? string.Empty : EditorProperties.Resources.Error_InvalidSpanValue);
 		}
 
 		private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)

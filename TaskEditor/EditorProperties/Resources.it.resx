@@ -550,4 +550,7 @@ Azione: {3}</value>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>Utilità di pianificazione non può creare l'attività. L'account utente è sconosciuto, la password non è corretta o l'account utente non dispone dell'autorizzazione per creare questa attività.</value>
   </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>Valore di durata valido.!</value>
+  </data>
 </root>

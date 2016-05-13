@@ -835,6 +835,14 @@ namespace Microsoft.Win32.TaskScheduler
 			taskVersionCombo.EndUpdate();
 		}
 
+		private void span_Validating(object sender, CancelEventArgs e)
+		{
+			var pkr = sender as TimeSpanPicker;
+			bool valid = pkr != null && pkr.Enabled && pkr.IsTextValid;
+			e.Cancel = !valid;
+			errorProvider.SetError(pkr, valid ? string.Empty : EditorProperties.Resources.Error_InvalidSpanValue);
+		}
+
 		private void tabControl_TabIndexChanged(object sender, EventArgs e)
 		{
 			if (task == null)
@@ -1269,7 +1277,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskMaintenanceDeadlineCombo_Validating(object sender, CancelEventArgs e)
 		{
-			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenanceDeadlineCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value);
+			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenanceDeadlineCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value && (taskMaintenanceDeadlineCombo.Enabled && taskMaintenanceDeadlineCombo.IsTextValid));
 			errorProvider.SetError(taskMaintenanceDeadlineCombo, valid ? string.Empty : EditorProperties.Resources.Error_MaintenanceDeadlineLimit);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, EditorProperties.Resources.Error_MaintenanceDeadlineLimit));
 			HasError = valid;
@@ -1292,7 +1300,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskMaintenancePeriodCombo_Validating(object sender, CancelEventArgs e)
 		{
-			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenancePeriodCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value);
+			bool valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenancePeriodCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value && (taskMaintenancePeriodCombo.Enabled && taskMaintenancePeriodCombo.IsTextValid));
 			errorProvider.SetError(taskMaintenancePeriodCombo, valid ? string.Empty : EditorProperties.Resources.Error_MaintenanceDeadlineLimit);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, EditorProperties.Resources.Error_MaintenanceDeadlineLimit));
 			HasError = valid;

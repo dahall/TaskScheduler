@@ -268,9 +268,17 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private static DateTime ConstrainedDateTime(DateTime value)
+		{
+			DateTime displayTime = value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value;
+			if (displayTime > DateTimePicker.MaximumDateTime) displayTime = DateTimePicker.MaximumDateTime;
+			if (displayTime < DateTimePicker.MinimumDateTime) displayTime = DateTimePicker.MinimumDateTime;
+			return displayTime;
+		}
+
 		private void DataToControls()
 		{
-			DateTime displayTime = currentValue.Kind == DateTimeKind.Utc ? currentValue.ToLocalTime() : currentValue;
+			DateTime displayTime = ConstrainedDateTime(currentValue);
 			dateTimePickerDate.Value = displayTime.Date;
 			dateTimePickerTime.Value = displayTime;
 			if (!string.IsNullOrEmpty(utcPrompt))

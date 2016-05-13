@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TriggerEditDialog));
 			this.triggerTypeLabel = new System.Windows.Forms.Label();
 			this.triggerTypeCombo = new System.Windows.Forms.ComboBox();
@@ -75,6 +76,7 @@
 			this.okBtn = new System.Windows.Forms.Button();
 			this.triggerIdText = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
+			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
@@ -85,6 +87,7 @@
 			this.onEventTab.SuspendLayout();
 			this.customTab.SuspendLayout();
 			this.advSettingsGroup.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// triggerTypeLabel
@@ -300,24 +303,28 @@
 			resources.ApplyResources(this.stopIfRunsSpan, "stopIfRunsSpan");
 			this.stopIfRunsSpan.Name = "stopIfRunsSpan";
 			this.stopIfRunsSpan.ValueChanged += new System.EventHandler(this.stopIfRunsSpan_ValueChanged);
+			this.stopIfRunsSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// durationSpan
 			// 
 			resources.ApplyResources(this.durationSpan, "durationSpan");
 			this.durationSpan.Name = "durationSpan";
 			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
+			this.durationSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// repeatSpan
 			// 
 			resources.ApplyResources(this.repeatSpan, "repeatSpan");
 			this.repeatSpan.Name = "repeatSpan";
 			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
+			this.repeatSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// delaySpan
 			// 
 			resources.ApplyResources(this.delaySpan, "delaySpan");
 			this.delaySpan.Name = "delaySpan";
 			this.delaySpan.ValueChanged += new System.EventHandler(this.delaySpan_ValueChanged);
+			this.delaySpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// expireDatePicker
 			// 
@@ -413,6 +420,10 @@
 			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
 			// 
+			// errorProvider
+			// 
+			this.errorProvider.ContainerControl = this;
+			// 
 			// TriggerEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
@@ -447,6 +458,7 @@
 			this.customTab.PerformLayout();
 			this.advSettingsGroup.ResumeLayout(false);
 			this.advSettingsGroup.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -500,5 +512,6 @@
 		private Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI calendarTriggerUI1;
 		private System.Windows.Forms.TextBox triggerIdText;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.ErrorProvider errorProvider;
 	}
 }

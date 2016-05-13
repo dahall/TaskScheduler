@@ -546,4 +546,7 @@ Acción : {3}</value>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
     <value>Programador de tareas no puede crear la tarea. Se desconoce la cuenta de usuario, la contraseña es incorrecta, o la cuenta de usuario no tiene permiso para crear esta tarea.</value>
   </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>Valor de duración válida.!</value>
+  </data>
 </root>
