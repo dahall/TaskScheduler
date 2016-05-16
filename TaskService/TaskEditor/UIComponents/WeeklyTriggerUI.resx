@@ -493,6 +493,6 @@
     <value>WeeklyTriggerUI</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.BaseTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.20.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.BaseTriggerUI, Microsoft.Win32.TaskSchedulerEditor</value>
   </data>
 </root>

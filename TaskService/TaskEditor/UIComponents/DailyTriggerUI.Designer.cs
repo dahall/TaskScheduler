@@ -49,7 +49,7 @@
 			// 
 			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
 			this.dailyRecurNumUpDn.Maximum = new decimal(new int[] {
-            32676,
+            365,
             0,
             0,
             0});
