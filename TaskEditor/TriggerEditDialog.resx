@@ -193,7 +193,7 @@
     <value>calendarTriggerUI1</value>
   </data>
   <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.20.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor</value>
   </data>
   <data name="&gt;&gt;calendarTriggerUI1.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -595,7 +595,7 @@
     <value>eventTriggerUI1</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.20.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
     <value>onEventTab</value>
@@ -895,7 +895,7 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.20.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
@@ -922,7 +922,7 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.20.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
     <value>advSettingsGroup</value>
