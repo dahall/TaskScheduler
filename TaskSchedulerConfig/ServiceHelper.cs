@@ -1,11 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.ServiceProcess;
 
-namespace TaskSchedulerConfig
+namespace System.ServiceProcess
 {
-	internal static class ServiceHelper
+	internal static class ServiceControllerExtensions
 	{
 		[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
