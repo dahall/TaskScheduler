@@ -18,9 +18,7 @@ namespace System.Security.Policy
 		{
 			LSA_UNICODE_STRING systemName = server;
 			LSA_OBJECT_ATTRIBUTES objectAttributes = LSA_OBJECT_ATTRIBUTES.Empty;
-			var ret = LsaNtStatusToWinError(LsaOpenPolicy(systemName, ref objectAttributes, 0x000F0000 | (int)accessRights, out handle)); // Add in STANDARD_RIGHTS_REQUIRED
-			if (ret != 0)
-				throw new System.ComponentModel.Win32Exception(ret);
+			ThrowIfLsaError(LsaOpenPolicy(systemName, ref objectAttributes, 0x000F0000 | (int)accessRights, out handle)); // Add in STANDARD_RIGHTS_REQUIRED
 			svr = server;
 		}
 
@@ -78,19 +76,38 @@ namespace System.Security.Policy
 			AllAccess = 0xFFF,
 		}
 
+		/// <summary>Account rights determine the type of logon that a user account can perform. An administrator assigns account rights to user and group accounts. Each user's account rights include those granted to the user and to the groups to which the user belongs.</summary>
 		[Flags]
 		public enum LsaSecurityAccessRights : int
 		{
+			/// <summary>Required for an account to log on using the interactive logon type.</summary>
 			InteractiveLogon = 0x00000001,
+
+			/// <summary>Required for an account to log on using the network logon type.</summary>
 			NetworkLogon = 0x00000002,
+
+			/// <summary>Required for an account to log on using the batch logon type.</summary>
 			BatchLogon = 0x00000004,
+
+			/// <summary>Required for an account to log on using the service logon type.</summary>
 			ServiceLogon = 0x00000010,
-			ProxyLogon = 0x00000020,
+
+			/// <summary>Explicitly denies an account the right to log on using the interactive logon type.</summary>
 			DenyInteractiveLogon = 0x00000040,
+
+			/// <summary>Explicitly denies an account the right to log on using the network logon type.</summary>
 			DenyNetworkLogon = 0x00000080,
+
+			/// <summary>Explicitly denies an account the right to log on using the batch logon type.</summary>
 			DenyBatchLogon = 0x00000100,
+
+			/// <summary>Explicitly denies an account the right to log on using the service logon type.</summary>
 			DenyServiceLogon = 0x00000200,
+
+			/// <summary>Remote interactive logon</summary>
 			RemoteInteractiveLogon = 0x00000400,
+
+			/// <summary>Explicitly denies an account the right to log on remotely using the interactive logon type.</summary>
 			DenyRemoteInteractiveLogon = 0x00000800,
 		}
 
@@ -124,9 +141,7 @@ namespace System.Security.Policy
 		{
 			SafeLsaMemoryHandle buffer;
 			int count;
-			int res = LsaNtStatusToWinError(LsaEnumerateAccountsWithUserRight(handle, privilege, out buffer, out count));
-			if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+			ThrowIfLsaError(LsaEnumerateAccountsWithUserRight(handle, privilege, out buffer, out count));
 			return Array.ConvertAll(buffer.DangerousGetHandle().ToArray<LSA_ENUMERATION_INFORMATION>(count), i => new Principal.SecurityIdentifier(i.Sid));
 		}
 
@@ -183,9 +198,7 @@ namespace System.Security.Policy
 		private void AddRight(string accountName, string privilegeName)
 		{
 			LSA_UNICODE_STRING[] userRights = new LSA_UNICODE_STRING[] { privilegeName };
-			int res = LsaNtStatusToWinError(LsaAddAccountRights(handle, GetSid(accountName), userRights, userRights.Length));
-			if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+			ThrowIfLsaError(LsaAddAccountRights(handle, GetSid(accountName), userRights, userRights.Length));
 		}
 
 		private SafeLsaHandle GetAccount(string accountName, LsaAccountAccessMask mask = LsaAccountAccessMask.View)
@@ -194,11 +207,7 @@ namespace System.Security.Policy
 			SafeLsaHandle hAcct;
 			int res = LsaNtStatusToWinError(LsaOpenAccount(handle, sid, mask, out hAcct));
 			if (res == 2)
-			{
-				res = LsaNtStatusToWinError(LsaCreateAccount(handle, sid, mask, out hAcct));
-				if (res != 0)
-					throw new System.ComponentModel.Win32Exception(res);
-			}
+				ThrowIfLsaError(LsaCreateAccount(handle, sid, mask, out hAcct));
 			else if (res != 0)
 				throw new System.ComponentModel.Win32Exception(res);
 			return hAcct;
@@ -233,26 +242,27 @@ namespace System.Security.Policy
 		private LsaSecurityAccessRights GetSystemAccess(SafeLsaHandle hAcct)
 		{
 			int rights;
-			int res = LsaNtStatusToWinError(LsaGetSystemAccessAccount(hAcct, out rights));
-			if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+			ThrowIfLsaError(LsaGetSystemAccessAccount(hAcct, out rights));
 			return (LsaSecurityAccessRights)rights;
 		}
 
 		private void RemoveRight(string accountName, string privilegeName)
 		{
 			LSA_UNICODE_STRING[] userRights = new LSA_UNICODE_STRING[] { privilegeName };
-			int res = LsaNtStatusToWinError(LsaRemoveAccountRights(handle, GetSid(accountName), userRights, userRights.Length));
-			if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+			ThrowIfLsaError(LsaRemoveAccountRights(handle, GetSid(accountName), userRights, userRights.Length));
 		}
 
 		private void SetSystemAccess(SafeLsaHandle hAcct, LsaSecurityAccessRights rights)
 		{
 			LsaSecurityAccessRights cur = GetSystemAccess(hAcct);
-			int res = LsaNtStatusToWinError(LsaSetSystemAccessAccount(hAcct, (int)(cur | rights)));
-			if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+			ThrowIfLsaError(LsaSetSystemAccessAccount(hAcct, (int)(cur | rights)));
+		}
+
+		private static void ThrowIfLsaError(int lsaRetVal)
+		{
+			int ret = LsaNtStatusToWinError(lsaRetVal);
+			if (ret != 0)
+				throw new System.ComponentModel.Win32Exception(ret);
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -272,6 +282,42 @@ namespace System.Security.Policy
 			private IntPtr SecurityQualityOfService;
 
 			public static LSA_OBJECT_ATTRIBUTES Empty => new LSA_OBJECT_ATTRIBUTES { Length = Marshal.SizeOf(typeof(LSA_OBJECT_ATTRIBUTES)) };
+		}
+
+		/// <summary>Allows for the privileges of a user to be retrieved, enumerated and set.</summary>
+		/// <seealso cref="System.Collections.Generic.IEnumerable{System.String}"/>
+		public class Rights : IEnumerable<string>
+		{
+			private LocalSecurity ctrl;
+			private string user;
+
+			/// <summary>Initializes a new instance of the <see cref="Rights"/> class.</summary>
+			/// <param name="parent">The parent.</param>
+			/// <param name="userName">Name of the user.</param>
+			public Rights(LocalSecurity parent, string userName = null)
+			{
+				ctrl = parent; user = userName ?? CurrentUserName;
+			}
+
+			private static string CurrentUserName => System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+			/// <summary>Gets or sets the enablement of the specified privilege.</summary>
+			/// <value><c>true</c> if the specified privilege is enabled; otherwise <c>false</c>.</value>
+			/// <param name="right">The name of the privilege.</param>
+			/// <returns>A value that represents the enablement of the specified privilege.</returns>
+			public bool this[string right]
+			{
+				get { return Array.IndexOf(ctrl.GetRights(user), right) != -1; }
+				set { if (value) ctrl.AddRight(user, right); else ctrl.RemoveRight(user, right); }
+			}
+
+			Collections.IEnumerator Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+			/// <summary>Returns an enumerator that iterates all of the user's current privileges.</summary>
+			/// <returns>
+			/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+			/// </returns>
+			public IEnumerator<string> GetEnumerator() => Array.AsReadOnly(ctrl.GetRights(user)).GetEnumerator();
 		}
 
 		/// <summary>Allows for the privileges of a user to be retrieved, enumerated and set.</summary>
@@ -312,42 +358,6 @@ namespace System.Security.Policy
 					ctrl.SetSystemAccess(hAcct, cur);
 				}
 			}
-		}
-
-		/// <summary>Allows for the privileges of a user to be retrieved, enumerated and set.</summary>
-		/// <seealso cref="System.Collections.Generic.IEnumerable{System.String}"/>
-		public class Rights : IEnumerable<string>
-		{
-			private LocalSecurity ctrl;
-			private string user;
-
-			/// <summary>Initializes a new instance of the <see cref="Rights"/> class.</summary>
-			/// <param name="parent">The parent.</param>
-			/// <param name="userName">Name of the user.</param>
-			public Rights(LocalSecurity parent, string userName = null)
-			{
-				ctrl = parent; user = userName ?? CurrentUserName;
-			}
-
-			private static string CurrentUserName => System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-
-			/// <summary>Gets or sets the enablement of the specified privilege.</summary>
-			/// <value><c>true</c> if the specified privilege is enabled; otherwise <c>false</c>.</value>
-			/// <param name="right">The name of the privilege.</param>
-			/// <returns>A value that represents the enablement of the specified privilege.</returns>
-			public bool this[string right]
-			{
-				get { return Array.IndexOf(ctrl.GetRights(user), right) != -1; }
-				set { if (value) ctrl.AddRight(user, right); else ctrl.RemoveRight(user, right); }
-			}
-
-			Collections.IEnumerator Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-
-			/// <summary>Returns an enumerator that iterates all of the user's current privileges.</summary>
-			/// <returns>
-			/// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-			/// </returns>
-			public IEnumerator<string> GetEnumerator() => Array.AsReadOnly(ctrl.GetRights(user)).GetEnumerator();
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -397,29 +407,47 @@ namespace System.Security.Policy
 
 		private sealed class SafeLsaHandle : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
 		{
-			public SafeLsaHandle() : base(true) { }
+			public SafeLsaHandle() : base(true)
+			{
+			}
 
-			internal SafeLsaHandle(IntPtr ptr) : base(true) { SetHandle(ptr); }
+			internal SafeLsaHandle(IntPtr ptr) : base(true)
+			{
+				SetHandle(ptr);
+			}
 
 			protected override bool ReleaseHandle() => LsaClose(handle) == 0;
 		}
 
 		private sealed class SafeLsaMemoryHandle : SafeBuffer
 		{
-			public SafeLsaMemoryHandle() : base(true) { }
+			public SafeLsaMemoryHandle() : base(true)
+			{
+			}
 
-			internal SafeLsaMemoryHandle(IntPtr ptr) : base(true) { SetHandle(ptr); }
+			internal SafeLsaMemoryHandle(IntPtr ptr) : base(true)
+			{
+				SetHandle(ptr);
+			}
 
 			protected override bool ReleaseHandle() => LsaFreeMemory(handle) == 0;
 		}
 
 		private sealed class SafeMemoryHandle : SafeBuffer
 		{
-			public SafeMemoryHandle() : base(true) { }
+			public SafeMemoryHandle() : base(true)
+			{
+			}
 
-			public SafeMemoryHandle(int bytes) : base(true) { SetHandle(Marshal.AllocHGlobal(bytes)); }
+			public SafeMemoryHandle(int bytes) : base(true)
+			{
+				SetHandle(Marshal.AllocHGlobal(bytes));
+			}
 
-			internal SafeMemoryHandle(IntPtr ptr) : base(true) { SetHandle(ptr); }
+			internal SafeMemoryHandle(IntPtr ptr) : base(true)
+			{
+				SetHandle(ptr);
+			}
 
 			protected override bool ReleaseHandle()
 			{
