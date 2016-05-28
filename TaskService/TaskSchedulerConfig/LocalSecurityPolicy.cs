@@ -10,6 +10,11 @@ namespace System.Security.Policy
 		private SafeLsaHandle handle;
 		private string svr;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LocalSecurity"/> class.
+		/// </summary>
+		public LocalSecurity() : this(null) { }
+
 		/// <summary>Initializes a new instance of the <see cref="LocalSecurity"/> class.</summary>
 		/// <param name="server">The server. Use <c>null</c> for the local server.</param>
 		/// <param name="accessRights">The access rights mask for the actions to be taken.</param>
