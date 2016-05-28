@@ -188,14 +188,14 @@ namespace System.Security.Policy
 				throw new System.ComponentModel.Win32Exception(res);
 		}
 
-		private SafeLsaHandle GetAccount(string accountName)
+		private SafeLsaHandle GetAccount(string accountName, LsaAccountAccessMask mask = LsaAccountAccessMask.View)
 		{
 			var sid = GetSid(accountName);
 			SafeLsaHandle hAcct;
-			int res = LsaNtStatusToWinError(LsaOpenAccount(handle, sid, LsaAccountAccessMask.View, out hAcct));
+			int res = LsaNtStatusToWinError(LsaOpenAccount(handle, sid, mask, out hAcct));
 			if (res == 2)
 			{
-				res = LsaNtStatusToWinError(LsaCreateAccount(handle, sid, LsaAccountAccessMask.View, out hAcct));
+				res = LsaNtStatusToWinError(LsaCreateAccount(handle, sid, mask, out hAcct));
 				if (res != 0)
 					throw new System.ComponentModel.Win32Exception(res);
 			}
@@ -300,8 +300,11 @@ namespace System.Security.Policy
 				get { return (ctrl.GetSystemAccess(ctrl.GetAccount(user)) & right) == right; }
 				set
 				{
-					var hAcct = ctrl.GetAccount(user);
+					var hAcct = ctrl.GetAccount(user, LsaAccountAccessMask.View | LsaAccountAccessMask.AdjustSystemAccess);
 					var cur = ctrl.GetSystemAccess(hAcct);
+					bool hasFlag = cur.HasFlag(right);
+					if ((hasFlag && value) || (!hasFlag && !value))
+						return;
 					if (value)
 						cur |= right;
 					else
