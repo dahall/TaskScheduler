@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
-namespace TaskSchedulerConfig
+namespace System.IO
 {
-	public static class FileSystemEffectiveRights
+	internal static class FileSystemInfoExtensions
 	{
 		/// <summary>Determines the effective access rights for the given user.</summary>
 		/// <param name="path">The directory.</param>

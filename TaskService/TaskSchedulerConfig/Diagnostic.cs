@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Policy;
 using System.Security.Principal;
+using System.ServiceProcess;
 
 namespace TaskSchedulerConfig
 {
