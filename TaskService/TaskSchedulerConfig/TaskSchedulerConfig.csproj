@@ -58,7 +58,6 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CommandLineArguments.cs" />
     <Compile Include="CommandLink.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -75,7 +74,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Reporter.cs" />
     <Compile Include="UAC.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="WizardForm.cs">
