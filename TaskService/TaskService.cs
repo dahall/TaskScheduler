@@ -9,37 +9,21 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public enum QuickTriggerType
 	{
-		/// <summary>
-		/// At boot.
-		/// </summary>
+		/// <summary>At boot.</summary>
 		Boot,
-		/// <summary>
-		/// On system idle.
-		/// </summary>
+		/// <summary>On system idle.</summary>
 		Idle,
-		/// <summary>
-		/// At logon of any user.
-		/// </summary>
+		/// <summary>At logon of any user.</summary>
 		Logon,
-		/// <summary>
-		/// When the task is registered.
-		/// </summary>
+		/// <summary>When the task is registered.</summary>
 		TaskRegistration,
-		/// <summary>
-		/// Hourly, starting now.
-		/// </summary>
+		/// <summary>Hourly, starting now.</summary>
 		Hourly,
-		/// <summary>
-		/// Daily, starting now.
-		/// </summary>
+		/// <summary>Daily, starting now.</summary>
 		Daily,
-		/// <summary>
-		/// Weekly, starting now.
-		/// </summary>
+		/// <summary>Weekly, starting now.</summary>
 		Weekly,
-		/// <summary>
-		/// Monthly, starting now.
-		/// </summary>
+		/// <summary>Monthly, starting now.</summary>
 		Monthly
 	}
 
@@ -255,15 +239,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// Local user <see cref="TaskService"/> instance.
 		/// </value>
-		public static TaskService Instance
-		{
-			get
-			{
-				if (instance == null)
-					instance = new TaskService();
-				return instance;
-			}
-		}
+		public static TaskService Instance => instance ?? (instance = new TaskService());
 
 		/// <summary>
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
@@ -308,9 +284,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a value indicating whether the component can raise an event.
 		/// </summary>
-		/// <value></value>
-		/// <returns>true if the component can raise events; otherwise, false. The default is true.
-		/// </returns>
 		protected override bool CanRaiseEvents { get; } = false;
 
 		/// <summary>
@@ -346,12 +319,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="UserId">The user credentials used to register the task.</param>
 		/// <param name="Password">The password for the userId used to register the task.</param>
 		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="description">The task description.</param>
 		/// <returns>
 		/// A <see cref="Task"/> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, Trigger trigger, Action action, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken)
+		public Task AddTask(string path, Trigger trigger, Action action, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			TaskDefinition td = NewTask();
+			if (!string.IsNullOrEmpty(description))
+				td.RegistrationInfo.Description = description;
 
 			// Create a trigger that will fire the task at a specific date and time
 			td.Triggers.Add(trigger);
@@ -373,51 +349,46 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="UserId">The user credentials used to register the task.</param>
 		/// <param name="Password">The password for the userId used to register the task.</param>
 		/// <param name="LogonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="description">The task description.</param>
 		/// <returns>
 		/// A <see cref="Task" /> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken)
+		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken, string description = null)
 		{
-			TaskDefinition td = NewTask();
-
 			// Create a trigger based on quick trigger
+			Trigger newTrigger = null;
 			switch (trigger)
 			{
 				case QuickTriggerType.Boot:
-					td.Triggers.Add(new BootTrigger());
+					newTrigger = new BootTrigger();
 					break;
 				case QuickTriggerType.Idle:
-					td.Triggers.Add(new IdleTrigger());
+					newTrigger = new IdleTrigger();
 					break;
 				case QuickTriggerType.Logon:
-					td.Triggers.Add(new LogonTrigger());
+					newTrigger = new LogonTrigger();
 					break;
 				case QuickTriggerType.TaskRegistration:
-					td.Triggers.Add(new RegistrationTrigger());
+					newTrigger = new RegistrationTrigger();
 					break;
 				case QuickTriggerType.Hourly:
-					var dt = new DailyTrigger();
-					dt.SetRepetition(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false);
-					td.Triggers.Add(dt);
+					newTrigger = new DailyTrigger();
+					((DailyTrigger)newTrigger).SetRepetition(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false);
 					break;
 				case QuickTriggerType.Daily:
-					td.Triggers.Add(new DailyTrigger());
+					newTrigger = new DailyTrigger();
 					break;
 				case QuickTriggerType.Weekly:
-					td.Triggers.Add(new WeeklyTrigger());
+					newTrigger = new WeeklyTrigger();
 					break;
 				case QuickTriggerType.Monthly:
-					td.Triggers.Add(new MonthlyTrigger());
+					newTrigger = new MonthlyTrigger();
 					break;
 				default:
 					break;
 			}
 
-			// Create an action that will launch Notepad whenever the trigger fires
-			td.Actions.Add(exePath, arguments);
-
-			// Register the task in the root folder
-			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);
+			return AddTask(path, newTrigger, new ExecAction(exePath, arguments), UserId, Password, LogonType, description);
 		}
 
 		/// <summary>
