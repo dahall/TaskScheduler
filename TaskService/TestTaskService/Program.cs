@@ -74,7 +74,7 @@ namespace TestTaskService
 		{
 			try
 			{
-				Task t = ts.FindTask(arg[0]);
+				Task t = (arg.Length > 0 && !string.IsNullOrEmpty(arg[0])) ? (arg[0].StartsWith("\\") ? ts.GetTask(arg[0]) : ts.FindTask(arg[0])) : null;
 				if (t == null)
 					output.WriteLine($"Task '{arg[0]}' not found.");
 				else
@@ -759,9 +759,7 @@ namespace TestTaskService
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
 				if (isV12) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
 				if (isV12) tTrigger.Id = "Time test";
-				tTrigger.Repetition.Duration = TimeSpan.FromMinutes(21);
-				tTrigger.Repetition.Interval = TimeSpan.FromMinutes(17);
-				tTrigger.Repetition.StopAtDurationEnd = true;
+				tTrigger.Repetition = new RepetitionPattern(TimeSpan.FromMinutes(17), TimeSpan.FromMinutes(21), true);
 
 				WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
 				wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
@@ -954,12 +952,8 @@ namespace TestTaskService
 				td.Triggers.Add(new BootTrigger());
 				td.Triggers.Add(new LogonTrigger());
 				td.Triggers.Add(new IdleTrigger());
-				TimeTrigger tt = (TimeTrigger)td.Triggers.Add(new TimeTrigger() { Enabled = false, EndBoundary = DateTime.Now.AddYears(1) });
-				tt.Repetition.Duration = TimeSpan.FromHours(4);
-				tt.Repetition.Interval = TimeSpan.FromHours(1);
-				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger(3) { Enabled = false });
-				dt.Repetition.Duration = TimeSpan.FromHours(24);
-				dt.Repetition.Interval = TimeSpan.FromHours(2);
+				TimeTrigger tt = (TimeTrigger)td.Triggers.Add(new TimeTrigger() { Enabled = false, EndBoundary = DateTime.Now.AddYears(1), Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromHours(4)) });
+				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger(3) { Enabled = false, Repetition = new RepetitionPattern(TimeSpan.FromHours(2), TimeSpan.FromHours(24)) });
 				td.Triggers.Add(new MonthlyDOWTrigger { DaysOfWeek = DaysOfTheWeek.AllDays, MonthsOfYear = MonthsOfTheYear.AllMonths, WeeksOfMonth = WhichWeek.FirstWeek, RunOnLastWeekOfMonth = true });
 				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new int[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
 				td.Triggers.Add(new WeeklyTrigger(DaysOfTheWeek.Saturday, 2));

@@ -372,8 +372,7 @@ namespace Microsoft.Win32.TaskScheduler
 					newTrigger = new RegistrationTrigger();
 					break;
 				case QuickTriggerType.Hourly:
-					newTrigger = new DailyTrigger();
-					((DailyTrigger)newTrigger).SetRepetition(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false);
+					newTrigger = new DailyTrigger { Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false) };
 					break;
 				case QuickTriggerType.Daily:
 					newTrigger = new DailyTrigger();
