@@ -207,7 +207,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return v2Trigger.Enabled;
-				return !((v1TriggerData.Flags & V1Interop.TaskTriggerFlags.Disabled) == V1Interop.TaskTriggerFlags.Disabled);
+				return !v1TriggerData.Flags.IsFlagSet(V1Interop.TaskTriggerFlags.Disabled);
 			}
 			set
 			{
@@ -215,14 +215,11 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.Enabled = value;
 				else
 				{
-					if (!value)
-						v1TriggerData.Flags |= V1Interop.TaskTriggerFlags.Disabled;
-					else
-						v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.Disabled;
+					v1TriggerData.Flags.SetFlags(V1Interop.TaskTriggerFlags.Disabled, !value);
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["Enabled"] = value;
+						unboundValues[nameof(Enabled)] = value;
 				}
 			}
 		}
@@ -245,7 +242,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return string.IsNullOrEmpty(v2Trigger.EndBoundary) ? DateTime.MaxValue : DateTime.Parse(v2Trigger.EndBoundary, DefaultDateCulture);
-				return (unboundValues!=null && unboundValues.ContainsKey("EndBoundary")) ? (DateTime)unboundValues["EndBoundary"] : v1TriggerData.EndDate;
+				return GetUnboundValueOrDefault(nameof(EndBoundary), v1TriggerData.EndDate.GetValueOrDefault(DateTime.MaxValue));
 			}
 			set
 			{
@@ -253,11 +250,11 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.EndBoundary = value == DateTime.MaxValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
 				else
 				{
-					v1TriggerData.EndDate = value;
+					v1TriggerData.EndDate = value == DateTime.MaxValue ? (DateTime?)null : value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["EndBoundary"] = value;
+						unboundValues[nameof(EndBoundary)] = value;
 				}
 			}
 		}
@@ -274,7 +271,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(v2Trigger.ExecutionTimeLimit);
-				return ((unboundValues!=null && unboundValues.ContainsKey("ExecutionTimeLimit")) ? (TimeSpan)unboundValues["ExecutionTimeLimit"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(ExecutionTimeLimit), TimeSpan.Zero);
 			}
 			set
 			{
@@ -283,7 +280,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["ExecutionTimeLimit"] = value;
+					unboundValues[nameof(ExecutionTimeLimit)] = value;
 			}
 		}
 
@@ -299,7 +296,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return v2Trigger.Id;
-				return (unboundValues.ContainsKey("Id") ? (string)unboundValues["Id"] : null);
+				return GetUnboundValueOrDefault<string>(nameof(Id));
 			}
 			set
 			{
@@ -308,7 +305,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["Id"] = value;
+					unboundValues[nameof(Id)] = value;
 			}
 		}
 
@@ -322,6 +319,10 @@ namespace Microsoft.Win32.TaskScheduler
 				if (repititionPattern == null)
 					repititionPattern = new RepetitionPattern(this);
 				return repititionPattern;
+			}
+			set
+			{
+				Repetition.Set(value);
 			}
 		}
 
@@ -364,7 +365,7 @@ namespace Microsoft.Win32.TaskScheduler
 						return ret;
 					}
 				}
-				return (unboundValues!=null && unboundValues.ContainsKey("StartBoundary")) ? (DateTime)unboundValues["StartBoundary"] : v1TriggerData.BeginDate;
+				return GetUnboundValueOrDefault(nameof(StartBoundary), v1TriggerData.BeginDate);
 			}
 			set
 			{
@@ -376,7 +377,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["StartBoundary"] = value;
+						unboundValues[nameof(StartBoundary)] = value;
 				}
 			}
 		}
@@ -507,6 +508,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="interval">The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</param>
 		/// <param name="duration">The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.</param>
 		/// <param name="stopAtDurationEnd">if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
+		[Obsolete("Set the Repetition property directly with a new instance of RepetitionPattern.", false)]
 		public void SetRepetition(TimeSpan interval, TimeSpan duration, bool stopAtDurationEnd = true)
 		{
 			Repetition.Duration = duration;
@@ -727,6 +729,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets the unbound value or a default.
+		/// </summary>
+		/// <typeparam name="T">Return type.</typeparam>
+		/// <param name="prop">The property name.</param>
+		/// <param name="def">The default value if not found in unbound value list.</param>
+		/// <returns>The unbound value, if set, or the default value.</returns>
+		protected T GetUnboundValueOrDefault<T>(string prop, T def = default(T))
+		{
+			object val;
+			return unboundValues.TryGetValue(prop, out val) ? (T)val : def;
+		}
+
+		/// <summary>
 		/// Gets the non-localized trigger string for V2 triggers.
 		/// </summary>
 		/// <returns>String describing the trigger.</returns>
@@ -825,7 +840,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IBootTrigger)v2Trigger).Delay);
-				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -834,7 +849,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["Delay"] = value;
+					unboundValues[nameof(Delay)] = value;
 			}
 		}
 
@@ -1084,7 +1099,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["DaysInterval"] = value;
+						unboundValues[nameof(DaysInterval)] = value;
 				}
 			}
 		}
@@ -1101,7 +1116,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IDailyTrigger)v2Trigger).RandomDelay);
-				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -1110,7 +1125,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RandomDelay"] = value;
+					unboundValues[nameof(RandomDelay)] = value;
 			}
 		}
 
@@ -1225,14 +1240,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IEventTrigger)v2Trigger).Delay);
-				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					unboundValues["Delay"] = value;
+					unboundValues[nameof(Delay)] = value;
 			}
 		}
 
@@ -1246,14 +1261,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IEventTrigger)v2Trigger).Subscription;
-				return (unboundValues.ContainsKey("Subscription") ? (string)unboundValues["Subscription"] : null);
+				return GetUnboundValueOrDefault<string>(nameof(Subscription));
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.IEventTrigger)v2Trigger).Subscription = value;
 				else
-					unboundValues["Subscription"] = value;
+					unboundValues[nameof(Subscription)] = value;
 			}
 		}
 
@@ -1488,7 +1503,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ILogonTrigger)v2Trigger).Delay);
-				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -1497,7 +1512,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["Delay"] = value;
+					unboundValues[nameof(Delay)] = value;
 			}
 		}
 
@@ -1517,7 +1532,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ILogonTrigger)v2Trigger).UserId;
-				return (unboundValues.ContainsKey("UserId") ? (string)unboundValues["UserId"] : null);
+				return GetUnboundValueOrDefault<string>(nameof(UserId));
 			}
 			set
 			{
@@ -1526,7 +1541,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["UserId"] = value;
+					unboundValues[nameof(UserId)] = value;
 			}
 		}
 
@@ -1597,7 +1612,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["DaysOfWeek"] = (short)value;
+						unboundValues[nameof(DaysOfWeek)] = (short)value;
 				}
 			}
 		}
@@ -1624,7 +1639,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["MonthsOfYear"] = (short)value;
+						unboundValues[nameof(MonthsOfYear)] = (short)value;
 				}
 			}
 		}
@@ -1641,7 +1656,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IMonthlyDOWTrigger)v2Trigger).RandomDelay);
-				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -1650,7 +1665,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RandomDelay"] = value;
+					unboundValues[nameof(RandomDelay)] = value;
 			}
 		}
 
@@ -1666,7 +1681,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth;
-				return (unboundValues.ContainsKey("RunOnLastWeekOfMonth") ? (bool)unboundValues["RunOnLastWeekOfMonth"] : false);
+				return GetUnboundValueOrDefault(nameof(RunOnLastWeekOfMonth), false);
 			}
 			set
 			{
@@ -1675,7 +1690,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RunOnLastWeekOfMonth"] = value;
+					unboundValues[nameof(RunOnLastWeekOfMonth)] = value;
 			}
 		}
 
@@ -1698,7 +1713,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					return v1TriggerData.Data.monthlyDOW.V2WhichWeek;
 				else
-					return (unboundValues.ContainsKey("WeeksOfMonth") ? (WhichWeek)unboundValues["WeeksOfMonth"] : WhichWeek.FirstWeek);
+					return GetUnboundValueOrDefault(nameof(WeeksOfMonth), WhichWeek.FirstWeek);
 			}
 			set
 			{
@@ -1717,7 +1732,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["WeeksOfMonth"] = (short)value;
+						unboundValues[nameof(WeeksOfMonth)] = (short)value;
 				}
 			}
 		}
@@ -1962,7 +1977,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["DaysOfMonth"] = mask;
+						unboundValues[nameof(DaysOfMonth)] = mask;
 				}
 			}
 		}
@@ -1989,7 +2004,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["MonthsOfYear"] = (short)value;
+						unboundValues[nameof(MonthsOfYear)] = (short)value;
 				}
 			}
 		}
@@ -2006,7 +2021,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IMonthlyTrigger)v2Trigger).RandomDelay);
-				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -2015,7 +2030,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RandomDelay"] = value;
+					unboundValues[nameof(RandomDelay)] = value;
 			}
 		}
 
@@ -2031,7 +2046,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.IMonthlyTrigger)v2Trigger).RunOnLastDayOfMonth;
-				return (unboundValues.ContainsKey("RunOnLastDayOfMonth") ? (bool)unboundValues["RunOnLastDayOfMonth"] : false);
+				return GetUnboundValueOrDefault(nameof(RunOnLastDayOfMonth), false);
 			}
 			set
 			{
@@ -2040,7 +2055,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RunOnLastDayOfMonth"] = value;
+					unboundValues[nameof(RunOnLastDayOfMonth)] = value;
 			}
 		}
 
@@ -2250,7 +2265,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IRegistrationTrigger)v2Trigger).Delay);
-				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -2259,7 +2274,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["Delay"] = value;
+					unboundValues[nameof(Delay)] = value;
 			}
 		}
 
@@ -2278,7 +2293,22 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
 	{
 		private Trigger pTrigger;
+		private TimeSpan unboundInterval = TimeSpan.Zero, unboundDuration = TimeSpan.Zero;
+		private bool unboundStopAtDurationEnd = false;
 		private V2Interop.IRepetitionPattern v2Pattern = null;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="RepetitionPattern"/> class.
+		/// </summary>
+		/// <param name="interval">The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</param>
+		/// <param name="duration">The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.</param>
+		/// <param name="stopAtDurationEnd">If set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
+		public RepetitionPattern(TimeSpan interval, TimeSpan duration, bool stopAtDurationEnd = false)
+		{
+			Interval = interval;
+			Duration = duration;
+			StopAtDurationEnd = stopAtDurationEnd;
+		}
 
 		internal RepetitionPattern(Trigger parent)
 		{
@@ -2303,14 +2333,14 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(v2Pattern.Duration);
 				if (pTrigger != null)
 					return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
-				return TimeSpan.Zero;
+				return unboundDuration;
 			}
 			set
 			{
+				if (value.Ticks < 0 || (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1)))
+					throw new ArgumentOutOfRangeException(nameof(Duration));
 				if (v2Pattern != null)
 				{
-					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
-						throw new ArgumentOutOfRangeException(nameof(Duration));
 					v2Pattern.Duration = Task.TimeSpanToString(value);
 				}
 				else if (pTrigger != null)
@@ -2318,6 +2348,8 @@ namespace Microsoft.Win32.TaskScheduler
 					pTrigger.v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
 					Bind();
 				}
+				else
+					unboundDuration = value;
 			}
 		}
 
@@ -2338,21 +2370,25 @@ namespace Microsoft.Win32.TaskScheduler
 					return Task.StringToTimeSpan(v2Pattern.Interval);
 				if (pTrigger != null)
 					return TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
-				return TimeSpan.Zero;
+				return unboundInterval;
 			}
 			set
 			{
+				if (value.Ticks < 0 || ((v2Pattern != null || pTrigger == null) && value != TimeSpan.Zero && (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31))))
+					throw new ArgumentOutOfRangeException(nameof(Interval));
 				if (v2Pattern != null)
 				{
-					if (value != TimeSpan.Zero && (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31)))
-						throw new ArgumentOutOfRangeException(nameof(Interval));
 					v2Pattern.Interval = Task.TimeSpanToString(value);
 				}
 				else if (pTrigger != null)
 				{
+					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+						throw new ArgumentOutOfRangeException(nameof(Interval));
 					pTrigger.v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
 					Bind();
 				}
+				else
+					unboundInterval = value;
 			}
 		}
 
@@ -2368,7 +2404,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return v2Pattern.StopAtDurationEnd;
 				if (pTrigger != null)
 					return (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
-				return false;
+				return unboundStopAtDurationEnd;
 			}
 			set
 			{
@@ -2382,6 +2418,8 @@ namespace Microsoft.Win32.TaskScheduler
 						pTrigger.v1TriggerData.Flags &= ~V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 					Bind();
 				}
+				else
+					unboundStopAtDurationEnd = value;
 			}
 		}
 
@@ -2424,12 +2462,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override int GetHashCode() => new { A = Duration, B = Interval, C = StopAtDurationEnd }.GetHashCode();
 
-		/// <summary>
-		/// Determines whether any properties for this <see cref="RepetitionPattern"/> have been set.
-		/// </summary>
-		/// <returns>
-		///   <c>true</c> if properties have been set; otherwise, <c>false</c>.
-		/// </returns>
+		/// <summary>Determines whether any properties for this <see cref="RepetitionPattern"/> have been set.</summary>
+		/// <returns><c>true</c> if properties have been set; otherwise, <c>false</c>.</returns>
 		public bool IsSet()
 		{
 			if (v2Pattern != null)
@@ -2452,6 +2486,13 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Pattern.Duration = $"PT{pTrigger.v1TriggerData.MinutesDuration}M";
 				v2Pattern.StopAtDurationEnd = (pTrigger.v1TriggerData.Flags & V1Interop.TaskTriggerFlags.KillAtDurationEnd) == V1Interop.TaskTriggerFlags.KillAtDurationEnd;
 			}
+		}
+
+		internal void Set(RepetitionPattern value)
+		{
+			Duration = value.Duration;
+			Interval = value.Interval;
+			StopAtDurationEnd = value.StopAtDurationEnd;
 		}
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
@@ -2548,14 +2589,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay);
-				return (unboundValues.ContainsKey("Delay") ? (TimeSpan)unboundValues["Delay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
-					unboundValues["Delay"] = value;
+					unboundValues[nameof(Delay)] = value;
 			}
 		}
 
@@ -2569,14 +2610,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange;
-				return (unboundValues.ContainsKey("StateChange") ? (TaskSessionStateChangeType)unboundValues["StateChange"] : TaskSessionStateChangeType.ConsoleConnect);
+				return GetUnboundValueOrDefault(nameof(StateChange), TaskSessionStateChangeType.ConsoleConnect);
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).StateChange = value;
 				else
-					unboundValues["StateChange"] = value;
+					unboundValues[nameof(StateChange)] = value;
 			}
 		}
 
@@ -2590,14 +2631,14 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return ((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId;
-				return (unboundValues.ContainsKey("UserId") ? (string)unboundValues["UserId"] : null);
+				return GetUnboundValueOrDefault<string>(nameof(UserId));
 			}
 			set
 			{
 				if (v2Trigger != null)
 					((V2Interop.ISessionStateChangeTrigger)v2Trigger).UserId = value;
 				else
-					unboundValues["UserId"] = value;
+					unboundValues[nameof(UserId)] = value;
 			}
 		}
 
@@ -2638,7 +2679,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Returns a value indicating if the StateChange property has been set.
 		/// </summary>
 		/// <returns>StateChange property has been set.</returns>
-		internal bool StateChangeIsSet() => (v2Trigger != null || unboundValues.ContainsKey("StateChange"));
+		internal bool StateChangeIsSet() => v2Trigger != null || (unboundValues?.ContainsKey("StateChange") ?? false);
 	}
 
 	/// <summary>
@@ -2686,7 +2727,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.ITimeTrigger)v2Trigger).RandomDelay);
-				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -2695,7 +2736,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RandomDelay"] = value;
+					unboundValues[nameof(RandomDelay)] = value;
 			}
 		}
 
@@ -2770,7 +2811,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["DaysOfWeek"] = (short)value;
+						unboundValues[nameof(DaysOfWeek)] = (short)value;
 				}
 			}
 		}
@@ -2787,7 +2828,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return Task.StringToTimeSpan(((V2Interop.IWeeklyTrigger)v2Trigger).RandomDelay);
-				return (unboundValues.ContainsKey("RandomDelay") ? (TimeSpan)unboundValues["RandomDelay"] : TimeSpan.Zero);
+				return GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
 			}
 			set
 			{
@@ -2796,7 +2837,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
-					unboundValues["RandomDelay"] = value;
+					unboundValues[nameof(RandomDelay)] = value;
 			}
 		}
 
@@ -2822,7 +2863,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
-						unboundValues["WeeksInterval"] = value;
+						unboundValues[nameof(WeeksInterval)] = value;
 				}
 			}
 		}

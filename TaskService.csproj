@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
+    <Compile Include="Models.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\EventLog.cs" />
     <Compile Include="Native\InteropUtil.cs" />
@@ -78,10 +79,12 @@
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="ResourceReferenceValue.cs" />
+    <Compile Include="TaskEditor\Native\EnumUtil.cs" />
     <Compile Include="TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskEventWatcher.cs" />
     <Compile Include="TaskSecurity.cs" />
+    <Compile Include="TaskServiceFactory.cs" />
     <Compile Include="TaskServiceFluentExt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -104,13 +107,16 @@
     <Compile Include="TaskServiceCronExt.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="TriggerCollection.cs" />
+    <Compile Include="UnboundObject.cs" />
     <Compile Include="User.cs" />
     <Compile Include="V1\TaskSchedulerV1Interop.cs" />
     <Compile Include="TaskService.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="V1\V1TriggerControllers.cs" />
     <Compile Include="V2\TaskSchedulerV2Interop.cs" />
+    <Compile Include="V2\V2TriggerControllers.cs" />
     <Compile Include="Wildcard.cs" />
     <Compile Include="XmlSerializationHelper.cs" />
   </ItemGroup>

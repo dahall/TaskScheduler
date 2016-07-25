@@ -1525,53 +1525,57 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static TaskScheduler.V2Interop.ITaskDefinition GetV2StrippedDefinition(TaskService svc, TaskScheduler.V2Interop.IRegisteredTask iTask)
 		{
-			DefDoc dd = new DefDoc(iTask.Xml);
-			Version xmlVer = dd.Version;
-			if (xmlVer.Minor > osLibMinorVer)
+			try
 			{
-				if (osLibMinorVer < 4)
+				DefDoc dd = new DefDoc(iTask.Xml);
+				Version xmlVer = dd.Version;
+				if (xmlVer.Minor > osLibMinorVer)
 				{
-					dd.RemoveTag("Volatile");
-					dd.RemoveTag("MaintenanceSettings");
-				}
-				if (osLibMinorVer < 3)
-				{
-					dd.RemoveTag("UseUnifiedSchedulingEngine");
-					dd.RemoveTag("DisallowStartOnRemoteAppSession");
-					dd.RemoveTag("RequiredPrivileges");
-					dd.RemoveTag("ProcessTokenSidType");
-				}
-				if (osLibMinorVer < 2)
-				{
-					dd.RemoveTag("DisplayName");
-					dd.RemoveTag("GroupId");
-					dd.RemoveTag("RunLevel");
-					dd.RemoveTag("SecurityDescriptor");
-					dd.RemoveTag("Source");
-					dd.RemoveTag("URI");
-					dd.RemoveTag("AllowStartOnDemand");
-					dd.RemoveTag("AllowHardTerminate");
-					dd.RemoveTag("MultipleInstancesPolicy");
-					dd.RemoveTag("NetworkSettings");
-					dd.RemoveTag("StartWhenAvailable");
-					dd.RemoveTag("SendEmail");
-					dd.RemoveTag("ShowMessage");
-					dd.RemoveTag("ComHandler");
-					dd.RemoveTag("EventTrigger");
-					dd.RemoveTag("SessionStateChangeTrigger");
-					dd.RemoveTag("RegistrationTrigger");
-					dd.RemoveTag("RestartOnFailure");
-					dd.RemoveTag("LogonType");
-				}
-				dd.Version = new Version(1, osLibMinorVer);
-				TaskScheduler.V2Interop.ITaskDefinition def = svc.v2TaskService.NewTask(0);
+					if (osLibMinorVer < 4)
+					{
+						dd.RemoveTag("Volatile");
+						dd.RemoveTag("MaintenanceSettings");
+					}
+					if (osLibMinorVer < 3)
+					{
+						dd.RemoveTag("UseUnifiedSchedulingEngine");
+						dd.RemoveTag("DisallowStartOnRemoteAppSession");
+						dd.RemoveTag("RequiredPrivileges");
+						dd.RemoveTag("ProcessTokenSidType");
+					}
+					if (osLibMinorVer < 2)
+					{
+						dd.RemoveTag("DisplayName");
+						dd.RemoveTag("GroupId");
+						dd.RemoveTag("RunLevel");
+						dd.RemoveTag("SecurityDescriptor");
+						dd.RemoveTag("Source");
+						dd.RemoveTag("URI");
+						dd.RemoveTag("AllowStartOnDemand");
+						dd.RemoveTag("AllowHardTerminate");
+						dd.RemoveTag("MultipleInstancesPolicy");
+						dd.RemoveTag("NetworkSettings");
+						dd.RemoveTag("StartWhenAvailable");
+						dd.RemoveTag("SendEmail");
+						dd.RemoveTag("ShowMessage");
+						dd.RemoveTag("ComHandler");
+						dd.RemoveTag("EventTrigger");
+						dd.RemoveTag("SessionStateChangeTrigger");
+						dd.RemoveTag("RegistrationTrigger");
+						dd.RemoveTag("RestartOnFailure");
+						dd.RemoveTag("LogonType");
+					}
+					dd.Version = new Version(1, osLibMinorVer);
+					TaskScheduler.V2Interop.ITaskDefinition def = svc.v2TaskService.NewTask(0);
 #if DEBUG
-				string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
-				System.IO.File.WriteAllText(path, dd.Xml, System.Text.Encoding.Unicode);
+					string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
+					System.IO.File.WriteAllText(path, dd.Xml, System.Text.Encoding.Unicode);
 #endif
-				def.XmlText = dd.Xml;
-				return def;
+					def.XmlText = dd.Xml;
+					return def;
+				}
 			}
+			catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Error in GetV2StrippedDefinition: {ex}"); }
 			return iTask.Definition;
 		}
 

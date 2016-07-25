@@ -285,16 +285,16 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 			}
 		}
 
-		public DateTime EndDate
+		public DateTime? EndDate
 		{
-			get { try { return EndYear == 0 ? DateTime.MaxValue : new DateTime(EndYear, EndMonth, EndDay); } catch { return DateTime.MaxValue; } }
+			get { try { return EndYear == 0 ? (DateTime?)null : new DateTime(EndYear, EndMonth, EndDay); } catch { return DateTime.MaxValue; } }
 			set
 			{
-				if (value != DateTime.MaxValue)
+				if (value.HasValue)
 				{
-					EndYear = (ushort)value.Year;
-					EndMonth = (ushort)value.Month;
-					EndDay = (ushort)value.Day;
+					EndYear = (ushort)value.Value.Year;
+					EndMonth = (ushort)value.Value.Month;
+					EndDay = (ushort)value.Value.Day;
 					Flags |= TaskTriggerFlags.HasEndDate;
 				}
 				else
@@ -305,7 +305,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 			}
 		}
 
-		public override string ToString() => $"Trigger Type: {Type};\n> Start: {BeginDate}; End: {(EndYear == 0 ? "null" : EndDate.ToString())};\n> DurMin: {MinutesDuration}; DurItv: {MinutesInterval};\n>";
+		public override string ToString() => $"Trigger Type: {Type};\n> Start: {BeginDate}; End: {(EndYear == 0 ? "null" : EndDate?.ToString())};\n> DurMin: {MinutesDuration}; DurItv: {MinutesInterval};\n>";
 	}
 
 	#endregion
