@@ -9,13 +9,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Contains all the tasks that are registered.
 	/// </summary>
 	/// <remarks>Potentially breaking change in 1.6.2 and later where under V1 the list previously included the '.job' extension on the task name. This has been removed so that it is consistent with V2.</remarks>
-	public sealed class TaskCollection : IEnumerable<Task>, IDisposable
+	public sealed class TaskCollection : IReadOnlyList<Task>, IDisposable
 	{
-		private TaskService svc;
+		private readonly TaskService svc;
 		private Regex filter;
-		private TaskFolder fld;
-		private V1Interop.ITaskScheduler v1TS = null;
-		private V2Interop.IRegisteredTaskCollection v2Coll = null;
+		private readonly TaskFolder fld;
+		private V1Interop.ITaskScheduler v1TS;
+		private readonly V2Interop.IRegisteredTaskCollection v2Coll;
 
 		internal TaskCollection(TaskService svc, Regex filter = null)
 		{
@@ -55,13 +55,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
-		internal class V1TaskEnumerator : IEnumerator<Task>, IDisposable
+		internal class V1TaskEnumerator : IEnumerator<Task>
 		{
-			private TaskService svc;
-			private V1Interop.IEnumWorkItems wienum = null;
-			private V1Interop.ITaskScheduler m_ts = null;
-			private string curItem = null;
-			private Regex filter;
+			private readonly TaskService svc;
+			private readonly V1Interop.IEnumWorkItems wienum;
+			private V1Interop.ITaskScheduler ts;
+			private string curItem;
+			private readonly Regex filter;
 
 			/// <summary>
 			/// Internal constructor
@@ -72,17 +72,17 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				this.svc = svc;
 				this.filter = filter;
-				m_ts = svc.v1TaskScheduler;
-				wienum = m_ts?.Enum();
+				ts = svc.v1TaskScheduler;
+				wienum = ts?.Enum();
 				Reset();
 			}
 
 			/// <summary>
 			/// Retrieves the current task.  See <see cref="System.Collections.IEnumerator.Current"/> for more information.
 			/// </summary>
-			public Microsoft.Win32.TaskScheduler.Task Current => new Task(svc, ICurrent);
+			public Task Current => new Task(svc, ICurrent);
 
-			internal V1Interop.ITask ICurrent => TaskService.GetTask(m_ts, curItem);
+			internal V1Interop.ITask ICurrent => TaskService.GetTask(ts, curItem);
 
 			/// <summary>
 			/// Releases all resources used by this class.
@@ -90,7 +90,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public void Dispose()
 			{
 				if (wienum != null) Marshal.ReleaseComObject(wienum);
-				m_ts = null;
+				ts = null;
 			}
 
 			object System.Collections.IEnumerator.Current => Current;
@@ -159,9 +159,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal class V2TaskEnumerator : ComEnumerator<Task, V2Interop.IRegisteredTaskCollection>
+		private class V2TaskEnumerator : ComEnumerator<Task, V2Interop.IRegisteredTaskCollection>
 		{
-			private Regex filter;
+			private readonly Regex filter;
 
 			internal V2TaskEnumerator(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null) :
 				base(iTaskColl, o => Task.CreateTask(folder.TaskService, (V2Interop.IRegisteredTask)o))
@@ -192,14 +192,14 @@ namespace Microsoft.Win32.TaskScheduler
 				int i = 0;
 				if (v2Coll != null)
 				{
-					V2TaskEnumerator v2te = new V2TaskEnumerator(fld, v2Coll, filter);
-					while (v2te.MoveNext())
+					var v2Enum = new V2TaskEnumerator(fld, v2Coll, filter);
+					while (v2Enum.MoveNext())
 						i++;
 				}
 				else
 				{
-					V1TaskEnumerator v1te = new V1TaskEnumerator(svc, filter);
-					return v1te.Count;
+					var v1Enum = new V1TaskEnumerator(svc, filter);
+					return v1Enum.Count;
 				}
 				return i;
 			}
@@ -211,18 +211,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The regular expression filter.</value>
 		private Regex Filter
 		{
-			get
-			{
-				return filter;
-			}
+			get { return filter; }
 			set
 			{
-				string sfilter = value == null ? string.Empty : value.ToString().TrimStart('^').TrimEnd('$');
+				string sfilter = value?.ToString().TrimStart('^').TrimEnd('$') ?? string.Empty;
 				if (sfilter == string.Empty || sfilter == "*")
 					filter = null;
 				else
 				{
-					if (value.ToString().TrimEnd('$').EndsWith("\\.job", StringComparison.InvariantCultureIgnoreCase))
+					if (value != null && value.ToString().TrimEnd('$').EndsWith("\\.job", StringComparison.InvariantCultureIgnoreCase))
 						filter = new Regex(value.ToString().Replace("\\.job", ""));
 					else
 						filter = value;
@@ -298,23 +295,19 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Collection of running tasks.
 	/// </summary>
-	public sealed class RunningTaskCollection : IEnumerable<RunningTask>, IDisposable
+	public sealed class RunningTaskCollection : IReadOnlyList<RunningTask>, IDisposable
 	{
-		private TaskService svc;
-		private V1Interop.ITaskScheduler v1TS = null;
-		private V2Interop.ITaskService v2Svc = null;
-		private V2Interop.IRunningTaskCollection v2Coll = null;
+		private readonly TaskService svc;
+		private readonly V2Interop.IRunningTaskCollection v2Coll;
 
 		internal RunningTaskCollection(TaskService svc)
 		{
 			this.svc = svc;
-			v1TS = svc.v1TaskScheduler;
 		}
 
 		internal RunningTaskCollection(TaskService svc, V2Interop.IRunningTaskCollection iTaskColl)
 		{
 			this.svc = svc;
-			v2Svc = svc.v2TaskService;
 			v2Coll = iTaskColl;
 		}
 
@@ -323,8 +316,6 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void Dispose()
 		{
-			v1TS = null;
-			v2Svc = null;
 			if (v2Coll != null)
 				Marshal.ReleaseComObject(v2Coll);
 		}
@@ -348,10 +339,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
-		internal class V1RunningTaskEnumerator : IEnumerator<RunningTask>
+		private class V1RunningTaskEnumerator : IEnumerator<RunningTask>
 		{
-			private TaskService svc;
-			private TaskCollection.V1TaskEnumerator tEnum;
+			private readonly TaskService svc;
+			private readonly TaskCollection.V1TaskEnumerator tEnum;
 
 			internal V1RunningTaskEnumerator(TaskService svc)
 			{
@@ -398,8 +389,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return v2Coll.Count;
 				int i = 0;
-				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(svc);
-				while (v1te.MoveNext())
+				V1RunningTaskEnumerator v1Enum = new V1RunningTaskEnumerator(svc);
+				while (v1Enum.MoveNext())
 					i++;
 				return i;
 			}
@@ -421,10 +412,10 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 
 				int i = 0;
-				V1RunningTaskEnumerator v1te = new V1RunningTaskEnumerator(svc);
-				while (v1te.MoveNext())
+				V1RunningTaskEnumerator v1Enum = new V1RunningTaskEnumerator(svc);
+				while (v1Enum.MoveNext())
 					if (i++ == index)
-						return v1te.Current;
+						return v1Enum.Current;
 				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}

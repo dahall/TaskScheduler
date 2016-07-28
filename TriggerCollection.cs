@@ -12,9 +12,9 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList
 	{
-		private V1Interop.ITask v1Task = null;
-		private V2Interop.ITriggerCollection v2Coll = null;
-		private V2Interop.ITaskDefinition v2Def = null;
+		private V1Interop.ITask v1Task;
+		private readonly V2Interop.ITriggerCollection v2Coll;
+		private V2Interop.ITaskDefinition v2Def;
 
 		internal TriggerCollection(V1Interop.ITask iTask)
 		{
@@ -30,15 +30,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of triggers in the collection.
 		/// </summary>
-		public int Count
-		{
-			get
-			{
-				if (v2Coll != null)
-					return v2Coll.Count;
-				return (int)v1Task.GetTriggerCount();
-			}
-		}
+		public int Count => v2Coll?.Count ?? v1Task.GetTriggerCount();
 
 		bool ICollection.IsSynchronized => false;
 
@@ -116,7 +108,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (Count <= index)
-					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the TriggerCollection");
+					throw new ArgumentOutOfRangeException(nameof(index), index, @"Index is not a valid index in the TriggerCollection");
 				Insert(index, value);
 				RemoveAt(index + 1);
 			}
@@ -152,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return Trigger.CreateTrigger(v1Task.CreateTrigger(out idx), Trigger.ConvertToV1TriggerType(taskTriggerType));
 			}
 
-			return Trigger.CreateTrigger(v2Coll.Create(taskTriggerType));
+			return Trigger.CreateTrigger(v2Coll.Create(taskTriggerType), v2Def);
 		}
 
 		/// <summary>
@@ -205,10 +197,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="Array"/> must have zero-based indexing.</param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-		public void CopyTo(Trigger[] array, int arrayIndex)
-		{
-			CopyTo(0, array, arrayIndex, Count);
-		}
+		public void CopyTo(Trigger[] array, int arrayIndex) { CopyTo(0, array, arrayIndex, Count); }
 
 		/// <summary>
 		/// Copies the elements of the <see cref="TriggerCollection" /> to an <see cref="T:Trigger[]" />, starting at a particular <see cref="T:Trigger[]" /> index.
@@ -307,10 +296,7 @@ namespace Microsoft.Win32.TaskScheduler
 			Array.Copy(src, 0, array, index, Count);
 		}
 
-		void ICollection<Trigger>.Add(Trigger item)
-		{
-			Add(item);
-		}
+		void ICollection<Trigger>.Add(Trigger item) { Add(item); }
 
 		int IList.Add(object value)
 		{
@@ -322,15 +308,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		int IList.IndexOf(object value) => IndexOf((Trigger)value);
 
-		void IList.Insert(int index, object value)
-		{
-			Insert(index, (Trigger)value);
-		}
+		void IList.Insert(int index, object value) { Insert(index, (Trigger)value); }
 
-		void IList.Remove(object value)
-		{
-			Remove((Trigger)value);
-		}
+		void IList.Remove(object value) { Remove((Trigger)value); }
 
 		/// <summary>
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
@@ -372,8 +352,8 @@ namespace Microsoft.Win32.TaskScheduler
 			for (int j = Count - 1; j >= index; j--)
 				RemoveAt(j);
 			Add(trigger);
-			for (int k = 0; k < pushItems.Length; k++)
-				Add(pushItems[k]);
+			foreach (Trigger t in pushItems)
+				Add(t);
 		}
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
@@ -449,14 +429,14 @@ namespace Microsoft.Win32.TaskScheduler
 		public void RemoveAt(int index)
 		{
 			if (index >= Count)
-				throw new ArgumentOutOfRangeException(nameof(index), index, "Failed to remove Trigger. Index out of range.");
+				throw new ArgumentOutOfRangeException(nameof(index), index, @"Failed to remove Trigger. Index out of range.");
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
 			else
 				v1Task.DeleteTrigger((ushort)index); //Remove the trigger from the Task Scheduler
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 		/// <summary>
 		/// Copies the elements of the <see cref="TriggerCollection"/> to a new array.
@@ -490,34 +470,25 @@ namespace Microsoft.Win32.TaskScheduler
 				t.SetV1TriggerData();
 		}
 
-		internal sealed class V1TriggerEnumerator : IEnumerator<Trigger>
+		private sealed class V1TriggerEnumerator : IEnumerator<Trigger>
 		{
 			private short curItem = -1;
 			private V1Interop.ITask iTask;
 
-			internal V1TriggerEnumerator(V1Interop.ITask task)
-			{
-				iTask = task;
-			}
+			internal V1TriggerEnumerator(V1Interop.ITask task) { iTask = task; }
 
 			public Trigger Current => Trigger.CreateTrigger(iTask.GetTrigger((ushort)curItem));
 
-			object System.Collections.IEnumerator.Current => Current;
+			object IEnumerator.Current => Current;
 
 			/// <summary>
 			/// Releases all resources used by this class.
 			/// </summary>
-			public void Dispose()
-			{
-				iTask = null;
-			}
+			public void Dispose() { iTask = null; }
 
 			public bool MoveNext() => (++curItem < iTask.GetTriggerCount());
 
-			public void Reset()
-			{
-				curItem = -1;
-			}
+			public void Reset() { curItem = -1; }
 		}
 	}
 }

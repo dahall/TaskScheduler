@@ -6,24 +6,18 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Provides information and control for a collection of folders that contain tasks.
 	/// </summary>
-	public sealed class TaskFolderCollection : ICollection<TaskFolder>
+	public sealed class TaskFolderCollection : ICollection<TaskFolder>, IDisposable
 	{
-		private TaskFolder parent;
-		private TaskFolder[] v1FolderList = null;
-		private TaskScheduler.V2Interop.ITaskFolderCollection v2FolderList = null;
+		private readonly TaskFolder parent;
+		private readonly TaskFolder[] v1FolderList;
+		private readonly V2Interop.ITaskFolderCollection v2FolderList;
 
 		internal TaskFolderCollection()
 		{
 			v1FolderList = new TaskFolder[0];
 		}
 
-		internal TaskFolderCollection(TaskFolder v1Folder)
-		{
-			parent = v1Folder;
-			v1FolderList = new TaskFolder[] { v1Folder };
-		}
-
-		internal TaskFolderCollection(TaskFolder folder, TaskScheduler.V2Interop.ITaskFolderCollection iCollection)
+		internal TaskFolderCollection(TaskFolder folder, V2Interop.ITaskFolderCollection iCollection)
 		{
 			parent = folder;
 			v2FolderList = iCollection;
@@ -32,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of items in the collection.
 		/// </summary>
-		public int Count => (v2FolderList != null) ? v2FolderList.Count : v1FolderList.Length;
+		public int Count => v2FolderList?.Count ?? v1FolderList.Length;
 
 		/// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
@@ -67,7 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return new TaskFolder(parent.TaskService, v2FolderList[path]);
 				if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
 					return v1FolderList[0];
-				throw new ArgumentException("Path not found", nameof(path));
+				throw new ArgumentException(@"Path not found", nameof(path));
 			}
 		}
 
@@ -76,10 +70,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
 		/// <exception cref="System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string, bool)"/> instead.</exception>
-		public void Add(TaskFolder item)
-		{
-			throw new NotImplementedException();
-		}
+		public void Add(TaskFolder item) { throw new NotImplementedException(); }
 
 		/// <summary>
 		/// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.
@@ -126,7 +117,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (arrayIndex + Count > array.Length)
 					throw new ArgumentException();
-				foreach (TaskScheduler.V2Interop.ITaskFolder f in v2FolderList)
+				foreach (V2Interop.ITaskFolder f in v2FolderList)
 					array[arrayIndex++] = new TaskFolder(parent.TaskService, f);
 			}
 			else
@@ -227,7 +218,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						try
 						{
-							parent.DeleteFolder(v2FolderList[i].Name, true);
+							parent.DeleteFolder(v2FolderList[i].Name);
 						}
 						catch
 						{
