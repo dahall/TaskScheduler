@@ -50,7 +50,8 @@
     <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
     <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
     <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER, </DefineConstants>
+    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.5 ">$(DefineConstants)NET_45_OR_GREATER</DefineConstants>
     <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,7 +69,6 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
-    <Compile Include="Models.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
     <Compile Include="Native\EventLog.cs" />
     <Compile Include="Native\InteropUtil.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Native\NetServerEnum.cs" />
     <Compile Include="Native\NTDSAPI.cs" />
     <Compile Include="Native\System.Collections.Specialized.Net20.cs" />
+    <Compile Include="Native\System.Collections.Generic.PreNet45.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="ResourceReferenceValue.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskEventWatcher.cs" />
     <Compile Include="TaskSecurity.cs" />
-    <Compile Include="TaskServiceFactory.cs" />
     <Compile Include="TaskServiceFluentExt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -107,16 +107,13 @@
     <Compile Include="TaskServiceCronExt.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="TriggerCollection.cs" />
-    <Compile Include="UnboundObject.cs" />
     <Compile Include="User.cs" />
     <Compile Include="V1\TaskSchedulerV1Interop.cs" />
     <Compile Include="TaskService.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="V1\V1TriggerControllers.cs" />
     <Compile Include="V2\TaskSchedulerV2Interop.cs" />
-    <Compile Include="V2\V2TriggerControllers.cs" />
     <Compile Include="Wildcard.cs" />
     <Compile Include="XmlSerializationHelper.cs" />
   </ItemGroup>

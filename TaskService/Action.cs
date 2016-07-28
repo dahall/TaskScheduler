@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using System.Xml;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -48,11 +46,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged
 	{
-		internal IAction iAction = null;
+		internal IAction iAction;
 		internal V1Interop.ITask v1Task;
 
 		/// <summary>List of unbound values when working with Actions not associated with a registered task.</summary>
-		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
+		protected readonly Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 
 		internal Action() { }
 
@@ -214,7 +212,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return Activator.CreateInstance(t, BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { iAction }, null) as Action;
 		}
 
-		internal static Type GetObjectType(TaskActionType actionType)
+		private static Type GetObjectType(TaskActionType actionType)
 		{
 			switch (actionType)
 			{
@@ -227,7 +225,6 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskActionType.ShowMessage:
 					return typeof(ShowMessageAction);
 
-				case TaskActionType.Execute:
 				default:
 					return typeof(ExecAction);
 			}
@@ -246,23 +243,23 @@ namespace Microsoft.Win32.TaskScheduler
 				iTask.SetDataItem("ActionId", Id);
 			IBindAsExecAction bindable = this as IBindAsExecAction;
 			if (bindable != null)
-				iTask.SetDataItem("ActionType", this.InternalActionType.ToString());
+				iTask.SetDataItem("ActionType", InternalActionType.ToString());
 			object o = null;
 			unboundValues.TryGetValue("Path", out o);
 			iTask.SetApplicationName(bindable != null ? ExecAction.PowerShellPath : o?.ToString() ?? string.Empty);
 			o = null;
 			unboundValues.TryGetValue("Arguments", out o);
-			iTask.SetParameters(bindable != null ? ExecAction.BuildPowerShellCmd(this.ActionType.ToString(), GetPowerShellCommand()) : o?.ToString() ?? string.Empty);
+			iTask.SetParameters(bindable != null ? ExecAction.BuildPowerShellCmd(ActionType.ToString(), GetPowerShellCommand()) : o?.ToString() ?? string.Empty);
 			o = null;
 			unboundValues.TryGetValue("WorkingDirectory", out o);
 			iTask.SetWorkingDirectory(o?.ToString() ?? string.Empty);
 		}
 
-		internal virtual void Bind(V2Interop.ITaskDefinition iTaskDef)
+		internal virtual void Bind(ITaskDefinition iTaskDef)
 		{
-			V2Interop.IActionCollection iActions = iTaskDef.Actions;
+			IActionCollection iActions = iTaskDef.Actions;
 			if (iActions.Count >= ActionCollection.MaxActions)
-				throw new ArgumentOutOfRangeException(nameof(iTaskDef), "A maximum of 32 actions is allowed within a single task.");
+				throw new ArgumentOutOfRangeException(nameof(iTaskDef), @"A maximum of 32 actions is allowed within a single task.");
 			CreateV2Action(iActions);
 			Marshal.ReleaseComObject(iActions);
 			foreach (string key in unboundValues.Keys)
@@ -274,15 +271,15 @@ namespace Microsoft.Win32.TaskScheduler
 			unboundValues.Clear();
 		}
 
-		internal abstract void CreateV2Action(V2Interop.IActionCollection iActions);
+		internal abstract void CreateV2Action(IActionCollection iActions);
 
 		internal abstract string GetPowerShellCommand();
 
-		internal T GetProperty<T, B>(string propName, T defaultValue = default(T))
+		internal T GetProperty<T, TB>(string propName, T defaultValue = default(T))
 		{
 			if (iAction == null)
 				return (unboundValues.ContainsKey(propName)) ? (T)unboundValues[propName] : defaultValue;
-			return ReflectionHelper.GetProperty((B)iAction, propName, defaultValue);
+			return ReflectionHelper.GetProperty((TB)iAction, propName, defaultValue);
 		}
 
 		internal void OnPropertyChanged(string propName)
@@ -290,7 +287,7 @@ namespace Microsoft.Win32.TaskScheduler
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 		}
 
-		internal void SetProperty<T, B>(string propName, T value)
+		internal void SetProperty<T, TB>(string propName, T value)
 		{
 			if (iAction == null)
 			{
@@ -300,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 					unboundValues[propName] = value;
 			}
 			else
-				ReflectionHelper.SetProperty((B)iAction, propName, value);
+				ReflectionHelper.SetProperty((TB)iAction, propName, value);
 			OnPropertyChanged(propName);
 		}
 
@@ -308,7 +305,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected virtual void CopyProperties(Action sourceAction)
+		internal virtual void CopyProperties(Action sourceAction)
 		{
 			Id = sourceAction.Id;
 		}
@@ -393,7 +390,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="guid">The unique identifier.</param>
 		/// <returns></returns>
-		internal static string GetNameForCLSID(Guid guid)
+		private static string GetNameForCLSID(Guid guid)
 		{
 			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
 			{
@@ -414,7 +411,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal override string GetPowerShellCommand()
 		{
 			var sb = new System.Text.StringBuilder();
-			sb.Append($"[Reflection.Assembly]::LoadFile('{System.Reflection.Assembly.GetExecutingAssembly().Location}'); ");
+			sb.Append($"[Reflection.Assembly]::LoadFile('{Assembly.GetExecutingAssembly().Location}'); ");
 			sb.Append($"[Microsoft.Win32.TaskScheduler.TaskService]::RunComHandlerAction([GUID]('{ClassId.ToString("D")}'), '{Data?.Replace("'", "''") ?? string.Empty}'); ");
 			return sb.ToString();
 		}
@@ -423,7 +420,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected override void CopyProperties(Action sourceAction)
+		internal override void CopyProperties(Action sourceAction)
 		{
 			if (sourceAction.GetType() == GetType())
 			{
@@ -443,7 +440,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private const string ImportanceHeader = "Importance";
 
-		private NamedValueCollection nvc = null;
+		private NamedValueCollection nvc;
 		private bool validateAttachments = true;
 
 		/// <summary>
@@ -486,12 +483,12 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value != null)
 				{
 					if (value.Length > 8)
-						throw new ArgumentOutOfRangeException("Attachments", "Attachments array cannot contain more than 8 items.");
+						throw new ArgumentOutOfRangeException(nameof(Attachments), @"Attachments array cannot contain more than 8 items.");
 					if (validateAttachments)
 					{
 						foreach (var o in value)
 							if (!(o is string) || !System.IO.File.Exists((string)o))
-								throw new ArgumentException("Each value of the array must contain a valid file reference.", nameof(Attachments));
+								throw new ArgumentException(@"Each value of the array must contain a valid file reference.", nameof(Attachments));
 					}
 				}
 				if (iAction == null && (value == null || value.Length == 0))
@@ -556,7 +553,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (nvc == null)
 				{
 					if (iAction != null)
-						nvc = new NamedValueCollection(((V2Interop.IEmailAction)iAction).HeaderFields);
+						nvc = new NamedValueCollection(((IEmailAction)iAction).HeaderFields);
 					else
 						nvc = new NamedValueCollection();
 					nvc.AttributedXmlFormat = false;
@@ -638,7 +635,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		public override bool Equals(Action other) => base.Equals(other) && GetPowerShellCommand() == GetPowerShellCommand();
+		public override bool Equals(Action other) => base.Equals(other) && GetPowerShellCommand() == other.GetPowerShellCommand();
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="EmailAction"/>.
@@ -668,7 +665,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			base.Bind(iTaskDef);
 			if (nvc != null)
-				nvc.Bind(((V2Interop.IEmailAction)iAction).HeaderFields);
+				nvc.Bind(((IEmailAction)iAction).HeaderFields);
 		}
 
 		internal override void CreateV2Action(IActionCollection iActions)
@@ -695,7 +692,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!string.IsNullOrEmpty(Body))
 				sb.AppendFormat(" -Body '{0}'", ToUTF8(Prep(Body)));
 			if (Attachments != null && Attachments.Length > 0)
-				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll<object, string>(Attachments, o => Prep(o.ToString()))));
+				sb.AppendFormat(" -Attachments {0}", ToPS(Array.ConvertAll(Attachments, o => Prep(o.ToString()))));
 			var hdr = new List<string>(HeaderFields.Names);
 			if (hdr.Contains(ImportanceHeader))
 			{
@@ -730,7 +727,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected override void CopyProperties(Action sourceAction)
+		internal override void CopyProperties(Action sourceAction)
 		{
 			if (sourceAction.GetType() == GetType())
 			{
@@ -752,8 +749,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static string[] FromPS(string p)
 		{
-			var list = p.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
-			return Array.ConvertAll<string, string>(list, i => UnPrep(i).Trim('\''));
+			var list = p.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+			return Array.ConvertAll(list, i => UnPrep(i).Trim('\''));
 		}
 
 		private static string FromPS(System.Text.RegularExpressions.Group g, string delimeter = ";")
@@ -774,11 +771,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private static string ToPS(string input, char[] delimeters = null)
 		{
 			if (delimeters == null)
-				delimeters = new char[] { ';', ',' };
-			return ToPS(Array.ConvertAll<string, string>(input.Split(delimeters), i => Prep(i.Trim())));
+				delimeters = new[] { ';', ',' };
+			return ToPS(Array.ConvertAll(input.Split(delimeters), i => Prep(i.Trim())));
 		}
 
-		private static string ToPS(string[] input) => string.Join(", ", Array.ConvertAll<string, string>(input, i => string.Concat("'", i.Trim(), "'")));
+		private static string ToPS(string[] input) => string.Join(", ", Array.ConvertAll(input, i => string.Concat("'", i.Trim(), "'")));
 
 		private static string ToUTF8(string s)
 		{
@@ -939,7 +936,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var match = System.Text.RegularExpressions.Regex.Match(Arguments, @"<# " + ScriptIdentifer + ":(?<type>\\w+) #> (?<cmd>.+)}\"$");
 				if (match.Success)
-					return new string[] { match.Groups["type"].Value, match.Groups["cmd"].Value };
+					return new[] { match.Groups["type"].Value, match.Groups["cmd"].Value };
 			}
 			return null;
 		}
@@ -948,7 +945,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected override void CopyProperties(Action sourceAction)
+		internal override void CopyProperties(Action sourceAction)
 		{
 			if (sourceAction.GetType() == GetType())
 			{
@@ -1017,7 +1014,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		public override bool Equals(Action other) => base.Equals(other) && string.Equals(this.Title, (other as ShowMessageAction)?.Title) && string.Equals(this.MessageBody, (other as ShowMessageAction)?.MessageBody);
+		public override bool Equals(Action other) => base.Equals(other) && string.Equals(Title, (other as ShowMessageAction)?.Title) && string.Equals(MessageBody, (other as ShowMessageAction)?.MessageBody);
 
 		/// <summary>
 		/// Gets a string representation of the <see cref="ShowMessageAction"/>.
@@ -1054,7 +1051,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		protected override void CopyProperties(Action sourceAction)
+		internal override void CopyProperties(Action sourceAction)
 		{
 			if (sourceAction.GetType() == GetType())
 			{

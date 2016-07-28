@@ -1,6 +1,4 @@
 ﻿#if !NET_40_OR_GREATER
-using System;
-
 namespace System.Collections.Specialized
 {
 	/// <summary>
