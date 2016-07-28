@@ -9,7 +9,7 @@ using System.ServiceProcess;
 
 namespace TaskSchedulerConfig
 {
-	class Validator : IDisposable
+	class ServicesDetail : IDisposable
 	{
 		private WindowsIdentity id;
 		public SecurityIdentifier sid;
@@ -18,7 +18,7 @@ namespace TaskSchedulerConfig
 		private Firewall fw = null;
 		private ServiceController sc = null;
 
-		public Validator(string svr = null)
+		public ServicesDetail(string svr = null)
 		{
 			server = svr;
 			id = WindowsIdentity.GetCurrent();
@@ -44,6 +44,8 @@ namespace TaskSchedulerConfig
 		}
 
 		public Firewall Firewall => fw ?? (fw = new Firewall(server));
+
+		public bool IsLocal => string.IsNullOrEmpty(server);
 
 		public ServiceController RemoteRegistryService => sc ?? (sc = new ServiceController("RemoteRegistry", server ?? "."));
 

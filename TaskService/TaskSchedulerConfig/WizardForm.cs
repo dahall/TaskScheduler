@@ -28,8 +28,7 @@ namespace TaskSchedulerConfig
 
 		private void wizardControl1_Cancelling(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (localScanner.IsBusy) localScanner.CancelAsync();
-			if (remoteScanner.IsBusy) remoteScanner.CancelAsync();
+			if (scanner.IsBusy) scanner.CancelAsync();
 		}
 
 		// ********* INTRO Page *************
@@ -46,13 +45,13 @@ namespace TaskSchedulerConfig
 		private void introWizPg_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
 			autofix = autoRepairCheck.Checked;
+			diags = new Diagnostics(null);
 		}
 
 		// ********* DETECT Page *************
 		private void scanLocal_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
-			diags = new Diagnostics(null);
-			localScanner.RunWorkerAsync();
+			scanner.RunWorkerAsync();
 		}
 
 		// ********* NO ERROR Page *************
@@ -160,42 +159,39 @@ namespace TaskSchedulerConfig
 		// ********* REMOTE SERVER Page *************
 		private void selectRemote_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			remoteScanner.RunWorkerAsync();
+			diags = new Diagnostics(remoteSvrText.Text);
 		}
 
 		// ********* SCANNER METHODS *************
-		private void localScanner_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		private void scanner_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			object defParam = null;
 			e.Result = diags;
-			var rp = new EventHandler<Diagnostics.ShowMessageEventArgs>((o, m) => localScanner.ReportProgress(0, m.Message));
+			var rp = new EventHandler<Diagnostics.ShowMessageEventArgs>((o, m) => scanner.ReportProgress(0, m.Message));
 			diags.ShowMessage += rp;
 			foreach (var d in diags)
 			{
-				if (d.Condition(defParam))
+				if (d.Condition(defParam) && (!d.RequiresElevation || isElevated))
 				{
-					if (!d.RequiresElevation || isElevated)
-					{
-						try { d.HasIssue = d.Troubleshooter(defParam); } catch (Exception ex) { e.Result = ex; throw; }
-						if (d.HasIssue.Value && autofix && !d.Resolution.RequiresConsent)
-						{
-							if (!d.Resolution.RequiresElevation || isElevated)
-								try { d.Resolution.Resolver(defParam); d.Resolved = !d.Troubleshooter(defParam); } catch { }
-						}
-					}
+					scanner.ReportProgress(0, $"Checking {d.Name}...");
+					try { d.HasIssue = d.Troubleshooter(defParam); }
+					catch (Exception ex) { e.Result = ex; System.Diagnostics.Debug.WriteLine($"Error troubleshooting {d.Name}: {ex}"); }
+					if (d.HasIssue.GetValueOrDefault(true) && autofix && !d.Resolution.RequiresConsent && (!d.Resolution.RequiresElevation || isElevated))
+						try { d.Resolution.Resolver(defParam); d.Resolved = !d.Troubleshooter(defParam); }
+						catch (Exception ex2) { System.Diagnostics.Debug.WriteLine($"Error resolving {d.Name}: {ex2}"); }
 				}
 			}
 			diags.ShowMessage -= rp;
 		}
 
-		private void localScanner_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+		private void scanner_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
 			scanLocalStatusLabel.Text = e.UserState?.ToString();
 			if (e.ProgressPercentage == 100)
 				wizardControl1.NextPage();
 		}
 
-		private void localScanner_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		private void scanner_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			if (!e.Cancelled)
 			{
@@ -210,20 +206,6 @@ namespace TaskSchedulerConfig
 					wizardControl1.NextPage(i == 0 ? completeNoProbWizPg : completeWithProbWizPg);
 				}
 			}
-		}
-
-		private void remoteScanner_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-		{
-		}
-
-		private void remoteScanner_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-		{
-
-		}
-
-		private void remoteScanner_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-		{
-
 		}
 
 		/*private void listBox1_DrawItem(object sender, DrawItemEventArgs e)

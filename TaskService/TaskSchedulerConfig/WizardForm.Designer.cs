@@ -45,25 +45,24 @@
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.completeNoProbWizPg = new AeroWizard.WizardPage();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.closeBtn = new TaskSchedulerConfig.CommandLink();
+			this.connRemoteBtn = new TaskSchedulerConfig.CommandLink();
 			this.label5 = new System.Windows.Forms.Label();
+			this.explOptionsBtn = new TaskSchedulerConfig.CommandLink();
 			this.completeWithProbWizPg = new AeroWizard.WizardPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.localResultLabel = new System.Windows.Forms.Label();
+			this.localCloseBtn = new TaskSchedulerConfig.CommandLink();
+			this.remoteConnBtn = new TaskSchedulerConfig.CommandLink();
 			this.issueList = new System.Windows.Forms.Panel();
 			this.reportWizPg = new AeroWizard.WizardPage();
 			this.localConfigList = new System.Windows.Forms.Panel();
 			this.selectRemoteWizPg = new AeroWizard.WizardPage();
 			this.computerBrowseBtn = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.remoteSvrText = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.localScanner = new System.ComponentModel.BackgroundWorker();
-			this.remoteScanner = new System.ComponentModel.BackgroundWorker();
+			this.scanner = new System.ComponentModel.BackgroundWorker();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.closeBtn = new TaskSchedulerConfig.CommandLink();
-			this.connRemoteBtn = new TaskSchedulerConfig.CommandLink();
-			this.explOptionsBtn = new TaskSchedulerConfig.CommandLink();
-			this.localCloseBtn = new TaskSchedulerConfig.CommandLink();
-			this.remoteConnBtn = new TaskSchedulerConfig.CommandLink();
 			((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
 			this.introWizPg.SuspendLayout();
 			this.runAsAdminPrompt.SuspendLayout();
@@ -139,7 +138,7 @@
 			this.label4.Location = new System.Drawing.Point(3, 0);
 			this.label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(388, 15);
+			this.label4.Size = new System.Drawing.Size(387, 15);
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Troubleshooting with administrator permissions might find more issues.";
 			// 
@@ -186,7 +185,7 @@
 			this.label3.AutoSize = true;
 			this.label3.Location = new System.Drawing.Point(39, 22);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(442, 15);
+			this.label3.Size = new System.Drawing.Size(441, 15);
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Find and fix problems with Task Scheduler connecting to this and other computers";
 			// 
@@ -196,7 +195,7 @@
 			this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
 			this.label2.Location = new System.Drawing.Point(39, 1);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(188, 20);
+			this.label2.Size = new System.Drawing.Size(186, 20);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Task Scheduler Diagnostics";
 			// 
@@ -233,7 +232,7 @@
 			// progressBar1
 			// 
 			this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBar1.Location = new System.Drawing.Point(47, 40);
 			this.progressBar1.Name = "progressBar1";
 			this.progressBar1.Size = new System.Drawing.Size(417, 16);
@@ -249,7 +248,7 @@
 			this.completeNoProbWizPg.ShowNext = false;
 			this.completeNoProbWizPg.Size = new System.Drawing.Size(515, 261);
 			this.completeNoProbWizPg.TabIndex = 7;
-			this.completeNoProbWizPg.Text = "Troubleshooting couldn\'t identify the problem";
+			this.completeNoProbWizPg.Text = "Troubleshooting didn\'t identify any problems";
 			this.completeNoProbWizPg.HelpClicked += new System.EventHandler(this.showLocalResults_HelpClicked);
 			// 
 			// tableLayoutPanel2
@@ -265,6 +264,7 @@
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.tableLayoutPanel2.RowCount = 3;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -274,15 +274,51 @@
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(515, 186);
 			this.tableLayoutPanel2.TabIndex = 10;
 			// 
+			// closeBtn
+			// 
+			this.closeBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.closeBtn.Location = new System.Drawing.Point(3, 137);
+			this.closeBtn.Name = "closeBtn";
+			this.closeBtn.Size = new System.Drawing.Size(509, 46);
+			this.closeBtn.TabIndex = 10;
+			this.closeBtn.Text = "Close the troubleshooter";
+			this.closeBtn.UseVisualStyleBackColor = true;
+			this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
+			// 
+			// connRemoteBtn
+			// 
+			this.connRemoteBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.connRemoteBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.connRemoteBtn.Location = new System.Drawing.Point(3, 85);
+			this.connRemoteBtn.Name = "connRemoteBtn";
+			this.connRemoteBtn.Size = new System.Drawing.Size(509, 46);
+			this.connRemoteBtn.TabIndex = 9;
+			this.connRemoteBtn.Text = "Troubleshoot connecting to a remote computer";
+			this.connRemoteBtn.UseVisualStyleBackColor = true;
+			this.connRemoteBtn.Click += new System.EventHandler(this.connRemoteBtn_Click);
+			// 
 			// label5
 			// 
 			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.label5.Location = new System.Drawing.Point(3, 0);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(509, 30);
 			this.label5.TabIndex = 6;
 			this.label5.Text = "You can try exploring other options that might be helpful.";
+			// 
+			// explOptionsBtn
+			// 
+			this.explOptionsBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.explOptionsBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.explOptionsBtn.Location = new System.Drawing.Point(3, 33);
+			this.explOptionsBtn.Name = "explOptionsBtn";
+			this.explOptionsBtn.Size = new System.Drawing.Size(509, 46);
+			this.explOptionsBtn.TabIndex = 7;
+			this.explOptionsBtn.Text = "Explore additional options";
+			this.explOptionsBtn.UseVisualStyleBackColor = true;
+			this.explOptionsBtn.Click += new System.EventHandler(this.explOptionsBtn_Click);
 			// 
 			// completeWithProbWizPg
 			// 
@@ -328,12 +364,36 @@
 			this.localResultLabel.Size = new System.Drawing.Size(509, 34);
 			this.localResultLabel.TabIndex = 6;
 			this.localResultLabel.Text = "Troubleshooting was able to find the following problems. To fix a problem, check " +
-    "the resolution below each problem\'s description.";
+	"the resolution below each problem\'s description.";
+			// 
+			// localCloseBtn
+			// 
+			this.localCloseBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.localCloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.localCloseBtn.Location = new System.Drawing.Point(3, 188);
+			this.localCloseBtn.Name = "localCloseBtn";
+			this.localCloseBtn.Size = new System.Drawing.Size(509, 43);
+			this.localCloseBtn.TabIndex = 7;
+			this.localCloseBtn.Text = "Close the troubleshooter";
+			this.localCloseBtn.UseVisualStyleBackColor = true;
+			this.localCloseBtn.Click += new System.EventHandler(this.closeBtn_Click);
+			// 
+			// remoteConnBtn
+			// 
+			this.remoteConnBtn.Dock = System.Windows.Forms.DockStyle.Top;
+			this.remoteConnBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.remoteConnBtn.Location = new System.Drawing.Point(3, 139);
+			this.remoteConnBtn.Name = "remoteConnBtn";
+			this.remoteConnBtn.Size = new System.Drawing.Size(509, 43);
+			this.remoteConnBtn.TabIndex = 7;
+			this.remoteConnBtn.Text = "Troubleshoot connecting to a remote computer";
+			this.remoteConnBtn.UseVisualStyleBackColor = true;
+			this.remoteConnBtn.Click += new System.EventHandler(this.connRemoteBtn_Click);
 			// 
 			// issueList
 			// 
 			this.issueList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.issueList.AutoScroll = true;
 			this.issueList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.issueList.Location = new System.Drawing.Point(3, 37);
@@ -366,9 +426,10 @@
 			// selectRemoteWizPg
 			// 
 			this.selectRemoteWizPg.Controls.Add(this.computerBrowseBtn);
-			this.selectRemoteWizPg.Controls.Add(this.textBox1);
+			this.selectRemoteWizPg.Controls.Add(this.remoteSvrText);
 			this.selectRemoteWizPg.Controls.Add(this.label1);
 			this.selectRemoteWizPg.Name = "selectRemoteWizPg";
+			this.selectRemoteWizPg.NextPage = this.detectWizPg;
 			this.selectRemoteWizPg.Size = new System.Drawing.Size(515, 261);
 			this.selectRemoteWizPg.Suppress = true;
 			this.selectRemoteWizPg.TabIndex = 2;
@@ -387,12 +448,12 @@
 			this.computerBrowseBtn.Text = "Browse...";
 			this.computerBrowseBtn.UseVisualStyleBackColor = true;
 			// 
-			// textBox1
+			// remoteSvrText
 			// 
-			this.textBox1.Location = new System.Drawing.Point(4, 43);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(259, 23);
-			this.textBox1.TabIndex = 6;
+			this.remoteSvrText.Location = new System.Drawing.Point(4, 43);
+			this.remoteSvrText.Name = "remoteSvrText";
+			this.remoteSvrText.Size = new System.Drawing.Size(259, 23);
+			this.remoteSvrText.TabIndex = 6;
 			// 
 			// label1
 			// 
@@ -402,91 +463,15 @@
 			this.label1.Size = new System.Drawing.Size(515, 39);
 			this.label1.TabIndex = 5;
 			this.label1.Text = "Select a remote computer for the troubleshooter to find problems with connecting " +
-    "to it and accessing the Task Scheduler on that computer.";
+	"to it and accessing the Task Scheduler on that computer.";
 			// 
-			// localScanner
+			// scanner
 			// 
-			this.localScanner.WorkerReportsProgress = true;
-			this.localScanner.WorkerSupportsCancellation = true;
-			this.localScanner.DoWork += new System.ComponentModel.DoWorkEventHandler(this.localScanner_DoWork);
-			this.localScanner.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.localScanner_ProgressChanged);
-			this.localScanner.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.localScanner_RunWorkerCompleted);
-			// 
-			// remoteScanner
-			// 
-			this.remoteScanner.WorkerReportsProgress = true;
-			this.remoteScanner.WorkerSupportsCancellation = true;
-			this.remoteScanner.DoWork += new System.ComponentModel.DoWorkEventHandler(this.remoteScanner_DoWork);
-			this.remoteScanner.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.remoteScanner_ProgressChanged);
-			this.remoteScanner.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.remoteScanner_RunWorkerCompleted);
-			// 
-			// closeBtn
-			// 
-			this.closeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.closeBtn.Location = new System.Drawing.Point(3, 137);
-			this.closeBtn.Name = "closeBtn";
-			this.closeBtn.Size = new System.Drawing.Size(509, 46);
-			this.closeBtn.TabIndex = 10;
-			this.closeBtn.Text = "Close the troubleshooter";
-			this.closeBtn.UseVisualStyleBackColor = true;
-			this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
-			// 
-			// connRemoteBtn
-			// 
-			this.connRemoteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.connRemoteBtn.Enabled = false;
-			this.connRemoteBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.connRemoteBtn.Location = new System.Drawing.Point(3, 85);
-			this.connRemoteBtn.Name = "connRemoteBtn";
-			this.connRemoteBtn.Size = new System.Drawing.Size(509, 46);
-			this.connRemoteBtn.TabIndex = 9;
-			this.connRemoteBtn.Text = "Troubleshoot connecting to a remote computer";
-			this.connRemoteBtn.UseVisualStyleBackColor = true;
-			this.connRemoteBtn.Visible = false;
-			this.connRemoteBtn.Click += new System.EventHandler(this.connRemoteBtn_Click);
-			// 
-			// explOptionsBtn
-			// 
-			this.explOptionsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.explOptionsBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.explOptionsBtn.Location = new System.Drawing.Point(3, 33);
-			this.explOptionsBtn.Name = "explOptionsBtn";
-			this.explOptionsBtn.Size = new System.Drawing.Size(509, 46);
-			this.explOptionsBtn.TabIndex = 7;
-			this.explOptionsBtn.Text = "Explore additional options";
-			this.explOptionsBtn.UseVisualStyleBackColor = true;
-			this.explOptionsBtn.Click += new System.EventHandler(this.explOptionsBtn_Click);
-			// 
-			// localCloseBtn
-			// 
-			this.localCloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.localCloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.localCloseBtn.Location = new System.Drawing.Point(3, 188);
-			this.localCloseBtn.Name = "localCloseBtn";
-			this.localCloseBtn.Size = new System.Drawing.Size(509, 43);
-			this.localCloseBtn.TabIndex = 7;
-			this.localCloseBtn.Text = "Close the troubleshooter";
-			this.localCloseBtn.UseVisualStyleBackColor = true;
-			this.localCloseBtn.Click += new System.EventHandler(this.closeBtn_Click);
-			// 
-			// remoteConnBtn
-			// 
-			this.remoteConnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.remoteConnBtn.Enabled = false;
-			this.remoteConnBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.remoteConnBtn.Location = new System.Drawing.Point(3, 139);
-			this.remoteConnBtn.Name = "remoteConnBtn";
-			this.remoteConnBtn.Size = new System.Drawing.Size(509, 43);
-			this.remoteConnBtn.TabIndex = 7;
-			this.remoteConnBtn.Text = "Troubleshoot connecting to a remote computer";
-			this.remoteConnBtn.UseVisualStyleBackColor = true;
-			this.remoteConnBtn.Click += new System.EventHandler(this.connRemoteBtn_Click);
+			this.scanner.WorkerReportsProgress = true;
+			this.scanner.WorkerSupportsCancellation = true;
+			this.scanner.DoWork += new System.ComponentModel.DoWorkEventHandler(this.scanner_DoWork);
+			this.scanner.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.scanner_ProgressChanged);
+			this.scanner.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.scanner_RunWorkerCompleted);
 			// 
 			// WizardForm
 			// 
@@ -526,7 +511,7 @@
 		private AeroWizard.WizardPage selectRemoteWizPg;
 		private System.Windows.Forms.Label scanLocalStatusLabel;
 		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox remoteSvrText;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button computerBrowseBtn;
 		private TaskSchedulerConfig.CommandLink remoteConnBtn;
@@ -534,8 +519,7 @@
 		private System.Windows.Forms.Label localResultLabel;
 		private AeroWizard.WizardPage reportWizPg;
 		private System.Windows.Forms.Panel localConfigList;
-		private System.ComponentModel.BackgroundWorker localScanner;
-		private System.ComponentModel.BackgroundWorker remoteScanner;
+		private System.ComponentModel.BackgroundWorker scanner;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private AeroWizard.WizardPage introWizPg;
 		private System.Windows.Forms.Label label3;

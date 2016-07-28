@@ -15,7 +15,7 @@ namespace TaskSchedulerConfig
 		public Firewall(string server)
 		{
 			Rules = new RulesContainer(this);
-			Type NetFwMgrType = Type.GetTypeFromProgID(OldFirewall ? "HNetCfg.FwMgr" : "HNetCfg.FwPolicy2", server, false);
+			Type NetFwMgrType = Type.GetTypeFromProgID(OldFirewall ? "HNetCfg.FwMgr" : "HNetCfg.FwPolicy2", server, true);
 			Instance = Activator.CreateInstance(NetFwMgrType);
 		}
 

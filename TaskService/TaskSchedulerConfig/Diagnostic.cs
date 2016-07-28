@@ -10,16 +10,17 @@ namespace TaskSchedulerConfig
 {
 	class Diagnostics : List<Diagnostics.Diagnostic>
 	{
-		Validator v;
+		ServicesDetail v;
 
 		public Diagnostics(string server)
 		{
-			v = new Validator(server);
+			v = new ServicesDetail(server);
 
 			Add(new Diagnostic
 			{
 				Name = "V1 Local Access: User has insufficient permissions to schedule tasks",
 				Description = "To schedule a V1 task, the current user must be a member of the Administrators, Backup Operators, or Server Operators group on the local computer.",
+				Condition = o => v.IsLocal,
 				Troubleshooter = o => !(v.UserIsAdmin || v.UserIsBackupOperator || v.UserIsServerOperator),
 				Resolution = new Resolution
 				{
@@ -35,6 +36,7 @@ namespace TaskSchedulerConfig
 			{
 				Name = "V1 Remote Access: Firewall is not enabled",
 				Description = "Firewall must be enabled on local system.",
+				Condition = o => v.IsLocal,
 				Troubleshooter = o => !v.Firewall.Enabled,
 				Resolution = new Resolution
 				{
@@ -63,6 +65,7 @@ namespace TaskSchedulerConfig
 			{
 				Name = "V1 Local Access: Invalid permissions on the \"%windir%\\Tasks\" directory",
 				Description = "Permissions on the \"%windir%\\Tasks\" directory do not allow V1 tasks to be created or edited by the current user",
+				Condition = o => v.IsLocal,
 				Troubleshooter = CheckTasksDirPerms,
 				Resolution = new Resolution
 				{
@@ -81,6 +84,7 @@ namespace TaskSchedulerConfig
 			{
 				Name = "V2 Local Access: User has insufficient permissions to schedule tasks",
 				Description = "To schedule a V2 task, the current user must have \"Log on as a batch job\" and \"Log on as a service\" privileges.",
+				Condition = o => v.IsLocal,
 				//Troubleshooter = o => !v.UserRights[LocalSecurityAccountPrivileges.LogonAsBatchJob],
 				RequiresElevation = true,
 				Troubleshooter = o => !v.UserAccessRights[LocalSecurity.LsaSecurityAccessRights.BatchLogon],
@@ -148,6 +152,8 @@ namespace TaskSchedulerConfig
 				}
 			}
 		}
+
+		public string Server => v.Server;
 
 		public IEnumerable<Diagnostic> UnRun
 		{
