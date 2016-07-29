@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
-	/// Quick simple trigger types for the <see cref="TaskService.AddTask(string, QuickTriggerType, string, string, string, string, TaskLogonType)"/> method.
+	/// Quick simple trigger types for the <see cref="TaskService.AddTask(string,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,string,string,Microsoft.Win32.TaskScheduler.TaskLogonType,string)"/> method.
 	/// </summary>
 	public enum QuickTriggerType
 	{
