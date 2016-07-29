@@ -1301,7 +1301,7 @@ namespace Microsoft.Win32.TaskScheduler
 								if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
 								{
 									string content = rdr.ReadString();
-									System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content
+									System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(content,
 										@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
 										System.Text.RegularExpressions.RegexOptions.IgnoreCase |
 										System.Text.RegularExpressions.RegexOptions.Compiled |
