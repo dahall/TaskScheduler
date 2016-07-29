@@ -1,36 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler.V1Interop
 {
-	internal class V1Trigger : ITriggerImpl
+	internal abstract class V1Trigger : ITriggerImpl, IDisposable
 	{
-		private ITaskTrigger v1Trigger;
-		private TaskTrigger v1TriggerData;
+		protected ITaskTrigger iTrigger;
+		protected TaskTrigger triggerData;
 
-		public V1Trigger() { }
+		public V1Trigger(ITaskTrigger trigger, TaskTriggerType type)
+		{
+			iTrigger = trigger;
+			triggerData = trigger.GetTrigger();
+			triggerData.Type = type;
+		}
 
-		public object BaseObject { get; set; }
+		public virtual TimeSpan? Delay
+		{
+			get { return null; }
+			set { throw new NotV1SupportedException(); }
+		}
 
 		public bool Enabled
 		{
-			get { return !v1TriggerData.Flags.IsFlagSet(V1Interop.TaskTriggerFlags.Disabled); } 
+			get { return !triggerData.Flags.IsFlagSet(TaskTriggerFlags.Disabled); } 
 			set
 			{
-				v1TriggerData.Flags.SetFlags(V1Interop.TaskTriggerFlags.Disabled, !value);
+				triggerData.Flags.SetFlags(TaskTriggerFlags.Disabled, !value);
 				SetData();
 			}
 		}
 
 		public DateTime? EndBoundary
 		{
-			get { return v1TriggerData.EndDate; }
+			get { return triggerData.EndDate; }
 			set
 			{
-				v1TriggerData.EndDate = value;
+				triggerData.EndDate = value;
 				SetData();
 			}
 		}
@@ -49,54 +55,81 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 		public TimeSpan? RepetitionDuration
 		{
-			get { return TimeSpan.FromMinutes(v1TriggerData.MinutesDuration); }
+			get { return TimeSpan.FromMinutes(triggerData.MinutesDuration); }
 			set
 			{
-				v1TriggerData.MinutesDuration = (uint)value.GetValueOrDefault(TimeSpan.Zero).TotalMinutes;
+				triggerData.MinutesDuration = (uint)value.GetValueOrDefault(TimeSpan.Zero).TotalMinutes;
 				SetData();
 			}
 		}
 
 		public TimeSpan? RepetitionInterval
 		{
-			get { return TimeSpan.FromMinutes(v1TriggerData.MinutesInterval); }
+			get { return TimeSpan.FromMinutes(triggerData.MinutesInterval); }
 			set
 			{
 				if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
 					throw new ArgumentOutOfRangeException(nameof(RepetitionInterval));
-				v1TriggerData.MinutesInterval = (uint)value.GetValueOrDefault(TimeSpan.Zero).TotalMinutes;
+				triggerData.MinutesInterval = (uint)value.GetValueOrDefault(TimeSpan.Zero).TotalMinutes;
 				SetData();
 			}
 		}
 
 		public bool RepetitionStopAtDurationEnd
 		{
-			get { return v1TriggerData.Flags.IsFlagSet(TaskTriggerFlags.KillAtDurationEnd); }
+			get { return triggerData.Flags.IsFlagSet(TaskTriggerFlags.KillAtDurationEnd); }
 			set
 			{
-				v1TriggerData.Flags.SetFlags(TaskTriggerFlags.KillAtDurationEnd, value);
+				triggerData.Flags.SetFlags(TaskTriggerFlags.KillAtDurationEnd, value);
 				SetData();
 			}
 		}
 
 		public DateTime StartBoundary
 		{
-			get { return v1TriggerData.BeginDate; }
+			get { return triggerData.BeginDate; }
 			set
 			{
-				v1TriggerData.BeginDate = value;
+				triggerData.BeginDate = value;
 				SetData();
 			}
 		}
 
-		private void SetData()
+		public TaskScheduler.TaskTriggerType TriggerType => ConvertFromV1TriggerType(triggerData.Type);
+
+		public virtual void Dispose()
 		{
-			if (v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
+			if (iTrigger != null)
+			{
+				Marshal.ReleaseComObject(iTrigger);
+				iTrigger = null;
+			}
+		}
+
+		protected void SetData()
+		{
+			if (triggerData.MinutesInterval != 0 && triggerData.MinutesInterval >= triggerData.MinutesDuration)
 				throw new ArgumentException("Trigger repetition interval must be less than trigger repetition duration under Task Scheduler 1.0.");
-			if (v1TriggerData.BeginDate == DateTime.MinValue)
-				v1TriggerData.BeginDate = DateTime.Now;
-			v1Trigger.SetTrigger(ref v1TriggerData);
-			System.Diagnostics.Debug.WriteLine(v1TriggerData);
+			if (triggerData.BeginDate == DateTime.MinValue)
+				triggerData.BeginDate = DateTime.Now;
+			iTrigger.SetTrigger(ref triggerData);
+			System.Diagnostics.Debug.WriteLine(triggerData);
+		}
+
+		internal static TaskScheduler.TaskTriggerType ConvertFromV1TriggerType(TaskTriggerType v1Type)
+		{
+			int v2tt = (int)v1Type + 1;
+			if (v2tt > 6) v2tt++;
+			return (TaskScheduler.TaskTriggerType)v2tt;
+		}
+
+		internal static TaskTriggerType ConvertToV1TriggerType(TaskScheduler.TaskTriggerType type)
+		{
+			if (type == TaskScheduler.TaskTriggerType.Registration || type == TaskScheduler.TaskTriggerType.Event || type == TaskScheduler.TaskTriggerType.SessionStateChange)
+				throw new NotV1SupportedException();
+			int v1tt = (int)type - 1;
+			if (v1tt >= 7) v1tt--;
+			return (TaskTriggerType)v1tt;
 		}
 	}
 }
