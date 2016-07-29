@@ -27,10 +27,6 @@ namespace Microsoft.Win32.TaskScheduler
 			data.Add(new Data { engine = eng, type = type });
 		}
 
-		public static T GetInstance<T>(TaskServiceEngine eng)
-		{
-			T ret = (T)Activator.CreateInstance(data.First(d => d.engine == eng && d.type is T).type);
-			return ret;
-		}
+		public static T GetInstance<T>(TaskServiceEngine eng, params object[] args) => (T)Activator.CreateInstance(data.First(d => d.engine == eng && d.type is T)?.type, args);
 	}
 }
