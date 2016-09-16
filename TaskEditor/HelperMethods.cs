@@ -9,13 +9,20 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService, out string sid)
 		{
-			Locations l = Locations.EnterpriseDomain | Locations.ExternalDomain | Locations.GlobalCatalog | Locations.JoinedDomain | Locations.LocalComputer;
-			DirectoryObjectPickerDialog dlg = new DirectoryObjectPickerDialog() { TargetComputer = targetComputerName, MultiSelect = false, SkipDomainControllerCheck = true, AllowedLocations = l, DefaultLocations = l };
-			dlg.AllowedObjectTypes = ObjectTypes.Users; // | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
+			var l = Locations.EnterpriseDomain | Locations.ExternalDomain | Locations.GlobalCatalog | Locations.JoinedDomain | Locations.LocalComputer;
+			var dlg = new DirectoryObjectPickerDialog
+			{
+				TargetComputer = targetComputerName,
+				MultiSelect = false,
+				SkipDomainControllerCheck = true,
+				AllowedLocations = l,
+				DefaultLocations = l,
+				AllowedObjectTypes = ObjectTypes.Users// | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
+			};
 			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups;
 			dlg.DefaultObjectTypes = dlg.AllowedObjectTypes;
 			dlg.AttributesToFetch.Add("objectSid");
-			System.Windows.Forms.DialogResult res = System.Windows.Forms.DialogResult.None;
+			var res = System.Windows.Forms.DialogResult.None;
 			try { res = dlg.ShowDialog(parent); } catch { }
 			if (res == System.Windows.Forms.DialogResult.OK)
 			{
@@ -23,10 +30,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					try
 					{
-						if (!String.IsNullOrEmpty(dlg.SelectedObject.Upn))
-							acctName = NameTranslator.TranslateUpnToDownLevel(dlg.SelectedObject.Upn);
-						else
-							acctName = dlg.SelectedObject.Name;
+						acctName = !string.IsNullOrEmpty(dlg.SelectedObject.Upn) ? NameTranslator.TranslateUpnToDownLevel(dlg.SelectedObject.Upn) : dlg.SelectedObject.Name;
 					}
 					catch
 					{
@@ -45,13 +49,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static string AttrToString(object attr)
 		{
-			object multivaluedAttribute = attr;
+			var multivaluedAttribute = attr;
 			if (!(multivaluedAttribute is IEnumerable) || multivaluedAttribute is byte[] || multivaluedAttribute is string)
-				multivaluedAttribute = new Object[1] { multivaluedAttribute };
+				multivaluedAttribute = new[] { multivaluedAttribute };
 
-			System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
+			var list = new System.Collections.Generic.List<string>();
 
-			foreach (object attribute in (IEnumerable)multivaluedAttribute)
+			foreach (var attribute in (IEnumerable)multivaluedAttribute)
 			{
 				if (attribute == null)
 				{
@@ -59,7 +63,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else if (attribute is byte[])
 				{
-					byte[] bytes = (byte[])attribute;
+					var bytes = (byte[])attribute;
 					list.Add(BytesToString(bytes));
 				}
 				else

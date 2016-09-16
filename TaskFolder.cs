@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Security.Principal;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Provides the methods that are used to register (create) tasks in the folder, remove tasks from the folder, and create or remove subfolders from the folder.
 	/// </summary>
+	[PublicAPI]
 	public sealed class TaskFolder : IDisposable, IComparable<TaskFolder>
 	{
-		V1Interop.ITaskScheduler v1List = null;
-		V2Interop.ITaskFolder v2Folder = null;
+		private V1Interop.ITaskScheduler v1List;
+		private readonly V2Interop.ITaskFolder v2Folder;
 
-		internal TaskFolder(TaskService svc)
+		internal TaskFolder([NotNull] TaskService svc)
 		{
 			TaskService = svc;
 			v1List = svc.v1TaskScheduler;
 		}
 
-		internal TaskFolder(TaskService svc, V2Interop.ITaskFolder iFldr)
+		internal TaskFolder([NotNull] TaskService svc, [NotNull] V2Interop.ITaskFolder iFldr)
 		{
 			TaskService = svc;
 			v2Folder = iFldr;
@@ -39,11 +40,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// A <see cref="System.Collections.Generic.IEnumerator{Task}"/> for all <see cref="Task"/> instances.
 		/// </value>
+		[NotNull, ItemNotNull]
 		public System.Collections.Generic.IEnumerable<Task> AllTasks => EnumerateFolderTasks(this);
 
 		/// <summary>
 		/// Gets the name that is used to identify the folder that contains a task.
 		/// </summary>
+		[NotNull]
 		public string Name => (v2Folder == null) ? @"\" : v2Folder.Name;
 
 		/// <summary>
@@ -71,12 +74,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the path to where the folder is stored.
 		/// </summary>
+		[NotNull]
 		public string Path => (v2Folder == null) ? @"\" : v2Folder.Path;
 
-		internal TaskFolder GetFolder(string Path)
+		[NotNull]
+		internal TaskFolder GetFolder([NotNull] string path)
 		{
 			if (v2Folder != null)
-				return new TaskFolder(TaskService, v2Folder.GetFolder(Path));
+				return new TaskFolder(TaskService, v2Folder.GetFolder(path));
 			throw new NotV1SupportedException();
 		}
 
@@ -88,20 +93,15 @@ namespace Microsoft.Win32.TaskScheduler
 		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
 		{
 #pragma warning disable 0618
-			get
-			{
-				return GetSecurityDescriptor(Task.defaultSecurityInfosSections);
-			}
-			set
-			{
-				SetSecurityDescriptor(value, Task.defaultSecurityInfosSections);
-			}
+			get { return GetSecurityDescriptor(); }
+			set { SetSecurityDescriptor(value); }
 #pragma warning restore 0618
 		}
 
 		/// <summary>
 		/// Gets all the subfolders in the folder.
 		/// </summary>
+		[NotNull, ItemNotNull]
 		public TaskFolderCollection SubFolders
 		{
 			get
@@ -118,6 +118,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets a collection of all the tasks in the folder.
 		/// </summary>
+		[NotNull, ItemNotNull]
 		public TaskCollection Tasks => GetTasks();
 
 		/// <summary>
@@ -142,7 +143,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sd">The security descriptor associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
 		[Obsolete("This method will be removed in deference to the CreateFolder(string, TaskSecurity) method.")]
-		public TaskFolder CreateFolder(string subFolderName, System.Security.AccessControl.GenericSecurityDescriptor sd) => CreateFolder(subFolderName, sd == null ? null : sd.GetSddlForm(Task.defaultAccessControlSections));
+		public TaskFolder CreateFolder([NotNull] string subFolderName, System.Security.AccessControl.GenericSecurityDescriptor sd) => CreateFolder(subFolderName, sd == null ? null : sd.GetSddlForm(Task.defaultAccessControlSections));
 
 		/// <summary>
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
@@ -150,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="subFolderName">The name used to identify the folder. If "FolderName\SubFolder1\SubFolder2" is specified, the entire folder tree will be created if the folders do not exist. This parameter can be a relative path to the current <see cref="TaskFolder"/> instance. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="folderSecurity">The task security associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
-		public TaskFolder CreateFolder(string subFolderName, TaskSecurity folderSecurity)
+		public TaskFolder CreateFolder([NotNull] string subFolderName, [NotNull] TaskSecurity folderSecurity)
 		{
 			if (folderSecurity == null)
 				throw new ArgumentNullException(nameof(folderSecurity));
@@ -167,43 +168,40 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.Security.SecurityException">Security descriptor mismatch between specified credentials and credentials on existing folder by same name.</exception>
 		/// <exception cref="System.ArgumentException">Invalid SDDL form.</exception>
 		/// <exception cref="Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public TaskFolder CreateFolder(string subFolderName, string sddlForm = null, bool exceptionOnExists = true)
+		public TaskFolder CreateFolder([NotNull] string subFolderName, string sddlForm = null, bool exceptionOnExists = true)
 		{
-			if (v2Folder != null)
+			if (v2Folder == null) throw new NotV1SupportedException();
+			V2Interop.ITaskFolder ifld = null;
+			try { ifld = v2Folder.CreateFolder(subFolderName, sddlForm); }
+			catch (System.Runtime.InteropServices.COMException ce)
 			{
-				V2Interop.ITaskFolder ifld = null;
-				try { ifld = v2Folder.CreateFolder(subFolderName, sddlForm); }
-				catch (System.Runtime.InteropServices.COMException ce)
+				int serr = ce.ErrorCode & 0x0000FFFF;
+				if (serr == 0xb7) // ERROR_ALREADY_EXISTS
 				{
-					int serr = ce.ErrorCode & 0x0000FFFF;
-					if (serr == 0xb7) // ERROR_ALREADY_EXISTS
+					if (exceptionOnExists) throw;
+					try
 					{
-						if (exceptionOnExists) throw;
-						try
+						ifld = v2Folder.GetFolder(subFolderName);
+						if (ifld != null && sddlForm != null && sddlForm.Trim().Length > 0)
 						{
-							ifld = v2Folder.GetFolder(subFolderName);
-							if (ifld != null && sddlForm != null && sddlForm.Trim().Length > 0)
-							{
-								string sd = ifld.GetSecurityDescriptor((int)Task.defaultSecurityInfosSections);
-								if (string.Compare(sddlForm, sd, true) != 0)
-									throw new System.Security.SecurityException("Security descriptor mismatch between specified credentials and credentials on existing folder by same name.");
-							}
-						}
-						catch
-						{
-							if (ifld != null)
-								System.Runtime.InteropServices.Marshal.ReleaseComObject(ifld);
-							throw;
+							string sd = ifld.GetSecurityDescriptor((int)Task.defaultSecurityInfosSections);
+							if (string.Compare(sddlForm, sd, StringComparison.OrdinalIgnoreCase) != 0)
+								throw new System.Security.SecurityException("Security descriptor mismatch between specified credentials and credentials on existing folder by same name.");
 						}
 					}
-					else if (serr == 0x534 || serr == 0x538 || serr == 0x539 || serr == 0x53A || serr == 0x519 || serr == 0x57)
-						throw new ArgumentException("Invalid SDDL form", nameof(sddlForm), ce);
-					else
+					catch
+					{
+						if (ifld != null)
+							System.Runtime.InteropServices.Marshal.ReleaseComObject(ifld);
 						throw;
+					}
 				}
-				return new TaskFolder(TaskService, ifld);
+				else if (serr == 0x534 || serr == 0x538 || serr == 0x539 || serr == 0x53A || serr == 0x519 || serr == 0x57)
+					throw new ArgumentException(@"Invalid SDDL form", nameof(sddlForm), ce);
+				else
+					throw;
 			}
-			throw new NotV1SupportedException();
+			return new TaskFolder(TaskService, ifld);
 		}
 
 		/// <summary>
@@ -212,7 +210,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="subFolderName">The name of the subfolder to be removed. The root task folder is specified with a backslash (\). This parameter can be a relative path to the folder you want to delete. An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the folder does not exist.</param>
 		/// <exception cref="Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void DeleteFolder(string subFolderName, bool exceptionOnNotExists = true)
+		public void DeleteFolder([NotNull] string subFolderName, bool exceptionOnNotExists = true)
 		{
 			if (v2Folder != null)
 			{
@@ -233,19 +231,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Deletes a task from the folder.
 		/// </summary>
-		/// <param name="Name">The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="name">The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the task does not exist.</param>
-		public void DeleteTask(string Name, bool exceptionOnNotExists = true)
+		public void DeleteTask([NotNull] string name, bool exceptionOnNotExists = true)
 		{
 			try
 			{
 				if (v2Folder != null)
-					v2Folder.DeleteTask(Name, 0);
+					v2Folder.DeleteTask(name, 0);
 				else
 				{
-					if (!Name.EndsWith(".job", StringComparison.CurrentCultureIgnoreCase))
-						Name += ".job";
-					v1List.Delete(Name);
+					if (!name.EndsWith(".job", StringComparison.CurrentCultureIgnoreCase))
+						name += ".job";
+					v1List.Delete(name);
 				}
 			}
 			catch (System.IO.FileNotFoundException)
@@ -264,11 +262,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override bool Equals(object obj)
 		{
-			if (obj is TaskFolder)
-			{
-				TaskFolder val = obj as TaskFolder;
-				return Path == val.Path && TaskService.TargetServer == val.TaskService.TargetServer && GetSecurityDescriptorSddlForm() == val.GetSecurityDescriptorSddlForm();
-			}
+			var folder = obj as TaskFolder;
+			if (folder != null)
+				return Path == folder.Path && TaskService.TargetServer == folder.TaskService.TargetServer && GetSecurityDescriptorSddlForm() == folder.GetSecurityDescriptorSddlForm();
 			return false;
 		}
 
@@ -276,6 +272,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="TaskFolder"/> object.
 		/// </summary>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
+		[NotNull]
 		public TaskSecurity GetAccessControl() => GetAccessControl(Task.defaultAccessControlSections);
 
 		/// <summary>
@@ -283,6 +280,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="includeSections">One of the <see cref="System.Security.AccessControl.AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
+		[NotNull]
 		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections) => new TaskSecurity(this, includeSections);
 
 		/// <summary>
@@ -319,6 +317,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="filter">The optional name filter expression.</param>
 		/// <returns>Collection of all matching tasks.</returns>
+		[NotNull, ItemNotNull]
 		public TaskCollection GetTasks(System.Text.RegularExpressions.Regex filter = null)
 		{
 			if (v2Folder != null)
@@ -329,67 +328,60 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Imports a <see cref="Task"/> from an XML file.
 		/// </summary>
-		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="xmlFile">The file containing the XML-formatted definition of the task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
-		public Task ImportTask(string Path, string xmlFile) => RegisterTask(Path, System.IO.File.ReadAllText(xmlFile));
+		public Task ImportTask(string path, [NotNull] string xmlFile) => RegisterTask(path, System.IO.File.ReadAllText(xmlFile));
 
 		/// <summary>
 		/// Registers (creates) a new task in the folder using XML to define the task.
 		/// </summary>
-		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
-		/// <param name="XmlText">An XML-formatted definition of the task.</param>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="xmlText">An XML-formatted definition of the task.</param>
 		/// <param name="createType">A union of <see cref="TaskCreation"/> flags.</param>
-		/// <param name="UserId">The user credentials used to register the task.</param>
+		/// <param name="userId">The user credentials used to register the task.</param>
 		/// <param name="password">The password for the userId used to register the task.</param>
-		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="logonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="sddl">The security descriptor associated with the registered task. You can specify the access control list (ACL) in the security descriptor for a task in order to allow or deny certain users and groups access to a task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
-		public Task RegisterTask(string Path, string XmlText, TaskCreation createType = TaskCreation.CreateOrUpdate, string UserId = null, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
+		public Task RegisterTask(string path, [NotNull] string xmlText, TaskCreation createType = TaskCreation.CreateOrUpdate, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (v2Folder != null)
-				return Task.CreateTask(TaskService, v2Folder.RegisterTask(Path, XmlText, (int)createType, UserId, password, LogonType, sddl));
+				return Task.CreateTask(TaskService, v2Folder.RegisterTask(path, xmlText, (int)createType, userId, password, logonType, sddl));
 
-			try
-			{
-				TaskDefinition td = TaskService.NewTask();
-				XmlSerializationHelper.ReadObjectFromXmlText(XmlText, td);
-				return RegisterTaskDefinition(Path, td, createType, UserId == null ? td.Principal.ToString() : UserId,
-					password, LogonType == TaskLogonType.S4U ? td.Principal.LogonType : LogonType, sddl);
-			}
-			catch
-			{
-				throw; // new NotV1SupportedException();
-			}
+			TaskDefinition td = TaskService.NewTask();
+			XmlSerializationHelper.ReadObjectFromXmlText(xmlText, td);
+			return RegisterTaskDefinition(path, td, createType, userId ?? td.Principal.ToString(),
+				password, logonType == TaskLogonType.S4U ? td.Principal.LogonType : logonType, sddl);
 		}
 
 		/// <summary>
 		/// Registers (creates) a task in a specified location using a <see cref="TaskDefinition"/> instance to define a task.
 		/// </summary>
-		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="definition">The <see cref="TaskDefinition"/> of the registered task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
-		public Task RegisterTaskDefinition(string Path, TaskDefinition definition) => RegisterTaskDefinition(Path, definition, TaskCreation.CreateOrUpdate,
-				definition.Principal.ToString(), null, definition.Principal.LogonType, null);
+		public Task RegisterTaskDefinition(string path, [NotNull] TaskDefinition definition) => RegisterTaskDefinition(path, definition, TaskCreation.CreateOrUpdate,
+				definition.Principal.ToString(), null, definition.Principal.LogonType);
 
 		/// <summary>
 		/// Registers (creates) a task in a specified location using a <see cref="TaskDefinition" /> instance to define a task.
 		/// </summary>
-		/// <param name="Path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="definition">The <see cref="TaskDefinition" /> of the registered task.</param>
 		/// <param name="createType">A union of <see cref="TaskCreation" /> flags.</param>
-		/// <param name="UserId">The user credentials used to register the task.</param>
+		/// <param name="userId">The user credentials used to register the task.</param>
 		/// <param name="password">The password for the userId used to register the task.</param>
-		/// <param name="LogonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="logonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="sddl">The security descriptor associated with the registered task. You can specify the access control list (ACL) in the security descriptor for a task in order to allow or deny certain users and groups access to a task.</param>
 		/// <returns>
 		/// A <see cref="Task" /> instance that represents the new task. This will return <c>null</c> if <paramref name="createType"/> is set to <c>ValidateOnly</c> and there are no validation errors.
 		/// </returns>
 		/// <exception cref="System.ArgumentOutOfRangeException">
-		/// Path;Task names may not include any characters which are invalid for file names.
+		/// Task names may not include any characters which are invalid for file names.
 		/// or
-		/// Path;Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.
+		/// Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.
 		/// </exception>
 		/// <exception cref="NotV1SupportedException">This LogonType is not supported on Task Scheduler 1.0.
 		/// or
@@ -398,36 +390,35 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Registration triggers are not available on Task Scheduler 1.0.
 		/// or
 		/// XML validation not available on Task Scheduler 1.0.</exception>
-		public Task RegisterTaskDefinition(string Path, TaskDefinition definition, TaskCreation createType, string UserId, string password = null, TaskLogonType LogonType = TaskLogonType.S4U, string sddl = null)
+		public Task RegisterTaskDefinition(string path, [NotNull] TaskDefinition definition, TaskCreation createType, string userId, string password = null, TaskLogonType logonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (definition.Actions.Count < 1 || definition.Actions.Count > 32)
-			{
-				throw new ArgumentOutOfRangeException(nameof(definition.Actions), "A task must be registered with at least one action and no more than 32 actions.");
-			}
-			UserId = UserId ?? definition.Principal.UserId;
-			User user = new User(UserId);
+				throw new ArgumentOutOfRangeException(nameof(definition.Actions), @"A task must be registered with at least one action and no more than 32 actions.");
+
+			userId = userId ?? definition.Principal.UserId;
+			User user = new User(userId);
 			if (v2Folder != null)
 			{
 				definition.Actions.ConvertUnsupportedActions();
-				if (LogonType == TaskLogonType.ServiceAccount)
+				if (logonType == TaskLogonType.ServiceAccount)
 				{
-					if (string.IsNullOrEmpty(UserId) || !user.IsServiceAccount)
-						throw new ArgumentException("A valid system account name must be supplied for TaskLogonType.ServiceAccount. Valid entries are \"NT AUTHORITY\\SYSTEM\", \"SYSTEM\", \"NT AUTHORITY\\LOCALSERVICE\", or \"NT AUTHORITY\\NETWORKSERVICE\".", nameof(UserId));
+					if (string.IsNullOrEmpty(userId) || !user.IsServiceAccount)
+						throw new ArgumentException(@"A valid system account name must be supplied for TaskLogonType.ServiceAccount. Valid entries are ""NT AUTHORITY\SYSTEM"", ""SYSTEM"", ""NT AUTHORITY\LOCALSERVICE"", or ""NT AUTHORITY\NETWORKSERVICE"".", nameof(userId));
 					if (password != null)
-						throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
+						throw new ArgumentException(@"A password cannot be supplied when specifying TaskLogonType.ServiceAccount.", nameof(password));
 				}
 				/*else if ((LogonType == TaskLogonType.Password || LogonType == TaskLogonType.InteractiveTokenOrPassword ||
 					(LogonType == TaskLogonType.S4U && UserId != null && !user.IsCurrent)) && password == null)
 				{
 					throw new ArgumentException("A password must be supplied when specifying TaskLogonType.Password or TaskLogonType.InteractiveTokenOrPassword or TaskLogonType.S4U from another account.", nameof(password));
 				}*/
-				else if (LogonType == TaskLogonType.Group && password != null)
+				else if (logonType == TaskLogonType.Group && password != null)
 				{
-					throw new ArgumentException("A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
+					throw new ArgumentException(@"A password cannot be supplied when specifying TaskLogonType.Group.", nameof(password));
 				}
 				// The following line compensates for an omission in the native library that never actually sets the registration date (thanks ixm7).
 				if (definition.RegistrationInfo.Date == DateTime.MinValue) definition.RegistrationInfo.Date = DateTime.Now;
-				var iRegTask = v2Folder.RegisterTaskDefinition(Path, definition.v2Def, (int)createType, UserId ?? user.Name, password, LogonType, sddl);
+				var iRegTask = v2Folder.RegisterTaskDefinition(path, definition.v2Def, (int)createType, userId ?? user.Name, password, logonType, sddl);
 				if (createType == TaskCreation.ValidateOnly && iRegTask == null)
 					return null;
 				return Task.CreateTask(TaskService, iRegTask);
@@ -435,16 +426,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 			// Check for V1 invalid task names
 			string invChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
-			if (System.Text.RegularExpressions.Regex.IsMatch(Path, @"[" + invChars + @"]"))
-				throw new ArgumentOutOfRangeException(nameof(Path), "Task names may not include any characters which are invalid for file names.");
-			if (System.Text.RegularExpressions.Regex.IsMatch(Path, @"\.[^" + invChars + @"]{0,3}\z"))
-				throw new ArgumentOutOfRangeException(nameof(Path), "Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.");
+			if (System.Text.RegularExpressions.Regex.IsMatch(path, @"[" + invChars + @"]"))
+				throw new ArgumentOutOfRangeException(nameof(path), @"Task names may not include any characters which are invalid for file names.");
+			if (System.Text.RegularExpressions.Regex.IsMatch(path, @"\.[^" + invChars + @"]{0,3}\z"))
+				throw new ArgumentOutOfRangeException(nameof(path), @"Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.");
 
 			// Adds ability to set a password for a V1 task. Provided by Arcao.
 			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
-			if (LogonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
-				LogonType = TaskLogonType.InteractiveToken;
-			switch (LogonType)
+			if (logonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
+				logonType = TaskLogonType.InteractiveToken;
+			switch (logonType)
 			{
 				case TaskLogonType.Group:
 				case TaskLogonType.S4U:
@@ -456,7 +447,7 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 				case TaskLogonType.ServiceAccount:
 					flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
-					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(UserId) || user.IsSystem) ? String.Empty : user.Name, IntPtr.Zero);
+					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(userId) || user.IsSystem) ? String.Empty : user.Name, IntPtr.Zero);
 					break;
 				case TaskLogonType.InteractiveTokenOrPassword:
 					flags |= V1Interop.TaskFlags.Interactive;
@@ -468,7 +459,7 @@ namespace Microsoft.Win32.TaskScheduler
 						definition.v1Task.SetAccountInformation(user.Name, cpwd.DangerousGetHandle());
 					break;
 				default:
-					break;
+					throw new ArgumentOutOfRangeException(nameof(logonType), logonType, null);
 			}
 			definition.v1Task.SetFlags(flags);
 
@@ -480,7 +471,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskCreation.Update:
 					if (createType == TaskCreation.Disable)
 						definition.Settings.Enabled = false;
-					definition.V1Save(Path);
+					definition.V1Save(path);
 					break;
 				case TaskCreation.DontAddPrincipalAce:
 					throw new NotV1SupportedException("Security settings are not available on Task Scheduler 1.0.");
@@ -489,7 +480,7 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskCreation.ValidateOnly:
 					throw new NotV1SupportedException("XML validation not available on Task Scheduler 1.0.");
 				default:
-					break;
+					throw new ArgumentOutOfRangeException(nameof(createType), createType, null);
 			}
 			return new Task(TaskService, definition.v1Task);
 		}
@@ -498,10 +489,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Applies access control list (ACL) entries described by a <see cref="TaskSecurity"/> object to the file described by the current <see cref="TaskFolder"/> object.
 		/// </summary>
 		/// <param name="taskSecurity">A <see cref="TaskSecurity"/> object that describes an access control list (ACL) entry to apply to the current folder.</param>
-		public void SetAccessControl(TaskSecurity taskSecurity)
-		{
-			taskSecurity.Persist(this);
-		}
+		public void SetAccessControl([NotNull] TaskSecurity taskSecurity) { taskSecurity.Persist(this); }
 
 		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.
@@ -509,10 +497,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sd">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		[Obsolete("This method will be removed in deference to the SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
-		public void SetSecurityDescriptor(System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
-		{
-			SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections));
-		}
+		public void SetSecurityDescriptor([NotNull] System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections) { SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections)); }
 
 		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.

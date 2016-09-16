@@ -11,34 +11,33 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			InitializeComponent();
 		}
 
+		public event EventHandler KeyValueChanged;
+
 		[System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
 		public Action Action
 		{
-			get
-			{
-				return new ShowMessageAction(msgMsgText.Text, msgTitleText.Text);
-			}
+			get { return new ShowMessageAction(msgMsgText.Text, msgTitleText.Text); }
 			set
 			{
-				msgTitleText.Text = ((ShowMessageAction)value).Title;
-				msgMsgText.Text = ((ShowMessageAction)value).MessageBody;
+				var ma = value as ShowMessageAction;
+				if (ma == null) return;
+				msgTitleText.Text = ma.Title;
+				msgMsgText.Text = ma.MessageBody;
 			}
 		}
+
+		public bool CanValidate => msgMsgText.TextLength > 0;
 
 		public void Run()
 		{
-
+			MessageBox.Show(this, msgMsgText.Text, msgTitleText.Text, MessageBoxButtons.OK);
 		}
 
-		public bool IsActionValid() => msgMsgText.TextLength > 0;
-
-		public event EventHandler KeyValueChanged;
+		public bool ValidateFields() => true;
 
 		private void msgMsgText_TextChanged(object sender, EventArgs e)
 		{
-			EventHandler h = KeyValueChanged;
-			if (h != null)
-				h(this, EventArgs.Empty);
+			KeyValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

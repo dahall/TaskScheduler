@@ -46,7 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (log != null)
 			{
-				eventEnum = log.GetEnumerator() as TaskEventEnumerator;
+				eventEnum = log.GetEnumerator(true);
 				eventEnum.Seek(CurrentEvent.EventRecord.Bookmark);
 			}
 			else

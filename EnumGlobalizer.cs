@@ -30,8 +30,6 @@ namespace Microsoft.Win32.TaskScheduler
 					return BuildEnumString("ActionType", enumValue);
 				case "TaskState":
 					return BuildEnumString("TaskState", enumValue);
-				default:
-					break;
 			}
 			return enumValue.ToString();
 		}
@@ -41,9 +39,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (val == DaysOfTheWeek.AllDays)
 				return Properties.Resources.DOWAllDays;
 
-			List<string> s = new List<string>(7);
-			Array vals = Enum.GetValues(val.GetType());
-			for (int i = 0; i < vals.Length - 1; i++)
+			var s = new List<string>(7);
+			var vals = Enum.GetValues(val.GetType());
+			for (var i = 0; i < vals.Length - 1; i++)
 			{
 				if ((val & (DaysOfTheWeek)vals.GetValue(i)) > 0)
 					s.Add(DateTimeFormatInfo.CurrentInfo.GetDayName((DayOfWeek)i));
@@ -57,9 +55,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (val == MonthsOfTheYear.AllMonths)
 				return Properties.Resources.MOYAllMonths;
 
-			List<string> s = new List<string>(12);
-			Array vals = Enum.GetValues(val.GetType());
-			for (int i = 0; i < vals.Length - 1; i++)
+			var s = new List<string>(12);
+			var vals = Enum.GetValues(val.GetType());
+			for (var i = 0; i < vals.Length - 1; i++)
 			{
 				if ((val & (MonthsOfTheYear)vals.GetValue(i)) > 0)
 					s.Add(DateTimeFormatInfo.CurrentInfo.GetMonthName(i+1));
@@ -70,10 +68,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static string BuildEnumString(string preface, object enumValue)
 		{
-			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
+			var vals = enumValue.ToString().Split(new[] { ", " }, StringSplitOptions.None);
 			if (vals.Length == 0)
 				return string.Empty;
-			for (int i = 0; i < vals.Length; i++)
+			for (var i = 0; i < vals.Length; i++)
 				vals[i] = Properties.Resources.ResourceManager.GetString(preface + vals[i]);
 			return string.Join(Properties.Resources.ListSeparator, vals);
 		}

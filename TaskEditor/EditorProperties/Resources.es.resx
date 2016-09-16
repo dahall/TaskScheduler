@@ -549,4 +549,7 @@ Acción : {3}</value>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
     <value>Valor de duración válida.!</value>
   </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>El programa/script suministrado no es un nombre de archivo válido. Por favor corregir antes de continuar.!</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
@@ -19,7 +20,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			get
 			{
-				Action ret = new ExecAction(execProgText.Text, null, null);
+				Action ret = new ExecAction(execProgText.Text);
 				if (execArgText.TextLength > 0)
 					((ExecAction)ret).Arguments = execArgText.Text;
 				if (execDirText.TextLength > 0)
@@ -28,18 +29,27 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 			set
 			{
-				execProgText.Text = ((ExecAction)value).Path;
-				execArgText.Text = ((ExecAction)value).Arguments;
-				execDirText.Text = ((ExecAction)value).WorkingDirectory;
+				var execAction = value as ExecAction;
+				execProgText.Text = execAction?.Path;
+				execArgText.Text = execAction?.Arguments;
+				execDirText.Text = execAction?.WorkingDirectory;
 			}
 		}
 
+		public bool CanValidate => ExecAction.IsValidPath(execProgText.Text, false);
+
 		public void Run()
 		{
-
+			System.Diagnostics.Process.Start(execProgText.Text, execArgText.TextLength == 0 ? null : execArgText.Text);
 		}
 
-		public bool IsActionValid() => execProgText.TextLength > 0;
+		public bool ValidateFields()
+		{
+			// Check to ensure Path is a valid filename
+			if (ExecAction.IsValidPath(execProgText.Text)) return true;
+			MessageBox.Show(this, EditorProperties.Resources.Error_InvalidFileName, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			return false;
+		}
 
 		private void execProgBrowseBtn_Click(object sender, EventArgs e)
 		{
@@ -49,9 +59,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void execProgText_TextChanged(object sender, EventArgs e)
 		{
-			EventHandler h = KeyValueChanged;
-			if (h != null)
-				h(this, EventArgs.Empty);
+			KeyValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

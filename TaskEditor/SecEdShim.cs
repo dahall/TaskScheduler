@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	class SecEdShim
+	internal class SecEdShim
 	{
-		static Type dlgType;
-		static MethodInfo initMI, init2MI, showDlgMI;
-		static PropertyInfo sddlPI;
-		object dlg;
+		private static readonly Type dlgType;
+		private static readonly MethodInfo initMI;
+		private static readonly MethodInfo init2MI;
+		private static readonly MethodInfo showDlgMI;
+		private static readonly PropertyInfo sddlPI;
+		private readonly object dlg;
 
 		static SecEdShim()
 		{
@@ -19,9 +19,9 @@ namespace Microsoft.Win32.TaskScheduler
 				dlgType = ReflectionHelper.LoadType("Community.Windows.Forms.AccessControlEditorDialog", "SecurityEditor.dll");
 				if (dlgType != null)
 				{
-					initMI = dlgType.GetMethod("Initialize", new Type[] { typeof(object) });
-					init2MI = dlgType.GetMethod("Initialize", new Type[] { typeof(string), typeof(string), typeof(bool), typeof(System.Security.AccessControl.ResourceType), typeof(byte[]), typeof(string) });
-					showDlgMI = dlgType.GetMethod("ShowDialog", new Type[] { typeof(System.Windows.Forms.IWin32Window) });
+					initMI = dlgType.GetMethod("Initialize", new[] { typeof(object) });
+					init2MI = dlgType.GetMethod("Initialize", new[] { typeof(string), typeof(string), typeof(bool), typeof(System.Security.AccessControl.ResourceType), typeof(byte[]), typeof(string) });
+					showDlgMI = dlgType.GetMethod("ShowDialog", new[] { typeof(System.Windows.Forms.IWin32Window) });
 					sddlPI = dlgType.GetProperty("SDDL", typeof(string));
 				}
 			}
@@ -39,7 +39,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public void Initialize(object taskObj)
 		{
-			initMI.Invoke(dlg, new object[] { taskObj });
+			initMI.Invoke(dlg, new[] { taskObj });
 		}
 
 		public void Initialize(string displayName, bool isContainer, string targetServer, TaskSecurity taskSecurity)
@@ -50,12 +50,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		public System.Windows.Forms.DialogResult ShowDialog(System.Windows.Forms.IWin32Window owner) => (System.Windows.Forms.DialogResult)showDlgMI.Invoke(dlg, new object[] { owner });
 
-		public static SecEdShim GetNew()
-		{
-			if (dlgType != null)
-				return new SecEdShim();
-			return null;
-		}
+		public static SecEdShim GetNew() => dlgType != null ? new SecEdShim() : null;
 
 		public static bool IsValid => dlgType != null;
 	}

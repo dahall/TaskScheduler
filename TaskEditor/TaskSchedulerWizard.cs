@@ -679,7 +679,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void emailActionUI1_KeyValueChanged(object sender, EventArgs e)
 		{
-			emailActionPage.AllowNext = emailActionUI1.IsActionValid();
+			emailActionPage.AllowNext = emailActionUI1.CanValidate;
 		}
 
 		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -689,7 +689,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void execActionUI1_KeyValueChanged(object sender, EventArgs e)
 		{
-			runActionPage.AllowNext = execActionUI1.IsActionValid();
+			runActionPage.AllowNext = execActionUI1.CanValidate;
 		}
 
 		private string InvokeCredentialDialog(string userName)
@@ -937,7 +937,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void showMessageActionUI1_KeyValueChanged(object sender, EventArgs e)
 		{
-			msgActionPage.AllowNext = showMessageActionUI1.IsActionValid();
+			msgActionPage.AllowNext = showMessageActionUI1.CanValidate;
 		}
 
 		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)

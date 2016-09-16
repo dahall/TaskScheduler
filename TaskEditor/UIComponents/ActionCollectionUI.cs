@@ -1,18 +1,32 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler.EditorProperties;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
 	internal partial class ActionCollectionUI : UserControl, ITaskEditorUIElement
 	{
-		ITaskDefinitionEditor editor;
-		bool modern = false;
+		private ITaskDefinitionEditor editor;
+		private bool modern;
 
 		public ActionCollectionUI()
 		{
 			InitializeComponent();
+		}
+
+		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Determines whether a button is shown when editing an action that allows user to execute the current action.")]
+		public bool ShowActionRunButton { get; set; }
+
+		[DefaultValue(false), Category("Appearance")]
+		public bool ShowPowerShellConversionCheck
+		{
+			get { return allowPowerShellConvCheck.Visible; }
+			set { allowPowerShellConvCheck.Visible = value; }
 		}
 
 		[DefaultValue(false), Category("Appearance")]
@@ -21,22 +35,20 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			get { return modern;}
 			set
 			{
-				if (modern != value)
-				{
-					modern = value;
-					if (!DesignMode && value && imageList.Images.Count == 0)
-						InitializeModernImages();
-					RefreshState();
-				}
+				if (modern == value) return;
+				modern = value;
+				if (!DesignMode && value && imageList.Images.Count == 0)
+					InitializeModernImages();
+				RefreshState();
 			}
 		}
 
 		private void InitializeModernImages()
 		{
-			imageList.Images.Add(EditorProperties.Resources.ActionTypeExecuteImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.ActionTypeComHandlerImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.ActionTypeSendEmailImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.ActionTypeShowMessageImage, Color.Transparent);
+			imageList.Images.Add(Resources.ActionTypeExecuteImage, Color.Transparent);
+			imageList.Images.Add(Resources.ActionTypeComHandlerImage, Color.Transparent);
+			imageList.Images.Add(Resources.ActionTypeSendEmailImage, Color.Transparent);
+			imageList.Images.Add(Resources.ActionTypeShowMessageImage, Color.Transparent);
 		}
 
 		private int SelectedIndex => actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
@@ -45,35 +57,33 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (editor == null)
 				editor = this.GetParent<ITaskDefinitionEditor>();
-			if (editor != null && editor.TaskDefinition != null)
+			if (editor?.TaskDefinition == null) return;
+			actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editor.Editable;
+			actionListView.Enabled = allowPowerShellConvCheck.Enabled = editor.Editable;
+			allowPowerShellConvCheck.Checked = editor.TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version1);
+			actionListView.BeginUpdate();
+			actionListView.View = modern ? View.Tile : View.Details;
+			actionListView.Items.Clear();
+			if (editor.TaskDefinition.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
 			{
-				actionDeleteButton.Visible = actionEditButton.Visible = actionNewButton.Visible = editor.Editable;
-				actionListView.Enabled = allowPowerShellConvCheck.Enabled = editor.Editable;
-				allowPowerShellConvCheck.Checked = (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) == PowerShellActionPlatformOption.Version1;
-				actionListView.BeginUpdate();
-				actionListView.View = modern ? View.Tile : View.Details;
-				actionListView.Items.Clear();
-				if (editor.TaskDefinition.Actions.Count > 0) // Added to make sure that if this is V1 and the ExecAction is invalid, that dialog won't show any actions.
-				{
-					foreach (Action act in editor.TaskDefinition.Actions)
-						AddActionToList(act, -1);
-				}
-				if (modern)
-				{
-					actionListView.Alignment = ListViewAlignment.Top;
-					actionListView.AdjustTileToWidth();
-					NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
-				}
-				else
-				{
-					actionListView.Alignment = ListViewAlignment.Top;
-					if (actionListView.Items.Count > 0)
-						actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-					actionListView.AdjustColumnToFill();
-				}
-				actionListView.EndUpdate();
-				SetActionButtonState();
+				foreach (Action act in editor.TaskDefinition.Actions)
+					AddActionToList(act, -1);
 			}
+			if (modern)
+			{
+				actionListView.Alignment = ListViewAlignment.Top;
+				actionListView.AdjustTileToWidth();
+				NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
+			}
+			else
+			{
+				actionListView.Alignment = ListViewAlignment.Top;
+				if (actionListView.Items.Count > 0)
+					actionListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+				actionListView.AdjustColumnToFill();
+			}
+			actionListView.EndUpdate();
+			SetActionButtonState();
 		}
 
 		protected override void OnParentChanged(EventArgs e)
@@ -105,31 +115,25 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionListView.Items.RemoveAt(index);
 				editor.TaskDefinition.Actions.RemoveAt(index);
 				actionListView.Items.Insert(index + 1, lvi);
-				editor.TaskDefinition.Actions.Insert(index + 1, aTemp as Action);
+				editor.TaskDefinition.Actions.Insert(index + 1, aTemp);
 				lvi.Tag = aTemp;
 				actionListView.EndUpdate();
 			}
 		}
 
-		private bool SetActionEditDialogV1 => (!editor.IsV2 && (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) == 0);
+		private bool SetActionEditDialogV1 => !editor.IsV2 && !editor.TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version1);
 
 		private void actionEditButton_Click(object sender, EventArgs e)
 		{
 			int idx = SelectedIndex;
-			if (idx >= 0)
+			if (idx < 0) return;
+			using (var dlg = GetActionEditDialog(Resources.ActionDlgEditCaption, actionListView.Items[idx].Tag as Action))
 			{
-				using (ActionEditDialog dlg = new ActionEditDialog(actionListView.Items[idx].Tag as Action) { SupportV1Only = SetActionEditDialogV1 })
-				{
-					dlg.Text = EditorProperties.Resources.ActionDlgEditCaption;
-					dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
-					if (dlg.ShowDialog() == DialogResult.OK)
-					{
-						actionListView.Items.RemoveAt(idx);
-						editor.TaskDefinition.Actions[idx] = dlg.Action;
-						AddActionToList(dlg.Action, idx);
-						actionListView.Items[idx].Selected = true;
-					}
-				}
+				if (dlg.ShowDialog() != DialogResult.OK || dlg.Action == null) return;
+				actionListView.Items.RemoveAt(idx);
+				editor.TaskDefinition.Actions[idx] = dlg.Action;
+				AddActionToList(dlg.Action, idx);
+				actionListView.Items[idx].Selected = true;
 			}
 		}
 
@@ -139,11 +143,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionEditButton_Click(sender, EventArgs.Empty);
 		}
 
-		void actionListView_Reordered(object sender, ListViewReorderedEventArgs e)
+		private void actionListView_Reordered(object sender, ListViewReorderedEventArgs e)
 		{
 			Action aTemp = editor.TaskDefinition.Actions[e.OldIndex].Clone() as Action;
 			editor.TaskDefinition.Actions.RemoveAt(e.OldIndex);
-			editor.TaskDefinition.Actions.Insert(e.NewIndex, aTemp as Action);
+			editor.TaskDefinition.Actions.Insert(e.NewIndex, aTemp);
 		}
 
 		private void actionListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -161,16 +165,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void actionNewButton_Click(object sender, EventArgs e)
 		{
-			using (ActionEditDialog dlg = new ActionEditDialog { SupportV1Only = SetActionEditDialogV1 })
+			using (var dlg = GetActionEditDialog(Resources.ActionDlgNewCaption))
 			{
-				dlg.Text = EditorProperties.Resources.ActionDlgNewCaption;
-				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					editor.TaskDefinition.Actions.Add(dlg.Action);
-					AddActionToList(dlg.Action, -1);
-					SetActionButtonState();
-				}
+				if (dlg.ShowDialog() != DialogResult.OK || dlg.Action == null) return;
+				editor.TaskDefinition.Actions.Add(dlg.Action);
+				AddActionToList(dlg.Action, -1);
+				SetActionButtonState();
 			}
 		}
 
@@ -196,9 +196,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			int imgIdx = (int)act.ActionType;
 			if (imgIdx > 0) imgIdx -= 4;
 			string txt = act.ToString();
-			ListViewItem lvi = new ListViewItem(new string[] {
-					TaskEnumGlobalizer.GetString(act.ActionType),
-					txt }, imgIdx) { Tag = act, ToolTipText = txt };
+			var lvi = new ListViewItem(new[] { TaskEnumGlobalizer.GetString(act.ActionType), txt }, imgIdx) { Tag = act, ToolTipText = txt };
 			if (index < 0)
 				actionListView.Items.Add(lvi);
 			else
@@ -220,8 +218,20 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionUpButton.Enabled = moveUpToolStripMenuItem.Visible = selectedIndex > 0;
 				actionDownButton.Enabled = moveDownToolStripMenuItem.Visible = selectedIndex > -1 && selectedIndex < actionListView.Items.Count - 1;
 			}
-			actionNewButton.Enabled = newActionToolStripMenuItem.Visible = editable && (editor.IsV2 || actionListView.Items.Count == 0 || (editor.TaskDefinition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0);
+			actionNewButton.Enabled = newActionToolStripMenuItem.Visible = editable && (editor.IsV2 || actionListView.Items.Count == 0 || editor.TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version1));
 			actionEditButton.Enabled = actionDeleteButton.Enabled = editActionToolStripMenuItem.Visible = deleteActionToolStripMenuItem.Visible = editable && selectedIndex > -1;
+		}
+
+		private ActionEditDialog GetActionEditDialog(string caption, Action a = null)
+		{
+			return new ActionEditDialog
+			{
+				Action = a,
+				AllowRun = ShowActionRunButton,
+				SupportV1Only = SetActionEditDialogV1,
+				Text = caption,
+				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine
+			};
 		}
 	}
 
@@ -244,7 +254,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				// the widths of the columns before it.
 				if (nWidth < 1)
 					break;
-			};
+			}
 
 			// If there is any width remaining, that will be the width of the last column.
 			if (nWidth > 0)
@@ -255,7 +265,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			const string str = "Wg";
 			var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { IconTextSpacing = iconSpacing, MaxTextLines = maxLines };
-			var sb = new System.Text.StringBuilder(str);
+			var sb = new StringBuilder(str);
 			for (int i = 0; i < maxLines; i++)
 				sb.Append("\r" + str);
 			using (Graphics g = lvw.CreateGraphics())

@@ -32,31 +32,31 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[Description("Provides access to the Task Scheduler service.")]
 	[ToolboxItem(true), Serializable]
-	public sealed partial class TaskService : Component, IDisposable, ISupportInitialize, System.Runtime.Serialization.ISerializable
+	public sealed partial class TaskService : Component, ISupportInitialize, System.Runtime.Serialization.ISerializable
 	{
-		internal static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
-		internal static readonly Version v1Ver = new Version(1, 1);
-		internal static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+		private static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
+		private static readonly Version v1Ver = new Version(1, 1);
+		private static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
 		private static TaskService instance;
 
-		internal V1Interop.ITaskScheduler v1TaskScheduler = null;
-		internal V2Interop.TaskSchedulerClass v2TaskService = null;
+		internal V1Interop.ITaskScheduler v1TaskScheduler;
+		internal V2Interop.TaskSchedulerClass v2TaskService;
 
-		private bool forceV1 = false;
-		private bool initializing = false;
+		private bool forceV1;
+		private bool initializing;
 		private Version maxVer;
-		private bool maxVerSet = false;
-		private string targetServer = null;
-		private bool targetServerSet = false;
-		private string userDomain = null;
-		private bool userDomainSet = false;
-		private string userName = null;
-		private bool userNameSet = false;
-		private string userPassword = null;
-		private bool userPasswordSet = false;
-		private WindowsImpersonatedIdentity v1Impersonation = null;
+		private bool maxVerSet;
+		private string targetServer;
+		private bool targetServerSet;
+		private string userDomain;
+		private bool userDomainSet;
+		private string userName;
+		private bool userNameSet;
+		private string userPassword;
+		private bool userPasswordSet;
+		private WindowsImpersonatedIdentity v1Impersonation;
 
 		/// <summary>
 		/// Creates a new instance of a TaskService connecting to the local machine as the current user.
@@ -104,7 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if allow read only tasks; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Allow tasks from later OS versions with new properties to be retrieved as read only tasks.")]
-		public bool AllowReadOnlyTasks { get; set; } = false;
+		public bool AllowReadOnlyTasks { get; set; }
 
 		/// <summary>
 		/// Gets a <see cref="System.Collections.Generic.IEnumerator{T}" /> which enumerates all the tasks in all folders.
@@ -125,7 +125,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the name of the domain to which the <see cref="TargetServer"/> computer is connected.
 		/// </summary>
 		[Browsable(false)]
-		[DefaultValue((string)null)]
+		[DefaultValue(null)]
 		[Obsolete("This property has been superseded by the UserAccountDomin property and may not be available in future releases.")]
 		public string ConnectedDomain
 		{
@@ -144,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the name of the user that is connected to the Task Scheduler service.
 		/// </summary>
 		[Browsable(false)]
-		[DefaultValue((string)null)]
+		[DefaultValue(null)]
 		[Obsolete("This property has been superseded by the UserName property and may not be available in future releases.")]
 		public string ConnectedUser
 		{
@@ -170,12 +170,10 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				maxVer = value;
 				maxVerSet = true;
-				bool forceV1 = (value <= v1Ver);
-				if (forceV1 != this.forceV1)
-				{
-					this.forceV1 = forceV1;
-					Connect();
-				}
+				bool localForceV1 = (value <= v1Ver);
+				if (localForceV1 == forceV1) return;
+				forceV1 = localForceV1;
+				Connect();
 			}
 		}
 
@@ -197,14 +195,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
 		/// </summary>
-		[Category("Data"), DefaultValue((string)null), Description("The name of the computer to connect to.")]
+		[Category("Data"), DefaultValue(null), Description("The name of the computer to connect to.")]
 		public string TargetServer
 		{
 			get { return ShouldSerializeTargetServer() ? targetServer : null; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, targetServer, true) != 0)
+				if (string.Compare(value, targetServer, StringComparison.OrdinalIgnoreCase) != 0)
 				{
 					targetServerSet = true;
 					targetServer = value;
@@ -217,14 +215,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user account domain to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user account domain.</value>
-		[Category("Data"), DefaultValue((string)null), Description("The user account domain to be used when connecting.")]
+		[Category("Data"), DefaultValue(null), Description("The user account domain to be used when connecting.")]
 		public string UserAccountDomain
 		{
 			get { return ShouldSerializeUserAccountDomain() ? userDomain : null; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, userDomain, true) != 0)
+				if (string.Compare(value, userDomain, StringComparison.OrdinalIgnoreCase) != 0)
 				{
 					userDomainSet = true;
 					userDomain = value;
@@ -245,14 +243,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user name.</value>
-		[Category("Data"), DefaultValue((string)null), Description("The user name to be used when connecting.")]
+		[Category("Data"), DefaultValue(null), Description("The user name to be used when connecting.")]
 		public string UserName
 		{
 			get { return ShouldSerializeUserName() ? userName : null; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, userName, true) != 0)
+				if (string.Compare(value, userName, StringComparison.OrdinalIgnoreCase) != 0)
 				{
 					userNameSet = true;
 					userName = value;
@@ -265,14 +263,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the user password to be used when connecting to the <see cref="TargetServer"/>.
 		/// </summary>
 		/// <value>The user password.</value>
-		[Category("Data"), DefaultValue((string)null), Description("The user password to be used when connecting.")]
+		[Category("Data"), DefaultValue(null), Description("The user password to be used when connecting.")]
 		public string UserPassword
 		{
 			get { return userPassword; }
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, userPassword, true) != 0)
+				if (string.CompareOrdinal(value, userPassword) != 0)
 				{
 					userPasswordSet = true;
 					userPassword = value;
@@ -316,14 +314,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
 		/// <param name="action">The <see cref="Action"/> to determine what happens when the task is triggered.</param>
-		/// <param name="UserId">The user credentials used to register the task.</param>
-		/// <param name="Password">The password for the userId used to register the task.</param>
-		/// <param name="LogonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="userId">The user credentials used to register the task.</param>
+		/// <param name="password">The password for the userId used to register the task.</param>
+		/// <param name="logonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="description">The task description.</param>
 		/// <returns>
 		/// A <see cref="Task"/> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, Trigger trigger, Action action, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken, string description = null)
+		public Task AddTask(string path, Trigger trigger, Action action, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			TaskDefinition td = NewTask();
 			if (!string.IsNullOrEmpty(description))
@@ -336,7 +334,7 @@ namespace Microsoft.Win32.TaskScheduler
 			td.Actions.Add(action);
 
 			// Register the task in the root folder
-			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, UserId, Password, LogonType);
+			return RootFolder.RegisterTaskDefinition(path, td, TaskCreation.CreateOrUpdate, userId, password, logonType);
 		}
 
 		/// <summary>
@@ -346,17 +344,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="trigger">The <see cref="Trigger" /> to determine when to run the task.</param>
 		/// <param name="exePath">The executable path.</param>
 		/// <param name="arguments">The arguments (optional). Value can be NULL.</param>
-		/// <param name="UserId">The user credentials used to register the task.</param>
-		/// <param name="Password">The password for the userId used to register the task.</param>
-		/// <param name="LogonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="userId">The user credentials used to register the task.</param>
+		/// <param name="password">The password for the userId used to register the task.</param>
+		/// <param name="logonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
 		/// <param name="description">The task description.</param>
 		/// <returns>
 		/// A <see cref="Task" /> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string UserId = null, string Password = null, TaskLogonType LogonType = TaskLogonType.InteractiveToken, string description = null)
+		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			// Create a trigger based on quick trigger
-			Trigger newTrigger = null;
+			Trigger newTrigger;
 			switch (trigger)
 			{
 				case QuickTriggerType.Boot:
@@ -372,7 +370,7 @@ namespace Microsoft.Win32.TaskScheduler
 					newTrigger = new RegistrationTrigger();
 					break;
 				case QuickTriggerType.Hourly:
-					newTrigger = new DailyTrigger { Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromDays(1), false) };
+					newTrigger = new DailyTrigger { Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromDays(1)) };
 					break;
 				case QuickTriggerType.Daily:
 					newTrigger = new DailyTrigger();
@@ -384,10 +382,10 @@ namespace Microsoft.Win32.TaskScheduler
 					newTrigger = new MonthlyTrigger();
 					break;
 				default:
-					break;
+					throw new ArgumentOutOfRangeException(nameof(trigger), trigger, null);
 			}
 
-			return AddTask(path, newTrigger, new ExecAction(exePath, arguments), UserId, Password, LogonType, description);
+			return AddTask(path, newTrigger, new ExecAction(exePath, arguments), userId, password, logonType, description);
 		}
 
 		/// <summary>
@@ -486,7 +484,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
 		/// </returns>
-		public override int GetHashCode() => new { A = TargetServer, B = UserAccountDomain, C = UserName, D = UserPassword, E = forceV1 }.GetHashCode();
+		public override int GetHashCode() => new {A = TargetServer, B = UserAccountDomain, C = UserName, D = UserPassword, E = forceV1}.GetHashCode();
 
 		/// <summary>
 		/// Gets a collection of running tasks.
@@ -496,7 +494,11 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTaskCollection GetRunningTasks(bool includeHidden = true)
 		{
 			if (v2TaskService != null)
-				try { return new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0)); } catch { }
+				try
+				{
+					return new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0));
+				}
+				catch { }
 			return new RunningTaskCollection(this);
 		}
 
@@ -527,10 +529,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Signals the object that initialization is starting.
 		/// </summary>
-		public void BeginInit()
-		{
-			initializing = true;
-		}
+		public void BeginInit() { initializing = true; }
 
 		/// <summary>
 		/// Signals the object that initialization is complete.
@@ -549,7 +548,6 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2TaskService != null)
 				return new TaskDefinition(v2TaskService.NewTask(0));
-			Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
 			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, ref CTaskGuid, ref ITaskGuid), v1Name);
@@ -573,7 +571,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public void StartSystemTaskSchedulerManager()
 		{
-			if (System.Environment.UserInteractive)
+			if (Environment.UserInteractive)
 				System.Diagnostics.Process.Start("control.exe", "schedtasks");
 		}
 
@@ -611,10 +609,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="data">An optional string passed to the COM object at startup.</param>
 		/// <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
 		/// <param name="onUpdate">An optional <see cref="ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="ITaskHandlerStatus.UpdateStatus(short, string)" /> method.</param>
-		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null)
-		{
-			new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start();
-		}
+		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null) { new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start(); }
 
 		/// <summary>
 		/// Delegate for methods that support update calls during COM handler execution.
@@ -625,19 +620,23 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class ComHandlerThread
 		{
-			Type objType;
-			string Data;
-			int Timeout;
-			TaskHandlerStatus status;
+			private readonly System.Threading.AutoResetEvent completed = new System.Threading.AutoResetEvent(false);
+			private readonly Type objType;
+			private readonly string Data;
+			private readonly int Timeout;
+			private readonly TaskHandlerStatus status;
 			public int ReturnCode;
-			System.Threading.AutoResetEvent completed = new System.Threading.AutoResetEvent(false);
 
 			public ComHandlerThread(Guid clsid, string data, int millisecondsTimeout, ComHandlerUpdate onUpdate, Action<int> onComplete)
 			{
 				objType = Type.GetTypeFromCLSID(clsid, true);
 				Data = data;
 				Timeout = millisecondsTimeout;
-				status = new TaskHandlerStatus(i => { completed.Set(); onComplete?.Invoke(i); }, onUpdate);
+				status = new TaskHandlerStatus(i =>
+				{
+					completed.Set();
+					onComplete?.Invoke(i);
+				}, onUpdate);
 			}
 
 			public System.Threading.Thread Start()
@@ -678,8 +677,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 			private class TaskHandlerStatus : ITaskHandlerStatus
 			{
-				Action<int> OnCompleted;
-				ComHandlerUpdate OnUpdate;
+				private readonly Action<int> OnCompleted;
+				private readonly ComHandlerUpdate OnUpdate;
 
 				public TaskHandlerStatus(Action<int> onCompleted, ComHandlerUpdate onUpdate)
 				{
@@ -687,37 +686,10 @@ namespace Microsoft.Win32.TaskScheduler
 					OnUpdate = onUpdate;
 				}
 
-				public void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode)
-				{
-					OnCompleted?.Invoke(taskErrCode);
-				}
+				public void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode) { OnCompleted?.Invoke(taskErrCode); }
 
-				public void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage)
-				{
-					OnUpdate?.Invoke(percentComplete, statusMessage);
-				}
+				public void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage) { OnUpdate?.Invoke(percentComplete, statusMessage); }
 			}
-		}
-
-		internal static bool SystemSupportsPowerShellActions(string server = null)
-		{
-			try
-			{
-				if (string.IsNullOrEmpty(server))
-				{
-					// Check to see if the COM server is registered on the local machine.
-					using (var key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(@"TaskSchedulerPowerShellAction.PSTaskHandler\CLSID"))
-					{
-						return true;
-					}
-				}
-				else
-				{
-					// TODO: Try and create a remote instance of the COM server.
-				}
-			}
-			catch { }
-			return false;
 		}
 
 		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)
@@ -746,16 +718,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				return iSvc.Activate(name, ref ITaskGuid);
 			}
-			catch (System.UnauthorizedAccessException)
+			catch (UnauthorizedAccessException)
 			{
 				// TODO: Take ownership of the file and try again
 				throw;
 			}
-			catch (System.ArgumentException)
+			catch (ArgumentException)
 			{
 				return iSvc.Activate(name + ".job", ref ITaskGuid);
 			}
-			catch { throw; }
 		}
 
 		/// <summary>
@@ -766,12 +737,20 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2TaskService != null)
 			{
-				try { Marshal.ReleaseComObject(v2TaskService); } catch { }
+				try
+				{
+					Marshal.ReleaseComObject(v2TaskService);
+				}
+				catch { }
 				v2TaskService = null;
 			}
 			if (v1TaskScheduler != null)
 			{
-				try { Marshal.ReleaseComObject(v1TaskScheduler); } catch { }
+				try
+				{
+					Marshal.ReleaseComObject(v1TaskScheduler);
+				}
+				catch { }
 				v1TaskScheduler = null;
 			}
 			if (v1Impersonation != null)
@@ -791,8 +770,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (!initializing && !DesignMode)
 			{
-				if (((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) ||
-				(string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
+				if (((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) || (string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
 				{
 					// Clear stuff if already connected
 					Dispose(true);
@@ -820,8 +798,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 					{
 						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
-						V1Interop.CTaskScheduler csched = new V1Interop.CTaskScheduler();
-						v1TaskScheduler = (V1Interop.ITaskScheduler)csched;
+						v1TaskScheduler = new V1Interop.CTaskScheduler() as V1Interop.ITaskScheduler;
 						if (!string.IsNullOrEmpty(targetServer))
 						{
 							// Check to ensure UNC format for server name. (Suggested by bigsan)
@@ -858,7 +835,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				foreach (var f in fld.SubFolders)
 				{
-					if (FindTaskInFolder(f, taskName, ref results, recurse))
+					if (FindTaskInFolder(f, taskName, ref results))
 						return true;
 				}
 			}
@@ -875,7 +852,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>True if any tasks are found, False if not.</returns>
 		private bool FindTaskInFolder(TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
-			foreach (Task t in fld.GetTasks(null))
+			foreach (Task t in fld.GetTasks())
 				try
 				{
 					if (filter(t))
@@ -890,7 +867,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				foreach (var f in fld.SubFolders)
 				{
-					if (FindTaskInFolder(f, filter, ref results, recurse))
+					if (FindTaskInFolder(f, filter, ref results))
 						return true;
 				}
 			}
@@ -951,11 +928,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool ShouldSerializeHighestSupportedVersion() => (hasV2 && maxVer <= v1Ver);
 
-		private bool ShouldSerializeTargetServer() => targetServer != null && !targetServer.Trim('\\').Equals(System.Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
+		private bool ShouldSerializeTargetServer() => targetServer != null && !targetServer.Trim('\\').Equals(Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
 
-		private bool ShouldSerializeUserAccountDomain() => userDomain != null && !userDomain.Equals(System.Environment.UserDomainName, StringComparison.InvariantCultureIgnoreCase);
+		private bool ShouldSerializeUserAccountDomain() => userDomain != null && !userDomain.Equals(Environment.UserDomainName, StringComparison.InvariantCultureIgnoreCase);
 
-		private bool ShouldSerializeUserName() => userName != null && !userName.Equals(System.Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
+		private bool ShouldSerializeUserName() => userName != null && !userName.Equals(Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
 
 		private class VersionConverter : TypeConverter
 		{
@@ -968,9 +945,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
 			{
-				if (value is string)
-					return new Version(value as string);
-				return base.ConvertFrom(context, culture, value);
+				var s = value as string;
+				return s != null ? new Version(s) : base.ConvertFrom(context, culture, value);
 			}
 		}
 	}

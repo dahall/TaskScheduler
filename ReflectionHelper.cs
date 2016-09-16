@@ -50,18 +50,15 @@
 
 		public static T InvokeMethod<T>(object obj, string methodName, params object[] args)
 		{
-			Type[] argTypes = (args == null || args.Length == 0) ? Type.EmptyTypes : Array.ConvertAll<object, Type>(args, delegate(object o) { return o == null ? typeof(object) : o.GetType(); });
+			Type[] argTypes = (args == null || args.Length == 0) ? Type.EmptyTypes : Array.ConvertAll(args, delegate(object o) { return o == null ? typeof(object) : o.GetType(); });
 			return InvokeMethod<T>(obj, methodName, argTypes, args);
 		}
 
 		public static T InvokeMethod<T>(object obj, string methodName, Type[] argTypes, object[] args)
 		{
-			if (obj != null)
-			{
-				MethodInfo mi = obj.GetType().GetMethod(methodName, argTypes);
-				if (mi != null)
-					return (T)Convert.ChangeType(mi.Invoke(obj, args), typeof(T));
-			}
+			MethodInfo mi = obj?.GetType().GetMethod(methodName, argTypes);
+			if (mi != null)
+				return (T)Convert.ChangeType(mi.Invoke(obj, args), typeof(T));
 			return default(T);
 		}
 

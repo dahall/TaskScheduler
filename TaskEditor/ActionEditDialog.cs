@@ -19,11 +19,11 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private Action action;
-		private bool allowRun = false;
+		private bool allowRun;
 		private bool isV2 = true;
-		private bool onAssignment = false;
-		private bool useUnifiedSchedulingEngine = false;
-		private UIComponents.IActionHandler curHandler = null;
+		private bool onAssignment;
+		private bool useUnifiedSchedulingEngine;
+		private UIComponents.IActionHandler curHandler;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionEditDialog"/> class.
@@ -55,8 +55,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				onAssignment = true;
 				action = value;
-				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)action.ActionType);
-				actionIdText.Text = action.Id;
+				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)(action?.ActionType ?? TaskActionType.Execute));
+				actionIdText.Text = action?.Id;
 				curHandler.Action = action;
 				onAssignment = false;
 			}
@@ -143,26 +143,22 @@ namespace Microsoft.Win32.TaskScheduler
 					curHandler = showMessageActionUI1;
 					break;
 				case TaskActionType.Execute:
-				default:
 					settingsTabs.SelectedTab = execTab;
 					curHandler = execActionUI1;
 					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-			ValidateCurrentAction();
+			DetermineIfCanValidate();
 		}
 
-		private void cancelBtn_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
+		private void cancelBtn_Click(object sender, EventArgs e) { Close(); }
 
-		private void keyField_TextChanged(object sender, EventArgs e)
-		{
-			ValidateCurrentAction();
-		}
+		private void keyField_TextChanged(object sender, EventArgs e) { DetermineIfCanValidate(); }
 
 		private void okBtn_Click(object sender, EventArgs e)
 		{
+			if (!curHandler.ValidateFields()) return;
 			UpdateAction();
 			Close();
 		}
@@ -199,10 +195,7 @@ namespace Microsoft.Win32.TaskScheduler
 			actionIdText_TextChanged(null, EventArgs.Empty);
 		}
 
-		private void ValidateCurrentAction()
-		{
-			okBtn.Enabled = curHandler.IsActionValid();
-		}
+		private void DetermineIfCanValidate() { okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate; }
 
 		private void actionIdText_TextChanged(object sender, EventArgs e)
 		{
@@ -210,9 +203,6 @@ namespace Microsoft.Win32.TaskScheduler
 				action.Id = actionIdText.TextLength == 0 ? null : actionIdText.Text;
 		}
 
-		private void runActionBtn_Click(object sender, EventArgs e)
-		{
-			curHandler.Run();
-		}
+		private void runActionBtn_Click(object sender, EventArgs e) { curHandler.Run(); }
 	}
 }

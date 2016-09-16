@@ -418,6 +418,15 @@ namespace Microsoft.Win32.TaskScheduler.EditorProperties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The supplied program/script is not a valid file name. Please correct before continuing..
+        /// </summary>
+        internal static string Error_InvalidFileName {
+            get {
+                return ResourceManager.GetString("Error_InvalidFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task name is not in a valid format. Characters not allowed in a filename are not allowed in a task name..
         /// </summary>
         internal static string Error_InvalidNameFormat {

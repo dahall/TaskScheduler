@@ -76,7 +76,6 @@
 			this.actionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.actionListView.HideSelection = false;
 			this.actionListView.LargeImageList = this.imageList;
-			this.actionListView.MultiSelect = false;
 			this.actionListView.Name = "actionListView";
 			this.actionListView.ShowItemToolTips = true;
 			this.actionListView.UseCompatibleStateImageBehavior = false;
@@ -197,7 +196,6 @@
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tableLayoutPanel2);
-			this.MinimumSize = new System.Drawing.Size(237, 89);
 			this.Name = "ActionCollectionUI";
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();

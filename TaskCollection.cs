@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -9,6 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Contains all the tasks that are registered.
 	/// </summary>
 	/// <remarks>Potentially breaking change in 1.6.2 and later where under V1 the list previously included the '.job' extension on the task name. This has been removed so that it is consistent with V2.</remarks>
+	[PublicAPI]
 	public sealed class TaskCollection : IReadOnlyList<Task>, IDisposable
 	{
 		private readonly TaskService svc;
@@ -17,14 +19,14 @@ namespace Microsoft.Win32.TaskScheduler
 		private V1Interop.ITaskScheduler v1TS;
 		private readonly V2Interop.IRegisteredTaskCollection v2Coll;
 
-		internal TaskCollection(TaskService svc, Regex filter = null)
+		internal TaskCollection([NotNull] TaskService svc, Regex filter = null)
 		{
 			this.svc = svc;
 			Filter = filter;
 			v1TS = svc.v1TaskScheduler;
 		}
 
-		internal TaskCollection(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null)
+		internal TaskCollection([NotNull] TaskFolder folder, [NotNull] V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null)
 		{
 			svc = folder.TaskService;
 			Filter = filter;
@@ -270,7 +272,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="taskName">The name of the task.</param>
 		/// <returns>true if task exists; otherwise, false.</returns>
-		public bool Exists(string taskName)
+		public bool Exists([NotNull] string taskName)
 		{
 			try
 			{
@@ -300,12 +302,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private readonly TaskService svc;
 		private readonly V2Interop.IRunningTaskCollection v2Coll;
 
-		internal RunningTaskCollection(TaskService svc)
+		internal RunningTaskCollection([NotNull] TaskService svc)
 		{
 			this.svc = svc;
 		}
 
-		internal RunningTaskCollection(TaskService svc, V2Interop.IRunningTaskCollection iTaskColl)
+		internal RunningTaskCollection([NotNull] TaskService svc, [NotNull] V2Interop.IRunningTaskCollection iTaskColl)
 		{
 			this.svc = svc;
 			v2Coll = iTaskColl;
@@ -344,7 +346,7 @@ namespace Microsoft.Win32.TaskScheduler
 			private readonly TaskService svc;
 			private readonly TaskCollection.V1TaskEnumerator tEnum;
 
-			internal V1RunningTaskEnumerator(TaskService svc)
+			internal V1RunningTaskEnumerator([NotNull] TaskService svc)
 			{
 				this.svc = svc;
 				tEnum = new TaskCollection.V1TaskEnumerator(svc);
@@ -427,5 +429,4 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString() => $"RunningTaskCollection; Count: {Count}";
 	}
-
 }
