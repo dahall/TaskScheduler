@@ -4,7 +4,8 @@
 	{
 		event System.EventHandler KeyValueChanged;
 		Action Action { get; set; }
-		bool IsActionValid();
+		bool CanValidate { get; }
+		bool ValidateFields();
 		void Run();
 	}
 }

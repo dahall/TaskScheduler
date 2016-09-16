@@ -122,16 +122,19 @@
 			// 
 			this.newTriggerToolStripMenuItem.Name = "newTriggerToolStripMenuItem";
 			resources.ApplyResources(this.newTriggerToolStripMenuItem, "newTriggerToolStripMenuItem");
+			this.newTriggerToolStripMenuItem.Click += new System.EventHandler(this.triggerNewButton_Click);
 			// 
 			// deleteTriggerToolStripMenuItem
 			// 
 			this.deleteTriggerToolStripMenuItem.Name = "deleteTriggerToolStripMenuItem";
 			resources.ApplyResources(this.deleteTriggerToolStripMenuItem, "deleteTriggerToolStripMenuItem");
+			this.deleteTriggerToolStripMenuItem.Click += new System.EventHandler(this.triggerDeleteButton_Click);
 			// 
 			// editTriggerToolStripMenuItem
 			// 
 			this.editTriggerToolStripMenuItem.Name = "editTriggerToolStripMenuItem";
 			resources.ApplyResources(this.editTriggerToolStripMenuItem, "editTriggerToolStripMenuItem");
+			this.editTriggerToolStripMenuItem.Click += new System.EventHandler(this.triggerEditButton_Click);
 			// 
 			// enableToolStripMenuItem
 			// 

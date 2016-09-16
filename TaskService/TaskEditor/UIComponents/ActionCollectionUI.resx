@@ -205,7 +205,7 @@
     <value>actionListView</value>
   </data>
   <data name="&gt;&gt;actionListView.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.ReorderableListView, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.14.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.ReorderableListView, Microsoft.Win32.TaskSchedulerEditor, Version=2.5.22.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;actionListView.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -447,6 +447,9 @@
   <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
     <value>Allow PowerShell conversion for unsupported actions</value>
   </data>
+  <data name="allowPowerShellConvCheck.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;allowPowerShellConvCheck.Name" xml:space="preserve">
     <value>allowPowerShellConvCheck</value>
   </data>
@@ -494,6 +497,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>237, 89</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>304, 173</value>

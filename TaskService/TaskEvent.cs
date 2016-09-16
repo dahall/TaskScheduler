@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using JetBrains.Annotations;
+
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -343,9 +347,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <remarks>
 	/// For events on systems prior to Windows Vista, this class will only have information for the TaskPath, TimeCreated and EventId properties.
 	/// </remarks>
+	[PublicAPI]
 	public sealed class TaskEvent : IComparable<TaskEvent>
 	{
-		internal TaskEvent(EventRecord rec)
+		internal TaskEvent([NotNull] EventRecord rec)
 		{
 			EventId = rec.Id;
 			EventRecord = rec;
@@ -361,8 +366,8 @@ namespace Microsoft.Win32.TaskScheduler
 			TaskPath = rec.Properties.Count > 0 ? rec.Properties[0]?.Value?.ToString() : null;
 			DataValues = new EventDataValues(rec as EventLogRecord);
 		}
-		
-		internal TaskEvent(string taskPath, StandardTaskEventId id, DateTime time)
+
+		internal TaskEvent([NotNull] string taskPath, StandardTaskEventId id, DateTime time)
 		{
 			EventId = (int)id;
 			TaskPath = taskPath;
@@ -478,10 +483,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public int CompareTo(TaskEvent other)
 		{
-			int i = TaskPath.CompareTo(other.TaskPath);
+			int i = string.Compare(TaskPath, other.TaskPath, StringComparison.Ordinal);
 			if (i == 0 && EventRecord != null)
 			{
-				i = ActivityId.ToString().CompareTo(other.ActivityId.ToString());
+				i = string.Compare(ActivityId.ToString(), other.ActivityId.ToString(), StringComparison.Ordinal);
 				if (i == 0)
 					i = Convert.ToInt32(RecordId - other.RecordId);
 			}
@@ -493,7 +498,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public class EventDataValues
 		{
-			EventLogRecord rec;
+			private readonly EventLogRecord rec;
 
 			internal EventDataValues(EventLogRecord eventRec)
 			{
@@ -512,7 +517,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				get
 				{
-					var propsel = new EventLogPropertySelector(new string[] { string.Format("Event/EventData/Data[@Name='{0}']", propertyName) });
+					var propsel = new EventLogPropertySelector(new[] {$"Event/EventData/Data[@Name='{propertyName}']"});
 					try
 					{
 						var logEventProps = rec.GetPropertyValues(propsel);
@@ -528,12 +533,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// An enumerator over a task's history of events.
 	/// </summary>
-	public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>, IDisposable
+	public sealed class TaskEventEnumerator : IEnumerator<TaskEvent>
 	{
 		private EventRecord curRec;
 		private EventLogReader log;
 
-		internal TaskEventEnumerator(EventLogReader log)
+		internal TaskEventEnumerator([NotNull] EventLogReader log)
 		{
 			this.log = log;
 		}
@@ -612,7 +617,6 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	public sealed class TaskEventLog : IEnumerable<TaskEvent>
 	{
-		private EventLogQuery q;
 		private const string TSEventLogPath = "Microsoft-Windows-TaskScheduler/Operational";
 
 		/// <summary>
@@ -620,7 +624,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="taskPath">The task path. This can be retrieved using the <see cref="Task.Path"/> property.</param>
 		/// <exception cref="NotSupportedException">Thrown when instantiated on an OS prior to Windows Vista.</exception>
-		public TaskEventLog(string taskPath) : this(".", taskPath)
+		public TaskEventLog([CanBeNull] string taskPath) : this(".", taskPath)
 		{
 			Initialize(".", BuildQuery(taskPath), true);
 		}
@@ -634,7 +638,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="user">The user.</param>
 		/// <param name="password">The password.</param>
 		/// <exception cref="NotSupportedException">Thrown when instantiated on an OS prior to Windows Vista.</exception>
-		public TaskEventLog(string machineName, string taskPath, string domain = null, string user = null, string password = null)
+		public TaskEventLog([NotNull] string machineName, [CanBeNull] string taskPath, string domain = null, string user = null, string password = null)
 		{
 			Initialize(machineName, BuildQuery(taskPath), true, domain, user, password);
 		}
@@ -727,12 +731,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (sb.Length > 1)
 				sb.Append("]");
-			return string.Format(queryString, sb.ToString());
+			return string.Format(queryString, sb);
 		}
 
 		private void Initialize(string machineName, string query, bool revDir, string domain = null, string user = null, string password = null)
 		{
-			if (System.Environment.OSVersion.Version.Major < 6)
+			if (Environment.OSVersion.Version.Major < 6)
 				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
 
 			System.Security.SecureString spwd = null;
@@ -744,9 +748,9 @@ namespace Microsoft.Win32.TaskScheduler
 					spwd.AppendChar(c);
 			}
 
-			q = new EventLogQuery(TSEventLogPath, PathType.LogName, query) { ReverseDirection = revDir };
+			Query = new EventLogQuery(TSEventLogPath, PathType.LogName, query) { ReverseDirection = revDir };
 			if (machineName != null && machineName != "." && !machineName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
-				q.Session = new EventLogSession(machineName, domain, user, spwd, SessionAuthentication.Default);
+				Query.Session = new EventLogSession(machineName, domain, user, spwd, SessionAuthentication.Default);
 		}
 
 		/// <summary>
@@ -756,7 +760,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				using (EventLogReader log = new EventLogReader(q))
+				using (EventLogReader log = new EventLogReader(Query))
 				{
 					long seed = 64L, l = 0L, h = seed;
 					while (log.ReadEvent() != null)
@@ -786,16 +790,16 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (System.Environment.OSVersion.Version.Major < 6)
+				if (Environment.OSVersion.Version.Major < 6)
 					return false;
-				using (var cfg = new EventLogConfiguration(TSEventLogPath, q.Session))
+				using (var cfg = new EventLogConfiguration(TSEventLogPath, Query.Session))
 					return cfg.IsEnabled;
 			}
 			set
 			{
-				if (System.Environment.OSVersion.Version.Major < 6)
+				if (Environment.OSVersion.Version.Major < 6)
 					throw new NotSupportedException("Task history not available on systems prior to Windows Vista and Windows Server 2008.");
-				using (var cfg = new EventLogConfiguration(TSEventLogPath, q.Session))
+				using (var cfg = new EventLogConfiguration(TSEventLogPath, Query.Session))
 				{
 					if (cfg.IsEnabled != value)
 					{
@@ -830,10 +834,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="TaskEventEnumerator" /> that can be used to iterate through the collection.
 		/// </returns>
-		public TaskEventEnumerator GetEnumerator(bool reverse = false)
+		[NotNull]
+		public TaskEventEnumerator GetEnumerator(bool reverse)
 		{
-			q.ReverseDirection = !reverse;
-			return new TaskEventEnumerator(new EventLogReader(q));
+			Query.ReverseDirection = !reverse;
+			return new TaskEventEnumerator(new EventLogReader(Query));
 		}
 
 		/// <summary>
@@ -842,8 +847,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
 		/// </returns>
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator(false);
 
-		internal EventLogQuery Query => q;
+		internal EventLogQuery Query { get; private set; }
 	}
 }

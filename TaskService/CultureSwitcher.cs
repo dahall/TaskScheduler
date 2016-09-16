@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Threading;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	internal class CultureSwitcher : IDisposable
 	{
-		System.Globalization.CultureInfo cur, curUI;
+		private readonly System.Globalization.CultureInfo cur, curUI;
 
-		public CultureSwitcher(System.Globalization.CultureInfo culture)
+		public CultureSwitcher([JetBrains.Annotations.NotNull] System.Globalization.CultureInfo culture)
 		{
-			cur = System.Threading.Thread.CurrentThread.CurrentCulture;
-			curUI = System.Threading.Thread.CurrentThread.CurrentUICulture;
-			System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+			cur = Thread.CurrentThread.CurrentCulture;
+			curUI = Thread.CurrentThread.CurrentUICulture;
+			Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = culture;
 		}
 
 		public void Dispose()
 		{
-			System.Threading.Thread.CurrentThread.CurrentCulture = cur;
-			System.Threading.Thread.CurrentThread.CurrentUICulture = curUI;
+			Thread.CurrentThread.CurrentCulture = cur;
+			Thread.CurrentThread.CurrentUICulture = curUI;
 		}
 	}
 }

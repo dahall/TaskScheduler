@@ -61,6 +61,10 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.1.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Runtime.Serialization" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt; 2.0 " />
@@ -79,7 +83,8 @@
     <Compile Include="Native\System.Collections.Generic.PreNet45.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="ResourceReferenceValue.cs" />
+    <None Include="packages.config" />
+    <None Include="ResourceReferenceValue.cs" />
     <Compile Include="TaskEditor\Native\EnumUtil.cs" />
     <Compile Include="TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="TaskEvent.cs" />

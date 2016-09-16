@@ -1,7 +1,9 @@
-﻿using Microsoft.Win32.TaskScheduler.V2Interop;
+﻿using JetBrains.Annotations;
+using Microsoft.Win32.TaskScheduler.V2Interop;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -44,6 +46,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Abstract base class that provides the common properties that are inherited by all action
 	/// objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
+	[PublicAPI]
 	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged
 	{
 		internal IAction iAction;
@@ -54,12 +57,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal Action() { }
 
-		internal Action(IAction action)
+		internal Action([NotNull] IAction action)
 		{
 			iAction = action;
 		}
 
-		internal Action(V1Interop.ITask iTask)
+		internal Action([NotNull] V1Interop.ITask iTask)
 		{
 			v1Task = iTask;
 		}
@@ -125,7 +128,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
 		/// </returns>
-		public override bool Equals(object obj)
+		public override bool Equals([CanBeNull] object obj)
 		{
 			if (obj is Action)
 				return Equals((Action)obj);
@@ -139,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		public virtual bool Equals(Action other) => ActionType == other.ActionType && Id == other.Id;
+		public virtual bool Equals([NotNull] Action other) => ActionType == other.ActionType && Id == other.Id;
 
 		/// <summary>
 		/// Returns a hash code for this instance.
@@ -160,7 +163,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="culture">The culture.</param>
 		/// <returns>String representation of action.</returns>
-		public virtual string ToString(System.Globalization.CultureInfo culture)
+		public virtual string ToString([NotNull] System.Globalization.CultureInfo culture)
 		{
 			using (new CultureSwitcher(culture))
 				return ToString();
@@ -212,6 +215,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return Activator.CreateInstance(t, BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { iAction }, null) as Action;
 		}
 
+		[NotNull]
 		private static Type GetObjectType(TaskActionType actionType)
 		{
 			switch (actionType)
@@ -305,7 +309,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the properties from another <see cref="Action"/> the current instance.
 		/// </summary>
 		/// <param name="sourceAction">The source <see cref="Action"/>.</param>
-		internal virtual void CopyProperties(Action sourceAction)
+		internal virtual void CopyProperties([NotNull] Action sourceAction)
 		{
 			Id = sourceAction.Id;
 		}
@@ -328,15 +332,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="classId">Identifier of the handler class.</param>
 		/// <param name="data">Addition data associated with the handler.</param>
-		public ComHandlerAction(Guid classId, string data)
+		public ComHandlerAction(Guid classId, [CanBeNull] string data)
 		{
 			ClassId = classId;
 			Data = data;
 		}
 
-		internal ComHandlerAction(V1Interop.ITask task) : base(task) { }
+		internal ComHandlerAction([NotNull] V1Interop.ITask task) : base(task) { }
 
-		internal ComHandlerAction(IAction action) : base(action) { }
+		internal ComHandlerAction([NotNull] IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the identifier of the handler class.
@@ -356,6 +360,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets additional data that is associated with the handler.
 		/// </summary>
 		[DefaultValue(null)]
+		[CanBeNull]
 		public string Data
 		{
 			get { return GetProperty<string, IComHandlerAction>(nameof(Data)); }
@@ -390,6 +395,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="guid">The unique identifier.</param>
 		/// <returns></returns>
+		[CanBeNull]
 		private static string GetNameForCLSID(Guid guid)
 		{
 			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
@@ -397,13 +403,13 @@ namespace Microsoft.Win32.TaskScheduler
 				if (k != null)
 				{
 					using (RegistryKey k2 = k.OpenSubKey(guid.ToString("B"), false))
-						return k2 != null ? k2.GetValue(null) as string : null;
+						return k2?.GetValue(null) as string;
 				}
 			}
 			return null;
 		}
 
-		internal override void CreateV2Action(IActionCollection iActions)
+		internal override void CreateV2Action([NotNull] IActionCollection iActions)
 		{
 			iAction = iActions.Create(TaskActionType.ComHandler);
 		}
@@ -456,7 +462,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="to">E-mail address or addresses that you want to send the e-mail to.</param>
 		/// <param name="body">Body of the e-mail that contains the e-mail message.</param>
 		/// <param name="mailServer">Name of the server that you use to send e-mail from.</param>
-		public EmailAction(string subject, string from, string to, string body, string mailServer)
+		public EmailAction([CanBeNull] string subject, [NotNull] string from, [NotNull] string to, [CanBeNull] string body, [NotNull] string mailServer)
 		{
 			Subject = subject;
 			From = from;
@@ -465,9 +471,9 @@ namespace Microsoft.Win32.TaskScheduler
 			Server = mailServer;
 		}
 
-		internal EmailAction(V1Interop.ITask task) : base(task) { }
+		internal EmailAction([NotNull] V1Interop.ITask task) : base(task) { }
 
-		internal EmailAction(IAction action) : base(action) { }
+		internal EmailAction([NotNull] IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets an array of file paths to be sent as attachments with the e-mail. Each item must be a <see cref="System.String"/> value containing a path to file.
@@ -546,16 +552,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlArray]
 		[XmlArrayItem("HeaderField", typeof(NameValuePair))]
+		[NotNull]
 		public NamedValueCollection HeaderFields
 		{
 			get
 			{
 				if (nvc == null)
 				{
-					if (iAction != null)
-						nvc = new NamedValueCollection(((IEmailAction)iAction).HeaderFields);
-					else
-						nvc = new NamedValueCollection();
+					nvc = iAction == null ? new NamedValueCollection() : new NamedValueCollection(((IEmailAction)iAction).HeaderFields);
 					nvc.AttributedXmlFormat = false;
 					nvc.CollectionChanged += (o, e) => OnPropertyChanged(nameof(HeaderFields));
 				}
@@ -664,8 +668,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal override void Bind(ITaskDefinition iTaskDef)
 		{
 			base.Bind(iTaskDef);
-			if (nvc != null)
-				nvc.Bind(((IEmailAction)iAction).HeaderFields);
+			nvc?.Bind(((IEmailAction)iAction).HeaderFields);
 		}
 
 		internal override void CreateV2Action(IActionCollection iActions)
@@ -812,16 +815,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="path">Path to an executable file.</param>
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
-		public ExecAction(string path, string arguments = null, string workingDirectory = null)
+		public ExecAction([NotNull] string path, string arguments = null, string workingDirectory = null)
 		{
 			Path = path;
 			Arguments = arguments;
 			WorkingDirectory = workingDirectory;
 		}
 
-		internal ExecAction(V1Interop.ITask task) : base(task) { }
+		internal ExecAction([NotNull] V1Interop.ITask task) : base(task) { }
 
-		internal ExecAction(IAction action) : base(action) { }
+		internal ExecAction([NotNull] IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the arguments associated with the command-line operation.
@@ -897,10 +900,50 @@ namespace Microsoft.Win32.TaskScheduler
 		public override bool Equals(Action other) => base.Equals(other) && Path == ((ExecAction)other).Path && Arguments == ((ExecAction)other).Arguments && WorkingDirectory == ((ExecAction)other).WorkingDirectory;
 
 		/// <summary>
+		/// Validates the input as a valid filename and optionally checks for its existence. If valid, the <see cref="Path"/> property is set to the validated absolute file path.
+		/// </summary>
+		/// <param name="path">The file path to validate.</param>
+		/// <param name="checkIfExists">if set to <c>true</c> check if the file exists.</param>
+		public void SetValidatedPath([NotNull] string path, bool checkIfExists = true)
+		{
+			if (IsValidPath(path, checkIfExists, true))
+				Path = path;
+		}
+
+		/// <summary>
 		/// Gets a string representation of the <see cref="ExecAction"/>.
 		/// </summary>
 		/// <returns>String representation of this action.</returns>
 		public override string ToString() => string.Format(Properties.Resources.ExecAction, Path, Arguments, WorkingDirectory, Id);
+
+		/// <summary>Determines whether the specified path is a valid filename and, optionally, if it exists.</summary>
+		/// <param name="path">The path.</param>
+		/// <param name="checkIfExists">if set to <c>true</c> check if file exists.</param>
+		/// <param name="throwOnException">if set to <c>true</c> throw exception on error.</param>
+		/// <returns><c>true</c> if the specified path is a valid filename; otherwise, <c>false</c>.</returns>
+		public static bool IsValidPath(string path, bool checkIfExists = true, bool throwOnException = false)
+		{
+			try
+			{
+				if (path == null) throw new ArgumentNullException(nameof(path));
+				/*if (path.StartsWith("\"") && path.EndsWith("\"") && path.Length > 1)
+					path = path.Substring(1, path.Length - 2);*/
+				var fn = System.IO.Path.GetFileName(path);
+				System.Diagnostics.Debug.WriteLine($"IsValidPath fn={fn}");
+				if (fn == string.Empty)
+					return false;
+				var dn = System.IO.Path.GetDirectoryName(path);
+				System.Diagnostics.Debug.WriteLine($"IsValidPath dir={dn ?? "null"}");
+				System.IO.Path.GetFullPath(path);
+				return true;
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"IsValidPath exc={ex}");
+				if (throwOnException) throw;
+			}
+			return false;
+		}
 
 		internal static string BuildPowerShellCmd(string actionType, string cmd) => string.Format(PowerShellArgFormat, ScriptIdentifer, actionType, cmd);
 
@@ -974,15 +1017,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="messageBody">Message text that is displayed in the body of the message box.</param>
 		/// <param name="title">Title of the message box.</param>
-		public ShowMessageAction(string messageBody, string title)
+		public ShowMessageAction([CanBeNull] string messageBody, [CanBeNull] string title)
 		{
 			MessageBody = messageBody;
 			Title = title;
 		}
 
-		internal ShowMessageAction(V1Interop.ITask task) : base(task) { }
+		internal ShowMessageAction([NotNull] V1Interop.ITask task) : base(task) { }
 
-		internal ShowMessageAction(IAction action) : base(action) { }
+		internal ShowMessageAction([NotNull] IAction action) : base(action) { }
 
 		/// <summary>
 		/// Gets or sets the message text that is displayed in the body of the message box.

@@ -102,6 +102,24 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Behavior"), DefaultValue(false)]
 		public bool RegisterTaskOnAccept { get; set; }
 
+		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Determines whether a button is shown when editing an action that allows user to execute the current action.")]
+		public bool ShowActionRunButton
+		{
+			get { return taskPropertiesControl1.ShowActionRunButton; }
+			set { taskPropertiesControl1.ShowActionRunButton = value; }
+		}
+
+		/// <summary>Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.</summary>
+		/// <value><c>true</c> if check box is shown; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Determines whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.")]
+		public bool ShowConvertActionsToPowerShellCheck
+		{
+			get { return taskPropertiesControl1.ShowConvertActionsToPowerShellCheck; }
+			set { taskPropertiesControl1.ShowConvertActionsToPowerShellCheck = value; }
+		}
+
 		/// <summary>
 		/// Gets or sets a value indicating whether to show the 'Additions' tab.
 		/// </summary>

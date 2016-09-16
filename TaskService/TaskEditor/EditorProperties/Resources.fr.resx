@@ -537,4 +537,7 @@ Action : {3}</value>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
     <value>Durée non valide valeur. !</value>
   </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>Le programme/script fourni n’est pas un nom de fichier valide. S’il vous plaît corriger avant de continuer. !</value>
+  </data>
 </root>

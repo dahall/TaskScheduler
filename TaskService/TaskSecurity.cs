@@ -77,7 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 		}
 
-		internal TaskAccessRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+		private TaskAccessRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
 			: base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
 		{
 		}
@@ -88,7 +88,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// A bitwise combination of <see cref="TaskRights"/> values indicating the rights allowed or denied by the access rule.
 		/// </value>
-		public TaskRights TaskRights => (TaskRights)base.AccessMask;
+		public TaskRights TaskRights => (TaskRights)AccessMask;
 	}
 
 	/// <summary>
@@ -119,7 +119,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// A bitwise combination of <see cref="TaskRights"/> values that indicates the rights affected by the audit rule.
 		/// </value>
 		/// <remarks><see cref="TaskAuditRule"/> objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of AuditFlags values, but you cannot modify an existing audit rule.</remarks>
-		public TaskRights TaskRights => (TaskRights)base.AccessMask;
+		public TaskRights TaskRights => (TaskRights)AccessMask;
 	}
 
 	/// <summary>
@@ -348,9 +348,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString() => GetSecurityDescriptorSddlForm(Task.defaultAccessControlSections);
 
-		internal static System.Security.AccessControl.SecurityInfos Convert(AccessControlSections si)
+		private static SecurityInfos Convert(AccessControlSections si)
 		{
-			System.Security.AccessControl.SecurityInfos ret = 0;
+			SecurityInfos ret = 0;
 			if ((si & AccessControlSections.Audit) != 0)
 				ret |= SecurityInfos.SystemAcl;
 			if ((si & AccessControlSections.Access) != 0)
@@ -362,7 +362,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret;
 		}
 
-		internal static AccessControlSections Convert(System.Security.AccessControl.SecurityInfos si)
+		private static AccessControlSections Convert(SecurityInfos si)
 		{
 			AccessControlSections ret = AccessControlSections.None;
 			if ((si & SecurityInfos.SystemAcl) != 0)
@@ -376,22 +376,22 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret;
 		}
 
-		internal AccessControlSections GetAccessControlSectionsFromChanges()
+		private AccessControlSections GetAccessControlSectionsFromChanges()
 		{
 			AccessControlSections none = AccessControlSections.None;
-			if (base.AccessRulesModified)
+			if (AccessRulesModified)
 			{
 				none = AccessControlSections.Access;
 			}
-			if (base.AuditRulesModified)
+			if (AuditRulesModified)
 			{
 				none |= AccessControlSections.Audit;
 			}
-			if (base.OwnerModified)
+			if (OwnerModified)
 			{
 				none |= AccessControlSections.Owner;
 			}
-			if (base.GroupModified)
+			if (GroupModified)
 			{
 				none |= AccessControlSections.Group;
 			}
@@ -406,19 +406,19 @@ namespace Microsoft.Win32.TaskScheduler
 		[SecurityCritical]
 		internal void Persist(Task task, AccessControlSections includeSections = Task.defaultAccessControlSections)
 		{
-			base.WriteLock();
+			WriteLock();
 			try
 			{
 				AccessControlSections accessControlSectionsFromChanges = GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
 					task.SetSecurityDescriptorSddlForm(GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
-					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
+					OwnerModified = GroupModified = AccessRulesModified = AuditRulesModified = false;
 				}
 			}
 			finally
 			{
-				base.WriteUnlock();
+				WriteUnlock();
 			}
 		}
 
@@ -430,19 +430,19 @@ namespace Microsoft.Win32.TaskScheduler
 		[SecurityCritical]
 		internal void Persist(TaskFolder folder, AccessControlSections includeSections = Task.defaultAccessControlSections)
 		{
-			base.WriteLock();
+			WriteLock();
 			try
 			{
 				AccessControlSections accessControlSectionsFromChanges = GetAccessControlSectionsFromChanges();
 				if (accessControlSectionsFromChanges != AccessControlSections.None)
 				{
 					folder.SetSecurityDescriptorSddlForm(GetSecurityDescriptorSddlForm(accessControlSectionsFromChanges));
-					base.OwnerModified = base.GroupModified = base.AccessRulesModified = base.AuditRulesModified = false;
+					OwnerModified = GroupModified = AccessRulesModified = AuditRulesModified = false;
 				}
 			}
 			finally
 			{
-				base.WriteUnlock();
+				WriteUnlock();
 			}
 		}
 

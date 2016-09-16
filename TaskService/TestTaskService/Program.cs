@@ -841,7 +841,7 @@ namespace TestTaskService
 			if (isV12)
 			{
 				output.WriteLine("\nTask history enumeration:");
-				TaskEventLog log = new TaskEventLog(@"\Maint", new int[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
+				TaskEventLog log = new TaskEventLog(@"\Microsoft\Windows\Autochk\Proxy", new[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
 				foreach (TaskEvent ev in log)
 					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.DataValues["ActionName"], ev.TimeCreated.Value, ev.DataValues["ResultCode"]);
 			}
@@ -872,6 +872,8 @@ namespace TestTaskService
 			editorForm.Initialize(t);
 			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
+			editorForm.ShowActionRunButton = true;
+			editorForm.ShowConvertActionsToPowerShellCheck = true;
 			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
@@ -883,6 +885,8 @@ namespace TestTaskService
 			editorForm.Initialize(ts, td);
 			editorForm.RegisterTaskOnAccept = editable;
 			editorForm.AvailableTabs = AvailableTaskTabs.All;
+			editorForm.ShowActionRunButton = true;
+			editorForm.ShowConvertActionsToPowerShellCheck = true;
 			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 

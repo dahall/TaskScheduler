@@ -58,8 +58,11 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2FolderList != null)
-					return new TaskFolder(parent.TaskService, v2FolderList[path]);
-				if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
+				{
+					var tf = parent.GetFolder(path);
+					if (tf != null) return tf;
+				}
+				else if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
 					return v1FolderList[0];
 				throw new ArgumentException(@"Path not found", nameof(path));
 			}

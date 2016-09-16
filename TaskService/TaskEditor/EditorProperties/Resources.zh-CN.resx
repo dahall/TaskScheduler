@@ -541,4 +541,7 @@
   <data name="Error_InvalidSpanValue" xml:space="preserve">
     <value>无效的工期值。 ！</value>
   </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>提供的程序脚本不是一个有效的文件名。请在继续之前更正。 ！</value>
+  </data>
 </root>

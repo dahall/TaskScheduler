@@ -3,17 +3,19 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Information about the task event.
 	/// </summary>
+	[PublicAPI]
 	public class TaskEventArgs : EventArgs
 	{
-		private TaskService taskService;
+		private readonly TaskService taskService;
 
-		internal TaskEventArgs(TaskEvent evt, TaskService ts = null)
+		internal TaskEventArgs([NotNull] TaskEvent evt, TaskService ts = null)
 		{
 			TaskEvent = evt;
 			TaskPath = evt.TaskPath;
@@ -37,6 +39,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The TaskEvent.
 		/// </value>
+		[NotNull]
 		public TaskEvent TaskEvent { get; }
 
 		/// <summary>
@@ -45,7 +48,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The task name.
 		/// </value>
-		public string TaskName => System.IO.Path.GetFileName(TaskPath);
+		public string TaskName => Path.GetFileName(TaskPath);
 
 		/// <summary>
 		/// Gets the task path.
@@ -59,27 +62,28 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Watches system events related to tasks and issues a <see cref="TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
 	/// </summary>
-	[DefaultEvent(nameof(TaskEventWatcher.EventRecorded)), DefaultProperty(nameof(TaskEventWatcher.Folder))]
+	[DefaultEvent(nameof(EventRecorded)), DefaultProperty(nameof(Folder))]
 #if DESIGNER
 	[Designer(typeof(Design.TaskEventWatcherDesigner))]
 #endif
 	[ToolboxItem(true), Serializable]
+	[PublicAPI]
 	public class TaskEventWatcher : Component, ISupportInitialize
 	{
 		private const string root = "\\";
 		private const string star = "*";
 
-		private static TimeSpan MaxV1EventLapse = TimeSpan.FromSeconds(1);
+		private static readonly TimeSpan MaxV1EventLapse = TimeSpan.FromSeconds(1);
 
 		private bool disposed;
-		private bool enabled = false;
+		private bool enabled;
 		private string folder = root;
 		private bool includeSubfolders;
 		private bool initializing;
 		private StandardTaskEventId lastId = 0;
 		private DateTime lastIdTime = DateTime.MinValue;
 		private TaskService ts;
-		private System.IO.FileSystemWatcher v1watcher;
+		private FileSystemWatcher v1Watcher;
 		private EventLogWatcher watcher;
 		private ISynchronizeInvoke synchronizingObject;
 
@@ -109,7 +113,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="task">The task to watch.</param>
 		/// <exception cref="ArgumentNullException">Occurs if the <paramref name="task"/> is <c>null</c>.</exception>
-		public TaskEventWatcher(Task task) : this(task?.TaskService)
+		public TaskEventWatcher([NotNull] Task task) : this(task?.TaskService)
 		{
 			if (task == null)
 				throw new ArgumentNullException(nameof(task));
@@ -125,7 +129,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="taskFilter">The filter for task names using standard file system wildcards. Use "*" to include all tasks.</param>
 		/// <param name="includeSubfolders">if set to <c>true</c> include events from tasks subfolders.</param>
 		/// <exception cref="ArgumentNullException">Occurs if the <paramref name="taskFolder"/> is <c>null</c>.</exception>
-		public TaskEventWatcher(TaskFolder taskFolder, string taskFilter = "*", bool includeSubfolders = false) : this(taskFolder?.TaskService)
+		public TaskEventWatcher([NotNull] TaskFolder taskFolder, string taskFilter = "*", bool includeSubfolders = false) : this(taskFolder?.TaskService)
 		{
 			if (taskFolder == null)
 				throw new ArgumentNullException(nameof(taskFolder));
@@ -237,13 +241,10 @@ namespace Microsoft.Win32.TaskScheduler
 					value = root;
 				if (!value.EndsWith("\\"))
 					value += "\\";
-				if (string.Compare(folder, value, StringComparison.OrdinalIgnoreCase) != 0)
-				{
-					if ((base.DesignMode && (value.IndexOfAny(new char[] { '*', '?' }) != -1 || value.IndexOfAny(Path.GetInvalidPathChars()) != -1)) || (TaskService.GetFolder(value == root ? value : value.TrimEnd('\\')) == null))
-						throw new ArgumentException($"Invalid folder name: {value}");
-
-					folder = value;
-				}
+				if (string.Compare(folder, value, StringComparison.OrdinalIgnoreCase) == 0) return;
+				if ((DesignMode && (value.IndexOfAny(new[] { '*', '?' }) != -1 || value.IndexOfAny(Path.GetInvalidPathChars()) != -1)) || (TaskService.GetFolder(value == root ? value : value.TrimEnd('\\')) == null))
+					throw new ArgumentException($"Invalid folder name: {value}");
+				folder = value;
 			}
 		}
 
@@ -259,11 +260,9 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return includeSubfolders; }
 			set
 			{
-				if (includeSubfolders != value)
-				{
-					includeSubfolders = value;
-					Restart();
-				}
+				if (includeSubfolders == value) return;
+				includeSubfolders = value;
+				Restart();
 			}
 		}
 
@@ -278,7 +277,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (synchronizingObject == null && base.DesignMode)
+				if (synchronizingObject == null && DesignMode)
 				{
 					var so = ((IDesignerHost)GetService(typeof(IDesignerHost)))?.RootComponent as ISynchronizeInvoke;
 					if (so != null)
@@ -299,11 +298,9 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, TaskService.TargetServer, true) != 0)
-				{
-					TaskService.TargetServer = value;
-					Restart();
-				}
+				if (string.Compare(value, TaskService.TargetServer, StringComparison.OrdinalIgnoreCase) == 0) return;
+				TaskService.TargetServer = value;
+				Restart();
 			}
 		}
 
@@ -332,11 +329,9 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, TaskService.UserAccountDomain, true) != 0)
-				{
-					TaskService.UserAccountDomain = value;
-					Restart();
-				}
+				if (string.Compare(value, TaskService.UserAccountDomain, StringComparison.OrdinalIgnoreCase) == 0) return;
+				TaskService.UserAccountDomain = value;
+				Restart();
 			}
 		}
 
@@ -351,11 +346,9 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, TaskService.UserName, true) != 0)
-				{
-					TaskService.UserName = value;
-					Restart();
-				}
+				if (string.Compare(value, TaskService.UserName, StringComparison.OrdinalIgnoreCase) == 0) return;
+				TaskService.UserName = value;
+				Restart();
 			}
 		}
 
@@ -370,11 +363,9 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
-				if (string.Compare(value, TaskService.UserPassword, true) != 0)
-				{
-					TaskService.UserPassword = value;
-					Restart();
-				}
+				if (string.Compare(value, TaskService.UserPassword, StringComparison.OrdinalIgnoreCase) == 0) return;
+				TaskService.UserPassword = value;
+				Restart();
 			}
 		}
 
@@ -382,9 +373,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets a value indicating if watching is available.
 		/// </summary>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		private bool IsHandleInvalid => IsV1 ? v1watcher == null : watcher == null;
+		private bool IsHandleInvalid => IsV1 ? v1Watcher == null : watcher == null;
 
-		private bool IsV1 => Environment.OSVersion.Version.Major < 6;
+		private static bool IsV1 => Environment.OSVersion.Version.Major < 6;
 
 		/// <summary>
 		/// Signals the object that initialization is starting.
@@ -393,9 +384,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(BeginInit)}");
 			initializing = true;
-			bool enabled = this.enabled;
+			var localEnabled = enabled;
 			StopRaisingEvents();
-			this.enabled = enabled;
+			enabled = localEnabled;
 			TaskService.BeginInit();
 		}
 
@@ -444,16 +435,14 @@ namespace Microsoft.Win32.TaskScheduler
 		protected virtual void OnEventRecorded(object sender, TaskEventArgs e)
 		{
 			var h = EventRecorded;
-			if (h != null)
-			{
-				if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
-					SynchronizingObject.BeginInvoke(h, new object[] { this, e });
-				else
-					h(sender, e);
-			}
+			if (h == null) return;
+			if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
+				SynchronizingObject.BeginInvoke(h, new object[] { this, e });
+			else
+				h(sender, e);
 		}
 
-		private void InitTask(Task task)
+		private void InitTask([NotNull] Task task)
 		{
 			Filter.TaskName = task.Name;
 			Folder = task.Folder.Path;
@@ -463,7 +452,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			this.includeSubfolders = includeSubfolders;
 			Filter.TaskName = taskFilter;
-			Folder = taskFolder.Path;
+			Folder = taskFolder?.Path;
 		}
 
 		private void InitTask(string taskFolder, string taskFilter, bool includeSubfolders)
@@ -475,39 +464,30 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void InitTask(string taskPath)
 		{
-			Filter.TaskName = System.IO.Path.GetFileNameWithoutExtension(taskPath);
-			Folder = System.IO.Path.GetDirectoryName(taskPath);
+			Filter.TaskName = Path.GetFileNameWithoutExtension(taskPath);
+			Folder = Path.GetDirectoryName(taskPath);
 		}
 
-		private bool IsSuspended()
-		{
-			if (!initializing)
-				return base.DesignMode;
-			return true;
-		}
+		private bool IsSuspended() => initializing || DesignMode;
 
 		private void ReleaseWatcher()
 		{
 			if (IsV1)
 			{
-				if (v1watcher != null)
-				{
-					v1watcher.EnableRaisingEvents = false;
-					v1watcher.Changed -= Watcher_DirectoryChanged;
-					v1watcher.Created -= Watcher_DirectoryChanged;
-					v1watcher.Deleted -= Watcher_DirectoryChanged;
-					v1watcher.Renamed -= Watcher_DirectoryChanged;
-					v1watcher = null;
-				}
+				if (v1Watcher == null) return;
+				v1Watcher.EnableRaisingEvents = false;
+				v1Watcher.Changed -= Watcher_DirectoryChanged;
+				v1Watcher.Created -= Watcher_DirectoryChanged;
+				v1Watcher.Deleted -= Watcher_DirectoryChanged;
+				v1Watcher.Renamed -= Watcher_DirectoryChanged;
+				v1Watcher = null;
 			}
 			else
 			{
-				if (watcher != null)
-				{
-					watcher.Enabled = false;
-					watcher.EventRecordWritten -= Watcher_EventRecordWritten;
-					watcher = null;
-				}
+				if (watcher == null) return;
+				watcher.Enabled = false;
+				watcher.EventRecordWritten -= Watcher_EventRecordWritten;
+				watcher = null;
 			}
 		}
 
@@ -515,12 +495,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void Restart()
 		{
-			if (!IsSuspended() && enabled)
-			{
-				System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(Restart)}");
-				StopRaisingEvents();
-				StartRaisingEvents();
-			}
+			if (IsSuspended() || !enabled) return;
+			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(Restart)}");
+			StopRaisingEvents();
+			StartRaisingEvents();
 		}
 
 		private void SetupWatcher()
@@ -532,42 +510,39 @@ namespace Microsoft.Win32.TaskScheduler
 			if (IsV1)
 			{
 				var di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.System));
-				string dir = Path.Combine(di.Parent.FullName, "Tasks");
-				v1watcher = new FileSystemWatcher(dir, "*.job") { NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.Attributes };
-				v1watcher.Changed += Watcher_DirectoryChanged;
-				v1watcher.Created += Watcher_DirectoryChanged;
-				v1watcher.Deleted += Watcher_DirectoryChanged;
-				v1watcher.Renamed += Watcher_DirectoryChanged;
+				string dir = di.Parent != null ? Path.Combine(di.Parent.FullName, "Tasks") : "Tasks";
+				v1Watcher = new FileSystemWatcher(dir, "*.job") { NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.Attributes };
+				v1Watcher.Changed += Watcher_DirectoryChanged;
+				v1Watcher.Created += Watcher_DirectoryChanged;
+				v1Watcher.Deleted += Watcher_DirectoryChanged;
+				v1Watcher.Renamed += Watcher_DirectoryChanged;
 			}
 			else
 			{
 				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.Now, TargetServer, UserAccountDomain, UserName, UserPassword);
 				log.Query.ReverseDirection = false;
 				watcher = new EventLogWatcher(log.Query);
-				log = null;
 				watcher.EventRecordWritten += Watcher_EventRecordWritten;
 			}
 		}
 
 		private bool ShouldSerializeFilter() => Filter.ShouldSerialize();
 
-		private bool ShouldSerializeTaskService() => TaskService != TaskService.Instance;
+		private bool ShouldSerializeTaskService() => !Equals(TaskService, TaskService.Instance);
 
 		private void StartRaisingEvents()
 		{
 			if (disposed)
-				throw new ObjectDisposedException(base.GetType().Name);
+				throw new ObjectDisposedException(GetType().Name);
 
-			if (!IsSuspended())
-			{
-				System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(StartRaisingEvents)}");
-				enabled = true;
-				SetupWatcher();
-				if (IsV1)
-					try { v1watcher.EnableRaisingEvents = true; } catch { }
-				else
-					try { watcher.Enabled = true; } catch { }
-			}
+			if (IsSuspended()) return;
+			System.Diagnostics.Debug.WriteLine($"TaskEventWather: {nameof(StartRaisingEvents)}");
+			enabled = true;
+			SetupWatcher();
+			if (IsV1)
+				try { v1Watcher.EnableRaisingEvents = true; } catch { }
+			else
+				try { watcher.Enabled = true; } catch { }
 		}
 
 		private void StopListening()
@@ -592,12 +567,10 @@ namespace Microsoft.Win32.TaskScheduler
 				id = StandardTaskEventId.TaskDeleted;
 			else if (e.ChangeType == WatcherChangeTypes.Created)
 				id = StandardTaskEventId.JobRegistered;
-			if (lastId != id || DateTime.Now.Subtract(lastIdTime) > MaxV1EventLapse)
-			{
-				OnEventRecorded(this, new TaskEventArgs(new TaskEvent(Path.Combine("\\", e.Name.Replace(".job", "")), id, DateTime.Now), TaskService));
-				lastId = id;
-				lastIdTime = DateTime.Now;
-			}
+			if (lastId == id && DateTime.Now.Subtract(lastIdTime) <= MaxV1EventLapse) return;
+			OnEventRecorded(this, new TaskEventArgs(new TaskEvent(Path.Combine("\\", e.Name.Replace(".job", "")), id, DateTime.Now), TaskService));
+			lastId = id;
+			lastIdTime = DateTime.Now;
 		}
 
 		private void Watcher_EventRecordWritten(object sender, EventRecordWrittenEventArgs e)
@@ -608,25 +581,23 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Diagnostics.Debug.WriteLine("Task event: " + taskEvent.ToString());
 
 				// Get the task name and folder
-				if (!string.IsNullOrEmpty(taskEvent.TaskPath))
+				if (string.IsNullOrEmpty(taskEvent.TaskPath)) return;
+				int cpos = taskEvent.TaskPath.LastIndexOf('\\');
+				string name = taskEvent.TaskPath.Substring(cpos + 1);
+				string fld = taskEvent.TaskPath.Substring(0, cpos + 1);
+
+				// Check folder and name filters
+				if (!string.IsNullOrEmpty(Filter.TaskName) && string.Compare(Filter.TaskName, taskEvent.TaskPath, StringComparison.OrdinalIgnoreCase) != 0)
 				{
-					int cpos = taskEvent.TaskPath.LastIndexOf('\\');
-					string name = taskEvent.TaskPath.Substring(cpos + 1);
-					string fld = taskEvent.TaskPath.Substring(0, cpos + 1);
-
-					// Check folder and name filters
-					if (!string.IsNullOrEmpty(Filter.TaskName) && string.Compare(Filter.TaskName, taskEvent.TaskPath, StringComparison.OrdinalIgnoreCase) != 0)
-					{
-						if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
-							return;
-						if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
-							return;
-						if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
-							return;
-					}
-
-					OnEventRecorded(this, new TaskEventArgs(taskEvent, TaskService));
+					if (Filter.Wildcard != null && !Filter.Wildcard.IsMatch(name))
+						return;
+					if (IncludeSubfolders && !fld.StartsWith(folder, StringComparison.OrdinalIgnoreCase))
+						return;
+					if (!IncludeSubfolders && string.Compare(folder, fld, StringComparison.OrdinalIgnoreCase) != 0)
+						return;
 				}
+
+				OnEventRecorded(this, new TaskEventArgs(taskEvent, TaskService));
 			}
 			catch (Exception ex)
 			{
@@ -638,15 +609,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Holds filter information for a <see cref="TaskEventWatcher"/>.
 		/// </summary>
 		[TypeConverter(typeof(ExpandableObjectConverter)), Serializable]
+		[PublicAPI]
 		public class EventFilter
 		{
 			private string filter = star;
-			private Wildcard filterWildcard = new Wildcard(star);
-			private int[] ids = null;
-			private int[] levels = null;
-			private TaskEventWatcher parent;
+			private int[] ids;
+			private int[] levels;
+			private readonly TaskEventWatcher parent;
 
-			internal EventFilter(TaskEventWatcher parent)
+			internal EventFilter([NotNull] TaskEventWatcher parent)
 			{
 				this.parent = parent;
 			}
@@ -706,13 +677,13 @@ namespace Microsoft.Win32.TaskScheduler
 					if (string.Compare(filter, value, StringComparison.OrdinalIgnoreCase) != 0)
 					{
 						filter = value;
-						filterWildcard = (value.IndexOfAny(new char[] { '?', '*' }) == -1) ? null : new Wildcard(value);
+						Wildcard = (value.IndexOfAny(new[] { '?', '*' }) == -1) ? null : new Wildcard(value);
 						parent.Restart();
 					}
 				}
 			}
 
-			internal Wildcard Wildcard => filterWildcard;
+			internal Wildcard Wildcard { get; private set; } = new Wildcard(star);
 
 			/// <summary>
 			/// Returns a <see cref="System.String" /> that represents this instance.

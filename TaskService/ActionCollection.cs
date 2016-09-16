@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -36,6 +37,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Collection that contains the actions that are performed by the task.
 	/// </summary>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
+	[PublicAPI]
 	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
 	{
 		internal const int MaxActions = 32;
@@ -47,14 +49,14 @@ namespace Microsoft.Win32.TaskScheduler
 		private PowerShellActionPlatformOption psConvert = PowerShellActionPlatformOption.Version2;
 		private static readonly string psV2IdRegex = $"(?:; )?{nameof(PowerShellConversion)}=(?<v>0|1)";
 
-		internal ActionCollection(V1Interop.ITask task)
+		internal ActionCollection([NotNull] V1Interop.ITask task)
 		{
 			v1Task = task;
 			v1Actions = GetV1Actions();
 			PowerShellConversion = Action.TryParse(v1Task.GetDataItem(nameof(PowerShellConversion)), psConvert | PowerShellActionPlatformOption.Version2);
 		}
 
-		internal ActionCollection(V2Interop.ITaskDefinition iTaskDef)
+		internal ActionCollection([NotNull] V2Interop.ITaskDefinition iTaskDef)
 		{
 			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
@@ -75,6 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlAttribute]
 		[DefaultValue(null)]
+		[CanBeNull]
 		public string Context
 		{
 			get
@@ -169,6 +172,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets a an action at the specified index.
 		/// </summary>
 		/// <value>The zero-based index of the action to get or set.</value>
+		[NotNull]
 		public Action this[int index]
 		{
 			get
@@ -218,6 +222,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
 		/// <exception cref="System.NullReferenceException"></exception>
 		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
+		[NotNull]
 		public Action this[string actionId]
 		{
 			get
@@ -249,7 +254,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="action">A derived <see cref="Action"/> class.</param>
 		/// <returns>The bound <see cref="Action"/> that was added to the collection.</returns>
-		public Action Add(Action action)
+		[NotNull]
+		public Action Add([NotNull] Action action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
@@ -272,7 +278,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
 		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
 		/// <returns>The bound <see cref="ExecAction"/> that was added to the collection.</returns>
-		public ExecAction Add(string path, string arguments = null, string workingDirectory = null) =>
+		[NotNull]
+		public ExecAction Add([NotNull] string path, [CanBeNull] string arguments = null, [CanBeNull] string workingDirectory = null) =>
 			(ExecAction)Add(new ExecAction(path, arguments, workingDirectory));
 
 		/// <summary>
@@ -280,6 +287,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="actionType">Type of task to be created</param>
 		/// <returns>Specialized <see cref="Action"/> instance.</returns>
+		[NotNull]
 		public Action AddNew(TaskActionType actionType)
 		{
 			if (Count >= MaxActions)
@@ -298,7 +306,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="actions">The actions to be added to the end of the <see cref="ActionCollection" />. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="actions" /> is <c>null</c>.</exception>
-		public void AddRange(IEnumerable<Action> actions)
+		public void AddRange([ItemNotNull, NotNull] IEnumerable<Action> actions)
 		{
 			if (actions == null)
 				throw new ArgumentNullException(nameof(actions));
@@ -339,7 +347,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Action item) => Find(a => a.Equals(item)) != null;
+		public bool Contains([NotNull] Action item) => Find(a => a.Equals(item)) != null;
 
 		/// <summary>
 		/// Determines whether the specified action type is contained in this collection.
@@ -370,7 +378,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
 		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>
 		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="ActionCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
-		public void CopyTo(int index, Action[] array, int arrayIndex, int count)
+		public void CopyTo(int index, [NotNull] Action[] array, int arrayIndex, int count)
 		{
 			if (array == null)
 				throw new ArgumentNullException(nameof(array));
@@ -417,7 +425,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="count">The number of elements in the collection to search.</param>
 		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
 		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
-		public int FindIndexOf(int startIndex, int count, Predicate<Action> match)
+		public int FindIndexOf(int startIndex, int count, [NotNull] Predicate<Action> match)
 		{
 			if (startIndex < 0 || startIndex >= Count)
 				throw new ArgumentOutOfRangeException(nameof(startIndex));
@@ -435,7 +443,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
 		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
-		public int FindIndexOf(Predicate<Action> match) => FindIndexOf(0, Count, match);
+		public int FindIndexOf([NotNull] Predicate<Action> match) => FindIndexOf(0, Count, match);
 
 		/// <summary>
 		/// Retrieves an enumeration of each of the actions.
@@ -512,7 +520,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="index">The zero-based index at which action should be inserted.</param>
 		/// <param name="action">The action to insert into the list.</param>
-		public void Insert(int index, Action action)
+		public void Insert(int index, [NotNull] Action action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
@@ -571,7 +579,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </returns>
-		public bool Remove(Action item)
+		public bool Remove([NotNull] Action item)
 		{
 			int idx = IndexOf(item);
 			if (idx != -1)
@@ -608,6 +616,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies the elements of the <see cref="ActionCollection"/> to a new array.
 		/// </summary>
 		/// <returns>An array containing copies of the elements of the <see cref="ActionCollection"/>.</returns>
+		[NotNull, ItemNotNull]
 		public Action[] ToArray()
 		{
 			var ret = new Action[Count];

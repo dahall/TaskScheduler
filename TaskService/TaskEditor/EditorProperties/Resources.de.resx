@@ -636,4 +636,7 @@ Aktion: {3}</value>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
     <value>Ungültige Dauerwert.!</value>
   </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>Das mitgelieferte Programm/Skript ist kein gültiger Dateiname. Bitte korrigieren, bevor Sie fortfahren.!</value>
+  </data>
 </root>

@@ -15,18 +15,18 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal const string runTimesTempTaskPrefix = "TempTask-";
 
-		private static TimeSpan2 PT1D = TimeSpan2.FromDays(1);
-		private static SecEdShim secEd = SecEdShim.GetNew();
+		private static readonly TimeSpan2 PT1D = TimeSpan2.FromDays(1);
+		private static readonly SecEdShim secEd = SecEdShim.GetNew();
 
 		private AvailableTaskTabs availableTabs = AvailableTaskTabs.All;
-		private bool editable = false;
+		private bool editable;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
-		private bool onAssignment = false;
-		private string runTimesTaskName = null;
-		private TabPage[] tabPages;
-		private Task task = null;
-		private TaskDefinition td = null;
+		private bool onAssignment;
+		private string runTimesTaskName;
+		private readonly TabPage[] tabPages;
+		private Task task;
+		private TaskDefinition td;
 		private bool v2 = true;
 
 		/// <summary>
@@ -45,21 +45,21 @@ namespace Microsoft.Win32.TaskScheduler
 			try
 			{
 				using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MMC\SnapIns\FX:{c7b8fb06-bfe1-4c2e-9217-7a69a95bbac4}"))
-					helpProvider.HelpNamespace = key.GetValue("HelpTopic", string.Empty).ToString();
+					helpProvider.HelpNamespace = key?.GetValue("HelpTopic", string.Empty).ToString();
 			}
 			catch { }
 
 			// Settings for conditionsTab
 			long allVal;
-			taskIdleDurationCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
+			taskIdleDurationCombo.Items.AddRange(new[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
 			taskIdleWaitTimeoutCombo.FormattedZero = EditorProperties.Resources.TimeSpanDoNotWait;
-			taskIdleWaitTimeoutCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+			taskIdleWaitTimeoutCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
 
 			// Settings for settingsTab
-			taskRestartIntervalCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
-			taskExecutionTimeLimitCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
+			taskRestartIntervalCombo.Items.AddRange(new[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
+			taskExecutionTimeLimitCombo.Items.AddRange(new[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
-			taskDeleteAfterCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
+			taskDeleteAfterCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
 			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
 
 			// Settings for addPropTab
@@ -68,9 +68,9 @@ namespace Microsoft.Win32.TaskScheduler
 			principalReqPrivilegesDropDown.Sorted = true;
 			principalReqPrivilegesDropDown.InitializeFromEnum(typeof(TaskPrincipalPrivilege), EditorProperties.Resources.ResourceManager, "");
 			taskMaintenanceDeadlineCombo.FormattedZero = EditorProperties.Resources.TimeSpanUnset;
-			taskMaintenanceDeadlineCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
+			taskMaintenanceDeadlineCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
 			taskMaintenancePeriodCombo.FormattedZero = EditorProperties.Resources.TimeSpanUnset;
-			taskMaintenancePeriodCombo.Items.AddRange(new TimeSpan2[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
+			taskMaintenancePeriodCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromDays(1), TimeSpan2.FromDays(2), TimeSpan2.FromDays(7), TimeSpan2.FromDays(14), TimeSpan2.FromDays(30) });
 
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
@@ -87,7 +87,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Empty arguments signifying that the error has been cleared.
 			/// </summary>
-			public static readonly new ComponentErrorEventArgs Empty = new ComponentErrorEventArgs();
+			public new static readonly ComponentErrorEventArgs Empty = new ComponentErrorEventArgs();
 
 			internal ComponentErrorEventArgs(Exception ex = null, string err = null)
 			{
@@ -170,7 +170,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <c>true</c> if this instance has error; otherwise, <c>false</c>.
 		/// </value>
 		[Browsable(false), DefaultValue(false), Description("Indicates whether there is currently an error with one of the components."), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public bool HasError { get; set; } = false;
+		public bool HasError { get; set; }
 
 		/// <summary>
 		/// Gets or sets the maximum history count. Use -1 for infinite or to retrieve all items.
@@ -185,12 +185,26 @@ namespace Microsoft.Win32.TaskScheduler
 			set { taskHistoryControl1.MaxQueryCount = value; }
 		}
 
-		/// <summary>
-		/// Gets or sets a value indicating whether errors are shown in the UI.
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if errors are shown; otherwise, <c>false</c>.
-		/// </value>
+		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Determines whether a button is shown when editing an action that allows user to execute the current action.")]
+		public bool ShowActionRunButton
+		{
+			get { return actionCollectionUI.ShowActionRunButton; }
+			set { actionCollectionUI.ShowActionRunButton = value; }
+		}
+
+		/// <summary>Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.</summary>
+		/// <value><c>true</c> if check box is shown; otherwise, <c>false</c>.</value>
+		[DefaultValue(false), Category("Appearance"), Description("Determines whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.")]
+		public bool ShowConvertActionsToPowerShellCheck
+		{
+			get { return actionCollectionUI.ShowPowerShellConversionCheck; }
+			set { actionCollectionUI.ShowPowerShellConversionCheck = value; }
+		}
+
+		/// <summary>Gets or sets a value indicating whether errors are shown in the UI.</summary>
+		/// <value><c>true</c> if errors are shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(true), Category("Behavior"), Description("Determines whether errors are shown in the UI.")]
 		public bool ShowErrors { get; set; } = true;
 
@@ -202,17 +216,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowAddedPropertiesTab
 		{
-			get
-			{
-				return (AvailableTabs & AvailableTaskTabs.Properties) != 0;
-			}
-			set
-			{
-				if (value)
-					AvailableTabs |= AvailableTaskTabs.Properties;
-				else
-					AvailableTabs &= ~AvailableTaskTabs.Properties;
-			}
+			get { return AvailableTabs.IsFlagSet(AvailableTaskTabs.Properties); }
+			set { AvailableTabs.SetFlags(AvailableTaskTabs.Properties, value); }
 		}
 
 		/// <summary>
@@ -223,17 +228,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRegistrationInfoTab
 		{
-			get
-			{
-				return (AvailableTabs & AvailableTaskTabs.RegistrationInfo) != 0;
-			}
-			set
-			{
-				if (value)
-					AvailableTabs |= AvailableTaskTabs.RegistrationInfo;
-				else
-					AvailableTabs &= ~AvailableTaskTabs.RegistrationInfo;
-			}
+			get { return AvailableTabs.IsFlagSet(AvailableTaskTabs.RegistrationInfo); }
+			set { AvailableTabs.SetFlags(AvailableTaskTabs.RegistrationInfo, value); }
 		}
 
 		/// <summary>
@@ -244,17 +240,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool ShowRunTimesTab
 		{
-			get
-			{
-				return (AvailableTabs & AvailableTaskTabs.RunTimes) != 0;
-			}
-			set
-			{
-				if (value)
-					AvailableTabs |= AvailableTaskTabs.RunTimes;
-				else
-					AvailableTabs &= ~AvailableTaskTabs.RunTimes;
-			}
+			get { return AvailableTabs.IsFlagSet(AvailableTaskTabs.RunTimes); }
+			set { AvailableTabs.SetFlags(AvailableTaskTabs.RunTimes, value); }
 		}
 
 		/// <summary>
@@ -292,10 +279,10 @@ namespace Microsoft.Win32.TaskScheduler
 			private set
 			{
 				if (TaskService == null)
-					throw new ArgumentNullException("TaskDefinition cannot be set until TaskService has been set with a valid object.");
+					throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set until TaskService has been set with a valid object.");
 
 				if (value == null)
-					throw new ArgumentNullException("TaskDefinition cannot be set to null.");
+					throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set to null.");
 
 				td = value;
 				onAssignment = true;
@@ -484,7 +471,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static string BuildEnumString(string preface, object enumValue)
 		{
-			string[] vals = enumValue.ToString().Split(new string[] { ", " }, StringSplitOptions.None);
+			string[] vals = enumValue.ToString().Split(new[] { ", " }, StringSplitOptions.None);
 			if (vals.Length == 0)
 				return string.Empty;
 
@@ -769,7 +756,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
 			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
 
-			string user = td == null ? null : td.Principal.ToString();
+			string user = td?.Principal.ToString();
 			if (string.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
@@ -779,8 +766,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class ComboItem : IEnableable
 		{
-			public string Text;
-			public int Version;
+			public readonly string Text;
+			public readonly int Version;
 
 			public ComboItem(string text, int ver, bool enabled = true) { Text = text; Version = ver; Enabled = enabled; }
 
@@ -808,12 +795,12 @@ namespace Microsoft.Win32.TaskScheduler
 			taskVersionCombo.Items.Clear();
 			string[] versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
-				throw new ArgumentOutOfRangeException("Locale specific information about supported Operating Systems is insufficient.");
+				throw new ArgumentOutOfRangeException(nameof(TaskDefinition), @"Locale specific information about supported Operating Systems is insufficient.");
 			int max = (TaskService == null) ? expectedVersions - 1 : Math.Min(TaskService.LibraryVersion.Minor, TaskService.HighestSupportedVersion.Minor);
 			if (Environment.OSVersion.Version >= new Version(6, 2))
 			{
 				using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-					versions[TaskService.LibraryVersion.Minor] = key.GetValue("ProductName", Environment.OSVersion).ToString();
+					versions[TaskService.LibraryVersion.Minor] = key?.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
 			TaskCompatibility comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			TaskCompatibility lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
@@ -1063,9 +1050,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskVersionCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			v2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
-			bool v2_1 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
-			bool v2_2 = taskVersionCombo.SelectedIndex == -1 ? true : ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
+			v2 = taskVersionCombo.SelectedIndex == -1 || ((ComboItem)taskVersionCombo.SelectedItem).Version > 1;
+			bool v2_1 = taskVersionCombo.SelectedIndex == -1 || ((ComboItem)taskVersionCombo.SelectedItem).Version > 2;
+			bool v2_2 = taskVersionCombo.SelectedIndex == -1 || ((ComboItem)taskVersionCombo.SelectedItem).Version > 3;
 			TaskCompatibility priorSetting = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			if (!onAssignment && td != null && taskVersionCombo.SelectedIndex != -1)
 				td.Settings.Compatibility = (TaskCompatibility)((ComboItem)taskVersionCombo.SelectedItem).Version;
@@ -1074,8 +1061,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					if (!onAssignment && td != null)
-						td.Validate(true);
+					if (!onAssignment)
+						td?.Validate(true);
 				}
 				catch (InvalidOperationException ex)
 				{
@@ -1115,7 +1102,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void UpdateIdleSettingsControls()
 		{
-			bool idleEnabled = taskIdleDurationCheck.Checked ? editable : false;
+			bool idleEnabled = taskIdleDurationCheck.Checked && editable;
 			taskIdleDurationCombo.Enabled = taskIdleWaitTimeoutLabel.Enabled = 
 				taskIdleWaitTimeoutCombo.Enabled = taskStopOnIdleEndCheck.Enabled = idleEnabled;
 			taskRestartOnIdleCheck.Enabled = v2 && idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
@@ -1194,8 +1181,10 @@ namespace Microsoft.Win32.TaskScheduler
 						t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
 						t.Repetition.StopAtDurationEnd = false;
 					}
-					else if (t is EventTrigger)
-						((EventTrigger)t).ValueQueries.Clear();
+					else
+					{
+						(t as EventTrigger)?.ValueQueries.Clear();
+					}
 				}
 			}
 		}

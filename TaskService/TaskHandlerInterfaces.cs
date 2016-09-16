@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -16,8 +15,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Called to start the COM handler. This method must be implemented by the handler.
 		/// </summary>
 		/// <param name="pHandlerServices">An <c>IUnkown</c> interface that is used to communicate back with the Task Scheduler.</param>
-		/// <param name="Data">The arguments that are required by the handler. These arguments are defined in the <see cref="ComHandlerAction.Data"/> property of the COM handler action.</param>
-		void Start([In, MarshalAs(UnmanagedType.IUnknown)] object pHandlerServices, [In, MarshalAs(UnmanagedType.BStr)] string Data);
+		/// <param name="data">The arguments that are required by the handler. These arguments are defined in the <see cref="ComHandlerAction.Data"/> property of the COM handler action.</param>
+		void Start([In, MarshalAs(UnmanagedType.IUnknown)] object pHandlerServices, [In, MarshalAs(UnmanagedType.BStr)] string data);
 		/// <summary>
 		/// Called to stop the COM handler. This method must be implemented by the handler.
 		/// </summary>

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Some string values of <see cref="TaskDefinition"/> properties can be set to retrieve their value from existing DLLs as a resource. This class facilitates creating those reference strings.
 	/// </summary>
+	[PublicAPI]
 	public class ResourceReferenceValue
 	{
 		/// <summary>
@@ -14,7 +16,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="dllPath">The DLL path.</param>
 		/// <param name="resourceId">The resource identifier.</param>
-		public ResourceReferenceValue(string dllPath, int resourceId)
+		public ResourceReferenceValue([NotNull] string dllPath, int resourceId)
 		{
 			ResourceFilePath = dllPath;
 			ResourceIdentifier = resourceId;
@@ -48,7 +50,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A new <see cref="ResourceReferenceValue" /> instance on success or <c>null</c> on failure.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="value"/> is <c>null</c></exception>
 		/// <exception cref="FormatException"><paramref name="value"/> is not in the format "$(@ [Dll], [ResourceID])"</exception>
-		public static ResourceReferenceValue Parse(string value)
+		[NotNull]
+		public static ResourceReferenceValue Parse([NotNull] string value)
 		{
 			if (value == null)
 				throw new ArgumentNullException(nameof(value));
@@ -85,6 +88,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="string"/> from resource file.</returns>
 		/// <exception cref="System.IO.FileNotFoundException"><see cref="ResourceFilePath"/> cannot be found.</exception>
 		/// <exception cref="System.ComponentModel.Win32Exception">Unable to load <see cref="ResourceFilePath"/> or string identified by <see cref="ResourceIdentifier"/>.</exception>
+		[NotNull]
 		public string GetResolvedString()
 		{
 			if (!System.IO.File.Exists(ResourceFilePath))

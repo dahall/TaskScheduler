@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
@@ -17,14 +18,13 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
 		public Action Action
 		{
-			get
-			{
-				return new ComHandlerAction(ComCLSID, comDataText.TextLength > 0 ? comDataText.Text : null);
-			}
+			get { return new ComHandlerAction(ComCLSID, comDataText.TextLength > 0 ? comDataText.Text : null); }
 			set
 			{
-				ComCLSID = ((ComHandlerAction)value).ClassId;
-				comDataText.Text = ((ComHandlerAction)value).Data;
+				var ca = value as ComHandlerAction;
+				if (ca == null) return;
+				ComCLSID = ca.ClassId;
+				comDataText.Text = ca.Data;
 			}
 		}
 
@@ -52,26 +52,26 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		public bool IsActionValid() => ComCLSID != Guid.Empty;
+		public bool CanValidate => ComCLSID != Guid.Empty;
+
+		public bool ValidateFields() => true;
 
 		public void Run()
 		{
-			//var dlg = new ActionEditDialog();
-			//dlg.Show(this);
-			//TaskService.RunComHandlerActionAsync(ComCLSID, i => { dlg?.Close(); dlg = null; }, comDataText.Text, -1, (i, m) => { if (dlg != null) { dlg.Text = m; } });
+			TaskService.RunComHandlerActionAsync(ComCLSID, i => { }, comDataText.TextLength == 0 ? null : comDataText.Text, -1, (i, m) => { });
+			//var strs = new List<string>();
+			//TaskService.RunComHandlerActionAsync(ComCLSID, i => { strs.Add($"Completed. Code={i}"); }, comDataText.TextLength == 0 ? null : comDataText.Text, -1, (i, m) => { strs.Add($"{i}% - {m}"); });
+			//MessageBox.Show(this.ParentForm, string.Join("\r\n", strs.ToArray()), @"COM Handler Results", MessageBoxButtons.OK);
 		}
 
-		internal static string GetNameForCLSID(Guid guid)
+		private static string GetNameForCLSID(Guid guid)
 		{
-			using (RegistryKey k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
+			using (var k = Registry.ClassesRoot.OpenSubKey("CLSID", false))
 			{
-				if (k != null)
-				{
-					using (RegistryKey k2 = k.OpenSubKey(guid.ToString("B"), false))
-						return k2 != null ? k2.GetValue(null) as string : null;
-				}
+				if (k == null) return null;
+				using (var k2 = k.OpenSubKey(guid.ToString("B"), false))
+					return k2?.GetValue(null) as string;
 			}
-			return null;
 		}
 
 		private void comCLSIDText_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -82,9 +82,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			Guid? og = null;
 			try { og = new Guid(comCLSIDText.Text); } catch { }
 			if (og.HasValue)
-			{
 				errorProvider.SetError(comCLSIDText, "");
-			}
 			else
 			{
 				errorProvider.SetError(comCLSIDText, "Invalid GUID format for CLSID");
@@ -101,8 +99,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			try
 			{
-				ComObjectSelectionDialog dlg = new ComObjectSelectionDialog();
-				dlg.SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04");
+				var dlg = new ComObjectSelectionDialog {SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04")};
 				if (dlg.ShowDialog(this) == DialogResult.OK)
 					ComCLSID = dlg.CLSID;
 			}

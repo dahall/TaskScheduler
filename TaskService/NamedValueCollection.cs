@@ -4,15 +4,18 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using Microsoft.Win32.TaskScheduler.V2Interop;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Pair of name and value.
 	/// </summary>
-	public class NameValuePair : IXmlSerializable, INotifyPropertyChanged, ICloneable
+	[PublicAPI]
+	public class NameValuePair : IXmlSerializable, INotifyPropertyChanged, ICloneable, IEquatable<NameValuePair>, IEquatable<ITaskNamedValuePair>
 	{
-		private V2Interop.ITaskNamedValuePair v2Pair = null;
+		private readonly ITaskNamedValuePair v2Pair;
 		private string name, value;
 
 		/// <summary>
@@ -25,12 +28,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public NameValuePair() { }
 
-		internal NameValuePair(V2Interop.ITaskNamedValuePair iPair)
+		internal NameValuePair([NotNull] ITaskNamedValuePair iPair)
 		{
 			v2Pair = iPair;
 		}
 
-		internal NameValuePair(string name, string value)
+		internal NameValuePair([NotNull] string name, [NotNull] string value)
 		{
 			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(value))
 				throw new ArgumentException("Both name and value must be non-empty strings.");
@@ -46,6 +49,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The name.
 		/// </value>
+		[NotNull]
 		public string Name
 		{
 			get { return v2Pair == null ? name : v2Pair.Name; }
@@ -58,6 +62,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The value.
 		/// </value>
+		[NotNull]
 		public string Value
 		{
 			get { return v2Pair == null ? value : v2Pair.Value; }
@@ -68,7 +73,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Clones this instance.
 		/// </summary>
 		/// <returns>A copy of an unbound <see cref="NameValuePair"/>.</returns>
-		public NameValuePair Clone() => new NameValuePair(this.Name, this.Value);
+		[NotNull]
+		public NameValuePair Clone() => new NameValuePair(Name, Value);
 
 		object ICloneable.Clone() => Clone();
 
@@ -81,12 +87,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override bool Equals(object obj)
 		{
-			if (obj is NameValuePair)
-				return ((NameValuePair)obj).Name == Name && ((NameValuePair)obj).Value == Value;
-			if (obj is V2Interop.ITaskNamedValuePair)
-				return ((V2Interop.ITaskNamedValuePair)obj).Name == Name && ((V2Interop.ITaskNamedValuePair)obj).Value == Value;
+			var valuePair = obj as ITaskNamedValuePair;
+			if (valuePair != null)
+				return (this as IEquatable<ITaskNamedValuePair>).Equals(valuePair);
+			var pair = obj as NameValuePair;
+			if (pair != null)
+				return Equals(pair);
 			return base.Equals(obj);
 		}
+
+		/// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.</returns>
+		public bool Equals([NotNull] NameValuePair other) => other.Name == Name && other.Value == Value;
+
+		/// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.</returns>
+		bool IEquatable<ITaskNamedValuePair>.Equals(ITaskNamedValuePair other) => other.Name == Name && other.Value == Value;
 
 		/// <summary>
 		/// Returns a hash code for this instance.
@@ -148,10 +166,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Contains a collection of name-value pairs.
 	/// </summary>
+	[PublicAPI]
 	public sealed class NamedValueCollection : IDisposable, ICollection<NameValuePair>, IDictionary<string, string>, INotifyCollectionChanged, INotifyPropertyChanged
 	{
-		private V2Interop.ITaskNamedValueCollection v2Coll = null;
-		private List<NameValuePair> unboundDict = null;
+		private ITaskNamedValueCollection v2Coll;
+		private readonly List<NameValuePair> unboundDict;
 
 		/// <summary>
 		/// Occurs when the collection has changed.
@@ -163,19 +182,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		internal NamedValueCollection(V2Interop.ITaskNamedValueCollection iColl) { v2Coll = iColl; }
+		internal NamedValueCollection([NotNull] ITaskNamedValueCollection iColl) { v2Coll = iColl; }
 
 		internal NamedValueCollection()
 		{
 			unboundDict = new List<NameValuePair>(5);
 		}
 
-		internal bool Bound => v2Coll != null;
-
 		[XmlIgnore]
 		internal bool AttributedXmlFormat { get; set; } = true;
 
-		internal void Bind(V2Interop.ITaskNamedValueCollection iTaskNamedValueCollection)
+		internal void Bind([NotNull] ITaskNamedValueCollection iTaskNamedValueCollection)
 		{
 			v2Coll = iTaskNamedValueCollection;
 			v2Coll.Clear();
@@ -187,11 +204,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Copies current <see cref="NamedValueCollection"/> to another.
 		/// </summary>
 		/// <param name="destCollection">The destination collection.</param>
-		public void CopyTo(NamedValueCollection destCollection)
+		public void CopyTo([NotNull] NamedValueCollection destCollection)
 		{
 			if (v2Coll != null)
 			{
-				for (int i = 1; i <= Count; i++)
+				for (var i = 1; i <= Count; i++)
 					destCollection.Add(v2Coll[i].Name, v2Coll[i].Value);
 			}
 			else
@@ -212,7 +229,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets the number of items in the collection.
 		/// </summary>
-		public int Count => v2Coll != null ? v2Coll.Count : unboundDict.Count;
+		public int Count => v2Coll?.Count ?? unboundDict.Count;
 
 		/// <summary>
 		/// Gets a collection of the names.
@@ -220,15 +237,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The names.
 		/// </value>
+		[ItemNotNull, NotNull]
 		public ICollection<string> Names
 		{
 			get
 			{
 				if (v2Coll == null)
-					return unboundDict.ConvertAll<string>(p => p.Name);
+					return unboundDict.ConvertAll(p => p.Name);
 
-				List<string> ret = new List<string>(v2Coll.Count);
-				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+				var ret = new List<string>(v2Coll.Count);
+				foreach (ITaskNamedValuePair item in v2Coll)
 					ret.Add(item.Name);
 				return ret;
 			}
@@ -240,15 +258,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// The values.
 		/// </value>
+		[ItemNotNull, NotNull]
 		public ICollection<string> Values
 		{
 			get
 			{
 				if (v2Coll == null)
-					return unboundDict.ConvertAll<string>(p => p.Value);
+					return unboundDict.ConvertAll(p => p.Value);
 
-				List<string> ret = new List<string>(v2Coll.Count);
-				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+				var ret = new List<string>(v2Coll.Count);
+				foreach (ITaskNamedValuePair item in v2Coll)
 					ret.Add(item.Value);
 				return ret;
 			}
@@ -259,6 +278,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="index">The index of the item being requested.</param>
 		/// <returns>The value of the name-value pair at the specified index.</returns>
+		[NotNull]
 		public string this[int index]
 		{
 			get
@@ -276,17 +296,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>Value for the name, or null if not found.</returns>
 		public string this[string name]
 		{
+			[CanBeNull]
 			get
 			{
 				string ret;
 				TryGetValue(name, out ret);
 				return ret;
 			}
+			[NotNull]
 			set
 			{
-				int idx = -1;
+				int idx;
 				NameValuePair old = null;
-				NameValuePair nvp = new NameValuePair(name, value);
+				var nvp = new NameValuePair(name, value);
 				if (v2Coll == null)
 				{
 					idx = unboundDict.FindIndex(p => p.Name == name);
@@ -310,8 +332,8 @@ namespace Microsoft.Win32.TaskScheduler
 						old = array[idx];
 						array[idx] = new KeyValuePair<string, string>(name, value);
 						v2Coll.Clear();
-						for (int i = 0; i < array.Length; i++)
-							v2Coll.Create(array[i].Key, array[i].Value);
+						foreach (KeyValuePair<string, string> t in array)
+							v2Coll.Create(t.Key, t.Value);
 					}
 				}
 				if (idx == -1)
@@ -325,7 +347,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-		public void Add(NameValuePair item)
+		public void Add([NotNull] NameValuePair item)
 		{
 			if (v2Coll != null)
 				v2Coll.Create(item.Name, item.Value);
@@ -337,18 +359,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Adds a name-value pair to the collection.
 		/// </summary>
-		/// <param name="Name">The name associated with a value in a name-value pair.</param>
-		/// <param name="Value">The value associated with a name in a name-value pair.</param>
-		public void Add(string Name, string Value)
+		/// <param name="name">The name associated with a value in a name-value pair.</param>
+		/// <param name="value">The value associated with a name in a name-value pair.</param>
+		public void Add([NotNull] string name, [NotNull] string value)
 		{
-			Add(new NameValuePair(Name, Value));
+			Add(new NameValuePair(name, value));
 		}
 
 		/// <summary>
 		/// Adds the elements of the specified collection to the end of <see cref="NamedValueCollection"/>.
 		/// </summary>
 		/// <param name="items">The collection of whose elements should be added to the end of <see cref="NamedValueCollection"/>.</param>
-		public void AddRange(IEnumerable<NameValuePair> items)
+		public void AddRange([ItemNotNull, NotNull] IEnumerable<NameValuePair> items)
 		{
 			if (v2Coll != null)
 			{
@@ -385,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.GetEnumerator();
 
-			return new ComEnumerator<NameValuePair, V2Interop.ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((V2Interop.ITaskNamedValuePair)o));
+			return new ComEnumerator<NameValuePair, ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((ITaskNamedValuePair)o));
 		}
 
 		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -401,9 +423,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="name">The name associated with a value in a name-value pair.</param>
 		/// <returns><c>true</c> if item successfully removed; <c>false</c> otherwise.</returns>
-		public bool Remove(string name)
+		public bool Remove([NotNull] string name)
 		{
-			int i = -1;
+			var i = -1;
 			NameValuePair nvp = null;
 			try
 			{
@@ -475,9 +497,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 			{
-				foreach (V2Interop.ITaskNamedValuePair item in v2Coll)
+				foreach (ITaskNamedValuePair item in v2Coll)
 				{
-					if (string.Compare(item.Name, name, false) == 0)
+					if (string.CompareOrdinal(item.Name, name) == 0)
 					{
 						value = item.Value;
 						return true;
@@ -503,7 +525,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.Contains(item);
 
-			foreach (V2Interop.ITaskNamedValuePair invp in v2Coll)
+			foreach (ITaskNamedValuePair invp in v2Coll)
 				if (item.Equals(invp)) return true;
 			return false;
 		}
@@ -517,8 +539,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (array.Length - arrayIndex < v2Coll.Count)
 					throw new ArgumentException("Items in collection exceed available items in destination array.");
 				if (arrayIndex < 0)
-					throw new ArgumentException("Array index must be 0 or greater.", nameof(arrayIndex));
-				for (int i = 0; i < v2Coll.Count; i++)
+					throw new ArgumentException(@"Array index must be 0 or greater.", nameof(arrayIndex));
+				for (var i = 0; i < v2Coll.Count; i++)
 					array[i + arrayIndex] = new NameValuePair(v2Coll[i]);
 			}
 		}
@@ -531,18 +553,23 @@ namespace Microsoft.Win32.TaskScheduler
 
 		bool ICollection<NameValuePair>.Remove(NameValuePair item)
 		{
-			int i = -1;
+			var i = -1;
 			try
 			{
-				if (v2Coll == null && (i = unboundDict.IndexOf(item)) != -1)
-					return unboundDict.Remove(item);
-
-				for (i = 0; i < v2Coll.Count; i++)
+				if (v2Coll == null)
 				{
-					if (item.Equals(v2Coll[i]))
+					if ((i = unboundDict.IndexOf(item)) != -1)
+						return unboundDict.Remove(item);
+				}
+				else
+				{
+					for (i = 0; i < v2Coll.Count; i++)
 					{
-						v2Coll.Remove(i);
-						return true;
+						if (item.Equals(v2Coll[i]))
+						{
+							v2Coll.Remove(i);
+							return true;
+						}
 					}
 				}
 				i = -1;
@@ -572,7 +599,7 @@ namespace Microsoft.Win32.TaskScheduler
 		void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
 		{
 			if (array.Length < Count + arrayIndex)
-				throw new ArgumentOutOfRangeException(nameof(array), "Array has insufficient capacity to support copy.");
+				throw new ArgumentOutOfRangeException(nameof(array), @"Array has insufficient capacity to support copy.");
 			foreach (var item in ((IEnumerable<KeyValuePair<string, string>>)this))
 				array[arrayIndex++] = item;
 		}

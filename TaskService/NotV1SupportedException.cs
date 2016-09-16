@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Abstract class for throwing a method specific exception.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough, Serializable]
+	[DebuggerStepThrough, Serializable]
+	[PublicAPI]
 	public abstract class TSNotSupportedException : Exception
 	{
 		/// <summary>Defines the minimum supported version for the action not allowed by this exception.</summary>
-		protected TaskCompatibility min;
-		private string myMessage;
+		protected readonly TaskCompatibility min;
+		private readonly string myMessage;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TSNotSupportedException"/> class.
@@ -32,10 +33,10 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TSNotSupportedException(TaskCompatibility minComp)
 		{
 			min = minComp;
-			StackTrace stackTrace = new StackTrace();
-			StackFrame stackFrame = stackTrace.GetFrame(2);
-			MethodBase methodBase = stackFrame.GetMethod();
-			myMessage = $"{methodBase.DeclaringType.Name}.{methodBase.Name} is not supported on {LibName}";
+			var stackTrace = new StackTrace();
+			var stackFrame = stackTrace.GetFrame(2);
+			var methodBase = stackFrame.GetMethod();
+			myMessage = $"{methodBase.DeclaringType?.Name}.{methodBase.Name} is not supported on {LibName}";
 		}
 
 		internal TSNotSupportedException(string message, TaskCompatibility minComp)
@@ -74,7 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler 1.0.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough, Serializable]
+	[DebuggerStepThrough, Serializable]
 	public class NotV1SupportedException : TSNotSupportedException
 	{
 		/// <summary>
@@ -95,7 +96,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler 2.0.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough, Serializable]
+	[DebuggerStepThrough, Serializable]
 	public class NotV2SupportedException : TSNotSupportedException
 	{
 		/// <summary>
@@ -112,7 +113,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Thrown when the calling method is not supported by Task Scheduler versions prior to the one specified.
 	/// </summary>
-	[System.Diagnostics.DebuggerStepThrough, Serializable]
+	[DebuggerStepThrough, Serializable]
 	public class NotSupportedPriorToException : TSNotSupportedException
 	{
 		/// <summary>

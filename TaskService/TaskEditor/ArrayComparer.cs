@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
@@ -12,7 +13,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (source == null)
 				throw new System.ArgumentNullException(nameof(source));
 			if (default(TResult) != null && source is IEnumerable<TResult>)
-				return source as IEnumerable<TResult>;
+				return (IEnumerable<TResult>)source;
 			return CastImpl<TResult>(source);
 		}
 
@@ -27,7 +28,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (source == null)
 				throw new System.ArgumentNullException(nameof(source));
 			if (default(TResult) != null && source is IEnumerable<TResult>)
-				return source as IEnumerable<TResult>;
+				return (IEnumerable<TResult>)source;
 			return OfTypeImpl<TResult>(source);
 		}
 
@@ -81,7 +82,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static bool Equals<T>(this IList<T> list1, IList<T> list2)
 		{
 			// if same reference or both null, then equality is true
-			if (object.ReferenceEquals(list1, list2))
+			if (ReferenceEquals(list1, list2))
 				return true;
 
 			// otherwise, if both arrays have same length, compare all elements
@@ -90,7 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 				for (int i = 0; i < list1.Count; i++)
 				{
 					// if any mismatch, not equal
-					if (!object.Equals(list1[i], list2[i]))
+					if (!Equals(list1[i], list2[i]))
 						return false;
 				}
 				// if no mismatches, equal

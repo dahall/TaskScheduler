@@ -30,31 +30,30 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 			set
 			{
-				emailFromText.Text = ((EmailAction)value).From;
-				emailToText.Text = ((EmailAction)value).To;
-				emailSubjectText.Text = ((EmailAction)value).Subject;
-				emailTextText.Text = ((EmailAction)value).Body;
-				if (((EmailAction)value).Attachments != null && ((EmailAction)value).Attachments.Length > 0)
-					emailAttachmentText.Text = string.Join(";", Array.ConvertAll<object, string>(((EmailAction)value).Attachments, o => (string)o));
-				emailSMTPText.Text = ((EmailAction)value).Server;
+				var ea = value as EmailAction;
+				if (ea == null) return;
+				emailFromText.Text = ea.From;
+				emailToText.Text = ea.To;
+				emailSubjectText.Text = ea.Subject;
+				emailTextText.Text = ea.Body;
+				if (ea.Attachments != null && ea.Attachments.Length > 0)
+					emailAttachmentText.Text = string.Join(";", Array.ConvertAll<object, string>(ea.Attachments, o => (string)o));
+				emailSMTPText.Text = ea.Server;
 			}
 		}
 
-		public void Run()
-		{
+		public bool ValidateFields() => true;
 
-		}
+		public void Run() { MessageBox.Show(this.ParentForm, "", null, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
-		public bool IsActionValid() => emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
+		public bool CanValidate => emailSubjectText.TextLength > 0 && emailFromText.TextLength > 0 &&
 				emailToText.TextLength > 0 && emailTextText.TextLength > 0 && emailSMTPText.TextLength > 0;
 
 		public event EventHandler KeyValueChanged;
 
 		private void keyField_TextChanged(object sender, EventArgs e)
 		{
-			EventHandler h = KeyValueChanged;
-			if (h != null)
-				h(this, EventArgs.Empty);
+			KeyValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
