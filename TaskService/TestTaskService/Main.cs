@@ -15,7 +15,7 @@ namespace TestTaskService
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
-			Text = $"{Text} - {Environment.OSVersion.Version}";
+			Text = $"{Text} - OS: {Environment.OSVersion.Version}, App: {System.Reflection.Assembly.GetEntryAssembly().GetName().Version}";
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
