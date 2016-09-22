@@ -2,15 +2,14 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
 	internal partial class TriggerCollectionUI : UserControl, ITaskEditorUIElement
 	{
-		int disabledOverlayImageIndex = -1;
-		ITaskDefinitionEditor editor;
-		bool modern;
+		private int disabledOverlayImageIndex = -1;
+		private ITaskDefinitionEditor editor;
+		private bool modern;
 
 		public TriggerCollectionUI()
 		{
@@ -57,14 +56,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			if (editor == null)
 				editor = this.GetParent<ITaskDefinitionEditor>();
-			if (editor != null && editor.TaskDefinition != null)
+			if (editor?.TaskDefinition != null)
 			{
 				triggerDeleteButton.Visible = triggerEditButton.Visible = triggerNewButton.Visible = editor.Editable;
 				triggerListView.Enabled = editor.Editable;
 				triggerListView.BeginUpdate();
 				triggerListView.Items.Clear();
 				triggerListView.View = modern ? View.Tile : View.Details;
-				foreach (Trigger tr in editor.TaskDefinition.Triggers)
+				foreach (var tr in editor.TaskDefinition.Triggers)
 				{
 					AddTriggerToList(tr, -1);
 				}
@@ -95,19 +94,16 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void AddTriggerToList(Trigger tr, int index)
 		{
-			int imgIdx = (int)tr.TriggerType;
-			string txt = tr.ToString();
-			ListViewItem lvi = new ListViewItem(new string[] {
+			var imgIdx = (int)tr.TriggerType;
+			var txt = tr.ToString();
+			var lvi = new ListViewItem(new [] {
 					TaskEnumGlobalizer.GetString(tr.TriggerType), txt,
 					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
 				}, imgIdx) { Tag = tr, ToolTipText = txt };
-			if (index < 0)
-				lvi = triggerListView.Items.Add(lvi);
-			else
-				lvi = triggerListView.Items.Insert(index, lvi);
+			lvi = index < 0 ? triggerListView.Items.Add(lvi) : triggerListView.Items.Insert(index, lvi);
 			if (modern)
 			{
-				var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new int[] { 1 } };
+				var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new[] { 1 } };
 				if (!tr.Enabled)
 					nlvi.OverlayImageIndex = 1;
 				NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
@@ -116,16 +112,19 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void SetTriggerButtonState()
 		{
-			int idx = SelectedIndex;
+			var idx = SelectedIndex;
 			triggerNewButton.Enabled = newTriggerToolStripMenuItem.Visible = editor.Editable;
 			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editor.Editable && idx > -1;
 			if (idx >= 0)
 				enableToolStripMenuItem.Visible = !(disableToolStripMenuItem.Visible = editor.TaskDefinition.Triggers[idx].Enabled);
+			else
+				enableToolStripMenuItem.Visible = disableToolStripMenuItem.Visible = false;
+
 		}
 
 		private void triggerDeleteButton_Click(object sender, EventArgs e)
 		{
-			int idx = SelectedIndex;
+			var idx = SelectedIndex;
 			if (idx >= 0)
 			{
 				editor.TaskDefinition.Triggers.RemoveAt(idx);
@@ -135,7 +134,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void triggerEditButton_Click(object sender, EventArgs e)
 		{
-			int idx = SelectedIndex;
+			var idx = SelectedIndex;
 			if (idx >= 0)
 			{
 				/*if (editor.TaskDefinition.Triggers[idx].TriggerType == TaskTriggerType.Custom)
@@ -144,7 +143,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					return;
 				}*/
 
-				using (TriggerEditDialog dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
+				using (var dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
 				{
 					dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
 					dlg.TargetServer = editor.TaskService.TargetServer;
@@ -181,7 +180,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void triggerNewButton_Click(object sender, EventArgs e)
 		{
-			using (TriggerEditDialog dlg = new TriggerEditDialog(null, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
+			using (var dlg = new TriggerEditDialog(null, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
 			{
 				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
 				dlg.TargetServer = editor.TaskService.TargetServer;
@@ -196,7 +195,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void enableToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int i = SelectedIndex;
+			var i = SelectedIndex;
 			if (i >= 0)
 			{
 				editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;

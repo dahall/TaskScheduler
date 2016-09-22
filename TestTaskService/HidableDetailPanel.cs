@@ -31,19 +31,11 @@ namespace TestTaskService
 
 		private void headerPanel_CheckedChanged(object sender, EventArgs e)
 		{
-			if (detailHidden)
-			{
-				detailHidden = !detailHidden;
-				Height = defaultHeight;
-			}
-			else
-			{
-				detailHidden = !detailHidden;
-				Height = headerHeight;
-			}
+		    Height = detailHidden ? defaultHeight : headerHeight;
+		    detailHidden = !detailHidden;
 		}
 
-		protected override void OnResize(EventArgs e)
+	    protected override void OnResize(EventArgs e)
 		{
 			base.OnResize(e);
 			if (!detailHidden)
@@ -70,12 +62,12 @@ namespace TestTaskService
 		{
 			base.Initialize(component);
 
-			if (Control is HidableDetailPanel)
-				EnableDesignMode(((HidableDetailPanel)Control).DetailArea, "DetailArea");
+		    var panel = Control as HidableDetailPanel;
+		    if (panel != null)
+				EnableDesignMode(panel.DetailArea, "DetailArea");
 
-			DesignerActionService service = GetService(typeof(DesignerActionService)) as DesignerActionService;
-			if (service != null)
-				service.Remove(component);
+			var service = GetService(typeof(DesignerActionService)) as DesignerActionService;
+		    service?.Remove(component);
 		}
 	}
 }
