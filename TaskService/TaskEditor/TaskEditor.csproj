@@ -68,17 +68,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard">
-      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AeroWizard.2.1.7\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\AeroWizard.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
-      <Aliases>global</Aliases>
+      <HintPath>..\packages\GroupControls.1.5.3\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\GroupControls.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,9 +86,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TimeSpan2">
-      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Aliases>global</Aliases>
+      <HintPath>..\packages\TimeSpan2.2.1.4\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\TimeSpan2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -911,6 +909,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
