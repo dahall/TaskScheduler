@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -506,7 +507,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the task with the specified path.
 		/// </summary>
 		/// <param name="taskPath">The task path.</param>
-		/// <returns>The task.</returns>
+		/// <returns>The <see cref="Task"/> instance matching the <paramref name="taskPath"/>, if found. If not found, this method returns <c>null</c>.</returns>
 		public Task GetTask(string taskPath)
 		{
 			Task t = null;
@@ -726,6 +727,10 @@ namespace Microsoft.Win32.TaskScheduler
 			catch (ArgumentException)
 			{
 				return iSvc.Activate(name + ".job", ref ITaskGuid);
+			}
+			catch (FileNotFoundException)
+			{
+				return null;
 			}
 		}
 
