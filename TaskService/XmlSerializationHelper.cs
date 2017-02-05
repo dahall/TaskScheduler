@@ -5,12 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	internal static class XmlSerializationHelper
 	{
-		public static object GetDefaultValue(PropertyInfo prop)
+		public static object GetDefaultValue([NotNull] PropertyInfo prop)
 		{
 			var attributes = prop.GetCustomAttributes(typeof(DefaultValueAttribute), true);
 			if (attributes.Length > 0)
@@ -25,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return null;
 		}
 
-		private static bool GetPropertyValue(object obj, string property, ref object outVal)
+		private static bool GetPropertyValue(object obj, [NotNull] string property, ref object outVal)
 		{
 			if (obj != null)
 			{
@@ -47,7 +48,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		private static bool GetAttributeValue(PropertyInfo propInfo, Type attrType, string property, bool inherit, ref object outVal)
+		private static bool GetAttributeValue([NotNull] PropertyInfo propInfo, Type attrType, string property, bool inherit, ref object outVal)
 		{
 			Attribute attr = Attribute.GetCustomAttribute(propInfo, attrType, inherit);
 			return GetPropertyValue(attr, property, ref outVal);
@@ -55,7 +56,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static bool IsStandardType(Type type) => type.IsPrimitive || type == typeof(DateTime) || type == typeof(DateTimeOffset) || type == typeof(Decimal) || type == typeof(Guid) || type == typeof(TimeSpan) || type == typeof(string) || type.IsEnum;
 
-		private static bool HasMembers(object obj)
+		private static bool HasMembers([NotNull] object obj)
 		{
 			if (obj is IXmlSerializable)
 			{
@@ -94,7 +95,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		public static string GetPropertyAttributeName(PropertyInfo pi)
+		public static string GetPropertyAttributeName([NotNull] PropertyInfo pi)
 		{
 			object oVal = null;
 			string eName = pi.Name;
@@ -103,7 +104,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return eName;
 		}
 
-		public static string GetPropertyElementName(PropertyInfo pi)
+		public static string GetPropertyElementName([NotNull] PropertyInfo pi)
 		{
 			object oVal = null;
 			string eName = pi.Name;
@@ -114,9 +115,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return eName;
 		}
 
-		public delegate bool PropertyConversionHandler(PropertyInfo pi, Object obj, ref Object value);
+		public delegate bool PropertyConversionHandler([NotNull] PropertyInfo pi, Object obj, ref Object value);
 
-		public static bool WriteProperty(XmlWriter writer, PropertyInfo pi, Object obj, PropertyConversionHandler handler = null)
+		public static bool WriteProperty([NotNull] XmlWriter writer, [NotNull] PropertyInfo pi, [NotNull] Object obj, PropertyConversionHandler handler = null)
 		{
 			if (Attribute.IsDefined(pi, typeof(XmlIgnoreAttribute), false) || Attribute.IsDefined(pi, typeof(XmlAttributeAttribute), false))
 				return false;
@@ -170,7 +171,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		private static string GetXmlValue(object value, Type propType)
+		private static string GetXmlValue([NotNull] object value, Type propType)
 		{
 			string output = null;
 			if (propType.IsEnum)
@@ -244,7 +245,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return output;
 		}
 
-		public static void WriteObjectAttributes(XmlWriter writer, object obj, PropertyConversionHandler handler = null)
+		public static void WriteObjectAttributes([NotNull] XmlWriter writer, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			// Enumerate each property
 			foreach (var pi in obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
@@ -252,7 +253,7 @@ namespace Microsoft.Win32.TaskScheduler
 					WriteObjectAttribute(writer, pi, obj, handler);
 		}
 
-		public static void WriteObjectAttribute(XmlWriter writer, PropertyInfo pi, object obj, PropertyConversionHandler handler = null)
+		public static void WriteObjectAttribute([NotNull] XmlWriter writer, [NotNull] PropertyInfo pi, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			object value = pi.GetValue(obj, null);
 			object defValue = GetDefaultValue(pi);
@@ -266,14 +267,14 @@ namespace Microsoft.Win32.TaskScheduler
 			writer.WriteAttributeString(GetPropertyAttributeName(pi), GetXmlValue(value, propType));
 		}
 
-		public static void WriteObjectProperties(XmlWriter writer, object obj, PropertyConversionHandler handler = null)
+		public static void WriteObjectProperties([NotNull] XmlWriter writer, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			// Enumerate each public property
 			foreach (var pi in obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
 				WriteProperty(writer, pi, obj, handler);
 		}
 
-		public static void WriteObject(XmlWriter writer, object obj, PropertyConversionHandler handler = null, bool includeNS = false, string elemName = null)
+		public static void WriteObject([NotNull] XmlWriter writer, [NotNull] object obj, PropertyConversionHandler handler = null, bool includeNS = false, string elemName = null)
 		{
 			if (obj == null)
 				return;
@@ -302,19 +303,19 @@ namespace Microsoft.Win32.TaskScheduler
 			writer.WriteEndElement();
 		}
 
-		public static string GetElementName(object obj)
+		public static string GetElementName([NotNull] object obj)
 		{
 			object oVal = null;
 			return GetAttributeValue(obj.GetType(), typeof(XmlRootAttribute), "ElementName", true, ref oVal) ? oVal.ToString() : obj.GetType().Name;
 		}
 
-		public static string GetTopLevelNamespace(object obj)
+		public static string GetTopLevelNamespace([NotNull] object obj)
 		{
 			object oVal = null;
 			return GetAttributeValue(obj.GetType(), typeof(XmlRootAttribute), "Namespace", true, ref oVal) ? oVal.ToString() : null;
 		}
 
-		public static void ReadObjectProperties(XmlReader reader, object obj, PropertyConversionHandler handler = null)
+		public static void ReadObjectProperties([NotNull] XmlReader reader, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			// Build property lookup table
 			PropertyInfo[] props = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
@@ -475,7 +476,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public static void ReadObject(XmlReader reader, object obj, PropertyConversionHandler handler = null)
+		public static void ReadObject([NotNull] XmlReader reader, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			if (obj == null)
 				throw new ArgumentNullException(nameof(obj));
@@ -505,7 +506,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public static void ReadObjectFromXmlText(string xml, object obj, PropertyConversionHandler handler = null)
+		public static void ReadObjectFromXmlText([NotNull] string xml, [NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			using (System.IO.StringReader sr = new System.IO.StringReader(xml))
 			{
@@ -517,7 +518,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		public static string WriteObjectToXmlText(object obj, PropertyConversionHandler handler = null)
+		public static string WriteObjectToXmlText([NotNull] object obj, PropertyConversionHandler handler = null)
 		{
 			StringBuilder sb = new StringBuilder();
 			using (XmlWriter writer = XmlWriter.Create(sb, new XmlWriterSettings() { Indent = true }))

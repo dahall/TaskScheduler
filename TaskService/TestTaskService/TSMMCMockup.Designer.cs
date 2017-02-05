@@ -68,7 +68,6 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -491,7 +490,6 @@
 			this.mainMenuStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskService)).EndInit();
 			this.splitContainer1.Panel1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.hidableDetailPanel1.DetailArea.ResumeLayout(false);

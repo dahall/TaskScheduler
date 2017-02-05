@@ -3,6 +3,6 @@
 [assembly: AssemblyDescription("https://taskscheduler.codeplex.com/")]
 [assembly: AssemblyCompany("CodePlex Community")]
 [assembly: AssemblyProduct("TaskService")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyVersion("2.5.22.0")]
 [assembly: AssemblyFileVersion("2.5.22.0")]

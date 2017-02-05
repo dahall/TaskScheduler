@@ -71,7 +71,6 @@
 			this.collapseAllGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.columnContextMenuBreak = new System.Windows.Forms.ToolStripSeparator();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).BeginInit();
 			this.historySplitContainer.Panel1.SuspendLayout();
 			this.historySplitContainer.Panel2.SuspendLayout();
 			this.historySplitContainer.SuspendLayout();
@@ -372,7 +371,6 @@
 			this.historySplitContainer.Panel1.PerformLayout();
 			this.historySplitContainer.Panel2.ResumeLayout(false);
 			this.historySplitContainer.Panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.historySplitContainer)).EndInit();
 			this.historySplitContainer.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();

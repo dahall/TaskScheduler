@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestTaskService</RootNamespace>
     <AssemblyName>TestTaskService</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -58,7 +58,6 @@
   <ItemGroup>
     <Reference Include="GroupControls">
       <SpecificVersion>False</SpecificVersion>
-      <!--<HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>-->
       <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
       <Aliases>GrpCtrl</Aliases>
     </Reference>
@@ -100,18 +99,18 @@
     <Compile Include="HomePanel.Designer.cs">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\ControlExtension.cs" />
-    <Compile Include="Native\EnumUtil.cs" />
-    <Compile Include="Native\Header.cs" />
-    <Compile Include="Native\InteropUtil.cs" />
-    <Compile Include="Native\ListViewExtensions.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Native\ControlExtension.cs" />
+    <Compile Include="Native\EnumUtil.cs" />
+    <Compile Include="Native\Header.cs" />
+    <Compile Include="Native\InteropUtil.cs" />
     <Compile Include="Native\ListView.cs" />
+    <Compile Include="Native\ListViewExtensions.cs" />
     <Compile Include="Native\RECT.cs" />
     <Compile Include="Native\SIZE.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="ScriptTestDlg.Designer.cs">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="TaskWatcherForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,11 +216,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\ts.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\empty.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\PanelHeaderArrows.png" />
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +238,9 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.5.2 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
     <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
   </Target>
 </Project>

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -88,7 +89,7 @@ namespace Microsoft.Win32.TaskScheduler
 			EndInit();
 		}
 
-		private TaskService(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+		private TaskService([NotNull] System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
 		{
 			BeginInit();
 			TargetServer = (string)info.GetValue("TargetServer", typeof(string));
@@ -191,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the root ("\") folder. For Task Scheduler 1.0, this is the only folder.
 		/// </summary>
 		[Browsable(false)]
-		public TaskFolder RootFolder => GetFolder(@"\");
+		public TaskFolder RootFolder => GetFolder(TaskFolder.rootString);
 
 		/// <summary>
 		/// Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
@@ -296,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="workingDirectory">The directory that contains either the executable file or the files that are used by the executable file.</param>
 		/// <returns>A <see cref="Task" /> instance of the Automatic Maintenance Task.</returns>
 		/// <exception cref="System.InvalidOperationException">Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.</exception>
-		public Task AddAutomaticMaintenanceTask(string taskPathAndName, TimeSpan period, TimeSpan deadline, string executablePath, string arguments = null, string workingDirectory = null)
+		public Task AddAutomaticMaintenanceTask([NotNull] string taskPathAndName, TimeSpan period, TimeSpan deadline, string executablePath, string arguments = null, string workingDirectory = null)
 		{
 			if (HighestSupportedVersion.Minor < 4)
 				throw new InvalidOperationException("Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.");
@@ -322,7 +323,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="Task"/> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, Trigger trigger, Action action, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
+		public Task AddTask([NotNull] string path, [NotNull] Trigger trigger, [NotNull] Action action, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			TaskDefinition td = NewTask();
 			if (!string.IsNullOrEmpty(description))
@@ -352,7 +353,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="Task" /> instance of the registered task.
 		/// </returns>
-		public Task AddTask(string path, QuickTriggerType trigger, string exePath, string arguments = null, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
+		public Task AddTask([NotNull] string path, QuickTriggerType trigger, [NotNull] string exePath, string arguments = null, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			// Create a trigger based on quick trigger
 			Trigger newTrigger;
@@ -437,7 +438,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="name">The task name. This can include the wildcards * or ?.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
 		/// <returns>A <see cref="Task"/> if one matches <paramref name="name"/>, otherwise NULL.</returns>
-		public Task FindTask(string name, bool searchAllFolders = true)
+		public Task FindTask([NotNull] string name, bool searchAllFolders = true)
 		{
 			Task[] results = FindAllTasks(new Wildcard(name), searchAllFolders);
 			if (results.Length > 0)
@@ -452,17 +453,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="TaskEventLog"/> instance.</returns>
 		public TaskEventLog GetEventLog(string taskPath = null) => new TaskEventLog(TargetServer, taskPath, UserAccountDomain, UserName, UserPassword);
 
-		/// <summary>
-		/// Gets the path to a folder of registered tasks.
-		/// </summary>
-		/// <param name="folderName">The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
-		/// <returns><see cref="TaskFolder"/> instance for the requested folder.</returns>
+		/// <summary>Gets the path to a folder of registered tasks.</summary>
+		/// <param name="folderName">
+		/// The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a
+		/// backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the
+		/// current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
+		/// </param>
+		/// <returns><see cref="TaskFolder"/> instance for the requested folder or <c>null</c> if <paramref name="folderName"/> was unrecognized.</returns>
 		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
 		public TaskFolder GetFolder(string folderName)
 		{
 			TaskFolder f = null;
 			if (v2TaskService != null)
 			{
+				if (string.IsNullOrEmpty(folderName)) folderName = TaskFolder.rootString;
 				try
 				{
 					var ifld = v2TaskService.GetFolder(folderName);
@@ -472,7 +476,7 @@ namespace Microsoft.Win32.TaskScheduler
 				catch (System.IO.DirectoryNotFoundException) { }
 				catch (System.IO.FileNotFoundException) { }
 			}
-			else if (folderName == @"\" || string.IsNullOrEmpty(folderName))
+			else if (folderName == TaskFolder.rootString || string.IsNullOrEmpty(folderName))
 				f = new TaskFolder(this);
 			else
 				throw new NotV1SupportedException("Folder other than the root (\\) was requested on a system only supporting Task Scheduler 1.0.");
@@ -508,7 +512,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="taskPath">The task path.</param>
 		/// <returns>The <see cref="Task"/> instance matching the <paramref name="taskPath"/>, if found. If not found, this method returns <c>null</c>.</returns>
-		public Task GetTask(string taskPath)
+		public Task GetTask([NotNull] string taskPath)
 		{
 			Task t = null;
 			if (v2TaskService != null)
@@ -551,7 +555,7 @@ namespace Microsoft.Win32.TaskScheduler
 				return new TaskDefinition(v2TaskService.NewTask(0));
 			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
-			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, ref CTaskGuid, ref ITaskGuid), v1Name);
+			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, CTaskGuid, ITaskGuid), v1Name);
 		}
 
 		/// <summary>
@@ -560,7 +564,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="xmlFile">The XML file to use as input.</param>
 		/// <returns>A <see cref="TaskDefinition"/> instance.</returns>
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
-		public TaskDefinition NewTaskFromFile(string xmlFile)
+		public TaskDefinition NewTaskFromFile([NotNull] string xmlFile)
 		{
 			TaskDefinition td = NewTask();
 			td.XmlText = System.IO.File.ReadAllText(xmlFile);
@@ -583,7 +587,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="resourceId">The identifier for the resource text (typically a negative number).</param>
 		/// <returns>A string in the format of $(@ [dllPath], [resourceId]).</returns>
 		/// <example>For example, the setting this property value to $(@ %SystemRoot%\System32\ResourceName.dll, -101) will set the property to the value of the resource text with an identifier equal to -101 in the %SystemRoot%\System32\ResourceName.dll file.</example>
-		public static string GetDllResourceString(string dllPath, int resourceId) => $"$(@ {dllPath}, {resourceId})";
+		public static string GetDllResourceString([NotNull] string dllPath, int resourceId) => $"$(@ {dllPath}, {resourceId})";
 
 		/// <summary>
 		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler" /> interface.
@@ -693,7 +697,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal static V2Interop.IRegisteredTask GetTask(V2Interop.ITaskService iSvc, string name)
+		internal static V2Interop.IRegisteredTask GetTask([NotNull] V2Interop.ITaskService iSvc, [NotNull] string name)
 		{
 			V2Interop.ITaskFolder fld = null;
 			try
@@ -711,13 +715,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal static V1Interop.ITask GetTask(V1Interop.ITaskScheduler iSvc, string name)
+		internal static V1Interop.ITask GetTask([NotNull] V1Interop.ITaskScheduler iSvc, [NotNull] string name)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
 			try
 			{
-				return iSvc.Activate(name, ref ITaskGuid);
+				return iSvc.Activate(name, ITaskGuid);
 			}
 			catch (UnauthorizedAccessException)
 			{
@@ -726,7 +730,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			catch (ArgumentException)
 			{
-				return iSvc.Activate(name + ".job", ref ITaskGuid);
+				return iSvc.Activate(name + ".job", ITaskGuid);
 			}
 			catch (FileNotFoundException)
 			{
@@ -832,7 +836,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="results">The results.</param>
 		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
 		/// <returns>True if any tasks are found, False if not.</returns>
-		private bool FindTaskInFolder(TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref System.Collections.Generic.List<Task> results, bool recurse = true)
+		private bool FindTaskInFolder([NotNull] TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
 			results.AddRange(fld.GetTasks(taskName));
 
@@ -855,7 +859,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="results">The results.</param>
 		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
 		/// <returns>True if any tasks are found, False if not.</returns>
-		private bool FindTaskInFolder(TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
+		private bool FindTaskInFolder([NotNull] TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
 			foreach (Task t in fld.GetTasks())
 				try

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -17,7 +18,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v1FolderList = new TaskFolder[0];
 		}
 
-		internal TaskFolderCollection(TaskFolder folder, V2Interop.ITaskFolderCollection iCollection)
+		internal TaskFolderCollection([NotNull] TaskFolder folder, [NotNull] V2Interop.ITaskFolderCollection iCollection)
 		{
 			parent = folder;
 			v2FolderList = iCollection;
@@ -53,17 +54,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="path">The path of the folder to be retrieved.</param>
 		/// <returns>A TaskFolder instance that represents the requested folder.</returns>
-		public TaskFolder this[string path]
+		public TaskFolder this[[NotNull] string path]
 		{
 			get
 			{
-				if (v2FolderList != null)
+				try
 				{
-					var tf = parent.GetFolder(path);
-					if (tf != null) return tf;
+					if (v2FolderList != null)
+						return parent.GetFolder(path);
+					if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
+						return v1FolderList[0];
 				}
-				else if (v1FolderList != null && v1FolderList.Length > 0 && (path == string.Empty || path == "\\"))
-					return v1FolderList[0];
+				catch { }
 				throw new ArgumentException(@"Path not found", nameof(path));
 			}
 		}
@@ -73,7 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
 		/// <exception cref="System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string, bool)"/> instead.</exception>
-		public void Add(TaskFolder item) { throw new NotImplementedException(); }
+		public void Add([NotNull] TaskFolder item) { throw new NotImplementedException(); }
 
 		/// <summary>
 		/// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.
@@ -94,7 +96,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(TaskFolder item)
+		public bool Contains([NotNull] TaskFolder item)
 		{
 			if (v2FolderList != null)
 			{
@@ -150,12 +152,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="path">The path of the folder.</param>
 		/// <returns>true if folder exists; otherwise, false.</returns>
-		public bool Exists(string path)
+		public bool Exists([NotNull] string path)
 		{
 			try
 			{
-				if (parent.GetFolder(path) != null)
-					return true;
+				parent.GetFolder(path);
+				return true;
 			}
 			catch { }
 			return false;
@@ -211,7 +213,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </returns>
-		public bool Remove(TaskFolder item)
+		public bool Remove([NotNull] TaskFolder item)
 		{
 			if (v2FolderList != null)
 			{

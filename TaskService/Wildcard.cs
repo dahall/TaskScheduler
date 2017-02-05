@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -13,7 +14,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="pattern">The wildcard pattern to match.</param>
 		/// <param name="options">A combination of one or more <see cref="System.Text.RegularExpressions.RegexOptions"/>.</param>
-		public Wildcard(string pattern, RegexOptions options = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)
+		public Wildcard([NotNull] string pattern, RegexOptions options = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)
 			: base(WildcardToRegex(pattern), options)
 		{
 		}
@@ -23,7 +24,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="pattern">The wildcard pattern to convert.</param>
 		/// <returns>A regular expression equivalent of the given wildcard.</returns>
-		public static string WildcardToRegex(string pattern)
+		public static string WildcardToRegex([NotNull] string pattern)
 		{
 			string s = Regex.Escape(pattern);
 			s = Regex.Replace(Regex.Escape(pattern), @"(?<!\\)\\\*", @".*"); // Negative Lookbehind

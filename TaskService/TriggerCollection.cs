@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -16,12 +17,12 @@ namespace Microsoft.Win32.TaskScheduler
 		private readonly V2Interop.ITriggerCollection v2Coll;
 		private V2Interop.ITaskDefinition v2Def;
 
-		internal TriggerCollection(V1Interop.ITask iTask)
+		internal TriggerCollection([NotNull] V1Interop.ITask iTask)
 		{
 			v1Task = iTask;
 		}
 
-		internal TriggerCollection(V2Interop.ITaskDefinition iTaskDef)
+		internal TriggerCollection([NotNull] V2Interop.ITaskDefinition iTaskDef)
 		{
 			v2Def = iTaskDef;
 			v2Coll = v2Def.Triggers;
@@ -62,7 +63,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
 		/// <exception cref="System.NullReferenceException"></exception>
 		/// <exception cref="System.InvalidOperationException">Mismatching Id for trigger and lookup.</exception>
-		public Trigger this[string triggerId]
+		public Trigger this[[NotNull] string triggerId]
 		{
 			get
 			{
@@ -120,7 +121,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
 		/// <returns>Bound trigger.</returns>
 		/// <exception cref="System.ArgumentNullException"><c>unboundTrigger</c> is <c>null</c>.</exception>
-		public Trigger Add(Trigger unboundTrigger)
+		public Trigger Add([NotNull] Trigger unboundTrigger)
 		{
 			if (unboundTrigger == null)
 				throw new ArgumentNullException(nameof(unboundTrigger));
@@ -152,7 +153,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="triggers">The triggers to be added to the end of the <see cref="TriggerCollection"/>. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
 		/// <exception cref="System.ArgumentNullException"><paramref name="triggers"/> is <c>null</c>.</exception>
-		public void AddRange(IEnumerable<Trigger> triggers)
+		public void AddRange([NotNull] IEnumerable<Trigger> triggers)
 		{
 			if (triggers == null)
 				throw new ArgumentNullException(nameof(triggers));
@@ -181,7 +182,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
 		/// </returns>
-		public bool Contains(Trigger item) => Find(a => a.Equals(item)) != null;
+		public bool Contains([NotNull] Trigger item) => Find(a => a.Equals(item)) != null;
 
 		/// <summary>
 		/// Determines whether the specified trigger type is contained in this collection.
@@ -240,7 +241,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the <see cref="Trigger"/> to search for.</param>
 		/// <returns>The first <see cref="Trigger"/> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
-		public Trigger Find(Predicate<Trigger> match)
+		public Trigger Find([NotNull] Predicate<Trigger> match)
 		{
 			if (match == null)
 				throw new ArgumentNullException(nameof(match));
@@ -256,7 +257,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="count">The number of elements in the collection to search.</param>
 		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the element to search for.</param>
 		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
-		public int FindIndexOf(int startIndex, int count, Predicate<Trigger> match)
+		public int FindIndexOf(int startIndex, int count, [NotNull] Predicate<Trigger> match)
 		{
 			if (startIndex < 0 || startIndex >= Count)
 				throw new ArgumentOutOfRangeException(nameof(startIndex));
@@ -274,7 +275,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="match">The <see cref="Predicate{Trigger}"/> delegate that defines the conditions of the element to search for.</param>
 		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
-		public int FindIndexOf(Predicate<Trigger> match) => FindIndexOf(0, Count, match);
+		public int FindIndexOf([NotNull] Predicate<Trigger> match) => FindIndexOf(0, Count, match);
 
 		/// <summary>
 		/// Gets the collection enumerator for this collection.
@@ -319,7 +320,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
 		/// </returns>
-		public int IndexOf(Trigger item) => FindIndexOf(a => a.Equals(item));
+		public int IndexOf([NotNull] Trigger item) => FindIndexOf(a => a.Equals(item));
 
 		/// <summary>
 		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
@@ -328,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// The index of <paramref name="triggerId" /> if found in the list; otherwise, -1.
 		/// </returns>
-		public int IndexOf(string triggerId)
+		public int IndexOf([NotNull] string triggerId)
 		{
 			if (string.IsNullOrEmpty(triggerId))
 				throw new ArgumentNullException(triggerId);
@@ -340,7 +341,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="index">The zero-based index at which trigger should be inserted.</param>
 		/// <param name="trigger">The trigger to insert into the list.</param>
-		public void Insert(int index, Trigger trigger)
+		public void Insert(int index, [NotNull] Trigger trigger)
 		{
 			if (trigger == null)
 				throw new ArgumentNullException(nameof(trigger));
@@ -406,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
 		/// </returns>
-		public bool Remove(Trigger item)
+		public bool Remove([NotNull] Trigger item)
 		{
 			int idx = IndexOf(item);
 			if (idx != -1)

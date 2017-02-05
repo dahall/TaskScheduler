@@ -1,5 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
+// ReSharper disable InconsistentNaming
+// ReSharper disable FieldCanBeMadeReadOnly.Global
 
 namespace Microsoft.Win32.TaskScheduler.V1Interop
 {
@@ -223,7 +226,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 			}
 			set
 			{
-				int idx = Array.IndexOf<short>(new short[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (short)value);
+				int idx = Array.IndexOf(new short[] { 0x1, 0x2, 0x4, 0x8, 0x10 }, (short)value);
 				if (idx >= 0)
 					WhichWeek = (ushort)(idx + 1);
 				else
@@ -319,19 +322,19 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		[return: MarshalAs(UnmanagedType.Interface)]
 		IEnumWorkItems Enum();
 		[return: MarshalAs(UnmanagedType.Interface)]
-		ITask Activate([In, MarshalAs(UnmanagedType.LPWStr)] string Name, [In] ref System.Guid riid);
-		void Delete([In, MarshalAs(UnmanagedType.LPWStr)] string Name);
+		ITask Activate([In, MarshalAs(UnmanagedType.LPWStr)][NotNull] string Name, [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+		void Delete([In, MarshalAs(UnmanagedType.LPWStr)][NotNull] string Name);
 		[return: MarshalAs(UnmanagedType.Interface)]
-		ITask NewWorkItem([In, MarshalAs(UnmanagedType.LPWStr)] string TaskName, [In] ref System.Guid rclsid, [In] ref System.Guid riid);
-		void AddWorkItem([In, MarshalAs(UnmanagedType.LPWStr)] string TaskName, [In, MarshalAs(UnmanagedType.Interface)] ITask WorkItem);
-		void IsOfType([In, MarshalAs(UnmanagedType.LPWStr)] string TaskName, [In] ref System.Guid riid);
+		ITask NewWorkItem([In, MarshalAs(UnmanagedType.LPWStr)][NotNull] string TaskName, [In, MarshalAs(UnmanagedType.LPStruct)] Guid rclsid, [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+		void AddWorkItem([In, MarshalAs(UnmanagedType.LPWStr)][NotNull] string TaskName, [In, MarshalAs(UnmanagedType.Interface)] ITask WorkItem);
+		void IsOfType([In, MarshalAs(UnmanagedType.LPWStr)][NotNull] string TaskName, [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
 	}
 
 	[Guid("148BD528-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IEnumWorkItems
 	{
 		[PreserveSig()]
-		int Next([In] uint RequestCount, [Out] out System.IntPtr Names, [Out] out uint Fetched);
+		int Next([In] uint RequestCount, [Out] out IntPtr Names, [Out] out uint Fetched);
 		void Skip([In] uint Count);
 		void Reset();
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -339,41 +342,41 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	}
 
 #if WorkItem
-		// The IScheduledWorkItem interface is actually never used because ITask inherits all of its
-		// methods.  As ITask is the only kind of WorkItem (in 2002) it is the only interface we need.
-		[Guid("a6b952f0-a4b1-11d0-997d-00aa006887ec"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-		internal interface IScheduledWorkItem
-		{
-			void CreateTrigger([Out] out ushort NewTriggerIndex, [Out, MarshalAs(UnmanagedType.Interface)] out ITaskTrigger Trigger);
-			void DeleteTrigger([In] ushort TriggerIndex);
-			void GetTriggerCount([Out] out ushort Count);
-			void GetTrigger([In] ushort TriggerIndex, [Out, MarshalAs(UnmanagedType.Interface)] out ITaskTrigger Trigger);
-			void GetTriggerString([In] ushort TriggerIndex, out System.IntPtr TriggerString);
-			void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] SystemTime End, ref ushort Count, [Out] out System.IntPtr TaskTimes);
-			void GetNextRunTime([In, Out, MarshalAs(UnmanagedType.Struct)] ref SystemTime NextRun);
-			void SetIdleWait([In] ushort IdleMinutes, [In] ushort DeadlineMinutes);
-			void GetIdleWait([Out] out ushort IdleMinutes, [Out] out ushort DeadlineMinutes);
-			void Run();
-			void Terminate();
-			void EditWorkItem([In] uint hParent, [In] uint dwReserved);
-			void GetMostRecentRunTime([In, Out, MarshalAs(UnmanagedType.Struct)] ref SystemTime LastRun);
-			void GetStatus([Out, MarshalAs(UnmanagedType.Error)] out int Status);
-			void GetExitCode([Out] out uint ExitCode);
-			void SetComment([In, MarshalAs(UnmanagedType.LPWStr)] string Comment);
-			void GetComment(out System.IntPtr Comment);
-			void SetCreator([In, MarshalAs(UnmanagedType.LPWStr)] string Creator);
-			void GetCreator(out System.IntPtr Creator);
-			void SetWorkItemData([In] ushort DataLen, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0, ArraySubType=UnmanagedType.U1)] byte[] Data);
-			void GetWorkItemData([Out] out ushort DataLen, [Out] out System.IntPtr Data);
-			void SetErrorRetryCount([In] ushort RetryCount);
-			void GetErrorRetryCount([Out] out ushort RetryCount);
-			void SetErrorRetryInterval([In] ushort RetryInterval);
-			void GetErrorRetryInterval([Out] out ushort RetryInterval);
-			void SetFlags([In] uint Flags);
-			void GetFlags([Out] out uint Flags);
-			void SetAccountInformation([In, MarshalAs(UnmanagedType.LPWStr)] string AccountName, [In, MarshalAs(UnmanagedType.LPWStr)] string Password);
-			void GetAccountInformation(out System.IntPtr AccountName);
-		}
+	// The IScheduledWorkItem interface is actually never used because ITask inherits all of its
+	// methods.  As ITask is the only kind of WorkItem (in 2002) it is the only interface we need.
+	[Guid("a6b952f0-a4b1-11d0-997d-00aa006887ec"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+	internal interface IScheduledWorkItem
+	{
+		void CreateTrigger([Out] out ushort NewTriggerIndex, [Out, MarshalAs(UnmanagedType.Interface)] out ITaskTrigger Trigger);
+		void DeleteTrigger([In] ushort TriggerIndex);
+		void GetTriggerCount([Out] out ushort Count);
+		void GetTrigger([In] ushort TriggerIndex, [Out, MarshalAs(UnmanagedType.Interface)] out ITaskTrigger Trigger);
+		void GetTriggerString([In] ushort TriggerIndex, out System.IntPtr TriggerString);
+		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] SystemTime Begin, [In, MarshalAs(UnmanagedType.Struct)] SystemTime End, ref ushort Count, [Out] out System.IntPtr TaskTimes);
+		void GetNextRunTime([In, Out, MarshalAs(UnmanagedType.Struct)] ref SystemTime NextRun);
+		void SetIdleWait([In] ushort IdleMinutes, [In] ushort DeadlineMinutes);
+		void GetIdleWait([Out] out ushort IdleMinutes, [Out] out ushort DeadlineMinutes);
+		void Run();
+		void Terminate();
+		void EditWorkItem([In] uint hParent, [In] uint dwReserved);
+		void GetMostRecentRunTime([In, Out, MarshalAs(UnmanagedType.Struct)] ref SystemTime LastRun);
+		void GetStatus([Out, MarshalAs(UnmanagedType.Error)] out int Status);
+		void GetExitCode([Out] out uint ExitCode);
+		void SetComment([In, MarshalAs(UnmanagedType.LPWStr)] string Comment);
+		void GetComment(out System.IntPtr Comment);
+		void SetCreator([In, MarshalAs(UnmanagedType.LPWStr)] string Creator);
+		void GetCreator(out System.IntPtr Creator);
+		void SetWorkItemData([In] ushort DataLen, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0, ArraySubType=UnmanagedType.U1)] byte[] Data);
+		void GetWorkItemData([Out] out ushort DataLen, [Out] out System.IntPtr Data);
+		void SetErrorRetryCount([In] ushort RetryCount);
+		void GetErrorRetryCount([Out] out ushort RetryCount);
+		void SetErrorRetryInterval([In] ushort RetryInterval);
+		void GetErrorRetryInterval([Out] out ushort RetryInterval);
+		void SetFlags([In] uint Flags);
+		void GetFlags([Out] out uint Flags);
+		void SetAccountInformation([In, MarshalAs(UnmanagedType.LPWStr)] string AccountName, [In, MarshalAs(UnmanagedType.LPWStr)] string Password);
+		void GetAccountInformation(out System.IntPtr AccountName);
+	}
 #endif
 
 	[Guid("148BD524-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity]
@@ -387,16 +390,16 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		[return: MarshalAs(UnmanagedType.Interface)]
 		ITaskTrigger GetTrigger([In] ushort TriggerIndex);
 		CoTaskMemString GetTriggerString([In] ushort TriggerIndex);
-		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref Microsoft.Win32.NativeMethods.SYSTEMTIME Begin, [In, MarshalAs(UnmanagedType.Struct)] ref Microsoft.Win32.NativeMethods.SYSTEMTIME End, ref ushort Count, [In, Out] ref System.IntPtr TaskTimes);
+		void GetRunTimes([In, MarshalAs(UnmanagedType.Struct)] ref NativeMethods.SYSTEMTIME Begin, [In, MarshalAs(UnmanagedType.Struct)] ref NativeMethods.SYSTEMTIME End, ref ushort Count, [In, Out] ref IntPtr TaskTimes);
 		[return: MarshalAs(UnmanagedType.Struct)]
-		Microsoft.Win32.NativeMethods.SYSTEMTIME GetNextRunTime();
+		NativeMethods.SYSTEMTIME GetNextRunTime();
 		void SetIdleWait([In] ushort IdleMinutes, [In] ushort DeadlineMinutes);
 		void GetIdleWait([Out] out ushort IdleMinutes, [Out] out ushort DeadlineMinutes);
 		void Run();
 		void Terminate();
 		void EditWorkItem([In] IntPtr hParent, [In] uint dwReserved);
 		[return: MarshalAs(UnmanagedType.Struct)]
-		Microsoft.Win32.NativeMethods.SYSTEMTIME GetMostRecentRunTime();
+		NativeMethods.SYSTEMTIME GetMostRecentRunTime();
 		TaskStatus GetStatus();
 		uint GetExitCode();
 		void SetComment([In, MarshalAs(UnmanagedType.LPWStr)] string Comment);
@@ -450,12 +453,12 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	internal sealed class CoTaskMemString : SafeHandle
 	{
 		public CoTaskMemString() : base(IntPtr.Zero, true) { }
-		public CoTaskMemString(IntPtr handle) : this() { base.SetHandle(handle); }
-		public CoTaskMemString(string text) : this() { base.SetHandle(Marshal.StringToCoTaskMemUni(text)); }
+		public CoTaskMemString(IntPtr handle) : this() { SetHandle(handle); }
+		public CoTaskMemString(string text) : this() { SetHandle(Marshal.StringToCoTaskMemUni(text)); }
 
 		public static implicit operator string (CoTaskMemString cmem) => cmem.ToString();
 
-		public override bool IsInvalid => (handle == null || handle == IntPtr.Zero);
+		public override bool IsInvalid => handle == IntPtr.Zero;
 
 		protected override bool ReleaseHandle()
 		{
