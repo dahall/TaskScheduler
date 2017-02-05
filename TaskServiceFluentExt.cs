@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -9,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="path">The path of the program to run.</param>
 		/// <returns>An <see cref="Fluent.ActionBuilder"/> instance.</returns>
-		public Fluent.ActionBuilder Execute(string path) => new Fluent.ActionBuilder(new Fluent.BuilderInfo(this), path);
+		public Fluent.ActionBuilder Execute([NotNull] string path) => new Fluent.ActionBuilder(new Fluent.BuilderInfo(this), path);
 	}
 
 	namespace Fluent
@@ -22,7 +23,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public TaskService ts;
 			public TaskDefinition td;
 
-			public BuilderInfo(TaskService taskSvc)
+			public BuilderInfo([NotNull] TaskService taskSvc)
 			{
 				ts = taskSvc;
 				td = ts.NewTask();
@@ -60,7 +61,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="args">The arguments.</param>
 			/// <returns><see cref="ActionBuilder"/> instance.</returns>
-			public ActionBuilder WithArguments(string args)
+			public ActionBuilder WithArguments([NotNull] string args)
 			{
 				((ExecAction)TaskDef.Actions[0]).Arguments = args;
 				return this;
@@ -71,7 +72,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="dir">The directory.</param>
 			/// <returns><see cref="ActionBuilder" /> instance.</returns>
-			public ActionBuilder InWorkingDirectory(string dir)
+			public ActionBuilder InWorkingDirectory([NotNull] string dir)
 			{
 				((ExecAction)TaskDef.Actions[0]).WorkingDirectory = dir;
 				return this;
@@ -175,7 +176,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>
 			///   <see cref="TriggerBuilder" /> instance.
 			/// </returns>
-			public TriggerBuilder OnTheDays(params int[] days)
+			public TriggerBuilder OnTheDays([NotNull] params int[] days)
 			{
 				((MonthlyTrigger)trb.trigger).DaysOfMonth = days;
 				return trb;
@@ -343,7 +344,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>
 			///   <see cref="TriggerBuilder" /> instance.
 			/// </returns>
-			public TriggerBuilder Starting(string dt)
+			public TriggerBuilder Starting([NotNull] string dt)
 			{
 				trigger.StartBoundary = DateTime.Parse(dt);
 				return this;
@@ -402,7 +403,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>
 			///   <see cref="TriggerBuilder" /> instance.
 			/// </returns>
-			public TriggerBuilder Ending(string dt)
+			public TriggerBuilder Ending([NotNull] string dt)
 			{
 				trigger.EndBoundary = DateTime.Parse(dt);
 				return this;
@@ -437,7 +438,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RepeatingEvery(string span)
+			public TriggerBuilder RepeatingEvery([NotNull] string span)
 			{
 				trigger.Repetition.Interval = TimeSpan.Parse(span);
 				return this;
@@ -459,7 +460,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="span">The duration span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
 			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RunningAtMostFor(string span)
+			public TriggerBuilder RunningAtMostFor([NotNull] string span)
 			{
 				trigger.Repetition.Duration = TimeSpan.Parse(span);
 				return this;
@@ -480,7 +481,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// </summary>
 			/// <param name="name">The name.</param>
 			/// <returns>A registered <see cref="Task"/> instance.</returns>
-			public Task AsTask(string name) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
+			public Task AsTask([NotNull] string name) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
 		}
 	}
 }

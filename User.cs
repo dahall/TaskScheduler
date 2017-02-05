@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public User(string userName = null)
 		{
 			var cur = WindowsIdentity.GetCurrent();
+			if (string.IsNullOrEmpty(userName)) userName = null;
 			if (userName == null || cur.Name.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
 			{
 				acct = cur;
@@ -27,15 +28,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (acct == null)
 			{
-				if (userName.Contains("@"))
+				if (userName != null && userName.Contains("@"))
 				{
 					acct = new WindowsIdentity(userName);
 					sid = acct.User;
 				}
 
-				if (acct == null)
+				if (acct == null && userName != null)
 				{
-					NTAccount ntacct = new NTAccount(userName);
+					var ntacct = new NTAccount(userName);
 					try { sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier)); } catch { }
 				}
 			}

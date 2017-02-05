@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -34,7 +35,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <para>Any field may contain a list of values separated by commas, (e.g. 1,3,7) or a range of values (two integers separated by a hyphen, e.g. 1-5).</para>
 		///   <para>After an asterisk (*) or a range of values, you can use character / to specify that values are repeated over and over with a certain interval between them. For example, you can write "0-23/2" in Hour field to specify that some action should be performed every two hours (it will have the same effect as "0,2,4,6,8,10,12,14,16,18,20,22"); value "*/4" in Minute field means that the action should be performed every 4 minutes, "1-30/3"  means the same as "1,4,7,10,13,16,19,22,25,28".</para>
 		/// </remarks>
-		public static Trigger[] FromCronFormat(string cronString)
+		public static Trigger[] FromCronFormat([NotNull] string cronString)
 		{
 			CronExpression cron = new CronExpression();
 			cron.Parse(cronString);

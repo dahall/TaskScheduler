@@ -12,6 +12,8 @@ namespace Microsoft.Win32.TaskScheduler
 		private V1Interop.ITaskScheduler v1List;
 		private readonly V2Interop.ITaskFolder v2Folder;
 
+		internal const string rootString = @"\";
+
 		internal TaskFolder([NotNull] TaskService svc)
 		{
 			TaskService = svc;
@@ -47,7 +49,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the name that is used to identify the folder that contains a task.
 		/// </summary>
 		[NotNull]
-		public string Name => (v2Folder == null) ? @"\" : v2Folder.Name;
+		public string Name => (v2Folder == null) ? rootString : v2Folder.Name;
 
 		/// <summary>
 		/// Gets the parent folder of this folder.
@@ -75,7 +77,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the path to where the folder is stored.
 		/// </summary>
 		[NotNull]
-		public string Path => (v2Folder == null) ? @"\" : v2Folder.Path;
+		public string Path => (v2Folder == null) ? rootString : v2Folder.Path;
 
 		[NotNull]
 		internal TaskFolder GetFolder([NotNull] string path)
@@ -396,6 +398,7 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(definition.Actions), @"A task must be registered with at least one action and no more than 32 actions.");
 
 			userId = userId ?? definition.Principal.UserId;
+			if (userId != null && userId.Length == 0) userId = null;
 			User user = new User(userId);
 			if (v2Folder != null)
 			{
@@ -505,7 +508,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sddlForm">The security descriptor for the folder.</param>
 		/// <param name="options">Flags that specify how to set the security descriptor.</param>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public void SetSecurityDescriptorSddlForm(string sddlForm, TaskSetSecurityOptions options = TaskSetSecurityOptions.None)
+		public void SetSecurityDescriptorSddlForm([NotNull] string sddlForm, TaskSetSecurityOptions options = TaskSetSecurityOptions.None)
 		{
 			if (v2Folder != null)
 				v2Folder.SetSecurityDescriptor(sddlForm, (int)options);

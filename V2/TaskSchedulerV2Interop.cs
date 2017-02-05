@@ -3,6 +3,7 @@ using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler.V2Interop
 {
@@ -28,7 +29,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string XmlText { [return: MarshalAs(UnmanagedType.BStr)] get; [param: In, MarshalAs(UnmanagedType.BStr)] set; }
 		[return: MarshalAs(UnmanagedType.Interface)]
 		IAction Create([In] TaskActionType Type);
-		void Remove([In, MarshalAs(UnmanagedType.Struct)] object index);
+		void Remove([In, MarshalAs(UnmanagedType.Struct)][NotNull] object index);
 		void Clear();
 		string Context { [return: MarshalAs(UnmanagedType.BStr)] get; [param: In, MarshalAs(UnmanagedType.BStr)] set; }
 	}
@@ -359,14 +360,14 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		ITaskFolder CreateFolder([In, MarshalAs(UnmanagedType.BStr)] string subFolderName, [In, Optional, MarshalAs(UnmanagedType.Struct)] object sddl);
 		void DeleteFolder([MarshalAs(UnmanagedType.BStr)] string subFolderName, [In] int flags);
 		[return: MarshalAs(UnmanagedType.Interface)]
-		IRegisteredTask GetTask([MarshalAs(UnmanagedType.BStr)] string Path);
+		IRegisteredTask GetTask([MarshalAs(UnmanagedType.BStr)][NotNull] string Path);
 		[return: MarshalAs(UnmanagedType.Interface)]
 		IRegisteredTaskCollection GetTasks(int flags);
-		void DeleteTask([In, MarshalAs(UnmanagedType.BStr)] string Name, [In] int flags);
+		void DeleteTask([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Name, [In] int flags);
 		[return: MarshalAs(UnmanagedType.Interface)]
-		IRegisteredTask RegisterTask([In, MarshalAs(UnmanagedType.BStr)] string Path, [In, MarshalAs(UnmanagedType.BStr)] string XmlText, [In] int flags, [In, MarshalAs(UnmanagedType.Struct)] object UserId, [In, MarshalAs(UnmanagedType.Struct)] object password, [In] TaskLogonType LogonType, [In, Optional, MarshalAs(UnmanagedType.Struct)] object sddl);
+		IRegisteredTask RegisterTask([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Path, [In, MarshalAs(UnmanagedType.BStr)][NotNull] string XmlText, [In] int flags, [In, MarshalAs(UnmanagedType.Struct)] object UserId, [In, MarshalAs(UnmanagedType.Struct)] object password, [In] TaskLogonType LogonType, [In, Optional, MarshalAs(UnmanagedType.Struct)] object sddl);
 		[return: MarshalAs(UnmanagedType.Interface)]
-		IRegisteredTask RegisterTaskDefinition([In, MarshalAs(UnmanagedType.BStr)] string Path, [In, MarshalAs(UnmanagedType.Interface)] ITaskDefinition pDefinition, [In] int flags, [In, MarshalAs(UnmanagedType.Struct)] object UserId, [In, MarshalAs(UnmanagedType.Struct)] object password, [In] TaskLogonType LogonType, [In, Optional, MarshalAs(UnmanagedType.Struct)] object sddl);
+		IRegisteredTask RegisterTaskDefinition([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Path, [In, MarshalAs(UnmanagedType.Interface)][NotNull] ITaskDefinition pDefinition, [In] int flags, [In, MarshalAs(UnmanagedType.Struct)] object UserId, [In, MarshalAs(UnmanagedType.Struct)] object password, [In] TaskLogonType LogonType, [In, Optional, MarshalAs(UnmanagedType.Struct)] object sddl);
 		[return: MarshalAs(UnmanagedType.BStr)]
 		string GetSecurityDescriptor(int securityInformation);
 		void SetSecurityDescriptor([In, MarshalAs(UnmanagedType.BStr)] string sddl, [In] int flags);
@@ -389,7 +390,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		[return: MarshalAs(UnmanagedType.Interface)]
 		new IEnumerator GetEnumerator();
 		[return: MarshalAs(UnmanagedType.Interface)]
-		ITaskNamedValuePair Create([In, MarshalAs(UnmanagedType.BStr)] string Name, [In, MarshalAs(UnmanagedType.BStr)] string Value);
+		ITaskNamedValuePair Create([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Name, [In, MarshalAs(UnmanagedType.BStr)] string Value);
 		void Remove([In] int index);
 		void Clear();
 	}
@@ -406,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	{
 		[return: MarshalAs(UnmanagedType.Interface)]
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)]
-		ITaskFolder GetFolder([In, MarshalAs(UnmanagedType.BStr)] string Path);
+		ITaskFolder GetFolder([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Path);
 		[return: MarshalAs(UnmanagedType.Interface)]
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)]
 		IRunningTaskCollection GetRunningTasks(int flags);
@@ -440,7 +441,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		public virtual extern void Connect([In, Optional, MarshalAs(UnmanagedType.Struct)] object serverName, [In, Optional, MarshalAs(UnmanagedType.Struct)] object user, [In, Optional, MarshalAs(UnmanagedType.Struct)] object domain, [In, Optional, MarshalAs(UnmanagedType.Struct)] object password);
 		[return: MarshalAs(UnmanagedType.Interface)]
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(1)]
-		public virtual extern ITaskFolder GetFolder([In, MarshalAs(UnmanagedType.BStr)] string Path);
+		public virtual extern ITaskFolder GetFolder([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Path);
 		[return: MarshalAs(UnmanagedType.Interface)]
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(2)]
 		public virtual extern IRunningTaskCollection GetRunningTasks(int flags);

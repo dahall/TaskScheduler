@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+// ReSharper disable InconsistentNaming
+// ReSharper disable FieldCanBeMadeReadOnly.Local
 
 namespace System.Security.Policy
 {
@@ -29,7 +31,7 @@ namespace System.Security.Policy
 
 		/// <summary>Access rights for a local security policy.</summary>
 		[Flags]
-		public enum LsaPolicyAccessRights : int
+		public enum LsaPolicyAccessRights
 		{
 			/// <summary>
 			/// This access type is needed to read the target system's miscellaneous security policy information. This
@@ -83,7 +85,7 @@ namespace System.Security.Policy
 
 		/// <summary>Account rights determine the type of logon that a user account can perform. An administrator assigns account rights to user and group accounts. Each user's account rights include those granted to the user and to the groups to which the user belongs.</summary>
 		[Flags]
-		public enum LsaSecurityAccessRights : int
+		public enum LsaSecurityAccessRights
 		{
 			/// <summary>Required for an account to log on using the interactive logon type.</summary>
 			InteractiveLogon = 0x00000001,
@@ -116,7 +118,8 @@ namespace System.Security.Policy
 			DenyRemoteInteractiveLogon = 0x00000800,
 		}
 
-		private enum LsaAccountAccessMask : int
+		[Flags]
+		private enum LsaAccountAccessMask
 		{
 			View = 0x00000001,
 			AdjustPrivileges = 0x00000002,
@@ -145,9 +148,9 @@ namespace System.Security.Policy
 		public Principal.SecurityIdentifier[] EnumerateAccountsWithRight(string privilege)
 		{
 			SafeLsaMemoryHandle buffer;
-			int count;
+			uint count;
 			ThrowIfLsaError(LsaEnumerateAccountsWithUserRight(handle, privilege, out buffer, out count));
-			return Array.ConvertAll(buffer.DangerousGetHandle().ToArray<LSA_ENUMERATION_INFORMATION>(count), i => new Principal.SecurityIdentifier(i.Sid));
+			return Array.ConvertAll(buffer.DangerousGetHandle().ToArray<LSA_ENUMERATION_INFORMATION>((int)count), i => new Principal.SecurityIdentifier(i.Sid));
 		}
 
 		/// <summary>Gets the account rights for the specified user.</summary>
@@ -162,7 +165,7 @@ namespace System.Security.Policy
 
 		[DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true, PreserveSig = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		private static extern bool LookupAccountName(string lpSystemName, string lpAccountName, SafeMemoryHandle psid, ref int cbsid, System.Text.StringBuilder domainName, ref int cbdomainLength, ref int use);
+		private static extern bool LookupAccountName(string lpSystemName, string lpAccountName, SafeMemoryHandle psid, ref int cbsid, Text.StringBuilder domainName, ref int cbdomainLength, ref int use);
 
 		[DllImport("advapi32.dll", PreserveSig = true)]
 		private static extern int LsaAddAccountRights(SafeLsaHandle PolicyHandle, SafeMemoryHandle AccountSid, LSA_UNICODE_STRING[] UserRights, int CountOfRights);
@@ -177,7 +180,7 @@ namespace System.Security.Policy
 		private static extern int LsaEnumerateAccountRights(SafeLsaHandle PolicyHandle, SafeMemoryHandle AccountSid, out IntPtr UserRightsPtr, out int CountOfRights);
 
 		[DllImport("advapi32.dll", PreserveSig = true)]
-		private static extern int LsaEnumerateAccountsWithUserRight(SafeLsaHandle PolicyHandle, LSA_UNICODE_STRING UserRights, out SafeLsaMemoryHandle EnumerationBuffer, out int CountReturned);
+		private static extern int LsaEnumerateAccountsWithUserRight(SafeLsaHandle PolicyHandle, LSA_UNICODE_STRING UserRights, out SafeLsaMemoryHandle EnumerationBuffer, out uint CountReturned);
 
 		[DllImport("advapi32.dll", PreserveSig = true)]
 		private static extern int LsaFreeMemory(IntPtr Buffer);
@@ -202,7 +205,7 @@ namespace System.Security.Policy
 
 		private void AddRight(string accountName, string privilegeName)
 		{
-			LSA_UNICODE_STRING[] userRights = new LSA_UNICODE_STRING[] { privilegeName };
+			LSA_UNICODE_STRING[] userRights = { privilegeName };
 			ThrowIfLsaError(LsaAddAccountRights(handle, GetSid(accountName), userRights, userRights.Length));
 		}
 
@@ -214,22 +217,22 @@ namespace System.Security.Policy
 			if (res == 2)
 				ThrowIfLsaError(LsaCreateAccount(handle, sid, mask, out hAcct));
 			else if (res != 0)
-				throw new System.ComponentModel.Win32Exception(res);
+				throw new ComponentModel.Win32Exception(res);
 			return hAcct;
 		}
 
 		private string[] GetRights(string accountName)
 		{
 			IntPtr userRightsPtr;
-			int countOfRights = 0;
+			int countOfRights;
 			int result = LsaNtStatusToWinError(LsaEnumerateAccountRights(handle, GetSid(accountName), out userRightsPtr, out countOfRights));
 			if (result == 2) // Try adding account and retrying
 			{
-				using (var a = GetAccount(accountName))
+				using (GetAccount(accountName))
 					result = LsaNtStatusToWinError(LsaEnumerateAccountRights(handle, GetSid(accountName), out userRightsPtr, out countOfRights));
 			}
 			if (result != 0 && result != 2)
-				throw new System.ComponentModel.Win32Exception(result);
+				throw new ComponentModel.Win32Exception(result);
 			return Array.ConvertAll(userRightsPtr.ToArray<LSA_UNICODE_STRING>(countOfRights), u => u.ToString());
 		}
 
@@ -237,10 +240,10 @@ namespace System.Security.Policy
 		{
 			int sidSize = 0, nameSize = 0, accountType = 0;
 			LookupAccountName(svr, accountName, new SafeMemoryHandle(), ref sidSize, null, ref nameSize, ref accountType);
-			var domainName = new System.Text.StringBuilder(nameSize);
+			var domainName = new Text.StringBuilder(nameSize);
 			SafeMemoryHandle sid = new SafeMemoryHandle(sidSize);
 			if (!LookupAccountName(string.Empty, accountName, sid, ref sidSize, domainName, ref nameSize, ref accountType))
-				throw new System.ComponentModel.Win32Exception();
+				throw new ComponentModel.Win32Exception();
 			return sid;
 		}
 
@@ -267,7 +270,7 @@ namespace System.Security.Policy
 		{
 			int ret = LsaNtStatusToWinError(lsaRetVal);
 			if (ret != 0)
-				throw new System.ComponentModel.Win32Exception(ret);
+				throw new ComponentModel.Win32Exception(ret);
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -290,7 +293,7 @@ namespace System.Security.Policy
 		}
 
 		/// <summary>Allows for the privileges of a user to be retrieved, enumerated and set.</summary>
-		/// <seealso cref="System.Collections.Generic.IEnumerable{System.String}"/>
+		/// <seealso cref="IEnumerable{T}"/>
 		public class Rights : IEnumerable<string>
 		{
 			private LocalSecurity ctrl;
@@ -304,7 +307,7 @@ namespace System.Security.Policy
 				ctrl = parent; user = userName ?? CurrentUserName;
 			}
 
-			private static string CurrentUserName => System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+			private static string CurrentUserName => Principal.WindowsIdentity.GetCurrent().Name;
 
 			/// <summary>Gets or sets the enablement of the specified privilege.</summary>
 			/// <value><c>true</c> if the specified privilege is enabled; otherwise <c>false</c>.</value>
@@ -326,7 +329,7 @@ namespace System.Security.Policy
 		}
 
 		/// <summary>Allows for the privileges of a user to be retrieved, enumerated and set.</summary>
-		/// <seealso cref="System.Collections.Generic.IEnumerable{System.String}"/>
+		/// <seealso cref="System.Collections.Generic.IEnumerable{T}"/>
 		public class SystemAccess
 		{
 			private LocalSecurity ctrl;
@@ -340,7 +343,7 @@ namespace System.Security.Policy
 				ctrl = parent; user = userName ?? CurrentUserName;
 			}
 
-			private static string CurrentUserName => System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+			private static string CurrentUserName => Principal.WindowsIdentity.GetCurrent().Name;
 
 			/// <summary>Gets or sets the enablement of the specified privilege.</summary>
 			/// <value><c>true</c> if the specified privilege is enabled; otherwise <c>false</c>.</value>
@@ -399,7 +402,7 @@ namespace System.Security.Policy
 
 			public override string ToString() => Marshal.PtrToStringUni(Buffer, Length);
 
-			private bool own { get; } = false;
+			private bool own { get; }
 
 			void IDisposable.Dispose()
 			{

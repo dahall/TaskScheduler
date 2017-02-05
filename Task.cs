@@ -22,6 +22,8 @@ using JetBrains.Annotations;
 using Microsoft.Win32.TaskScheduler.V1Interop;
 using Microsoft.Win32.TaskScheduler.V2Interop;
 using IPrincipal = Microsoft.Win32.TaskScheduler.V2Interop.IPrincipal;
+// ReSharper disable InconsistentNaming
+// ReSharper disable SuspiciousTypeConversion.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -40,8 +42,8 @@ namespace Microsoft.Win32.TaskScheduler
 		V2_1,
 		/// <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
 		V2_2,
-		/// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
-		V2_3
+		// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		// V2_3
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
@@ -834,9 +836,9 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Task == null)
 					return TaskService.RootFolder;
 
-				string path = v2Task.Path;
-				string parentPath = System.IO.Path.GetDirectoryName(path);
-				if (string.IsNullOrEmpty(parentPath) || parentPath == @"\")
+				var path = v2Task.Path;
+				var parentPath = System.IO.Path.GetDirectoryName(path);
+				if (string.IsNullOrEmpty(parentPath) || parentPath == TaskFolder.rootString)
 					return TaskService.RootFolder;
 				return TaskService.GetFolder(parentPath);
 			}
@@ -852,10 +854,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				DateTime now = DateTime.Now;
+				var now = DateTime.Now;
 				if (Definition.Settings.Enabled)
 				{
-					foreach (Trigger trigger in Definition.Triggers)
+					foreach (var trigger in Definition.Triggers)
 					{
 						if (trigger.Enabled && (now >= trigger.StartBoundary && now <= trigger.EndBoundary))
 						{
@@ -879,7 +881,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Task == null) return v1Task.GetMostRecentRunTime();
-				DateTime dt = v2Task.LastRunTime;
+				var dt = v2Task.LastRunTime;
 				return dt == v2InvalidDate ? DateTime.MinValue : dt;
 			}
 		}
@@ -918,10 +920,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				if (v2Task == null) return v1Task.GetNextRunTime();
-				DateTime ret = v2Task.NextRunTime;
+				var ret = v2Task.NextRunTime;
 				if (ret == DateTime.MinValue || ret == v2InvalidDate)
 				{
-					DateTime[] nrts = GetRunTimes(DateTime.Now, DateTime.MaxValue, 1);
+					var nrts = GetRunTimes(DateTime.Now, DateTime.MaxValue, 1);
 					ret = nrts.Length > 0 ? nrts[0] : DateTime.MinValue;
 				}
 				return ret == v2InvalidDate ? DateTime.MinValue : ret;
@@ -974,7 +976,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				string sddl = GetSecurityDescriptorSddlForm();
+				var sddl = GetSecurityDescriptorSddlForm();
 				return new RawSecurityDescriptor(sddl);
 			}
 			set
@@ -1007,9 +1009,9 @@ namespace Microsoft.Win32.TaskScheduler
 						return TaskState.Running;
 					case TaskStatus.Disabled:
 						return TaskState.Disabled;
-					case TaskStatus.NotScheduled:
-					case TaskStatus.NoTriggers:
-					case TaskStatus.NoTriggerTime:
+					// case TaskStatus.NotScheduled:
+					// case TaskStatus.NoTriggers:
+					// case TaskStatus.NoTriggerTime:
 					default:
 						return TaskState.Unknown;
 				}
@@ -1079,10 +1081,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><see cref="DateTime"/> of the last registration or <see cref="DateTime.MinValue"/> if no value can be found.</returns>
 		public DateTime GetLastRegistrationTime()
 		{
-			DateTime ret = Definition.RegistrationInfo.Date;
+			var ret = Definition.RegistrationInfo.Date;
 			if (ret == DateTime.MinValue)
 			{
-				TaskEventLog log = new TaskEventLog(Path, new[] { (int)StandardTaskEventId.JobRegistered }, null, TaskService.TargetServer, TaskService.UserAccountDomain, TaskService.UserName, TaskService.UserPassword);
+				var log = new TaskEventLog(Path, new[] { (int)StandardTaskEventId.JobRegistered }, null, TaskService.TargetServer, TaskService.UserAccountDomain, TaskService.UserName, TaskService.UserPassword);
 				if (log.Enabled)
 				{
 					foreach (var item in log)
@@ -1109,15 +1111,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 			NativeMethods.SYSTEMTIME stStart = start;
 			NativeMethods.SYSTEMTIME stEnd = end;
-			IntPtr runTimes = IntPtr.Zero;
-			DateTime[] ret = new DateTime[0];
+			var runTimes = IntPtr.Zero;
+			var ret = new DateTime[0];
 			try
 			{
 				if (v2Task != null)
 					v2Task.GetRunTimes(ref stStart, ref stEnd, ref count, ref runTimes);
 				else
 				{
-					ushort count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
+					var count1 = (count > 0 && count <= TASK_MAX_RUN_TIMES) ? (ushort)count : TASK_MAX_RUN_TIMES;
 					v1Task.GetRunTimes(ref stStart, ref stEnd, ref count1, ref runTimes);
 					count = count1;
 				}
@@ -1268,7 +1270,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-				Type t = ReflectionHelper.LoadType("Microsoft.Win32.TaskScheduler.TaskEditDialog", "Microsoft.Win32.TaskSchedulerEditor.dll");
+				var t = ReflectionHelper.LoadType("Microsoft.Win32.TaskScheduler.TaskEditDialog", "Microsoft.Win32.TaskSchedulerEditor.dll");
 				if (t != null)
 					return ReflectionHelper.InvokeMethod<int>(t, new object[] { this, true, true }, "ShowDialog") == 1;
 			}
@@ -1314,7 +1316,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal void V1Reactivate()
 		{
-			ITask iTask = TaskService.GetTask(TaskService.v1TaskScheduler, Name);
+			var iTask = TaskService.GetTask(TaskService.v1TaskScheduler, Name);
 			if (iTask != null)
 				v1Task = iTask;
 		}
@@ -1341,29 +1343,20 @@ namespace Microsoft.Win32.TaskScheduler
 					case 1:
 						return 3;
 					default:
-						// TODO: Hack to determine if this is Windows 10. Needs to be corrected once gold.
-						using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-							if (Convert.ToInt32(key.GetValue("CurrentMajorVersionNumber", 0)) == 10)
-								return 5;
+						//return Convert.ToInt32(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", 0)) == 10 ? 5 : 4;
 						return 4;
 				}
 			}
 			return 1;
 		}
 
+		[NotNull]
 		internal static string GetV1Path(ITask v1Task)
 		{
-			string fileName = string.Empty;
-			try
-			{
-				IPersistFile iFile = (IPersistFile)v1Task;
-				iFile.GetCurFile(out fileName);
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			return fileName;
+			string fileName;
+			var iFile = (IPersistFile)v1Task;
+			iFile.GetCurFile(out fileName);
+			return fileName ?? string.Empty;
 		}
 
 		/// <summary>
@@ -1378,14 +1371,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="System.InvalidOperationException">Unable to get a compatible task definition for this version of the library.</exception>
 		internal static ITaskDefinition GetV2Definition(TaskService svc, IRegisteredTask iTask, bool throwError = false)
 		{
-			Version xmlVer = new Version();
+			var xmlVer = new Version();
 			try
 			{
-				DefDoc dd = new DefDoc(iTask.Xml);
+				var dd = new DefDoc(iTask.Xml);
 				xmlVer = dd.Version;
 				if (xmlVer.Minor > osLibMinorVer)
 				{
-					int newMinor = xmlVer.Minor;
+					var newMinor = xmlVer.Minor;
 					if (!dd.Contains("Volatile", "false", true) &&
 						!dd.Contains("MaintenanceSettings"))
 						newMinor = 3;
@@ -1421,7 +1414,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (newMinor != xmlVer.Minor)
 					{
 						dd.Version = new Version(1, newMinor);
-						ITaskDefinition def = svc.v2TaskService.NewTask(0);
+						var def = svc.v2TaskService.NewTask(0);
 						def.XmlText = dd.Xml;
 						return def;
 					}
@@ -1449,8 +1442,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			try
 			{
-				DefDoc dd = new DefDoc(iTask.Xml);
-				Version xmlVer = dd.Version;
+				var dd = new DefDoc(iTask.Xml);
+				var xmlVer = dd.Version;
 				if (xmlVer.Minor > osLibMinorVer)
 				{
 					if (osLibMinorVer < 4)
@@ -1488,9 +1481,9 @@ namespace Microsoft.Win32.TaskScheduler
 						dd.RemoveTag("LogonType");
 					}
 					dd.Version = new Version(1, osLibMinorVer);
-					ITaskDefinition def = svc.v2TaskService.NewTask(0);
+					var def = svc.v2TaskService.NewTask(0);
 #if DEBUG
-					string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
+					var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
 					File.WriteAllText(path, dd.Xml, Encoding.Unicode);
 #endif
 					def.XmlText = dd.Xml;
@@ -1517,7 +1510,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class DefDoc
 		{
-			private XmlDocument doc;
+			private readonly XmlDocument doc;
 
 			public DefDoc(string xml)
 			{
@@ -1540,7 +1533,8 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				set
 				{
-					doc["Task"].Attributes["version"].Value = value.ToString(2);
+					var task = doc["Task"];
+					if (task != null) task.Attributes["version"].Value = value.ToString(2);
 				}
 			}
 
@@ -1549,15 +1543,12 @@ namespace Microsoft.Win32.TaskScheduler
 			public bool Contains(string tag, string defaultVal = null, bool removeIfFound = false)
 			{
 				var elems = doc.GetElementsByTagName(tag);
-				if (elems != null && elems.Count > 0)
+				if (elems.Count > 0)
 				{
 					var e = elems[0];
-					if (e.InnerText == defaultVal && removeIfFound)
-					{
-						e.ParentNode.RemoveChild(e);
-						return false;
-					}
-					return true;
+					if (e.InnerText != defaultVal || !removeIfFound || e.ParentNode == null)
+						return true;
+					e.ParentNode.RemoveChild(e);
 				}
 				return false;
 			}
@@ -1565,10 +1556,10 @@ namespace Microsoft.Win32.TaskScheduler
 			public void RemoveTag(string tag)
 			{
 				var elems = doc.GetElementsByTagName(tag);
-				if (elems != null && elems.Count > 0)
+				if (elems.Count > 0)
 				{
 					var e = elems[0];
-					e.ParentNode.RemoveChild(e);
+					e.ParentNode?.RemoveChild(e);
 				}
 			}
 		}
@@ -1691,20 +1682,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the settings that define how the Task Scheduler service performs the task.
 		/// </summary>
 		[NotNull]
-		public TaskSettings Settings
-		{
-			get
-			{
-				if (settings == null)
-				{
-					if (v2Def != null)
-						settings = new TaskSettings(v2Def.Settings);
-					else
-						settings = new TaskSettings(v1Task);
-				}
-				return settings;
-			}
-		}
+		public TaskSettings Settings => settings ?? (settings = v2Def != null ? new TaskSettings(v2Def.Settings) : new TaskSettings(v1Task));
 
 		/// <summary>
 		/// Gets a collection of triggers that are used to start a task.
@@ -1716,20 +1694,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlArrayItem(ElementName = "TimeTrigger", IsNullable = true, Type = typeof(TimeTrigger))]
 		[XmlArray]
 		[NotNull, ItemNotNull]
-		public TriggerCollection Triggers
-		{
-			get
-			{
-				if (triggers == null)
-				{
-					if (v2Def != null)
-						triggers = new TriggerCollection(v2Def);
-					else
-						triggers = new TriggerCollection(v1Task);
-				}
-				return triggers;
-			}
-		}
+		public TriggerCollection Triggers => triggers ?? (triggers = v2Def != null ? new TriggerCollection(v2Def) : new TriggerCollection(v1Task));
 
 		/// <summary>
 		/// Gets or sets the XML-formatted definition of the task.
@@ -1759,8 +1724,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><c>true</c> if this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
 		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false)
 		{
-			InvalidOperationException ex = new InvalidOperationException { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
-			bool bad = false;
+			var ex = new InvalidOperationException { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
+			var bad = false;
 			if (Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
 			{
 				bad = true;
@@ -1785,9 +1750,9 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!throwExceptionWithDetails) return false;
 				TryAdd(ex.Data, "Settings.AllowHardTerminate", "== false");
 			}
-			for (int i = 0; i < Actions.Count; i++)
+			for (var i = 0; i < Actions.Count; i++)
 			{
-				Action a = Actions[i];
+				var a = Actions[i];
 				if (a is EmailAction)
 				{
 					bad = true;
@@ -1801,9 +1766,9 @@ namespace Microsoft.Win32.TaskScheduler
 					TryAdd(ex.Data, $"Actions[{i}]", "== typeof(ShowMessageAction)");
 				}
 			}
-			for (int i = 0; i < Triggers.Count; i++)
+			for (var i = 0; i < Triggers.Count; i++)
 			{
-				Trigger t = null;
+				Trigger t;
 				try { t = Triggers[i]; }
 				catch
 				{
@@ -1868,17 +1833,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>An object containing the XML Schema for V1 tasks.</returns>
 		public static XmlSchemaComplexType GetV1SchemaFile([NotNull] XmlSchemaSet xs)
 		{
-			XmlSchema schema = null;
-			using (Stream xsdFile = Assembly.GetAssembly(typeof(TaskDefinition)).GetManifestResourceStream("Microsoft.Win32.TaskScheduler.V1.TaskSchedulerV1Schema.xsd"))
+			XmlSchema schema;
+			using (var xsdFile = Assembly.GetAssembly(typeof(TaskDefinition)).GetManifestResourceStream("Microsoft.Win32.TaskScheduler.V1.TaskSchedulerV1Schema.xsd"))
 			{
-				XmlSerializer schemaSerializer = new XmlSerializer(typeof(XmlSchema));
+				var schemaSerializer = new XmlSerializer(typeof(XmlSchema));
 				schema = (XmlSchema)schemaSerializer.Deserialize(XmlReader.Create(xsdFile));
 				xs.Add(schema);
 			}
 
 			// target namespace
-			XmlQualifiedName name = new XmlQualifiedName("taskType", tns);
-			XmlSchemaComplexType productType = (XmlSchemaComplexType)schema.SchemaTypes[name];
+			var name = new XmlQualifiedName("taskType", tns);
+			var productType = (XmlSchemaComplexType)schema.SchemaTypes[name];
 
 			return productType;
 		}
@@ -1890,7 +1855,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><c>true</c> if current <see cref="TaskDefinition"/> is valid; <c>false</c> if not.</returns>
 		public bool Validate(bool throwException = false)
 		{
-			InvalidOperationException ex = new InvalidOperationException();
+			var ex = new InvalidOperationException();
 			if (Settings.UseUnifiedSchedulingEngine)
 			{
 				try { CanUseUnifiedSchedulingEngine(throwException); }
@@ -1913,13 +1878,13 @@ namespace Microsoft.Win32.TaskScheduler
 				foreach (var item in list)
 					TryAdd(ex.Data, item.Property, item.Reason);
 
-			bool startWhenAvailable = Settings.StartWhenAvailable;
-			bool delOldTask = Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
-			bool v1 = Settings.Compatibility < TaskCompatibility.V2;
-			bool hasEndBound = false;
-			for (int i = 0; i < Triggers.Count; i++)
+			var startWhenAvailable = Settings.StartWhenAvailable;
+			var delOldTask = Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+			var v1 = Settings.Compatibility < TaskCompatibility.V2;
+			var hasEndBound = false;
+			for (var i = 0; i < Triggers.Count; i++)
 			{
-				Trigger trigger = null;
+				Trigger trigger;
 				try { trigger = Triggers[i]; }
 				catch
 				{
@@ -1953,7 +1918,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				Triggers.Bind();
 
-				IPersistFile iFile = (IPersistFile)v1Task;
+				var iFile = (IPersistFile)v1Task;
 				if (string.IsNullOrEmpty(newName) || newName == v1Name)
 				{
 					try
@@ -1971,7 +1936,6 @@ namespace Microsoft.Win32.TaskScheduler
 				path = Path.GetDirectoryName(path) + Path.DirectorySeparatorChar + newName + Path.GetExtension(path);
 				File.Delete(path);
 				iFile.Save(path, true);
-				iFile = null;
 			}
 		}
 
@@ -1982,7 +1946,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns></returns>
 		private TaskCompatibility GetLowestSupportedVersion(IList<TaskCompatibilityEntry> outputList = null)
 		{
-			TaskCompatibility res = TaskCompatibility.V1;
+			var res = TaskCompatibility.V1;
 			var list = new List<TaskCompatibilityEntry>();
 
 			//if (Principal.DisplayName != null)
@@ -2067,7 +2031,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static Dictionary<string, string> GetV1TaskDataDictionary(ITask v1Task)
 		{
 			Dictionary<string, string> dict;
-			object o = GetV1TaskData(v1Task);
+			var o = GetV1TaskData(v1Task);
 			if (o is string)
 				dict = new Dictionary<string, string> {{"Data", o.ToString()}, {"Documentation", o.ToString()}};
 			else
@@ -2077,14 +2041,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static object GetV1TaskData(ITask v1Task)
 		{
-			IntPtr Data = IntPtr.Zero;
+			var Data = IntPtr.Zero;
 			try
 			{
 				ushort DataLen;
 				v1Task.GetWorkItemData(out DataLen, out Data);
 				if (DataLen == 0)
 					return null;
-				byte[] bytes = new byte[DataLen];
+				var bytes = new byte[DataLen];
 				Marshal.Copy(Data, bytes, 0, DataLen);
 				var stream = new MemoryStream(bytes, false);
 				var b = new BinaryFormatter();
@@ -2347,7 +2311,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value><c>true</c> if settings requires a password to be provided; otherwise, <c>false</c>.</value>
 		public bool RequiresPassword() => LogonType == TaskLogonType.InteractiveTokenOrPassword ||
-			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null && string.Compare(UserId, WindowsIdentity.GetCurrent().Name, true) != 0);
+			LogonType == TaskLogonType.Password || (LogonType == TaskLogonType.S4U && UserId != null && string.Compare(UserId, WindowsIdentity.GetCurrent().Name, StringComparison.OrdinalIgnoreCase) != 0);
 
 		/// <summary>
 		/// Returns a <see cref="System.String"/> that represents this instance.
@@ -2432,7 +2396,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>The index of <paramref name="item"/> if found in the list; otherwise, -1.</returns>
 		public int IndexOf(TaskPrincipalPrivilege item)
 		{
-			for (int i = 0; i < Count; i++)
+			for (var i = 0; i < Count; i++)
 			{
 				if (item == this[i])
 					return i;
@@ -2516,12 +2480,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arrayIndex">Index of the array.</param>
 		public void CopyTo(TaskPrincipalPrivilege[] array, int arrayIndex)
 		{
-			var pEnum = GetEnumerator();
-			for (int i = arrayIndex; i < array.Length; i++)
+			using (var pEnum = GetEnumerator())
 			{
-				if (!pEnum.MoveNext())
-					break;
-				array[i] = pEnum.Current;
+				for (var i = arrayIndex; i < array.Length; i++)
+				{
+					if (!pEnum.MoveNext())
+						break;
+					array[i] = pEnum.Current;
+				}
 			}
 		}
 
@@ -2664,7 +2630,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 				{
-					string v1Path = Task.GetV1Path(v1Task);
+					var v1Path = Task.GetV1Path(v1Task);
 					if (!string.IsNullOrEmpty(v1Path) && File.Exists(v1Path))
 						return File.GetLastWriteTime(v1Path);
 				}
@@ -2676,7 +2642,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Date = value == DateTime.MinValue ? null : value.ToString(Trigger.V2BoundaryDateFormat, Trigger.DefaultDateCulture);
 				else
 				{
-					string v1Path = Task.GetV1Path(v1Task);
+					var v1Path = Task.GetV1Path(v1Task);
 					if (!string.IsNullOrEmpty(v1Path) && File.Exists(v1Path))
 						File.SetLastWriteTime(v1Path, value);
 				}
@@ -2776,11 +2742,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				string uri = null;
-				uri = v2RegInfo != null ? v2RegInfo.URI : v1Task.GetDataItem(nameof(URI));
-				if (string.IsNullOrEmpty(uri))
-					return null;
-				return uri;
+				var uri = v2RegInfo != null ? v2RegInfo.URI : v1Task.GetDataItem(nameof(URI));
+				return string.IsNullOrEmpty(uri) ? null : uri;
 			}
 			set
 			{
@@ -3080,7 +3043,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 					return Task.StringToTimeSpan(v2Settings.ExecutionTimeLimit);
-				uint ms = v1Task.GetMaxRunTime();
+				var ms = v1Task.GetMaxRunTime();
 				return ms == InfiniteRunTimeV1 ? TimeSpan.Zero : TimeSpan.FromMilliseconds(ms);
 			}
 			set
@@ -3093,7 +3056,7 @@ namespace Microsoft.Win32.TaskScheduler
 					// MaxRunTime to INFINITE results in the task only running for 72 hours. For
 					// these operating systems, setting the RunTime to "INFINITE - 1" gets the
 					// desired behavior of allowing an "infinite" run of the task.
-					uint ms = value == TimeSpan.Zero ? InfiniteRunTimeV1 : Convert.ToUInt32(value.TotalMilliseconds);
+					var ms = value == TimeSpan.Zero ? InfiniteRunTimeV1 : Convert.ToUInt32(value.TotalMilliseconds);
 					v1Task.SetMaxRunTime(ms);
 					if (value == TimeSpan.Zero && v1Task.GetMaxRunTime() != InfiniteRunTimeV1)
 						v1Task.SetMaxRunTime(InfiniteRunTimeV1 - 1);
@@ -3207,8 +3170,8 @@ namespace Microsoft.Win32.TaskScheduler
 				case 5:
 				case 6:
 					return ProcessPriorityClass.Normal;
-				case 7:
-				case 8:
+				// case 7:
+				// case 8:
 				default:
 					return ProcessPriorityClass.BelowNormal;
 				case 9:
@@ -3219,7 +3182,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private int GetPriorityAsInt(ProcessPriorityClass value)
 		{
-			int p = 7;
+			var p = 7;
 			switch (value)
 			{
 				case ProcessPriorityClass.AboveNormal:
@@ -3237,9 +3200,9 @@ namespace Microsoft.Win32.TaskScheduler
 				case ProcessPriorityClass.RealTime:
 					p = 0;
 					break;
-				case ProcessPriorityClass.BelowNormal:
-				default:
-					break;
+				// case ProcessPriorityClass.BelowNormal:
+				// default:
+				// 	break;
 			}
 			return p;
 		}
@@ -3508,7 +3471,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		public static string GetDataItem(this ITask v1Task, string name)
 		{
-			string ret = null;
+			string ret;
 			TaskDefinition.GetV1TaskDataDictionary(v1Task).TryGetValue(name, out ret);
 			return ret;
 		}

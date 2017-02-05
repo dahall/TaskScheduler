@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -68,16 +68,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard">
-      <HintPath>..\packages\AeroWizard.2.1.7\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\AeroWizard.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\GroupControls.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,8 +87,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TimeSpan2">
-      <HintPath>..\packages\TimeSpan2.2.1.4\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\TimeSpan2.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Aliases>global</Aliases>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -577,12 +579,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskBrowserDialog.es.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskBrowserDialog.it.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskBrowserDialog.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.es.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
@@ -909,7 +913,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="packages.config" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -973,14 +976,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TaskDialog.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Dialog.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Control.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="TaskControl.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -996,9 +993,9 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.5.2 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
     <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
   </Target>
 </Project>
