@@ -1343,8 +1343,7 @@ namespace Microsoft.Win32.TaskScheduler
 					case 1:
 						return 3;
 					default:
-						//return Convert.ToInt32(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", 0)) == 10 ? 5 : 4;
-						return 4;
+						return Convert.ToInt32(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", 0)) == 10 ? 5 : 4;
 				}
 			}
 			return 1;
@@ -1862,7 +1861,7 @@ namespace Microsoft.Win32.TaskScheduler
 				catch (InvalidOperationException iox)
 				{
 					foreach (DictionaryEntry kvp in iox.Data)
-						TryAdd(ex.Data, (kvp.Key is ICloneable) ? ((ICloneable)(kvp.Key)).Clone() : kvp.Key, (kvp.Value is ICloneable) ? ((ICloneable)(kvp.Value)).Clone() : kvp.Value);
+						TryAdd(ex.Data, (kvp.Key as ICloneable)?.Clone() ?? kvp.Key, (kvp.Value as ICloneable)?.Clone() ?? kvp.Value);
 				}
 			}
 
@@ -1992,7 +1991,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain delays.")); }
 				if (null != Triggers.Find(t => t.ExecutionTimeLimit != TimeSpan.Zero || t.Id != null))
 					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain an ExecutionTimeLimit or Id.")); }
-				if (null != Triggers.Find(t => (t is LogonTrigger && ((LogonTrigger)t).UserId != null)))
+				if (null != Triggers.Find(t => ((t as LogonTrigger)?.UserId != null)))
 					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a LogonTrigger with a UserId.")); }
 				if (null != Triggers.Find(t => (t is MonthlyDOWTrigger && ((MonthlyDOWTrigger)t).RunOnLastWeekOfMonth) || (t is MonthlyDOWTrigger && ((((MonthlyDOWTrigger)t).WeeksOfMonth & (((MonthlyDOWTrigger)t).WeeksOfMonth - 1)) != 0))))
 					{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Triggers", "cannot contain a MonthlyDOWTrigger with RunOnLastWeekOfMonth set or multiple WeeksOfMonth.")); }
@@ -2528,7 +2527,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public sealed class TaskPrincipalPrivilegesEnumerator : IEnumerator<TaskPrincipalPrivilege>
 		{
 			private int cur;
-			private IPrincipal2 v2Principal2;
+			private readonly IPrincipal2 v2Principal2;
 
 			internal TaskPrincipalPrivilegesEnumerator(IPrincipal2 iPrincipal2 = null)
 			{
@@ -2762,9 +2761,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				var sver = v2RegInfo != null ? v2RegInfo.Version : v1Task.GetDataItem(nameof(Version));
-				try { return new Version(sver); }
-				catch { }
+                var sver = v2RegInfo != null ? v2RegInfo.Version : v1Task.GetDataItem(nameof(Version));
+                if (sver != null) try { return new Version(sver); } catch { }
 				return new Version(1, 0);
 			}
 			set
@@ -2784,9 +2782,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (v2RegInfo != null)
-					return v2RegInfo.XmlText;
-				return XmlSerializationHelper.WriteObjectToXmlText(this);
+			    return v2RegInfo != null ? v2RegInfo.XmlText : XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
@@ -3116,17 +3112,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlIgnore]
 		[NotNull]
-		public NetworkSettings NetworkSettings
-		{
-			get
-			{
-				if (networkSettings == null)
-					networkSettings = new NetworkSettings(v2Settings?.NetworkSettings);
-				return networkSettings;
-			}
-		}
+		public NetworkSettings NetworkSettings => networkSettings ?? (networkSettings = new NetworkSettings(v2Settings?.NetworkSettings));
 
-		/// <summary>
+	    /// <summary>
 		/// Gets or sets the priority level of the task.
 		/// </summary>
 		/// <value>
