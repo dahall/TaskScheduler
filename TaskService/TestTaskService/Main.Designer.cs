@@ -75,8 +75,9 @@ namespace TestTaskService
 			this.radioButtonList1.AutoScrollMinSize = new System.Drawing.Size(496, 51);
 			radioButtonListItem1.Text = "Short test*";
 			radioButtonListItem2.Text = "Long test*";
-			radioButtonListItem3.Text = "Editor test";
-			radioButtonListItem4.Text = "Find Task Prop*";
+			radioButtonListItem3.Text = "Editor test*";
+            radioButtonListItem3.ToolTipText = "Input line for existing task";
+            radioButtonListItem4.Text = "Find Task Prop*";
 			radioButtonListItem5.Text = "Wizard test";
 			radioButtonListItem6.Text = "MMC test";
 			radioButtonListItem7.Text = "Find Task*";

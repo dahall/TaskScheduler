@@ -38,8 +38,8 @@ namespace Microsoft.Win32
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool InvalidateRect(IntPtr hWnd, IntPtr rect, [MarshalAs(UnmanagedType.Bool)] bool bErase);
 
-		[DllImport(USER32, ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
-		public static extern int LoadString(IntPtr hInstance, int uID, out IntPtr lpBuffer, int nBufferMax);
+		[DllImport(USER32, CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern int LoadString(IntPtr hInstance, uint uID, out IntPtr lpBuffer, uint nBufferMax);
 
 		[DllImport(USER32, CharSet = CharSet.Auto, ExactSpelling = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]

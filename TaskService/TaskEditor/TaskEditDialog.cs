@@ -72,6 +72,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.
+		/// </summary>
+		/// <value><c>true</c> if references to resource strings are converted; otherwise, <c>false</c>.</value>
+		[DefaultValue(true), Category("Behavior"), Description("Converts string references in libraries to value.")]
+		public bool ConvertResourceStringReferences
+		{
+			get { return taskPropertiesControl1.ConvertResourceStringReferences; }
+			set { taskPropertiesControl1.ConvertResourceStringReferences = value; }
+		}
+
+		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="TaskEditDialog"/> is editable.
 		/// </summary>
 		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>

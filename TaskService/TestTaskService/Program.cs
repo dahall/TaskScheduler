@@ -4,17 +4,17 @@ using System.Windows.Forms;
 
 namespace TestTaskService
 {
-	class Program
+	internal class Program
 	{
 		private static TaskEditDialog editorForm;
 		public delegate void TestMethod(TaskService ts, System.IO.TextWriter output, params string[] arg);
 
 		[STAThread]
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			if (args.Length > 0 && char.ToUpper(args[0][0]) == 'C')
 			{
-				string[] newArgs = new string[args.Length - 1];
+				var newArgs = new string[args.Length - 1];
 				Array.Copy(args, 1, newArgs, 0, newArgs.Length);
 				ConsoleMain(newArgs);
 				return;
@@ -27,21 +27,21 @@ namespace TestTaskService
 			Application.Run(new Main());
 		}
 
-		static void ConsoleMain(string[] args)
+		private static void ConsoleMain(string[] args)
 		{
-			int init = 0;
-			char test = 'L';
+			var init = 0;
+			var test = 'L';
 			if (args.Length > 0 && char.IsLetter(args[0][0]))
 			{
 				test = args[0].ToUpper()[0];
 				init++;
 			}
-			string[] newArgs = new string[] { args.Length > init ? args[init] : "2", null, null, null, null };
-			for (int i = init + 1; i < init + 5; i++)
+			var newArgs = new[] { args.Length > init ? args[init] : "2", null, null, null, null };
+			for (var i = init + 1; i < init + 5; i++)
 				if (args.Length > i) newArgs[i] = args[i];
 
-			System.Windows.Forms.Application.EnableVisualStyles();
-			using (TaskService ts = new TaskService(newArgs[1], newArgs[2], newArgs[3], newArgs[4], newArgs[0] == "1"))
+			Application.EnableVisualStyles();
+			using (var ts = new TaskService(newArgs[1], newArgs[2], newArgs[3], newArgs[4], newArgs[0] == "1"))
 			{
 				switch (test)
 				{
@@ -74,7 +74,7 @@ namespace TestTaskService
 		{
 			try
 			{
-				Task t = (arg.Length > 0 && !string.IsNullOrEmpty(arg[0])) ? (arg[0].StartsWith("\\") ? ts.GetTask(arg[0]) : ts.FindTask(arg[0])) : null;
+				var t = (arg.Length > 0 && !string.IsNullOrEmpty(arg[0])) ? (arg[0].StartsWith("\\") ? ts.GetTask(arg[0]) : ts.FindTask(arg[0])) : null;
 				if (t == null)
 					output.WriteLine($"Task '{arg[0]}' not found.");
 				else
@@ -84,11 +84,11 @@ namespace TestTaskService
 					{
 						foreach (var tr in t.Definition.Triggers)
 						{
-							CustomTrigger ct = tr as CustomTrigger;
+							var ct = tr as CustomTrigger;
 							if (ct != null && ct.Properties.Count > 0)
 							{
 								output.WriteLine("Custom Trigger Properties:");
-								int i = 0;
+								var i = 0;
 								foreach (var name in ct.Properties.Names)
 									output.WriteLine("{0}. {1} = {2}", ++i, name, ct.Properties[name]);
 							}
@@ -106,7 +106,7 @@ namespace TestTaskService
 		{
 			try
 			{
-				TaskFolder tf = ts.RootFolder;
+				var tf = ts.RootFolder;
 				FindTaskWithPropertyInFolder(output, tf, arg[0]);
 			}
 			catch (Exception ex)
@@ -115,25 +115,23 @@ namespace TestTaskService
 			}
 		}
 
-		static void FindTaskWithPropertyInFolder(System.IO.TextWriter output, TaskFolder tf, string arg, System.Text.RegularExpressions.Match match = null)
+		private static void FindTaskWithPropertyInFolder(System.IO.TextWriter output, TaskFolder tf, string arg, System.Text.RegularExpressions.Match match = null)
 		{
 			if (match == null)
 				match = System.Text.RegularExpressions.Regex.Match(arg, "^(\\.?\\w+)+\\s*(==|!=)\\s*\\\"([^\"]*)\\\"$");
 			if (!match.Success)
 				return;
 
-			foreach (Task t in tf.Tasks)
+			foreach (var t in tf.Tasks)
 			{
 				try
 				{
-					bool found = false;
-					System.Reflection.PropertyInfo pi;
-					Object lastObj = t;
+					object lastObj = t;
 					int i;
 					for (i = 0; i < match.Groups[1].Captures.Count && lastObj != null; i++)
 					{
-						string prop = match.Groups[1].Captures[i].Value.TrimStart('.');
-						pi = lastObj.GetType().GetProperty(prop);
+						var prop = match.Groups[1].Captures[i].Value.TrimStart('.');
+						var pi = lastObj.GetType().GetProperty(prop);
 						if (pi == null)
 						{
 							output.WriteLine("Unable to locate property {0}", prop);
@@ -143,23 +141,23 @@ namespace TestTaskService
 					}
 					if (i == match.Groups[1].Captures.Count)
 					{
-						string res = (lastObj == null) ? string.Empty : lastObj.ToString();
-						found = res.Equals(match.Groups[3].Value, StringComparison.InvariantCultureIgnoreCase);
+						var res = lastObj?.ToString() ?? string.Empty;
+						var found = res.Equals(match.Groups[3].Value, StringComparison.InvariantCultureIgnoreCase);
 						if (match.Groups[2].Value == "!=")
 							found = !found;
 						if (found)
-							output.WriteLine("+ {1} ({2})({4})\n\r== {3}", t.Name, t.Path, t.State, res, t.Definition.Settings.Compatibility);
+							output.WriteLine($"+ {t.Path} ({t.State})({t.Definition.Settings.Compatibility})\n\r== {res}");
 					}
 				}
 				catch { }
 			}
 
-			TaskFolderCollection tfs = tf.SubFolders;
+			var tfs = tf.SubFolders;
 			if (tfs.Count > 0)
 			{
 				try
 				{
-					foreach (TaskFolder sf in tfs)
+					foreach (var sf in tfs)
 						FindTaskWithPropertyInFolder(output, sf, arg, match);
 				}
 				catch (Exception ex)
@@ -173,8 +171,8 @@ namespace TestTaskService
 		{
 			try
 			{
-				string FolderName = "My Folder";
-				bool v2 = ts.HighestSupportedVersion > new Version(1, 1);
+				var FolderName = "My Folder";
+				var v2 = ts.HighestSupportedVersion > new Version(1, 1);
 				var taskFolder = ts.RootFolder;
 				if (v2)
 				{
@@ -243,7 +241,7 @@ namespace TestTaskService
 
 		internal class TemporaryScopedFile : IDisposable
 		{
-			private string fn;
+			private readonly string fn;
 
 			public TemporaryScopedFile()
 			{
@@ -252,7 +250,7 @@ namespace TestTaskService
 
 			public TemporaryScopedFile(string ext, string fileName = null, string content = null)
 			{
-				fn = System.IO.Path.Combine(System.IO.Path.GetTempPath(), String.Concat(Guid.NewGuid().ToString(), ".", ext));
+				fn = System.IO.Path.Combine(System.IO.Path.GetTempPath(), string.Concat(Guid.NewGuid().ToString(), ".", ext));
 				using (var f = System.IO.File.CreateText(fn))
 				{
 					if (content != null)
@@ -276,31 +274,35 @@ namespace TestTaskService
 			try
 			{
 				const string taskName = "Test";
+				Converter<DateTime, string> d = dt => (dt == DateTime.MinValue || dt == DateTime.MaxValue) ? "Never" : dt.ToString();
 
-				// Create a new task definition and assign properties
-				TaskDefinition td = ts.NewTask();
-				td.RegistrationInfo.Description = "Test for editor\r\n\r\nLine 2";
-				//td.RegistrationInfo.Author = "incaunu";
-				td.Triggers.Add(new DailyTrigger() { StartBoundary = new DateTime(2014, 1, 15, 9, 0, 0), EndBoundary = DateTime.Today.AddMonths(1) });
-				/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
-				eTrig.ValueQueries.Add("Name", "Value");
-				td.Triggers.Add(eTrig);*/
-				td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
-				td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
-				//EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
-				//ea.HeaderFields.Add("reply-to", "dh@mail.com");
-				//ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
-				//WriteXml(td, taskName);
-				//using (var op = new TaskOptionsEditor(t, true, false))
-				//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
-				//Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
-				System.Converter<DateTime, string> d = dt => (dt == DateTime.MinValue || dt == DateTime.MaxValue) ? "Never" : dt.ToString();
-				//WriteXml(t);
+				var td = (arg.Length > 0 && arg[0] != null) ? ts.FindTask(arg[0])?.Definition : null;
+				if (td == null)
+				{
+					// Create a new task definition and assign properties
+					td = ts.NewTask();
+					td.RegistrationInfo.Description = "Test for editor\r\n\r\nLine 2";
+					//td.RegistrationInfo.Author = "incaunu";
+					td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now + TimeSpan.FromSeconds(5), EndBoundary = DateTime.Today.AddMonths(1) });
+					/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
+					eTrig.ValueQueries.Add("Name", "Value");
+					td.Triggers.Add(eTrig);*/
+					td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
+					td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
+					//EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
+					//ea.HeaderFields.Add("reply-to", "dh@mail.com");
+					//ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
+					//WriteXml(td, taskName);
+					//using (var op = new TaskOptionsEditor(t, true, false))
+					//	if (op.ShowDialog() == DialogResult.OK) td = op.TaskDefinition;
+					//Task t = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "system", null, TaskLogonType.ServiceAccount);
+					//WriteXml(t);
+				}
 
 				// Register then show task again
-				if (DisplayTask(ts, null, true) != null)
+				if (DisplayTask(ts, td, true) != null)
 				{
-					Task t = editorForm.Task;
+					var t = editorForm.Task;
 					while (DisplayTask(t, true) != null)
 					{
 						t = editorForm.Task;
@@ -320,23 +322,22 @@ namespace TestTaskService
 			}
 		}
 
-		static void FindTaskWithComAction(System.IO.TextWriter output, TaskFolder tf)
+		private static void FindTaskWithComAction(System.IO.TextWriter output, TaskFolder tf)
 		{
-			foreach (Task t in tf.Tasks)
+			foreach (var t in tf.Tasks)
 			{
-				foreach (Microsoft.Win32.TaskScheduler.Action ac in t.Definition.Actions)
+				foreach (var ac in t.Definition.Actions)
 				{
-					ComHandlerAction a = ac as ComHandlerAction;
+					var a = ac as ComHandlerAction;
 					if (a == null)
 						continue;
 					string name = null, model = null, path = null, asm = null;
 					try
 					{
-						Microsoft.Win32.RegistryKey k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("CLSID\\" + a.ClassId.ToString("B"));
-						if (k == null)
-							k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("Wow6432Node\\CLSID\\" + a.ClassId.ToString("B"));
-						name = k.GetValue(null, "").ToString();
-						Microsoft.Win32.RegistryKey sk = k.OpenSubKey("InprocServer32");
+						var k = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("CLSID\\" + a.ClassId.ToString("B")) ??
+						        Microsoft.Win32.Registry.ClassesRoot.OpenSubKey("Wow6432Node\\CLSID\\" + a.ClassId.ToString("B"));
+						name = k?.GetValue(null, "").ToString();
+						var sk = k.OpenSubKey("InprocServer32");
 						path = sk.GetValue(null, "").ToString();
 						if (!string.IsNullOrEmpty(path))
 						{
@@ -361,7 +362,7 @@ namespace TestTaskService
 
 		internal static void FluentTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			Task t = ts.Execute("notepad.exe").WithArguments(@"c:\temp\music.txt").Once().Starting(2013, 11, 11, 11, 0, 0).RepeatingEvery(TimeSpan.FromMinutes(5)).AsTask("Test");
+			var t = ts.Execute("notepad.exe").WithArguments(@"c:\temp\music.txt").Once().Starting(2013, 11, 11, 11, 0, 0).RepeatingEvery(TimeSpan.FromMinutes(5)).AsTask("Test");
 			DisplayTask(t, false);
 			ts.RootFolder.DeleteTask(t.Name);
 
@@ -404,8 +405,7 @@ namespace TestTaskService
 
 		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction, int level = 0)
 		{
-			if (fldAction != null)
-				fldAction(fld);
+			fldAction?.Invoke(fld);
 			if (taskAction != null)
 				foreach (var task in fld.Tasks)
 					taskAction(task);
@@ -439,13 +439,13 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				//string[] names = arg[0].Split('\\');
-				string taskName = "TesterTask";
+				var taskName = "TesterTask";
 
 				//string taskFolder = (names.Length == 1 || names[0].Length == 0) ? "\\" : names[0];
 
-				TaskDefinition td = ts.NewTask();
+				var td = ts.NewTask();
 				//td.RegistrationInfo.Description = "some description";
-				td.Triggers.Add(new DailyTrigger(1));
+				td.Triggers.Add(new DailyTrigger());
 				td.Actions.Add("cmd.exe", "-someparameter");
 				//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
 
@@ -520,9 +520,12 @@ namespace TestTaskService
 				//ts.RootFolder.DeleteTask(taskName);
 				td = t.Definition;
 				td.Triggers.Clear();
-				WeeklyTrigger wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
-				wt.DaysOfWeek = DaysOfTheWeek.Friday;
-				wt.EndBoundary = DateTime.Today.AddYears(1);
+				var wt = td.Triggers.AddNew(TaskTriggerType.Weekly) as WeeklyTrigger;
+				if (wt != null)
+				{
+					wt.DaysOfWeek = DaysOfTheWeek.Friday;
+					wt.EndBoundary = DateTime.Today.AddYears(1);
+				}
 				//((ExecAction)td.Actions[0]).Path = "calc.exe";
 				t.RegisterChanges();
 				/*t = ts.RootFolder.RegisterTaskDefinition(taskName, td);
@@ -539,40 +542,38 @@ namespace TestTaskService
 
 		internal static void LongTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+			var user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-			Version ver = ts.HighestSupportedVersion;
-			bool isV12 = (ver >= new Version(1, 2));
-			bool isV13 = (ver >= new Version(1, 3));
-			bool isV14 = (ver >= new Version(1, 4));
+			var ver = ts.HighestSupportedVersion;
+			var isV12 = (ver >= new Version(1, 2));
+			var isV13 = (ver >= new Version(1, 3));
+			var isV14 = (ver >= new Version(1, 4));
 			output.WriteLine($"Highest version: {ver}, Library version {TaskService.LibraryVersion}");
 			output.WriteLine("Server: {0} ({1}); User: {2}\\{3}", ts.TargetServer, ts.Connected ? "Connected" : "Disconnected", ts.UserAccountDomain, ts.UserName);
 
 			output.WriteLine("Running tasks:");
 			try
 			{
-				foreach (RunningTask rt in ts.GetRunningTasks(true))
+				foreach (var rt in ts.GetRunningTasks(true))
 				{
-					if (rt != null)
-					{
-						output.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
-						if (ver.Minor > 0)
-							output.WriteLine("  Current Action: " + rt.CurrentAction);
-					}
+					if (rt == null) continue;
+					output.WriteLine("+ {0}, {1} ({2})", rt.Name, rt.Path, rt.State);
+					if (ver.Minor > 0)
+						output.WriteLine("  Current Action: " + rt.CurrentAction);
 				}
 			}
 			catch (Exception ex) { output.WriteLine("  " + ex.Message); }
 
-			string filter = arg.Length > 0 ? arg[0] : string.Empty;
-			TaskFolder tf = ts.RootFolder;
-			TaskCollection tasks = tf.GetTasks(new Wildcard(filter));
+			var filter = arg.Length > 0 ? arg[0] : string.Empty;
+			var tf = ts.RootFolder;
+			var tasks = tf.GetTasks(new Wildcard(filter));
 			output.WriteLine("\nRoot folder tasks matching \"{1}\" ({0}):", tasks.Count, filter);
-			foreach (Task t in tasks)
+			foreach (var t in tasks)
 			{
 				try
 				{
 					output.WriteLine("+ {0}, {1} ({2}) - {3}; Actions:{4}; Triggers:{5}", t.Name, t.Definition.RegistrationInfo.Author, t.State, t.Definition.Settings.Compatibility, t.Definition.Actions.Count, t.Definition.Triggers.Count);
-					foreach (Trigger trg in t.Definition.Triggers)
+					foreach (var trg in t.Definition.Triggers)
 						output.WriteLine(" + {0}", trg);
 					foreach (var act in t.Definition.Actions)
 						output.WriteLine(" = {0}", act);
@@ -581,19 +582,19 @@ namespace TestTaskService
 			}
 
 			output.WriteLine("\n***Finding defrag task***");
-			Task ft = ts.FindTask("*defrag*");
+			var ft = ts.FindTask("*defrag*");
 			if (ft != null)
 				output.WriteLine("Defrag task found at " + ft.Path);
 			else
 				output.WriteLine("Defrag task not found.");
 
-			TaskFolderCollection tfs = tf.SubFolders;
+			var tfs = tf.SubFolders;
 			if (tfs.Count > 0)
 			{
 				output.WriteLine("\nSub folders:");
 				try
 				{
-					foreach (TaskFolder sf in tfs)
+					foreach (var sf in tfs)
 						output.WriteLine("+ {0}", sf.Path);
 				}
 				catch (Exception ex)
@@ -610,8 +611,7 @@ namespace TestTaskService
 					const string testFolder = "David's TestFolder";
 					try { tf.CreateFolder(testFolder); }
 					catch (System.Runtime.InteropServices.COMException cex) { if (cex.ErrorCode != -2147024713) throw; }
-					catch { throw; }
-					TaskFolder sub = tf.SubFolders[testFolder];
+					var sub = tf.SubFolders[testFolder];
 					output.WriteLine("\nSubfolder path: " + sub.Path);
 					try
 					{
@@ -635,15 +635,12 @@ namespace TestTaskService
 			output.WriteLine("\n***Checking task creation***");
 			try
 			{
-				TaskDefinition td = ts.NewTask();
+				var td = ts.NewTask();
 				td.Data = "Your data";
 				//td.Principal.UserId = "SYSTEM";
 				//td.Principal.LogonType = TaskLogonType.ServiceAccount;
 				td.Principal.Id = "Author";
-				if (isV12)
-					td.Principal.LogonType = TaskLogonType.S4U;
-				else
-					td.Principal.LogonType = TaskLogonType.InteractiveToken;
+				td.Principal.LogonType = isV12 ? TaskLogonType.S4U : TaskLogonType.InteractiveToken;
 				td.RegistrationInfo.Author = "dahall";
 				td.RegistrationInfo.Description = "Does something";
 				td.RegistrationInfo.Documentation = "Don't pretend this is real.";
@@ -708,16 +705,16 @@ namespace TestTaskService
 				// Setup Triggers
 				if (isV12)
 				{
-					BootTrigger bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
+					var bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
 					if (isV12) bTrigger.Delay = TimeSpan.FromMinutes(5);
 				}
 
-				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				var dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				if (isV12) dTrigger.RandomDelay = TimeSpan.FromHours(2);
 
 				if (isV12)
 				{
-					EventTrigger eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
+					var eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
 					eTrigger.ValueQueries.Add("Name", "Value");
 					eTrigger.ValueQueries["Name"] = "NewValue";
@@ -734,7 +731,7 @@ namespace TestTaskService
 
 				td.Triggers.Add(new IdleTrigger());
 
-				LogonTrigger lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
+				var lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
 				if (isV12)
 				{
 					lTrigger.Delay = TimeSpan.FromMinutes(15);
@@ -742,39 +739,43 @@ namespace TestTaskService
 					lTrigger.Repetition.Interval = TimeSpan.FromSeconds(1000);
 				}
 
-				MonthlyTrigger mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
-				mTrigger.DaysOfMonth = new int[] { 3, 6, 10, 18 };
+				var mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
+				mTrigger.DaysOfMonth = new[] { 3, 6, 10, 18 };
 				mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
 				if (isV12) mTrigger.RunOnLastDayOfMonth = true;
 				mTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(90);
 
-				MonthlyDOWTrigger mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
+				var mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
 				mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
 				mdTrigger.MonthsOfYear = MonthsOfTheYear.January | MonthsOfTheYear.December;
 				if (isV12) mdTrigger.RunOnLastWeekOfMonth = true;
 				mdTrigger.WeeksOfMonth = WhichWeek.FirstWeek;
 
-				TimeTrigger tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
+				var tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
 				tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
 				if (isV12) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
 				if (isV12) tTrigger.Id = "Time test";
 				tTrigger.Repetition = new RepetitionPattern(TimeSpan.FromMinutes(17), TimeSpan.FromMinutes(21), true);
 
-				WeeklyTrigger wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
+				var wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
 				wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 				wTrigger.WeeksInterval = 3;
 
 				// Setup Actions
 				td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
-				td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
+				td.Actions.Add("notepad.exe", "c:\\test.log");
 				if (isV12 || (td.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0)
 				{
 					td.Actions.Context = "Author";
 					if (td.Principal.LogonType == TaskLogonType.InteractiveToken || td.Principal.LogonType == TaskLogonType.Group || td.Principal.LogonType == TaskLogonType.S4U)
 						td.Actions.Add(new ShowMessageAction("Running Notepad", "Info"));
-					var email = new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com") { Id = "Email", Attachments = new object[] { (string)new TemporaryScopedFile() } };
-					email.Priority = System.Net.Mail.MailPriority.High;
+					var email = new EmailAction("Testing", "dahall@codeplex.com", "user@test.com", "You've got mail.", "mail.myisp.com")
+					{
+						Id = "Email",
+						Attachments = new object[] {(string) new TemporaryScopedFile()},
+						Priority = System.Net.Mail.MailPriority.High
+					};
 					td.Actions.Add(email);
 					email = (EmailAction)td.Actions["Email"];
 					email.To = "user@t2.com";
@@ -787,15 +788,15 @@ namespace TestTaskService
 				// Validate and Register task
 				WriteXml(td, "PreRegTest");
 				td.Validate(true);
-				Task t = tf.RegisterTaskDefinition("Test1", td);
+				var t = tf.RegisterTaskDefinition("Test1", td);
 				WriteXml(t);
 
 				// Try copying it
-				TaskDefinition td2 = ts.NewTask();
+				var td2 = ts.NewTask();
 				td2.Actions.PowerShellConversion = td.Actions.PowerShellConversion;
 				td2.Triggers.AddRange(td.Triggers.ToArray());
 				td2.Actions.AddRange(td.Actions.ToArray());
-				Task t2 = tf.RegisterTaskDefinition("Test2", td2, TaskCreation.CreateOrUpdate, user, null, TaskLogonType.InteractiveToken, null);
+				var t2 = tf.RegisterTaskDefinition("Test2", td2, TaskCreation.CreateOrUpdate, user, null, TaskLogonType.InteractiveToken);
 				WriteXml(t2.Definition, "ReRegTest");
 				tf.DeleteTask("Test2");
 
@@ -816,33 +817,33 @@ namespace TestTaskService
 			}
 
 			// Display results
-			Task runningTask = tf.Tasks["Test1"];
+			var runningTask = tf.Tasks["Test1"];
 			if (isV12 || (runningTask.Definition.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0)
 				System.Diagnostics.Debug.Assert(runningTask.Definition.Actions.Count == 4);
 			else
 				System.Diagnostics.Debug.Assert(runningTask.Definition.Actions.Count == 1);
 			WriteXml(runningTask.Definition, "RunRegTest");
 			output.WriteLine("\nNew task will next run at " + runningTask.NextRunTime);
-			DateTime[] times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7), 0);
+			var times = runningTask.GetRunTimes(DateTime.Now, DateTime.Now + TimeSpan.FromDays(7));
 			if (times.Length > 0)
 			{
 				output.WriteLine("\nNew task will run at the following times over the next week:");
-				foreach (DateTime dt in times)
+				foreach (var dt in times)
 					output.WriteLine("  {0}", dt);
 			}
 			output.WriteLine("\nNew task triggers:");
-			for (int i = 0; i < runningTask.Definition.Triggers.Count; i++)
+			for (var i = 0; i < runningTask.Definition.Triggers.Count; i++)
 				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Triggers[i]);
 			output.WriteLine("\nNew task actions:");
-			for (int i = 0; i < runningTask.Definition.Actions.Count; i++)
+			for (var i = 0; i < runningTask.Definition.Actions.Count; i++)
 				output.WriteLine("  {0}: {1}", i, runningTask.Definition.Actions[i]);
 
 			// Loop through event logs for this task and find action completed events newest to oldest
 			if (isV12)
 			{
 				output.WriteLine("\nTask history enumeration:");
-				TaskEventLog log = new TaskEventLog(@"\Microsoft\Windows\Autochk\Proxy", new[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
-				foreach (TaskEvent ev in log)
+				var log = new TaskEventLog(@"\Microsoft\Windows\Autochk\Proxy", new[] { 201 }, DateTime.Now.AddDays(-7)) { EnumerateInReverse = false };
+				foreach (var ev in log)
 					output.WriteLine("  Completed action '{0}' ({2}) at {1}.", ev.DataValues["ActionName"], ev.TimeCreated.Value, ev.DataValues["ResultCode"]);
 			}
 
@@ -860,11 +861,11 @@ namespace TestTaskService
 
 		internal static void MMCTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			TSMMCMockup form = new TSMMCMockup();
+			var form = new TSMMCMockup();
 			form.ShowDialog();
 		}
 
-		static TaskDefinition DisplayTask(Task t, bool editable)
+		private static TaskDefinition DisplayTask(Task t, bool editable)
 		{
 			if (editorForm == null)
 				editorForm = new TaskEditDialog();
@@ -877,7 +878,7 @@ namespace TestTaskService
 			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
-		static TaskDefinition DisplayTask(TaskService ts, TaskDefinition td, bool editable)
+		private static TaskDefinition DisplayTask(TaskService ts, TaskDefinition td, bool editable)
 		{
 			if (editorForm == null)
 				editorForm = new TaskEditDialog();
@@ -890,18 +891,18 @@ namespace TestTaskService
 			return (editorForm.ShowDialog() == DialogResult.OK) ? editorForm.TaskDefinition : null;
 		}
 
-		static string GetTempXmlFile(string taskName) => System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
+		private static string GetTempXmlFile(string taskName) => System.IO.Path.Combine(System.IO.Path.GetTempPath(), taskName + DateTime.Now.ToString("yyyy'_'MM'_'dd'_'HH'_'mm'_'ss") + ".xml");
 
-		static string WriteXml(Task t)
+		private static string WriteXml(Task t)
 		{
-			string fn = GetTempXmlFile(t.Name);
+			var fn = GetTempXmlFile(t.Name);
 			t.Export(fn);
 			return fn;
 		}
 
-		static string WriteXml(TaskDefinition td, string name)
+		private static string WriteXml(TaskDefinition td, string name)
 		{
-			string fn = GetTempXmlFile(name);
+			var fn = GetTempXmlFile(name);
 			System.IO.File.WriteAllText(fn, td.XmlText, System.Text.Encoding.Unicode);
 			return fn;
 		}
@@ -915,13 +916,13 @@ namespace TestTaskService
 
 				// Create a new task definition and assign properties
 				const string taskName = "Test";
-				string fn = null;
+				string fn;
 				using (var tt = new TempTask(ts, taskName))
 				{
 					System.Threading.Thread.Sleep(1000);
 
 					// Serialize task and output
-					string xmlOutput = tt.Task.Xml;
+					var xmlOutput = tt.Task.Xml;
 					output.Write(xmlOutput);
 					fn = WriteXml(tt);
 				}
@@ -938,17 +939,17 @@ namespace TestTaskService
 
 		private class TempTask : IDisposable
 		{
-			TaskService ts;
-			string taskName;
+			private readonly TaskService ts;
+			private readonly string taskName;
 
-			public Task Task { get; set; }
+			public Task Task { get; }
 
 			public TempTask(TaskService ts, string taskName)
 			{
 				this.ts = ts;
 				this.taskName = taskName;
 
-				TaskDefinition td = ts.NewTask();
+				var td = ts.NewTask();
 				td.Data = "Some data";
 				td.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
 				td.Settings.IdleSettings.RestartOnIdle = true;
@@ -956,10 +957,10 @@ namespace TestTaskService
 				td.Triggers.Add(new BootTrigger());
 				td.Triggers.Add(new LogonTrigger());
 				td.Triggers.Add(new IdleTrigger());
-				TimeTrigger tt = (TimeTrigger)td.Triggers.Add(new TimeTrigger() { Enabled = false, EndBoundary = DateTime.Now.AddYears(1), Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromHours(4)) });
-				DailyTrigger dt = (DailyTrigger)td.Triggers.Add(new DailyTrigger(3) { Enabled = false, Repetition = new RepetitionPattern(TimeSpan.FromHours(2), TimeSpan.FromHours(24)) });
+				td.Triggers.Add(new TimeTrigger() { Enabled = false, EndBoundary = DateTime.Now.AddYears(1), Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromHours(4)) });
+				td.Triggers.Add(new DailyTrigger(3) { Enabled = false, Repetition = new RepetitionPattern(TimeSpan.FromHours(2), TimeSpan.FromHours(24)) });
 				td.Triggers.Add(new MonthlyDOWTrigger { DaysOfWeek = DaysOfTheWeek.AllDays, MonthsOfYear = MonthsOfTheYear.AllMonths, WeeksOfMonth = WhichWeek.FirstWeek, RunOnLastWeekOfMonth = true });
-				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new int[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
+				td.Triggers.Add(new MonthlyTrigger { DaysOfMonth = new[] { 3, 6, 9 }, RunOnLastDayOfMonth = true, MonthsOfYear = MonthsOfTheYear.April });
 				td.Triggers.Add(new WeeklyTrigger(DaysOfTheWeek.Saturday, 2));
 				td.Actions.Add(new ExecAction("notepad.exe"));
 				Task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);

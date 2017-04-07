@@ -66,7 +66,8 @@
     <ManifestCertificateThumbprint>1533A21C3FEA695822A1E91AC6F6BDAE0EEE8826</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TaskSchedulerConfig_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
