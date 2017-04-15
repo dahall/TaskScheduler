@@ -313,8 +313,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 
 	#endregion
 
-	// Interfaces
-	[Guid("148BD527-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity]
+	[ComImport, Guid("148BD527-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity, CoClass(typeof(CTaskScheduler))]
 	internal interface ITaskScheduler
 	{
 		void SetTargetComputer([In, MarshalAs(UnmanagedType.LPWStr)] string Computer);
@@ -334,7 +333,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	internal interface IEnumWorkItems
 	{
 		[PreserveSig()]
-		int Next([In] uint RequestCount, [Out] out IntPtr Names, [Out] out uint Fetched);
+		int Next([In] uint celt, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 0)] out string[] rgpwszNames, [Out] out uint pceltFetched);
 		void Skip([In] uint Count);
 		void Reset();
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -379,7 +378,7 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 	}
 #endif
 
-	[Guid("148BD524-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity]
+	[ComImport, Guid("148BD524-A2AB-11CE-B11F-00AA00530503"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), System.Security.SuppressUnmanagedCodeSecurity, CoClass(typeof(CTask))]
 	internal interface ITask
 	{
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -439,13 +438,12 @@ namespace Microsoft.Win32.TaskScheduler.V1Interop
 		CoTaskMemString GetTriggerString();
 	}
 
-	// Classes
-	[ComImport, Guid("148BD52A-A2AB-11CE-B11F-00AA00530503"), System.Security.SuppressUnmanagedCodeSecurity]
+	[ComImport, Guid("148BD52A-A2AB-11CE-B11F-00AA00530503"), System.Security.SuppressUnmanagedCodeSecurity, ClassInterface(ClassInterfaceType.None)]
 	internal class CTaskScheduler
 	{
 	}
 
-	[ComImport, Guid("148BD520-A2AB-11CE-B11F-00AA00530503"), System.Security.SuppressUnmanagedCodeSecurity]
+	[ComImport, Guid("148BD520-A2AB-11CE-B11F-00AA00530503"), System.Security.SuppressUnmanagedCodeSecurity, ClassInterface(ClassInterfaceType.None)]
 	internal class CTask
 	{
 	}

@@ -44,7 +44,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private static TaskService instance;
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler;
-		internal V2Interop.TaskSchedulerClass v2TaskService;
+		internal V2Interop.ITaskService v2TaskService;
 
 		private bool forceV1;
 		private bool initializing;
@@ -786,7 +786,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 					if (hasV2 && !forceV1)
 					{
-						v2TaskService = new V2Interop.TaskSchedulerClass();
+						v2TaskService = new V2Interop.ITaskService();
 						if (!string.IsNullOrEmpty(targetServer))
 						{
 							// Check to ensure character only server name. (Suggested by bigsan)
@@ -807,7 +807,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 					{
 						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
-						v1TaskScheduler = new V1Interop.CTaskScheduler() as V1Interop.ITaskScheduler;
+						v1TaskScheduler = new V1Interop.ITaskScheduler();
 						if (!string.IsNullOrEmpty(targetServer))
 						{
 							// Check to ensure UNC format for server name. (Suggested by bigsan)
