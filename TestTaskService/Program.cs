@@ -445,7 +445,7 @@ namespace TestTaskService
 
 				var td = ts.NewTask();
 				//td.RegistrationInfo.Description = "some description";
-				td.Triggers.Add(new DailyTrigger());
+				td.Triggers.Add(new MonthlyTrigger());
 				td.Actions.Add("cmd.exe", "-someparameter");
 				//td.Actions.Add(new ComHandlerAction(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), ""));
 
