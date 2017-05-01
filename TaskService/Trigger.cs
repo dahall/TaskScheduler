@@ -1988,7 +1988,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
 		/// </returns>
-		public override bool Equals(Trigger other) => base.Equals(other) && DaysOfMonth == ((MonthlyTrigger)other).DaysOfMonth && MonthsOfYear == ((MonthlyTrigger)other).MonthsOfYear && (v1Trigger == null && RunOnLastDayOfMonth == ((MonthlyTrigger)other).RunOnLastDayOfMonth);
+		public override bool Equals(Trigger other) => base.Equals(other) && ListsEqual(DaysOfMonth, (other as MonthlyTrigger)?.DaysOfMonth) && MonthsOfYear == ((MonthlyTrigger)other).MonthsOfYear && (v1Trigger == null && RunOnLastDayOfMonth == ((MonthlyTrigger)other).RunOnLastDayOfMonth);
+
+		/// <summary>Compares two collections.</summary>
+		/// <typeparam name="T">Item type of collections.</typeparam>
+		/// <param name="left">The first collection.</param>
+		/// <param name="right">The second collection</param>
+		/// <returns><c>true</c> if the collections values are equal; <c>false</c> otherwise.</returns>
+		private static bool ListsEqual<T>(ICollection<T> left, ICollection<T> right) where T : IComparable
+		{
+			if (left == null && right == null) return true;
+			if (left == null || right == null) return false;
+			if (left.Count != right.Count) return false;
+			List<T> l1 = new List<T>(left), l2 = new List<T>(right);
+			l1.Sort(); l2.Sort();
+			for (var i = 0; i < l1.Count; i++)
+				if (l1[i].CompareTo(l2[i]) != 0) return false;
+			return true;
+		}
 
 		/// <summary>
 		/// Converts an array of bit indices into a mask with bits  turned ON at every index
