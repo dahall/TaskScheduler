@@ -1,5 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.AccessControl;
+using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using Microsoft.Win32.TaskScheduler.V1Interop;
+using Microsoft.Win32.TaskScheduler.V2Interop;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -9,8 +17,8 @@ namespace Microsoft.Win32.TaskScheduler
 	[PublicAPI]
 	public sealed class TaskFolder : IDisposable, IComparable<TaskFolder>
 	{
-		private V1Interop.ITaskScheduler v1List;
-		private readonly V2Interop.ITaskFolder v2Folder;
+		private ITaskScheduler v1List;
+		private readonly ITaskFolder v2Folder;
 
 		internal const string rootString = @"\";
 
@@ -20,7 +28,7 @@ namespace Microsoft.Win32.TaskScheduler
 			v1List = svc.v1TaskScheduler;
 		}
 
-		internal TaskFolder([NotNull] TaskService svc, [NotNull] V2Interop.ITaskFolder iFldr)
+		internal TaskFolder([NotNull] TaskService svc, [NotNull] ITaskFolder iFldr)
 		{
 			TaskService = svc;
 			v2Folder = iFldr;
@@ -32,7 +40,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Dispose()
 		{
 			if (v2Folder != null)
-				System.Runtime.InteropServices.Marshal.ReleaseComObject(v2Folder);
+				Marshal.ReleaseComObject(v2Folder);
 			v1List = null;
 		}
 
@@ -43,7 +51,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// A <see cref="System.Collections.Generic.IEnumerator{Task}"/> for all <see cref="Task"/> instances.
 		/// </value>
 		[NotNull, ItemNotNull]
-		public System.Collections.Generic.IEnumerable<Task> AllTasks => EnumerateFolderTasks(this);
+		public IEnumerable<Task> AllTasks => EnumerateFolderTasks(this);
 
 		/// <summary>
 		/// Gets the name that is used to identify the folder that contains a task.
@@ -92,7 +100,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The security descriptor.</value>
 		[Obsolete("This property will be removed in deference to the GetAccessControl, GetSecurityDescriptorSddlForm, SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
-		public System.Security.AccessControl.GenericSecurityDescriptor SecurityDescriptor
+		public GenericSecurityDescriptor SecurityDescriptor
 		{
 #pragma warning disable 0618
 			get { return GetSecurityDescriptor(); }
@@ -145,7 +153,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sd">The security descriptor associated with the folder.</param>
 		/// <returns>A <see cref="TaskFolder"/> instance that represents the new subfolder.</returns>
 		[Obsolete("This method will be removed in deference to the CreateFolder(string, TaskSecurity) method.")]
-		public TaskFolder CreateFolder([NotNull] string subFolderName, System.Security.AccessControl.GenericSecurityDescriptor sd) => CreateFolder(subFolderName, sd == null ? null : sd.GetSddlForm(Task.defaultAccessControlSections));
+		public TaskFolder CreateFolder([NotNull] string subFolderName, GenericSecurityDescriptor sd) => CreateFolder(subFolderName, sd == null ? null : sd.GetSddlForm(Task.defaultAccessControlSections));
 
 		/// <summary>
 		/// Creates a folder for related tasks. Not available to Task Scheduler 1.0.
@@ -173,9 +181,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public TaskFolder CreateFolder([NotNull] string subFolderName, string sddlForm = null, bool exceptionOnExists = true)
 		{
 			if (v2Folder == null) throw new NotV1SupportedException();
-			V2Interop.ITaskFolder ifld = null;
+			ITaskFolder ifld = null;
 			try { ifld = v2Folder.CreateFolder(subFolderName, sddlForm); }
-			catch (System.Runtime.InteropServices.COMException ce)
+			catch (COMException ce)
 			{
 				int serr = ce.ErrorCode & 0x0000FFFF;
 				if (serr == 0xb7) // ERROR_ALREADY_EXISTS
@@ -188,13 +196,13 @@ namespace Microsoft.Win32.TaskScheduler
 						{
 							string sd = ifld.GetSecurityDescriptor((int)Task.defaultSecurityInfosSections);
 							if (string.Compare(sddlForm, sd, StringComparison.OrdinalIgnoreCase) != 0)
-								throw new System.Security.SecurityException("Security descriptor mismatch between specified credentials and credentials on existing folder by same name.");
+								throw new SecurityException("Security descriptor mismatch between specified credentials and credentials on existing folder by same name.");
 						}
 					}
 					catch
 					{
 						if (ifld != null)
-							System.Runtime.InteropServices.Marshal.ReleaseComObject(ifld);
+							Marshal.ReleaseComObject(ifld);
 						throw;
 					}
 				}
@@ -222,7 +230,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				catch (Exception e)
 				{
-					if (!(e is System.IO.FileNotFoundException || e is System.IO.DirectoryNotFoundException) || exceptionOnNotExists)
+					if (!(e is FileNotFoundException || e is DirectoryNotFoundException) || exceptionOnNotExists)
 						throw;
 				}
 			}
@@ -230,10 +238,11 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new NotV1SupportedException();
 		}
 
-		/// <summary>
-		/// Deletes a task from the folder.
-		/// </summary>
-		/// <param name="name">The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+		/// <summary>Deletes a task from the folder.</summary>
+		/// <param name="name">
+		/// The name of the task that is specified when the task was registered. The '.' character cannot be used to specify the current task folder and the '..'
+		/// characters cannot be used to specify the parent task folder in the path.
+		/// </param>
 		/// <param name="exceptionOnNotExists">Set this value to false to avoid having an exception called if the task does not exist.</param>
 		public void DeleteTask([NotNull] string name, bool exceptionOnNotExists = true)
 		{
@@ -248,20 +257,37 @@ namespace Microsoft.Win32.TaskScheduler
 					v1List.Delete(name);
 				}
 			}
-			catch (System.IO.FileNotFoundException)
+			catch (FileNotFoundException)
 			{
 				if (exceptionOnNotExists)
 					throw;
 			}
 		}
 
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-		/// <returns>
-		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-		/// </returns>
+		/// <summary>Returns an enumerable collection of folders that matches a specified filter and recursion option.</summary>
+		/// <param name="filter">An optional predicate used to filter the returned <see cref="TaskFolder"/> instances.</param>
+		/// <returns>An enumerable collection of folders that matches <paramref name="filter"/>.</returns>
+		[NotNull, ItemNotNull]
+		public IEnumerable<TaskFolder> EnumerateFolders(Predicate<TaskFolder> filter = null)
+		{
+			foreach (var fld in SubFolders)
+			{
+				if (filter != null && filter(fld))
+					yield return fld;
+			}
+
+		}
+
+		/// <summary>Returns an enumerable collection of tasks that matches a specified filter and recursion option.</summary>
+		/// <param name="filter">An optional predicate used to filter the returned <see cref="Task"/> instances.</param>
+		/// <param name="recurse">Specifies whether the enumeration should include tasks in any subfolders.</param>
+		/// <returns>An enumerable collection of directories that matches <paramref name="filter"/> and <paramref name="recurse"/>.</returns>
+		[NotNull, ItemNotNull]
+		public IEnumerable<Task> EnumerateTasks(Predicate<Task> filter = null, bool recurse = false) => EnumerateFolderTasks(this, filter, recurse);
+
+		/// <summary>Determines whether the specified <see cref="System.Object"/>, is equal to this instance.</summary>
+		/// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+		/// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
 		public override bool Equals(object obj)
 		{
 			var folder = obj as TaskFolder;
@@ -271,35 +297,33 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the current <see cref="TaskFolder"/> object.
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task described by the
+		/// current <see cref="TaskFolder"/> object.
 		/// </summary>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
 		[NotNull]
 		public TaskSecurity GetAccessControl() => GetAccessControl(Task.defaultAccessControlSections);
 
 		/// <summary>
-		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task folder described by the current <see cref="TaskFolder"/> object.
+		/// Gets a <see cref="TaskSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the task folder described by
+		/// the current <see cref="TaskFolder"/> object.
 		/// </summary>
-		/// <param name="includeSections">One of the <see cref="System.Security.AccessControl.AccessControlSections"/> values that specifies which group of access control entries to retrieve.</param>
+		/// <param name="includeSections">
+		/// One of the <see cref="System.Security.AccessControl.AccessControlSections"/> values that specifies which group of access control entries to retrieve.
+		/// </param>
 		/// <returns>A <see cref="TaskSecurity"/> object that encapsulates the access control rules for the current folder.</returns>
 		[NotNull]
-		public TaskSecurity GetAccessControl(System.Security.AccessControl.AccessControlSections includeSections) => new TaskSecurity(this, includeSections);
+		public TaskSecurity GetAccessControl(AccessControlSections includeSections) => new TaskSecurity(this, includeSections);
 
-		/// <summary>
-		/// Returns a hash code for this instance.
-		/// </summary>
-		/// <returns>
-		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-		/// </returns>
+		/// <summary>Returns a hash code for this instance.</summary>
+		/// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
 		public override int GetHashCode() => new { A = Path, B = TaskService.TargetServer, C = GetSecurityDescriptorSddlForm() }.GetHashCode();
 
-		/// <summary>
-		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
-		/// </summary>
+		/// <summary>Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.</summary>
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
 		[Obsolete("This method will be removed in deference to the GetAccessControl and GetSecurityDescriptorSddlForm methods.")]
-		public System.Security.AccessControl.GenericSecurityDescriptor GetSecurityDescriptor(System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections) => new System.Security.AccessControl.RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
+		public GenericSecurityDescriptor GetSecurityDescriptor(SecurityInfos includeSections = Task.defaultSecurityInfosSections) => new RawSecurityDescriptor(GetSecurityDescriptorSddlForm(includeSections));
 
 		/// <summary>
 		/// Gets the security descriptor for the folder. Not available to Task Scheduler 1.0.
@@ -307,7 +331,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the folder.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections)
+		public string GetSecurityDescriptorSddlForm(SecurityInfos includeSections = Task.defaultSecurityInfosSections)
 		{
 			if (v2Folder != null)
 				return v2Folder.GetSecurityDescriptor((int)includeSections);
@@ -320,7 +344,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="filter">The optional name filter expression.</param>
 		/// <returns>Collection of all matching tasks.</returns>
 		[NotNull, ItemNotNull]
-		public TaskCollection GetTasks(System.Text.RegularExpressions.Regex filter = null)
+		public TaskCollection GetTasks(Regex filter = null)
 		{
 			if (v2Folder != null)
 				return new TaskCollection(this, v2Folder.GetTasks(1), filter);
@@ -334,7 +358,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="xmlFile">The file containing the XML-formatted definition of the task.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
-		public Task ImportTask(string path, [NotNull] string xmlFile) => RegisterTask(path, System.IO.File.ReadAllText(xmlFile));
+		public Task ImportTask(string path, [NotNull] string xmlFile) => RegisterTask(path, File.ReadAllText(xmlFile));
 
 		/// <summary>
 		/// Registers (creates) a new task in the folder using XML to define the task.
@@ -428,14 +452,14 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			// Check for V1 invalid task names
-			string invChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
-			if (System.Text.RegularExpressions.Regex.IsMatch(path, @"[" + invChars + @"]"))
+			string invChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+			if (Regex.IsMatch(path, @"[" + invChars + @"]"))
 				throw new ArgumentOutOfRangeException(nameof(path), @"Task names may not include any characters which are invalid for file names.");
-			if (System.Text.RegularExpressions.Regex.IsMatch(path, @"\.[^" + invChars + @"]{0,3}\z"))
+			if (Regex.IsMatch(path, @"\.[^" + invChars + @"]{0,3}\z"))
 				throw new ArgumentOutOfRangeException(nameof(path), @"Task names ending with a period followed by three or fewer characters cannot be retrieved due to a bug in the native library.");
 
 			// Adds ability to set a password for a V1 task. Provided by Arcao.
-			V1Interop.TaskFlags flags = definition.v1Task.GetFlags();
+			TaskFlags flags = definition.v1Task.GetFlags();
 			if (logonType == TaskLogonType.InteractiveTokenOrPassword && string.IsNullOrEmpty(password))
 				logonType = TaskLogonType.InteractiveToken;
 			switch (logonType)
@@ -445,20 +469,20 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskLogonType.None:
 					throw new NotV1SupportedException("This LogonType is not supported on Task Scheduler 1.0.");
 				case TaskLogonType.InteractiveToken:
-					flags |= (V1Interop.TaskFlags.RunOnlyIfLoggedOn | V1Interop.TaskFlags.Interactive);
+					flags |= (TaskFlags.RunOnlyIfLoggedOn | TaskFlags.Interactive);
 					definition.v1Task.SetAccountInformation(user.Name, IntPtr.Zero);
 					break;
 				case TaskLogonType.ServiceAccount:
-					flags &= ~(V1Interop.TaskFlags.Interactive | V1Interop.TaskFlags.RunOnlyIfLoggedOn);
+					flags &= ~(TaskFlags.Interactive | TaskFlags.RunOnlyIfLoggedOn);
 					definition.v1Task.SetAccountInformation((String.IsNullOrEmpty(userId) || user.IsSystem) ? String.Empty : user.Name, IntPtr.Zero);
 					break;
 				case TaskLogonType.InteractiveTokenOrPassword:
-					flags |= V1Interop.TaskFlags.Interactive;
-					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
+					flags |= TaskFlags.Interactive;
+					using (CoTaskMemString cpwd = new CoTaskMemString(password))
 						definition.v1Task.SetAccountInformation(user.Name, cpwd.DangerousGetHandle());
 					break;
 				case TaskLogonType.Password:
-					using (V1Interop.CoTaskMemString cpwd = new V1Interop.CoTaskMemString(password))
+					using (CoTaskMemString cpwd = new CoTaskMemString(password))
 						definition.v1Task.SetAccountInformation(user.Name, cpwd.DangerousGetHandle());
 					break;
 				default:
@@ -500,7 +524,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sd">The security descriptor for the folder.</param>
 		/// <param name="includeSections">Section(s) of the security descriptor to set.</param>
 		[Obsolete("This method will be removed in deference to the SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
-		public void SetSecurityDescriptor([NotNull] System.Security.AccessControl.GenericSecurityDescriptor sd, System.Security.AccessControl.SecurityInfos includeSections = Task.defaultSecurityInfosSections) { SetSecurityDescriptorSddlForm(sd.GetSddlForm((System.Security.AccessControl.AccessControlSections)includeSections)); }
+		public void SetSecurityDescriptor([NotNull] GenericSecurityDescriptor sd, SecurityInfos includeSections = Task.defaultSecurityInfosSections) { SetSecurityDescriptorSddlForm(sd.GetSddlForm((AccessControlSections)includeSections)); }
 
 		/// <summary>
 		/// Sets the security descriptor for the folder. Not available to Task Scheduler 1.0.
@@ -528,21 +552,20 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Enumerates the tasks in the specified folder and its child folders.
 		/// </summary>
 		/// <param name="folder">The folder in which to start enumeration.</param>
+		/// <param name="filter">An optional filter to apply to the task list.</param>
+		/// <param name="recurse"><c>true</c> if subfolders are to be queried recursively.</param>
 		/// <returns>A <see cref="System.Collections.Generic.IEnumerator{Task}"/> that can be used to iterate through the tasks.</returns>
-		private static System.Collections.Generic.IEnumerable<Task> EnumerateFolderTasks(TaskFolder folder)
+		internal static IEnumerable<Task> EnumerateFolderTasks(TaskFolder folder, Predicate<Task> filter = null, bool recurse = true)
 		{
 			foreach (var task in folder.Tasks)
-			{
-				yield return task;
-			}
+				if (filter == null || filter(task))
+					yield return task;
+
+			if (!recurse) yield break;
 
 			foreach (var sfld in folder.SubFolders)
-			{
-				foreach (var task in EnumerateFolderTasks(sfld))
-				{
+				foreach (var task in EnumerateFolderTasks(sfld, filter))
 					yield return task;
-				}
-			}
 		}
 	}
 }
