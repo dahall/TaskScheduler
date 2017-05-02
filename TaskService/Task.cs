@@ -2761,8 +2761,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-                var sver = v2RegInfo != null ? v2RegInfo.Version : v1Task.GetDataItem(nameof(Version));
-                if (sver != null) try { return new Version(sver); } catch { }
+				var sver = v2RegInfo != null ? v2RegInfo.Version : v1Task.GetDataItem(nameof(Version));
+				if (sver != null) try { return new Version(sver); } catch { }
 				return new Version(1, 0);
 			}
 			set
@@ -2782,7 +2782,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-			    return v2RegInfo != null ? v2RegInfo.XmlText : XmlSerializationHelper.WriteObjectToXmlText(this);
+				return v2RegInfo != null ? v2RegInfo.XmlText : XmlSerializationHelper.WriteObjectToXmlText(this);
 			}
 			set
 			{
@@ -3114,7 +3114,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[NotNull]
 		public NetworkSettings NetworkSettings => networkSettings ?? (networkSettings = new NetworkSettings(v2Settings?.NetworkSettings));
 
-	    /// <summary>
+		/// <summary>
 		/// Gets or sets the priority level of the task.
 		/// </summary>
 		/// <value>

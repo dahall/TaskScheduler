@@ -117,7 +117,7 @@ namespace TestTaskService
 		{
 			if (provider == null)
 			{
-				Dictionary<string, string> providerOptions = new Dictionary<string, string> { {"CompilerVersion", "v4.0"} };
+				Dictionary<string, string> providerOptions = new Dictionary<string, string>();// { {"CompilerVersion", "v4"} };
 				provider = new CSharpCodeProvider(providerOptions);
 				compilerParams = new CompilerParameters(new string[] { "System.dll", "System.Xml.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
 			}

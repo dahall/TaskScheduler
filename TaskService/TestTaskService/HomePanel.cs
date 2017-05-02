@@ -42,6 +42,7 @@ namespace TestTaskService
 			base.OnVisibleChanged(e);
 			if (!Visible)
 			{
+				System.Diagnostics.Debug.WriteLine("Leaving HomePanel and terminating tasks.");
 				object[] array;
 				lock (tasks.SyncRoot)
 				{
@@ -96,6 +97,7 @@ namespace TestTaskService
 		{
 			Exception e = null;
 			List<ListViewItem> list = new List<ListViewItem>();
+			bool cancelled = false;
 
 			if (!IsTaskCanceled(asyncOp.UserSuppliedState))
 			{
@@ -103,10 +105,14 @@ namespace TestTaskService
 				{
 					using (TaskService lts = new TaskService(ts.TargetServer, ts.UserName, ts.UserAccountDomain, ts.UserPassword, ts.HighestSupportedVersion.Minor == 1))
 					{
-						foreach (var t in lts.FindAllTasks(x => x.IsActive))
+						foreach (var t in lts.RootFolder.EnumerateTasks(x => x.IsActive, true))
 						{
 							if (IsTaskCanceled(asyncOp.UserSuppliedState))
+							{
+								System.Diagnostics.Debug.WriteLine("HomePanel.ActiveTasks cancelled.");
+								cancelled = true;
 								break;
+							}
 							try
 							{
 								DateTime next = t.NextRunTime;
@@ -117,7 +123,8 @@ namespace TestTaskService
 								System.Diagnostics.Debug.WriteLine($"Unable to insert task '{t.Path}' into active task list.");
 							}
 						}
-						list.Sort(ActiveTaskSorter);
+						if (!cancelled)
+							list.Sort(ActiveTaskSorter);
 					}
 				}
 				catch (Exception ex)
@@ -126,7 +133,7 @@ namespace TestTaskService
 				}
 			}
 
-			ActiveTasksSignalCompletion(list.ToArray(), e, IsTaskCanceled(asyncOp.UserSuppliedState), asyncOp);
+			ActiveTasksSignalCompletion(list.ToArray(), e, cancelled, asyncOp);
 		}
 
 		private void ActiveTasksGetAsync(object taskId)

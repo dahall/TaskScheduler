@@ -383,6 +383,9 @@ namespace Microsoft.Win32.TaskScheduler
 				taskMaintenanceExclusiveCheck.Checked = td.Settings.MaintenanceSettings.Exclusive;
 				UpdateUnifiedSchedulingEngineControls();
 
+				// Set History tab
+				taskHistoryControl1.Task = null;
+
 				onAssignment = false;
 			}
 		}

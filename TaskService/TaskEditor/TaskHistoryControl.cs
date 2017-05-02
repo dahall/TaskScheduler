@@ -81,8 +81,7 @@ namespace Microsoft.Win32.TaskScheduler
 				task = value;
 				historyDetailView.ActiveTab = EventViewerControl.EventViewerActiveTab.General;
 				historySplitContainer.Panel2Collapsed = false;
-				if (value != null)
-					vlog = CreateLogInstance();
+				vlog = value != null ? CreateLogInstance() : null;
 				RefreshHistory();
 			}
 		}
@@ -104,12 +103,20 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			historyListView.Cursor = Cursors.WaitCursor;
 			historyListView.VirtualListSize = 0;
+			historyListView.Items.Clear();
 			historyListView.Refresh();
 			historyHeader_Refresh(-1);
 			historyDetailView.TaskEvent = null;
 			selectedIndex = -1;
 			vcache.Clear();
-			historyBackgroundWorker.RunWorkerAsync();
+			if (task != null)
+			{
+				if (historyBackgroundWorker.IsBusy)
+					historyBackgroundWorker.CancelAsync();
+				while (historyBackgroundWorker.IsBusy)
+					Application.DoEvents();
+				historyBackgroundWorker.RunWorkerAsync();
+			}
 		}
 
 		/// <summary>
@@ -128,6 +135,13 @@ namespace Microsoft.Win32.TaskScheduler
 				var tsi = new ToolStripMenuItem(c[i].Text, null, columnContextMenuColumnHeaderItem_onClick) { Checked = c[i].Width > 0, Tag = c[i].Index };
 				columnContextMenu.Items.Insert(++insIdx, tsi);
 			}
+		}
+
+		protected override void OnLostFocus(EventArgs e)
+		{
+			if (!historyBackgroundWorker.CancellationPending)
+				historyBackgroundWorker.CancelAsync();
+			base.OnLostFocus(e);
 		}
 
 		private ListViewItem BuildItem(TaskEvent item)
@@ -201,6 +215,11 @@ namespace Microsoft.Win32.TaskScheduler
 					long i = 0, max = MaxQueryCount == -1 ? log.Count : MaxQueryCount;
 					foreach (var te in log)
 					{
+						if (historyBackgroundWorker.CancellationPending)
+						{
+							e.Cancel = true;
+							break;
+						}
 						if (++i > max)
 							break;
 						list.Add(BuildItem(te));
@@ -223,41 +242,43 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void historyBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			if (e.Cancelled || !IsHandleCreated)
-				return;
-			historyListView.BeginUpdate();
-			if (e.Error != null || e.Result is Exception)
+			if (!e.Cancelled && IsHandleCreated)
 			{
-				historyHeader_Refresh(0L);
-				var exc = (e.Result as Exception) ?? e.Error;
-				if (exc != null && ShowErrors)
-					MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, exc.Message), EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			else if (e.Result == null)
-			{
-				historyListView.Items.Clear();
-				historyListView.VirtualMode = true;
-				long vlogCount = vlog.Count;
-				historyListView.VirtualListSize = (int)Math.Min(Int32.MaxValue, vlogCount);
-				historyHeader_Refresh(vlogCount);
-				vcache = new SparseArray<ListViewItem>();
-				vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending);
-			}
-			else
-			{
-				historyListView.VirtualMode = false;
-				vevEnum = null;
-				var list = e.Result as List<ListViewItem>;
-				vcache = list;
-				historyListView.Items.Clear();
-				historyListView.Items.AddRange(list.ToArray());
-				historyHeader_Refresh(historyListView.Items.Count);
-				if (lvwColumnSorter.Group)
-					SetupGroups();
+				historyListView.BeginUpdate();
+				if (e.Error != null || e.Result is Exception)
+				{
+					historyHeader_Refresh(0L);
+					var exc = (e.Result as Exception) ?? e.Error;
+					if (exc != null && ShowErrors)
+						MessageBox.Show(this, string.Format(EditorProperties.Resources.Error_CannotRetrieveHistory, exc.Message),
+							EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				else if (e.Result == null)
+				{
+					historyListView.Items.Clear();
+					historyListView.VirtualMode = true;
+					long vlogCount = vlog.Count;
+					historyListView.VirtualListSize = (int) Math.Min(Int32.MaxValue, vlogCount);
+					historyHeader_Refresh(vlogCount);
+					vcache = new SparseArray<ListViewItem>();
+					vevEnum = vlog.GetEnumerator(lvwColumnSorter.Order == SortOrder.Ascending);
+				}
 				else
-					historyListView.ShowGroups = false;
+				{
+					historyListView.VirtualMode = false;
+					vevEnum = null;
+					var list = e.Result as List<ListViewItem>;
+					vcache = list;
+					historyListView.Items.Clear();
+					historyListView.Items.AddRange(list.ToArray());
+					historyHeader_Refresh(historyListView.Items.Count);
+					if (lvwColumnSorter.Group)
+						SetupGroups();
+					else
+						historyListView.ShowGroups = false;
+				}
+				historyListView.EndUpdate();
 			}
-			historyListView.EndUpdate();
 			historyListView.Cursor = Cursors.Default;
 			historyListView.Focus();
 		}
