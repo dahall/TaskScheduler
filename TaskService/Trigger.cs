@@ -185,8 +185,8 @@ namespace Microsoft.Win32.TaskScheduler
 			ttype = triggerType;
 
 			v1TriggerData.TriggerSize = (ushort)Marshal.SizeOf(typeof(V1Interop.TaskTrigger));
-			try { v1TriggerData.Type = ConvertToV1TriggerType(ttype); }
-			catch { }
+			if (ttype != TaskTriggerType.Registration && ttype != TaskTriggerType.Event && ttype != TaskTriggerType.SessionStateChange)
+				v1TriggerData.Type = ConvertToV1TriggerType(ttype);
 
 			if (this is ICalendarTrigger)
 				StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
