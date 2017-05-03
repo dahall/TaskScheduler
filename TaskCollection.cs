@@ -103,7 +103,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>true if next task found, false if no more tasks.</returns>
 			public bool MoveNext()
 			{
-				string[] names = null;
+				IntPtr names = IntPtr.Zero;
 				bool valid = false;
 				do
 				{
@@ -112,16 +112,18 @@ namespace Microsoft.Win32.TaskScheduler
 					try
 					{
 						wienum?.Next(1, out names, out uFetched);
-						if (uFetched != 1 || names == null)
+						if (uFetched != 1)
 							break;
-						curItem = names[0];
+						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
+							curItem = name.ToString();
 						if (curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
 							curItem = curItem.Remove(curItem.Length - 4);
 					}
 					catch { }
+					finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
 
 					// If name doesn't match filter, look for next item
-					if (filter != null && curItem != null)
+					if (filter != null)
 					{
 						if (!filter.IsMatch(curItem))
 							continue;
@@ -133,7 +135,7 @@ namespace Microsoft.Win32.TaskScheduler
 					finally { itask = null; }
 				} while (!valid);
 
-				return curItem != null;
+				return (curItem != null);
 			}
 
 			/// <summary>

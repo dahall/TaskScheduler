@@ -558,7 +558,7 @@ namespace Microsoft.Win32.TaskScheduler
 			Context = reader.GetAttribute("Context");
 			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
 			{
-				Action a = Action.CreateAction(Action.TryParse(reader.LocalName, TaskActionType.Execute));
+				Action a = Action.CreateAction(Action.TryParse(reader.LocalName == "Exec" ? "Execute" : reader.LocalName, TaskActionType.Execute));
 				XmlSerializationHelper.ReadObject(reader, a);
 				this.Add(a);
 			}

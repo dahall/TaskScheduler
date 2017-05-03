@@ -2099,6 +2099,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TaskPrincipal : IDisposable, IXmlSerializable
 	{
 		private const string localSystemAcct = "SYSTEM";
+		private string v1CachedAcctInfo;
 		private ITask v1Task;
 		private IPrincipal v2Principal;
 		private IPrincipal2 v2Principal2;
@@ -2265,12 +2266,16 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Principal != null)
 					return v2Principal.UserId;
-				try
+				if (v1CachedAcctInfo == null)
 				{
-					string acct = v1Task.GetAccountInformation();
-					return string.IsNullOrEmpty(acct) ? localSystemAcct : acct;
+					try
+					{
+						string acct = v1Task.GetAccountInformation();
+						v1CachedAcctInfo = string.IsNullOrEmpty(acct) ? localSystemAcct : acct;
+					}
+					catch { v1CachedAcctInfo = string.Empty; }
 				}
-				catch { return null; }
+				return v1CachedAcctInfo == string.Empty ? null : v1CachedAcctInfo;
 			}
 			set
 			{
@@ -2291,6 +2296,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (value.Equals(localSystemAcct, StringComparison.CurrentCultureIgnoreCase))
 						value = "";
 					v1Task.SetAccountInformation(value, IntPtr.Zero);
+					v1CachedAcctInfo = null;
 				}
 			}
 		}
@@ -2756,7 +2762,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the version number of the task.
 		/// </summary>
-		[DefaultValue(typeof(Version), "1.0")]
+		[DefaultValueEx(typeof(Version), "1.0")]
 		public Version Version
 		{
 			get
@@ -2848,6 +2854,26 @@ namespace Microsoft.Win32.TaskScheduler
 				return true;
 			}
 			return false;
+		}
+	}
+
+	internal class DefaultValueExAttribute : DefaultValueAttribute
+	{
+		public DefaultValueExAttribute(Type type, string value) : base(null)
+		{
+			try
+			{
+				if (type == typeof(Version))
+				{
+					SetValue(new Version(value));
+					return;
+				}
+				SetValue(TypeDescriptor.GetConverter(type).ConvertFromInvariantString(value));
+			}
+			catch
+			{
+				Debug.Fail("Default value attribute of type " + type.FullName + " threw converting from the string '" + value + "'.");
+			}
 		}
 	}
 
@@ -3032,7 +3058,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <remarks>
 		/// If a task is started on demand, the ExecutionTimeLimit setting is bypassed. Therefore, a task that is started on demand will not be terminated if it exceeds the ExecutionTimeLimit.
 		/// </remarks>
-		[DefaultValue(typeof(TimeSpan), "72:00:00")]
+		[DefaultValue(typeof(TimeSpan), "3")]
 		public TimeSpan ExecutionTimeLimit
 		{
 			get

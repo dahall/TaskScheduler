@@ -237,7 +237,8 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static T TryParse<T>(string val, T defaultVal)
 		{
 			T ret = defaultVal;
-			try { ret = (T)Enum.Parse(typeof(T), val); } catch { }
+			if (val != null)
+				try { ret = (T)Enum.Parse(typeof(T), val); } catch { }
 			return ret;
 		}
 

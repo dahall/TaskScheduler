@@ -38,7 +38,8 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		private static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
 		private static readonly Version v1Ver = new Version(1, 1);
-		private static Guid ITaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+		private static Guid CLSID_Ctask = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
+		private static Guid IID_ITask = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
 		private static TaskService instance;
@@ -553,9 +554,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2TaskService != null)
 				return new TaskDefinition(v2TaskService.NewTask(0));
-			Guid CTaskGuid = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
-			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, CTaskGuid, ITaskGuid), v1Name);
+			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, CLSID_Ctask, IID_ITask), v1Name);
 		}
 
 		/// <summary>
@@ -721,7 +721,7 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentNullException(nameof(name));
 			try
 			{
-				return iSvc.Activate(name, ITaskGuid);
+				return iSvc.Activate(name, IID_ITask);
 			}
 			catch (UnauthorizedAccessException)
 			{
@@ -730,7 +730,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			catch (ArgumentException)
 			{
-				return iSvc.Activate(name + ".job", ITaskGuid);
+				return iSvc.Activate(name + ".job", IID_ITask);
 			}
 			catch (FileNotFoundException)
 			{
