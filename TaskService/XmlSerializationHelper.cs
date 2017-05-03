@@ -28,14 +28,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static bool GetPropertyValue(object obj, [NotNull] string property, ref object outVal)
 		{
-			if (obj != null)
+			PropertyInfo pi = obj?.GetType().GetProperty(property);
+			if (pi != null)
 			{
-				PropertyInfo pi = obj.GetType().GetProperty(property);
-				if (pi != null)
-				{
-					outVal = pi.GetValue(obj, null);
-					return true;
-				}
+				outVal = pi.GetValue(obj, null);
+				return true;
 			}
 			return false;
 		}
@@ -70,25 +67,23 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 				}
 			}
-			else
+
+			// Enumerate each public property
+			PropertyInfo[] props = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+			foreach (var pi in props)
 			{
-				// Enumerate each public property
-				PropertyInfo[] props = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
-				foreach (var pi in props)
+				if (!Attribute.IsDefined(pi, typeof(XmlIgnoreAttribute), false))
 				{
-					if (!Attribute.IsDefined(pi, typeof(XmlIgnoreAttribute), false))
+					object value = pi.GetValue(obj, null);
+					if (!Equals(value, GetDefaultValue(pi)))
 					{
-						object value = pi.GetValue(obj, null);
-						if (!object.Equals(value, GetDefaultValue(pi)))
+						if (!IsStandardType(pi.PropertyType))
 						{
-							if (!IsStandardType(pi.PropertyType))
-							{
-								if (HasMembers(value))
-									return true;
-							}
-							else
+							if (HasMembers(value))
 								return true;
 						}
+						else
+							return true;
 					}
 				}
 			}
