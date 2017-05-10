@@ -155,10 +155,10 @@
     <value>210, 19</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Verbindung vom Remotecomputer</value>
+    <value>Verbindung vom remote Computer</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Benutzer änder...</value>
+    <value>Benutzer ändern...</value>
   </data>
   <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 15</value>
@@ -257,7 +257,7 @@
     <value>115, 19</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Widerholen jede:</value>
+    <value>Wiederholen jede:</value>
   </data>
   <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 19</value>
@@ -275,7 +275,7 @@
     <value>Neuer Trigger</value>
   </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt;Aktuelle benutzer&gt;</value>
+    <value>&lt;Aktuelle Benutzer&gt;</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
     <value>Anfang:</value>

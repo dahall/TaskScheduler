@@ -150,10 +150,10 @@
     <value>Nach einem Zeitplan</value>
   </data>
   <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>Bei Verbingung einer Bentzersitzung</value>
+    <value>Bei Verbindung einer Benutzersitzung</value>
   </data>
   <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
-    <value>Bei Trennung von einer Benutzersitzung</value>
+    <value>Bei Trennung einer Benutzersitzung</value>
   </data>
   <data name="TriggerTypeWorkstationLock" xml:space="preserve">
     <value>Bei Arbeitsstationssperre</value>
@@ -175,16 +175,16 @@
     <value>Ungültiger Ereignis-Trigger</value>
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value>Zumindest muss ein Protokoll ausgewählt werden.</value>
+    <value>Es muss mindestens ein Protokoll ausgewählt werden.</value>
   </data>
   <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value>Es muss mindestens einen Monat, eine Woche, und einen Wochentag ausgewählt werden.</value>
+    <value>Es muss mindestens ein Monat, eine Woche, und einen Wochentag ausgewählt werden.</value>
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
     <value>Ungültiger monatlicher Trigger</value>
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value>Es muss mindestens einen Monat und einen Tag ausgewählt werden.</value>
+    <value>Es muss mindestens ein Monat und ein Tag ausgewählt werden.</value>
   </data>
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
     <value>Diese COM-Klasse unterstützt die gewünschte Schnittstelle nicht.</value>
@@ -199,16 +199,16 @@
     <value>Aufgabenplanner</value>
   </data>
   <data name="CredentialPromptMessage" xml:space="preserve">
-    <value>Geben Sie Informationen zum Benutzerkonto für die Auführung dieser Aufgabe.</value>
+    <value>Geben Sie Informationen zum Benutzerkonto für die Auführung dieser Aufgabe an.</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
-    <value>Ein gültiges Kennwort für das angegebene Konto war nicht vorgesehen.</value>
+    <value>Ein gültiges Kennwort für das angegebene Konto wurde nicht angegeben.</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
     <value>Es muss mindestens eine Aktion zu dieser Aufgabe zugeordnet sein.</value>
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value>Aufgabenlautzeiten ({0})</value>
+    <value>Aufgabenlaufzeiten ({0})</value>
   </data>
   <data name="LastResultSuccessful" xml:space="preserve">
     <value>Die Operation wurde erfolgreich abgeschlossen. (0x0)</value>
@@ -245,19 +245,19 @@
     <value>Sofort</value>
   </data>
   <data name="TimeSpanIndefinitely" xml:space="preserve">
-    <value>Sofort</value>
+    <value>Unbegrenzt</value>
   </data>
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
-    <value>Taskverlauf kann nicht abgeruft werden. Fehler: {0}</value>
+    <value>Taskverlauf kann nicht abgerufen werden. Fehler: {0}</value>
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
-    <value>Ausführen einer Aufgabe unter einer Gruppe-Benutzerkonto wird nur unter Windows Vista™ oder höher unterstützt. Um eine Aufgabe im Rahmen einer Gruppenkonto ausführen, müssen Sie diese Aufgabe zu einem Windows Vista™ Task umwandeln.</value>
+    <value>Ausführen einer Aufgabe unter einer Gruppe-Benutzerkonto wird nur unter Windows Vista™ oder höher unterstützt. Um eine Aufgabe im Rahmen eines Gruppenkontos ausführen, müssen Sie diese Aufgabe zu einem Windows Vista™ Task umwandeln.</value>
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
-    <value>Sendet eine E-Mail mit vorgesorget Informationen.</value>
+    <value>Sendet eine E-Mail mit den angegebenen Informationen.</value>
   </data>
   <data name="WizActionSubtextExecute" xml:space="preserve">
-    <value>Führt eine Befehlszeile-Operation.</value>
+    <value>Führt eine Befehlszeilen-Operation aus.</value>
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
     <value>Zeigt eine Meldung, wenn eine Aufgabe aktiviert ist.</value>
@@ -272,7 +272,7 @@
     <value>Meldung anzeigen</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value>Startet eine Aufgabe auf einer täglichen Zeitplan. Zum Beispiel beginnt die Aufgabe zu einer bestimmten Zeit täglich, jeden zweiten Tag, jeden dritten Tag, und so weiter.</value>
+    <value>Startet eine Aufgabe auf Basis eines täglichen Zeitplans. Zum Beispiel beginnt die Aufgabe zu einer bestimmten Zeit täglich, jeden zweiten Tag, jeden dritten Tag, und so weiter.</value>
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Täglich</value>
@@ -284,7 +284,7 @@
     <value>Falls ein bestimmtes Ereignis protokoliert wird</value>
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value>Startet eine Aufgabe auf einem monatlichen Zeitplan. Zum Beispiel beginnt die Aufgabe an bestimmten Tagen bestimmten Monaten.</value>
+    <value>Startet eine Aufgabe auf Basis eines monatlichen Zeitplans. Zum Beispiel beginnt die Aufgabe an bestimmten Tagen bestimmten Monaten.</value>
   </data>
   <data name="WizTriggerTextMonthly" xml:space="preserve">
     <value>Monatlich</value>
@@ -296,7 +296,7 @@
     <value>Einmal</value>
   </data>
   <data name="WizTriggerSubtextWeekly" xml:space="preserve">
-    <value>Startet eine Aufgabe auf einem wöchentlichen Zeitplan. Zum Beispiel beginnt die Aufgabe um 08:00 Uhr an einem bestimmten Tag der Woche jede Woche oder jede zweite Woche.</value>
+    <value>Startet eine Aufgabe auf Basis eines wöchentlichen Zeitplans. Zum Beispiel beginnt die Aufgabe um 08:00 Uhr an einem bestimmten Tag der Woche jede Woche oder jede zweite Woche.</value>
   </data>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
     <value>Wöchentlich</value>
@@ -311,7 +311,7 @@ Trigger: {2}
 Aktion: {3}</value>
   </data>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
-    <value>Die Wiederholung-Intervallwert muss kleiner oder gleich als die Dauer der Wiederholungswert.</value>
+    <value>Der Wert für das Wiederholunsinterval muss kleiner oder gleich dem Wert der Wiederholunsdauer sein.</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
     <value>AT service|Windows Server™ 2003, Windows® XP, or Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
@@ -351,7 +351,7 @@ Aktion: {3}</value>
     <value>Wenn der Prozess SID-Typ auf "eingeschränkt" auf der Registerkarte "Zugänge"  eingestellt ist, muss das Benutzerkonto auf der Registerkarte "Allgemein" entweder "NETZWERKDIENST" oder "LOCALER DIENST" sein. Sie müssen entweder die SID-Typ oder den Benutzer zu einer der gültigen Konten ändern.</value>
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
-    <value>Das Festlegen dieser Eigenschaft wird eine Reihe von anderen Eigenschaften deaktivieren. Würden Sie gerne noch fortfahren?</value>
+    <value>Das Festlegen dieser Eigenschaft wird eine Reihe von anderen Eigenschaften deaktivieren. Möchten Sie dennoch fortfahren?</value>
   </data>
   <data name="ActionTypeComHandler" xml:space="preserve">
     <value>Benutzerdefinierter Handler</value>
@@ -366,13 +366,13 @@ Aktion: {3}</value>
     <value>Meldung anzeigen</value>
   </data>
   <data name="TaskInstancesIgnoreNew" xml:space="preserve">
-    <value>Eine neue Instanz nicht ausführen</value>
+    <value>Neue Instanz nicht ausführen</value>
   </data>
   <data name="TaskInstancesParallel" xml:space="preserve">
-    <value>Eine neue Instanz parallel ausführen</value>
+    <value>Neue Instanz parallel ausführen</value>
   </data>
   <data name="TaskInstancesQueue" xml:space="preserve">
-    <value>Eine neue Instanz einreihen</value>
+    <value>Neue Instanz einreihen</value>
   </data>
   <data name="TaskInstancesStopExisting" xml:space="preserve">
     <value>Die vorhandene Instanz stoppen</value>
@@ -502,10 +502,10 @@ Aktion: {3}</value>
     <value>Abgebrochen</value>
   </data>
   <data name="TriggerTypeRemoteConnect" xml:space="preserve">
-    <value>Bei Verbindung vom Remotecomputer</value>
+    <value>Bei Verbindung vom Remote Computer</value>
   </data>
   <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
-    <value>Bei Trennung vom Remotecomputer</value>
+    <value>Bei Trennung vom Remote Computer</value>
   </data>
   <data name="LoadingPrompt" xml:space="preserve">
     <value>Wird geladen...</value>
@@ -526,10 +526,10 @@ Aktion: {3}</value>
     <value>&amp;Benutzer ändern...</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value>Task-Veranstaltungen und Geschichte sind auf NET-Versionen vor 3.5 nicht unterstützt.</value>
+    <value>Task-Veranstaltungen und Historie sind auf NET-Versionen vor 3.5 nicht unterstützt.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value>Die folgenden Eigenschafteneinstellungen nicht mit der gewählten Einstellung verwendet werden:</value>
+    <value>Die folgenden Eigenschafteneinstellungen können nicht mit der gewählten Einstellung verwendet werden:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
     <value>Einige Einstellungen sind nicht kompatibel mit dieser Auswahl.</value>
@@ -541,13 +541,13 @@ Aktion: {3}</value>
     <value>Löschen</value>
   </data>
   <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
-    <value>Ungültige ID Bereich Muster</value>
+    <value>Ungültiges ID Bereich Muster</value>
   </data>
   <data name="EventLogTime12Hours" xml:space="preserve">
     <value>Letzte 12 Stunden</value>
   </data>
   <data name="EventLogTime30Days" xml:space="preserve">
-    <value>Последние 30 дней</value>
+    <value>Letze 30 Tage</value>
   </data>
   <data name="EventLogTimeAnyTime" xml:space="preserve">
     <value>Jeder Zeit</value>
@@ -559,19 +559,19 @@ Aktion: {3}</value>
     <value>Alle Veranstaltungen von {0}</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
-    <value>Das Wiederholungsintervall Wert muss 1 Minute oder länger und weniger als oder gleich zu 31 Tagen sein.</value>
+    <value>Das Wiederholungsintervall muss 1 Minute oder länger und weniger oder gleich zu 31 Tagen sein.</value>
   </data>
   <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
-    <value>Die Wiederholung Dauer Wert muss 1 Minute oder länger sein.</value>
+    <value>Der Wert für die Wiederholungsdauer muss 1 Minute oder länger sein.</value>
   </data>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Aufgabenplanung kann nicht die Aufgabe erstellt werden. Das Benutzerkonto ist nicht bekannt, das Kennwort ist falsch oder das Benutzerkonto ist nicht berechtigt, diese Aufgabe zu erstellen.</value>
+    <value>Die Aufgabenplanung kann die Aufgabe nicht erstellen. Das Benutzerkonto ist nicht bekannt, das Kennwort ist falsch, oder das Benutzerkonto ist nicht berechtigt diese Aufgabe zu erstellen.</value>
   </data>
   <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
-    <value>Wenn Sie die Abfrage manuell bearbeiten möchten, werden Sie nicht mehr in der Lage, ändern Sie die Abfrage mit den Steuerelementen auf die Registerkarte "Filter" möchten Sie fortfahren?</value>
+    <value>Wenn Sie die Abfrage manuell bearbeiten, werden Sie nicht mehr in der Lage sein, die Abfrage mit den Steuerelementen auf die Registerkarte "Filter" zu ändern. Möchten Sie fortfahren?</value>
   </data>
   <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
-    <value>Möchten Sie die Registerkarte Filter verwenden, um die Abfrage zu bearbeiten? Manuelle Änderungen an der Abfrage verworfen wird daraufhin wird.</value>
+    <value>Möchten Sie die Registerkarte Filter verwenden um die Abfrage zu bearbeiten? Manuelle Änderungen an der Abfrage werden daraufhin verworfen.</value>
   </data>
   <data name="EventLogTimeCustomFromTo" xml:space="preserve">
     <value>Von {0} bis {1}</value>
@@ -589,10 +589,10 @@ Aktion: {3}</value>
     <value>Überwachungsfehler</value>
   </data>
   <data name="EventKeywordsAuditSuccess" xml:space="preserve">
-    <value>Überwachen Sie Erfolg</value>
+    <value>Erfolg überwachen</value>
   </data>
   <data name="EventKeywordsEventLogClassic" xml:space="preserve">
-    <value>Ein Klassiker</value>
+    <value>Klassisch</value>
   </data>
   <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
     <value>Korrelation-Hinweis</value>
@@ -613,13 +613,13 @@ Aktion: {3}</value>
     <value>Ereignisanzeige</value>
   </data>
   <data name="EventLogParentApps" xml:space="preserve">
-    <value>Anwendungs und Dienstprotokolle</value>
+    <value>Anwendungs- und Dienstprotokolle</value>
   </data>
   <data name="EventLogParentStandard" xml:space="preserve">
     <value>Windows Protokolle</value>
   </data>
   <data name="Error_InvalidQueryFormat" xml:space="preserve">
-    <value>Abgelegte Inhalte muss Text oder eine Datei mit einer gültigen Xml-Abfrage sein.</value>
+    <value>Abgelegter Inhalt muss Text oder eine Datei mit einer gültigen Xml-Abfrage sein.</value>
   </data>
   <data name="Error_EventFilterBadQuery" xml:space="preserve">
     <value>Nicht erkannter Text in XML-Abfrage gefunden.</value>
@@ -628,15 +628,15 @@ Aktion: {3}</value>
     <value>Text zu beleidigen: "{0}"</value>
   </data>
   <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
-    <value>Die minimale Frist oder Periode, die eine Aufgabe verwenden kann ist 1 Tag. Die Frist muss auch den Zeitraum größer sein.</value>
+    <value>Die minimale Frist oder Periode, die eine Aufgabe verwenden kann ist 1 Tag. Die Frist muss größer sein, als der Zeitraum.</value>
   </data>
   <data name="EventLogTimeDay" xml:space="preserve">
     <value>24 Stunden</value>
   </data>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
-    <value>Ungültige Dauerwert.!</value>
+    <value>Ungültiger Wert für Dauer!</value>
   </data>
   <data name="Error_InvalidFileName" xml:space="preserve">
-    <value>Das mitgelieferte Programm/Skript ist kein gültiger Dateiname. Bitte korrigieren, bevor Sie fortfahren.!</value>
+    <value>Das mitgelieferte Programm/Skript ist kein gültiger Dateiname. Bitte korrigieren Sie, bevor Sie fortfahren!</value>
   </data>
 </root>
