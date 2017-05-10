@@ -263,11 +263,11 @@
     <comment>0 = UserId</comment>
   </data>
   <data name="TriggerSessionSessionLock" xml:space="preserve">
-    <value>On workstation lock of {0}.</value>
+    <value>Beim Sperren der Arbeiststation von {0}.</value>
     <comment>0 = UserId</comment>
   </data>
   <data name="TriggerSessionSessionUnlock" xml:space="preserve">
-    <value>On workstation unlock of {0}.</value>
+    <value>Beim Entsperren der Arbeiststation von {0}.</value>
     <comment>0 = UserId</comment>
   </data>
   <data name="TriggerSessionUserSession" xml:space="preserve">

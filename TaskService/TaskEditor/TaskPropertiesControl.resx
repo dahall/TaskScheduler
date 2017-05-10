@@ -1498,7 +1498,7 @@
     <value>0</value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
-    <value>Specify the conditions that. along with the trigger, determine whether the task should run. The task will not run if any condition specified is not true.</value>
+    <value>Specify the conditions that, along with the trigger, determine whether the task should run. The task will not run if any condition specified is not true.</value>
   </data>
   <data name="&gt;&gt;conditionIntroLabel.Name" xml:space="preserve">
     <value>conditionIntroLabel</value>
