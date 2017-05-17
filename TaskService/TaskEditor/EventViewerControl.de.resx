@@ -117,40 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Kopieren</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Ebene:</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="textViewRadio.Text" xml:space="preserve">
+    <value>Freundliche Ansicht</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Aufgaben Kategorie:</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Benutzer:</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alles auswählen</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="label17.Text" xml:space="preserve">
+    <value>Computer:</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
+  <data name="xmlViewRadio.Text" xml:space="preserve">
+    <value>XML Ansicht</value>
   </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Ereignis ID:</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+  <data name="label21.Text" xml:space="preserve">
+    <value>Log Name:</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
+  <data name="label18.Text" xml:space="preserve">
+    <value>Schlüsselwörter:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+    <value>OpCode:</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Logged:</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Quelle:</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Mehr Informationen:</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="infoLink.Text" xml:space="preserve">
+    <value>Ereignis Anzeige Online Hilfe</value>
   </data>
 </root>

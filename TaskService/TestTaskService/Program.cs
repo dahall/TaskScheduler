@@ -21,7 +21,7 @@ namespace TestTaskService
 			}
 
 			//System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es");
-			//System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
+			//System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());

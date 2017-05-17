@@ -144,9 +144,6 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-  <data name="idleTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Pour modifier les conditions d’inactivité, utilisez la page Conditions dans la feuille Créer une tâche ou Propriétés de la tâche.</value>
   </data>
@@ -165,17 +162,11 @@
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
     <value>Utilisateur ou groupe spécifique :</value>
   </data>
-  <data name="logonTab.Text" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
   <data name="logonUserLabel.Text" xml:space="preserve">
     <value>Utilisateur actuel</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="onEventTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
     <value>Répéter la tâche toutes les :</value>
@@ -197,9 +188,6 @@
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
     <value>Aucun autre paramètre n’est requis.</value>
-  </data>
-  <data name="startupTab.Text" xml:space="preserve">
-    <value>tabPage1</value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
     <value>Arrêter toutes les tâches à l’issue de la durée de répétition</value>

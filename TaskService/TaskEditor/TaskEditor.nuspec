@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <package>
-  <metadata>
+	<metadata>
 	<id>TaskSchedulerEditor</id>
-	<version>2.5.25</version>
+	<version>2.5.26</version>
 	<title>Task Scheduler Managed Wrapper UI Library</title>
 	<authors>David Hall</authors>
 	<description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
@@ -12,13 +12,13 @@
 	<iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=taskscheduler&amp;DownloadId=885310</iconUrl>
 	<tags>task interop taskscheduler UI editor</tags>
 	<dependencies>
-	  <dependency id="TaskScheduler" version="[2.5.25]" />
-	  <dependency id="AeroWizard" version="[2.1.10]" />
-	  <dependency id="GroupControls" version="[1.5.3]" />
-	  <dependency id="TimeSpan2" version="[2.1.5]" />
+		<dependency id="TaskScheduler" version="[2.5.26]" />
+		<dependency id="AeroWizard" version="[2.1.10]" />
+		<dependency id="GroupControls" version="[1.5.3]" />
+		<dependency id="TimeSpan2" version="[2.1.5]" />
 	</dependencies>
-  </metadata>
-  <files>
+	</metadata>
+	<files>
 	<file src="bin\Release\v2.0\CubicOrange.Windows.Forms.ActiveDirectory.dll" target="lib\net20" />
 	<file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net20" />
 	<file src="bin\Release\v2.0\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net20" />
@@ -40,5 +40,5 @@
 	<file src="Native\*.cs" target="src\Native" />
 	<file src="OptionPanels\*.cs" target="src\OptionPanels" />
 	<file src="UIComponents\*.cs" target="src\UIComponents" />
-  </files>
+	</files>
 </package>

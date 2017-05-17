@@ -117,40 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
+    <value>Sicherheit bearbeiten...</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
+    <value>Zugriffsberechtigungen</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Laufzeit Sicherheit</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Passwort nicht speichern. Die Aufgabe greift nur auf lokale Computerressourcen zu.</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Ausführen, egal ob der Benutzer angemeldet ist oder nicht.</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Nur ausführen, wenn der Benutzer angemeldet ist.</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Benutzer oder Gruppe ändern …</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Beim Ausführen der Aufgabe folgendes Benutzerkonto verwenden:</value>
   </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Mit höchsten Privilegien ausführen</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Prozess und Sicherheits Bezeichner (SID) Typ</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>Benötigte Privilegien:</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Aufgaben Sicherheit</value>
   </data>
 </root>
