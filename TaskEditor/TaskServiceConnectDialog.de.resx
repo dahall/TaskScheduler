@@ -117,40 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="v1Check.Text" xml:space="preserve">
+    <value>Version 1 erzwingen</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Wählen Sie den Computer, den Sie verwalten möchten:</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="localComputerRadio.Text" xml:space="preserve">
+    <value>Lokaler Computer</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="remoteComputerRadio.Text" xml:space="preserve">
+    <value>Anderer Computer</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="otherUserCheckbox.Text" xml:space="preserve">
+    <value>Als anderer Benutzer verbindern: {0}</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="computerBrowseBtn.Text" xml:space="preserve">
+    <value>Durchsuchen …</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
-  </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="setUserBtn.Text" xml:space="preserve">
+    <value>Benutzer setzen …</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+    <value>Computer wählen</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
+  <data name="runButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+  <data name="closeButton.Text" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
 </root>

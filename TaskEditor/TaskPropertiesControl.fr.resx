@@ -120,9 +120,6 @@
   <data name="actionDeleteButton.Text" xml:space="preserve">
     <value>Supprimer</value>
   </data>
-  <data name="actionDownButton.Text" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="actionEditButton.Text" xml:space="preserve">
     <value>Modifier</value>
   </data>
@@ -134,9 +131,6 @@
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
     <value>Actions</value>
-  </data>
-  <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="addPropTab.Text" xml:space="preserve">
     <value>Ajouts</value>

@@ -117,40 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="triggerEditButton.Text" xml:space="preserve">
+    <value>Bearbeiten …</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="triggerNewButton.Text" xml:space="preserve">
+    <value>Neu …</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Trigger</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Details</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Neuer Trigger</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="deleteTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trigger löschen</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
+  <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trigger bearbeiten</value>
   </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="enableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aktivieren</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+  <data name="disableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Deaktivieren</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+  <data name="triggerDeleteButton.Text" xml:space="preserve">
+    <value>Löschen</value>
   </data>
 </root>

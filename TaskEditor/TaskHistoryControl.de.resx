@@ -117,40 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="columnHeader0.Text" xml:space="preserve">
+    <value>Level</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Datum und Zeit</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Ereignis ID</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Aufgaben Kategorie</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Operational Code</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>Correlation ID</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="columnHeader6.Text" xml:space="preserve">
+    <value>Schlüsselwörter</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
+  <data name="columnHeader7.Text" xml:space="preserve">
+    <value>Quelle</value>
   </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="columnHeader8.Text" xml:space="preserve">
+    <value>Benutzer</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+  <data name="columnHeader9.Text" xml:space="preserve">
+    <value>Log</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
+  <data name="columnHeader10.Text" xml:space="preserve">
+    <value>Computer</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+  <data name="columnHeader11.Text" xml:space="preserve">
+    <value>Prozess ID</value>
+  </data>
+  <data name="columnHeader12.Text" xml:space="preserve">
+    <value>Thread ID</value>
+  </data>
+  <data name="historyHeader.Text" xml:space="preserve">
+    <value>Anzahl der Ereignisse:</value>
+  </data>
+  <data name="historyDetailTitleText.Text" xml:space="preserve">
+    <value>Ereignis 1000, Aufgabenplaner</value>
+  </data>
+  <data name="historyDetailHideBtn.Text" xml:space="preserve">
+    <value>r</value>
+  </data>
+  <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ereignis Eigenschaften</value>
+  </data>
+  <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aufgabe an dieses Ereignis anheften</value>
+  </data>
+  <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aller Ereignisse speichern unter …</value>
+  </data>
+  <data name="addremoveColumnsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Spalten Hinzufügen/Entfernen</value>
+  </data>
+  <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ereignisse nach dieser Spalte sortieren</value>
+  </data>
+  <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sortierung entfernen</value>
+  </data>
+  <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ereignisse nach dieser Spalte gruppieren</value>
+  </data>
+  <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Gruppierung für Ereignisse entfernen</value>
+  </data>
+  <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alle Gruppen expandierren</value>
+  </data>
+  <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alle Gruppen einklappen</value>
+  </data>
+  <data name="saveFileDialog.Filter" xml:space="preserve">
+    <value>Event Files (*.evtx)|*.evtx|Xml (Xml File) (*.xml)|*.xml|Text (Tab Delimited) (*.txt)|*.txt|CSV (Comma Separated) (*.csv)|*.csv</value>
   </data>
 </root>

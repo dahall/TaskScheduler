@@ -136,9 +136,6 @@
   <data name="actionDownButton.Error" xml:space="preserve">
     <value></value>
   </data>
-  <data name="actionDownButton.Text" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="actionEditButton.Error" xml:space="preserve">
     <value></value>
   </data>

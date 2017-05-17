@@ -454,6 +454,9 @@
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComObjectSelectionDialog.de.resx">
+      <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComObjectSelectionDialog.es.resx">
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -477,6 +480,9 @@
     <EmbeddedResource Include="EditorProperties\Resources.it.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterDataEditor.de.resx">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterDataEditor.es.resx">
       <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -485,6 +491,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterDataEditor.resx">
       <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterEditor.de.resx">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterEditor.es.resx">
       <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
@@ -495,6 +504,9 @@
     <EmbeddedResource Include="EventActionFilterEditor.resx">
       <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterTimeEditor.de.resx">
+      <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterTimeEditor.es.resx">
       <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -503,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterTimeEditor.resx">
       <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventViewerControl.de.resx">
+      <DependentUpon>EventViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventViewerControl.es.resx">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
@@ -519,6 +534,9 @@
     <EmbeddedResource Include="EventViewerDialog.resx">
       <DependentUpon>EventViewerDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FullDateTimePicker.de.resx">
+      <DependentUpon>FullDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FullDateTimePicker.es.resx">
       <DependentUpon>FullDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -530,6 +548,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditorProperties\Resources.zh-CN.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListColumnEditor.de.resx">
+      <DependentUpon>ListColumnEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListColumnEditor.es.resx">
       <DependentUpon>ListColumnEditor.cs</DependentUpon>
@@ -546,6 +567,9 @@
     <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.resx">
       <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.de.resx">
+      <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\GeneralOptionPanel.es.resx">
       <DependentUpon>GeneralOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -554,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
       <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.de.resx">
+      <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.es.resx">
       <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
@@ -580,6 +607,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskBrowserDialog.de.resx">
+      <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskBrowserDialog.es.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -590,6 +620,9 @@
     <EmbeddedResource Include="TaskBrowserDialog.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskEditDialog.de.resx">
+      <DependentUpon>TaskEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskEditDialog.es.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
@@ -618,6 +651,9 @@
     <EmbeddedResource Include="TaskEditDialog.zh-CN.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskHistoryControl.de.resx">
+      <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskHistoryControl.es.resx">
       <DependentUpon>TaskHistoryControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -629,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskHistoryControl.resx">
       <DependentUpon>TaskHistoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskListView.de.resx">
+      <DependentUpon>TaskListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskListView.es.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>
@@ -644,6 +683,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskListView.zh-CN.resx">
       <DependentUpon>TaskListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskOptionsEditor.de.resx">
+      <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskOptionsEditor.es.resx">
       <DependentUpon>TaskOptionsEditor.cs</DependentUpon>
@@ -675,6 +717,9 @@
       <DependentUpon>TaskPropertiesControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesControl.de.resx">
+      <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesControl.es.resx">
       <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -689,6 +734,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesControl.zh-CN.resx">
       <DependentUpon>TaskRunTimesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunTimesDialog.de.resx">
+      <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunTimesDialog.es.resx">
       <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
@@ -706,6 +754,9 @@
     <EmbeddedResource Include="TaskRunTimesDialog.zh-CN.resx">
       <DependentUpon>TaskRunTimesDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskSchedulerWizard.de.resx">
+      <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskSchedulerWizard.es.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -722,6 +773,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskSchedulerWizard.zh-CN.resx">
       <DependentUpon>TaskSchedulerWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskServiceConnectDialog.de.resx">
+      <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskServiceConnectDialog.es.resx">
       <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
@@ -758,6 +812,9 @@
     <EmbeddedResource Include="TriggerEditDialog.zh-CN.resx">
       <DependentUpon>TriggerEditDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ActionCollectionUI.de.resx">
+      <DependentUpon>ActionCollectionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ActionCollectionUI.es.resx">
       <DependentUpon>ActionCollectionUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -767,6 +824,9 @@
     <EmbeddedResource Include="UIComponents\ActionCollectionUI.resx">
       <DependentUpon>ActionCollectionUI.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\BaseTriggerUI.de.resx">
+      <DependentUpon>BaseTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\BaseTriggerUI.es.resx">
       <DependentUpon>BaseTriggerUI.cs</DependentUpon>
@@ -799,6 +859,9 @@
     <EmbeddedResource Include="UIComponents\CalendarTriggerUI.zh-CN.resx">
       <DependentUpon>CalendarTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ComHandlerActionUI.de.resx">
+      <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ComHandlerActionUI.es.resx">
       <DependentUpon>ComHandlerActionUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -826,6 +889,9 @@
     <EmbeddedResource Include="UIComponents\DailyTriggerUI.resx">
       <DependentUpon>DailyTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EmailActionUI.de.resx">
+      <DependentUpon>EmailActionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\EmailActionUI.es.resx">
       <DependentUpon>EmailActionUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -838,6 +904,9 @@
     <EmbeddedResource Include="UIComponents\EmailActionUI.resx">
       <DependentUpon>EmailActionUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\EventTriggerUI.de.resx">
+      <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\EventTriggerUI.es.resx">
       <DependentUpon>EventTriggerUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -849,6 +918,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\EventTriggerUI.resx">
       <DependentUpon>EventTriggerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ExecActionUI.de.resx">
+      <DependentUpon>ExecActionUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ExecActionUI.es.resx">
       <DependentUpon>ExecActionUI.cs</DependentUpon>
@@ -878,6 +950,9 @@
       <DependentUpon>MonthlyTriggerUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\ShowMessageActionUI.de.resx">
+      <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ShowMessageActionUI.es.resx">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -889,6 +964,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\ShowMessageActionUI.resx">
       <DependentUpon>ShowMessageActionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponents\TriggerCollectionUI.de.resx">
+      <DependentUpon>TriggerCollectionUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIComponents\TriggerCollectionUI.es.resx">
       <DependentUpon>TriggerCollectionUI.cs</DependentUpon>

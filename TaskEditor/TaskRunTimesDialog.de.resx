@@ -117,40 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
-  </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
-  </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
-  </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
-  </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
-  </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
+  <data name="cancelButton.Text" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
-  </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
-  </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+    <value>Aufgabe läuft</value>
   </data>
 </root>

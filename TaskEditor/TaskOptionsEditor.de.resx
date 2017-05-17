@@ -117,40 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Ein Program starten</value>
+  <data name="generalItem.Text" xml:space="preserve">
+    <value>Allgemein</value>
   </data>
-  <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Eine E-Mail senden</value>
+  <data name="triggersItem.Text" xml:space="preserve">
+    <value>Auslöser</value>
   </data>
-  <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Eine Nachricht anzeigen</value>
+  <data name="actionsItem.Text" xml:space="preserve">
+    <value>Aktionen</value>
   </data>
-  <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Eigener Handler</value>
+  <data name="securityItem.Text" xml:space="preserve">
+    <value>Sicherheit</value>
   </data>
-  <data name="settingsGroup.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="startupItem.Text" xml:space="preserve">
+    <value>Start</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="runItem.Text" xml:space="preserve">
+    <value>Laufzeit</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Name:</value>
   </data>
-  <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Aktion:</value>
-  </data>
-  <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Aktion ausfühern</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Konfigurieren für:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Neue Aktion</value>
+    <value>Aufgaben Optionen</value>
   </data>
-  <data name="promptLabel.Text" xml:space="preserve">
-    <value>Sie müssen angeben, welche Aktion diese Aufgabe ausführen wird.</value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>ID:</value>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
 </root>
