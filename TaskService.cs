@@ -36,10 +36,11 @@ namespace Microsoft.Win32.TaskScheduler
 	[ToolboxItem(true), Serializable]
 	public sealed partial class TaskService : Component, ISupportInitialize, System.Runtime.Serialization.ISerializable
 	{
-		private static readonly bool hasV2 = (Environment.OSVersion.Version >= new Version(6, 0));
+		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		private static readonly Version v1Ver = new Version(1, 1);
 		private static Guid CLSID_Ctask = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
 		private static Guid IID_ITask = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+		private static Version osLibVer;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
 		private static TaskService instance;
@@ -122,7 +123,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets a Boolean value that indicates if you are connected to the Task Scheduler service.
 		/// </summary>
 		[Browsable(false)]
-		public bool Connected => (v2TaskService != null && v2TaskService.Connected) || v1TaskScheduler != null;
+		public bool Connected => v2TaskService != null && v2TaskService.Connected || v1TaskScheduler != null;
 
 		/// <summary>
 		/// Gets the name of the domain to which the <see cref="TargetServer"/> computer is connected.
@@ -136,7 +137,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2TaskService != null)
 					return v2TaskService.ConnectedDomain;
-				string[] parts = v1Impersonation.Name.Split('\\');
+				var parts = v1Impersonation.Name.Split('\\');
 				if (parts.Length == 2)
 					return parts[0];
 				return string.Empty;
@@ -155,7 +156,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2TaskService != null)
 					return v2TaskService.ConnectedUser;
-				string[] parts = v1Impersonation.Name.Split('\\');
+				var parts = v1Impersonation.Name.Split('\\');
 				if (parts.Length == 2)
 					return parts[1];
 				return parts[0];
@@ -171,14 +172,24 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return maxVer; }
 			set
 			{
+				if (value > GetLibraryVersionFromLocalOS())
+					throw new ArgumentOutOfRangeException(nameof(HighestSupportedVersion), @"The value of HighestSupportedVersion cannot exceed that of the underlying Windows version library.");
 				maxVer = value;
 				maxVerSet = true;
-				bool localForceV1 = (value <= v1Ver);
+				var localForceV1 = value <= v1Ver;
 				if (localForceV1 == forceV1) return;
 				forceV1 = localForceV1;
 				Connect();
 			}
 		}
+
+		/// <summary>
+		/// Gets a local instance of the <see cref="TaskService"/> using the current user's credentials.
+		/// </summary>
+		/// <value>
+		/// Local user <see cref="TaskService"/> instance.
+		/// </value>
+		public static TaskService Instance => instance ?? (instance = new TaskService());
 
 		/// <summary>
 		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher than this version.
@@ -187,7 +198,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The library version.
 		/// </value>
 		[Browsable(false)]
-		public static Version LibraryVersion => new Version(1, Task.GetOSLibraryMinorVersion());
+		public static Version LibraryVersion { get; } = Instance.HighestSupportedVersion;
 
 		/// <summary>
 		/// Gets the root ("\") folder. For Task Scheduler 1.0, this is the only folder.
@@ -233,14 +244,6 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 			}
 		}
-
-		/// <summary>
-		/// Gets a local instance of the <see cref="TaskService"/> using the current user's credentials.
-		/// </summary>
-		/// <value>
-		/// Local user <see cref="TaskService"/> instance.
-		/// </value>
-		public static TaskService Instance => instance ?? (instance = new TaskService());
 
 		/// <summary>
 		/// Gets or sets the user name to be used when connecting to the <see cref="TargetServer"/>.
@@ -302,7 +305,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (HighestSupportedVersion.Minor < 4)
 				throw new InvalidOperationException("Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.");
-			TaskDefinition td = NewTask();
+			var td = NewTask();
 			td.Settings.UseUnifiedSchedulingEngine = true;
 			td.Settings.MaintenanceSettings.Period = period;
 			td.Settings.MaintenanceSettings.Deadline = deadline;
@@ -326,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public Task AddTask([NotNull] string path, [NotNull] Trigger trigger, [NotNull] Action action, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
-			TaskDefinition td = NewTask();
+			var td = NewTask();
 			if (!string.IsNullOrEmpty(description))
 				td.RegistrationInfo.Description = description;
 
@@ -400,7 +403,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override bool Equals(object obj)
 		{
-			TaskService tsobj = obj as TaskService;
+			var tsobj = obj as TaskService;
 			if (tsobj != null)
 				return tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPassword == UserPassword && tsobj.forceV1 == forceV1;
 			return base.Equals(obj);
@@ -414,7 +417,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>An array of <see cref="Task"/> containing all tasks matching <paramref name="name"/>.</returns>
 		public Task[] FindAllTasks(System.Text.RegularExpressions.Regex name, bool searchAllFolders = true)
 		{
-			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
+			var results = new System.Collections.Generic.List<Task>();
 			FindTaskInFolder(RootFolder, name, ref results, searchAllFolders);
 			return results.ToArray();
 		}
@@ -428,7 +431,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true)
 		{
 			if (filter == null) filter = t => true;
-			System.Collections.Generic.List<Task> results = new System.Collections.Generic.List<Task>();
+			var results = new System.Collections.Generic.List<Task>();
 			FindTaskInFolder(RootFolder, filter, ref results, searchAllFolders);
 			return results.ToArray();
 		}
@@ -441,7 +444,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="Task"/> if one matches <paramref name="name"/>, otherwise NULL.</returns>
 		public Task FindTask([NotNull] string name, bool searchAllFolders = true)
 		{
-			Task[] results = FindAllTasks(new Wildcard(name), searchAllFolders);
+			var results = FindAllTasks(new Wildcard(name), searchAllFolders);
 			if (results.Length > 0)
 				return results[0];
 			return null;
@@ -518,14 +521,14 @@ namespace Microsoft.Win32.TaskScheduler
 			Task t = null;
 			if (v2TaskService != null)
 			{
-				V2Interop.IRegisteredTask iTask = GetTask(v2TaskService, taskPath);
+				var iTask = GetTask(v2TaskService, taskPath);
 				if (iTask != null)
 					t = Task.CreateTask(this, iTask);
 			}
 			else
 			{
 				taskPath = System.IO.Path.GetFileNameWithoutExtension(taskPath);
-				V1Interop.ITask iTask = GetTask(v1TaskScheduler, taskPath);
+				var iTask = GetTask(v1TaskScheduler, taskPath);
 				if (iTask != null)
 					t = new Task(this, iTask);
 			}
@@ -554,7 +557,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2TaskService != null)
 				return new TaskDefinition(v2TaskService.NewTask(0));
-			string v1Name = "Temp" + Guid.NewGuid().ToString("B");
+			var v1Name = "Temp" + Guid.NewGuid().ToString("B");
 			return new TaskDefinition(v1TaskScheduler.NewWorkItem(v1Name, CLSID_Ctask, IID_ITask), v1Name);
 		}
 
@@ -566,7 +569,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
 		public TaskDefinition NewTaskFromFile([NotNull] string xmlFile)
 		{
-			TaskDefinition td = NewTask();
+			var td = NewTask();
 			td.XmlText = System.IO.File.ReadAllText(xmlFile);
 			return td;
 		}
@@ -779,12 +782,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (!initializing && !DesignMode)
 			{
-				if (((!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword)) || (string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))))
+				if (!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword) || string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))
 				{
 					// Clear stuff if already connected
 					Dispose(true);
 
-					if (hasV2 && !forceV1)
+					if (LibraryIsV2 && !forceV1)
 					{
 						v2TaskService = new V2Interop.ITaskService();
 						if (!string.IsNullOrEmpty(targetServer))
@@ -861,7 +864,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>True if any tasks are found, False if not.</returns>
 		private bool FindTaskInFolder([NotNull] TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
 		{
-			foreach (Task t in fld.GetTasks())
+			foreach (var t in fld.GetTasks())
 				try
 				{
 					if (filter(t))
@@ -883,6 +886,51 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
+		private static Version GetLibraryVersionFromLocalOS()
+		{
+			if (osLibVer == null)
+			{
+				if (Environment.OSVersion.Version.Major < 6)
+					osLibVer = v1Ver;
+				else
+				{
+					try
+					{
+						var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(Path.Combine(System.Environment.SystemDirectory, "taskschd.dll"));
+						if (fvi.FileMajorPart == 10)
+							osLibVer = new Version(1, 5);
+						else if (fvi.FileMajorPart == 6)
+						{
+							switch (fvi.FileMinorPart)
+							{
+								case 0:
+									osLibVer = new Version(1, 2);
+									break;
+								case 1:
+									osLibVer = new Version(1, 3);
+									break;
+								case 2:
+								case 3:
+									osLibVer = new Version(1, 4);
+									break;
+								case 4:
+									osLibVer = new Version(1, 5);
+									break;
+							}
+						}
+					}
+					catch
+					{
+						// ignored
+					}
+				}
+
+				if (osLibVer == null)
+					throw new NotSupportedException(@"The Task Scheduler library version for this system cannot be determined.");
+			}
+			return osLibVer;
+		}
+
 		[System.Security.SecurityCritical]
 		void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
 		{
@@ -895,7 +943,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private Version GetV2Version()
 		{
-			uint v = v2TaskService.HighestVersion;
+			var v = v2TaskService.HighestVersion;
 			return new Version((int)(v >> 16), (int)(v & 0x0000FFFF));
 		}
 
@@ -910,32 +958,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetHighestSupportedVersion()
 		{
-			if (Connected)
-				maxVer = v2TaskService != null ? GetV2Version() : v1Ver;
-			else
-			{
-				if (!hasV2)
-					maxVer = v1Ver;
-				else if (Environment.OSVersion.Version.Major == 6)
-				{
-					switch (Environment.OSVersion.Version.Minor)
-					{
-						case 0:
-							maxVer = new Version(1, 2);
-							break;
-						case 1:
-							maxVer = new Version(1, 3);
-							break;
-						case 2:
-						case 3:
-							maxVer = new Version(1, 4);
-							break;
-					}
-				}
-			}
+			maxVer = Connected ? (v2TaskService != null ? GetV2Version() : v1Ver) : GetLibraryVersionFromLocalOS();
 		}
 
-		private bool ShouldSerializeHighestSupportedVersion() => (hasV2 && maxVer <= v1Ver);
+		private bool ShouldSerializeHighestSupportedVersion() => LibraryIsV2 && maxVer <= v1Ver;
 
 		private bool ShouldSerializeTargetServer() => targetServer != null && !targetServer.Trim('\\').Equals(Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
 

@@ -261,14 +261,7 @@
 			// 
 			// taskEditDialog1
 			// 
-			this.taskEditDialog1.AvailableTabs = ((Microsoft.Win32.TaskScheduler.AvailableTaskTabs)(((((((((Microsoft.Win32.TaskScheduler.AvailableTaskTabs.General | Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Triggers)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Actions)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Conditions)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Settings)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RegistrationInfo)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Properties)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RunTimes)
-			| Microsoft.Win32.TaskScheduler.AvailableTaskTabs.History)));
+			this.taskEditDialog1.AvailableTabs = Microsoft.Win32.TaskScheduler.AvailableTaskTabs.All;
 			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.taskEditDialog1.ClientSize = new System.Drawing.Size(600, 462);

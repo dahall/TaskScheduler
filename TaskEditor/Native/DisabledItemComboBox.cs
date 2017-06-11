@@ -18,15 +18,15 @@ namespace System.Windows.Forms
 	/// <summary>
 	/// A version of <see cref="ComboBox"/> that allows for disabled items.
 	/// </summary>
-	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
+	[ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public class DisabledItemComboBox : ComboBox
 	{
 		private const TextFormatFlags tff = TextFormatFlags.Default | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;
 		private bool animationsNeedCleanup;
-		private bool BufferedPaintSupported = false;
+		private readonly bool BufferedPaintSupported = false;
 		private ComboBoxState currentState = ComboBoxState.Normal, newState = ComboBoxState.Normal;
 		private LBNativeWindow dropDownWindow;
-		private AnimationTransition<ComboBoxState>[] transitions;
+		private readonly AnimationTransition<ComboBoxState>[] transitions;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DisabledItemComboBox"/> class.
@@ -34,13 +34,13 @@ namespace System.Windows.Forms
 		public DisabledItemComboBox()
 		{
 			SetStyle(/*ControlStyles.Opaque |*/ ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-			DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			DrawMode = DrawMode.OwnerDrawFixed;
 			DropDownStyle = ComboBoxStyle.DropDownList;
-			if ((Environment.OSVersion.Version.Major >= 6) && VisualStyleRenderer.IsSupported && Application.RenderWithVisualStyles)
+			if (Environment.OSVersion.Version.Major >= 6 && VisualStyleRenderer.IsSupported && Application.RenderWithVisualStyles)
 			{
 				BufferedPaintSupported = true;
 				var vsr = new VisualStyleRenderer("COMBOBOX", 5, 0);
-				transitions = new AnimationTransition<ComboBoxState>[] {
+				transitions = new[] {
 					new AnimationTransition<ComboBoxState>(vsr, ComboBoxState.Normal, ComboBoxState.Hot),
 					new AnimationTransition<ComboBoxState>(vsr, ComboBoxState.Normal, ComboBoxState.Pressed),
 					new AnimationTransition<ComboBoxState>(vsr, ComboBoxState.Normal, ComboBoxState.Disabled),
@@ -102,7 +102,7 @@ namespace System.Windows.Forms
 			}
 			set
 			{
-				bool diff = !Object.Equals(currentState, value);
+				var diff = !Equals(currentState, value);
 				newState = value;
 				if (diff)
 				{
@@ -141,13 +141,13 @@ namespace System.Windows.Forms
 		/// <param name="e">A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data.</param>
 		protected override void OnDrawItem(DrawItemEventArgs e)
 		{
-			string itemString = e.Index >= 0 ? GetItemText(Items[e.Index]) : string.Empty;
+			var itemString = e.Index >= 0 ? GetItemText(Items[e.Index]) : string.Empty;
 
 			if ((e.State & DrawItemState.ComboBoxEdit) != DrawItemState.ComboBoxEdit)
 			{
 				if (e.Index >= 0)
 				{
-					bool iEnabled = IsItemEnabled(e.Index);
+					var iEnabled = IsItemEnabled(e.Index);
 					if (iEnabled)
 					{
 						e.DrawBackground();
@@ -158,7 +158,7 @@ namespace System.Windows.Forms
 						using (var bb = new SolidBrush(e.BackColor))
 							e.Graphics.FillRectangle(bb, e.Bounds);
 					}
-					TextRenderer.DrawText(e.Graphics, itemString, e.Font, Rectangle.Inflate(e.Bounds, -2, 0), iEnabled ? (/*e.Index == this.SelectedIndex ? SystemColors.HighlightText :*/ e.ForeColor) : SystemColors.GrayText, tff);
+					TextRenderer.DrawText(e.Graphics, itemString, e.Font, Rectangle.Inflate(e.Bounds, -2, 0), iEnabled ? e.ForeColor : SystemColors.GrayText, tff);
 				}
 			}
 			base.OnDrawItem(e);
@@ -202,10 +202,9 @@ namespace System.Windows.Forms
 		/// Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.
 		/// </summary>
 		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
-		protected override void OnHandleDestroyed(System.EventArgs e)
+		protected override void OnHandleDestroyed(EventArgs e)
 		{
-			if (dropDownWindow != null)
-				dropDownWindow.DestroyHandle();
+			dropDownWindow?.DestroyHandle();
 			base.OnHandleDestroyed(e);
 		}
 
@@ -215,7 +214,7 @@ namespace System.Windows.Forms
 		/// <param name="e">A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.</param>
 		protected override void OnKeyPress(KeyPressEventArgs e)
 		{
-			int idx = FindEnabledString(e.KeyChar.ToString(), SelectedIndex);
+			var idx = FindEnabledString(e.KeyChar.ToString(), SelectedIndex);
 			if (idx == -1 || idx == SelectedIndex)
 				e.Handled = true;
 			base.OnKeyPress(e);
@@ -283,53 +282,48 @@ namespace System.Windows.Forms
 
 			if (BufferedPaintSupported)
 			{
-				bool stateChanged = !Object.Equals(currentState, newState);
+				var stateChanged = !Equals(currentState, newState);
 
 				using (var hdc = new SafeGDIHandle(e.Graphics))
 				{
-					if (!hdc.IsInvalid)
+					if (hdc.IsInvalid || NativeMethods.BufferedPaintRenderAnimation(Handle, hdc)) return;
+
+					var animParams = new NativeMethods.BufferedPaintAnimationParams(NativeMethods.BufferedPaintAnimationStyle.Linear);
+
+					// get appropriate animation time depending on state transition (or 0 if unchanged)
+					if (stateChanged)
 					{
-						// see if this paint was generated by a soft-fade animation
-						if (!NativeMethods.BufferedPaintRenderAnimation(Handle, hdc))
+						foreach (var item in transitions)
+							if (item.currentState == currentState && item.newState == newState)
+							{
+								animParams.Duration = item.duration;
+								break;
+							}
+					}
+
+					var rc = ClientRectangle;
+					IntPtr hdcFrom, hdcTo;
+					var hbpAnimation = NativeMethods.BeginBufferedAnimation(Handle, hdc, ref rc, NativeMethods.BufferedPaintBufferFormat.CompatibleBitmap, IntPtr.Zero, ref animParams, out hdcFrom, out hdcTo);
+					if (hbpAnimation != IntPtr.Zero)
+					{
+						if (hdcFrom != IntPtr.Zero)
 						{
-							NativeMethods.BufferedPaintAnimationParams animParams = new NativeMethods.BufferedPaintAnimationParams(NativeMethods.BufferedPaintAnimationStyle.Linear);
-
-							// get appropriate animation time depending on state transition (or 0 if unchanged)
-							if (stateChanged)
-							{
-								foreach (var item in transitions)
-									if (item.currentState == currentState && item.newState == newState)
-									{
-										animParams.Duration = item.duration;
-										break;
-									}
-							}
-
-							Rectangle rc = ClientRectangle;
-							IntPtr hdcFrom, hdcTo;
-							IntPtr hbpAnimation = NativeMethods.BeginBufferedAnimation(Handle, hdc, ref rc, NativeMethods.BufferedPaintBufferFormat.CompatibleBitmap, IntPtr.Zero, ref animParams, out hdcFrom, out hdcTo);
-							if (hbpAnimation != IntPtr.Zero)
-							{
-								if (hdcFrom != IntPtr.Zero)
-								{
-									using (Graphics gfxFrom = Graphics.FromHdc(hdcFrom))
-										PaintControl(new PaintEventArgs(gfxFrom, e.ClipRectangle));
-								}
-								currentState = newState;
-								if (hdcTo != IntPtr.Zero)
-								{
-									using (Graphics gfxTo = Graphics.FromHdc(hdcTo))
-										PaintControl(new PaintEventArgs(gfxTo, e.ClipRectangle));
-								}
-								NativeMethods.EndBufferedAnimation(hbpAnimation, true);
-							}
-							else
-							{
-								hdc.Dispose();
-								currentState = newState;
-								PaintControl(e);
-							}
+							using (var gfxFrom = Graphics.FromHdc(hdcFrom))
+								PaintControl(new PaintEventArgs(gfxFrom, e.ClipRectangle));
 						}
+						currentState = newState;
+						if (hdcTo != IntPtr.Zero)
+						{
+							using (var gfxTo = Graphics.FromHdc(hdcTo))
+								PaintControl(new PaintEventArgs(gfxTo, e.ClipRectangle));
+						}
+						NativeMethods.EndBufferedAnimation(hbpAnimation, true);
+					}
+					else
+					{
+						hdc.Dispose();
+						currentState = newState;
+						PaintControl(e);
 					}
 				}
 			}
@@ -358,15 +352,15 @@ namespace System.Windows.Forms
 		{
 			var cbi = NativeMethods.COMBOBOXINFO.FromComboBox(this);
 
-			string itemText = SelectedIndex >= 0 ? GetItemText(SelectedItem) : string.Empty;
-			ComboBoxState state = Enabled ? currentState : ComboBoxState.Disabled;
+			var itemText = SelectedIndex >= 0 ? GetItemText(SelectedItem) : string.Empty;
+			var state = Enabled ? currentState : ComboBoxState.Disabled;
 			Rectangle tr = cbi.rcItem;
 			/*Rectangle tr = this.ClientRectangle;
 			tr.Width -= (SystemInformation.VerticalScrollBarWidth + 2);
 			tr.Inflate(0, -2);
 			tr.Offset(1, 0);*/
 			Rectangle br = cbi.rcButton;
-			bool vsSuccess = false;
+			var vsSuccess = false;
 			if (VisualStyleRenderer.IsSupported && Application.RenderWithVisualStyles)
 			{
 				/*Rectangle r = Rectangle.Inflate(this.ClientRectangle, 1, 1);
@@ -384,13 +378,13 @@ namespace System.Windows.Forms
 						vr.DrawParentBackground(e.Graphics, ClientRectangle, this);
 						vr.DrawBackground(e.Graphics, ClientRectangle);
 						if (DropDownStyle != ComboBoxStyle.DropDownList) br.Inflate(1, 1);
-						Rectangle cr = DropDownStyle == ComboBoxStyle.DropDownList ? Rectangle.Inflate(br, -1, -1) : br;
+						var cr = DropDownStyle == ComboBoxStyle.DropDownList ? Rectangle.Inflate(br, -1, -1) : br;
 						vr.SetParameters("Combobox", 7, (int)(br.Contains(PointToClient(Cursor.Position)) ? state : ComboBoxState.Normal));
 						vr.DrawBackground(e.Graphics, br, cr);
 						if (Focused && State != ComboBoxState.Pressed)
 						{
-							Size sz = TextRenderer.MeasureText(e.Graphics, "Wg", Font, tr.Size, TextFormatFlags.Default);
-							Rectangle fr = Rectangle.Inflate(tr, 0, ((sz.Height - tr.Height) / 2) + 1);
+							var sz = TextRenderer.MeasureText(e.Graphics, "Wg", Font, tr.Size, TextFormatFlags.Default);
+							var fr = Rectangle.Inflate(tr, 0, (sz.Height - tr.Height) / 2 + 1);
 							ControlPaint.DrawFocusRectangle(e.Graphics, fr);
 						}
 						TextRenderer.DrawText(e.Graphics, itemText, Font, tr, ForeColor, tff);
@@ -402,7 +396,7 @@ namespace System.Windows.Forms
 
 			if (!vsSuccess)
 			{
-				System.Diagnostics.Debug.WriteLine($"CR:{ClientRectangle};ClR:{e.ClipRectangle};Foc:{Focused};St:{state};Tx:{itemText}");
+				Diagnostics.Debug.WriteLine($"CR:{ClientRectangle};ClR:{e.ClipRectangle};Foc:{Focused};St:{state};Tx:{itemText}");
 				var bgc = Enabled ? BackColor : SystemColors.Control;
 				e.Graphics.Clear(bgc);
 				ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.Sunken);
@@ -411,8 +405,8 @@ namespace System.Windows.Forms
 				//	e.Graphics.FillRectangle(bb, tr);
 				if (Focused)
 				{
-					Size sz = TextRenderer.MeasureText(e.Graphics, "Wg", Font, tr.Size, TextFormatFlags.Default);
-					Rectangle fr = Rectangle.Inflate(tr, 0, ((sz.Height - tr.Height) / 2) + 1);
+					var sz = TextRenderer.MeasureText(e.Graphics, "Wg", Font, tr.Size, TextFormatFlags.Default);
+					var fr = Rectangle.Inflate(tr, 0, (sz.Height - tr.Height) / 2 + 1);
 					e.Graphics.FillRectangle(SystemBrushes.Highlight, fr);
 					ControlPaint.DrawFocusRectangle(e.Graphics, fr); //, this.ForeColor, SystemColors.Highlight);
 				}
@@ -430,7 +424,7 @@ namespace System.Windows.Forms
 		/// </returns>
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
-			int visItems = DropDownHeight / ItemHeight;
+			var visItems = DropDownHeight / ItemHeight;
 			switch (keyData)
 			{
 				case Keys.Down:
@@ -466,8 +460,8 @@ namespace System.Windows.Forms
 					return true;
 
 				case Keys.Enter:
-					Point pt = NativeMethods.MapPointToClient(dropDownWindow, Cursor.Position);
-					int idx = dropDownWindow.IndexFromPoint(pt.X, pt.Y);
+					var pt = dropDownWindow.MapPointToClient(Cursor.Position);
+					var idx = dropDownWindow.IndexFromPoint(pt.X, pt.Y);
 					if (idx >= 0 && IsItemEnabled(idx))
 						return false;
 					DroppedDown = false;
@@ -476,9 +470,6 @@ namespace System.Windows.Forms
 				case Keys.Escape:
 					DroppedDown = false;
 					return true;
-
-				default:
-					break;
 			}
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
@@ -490,7 +481,7 @@ namespace System.Windows.Forms
 		protected override void WndProc(ref Message m)
 		{
 			base.WndProc(ref m);
-			if (((int)((long)m.WParam)) == 0x3e80001)
+			if ((int)(long)m.WParam == 0x3e80001)
 			{
 				dropDownWindow = new LBNativeWindow(m.LParam, this);
 			}
@@ -498,16 +489,16 @@ namespace System.Windows.Forms
 
 		private int FindEnabledString(string str, int startIndex)
 		{
-			if ((str != null) && (Items != null))
+			if (str != null)
 			{
-				if ((startIndex < -1) || (startIndex >= Items.Count))
+				if (startIndex < -1 || startIndex >= Items.Count)
 					return -1;
-				int length = str.Length;
-				int num2 = 0;
-				for (int i = (startIndex + 1) % Items.Count; num2 < Items.Count; i = (i + 1) % Items.Count)
+				var length = str.Length;
+				var num2 = 0;
+				for (var i = (startIndex + 1) % Items.Count; num2 < Items.Count; i = (i + 1) % Items.Count)
 				{
 					num2++;
-					if (IsItemEnabled(i) && string.Compare(str, 0, GetItemText(Items[i]), 0, length, true, System.Globalization.CultureInfo.CurrentUICulture) == 0)
+					if (IsItemEnabled(i) && string.Compare(str, 0, GetItemText(Items[i]), 0, length, true, Globalization.CultureInfo.CurrentUICulture) == 0)
 						return i;
 				}
 			}
@@ -518,7 +509,7 @@ namespace System.Windows.Forms
 		{
 			if (forward)
 			{
-				for (int i = startIndex + 1; i < Items.Count; i++)
+				for (var i = startIndex + 1; i < Items.Count; i++)
 				{
 					if (IsItemEnabled(i))
 						return i;
@@ -527,7 +518,7 @@ namespace System.Windows.Forms
 			}
 			else
 			{
-				for (int i = startIndex - 1; i >= 0; i--)
+				for (var i = startIndex - 1; i >= 0; i--)
 				{
 					if (IsItemEnabled(i))
 						return i;
@@ -535,10 +526,12 @@ namespace System.Windows.Forms
 				return startIndex;
 			}
 		}
+
 		private struct AnimationTransition<T>
 		{
-			public T currentState, newState;
-			public UInt32 duration;
+			public readonly T currentState;
+			public readonly uint duration;
+			public readonly T newState;
 
 			public AnimationTransition(VisualStyleRenderer rnd, T fromState, T toState)
 			{
@@ -552,17 +545,17 @@ namespace System.Windows.Forms
 
 		private class LBNativeWindow : NativeWindow
 		{
-			private DisabledItemComboBox Parent;
+			private readonly DisabledItemComboBox Parent;
 
 			public LBNativeWindow(IntPtr handle, DisabledItemComboBox parent)
 			{
 				Parent = parent;
-				base.AssignHandle(handle);
+				AssignHandle(handle);
 			}
 
 			public int IndexFromPoint(int x, int y)
 			{
-				int n = NativeMethods.SendMessage(base.Handle, 0x1a9 /* LB_ITEMFROMPOINT */, IntPtr.Zero, NativeMethods.Util.MAKELPARAM(x, y)).ToInt32();
+				var n = NativeMethods.SendMessage(Handle, 0x1a9 /* LB_ITEMFROMPOINT */, IntPtr.Zero, NativeMethods.Util.MAKELPARAM(x, y)).ToInt32();
 				if (NativeMethods.Util.HIWORD(n) == 0)
 					return NativeMethods.Util.LOWORD(n);
 				return -1;
@@ -572,7 +565,7 @@ namespace System.Windows.Forms
 			{
 				if (m.Msg == 0x0202 || m.Msg == 0x0201 || m.Msg == 0x0203) /* WM_LBUTTONUP or WM_LBUTTONDOWN or WM_LBUTTONDBLCLK */
 				{
-					int idx = IndexFromPoint(NativeMethods.Util.SignedLOWORD(m.LParam), NativeMethods.Util.SignedHIWORD(m.LParam));
+					var idx = IndexFromPoint(NativeMethods.Util.SignedLOWORD(m.LParam), NativeMethods.Util.SignedHIWORD(m.LParam));
 					if (idx >= 0 && !Parent.IsItemEnabled(idx))
 						return;
 				}

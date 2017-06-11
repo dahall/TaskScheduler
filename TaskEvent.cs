@@ -618,6 +618,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class TaskEventLog : IEnumerable<TaskEvent>
 	{
 		private const string TSEventLogPath = "Microsoft-Windows-TaskScheduler/Operational";
+		private static readonly bool IsVistaOrLater = Environment.OSVersion.Version.Major >= 6;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TaskEventLog"/> class.
@@ -736,7 +737,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void Initialize(string machineName, string query, bool revDir, string domain = null, string user = null, string password = null)
 		{
-			if (Environment.OSVersion.Version.Major < 6)
+			if (!IsVistaOrLater)
 				throw new NotSupportedException("Enumeration of task history not available on systems prior to Windows Vista and Windows Server 2008.");
 
 			System.Security.SecureString spwd = null;
@@ -790,14 +791,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				if (Environment.OSVersion.Version.Major < 6)
+				if (!IsVistaOrLater)
 					return false;
 				using (var cfg = new EventLogConfiguration(TSEventLogPath, Query.Session))
 					return cfg.IsEnabled;
 			}
 			set
 			{
-				if (Environment.OSVersion.Version.Major < 6)
+				if (!IsVistaOrLater)
 					throw new NotSupportedException("Task history not available on systems prior to Windows Vista and Windows Server 2008.");
 				using (var cfg = new EventLogConfiguration(TSEventLogPath, Query.Session))
 				{

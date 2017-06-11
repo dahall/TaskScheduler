@@ -433,8 +433,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2 != value || onAssignment)
 				{
 					v2 = value;
-					if (taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0)
-						taskVersionCombo.SelectedIndex = 1;
+					//if (taskVersionCombo.Items.Count > 1 && taskVersionCombo.SelectedIndex == 0) taskVersionCombo.SelectedIndex = 1;
 				}
 			}
 		}
@@ -758,7 +757,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else if (flagExecutorIsGroup)
 			{
-				taskLoggedOnRadio.Enabled = editable;
+				taskLoggedOnRadio.Enabled = false;
 				taskLoggedOptionalRadio.Enabled = false;
 				taskLocalOnlyCheck.Enabled = false;
 			}

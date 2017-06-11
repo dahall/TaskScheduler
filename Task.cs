@@ -42,8 +42,8 @@ namespace Microsoft.Win32.TaskScheduler
 		V2_1,
 		/// <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
 		V2_2,
-		// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
-		// V2_3
+		/// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		V2_3
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
@@ -1332,22 +1332,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return new Task(svc, iTask, iDef);
 		}
 
-		internal static int GetOSLibraryMinorVersion()
-		{
-			if (Environment.OSVersion.Version.Major == 6)
-			{
-				switch (Environment.OSVersion.Version.Minor)
-				{
-					case 0:
-						return 2;
-					case 1:
-						return 3;
-					default:
-						return Convert.ToInt32(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", 0)) == 10 ? 5 : 4;
-				}
-			}
-			return 1;
-		}
+		internal static int GetOSLibraryMinorVersion() => TaskService.LibraryVersion.Minor;
 
 		[NotNull]
 		internal static string GetV1Path(ITask v1Task)
