@@ -137,6 +137,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		/// <inheritdoc />
 		protected override void OnLostFocus(EventArgs e)
 		{
 			if (!historyBackgroundWorker.CancellationPending)

@@ -19,7 +19,7 @@ namespace Microsoft.Win32.TaskScheduler
 				DefaultLocations = l,
 				AllowedObjectTypes = ObjectTypes.Users// | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
 			};
-			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups;
+			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups | ObjectTypes.WellKnownPrincipals;
 			dlg.DefaultObjectTypes = dlg.AllowedObjectTypes;
 			dlg.AttributesToFetch.Add("objectSid");
 			var res = System.Windows.Forms.DialogResult.None;

@@ -1,6 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace System.Windows.Forms
 {
@@ -46,7 +47,7 @@ namespace System.Windows.Forms
 
 		private static void ApplyGroupingSet<T>(this ListView listView, ListViewGroupingSetTemplate<T> set) where T : class
 		{
-			bool vm = listView.VirtualMode;
+			var vm = listView.VirtualMode;
 			listView.BeginUpdate();
 			if (vm)
 				listView.VirtualMode = false;
@@ -55,11 +56,11 @@ namespace System.Windows.Forms
 				(listView as ListViewEx).Groups.AddRange(set.Groupings as ListViewGroupEx[]);
 			else*/
 				listView.Groups.AddRange(set.Groupings as ListViewGroup[]);
-			var other = new System.Collections.Generic.List<ListViewItem>();
+			var other = new List<ListViewItem>();
 			foreach (ListViewItem i in listView.Items)
 			{
-				bool found = false;
-				for (int r = 0; r < set.GroupingRules.Length; r++)
+				var found = false;
+				for (var r = 0; r < set.GroupingRules.Length; r++)
 				{
 					if (set.GroupingRules[r](i))
 					{
@@ -74,7 +75,7 @@ namespace System.Windows.Forms
 			if (other.Count > 0)
 			{
 				var og = listView.Groups.Add("Other", "Other");
-				for (int oi = 0; oi < other.Count; oi++)
+				for (var oi = 0; oi < other.Count; oi++)
 					og.Items.Add(other[oi]);
 			}
 			if (vm)
@@ -94,7 +95,7 @@ namespace System.Windows.Forms
 		{
 			if (group == null)
 				throw new ArgumentNullException();
-			return (IsWinVista() ? GetState(group, NativeMethods.ListViewGroupState.Collapsible) : false);
+			return IsWinVista && GetState(group, NativeMethods.ListViewGroupState.Collapsible);
 		}
 
 		public static IntPtr GetHeaderHandle(this ListView listView)
@@ -120,14 +121,14 @@ namespace System.Windows.Forms
 		{
 			if (group == null)
 				throw new ArgumentNullException();
-			if (!IsWinVista())
+			if (!IsWinVista)
 				throw new PlatformNotSupportedException();
 			SetState(group, NativeMethods.ListViewGroupState.Collapsible, value);
 		}
 
 		public static void SetColumnDropDown(this ListView listView, int columnIndex, bool enable)
 		{
-			if (((columnIndex < 0) || ((columnIndex >= 0) && (listView.Columns == null))) || (columnIndex >= listView.Columns.Count))
+			if (columnIndex < 0 || columnIndex >= 0 && listView.Columns == null || columnIndex >= listView.Columns.Count)
 				throw new ArgumentOutOfRangeException(nameof(columnIndex));
 
 			if (listView.IsHandleCreated)
@@ -137,7 +138,7 @@ namespace System.Windows.Forms
 				if (enable)
 					lvc.Format |= NativeMethods.ListViewColumnFormat.SplitButton;
 				else
-					lvc.Format &= (~NativeMethods.ListViewColumnFormat.SplitButton);
+					lvc.Format &= ~NativeMethods.ListViewColumnFormat.SplitButton;
 				NativeMethods.SendMessage(listView.Handle, NativeMethods.ListViewMessage.SetColumn, columnIndex, lvc);
 				listView.InvalidateHeader();
 			}
@@ -149,7 +150,7 @@ namespace System.Windows.Forms
 				throw new ArgumentOutOfRangeException(nameof(imageIndex));
 			if (lvi.ListView == null)
 				throw new ArgumentNullException(nameof(lvi), "ListViewItem must be attached to a valid ListView.");
-			NativeMethods.LVITEM nItem = new NativeMethods.LVITEM(lvi.Index);
+			var nItem = new NativeMethods.LVITEM(lvi.Index);
 			nItem.OverlayImageIndex = (uint)imageIndex;
 			if (NativeMethods.SendMessage(lvi.ListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nItem).ToInt32() == 0)
 				throw new Win32Exception();
@@ -157,9 +158,9 @@ namespace System.Windows.Forms
 
 		public static void SetSortIcon(this ListView listView, int columnIndex, SortOrder order)
 		{
-			IntPtr columnHeader = NativeMethods.SendMessage(listView.Handle, NativeMethods.ListViewMessage.GetHeader, 0, IntPtr.Zero);
+			var columnHeader = NativeMethods.SendMessage(listView.Handle, NativeMethods.ListViewMessage.GetHeader, 0, IntPtr.Zero);
 
-			for (int columnNumber = 0; columnNumber <= listView.Columns.Count - 1; columnNumber++)
+			for (var columnNumber = 0; columnNumber <= listView.Columns.Count - 1; columnNumber++)
 			{
 				// Get current listview column info
 				var lvcol = new NativeMethods.LVCOLUMN(NativeMethods.ListViewColumMask.Fmt);
@@ -175,8 +176,8 @@ namespace System.Windows.Forms
 					hditem.ShowText = true;
 
 				// Set header image info
-				if (!(order == SortOrder.None) && columnNumber == columnIndex)
-					hditem.ImageDisplay = (order == System.Windows.Forms.SortOrder.Descending) ? NativeMethods.HeaderItemImageDisplay.DownArrow : NativeMethods.HeaderItemImageDisplay.UpArrow;
+				if (order != SortOrder.None && columnNumber == columnIndex)
+					hditem.ImageDisplay = order == SortOrder.Descending ? NativeMethods.HeaderItemImageDisplay.DownArrow : NativeMethods.HeaderItemImageDisplay.UpArrow;
 				else
 					hditem.ImageDisplay = NativeMethods.HeaderItemImageDisplay.None;
 
@@ -187,10 +188,10 @@ namespace System.Windows.Forms
 
 		public static void SetFooter(this ListViewGroup group, string footer = null, HorizontalAlignment footerAlignment = HorizontalAlignment.Left)
 		{
-			int groupId = GetGroupId(group);
+			var groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
+				using (var lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.Footer = footer;
 					lvgroup.SetAlignment(group.HeaderAlignment, footerAlignment);
@@ -201,10 +202,10 @@ namespace System.Windows.Forms
 
 		public static void SetTask(this ListViewGroup group, string task)
 		{
-			int groupId = GetGroupId(group);
+			var groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
+				using (var lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.Task = task;
 					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.ListViewMessage.SetGroupInfo, groupId, lvgroup);
@@ -216,16 +217,16 @@ namespace System.Windows.Forms
 		{
 			if (!group.ListView.IsHandleCreated)
 				throw new InvalidOperationException();
-			IntPtr lparam = (imageList == null) ? IntPtr.Zero : imageList.Handle;
+			var lparam = imageList?.Handle ?? IntPtr.Zero;
 			NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.SetImageList, (IntPtr)3, lparam);
 		}
 
 		public static void SetImage(this ListViewGroup group, int titleImageIndex, string descriptionTop = null, string descriptionBottom = null)
 		{
-			int groupId = GetGroupId(group);
+			var groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				using (NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
+				using (var lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.None))
 				{
 					lvgroup.TitleImageIndex = titleImageIndex;
 					if (descriptionBottom != null)
@@ -241,25 +242,25 @@ namespace System.Windows.Forms
 		{
 			if (GroupIdProperty == null)
 				GroupIdProperty = typeof(ListViewGroup).GetProperty("ID", BindingFlags.NonPublic | BindingFlags.Instance);
-			return ((GroupIdProperty != null) ? ((int) GroupIdProperty.GetValue(group, null)) : -1);
+			return (int?) GroupIdProperty?.GetValue(@group, null) ?? -1;
 		}
 
 		private static bool GetState(ListViewGroup group, NativeMethods.ListViewGroupState state)
 		{
-			int groupId = GetGroupId(group);
+			var groupId = GetGroupId(group);
 			if (groupId < 0)
 				return false;
 			return (NativeMethods.SendMessage(group.ListView.Handle, (uint)NativeMethods.ListViewMessage.GetGroupState, (IntPtr)groupId, new IntPtr((int)state)).ToInt32() & (int)state) != 0;
 		}
 
-		private static bool IsWinVista() => System.Environment.OSVersion.Version.Major >= 6;
+		private static bool IsWinVista { get; } = Environment.OSVersion.Version.Major >= 6;
 
 		private static void SetState(ListViewGroup group, NativeMethods.ListViewGroupState state, bool value)
 		{
-			int groupId = GetGroupId(group);
+			var groupId = GetGroupId(group);
 			if (groupId >= 0)
 			{
-				NativeMethods.LVGROUP lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.State);
+				var lvgroup = new NativeMethods.LVGROUP(NativeMethods.ListViewGroupMask.State);
 				{
 					lvgroup.SetState(state, value);
 					NativeMethods.SendMessage(group.ListView.Handle, NativeMethods.ListViewMessage.SetGroupInfo, groupId, lvgroup);

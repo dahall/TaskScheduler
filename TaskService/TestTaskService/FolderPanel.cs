@@ -110,8 +110,7 @@ namespace TestTaskService
 
 		private void runMenu_Click(object sender, EventArgs e)
 		{
-			if (selTask != null)
-				selTask.Run();
+			selTask?.Run();
 		}
 
 		private void taskListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -122,9 +121,10 @@ namespace TestTaskService
 		private void taskListView_TaskSelected(object sender, Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs e)
 		{
 			if (itemMenuStrip.Enabled != (e.Task != null))
-				itemMenuStrip.Enabled = (e.Task != null);
-			bool hasValidTask = true;
-			try { var d = e.Task.Definition; } catch { hasValidTask = false; }
+				itemMenuStrip.Enabled = e.Task != null;
+			var hasValidTask = e.Task != null;
+			if (hasValidTask)
+				try { var d = e.Task.Definition; } catch { hasValidTask = false; }
 			if (!hasValidTask)
 			{
 				TaskPropertiesControl.Hide();
@@ -136,9 +136,9 @@ namespace TestTaskService
 				TaskPropertiesControl.Initialize(e.Task);
 				selTask = e.Task;
 
-				runMenuItem.Enabled = runMenuItem2.Enabled = (selTask.Definition.Settings.AllowDemandStart);
-				endMenuItem.Enabled = endMenuItem2.Enabled = (selTask.State == TaskState.Running);
-				disableMenuItem.Enabled = disableMenuItem2.Enabled = (selTask.Enabled);
+				runMenuItem.Enabled = runMenuItem2.Enabled = selTask.Definition.Settings.AllowDemandStart;
+				endMenuItem.Enabled = endMenuItem2.Enabled = selTask.State == TaskState.Running;
+				disableMenuItem.Enabled = disableMenuItem2.Enabled = selTask.Enabled;
 			}
 		}
 	}
