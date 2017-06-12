@@ -103,8 +103,8 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <returns>true if next task found, false if no more tasks.</returns>
 			public bool MoveNext()
 			{
-				IntPtr names = IntPtr.Zero;
-				bool valid = false;
+				var names = IntPtr.Zero;
+				var valid = false;
 				do
 				{
 					curItem = null;
@@ -114,7 +114,7 @@ namespace Microsoft.Win32.TaskScheduler
 						wienum?.Next(1, out names, out uFetched);
 						if (uFetched != 1)
 							break;
-						using (V1Interop.CoTaskMemString name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
+						using (var name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
 							curItem = name.ToString();
 						if (curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
 							curItem = curItem.Remove(curItem.Length - 4);
@@ -123,7 +123,7 @@ namespace Microsoft.Win32.TaskScheduler
 					finally { Marshal.FreeCoTaskMem(names); names = IntPtr.Zero; }
 
 					// If name doesn't match filter, look for next item
-					if (filter != null)
+					if (filter != null && curItem != null)
 					{
 						if (!filter.IsMatch(curItem))
 							continue;
@@ -151,7 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				get
 				{
-					int i = 0;
+					var i = 0;
 					Reset();
 					while (MoveNext())
 						i++;
@@ -173,10 +173,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public override bool MoveNext()
 			{
-				bool hasNext = base.MoveNext();
+				var hasNext = base.MoveNext();
 				while (hasNext)
 				{
-					if (filter == null || filter.IsMatch(((V2Interop.IRegisteredTask)iEnum.Current).Name))
+					if (filter == null || filter.IsMatch(((V2Interop.IRegisteredTask)iEnum?.Current)?.Name ?? ""))
 						break;
 					hasNext = base.MoveNext();
 				}
@@ -191,7 +191,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				int i = 0;
+				var i = 0;
 				if (v2Coll != null)
 				{
 					var v2Enum = new V2TaskEnumerator(fld, v2Coll, filter);
@@ -216,7 +216,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return filter; }
 			set
 			{
-				string sfilter = value?.ToString().TrimStart('^').TrimEnd('$') ?? string.Empty;
+				var sfilter = value?.ToString().TrimStart('^').TrimEnd('$') ?? string.Empty;
 				if (sfilter == string.Empty || sfilter == "*")
 					filter = null;
 				else
@@ -238,7 +238,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				int i = 0;
+				var i = 0;
 				var te = GetEnumerator();
 				while (te.MoveNext())
 					if (i++ == index)
@@ -259,7 +259,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (v2Coll != null)
 					return Task.CreateTask(svc, v2Coll[name]);
 
-				Task v1Task = svc.GetTask(name);
+				var v1Task = svc.GetTask(name);
 				if (v1Task != null)
 					return v1Task;
 
@@ -352,16 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 				tEnum = new TaskCollection.V1TaskEnumerator(svc);
 			}
 
-			public bool MoveNext()
-			{
-				if (tEnum.MoveNext())
-				{
-					if (tEnum.Current.State == TaskState.Running)
-						return true;
-					return MoveNext();
-				}
-				return false;
-			}
+			public bool MoveNext() => tEnum.MoveNext() && (tEnum.Current?.State == TaskState.Running || MoveNext());
 
 			public RunningTask Current => new RunningTask(svc, tEnum.ICurrent);
 
@@ -390,8 +381,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 					return v2Coll.Count;
-				int i = 0;
-				V1RunningTaskEnumerator v1Enum = new V1RunningTaskEnumerator(svc);
+				var i = 0;
+				var v1Enum = new V1RunningTaskEnumerator(svc);
 				while (v1Enum.MoveNext())
 					i++;
 				return i;
@@ -409,12 +400,12 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Coll != null)
 				{
-					V2Interop.IRunningTask irt = v2Coll[++index];
+					var irt = v2Coll[++index];
 					return new RunningTask(svc, TaskService.GetTask(svc.v2TaskService, irt.Path), irt);
 				}
 
-				int i = 0;
-				V1RunningTaskEnumerator v1Enum = new V1RunningTaskEnumerator(svc);
+				var i = 0;
+				var v1Enum = new V1RunningTaskEnumerator(svc);
 				while (v1Enum.MoveNext())
 					if (i++ == index)
 						return v1Enum.Current;
