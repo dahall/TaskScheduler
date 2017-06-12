@@ -114,6 +114,20 @@ namespace TaskSchedulerConfig
 
 			Add(new Diagnostic
 			{
+				Name = "V2 Remote Event Access: \"Remote Event Log Management\" rule on the firewall is not enabled",
+				Description = "The \"Remote Event Log Management\" rule must be enabled in order for the Task Scheduler V2 to share its events with other computers.",
+				Troubleshooter = o => !v.Firewall.Rules[Firewall.Rule.RemoteEventLogManagment],
+				Resolution = new Resolution
+				{
+					Name = "Enable the \"Remote Event Log Management\" rule on the firewall",
+					Description = "Enabling the \"Remote Event Log Management\" rule on the firewall allows the Task Scheduler V2 to share its events with other computers.",
+					RequiresElevation = true,
+					Resolver = o => v.Firewall.Rules[Firewall.Rule.RemoteEventLogManagment] = true
+				}
+			});
+
+			Add(new Diagnostic
+			{
 				Name = "V2 Remote Access: \"Remote Registry\" service is not running",
 				Description = "The \"Remote Registry\" service must be running in order for the Task Scheduler V1 to connect to this computer.",
 				Troubleshooter = o => !v.RemoteRegistryServiceRunning,

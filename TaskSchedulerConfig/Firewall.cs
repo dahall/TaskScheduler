@@ -9,6 +9,7 @@ namespace TaskSchedulerConfig
 		public enum Rule
 		{
 			FileAndPrinterSharing,
+			RemoteEventLogManagment,
 			RemoteTaskManagement
 		}
 
@@ -66,6 +67,7 @@ namespace TaskSchedulerConfig
 		{
 			private const int NET_FW_SERVICE_FILE_AND_PRINT = 0;
 			private const string FPS = "File and Printer Sharing";
+			private const string RELM = "Remote Event Log Management";
 			private const string RSTM = "Remote Scheduled Tasks Management";
 
 			private Firewall firewall;
@@ -92,6 +94,8 @@ namespace TaskSchedulerConfig
 						{
 							case Rule.FileAndPrinterSharing:
 								return firewall.Instance.IsRuleGroupCurrentlyEnabled(FPS);
+							case Rule.RemoteEventLogManagment:
+								return firewall.Instance.IsRuleGroupCurrentlyEnabled(RELM);
 							case Rule.RemoteTaskManagement:
 								return firewall.Instance.IsRuleGroupCurrentlyEnabled(RSTM);
 							default:
@@ -118,6 +122,9 @@ namespace TaskSchedulerConfig
 						{
 							case Rule.FileAndPrinterSharing:
 								firewall.Instance.EnableRuleGroup(firewall.Instance.CurrentProfileTypes, FPS, value);
+								break;
+							case Rule.RemoteEventLogManagment:
+								firewall.Instance.EnableRuleGroup(firewall.Instance.CurrentProfileTypes, RELM, value);
 								break;
 							case Rule.RemoteTaskManagement:
 								firewall.Instance.EnableRuleGroup(firewall.Instance.CurrentProfileTypes, RSTM, value);
