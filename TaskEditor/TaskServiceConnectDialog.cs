@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler.Design;
+using Microsoft.Win32.TaskScheduler.EditorProperties;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -9,8 +12,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"),
 	Description("Dialog box to set the properties of a TaskService."),
-	Designer(typeof(Design.TaskServiceComponentDesigner)), DesignTimeVisible(true), DefaultProperty("TaskService")]
-	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
+	Designer(typeof(TaskServiceComponentDesigner)), DesignTimeVisible(true), DefaultProperty("TaskService")]
+	[ToolboxBitmap(typeof(TaskEditDialog), "TaskDialog")]
 	public partial class TaskServiceConnectDialog :
 #if DEBUG
 		Form
@@ -33,7 +36,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the domain.
 		/// </summary>
 		/// <value>The domain.</value>
-		[Browsable(false), Description("The user's account domain."), DefaultValue((string)null)]
+		[Browsable(false), Description("The user's account domain."), DefaultValue(null)]
 		public string Domain { get; set; }
 
 		/// <summary>
@@ -47,19 +50,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the password.
 		/// </summary>
 		/// <value>The password.</value>
-		[Browsable(false), Description("The user's password."), DefaultValue((string)null)]
+		[Browsable(false), Description("The user's password."), DefaultValue(null)]
 		public string Password { get; set; }
 
 		/// <summary>
 		/// Gets or sets the target server.
 		/// </summary>
 		/// <value>The target server.</value>
-		[Browsable(false), Description("The name of the server to get the Task Scheduler."), DefaultValue((string)null)]
+		[Browsable(false), Description("The name of the server to get the Task Scheduler."), DefaultValue(null)]
 		public string TargetServer
 		{
 			get
 			{
-				if (server == null || string.Compare(server.Trim('\\', ' '), Environment.MachineName, true) == 0)
+				if (server == null || string.Compare(server.Trim('\\', ' '), Environment.MachineName, StringComparison.OrdinalIgnoreCase) == 0)
 					return null;
 				return string.IsNullOrEmpty(server.Trim()) ? null : server.Trim();
 			}
@@ -109,29 +112,29 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Appearance"), Description("A string to display in the title bar of the dialog box."), Localizable(true)]
 		public string Title
 		{
-			get { return base.Text; }
-			set { base.Text = value; }
+			get { return Text; }
+			set { Text = value; }
 		}
 
 		/// <summary>
 		/// Gets or sets the user.
 		/// </summary>
 		/// <value>The user.</value>
-		[Browsable(false), Description("The user's username."), DefaultValue((string)null)]
+		[Browsable(false), Description("The user's username."), DefaultValue(null)]
 		public string User { get; set; }
 
 		private void computerBrowseBtn_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog2 dlg = FolderBrowserDialog2.ComputerBrowser;
-			dlg.Description = EditorProperties.Resources.BrowseForTargetServerPrompt;
-			dlg.SelectedPath = TargetServer == null ? Environment.MachineName : TargetServer;
+			var dlg = FolderBrowserDialog2.ComputerBrowser;
+			dlg.Description = Resources.BrowseForTargetServerPrompt;
+			dlg.SelectedPath = TargetServer ?? Environment.MachineName;
 			if (dlg.ShowDialog(this) == DialogResult.OK)
 				TargetServer = remoteComputerText.Text = dlg.SelectedPath;
 		}
 
 		private void computerRadio_CheckedChanged(object sender, EventArgs e)
 		{
-			runButton.Enabled = (localComputerRadio.Checked || remoteComputerText.TextLength > 0);
+			runButton.Enabled = localComputerRadio.Checked || remoteComputerText.TextLength > 0;
 			remoteComputerText.Enabled = computerBrowseBtn.Enabled = otherUserCheckbox.Enabled = !localComputerRadio.Checked;
 			setUserBtn.Enabled = !localComputerRadio.Checked && otherUserCheckbox.Checked;
 			if (localComputerRadio.Checked)
@@ -146,7 +149,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string GetLocalizedResourceString(string resourceName)
 		{
-			ComponentResourceManager resources = new ComponentResourceManager(GetType());
+			var resources = new ComponentResourceManager(GetType());
 			return resources.GetString(resourceName);
 		}
 
@@ -165,12 +168,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetTitle()
 		{
-			base.Text = GetLocalizedResourceString("$this.Text");
+			Text = GetLocalizedResourceString("$this.Text");
 		}
 
 		private void runButton_Click(object sender, EventArgs e)
 		{
-			bool success = true;
+			var success = true;
 			ts.BeginInit();
 			ts.TargetServer = TargetServer;
 			ts.UserName = User;
@@ -188,13 +191,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void setUserBtn_Click(object sender, EventArgs e)
 		{
-			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName);
+			var dlg = new CredentialsDialog(Resources.TaskSchedulerName);
 			if (TargetServer != null)
 				dlg.Target = TargetServer;
 			if (dlg.ShowDialog(this) == DialogResult.OK)
 			{
 				SetUserText(dlg.UserName);
-				string[] userParts = dlg.UserName.Split('\\');
+				var userParts = dlg.UserName.Split('\\');
 				if (userParts.Length == 1)
 				{
 					Domain = TargetServer;
@@ -211,15 +214,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetUserText(string value)
 		{
-			if (String.IsNullOrEmpty(value))
+			if (string.IsNullOrEmpty(value))
 			{
-				value = EditorProperties.Resources.NoUserSpecifiedText;
+				value = Resources.NoUserSpecifiedText;
 				otherUserCheckbox.Checked = false;
 			}
 			otherUserCheckbox.Text = string.Format(GetLocalizedResourceString("otherUserCheckbox.Text"), value);
 		}
 
-		private bool ShouldSerializeTitle() => base.Text != GetLocalizedResourceString("$this.Text");
+		private bool ShouldSerializeTitle() => Text != GetLocalizedResourceString("$this.Text");
 
 		private void v1Check_CheckedChanged(object sender, EventArgs e)
 		{

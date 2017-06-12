@@ -1,10 +1,11 @@
-﻿using Microsoft.Win32.TaskScheduler;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler;
 
 namespace TestTaskService
 {
@@ -13,7 +14,7 @@ namespace TestTaskService
 		private object currentEventTaskId;
 		private SendOrPostCallback onActiveTasksRetrieved;
 		private SendOrPostCallback onEventStatusRetrieved;
-		private HybridDictionary tasks = new HybridDictionary();
+		private readonly HybridDictionary tasks = new HybridDictionary();
 		private TaskService ts;
 
 		public HomePanel()
@@ -42,7 +43,7 @@ namespace TestTaskService
 			base.OnVisibleChanged(e);
 			if (!Visible)
 			{
-				System.Diagnostics.Debug.WriteLine("Leaving HomePanel and terminating tasks.");
+				Debug.WriteLine("Leaving HomePanel and terminating tasks.");
 				object[] array;
 				lock (tasks.SyncRoot)
 				{
@@ -59,7 +60,7 @@ namespace TestTaskService
 			switch (m.Msg)
 			{
 				case 0x0202: // WM_LBUTTONUP
-					base.DefWndProc(ref m);
+					DefWndProc(ref m);
 					break;
 
 				default:
@@ -72,21 +73,21 @@ namespace TestTaskService
 		{
 			Task a = al?.Tag as Task, b = bl?.Tag as Task;
 			DateTime an = DateTime.MinValue, bn = DateTime.MinValue;
-			bool ax = a == null || (an = a.NextRunTime) == DateTime.MinValue;
-			bool bx = b == null || (bn = b.NextRunTime) == DateTime.MinValue;
+			var ax = a == null || (an = a.NextRunTime) == DateTime.MinValue;
+			var bx = b == null || (bn = b.NextRunTime) == DateTime.MinValue;
 			if (ax && !bx)
 				return -1;
 			if (!ax && bx)
 				return 1;
-			if (ax && bx)
+			if (ax)
 				return string.Compare(a?.Name, b?.Name, StringComparison.CurrentCulture);
 			return DateTime.Compare(an, bn);
 		}
 
 		private void ActiveTasksComplete(object state)
 		{
-			ListViewItemEventArgs e = state as ListViewItemEventArgs;
-			if (e.Cancelled) return;
+			var e = state as ListViewItemEventArgs;
+			if (e == null || e.Cancelled) return;
 			activeListView.UseWaitCursor = false;
 			if (e.Items != null && e.Items.Length > 0)
 				activeListView.Items.AddRange(e.Items);
@@ -96,31 +97,31 @@ namespace TestTaskService
 		private void ActiveTasksDoWork(TimeSpan span, AsyncOperation asyncOp)
 		{
 			Exception e = null;
-			List<ListViewItem> list = new List<ListViewItem>();
-			bool cancelled = false;
+			var list = new List<ListViewItem>();
+			var cancelled = false;
 
 			if (!IsTaskCanceled(asyncOp.UserSuppliedState))
 			{
 				try
 				{
-					using (TaskService lts = new TaskService(ts.TargetServer, ts.UserName, ts.UserAccountDomain, ts.UserPassword, ts.HighestSupportedVersion.Minor == 1))
+					using (var lts = new TaskService(ts.TargetServer, ts.UserName, ts.UserAccountDomain, ts.UserPassword, ts.HighestSupportedVersion.Minor == 1) {AllowReadOnlyTasks = true})
 					{
 						foreach (var t in lts.RootFolder.EnumerateTasks(x => x.IsActive, true))
 						{
 							if (IsTaskCanceled(asyncOp.UserSuppliedState))
 							{
-								System.Diagnostics.Debug.WriteLine("HomePanel.ActiveTasks cancelled.");
+								Debug.WriteLine("HomePanel.ActiveTasks cancelled.");
 								cancelled = true;
 								break;
 							}
 							try
 							{
-								DateTime next = t.NextRunTime;
-								list.Add(new ListViewItem(new string[] { t.Name, next == DateTime.MinValue ? "" : next.ToString("G"), t.Definition.Triggers.ToString(), t.Folder.Path }) { Tag = t });
+								var next = t.NextRunTime;
+								list.Add(new ListViewItem(new[] { t.Name, next == DateTime.MinValue ? "" : next.ToString("G"), t.Definition.Triggers.ToString(), t.Folder.Path }) { Tag = t });
 							}
 							catch
 							{
-								System.Diagnostics.Debug.WriteLine($"Unable to insert task '{t.Path}' into active task list.");
+								Debug.WriteLine($"Unable to insert task '{t.Path}' into active task list.");
 							}
 						}
 						if (!cancelled)
@@ -138,7 +139,7 @@ namespace TestTaskService
 
 		private void ActiveTasksGetAsync(object taskId)
 		{
-			AsyncOperation asyncOp = AsyncOperationManager.CreateOperation(taskId);
+			var asyncOp = AsyncOperationManager.CreateOperation(taskId);
 			lock (tasks.SyncRoot)
 			{
 				if (tasks.Contains(taskId))
@@ -156,7 +157,7 @@ namespace TestTaskService
 				lock (tasks.SyncRoot)
 					tasks.Remove(asyncOp.UserSuppliedState);
 
-			ListViewItemEventArgs e = new ListViewItemEventArgs(items, exception, canceled, asyncOp.UserSuppliedState);
+			var e = new ListViewItemEventArgs(items, exception, canceled, asyncOp.UserSuppliedState);
 			asyncOp.PostOperationCompleted(onActiveTasksRetrieved, e);
 		}
 
@@ -171,7 +172,7 @@ namespace TestTaskService
 
 		private void CancelAsync(object taskId)
 		{
-			AsyncOperation asyncOp = tasks[taskId] as AsyncOperation;
+			var asyncOp = tasks[taskId] as AsyncOperation;
 			if (asyncOp != null)
 				lock (tasks.SyncRoot)
 					tasks.Remove(taskId);
@@ -186,8 +187,8 @@ namespace TestTaskService
 		private void EventStatusComplete(object state)
 		{
 			currentEventTaskId = null;
-			ListViewItemEventArgs e = state as ListViewItemEventArgs;
-			if (e.Error != null || e.Cancelled || e.Items == null || e.Items.Length == 0)
+			var e = state as ListViewItemEventArgs;
+			if (e == null || e.Error != null || e.Cancelled || e.Items == null || e.Items.Length == 0)
 			{
 				label4.Text = "No results";
 			}
@@ -239,7 +240,7 @@ namespace TestTaskService
 		private void EventStatusDoWork(TimeSpan span, AsyncOperation asyncOp)
 		{
 			Exception e = null;
-			List<ListViewItem> list = new List<ListViewItem>();
+			var list = new List<ListViewItem>();
 
 			if (!IsTaskCanceled(asyncOp.UserSuppliedState))
 			{
@@ -270,7 +271,7 @@ namespace TestTaskService
 
 		private void EventStatusGetAsync(TimeSpan span, object taskId)
 		{
-			AsyncOperation asyncOp = AsyncOperationManager.CreateOperation(taskId);
+			var asyncOp = AsyncOperationManager.CreateOperation(taskId);
 			lock (tasks.SyncRoot)
 			{
 				if (tasks.Contains(taskId))
@@ -288,7 +289,7 @@ namespace TestTaskService
 				lock (tasks.SyncRoot)
 					tasks.Remove(asyncOp.UserSuppliedState);
 
-			ListViewItemEventArgs e = new ListViewItemEventArgs(items, exception, canceled, asyncOp.UserSuppliedState);
+			var e = new ListViewItemEventArgs(items, exception, canceled, asyncOp.UserSuppliedState);
 			asyncOp.PostOperationCompleted(onEventStatusRetrieved, e);
 		}
 
@@ -298,7 +299,7 @@ namespace TestTaskService
 			statusListView.Items.Clear();
 			statusListView.Groups.Clear();
 			statusListView.UseWaitCursor = true;
-			TimeSpan span = TimeSpan.Zero;
+			var span = TimeSpan.Zero;
 			switch (comboBox1.SelectedIndex)
 			{
 				case 0:
@@ -316,9 +317,6 @@ namespace TestTaskService
 				case 3:
 					span = TimeSpan.FromDays(30);
 					break;
-
-				default:
-					break;
 			}
 			if (currentEventTaskId != null)
 				CancelAsync(currentEventTaskId);
@@ -331,8 +329,8 @@ namespace TestTaskService
 
 		private void InitializeDelegates()
 		{
-			onActiveTasksRetrieved = new SendOrPostCallback(ActiveTasksComplete);
-			onEventStatusRetrieved = new SendOrPostCallback(EventStatusComplete);
+			onActiveTasksRetrieved = ActiveTasksComplete;
+			onEventStatusRetrieved = EventStatusComplete;
 		}
 
 		private bool IsTaskCanceled(object taskId) => tasks[taskId] == null;
@@ -344,7 +342,7 @@ namespace TestTaskService
 
 		private void RefreshPanels()
 		{
-			DateTime now = DateTime.Now;
+			var now = DateTime.Now;
 
 			// Update summary
 			summaryLabel.Text = $"Task Scheduler Summary (Last refreshed: {now:G})";
@@ -360,7 +358,7 @@ namespace TestTaskService
 			ActiveTasksUpdate();
 		}
 
-		private class ListViewItemEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+		private class ListViewItemEventArgs : AsyncCompletedEventArgs
 		{
 			private ListViewItem[] items;
 

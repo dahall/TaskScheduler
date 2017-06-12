@@ -1464,17 +1464,25 @@ namespace Microsoft.Win32.TaskScheduler
 						dd.RemoveTag("RestartOnFailure");
 						dd.RemoveTag("LogonType");
 					}
+					dd.RemoveTag("WnfStateChangeTrigger"); // Remove custom triggers that can't be sent to Xml
 					dd.Version = new Version(1, osLibMinorVer);
 					var def = svc.v2TaskService.NewTask(0);
 #if DEBUG
-					var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
+					var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
+						$"TS_Stripped_Def_{xmlVer.Minor}-{osLibMinorVer}_{iTask.Name}.xml");
 					File.WriteAllText(path, dd.Xml, Encoding.Unicode);
 #endif
 					def.XmlText = dd.Xml;
 					return def;
 				}
 			}
-			catch (Exception ex) { Debug.WriteLine($"Error in GetV2StrippedDefinition: {ex}"); }
+			catch (Exception ex)
+			{
+#if DEBUG
+				Debug.WriteLine($"Error in GetV2StrippedDefinition: {ex}");
+				throw;
+#endif
+			}
 			return iTask.Definition;
 		}
 
@@ -1526,24 +1534,26 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public bool Contains(string tag, string defaultVal = null, bool removeIfFound = false)
 			{
-				var elems = doc.GetElementsByTagName(tag);
-				if (elems.Count > 0)
+				var nl = doc.GetElementsByTagName(tag);
+				while (nl.Count > 0)
 				{
-					var e = elems[0];
+					var e = nl[0];
 					if (e.InnerText != defaultVal || !removeIfFound || e.ParentNode == null)
 						return true;
-					e.ParentNode.RemoveChild(e);
+					e.ParentNode?.RemoveChild(e);
+					nl = doc.GetElementsByTagName(tag);
 				}
 				return false;
 			}
 
 			public void RemoveTag(string tag)
 			{
-				var elems = doc.GetElementsByTagName(tag);
-				if (elems.Count > 0)
+				var nl = doc.GetElementsByTagName(tag);
+				while (nl.Count > 0)
 				{
-					var e = elems[0];
+					var e = nl[0];
 					e.ParentNode?.RemoveChild(e);
+					nl = doc.GetElementsByTagName(tag);
 				}
 			}
 		}

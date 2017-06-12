@@ -9,6 +9,7 @@ namespace TestTaskService
 		private static TaskEditDialog editorForm;
 		public delegate void TestMethod(TaskService ts, System.IO.TextWriter output, params string[] arg);
 
+		// Format for command line is: C [W|E|F|S|M|L] [1|2] [Server] [User] [Domain] [Pwd]
 		[STAThread]
 		private static void Main(string[] args)
 		{
@@ -41,7 +42,7 @@ namespace TestTaskService
 				if (args.Length > i) newArgs[i] = args[i];
 
 			Application.EnableVisualStyles();
-			using (var ts = new TaskService(newArgs[1], newArgs[2], newArgs[3], newArgs[4], newArgs[0] == "1"))
+			using (var ts = new TaskService(newArgs[1], newArgs[2], newArgs[3], newArgs[4], newArgs[0] == "1") { AllowReadOnlyTasks = true })
 			{
 				switch (test)
 				{
@@ -861,7 +862,7 @@ namespace TestTaskService
 
 		internal static void MMCTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			var form = new TSMMCMockup();
+			var form = new TSMMCMockup(ts);
 			form.ShowDialog();
 		}
 
