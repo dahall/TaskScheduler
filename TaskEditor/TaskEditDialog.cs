@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -317,7 +318,8 @@ namespace Microsoft.Win32.TaskScheduler
 					Task.RegisterChanges();
 				else
 				{
-					string user = TaskDefinition.Principal.ToString();
+					var user = TaskDefinition.Principal.ToString();
+					user = string.IsNullOrEmpty(user) ? WindowsIdentity.GetCurrent().Name : user;
 					string pwd = null;
 					TaskFolder fld = TaskService.GetFolder(TaskFolder);
 					if (TaskDefinition.Principal.RequiresPassword())

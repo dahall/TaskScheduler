@@ -442,14 +442,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
-		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
-		public void Initialize(TaskService service, TaskDefinition td = null)
+		/// <param name="taskDef">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
+		public void Initialize(TaskService service, TaskDefinition taskDef = null)
 		{
 			TaskService = service;
 			task = null;
 			if (!this.IsDesignMode())
 			{
-				if (td == null)
+				if (taskDef == null)
 				{
 					var temp = service.NewTask();
 					if (service.HighestSupportedVersion == new Version(1, 1))
@@ -457,17 +457,17 @@ namespace Microsoft.Win32.TaskScheduler
 					TaskDefinition = temp;
 				}
 				else
-					TaskDefinition = td;
+					TaskDefinition = taskDef;
 			}
 		}
 
 		/// <summary>
 		/// Initializes the control for the editing of an existing <see cref="Task"/>.
 		/// </summary>
-		/// <param name="task">A <see cref="Task"/> instance.</param>
-		public void Initialize(Task task)
+		/// <param name="taskInstance">A <see cref="Task"/> instance.</param>
+		public void Initialize(Task taskInstance)
 		{
-			Task = task;
+			Task = taskInstance;
 		}
 
 		/// <summary>
@@ -554,10 +554,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private int FindFirstVisibleTab(int startingIndex = -1)
 		{
-			var ins = -1;
 			for (var i = startingIndex + 1; i < tabPages.Length; i++)
 			{
-				ins = tabControl.TabPages.IndexOf(tabPages[i]);
+				var ins = tabControl.TabPages.IndexOf(tabPages[i]);
 				if (ins != -1)
 					return ins;
 			}
@@ -581,11 +580,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// Moved to historyTab_Intialize
 		}
 
-		private void InitControls(bool editable)
+		private void InitControls(bool canEdit)
 		{
 			// General tab
-			taskDescText.ReadOnly = !editable;
-			changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = editable;
+			taskDescText.ReadOnly = !canEdit;
+			changePrincipalButton.Visible = taskHiddenCheck.Enabled = taskRunLevelCheck.Enabled = taskVersionCombo.Enabled = canEdit;
 			SetUserControls(td?.Principal.LogonType ?? TaskLogonType.InteractiveTokenOrPassword);
 
 			// Triggers tab
@@ -595,16 +594,16 @@ namespace Microsoft.Win32.TaskScheduler
 			actionCollectionUI.RefreshState();
 
 			// Conditions tab
-			conditionsTab.EnableChildren(editable);
+			conditionsTab.EnableChildren(canEdit);
 
 			// Settings tab
-			settingsTab.EnableChildren(editable);
+			settingsTab.EnableChildren(canEdit);
 
 			// Info tab
-			regInfoTab.EnableChildren(editable);
+			regInfoTab.EnableChildren(canEdit);
 
 			// Additions tab
-			addPropTab.EnableChildren(editable);
+			addPropTab.EnableChildren(canEdit);
 
 			// If the task has already been set, then reset it to make sure all the items are enabled correctly
 			if (td != null)
@@ -797,11 +796,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public override bool Equals(object obj)
 			{
+				if (obj == null) return false;
 				if (obj is ComboItem)
 					return Version == ((ComboItem)obj).Version;
 				if (obj is int)
 					return Version == (int)obj;
-				return Text.CompareTo(obj.ToString()) == 0;
+				return string.Compare(Text, obj.ToString(), StringComparison.Ordinal) == 0;
 			}
 
 			public override int GetHashCode() => Version.GetHashCode();
@@ -818,11 +818,12 @@ namespace Microsoft.Win32.TaskScheduler
 			var versions = EditorProperties.Resources.TaskCompatibility.Split('|');
 			if (versions.Length != expectedVersions)
 				throw new ArgumentOutOfRangeException(nameof(TaskDefinition), @"Locale specific information about supported Operating Systems is insufficient.");
-			var max = (TaskService == null) ? expectedVersions - 1 : Math.Min(TaskService.LibraryVersion.Minor, TaskService.HighestSupportedVersion.Minor);
+			var libVerMinor = TaskService.LibraryVersion.Minor > 5 ? 5 : TaskService.LibraryVersion.Minor;
+			var max = (TaskService == null) ? expectedVersions - 1 : Math.Min(libVerMinor, TaskService.HighestSupportedVersion.Minor);
 			if (Environment.OSVersion.Version >= new Version(6, 2))
 			{
 				using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-					versions[TaskService.LibraryVersion.Minor] = key?.GetValue("ProductName", Environment.OSVersion).ToString();
+					versions[libVerMinor] = key?.GetValue("ProductName", Environment.OSVersion).ToString();
 			}
 			var comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			var lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
@@ -849,7 +850,8 @@ namespace Microsoft.Win32.TaskScheduler
 			var pkr = sender as TimeSpanPicker;
 			var valid = pkr != null && pkr.Enabled && pkr.IsTextValid;
 			e.Cancel = !valid;
-			errorProvider.SetError(pkr, valid ? string.Empty : EditorProperties.Resources.Error_InvalidSpanValue);
+			if (pkr != null)
+				errorProvider.SetError(pkr, valid ? string.Empty : EditorProperties.Resources.Error_InvalidSpanValue);
 		}
 
 		private void tabControl_TabIndexChanged(object sender, EventArgs e)
@@ -1055,7 +1057,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskVersionCombo_GotFocus(object sender, EventArgs e)
 		{
-			var comp = td?.Settings.Compatibility ?? TaskCompatibility.V1;
 			var lowestComp = td?.LowestSupportedVersion ?? TaskCompatibility.V1;
 			for (var i = 0; i < taskVersionCombo.Items.Count; i++)
 			{
