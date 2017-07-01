@@ -30,9 +30,14 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://taskscheduler.codeplex.com/releases/clickonce/</InstallUrl>
+    <SupportUrl>https://taskscheduler.codeplex.com</SupportUrl>
+    <ErrorReportUrl>https://taskscheduler.codeplex.com/documentation</ErrorReportUrl>
+    <ProductName>Task Scheduler Config</ProductName>
+    <PublisherName>CodePlex Project</PublisherName>
+    <SuiteName>Task Scheduler Managed Wrapper</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -63,11 +68,10 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1533A21C3FEA695822A1E91AC6F6BDAE0EEE8826</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>BBAFC17DC36CE82DB0A597921CEAD17A2DC3F1F8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>TaskSchedulerConfigKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
