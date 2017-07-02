@@ -994,7 +994,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
