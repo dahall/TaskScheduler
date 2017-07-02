@@ -79,7 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
+    <Compile Include="..\TaskService\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
@@ -230,7 +230,7 @@
       <Project>{5279d487-59fa-4d01-9d7a-ea7387d8b67c}</Project>
       <Name>TaskEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskService.csproj">
+    <ProjectReference Include="..\TaskService\TaskService.csproj">
       <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
       <Name>TaskService</Name>
     </ProjectReference>

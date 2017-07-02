@@ -61,15 +61,20 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations">
-      <HintPath>..\..\..\..\AppData\Local\JetBrains\Installations\ReSharperPlatformVs14\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Runtime.Serialization" Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt; 2.0 " />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TaskEditor\Native\EnumUtil.cs">
+      <Link>Native\EnumUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs">
+      <Link>Native\ExtensionAttributeFor.NET_2.0.cs</Link>
+    </Compile>
     <Compile Include="Action.cs" />
     <Compile Include="ActionCollection.cs" />
     <Compile Include="Native\ADVAPI32.cs" />
@@ -84,8 +89,6 @@
     <Compile Include="ReflectionHelper.cs" />
     <None Include="packages.config" />
     <None Include="ResourceReferenceValue.cs" />
-    <Compile Include="TaskEditor\Native\EnumUtil.cs" />
-    <Compile Include="TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskEventWatcher.cs" />
     <Compile Include="TaskSecurity.cs" />
