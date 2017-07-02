@@ -122,7 +122,6 @@
     <Compile Include="XmlSerializationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="TaskService.nuspec" />
     <None Include="TaskService.snk" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
