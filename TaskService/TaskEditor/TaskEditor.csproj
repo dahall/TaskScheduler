@@ -93,23 +93,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Native\ADVAPI32.cs">
+    <Compile Include="..\TaskService\Native\ADVAPI32.cs">
       <Link>Native\ADVAPI32.cs</Link>
     </Compile>
-    <Compile Include="..\Native\InteropUtil.cs">
+    <Compile Include="..\TaskService\Native\InteropUtil.cs">
       <Link>Native\InteropUtil.cs</Link>
     </Compile>
-    <Compile Include="..\Native\KERNEL32.cs">
+    <Compile Include="..\TaskService\Native\KERNEL32.cs">
       <Link>Native\KERNEL32.cs</Link>
     </Compile>
-    <Compile Include="..\Native\SYSTEMTIME.cs">
+    <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
       <Link>Native\SYSTEMTIME.cs</Link>
     </Compile>
-    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\ReflectionHelper.cs">
+    <Compile Include="..\TaskService\ReflectionHelper.cs">
       <Link>ReflectionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ActionEditDialog.cs">
       <SubType>Form</SubType>
@@ -1050,7 +1050,7 @@
     <None Include="Resources\TriggerTypeWeekly.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskService.csproj">
+    <ProjectReference Include="..\TaskService\TaskService.csproj">
       <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
       <Name>TaskService</Name>
     </ProjectReference>
