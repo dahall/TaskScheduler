@@ -67,18 +67,15 @@
     <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AeroWizard">
-      <HintPath>..\..\AeroWizard\bin\Release\$(TargetFrameworkVersion)\AeroWizard.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AeroWizard, Version=2.1.10.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.1.10\lib\net20\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2010\Projects\ActiveDirectoryCommonDialogs\CubicOrange.Windows.Forms.ActiveDirectory\bin\Release\$(TargetFrameworkVersion)\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GroupControls\bin\Release\$(TargetFrameworkVersion)\GroupControls.dll</HintPath>
-      <Aliases>global</Aliases>
+    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
+      <HintPath>..\packages\GroupControls.1.5.3\lib\net20\GroupControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,10 +83,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TimeSpan2">
-      <HintPath>..\..\TimeSpan2\bin\Release\$(TargetFrameworkVersion)\TimeSpan2.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Aliases>global</Aliases>
+    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net20\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -994,6 +989,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -1050,16 +1046,16 @@
     <None Include="Resources\TriggerTypeWeekly.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskService\TaskService.csproj">
-      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
-      <Name>TaskService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="TaskDialog.bmp" />
     <EmbeddedResource Include="Dialog.bmp" />
     <EmbeddedResource Include="Control.bmp" />
     <EmbeddedResource Include="TaskControl.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskService\TaskService.csproj">
+      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Name>TaskService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

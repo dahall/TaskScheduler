@@ -1,0 +1,2479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.TaskSchedulerEditor</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.TaskScheduler.ActionEditDialog">
+      <summary>
+            An editor that handles all Task actions.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ActionEditDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionEditDialog" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ActionEditDialog.#ctor(Microsoft.Win32.TaskScheduler.Action)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionEditDialog" /> class with the provided action.
+            </summary>
+      <param name="action">The action.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ActionEditDialog.Action">
+      <summary>
+            Gets or sets the action.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ActionEditDialog.AllowRun">
+      <summary>
+            Gets or sets a value indicating whether to show a button allowing the action to be run in real time.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ActionEditDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ActionEditDialog.Prompt">
+      <summary>
+            Gets or sets the prompt text at the top of the dialog.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ActionEditDialog.SupportV1Only">
+      <summary>
+            Gets or sets a value indicating whether this editor only supports V1 actions.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ActionEditDialog.UseUnifiedSchedulingEngine">
+      <summary>
+            Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.AvailableTaskTabs">
+      <summary>
+            Flags representing tabs that can be visible on a <see cref="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl" />.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.General">
+      <summary>Displays General tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Triggers">
+      <summary>Displays Triggers tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Actions">
+      <summary>Displays Actions tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Conditions">
+      <summary>Displays Conditions tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Settings">
+      <summary>Displays Settings tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RegistrationInfo">
+      <summary>Displays Info tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Properties">
+      <summary>Displays Additional tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.RunTimes">
+      <summary>Displays Run Times tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.History">
+      <summary>Displays History tab</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.Default">
+      <summary>Displays General, Triggers, Actions, Conditions, Settings, Run Times and History tabs</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.AvailableTaskTabs.All">
+      <summary>Displays all tabs</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog">
+      <summary>
+            Dialog that will enumerate and display a list of COM objects and allow for a single selection.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.CLSID">
+      <summary>
+            Gets or sets the CLSID.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.ServerType">
+      <summary>
+            Gets or sets the type of COM servers to display.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedInterface">
+      <summary>
+            Gets or sets the COM interface that the selected item must support.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers">
+      <summary>
+            COM server types that can be displayed by a <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" />.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers.InProcess">
+      <summary>In process</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers.OutOfProcess">
+      <summary>Out of process</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers.All">
+      <summary>All server types</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent">
+      <summary>
+            Historical event information for a task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.ActivityId">
+      <summary>
+            Gets the activity id.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.ErrorCode">
+      <summary>
+            Gets the error code.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.EventRecords">
+      <summary>
+            Gets the underlying <see cref="T:System.Diagnostics.Eventing.Reader.EventRecord" /> instances.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.RunEnd">
+      <summary>
+            Gets the time ended.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.RunResult">
+      <summary>
+            Gets the result status.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.RunStart">
+      <summary>
+            Gets the time started.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TaskName">
+      <summary>
+            Gets the task name.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggeredBy">
+      <summary>
+            Gets how the task was triggered.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.Status">
+      <summary>
+            Status of correlated task events
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.Status.StillRunning">
+      <summary>Task is still running.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.Status.Success">
+      <summary>Task has successfully completed.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.Status.Failure">
+      <summary>Task failed to start.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.Status.Terminated">
+      <summary>Task was terminated due to exceeding time for execution.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType">
+      <summary>
+            Type of trigger that initiated the task execution.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Schedule">
+      <summary>Scheduled time.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Event">
+      <summary>On an event.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Registration">
+      <summary>When task is registered.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Idle">
+      <summary>When system is idle.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Boot">
+      <summary>When system boots.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.Logon">
+      <summary>When a user logs on.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.SessionConnect">
+      <summary>When a session connects.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.SessionDisconnect">
+      <summary>When a session disconnects.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.RemoteConnect">
+      <summary>When a remote session connects.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.RemoteDisconnect">
+      <summary>When a remote session disconnects.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.WorkstationLock">
+      <summary>When computer is locked.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CorrelatedTaskEvent.TriggerType.WorkstationUnlock">
+      <summary>When computer is unlocked.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventEnumerator">
+      <summary>
+            An enumerator over a task's history of events.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventEnumerator.Current">
+      <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+      <returns>
+            The element in the collection at the current position of the enumerator.
+              </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventEnumerator.Dispose">
+      <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventEnumerator.MoveNext">
+      <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+      <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+      <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+              </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventEnumerator.Reset">
+      <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+              </exception>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventLog">
+      <summary>
+            Historical event log for a task. Only available for Windows Vista and Windows Server 2008 and later systems.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventLog.#ctor(System.DateTime,System.String,System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventLog" /> class that looks at all task events from a specified time.
+            </summary>
+      <param name="startTime">The start time.</param>
+      <param name="taskName">Name of the task.</param>
+      <param name="machineName">Name of the machine (optional).</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CorrelatedTaskEventLog.GetEnumerator">
+      <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+      <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+            </returns>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CustomComboBox">
+      <summary>
+        <c>CustomComboBox</c> is an extension of <see cref="T:System.Windows.Forms.ComboBox" /> which provides drop-down customization.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.CustomComboBox" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.#ctor(System.Windows.Forms.Control)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.CustomComboBox" /> class.
+            </summary>
+      <param name="dropControl">The control to display in the drop-down.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.AllowResizeDropDown">
+      <summary>
+            Indicates if drop-down is resizable.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.AssignControl(System.Windows.Forms.Control)">
+      <summary>
+            Assigns control to custom drop-down area of combo box.
+            </summary>
+      <param name="control">Control to be used as drop-down. Please note that this control must not be contained elsewhere.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.AutoSizeDropDown">
+      <summary>
+            Automatically resize drop-down from properties.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.ControlSize">
+      <summary>
+            Gets or sets the size of the drop-down control itself.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DisplayMember">
+      <summary>
+            Gets or sets the property to display for this <see cref="T:System.Windows.Forms.ListControl" />.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> specifying the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> property. The default is an empty string ("").
+            </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.Dispose(System.Boolean)">
+      <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox" /> and optionally releases the managed resources.
+            </summary>
+      <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDown">
+      <summary>
+            Occurs when the drop-down portion of a <see cref="T:Microsoft.Win32.TaskScheduler.CustomComboBox" /> is shown.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownClosed">
+      <summary>
+            Occurs when the drop-down portion of the <see cref="T:Microsoft.Win32.TaskScheduler.CustomComboBox" /> is no longer visible.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownControl">
+      <summary>
+            Gets or sets drop-down control itself.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownHeight">
+      <summary>
+            Gets or sets the height in pixels of the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.
+            </summary>
+      <returns>
+            The height, in pixels, of the drop-down box.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The specified value is less than one.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownSizeMode">
+      <summary>
+            Gets or sets the sizing mode for the drop-down.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownStyle">
+      <summary>
+            Gets or sets a value specifying the style of the combo box.
+            </summary>
+      <returns>
+            One of the <see cref="T:System.Windows.Forms.ComboBoxStyle" /> values. The default is DropDown.
+            </returns>
+      <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+            The assigned value is not one of the <see cref="T:System.Windows.Forms.ComboBoxStyle" /> values.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownWidth">
+      <summary>
+            Gets or sets the width of the of the drop-down portion of a combo box.
+            </summary>
+      <returns>
+            The width, in pixels, of the drop-down box.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The specified value is less than one.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.DropSize">
+      <summary>
+            Gets or sets the size of the drop-down area.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.HideDropDown">
+      <summary>
+            Hides drop-down area of combo box, if shown.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.IntegralHeight">
+      <summary>
+            Gets or sets a value indicating whether the control should resize to avoid showing partial items.
+            </summary>
+      <returns>true if the list portion can contain only complete items; otherwise, false. The default is true.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.IsDroppedDown">
+      <summary>
+            Indicates if drop-down is currently shown.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.ItemHeight">
+      <summary>
+            Gets or sets the height of an item in the combo box.
+            </summary>
+      <returns>
+            The height, in pixels, of an item in the combo box.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The item height value is less than zero.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.Items">
+      <summary>
+            Gets an object representing the collection of the items contained in this <see cref="T:System.Windows.Forms.ComboBox" />.
+            </summary>
+      <returns>
+            A <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> representing the items in the <see cref="T:System.Windows.Forms.ComboBox" />.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.MaxDropDownItems">
+      <summary>
+            Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.
+            </summary>
+      <returns>
+            The maximum number of items of in the drop-down portion. The minimum for this property is 1 and the maximum is 100.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The maximum number is set less than one or greater than 100.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.OnDropDown(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDown" /> event.
+            </summary>
+      <param name="args">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.OnDropDownClosed(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownClosed" /> event.
+            </summary>
+      <param name="args">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.OnFontChanged(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event.
+            </summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.PreProcessMessage(System.Windows.Forms.Message@)">
+      <summary>
+            Preprocesses keyboard or input messages within the message loop before they are dispatched. 
+            </summary>
+      <param name="m">A <see cref="T:System.Windows.Forms.Message" />, passed by reference, that represents the message to process. The possible values are WM_KEYDOWN, WM_SYSKEYDOWN, WM_CHAR, and WM_SYSCHAR.</param>
+      <returns>
+        <c>true</c> if the message was processed by the control; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.PreventPopupHide">
+      <summary>
+            Gets or sets a value indicating whether to prevent hiding the popup window.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectedIndex">
+      <summary>
+            Gets or sets the index specifying the currently selected item.
+            </summary>
+      <returns>
+            A zero-based index of the currently selected item. A value of negative one (-1) is returned if no item is selected.
+            </returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+            The specified index is less than or equal to -2.
+            -or-
+            The specified index is greater than or equal to the number of items in the combo box.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectedItem">
+      <summary>
+            Gets or sets currently selected item in the <see cref="T:System.Windows.Forms.ComboBox" />.
+            </summary>
+      <returns>
+            The object that is the currently selected item or null if there is no currently selected item.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectedText">
+      <summary>
+            Gets or sets the text that is selected in the editable portion of a <see cref="T:System.Windows.Forms.ComboBox" />.
+            </summary>
+      <returns>
+            A string that represents the currently selected text in the combo box. If <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> is set to <see cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList" />, the return value is an empty string ("").
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectedValue">
+      <summary>
+            Gets or sets the value of the member property specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember" /> property.
+            </summary>
+      <returns>
+            An object containing the value of the member of the data source specified by the <see cref="P:System.Windows.Forms.ListControl.ValueMember" /> property.
+            </returns>
+      <exception cref="T:System.InvalidOperationException">
+            The assigned value is null or the empty string ("").
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectionLength">
+      <summary>
+            Gets or sets the number of characters selected in the editable portion of the combo box.
+            </summary>
+      <returns>
+            The number of characters selected in the combo box.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The value was less than zero.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.SelectionStart">
+      <summary>
+            Gets or sets the starting index of text selected in the combo box.
+            </summary>
+      <returns>
+            The zero-based index of the first character in the string of the current text selection.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The value is less than zero.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.ShowDropDown">
+      <summary>
+            Displays drop-down area of combo box, if not already shown.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.Sorted">
+      <summary>
+            Gets or sets a value indicating whether the items in the combo box are sorted.
+            </summary>
+      <returns>true if the combo box is sorted; otherwise, false. The default is false.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox" /> that is attached to a data source.
+            </exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.Text">
+      <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+      <returns>
+            The text associated with this control.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.CustomComboBox.ValueMember">
+      <summary>
+            Gets or sets the property to use as the actual value for the items in the <see cref="T:System.Windows.Forms.ListControl" />.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> representing the name of an object property that is contained in the collection specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> property. The default is an empty string ("").
+            </returns>
+      <exception cref="T:System.ArgumentException">
+            The specified property cannot be found on the object specified by the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> property.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.CustomComboBox.WndProc(System.Windows.Forms.Message@)">
+      <summary>
+            Processes Windows messages.
+            </summary>
+      <param name="m">The Windows <see cref="T:System.Windows.Forms.Message" /> to process.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.CustomComboBox.SizeMode">
+      <summary>
+            Sizing mode for the CustomComboBox drop-down area.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CustomComboBox.SizeMode.UseComboSize">
+      <summary>
+            Uses the width of the parent.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CustomComboBox.SizeMode.UseControlSize">
+      <summary>
+            Uses the width of the supplied control for the drop-down.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.CustomComboBox.SizeMode.UseDropDownSize">
+      <summary>
+            Uses the width of the combo box drop-down box.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.DropDownCheckList">
+      <summary>
+            A check list in a drop down combo box.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckList" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.AllowOnlyOneCheckedItem">
+      <summary>
+            Gets or sets a value indicating whether to allow only one checked item.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.CheckAllText">
+      <summary>
+            Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.CheckedFlagValue">
+      <summary>
+            Gets or sets the logical AND value of all checked items.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.CheckItems(System.Predicate{System.Object},System.Boolean)">
+      <summary>
+            Checks the matching items.
+            </summary>
+      <param name="match">The match.</param>
+      <param name="keepExisting">if set to <c>true</c> keep existing checked items.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.FormattingEnabled">
+      <summary>
+            Gets or sets a value indicating whether formatting is applied to the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property of the <see cref="T:System.Windows.Forms.ListControl" />.
+            </summary>
+      <returns>true if formatting of the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property is enabled; otherwise, false. The default is false.
+            </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.GetItemChecked(System.Int32)">
+      <summary>
+            Gets the check state of the specified item.
+            </summary>
+      <param name="index">The index of the item.</param>
+      <returns>
+        <c>true</c> if item is checked; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.InitializeAndSet``1(``0,System.Resources.ResourceManager,System.String,``0[])">
+      <summary>
+            Initializes the check list from an enumerated type and sets its initial checks.
+            </summary>
+      <param name="val">The flag value used to check the items.</param>
+      <param name="mgr">The <see cref="T:System.Resources.ResourceManager" /> that holds the display text for each enumerated value.</param>
+      <param name="prefix">(Optional) The prefix used in front of the enumeration value to pull from the resource file. If <c>null</c>, then this value defaults to the name of the enumerated type specified by <typeparamref name="T" />.</param>
+      <param name="exclude">(Optional) The excluded items from the enumerated type.</param>
+      <typeparam name="T">Enumerated type used to set the items.</typeparam>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.InitializeFromEnum(System.Type,System.Resources.ResourceManager,System.String,System.String[])">
+      <summary>
+            Initializes the check list from an enumerated type.
+            </summary>
+      <param name="enumType">The enumerated type.</param>
+      <param name="mgr">The <see cref="T:System.Resources.ResourceManager" /> that holds the display text for each enumerated value.</param>
+      <param name="prefix">(Optional) The prefix used in front of the enumeration value to pull from the resource file. If <c>null</c>, then this value defaults to the name of the enumerated type specified by <paramref name="enumType" />.</param>
+      <param name="exclude">(Optional) The excluded items from the enumerated type.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.InitializeFromTaskEnum(System.Type)">
+      <summary>
+            Initializes the check list from an enumerated type defined in the TaskScheduler assembly
+            </summary>
+      <param name="enumType">The enumerated type.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.Items">
+      <summary>
+            Gets the list of all check list items.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.MultiColumnList">
+      <summary>
+            Gets or sets a value indicating whether to display the list with multiple columns.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.OnDropDown(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDown" /> event.
+            </summary>
+      <param name="args">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.OnDropDownClosed(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.CustomComboBox.DropDownClosed" /> event.
+            </summary>
+      <param name="args">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.OnSelectedItemsChanged">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.DropDownCheckList.SelectedItemsChanged" /> event.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.RemoveItem(System.Int32)">
+      <summary>
+            Removes the specified item from the check list.
+            </summary>
+      <param name="index">The index of the item to remove.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.RequireAtLeastOneCheckedItem">
+      <summary>
+            Gets or sets a value indicating whether at least one item must be checked.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.SelectedItems">
+      <summary>
+            Gets the selected items.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.DropDownCheckList.SelectedItemsChanged">
+      <summary>
+            Occurs when the <see cref="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.SelectedItems" /> property changes.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.SetItemChecked(System.Int32,System.Boolean)">
+      <summary>
+            Sets the specified item's check state.
+            </summary>
+      <param name="index">The index of the item.</param>
+      <param name="value">Checked if set to <c>true</c>; otherwise unchecked.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckList.Sorted">
+      <summary>
+            Gets or sets a value indicating whether the items in the combo box are sorted.
+            </summary>
+      <returns>true if the combo box is sorted; otherwise, false. The default is false.</returns>
+      <exception cref="T:System.ArgumentException">
+            An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox" /> that is attached to a data source.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.UncheckAllItems">
+      <summary>
+            Unchecks all items.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckList.UpdateText">
+      <summary>
+            Updates the text associated with each item of the check list.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.DropDownCheckListItem">
+      <summary>
+            An item in a <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckList" />.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckListItem" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.#ctor(System.Object)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckListItem" /> class.
+            </summary>
+      <param name="value">The value.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckListItem" /> class.
+            </summary>
+      <param name="text">The text.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.#ctor(System.String,System.Object)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckListItem" /> class.
+            </summary>
+      <param name="text">The text.</param>
+      <param name="value">The value.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.Equals(System.Object)">
+      <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            </summary>
+      <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+      <returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+      <exception cref="T:System.NullReferenceException">
+            The <paramref name="obj" /> parameter is null.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.GetHashCode">
+      <summary>
+            Returns a hash code for this instance.
+            </summary>
+      <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.Text">
+      <summary>
+            Gets or sets the text.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckListItem.Value">
+      <summary>
+            Gets or sets the value.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.DropDownCheckTree">
+      <summary>
+            A check list in a drop down combo box.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.DropDownCheckTree" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.CheckAllText">
+      <summary>
+            Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.CheckedItems">
+      <summary>
+            Gets the checked items.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.CheckItems(System.Predicate{System.String},System.Boolean)">
+      <summary>
+            Checks the matching items.
+            </summary>
+      <param name="match">The match.</param>
+      <param name="keepExisting">if set to <c>true</c> keep existing checked items.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.CheckValue(System.String,System.Boolean)">
+      <summary>
+            Checks the item in the tree whose value matches the one specified by <paramref name="value" />.
+            </summary>
+      <param name="value">The value to match.</param>
+      <param name="check">if set to <c>true</c> check the matching item, else uncheck it.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.FormattingEnabled">
+      <summary>
+            Gets or sets a value indicating whether formatting is applied to the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property of the <see cref="T:System.Windows.Forms.ListControl" />.
+            </summary>
+      <returns>true if formatting of the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property is enabled; otherwise, false. The default is false.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.Items">
+      <summary>
+            Gets the list of all check list items.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.OnDropDownClosed(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed" /> event.
+            </summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.OnSelectedItemsChanged">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.DropDownCheckTree.SelectedItemsChanged" /> event.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.DropDownCheckTree.SelectedItemsChanged">
+      <summary>
+            Occurs when the <see cref="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.CheckedItems" /> property changes.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.DropDownCheckTree.Sorted">
+      <summary>
+            Gets or sets a value indicating whether the items in the combo box are sorted.
+            </summary>
+      <returns>true if the combo box is sorted; otherwise, false. The default is false.</returns>
+      <exception cref="T:System.ArgumentException">
+            An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox" /> that is attached to a data source.
+            </exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.UncheckAllItems">
+      <summary>
+            Unchecks all items in the tree.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.DropDownCheckTree.UpdateText">
+      <summary>
+            Updates the text associated with each item of the check list.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.EventActionFilterEditor">
+      <summary>
+            Dialog that enables editing of event queries, specifically for creating filters.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventActionFilterEditor.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.EventActionFilterEditor" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventActionFilterEditor.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.EventActionFilterEditor" /> class.
+            </summary>
+      <param name="eventSubscription">The event query XML used to initialize the dialog.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventActionFilterEditor.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.EventActionFilterEditor.Subscription">
+      <summary>
+            Gets or sets the event query XML. Setting this value will reinitialize the dialog.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.EventViewerDialog">
+      <summary>
+            Dialog allowing the viewing of a task event.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventViewerDialog.#ctor(Microsoft.Win32.TaskScheduler.TaskEvent,Microsoft.Win32.TaskScheduler.TaskEventLog)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.EventViewerDialog" /> class.
+            </summary>
+      <param name="taskEvent">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskEvent" /> to show initially.</param>
+      <param name="log">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventLog" /> for the task.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventViewerDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.EventViewerDialog.Initialize(Microsoft.Win32.TaskScheduler.TaskEvent,Microsoft.Win32.TaskScheduler.TaskEventLog)">
+      <summary>
+            Initializes the dialog with the specified task event.
+            </summary>
+      <param name="taskEvent">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskEvent" /> to show initially.</param>
+      <param name="log">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventLog" /> for the task.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker">
+      <summary>
+            A single control that can represent a full date and time.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.AutoSize">
+      <summary>
+            Gets or sets a value indicating whether [auto size].
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.AutoSizeMode">
+      <summary>
+            Gets or sets how the control will resize itself.
+            </summary>
+      <returns>
+            A value from the <see cref="T:System.Windows.Forms.AutoSizeMode" /> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly" />.
+            </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.OnValueChanged(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueChanged" /> event.
+            </summary>
+      <param name="eventArgs">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.SelectDate">
+      <summary>
+            Selects the date control.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Text">
+      <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+      <returns>A string that represents the text associated with this control.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.TimeFormat">
+      <summary>
+            Gets or sets the format of the time portion of the control.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.UtcCheckBehavior">
+      <summary>
+            Gets or sets how fields are processed when the Utc Checkbox is checked.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.UTCPrompt">
+      <summary>
+            Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Value">
+      <summary>
+            Gets or sets the value.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueChanged">
+      <summary>
+            Occurs when the <see cref="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Value" /> property changes.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueIsUTC">
+      <summary>
+            Gets a value indicating whether value is UTC.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior">
+      <summary>
+            Behavior of producing value when Utc check is checked
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc">
+      <summary>Takes time in fields as local and produces value in Utc.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeUtc">
+      <summary>Takes time in fields as Utc and produces value in local.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.AssumeLocal">
+      <summary>Takes time in fields as local and leaves them local.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat">
+      <summary>
+            Determines the format of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> control.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat.LongTime">
+      <summary>Shows hours, minutes and seconds</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat.ShortTime">
+      <summary>Shows hours and minutes</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat.Hidden">
+      <summary>No time box shown</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor">
+      <summary>
+            Represents a UI element that can edit task settings
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.Editable">
+      <summary>
+            Gets or sets a value indicating whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> is editor.Editable.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.IsV2">
+      <summary>
+            Gets or sets a value indicating whether this task definition is v2.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.ReinitializeControls">
+      <summary>
+            Reinitializes all the controls based on current <see cref="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.TaskDefinition" /> values.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.ShowErrors">
+      <summary>
+            Gets or sets a value indicating whether errors are shown in the UI.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.TaskDefinition">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.TaskDefinition" /> in its edited state.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.TaskService">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.ITaskDefinitionEditor.TaskService" /> assigned at initialization.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ITaskEditor">
+      <summary>
+            Represents a UI element that can edit tasks and their settings
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskEditor.Task">
+      <summary>
+            Gets the current <see cref="P:Microsoft.Win32.TaskScheduler.ITaskEditor.Task" />. This is only the task used to initialize this control. The updates made to the control are not registered.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskEditor.TaskFolder">
+      <summary>
+            Gets or sets the folder for the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.ITaskEditor.Task" />, this value will be set to the folder of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ITaskEditor.TaskName">
+      <summary>
+            Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.ITaskEditor.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ITaskEditorUIElement">
+      <summary>
+            Represents a UI element that can must be forced to refresh its state
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ITaskEditorUIElement.RefreshState">
+      <summary>
+            Refreshes the state of the elements within the control using values set within the control.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ListColumnEditor">
+      <summary>
+            Dialog allowing the selections of columns for a list.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ListColumnEditor.#ctor(System.String[],System.String[],System.String[])">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ListColumnEditor" /> class.
+            </summary>
+      <param name="columns">The list of all possible column entries.</param>
+      <param name="defaultColumns">The default column entries.</param>
+      <param name="displayedColumns">The displayed column entries.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ListColumnEditor.DisplayedColumns">
+      <summary>
+            Gets the displayed columns.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ListColumnEditor.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskBrowserDialog">
+      <summary>
+            A dialog for selecting tasks or task folders.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskBrowserDialog" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.AllowFolderSelection">
+      <summary>
+            Gets or sets a value indicating whether folders may be selected.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.Description">
+      <summary>
+            Gets or sets the description.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.SelectedPath">
+      <summary>
+            Gets or sets the selected item path. The path may reference either a <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> or a <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" />.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.SelectedPathType">
+      <summary>
+            Gets the type of the selected path. Value is <c>null</c> if unresolved or not selected.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.ShowTasks">
+      <summary>
+            Gets or sets a value indicating whether to show tasks along with the folders.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.TaskService">
+      <summary>
+            Gets or sets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskBrowserDialog.TaskService" />.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskEditDialog">
+      <summary>
+            Dialog that allows tasks to be edited
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.#ctor(Microsoft.Win32.TaskScheduler.Task,System.Boolean,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> class.
+            </summary>
+      <param name="task">The task.</param>
+      <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+      <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.#ctor(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.Boolean,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> class.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService" /> instance.</param>
+      <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+      <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.AvailableTabs">
+      <summary>
+            Gets or sets the available tabs.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ConvertResourceStringReferences">
+      <summary>
+            Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Editable">
+      <summary>
+            Gets or sets a value indicating whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> is editable.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.Initialize(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>
+            Initializes the control for the editing of an existing <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" />.
+            </summary>
+      <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" /> instance.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+      <summary>
+            Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService" /> instance.</param>
+      <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />. Leaving null creates a new task.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.MaxHistoryCount">
+      <summary>
+            Gets or sets the maximum history count. Use -1 for infinite or to retrieve all items.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.RegisterTaskOnAccept">
+      <summary>
+            Gets or sets a value indicating whether to register task when Accept (OK) button pressed.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowActionRunButton">
+      <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowAddedPropertiesTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Additions' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowConvertActionsToPowerShellCheck">
+      <summary>Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowErrors">
+      <summary>
+            Gets or sets a value indicating whether errors are shown in the UI.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowRegistrationInfoTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Info' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.ShowRunTimesTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Run Times' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task">
+      <summary>
+            Gets the current <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" />. This is only the task used to initialize this control. The updates made to the control are not registered.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" /> in its edited state.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskFolder">
+      <summary>
+            Gets or sets the folder for the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" />, this value will be set to the folder of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskName">
+      <summary>
+            Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService" /> assigned at initialization.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Title">
+      <summary>
+            Gets or sets the title.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskHistoryControl">
+      <summary>
+            Split-panel that displays a list of all events associated with a task with a hidable detail pane.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskHistoryControl" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.Activate(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>
+            Activates this instance. Call when the control receives initial focus or needs to refresh.
+            </summary>
+      <param name="t">The <see cref="P:Microsoft.Win32.TaskScheduler.TaskHistoryControl.Task" /> for which to get the history.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskHistoryControl.MaxQueryCount">
+      <summary>
+            Gets or sets the maximum query count. Use -1 for all or infinite.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLoad(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:System.Windows.Forms.UserControl.Load" /> event.
+            </summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLostFocus(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.RefreshHistory">
+      <summary>
+            Refreshes the history list of the control using current sorting and grouping settings.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskHistoryControl.ShowErrors">
+      <summary>
+            Gets or sets a value indicating whether errors are shown in the UI.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskHistoryControl.Task">
+      <summary>
+            Gets or sets the task used to retrieve the history for this control.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskListView">
+      <summary>
+            Displays a <see cref="T:Microsoft.Win32.TaskScheduler.TaskCollection" /> in a <see cref="T:System.Windows.Forms.ListView" /> control. Mimics list in MMC.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskListView" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskListView.ContextMenuStrip">
+      <summary>
+            Gets or sets the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> associated with this control.
+            </summary>
+      <returns>The <see cref="T:System.Windows.Forms.ContextMenuStrip" /> for this control, or null if there is no <see cref="T:System.Windows.Forms.ContextMenuStrip" />. The default is null.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskListView.Folder">
+      <summary>
+            Gets or sets the folder from which to display the tasks.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.GetItemAt(System.Int32,System.Int32)">
+      <summary>
+            Retrieves the item at the specified location.
+            </summary>
+      <param name="x">The x-coordinate of the location to search for an item (expressed in client coordinates).</param>
+      <param name="y">The y-coordinate of the location to search for an item (expressed in client coordinates).</param>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> that represents the item at the specified position. If there is no item at the specified location, the method returns <c>null</c>.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.OnHandleCreated(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:HandleCreated" /> event.
+            </summary>
+      <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.OnHandleDestroyed(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.
+            </summary>
+      <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.OnTaskSelected(Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelected" /> event.
+            </summary>
+      <param name="e">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskListView.SelectedIndex">
+      <summary>
+            Gets or sets the zero-based index of the currently selected item in a <see cref="T:Microsoft.Win32.TaskScheduler.TaskListView" />.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskListView.Tasks">
+      <summary>
+            Gets or sets the tasks. When setting, be aware that if the collection is empty, the list
+            will not be updated with newly added tasks. For a list view that is self-updating, this
+            value must already contain tasks or use the <see cref="P:Microsoft.Win32.TaskScheduler.TaskListView.Folder" /> property.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelected">
+      <summary>
+            Occurs when task selected in the list.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs">
+      <summary>
+            Event args for when a task is selected.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs.Empty">
+      <summary>
+            Empty <see cref="T:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskListView.TaskSelectedEventArgs.Task">
+      <summary>
+            Gets the task.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskOptionsEditor">
+      <summary>
+            Dialog that allows tasks to be edited
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskOptionsEditor" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.#ctor(Microsoft.Win32.TaskScheduler.Task,System.Boolean,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskOptionsEditor" /> class.
+            </summary>
+      <param name="task">The task.</param>
+      <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+      <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.#ctor(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.Boolean,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskOptionsEditor" /> class.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService" /> instance.</param>
+      <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
+      <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Editable">
+      <summary>
+            Gets or sets a value indicating whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> is editable.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Initialize(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>
+            Initializes the control for the editing of an existing <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />.
+            </summary>
+      <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" /> instance.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+      <summary>
+            Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" />.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService" /> instance.</param>
+      <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" />. Leaving null creates a new task.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.IsV2">
+      <summary>
+            Gets or sets a value indicating whether this task definition is v2.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.OnParentFontChanged(System.EventArgs)">
+      <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event when the <see cref="P:System.Windows.Forms.Control.Font" /> property value of the control's container changes.
+            </summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.RegisterTaskOnAccept">
+      <summary>
+            Gets or sets a value indicating whether to register task when Accept (OK) button pressed.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ReinitializeControls">
+      <summary>
+            Reinitializes all the controls based on current <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" /> values.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ShowErrors">
+      <summary>
+            Gets or sets a value indicating whether errors are shown in the UI.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task">
+      <summary>
+            Gets the current <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />. This is only the task used to initialize this control. The updates made to the control are not registered.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" /> in its edited state.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskFolder">
+      <summary>
+            Gets or sets the folder for the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />, this value will be set to the folder of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskName">
+      <summary>
+            Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService" /> assigned at initialization.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Title">
+      <summary>
+            Gets or sets the title.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl">
+      <summary>
+            Control which allows for the editing of all properties of a <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" />.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl" /> class.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.AvailableTabs">
+      <summary>
+            Gets or sets the available tabs.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentError">
+      <summary>
+            Occurs when a component entry has an error.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ConvertResourceStringReferences">
+      <summary>
+            Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Editable">
+      <summary>
+            Gets or sets a value indicating whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl" /> is editable.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.HasError">
+      <summary>
+            Gets or sets a value indicating whether this instance has error.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Initialize(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>
+            Initializes the control for the editing of an existing <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" />.
+            </summary>
+      <param name="taskInstance">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" /> instance.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+      <summary>
+            Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" />.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskService" /> instance.</param>
+      <param name="taskDef">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" />. Leaving null creates a new task.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.IsV2">
+      <summary>
+            Gets or sets a value indicating whether this task definition is v2.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.MaxHistoryCount">
+      <summary>
+            Gets or sets the maximum history count. Use -1 for infinite or to retrieve all items.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.OnComponentError(Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs)">
+      <summary>
+            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentError" /> event.
+            </summary>
+      <param name="e">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs" /> instance containing the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ReinitializeControls">
+      <summary>
+            Reinitializes all the controls based on current <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" /> values.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowActionRunButton">
+      <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowAddedPropertiesTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Additions' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowConvertActionsToPowerShellCheck">
+      <summary>Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowErrors">
+      <summary>Gets or sets a value indicating whether errors are shown in the UI.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowRegistrationInfoTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Info' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ShowRunTimesTab">
+      <summary>
+            Gets or sets a value indicating whether to show the 'Run Times' tab.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task">
+      <summary>
+            Gets the current <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" />. This is only the task used to initialize this control. The updates made to the control are not registered.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" /> in its edited state.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskFolder">
+      <summary>
+            Gets or sets the folder for the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" />, this value will be set to the folder of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskName">
+      <summary>
+            Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskService">
+      <summary>
+            Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskService" /> assigned at initialization.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs">
+      <summary>
+            Error thrown within the component.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs.Empty">
+      <summary>
+            Empty arguments signifying that the error has been cleared.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs.ErrorText">
+      <summary>
+            Gets the text associated with the error event. This value may be null.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.ComponentErrorEventArgs.ThrownException">
+      <summary>
+            Gets the thrown exception on the error. This value may be null.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskRunTimesControl">
+      <summary>
+            Control that will display the run times for a provided task.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesControl" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.BeginInit">
+      <summary>
+            Signals the object that initialization is starting.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.EndDate">
+      <summary>
+            Gets or sets the end date.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.EndInit">
+      <summary>
+            Signals the object that initialization is complete.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Initialize(Microsoft.Win32.TaskScheduler.Task,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+      <summary>
+            Initializes an instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog" /> class.
+            </summary>
+      <param name="task">The task to display.</param>
+      <param name="startDate">The date to begin looking for run times.</param>
+      <param name="endDate">The date to end looking for run times.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.StartDate">
+      <summary>
+            Gets or sets the start date.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Task">
+      <summary>
+            Gets or sets the task.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog">
+      <summary>
+            Dialog that will display the run times for a provided task.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.#ctor(Microsoft.Win32.TaskScheduler.Task,System.DateTime,System.DateTime)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog" /> class.
+            </summary>
+      <param name="task">The task to display.</param>
+      <param name="startDate">The date to begin looking for run times.</param>
+      <param name="endDate">The date to end looking for run times.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.EndDate">
+      <summary>
+            Gets or sets the end date.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.Initialize(Microsoft.Win32.TaskScheduler.Task,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+      <summary>
+            Initializes the dialog with the specified task.
+            </summary>
+      <param name="task">The task.</param>
+      <param name="startDate">The start date.</param>
+      <param name="endDate">The end date.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.StartDate">
+      <summary>
+            Gets or sets the start date.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog.Task">
+      <summary>
+            Gets or sets the task.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard">
+      <summary>
+            A wizard that walks the user through the creation of a simple task.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.#ctor(Microsoft.Win32.TaskScheduler.Task,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" /> class.
+            </summary>
+      <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" /> instance.</param>
+      <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.#ctor(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" /> class.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskService" /> instance.</param>
+      <param name="definition">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AllowEditorOnFinish">
+      <summary>
+            Gets or sets a value indicating whether show a check box on the summary page that will open the full editor when the user presses Finish.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableActions">
+      <summary>
+            Gets or sets the available actions.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailablePages">
+      <summary>
+            Gets or sets the available pages.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableTriggers">
+      <summary>
+            Gets or sets the available triggers.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.EditorOnFinishText">
+      <summary>
+            Gets or sets the text shown on the summary page prompting for editor on finish click.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Icon">
+      <summary>
+            Gets or sets the icon for the form.
+            </summary>
+      <returns>
+            An <see cref="T:System.Drawing.Icon" /> that represents the icon for the form.
+            </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Initialize(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>
+            Initializes the control for the editing of an existing <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" />.
+            </summary>
+      <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" /> instance.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+      <summary>
+            Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />.
+            </summary>
+      <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskService" /> instance.</param>
+      <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />. Leaving null creates a new task.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Password">
+      <summary>
+            Gets the password.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.RegisterTaskOnFinish">
+      <summary>
+            Gets or sets a value indicating whether to register the task on Finish.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.ShowIcon">
+      <summary>
+            Gets or sets a value indicating whether an icon is displayed in the caption bar of the form.
+            </summary>
+      <returns>true if the form displays an icon in the caption bar; otherwise, false. The default is true.
+            </returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.SummaryFormatString">
+      <summary>
+            Gets or sets the summary format string.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.SummaryRegistrationNotice">
+      <summary>
+            Gets or sets the summary registration notice.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task">
+      <summary>
+            Gets the current <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" />. This is only the task used to initialize this control. The updates made to the control are not registered.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition">
+      <summary>
+            Gets or sets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskFolder">
+      <summary>
+            Gets or sets the folder for the task. Used only if <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" /> property has not been set and <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.RegisterTaskOnFinish" /> property is true.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskName">
+      <summary>
+            Gets or sets the name of the task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskService">
+      <summary>
+            Gets or sets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskService" />.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Text">
+      <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Title">
+      <summary>
+            Gets or sets the title.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TriggerPagePrompt">
+      <summary>
+            Gets or sets the trigger page prompt.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TriggerPropertiesInstructions">
+      <summary>
+            Gets or sets the trigger properties page instructions text.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardActions">
+      <summary>
+            Flags to indicate which actions are available in the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" />.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardActions.Execute">
+      <summary>This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is provided, find its associated application and launch the application with the document.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardActions.SendEmail">
+      <summary>This action sends and e-mail.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardActions.ShowMessage">
+      <summary>This action shows a message box.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages">
+      <summary>
+            Flags to indicate which pages are visible in the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" />.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.IntroPage">
+      <summary>Displays the introduction page with name and description.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.SecurityPage">
+      <summary>Displays the security options page with user and password options.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.TriggerSelectPage">
+      <summary>Displays trigger selection page.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.TriggerPropertiesPage">
+      <summary>Displays generic trigger properties page.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.ActionSelectPage">
+      <summary>Displays action selection page.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.SummaryPage">
+      <summary>Displays the summary page.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage">
+      <summary>Displays a page to edit the selected trigger.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages.ActionEditPage">
+      <summary>Displays a page to edit the selected action.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers">
+      <summary>
+            Flags to indicate which triggers are available in the <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard" />.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Event">
+      <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Time">
+      <summary>Triggers the task at a specific time of day.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Daily">
+      <summary>Triggers the task on a daily schedule.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Weekly">
+      <summary>Triggers the task on a weekly schedule.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Monthly">
+      <summary>Triggers the task on a monthly schedule.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.MonthlyDOW">
+      <summary>Triggers the task on a monthly day-of-week schedule.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Idle">
+      <summary>Triggers the task when the computer goes into an idle state.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Registration">
+      <summary>Triggers the task when the task is registered. Version 1.2 only.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Boot">
+      <summary>Triggers the task when the computer boots.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.Logon">
+      <summary>Triggers the task when a specific user logs on.</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardTriggers.SessionStateChange">
+      <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog">
+      <summary>
+            Dialog box to set the properties of a TaskService.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.Domain">
+      <summary>
+            Gets or sets the domain.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.ForceV1">
+      <summary>
+            Gets or sets a value indicating whether to force the Task Scheduler to Version 1.0.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.Password">
+      <summary>
+            Gets or sets the password.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.TargetServer">
+      <summary>
+            Gets or sets the target server.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.TaskService">
+      <summary>
+            Gets or sets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.TaskService" /> instance associated with the dialog.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.Title">
+      <summary>
+            Gets or sets the title.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog.User">
+      <summary>
+            Gets or sets the user.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TriggerEditDialog">
+      <summary>
+            An editor that handles all Task triggers.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TriggerEditDialog.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerEditDialog" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TriggerEditDialog.#ctor(Microsoft.Win32.TaskScheduler.Trigger,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerEditDialog" /> class.
+            </summary>
+      <param name="trigger">The <see cref="P:Microsoft.Win32.TaskScheduler.TriggerEditDialog.Trigger" /> to edit.</param>
+      <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TriggerEditDialog.Dispose(System.Boolean)">
+      <summary>
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TriggerEditDialog.SupportV1Only">
+      <summary>
+            Gets or sets a value indicating whether this editor only supports V1 triggers.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TriggerEditDialog.TargetServer">
+      <summary>
+            Gets or sets the target server.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TriggerEditDialog.Trigger">
+      <summary>
+            Gets or sets the trigger that is being edited.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TriggerEditDialog.UseUnifiedSchedulingEngine">
+      <summary>
+            Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery">
+      <summary>
+            Object which encapsulates the filter query used by <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" /> objects.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.#ctor(System.String,System.Int32[],System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery" /> class.
+            </summary>
+      <param name="path">The path.</param>
+      <param name="eventIDs">The event ids.</param>
+      <param name="startTime">The start time.</param>
+      <param name="endTime">The end time.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.#ctor(System.String,System.TimeSpan,System.Int32[])">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery" /> class.
+            </summary>
+      <param name="path">The path.</param>
+      <param name="lastSpan">The last span.</param>
+      <param name="eventIDs">The event ids.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.Deserialize(System.String)">
+      <summary>
+            Deserializes the specified XML.
+            </summary>
+      <param name="xml">The XML.</param>
+      <returns></returns>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.Query">
+      <summary>
+            The query sub element
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.Serialize(Microsoft.Win32.TaskScheduler.Events.EventQuery)">
+      <summary>
+            Serializes the specified q.
+            </summary>
+      <param name="q">The q.</param>
+      <returns></returns>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery">
+      <summary>
+            Represents the Query sub object.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.AddPath(System.String)">
+      <summary>
+            Adds the path.
+            </summary>
+      <param name="path">The path.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.AddValidatedComputers(System.String)">
+      <summary>
+            Adds the validated computers.
+            </summary>
+      <param name="computers">The computers.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.AddValidatedUser(System.String)">
+      <summary>
+            Adds the validated user.
+            </summary>
+      <param name="user">The user.</param>
+      <exception cref="T:System.Security.Principal.IdentityNotMappedException"></exception>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Computers">
+      <summary>
+            The computers
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Data">
+      <summary>
+            The data items (e.g. TaskName) that are being requested
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Id">
+      <summary>
+            The identifier
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.IDs">
+      <summary>
+            The ids
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.IDString">
+      <summary>
+            Gets or sets the identifier string.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.IsSelect">
+      <summary>
+            The is select vs suppress
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Keywords">
+      <summary>
+            The keywords
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Levels">
+      <summary>
+            The levels
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Path">
+      <summary>
+            The path
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Providers">
+      <summary>
+            The providers
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Select">
+      <summary>
+            The select
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Suppress">
+      <summary>
+            The suppress
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.SuppressedIDs">
+      <summary>
+            The suppressed ids
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Tasks">
+      <summary>
+            The tasks
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.Times">
+      <summary>
+            The times
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.User">
+      <summary>
+            The user
+            </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID">
+      <summary>
+            Represents event IDs
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID.#ctor(System.Int32)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID" /> class.
+            </summary>
+      <param name="id">The identifier.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID.#ctor(System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID" /> class.
+            </summary>
+      <param name="idLow">The identifier low.</param>
+      <param name="idHigh">The identifier high.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID.Text">
+      <summary>
+            Gets the text.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CID.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect">
+      <summary>
+            Represents the Select element
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.#ctor(Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery,System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect" /> class.
+            </summary>
+      <param name="parent">The parent.</param>
+      <param name="path">The path.</param>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.IsSelect">
+      <summary>
+            The is select
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.Parent">
+      <summary>
+            The parent
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.Path">
+      <summary>
+            The path
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.ReadXml(System.Xml.XmlReader)">
+      <summary>
+            Generates an object from its XML representation.
+            </summary>
+      <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.Value">
+      <summary>
+            Gets or sets the value.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSelect.WriteXml(System.Xml.XmlWriter)">
+      <summary>
+            Converts an object into its XML representation.
+            </summary>
+      <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSuppress">
+      <summary>
+            Represents the Suppress element
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSuppress.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSuppress" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSuppress.#ctor(Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery,System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CSuppress" /> class.
+            </summary>
+      <param name="parent">The parent.</param>
+      <param name="path">The path.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated">
+      <summary>
+            Represents the event time creation values
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.#ctor(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated" /> class.
+            </summary>
+      <param name="start">The start.</param>
+      <param name="end">The end.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.#ctor(System.TimeSpan)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated" /> class.
+            </summary>
+      <param name="last">The last.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.HasDates">
+      <summary>
+            Gets a value indicating whether this instance has dates.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.high">
+      <summary>
+            The low
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.low">
+      <summary>
+            The low
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.span">
+      <summary>
+            The span
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Events.EventQuery.CQuery.CTimeCreated.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI">
+      <summary>
+            User interface for setting properties on a time/calendar based trigger.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI" /> class.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.Dispose(System.Boolean)">
+      <summary> 
+            Clean up any resources being used.
+            </summary>
+      <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.IsV2">
+      <summary>
+            Gets or sets a value indicating whether this editor supports a V1 or V2 trigger.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.OnTriggerTypeChanged">
+      <summary>
+            Called when the trigger type has changed.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.Trigger">
+      <summary>
+            Gets or sets the trigger that is being edited. A new trigger may be returned so you remove and re-add the resulting value to the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.TriggerTypeChanged">
+      <summary>
+            Occurs when the trigger type has changed.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.UseUnifiedSchedulingEngine">
+      <summary>
+            Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+            </summary>
+    </member>
+  </members>
+</doc>
