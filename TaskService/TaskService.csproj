@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net452</TargetFrameworks>
+    <TargetFrameworks>net40;net452;netstandard2.0</TargetFrameworks>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -15,16 +15,12 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
-    <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
-    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(TargetFramework.Replace('net', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFramework.Replace('net', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFramework.Replace('net', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFramework.Replace('net', '')) &gt;= 4.5 ">$(DefineConstants)NET_45_OR_GREATER</DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net20' ">NET_20_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net35' ">NET_20_OR_GREATER;NET_35_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">NET_20_OR_GREATER;NET_35_OR_GREATER;NET_40_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net452' ">NET_20_OR_GREATER;NET_35_OR_GREATER;NET_40_OR_GREATER;NET_45_OR_GREATER</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'netstandard2.0' ">NET_20_OR_GREATER;NET_35_OR_GREATER;NET_40_OR_GREATER;NET_45_OR_GREATER;NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
@@ -34,12 +30,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
 
+
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETStandard' ">
+    <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="4.4.0" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\TaskEditor\Native\EnumUtil.cs">
       <Link>Native\EnumUtil.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\ExtensionAttributeFor.NET_2.0.cs">
-      <Link>Native\ExtensionAttributeFor.NET_2.0.cs</Link>
     </Compile>
   </ItemGroup>
 </Project>
