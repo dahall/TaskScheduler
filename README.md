@@ -55,7 +55,7 @@ If you are writing your own custom Task Scheduler COM Handler based on the <span
 There is a help file included with the download that provides an overview of the various classes. There are numerous examples under the "Documentation" tab.  
 
 You can perform a number of actions in a single line of code:  
-```C$
+```C#
 // Run a program every day on the local machine
 TaskService.Instance.AddTask("Test", QuickTriggerType.Daily, "myprogram.exe", "-a arg");
 
@@ -65,7 +65,7 @@ TaskService.Instance.AddTask("Test", new MonthlyTrigger { RunOnLastDayOfMonth = 
 ```
 
 For many more options, use the library classes to build a complex task. Below is a brief example of how to use the library from C#.  
-```
+```C#
 using System;
 using Microsoft.Win32.TaskScheduler;
 
@@ -93,4 +93,4 @@ class Program
 }
 ```
 
-For extended examples on how to the use the library, look in the source code area or look at the [Examples Page](http://taskscheduler.codeplex.com/wikipage?title=Examples&referringTitle=Home). The library closely follows the Task Scheduler 2.0 Scripting classes. Microsoft has some examples on [MSDN](http://msdn2.microsoft.com/en-us/library/aa384006(VS.85).aspx) around it that may further help you understand how to use this library.
+For extended examples on how to the use the library, look in the source code area or look at the [Examples Page](https://github.com/dahall/TaskScheduler/wiki/Examples). The library closely follows the Task Scheduler 2.0 Scripting classes. Microsoft has some examples on [MSDN](http://msdn2.microsoft.com/en-us/library/aa384006(VS.85).aspx) around it that may further help you understand how to use this library.
