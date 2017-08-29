@@ -314,7 +314,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (RegisterTaskOnAccept)
 			{
-				if (Task != null && !Task.Definition.Principal.RequiresPassword())
+				if (Task != null && !TaskDefinition.Principal.RequiresPassword())
 					Task.RegisterChanges();
 				else
 				{

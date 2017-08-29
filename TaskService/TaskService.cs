@@ -38,8 +38,8 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		private static readonly Version v1Ver = new Version(1, 1);
-		private static Guid CLSID_Ctask = Marshal.GenerateGuidForType(typeof(V1Interop.CTask));
-		private static Guid IID_ITask = Marshal.GenerateGuidForType(typeof(V1Interop.ITask));
+		private static Guid CLSID_Ctask = typeof(V1Interop.CTask).GUID;
+		private static Guid IID_ITask = typeof(V1Interop.ITask).GUID;
 		private static Version osLibVer;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 

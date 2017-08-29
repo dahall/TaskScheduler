@@ -1478,8 +1478,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			catch (Exception ex)
 			{
-#if DEBUG
 				Debug.WriteLine($"Error in GetV2StrippedDefinition: {ex}");
+#if DEBUG
 				throw;
 #endif
 			}

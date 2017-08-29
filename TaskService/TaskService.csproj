@@ -61,8 +61,8 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=11.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -87,7 +87,9 @@
     <Compile Include="Native\System.Collections.Generic.PreNet45.cs" />
     <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="ReflectionHelper.cs" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ResourceReferenceValue.cs" />
     <Compile Include="TaskEvent.cs" />
     <Compile Include="TaskEventWatcher.cs" />

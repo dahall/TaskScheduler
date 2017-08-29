@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Security.Principal;
-using CubicOrange.Windows.Forms.ActiveDirectory;
+using Tulpep.ActiveDirectoryObjectPicker;
 
 namespace Microsoft.Win32.TaskScheduler
 {

@@ -1,4 +1,4 @@
-﻿#if !NET_35_OR_GREATER
+﻿#if NET20
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  * Event methods and classes literally pulled from the .NET 4.0 implementation.
  * None of this is original work. It comes straight from decompiled Microsoft
