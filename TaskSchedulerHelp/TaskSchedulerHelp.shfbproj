@@ -15,7 +15,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <OutputPath>.\Help\</OutputPath>
+    <OutputPath>..\docs\</OutputPath>
     <HtmlHelpName>TaskScheduler</HtmlHelpName>
     <ProjectSummary>&amp;lt%3bp&amp;gt%3bThe Microsoft.Win32.TaskScheduler namespace provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
@@ -32,7 +32,7 @@
     </WorkingPath>
     <FrameworkVersion>.NET Framework 4.5.2</FrameworkVersion>
     <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-    <CopyrightText>&amp;#169%3b 2016 Codeplex Community. All rights reserved.</CopyrightText>
+    <CopyrightText>&amp;#169%3b 2017 Open Source Community. All rights reserved.</CopyrightText>
     <PresentationStyle>VS2013</PresentationStyle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
@@ -102,9 +102,9 @@
       <NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
       <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
     </NamespaceSummaries>
-    <HelpFileVersion>2.5.21</HelpFileVersion>
-    <HelpFileFormat>MSHelpViewer</HelpFileFormat>
-    <CopyrightHref>http://taskscheduler.codeplex.com/license</CopyrightHref>
+    <HelpFileVersion>2.6.0</HelpFileVersion>
+    <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
+    <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceTitle>Task Scheduler Managed Class Library Help</RootNamespaceTitle>
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
@@ -124,7 +124,7 @@
     <SyntaxFilters>Standard</SyntaxFilters>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <Preliminary>False</Preliminary>
-    <NamingMethod>Guid</NamingMethod>
+    <NamingMethod>MemberName</NamingMethod>
     <Language>en-US</Language>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <PlugInConfigurations />
@@ -145,6 +145,9 @@
     <ComponentPath />
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>True</NamespaceGrouping>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
+    <SourceCodeBasePath>..\</SourceCodeBasePath>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
