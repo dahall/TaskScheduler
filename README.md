@@ -2,6 +2,8 @@
 
 > Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.  
 
+API documentation can be found at https://dahall.github.io/TaskScheduler.
+
 ## Installation
 This project's assemblies are available via NuGet.
 
