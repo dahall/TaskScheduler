@@ -263,3 +263,8 @@ __pycache__/
 # Local build files
 *.cmd
 *.zip
+
+# Built help files
+docs/*.bat
+docs/*.exe
+docs/*.msh?
