@@ -1,0 +1,3 @@
+[submodule "TaskSchedulerConfig"]
+	path = TaskSchedulerConfig
+	url = https://github.com/dahall/TaskSchedulerConfig
