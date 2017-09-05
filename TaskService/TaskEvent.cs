@@ -342,7 +342,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// Historical event information for a task.
+	/// Historical event information for a task. This class wraps and extends the <see cref="EventRecord"/> class.
 	/// </summary>
 	/// <remarks>
 	/// For events on systems prior to Windows Vista, this class will only have information for the TaskPath, TimeCreated and EventId properties.
@@ -615,6 +615,31 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Historical event log for a task. Only available for Windows Vista and Windows Server 2008 and later systems.
 	/// </summary>
+	/// <remarks>Many applications have the need to audit the execution of the tasks they supply. To enable this, the library provides the TaskEventLog class that allows for TaskEvent instances to be enumerated. This can be done for single tasks or the entire system. It can also be filtered by specific events or criticality.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a log instance for the Maint task in the root directory
+	/// TaskEventLog log = new TaskEventLog(@"\Maint",
+	///    // Specify the event id(s) you want to enumerate
+	///    new int[] { 141 /* TaskDeleted */, 201 /* ActionSuccess */ },
+	///    // Specify the start date of the events to enumerate. Here, we look at the last week.
+	///    DateTime.Now.AddDays(-7));
+	/// 
+	/// // Tell the enumerator to expose events 'newest first'
+	/// log.EnumerateInReverse = false;
+	/// 
+	/// // Enumerate the events
+	/// foreach (TaskEvent ev in log)
+	/// {
+	///    // TaskEvents can interpret event ids into a well known, readable, enumerated type
+	///    if (ev.StandardEventId == StandardTaskEventId.TaskDeleted)
+	///       output.WriteLine($"  Task '{ev.TaskPath}' was deleted");
+	/// 
+	///    // TaskEvent exposes a number of properties regarding the event
+	///    else if (ev.EventId == 201)
+	///       output.WriteLine($"  Completed action '{ev.DataValues["ActionName"]}',
+	///          ({ev.DataValues["ResultCode"]}) at {ev.TimeCreated.Value}.");
+	/// }
+	/// ]]></code></example>
 	public sealed class TaskEventLog : IEnumerable<TaskEvent>
 	{
 		private const string TSEventLogPath = "Microsoft-Windows-TaskScheduler/Operational";

@@ -783,6 +783,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when the system is booted.
 	/// </summary>
+	/// <remarks>A BootTrigger will fire when the system starts. It can only be delayed. All triggers that support a delay implement the ITriggerDelay interface.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create trigger that fires 5 minutes after the system starts.
+	/// BootTrigger bt = new BootTrigger();
+	/// bt.Delay = TimeSpan.FromMinutes(5);  // V2 only
+	/// ]]></code></example>
 	public sealed class BootTrigger : Trigger, ITriggerDelay
 	{
 		/// <summary>
@@ -828,6 +834,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Represents a custom trigger. This class is based on undocumented features and may change.
+	/// <note>This type of trigger is only available for reading custom triggers. It cannot be used to create custom triggers.</note>
 	/// </summary>
 	public sealed class CustomTrigger : Trigger, ITriggerDelay
 	{
@@ -1014,6 +1021,14 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
 	/// </summary>
+	/// <remarks>A DailyTrigger will fire at a specified time every day or interval of days.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a trigger that runs every other day and will start randomly between 10 a.m. and 12 p.m.
+	/// DailyTrigger dt = new DailyTrigger();
+	/// dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(10);
+	/// dt.DaysInterval = 2;
+	/// dt.RandomDelay = TimeSpan.FromHours(2); // V2 only
+	/// ]]></code></example>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class DailyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
@@ -1150,8 +1165,16 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>
-	/// Represents a trigger that starts a task when a system event occurs. Not available on Task Scheduler 1.0.
+	/// Represents a trigger that starts a task when a system event occurs.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
 	/// </summary>
+	/// <remarks>The EventTrigger runs when a system event fires.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a trigger that will fire whenever a level 2 system event fires.
+	/// EventTrigger eTrigger = new EventTrigger();
+	/// eTrigger.Subscription = @"<QueryList><Query Id='1'><Select Path='System'>*[System/Level=2]</Select></Query></QueryList>";
+	/// eTrigger.ValueQueries.Add("Name", "Value");
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = false)]
 	public sealed class EventTrigger : Trigger, ITriggerDelay
 	{
@@ -1370,6 +1393,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when the computer goes into an idle state. For information about idle conditions, see Task Idle Conditions.
 	/// </summary>
+	/// <remarks>An IdleTrigger will fire when the system becomes idle. It is generally a good practice to set a limit on how long it can run using the ExecutionTimeLimit property.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// IdleTrigger it = new IdleTrigger();
+	/// ]]></code></example>
 	public sealed class IdleTrigger : Trigger
 	{
 		/// <summary>
@@ -1391,6 +1418,15 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
 	/// </summary>
+	/// <remarks>A LogonTrigger will fire after a user logs on. It can only be delayed. Under V2, you can specify which user it applies to.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Add a general logon trigger
+	/// LogonTrigger lt1 = new LogonTrigger();
+	/// 
+	/// // V2 only: Add a delayed logon trigger for a specific user
+	/// LogonTrigger lt2 = new LogonTrigger { UserId = "LocalUser" };
+	/// lt2.Delay = TimeSpan.FromMinutes(15);
+	/// ]]></code></example>
 	public sealed class LogonTrigger : Trigger, ITriggerDelay, ITriggerUserId
 	{
 		/// <summary>
@@ -2141,7 +2177,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
 	/// </summary>
+	/// <remarks>The RegistrationTrigger will fire after the task is registered (saved). It is advisable to put in a delay.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a trigger that will fire the task 5 minutes after its registered
+	/// RegistrationTrigger rTrigger = new RegistrationTrigger();
+	/// rTrigger.Delay = TimeSpan.FromMinutes(5);
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = false)]
 	public sealed class RegistrationTrigger : Trigger, ITriggerDelay
 	{
@@ -2187,6 +2230,20 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
 	/// </summary>
+	/// <remarks>This can be used directly or by assignment for a <see cref="Trigger"/>.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a time trigger with a repetition
+	/// var tt = new TimeTrigger(new DateTime().Now.AddHours(1));
+	/// // Set the time in between each repetition of the task after it starts to 30 minutes.
+	/// tt.Repetition.Interval = TimeSpan.FromMinutes(30); // Default is TimeSpan.Zero (or never)
+	/// // Set the time the task will repeat to 1 day.
+	/// tt.Repetition.Duration = TimeSpan.FromDays(1); // Default is TimeSpan.Zero (or never)
+	/// // Set the task to end even if running when the duration is over
+	/// tt.Repetition.StopAtDurationEnd = true; // Default is false;
+	/// 
+	/// // Do the same as above with a constructor
+	/// tt = new TimeTrigger(new DateTime().Now.AddHours(1)) { Repetition = new RepetitionPattern(TimeSpan.FromMinutes(30), TimeSpan.FromDays(1), true) };
+	/// ]]></code></example>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[TypeConverter(typeof(RepetitionPatternConverter))]
 	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
@@ -2447,7 +2504,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
 	/// </summary>
+	/// <remarks>The SessionStateChangeTrigger will fire after six different system events: connecting or disconnecting locally or remotely, or locking or unlocking the session.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = "joe" };
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect };
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect };
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect };
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = "joe" };
+	/// new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock };
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = false)]
 	public sealed class SessionStateChangeTrigger : Trigger, ITriggerDelay, ITriggerUserId
 	{
@@ -2570,6 +2637,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task at a specific date and time.
 	/// </summary>
+	/// <remarks>A TimeTrigger runs at a specified date and time.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a trigger that runs the last minute of this year
+	/// TimeTrigger tTrigger = new TimeTrigger();
+	/// tTrigger.StartBoundary = new DateTime(DateTime.Today.Year, 12, 31, 23, 59, 0);
+	/// ]]></code></example>
 	public sealed class TimeTrigger : Trigger, ITriggerDelay, ICalendarTrigger
 	{
 		/// <summary>
@@ -2632,6 +2705,14 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
 	/// </summary>
+	/// <remarks>A WeeklyTrigger runs at a specified time on specified days of the week every week or interval of weeks.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// // Create a trigger that runs on Monday every third week just after midnight.
+	/// WeeklyTrigger wTrigger = new WeeklyTrigger();
+	/// wTrigger.StartBoundary = DateTime.Today + TimeSpan.FromSeconds(15);
+	/// wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
+	/// wTrigger.WeeksInterval = 3;
+	/// ]]></code></example>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class WeeklyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{

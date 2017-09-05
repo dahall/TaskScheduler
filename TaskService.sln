@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskService", "TestTaskService\TestTaskService.csproj", "{207F8F60-0A74-4959-8623-5D258EB133EB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -77,6 +77,7 @@ Global
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|x86.ActiveCfg = Release|Any CPU
 		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -111,6 +112,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8AF11B7C-1DF2-4AE0-B595-CF5ADC633242}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TaskService1.vsmdi

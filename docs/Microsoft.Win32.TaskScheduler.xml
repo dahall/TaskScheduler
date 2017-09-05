@@ -256,9 +256,7 @@
       <exception cref="T:System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion">
-      <summary>
-            Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> instances.
-            </summary>
+      <summary>Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> instances.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Remove(Microsoft.Win32.TaskScheduler.Action)">
       <summary>
@@ -320,7 +318,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.ComHandlerAction">
       <summary>
             Represents an action that fires a handler. Only available on Task Scheduler 2.0.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComHandlerAction.#ctor">
       <summary>
@@ -367,7 +365,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.CustomTrigger">
       <summary>
             Represents a custom trigger. This class is based on undocumented features and may change.
-            </summary>
+            <note>This type of trigger is only available for reading custom triggers. It cannot be used to create custom triggers.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.CustomTrigger.Clone">
       <summary>
@@ -471,7 +469,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.EmailAction">
       <summary>
             Represents an action that sends an e-mail.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EmailAction.#ctor">
       <summary>
@@ -560,8 +558,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.EventTrigger">
       <summary>
-            Represents a trigger that starts a task when a system event occurs. Not available on Task Scheduler 1.0.
-            </summary>
+            Represents a trigger that starts a task when a system event occurs.
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.#ctor">
       <summary>
@@ -1362,7 +1360,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger">
       <summary>
             Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RegistrationTrigger.#ctor">
       <summary>
@@ -1521,7 +1519,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger">
       <summary>
             Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.#ctor">
       <summary>
@@ -1573,7 +1571,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.ShowMessageAction">
       <summary>
             Represents an action that shows a message box when a task is activated.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ShowMessageAction.#ctor">
       <summary>
@@ -2436,7 +2434,7 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskEvent">
       <summary>
-            Historical event information for a task.
+            Historical event information for a task. This class wraps and extends the <see cref="P:Microsoft.Win32.TaskScheduler.TaskEvent.EventRecord" /> class.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskEvent.ActivityId">
@@ -2707,7 +2705,7 @@
     <member name="T:Microsoft.Win32.TaskScheduler.TaskEventWatcher">
       <summary>
             Watches system events related to tasks and issues a <see cref="E:Microsoft.Win32.TaskScheduler.TaskEventWatcher.EventRecorded" /> event when the filtered conditions are met.
-            </summary>
+            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskEventWatcher.#ctor">
       <summary>

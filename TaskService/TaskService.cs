@@ -327,6 +327,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="Task"/> instance of the registered task.
 		/// </returns>
+		/// <remarks>This method is shorthand for creating a new TaskDescription, adding a trigger and action, and then registering it in the root folder.</remarks>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Display a log file every other day
+		/// TaskService.Instance.AddTask("Test", new DailyTrigger { DaysInterval = 2 }, new ExecAction("notepad.exe", "c:\\test.log", null));
+		/// ]]></code></example>
 		public Task AddTask([NotNull] string path, [NotNull] Trigger trigger, [NotNull] Action action, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			var td = NewTask();
@@ -357,6 +362,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>
 		/// A <see cref="Task" /> instance of the registered task.
 		/// </returns>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Display a log file every day
+		/// TaskService.Instance.AddTask("Test", QuickTriggerType.Daily, "notepad.exe", "c:\\test.log"));
+		/// ]]></code></example>
 		public Task AddTask([NotNull] string path, QuickTriggerType trigger, [NotNull] string exePath, string arguments = null, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
 			// Create a trigger based on quick trigger

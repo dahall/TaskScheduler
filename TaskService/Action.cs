@@ -318,7 +318,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Represents an action that fires a handler. Only available on Task Scheduler 2.0.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
 	/// </summary>
+	/// <remarks>This action is the most complex. It allows the task to execute and In-Proc COM server object that implements the ITaskHandler interface. There is a sample project that shows how to do this in the Downloads section.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// ComHandlerAction comAction = new ComHandlerAction(new Guid("{CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734}"));
+	/// comAction.Data = "Something specific the COM object needs to execute. This can be left unassigned as well.";
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public class ComHandlerAction : Action, IBindAsExecAction
@@ -440,7 +446,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Represents an action that sends an e-mail.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
+	/// <note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="ActionCollection.PowerShellConversion"/> property is set to <see cref="PowerShellActionPlatformOption.All"/>. To disable this conversion, set the value to <see cref="PowerShellActionPlatformOption.Never"/>.</note>
 	/// </summary>
+	/// <remarks>The EmailAction allows for an email to be sent when the task is triggered.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// EmailAction ea = new EmailAction("Task fired", "sender@email.com", "recipient@email.com", "You just got a message", "smtp.company.com");
+	/// ea.Bcc = "alternate@email.com";
+	/// ea.HeaderFields.Add("reply-to", "dh@mail.com");
+	/// ea.Priority = System.Net.Mail.MailPriority.High;
+	/// // All attachement paths are checked to ensure there is an existing file
+	/// ea.Attachments = new object[] { "localpath\\ondiskfile.txt" };
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("SendEmail", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class EmailAction : Action, IBindAsExecAction
@@ -794,6 +811,13 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Represents an action that executes a command-line operation.
 	/// </summary>
+	/// <remarks>All versions of the base library support the ExecAction. It only has three properties that allow it to run an executable with parameters.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// ExecAction ea1 = new ExecAction("notepad.exe", "file.txt", null);
+	/// ExecAction ea2 = new ExecAction();
+	/// ea2.Path = "notepad.exe";
+	/// ea.Arguments = "file2.txt";
+	/// ]]></code></example>
 	[XmlRoot("Exec", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public class ExecAction : Action
 	{
@@ -1003,7 +1027,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Represents an action that shows a message box when a task is activated.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
+	/// <note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="ActionCollection.PowerShellConversion"/> property is set to <see cref="PowerShellActionPlatformOption.All"/>. To disable this conversion, set the value to <see cref="PowerShellActionPlatformOption.Never"/>.</note>
 	/// </summary>
+	/// <remarks>Display a message when the trigger fires using the ShowMessageAction.</remarks>
+	/// <example><code lang="cs"><![CDATA[
+	/// ShowMessageAction msg = new ShowMessageAction("You just got a message!", "SURPRISE");
+	/// ]]></code></example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ShowMessage", Namespace = TaskDefinition.tns, IsNullable = false)]
 	public sealed class ShowMessageAction : Action, IBindAsExecAction

@@ -61,7 +61,98 @@ namespace Microsoft.Win32.TaskScheduler
 
 	/// <summary>
 	/// Watches system events related to tasks and issues a <see cref="TaskEventWatcher.EventRecorded"/> event when the filtered conditions are met.
+	/// <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note>
 	/// </summary>
+	/// <remarks>Sometimes, a developer will need to know about events as they occur. In this case, they can use the TaskEventWatcher component that enables the developer to watch a task, a folder, or the entire system for filtered events.</remarks>
+	/// <example>
+	/// <para>Below is information on how to watch a folder for all task events. For a complete example, look at this sample project: TestTaskWatcher.zip</para>
+	/// <code lang="cs"><![CDATA[
+	/// private TaskEventWatcher watcher;
+	/// 
+	/// // Create and configure a new task watcher for the task folder
+	/// private void SetupWatcher(TaskFolder tf)
+	/// {
+	/// 	if (tf != null)
+	/// 	{
+	/// 		// Set up a watch over the supplied task folder.
+	/// 		watcher = new TaskEventWatcher(tf);
+	/// 
+	/// 		// Assign a SynchronizingObject to a local UI class to synchronize the events in this thread.
+	/// 		watcher.SynchronizingObject = this;
+	/// 
+	/// 		// Only watch for tasks that start with my company name
+	/// 		watcher.Filter.TaskName = "MyCo*";
+	/// 
+	/// 		// Only watch for task events that are informational
+	/// 		watcher.Filter.EventLevels = new int[]
+	/// 		   { 0 /* StandardEventLevel.LogAlways */, (int)StandardEventLevel.Informational };
+	/// 
+	/// 		// Assign an event handler for when events are recorded
+	/// 		watcher.EventRecorded += Watcher_EventRecorded;
+	/// 
+	/// 		// Start watching the folder by enabling the watcher
+	/// 		watcher.Enabled = true;
+	/// 	}
+	/// }
+	/// 
+	/// // Cleanup and release the task watcher
+	/// private void TearDownWatcher()
+	/// {
+	/// 	if (watcher != null)
+	/// 	{
+	/// 		// Unhook the event
+	/// 		watcher.EventRecorded -= Watcher_EventRecorded;
+	/// 		// Stop watching for events
+	/// 		watcher.Enabled = false;
+	/// 		// Initiate garbage collection for the watcher
+	/// 		watcher = null;
+	/// 	}
+	/// }
+	/// 
+	/// // Update ListView instance when task events occur
+	/// private void Watcher_EventRecorded(object sender, TaskEventArgs e)
+	/// {
+	/// 	int idx = IndexOfTask(e.TaskName);
+	/// 
+	/// 	// If event is for a task we already have in the list...
+	/// 	if (idx != -1)
+	/// 	{
+	/// 		// If event indicates that task has been deleted, remove it from the list
+	/// 		if (e.TaskEvent.StandardEventId == StandardTaskEventId.TaskDeleted)
+	/// 		{
+	/// 			listView1.Items.RemoveAt(idx);
+	/// 		}
+	/// 
+	/// 		// If event is anything else, it most likely represents a change,
+	/// 		// so update the item using information supplied through the
+	/// 		// TaskEventArgs instance.
+	/// 		else
+	/// 		{
+	/// 			var lvi = listView1.Items[idx];
+	/// 			lvi.Subitems[0].Text = e.TaskName;
+	/// 			lvi.Subitems[1].Text = e.Task.State.ToString();
+	/// 			lvi.Subitems[2].Text = GetNextRunTimeString(e.Task);
+	/// 		}
+	/// 	}
+	/// 
+	/// 	// If event is for a task we don't have in our list, add it
+	/// 	else
+	/// 	{
+	/// 		var lvi = new ListViewItem(new string[] { e.TaskName,
+	/// 	 e.Task.State.ToString(), GetNextRunTimeString(e.Task) });
+	/// 		listView1.Items.Add(lvi);
+	/// 		listView1.Sort();
+	/// 	}
+	/// }
+	/// 
+	/// // Get the next run time for a task
+	/// private string GetNextRunTimeString(Task t)
+	/// {
+	/// 	if (t.State == TaskState.Disabled || t.NextRunTime < DateTime.Now)
+	/// 		return string.Empty;
+	/// 	return t.NextRunTime.ToString("G");
+	/// }
+	/// ]]></code></example>
 	[DefaultEvent(nameof(EventRecorded)), DefaultProperty(nameof(Folder))]
 #if DESIGNER
 	[Designer(typeof(Design.TaskEventWatcherDesigner))]

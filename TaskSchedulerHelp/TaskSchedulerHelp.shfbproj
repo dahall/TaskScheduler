@@ -17,9 +17,20 @@
     <!-- SHFB properties -->
     <OutputPath>..\docs\</OutputPath>
     <HtmlHelpName>TaskScheduler</HtmlHelpName>
-    <ProjectSummary>&amp;lt%3bp&amp;gt%3bThe Microsoft.Win32.TaskScheduler namespace provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
+    <ProjectSummary>&amp;lt%3bstyle&amp;gt%3b.code a { font-family: monospace%3b font-weight: bold%3b }&amp;lt%3b/style&amp;gt%3b
+&amp;lt%3bh2&amp;gt%3bIntroduction&amp;lt%3b/h2&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe Task Scheduler Managed Class Library provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
-&amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttp://taskscheduler.codeplex.com&amp;quot%3b&amp;gt%3bhttp://taskscheduler.codeplex.com&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
+&amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttps://github.com/dahall/TaskScheduler&amp;quot%3b&amp;gt%3bhttps://github.com/dahall/TaskScheduler&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bh2&amp;gt%3bClass Overview&amp;lt%3b/h2&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskService.htm&amp;quot%3b&amp;gt%3bTaskService&amp;lt%3b/a&amp;gt%3b class represents the machine specific instance of the system task scheduler. It provides access to information about the service, access folders %282.0 only%29, and can quickly add or retrieve a task. If you only need to use the library for very intermitant periods, wrap the TaskService instantiation in a using statement to easily disconnect at the end of your use. However, if you plan on using the connection to the Task Scheduler repeatedly, use an assembly level field to store the TaskService instance as connecting and disconnecting is an expensive operation.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bTasks are accessed and can be enumerated through a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskFolder.htm&amp;quot%3b&amp;gt%3bTaskFolder&amp;lt%3b/a&amp;gt%3b. For systems supporting only the 1.0 library, there is only the root folder. The 2.0 library supports a hierarchal structure similar to a file system. The Tasks property exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskCollection.htm&amp;quot%3b&amp;gt%3bTaskCollection&amp;lt%3b/a&amp;gt%3b instance which can enumerate tasks and provides an indexer which allows access to individual tasks by name. The TaskCollection class also has methods that allow for the creation/registration and deletion of tasks and subfolders by name.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bA task is represented by a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Task.htm&amp;quot%3b&amp;gt%3bTask&amp;lt%3b/a&amp;gt%3b instance. The Task class provides information about tasks state and history and exposes the task&amp;#39%3bs &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_Task_Definition.htm&amp;quot%3b&amp;gt%3bDefinition&amp;lt%3b/a&amp;gt%3b property.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bA &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b exposes all of the properties of a task which allow you to define how and what will run when the task is triggered. A task must have at least one action and one trigger defined.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bEach task has a list of triggers that determine when the task will be run. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Triggers.htm&amp;quot%3b&amp;gt%3bTriggers&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TriggerCollection.htm&amp;quot%3b&amp;gt%3bTriggerCollection&amp;lt%3b/a&amp;gt%3b instance. TriggerCollection provides an indexer which allows access to individual triggers by their position in the list. The TriggerCollection class also has methods that allow for the addition and removal of triggers. TriggerCollection implements the IList interface so you can also enumerate all triggers using the foreach construct.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Trigger.htm&amp;quot%3b&amp;gt%3bTrigger&amp;lt%3b/a&amp;gt%3b class is an abstract class that forms the foundation of the different types of triggers that can be specified for a task. There are 10 different specializations that provide different ways to specify the time a task will run. Not all specializations work with the 1.0 library. See the help file for details about each of the trigger classes. The Trigger Documentation has some examples of how to setup each kind of trigger.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bEach task also has a list of actions that determine what the task will do when triggered. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Actions.htm&amp;quot%3b&amp;gt%3bActions&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ActionCollection.htm&amp;quot%3b&amp;gt%3bActionCollection&amp;lt%3b/a&amp;gt%3b instance. ActionCollection provides an indexer which allows access to individual actions by their position in the list. The ActionCollection class also has methods that allow for the addition and removal of actions. ActionCollection implements the IList interface so you can also enumerate all actions using the foreach construct.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Action.htm&amp;quot%3b&amp;gt%3bAction&amp;lt%3b/a&amp;gt%3b class is an abstract class that is the foundation for four different actions. On 1.0, only the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ExecAction.htm&amp;quot%3b&amp;gt%3bExecAction&amp;lt%3b/a&amp;gt%3b specialization is available unless the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_ActionCollection_PowerShellConversion.htm&amp;quot%3b&amp;gt%3bPowerShellConversion&amp;lt%3b/a&amp;gt%3b option is enabled %28see Action Documentation for more information%29. These actions determine what the service will do when a trigger is fired. The Action Documentation has some examples of how to setup each kind of action.&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
     <MissingTags>Summary, Parameter, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath>
@@ -88,7 +99,7 @@
       <DocumentationSource sourceFile="..\TaskService\bin\Release\v4.5.2\Microsoft.Win32.TaskScheduler.dll" />
       <DocumentationSource sourceFile="..\TaskService\bin\Release\v4.5.2\Microsoft.Win32.TaskScheduler.XML" />
       <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.dll" />
-      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.0\Microsoft.Win32.TaskSchedulerEditor.XML" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.XML" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
@@ -121,7 +132,7 @@
     <SelfBranded>True</SelfBranded>
     <CatalogVersion>100</CatalogVersion>
     <CatalogProductId>VS</CatalogProductId>
-    <SyntaxFilters>Standard</SyntaxFilters>
+    <SyntaxFilters>C#, Visual Basic, Managed C++</SyntaxFilters>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
@@ -148,6 +159,19 @@
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
     <SourceCodeBasePath>..\</SourceCodeBasePath>
+    <TransformComponentArguments>
+      <Argument Key="logoFile" Value="tsnew48.png" />
+      <Argument Key="logoHeight" Value="48" />
+      <Argument Key="logoWidth" Value="48" />
+      <Argument Key="logoAltText" Value="Task Scheduler Managed Class Library" />
+      <Argument Key="logoPlacement" Value="left" />
+      <Argument Key="logoAlignment" Value="left" />
+      <Argument Key="maxVersionParts" Value="3" />
+      <Argument Key="defaultLanguage" Value="cs" />
+      <Argument Key="includeEnumValues" Value="true" />
+      <Argument Key="baseSourceCodeUrl" Value="https://github.com/dahall/TaskScheduler/blob/master/" />
+      <Argument Key="requestExampleUrl" Value="https://github.com/dahall/TaskScheduler/issues/new" />
+    </TransformComponentArguments>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
@@ -155,6 +179,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="icons" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\tsnew48.png" />
+  </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
 </Project>

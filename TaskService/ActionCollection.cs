@@ -110,12 +110,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		bool IList.IsReadOnly => false;
 
-		/// <summary>
-		/// Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="ExecAction"/> instances.
-		/// </summary>
-		/// <value>
-		/// The PowerShell platform options.
-		/// </value>
+		/// <summary>Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="ExecAction"/> instances.</summary>
+		/// <value>The PowerShell platform options.</value>
+		/// <remarks>This property will affect how many actions are physically stored in the system and is tied to the version of Task Scheduler.
+		/// <para>If set to <see cref="PowerShellActionPlatformOption.Never"/>, then no actions will ever be converted to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities are found.</para>
+		/// <para>If set to <see cref="PowerShellActionPlatformOption.Version1"/>, then actions will be converted only under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types. If not specified, only a single <see cref="ExecAction"/> is supported. Developer must ensure that PowerShell v2 or higher is installed on the target computer.</para>
+		/// <para>If set to <see cref="PowerShellActionPlatformOption.Version2"/> (which is the default value), then <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references will be converted to their PowerShell equivalents on systems on or after Windows 8 / Server 2012.</para>
+		/// <para>If set to <see cref="PowerShellActionPlatformOption.All"/>, then any actions not supported by the Task Scheduler version will be converted to PowerShell.</para>
+		/// </remarks>
 		[DefaultValue(typeof(PowerShellActionPlatformOption), "Version2")]
 		public PowerShellActionPlatformOption PowerShellConversion
 		{
