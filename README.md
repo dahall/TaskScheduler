@@ -50,9 +50,6 @@ There is a second library that includes localized and localizable GUI editors an
 * Task creation wizard
 * Task service connection dialog
 
-### COM Handler Project Template
-If you are writing your own custom Task Scheduler COM Handler based on the <span class="codeInline">ITaskHandler</span> interface, there is a [project template](http://taskscheduler.codeplex.com/releases/view/142773) available that will stub out the majority of the work to create it in C# and a [sample](http://taskscheduler.codeplex.com/releases/view/29938) to show a complete one. If running your own code, this model provides much better interaction, control and memory management than running an executable.  
-
 ## Sample Code
 There is a help file included with the download that provides an overview of the various classes. There are numerous examples under the "Documentation" tab.  
 
