@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskService", "TestTask
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VBTestTaskService", "VBTestTaskService\VBTestTaskService.vbproj", "{8C410535-95B6-434B-A03D-1359884D0410}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMTask", "COMTask\COMTask.csproj", "{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor", "TaskEditor\TaskEditor.csproj", "{5279D487-59FA-4D01-9D7A-EA7387D8B67C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
@@ -23,10 +21,6 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSc
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C} = {5279D487-59FA-4D01-9D7A-EA7387D8B67C}
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043} = {81B5ABCC-6909-483D-8BB3-84B52E3C7043}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITaskHandler COM Server Project Template", "ITaskHandler COM Server Project Template\ITaskHandler COM Server Project Template.csproj", "{601FB415-6066-47F7-9549-938AC0C40396}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskSchedulerConfig", "TaskSchedulerConfig\TaskSchedulerConfig.csproj", "{464AE5DD-6049-4A73-B07C-10CC1E3742F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService\TaskService.csproj", "{81B5ABCC-6909-483D-8BB3-84B52E3C7043}"
 EndProject
@@ -56,12 +50,6 @@ Global
 		{8C410535-95B6-434B-A03D-1359884D0410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C410535-95B6-434B-A03D-1359884D0410}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8C410535-95B6-434B-A03D-1359884D0410}.Release|x86.ActiveCfg = Release|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D8FF73D8-57A2-42E4-98C3-76C129BBB8F0}.Release|x86.ActiveCfg = Release|Any CPU
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5279D487-59FA-4D01-9D7A-EA7387D8B67C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -79,24 +67,6 @@ Global
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DE4DC8A8-9008-4769-A7C2-F52F4F733944}.Release|x86.ActiveCfg = Release|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{601FB415-6066-47F7-9549-938AC0C40396}.Release|x86.ActiveCfg = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Debug|x86.Build.0 = Debug|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|x86.ActiveCfg = Release|Any CPU
-		{464AE5DD-6049-4A73-B07C-10CC1E3742F6}.Release|x86.Build.0 = Release|Any CPU
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B5ABCC-6909-483D-8BB3-84B52E3C7043}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

@@ -17,8 +17,7 @@
     <!-- SHFB properties -->
     <OutputPath>..\docs\</OutputPath>
     <HtmlHelpName>TaskScheduler</HtmlHelpName>
-    <ProjectSummary>&amp;lt%3bstyle&amp;gt%3b.code a { font-family: monospace%3b font-weight: bold%3b }&amp;lt%3b/style&amp;gt%3b
-&amp;lt%3bh2&amp;gt%3bIntroduction&amp;lt%3b/h2&amp;gt%3b
+    <ProjectSummary>&amp;lt%3bh2&amp;gt%3bIntroduction&amp;lt%3b/h2&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bThe Task Scheduler Managed Class Library provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttps://github.com/dahall/TaskScheduler&amp;quot%3b&amp;gt%3bhttps://github.com/dahall/TaskScheduler&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b
