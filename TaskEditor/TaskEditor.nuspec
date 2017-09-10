@@ -16,6 +16,7 @@
 		<dependency id="AeroWizard" version="[2.1.10]" />
 		<dependency id="GroupControls" version="[1.5.3]" />
 		<dependency id="TimeSpan2" version="[2.1.6]" />
+	  <dependency id="Tulpep.ActiveDirectoryObjectPicker" version="[2.2.128]" />
 	</dependencies>
 	</metadata>
 	<files>

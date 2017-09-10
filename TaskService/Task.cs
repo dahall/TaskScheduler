@@ -1242,6 +1242,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Applies access control list (ACL) entries described by a <see cref="TaskSecurity"/> object to the file described by the current <see cref="Task"/> object.
 		/// </summary>
 		/// <param name="taskSecurity">A <see cref="TaskSecurity"/> object that describes an access control list (ACL) entry to apply to the current task.</param>
+		/// <example><para>Give read access to all authenticated users for a task.</para><code lang="cs"><![CDATA[
+		/// // Assume variable 'task' is a valid Task instance
+		/// var taskSecurity = task.GetAccessControl();
+		/// taskSecurity.AddAccessRule(new TaskAccessRule("Authenticated Users", TaskRights.Read, System.Security.AccessControl.AccessControlType.Allow));
+		/// task.SetAccessControl(taskSecurity);
+		/// ]]></code></example>
 		public void SetAccessControl([NotNull] TaskSecurity taskSecurity)
 		{
 			taskSecurity.Persist(this);
