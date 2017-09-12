@@ -120,7 +120,7 @@
       <Name>TaskEditor</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskService\TaskService.csproj">
-      <Project>{81B5ABCC-6909-483D-8BB3-84B52E3C7043}</Project>
+      <Project>{8b1f5f40-510e-4128-92d4-6cbf85da952d}</Project>
       <Name>TaskService</Name>
     </ProjectReference>
   </ItemGroup>

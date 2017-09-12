@@ -118,7 +118,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task GetItemAt(int x, int y) => (Task)listView1.GetItemAt(x, y)?.Tag;
 
 		/// <summary>
-		/// Raises the <see cref="E:HandleCreated" /> event.
+		/// Raises the <see cref="Control.HandleCreated" /> event.
 		/// </summary>
 		/// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
 		protected override void OnHandleCreated(EventArgs e)

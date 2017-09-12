@@ -361,21 +361,21 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool ContainsType(Type actionType) => Find(a => a.GetType() == actionType) != null;
 
 		/// <summary>
-		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" />, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> index.
+		/// Copies the elements of the <see cref="ActionCollection" /> to an array of <see cref="Action" />, starting at a particular  index.
 		/// </summary>
-		/// <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> at which copying begins.</param>
+		/// <param name="array">The <see cref="Action" /> array that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="Action" /> array must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="Action" /> array at which copying begins.</param>
 		public void CopyTo(Action[] array, int arrayIndex)
 		{
 			CopyTo(0, array, arrayIndex, Count);
 		}
 
 		/// <summary>
-		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" />, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> index.
+		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="Action" /> array, starting at a particular <see cref="Action" /> array index.
 		/// </summary>
 		/// <param name="index">The zero-based index in the source at which copying begins.</param>
-		/// <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> at which copying begins.</param>
+		/// <param name="array">The <see cref="Action" /> array that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="Action" /> array must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="Action" /> array at which copying begins.</param>
 		/// <param name="count">The number of elements to copy.</param>
 		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
 		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>

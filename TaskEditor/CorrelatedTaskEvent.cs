@@ -1,4 +1,4 @@
-﻿#if NET_35_OR_GREATER
+﻿#if !(NET20)
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;

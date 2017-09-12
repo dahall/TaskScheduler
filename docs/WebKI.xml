@@ -1015,6 +1015,7 @@
   <HelpKINode Title="GetItemChecked method" Url="html/M_Microsoft_Win32_TaskScheduler_DropDownCheckList_GetItemChecked.htm" />
   <HelpKINode Title="GetLastRegistrationTime method" Url="html/M_Microsoft_Win32_TaskScheduler_Task_GetLastRegistrationTime.htm" />
   <HelpKINode Title="GetObjectData method" Url="html/M_Microsoft_Win32_TaskScheduler_TSNotSupportedException_GetObjectData.htm" />
+  <HelpKINode Title="GetResolvedString method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_GetResolvedString.htm" />
   <HelpKINode Title="GetRunningTasks method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_GetRunningTasks.htm" />
   <HelpKINode Title="GetRunTimes method" Url="html/M_Microsoft_Win32_TaskScheduler_Task_GetRunTimes.htm" />
   <HelpKINode Title="GetSecurityDescriptor method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolder_GetSecurityDescriptor.htm" />
@@ -1370,6 +1371,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.QuickTriggerType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_QuickTriggerType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.RegistrationTrigger class" Url="html/T_Microsoft_Win32_TaskScheduler_RegistrationTrigger.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.RepetitionPattern class" Url="html/T_Microsoft_Win32_TaskScheduler_RepetitionPattern.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.ResourceReferenceValue class" Url="html/T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.RunningTask class" Url="html/T_Microsoft_Win32_TaskScheduler_RunningTask.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.RunningTaskCollection class" Url="html/T_Microsoft_Win32_TaskScheduler_RunningTaskCollection.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger class" Url="html/T_Microsoft_Win32_TaskScheduler_SessionStateChangeTrigger.htm" />
@@ -1652,6 +1654,7 @@
   <HelpKINode Title="Parallel enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskInstancesPolicy.htm" />
   <HelpKINode Title="Parent field" Url="html/F_Microsoft_Win32_TaskScheduler_Events_EventQuery_CQuery_CSelect_Parent.htm" />
   <HelpKINode Title="Parent property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskFolder_Parent.htm" />
+  <HelpKINode Title="Parse method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_Parse.htm" />
   <HelpKINode Title="Password enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskLogonType.htm" />
   <HelpKINode Title="Password property">
     <HelpKINode Title="TaskSchedulerWizard.Password Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_Password.htm" />
@@ -1801,6 +1804,24 @@
     <HelpKINode Title="TaskPrincipalPrivileges.TaskPrincipalPrivilegesEnumerator.Reset Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivileges_TaskPrincipalPrivilegesEnumerator_Reset.htm" />
   </HelpKINode>
   <HelpKINode Title="ResetAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_ResetAccessRule.htm" />
+  <HelpKINode Title="ResourceFilePath property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceFilePath.htm" />
+  <HelpKINode Title="ResourceIdentifier property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceIdentifier.htm" />
+  <HelpKINode Title="ResourceReferenceValue class">
+    <HelpKINode Title="ResourceReferenceValue Class" Url="html/T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
+    <HelpKINode Title="about ResourceReferenceValue class" Url="html/T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators_T_Microsoft_Win32_TaskScheduler_ResourceReferenceValue.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ResourceReferenceValue to String conversion" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_op_Implicit.htm" />
+  <HelpKINode Title="ResourceReferenceValue.GetResolvedString method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_GetResolvedString.htm" />
+  <HelpKINode Title="ResourceReferenceValue.Parse method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_Parse.htm" />
+  <HelpKINode Title="ResourceReferenceValue.ResourceFilePath property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceFilePath.htm" />
+  <HelpKINode Title="ResourceReferenceValue.ResourceIdentifier property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceIdentifier.htm" />
+  <HelpKINode Title="ResourceReferenceValue.ResourceReferenceValue constructor" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue__ctor.htm" />
+  <HelpKINode Title="ResourceReferenceValue.ToString method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ToString.htm" />
+  <HelpKINode Title="ResourceReferenceValue.TryParse method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_TryParse.htm" />
   <HelpKINode Title="RestartCount property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartCount.htm" />
   <HelpKINode Title="RestartInterval property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartInterval.htm" />
   <HelpKINode Title="RestartOnIdle property" Url="html/P_Microsoft_Win32_TaskScheduler_IdleSettings_RestartOnIdle.htm" />
@@ -2897,6 +2918,7 @@
     <HelpKINode Title="MaintenanceSettings.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_MaintenanceSettings_ToString.htm" />
     <HelpKINode Title="NameValuePair.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_NameValuePair_ToString.htm" />
     <HelpKINode Title="NetworkSettings.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_NetworkSettings_ToString.htm" />
+    <HelpKINode Title="ResourceReferenceValue.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ToString.htm" />
     <HelpKINode Title="RunningTaskCollection.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_RunningTaskCollection_ToString.htm" />
     <HelpKINode Title="ShowMessageAction.ToString Method " Url="html/Overload_Microsoft_Win32_TaskScheduler_ShowMessageAction_ToString.htm" />
     <HelpKINode Title="Task.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_Task_ToString.htm" />
@@ -3005,6 +3027,7 @@
   <HelpKINode Title="TriggerType property" Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_TriggerType.htm" />
   <HelpKINode Title="TriggerTypeChanged event" Url="html/E_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_TriggerTypeChanged.htm" />
   <HelpKINode Title="TryGetValue method" Url="html/M_Microsoft_Win32_TaskScheduler_NamedValueCollection_TryGetValue.htm" />
+  <HelpKINode Title="TryParse method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_TryParse.htm" />
   <HelpKINode Title="TSNotSupportedException class">
     <HelpKINode Title="TSNotSupportedException Class" Url="html/T_Microsoft_Win32_TaskScheduler_TSNotSupportedException.htm" />
     <HelpKINode Title="about TSNotSupportedException class" Url="html/T_Microsoft_Win32_TaskScheduler_TSNotSupportedException.htm" />

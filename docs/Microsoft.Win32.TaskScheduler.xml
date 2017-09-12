@@ -154,18 +154,18 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.CopyTo(Microsoft.Win32.TaskScheduler.Action[],System.Int32)">
       <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" />, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> index.
+            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an array of <see cref="T:Microsoft.Win32.TaskScheduler.Action" />, starting at a particular  index.
             </summary>
-      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> must have zero-based indexing.</param>
-      <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> at which copying begins.</param>
+      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.</param>
+      <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array at which copying begins.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.CopyTo(System.Int32,Microsoft.Win32.TaskScheduler.Action[],System.Int32,System.Int32)">
       <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" />, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> index.
+            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array index.
             </summary>
       <param name="index">The zero-based index in the source at which copying begins.</param>
-      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> must have zero-based indexing.</param>
-      <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action[]" /> at which copying begins.</param>
+      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.</param>
+      <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array at which copying begins.</param>
       <param name="count">The number of elements to copy.</param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="array" /> is null.</exception>
@@ -1443,6 +1443,70 @@
       <summary>
             Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
             </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue">
+      <summary>
+            Some string values of <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> properties can be set to retrieve their value from existing DLLs as a resource. This class facilitates creating those reference strings.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.#ctor(System.String,System.Int32)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue" /> class.
+            </summary>
+      <param name="dllPath">The DLL path.</param>
+      <param name="resourceId">The resource identifier.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.GetResolvedString">
+      <summary>
+            Gets the result of pulling the string from the resource file using the identifier.
+            </summary>
+      <returns>
+        <see cref="T:System.String" /> from resource file.</returns>
+      <exception cref="T:System.IO.FileNotFoundException">
+        <see cref="P:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ResourceFilePath" /> cannot be found.</exception>
+      <exception cref="T:System.ComponentModel.Win32Exception">Unable to load <see cref="P:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ResourceFilePath" /> or string identified by <see cref="P:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ResourceIdentifier" />.</exception>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.op_Implicit(Microsoft.Win32.TaskScheduler.ResourceReferenceValue)~System.String">
+      <summary>
+            Performs an implicit conversion from <see cref="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue" /> to <see cref="T:System.String" />.
+            </summary>
+      <param name="value">The value.</param>
+      <returns>The result of the conversion.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.Parse(System.String)">
+      <summary>
+            Parses the input string. String must be in the format "$(@ [Dll], [ResourceID])".
+            </summary>
+      <param name="value">The input string value.</param>
+      <returns>A new <see cref="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue" /> instance on success or <c>null</c> on failure.</returns>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="value" /> is <c>null</c></exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="value" /> is not in the format "$(@ [Dll], [ResourceID])"</exception>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ResourceFilePath">
+      <summary>
+            Gets or sets the resource file path. This can be a relative path, full path or lookup path (e.g. %SystemRoot%\System32\ResourceName.dll).
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ResourceIdentifier">
+      <summary>
+            Gets or sets the resource identifier.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> in the format required by the Task Scheduler to reference a string in a DLL.
+            </summary>
+      <returns>A formatted <see cref="T:System.String" /> in the format $(@ [Dll], [ResourceID]).</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ResourceReferenceValue.TryParse(System.String,Microsoft.Win32.TaskScheduler.ResourceReferenceValue@)">
+      <summary>
+            Tries to parse to input string. String must be in the format "$(@ [Dll], [ResourceID])".
+            </summary>
+      <param name="value">The input string value.</param>
+      <param name="resourceRef">The resource reference to be returned. On failure, this value equals <c>null</c>.</param>
+      <returns>A new <see cref="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue" /> instance on success or <c>null</c> on failure.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.RunningTask">
       <summary>
@@ -4612,11 +4676,11 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.CopyTo(System.Int32,Microsoft.Win32.TaskScheduler.Trigger[],System.Int32,System.Int32)">
       <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> to an <see cref="T:Trigger[]" />, starting at a particular <see cref="T:Trigger[]" /> index.
+            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> to a <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array index.
             </summary>
       <param name="index">The zero-based index in the source at which copying begins.</param>
-      <param name="array">The <see cref="T:Trigger[]" /> that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The <see cref="T:Trigger[]" /> must have zero-based indexing.</param>
-      <param name="arrayIndex">The zero-based index in <see cref="T:Trigger[]" /> at which copying begins.</param>
+      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array must have zero-based indexing.</param>
+      <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array at which copying begins.</param>
       <param name="count">The number of elements to copy.</param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="array" /> is null.</exception>

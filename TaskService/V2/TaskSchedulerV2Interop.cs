@@ -238,7 +238,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string GetSecurityDescriptor(int securityInformation);
 		void SetSecurityDescriptor([In, MarshalAs(UnmanagedType.BStr)] string sddl, [In] int flags);
 		void Stop(int flags);
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), TypeLibFunc((short)0x41), DispId(0x60020011)]
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(0x60020011)]
 		void GetRunTimes([In] ref Microsoft.Win32.NativeMethods.SYSTEMTIME pstStart, [In] ref Microsoft.Win32.NativeMethods.SYSTEMTIME pstEnd, [In, Out] ref uint pCount, [In, Out] ref IntPtr pRunTimes);
 	}
 
@@ -402,7 +402,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		string Value { [return: MarshalAs(UnmanagedType.BStr)] get; [param: In, MarshalAs(UnmanagedType.BStr)] set; }
 	}
 
-	[ComImport, TypeLibType((short)0x10c0), DefaultMember("TargetServer"), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85"), System.Security.SuppressUnmanagedCodeSecurity, CoClass(typeof(TaskSchedulerClass))]
+	[ComImport, DefaultMember("TargetServer"), Guid("2FABA4C7-4DA9-4013-9697-20CC3FD40F85"), System.Security.SuppressUnmanagedCodeSecurity, CoClass(typeof(TaskSchedulerClass))]
 	internal interface ITaskService
 	{
 		[return: MarshalAs(UnmanagedType.Interface)]
@@ -428,7 +428,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		uint HighestVersion { [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime), DispId(8)] get; }
 	}
 
-	[ComImport, DefaultMember("TargetServer"), Guid("0F87369F-A4E5-4CFC-BD3E-73E6154572DD"), TypeLibType((short)2), ClassInterface((short)0), System.Security.SuppressUnmanagedCodeSecurity]
+	[ComImport, DefaultMember("TargetServer"), Guid("0F87369F-A4E5-4CFC-BD3E-73E6154572DD"), ClassInterface((short)0), System.Security.SuppressUnmanagedCodeSecurity]
 	internal class TaskSchedulerClass
 	{
 	}

@@ -76,9 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskService\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="FolderPanel.cs">
       <SubType>UserControl</SubType>
@@ -229,7 +226,7 @@
       <Name>TaskEditor</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskService\TaskService.csproj">
-      <Project>{81b5abcc-6909-483d-8bb3-84b52e3c7043}</Project>
+      <Project>{8b1f5f40-510e-4128-92d4-6cbf85da952d}</Project>
       <Name>TaskService</Name>
     </ProjectReference>
   </ItemGroup>

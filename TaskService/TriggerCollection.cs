@@ -201,11 +201,11 @@ namespace Microsoft.Win32.TaskScheduler
 		public void CopyTo(Trigger[] array, int arrayIndex) { CopyTo(0, array, arrayIndex, Count); }
 
 		/// <summary>
-		/// Copies the elements of the <see cref="TriggerCollection" /> to an <see cref="T:Trigger[]" />, starting at a particular <see cref="T:Trigger[]" /> index.
+		/// Copies the elements of the <see cref="TriggerCollection" /> to a <see cref="Trigger" /> array, starting at a particular <see cref="Trigger" /> array index.
 		/// </summary>
 		/// <param name="index">The zero-based index in the source at which copying begins.</param>
-		/// <param name="array">The <see cref="T:Trigger[]" /> that is the destination of the elements copied from <see cref="TriggerCollection" />. The <see cref="T:Trigger[]" /> must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <see cref="T:Trigger[]" /> at which copying begins.</param>
+		/// <param name="array">The <see cref="Trigger" /> array that is the destination of the elements copied from <see cref="TriggerCollection" />. The <see cref="Trigger" /> array must have zero-based indexing.</param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="Trigger" /> array at which copying begins.</param>
 		/// <param name="count">The number of elements to copy.</param>
 		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
 		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>

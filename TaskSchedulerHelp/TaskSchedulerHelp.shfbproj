@@ -42,7 +42,7 @@
     </WorkingPath>
     <FrameworkVersion>.NET Framework 4.5.2</FrameworkVersion>
     <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-    <CopyrightText>&amp;#169%3b 2017 Open Source Community. All rights reserved.</CopyrightText>
+    <CopyrightText>&amp;#169%3b 2017 GitHub Community. All rights reserved.</CopyrightText>
     <PresentationStyle>VS2013</PresentationStyle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
@@ -95,28 +95,28 @@
       </ComponentConfig>
     </ComponentConfigurations>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\TaskService\bin\Release\v4.5.2\Microsoft.Win32.TaskScheduler.dll" />
-      <DocumentationSource sourceFile="..\TaskService\bin\Release\v4.5.2\Microsoft.Win32.TaskScheduler.XML" />
-      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.dll" />
-      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\v4.5.2\Microsoft.Win32.TaskSchedulerEditor.XML" />
+      <DocumentationSource sourceFile="..\TaskService\bin\Release\net452\Microsoft.Win32.TaskScheduler.xml" />
+      <DocumentationSource sourceFile="..\TaskService\bin\Release\net452\Microsoft.Win32.TaskScheduler.dll" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.dll" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.xml" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
-      <NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
-      <NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
-      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
-    </NamespaceSummaries>
-    <HelpFileVersion>2.6.0</HelpFileVersion>
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
+<NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
+<NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
+<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="System.Reflection" isDocumented="False" /></NamespaceSummaries>
+    <HelpFileVersion>2.6.1</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceTitle>Task Scheduler Managed Class Library Help</RootNamespaceTitle>
+    <RootNamespaceTitle>Overview</RootNamespaceTitle>
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
     <ProductTitle>
     </ProductTitle>

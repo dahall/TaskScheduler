@@ -1,4 +1,4 @@
-﻿#if !NET_40_OR_GREATER
+﻿#if (NET20 || NET35)
 namespace System.Collections.Specialized
 {
 	/// <summary>

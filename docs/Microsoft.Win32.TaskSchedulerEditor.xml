@@ -1413,7 +1413,7 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskListView.OnHandleCreated(System.EventArgs)">
       <summary>
-            Raises the <see cref="E:HandleCreated" /> event.
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" /> event.
             </summary>
       <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
     </member>

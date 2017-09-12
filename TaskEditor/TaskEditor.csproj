@@ -27,7 +27,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</OutputPath>
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,11 +39,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</OutputPath>
     <DefineConstants>TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion)\Microsoft.Win32.TaskSchedulerEditor.XML</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\Microsoft.Win32.TaskSchedulerEditor.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -52,9 +52,6 @@
     <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
     <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
     <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
     <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
@@ -90,6 +87,8 @@
     <Compile Include="..\TaskService\Native\ADVAPI32.cs">
       <Link>Native\ADVAPI32.cs</Link>
     </Compile>
+    <Compile Include="..\TaskService\Native\EnumUtil.cs" Link="Native\EnumUtil.cs" />
+    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="..\TaskService\Native\InteropUtil.cs">
       <Link>Native\InteropUtil.cs</Link>
     </Compile>
@@ -98,12 +97,6 @@
     </Compile>
     <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
       <Link>Native\SYSTEMTIME.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\ReflectionHelper.cs">
-      <Link>ReflectionHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ActionEditDialog.cs">
       <SubType>Form</SubType>
@@ -183,7 +176,6 @@
     <Compile Include="Native\DisabledItemComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Native\ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="Native\BROWSEINFO.cs" />
     <Compile Include="Native\ComboBox.cs" />
@@ -209,7 +201,6 @@
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Native\CREDUI.cs" />
-    <Compile Include="Native\EnumUtil.cs" />
     <Compile Include="Native\FolderBrowserDialog2.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -231,7 +222,6 @@
     <Compile Include="Native\VisualStylesRendererExtension.cs" />
     <Compile Include="Native\NetworkListManager.cs" />
     <Compile Include="Native\NetworkProfile.cs" />
-    <None Include="ComputerInfo.cs" />
     <Compile Include="OptionPanels\ActionsOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -261,11 +251,6 @@
     </Compile>
     <Compile Include="OptionPanels\TriggersOptionPanel.Designer.cs">
       <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SecEdShim.cs" />
     <Compile Include="SystemEventEnumerator.cs" />
@@ -596,10 +581,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.resx">
       <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskBrowserDialog.de.resx">
       <DependentUpon>TaskBrowserDialog.cs</DependentUpon>
@@ -1057,6 +1038,15 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Begin: NuGet Pack instructions
+  <Import Project="$(MSBuildSDKsPath)\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PackageId>TaskSchedulerEditor</PackageId>
+    <Authors>David Hall</Authors>
+    <BuildOutputTargetFolder>bin\$(Configuration)</BuildOutputTargetFolder>
+    <NuspecFile>TaskEditor.nuspec</NuspecFile>
+  </PropertyGroup>
+  End: NuGet Pack instructions -->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

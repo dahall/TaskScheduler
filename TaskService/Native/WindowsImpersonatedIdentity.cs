@@ -13,7 +13,9 @@ namespace Microsoft.Win32
 	/// </summary>
 	internal class WindowsImpersonatedIdentity : IDisposable, IIdentity
 	{
+#if !(NETSTANDARD2_0)
 		private WindowsImpersonationContext impersonationContext = null;
+#endif
 		private WindowsIdentity identity = null;
 
 		/// <summary>
@@ -36,7 +38,9 @@ namespace Microsoft.Win32
 				if (NativeMethods.LogonUser(userName, domainName, password, LOGON_TYPE_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
 					identity = new WindowsIdentity(token.DangerousGetHandle());
+#if !(NETSTANDARD2_0)
 					impersonationContext = identity.Impersonate();
+#endif
 				}
 				else
 				{
@@ -47,8 +51,10 @@ namespace Microsoft.Win32
 
 		public void Dispose()
 		{
+#if !(NETSTANDARD2_0)
 			if (impersonationContext != null)
 				impersonationContext.Undo();
+#endif
 			if (identity != null)
 				identity.Dispose();
 		}
