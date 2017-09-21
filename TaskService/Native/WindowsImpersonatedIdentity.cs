@@ -13,9 +13,16 @@ namespace Microsoft.Win32
 	/// </summary>
 	internal class WindowsImpersonatedIdentity : IDisposable, IIdentity
 	{
-#if !(NETSTANDARD2_0)
+		private const int LOGON_TYPE_NEW_CREDENTIALS = 9;
+		private const int LOGON32_LOGON_INTERACTIVE = 2;
+		private const int LOGON32_PROVIDER_DEFAULT = 0;
+		private const int LOGON32_PROVIDER_WINNT50 = 3;
+
+#if NETSTANDARD2_0
+#else
 		private WindowsImpersonationContext impersonationContext = null;
 #endif
+		NativeMethods.SafeTokenHandle token;
 		private WindowsIdentity identity = null;
 
 		/// <summary>
@@ -28,17 +35,19 @@ namespace Microsoft.Win32
 		/// <param name="password">The password of the user to act as.</param>
 		public WindowsImpersonatedIdentity(string userName, string domainName, string password)
 		{
-			NativeMethods.SafeTokenHandle token;
 			if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(domainName) && string.IsNullOrEmpty(password))
 			{
 				identity = WindowsIdentity.GetCurrent();
 			}
 			else
 			{
-				if (NativeMethods.LogonUser(userName, domainName, password, LOGON_TYPE_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, out token) != 0)
+				if (NativeMethods.LogonUser(userName, domainName, password, domainName == null ? LOGON_TYPE_NEW_CREDENTIALS : LOGON32_LOGON_INTERACTIVE, domainName == null ? LOGON32_PROVIDER_WINNT50 : LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
+#if NETSTANDARD2_0
+					if (!NativeMethods.ImpersonateLoggedOnUser(token.DangerousGetHandle()))
+						throw new Win32Exception();
+#else
 					identity = new WindowsIdentity(token.DangerousGetHandle());
-#if !(NETSTANDARD2_0)
 					impersonationContext = identity.Impersonate();
 #endif
 				}
@@ -49,24 +58,23 @@ namespace Microsoft.Win32
 			}
 		}
 
-		public void Dispose()
-		{
-#if !(NETSTANDARD2_0)
-			if (impersonationContext != null)
-				impersonationContext.Undo();
-#endif
-			if (identity != null)
-				identity.Dispose();
-		}
-
-		private const int LOGON_TYPE_NEW_CREDENTIALS = 9;
-		private const int LOGON32_LOGON_INTERACTIVE = 2;
-		private const int LOGON32_PROVIDER_DEFAULT = 0;
-
-		public string AuthenticationType => identity == null ? null : identity.AuthenticationType;
+		public string AuthenticationType => identity?.AuthenticationType;
 
 		public bool IsAuthenticated => identity == null ? false : identity.IsAuthenticated;
 
 		public string Name => identity == null ? null : identity.Name;
+
+		public void Dispose()
+		{
+#if NETSTANDARD2_0
+			NativeMethods.RevertToSelf();
+#else
+			if (impersonationContext != null)
+				impersonationContext.Undo();
+#endif
+			token?.Dispose();
+			if (identity != null)
+				identity.Dispose();
+		}
 	}
 }

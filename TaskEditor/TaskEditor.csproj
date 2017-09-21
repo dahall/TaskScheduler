@@ -35,6 +35,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,6 +47,7 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\Microsoft.Win32.TaskSchedulerEditor.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
@@ -97,6 +99,9 @@
     </Compile>
     <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
       <Link>Native\SYSTEMTIME.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\ReflectionHelper.cs">
+      <Link>Native\ReflectionHelper.cs</Link>
     </Compile>
     <Compile Include="ActionEditDialog.cs">
       <SubType>Form</SubType>

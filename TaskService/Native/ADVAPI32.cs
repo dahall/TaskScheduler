@@ -134,6 +134,10 @@ namespace Microsoft.Win32
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, Int32 tokenInfoLength, out Int32 returnLength);
 
+		[DllImport(ADVAPI32, ExactSpelling = true, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImpersonateLoggedOnUser(IntPtr hToken);
+
 		[DllImport(ADVAPI32, SetLastError = true, CharSet = CharSet.Unicode)]
 		public static extern int LogonUser(string lpszUserName, string lpszDomain, string lpszPassword, int dwLogonType, int dwLogonProvider, out SafeTokenHandle phToken);
 

@@ -784,7 +784,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>
 		/// Connects this instance of the <see cref="TaskService"/> class to a running Task Scheduler.
-		/// <note type="note">Connecting to V1 targets, even the local target, with any credentials not matching the current user, is not supported and will not fail</note>
 		/// </summary>
 		private void Connect()
 		{
@@ -819,10 +818,6 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 					else
 					{
-#if NETSTANDARD2_0
-						if (!string.IsNullOrEmpty(userName) || !string.IsNullOrEmpty(userDomain) || !string.IsNullOrEmpty(userPassword))
-							throw new NotSupportedException(@"Using any identity, other than the current process', is not supported under the .NET Standard build of this library.");
-#endif
 						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
 						v1TaskScheduler = new V1Interop.ITaskScheduler();
 						if (!string.IsNullOrEmpty(targetServer))

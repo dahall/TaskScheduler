@@ -1,7 +1,7 @@
 ﻿namespace System.Reflection
 {
 	/// <summary>Extensions related to <c>System.Reflection</c></summary>
-	public static class ReflectionHelper
+	internal static class ReflectionHelper
 	{
 		/// <summary>Loads a type from a named assembly.</summary>
 		/// <param name="typeName">Name of the type.</param>
