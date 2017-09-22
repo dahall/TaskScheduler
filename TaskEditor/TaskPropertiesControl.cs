@@ -22,6 +22,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool editable;
 		//private bool flagExecutorIsCurrentUser, flagExecutorIsTheMachineAdministrator;
 		private bool flagUserIsAnAdmin, flagExecutorIsServiceAccount, flagRunOnlyWhenUserIsLoggedOn, flagExecutorIsGroup;
+		private bool lockTaskName = false;
 		private bool onAssignment;
 		private string runTimesTaskName;
 		private readonly TabPage[] tabPages;
@@ -310,7 +311,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				SetUserControls(td.Principal.LogonType);
 				taskNameText.Text = task?.Name ?? string.Empty;
-				taskNameText.ReadOnly = !(task == null && editable);
+				taskNameText.ReadOnly = !TaskNameIsEditable;
 				taskLocationText.Text = GetTaskLocation();
 				if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
 					td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
@@ -411,6 +412,20 @@ namespace Microsoft.Win32.TaskScheduler
 			get { return taskNameText.Text; }
 			set { taskNameText.Text = value; }
 		}
+
+		/// <summary>
+		/// If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from editing the TaskName.
+		/// </summary>
+		[Browsable(false)]
+		public bool TaskNameIsEditable
+		{
+			get { return task == null && editable && !lockTaskName; }
+			set { if (task == null && editable) taskNameText.ReadOnly = (lockTaskName = !value); }
+		}
+
+		private bool ShouldSerializeTaskNameIsEditable() => task == null && editable && lockTaskName;
+
+		private void ResetTaskNameIsEditable() { lockTaskName = false; }
 
 		/// <summary>
 		/// Gets the <see cref="TaskService"/> assigned at initialization.

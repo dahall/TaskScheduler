@@ -1314,6 +1314,11 @@
             Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" />, this value will be set to the name of the registered task.
             </summary>
     </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskNameIsEditable">
+      <summary>
+            If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from editing the TaskName.
+            </summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService">
       <summary>
             Gets the <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService" /> assigned at initialization.
@@ -1685,6 +1690,11 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskName">
       <summary>
             Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskNameIsEditable">
+      <summary>
+            If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from editing the TaskName.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskService">

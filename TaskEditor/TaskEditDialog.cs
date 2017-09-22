@@ -222,6 +222,16 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
+		/// If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from editing the TaskName.
+		/// </summary>
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool TaskNameIsEditable
+		{
+			get { return taskPropertiesControl1.TaskNameIsEditable; }
+			set { taskPropertiesControl1.TaskNameIsEditable = value; }
+		}
+
+		/// <summary>
 		/// Gets the <see cref="TaskService"/> assigned at initialization.
 		/// </summary>
 		/// <value>The task service.</value>

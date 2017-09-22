@@ -2291,6 +2291,7 @@
   <HelpKINode Title="TaskEditDialog.TaskEditDialog constructor" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskEditDialog__ctor.htm" />
   <HelpKINode Title="TaskEditDialog.TaskFolder property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskFolder.htm" />
   <HelpKINode Title="TaskEditDialog.TaskName property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskName.htm" />
+  <HelpKINode Title="TaskEditDialog.TaskNameIsEditable property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskNameIsEditable.htm" />
   <HelpKINode Title="TaskEditDialog.TaskService property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskService.htm" />
   <HelpKINode Title="TaskEditDialog.Title property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_Title.htm" />
   <HelpKINode Title="TaskEnumGlobalizer class">
@@ -2504,6 +2505,10 @@
     <HelpKINode Title="TaskPropertiesControl.TaskName Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskName.htm" />
     <HelpKINode Title="TaskSchedulerWizard.TaskName Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_TaskName.htm" />
   </HelpKINode>
+  <HelpKINode Title="TaskNameIsEditable property">
+    <HelpKINode Title="TaskEditDialog.TaskNameIsEditable Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskNameIsEditable.htm" />
+    <HelpKINode Title="TaskPropertiesControl.TaskNameIsEditable Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskNameIsEditable.htm" />
+  </HelpKINode>
   <HelpKINode Title="TaskNotRunServiceBusy enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="TaskNotStartedEngineQuotaExceeded enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="TaskNotStartedTaskQueueQuotaExceeded enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
@@ -2616,6 +2621,7 @@
   <HelpKINode Title="TaskPropertiesControl.TaskDefinition property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskDefinition.htm" />
   <HelpKINode Title="TaskPropertiesControl.TaskFolder property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskFolder.htm" />
   <HelpKINode Title="TaskPropertiesControl.TaskName property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskName.htm" />
+  <HelpKINode Title="TaskPropertiesControl.TaskNameIsEditable property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskNameIsEditable.htm" />
   <HelpKINode Title="TaskPropertiesControl.TaskPropertiesControl constructor" Url="html/M_Microsoft_Win32_TaskScheduler_TaskPropertiesControl__ctor.htm" />
   <HelpKINode Title="TaskPropertiesControl.TaskService property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskService.htm" />
   <HelpKINode Title="TaskQueueQuotaApproaching enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
