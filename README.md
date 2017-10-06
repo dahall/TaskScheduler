@@ -2,13 +2,17 @@
 
 > Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.  
 
-API documentation can be found at https://dahall.github.io/TaskScheduler.
+## Quick Links
+* [Discussion Forum (users helping users, enhancement requests, Q&A)](https://groups.google.com/forum/#!forum/taskscheduler)
+* [Documentation Wiki (samples, library how-to, etc.)](https://github.com/dahall/TaskScheduler/wiki/Documentation)
+* [API documentation (class/method/property help)](https://dahall.github.io/TaskScheduler)
+* [Issues](https://github.com/dahall/TaskScheduler/issues)
 
 ## Installation
 This project's assemblies are available via NuGet.
 
-*   Main Library: [Task Scheduler Managed Wrapper](http://www.nuget.org/packages/TaskScheduler/) (TaskScheduler)
-*   UI Library: [Task Scheduler Managed Wrapper UI Library](http://www.nuget.org/packages/TaskSchedulerEditor/) (TaskSchedulerEditor)
+* Main Library: [Task Scheduler Managed Wrapper](http://www.nuget.org/packages/TaskScheduler/) (TaskScheduler)
+* UI Library: [Task Scheduler Managed Wrapper UI Library](http://www.nuget.org/packages/TaskSchedulerEditor/) (TaskSchedulerEditor)
 
 ## Project Components
 ### Main Library
