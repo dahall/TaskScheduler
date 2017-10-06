@@ -16,7 +16,6 @@
             Remove this element if your application requires this virtualization for backwards
             compatibility.
         -->
-        <requestedExecutionLevel level="highestAvailable" uiAccess="false" />
       </requestedPrivileges>
     </security>
   </trustInfo>

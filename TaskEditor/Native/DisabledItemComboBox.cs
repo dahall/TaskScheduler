@@ -397,20 +397,22 @@ namespace System.Windows.Forms
 			if (!vsSuccess)
 			{
 				Diagnostics.Debug.WriteLine($"CR:{ClientRectangle};ClR:{e.ClipRectangle};Foc:{Focused};St:{state};Tx:{itemText}");
-				var bgc = Enabled ? BackColor : SystemColors.Control;
+				var focusedNotPressed = Focused && state != ComboBoxState.Pressed;
+				var bgc = Enabled ? (focusedNotPressed ? SystemColors.Highlight : BackColor) : SystemColors.Control;
+				var fgc = Enabled ? (focusedNotPressed ? SystemColors.HighlightText : ForeColor) : SystemColors.GrayText;
 				e.Graphics.Clear(bgc);
 				ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, Border3DStyle.Sunken);
 				ControlPaint.DrawComboButton(e.Graphics, br, Enabled ? (state == ComboBoxState.Pressed ? ButtonState.Pushed : ButtonState.Normal) : ButtonState.Inactive);
-				//using (var bb = new SolidBrush(this.BackColor))
-				//	e.Graphics.FillRectangle(bb, tr);
-				if (Focused)
+				tr = new Rectangle(tr.X + 3, tr.Y + 1, tr.Width - 4, tr.Height - 2);
+				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, fgc, tff);
+				if (focusedNotPressed)
 				{
-					var sz = TextRenderer.MeasureText(e.Graphics, "Wg", Font, tr.Size, TextFormatFlags.Default);
-					var fr = Rectangle.Inflate(tr, 0, (sz.Height - tr.Height) / 2 + 1);
-					e.Graphics.FillRectangle(SystemBrushes.Highlight, fr);
-					ControlPaint.DrawFocusRectangle(e.Graphics, fr); //, this.ForeColor, SystemColors.Highlight);
+					var fr = Rectangle.Inflate(cbi.rcItem, -1, -1);
+					fr.Height++;
+					fr.Width++;
+					ControlPaint.DrawFocusRectangle(e.Graphics, fr, fgc, bgc);
+					e.Graphics.DrawRectangle(SystemPens.Window, cbi.rcItem);
 				}
-				TextRenderer.DrawText(e.Graphics, itemText, Font, tr, Focused ? SystemColors.HighlightText : (Enabled ? ForeColor : SystemColors.GrayText), bgc, tff);
 			}
 		}
 

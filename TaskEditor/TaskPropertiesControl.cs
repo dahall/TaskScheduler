@@ -269,6 +269,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (task != null)
 				{
 					TaskService = task.TaskService;
+					TaskFolder = task.Folder.Path;
 					if (task.ReadOnly)
 						Editable = false;
 					TaskDefinition = task.Definition;

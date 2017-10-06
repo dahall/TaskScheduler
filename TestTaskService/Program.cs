@@ -21,7 +21,7 @@ namespace TestTaskService
 				return;
 			}
 
-			//System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es");
+			//System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
 			//System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -301,7 +301,14 @@ namespace TestTaskService
 				}
 
 				// Register then show task again
-				if (DisplayTask(ts, td, true) != null)
+				editorForm = new TaskEditDialog(ts, td, true, true);
+				editorForm.AvailableTabs = AvailableTaskTabs.All;
+				editorForm.TaskName = "Test";
+				if (ts.HighestSupportedVersion >= new Version(1, 2)) editorForm.TaskFolder = @"\Microsoft";
+				editorForm.TaskNameIsEditable = false;
+				editorForm.ShowActionRunButton = true;
+				editorForm.ShowConvertActionsToPowerShellCheck = true;
+				if (editorForm.ShowDialog() == DialogResult.OK)
 				{
 					var t = editorForm.Task;
 					while (DisplayTask(t, true) != null)
@@ -312,10 +319,10 @@ namespace TestTaskService
 						if (t.Definition.Triggers.Count > 0)
 							output.Write($"TriggerStart: {d(t.Definition.Triggers[0].StartBoundary)}\r\nTriggerEnd: {d(t.Definition.Triggers[0].EndBoundary)}\r\n");
 					}
-				}
 
-				// Remove the task we just created
-				ts.RootFolder.DeleteTask(taskName, false);
+					// Remove the task we just created
+					t.Folder.DeleteTask(taskName, false);
+				}
 			}
 			catch (Exception ex)
 			{
