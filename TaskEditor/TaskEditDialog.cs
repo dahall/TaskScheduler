@@ -51,11 +51,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
 		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
-		public TaskEditDialog(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true)
+		/// <param name="taskName">If set, assigns this name to the task's name field.</param>
+		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
+		public TaskEditDialog(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true, string taskName = null, string taskFolder = null)
 		{
 			InitializeComponent();
 			Editable = editable;
-			Initialize(service, td);
+			Initialize(service, td, taskName, taskFolder);
 			RegisterTaskOnAccept = registerOnAccept;
 		}
 
@@ -258,14 +260,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
-		public void Initialize(TaskService service, TaskDefinition td = null)
+		/// <param name="taskName">If set, assigns this name to the task's name field.</param>
+		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
+		public void Initialize(TaskService service, TaskDefinition td = null, string taskName = null, string taskFolder = null)
 		{
 			if (service == null)
 				throw new ArgumentNullException(nameof(service));
 			if (!titleSet)
 				Text = string.Format(EditorProperties.Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
 			okBtn.Enabled = false;
-			taskPropertiesControl1.Initialize(service, td);
+			taskPropertiesControl1.Initialize(service, td, taskName, taskFolder);
 		}
 
 		/// <summary>

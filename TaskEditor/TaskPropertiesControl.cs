@@ -459,7 +459,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="taskDef">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
-		public void Initialize(TaskService service, TaskDefinition taskDef = null)
+		/// <param name="taskName">If set, assigns this name to the task's name field.</param>
+		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
+		public void Initialize(TaskService service, TaskDefinition taskDef = null, string taskName = null, string taskFolder = null)
 		{
 			TaskService = service;
 			task = null;
@@ -475,6 +477,8 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					TaskDefinition = taskDef;
 			}
+			TaskName = taskName;
+			TaskFolder = taskFolder;
 		}
 
 		/// <summary>

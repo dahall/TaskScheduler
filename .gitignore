@@ -268,3 +268,4 @@ __pycache__/
 docs/*.bat
 docs/*.exe
 docs/*.msh?
+/docs/Working
