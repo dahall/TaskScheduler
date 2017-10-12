@@ -35,14 +35,53 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>The task is compatible with the AT command.</summary>
 		AT,
 		/// <summary>The task is compatible with Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
+		/// <remarks>Items not available when compared to V2:
+		/// <list type="bullet">
+		/// <item><term>TaskDefinition.Principal.GroupId - All account information can be retrieved via the UserId property.</term></item>
+		/// <item><term>TaskLogonType values Group, None and S4U are not supported.</term></item>
+		/// <item><term>TaskDefinition.Principal.RunLevel == TaskRunLevel.Highest is not supported.</term></item>
+		/// <item><term>Assigning access security to a task is not supported using TaskDefinition.RegistrationInfo.SecurityDescriptorSddlForm or in RegisterTaskDefinition.</term></item>
+		/// <item><term>TaskDefinition.RegistrationInfo.Documentation, Source, URI and Version properties are only supported using this library. See details in the remarks for <see cref="TaskDefinition.Data"/>.</term></item>
+		/// <item><term>TaskDefinition.Settings.AllowDemandStart cannot be false.</term></item>
+		/// <item><term>TaskDefinition.Settings.AllowHardTerminate cannot be false.</term></item>
+		/// <item><term>TaskDefinition.Settings.MultipleInstances can only be IgnoreNew.</term></item>
+		/// <item><term>TaskDefinition.Settings.NetworkSettings cannot have any values.</term></item>
+		/// <item><term>TaskDefinition.Settings.RestartCount can only be 0.</term></item>
+		/// <item><term>TaskDefinition.Settings.StartWhenAvailable can only be false.</term></item>
+		/// <item><term>TaskDefinition.Actions can only contain ExecAction instances unless the TaskDefinition.Actions.PowerShellConversion property has the Version1 flag set.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain CustomTrigger, EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger instances.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain instances with delays set.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain instances with ExecutionTimeLimit or Id properties set.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain LogonTriggers instances with the UserId property set.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain MonthlyDOWTrigger instances with the RunOnLastWeekOfMonth property set to <c>true</c>.</term></item>
+		/// <item><term>TaskDefinition.Triggers cannot contain MonthlyTrigger instances with the RunOnDayWeekOfMonth property set to <c>true</c>.</term></item>
+		/// </list></remarks>
 		V1,
 		/// <summary>The task is compatible with Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
+		/// <remarks>This version is the baseline for the new, non-file based Task Scheduler. See <see cref="TaskCompatibility.V1"/> remarks for functionality that was not forward-compatible.</remarks>
 		V2,
 		/// <summary>The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
+		/// <remarks>Changes from V2:
+		/// <list type="bullet">
+		/// <item><term>TaskDefinition.Principal.ProcessTokenSidType can be defined as a value other than Default.</term></item>
+		/// <item><term>TaskDefinition.Actions may not contain EmailAction or ShowMessageAction instances unless the TaskDefinition.Actions.PowerShellConversion property has the Version2 flag set.</term></item>
+		/// <item><term>TaskDefinition.Principal.RequiredPrivileges can have privilege values assigned.</term></item>
+		/// <item><term>TaskDefinition.Settings.DisallowStartOnRemoteAppSession can be set to true.</term></item>
+		/// <item><term>TaskDefinition.UseUnifiedSchedulingEngine can be set to true.</term></item>
+		/// </list></remarks>
 		V2_1,
 		/// <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
+		/// <remarks>Changes from V2_1:
+		/// <list type="bullet">
+		/// <item><term>TaskDefinition.Settings.MaintenanceSettings can have Period or Deadline be values other than TimeSpan.Zero or the Exclusive property set to true.</term></item>
+		/// <item><term>TaskDefinition.Settings.Volatile can be set to true.</term></item>
+		/// </list></remarks>
 		V2_2,
 		/// <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		/// <remarks>Changes from V2_2:
+		/// <list type="bullet">
+		/// <item><term>None published.</term></item>
+		/// </list></remarks>
 		V2_3
 	}
 
@@ -1648,6 +1687,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the data that is associated with the task. This data is ignored by the Task Scheduler service, but is used by third-parties who wish to extend the task format.
 		/// </summary>
+		/// <remarks>For V1 tasks, this library makes special use of the SetWorkItemData and GetWorkItemData methods and does not expose that data stream directly. Instead, it uses
+		/// that data stream to hold a dictionary of properties that are not supported under V1, but can have values under V2. An example of this is the <see cref="TaskRegistrationInfo.URI"/>
+		/// value which is stored in the data stream.
+		/// <para>The library does not provide direct access to the V1 work item data. If using V2 properties with a V1 task, programmatic access to the task using the native
+		/// API will retrieve unreadable results from GetWorkItemData and will eliminate those property values if SetWorkItemData is used.</para>
+		/// </remarks>
 		[CanBeNull]
 		public string Data
 		{
@@ -2044,8 +2089,7 @@ namespace Microsoft.Win32.TaskScheduler
 			var Data = IntPtr.Zero;
 			try
 			{
-				ushort DataLen;
-				v1Task.GetWorkItemData(out DataLen, out Data);
+				v1Task.GetWorkItemData(out var DataLen, out Data);
 				if (DataLen == 0)
 					return null;
 				var bytes = new byte[DataLen];
