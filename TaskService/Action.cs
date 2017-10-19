@@ -47,7 +47,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// objects. An action object is created by the <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
 	[PublicAPI]
-	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged
+	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged, IComparable
 	{
 		internal IAction iAction;
 		internal V1Interop.ITask v1Task;
@@ -314,6 +314,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			Id = sourceAction.Id;
 		}
+
+		int IComparable.CompareTo(object obj) => string.Compare(Id, (obj as Action)?.Id, StringComparison.InvariantCulture);
 	}
 
 	/// <summary>

@@ -807,7 +807,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public class Task : IDisposable
+	public class Task : IDisposable, IComparable
 	{
 		internal ITask v1Task;
 
@@ -1358,6 +1358,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// A <see cref="System.String"/> that represents this instance.
 		/// </returns>
 		public override string ToString() => Name;
+
+		int IComparable.CompareTo(object other) => string.Compare(Path, (obj as Task)?.Path, StringComparison.InvariantCulture);
 
 		internal void V1Reactivate()
 		{

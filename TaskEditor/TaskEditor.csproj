@@ -36,6 +36,7 @@
     </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <RegisterForComInterop>false</RegisterForComInterop>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +49,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <RegisterForComInterop>false</RegisterForComInterop>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->

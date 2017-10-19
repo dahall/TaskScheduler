@@ -149,7 +149,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="TriggerCollection.Add"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>
+	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 		internal static readonly CultureInfo DefaultDateCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -778,6 +778,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 			return span.ToString();
 		}
+
+		int IComparable.CompareTo(object obj) => string.Compare(Id, (obj as Trigger)?.Id, StringComparison.InvariantCulture);
 	}
 
 	/// <summary>
@@ -2246,7 +2248,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]></code></example>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[TypeConverter(typeof(RepetitionPatternConverter))]
-	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>, IComparable
 	{
 		private readonly Trigger pTrigger;
 		private TimeSpan unboundInterval = TimeSpan.Zero, unboundDuration = TimeSpan.Zero;
@@ -2449,6 +2451,8 @@ namespace Microsoft.Win32.TaskScheduler
 			Interval = value.Interval;
 			StopAtDurationEnd = value.StopAtDurationEnd;
 		}
+
+		int IComparable.CompareTo(object obj) => Task.DeepCompare(this, obj);
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 

@@ -7,8 +7,9 @@
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>2.6.2</Version>
+    <Version>2.6.3</Version>
     <Title>Task Scheduler Managed Wrapper</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
@@ -23,6 +24,7 @@
     <PackageTags>task interop taskscheduler</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
