@@ -807,7 +807,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public class Task : IDisposable, IComparable
+	public class Task : IDisposable, IComparable, IComparable<Task>
 	{
 		internal ITask v1Task;
 
@@ -1067,6 +1067,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets the XML-formatted registration information for the registered task.
 		/// </summary>
 		public string Xml => v2Task != null ? v2Task.Xml : Definition.XmlText;
+
+		/// <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+		/// <param name="other">An object to compare with this instance.</param>
+		/// <returns>A value that indicates the relative order of the objects being compared.</returns>
+		public int CompareTo(Task other) => string.Compare(Path, other?.Path, StringComparison.InvariantCulture);
 
 		/// <summary>
 		/// Releases all resources used by this class.
@@ -1359,7 +1364,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </returns>
 		public override string ToString() => Name;
 
-		int IComparable.CompareTo(object other) => string.Compare(Path, (obj as Task)?.Path, StringComparison.InvariantCulture);
+		int IComparable.CompareTo(object other) => CompareTo(other as Task);
 
 		internal void V1Reactivate()
 		{

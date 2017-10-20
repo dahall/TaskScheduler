@@ -269,3 +269,4 @@ docs/*.bat
 docs/*.exe
 docs/*.msh?
 /docs/Working
+/docs/html

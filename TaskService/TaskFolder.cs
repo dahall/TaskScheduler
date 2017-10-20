@@ -272,7 +272,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			foreach (var fld in SubFolders)
 			{
-				if (filter != null && filter(fld))
+				if (filter == null || filter(fld))
 					yield return fld;
 			}
 

@@ -149,7 +149,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="TriggerCollection.Add"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable
+	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable, IComparable<Trigger>
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 		internal static readonly CultureInfo DefaultDateCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -387,6 +387,11 @@ namespace Microsoft.Win32.TaskScheduler
 			ret.CopyProperties(this);
 			return ret;
 		}
+
+		/// <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+		/// <param name="other">An object to compare with this instance.</param>
+		/// <returns>A value that indicates the relative order of the objects being compared.</returns>
+		public int CompareTo(Trigger other) => string.Compare(Id, other?.Id, StringComparison.InvariantCulture);
 
 		/// <summary>
 		/// Copies the properties from another <see cref="Trigger"/> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="ITriggerDelay"/> interface.
@@ -779,7 +784,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return span.ToString();
 		}
 
-		int IComparable.CompareTo(object obj) => string.Compare(Id, (obj as Trigger)?.Id, StringComparison.InvariantCulture);
+		int IComparable.CompareTo(object obj) => CompareTo(obj as Trigger);
 	}
 
 	/// <summary>
@@ -2248,7 +2253,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]></code></example>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[TypeConverter(typeof(RepetitionPatternConverter))]
-	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>, IComparable
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
 	{
 		private readonly Trigger pTrigger;
 		private TimeSpan unboundInterval = TimeSpan.Zero, unboundDuration = TimeSpan.Zero;
@@ -2451,8 +2456,6 @@ namespace Microsoft.Win32.TaskScheduler
 			Interval = value.Interval;
 			StopAtDurationEnd = value.StopAtDurationEnd;
 		}
-
-		int IComparable.CompareTo(object obj) => Task.DeepCompare(this, obj);
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
 
