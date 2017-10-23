@@ -275,7 +275,6 @@ namespace Microsoft.Win32.TaskScheduler
 				if (filter == null || filter(fld))
 					yield return fld;
 			}
-
 		}
 
 		/// <summary>Returns an enumerable collection of tasks that matches a specified filter and recursion option.</summary>

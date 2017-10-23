@@ -23,6 +23,11 @@
             A new object that is a copy of this instance.
             </returns>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Action.CompareTo(Microsoft.Win32.TaskScheduler.Action)">
+      <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+      <param name="obj">An object to compare with this instance.</param>
+      <returns>A value that indicates the relative order of the objects being compared.</returns>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.CreateAction(Microsoft.Win32.TaskScheduler.TaskActionType)">
       <summary>
             Creates the specified action.
@@ -2010,6 +2015,11 @@
       <summary>
             Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials that are used to register the task, and the properties that describe the task.
             </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Task.CompareTo(Microsoft.Win32.TaskScheduler.Task)">
+      <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+      <param name="other">An object to compare with this instance.</param>
+      <returns>A value that indicates the relative order of the objects being compared.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Task.Definition">
       <summary>
@@ -4484,6 +4494,11 @@
       <returns>
             A new <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that is an unbound copy of this instance.
             </returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CompareTo(Microsoft.Win32.TaskScheduler.Trigger)">
+      <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+      <param name="other">An object to compare with this instance.</param>
+      <returns>A value that indicates the relative order of the objects being compared.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>

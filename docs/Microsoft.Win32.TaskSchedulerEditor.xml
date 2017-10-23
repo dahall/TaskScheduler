@@ -1215,7 +1215,7 @@
       <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
       <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.#ctor(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.Boolean,System.Boolean)">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.#ctor(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.Boolean,System.Boolean,System.String,System.String)">
       <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEditDialog" /> class.
             </summary>
@@ -1223,6 +1223,8 @@
       <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />. Leaving null creates a new task.</param>
       <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
       <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
+      <param name="taskName">If set, assigns this name to the task's name field.</param>
+      <param name="taskFolder">If set, assigns this path to the task's folder.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.AvailableTabs">
       <summary>
@@ -1251,12 +1253,14 @@
             </summary>
       <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.Task" /> instance.</param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEditDialog.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.String,System.String)">
       <summary>
             Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />.
             </summary>
       <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskService" /> instance.</param>
       <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="taskName">If set, assigns this name to the task's name field.</param>
+      <param name="taskFolder">If set, assigns this path to the task's folder.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskEditDialog.MaxHistoryCount">
       <summary>
@@ -1620,12 +1624,14 @@
             </summary>
       <param name="taskInstance">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Task" /> instance.</param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.String,System.String)">
       <summary>
             Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" />.
             </summary>
       <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskService" /> instance.</param>
       <param name="taskDef">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="taskName">If set, assigns this name to the task's name field.</param>
+      <param name="taskFolder">If set, assigns this path to the task's folder.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPropertiesControl.IsV2">
       <summary>

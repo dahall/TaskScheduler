@@ -14,6 +14,7 @@
   <HelpKINode Title="Action property" Url="html/P_Microsoft_Win32_TaskScheduler_ActionEditDialog_Action.htm" />
   <HelpKINode Title="Action.ActionType property" Url="html/P_Microsoft_Win32_TaskScheduler_Action_ActionType.htm" />
   <HelpKINode Title="Action.Clone method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_Clone.htm" />
+  <HelpKINode Title="Action.CompareTo method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_CompareTo.htm" />
   <HelpKINode Title="Action.CreateAction method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_CreateAction.htm" />
   <HelpKINode Title="Action.Dispose method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_Dispose.htm" />
   <HelpKINode Title="Action.Equals method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Action_Equals.htm" />
@@ -279,7 +280,12 @@
   <HelpKINode Title="ComObjectSelectionDialog.ServerType property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_ServerType.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.SupportedInterface property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_SupportedInterface.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.SupportedServers enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_SupportedServers.htm" />
-  <HelpKINode Title="CompareTo method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskEvent_CompareTo.htm" />
+  <HelpKINode Title="CompareTo method">
+    <HelpKINode Title="Action.CompareTo Method " Url="html/M_Microsoft_Win32_TaskScheduler_Action_CompareTo.htm" />
+    <HelpKINode Title="Task.CompareTo Method " Url="html/M_Microsoft_Win32_TaskScheduler_Task_CompareTo.htm" />
+    <HelpKINode Title="TaskEvent.CompareTo Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskEvent_CompareTo.htm" />
+    <HelpKINode Title="Trigger.CompareTo Method " Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CompareTo.htm" />
+  </HelpKINode>
   <HelpKINode Title="CompatDirectoryMonitorFailed enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="Compatibility property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_Compatibility.htm" />
   <HelpKINode Title="CompatibilityLevel property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskCompatibilityEntry_CompatibilityLevel.htm" />
@@ -2147,6 +2153,7 @@
     <HelpKINode Title="TaskRunTimesDialog.Task Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskRunTimesDialog_Task.htm" />
     <HelpKINode Title="TaskSchedulerWizard.Task Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_Task.htm" />
   </HelpKINode>
+  <HelpKINode Title="Task.CompareTo method" Url="html/M_Microsoft_Win32_TaskScheduler_Task_CompareTo.htm" />
   <HelpKINode Title="Task.Definition property" Url="html/P_Microsoft_Win32_TaskScheduler_Task_Definition.htm" />
   <HelpKINode Title="Task.Dispose method" Url="html/M_Microsoft_Win32_TaskScheduler_Task_Dispose.htm" />
   <HelpKINode Title="Task.Enabled property" Url="html/P_Microsoft_Win32_TaskScheduler_Task_Enabled.htm" />
@@ -2953,6 +2960,7 @@
   </HelpKINode>
   <HelpKINode Title="Trigger.CheckBindValue method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CheckBindValue.htm" />
   <HelpKINode Title="Trigger.Clone method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_Clone.htm" />
+  <HelpKINode Title="Trigger.CompareTo method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CompareTo.htm" />
   <HelpKINode Title="Trigger.CopyProperties method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CopyProperties.htm" />
   <HelpKINode Title="Trigger.CreateTrigger method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CreateTrigger.htm" />
   <HelpKINode Title="Trigger.Dispose method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_Dispose.htm" />
