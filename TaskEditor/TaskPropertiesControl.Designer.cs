@@ -863,9 +863,9 @@
 			// 
 			// principalSIDTypeCombo
 			// 
+			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
 			this.principalSIDTypeCombo.DisplayMember = "Text";
 			this.principalSIDTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			resources.ApplyResources(this.principalSIDTypeCombo, "principalSIDTypeCombo");
 			this.principalSIDTypeCombo.Name = "principalSIDTypeCombo";
 			this.helpProvider.SetShowHelp(this.principalSIDTypeCombo, ((bool)(resources.GetObject("principalSIDTypeCombo.ShowHelp"))));
 			this.principalSIDTypeCombo.ValueMember = "Value";
@@ -879,10 +879,10 @@
 			// 
 			// principalReqPrivilegesDropDown
 			// 
+			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
 			this.principalReqPrivilegesDropDown.BackColor = System.Drawing.Color.White;
 			this.principalReqPrivilegesDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.principalReqPrivilegesDropDown.DropSize = new System.Drawing.Size(121, 106);
-			resources.ApplyResources(this.principalReqPrivilegesDropDown, "principalReqPrivilegesDropDown");
 			this.principalReqPrivilegesDropDown.Name = "principalReqPrivilegesDropDown";
 			this.helpProvider.SetShowHelp(this.principalReqPrivilegesDropDown, ((bool)(resources.GetObject("principalReqPrivilegesDropDown.ShowHelp"))));
 			this.principalReqPrivilegesDropDown.SelectedIndexChanged += new System.EventHandler(this.principalReqPrivilegesDropDown_SelectedIndexChanged);

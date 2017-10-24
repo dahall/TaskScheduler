@@ -402,9 +402,6 @@
   <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 81</value>
   </data>
-  <data name="taskDescText.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 50</value>
-  </data>
   <data name="taskDescText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -430,7 +427,7 @@
     <value>7</value>
   </data>
   <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 341</value>
@@ -455,9 +452,6 @@
   </data>
   <data name="&gt;&gt;taskVersionCombo.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="taskVersionLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="taskVersionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1279,7 +1273,7 @@
     <value>taskIdleWaitTimeoutCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1303,7 +1297,7 @@
     <value>taskIdleDurationCombo</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
     <value>idleConditionGroupBox</value>
@@ -1449,9 +1443,6 @@
   <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 46</value>
   </data>
-  <data name="idleConditionGroupBox.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 0</value>
-  </data>
   <data name="idleConditionGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1576,7 +1567,7 @@
     <value>0</value>
   </data>
   <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 288</value>
+    <value>10, 288</value>
   </data>
   <data name="taskMultInstCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1606,7 +1597,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRunningRuleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 264</value>
+    <value>7, 264</value>
   </data>
   <data name="taskRunningRuleLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1672,7 +1663,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRestartCountLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 138</value>
+    <value>26, 138</value>
   </data>
   <data name="taskRestartCountLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1705,7 +1696,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskDeleteAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 228</value>
+    <value>10, 228</value>
   </data>
   <data name="taskDeleteAfterCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1738,7 +1729,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 198</value>
+    <value>10, 198</value>
   </data>
   <data name="taskAllowHardTerminateCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1771,7 +1762,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 168</value>
+    <value>10, 168</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1804,7 +1795,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskRestartIntervalCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 108</value>
+    <value>10, 108</value>
   </data>
   <data name="taskRestartIntervalCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1837,7 +1828,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
+    <value>10, 78</value>
   </data>
   <data name="taskStartWhenAvailableCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1870,7 +1861,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskAllowDemandStartCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 48</value>
+    <value>10, 48</value>
   </data>
   <data name="taskAllowDemandStartCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1948,7 +1939,7 @@
     <value>taskDeleteAfterCombo</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1972,7 +1963,7 @@
     <value>taskExecutionTimeLimitCombo</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -1996,7 +1987,7 @@
     <value>taskRestartIntervalCombo</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
     <value>settingsTab</value>
@@ -2533,7 +2524,7 @@
     <value>taskMaintenanceDeadlineCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskMaintenanceDeadlineCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -2656,7 +2647,7 @@
     <value>taskMaintenancePeriodCombo</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2</value>
   </data>
   <data name="&gt;&gt;taskMaintenancePeriodCombo.Parent" xml:space="preserve">
     <value>autoMaintGroup</value>
@@ -2730,6 +2721,9 @@
   <data name="&gt;&gt;principalSIDTypeLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="principalSIDTypeCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>218, 21</value>
   </data>
@@ -2787,6 +2781,9 @@
   <data name="&gt;&gt;principalReqPrivilegesLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="principalReqPrivilegesDropDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="principalReqPrivilegesDropDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>123, 50</value>
   </data>
@@ -2816,9 +2813,6 @@
   </data>
   <data name="secHardGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 171</value>
-  </data>
-  <data name="secHardGroup.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>500, 0</value>
   </data>
   <data name="secHardGroup.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2851,7 +2845,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskEnabledCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 0</value>
+    <value>3, 0</value>
   </data>
   <data name="taskEnabledCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2884,7 +2878,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 52</value>
+    <value>3, 52</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2917,7 +2911,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 77</value>
+    <value>3, 77</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2974,7 +2968,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskVolatileCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 102</value>
+    <value>3, 102</value>
   </data>
   <data name="taskVolatileCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3007,7 +3001,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-2, 26</value>
+    <value>0, 26</value>
   </data>
   <data name="label8.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
