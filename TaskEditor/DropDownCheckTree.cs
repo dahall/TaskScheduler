@@ -116,7 +116,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void CheckValue(string value, bool check = true)
 		{
 			TreeNode node;
-			if (value != null && value is string)
+			if (value != null)
 				if (values.TryGetValue((string)value, out node))
 					node.Checked = check;
 			UpdateText();
