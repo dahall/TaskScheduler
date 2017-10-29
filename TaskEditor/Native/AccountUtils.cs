@@ -88,7 +88,7 @@ namespace Microsoft.Win32
 
 			public static bool CurrentUserIsAdmin(string computerName)
 			{
-				if (!string.IsNullOrEmpty(computerName) || computerName == ".")
+				if (!string.IsNullOrEmpty(computerName))
 					return true;
 
 				WindowsPrincipal principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
