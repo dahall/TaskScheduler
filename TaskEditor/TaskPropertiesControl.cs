@@ -1125,8 +1125,7 @@ namespace Microsoft.Win32.TaskScheduler
 			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled = 
 				principalReqPrivilegesDropDown.Enabled = taskDisallowStartOnRemoteAppSessionCheck.Enabled =
-				taskUseUnifiedSchedulingEngineCheck.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesDropDown.Enabled =
-				editable && v2_1;
+				taskUseUnifiedSchedulingEngineCheck.Enabled = editable && v2_1;
 			taskVolatileCheck.Enabled = taskMaintenanceDeadlineLabel.Enabled = taskMaintenanceDeadlineCombo.Enabled = 
 				taskMaintenanceExclusiveCheck.Enabled = taskMaintenancePeriodLabel.Enabled = taskMaintenancePeriodCombo.Enabled = editable && v2_2;
 		}
