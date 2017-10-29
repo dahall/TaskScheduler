@@ -91,7 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Type elhType = session?.GetType().Assembly.GetType("System.Diagnostics.Eventing.Reader.EventLogHandle");
 				SessionHandlePI = session?.GetType().GetProperty("Handle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, elhType, Type.EmptyTypes, null);
 			}
-			object o = SessionHandlePI.GetValue(session, null);
+			object o = SessionHandlePI?.GetValue(session, null);
 			if (o != null)
 				hEvt = ((SafeHandle)o).DangerousGetHandle();
 
