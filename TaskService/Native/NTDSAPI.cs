@@ -223,7 +223,7 @@ namespace Microsoft.Win32
 			{
 				if (status == DS_NAME_ERROR.DS_NAME_NO_ERROR)
 					return pName;
-				return null;
+				return string.Empty;
 			}
 		}
 	}
