@@ -423,8 +423,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 					if (inner[0] != null)
 					{
 						newVal = Regex.Replace(inner[0], string.Join("|", new string[] { computer, evidrange, evid, keyword, level, prov, tasks, user, time2dates, timedate2end, timestart2date, timediff, AND, @"\s*\(\s*\)\s*", @"\s+" }), string.Empty, RegexOptions.IgnoreCase);
-						if (newVal != null)
-							newVal = Regex.Replace(newVal, @"\s*\(\s*(?:or\s*)*\)\s*", string.Empty, RegexOptions.IgnoreCase);
+						newVal = Regex.Replace(newVal, @"\s*\(\s*(?:or\s*)*\)\s*", string.Empty, RegexOptions.IgnoreCase);
 						ThrowIfBadXml(value, newVal, "Select");
 					}
 					if (inner[1] != null)
