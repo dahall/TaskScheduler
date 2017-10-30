@@ -128,7 +128,7 @@ namespace System.Windows.Forms
 
 		public static void SetColumnDropDown(this ListView listView, int columnIndex, bool enable)
 		{
-			if (columnIndex < 0 || columnIndex >= 0 && listView.Columns == null || columnIndex >= listView.Columns.Count)
+			if (columnIndex < 0 || (columnIndex >= 0 && listView.Columns == null) || columnIndex >= listView.Columns.Count)
 				throw new ArgumentOutOfRangeException(nameof(columnIndex));
 
 			if (listView.IsHandleCreated)

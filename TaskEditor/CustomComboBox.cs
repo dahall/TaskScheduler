@@ -753,9 +753,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDown(EventArgs args)
 		{
-			EventHandler eventHandler = DropDown;
-			if (eventHandler != null)
-				DropDown(this, args);
+			DropDown?.Invoke(this, args);
 		}
 
 		/// <summary>
@@ -764,9 +762,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="args">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected new virtual void OnDropDownClosed(EventArgs args)
 		{
-			EventHandler eventHandler = DropDownClosed;
-			if (eventHandler != null)
-				DropDownClosed(this, args);
+			DropDownClosed?.Invoke(this, args);
 		}
 
 		/// <summary>
