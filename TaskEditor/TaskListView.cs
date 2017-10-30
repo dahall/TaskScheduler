@@ -172,8 +172,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (item != null)
 				{
 					item.Selected = true;
-					if (ContextMenuStrip != null)
-						ContextMenuStrip.Show(listView1, e.Location);
+					ContextMenuStrip.Show(listView1, e.Location);
 				}
 			}
 			OnMouseClick(e);

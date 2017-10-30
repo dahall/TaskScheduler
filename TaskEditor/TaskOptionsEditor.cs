@@ -522,7 +522,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 			public override bool Equals(object obj)
 			{
-				if (obj is ComboItem)
+                if (obj == null)
+                    return false;
+                if (obj is ComboItem)
 					return Version == ((ComboItem)obj).Version;
 				if (obj is int)
 					return Version == (int)obj;

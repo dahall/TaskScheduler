@@ -487,6 +487,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </exception>
 		public override bool Equals(object obj)
 		{
+            if (obj == null)
+                return false;
 			if (obj is DropDownCheckListItem)
 				return Text == ((DropDownCheckListItem)obj).Text && Value == ((DropDownCheckListItem)obj).Value;
 			if (obj.GetType() == Value.GetType())
