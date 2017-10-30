@@ -37,7 +37,7 @@ namespace TestTaskService
 				test = args[0].ToUpper()[0];
 				init++;
 			}
-			var newArgs = new[] { args.Length > init ? args[init] : "2", null, null, null, null };
+			var newArgs = new[] { args.Length > init ? args[init] : "2", null, null, null, null, null };
 			for (var i = init + 1; i < init + 5; i++)
 				if (args.Length > i) newArgs[i] = args[i];
 
