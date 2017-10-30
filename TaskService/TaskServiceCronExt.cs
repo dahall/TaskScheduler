@@ -106,7 +106,7 @@ namespace Microsoft.Win32.TaskScheduler
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
 			// DailyTrigger
-			else if (cron.Months.IsEvery && cron.DOW.IsEvery && cron.Days.repeating)
+			else if (cron.Months.IsEvery && cron.Days.repeating)
 			{
 				Trigger tr = new DailyTrigger((short)cron.Days.step);
 				ret.AddRange(ProcessCronTimes(cron, tr));
