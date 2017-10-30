@@ -779,7 +779,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 						else if (low.HasValue && high.HasValue)
 							return string.Concat(d1, " and ", d2);
 					}
-					return null;
+					return string.Empty;
 				}
 			}
 		}
