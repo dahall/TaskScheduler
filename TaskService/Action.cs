@@ -998,7 +998,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			var sb = new System.Text.StringBuilder($"Start-Process -FilePath '{Path}'");
 			if (!string.IsNullOrEmpty(Arguments))
-				sb.Append($" -ArgumentList '{Arguments?.Replace("'", "''")}'");
+				sb.Append($" -ArgumentList '{Arguments.Replace("'", "''")}'");
 			if (!string.IsNullOrEmpty(WorkingDirectory))
 				sb.Append($" -WorkingDirectory '{WorkingDirectory}'");
 			return sb.Append("; ").ToString();
