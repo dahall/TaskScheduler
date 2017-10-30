@@ -755,7 +755,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			EventHandler eventHandler = DropDown;
 			if (eventHandler != null)
-				DropDown(this, args);
+                eventHandler(this, args);
 		}
 
 		/// <summary>
@@ -766,7 +766,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			EventHandler eventHandler = DropDownClosed;
 			if (eventHandler != null)
-				DropDownClosed(this, args);
+                eventHandler(this, args);
 		}
 
 		/// <summary>
