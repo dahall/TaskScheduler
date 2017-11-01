@@ -11,6 +11,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			InitializeComponent();
 			errorProvider.SetIconPadding(comCLSIDText, -18);
+			comCLSIDText.TextChanged += (sender, args) => { if (!comCLSIDText.ReadOnly) KeyValueChanged?.Invoke(this, EventArgs.Empty); };
 		}
 
 		public event EventHandler KeyValueChanged;
@@ -32,8 +33,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			get
 			{
-				try { return new Guid(toolTip.GetToolTip(comCLSIDText)); }
-				catch { return Guid.Empty; }
+				if (comCLSIDText.ReadOnly)
+					try { return new Guid(toolTip.GetToolTip(comCLSIDText)); } catch { }
+				else
+					try { return new Guid(comCLSIDText.Text); } catch { }
+				return Guid.Empty;
 			}
 			set
 			{
@@ -80,7 +84,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				return;
 
 			Guid? og = null;
-			try { og = new Guid(comCLSIDText.Text); } catch { }
+			if (comCLSIDText.ReadOnly)
+				try { og = new Guid(toolTip.GetToolTip(comCLSIDText)); } catch { }
+			else
+				try { og = new Guid(comCLSIDText.Text); } catch { }
 			if (og.HasValue)
 				errorProvider.SetError(comCLSIDText, "");
 			else
@@ -100,8 +107,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			try
 			{
 				var dlg = new ComObjectSelectionDialog {SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04")};
-				if (dlg.ShowDialog(this) == DialogResult.OK)
-					ComCLSID = dlg.CLSID;
+				if (dlg.ShowDialog(this) != DialogResult.OK) return;
+				comCLSIDText.ReadOnly = true;
+				ComCLSID = dlg.CLSID;
 			}
 			catch { }
 		}

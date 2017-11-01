@@ -97,7 +97,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (ppv != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(ppv);
 				if (iu != IntPtr.Zero) System.Runtime.InteropServices.Marshal.Release(iu);
-				if (o != null) System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
+				o = null;
 			}
 		}
 
