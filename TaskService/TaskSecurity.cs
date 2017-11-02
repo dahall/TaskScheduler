@@ -169,6 +169,7 @@ namespace Microsoft.Win32.TaskScheduler
 			: base(false)
 		{
 			SetSecurityDescriptorSddlForm(task.GetSecurityDescriptorSddlForm(Convert(sections)), sections);
+			this.CanonicalizeAccessRules();
 		}
 
 		/// <summary>
@@ -180,6 +181,7 @@ namespace Microsoft.Win32.TaskScheduler
 			: base(false)
 		{
 			SetSecurityDescriptorSddlForm(folder.GetSecurityDescriptorSddlForm(Convert(sections)), sections);
+			this.CanonicalizeAccessRules();
 		}
 
 		/// <summary>
