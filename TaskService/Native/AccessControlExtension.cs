@@ -2,6 +2,7 @@
 
 namespace System.Security.AccessControl
 {
+	/// <summary>Extensions for classes in the System.Security.AccessControl namespace.</summary>
 	public static class AccessControlExtension
 	{
 		/// <summary>Canonicalizes the specified Access Control List.</summary>
