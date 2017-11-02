@@ -362,10 +362,8 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set Info tab
 				taskRegDocText.Text = GetStringValue(td.RegistrationInfo.Documentation);
 				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
-				if (secEd != null && IsV2)
-					taskRegSDDLBtn.Visible = true;
-				else
-					taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, 2);
+				taskRegSDDLBtn.Visible = secEd != null && IsV2;
+				taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, secEd != null && IsV2 ? 1 : 2);
 				taskRegSourceText.Text = GetStringValue(td.RegistrationInfo.Source);
 				taskRegURIText.Text = td.RegistrationInfo.URI;
 				taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();

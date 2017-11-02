@@ -58,12 +58,16 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Guid SupportedInterface { get; set; } = Guid.Empty;
 
+		/// <summary>Raises the <see cref="E:System.Windows.Forms.Form.Closing" /> event.</summary>
+		/// <param name="e">A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.</param>
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			backgroundWorker1.CancelAsync();
 			base.OnClosing(e);
 		}
 
+		/// <summary>Raises the <see cref="E:System.Windows.Forms.Form.Load" /> event.</summary>
+		/// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
