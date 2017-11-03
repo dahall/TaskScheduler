@@ -387,7 +387,8 @@ namespace System.Windows.Forms
 							var fr = Rectangle.Inflate(tr, 0, (sz.Height - tr.Height) / 2 + 1);
 							ControlPaint.DrawFocusRectangle(e.Graphics, fr);
 						}
-						TextRenderer.DrawText(e.Graphics, itemText, Font, tr, ForeColor, tff);
+						var fgc = Enabled ? ForeColor : SystemColors.GrayText;
+						TextRenderer.DrawText(e.Graphics, itemText, Font, tr, fgc, tff);
 						vsSuccess = true;
 					}
 					catch { }
