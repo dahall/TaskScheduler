@@ -43,6 +43,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private static Version osLibVer;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 
+		[ThreadStatic]
 		private static TaskService instance;
 
 		internal V1Interop.ITaskScheduler v1TaskScheduler;
