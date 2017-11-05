@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionsOptionPanel));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.actionCollectionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI();
@@ -41,13 +42,13 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.actionCollectionUI1, 0, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(372, 262);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(372, 366);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
 			// optionPanelHeaderLabel1
@@ -63,13 +64,13 @@
 			// 
 			// actionCollectionUI1
 			// 
-			this.actionCollectionUI1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.actionCollectionUI1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.actionCollectionUI1.Location = new System.Drawing.Point(0, 29);
 			this.actionCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
 			this.actionCollectionUI1.MinimumSize = new System.Drawing.Size(322, 119);
 			this.actionCollectionUI1.Name = "actionCollectionUI1";
 			this.actionCollectionUI1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-			this.actionCollectionUI1.Size = new System.Drawing.Size(372, 233);
+			this.actionCollectionUI1.Size = new System.Drawing.Size(372, 337);
 			this.actionCollectionUI1.TabIndex = 1;
 			this.actionCollectionUI1.UseModernUI = true;
 			// 
@@ -77,6 +78,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.Controls.Add(this.tableLayoutPanel1);
+			this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
 			this.Name = "ActionsOptionPanel";
 			this.Size = new System.Drawing.Size(372, 366);
 			this.Title = "Task Actions";

@@ -17,16 +17,16 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskHiddenCheck.Enabled = taskEnabledCheck.Enabled = parent.Editable;
 			taskRegSourceText.ReadOnly = taskRegURIText.ReadOnly = taskRegVersionText.ReadOnly = !parent.Editable;
 
-			taskDescText.Text = td.RegistrationInfo.Description;
+			taskDescText.Text = parent.GetStringValue(td.RegistrationInfo.Description);
 			taskEnabledCheck.Checked = td.Settings.Enabled;
 			taskHiddenCheck.Checked = td.Settings.Hidden;
 			if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
 				td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
-			taskAuthorText.Text = td.RegistrationInfo.Author;
-			taskRegSourceText.Text = td.RegistrationInfo.Source;
+			taskAuthorText.Text = parent.GetStringValue(td.RegistrationInfo.Author);
+			taskRegSourceText.Text = parent.GetStringValue(td.RegistrationInfo.Source);
 			taskRegURIText.Text = td.RegistrationInfo.URI;
 			taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
-			taskRegDocText.Text = td.RegistrationInfo.Documentation;
+			taskRegDocText.Text = parent.GetStringValue(td.RegistrationInfo.Documentation);
 		}
 
 		private void taskDescText_Leave(object sender, EventArgs e)
@@ -129,8 +129,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 										t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
 										t.Repetition.StopAtDurationEnd = false;
 									}
-									else if (t is EventTrigger)
-										((EventTrigger)t).ValueQueries.Clear();
+									else if (t is EventTrigger et)
+										et.ValueQueries.Clear();
 								}
 							}
 						}

@@ -50,7 +50,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskExecutionTimeLimitCombo.Value = td.Settings.ExecutionTimeLimit;
 			taskAllowHardTerminateCheck.Checked = td.Settings.AllowHardTerminate;
 			taskDeleteAfterCheck.Checked = td.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
-			taskDeleteAfterCombo.Enabled = v2 && editable && taskDeleteAfterCheck.Checked;
+			taskDeleteAfterCombo.Enabled = editable && taskDeleteAfterCheck.Checked;
 			taskDeleteAfterCombo.Value = td.Settings.DeleteExpiredTaskAfter == TimeSpan.FromSeconds(1) ? TimeSpan.Zero : td.Settings.DeleteExpiredTaskAfter;
 			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 
@@ -74,10 +74,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskDeleteAfterCombo.Enabled = parent.Editable && taskDeleteAfterCheck.Checked;
 			if (!onAssignment)
 			{
-				if (taskDeleteAfterCheck.Checked)
-					taskDeleteAfterCombo.Value = TimeSpan.FromDays(30);
-				else
-					taskDeleteAfterCombo.Value = TimeSpan.Zero;
+				taskDeleteAfterCombo.Value = taskDeleteAfterCheck.Checked ? TimeSpan.FromDays(30) : TimeSpan.Zero;
 			}
 		}
 
@@ -92,10 +89,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskExecutionTimeLimitCombo.Enabled = parent.Editable && taskExecutionTimeLimitCheck.Checked;
 			if (!onAssignment)
 			{
-				if (taskExecutionTimeLimitCheck.Checked)
-					taskExecutionTimeLimitCombo.Value = TimeSpan.FromDays(3);
-				else
-					taskExecutionTimeLimitCombo.Value = TimeSpan.Zero;
+				taskExecutionTimeLimitCombo.Value = taskExecutionTimeLimitCheck.Checked ? TimeSpan.FromDays(3) : TimeSpan.Zero;
 			}
 		}
 

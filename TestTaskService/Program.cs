@@ -859,10 +859,10 @@ namespace TestTaskService
 			//TaskService.RunComHandlerActionAsync(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), i => output.WriteLine("Com task complete."), "5", 120000, (p, s) => output.WriteLine($"Com task running: {p}% complete = {s}"));
 
 			// Show on traditional editor
-			DisplayTask(runningTask, true);
+			//DisplayTask(runningTask, true);
 
 			// Show on new editor
-			//new TaskOptionsEditor(runningTask).ShowDialog();
+			new TaskOptionsEditor(runningTask).ShowDialog();
 
 			tf.DeleteTask("Test1");
 		}

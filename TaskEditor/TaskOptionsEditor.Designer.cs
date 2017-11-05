@@ -201,6 +201,7 @@
 			resources.ApplyResources(this.taskVersionCombo, "taskVersionCombo");
 			this.taskVersionCombo.Name = "taskVersionCombo";
 			this.taskVersionCombo.SelectedIndexChanged += new System.EventHandler(this.taskVersionCombo_SelectedIndexChanged);
+			this.taskVersionCombo.Enter += new System.EventHandler(this.taskVersionCombo_GotFocus);
 			// 
 			// taskNameText
 			// 
@@ -226,12 +227,12 @@
 			// menuItemsContainer
 			// 
 			this.menuItemsContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.generalItem,
-			this.triggersItem,
-			this.actionsItem,
-			this.securityItem,
-			this.startupItem,
-			this.runItem});
+            this.generalItem,
+            this.triggersItem,
+            this.actionsItem,
+            this.securityItem,
+            this.startupItem,
+            this.runItem});
 			this.menuItemsContainer.Name = "menuItemsContainer";
 			resources.ApplyResources(this.menuItemsContainer, "menuItemsContainer");
 			// 

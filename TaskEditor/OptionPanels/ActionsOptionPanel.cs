@@ -9,6 +9,8 @@
 
 		protected override void InitializePanel()
 		{
+			actionCollectionUI1.ShowActionRunButton = parent.ShowActionRunButton;
+			actionCollectionUI1.ShowPowerShellConversionCheck = parent.ShowConvertActionsToPowerShellCheck;
 			actionCollectionUI1.RefreshState();
 		}
 	}

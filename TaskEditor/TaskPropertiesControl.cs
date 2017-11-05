@@ -51,7 +51,6 @@ namespace Microsoft.Win32.TaskScheduler
 			catch { }
 
 			// Settings for conditionsTab
-			long allVal;
 			taskIdleDurationCombo.Items.AddRange(new[] { TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromMinutes(60) });
 			taskIdleWaitTimeoutCombo.FormattedZero = EditorProperties.Resources.TimeSpanDoNotWait;
 			taskIdleWaitTimeoutCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(5), TimeSpan2.FromMinutes(10), TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2) });
@@ -61,7 +60,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskExecutionTimeLimitCombo.Items.AddRange(new[] { TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
 			taskDeleteAfterCombo.FormattedZero = EditorProperties.Resources.TimeSpanImmediately;
 			taskDeleteAfterCombo.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromDays(30), TimeSpan2.FromDays(90), TimeSpan2.FromDays(180), TimeSpan2.FromDays(365) });
-			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
+			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out long allVal);
 
 			// Settings for addPropTab
 			ComboBoxExtension.InitializeFromEnum(principalSIDTypeCombo.Items, typeof(TaskProcessTokenSidType), EditorProperties.Resources.ResourceManager, "SIDType", out allVal);
@@ -290,11 +289,8 @@ namespace Microsoft.Win32.TaskScheduler
 				if (TaskService == null)
 					throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set until TaskService has been set with a valid object.");
 
-				if (value == null)
-					throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set to null.");
-
-				td = value;
 				onAssignment = true;
+				td = value ?? throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set to null.");
 				SetVersionComboItems();
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= new Version(1, 2);
 
@@ -361,7 +357,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 				// Set Info tab
 				taskRegDocText.Text = GetStringValue(td.RegistrationInfo.Documentation);
-				taskRegSDDLText.Text = td.RegistrationInfo.SecurityDescriptorSddlForm;
+				var sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
+				if (string.IsNullOrEmpty(sddl) && Task != null)
+					sddl = Task.GetSecurityDescriptorSddlForm();
+				taskRegSDDLText.Text = sddl;
 				taskRegSDDLBtn.Visible = secEd != null && IsV2;
 				taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, secEd != null && IsV2 ? 1 : 2);
 				taskRegSourceText.Text = GetStringValue(td.RegistrationInfo.Source);
@@ -461,6 +460,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
 		public void Initialize(TaskService service, TaskDefinition taskDef = null, string taskName = null, string taskFolder = null)
 		{
+			if (service == null)
+				throw new ArgumentNullException(nameof(service));
 			TaskService = service;
 			task = null;
 			if (!this.IsDesignMode())
@@ -485,7 +486,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="taskInstance">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task taskInstance)
 		{
-			Task = taskInstance;
+			Task = taskInstance ?? throw new ArgumentNullException(nameof(taskInstance));
 		}
 
 		/// <summary>
@@ -643,8 +644,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void InvokeObjectPicker(string targetComputerName)
 		{
-			string acct = String.Empty, sid;
-			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
+			var acct = String.Empty;
+			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out var sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
@@ -1151,8 +1152,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskAllowHardTerminateCheck.Enabled = editable && !isSet;
 			// Update Multiple Instances policy combo
 			taskMultInstCombo.BeginUpdate();
-			long allVal;
-			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out allVal);
+			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), EditorProperties.Resources.ResourceManager, "TaskInstances", out long allVal);
 			if (isSet)
 				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
 			taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
@@ -1400,8 +1400,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskNameText_Validating(object sender, CancelEventArgs e)
 		{
 			var inv = System.IO.Path.GetInvalidFileNameChars();
-			e.Cancel = !ValidateText(taskNameText,
-				s => s.Length > 0 && s.IndexOfAny(inv) == -1,
+			e.Cancel = !ValidateText(taskNameText, s => s.Length > 0 && s.IndexOfAny(inv) == -1,
 				EditorProperties.Resources.Error_InvalidNameFormat);
 		}
 

@@ -13,8 +13,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		public SecurityOptionPanel()
 		{
 			InitializeComponent();
-			long allVal;
-			ComboBoxExtension.InitializeFromEnum(principalSIDTypeCombo.Items, typeof(TaskProcessTokenSidType), EditorProperties.Resources.ResourceManager, "SIDType", out allVal);
+			ComboBoxExtension.InitializeFromEnum(principalSIDTypeCombo.Items, typeof(TaskProcessTokenSidType), EditorProperties.Resources.ResourceManager, "SIDType", out var allVal);
 			principalReqPrivilegesDropDown.Sorted = true;
 			principalReqPrivilegesDropDown.InitializeFromEnum(typeof(TaskPrincipalPrivilege), EditorProperties.Resources.ResourceManager, "");
 		}
@@ -34,7 +33,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			flagUserIsAnAdmin = NativeMethods.AccountUtils.CurrentUserIsAdmin(parent.TaskService.TargetServer);
 			if (td != null && td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
-			string sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
+			var sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
 			if (string.IsNullOrEmpty(sddl) && parent.Task != null)
 				sddl = parent.Task.GetSecurityDescriptorSddlForm();
 			taskRegSDDLText.Text = sddl;
@@ -42,9 +41,9 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void InvokeObjectPicker(string targetComputerName)
 		{
-			bool v2 = parent.IsV2;
-			string acct = String.Empty, sid;
-			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
+			var v2 = parent.IsV2;
+			var acct = String.Empty;
+			if (!HelperMethods.SelectAccount(this, targetComputerName, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out var sid))
 				return;
 
 			if (!ValidateAccountForSidType(acct))
@@ -125,8 +124,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void SetUserControls(TaskLogonType logonType)
 		{
-			bool editable = parent.Editable;
-			bool prevOnAssignment = onAssignment;
+			var editable = parent.Editable;
+			var prevOnAssignment = onAssignment;
 			onAssignment = true;
 			switch (logonType)
 			{
@@ -181,7 +180,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
 			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
 
-			string user = td == null ? null : td.Principal.ToString();
+			var user = td?.Principal.ToString();
 			if (string.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
@@ -215,7 +214,14 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void taskRegSDDLBtn_Click(object sender, EventArgs e)
 		{
-			secEd.Initialize(parent.Task);
+			if (parent.Task != null)
+				secEd.Initialize(parent.Task);
+			else
+			{
+				var tsec = TaskSecurity.DefaultTaskSecurity;
+				if (taskRegSDDLText.TextLength > 0) { tsec = new TaskSecurity(); tsec.SetSecurityDescriptorSddlForm(taskRegSDDLText.Text); }
+				secEd.Initialize(parent.TaskName, false, parent.TaskService.TargetServer, tsec);
+			}
 			if (secEd.ShowDialog(this) == DialogResult.OK)
 			{
 				td.RegistrationInfo.SecurityDescriptorSddlForm = secEd.SecurityDescriptorSddlForm;

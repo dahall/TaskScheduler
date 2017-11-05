@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TriggersOptionPanel));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.optionPanelHeaderLabel1 = new Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel();
 			this.triggerCollectionUI1 = new Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI();
@@ -41,13 +42,13 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.triggerCollectionUI1, 0, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 262);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 412);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// optionPanelHeaderLabel1
@@ -63,12 +64,12 @@
 			// 
 			// triggerCollectionUI1
 			// 
-			this.triggerCollectionUI1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.triggerCollectionUI1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.triggerCollectionUI1.Location = new System.Drawing.Point(0, 29);
 			this.triggerCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
 			this.triggerCollectionUI1.Name = "triggerCollectionUI1";
 			this.triggerCollectionUI1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-			this.triggerCollectionUI1.Size = new System.Drawing.Size(330, 233);
+			this.triggerCollectionUI1.Size = new System.Drawing.Size(330, 383);
 			this.triggerCollectionUI1.TabIndex = 1;
 			this.triggerCollectionUI1.UseModernUI = true;
 			// 
@@ -76,6 +77,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.Controls.Add(this.tableLayoutPanel1);
+			this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
 			this.Name = "TriggersOptionPanel";
 			this.Size = new System.Drawing.Size(330, 412);
 			this.Title = "Trigger Options";

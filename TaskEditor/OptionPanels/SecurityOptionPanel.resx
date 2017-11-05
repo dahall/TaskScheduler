@@ -145,13 +145,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskRegSDDLBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 0</value>
+    <value>311, 0</value>
   </data>
   <data name="taskRegSDDLBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 0, 0, 0</value>
   </data>
   <data name="taskRegSDDLBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 25</value>
+    <value>120, 30</value>
   </data>
   <data name="taskRegSDDLBtn.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -184,7 +184,7 @@
     <value>3, 1, 0, 0</value>
   </data>
   <data name="taskRegSDDLText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 23</value>
+    <value>301, 23</value>
   </data>
   <data name="taskRegSDDLText.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -214,7 +214,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 25</value>
+    <value>431, 30</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -259,7 +259,7 @@
     <value>optionPanelHeaderLabel2</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel2.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -292,7 +292,7 @@
     <value>optionPanelHeaderLabel1</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -334,7 +334,7 @@
     <value>taskLocalOnlyCheck</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -577,7 +577,7 @@
     <value>taskRunLevelCheck</value>
   </data>
   <data name="&gt;&gt;taskRunLevelCheck.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -715,7 +715,7 @@
     <value>principalReqPrivilegesDropDown</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.DropDownCheckList, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;principalReqPrivilegesDropDown.Parent" xml:space="preserve">
     <value>tableLayoutPanel6</value>
@@ -841,7 +841,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>436, 314</value>
+    <value>436, 319</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -867,6 +867,18 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
+  <data name="$this.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFwSURBVFhH7ZYhUgNBEEVXREbmCBEIRI6wAhnBETgGMjdAIhARkYgcIQKBiOQAHACBQEQg4P+q
+        v1Qz6V5m2EmlKPKrXlV2en5379TsZJo/q7Ztz0CnczBS6HBCkSm4BS/gI+ENrMBM0+sKia/BO0gLe9yA
+        eiuihGkRvvEWPIJXjVnuwfAmkGRhkpIncAm+JcfzBXgAdu5S4d8JCWbALvsd6H0rxNOG5wqVC2YuY5eI
+        S521pIlvq+EywTgGO5OoVehHYSq/FrtyU4XyBRPVJXjWcLbg2Rj/lYbzRZNJsNZwtuCxX85Cw/mCyTZQ
+        vJvh4Qbmp0rKDyeYBjVAwcd9NNZjmWAc3MAg/d8GTNGDoDKxPFNNVCaWZwrgcTsR9ujtRWVieaaAiSz0
+        sAlvzh6yxPJMAUdvYCULPbyKeXP2kCWWZwr4+oPi7yQWIksszxRwauDoDfC2tBT25tSLysTyTDVRmVie
+        qSYqE8sz1URlTpKa5hPMYeV3blFBbAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>436, 412</value>
   </data>
@@ -877,6 +889,6 @@
     <value>SecurityOptionPanel</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
 </root>
