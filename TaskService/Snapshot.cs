@@ -101,7 +101,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static TaskSchedulerSnapshot Create(TaskService ts, string path)
 		{
 			var c = new System.Threading.CancellationTokenSource();
-			return InternalCreate(ts, path, c.Token, null);
+			return InternalCreate(ts.Token, path, c.Token, null);
 		}
 
 		/// <summary>
@@ -109,14 +109,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// reconstitute its tasks and folders. <note type="warning">This method will execute without error even if the user does not have permissions to see all
 		/// tasks and folders. It is imperative that the developer ensures that the user has Administrator or equivalent rights before calling this method.</note>
 		/// </summary>
-		/// <param name="ts">The <see cref="TaskService"/> from which to pull the tasks and folders.</param>
+		/// <param name="tsToken">The <see cref="TaskService.ConnectionToken"/> from which to pull the tasks and folders.</param>
 		/// <param name="path">The output zip file in which to place the snapshot information.</param>
 		/// <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
 		/// <param name="progress">An optional <see cref="IProgress{T}"/> instance to use to report progress of the asynchronous operation.</param>
 		/// <returns>An asynchronous <see cref="TaskSchedulerSnapshot"/> instance with the contents of the specified Task Scheduler connection.</returns>
-		public static async System.Threading.Tasks.Task<TaskSchedulerSnapshot> Create(TaskService ts, string path, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
+		public static async System.Threading.Tasks.Task<TaskSchedulerSnapshot> Create(TaskService.ConnectionToken tsToken, string path, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
 		{
-			return await System.Threading.Tasks.Task.Run(() => InternalCreate(ts, path, cancelToken, progress), cancelToken);
+			return await System.Threading.Tasks.Task.Run(() => InternalCreate(tsToken, path, cancelToken, progress), cancelToken);
 		}
 
 		/// <summary>Opens an existing snapshot and returns a new instance of <see cref="TaskSchedulerSnapshot"/>.</summary>
@@ -125,7 +125,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static TaskSchedulerSnapshot Open(string path) => new TaskSchedulerSnapshot(path);
 
 		/// <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
-		/// <param name="ts">The <see cref="TaskService"/> into which the tasks and folders are registered.</param>
+		/// <param name="tsToken">The <see cref="TaskService.ConnectionToken"/> into which the tasks and folders are registered.</param>
 		/// <param name="itemPaths">
 		/// The list of paths representing the tasks and folders from this snapshot that should be registered on the <see cref="TaskService"/> instance.
 		/// </param>
@@ -141,17 +141,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
 		/// <param name="progress">An optional <see cref="IProgress{T}"/> instance to use to report progress of the asynchronous operation.</param>
 		/// <returns>An asynchronous <see cref="Task"/> instance.</returns>
-		public async System.Threading.Tasks.Task Restore(TaskService ts, IEnumerable<string> itemPaths, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
+		public async System.Threading.Tasks.Task Restore(TaskService.ConnectionToken tsToken, IEnumerable<string> itemPaths, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
 		{
-			if (ts == null) throw new ArgumentNullException(nameof(ts));
 			if (itemPaths == null) throw new ArgumentNullException(nameof(itemPaths));
 			var items = Items.Where(i => i is TaskSnapshot).Join(itemPaths, a => a.Path, b => b, (a, b) => a).ToList();
 			if (items.Count != itemPaths.Count()) throw new ArgumentException($"Unable to locate matching tasks to all values of {nameof(itemPaths)}.", nameof(itemPaths));
-			await System.Threading.Tasks.Task.Run(() => InternalRestore(ts, items, applyAccessRights, overwriteExisting, passwords, cancelToken, progress));
+			await System.Threading.Tasks.Task.Run(() => InternalRestore(tsToken, items, applyAccessRights, overwriteExisting, passwords, cancelToken, progress));
 		}
 
 		/// <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
-		/// <param name="ts">The <see cref="TaskService"/> into which the tasks and folders are registered.</param>
+		/// <param name="tsToken">The <see cref="TaskService.ConnectionToken"/> into which the tasks and folders are registered.</param>
 		/// <param name="items">
 		/// The list of <see cref="SnapshotItem"/> instances representing the tasks and folders from this snapshot that should be registered on the
 		/// <see cref="TaskService"/> instance.
@@ -168,11 +167,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
 		/// <param name="progress">An optional <see cref="IProgress{T}"/> instance to use to report progress of the asynchronous operation.</param>
 		/// <returns>An asynchronous <see cref="Task"/> instance.</returns>
-		public async System.Threading.Tasks.Task Restore(TaskService ts, ICollection<SnapshotItem> items, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
+		public async System.Threading.Tasks.Task Restore(TaskService.ConnectionToken tsToken, ICollection<SnapshotItem> items, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
 		{
-			if (ts == null) throw new ArgumentNullException(nameof(ts));
 			if (items == null) throw new ArgumentNullException(nameof(items));
-			await System.Threading.Tasks.Task.Run(() => InternalRestore(ts, items, applyAccessRights, overwriteExisting, passwords, cancelToken, progress));
+			await System.Threading.Tasks.Task.Run(() => InternalRestore(tsToken, items, applyAccessRights, overwriteExisting, passwords, cancelToken, progress));
 		}
 
 		/// <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
@@ -193,7 +191,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Restore(TaskService ts, ICollection<SnapshotItem> items, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords)
 		{
 			var c = new System.Threading.CancellationTokenSource();
-			InternalRestore(ts, items, applyAccessRights, overwriteExisting, passwords, c.Token, null);
+			InternalRestore(ts.Token, items, applyAccessRights, overwriteExisting, passwords, c.Token, null);
 		}
 
 		XmlSchema IXmlSerializable.GetSchema() => null;
@@ -267,8 +265,9 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret?.Items;
 		}
 
-		private static TaskSchedulerSnapshot InternalCreate(TaskService ts, string path, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
+		private static TaskSchedulerSnapshot InternalCreate(TaskService.ConnectionToken token, string path, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
 		{
+			var ts = TaskService.CreateFromToken(token);
 			const SecurityInfos siall = SecurityInfos.DiscretionaryAcl | SecurityInfos.SystemAcl | SecurityInfos.Group | SecurityInfos.Owner;
 			if (File.Exists(path)) throw new ArgumentException("Output file already exists.", nameof(path));
 			int i = 0, count = 0;
@@ -317,8 +316,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void InternalRestore(TaskService ts, ICollection<SnapshotItem> items, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
+		private void InternalRestore(TaskService.ConnectionToken token, ICollection<SnapshotItem> items, bool applyAccessRights, bool overwriteExisting, IDictionary<string, string> passwords, System.Threading.CancellationToken cancelToken, IProgress<Tuple<int, string>> progress)
 		{
+			var ts = TaskService.CreateFromToken(token);
 			var i = 0;
 			progress?.Report(new Tuple<int, string>(0, ""));
 			foreach (var item in items)
