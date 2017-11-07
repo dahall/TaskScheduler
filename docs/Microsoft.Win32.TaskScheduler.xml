@@ -1335,7 +1335,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.QuickTriggerType">
       <summary>
-            Quick simple trigger types for the <see cref="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)" /> method.
+            Quick simple trigger types for the
+            <see cref="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)" /> method.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.QuickTriggerType.Boot">
@@ -3788,12 +3789,12 @@
       <param name="path">The output zip file in which to place the snapshot information.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" /> instance with the contents of the specified Task Scheduler connection.</returns>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService,System.String,System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken,System.String,System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
       <summary>
             Creates a compressed zip file that contains all the information accessible to the user from the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance necessary to
             reconstitute its tasks and folders. <note type="warning">This method will execute without error even if the user does not have permissions to see all
             tasks and folders. It is imperative that the developer ensures that the user has Administrator or equivalent rights before calling this method.</note></summary>
-      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> from which to pull the tasks and folders.</param>
+      <param name="tsToken">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken" /> from which to pull the tasks and folders.</param>
       <param name="path">The output zip file in which to place the snapshot information.</param>
       <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
       <param name="progress">An optional <see cref="T:System.IProgress`1" /> instance to use to report progress of the asynchronous operation.</param>
@@ -3829,9 +3830,9 @@
             Lookup table for password. Provide pairs of the user/group account name and the associated passwords for any task that requires a password.
             </param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService,System.Collections.Generic.ICollection{Microsoft.Win32.TaskScheduler.SnapshotItem},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken,System.Collections.Generic.ICollection{Microsoft.Win32.TaskScheduler.SnapshotItem},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
       <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
-      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> into which the tasks and folders are registered.</param>
+      <param name="tsToken">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken" /> into which the tasks and folders are registered.</param>
       <param name="items">
             The list of <see cref="T:Microsoft.Win32.TaskScheduler.SnapshotItem" /> instances representing the tasks and folders from this snapshot that should be registered on the
             <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
@@ -3849,9 +3850,9 @@
       <param name="progress">An optional <see cref="T:System.IProgress`1" /> instance to use to report progress of the asynchronous operation.</param>
       <returns>An asynchronous <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
       <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
-      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> into which the tasks and folders are registered.</param>
+      <param name="tsToken">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken" /> into which the tasks and folders are registered.</param>
       <param name="itemPaths">
             The list of paths representing the tasks and folders from this snapshot that should be registered on the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
             </param>
@@ -4035,32 +4036,33 @@
             </returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskService">
-      <summary>
-            Provides access to the Task Scheduler service for managing registered tasks.
-            </summary>
+      <summary>Provides access to the Task Scheduler service for managing registered tasks.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.#ctor">
-      <summary>
-            Creates a new instance of a TaskService connecting to the local machine as the current user.
-            </summary>
+      <summary>Creates a new instance of a TaskService connecting to the local machine as the current user.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
-      <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> class.
-            </summary>
-      <param name="targetServer">The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.</param>
-      <param name="userName">The user name that is used during the connection to the computer. If the user is not specified, then the current token is used.</param>
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> class.</summary>
+      <param name="targetServer">
+            The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.
+            </param>
+      <param name="userName">
+            The user name that is used during the connection to the computer. If the user is not specified, then the current token is used.
+            </param>
       <param name="accountDomain">The domain of the user specified in the <paramref name="userName" /> parameter.</param>
-      <param name="password">The password that is used to connect to the computer. If the user name and password are not specified, then the current token is used.</param>
+      <param name="password">
+            The password that is used to connect to the computer. If the user name and password are not specified, then the current token is used.
+            </param>
       <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.AddAutomaticMaintenanceTask(System.String,System.TimeSpan,System.TimeSpan,System.String,System.String,System.String)">
-      <summary>
-            Adds or updates an Automatic Maintenance Task on the connected machine.
-            </summary>
+      <summary>Adds or updates an Automatic Maintenance Task on the connected machine.</summary>
       <param name="taskPathAndName">Name of the task with full path.</param>
       <param name="period">The amount of time the task needs once executed during regular Automatic maintenance.</param>
-      <param name="deadline">The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete during regular Automatic Maintenance.</param>
+      <param name="deadline">
+            The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete
+            during regular Automatic Maintenance.
+            </param>
       <param name="executablePath">The path to an executable file.</param>
       <param name="arguments">The arguments associated with the command-line operation.</param>
       <param name="workingDirectory">The directory that contains either the executable file or the files that are used by the executable file.</param>
@@ -4068,10 +4070,12 @@
       <exception cref="T:System.InvalidOperationException">Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.QuickTriggerType,System.String,System.String,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)">
-      <summary>
-            Creates a new task, registers the task, and returns the instance.
-            </summary>
-      <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+      <summary>Creates a new task, registers the task, and returns the instance.</summary>
+      <param name="path">
+            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
+            the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
+            folder and the '..' characters cannot be used to specify the parent task folder in the path.
+            </param>
       <param name="trigger">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to determine when to run the task.</param>
       <param name="exePath">The executable path.</param>
       <param name="arguments">The arguments (optional). Value can be NULL.</param>
@@ -4079,79 +4083,61 @@
       <param name="password">The password for the userId used to register the task.</param>
       <param name="logonType">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
       <param name="description">The task description.</param>
-      <returns>
-            A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.
-            </returns>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)">
-      <summary>
-            Creates a new task, registers the task, and returns the instance.
-            </summary>
-      <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
+      <summary>Creates a new task, registers the task, and returns the instance.</summary>
+      <param name="path">
+            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
+            the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
+            folder and the '..' characters cannot be used to specify the parent task folder in the path.
+            </param>
       <param name="trigger">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to determine when to run the task.</param>
       <param name="action">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> to determine what happens when the task is triggered.</param>
       <param name="userId">The user credentials used to register the task.</param>
       <param name="password">The password for the userId used to register the task.</param>
       <param name="logonType">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
       <param name="description">The task description.</param>
-      <returns>
-            A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.
-            </returns>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.AllowReadOnlyTasks">
-      <summary>
-            Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.
-            </summary>
+      <summary>Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.AllTasks">
-      <summary>
-            Gets a <see cref="T:System.Collections.Generic.IEnumerator`1" /> which enumerates all the tasks in all folders.
-            </summary>
+      <summary>Gets a <see cref="T:System.Collections.Generic.IEnumerator`1" /> which enumerates all the tasks in all folders.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.BeginInit">
-      <summary>
-            Signals the object that initialization is starting.
-            </summary>
+      <summary>Signals the object that initialization is starting.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.CanRaiseEvents">
-      <summary>
-            Gets a value indicating whether the component can raise an event.
-            </summary>
+      <summary>Gets a value indicating whether the component can raise an event.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.Connected">
-      <summary>
-            Gets a Boolean value that indicates if you are connected to the Task Scheduler service.
-            </summary>
+      <summary>Gets a Boolean value that indicates if you are connected to the Task Scheduler service.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.ConnectedDomain">
-      <summary>
-            Gets the name of the domain to which the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" /> computer is connected.
-            </summary>
+      <summary>Gets the name of the domain to which the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" /> computer is connected.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.ConnectedUser">
-      <summary>
-            Gets the name of the user that is connected to the Task Scheduler service.
-            </summary>
+      <summary>Gets the name of the user that is connected to the Task Scheduler service.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskService.CreateFromToken(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken)">
+      <summary>Creates a new <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance from a token. Given that a TaskService instance is thread specific, this is the preferred method for multi-thread creation or asynchronous method parameters.</summary>
+      <param name="token">The token.</param>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance valid for the thread calling this method.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.Dispose(System.Boolean)">
-      <summary>
-            Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" /> and optionally releases the managed resources.
-            </summary>
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" /> and optionally releases the managed resources.</summary>
       <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.EndInit">
-      <summary>
-            Signals the object that initialization is complete.
-            </summary>
+      <summary>Signals the object that initialization is complete.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.Equals(System.Object)">
-      <summary>
-            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
-            </summary>
+      <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
       <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
       <returns>
-        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.Execute(System.String)">
       <summary>
@@ -4161,41 +4147,31 @@
       <returns>An <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.FindAllTasks(System.Predicate{Microsoft.Win32.TaskScheduler.Task},System.Boolean)">
-      <summary>
-            Finds all tasks matching a name or standard wildcards.
-            </summary>
+      <summary>Finds all tasks matching a name or standard wildcards.</summary>
       <param name="filter">The filter used to determine tasks to select.</param>
       <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
       <returns>An array of <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> containing all tasks matching <paramref name="filter" />.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.FindAllTasks(System.Text.RegularExpressions.Regex,System.Boolean)">
-      <summary>
-            Finds all tasks matching a name or standard wildcards.
-            </summary>
+      <summary>Finds all tasks matching a name or standard wildcards.</summary>
       <param name="name">Name of the task in regular expression form.</param>
       <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
       <returns>An array of <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> containing all tasks matching <paramref name="name" />.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.FindTask(System.String,System.Boolean)">
-      <summary>
-            Finds a task given a name and standard wildcards.
-            </summary>
+      <summary>Finds a task given a name and standard wildcards.</summary>
       <param name="name">The task name. This can include the wildcards * or ?.</param>
       <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> if one matches <paramref name="name" />, otherwise NULL.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetDllResourceString(System.String,System.Int32)">
-      <summary>
-            Gets a formatted string that tells the Task Scheduler to retrieve a string from a resource .dll file.
-            </summary>
+      <summary>Gets a formatted string that tells the Task Scheduler to retrieve a string from a resource .dll file.</summary>
       <param name="dllPath">The path to the .dll file that contains the resource.</param>
       <param name="resourceId">The identifier for the resource text (typically a negative number).</param>
       <returns>A string in the format of $(@ [dllPath], [resourceId]).</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetEventLog(System.String)">
-      <summary>
-            Gets the event log for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
-            </summary>
+      <summary>Gets the event log for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.</summary>
       <param name="taskPath">(Optional) The task path if only the events for a single task are desired.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventLog" /> instance.</returns>
     </member>
@@ -4211,61 +4187,47 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetHashCode">
-      <summary>
-            Returns a hash code for this instance.
-            </summary>
-      <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
+      <summary>Returns a hash code for this instance.</summary>
+      <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetRunningTasks(System.Boolean)">
-      <summary>
-            Gets a collection of running tasks.
-            </summary>
+      <summary>Gets a collection of running tasks.</summary>
       <param name="includeHidden">True to include hidden tasks.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.RunningTaskCollection" /> instance with the list of running tasks.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetTask(System.String)">
-      <summary>
-            Gets the task with the specified path.
-            </summary>
+      <summary>Gets the task with the specified path.</summary>
       <param name="taskPath">The task path.</param>
       <returns>The <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance matching the <paramref name="taskPath" />, if found. If not found, this method returns <c>null</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.HighestSupportedVersion">
-      <summary>
-            Gets the highest version of Task Scheduler that a computer supports.
-            </summary>
+      <summary>Gets the highest version of Task Scheduler that a computer supports.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.Instance">
-      <summary>
-            Gets a local instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> using the current user's credentials.
-            </summary>
+      <summary>Gets a local instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> using the current user's credentials.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.LibraryVersion">
       <summary>
-            Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher than this version.
+            Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher
+            than this version.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.NewTask">
       <summary>
-            Returns an empty task definition object to be filled in with settings and properties and then registered using the <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.RegisterTaskDefinition(System.String,Microsoft.Win32.TaskScheduler.TaskDefinition)" /> method.
+            Returns an empty task definition object to be filled in with settings and properties and then registered using the
+            <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.RegisterTaskDefinition(System.String,Microsoft.Win32.TaskScheduler.TaskDefinition)" /> method.
             </summary>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> instance for setting properties.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.NewTaskFromFile(System.String)">
-      <summary>
-            Returns a <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> populated with the properties defined in an XML file.
-            </summary>
+      <summary>Returns a <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> populated with the properties defined in an XML file.</summary>
       <param name="xmlFile">The XML file to use as input.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> instance.</returns>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.RootFolder">
-      <summary>
-            Gets the root ("\") folder. For Task Scheduler 1.0, this is the only folder.
-            </summary>
+      <summary>Gets the root ("\") folder. For Task Scheduler 1.0, this is the only folder.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.RunComHandlerAction(System.Guid,System.String,System.Int32,Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate)">
       <summary>
@@ -4274,10 +4236,11 @@
       <param name="clsid">The CLSID of the COM object.</param>
       <param name="data">An optional string passed to the COM object at startup.</param>
       <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
-      <param name="onUpdate">An optional <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.UpdateStatus(System.Int16,System.String)" /> method.</param>
-      <returns>
-            The value set by the COM object via a call to the <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.TaskCompleted(System.Int32)" /> method.
-            </returns>
+      <param name="onUpdate">
+            An optional <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate" /> delegate that is called when the COM object calls the
+            <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.UpdateStatus(System.Int16,System.String)" /> method.
+            </param>
+      <returns>The value set by the COM object via a call to the <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.TaskCompleted(System.Int32)" /> method.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.RunComHandlerActionAsync(System.Guid,System.Action{System.Int32},System.String,System.Int32,Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate)">
       <summary>
@@ -4287,39 +4250,39 @@
       <param name="onComplete">The action to run on thread completion.</param>
       <param name="data">An optional string passed to the COM object at startup.</param>
       <param name="millisecondsTimeout">The number of milliseconds to wait or -1 for indefinitely.</param>
-      <param name="onUpdate">An optional <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate" /> delegate that is called when the COM object calls the <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.UpdateStatus(System.Int16,System.String)" /> method.</param>
+      <param name="onUpdate">
+            An optional <see cref="T:Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate" /> delegate that is called when the COM object calls the
+            <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.UpdateStatus(System.Int16,System.String)" /> method.
+            </param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.StartSystemTaskSchedulerManager">
-      <summary>
-            Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.
-            </summary>
+      <summary>Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer">
-      <summary>
-            Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.
-            </summary>
+      <summary>Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskService.Token">
+      <summary>Gets the connection token for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance. This token is thread safe and can be used to create new <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instances on other threads using the <see cref="M:Microsoft.Win32.TaskScheduler.TaskService.CreateFromToken(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken)" /> static method.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.UserAccountDomain">
-      <summary>
-            Gets or sets the user account domain to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.
-            </summary>
+      <summary>Gets or sets the user account domain to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.UserName">
-      <summary>
-            Gets or sets the user name to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.
-            </summary>
+      <summary>Gets or sets the user name to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.UserPassword">
-      <summary>
-            Gets or sets the user password to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.
-            </summary>
+      <summary>Gets or sets the user password to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate">
-      <summary>
-            Delegate for methods that support update calls during COM handler execution.
-            </summary>
+      <summary>Delegate for methods that support update calls during COM handler execution.</summary>
       <param name="percentage">The percentage of completion (0 to 100).</param>
       <param name="message">An optional message.</param>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken">
+      <summary>
+            Represents a valid, connected session to a Task Scheduler instance. This token is thread-safe and should be the means of passing information about a
+            <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> between threads.
+            </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType">
       <summary>Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify the type of state change in the SessionStateChangeTrigger.</summary>

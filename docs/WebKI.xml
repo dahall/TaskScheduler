@@ -319,6 +319,9 @@
   <HelpKINode Title="Connected property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_Connected.htm" />
   <HelpKINode Title="ConnectedDomain property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_ConnectedDomain.htm" />
   <HelpKINode Title="ConnectedUser property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_ConnectedUser.htm" />
+  <HelpKINode Title="ConnectionToken structure">
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
+  </HelpKINode>
   <HelpKINode Title="ConsoleConnect enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="ConsoleConnectTrigger enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="ConsoleDisconnect enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
@@ -413,6 +416,7 @@
   <HelpKINode Title="CreateAction method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_CreateAction.htm" />
   <HelpKINode Title="CreatedTaskProcess enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="CreateFolder method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskFolder_CreateFolder.htm" />
+  <HelpKINode Title="CreateFromToken method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_CreateFromToken.htm" />
   <HelpKINode Title="CreateOrUpdate enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCreation.htm" />
   <HelpKINode Title="CreateTrigger method" Url="html/M_Microsoft_Win32_TaskScheduler_Trigger_CreateTrigger.htm" />
   <HelpKINode Title="CSelect class">
@@ -1439,6 +1443,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSecurity class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSecurity.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate delegate" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ComHandlerUpdate.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken structure" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
@@ -2849,6 +2854,11 @@
   <HelpKINode Title="TaskService.Connected property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_Connected.htm" />
   <HelpKINode Title="TaskService.ConnectedDomain property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_ConnectedDomain.htm" />
   <HelpKINode Title="TaskService.ConnectedUser property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_ConnectedUser.htm" />
+  <HelpKINode Title="TaskService.ConnectionToken structure">
+    <HelpKINode Title="TaskService.ConnectionToken Structure" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
+    <HelpKINode Title="about TaskService.ConnectionToken structure" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TaskService.CreateFromToken method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_CreateFromToken.htm" />
   <HelpKINode Title="TaskService.Dispose method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskService_Dispose.htm" />
   <HelpKINode Title="TaskService.EndInit method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_EndInit.htm" />
   <HelpKINode Title="TaskService.Equals method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_Equals.htm" />
@@ -2872,6 +2882,7 @@
   <HelpKINode Title="TaskService.StartSystemTaskSchedulerManager method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_StartSystemTaskSchedulerManager.htm" />
   <HelpKINode Title="TaskService.TargetServer property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_TargetServer.htm" />
   <HelpKINode Title="TaskService.TaskService constructor" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskService__ctor.htm" />
+  <HelpKINode Title="TaskService.Token property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_Token.htm" />
   <HelpKINode Title="TaskService.UserAccountDomain property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_UserAccountDomain.htm" />
   <HelpKINode Title="TaskService.UserName property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_UserName.htm" />
   <HelpKINode Title="TaskService.UserPassword property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_UserPassword.htm" />
@@ -2983,6 +2994,7 @@
     <HelpKINode Title="ActionCollection.ToArray Method " Url="html/M_Microsoft_Win32_TaskScheduler_ActionCollection_ToArray.htm" />
     <HelpKINode Title="TriggerCollection.ToArray Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_ToArray.htm" />
   </HelpKINode>
+  <HelpKINode Title="Token property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_Token.htm" />
   <HelpKINode Title="ToString method">
     <HelpKINode Title="Action.ToString Method " Url="html/Overload_Microsoft_Win32_TaskScheduler_Action_ToString.htm" />
     <HelpKINode Title="ActionCollection.ToString Method " Url="html/M_Microsoft_Win32_TaskScheduler_ActionCollection_ToString.htm" />
