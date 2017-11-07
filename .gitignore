@@ -267,6 +267,7 @@ __pycache__/
 # Built help files
 docs/*.bat
 docs/*.exe
-docs/*.msh?
-/docs/Working
-/docs/html
+docs/*.log
+docs/*.msha
+docs/*.mshc
+docs/Working/
