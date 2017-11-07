@@ -90,19 +90,13 @@
       <summary>Displays all tabs</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog">
-      <summary>
-            Dialog that will enumerate and display a list of COM objects and allow for a single selection.
-            </summary>
+      <summary>Dialog that will enumerate and display a list of COM objects and allow for a single selection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.#ctor">
-      <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" /> class.
-            </summary>
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" /> class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.CLSID">
-      <summary>
-            Gets or sets the CLSID.
-            </summary>
+      <summary>Gets or sets the CLSID.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.Dispose(System.Boolean)">
       <summary>
@@ -110,20 +104,22 @@
             </summary>
       <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.OnClosing(System.ComponentModel.CancelEventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Form.Closing" /> event.</summary>
+      <param name="e">A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.OnLoad(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Form.Load" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.ServerType">
-      <summary>
-            Gets or sets the type of COM servers to display.
-            </summary>
+      <summary>Gets or sets the type of COM servers to display.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedInterface">
-      <summary>
-            Gets or sets the COM interface that the selected item must support.
-            </summary>
+      <summary>Gets or sets the COM interface that the selected item must support.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers">
-      <summary>
-            COM server types that can be displayed by a <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" />.
-            </summary>
+      <summary>COM server types that can be displayed by a <see cref="T:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog" />.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.ComObjectSelectionDialog.SupportedServers.InProcess">
       <summary>In process</summary>
@@ -1497,6 +1493,11 @@
       <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
       <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
     </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ConvertResourceStringReferences">
+      <summary>
+            Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.
+            </summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Dispose(System.Boolean)">
       <summary>
             Clean up any resources being used.
@@ -1512,14 +1513,16 @@
       <summary>
             Initializes the control for the editing of an existing <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />.
             </summary>
-      <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" /> instance.</param>
+      <param name="taskInstance">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" /> instance.</param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.String,System.String)">
       <summary>
             Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" />.
             </summary>
       <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService" /> instance.</param>
       <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="taskName">If set, assigns this name to the task's name field.</param>
+      <param name="taskFolder">If set, assigns this path to the task's folder.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.IsV2">
       <summary>
@@ -1541,6 +1544,12 @@
       <summary>
             Reinitializes all the controls based on current <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskDefinition" /> values.
             </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ShowActionRunButton">
+      <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ShowConvertActionsToPowerShellCheck">
+      <summary>Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert unsupported actions.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.ShowErrors">
       <summary>
@@ -1565,6 +1574,11 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskName">
       <summary>
             Gets or sets the name of the task. If control is initialized with a <see cref="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.Task" />, this value will be set to the name of the registered task.
+            </summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskNameIsEditable">
+      <summary>
+            If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from editing the TaskName.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskOptionsEditor.TaskService">

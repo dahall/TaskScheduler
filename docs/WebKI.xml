@@ -104,8 +104,8 @@
     <HelpKINode Title="TaskPrincipalPrivileges.Add Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivileges_Add.htm" />
     <HelpKINode Title="TriggerCollection.Add Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_Add.htm" />
   </HelpKINode>
-  <HelpKINode Title="AddAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAccessRule.htm" />
-  <HelpKINode Title="AddAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAuditRule.htm" />
+  <HelpKINode Title="AddAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAccessRule.htm" />
+  <HelpKINode Title="AddAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAuditRule.htm" />
   <HelpKINode Title="AddAutomaticMaintenanceTask method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_AddAutomaticMaintenanceTask.htm" />
   <HelpKINode Title="AddNew method">
     <HelpKINode Title="ActionCollection.AddNew Method " Url="html/M_Microsoft_Win32_TaskScheduler_ActionCollection_AddNew.htm" />
@@ -277,6 +277,8 @@
   <HelpKINode Title="ComObjectSelectionDialog.CLSID property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_CLSID.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.ComObjectSelectionDialog constructor" Url="html/M_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog__ctor.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.Dispose method" Url="html/Overload_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_Dispose.htm" />
+  <HelpKINode Title="ComObjectSelectionDialog.OnClosing method" Url="html/M_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_OnClosing.htm" />
+  <HelpKINode Title="ComObjectSelectionDialog.OnLoad method" Url="html/M_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_OnLoad.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.ServerType property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_ServerType.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.SupportedInterface property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_SupportedInterface.htm" />
   <HelpKINode Title="ComObjectSelectionDialog.SupportedServers enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_SupportedServers.htm" />
@@ -337,6 +339,7 @@
   <HelpKINode Title="ConvertLocalToUtc enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_FullDateTimePicker_FieldConversionUtcCheckBehavior.htm" />
   <HelpKINode Title="ConvertResourceStringReferences property">
     <HelpKINode Title="TaskEditDialog.ConvertResourceStringReferences Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_ConvertResourceStringReferences.htm" />
+    <HelpKINode Title="TaskOptionsEditor.ConvertResourceStringReferences Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ConvertResourceStringReferences.htm" />
     <HelpKINode Title="TaskPropertiesControl.ConvertResourceStringReferences Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_ConvertResourceStringReferences.htm" />
   </HelpKINode>
   <HelpKINode Title="CopyProperties method">
@@ -406,6 +409,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Events_EventQuery_CQuery.htm" />
   </HelpKINode>
   <HelpKINode Title="Create enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCreation.htm" />
+  <HelpKINode Title="Create method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Create.htm" />
   <HelpKINode Title="CreateAction method" Url="html/M_Microsoft_Win32_TaskScheduler_Action_CreateAction.htm" />
   <HelpKINode Title="CreatedTaskProcess enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="CreateFolder method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskFolder_CreateFolder.htm" />
@@ -724,6 +728,7 @@
     <HelpKINode Title="TaskEventLog.Enabled Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEventLog_Enabled.htm" />
     <HelpKINode Title="TaskEventWatcher.Enabled Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEventWatcher_Enabled.htm" />
     <HelpKINode Title="TaskSettings.Enabled Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_Enabled.htm" />
+    <HelpKINode Title="TaskSnapshot.Enabled Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSnapshot_Enabled.htm" />
     <HelpKINode Title="Trigger.Enabled Property " Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_Enabled.htm" />
   </HelpKINode>
   <HelpKINode Title="EndBoundary property" Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_EndBoundary.htm" />
@@ -1216,6 +1221,7 @@
     <HelpKINode Title="CustomComboBox.Items Property " Url="html/P_Microsoft_Win32_TaskScheduler_CustomComboBox_Items.htm" />
     <HelpKINode Title="DropDownCheckList.Items Property " Url="html/P_Microsoft_Win32_TaskScheduler_DropDownCheckList_Items.htm" />
     <HelpKINode Title="DropDownCheckTree.Items Property " Url="html/P_Microsoft_Win32_TaskScheduler_DropDownCheckTree_Items.htm" />
+    <HelpKINode Title="TaskSchedulerSnapshot.Items Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Items.htm" />
   </HelpKINode>
   <HelpKINode Title="ITriggerDelay interface">
     <HelpKINode Title="ITriggerDelay Interface" Url="html/T_Microsoft_Win32_TaskScheduler_ITriggerDelay.htm" />
@@ -1382,6 +1388,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.RunningTaskCollection class" Url="html/T_Microsoft_Win32_TaskScheduler_RunningTaskCollection.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger class" Url="html/T_Microsoft_Win32_TaskScheduler_SessionStateChangeTrigger.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.ShowMessageAction class" Url="html/T_Microsoft_Win32_TaskScheduler_ShowMessageAction.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.SnapshotItem class" Url="html/T_Microsoft_Win32_TaskScheduler_SnapshotItem.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.StandardTaskEventId enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Task class" Url="html/T_Microsoft_Win32_TaskScheduler_Task.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskAccessRule class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskAccessRule.htm" />
@@ -1404,6 +1411,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskEventWatcher.EventFilter class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskEventWatcher_EventFilter.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskFolder class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskFolder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskFolderCollection class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskFolderCollection.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskFolderSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskFolderSnapshot.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskHistoryControl class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskHistoryControl.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskInstancesPolicy enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskInstancesPolicy.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskListView class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskListView.htm" />
@@ -1423,6 +1431,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskRunLevel enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskRunLevel.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskRunTimesControl class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskRunTimesControl.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskRunTimesDialog class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskRunTimesDialog.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSchedulerWizard class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardActions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_AvailableWizardActions.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.AvailableWizardPages enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_AvailableWizardPages.htm" />
@@ -1434,6 +1443,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSettings class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSettings.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSnapshot.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskState enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskState.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskTriggerType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskTriggerType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TimeTrigger class" Url="html/T_Microsoft_Win32_TaskScheduler_TimeTrigger.htm" />
@@ -1628,6 +1638,7 @@
   <HelpKINode Title="OnAll method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_OnAll.htm" />
   <HelpKINode Title="OnBoot method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_OnBoot.htm" />
   <HelpKINode Title="Once method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_Once.htm" />
+  <HelpKINode Title="OnClosing method" Url="html/M_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_OnClosing.htm" />
   <HelpKINode Title="OnComponentError method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_OnComponentError.htm" />
   <HelpKINode Title="OnDropDown method">
     <HelpKINode Title="CustomComboBox.OnDropDown Method " Url="html/M_Microsoft_Win32_TaskScheduler_CustomComboBox_OnDropDown.htm" />
@@ -1643,7 +1654,10 @@
   <HelpKINode Title="OnHandleCreated method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskListView_OnHandleCreated.htm" />
   <HelpKINode Title="OnHandleDestroyed method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskListView_OnHandleDestroyed.htm" />
   <HelpKINode Title="OnIdle method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_OnIdle.htm" />
-  <HelpKINode Title="OnLoad method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskHistoryControl_OnLoad.htm" />
+  <HelpKINode Title="OnLoad method">
+    <HelpKINode Title="ComObjectSelectionDialog.OnLoad Method " Url="html/M_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_OnLoad.htm" />
+    <HelpKINode Title="TaskHistoryControl.OnLoad Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskHistoryControl_OnLoad.htm" />
+  </HelpKINode>
   <HelpKINode Title="OnLostFocus method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskHistoryControl_OnLostFocus.htm" />
   <HelpKINode Title="OnParentFontChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_OnParentFontChanged.htm" />
   <HelpKINode Title="OnSelectedItemsChanged method">
@@ -1656,6 +1670,7 @@
   <HelpKINode Title="OnTriggerTypeChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_OnTriggerTypeChanged.htm" />
   <HelpKINode Title="OnValueChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_FullDateTimePicker_OnValueChanged.htm" />
   <HelpKINode Title="OpCode property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEvent_OpCode.htm" />
+  <HelpKINode Title="Open method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Open.htm" />
   <HelpKINode Title="OutOfProcess enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_SupportedServers.htm" />
   <HelpKINode Title="Parallel enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskInstancesPolicy.htm" />
   <HelpKINode Title="Parent field" Url="html/F_Microsoft_Win32_TaskScheduler_Events_EventQuery_CQuery_CSelect_Parent.htm" />
@@ -1672,12 +1687,14 @@
   </HelpKINode>
   <HelpKINode Title="Path property">
     <HelpKINode Title="ExecAction.Path Property " Url="html/P_Microsoft_Win32_TaskScheduler_ExecAction_Path.htm" />
+    <HelpKINode Title="SnapshotItem.Path Property " Url="html/P_Microsoft_Win32_TaskScheduler_SnapshotItem_Path.htm" />
     <HelpKINode Title="Task.Path Property " Url="html/P_Microsoft_Win32_TaskScheduler_Task_Path.htm" />
     <HelpKINode Title="TaskFolder.Path Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskFolder_Path.htm" />
+    <HelpKINode Title="TaskSchedulerSnapshot.Path Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Path.htm" />
   </HelpKINode>
   <HelpKINode Title="Pause method" Url="html/M_Microsoft_Win32_TaskScheduler_ITaskHandler_Pause.htm" />
   <HelpKINode Title="Period property" Url="html/P_Microsoft_Win32_TaskScheduler_MaintenanceSettings_Period.htm" />
-  <HelpKINode Title="Persist method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_Persist.htm" />
+  <HelpKINode Title="Persist method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_Persist.htm" />
   <HelpKINode Title="PowerShellActionPlatformOption enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_PowerShellActionPlatformOption.htm" />
   <HelpKINode Title="PowerShellConversion property" Url="html/P_Microsoft_Win32_TaskScheduler_ActionCollection_PowerShellConversion.htm" />
   <HelpKINode Title="PreProcessMessage method" Url="html/M_Microsoft_Win32_TaskScheduler_CustomComboBox_PreProcessMessage.htm" />
@@ -1771,17 +1788,17 @@
     <HelpKINode Title="TaskFolderCollection.Remove Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolderCollection_Remove.htm" />
     <HelpKINode Title="TriggerCollection.Remove Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_Remove.htm" />
   </HelpKINode>
-  <HelpKINode Title="RemoveAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRule.htm" />
-  <HelpKINode Title="RemoveAccessRuleAll method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleAll.htm" />
-  <HelpKINode Title="RemoveAccessRuleSpecific method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleSpecific.htm" />
+  <HelpKINode Title="RemoveAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRule.htm" />
+  <HelpKINode Title="RemoveAccessRuleAll method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleAll.htm" />
+  <HelpKINode Title="RemoveAccessRuleSpecific method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleSpecific.htm" />
   <HelpKINode Title="RemoveAt method">
     <HelpKINode Title="ActionCollection.RemoveAt Method " Url="html/M_Microsoft_Win32_TaskScheduler_ActionCollection_RemoveAt.htm" />
     <HelpKINode Title="NamedValueCollection.RemoveAt Method " Url="html/M_Microsoft_Win32_TaskScheduler_NamedValueCollection_RemoveAt.htm" />
     <HelpKINode Title="TriggerCollection.RemoveAt Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_RemoveAt.htm" />
   </HelpKINode>
-  <HelpKINode Title="RemoveAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRule.htm" />
-  <HelpKINode Title="RemoveAuditRuleAll method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleAll.htm" />
-  <HelpKINode Title="RemoveAuditRuleSpecific method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleSpecific.htm" />
+  <HelpKINode Title="RemoveAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRule.htm" />
+  <HelpKINode Title="RemoveAuditRuleAll method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleAll.htm" />
+  <HelpKINode Title="RemoveAuditRuleSpecific method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleSpecific.htm" />
   <HelpKINode Title="RemoveItem method" Url="html/M_Microsoft_Win32_TaskScheduler_DropDownCheckList_RemoveItem.htm" />
   <HelpKINode Title="RepeatingEvery method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_RepeatingEvery.htm" />
   <HelpKINode Title="Repetition property" Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_Repetition.htm" />
@@ -1809,7 +1826,7 @@
     <HelpKINode Title="TaskEventEnumerator.Reset Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskEventEnumerator_Reset.htm" />
     <HelpKINode Title="TaskPrincipalPrivileges.TaskPrincipalPrivilegesEnumerator.Reset Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivileges_TaskPrincipalPrivilegesEnumerator_Reset.htm" />
   </HelpKINode>
-  <HelpKINode Title="ResetAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_ResetAccessRule.htm" />
+  <HelpKINode Title="ResetAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_ResetAccessRule.htm" />
   <HelpKINode Title="ResourceFilePath property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceFilePath.htm" />
   <HelpKINode Title="ResourceIdentifier property" Url="html/P_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ResourceIdentifier.htm" />
   <HelpKINode Title="ResourceReferenceValue class">
@@ -1831,6 +1848,7 @@
   <HelpKINode Title="RestartCount property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartCount.htm" />
   <HelpKINode Title="RestartInterval property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartInterval.htm" />
   <HelpKINode Title="RestartOnIdle property" Url="html/P_Microsoft_Win32_TaskScheduler_IdleSettings_RestartOnIdle.htm" />
+  <HelpKINode Title="Restore method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Restore.htm" />
   <HelpKINode Title="Resume method" Url="html/M_Microsoft_Win32_TaskScheduler_ITaskHandler_Resume.htm" />
   <HelpKINode Title="RootFolder property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_RootFolder.htm" />
   <HelpKINode Title="Run enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
@@ -1889,6 +1907,7 @@
   <HelpKINode Title="ScheduleServiceStop enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="ScheduleServiceTimeChangeInitError enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="ScheduleServiceTimeChangeSignaled enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
+  <HelpKINode Title="Sddl property" Url="html/P_Microsoft_Win32_TaskScheduler_SnapshotItem_Sddl.htm" />
   <HelpKINode Title="SeAssignPrimaryTokenPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SeAuditPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SeBackupPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
@@ -2002,9 +2021,9 @@
     <HelpKINode Title="Task.SetAccessControl Method " Url="html/M_Microsoft_Win32_TaskScheduler_Task_SetAccessControl.htm" />
     <HelpKINode Title="TaskFolder.SetAccessControl Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolder_SetAccessControl.htm" />
   </HelpKINode>
-  <HelpKINode Title="SetAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAccessRule.htm" />
+  <HelpKINode Title="SetAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAccessRule.htm" />
   <HelpKINode Title="SeTakeOwnershipPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
-  <HelpKINode Title="SetAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAuditRule.htm" />
+  <HelpKINode Title="SetAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAuditRule.htm" />
   <HelpKINode Title="SetBasic method" Url="html/M_Microsoft_Win32_TaskScheduler_EventTrigger_SetBasic.htm" />
   <HelpKINode Title="SeTcbPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SeTimeZonePrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
@@ -2024,6 +2043,7 @@
   <HelpKINode Title="ShortTime enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_FullDateTimePickerTimeFormat.htm" />
   <HelpKINode Title="ShowActionRunButton property">
     <HelpKINode Title="TaskEditDialog.ShowActionRunButton Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_ShowActionRunButton.htm" />
+    <HelpKINode Title="TaskOptionsEditor.ShowActionRunButton Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ShowActionRunButton.htm" />
     <HelpKINode Title="TaskPropertiesControl.ShowActionRunButton Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_ShowActionRunButton.htm" />
   </HelpKINode>
   <HelpKINode Title="ShowAddedPropertiesTab property">
@@ -2032,6 +2052,7 @@
   </HelpKINode>
   <HelpKINode Title="ShowConvertActionsToPowerShellCheck property">
     <HelpKINode Title="TaskEditDialog.ShowConvertActionsToPowerShellCheck Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_ShowConvertActionsToPowerShellCheck.htm" />
+    <HelpKINode Title="TaskOptionsEditor.ShowConvertActionsToPowerShellCheck Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ShowConvertActionsToPowerShellCheck.htm" />
     <HelpKINode Title="TaskPropertiesControl.ShowConvertActionsToPowerShellCheck Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_ShowConvertActionsToPowerShellCheck.htm" />
   </HelpKINode>
   <HelpKINode Title="ShowDropDown method" Url="html/M_Microsoft_Win32_TaskScheduler_CustomComboBox_ShowDropDown.htm" />
@@ -2072,6 +2093,14 @@
     <HelpKINode Title="TaskPropertiesControl.ShowRunTimesTab Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_ShowRunTimesTab.htm" />
   </HelpKINode>
   <HelpKINode Title="ShowTasks property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskBrowserDialog_ShowTasks.htm" />
+  <HelpKINode Title="SnapshotItem class">
+    <HelpKINode Title="SnapshotItem Class" Url="html/T_Microsoft_Win32_TaskScheduler_SnapshotItem.htm" />
+    <HelpKINode Title="about SnapshotItem class" Url="html/T_Microsoft_Win32_TaskScheduler_SnapshotItem.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_SnapshotItem.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_SnapshotItem.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SnapshotItem.Path property" Url="html/P_Microsoft_Win32_TaskScheduler_SnapshotItem_Path.htm" />
+  <HelpKINode Title="SnapshotItem.Sddl property" Url="html/P_Microsoft_Win32_TaskScheduler_SnapshotItem_Sddl.htm" />
   <HelpKINode Title="Sorted property">
     <HelpKINode Title="CustomComboBox.Sorted Property " Url="html/P_Microsoft_Win32_TaskScheduler_CustomComboBox_Sorted.htm" />
     <HelpKINode Title="DropDownCheckList.Sorted Property " Url="html/P_Microsoft_Win32_TaskScheduler_DropDownCheckList_Sorted.htm" />
@@ -2131,6 +2160,7 @@
   <HelpKINode Title="TakeOwnership enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskRights.htm" />
   <HelpKINode Title="TargetServer property">
     <HelpKINode Title="TaskEventWatcher.TargetServer Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEventWatcher_TargetServer.htm" />
+    <HelpKINode Title="TaskSchedulerSnapshot.TargetServer Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_TargetServer.htm" />
     <HelpKINode Title="TaskService.TargetServer Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_TargetServer.htm" />
     <HelpKINode Title="TaskServiceConnectDialog.TargetServer Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog_TargetServer.htm" />
     <HelpKINode Title="TriggerEditDialog.TargetServer Property " Url="html/P_Microsoft_Win32_TaskScheduler_TriggerEditDialog_TargetServer.htm" />
@@ -2270,6 +2300,7 @@
   <HelpKINode Title="TaskDefinition.Triggers property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_Triggers.htm" />
   <HelpKINode Title="TaskDefinition.Validate method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskDefinition_Validate.htm" />
   <HelpKINode Title="TaskDefinition.XmlText property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_XmlText.htm" />
+  <HelpKINode Title="TaskDefinitionXml property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSnapshot_TaskDefinitionXml.htm" />
   <HelpKINode Title="TaskDeleted enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="TaskDisabled enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="TaskEditDialog class">
@@ -2458,6 +2489,12 @@
   <HelpKINode Title="TaskFolderCollection.GetEnumerator method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolderCollection_GetEnumerator.htm" />
   <HelpKINode Title="TaskFolderCollection.Item property" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskFolderCollection_Item.htm" />
   <HelpKINode Title="TaskFolderCollection.Remove method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolderCollection_Remove.htm" />
+  <HelpKINode Title="TaskFolderSnapshot class">
+    <HelpKINode Title="TaskFolderSnapshot Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskFolderSnapshot.htm" />
+    <HelpKINode Title="about TaskFolderSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskFolderSnapshot.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskFolderSnapshot.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskFolderSnapshot.htm" />
+  </HelpKINode>
   <HelpKINode Title="TaskHistoryControl class">
     <HelpKINode Title="TaskHistoryControl Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskHistoryControl.htm" />
     <HelpKINode Title="about TaskHistoryControl class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskHistoryControl.htm" />
@@ -2514,6 +2551,7 @@
   </HelpKINode>
   <HelpKINode Title="TaskNameIsEditable property">
     <HelpKINode Title="TaskEditDialog.TaskNameIsEditable Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskEditDialog_TaskNameIsEditable.htm" />
+    <HelpKINode Title="TaskOptionsEditor.TaskNameIsEditable Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskNameIsEditable.htm" />
     <HelpKINode Title="TaskPropertiesControl.TaskNameIsEditable Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskPropertiesControl_TaskNameIsEditable.htm" />
   </HelpKINode>
   <HelpKINode Title="TaskNotRunServiceBusy enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
@@ -2527,6 +2565,7 @@
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskOptionsEditor.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskOptionsEditor.htm" />
   </HelpKINode>
+  <HelpKINode Title="TaskOptionsEditor.ConvertResourceStringReferences property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ConvertResourceStringReferences.htm" />
   <HelpKINode Title="TaskOptionsEditor.Dispose method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_Dispose.htm" />
   <HelpKINode Title="TaskOptionsEditor.Editable property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_Editable.htm" />
   <HelpKINode Title="TaskOptionsEditor.Initialize method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_Initialize.htm" />
@@ -2534,11 +2573,14 @@
   <HelpKINode Title="TaskOptionsEditor.OnParentFontChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_OnParentFontChanged.htm" />
   <HelpKINode Title="TaskOptionsEditor.RegisterTaskOnAccept property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_RegisterTaskOnAccept.htm" />
   <HelpKINode Title="TaskOptionsEditor.ReinitializeControls method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ReinitializeControls.htm" />
+  <HelpKINode Title="TaskOptionsEditor.ShowActionRunButton property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ShowActionRunButton.htm" />
+  <HelpKINode Title="TaskOptionsEditor.ShowConvertActionsToPowerShellCheck property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ShowConvertActionsToPowerShellCheck.htm" />
   <HelpKINode Title="TaskOptionsEditor.ShowErrors property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_ShowErrors.htm" />
   <HelpKINode Title="TaskOptionsEditor.Task property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_Task.htm" />
   <HelpKINode Title="TaskOptionsEditor.TaskDefinition property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskDefinition.htm" />
   <HelpKINode Title="TaskOptionsEditor.TaskFolder property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskFolder.htm" />
   <HelpKINode Title="TaskOptionsEditor.TaskName property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskName.htm" />
+  <HelpKINode Title="TaskOptionsEditor.TaskNameIsEditable property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskNameIsEditable.htm" />
   <HelpKINode Title="TaskOptionsEditor.TaskOptionsEditor constructor" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskOptionsEditor__ctor.htm" />
   <HelpKINode Title="TaskOptionsEditor.TaskService property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_TaskService.htm" />
   <HelpKINode Title="TaskOptionsEditor.Title property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_Title.htm" />
@@ -2695,6 +2737,21 @@
     <HelpKINode Title="TaskFolder.Tasks Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskFolder_Tasks.htm" />
     <HelpKINode Title="TaskListView.Tasks Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskListView_Tasks.htm" />
   </HelpKINode>
+  <HelpKINode Title="TaskSchedulerSnapshot class">
+    <HelpKINode Title="TaskSchedulerSnapshot Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot.htm" />
+    <HelpKINode Title="about TaskSchedulerSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TaskSchedulerSnapshot.Create method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Create.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.Items property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Items.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.Open method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Open.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.Path property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Path.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.Restore method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Restore.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.TargetServer property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_TargetServer.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.TaskSchedulerSnapshot constructor" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot__ctor.htm" />
+  <HelpKINode Title="TaskSchedulerSnapshot.TimeStamp property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_TimeStamp.htm" />
   <HelpKINode Title="TaskSchedulerWizard class">
     <HelpKINode Title="TaskSchedulerWizard Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard.htm" />
     <HelpKINode Title="about TaskSchedulerWizard class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard.htm" />
@@ -2739,21 +2796,21 @@
   <HelpKINode Title="TaskSecurity.AccessRightType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRightType.htm" />
   <HelpKINode Title="TaskSecurity.AccessRuleFactory method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRuleFactory.htm" />
   <HelpKINode Title="TaskSecurity.AccessRuleType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRuleType.htm" />
-  <HelpKINode Title="TaskSecurity.AddAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAccessRule.htm" />
-  <HelpKINode Title="TaskSecurity.AddAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAuditRule.htm" />
+  <HelpKINode Title="TaskSecurity.AddAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAccessRule.htm" />
+  <HelpKINode Title="TaskSecurity.AddAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAuditRule.htm" />
   <HelpKINode Title="TaskSecurity.AuditRuleFactory method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AuditRuleFactory.htm" />
   <HelpKINode Title="TaskSecurity.AuditRuleType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_AuditRuleType.htm" />
   <HelpKINode Title="TaskSecurity.DefaultTaskSecurity property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_DefaultTaskSecurity.htm" />
-  <HelpKINode Title="TaskSecurity.Persist method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_Persist.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRule.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAccessRuleAll method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleAll.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAccessRuleSpecific method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleSpecific.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRule.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAuditRuleAll method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleAll.htm" />
-  <HelpKINode Title="TaskSecurity.RemoveAuditRuleSpecific method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleSpecific.htm" />
-  <HelpKINode Title="TaskSecurity.ResetAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_ResetAccessRule.htm" />
-  <HelpKINode Title="TaskSecurity.SetAccessRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAccessRule.htm" />
-  <HelpKINode Title="TaskSecurity.SetAuditRule method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAuditRule.htm" />
+  <HelpKINode Title="TaskSecurity.Persist method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_Persist.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRule.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAccessRuleAll method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleAll.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAccessRuleSpecific method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAccessRuleSpecific.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRule.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAuditRuleAll method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleAll.htm" />
+  <HelpKINode Title="TaskSecurity.RemoveAuditRuleSpecific method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_RemoveAuditRuleSpecific.htm" />
+  <HelpKINode Title="TaskSecurity.ResetAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_ResetAccessRule.htm" />
+  <HelpKINode Title="TaskSecurity.SetAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAccessRule.htm" />
+  <HelpKINode Title="TaskSecurity.SetAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_SetAuditRule.htm" />
   <HelpKINode Title="TaskSecurity.TaskSecurity constructor" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSecurity__ctor.htm" />
   <HelpKINode Title="TaskSecurity.ToString method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_ToString.htm" />
   <HelpKINode Title="TaskSelected event" Url="html/E_Microsoft_Win32_TaskScheduler_TaskListView_TaskSelected.htm" />
@@ -2870,6 +2927,14 @@
   <HelpKINode Title="TaskSettings.Volatile property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_Volatile.htm" />
   <HelpKINode Title="TaskSettings.WakeToRun property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_WakeToRun.htm" />
   <HelpKINode Title="TaskSettings.XmlText property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_XmlText.htm" />
+  <HelpKINode Title="TaskSnapshot class">
+    <HelpKINode Title="TaskSnapshot Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSnapshot.htm" />
+    <HelpKINode Title="about TaskSnapshot class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSnapshot.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskSnapshot.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskSnapshot.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TaskSnapshot.Enabled property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSnapshot_Enabled.htm" />
+  <HelpKINode Title="TaskSnapshot.TaskDefinitionXml property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSnapshot_TaskDefinitionXml.htm" />
   <HelpKINode Title="TaskStartedOnComputerWakeup enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="TaskState enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskState.htm" />
   <HelpKINode Title="TaskTriggerType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskTriggerType.htm" />
@@ -2893,6 +2958,7 @@
   <HelpKINode Title="TimeFormat property" Url="html/P_Microsoft_Win32_TaskScheduler_FullDateTimePicker_TimeFormat.htm" />
   <HelpKINode Title="TimeoutWontWork enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="Times field" Url="html/F_Microsoft_Win32_TaskScheduler_Events_EventQuery_CQuery_Times.htm" />
+  <HelpKINode Title="TimeStamp property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_TimeStamp.htm" />
   <HelpKINode Title="TimeTrigger class">
     <HelpKINode Title="TimeTrigger Class" Url="html/T_Microsoft_Win32_TaskScheduler_TimeTrigger.htm" />
     <HelpKINode Title="about TimeTrigger class" Url="html/T_Microsoft_Win32_TaskScheduler_TimeTrigger.htm" />

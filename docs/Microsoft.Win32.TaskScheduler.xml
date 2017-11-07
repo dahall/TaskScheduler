@@ -1679,6 +1679,15 @@
             </summary>
       <returns>String representation of this action.</returns>
     </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.SnapshotItem">
+      <summary>Abstract class representing a secured item for storage in a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" />.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.SnapshotItem.Path">
+      <summary>Gets the path to the item.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.SnapshotItem.Sddl">
+      <summary>Gets the SDDL for the item.</summary>
+    </member>
     <member name="T:Microsoft.Win32.TaskScheduler.StandardTaskEventId">
       <summary>
             Changes to tasks and the engine that cause events.
@@ -3275,6 +3284,9 @@
             true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
             </returns>
     </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskFolderSnapshot">
+      <summary>Represents a <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" /> instance and captures its name and security.</summary>
+    </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskInstancesPolicy">
       <summary>Defines how the Task Scheduler handles existing instances of the task when it starts a new instance of the task.</summary>
     </member>
@@ -3755,6 +3767,112 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskRunLevel.Highest">
       <summary>Tasks will be run with the highest privileges.</summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot">
+      <summary>
+            Represents all the information about the tasks and folders from a <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance that can be used to reconstitute tasks and folders
+            on the same or different systems. <note>This class and related classes are only available under the .NET 4.5.2 build and later .NET versions due to
+            dependencies on threading and compressed (zip) files.</note></summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.#ctor(System.String)">
+      <summary>Creates a new instance of <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" /> from an existing snapshot.</summary>
+      <param name="path">The zip file snapshot created by the <see cref="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService,System.String)" /> method.</param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService,System.String)">
+      <summary>
+            Creates a compressed zip file that contains all the information accessible to the user from the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance necessary to
+            reconstitute its tasks and folders. <note>This method can take many seconds to execute. It is recommended to call the asynchronous
+            version.</note><note type="warning">This method will execute without error even if the user does not have permissions to see all tasks and folders.
+            It is imperative that the developer ensures that the user has Administrator or equivalent rights before calling this method.</note></summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> from which to pull the tasks and folders.</param>
+      <param name="path">The output zip file in which to place the snapshot information.</param>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" /> instance with the contents of the specified Task Scheduler connection.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService,System.String,System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+      <summary>
+            Creates a compressed zip file that contains all the information accessible to the user from the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance necessary to
+            reconstitute its tasks and folders. <note type="warning">This method will execute without error even if the user does not have permissions to see all
+            tasks and folders. It is imperative that the developer ensures that the user has Administrator or equivalent rights before calling this method.</note></summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> from which to pull the tasks and folders.</param>
+      <param name="path">The output zip file in which to place the snapshot information.</param>
+      <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
+      <param name="progress">An optional <see cref="T:System.IProgress`1" /> instance to use to report progress of the asynchronous operation.</param>
+      <returns>An asynchronous <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" /> instance with the contents of the specified Task Scheduler connection.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Items">
+      <summary>
+            Gets a list of <see cref="T:Microsoft.Win32.TaskScheduler.TaskSnapshot" /> and <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolderSnapshot" /> instances the represent the tasks and folders from a Task Scheduler instance.
+            </summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Open(System.String)">
+      <summary>Opens an existing snapshot and returns a new instance of <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" />.</summary>
+      <param name="path">The zip file snapshot created by the <see cref="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Create(Microsoft.Win32.TaskScheduler.TaskService,System.String)" /> method.</param>
+      <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot" /> instance with the contents of the specified snapshot file.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Path">
+      <summary>Gets the path of the file based snapshot.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService,System.Collections.Generic.ICollection{Microsoft.Win32.TaskScheduler.SnapshotItem},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String})">
+      <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> into which the tasks and folders are registered.</param>
+      <param name="items">
+            The list of <see cref="T:Microsoft.Win32.TaskScheduler.SnapshotItem" /> instances representing the tasks and folders from this snapshot that should be registered on the
+            <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
+            </param>
+      <param name="applyAccessRights">
+            If <c>true</c>, takes the access rights from the snapshot item and applies it to both new and existing tasks and folders.
+            </param>
+      <param name="overwriteExisting">
+            If <c>true</c>, overwrite any existing tasks and folders found in the target Task Scheduler that match the path of the snapshot item.
+            </param>
+      <param name="passwords">
+            Lookup table for password. Provide pairs of the user/group account name and the associated passwords for any task that requires a password.
+            </param>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService,System.Collections.Generic.ICollection{Microsoft.Win32.TaskScheduler.SnapshotItem},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+      <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> into which the tasks and folders are registered.</param>
+      <param name="items">
+            The list of <see cref="T:Microsoft.Win32.TaskScheduler.SnapshotItem" /> instances representing the tasks and folders from this snapshot that should be registered on the
+            <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
+            </param>
+      <param name="applyAccessRights">
+            If <c>true</c>, takes the access rights from the snapshot item and applies it to both new and existing tasks and folders.
+            </param>
+      <param name="overwriteExisting">
+            If <c>true</c>, overwrite any existing tasks and folders found in the target Task Scheduler that match the path of the snapshot item.
+            </param>
+      <param name="passwords">
+            Lookup table for password. Provide pairs of the user/group account name and the associated passwords for any task that requires a password.
+            </param>
+      <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
+      <param name="progress">An optional <see cref="T:System.IProgress`1" /> instance to use to report progress of the asynchronous operation.</param>
+      <returns>An asynchronous <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.Restore(Microsoft.Win32.TaskScheduler.TaskService,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken,System.IProgress{System.Tuple{System.Int32,System.String}})">
+      <summary>Register a list of snapshot items (tasks and folders) into the specified Task Scheduler.</summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> into which the tasks and folders are registered.</param>
+      <param name="itemPaths">
+            The list of paths representing the tasks and folders from this snapshot that should be registered on the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.
+            </param>
+      <param name="applyAccessRights">
+            If <c>true</c>, takes the access rights from the snapshot item and applies it to both new and existing tasks and folders.
+            </param>
+      <param name="overwriteExisting">
+            If <c>true</c>, overwrite any existing tasks and folders found in the target Task Scheduler that match the path of the snapshot item.
+            </param>
+      <param name="passwords">
+            Lookup table for password. Provide pairs of the user/group account name and the associated passwords for any task that requires a password.
+            </param>
+      <param name="cancelToken">A cancellation token to use to cancel this asynchronous operation.</param>
+      <param name="progress">An optional <see cref="T:System.IProgress`1" /> instance to use to report progress of the asynchronous operation.</param>
+      <returns>An asynchronous <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.TargetServer">
+      <summary>Gets the machine name of the server from which the snapshot was taken.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerSnapshot.TimeStamp">
+      <summary>Gets the UTC time stamp for when the snapshot was taken.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskSecurity">
       <summary>
@@ -4389,6 +4507,15 @@
       <summary>
             Gets or sets an XML-formatted definition of the task settings.
             </summary>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskSnapshot">
+      <summary>Represents a <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance and captures its details.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSnapshot.Enabled">
+      <summary>Gets a value indicating whether th <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> is enabled.</summary>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskSnapshot.TaskDefinitionXml">
+      <summary>Gets the <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> XML.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskState">
       <summary>Defines the different states that a registered task can be in.</summary>
