@@ -105,6 +105,7 @@
 			this.taskUseUnifiedSchedulingEngineCheck.Name = "taskUseUnifiedSchedulingEngineCheck";
 			this.helpProvider.SetShowHelp(this.taskUseUnifiedSchedulingEngineCheck, ((bool)(resources.GetObject("taskUseUnifiedSchedulingEngineCheck.ShowHelp"))));
 			this.taskUseUnifiedSchedulingEngineCheck.UseVisualStyleBackColor = true;
+			this.taskUseUnifiedSchedulingEngineCheck.CheckedChanged += new System.EventHandler(this.taskUseUnifiedSchedulingEngineCheck_CheckedChanged);
 			// 
 			// taskRegURIText
 			// 
@@ -152,6 +153,7 @@
 			this.tableLayoutPanel1.SetColumnSpan(this.taskVolatileCheck, 2);
 			this.taskVolatileCheck.Name = "taskVolatileCheck";
 			this.taskVolatileCheck.UseVisualStyleBackColor = true;
+			this.taskVolatileCheck.CheckedChanged += new System.EventHandler(this.taskVolatileCheck_CheckedChanged);
 			// 
 			// taskRegURILabel
 			// 

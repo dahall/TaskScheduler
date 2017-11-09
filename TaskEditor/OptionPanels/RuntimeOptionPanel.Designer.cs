@@ -201,6 +201,7 @@
 			this.taskExecutionTimeLimitCheck.TabIndex = 8;
 			this.taskExecutionTimeLimitCheck.Text = "Stop the tas&k if it runs longer than:";
 			this.taskExecutionTimeLimitCheck.UseVisualStyleBackColor = true;
+			this.taskExecutionTimeLimitCheck.CheckedChanged += new System.EventHandler(taskExecutionTimeLimitCheck_CheckedChanged);
 			// 
 			// taskDeleteAfterCombo
 			// 

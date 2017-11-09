@@ -247,7 +247,7 @@
     <value>taskUseUnifiedSchedulingEngineCheck</value>
   </data>
   <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskUseUnifiedSchedulingEngineCheck.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -430,7 +430,7 @@
     <value>optionPanelHeaderLabel2</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel2.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -454,7 +454,7 @@
     <value>5, 0, 0, 0</value>
   </data>
   <data name="taskRegVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 15</value>
+    <value>53, 15</value>
   </data>
   <data name="taskRegVersionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -502,7 +502,7 @@
     <value>taskVolatileCheck</value>
   </data>
   <data name="&gt;&gt;taskVolatileCheck.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;taskVolatileCheck.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -730,7 +730,7 @@
     <value>optionPanelHeaderLabel1</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;optionPanelHeaderLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -816,6 +816,6 @@
     <value>GeneralOptionPanel</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.2.3.23356, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.6.4.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
 </root>

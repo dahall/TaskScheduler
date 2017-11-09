@@ -13,16 +13,20 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		protected override void InitializePanel()
 		{
-			taskDescText.ReadOnly = !parent.Editable;
 			taskHiddenCheck.Enabled = taskEnabledCheck.Enabled = parent.Editable;
-			taskRegSourceText.ReadOnly = taskRegURIText.ReadOnly = taskRegVersionText.ReadOnly = !parent.Editable;
+			taskUseUnifiedSchedulingEngineCheck.Enabled = parent.Editable && td.Settings.Compatibility >= TaskCompatibility.V2_1;
+			taskVolatileCheck.Enabled = parent.Editable && td.Settings.Compatibility >= TaskCompatibility.V2_2;
+			taskDescText.ReadOnly = !parent.Editable;
+			taskRegSourceText.ReadOnly = taskRegURIText.ReadOnly = taskRegVersionText.ReadOnly = taskRegDocText.ReadOnly = !parent.Editable;
 
-			taskDescText.Text = parent.GetStringValue(td.RegistrationInfo.Description);
 			taskEnabledCheck.Checked = td.Settings.Enabled;
 			taskHiddenCheck.Checked = td.Settings.Hidden;
+			taskVolatileCheck.Checked = td.Settings.Volatile;
+			taskUseUnifiedSchedulingEngineCheck.Checked = td.Settings.UseUnifiedSchedulingEngine;
 			if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
 				td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
 			taskAuthorText.Text = parent.GetStringValue(td.RegistrationInfo.Author);
+			taskDescText.Text = parent.GetStringValue(td.RegistrationInfo.Description);
 			taskRegSourceText.Text = parent.GetStringValue(td.RegistrationInfo.Source);
 			taskRegURIText.Text = td.RegistrationInfo.URI;
 			taskRegVersionText.Text = td.RegistrationInfo.Version.ToString();
