@@ -2530,11 +2530,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public SessionStateChangeTrigger() : base(TaskTriggerType.SessionStateChange) { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="SessionStateChangeTrigger"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="SessionStateChangeTrigger" /> class.</summary>
 		/// <param name="stateChange">The state change.</param>
-		public SessionStateChangeTrigger(TaskSessionStateChangeType stateChange) : this() { StateChange = stateChange; }
+		/// <param name="userId">The user identifier.</param>
+		public SessionStateChangeTrigger(TaskSessionStateChangeType stateChange, string userId = null) : this() { StateChange = stateChange; UserId = userId; }
 
 		internal SessionStateChangeTrigger([NotNull] V2Interop.ITrigger iTrigger) : base(iTrigger) { }
 
