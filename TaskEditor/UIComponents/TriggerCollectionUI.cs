@@ -19,35 +19,15 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[DefaultValue(false), Category("Appearance")]
 		public bool UseModernUI
 		{
-			get { return modern; }
+			get => modern;
 			set
 			{
-				if (modern != value)
-				{
-					modern = value;
-					if (!DesignMode && value && imageList.Images.Count == 0)
-						InitializeModernImages();
-					RefreshState();
-				}
+				if (modern == value) return;
+				modern = value;
+				if (!DesignMode && value && imageList.Images.Count == 0)
+					InitializeModernImages();
+				RefreshState();
 			}
-		}
-
-		private void InitializeModernImages()
-		{
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeEventImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeTimeImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeDailyImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeWeeklyImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyDOWImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeIdleImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeRegistrationImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeBootImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent); // Added to make enum int line up
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeSessionStateChangeImage, Color.Transparent);
-			imageList.Images.Add(EditorProperties.Resources.TriggerTypeCustomImage, Color.Transparent);
-			disabledOverlayImageIndex = imageList.AddOverlay(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
 		}
 
 		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
@@ -96,18 +76,39 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			var imgIdx = (int)tr.TriggerType;
 			var txt = tr.ToString();
-			var lvi = new ListViewItem(new [] {
-					TaskEnumGlobalizer.GetString(tr.TriggerType), txt,
-					tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled
-				}, imgIdx) { Tag = tr, ToolTipText = txt };
+			var lvi = new ListViewItem(new[] { TaskEnumGlobalizer.GetString(tr.TriggerType), txt, tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled }, imgIdx) { Tag = tr, ToolTipText = txt };
 			lvi = index < 0 ? triggerListView.Items.Add(lvi) : triggerListView.Items.Insert(index, lvi);
-			if (modern)
-			{
-				var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new[] { 1 } };
-				if (!tr.Enabled)
-					nlvi.OverlayImageIndex = 1;
-				NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
-			}
+			if (!modern) return;
+			var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new[] { 1 } };
+			if (!tr.Enabled)
+				nlvi.OverlayImageIndex = (uint)disabledOverlayImageIndex;
+			NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
+		}
+
+		private void enableToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var i = SelectedIndex;
+			if (i < 0) return;
+			editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;
+			RefreshState();
+		}
+
+		private void InitializeModernImages()
+		{
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeEventImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeTimeImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeDailyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeWeeklyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeMonthlyDOWImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeIdleImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeRegistrationImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeBootImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeLogonImage, Color.Transparent); // Added to make enum int line up
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeSessionStateChangeImage, Color.Transparent);
+			imageList.Images.Add(EditorProperties.Resources.TriggerTypeCustomImage, Color.Transparent);
+			disabledOverlayImageIndex = imageList.AddOverlay(EditorProperties.Resources.TriggerTypeStateDisabled, Color.Transparent);
 		}
 
 		private void SetTriggerButtonState()
@@ -119,43 +120,35 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				enableToolStripMenuItem.Visible = !(disableToolStripMenuItem.Visible = editor.TaskDefinition.Triggers[idx].Enabled);
 			else
 				enableToolStripMenuItem.Visible = disableToolStripMenuItem.Visible = false;
-
 		}
 
 		private void triggerDeleteButton_Click(object sender, EventArgs e)
 		{
 			var idx = SelectedIndex;
-			if (idx >= 0)
-			{
-				editor.TaskDefinition.Triggers.RemoveAt(idx);
-				triggerListView.Items.RemoveAt(idx);
-			}
+			if (idx < 0) return;
+			editor.TaskDefinition.Triggers.RemoveAt(idx);
+			triggerListView.Items.RemoveAt(idx);
 		}
 
 		private void triggerEditButton_Click(object sender, EventArgs e)
 		{
 			var idx = SelectedIndex;
-			if (idx >= 0)
+			if (idx < 0) return;
+			/*if (editor.TaskDefinition.Triggers[idx].TriggerType == TaskTriggerType.Custom)
 			{
-				/*if (editor.TaskDefinition.Triggers[idx].TriggerType == TaskTriggerType.Custom)
-				{
-					MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
-					return;
-				}*/
-
-				using (var dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
-				{
-					dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
-					dlg.TargetServer = editor.TaskService.TargetServer;
-					dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
-					if (dlg.ShowDialog() == DialogResult.OK)
-					{
-						triggerListView.Items.RemoveAt(idx);
-						editor.TaskDefinition.Triggers[idx] = dlg.Trigger;
-						AddTriggerToList(dlg.Trigger, idx);
-						triggerListView.Items[idx].Selected = true;
-					}
-				}
+				MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
+				return;
+			}*/
+			using (var dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
+			{
+				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
+				dlg.TargetServer = editor.TaskService.TargetServer;
+				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
+				if (dlg.ShowDialog() != DialogResult.OK) return;
+				triggerListView.Items.RemoveAt(idx);
+				editor.TaskDefinition.Triggers[idx] = dlg.Trigger;
+				AddTriggerToList(dlg.Trigger, idx);
+				triggerListView.Items[idx].Selected = true;
 			}
 		}
 
@@ -185,21 +178,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
 				dlg.TargetServer = editor.TaskService.TargetServer;
 				dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
-				if (dlg.ShowDialog() == DialogResult.OK)
-				{
-					editor.TaskDefinition.Triggers.Add(dlg.Trigger);
-					AddTriggerToList(dlg.Trigger, -1);
-				}
-			}
-		}
-
-		private void enableToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			var i = SelectedIndex;
-			if (i >= 0)
-			{
-				editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;
-				RefreshState();
+				if (dlg.ShowDialog() != DialogResult.OK) return;
+				editor.TaskDefinition.Triggers.Add(dlg.Trigger);
+				AddTriggerToList(dlg.Trigger, -1);
 			}
 		}
 	}

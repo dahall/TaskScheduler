@@ -93,11 +93,17 @@
     </Compile>
     <Compile Include="..\TaskService\Native\EnumUtil.cs" Link="Native\EnumUtil.cs" />
     <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="Native\ExtensionAttributeFor.NET_2.0.cs" />
+    <Compile Include="..\TaskService\Native\Func.Net2.cs">
+      <Link>Native\Func.Net2.cs</Link>
+    </Compile>
     <Compile Include="..\TaskService\Native\InteropUtil.cs">
       <Link>Native\InteropUtil.cs</Link>
     </Compile>
     <Compile Include="..\TaskService\Native\KERNEL32.cs">
       <Link>Native\KERNEL32.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\Linq.Net2.cs">
+      <Link>Native\Linq.Net2.cs</Link>
     </Compile>
     <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
       <Link>Native\SYSTEMTIME.cs</Link>
@@ -112,6 +118,7 @@
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ArrayComparer.cs" />
+    <Compile Include="ComboBoxExtension.cs" />
     <Compile Include="ComObjectSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +126,7 @@
       <DependentUpon>ComObjectSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EditorInterfaces.cs" />
+    <Compile Include="ListControlItem.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Native\GenericSafeHandle.cs" />
     <Compile Include="Native\ImageList.cs" />
@@ -335,6 +343,7 @@
     <Compile Include="TaskServiceConnectDialog.Designer.cs">
       <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextValueItem.cs" />
     <Compile Include="TimeSpanExtension.cs" />
     <Compile Include="TriggerEditDialog.cs">
       <SubType>Form</SubType>
@@ -392,6 +401,7 @@
     </Compile>
     <Compile Include="UIComponents\IActionHandler.cs" />
     <Compile Include="UIComponents\ITriggerHandler.cs" />
+    <Compile Include="Native\ListViewExtensions.cs" />
     <Compile Include="UIComponents\MonthlyTriggerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,21 +1,25 @@
-﻿using Microsoft.Win32.TaskScheduler.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler.EditorProperties;
+using Microsoft.Win32.TaskScheduler.Events;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// Dialog that enables editing of event queries, specifically for creating filters.
-	/// </summary>
+	/// <summary>Dialog that enables editing of event queries, specifically for creating filters.</summary>
 	public partial class EventActionFilterEditor : Form
 	{
-		private static System.Text.RegularExpressions.Regex IDRegex;
+		private static readonly Regex IDRegex;
 		private static StringNode Logs;
-		private static LogTimeItem[] LogTimeBaseItems;
+		private static readonly LogTimeItem[] LogTimeBaseItems;
 		private static List<string> Providers;
 
-		private bool internalSet = false;
+		private bool internalSet;
 		private int lastLogTimeComboIndex;
 		private EventQuery ql = new EventQuery();
 		private bool queryTextIsDirty;
@@ -23,20 +27,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		static EventActionFilterEditor()
 		{
-			IDRegex = new System.Text.RegularExpressions.Regex(@"^-?\d+(-\d+)?(,-?\d+(-\d+)?)*$", System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.CultureInvariant | System.Text.RegularExpressions.RegexOptions.Singleline);
+			IDRegex = new Regex(@"^-?\d+(-\d+)?(,-?\d+(-\d+)?)*$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline);
 			LogTimeBaseItems = new LogTimeItem[7];
-			LogTimeBaseItems[0] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeAnyTime, DiffTime = TimeSpan.Zero };
-			LogTimeBaseItems[1] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeHour, DiffTime = TimeSpan.FromHours(1) };
-			LogTimeBaseItems[2] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime12Hours, DiffTime = TimeSpan.FromHours(12) };
-			LogTimeBaseItems[3] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeDay, DiffTime = TimeSpan.FromHours(24) };
-			LogTimeBaseItems[4] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeWeek, DiffTime = TimeSpan.FromDays(7) };
-			LogTimeBaseItems[5] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTime30Days, DiffTime = TimeSpan.FromDays(30) };
-			LogTimeBaseItems[6] = new LogTimeItem { Text = EditorProperties.Resources.EventLogTimeCustom };
+			LogTimeBaseItems[0] = new LogTimeItem { Text = Resources.EventLogTimeAnyTime, DiffTime = TimeSpan.Zero };
+			LogTimeBaseItems[1] = new LogTimeItem { Text = Resources.EventLogTimeHour, DiffTime = TimeSpan.FromHours(1) };
+			LogTimeBaseItems[2] = new LogTimeItem { Text = Resources.EventLogTime12Hours, DiffTime = TimeSpan.FromHours(12) };
+			LogTimeBaseItems[3] = new LogTimeItem { Text = Resources.EventLogTimeDay, DiffTime = TimeSpan.FromHours(24) };
+			LogTimeBaseItems[4] = new LogTimeItem { Text = Resources.EventLogTimeWeek, DiffTime = TimeSpan.FromDays(7) };
+			LogTimeBaseItems[5] = new LogTimeItem { Text = Resources.EventLogTime30Days, DiffTime = TimeSpan.FromDays(30) };
+			LogTimeBaseItems[6] = new LogTimeItem { Text = Resources.EventLogTimeCustom };
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="EventActionFilterEditor"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="EventActionFilterEditor"/> class.</summary>
 		public EventActionFilterEditor()
 		{
 			InitializeComponent();
@@ -44,48 +46,42 @@ namespace Microsoft.Win32.TaskScheduler
 			logTimeCombo.Items.AddRange(LogTimeBaseItems);
 			logTimeCombo.SelectedIndex = 0;
 			// Event level
-			criticalLevelCheckBox.Tag = new int[] { 1 };
-			errorLevelCheckBox.Tag = new int[] { 2 };
-			warningLevelCheckBox.Tag = new int[] { 3 };
-			infoLevelCheckBox.Tag = new int[] { 0, 4 };
-			verboseLevelCheckBox.Tag = new int[] { 5 };
+			criticalLevelCheckBox.Tag = new[] { 1 };
+			errorLevelCheckBox.Tag = new[] { 2 };
+			warningLevelCheckBox.Tag = new[] { 3 };
+			infoLevelCheckBox.Tag = new[] { 0, 4 };
+			verboseLevelCheckBox.Tag = new[] { 5 };
 			// Text boxes
 			eventIDsText.Tag = eventIDsText.Text;
 			userText.Tag = userText.Text;
 			computerText.Tag = computerText.Text;
 			// Logs and providers
-			eventLogCombo.CheckAllText = EditorProperties.Resources.EventLogsAll;
+			eventLogCombo.CheckAllText = Resources.EventLogsAll;
 			UpdateLogList(eventLogCombo.Items);
-			eventSourceCombo.CheckAllText = EditorProperties.Resources.EventSourcesAll;
+			eventSourceCombo.CheckAllText = Resources.EventSourcesAll;
 			UpdateProviderList(eventSourceCombo.Items);
 			eventSourceCombo.Sorted = true;
 			// Categories
-			categoryCombo.CheckAllText = EditorProperties.Resources.EventTasksAll;
+			categoryCombo.CheckAllText = Resources.EventTasksAll;
 			// Keywords
-			keywordsCombo.CheckAllText = EditorProperties.Resources.EventKeywordsAll;
-			keywordsCombo.InitializeFromEnum(typeof(System.Diagnostics.Eventing.Reader.StandardEventKeywords), EditorProperties.Resources.ResourceManager, "EventKeywords", new string[] { "None", "CorrelationHint" });
+			keywordsCombo.CheckAllText = Resources.EventKeywordsAll;
+			keywordsCombo.InitializeFromEnum(typeof(StandardEventKeywords), Resources.ResourceManager, "EventKeywords", new[] { "None", "CorrelationHint" });
 			keywordsCombo.Sorted = true;
 			ResetFilterControls();
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="EventActionFilterEditor"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="EventActionFilterEditor"/> class.</summary>
 		/// <param name="eventSubscription">The event query XML used to initialize the dialog.</param>
 		public EventActionFilterEditor(string eventSubscription) : this()
 		{
 			Subscription = eventSubscription;
 		}
 
-		/// <summary>
-		/// Gets or sets the event query XML. Setting this value will reinitialize the dialog.
-		/// </summary>
-		/// <value>
-		/// The event query XML.
-		/// </value>
+		/// <summary>Gets or sets the event query XML. Setting this value will reinitialize the dialog.</summary>
+		/// <value>The event query XML.</value>
 		public string Subscription
 		{
-			get { return subscription; }
+			get => subscription;
 			set
 			{
 				if (string.IsNullOrEmpty(value))
@@ -115,26 +111,26 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				Logs = new StringNode(null);
 				// Add standard nodes
-				StringNode std = new StringNode(EditorProperties.Resources.EventLogParentStandard);
-				string[] stdLogs = new string[] { "Application", "Security", "Setup", "System", "ForwardedEvents" };
-				foreach (string s in stdLogs)
+				var std = new StringNode(Resources.EventLogParentStandard);
+				string[] stdLogs = { "Application", "Security", "Setup", "System", "ForwardedEvents" };
+				foreach (var s in stdLogs)
 					std.Nodes.Add(new StringNode(s, s));
 				std.LastChild.Text = "Forwarded Events";
 				Logs.Nodes.Add(std);
 				// Get all event logs and remove standard ones
 				var list = SystemEventEnumerator.GetEventLogStrings(targetServer);
-				foreach (string s in stdLogs)
+				foreach (var s in stdLogs)
 					list.Remove(s);
 				// Add app nodes
-				StringNode lastParent = null, curCompare = null, appNode = new StringNode(EditorProperties.Resources.EventLogParentApps);
+				StringNode curCompare = null, appNode = new StringNode(Resources.EventLogParentApps);
 				Logs.Nodes.Add(appNode);
-				int max = 0;
+				var max = 0;
 				var partList = list.ConvertAll(s => { var a = s.Split('-', '/', '\\'); max = Math.Max(max, a.Length); return a; });
 				//partList.Sort((a, b) => string.Compare(a[0], b[0]));
-				for (int i = 0; i < partList.Count; i++)
+				for (var i = 0; i < partList.Count; i++)
 				{
-					lastParent = appNode;
-					for (int j = 0; j < partList[i].Length; j++)
+					var lastParent = appNode;
+					for (var j = 0; j < partList[i].Length; j++)
 					{
 						if (curCompare != null && string.Compare(curCompare, partList[i][j], true) == 0)
 						{
@@ -163,7 +159,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Providers = SystemEventEnumerator.GetEventProviders(targetServer, null, true);
 			}
 			items.Clear();
-			items.AddRange(Providers.ConvertAll<DropDownCheckListItem>(s => { var p = s.Split('|'); return new DropDownCheckListItem(p[1], p[0]); }).ToArray());
+			items.AddRange(Providers.ConvertAll(s => { var p = s.Split('|'); return new ListControlItem(p[1], p[0]); }).ToArray());
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
@@ -177,8 +173,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				ql.Query.Tasks.Clear();
 				foreach (var item in categoryCombo.SelectedItems)
-					if (item.Value is int)
-						ql.Query.Tasks.Add((int)item.Value);
+					if (item.Value is int i)
+						ql.Query.Tasks.Add(i);
 			}
 		}
 
@@ -205,29 +201,15 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				queryText.Enabled = editManuallyCheckBox.Checked;
 			}
-			else
-			{
-				/*if (editManuallyCheckBox.Checked)
-					queryText.Enabled = true;
-				else
-				{
-					if (!internalSet)
-					{
-						if (MessageBox.Show(this, EditorProperties.Resources.EventTriggerFilterGoManualPrompt, EditorProperties.Resources.EventViewerDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
-						{
-						}
-					}
-				}*/
-			}
 		}
 
 		private void EnableControls()
 		{
-			bool enableCtrls = eventLogCombo.CheckedItems.Count > 0;
+			var enableCtrls = eventLogCombo.CheckedItems.Count > 0;
 			eventLogCombo.Enabled = enableCtrls || byLogRadio.Checked;
 			eventSourceCombo.Enabled = eventIDsText.Enabled = keywordsCombo.Enabled =
 				userText.Enabled = computerText.Enabled = enableCtrls;
-			foreach (TextBox t in new TextBox[] { eventIDsText, userText, computerText })
+			foreach (var t in new[] { eventIDsText, userText, computerText })
 				nullableText_Leave(t, EventArgs.Empty);
 		}
 
@@ -235,15 +217,15 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!internalSet)
 			{
-				bool match = false;
-				if (eventIDsText.TextLength == 0 || (match = IDRegex.IsMatch(eventIDsText.Text)) || string.Equals(eventIDsText.Text, eventIDsText.Tag))
+				var match = false;
+				if (eventIDsText.TextLength == 0 || (match = IDRegex.IsMatch(eventIDsText.Text)) || Equals(eventIDsText.Text, eventIDsText.Tag))
 				{
 					errorProvider.SetError(eventIDsText, String.Empty);
 					if (match)
 						ql.Query.IDString = eventIDsText.Text;
 				}
 				else
-					errorProvider.SetError(eventIDsText, EditorProperties.Resources.Error_EventTriggerIDInvalid);
+					errorProvider.SetError(eventIDsText, Resources.Error_EventTriggerIDInvalid);
 			}
 		}
 
@@ -252,8 +234,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!internalSet)
 			{
 				ql.Query.Select.Clear();
-				List<string> selLogs = eventLogCombo.CheckedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll<string>(n => n.Name);
-				foreach (string log in selLogs)
+				var selLogs = eventLogCombo.CheckedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll(n => n.Name);
+				foreach (var log in selLogs)
 					ql.Query.AddPath(log);
 				EnableControls();
 			}
@@ -261,7 +243,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void eventSourceCombo_SelectedItemsChanged(object sender, EventArgs e)
 		{
-			var provs = Array.ConvertAll<DropDownCheckListItem, string>(eventSourceCombo.SelectedItems, i => (string)i.Value);
+			var provs = Array.ConvertAll(eventSourceCombo.SelectedItems, i => (string)i.Value);
 			if (!internalSet)
 			{
 				ql.Query.Providers = new List<string>(provs);
@@ -281,8 +263,8 @@ namespace Microsoft.Win32.TaskScheduler
 				categoryCombo.Enabled = true;
 				categoryCombo.BeginUpdate();
 				categoryCombo.Items.Clear();
-				categoryCombo.Items.Add(new DropDownCheckListItem(categoryCombo.CheckAllText));
-				categoryCombo.Items.AddRange(tasks.ConvertAll<DropDownCheckListItem>(kv => new DropDownCheckListItem(kv.Value, kv.Key)).ToArray());
+				categoryCombo.Items.Add(new ListControlItem(categoryCombo.CheckAllText));
+				categoryCombo.Items.AddRange(tasks.ConvertAll(kv => new ListControlItem(kv.Value, kv.Key)).ToArray());
 				categoryCombo.EndUpdate();
 			}
 		}
@@ -296,22 +278,22 @@ namespace Microsoft.Win32.TaskScheduler
 				// Log time
 				InitLogTime(ql.Query.Times);
 				// Level
-				var ctrls = new CheckBox[] { criticalLevelCheckBox, errorLevelCheckBox, warningLevelCheckBox, infoLevelCheckBox, verboseLevelCheckBox };
+				var ctrls = new[] { criticalLevelCheckBox, errorLevelCheckBox, warningLevelCheckBox, infoLevelCheckBox, verboseLevelCheckBox };
 				foreach (var cb in ctrls)
-					for (int i = 0; i < ((int[])cb.Tag).Length; i++)
+					for (var i = 0; i < ((int[])cb.Tag).Length; i++)
 						cb.Checked = ql.Query.Levels.Contains(((int[])cb.Tag)[i]);
 				// Logs
 				eventLogCombo.UncheckAllItems();
 				foreach (var s in ql.Query.Select)
 					eventLogCombo.CheckValue(s.Path);
 				// Providers
-				eventSourceCombo.CheckItems(o => ql.Query.Providers.FindIndex(s => Equals(((DropDownCheckListItem)o).Value, s)) != -1);
+				eventSourceCombo.CheckItems(o => ql.Query.Providers.FindIndex(s => Equals(((ListControlItem)o).Value, s)) != -1);
 				byLogRadio.Checked = ql.Query.Providers.Count == 0;
 				bySourceRadio.Checked = ql.Query.Providers.Count > 0;
 				// EventIDs
 				eventIDsText.Text = ql.Query.IDString;
 				// Tasks
-				categoryCombo.CheckItems(o => ql.Query.Tasks.FindIndex(i => Equals(((DropDownCheckListItem)o).Value, i)) != -1);
+				categoryCombo.CheckItems(o => ql.Query.Tasks.FindIndex(i => Equals(((ListControlItem)o).Value, i)) != -1);
 				// Keywords
 				keywordsCombo.CheckedFlagValue = ql.Query.Keywords;
 				// User
@@ -327,39 +309,38 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void InitLogTime(EventQuery.CQuery.CTimeCreated time)
 		{
-			int selIdx = -1;
+			var selIdx = -1;
 			if (time == null)
 			{
 				selIdx = 0;
 			}
 			else if (!time.HasDates)
 			{
-				for (int i = 0; i < LogTimeBaseItems.Length; i++)
+				for (var i = 0; i < LogTimeBaseItems.Length; i++)
 					if (LogTimeBaseItems[i].DiffTime == time.span)
 					{
 						selIdx = i;
 						break;
 					}
 				if (selIdx == -1)
-					throw new ArgumentOutOfRangeException("Unable to identify selection option for specified log time.");
+					throw new ArgumentOutOfRangeException(nameof(time), "Unable to identify selection option for specified log time.");
 			}
 			else
 			{
-				int x = (time.low.HasValue ? 1 : 0) | (time.high.HasValue ? 2 : 0);
+				var x = (time.low.HasValue ? 1 : 0) | (time.high.HasValue ? 2 : 0);
 				string resStr;
 				switch (x)
 				{
-					case 1: resStr = EditorProperties.Resources.EventLogTimeCustomFrom; break;
-					case 2: resStr = EditorProperties.Resources.EventLogTimeCustomTo; break;
-					case 3: resStr = EditorProperties.Resources.EventLogTimeCustomFromTo; break;
-					case 0:
+					case 1: resStr = Resources.EventLogTimeCustomFrom; break;
+					case 2: resStr = Resources.EventLogTimeCustomTo; break;
+					case 3: resStr = Resources.EventLogTimeCustomFromTo; break;
 					default: resStr = null; break;
 				}
 				if (resStr == null)
 					selIdx = 0;
 				else
 				{
-					string txt = string.Format(resStr, time.low, time.high);
+					var txt = string.Format(resStr, time.low, time.high);
 					if (logTimeCombo.Items.Count == 7)
 						logTimeCombo.Items.Insert(6, txt);
 					else
@@ -383,7 +364,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!internalSet)
 			{
 				ql.Query.Levels.Clear();
-				var ctrls = new CheckBox[] { criticalLevelCheckBox, errorLevelCheckBox, warningLevelCheckBox, infoLevelCheckBox, verboseLevelCheckBox };
+				var ctrls = new[] { criticalLevelCheckBox, errorLevelCheckBox, warningLevelCheckBox, infoLevelCheckBox, verboseLevelCheckBox };
 				foreach (var cb in ctrls)
 					if (cb.Checked) ql.Query.Levels.AddRange((int[])cb.Tag);
 			}
@@ -393,8 +374,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!internalSet)
 			{
-				bool isCustom = logTimeCombo.SelectedIndex == logTimeCombo.Items.Count - 1;
-				bool isInserted = logTimeCombo.Items.Count == 8 && logTimeCombo.SelectedIndex == 6;
+				var isCustom = logTimeCombo.SelectedIndex == logTimeCombo.Items.Count - 1;
+				var isInserted = logTimeCombo.Items.Count == 8 && logTimeCombo.SelectedIndex == 6;
 				if (isCustom)
 				{
 					using (var dlg = new EventActionFilterTimeEditor())
@@ -421,31 +402,21 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void nullableText_Enter(object sender, EventArgs e)
 		{
-			TextBox tb = sender as TextBox;
-			if (tb != null)
-			{
-				if (string.Equals(tb.Text, tb.Tag))
-					tb.Clear();
-			}
+			if (!(sender is TextBox tb)) return;
+			if (Equals(tb.Text, tb.Tag))
+				tb.Clear();
 		}
 
 		private void nullableText_Leave(object sender, EventArgs e)
 		{
-			TextBox tb = sender as TextBox;
-			if (tb != null)
-			{
-				if (tb.TextLength == 0)
-					tb.Text = (string)tb.Tag;
-			}
+			if (!(sender is TextBox tb)) return;
+			if (tb.TextLength == 0)
+				tb.Text = (string)tb.Tag;
 		}
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
-			if (tabControl.SelectedTab == xmlTab)
-			{
-				if (!UpdateQLFromText())
-					return;
-			}
+			if (tabControl.SelectedTab == xmlTab && !UpdateQLFromText()) return;
 			subscription = EventQuery.Serialize(ql);
 			DialogResult = DialogResult.OK;
 			Close();
@@ -458,29 +429,29 @@ namespace Microsoft.Win32.TaskScheduler
 
 			try
 			{
-				string text = string.Empty;
+				var text = string.Empty;
 				if (e.Data.GetDataPresent(DataFormats.FileDrop))
 				{
-					string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-					text = System.IO.File.ReadAllText(files[0]);
+					var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+					text = File.ReadAllText(files[0]);
 				}
 				else if (e.Data.GetDataPresent(DataFormats.Text, true))
 				{
 					text = e.Data.GetData(DataFormats.Text, true).ToString();
 				}
-				if (!text.StartsWith("<QueryList>", true, System.Globalization.CultureInfo.CurrentCulture))
+				if (!text.StartsWith("<QueryList>", true, CultureInfo.CurrentCulture))
 					throw new FormatException();
 				queryText.Text = text;
 			}
 			catch
 			{
-				MessageBox.Show(this, EditorProperties.Resources.Error_InvalidQueryFormat, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(this, Resources.Error_InvalidQueryFormat, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		private void queryText_DragEnter(object sender, DragEventArgs e)
 		{
-			if ((queryText.Enabled && !queryText.ReadOnly) && e.Data.GetDataPresent(DataFormats.Text, true) || e.Data.GetDataPresent(DataFormats.FileDrop))
+			if (queryText.Enabled && !queryText.ReadOnly && e.Data.GetDataPresent(DataFormats.Text, true) || e.Data.GetDataPresent(DataFormats.FileDrop))
 				e.Effect = DragDropEffects.Copy;
 			else
 				e.Effect = DragDropEffects.None;
@@ -503,7 +474,7 @@ namespace Microsoft.Win32.TaskScheduler
 				errorLevelCheckBox.Checked = infoLevelCheckBox.Checked = false;
 			logTimeCombo.SelectedIndex = 0;
 			eventIDsText.Text = userText.Text = computerText.Text = string.Empty;
-			foreach (TextBox t in new TextBox[] { eventIDsText, userText, computerText })
+			foreach (var t in new[] { eventIDsText, userText, computerText })
 				nullableText_Leave(t, EventArgs.Empty);
 			eventLogCombo.UncheckAllItems();
 			eventSourceCombo.UncheckAllItems();
@@ -523,23 +494,21 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool UpdateQLFromText(bool initForm = true)
 		{
-			if (queryTextIsDirty) // && editManuallyCheckBox.Checked)
+			if (!queryTextIsDirty) return true;
+			try
 			{
-				try
-				{
-					ql = EventQuery.Deserialize(queryText.Text);
-					queryTextIsDirty = false;
-					if (initForm)
-						Initialize();
-				}
-				catch (Exception ex)
-				{
-					var s = EditorProperties.Resources.Error_EventFilterBadQuery;
-					if (ex is InvalidOperationException && ex.InnerException is InvalidOperationException && ex.InnerException.Data.Contains("Remaining text"))
-						s += string.Format("\r\n" + EditorProperties.Resources.Error_EventFilterBadQueryText, ex.InnerException.Data["Remaining text"].ToString());
-					MessageBox.Show(this, s, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return false;
-				}
+				ql = EventQuery.Deserialize(queryText.Text);
+				queryTextIsDirty = false;
+				if (initForm)
+					Initialize();
+			}
+			catch (Exception ex)
+			{
+				var s = Resources.Error_EventFilterBadQuery;
+				if (ex is InvalidOperationException && ex.InnerException is InvalidOperationException && ex.InnerException.Data.Contains("Remaining text"))
+					s += string.Format("\r\n" + Resources.Error_EventFilterBadQueryText, ex.InnerException.Data["Remaining text"].ToString());
+				MessageBox.Show(this, s, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
 			}
 			return true;
 		}
@@ -551,11 +520,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void xmlTab_Enter(object sender, EventArgs e)
 		{
-			if (!queryTextIsDirty)
-			{
-				queryText.Text = EventQuery.Serialize(ql);
-				queryTextIsDirty = false;
-			}
+			if (queryTextIsDirty) return;
+			queryText.Text = EventQuery.Serialize(ql);
+			queryTextIsDirty = false;
 		}
 
 		private void xmlTab_Leave(object sender, EventArgs e)
@@ -572,7 +539,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private class StringNode
 		{
-			public List<StringNode> Nodes = new List<StringNode>(0);
+			public readonly List<StringNode> Nodes = new List<StringNode>(0);
 			public string Path;
 			public string Text;
 
@@ -582,7 +549,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Path = path;
 			}
 
-			internal StringNode LastChild => (Nodes.Count == 0) ? null : Nodes[Nodes.Count - 1];
+			internal StringNode LastChild => Nodes.Count == 0 ? null : Nodes[Nodes.Count - 1];
 
 			public static implicit operator string(StringNode n) => n.Text;
 
@@ -603,7 +570,7 @@ namespace Microsoft.Win32.TaskScheduler
 						var n = DropDownCheckTree.AddValue(coll, item.Text, item.Path);
 						UpdateNodes(item.Nodes, n.Nodes);
 					}
-					catch (Exception e) { System.Diagnostics.Debug.WriteLine($"Unable to add node '{item.Text}': {e.Message}"); }
+					catch (Exception e) { Debug.WriteLine($"Unable to add node '{item.Text}': {e.Message}"); }
 				}
 			}
 		}

@@ -13,7 +13,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			monthlyMonthsDropDown.InitializeFromTaskEnum(typeof(MonthsOfTheYear));
 			monthlyMonthsDropDown.Items.RemoveAt(13);
 			monthlyDaysDropDown.InitializeFromRange(1, 31);
-			monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
+			monthlyDaysDropDown.Items.Add(new ListControlItem(EditorProperties.Resources.Last, 99));
 			monthlyDaysDropDown.MultiColumnList = true;
 			monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
 			monthlyOnWeekDropDown.Items.RemoveAt(5);
@@ -24,80 +24,78 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[Category("Property Changed")]
 		public event EventHandler TriggerTypeChanged;
 
-		protected void OnTriggerTypeChanged()
-		{
-			TriggerTypeChanged?.Invoke(this, new EventArgs());
-		}
-
-		public override Trigger Trigger
-		{
-			get { return base.Trigger; }
-			set
-			{
-				base.Trigger = value;
-				if (trigger is MonthlyTrigger)
-				{
-					monthlyDaysRadio.Checked = true;
-					monthlyDaysDropDown.CheckedFlagValue = 0L;
-					foreach (int i in ((MonthlyTrigger)trigger).DaysOfMonth)
-						monthlyDaysDropDown.SetItemChecked(i - 1, true);
-					monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyTrigger)trigger).MonthsOfYear;
-					if (IsV2)
-						monthlyDaysDropDown.SetItemChecked(31, ((MonthlyTrigger)trigger).RunOnLastDayOfMonth);
-				}
-				else if (trigger is MonthlyDOWTrigger)
-				{
-					monthlyOnRadio.Checked = true;
-					monthlyOnDOWDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).DaysOfWeek;
-					monthlyMonthsDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).MonthsOfYear;
-					monthlyOnWeekDropDown.CheckedFlagValue = (long)((MonthlyDOWTrigger)trigger).WeeksOfMonth;
-					monthlyOnWeekDropDown.SetItemChecked(4, ((MonthlyDOWTrigger)trigger).RunOnLastWeekOfMonth);
-				}
-				else
-					throw new ArgumentException("Trigger must be MonthlyDOWTrigger or MonthlyTrigger.", "Trigger");
-
-				monthlyDaysRadio_CheckedChanged(this, EventArgs.Empty);
-				onAssignment = false;
-			}
-		}
-
 		public override bool IsV2
 		{
-			get { return !monthlyOnWeekDropDown.AllowOnlyOneCheckedItem; }
+			get => !monthlyOnWeekDropDown.AllowOnlyOneCheckedItem;
 			set
 			{
 				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !value;
 				if (!value)
 					monthlyDaysDropDown.Items.RemoveAt(31);
 				else if (monthlyDaysDropDown.Items.Count <= 31)
-					monthlyDaysDropDown.Items.Add(new DropDownCheckListItem(EditorProperties.Resources.Last, 99));
+					monthlyDaysDropDown.Items.Add(new ListControlItem(EditorProperties.Resources.Last, 99));
+			}
+		}
+
+		public override Trigger Trigger
+		{
+			get => base.Trigger;
+			set
+			{
+				base.Trigger = value;
+				switch (trigger)
+				{
+					case MonthlyTrigger mt:
+						monthlyDaysRadio.Checked = true;
+						monthlyDaysDropDown.CheckedFlagValue = 0L;
+						foreach (var i in mt.DaysOfMonth)
+							monthlyDaysDropDown.SetItemChecked(i - 1, true);
+						monthlyMonthsDropDown.CheckedFlagValue = (long)mt.MonthsOfYear;
+						if (IsV2)
+							monthlyDaysDropDown.SetItemChecked(31, mt.RunOnLastDayOfMonth);
+						break;
+					case MonthlyDOWTrigger dowt:
+						monthlyOnRadio.Checked = true;
+						monthlyOnDOWDropDown.CheckedFlagValue = (long)dowt.DaysOfWeek;
+						monthlyMonthsDropDown.CheckedFlagValue = (long)dowt.MonthsOfYear;
+						monthlyOnWeekDropDown.CheckedFlagValue = (long)dowt.WeeksOfMonth;
+						monthlyOnWeekDropDown.SetItemChecked(4, dowt.RunOnLastWeekOfMonth);
+						break;
+					default:
+						throw new ArgumentException("Trigger must be MonthlyDOWTrigger or MonthlyTrigger.", nameof(Trigger));
+				}
+				monthlyDaysRadio_CheckedChanged(this, EventArgs.Empty);
+				onAssignment = false;
 			}
 		}
 
 		[Browsable(false), DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
 		public TaskTriggerType TriggerType => monthlyDaysRadio.Checked ? TaskTriggerType.Monthly : TaskTriggerType.MonthlyDOW;
 
+		protected void OnTriggerTypeChanged()
+		{
+			TriggerTypeChanged?.Invoke(this, new EventArgs());
+		}
+
 		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment)
+			if (onAssignment) return;
+			var days = new System.Collections.Generic.List<int>(31);
+			var runOnLastDay = false;
+			foreach (var t in monthlyDaysDropDown.SelectedItems)
 			{
-				var days = new System.Collections.Generic.List<int>(31);
-				bool runOnLastDay = false;
-				for (int i = 0; i < monthlyDaysDropDown.SelectedItems.Length; i++)
-				{
-					if ((int)monthlyDaysDropDown.SelectedItems[i].Value == 99)
-						runOnLastDay = true;
-					else
-						days.Add((int)monthlyDaysDropDown.SelectedItems[i].Value);
-				}
-				((MonthlyTrigger)trigger).DaysOfMonth = days.ToArray();
-				if (IsV2) ((MonthlyTrigger)trigger).RunOnLastDayOfMonth = runOnLastDay;
+				if ((int)t.Value == 99)
+					runOnLastDay = true;
+				else
+					days.Add((int)t.Value);
 			}
+			((MonthlyTrigger)trigger).DaysOfMonth = days.ToArray();
+			if (IsV2) ((MonthlyTrigger)trigger).RunOnLastDayOfMonth = runOnLastDay;
 		}
 
 		private void monthlyDaysRadio_CheckedChanged(object sender, EventArgs e)
 		{
-			bool days = monthlyDaysRadio.Checked;
+			var days = monthlyDaysRadio.Checked;
 			monthlyDaysDropDown.Enabled = days;
 			monthlyOnDOWDropDown.Enabled = monthlyOnWeekDropDown.Enabled = !days;
 			if (!onAssignment)
@@ -106,13 +104,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void monthlyMonthsDropDown_SelectedItemsChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment)
-			{
-				if (monthlyDaysRadio.Checked)
-					((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
-				else
-					((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
-			}
+			if (onAssignment) return;
+			if (monthlyDaysRadio.Checked)
+				((MonthlyTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
+			else
+				((MonthlyDOWTrigger)trigger).MonthsOfYear = (MonthsOfTheYear)monthlyMonthsDropDown.CheckedFlagValue;
 		}
 
 		private void monthlyOnDOWDropDown_SelectedItemsChanged(object sender, EventArgs e)
