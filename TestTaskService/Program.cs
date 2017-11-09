@@ -301,13 +301,15 @@ namespace TestTaskService
 				}
 
 				// Register then show task again
-				editorForm = new TaskEditDialog(ts, td, true, true);
-				editorForm.AvailableTabs = AvailableTaskTabs.All;
-				editorForm.TaskName = "Test";
+				editorForm = new TaskEditDialog(ts, td, true, true)
+				{
+					AvailableTabs = AvailableTaskTabs.All,
+					TaskName = "Test",
+					TaskNameIsEditable = false,
+					ShowActionRunButton = true,
+					ShowConvertActionsToPowerShellCheck = true
+				};
 				if (ts.HighestSupportedVersion >= new Version(1, 2)) editorForm.TaskFolder = @"\Microsoft";
-				editorForm.TaskNameIsEditable = false;
-				editorForm.ShowActionRunButton = true;
-				editorForm.ShowConvertActionsToPowerShellCheck = true;
 				if (editorForm.ShowDialog() == DialogResult.OK)
 				{
 					var t = editorForm.Task;
@@ -713,33 +715,33 @@ namespace TestTaskService
 				// Setup Triggers
 				if (isV12)
 				{
-					var bTrigger = (BootTrigger)td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
+					var bTrigger = td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
 					if (isV12) bTrigger.Delay = TimeSpan.FromMinutes(5);
 				}
 
-				var dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+				var dTrigger = td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
 				if (isV12) dTrigger.RandomDelay = TimeSpan.FromHours(2);
 
 				if (isV12)
 				{
-					var eTrigger = (EventTrigger)td.Triggers.Add(new EventTrigger());
+					var eTrigger = td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
 					eTrigger.ValueQueries.Add("Name", "Value");
 					eTrigger.ValueQueries["Name"] = "NewValue";
 
 					td.Triggers.Add(new RegistrationTrigger { Delay = TimeSpan.FromMinutes(5) });
 
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleConnect, UserId = user });
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.ConsoleDisconnect });
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteConnect });
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.RemoteDisconnect });
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionLock, UserId = user });
-					td.Triggers.Add(new SessionStateChangeTrigger { StateChange = TaskSessionStateChangeType.SessionUnlock });
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.ConsoleConnect, user));
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.ConsoleDisconnect));
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.RemoteConnect));
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.RemoteDisconnect));
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.SessionLock, user));
+					td.Triggers.Add(new SessionStateChangeTrigger(TaskSessionStateChangeType.SessionUnlock));
 				}
 
 				td.Triggers.Add(new IdleTrigger());
 
-				var lTrigger = (LogonTrigger)td.Triggers.Add(new LogonTrigger());
+				var lTrigger = td.Triggers.Add(new LogonTrigger());
 				if (isV12)
 				{
 					lTrigger.Delay = TimeSpan.FromMinutes(15);
@@ -747,26 +749,26 @@ namespace TestTaskService
 					lTrigger.Repetition.Interval = TimeSpan.FromSeconds(1000);
 				}
 
-				var mTrigger = (MonthlyTrigger)td.Triggers.Add(new MonthlyTrigger());
+				var mTrigger = td.Triggers.Add(new MonthlyTrigger());
 				mTrigger.DaysOfMonth = new[] { 3, 6, 10, 18 };
 				mTrigger.MonthsOfYear = MonthsOfTheYear.July | MonthsOfTheYear.November;
 				if (isV12) mTrigger.RunOnLastDayOfMonth = true;
 				mTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(90);
 
-				var mdTrigger = (MonthlyDOWTrigger)td.Triggers.Add(new MonthlyDOWTrigger());
+				var mdTrigger = td.Triggers.Add(new MonthlyDOWTrigger());
 				mdTrigger.DaysOfWeek = DaysOfTheWeek.AllDays;
 				mdTrigger.MonthsOfYear = MonthsOfTheYear.January | MonthsOfTheYear.December;
 				if (isV12) mdTrigger.RunOnLastWeekOfMonth = true;
 				mdTrigger.WeeksOfMonth = WhichWeek.FirstWeek;
 
-				var tTrigger = (TimeTrigger)td.Triggers.Add(new TimeTrigger());
+				var tTrigger = td.Triggers.Add(new TimeTrigger());
 				tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
 				if (isV12) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
 				if (isV12) tTrigger.Id = "Time test";
 				tTrigger.Repetition = new RepetitionPattern(TimeSpan.FromMinutes(17), TimeSpan.FromMinutes(21), true);
 
-				var wTrigger = (WeeklyTrigger)td.Triggers.Add(new WeeklyTrigger());
+				var wTrigger = td.Triggers.Add(new WeeklyTrigger());
 				wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
 				wTrigger.WeeksInterval = 3;
 
@@ -858,11 +860,13 @@ namespace TestTaskService
 			// Run ComHandler
 			//TaskService.RunComHandlerActionAsync(new Guid("CE7D4428-8A77-4c5d-8A13-5CAB5D1EC734"), i => output.WriteLine("Com task complete."), "5", 120000, (p, s) => output.WriteLine($"Com task running: {p}% complete = {s}"));
 
-			// Show on traditional editor
-			//DisplayTask(runningTask, true);
+			if (arg.Length > 0 && arg[0] == "new")
+				// Show on new editor
+				new TaskOptionsEditor(runningTask).ShowDialog();
+			else
+				// Show on traditional editor
+				DisplayTask(runningTask, true);
 
-			// Show on new editor
-			new TaskOptionsEditor(runningTask).ShowDialog();
 
 			tf.DeleteTask("Test1");
 		}
