@@ -115,13 +115,31 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
+		/*/// <summary>
 		/// Add an unbound <see cref="Trigger"/> to the task.
 		/// </summary>
 		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
 		/// <returns>Bound trigger.</returns>
 		/// <exception cref="System.ArgumentNullException"><c>unboundTrigger</c> is <c>null</c>.</exception>
 		public Trigger Add([NotNull] Trigger unboundTrigger)
+		{
+			if (unboundTrigger == null)
+				throw new ArgumentNullException(nameof(unboundTrigger));
+			if (v2Def != null)
+				unboundTrigger.Bind(v2Def);
+			else
+				unboundTrigger.Bind(v1Task);
+			return unboundTrigger;
+		}*/
+
+		/// <summary>
+		/// Add an unbound <see cref="Trigger"/> to the task.
+		/// </summary>
+		/// <typeparam name="TTrigger">A type derived from <see cref="Trigger"/>.</typeparam>
+		/// <param name="unboundTrigger"><see cref="Trigger"/> derivative to add to the task.</param>
+		/// <returns>Bound trigger.</returns>
+		/// <exception cref="System.ArgumentNullException"><c>unboundTrigger</c> is <c>null</c>.</exception>
+		public TTrigger Add<TTrigger>([NotNull] TTrigger unboundTrigger) where TTrigger : Trigger
 		{
 			if (unboundTrigger == null)
 				throw new ArgumentNullException(nameof(unboundTrigger));

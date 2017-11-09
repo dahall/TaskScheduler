@@ -254,10 +254,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Adds an action to the task.
 		/// </summary>
+		/// <typeparam name="TAction">A type derived from <see cref="Action"/>.</typeparam>
 		/// <param name="action">A derived <see cref="Action"/> class.</param>
 		/// <returns>The bound <see cref="Action"/> that was added to the collection.</returns>
 		[NotNull]
-		public Action Add([NotNull] Action action)
+		public TAction Add<TAction>([NotNull] TAction action) where TAction : Action
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
