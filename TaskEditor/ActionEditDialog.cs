@@ -7,29 +7,6 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>Defines the type of actions available to a user interface element.</summary>
-	[Flags]
-	public enum AvailableActions
-	{
-		/// <summary>This action fires a handler.</summary>
-		ComHandler = 0x2,
-
-		/// <summary>
-		/// This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is
-		/// provided, find its associated application and launch the application with the document.
-		/// </summary>
-		Execute = 0x1,
-
-		/// <summary>This action sends and e-mail.</summary>
-		SendEmail = 0x4,
-
-		/// <summary>This action shows a message box.</summary>
-		ShowMessage = 0x8,
-
-		/// <summary>All actions are available.</summary>
-		AllActions = 0xF
-	}
-
 	/// <summary>An editor that handles all Task actions.</summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task action.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]

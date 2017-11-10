@@ -11,45 +11,87 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler.Design;
 using Microsoft.Win32.TaskScheduler.EditorProperties;
+// ReSharper disable UnusedMember.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	/// <summary>Defines the type of actions available to a user interface element.</summary>
+	[Flags]
+	public enum AvailableActions
+	{
+		/// <summary>This action fires a handler.</summary>
+		ComHandler = 0x2,
+		/// <summary>
+		/// This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is
+		/// provided, find its associated application and launch the application with the document.
+		/// </summary>
+		Execute = 0x1,
+		/// <summary>This action sends and e-mail.</summary>
+		SendEmail = 0x4,
+		/// <summary>This action shows a message box.</summary>
+		ShowMessage = 0x8,
+		/// <summary>All actions are available.</summary>
+		AllActions = 0xF
+	}
+
 	/// <summary>Flags representing tabs that can be visible on a <see cref="TaskPropertiesControl"/>.</summary>
 	[Flags]
 	public enum AvailableTaskTabs
 	{
 		/// <summary>Displays General tab</summary>
 		General = 0x01,
-
 		/// <summary>Displays Triggers tab</summary>
 		Triggers = 0x02,
-
 		/// <summary>Displays Actions tab</summary>
 		Actions = 0x04,
-
 		/// <summary>Displays Conditions tab</summary>
 		Conditions = 0x08,
-
 		/// <summary>Displays Settings tab</summary>
 		Settings = 0x10,
-
 		/// <summary>Displays Info tab</summary>
 		RegistrationInfo = 0x20,
-
 		/// <summary>Displays Additional tab</summary>
 		Properties = 0x40,
-
 		/// <summary>Displays Run Times tab</summary>
 		RunTimes = 0x80,
-
 		/// <summary>Displays History tab</summary>
 		History = 0x100,
-
 		/// <summary>Displays General, Triggers, Actions, Conditions, Settings, Run Times and History tabs</summary>
 		Default = 0x19F,
-
 		/// <summary>Displays all tabs</summary>
 		All = 0x1FF
+	}
+
+	/// <summary>Trigger types that can be made available to UI elements.</summary>
+	[Flags]
+	public enum AvailableTriggers
+	{
+		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
+		Event = 1 << 0,
+		/// <summary>Triggers the task at a specific time of day.</summary>
+		Time = 1 << 1,
+		/// <summary>Triggers the task on a daily schedule.</summary>
+		Daily = 1 << 2,
+		/// <summary>Triggers the task on a weekly schedule.</summary>
+		Weekly = 1 << 3,
+		/// <summary>Triggers the task on a monthly schedule.</summary>
+		Monthly = 1 << 4,
+		/// <summary>Triggers the task on a monthly day-of-week schedule.</summary>
+		MonthlyDOW = 1 << 5,
+		/// <summary>Triggers the task when the computer goes into an idle state.</summary>
+		Idle = 1 << 6,
+		/// <summary>Triggers the task when the task is registered. Version 1.2 only.</summary>
+		Registration = 1 << 7,
+		/// <summary>Triggers the task when the computer boots.</summary>
+		Boot = 1 << 8,
+		/// <summary>Triggers the task when a specific user logs on.</summary>
+		Logon = 1 << 9,
+		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
+		SessionStateChange = 1 << 11,
+		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
+		Custom = 1 << 12,
+		/// <summary>All triggers are available.</summary>
+		AllTriggers = 0b1_1011_1111_1111,
 	}
 
 	/// <summary>Control which allows for the editing of all properties of a <see cref="TaskDefinition"/>.</summary>

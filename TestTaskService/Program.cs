@@ -329,7 +329,7 @@ namespace TestTaskService
 					tdlg.Trigger = new BootTrigger();
 					tdlg.ShowDialog();
 					// Make current type unavailable and test
-					tdlg.AvailableTriggers = AvailableTriggers.Monthly | AvailableTriggers.SessionStateChange;
+					tdlg.AvailableTriggers = AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.SessionStateChange;
 					tdlg.ShowDialog();
 					return;
 				}

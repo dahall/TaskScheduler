@@ -10,37 +10,6 @@ using Microsoft.Win32.TaskScheduler.UIComponents;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	[Flags]
-	public enum AvailableTriggers
-	{
-		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
-		Event = 1 << 0,
-		/// <summary>Triggers the task at a specific time of day.</summary>
-		Time = 1 << 1,
-		/// <summary>Triggers the task on a daily schedule.</summary>
-		Daily = 1 << 2,
-		/// <summary>Triggers the task on a weekly schedule.</summary>
-		Weekly = 1 << 3,
-		/// <summary>Triggers the task on a monthly schedule.</summary>
-		Monthly = 1 << 4,
-		/// <summary>Triggers the task on a monthly day-of-week schedule.</summary>
-		MonthlyDOW = 1 << 5,
-		/// <summary>Triggers the task when the computer goes into an idle state.</summary>
-		Idle = 1 << 6,
-		/// <summary>Triggers the task when the task is registered. Version 1.2 only.</summary>
-		Registration = 1 << 7,
-		/// <summary>Triggers the task when the computer boots.</summary>
-		Boot = 1 << 8,
-		/// <summary>Triggers the task when a specific user logs on.</summary>
-		Logon = 1 << 9,
-		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
-		SessionStateChange = 1 << 11,
-		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
-		Custom = 1 << 12,
-		/// <summary>All triggers are available.</summary>
-		AllTriggers = 0b1_1011_1111_1111,
-	}
-
 	/// <summary>An editor that handles all Task triggers.</summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task trigger.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
