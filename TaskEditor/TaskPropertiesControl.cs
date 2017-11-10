@@ -170,6 +170,15 @@ namespace Microsoft.Win32.TaskScheduler
 		[Description("Occurs when a component entry has an error."), Category("Behavior")]
 		public event EventHandler<ComponentErrorEventArgs> ComponentError;
 
+		/// <summary>Gets or sets the available actions.</summary>
+		/// <value>The available actions.</value>
+		[DefaultValue(typeof(AvailableActions), nameof(AvailableActions.AllActions)), Category("Appearance")]
+		public AvailableActions AvailableActions
+		{
+			get => actionCollectionUI.AvailableActions;
+			set => actionCollectionUI.AvailableActions = value;
+		}
+
 		/// <summary>Gets or sets the available tabs.</summary>
 		/// <value>The available tabs.</value>
 		[DefaultValue(AvailableTaskTabs.Default), Category("Behavior"), Description("Determines which tabs are shown.")]
@@ -194,6 +203,15 @@ namespace Microsoft.Win32.TaskScheduler
 					tabControl.SelectedIndex = FindFirstVisibleTab();
 				}
 			}
+		}
+
+		/// <summary>Gets or sets the available triggers.</summary>
+		/// <value>The available triggers.</value>
+		[DefaultValue(typeof(AvailableTriggers), nameof(AvailableTriggers.AllTriggers)), Category("Appearance")]
+		public AvailableTriggers AvailableTriggers
+		{
+			get => triggerCollectionUI1.AvailableTriggers;
+			set => triggerCollectionUI1.AvailableTriggers = value;
 		}
 
 		/// <summary>Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.</summary>
@@ -316,14 +334,12 @@ namespace Microsoft.Win32.TaskScheduler
 			private set
 			{
 				task = value;
-				if (task != null)
-				{
-					TaskService = task.TaskService;
-					TaskFolder = task.Folder.Path;
-					if (task.ReadOnly)
-						Editable = false;
-					TaskDefinition = task.Definition;
-				}
+				if (task == null) return;
+				TaskService = task.TaskService;
+				TaskFolder = task.Folder.Path;
+				if (task.ReadOnly)
+					Editable = false;
+				TaskDefinition = task.Definition;
 			}
 		}
 

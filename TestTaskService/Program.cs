@@ -284,12 +284,14 @@ namespace TestTaskService
 					td = ts.NewTask();
 					td.RegistrationInfo.Description = "Test for editor\r\n\r\nLine 2";
 					//td.RegistrationInfo.Author = "incaunu";
+					td.Triggers.Add(new TimeTrigger());
 					td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now + TimeSpan.FromSeconds(5), EndBoundary = DateTime.Today.AddMonths(1) });
 					/*EventTrigger eTrig = new EventTrigger("Security", "VSSAudit", 25);
 					eTrig.ValueQueries.Add("Name", "Value");
 					td.Triggers.Add(eTrig);*/
 					td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
 					td.Actions.Add("cmd.exe", "/c \"date /t > c:\\cmd.txt\"");
+					td.Actions.Add(new ShowMessageAction("x", "y"));
 					//EmailAction ea = (EmailAction)td.Actions.Add(new EmailAction("Hi", "dahall@codeplex.com", "someone@mail.com; another@mail.com", "<p>How you been?</p>", "smtp.codeplex.com"));
 					//ea.HeaderFields.Add("reply-to", "dh@mail.com");
 					//ea.Attachments = new object[] { (string)new TemporaryScopedFile(), (string)new TemporaryScopedFile() };
@@ -315,7 +317,7 @@ namespace TestTaskService
 					ad.AvailableActions = AvailableActions.Execute | AvailableActions.ComHandler;
 					ad.ShowDialog();
 					return;
-				}*/
+				}
 
 				using (var tdlg = new TriggerEditDialog { AvailableTriggers = (AvailableTriggers.AllTriggers & ~AvailableTriggers.Boot) })
 				{
@@ -332,12 +334,14 @@ namespace TestTaskService
 					tdlg.AvailableTriggers = AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.SessionStateChange;
 					tdlg.ShowDialog();
 					return;
-				}
+				}*/
 
 				// Register then show task again
 				editorForm = new TaskEditDialog(ts, td, true, true)
 				{
 					AvailableTabs = AvailableTaskTabs.All,
+					//AvailableActions = AvailableActions.ComHandler | AvailableActions.Execute,
+					//AvailableTriggers = AvailableTriggers.Daily | AvailableTriggers.Weekly,
 					TaskName = "Test",
 					TaskNameIsEditable = false,
 					ShowActionRunButton = true,

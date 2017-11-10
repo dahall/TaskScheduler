@@ -16,6 +16,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			InitializeComponent();
 		}
 
+		/// <summary>Gets or sets the available triggers.</summary>
+		/// <value>The available triggers.</value>
+		[DefaultValue(typeof(AvailableTriggers), nameof(AvailableTriggers.AllTriggers)), Category("Appearance")]
+		public AvailableTriggers AvailableTriggers { get; set; } = AvailableTriggers.AllTriggers;
+
 		[DefaultValue(false), Category("Appearance")]
 		public bool UseModernUI
 		{
@@ -29,6 +34,13 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				RefreshState();
 			}
 		}
+
+		private Trigger SelectedTrigger
+		{
+			get { var idx = SelectedIndex; return idx == -1 ? null : triggerListView.Items[idx].Tag as Trigger; }
+		}
+
+		private bool SelectedTriggerIsAvailable => SelectedIndex != -1 && AvailableTriggers.IsFlagSet(TypeToAv(SelectedTrigger.TriggerType));
 
 		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 
@@ -72,6 +84,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			RefreshState();
 		}
 
+		private static AvailableTriggers TypeToAv(TaskTriggerType triggerType) => (AvailableTriggers)Enum.Parse(typeof(AvailableTriggers), triggerType.ToString());
+
 		private void AddTriggerToList(Trigger tr, int index)
 		{
 			var imgIdx = (int)tr.TriggerType;
@@ -91,6 +105,17 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			if (i < 0) return;
 			editor.TaskDefinition.Triggers[i].Enabled = !editor.TaskDefinition.Triggers[i].Enabled;
 			RefreshState();
+		}
+
+		private TriggerEditDialog GetTriggerEditDialog(string caption, Trigger t = null)
+		{
+			return new TriggerEditDialog(t, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2)
+			{
+				AvailableTriggers = AvailableTriggers,
+				TargetServer = editor.TaskService.TargetServer,
+				Text = caption,
+				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine
+			};
 		}
 
 		private void InitializeModernImages()
@@ -113,10 +138,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void SetTriggerButtonState()
 		{
+			var editable = editor.Editable;
 			var idx = SelectedIndex;
-			triggerNewButton.Enabled = newTriggerToolStripMenuItem.Visible = editor.Editable;
-			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editor.Editable && idx > -1;
-			if (idx >= 0)
+			triggerNewButton.Enabled = newTriggerToolStripMenuItem.Visible = editable;
+			var available = SelectedTriggerIsAvailable;
+			triggerEditButton.Enabled = editTriggerToolStripMenuItem.Visible = triggerDeleteButton.Enabled = deleteTriggerToolStripMenuItem.Visible = editable && idx > -1 && available;
+			if (idx >= 0 && available)
 				enableToolStripMenuItem.Visible = !(disableToolStripMenuItem.Visible = editor.TaskDefinition.Triggers[idx].Enabled);
 			else
 				enableToolStripMenuItem.Visible = disableToolStripMenuItem.Visible = false;
@@ -139,11 +166,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				MessageBox.Show(this, EditorProperties.Resources.Error_CannotEditTrigger, EditorProperties.Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.None);
 				return;
 			}*/
-			using (var dlg = new TriggerEditDialog(editor.TaskDefinition.Triggers[idx], editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
+			using (var dlg = GetTriggerEditDialog(EditorProperties.Resources.TriggerDlgEditCaption, editor.TaskDefinition.Triggers[idx]))
 			{
-				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
-				dlg.TargetServer = editor.TaskService.TargetServer;
-				dlg.Text = EditorProperties.Resources.TriggerDlgEditCaption;
 				if (dlg.ShowDialog() != DialogResult.OK) return;
 				triggerListView.Items.RemoveAt(idx);
 				editor.TaskDefinition.Triggers[idx] = dlg.Trigger;
@@ -154,7 +178,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void triggerListView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			if (editor.Editable)
+			if (editor.Editable && SelectedTriggerIsAvailable)
 				triggerEditButton_Click(sender, EventArgs.Empty);
 		}
 
@@ -173,11 +197,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void triggerNewButton_Click(object sender, EventArgs e)
 		{
-			using (var dlg = new TriggerEditDialog(null, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2))
+			using (var dlg = GetTriggerEditDialog(EditorProperties.Resources.TriggerDlgNewCaption))
 			{
-				dlg.UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine;
-				dlg.TargetServer = editor.TaskService.TargetServer;
-				dlg.Text = EditorProperties.Resources.TriggerDlgNewCaption;
 				if (dlg.ShowDialog() != DialogResult.OK) return;
 				editor.TaskDefinition.Triggers.Add(dlg.Trigger);
 				AddTriggerToList(dlg.Trigger, -1);

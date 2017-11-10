@@ -16,6 +16,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			InitializeComponent();
 		}
 
+		/// <summary>Gets or sets the available actions.</summary>
+		/// <value>The available actions.</value>
+		[DefaultValue(typeof(AvailableActions), nameof(AvailableActions.AllActions)), Category("Appearance")]
+		public AvailableActions AvailableActions { get; set; } = AvailableActions.AllActions;
+
 		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
 		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Appearance"), Description("Determines whether a button is shown when editing an action that allows user to execute the current action.")]
@@ -41,6 +46,13 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				RefreshState();
 			}
 		}
+
+		private Action SelectedAction
+		{
+			get { var idx = SelectedIndex; return idx == -1 ? null : actionListView.Items[idx].Tag as Action; }
+		}
+
+		private bool SelectedActionIsAvailable => SelectedIndex != -1 && AvailableActions.IsFlagSet(TypeToAv(SelectedAction.ActionType));
 
 		private int SelectedIndex => actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
 
@@ -86,6 +98,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			RefreshState();
 		}
 
+		private static AvailableActions TypeToAv(TaskActionType actionType) => (AvailableActions)Enum.Parse(typeof(AvailableActions), actionType.ToString());
+
 		private void actionDeleteButton_Click(object sender, EventArgs e)
 		{
 			var idx = SelectedIndex;
@@ -116,7 +130,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			var idx = SelectedIndex;
 			if (idx < 0) return;
-			using (var dlg = GetActionEditDialog(Resources.ActionDlgEditCaption, actionListView.Items[idx].Tag as Action))
+			using (var dlg = GetActionEditDialog(Resources.ActionDlgEditCaption, SelectedAction))
 			{
 				if (dlg.ShowDialog() != DialogResult.OK || dlg.Action == null) return;
 				actionListView.Items.RemoveAt(idx);
@@ -128,7 +142,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void actionListView_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			if (editor.Editable)
+			if (editor.Editable && SelectedActionIsAvailable)
 				actionEditButton_Click(sender, EventArgs.Empty);
 		}
 
@@ -201,6 +215,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				Action = a,
 				AllowRun = ShowActionRunButton,
+				AvailableActions = AvailableActions,
 				SupportV1Only = SetActionEditDialogV1,
 				Text = caption,
 				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine
@@ -226,7 +241,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				actionDownButton.Enabled = moveDownToolStripMenuItem.Visible = selectedIndex > -1 && selectedIndex < actionListView.Items.Count - 1;
 			}
 			actionNewButton.Enabled = newActionToolStripMenuItem.Visible = editable && (editor.IsV2 || actionListView.Items.Count == 0 || editor.TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version1));
-			actionEditButton.Enabled = actionDeleteButton.Enabled = editActionToolStripMenuItem.Visible = deleteActionToolStripMenuItem.Visible = editable && selectedIndex > -1;
+			actionEditButton.Enabled = actionDeleteButton.Enabled = editActionToolStripMenuItem.Visible = deleteActionToolStripMenuItem.Visible = editable && SelectedActionIsAvailable;
 		}
 	}
 }

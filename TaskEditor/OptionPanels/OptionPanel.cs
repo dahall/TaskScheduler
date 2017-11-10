@@ -10,7 +10,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 #endif
 	partial class OptionPanel : UserControl
 	{
-		protected bool onAssignment = false;
+		protected bool onAssignment;
 		protected TaskOptionsEditor parent;
 
 		public OptionPanel()
@@ -24,8 +24,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), EditorBrowsable(EditorBrowsableState.Never)]
 		public override string Text
 		{
-			get { return base.Text; }
-			set { base.Text = value; }
+			get => base.Text;
+			set => base.Text = value;
 		}
 
 		[Browsable(true), DefaultValue((string)null), Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]

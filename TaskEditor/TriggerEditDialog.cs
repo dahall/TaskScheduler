@@ -23,7 +23,6 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private readonly bool showCustom;
-		private readonly List<ListControlItem> triggerComboItems = new List<ListControlItem>(12);
 		private AvailableTriggers availableTriggers = AvailableTriggers.AllTriggers;
 		private DateTime initialStartBoundary = DateTime.MinValue;
 		private bool isV2;
@@ -52,6 +51,7 @@ namespace Microsoft.Win32.TaskScheduler
 			durationSpan.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
 			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
 			stopIfRunsSpan.Items.AddRange(new[] { TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
+			ResetCombo();
 
 			if (trigger != null)
 				Trigger = trigger;
@@ -99,6 +99,8 @@ namespace Microsoft.Win32.TaskScheduler
 			Custom = 120,
 		}
 
+		/// <summary>Gets or sets the available triggers.</summary>
+		/// <value>The available triggers.</value>
 		[DefaultValue(typeof(AvailableTriggers), nameof(AvailableTriggers.AllTriggers)), Category("Appearance")]
 		public AvailableTriggers AvailableTriggers
 		{
@@ -482,9 +484,11 @@ namespace Microsoft.Win32.TaskScheduler
 			// Setup list of triggers available
 			var curItem = triggerTypeCombo.SelectedItem as TextValueItem<TaskTriggerDisplayType>;
 			triggerTypeCombo.BeginUpdate();
-			triggerTypeCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "TriggerType", InvalidTriggers);
+			var invalidTriggers = InvalidTriggers;
+			triggerTypeCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "TriggerType", invalidTriggers);
 			triggerTypeCombo.EndUpdate();
-			TriggerView = curItem != null && !InvalidTriggers.Contains(curItem.Value) ? curItem.Value : TriggerView;
+			if (triggerTypeCombo.Items.Count == 0) throw new InvalidOperationException("There are no trigger types allowed.");
+			TriggerView = curItem != null && !invalidTriggers.Contains(curItem.Value) ? curItem.Value : TriggerView;
 		}
 
 		private void ResetControls()
@@ -597,7 +601,6 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 
-			if (newTrigger != null && newTrigger.TriggerType == trigger.TriggerType) return;
 			if (newTrigger != null && !onAssignment)
 			{
 				if (trigger != null)
@@ -609,7 +612,8 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					newTrigger.StartBoundary = initialStartBoundary;
-				Trigger = newTrigger;
+				if (trigger == null || newTrigger.TriggerType != trigger.TriggerType)
+					Trigger = newTrigger;
 			}
 		}
 	}
