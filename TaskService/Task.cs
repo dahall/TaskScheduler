@@ -163,6 +163,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
+	[DefaultValue(CreateOrUpdate)]
 	public enum TaskCreation
 	{
 		/// <summary>The Task Scheduler service registers the task as a new task.</summary>
@@ -206,6 +207,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Defines how the Task Scheduler handles existing instances of the task when it starts a new instance of the task.</summary>
+	[DefaultValue(IgnoreNew)]
 	public enum TaskInstancesPolicy
 	{
 		/// <summary>Starts new instance while an existing instance is running.</summary>
@@ -222,6 +224,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Defines what logon technique is required to run a task.</summary>
+	[DefaultValue(S4U)]
 	public enum TaskLogonType
 	{
 		/// <summary>The logon method is not specified. Used for non-NT credentials.</summary>

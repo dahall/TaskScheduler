@@ -66,6 +66,7 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Defines the type of triggers that can be used by tasks.</summary>
+	[DefaultValue(Time)]
 	public enum TaskTriggerType
 	{
 		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>

@@ -10,23 +10,18 @@ using System.Xml.Serialization;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// Defines the type of actions a task can perform.
-	/// </summary>
-	/// <remarks>
-	/// The action type is defined when the action is created and cannot be changed later. See <see cref="ActionCollection.AddNew"/>.
-	/// </remarks>
+	/// <summary>Defines the type of actions a task can perform.</summary>
+	/// <remarks>The action type is defined when the action is created and cannot be changed later. See <see cref="ActionCollection.AddNew"/>.</remarks>
 	public enum TaskActionType
 	{
-		/// <summary>This action fires a handler.</summary>
-		ComHandler = 5,
-
 		/// <summary>
-		/// This action performs a command-line operation. For example, the action can run a script,
-		/// launch an executable, or, if the name of a document is provided, find its associated
-		/// application and launch the application with the document.
+		/// This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is
+		/// provided, find its associated application and launch the application with the document.
 		/// </summary>
 		Execute = 0,
+
+		/// <summary>This action fires a handler.</summary>
+		ComHandler = 5,
 
 		/// <summary>This action sends and e-mail.</summary>
 		SendEmail = 6,
