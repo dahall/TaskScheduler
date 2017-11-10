@@ -1,10 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Win32.TaskScheduler.UIComponents;
+
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
+	[Flags]
+	public enum AvailableTriggers
+	{
+		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
+		Event = 1 << 0,
+		/// <summary>Triggers the task at a specific time of day.</summary>
+		Time = 1 << 1,
+		/// <summary>Triggers the task on a daily schedule.</summary>
+		Daily = 1 << 2,
+		/// <summary>Triggers the task on a weekly schedule.</summary>
+		Weekly = 1 << 3,
+		/// <summary>Triggers the task on a monthly schedule.</summary>
+		Monthly = 1 << 4,
+		/// <summary>Triggers the task on a monthly day-of-week schedule.</summary>
+		MonthlyDOW = 1 << 5,
+		/// <summary>Triggers the task when the computer goes into an idle state.</summary>
+		Idle = 1 << 6,
+		/// <summary>Triggers the task when the task is registered. Version 1.2 only.</summary>
+		Registration = 1 << 7,
+		/// <summary>Triggers the task when the computer boots.</summary>
+		Boot = 1 << 8,
+		/// <summary>Triggers the task when a specific user logs on.</summary>
+		Logon = 1 << 9,
+		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
+		SessionStateChange = 1 << 11,
+		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
+		Custom = 1 << 12,
+		/// <summary>All triggers are available.</summary>
+		AllTriggers = 0b1_1011_1111_1111,
+	}
+
 	/// <summary>An editor that handles all Task triggers.</summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Dialog allowing the editing of a task trigger.")]
 	[Designer("System.ComponentModel.Design.ComponentDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
@@ -17,12 +53,13 @@ namespace Microsoft.Win32.TaskScheduler
 		DialogBase
 #endif
 	{
+		private readonly bool showCustom;
+		private readonly List<ListControlItem> triggerComboItems = new List<ListControlItem>(12);
+		private AvailableTriggers availableTriggers = AvailableTriggers.AllTriggers;
 		private DateTime initialStartBoundary = DateTime.MinValue;
 		private bool isV2;
 		private bool onAssignment;
-		private readonly bool showCustom;
 		private Trigger trigger;
-		private readonly List<ListControlItem> triggerComboItems = new List<ListControlItem>(12);
 		private bool useUnifiedSchedulingEngine;
 
 		/// <summary>Initializes a new instance of the <see cref="TriggerEditDialog"/> class.</summary>
@@ -33,12 +70,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Initializes a new instance of the <see cref="TriggerEditDialog"/> class.</summary>
 		/// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
 		/// <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
-		public TriggerEditDialog(Trigger trigger, bool supportV1Only)
+		public TriggerEditDialog(Trigger trigger, bool supportV1Only = false)
 		{
 			InitializeComponent();
 
 			showCustom = trigger != null && trigger.TriggerType == TaskTriggerType.Custom;
-			SupportV1Only = supportV1Only;
+			isV2 = !supportV1Only;
 
 			// Populate combo boxes
 			delaySpan.Items.AddRange(new[] { TimeSpan2.FromSeconds(30), TimeSpan2.FromMinutes(1), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(8), TimeSpan2.FromDays(1) });
@@ -93,6 +130,19 @@ namespace Microsoft.Win32.TaskScheduler
 			Custom = 120,
 		}
 
+		[DefaultValue(typeof(AvailableTriggers), nameof(AvailableTriggers.AllTriggers)), Category("Appearance")]
+		public AvailableTriggers AvailableTriggers
+		{
+			get => availableTriggers;
+			set
+			{
+				if (availableTriggers == value) return;
+				availableTriggers = value;
+				calendarTriggerUI1.AvailableTriggers = value;
+				ResetCombo();
+			}
+		}
+
 		/// <summary>Gets or sets a value indicating whether this editor only supports V1 triggers.</summary>
 		/// <value><c>true</c> if supports V1 only; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior")]
@@ -101,6 +151,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get => !isV2;
 			set
 			{
+				if (isV2 != value) return;
 				isV2 = !value;
 				ResetControls();
 			}
@@ -123,49 +174,31 @@ namespace Microsoft.Win32.TaskScheduler
 				onAssignment = true;
 				trigger = value is CustomTrigger ? value : (Trigger)value.Clone();
 				initialStartBoundary = trigger.StartBoundary;
-				switch (trigger.TriggerType)
+				var view = DisplayForType(trigger.TriggerType);
+				if (view == TaskTriggerDisplayType.SessionConnect)
 				{
-					case TaskTriggerType.Time:
-					case TaskTriggerType.Daily:
-					case TaskTriggerType.Weekly:
-					case TaskTriggerType.Monthly:
-					case TaskTriggerType.MonthlyDOW:
-						TriggerView = TaskTriggerDisplayType.Schedule;
+					var state = (int)view - 1 + (int)((SessionStateChangeTrigger)trigger).StateChange;
+					if (state == 113 || state == 114) state -= 2;
+					view = (TaskTriggerDisplayType)state;
+				}
+				TriggerView = view;
+				switch (view)
+				{
+					case TaskTriggerDisplayType.Schedule:
 						calendarTriggerUI1.Trigger = trigger;
 						break;
-
-					case TaskTriggerType.Logon:
-						TriggerView = TaskTriggerDisplayType.Logon;
-						break;
-
-					case TaskTriggerType.Boot:
-						TriggerView = TaskTriggerDisplayType.Boot;
-						break;
-
-					case TaskTriggerType.Idle:
-						TriggerView = TaskTriggerDisplayType.Idle;
-						break;
-
-					case TaskTriggerType.Event:
-						TriggerView = TaskTriggerDisplayType.Event;
+					case TaskTriggerDisplayType.Event:
 						eventTriggerUI1.TargetServer = TargetServer;
 						eventTriggerUI1.Trigger = trigger;
 						break;
-
-					case TaskTriggerType.Registration:
-						TriggerView = TaskTriggerDisplayType.Registration;
-						break;
-
-					case TaskTriggerType.SessionStateChange:
-						var state = 110 + (int)((SessionStateChangeTrigger)trigger).StateChange;
-						if (state == 113 || state == 114) state -= 2;
-						TriggerView = (TaskTriggerDisplayType)state;
+					case TaskTriggerDisplayType.SessionConnect:
+					case TaskTriggerDisplayType.SessionDisconnect:
+					case TaskTriggerDisplayType.WorkstationLock:
+					case TaskTriggerDisplayType.WorkstationUnlock:
 						logonRemoteRadio.Checked = ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteConnect || ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteDisconnect;
 						logonLocalRadio.Checked = !logonRemoteRadio.Checked;
 						break;
-
-					case TaskTriggerType.Custom:
-						TriggerView = TaskTriggerDisplayType.Custom;
+					case TaskTriggerDisplayType.Custom:
 						customNameText.Text = ((CustomTrigger)trigger).Name;
 						customPropsListView.Items.Clear();
 						foreach (var nvpair in ((CustomTrigger)trigger).Properties)
@@ -244,15 +277,83 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private IList<TaskTriggerDisplayType> InvalidTriggers
+		{
+			get
+			{
+				var excl = new List<TaskTriggerDisplayType>();
+				// Remove all non-V1 triggers if set
+				if (!isV2)
+					excl.AddRange(new[] { TaskTriggerDisplayType.Event, TaskTriggerDisplayType.Registration, TaskTriggerDisplayType.SessionConnect, TaskTriggerDisplayType.SessionDisconnect, TaskTriggerDisplayType.WorkstationLock, TaskTriggerDisplayType.WorkstationUnlock });
+				// Remove custom trigger if not shown or v1
+				if (!showCustom || !isV2)
+					excl.Add(TaskTriggerDisplayType.Custom);
+				// Get unavailable settings and convert to unavailable views
+				foreach (var t in (AvailableTriggers.AllTriggers & ~availableTriggers).GetFlags().Select(AvToType))
+				{
+					var d = DisplayForType(t);
+					// Add all types of sessions
+					if (t == TaskTriggerType.SessionStateChange)
+						foreach (var ds in new[] { TaskTriggerDisplayType.SessionConnect, TaskTriggerDisplayType.SessionDisconnect, TaskTriggerDisplayType.WorkstationLock, TaskTriggerDisplayType.WorkstationUnlock })
+							AddIfMissing(excl, ds);
+					// Ignore schedule triggers for now
+					else if (d != TaskTriggerDisplayType.Schedule)
+						AddIfMissing(excl, d);
+				}
+				// All schedule triggers must be unavailable before hiding view
+				if ((availableTriggers & (AvailableTriggers.Time | AvailableTriggers.Daily | AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW)) == 0)
+					AddIfMissing(excl, TaskTriggerDisplayType.Schedule);
+				return excl;
+
+				void AddIfMissing<T>(IList<T> l, T a) { if (!l.Contains(a)) l.Add(a); }
+			}
+		}
+
+		private TaskTriggerDisplayType? SelectedComboValue => (triggerTypeCombo.SelectedItem as TextValueItem<TaskTriggerDisplayType>)?.Value;
+
 		private TaskTriggerDisplayType TriggerView
 		{
-			get => triggerTypeCombo.SelectedValue == null
-				? TaskTriggerDisplayType.Schedule
-				: (TaskTriggerDisplayType) Convert.ToInt32(triggerTypeCombo.SelectedValue);
+			get
+			{
+				var def = DisplayForType(AvToType(availableTriggers.GetFlags().First()));
+				return triggerTypeCombo.SelectedIndex == -1 ? def : SelectedComboValue ?? def;
+			}
 			set
 			{
-				if (triggerTypeCombo.SelectedIndex == -1 || Convert.ToInt64(triggerTypeCombo.SelectedValue) != (long)value)
-					triggerTypeCombo.SelectedValue = (long)value;
+				if (InvalidTriggers.Contains(value)) throw new ArgumentException("Type of Trigger is not permitted.", nameof(Trigger));
+				if (triggerTypeCombo.SelectedIndex == -1 || SelectedComboValue != value)
+					triggerTypeCombo.SelectedIndex = triggerTypeCombo.IndexOfItemValue(value);
+			}
+		}
+
+		private static TaskTriggerType AvToType(AvailableTriggers av) => (TaskTriggerType)(int)Math.Log((int)av, 2);
+
+		private static TaskTriggerDisplayType DisplayForType(TaskTriggerType triggerType)
+		{
+			switch (triggerType)
+			{
+				case TaskTriggerType.Time:
+				case TaskTriggerType.Daily:
+				case TaskTriggerType.Weekly:
+				case TaskTriggerType.Monthly:
+				case TaskTriggerType.MonthlyDOW:
+					return TaskTriggerDisplayType.Schedule;
+				case TaskTriggerType.Logon:
+					return TaskTriggerDisplayType.Logon;
+				case TaskTriggerType.Boot:
+					return TaskTriggerDisplayType.Boot;
+				case TaskTriggerType.Idle:
+					return TaskTriggerDisplayType.Idle;
+				case TaskTriggerType.Event:
+					return TaskTriggerDisplayType.Event;
+				case TaskTriggerType.Registration:
+					return TaskTriggerDisplayType.Registration;
+				case TaskTriggerType.SessionStateChange:
+					return TaskTriggerDisplayType.SessionConnect;
+				case TaskTriggerType.Custom:
+					return TaskTriggerDisplayType.Custom;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(triggerType), triggerType, null);
 			}
 		}
 
@@ -407,21 +508,19 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void ResetControls()
+		private void ResetCombo()
 		{
 			// Setup list of triggers available
-			triggerComboItems.Clear();
-			ComboBoxExtension.InitializeFromEnum(triggerComboItems, typeof(TaskTriggerDisplayType), EditorProperties.Resources.ResourceManager, "TriggerType", out long _);
-			if (!isV2)
-				triggerComboItems.RemoveRange(4, 7);
-			if (!showCustom)
-				triggerComboItems.RemoveAt(triggerComboItems.Count - 1);
+			var curItem = triggerTypeCombo.SelectedItem as TextValueItem<TaskTriggerDisplayType>;
 			triggerTypeCombo.BeginUpdate();
-			triggerTypeCombo.DataSource = null;
-			triggerTypeCombo.DisplayMember = "Text";
-			triggerTypeCombo.ValueMember = "Value";
-			triggerTypeCombo.DataSource = triggerComboItems;
+			triggerTypeCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "TriggerType", InvalidTriggers);
 			triggerTypeCombo.EndUpdate();
+			TriggerView = curItem != null && !InvalidTriggers.Contains(curItem.Value) ? curItem.Value : TriggerView;
+		}
+
+		private void ResetControls()
+		{
+			ResetCombo();
 
 			// Enable/disable version specific features
 			calendarTriggerUI1.IsV2 = isV2;
@@ -474,7 +573,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void triggerTypeCombo_SelectedValueChanged(object sender, EventArgs e)
 		{
-			if (triggerTypeCombo.SelectedValue == null)
+			if (triggerTypeCombo.SelectedIndex == -1)
 				return;
 
 			Trigger newTrigger = null;
@@ -483,7 +582,8 @@ namespace Microsoft.Win32.TaskScheduler
 				//case TaskTriggerDisplayType.Schedule:
 				default:
 					settingsTabControl.SelectedTab = scheduleTab;
-					if (!onAssignment) newTrigger = new TimeTrigger();
+					if (!onAssignment)
+						newTrigger = Trigger.CreateTrigger(AvToType((availableTriggers & CalendarTriggerUI.calendarTriggers).GetFlags().First()));
 					break;
 
 				case TaskTriggerDisplayType.Logon:
@@ -528,6 +628,7 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 
+			if (newTrigger != null && newTrigger.TriggerType == trigger.TriggerType) return;
 			if (newTrigger != null && !onAssignment)
 			{
 				if (trigger != null)
