@@ -302,16 +302,37 @@ namespace TestTaskService
 
 				/*using (var ad = new ActionEditDialog { AvailableActions = AvailableActions.Execute | AvailableActions.ComHandler | AvailableActions.ShowMessage })
 				{
+					// Test unavailable action
 					try { ad.Action = new EmailAction(); } catch { output.Write("ActionEditDialog: Successfully caught expected exception."); }
+					// Test available action
 					ad.Action = new ComHandlerAction() { ClassId = Guid.NewGuid() };
 					ad.ShowDialog();
+					// Add available and test
 					ad.AvailableActions |= AvailableActions.SendEmail;
 					ad.Action = new EmailAction();
 					ad.ShowDialog();
+					// Make current type unavailable and test
 					ad.AvailableActions = AvailableActions.Execute | AvailableActions.ComHandler;
 					ad.ShowDialog();
 					return;
 				}*/
+
+				using (var tdlg = new TriggerEditDialog { AvailableTriggers = (AvailableTriggers.AllTriggers & ~AvailableTriggers.Boot) })
+				{
+					// Test unavailable trigger
+					try { tdlg.Trigger = new BootTrigger(); } catch { output.Write("TriggerEditDialog: Successfully caught expected exception."); }
+					// Test available trigger
+					tdlg.Trigger = new MonthlyTrigger();
+					tdlg.ShowDialog();
+					// Add available and test
+					tdlg.AvailableTriggers |= AvailableTriggers.Boot;
+					tdlg.Trigger = new BootTrigger();
+					tdlg.ShowDialog();
+					// Make current type unavailable and test
+					tdlg.AvailableTriggers = AvailableTriggers.Monthly | AvailableTriggers.SessionStateChange;
+					tdlg.ShowDialog();
+					return;
+				}
 
 				// Register then show task again
 				editorForm = new TaskEditDialog(ts, td, true, true)
