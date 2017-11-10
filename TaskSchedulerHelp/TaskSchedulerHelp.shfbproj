@@ -113,7 +113,7 @@
 <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
 <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" /></NamespaceSummaries>
-    <HelpFileVersion>2.6.6</HelpFileVersion>
+    <HelpFileVersion>2.7.0</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
