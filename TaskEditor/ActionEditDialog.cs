@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Forms;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
@@ -206,9 +205,11 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!isV2 || useUnifiedSchedulingEngine || !availableActions.IsFlagSet(AvailableActions.ShowMessage)) excl.Add(TaskActionType.ShowMessage);
 			if (excl.Count == 4) throw new InvalidOperationException("No actions are available to display given the current settings.");
 			if (excl.Count == 0) excl = null;
+			actionsCombo.BeginUpdate();
 			actionsCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "ActionType", excl);
 			int idx;
-			actionsCombo.SelectedIndex = curItem != null && -1 != (idx = actionsCombo.Items.IndexOf(curItem)) ? idx : 0;
+			actionsCombo.SelectedIndex = curItem != null && -1 != (idx = actionsCombo.IndexOfItemValue(curItem.Value)) ? idx : 0;
+			actionsCombo.EndUpdate();
 			runActionBtn.Visible = AllowRun;
 		}
 

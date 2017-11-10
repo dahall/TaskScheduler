@@ -37,16 +37,12 @@ namespace System.Windows.Forms
 
 		public static void InitializeFromEnum<T>(this ComboBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
 		{
-			ctrl.BeginUpdate();
 			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
-			ctrl.EndUpdate();
 		}
 
 		public static void InitializeFromEnum<T>(this ListBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
 		{
-			ctrl.BeginUpdate();
 			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
-			ctrl.EndUpdate();
 		}
 
 		private static int IndexOfItemValue<T>(IList items, T value)
