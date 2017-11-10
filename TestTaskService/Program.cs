@@ -300,6 +300,19 @@ namespace TestTaskService
 					//WriteXml(t);
 				}
 
+				/*using (var ad = new ActionEditDialog { AvailableActions = AvailableActions.Execute | AvailableActions.ComHandler | AvailableActions.ShowMessage })
+				{
+					try { ad.Action = new EmailAction(); } catch { output.Write("ActionEditDialog: Successfully caught expected exception."); }
+					ad.Action = new ComHandlerAction() { ClassId = Guid.NewGuid() };
+					ad.ShowDialog();
+					ad.AvailableActions |= AvailableActions.SendEmail;
+					ad.Action = new EmailAction();
+					ad.ShowDialog();
+					ad.AvailableActions = AvailableActions.Execute | AvailableActions.ComHandler;
+					ad.ShowDialog();
+					return;
+				}*/
+
 				// Register then show task again
 				editorForm = new TaskEditDialog(ts, td, true, true)
 				{

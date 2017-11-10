@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -71,7 +75,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				onAssignment = true;
 				action = value;
-				actionsCombo.SelectedIndex = actionsCombo.Items.IndexOf((long)(action?.ActionType ?? TaskActionType.Execute));
+				actionsCombo.SelectedIndex = actionsCombo.IndexOfItemValue(action?.ActionType ?? TaskActionType.Execute);
+				if (actionsCombo.SelectedIndex == -1)
+					throw new ArgumentException("Type of Action is not permitted.", nameof(Action));
 				actionIdText.Text = action?.Id;
 				curHandler.Action = action;
 				onAssignment = false;
@@ -148,7 +154,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void actionsCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			switch (GetComboItemActionType(actionsCombo.SelectedItem))
+			var selVal = (actionsCombo.SelectedItem as TextValueItem<TaskActionType>)?.Value;
+			switch (selVal)
 			{
 				case TaskActionType.ComHandler:
 					settingsTabs.SelectedTab = comTab;
@@ -180,8 +187,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void DetermineIfCanValidate() { okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate; }
 
-		private TaskActionType GetComboItemActionType(object comboItem) => (TaskActionType)Convert.ToInt32(((ListControlItem)comboItem).Value);
-
 		private void keyField_TextChanged(object sender, EventArgs e) { DetermineIfCanValidate(); }
 
 		private void okBtn_Click(object sender, EventArgs e)
@@ -193,42 +198,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetCombo()
 		{
-			var curType = actionsCombo.SelectedIndex == -1 ? -1 : (int)GetComboItemActionType(actionsCombo.SelectedItem);
-			actionsCombo.BeginUpdate();
-			actionsCombo.Items.Clear();
-			ComboBoxExtension.InitializeFromEnum(actionsCombo.Items, typeof(TaskActionType), EditorProperties.Resources.ResourceManager, "ActionType", out _);
-			for (var i = actionsCombo.Items.Count - 1; i >= 0; i--)
-			{
-				bool remove;
-				switch (GetComboItemActionType(actionsCombo.Items[i]))
-				{
-					case TaskActionType.ComHandler:
-						remove = !isV2 || (availableActions & AvailableActions.ComHandler) == 0;
-						break;
-
-					case TaskActionType.Execute:
-						remove = (availableActions & AvailableActions.Execute) == 0;
-						break;
-
-					case TaskActionType.SendEmail:
-						remove = !isV2 || useUnifiedSchedulingEngine || (availableActions & AvailableActions.SendEmail) == 0;
-						break;
-
-					case TaskActionType.ShowMessage:
-						remove = !isV2 || useUnifiedSchedulingEngine || (availableActions & AvailableActions.ShowMessage) == 0;
-						break;
-
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
-				if (remove) actionsCombo.Items.RemoveAt(i);
-			}
-			if (actionsCombo.Items.Count == 0) throw new InvalidOperationException("No actions are available to display given the current settings.");
-			if (curType > -1)
-				curType = actionsCombo.Items.IndexOf((long)curType);
-			if (curType == -1) curType = 0;
-			actionsCombo.SelectedIndex = curType;
-			actionsCombo.EndUpdate();
+			var curItem = actionsCombo.SelectedItem as TextValueItem<TaskActionType>;
+			var excl = new List<TaskActionType>();
+			if (!isV2 || !availableActions.IsFlagSet(AvailableActions.ComHandler)) excl.Add(TaskActionType.ComHandler);
+			if (!availableActions.IsFlagSet(AvailableActions.Execute)) excl.Add(TaskActionType.Execute);
+			if (!isV2 || useUnifiedSchedulingEngine || !availableActions.IsFlagSet(AvailableActions.SendEmail)) excl.Add(TaskActionType.SendEmail);
+			if (!isV2 || useUnifiedSchedulingEngine || !availableActions.IsFlagSet(AvailableActions.ShowMessage)) excl.Add(TaskActionType.ShowMessage);
+			if (excl.Count == 4) throw new InvalidOperationException("No actions are available to display given the current settings.");
+			if (excl.Count == 0) excl = null;
+			actionsCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "ActionType", excl);
+			int idx;
+			actionsCombo.SelectedIndex = curItem != null && -1 != (idx = actionsCombo.Items.IndexOf(curItem)) ? idx : 0;
 			runActionBtn.Visible = AllowRun;
 		}
 

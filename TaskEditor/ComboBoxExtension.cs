@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using Microsoft.Win32.TaskScheduler;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
-using Microsoft.Win32.TaskScheduler;
 
 namespace System.Windows.Forms
 {
 	internal static class ComboBoxExtension
 	{
+		public static int IndexOfItemValue<T>(this ComboBox ctrl, T value) => IndexOfItemValue<T>(ctrl.Items, value);
+
+		public static int IndexOfItemValue<T>(this ListBox ctrl, T value) => IndexOfItemValue<T>(ctrl.Items, value);
+
 		public static void InitializeFromEnum(IList list, Type enumType, ResourceManager mgr, string prefix, out long allVal, string[] exclude = null)
 		{
 			list.Clear();
@@ -31,7 +35,28 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static void InitializeFromEnum<T>(IList list, ResourceManager mgr, string prefix, out long allVal, Func<string, T, object> creator = null, string[] exclude = null)
+		public static void InitializeFromEnum<T>(this ComboBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
+		{
+			ctrl.BeginUpdate();
+			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
+			ctrl.EndUpdate();
+		}
+
+		public static void InitializeFromEnum<T>(this ListBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
+		{
+			ctrl.BeginUpdate();
+			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
+			ctrl.EndUpdate();
+		}
+
+		private static int IndexOfItemValue<T>(IList items, T value)
+		{
+			for (var index = 0; index < items.Count; index++)
+				if (items[index] is TextValueItem<T> i && Equals(i.Value, value)) return index;
+			return -1;
+		}
+
+		private static void InitializeFromEnum<T>(IList list, ResourceManager mgr, string prefix, out long allVal, Func<string, T, object> creator = null, string[] exclude = null)
 		{
 			var enumType = typeof(T);
 			if (!enumType.IsEnum)
@@ -55,20 +80,6 @@ namespace System.Windows.Forms
 				//text = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(text);
 				list.Add(creator(text, (T)vals.GetValue(i)));
 			}
-		}
-
-		public static void InitializeFromEnum<T>(this ComboBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
-		{
-			ctrl.BeginUpdate();
-			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
-			ctrl.EndUpdate();
-		}
-
-		public static void InitializeFromEnum<T>(this ListBox ctrl, ResourceManager mgr, out long allVal, string prefix = null, IEnumerable<T> exclude = null)
-		{
-			ctrl.BeginUpdate();
-			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
-			ctrl.EndUpdate();
 		}
 	}
 }
