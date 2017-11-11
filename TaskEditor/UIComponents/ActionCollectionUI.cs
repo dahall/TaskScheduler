@@ -216,6 +216,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				Action = a,
 				AllowRun = ShowActionRunButton,
 				AvailableActions = AvailableActions,
+				StartPosition = FormStartPosition.CenterParent,
 				SupportV1Only = SetActionEditDialogV1,
 				Text = caption,
 				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine

@@ -1083,11 +1083,7 @@ namespace Microsoft.Win32.TaskScheduler
 			td.Actions.Add(action);
 			if (openDlgAfterCheck.Checked)
 			{
-				TaskEditDialog dlg = new TaskEditDialog();
-				dlg.Editable = true;
-				dlg.Initialize(TaskService, td);
-				dlg.RegisterTaskOnAccept = false;
-				dlg.TaskName = TaskName;
+				var dlg = new TaskEditDialog(TaskService, td, true, false, TaskName) { StartPosition = FormStartPosition.CenterParent };
 				if (dlg.ShowDialog(ParentForm) == DialogResult.OK)
 					td = dlg.TaskDefinition;
 			}

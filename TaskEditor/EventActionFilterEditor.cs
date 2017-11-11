@@ -185,7 +185,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void dataBtn_Click(object sender, EventArgs e)
 		{
-			using (var dlg = new EventActionFilterDataEditor())
+			using (var dlg = new EventActionFilterDataEditor { StartPosition = FormStartPosition.CenterParent })
 			{
 				dlg.DataItems = new Dictionary<string, string>(ql.Query.Data);
 				if (dlg.ShowDialog(this) == DialogResult.OK)
@@ -378,7 +378,7 @@ namespace Microsoft.Win32.TaskScheduler
 				var isInserted = logTimeCombo.Items.Count == 8 && logTimeCombo.SelectedIndex == 6;
 				if (isCustom)
 				{
-					using (var dlg = new EventActionFilterTimeEditor())
+					using (var dlg = new EventActionFilterTimeEditor { StartPosition = FormStartPosition.CenterParent })
 					{
 						if (ql.Query.Times != null && ql.Query.Times.HasDates) { dlg.FromDateTime = ql.Query.Times.low; dlg.ToDateTime = ql.Query.Times.high; }
 						if (dlg.ShowDialog(this) == DialogResult.OK)

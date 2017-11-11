@@ -189,7 +189,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private void editBtn_Click(object sender, EventArgs e)
 		{
-			using (var dlg = new EventActionFilterEditor(onEventCustomText.Text))
+			using (var dlg = new EventActionFilterEditor(onEventCustomText.Text) { StartPosition = FormStartPosition.CenterParent })
 			{
 				if (dlg.ShowDialog(this) == DialogResult.OK)
 				{

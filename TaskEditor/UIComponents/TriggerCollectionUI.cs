@@ -112,6 +112,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			return new TriggerEditDialog(t, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2)
 			{
 				AvailableTriggers = AvailableTriggers,
+				StartPosition = FormStartPosition.CenterParent,
 				TargetServer = editor.TaskService.TargetServer,
 				Text = caption,
 				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine

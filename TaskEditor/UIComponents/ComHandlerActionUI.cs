@@ -106,7 +106,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			try
 			{
-				var dlg = new ComObjectSelectionDialog {SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04")};
+				var dlg = new ComObjectSelectionDialog {SupportedInterface = new Guid("839D7762-5121-4009-9234-4F0D19394F04"), StartPosition = FormStartPosition.CenterParent};
 				if (dlg.ShowDialog(this) != DialogResult.OK) return;
 				comCLSIDText.ReadOnly = true;
 				ComCLSID = dlg.CLSID;

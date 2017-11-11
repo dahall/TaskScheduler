@@ -345,7 +345,7 @@ namespace Microsoft.Win32.TaskScheduler
 				ListViewItem lvi = vcache[selectedIndex];
 				if (lvi != null)
 				{
-					EventViewerDialog dlg = new EventViewerDialog();
+					EventViewerDialog dlg = new EventViewerDialog { StartPosition = FormStartPosition.CenterParent };
 					dlg.Initialize(lvi.Tag as TaskEvent, null); //TaskService == null ? new TaskEventLog(task.Path) : new TaskEventLog(TaskService.TargetServer, task.Path));
 					dlg.ShowDialog(this);
 				}
@@ -434,7 +434,7 @@ namespace Microsoft.Win32.TaskScheduler
 					var eventId = taskEvent.EventId;
 					td.Triggers.Add(new EventTrigger("Microsoft-Windows-TaskScheduler/Operational", "TaskScheduler", eventId));
 					td.Actions.Add(new ExecAction());
-					using (var wiz = new TaskSchedulerWizard())
+					using (var wiz = new TaskSchedulerWizard { StartPosition = FormStartPosition.CenterParent })
 					{
 						wiz.Initialize(task.TaskService, td);
 						wiz.AvailablePages = TaskSchedulerWizard.AvailableWizardPages.IntroPage | TaskSchedulerWizard.AvailableWizardPages.SecurityPage | TaskSchedulerWizard.AvailableWizardPages.SummaryPage | TaskSchedulerWizard.AvailableWizardPages.TriggerEditPage | TaskSchedulerWizard.AvailableWizardPages.ActionEditPage;
@@ -472,7 +472,7 @@ namespace Microsoft.Win32.TaskScheduler
 			var allHeaders = cols.ConvertAll<string>(cdel).ToArray();
 			var shownHeaders = cols.FindAll(delegate(ColumnHeader c) { return c.Width > 0; });
 			shownHeaders.Sort(delegate(ColumnHeader a, ColumnHeader b) { return a.DisplayIndex.CompareTo(b.DisplayIndex); });
-			using (ListColumnEditor colEd = new ListColumnEditor(allHeaders, allHeaders, shownHeaders.ConvertAll<string>(cdel).ToArray()))
+			using (ListColumnEditor colEd = new ListColumnEditor(allHeaders, allHeaders, shownHeaders.ConvertAll<string>(cdel).ToArray()) { StartPosition = FormStartPosition.CenterParent })
 			{
 				if (colEd.ShowDialog(this) == DialogResult.OK)
 				{
