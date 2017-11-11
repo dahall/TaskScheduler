@@ -4,7 +4,7 @@
 	public class ListControlItem : TextValueItem<object>
 	{
 		/// <summary>Initializes a new instance of the <see cref="ListControlItem"/> class.</summary>
-		/// <param name="value">The value. The text value is the value of the <param name="value"> ToString() method result.</param></param>
+		/// <param name="value">The value. The text value is the value of the <paramref name="value"/> ToString() method result.</param>
 		public ListControlItem(object value) : base(value) { }
 
 		/// <summary>Initializes a new instance of the <see cref="ListControlItem"/> class.</summary>

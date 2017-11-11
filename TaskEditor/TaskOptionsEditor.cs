@@ -69,10 +69,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		/// <param name="editable">If set to <c>true</c> the task will be editable in the dialog.</param>
 		/// <param name="registerOnAccept">If set to <c>true</c> the task will be registered when OK is pressed.</param>
-		public TaskOptionsEditor(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true) : this()
+		/// <param name="taskName">If set, assigns this name to the task's name field.</param>
+		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
+		public TaskOptionsEditor(TaskService service, TaskDefinition td = null, bool editable = true, bool registerOnAccept = true, string taskName = null, string taskFolder = null) : this()
 		{
 			Editable = editable;
-			Initialize(service, td);
+			Initialize(service, td, taskName, taskFolder);
 			RegisterTaskOnAccept = registerOnAccept;
 		}
 
