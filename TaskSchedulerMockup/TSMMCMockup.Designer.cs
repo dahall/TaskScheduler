@@ -1,4 +1,4 @@
-﻿namespace TestTaskService
+﻿namespace TaskSchedulerMockup
 {
 	partial class TSMMCMockup
 	{
@@ -48,7 +48,7 @@
 			this.taskSchedulerWizard1 = new Microsoft.Win32.TaskScheduler.TaskSchedulerWizard();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.hidableDetailPanel1 = new TestTaskService.HidableDetailPanel();
+			this.hidableDetailPanel1 = new TaskSchedulerMockup.HidableDetailPanel();
 			this.libraryMenuStrip = new System.Windows.Forms.ToolStrip();
 			this.connectToAnotherComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createBasicTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +62,7 @@
 			this.delFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.refreshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.itemPanel = new TestTaskService.HidableDetailPanel();
+			this.itemPanel = new TaskSchedulerMockup.HidableDetailPanel();
 			this.itemMenuStrip = new System.Windows.Forms.ToolStrip();
 			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.panel1 = new System.Windows.Forms.Panel();

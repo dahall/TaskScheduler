@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TestTaskService
+namespace TaskSchedulerMockup
 {
 	public partial class TaskEventViewer : Form
 	{

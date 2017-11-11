@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
 
-namespace TestTaskService
+namespace TaskSchedulerMockup
 {
 	[Designer(typeof(HidableDetailPanelDesigner))]
 	public partial class HidableDetailPanel : Control

@@ -1,4 +1,4 @@
-﻿namespace TestTaskService
+﻿namespace TaskSchedulerMockup
 {
 	partial class HidableDetailPanel
 	{
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.headerPanel = new TestTaskService.PanelHeader();
+			this.headerPanel = new TaskSchedulerMockup.PanelHeader();
 			this.detailPanel = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();

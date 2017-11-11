@@ -1,31 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{207F8F60-0A74-4959-8623-5D258EB133EB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestTaskService</RootNamespace>
     <AssemblyName>TestTaskService</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,8 +22,6 @@
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -44,8 +31,6 @@
     <DefineConstants>TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -71,64 +56,17 @@
       <HintPath>..\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net20\TimeSpan2.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
-    <Compile Include="FolderPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FolderPanel.Designer.cs">
-      <DependentUpon>FolderPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GradientPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="HidableDetailPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="HidableDetailPanel.Designer.cs">
-      <DependentUpon>HidableDetailPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HomePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="HomePanel.Designer.cs">
-      <DependentUpon>HomePanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Native\ControlExtension.cs" />
-    <Compile Include="Native\EnumUtil.cs" />
-    <Compile Include="Native\Header.cs" />
-    <Compile Include="Native\InteropUtil.cs" />
-    <Compile Include="Native\ListView.cs" />
-    <Compile Include="Native\ListViewExtensions.cs" />
-    <Compile Include="Native\RECT.cs" />
-    <Compile Include="Native\SIZE.cs" />
-    <Compile Include="Native\SYSTEMTIME.cs" />
-    <Compile Include="Native\TreeViewExtension.cs" />
-    <Compile Include="Native\USER32.cs" />
-    <Compile Include="Native\UXTHEME.cs" />
-    <Compile Include="NewFolderDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewFolderDlg.Designer.cs">
-      <DependentUpon>NewFolderDlg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PanelHeader.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,73 +80,33 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RunningTasksDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RunningTasksDlg.Designer.cs">
-      <DependentUpon>RunningTasksDlg.cs</DependentUpon>
-    </Compile>
     <Compile Include="ScriptTestDlg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ScriptTestDlg.Designer.cs">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Compile Include="TaskWatcherForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TaskWatcherForm.designer.cs">
       <DependentUpon>TaskWatcherForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSMMCMockup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TSMMCMockup.Designer.cs">
-      <DependentUpon>TSMMCMockup.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FolderPanel.resx">
-      <DependentUpon>FolderPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HidableDetailPanel.resx">
-      <DependentUpon>HidableDetailPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.es.resx">
-      <DependentUpon>HomePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.fr.resx">
-      <DependentUpon>HomePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.it.resx">
-      <DependentUpon>HomePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.resx">
-      <DependentUpon>HomePanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewFolderDlg.resx">
-      <DependentUpon>NewFolderDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RunningTasksDlg.resx">
-      <DependentUpon>RunningTasksDlg.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ScriptTestDlg.resx">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskWatcherForm.resx">
       <DependentUpon>TaskWatcherForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TSMMCMockup.resx">
-      <DependentUpon>TSMMCMockup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -222,8 +120,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\ts.ico" />
-    <None Include="Resources\empty.bmp" />
-    <None Include="Resources\PanelHeaderArrows.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskEditor\TaskEditor.csproj">

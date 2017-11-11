@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TestTaskService
+namespace TaskSchedulerMockup
 {
 	[DefaultProperty("Text"), DefaultEvent("CheckChanged")]
 	internal partial class PanelHeader : Control

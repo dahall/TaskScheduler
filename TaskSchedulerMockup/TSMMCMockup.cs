@@ -3,9 +3,9 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler;
-using TestTaskService.Properties;
+using TaskSchedulerMockup.Properties;
 
-namespace TestTaskService
+namespace TaskSchedulerMockup
 {
 	public interface ISupportTasks
 	{
@@ -19,11 +19,10 @@ namespace TestTaskService
 		private FolderPanel folderPanel;
 		private HomePanel homePanel;
 
-		public TSMMCMockup(TaskService taskSvc)
+		public TSMMCMockup()
 		{
 			InitializeComponent();
 			Icon = Resources.TaskScheduler;
-			taskService = taskSvc;
 		}
 
 		private void connectToAnotherComputerToolStripMenuItem_Click(object sender, EventArgs e)

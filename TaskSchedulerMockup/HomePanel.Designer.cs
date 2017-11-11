@@ -1,4 +1,4 @@
-﻿namespace TestTaskService
+﻿namespace TaskSchedulerMockup
 {
 	partial class HomePanel
 	{
@@ -34,7 +34,7 @@
 			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
 			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.activePanel = new TestTaskService.HidableDetailPanel();
+			this.activePanel = new TaskSchedulerMockup.HidableDetailPanel();
 			this.activeListView = new System.Windows.Forms.ListView();
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,10 +42,10 @@
 			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.overviewPanel = new TestTaskService.HidableDetailPanel();
+			this.overviewPanel = new TaskSchedulerMockup.HidableDetailPanel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.statusPanel = new TestTaskService.HidableDetailPanel();
+			this.statusPanel = new TaskSchedulerMockup.HidableDetailPanel();
 			this.statusListView = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -196,7 +196,7 @@
 			// 
 			// label2
 			// 
-			this.label2.Image = global::TestTaskService.Properties.Resources.ts;
+			this.label2.Image = global::TaskSchedulerMockup.Properties.Resources.ts;
 			this.label2.Location = new System.Drawing.Point(0, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(46, 43);

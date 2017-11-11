@@ -911,8 +911,6 @@ namespace TestTaskService
 
 		internal static void MMCTest(TaskService ts, System.IO.TextWriter output, params string[] arg)
 		{
-			var form = new TSMMCMockup(ts);
-			form.ShowDialog();
 		}
 
 		private static TaskDefinition DisplayTask(Task t, bool editable)

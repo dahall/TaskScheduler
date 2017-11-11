@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler;
 
-namespace TestTaskService
+namespace TaskSchedulerMockup
 {
 	public partial class HomePanel : UserControl, ISupportTasks
 	{

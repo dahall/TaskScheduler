@@ -1,4 +1,4 @@
-﻿namespace TestTaskService
+﻿namespace TaskSchedulerMockup
 {
 	partial class FolderPanel
 	{
