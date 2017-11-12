@@ -952,8 +952,11 @@ namespace Microsoft.Win32.TaskScheduler
 			private void ThreadProc()
 			{
 				completed.Reset();
-				var obj = Activator.CreateInstance(objType);
-				var taskHandler = (ITaskHandler)obj;
+				object obj = null;
+				try { obj = Activator.CreateInstance(objType); } catch { }
+				if (obj == null) return;
+				ITaskHandler taskHandler = null;
+				try { taskHandler = (ITaskHandler)obj; } catch { }
 				try
 				{
 					if (taskHandler != null)
@@ -966,15 +969,8 @@ namespace Microsoft.Win32.TaskScheduler
 				finally
 				{
 					if (taskHandler != null)
-					{
 						Marshal.ReleaseComObject(taskHandler);
-						taskHandler = null;
-					}
-					if (obj != null)
-					{
-						Marshal.ReleaseComObject(obj);
-						obj = null;
-					}
+					Marshal.ReleaseComObject(obj);
 				}
 			}
 
