@@ -26,7 +26,7 @@ namespace Microsoft.Win32
 					FreeLibrary(hLib);
 			}
 
-			public string GetString(uint id)
+			public string GetString(int id)
 			{
 				IntPtr ptr;
 				var len = LoadString(hLib, id, out ptr, 0);
@@ -59,7 +59,7 @@ namespace Microsoft.Win32
 				if (!int.TryParse(m.Groups["i"].Value, out id) || id > 0)
 					throw new ArgumentException(@"Invalid resource identifier.", nameof(resourceReference));
 				using (var nr = new NativeResource(m.Groups["f"].Value))
-					return nr.GetString((uint)-id);
+					return nr.GetString(-id);
 			}
 		}
 	}

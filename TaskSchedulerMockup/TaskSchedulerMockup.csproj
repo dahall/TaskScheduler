@@ -57,6 +57,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TaskEditor\Native\ControlExtension.cs">
+      <Link>Native\ControlExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\Header.cs">
+      <Link>Native\Header.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\ListView.cs">
+      <Link>Native\ListView.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\RECT.cs">
+      <Link>Native\RECT.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\SIZE.cs">
+      <Link>Native\SIZE.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\USER32.cs">
+      <Link>Native\USER32.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskEditor\Native\UXTHEME.cs">
+      <Link>Native\UXTHEME.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\EnumUtil.cs">
+      <Link>Native\EnumUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\InteropUtil.cs">
+      <Link>Native\InteropUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
+      <Link>Native\SYSTEMTIME.cs</Link>
+    </Compile>
     <Compile Include="ExtensionAttributeFor.NET_2.0.cs" />
     <Compile Include="FolderPanel.cs">
       <SubType>UserControl</SubType>
@@ -79,18 +109,8 @@
     <Compile Include="HomePanel.Designer.cs">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\ControlExtension.cs" />
-    <Compile Include="Native\EnumUtil.cs" />
-    <Compile Include="Native\Header.cs" />
-    <Compile Include="Native\InteropUtil.cs" />
-    <Compile Include="Native\ListView.cs" />
     <Compile Include="Native\ListViewExtensions.cs" />
-    <Compile Include="Native\RECT.cs" />
-    <Compile Include="Native\SIZE.cs" />
-    <Compile Include="Native\SYSTEMTIME.cs" />
     <Compile Include="Native\TreeViewExtension.cs" />
-    <Compile Include="Native\USER32.cs" />
-    <Compile Include="Native\UXTHEME.cs" />
     <Compile Include="NewFolderDlg.cs">
       <SubType>Form</SubType>
     </Compile>
