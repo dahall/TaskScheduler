@@ -122,7 +122,7 @@ namespace TestTaskService
 				compilerParams = new CompilerParameters(new[] { "System.dll", "System.Xml.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
 			}
 
-			var code = string.Concat(@"using System; using System.Windows.Forms; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
+			var code = string.Concat(@"using System; using System.Collections.Generic; using System.Linq; using System.Windows.Forms; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
 			var results = provider.CompileAssemblyFromSource(compilerParams, code);
 			if (results.Errors.Count != 0)
 			{
@@ -134,7 +134,7 @@ namespace TestTaskService
 			{
 				var mi = results.CompiledAssembly.GetType("RuntimeNS.RuntimeRunner").GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
 				var sw = new StringWriter();
-				try { mi.Invoke(null, new object[] { TaskService, sw }); ShowSidePanel(sw.ToString(), "Results"); }
+				try { mi?.Invoke(null, new object[] { TaskService, sw }); ShowSidePanel(sw.ToString(), "Results"); }
 				catch (Exception ex) { ShowSidePanel(ex.ToString(), "Exception"); }
 			}
 		}
