@@ -297,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private static TaskTriggerType AvToType(AvailableTriggers av) => (TaskTriggerType)(int)Math.Log((int)av, 2);
+		private static TaskTriggerType AvToType(AvailableTriggers av) => (TaskTriggerType)av.BitPosition();
 
 		private static TaskTriggerDisplayType DisplayForType(TaskTriggerType triggerType)
 		{

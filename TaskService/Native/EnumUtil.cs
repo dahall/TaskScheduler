@@ -21,7 +21,7 @@ namespace System
 			CheckIsEnum<T>();
 			if (IsFlags<T>())
 			{
-				long allFlags = 0L;
+				var allFlags = 0L;
 				foreach (T flag in Enum.GetValues(typeof(T)))
 					allFlags |= Convert.ToInt64(flag);
 				if ((allFlags & Convert.ToInt64(value)) != 0L)
@@ -29,21 +29,31 @@ namespace System
 			}
 			else if (Enum.IsDefined(typeof(T), value))
 				return;
-			throw new InvalidEnumArgumentException(argName == null ? "value" : argName, Convert.ToInt32(value), typeof(T));
+			throw new InvalidEnumArgumentException(argName ?? "value", Convert.ToInt32(value), typeof(T));
+		}
+
+		public static byte BitPosition<T>(this T flags) where T : struct, IConvertible
+		{
+			CheckIsEnum<T>(true);
+			var flagValue = Convert.ToInt64(flags);
+			if (flagValue == 0) throw new ArgumentException("The flag value is zero and has no bit position.");
+			var r = Math.Log(flagValue, 2);
+			if (!Math.Abs(r).Equals(r)) throw new ArithmeticException("The flag value has more than a single bit set.");
+			return Convert.ToByte(r);
 		}
 
 		public static bool IsFlagSet<T>(this T flags, T flag) where T : struct, IConvertible
 		{
 			CheckIsEnum<T>(true);
-			long flagValue = Convert.ToInt64(flag);
+			var flagValue = Convert.ToInt64(flag);
 			return (Convert.ToInt64(flags) & flagValue) == flagValue;
 		}
 
 		public static void SetFlags<T>(ref T flags, T flag, bool set = true) where T : struct, IConvertible
 		{
 			CheckIsEnum<T>(true);
-			long flagsValue = Convert.ToInt64(flags);
-			long flagValue = Convert.ToInt64(flag);
+			var flagsValue = Convert.ToInt64(flags);
+			var flagValue = Convert.ToInt64(flag);
 			if (set)
 				flagsValue |= flagValue;
 			else
@@ -53,7 +63,7 @@ namespace System
 
 		public static T SetFlags<T>(this T flags, T flag, bool set = true) where T : struct, IConvertible
 		{
-			T ret = flags;
+			var ret = flags;
 			SetFlags<T>(ref ret, flag, set);
 			return ret;
 		}
@@ -74,9 +84,9 @@ namespace System
 		{
 			CheckIsEnum<T>(true);
 			long lValue = 0;
-			foreach (T flag in flags)
+			foreach (var flag in flags)
 			{
-				long lFlag = Convert.ToInt64(flag);
+				var lFlag = Convert.ToInt64(flag);
 				lValue |= lFlag;
 			}
 			return (T)Enum.ToObject(typeof(T), lValue);
@@ -85,13 +95,13 @@ namespace System
 		public static string GetDescription<T>(this T value) where T : struct, IConvertible
 		{
 			CheckIsEnum<T>();
-			string name = Enum.GetName(typeof(T), value);
+			var name = Enum.GetName(typeof(T), value);
 			if (name != null)
 			{
-				FieldInfo field = typeof(T).GetField(name);
+				var field = typeof(T).GetField(name);
 				if (field != null)
 				{
-					DescriptionAttribute attr = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+					var attr = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
 					if (attr != null)
 					{
 						return attr.Description;

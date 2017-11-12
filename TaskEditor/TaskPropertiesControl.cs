@@ -19,19 +19,19 @@ namespace Microsoft.Win32.TaskScheduler
 	[Flags]
 	public enum AvailableActions
 	{
-		/// <summary>This action fires a handler.</summary>
-		ComHandler = 0x2,
 		/// <summary>
 		/// This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is
 		/// provided, find its associated application and launch the application with the document.
 		/// </summary>
-		Execute = 0x1,
+		Execute = 1 << 0,
+		/// <summary>This action fires a handler.</summary>
+		ComHandler = 5 << 0,
 		/// <summary>This action sends and e-mail.</summary>
-		SendEmail = 0x4,
+		SendEmail = 6 << 0,
 		/// <summary>This action shows a message box.</summary>
-		ShowMessage = 0x8,
+		ShowMessage = 7 << 0,
 		/// <summary>All actions are available.</summary>
-		AllActions = 0xF
+		AllActions = 0b1110001
 	}
 
 	/// <summary>Flags representing tabs that can be visible on a <see cref="TaskPropertiesControl"/>.</summary>
