@@ -1,17 +1,17 @@
-﻿using Microsoft.CSharp;
-using Microsoft.Win32.TaskScheduler;
-using System;
+﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Microsoft.CSharp;
+using Microsoft.Win32.TaskScheduler;
 
 namespace TestTaskService
 {
 	internal partial class ScriptTestDlg : Form
 	{
-		static readonly string[] validExts = new string[] { ".cs", ".txt" };
+		private static readonly string[] validExts = { ".cs", ".txt" };
 
 		private CompilerParameters compilerParams;
 		private string lastFileName;
@@ -29,22 +29,8 @@ namespace TestTaskService
 
 		private void closeBtn_Click(object sender, EventArgs e)
 		{
+			Properties.Settings.Default.Save();
 			Close();
-		}
-
-		private string IsValidDropFile(DragEventArgs e)
-		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
-			{
-				foreach (string f in (string[])e.Data.GetData(DataFormats.FileDrop))
-				{
-					string ext = Path.GetExtension(f);
-					foreach (string s in validExts)
-						if (string.Compare(s, ext, true) == 0)
-							return f;
-				}
-			}
-			return null;
 		}
 
 		private void CodeEditor_DragDrop(object sender, DragEventArgs e)
@@ -53,9 +39,8 @@ namespace TestTaskService
 				codeEditor.SelectedText = e.Data.GetData(DataFormats.Text, true).ToString();
 			else
 			{
-				string fn = IsValidDropFile(e);
-				if (fn != null)
-					codeEditor.Text = File.ReadAllText(fn);
+				if (IsValidDropFile(e) != null)
+					codeEditor.Text = File.ReadAllText(IsValidDropFile(e));
 			}
 		}
 
@@ -79,13 +64,28 @@ namespace TestTaskService
 
 		private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
 		{
-			bool hasText = codeEditor.TextLength > 0;
+			var hasText = codeEditor.TextLength > 0;
 			saveToolStripMenuItem.Enabled = hasText && !string.IsNullOrEmpty(lastFileName);
 			saveAsToolStripMenuItem.Enabled = printToolStripMenuItem.Enabled = hasText;
 			undoToolStripMenuItem.Enabled = codeEditor.CanUndo;
 			redoToolStripMenuItem.Enabled = codeEditor.CanRedo;
 			cutToolStripMenuItem.Enabled = copyToolStripMenuItem.Enabled = codeEditor.SelectionLength > 0;
 			pasteToolStripMenuItem.Enabled = codeEditor.CanPaste(DataFormats.GetFormat(DataFormats.Text));
+		}
+
+		private string IsValidDropFile(DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				foreach (var f in (string[])e.Data.GetData(DataFormats.FileDrop))
+				{
+					var ext = Path.GetExtension(f);
+					foreach (var s in validExts)
+						if (string.Compare(s, ext, true) == 0)
+							return f;
+				}
+			}
+			return null;
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,23 +117,23 @@ namespace TestTaskService
 		{
 			if (provider == null)
 			{
-				Dictionary<string, string> providerOptions = new Dictionary<string, string>();// { {"CompilerVersion", "v4"} };
+				var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v3.5" } };
 				provider = new CSharpCodeProvider(providerOptions);
-				compilerParams = new CompilerParameters(new string[] { "System.dll", "System.Xml.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
+				compilerParams = new CompilerParameters(new[] { "System.dll", "System.Xml.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
 			}
 
-			string code = String.Concat(@"using System; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
-			CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, code);
+			var code = string.Concat(@"using System; using System.Windows.Forms; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
+			var results = provider.CompileAssemblyFromSource(compilerParams, code);
 			if (results.Errors.Count != 0)
 			{
-				string[] strArr = new string[results.Output.Count];
+				var strArr = new string[results.Output.Count];
 				results.Output.CopyTo(strArr, 0);
 				ShowSidePanel(string.Join("\r\n", strArr), "Compiler Errors");
 			}
 			else
 			{
-				MethodInfo mi = results.CompiledAssembly.GetType("RuntimeNS.RuntimeRunner").GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
-				var sw = new System.IO.StringWriter();
+				var mi = results.CompiledAssembly.GetType("RuntimeNS.RuntimeRunner").GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
+				var sw = new StringWriter();
 				try { mi.Invoke(null, new object[] { TaskService, sw }); ShowSidePanel(sw.ToString(), "Results"); }
 				catch (Exception ex) { ShowSidePanel(ex.ToString(), "Exception"); }
 			}
