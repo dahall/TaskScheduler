@@ -76,10 +76,10 @@
 			this.actionsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.actionsCombo.FormattingEnabled = true;
 			this.actionsCombo.Items.AddRange(new object[] {
-            resources.GetString("actionsCombo.Items"),
-            resources.GetString("actionsCombo.Items1"),
-            resources.GetString("actionsCombo.Items2"),
-            resources.GetString("actionsCombo.Items3")});
+			resources.GetString("actionsCombo.Items"),
+			resources.GetString("actionsCombo.Items1"),
+			resources.GetString("actionsCombo.Items2"),
+			resources.GetString("actionsCombo.Items3")});
 			this.actionsCombo.Name = "actionsCombo";
 			this.actionsCombo.SelectedIndexChanged += new System.EventHandler(this.actionsCombo_SelectedIndexChanged);
 			// 
@@ -194,7 +194,6 @@
 			// runActionBtn
 			// 
 			resources.ApplyResources(this.runActionBtn, "runActionBtn");
-			this.runActionBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.runActionBtn.Name = "runActionBtn";
 			this.runActionBtn.UseVisualStyleBackColor = true;
 			this.runActionBtn.Click += new System.EventHandler(this.runActionBtn_Click);
