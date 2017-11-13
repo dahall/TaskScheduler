@@ -547,14 +547,14 @@ namespace Microsoft.Win32
 
 			public System.Drawing.Bitmap Bitmap
 			{
-				get { return hBmp != IntPtr.Zero ? System.Drawing.Bitmap.FromHbitmap(hBmp) : null; }
-				set { hBmp = (value == null) ? IntPtr.Zero : value.GetHbitmap(); }
+				get => hBmp != IntPtr.Zero ? System.Drawing.Bitmap.FromHbitmap(hBmp) : null;
+				set => hBmp = (value == null) ? IntPtr.Zero : value.GetHbitmap();
 			}
 
 			public string Url
 			{
-				get { return InteropUtil.GetString(pszImage); }
-				set { InteropUtil.SetString(ref pszImage, ref cchImageMax, value); }
+				get => InteropUtil.GetString(pszImage);
+				set => InteropUtil.SetString(ref pszImage, ref cchImageMax, value);
 			}
 
 			void IDisposable.Dispose()
@@ -587,55 +587,55 @@ namespace Microsoft.Win32
 
 			public ListViewColumnFormat Format
 			{
-				get { return fmt; }
+				get => fmt;
 				set { fmt = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.Fmt, true); }
 			}
 
 			public string Text
 			{
-				get { return InteropUtil.GetString(pszText); }
+				get => InteropUtil.GetString(pszText);
 				set { InteropUtil.SetString(ref pszText, ref cchTextMax, value); EnumUtil.SetFlags(ref mask, ListViewColumMask.Text, value != null); }
 			}
 
 			public int Subitem
 			{
-				get { return iSubItem; }
+				get => iSubItem;
 				set { iSubItem = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.Subitem, true); }
 			}
 
 			public int ImageListIndex
 			{
-				get { return iImage; }
+				get => iImage;
 				set { iImage = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.Image, true); }
 			}
 
 			public int ColumnPosition
 			{
-				get { return iOrder; }
+				get => iOrder;
 				set { iOrder = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.Order, true); }
 			}
 
 			public int DefaultWidth
 			{
-				get { return cxDefault; }
+				get => cxDefault;
 				set { cxDefault = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.DefaultWidth, true); }
 			}
 
 			public int MinWidth
 			{
-				get { return cxMin; }
+				get => cxMin;
 				set { cxMin = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.MinWidth, true); }
 			}
 
 			public int IdealWidth
 			{
-				get { return cxIdeal; }
+				get => cxIdeal;
 				set { cxIdeal = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.IdealWidth, true); }
 			}
 
 			public int Width
 			{
-				get { return cx; }
+				get => cx;
 				set { cx = value; EnumUtil.SetFlags(ref mask, ListViewColumMask.Width, true); }
 			}
 
@@ -771,37 +771,37 @@ namespace Microsoft.Win32
 
 			public string DescriptionBottom
 			{
-				get { return InteropUtil.GetString(pszDescriptionBottom); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionBottom, InteropUtil.SetString(ref pszDescriptionBottom, ref cchDescriptionBottom, value)); }
+				get => InteropUtil.GetString(pszDescriptionBottom);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionBottom, InteropUtil.SetString(ref pszDescriptionBottom, ref cchDescriptionBottom, value));
 			}
 
 			public string DescriptionTop
 			{
-				get { return InteropUtil.GetString(pszDescriptionTop); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszDescriptionTop, ref cchDescriptionTop, value)); }
+				get => InteropUtil.GetString(pszDescriptionTop);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszDescriptionTop, ref cchDescriptionTop, value));
 			}
 
 			public string Footer
 			{
-				get { return InteropUtil.GetString(pszFooter); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszFooter, ref cchFooter, value)); }
+				get => InteropUtil.GetString(pszFooter);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszFooter, ref cchFooter, value));
 			}
 
 			public int ID
 			{
-				get { return iGroupId; }
+				get => iGroupId;
 				set { iGroupId = value; mask |= ListViewGroupMask.GroupId; }
 			}
 
 			public int TitleImageIndex
 			{
-				get { return iTitleImage; }
+				get => iTitleImage;
 				set { iTitleImage = value; mask |= ListViewGroupMask.TitleImage; }
 			}
 
 			public int ExtendedImageIndex
 			{
-				get { return iExtendedImage; }
+				get => iExtendedImage;
 				set { iExtendedImage = value; mask |= ListViewGroupMask.ExtendedImage; }
 			}
 
@@ -824,20 +824,20 @@ namespace Microsoft.Win32
 
 			public string Header
 			{
-				get { return InteropUtil.GetString(pszHeader); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszHeader, ref cchHeader, value)); }
+				get => InteropUtil.GetString(pszHeader);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszHeader, ref cchHeader, value));
 			}
 
 			public string Subtitle
 			{
-				get { return InteropUtil.GetString(pszSubtitle); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszSubtitle, ref cchSubtitle, value)); }
+				get => InteropUtil.GetString(pszSubtitle);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszSubtitle, ref cchSubtitle, value));
 			}
 
 			public string Task
 			{
-				get { return InteropUtil.GetString(pszTask); }
-				set { EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszTask, ref cchTask, value)); }
+				get => InteropUtil.GetString(pszTask);
+				set => EnumUtil.SetFlags(ref mask, ListViewGroupMask.DescriptionTop, InteropUtil.SetString(ref pszTask, ref cchTask, value));
 			}
 
 			public void Dispose()
@@ -895,7 +895,7 @@ namespace Microsoft.Win32
 
 			public System.Windows.Forms.Padding Padding
 			{
-				get { return new Padding(Left, Top, Right, Bottom); }
+				get => new Padding(Left, Top, Right, Bottom);
 				set
 				{
 					Left = value.Left;
@@ -989,31 +989,37 @@ namespace Microsoft.Win32
 
 			public int GroupId
 			{
-				get { return iGroupId; }
+				get => iGroupId;
 				set { iGroupId = value; EnumUtil.SetFlags(ref mask, ListViewItemMask.GroupId, true); }
 			}
 
 			public int ImageIndex
 			{
-				get { return iImage; }
+				get => iImage;
 				set { iImage = value; EnumUtil.SetFlags(ref mask, ListViewItemMask.Image, true); }
+			}
+
+			public int ItemIndex
+			{
+				get => iItem;
+				set => iItem = value;
 			}
 
 			public int Indent
 			{
-				get { return iIndent; }
+				get => iIndent;
 				set { iIndent = value; EnumUtil.SetFlags(ref mask, ListViewItemMask.Indent, true); }
 			}
 
 			public IntPtr LParam
 			{
-				get { return lParam; }
+				get => lParam;
 				set { lParam = value; EnumUtil.SetFlags(ref mask, ListViewItemMask.Param, true); }
 			}
 
 			public string Text
 			{
-				get { return InteropUtil.GetString(pszText); }
+				get => InteropUtil.GetString(pszText);
 				set { InteropUtil.SetString(ref pszText, ref cchTextMax, value); EnumUtil.SetFlags(ref mask, ListViewItemMask.Text, true); }
 			}
 
@@ -1059,8 +1065,8 @@ namespace Microsoft.Win32
 					}
 					else
 					{
-						puColumns = IntPtr.Zero;
-						piColFmt = IntPtr.Zero;
+						if (puColumns != IntPtr.Zero) { Marshal.FreeHGlobal(puColumns); puColumns = IntPtr.Zero; }
+						if (piColFmt != IntPtr.Zero) { Marshal.FreeHGlobal(piColFmt); piColFmt = IntPtr.Zero; }
 						EnumUtil.SetFlags(ref mask, ListViewItemMask.ColFmt | ListViewItemMask.Columns, false);
 					}
 				}
@@ -1087,7 +1093,7 @@ namespace Microsoft.Win32
 					}
 					else
 					{
-						puColumns = IntPtr.Zero;
+						if (puColumns != IntPtr.Zero) { Marshal.FreeHGlobal(puColumns); puColumns = IntPtr.Zero; }
 						mask.SetFlags(ListViewItemMask.Columns, false);
 					}
 				}
@@ -1108,7 +1114,7 @@ namespace Microsoft.Win32
 
 			public uint OverlayImageIndex
 			{
-				get { return (state & 0x00000F00) >> 8; }
+				get => (state & 0x00000F00) >> 8;
 				set
 				{
 					if (value > 15)
@@ -1121,7 +1127,7 @@ namespace Microsoft.Win32
 
 			public uint StateImageIndex
 			{
-				get { return (state & 0x0000F000) >> 12; }
+				get => (state & 0x0000F000) >> 12;
 				set
 				{
 					if (value > 15)
@@ -1137,6 +1143,8 @@ namespace Microsoft.Win32
 			void IDisposable.Dispose()
 			{
 				InteropUtil.FreeString(ref pszText, ref cchTextMax);
+				if (puColumns != IntPtr.Zero) Marshal.FreeHGlobal(puColumns);
+				if (piColFmt != IntPtr.Zero) Marshal.FreeHGlobal(piColFmt);
 			}
 		}
 
@@ -1170,43 +1178,43 @@ namespace Microsoft.Win32
 
 			public bool AutoSize
 			{
-				get { return dwFlags.IsFlagSet(ListViewTileViewFlag.Autosize); }
+				get => dwFlags.IsFlagSet(ListViewTileViewFlag.Autosize);
 				set { dwFlags = value ? ListViewTileViewFlag.Autosize : ListViewTileViewFlag.FixedSize; dwMask |= ListViewTileViewMask.TileSize; sizeTile.height = sizeTile.width = 0; }
 			}
 
 			public System.Drawing.Size TileSize
 			{
-				get { return sizeTile; }
+				get => sizeTile;
 				set { sizeTile = value; dwMask |= ListViewTileViewMask.TileSize; dwFlags |= ListViewTileViewFlag.FixedSize; }
 			}
 
 			public int TileHeight
 			{
-				get { return sizeTile.height; }
+				get => sizeTile.height;
 				set { sizeTile.height = value; dwMask |= ListViewTileViewMask.TileSize; dwFlags |= ListViewTileViewFlag.FixedHeight; }
 			}
 
 			public int TileWidth
 			{
-				get { return sizeTile.width; }
+				get => sizeTile.width;
 				set { sizeTile.width = value; dwMask |= ListViewTileViewMask.TileSize; dwFlags |= ListViewTileViewFlag.FixedWidth; }
 			}
 
 			public int MaxTextLines
 			{
-				get { return cLines; }
+				get => cLines;
 				set { cLines = value; dwMask |= ListViewTileViewMask.Columns; }
 			}
 
 			public System.Windows.Forms.Padding TilePadding
 			{
-				get { return new Padding(rcLabelMargin.Left, rcLabelMargin.Top, rcLabelMargin.Right, rcLabelMargin.Bottom); }
+				get => new Padding(rcLabelMargin.Left, rcLabelMargin.Top, rcLabelMargin.Right, rcLabelMargin.Bottom);
 				set { rcLabelMargin = new RECT(value.Left, value.Top, value.Right, value.Bottom); dwMask |= ListViewTileViewMask.LabelMargin; }
 			}
 
 			public int IconTextSpacing
 			{
-				get { return rcLabelMargin.Left; }
+				get => rcLabelMargin.Left;
 				set { rcLabelMargin.Left = value; dwMask |= ListViewTileViewMask.LabelMargin; }
 			}
 		}
