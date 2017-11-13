@@ -202,7 +202,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Trigger != null)
 					return v2Trigger.Enabled;
-				return !v1TriggerData.Flags.IsFlagSet(V1Interop.TaskTriggerFlags.Disabled);
+				return GetUnboundValueOrDefault(nameof(Enabled), !v1TriggerData.Flags.IsFlagSet(V1Interop.TaskTriggerFlags.Disabled));
 			}
 			set
 			{
@@ -210,7 +210,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Trigger.Enabled = value;
 				else
 				{
-					v1TriggerData.Flags.SetFlags(V1Interop.TaskTriggerFlags.Disabled, !value);
+					v1TriggerData.Flags = v1TriggerData.Flags.SetFlags(V1Interop.TaskTriggerFlags.Disabled, !value);
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
