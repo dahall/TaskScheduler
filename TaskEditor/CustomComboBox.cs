@@ -797,7 +797,7 @@ namespace Microsoft.Win32.TaskScheduler
 						return;
 
 					case CBN_CLOSEUP:
-						if ((DateTime.Now - m_sShowTime).Seconds > 1)
+						if ((DateTime.Now - m_sShowTime).TotalSeconds > 1)
 							HideDropDown();
 						return;
 				}
@@ -810,7 +810,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (m_popupCtrl != null && m_popupCtrl.Visible)
 				HideDropDown();
-			else if ((DateTime.Now - m_lastHideTime).Milliseconds > 50)
+			else if ((DateTime.Now - m_lastHideTime).TotalMilliseconds > 50)
 				ShowDropDown();
 		}
 
