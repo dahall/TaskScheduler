@@ -45,6 +45,7 @@ namespace System.Windows.Forms
 		/// </summary>
 		/// <param name="ctrl">The control.</param>
 		/// <param name="getLenMsg">The MSG.</param>
+		/// <param name="getTextMsg"></param>
 		/// <returns></returns>
 		public static string GetMessageString(this Control ctrl, uint getLenMsg, uint getTextMsg)
 		{
