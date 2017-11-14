@@ -503,7 +503,7 @@ namespace Microsoft.Win32.TaskScheduler
 			// Enable/disable version specific features
 			triggerIdText.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
 			stopIfRunsSpan.Enabled = stopIfRunsCheckBox.Enabled = isV2 && !useUnifiedSchedulingEngine;
-			repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
+			repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !(useUnifiedSchedulingEngine && trigger is ICalendarTrigger);
 
 			// Set date/time controls
 			activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
