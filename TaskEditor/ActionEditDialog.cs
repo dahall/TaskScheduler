@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
@@ -34,10 +35,14 @@ namespace Microsoft.Win32.TaskScheduler
 			ResetCombo();
 		}
 
-		/// <summary>Initializes a new instance of the <see cref="ActionEditDialog"/> class with the provided action.</summary>
+		/// <summary>Initializes a new instance of the <see cref="ActionEditDialog" /> class with the provided action.</summary>
 		/// <param name="action">The action.</param>
-		public ActionEditDialog(Action action) : this()
+		/// <param name="supportV1Only"><c>true</c> if supports V1 only; otherwise, <c>false</c>.</param>
+		/// <param name="allowedActions">The allowed actions.</param>
+		public ActionEditDialog(Action action, bool supportV1Only = false, AvailableActions allowedActions = AvailableActions.AllActions) : this()
 		{
+			isV2 = !supportV1Only;
+			AvailableActions = allowedActions;
 			Action = action;
 		}
 
@@ -50,8 +55,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				onAssignment = true;
+				if (value != null && !ReallyAvailableActions.IsFlagSet((AvailableActions)(1 << (int)value.ActionType)))
+					throw new ArgumentException("Type of Action is not permitted.", nameof(Action));
+				if (value == null) value = GetFirstAvailableAction();
 				action = value;
-				actionsCombo.SelectedIndex = actionsCombo.IndexOfItemValue(action?.ActionType ?? TaskActionType.Execute);
+				actionsCombo.SelectedIndex = actionsCombo.IndexOfItemValue(action.ActionType);
 				if (actionsCombo.SelectedIndex == -1)
 					throw new ArgumentException("Type of Action is not permitted.", nameof(Action));
 				actionIdText.Text = action?.Id;
@@ -77,7 +85,6 @@ namespace Microsoft.Win32.TaskScheduler
 			get => availableActions;
 			set
 			{
-				if (availableActions == value) return;
 				availableActions = value;
 				ResetCombo();
 			}
@@ -122,6 +129,28 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
+		private IList<TaskActionType> InvalidActions
+		{
+			get
+			{
+				var x = AvailableActions.AllActions & ~ReallyAvailableActions;
+				return x == 0 ? null : x.GetFlags().Select(AvToType).ToList();
+			}
+		}
+
+		private AvailableActions ReallyAvailableActions
+		{
+			get
+			{
+				var ret = availableActions;
+				if (!isV2 && availableActions.IsFlagSet(AvailableActions.ComHandler)) ret = ret.SetFlags(AvailableActions.ComHandler, false);
+				if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.SendEmail)) ret = ret.SetFlags(AvailableActions.SendEmail, false);
+				if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.ShowMessage)) ret = ret.SetFlags(AvailableActions.ShowMessage, false);
+				if (ret == 0) throw new InvalidOperationException("No actions are available to display given the current settings.");
+				return ret;
+			}
+		}
+
 		private void actionIdText_TextChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -159,9 +188,13 @@ namespace Microsoft.Win32.TaskScheduler
 			DetermineIfCanValidate();
 		}
 
+		private static TaskActionType AvToType(AvailableActions av) => (TaskActionType)av.BitPosition();
+
 		private void cancelBtn_Click(object sender, EventArgs e) { Close(); }
 
 		private void DetermineIfCanValidate() { okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate; }
+
+		private Action GetFirstAvailableAction() => Action.CreateAction(AvToType(ReallyAvailableActions.GetFlags().First()));
 
 		private void keyField_TextChanged(object sender, EventArgs e) { DetermineIfCanValidate(); }
 
@@ -175,19 +208,13 @@ namespace Microsoft.Win32.TaskScheduler
 		private void ResetCombo()
 		{
 			var curItem = actionsCombo.SelectedItem as TextValueItem<TaskActionType>;
-			var excl = new List<TaskActionType>();
-			if (!isV2 || !availableActions.IsFlagSet(AvailableActions.ComHandler)) excl.Add(TaskActionType.ComHandler);
-			if (!availableActions.IsFlagSet(AvailableActions.Execute)) excl.Add(TaskActionType.Execute);
-			if (!isV2 || useUnifiedSchedulingEngine || !availableActions.IsFlagSet(AvailableActions.SendEmail)) excl.Add(TaskActionType.SendEmail);
-			if (!isV2 || useUnifiedSchedulingEngine || !availableActions.IsFlagSet(AvailableActions.ShowMessage)) excl.Add(TaskActionType.ShowMessage);
-			if (excl.Count == 4) throw new InvalidOperationException("No actions are available to display given the current settings.");
-			if (excl.Count == 0) excl = null;
 			actionsCombo.BeginUpdate();
-			actionsCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "ActionType", excl);
-			int idx;
-			actionsCombo.SelectedIndex = curItem != null && -1 != (idx = actionsCombo.IndexOfItemValue(curItem.Value)) ? idx : 0;
+			actionsCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "ActionType", InvalidActions);
 			actionsCombo.EndUpdate();
-			runActionBtn.Visible = AllowRun;
+			if (curItem == null) return;
+			actionsCombo.SelectedIndex = actionsCombo.IndexOfItemValue(curItem.Value);
+			if (actionsCombo.SelectedIndex == -1)
+				throw new ArgumentException("Type of current Action is not permitted.", nameof(Action));
 		}
 
 		private void runActionBtn_Click(object sender, EventArgs e) { curHandler.Run(); }

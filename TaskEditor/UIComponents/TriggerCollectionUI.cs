@@ -86,17 +86,27 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private static AvailableTriggers TypeToAv(TaskTriggerType triggerType) => (AvailableTriggers)Enum.Parse(typeof(AvailableTriggers), triggerType.ToString());
 
-		private void AddTriggerToList(Trigger tr, int index)
+		private int AddTriggerToList(Trigger tr, int index = -1, bool updateOnly = false)
 		{
 			var imgIdx = (int)tr.TriggerType;
 			var txt = tr.ToString();
 			var lvi = new ListViewItem(new[] { TaskEnumGlobalizer.GetString(tr.TriggerType), txt, tr.Enabled ? EditorProperties.Resources.Enabled : EditorProperties.Resources.Disabled }, imgIdx) { Tag = tr, ToolTipText = txt };
-			lvi = index < 0 ? triggerListView.Items.Add(lvi) : triggerListView.Items.Insert(index, lvi);
-			if (!modern) return;
+			if (updateOnly)
+			{
+				if (index < 0 || index >= triggerListView.Items.Count) throw new ArgumentOutOfRangeException(nameof(index));
+				triggerListView.Items[index] = lvi;
+				lvi = triggerListView.Items[index];
+			}
+			else
+			{
+				lvi = index < 0 ? triggerListView.Items.Add(lvi) : triggerListView.Items.Insert(index, lvi);
+			}
+			if (!modern) return lvi.Index;
 			var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new[] { 1 } };
 			if (!tr.Enabled)
 				nlvi.OverlayImageIndex = (uint)disabledOverlayImageIndex;
 			NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
+			return lvi.Index;
 		}
 
 		private void enableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,13 +119,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		private TriggerEditDialog GetTriggerEditDialog(string caption, Trigger t = null)
 		{
-			return new TriggerEditDialog(t, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2)
+			return new TriggerEditDialog(t, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2, AvailableTriggers)
 			{
-				AvailableTriggers = AvailableTriggers,
+				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
 				StartPosition = FormStartPosition.CenterParent,
 				TargetServer = editor.TaskService.TargetServer,
 				Text = caption,
-				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine
 			};
 		}
 
@@ -170,9 +179,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			using (var dlg = GetTriggerEditDialog(EditorProperties.Resources.TriggerDlgEditCaption, editor.TaskDefinition.Triggers[idx]))
 			{
 				if (dlg.ShowDialog() != DialogResult.OK) return;
-				triggerListView.Items.RemoveAt(idx);
+
 				editor.TaskDefinition.Triggers[idx] = dlg.Trigger;
-				AddTriggerToList(dlg.Trigger, idx);
+				AddTriggerToList(dlg.Trigger, idx, true);
+				triggerListView.Focus();
+				triggerListView.Items[idx].Focused = true;
 				triggerListView.Items[idx].Selected = true;
 			}
 		}
@@ -202,7 +213,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				if (dlg.ShowDialog() != DialogResult.OK) return;
 				editor.TaskDefinition.Triggers.Add(dlg.Trigger);
-				AddTriggerToList(dlg.Trigger, -1);
+				var idx = AddTriggerToList(dlg.Trigger);
+				triggerListView.Focus();
+				triggerListView.Items[idx].Focused = true;
+				triggerListView.Items[idx].Selected = true;
+				triggerListView.EnsureVisible(idx);
 			}
 		}
 	}

@@ -23,7 +23,7 @@ namespace Microsoft.Win32.TaskScheduler
 #endif
 	{
 		private readonly bool showCustom;
-		private AvailableTriggers availableTriggers = AvailableTriggers.AllTriggers;
+		private AvailableTriggers availableTriggers = 0;
 		private DateTime initialStartBoundary = DateTime.MinValue;
 		private bool isV2;
 		private bool onAssignment;
@@ -31,14 +31,15 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool useUnifiedSchedulingEngine;
 
 		/// <summary>Initializes a new instance of the <see cref="TriggerEditDialog"/> class.</summary>
-		public TriggerEditDialog() : this(null, false)
+		public TriggerEditDialog() : this(null)
 		{
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="TriggerEditDialog"/> class.</summary>
 		/// <param name="trigger">The <see cref="Trigger"/> to edit.</param>
 		/// <param name="supportV1Only">If set to <c>true</c> support V1 triggers only.</param>
-		public TriggerEditDialog(Trigger trigger, bool supportV1Only = false)
+		/// <param name="allowedTriggers">Sets the types of triggers that can be edited. Default is all.</param>
+		public TriggerEditDialog(Trigger trigger, bool supportV1Only = false, AvailableTriggers allowedTriggers = AvailableTriggers.AllTriggers)
 		{
 			InitializeComponent();
 
@@ -51,13 +52,13 @@ namespace Microsoft.Win32.TaskScheduler
 			durationSpan.Items.AddRange(new[] { TimeSpan2.Zero, TimeSpan2.FromMinutes(15), TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1) });
 			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
 			stopIfRunsSpan.Items.AddRange(new[] { TimeSpan2.FromMinutes(30), TimeSpan2.FromHours(1), TimeSpan2.FromHours(2), TimeSpan2.FromHours(4), TimeSpan2.FromHours(8), TimeSpan2.FromHours(12), TimeSpan2.FromDays(1), TimeSpan2.FromDays(3) });
-			ResetCombo();
+			AvailableTriggers = allowedTriggers;
 
 			if (trigger != null)
 				Trigger = trigger;
 			else
 			{
-				Trigger = new TimeTrigger();
+				Trigger = (ReallyAvailableTriggers & CalendarTriggerUI.calendarTriggers) != 0 ? GetFirstAvailableTrigger(CalendarTriggerUI.calendarTriggers) : GetFirstAvailableTrigger();
 				initialStartBoundary = DateTime.MinValue;
 			}
 		}
@@ -107,9 +108,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get => availableTriggers;
 			set
 			{
+				if (value == 0) throw new ArgumentException("Value cannot be 0", nameof(AvailableTriggers));
 				if (availableTriggers == value) return;
 				availableTriggers = value;
-				calendarTriggerUI1.AvailableTriggers = value;
+				calendarTriggerUI1.AvailableTriggers = ReallyAvailableTriggers;
 				ResetCombo();
 			}
 		}
@@ -152,6 +154,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (state == 113 || state == 114) state -= 2;
 					view = (TaskTriggerDisplayType)state;
 				}
+				ResetControls();
 				TriggerView = view;
 				switch (view)
 				{
@@ -237,14 +240,9 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (!isV2 && value)
 					throw new NotSupportedException("Version 1.0 of the Task Scheduler library cannot use the Unified Scheduling Engine.");
-				if (value != useUnifiedSchedulingEngine)
-				{
-					useUnifiedSchedulingEngine = value;
-					calendarTriggerUI1.UseUnifiedSchedulingEngine = value;
-					stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled =
-						repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled =
-						durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
-				}
+				if (value == useUnifiedSchedulingEngine) return;
+				useUnifiedSchedulingEngine = value;
+				ResetControls();
 			}
 		}
 
@@ -253,14 +251,8 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				var excl = new List<TaskTriggerDisplayType>();
-				// Remove all non-V1 triggers if set
-				if (!isV2)
-					excl.AddRange(new[] { TaskTriggerDisplayType.Event, TaskTriggerDisplayType.Registration, TaskTriggerDisplayType.SessionConnect, TaskTriggerDisplayType.SessionDisconnect, TaskTriggerDisplayType.WorkstationLock, TaskTriggerDisplayType.WorkstationUnlock });
-				// Remove custom trigger if not shown or v1
-				if (!showCustom || !isV2)
-					excl.Add(TaskTriggerDisplayType.Custom);
 				// Get unavailable settings and convert to unavailable views
-				foreach (var t in (AvailableTriggers.AllTriggers & ~availableTriggers).GetFlags().Select(AvToType))
+				foreach (var t in (AvailableTriggers.AllTriggers & ~ReallyAvailableTriggers).GetFlags().Select(AvToType))
 				{
 					var d = DisplayForType(t);
 					// Add all types of sessions
@@ -272,11 +264,29 @@ namespace Microsoft.Win32.TaskScheduler
 						AddIfMissing(excl, d);
 				}
 				// All schedule triggers must be unavailable before hiding view
-				if ((availableTriggers & (AvailableTriggers.Time | AvailableTriggers.Daily | AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW)) == 0)
+				if ((ReallyAvailableTriggers & (AvailableTriggers.Time | AvailableTriggers.Daily | AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW)) == 0)
 					AddIfMissing(excl, TaskTriggerDisplayType.Schedule);
 				return excl;
 
 				void AddIfMissing<T>(IList<T> l, T a) { if (!l.Contains(a)) l.Add(a); }
+			}
+		}
+
+		private AvailableTriggers ReallyAvailableTriggers
+		{
+			get
+			{
+				var ret = availableTriggers;
+				// Remove all non-V1 triggers if set
+				if (!isV2)
+					ret &= ~(AvailableTriggers.Event | AvailableTriggers.Registration | AvailableTriggers.SessionStateChange);
+				// Remove custom trigger if not shown or v1
+				if (!showCustom || !isV2)
+					ret &= ~AvailableTriggers.Custom;
+				// Remove unsupported USE triggers
+				if (useUnifiedSchedulingEngine)
+					ret &= ~(AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW);
+				return ret != 0 ? ret : throw new InvalidOperationException("No triggers are available to display given the current settings.");
 			}
 		}
 
@@ -286,7 +296,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				var def = DisplayForType(AvToType(availableTriggers.GetFlags().First()));
+				var def = DisplayForType(AvToType(ReallyAvailableTriggers.GetFlags().First()));
 				return triggerTypeCombo.SelectedIndex == -1 ? def : SelectedComboValue ?? def;
 			}
 			set
@@ -398,7 +408,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			trigger.Enabled = enabledCheckBox.Checked;
+			if (!onAssignment)
+				trigger.Enabled = enabledCheckBox.Checked;
 		}
 
 		private void expireCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -419,16 +430,19 @@ namespace Microsoft.Win32.TaskScheduler
 				trigger.EndBoundary = expireDatePicker.Value == DateTimePicker.MinimumDateTime || expireDatePicker.Value == DateTimePicker.MaximumDateTime ? DateTime.MaxValue : expireDatePicker.Value;
 		}
 
+		private Trigger GetFirstAvailableTrigger(AvailableTriggers filter = AvailableTriggers.AllTriggers) => Trigger.CreateTrigger(AvToType((ReallyAvailableTriggers & filter).GetFlags().First()));
+
 		private void logonAnyUserRadio_CheckedChanged(object sender, EventArgs e)
 		{
 			var any = logonAnyUserRadio.Checked;
 			logonChgUserBtn.Enabled = logonUserLabel.Enabled = !any;
-			((ITriggerUserId)trigger).UserId = any ? null : logonUserLabel.Text;
+			if (!onAssignment)
+				((ITriggerUserId)trigger).UserId = any ? null : logonUserLabel.Text;
 		}
 
 		private void logonChgUserBtn_Click(object sender, EventArgs e)
 		{
-			string acct = String.Empty;
+			var acct = string.Empty;
 			if (!HelperMethods.SelectAccount(this, null, ref acct, out bool _, out bool _, out var _))
 				return;
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
@@ -488,16 +502,24 @@ namespace Microsoft.Win32.TaskScheduler
 			triggerTypeCombo.InitializeFromEnum(EditorProperties.Resources.ResourceManager, out _, "TriggerType", invalidTriggers);
 			triggerTypeCombo.EndUpdate();
 			if (triggerTypeCombo.Items.Count == 0) throw new InvalidOperationException("There are no trigger types allowed.");
-			TriggerView = curItem != null && !invalidTriggers.Contains(curItem.Value) ? curItem.Value : TriggerView;
+			if (curItem != null)
+				TriggerView = !invalidTriggers.Contains(curItem.Value) ? curItem.Value : TriggerView;
 		}
 
 		private void ResetControls()
 		{
-			ResetCombo();
+			if (trigger != null && !ReallyAvailableTriggers.IsFlagSet((AvailableTriggers)(1 << (int)trigger.TriggerType)))
+				throw new ArgumentException("Type of current Action is not permitted.", nameof(Trigger));
+
+			// Update CalendarTriggerUI
+			calendarTriggerUI1.AvailableTriggers = ReallyAvailableTriggers;
+			calendarTriggerUI1.IsV2 = isV2;
+			calendarTriggerUI1.UseUnifiedSchedulingEngine = UseUnifiedSchedulingEngine;
 
 			// Enable/disable version specific features
-			calendarTriggerUI1.IsV2 = isV2;
-			triggerIdText.Enabled = stopIfRunsCheckBox.Enabled = stopIfRunsSpan.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+			triggerIdText.Enabled = delayCheckBox.Enabled = delaySpan.Enabled = isV2;
+			stopIfRunsSpan.Enabled = stopIfRunsCheckBox.Enabled = isV2 && !useUnifiedSchedulingEngine;
+			repeatCheckBox.Enabled = repeatSpan.Enabled = durationLabel.Enabled = durationSpan.Enabled = stopAfterDurationCheckBox.Enabled = !useUnifiedSchedulingEngine;
 
 			// Set date/time controls
 			activateDatePicker.UTCPrompt = expireDatePicker.UTCPrompt = isV2 ? EditorProperties.Resources.DateTimeSyncText : null;
@@ -520,7 +542,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void stopAfterDurationCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			trigger.Repetition.StopAtDurationEnd = stopAfterDurationCheckBox.Checked;
+			if (!onAssignment)
+				trigger.Repetition.StopAtDurationEnd = stopAfterDurationCheckBox.Checked;
 		}
 
 		private void stopIfRunsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -556,7 +579,7 @@ namespace Microsoft.Win32.TaskScheduler
 				default:
 					settingsTabControl.SelectedTab = scheduleTab;
 					if (!onAssignment)
-						newTrigger = Trigger.CreateTrigger(AvToType((availableTriggers & CalendarTriggerUI.calendarTriggers).GetFlags().First()));
+						newTrigger = GetFirstAvailableTrigger(CalendarTriggerUI.calendarTriggers);
 					break;
 
 				case TaskTriggerDisplayType.Logon:
@@ -601,7 +624,7 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 			}
 
-			if (newTrigger != null && !onAssignment)
+			if (!onAssignment && newTrigger != null)
 			{
 				if (trigger != null)
 					newTrigger.CopyProperties(trigger);
@@ -612,8 +635,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					newTrigger.StartBoundary = initialStartBoundary;
-				if (trigger == null || newTrigger.TriggerType != trigger.TriggerType)
-					Trigger = newTrigger;
+				Trigger = newTrigger;
 			}
 		}
 	}

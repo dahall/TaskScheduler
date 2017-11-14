@@ -12,18 +12,19 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		public override Trigger Trigger
 		{
-			get { return base.Trigger; }
+			get => base.Trigger;
 			set
 			{
+				if (!(value is WeeklyTrigger wt)) throw new ArgumentException("Trigger must of type WeeklyTrigger.");
 				base.Trigger = value;
-				weeklyRecurNumUpDn.Value = ((WeeklyTrigger)trigger).WeeksInterval;
-				weeklySunCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Sunday) != 0;
-				weeklyMonCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Monday) != 0;
-				weeklyTueCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Tuesday) != 0;
-				weeklyWedCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Wednesday) != 0;
-				weeklyThuCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Thursday) != 0;
-				weeklyFriCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Friday) != 0;
-				weeklySatCheck.Checked = (((WeeklyTrigger)trigger).DaysOfWeek & DaysOfTheWeek.Saturday) != 0;
+				weeklyRecurNumUpDn.Value = wt.WeeksInterval;
+				weeklySunCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Sunday);
+				weeklyMonCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Monday);
+				weeklyTueCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Tuesday);
+				weeklyWedCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Wednesday);
+				weeklyThuCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Thursday);
+				weeklyFriCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Friday);
+				weeklySatCheck.Checked = wt.DaysOfWeek.IsFlagSet(DaysOfTheWeek.Saturday);
 				onAssignment = false;
 			}
 		}

@@ -30,9 +30,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			set
 			{
 				monthlyOnWeekDropDown.AllowOnlyOneCheckedItem = !value;
-				if (!value)
+				if (!value && monthlyDaysDropDown.Items.Count == 31)
 					monthlyDaysDropDown.Items.RemoveAt(31);
-				else if (monthlyDaysDropDown.Items.Count <= 31)
+				else if (value && monthlyDaysDropDown.Items.Count <= 31)
 					monthlyDaysDropDown.Items.Add(new ListControlItem(EditorProperties.Resources.Last, 99));
 			}
 		}

@@ -133,9 +133,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			using (var dlg = GetActionEditDialog(Resources.ActionDlgEditCaption, SelectedAction))
 			{
 				if (dlg.ShowDialog() != DialogResult.OK || dlg.Action == null) return;
-				actionListView.Items.RemoveAt(idx);
+
 				editor.TaskDefinition.Actions[idx] = dlg.Action;
-				AddActionToList(dlg.Action, idx);
+				AddActionToList(dlg.Action, idx, true);
+				actionListView.Focus();
+				actionListView.Items[idx].Focused = true;
 				actionListView.Items[idx].Selected = true;
 			}
 		}
@@ -172,8 +174,11 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				if (dlg.ShowDialog() != DialogResult.OK || dlg.Action == null) return;
 				editor.TaskDefinition.Actions.Add(dlg.Action);
-				AddActionToList(dlg.Action, -1);
-				SetActionButtonState();
+				var idx = AddActionToList(dlg.Action, -1);
+				actionListView.Focus();
+				actionListView.Items[idx].Focused = true;
+				actionListView.Items[idx].Selected = true;
+				actionListView.EnsureVisible(idx);
 			}
 		}
 
@@ -192,16 +197,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			actionListView.EndUpdate();
 		}
 
-		private void AddActionToList(Action act, int index)
+		private int AddActionToList(Action act, int index = -1, bool updateOnly = false)
 		{
 			var imgIdx = (int)act.ActionType;
 			if (imgIdx > 0) imgIdx -= 4;
 			var txt = act.ToString();
 			var lvi = new ListViewItem(new[] { TaskEnumGlobalizer.GetString(act.ActionType), txt }, imgIdx) { Tag = act, ToolTipText = txt };
-			if (index < 0)
-				actionListView.Items.Add(lvi);
+			if (updateOnly)
+			{
+				if (index < 0 || index >= actionListView.Items.Count) throw new ArgumentOutOfRangeException(nameof(index));
+				actionListView.Items[index] = lvi;
+				lvi = actionListView.Items[index];
+			}
 			else
-				actionListView.Items.Insert(index, lvi);
+			{
+				lvi = index < 0 ? actionListView.Items.Add(lvi) : actionListView.Items.Insert(index, lvi);
+			}
+			return lvi.Index;
 		}
 
 		private void allowPowerShellConvCheck_CheckedChanged(object sender, EventArgs e)
@@ -213,13 +225,13 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			return new ActionEditDialog
 			{
-				Action = a,
 				AllowRun = ShowActionRunButton,
-				AvailableActions = AvailableActions,
 				StartPosition = FormStartPosition.CenterParent,
-				SupportV1Only = SetActionEditDialogV1,
 				Text = caption,
-				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine
+				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
+				AvailableActions = AvailableActions,
+				SupportV1Only = SetActionEditDialogV1,
+				Action = a
 			};
 		}
 

@@ -16,7 +16,7 @@ using Microsoft.Win32.TaskScheduler.EditorProperties;
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>Defines the type of actions available to a user interface element.</summary>
-	[Flags]
+	[Flags, DefaultValue(Execute)]
 	public enum AvailableActions
 	{
 		/// <summary>
@@ -25,13 +25,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		Execute = 1 << 0,
 		/// <summary>This action fires a handler.</summary>
-		ComHandler = 5 << 0,
+		ComHandler = 1 << 5,
 		/// <summary>This action sends and e-mail.</summary>
-		SendEmail = 6 << 0,
+		SendEmail = 1 << 6,
 		/// <summary>This action shows a message box.</summary>
-		ShowMessage = 7 << 0,
+		ShowMessage = 1 << 7,
 		/// <summary>All actions are available.</summary>
-		AllActions = 0b1110001
+		AllActions = 0b11100001
 	}
 
 	/// <summary>Flags representing tabs that can be visible on a <see cref="TaskPropertiesControl"/>.</summary>
@@ -63,11 +63,9 @@ namespace Microsoft.Win32.TaskScheduler
 	}
 
 	/// <summary>Trigger types that can be made available to UI elements.</summary>
-	[Flags]
+	[Flags, DefaultValue(Time)]
 	public enum AvailableTriggers
 	{
-		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
-		Event = 1 << 0,
 		/// <summary>Triggers the task at a specific time of day.</summary>
 		Time = 1 << 1,
 		/// <summary>Triggers the task on a daily schedule.</summary>
@@ -86,6 +84,8 @@ namespace Microsoft.Win32.TaskScheduler
 		Boot = 1 << 8,
 		/// <summary>Triggers the task when a specific user logs on.</summary>
 		Logon = 1 << 9,
+		/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
+		Event = 1 << 0,
 		/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
 		SessionStateChange = 1 << 11,
 		/// <summary>Triggers the custom trigger. Version 1.3 only.</summary>
