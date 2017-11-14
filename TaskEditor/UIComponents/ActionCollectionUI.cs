@@ -47,12 +47,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		private AvailableActions ReallyAvailableActions => TaskPropertiesControl.GetFilteredAvailableActions(AvailableActions, editor.IsV2, editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine);
+
 		private Action SelectedAction
 		{
 			get { var idx = SelectedIndex; return idx == -1 ? null : actionListView.Items[idx].Tag as Action; }
 		}
 
-		private bool SelectedActionIsAvailable => SelectedIndex != -1 && AvailableActions.IsFlagSet(TypeToAv(SelectedAction.ActionType));
+		private bool SelectedActionIsAvailable => SelectedIndex != -1 && ReallyAvailableActions.IsFlagSet(TypeToAv(SelectedAction.ActionType));
 
 		private int SelectedIndex => actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
 

@@ -138,18 +138,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private AvailableActions ReallyAvailableActions
-		{
-			get
-			{
-				var ret = availableActions;
-				if (!isV2 && availableActions.IsFlagSet(AvailableActions.ComHandler)) ret = ret.SetFlags(AvailableActions.ComHandler, false);
-				if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.SendEmail)) ret = ret.SetFlags(AvailableActions.SendEmail, false);
-				if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.ShowMessage)) ret = ret.SetFlags(AvailableActions.ShowMessage, false);
-				if (ret == 0) throw new InvalidOperationException("No actions are available to display given the current settings.");
-				return ret;
-			}
-		}
+		private AvailableActions ReallyAvailableActions => TaskPropertiesControl.GetFilteredAvailableActions(availableActions, isV2, useUnifiedSchedulingEngine);
 
 		private void actionIdText_TextChanged(object sender, EventArgs e)
 		{

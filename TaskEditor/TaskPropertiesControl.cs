@@ -133,7 +133,7 @@ namespace Microsoft.Win32.TaskScheduler
 			try
 			{
 				using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MMC\SnapIns\FX:{c7b8fb06-bfe1-4c2e-9217-7a69a95bbac4}"))
-					helpProvider.HelpNamespace = key?.GetValue("HelpTopic", string.Empty).ToString();
+					helpProvider.HelpNamespace = key?.GetValue("HelpTopic", String.Empty).ToString();
 			}
 			catch { }
 
@@ -372,10 +372,10 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set General tab
 				if (td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				SetUserControls(td.Principal.LogonType);
-				taskNameText.Text = task?.Name ?? string.Empty;
+				taskNameText.Text = task?.Name ?? String.Empty;
 				taskNameText.ReadOnly = !TaskNameIsEditable;
 				taskLocationText.Text = GetTaskLocation();
-				if (string.IsNullOrEmpty(td.RegistrationInfo.Author))
+				if (String.IsNullOrEmpty(td.RegistrationInfo.Author))
 					td.RegistrationInfo.Author = WindowsIdentity.GetCurrent().Name;
 				taskAuthorText.Text = GetStringValue(td.RegistrationInfo.Author);
 				taskDescText.Text = GetStringValue(td.RegistrationInfo.Description);
@@ -423,7 +423,7 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set Info tab
 				taskRegDocText.Text = GetStringValue(td.RegistrationInfo.Documentation);
 				var sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
-				if (string.IsNullOrEmpty(sddl) && Task != null)
+				if (String.IsNullOrEmpty(sddl) && Task != null)
 					sddl = Task.GetSecurityDescriptorSddlForm();
 				taskRegSDDLText.Text = sddl;
 				taskRegSDDLBtn.Visible = secEd != null && IsV2;
@@ -534,13 +534,41 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			var vals = enumValue.ToString().Split(new[] { ", " }, StringSplitOptions.None);
 			if (vals.Length == 0)
-				return string.Empty;
+				return String.Empty;
 
 			for (var i = 0; i < vals.Length; i++)
 			{
 				vals[i] = Resources.ResourceManager.GetString(preface + vals[i], CultureInfo.CurrentUICulture);
 			}
-			return string.Join(", ", vals);
+			return String.Join(", ", vals);
+		}
+
+		internal static AvailableTriggers GetFilteredAvailableTriggers(AvailableTriggers availableTriggers, bool isV2, bool useUnifiedSchedulingEngine, bool showCustom)
+		{
+			var ret = availableTriggers;
+			// Remove all non-V1 triggers if set
+			if (!isV2)
+				ret &= ~(AvailableTriggers.Event | AvailableTriggers.Registration | AvailableTriggers.SessionStateChange);
+			// Remove custom trigger if not shown or v1
+			if (!showCustom || !isV2)
+				ret &= ~AvailableTriggers.Custom;
+			// Remove unsupported USE triggers
+			if (useUnifiedSchedulingEngine)
+				ret &= ~(AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW);
+			return ret != 0 ? ret : throw new InvalidOperationException("No triggers are available to display given the current settings.");
+		}
+
+		internal static AvailableActions GetFilteredAvailableActions(AvailableActions availableActions, bool isV2, bool useUnifiedSchedulingEngine)
+		{
+			var ret = availableActions;
+			if (!isV2 && availableActions.IsFlagSet(AvailableActions.ComHandler))
+				ret = ret.SetFlags(AvailableActions.ComHandler, false);
+			if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.SendEmail))
+				ret = ret.SetFlags(AvailableActions.SendEmail, false);
+			if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.ShowMessage))
+				ret = ret.SetFlags(AvailableActions.ShowMessage, false);
+			if (ret == 0) throw new InvalidOperationException("No actions are available to display given the current settings.");
+			return ret;
 		}
 
 		/// <summary>Gets a string value that is converted if needed.</summary>
@@ -903,7 +931,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
 
 			var user = td?.Principal.ToString();
-			if (string.IsNullOrEmpty(user))
+			if (String.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
 			changePrincipalButton.Text = flagUserIsAnAdmin ? Resources.ChangeUserBtn : Resources.ChangeUserBtnNonAdmin;
@@ -955,7 +983,7 @@ namespace Microsoft.Win32.TaskScheduler
 			var valid = pkr != null && pkr.Enabled && pkr.IsTextValid;
 			e.Cancel = !valid;
 			if (pkr != null)
-				errorProvider.SetError(pkr, valid ? string.Empty : Resources.Error_InvalidSpanValue);
+				errorProvider.SetError(pkr, valid ? String.Empty : Resources.Error_InvalidSpanValue);
 		}
 
 		private void tabControl_TabIndexChanged(object sender, EventArgs e)
@@ -1100,7 +1128,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskMaintenanceDeadlineCombo_Validating(object sender, CancelEventArgs e)
 		{
 			var valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenanceDeadlineCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value && (taskMaintenanceDeadlineCombo.Enabled && taskMaintenanceDeadlineCombo.IsTextValid));
-			errorProvider.SetError(taskMaintenanceDeadlineCombo, valid ? string.Empty : Resources.Error_MaintenanceDeadlineLimit);
+			errorProvider.SetError(taskMaintenanceDeadlineCombo, valid ? String.Empty : Resources.Error_MaintenanceDeadlineLimit);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, Resources.Error_MaintenanceDeadlineLimit));
 			HasError = valid;
 			e.Cancel = !valid;
@@ -1129,7 +1157,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void taskMaintenancePeriodCombo_Validating(object sender, CancelEventArgs e)
 		{
 			var valid = (taskMaintenanceDeadlineCombo.Value == TimeSpan2.Zero && taskMaintenancePeriodCombo.Value == TimeSpan2.Zero) || (taskMaintenancePeriodCombo.Value >= PT1D && taskMaintenanceDeadlineCombo.Value > taskMaintenancePeriodCombo.Value && (taskMaintenancePeriodCombo.Enabled && taskMaintenancePeriodCombo.IsTextValid));
-			errorProvider.SetError(taskMaintenancePeriodCombo, valid ? string.Empty : Resources.Error_MaintenanceDeadlineLimit);
+			errorProvider.SetError(taskMaintenancePeriodCombo, valid ? String.Empty : Resources.Error_MaintenanceDeadlineLimit);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, Resources.Error_MaintenanceDeadlineLimit));
 			HasError = valid;
 			e.Cancel = !valid;
@@ -1449,7 +1477,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool ValidateText(Control ctrl, Predicate<string> pred, string error)
 		{
 			var valid = pred(ctrl.Text);
-			errorProvider.SetError(ctrl, valid ? string.Empty : error);
+			errorProvider.SetError(ctrl, valid ? String.Empty : error);
 			OnComponentError(valid ? ComponentErrorEventArgs.Empty : new ComponentErrorEventArgs(null, error));
 			HasError = valid;
 			return valid;
@@ -1494,7 +1522,7 @@ namespace Microsoft.Win32.TaskScheduler
 					case int i:
 						return Version == i;
 				}
-				return string.Compare(Text, obj.ToString(), StringComparison.Ordinal) == 0;
+				return String.Compare(Text, obj.ToString(), StringComparison.Ordinal) == 0;
 			}
 
 			public override int GetHashCode() => Version.GetHashCode();

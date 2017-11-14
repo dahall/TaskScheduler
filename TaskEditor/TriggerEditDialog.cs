@@ -272,23 +272,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private AvailableTriggers ReallyAvailableTriggers
-		{
-			get
-			{
-				var ret = availableTriggers;
-				// Remove all non-V1 triggers if set
-				if (!isV2)
-					ret &= ~(AvailableTriggers.Event | AvailableTriggers.Registration | AvailableTriggers.SessionStateChange);
-				// Remove custom trigger if not shown or v1
-				if (!showCustom || !isV2)
-					ret &= ~AvailableTriggers.Custom;
-				// Remove unsupported USE triggers
-				if (useUnifiedSchedulingEngine)
-					ret &= ~(AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW);
-				return ret != 0 ? ret : throw new InvalidOperationException("No triggers are available to display given the current settings.");
-			}
-		}
+		private AvailableTriggers ReallyAvailableTriggers => TaskPropertiesControl.GetFilteredAvailableTriggers(availableTriggers, isV2, useUnifiedSchedulingEngine, showCustom);
 
 		private TaskTriggerDisplayType? SelectedComboValue => (triggerTypeCombo.SelectedItem as TextValueItem<TaskTriggerDisplayType>)?.Value;
 
