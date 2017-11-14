@@ -63,7 +63,8 @@ namespace Microsoft.Win32.TaskScheduler
 			System.Text.RegularExpressions.Match match;
 			if (iTaskDef.Data != null && (match = System.Text.RegularExpressions.Regex.Match(iTaskDef.Data, psV2IdRegex)).Success)
 			{
-				bool on = bool.Parse(match.Groups["v"].Value);
+				var on = false;
+				try { on = bool.Parse(match.Groups["v"].Value); } catch { try { on = int.Parse(match.Groups["v"].Value) == 1; } catch {} }
 				if (on)
 					psConvert |= PowerShellActionPlatformOption.Version2;
 				else
