@@ -5,7 +5,7 @@
 
 ## Quick Links
 * [Discussion Forum (users helping users, enhancement requests, Q&A)](https://groups.google.com/forum/#!forum/taskscheduler)
-* [Documentation Wiki (samples, library how-to, etc.)](https://github.com/dahall/TaskScheduler/wiki/Documentation)
+* [Documentation Wiki (samples, library how-to, etc.)](https://github.com/dahall/TaskScheduler/wiki)
 * [API documentation (class/method/property help)](https://dahall.github.io/TaskScheduler)
 * [Issues](https://github.com/dahall/TaskScheduler/issues)
 
