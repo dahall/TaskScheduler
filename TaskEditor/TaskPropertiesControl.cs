@@ -423,8 +423,8 @@ namespace Microsoft.Win32.TaskScheduler
 				// Set Info tab
 				taskRegDocText.Text = GetStringValue(td.RegistrationInfo.Documentation);
 				var sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
-				if (String.IsNullOrEmpty(sddl) && Task != null)
-					sddl = Task.GetSecurityDescriptorSddlForm();
+				if (string.IsNullOrEmpty(sddl) && Task != null && IsV2)
+					try { sddl = Task.GetSecurityDescriptorSddlForm(); } catch { }
 				taskRegSDDLText.Text = sddl;
 				taskRegSDDLBtn.Visible = secEd != null && IsV2;
 				taskRegLayoutPanel.SetColumnSpan(taskRegSDDLText, secEd != null && IsV2 ? 1 : 2);

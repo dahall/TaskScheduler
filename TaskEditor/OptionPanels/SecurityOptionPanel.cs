@@ -34,8 +34,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			if (td != null && td.Principal.LogonType == TaskLogonType.None) td.Principal.LogonType = TaskLogonType.InteractiveToken;
 			SetUserControls(td != null ? td.Principal.LogonType : TaskLogonType.InteractiveTokenOrPassword);
 			var sddl = td.RegistrationInfo.SecurityDescriptorSddlForm;
-			if (string.IsNullOrEmpty(sddl) && parent.Task != null)
-				sddl = parent.Task.GetSecurityDescriptorSddlForm();
+			if (string.IsNullOrEmpty(sddl) && parent.Task != null && parent.IsV2)
+				try { sddl = parent.Task.GetSecurityDescriptorSddlForm(); } catch { }
 			taskRegSDDLText.Text = sddl;
 		}
 
