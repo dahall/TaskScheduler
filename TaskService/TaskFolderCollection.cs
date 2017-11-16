@@ -118,19 +118,19 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
 			if (array == null) throw new ArgumentNullException(nameof(array));
-			if (v2FolderList != null)
-			{
-				if (arrayIndex + Count > array.Length)
-					throw new ArgumentException();
-				foreach (V2Interop.ITaskFolder f in v2FolderList)
-					array[arrayIndex++] = new TaskFolder(parent.TaskService, f);
-			}
-			else
-			{
-				if (arrayIndex + v1FolderList.Length > array.Length)
-					throw new ArgumentException();
-				v1FolderList.CopyTo(array, arrayIndex);
-			}
+		    if (v2FolderList != null)
+		    {
+		        if (arrayIndex + Count > array.Length)
+		            throw new ArgumentException();
+		        for (var x = 0; x < v2FolderList.Count; x++)
+		            array[arrayIndex++] = new TaskFolder(parent.TaskService, v2FolderList[x]);
+		    }
+		    else
+		    {
+		        if (arrayIndex + v1FolderList.Length > array.Length)
+		            throw new ArgumentException();
+		        v1FolderList.CopyTo(array, arrayIndex);
+		    }
 		}
 
 		/// <summary>
@@ -170,7 +170,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
 			if (v2FolderList != null)
-				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder, V2Interop.ITaskFolderCollection>(v2FolderList, o => new TaskFolder(parent.TaskService, (V2Interop.ITaskFolder)o));
+				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder>(() => v2FolderList.Count, n => v2FolderList[n], o => new TaskFolder(parent.TaskService, (V2Interop.ITaskFolder)o));
 			return Array.AsReadOnly(v1FolderList).GetEnumerator();
 		}
 
