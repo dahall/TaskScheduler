@@ -55,7 +55,7 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				onAssignment = true;
-				if (value != null && !ReallyAvailableActions.IsFlagSet((AvailableActions)(1 << (int)value.ActionType)))
+				if (value != null && !AvailableActions.IsFlagSet((AvailableActions)(1 << (int)value.ActionType)))
 					throw new ArgumentException("Type of Action is not permitted.", nameof(Action));
 				if (value == null) value = GetFirstAvailableAction();
 				action = value;
@@ -133,12 +133,10 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				var x = AvailableActions.AllActions & ~ReallyAvailableActions;
+				var x = AvailableActions.AllActions & ~AvailableActions;
 				return x == 0 ? null : x.GetFlags().Select(AvToType).ToList();
 			}
 		}
-
-		private AvailableActions ReallyAvailableActions => TaskPropertiesControl.GetFilteredAvailableActions(availableActions, isV2, useUnifiedSchedulingEngine);
 
 		private void actionIdText_TextChanged(object sender, EventArgs e)
 		{
@@ -183,7 +181,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void DetermineIfCanValidate() { okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate; }
 
-		private Action GetFirstAvailableAction() => Action.CreateAction(AvToType(ReallyAvailableActions.GetFlags().First()));
+		private Action GetFirstAvailableAction() => Action.CreateAction(AvToType(AvailableActions.GetFlags().First()));
 
 		private void keyField_TextChanged(object sender, EventArgs e) { DetermineIfCanValidate(); }
 

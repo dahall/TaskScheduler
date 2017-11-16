@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler.Design;
 using Microsoft.Win32.TaskScheduler.EditorProperties;
 // ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -162,6 +164,9 @@ namespace Microsoft.Win32.TaskScheduler
 			// Settings for shown tabs
 			AvailableTabs = AvailableTaskTabs.Default;
 
+			// If the value of PowerShellConversion changes, update which actions can be edited
+			actionCollectionUI.PowerShellConversionChanged += (sender, args) => UpdateAvailableActions(AvailableActions);
+
 			// Initialize all the controls as not editable
 			InitControls(false);
 		}
@@ -176,7 +181,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public AvailableActions AvailableActions
 		{
 			get => actionCollectionUI.AvailableActions;
-			set => actionCollectionUI.AvailableActions = value;
+			set => UpdateAvailableActions(value);
 		}
 
 		/// <summary>Gets or sets the available tabs.</summary>
@@ -211,7 +216,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public AvailableTriggers AvailableTriggers
 		{
 			get => triggerCollectionUI1.AvailableTriggers;
-			set => triggerCollectionUI1.AvailableTriggers = value;
+			set => UpdateAvailableTriggers(value);
 		}
 
 		/// <summary>Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.</summary>
@@ -356,6 +361,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 				onAssignment = true;
 				td = value ?? throw new ArgumentNullException(nameof(TaskDefinition), @"TaskDefinition cannot be set to null.");
+				UpdateAvailableActions(AvailableActions);
+				UpdateAvailableTriggers(AvailableTriggers);
 				SetVersionComboItems();
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= new Version(1, 2);
 
@@ -541,34 +548,6 @@ namespace Microsoft.Win32.TaskScheduler
 				vals[i] = Resources.ResourceManager.GetString(preface + vals[i], CultureInfo.CurrentUICulture);
 			}
 			return String.Join(", ", vals);
-		}
-
-		internal static AvailableTriggers GetFilteredAvailableTriggers(AvailableTriggers availableTriggers, bool isV2, bool useUnifiedSchedulingEngine, bool showCustom)
-		{
-			var ret = availableTriggers;
-			// Remove all non-V1 triggers if set
-			if (!isV2)
-				ret &= ~(AvailableTriggers.Event | AvailableTriggers.Registration | AvailableTriggers.SessionStateChange);
-			// Remove custom trigger if not shown or v1
-			if (!showCustom || !isV2)
-				ret &= ~AvailableTriggers.Custom;
-			// Remove unsupported USE triggers
-			if (useUnifiedSchedulingEngine)
-				ret &= ~(AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW);
-			return ret != 0 ? ret : throw new InvalidOperationException("No triggers are available to display given the current settings.");
-		}
-
-		internal static AvailableActions GetFilteredAvailableActions(AvailableActions availableActions, bool isV2, bool useUnifiedSchedulingEngine)
-		{
-			var ret = availableActions;
-			if (!isV2 && availableActions.IsFlagSet(AvailableActions.ComHandler))
-				ret = ret.SetFlags(AvailableActions.ComHandler, false);
-			if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.SendEmail))
-				ret = ret.SetFlags(AvailableActions.SendEmail, false);
-			if ((!isV2 || useUnifiedSchedulingEngine) && availableActions.IsFlagSet(AvailableActions.ShowMessage))
-				ret = ret.SetFlags(AvailableActions.ShowMessage, false);
-			if (ret == 0) throw new InvalidOperationException("No actions are available to display given the current settings.");
-			return ret;
 		}
 
 		/// <summary>Gets a string value that is converted if needed.</summary>
@@ -1425,6 +1404,16 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Settings.WakeToRun = taskWakeToRunCheck.Checked;
 		}
 
+		private void UpdateAvailableActions(AvailableActions value)
+		{
+			actionCollectionUI.AvailableActions = TaskService == null ? value : TaskDefinition.GetFilteredAvailableActions(value, TaskService.HighestSupportedVersion);
+		}
+
+		private void UpdateAvailableTriggers(AvailableTriggers value)
+		{
+			triggerCollectionUI1.AvailableTriggers = TaskService == null ? value : TaskDefinition.GetFilteredAvailableTriggers(value, TaskService.HighestSupportedVersion);
+		}
+
 		private void UpdateIdleSettingsControls()
 		{
 			var idleEnabled = taskIdleDurationCheck.Checked && editable;
@@ -1449,6 +1438,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (idx < 0 || idx >= taskMultInstCombo.Items.Count) idx = 2;
 			taskMultInstCombo.SelectedIndex = idx;
 			taskMultInstCombo.EndUpdate();
+			UpdateAvailableActions(AvailableActions);
+			UpdateAvailableTriggers(AvailableTriggers);
 			if (!alreadyOnAssigment)
 				onAssignment = false;
 		}

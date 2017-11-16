@@ -37,6 +37,8 @@ namespace Microsoft.Win32.TaskScheduler
 		private Task task;
 		private TaskDefinition td;
 		private bool titleSet;
+		private AvailableActions availableActions = AvailableActions.AllActions;
+		private AvailableTriggers availableTriggers = AvailableTriggers.AllTriggers;
 
 		/// <summary>Initializes a new instance of the <see cref="TaskOptionsEditor"/> class.</summary>
 		public TaskOptionsEditor()
@@ -82,7 +84,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The available actions.</value>
 		[DefaultValue(typeof(AvailableActions), nameof(AvailableActions.AllActions))]
 		[Category("Appearance")]
-		public AvailableActions AvailableActions { get; set; } = AvailableActions.AllActions;
+		public AvailableActions AvailableActions
+		{
+			get => availableActions;
+			set => UpdateAvailableActions(value);
+		}
 
 		/*/// <summary>Gets or sets the available tabs.</summary>
 		/// <value>The available tabs.</value>
@@ -97,7 +103,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The available triggers.</value>
 		[DefaultValue(typeof(AvailableTriggers), nameof(AvailableTriggers.AllTriggers))]
 		[Category("Appearance")]
-		public AvailableTriggers AvailableTriggers { get; set; } = AvailableTriggers.AllTriggers;
+		public AvailableTriggers AvailableTriggers
+		{
+			get => availableTriggers;
+			set => UpdateAvailableTriggers(value);
+		}
 
 		/// <summary>Gets or sets a value indicating whether to convert references to resource strings in libraries to their value.</summary>
 		/// <value><c>true</c> if references to resource strings are converted; otherwise, <c>false</c>.</value>
@@ -188,6 +198,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 				onAssignment = true;
 				td = value ?? throw new ArgumentNullException("TaskDefinition cannot be set to null.");
+				UpdateAvailableActions(AvailableActions);
+				UpdateAvailableTriggers(AvailableTriggers);
 				SetVersionComboItems();
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 &&
 					   TaskService.HighestSupportedVersion >= new Version(1, 2);
@@ -565,6 +577,16 @@ namespace Microsoft.Win32.TaskScheduler
 					MessageBox.Show(this, msg.ToString(), Resources.TaskSchedulerName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					taskVersionCombo.SelectedIndex = taskVersionCombo.Items.IndexOf((int)priorSetting);
 				}
+		}
+
+		internal void UpdateAvailableActions(AvailableActions value)
+		{
+			availableActions = TaskService == null ? value : TaskDefinition.GetFilteredAvailableActions(value, TaskService.HighestSupportedVersion);
+		}
+
+		internal void UpdateAvailableTriggers(AvailableTriggers value)
+		{
+			availableTriggers = TaskService == null ? value : TaskDefinition.GetFilteredAvailableTriggers(value, TaskService.HighestSupportedVersion);
 		}
 
 		private void UpdateTitleFont()

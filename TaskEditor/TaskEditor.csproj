@@ -343,6 +343,7 @@
     <Compile Include="TaskServiceConnectDialog.Designer.cs">
       <DependentUpon>TaskServiceConnectDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskServiceExtensions.cs" />
     <Compile Include="TextValueItem.cs" />
     <Compile Include="TimeSpanExtension.cs" />
     <Compile Include="TriggerEditDialog.cs">

@@ -35,14 +35,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		private AvailableTriggers ReallyAvailableTriggers => TaskPropertiesControl.GetFilteredAvailableTriggers(AvailableTriggers, editor.IsV2, editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine, true);
-
 		private Trigger SelectedTrigger
 		{
 			get { var idx = SelectedIndex; return idx == -1 ? null : triggerListView.Items[idx].Tag as Trigger; }
 		}
 
-		private bool SelectedTriggerIsAvailable => SelectedIndex != -1 && ReallyAvailableTriggers.IsFlagSet(TypeToAv(SelectedTrigger.TriggerType));
+		private bool SelectedTriggerIsAvailable => SelectedIndex != -1 && AvailableTriggers.IsFlagSet(TypeToAv(SelectedTrigger.TriggerType));
 
 		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 
@@ -123,7 +121,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		{
 			return new TriggerEditDialog(t, editor.TaskDefinition.Settings.Compatibility < TaskCompatibility.V2, AvailableTriggers)
 			{
-				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
+				//UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
 				StartPosition = FormStartPosition.CenterParent,
 				TargetServer = editor.TaskService.TargetServer,
 				Text = caption,

@@ -187,6 +187,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			schedDailyRadio.Enabled = availableTriggers.IsFlagSet(AvailableTriggers.Daily);
 			schedWeeklyRadio.Enabled = availableTriggers.IsFlagSet(AvailableTriggers.Weekly);
 			schedMonthlyRadio.Enabled = !useUnifiedSchedulingEngine && (availableTriggers.IsFlagSet(AvailableTriggers.Monthly) || availableTriggers.IsFlagSet(AvailableTriggers.MonthlyDOW));
+
+			monthlyTriggerUI1.AvailableTriggers = AvailableTriggers;
 		}
 
 		private void schedOneRadio_CheckedChanged(object sender, EventArgs e)

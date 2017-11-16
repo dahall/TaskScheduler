@@ -143,6 +143,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 					}
 				}
 				td.Settings.UseUnifiedSchedulingEngine = taskUseUnifiedSchedulingEngineCheck.Checked;
+				parent.UpdateAvailableActions(parent.AvailableActions);
+				parent.UpdateAvailableTriggers(parent.AvailableTriggers);
 				parent.ReinitializeControls();
 			}
 		}

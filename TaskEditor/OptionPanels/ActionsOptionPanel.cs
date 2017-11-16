@@ -5,6 +5,8 @@
 		public ActionsOptionPanel()
 		{
 			InitializeComponent();
+			// If the value of PowerShellConversion changes, update which actions can be edited
+			actionCollectionUI1.PowerShellConversionChanged += (sender, args) => parent.UpdateAvailableActions(parent.AvailableActions);
 		}
 
 		protected override void InitializePanel()

@@ -6,6 +6,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 	[DefaultEvent("TriggerTypeChanged")]
 	internal partial class MonthlyTriggerUI : BaseTriggerUI
 	{
+		private const AvailableTriggers monthlyTriggers = AvailableTriggers.MonthlyDOW | AvailableTriggers.Monthly;
+
 		public MonthlyTriggerUI()
 		{
 			InitializeComponent();
@@ -23,6 +25,25 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 
 		[Category("Property Changed")]
 		public event EventHandler TriggerTypeChanged;
+
+		/// <summary>Gets or sets the available triggers.</summary>
+		/// <value>The available triggers.</value>
+		[DefaultValue(monthlyTriggers), Category("Appearance")]
+		public AvailableTriggers AvailableTriggers
+		{
+			get => (monthlyDaysRadio.Enabled ? AvailableTriggers.Monthly : 0) | (monthlyOnRadio.Enabled ? AvailableTriggers.MonthlyDOW : 0);
+			set
+			{
+				value &= monthlyTriggers; // filter out unneeded values
+				if (AvailableTriggers == value) return;
+				monthlyDaysRadio.Enabled = value.IsFlagSet(AvailableTriggers.Monthly);
+				monthlyOnRadio.Enabled = value.IsFlagSet(AvailableTriggers.MonthlyDOW);
+				if (!monthlyDaysRadio.Enabled && monthlyDaysRadio.Checked)
+					monthlyOnRadio.Checked = true;
+				else if (!monthlyOnRadio.Enabled && monthlyOnRadio.Checked)
+					monthlyDaysRadio.Checked = true;
+			}
+		}
 
 		public override bool IsV2
 		{

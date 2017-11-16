@@ -58,7 +58,7 @@ namespace Microsoft.Win32.TaskScheduler
 				Trigger = trigger;
 			else
 			{
-				Trigger = (ReallyAvailableTriggers & CalendarTriggerUI.calendarTriggers) != 0 ? GetFirstAvailableTrigger(CalendarTriggerUI.calendarTriggers) : GetFirstAvailableTrigger();
+				Trigger = (AvailableTriggers & CalendarTriggerUI.calendarTriggers) != 0 ? GetFirstAvailableTrigger(CalendarTriggerUI.calendarTriggers) : GetFirstAvailableTrigger();
 				initialStartBoundary = DateTime.MinValue;
 			}
 		}
@@ -111,7 +111,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value == 0) throw new ArgumentException("Value cannot be 0", nameof(AvailableTriggers));
 				if (availableTriggers == value) return;
 				availableTriggers = value;
-				calendarTriggerUI1.AvailableTriggers = ReallyAvailableTriggers;
+				calendarTriggerUI1.AvailableTriggers = AvailableTriggers;
 				ResetCombo();
 			}
 		}
@@ -252,7 +252,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var excl = new List<TaskTriggerDisplayType>();
 				// Get unavailable settings and convert to unavailable views
-				foreach (var t in (AvailableTriggers.AllTriggers & ~ReallyAvailableTriggers).GetFlags().Select(AvToType))
+				foreach (var t in (AvailableTriggers.AllTriggers & ~AvailableTriggers).GetFlags().Select(AvToType))
 				{
 					var d = DisplayForType(t);
 					// Add all types of sessions
@@ -264,7 +264,7 @@ namespace Microsoft.Win32.TaskScheduler
 						AddIfMissing(excl, d);
 				}
 				// All schedule triggers must be unavailable before hiding view
-				if ((ReallyAvailableTriggers & (AvailableTriggers.Time | AvailableTriggers.Daily | AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW)) == 0)
+				if ((AvailableTriggers & (AvailableTriggers.Time | AvailableTriggers.Daily | AvailableTriggers.Weekly | AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW)) == 0)
 					AddIfMissing(excl, TaskTriggerDisplayType.Schedule);
 				return excl;
 
@@ -272,15 +272,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private AvailableTriggers ReallyAvailableTriggers => TaskPropertiesControl.GetFilteredAvailableTriggers(availableTriggers, isV2, useUnifiedSchedulingEngine, showCustom);
-
 		private TaskTriggerDisplayType? SelectedComboValue => (triggerTypeCombo.SelectedItem as TextValueItem<TaskTriggerDisplayType>)?.Value;
 
 		private TaskTriggerDisplayType TriggerView
 		{
 			get
 			{
-				var def = DisplayForType(AvToType(ReallyAvailableTriggers.GetFlags().First()));
+				var def = DisplayForType(AvToType(AvailableTriggers.GetFlags().First()));
 				return triggerTypeCombo.SelectedIndex == -1 ? def : SelectedComboValue ?? def;
 			}
 			set
@@ -414,7 +412,7 @@ namespace Microsoft.Win32.TaskScheduler
 				trigger.EndBoundary = expireDatePicker.Value == DateTimePicker.MinimumDateTime || expireDatePicker.Value == DateTimePicker.MaximumDateTime ? DateTime.MaxValue : expireDatePicker.Value;
 		}
 
-		private Trigger GetFirstAvailableTrigger(AvailableTriggers filter = AvailableTriggers.AllTriggers) => Trigger.CreateTrigger(AvToType((ReallyAvailableTriggers & filter).GetFlags().First()));
+		private Trigger GetFirstAvailableTrigger(AvailableTriggers filter = AvailableTriggers.AllTriggers) => Trigger.CreateTrigger(AvToType((AvailableTriggers & filter).GetFlags().First()));
 
 		private void logonAnyUserRadio_CheckedChanged(object sender, EventArgs e)
 		{
@@ -492,11 +490,11 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetControls()
 		{
-			if (trigger != null && !ReallyAvailableTriggers.IsFlagSet((AvailableTriggers)(1 << (int)trigger.TriggerType)))
+			if (trigger != null && !AvailableTriggers.IsFlagSet((AvailableTriggers)(1 << (int)trigger.TriggerType)))
 				throw new ArgumentException("Type of current Action is not permitted.", nameof(Trigger));
 
 			// Update CalendarTriggerUI
-			calendarTriggerUI1.AvailableTriggers = ReallyAvailableTriggers;
+			calendarTriggerUI1.AvailableTriggers = AvailableTriggers;
 			calendarTriggerUI1.IsV2 = isV2;
 			calendarTriggerUI1.UseUnifiedSchedulingEngine = UseUnifiedSchedulingEngine;
 

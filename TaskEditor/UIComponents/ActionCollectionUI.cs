@@ -16,6 +16,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			InitializeComponent();
 		}
 
+		/// <summary>Occurs when value of the <see cref="ActionCollection.PowerShellConversion"/> changes.</summary>
+		public event EventHandler PowerShellConversionChanged;
+
 		/// <summary>Gets or sets the available actions.</summary>
 		/// <value>The available actions.</value>
 		[DefaultValue(typeof(AvailableActions), nameof(AvailableActions.AllActions)), Category("Appearance")]
@@ -47,14 +50,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		private AvailableActions ReallyAvailableActions => TaskPropertiesControl.GetFilteredAvailableActions(AvailableActions, editor.IsV2, editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine);
-
 		private Action SelectedAction
 		{
 			get { var idx = SelectedIndex; return idx == -1 ? null : actionListView.Items[idx].Tag as Action; }
 		}
 
-		private bool SelectedActionIsAvailable => SelectedIndex != -1 && ReallyAvailableActions.IsFlagSet(TypeToAv(SelectedAction.ActionType));
+		private bool SelectedActionIsAvailable => SelectedIndex != -1 && AvailableActions.IsFlagSet(TypeToAv(SelectedAction.ActionType));
 
 		private int SelectedIndex => actionListView.SelectedIndices.Count > 0 ? actionListView.SelectedIndices[0] : -1;
 
@@ -221,6 +222,8 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void allowPowerShellConvCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			editor.TaskDefinition.Actions.PowerShellConversion = allowPowerShellConvCheck.Checked ? PowerShellActionPlatformOption.All : PowerShellActionPlatformOption.Version2;
+			PowerShellConversionChanged?.Invoke(this, EventArgs.Empty);
+			SetActionButtonState();
 		}
 
 		private ActionEditDialog GetActionEditDialog(string caption, Action a = null)
@@ -230,7 +233,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				AllowRun = ShowActionRunButton,
 				StartPosition = FormStartPosition.CenterParent,
 				Text = caption,
-				UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
+				//UseUnifiedSchedulingEngine = editor.TaskDefinition.Settings.UseUnifiedSchedulingEngine,
 				AvailableActions = AvailableActions,
 				SupportV1Only = SetActionEditDialogV1,
 				Action = a
