@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskService", "TestTaskService\TestTaskService.csproj", "{207F8F60-0A74-4959-8623-5D258EB133EB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -128,6 +128,7 @@ Global
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|ARM.Build.0 = Debug|Any CPU
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|x64.Build.0 = Debug|Any CPU
 		{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}.Debug|x86.ActiveCfg = Debug|Any CPU

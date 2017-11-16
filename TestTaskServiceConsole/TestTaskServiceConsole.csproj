@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TaskScheduler" Version="2.6.2" />
+    <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -84,6 +84,9 @@
     <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs">
       <Link>Native\ExtensionAttributeFor.NET_2.0.cs</Link>
     </Compile>
+    <Compile Include="..\TaskService\Native\Func.Net2.cs">
+      <Link>Native\Func.Net2.cs</Link>
+    </Compile>
     <Compile Include="..\TaskService\Native\InteropUtil.cs">
       <Link>Native\InteropUtil.cs</Link>
     </Compile>
