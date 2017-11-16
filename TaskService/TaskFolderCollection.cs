@@ -122,8 +122,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (arrayIndex + Count > array.Length)
 					throw new ArgumentException();
-				foreach (V2Interop.ITaskFolder f in v2FolderList)
-					array[arrayIndex++] = new TaskFolder(parent.TaskService, f);
+				foreach (var f in this)
+					array[arrayIndex++] = f;
 			}
 			else
 			{
@@ -170,7 +170,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
 			if (v2FolderList != null)
-				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder, V2Interop.ITaskFolderCollection>(v2FolderList, o => new TaskFolder(parent.TaskService, (V2Interop.ITaskFolder)o));
+				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder, V2Interop.ITaskFolder>(() => v2FolderList.Count, (object o) => v2FolderList[o], o => new TaskFolder(parent.TaskService, o));
 			return Array.AsReadOnly(v1FolderList).GetEnumerator();
 		}
 

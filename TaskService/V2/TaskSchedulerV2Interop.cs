@@ -20,12 +20,12 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("02820E19-7B98-4ED2-B2E8-FDCCCEFF619B"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface IActionCollection : IEnumerable
+	internal interface IActionCollection
 	{
 		int Count { get; }
 		IAction this[int index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 		string XmlText { [return: MarshalAs(UnmanagedType.BStr)] get; [param: In, MarshalAs(UnmanagedType.BStr)] set; }
 		[return: MarshalAs(UnmanagedType.Interface)]
 		IAction Create([In] TaskActionType Type);
@@ -243,12 +243,12 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("86627EB4-42A7-41E4-A4D9-AC33A72F2D52"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface IRegisteredTaskCollection : IEnumerable
+	internal interface IRegisteredTaskCollection
 	{
 		int Count { get; }
 		IRegisteredTask this[object index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 	}
 
 	[ComImport, Guid("416D8B73-CB41-4EA1-805C-9BE9A5AC4A74"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
@@ -301,12 +301,12 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("6A67614B-6828-4FEC-AA54-6D52E8F1F2DB"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface IRunningTaskCollection : IEnumerable
+	internal interface IRunningTaskCollection
 	{
 		int Count { get; }
 		IRunningTask this[object index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 	}
 
 	[ComImport, InterfaceType(ComInterfaceType.InterfaceIsDual), Guid("754DA71B-4385-4475-9DD9-598294FA3641"), System.Security.SuppressUnmanagedCodeSecurity]
@@ -374,21 +374,21 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("79184A66-8664-423F-97F1-637356A5D812"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface ITaskFolderCollection : IEnumerable
+	internal interface ITaskFolderCollection
 	{
 		int Count { get; }
 		ITaskFolder this[object index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 	}
 
 	[ComImport, Guid("B4EF826B-63C3-46E4-A504-EF69E4F7EA4D"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface ITaskNamedValueCollection : IEnumerable
+	internal interface ITaskNamedValueCollection
 	{
 		int Count { get; }
 		ITaskNamedValuePair this[int index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 		[return: MarshalAs(UnmanagedType.Interface)]
 		ITaskNamedValuePair Create([In, MarshalAs(UnmanagedType.BStr)][NotNull] string Name, [In, MarshalAs(UnmanagedType.BStr)] string Value);
 		void Remove([In] int index);
@@ -545,12 +545,12 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 	}
 
 	[ComImport, Guid("85DF5081-1B24-4F32-878A-D9D14DF4CB77"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
-	internal interface ITriggerCollection : IEnumerable
+	internal interface ITriggerCollection
 	{
 		int Count { get; }
 		ITrigger this[int index] { [return: MarshalAs(UnmanagedType.Interface)] get; }
 		[return: MarshalAs(UnmanagedType.Interface)]
-		new IEnumerator GetEnumerator();
+		IEnumerator GetEnumerator();
 		[return: MarshalAs(UnmanagedType.Interface)]
 		ITrigger Create([In] TaskTriggerType Type);
 		void Remove([In, MarshalAs(UnmanagedType.Struct)] object index);

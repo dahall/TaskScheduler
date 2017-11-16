@@ -456,7 +456,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<Action> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new ComEnumerator<Action, V2Interop.IActionCollection>(v2Coll, o => Action.CreateAction(o as V2Interop.IAction));
+				return new ComEnumerator<Action, V2Interop.IAction>(() => v2Coll.Count, i => v2Coll[i], Action.CreateAction);
 			return v1Actions.GetEnumerator();
 		}
 

@@ -246,7 +246,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return unboundDict.ConvertAll(p => p.Name);
 
 				var ret = new List<string>(v2Coll.Count);
-				foreach (ITaskNamedValuePair item in v2Coll)
+				foreach (var item in this)
 					ret.Add(item.Name);
 				return ret;
 			}
@@ -267,7 +267,7 @@ namespace Microsoft.Win32.TaskScheduler
 					return unboundDict.ConvertAll(p => p.Value);
 
 				var ret = new List<string>(v2Coll.Count);
-				foreach (ITaskNamedValuePair item in v2Coll)
+				foreach (var item in this)
 					ret.Add(item.Value);
 				return ret;
 			}
@@ -407,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.GetEnumerator();
 
-			return new ComEnumerator<NameValuePair, ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((ITaskNamedValuePair)o));
+			return new ComEnumerator<NameValuePair, ITaskNamedValuePair>(() => v2Coll.Count, i => v2Coll[i], o => new NameValuePair(o));
 		}
 
 		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -497,7 +497,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 			{
-				foreach (ITaskNamedValuePair item in v2Coll)
+				foreach (var item in this)
 				{
 					if (string.CompareOrdinal(item.Name, name) == 0)
 					{
@@ -525,8 +525,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.Contains(item);
 
-			foreach (ITaskNamedValuePair invp in v2Coll)
-				if (item.Equals(invp)) return true;
+			foreach (var invp in this)
+				if (Equals(item, invp)) return true;
 			return false;
 		}
 

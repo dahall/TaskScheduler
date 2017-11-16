@@ -303,7 +303,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1Task != null)
 				return new V1TriggerEnumerator(v1Task);
-			return new ComEnumerator<Trigger, V2Interop.ITriggerCollection>(v2Coll, o => Trigger.CreateTrigger((V2Interop.ITrigger)o, v2Def));
+			return new ComEnumerator<Trigger, V2Interop.ITrigger>(() => v2Coll.Count, i => v2Coll[i], o => Trigger.CreateTrigger(o, v2Def));
 		}
 
 		void ICollection.CopyTo(Array array, int index)

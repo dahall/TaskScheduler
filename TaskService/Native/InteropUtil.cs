@@ -94,30 +94,38 @@ namespace System.Runtime.InteropServices
 		}
 	}
 
-	internal class ComEnumerator<T, TE> : IEnumerator<T> where TE : IEnumerable where T : class
+	internal class ComEnumerator<T, TIn> : IEnumerator<T> where T : class where TIn : class
 	{
-		protected IEnumerator iEnum;
-		private readonly Converter<object, T> conv;
+		protected readonly Func<TIn, T> converter;
+		protected IEnumerator<TIn> iEnum;
 
-		public ComEnumerator(TE collection, Converter<object, T> converter = null)
+		public ComEnumerator(Func<int> getCount, Func<int, TIn> indexer, Func<TIn, T> converter)
 		{
-			iEnum = collection?.GetEnumerator();
-			conv = converter == null || collection == null ? DefaultConverter : converter;
+			IEnumerator<TIn> Enumerate()
+			{
+				for (var x = 1; x <= getCount(); x++)
+					yield return indexer(x);
+			}
+
+			this.converter = converter;
+			iEnum = Enumerate();
+		}
+
+		public ComEnumerator(Func<int> getCount, Func<object, TIn> indexer, Func<TIn, T> converter)
+		{
+			IEnumerator<TIn> Enumerate()
+			{
+				for (var x = 1; x <= getCount(); x++)
+					yield return indexer(x);
+			}
+
+			this.converter = converter;
+			iEnum = Enumerate();
 		}
 
 		object IEnumerator.Current => Current;
 
-		public virtual T Current => conv(iEnum?.Current);
-
-		private static T DefaultConverter(object o)
-		{
-			if (o == null)
-				return default(T);
-			var converter = o as T;
-			if (converter != null)
-				return converter;
-			return (T)Activator.CreateInstance(typeof(T), Reflection.BindingFlags.CreateInstance | Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Public, null, new[] { o }, null);
-		}
+		public virtual T Current => converter(iEnum?.Current);
 
 		public virtual void Dispose()
 		{
