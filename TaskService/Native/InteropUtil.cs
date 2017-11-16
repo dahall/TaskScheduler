@@ -94,18 +94,24 @@ namespace System.Runtime.InteropServices
 		}
 	}
 
-	internal class ComEnumerator<T, TE> : IEnumerator<T> where TE : IEnumerable where T : class
+	internal class ComEnumerator<T> : IEnumerator<T> where T : class
 	{
 		protected IEnumerator iEnum;
 		private readonly Converter<object, T> conv;
 
-		public ComEnumerator(TE collection, Converter<object, T> converter = null)
-		{
-			iEnum = collection?.GetEnumerator();
-			conv = converter == null || collection == null ? DefaultConverter : converter;
-		}
+	    public ComEnumerator(Func<int> getCount, Func<int, object> indexer, Converter<object, T> converter = null)
+	    {
+	        IEnumerator Enumerate()
+	        {
+	            for (var x = 1; x <= getCount(); x++)
+	                yield return indexer(x);
+	        }
 
-		object IEnumerator.Current => Current;
+	        iEnum = Enumerate();
+	        conv = converter ?? DefaultConverter;
+	    }
+
+        object IEnumerator.Current => Current;
 
 		public virtual T Current => conv(iEnum?.Current);
 

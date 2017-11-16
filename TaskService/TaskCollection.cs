@@ -161,12 +161,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private class V2TaskEnumerator : ComEnumerator<Task, V2Interop.IRegisteredTaskCollection>
+		private class V2TaskEnumerator : ComEnumerator<Task>
 		{
 			private readonly Regex filter;
 
 			internal V2TaskEnumerator(TaskFolder folder, V2Interop.IRegisteredTaskCollection iTaskColl, Regex filter = null) :
-				base(iTaskColl, o => Task.CreateTask(folder.TaskService, (V2Interop.IRegisteredTask)o))
+				base(() => iTaskColl.Count, n => iTaskColl[n], o => Task.CreateTask(folder.TaskService, (V2Interop.IRegisteredTask)o))
 			{
 				this.filter = filter;
 			}
@@ -329,7 +329,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public IEnumerator<RunningTask> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new ComEnumerator<RunningTask, V2Interop.IRunningTaskCollection>(v2Coll, o =>
+				return new ComEnumerator<RunningTask>(() => v2Coll.Count, n => v2Coll[n], o =>
 				{
 					var irt = (V2Interop.IRunningTask)o;
 					V2Interop.IRegisteredTask task = null;

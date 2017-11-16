@@ -246,8 +246,8 @@ namespace Microsoft.Win32.TaskScheduler
 					return unboundDict.ConvertAll(p => p.Name);
 
 				var ret = new List<string>(v2Coll.Count);
-				foreach (ITaskNamedValuePair item in v2Coll)
-					ret.Add(item.Name);
+                for(var x = 0; x < v2Coll.Count; x++)
+					ret.Add(v2Coll[x].Name);
 				return ret;
 			}
 		}
@@ -261,16 +261,16 @@ namespace Microsoft.Win32.TaskScheduler
 		[ItemNotNull, NotNull]
 		public ICollection<string> Values
 		{
-			get
-			{
-				if (v2Coll == null)
-					return unboundDict.ConvertAll(p => p.Value);
+		    get
+		    {
+		        if (v2Coll == null)
+		            return unboundDict.ConvertAll(p => p.Value);
 
-				var ret = new List<string>(v2Coll.Count);
-				foreach (ITaskNamedValuePair item in v2Coll)
-					ret.Add(item.Value);
-				return ret;
-			}
+		        var ret = new List<string>(v2Coll.Count);
+		        for (var x = 0; x < v2Coll.Count; x++)
+		            ret.Add(v2Coll[x].Value);
+		        return ret;
+		    }
 		}
 
 		/// <summary>
@@ -407,7 +407,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.GetEnumerator();
 
-			return new ComEnumerator<NameValuePair, ITaskNamedValueCollection>(v2Coll, o => new NameValuePair((ITaskNamedValuePair)o));
+			return new ComEnumerator<NameValuePair>(() => v2Coll.Count, n => v2Coll[n], o => new NameValuePair((ITaskNamedValuePair)o));
 		}
 
 		private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -497,8 +497,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v2Coll != null)
 			{
-				foreach (ITaskNamedValuePair item in v2Coll)
-				{
+			    for (var x = 0; x < v2Coll.Count; x++)
+                {
+				    var item = v2Coll[x];
 					if (string.CompareOrdinal(item.Name, name) == 0)
 					{
 						value = item.Value;
@@ -525,8 +526,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Coll == null)
 				return unboundDict.Contains(item);
 
-			foreach (ITaskNamedValuePair invp in v2Coll)
-				if (item.Equals(invp)) return true;
+		    for (var x = 0; x < v2Coll.Count; x++)
+                if (item.Equals(v2Coll[x])) return true;
 			return false;
 		}
 
