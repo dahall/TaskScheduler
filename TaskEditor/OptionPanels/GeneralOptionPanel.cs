@@ -119,7 +119,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 									if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
 										td.Actions.RemoveAt(i);
 								}
-							if (parent.TaskService != null && parent.TaskService.HighestSupportedVersion == new Version(1, 3))
+							if (parent.TaskService != null && parent.TaskService.HighestSupportedVersion == TaskServiceVersion.V1_3)
 								for (int i = td.Triggers.Count - 1; i >= 0; i--)
 								{
 									if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)

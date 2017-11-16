@@ -25,9 +25,9 @@ namespace Microsoft.Win32.TaskScheduler
 		internal static AvailableActions GetFilteredAvailableActions(AvailableActions availableActions, Version tsVer, bool useUnifiedSchedulingEngine, PowerShellActionPlatformOption psOption)
 		{
 			var ret = availableActions;
-			var isV1 = tsVer < new Version(1, 2);
-			var isAfter7 = tsVer > new Version(1, 3);
-			var isWin7 = tsVer == new Version(1, 3);
+			var isV1 = tsVer < TaskServiceVersion.V1_2;
+			var isAfter7 = tsVer > TaskServiceVersion.V1_3;
+			var isWin7 = tsVer == TaskServiceVersion.V1_3;
 			// ComHandler not supported in V1
 			if (isV1)
 				ret &= ~AvailableActions.ComHandler;
@@ -59,7 +59,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static AvailableTriggers GetFilteredAvailableTriggers(AvailableTriggers availableTriggers, Version tsVer, bool useUnifiedSchedulingEngine, bool showCustom)
 		{
-			var isV1 = tsVer < new Version(1, 2);
+			var isV1 = tsVer < TaskServiceVersion.V1_2;
 			var ret = availableTriggers;
 			// Remove all non-V1 triggers if set
 			if (isV1)
@@ -68,7 +68,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!showCustom || isV1)
 				ret &= ~AvailableTriggers.Custom;
 			// Remove unsupported USE triggers only on Win7
-			if (useUnifiedSchedulingEngine && tsVer == new Version(1, 3))
+			if (useUnifiedSchedulingEngine && tsVer == TaskServiceVersion.V1_3)
 				ret &= ~(AvailableTriggers.Monthly | AvailableTriggers.MonthlyDOW);
 			return ret != 0 ? ret : throw new InvalidOperationException("No triggers are available to display given the current settings.");
 		}

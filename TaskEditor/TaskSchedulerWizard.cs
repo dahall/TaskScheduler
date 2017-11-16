@@ -357,7 +357,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 				td = value;
 				onAssignment = true;
-				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2)) && td.Settings.Compatibility >= TaskCompatibility.V2;
+				IsV2 = TaskService.HighestSupportedVersion >= (TaskServiceVersion.V1_2) && td.Settings.Compatibility >= TaskCompatibility.V2;
 
 				// Set General tab
 				if (task != null) nameText.Text = task.Name;
@@ -532,7 +532,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (td == null)
 			{
 				TaskDefinition = service.NewTask();
-				IsV2 = TaskService.HighestSupportedVersion >= (new Version(1, 2));
+				IsV2 = TaskService.HighestSupportedVersion >= TaskServiceVersion.V1_2;
 			}
 			else
 			{
@@ -1090,7 +1090,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (RegisterTaskOnFinish)
 			{
 				TaskFolder fld = TaskService.RootFolder;
-				if (!string.IsNullOrEmpty(TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) != 0)
+				if (!string.IsNullOrEmpty(TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(TaskServiceVersion.V1_1) != 0)
 					fld = TaskService.GetFolder(TaskFolder);
 				task = fld.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate, td.Principal.ToString(), Password, td.Principal.LogonType);
 			}

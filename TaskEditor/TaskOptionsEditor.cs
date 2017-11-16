@@ -202,7 +202,7 @@ namespace Microsoft.Win32.TaskScheduler
 				UpdateAvailableTriggers(AvailableTriggers);
 				SetVersionComboItems();
 				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 &&
-					   TaskService.HighestSupportedVersion >= new Version(1, 2);
+					   TaskService.HighestSupportedVersion >= TaskServiceVersion.V1_2;
 				taskNameText.Text = task?.Name ?? string.Empty;
 				ReinitializeControls();
 				onAssignment = false;
@@ -269,7 +269,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (td == null)
 				{
 					var temp = service.NewTask();
-					if (service.HighestSupportedVersion == new Version(1, 1))
+					if (service.HighestSupportedVersion == TaskServiceVersion.V1_1)
 						temp.Settings.Compatibility = TaskCompatibility.V1;
 					TaskDefinition = temp;
 				}

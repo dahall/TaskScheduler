@@ -1834,7 +1834,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false, Version taskSchedulerVersion = null)
 		{
 			var tsVer = taskSchedulerVersion ?? TaskService.LibraryVersion;
-			if (tsVer < new Version(1, 3)) return false;
+			if (tsVer < TaskServiceVersion.V1_3) return false;
 			var ex = new InvalidOperationException { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
 			var bad = false;
 			/*if (Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
@@ -1849,7 +1849,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!throwExceptionWithDetails) return false;
 				TryAdd(ex.Data, "Settings.MultipleInstances", "== TaskInstancesPolicy.StopExisting");
 			}*/
-			if (Settings.NetworkSettings.Id != Guid.Empty && tsVer >= new Version(1,5))
+			if (Settings.NetworkSettings.Id != Guid.Empty && tsVer >= TaskServiceVersion.V1_5)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
@@ -1879,7 +1879,7 @@ namespace Microsoft.Win32.TaskScheduler
 							break;
 					}
 				}
-			if (tsVer == new Version(1,3))
+			if (tsVer == TaskServiceVersion.V1_3)
 				for (var i = 0; i < Triggers.Count; i++)
 				{
 					Trigger t;

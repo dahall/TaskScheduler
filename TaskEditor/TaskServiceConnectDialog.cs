@@ -89,7 +89,7 @@ namespace Microsoft.Win32.TaskScheduler
 					User = value.UserName;
 					Domain = value.UserAccountDomain;
 					Password = value.UserPassword;
-					v1Check.Checked = ForceV1 = value.HighestSupportedVersion <= new Version(1, 1);
+					v1Check.Checked = ForceV1 = value.HighestSupportedVersion <= TaskServiceVersion.V1_1;
 
 					if (TargetServer == null && User == null)
 					{

@@ -45,7 +45,7 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
-		private static readonly Version v1Ver = new Version(1, 1);
+		private static readonly Version v1Ver = TaskServiceVersion.V1_1;
 		private static Guid CLSID_Ctask = typeof(V1Interop.CTask).GUID;
 		private static Guid IID_ITask = typeof(V1Interop.ITask).GUID;
 		[ThreadStatic]
@@ -708,26 +708,26 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(Path.Combine(System.Environment.SystemDirectory, "taskschd.dll"));
 						if (fvi.FileMajorPart == 10)
-							osLibVer = new Version(1, 5);
+							osLibVer = TaskServiceVersion.V1_5;
 						else if (fvi.FileMajorPart == 6)
 						{
 							switch (fvi.FileMinorPart)
 							{
 								case 0:
-									osLibVer = new Version(1, 2);
+									osLibVer = TaskServiceVersion.V1_2;
 									break;
 
 								case 1:
-									osLibVer = new Version(1, 3);
+									osLibVer = TaskServiceVersion.V1_3;
 									break;
 
 								case 2:
 								case 3:
-									osLibVer = new Version(1, 4);
+									osLibVer = TaskServiceVersion.V1_4;
 									break;
 
 								case 4:
-									osLibVer = new Version(1, 5);
+									osLibVer = TaskServiceVersion.V1_5;
 									break;
 							}
 						}
@@ -1030,5 +1030,30 @@ namespace Microsoft.Win32.TaskScheduler
 				return s != null ? new Version(s) : base.ConvertFrom(context, culture, value);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Known versions of the native Task Scheduler library. This can be used as a decoder for the <see cref="TaskService.HighestSupportedVersion"/> and <see cref="TaskService.LibraryVersion"/> values.
+	/// </summary>
+	public static class TaskServiceVersion
+	{
+		/// <summary>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
+		[Description("Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).")]
+		public static readonly Version V1_1 = new Version(1, 1);
+		/// <summary>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
+		[Description("Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).")]
+		public static readonly Version V1_2 = new Version(1, 2);
+		/// <summary>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
+		[Description("Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).")]
+		public static readonly Version V1_3 = new Version(1, 3);
+		/// <summary>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
+		[Description("Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).")]
+		public static readonly Version V1_4 = new Version(1, 4);
+		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
+		public static readonly Version V1_5 = new Version(1, 5);
+		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
+		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
+		public static readonly Version V1_6 = new Version(1, 6);
 	}
 }

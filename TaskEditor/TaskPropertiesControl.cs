@@ -364,7 +364,7 @@ namespace Microsoft.Win32.TaskScheduler
 				UpdateAvailableActions(AvailableActions);
 				UpdateAvailableTriggers(AvailableTriggers);
 				SetVersionComboItems();
-				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= new Version(1, 2);
+				IsV2 = td.Settings.Compatibility >= TaskCompatibility.V2 && TaskService.HighestSupportedVersion >= TaskServiceVersion.V1_2;
 
 				tabControl.SelectedIndex = 0;
 
@@ -513,7 +513,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (taskDef == null)
 				{
 					var temp = service.NewTask();
-					if (service.HighestSupportedVersion == new Version(1, 1))
+					if (service.HighestSupportedVersion == TaskServiceVersion.V1_1)
 						temp.Settings.Compatibility = TaskCompatibility.V1;
 					TaskDefinition = temp;
 				}
@@ -629,7 +629,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private string GetTaskLocation()
 		{
-			if (task == null || TaskService.HighestSupportedVersion.CompareTo(new Version(1, 1)) == 0)
+			if (task == null || TaskService.HighestSupportedVersion.CompareTo(TaskServiceVersion.V1_1) == 0)
 				return @"\";
 			return Path.GetDirectoryName(task.Path);
 		}
@@ -780,7 +780,7 @@ namespace Microsoft.Win32.TaskScheduler
 						actionCollectionUI.RefreshState();
 					}
 				}
-			if (TaskService != null && TaskService.HighestSupportedVersion == new Version(1, 3))
+			if (TaskService != null && TaskService.HighestSupportedVersion == TaskServiceVersion.V1_3)
 				for (var i = td.Triggers.Count - 1; i >= 0; i--)
 				{
 					if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
@@ -1294,7 +1294,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
 		{
-			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1,5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !taskUseUnifiedSchedulingEngineCheck.Checked);
 			if (!onAssignment)
 				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
 		}
@@ -1386,7 +1386,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
 				taskStartIfConnectionCheck.Enabled = taskRegSDDLText.Enabled = editable && v2;
 			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = v2 && editable && taskRestartIntervalCheck.Checked;
-			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1, 5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
+			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !taskUseUnifiedSchedulingEngineCheck.Checked);
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled =
 				principalReqPrivilegesDropDown.Enabled = taskDisallowStartOnRemoteAppSessionCheck.Enabled =
 				taskUseUnifiedSchedulingEngineCheck.Enabled = editable && v2_1;
@@ -1429,7 +1429,7 @@ namespace Microsoft.Win32.TaskScheduler
 			var isSet = taskUseUnifiedSchedulingEngineCheck.Checked;
 			var alreadyOnAssigment = onAssignment;
 			onAssignment = true;
-			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1, 5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !taskUseUnifiedSchedulingEngineCheck.Checked);
 			//taskAllowHardTerminateCheck.Enabled = editable && !isSet;
 			// Update Multiple Instances policy combo
 			/*taskMultInstCombo.BeginUpdate();
