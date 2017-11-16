@@ -2365,11 +2365,12 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Actions">
       <summary>Gets a collection of actions that are performed by the task.</summary>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.CanUseUnifiedSchedulingEngine(System.Boolean)">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.CanUseUnifiedSchedulingEngine(System.Boolean,System.Version)">
       <summary>Determines whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> can use the Unified Scheduling Engine or if it contains unsupported properties.</summary>
       <param name="throwExceptionWithDetails">
             if set to <c>true</c> throws an <see cref="T:System.InvalidOperationException" /> with details about unsupported properties in the Data property of the exception.
             </param>
+      <param name="taskSchedulerVersion"></param>
       <returns>
         <c>true</c> if this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
     </member>

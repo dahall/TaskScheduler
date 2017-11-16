@@ -1033,6 +1033,8 @@
     <HelpKINode Title="TriggerCollection.GetEnumerator Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_GetEnumerator.htm" />
   </HelpKINode>
   <HelpKINode Title="GetEventLog method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_GetEventLog.htm" />
+  <HelpKINode Title="GetFilteredAvailableActions method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableActions.htm" />
+  <HelpKINode Title="GetFilteredAvailableTriggers method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableTriggers.htm" />
   <HelpKINode Title="GetFolder method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_GetFolder.htm" />
   <HelpKINode Title="GetHashCode method">
     <HelpKINode Title="Action.GetHashCode Method " Url="html/M_Microsoft_Win32_TaskScheduler_Action_GetHashCode.htm" />
@@ -1475,6 +1477,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate delegate" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ComHandlerUpdate.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken structure" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceExtensions class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceExtensions.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSettings class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSettings.htm" />
@@ -2947,6 +2950,13 @@
   <HelpKINode Title="TaskServiceConnectDialog.TaskServiceConnectDialog constructor" Url="html/M_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog__ctor.htm" />
   <HelpKINode Title="TaskServiceConnectDialog.Title property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog_Title.htm" />
   <HelpKINode Title="TaskServiceConnectDialog.User property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog_User.htm" />
+  <HelpKINode Title="TaskServiceExtensions class">
+    <HelpKINode Title="TaskServiceExtensions Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceExtensions.htm" />
+    <HelpKINode Title="about TaskServiceExtensions class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskServiceExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TaskServiceExtensions.GetFilteredAvailableActions method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableActions.htm" />
+  <HelpKINode Title="TaskServiceExtensions.GetFilteredAvailableTriggers method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableTriggers.htm" />
   <HelpKINode Title="TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
   <HelpKINode Title="TaskSettings class">

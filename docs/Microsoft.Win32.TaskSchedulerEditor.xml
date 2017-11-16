@@ -1991,6 +1991,39 @@
             Gets or sets the user.
             </summary>
     </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskServiceExtensions">
+      <summary>Extension methods for <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" />.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceExtensions.GetFilteredAvailableActions(Microsoft.Win32.TaskScheduler.TaskDefinition,Microsoft.Win32.TaskScheduler.AvailableActions,System.Version)">
+      <summary>Filtered the supplied available actions based on this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> and the version of the Task Scheduler.</summary>
+      <param name="td">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> instance.</param>
+      <param name="availableActions">The available actions.</param>
+      <param name="taskSchedulerVersion">The Task Scheduler version.</param>
+      <returns>The filtered set of available actions.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceExtensions.GetFilteredAvailableActions(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.AvailableActions,System.Boolean,Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption)">
+      <summary>Filtered the supplied available actions based on this version of the Task Scheduler and options that could be set on the <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" />.</summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.</param>
+      <param name="availableActions">The available actions.</param>
+      <param name="useUnifiedSchedulingEngine">if set to <c>true</c> assume the task will use the Unified Scheduling Engine.</param>
+      <param name="psOption">The PowerShell conversion options to assume are in place.</param>
+      <returns>The filtered set of available actions.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceExtensions.GetFilteredAvailableTriggers(Microsoft.Win32.TaskScheduler.TaskDefinition,Microsoft.Win32.TaskScheduler.AvailableTriggers,System.Version,System.Boolean)">
+      <summary>Filtered the supplied available triggers based on this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> and the version of the Task Scheduler.</summary>
+      <param name="td">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> instance.</param>
+      <param name="availableTriggers">The available triggers.</param>
+      <param name="taskSchedulerVersion">The Task Scheduler version.</param>
+      <param name="showCustom">Show <see cref="T:Microsoft.Win32.TaskScheduler.CustomTrigger" /> instances.</param>
+      <returns>The filtered set of available triggers.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskServiceExtensions.GetFilteredAvailableTriggers(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.AvailableTriggers,System.Boolean)">
+      <summary>Filtered the supplied available triggers based on this version of the Task Scheduler and options that could be set on the <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" />.</summary>
+      <param name="ts">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance.</param>
+      <param name="availableTriggers">The available triggers.</param>
+      <param name="useUnifiedSchedulingEngine">if set to <c>true</c> assume the task will use the Unified Scheduling Engine.</param>
+      <returns>The filtered set of available triggers.</returns>
+    </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TextValueItem`1">
       <summary>A generic text/value class.</summary>
       <typeparam name="T">Any object type.</typeparam>
