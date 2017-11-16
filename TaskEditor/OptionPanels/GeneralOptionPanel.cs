@@ -110,33 +110,35 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 						{
 							if (td.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
 								td.Principal.LogonType = TaskLogonType.InteractiveToken;
-							if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
-								td.Settings.MultipleInstances = TaskInstancesPolicy.IgnoreNew;
-							td.Settings.AllowHardTerminate = true;
-							for (int i = td.Actions.Count - 1; i >= 0; i--)
-							{
-								if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
-									td.Actions.RemoveAt(i);
-							}
-							for (int i = td.Triggers.Count - 1; i >= 0; i--)
-							{
-								if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
+							//if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
+							//	td.Settings.MultipleInstances = TaskInstancesPolicy.IgnoreNew;
+							//td.Settings.AllowHardTerminate = true;
+							if (!parent.TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version2))
+								for (int i = td.Actions.Count - 1; i >= 0; i--)
 								{
-									td.Triggers.RemoveAt(i);
+									if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
+										td.Actions.RemoveAt(i);
 								}
-								else
+							if (parent.TaskService != null && parent.TaskService.HighestSupportedVersion == new Version(1, 3))
+								for (int i = td.Triggers.Count - 1; i >= 0; i--)
 								{
-									Trigger t = td.Triggers[i];
-									t.ExecutionTimeLimit = TimeSpan.Zero;
-									if (t is ICalendarTrigger)
+									if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
 									{
-										t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
-										t.Repetition.StopAtDurationEnd = false;
+										td.Triggers.RemoveAt(i);
 									}
-									else if (t is EventTrigger et)
-										et.ValueQueries.Clear();
+									else
+									{
+										Trigger t = td.Triggers[i];
+										t.ExecutionTimeLimit = TimeSpan.Zero;
+										if (t is ICalendarTrigger)
+										{
+											t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
+											t.Repetition.StopAtDurationEnd = false;
+										}
+										else if (t is EventTrigger et)
+											et.ValueQueries.Clear();
+									}
 								}
-							}
 						}
 						else
 							taskUseUnifiedSchedulingEngineCheck.Checked = false;

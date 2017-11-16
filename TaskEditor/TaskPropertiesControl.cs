@@ -766,41 +766,43 @@ namespace Microsoft.Win32.TaskScheduler
 				td.Principal.LogonType = TaskLogonType.InteractiveToken;
 				SetUserControls(td.Principal.LogonType);
 			}
-			if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
-				taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.IgnoreNew);
-			if (availableConnectionsCombo.Items.Count > 0)
+			//if (td.Settings.MultipleInstances == TaskInstancesPolicy.StopExisting)
+			//	taskMultInstCombo.SelectedIndex = taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.IgnoreNew);
+			if (availableConnectionsCombo.Items.Count > 0 && TaskService != null && TaskService.HighestSupportedVersion >= new Version (1,5))
 				availableConnectionsCombo.SelectedIndex = 0;
-			taskAllowHardTerminateCheck.Checked = true;
-			for (var i = td.Actions.Count - 1; i >= 0; i--)
-			{
-				if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
+			//taskAllowHardTerminateCheck.Checked = true;
+			if (!TaskDefinition.Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version2))
+				for (var i = td.Actions.Count - 1; i >= 0; i--)
 				{
-					td.Actions.RemoveAt(i);
-					actionCollectionUI.RefreshState();
-				}
-			}
-			for (var i = td.Triggers.Count - 1; i >= 0; i--)
-			{
-				if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
-				{
-					td.Triggers.RemoveAt(i);
-					triggerCollectionUI1.RefreshState();
-				}
-				else
-				{
-					var t = td.Triggers[i];
-					t.ExecutionTimeLimit = TimeSpan.Zero;
-					if (t is ICalendarTrigger)
+					if (td.Actions[i].ActionType == TaskActionType.SendEmail || td.Actions[i].ActionType == TaskActionType.ShowMessage)
 					{
-						t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
-						t.Repetition.StopAtDurationEnd = false;
+						td.Actions.RemoveAt(i);
+						actionCollectionUI.RefreshState();
+					}
+				}
+			if (TaskService != null && TaskService.HighestSupportedVersion == new Version(1, 3))
+				for (var i = td.Triggers.Count - 1; i >= 0; i--)
+				{
+					if (td.Triggers[i].TriggerType == TaskTriggerType.Monthly || td.Triggers[i].TriggerType == TaskTriggerType.MonthlyDOW)
+					{
+						td.Triggers.RemoveAt(i);
+						triggerCollectionUI1.RefreshState();
 					}
 					else
 					{
-						(t as EventTrigger)?.ValueQueries.Clear();
+						var t = td.Triggers[i];
+						t.ExecutionTimeLimit = TimeSpan.Zero;
+						if (t is ICalendarTrigger)
+						{
+							t.Repetition.Duration = t.Repetition.Interval = TimeSpan.Zero;
+							t.Repetition.StopAtDurationEnd = false;
+						}
+						else
+						{
+							(t as EventTrigger)?.ValueQueries.Clear();
+						}
 					}
 				}
-			}
 		}
 
 		private void ResetTaskNameIsEditable() { lockTaskName = false; }
@@ -1292,7 +1294,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
 		{
-			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1,5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
 			if (!onAssignment)
 				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
 		}
@@ -1384,7 +1386,7 @@ namespace Microsoft.Win32.TaskScheduler
 				taskAllowHardTerminateCheck.Enabled = taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled =
 				taskStartIfConnectionCheck.Enabled = taskRegSDDLText.Enabled = editable && v2;
 			taskRestartIntervalCombo.Enabled = taskRestartCountLabel.Enabled = taskRestartCountText.Enabled = v2 && editable && taskRestartIntervalCheck.Checked;
-			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && !taskUseUnifiedSchedulingEngineCheck.Checked;
+			availableConnectionsCombo.Enabled = editable && v2 && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1, 5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
 			principalSIDTypeLabel.Enabled = principalSIDTypeCombo.Enabled = principalReqPrivilegesLabel.Enabled =
 				principalReqPrivilegesDropDown.Enabled = taskDisallowStartOnRemoteAppSessionCheck.Enabled =
 				taskUseUnifiedSchedulingEngineCheck.Enabled = editable && v2_1;
@@ -1427,17 +1429,17 @@ namespace Microsoft.Win32.TaskScheduler
 			var isSet = taskUseUnifiedSchedulingEngineCheck.Checked;
 			var alreadyOnAssigment = onAssignment;
 			onAssignment = true;
-			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && !isSet;
-			taskAllowHardTerminateCheck.Enabled = editable && !isSet;
+			availableConnectionsCombo.Enabled = editable && taskStartIfConnectionCheck.Checked && ((TaskService != null && TaskService.HighestSupportedVersion < new Version(1, 5)) || !taskUseUnifiedSchedulingEngineCheck.Checked);
+			//taskAllowHardTerminateCheck.Enabled = editable && !isSet;
 			// Update Multiple Instances policy combo
-			taskMultInstCombo.BeginUpdate();
+			/*taskMultInstCombo.BeginUpdate();
 			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), Resources.ResourceManager, "TaskInstances", out long _);
 			if (isSet)
 				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
 			var idx = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 			if (idx < 0 || idx >= taskMultInstCombo.Items.Count) idx = 2;
 			taskMultInstCombo.SelectedIndex = idx;
-			taskMultInstCombo.EndUpdate();
+			taskMultInstCombo.EndUpdate();*/
 			UpdateAvailableActions(AvailableActions);
 			UpdateAvailableTriggers(AvailableTriggers);
 			if (!alreadyOnAssigment)

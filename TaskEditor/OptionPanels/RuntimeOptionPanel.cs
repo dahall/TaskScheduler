@@ -35,7 +35,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskAllowDemandStartCheck.Enabled = taskStartWhenAvailableCheck.Enabled =
 				taskRestartIntervalCheck.Enabled = taskRestartAttemptTimesLabel.Enabled =
 					taskRunningRuleLabel.Enabled = taskMultInstCombo.Enabled = editable && v2;
-			taskAllowHardTerminateCheck.Enabled = editable && v2 && !td.Settings.UseUnifiedSchedulingEngine;
+			taskAllowHardTerminateCheck.Enabled = editable && v2;
 
 			taskAllowDemandStartCheck.Checked = td.Settings.AllowDemandStart;
 
@@ -43,8 +43,8 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			taskMultInstCombo.BeginUpdate();
 			ComboBoxExtension.InitializeFromEnum(taskMultInstCombo.Items, typeof(TaskInstancesPolicy), Resources.ResourceManager,
 				"TaskInstances", out var _);
-			if (td.Settings.UseUnifiedSchedulingEngine)
-				taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
+			//if (td.Settings.UseUnifiedSchedulingEngine)
+			//	taskMultInstCombo.Items.RemoveAt(taskMultInstCombo.Items.IndexOf((long)TaskInstancesPolicy.StopExisting));
 			var idx = taskMultInstCombo.Items.IndexOf((long)td.Settings.MultipleInstances);
 			if (idx < 0 || idx >= taskMultInstCombo.Items.Count) idx = 2;
 			taskMultInstCombo.SelectedIndex = idx;

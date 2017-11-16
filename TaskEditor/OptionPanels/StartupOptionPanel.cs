@@ -26,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			bool v2 = parent.IsV2;
 			taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
 			taskStartIfConnectionCheck.Enabled = editable && v2;
-			availableConnectionsCombo.Enabled = editable && v2 && td.Settings.RunOnlyIfNetworkAvailable && !td.Settings.UseUnifiedSchedulingEngine;
+			availableConnectionsCombo.Enabled = editable && v2 && td.Settings.RunOnlyIfNetworkAvailable && ((parent.TaskService != null && parent.TaskService.HighestSupportedVersion < new Version(1, 5)) || !td.Settings.UseUnifiedSchedulingEngine);
 			taskDisallowStartOnRemoteAppSessionCheck.Enabled = editable && td.Settings.Compatibility >= TaskCompatibility.V2_1;
 
 			taskRestartOnIdleCheck.Checked = td.Settings.IdleSettings.RestartOnIdle;
@@ -112,7 +112,7 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 
 		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
 		{
-			availableConnectionsCombo.Enabled = parent.Editable && taskStartIfConnectionCheck.Checked && !td.Settings.UseUnifiedSchedulingEngine;
+			availableConnectionsCombo.Enabled = parent.Editable && taskStartIfConnectionCheck.Checked && ((parent.TaskService != null && parent.TaskService.HighestSupportedVersion < new Version(1, 5)) || !td.Settings.UseUnifiedSchedulingEngine);
 			if (!onAssignment)
 				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
 		}
