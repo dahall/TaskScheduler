@@ -4180,6 +4180,29 @@
             <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> between threads.
             </summary>
     </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.TaskServiceVersion">
+      <summary>
+            Known versions of the native Task Scheduler library. This can be used as a decoder for the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.HighestSupportedVersion" /> and <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.LibraryVersion" /> values.
+            </summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_1">
+      <summary>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_2">
+      <summary>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_3">
+      <summary>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_4">
+      <summary>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_5">
+      <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+    </member>
+    <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_6">
+      <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
+    </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType">
       <summary>
             Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify the type of state

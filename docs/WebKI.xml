@@ -1478,6 +1478,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken structure" Url="html/T_Microsoft_Win32_TaskScheduler_TaskService_ConnectionToken.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceConnectDialog.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceExtensions class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceExtensions.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskServiceVersion class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceVersion.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.TaskSettings class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSettings.htm" />
@@ -2957,6 +2958,17 @@
   </HelpKINode>
   <HelpKINode Title="TaskServiceExtensions.GetFilteredAvailableActions method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableActions.htm" />
   <HelpKINode Title="TaskServiceExtensions.GetFilteredAvailableTriggers method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskServiceExtensions_GetFilteredAvailableTriggers.htm" />
+  <HelpKINode Title="TaskServiceVersion class">
+    <HelpKINode Title="TaskServiceVersion Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceVersion.htm" />
+    <HelpKINode Title="about TaskServiceVersion class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskServiceVersion.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_Microsoft_Win32_TaskScheduler_TaskServiceVersion.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TaskServiceVersion.V1_1 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_1.htm" />
+  <HelpKINode Title="TaskServiceVersion.V1_2 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_2.htm" />
+  <HelpKINode Title="TaskServiceVersion.V1_3 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_3.htm" />
+  <HelpKINode Title="TaskServiceVersion.V1_4 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_4.htm" />
+  <HelpKINode Title="TaskServiceVersion.V1_5 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_5.htm" />
+  <HelpKINode Title="TaskServiceVersion.V1_6 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_6.htm" />
   <HelpKINode Title="TaskSessionStateChangeType enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSessionStateChangeType.htm" />
   <HelpKINode Title="TaskSetSecurityOptions enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_TaskSetSecurityOptions.htm" />
   <HelpKINode Title="TaskSettings class">
@@ -3275,6 +3287,12 @@
   <HelpKINode Title="UtcCheckBehavior property" Url="html/P_Microsoft_Win32_TaskScheduler_FullDateTimePicker_UtcCheckBehavior.htm" />
   <HelpKINode Title="UTCPrompt property" Url="html/P_Microsoft_Win32_TaskScheduler_FullDateTimePicker_UTCPrompt.htm" />
   <HelpKINode Title="V1 enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCompatibility.htm" />
+  <HelpKINode Title="V1_1 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_1.htm" />
+  <HelpKINode Title="V1_2 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_2.htm" />
+  <HelpKINode Title="V1_3 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_3.htm" />
+  <HelpKINode Title="V1_4 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_4.htm" />
+  <HelpKINode Title="V1_5 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_5.htm" />
+  <HelpKINode Title="V1_6 field" Url="html/F_Microsoft_Win32_TaskScheduler_TaskServiceVersion_V1_6.htm" />
   <HelpKINode Title="V2 enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCompatibility.htm" />
   <HelpKINode Title="V2GetTriggerString method">
     <HelpKINode Title="BootTrigger.V2GetTriggerString Method " Url="html/M_Microsoft_Win32_TaskScheduler_BootTrigger_V2GetTriggerString.htm" />
