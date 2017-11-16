@@ -1829,12 +1829,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="throwExceptionWithDetails">
 		/// if set to <c>true</c> throws an <see cref="InvalidOperationException"/> with details about unsupported properties in the Data property of the exception.
 		/// </param>
+		/// <param name="taskSchedulerVersion"></param>
 		/// <returns><c>true</c> if this <see cref="TaskDefinition"/> can use the Unified Scheduling Engine; otherwise, <c>false</c>.</returns>
-		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false)
+		public bool CanUseUnifiedSchedulingEngine(bool throwExceptionWithDetails = false, Version taskSchedulerVersion = null)
 		{
+			var tsVer = taskSchedulerVersion ?? TaskService.LibraryVersion;
+			if (tsVer < new Version(1, 3)) return false;
 			var ex = new InvalidOperationException { HelpLink = "http://msdn.microsoft.com/en-us/library/windows/desktop/aa384138(v=vs.85).aspx" };
 			var bad = false;
-			if (Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
+			/*if (Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
@@ -1845,76 +1848,78 @@ namespace Microsoft.Win32.TaskScheduler
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
 				TryAdd(ex.Data, "Settings.MultipleInstances", "== TaskInstancesPolicy.StopExisting");
-			}
-			if (Settings.NetworkSettings.Id != Guid.Empty)
+			}*/
+			if (Settings.NetworkSettings.Id != Guid.Empty && tsVer >= new Version(1,5))
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
 				TryAdd(ex.Data, "Settings.NetworkSettings.Id", "!= Guid.Empty");
 			}
-			if (!Settings.AllowHardTerminate)
+			/*if (!Settings.AllowHardTerminate)
 			{
 				bad = true;
 				if (!throwExceptionWithDetails) return false;
 				TryAdd(ex.Data, "Settings.AllowHardTerminate", "== false");
-			}
-			for (var i = 0; i < Actions.Count; i++)
-			{
-				var a = Actions[i];
-				switch (a)
+			}*/
+			if (!Actions.PowerShellConversion.IsFlagSet(PowerShellActionPlatformOption.Version2))
+				for (var i = 0; i < Actions.Count; i++)
 				{
-					case EmailAction _:
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Actions[{i}]", "== typeof(EmailAction)");
-						break;
-					case ShowMessageAction _:
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Actions[{i}]", "== typeof(ShowMessageAction)");
-						break;
+					var a = Actions[i];
+					switch (a)
+					{
+						case EmailAction _:
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Actions[{i}]", "== typeof(EmailAction)");
+							break;
+						case ShowMessageAction _:
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Actions[{i}]", "== typeof(ShowMessageAction)");
+							break;
+					}
 				}
-			}
-			for (var i = 0; i < Triggers.Count; i++)
-			{
-				Trigger t;
-				try { t = Triggers[i]; }
-				catch
+			if (tsVer == new Version(1,3))
+				for (var i = 0; i < Triggers.Count; i++)
 				{
-					if (!throwExceptionWithDetails) return false;
-					TryAdd(ex.Data, $"Triggers[{i}]", "is irretrievable.");
-					continue;
+					Trigger t;
+					try { t = Triggers[i]; }
+					catch
+					{
+						if (!throwExceptionWithDetails) return false;
+						TryAdd(ex.Data, $"Triggers[{i}]", "is irretrievable.");
+						continue;
+					}
+					switch (t)
+					{
+						case MonthlyTrigger _:
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Triggers[{i}]", "== typeof(MonthlyTrigger)");
+							break;
+						case MonthlyDOWTrigger _:
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Triggers[{i}]", "== typeof(MonthlyDOWTrigger)");
+							break;
+						/*case ICalendarTrigger _ when t.Repetition.IsSet():
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Triggers[{i}].Repetition", "");
+							break;
+						case EventTrigger _ when ((EventTrigger)t).ValueQueries.Count > 0:
+							bad = true;
+							if (!throwExceptionWithDetails) return false;
+							TryAdd(ex.Data, $"Triggers[{i}].ValueQueries.Count", "!= 0");
+							break;*/
+					}
+					if (t.ExecutionTimeLimit != TimeSpan.Zero)
+					{
+						bad = true;
+						if (!throwExceptionWithDetails) return false;
+						TryAdd(ex.Data, $"Triggers[{i}].ExecutionTimeLimit", "!= TimeSpan.Zero");
+					}
 				}
-				switch (t)
-				{
-					case MonthlyTrigger _:
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Triggers[{i}]", "== typeof(MonthlyTrigger)");
-						break;
-					case MonthlyDOWTrigger _:
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Triggers[{i}]", "== typeof(MonthlyDOWTrigger)");
-						break;
-					case ICalendarTrigger _ when t.Repetition.IsSet():
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Triggers[{i}].Repetition", "");
-						break;
-					case EventTrigger _ when ((EventTrigger)t).ValueQueries.Count > 0:
-						bad = true;
-						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Triggers[{i}].ValueQueries.Count", "!= 0");
-						break;
-				}
-				if (t.ExecutionTimeLimit != TimeSpan.Zero)
-				{
-					bad = true;
-					if (!throwExceptionWithDetails) return false;
-					TryAdd(ex.Data, $"Triggers[{i}].ExecutionTimeLimit", "!= TimeSpan.Zero");
-				}
-			}
 			if (bad && throwExceptionWithDetails)
 				throw ex;
 			return !bad;
