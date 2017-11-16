@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("VBTestTaskService")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Hewlett-Packard Company")> 
+<Assembly: AssemblyCompany("Github Community")> 
 <Assembly: AssemblyProduct("VBTestTaskService")> 
-<Assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2008")> 
+<Assembly: AssemblyCopyright("Copyright © Github Community")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("2.7.1.0")> 
+<Assembly: AssemblyFileVersion("2.7.1.0")> 
