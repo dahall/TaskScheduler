@@ -1305,8 +1305,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (parameters.Length > 32)
 					throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 values is allowed.");
-				if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) > 260))
-					throw new ArgumentOutOfRangeException(nameof(parameters), "On systems prior to Windows 10, no individual parameter may be more than 260 characters.");
+				if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) >= 260))
+					throw new ArgumentOutOfRangeException(nameof(parameters), "On systems prior to Windows 10, all individual parameters must be less than 260 characters.");
 				var irt = v2Task.Run(parameters.Length == 0 ? null : parameters);
 				return irt != null ? new RunningTask(TaskService, v2Task, irt) : null;
 			}
@@ -1356,7 +1356,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Task == null) throw new NotV1SupportedException();
 			if (parameters.Length > 32)
 				throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 parameters can be supplied to RunEx.");
-			if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) > 260))
+			if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) >= 260))
 				throw new ArgumentOutOfRangeException(nameof(parameters), "On systems prior to Windows 10, no individual parameter may be more than 260 characters.");
 			var irt = v2Task.RunEx(parameters.Length == 0 ? null : parameters, (int)flags, sessionID, user);
 			return irt != null ? new RunningTask(TaskService, v2Task, irt) : null;
