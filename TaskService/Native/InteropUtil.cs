@@ -129,6 +129,7 @@ namespace System.Runtime.InteropServices
 
 		public virtual void Dispose()
 		{
+			iEnum?.Dispose();
 			iEnum = null;
 		}
 
