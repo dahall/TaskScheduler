@@ -116,7 +116,7 @@ namespace Microsoft.Win32.TaskScheduler
 							break;
 						using (var name = new V1Interop.CoTaskMemString(Marshal.ReadIntPtr(names)))
 							curItem = name.ToString();
-						if (curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
+						if (curItem != null && curItem.EndsWith(".job", StringComparison.InvariantCultureIgnoreCase))
 							curItem = curItem.Remove(curItem.Length - 4);
 					}
 					catch { }
