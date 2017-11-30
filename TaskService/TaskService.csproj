@@ -27,8 +27,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\Microsoft.Win32.TaskScheduler.xml</DocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).xml</DocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>\n<DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
