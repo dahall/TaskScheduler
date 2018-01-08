@@ -8,7 +8,7 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>2.7.2</Version>
+    <Version>2.7.3</Version>
     <Title>Task Scheduler Managed Wrapper</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
@@ -28,7 +28,7 @@
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).xml</DocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>\n<DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).xml</DocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
