@@ -105,7 +105,9 @@ namespace TestTaskService
 				}*/
 
 				// Register then show task again
-				editorForm = new TaskEditDialog(ts, td, true, true)
+				//editorForm = new TaskEditDialog(ts, td, true, true)
+				var task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				editorForm = new TaskEditDialog(task, true, true)
 				{
 					AvailableTabs = AvailableTaskTabs.All,
 					//AvailableActions = AvailableActions.ComHandler | AvailableActions.Execute,
