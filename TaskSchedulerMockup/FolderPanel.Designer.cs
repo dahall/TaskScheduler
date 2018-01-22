@@ -262,6 +262,7 @@
 			// taskEditDialog1
 			// 
 			this.taskEditDialog1.AvailableTabs = Microsoft.Win32.TaskScheduler.AvailableTaskTabs.All;
+			this.taskEditDialog1.AvailableTriggers = Microsoft.Win32.TaskScheduler.AvailableTriggers.AllTriggers | Microsoft.Win32.TaskScheduler.AvailableTriggers.Custom;
 			this.taskEditDialog1.AutoSize = true;
 			this.taskEditDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.taskEditDialog1.ClientSize = new System.Drawing.Size(600, 462);
@@ -271,6 +272,8 @@
 			this.taskEditDialog1.MaximizeBox = false;
 			this.taskEditDialog1.Name = "TaskEditDialog";
 			this.taskEditDialog1.RegisterTaskOnAccept = true;
+			this.taskEditDialog1.ShowActionRunButton = true;
+			this.taskEditDialog1.ShowConvertActionsToPowerShellCheck = true;
 			this.taskEditDialog1.ShowIcon = false;
 			this.taskEditDialog1.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.taskEditDialog1.Text = "Create Task";
