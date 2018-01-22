@@ -125,6 +125,17 @@ namespace Microsoft.Win32.TaskScheduler
 		/// than this version.
 		/// </summary>
 		/// <value>The library version.</value>
+		/// <remarks>The following table list the various versions and their host operating system:
+		/// <list type="table">
+		/// <listheader><term>Version</term><term>Operating System</term></listheader>
+		/// <item><term>1.1</term><term>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</term></item>
+		/// <item><term>1.2</term><term>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</term></item>
+		/// <item><term>1.3</term><term>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</term></item>
+		/// <item><term>1.4</term><term>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</term></item>
+		/// <item><term>1.5</term><term>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</term></item>
+		/// <item><term>1.6</term><term>Task Scheduler 2.4 (Windows® 10 Version 1703, Windows Server™ 2016 Version 1703).</term></item>
+		/// </list>
+		/// </remarks>
 		[Browsable(false)]
 		public static Version LibraryVersion { get; } = Instance.HighestSupportedVersion;
 
@@ -168,6 +179,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Gets the highest version of Task Scheduler that a computer supports.</summary>
+		/// <remarks>The following table list the various versions and their host operating system:
+		/// <list type="table">
+		/// <listheader><term>Version</term><term>Operating System</term></listheader>
+		/// <item><term>1.1</term><term>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</term></item>
+		/// <item><term>1.2</term><term>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</term></item>
+		/// <item><term>1.3</term><term>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</term></item>
+		/// <item><term>1.4</term><term>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</term></item>
+		/// <item><term>1.5</term><term>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</term></item>
+		/// <item><term>1.6</term><term>Task Scheduler 2.4 (Windows® 10 Version 1703, Windows Server™ 2016 Version 1703).</term></item>
+		/// </list>
+		/// </remarks>
 		[Category("Data"), TypeConverter(typeof(VersionConverter)), Description("Highest version of library that should be used.")]
 		public Version HighestSupportedVersion
 		{
