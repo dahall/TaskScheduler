@@ -8,6 +8,8 @@
 * [Documentation Wiki (samples, library how-to, etc.)](https://github.com/dahall/TaskScheduler/wiki)
 * [API documentation (class/method/property help)](https://dahall.github.io/TaskScheduler)
 * [Issues](https://github.com/dahall/TaskScheduler/issues)
+* [ITaskHandler Template and Sample Project](https://github.com/dahall/ITaskHandlerTemplate) - Use this to create your own COM based  assembly for in-process actions.
+* [Troubleshooting Tool](https://github.com/dahall/TaskSchedulerConfig) - Tool to help identify and fix configuration and connectivity issues. (ClickOnce installer [here](https://github.com/dahall/TaskSchedulerConfig/blob/master/publish/setup.exe?raw=true))
 
 ## Installation
 This project's assemblies are available via NuGet.
