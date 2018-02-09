@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{de4dc8a8-9008-4769-a7c2-f52f4f733944}</ProjectGuid>
-    <SHFBSchemaVersion>2015.6.5.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
@@ -31,7 +31,7 @@
 &amp;lt%3bp&amp;gt%3bEach task also has a list of actions that determine what the task will do when triggered. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Actions.htm&amp;quot%3b&amp;gt%3bActions&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ActionCollection.htm&amp;quot%3b&amp;gt%3bActionCollection&amp;lt%3b/a&amp;gt%3b instance. ActionCollection provides an indexer which allows access to individual actions by their position in the list. The ActionCollection class also has methods that allow for the addition and removal of actions. ActionCollection implements the IList interface so you can also enumerate all actions using the foreach construct.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Action.htm&amp;quot%3b&amp;gt%3bAction&amp;lt%3b/a&amp;gt%3b class is an abstract class that is the foundation for four different actions. On 1.0, only the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ExecAction.htm&amp;quot%3b&amp;gt%3bExecAction&amp;lt%3b/a&amp;gt%3b specialization is available unless the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_ActionCollection_PowerShellConversion.htm&amp;quot%3b&amp;gt%3bPowerShellConversion&amp;lt%3b/a&amp;gt%3b option is enabled %28see Action Documentation for more information%29. These actions determine what the service will do when a trigger is fired. The Action Documentation has some examples of how to setup each kind of action.&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
     <MissingTags>Summary, Parameter, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
-    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
     <HtmlHelp1xCompilerPath>
     </HtmlHelp1xCompilerPath>
     <HtmlHelp2xCompilerPath>
@@ -102,17 +102,18 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
-<NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
-<NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
-<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
-<NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" /></NamespaceSummaries>
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
+    </NamespaceSummaries>
     <HelpFileVersion>2.7.3</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
