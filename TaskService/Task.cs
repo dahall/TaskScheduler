@@ -3302,7 +3302,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private int GetPriorityAsInt(ProcessPriorityClass value)
 		{
-			var p = 7;
+			// Check for back-door case where exact value is being passed and cast to ProcessPriorityClass
+			if ((int)value <= 10 && value >= 0) return (int)value;
+			int p = 7;
 			switch (value)
 			{
 				case ProcessPriorityClass.AboveNormal:
