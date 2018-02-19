@@ -889,7 +889,19 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Refreshes all of the local instance variables of the task.</summary>
-		public void Refresh() { v2RunningTask?.Refresh(); }
+		/// <exception cref="InvalidOperationException">Thrown if task is no longer running.</exception>
+		public void Refresh()
+		{
+			try { v2RunningTask?.Refresh(); }
+			catch (COMException ce)
+			{
+				unchecked
+				{
+					if (ce.ErrorCode == (int)0x8004130B)
+						throw new InvalidOperationException("The current task is no longer running.", ce);
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -1291,6 +1303,8 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2Task == null) throw new NotV1SupportedException();
 			if (parameters.Length > 32)
 				throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 parameters can be supplied to RunEx.");
+			if (parameters.Any(s => s == null))
+				throw new ArgumentNullException(nameof(parameters), "None of the values passed as parameters may be `null`.");
 			if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) >= 260))
 				throw new ArgumentOutOfRangeException(nameof(parameters), "On systems prior to Windows 10, no individual parameter may be more than 260 characters.");
 			var irt = v2Task.RunEx(parameters.Length == 0 ? null : parameters, (int)flags, sessionID, user);
@@ -1442,7 +1456,7 @@ namespace Microsoft.Win32.TaskScheduler
 						newMinor = 1;
 
 					if (newMinor > osLibMinorVer && throwError)
-						throw new InvalidOperationException($"The current version of the native library (1.{osLibMinorVer}) does not support the original or minimum version of the \"{iTask.Name}\" task ({xmlVer}/1.{newMinor})");
+						throw new InvalidOperationException($"The current version of the native library (1.{osLibMinorVer}) does not support the original or minimum version of the \"{iTask.Name}\" task ({xmlVer}/1.{newMinor}). This is likely due to attempting to read the remote tasks of a newer version of Windows from a down-level client.");
 
 					if (newMinor != xmlVer.Minor)
 					{
