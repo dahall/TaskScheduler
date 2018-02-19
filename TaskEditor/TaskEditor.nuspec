@@ -1,41 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
-	<metadata>
-	<id>TaskSchedulerEditor</id>
-	<version>2.7.3</version>
-	<title>Task Scheduler Managed Wrapper UI Library</title>
-	<authors>David Hall</authors>
-	<description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
-	<language>en-US</language>
-	<licenseUrl>https://github.com/dahall/TaskScheduler/blob/master/license.md</licenseUrl>
-	<projectUrl>https://github.com/dahall/taskscheduler</projectUrl>
-	<iconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</iconUrl>
-	<tags>task interop taskscheduler UI editor</tags>
-	<dependencies>
-		<dependency id="TaskScheduler" version="[2.7.3]" />
-		<dependency id="AeroWizard" version="[2.1.10]" />
-		<dependency id="GroupControls" version="[1.5.3]" />
-		<dependency id="TimeSpan2" version="[2.1.6]" />
-	  <dependency id="Tulpep.ActiveDirectoryObjectPicker" version="[2.2.128]" />
-	</dependencies>
-	</metadata>
-	<files>
-	<file src="bin\Release\net20\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net20" />
-	<file src="bin\Release\net20\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net20" />
-	<file src="bin\Release\net20\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net20" />
-	<file src="bin\Release\net35\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net35" />
-	<file src="bin\Release\net35\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net35" />
-	<file src="bin\Release\net35\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net35" />
-	<file src="bin\Release\net40\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net40" />
-	<file src="bin\Release\net40\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net40" />
-	<file src="bin\Release\net40\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net40" />
-	<file src="bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net452" />
-	<file src="bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net452" />
-	<file src="bin\Release\net452\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net452" />
-	<file src="*.cs" target="src" />
-	<file src="EditorProperties\*.cs" target="src\EditorProperties" />
-	<file src="Native\*.cs" target="src\Native" />
-	<file src="OptionPanels\*.cs" target="src\OptionPanels" />
-	<file src="UIComponents\*.cs" target="src\UIComponents" />
-	</files>
+  <metadata>
+    <id>TaskSchedulerEditor</id>
+    <version>2.7.4</version>
+    <title>Task Scheduler Managed Wrapper UI Library</title>
+    <authors>David Hall</authors>
+    <description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
+    <language>en-US</language>
+    <licenseUrl>https://github.com/dahall/TaskScheduler/blob/master/license.md</licenseUrl>
+    <projectUrl>https://github.com/dahall/taskscheduler</projectUrl>
+    <iconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</iconUrl>
+    <tags>task interop taskscheduler UI editor</tags>
+    <dependencies>
+      <dependency id="TaskScheduler" version="[2.7.4]" />
+      <dependency id="AeroWizard" version="[2.1.10]" />
+      <dependency id="GroupControls" version="[1.5.3]" />
+      <dependency id="TimeSpan2" version="[2.1.6]" />
+      <dependency id="Tulpep.ActiveDirectoryObjectPicker" version="[2.2.128]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\net20\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net20" />
+    <file src="bin\Release\net20\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net20" />
+    <file src="bin\Release\net20\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net20" />
+    <file src="bin\Release\net35\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net35" />
+    <file src="bin\Release\net35\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net35" />
+    <file src="bin\Release\net35\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net35" />
+    <file src="bin\Release\net40\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net40" />
+    <file src="bin\Release\net40\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net40" />
+    <file src="bin\Release\net40\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net40" />
+    <file src="bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.dll" target="lib\net452" />
+    <file src="bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.xml" target="lib\net452" />
+    <file src="bin\Release\net452\**\Microsoft.Win32.TaskSchedulerEditor.resources.dll" target="lib\net452" />
+    <file src="*.cs" target="src" />
+    <file src="EditorProperties\*.cs" target="src\EditorProperties" />
+    <file src="Native\*.cs" target="src\Native" />
+    <file src="OptionPanels\*.cs" target="src\OptionPanels" />
+    <file src="UIComponents\*.cs" target="src\UIComponents" />
+  </files>
 </package>
