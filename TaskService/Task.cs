@@ -1297,10 +1297,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task == null) throw new NotV1SupportedException();
+			if (parameters == null || parameters.Any(s => s == null))
+				throw new ArgumentNullException(nameof(parameters), "The array and none of the values passed as parameters may be `null`.");
 			if (parameters.Length > 32)
 				throw new ArgumentOutOfRangeException(nameof(parameters), "A maximum of 32 parameters can be supplied to RunEx.");
-			if (parameters.Any(s => s == null))
-				throw new ArgumentNullException(nameof(parameters), "None of the values passed as parameters may be `null`.");
 			if (TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5 && parameters.Any(p => (p?.Length ?? 0) >= 260))
 				throw new ArgumentOutOfRangeException(nameof(parameters), "On systems prior to Windows 10, no individual parameter may be more than 260 characters.");
 			var irt = v2Task.RunEx(parameters.Length == 0 ? null : parameters, (int)flags, sessionID, user);
