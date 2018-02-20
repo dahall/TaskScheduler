@@ -893,13 +893,9 @@ namespace Microsoft.Win32.TaskScheduler
 		public void Refresh()
 		{
 			try { v2RunningTask?.Refresh(); }
-			catch (COMException ce)
+			catch (COMException ce) when ((uint)ce.ErrorCode == 0x8004130B)
 			{
-				unchecked
-				{
-					if (ce.ErrorCode == (int)0x8004130B)
-						throw new InvalidOperationException("The current task is no longer running.", ce);
-				}
+				throw new InvalidOperationException("The current task is no longer running.", ce);
 			}
 		}
 	}
