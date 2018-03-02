@@ -310,8 +310,8 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentNullException(nameof(service));
 			if (!titleSet)
 				Text = string.Format(Resources.TaskEditDlgTitle, "New Task", GetServerString(service));
-			okBtn.Enabled = false;
 			taskPropertiesControl1.Initialize(service, td, taskName, taskFolder);
+			okBtn.Enabled = IsValidTaskName(taskName);
 		}
 
 		/// <summary>Initializes the control for the editing of an existing <see cref="Task"/>.</summary>
@@ -387,7 +387,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 				{
 					var user = TaskDefinition.Principal.ToString();
-					user = string.IsNullOrEmpty(user) ? WindowsIdentity.GetCurrent().Name : user;
+					if (string.IsNullOrEmpty(user)) user = WindowsIdentity.GetCurrent().Name;
 					string pwd = null;
 					var fld = TaskService.GetFolder(TaskFolder);
 					if (TaskDefinition.Principal.RequiresPassword())

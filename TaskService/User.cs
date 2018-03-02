@@ -12,7 +12,11 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			var cur = WindowsIdentity.GetCurrent();
 			if (string.IsNullOrEmpty(userName)) userName = null;
-			if (userName == null || cur.Name.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+			// 2018-03-02: Hopefully not a breaking change, but by adding in the comparison of an account name without a domain and the current user,
+			//    there is a chance that current implementations will break given the condition that a local account with the same name as a domain
+			//    account exists and the intention was to prefer the local account. In such a case, the developer should prepend the user name in
+			//    TaskDefinition.Principal.UserId with the machine name of the local machine.
+			if (userName == null || cur.Name.Equals(userName, StringComparison.InvariantCultureIgnoreCase) || GetUser(cur.Name).Equals(userName, StringComparison.InvariantCultureIgnoreCase))
 			{
 				acct = cur;
 				sid = acct.User;
@@ -21,7 +25,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				try
 				{
-					using (var ds = new Microsoft.Win32.NativeMethods.DomainService())
+					using (var ds = new NativeMethods.DomainService())
 						acct = new WindowsIdentity(ds.CrackName(userName)); sid = acct.User;
 				} catch { }
 			}
@@ -39,6 +43,12 @@ namespace Microsoft.Win32.TaskScheduler
 					var ntacct = new NTAccount(userName);
 					try { sid = (SecurityIdentifier)ntacct.Translate(typeof(SecurityIdentifier)); } catch { }
 				}
+			}
+
+			string GetUser(string domUser)
+			{
+				var split = domUser.Split('\\');
+				return split.Length == 2 ? split[1] : domUser;
 			}
 		}
 
