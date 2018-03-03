@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace TestTaskService
@@ -10,6 +14,30 @@ namespace TestTaskService
 			InitializeComponent();
 			Icon = Properties.Resources.TaskScheduler;
 			radioButtonList1.SelectedIndex = 0;
+
+			// Add languages to combo
+			langCombo.SelectedIndexChanged += langCombo_SelectedIndexChanged;
+			langCombo.BeginUpdate();
+			langCombo.SelectedIndex = -1;
+			foreach (
+				var culture in
+				GetAsmCultures(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog).Assembly.GetTypes().First(t => t.Name == "Resources")))
+				langCombo.Items.Add(culture);
+			langCombo.EndUpdate();
+			langCombo.SelectedItem = System.Threading.Thread.CurrentThread.CurrentUICulture;
+		}
+
+		private static IEnumerable<CultureInfo> GetAsmCultures(Type type)
+		{
+			var rm = new ResourceManager(type);
+			foreach (var culture in CultureInfo.GetCultures(CultureTypes.AllCultures))
+				if (!culture.Equals(CultureInfo.InvariantCulture) && rm.GetResourceSet(culture, true, false) != null)
+					yield return culture;
+		}
+
+		private void langCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			System.Threading.Thread.CurrentThread.CurrentUICulture = langCombo.SelectedItem as CultureInfo;
 		}
 
 		protected override void OnLoad(EventArgs e)

@@ -7,7 +7,7 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>2.7.4</Version>
+    <Version>2.7.5</Version>
     <Title>Task Scheduler Managed Wrapper</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
@@ -73,6 +73,9 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

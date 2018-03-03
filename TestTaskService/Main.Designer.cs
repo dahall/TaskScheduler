@@ -51,6 +51,7 @@ namespace TestTaskService
 			this.ts = new Microsoft.Win32.TaskScheduler.TaskService();
 			this.taskServiceConnectDialog1 = new Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog();
 			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.langCombo = new System.Windows.Forms.ComboBox();
 			this.radioButtonList1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.ts)).BeginInit();
 			this.SuspendLayout();
@@ -76,8 +77,8 @@ namespace TestTaskService
 			radioButtonListItem1.Text = "Short test*";
 			radioButtonListItem2.Text = "Long test*";
 			radioButtonListItem3.Text = "Editor test*";
-            radioButtonListItem3.ToolTipText = "Input line for existing task";
-            radioButtonListItem4.Text = "Find Task Prop*";
+			radioButtonListItem3.ToolTipText = "Input line for existing task";
+			radioButtonListItem4.Text = "Find Task Prop*";
 			radioButtonListItem5.Text = "Wizard test";
 			radioButtonListItem6.Text = "MMC test";
 			radioButtonListItem7.Text = "Find Task*";
@@ -152,15 +153,9 @@ namespace TestTaskService
 			// 
 			// taskServiceConnectDialog1
 			// 
-			this.taskServiceConnectDialog1.AutoSize = true;
 			this.taskServiceConnectDialog1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.taskServiceConnectDialog1.ClientSize = new System.Drawing.Size(444, 181);
-			this.taskServiceConnectDialog1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.taskServiceConnectDialog1.Location = new System.Drawing.Point(26, 26);
 			this.taskServiceConnectDialog1.Name = "TSConnectDlg";
 			this.taskServiceConnectDialog1.TaskService = this.ts;
-			this.taskServiceConnectDialog1.Text = "Select Computer";
-			this.taskServiceConnectDialog1.Visible = false;
 			// 
 			// textBox2
 			// 
@@ -173,6 +168,15 @@ namespace TestTaskService
 			this.textBox2.TabIndex = 2;
 			this.textBox2.Text = global::TestTaskService.Properties.Settings.Default.MainInput;
 			// 
+			// langCombo
+			// 
+			this.langCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.langCombo.FormattingEnabled = true;
+			this.langCombo.Location = new System.Drawing.Point(167, 316);
+			this.langCombo.Name = "langCombo";
+			this.langCombo.Size = new System.Drawing.Size(180, 21);
+			this.langCombo.TabIndex = 7;
+			// 
 			// Main
 			// 
 			this.AcceptButton = this.runButton;
@@ -180,6 +184,7 @@ namespace TestTaskService
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.closeButton;
 			this.ClientSize = new System.Drawing.Size(521, 350);
+			this.Controls.Add(this.langCombo);
 			this.Controls.Add(this.reconnectLink);
 			this.Controls.Add(this.textBox2);
 			this.Controls.Add(this.label1);
@@ -207,5 +212,6 @@ namespace TestTaskService
 		private Microsoft.Win32.TaskScheduler.TaskService ts;
 		private System.Windows.Forms.LinkLabel reconnectLink;
 		private Microsoft.Win32.TaskScheduler.TaskServiceConnectDialog taskServiceConnectDialog1;
+		private System.Windows.Forms.ComboBox langCombo;
 	}
 }

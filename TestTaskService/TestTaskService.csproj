@@ -62,6 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs">
+      <Link>ExtensionAttributeFor.NET_2.0.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\Func.Net2.cs">
+      <Link>Func.Net2.cs</Link>
+    </Compile>
+    <Compile Include="..\TaskService\Native\Linq.Net2.cs">
+      <Link>Linq.Net2.cs</Link>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

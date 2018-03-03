@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="taskNameLabel.Text" xml:space="preserve">
+    <value>Na &amp; меня:!</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Расположение</value>
+  </data>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="taskNameText.Text" xml:space="preserve">
+    <value>Имя задачи</value>
+  </data>
+  <data name="taskVersionLabel.Text" xml:space="preserve">
+    <value>&amp; Настройка для:!</value>
+  </data>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Hidd &amp; en!</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Запустите w &amp; ith высокие привилегии!</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Не храните &amp; пароль. Задача будет только иметь доступ к ресурсам локального компьютера.!</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Запуск от &amp; ли пользователь вошел в систему или нет!</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>&amp; Работать только тогда, когда пользователь вошел в систему!</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Смена &amp; пользователя или группу...!</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>При выполнении задачи, используйте следующую учетную запись:!</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Параметры безопасности</value>
+  </data>
+  <data name="generalTab.Text" xml:space="preserve">
+    <value>Общая информация</value>
+  </data>
+  <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
+    <value>При создании задачи, можно указать условия, которые будут вызывать задачу.!</value>
+  </data>
+  <data name="triggersTab.Text" xml:space="preserve">
+    <value>Триггеры</value>
+  </data>
+  <data name="actionIntroLabel.Text" xml:space="preserve">
+    <value>При создании задачи, необходимо указать действие, которое будет происходить, когда ваша задача начинается.!</value>
+  </data>
+  <data name="actionsTab.Text" xml:space="preserve">
+    <value>Действие</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Начать onl &amp; y если следующие сетевые подключения доступен:!</value>
+  </data>
+  <data name="networkConditionGroupBox.Text" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Остановить, если компьютер переходит в &amp; аккумулятора!</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>&amp; Пробуждение компьютера для запуска этой задачи!</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Запустите задачу, только если компьютер на AC &amp; власть!</value>
+  </data>
+  <data name="powerConditionGroupBox.Text" xml:space="preserve">
+    <value>Мощность</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Перезапуск, если состояние бездействия res &amp; громкости!</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Если остановить компьютер &amp; er перестает быть простоя!</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>W &amp; МТА для простоя для:!</value>
+  </data>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Запустите задачу только если &amp; компьютер простаивает для:!</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Неактивно</value>
+  </data>
+  <data name="conditionIntroLabel.Text" xml:space="preserve">
+    <value>Укажите условия, которые, наряду с триггером, определить, должен ли выполняться задача. Задача не будет запускаться, если любое условие, указанное не верно.!</value>
+  </data>
+  <data name="conditionsTab.Text" xml:space="preserve">
+    <value>Список</value>
+  </data>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Если задача уже ru &amp; nning, то применяется следующее правило:!</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>раз</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Попытка &amp; до перезапуска:!</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Если задача не планируется запустить снова &amp; удалить его после:!</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Если выполняемая задача не заканчивается, когда просил &amp; заставить его остановить!</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Остановить ТАС &amp; k, если она выполняется дольше, чем:!</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>Если &amp; задача терпит неудачу, перезапустите каждые:!</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Выполнить задачу как можно скорее после &amp; пропущен плановый запуск!</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>A &amp; разрешить выполнение задачи по требованию!</value>
+  </data>
+  <data name="settingsIntroLabel.Text" xml:space="preserve">
+    <value>Укажите дополнительные параметры, которые влияют на поведение задачи.!</value>
+  </data>
+  <data name="settingsTab.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="taskRegSourceLabel.Text" xml:space="preserve">
+    <value>Источник</value>
+  </data>
+  <data name="taskRegURILabel.Text" xml:space="preserve">
+    <value>Украина</value>
+  </data>
+  <data name="taskRegDocLabel.Text" xml:space="preserve">
+    <value>Документацияv</value>
+  </data>
+  <data name="taskRegSDDLLabel.Text" xml:space="preserve">
+    <value>SE &amp; предстоит:!</value>
+  </data>
+  <data name="taskRegVersionLabel.Text" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
+    <value>Измените безопасность...!</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Укажите регистрационную информацию для выполнения этой задачи.!</value>
+  </data>
+  <data name="regInfoTab.Text" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
+    <value>Запуск задачи в режиме e &amp; xclusive!</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
+    <value>Если задача не удается завершить, перезапустить после:!</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
+    <value>Во время обслуживания, запустить задачу каждые:!</value>
+  </data>
+  <data name="autoMaintGroup.Text" xml:space="preserve">
+    <value>Автоматическое поддержание!</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Процесс &amp; определить безопасности (SID) тип:!</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>&amp; Заказываемого привилегии:!</value>
+  </data>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Усиление безопасности!</value>
+  </data>
+  <data name="taskEnabledCheck.Text" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>&amp; Запретить запуск, если в сеансе удаленного приложения комплексной локально (железнодорожных)!</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
+    <value>&amp; Использования единой планирование двигателя!</value>
+  </data>
+  <data name="taskVolatileCheck.Text" xml:space="preserve">
+    <value>&amp; Автоматически отключить задачи каждый раз, когда Windows начинается!</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Конверсии Уровень приоритета</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Укажите дополнительные параметры безопасности, техническое обслуживание и системы функция совместимости для задачи.!</value>
+  </data>
+  <data name="addPropTab.Text" xml:space="preserve">
+    <value>Дополнения:</value>
+  </data>
+  <data name="runTimesErrorLabel.Text" xml:space="preserve">
+    <value>Текст ошибки</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Не удается отобразить время выполнения для выполнения этой задачи.!</value>
+  </data>
+  <data name="runTimesTab.Text" xml:space="preserve">
+    <value>Запуск раз!</value>
+  </data>
+  <data name="historyTab.Text" xml:space="preserve">
+    <value>История</value>
+  </data>
+</root>

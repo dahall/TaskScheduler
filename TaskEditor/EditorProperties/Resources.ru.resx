@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyConnection" xml:space="preserve">
+    <value>Подключение</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Поскольку Ваш браузер не поддерживает JavaScript или он отключен, пожалуйста, убедитесь, что Вы нажмете кнопку &lt; Em &gt; обновить итоги перед размещением заказа. Если вы этого не сделаете, с вас может взиматься дополнительная плата.</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Последняя</value>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>При запуске!</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>На событии!</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>На холостом ходу!</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>В задачи создания/изменения!</value>
+  </data>
+  <data name="TriggerTypeSchedule" xml:space="preserve">
+    <value>Запуск по расписанию</value>
+  </data>
+  <data name="TriggerTypeSessionConnect" xml:space="preserve">
+    <value>При подключении к сеансу пользователя!</value>
+  </data>
+  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
+    <value>При отключении от сеанса пользователя!</value>
+  </data>
+  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
+    <value>Блокировка рабочей станции!</value>
+  </data>
+  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
+    <value>На станции разблокировать!</value>
+  </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>Синхронизация часовых поясов!</value>
+  </data>
+  <data name="LocalMachine" xml:space="preserve">
+    <value>Локальный компьютер!</value>
+  </data>
+  <data name="TaskEditDlgTitle" xml:space="preserve">
+    <value>{0} свойства ({1})!</value>
+  </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>Недопустимое событие триггера!</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>Как минимум, должен быть выбран журнал.!</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>Там должно быть по крайней мере один месяц, одну неделю и один будний день выбран.!</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>Недопустимый ежемесячные триггер!</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>Там должен быть по крайней мере один месяц и один день выбран.!</value>
+  </data>
+  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
+    <value>Этот класс COM не поддерживает требуемый интерфейс.!</value>
+  </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Вызов CredUIConfirmCredentials неудачу с кодом ошибки: {0}!</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Вызов CredUIPromptForCredentials неудачу с кодом ошибки: {0}!</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>Планировщик задач!</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>Введите данные учетной записи пользователя для выполнения этой задачи.!</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>Действительный пароль для указанной учетной записи не была предоставлена.!</value>
+  </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>Там должно быть по крайней мере одно действие, назначенные этой задаче.!</value>
+  </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>Время выполнения задачи ({0})!</value>
+  </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>Операция успешно завершена.</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Никогда!</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>редактировать действие</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>Новое действие</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>Спусковой крючок</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>Спусковой крючок</value>
+  </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>Если вы хотите иметь задачи удаляются автоматически после того, как она работает, вы должны добавить по крайней мере один триггер, который имеет дату истечения.!</value>
+  </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>Выберите новый целевой компьютер:!</value>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>Не</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>Немедленно!</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>Бессрочно</value>
+  </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>Невозможно получить задачи истории. Ошибка: {0}!</value>
+  </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>Запуск задачи под учетной записью группы поддерживается только на Windows Vista™ или более поздней версии. Для запуска задачи под учетной записью группы, необходимо обновить эту задачу к задаче Windows Vista™.!</value>
+  </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>Отправляет почту с помощью поставляемых сведения.!</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>Выполняет операцию командной строки.!</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>Показывает окно сообщения при активации задачи.!</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>Запустите программу!</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>Отправьте сообщение</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>Отобразить сообщение</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>Запускает задачу на ежедневной основе. Например, задача запускается в определенное время каждый день, каждый день, каждый третий день, и так далее.!</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>Ежедневно</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>Запускает задачу при возникновении системного события.!</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>Когда регистрируется определенное событие!</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>Запускает задачу, основанный на ежемесячной основе. Например, задача запускается на определенные дни конкретных месяцев.!</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>Ежемесячно</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>Запускает задачу на определенную дату и время.!</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>Однократно</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>Запускает задачу, основанный на еженедельный график. Например, задача начинается в 8:00 утра на определенный день недели, каждую неделю или каждые две недели.!</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>Каждую неделю</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>Наименование: описание {0}: {1} Триггер: {2} действий: {3}!</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>Значение интервала повтора должно быть меньше или равно значение длительности повтора.!</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>Планировщик не может создать задачу. Учетная запись пользователя неизвестно, неверный пароль или учетная запись пользователя не имеет разрешений на создание этой задачи.!</value>
+  </data>
+  <data name="TaskCompatibility" xml:space="preserve">
+    <value>В сервис | Windows Server™ 2003, Windows® XP или Windows® 2000 | Windows Vista™, Windows Server™ 2008 | Windows® 7, Server™ 2008 R2 Windows | Windows® 8 или 8.1, Windows Server™ 2012 | Windows® 10!</value>
+  </data>
+  <data name="TimeSpanNotStarted" xml:space="preserve">
+    <value>Выполнение не начато</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal" xml:space="preserve">
+    <value>Выше нормы!</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal" xml:space="preserve">
+    <value>Ниже обычного!</value>
+  </data>
+  <data name="ProcessPriorityHigh" xml:space="preserve">
+    <value>Установленные&amp;#x0D;</value>
+  </data>
+  <data name="ProcessPriorityIdle" xml:space="preserve">
+    <value>Неактивно</value>
+  </data>
+  <data name="ProcessPriorityNormal" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="ProcessPriorityRealTime" xml:space="preserve">
+    <value>Реальное время</value>
+  </data>
+  <data name="SIDTypeDefault" xml:space="preserve">
+    <value>Predefinito</value>
+  </data>
+  <data name="SIDTypeNone" xml:space="preserve">
+    <value>Отсутствуют</value>
+  </data>
+  <data name="SIDTypeUnrestricted" xml:space="preserve">
+    <value>Без ограничений</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
+    <value>Учетной записи пользователя на вкладке Общие должно быть присвоено «Локальная служба» или «Сетевая служба» когда тип SID процесса имеет значение «Неограниченный» на вкладке дополнений. Необходимо либо изменить тип SID или установить один из допустимых учетных записей пользователя.!</value>
+  </data>
+  <data name="UseUnifiedResetQuestion" xml:space="preserve">
+    <value>Установка этого свойства будет отключить ряд других свойств. Вы все еще хотите продолжить?!</value>
+  </data>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Пользовательский обработчик!</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Старт А</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>Отправьте сообщение</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Отобразить сообщение</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew" xml:space="preserve">
+    <value>Не запускает новый экземпляр!</value>
+  </data>
+  <data name="TaskInstancesParallel" xml:space="preserve">
+    <value>Запустите новый экземпляр параллельно!</value>
+  </data>
+  <data name="TaskInstancesQueue" xml:space="preserve">
+    <value>Очередь новый экземпляр!</value>
+  </data>
+  <data name="TaskInstancesStopExisting" xml:space="preserve">
+    <value>Остановите существующий экземпляр!</value>
+  </data>
+  <data name="Error_InvalidSddlFormat" xml:space="preserve">
+    <value>SDDL должен быть в формате, определенном в http://goo.gl/6au0V!</value>
+  </data>
+  <data name="Error_InvalidUriFormat" xml:space="preserve">
+    <value>Формат даты по Недвижимости</value>
+  </data>
+  <data name="Error_InvalidVersionFormat" xml:space="preserve">
+    <value>Версия должна быть в формате [Главная.вспомогательная[.построение[.Редакция]].!</value>
+  </data>
+  <data name="EventDetailHeader" xml:space="preserve">
+    <value>Событие {0}, TaskScheduler!</value>
+  </data>
+  <data name="HistoryHeader" xml:space="preserve">
+    <value>Количество событий:</value>
+  </data>
+  <data name="EventPropertiesDialogTitle" xml:space="preserve">
+    <value>Свойства события - события {0}, TaskScheduler!</value>
+  </data>
+  <data name="TaskEventStatusFailure" xml:space="preserve">
+    <value>Неудача!</value>
+  </data>
+  <data name="TaskEventStatusStillRunning" xml:space="preserve">
+    <value>Все еще работает!</value>
+  </data>
+  <data name="TaskEventStatusSuccess" xml:space="preserve">
+    <value>Успех!</value>
+  </data>
+  <data name="TaskEventStatusTerminated" xml:space="preserve">
+    <value>Ограниченные</value>
+  </data>
+  <data name="TriggerTypeRemoteConnect" xml:space="preserve">
+    <value>При подключении к сеансу удаленного пользователя!</value>
+  </data>
+  <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
+    <value>При отключении от сеанса удаленного пользователя!</value>
+  </data>
+  <data name="LoadingPrompt" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value>Имя задачи находится не в допустимом формате. Символы не допускаются в имени файла не допускаются в имени задачи.!</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>Этот тип триггера не может редактироваться в этот инструмент.!</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Пользовательский триггер!</value>
+  </data>
+  <data name="ChangeUserBtn" xml:space="preserve">
+    <value>Изменить пользователя или группу...!</value>
+  </data>
+  <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
+    <value>Сменить пользователя</value>
+  </data>
+  <data name="Error_EventsNotSupported" xml:space="preserve">
+    <value>События задач и истории не поддерживаются в версиях .NET 3.5.!</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
+    <value>Следующие параметры свойства не может использоваться с выбранным совместимости:!</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
+    <value>Некоторые параметры несовместимы с этой отбора.!</value>
+  </data>
+  <data name="LastResultRunning" xml:space="preserve">
+    <value>Задача в настоящее время выполняется. (0 x {0: x})!</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>Недопустимый шаблон диапазона ID!</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>Если вы хотите вручную изменить запрос, вы больше не сможете изменить запрос, используя элементы управления на вкладке Фильтр, вы хотели бы продолжить?!</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>Вы хотите использовать вкладку Фильтр для редактирования запроса? Это приведет к ручного изменения, внесенные в запросе она будет отброшена.!</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>Последние 12 часов</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>В любой момент</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>Ручной промежуток</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>Все события</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>От {0} до {1}!</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>Все события до {1}!</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>За последние 24 часа</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>Последний час</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>Сбой аудита!</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>Аудит успехов!</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>Классический</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>Корреляция</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>Время отклика</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>Контроль качества поставщика</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>Контекст</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>DIAG</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>Список пользователей, просмотревших события</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>Журналы приложений и служб!</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>Упал содержание должно быть текст или файл, содержащий допустимый запрос Xml.!</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>Нераспознанные текст найден в запросе XML.!</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>Обидеть текст: «{0}»!</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>Минимальный срок или период, которые может использовать задача — 1 день. Крайний срок также должно быть больше, чем период.!</value>
+  </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>*Unset* (расформировать)</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>Значение длительности повтора должно быть или равно 1 минуте.!</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>Значение интервала повтора должно быть или равно 1 минуте и меньше или равно 31 дней.!</value>
+  </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>Недопустимое значение.!</value>
+  </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>Предоставленный программа/скрипт не является допустимым именем файла. Просьба исправить перед продолжением.!</value>
+  </data>
+</root>
