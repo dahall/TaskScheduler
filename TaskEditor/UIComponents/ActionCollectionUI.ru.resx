@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Мотор!</value>
+    <value>Действие</value>
   </data>
   <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Детали</value>
+    <value>Подробности</value>
   </data>
   <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Новое действие</value>
+    <value>Новое действие...</value>
   </data>
   <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
     <value>Удалить действие</value>
@@ -133,27 +133,27 @@
     <value>Изменить действие...</value>
   </data>
   <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Переместить вверх</value>
+    <value>Вверх</value>
   </data>
   <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Движение вниз</value>
+    <value>Вниз</value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Новый!</value>
+    <value>Создать...</value>
   </data>
   <data name="actionDeleteButton.Text" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Изменить</value>
+    <value>Изменить...</value>
   </data>
   <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5!</value>
+    <value>5</value>
   </data>
   <data name="actionDownButton.Text" xml:space="preserve">
-    <value>6!</value>
+    <value>6</value>
   </data>
   <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Разрешить преобразование PowerShell для неподдерживаемых действия!</value>
+    <value>Разрешить преобразование PowerShell для неподдерживаемых действий</value>
   </data>
 </root>

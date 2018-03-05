@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="promptLabel.Text" xml:space="preserve">
-    <value>Вам необходимо указать, какое действие будет выполнять эту задачу.!</value>
+    <value>Укажите, какое действие будет выполняться при запуске задачи.</value>
   </data>
   <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Старт А</value>
+    <value>Запуск программы</value>
   </data>
   <data name="actionsCombo.Items1" xml:space="preserve">
-    <value>Отправьте сообщение</value>
+    <value>Отправить сообщение</value>
   </data>
   <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Отобразить сообщение</value>
+    <value>Вывод сообщения</value>
   </data>
   <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Пользовательский обработчик!</value>
+    <value>Пользовательский обработчик COM</value>
   </data>
   <data name="settingsGroup.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Отмена</value>
@@ -145,10 +145,10 @@
     <value>Действие</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Идент.</value>
+    <value>ИД:</value>
   </data>
   <data name="runActionBtn.Text" xml:space="preserve">
-    <value>&amp; Акцию!</value>
+    <value>Выполнить</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Новое действие</value>

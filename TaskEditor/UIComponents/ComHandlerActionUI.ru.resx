@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Поиск идентификатора CLSID...!</value>
+    <value>Поиск идентификатора CLSID...</value>
   </data>
   <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Поиск идентификатора CLSID из локального системного реестра.!</value>
+    <value>Поиск идентификатора CLSID в локальном реестре</value>
   </data>
   <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вручную ввести CLSID...!</value>
+    <value>Ввести CLSID вручную...</value>
   </data>
   <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Вручную ввести идентификатор CLSID!</value>
+    <value>Ввести идентификатор CLSID</value>
   </data>
   <data name="getCLSIDButton.Text" xml:space="preserve">
-    <value>...!</value>
+    <value>...</value>
   </data>
   <data name="comDataLabel.Text" xml:space="preserve">
-    <value>Данные</value>
+    <value>Данные:</value>
   </data>
   <data name="comCLSIDLabel.Text" xml:space="preserve">
-    <value>Объект</value>
+    <value>COM-объект:</value>
   </data>
   <data name="comIntroLabel.Text" xml:space="preserve">
-    <value>Это действие запускает пользовательский обработчик COM.!</value>
+    <value>Это действие запускает пользовательский COM-обработчик.</value>
   </data>
 </root>

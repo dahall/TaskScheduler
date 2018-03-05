@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value>Выбрать...</value>
+    <value>Обзор...</value>
   </data>
   <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value>SMTP</value>
+    <value>SMTP:</value>
   </data>
   <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value>Вложения</value>
+    <value>Вложение:</value>
   </data>
   <data name="emailTextLabel.Text" xml:space="preserve">
-    <value>Текст</value>
+    <value>Текст:</value>
   </data>
   <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value>Тема</value>
+    <value>Тема:</value>
   </data>
   <data name="emailToLabel.Text" xml:space="preserve">
-    <value>Кому</value>
+    <value>Кому:</value>
   </data>
   <data name="emailFromLabel.Text" xml:space="preserve">
-    <value>С</value>
+    <value>От:</value>
   </data>
 </root>

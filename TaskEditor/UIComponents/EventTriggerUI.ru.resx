@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Зарегистрироваться</value>
+    <value>Журнал: </value>
   </data>
   <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Источник</value>
+    <value>Источник:</value>
   </data>
   <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>ID мероприятия</value>
+    <value>Код события: </value>
   </data>
   <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value>Пользовательский</value>
+    <value>Настраиваемое</value>
   </data>
   <data name="eventBasicRadio.Text" xml:space="preserve">
-    <value>Основные</value>
+    <value>Простое</value>
   </data>
   <data name="editBtn.Text" xml:space="preserve">
-    <value>&amp; Изменить событие...</value>
+    <value>Создать фильтр события...</value>
   </data>
 </root>

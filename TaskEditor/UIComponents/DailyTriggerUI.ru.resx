@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>Сутки</value>
+    <value>дн.</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
     <value>Повторять каждые</value>

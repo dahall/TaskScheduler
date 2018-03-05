@@ -121,7 +121,7 @@
     <value>Отмена</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="descLabel.Text" xml:space="preserve">
     <value>Выберите файл или папку</value>
@@ -130,6 +130,6 @@
     <value>Загрузка</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Обзор задачи!</value>
+    <value>Выбор задания</value>
   </data>
 </root>

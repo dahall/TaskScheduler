@@ -118,12 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>5</value>
+    <value>В:</value>
   </data>
   <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>Дней</value>
+    <value>Дни:</value>
   </data>
   <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>Месяцы</value>
+    <value>Месяцы:</value>
+  </data>
+  <data name="monthlyOnDOWDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Выбрать все дни&gt;</value>
+  </data>
+  <data name="monthlyMonthsDropDown.CheckAllText" xml:space="preserve">
+    <value>&lt;Выбрать все месяцы&gt;</value>
   </data>
 </root>

@@ -127,7 +127,7 @@
     <value>Вторник</value>
   </data>
   <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>Mercoledì</value>
+    <value>Среда</value>
   </data>
   <data name="weeklyThuCheck.Text" xml:space="preserve">
     <value>Четверг</value>
@@ -139,9 +139,9 @@
     <value>Суббота</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>недели</value>
+    <value>неделю по</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Повторять каждые</value>
+    <value>Повторять каждую</value>
   </data>
 </root>

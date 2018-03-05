@@ -121,24 +121,30 @@
     <value>Отмена</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="upBtn.Text" xml:space="preserve">
-    <value>M &amp; Ове вверх!</value>
+    <value>Вверх</value>
   </data>
   <data name="downBtn.Text" xml:space="preserve">
-    <value>Mo &amp; ve вниз!</value>
+    <value>Вниз</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Доступные столбцы</value>
+    <value>Доступные столбцы:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Отображение &amp; Эд столбцы:!</value>
+    <value>Отображаемые столбцы:</value>
   </data>
   <data name="restoreBtn.Text" xml:space="preserve">
-    <value>Ре &amp; хранения по умолчанию!</value>
+    <value>По умолчанию</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Добавление и удаление столбцов!</value>
+    <value>Добавление и удаление столбцов</value>
+  </data>
+  <data name="addBtn.Text" xml:space="preserve">
+    <value>Добавить -&gt;</value>
+  </data>
+  <data name="remBtn.Text" xml:space="preserve">
+    <value>&lt;- Удалить</value>
   </data>
 </root>

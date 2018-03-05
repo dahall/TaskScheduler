@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>&amp; Использования единой планирование двигателя!</value>
+    <value>Использовать единый движок планировщика</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Описание</value>
+    <value>Описание:</value>
   </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value>Документацияv</value>
+    <value>Документация:</value>
   </data>
   <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
     <value>Информация</value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>Версия</value>
+    <value>Версия:</value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value>&amp; Автоматически отключить задачи каждый раз, когда Windows начинается!</value>
+    <value>Автоматически отключать задачу при запуске Windows</value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value>Украина</value>
+    <value>URI:</value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value>Источник</value>
+    <value>Источник:</value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>&amp;Скрытых</value>
+    <value>Скрытая задача</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Автор</value>
+    <value>Автор:</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Конфигурация</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Сведения о задаче общего!</value>
+    <value>Общие</value>
   </data>
 </root>

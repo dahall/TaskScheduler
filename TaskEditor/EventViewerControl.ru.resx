@@ -118,57 +118,57 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Копировать</value>
+    <value>Копировать</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>УРОВЕНЬ</value>
+    <value>Уровень</value>
   </data>
   <data name="textViewRadio.Text" xml:space="preserve">
-    <value>Друз &amp; ndly мнение!</value>
+    <value>Понятное представление</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
-    <value>Задача Categor &amp; y:!</value>
+    <value>Категория задачи:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Пользователь:</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Выбрать &amp;все</value>
+    <value>Выбрать все</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
-    <value>Вычислить &amp; r:!</value>
+    <value>Компьютер: </value>
   </data>
   <data name="xmlViewRadio.Text" xml:space="preserve">
-    <value>&amp; XML</value>
+    <value>Режим XML</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>ID мероприятия</value>
+    <value>Код события: </value>
   </data>
   <data name="label21.Text" xml:space="preserve">
-    <value>Вход Na &amp; меня:!</value>
+    <value>Пользователь:</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>Ключевые слова</value>
+    <value>Ключевые слова:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Код операции</value>
+    <value>Код операции:</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>Детали</value>
+    <value>Подробности</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
-    <value>Logge &amp; d:!</value>
+    <value>Дата:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Источник</value>
+    <value>Источник:</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Подробнее</value>
+    <value>Подробности</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
-    <value>Общая информация</value>
+    <value>Общие</value>
   </data>
   <data name="infoLink.Text" xml:space="preserve">
-    <value>Онлайн справка журнала событий!</value>
+    <value>Веб-справка журнала</value>
   </data>
 </root>

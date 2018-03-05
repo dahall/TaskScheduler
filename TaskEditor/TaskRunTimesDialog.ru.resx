@@ -121,6 +121,6 @@
     <value>Отмена</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Задача выполнения раз!</value>
+    <value>Время выполнения задачи</value>
   </data>
 </root>

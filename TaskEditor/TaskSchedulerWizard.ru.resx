@@ -118,90 +118,90 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="weeklyTriggerPage.Text" xml:space="preserve">
-    <value>Установка триггера загрузок!</value>
+    <value>Еженедельно</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>на срок:!</value>
+    <value>в течение: </value>
   </data>
   <data name="oneTimeTriggerPage.Text" xml:space="preserve">
-    <value>Установка одного триггера времени!</value>
+    <value>Однократно</value>
   </data>
   <data name="openFileDialog1.Filter" xml:space="preserve">
-    <value>Общо файлове</value>
+    <value>Все файлы</value>
   </data>
   <data name="triggerSelectPage.Text" xml:space="preserve">
-    <value>Выберите, какие триггеры задачу!</value>
+    <value>Когда запускать задачу? </value>
   </data>
   <data name="summaryPrompt.Text" xml:space="preserve">
-    <value>При нажатии кнопки Готово, Новая задача будет создан и добавлен график вашей Windows.!</value>
+    <value>После нажатии кнопки "Готово" новая задача создается и добавляется в расписание Windows.</value>
   </data>
   <data name="summaryPage.Text" xml:space="preserve">
-    <value>Выводы</value>
+    <value>Сводка</value>
   </data>
   <data name="msgActionPage.Text" xml:space="preserve">
-    <value>Настройка сообщения для отображения!</value>
+    <value>Вывод сообщения</value>
   </data>
   <data name="openDlgAfterCheck.Text" xml:space="preserve">
-    <value>Откройте диалоговое окно свойств для этой задачи, нажимая готово!</value>
+    <value>Открыть окно свойств задачи после нажатия кнопки "Готово"</value>
   </data>
   <data name="oneTimeStartLabel.Text" xml:space="preserve">
-    <value>Начало</value>
+    <value>Начать:</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Повторять задачу каждые:!</value>
+    <value>Повторять каждые:</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Не следует хранить пароль. Задача будет только иметь доступ к ресурсам локального компьютера.!</value>
+    <value>Не сохранять пароль. Будут доступны ресурсы только локального компьютера.</value>
   </data>
   <data name="dailyTriggerPage.Text" xml:space="preserve">
-    <value>Установка триггера ежедневно!</value>
+    <value>Ежедневно</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>При выполнении задачи, используйте следующую учетную запись:!</value>
+    <value>При выполнении задачи, используйте следующую учетную запись:</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Имя задачи</value>
+    <value>Имя задачи:</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Изменить пользователя или группу...!</value>
+    <value>Изменить...</value>
   </data>
   <data name="runActionPage.Text" xml:space="preserve">
-    <value>Настройка программы для запуска!</value>
+    <value>Запуск программы</value>
   </data>
   <data name="introPage.Text" xml:space="preserve">
-    <value>создать задачу</value>
+    <value>Создать задачу</value>
   </data>
   <data name="emailActionPage.Text" xml:space="preserve">
-    <value>Настройка сообщения электронной почты, чтобы отправить!</value>
+    <value>Отправка электронной почты</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Описание</value>
+    <value>Описание:</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Запустите, только когда пользователь вошел в систему!</value>
+    <value>Выполнять только для зарегистрированного пользователя</value>
   </data>
   <data name="wizardControl1.Title" xml:space="preserve">
-    <value>Создайте задачи мастер!</value>
+    <value>Мастер создания задачи</value>
   </data>
   <data name="onEventTriggerPage.Text" xml:space="preserve">
-    <value>Настроить триггер на событие системы!</value>
+    <value>При событии</value>
   </data>
   <data name="triggerPropPage.Text" xml:space="preserve">
-    <value>Свойства триггера!</value>
+    <value>Настройки триггера</value>
   </data>
   <data name="secOptPage.Text" xml:space="preserve">
     <value>Настройки безопасности</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Запуск, ли пользователь вошел в систему или нет!</value>
+    <value>Выполнять вне зависимости от регистрации пользователя</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
   <data name="actionSelectPage.Text" xml:space="preserve">
-    <value>Выберите действие для выполнения!</value>
+    <value>Выберите действие для задачи</value>
   </data>
   <data name="monthlyTriggerPage.Text" xml:space="preserve">
-    <value>Установка триггера ежемесячно!</value>
+    <value>Ежемесячно</value>
   </data>
 </root>

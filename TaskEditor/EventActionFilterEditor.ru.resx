@@ -121,78 +121,87 @@
     <value>Отмена</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Ло &amp; gged:!</value>
+    <value>Дата:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>- Журналы событий</value>
+    <value>Журналы событий:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>E &amp; дефлектора источники:!</value>
+    <value>Источники событий:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Уровень события:!</value>
+    <value>Уровень события:</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Включает/исключая Ева &amp; nt идентификаторы: введите идентификационные номера и/или диапазоны Идентификаторов, разделенных запятыми. Чтобы исключить критерии, сначала введите минус петь. К примеру 1,3,5-99,-76!</value>
+    <value>Включение или исключение кодов событий. Введите коды событий или диапазоны кодов, разделяя их запятыми. Для исключения условия введите знак минус. Например, 1,3,5-99,-76</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>КАТЕГОРИЯ</value>
+    <value>Категория задачи:</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Ключевые слова</value>
+    <value>Ключевые слова:</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Пользователь:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Com &amp; puter(s):!</value>
+    <value>Компьютеры: </value>
   </data>
   <data name="clearButton.Text" xml:space="preserve">
-    <value>"КЛЕ" &amp; ar!</value>
+    <value>Очистить</value>
   </data>
   <data name="criticalLevelCheckBox.Text" xml:space="preserve">
-    <value>Был &amp; l!</value>
+    <value>Критическое</value>
   </data>
   <data name="warningLevelCheckBox.Text" xml:space="preserve">
-    <value>ВНИМАНИЕ!</value>
+    <value>Предупреждение</value>
   </data>
   <data name="infoLevelCheckBox.Text" xml:space="preserve">
-    <value>Информация</value>
+    <value>Сведения</value>
   </data>
   <data name="errorLevelCheckBox.Text" xml:space="preserve">
-    <value>E</value>
+    <value>Ошибки</value>
   </data>
   <data name="verboseLevelCheckBox.Text" xml:space="preserve">
-    <value>Ver &amp; Бозе!</value>
+    <value>Подробности</value>
   </data>
   <data name="byLogRadio.Text" xml:space="preserve">
-    <value>От l &amp; ОГ!</value>
+    <value>По журналу</value>
   </data>
   <data name="bySourceRadio.Text" xml:space="preserve">
     <value>По источнику</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Редактирование фильтра событий!</value>
+    <value>Редактирование фильтра событий</value>
   </data>
   <data name="dataBtn.Text" xml:space="preserve">
-    <value>&amp; Данных фильтрует...!</value>
+    <value>Фильтры данных...</value>
   </data>
   <data name="filterTab.Text" xml:space="preserve">
-    <value>Фильтр!</value>
+    <value>Фильтр</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Чтобы обеспечить фильтр событий в форме XPath, щелкните расположенный ниже флажок «Изменить запрос вручную».!</value>
+    <value>Чтобы организовать фильтр событий в форме XPath, установите флажок ниже.</value>
   </data>
   <data name="editManuallyCheckBox.Text" xml:space="preserve">
-    <value>Редактировать &amp; запроса вручную!</value>
+    <value>Изменить запрос вручную</value>
   </data>
   <data name="wrapCheckBox.Text" xml:space="preserve">
-    <value>&amp; Обтекание текста!</value>
+    <value>Обтекание текста</value>
   </data>
   <data name="xmlTab.Text" xml:space="preserve">
     <value>XML</value>
+  </data>
+  <data name="userText.Text" xml:space="preserve">
+    <value>&lt;Все пользователи&gt;</value>
+  </data>
+  <data name="computerText.Text" xml:space="preserve">
+    <value>&lt;Все компьютеры&gt;</value>
+  </data>
+  <data name="eventIDsText.Text" xml:space="preserve">
+    <value>&lt;Все коды событий&gt;</value>
   </data>
 </root>

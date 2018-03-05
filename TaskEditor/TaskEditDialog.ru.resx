@@ -121,9 +121,9 @@
     <value>Отмена</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>ОБЪЕКТЫ</value>
+    <value>Свойства</value>
   </data>
 </root>

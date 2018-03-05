@@ -118,166 +118,166 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionTypeComHandler" xml:space="preserve">
-    <value>Вызов COM-объекта!</value>
+    <value>Вызов COM-объекта</value>
   </data>
   <data name="ActionTypeExecute" xml:space="preserve">
-    <value>Старт А</value>
+    <value>Запуск программы</value>
   </data>
   <data name="ActionTypeSendEmail" xml:space="preserve">
-    <value>Отправьте сообщение</value>
+    <value>Отправить сообщение</value>
   </data>
   <data name="ActionTypeShowMessage" xml:space="preserve">
-    <value>Отобразить сообщение</value>
+    <value>Вывод сообщения</value>
   </data>
   <data name="ComHandlerAction" xml:space="preserve">
-    <value>{3} {0:P}!</value>
+    <value>{3} {0:P}</value>
   </data>
   <data name="DOWAllDays" xml:space="preserve">
     <value>каждый день</value>
   </data>
   <data name="EmailAction" xml:space="preserve">
-    <value>1 0</value>
+    <value>{1} {0}</value>
   </data>
   <data name="EndSentence" xml:space="preserve">
-    <value>.!</value>
+    <value>.</value>
   </data>
   <data name="ExecAction" xml:space="preserve">
     <value>{0} {1}</value>
   </data>
   <data name="HyphenSeparator" xml:space="preserve">
-    <value>-!</value>
+    <value>-</value>
   </data>
   <data name="ListSeparator" xml:space="preserve">
-    <value>,!</value>
+    <value>,</value>
   </data>
   <data name="MOYAllMonths" xml:space="preserve">
     <value>каждый месяц</value>
   </data>
   <data name="MultipleActions" xml:space="preserve">
-    <value>Несколько действий определены!</value>
+    <value>Определено несколько действий</value>
   </data>
   <data name="MultipleTriggers" xml:space="preserve">
-    <value>Множественные триггеры!</value>
+    <value>Определено несколько триггеров</value>
   </data>
   <data name="ShowMessageAction" xml:space="preserve">
-    <value>{0}!</value>
+    <value>{0}</value>
   </data>
   <data name="TaskDefaultPrincipal" xml:space="preserve">
     <value>Автор</value>
   </data>
   <data name="TaskStateQueued" xml:space="preserve">
-    <value>очередь</value>
+    <value>В очереди</value>
   </data>
   <data name="TaskStateReady" xml:space="preserve">
-    <value>Готов!</value>
+    <value>Готово</value>
   </data>
   <data name="TaskStateRunning" xml:space="preserve">
-    <value>В процессе</value>
+    <value>Выполняется</value>
   </data>
   <data name="TaskStateUnknown" xml:space="preserve">
-    <value>Неизвестно!</value>
+    <value>Неизвестно</value>
   </data>
   <data name="TriggerAnyUser" xml:space="preserve">
     <value>Пользователь</value>
   </data>
   <data name="TriggerBoot1" xml:space="preserve">
-    <value>• запуск системы;</value>
+    <value>При запуске системы</value>
   </data>
   <data name="TriggerCustom1" xml:space="preserve">
-    <value>Пользовательский триггер!</value>
+    <value>Пользовательский триггер</value>
   </data>
   <data name="TriggerDaily1" xml:space="preserve">
-    <value>В {0:t} каждый день!</value>
+    <value>В {0:t} каждый день</value>
   </data>
   <data name="TriggerDaily2" xml:space="preserve">
-    <value>В {0:t} каждые {1} дней!</value>
+    <value>В {0:t} каждые {1} дней</value>
   </data>
   <data name="TriggerDuration0" xml:space="preserve">
-    <value>shops|бессрочно</value>
+    <value>бессрочно</value>
   </data>
   <data name="TriggerDurationNot0" xml:space="preserve">
-    <value>продолжительностью в {0}!</value>
+    <value>продолжительностью в {0}</value>
   </data>
   <data name="TriggerDurationNot0Short" xml:space="preserve">
-    <value>для {0}!</value>
+    <value>на {0}</value>
   </data>
   <data name="TriggerEndBoundary" xml:space="preserve">
-    <value>Триггер истекает в {0:G}.!</value>
+    <value>Триггер истекает в {0:G}.</value>
   </data>
   <data name="TriggerEvent1" xml:space="preserve">
-    <value>Фильтр пользовательских событий!</value>
+    <value>Настраиваемое</value>
   </data>
   <data name="TriggerEventBasic1" xml:space="preserve">
-    <value>На мероприятии - журнала: {0}!</value>
+    <value>При событии - журнал: {0}</value>
   </data>
   <data name="TriggerEventBasic2" xml:space="preserve">
-    <value>, Источник: {0}!</value>
+    <value>, Источник: {0}</value>
   </data>
   <data name="TriggerEventBasic3" xml:space="preserve">
-    <value>, EventID: {0}!</value>
+    <value>, EventID: {0}</value>
   </data>
   <data name="TriggerIdle1" xml:space="preserve">
-    <value>Когда компьютер простаивает!</value>
+    <value>При простое компьютера</value>
   </data>
   <data name="TriggerLogon1" xml:space="preserve">
-    <value>В журнал на {0}!</value>
+    <value>При входе в систему {0}</value>
   </data>
   <data name="TriggerMonthly1" xml:space="preserve">
-    <value>В {0:t} на день {1} {2}, {0: d} начиная!</value>
+    <value>В {0:t} в {1} день месяца {2}, начиная с {0:d} </value>
   </data>
   <data name="TriggerMonthlyDOW1" xml:space="preserve">
-    <value>В {0:t} на {1} {поднята} каждый {3}, {0: d} начиная!</value>
+    <value>В {0:t} по {1} {2:f} каждый {3}, начиная c {0:d} </value>
   </data>
   <data name="TriggerRegistration1" xml:space="preserve">
-    <value>Когда задача создается или изменяется!</value>
+    <value>При создании или изменении задачи</value>
   </data>
   <data name="TriggerRepetition" xml:space="preserve">
-    <value>После срабатывания, повторять каждые {0} {1}.!</value>
+    <value>После срабатывания, повторять каждые {0} {1}.</value>
   </data>
   <data name="TriggerRepetitionShort" xml:space="preserve">
-    <value>Каждые {0} {1}.!</value>
+    <value>Каждые {0} {1}.</value>
   </data>
   <data name="TriggerSessionConsoleConnect" xml:space="preserve">
-    <value>Локального подключения к {0}.!</value>
+    <value>При локальном подключении к {0}.</value>
   </data>
   <data name="TriggerSessionConsoleDisconnect" xml:space="preserve">
-    <value>На локальном отключиться от {0}.!</value>
+    <value>При локальном отключении от {0}.</value>
   </data>
   <data name="TriggerSessionRemoteConnect" xml:space="preserve">
-    <value>На удаленное подключение к {0}.!</value>
+    <value>При удаленном подключении к {0}.</value>
   </data>
   <data name="TriggerSessionRemoteDisconnect" xml:space="preserve">
-    <value>На пульт дистанционного отключения от {0}.!</value>
+    <value>При удаленном отключении от  {0}.</value>
   </data>
   <data name="TriggerSessionSessionLock" xml:space="preserve">
-    <value>Блокировка рабочей станции {0}.!</value>
+    <value>При блокировке рабочей станции {0}.</value>
   </data>
   <data name="TriggerSessionSessionUnlock" xml:space="preserve">
-    <value>На станции разблокировать {0}.!</value>
+    <value>При разблокировке рабочей станции {0}.</value>
   </data>
   <data name="TriggerSessionUserSession" xml:space="preserve">
-    <value>Сессия пользователя</value>
+    <value>Сеанс пользователя {0}</value>
   </data>
   <data name="TriggerTime1" xml:space="preserve">
-    <value>В {0:t} на {0: d}!</value>
+    <value>В {0:t} на {0:d}</value>
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>При запуске!</value>
+    <value>При запуске</value>
   </data>
   <data name="TriggerTypeCustom" xml:space="preserve">
-    <value>Пользовательский триггер!</value>
+    <value>Пользовательский триггер</value>
   </data>
   <data name="TriggerTypeDaily" xml:space="preserve">
     <value>Ежедневно</value>
   </data>
   <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>На событии!</value>
+    <value>При событии</value>
   </data>
   <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>На холостом ходу!</value>
+    <value>При простое</value>
   </data>
   <data name="TriggerTypeLogon" xml:space="preserve">
-    <value>Log in</value>
+    <value>При входе в систему</value>
   </data>
   <data name="TriggerTypeMonthly" xml:space="preserve">
     <value>Ежемесячно</value>
@@ -286,10 +286,10 @@
     <value>Ежемесячно</value>
   </data>
   <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>В задачи создания/изменения!</value>
+    <value>При создании или изменении задачи</value>
   </data>
   <data name="TriggerTypeSessionStateChange" xml:space="preserve">
-    <value>На изменение состояния!</value>
+    <value>При изменении состояния</value>
   </data>
   <data name="TriggerTypeTime" xml:space="preserve">
     <value>Однократно</value>
@@ -298,19 +298,19 @@
     <value>Каждую неделю</value>
   </data>
   <data name="TriggerWeekly1Week" xml:space="preserve">
-    <value>В {0:t} каждый {1} каждую неделю, начиная с {0: d}!</value>
+    <value>В {0:t} каждый {1} каждую неделю, начиная с {0: d}</value>
   </data>
   <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
-    <value>В {0:t} каждый {1} каждого {2} недель, начиная с {0: d}!</value>
+    <value>В {0:t} каждый {1} каждого {2} недель, начиная с {0: d}</value>
   </data>
   <data name="WWAllWeeks" xml:space="preserve">
-    <value>ogni</value>
+    <value>каждый</value>
   </data>
   <data name="WWFifthWeek" xml:space="preserve">
     <value>пятый</value>
   </data>
   <data name="WWFirstWeek" xml:space="preserve">
-    <value>primo</value>
+    <value>первый</value>
   </data>
   <data name="WWFourthWeek" xml:space="preserve">
     <value>четвертый</value>
@@ -323,5 +323,8 @@
   </data>
   <data name="WWThirdWeek" xml:space="preserve">
     <value>третий</value>
+  </data>
+  <data name="TaskStateDisabled" xml:space="preserve">
+    <value>Отключено</value>
   </data>
 </root>

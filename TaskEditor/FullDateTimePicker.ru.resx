@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="utcCheckBox.Text" xml:space="preserve">
-    <value>Synchroni &amp; ze через часовые пояса!</value>
+    <value>Синхр. по поясам</value>
   </data>
 </root>

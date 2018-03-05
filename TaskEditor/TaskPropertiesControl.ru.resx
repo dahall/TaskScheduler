@@ -118,100 +118,100 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>Na &amp; меня:!</value>
+    <value>Название:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Расположение</value>
+    <value>Расположение:</value>
   </data>
   <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Автор</value>
+    <value>Автор:</value>
   </data>
   <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>Описание</value>
+    <value>Описание:</value>
   </data>
   <data name="taskNameText.Text" xml:space="preserve">
     <value>Имя задачи</value>
   </data>
   <data name="taskVersionLabel.Text" xml:space="preserve">
-    <value>&amp; Настройка для:!</value>
+    <value>Настроить для:</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Hidd &amp; en!</value>
+    <value>Скрытая задача</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Запустите w &amp; ith высокие привилегии!</value>
+    <value>Выполнить с наивысшими правами</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Не храните &amp; пароль. Задача будет только иметь доступ к ресурсам локального компьютера.!</value>
+    <value>Не сохранять пароль. Будут доступны ресурсы только локального компьютера.</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Запуск от &amp; ли пользователь вошел в систему или нет!</value>
+    <value>Выполнять вне зависимости от регистрации пользователя</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp; Работать только тогда, когда пользователь вошел в систему!</value>
+    <value>Выполнять только для зарегистрированного пользователя</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Смена &amp; пользователя или группу...!</value>
+    <value>Изменить...</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>При выполнении задачи, используйте следующую учетную запись:!</value>
+    <value>При выполнении задачи, используйте следующую учетную запись:</value>
   </data>
   <data name="taskSecurityGroupBox.Text" xml:space="preserve">
     <value>Параметры безопасности</value>
   </data>
   <data name="generalTab.Text" xml:space="preserve">
-    <value>Общая информация</value>
+    <value>Общие</value>
   </data>
   <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
-    <value>При создании задачи, можно указать условия, которые будут вызывать задачу.!</value>
+    <value>При создании задачи, можно указать условия, при которых она будет запускаться.</value>
   </data>
   <data name="triggersTab.Text" xml:space="preserve">
     <value>Триггеры</value>
   </data>
   <data name="actionIntroLabel.Text" xml:space="preserve">
-    <value>При создании задачи, необходимо указать действие, которое будет происходить, когда ваша задача начинается.!</value>
+    <value>При создании задачи необходимо указать действие, которое будет выполняться при ее запуске.</value>
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
-    <value>Действие</value>
+    <value>Действия</value>
   </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Начать onl &amp; y если следующие сетевые подключения доступен:!</value>
+    <value>Запускать задачу только при подключении к следующей сети:</value>
   </data>
   <data name="networkConditionGroupBox.Text" xml:space="preserve">
     <value>Сеть</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Остановить, если компьютер переходит в &amp; аккумулятора!</value>
+    <value>Останавливать при переходе на питание от батарей</value>
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>&amp; Пробуждение компьютера для запуска этой задачи!</value>
+    <value>Пробуждать компьютер для выполнения задачи</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Запустите задачу, только если компьютер на AC &amp; власть!</value>
+    <value>Запускать только при питании от электосети</value>
   </data>
   <data name="powerConditionGroupBox.Text" xml:space="preserve">
-    <value>Мощность</value>
+    <value>Питание</value>
   </data>
   <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Перезапуск, если состояние бездействия res &amp; громкости!</value>
+    <value>Перезапускать при возобновлении простоя</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Если остановить компьютер &amp; er перестает быть простоя!</value>
+    <value>Останавливать пр выходе компьютера из простоя</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>W &amp; МТА для простоя для:!</value>
+    <value>Ожидать простоя в течение: </value>
   </data>
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Запустите задачу только если &amp; компьютер простаивает для:!</value>
+    <value>Запускать задачу при простое компьютера:</value>
   </data>
   <data name="idleConditionGroupBox.Text" xml:space="preserve">
-    <value>Неактивно</value>
+    <value>Простой</value>
   </data>
   <data name="conditionIntroLabel.Text" xml:space="preserve">
-    <value>Укажите условия, которые, наряду с триггером, определить, должен ли выполняться задача. Задача не будет запускаться, если любое условие, указанное не верно.!</value>
+    <value>Укажите условия, которые вместе с триггерами будут определять необходимость выполнения задачи. Если заданное условие недопустимо, задача не будет выполняться. </value>
   </data>
   <data name="conditionsTab.Text" xml:space="preserve">
-    <value>Список</value>
+    <value>Условия</value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
     <value>Если задача уже ru &amp; nning, то применяется следующее правило:!</value>
@@ -220,109 +220,109 @@
     <value>раз</value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Попытка &amp; до перезапуска:!</value>
+    <value>Количество попыток перезапуска:</value>
   </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Если задача не планируется запустить снова &amp; удалить его после:!</value>
+    <value>Если повтор задачи не запланирован, удалять через: </value>
   </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Если выполняемая задача не заканчивается, когда просил &amp; заставить его остановить!</value>
+    <value>Принудительная остановка задачи, если она не прекращается по запросу</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Остановить ТАС &amp; k, если она выполняется дольше, чем:!</value>
+    <value>Останавливать задачу, выполняемую дольше:</value>
   </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>Если &amp; задача терпит неудачу, перезапустите каждые:!</value>
+    <value>При сбое выполнения перезапускать через:</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Выполнить задачу как можно скорее после &amp; пропущен плановый запуск!</value>
+    <value>Немедленно запускать задачу, если пропущен плановый запуск</value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>A &amp; разрешить выполнение задачи по требованию!</value>
+    <value>Разрешать выполнение задачи по требованию</value>
   </data>
   <data name="settingsIntroLabel.Text" xml:space="preserve">
-    <value>Укажите дополнительные параметры, которые влияют на поведение задачи.!</value>
+    <value>Укажите дополнительные параметры выполнения задачи.</value>
   </data>
   <data name="settingsTab.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value>Источник</value>
+    <value>Источник:</value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value>Украина</value>
+    <value>URI:</value>
   </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value>Документацияv</value>
+    <value>Документация:</value>
   </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
-    <value>SE &amp; предстоит:!</value>
+    <value>Безопасность:</value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>Версия</value>
+    <value>Версия:</value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Измените безопасность...!</value>
+    <value>Параметры безопасности...</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Укажите регистрационную информацию для выполнения этой задачи.!</value>
+    <value>Укажите регистрационную информацию для задачи.</value>
   </data>
   <data name="regInfoTab.Text" xml:space="preserve">
     <value>Информация</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value>Запуск задачи в режиме e &amp; xclusive!</value>
+    <value>Запуск задания в монопольном режиме</value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value>Если задача не удается завершить, перезапустить после:!</value>
+    <value>Если задача была завершена с ошибкой, повторить через: </value>
   </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
-    <value>Во время обслуживания, запустить задачу каждые:!</value>
+    <value>В ходе обслуживания, запускать задачу каждые:</value>
   </data>
   <data name="autoMaintGroup.Text" xml:space="preserve">
-    <value>Автоматическое поддержание!</value>
+    <value>Автоматическое обслуживание</value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Процесс &amp; определить безопасности (SID) тип:!</value>
+    <value> Тип идентификатора безопасности:</value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp; Заказываемого привилегии:!</value>
+    <value>Требуемые права доступа:</value>
   </data>
   <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Усиление безопасности!</value>
+    <value>Усиление защиты</value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>&amp; Запретить запуск, если в сеансе удаленного приложения комплексной локально (железнодорожных)!</value>
+    <value>Запретить запуск при наличии подключения со стороны удаленного приложения</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>&amp; Использования единой планирование двигателя!</value>
+    <value>Использовать единый движок планировщика</value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value>&amp; Автоматически отключить задачи каждый раз, когда Windows начинается!</value>
+    <value>Автоматически отключать задачу при запуске Windows</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Конверсии Уровень приоритета</value>
+    <value>Приоритет:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Укажите дополнительные параметры безопасности, техническое обслуживание и системы функция совместимости для задачи.!</value>
+    <value>Укажите дополнительные параметры безопасности, обслуживания и совместимости системных характерстик для задачи.</value>
   </data>
   <data name="addPropTab.Text" xml:space="preserve">
-    <value>Дополнения:</value>
+    <value>Дополнительно</value>
   </data>
   <data name="runTimesErrorLabel.Text" xml:space="preserve">
-    <value>Текст ошибки</value>
+    <value>(текст ошибки)</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Ошибка</value>
+    <value>Ошибка:</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Не удается отобразить время выполнения для выполнения этой задачи.!</value>
+    <value>Не удается отобразить время выполнения для этой задачи.</value>
   </data>
   <data name="runTimesTab.Text" xml:space="preserve">
-    <value>Запуск раз!</value>
+    <value>Время выполнения</value>
   </data>
   <data name="historyTab.Text" xml:space="preserve">
     <value>История</value>

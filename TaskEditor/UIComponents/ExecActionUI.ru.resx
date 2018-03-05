@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="execProgLabel.Text" xml:space="preserve">
-    <value>Программа/скрипт:!</value>
+    <value>Программа или сценарий:</value>
   </data>
   <data name="execArgLabel.Text" xml:space="preserve">
-    <value>Добавить аргументы (необязательно):!</value>
+    <value>Добавить аргументы (необязательно):</value>
   </data>
   <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>Выбрать...</value>
+    <value>Обзор...</value>
   </data>
   <data name="execDirLabel.Text" xml:space="preserve">
-    <value>Начало (опционально):!</value>
+    <value>Рабочая папка (необязательно):</value>
   </data>
 </root>

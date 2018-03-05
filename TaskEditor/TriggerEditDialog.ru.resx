@@ -118,81 +118,84 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Начало задачи:!</value>
+    <value>Начало задачи:</value>
   </data>
   <data name="groupBox6.Text" xml:space="preserve">
     <value>groupBox6!</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
-    <value>Соединение с локального компьютера!</value>
+    <value>Подключение с локального компьютера</value>
   </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
-    <value>Соединение с удаленного компьютера!</value>
+    <value>Подключение с удаленного компьютера</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
-    <value>Изменить пользователя или группу...!</value>
+    <value>Изменить...</value>
   </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
-    <value>Конкретный пользователь или Группа:!</value>
+    <value>Указанный пользователь или группа:</value>
   </data>
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
-    <value>Пользователь</value>
+    <value>Любой пользователь</value>
   </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
-    <value>Никаких дополнительных настроек требуется.!</value>
+    <value>Дополнительные параметры не требуется.</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Чтобы изменить условия простоя, используйте страницу условия в создание задачи или задачи свойств.!</value>
+    <value>Чтобы изменить параметры состояния простоя, используйте вкладку "Условия" на листе создания задачи или свойств задачи.</value>
   </data>
   <data name="propNameCol.Text" xml:space="preserve">
-    <value>Property</value>
+    <value>Свойство</value>
   </data>
   <data name="propValCol.Text" xml:space="preserve">
     <value>Значение</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Название</value>
+    <value>Название:</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
-    <value>на срок:!</value>
+    <value>в течение: </value>
   </data>
   <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Остановите все выполняющиеся задания в конце повторения продолжительность!</value>
+    <value>Останавливать все задачи по истечению срока повторов</value>
   </data>
   <data name="enabledCheckBox.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
   <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Срок заканчивается</value>
+    <value>Срок действия:</value>
   </data>
   <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>активировать</value>
+    <value>Активировать:</value>
   </data>
   <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Остановить задачу, если она выполняется дольше, чем:!</value>
+    <value>Остановить через:</value>
   </data>
   <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Повторять задачу каждые:!</value>
+    <value>Повторять задачу каждые:</value>
   </data>
   <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Задача задержки до (произвольная задержка):!</value>
+    <value>Отложить на:</value>
   </data>
   <data name="advSettingsGroup.Text" xml:space="preserve">
-    <value>Расширенные настройки</value>
+    <value>Дополнительные параметры</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Идент.</value>
+    <value>ИД:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Спусковой крючок</value>
+    <value>Создание триггера</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Текущий пользователь&gt;</value>
   </data>
 </root>

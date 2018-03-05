@@ -124,16 +124,16 @@
     <value>Дата и время</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
-    <value>ID мероприятия</value>
+    <value>Код события</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>КАТЕГОРИЯ</value>
+    <value>Категория задачи</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Операции</value>
+    <value>Рабочий код</value>
   </data>
   <data name="columnHeader5.Text" xml:space="preserve">
-    <value>Корреляция</value>
+    <value>Код корреляции</value>
   </data>
   <data name="columnHeader6.Text" xml:space="preserve">
     <value>Ключевые слова</value>
@@ -145,7 +145,7 @@
     <value>Пользователь</value>
   </data>
   <data name="columnHeader9.Text" xml:space="preserve">
-    <value>Зарегистрироваться</value>
+    <value>Журнал</value>
   </data>
   <data name="columnHeader10.Text" xml:space="preserve">
     <value>Компьютер</value>
@@ -160,42 +160,45 @@
     <value>Количество событий:</value>
   </data>
   <data name="historyDetailTitleText.Text" xml:space="preserve">
-    <value>События 100, TaskScheduler!</value>
+    <value>Событие 100, TaskScheduler</value>
   </data>
   <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
     <value>Обновить</value>
   </data>
   <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Свойства событий!</value>
+    <value>Свойства событий</value>
   </data>
   <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
-    <value>Приложите задачу к этому событию!</value>
+    <value>Привязать задачу к событию</value>
   </data>
   <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Сохранить события как...!</value>
+    <value>Сохранить все события как...</value>
   </data>
   <data name="addremoveColumnsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Добавление и удаление столбцов!</value>
+    <value>Добавление и удаление столбцов</value>
   </data>
   <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Сортировать события по этому столбцу!</value>
+    <value>Сортировать по столбцу</value>
   </data>
   <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Удаление сортировки!</value>
+    <value>Сброс сортировки</value>
   </data>
   <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Группировать по этому столбцу</value>
+    <value>Группировать по столбцу</value>
   </data>
   <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Удалите группировку событий!</value>
+    <value>Сброс группировки</value>
   </data>
   <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Разверните все группы!</value>
+    <value>Развернуть все группы</value>
   </data>
   <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Свернуть все группы!</value>
+    <value>Свернуть все группы</value>
   </data>
   <data name="saveFileDialog.Filter" xml:space="preserve">
-    <value>Файлы событий (*.evtx) | * .evtx | XML (XML-файл) (*.xml) | * .xml | Текст (разделитель — табуляция) (*.txt) | * .txt | CSV (разделитель — запятая) (*.csv) | * .csv!</value>
+    <value>Файлы событий (*.evtx)|* .evtx|XML (XML-файл) (*.xml)|* .xml|Текст (с разделением табуляцией) (*.txt)|* .txt|CSV (с разделением запятой) (*.csv)|* .csv</value>
+  </data>
+  <data name="historyDetailHideBtn.Text" xml:space="preserve">
+    <value>r</value>
   </data>
 </root>

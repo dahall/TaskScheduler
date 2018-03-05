@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value>Это действие отображает окно сообщения на рабочем столе.!</value>
+    <value>Выведение окна сообщения на рабочем столе.</value>
   </data>
   <data name="msgMsgLabel.Text" xml:space="preserve">
     <value>Сообщение</value>

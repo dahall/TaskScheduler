@@ -121,7 +121,7 @@
     <value>Отмена</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="NameCol.HeaderText" xml:space="preserve">
     <value>Название</value>
@@ -130,6 +130,6 @@
     <value>Значение</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Редактирование элементов EventData!</value>
+    <value>Редактирование элементов EventData</value>
   </data>
 </root>

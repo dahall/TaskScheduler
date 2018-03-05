@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="v1Check.Text" xml:space="preserve">
-    <value>Версия 1 силы!</value>
+    <value>Принудительно использовать V1</value>
   </data>
   <data name="runButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Выберите компьютер, которым требуется управлять:!</value>
+    <value>Выберите компьютер, которым требуется управлять:</value>
   </data>
   <data name="localComputerRadio.Text" xml:space="preserve">
     <value>Имя локального компьютера</value>
   </data>
   <data name="remoteComputerRadio.Text" xml:space="preserve">
-    <value>Другой компьютер:!</value>
+    <value>Другой компьютер:</value>
   </data>
   <data name="otherUserCheckbox.Text" xml:space="preserve">
-    <value>Подключиться как другой пользователь: {0}!</value>
+    <value>Подключиться как другой пользователь: {0}</value>
   </data>
   <data name="computerBrowseBtn.Text" xml:space="preserve">
     <value>Выбрать...</value>
   </data>
   <data name="setUserBtn.Text" xml:space="preserve">
-    <value>Установить тип пользователя</value>
+    <value>Выбрать пользователя...</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Выберите Компьютер</value>

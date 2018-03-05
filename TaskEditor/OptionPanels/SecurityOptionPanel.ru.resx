@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Измените безопасность...!</value>
+    <value>Изменить параметры безопасности...</value>
   </data>
   <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
     <value>Права доступа</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
-    <value>Безопасности во время выполнения!</value>
+    <value>Параметры безопасности во время выполнения</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Не храните &amp; пароль. Задача будет только иметь доступ к ресурсам локального компьютера.!</value>
+    <value>Не сохранять пароль. Будут доступны ресурсы только локального компьютера.</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Запуск от &amp; ли пользователь вошел в систему или нет!</value>
+    <value>Выполнять вне зависимости от регистрации пользователя</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp; Работать только тогда, когда пользователь вошел в систему!</value>
+    <value>Выполнять только для зарегистрированного пользователя</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Смена &amp; пользователя или группу...!</value>
+    <value>Изменить...</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>При выполнении задачи, используйте следующую учетную запись:!</value>
+    <value>При выполнении задачи использовать следующую учетную запись пользователя:</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Запустите w &amp; ith высокие привилегии!</value>
+    <value>Выполнить с наивысшими правами</value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Процесс &amp; определить безопасности (SID) тип:!</value>
+    <value>Идентификатор безопасности (SID):</value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>&amp; Заказываемого привилегии:!</value>
+    <value>Требуемые права:</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Задачи безопасности!</value>
+    <value>Параметры безопасности</value>
   </data>
 </root>

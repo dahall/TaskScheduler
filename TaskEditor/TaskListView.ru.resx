@@ -121,24 +121,24 @@
     <value>Название</value>
   </data>
   <data name="status.Text" xml:space="preserve">
-    <value>Статус</value>
+    <value>Состояние</value>
   </data>
   <data name="triggers.Text" xml:space="preserve">
     <value>Триггеры</value>
   </data>
   <data name="nextRunTime.Text" xml:space="preserve">
-    <value>на байпасе[Byp. Run time]</value>
+    <value>Время следующего запуска</value>
   </data>
   <data name="lastRunTime.Text" xml:space="preserve">
     <value>Время последнего запуска</value>
   </data>
   <data name="lastRunResult.Text" xml:space="preserve">
-    <value>Последний результат выполнения!</value>
+    <value>Результат последнего запуска</value>
   </data>
   <data name="author.Text" xml:space="preserve">
     <value>Автор</value>
   </data>
   <data name="created.Text" xml:space="preserve">
-    <value>Создано!</value>
+    <value>Создано</value>
   </data>
 </root>

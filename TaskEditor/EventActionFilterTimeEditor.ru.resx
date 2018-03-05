@@ -121,30 +121,30 @@
     <value>Отмена</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Ввести диапазон дат для вашего фильтра:!</value>
+    <value>Укажите диапазон дат для фильтра:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>С</value>
+    <value>Начало:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Кому</value>
+    <value>Конец:</value>
   </data>
   <data name="fromCombo.Items" xml:space="preserve">
-    <value>Первое событие!</value>
+    <value>Первое событие</value>
   </data>
   <data name="fromCombo.Items1" xml:space="preserve">
-    <value>События на!</value>
+    <value>Событие</value>
   </data>
   <data name="toCombo.Items" xml:space="preserve">
     <value>Последнее событие</value>
   </data>
   <data name="toCombo.Items1" xml:space="preserve">
-    <value>События на!</value>
+    <value>Событие</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Пользовательский диапазон</value>
+    <value>Настраиваемый диапазон</value>
   </data>
 </root>

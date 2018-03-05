@@ -121,7 +121,7 @@
     <value>Отмена</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>ОК!</value>
+    <value>ОК</value>
   </data>
   <data name="generalItem.Text" xml:space="preserve">
     <value>Общая информация</value>
@@ -130,24 +130,24 @@
     <value>Триггеры</value>
   </data>
   <data name="actionsItem.Text" xml:space="preserve">
-    <value>Действие</value>
+    <value>Действия</value>
   </data>
   <data name="securityItem.Text" xml:space="preserve">
-    <value>Охрана!</value>
+    <value>Безопасность</value>
   </data>
   <data name="startupItem.Text" xml:space="preserve">
-    <value>Начало!</value>
+    <value>Запуск</value>
   </data>
   <data name="runItem.Text" xml:space="preserve">
-    <value>Среды выполнения</value>
+    <value>Выполнение</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Название</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>&amp; Настройка для:!</value>
+    <value>Настроить для:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Опции</value>
+    <value>Свойства задания</value>
   </data>
 </root>

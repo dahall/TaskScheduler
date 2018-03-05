@@ -127,7 +127,7 @@
     <value>Ежедневно</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Начало</value>
+    <value>Начало:</value>
   </data>
   <data name="schedOneRadio.Text" xml:space="preserve">
     <value>Однократно</value>

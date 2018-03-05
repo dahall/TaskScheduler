@@ -118,328 +118,334 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnyConnection" xml:space="preserve">
-    <value>Подключение</value>
+    <value>Любое подключение</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Поскольку Ваш браузер не поддерживает JavaScript или он отключен, пожалуйста, убедитесь, что Вы нажмете кнопку &lt; Em &gt; обновить итоги перед размещением заказа. Если вы этого не сделаете, с вас может взиматься дополнительная плата.</value>
+    <value>Отключено</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Включено</value>
   </data>
   <data name="Last" xml:space="preserve">
-    <value>Последняя</value>
+    <value>Последний</value>
   </data>
   <data name="TriggerTypeBoot" xml:space="preserve">
-    <value>При запуске!</value>
+    <value>При запуске</value>
   </data>
   <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>На событии!</value>
+    <value>При событии</value>
   </data>
   <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>На холостом ходу!</value>
+    <value>При простое</value>
   </data>
   <data name="TriggerTypeLogon" xml:space="preserve">
-    <value>Log in</value>
+    <value>При входе в систему</value>
   </data>
   <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>В задачи создания/изменения!</value>
+    <value>При создании или изменении задачи</value>
   </data>
   <data name="TriggerTypeSchedule" xml:space="preserve">
-    <value>Запуск по расписанию</value>
+    <value>По расписанию</value>
   </data>
   <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>При подключении к сеансу пользователя!</value>
+    <value>При подключении к пользовательскому сеансу</value>
   </data>
   <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
-    <value>При отключении от сеанса пользователя!</value>
+    <value>При отключении от пользовательского сеанса</value>
   </data>
   <data name="TriggerTypeWorkstationLock" xml:space="preserve">
-    <value>Блокировка рабочей станции!</value>
+    <value>При блокировке рабочей станции.</value>
   </data>
   <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
-    <value>На станции разблокировать!</value>
+    <value>При разблокировке рабочей станции.</value>
   </data>
   <data name="DateTimeSyncText" xml:space="preserve">
-    <value>Синхронизация часовых поясов!</value>
+    <value>Синхронизировать по поясам</value>
   </data>
   <data name="LocalMachine" xml:space="preserve">
-    <value>Локальный компьютер!</value>
+    <value>Локальный компьютер</value>
   </data>
   <data name="TaskEditDlgTitle" xml:space="preserve">
-    <value>{0} свойства ({1})!</value>
+    <value>{0} свойства ({1})</value>
   </data>
   <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value>Недопустимое событие триггера!</value>
+    <value>Некорректные параметры триггера</value>
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value>Как минимум, должен быть выбран журнал.!</value>
+    <value>Как минимум, должен быть выбран журнал.</value>
   </data>
   <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value>Там должно быть по крайней мере один месяц, одну неделю и один будний день выбран.!</value>
+    <value>Должны быть выбраны, как минимум, один месяц, одна неделя и один день недели.</value>
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value>Недопустимый ежемесячные триггер!</value>
+    <value>Некорректные параметры триггера</value>
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value>Там должен быть по крайней мере один месяц и один день выбран.!</value>
+    <value>Должны быть выбраны, как минимум, один месяц и один день.</value>
   </data>
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
-    <value>Этот класс COM не поддерживает требуемый интерфейс.!</value>
+    <value>Данный COM-объект не поддерживает требуемый интерфейс.</value>
   </data>
   <data name="Error_CredUIConfirmFailed" xml:space="preserve">
-    <value>Вызов CredUIConfirmCredentials неудачу с кодом ошибки: {0}!</value>
+    <value>Вызов CredUIConfirmCredentials завершился с кодом ошибки: {0}</value>
   </data>
   <data name="Error_CredUIPromptFailed" xml:space="preserve">
-    <value>Вызов CredUIPromptForCredentials неудачу с кодом ошибки: {0}!</value>
+    <value>Вызов CredUIPromptForCredentials завершился с кодом ошибки: {0}</value>
   </data>
   <data name="TaskSchedulerName" xml:space="preserve">
-    <value>Планировщик задач!</value>
+    <value>Планировщик задач</value>
   </data>
   <data name="CredentialPromptMessage" xml:space="preserve">
-    <value>Введите данные учетной записи пользователя для выполнения этой задачи.!</value>
+    <value>Введите данные учетной записи пользователя для запуска этой задачи.</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
-    <value>Действительный пароль для указанной учетной записи не была предоставлена.!</value>
+    <value>Необходимо предоставить действительный пароль для указанной учетной записи.</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
-    <value>Там должно быть по крайней мере одно действие, назначенные этой задаче.!</value>
+    <value>Необходимо назначить как минимум одно действие для задачи.</value>
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value>Время выполнения задачи ({0})!</value>
+    <value>Время выполнения ({0})</value>
   </data>
   <data name="LastResultSuccessful" xml:space="preserve">
     <value>Операция успешно завершена.</value>
   </data>
   <data name="Never" xml:space="preserve">
-    <value>Никогда!</value>
+    <value>Никогда</value>
   </data>
   <data name="ActionDlgEditCaption" xml:space="preserve">
-    <value>редактировать действие</value>
+    <value>Изменить действие</value>
   </data>
   <data name="ActionDlgNewCaption" xml:space="preserve">
-    <value>Новое действие</value>
+    <value>Создать действие</value>
   </data>
   <data name="TriggerDlgEditCaption" xml:space="preserve">
-    <value>Спусковой крючок</value>
+    <value>Изменить триггер</value>
   </data>
   <data name="TriggerDlgNewCaption" xml:space="preserve">
-    <value>Спусковой крючок</value>
+    <value>Создать триггер</value>
   </data>
   <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
-    <value>Если вы хотите иметь задачи удаляются автоматически после того, как она работает, вы должны добавить по крайней мере один триггер, который имеет дату истечения.!</value>
+    <value>Если вы хотите, чтобы задача была удалена автоматически после выполнения, необходимо добавить хотя бы один триггер со сроком истечения.</value>
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
-    <value>Выберите новый целевой компьютер:!</value>
+    <value>Выберите новый целевой компьютер:</value>
   </data>
   <data name="TimeSpanDoNotWait" xml:space="preserve">
-    <value>Не</value>
+    <value>Не ждать</value>
   </data>
   <data name="TimeSpanImmediately" xml:space="preserve">
-    <value>Немедленно!</value>
+    <value>Немедленно</value>
   </data>
   <data name="TimeSpanIndefinitely" xml:space="preserve">
     <value>Бессрочно</value>
   </data>
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
-    <value>Невозможно получить задачи истории. Ошибка: {0}!</value>
+    <value>Невозможно получить историю для этой задачи. Ошибка: {0}</value>
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
-    <value>Запуск задачи под учетной записью группы поддерживается только на Windows Vista™ или более поздней версии. Для запуска задачи под учетной записью группы, необходимо обновить эту задачу к задаче Windows Vista™.!</value>
+    <value>Запуск задачи под учетной записью группы поддерживается только на Windows Vista™ или более поздней версии. Для запуска задачи под учетной записью группы, необходимо настроить эту задачу как задачу для Windows Vista™.</value>
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
-    <value>Отправляет почту с помощью поставляемых сведения.!</value>
+    <value>Отправляет электронное сообщение с использованием указанной информации.</value>
   </data>
   <data name="WizActionSubtextExecute" xml:space="preserve">
-    <value>Выполняет операцию командной строки.!</value>
+    <value>Выполняет операцию командной строки.</value>
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
-    <value>Показывает окно сообщения при активации задачи.!</value>
+    <value>Выводит на экран окно сообщения при активации задачи.</value>
   </data>
   <data name="WizActionTextExecute" xml:space="preserve">
-    <value>Запустите программу!</value>
+    <value>Запуск программы</value>
   </data>
   <data name="WizActionTextSendEmail" xml:space="preserve">
-    <value>Отправьте сообщение</value>
+    <value>Отправка электронной почты</value>
   </data>
   <data name="WizActionTextShowMessage" xml:space="preserve">
-    <value>Отобразить сообщение</value>
+    <value>Вывод сообщения</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value>Запускает задачу на ежедневной основе. Например, задача запускается в определенное время каждый день, каждый день, каждый третий день, и так далее.!</value>
+    <value>Запускает задачу на ежедневной основе. Например, задача запускается в определенное время каждый день, через день, каждый третий день, и так далее.</value>
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Ежедневно</value>
   </data>
   <data name="WizTriggerSubtextEvent" xml:space="preserve">
-    <value>Запускает задачу при возникновении системного события.!</value>
+    <value>Запускает задачу при возникновении системного события.</value>
   </data>
   <data name="WizTriggerTextEvent" xml:space="preserve">
-    <value>Когда регистрируется определенное событие!</value>
+    <value>При регистрации определенного события</value>
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value>Запускает задачу, основанный на ежемесячной основе. Например, задача запускается на определенные дни конкретных месяцев.!</value>
+    <value>Запускает задачу на ежемесячной основе. Например, задача запускается на определенные дни указанных месяцев.</value>
   </data>
   <data name="WizTriggerTextMonthly" xml:space="preserve">
     <value>Ежемесячно</value>
   </data>
   <data name="WizTriggerSubtextTime" xml:space="preserve">
-    <value>Запускает задачу на определенную дату и время.!</value>
+    <value>Запускает задачу на указанные дату и время.</value>
   </data>
   <data name="WizTriggerTextTime" xml:space="preserve">
     <value>Однократно</value>
   </data>
   <data name="WizTriggerSubtextWeekly" xml:space="preserve">
-    <value>Запускает задачу, основанный на еженедельный график. Например, задача начинается в 8:00 утра на определенный день недели, каждую неделю или каждые две недели.!</value>
+    <value>Запускает задачу на еженедельной основе. Например, задача начинается в 8:00 утра в определенный день недели, каждую неделю или каждые две недели.</value>
   </data>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
-    <value>Каждую неделю</value>
+    <value>Еженедельно</value>
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
-    <value>Наименование: описание {0}: {1} Триггер: {2} действий: {3}!</value>
+    <value>Название: {0}
+
+Описание : {1}
+
+Триггер: {2}
+
+Действие: {3}</value>
   </data>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
-    <value>Значение интервала повтора должно быть меньше или равно значение длительности повтора.!</value>
+    <value>Продолжительность интервала должна превышать промежуток между повторениями.</value>
   </data>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Планировщик не может создать задачу. Учетная запись пользователя неизвестно, неверный пароль или учетная запись пользователя не имеет разрешений на создание этой задачи.!</value>
+    <value>Планировщик не может создать задачу. Учетная запись пользователя неизвестна, указан неверный пароль или учетная запись пользователя не имеет прав на создание этой задачи.</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value>В сервис | Windows Server™ 2003, Windows® XP или Windows® 2000 | Windows Vista™, Windows Server™ 2008 | Windows® 7, Server™ 2008 R2 Windows | Windows® 8 или 8.1, Windows Server™ 2012 | Windows® 10!</value>
+    <value>AT service | Windows Server™ 2003, Windows® XP или Windows® 2000 | Windows Vista™, Windows Server™ 2008 | Windows® 7, Server™ 2008 R2 Windows | Windows® 8 или 8.1, Windows Server™ 2012 | Windows® 10</value>
   </data>
   <data name="TimeSpanNotStarted" xml:space="preserve">
     <value>Выполнение не начато</value>
   </data>
   <data name="ProcessPriorityAboveNormal" xml:space="preserve">
-    <value>Выше нормы!</value>
+    <value>Выше среднего</value>
   </data>
   <data name="ProcessPriorityBelowNormal" xml:space="preserve">
-    <value>Ниже обычного!</value>
+    <value>Ниже среднего</value>
   </data>
   <data name="ProcessPriorityHigh" xml:space="preserve">
-    <value>Установленные&amp;#x0D;</value>
+    <value>Высокий</value>
   </data>
   <data name="ProcessPriorityIdle" xml:space="preserve">
-    <value>Неактивно</value>
+    <value>Неактивен</value>
   </data>
   <data name="ProcessPriorityNormal" xml:space="preserve">
     <value>Средний</value>
   </data>
   <data name="ProcessPriorityRealTime" xml:space="preserve">
-    <value>Реальное время</value>
+    <value>Реального времени</value>
   </data>
   <data name="SIDTypeDefault" xml:space="preserve">
-    <value>Predefinito</value>
+    <value>По умолчанию</value>
   </data>
   <data name="SIDTypeNone" xml:space="preserve">
-    <value>Отсутствуют</value>
+    <value>Отсутствует</value>
   </data>
   <data name="SIDTypeUnrestricted" xml:space="preserve">
     <value>Без ограничений</value>
   </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
-    <value>Учетной записи пользователя на вкладке Общие должно быть присвоено «Локальная служба» или «Сетевая служба» когда тип SID процесса имеет значение «Неограниченный» на вкладке дополнений. Необходимо либо изменить тип SID или установить один из допустимых учетных записей пользователя.!</value>
+    <value>Учетной записи пользователя на вкладке Общие должно быть присвоено значение «Локальная служба» или «Сетевая служба», если тип идентификатора безопасности процесса имеет значение «Без ограничений» на вкладке дополнений. Необходимо либо изменить тип SID или выбрать одну из допустимых учетных записей пользователя.</value>
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
-    <value>Установка этого свойства будет отключить ряд других свойств. Вы все еще хотите продолжить?!</value>
+    <value>Установка этого свойства отменит ряд других указанных настроек. Вы хотите продолжить?</value>
   </data>
   <data name="ActionTypeComHandler" xml:space="preserve">
-    <value>Пользовательский обработчик!</value>
+    <value>Пользовательский обработчик</value>
   </data>
   <data name="ActionTypeExecute" xml:space="preserve">
-    <value>Старт А</value>
+    <value>Запуск программы</value>
   </data>
   <data name="ActionTypeSendEmail" xml:space="preserve">
-    <value>Отправьте сообщение</value>
+    <value>Отправка электронной почты</value>
   </data>
   <data name="ActionTypeShowMessage" xml:space="preserve">
-    <value>Отобразить сообщение</value>
+    <value>Вывод сообщения</value>
   </data>
   <data name="TaskInstancesIgnoreNew" xml:space="preserve">
-    <value>Не запускает новый экземпляр!</value>
+    <value>Не запускать новый экземпляр</value>
   </data>
   <data name="TaskInstancesParallel" xml:space="preserve">
-    <value>Запустите новый экземпляр параллельно!</value>
+    <value>Запускать новый экземпляр здадания</value>
   </data>
   <data name="TaskInstancesQueue" xml:space="preserve">
-    <value>Очередь новый экземпляр!</value>
+    <value>Ставить новый экземпляр задания в очередь</value>
   </data>
   <data name="TaskInstancesStopExisting" xml:space="preserve">
-    <value>Остановите существующий экземпляр!</value>
+    <value>Остановка текущего задания</value>
   </data>
   <data name="Error_InvalidSddlFormat" xml:space="preserve">
     <value>SDDL должен быть в формате, определенном в http://goo.gl/6au0V!</value>
   </data>
   <data name="Error_InvalidUriFormat" xml:space="preserve">
-    <value>Формат даты по Недвижимости</value>
+    <value>Некорректный формат URI</value>
   </data>
   <data name="Error_InvalidVersionFormat" xml:space="preserve">
-    <value>Версия должна быть в формате [Главная.вспомогательная[.построение[.Редакция]].!</value>
+    <value>Версия должна быть в формате [Главная.вспомогательная[.построение[.Редакция]].</value>
   </data>
   <data name="EventDetailHeader" xml:space="preserve">
-    <value>Событие {0}, TaskScheduler!</value>
+    <value>Событие {0}, Планировщик заданий</value>
   </data>
   <data name="HistoryHeader" xml:space="preserve">
-    <value>Количество событий:</value>
+    <value>Количество событий: {0}</value>
   </data>
   <data name="EventPropertiesDialogTitle" xml:space="preserve">
-    <value>Свойства события - события {0}, TaskScheduler!</value>
+    <value>Свойства события - события {0}, Планировщик заданий</value>
   </data>
   <data name="TaskEventStatusFailure" xml:space="preserve">
-    <value>Неудача!</value>
+    <value>Ошибка</value>
   </data>
   <data name="TaskEventStatusStillRunning" xml:space="preserve">
-    <value>Все еще работает!</value>
+    <value>Выполняется</value>
   </data>
   <data name="TaskEventStatusSuccess" xml:space="preserve">
-    <value>Успех!</value>
+    <value>Успешно</value>
   </data>
   <data name="TaskEventStatusTerminated" xml:space="preserve">
-    <value>Ограниченные</value>
+    <value>Прервано</value>
   </data>
   <data name="TriggerTypeRemoteConnect" xml:space="preserve">
-    <value>При подключении к сеансу удаленного пользователя!</value>
+    <value>При подключении к сеансу удаленного пользователя</value>
   </data>
   <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
-    <value>При отключении от сеанса удаленного пользователя!</value>
+    <value>При отключении от сеанса удаленного пользователя</value>
   </data>
   <data name="LoadingPrompt" xml:space="preserve">
     <value>Загрузка</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
-    <value>Имя задачи находится не в допустимом формате. Символы не допускаются в имени файла не допускаются в имени задачи.!</value>
+    <value>Некорректное название задачи. Присутствуют недопустимые символы.</value>
   </data>
   <data name="Error_CannotEditTrigger" xml:space="preserve">
-    <value>Этот тип триггера не может редактироваться в этот инструмент.!</value>
+    <value>Невозможно редактировать настройки этого типа триггера при помощи данного инструмента.</value>
   </data>
   <data name="TriggerTypeCustom" xml:space="preserve">
-    <value>Пользовательский триггер!</value>
+    <value>Пользовательский триггер</value>
   </data>
   <data name="ChangeUserBtn" xml:space="preserve">
-    <value>Изменить пользователя или группу...!</value>
+    <value>Изменить...</value>
   </data>
   <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
-    <value>Сменить пользователя</value>
+    <value>Выбрать пользователя...</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value>События задач и истории не поддерживаются в версиях .NET 3.5.!</value>
+    <value>События задачи и история недоступны в версиях, предшествующих .NET 3.5.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value>Следующие параметры свойства не может использоваться с выбранным совместимости:!</value>
+    <value>Следующие параметры не могут быть использованы при указанных настройках совместимости:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value>Некоторые параметры несовместимы с этой отбора.!</value>
+    <value>Некоторые параметры несовместимы в текущей выборке.</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
-    <value>Задача в настоящее время выполняется. (0 x {0: x})!</value>
+    <value>Задач выполняется в настоящее время. (0x{0:X})</value>
   </data>
   <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
-    <value>Недопустимый шаблон диапазона ID!</value>
+    <value>Недопустимый диапазон кодов событий</value>
   </data>
   <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
-    <value>Если вы хотите вручную изменить запрос, вы больше не сможете изменить запрос, используя элементы управления на вкладке Фильтр, вы хотели бы продолжить?!</value>
+    <value>Если вы выберите изменение запроса вручную, то в дальнейшем не сможете изменять запрос с помощью элементов управления вкладки "Фильтр". Продолжить?</value>
   </data>
   <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
-    <value>Вы хотите использовать вкладку Фильтр для редактирования запроса? Это приведет к ручного изменения, внесенные в запросе она будет отброшена.!</value>
+    <value>Использовать вкладку "Фильтр" для редактирования запроса? В результате этого изменения, внесенные в запрос вручную, будут отменены.</value>
   </data>
   <data name="EventLogTime12Hours" xml:space="preserve">
     <value>Последние 12 часов</value>
@@ -451,16 +457,16 @@
     <value>В любой момент</value>
   </data>
   <data name="EventLogTimeCustom" xml:space="preserve">
-    <value>Ручной промежуток</value>
+    <value>Настраиваемый диапазон</value>
   </data>
   <data name="EventLogTimeCustomFrom" xml:space="preserve">
-    <value>Все события</value>
+    <value>Все события с {0}</value>
   </data>
   <data name="EventLogTimeCustomFromTo" xml:space="preserve">
-    <value>От {0} до {1}!</value>
+    <value>От {0} до {1}</value>
   </data>
   <data name="EventLogTimeCustomTo" xml:space="preserve">
-    <value>Все события до {1}!</value>
+    <value>Все события до {1}</value>
   </data>
   <data name="EventLogTimeDay" xml:space="preserve">
     <value>За последние 24 часа</value>
@@ -472,10 +478,10 @@
     <value>Последние 7 дней</value>
   </data>
   <data name="EventKeywordsAuditFailure" xml:space="preserve">
-    <value>Сбой аудита!</value>
+    <value>Сбой аудита</value>
   </data>
   <data name="EventKeywordsAuditSuccess" xml:space="preserve">
-    <value>Аудит успехов!</value>
+    <value>Аудит выполнен успешно</value>
   </data>
   <data name="EventKeywordsEventLogClassic" xml:space="preserve">
     <value>Классический</value>
@@ -487,48 +493,63 @@
     <value>Время отклика</value>
   </data>
   <data name="EventKeywordsSqm" xml:space="preserve">
-    <value>Контроль качества поставщика</value>
+    <value>Показатели качества обслуживания</value>
   </data>
   <data name="EventKeywordsWdiContext" xml:space="preserve">
-    <value>Контекст</value>
+    <value>WDI Context</value>
   </data>
   <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
-    <value>DIAG</value>
+    <value>WDI Diag</value>
   </data>
   <data name="EventViewerDialogTitle" xml:space="preserve">
-    <value>Список пользователей, просмотревших события</value>
+    <value>Просмотр событий</value>
   </data>
   <data name="EventLogParentApps" xml:space="preserve">
-    <value>Журналы приложений и служб!</value>
+    <value>Журналы приложений и служб</value>
   </data>
   <data name="EventLogParentStandard" xml:space="preserve">
-    <value>Windows</value>
+    <value>Журнал Windows</value>
   </data>
   <data name="Error_InvalidQueryFormat" xml:space="preserve">
-    <value>Упал содержание должно быть текст или файл, содержащий допустимый запрос Xml.!</value>
+    <value>Содержимым может быть только текст или файл, содержащий корректный XML-запрос.</value>
   </data>
   <data name="Error_EventFilterBadQuery" xml:space="preserve">
-    <value>Нераспознанные текст найден в запросе XML.!</value>
+    <value>XML-запрос содержит нераспознанный текст.</value>
   </data>
   <data name="Error_EventFilterBadQueryText" xml:space="preserve">
-    <value>Обидеть текст: «{0}»!</value>
+    <value>Проблемный текст: '{0}'</value>
   </data>
   <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
     <value>Минимальный срок или период, которые может использовать задача — 1 день. Крайний срок также должно быть больше, чем период.!</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
-    <value>*Unset* (расформировать)</value>
+    <value>Не задано</value>
   </data>
   <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
-    <value>Значение длительности повтора должно быть или равно 1 минуте.!</value>
+    <value>Продолжительность интервала повтора не может быть меньше одной минуты.</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
-    <value>Значение интервала повтора должно быть или равно 1 минуте и меньше или равно 31 дней.!</value>
+    <value>Промежуток между повторениями не должен быть меньше, чем одна минута, и больше, чем 31 день. </value>
   </data>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
-    <value>Недопустимое значение.!</value>
+    <value>Недопустимое значение.</value>
   </data>
   <data name="Error_InvalidFileName" xml:space="preserve">
-    <value>Предоставленный программа/скрипт не является допустимым именем файла. Просьба исправить перед продолжением.!</value>
+    <value>Некорректное имя указанной программы или сценария. Исправьте ошибки для того, чтобы продолжить.</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;Не указан&gt;</value>
+  </data>
+  <data name="EventKeywordsAll" xml:space="preserve">
+    <value>&lt;Все ключевые слова&gt;</value>
+  </data>
+  <data name="EventTasksAll" xml:space="preserve">
+    <value>&lt;Все категории событий&gt;</value>
+  </data>
+  <data name="EventLogsAll" xml:space="preserve">
+    <value>&lt;Все логи&gt;</value>
+  </data>
+  <data name="EventSourcesAll" xml:space="preserve">
+    <value>&lt;Все источники&gt;</value>
   </data>
 </root>
