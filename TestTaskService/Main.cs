@@ -19,25 +19,10 @@ namespace TestTaskService
 			langCombo.SelectedIndexChanged += langCombo_SelectedIndexChanged;
 			langCombo.BeginUpdate();
 			langCombo.SelectedIndex = -1;
-			foreach (
-				var culture in
-				GetAsmCultures(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog).Assembly.GetTypes().First(t => t.Name == "Resources")))
+			foreach (var culture in GetAsmCultures(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog).Assembly.GetTypes().First(t => t.Name == "Resources")))
 				langCombo.Items.Add(culture);
 			langCombo.EndUpdate();
-			langCombo.SelectedItem = System.Threading.Thread.CurrentThread.CurrentUICulture;
-		}
-
-		private static IEnumerable<CultureInfo> GetAsmCultures(Type type)
-		{
-			var rm = new ResourceManager(type);
-			foreach (var culture in CultureInfo.GetCultures(CultureTypes.AllCultures))
-				if (!culture.Equals(CultureInfo.InvariantCulture) && rm.GetResourceSet(culture, true, false) != null)
-					yield return culture;
-		}
-
-		private void langCombo_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			System.Threading.Thread.CurrentThread.CurrentUICulture = langCombo.SelectedItem as CultureInfo;
+			langCombo.SelectedItem = CultureInfo.CurrentUICulture;
 		}
 
 		protected override void OnLoad(EventArgs e)
@@ -46,9 +31,21 @@ namespace TestTaskService
 			Text = $"{Text} - OS: {Environment.OSVersion.Version}, App: {System.Reflection.Assembly.GetEntryAssembly().GetName().Version}";
 		}
 
+		private static IEnumerable<CultureInfo> GetAsmCultures(Type type)
+		{
+			var rm = new ResourceManager(type);
+			return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(c => !c.Equals(CultureInfo.InvariantCulture) &&
+				rm.GetResourceSet(c, true, false) != null).Select(c => c.IsNeutralCulture ? CultureInfo.CreateSpecificCulture(c.TwoLetterISOLanguageName) : c);
+		}
+
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			Close();
+		}
+
+		private void langCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			System.Threading.Thread.CurrentThread.CurrentUICulture = langCombo.SelectedItem as CultureInfo;
 		}
 
 		private void reconnectLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
