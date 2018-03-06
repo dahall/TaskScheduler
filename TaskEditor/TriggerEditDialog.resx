@@ -118,17 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="triggerTypeLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="triggerTypeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="triggerTypeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="triggerTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>0, 4</value>
+  </data>
+  <data name="triggerTypeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>84, 15</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="triggerTypeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -142,13 +151,16 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 6</value>
+    <value>90, 0</value>
+  </data>
+  <data name="triggerTypeCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
   </data>
   <data name="triggerTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 23</value>
@@ -163,10 +175,10 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;triggerTypeCombo.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="settingsTabControl.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>Buttons</value>
@@ -178,13 +190,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="calendarTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+    <value>0, 3</value>
   </data>
   <data name="calendarTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>512, 161</value>
   </data>
   <data name="calendarTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 162</value>
+    <value>625, 161</value>
   </data>
   <data name="calendarTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -193,7 +205,7 @@
     <value>calendarTriggerUI1</value>
   </data>
   <data name="&gt;&gt;calendarTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;calendarTriggerUI1.Parent" xml:space="preserve">
     <value>scheduleTab</value>
@@ -204,11 +216,8 @@
   <data name="scheduleTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
   </data>
-  <data name="scheduleTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="scheduleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 172</value>
+    <value>631, 172</value>
   </data>
   <data name="scheduleTab.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -310,7 +319,7 @@
     <value>2</value>
   </data>
   <data name="logonRemotePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 67</value>
+    <value>1, 67</value>
   </data>
   <data name="logonRemotePanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>604, 98</value>
@@ -334,7 +343,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonChgUserBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 33</value>
+    <value>387, 33</value>
   </data>
   <data name="logonChgUserBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 27</value>
@@ -364,7 +373,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonUserLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 39</value>
+    <value>180, 39</value>
   </data>
   <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 15</value>
@@ -394,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonSpecUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 37</value>
+    <value>4, 37</value>
   </data>
   <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 19</value>
@@ -424,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="logonAnyUserRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 9</value>
+    <value>4, 9</value>
   </data>
   <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 19</value>
@@ -454,7 +463,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="logonTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>631, 172</value>
   </data>
   <data name="logonTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -478,7 +487,10 @@
     <value>NoControl</value>
   </data>
   <data name="startupIntroLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
+    <value>1, 5</value>
+  </data>
+  <data name="startupIntroLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 15</value>
@@ -505,7 +517,7 @@
     <value>4, 5</value>
   </data>
   <data name="startupTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>631, 172</value>
   </data>
   <data name="startupTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -529,7 +541,10 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>1, 4</value>
+  </data>
+  <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>501, 15</value>
@@ -556,7 +571,7 @@
     <value>4, 5</value>
   </data>
   <data name="idleTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>631, 172</value>
   </data>
   <data name="idleTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -580,13 +595,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="eventTriggerUI1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 6</value>
+    <value>0, 6</value>
   </data>
   <data name="eventTriggerUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>516, 96</value>
   </data>
   <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 143</value>
+    <value>629, 131</value>
   </data>
   <data name="eventTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -595,7 +610,7 @@
     <value>eventTriggerUI1</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor</value>
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.EventTriggerUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;eventTriggerUI1.Parent" xml:space="preserve">
     <value>onEventTab</value>
@@ -607,7 +622,7 @@
     <value>4, 5</value>
   </data>
   <data name="onEventTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>631, 172</value>
   </data>
   <data name="onEventTab.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -637,7 +652,7 @@
     <value>113</value>
   </data>
   <data name="customPropsListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 36</value>
+    <value>4, 36</value>
   </data>
   <data name="customPropsListView.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 135</value>
@@ -658,7 +673,7 @@
     <value>0</value>
   </data>
   <data name="customNameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 6</value>
+    <value>58, 6</value>
   </data>
   <data name="customNameText.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 23</value>
@@ -685,7 +700,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 9</value>
+    <value>1, 9</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 15</value>
@@ -712,7 +727,7 @@
     <value>4, 5</value>
   </data>
   <data name="customTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 175</value>
+    <value>631, 172</value>
   </data>
   <data name="customTab.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -739,7 +754,7 @@
     <value>3, 19</value>
   </data>
   <data name="settingsTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 181</value>
+    <value>639, 181</value>
   </data>
   <data name="settingsTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -756,14 +771,17 @@
   <data name="&gt;&gt;settingsTabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 35</value>
+    <value>10, 39</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 203</value>
+    <value>645, 203</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Settings</value>
@@ -778,115 +796,40 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="stopIfRunsSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="stopIfRunsSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 114</value>
-  </data>
-  <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 23</value>
-  </data>
-  <data name="stopIfRunsSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Name" xml:space="preserve">
-    <value>stopIfRunsSpan</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsSpan.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 52</value>
-  </data>
-  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
-    <value>durationSpan</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 52</value>
-  </data>
-  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 23</value>
-  </data>
-  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
-    <value>repeatSpan</value>
+  <data name="advSettingsGroup.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="delaySpan.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="delaySpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 21</value>
-  </data>
-  <data name="delaySpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 23</value>
-  </data>
-  <data name="delaySpan.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Name" xml:space="preserve">
-    <value>delaySpan</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.4.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;delaySpan.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="expireDatePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="expireDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 174</value>
+    <value>78, 32</value>
   </data>
   <data name="expireDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 23</value>
   </data>
   <data name="expireDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="expireDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -895,25 +838,61 @@
     <value>expireDatePicker</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;expireDatePicker.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
+  </data>
+  <data name="expireCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="expireCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="expireCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="expireCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 35</value>
+  </data>
+  <data name="expireCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 0, 2</value>
+  </data>
+  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 19</value>
+  </data>
+  <data name="expireCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Expire:</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Name" xml:space="preserve">
+    <value>expireCheckBox</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;expireCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="activateDatePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="activateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 145</value>
+    <value>78, 3</value>
   </data>
   <data name="activateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 23</value>
   </data>
   <data name="activateDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>2</value>
   </data>
   <data name="activateDatePicker.UTCPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -922,25 +901,262 @@
     <value>activateDatePicker</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Type" xml:space="preserve">
-    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor</value>
+    <value>Microsoft.Win32.TaskScheduler.FullDateTimePicker, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;activateDatePicker.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
+  </data>
+  <data name="activateCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="activateCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="activateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="activateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="activateCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 0, 2</value>
+  </data>
+  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 19</value>
+  </data>
+  <data name="activateCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Activate:</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Name" xml:space="preserve">
+    <value>activateCheckBox</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;activateCheckBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 112</value>
+  </data>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 58</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="expireDatePicker" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="expireCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="activateDatePicker" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="activateCheckBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="flowLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="stopIfRunsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="stopIfRunsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 0, 2</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="stopIfRunsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
+    <value>Stop task if it runs longer than:</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Name" xml:space="preserve">
+    <value>stopIfRunsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
+    <value>flowLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="stopIfRunsSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="stopIfRunsSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 3</value>
+  </data>
+  <data name="stopIfRunsSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 23</value>
+  </data>
+  <data name="stopIfRunsSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Name" xml:space="preserve">
+    <value>stopIfRunsSpan</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.Parent" xml:space="preserve">
+    <value>flowLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stopIfRunsSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="flowLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 83</value>
+  </data>
+  <data name="flowLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 29</value>
+  </data>
+  <data name="flowLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel3.Name" xml:space="preserve">
+    <value>flowLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="repeatCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="repeatCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 0, 2</value>
+  </data>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Repeat task every:</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
+    <value>repeatCheckBox</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="repeatSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 3</value>
+  </data>
+  <data name="repeatSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="repeatSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Name" xml:space="preserve">
+    <value>repeatSpan</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;repeatSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="durationLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="durationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="durationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 54</value>
+    <value>321, 7</value>
+  </data>
+  <data name="durationLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>15, 0, 3, 0</value>
   </data>
   <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
+    <value>96, 15</value>
   </data>
   <data name="durationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="durationLabel.Text" xml:space="preserve">
     <value>for a duration of:</value>
@@ -955,190 +1171,70 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;durationLabel.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+    <value>flowLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;durationLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 85</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 19</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Stop all running tasks at end of repetition duration</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Name" xml:space="preserve">
-    <value>stopAfterDurationCheckBox</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;stopAfterDurationCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 208</value>
-  </data>
-  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
-  </data>
-  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
-    <value>enabledCheckBox</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="expireCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="expireCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="expireCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 178</value>
-  </data>
-  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 19</value>
-  </data>
-  <data name="expireCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Expire:</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Name" xml:space="preserve">
-    <value>expireCheckBox</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;expireCheckBox.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="activateCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="activateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="activateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 149</value>
-  </data>
-  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 19</value>
-  </data>
-  <data name="activateCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Activate:</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Name" xml:space="preserve">
-    <value>activateCheckBox</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;activateCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="stopIfRunsCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="stopIfRunsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 117</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
-  </data>
-  <data name="stopIfRunsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Stop task if it runs longer than:</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Name" xml:space="preserve">
-    <value>stopIfRunsCheckBox</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
-  </data>
-  <data name="&gt;&gt;stopIfRunsCheckBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="repeatCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="repeatCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
-  </data>
-  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 19</value>
-  </data>
-  <data name="repeatCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Repeat task every:</value>
+  <data name="durationSpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;repeatCheckBox.Name" xml:space="preserve">
-    <value>repeatCheckBox</value>
+  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>423, 3</value>
   </data>
-  <data name="&gt;&gt;repeatCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="durationSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
   </data>
-  <data name="&gt;&gt;repeatCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+  <data name="durationSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;repeatCheckBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;durationSpan.Name" xml:space="preserve">
+    <value>durationSpan</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;durationSpan.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 29</value>
+  </data>
+  <data name="flowLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 29</value>
+  </data>
+  <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="delayCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="delayCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1147,7 +1243,10 @@
     <value>NoControl</value>
   </data>
   <data name="delayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 23</value>
+    <value>3, 6</value>
+  </data>
+  <data name="delayCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 0, 2</value>
   </data>
   <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 19</value>
@@ -1165,19 +1264,178 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.Parent" xml:space="preserve">
-    <value>advSettingsGroup</value>
+    <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;delayCheckBox.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>0</value>
+  </data>
+  <data name="delaySpan.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="delaySpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>221, 3</value>
+  </data>
+  <data name="delaySpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 23</value>
+  </data>
+  <data name="delaySpan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Name" xml:space="preserve">
+    <value>delaySpan</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;delaySpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 29</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 62</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>23, 4, 0, 2</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 19</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
+    <value>Stop all running tasks at end of repetition duration</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Name" xml:space="preserve">
+    <value>stopAfterDurationCheckBox</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;stopAfterDurationCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="enabledCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="enabledCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enabledCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 174</value>
+  </data>
+  <data name="enabledCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="enabledCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Name" xml:space="preserve">
+    <value>enabledCheckBox</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;enabledCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 195</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>advSettingsGroup</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="stopAfterDurationCheckBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="enabledCheckBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="advSettingsGroup.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="advSettingsGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 244</value>
+    <value>10, 242</value>
+  </data>
+  <data name="advSettingsGroup.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 3</value>
   </data>
   <data name="advSettingsGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 238</value>
+    <value>645, 224</value>
   </data>
   <data name="advSettingsGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="advSettingsGroup.Text" xml:space="preserve">
     <value>Advanced Settings</value>
@@ -1192,7 +1450,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;advSettingsGroup.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="cancelBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1201,13 +1459,13 @@
     <value>NoControl</value>
   </data>
   <data name="cancelBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>566, 489</value>
+    <value>568, 474</value>
   </data>
   <data name="cancelBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 27</value>
   </data>
   <data name="cancelBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -1222,7 +1480,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="okBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1231,13 +1489,13 @@
     <value>NoControl</value>
   </data>
   <data name="okBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 489</value>
+    <value>475, 474</value>
   </data>
   <data name="okBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 27</value>
   </data>
   <data name="okBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>OK</value>
@@ -1252,16 +1510,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;okBtn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="triggerIdText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 6</value>
+    <value>545, 0</value>
+  </data>
+  <data name="triggerIdText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
   </data>
   <data name="triggerIdText.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="triggerIdText.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;triggerIdText.Name" xml:space="preserve">
     <value>triggerIdText</value>
@@ -1270,22 +1531,28 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;triggerIdText.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;triggerIdText.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 9</value>
+    <value>519, 4</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 22</value>
+    <value>20, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Id:</value>
@@ -1300,10 +1567,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -1321,10 +1588,55 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>665, 528</value>
+    <value>665, 514</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="tableLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 6</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>645, 29</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="triggerTypeLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="triggerIdText" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="triggerTypeCombo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>New Trigger</value>

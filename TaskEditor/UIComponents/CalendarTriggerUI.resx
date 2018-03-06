@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="schedStartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 3</value>
+    <value>94, 3</value>
   </data>
   <data name="schedStartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 23</value>
+    <value>443, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="schedStartDatePicker.TabIndex" type="System.Int32, mscorlib">
@@ -151,7 +151,7 @@
     <value>Left</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 0</value>
+    <value>86, 0</value>
   </data>
   <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 3</value>
@@ -292,7 +292,10 @@
     <value>TopDown</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 100</value>
@@ -322,7 +325,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="oneTimeTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 95</value>
+    <value>429, 95</value>
   </data>
   <data name="oneTimeTab.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -349,7 +352,7 @@
     <value>3, 3</value>
   </data>
   <data name="dailyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 55</value>
+    <value>427, 55</value>
   </data>
   <data name="dailyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -373,7 +376,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="dailyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 105</value>
+    <value>433, 101</value>
   </data>
   <data name="dailyTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -403,7 +406,7 @@
     <value>4, 3, 0, 0</value>
   </data>
   <data name="weeklyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 99</value>
+    <value>433, 99</value>
   </data>
   <data name="weeklyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -424,7 +427,7 @@
     <value>4, 5</value>
   </data>
   <data name="weeklyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 105</value>
+    <value>433, 101</value>
   </data>
   <data name="weeklyTab.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -460,7 +463,7 @@
     <value>3, 2, 0, 0</value>
   </data>
   <data name="monthlyTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 91</value>
+    <value>433, 91</value>
   </data>
   <data name="monthlyTriggerUI1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -481,7 +484,7 @@
     <value>4, 5</value>
   </data>
   <data name="monthlyTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 105</value>
+    <value>433, 101</value>
   </data>
   <data name="monthlyTab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -508,7 +511,7 @@
     <value>3, 19</value>
   </data>
   <data name="schedTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 104</value>
+    <value>437, 104</value>
   </data>
   <data name="schedTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -529,10 +532,10 @@
     <value>Fill</value>
   </data>
   <data name="schedGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 32</value>
+    <value>94, 32</value>
   </data>
   <data name="schedGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 126</value>
+    <value>443, 126</value>
   </data>
   <data name="schedGroup.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>

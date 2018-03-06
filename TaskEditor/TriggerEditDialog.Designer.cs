@@ -58,25 +58,31 @@
 			this.customNameText = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.advSettingsGroup = new System.Windows.Forms.GroupBox();
-			this.stopIfRunsSpan = new System.Windows.Forms.TimeSpanPicker();
-			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
-			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
-			this.delaySpan = new System.Windows.Forms.TimeSpanPicker();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.expireDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.expireCheckBox = new System.Windows.Forms.CheckBox();
 			this.activateDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
+			this.activateCheckBox = new System.Windows.Forms.CheckBox();
+			this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+			this.stopIfRunsCheckBox = new System.Windows.Forms.CheckBox();
+			this.stopIfRunsSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+			this.repeatCheckBox = new System.Windows.Forms.CheckBox();
+			this.repeatSpan = new System.Windows.Forms.TimeSpanPicker();
 			this.durationLabel = new System.Windows.Forms.Label();
+			this.durationSpan = new System.Windows.Forms.TimeSpanPicker();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.delayCheckBox = new System.Windows.Forms.CheckBox();
+			this.delaySpan = new System.Windows.Forms.TimeSpanPicker();
 			this.stopAfterDurationCheckBox = new System.Windows.Forms.CheckBox();
 			this.enabledCheckBox = new System.Windows.Forms.CheckBox();
-			this.expireCheckBox = new System.Windows.Forms.CheckBox();
-			this.activateCheckBox = new System.Windows.Forms.CheckBox();
-			this.stopIfRunsCheckBox = new System.Windows.Forms.CheckBox();
-			this.repeatCheckBox = new System.Windows.Forms.CheckBox();
-			this.delayCheckBox = new System.Windows.Forms.CheckBox();
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
 			this.triggerIdText = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
@@ -87,7 +93,13 @@
 			this.onEventTab.SuspendLayout();
 			this.customTab.SuspendLayout();
 			this.advSettingsGroup.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
+			this.tableLayoutPanel3.SuspendLayout();
+			this.flowLayoutPanel3.SuspendLayout();
+			this.flowLayoutPanel2.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// triggerTypeLabel
@@ -280,51 +292,30 @@
 			// 
 			// advSettingsGroup
 			// 
-			this.advSettingsGroup.Controls.Add(this.stopIfRunsSpan);
-			this.advSettingsGroup.Controls.Add(this.durationSpan);
-			this.advSettingsGroup.Controls.Add(this.repeatSpan);
-			this.advSettingsGroup.Controls.Add(this.delaySpan);
-			this.advSettingsGroup.Controls.Add(this.expireDatePicker);
-			this.advSettingsGroup.Controls.Add(this.activateDatePicker);
-			this.advSettingsGroup.Controls.Add(this.durationLabel);
-			this.advSettingsGroup.Controls.Add(this.stopAfterDurationCheckBox);
-			this.advSettingsGroup.Controls.Add(this.enabledCheckBox);
-			this.advSettingsGroup.Controls.Add(this.expireCheckBox);
-			this.advSettingsGroup.Controls.Add(this.activateCheckBox);
-			this.advSettingsGroup.Controls.Add(this.stopIfRunsCheckBox);
-			this.advSettingsGroup.Controls.Add(this.repeatCheckBox);
-			this.advSettingsGroup.Controls.Add(this.delayCheckBox);
 			resources.ApplyResources(this.advSettingsGroup, "advSettingsGroup");
+			this.advSettingsGroup.Controls.Add(this.tableLayoutPanel2);
 			this.advSettingsGroup.Name = "advSettingsGroup";
 			this.advSettingsGroup.TabStop = false;
 			// 
-			// stopIfRunsSpan
+			// tableLayoutPanel2
 			// 
-			resources.ApplyResources(this.stopIfRunsSpan, "stopIfRunsSpan");
-			this.stopIfRunsSpan.Name = "stopIfRunsSpan";
-			this.stopIfRunsSpan.ValueChanged += new System.EventHandler(this.stopIfRunsSpan_ValueChanged);
-			this.stopIfRunsSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
+			resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+			this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 4);
+			this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel3, 0, 3);
+			this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 1);
+			this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.stopAfterDurationCheckBox, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.enabledCheckBox, 0, 5);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			// 
-			// durationSpan
+			// tableLayoutPanel3
 			// 
-			resources.ApplyResources(this.durationSpan, "durationSpan");
-			this.durationSpan.Name = "durationSpan";
-			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
-			this.durationSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
-			// 
-			// repeatSpan
-			// 
-			resources.ApplyResources(this.repeatSpan, "repeatSpan");
-			this.repeatSpan.Name = "repeatSpan";
-			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
-			this.repeatSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
-			// 
-			// delaySpan
-			// 
-			resources.ApplyResources(this.delaySpan, "delaySpan");
-			this.delaySpan.Name = "delaySpan";
-			this.delaySpan.ValueChanged += new System.EventHandler(this.delaySpan_ValueChanged);
-			this.delaySpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
+			resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+			this.tableLayoutPanel3.Controls.Add(this.expireDatePicker, 1, 1);
+			this.tableLayoutPanel3.Controls.Add(this.expireCheckBox, 0, 1);
+			this.tableLayoutPanel3.Controls.Add(this.activateDatePicker, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.activateCheckBox, 0, 0);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			// 
 			// expireDatePicker
 			// 
@@ -333,6 +324,13 @@
 			this.expireDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 48, 186);
 			this.expireDatePicker.ValueChanged += new System.EventHandler(this.expireDatePicker_ValueChanged);
 			// 
+			// expireCheckBox
+			// 
+			resources.ApplyResources(this.expireCheckBox, "expireCheckBox");
+			this.expireCheckBox.Name = "expireCheckBox";
+			this.expireCheckBox.UseVisualStyleBackColor = true;
+			this.expireCheckBox.CheckedChanged += new System.EventHandler(this.expireCheckBox_CheckedChanged);
+			// 
 			// activateDatePicker
 			// 
 			resources.ApplyResources(this.activateDatePicker, "activateDatePicker");
@@ -340,10 +338,89 @@
 			this.activateDatePicker.Value = new System.DateTime(2009, 7, 30, 13, 10, 48, 206);
 			this.activateDatePicker.ValueChanged += new System.EventHandler(this.activateDatePicker_ValueChanged);
 			// 
+			// activateCheckBox
+			// 
+			resources.ApplyResources(this.activateCheckBox, "activateCheckBox");
+			this.activateCheckBox.Name = "activateCheckBox";
+			this.activateCheckBox.UseVisualStyleBackColor = true;
+			this.activateCheckBox.CheckedChanged += new System.EventHandler(this.activateCheckBox_CheckedChanged);
+			// 
+			// flowLayoutPanel3
+			// 
+			resources.ApplyResources(this.flowLayoutPanel3, "flowLayoutPanel3");
+			this.flowLayoutPanel3.Controls.Add(this.stopIfRunsCheckBox);
+			this.flowLayoutPanel3.Controls.Add(this.stopIfRunsSpan);
+			this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+			// 
+			// stopIfRunsCheckBox
+			// 
+			resources.ApplyResources(this.stopIfRunsCheckBox, "stopIfRunsCheckBox");
+			this.stopIfRunsCheckBox.Name = "stopIfRunsCheckBox";
+			this.stopIfRunsCheckBox.UseVisualStyleBackColor = true;
+			this.stopIfRunsCheckBox.CheckedChanged += new System.EventHandler(this.stopIfRunsCheckBox_CheckedChanged);
+			// 
+			// stopIfRunsSpan
+			// 
+			resources.ApplyResources(this.stopIfRunsSpan, "stopIfRunsSpan");
+			this.stopIfRunsSpan.Name = "stopIfRunsSpan";
+			this.stopIfRunsSpan.ValueChanged += new System.EventHandler(this.stopIfRunsSpan_ValueChanged);
+			this.stopIfRunsSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
+			// 
+			// flowLayoutPanel2
+			// 
+			resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+			this.flowLayoutPanel2.Controls.Add(this.repeatCheckBox);
+			this.flowLayoutPanel2.Controls.Add(this.repeatSpan);
+			this.flowLayoutPanel2.Controls.Add(this.durationLabel);
+			this.flowLayoutPanel2.Controls.Add(this.durationSpan);
+			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+			// 
+			// repeatCheckBox
+			// 
+			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
+			this.repeatCheckBox.Name = "repeatCheckBox";
+			this.repeatCheckBox.UseVisualStyleBackColor = true;
+			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
+			// 
+			// repeatSpan
+			// 
+			resources.ApplyResources(this.repeatSpan, "repeatSpan");
+			this.repeatSpan.Name = "repeatSpan";
+			this.repeatSpan.ValueChanged += new System.EventHandler(this.repeatSpan_ValueChanged);
+			this.repeatSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
+			// 
 			// durationLabel
 			// 
 			resources.ApplyResources(this.durationLabel, "durationLabel");
 			this.durationLabel.Name = "durationLabel";
+			// 
+			// durationSpan
+			// 
+			resources.ApplyResources(this.durationSpan, "durationSpan");
+			this.durationSpan.Name = "durationSpan";
+			this.durationSpan.ValueChanged += new System.EventHandler(this.durationSpan_ValueChanged);
+			this.durationSpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
+			// 
+			// flowLayoutPanel1
+			// 
+			resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+			this.flowLayoutPanel1.Controls.Add(this.delayCheckBox);
+			this.flowLayoutPanel1.Controls.Add(this.delaySpan);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			// 
+			// delayCheckBox
+			// 
+			resources.ApplyResources(this.delayCheckBox, "delayCheckBox");
+			this.delayCheckBox.Name = "delayCheckBox";
+			this.delayCheckBox.UseVisualStyleBackColor = true;
+			this.delayCheckBox.CheckedChanged += new System.EventHandler(this.delayCheckBox_CheckedChanged);
+			// 
+			// delaySpan
+			// 
+			resources.ApplyResources(this.delaySpan, "delaySpan");
+			this.delaySpan.Name = "delaySpan";
+			this.delaySpan.ValueChanged += new System.EventHandler(this.delaySpan_ValueChanged);
+			this.delaySpan.Validating += new System.ComponentModel.CancelEventHandler(this.span_Validating);
 			// 
 			// stopAfterDurationCheckBox
 			// 
@@ -358,41 +435,6 @@
 			this.enabledCheckBox.Name = "enabledCheckBox";
 			this.enabledCheckBox.UseVisualStyleBackColor = true;
 			this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
-			// 
-			// expireCheckBox
-			// 
-			resources.ApplyResources(this.expireCheckBox, "expireCheckBox");
-			this.expireCheckBox.Name = "expireCheckBox";
-			this.expireCheckBox.UseVisualStyleBackColor = true;
-			this.expireCheckBox.CheckedChanged += new System.EventHandler(this.expireCheckBox_CheckedChanged);
-			// 
-			// activateCheckBox
-			// 
-			resources.ApplyResources(this.activateCheckBox, "activateCheckBox");
-			this.activateCheckBox.Name = "activateCheckBox";
-			this.activateCheckBox.UseVisualStyleBackColor = true;
-			this.activateCheckBox.CheckedChanged += new System.EventHandler(this.activateCheckBox_CheckedChanged);
-			// 
-			// stopIfRunsCheckBox
-			// 
-			resources.ApplyResources(this.stopIfRunsCheckBox, "stopIfRunsCheckBox");
-			this.stopIfRunsCheckBox.Name = "stopIfRunsCheckBox";
-			this.stopIfRunsCheckBox.UseVisualStyleBackColor = true;
-			this.stopIfRunsCheckBox.CheckedChanged += new System.EventHandler(this.stopIfRunsCheckBox_CheckedChanged);
-			// 
-			// repeatCheckBox
-			// 
-			resources.ApplyResources(this.repeatCheckBox, "repeatCheckBox");
-			this.repeatCheckBox.Name = "repeatCheckBox";
-			this.repeatCheckBox.UseVisualStyleBackColor = true;
-			this.repeatCheckBox.CheckedChanged += new System.EventHandler(this.repeatCheckBox_CheckedChanged);
-			// 
-			// delayCheckBox
-			// 
-			resources.ApplyResources(this.delayCheckBox, "delayCheckBox");
-			this.delayCheckBox.Name = "delayCheckBox";
-			this.delayCheckBox.UseVisualStyleBackColor = true;
-			this.delayCheckBox.CheckedChanged += new System.EventHandler(this.delayCheckBox_CheckedChanged);
 			// 
 			// cancelBtn
 			// 
@@ -424,20 +466,26 @@
 			// 
 			this.errorProvider.ContainerControl = this;
 			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.triggerTypeLabel, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.triggerIdText, 3, 0);
+			this.tableLayoutPanel1.Controls.Add(this.triggerTypeCombo, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			// 
 			// TriggerEditDialog
 			// 
 			this.AcceptButton = this.okBtn;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
-			this.Controls.Add(this.triggerIdText);
 			this.Controls.Add(this.cancelBtn);
 			this.Controls.Add(this.okBtn);
 			this.Controls.Add(this.advSettingsGroup);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.triggerTypeCombo);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.triggerTypeLabel);
+			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "TriggerEditDialog";
 			this.ShowIcon = false;
@@ -458,7 +506,19 @@
 			this.customTab.PerformLayout();
 			this.advSettingsGroup.ResumeLayout(false);
 			this.advSettingsGroup.PerformLayout();
+			this.tableLayoutPanel2.ResumeLayout(false);
+			this.tableLayoutPanel2.PerformLayout();
+			this.tableLayoutPanel3.ResumeLayout(false);
+			this.tableLayoutPanel3.PerformLayout();
+			this.flowLayoutPanel3.ResumeLayout(false);
+			this.flowLayoutPanel3.PerformLayout();
+			this.flowLayoutPanel2.ResumeLayout(false);
+			this.flowLayoutPanel2.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -513,5 +573,11 @@
 		private System.Windows.Forms.TextBox triggerIdText;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ErrorProvider errorProvider;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 	}
 }
