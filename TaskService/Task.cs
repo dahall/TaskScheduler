@@ -1228,7 +1228,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (Definition.Principal.RequiresPassword())
 				throw new SecurityException("Tasks which have been registered previously with stored passwords must use the TaskFolder.RegisterTaskDefinition method for updates.");
 			if (v2Task != null)
-				TaskService.GetFolder(System.IO.Path.GetDirectoryName(Path)).RegisterTaskDefinition(Name, Definition, TaskCreation.Update, Definition.Principal.ToString(), null, Definition.Principal.LogonType);
+				TaskService.GetFolder(System.IO.Path.GetDirectoryName(Path)).RegisterTaskDefinition(Name, Definition, TaskCreation.Update, null, null, Definition.Principal.LogonType);
 			else
 				TaskService.RootFolder.RegisterTaskDefinition(Name, Definition);
 		}
@@ -1743,7 +1743,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets the principal for the task that provides the security credentials for the task.</summary>
 		[NotNull]
-		public TaskPrincipal Principal => principal ?? (principal = v2Def != null ? new TaskPrincipal(v2Def.Principal) : new TaskPrincipal(v1Task));
+		public TaskPrincipal Principal => principal ?? (principal = v2Def != null ? new TaskPrincipal(v2Def.Principal, () => XmlText) : new TaskPrincipal(v1Task));
 
 		/// <summary>
 		/// Gets a class instance of registration information that is used to describe a task, such as the description of the task, the author of the task, and
@@ -2136,11 +2136,13 @@ namespace Microsoft.Win32.TaskScheduler
 		private TaskPrincipalPrivileges reqPriv;
 		private string v1CachedAcctInfo;
 		private ITask v1Task;
-		private IPrincipal v2Principal;
-		private IPrincipal2 v2Principal2;
+		private readonly IPrincipal v2Principal;
+		private readonly IPrincipal2 v2Principal2;
+		private readonly Func<string> xmlFunc;
 
-		internal TaskPrincipal([NotNull] IPrincipal iPrincipal)
+		internal TaskPrincipal([NotNull] IPrincipal iPrincipal, Func<string> defXml)
 		{
+			xmlFunc = defXml;
 			v2Principal = iPrincipal;
 			try { v2Principal2 = (IPrincipal2)v2Principal; }
 			catch { }
@@ -2149,6 +2151,38 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskPrincipal([NotNull] ITask iTask)
 		{
 			v1Task = iTask;
+		}
+
+		/// <summary>Gets the account associated with this principal. This value is pulled from the TaskDefinition's XMLText property if set.</summary>
+		/// <value>The account.</value>
+		[DefaultValue(null), Browsable(false)]
+		public string Account
+		{
+			get
+			{
+				try
+				{
+					var xml = xmlFunc?.Invoke();
+					if (!string.IsNullOrEmpty(xml))
+					{
+						var doc = new XmlDocument();
+						doc.LoadXml(xml);
+						var pn = doc.DocumentElement["Principals"]["Principal"];
+						if (pn != null)
+						{
+							var un = pn["UserId"];
+							if (un == null) un = pn["GroupId"];
+							if (un != null)
+								try { return User.FromSidString(un.InnerText).Name; } catch { return un.Value; }
+						}
+					}
+					return new User(ToString()).Name;
+				}
+				catch
+				{
+					return null;
+				}
+			}
 		}
 
 		/// <summary>Gets or sets the name of the principal that is displayed in the Task Scheduler UI.</summary>

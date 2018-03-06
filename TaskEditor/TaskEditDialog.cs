@@ -368,8 +368,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (TaskDefinition.Settings.DeleteExpiredTaskAfter != TimeSpan.Zero && !ValidateOneTriggerExpires())
 			{
-				MessageBox.Show(Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
+				MessageBox.Show(Resources.Error_TaskDeleteMustHaveExpiringTrigger, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -386,13 +385,11 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 				{
-					var user = TaskDefinition.Principal.ToString();
-					if (string.IsNullOrEmpty(user)) user = WindowsIdentity.GetCurrent().Name;
 					string pwd = null;
 					var fld = TaskService.GetFolder(TaskFolder);
 					if (TaskDefinition.Principal.RequiresPassword())
 					{
-						pwd = InvokeCredentialDialog(user, this);
+						pwd = InvokeCredentialDialog(TaskDefinition.Principal.Account, this);
 						if (pwd == null)
 						{
 							//throw new System.Security.Authentication.AuthenticationException(EditorProperties.Resources.UserAuthenticationError);
@@ -401,7 +398,7 @@ namespace Microsoft.Win32.TaskScheduler
 						}
 					}
 					Task = fld.RegisterTaskDefinition(taskPropertiesControl1.TaskName, TaskDefinition, TaskCreation.CreateOrUpdate,
-						user, pwd, TaskDefinition.Principal.LogonType);
+						null, pwd, TaskDefinition.Principal.LogonType);
 				}
 			DialogResult = DialogResult.OK;
 			Close();

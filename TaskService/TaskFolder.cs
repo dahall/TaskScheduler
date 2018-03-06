@@ -479,13 +479,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <code lang="cs"><![CDATA[
 		/// TaskService.Instance.RootFolder.RegisterTaskDefinition("TaskName", taskDefinition, TaskCreation.CreateOrUpdate, "userDomain\\userName", "userPassword", TaskLogonType.Password, @"O:BAG:DUD:(A;ID;0x1f019f;;;BA)(A;ID;0x1f019f;;;SY)(A;ID;FA;;;BA)(A;;FR;;;BU)");
 		/// ]]></code></example>
-		public Task RegisterTaskDefinition(string path, [NotNull] TaskDefinition definition, TaskCreation createType, string userId, string password = null, TaskLogonType logonType = TaskLogonType.S4U, string sddl = null)
+		public Task RegisterTaskDefinition([NotNull] string path, [NotNull] TaskDefinition definition, TaskCreation createType, string userId, string password = null, TaskLogonType logonType = TaskLogonType.S4U, string sddl = null)
 		{
 			if (definition.Actions.Count < 1 || definition.Actions.Count > 32)
 				throw new ArgumentOutOfRangeException(nameof(definition.Actions), @"A task must be registered with at least one action and no more than 32 actions.");
 
-			userId = userId ?? definition.Principal.UserId;
-			if (userId != null && userId.Length == 0) userId = null;
+			userId = userId ?? definition.Principal.Account;
+			if (userId == string.Empty) userId = null;
 			User user = new User(userId);
 			if (v2Folder != null)
 			{

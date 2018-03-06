@@ -749,7 +749,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 			{
-				if (!ValidateAccountForSidType(td.Principal.ToString()))
+				if (!ValidateAccountForSidType(td.Principal.Account))
 				{
 					principalSIDTypeCombo.SelectedIndex = principalSIDTypeCombo.Items.IndexOf((long)TaskProcessTokenSidType.Default);
 					return;
@@ -911,7 +911,7 @@ namespace Microsoft.Win32.TaskScheduler
 			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
 			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
 
-			var user = td?.Principal.ToString();
+			var user = td?.Principal.Account;
 			if (String.IsNullOrEmpty(user))
 				user = WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
