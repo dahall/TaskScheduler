@@ -19,13 +19,13 @@
     <PackageIconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</PackageIconUrl>
     <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>task interop taskscheduler</PackageTags>
+    <PackageTags>task;interop;taskscheduler</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\Microsoft.Win32.TaskScheduler.xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

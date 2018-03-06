@@ -892,27 +892,17 @@
       <param name="log">The <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventLog" /> for the task.</param>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker">
-      <summary>
-            A single control that can represent a full date and time.
-            </summary>
+      <summary>A single control that can represent a full date and time.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.#ctor">
-      <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> class.
-            </summary>
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.AutoSize">
-      <summary>
-            Gets or sets a value indicating whether [auto size].
-            </summary>
+      <summary>Gets or sets a value indicating whether [auto size].</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.AutoSizeMode">
-      <summary>
-            Gets or sets how the control will resize itself.
-            </summary>
-      <returns>
-            A value from the <see cref="T:System.Windows.Forms.AutoSizeMode" /> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly" />.
-            </returns>
+      <summary>Gets or sets how the control will resize itself.</summary>
+      <returns>A value from the <see cref="T:System.Windows.Forms.AutoSizeMode" /> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly" />.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Dispose(System.Boolean)">
       <summary> 
@@ -921,56 +911,36 @@
       <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.OnValueChanged(System.EventArgs)">
-      <summary>
-            Raises the <see cref="E:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueChanged" /> event.
-            </summary>
+      <summary>Raises the <see cref="E:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueChanged" /> event.</summary>
       <param name="eventArgs">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.FullDateTimePicker.SelectDate">
-      <summary>
-            Selects the date control.
-            </summary>
+      <summary>Selects the date control.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Text">
-      <summary>
-            Gets or sets the text associated with this control.
-            </summary>
+      <summary>Gets or sets the text associated with this control.</summary>
       <returns>A string that represents the text associated with this control.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.TimeFormat">
-      <summary>
-            Gets or sets the format of the time portion of the control.
-            </summary>
+      <summary>Gets or sets the format of the time portion of the control.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.UtcCheckBehavior">
-      <summary>
-            Gets or sets how fields are processed when the Utc Checkbox is checked.
-            </summary>
+      <summary>Gets or sets how fields are processed when the Utc Checkbox is checked.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.UTCPrompt">
-      <summary>
-            Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.
-            </summary>
+      <summary>Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Value">
-      <summary>
-            Gets or sets the value.
-            </summary>
+      <summary>Gets or sets the value.</summary>
     </member>
     <member name="E:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueChanged">
-      <summary>
-            Occurs when the <see cref="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Value" /> property changes.
-            </summary>
+      <summary>Occurs when the <see cref="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.Value" /> property changes.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.FullDateTimePicker.ValueIsUTC">
-      <summary>
-            Gets a value indicating whether value is UTC.
-            </summary>
+      <summary>Gets a value indicating whether value is UTC.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior">
-      <summary>
-            Behavior of producing value when Utc check is checked
-            </summary>
+      <summary>Behavior of producing value when Utc check is checked</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePicker.FieldConversionUtcCheckBehavior.ConvertLocalToUtc">
       <summary>Takes time in fields as local and produces value in Utc.</summary>
@@ -982,9 +952,7 @@
       <summary>Takes time in fields as local and leaves them local.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat">
-      <summary>
-            Determines the format of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> control.
-            </summary>
+      <summary>Determines the format of the <see cref="T:Microsoft.Win32.TaskScheduler.FullDateTimePicker" /> control.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.FullDateTimePickerTimeFormat.LongTime">
       <summary>Shows hours, minutes and seconds</summary>
@@ -1630,19 +1598,13 @@
       <summary>Gets the thrown exception on the error. This value may be null.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskRunTimesControl">
-      <summary>
-            Control that will display the run times for a provided task.
-            </summary>
+      <summary>Control that will display the run times for a provided task.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.#ctor">
-      <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesControl" /> class.
-            </summary>
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesControl" /> class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.BeginInit">
-      <summary>
-            Signals the object that initialization is starting.
-            </summary>
+      <summary>Signals the object that initialization is starting.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Dispose(System.Boolean)">
       <summary> 
@@ -1651,32 +1613,22 @@
       <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.EndDate">
-      <summary>
-            Gets or sets the end date.
-            </summary>
+      <summary>Gets or sets the end date.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.EndInit">
-      <summary>
-            Signals the object that initialization is complete.
-            </summary>
+      <summary>Signals the object that initialization is complete.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Initialize(Microsoft.Win32.TaskScheduler.Task,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
-      <summary>
-            Initializes an instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog" /> class.
-            </summary>
+      <summary>Initializes an instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog" /> class.</summary>
       <param name="task">The task to display.</param>
       <param name="startDate">The date to begin looking for run times.</param>
       <param name="endDate">The date to end looking for run times.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.StartDate">
-      <summary>
-            Gets or sets the start date.
-            </summary>
+      <summary>Gets or sets the start date.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRunTimesControl.Task">
-      <summary>
-            Gets or sets the task.
-            </summary>
+      <summary>Gets or sets the task.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskRunTimesDialog">
       <summary>
