@@ -37,6 +37,8 @@
 			this.execArgLabel = new System.Windows.Forms.Label();
 			this.execProgLabel = new System.Windows.Forms.Label();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// execProgBrowseBtn
@@ -51,11 +53,13 @@
 			resources.ApplyResources(this.execDirText, "execDirText");
 			this.execDirText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
 			this.execDirText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+			this.tableLayoutPanel1.SetColumnSpan(this.execDirText, 2);
 			this.execDirText.Name = "execDirText";
 			// 
 			// execArgText
 			// 
 			resources.ApplyResources(this.execArgText, "execArgText");
+			this.tableLayoutPanel1.SetColumnSpan(this.execArgText, 2);
 			this.execArgText.Name = "execArgText";
 			// 
 			// execProgText
@@ -63,6 +67,7 @@
 			resources.ApplyResources(this.execProgText, "execProgText");
 			this.execProgText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
 			this.execProgText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+			this.tableLayoutPanel1.SetColumnSpan(this.execProgText, 2);
 			this.execProgText.Name = "execProgText";
 			this.execProgText.TextChanged += new System.EventHandler(this.execProgText_TextChanged);
 			// 
@@ -79,25 +84,33 @@
 			// execProgLabel
 			// 
 			resources.ApplyResources(this.execProgLabel, "execProgLabel");
+			this.tableLayoutPanel1.SetColumnSpan(this.execProgLabel, 3);
 			this.execProgLabel.Name = "execProgLabel";
 			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
-			resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
+			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.execProgLabel, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.execDirText, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.execProgBrowseBtn, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.execArgText, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.execProgText, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.execDirLabel, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.execArgLabel, 0, 2);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
 			// ExecActionUI
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.execProgBrowseBtn);
-			this.Controls.Add(this.execDirText);
-			this.Controls.Add(this.execArgText);
-			this.Controls.Add(this.execProgText);
-			this.Controls.Add(this.execDirLabel);
-			this.Controls.Add(this.execArgLabel);
-			this.Controls.Add(this.execProgLabel);
+			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "ExecActionUI";
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -113,6 +126,6 @@
 		private System.Windows.Forms.Label execArgLabel;
 		private System.Windows.Forms.Label execProgLabel;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }

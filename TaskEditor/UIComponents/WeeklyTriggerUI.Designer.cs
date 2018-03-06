@@ -41,9 +41,11 @@
 			this.weeklyOnWeeksLabel = new System.Windows.Forms.Label();
 			this.weeklyRecurLabel = new System.Windows.Forms.Label();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.weeklyRecurNumUpDn)).BeginInit();
 			this.panel2.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -142,11 +144,17 @@
 			// panel2
 			// 
 			resources.ApplyResources(this.panel2, "panel2");
-			this.panel2.Controls.Add(this.weeklyRecurLabel);
 			this.panel2.Controls.Add(this.tableLayoutPanel1);
-			this.panel2.Controls.Add(this.weeklyOnWeeksLabel);
-			this.panel2.Controls.Add(this.weeklyRecurNumUpDn);
+			this.panel2.Controls.Add(this.flowLayoutPanel1);
 			this.panel2.Name = "panel2";
+			// 
+			// flowLayoutPanel1
+			// 
+			resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+			this.flowLayoutPanel1.Controls.Add(this.weeklyRecurLabel);
+			this.flowLayoutPanel1.Controls.Add(this.weeklyRecurNumUpDn);
+			this.flowLayoutPanel1.Controls.Add(this.weeklyOnWeeksLabel);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			// 
 			// WeeklyTriggerUI
 			// 
@@ -159,6 +167,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.weeklyRecurNumUpDn)).EndInit();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -178,5 +188,6 @@
 		private System.Windows.Forms.Label weeklyOnWeeksLabel;
 		private System.Windows.Forms.Label weeklyRecurLabel;
 		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	}
 }

@@ -45,7 +45,7 @@ namespace TestTaskService
 
 		private void langCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			System.Threading.Thread.CurrentThread.CurrentUICulture = langCombo.SelectedItem as CultureInfo;
+			System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture = langCombo.SelectedItem as CultureInfo;
 		}
 
 		private void reconnectLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

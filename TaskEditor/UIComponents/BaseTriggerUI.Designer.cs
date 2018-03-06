@@ -30,7 +30,7 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseTriggerUI));
 			this.schedStartDatePicker = new Microsoft.Win32.TaskScheduler.FullDateTimePicker();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -69,7 +69,7 @@
 		#endregion
 
 		private FullDateTimePicker schedStartDatePicker;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.FlowLayoutPanel panel1;
 		private System.Windows.Forms.Label label1;
 	}
 }

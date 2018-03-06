@@ -45,11 +45,15 @@
 			this.schedWeeklyRadio = new System.Windows.Forms.RadioButton();
 			this.schedDailyRadio = new System.Windows.Forms.RadioButton();
 			this.schedOneRadio = new System.Windows.Forms.RadioButton();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.schedGroup.SuspendLayout();
 			this.schedTabControl.SuspendLayout();
 			this.dailyTab.SuspendLayout();
 			this.weeklyTab.SuspendLayout();
 			this.monthlyTab.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// schedStartDatePicker
@@ -63,12 +67,13 @@
 			// 
 			resources.ApplyResources(this.groupBox3, "groupBox3");
 			this.groupBox3.Name = "groupBox3";
+			this.tableLayoutPanel1.SetRowSpan(this.groupBox3, 2);
 			this.groupBox3.TabStop = false;
 			// 
 			// schedGroup
 			// 
-			resources.ApplyResources(this.schedGroup, "schedGroup");
 			this.schedGroup.Controls.Add(this.schedTabControl);
+			resources.ApplyResources(this.schedGroup, "schedGroup");
 			this.schedGroup.Name = "schedGroup";
 			this.schedGroup.TabStop = false;
 			// 
@@ -92,8 +97,8 @@
 			// 
 			// dailyTab
 			// 
-			resources.ApplyResources(this.dailyTab, "dailyTab");
 			this.dailyTab.Controls.Add(this.dailyTriggerUI1);
+			resources.ApplyResources(this.dailyTab, "dailyTab");
 			this.dailyTab.Name = "dailyTab";
 			this.dailyTab.UseVisualStyleBackColor = true;
 			// 
@@ -105,8 +110,8 @@
 			// 
 			// weeklyTab
 			// 
-			resources.ApplyResources(this.weeklyTab, "weeklyTab");
 			this.weeklyTab.Controls.Add(this.weeklyTriggerUI1);
+			resources.ApplyResources(this.weeklyTab, "weeklyTab");
 			this.weeklyTab.Name = "weeklyTab";
 			this.weeklyTab.UseVisualStyleBackColor = true;
 			// 
@@ -118,8 +123,8 @@
 			// 
 			// monthlyTab
 			// 
-			resources.ApplyResources(this.monthlyTab, "monthlyTab");
 			this.monthlyTab.Controls.Add(this.monthlyTriggerUI1);
+			resources.ApplyResources(this.monthlyTab, "monthlyTab");
 			this.monthlyTab.Name = "monthlyTab";
 			this.monthlyTab.UseVisualStyleBackColor = true;
 			// 
@@ -163,18 +168,31 @@
 			this.schedOneRadio.UseVisualStyleBackColor = true;
 			this.schedOneRadio.CheckedChanged += new System.EventHandler(this.schedOneRadio_CheckedChanged);
 			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.schedGroup, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.schedStartDatePicker, 2, 0);
+			this.tableLayoutPanel1.Controls.Add(this.groupBox3, 1, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			// 
+			// flowLayoutPanel1
+			// 
+			resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+			this.flowLayoutPanel1.Controls.Add(this.schedOneRadio);
+			this.flowLayoutPanel1.Controls.Add(this.schedDailyRadio);
+			this.flowLayoutPanel1.Controls.Add(this.schedWeeklyRadio);
+			this.flowLayoutPanel1.Controls.Add(this.schedMonthlyRadio);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanel1, 2);
+			// 
 			// CalendarTriggerUI
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.schedStartDatePicker);
-			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.schedGroup);
+			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.schedStartLabel);
-			this.Controls.Add(this.schedMonthlyRadio);
-			this.Controls.Add(this.schedWeeklyRadio);
-			this.Controls.Add(this.schedDailyRadio);
-			this.Controls.Add(this.schedOneRadio);
 			this.MinimumSize = new System.Drawing.Size(512, 161);
 			this.Name = "CalendarTriggerUI";
 			this.schedGroup.ResumeLayout(false);
@@ -182,6 +200,10 @@
 			this.dailyTab.ResumeLayout(false);
 			this.weeklyTab.ResumeLayout(false);
 			this.monthlyTab.ResumeLayout(false);
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -205,6 +227,7 @@
 		private System.Windows.Forms.RadioButton schedWeeklyRadio;
 		private System.Windows.Forms.RadioButton schedDailyRadio;
 		private System.Windows.Forms.RadioButton schedOneRadio;
-
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	}
 }

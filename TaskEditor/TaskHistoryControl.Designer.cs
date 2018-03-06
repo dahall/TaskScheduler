@@ -102,19 +102,19 @@
 			// 
 			this.historyListView.AllowColumnReorder = true;
 			this.historyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader0,
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader12});
+			this.columnHeader0,
+			this.columnHeader1,
+			this.columnHeader2,
+			this.columnHeader3,
+			this.columnHeader4,
+			this.columnHeader5,
+			this.columnHeader6,
+			this.columnHeader7,
+			this.columnHeader8,
+			this.columnHeader9,
+			this.columnHeader10,
+			this.columnHeader11,
+			this.columnHeader12});
 			resources.ApplyResources(this.historyListView, "historyListView");
 			this.historyListView.FullRowSelect = true;
 			this.historyListView.HideSelection = false;
@@ -232,7 +232,6 @@
 			this.historyDetailView.BackColor = System.Drawing.SystemColors.Control;
 			resources.ApplyResources(this.historyDetailView, "historyDetailView");
 			this.historyDetailView.Name = "historyDetailView";
-			this.historyDetailView.TaskEvent = null;
 			// 
 			// tableLayoutPanel2
 			// 
@@ -265,10 +264,10 @@
 			// listContextMenu
 			// 
 			this.listContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshToolStripMenuItem,
-            this.eventPropertiesToolStripMenuItem,
-            this.attachTaskToThisEventToolStripMenuItem,
-            this.saveAllEventsAsToolStripMenuItem});
+			this.refreshToolStripMenuItem,
+			this.eventPropertiesToolStripMenuItem,
+			this.attachTaskToThisEventToolStripMenuItem,
+			this.saveAllEventsAsToolStripMenuItem});
 			this.listContextMenu.Name = "listContextMenu";
 			resources.ApplyResources(this.listContextMenu, "listContextMenu");
 			// 
@@ -299,14 +298,14 @@
 			// columnContextMenu
 			// 
 			this.columnContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addremoveColumnsToolStripMenuItem,
-            this.sortEventsByThisColumnToolStripMenuItem,
-            this.removeSortingToolStripMenuItem,
-            this.groupEventsByThisColumnToolStripMenuItem,
-            this.removeGroupingOfEventsToolStripMenuItem,
-            this.expandAllGroupsToolStripMenuItem,
-            this.collapseAllGroupsToolStripMenuItem,
-            this.columnContextMenuBreak});
+			this.addremoveColumnsToolStripMenuItem,
+			this.sortEventsByThisColumnToolStripMenuItem,
+			this.removeSortingToolStripMenuItem,
+			this.groupEventsByThisColumnToolStripMenuItem,
+			this.removeGroupingOfEventsToolStripMenuItem,
+			this.expandAllGroupsToolStripMenuItem,
+			this.collapseAllGroupsToolStripMenuItem,
+			this.columnContextMenuBreak});
 			this.columnContextMenu.Name = "columnContextMenu";
 			resources.ApplyResources(this.columnContextMenu, "columnContextMenu");
 			// 

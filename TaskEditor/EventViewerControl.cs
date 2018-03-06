@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -24,12 +25,9 @@ namespace Microsoft.Win32.TaskScheduler
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Gets or sets the task event.
-		/// </summary>
-		/// <value>
-		/// The task event.
-		/// </value>
+		/// <summary>Gets or sets the task event.</summary>
+		/// <value>The task event.</value>
+		[DefaultValue(null)]
 		public TaskEvent TaskEvent
 		{
 			get { return taskEvent; }
@@ -89,6 +87,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets the active tab.
 		/// </summary>
+		[DefaultValue(0)]
 		public EventViewerActiveTab ActiveTab
 		{
 			get { return (EventViewerActiveTab)tabControl1.SelectedIndex; }
@@ -193,6 +192,11 @@ namespace Microsoft.Win32.TaskScheduler
 		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			htmlText.Document.ExecCommand("Copy", false, null);
+		}
+
+		private void tabPage1_Click(object sender, EventArgs e)
+		{
+
 		}
 
 		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)

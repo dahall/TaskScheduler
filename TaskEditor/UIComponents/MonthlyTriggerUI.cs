@@ -19,8 +19,24 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			monthlyDaysDropDown.MultiColumnList = true;
 			monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
 			monthlyOnWeekDropDown.Items.RemoveAt(5);
-			monthlyOnDOWDropDown.InitializeFromTaskEnum(typeof(DaysOfTheWeek));
-			monthlyOnDOWDropDown.Items.RemoveAt(8);
+			InitDOWDropDown();
+		}
+
+		private void InitDOWDropDown()
+		{
+			monthlyOnDOWDropDown.BeginUpdate();
+			monthlyOnDOWDropDown.Items.Clear();
+			long allVal = 0;
+			for (int i = 0; i < 7; i++)
+			{
+				var val = (long)1 << i;
+				allVal |= val;
+				var text = System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName((DayOfWeek)i);
+				monthlyOnDOWDropDown.Items.Add(new ListControlItem(text, val));
+			}
+			if (!string.IsNullOrEmpty(monthlyOnDOWDropDown.CheckAllText))
+				monthlyOnDOWDropDown.Items.Insert(0, new ListControlItem(monthlyOnDOWDropDown.CheckAllText, allVal));
+			monthlyOnDOWDropDown.EndUpdate();
 		}
 
 		[Category("Property Changed")]

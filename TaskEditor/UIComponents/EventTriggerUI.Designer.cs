@@ -29,32 +29,38 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventTriggerUI));
-			this.onEventBasicPanel = new System.Windows.Forms.Panel();
+			this.onEventBasicPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.onEventLogLabel = new System.Windows.Forms.Label();
-			this.onEventIdText = new System.Windows.Forms.TextBox();
+			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
 			this.onEventSourceLabel = new System.Windows.Forms.Label();
 			this.onEventSourceCombo = new System.Windows.Forms.ComboBox();
-			this.onEventLogCombo = new System.Windows.Forms.ComboBox();
 			this.onEventIdLabel = new System.Windows.Forms.Label();
+			this.onEventIdText = new System.Windows.Forms.TextBox();
 			this.onEventCustomText = new System.Windows.Forms.TextBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.eventCustomRadio = new System.Windows.Forms.RadioButton();
 			this.eventBasicRadio = new System.Windows.Forms.RadioButton();
 			this.onEventCustomPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.editBtn = new System.Windows.Forms.Button();
+			this.mainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.radioLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.editorLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.onEventBasicPanel.SuspendLayout();
 			this.onEventCustomPanel.SuspendLayout();
+			this.mainLayoutPanel.SuspendLayout();
+			this.radioLayoutPanel.SuspendLayout();
+			this.editorLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// onEventBasicPanel
 			// 
 			resources.ApplyResources(this.onEventBasicPanel, "onEventBasicPanel");
-			this.onEventBasicPanel.Controls.Add(this.onEventLogLabel);
-			this.onEventBasicPanel.Controls.Add(this.onEventIdText);
-			this.onEventBasicPanel.Controls.Add(this.onEventSourceLabel);
-			this.onEventBasicPanel.Controls.Add(this.onEventSourceCombo);
-			this.onEventBasicPanel.Controls.Add(this.onEventLogCombo);
-			this.onEventBasicPanel.Controls.Add(this.onEventIdLabel);
+			this.onEventBasicPanel.Controls.Add(this.onEventLogLabel, 0, 0);
+			this.onEventBasicPanel.Controls.Add(this.onEventLogCombo, 1, 0);
+			this.onEventBasicPanel.Controls.Add(this.onEventSourceLabel, 0, 1);
+			this.onEventBasicPanel.Controls.Add(this.onEventSourceCombo, 1, 1);
+			this.onEventBasicPanel.Controls.Add(this.onEventIdLabel, 0, 2);
+			this.onEventBasicPanel.Controls.Add(this.onEventIdText, 1, 2);
 			this.onEventBasicPanel.Name = "onEventBasicPanel";
 			// 
 			// onEventLogLabel
@@ -62,13 +68,15 @@
 			resources.ApplyResources(this.onEventLogLabel, "onEventLogLabel");
 			this.onEventLogLabel.Name = "onEventLogLabel";
 			// 
-			// onEventIdText
+			// onEventLogCombo
 			// 
-			resources.ApplyResources(this.onEventIdText, "onEventIdText");
-			this.onEventIdText.Name = "onEventIdText";
-			this.onEventIdText.TextChanged += new System.EventHandler(this.onEventIdText_TextChanged);
-			this.onEventIdText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onEventIdText_KeyPress);
-			this.onEventIdText.Leave += new System.EventHandler(this.onEventTextBox_Leave);
+			this.onEventLogCombo.DisplayMember = "Text";
+			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
+			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.onEventLogCombo.FormattingEnabled = true;
+			this.onEventLogCombo.Name = "onEventLogCombo";
+			this.onEventLogCombo.ValueMember = "Value";
+			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
 			// 
 			// onEventSourceLabel
 			// 
@@ -82,20 +90,18 @@
 			this.onEventSourceCombo.SelectedIndexChanged += new System.EventHandler(this.onEventTextBox_Leave);
 			this.onEventSourceCombo.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
-			// onEventLogCombo
-			// 
-			resources.ApplyResources(this.onEventLogCombo, "onEventLogCombo");
-			this.onEventLogCombo.DisplayMember = "Text";
-			this.onEventLogCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.onEventLogCombo.FormattingEnabled = true;
-			this.onEventLogCombo.Name = "onEventLogCombo";
-			this.onEventLogCombo.SelectedIndexChanged += new System.EventHandler(this.onEventLogCombo_SelectedIndexChanged);
-			this.onEventLogCombo.ValueMember = "Value";
-			// 
 			// onEventIdLabel
 			// 
 			resources.ApplyResources(this.onEventIdLabel, "onEventIdLabel");
 			this.onEventIdLabel.Name = "onEventIdLabel";
+			// 
+			// onEventIdText
+			// 
+			resources.ApplyResources(this.onEventIdText, "onEventIdText");
+			this.onEventIdText.Name = "onEventIdText";
+			this.onEventIdText.TextChanged += new System.EventHandler(this.onEventIdText_TextChanged);
+			this.onEventIdText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onEventIdText_KeyPress);
+			this.onEventIdText.Leave += new System.EventHandler(this.onEventTextBox_Leave);
 			// 
 			// onEventCustomText
 			// 
@@ -141,21 +147,45 @@
 			this.editBtn.UseVisualStyleBackColor = true;
 			this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
 			// 
+			// mainLayoutPanel
+			// 
+			resources.ApplyResources(this.mainLayoutPanel, "mainLayoutPanel");
+			this.mainLayoutPanel.Controls.Add(this.radioLayoutPanel, 0, 0);
+			this.mainLayoutPanel.Controls.Add(this.groupBox5, 1, 0);
+			this.mainLayoutPanel.Controls.Add(this.editorLayoutPanel, 2, 0);
+			this.mainLayoutPanel.Name = "mainLayoutPanel";
+			// 
+			// radioLayoutPanel
+			// 
+			resources.ApplyResources(this.radioLayoutPanel, "radioLayoutPanel");
+			this.radioLayoutPanel.Controls.Add(this.eventBasicRadio);
+			this.radioLayoutPanel.Controls.Add(this.eventCustomRadio);
+			this.radioLayoutPanel.Name = "radioLayoutPanel";
+			// 
+			// editorLayoutPanel
+			// 
+			resources.ApplyResources(this.editorLayoutPanel, "editorLayoutPanel");
+			this.editorLayoutPanel.Controls.Add(this.onEventBasicPanel);
+			this.editorLayoutPanel.Controls.Add(this.onEventCustomPanel);
+			this.editorLayoutPanel.Name = "editorLayoutPanel";
+			// 
 			// EventTriggerUI
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.onEventCustomPanel);
-			this.Controls.Add(this.onEventBasicPanel);
-			this.Controls.Add(this.groupBox5);
-			this.Controls.Add(this.eventCustomRadio);
-			this.Controls.Add(this.eventBasicRadio);
+			this.Controls.Add(this.mainLayoutPanel);
 			this.MinimumSize = new System.Drawing.Size(516, 96);
 			this.Name = "EventTriggerUI";
 			this.onEventBasicPanel.ResumeLayout(false);
 			this.onEventBasicPanel.PerformLayout();
 			this.onEventCustomPanel.ResumeLayout(false);
 			this.onEventCustomPanel.PerformLayout();
+			this.mainLayoutPanel.ResumeLayout(false);
+			this.mainLayoutPanel.PerformLayout();
+			this.radioLayoutPanel.ResumeLayout(false);
+			this.radioLayoutPanel.PerformLayout();
+			this.editorLayoutPanel.ResumeLayout(false);
+			this.editorLayoutPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -163,7 +193,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel onEventBasicPanel;
+		private System.Windows.Forms.TableLayoutPanel onEventBasicPanel;
 		private System.Windows.Forms.Label onEventLogLabel;
 		private System.Windows.Forms.TextBox onEventIdText;
 		private System.Windows.Forms.Label onEventSourceLabel;
@@ -176,5 +206,8 @@
 		private System.Windows.Forms.RadioButton eventBasicRadio;
 		private System.Windows.Forms.TableLayoutPanel onEventCustomPanel;
 		private System.Windows.Forms.Button editBtn;
+		private System.Windows.Forms.TableLayoutPanel mainLayoutPanel;
+		private System.Windows.Forms.FlowLayoutPanel radioLayoutPanel;
+		private System.Windows.Forms.FlowLayoutPanel editorLayoutPanel;
 	}
 }

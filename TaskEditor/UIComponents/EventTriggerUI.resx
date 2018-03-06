@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="onEventBasicPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="onEventBasicPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="onEventBasicPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="onEventBasicPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="onEventLogLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="onEventLogLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -130,7 +139,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="onEventLogLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 5</value>
+    <value>3, 7</value>
   </data>
   <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 15</value>
@@ -153,29 +162,32 @@
   <data name="&gt;&gt;onEventLogLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="onEventIdText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="onEventLogCombo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="onEventIdText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 70</value>
+  <data name="onEventLogCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 3</value>
   </data>
-  <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 23</value>
+  <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 23</value>
   </data>
-  <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;onEventIdText.Name" xml:space="preserve">
-    <value>onEventIdText</value>
+  <data name="&gt;&gt;onEventLogCombo.Name" xml:space="preserve">
+    <value>onEventLogCombo</value>
   </data>
-  <data name="&gt;&gt;onEventIdText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;onEventLogCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;onEventIdText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;onEventLogCombo.Parent" xml:space="preserve">
     <value>onEventBasicPanel</value>
   </data>
-  <data name="&gt;&gt;onEventIdText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;onEventLogCombo.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="onEventSourceLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="onEventSourceLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -184,7 +196,7 @@
     <value>NoControl</value>
   </data>
   <data name="onEventSourceLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 38</value>
+    <value>3, 36</value>
   </data>
   <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
@@ -207,14 +219,14 @@
   <data name="&gt;&gt;onEventSourceLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="onEventSourceCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="onEventSourceCombo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="onEventSourceCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 35</value>
+    <value>62, 32</value>
   </data>
   <data name="onEventSourceCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 23</value>
+    <value>310, 23</value>
   </data>
   <data name="onEventSourceCombo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -231,29 +243,8 @@
   <data name="&gt;&gt;onEventSourceCombo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="onEventLogCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="onEventLogCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 0</value>
-  </data>
-  <data name="onEventLogCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 23</value>
-  </data>
-  <data name="onEventLogCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Name" xml:space="preserve">
-    <value>onEventLogCombo</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.Parent" xml:space="preserve">
-    <value>onEventBasicPanel</value>
-  </data>
-  <data name="&gt;&gt;onEventLogCombo.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="onEventIdLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="onEventIdLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -262,7 +253,7 @@
     <value>NoControl</value>
   </data>
   <data name="onEventIdLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 73</value>
+    <value>3, 65</value>
   </data>
   <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 15</value>
@@ -283,13 +274,40 @@
     <value>onEventBasicPanel</value>
   </data>
   <data name="&gt;&gt;onEventIdLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="onEventIdText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="onEventIdText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 61</value>
+  </data>
+  <data name="onEventIdText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 23</value>
+  </data>
+  <data name="onEventIdText.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;onEventIdText.Name" xml:space="preserve">
+    <value>onEventIdText</value>
+  </data>
+  <data name="&gt;&gt;onEventIdText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onEventIdText.Parent" xml:space="preserve">
+    <value>onEventBasicPanel</value>
+  </data>
+  <data name="&gt;&gt;onEventIdText.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="onEventBasicPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="onEventBasicPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="onEventBasicPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 113</value>
+    <value>375, 87</value>
   </data>
   <data name="onEventBasicPanel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -298,19 +316,22 @@
     <value>onEventBasicPanel</value>
   </data>
   <data name="&gt;&gt;onEventBasicPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onEventBasicPanel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>editorLayoutPanel</value>
   </data>
   <data name="&gt;&gt;onEventBasicPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
-  <data name="onEventCustomText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="onEventBasicPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="onEventLogLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="onEventLogCombo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="onEventSourceLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="onEventSourceCombo" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="onEventIdLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="onEventIdText" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="onEventCustomText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="onEventCustomText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 0</value>
+    <value>6, 0</value>
   </data>
   <data name="onEventCustomText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -322,7 +343,7 @@
     <value>Both</value>
   </data>
   <data name="onEventCustomText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 79</value>
+    <value>366, 79</value>
   </data>
   <data name="onEventCustomText.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -346,10 +367,13 @@
     <value>Top, Bottom, Left</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 3</value>
+    <value>76, 0</value>
+  </data>
+  <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>2, 97</value>
+    <value>2, 209</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -361,10 +385,10 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>mainLayoutPanel</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="eventCustomRadio.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -391,10 +415,10 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;eventCustomRadio.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>radioLayoutPanel</value>
   </data>
   <data name="&gt;&gt;eventCustomRadio.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="eventBasicRadio.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -421,13 +445,13 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;eventBasicRadio.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>radioLayoutPanel</value>
   </data>
   <data name="&gt;&gt;eventBasicRadio.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
-  <data name="onEventCustomPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="onEventCustomPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="onEventCustomPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -436,7 +460,7 @@
     <value>1</value>
   </data>
   <data name="editBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 86</value>
+    <value>6, 86</value>
   </data>
   <data name="editBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 7, 0, 4</value>
@@ -462,17 +486,20 @@
   <data name="&gt;&gt;editBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="onEventCustomPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="onEventCustomPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 0</value>
+    <value>3, 96</value>
   </data>
   <data name="onEventCustomPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>16, 0, 16, 0</value>
+    <value>6, 0, 3, 0</value>
   </data>
   <data name="onEventCustomPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="onEventCustomPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 113</value>
+    <value>375, 113</value>
   </data>
   <data name="onEventCustomPanel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -487,13 +514,121 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onEventCustomPanel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>editorLayoutPanel</value>
   </data>
   <data name="&gt;&gt;onEventCustomPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="onEventCustomPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="onEventCustomText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="editBtn" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="mainLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mainLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="mainLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="radioLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="radioLayoutPanel.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="radioLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="radioLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="radioLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 50</value>
+  </data>
+  <data name="radioLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;radioLayoutPanel.Name" xml:space="preserve">
+    <value>radioLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;radioLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioLayoutPanel.Parent" xml:space="preserve">
+    <value>mainLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;radioLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="editorLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="editorLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="editorLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="editorLayoutPanel.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="editorLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 0</value>
+  </data>
+  <data name="editorLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="editorLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 212</value>
+  </data>
+  <data name="editorLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;editorLayoutPanel.Name" xml:space="preserve">
+    <value>editorLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;editorLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editorLayoutPanel.Parent" xml:space="preserve">
+    <value>mainLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;editorLayoutPanel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mainLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="mainLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mainLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mainLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>516, 212</value>
+  </data>
+  <data name="mainLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Name" xml:space="preserve">
+    <value>mainLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioLayoutPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox5" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="editorLayoutPanel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

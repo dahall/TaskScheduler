@@ -4,11 +4,7 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	#region Enumerations
-
-	/// <summary>
-	/// Determines the format of the <see cref="FullDateTimePicker"/> control.
-	/// </summary>
+	/// <summary>Determines the format of the <see cref="FullDateTimePicker"/> control.</summary>
 	public enum FullDateTimePickerTimeFormat
 	{
 		/// <summary>Shows hours, minutes and seconds</summary>
@@ -19,11 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 		Hidden
 	}
 
-	#endregion Enumerations
-
-	/// <summary>
-	/// A single control that can represent a full date and time.
-	/// </summary>
+	/// <summary>A single control that can represent a full date and time.</summary>
 	[DefaultEvent("ValueChanged"), DefaultProperty("Value"), DefaultBindingProperty("Value")]
 	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public partial class FullDateTimePicker : UserControl
@@ -35,9 +27,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private FieldConversionUtcCheckBehavior utcBehavior = FieldConversionUtcCheckBehavior.ConvertLocalToUtc;
 		private string utcPrompt = "Synchronize across time zones";
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FullDateTimePicker"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="FullDateTimePicker"/> class.</summary>
 		public FullDateTimePicker()
 		{
 			InitializeComponent();
@@ -46,9 +36,11 @@ namespace Microsoft.Win32.TaskScheduler
 			ResetValue();
 		}
 
-		/// <summary>
-		/// Behavior of producing value when Utc check is checked
-		/// </summary>
+		/// <summary>Occurs when the <see cref="Value"/> property changes.</summary>
+		[Category("Action"), Description("Occurs when the Value property changes.")]
+		public event EventHandler ValueChanged;
+
+		/// <summary>Behavior of producing value when Utc check is checked</summary>
 		public enum FieldConversionUtcCheckBehavior
 		{
 			/// <summary>Takes time in fields as local and produces value in Utc.</summary>
@@ -59,49 +51,32 @@ namespace Microsoft.Win32.TaskScheduler
 			AssumeLocal = 2
 		}
 
-		/// <summary>
-		/// Occurs when the <see cref="Value"/> property changes.
-		/// </summary>
-		[Category("Action"), Description("Occurs when the Value property changes.")]
-		public event EventHandler ValueChanged;
-
-		/// <summary>
-		/// Gets or sets a value indicating whether [auto size].
-		/// </summary>
+		/// <summary>Gets or sets a value indicating whether [auto size].</summary>
 		/// <value><c>true</c> if [auto size]; otherwise, <c>false</c>.</value>
 		[Browsable(true), Category("Layout"), DefaultValue(true), EditorBrowsable(EditorBrowsableState.Always), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public override bool AutoSize
 		{
-			get { return base.AutoSize; }
-			set { base.AutoSize = value; }
+			get => base.AutoSize;
+			set => base.AutoSize = value;
 		}
 
-		/// <summary>
-		/// Gets or sets how the control will resize itself.
-		/// </summary>
+		/// <summary>Gets or sets how the control will resize itself.</summary>
 		/// <value></value>
-		/// <returns>
-		/// A value from the <see cref="T:System.Windows.Forms.AutoSizeMode"/> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly"/>.
-		/// </returns>
+		/// <returns>A value from the <see cref="T:System.Windows.Forms.AutoSizeMode"/> enumeration. The default is <see cref="F:System.Windows.Forms.AutoSizeMode.GrowOnly"/>.</returns>
 		[Browsable(true), Category("Layout"), Description("How the control will resize itself"), DefaultValue(AutoSizeMode.GrowAndShrink), Localizable(true)]
 		public new AutoSizeMode AutoSizeMode
 		{
-			get { return base.AutoSizeMode; }
-			set { base.AutoSizeMode = value; }
+			get => base.AutoSizeMode;
+			set => base.AutoSizeMode = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the text associated with this control.
-		/// </summary>
+		/// <summary>Gets or sets the text associated with this control.</summary>
 		/// <value></value>
 		/// <returns>A string that represents the text associated with this control.</returns>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
 		public override string Text
 		{
-			get
-			{
-				return base.Text;
-			}
+			get => base.Text;
 			set
 			{
 				if ((value == null) || (value.Length == 0))
@@ -111,15 +86,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the format of the time portion of the control.
-		/// </summary>
+		/// <summary>Gets or sets the format of the time portion of the control.</summary>
 		/// <value>The time format.</value>
 		[RefreshProperties(RefreshProperties.Repaint), DefaultValue(FullDateTimePickerTimeFormat.LongTime), Category("Behavior")]
 		[Description("The format of the time portion of the control.")]
 		public FullDateTimePickerTimeFormat TimeFormat
 		{
-			get { return timeFormat; }
+			get => timeFormat;
 			set
 			{
 				if (timeFormat != value)
@@ -147,26 +120,22 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets how fields are processed when the Utc Checkbox is checked.
-		/// </summary>
+		/// <summary>Gets or sets how fields are processed when the Utc Checkbox is checked.</summary>
 		/// <value>The UTC check behavior.</value>
 		[DefaultValue(FieldConversionUtcCheckBehavior.ConvertLocalToUtc), Category("Behavior"), Description("Determines how to process fields when Utc Checkbox is checked")]
 		public FieldConversionUtcCheckBehavior UtcCheckBehavior
 		{
-			get { return utcBehavior; }
-			set { utcBehavior = value; }
+			get => utcBehavior;
+			set => utcBehavior = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.
-		/// </summary>
+		/// <summary>Gets or sets the text prompt for the UTC CheckBox. Leave blank to remove the CheckBox.</summary>
 		/// <value>The text prompt for the UTC CheckBox.</value>
 		[RefreshProperties(RefreshProperties.Repaint), DefaultValue("Synchronize across time zones"), Category("Behavior"), Localizable(true), Bindable(true)]
 		[Description("The text prompt for the UTC CheckBox.")]
 		public string UTCPrompt
 		{
-			get { return utcPrompt; }
+			get => utcPrompt;
 			set
 			{
 				if (utcPrompt != value)
@@ -187,14 +156,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the value.
-		/// </summary>
+		/// <summary>Gets or sets the value.</summary>
 		/// <value>The value.</value>
 		[Category("Data"), RefreshProperties(RefreshProperties.All), Bindable(true), Description("The full date and time.")]
 		public DateTime Value
 		{
-			get { return userHasSetValue ? currentValue : DateTimePicker.MinimumDateTime; }
+			get => userHasSetValue ? currentValue : DateTimePicker.MinimumDateTime;
 			set
 			{
 				bool newVal = currentValue != value;
@@ -211,30 +178,26 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets a value indicating whether value is UTC.
-		/// </summary>
+		/// <summary>Gets a value indicating whether value is UTC.</summary>
 		/// <value><c>true</c> if value is UTC; otherwise, <c>false</c>.</value>
 		[Browsable(false)]
 		public bool ValueIsUTC => currentValue.Kind == DateTimeKind.Utc;
 
 		internal bool ShouldSerializeValue() => userHasSetValue;
 
-		/// <summary>
-		/// Raises the <see cref="ValueChanged"/> event.
-		/// </summary>
+		/// <summary>Raises the <see cref="ValueChanged"/> event.</summary>
 		/// <param name="eventArgs">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-		protected virtual void OnValueChanged(EventArgs eventArgs)
-		{
-			ValueChanged?.Invoke(this, EventArgs.Empty);
-		}
+		protected virtual void OnValueChanged(EventArgs eventArgs) => ValueChanged?.Invoke(this, EventArgs.Empty);
 
-		/// <summary>
-		/// Selects the date control.
-		/// </summary>
-		protected void SelectDate()
+		/// <summary>Selects the date control.</summary>
+		protected void SelectDate() => dateTimePickerDate.Select();
+
+		private static DateTime ConstrainedDateTime(DateTime value)
 		{
-			dateTimePickerDate.Select();
+			DateTime displayTime = value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value;
+			if (displayTime > DateTimePicker.MaximumDateTime) displayTime = DateTimePicker.MaximumDateTime;
+			if (displayTime < DateTimePicker.MinimumDateTime) displayTime = DateTimePicker.MinimumDateTime;
+			return displayTime;
 		}
 
 		private void ControlsToData()
@@ -266,14 +229,6 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					currentValue = DateTime.SpecifyKind(time, currentValue.Kind);
 			}
-		}
-
-		private static DateTime ConstrainedDateTime(DateTime value)
-		{
-			DateTime displayTime = value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value;
-			if (displayTime > DateTimePicker.MaximumDateTime) displayTime = DateTimePicker.MaximumDateTime;
-			if (displayTime < DateTimePicker.MinimumDateTime) displayTime = DateTimePicker.MinimumDateTime;
-			return displayTime;
 		}
 
 		private void DataToControls()

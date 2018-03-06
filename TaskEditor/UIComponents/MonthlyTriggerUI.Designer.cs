@@ -37,7 +37,9 @@
 			this.monthlyOnWeekDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.monthlyMonthsDropDown = new Microsoft.Win32.TaskScheduler.DropDownCheckList();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel2.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// monthlyOnRadio
@@ -64,6 +66,7 @@
 			// 
 			resources.ApplyResources(this.monthlyDaysDropDown, "monthlyDaysDropDown");
 			this.monthlyDaysDropDown.BackColor = System.Drawing.Color.White;
+			this.tableLayoutPanel1.SetColumnSpan(this.monthlyDaysDropDown, 2);
 			this.monthlyDaysDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyDaysDropDown.DropSize = new System.Drawing.Size(121, 106);
 			this.monthlyDaysDropDown.Name = "monthlyDaysDropDown";
@@ -94,6 +97,7 @@
 			// 
 			resources.ApplyResources(this.monthlyMonthsDropDown, "monthlyMonthsDropDown");
 			this.monthlyMonthsDropDown.BackColor = System.Drawing.Color.White;
+			this.tableLayoutPanel1.SetColumnSpan(this.monthlyMonthsDropDown, 2);
 			this.monthlyMonthsDropDown.ControlSize = new System.Drawing.Size(187, 105);
 			this.monthlyMonthsDropDown.DropSize = new System.Drawing.Size(121, 106);
 			this.monthlyMonthsDropDown.Name = "monthlyMonthsDropDown";
@@ -103,14 +107,20 @@
 			// panel2
 			// 
 			resources.ApplyResources(this.panel2, "panel2");
-			this.panel2.Controls.Add(this.monthlyOnWeekDropDown);
-			this.panel2.Controls.Add(this.monthlyDaysRadio);
-			this.panel2.Controls.Add(this.monthlyOnDOWDropDown);
-			this.panel2.Controls.Add(this.monthlyMonthsDropDown);
-			this.panel2.Controls.Add(this.monthlyMonthsLabel);
-			this.panel2.Controls.Add(this.monthlyOnRadio);
-			this.panel2.Controls.Add(this.monthlyDaysDropDown);
+			this.panel2.Controls.Add(this.tableLayoutPanel1);
 			this.panel2.Name = "panel2";
+			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.monthlyMonthsLabel, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyOnDOWDropDown, 2, 2);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyOnWeekDropDown, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyDaysRadio, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyOnRadio, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyDaysDropDown, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.monthlyMonthsDropDown, 1, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
 			// MonthlyTriggerUI
 			// 
@@ -121,6 +131,8 @@
 			this.Controls.SetChildIndex(this.panel2, 0);
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -136,5 +148,6 @@
 		private DropDownCheckList monthlyOnWeekDropDown;
 		private DropDownCheckList monthlyMonthsDropDown;
 		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }

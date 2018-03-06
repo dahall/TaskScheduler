@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DailyTriggerUI));
-			this.panel2 = new System.Windows.Forms.Panel();
+			this.panel2 = new System.Windows.Forms.FlowLayoutPanel();
 			this.dailyRecurNumUpDn = new System.Windows.Forms.NumericUpDown();
 			this.dailyDaysLabel = new System.Windows.Forms.Label();
 			this.dailyRecurLabel = new System.Windows.Forms.Label();
@@ -40,30 +40,30 @@
 			// panel2
 			// 
 			resources.ApplyResources(this.panel2, "panel2");
+			this.panel2.Controls.Add(this.dailyRecurLabel);
 			this.panel2.Controls.Add(this.dailyRecurNumUpDn);
 			this.panel2.Controls.Add(this.dailyDaysLabel);
-			this.panel2.Controls.Add(this.dailyRecurLabel);
 			this.panel2.Name = "panel2";
 			// 
 			// dailyRecurNumUpDn
 			// 
 			resources.ApplyResources(this.dailyRecurNumUpDn, "dailyRecurNumUpDn");
 			this.dailyRecurNumUpDn.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
+			365,
+			0,
+			0,
+			0});
 			this.dailyRecurNumUpDn.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dailyRecurNumUpDn.Name = "dailyRecurNumUpDn";
 			this.dailyRecurNumUpDn.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dailyRecurNumUpDn.ValueChanged += new System.EventHandler(this.dailyRecurNumUpDn_ValueChanged);
 			this.dailyRecurNumUpDn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dailyRecurNumUpDn_KeyPress);
 			// 
@@ -94,7 +94,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.FlowLayoutPanel panel2;
 		private System.Windows.Forms.NumericUpDown dailyRecurNumUpDn;
 		private System.Windows.Forms.Label dailyDaysLabel;
 		private System.Windows.Forms.Label dailyRecurLabel;

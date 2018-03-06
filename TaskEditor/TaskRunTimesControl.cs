@@ -4,19 +4,15 @@ using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// Control that will display the run times for a provided task.
-	/// </summary>
-	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "TaskControl")]
+	/// <summary>Control that will display the run times for a provided task.</summary>
+	[System.Drawing.ToolboxBitmap(typeof(TaskEditDialog), "TaskControl")]
 	public partial class TaskRunTimesControl : UserControl, ISupportInitialize
 	{
 		private bool initializing = false;
 		private bool isTemp = false;
 		private Task task;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskRunTimesControl"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="TaskRunTimesControl"/> class.</summary>
 		public TaskRunTimesControl()
 		{
 			initializing = true;
@@ -24,36 +20,30 @@ namespace Microsoft.Win32.TaskScheduler
 			initializing = false;
 		}
 
-		/// <summary>
-		/// Gets or sets the end date.
-		/// </summary>
+		/// <summary>Gets or sets the end date.</summary>
 		/// <value>The end date.</value>
 		[Category("Data")]
 		public DateTime EndDate
 		{
-			get { return endDatePicker.Value; }
-			set { endDatePicker.Value = value; }
+			get => endDatePicker.Value;
+			set => endDatePicker.Value = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the start date.
-		/// </summary>
+		/// <summary>Gets or sets the start date.</summary>
 		/// <value>The start date.</value>
 		[Category("Data")]
 		public DateTime StartDate
 		{
-			get { return startDatePicker.Value; }
-			set { startDatePicker.Value = value; }
+			get => startDatePicker.Value;
+			set => startDatePicker.Value = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the task.
-		/// </summary>
+		/// <summary>Gets or sets the task.</summary>
 		/// <value>The task.</value>
 		[Browsable(false), DefaultValue((Task)null)]
 		public Task Task
 		{
-			get { return task; }
+			get => task;
 			set
 			{
 				task = value;
@@ -64,26 +54,17 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Signals the object that initialization is starting.
-		/// </summary>
-		public void BeginInit()
-		{
-			initializing = true;
-		}
+		/// <summary>Signals the object that initialization is starting.</summary>
+		public void BeginInit() => initializing = true;
 
-		/// <summary>
-		/// Signals the object that initialization is complete.
-		/// </summary>
+		/// <summary>Signals the object that initialization is complete.</summary>
 		public void EndInit()
 		{
 			initializing = false;
 			Fetch();
 		}
 
-		/// <summary>
-		/// Initializes an instance of the <see cref="TaskRunTimesDialog"/> class.
-		/// </summary>
+		/// <summary>Initializes an instance of the <see cref="TaskRunTimesDialog"/> class.</summary>
 		/// <param name="task">The task to display.</param>
 		/// <param name="startDate">The date to begin looking for run times.</param>
 		/// <param name="endDate">The date to end looking for run times.</param>
@@ -97,6 +78,10 @@ namespace Microsoft.Win32.TaskScheduler
 			Task = task;
 			EndInit();
 		}
+
+		internal bool ShouldSerializeEndDate() => endDatePicker.ShouldSerializeValue();
+
+		internal bool ShouldSerializeStartDate() => startDatePicker.ShouldSerializeValue();
 
 		private void dateValueChanged(object sender, EventArgs e)
 		{
@@ -115,9 +100,5 @@ namespace Microsoft.Win32.TaskScheduler
 				if (isTemp) task.Enabled = false;
 			}
 		}
-
-		internal bool ShouldSerializeEndDate() => endDatePicker.ShouldSerializeValue();
-
-		internal bool ShouldSerializeStartDate() => startDatePicker.ShouldSerializeValue();
 	}
 }

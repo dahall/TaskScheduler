@@ -63,18 +63,20 @@
 			this.htmlContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.htmlContextMenu.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
 			// 
-			resources.ApplyResources(this.tabControl1, "tabControl1");
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			resources.ApplyResources(this.tabControl1, "tabControl1");
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
 			// 
@@ -82,42 +84,23 @@
 			// 
 			resources.ApplyResources(this.tabPage1, "tabPage1");
 			this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-			this.tabPage1.Controls.Add(this.infoLink);
-			this.tabPage1.Controls.Add(this.userText);
-			this.tabPage1.Controls.Add(this.opCodeText);
-			this.tabPage1.Controls.Add(this.computerText);
-			this.tabPage1.Controls.Add(this.keywordsText);
-			this.tabPage1.Controls.Add(this.loggedText);
-			this.tabPage1.Controls.Add(this.taskCategoryText);
-			this.tabPage1.Controls.Add(this.logNameText);
-			this.tabPage1.Controls.Add(this.sourceText);
-			this.tabPage1.Controls.Add(this.eventIdText);
-			this.tabPage1.Controls.Add(this.levelText);
-			this.tabPage1.Controls.Add(this.label18);
-			this.tabPage1.Controls.Add(this.label14);
-			this.tabPage1.Controls.Add(this.label17);
-			this.tabPage1.Controls.Add(this.label21);
-			this.tabPage1.Controls.Add(this.label13);
-			this.tabPage1.Controls.Add(this.label10);
-			this.tabPage1.Controls.Add(this.label9);
-			this.tabPage1.Controls.Add(this.label6);
-			this.tabPage1.Controls.Add(this.label5);
-			this.tabPage1.Controls.Add(this.label2);
-			this.tabPage1.Controls.Add(this.label1);
+			this.tabPage1.Controls.Add(this.tableLayoutPanel1);
 			this.tabPage1.Controls.Add(this.detailsText);
 			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
 			// 
 			// infoLink
 			// 
 			resources.ApplyResources(this.infoLink, "infoLink");
+			this.tableLayoutPanel1.SetColumnSpan(this.infoLink, 3);
 			this.infoLink.Name = "infoLink";
 			this.infoLink.TabStop = true;
 			this.infoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.infoLink_LinkClicked);
 			// 
 			// userText
 			// 
-			resources.ApplyResources(this.userText, "userText");
 			this.userText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.userText, "userText");
 			this.userText.Name = "userText";
 			this.userText.ReadOnly = true;
 			// 
@@ -125,6 +108,7 @@
 			// 
 			resources.ApplyResources(this.opCodeText, "opCodeText");
 			this.opCodeText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.tableLayoutPanel1.SetColumnSpan(this.opCodeText, 3);
 			this.opCodeText.Name = "opCodeText";
 			this.opCodeText.ReadOnly = true;
 			// 
@@ -160,27 +144,28 @@
 			// 
 			resources.ApplyResources(this.logNameText, "logNameText");
 			this.logNameText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.tableLayoutPanel1.SetColumnSpan(this.logNameText, 3);
 			this.logNameText.Name = "logNameText";
 			this.logNameText.ReadOnly = true;
 			// 
 			// sourceText
 			// 
-			resources.ApplyResources(this.sourceText, "sourceText");
 			this.sourceText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.sourceText, "sourceText");
 			this.sourceText.Name = "sourceText";
 			this.sourceText.ReadOnly = true;
 			// 
 			// eventIdText
 			// 
-			resources.ApplyResources(this.eventIdText, "eventIdText");
 			this.eventIdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.eventIdText, "eventIdText");
 			this.eventIdText.Name = "eventIdText";
 			this.eventIdText.ReadOnly = true;
 			// 
 			// levelText
 			// 
-			resources.ApplyResources(this.levelText, "levelText");
 			this.levelText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.levelText, "levelText");
 			this.levelText.Name = "levelText";
 			this.levelText.ReadOnly = true;
 			// 
@@ -247,11 +232,11 @@
 			// 
 			// tabPage2
 			// 
-			resources.ApplyResources(this.tabPage2, "tabPage2");
 			this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
 			this.tabPage2.Controls.Add(this.xmlViewRadio);
 			this.tabPage2.Controls.Add(this.textViewRadio);
 			this.tabPage2.Controls.Add(this.panel1);
+			resources.ApplyResources(this.tabPage2, "tabPage2");
 			this.tabPage2.Name = "tabPage2";
 			// 
 			// xmlViewRadio
@@ -279,9 +264,9 @@
 			// 
 			// htmlText
 			// 
-			resources.ApplyResources(this.htmlText, "htmlText");
 			this.htmlText.AllowWebBrowserDrop = false;
 			this.htmlText.ContextMenuStrip = this.htmlContextMenu;
+			resources.ApplyResources(this.htmlText, "htmlText");
 			this.htmlText.IsWebBrowserContextMenuEnabled = false;
 			this.htmlText.Name = "htmlText";
 			this.htmlText.ScriptErrorsSuppressed = true;
@@ -289,23 +274,50 @@
 			// 
 			// htmlContextMenu
 			// 
-			resources.ApplyResources(this.htmlContextMenu, "htmlContextMenu");
 			this.htmlContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem,
             this.selectAllToolStripMenuItem});
 			this.htmlContextMenu.Name = "htmlContextMenu";
+			resources.ApplyResources(this.htmlContextMenu, "htmlContextMenu");
 			// 
 			// copyToolStripMenuItem
 			// 
-			resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
 			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+			resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
 			this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
 			// 
 			// selectAllToolStripMenuItem
 			// 
-			resources.ApplyResources(this.selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
 			this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+			resources.ApplyResources(this.selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
 			this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+			// 
+			// tableLayoutPanel1
+			// 
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.label21, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.computerText, 3, 4);
+			this.tableLayoutPanel1.Controls.Add(this.opCodeText, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.keywordsText, 3, 3);
+			this.tableLayoutPanel1.Controls.Add(this.infoLink, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.taskCategoryText, 3, 2);
+			this.tableLayoutPanel1.Controls.Add(this.loggedText, 3, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label10, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label9, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.label17, 2, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label18, 2, 3);
+			this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.label14, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label13, 2, 2);
+			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.levelText, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.eventIdText, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.sourceText, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.logNameText, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.userText, 1, 4);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
 			// EventViewerControl
 			// 
@@ -321,6 +333,8 @@
 			this.tabPage2.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.htmlContextMenu.ResumeLayout(false);
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -360,5 +374,6 @@
 		private System.Windows.Forms.RadioButton xmlViewRadio;
 		private System.Windows.Forms.RadioButton textViewRadio;
 		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }
