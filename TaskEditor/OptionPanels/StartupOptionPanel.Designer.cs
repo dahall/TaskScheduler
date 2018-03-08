@@ -53,10 +53,7 @@
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.taskIdleDurationCombo, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.availableConnectionsCombo, 0, 13);
 			this.tableLayoutPanel1.Controls.Add(this.taskIdleDurationCheck, 0, 3);
@@ -74,276 +71,134 @@
 			this.tableLayoutPanel1.Controls.Add(this.taskIdleWaitTimeoutCombo, 1, 4);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 5);
 			this.tableLayoutPanel1.Controls.Add(this.taskIdleWaitTimeoutLabel, 0, 4);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 14;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(302, 435);
-			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// taskIdleDurationCombo
 			// 
-			this.taskIdleDurationCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskIdleDurationCombo.Location = new System.Drawing.Point(173, 104);
-			this.taskIdleDurationCombo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			resources.ApplyResources(this.taskIdleDurationCombo, "taskIdleDurationCombo");
 			this.taskIdleDurationCombo.Name = "taskIdleDurationCombo";
-			this.taskIdleDurationCombo.Size = new System.Drawing.Size(126, 23);
-			this.taskIdleDurationCombo.TabIndex = 2;
 			this.taskIdleDurationCombo.ValueChanged += new System.EventHandler(this.taskIdleDurationCombo_ValueChanged);
 			// 
 			// availableConnectionsCombo
 			// 
-			this.availableConnectionsCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.availableConnectionsCombo, "availableConnectionsCombo");
 			this.tableLayoutPanel1.SetColumnSpan(this.availableConnectionsCombo, 2);
 			this.availableConnectionsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.availableConnectionsCombo.FormattingEnabled = true;
-			this.availableConnectionsCombo.Location = new System.Drawing.Point(25, 404);
-			this.availableConnectionsCombo.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
 			this.availableConnectionsCombo.Name = "availableConnectionsCombo";
-			this.availableConnectionsCombo.Size = new System.Drawing.Size(274, 23);
-			this.availableConnectionsCombo.TabIndex = 1;
 			this.availableConnectionsCombo.SelectedIndexChanged += new System.EventHandler(this.availableConnectionsCombo_SelectedIndexChanged);
 			// 
 			// taskIdleDurationCheck
 			// 
-			this.taskIdleDurationCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskIdleDurationCheck.AutoSize = true;
-			this.taskIdleDurationCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskIdleDurationCheck.Location = new System.Drawing.Point(7, 101);
-			this.taskIdleDurationCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+			resources.ApplyResources(this.taskIdleDurationCheck, "taskIdleDurationCheck");
 			this.taskIdleDurationCheck.Name = "taskIdleDurationCheck";
-			this.taskIdleDurationCheck.Size = new System.Drawing.Size(163, 34);
-			this.taskIdleDurationCheck.TabIndex = 1;
-			this.taskIdleDurationCheck.Text = "Start the task only if the &computer is idle for:";
 			this.taskIdleDurationCheck.UseVisualStyleBackColor = true;
 			this.taskIdleDurationCheck.CheckedChanged += new System.EventHandler(this.taskIdleDurationCheck_CheckedChanged);
 			// 
 			// taskWakeToRunCheck
 			// 
-			this.taskWakeToRunCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskWakeToRunCheck.AutoSize = true;
+			resources.ApplyResources(this.taskWakeToRunCheck, "taskWakeToRunCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskWakeToRunCheck, 2);
-			this.taskWakeToRunCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskWakeToRunCheck.Location = new System.Drawing.Point(7, 310);
-			this.taskWakeToRunCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskWakeToRunCheck.Name = "taskWakeToRunCheck";
-			this.taskWakeToRunCheck.Size = new System.Drawing.Size(292, 19);
-			this.taskWakeToRunCheck.TabIndex = 2;
-			this.taskWakeToRunCheck.Text = "&Wake the computer to run this task";
 			this.taskWakeToRunCheck.UseVisualStyleBackColor = true;
 			this.taskWakeToRunCheck.CheckedChanged += new System.EventHandler(this.taskWakeToRunCheck_CheckedChanged);
 			// 
 			// taskStartIfConnectionCheck
 			// 
-			this.taskStartIfConnectionCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskStartIfConnectionCheck.AutoSize = true;
+			resources.ApplyResources(this.taskStartIfConnectionCheck, "taskStartIfConnectionCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskStartIfConnectionCheck, 2);
-			this.taskStartIfConnectionCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskStartIfConnectionCheck.Location = new System.Drawing.Point(7, 367);
-			this.taskStartIfConnectionCheck.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
 			this.taskStartIfConnectionCheck.Name = "taskStartIfConnectionCheck";
-			this.taskStartIfConnectionCheck.Size = new System.Drawing.Size(292, 34);
-			this.taskStartIfConnectionCheck.TabIndex = 0;
-			this.taskStartIfConnectionCheck.Text = "Start onl&y if the following network connection is available:";
 			this.taskStartIfConnectionCheck.UseVisualStyleBackColor = true;
 			this.taskStartIfConnectionCheck.CheckedChanged += new System.EventHandler(this.taskStartIfConnectionCheck_CheckedChanged);
 			// 
 			// taskStopIfGoingOnBatteriesCheck
 			// 
-			this.taskStopIfGoingOnBatteriesCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskStopIfGoingOnBatteriesCheck.AutoSize = true;
+			resources.ApplyResources(this.taskStopIfGoingOnBatteriesCheck, "taskStopIfGoingOnBatteriesCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskStopIfGoingOnBatteriesCheck, 2);
-			this.taskStopIfGoingOnBatteriesCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskStopIfGoingOnBatteriesCheck.Location = new System.Drawing.Point(7, 285);
-			this.taskStopIfGoingOnBatteriesCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskStopIfGoingOnBatteriesCheck.Name = "taskStopIfGoingOnBatteriesCheck";
-			this.taskStopIfGoingOnBatteriesCheck.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-			this.taskStopIfGoingOnBatteriesCheck.Size = new System.Drawing.Size(292, 19);
-			this.taskStopIfGoingOnBatteriesCheck.TabIndex = 1;
-			this.taskStopIfGoingOnBatteriesCheck.Text = "Stop if the computer switches to &battery power";
 			this.taskStopIfGoingOnBatteriesCheck.UseVisualStyleBackColor = true;
 			this.taskStopIfGoingOnBatteriesCheck.CheckedChanged += new System.EventHandler(this.taskStopIfGoingOnBatteriesCheck_CheckedChanged);
 			// 
 			// taskRestartOnIdleCheck
 			// 
-			this.taskRestartOnIdleCheck.AutoSize = true;
+			resources.ApplyResources(this.taskRestartOnIdleCheck, "taskRestartOnIdleCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskRestartOnIdleCheck, 2);
-			this.taskRestartOnIdleCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskRestartOnIdleCheck.Location = new System.Drawing.Point(7, 200);
-			this.taskRestartOnIdleCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskRestartOnIdleCheck.Name = "taskRestartOnIdleCheck";
-			this.taskRestartOnIdleCheck.Padding = new System.Windows.Forms.Padding(36, 0, 0, 0);
-			this.taskRestartOnIdleCheck.Size = new System.Drawing.Size(225, 19);
-			this.taskRestartOnIdleCheck.TabIndex = 6;
-			this.taskRestartOnIdleCheck.Text = "Restart if the idle state res&umes";
 			this.taskRestartOnIdleCheck.UseVisualStyleBackColor = true;
 			this.taskRestartOnIdleCheck.CheckedChanged += new System.EventHandler(this.taskRestartOnIdleCheck_CheckedChanged);
 			// 
 			// taskDisallowStartOnRemoteAppSessionCheck
 			// 
-			this.taskDisallowStartOnRemoteAppSessionCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskDisallowStartOnRemoteAppSessionCheck.AutoSize = true;
+			resources.ApplyResources(this.taskDisallowStartOnRemoteAppSessionCheck, "taskDisallowStartOnRemoteAppSessionCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskDisallowStartOnRemoteAppSessionCheck, 2);
-			this.taskDisallowStartOnRemoteAppSessionCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskDisallowStartOnRemoteAppSessionCheck.Location = new System.Drawing.Point(7, 29);
-			this.taskDisallowStartOnRemoteAppSessionCheck.Margin = new System.Windows.Forms.Padding(7, 0, 0, 0);
 			this.taskDisallowStartOnRemoteAppSessionCheck.Name = "taskDisallowStartOnRemoteAppSessionCheck";
-			this.taskDisallowStartOnRemoteAppSessionCheck.Size = new System.Drawing.Size(295, 34);
-			this.taskDisallowStartOnRemoteAppSessionCheck.TabIndex = 5;
-			this.taskDisallowStartOnRemoteAppSessionCheck.Text = "&Disallow start if in a Remote Applications Integrated Locally (RAIL) session";
 			this.taskDisallowStartOnRemoteAppSessionCheck.UseVisualStyleBackColor = true;
 			this.taskDisallowStartOnRemoteAppSessionCheck.CheckedChanged += new System.EventHandler(this.taskDisallowStartOnRemoteAppSessionCheck_CheckedChanged);
 			// 
 			// taskDisallowStartIfOnBatteriesCheck
 			// 
-			this.taskDisallowStartIfOnBatteriesCheck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskDisallowStartIfOnBatteriesCheck.AutoSize = true;
+			resources.ApplyResources(this.taskDisallowStartIfOnBatteriesCheck, "taskDisallowStartIfOnBatteriesCheck");
 			this.tableLayoutPanel1.SetColumnSpan(this.taskDisallowStartIfOnBatteriesCheck, 2);
-			this.taskDisallowStartIfOnBatteriesCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskDisallowStartIfOnBatteriesCheck.Location = new System.Drawing.Point(7, 260);
-			this.taskDisallowStartIfOnBatteriesCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskDisallowStartIfOnBatteriesCheck.Name = "taskDisallowStartIfOnBatteriesCheck";
-			this.helpProvider.SetShowHelp(this.taskDisallowStartIfOnBatteriesCheck, true);
-			this.taskDisallowStartIfOnBatteriesCheck.Size = new System.Drawing.Size(292, 19);
-			this.taskDisallowStartIfOnBatteriesCheck.TabIndex = 0;
-			this.taskDisallowStartIfOnBatteriesCheck.Text = "Start the task only if the computer is on AC &power";
+			this.helpProvider.SetShowHelp(this.taskDisallowStartIfOnBatteriesCheck, ((bool)(resources.GetObject("taskDisallowStartIfOnBatteriesCheck.ShowHelp"))));
 			this.taskDisallowStartIfOnBatteriesCheck.UseVisualStyleBackColor = true;
 			this.taskDisallowStartIfOnBatteriesCheck.CheckedChanged += new System.EventHandler(this.taskDisallowStartIfOnBatteriesCheck_CheckedChanged);
 			// 
 			// optionPanelHeaderLabel1
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel1, 2);
-			this.optionPanelHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
-			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 6);
+			resources.ApplyResources(this.optionPanelHeaderLabel1, "optionPanelHeaderLabel1");
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(302, 23);
-			this.optionPanelHeaderLabel1.TabIndex = 0;
-			this.optionPanelHeaderLabel1.Text = "Options";
 			// 
 			// optionPanelHeaderLabel2
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel2, 2);
-			this.optionPanelHeaderLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel2.Location = new System.Drawing.Point(0, 69);
-			this.optionPanelHeaderLabel2.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+			resources.ApplyResources(this.optionPanelHeaderLabel2, "optionPanelHeaderLabel2");
 			this.optionPanelHeaderLabel2.Name = "optionPanelHeaderLabel2";
-			this.optionPanelHeaderLabel2.Size = new System.Drawing.Size(302, 23);
-			this.optionPanelHeaderLabel2.TabIndex = 1;
-			this.optionPanelHeaderLabel2.Text = "Idle";
 			// 
 			// taskStopOnIdleEndCheck
 			// 
-			this.taskStopOnIdleEndCheck.AutoSize = true;
+			resources.ApplyResources(this.taskStopOnIdleEndCheck, "taskStopOnIdleEndCheck");
 			this.taskStopOnIdleEndCheck.Checked = true;
 			this.taskStopOnIdleEndCheck.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.tableLayoutPanel1.SetColumnSpan(this.taskStopOnIdleEndCheck, 2);
-			this.taskStopOnIdleEndCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskStopOnIdleEndCheck.Location = new System.Drawing.Point(7, 175);
-			this.taskStopOnIdleEndCheck.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
 			this.taskStopOnIdleEndCheck.Name = "taskStopOnIdleEndCheck";
-			this.taskStopOnIdleEndCheck.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-			this.taskStopOnIdleEndCheck.Size = new System.Drawing.Size(242, 19);
-			this.taskStopOnIdleEndCheck.TabIndex = 5;
-			this.taskStopOnIdleEndCheck.Text = "Stop if the comput&er ceases to be idle";
 			this.taskStopOnIdleEndCheck.UseVisualStyleBackColor = true;
 			this.taskStopOnIdleEndCheck.CheckedChanged += new System.EventHandler(this.taskStopOnIdleEndCheck_CheckedChanged);
 			// 
 			// optionPanelHeaderLabel3
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel3, 2);
-			this.optionPanelHeaderLabel3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel3.Location = new System.Drawing.Point(0, 228);
-			this.optionPanelHeaderLabel3.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+			resources.ApplyResources(this.optionPanelHeaderLabel3, "optionPanelHeaderLabel3");
 			this.optionPanelHeaderLabel3.Name = "optionPanelHeaderLabel3";
-			this.optionPanelHeaderLabel3.Size = new System.Drawing.Size(302, 23);
-			this.optionPanelHeaderLabel3.TabIndex = 2;
-			this.optionPanelHeaderLabel3.Text = "Power";
 			// 
 			// optionPanelHeaderLabel4
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.optionPanelHeaderLabel4, 2);
-			this.optionPanelHeaderLabel4.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel4.Location = new System.Drawing.Point(0, 338);
-			this.optionPanelHeaderLabel4.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+			resources.ApplyResources(this.optionPanelHeaderLabel4, "optionPanelHeaderLabel4");
 			this.optionPanelHeaderLabel4.Name = "optionPanelHeaderLabel4";
-			this.optionPanelHeaderLabel4.Size = new System.Drawing.Size(302, 23);
-			this.optionPanelHeaderLabel4.TabIndex = 3;
-			this.optionPanelHeaderLabel4.Text = "Network";
 			// 
 			// taskIdleWaitTimeoutCombo
 			// 
-			this.taskIdleWaitTimeoutCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.taskIdleWaitTimeoutCombo.Location = new System.Drawing.Point(173, 141);
-			this.taskIdleWaitTimeoutCombo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+			resources.ApplyResources(this.taskIdleWaitTimeoutCombo, "taskIdleWaitTimeoutCombo");
 			this.taskIdleWaitTimeoutCombo.Name = "taskIdleWaitTimeoutCombo";
-			this.taskIdleWaitTimeoutCombo.Size = new System.Drawing.Size(126, 23);
-			this.taskIdleWaitTimeoutCombo.TabIndex = 4;
 			this.taskIdleWaitTimeoutCombo.ValueChanged += new System.EventHandler(this.taskIdleWaitTimeoutCombo_ValueChanged);
 			// 
 			// tableLayoutPanel3
 			// 
-			this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tableLayoutPanel3.AutoSize = true;
-			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.87356F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.12644F));
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 197);
-			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+			resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 1;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(173, 0);
-			this.tableLayoutPanel3.TabIndex = 9;
 			// 
 			// taskIdleWaitTimeoutLabel
 			// 
-			this.taskIdleWaitTimeoutLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.taskIdleWaitTimeoutLabel.AutoSize = true;
-			this.taskIdleWaitTimeoutLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.taskIdleWaitTimeoutLabel.Location = new System.Drawing.Point(7, 147);
-			this.taskIdleWaitTimeoutLabel.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
+			resources.ApplyResources(this.taskIdleWaitTimeoutLabel, "taskIdleWaitTimeoutLabel");
 			this.taskIdleWaitTimeoutLabel.Name = "taskIdleWaitTimeoutLabel";
-			this.taskIdleWaitTimeoutLabel.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-			this.taskIdleWaitTimeoutLabel.Size = new System.Drawing.Size(108, 15);
-			this.taskIdleWaitTimeoutLabel.TabIndex = 3;
-			this.taskIdleWaitTimeoutLabel.Text = "W&ait for idle for:";
 			// 
 			// StartupOptionPanel
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			resources.ApplyResources(this, "$this");
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
 			this.Name = "StartupOptionPanel";
-			this.Size = new System.Drawing.Size(302, 412);
-			this.Title = "Task Start Options";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);

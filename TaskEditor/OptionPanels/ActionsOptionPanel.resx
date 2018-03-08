@@ -117,13 +117,135 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="optionPanelHeaderLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="optionPanelHeaderLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Add, remove and change actions</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="actionCollectionUI1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="actionCollectionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 29</value>
+  </data>
+  <data name="actionCollectionUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="actionCollectionUI1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>322, 119</value>
+  </data>
+  <data name="actionCollectionUI1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 0, 0</value>
+  </data>
+  <data name="actionCollectionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 337</value>
+  </data>
+  <data name="actionCollectionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;actionCollectionUI1.Name" xml:space="preserve">
+    <value>actionCollectionUI1</value>
+  </data>
+  <data name="&gt;&gt;actionCollectionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.ActionCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;actionCollectionUI1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;actionCollectionUI1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 366</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="optionPanelHeaderLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="actionCollectionUI1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
   <data name="$this.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACRSURBVFhH7ZNLCsAgDAU9mkfxKN7cIiSQxUBba5pCM5DN8/OGUkuSTGqtI2KkPgVS4GMCErmB
-        XRg6gV0YOoFdGAJzvbU2eu/LotiFIWD3rYrYOyRaE9C5K2LPSvRMQOeqiD0j0R4BnTMJu1eiPQJhXyDs
-        Hwh7BavFCnZh6AR2YegEdmHoBHbZ8M2R+hRIfk0pBxSq4704M1hdAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAJFJREFUWEft
+        k0sKwCAMBT2aR/Eo3twiJJDFQFtrmkIzkM3z84ZSS5JMaq0jYqQ+BVLgYwISuYFdGDqBXRg6gV0YAnO9
+        tTZ678ui2IUhYPetitg7JFoT0LkrYs9K9ExA56qIPSPRHgGdMwm7V6I9AmFfIOwfCHsFq8UKdmHoBHZh
+        6AR2YegEdtnwzZH6FEh+TSkHFKrjvTgzWF0AAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 366</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Task Actions</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ActionsOptionPanel</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
 </root>

@@ -37,50 +37,27 @@
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.optionPanelHeaderLabel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.triggerCollectionUI1, 0, 1);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 412);
-			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// optionPanelHeaderLabel1
 			// 
-			this.optionPanelHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.optionPanelHeaderLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.optionPanelHeaderLabel1.Location = new System.Drawing.Point(0, 0);
-			this.optionPanelHeaderLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 6);
+			resources.ApplyResources(this.optionPanelHeaderLabel1, "optionPanelHeaderLabel1");
 			this.optionPanelHeaderLabel1.Name = "optionPanelHeaderLabel1";
-			this.optionPanelHeaderLabel1.Size = new System.Drawing.Size(330, 23);
-			this.optionPanelHeaderLabel1.TabIndex = 0;
-			this.optionPanelHeaderLabel1.Text = "Add, remove and change triggers";
 			// 
 			// triggerCollectionUI1
 			// 
-			this.triggerCollectionUI1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.triggerCollectionUI1.Location = new System.Drawing.Point(0, 29);
-			this.triggerCollectionUI1.Margin = new System.Windows.Forms.Padding(0);
+			resources.ApplyResources(this.triggerCollectionUI1, "triggerCollectionUI1");
 			this.triggerCollectionUI1.Name = "triggerCollectionUI1";
-			this.triggerCollectionUI1.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-			this.triggerCollectionUI1.Size = new System.Drawing.Size(330, 383);
-			this.triggerCollectionUI1.TabIndex = 1;
 			this.triggerCollectionUI1.UseModernUI = true;
 			// 
 			// TriggersOptionPanel
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			resources.ApplyResources(this, "$this");
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
 			this.Name = "TriggersOptionPanel";
-			this.Size = new System.Drawing.Size(330, 412);
-			this.Title = "Trigger Options";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();

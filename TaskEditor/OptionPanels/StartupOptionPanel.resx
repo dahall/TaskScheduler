@@ -117,25 +117,675 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="taskIdleDurationCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 115</value>
+  </data>
+  <data name="taskIdleDurationCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 3</value>
+  </data>
+  <data name="taskIdleDurationCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 23</value>
+  </data>
+  <data name="taskIdleDurationCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
+    <value>taskIdleDurationCombo</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="availableConnectionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="availableConnectionsCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 442</value>
+  </data>
+  <data name="availableConnectionsCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>25, 3, 3, 3</value>
+  </data>
+  <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 23</value>
+  </data>
+  <data name="availableConnectionsCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Name" xml:space="preserve">
+    <value>availableConnectionsCombo</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskIdleDurationCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="taskIdleDurationCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleDurationCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskIdleDurationCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 101</value>
+  </data>
+  <data name="taskIdleDurationCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
+  <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 49</value>
+  </data>
+  <data name="taskIdleDurationCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Start the task only if the &amp;computer is idle for:</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCheck.Name" xml:space="preserve">
+    <value>taskIdleDurationCheck</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCheck.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskWakeToRunCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskWakeToRunCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskWakeToRunCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskWakeToRunCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 348</value>
+  </data>
+  <data name="taskWakeToRunCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
+  <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 19</value>
+  </data>
+  <data name="taskWakeToRunCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>&amp;Wake the computer to run this task</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
+    <value>taskWakeToRunCheck</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 405</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 3, 0</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 34</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Start onl&amp;y if the following network connection is available:</value>
+  </data>
+  <data name="&gt;&gt;taskStartIfConnectionCheck.Name" xml:space="preserve">
+    <value>taskStartIfConnectionCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStartIfConnectionCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskStartIfConnectionCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskStartIfConnectionCheck.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 308</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>18, 0, 0, 0</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 34</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Stop if the computer switches to &amp;battery power</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Name" xml:space="preserve">
+    <value>taskStopIfGoingOnBatteriesCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 208</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>36, 0, 0, 0</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 19</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Restart if the idle state res&amp;umes</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Name" xml:space="preserve">
+    <value>taskRestartOnIdleCheck</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 29</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 0, 0</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 34</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>&amp;Disallow start if in a Remote Applications Integrated Locally (RAIL) session</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Name" xml:space="preserve">
+    <value>taskDisallowStartOnRemoteAppSessionCheck</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartOnRemoteAppSessionCheck.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 268</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="taskDisallowStartIfOnBatteriesCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 34</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Start the task only if the computer is on AC &amp;power</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Name" xml:space="preserve">
+    <value>taskDisallowStartIfOnBatteriesCheck</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 69</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel2.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel2</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel2.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel2.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 183</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>18, 0, 0, 0</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 19</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Stop if the comput&amp;er ceases to be idle</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
+    <value>taskStopOnIdleEndCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.WrappingCheckBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 236</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="optionPanelHeaderLabel3.Text" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel3.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel3</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel3.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel3.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 376</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Text" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel4.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel4</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel4.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel4.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 156</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 3</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 23</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Name" xml:space="preserve">
+    <value>taskIdleWaitTimeoutCombo</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 205</value>
+  </data>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,52.87356,Percent,47.12644" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 159</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 3, 0</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 0, 0, 0</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 15</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>W&amp;ait for idle for:</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Name" xml:space="preserve">
+    <value>taskIdleWaitTimeoutLabel</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 466</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskIdleDurationCombo" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="availableConnectionsCombo" Row="13" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskIdleDurationCheck" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskWakeToRunCheck" Row="10" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskStartIfConnectionCheck" Row="12" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskStopIfGoingOnBatteriesCheck" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskRestartOnIdleCheck" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskDisallowStartOnRemoteAppSessionCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskDisallowStartIfOnBatteriesCheck" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="optionPanelHeaderLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="optionPanelHeaderLabel2" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskStopOnIdleEndCheck" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="optionPanelHeaderLabel3" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="optionPanelHeaderLabel4" Row="11" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskIdleWaitTimeoutCombo" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskIdleWaitTimeoutLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,129" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
   <data name="$this.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAKQSURBVFhHvZetVxtREMUjIhEIBBKBRCAQCEQEAhmBqEAgEAhERUUFAodEIBCR/AEIBKKif0AF
-        srIiAoFAIBAV7e9m553Mzr7NfgS459yTZO598+bt+9oM+mI0Gq3DB/gbnlr480Cnt/Cf46ZJnwM6/BkK
-        GJn0caCPNbhq37MF8LEFh/r+biDhNryDf2HqqK4AxZ/hBZwV2xskWIHXsK6jprgKOVS8M2ioVf5oiTy7
-        FJB4Ka01aKDOtb1iIrFPAeKV9EZg1GPPjVyP8xjOFhifdQWo+BuLRZ7LsxCY4pyLP+CaWWbgd7aABH7u
-        QxXtPVrEu2apAlGr3TcQ1XllWxFbWIBASFvy1fTER5OrQNRW82aNoDTyBOKNBQiENW3eJ45NnoOgDhk9
-        Im88NrkCtFYFCEjRe2fSHARPgmkKa080tC4FHDif+AZXTC5AIF4u1yZlgd6lgCF8MV/ivskFCPwKhoUn
-        GHrrAgTke+cVz0wqQOBPMGyblAX6N+d9guVHGoB+5fzihUkFCMQCNkyqBZ4v8HtLry4nn7+xgD2T3gXk
-        m4T8lQJ04HhDeY6WBPniGjsyqQCBOEfVvdoT5MqdMeU1RkBntzdor66bvBTI89XlFacmzUFQezVeHjcm
-        9wY5VqF2ic+bv5oR4koVywdGR9A+HnCaivwbNIKqjU9Bv7fM0gm00xb1ucSJyXlgOAwNRF2ptRdTBF4N
-        JI5c1P3S/KKK6dI18tTxq4sle0kR12rXgotzLmoQO2ZtBua4LT11sehsl0frRoeM9nncaonqvPvBRqNz
-        WJe0LfXY2488gsa7MPeS2kQVriez3J+TBBKNoV7ZdEDlOkzUiDU1H/NnlcR6bdepeQY1/4lHcOEVXsVg
-        8B8jK6d3bQyjKgAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAApBJREFUWEe9
+        l61XG1EQxSMiEQgEEoFEIBAIRAQCGYGoQCAQCERFRQUCh0QgEJH8AQgEoqJ/QAWysiICgUAgEBXt72bn
+        nczOvs1+BLjn3JNk7n3z5u372gz6YjQarcMH+BueWvjzQKe38J/jpkmfAzr8GQoYmfRxoI81uGrfswXw
+        sQWH+v5uIOE2vIN/YeqorgDFn+EFnBXbGyRYgdewrqOmuAo5VLwzaKhV/miJPLsUkHgprTVooM61vWIi
+        sU8B4pX0RmDUY8+NXI/zGM4WGJ91Baj4G4tFnsuzEJjinIs/4JpZZuB3toAEfu5DFe09WsS7ZqkCUavd
+        NxDVeWVbEVtYgEBIW/LV9MRHk6tA1FbzZo2gNPIE4o0FCIQ1bd4njk2eg6AOGT0ibzw2uQK0VgUISNF7
+        Z9IcBE+CaQprTzS0LgUcOJ/4BldMLkAgXi7XJmWB3qWAIXwxX+K+yQUI/AqGhScYeusCBOR75xXPTCpA
+        4E8wbJuUBfo3532C5UcagH7l/OKFSQUIxAI2TKoFni/we0uvLiefv7GAPZPeBeSbhPyVAnTgeEN5jpYE
+        +eIaOzKpAIE4R9W92hPkyp0x5TVGQGe3N2ivrpu8FMjz1eUVpybNQVB7NV4eNyb3BjlWoXaJz5u/mhHi
+        ShXLB0ZH0D4ecJqK/Bs0gqqNT0G/t8zSCbTTFvW5xInJeWA4DA1EXam1F1MEXg0kjlzU/dL8oorp0jXy
+        1PGriyV7SRHXateCi3MuahA7Zm0G5rgtPXWx6GyXR+tGh4z2edxqieq8+8FGo3NYl7Qt9djbjzyCxrsw
+        95LaRBWuJ7Pcn5MEEo2hXtl0QOU6TNSINTUf82eVxHpt16l5BjX/iUdw4RVexWDwHyMrp3dtDKMqAAAA
+        AElFTkSuQmCC
 </value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 412</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Task Start Options</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Name" xml:space="preserve">
+    <value>helpProvider</value>
+  </data>
+  <data name="&gt;&gt;helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>StartupOptionPanel</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
 </root>

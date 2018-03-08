@@ -117,22 +117,140 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="optionPanelHeaderLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="optionPanelHeaderLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 6</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 23</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Add, remove and change triggers</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Name" xml:space="preserve">
+    <value>optionPanelHeaderLabel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanelHeaderLabel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;optionPanelHeaderLabel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="triggerCollectionUI1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="triggerCollectionUI1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 29</value>
+  </data>
+  <data name="triggerCollectionUI1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="triggerCollectionUI1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 0, 0</value>
+  </data>
+  <data name="triggerCollectionUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 383</value>
+  </data>
+  <data name="triggerCollectionUI1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;triggerCollectionUI1.Name" xml:space="preserve">
+    <value>triggerCollectionUI1</value>
+  </data>
+  <data name="&gt;&gt;triggerCollectionUI1.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.UIComponents.TriggerCollectionUI, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;triggerCollectionUI1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;triggerCollectionUI1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 412</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="optionPanelHeaderLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="triggerCollectionUI1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
   <data name="$this.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAJ/SURBVFhHxZetUgNBEIQjIpDICAQCgUDyACeQCAQSgUAiEIhIqiIiEAgkAoFEIhE8BAKJRCJ4
-        AOjvMhMmm8vd7kFBV3VVMj89e7ezPzfIRVVVQxFMxAfxWXw18hsbPjC0tJ9DYiNxKr6Jn5kklpyRyZRD
-        yTzxufghNhXJIblolL0RJayLj2Iq+C7eiafinngpnokAGz5i0jy01k2+HQrklb9YopN5PhHXLIy4C/PB
-        yszY10RiyYkaaLZPiQJ48rQ4Tzkv7JDtNsQcm3kOckRyoxbazW9CDuY8vnbm78DcS5CvdQAONMTYR9RY
-        7gkZaRYPgiuLA/mzBgDQCrHw3FwzyMC8x1FemmslFJM9AIBmiKfWdz/oD2vWnTTP0pynUEzpAOiJ2JhT
-        dzD3cZM5qR0dUFzRAADaIYeaQ4zAjazhzqcHirsOeYdmbgXaYtwnKozs3264s9hOKJa+uRevxOydjhqi
-        15tg4BBxw6nFdUKxxyKHEGt7bOZOUEP0eg8YEHHDfEdrg8L2Q44TYX8rTw2s35QIPOcZsdiZm1ajFYq7
-        CTlONpjYF008FDfD/9e+A0i3WMiTHyW2SNb+trg0gD5TgEhcuojvmm9HbMKG+YHn1VPQtwmZb7bvsbhl
-        5k5QQ/R6dRP2WoZ9QY1Qr16GwA3ZG1EfoG01vF69EfXaivsA7VBnthWbo/gwKgWapu11ZocR0J/i47gU
-        aAb9xeMYyFB0ISkBWon24oUEyFh0JcsFGqblus1XMiBH9qW0C+RYbtRafSl1KIB+SAdB8yxcy1eBGIuN
-        DQfRzPtSUmDOhwlgS4bgdz5MHEqgJ/7n0yxCyUzJ33+cppCYXyZ+8fN8MPgCtBnIFSji2EwAAAAASUVO
-        RK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAn9JREFUWEfF
+        l61SA0EQhCMikMgIBAKBQPIAJ5AIBBKBQCIQiEiqIiIQCCQCgUQiETwEAolEIngA6O8yEyaby93uQUFX
+        dVUyPz17t7M/N8hFVVVDEUzEB/FZfDXyGxs+MLS0n0NiI3EqvomfmSSWnJHJlEPJPPG5+CE2FckhuWiU
+        vRElrIuPYir4Lt6Jp+KeeCmeiQAbPmLSPLTWTb4dCuSVv1iik3k+EdcsjLgL88HKzNjXRGLJiRpotk+J
+        AnjytDhPOS/skO02xBybeQ5yRHKjFtrNb0IO5jy+dubvwNxLkK91AA40xNhH1FjuCRlpFg+CK4sD+bMG
+        ANAKsfDcXDPIwLzHUV6aayUUkz0AgGaIp9Z3P+gPa9adNM/SnKdQTOkA6InYmFN3MPdxkzmpHR1QXNEA
+        ANohh5pDjMCNrOHOpweKuw55h2ZuBdpi3CcqjOzfbriz2E4olr65F6/E7J2OGqLXm2DgEHHDqcV1QrHH
+        IocQa3ts5k5QQ/R6DxgQccN8R2uDwvZDjhNhfytPDazflAg85xmx2JmbVqMVirsJOU42mNgXTTwUN8P/
+        174DSLdYyJMfJbZI1v62uDSAPlOASFy6iO+ab0dswob5gefVU9C3CZlvtu+xuGXmTlBD9Hp1E/Zahn1B
+        jVCvXobADdkbUR+gbTW8Xr0R9dqK+wDtUGe2FZuj+DAqBZqm7XVmhxHQn+LjuBRoBv3F4xjIUHQhKQFa
+        ifbihQTIWHQlywUapuW6zVcyIEf2pbQL5Fhu1Fp9KXUogH5IB0HzLFzLV4EYi40NB9HM+1JSYM6HCWBL
+        huB3PkwcSqAn/ufTLELJTMnff5ymkJhfJn7x83ww+AK0GcgVKOLYTAAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 412</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Trigger Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TriggersOptionPanel</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Microsoft.Win32.TaskScheduler.OptionPanels.OptionPanel, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
   </data>
 </root>
