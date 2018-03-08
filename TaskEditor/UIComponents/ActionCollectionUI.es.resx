@@ -123,17 +123,11 @@
   <data name="actionDeleteButton.Text" xml:space="preserve">
     <value>Eliminar</value>
   </data>
-  <data name="actionDownButton.Text" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="actionEditButton.Text" xml:space="preserve">
     <value>&amp;Editar</value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
     <value>&amp;Nueva</value>
-  </data>
-  <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
     <value>Eliminar acción</value>

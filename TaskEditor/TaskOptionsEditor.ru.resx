@@ -124,7 +124,7 @@
     <value>ОК</value>
   </data>
   <data name="generalItem.Text" xml:space="preserve">
-    <value>Общая информация</value>
+    <value>Общие</value>
   </data>
   <data name="triggersItem.Text" xml:space="preserve">
     <value>Триггеры</value>

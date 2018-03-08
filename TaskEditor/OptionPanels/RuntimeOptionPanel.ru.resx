@@ -117,37 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Действие</value>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Если задача уже выполняется, то применять следующее правило:</value>
   </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Подробности</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Приоритет</value>
   </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Новое действие...</value>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Если повтор задачи не запланирован, удалять через: </value>
   </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Удалить действие</value>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Количество попыток перезапуска:</value>
   </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Изменить действие...</value>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Принудительная остановка задачи, если не прекращается по запросу</value>
   </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вверх</value>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Остагавливать задачу, выполняемую дольше: </value>
   </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вниз</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Настройки</value>
   </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Создать...</value>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>При сбое выполнения перезапускать через:</value>
   </data>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Удалить</value>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>Разрешить выполнение задачи по требованию</value>
   </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Изменить...</value>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Немедленно запускать задачу, если пропущен плановый запуск</value>
   </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Разрешить преобразование PowerShell для неподдерживаемых действий</value>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>раз</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Параметры выполнения</value>
   </data>
 </root>

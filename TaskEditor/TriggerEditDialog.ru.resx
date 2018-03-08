@@ -120,9 +120,6 @@
   <data name="triggerTypeLabel.Text" xml:space="preserve">
     <value>Начало задачи:</value>
   </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>groupBox6!</value>
-  </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
     <value>Подключение с локального компьютера</value>
   </data>
@@ -142,7 +139,7 @@
     <value>Дополнительные параметры не требуется.</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Чтобы изменить параметры состояния простоя, используйте вкладку "Условия" на листе создания задачи или свойств задачи.</value>
+    <value>Для правки параметров состояния простоя, используйте вкладку "Условия" в окне свойств задачи.</value>
   </data>
   <data name="propNameCol.Text" xml:space="preserve">
     <value>Свойство</value>

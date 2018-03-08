@@ -136,7 +136,7 @@
     <value>Настроить для:</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Скрытая задача</value>
+    <value>Скрытая</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
     <value>Выполнить с наивысшими правами</value>
@@ -196,7 +196,7 @@
     <value>Перезапускать при возобновлении простоя</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Останавливать пр выходе компьютера из простоя</value>
+    <value>Останавливать при выходе компьютера из простоя</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
     <value>Ожидать простоя в течение: </value>
@@ -214,7 +214,7 @@
     <value>Условия</value>
   </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>Если задача уже ru &amp; nning, то применяется следующее правило:!</value>
+    <value>Если задача уже выполняется, то применять следующее правило:</value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
     <value>раз</value>

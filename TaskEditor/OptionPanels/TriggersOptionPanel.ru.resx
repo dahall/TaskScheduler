@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Действие</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Создание, удаление и редактирование триггеров</value>
   </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Подробности</value>
-  </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Новое действие...</value>
-  </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Удалить действие</value>
-  </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Изменить действие...</value>
-  </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вверх</value>
-  </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вниз</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Создать...</value>
-  </data>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Удалить</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Изменить...</value>
-  </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Разрешить преобразование PowerShell для неподдерживаемых действий</value>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Триггеры</value>
   </data>
 </root>

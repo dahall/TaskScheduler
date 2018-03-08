@@ -117,37 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Действие</value>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Запускать задачу при простое компьютера:</value>
   </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Подробности</value>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Пробуждать компьютер для выполнения задачи</value>
   </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Новое действие...</value>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Запускать только при подключении к следующей сети:</value>
   </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Удалить действие</value>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Останавливать при переходе на питание от батарей</value>
   </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Изменить действие...</value>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Перезапускать при возобновлении простоя</value>
   </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вверх</value>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>Запретить запуск при наличии подключения со стороны удаленного приложения</value>
   </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вниз</value>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Запускать только при питании от электосети</value>
   </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Создать...</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Настройки</value>
   </data>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Удалить</value>
+  <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
+    <value>Простой</value>
   </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Изменить...</value>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Останавливать при выходе компьютера из простоя</value>
   </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Разрешить преобразование PowerShell для неподдерживаемых действий</value>
+  <data name="optionPanelHeaderLabel3.Text" xml:space="preserve">
+    <value>Питание</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Text" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>Ожидать простоя в течение: </value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Параметры запуска</value>
   </data>
 </root>

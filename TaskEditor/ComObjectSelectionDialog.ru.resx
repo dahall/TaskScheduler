@@ -136,6 +136,6 @@
     <value>Поиск</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Выберите COM-объект!</value>
+    <value>Выберите COM-объект</value>
   </data>
 </root>

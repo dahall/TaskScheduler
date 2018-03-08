@@ -296,7 +296,7 @@
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
     <value>Название: {0}
-
+    
 Описание : {1}
 
 Триггер: {2}
