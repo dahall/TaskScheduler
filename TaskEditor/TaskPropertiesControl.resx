@@ -121,20 +121,503 @@
   <data name="generalTab.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskNameLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="taskNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="tableLayoutPanel8.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel8.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="taskHiddenCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskHiddenCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskHiddenCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="taskNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
+  <data name="taskHiddenCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="taskHiddenCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 4, 3, 2</value>
   </data>
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>140, 17</value>
   </metadata>
+  <data name="taskHiddenCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskHiddenCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 19</value>
+  </data>
+  <data name="taskHiddenCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Hidd&amp;en</value>
+  </data>
+  <data name="&gt;&gt;taskHiddenCheck.Name" xml:space="preserve">
+    <value>taskHiddenCheck</value>
+  </data>
+  <data name="&gt;&gt;taskHiddenCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel8</value>
+  </data>
+  <data name="&gt;&gt;taskHiddenCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskVersionLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="taskVersionLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskVersionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 10</value>
+  </data>
+  <data name="taskVersionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>30, 0, 3, 0</value>
+  </data>
+  <data name="taskVersionLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 15</value>
+  </data>
+  <data name="taskVersionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="taskVersionLabel.Text" xml:space="preserve">
+    <value>&amp;Configure for:</value>
+  </data>
+  <data name="taskVersionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;taskVersionLabel.Name" xml:space="preserve">
+    <value>taskVersionLabel</value>
+  </data>
+  <data name="&gt;&gt;taskVersionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskVersionLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel8</value>
+  </data>
+  <data name="&gt;&gt;taskVersionLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskVersionCombo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>188, 6</value>
+  </data>
+  <data name="taskVersionCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 24</value>
+  </data>
+  <data name="taskVersionCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;taskVersionCombo.Name" xml:space="preserve">
+    <value>taskVersionCombo</value>
+  </data>
+  <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
+  </data>
+  <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel8</value>
+  </data>
+  <data name="&gt;&gt;taskVersionCombo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 333</value>
+  </data>
+  <data name="tableLayoutPanel8.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel8.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 33</value>
+  </data>
+  <data name="tableLayoutPanel8.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel8.Name" xml:space="preserve">
+    <value>tableLayoutPanel8</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel8.Parent" xml:space="preserve">
+    <value>generalTab</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel8.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskHiddenCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskVersionLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskVersionCombo" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="taskSecurityGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskSecurityGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel7.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel7.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskUserAcctLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskUserAcctLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 0</value>
+  </data>
+  <data name="taskUserAcctLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 3, 0</value>
+  </data>
+  <data name="taskUserAcctLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 15</value>
+  </data>
+  <data name="taskUserAcctLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>When running the task, use the following user account:</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
+    <value>taskUserAcctLabel</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskRunLevelCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRunLevelCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRunLevelCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 124</value>
+  </data>
+  <data name="taskRunLevelCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 19</value>
+  </data>
+  <data name="taskRunLevelCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Run w&amp;ith highest privileges</value>
+  </data>
+  <data name="&gt;&gt;taskRunLevelCheck.Name" xml:space="preserve">
+    <value>taskRunLevelCheck</value>
+  </data>
+  <data name="&gt;&gt;taskRunLevelCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskRunLevelCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskPrincipalText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="taskPrincipalText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="taskPrincipalText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskPrincipalText.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>365, 23</value>
+  </data>
+  <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Name" xml:space="preserve">
+    <value>taskPrincipalText</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskLocalOnlyCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLocalOnlyCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 99</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>22, 3, 3, 3</value>
+  </data>
+  <data name="taskLocalOnlyCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 19</value>
+  </data>
+  <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Do not store &amp;password. The task will only have access to local computer resources.</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
+    <value>taskLocalOnlyCheck</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskLocalOnlyCheck.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="changePrincipalButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="changePrincipalButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="changePrincipalButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="changePrincipalButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 18</value>
+  </data>
+  <data name="changePrincipalButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 25</value>
+  </data>
+  <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Change &amp;User or Group...</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
+    <value>changePrincipalButton</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 74</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 19</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Run &amp;whether user is logged on or not</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
+    <value>taskLoggedOptionalRadio</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOptionalRadio.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="taskLoggedOnRadio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLoggedOnRadio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="taskLoggedOnRadio.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 19</value>
+  </data>
+  <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>&amp;Run only when user is logged on</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
+    <value>taskLoggedOnRadio</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;taskLoggedOnRadio.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
+  </data>
+  <data name="tableLayoutPanel7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel7.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>523, 146</value>
+  </data>
+  <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel7.Name" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel7.Parent" xml:space="preserve">
+    <value>taskSecurityGroupBox</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel7.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel7.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskUserAcctLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskRunLevelCheck" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskPrincipalText" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskLocalOnlyCheck" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="changePrincipalButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskLoggedOptionalRadio" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskLoggedOnRadio" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="taskSecurityGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 165</value>
+  </data>
+  <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 168</value>
+  </data>
+  <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Security options</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
+    <value>taskSecurityGroupBox</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
+    <value>generalTab</value>
+  </data>
+  <data name="&gt;&gt;taskSecurityGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel9.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel9.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="taskNameLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskNameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 7</value>
+  </data>
+  <data name="taskNameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
   <data name="taskNameLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -154,10 +637,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
+    <value>tableLayoutPanel9</value>
   </data>
   <data name="&gt;&gt;taskNameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -166,7 +652,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 36</value>
+    <value>0, 30</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,79 +676,109 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>generalTab</value>
+    <value>tableLayoutPanel9</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="taskAuthorLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="taskDescText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 68</value>
+  </data>
+  <data name="taskDescText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskAuthorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskAuthorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 58</value>
-  </data>
-  <data name="taskAuthorLabel.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="taskDescText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskAuthorLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 15</value>
+  <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 85</value>
   </data>
-  <data name="taskAuthorLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;taskDescText.Name" xml:space="preserve">
+    <value>taskDescText</value>
+  </data>
+  <data name="&gt;&gt;taskDescText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskDescText.Parent" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
+  </data>
+  <data name="&gt;&gt;taskDescText.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Author:</value>
+  <data name="taskAuthorText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="&gt;&gt;taskAuthorLabel.Name" xml:space="preserve">
-    <value>taskAuthorLabel</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="taskDescLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDescLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="taskAuthorText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="taskDescLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 84</value>
+  <data name="taskAuthorText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 50</value>
   </data>
-  <data name="taskDescLabel.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="taskAuthorText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="taskAuthorText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskDescLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 15</value>
+  <data name="taskAuthorText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 15</value>
   </data>
-  <data name="taskDescLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>&amp;Description:</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Name" xml:space="preserve">
-    <value>taskDescLabel</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskDescLabel.ZOrder" xml:space="preserve">
+  <data name="taskAuthorText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="taskNameText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;taskAuthorText.Name" xml:space="preserve">
+    <value>taskAuthorText</value>
+  </data>
+  <data name="&gt;&gt;taskAuthorText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskAuthorText.Parent" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
+  </data>
+  <data name="&gt;&gt;taskAuthorText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskLocationText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="taskLocationText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskLocationText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 32</value>
+  </data>
+  <data name="taskLocationText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="taskLocationText.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskLocationText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 15</value>
+  </data>
+  <data name="taskLocationText.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;taskLocationText.Name" xml:space="preserve">
+    <value>taskLocationText</value>
+  </data>
+  <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskLocationText.Parent" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
+  </data>
+  <data name="&gt;&gt;taskLocationText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskNameText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -304,13 +823,13 @@
     <value>-18</value>
   </data>
   <data name="taskNameText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 7</value>
+    <value>76, 3</value>
   </data>
   <data name="taskNameText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 23</value>
+    <value>450, 23</value>
   </data>
   <data name="taskNameText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -325,457 +844,118 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskNameText.Parent" xml:space="preserve">
-    <value>generalTab</value>
+    <value>tableLayoutPanel9</value>
   </data>
   <data name="&gt;&gt;taskNameText.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="taskDescLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDescLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskDescLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 69</value>
+  </data>
+  <data name="taskDescLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 4, 3, 0</value>
+  </data>
+  <data name="taskDescLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDescLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 15</value>
+  </data>
+  <data name="taskDescLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="taskLocationText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>&amp;Description:</value>
   </data>
-  <data name="taskLocationText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;taskDescLabel.Name" xml:space="preserve">
+    <value>taskDescLabel</value>
   </data>
-  <data name="taskLocationText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 36</value>
-  </data>
-  <data name="taskLocationText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="taskLocationText.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLocationText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 15</value>
-  </data>
-  <data name="taskLocationText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.Name" xml:space="preserve">
-    <value>taskLocationText</value>
-  </data>
-  <data name="&gt;&gt;taskLocationText.Type" xml:space="preserve">
+  <data name="&gt;&gt;taskDescLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;taskLocationText.Parent" xml:space="preserve">
-    <value>generalTab</value>
+  <data name="&gt;&gt;taskDescLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
   </data>
-  <data name="&gt;&gt;taskLocationText.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="taskAuthorText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="taskAuthorText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskAuthorText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 58</value>
-  </data>
-  <data name="taskAuthorText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="taskAuthorText.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskAuthorText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 15</value>
-  </data>
-  <data name="taskAuthorText.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Name" xml:space="preserve">
-    <value>taskAuthorText</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskAuthorText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;taskDescLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="taskDescText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="taskAuthorLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 81</value>
-  </data>
-  <data name="taskDescText.Multiline" type="System.Boolean, mscorlib">
+  <data name="taskAuthorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskDescText.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 78</value>
-  </data>
-  <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Name" xml:space="preserve">
-    <value>taskDescText</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskDescText.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 341</value>
-  </data>
-  <data name="taskVersionCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 24</value>
-  </data>
-  <data name="taskVersionCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Name" xml:space="preserve">
-    <value>taskVersionCombo</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DisabledItemComboBox, Microsoft.Win32.TaskSchedulerEditor, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7be0d908c369d1a5</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskVersionCombo.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="taskVersionLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskVersionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="taskAuthorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 344</value>
+  <data name="taskAuthorLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 48</value>
   </data>
-  <data name="taskVersionLabel.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="taskAuthorLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="taskAuthorLabel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 15</value>
+  <data name="taskAuthorLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 15</value>
   </data>
-  <data name="taskVersionLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="taskVersionLabel.Text" xml:space="preserve">
-    <value>&amp;Configure for:</value>
-  </data>
-  <data name="taskVersionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Name" xml:space="preserve">
-    <value>taskVersionLabel</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskVersionLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="taskHiddenCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskHiddenCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskHiddenCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 343</value>
-  </data>
-  <data name="taskHiddenCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskHiddenCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 19</value>
-  </data>
-  <data name="taskHiddenCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Hidd&amp;en</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Name" xml:space="preserve">
-    <value>taskHiddenCheck</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskHiddenCheck.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="taskSecurityGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="taskRunLevelCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRunLevelCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRunLevelCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 141</value>
-  </data>
-  <data name="taskRunLevelCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 19</value>
-  </data>
-  <data name="taskRunLevelCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Run w&amp;ith highest privileges</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Name" xml:space="preserve">
-    <value>taskRunLevelCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskRunLevelCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="taskLocalOnlyCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLocalOnlyCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 116</value>
-  </data>
-  <data name="taskLocalOnlyCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 19</value>
-  </data>
-  <data name="taskLocalOnlyCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Do not store &amp;password. The task will only have access to local computer resources.</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Name" xml:space="preserve">
-    <value>taskLocalOnlyCheck</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLocalOnlyCheck.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 91</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 19</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Run &amp;whether user is logged on or not</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Name" xml:space="preserve">
-    <value>taskLoggedOptionalRadio</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOptionalRadio.ZOrder" xml:space="preserve">
+  <data name="taskAuthorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="taskLoggedOnRadio.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Author:</value>
   </data>
-  <data name="taskLoggedOnRadio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;taskAuthorLabel.Name" xml:space="preserve">
+    <value>taskAuthorLabel</value>
   </data>
-  <data name="taskLoggedOnRadio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 66</value>
-  </data>
-  <data name="taskLoggedOnRadio.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 19</value>
-  </data>
-  <data name="taskLoggedOnRadio.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>&amp;Run only when user is logged on</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Name" xml:space="preserve">
-    <value>taskLoggedOnRadio</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskLoggedOnRadio.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="taskPrincipalText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="taskPrincipalText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 37</value>
-  </data>
-  <data name="taskPrincipalText.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 23</value>
-  </data>
-  <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Name" xml:space="preserve">
-    <value>taskPrincipalText</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskPrincipalText.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="changePrincipalButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="changePrincipalButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 36</value>
-  </data>
-  <data name="changePrincipalButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 25</value>
-  </data>
-  <data name="changePrincipalButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Change &amp;User or Group...</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Name" xml:space="preserve">
-    <value>changePrincipalButton</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;changePrincipalButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="taskUserAcctLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskUserAcctLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskUserAcctLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="taskUserAcctLabel.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 15</value>
-  </data>
-  <data name="taskUserAcctLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>When running the task, use the following user account:</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Name" xml:space="preserve">
-    <value>taskUserAcctLabel</value>
-  </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;taskAuthorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;taskUserAcctLabel.Parent" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
+  <data name="&gt;&gt;taskAuthorLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
   </data>
-  <data name="&gt;&gt;taskUserAcctLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;taskAuthorLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 165</value>
+  <data name="tableLayoutPanel9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tableLayoutPanel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
-  <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 170</value>
+  <data name="tableLayoutPanel9.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 3</value>
   </data>
-  <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="tableLayoutPanel9.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
-    <value>Security options</value>
+  <data name="tableLayoutPanel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 159</value>
   </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Name" xml:space="preserve">
-    <value>taskSecurityGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.Parent" xml:space="preserve">
-    <value>generalTab</value>
-  </data>
-  <data name="&gt;&gt;taskSecurityGroupBox.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel9.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel9.Name" xml:space="preserve">
+    <value>tableLayoutPanel9</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel9.Parent" xml:space="preserve">
+    <value>generalTab</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel9.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel9.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskNameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskDescText" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskAuthorText" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskLocationText" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskNameText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskDescLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskAuthorLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="generalTab.HelpKeyword" xml:space="preserve">
     <value>/html/a922c2b5-6a43-4503-ab7f-4f3d77b3cc8a.htm</value>
@@ -787,7 +967,7 @@
     <value>4, 24</value>
   </data>
   <data name="generalTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>6, 6, 6, 6</value>
   </data>
   <data name="generalTab.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1038,32 +1218,20 @@
   <data name="conditionsTab.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="availableConnectionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="availableConnectionsCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 47</value>
-  </data>
-  <data name="availableConnectionsCombo.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="networkConditionGroupBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 23</value>
+  <data name="networkConditionGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="availableConnectionsCombo.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel6.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Name" xml:space="preserve">
-    <value>availableConnectionsCombo</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;availableConnectionsCombo.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="taskStartIfConnectionCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1072,7 +1240,10 @@
     <value>NoControl</value>
   </data>
   <data name="taskStartIfConnectionCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+    <value>3, 4</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
   </data>
   <data name="taskStartIfConnectionCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1093,22 +1264,85 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.Parent" xml:space="preserve">
-    <value>networkConditionGroupBox</value>
+    <value>tableLayoutPanel6</value>
   </data>
   <data name="&gt;&gt;taskStartIfConnectionCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="availableConnectionsCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="availableConnectionsCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 28</value>
+  </data>
+  <data name="availableConnectionsCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>23, 3, 3, 3</value>
+  </data>
+  <data name="availableConnectionsCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="availableConnectionsCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>498, 23</value>
+  </data>
+  <data name="availableConnectionsCombo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Name" xml:space="preserve">
+    <value>availableConnectionsCombo</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel6</value>
+  </data>
+  <data name="&gt;&gt;availableConnectionsCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="tableLayoutPanel6.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>523, 52</value>
+  </data>
+  <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel6.Name" xml:space="preserve">
+    <value>tableLayoutPanel6</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel6.Parent" xml:space="preserve">
+    <value>networkConditionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskStartIfConnectionCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="availableConnectionsCombo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="networkConditionGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="networkConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 274</value>
+    <value>6, 269</value>
+  </data>
+  <data name="networkConditionGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 3</value>
   </data>
   <data name="networkConditionGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 80</value>
+    <value>529, 73</value>
   </data>
   <data name="networkConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1128,70 +1362,19 @@
   <data name="&gt;&gt;networkConditionGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
+  <data name="powerConditionGroupBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="powerConditionGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 47</value>
-  </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 19</value>
+  <data name="tableLayoutPanel5.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Stop if the computer switches to &amp;battery power</value>
-  </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Name" xml:space="preserve">
-    <value>taskStopIfGoingOnBatteriesCheck</value>
-  </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="taskWakeToRunCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskWakeToRunCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskWakeToRunCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
-  </data>
-  <data name="taskWakeToRunCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 19</value>
-  </data>
-  <data name="taskWakeToRunCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>&amp;Wake the computer to run this task</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
-    <value>taskWakeToRunCheck</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskWakeToRunCheck.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel5.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
@@ -1201,7 +1384,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+    <value>6, 3</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1222,22 +1405,127 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.Parent" xml:space="preserve">
-    <value>powerConditionGroupBox</value>
+    <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;taskDisallowStartIfOnBatteriesCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskWakeToRunCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskWakeToRunCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskWakeToRunCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 53</value>
+  </data>
+  <data name="taskWakeToRunCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 19</value>
+  </data>
+  <data name="taskWakeToRunCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>&amp;Wake the computer to run this task</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Name" xml:space="preserve">
+    <value>taskWakeToRunCheck</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;taskWakeToRunCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 28</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>23, 3, 3, 3</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 19</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Stop if the computer switches to &amp;battery power</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Name" xml:space="preserve">
+    <value>taskStopIfGoingOnBatteriesCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;taskStopIfGoingOnBatteriesCheck.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="tableLayoutPanel5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>523, 75</value>
+  </data>
+  <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+    <value>powerConditionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskDisallowStartIfOnBatteriesCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskWakeToRunCheck" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskStopIfGoingOnBatteriesCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="powerConditionGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="powerConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 176</value>
+    <value>6, 173</value>
+  </data>
+  <data name="powerConditionGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 3</value>
   </data>
   <data name="powerConditionGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="powerConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 98</value>
+    <value>529, 96</value>
   </data>
   <data name="powerConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1257,152 +1545,23 @@
   <data name="&gt;&gt;powerConditionGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 51</value>
-  </data>
-  <data name="taskIdleWaitTimeoutCombo.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="idleConditionGroupBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskIdleWaitTimeoutCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
+  <data name="idleConditionGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="taskIdleWaitTimeoutCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Name" xml:space="preserve">
-    <value>taskIdleWaitTimeoutCombo</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 21</value>
-  </data>
-  <data name="taskIdleDurationCombo.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskIdleDurationCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
+  <data name="tableLayoutPanel4.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="taskIdleDurationCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
-    <value>taskIdleDurationCombo</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleDurationCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 104</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Restart if the idle state res&amp;umes</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Name" xml:space="preserve">
-    <value>taskRestartOnIdleCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskRestartOnIdleCheck.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="taskStopOnIdleEndCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 79</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 19</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Stop if the comput&amp;er ceases to be idle</value>
-  </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
-    <value>taskStopOnIdleEndCheck</value>
-  </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskStopOnIdleEndCheck.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 54</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 15</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>W&amp;ait for idle for:</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Name" xml:space="preserve">
-    <value>taskIdleWaitTimeoutLabel</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="taskIdleDurationCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="taskIdleDurationCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1411,7 +1570,10 @@
     <value>NoControl</value>
   </data>
   <data name="taskIdleDurationCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+    <value>6, 6</value>
+  </data>
+  <data name="taskIdleDurationCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
   </data>
   <data name="taskIdleDurationCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1432,10 +1594,208 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCheck.Parent" xml:space="preserve">
-    <value>idleConditionGroupBox</value>
+    <value>tableLayoutPanel4</value>
   </data>
   <data name="&gt;&gt;taskIdleDurationCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 32</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Name" xml:space="preserve">
+    <value>taskIdleWaitTimeoutCombo</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 36</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 15</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>W&amp;ait for idle for:</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Name" xml:space="preserve">
+    <value>taskIdleWaitTimeoutLabel</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;taskIdleWaitTimeoutLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 3</value>
+  </data>
+  <data name="taskIdleDurationCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskIdleDurationCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskIdleDurationCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Name" xml:space="preserve">
+    <value>taskIdleDurationCombo</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;taskIdleDurationCombo.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 62</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>23, 4, 3, 2</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 19</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Stop if the comput&amp;er ceases to be idle</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Name" xml:space="preserve">
+    <value>taskStopOnIdleEndCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;taskStopOnIdleEndCheck.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 87</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>43, 4, 3, 2</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 19</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Restart if the idle state res&amp;umes</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Name" xml:space="preserve">
+    <value>taskRestartOnIdleCheck</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;taskRestartOnIdleCheck.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tableLayoutPanel4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>523, 108</value>
+  </data>
+  <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+    <value>idleConditionGroupBox</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskIdleDurationCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskIdleWaitTimeoutCombo" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskIdleWaitTimeoutLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskIdleDurationCombo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskStopOnIdleEndCheck" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskRestartOnIdleCheck" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="idleConditionGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1443,11 +1803,14 @@
   <data name="idleConditionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 46</value>
   </data>
+  <data name="idleConditionGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
+  </data>
   <data name="idleConditionGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="idleConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 130</value>
+    <value>529, 127</value>
   </data>
   <data name="idleConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1542,317 +1905,17 @@
   <data name="settingsTab.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskRestartCountText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 133</value>
-  </data>
-  <data name="taskRestartCountText.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="taskRestartCountText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 23</value>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="taskRestartCountText.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Name" xml:space="preserve">
-    <value>taskRestartCountText</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 288</value>
-  </data>
-  <data name="taskMultInstCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskMultInstCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 23</value>
-  </data>
-  <data name="taskMultInstCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Name" xml:space="preserve">
-    <value>taskMultInstCombo</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskMultInstCombo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="taskRunningRuleLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRunningRuleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRunningRuleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 264</value>
-  </data>
-  <data name="taskRunningRuleLabel.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRunningRuleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 15</value>
-  </data>
-  <data name="taskRunningRuleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>If the task is already ru&amp;nning, then the following rule applies:</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Name" xml:space="preserve">
-    <value>taskRunningRuleLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRunningRuleLabel.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="taskRestartAttemptTimesLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 138</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>times</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Name" xml:space="preserve">
-    <value>taskRestartAttemptTimesLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartAttemptTimesLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="taskRestartCountLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartCountLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRestartCountLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 138</value>
-  </data>
-  <data name="taskRestartCountLabel.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartCountLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 15</value>
-  </data>
-  <data name="taskRestartCountLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Attempt &amp;restart up to:</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Name" xml:space="preserve">
-    <value>taskRestartCountLabel</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartCountLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="taskDeleteAfterCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDeleteAfterCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskDeleteAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 228</value>
-  </data>
-  <data name="taskDeleteAfterCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 19</value>
-  </data>
-  <data name="taskDeleteAfterCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>If the task is not scheduled to run again, &amp;delete it after:</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Name" xml:space="preserve">
-    <value>taskDeleteAfterCheck</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCheck.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 198</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 19</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>If the running task does not end when requested, &amp;force it to stop</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Name" xml:space="preserve">
-    <value>taskAllowHardTerminateCheck</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskAllowHardTerminateCheck.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 168</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 19</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Stop the tas&amp;k if it runs longer than:</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
-    <value>taskExecutionTimeLimitCheck</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCheck.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="taskRestartIntervalCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartIntervalCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskRestartIntervalCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 108</value>
-  </data>
-  <data name="taskRestartIntervalCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 19</value>
-  </data>
-  <data name="taskRestartIntervalCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>If the &amp;task fails, restart every:</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Name" xml:space="preserve">
-    <value>taskRestartIntervalCheck</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCheck.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 78</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 19</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Run task as soon as possible after a &amp;scheduled start is missed</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Name" xml:space="preserve">
-    <value>taskStartWhenAvailableCheck</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskStartWhenAvailableCheck.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="taskAllowDemandStartCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="taskAllowDemandStartCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1861,7 +1924,10 @@
     <value>NoControl</value>
   </data>
   <data name="taskAllowDemandStartCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 48</value>
+    <value>7, 4</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
   </data>
   <data name="taskAllowDemandStartCheck.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1870,7 +1936,7 @@
     <value>195, 19</value>
   </data>
   <data name="taskAllowDemandStartCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
     <value>A&amp;llow task to be run on demand</value>
@@ -1882,10 +1948,541 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.Parent" xml:space="preserve">
-    <value>settingsTab</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;taskAllowDemandStartCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 29</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 19</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Run task as soon as possible after a &amp;scheduled start is missed</value>
+  </data>
+  <data name="&gt;&gt;taskStartWhenAvailableCheck.Name" xml:space="preserve">
+    <value>taskStartWhenAvailableCheck</value>
+  </data>
+  <data name="&gt;&gt;taskStartWhenAvailableCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskStartWhenAvailableCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskStartWhenAvailableCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 216</value>
+  </data>
+  <data name="taskMultInstCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskMultInstCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 23</value>
+  </data>
+  <data name="taskMultInstCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;taskMultInstCombo.Name" xml:space="preserve">
+    <value>taskMultInstCombo</value>
+  </data>
+  <data name="&gt;&gt;taskMultInstCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskMultInstCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskMultInstCombo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskRestartIntervalCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartIntervalCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 56</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskRestartIntervalCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 19</value>
+  </data>
+  <data name="taskRestartIntervalCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>If the &amp;task fails, restart every:</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCheck.Name" xml:space="preserve">
+    <value>taskRestartIntervalCheck</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCheck.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="taskRunningRuleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskRunningRuleLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRunningRuleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRunningRuleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 198</value>
+  </data>
+  <data name="taskRunningRuleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 7, 3, 0</value>
+  </data>
+  <data name="taskRunningRuleLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRunningRuleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 15</value>
+  </data>
+  <data name="taskRunningRuleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>If the task is already ru&amp;nning, then the following rule applies:</value>
+  </data>
+  <data name="&gt;&gt;taskRunningRuleLabel.Name" xml:space="preserve">
+    <value>taskRunningRuleLabel</value>
+  </data>
+  <data name="&gt;&gt;taskRunningRuleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRunningRuleLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskRunningRuleLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 111</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Name" xml:space="preserve">
+    <value>taskExecutionTimeLimitCombo</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCombo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="taskRestartCountLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskRestartCountLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartCountLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRestartCountLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 86</value>
+  </data>
+  <data name="taskRestartCountLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="taskRestartCountLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartCountLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 15</value>
+  </data>
+  <data name="taskRestartCountLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Attempt &amp;restart up to:</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountLabel.Name" xml:space="preserve">
+    <value>taskRestartCountLabel</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="taskRestartIntervalCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 53</value>
+  </data>
+  <data name="taskRestartIntervalCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartIntervalCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskRestartIntervalCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCombo.Name" xml:space="preserve">
+    <value>taskRestartIntervalCombo</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskRestartIntervalCombo.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 114</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 19</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Stop the tas&amp;k if it runs longer than:</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Name" xml:space="preserve">
+    <value>taskExecutionTimeLimitCheck</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskExecutionTimeLimitCheck.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 141</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>364, 19</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>If the running task does not end when requested, &amp;force it to stop</value>
+  </data>
+  <data name="&gt;&gt;taskAllowHardTerminateCheck.Name" xml:space="preserve">
+    <value>taskAllowHardTerminateCheck</value>
+  </data>
+  <data name="&gt;&gt;taskAllowHardTerminateCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskAllowHardTerminateCheck.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;taskAllowHardTerminateCheck.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskDeleteAfterCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDeleteAfterCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 2</value>
+  </data>
+  <data name="taskDeleteAfterCheck.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 19</value>
+  </data>
+  <data name="taskDeleteAfterCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>If the task is not scheduled to run again, &amp;delete it after:</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCheck.Name" xml:space="preserve">
+    <value>taskDeleteAfterCheck</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCheck.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCheck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 3</value>
+  </data>
+  <data name="taskDeleteAfterCombo.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskDeleteAfterCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="taskDeleteAfterCombo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCombo.Name" xml:space="preserve">
+    <value>taskDeleteAfterCombo</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;taskDeleteAfterCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 162</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>531, 29</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="taskRestartCountText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="taskRestartCountText.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartCountText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 23</value>
+  </data>
+  <data name="taskRestartCountText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountText.Name" xml:space="preserve">
+    <value>taskRestartCountText</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountText.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;taskRestartCountText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 7</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>times</value>
+  </data>
+  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Name" xml:space="preserve">
+    <value>taskRestartAttemptTimesLabel</value>
+  </data>
+  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskRestartAttemptTimesLabel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;taskRestartAttemptTimesLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 79</value>
+  </data>
+  <data name="flowLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 29</value>
+  </data>
+  <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
+  </data>
+  <data name="tableLayoutPanel3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 242</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>settingsTab</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="taskAllowDemandStartCheck" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskStartWhenAvailableCheck" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskMultInstCombo" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskRestartIntervalCheck" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskRunningRuleLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="taskExecutionTimeLimitCombo" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskRestartCountLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskRestartIntervalCombo" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="taskExecutionTimeLimitCheck" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="taskAllowHardTerminateCheck" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutPanel1" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutPanel2" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="settingsIntroLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1921,79 +2518,7 @@
     <value>settingsTab</value>
   </data>
   <data name="&gt;&gt;settingsIntroLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 222</value>
-  </data>
-  <data name="taskDeleteAfterCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskDeleteAfterCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="taskDeleteAfterCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Name" xml:space="preserve">
-    <value>taskDeleteAfterCombo</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskDeleteAfterCombo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 162</value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Name" xml:space="preserve">
-    <value>taskExecutionTimeLimitCombo</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskExecutionTimeLimitCombo.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="taskRestartIntervalCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 103</value>
-  </data>
-  <data name="taskRestartIntervalCombo.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="taskRestartIntervalCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 23</value>
-  </data>
-  <data name="taskRestartIntervalCombo.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Name" xml:space="preserve">
-    <value>taskRestartIntervalCombo</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TimeSpanPicker, TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.Parent" xml:space="preserve">
-    <value>settingsTab</value>
-  </data>
-  <data name="&gt;&gt;taskRestartIntervalCombo.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>1</value>
   </data>
   <data name="settingsTab.HelpKeyword" xml:space="preserve">
     <value>/html/d758ff5d-27d3-4090-b1c2-14ecaa83ff12.htm</value>
