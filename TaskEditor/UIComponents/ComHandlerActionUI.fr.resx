@@ -126,4 +126,19 @@
   <data name="comIntroLabel.Text" xml:space="preserve">
     <value>Cette action exécute un gestionnaire d'COM.</value>
   </data>
+  <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Recherche CLSID...</value>
+  </data>
+  <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Recherche le CLSID du Registre du système local.</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Entrer manuellement les CLSID...</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Entrez manuellement le CLSID</value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
 </root>

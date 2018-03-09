@@ -422,4 +422,7 @@
   <data name="propValCol.Text" xml:space="preserve">
     <value>Valore</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>ID:</value>
+  </data>
 </root>

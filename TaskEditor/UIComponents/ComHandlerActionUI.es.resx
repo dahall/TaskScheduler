@@ -126,4 +126,19 @@
   <data name="comIntroLabel.Text" xml:space="preserve">
     <value>Esta acción ejecuta un controlador de COM personalizado.</value>
   </data>
+  <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Búsqueda CLSID...</value>
+  </data>
+  <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Buscar el CLSID de registro del sistema local.</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Introducir manualmente el CLSID...</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Introducir manualmente el CLSID</value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
 </root>

@@ -241,4 +241,7 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Nuevo desencadenador</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>ID:</value>
+  </data>
 </root>

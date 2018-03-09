@@ -527,4 +527,7 @@
   <data name="historyTab.Text" xml:space="preserve">
     <value>Cronologia</value>
   </data>
+  <data name="taskRegURILabel.Text" xml:space="preserve">
+    <value>&amp;URI:</value>
+  </data>
 </root>

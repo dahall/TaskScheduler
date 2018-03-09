@@ -168,4 +168,7 @@
   <data name="xmlViewRadio.Text" xml:space="preserve">
     <value>Vue XML</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Opcode :</value>
+  </data>
 </root>

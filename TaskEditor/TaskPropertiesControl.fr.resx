@@ -285,4 +285,79 @@
   <data name="triggersTab.Text" xml:space="preserve">
     <value>&amp;Déclencheurs...</value>
   </data>
+  <data name="runTimesTab.Text" xml:space="preserve">
+    <value>Temps d'exécution</value>
+  </data>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Si la tâche est déjà de cours, alors la règle suivante s’applique :</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Essayez &amp;redémarrer jusqu'à :</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>Autoriser les tâches à exécuter à la demande</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Spécifiez les informations d’enregistrement pour la tâche.</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
+    <value>Si la tâche ne se termine pas, redémarrer après :</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
+    <value>Au cours de l’entretien, démarrer la tâche chaque :</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Processus &amp;Security Identifier (SID) tapez :</value>
+  </data>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Renforcement de la sécurité</value>
+  </data>
+  <data name="taskVolatileCheck.Text" xml:space="preserve">
+    <value>&amp;Désactiver automatiquement la tâche chaque démarrage de Windows</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Spécifier la sécurité, la maintenance et système fonctionnalité compatibilité des paramètres supplémentaires pour la tâche.</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Impossible d’afficher la durée d’arrosage pour cette tâche.</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Exécuter avec les privilèges les plus élevés</value>
+  </data>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Caché</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Marche que si la connexion réseau suivante est disponible :</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Redémarrage si l’état d’inactivité reprend</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Arrêter si l’ordinateur cesse d’être inactif</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>Attendre d’inactivité :</value>
+  </data>
+  <data name="conditionIntroLabel.Text" xml:space="preserve">
+    <value>Préciser les conditions qui, avec le déclencheur, déterminer si la tâche doit s’exécuter. La tâche s’exécutera pas si une condition spécifiée n’est pas vraie.</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Arrêter la tâche si elle s’exécute plu de :</value>
+  </data>
+  <data name="taskRegSDDLLabel.Text" xml:space="preserve">
+    <value>Sécurité :</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
+    <value>Démarrer la tâche en mode exclusif</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>Requied privilèges :</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>Interdire le démarrage si lors d’une session Remote Applications intégrée localement (RAIL)</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
+    <value>&amp;Utilisation unifiée ordonnancement moteur</value>
+  </data>
 </root>

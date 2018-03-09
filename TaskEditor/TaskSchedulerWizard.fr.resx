@@ -171,4 +171,37 @@
   <data name="wizardControl1.Title" xml:space="preserve">
     <value>Assistant Création de tâches</value>
   </data>
+  <data name="weeklyTriggerPage.Text" xml:space="preserve">
+    <value>Programme d’installation un déclencheur hebdomadaire</value>
+  </data>
+  <data name="oneTimeTriggerPage.Text" xml:space="preserve">
+    <value>Configurer un déclencheur de temps</value>
+  </data>
+  <data name="triggerSelectPage.Text" xml:space="preserve">
+    <value>Choisissez ce qui déclenche la tâche</value>
+  </data>
+  <data name="msgActionPage.Text" xml:space="preserve">
+    <value>Programme d’installation un message à afficher</value>
+  </data>
+  <data name="dailyTriggerPage.Text" xml:space="preserve">
+    <value>Programme d’installation un déclencheur quotidiens</value>
+  </data>
+  <data name="runActionPage.Text" xml:space="preserve">
+    <value>Configurer un programme s’exécute</value>
+  </data>
+  <data name="emailActionPage.Text" xml:space="preserve">
+    <value>Programme d’installation un message électronique à envoyer</value>
+  </data>
+  <data name="onEventTriggerPage.Text" xml:space="preserve">
+    <value>Programme d’installation un déclencheur sur un événement système</value>
+  </data>
+  <data name="triggerPropPage.Text" xml:space="preserve">
+    <value>Propriétés de déclencheur</value>
+  </data>
+  <data name="actionSelectPage.Text" xml:space="preserve">
+    <value>Choisir l’action à effectuer</value>
+  </data>
+  <data name="monthlyTriggerPage.Text" xml:space="preserve">
+    <value>Programme d’installation un déclencheur mensuel</value>
+  </data>
 </root>

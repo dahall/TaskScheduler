@@ -149,9 +149,21 @@
     <value></value>
   </data>
   <data name="getCLSIDButton.Text" xml:space="preserve">
-    <value></value>
+    <value>...</value>
   </data>
   <data name="getCLSIDButton.ToolTip" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ricerca CLSID...</value>
+  </data>
+  <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Ricerca il CLSID dal registro di sistema locale.</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Immettere manualmente CLSID...</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Immettere manualmente il CLSID</value>
   </data>
 </root>

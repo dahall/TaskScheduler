@@ -117,91 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>Annuler</value>
+  <data name="optionPanelHeaderLabel4.Text" xml:space="preserve">
+    <value>Réseau</value>
   </data>
-  <data name="xmlTab.Text" xml:space="preserve">
-    <value>XML</value>
+  <data name="optionPanelHeaderLabel3.Text" xml:space="preserve">
+    <value>Puissance</value>
   </data>
-  <data name="wrapCheckBox.Text" xml:space="preserve">
-    <value>Renvoyer à la ligne automatiquement</value>
+  <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
+    <value>Inactif</value>
   </data>
-  <data name="editManuallyCheckBox.Text" xml:space="preserve">
-    <value>Modifier la requête</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Pour spécifier un filtre d’événements au format XPath, cochez « Modifier la requête ».</value>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Ne démarrer la tâche que si l’ordinateur est relié au secteur</value>
   </data>
-  <data name="filterTab.Text" xml:space="preserve">
-    <value>Filtrer</value>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Arrêter si l’ordinateur passe en alimentation par batterie</value>
   </data>
-  <data name="dataBtn.Text" xml:space="preserve">
-    <value>Réinitialiser les filtres de données</value>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Sortir l’ordinateur du mode veille pour exécuter cette tâche</value>
   </data>
-  <data name="eventIDsText.Text" xml:space="preserve">
-    <value>&lt;Tous les ID d’événements&gt;</value>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Ne démarrer la tâche que si l’ordinateur est inactif pendant :</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Modifier le filtre d’événement</value>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Options de démarrage de tâche</value>
   </data>
-  <data name="computerText.Text" xml:space="preserve">
-    <value>&lt;Tous les ordinateurs&gt;</value>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Marche que si la connexion réseau suivante est disponible :</value>
   </data>
-  <data name="userText.Text" xml:space="preserve">
-    <value>&lt;Tous les utilisateurs&gt;</value>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Redémarrage si l’état d’inactivité reprend</value>
   </data>
-  <data name="bySourceRadio.Text" xml:space="preserve">
-    <value>Par source</value>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>Interdire le démarrage si lors d’une session Remote Applications intégrée localement (RAIL)</value>
   </data>
-  <data name="errorLevelCheckBox.Text" xml:space="preserve">
-    <value>E&amp;rreur</value>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Arrêter si l’ordinateur cesse d’être inactif</value>
   </data>
-  <data name="infoLevelCheckBox.Text" xml:space="preserve">
-    <value>Informations</value>
-  </data>
-  <data name="warningLevelCheckBox.Text" xml:space="preserve">
-    <value>Avertissement</value>
-  </data>
-  <data name="clearButton.Text" xml:space="preserve">
-    <value>E&amp;ffacer</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Utilisateur :</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>&amp;Mots clés :</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Catégorie de la tâche :</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Niveau d’événement :</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Journaux d’événements :</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Pas de &amp;journalisation initiale</value>
-  </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Sources évent :</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Comprend/ne comprend pas évent ID : numéros d’identification Entrez et/ou gammes ID, séparés par des virgules. Pour exclure les critères, tapez d’abord chanter une moins. Par exemple 1,3,5-99, -76</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Ordinateur(s) :</value>
-  </data>
-  <data name="byLogRadio.Text" xml:space="preserve">
-    <value>Par log</value>
-  </data>
-  <data name="verboseLevelCheckBox.Text" xml:space="preserve">
-    <value>Verbeux</value>
-  </data>
-  <data name="criticalLevelCheckBox.Text" xml:space="preserve">
-    <value>Critique</value>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>Attendre d’inactivité :</value>
   </data>
 </root>

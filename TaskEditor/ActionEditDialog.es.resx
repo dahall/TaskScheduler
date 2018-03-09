@@ -147,4 +147,10 @@
   <data name="settingsGroup.Text" xml:space="preserve">
     <value>Configuración</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>ID:</value>
+  </data>
+  <data name="runActionBtn.Text" xml:space="preserve">
+    <value>Ejecutar acción</value>
+  </data>
 </root>

@@ -147,4 +147,13 @@
   <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
     <value>Salire</value>
   </data>
+  <data name="actionUpButton.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="actionDownButton.Text" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
+    <value>Consentire la conversione di PowerShell per le azioni non supportate</value>
+  </data>
 </root>

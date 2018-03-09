@@ -497,6 +497,9 @@
     <EmbeddedResource Include="EventActionFilterDataEditor.es.resx">
       <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterDataEditor.fr.resx">
+      <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterDataEditor.it.resx">
       <DependentUpon>EventActionFilterDataEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -513,6 +516,9 @@
       <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterEditor.es.resx">
+      <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventActionFilterEditor.fr.resx">
       <DependentUpon>EventActionFilterEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventActionFilterEditor.it.resx">

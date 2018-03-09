@@ -499,4 +499,13 @@
   <data name="historyTab.Text" xml:space="preserve">
     <value>Historia</value>
   </data>
+  <data name="generalTab.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="taskRegURILabel.Text" xml:space="preserve">
+    <value>&amp;URI:</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Error:</value>
+  </data>
 </root>

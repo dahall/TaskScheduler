@@ -132,4 +132,7 @@
   <data name="onEventSourceLabel.Text" xml:space="preserve">
     <value>Source :</value>
   </data>
+  <data name="editBtn.Text" xml:space="preserve">
+    <value>Modifier le filtre d’événement...</value>
+  </data>
 </root>

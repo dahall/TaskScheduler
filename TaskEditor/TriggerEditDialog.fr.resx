@@ -198,4 +198,16 @@
   <data name="triggerTypeLabel.Text" xml:space="preserve">
     <value>Commencer la tâche :</value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Id :</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>Propriété</value>
+  </data>
 </root>
