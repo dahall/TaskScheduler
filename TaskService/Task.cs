@@ -1006,6 +1006,12 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Gets the results that were returned the last time the registered task was run.</summary>
+		/// <remarks>The value returned is the last exit code of the last program run via an <see cref="ExecAction"/>.</remarks>
+		/// <example><code lang="cs"><![CDATA[
+		/// // See if the last run of a task returned an error code
+		/// if (TaskService.Instance.GetTask("MyTask").LastTaskResult != 0)
+		///    MessageBox.Show("This program has an error.");
+		/// ]]></code></example>
 		public int LastTaskResult
 		{
 			get
