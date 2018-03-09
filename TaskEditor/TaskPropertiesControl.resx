@@ -142,7 +142,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="taskHiddenCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
+    <value>1, 9</value>
   </data>
   <data name="taskHiddenCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 4, 3, 2</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 10</value>
+    <value>99, 10</value>
   </data>
   <data name="taskVersionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 0, 3, 0</value>
@@ -220,13 +220,16 @@
     <value>Top</value>
   </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 6</value>
+    <value>186, 6</value>
+  </data>
+  <data name="taskVersionCombo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
   </data>
   <data name="taskVersionCombo.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 24</value>
+    <value>326, 24</value>
   </data>
   <data name="taskVersionCombo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -247,16 +250,16 @@
     <value>Top</value>
   </data>
   <data name="tableLayoutPanel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 333</value>
+    <value>6, 343</value>
   </data>
   <data name="tableLayoutPanel8.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 0, 0</value>
+    <value>1, 3, 0, 0</value>
   </data>
   <data name="tableLayoutPanel8.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 33</value>
+    <value>512, 33</value>
   </data>
   <data name="tableLayoutPanel8.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -373,7 +376,7 @@
     <value>True</value>
   </data>
   <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 23</value>
+    <value>348, 23</value>
   </data>
   <data name="taskPrincipalText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -439,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 18</value>
+    <value>360, 18</value>
   </data>
   <data name="changePrincipalButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -544,7 +547,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>523, 146</value>
+    <value>506, 146</value>
   </data>
   <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -568,13 +571,13 @@
     <value>Top</value>
   </data>
   <data name="taskSecurityGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 165</value>
+    <value>6, 175</value>
   </data>
   <data name="taskSecurityGroupBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskSecurityGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 168</value>
+    <value>512, 168</value>
   </data>
   <data name="taskSecurityGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -652,7 +655,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
+    <value>0, 33</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 0</value>
@@ -685,7 +688,10 @@
     <value>Top</value>
   </data>
   <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 68</value>
+    <value>76, 78</value>
+  </data>
+  <data name="taskDescText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
   </data>
   <data name="taskDescText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -694,7 +700,7 @@
     <value>True</value>
   </data>
   <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 85</value>
+    <value>436, 85</value>
   </data>
   <data name="taskDescText.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -718,16 +724,16 @@
     <value>NoControl</value>
   </data>
   <data name="taskAuthorText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 50</value>
+    <value>77, 56</value>
   </data>
   <data name="taskAuthorText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+    <value>4, 4, 1, 4</value>
   </data>
   <data name="taskAuthorText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskAuthorText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 15</value>
+    <value>434, 15</value>
   </data>
   <data name="taskAuthorText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -751,16 +757,16 @@
     <value>NoControl</value>
   </data>
   <data name="taskLocationText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 32</value>
+    <value>77, 33</value>
   </data>
   <data name="taskLocationText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+    <value>4, 4, 1, 4</value>
   </data>
   <data name="taskLocationText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskLocationText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 15</value>
+    <value>434, 15</value>
   </data>
   <data name="taskLocationText.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -825,11 +831,14 @@
   <data name="taskNameText.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 3</value>
   </data>
+  <data name="taskNameText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
+  </data>
   <data name="taskNameText.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="taskNameText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 23</value>
+    <value>436, 23</value>
   </data>
   <data name="taskNameText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -856,7 +865,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskDescLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 69</value>
+    <value>0, 79</value>
   </data>
   <data name="taskDescLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 4, 3, 0</value>
@@ -895,7 +904,7 @@
     <value>NoControl</value>
   </data>
   <data name="taskAuthorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>0, 56</value>
   </data>
   <data name="taskAuthorLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 0</value>
@@ -937,7 +946,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 159</value>
+    <value>512, 169</value>
   </data>
   <data name="tableLayoutPanel9.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1309,7 +1318,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>523, 52</value>
+    <value>523, 54</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1342,7 +1351,7 @@
     <value>True</value>
   </data>
   <data name="networkConditionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 73</value>
+    <value>529, 75</value>
   </data>
   <data name="networkConditionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
