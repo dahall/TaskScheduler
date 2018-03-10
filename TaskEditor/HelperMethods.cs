@@ -9,14 +9,14 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		public static bool SelectAccount(System.Windows.Forms.IWin32Window parent, string targetComputerName, ref string acctName, out bool isGroup, out bool isService, out string sid)
 		{
-			var l = Locations.EnterpriseDomain | Locations.ExternalDomain | Locations.GlobalCatalog | Locations.JoinedDomain | Locations.LocalComputer;
+			const Locations defLoc = Locations.EnterpriseDomain | Locations.ExternalDomain | Locations.GlobalCatalog | Locations.JoinedDomain | Locations.LocalComputer;
 			var dlg = new DirectoryObjectPickerDialog
 			{
 				TargetComputer = targetComputerName,
 				MultiSelect = false,
 				SkipDomainControllerCheck = true,
-				AllowedLocations = l,
-				DefaultLocations = l,
+				AllowedLocations = defLoc,
+				DefaultLocations = defLoc,
 				AllowedObjectTypes = ObjectTypes.Users// | ObjectTypes.WellKnownPrincipals | ObjectTypes.Computers;
 			};
 			if (NativeMethods.AccountUtils.CurrentUserIsAdmin(targetComputerName)) dlg.AllowedObjectTypes |= ObjectTypes.BuiltInGroups | ObjectTypes.Groups | ObjectTypes.WellKnownPrincipals;
@@ -57,18 +57,17 @@ namespace Microsoft.Win32.TaskScheduler
 
 			foreach (var attribute in (IEnumerable)multivaluedAttribute)
 			{
-				if (attribute == null)
+				switch (attribute)
 				{
-					list.Add(string.Empty);
-				}
-				else if (attribute is byte[])
-				{
-					var bytes = (byte[])attribute;
-					list.Add(BytesToString(bytes));
-				}
-				else
-				{
-					list.Add(attribute.ToString());
+					case null:
+						list.Add(string.Empty);
+						break;
+					case byte[] bytes:
+						list.Add(BytesToString(bytes));
+						break;
+					default:
+						list.Add(attribute.ToString());
+						break;
 				}
 			}
 
