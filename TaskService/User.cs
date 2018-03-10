@@ -26,7 +26,7 @@ namespace Microsoft.Win32.TaskScheduler
 				acct = cur;
 				sid = acct.User;
 			}
-			else if (userName.Contains("\\"))
+			else if (userName.Contains("\\") && !userName.StartsWith(@"NT AUTHORITY\"))
 			{
 				try
 				{
