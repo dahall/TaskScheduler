@@ -26,7 +26,8 @@
 		{
 			try
 			{
-				return TryGetType(Assembly.LoadFrom(asmRef), typeName, ref type);
+				if (System.IO.File.Exists(asmRef))
+					return TryGetType(Assembly.LoadFrom(asmRef), typeName, ref type);
 			}
 			catch { }
 			return false;
