@@ -2173,7 +2173,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						var doc = new XmlDocument();
 						doc.LoadXml(xml);
-						var pn = doc.DocumentElement?["Principals"]?["Principal"];
+						var pn = doc.DocumentElement?["Principals"]?["Principal"]; 
 						if (pn != null)
 						{
 							var un = pn["UserId"] ?? pn["GroupId"];
