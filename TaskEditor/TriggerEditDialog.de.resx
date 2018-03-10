@@ -124,26 +124,14 @@
   <data name="schedMonthlyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 19</value>
   </data>
-  <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Monatlich</value>
-  </data>
   <data name="schedWeeklyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 19</value>
-  </data>
-  <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Wöchentlich</value>
   </data>
   <data name="schedDailyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 19</value>
   </data>
-  <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Täglich</value>
-  </data>
   <data name="schedOneRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 19</value>
-  </data>
-  <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>Einmal</value>
   </data>
   <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 19</value>
@@ -190,32 +178,17 @@
   <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 15</value>
   </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Protokoll:</value>
-  </data>
   <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 15</value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Quelle:</value>
   </data>
   <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 15</value>
   </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>Ereignis-ID:</value>
-  </data>
   <data name="eventCustomRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 19</value>
   </data>
-  <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value>Benutzerdefiniert</value>
-  </data>
   <data name="eventBasicRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 19</value>
-  </data>
-  <data name="eventBasicRadio.Text" xml:space="preserve">
-    <value>Minimal</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Einstellungen</value>
@@ -277,101 +250,11 @@
   <data name="logonUserLabel.Text" xml:space="preserve">
     <value>&lt;Aktuelle Benutzer&gt;</value>
   </data>
-  <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Anfang:</value>
-  </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="groupBox6.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="idleTab.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="logonTab.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="monthlyOnRadio.Text" xml:space="preserve">
     <value></value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="onEventTab.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="startupTab.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items1" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items2" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items3" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items4" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items5" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items6" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items7" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items8" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items9" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="propNameCol.Text" xml:space="preserve">
     <value>Eigenschaft</value>

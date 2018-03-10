@@ -189,9 +189,6 @@
   <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="execProgLabel.Text" xml:space="preserve">
-    <value>程序/脚本:</value>
-  </data>
   <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
     <value>execProgLabel</value>
   </data>
@@ -263,9 +260,6 @@
   </data>
   <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>浏览...</value>
   </data>
   <data name="&gt;&gt;execProgBrowseBtn.Name" xml:space="preserve">
     <value>execProgBrowseBtn</value>
@@ -372,9 +366,6 @@
   <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="execDirLabel.Text" xml:space="preserve">
-    <value>起始于 (可选):</value>
-  </data>
   <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
     <value>execDirLabel</value>
   </data>
@@ -398,9 +389,6 @@
   </data>
   <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value>添加参数 (可选):</value>
   </data>
   <data name="&gt;&gt;execArgLabel.Name" xml:space="preserve">
     <value>execArgLabel</value>
@@ -456,9 +444,6 @@
   <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value>浏览...</value>
-  </data>
   <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
     <value>emailAttachementBrowseBtn</value>
   </data>
@@ -513,9 +498,6 @@
   <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value>SMTP服务器:</value>
-  </data>
   <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
     <value>emailSMTPLabel</value>
   </data>
@@ -569,9 +551,6 @@
   </data>
   <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value>附件:</value>
   </data>
   <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
     <value>emailAttachmentLabel</value>
@@ -660,9 +639,6 @@
   <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="emailTextLabel.Text" xml:space="preserve">
-    <value>正文:</value>
-  </data>
   <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
     <value>emailTextLabel</value>
   </data>
@@ -713,9 +689,6 @@
   </data>
   <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value>标题:</value>
   </data>
   <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
     <value>emailSubjectLabel</value>
@@ -768,9 +741,6 @@
   <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="emailToLabel.Text" xml:space="preserve">
-    <value>收件人:</value>
-  </data>
   <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
     <value>emailToLabel</value>
   </data>
@@ -821,9 +791,6 @@
   </data>
   <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="emailFromLabel.Text" xml:space="preserve">
-    <value>发件人:</value>
   </data>
   <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
     <value>emailFromLabel</value>
@@ -906,9 +873,6 @@
   <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value>邮件:</value>
-  </data>
   <data name="&gt;&gt;msgMsgLabel.Name" xml:space="preserve">
     <value>msgMsgLabel</value>
   </data>
@@ -960,9 +924,6 @@
   <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value>标题:</value>
-  </data>
   <data name="&gt;&gt;msgTitleLabel.Name" xml:space="preserve">
     <value>msgTitleLabel</value>
   </data>
@@ -986,9 +947,6 @@
   </data>
   <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value>该操作在桌面上显示一个消息框。</value>
   </data>
   <data name="&gt;&gt;msgIntroLabel.Name" xml:space="preserve">
     <value>msgIntroLabel</value>
@@ -1037,9 +995,6 @@
   </data>
   <data name="getCLSIDButton.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="getCLSIDButton.Text" xml:space="preserve">
-    <value>...</value>
   </data>
   <data name="&gt;&gt;getCLSIDButton.Name" xml:space="preserve">
     <value>getCLSIDButton</value>
@@ -1092,9 +1047,6 @@
   <data name="comDataLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="comDataLabel.Text" xml:space="preserve">
-    <value>数据:</value>
-  </data>
   <data name="&gt;&gt;comDataLabel.Name" xml:space="preserve">
     <value>comDataLabel</value>
   </data>
@@ -1146,9 +1098,6 @@
   <data name="comCLSIDLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="comCLSIDLabel.Text" xml:space="preserve">
-    <value>COM对象:</value>
-  </data>
   <data name="&gt;&gt;comCLSIDLabel.Name" xml:space="preserve">
     <value>comCLSIDLabel</value>
   </data>
@@ -1172,9 +1121,6 @@
   </data>
   <data name="comIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="comIntroLabel.Text" xml:space="preserve">
-    <value>该操作运行一个COM处理程序。</value>
   </data>
   <data name="&gt;&gt;comIntroLabel.Name" xml:space="preserve">
     <value>comIntroLabel</value>
@@ -1406,57 +1352,6 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionsCombo.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionsLabel.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="cancelBtn.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comHandlerActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="messageTab.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="okBtn.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="promptLabel.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="settingsGroup.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="settingsTabs.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="showMessageActionUI1.ToolTip" xml:space="preserve">
-    <value></value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>ID：</value>

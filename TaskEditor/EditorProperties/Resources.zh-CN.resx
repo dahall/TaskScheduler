@@ -467,7 +467,7 @@
     <value>自定义范围</value>
   </data>
   <data name="EventLogTimeCustomFrom" xml:space="preserve">
-    <value>查看所有线索，从</value>
+    <value>来自{0}的所有活动</value>
   </data>
   <data name="EventLogTimeCustomFromTo" xml:space="preserve">
     <value>从 {0} 到 {1}</value>

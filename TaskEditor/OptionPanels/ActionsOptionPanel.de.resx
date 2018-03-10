@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Aufgabenaktionen</value>
   </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Modifier...</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nouveau...</value>
-  </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Descendre</value>
-  </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Monter</value>
-  </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Modifier une action</value>
-  </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supprimer l'action</value>
-  </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouvelle action</value>
-  </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Permettre la conversion de PowerShell pour les actions non pris en charge</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Hinzufügen, Entfernen und Ändern von Aktionen</value>
   </data>
 </root>

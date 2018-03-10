@@ -339,9 +339,6 @@
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>开始:</value>
-  </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
@@ -390,9 +387,6 @@
   <data name="dailyDaysLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>天</value>
-  </data>
   <data name="&gt;&gt;dailyDaysLabel.Name" xml:space="preserve">
     <value>dailyDaysLabel</value>
   </data>
@@ -419,9 +413,6 @@
   </data>
   <data name="dailyRecurLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;dailyRecurLabel.Name" xml:space="preserve">
     <value>dailyRecurLabel</value>
@@ -741,9 +732,6 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>开始:</value>
-  </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
@@ -780,9 +768,6 @@
   <data name="weeklySunCheck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>星期天</value>
-  </data>
   <data name="&gt;&gt;weeklySunCheck.Name" xml:space="preserve">
     <value>weeklySunCheck</value>
   </data>
@@ -809,9 +794,6 @@
   </data>
   <data name="weeklyMonCheck.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>星期一</value>
   </data>
   <data name="&gt;&gt;weeklyMonCheck.Name" xml:space="preserve">
     <value>weeklyMonCheck</value>
@@ -840,9 +822,6 @@
   <data name="weeklyTueCheck.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>星期二</value>
-  </data>
   <data name="&gt;&gt;weeklyTueCheck.Name" xml:space="preserve">
     <value>weeklyTueCheck</value>
   </data>
@@ -869,9 +848,6 @@
   </data>
   <data name="weeklyWedCheck.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>星期三</value>
   </data>
   <data name="&gt;&gt;weeklyWedCheck.Name" xml:space="preserve">
     <value>weeklyWedCheck</value>
@@ -900,9 +876,6 @@
   <data name="weeklyThuCheck.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>星期四</value>
-  </data>
   <data name="&gt;&gt;weeklyThuCheck.Name" xml:space="preserve">
     <value>weeklyThuCheck</value>
   </data>
@@ -930,9 +903,6 @@
   <data name="weeklyFriCheck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>星期五</value>
-  </data>
   <data name="&gt;&gt;weeklyFriCheck.Name" xml:space="preserve">
     <value>weeklyFriCheck</value>
   </data>
@@ -959,9 +929,6 @@
   </data>
   <data name="weeklySatCheck.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>星期六</value>
   </data>
   <data name="&gt;&gt;weeklySatCheck.Name" xml:space="preserve">
     <value>weeklySatCheck</value>
@@ -1038,9 +1005,6 @@
   <data name="weeklyOnWeeksLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>周:</value>
-  </data>
   <data name="&gt;&gt;weeklyOnWeeksLabel.Name" xml:space="preserve">
     <value>weeklyOnWeeksLabel</value>
   </data>
@@ -1067,9 +1031,6 @@
   </data>
   <data name="weeklyRecurLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>每隔:</value>
   </data>
   <data name="&gt;&gt;weeklyRecurLabel.Name" xml:space="preserve">
     <value>weeklyRecurLabel</value>
@@ -1302,9 +1263,6 @@
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>开始:</value>
-  </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
@@ -1346,9 +1304,6 @@
   </data>
   <data name="onEventLogLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
-  </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>日志:</value>
   </data>
   <data name="&gt;&gt;onEventLogLabel.Name" xml:space="preserve">
     <value>onEventLogLabel</value>
@@ -1400,9 +1355,6 @@
   </data>
   <data name="onEventSourceLabel.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>源:</value>
   </data>
   <data name="&gt;&gt;onEventSourceLabel.Name" xml:space="preserve">
     <value>onEventSourceLabel</value>
@@ -1478,9 +1430,6 @@
   </data>
   <data name="onEventIdLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
-  </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>事件ID:</value>
   </data>
   <data name="&gt;&gt;onEventIdLabel.Name" xml:space="preserve">
     <value>onEventIdLabel</value>
@@ -1571,9 +1520,6 @@
   </data>
   <data name="execProgBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value>浏览...</value>
   </data>
   <data name="&gt;&gt;execProgBrowseBtn.Name" xml:space="preserve">
     <value>execProgBrowseBtn</value>
@@ -1674,9 +1620,6 @@
   <data name="execDirLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="execDirLabel.Text" xml:space="preserve">
-    <value>起始于 (可选):</value>
-  </data>
   <data name="&gt;&gt;execDirLabel.Name" xml:space="preserve">
     <value>execDirLabel</value>
   </data>
@@ -1704,9 +1647,6 @@
   <data name="execArgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value>添加参数 (可选):</value>
-  </data>
   <data name="&gt;&gt;execArgLabel.Name" xml:space="preserve">
     <value>execArgLabel</value>
   </data>
@@ -1733,9 +1673,6 @@
   </data>
   <data name="execProgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
-  </data>
-  <data name="execProgLabel.Text" xml:space="preserve">
-    <value>程序/脚本:</value>
   </data>
   <data name="&gt;&gt;execProgLabel.Name" xml:space="preserve">
     <value>execProgLabel</value>
@@ -1968,9 +1905,6 @@
   <data name="emailAttachementBrowseBtn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value>浏览...</value>
-  </data>
   <data name="&gt;&gt;emailAttachementBrowseBtn.Name" xml:space="preserve">
     <value>emailAttachementBrowseBtn</value>
   </data>
@@ -2025,9 +1959,6 @@
   <data name="emailSMTPLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value>SMTP服务器:</value>
-  </data>
   <data name="&gt;&gt;emailSMTPLabel.Name" xml:space="preserve">
     <value>emailSMTPLabel</value>
   </data>
@@ -2081,9 +2012,6 @@
   </data>
   <data name="emailAttachmentLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value>附件:</value>
   </data>
   <data name="&gt;&gt;emailAttachmentLabel.Name" xml:space="preserve">
     <value>emailAttachmentLabel</value>
@@ -2163,9 +2091,6 @@
   <data name="emailTextLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="emailTextLabel.Text" xml:space="preserve">
-    <value>正文:</value>
-  </data>
   <data name="&gt;&gt;emailTextLabel.Name" xml:space="preserve">
     <value>emailTextLabel</value>
   </data>
@@ -2213,9 +2138,6 @@
   </data>
   <data name="emailSubjectLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value>标题:</value>
   </data>
   <data name="&gt;&gt;emailSubjectLabel.Name" xml:space="preserve">
     <value>emailSubjectLabel</value>
@@ -2265,9 +2187,6 @@
   <data name="emailToLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="emailToLabel.Text" xml:space="preserve">
-    <value>收件人:</value>
-  </data>
   <data name="&gt;&gt;emailToLabel.Name" xml:space="preserve">
     <value>emailToLabel</value>
   </data>
@@ -2315,9 +2234,6 @@
   </data>
   <data name="emailFromLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="emailFromLabel.Text" xml:space="preserve">
-    <value>发件人:</value>
   </data>
   <data name="&gt;&gt;emailFromLabel.Name" xml:space="preserve">
     <value>emailFromLabel</value>
@@ -2388,9 +2304,6 @@
   <data name="msgMsgLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value>邮件:</value>
-  </data>
   <data name="&gt;&gt;msgMsgLabel.Name" xml:space="preserve">
     <value>msgMsgLabel</value>
   </data>
@@ -2439,9 +2352,6 @@
   <data name="msgTitleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value>标题:</value>
-  </data>
   <data name="&gt;&gt;msgTitleLabel.Name" xml:space="preserve">
     <value>msgTitleLabel</value>
   </data>
@@ -2468,9 +2378,6 @@
   </data>
   <data name="msgIntroLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value>该操作在桌面上显示一个消息框。</value>
   </data>
   <data name="&gt;&gt;msgIntroLabel.Name" xml:space="preserve">
     <value>msgIntroLabel</value>
@@ -3125,18 +3032,6 @@
     <value></value>
   </data>
   <data name="&gt;&gt;showMessageActionUI1.ZOrder">
-    <value></value>
-  </data>
-  <data name="wizardControl1.BackButtonToolTipText" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="wizardControl1.CancelButtonText" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="wizardControl1.FinishButtonText" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="wizardControl1.NextButtonText" xml:space="preserve">
     <value></value>
   </data>
 </root>

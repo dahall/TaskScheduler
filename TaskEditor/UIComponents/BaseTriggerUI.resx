@@ -132,9 +132,6 @@
   <data name="schedStartDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="schedStartDatePicker.UTCPrompt" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;schedStartDatePicker.Name" xml:space="preserve">
     <value>schedStartDatePicker</value>
   </data>

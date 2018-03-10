@@ -124,113 +124,56 @@
   <data name="dailyDaysLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 15</value>
   </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>天</value>
-  </data>
   <data name="dailyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 15</value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>每隔:</value>
   </data>
   <data name="weeklySunCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
   </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value>星期天</value>
-  </data>
   <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>星期一</value>
   </data>
   <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
   </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value>星期二</value>
-  </data>
   <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value>星期三</value>
   </data>
   <data name="weeklyThuCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
   </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value>星期四</value>
-  </data>
   <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value>星期五</value>
   </data>
   <data name="weeklySatCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 19</value>
   </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value>星期六</value>
-  </data>
   <data name="weeklyOnWeeksLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 15</value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>周:</value>
   </data>
   <data name="weeklyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 15</value>
   </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>每隔:</value>
-  </data>
   <data name="monthlyOnRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 19</value>
-  </data>
-  <data name="monthlyOnRadio.Text" xml:space="preserve">
-    <value>在:</value>
   </data>
   <data name="monthlyDaysRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 19</value>
   </data>
-  <data name="monthlyDaysRadio.Text" xml:space="preserve">
-    <value>天:</value>
-  </data>
   <data name="monthlyMonthsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 15</value>
-  </data>
-  <data name="monthlyMonthsLabel.Text" xml:space="preserve">
-    <value>月:</value>
-  </data>
-  <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>开始:</value>
   </data>
   <data name="schedMonthlyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 19</value>
   </data>
-  <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>每月</value>
-  </data>
   <data name="schedWeeklyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 19</value>
-  </data>
-  <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>每周</value>
   </data>
   <data name="schedDailyRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 19</value>
   </data>
-  <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>每天</value>
-  </data>
   <data name="schedOneRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 19</value>
-  </data>
-  <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>一次</value>
   </data>
   <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 17</value>
@@ -280,32 +223,17 @@
   <data name="onEventLogLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 15</value>
   </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>日志:</value>
-  </data>
   <data name="onEventSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 15</value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>源:</value>
   </data>
   <data name="onEventIdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 15</value>
   </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>事件ID:</value>
-  </data>
   <data name="eventCustomRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 17</value>
   </data>
-  <data name="eventCustomRadio.Text" xml:space="preserve">
-    <value>自定义</value>
-  </data>
   <data name="eventBasicRadio.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
-  </data>
-  <data name="eventBasicRadio.Text" xml:space="preserve">
-    <value>基本</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>设置</value>
@@ -366,39 +294,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>新触发器</value>
-  </data>
-  <data name="triggerTypeCombo.Items">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items1">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items2">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items3">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items4">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items5">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items6">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items7">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items8">
-    <value></value>
-  </data>
-  <data name="triggerTypeCombo.Items9">
-    <value></value>
-  </data>
-  <data name="label9.Text">
-    <value></value>
   </data>
   <data name="&gt;&gt;triggerTypeLabel.Name">
     <value></value>
@@ -727,9 +622,6 @@
   <data name="&gt;&gt;logonAnyUserRadio.ZOrder">
     <value></value>
   </data>
-  <data name="logonTab.Text">
-    <value></value>
-  </data>
   <data name="&gt;&gt;logonTab.Name">
     <value></value>
   </data>
@@ -754,9 +646,6 @@
   <data name="&gt;&gt;startupIntroLabel.ZOrder">
     <value></value>
   </data>
-  <data name="startupTab.Text">
-    <value></value>
-  </data>
   <data name="&gt;&gt;startupTab.Name">
     <value></value>
   </data>
@@ -779,9 +668,6 @@
     <value></value>
   </data>
   <data name="&gt;&gt;label8.ZOrder">
-    <value></value>
-  </data>
-  <data name="idleTab.Text">
     <value></value>
   </data>
   <data name="&gt;&gt;idleTab.Name">
@@ -926,9 +812,6 @@
     <value></value>
   </data>
   <data name="&gt;&gt;eventBasicRadio.ZOrder">
-    <value></value>
-  </data>
-  <data name="onEventTab.Text">
     <value></value>
   </data>
   <data name="&gt;&gt;onEventTab.Name">

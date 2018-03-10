@@ -170,6 +170,9 @@
     <EmbeddedResource Include="HidableDetailPanel.resx">
       <DependentUpon>HidableDetailPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HomePanel.de.resx">
+      <DependentUpon>HomePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomePanel.es.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,7 +182,16 @@
     <EmbeddedResource Include="HomePanel.it.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HomePanel.pl.resx">
+      <DependentUpon>HomePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomePanel.resx">
+      <DependentUpon>HomePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomePanel.ru.resx">
+      <DependentUpon>HomePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomePanel.zh-CN.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewFolderDlg.resx">

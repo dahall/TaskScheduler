@@ -357,12 +357,6 @@
   <data name="taskVersionCombo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="taskVersionCombo.Items" xml:space="preserve">
-    <value>Windows Server™ 2003, Windows® XP, or Windows® 2000</value>
-  </data>
-  <data name="taskVersionCombo.Items1" xml:space="preserve">
-    <value>Windows Vista™ or Windows Server™ 2008</value>
-  </data>
   <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 324</value>
   </data>
@@ -726,9 +720,6 @@
   <data name="triggerDeleteButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>删除</value>
-  </data>
   <data name="&gt;&gt;triggerDeleteButton.Name" xml:space="preserve">
     <value>triggerDeleteButton</value>
   </data>
@@ -755,9 +746,6 @@
   </data>
   <data name="triggerEditButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>编辑...</value>
   </data>
   <data name="&gt;&gt;triggerEditButton.Name" xml:space="preserve">
     <value>triggerEditButton</value>
@@ -786,9 +774,6 @@
   <data name="triggerNewButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>新建...</value>
-  </data>
   <data name="&gt;&gt;triggerNewButton.Name" xml:space="preserve">
     <value>triggerNewButton</value>
   </data>
@@ -804,20 +789,11 @@
   <data name="triggerListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>触发器</value>
-  </data>
   <data name="columnHeader1.Width" type="System.Int32, mscorlib">
     <value>95</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>详细信息</value>
-  </data>
   <data name="columnHeader2.Width" type="System.Int32, mscorlib">
     <value>315</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>状态</value>
   </data>
   <data name="columnHeader3.Width" type="System.Int32, mscorlib">
     <value>74</value>
@@ -969,9 +945,6 @@
   <data name="actionDeleteButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>删除</value>
-  </data>
   <data name="&gt;&gt;actionDeleteButton.Name" xml:space="preserve">
     <value>actionDeleteButton</value>
   </data>
@@ -998,9 +971,6 @@
   </data>
   <data name="actionEditButton.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>修改...</value>
   </data>
   <data name="&gt;&gt;actionEditButton.Name" xml:space="preserve">
     <value>actionEditButton</value>
@@ -1029,9 +999,6 @@
   <data name="actionNewButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>新建...</value>
-  </data>
   <data name="&gt;&gt;actionNewButton.Name" xml:space="preserve">
     <value>actionNewButton</value>
   </data>
@@ -1047,14 +1014,8 @@
   <data name="actionListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>操作</value>
-  </data>
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>112</value>
-  </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
-    <value>详细信息</value>
   </data>
   <data name="columnHeader5.Width" type="System.Int32, mscorlib">
     <value>290</value>
@@ -1601,18 +1562,6 @@
   </data>
   <data name="&gt;&gt;taskRestartCountText.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="taskMultInstCombo.Items" xml:space="preserve">
-    <value>并行运行新实例</value>
-  </data>
-  <data name="taskMultInstCombo.Items1" xml:space="preserve">
-    <value>对新实例排队</value>
-  </data>
-  <data name="taskMultInstCombo.Items2" xml:space="preserve">
-    <value>请勿启动新实例</value>
-  </data>
-  <data name="taskMultInstCombo.Items3" xml:space="preserve">
-    <value>停止现有实例</value>
   </data>
   <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 288</value>
@@ -2172,38 +2121,20 @@
   <data name="historyListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="columnHeader6.Text" xml:space="preserve">
-    <value>级别</value>
-  </data>
   <data name="columnHeader6.Width" type="System.Int32, mscorlib">
     <value>50</value>
-  </data>
-  <data name="columnHeader7.Text" xml:space="preserve">
-    <value>日期和时间</value>
   </data>
   <data name="columnHeader7.Width" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
-  <data name="columnHeader8.Text" xml:space="preserve">
-    <value>事件ID</value>
-  </data>
   <data name="columnHeader8.Width" type="System.Int32, mscorlib">
     <value>73</value>
-  </data>
-  <data name="columnHeader9.Text" xml:space="preserve">
-    <value>任务类别</value>
   </data>
   <data name="columnHeader9.Width" type="System.Int32, mscorlib">
     <value>88</value>
   </data>
-  <data name="columnHeader10.Text" xml:space="preserve">
-    <value>操作代码</value>
-  </data>
   <data name="columnHeader10.Width" type="System.Int32, mscorlib">
     <value>77</value>
-  </data>
-  <data name="columnHeader11.Text" xml:space="preserve">
-    <value>相关Id</value>
   </data>
   <data name="columnHeader11.Width" type="System.Int32, mscorlib">
     <value>95</value>
@@ -2376,413 +2307,86 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionDeleteButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionDownButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionDownButton.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionEditButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionListView.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionNewButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="actionsTab.HelpKeyword" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionUpButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="actionUpButton.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="addPropTab.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="addPropTab.Text" xml:space="preserve">
     <value>附加</value>
   </data>
-  <data name="autoMaintGroup.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="autoMaintGroup.Text" xml:space="preserve">
     <value>自动维护</value>
   </data>
-  <data name="availableConnectionsCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="changePrincipalButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="conditionIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="conditionsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="conditionsTab.HelpKeyword" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="generalTab.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="generalTab.HelpKeyword" xml:space="preserve">
     <value></value>
   </data>
-  <data name="historyTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="historyTab.HelpKeyword" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="idleConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label4.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>指定额外的安全性，维护和对任务系统功能的兼容性设置。</value>
   </data>
-  <data name="label5.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="label5.Text" xml:space="preserve">
     <value>指定任务的注册信息。</value>
-  </data>
-  <data name="label8.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>优先级：</value>
   </data>
-  <data name="networkConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="powerConditionGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalReqPrivilegesDropDown.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalReqPrivilegesLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
     <value>科目编号特权：</value>
-  </data>
-  <data name="principalSIDTypeCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="principalSIDTypeLabel.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
     <value>过程安全标识（SID）类型：</value>
   </data>
-  <data name="regInfoTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="regInfoTab.Text" xml:space="preserve">
     <value>信息</value>
-  </data>
-  <data name="runTimesErrorLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="runTimesTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="secHardGroup.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="secHardGroup.Text" xml:space="preserve">
     <value>安全加固</value>
   </data>
-  <data name="settingsIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="settingsTab.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="settingsTab.HelpKeyword" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="tabControl.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAllowDemandStartCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAuthorLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskAuthorText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDeleteAfterCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDeleteAfterCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDescLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDescText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDisallowStartIfOnBatteriesCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskDisallowStartOnRemoteAppSessionCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
     <value>禁止启动，如果在远程应用程序集成本地（导轨）会议</value>
   </data>
-  <data name="taskEnabledCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
     <value>启用</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskExecutionTimeLimitCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskHiddenCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskHistoryControl1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleDurationCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleDurationCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleWaitTimeoutCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskIdleWaitTimeoutLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLocalOnlyCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLocationText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLoggedOnRadio.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskLoggedOptionalRadio.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenanceDeadlineCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenanceDeadlineLabel.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
     <value>如果任务未能完成，重新启动后：</value>
   </data>
-  <data name="taskMaintenanceExclusiveCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
     <value>在启动独占模式的任务</value>
-  </data>
-  <data name="taskMaintenancePeriodCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskMaintenancePeriodLabel.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
     <value>在维修过程中，开始每天的任务：</value>
   </data>
-  <data name="taskMultInstCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskNameLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskNameText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskPrincipalText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskPriorityCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegDocLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
     <value>文档：</value>
-  </data>
-  <data name="taskRegDocText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSDDLBtn.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
     <value>编辑安全...</value>
   </data>
-  <data name="taskRegSDDLLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
     <value>安全：</value>
-  </data>
-  <data name="taskRegSDDLText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegSourceLabel.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
     <value>资源：</value>
   </data>
-  <data name="taskRegSourceText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegURILabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
     <value>URI：</value>
-  </data>
-  <data name="taskRegURIText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRegVersionLabel.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
     <value>版：</value>
   </data>
-  <data name="taskRegVersionText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartAttemptTimesLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartCountLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartCountText.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartIntervalCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartIntervalCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRestartOnIdleCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunLevelCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunningRuleLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskRunTimesControl1.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskSecurityGroupBox.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStartIfConnectionCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStartWhenAvailableCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskStopOnIdleEndCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskTriggerIntroLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskUserAcctLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskUseUnifiedSchedulingEngineCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
     <value>使用统一调度引擎</value>
   </data>
-  <data name="taskVersionCombo.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVersionLabel.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="taskVolatileCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
     <value>每次Windows启动时自动禁用任务</value>
-  </data>
-  <data name="taskWakeToRunCheck.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerDeleteButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerEditButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerListView.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggerNewButton.Error" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="triggersTab.Error" xml:space="preserve">
-    <value></value>
   </data>
   <data name="triggersTab.HelpKeyword" xml:space="preserve">
     <value></value>

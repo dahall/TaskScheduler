@@ -225,9 +225,6 @@
   <data name="fromDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="fromDatePicker.UTCPrompt" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;fromDatePicker.Name" xml:space="preserve">
     <value>fromDatePicker</value>
   </data>
@@ -248,9 +245,6 @@
   </data>
   <data name="toDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="toDatePicker.UTCPrompt" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;toDatePicker.Name" xml:space="preserve">
     <value>toDatePicker</value>

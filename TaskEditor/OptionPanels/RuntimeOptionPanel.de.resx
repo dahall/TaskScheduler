@@ -117,37 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Wenn die Aufgabe bereits läuft, gilt die folgende Regel:</value>
   </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Modifier...</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>&amp;Ebene:</value>
   </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nouveau...</value>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Wenn es nicht geplant ist, die Aufgabe wieder auszuführen, &amp;lösche sie nach:</value>
   </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Descendre</value>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Versuche neu zu starten bis zu:</value>
   </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Monter</value>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Wenn die laufende Aufgabe nicht beendet ist, &amp;zwinge sie zu stoppen</value>
   </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Modifier une action</value>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Aufgabe stoppen, wenn sie länger läuft als:</value>
   </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supprimer l'action</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Optionen</value>
   </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouvelle action</value>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>Wenn die &amp;Aufgabe fehlschlägt, neu starten alle:</value>
   </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Détails</value>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>&amp;Aufgabe bei Bedarf ausgeführen lassen</value>
   </data>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Action</value>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Die Aufgabe so schnell wie möglich ausführen, wenn ein geplantes Start verpasst wurde</value>
   </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Permettre la conversion de PowerShell pour les actions non pris en charge</value>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>Mal</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Die Aufgabe wurde mit einer nicht unterstützten Kombination von Kontoeinstellungen und Laufzeitoptionen konfiguriert. </value>
   </data>
 </root>

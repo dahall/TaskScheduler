@@ -124,7 +124,4 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Inizio:</value>
   </data>
-  <data name="schedStartDatePicker.UTCPrompt" xml:space="preserve">
-    <value></value>
-  </data>
 </root>

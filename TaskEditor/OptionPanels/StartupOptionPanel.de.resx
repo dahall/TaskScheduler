@@ -117,37 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Aufgabe nur starten wenn der &amp;Computer im Leerlauf ist:</value>
   </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Modifier...</value>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>&amp;Computer reaktivieren, um diese Aufgabe auszuführen</value>
   </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nouveau...</value>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Nur starten, wenn die folgende Netzwerkverbindung verfügbar ist:</value>
   </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Descendre</value>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Anhalten, wenn der Computer in den &amp;Akku-Modus wechselt</value>
   </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Monter</value>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Neustarten, wenn immer noch im Leerlauf-Modus</value>
   </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Modifier une action</value>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>&amp;Start nicht erlauben, wenn in einer Remote Applications Integrated Locally (RAIL) Sitzung</value>
   </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supprimer l'action</value>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Aufgabe nur starten, wenn der Computer im AC-&amp;Modus  ist</value>
   </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouvelle action</value>
+  <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
+    <value>Optionen</value>
   </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Détails</value>
+  <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
+    <value>Leerlauf</value>
   </data>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Action</value>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Anhalten sobald der Computer nicht mehr im Leerlauf ist</value>
   </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Permettre la conversion de PowerShell pour les actions non pris en charge</value>
+  <data name="optionPanelHeaderLabel3.Text" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="optionPanelHeaderLabel4.Text" xml:space="preserve">
+    <value>Netzwerk</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>W&amp;arte auf Leerlauf für:</value>
+  </data>
+  <data name="$this.Title" xml:space="preserve">
+    <value>Aufgabe-Startoptionen</value>
   </data>
 </root>

@@ -147,12 +147,6 @@
   <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
     <value>Nueva acción…</value>
   </data>
-  <data name="actionUpButton.Text" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="actionDownButton.Text" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
     <value>Permite conversión de PowerShell para acciones</value>
   </data>

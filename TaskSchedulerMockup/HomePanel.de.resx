@@ -117,37 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Modifier...</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nouveau...</value>
-  </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Descendre</value>
-  </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Monter</value>
-  </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Modifier une action</value>
-  </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supprimer l'action</value>
-  </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouvelle action</value>
-  </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Permettre la conversion de PowerShell pour les actions non pris en charge</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Task Scheduler können Sie erstellen und Verwalten von gemeinsamen Aufgaben, die Ihrem Computer automatisch zu den Zeiten durchführen wird, die Sie angeben. Klicken Sie zunächst auf einen Befehl im Menü "Aktion".
+
+Aufgaben werden in Ordnern in der Task Scheduler Bibliothek gespeichert. Um anzuzeigen, oder führen Sie einen Vorgang für einen einzelnen Vorgang, wählen Sie die Aufgabe in der Task Scheduler Bibliothek und klicken Sie auf einen Befehl im Menü "Aktion".</value>
   </data>
 </root>

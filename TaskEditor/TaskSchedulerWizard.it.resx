@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="wizardControl1.BackButtonToolTipText" xml:space="preserve">
-    <value>Indietro alla pagina di prima</value>
-  </data>
-  <data name="wizardControl1.CancelButtonText" xml:space="preserve">
-    <value>&amp;Annulla</value>
-  </data>
-  <data name="wizardControl1.FinishButtonText" xml:space="preserve">
-    <value>&amp;Fine</value>
-  </data>
-  <data name="wizardControl1.NextButtonText" xml:space="preserve">
-    <value>&amp;Avanti</value>
-  </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Descrizione:</value>
   </data>
@@ -692,103 +680,10 @@
   <data name="oneTimeStartLabel.Text" xml:space="preserve">
     <value>Inizio:</value>
   </data>
-  <data name="onEventIdLabel.Text" xml:space="preserve">
-    <value>ID di evento:</value>
-  </data>
-  <data name="onEventLogLabel.Text" xml:space="preserve">
-    <value>Registro:</value>
-  </data>
-  <data name="onEventSourceLabel.Text" xml:space="preserve">
-    <value>Fonte:</value>
-  </data>
   <data name="openFileDialog1.Filter" xml:space="preserve">
     <value>Tutti file|*.*</value>
   </data>
   <data name="triggerPropPage.Text" xml:space="preserve">
     <value>Proprietà attività</value>
-  </data>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailAttachementBrowseBtn.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailAttachmentLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailFromLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailSMTPLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailSubjectLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailTextLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="emailToLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execArgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execDirLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execProgBrowseBtn.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="execProgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgIntroLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgMsgLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="msgTitleLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyFriCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySatCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklySunCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyThuCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyTueCheck.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="weeklyWedCheck.Text" xml:space="preserve">
-    <value></value>
   </data>
 </root>

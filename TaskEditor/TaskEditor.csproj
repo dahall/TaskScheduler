@@ -635,6 +635,9 @@
     <EmbeddedResource Include="ListColumnEditor.zh-CN.resx">
       <DependentUpon>ListColumnEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.de.resx">
+      <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\ActionsOptionPanel.es.resx">
       <DependentUpon>ActionsOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -679,6 +682,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\OptionPanel.resx">
       <DependentUpon>OptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\RuntimeOptionPanel.de.resx">
+      <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\RuntimeOptionPanel.es.resx">
       <DependentUpon>RuntimeOptionPanel.cs</DependentUpon>
@@ -728,6 +734,9 @@
     <EmbeddedResource Include="OptionPanels\SecurityOptionPanel.zh-CN.resx">
       <DependentUpon>SecurityOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\StartupOptionPanel.de.resx">
+      <DependentUpon>StartupOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\StartupOptionPanel.es.resx">
       <DependentUpon>StartupOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -748,6 +757,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\StartupOptionPanel.zh-CN.resx">
       <DependentUpon>StartupOptionPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.de.resx">
+      <DependentUpon>TriggersOptionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionPanels\TriggersOptionPanel.es.resx">
       <DependentUpon>TriggersOptionPanel.cs</DependentUpon>

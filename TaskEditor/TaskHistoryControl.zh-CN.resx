@@ -198,4 +198,7 @@
   <data name="saveFileDialog.Filter" xml:space="preserve">
     <value>事件文件（*采用.evtx）| *采用.evtx |提供XML（XML文件）（* .XML）| * .XML |文本文件（制表符分隔）（* .TXT）| * .TXT | CSV（逗号分隔）（*。 CSV）| * .CSV</value>
   </data>
+  <data name="historyDetailHideBtn.Text" xml:space="preserve">
+    <value>r</value>
+  </data>
 </root>

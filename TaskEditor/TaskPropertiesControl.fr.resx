@@ -117,17 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Modifier</value>
-  </data>
   <data name="actionIntroLabel.Text" xml:space="preserve">
     <value>Lorsque vous créez une tâche, vous devez spécifier l’action qui se produira au démarrage de la tâche.</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Nouveau</value>
   </data>
   <data name="actionsTab.Text" xml:space="preserve">
     <value>Actions</value>
@@ -140,21 +131,6 @@
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
     <value>Utilisateur ou groupe...</value>
-  </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Déclencheur</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>État :</value>
-  </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
-    <value>Détails</value>
   </data>
   <data name="conditionsTab.Text" xml:space="preserve">
     <value>Conditions</value>
@@ -272,15 +248,6 @@
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
     <value>Sortir l’ordinateur du mode veille pour exécuter cette tâche</value>
-  </data>
-  <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>Modifier</value>
-  </data>
-  <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>Nouveau</value>
   </data>
   <data name="triggersTab.Text" xml:space="preserve">
     <value>&amp;Déclencheurs...</value>

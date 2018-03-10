@@ -171,21 +171,6 @@
   <data name="repeatCheckBox.Text" xml:space="preserve">
     <value>Répéter la tâche toutes les :</value>
   </data>
-  <data name="schedDailyRadio.Text" xml:space="preserve">
-    <value>Tous les jours</value>
-  </data>
-  <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Tous les mois</value>
-  </data>
-  <data name="schedOneRadio.Text" xml:space="preserve">
-    <value>Une fois</value>
-  </data>
-  <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Démarrer</value>
-  </data>
-  <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Hebdomadaire</value>
-  </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
     <value>Aucun autre paramètre n’est requis.</value>
   </data>

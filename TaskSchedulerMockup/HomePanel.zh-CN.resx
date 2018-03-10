@@ -117,37 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>&amp;Modifier...</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>&amp;Nouveau...</value>
-  </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Descendre</value>
-  </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Monter</value>
-  </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Modifier une action</value>
-  </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supprimer l'action</value>
-  </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouvelle action</value>
-  </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Permettre la conversion de PowerShell pour les actions non pris en charge</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>您可以使用 "任务计划程序" 创建和管理计算机将在指定的时间自动执行的常见任务。若要开始, 请单击 "操作" 菜单中的命令。
+
+任务存储在任务计划程序库中的文件夹中。要查看或执行单个任务的操作, 请在 "任务计划程序库" 中选择任务, 然后单击 "操作" 菜单中的命令。</value>
   </data>
 </root>

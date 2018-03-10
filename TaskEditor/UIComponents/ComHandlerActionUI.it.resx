@@ -130,29 +130,8 @@
   <data name="comDataLabel.Text" xml:space="preserve">
     <value>Data:</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comCLSIDLabel.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comCLSIDText.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comDataLabel.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comDataText.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="comIntroLabel.ToolTip" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="getCLSIDButton.Text" xml:space="preserve">
     <value>...</value>
-  </data>
-  <data name="getCLSIDButton.ToolTip" xml:space="preserve">
-    <value></value>
   </data>
   <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
     <value>Ricerca CLSID...</value>
