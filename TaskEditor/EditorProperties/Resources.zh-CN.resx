@@ -544,4 +544,16 @@
   <data name="Error_InvalidFileName" xml:space="preserve">
     <value>提供的程序脚本不是一个有效的文件名。请在继续之前更正。 ！</value>
   </data>
+  <data name="EventKeywordsAll" xml:space="preserve">
+    <value>&lt;所有关键字&gt;</value>
+  </data>
+  <data name="EventTasksAll" xml:space="preserve">
+    <value>&lt;所有任务类别&gt;</value>
+  </data>
+  <data name="EventLogsAll" xml:space="preserve">
+    <value>&lt;所有日志&gt;</value>
+  </data>
+  <data name="EventSourcesAll" xml:space="preserve">
+    <value>&lt;所有来源&gt;</value>
+  </data>
 </root>

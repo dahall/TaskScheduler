@@ -2416,13 +2416,13 @@
     <value></value>
   </data>
   <data name="addPropTab.Text" xml:space="preserve">
-    <value></value>
+    <value>附加</value>
   </data>
   <data name="autoMaintGroup.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="autoMaintGroup.Text" xml:space="preserve">
-    <value></value>
+    <value>自动维护</value>
   </data>
   <data name="availableConnectionsCombo.Error" xml:space="preserve">
     <value></value>
@@ -2467,19 +2467,19 @@
     <value></value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value></value>
+    <value>指定额外的安全性，维护和对任务系统功能的兼容性设置。</value>
   </data>
   <data name="label5.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value></value>
+    <value>指定任务的注册信息。</value>
   </data>
   <data name="label8.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value></value>
+    <value>优先级：</value>
   </data>
   <data name="networkConditionGroupBox.Error" xml:space="preserve">
     <value></value>
@@ -2494,7 +2494,7 @@
     <value></value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>科目编号特权：</value>
   </data>
   <data name="principalSIDTypeCombo.Error" xml:space="preserve">
     <value></value>
@@ -2503,13 +2503,13 @@
     <value></value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>过程安全标识（SID）类型：</value>
   </data>
   <data name="regInfoTab.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="regInfoTab.Text" xml:space="preserve">
-    <value></value>
+    <value>信息</value>
   </data>
   <data name="runTimesErrorLabel.Error" xml:space="preserve">
     <value></value>
@@ -2521,7 +2521,7 @@
     <value></value>
   </data>
   <data name="secHardGroup.Text" xml:space="preserve">
-    <value></value>
+    <value>安全加固</value>
   </data>
   <data name="settingsIntroLabel.Error" xml:space="preserve">
     <value></value>
@@ -2566,13 +2566,13 @@
     <value></value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>禁止启动，如果在远程应用程序集成本地（导轨）会议</value>
   </data>
   <data name="taskEnabledCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>启用</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Error" xml:space="preserve">
     <value></value>
@@ -2617,13 +2617,13 @@
     <value></value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>如果任务未能完成，重新启动后：</value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>在启动独占模式的任务</value>
   </data>
   <data name="taskMaintenancePeriodCombo.Error" xml:space="preserve">
     <value></value>
@@ -2632,7 +2632,7 @@
     <value></value>
   </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>在维修过程中，开始每天的任务：</value>
   </data>
   <data name="taskMultInstCombo.Error" xml:space="preserve">
     <value></value>
@@ -2653,7 +2653,7 @@
     <value></value>
   </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>文档：</value>
   </data>
   <data name="taskRegDocText.Error" xml:space="preserve">
     <value></value>
@@ -2662,13 +2662,13 @@
     <value></value>
   </data>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value></value>
+    <value>编辑安全...</value>
   </data>
   <data name="taskRegSDDLLabel.Error" xml:space="preserve">
     <value></value>
   </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>安全：</value>
   </data>
   <data name="taskRegSDDLText.Error" xml:space="preserve">
     <value></value>
@@ -2677,7 +2677,7 @@
     <value></value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>资源：</value>
   </data>
   <data name="taskRegSourceText.Error" xml:space="preserve">
     <value></value>
@@ -2686,7 +2686,7 @@
     <value></value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value></value>
+    <value>URI：</value>
   </data>
   <data name="taskRegURIText.Error" xml:space="preserve">
     <value></value>
@@ -2695,7 +2695,7 @@
     <value></value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value></value>
+    <value>版：</value>
   </data>
   <data name="taskRegVersionText.Error" xml:space="preserve">
     <value></value>
@@ -2752,7 +2752,7 @@
     <value></value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>使用统一调度引擎</value>
   </data>
   <data name="taskVersionCombo.Error" xml:space="preserve">
     <value></value>
@@ -2764,7 +2764,7 @@
     <value></value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value></value>
+    <value>每次Windows启动时自动禁用任务</value>
   </data>
   <data name="taskWakeToRunCheck.Error" xml:space="preserve">
     <value></value>

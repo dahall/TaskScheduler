@@ -1177,4 +1177,16 @@
   <data name="&gt;&gt;$this.Type">
     <value></value>
   </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>名称：</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>ID：</value>
+  </data>
 </root>

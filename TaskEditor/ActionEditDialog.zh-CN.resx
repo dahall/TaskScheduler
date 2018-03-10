@@ -1458,4 +1458,10 @@
   <data name="showMessageActionUI1.ToolTip" xml:space="preserve">
     <value></value>
   </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>ID：</value>
+  </data>
+  <data name="runActionBtn.Text" xml:space="preserve">
+    <value>运行动作</value>
+  </data>
 </root>
