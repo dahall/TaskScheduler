@@ -121,34 +121,34 @@
     <value>Musisz określić akcję, którą to zadanie będzie wykonywać.</value>
   </data>
   <data name="actionsCombo.Items" xml:space="preserve">
-    <value>Uruchamianie programu</value>
+    <value>Uruchom program</value>
   </data>
   <data name="actionsCombo.Items1" xml:space="preserve">
     <value>Wyślij wiadomość e-mail</value>
   </data>
   <data name="actionsCombo.Items2" xml:space="preserve">
-    <value>Wyświetlanie wiadomości</value>
+    <value>Wyświetl wiadomość</value>
   </data>
   <data name="actionsCombo.Items3" xml:space="preserve">
-    <value>Niestandardowy program obsługi</value>
+    <value>Obsługa niestandardowa</value>
   </data>
   <data name="settingsGroup.Text" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
   <data name="okBtn.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="cancelBtn.Text" xml:space="preserve">
     <value>Anuluj</value>
   </data>
   <data name="actionsLabel.Text" xml:space="preserve">
-    <value>Działanie:</value>
+    <value>&amp;Akcja:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Identyfikator:</value>
+    <value>&amp;Identyfikator:</value>
   </data>
   <data name="runActionBtn.Text" xml:space="preserve">
-    <value>Uruchamianie akcji</value>
+    <value>U&amp;ruchom</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Nowa akcja</value>

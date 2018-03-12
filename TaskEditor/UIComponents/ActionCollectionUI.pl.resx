@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Działania</value>
+    <value>Akcje</value>
   </data>
   <data name="detailsColumnHeader.Text" xml:space="preserve">
     <value>Szczegóły</value>
@@ -127,10 +127,10 @@
     <value>Nowa akcja...</value>
   </data>
   <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usunąć akcję</value>
+    <value>Usuń akcję</value>
   </data>
   <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edycja akcji...</value>
+    <value>Edytuj akcję...</value>
   </data>
   <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
     <value>Przenieś w górę</value>
@@ -139,15 +139,15 @@
     <value>Przenieś w dół</value>
   </data>
   <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Nowy...</value>
+    <value>Nowa...</value>
   </data>
   <data name="actionDeleteButton.Text" xml:space="preserve">
     <value>Usuń</value>
   </data>
   <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Edycja...</value>
+    <value>Edytuj...</value>
   </data>
   <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Umożliwić PowerShell konwersji dla działania nieobsługiwane</value>
+    <value>Zezwalaj konwersji PowerShell konwersji na działania nieobsługiwane</value>
   </data>
 </root>

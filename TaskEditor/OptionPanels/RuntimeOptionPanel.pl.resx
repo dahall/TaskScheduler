@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>Jeśli zadanie jest już uruchomione, stosuje się następującą regułę:</value>
+    <value>Jeśli zada&amp;nie jest już uruchomione, zastosuj następującą regułę:</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Poziom priorytetu:</value>
+    <value>Priorytet:</value>
   </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Jeśli zadanie nie jest zaplanowane do ponownego uruchomienia, należy usunąć go po:</value>
+    <value>Jeśli zadanie nie jest ponownie zaplanowane, &amp;usuń je po:</value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Próba ponownego uruchomienia do:</value>
+    <value>&amp;Spróbuj uruchomić nie więcej niż:</value>
   </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Jeśli uruchomione zadanie nie zakończy się żądanie, wymuś jego zatrzymanie</value>
+    <value>&amp;Jeśli zadanie nie zakończy się na żądanie, wymuś zatrzymanie</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Zatrzymaj zadanie, jeśli działa dłużej niż:</value>
+    <value>Z&amp;atrzymaj zadanie, jeśli działa dłużej niż:</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Opcje</value>
   </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>Jeśli zadanie nie powiedzie się, należy ponownie uruchomić każdy:</value>
+    <value>P&amp;o błędzie uruchom ponownie co:</value>
   </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>Zezwalaj na uruchamianie na żądanie</value>
+    <value>&amp;Zezwalaj na uruchamianie zadania na żądanie</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
-    <value>Uruchom zadanie jak najszybciej po zaplanowane uruchomienie zostało pominięte</value>
+    <value>Uruchom szybko za&amp;danie, jeśli pominięto zaplanowane uruchomienie</value>
   </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
     <value>razy</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Uruchom czas opcje</value>
+    <value>Opcje uruchamiania</value>
   </data>
 </root>

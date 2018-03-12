@@ -139,16 +139,16 @@
     <value>Słowa kluczowe</value>
   </data>
   <data name="columnHeader7.Text" xml:space="preserve">
-    <value>Źródła</value>
+    <value>Źródło:</value>
   </data>
   <data name="columnHeader8.Text" xml:space="preserve">
-    <value>Użytkownika</value>
+    <value>Użytkownik</value>
   </data>
   <data name="columnHeader9.Text" xml:space="preserve">
     <value>Dziennik</value>
   </data>
   <data name="columnHeader10.Text" xml:space="preserve">
-    <value>Komputera</value>
+    <value>Komputer</value>
   </data>
   <data name="columnHeader11.Text" xml:space="preserve">
     <value>Identyfikator procesu</value>
@@ -160,7 +160,7 @@
     <value>Liczba zdarzeń: X</value>
   </data>
   <data name="historyDetailTitleText.Text" xml:space="preserve">
-    <value>Zdarzenia 100, TaskScheduler</value>
+    <value>Zdarzenie 100, TaskScheduler</value>
   </data>
   <data name="historyDetailHideBtn.Text" xml:space="preserve">
     <value>r</value>
@@ -172,7 +172,7 @@
     <value>Właściwości zdarzenia</value>
   </data>
   <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dołączyć zadanie do tego zdarzenia</value>
+    <value>Dołącz zadanie do tego zdarzenia…</value>
   </data>
   <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Zapisz wszystkie zdarzenia jako...</value>
@@ -181,24 +181,24 @@
     <value>Dodaj/Usuń kolumny</value>
   </data>
   <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sortowania zdarzenia według tej kolumny</value>
+    <value>Sortuj zdarzenia według tej kolumny</value>
   </data>
   <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usunąć, sortowanie</value>
+    <value>Usuń sortowanie</value>
   </data>
   <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
     <value>Grupuj zdarzenia według tej kolumny</value>
   </data>
   <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usunąć grupowanie zdarzeń</value>
+    <value>Usuń grupowanie zdarzeń</value>
   </data>
   <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
     <value>Rozwiń wszystkie grupy</value>
   </data>
   <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zwinąć wszystkie grupy</value>
+    <value>Zwiń wszystkie grupy</value>
   </data>
   <data name="saveFileDialog.Filter" xml:space="preserve">
-    <value>Pliki zdarzeń (*.evtx) | * evtx | XML (plik Xml) (*.xml) | * .xml | Tekst (rozdzielany tabulatorami) (*.txt) | * .txt | CSV (oddzielone przecinkami) (*.csv) | * .csv</value>
+    <value>Pliki zdarzeń (*.evtx)|*.evtx|XML (plik XML) (*.xml)|*.xml|Tekst (rozdzielany tabulatorami) (*.txt)|*.txt|CSV (rozdzielany przecinkami) (*.csv)|*.csv</value>
   </data>
 </root>

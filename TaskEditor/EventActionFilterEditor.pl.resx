@@ -121,85 +121,85 @@
     <value>Anuluj</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Rejestrowane:</value>
+    <value>Za&amp;logowano:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Dzienniki zdarzeń:</value>
+    <value>Dz&amp;ienniki zdarzeń:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Źródła zdarzeń:</value>
+    <value>Źródła zd&amp;arzeń:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Poziom zdarzenia:</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Obejmuje/wyklucza identyfikatory zdarzeń: Wprowadź numery ID i/lub zakresy identyfikatorów rozdzielone przecinkami. Aby wykluczyć kryteria, wpisz najpierw minus śpiewać. Na przykład 1,3,5-99-76</value>
+    <value>Dołącza/wyklucza identy&amp;fikatory zdarzeń: Wprowadź numery identyfikacyjne i/lub zakresy identyfikatorów rozdzielone przecinkami. W przypadku kryteriów wykluczania najpierw wpisz znak minus. Na przykład: 1,3,5-99,-76.</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>Kategorii zadań:</value>
+    <value>Katego&amp;ria zadania:</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
-    <value>Słowa kluczowe:</value>
+    <value>&amp;Słowa kluczowe:</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Użytkownik:</value>
+    <value>&amp;Użytkownik:</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Komputery:</value>
+    <value>Ko&amp;mputery:</value>
   </data>
   <data name="clearButton.Text" xml:space="preserve">
-    <value>Jasne</value>
+    <value>&amp;Wyczyść</value>
   </data>
   <data name="criticalLevelCheckBox.Text" xml:space="preserve">
-    <value>Krytyczne</value>
+    <value>&amp;Krytyczne</value>
   </data>
   <data name="warningLevelCheckBox.Text" xml:space="preserve">
-    <value>Ostrzeżenie</value>
+    <value>Os&amp;trzeżenie</value>
   </data>
   <data name="infoLevelCheckBox.Text" xml:space="preserve">
-    <value>Informacje</value>
+    <value>I&amp;nformacje</value>
   </data>
   <data name="errorLevelCheckBox.Text" xml:space="preserve">
-    <value>Błąd</value>
+    <value>&amp;Błąd</value>
   </data>
   <data name="verboseLevelCheckBox.Text" xml:space="preserve">
-    <value>Pełne</value>
+    <value>&amp;Pełne</value>
   </data>
   <data name="byLogRadio.Text" xml:space="preserve">
-    <value>Przez dziennik</value>
+    <value>Wedłu&amp;g dzienników</value>
   </data>
   <data name="bySourceRadio.Text" xml:space="preserve">
-    <value>Przez źródła</value>
+    <value>Według źró&amp;deł</value>
   </data>
   <data name="userText.Text" xml:space="preserve">
-    <value>&lt; Wszystkich Użytkowników &gt;</value>
+    <value>&lt;Wszyscy użytkownicy&gt;</value>
   </data>
   <data name="computerText.Text" xml:space="preserve">
-    <value>&lt; Wszystkie Komputery &gt;</value>
+    <value>&lt;Wszystkie komputery&gt;</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Edytuj filtr zdarzeń</value>
+    <value>Filtr nowych zdarzeń</value>
   </data>
   <data name="eventIDsText.Text" xml:space="preserve">
-    <value>&lt; Wszystkie Identyfikatory Zdarzeń &gt;</value>
+    <value>&lt;Wszystkie identyfikatory zdarzeń&gt;</value>
   </data>
   <data name="dataBtn.Text" xml:space="preserve">
-    <value>Filtry danych...</value>
+    <value>Filtry &amp;danych...</value>
   </data>
   <data name="filterTab.Text" xml:space="preserve">
     <value>Filtr</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Aby zapewnić filtr zdarzeń w formie XPath, kliknij pole wyboru "Ręcznie edytować kwerendy" poniżej.</value>
+    <value>Aby podać filtr zdarzeń w formie wyrażenia XPath, kliknij poniższe pole wyboru Edytuj zapytanie ręcznie.</value>
   </data>
   <data name="editManuallyCheckBox.Text" xml:space="preserve">
-    <value>Ręcznie edytować kwerendy</value>
+    <value>&amp;Edytuj zapytanie ręcznie</value>
   </data>
   <data name="wrapCheckBox.Text" xml:space="preserve">
-    <value>Zawijanie tekstu</value>
+    <value>Za&amp;wijaj tekst</value>
   </data>
   <data name="xmlTab.Text" xml:space="preserve">
     <value>XML</value>

@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Wyszukiwanie identyfikatora CLSID...</value>
+    <value>Wyszukiwanie CLSID...</value>
   </data>
   <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Wyszukiwanie identyfikatora CLSID z rejestru systemu lokalnego.</value>
+    <value>Wyszukiwanie CLSID z lokalnego rejestru.</value>
   </data>
   <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ręcznie wprowadź identyfikator CLSID...</value>
+    <value>Ręcznie wprowadź CLSID...</value>
   </data>
   <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Ręcznie wprowadź identyfikator CLSID</value>
+    <value>Ręcznie wprowadź CLSID</value>
   </data>
   <data name="getCLSIDButton.Text" xml:space="preserve">
     <value>...</value>

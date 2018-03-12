@@ -124,12 +124,12 @@
     <value>Codziennie</value>
   </data>
   <data name="schedWeeklyRadio.Text" xml:space="preserve">
-    <value>Co tydzień</value>
+    <value>Cotygodniowo</value>
   </data>
   <data name="schedMonthlyRadio.Text" xml:space="preserve">
-    <value>Miesięczne</value>
+    <value>Comiesięcznie</value>
   </data>
   <data name="schedStartLabel.Text" xml:space="preserve">
-    <value>Start:</value>
+    <value>Uruchom:</value>
   </data>
 </root>

@@ -118,43 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Tylko wtedy, gdy komputer jest bezczynny, należy uruchomić zadanie:</value>
+    <value>&amp;Uruchom zadanie tylko wtedy, gdy komputer jest bezczynny przez:</value>
   </data>
   <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>Wznawiania pracy komputera w celu uruchomienia tego zadania</value>
+    <value>&amp;Wznów pracę komputera, aby uruchomić to zadanie</value>
   </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
-    <value>Uruchom tylko wtedy, gdy następujące połączenie sieciowe jest dostępne:</value>
+    <value>U&amp;ruchom tylko wtedy, gdy następujące połączenie sieciowe jest dostępne:</value>
   </data>
   <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Zatrzymaj, jeśli komputer przełączy się na zasilanie akumulatorowe</value>
+    <value>Zatrzymaj, jeśli komputer przełączy się na zasilanie &amp;bateryjne</value>
   </data>
   <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Ponownie, jeśli stan bezczynności powróci</value>
+    <value>Uruc&amp;hom ponownie, jeśli stan bezczynności powróci</value>
   </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
-    <value>Nie Zezwalaj na początku Jeśli w sesji zdalnego aplikacji zintegrowanych lokalnie (kolej)</value>
+    <value>Nie zezwalaj na uruchamianie w sesji Remote Application Session Integrated Locally (RAIL)</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Uruchom zadanie tylko wtedy, gdy komputer jest zasilany prądem przemiennym</value>
+    <value>Uruchom zadanie tylko wtedy, gdy komputer jest na zasilaniu &amp;sieciowym</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Opcje</value>
   </data>
   <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
-    <value>Bezczynności</value>
+    <value>Bezczynność</value>
   </data>
   <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Zatrzymaj, jeśli komputer przestanie być bezczynny</value>
+    <value>&amp;Zatrzymaj, jeśli komputer przestanie być bezczynny</value>
   </data>
   <data name="optionPanelHeaderLabel3.Text" xml:space="preserve">
-    <value>Zasilania</value>
+    <value>Zasilanie</value>
   </data>
   <data name="optionPanelHeaderLabel4.Text" xml:space="preserve">
-    <value>Sieci</value>
+    <value>Sieć</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
-    <value>Czekać na bezczynności dla:</value>
+    <value>&amp;Czekaj na bezczynność przez:</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
     <value>Opcje uruchamiania zadania</value>

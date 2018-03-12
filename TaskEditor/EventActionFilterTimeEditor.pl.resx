@@ -121,30 +121,30 @@
     <value>Anuluj</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Wprowadź niestandardowy zakres dat dla filtru:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Od:</value>
+    <value>&amp;Od:</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Do:</value>
+    <value>&amp;Do:</value>
   </data>
   <data name="fromCombo.Items" xml:space="preserve">
     <value>Pierwsze zdarzenie</value>
   </data>
   <data name="fromCombo.Items1" xml:space="preserve">
-    <value>Wydarzenia na</value>
+    <value>Zdarzenie z dnia</value>
   </data>
   <data name="toCombo.Items" xml:space="preserve">
     <value>Ostatnie zdarzenie</value>
   </data>
   <data name="toCombo.Items1" xml:space="preserve">
-    <value>Wydarzenia na</value>
+    <value>Zdarzenie z dnia</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Niestandardowy zakres</value>
+    <value>Zakres niestandardowy</value>
   </data>
 </root>

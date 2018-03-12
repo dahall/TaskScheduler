@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="v1Check.Text" xml:space="preserve">
-    <value>Życie w wersji 1</value>
+    <value>Wymuś wersję 1</value>
   </data>
   <data name="runButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>Anuluj</value>
@@ -130,19 +130,19 @@
     <value>Wybierz komputer, którym chcesz zarządzać:</value>
   </data>
   <data name="localComputerRadio.Text" xml:space="preserve">
-    <value>Komputer lokalny</value>
+    <value>&amp;Komputer lokalny</value>
   </data>
   <data name="remoteComputerRadio.Text" xml:space="preserve">
-    <value>Innego komputera:</value>
+    <value>I&amp;nny komputer:</value>
   </data>
   <data name="otherUserCheckbox.Text" xml:space="preserve">
-    <value>Połącz się jako inny użytkownik: {0}</value>
+    <value>&amp;Połącz się jako inny użytkownik: {0}</value>
   </data>
   <data name="computerBrowseBtn.Text" xml:space="preserve">
-    <value>Przeglądaj...</value>
+    <value>Pr&amp;zeglądaj...</value>
   </data>
   <data name="setUserBtn.Text" xml:space="preserve">
-    <value>Set User...</value>
+    <value>Ustaw &amp;użytkownika...</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Wybierz komputer</value>

@@ -133,6 +133,6 @@
     <value>Podstawowe</value>
   </data>
   <data name="editBtn.Text" xml:space="preserve">
-    <value>Edytuj filtr zdarzeń...</value>
+    <value>&amp;Filtr nowych zdarzeń...</value>
   </data>
 </root>

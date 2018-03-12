@@ -121,10 +121,10 @@
     <value>Anuluj</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="descLabel.Text" xml:space="preserve">
-    <value>Wybierz zadanie lub folderu.</value>
+    <value>Wybierz zadanie lub folder.</value>
   </data>
   <data name="loadingLabel.Text" xml:space="preserve">
     <value>Trwa ładowanie...</value>

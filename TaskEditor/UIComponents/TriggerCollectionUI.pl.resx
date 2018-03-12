@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>Edycja...</value>
+    <value>&amp;Edytuj…</value>
   </data>
   <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>Nowy...</value>
+    <value>&amp;Nowy...</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Spust</value>
+    <value>Wyzwalacz</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Szczegóły</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Stanu</value>
+    <value>Stan</value>
   </data>
   <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Nowy wyzwalacz...</value>
@@ -139,7 +139,7 @@
     <value>Usuń wyzwalacz</value>
   </data>
   <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edytować spust...</value>
+    <value>Edytuj wyzwalacz...</value>
   </data>
   <data name="enableToolStripMenuItem.Text" xml:space="preserve">
     <value>Włącz</value>
@@ -148,6 +148,6 @@
     <value>Wyłącz</value>
   </data>
   <data name="triggerDeleteButton.Text" xml:space="preserve">
-    <value>Usuń</value>
+    <value>&amp;Usuń</value>
   </data>
 </root>

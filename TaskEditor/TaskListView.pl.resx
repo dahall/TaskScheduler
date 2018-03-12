@@ -124,21 +124,21 @@
     <value>Stanu</value>
   </data>
   <data name="triggers.Text" xml:space="preserve">
-    <value>Wyzwalaczy</value>
+    <value>Wyzwalacze</value>
   </data>
   <data name="nextRunTime.Text" xml:space="preserve">
-    <value>Następnym uruchomieniu</value>
+    <value>Czas nast. uruchomienia</value>
   </data>
   <data name="lastRunTime.Text" xml:space="preserve">
-    <value>Ostatni czas wykonywania</value>
+    <value>Czas ostat. uruchomienia</value>
   </data>
   <data name="lastRunResult.Text" xml:space="preserve">
-    <value>Ostatni wynik uruchomienia</value>
+    <value>Wynik ostatniego uruchomienia</value>
   </data>
   <data name="author.Text" xml:space="preserve">
     <value>Autor</value>
   </data>
   <data name="created.Text" xml:space="preserve">
-    <value>Stworzone</value>
+    <value>Utworzono</value>
   </data>
 </root>

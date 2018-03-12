@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
-    <value>Dodaj, Usuń i Zmień wyzwalaczy</value>
+    <value>Dodaj, Usuń i Zmień wyzwalacze</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Opcje wyzwalania</value>
+    <value>Opcje wyzwalacza</value>
   </data>
 </root>

@@ -121,10 +121,10 @@
     <value>Dowolne połączenie</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Niepełnosprawnych</value>
+    <value>Wyłączono</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>Włączone</value>
+    <value>Włączono</value>
   </data>
   <data name="Last" xml:space="preserve">
     <value>Ostatni</value>
@@ -133,22 +133,22 @@
     <value>Przy uruchamianiu</value>
   </data>
   <data name="TriggerTypeEvent" xml:space="preserve">
-    <value>Na zdarzenie</value>
+    <value>Przy zdarzeniu</value>
   </data>
   <data name="TriggerTypeIdle" xml:space="preserve">
-    <value>Na biegu jałowym</value>
+    <value>Przy bezczynności</value>
   </data>
   <data name="TriggerTypeLogon" xml:space="preserve">
     <value>Przy logowaniu</value>
   </data>
   <data name="TriggerTypeRegistration" xml:space="preserve">
-    <value>O tworzenie/modyfikowanie zadania</value>
+    <value>Przy tworzeniu/modyfikowaniu zadania</value>
   </data>
   <data name="TriggerTypeSchedule" xml:space="preserve">
     <value>Zgodnie z harmonogramem</value>
   </data>
   <data name="TriggerTypeSessionConnect" xml:space="preserve">
-    <value>Na połączenie z sesją użytkownika</value>
+    <value>Przy połączeniu z sesją użytkownika</value>
   </data>
   <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
     <value>Przy rozłączeniu z sesją użytkownika</value>
@@ -160,31 +160,31 @@
     <value>Przy odblokowaniu stacji roboczej</value>
   </data>
   <data name="DateTimeSyncText" xml:space="preserve">
-    <value>Synchronizowanie w strefach czasowych</value>
+    <value>Synch. w strefach czasowych</value>
   </data>
   <data name="LocalMachine" xml:space="preserve">
     <value>Komputer lokalny</value>
   </data>
   <data name="TaskEditDlgTitle" xml:space="preserve">
-    <value>{0} właściwości ({1})</value>
+    <value>Właściwości {0} ({1})</value>
   </data>
   <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
-    <value>Nieprawidłowe zdarzenie wyzwalania</value>
+    <value>Nieprawidłowe zdarzenie wyzwalacza</value>
   </data>
   <data name="WizardEventTriggerInvalid" xml:space="preserve">
-    <value>Jako minimum należy wybrać dziennik.</value>
+    <value>Należy wybrać dziennik.</value>
   </data>
   <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
-    <value>Musi istnieć co najmniej jeden miesiąc, jeden tydzień i jeden dzień tygodnia, zaznaczone.</value>
+    <value>Musi być zanaczony co najmniej jeden miesiąc, jeden tydzień i jeden dzień tygodnia.</value>
   </data>
   <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
-    <value>Nieprawidłowych miesięcznego wyzwalacza</value>
+    <value>Nieprawidłowy wyzwalacz comiesięczny</value>
   </data>
   <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
-    <value>Musi istnieć co najmniej jeden miesiąc i jeden dzień zaznaczony.</value>
+    <value>Musi być zaznaczony co najmniej jeden miesiąc i jeden dzień.</value>
   </data>
   <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
-    <value>Tej klasy COM nie obsługuje wymaganego interfejsu.</value>
+    <value>Ta klasa COM nie obsługuje wymaganego interfejsu.</value>
   </data>
   <data name="Error_CredUIConfirmFailed" xml:space="preserve">
     <value>Wywołanie CredUIConfirmCredentials nie powiodło się zwracając kod błędu: {0}</value>
@@ -199,19 +199,19 @@
     <value>Wprowadź informacje o koncie użytkownika do uruchomienia tego zadania.</value>
   </data>
   <data name="UserAuthenticationError" xml:space="preserve">
-    <value>Nie podano prawidłowego hasła dla określonego konta.</value>
+    <value>Nie podano prawidłowego hasła dla konta.</value>
   </data>
   <data name="TaskMustHaveActionsError" xml:space="preserve">
-    <value>Musi istnieć co najmniej jedno działanie przypisane do tego zadania.</value>
+    <value>Musi istnieć co najmniej jedna akcja przypisana do tego zadania.</value>
   </data>
   <data name="TaskRunTimesDialogTitle" xml:space="preserve">
-    <value>Uruchom zadanie czasu ({0})</value>
+    <value>Uruchomienia zadania ({0})</value>
   </data>
   <data name="LastResultSuccessful" xml:space="preserve">
     <value>Operacja zakończyła się pomyślnie. (0x0)</value>
   </data>
   <data name="Never" xml:space="preserve">
-    <value>Nigdy nie</value>
+    <value>Nigdy</value>
   </data>
   <data name="ActionDlgEditCaption" xml:space="preserve">
     <value>Edycja akcji</value>
@@ -226,13 +226,13 @@
     <value>Nowy wyzwalacz</value>
   </data>
   <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
-    <value>Jeśli chcesz mieć usuwane automatycznie po uruchomieniu zadania, należy dodać co najmniej jeden wyzwalacz, który ma datę wygaśnięcia.</value>
+    <value>Jeśli chcesz mieć zadania usuwane automatycznie po uruchomieniu, należy dodać co najmniej jeden wyzwalacz, który ma datę wygaśnięcia.</value>
   </data>
   <data name="BrowseForTargetServerPrompt" xml:space="preserve">
-    <value>Wybierz nowy komputer docelowy:</value>
+    <value>Wybierz komputer docelowy:</value>
   </data>
   <data name="NoUserSpecifiedText" xml:space="preserve">
-    <value>&lt;none&gt;</value>
+    <value>&lt;brak&gt;</value>
   </data>
   <data name="TimeSpanDoNotWait" xml:space="preserve">
     <value>Nie czekaj</value>
@@ -244,31 +244,31 @@
     <value>Czas nieokreślony</value>
   </data>
   <data name="Error_CannotRetrieveHistory" xml:space="preserve">
-    <value>Nie można pobrać historia zadanie. Błąd: {0}</value>
+    <value>Nie można pobrać historii zadania. Błąd: {0}</value>
   </data>
   <data name="Error_NoGroupsUnderV1" xml:space="preserve">
-    <value>Uruchamianie zadania przy użyciu konta użytkownika grupy jest obsługiwany tylko na Windows Vista™ lub później. Aby uruchomić zadanie w ramach konta grupy, należy uaktualnić tego zadania do zadania Windows Vista™.</value>
+    <value>Uruchamianie zadania przy użyciu konta grupy jest obsługiwane tylko na Windows Vista™ lub późniszym. Aby uruchomić zadanie w ramach konta grupy, należy uaktualnić to zadanie do zadania Windows Vista™.</value>
   </data>
   <data name="WizActionSubtextEmail" xml:space="preserve">
     <value>Wysyła wiadomości e-mail przy użyciu dostarczonych informacji.</value>
   </data>
   <data name="WizActionSubtextExecute" xml:space="preserve">
-    <value>Wykonuje operacji wiersza polecenia.</value>
+    <value>Wykonuje operację wiersza polecenia.</value>
   </data>
   <data name="WizActionSubtextShowMessage" xml:space="preserve">
-    <value>Pokazuje okno komunikatu, gdy zadanie jest aktywna.</value>
+    <value>Pokazuje okno komunikatu, gdy zadanie zostanie uruchomione.</value>
   </data>
   <data name="WizActionTextExecute" xml:space="preserve">
-    <value>Uruchamianie programu</value>
+    <value>Uruchom program</value>
   </data>
   <data name="WizActionTextSendEmail" xml:space="preserve">
     <value>Wyślij wiadomość e-mail</value>
   </data>
   <data name="WizActionTextShowMessage" xml:space="preserve">
-    <value>Wyświetlanie wiadomości</value>
+    <value>Wyświetl komunikat</value>
   </data>
   <data name="WizTriggerSubtextDaily" xml:space="preserve">
-    <value>Uruchamia zadanie w oparciu o plan dnia. Na przykład uruchamiania zadania w określonym czasie każdego dnia, co drugi dzień, co trzeci dzień i tak dalej.</value>
+    <value>Uruchamia zadanie w oparciu harmonogram dzienny. Na przykład uruchamiania zadania w określonym czasie każdego dnia, co drugi dzień, co trzeci dzień i tak dalej.</value>
   </data>
   <data name="WizTriggerTextDaily" xml:space="preserve">
     <value>Codziennie</value>
@@ -277,16 +277,16 @@
     <value>Uruchamia zadanie, gdy wystąpi zdarzenie systemu.</value>
   </data>
   <data name="WizTriggerTextEvent" xml:space="preserve">
-    <value>Podczas określonego zdarzenia jest rejestrowane</value>
+    <value>Przy zarejestrowaniu określonego zdarzenia</value>
   </data>
   <data name="WizTriggerSubtextMonthly" xml:space="preserve">
-    <value>Uruchamia zadanie w oparciu o miesięcznym harmonogramem. Na przykład zadanie rozpoczyna się na konkretne dni określonych miesięcy.</value>
+    <value>Uruchamia zadanie w oparciu o harmonogram miesięczny. Na przykład zadanie rozpoczyna się w konkretne dni określonych miesięcy.</value>
   </data>
   <data name="WizTriggerTextMonthly" xml:space="preserve">
-    <value>Miesięczne</value>
+    <value>Comiesięcznie</value>
   </data>
   <data name="WizTriggerSubtextTime" xml:space="preserve">
-    <value>Uruchamia zadanie o określonej dacie i czasie.</value>
+    <value>Uruchamia zadanie w określonym dniu i czasie.</value>
   </data>
   <data name="WizTriggerTextTime" xml:space="preserve">
     <value>Jeden raz</value>
@@ -295,19 +295,25 @@
     <value>Uruchamia zadanie w oparciu o Harmonogram tygodniowy. Na przykład zadanie rozpoczyna się o godzinie 8:00 w określonym dniu tygodnia, co tydzień lub co drugi tydzień.</value>
   </data>
   <data name="WizTriggerTextWeekly" xml:space="preserve">
-    <value>Co tydzień</value>
+    <value>Cotygodniowo</value>
   </data>
   <data name="WizardSummaryFormatString" xml:space="preserve">
-    <value>Nazwa: {0} opis: {1} wyzwalacz: {2} akcji: {3}</value>
+    <value>Nazwa: {0}
+
+Opis: {1}
+
+Wyzwalacz: {2}
+
+Akcja: {3}</value>
   </data>
   <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
-    <value>Wartość interwału powtarzania musi być mniejsza niż lub równa wartości czas trwania powtarzania.</value>
+    <value>Interwał powtarzania musi być mniejszy lub równa czasowi trwania powtarzania.</value>
   </data>
   <data name="Error_PasswordMustBeProvided" xml:space="preserve">
-    <value>Harmonogram zadań nie można utworzyć zadania. Konto użytkownika jest nieznany, hasło jest nieprawidłowe lub konto użytkownika nie ma uprawnień do tworzenia tego zadania.</value>
+    <value>Harmonogram zadań nie może utworzyć zadania. Konto użytkownika jest nieznane, hasło jest nieprawidłowe lub konto użytkownika nie ma uprawnień do utworzenia tego zadania.</value>
   </data>
   <data name="TaskCompatibility" xml:space="preserve">
-    <value>O usługi | Server™ systemu Windows 2003, Windows® lub Windows® 2000 | Windows Vista™, Windows Server™ 2008 | Windows® 7, Windows Server™ 2008 R2 | Windows® 8 lub 8.1, Windows Server™ 2012 | Windows® 10</value>
+    <value>Usługa AT|Server™ systemu Windows 2003, Windows® lub Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8 lub 8.1, Windows Server™ 2012|Windows® 10</value>
   </data>
   <data name="TimeSpanNotStarted" xml:space="preserve">
     <value>Nierozpoczęte</value>
@@ -316,22 +322,22 @@
     <value>Powyżej normalnego</value>
   </data>
   <data name="ProcessPriorityBelowNormal" xml:space="preserve">
-    <value>Poniżej normy</value>
+    <value>Poniżej normalnego</value>
   </data>
   <data name="ProcessPriorityHigh" xml:space="preserve">
-    <value>Wysoka</value>
+    <value>Wysoki</value>
   </data>
   <data name="ProcessPriorityIdle" xml:space="preserve">
     <value>Bezczynności</value>
   </data>
   <data name="ProcessPriorityNormal" xml:space="preserve">
-    <value>Normalne</value>
+    <value>Normalny</value>
   </data>
   <data name="ProcessPriorityRealTime" xml:space="preserve">
-    <value>W czasie rzeczywistym</value>
+    <value>Czasu rzeczywistego</value>
   </data>
   <data name="SIDTypeDefault" xml:space="preserve">
-    <value>Domyślne</value>
+    <value>Domyślny</value>
   </data>
   <data name="SIDTypeNone" xml:space="preserve">
     <value>Brak</value>
@@ -340,22 +346,22 @@
     <value>Bez ograniczeń</value>
   </data>
   <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
-    <value>Konto użytkownika, na karcie Ogólne należy ustawić 'Usługa sieciowa' lub 'Usługa lokalna' podczas procesu typu SID jest ustawiona na 'Bez ograniczeń' na karcie dodatki. Należy zmienić typ identyfikatora SID lub ustawić jedną z prawidłowego konta użytkownika.</value>
+    <value>Konto użytkownika na karcie Ogólne należy ustawić na 'Usługa sieciowa' lub 'Usługa lokalna' gdy typ identyfikatora SID jest ustawiony na 'Bez ograniczeń' na karcie Dodatkowe. Należy zmienić typ identyfikatora SID lub konto użytkownika na jedną z prawidłowych wartości.</value>
   </data>
   <data name="UseUnifiedResetQuestion" xml:space="preserve">
     <value>Ustawienie tej właociwooci spowoduje wyłączenie wielu innych obiektów. Nadal chcesz kontynuować?</value>
   </data>
   <data name="ActionTypeComHandler" xml:space="preserve">
-    <value>Niestandardowy program obsługi</value>
+    <value>Obsługa niestandardowa</value>
   </data>
   <data name="ActionTypeExecute" xml:space="preserve">
-    <value>Uruchamianie programu</value>
+    <value>Uruchom program</value>
   </data>
   <data name="ActionTypeSendEmail" xml:space="preserve">
     <value>Wyślij wiadomość e-mail</value>
   </data>
   <data name="ActionTypeShowMessage" xml:space="preserve">
-    <value>Wyświetlanie wiadomości</value>
+    <value>Wyświetl komunikat</value>
   </data>
   <data name="TaskInstancesIgnoreNew" xml:space="preserve">
     <value>Nie uruchamiaj nowego wystąpienia</value>
@@ -367,31 +373,31 @@
     <value>Kolejkuj nowe wystąpienie</value>
   </data>
   <data name="TaskInstancesStopExisting" xml:space="preserve">
-    <value>Zatrzymać istniejące wystąpienie</value>
+    <value>Zatrzymaj istniejące wystąpienie</value>
   </data>
   <data name="Error_InvalidSddlFormat" xml:space="preserve">
-    <value>SDDL musi być w formacie zdefiniowane w http://goo.gl/6au0V</value>
+    <value>SDDL musi być w formacie zdefiniowanym w http://goo.gl/6au0V</value>
   </data>
   <data name="Error_InvalidUriFormat" xml:space="preserve">
-    <value>Identyfikator URI nie jest w niepoprawnym formacie.</value>
+    <value>Identyfikator URI jest w niepoprawnym formacie.</value>
   </data>
   <data name="Error_InvalidVersionFormat" xml:space="preserve">
-    <value>Wersji musi być w formacie nr_główny.nr_pomocniczy[.nr_kompilacji[.nr_wydania]].</value>
+    <value>Wersja musi być w formacie nr_główny.nr_pomocniczy[.nr_kompilacji[.nr_wydania]].</value>
   </data>
   <data name="EventDetailHeader" xml:space="preserve">
-    <value>Zdarzenia {0}, TaskScheduler</value>
+    <value>Zdarzenie {0}, TaskScheduler</value>
   </data>
   <data name="HistoryHeader" xml:space="preserve">
     <value>Liczba zdarzeń: {0}</value>
   </data>
   <data name="EventPropertiesDialogTitle" xml:space="preserve">
-    <value>Właściwości zdarzenia - zdarzenia {0}, TaskScheduler</value>
+    <value>Właściwości zdarzenia - zdarzenie {0}, TaskScheduler</value>
   </data>
   <data name="TaskEventStatusFailure" xml:space="preserve">
-    <value>Awaria</value>
+    <value>Błąd</value>
   </data>
   <data name="TaskEventStatusStillRunning" xml:space="preserve">
-    <value>Nadal działa</value>
+    <value>Działa</value>
   </data>
   <data name="TaskEventStatusSuccess" xml:space="preserve">
     <value>Sukces</value>
@@ -400,7 +406,7 @@
     <value>Zakończony</value>
   </data>
   <data name="TriggerTypeRemoteConnect" xml:space="preserve">
-    <value>Na połączenia do sesji zdalnego użytkownika</value>
+    <value>Przy połączeniu z sesją zdalnego użytkownika</value>
   </data>
   <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
     <value>Przy rozłączeniu z sesją zdalnego użytkownika</value>
@@ -409,55 +415,55 @@
     <value>Trwa ładowanie...</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
-    <value>Nazwa zadania nie jest w prawidłowym formacie. Znaki nie są dozwolone w pliku są niedozwolone w nazwie zadania.</value>
+    <value>Nazwa zadania nie jest prawidłowa. Znaki niedozwolone w nazwie pliku są niedozwolone w nazwie zadania.</value>
   </data>
   <data name="Error_CannotEditTrigger" xml:space="preserve">
-    <value>Ten rodzaj wyzwalacz nie można edytować w tym narzędziu.</value>
+    <value>Nie można edytować tego rodzaju wyzwalacza w tym narzędziu.</value>
   </data>
   <data name="TriggerTypeCustom" xml:space="preserve">
-    <value>Wyzwalaczy niestandardowych</value>
+    <value>Wyzwalacz niestandardowy</value>
   </data>
   <data name="ChangeUserBtn" xml:space="preserve">
-    <value>Zmień użytkownika lub grupę...</value>
+    <value>Z&amp;mień użytkownika lub grupę…</value>
   </data>
   <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
     <value>Zmień użytkownika...</value>
   </data>
   <data name="Error_EventsNotSupported" xml:space="preserve">
-    <value>Zdarzenia zadanie i historii nie są obsługiwane w wersjach .NET przed 3.5.</value>
+    <value>Zdarzenia i historia zadania nie są obsługiwane w wersjach .NET przed 3.5.</value>
   </data>
   <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
-    <value>Następujące ustawienia właściwości nie można używać z ustawienie wybranego zgodności:</value>
+    <value>Poniższe ustawienia nie mogą być używane z wybranym ustawieniem zgodności:</value>
   </data>
   <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
-    <value>Niektóre ustawienia są niezgodne z tego wyboru.</value>
+    <value>Niektóre ustawienia są niezgodne z dokonanym wyborem.</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
     <value>Zadanie jest aktualnie uruchomione. (0x{0:x})</value>
   </data>
   <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
-    <value>Nieprawidłowy identyfikator zakresu wzór</value>
+    <value>Nieprawidłowy wzór zakresu identyfikatora</value>
   </data>
   <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
-    <value>Jeśli zdecydujesz się ręcznie edytować kwerendę, nie będzie mógł zmodyfikować kwerendę za pomocą formantów na karcie filtr chcesz kontynuować?</value>
+    <value>Jeśli wybierzesz ręczne edytowanie zapytania, później nie będzie można modyfikować tego zapytania za pomocą formantów na karcie Filtr. Czy chcesz kontynuować?</value>
   </data>
   <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
-    <value>Czy chcesz edytować kwerendy za pomocą karty filtr? To spowoduje ręczne zmiany dokonane w tej kwerendzie zostanie odrzucony.</value>
+    <value>Czy chcesz edytować kwerendę za pomocą karty filtr? To spowoduje, że ręczne zmiany dokonane w tej kwerendzie zostaną odrzucone.</value>
   </data>
   <data name="EventLogTime12Hours" xml:space="preserve">
-    <value>Ostatnich 12 godzin</value>
+    <value>Ostatnie 12 godzin</value>
   </data>
   <data name="EventLogTime30Days" xml:space="preserve">
     <value>Ostatnie 30 dni</value>
   </data>
   <data name="EventLogTimeAnyTime" xml:space="preserve">
-    <value>Dowolnym momencie</value>
+    <value>Kiedykolwiek</value>
   </data>
   <data name="EventLogTimeCustom" xml:space="preserve">
     <value>Własny zakres...</value>
   </data>
   <data name="EventLogTimeCustomFrom" xml:space="preserve">
-    <value>Wszystkie zdarzenia z {0}</value>
+    <value>Wszystkie zdarzenia od {0}</value>
   </data>
   <data name="EventLogTimeCustomFromTo" xml:space="preserve">
     <value>Od {0} do {1}</value>
@@ -493,19 +499,19 @@
     <value>SQM</value>
   </data>
   <data name="EventKeywordsWdiContext" xml:space="preserve">
-    <value>WDI kontekstu</value>
+    <value>WDI Context</value>
   </data>
   <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
     <value>WDI Diag</value>
   </data>
   <data name="EventKeywordsAll" xml:space="preserve">
-    <value>&lt; Wszystkich słów kluczowych &amp;gt;</value>
+    <value>&lt;Wszystkie słowa kluczowe&gt;</value>
   </data>
   <data name="EventTasksAll" xml:space="preserve">
-    <value>&lt; Wszystkie Zadań Kategorie &gt;</value>
+    <value>&lt;Wszystkie kategorie zadań&gt;</value>
   </data>
   <data name="EventViewerDialogTitle" xml:space="preserve">
-    <value>W Podglądzie zdarzeń</value>
+    <value>Podgląd zdarzeń</value>
   </data>
   <data name="EventLogParentApps" xml:space="preserve">
     <value>Dzienniki aplikacji i usług</value>
@@ -514,36 +520,36 @@
     <value>Dzienniki systemu Windows</value>
   </data>
   <data name="Error_InvalidQueryFormat" xml:space="preserve">
-    <value>Porzucone zawartość musi być tekstem lub plikiem zawierającym prawidłowej kwerendy Xml.</value>
+    <value>Zawartość musi być tekstem lub plikiem zawierającym prawidłowej kwerendy XML.</value>
   </data>
   <data name="EventLogsAll" xml:space="preserve">
-    <value>&lt; Wszystkie Dzienniki &gt;</value>
+    <value>&lt;Wszystkie dzienniki&gt;</value>
   </data>
   <data name="EventSourcesAll" xml:space="preserve">
-    <value>&lt; Wszystkich Źródeł &gt;</value>
+    <value>&lt;Wszystkie źródła&gt;</value>
   </data>
   <data name="Error_EventFilterBadQuery" xml:space="preserve">
-    <value>Kwerendy XML: znaleziono nierozpoznany tekstu.</value>
+    <value>Kwerenda XML: znaleziono nierozpoznany tekst.</value>
   </data>
   <data name="Error_EventFilterBadQueryText" xml:space="preserve">
-    <value>Obrażając tekst: '{0}'</value>
+    <value>Nierozpoznany tekst: '{0}'</value>
   </data>
   <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
-    <value>Minimalny termin lub okresu, które zadania można użyć jest 1 dzień. Termin również musi być większa niż okres.</value>
+    <value>Minimalny termin lub okres, który można użyć dla zadania to 1 dzień. Termin również musi być późniejszy niż koniec okresu.</value>
   </data>
   <data name="TimeSpanUnset" xml:space="preserve">
     <value>Nie ustawiono</value>
   </data>
   <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
-    <value>Wartość czasu trwania powtarzania musi być 1 minute lub większa.</value>
+    <value>Czasu trwania powtarzania to co najmniej 1 minuta.</value>
   </data>
   <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
-    <value>Wartość interwału powtarzania musi być 1 minutę lub więcej i mniej niż 31 dni.</value>
+    <value>Interwał powtarzania to co najmniej 1 minuta i mniej niż 31 dni.</value>
   </data>
   <data name="Error_InvalidSpanValue" xml:space="preserve">
     <value>Nieprawidłowa wartość czasu trwania.</value>
   </data>
   <data name="Error_InvalidFileName" xml:space="preserve">
-    <value>Podany program/skrypt nie jest prawidłową nazwę pliku. Proszę poprawić przed kontynuowaniem.</value>
+    <value>Podany program/skrypt nie jest prawidłową nazwą pliku. Proszę poprawić przed kontynuowaniem.</value>
   </data>
 </root>

@@ -127,9 +127,9 @@
     <value>Miesiące:</value>
   </data>
   <data name="monthlyOnDOWDropDown.CheckAllText" xml:space="preserve">
-    <value>&lt; Zaznacz wszystkie dni &gt;</value>
+    <value>&lt;Wybierz wszystkie dni&gt;</value>
   </data>
   <data name="monthlyMonthsDropDown.CheckAllText" xml:space="preserve">
-    <value>&lt; Wybierz wszystkie miesiące &gt;</value>
+    <value>&lt;Wybierz wszystkie miesiące&gt;</value>
   </data>
 </root>

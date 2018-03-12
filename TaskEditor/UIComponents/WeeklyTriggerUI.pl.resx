@@ -121,7 +121,7 @@
     <value>Niedziela</value>
   </data>
   <data name="weeklyMonCheck.Text" xml:space="preserve">
-    <value>Od poniedziałku</value>
+    <value>Poniedziałek</value>
   </data>
   <data name="weeklyTueCheck.Text" xml:space="preserve">
     <value>Wtorek</value>
@@ -139,9 +139,9 @@
     <value>Sobota</value>
   </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>tygodnie na:</value>
+    <value>tyg. w dniu:</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
-    <value>Powtarzać co:</value>
+    <value>Po&amp;wtórz co:</value>
   </data>
 </root>

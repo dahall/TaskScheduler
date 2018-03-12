@@ -121,25 +121,25 @@
     <value>Anuluj</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="generalItem.Text" xml:space="preserve">
     <value>Ogólne</value>
   </data>
   <data name="triggersItem.Text" xml:space="preserve">
-    <value>Wyzwalaczy</value>
+    <value>Wyzwalacze</value>
   </data>
   <data name="actionsItem.Text" xml:space="preserve">
-    <value>Działania</value>
+    <value>Akcje</value>
   </data>
   <data name="securityItem.Text" xml:space="preserve">
-    <value>Bezpieczeństwa</value>
+    <value>Zabezpieczenia</value>
   </data>
   <data name="startupItem.Text" xml:space="preserve">
-    <value>Początek</value>
+    <value>Warunki</value>
   </data>
   <data name="runItem.Text" xml:space="preserve">
-    <value>Środowisko wykonawcze</value>
+    <value>Ustawienia</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Nazwa:</value>

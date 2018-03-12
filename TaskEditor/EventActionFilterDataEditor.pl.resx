@@ -121,7 +121,7 @@
     <value>Anuluj</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="NameCol.HeaderText" xml:space="preserve">
     <value>Nazwa</value>
@@ -130,6 +130,6 @@
     <value>Wartość</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Edytowanie elementów EventData</value>
+    <value>Filtry danych</value>
   </data>
 </root>

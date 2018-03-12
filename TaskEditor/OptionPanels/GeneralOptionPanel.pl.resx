@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
-    <value>Użyj zunifikowanego aparat planowania</value>
+    <value>&amp;Użyj zunifikowanego aparatu harmonogramowania</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Opis:</value>
+    <value>&amp;Opis:</value>
   </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
-    <value>Dokumentacja:</value>
+    <value>&amp;Dokumentacja:</value>
   </data>
   <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
     <value>Informacje</value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
-    <value>Wersja:</value>
+    <value>&amp;Wersja:</value>
   </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
-    <value>Automatycznie wyłączyć zadania, każdym uruchomieniu systemu Windows</value>
+    <value>&amp;Automatycznie wyłącz zadanie przy każdym uruchomieniu systemu Windows</value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
-    <value>URI:</value>
+    <value>&amp;URI:</value>
   </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
-    <value>Źródło:</value>
+    <value>Ź&amp;ródło:</value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
-    <value>Włączone</value>
+    <value>&amp;Włączono</value>
   </data>
   <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Ukryte</value>
+    <value>&amp;Ukryte</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Autor:</value>
+    <value>&amp;Autor:</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Konfiguracja</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Zadania ogólne informacje</value>
+    <value>Ogólne informacje</value>
   </data>
 </root>

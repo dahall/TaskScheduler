@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label21.Text" xml:space="preserve">
-    <value>Nazwa dziennika:</value>
+    <value>&amp;Nazwa dziennika:</value>
   </data>
   <data name="infoLink.Text" xml:space="preserve">
-    <value>Pomoc Online dziennika zdarzeń</value>
+    <value>Pomoc online dziennika</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Źródło:</value>
+    <value>Ź&amp;ródło:</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Identyfikator zdarzenia:</value>
+    <value>&amp;Identyfikator:</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
-    <value>Komputer:</value>
+    <value>Ko&amp;mputer:</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>Słowa kluczowe:</value>
+    <value>&amp;Słowa kluczowe:</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Poziom:</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
-    <value>Rejestrowane:</value>
+    <value>Za&amp;logowano:</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
-    <value>Kategorii zadań:</value>
+    <value>Ka&amp;tegoria zadania:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Użytkownik:</value>
+    <value>U&amp;żytkownik:</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Kod operacji:</value>
+    <value>Kod op&amp;eracji:</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Więcej informacji:</value>
+    <value>Więcej in&amp;formacji:</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Ogólne</value>
   </data>
   <data name="xmlViewRadio.Text" xml:space="preserve">
-    <value>Widok XML</value>
+    <value>Widok &amp;XML</value>
   </data>
   <data name="textViewRadio.Text" xml:space="preserve">
-    <value>Przyjazny widok</value>
+    <value>Widok przyjazn&amp;y</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kopiowanie</value>
+    <value>&amp;Kopiuj</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zaznacz wszystkie</value>
+    <value>&amp;Zaznacz wszystko</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Szczegóły</value>

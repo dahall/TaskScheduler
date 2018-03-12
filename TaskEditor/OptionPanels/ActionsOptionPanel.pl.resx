@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
-    <value>Dodawania, usuwania i zmienić akcje</value>
+    <value>Dodaj, usuń i popraw akcje</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Akcje zadania</value>
+    <value>Akcje</value>
   </data>
 </root>

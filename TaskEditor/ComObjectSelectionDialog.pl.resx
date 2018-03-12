@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="okButton.Text" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Anuluj</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
-    <value>IDENTYFIKATOR CLSID</value>
+    <value>Identyfikator</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Obiekt COM</value>
@@ -136,6 +136,6 @@
     <value>Szukaj:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Zaznacz obiekt COM</value>
+    <value>Wybierz obiekt COM</value>
   </data>
 </root>

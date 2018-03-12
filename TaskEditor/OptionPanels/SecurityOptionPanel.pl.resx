@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="taskRegSDDLBtn.Text" xml:space="preserve">
-    <value>Edycja zabezpieczeń...</value>
+    <value>Zabezpieczenia…</value>
   </data>
   <data name="optionPanelHeaderLabel2.Text" xml:space="preserve">
     <value>Prawa dostępu</value>
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
-    <value>Wykonywania zabezpieczeń</value>
+    <value>Zabepieczenia uruchamiania</value>
   </data>
   <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Nie przechowuj hasła. Zadanie tylko mają dostęp do zasobów komputera lokalnego.</value>
+    <value>Nie prz&amp;echowuj hasła. Zadanie będzie miało dostęp tylko do zasobów komputera lokalnego.</value>
   </data>
   <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Uruchom, czy użytkownik jest zalogowany lub nie</value>
+    <value>Uruc&amp;hom niezależnie od tego, czy użytkownik jest zalogowany</value>
   </data>
   <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Uruchom tylko wtedy, gdy użytkownik jest zalogowany</value>
+    <value>U&amp;ruchom tylko wtedy, gdy użytkownik jest zalogowany</value>
   </data>
   <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Zmień użytkownika lub grupę...</value>
+    <value>Z&amp;mień użytkownika lub grupę...</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
-    <value>Podczas uruchamiania zadania, użyj następującego konta użytkownika:</value>
+    <value>Przy uruchamiania zadania użyj następującego konta użytkownika:</value>
   </data>
   <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Uruchom z najwyższymi uprawnieniami</value>
+    <value>Uruchom z &amp;najwyższymi uprawnieniami</value>
   </data>
   <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value>Proces identyfikacji zabezpieczeń (SID) typu:</value>
+    <value>Typ identyfikatora zabezpieczeń (SID):</value>
   </data>
   <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>Wymagany przywileje:</value>
+    <value>Wymagane uprawnienia:</value>
   </data>
   <data name="$this.Title" xml:space="preserve">
-    <value>Zadania zabezpieczeń</value>
+    <value>Zabezpieczenia</value>
   </data>
 </root>
