@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="weeklyTriggerPage.Text" xml:space="preserve">
+    <value>Ustawienia wyzwalacza tygodniowy</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>czas trwania:</value>
+  </data>
+  <data name="oneTimeTriggerPage.Text" xml:space="preserve">
+    <value>Ustawienie pewien jeden czas wyzwalacza</value>
+  </data>
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>Wszystkie pliki w formacie | *. *</value>
+  </data>
+  <data name="triggerSelectPage.Text" xml:space="preserve">
+    <value>Wybierz, co wyzwala zadanie</value>
+  </data>
+  <data name="summaryPrompt.Text" xml:space="preserve">
+    <value>Po kliknięciu przycisku Zakończ, nowe zadanie zostanie utworzone i dodane do harmonogramu systemu Windows.</value>
+  </data>
+  <data name="summaryPage.Text" xml:space="preserve">
+    <value>Krótki opis</value>
+  </data>
+  <data name="msgActionPage.Text" xml:space="preserve">
+    <value>Ustawienia komunikatu wyświetlanego</value>
+  </data>
+  <data name="openDlgAfterCheck.Text" xml:space="preserve">
+    <value>Otwórz okno dialogowe właściwości dla tego zadania, kiedy kliknę przycisk Zakończ</value>
+  </data>
+  <data name="oneTimeStartLabel.Text" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Powtarzaj zadanie co:</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Nie przechowuj hasła. Zadanie tylko mają dostęp do zasobów komputera lokalnego.</value>
+  </data>
+  <data name="dailyTriggerPage.Text" xml:space="preserve">
+    <value>Ustawienia wyzwalacza codziennie</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Podczas uruchamiania zadania, użyj następującego konta użytkownika:</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nazwa zadania:</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Zmień użytkownika lub grupę...</value>
+  </data>
+  <data name="runActionPage.Text" xml:space="preserve">
+    <value>Program do uruchomienia Instalatora</value>
+  </data>
+  <data name="introPage.Text" xml:space="preserve">
+    <value>Tworzenie zadania</value>
+  </data>
+  <data name="emailActionPage.Text" xml:space="preserve">
+    <value>Ustawienia wiadomości e-mail, aby wysłać</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Opis:</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Uruchom tylko wtedy, gdy użytkownik jest zalogowany</value>
+  </data>
+  <data name="wizardControl1.Title" xml:space="preserve">
+    <value>Tworzenie Kreatora zadań</value>
+  </data>
+  <data name="onEventTriggerPage.Text" xml:space="preserve">
+    <value>Ustawienia wyzwalacza zdarzeń systemu</value>
+  </data>
+  <data name="triggerPropPage.Text" xml:space="preserve">
+    <value>Właściwości wyzwalacza</value>
+  </data>
+  <data name="secOptPage.Text" xml:space="preserve">
+    <value>Opcje zabezpieczeń</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Uruchom, czy użytkownik jest zalogowany lub nie</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Włączone</value>
+  </data>
+  <data name="actionSelectPage.Text" xml:space="preserve">
+    <value>Wybierz akcję do wykonania</value>
+  </data>
+  <data name="monthlyTriggerPage.Text" xml:space="preserve">
+    <value>Konfiguracja miesięcznego wyzwalacza</value>
+  </data>
 </root>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lookupCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Wyszukiwanie identyfikatora CLSID...</value>
+  </data>
+  <data name="lookupCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Wyszukiwanie identyfikatora CLSID z rejestru systemu lokalnego.</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ręcznie wprowadź identyfikator CLSID...</value>
+  </data>
+  <data name="manuallyEnterCLSIDToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Ręcznie wprowadź identyfikator CLSID</value>
+  </data>
+  <data name="getCLSIDButton.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="comDataLabel.Text" xml:space="preserve">
+    <value>Dane:</value>
+  </data>
+  <data name="comCLSIDLabel.Text" xml:space="preserve">
+    <value>Obiekt COM:</value>
+  </data>
+  <data name="comIntroLabel.Text" xml:space="preserve">
+    <value>Ta akcja uruchamia niestandardowy program obsługi COM.</value>
+  </data>
 </root>

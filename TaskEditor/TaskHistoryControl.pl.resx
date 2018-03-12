@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="columnHeader0.Text" xml:space="preserve">
+    <value>Poziom</value>
+  </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Data i czas</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Identyfikator zdarzenia</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Kategoria zadania</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Kod operacyjny</value>
+  </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>Identyfikator korelacji</value>
+  </data>
+  <data name="columnHeader6.Text" xml:space="preserve">
+    <value>Słowa kluczowe</value>
+  </data>
+  <data name="columnHeader7.Text" xml:space="preserve">
+    <value>Źródła</value>
+  </data>
+  <data name="columnHeader8.Text" xml:space="preserve">
+    <value>Użytkownika</value>
+  </data>
+  <data name="columnHeader9.Text" xml:space="preserve">
+    <value>Dziennik</value>
+  </data>
+  <data name="columnHeader10.Text" xml:space="preserve">
+    <value>Komputera</value>
+  </data>
+  <data name="columnHeader11.Text" xml:space="preserve">
+    <value>Identyfikator procesu</value>
+  </data>
+  <data name="columnHeader12.Text" xml:space="preserve">
+    <value>Identyfikator wątku</value>
+  </data>
+  <data name="historyHeader.Text" xml:space="preserve">
+    <value>Liczba zdarzeń: X</value>
+  </data>
+  <data name="historyDetailTitleText.Text" xml:space="preserve">
+    <value>Zdarzenia 100, TaskScheduler</value>
+  </data>
+  <data name="historyDetailHideBtn.Text" xml:space="preserve">
+    <value>r</value>
+  </data>
+  <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
+    <value>Odświeżania</value>
+  </data>
+  <data name="eventPropertiesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Właściwości zdarzenia</value>
+  </data>
+  <data name="attachTaskToThisEventToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dołączyć zadanie do tego zdarzenia</value>
+  </data>
+  <data name="saveAllEventsAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zapisz wszystkie zdarzenia jako...</value>
+  </data>
+  <data name="addremoveColumnsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dodaj/Usuń kolumny</value>
+  </data>
+  <data name="sortEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sortowania zdarzenia według tej kolumny</value>
+  </data>
+  <data name="removeSortingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usunąć, sortowanie</value>
+  </data>
+  <data name="groupEventsByThisColumnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Grupuj zdarzenia według tej kolumny</value>
+  </data>
+  <data name="removeGroupingOfEventsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usunąć grupowanie zdarzeń</value>
+  </data>
+  <data name="expandAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rozwiń wszystkie grupy</value>
+  </data>
+  <data name="collapseAllGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zwinąć wszystkie grupy</value>
+  </data>
+  <data name="saveFileDialog.Filter" xml:space="preserve">
+    <value>Pliki zdarzeń (*.evtx) | * evtx | XML (plik Xml) (*.xml) | * .xml | Tekst (rozdzielany tabulatorami) (*.txt) | * .txt | CSV (oddzielone przecinkami) (*.csv) | * .csv</value>
+  </data>
 </root>

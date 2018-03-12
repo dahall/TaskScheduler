@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="promptLabel.Text" xml:space="preserve">
+    <value>Musisz określić akcję, którą to zadanie będzie wykonywać.</value>
+  </data>
+  <data name="actionsCombo.Items" xml:space="preserve">
+    <value>Uruchamianie programu</value>
+  </data>
+  <data name="actionsCombo.Items1" xml:space="preserve">
+    <value>Wyślij wiadomość e-mail</value>
+  </data>
+  <data name="actionsCombo.Items2" xml:space="preserve">
+    <value>Wyświetlanie wiadomości</value>
+  </data>
+  <data name="actionsCombo.Items3" xml:space="preserve">
+    <value>Niestandardowy program obsługi</value>
+  </data>
+  <data name="settingsGroup.Text" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="actionsLabel.Text" xml:space="preserve">
+    <value>Działanie:</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Identyfikator:</value>
+  </data>
+  <data name="runActionBtn.Text" xml:space="preserve">
+    <value>Uruchamianie akcji</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Nowa akcja</value>
+  </data>
 </root>

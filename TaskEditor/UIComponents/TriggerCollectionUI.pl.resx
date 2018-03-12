@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="triggerEditButton.Text" xml:space="preserve">
+    <value>Edycja...</value>
+  </data>
+  <data name="triggerNewButton.Text" xml:space="preserve">
+    <value>Nowy...</value>
+  </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Spust</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Szczegóły</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Stanu</value>
+  </data>
+  <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nowy wyzwalacz...</value>
+  </data>
+  <data name="deleteTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usuń wyzwalacz</value>
+  </data>
+  <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edytować spust...</value>
+  </data>
+  <data name="enableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Włącz</value>
+  </data>
+  <data name="disableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Wyłącz</value>
+  </data>
+  <data name="triggerDeleteButton.Text" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
 </root>

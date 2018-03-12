@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="triggerTypeLabel.Text" xml:space="preserve">
+    <value>Rozpoczęcie zadania:</value>
+  </data>
+  <data name="logonLocalRadio.Text" xml:space="preserve">
+    <value>Połączenia z komputera lokalnego</value>
+  </data>
+  <data name="logonRemoteRadio.Text" xml:space="preserve">
+    <value>Połączenie z komputerem zdalnym</value>
+  </data>
+  <data name="logonChgUserBtn.Text" xml:space="preserve">
+    <value>Zmień użytkownika lub grupę...</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt; Bieżącego użytkownika &gt;</value>
+  </data>
+  <data name="logonSpecUserRadio.Text" xml:space="preserve">
+    <value>Określony użytkownik lub Grupa:</value>
+  </data>
+  <data name="logonAnyUserRadio.Text" xml:space="preserve">
+    <value>Każdy użytkownik</value>
+  </data>
+  <data name="startupIntroLabel.Text" xml:space="preserve">
+    <value>Nie jest wymagane dodatkowe ustawienia.</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Aby zmienić warunki bezczynności, należy użyć strony warunki w Tworzenie zadania lub arkusz właściwości zadania.</value>
+  </data>
+  <data name="propNameCol.Text" xml:space="preserve">
+    <value>Właściwość</value>
+  </data>
+  <data name="propValCol.Text" xml:space="preserve">
+    <value>Wartość</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nazwa:</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Wygasa:</value>
+  </data>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Aktywować:</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
+    <value>Zatrzymaj zadanie, jeśli działa dłużej niż:</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Powtarzaj zadanie co:</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>czas trwania:</value>
+  </data>
+  <data name="delayCheckBox.Text" xml:space="preserve">
+    <value>Opóźnij zadanie maksymalnie o (losowe):</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
+    <value>Zatrzymaj wszystkie uruchomione zadania koniec czas trwania powtarzania</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Włączone</value>
+  </data>
+  <data name="advSettingsGroup.Text" xml:space="preserve">
+    <value>Ustawienia zaawansowane</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Identyfikator:</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Nowy wyzwalacz</value>
+  </data>
 </root>

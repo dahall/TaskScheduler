@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Rejestrowane:</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Dzienniki zdarzeń:</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Źródła zdarzeń:</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Poziom zdarzenia:</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Obejmuje/wyklucza identyfikatory zdarzeń: Wprowadź numery ID i/lub zakresy identyfikatorów rozdzielone przecinkami. Aby wykluczyć kryteria, wpisz najpierw minus śpiewać. Na przykład 1,3,5-99-76</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Kategorii zadań:</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Słowa kluczowe:</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Użytkownik:</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Komputery:</value>
+  </data>
+  <data name="clearButton.Text" xml:space="preserve">
+    <value>Jasne</value>
+  </data>
+  <data name="criticalLevelCheckBox.Text" xml:space="preserve">
+    <value>Krytyczne</value>
+  </data>
+  <data name="warningLevelCheckBox.Text" xml:space="preserve">
+    <value>Ostrzeżenie</value>
+  </data>
+  <data name="infoLevelCheckBox.Text" xml:space="preserve">
+    <value>Informacje</value>
+  </data>
+  <data name="errorLevelCheckBox.Text" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="verboseLevelCheckBox.Text" xml:space="preserve">
+    <value>Pełne</value>
+  </data>
+  <data name="byLogRadio.Text" xml:space="preserve">
+    <value>Przez dziennik</value>
+  </data>
+  <data name="bySourceRadio.Text" xml:space="preserve">
+    <value>Przez źródła</value>
+  </data>
+  <data name="userText.Text" xml:space="preserve">
+    <value>&lt; Wszystkich Użytkowników &gt;</value>
+  </data>
+  <data name="computerText.Text" xml:space="preserve">
+    <value>&lt; Wszystkie Komputery &gt;</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Edytuj filtr zdarzeń</value>
+  </data>
+  <data name="eventIDsText.Text" xml:space="preserve">
+    <value>&lt; Wszystkie Identyfikatory Zdarzeń &gt;</value>
+  </data>
+  <data name="dataBtn.Text" xml:space="preserve">
+    <value>Filtry danych...</value>
+  </data>
+  <data name="filterTab.Text" xml:space="preserve">
+    <value>Filtr</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Aby zapewnić filtr zdarzeń w formie XPath, kliknij pole wyboru "Ręcznie edytować kwerendy" poniżej.</value>
+  </data>
+  <data name="editManuallyCheckBox.Text" xml:space="preserve">
+    <value>Ręcznie edytować kwerendy</value>
+  </data>
+  <data name="wrapCheckBox.Text" xml:space="preserve">
+    <value>Zawijanie tekstu</value>
+  </data>
+  <data name="xmlTab.Text" xml:space="preserve">
+    <value>XML</value>
+  </data>
 </root>

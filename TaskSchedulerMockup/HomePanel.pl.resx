@@ -117,37 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actionColumnHeader.Text" xml:space="preserve">
-    <value>Działania</value>
-  </data>
-  <data name="detailsColumnHeader.Text" xml:space="preserve">
-    <value>Szczegóły</value>
-  </data>
-  <data name="newActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nowa akcja...</value>
-  </data>
-  <data name="deleteActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usunąć akcję</value>
-  </data>
-  <data name="editActionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edycja akcji...</value>
-  </data>
-  <data name="moveUpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Przenieś w górę</value>
-  </data>
-  <data name="moveDownToolStripMenuItem.Text" xml:space="preserve">
-    <value>Przenieś w dół</value>
-  </data>
-  <data name="actionNewButton.Text" xml:space="preserve">
-    <value>Nowy...</value>
-  </data>
-  <data name="actionDeleteButton.Text" xml:space="preserve">
-    <value>Usuń</value>
-  </data>
-  <data name="actionEditButton.Text" xml:space="preserve">
-    <value>Edycja...</value>
-  </data>
-  <data name="allowPowerShellConvCheck.Text" xml:space="preserve">
-    <value>Umożliwić PowerShell konwersji dla działania nieobsługiwane</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Harmonogram zadań służy do tworzenia i zarządzania typowe zadania, które komputer przeprowadzi automatycznie w czasie, które określisz. Aby rozpocząć, kliknij polecenia w menu Akcja.
+
+Zadania są przechowywane w folderach w Biblioteka harmonogramu zadań. Aby wyświetlić lub wykonać operację na poszczególne zadania, należy wybrać zadanie w Biblioteka harmonogramu zadań i kliknij polecenie w menu Akcja.</value>
   </data>
 </root>

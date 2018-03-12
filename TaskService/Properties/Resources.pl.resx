@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,214 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>Wywołanie obiektu com.</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>Uruchamianie programu</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>Wyślij wiadomość e-mail</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>Wyświetlanie wiadomości</value>
+  </data>
+  <data name="ComHandlerAction" xml:space="preserve">
+    <value>{3} {0:P}</value>
+  </data>
+  <data name="DOWAllDays" xml:space="preserve">
+    <value>Codziennie</value>
+  </data>
+  <data name="EmailAction" xml:space="preserve">
+    <value>{1} {0}</value>
+  </data>
+  <data name="EndSentence" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="ExecAction" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="HyphenSeparator" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>,</value>
+  </data>
+  <data name="MOYAllMonths" xml:space="preserve">
+    <value>co miesiąc</value>
+  </data>
+  <data name="MultipleActions" xml:space="preserve">
+    <value>Wiele działań określonych</value>
+  </data>
+  <data name="MultipleTriggers" xml:space="preserve">
+    <value>Wiele wyzwalaczy zdefiniowane</value>
+  </data>
+  <data name="ShowMessageAction" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TaskDefaultPrincipal" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="TaskStateDisabled" xml:space="preserve">
+    <value>Niepełnosprawnych</value>
+  </data>
+  <data name="TaskStateQueued" xml:space="preserve">
+    <value>W kolejce</value>
+  </data>
+  <data name="TaskStateReady" xml:space="preserve">
+    <value>Gotowe</value>
+  </data>
+  <data name="TaskStateRunning" xml:space="preserve">
+    <value>Uruchomiona</value>
+  </data>
+  <data name="TaskStateUnknown" xml:space="preserve">
+    <value>Nieznane</value>
+  </data>
+  <data name="TriggerAnyUser" xml:space="preserve">
+    <value>Każdy użytkownik</value>
+  </data>
+  <data name="TriggerBoot1" xml:space="preserve">
+    <value>Podczas uruchamiania systemu</value>
+  </data>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>Wyzwalaczy niestandardowych</value>
+  </data>
+  <data name="TriggerDaily1" xml:space="preserve">
+    <value>W {0:t} każdego dnia</value>
+  </data>
+  <data name="TriggerDaily2" xml:space="preserve">
+    <value>W {0:t} co {1} dni</value>
+  </data>
+  <data name="TriggerDuration0" xml:space="preserve">
+    <value>czas nieokreślony</value>
+  </data>
+  <data name="TriggerDurationNot0" xml:space="preserve">
+    <value>czas trwania {0}</value>
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>dla {0}</value>
+  </data>
+  <data name="TriggerEndBoundary" xml:space="preserve">
+    <value>Wyzwalacz wygasa w {0:G}.</value>
+  </data>
+  <data name="TriggerEvent1" xml:space="preserve">
+    <value>Niestandardowy filtr zdarzeń</value>
+  </data>
+  <data name="TriggerEventBasic1" xml:space="preserve">
+    <value>Na imprezę - Zaloguj się: {0}</value>
+  </data>
+  <data name="TriggerEventBasic2" xml:space="preserve">
+    <value>, Źródło: {0}</value>
+  </data>
+  <data name="TriggerEventBasic3" xml:space="preserve">
+    <value>, Identyfikator zdarzenia: {0}</value>
+  </data>
+  <data name="TriggerIdle1" xml:space="preserve">
+    <value>Gdy komputer jest bezczynny</value>
+  </data>
+  <data name="TriggerLogon1" xml:space="preserve">
+    <value>Przy logowaniu {0}</value>
+  </data>
+  <data name="TriggerMonthly1" xml:space="preserve">
+    <value>W {0:t} na dzień {1} {2}, zaczynając {0: d}</value>
+  </data>
+  <data name="TriggerMonthlyDOW1" xml:space="preserve">
+    <value>W {0:t} na {1} {2:f} każdego {3}, zaczynając {0: d}</value>
+  </data>
+  <data name="TriggerRegistration1" xml:space="preserve">
+    <value>Kiedy zadanie jest tworzone lub modyfikowane</value>
+  </data>
+  <data name="TriggerRepetition" xml:space="preserve">
+    <value>Po wyzwoleniu, powtórzyć każdy {0} {1}.</value>
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>Każdy {0} {1}.</value>
+  </data>
+  <data name="TriggerSessionConsoleConnect" xml:space="preserve">
+    <value>Na połączenia lokalnego do {0}.</value>
+  </data>
+  <data name="TriggerSessionConsoleDisconnect" xml:space="preserve">
+    <value>Na lokalne Odłącz od {0}.</value>
+  </data>
+  <data name="TriggerSessionRemoteConnect" xml:space="preserve">
+    <value>Na zdalne połączenie do {0}.</value>
+  </data>
+  <data name="TriggerSessionRemoteDisconnect" xml:space="preserve">
+    <value>Na zdalne rozłączanie z {0}.</value>
+  </data>
+  <data name="TriggerSessionSessionLock" xml:space="preserve">
+    <value>Przy zablokowaniu stacji roboczej {0}.</value>
+  </data>
+  <data name="TriggerSessionSessionUnlock" xml:space="preserve">
+    <value>Na stacji roboczej odblokować {0}.</value>
+  </data>
+  <data name="TriggerSessionUserSession" xml:space="preserve">
+    <value>sesja użytkownika {0}</value>
+  </data>
+  <data name="TriggerTime1" xml:space="preserve">
+    <value>W {0:t} na {0}: d</value>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>Przy uruchamianiu</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>Wyzwalaczy niestandardowych</value>
+  </data>
+  <data name="TriggerTypeDaily" xml:space="preserve">
+    <value>Codziennie</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>Na zdarzenie</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>Na biegu jałowym</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>Przy logowaniu</value>
+  </data>
+  <data name="TriggerTypeMonthly" xml:space="preserve">
+    <value>Miesięczne</value>
+  </data>
+  <data name="TriggerTypeMonthlyDOW" xml:space="preserve">
+    <value>Miesięczne</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>O tworzenie/modyfikowanie zadania</value>
+  </data>
+  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
+    <value>Na zmianę stanu</value>
+  </data>
+  <data name="TriggerTypeTime" xml:space="preserve">
+    <value>Jeden raz</value>
+  </data>
+  <data name="TriggerTypeWeekly" xml:space="preserve">
+    <value>Co tydzień</value>
+  </data>
+  <data name="TriggerWeekly1Week" xml:space="preserve">
+    <value>W {0:t} co {1} co tydzień, począwszy od {0: d}</value>
+  </data>
+  <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
+    <value>W {0:t} co {1} tygodnie {2}, zaczynając {0: d}</value>
+  </data>
+  <data name="WWAllWeeks" xml:space="preserve">
+    <value>Każdy</value>
+  </data>
+  <data name="WWFifthWeek" xml:space="preserve">
+    <value>piąty</value>
+  </data>
+  <data name="WWFirstWeek" xml:space="preserve">
+    <value>pierwszy</value>
+  </data>
+  <data name="WWFourthWeek" xml:space="preserve">
+    <value>czwarty</value>
+  </data>
+  <data name="WWLastWeek" xml:space="preserve">
+    <value>Ostatni</value>
+  </data>
+  <data name="WWSecondWeek" xml:space="preserve">
+    <value>drugi</value>
+  </data>
+  <data name="WWThirdWeek" xml:space="preserve">
+    <value>trzecie</value>
+  </data>
 </root>

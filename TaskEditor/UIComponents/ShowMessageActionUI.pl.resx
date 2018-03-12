@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="msgIntroLabel.Text" xml:space="preserve">
+    <value>Ta akcja wyświetla okno komunikatu, na pulpicie.</value>
+  </data>
+  <data name="msgMsgLabel.Text" xml:space="preserve">
+    <value>Komunikat:</value>
+  </data>
+  <data name="msgTitleLabel.Text" xml:space="preserve">
+    <value>Tytuł:</value>
+  </data>
 </root>

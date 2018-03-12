@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="v1Check.Text" xml:space="preserve">
+    <value>Życie w wersji 1</value>
+  </data>
+  <data name="runButton.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="closeButton.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Wybierz komputer, którym chcesz zarządzać:</value>
+  </data>
+  <data name="localComputerRadio.Text" xml:space="preserve">
+    <value>Komputer lokalny</value>
+  </data>
+  <data name="remoteComputerRadio.Text" xml:space="preserve">
+    <value>Innego komputera:</value>
+  </data>
+  <data name="otherUserCheckbox.Text" xml:space="preserve">
+    <value>Połącz się jako inny użytkownik: {0}</value>
+  </data>
+  <data name="computerBrowseBtn.Text" xml:space="preserve">
+    <value>Przeglądaj...</value>
+  </data>
+  <data name="setUserBtn.Text" xml:space="preserve">
+    <value>Set User...</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Wybierz komputer</value>
+  </data>
 </root>

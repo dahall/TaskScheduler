@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,214 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="taskNameLabel.Text" xml:space="preserve">
+    <value>Nazwa:</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Lokalizacja:</value>
+  </data>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Autor:</value>
+  </data>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>Opis:</value>
+  </data>
+  <data name="taskNameText.Text" xml:space="preserve">
+    <value>Nazwa zadania</value>
+  </data>
+  <data name="taskVersionLabel.Text" xml:space="preserve">
+    <value>Skonfiguruj dla:</value>
+  </data>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Ukryte</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Uruchom z najwyższymi uprawnieniami</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Nie przechowuj hasła. Zadanie tylko mają dostęp do zasobów komputera lokalnego.</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Uruchom, czy użytkownik jest zalogowany lub nie</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Uruchom tylko wtedy, gdy użytkownik jest zalogowany</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Zmień użytkownika lub grupę...</value>
+  </data>
+  <data name="taskUserAcctLabel.Text" xml:space="preserve">
+    <value>Podczas uruchamiania zadania, użyj następującego konta użytkownika:</value>
+  </data>
+  <data name="taskSecurityGroupBox.Text" xml:space="preserve">
+    <value>Opcje zabezpieczeń</value>
+  </data>
+  <data name="generalTab.Text" xml:space="preserve">
+    <value>Ogólne</value>
+  </data>
+  <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
+    <value>Podczas tworzenia zadania, można określić warunki, które uruchomią zadanie.</value>
+  </data>
+  <data name="triggersTab.Text" xml:space="preserve">
+    <value>Wyzwalaczy</value>
+  </data>
+  <data name="actionIntroLabel.Text" xml:space="preserve">
+    <value>Podczas tworzenia zadania, należy określić akcję, która ma miejsce, gdy zaczyna się Twoim zadaniem.</value>
+  </data>
+  <data name="actionsTab.Text" xml:space="preserve">
+    <value>Działania</value>
+  </data>
+  <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
+    <value>Uruchom tylko wtedy, gdy następujące połączenie sieciowe jest dostępne:</value>
+  </data>
+  <data name="networkConditionGroupBox.Text" xml:space="preserve">
+    <value>Sieci</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Zatrzymaj, jeśli komputer przełączy się na zasilanie akumulatorowe</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Wznawiania pracy komputera w celu uruchomienia tego zadania</value>
+  </data>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Uruchom zadanie tylko wtedy, gdy komputer jest zasilany prądem przemiennym</value>
+  </data>
+  <data name="powerConditionGroupBox.Text" xml:space="preserve">
+    <value>Zasilania</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Ponownie, jeśli stan bezczynności powróci</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Zatrzymaj, jeśli komputer przestanie być bezczynny</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
+    <value>Czekać na bezczynności dla:</value>
+  </data>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Tylko wtedy, gdy komputer jest bezczynny, należy uruchomić zadanie:</value>
+  </data>
+  <data name="idleConditionGroupBox.Text" xml:space="preserve">
+    <value>Bezczynności</value>
+  </data>
+  <data name="conditionIntroLabel.Text" xml:space="preserve">
+    <value>Określ warunki, które wraz z wyzwalacz, określić, czy zadanie ma być uruchomione. Zadanie zostanie uruchomione, jeśli każdy warunek określony nie jest prawdziwe.</value>
+  </data>
+  <data name="conditionsTab.Text" xml:space="preserve">
+    <value>Warunki</value>
+  </data>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Jeśli zadanie jest już uruchomione, stosuje się następującą regułę:</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>razy</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Próba ponownego uruchomienia do:</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Jeśli zadanie nie jest zaplanowane do ponownego uruchomienia, należy usunąć go po:</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Jeśli uruchomione zadanie nie zakończy się żądanie, wymuś jego zatrzymanie</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Zatrzymaj zadanie, jeśli działa dłużej niż:</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>Jeśli zadanie nie powiedzie się, należy ponownie uruchomić każdy:</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
+    <value>Uruchom zadanie jak najszybciej po zaplanowane uruchomienie zostało pominięte</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>Zezwalaj na uruchamianie na żądanie</value>
+  </data>
+  <data name="settingsIntroLabel.Text" xml:space="preserve">
+    <value>Określ dodatkowe ustawienia, które wpływają na zachowanie zadania.</value>
+  </data>
+  <data name="settingsTab.Text" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="taskRegSourceLabel.Text" xml:space="preserve">
+    <value>Źródło:</value>
+  </data>
+  <data name="taskRegURILabel.Text" xml:space="preserve">
+    <value>URI:</value>
+  </data>
+  <data name="taskRegDocLabel.Text" xml:space="preserve">
+    <value>Dokumentacja:</value>
+  </data>
+  <data name="taskRegSDDLLabel.Text" xml:space="preserve">
+    <value>Zabezpieczenia:</value>
+  </data>
+  <data name="taskRegVersionLabel.Text" xml:space="preserve">
+    <value>Wersja:</value>
+  </data>
+  <data name="taskRegSDDLBtn.Text" xml:space="preserve">
+    <value>Edycja zabezpieczeń...</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Określ informacje rejestracyjne dla zadania.</value>
+  </data>
+  <data name="regInfoTab.Text" xml:space="preserve">
+    <value>Informacje</value>
+  </data>
+  <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
+    <value>Jeśli zadanie nie zakończy się, należy ponownie uruchomić po:</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
+    <value>Podczas konserwacji, uruchom zadanie co:</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
+    <value>Uruchom zadanie w trybie wyłączności</value>
+  </data>
+  <data name="autoMaintGroup.Text" xml:space="preserve">
+    <value>Automatyczna konserwacja</value>
+  </data>
+  <data name="taskEnabledCheck.Text" xml:space="preserve">
+    <value>Włączone</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value>Proces identyfikacji zabezpieczeń (SID) typu:</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>Wymagany przywileje:</value>
+  </data>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Udoskonalanie zabezpieczeń</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
+    <value>Nie Zezwalaj na początku Jeśli w sesji zdalnego aplikacji zintegrowanych lokalnie (kolej)</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
+    <value>Użyj zunifikowanego aparat planowania</value>
+  </data>
+  <data name="taskVolatileCheck.Text" xml:space="preserve">
+    <value>Automatycznie wyłączyć zadania, każdym uruchomieniu systemu Windows</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Poziom priorytetu:</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Określ dodatkowe zabezpieczenia oraz utrzymania systemu funkcja ustawienia zgodności dla zadania.</value>
+  </data>
+  <data name="addPropTab.Text" xml:space="preserve">
+    <value>Uzupełnień</value>
+  </data>
+  <data name="runTimesErrorLabel.Text" xml:space="preserve">
+    <value>(tekst błędu)</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Błąd:</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nie można pokazać czasy dla tego zadania.</value>
+  </data>
+  <data name="runTimesTab.Text" xml:space="preserve">
+    <value>Uruchomić razy</value>
+  </data>
+  <data name="historyTab.Text" xml:space="preserve">
+    <value>Historia</value>
+  </data>
 </root>

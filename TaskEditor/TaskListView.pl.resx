@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="name.Text" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="status.Text" xml:space="preserve">
+    <value>Stanu</value>
+  </data>
+  <data name="triggers.Text" xml:space="preserve">
+    <value>Wyzwalaczy</value>
+  </data>
+  <data name="nextRunTime.Text" xml:space="preserve">
+    <value>Następnym uruchomieniu</value>
+  </data>
+  <data name="lastRunTime.Text" xml:space="preserve">
+    <value>Ostatni czas wykonywania</value>
+  </data>
+  <data name="lastRunResult.Text" xml:space="preserve">
+    <value>Ostatni wynik uruchomienia</value>
+  </data>
+  <data name="author.Text" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="created.Text" xml:space="preserve">
+    <value>Stworzone</value>
+  </data>
 </root>

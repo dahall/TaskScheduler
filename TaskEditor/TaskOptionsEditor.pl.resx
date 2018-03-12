@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="generalItem.Text" xml:space="preserve">
+    <value>Ogólne</value>
+  </data>
+  <data name="triggersItem.Text" xml:space="preserve">
+    <value>Wyzwalaczy</value>
+  </data>
+  <data name="actionsItem.Text" xml:space="preserve">
+    <value>Działania</value>
+  </data>
+  <data name="securityItem.Text" xml:space="preserve">
+    <value>Bezpieczeństwa</value>
+  </data>
+  <data name="startupItem.Text" xml:space="preserve">
+    <value>Początek</value>
+  </data>
+  <data name="runItem.Text" xml:space="preserve">
+    <value>Środowisko wykonawcze</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nazwa:</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Skonfiguruj dla:</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Opcje zadań</value>
+  </data>
 </root>

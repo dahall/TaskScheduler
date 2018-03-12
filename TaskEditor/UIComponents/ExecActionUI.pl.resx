@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="execProgBrowseBtn.Text" xml:space="preserve">
+    <value>Przeglądaj...</value>
+  </data>
+  <data name="execProgLabel.Text" xml:space="preserve">
+    <value>Program/skrypt:</value>
+  </data>
+  <data name="execDirLabel.Text" xml:space="preserve">
+    <value>Rozpocznij w (opcjonalne):</value>
+  </data>
+  <data name="execArgLabel.Text" xml:space="preserve">
+    <value>Dodaj argumenty (opcjonalne):</value>
+  </data>
 </root>

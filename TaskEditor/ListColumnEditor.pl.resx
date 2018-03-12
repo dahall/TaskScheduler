@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="upBtn.Text" xml:space="preserve">
+    <value>Przenieś w górę</value>
+  </data>
+  <data name="downBtn.Text" xml:space="preserve">
+    <value>Przenieś w dół</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Dostępne kolumny:</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Wyświetlanych kolumn:</value>
+  </data>
+  <data name="addBtn.Text" xml:space="preserve">
+    <value>Dodaj-&gt;</value>
+  </data>
+  <data name="remBtn.Text" xml:space="preserve">
+    <value>&lt;-Usuwanie</value>
+  </data>
+  <data name="restoreBtn.Text" xml:space="preserve">
+    <value>Przywróć domyślne</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Dodaj/Usuń kolumny</value>
+  </data>
 </root>

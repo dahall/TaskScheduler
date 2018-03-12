@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="weeklySunCheck.Text" xml:space="preserve">
+    <value>Niedziela</value>
+  </data>
+  <data name="weeklyMonCheck.Text" xml:space="preserve">
+    <value>Od poniedziałku</value>
+  </data>
+  <data name="weeklyTueCheck.Text" xml:space="preserve">
+    <value>Wtorek</value>
+  </data>
+  <data name="weeklyWedCheck.Text" xml:space="preserve">
+    <value>Środa</value>
+  </data>
+  <data name="weeklyThuCheck.Text" xml:space="preserve">
+    <value>Czwartek</value>
+  </data>
+  <data name="weeklyFriCheck.Text" xml:space="preserve">
+    <value>Piątek</value>
+  </data>
+  <data name="weeklySatCheck.Text" xml:space="preserve">
+    <value>Sobota</value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
+    <value>tygodnie na:</value>
+  </data>
+  <data name="weeklyRecurLabel.Text" xml:space="preserve">
+    <value>Powtarzać co:</value>
+  </data>
 </root>
