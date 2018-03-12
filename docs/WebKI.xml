@@ -3,6 +3,7 @@
   <HelpKINode Title="AccessRightType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRightType.htm" />
   <HelpKINode Title="AccessRuleFactory method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRuleFactory.htm" />
   <HelpKINode Title="AccessRuleType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSecurity_AccessRuleType.htm" />
+  <HelpKINode Title="Account property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPrincipal_Account.htm" />
   <HelpKINode Title="Action class">
     <HelpKINode Title="Action Class" Url="html/T_Microsoft_Win32_TaskScheduler_Action.htm" />
     <HelpKINode Title="events" Url="html/Events_T_Microsoft_Win32_TaskScheduler_Action.htm" />
@@ -2551,6 +2552,7 @@
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskPrincipal.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskPrincipal.htm" />
   </HelpKINode>
+  <HelpKINode Title="TaskPrincipal.Account property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPrincipal_Account.htm" />
   <HelpKINode Title="TaskPrincipal.DisplayName property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPrincipal_DisplayName.htm" />
   <HelpKINode Title="TaskPrincipal.Dispose method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskPrincipal_Dispose.htm" />
   <HelpKINode Title="TaskPrincipal.GroupId property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPrincipal_GroupId.htm" />

@@ -300,25 +300,17 @@
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.BootTrigger">
-      <summary>
-            Represents a trigger that starts a task when the system is booted.
-            </summary>
+      <summary>Represents a trigger that starts a task when the system is booted.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.BootTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.BootTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.BootTrigger" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.BootTrigger.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.BootTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ComHandlerAction">
@@ -370,79 +362,59 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.CustomTrigger">
       <summary>
-            Represents a custom trigger. This class is based on undocumented features and may change.
-            <note>This type of trigger is only available for reading custom triggers. It cannot be used to create custom triggers.</note></summary>
+            Represents a custom trigger. This class is based on undocumented features and may change. <note>This type of trigger is only available for reading custom
+            triggers. It cannot be used to create custom triggers.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.CustomTrigger.Clone">
-      <summary>
-            Clones this instance.
-            </summary>
+      <summary>Clones this instance.</summary>
       <returns>This method will always throw an exception.</returns>
       <exception cref="T:System.InvalidOperationException">CustomTrigger cannot be cloned due to OS restrictions.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.CustomTrigger.Delay">
-      <summary>
-            Gets a value that indicates the amount of time between the trigger events and when the task is started.
-            </summary>
+      <summary>Gets a value that indicates the amount of time between the trigger events and when the task is started.</summary>
       <exception cref="T:System.NotImplementedException">This value cannot be set.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.CustomTrigger.Name">
-      <summary>
-            Gets the name of the custom trigger type.
-            </summary>
+      <summary>Gets the name of the custom trigger type.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.CustomTrigger.Properties">
-      <summary>
-            Gets the properties from the XML definition if possible.
-            </summary>
+      <summary>Gets the properties from the XML definition if possible.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.CustomTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.DailyTrigger">
       <summary>
-            Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every third day, and so on.
+            Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every
+            third day, and so on.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.#ctor(System.Int16)">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.DailyTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.DailyTrigger" />.</summary>
       <param name="daysInterval">Interval between the days in the schedule.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.DailyTrigger.DaysInterval">
-      <summary>
-            Sets or retrieves the interval between the days in the schedule.
-            </summary>
+      <summary>Sets or retrieves the interval between the days in the schedule.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.DailyTrigger.RandomDelay">
-      <summary>
-            Gets or sets a delay time that is randomly added to the start time of the trigger.
-            </summary>
+      <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.DaysOfTheWeek">
@@ -564,26 +536,20 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.EventTrigger">
       <summary>
-            Represents a trigger that starts a task when a system event occurs.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+            Represents a trigger that starts a task when a system event occurs. <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003
+            and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.#ctor(System.String,System.String,System.Nullable{System.Int32})">
-      <summary>
-            Initializes an unbound instance of the <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" /> class and sets a basic event.
-            </summary>
+      <summary>Initializes an unbound instance of the <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" /> class and sets a basic event.</summary>
       <param name="log">The event's log.</param>
       <param name="source">The event's source. Can be <c>null</c>.</param>
       <param name="eventId">The event's id. Can be <c>null</c>.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.BuildQuery(System.String,System.String,System.Nullable{System.Int32})">
-      <summary>
-            Builds an event log XML query string based on the input parameters.
-            </summary>
+      <summary>Builds an event log XML query string based on the input parameters.</summary>
       <param name="log">The event's log.</param>
       <param name="source">The event's source. Can be <c>null</c>.</param>
       <param name="eventId">The event's id. Can be <c>null</c>.</param>
@@ -592,28 +558,21 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EventTrigger.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.GetBasic(System.String@,System.String@,System.Nullable{System.Int32}@)">
-      <summary>
-            Gets basic event information.
-            </summary>
+      <summary>Gets basic event information.</summary>
       <param name="log">The event's log.</param>
       <param name="source">The event's source. Can be <c>null</c>.</param>
       <param name="eventId">The event's id. Can be <c>null</c>.</param>
@@ -622,26 +581,24 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.SetBasic(System.String,System.String,System.Nullable{System.Int32})">
       <summary>
-            Sets the subscription for a basic event. This will replace the contents of the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.Subscription" /> property and clear all entries in the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries" /> property.
+            Sets the subscription for a basic event. This will replace the contents of the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.Subscription" /> property and clear all entries in the
+            <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries" /> property.
             </summary>
       <param name="log">The event's log.</param>
       <param name="source">The event's source. Can be <c>null</c>.</param>
       <param name="eventId">The event's id. Can be <c>null</c>.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EventTrigger.Subscription">
-      <summary>
-            Gets or sets the XPath query string that identifies the event that fires the trigger.
-            </summary>
+      <summary>Gets or sets the XPath query string that identifies the event that fires the trigger.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries">
       <summary>
-            Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from the subscription query specified in the Subscription property. The name of the query can be used as a variable in the message of a <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> action.
+            Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from the subscription query
+            specified in the Subscription property. The name of the query can be used as a variable in the message of a <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> action.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ExecAction">
@@ -707,9 +664,7 @@
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ICalendarTrigger">
-      <summary>
-            Interface that categorizes the trigger as a calendar trigger.
-            </summary>
+      <summary>Interface that categorizes the trigger as a calendar trigger.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.IdleSettings">
       <summary>
@@ -748,14 +703,10 @@
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.IdleTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.IdleTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.IdleTrigger" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.IdleTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ITaskHandler">
@@ -805,39 +756,28 @@
       <param name="statusMessage">The message that is displayed in the Task Scheduler UI.</param>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ITriggerDelay">
-      <summary>
-            Interface for triggers that support a delay.
-            </summary>
+      <summary>Interface for triggers that support a delay.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ITriggerDelay.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time before the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ITriggerUserId">
-      <summary>
-            Interface for triggers that support a user identifier.
-            </summary>
+      <summary>Interface for triggers that support a user identifier.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ITriggerUserId.UserId">
-      <summary>
-            Gets or sets the user for the <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.
-            </summary>
+      <summary>Gets or sets the user for the <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.LogonTrigger">
       <summary>
-            Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
-            </summary>
+             Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks
+             registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
+             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.LogonTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.LogonTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.LogonTrigger" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.LogonTrigger.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.LogonTrigger.UserId">
@@ -850,9 +790,7 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.LogonTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.MaintenanceSettings">
@@ -891,114 +829,80 @@
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.#ctor(Microsoft.Win32.TaskScheduler.DaysOfTheWeek,Microsoft.Win32.TaskScheduler.MonthsOfTheYear,Microsoft.Win32.TaskScheduler.WhichWeek)">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger" />.</summary>
       <param name="daysOfWeek">The days of the week.</param>
       <param name="monthsOfYear">The months of the year.</param>
       <param name="weeksOfMonth">The weeks of the month.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.DaysOfWeek">
-      <summary>
-            Gets or sets the days of the week during which the task runs.
-            </summary>
+      <summary>Gets or sets the days of the week during which the task runs.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.MonthsOfYear">
-      <summary>
-            Gets or sets the months of the year during which the task runs.
-            </summary>
+      <summary>Gets or sets the months of the year during which the task runs.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.RandomDelay">
-      <summary>
-            Gets or sets a delay time that is randomly added to the start time of the trigger.
-            </summary>
+      <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.RunOnLastWeekOfMonth">
-      <summary>
-            Gets or sets a Boolean value that indicates that the task runs on the last week of the month.
-            </summary>
+      <summary>Gets or sets a Boolean value that indicates that the task runs on the last week of the month.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.WeeksOfMonth">
-      <summary>
-            Gets or sets the weeks of the month during which the task runs.
-            </summary>
+      <summary>Gets or sets the weeks of the month during which the task runs.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger">
-      <summary>
-            Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
-            </summary>
+      <summary>Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.#ctor(System.Int32,Microsoft.Win32.TaskScheduler.MonthsOfTheYear)">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger" />.</summary>
       <param name="dayOfMonth">The day of the month.</param>
       <param name="monthsOfYear">The months of the year.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.DaysOfMonth">
-      <summary>
-            Gets or sets the days of the month during which the task runs.
-            </summary>
+      <summary>Gets or sets the days of the month during which the task runs.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.MonthsOfYear">
-      <summary>
-            Gets or sets the months of the year during which the task runs.
-            </summary>
+      <summary>Gets or sets the months of the year during which the task runs.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.RandomDelay">
-      <summary>
-            Gets or sets a delay time that is randomly added to the start time of the trigger.
-            </summary>
+      <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.RunOnLastDayOfMonth">
-      <summary>
-            Gets or sets a Boolean value that indicates that the task runs on the last day of the month.
-            </summary>
+      <summary>Gets or sets a Boolean value that indicates that the task runs on the last day of the month.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.MonthsOfTheYear">
@@ -1341,79 +1245,57 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger">
       <summary>
-            Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+            Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0. <note>Only available for Task
+            Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RegistrationTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RegistrationTrigger.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RegistrationTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.RepetitionPattern">
-      <summary>
-            Defines how often the task is run and how long the repetition pattern is repeated after the task is started.
-            </summary>
+      <summary>Defines how often the task is run and how long the repetition pattern is repeated after the task is started.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.#ctor(System.TimeSpan,System.TimeSpan,System.Boolean)">
-      <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> class.
-            </summary>
-      <param name="interval">The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</param>
-      <param name="duration">The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.</param>
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> class.</summary>
+      <param name="interval">
+            The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+            </param>
+      <param name="duration">
+            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is
+            repeated indefinitely.
+            </param>
       <param name="stopAtDurationEnd">If set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RepetitionPattern.Duration">
-      <summary>
-            Gets or sets how long the pattern is repeated.
-            </summary>
+      <summary>Gets or sets how long the pattern is repeated.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.Equals(Microsoft.Win32.TaskScheduler.RepetitionPattern)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.Equals(System.Object)">
-      <summary>
-            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
-            </summary>
+      <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
       <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
       <returns>
-        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.GetHashCode">
-      <summary>
-            Returns a hash code for this instance.
-            </summary>
-      <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
+      <summary>Returns a hash code for this instance.</summary>
+      <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RepetitionPattern.Interval">
-      <summary>
-            Gets or sets the amount of time between each restart of the task.
-            </summary>
+      <summary>Gets or sets the amount of time between each restart of the task.</summary>
       <exception cref="T:System.ArgumentOutOfRangeException">The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.IsSet">
@@ -1422,9 +1304,7 @@
         <c>true</c> if properties have been set; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RepetitionPattern.StopAtDurationEnd">
-      <summary>
-            Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
-            </summary>
+      <summary>Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue">
       <summary>
@@ -1551,13 +1431,11 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger">
       <summary>
-            Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+            Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications. <note>Only available for
+            Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.#ctor(Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType,System.String)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger" /> class.</summary>
@@ -1566,38 +1444,27 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.Delay">
-      <summary>
-            Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.
-            </summary>
+      <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.StateChange">
-      <summary>
-            Gets or sets the kind of Terminal Server session change that would trigger a task launch.
-            </summary>
+      <summary>Gets or sets the kind of Terminal Server session change that would trigger a task launch.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.UserId">
-      <summary>
-            Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.
-            </summary>
+      <summary>Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ShowMessageAction">
@@ -3259,6 +3126,9 @@
             Provides the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
             </summary>
     </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.Account">
+      <summary>Gets the account associated with this principal. This value is pulled from the TaskDefinition's XMLText property if set.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.DisplayName">
       <summary>Gets or sets the name of the principal that is displayed in the Task Scheduler UI.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
@@ -4433,104 +4303,78 @@
       <summary>Triggers the custom trigger. Version 1.3 only.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TimeTrigger">
-      <summary>
-            Represents a trigger that starts a task at a specific date and time.
-            </summary>
+      <summary>Represents a trigger that starts a task at a specific date and time.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TimeTrigger.#ctor">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.TimeTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.TimeTrigger" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TimeTrigger.#ctor(System.DateTime)">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.TimeTrigger" /> and assigns the execution time.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.TimeTrigger" /> and assigns the execution time.</summary>
       <param name="startBoundary">Date and time for the trigger to fire.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TimeTrigger.RandomDelay">
-      <summary>
-            Gets or sets a delay time that is randomly added to the start time of the trigger.
-            </summary>
+      <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TimeTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Trigger">
       <summary>
-            Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Add``1(``0)" /> or the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskTriggerType)" /> method.
+            Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the
+            <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Add``1(``0)" /> or the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskTriggerType)" /> method.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CheckBindValue(System.String,System.Object@)">
-      <summary>
-            Checks the bind value for any conversion.
-            </summary>
+      <summary>Checks the bind value for any conversion.</summary>
       <param name="key">The key (property) name.</param>
       <param name="o">The value.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.Clone">
-      <summary>
-            Creates a new <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that is an unbound copy of this instance.
-            </summary>
-      <returns>
-            A new <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that is an unbound copy of this instance.
-            </returns>
+      <summary>Creates a new <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that is an unbound copy of this instance.</summary>
+      <returns>A new <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that is an unbound copy of this instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CompareTo(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+      <summary>
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes,
+            follows, or occurs in the same position in the sort order as the other object.
+            </summary>
       <param name="other">An object to compare with this instance.</param>
       <returns>A value that indicates the relative order of the objects being compared.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CreateTrigger(Microsoft.Win32.TaskScheduler.TaskTriggerType)">
-      <summary>
-            Creates the specified trigger.
-            </summary>
+      <summary>Creates the specified trigger.</summary>
       <param name="triggerType">Type of the trigger to instantiate.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> of specified type.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.Enabled">
-      <summary>
-            Gets or sets a Boolean value that indicates whether the trigger is enabled.
-            </summary>
+      <summary>Gets or sets a Boolean value that indicates whether the trigger is enabled.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.EndBoundary">
-      <summary>
-            Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
-            </summary>
+      <summary>Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.Equals(System.Object)">
-      <summary>
-            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
-            </summary>
+      <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
       <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
       <returns>
-        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.ExecutionTimeLimit">
       <summary>
@@ -4547,71 +4391,57 @@
       <exception cref="T:System.NotImplementedException">Unsupported cron string.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.GetHashCode">
-      <summary>
-            Returns a hash code for this instance.
-            </summary>
-      <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-            </returns>
+      <summary>Returns a hash code for this instance.</summary>
+      <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.GetUnboundValueOrDefault``1(System.String,``0)">
-      <summary>
-            Gets the unbound value or a default.
-            </summary>
+      <summary>Gets the unbound value or a default.</summary>
       <param name="prop">The property name.</param>
       <param name="def">The default value if not found in unbound value list.</param>
       <typeparam name="T">Return type.</typeparam>
       <returns>The unbound value, if set, or the default value.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.Id">
-      <summary>
-            Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.
-            </summary>
+      <summary>Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.Repetition">
       <summary>
-            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> instance that indicates how often the task is run and how long the repetition pattern is repeated after the task is started.
+            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> instance that indicates how often the task is run and how long the repetition pattern is repeated after the
+            task is started.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.SetRepetition(System.TimeSpan,System.TimeSpan,System.Boolean)">
-      <summary>
-            Sets the repetition.
-            </summary>
-      <param name="interval">The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</param>
-      <param name="duration">The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.</param>
+      <summary>Sets the repetition.</summary>
+      <param name="interval">
+            The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+            </param>
+      <param name="duration">
+            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is
+            repeated indefinitely.
+            </param>
       <param name="stopAtDurationEnd">if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.StartBoundary">
-      <summary>
-            Gets or sets the date and time when the trigger is activated.
-            </summary>
+      <summary>Gets or sets the date and time when the trigger is activated.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.ToString">
-      <summary>
-            Returns a string representing this trigger.
-            </summary>
+      <summary>Returns a string representing this trigger.</summary>
       <returns>String value of trigger.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.ToString(System.Globalization.CultureInfo)">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents this trigger in a specific language.
-            </summary>
+      <summary>Returns a <see cref="T:System.String" /> that represents this trigger in a specific language.</summary>
       <param name="culture">The language of the resulting string.</param>
       <returns>String value of trigger.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.TriggerType">
-      <summary>
-            Gets the type of the trigger.
-            </summary>
+      <summary>Gets the type of the trigger.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.Trigger.unboundValues">
       <summary>In testing and may change. Do not use until officially introduced into library.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TriggerCollection">
@@ -4837,52 +4667,40 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.WeeklyTrigger">
       <summary>
-            Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or every other week.
+            Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or
+            every other week.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.#ctor(Microsoft.Win32.TaskScheduler.DaysOfTheWeek,System.Int16)">
-      <summary>
-            Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.WeeklyTrigger" />.
-            </summary>
+      <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.WeeklyTrigger" />.</summary>
       <param name="daysOfWeek">The days of the week.</param>
       <param name="weeksInterval">The interval between the weeks in the schedule.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
+            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.WeeklyTrigger.DaysOfWeek">
-      <summary>
-            Gets or sets the days of the week on which the task runs.
-            </summary>
+      <summary>Gets or sets the days of the week on which the task runs.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
-      <returns>
-            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-            </returns>
+      <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.WeeklyTrigger.RandomDelay">
-      <summary>
-            Gets or sets a delay time that is randomly added to the start time of the trigger.
-            </summary>
+      <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.V2GetTriggerString">
-      <summary>
-            Gets the non-localized trigger string for V2 triggers.
-            </summary>
+      <summary>Gets the non-localized trigger string for V2 triggers.</summary>
       <returns>String describing the trigger.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.WeeklyTrigger.WeeksInterval">
-      <summary>
-            Gets or sets the interval between the weeks in the schedule.
-            </summary>
+      <summary>Gets or sets the interval between the weeks in the schedule.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.WhichWeek">
       <summary>Values for week of month (first, second, ..., last)</summary>
