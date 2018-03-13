@@ -60,10 +60,10 @@ namespace Microsoft.Win32.TaskScheduler
 					dow = DaysOfTheWeek.AllDays;
 				else if (cron.DOW.range)
 					for (int i = cron.DOW.vals[0]; i <= cron.DOW.vals[1]; i += cron.DOW.step)
-						dow |= (DaysOfTheWeek)(1 << (i - 1));
+						dow |= (DaysOfTheWeek)(1 << i);
 				else
 					for (int i = 0; i < cron.DOW.vals.Length; i++)
-						dow |= (DaysOfTheWeek)(1 << (cron.DOW.vals[i] - 1));
+						dow |= (DaysOfTheWeek)(1 << (cron.DOW.vals[i]));
 
 				// Determine months
 				MonthsOfTheYear moy = 0;
