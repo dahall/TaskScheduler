@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	public abstract partial class Trigger
 	{
-		/// <summary>
-		/// Creates a trigger using a cron string.
-		/// </summary>
+		/// <summary>Creates a trigger using a cron string.</summary>
 		/// <param name="cronString">String using cron defined syntax for specifying a time interval. See remarks for syntax.</param>
-		/// <returns>Array of <see cref="Trigger" /> representing the specified cron string.</returns>
+		/// <returns>Array of <see cref="Trigger"/> representing the specified cron string.</returns>
 		/// <exception cref="System.NotImplementedException">Unsupported cron string.</exception>
 		/// <remarks>
-		///   <para>NOTE: This method does not support all combinations of cron strings. Please test extensively before use. Please post an issue with any syntax that should work, but doesn't.</para>
-		///   <para>Currently the cronString only supports numbers and not any of the weekday or month strings. Please use numeric equivalent.</para>
-		///   <para>This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated by white spaces:</para>
-		///   <code>
+		/// <note type="note"> This method does not support all combinations of cron strings. Please test extensively before use. Please post an issue with any
+		/// syntax that should work, but doesn't.</note>
+		/// <para>The following combinations are known <c>not</c> to work:</para>
+		/// <list type="bullet">
+		/// <item><description>Intervals on months (e.g. "* * * */5 *")</description></item>
+		/// <item><description>Intervals on DOW (e.g. "* * * * MON/3")</description></item>
+		/// </list>
+		/// <para>
+		/// This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated
+		/// by white spaces:
+		/// </para>
+		/// <code>
 		///   &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
-		///   </code>
-		///   <para>Each item has bounds as defined by the following:</para>
-		///   <code>
+		/// </code>
+		/// <para>Each item has bounds as defined by the following:</para>
+		/// <code>
 		///   * * * * *
 		///   | | | | |
 		///   | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
@@ -29,86 +35,70 @@ namespace Microsoft.Win32.TaskScheduler
 		///   | | +-------- Day of the Month  (range: 1-31)
 		///   | +---------- Hour              (range: 0-23)
 		///   +------------ Minute            (range: 0-59)
-		///   </code>
-		///   <para>Any of these 5 fields may be an asterisk (*). This would mean the entire range of possible values, i.e. each minute, each hour, etc.</para>
-		///   <para>Any of the first 4 fields can be a question mark ("?"). It stands for the current time, i.e. when a field is processed, the current time will be substituted for the question mark: minutes for Minute field, hour for Hour field, day of the month for Day of month field and month for Month field.</para>
-		///   <para>Any field may contain a list of values separated by commas, (e.g. 1,3,7) or a range of values (two integers separated by a hyphen, e.g. 1-5).</para>
-		///   <para>After an asterisk (*) or a range of values, you can use character / to specify that values are repeated over and over with a certain interval between them. For example, you can write "0-23/2" in Hour field to specify that some action should be performed every two hours (it will have the same effect as "0,2,4,6,8,10,12,14,16,18,20,22"); value "*/4" in Minute field means that the action should be performed every 4 minutes, "1-30/3"  means the same as "1,4,7,10,13,16,19,22,25,28".</para>
+		/// </code>
+		/// <para>Any of these 5 fields may be an asterisk (*). This would mean the entire range of possible values, i.e. each minute, each hour, etc.</para>
+		/// <para>
+		/// Any of the first 4 fields can be a question mark ("?"). It stands for the current time, i.e. when a field is processed, the current time will be
+		/// substituted for the question mark: minutes for Minute field, hour for Hour field, day of the month for Day of month field and month for Month field.
+		/// </para>
+		/// <para>Any field may contain a list of values separated by commas, (e.g. 1,3,7) or a range of values (two integers separated by a hyphen, e.g. 1-5).</para>
+		/// <para>
+		/// After an asterisk (*) or a range of values, you can use character / to specify that values are repeated over and over with a certain interval between
+		/// them. For example, you can write "0-23/2" in Hour field to specify that some action should be performed every two hours (it will have the same effect
+		/// as "0,2,4,6,8,10,12,14,16,18,20,22"); value "*/4" in Minute field means that the action should be performed every 4 minutes, "1-30/3" means the same
+		/// as "1,4,7,10,13,16,19,22,25,28".
+		/// </para>
 		/// </remarks>
 		public static Trigger[] FromCronFormat([NotNull] string cronString)
 		{
-			CronExpression cron = new CronExpression();
-			cron.Parse(cronString);
+			var cron = CronExpression.Parse(cronString);
+			System.Diagnostics.Debug.WriteLine($"{cronString}=M:{cron.Minutes}; H:{cron.Hours}; D:{cron.Days}; M:{cron.Months}; W:{cron.DOW}");
 
-			// TODO: Figure out all the permutations of expression and convert to Trigger(s)
-			/* Time (fields 1-4 have single number and dow = *)
-			 * Time repeating
-			 * Daily
-			 * Weekly
-			 * Monthly
-			 * Monthly DOW
-			 */
+			var ret = new List<Trigger>();
 
-			List<Trigger> ret = new List<Trigger>();
+			// There isn't a clean mechanism to handle intervals on DOW or months, so punt
+			if (cron.DOW.IsIncr) throw new NotSupportedException();
+			if (cron.Months.IsIncr) throw new NotSupportedException();
 
 			// MonthlyDOWTrigger
 			if (!cron.DOW.IsEvery)
 			{
 				// Determine DOW
 				DaysOfTheWeek dow = 0;
-				if (cron.DOW.vals.Length == 0)
-					dow = DaysOfTheWeek.AllDays;
-				else if (cron.DOW.range)
-					for (int i = cron.DOW.vals[0]; i <= cron.DOW.vals[1]; i += cron.DOW.step)
-						dow |= (DaysOfTheWeek)(1 << (i - 1));
-				else
-					for (int i = 0; i < cron.DOW.vals.Length; i++)
-						dow |= (DaysOfTheWeek)(1 << (cron.DOW.vals[i] - 1));
+				foreach (var i in cron.DOW.Values)
+					dow |= (DaysOfTheWeek)(1 << (i - 1));
 
 				// Determine months
 				MonthsOfTheYear moy = 0;
-				if ((cron.Months.vals.Length == 0 || (cron.Months.vals.Length == 1 && cron.Months.vals[0] == 1)) && cron.Months.IsEvery)
+				if (cron.Months.IsEvery)
 					moy = MonthsOfTheYear.AllMonths;
-				else if (cron.Months.range)
-					for (int i = cron.Months.vals[0]; i <= cron.Months.vals[1]; i += cron.Months.step)
-						moy |= (MonthsOfTheYear)(1 << (i - 1));
 				else
-					for (int i = 0; i < cron.Months.vals.Length; i++)
-						moy |= (MonthsOfTheYear)(1 << (cron.Months.vals[i] - 1));
+					foreach (var i in cron.Months.Values)
+						moy |= (MonthsOfTheYear)(1 << (i - 1));
 
-				Trigger tr = new MonthlyDOWTrigger(dow, moy, WhichWeek.AllWeeks);
+				var tr = new MonthlyDOWTrigger(dow, moy, WhichWeek.AllWeeks);
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
+
 			// MonthlyTrigger
-			else if (cron.Days.vals.Length > 0)
+			if (!cron.Days.IsEvery)
 			{
-				// Determine DOW
-				List<int> days = new List<int>();
-				if (cron.Days.range)
-					for (int i = cron.Days.vals[0]; i <= cron.Days.vals[1]; i += cron.Days.step)
-						days.Add(i);
-				else
-					for (int i = 0; i < cron.Days.vals.Length; i++)
-						days.Add(cron.Days.vals[i]);
-
 				// Determine months
 				MonthsOfTheYear moy = 0;
-				if ((cron.Months.vals.Length == 0 || (cron.Months.vals.Length == 1 && cron.Months.vals[0] == 1)) && cron.Months.IsEvery)
+				if (cron.Months.IsEvery)
 					moy = MonthsOfTheYear.AllMonths;
-				else if (cron.Months.range)
-					for (int i = cron.Months.vals[0]; i <= cron.Months.vals[1]; i += cron.Months.step)
-						moy |= (MonthsOfTheYear)(1 << (i - 1));
 				else
-					for (int i = 0; i < cron.Months.vals.Length; i++)
-						moy |= (MonthsOfTheYear)(1 << (cron.Months.vals[i] - 1));
+					foreach (var i in cron.Months.Values)
+						moy |= (MonthsOfTheYear)(1 << (i - 1));
 
-				Trigger tr = new MonthlyTrigger(1, moy) { DaysOfMonth = days.ToArray() };
+				var tr = new MonthlyTrigger(1, moy) { DaysOfMonth = cron.Days.Values.ToArray() };
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
+
 			// DailyTrigger
-			else if (cron.Months.IsEvery && cron.Days.repeating)
+			else if (cron.Months.IsEvery && (cron.Days.IsEvery || cron.Days.IsIncr))
 			{
-				Trigger tr = new DailyTrigger((short)cron.Days.step);
+				var tr = new DailyTrigger((short)cron.Days.Increment);
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
 			else
@@ -121,78 +111,106 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static IEnumerable<Trigger> ProcessCronTimes(CronExpression cron, Trigger baseTrigger)
 		{
-			List<Trigger> ret = new List<Trigger>();
-			// A single time
-			if (cron.Minutes.vals.Length == 1 && cron.Hours.vals.Length == 1)
+			// Sequential hours, every minute
+			// "* * * * *"
+			// "* 2-6 * * *"
+			if (cron.Minutes.FullRange && (cron.Hours.IsEvery || cron.Hours.IsRange))
 			{
-				baseTrigger.StartBoundary = baseTrigger.StartBoundary.Date + new TimeSpan(cron.Hours.vals[0], cron.Minutes.vals[0], 0);
-				ret.Add(baseTrigger);
+				System.Diagnostics.Debug.WriteLine("Minutes.FullRange && (Hours.IsEvery || Hours.IsRange)");
+				yield return MakeTrigger(
+					new TimeSpan(cron.Hours.FirstValue, 0, 0),
+					TimeSpan.FromMinutes(cron.Minutes.Increment),
+					TimeSpan.FromHours(cron.Hours.Duration));
 			}
-			// Multiple, non-repeating, hours and/or minutes
-			else if (cron.Minutes.vals.Length > 1 && !cron.Minutes.range && cron.Hours.vals.Length > 1 && !cron.Hours.range)
+			// Non-sequential hours, every minute
+			// "* 3,5,6 * * *"
+			// "* 3-15/3 * * *"
+			else if (cron.Minutes.FullRange && (cron.Hours.IsList || cron.Hours.IsIncr))
 			{
-				for (int h = 0; h < cron.Hours.vals.Length; h++)
+				System.Diagnostics.Debug.WriteLine("Minutes.FullRange && (Hours.IsList || Hours.IsIncr)");
+				foreach (var h in cron.Hours.Values)
 				{
-					for (int m = 0; m < cron.Minutes.vals.Length; m++)
-					{
-						Trigger newTr = (Trigger)baseTrigger.Clone();
-						newTr.StartBoundary = newTr.StartBoundary.Date + new TimeSpan(cron.Hours.vals[h], cron.Minutes.vals[m], 0);
-						ret.Add(newTr);
-					}
+					yield return MakeTrigger(
+						new TimeSpan(h, 0, 0),
+						TimeSpan.FromMinutes(cron.Minutes.Increment),
+						TimeSpan.FromHours(1));
 				}
 			}
-			// Repeating hours and/or minutes
-			else if (cron.Minutes.step > 0 || cron.Hours.step > 0)
+			// Non-repeating minutes, every hour
+			// "3,6 * * * *" Every hour starting at 12:03 and 12:06
+			// "3-33 * * * *"
+			// "3-33/6 * * * *"
+			// "3,6 * 3-5 * *"
+			// "3-33 3-5 * * *"
+			// "3-33/6 3-5 * * *"
+			else if (!cron.Minutes.FullRange && (cron.Hours.IsEvery || cron.Hours.IsRange))
 			{
-				int h_start = 0, h_end = 23, m_start = 0, m_end = 59;
-				if (cron.Minutes.range)
+				System.Diagnostics.Debug.WriteLine("!Minutes.FullRange && (Hours.IsEvery || Hours.IsRange)");
+				foreach (var m in cron.Minutes.Values)
 				{
-					m_start = cron.Minutes.vals[0];
-					m_end = cron.Minutes.vals[1];
+					yield return MakeTrigger(
+						new TimeSpan(cron.Hours.FirstValue, m, 0),
+						TimeSpan.FromHours(1),
+						TimeSpan.FromHours(cron.Hours.Duration));
 				}
-				else if (cron.Minutes.vals.Length == 1)
-					m_start = m_end = cron.Minutes.vals[0];
+			}
+			// Sequential or repeating minutes, and non-sequential hours
+			else if ((cron.Minutes.IsRange || cron.Minutes.IsIncr) && (cron.Hours.IsList || cron.Hours.IsIncr))
+			{
+				System.Diagnostics.Debug.WriteLine("(Minutes.IsRange || Minutes.IsIncr) && (Hours.IsList || Hours.IsIncr)");
+				foreach (var h in cron.Hours.Values)
+				{
+					yield return MakeTrigger(
+						new TimeSpan(h, cron.Minutes.FirstValue, 0),
+						TimeSpan.FromMinutes(cron.Minutes.Increment),
+						TimeSpan.FromMinutes(cron.Minutes.Duration));
+				}
+			}
+			// Non-sequential, hours and minutes
+			// "3,6 3,6 * * *" Every day at 3:03, 3:06, 6:03 and 6:06
+			// "3/6 3/6 * * *" Every day at 3:03, 3:06, 6:03 and 6:06
+			else
+			{
+				System.Diagnostics.Debug.WriteLine("Minutes.IsList && (Hours.IsIncr || Hours.IsList)");
+				foreach (var h in cron.Hours.Values)
+					foreach (var m in cron.Minutes.Values)
+						yield return MakeTrigger(new TimeSpan(h, m, 0));
+			}
 
-				if (cron.Hours.range)
+			Trigger MakeTrigger(TimeSpan start, TimeSpan interval = default, TimeSpan duration = default)
+			{
+				var newTr = (Trigger)baseTrigger.Clone();
+				newTr.StartBoundary = newTr.StartBoundary.Date + start;
+				if (interval != default)
 				{
-					h_start = cron.Hours.vals[0];
-					h_end = cron.Hours.vals[1];
+					newTr.Repetition.Interval = interval;
+					newTr.Repetition.Duration = duration;
 				}
-				else if (cron.Hours.vals.Length == 1)
-					h_start = h_end = cron.Hours.vals[0];
-
-				if (h_start == h_end)
-				{
-					Trigger newTr = (Trigger)baseTrigger.Clone();
-					newTr.StartBoundary = newTr.StartBoundary.Date + new TimeSpan(h_start, m_start, 0);
-					newTr.Repetition.Interval = TimeSpan.FromMinutes(cron.Minutes.step);
-					newTr.Repetition.Duration = TimeSpan.FromHours(1);
-					ret.Add(newTr);
-				}
-				else if (m_start == m_end)
-				{
-					Trigger newTr = (Trigger)baseTrigger.Clone();
-					newTr.StartBoundary = newTr.StartBoundary.Date + new TimeSpan(h_start, m_start, 0);
-					newTr.Repetition.Interval = TimeSpan.FromHours(cron.Hours.step);
-					newTr.Repetition.Duration = TimeSpan.FromHours(h_end - h_start);
-					ret.Add(newTr);
-				}
-				else
-				{
-					throw new NotImplementedException();
-				}
+				return newTr;
 			}
-			return ret;
 		}
 
-		private class CronExpression
+		class CronExpression
 		{
 			private FieldVal[] Fields = new FieldVal[5];
 
-			public CronExpression() { }
+			private CronExpression() { }
 
-			public void Parse(string cronString)
+			public enum CronFieldType { Minutes, Hours, Days, Months, DaysOfWeek };
+
+			public FieldVal Days => Fields[2];
+
+			public FieldVal DOW => Fields[4];
+
+			public FieldVal Hours => Fields[1];
+
+			public FieldVal Minutes => Fields[0];
+
+			public FieldVal Months => Fields[3];
+
+			public static CronExpression Parse(string cronString)
 			{
+				var ret = new CronExpression();
 				if (cronString == null)
 					throw new ArgumentNullException(nameof(cronString));
 
@@ -204,133 +222,216 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 
 				// min, hr, days, months, daysOfWeek
-				for (var i = 0; i < Fields.Length; i++)
-				{
-					Fields[i] = ParseCronField(tokens[i], (CronFieldType)i);
-				}
+				for (var i = 0; i < ret.Fields.Length; i++)
+					ret.Fields[i] = FieldVal.Parse(tokens[i], (CronFieldType)i);
+
+				return ret;
 			}
-
-			public FieldVal Minutes => Fields[0];
-			public FieldVal Hours => Fields[1];
-			public FieldVal Days => Fields[2];
-			public FieldVal Months => Fields[3];
-			public FieldVal DOW => Fields[4];
-
-			private FieldVal ParseCronField(string str, CronFieldType cft)
-			{
-				FieldVal res = new FieldVal();
-
-				if (string.IsNullOrEmpty(str))
-					throw new ArgumentNullException(nameof(str), "A crontab field value cannot be empty.");
-
-				// Look first for a list of values (e.g. 1,2,3).
-				if (str.IndexOf(",") > 0)
-				{
-					res.vals = Array.ConvertAll<string, int>(str.Split(','), delegate(string s) { return ParseInt(s); });
-					res.Validate(cft);
-					return res;
-				}
-
-				// Look for stepping (e.g. */2 = every 2nd).
-				res.step = 1;
-				var slashIndex = str.IndexOf("/");
-				if (slashIndex > 0)
-				{
-					res.step = ParseInt(str.Substring(slashIndex + 1));
-					str = str.Substring(0, slashIndex);
-				}
-
-				// Next, look for wildcard (*).
-				if (str.Length == 1 && str[0] == '*')
-				{
-					res.vals = new int[0];
-					res.repeating = true;
-					return res;
-				}
-
-				// Next, look for a range of values (e.g. 2-10).
-				var dashIndex = str.IndexOf("-");
-				if (dashIndex > 0)
-				{
-					var first = ParseInt(str.Substring(0, dashIndex));
-					var last = ParseInt(str.Substring(dashIndex + 1));
-					if (first >= last)
-						throw new ArgumentException("A crontab field value range must begin with a lower number");
-					res.range = true;
-					res.vals = new int[] { first, last };
-					res.Validate(cft);
-					return res;
-				}
-
-				// Check for "?" and substitute current time
-				if (str.Length == 1 && str[0] == '?')
-				{
-					DateTime now = DateTime.Now;
-					int nval = 0;
-					switch (cft)
-					{
-						case CronFieldType.Minutes:
-							nval = now.Minute;
-							break;
-						case CronFieldType.Hours:
-							nval = now.Hour;
-							break;
-						case CronFieldType.Days:
-							nval = now.Day;
-							break;
-						case CronFieldType.Months:
-							nval = now.Month;
-							break;
-						case CronFieldType.DaysOfWeek:
-							throw new ArgumentException("The fifth parameter representing the day of the week cannot be a '?'.");
-						default:
-							break;
-					}
-					res.vals = new int[] { nval };
-					res.step = 0;
-					res.Validate(cft);
-					return res;
-				}
-
-				// Finally, handle the case where there is only one number.
-				var value = ParseInt(str);
-				res.vals = new int[] { value };
-				res.step = 0;
-				res.Validate(cft);
-
-				return res;
-			}
-
-			private static int ParseInt(string str) => int.Parse(str.Trim());
-
-			public enum CronFieldType { Minutes, Hours, Days, Months, DaysOfWeek };
 
 			public struct FieldVal
 			{
-				public int[] vals;
-				public bool repeating, range;
-				public int step;
-
-				public bool IsEvery => step == 1 && repeating;
-
-				public bool Validate(CronFieldType cft)
+				private const string rangeRegEx = @"^(?:(?<A>\*)|(?<D1>\d+)(?:-(?<D2>\d+))?)(?:\/(?<I>\d+))?$";
+				private readonly static Dictionary<string, string> dow = new Dictionary<string, string>
 				{
-					switch (cft)
+					{ "SUN", "0" },
+					{ "MON", "1" },
+					{ "TUE", "2" },
+					{ "WED", "3" },
+					{ "THU", "4" },
+					{ "FRI", "5" },
+					{ "SAT", "6" },
+				};
+				private readonly static Dictionary<string, string> mon = new Dictionary<string, string>
+				{
+					{ "JAN", "1" },
+					{ "FEB", "2" },
+					{ "MAR", "3" },
+					{ "APR", "4" },
+					{ "MAY", "5" },
+					{ "JUN", "6" },
+					{ "JUL", "7" },
+					{ "AUG", "8" },
+					{ "SEP", "9" },
+					{ "OCT", "10" },
+					{ "NOV", "11" },
+					{ "DEC", "12" },
+				};
+				private readonly static Dictionary<CronFieldType, MinMax> validRange = new Dictionary<CronFieldType, MinMax>
+				{
+					{ CronFieldType.Days, new MinMax(1, 31) },
+					{ CronFieldType.DaysOfWeek, new MinMax(0, 6) },
+					{ CronFieldType.Hours, new MinMax(0, 23) },
+					{ CronFieldType.Minutes, new MinMax(0, 59) },
+					{ CronFieldType.Months, new MinMax(1, 12) },
+				};
+				private CronFieldType cft;
+				private FieldFlags flags;
+				private int incr;
+				private int[] vals;
+				public FieldVal(CronFieldType cft) { this.cft = cft; flags = 0; vals = new int[0]; incr = 1; FullRange = false; }
+
+				enum FieldFlags { List, Every, Range, Increment };
+				public int Duration => vals.Length == 1 ? 1 : vals[1] - vals[0] + 1;
+				public int Increment => incr;
+				public bool IsEvery { get => flags == FieldFlags.Every; private set => flags = FieldFlags.Every; }
+				public bool IsIncr { get => flags == FieldFlags.Increment; private set => flags = FieldFlags.Increment; }
+				public bool IsList { get => flags == 0; private set => flags = FieldFlags.List; }
+				public bool IsRange { get => flags == FieldFlags.Range; private set => flags = FieldFlags.Range; }
+				public bool FullRange { get; private set; }
+				public int FirstValue => vals[0];
+				public IEnumerable<int> Values
+				{
+					get
 					{
-						case CronFieldType.Minutes:
-							return Array.TrueForAll<int>(vals, delegate(int i) { return i >= 0 && i <= 59; });
-						case CronFieldType.Hours:
-							return Array.TrueForAll<int>(vals, delegate(int i) { return i >= 0 && i <= 23; });
-						case CronFieldType.Days:
-							return Array.TrueForAll<int>(vals, delegate(int i) { return i >= 1 && i <= 31; });
-						case CronFieldType.Months:
-							return Array.TrueForAll<int>(vals, delegate(int i) { return i >= 1 && i <= 12; });
-						case CronFieldType.DaysOfWeek:
-							return Array.TrueForAll<int>(vals, delegate(int i) { return i >= 0 && i <= 6; });
-						default:
-							break;
+						if (flags == 0)
+						{
+							foreach (var i in vals)
+								yield return i;
+						}
+						else
+						{
+							for (int i = vals[0]; i <= vals[1]; i += incr)
+								yield return i;
+						}
 					}
-					return false;
+				}
+
+				public static FieldVal Parse(string str, CronFieldType cft)
+				{
+					var res = new FieldVal(cft);
+					if (string.IsNullOrEmpty(str))
+						throw new ArgumentNullException(nameof(str), "A crontab field value cannot be empty.");
+
+					// Do substitutions
+					str = DoSubs(str, cft);
+
+					// Look first for a list of values (e.g. 1,2,3).
+					if (System.Text.RegularExpressions.Regex.IsMatch(str, @"^\d+(,\d+)*$"))
+					{
+						if (str.Contains("/")) throw new NotSupportedException();
+
+						res.vals = str.Split(',').Select(ParseInt).OrderBy(i => i).Distinct().ToArray();
+						res.Validate();
+						return res;
+					}
+
+					// Look for *|nn[-nn][/n] pattern
+					var match = System.Text.RegularExpressions.Regex.Match(str, rangeRegEx);
+					if (match.Success)
+					{
+						bool hasAst = res.FullRange = match.Groups["A"].Success;
+						if (match.Groups["I"].Success)
+						{
+							res.incr = ParseInt(match.Groups["I"].Value);
+							res.IsIncr = true;
+						}
+						else
+						{
+							if (hasAst)
+								res.IsEvery = true;
+							else
+								res.IsRange = true;
+						}
+						var mm = validRange[cft];
+						var start = hasAst ? mm.Min : ParseInt(match.Groups["D1"].Value);
+						var end = hasAst ? mm.Max : (match.Groups["D2"].Success ? ParseInt(match.Groups["D2"].Value) : (res.IsIncr ? mm.Max : start));
+						if (end < start) throw new ArgumentOutOfRangeException();
+						if (start == end && res.IsRange)
+						{
+							res.IsList = true;
+							res.vals = new[] { start };
+						}
+						else
+							res.vals = new[] { start, end };
+						res.Validate();
+						return res;
+					}
+
+					throw new FormatException();
+				}
+
+				public override string ToString() => $"Type:{flags}; Vals:{string.Join(",", vals.Select(i => i.ToString()).ToArray())}; Incr:{incr}";
+
+				private void Validate()
+				{
+					var l = validRange[cft];
+					if (vals.Any(i => i < l.Min || i > l.Max)) throw new ArgumentOutOfRangeException();
+					if (IsIncr && (incr < l.Min || incr > l.Max)) throw new ArgumentOutOfRangeException();
+				}
+
+				private static string DoSubs(string str, CronFieldType cft)
+				{
+					var sb = new System.Text.StringBuilder(str);
+
+					// Handle SUN-SAT strings
+					if (cft == CronFieldType.DaysOfWeek)
+					{
+						foreach (var kv in dow)
+							sb.Replace(kv.Key, kv.Value);
+					}
+
+					// Handle JAN–DEC strings
+					if (cft == CronFieldType.Months)
+					{
+						foreach (var kv in mon)
+							sb.Replace(kv.Key, kv.Value);
+					}
+
+					// Check for "?" and substitute current time
+					if (sb.Length == 1 && sb.ToString() == "?")
+					{
+						var now = DateTime.Now;
+						var nval = 0;
+						switch (cft)
+						{
+							case CronFieldType.Minutes:
+								nval = now.Minute;
+								break;
+							case CronFieldType.Hours:
+								nval = now.Hour;
+								break;
+							case CronFieldType.Days:
+								nval = now.Day;
+								break;
+							case CronFieldType.Months:
+								nval = now.Month;
+								break;
+							case CronFieldType.DaysOfWeek:
+								nval = (int)now.DayOfWeek;
+								break;
+							default:
+								break;
+						}
+						sb.Remove(0, 1);
+						sb.Append(nval);
+					}
+
+					// Expand or collapse ranges
+					var minMax = validRange[cft];
+					foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(sb.ToString(), @"(\d+)-(\d+)"))
+					{
+						var low = ParseInt(m.Groups[1].Value);
+						var high = ParseInt(m.Groups[2].Value);
+						if (low == minMax.Min && high == minMax.Max)
+							sb.Replace(m.Value, "*");
+						else if (sb.ToString().Contains(','))
+						{
+							var rsb = new System.Text.StringBuilder(low.ToString());
+							for (int i = low; i < high; i++)
+								rsb.Append($",{i + 1}");
+							sb.Replace(m.Value, rsb.ToString());
+						}
+					}
+
+					return sb.ToString();
+				}
+
+				private static int ParseInt(string str) => int.Parse(str.Trim());
+
+				private struct MinMax
+				{
+					public int Min, Max;
+					public MinMax(int min, int max) { Min = min; Max = max; }
 				}
 			}
 		}

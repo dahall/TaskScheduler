@@ -125,7 +125,7 @@ namespace System.Linq
 					if (e.MoveNext()) return e.Current;
 				}
 			}
-			return default(TSource);
+			return default;
 		}
 
 		/// <summary>Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.</summary>
@@ -139,7 +139,7 @@ namespace System.Linq
 			if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 			foreach (var element in source)
 				if (predicate(element)) return element;
-			return default(TSource);
+			return default;
 		}
 
 		/// <summary>Returns the minimum value in a generic sequence.</summary>
