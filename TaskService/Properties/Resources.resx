@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionTypeComHandler" xml:space="preserve">
     <value>Call a COM object</value>
@@ -240,7 +240,7 @@
     <comment>0 = StartBoundary; 1 = list of Days; 2 = list of Months</comment>
   </data>
   <data name="TriggerMonthlyDOW1" xml:space="preserve">
-    <value>At {0:t} on the {1} {2:f} each {3}, starting {0:d}</value>
+    <value>At {0:t} on {1} {2:f} each {3}, starting {0:d}</value>
     <comment>0 = StartBoundary; 1 = list of weeks of Month; 2 = list of Week Days; 3 = list of Months</comment>
   </data>
   <data name="TriggerRegistration1" xml:space="preserve">

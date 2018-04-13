@@ -394,7 +394,7 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At {0:t} on the {1} {2:f} each {3}, starting {0:d}.
+        ///   Looks up a localized string similar to At {0:t} on {1} {2:f} each {3}, starting {0:d}.
         /// </summary>
         internal static string TriggerMonthlyDOW1 {
             get {
