@@ -4383,9 +4383,7 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.FromCronFormat(System.String)">
-      <summary>
-            Creates a trigger using a cron string.
-            </summary>
+      <summary>Creates a trigger using a cron string.</summary>
       <param name="cronString">String using cron defined syntax for specifying a time interval. See remarks for syntax.</param>
       <returns>Array of <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> representing the specified cron string.</returns>
       <exception cref="T:System.NotImplementedException">Unsupported cron string.</exception>
