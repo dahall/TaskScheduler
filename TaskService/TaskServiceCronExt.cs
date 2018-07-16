@@ -96,11 +96,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			// DailyTrigger
-			else if (cron.Months.IsEvery && (cron.Days.IsEvery || cron.Days.IsIncr))
+			else if (cron.Months.IsEvery && (cron.Days.IsEvery || cron.Days.IsIncr) && cron.DOW.IsEvery)
 			{
 				var tr = new DailyTrigger((short)cron.Days.Increment);
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
+
+			// Fail out
 			else
 			{
 				if (ret.Count == 0)
