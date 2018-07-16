@@ -114,7 +114,7 @@
       <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
       <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
     </NamespaceSummaries>
-    <HelpFileVersion>2.8.1</HelpFileVersion>
+    <HelpFileVersion>2.8.2</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
