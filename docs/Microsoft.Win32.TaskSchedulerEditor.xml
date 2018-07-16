@@ -1254,23 +1254,8 @@
       <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLostFocus(System.EventArgs)">
-      <summary>
-        <markup>
-          <include item="SMCMissingTag">
-            <parameter>summary</parameter>
-            <parameter>M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLostFocus(System.EventArgs)</parameter>
-          </include>
-        </markup>
-      </summary>
-      <param name="e">
-        <markup>
-          <include item="SMCMissingParamTag">
-            <parameter>param</parameter>
-            <parameter>e</parameter>
-            <parameter>M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLostFocus(System.EventArgs)</parameter>
-          </include>
-        </markup>
-      </param>
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data. </param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.RefreshHistory">
       <summary>
