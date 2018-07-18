@@ -822,7 +822,13 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
+				{
 					((IMonthlyDOWTrigger)v2Trigger).WeeksOfMonth = (short)value;
+					// In Windows 10, the native library no longer acknowledges the LastWeek value and requires the RunOnLastWeekOfMonth to
+					// be expressly set. I think this is wrong so I am correcting their changed functionality. (thanks @SebastiaanPolfliet)
+					if (value.IsFlagSet(WhichWeek.LastWeek))
+						((IMonthlyDOWTrigger)v2Trigger).RunOnLastWeekOfMonth = true;
+				}
 				else
 				{
 					try
