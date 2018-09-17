@@ -45,7 +45,6 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
-		private static readonly Version v1Ver = TaskServiceVersion.V1_1;
 		private static Guid CLSID_Ctask = typeof(V1Interop.CTask).GUID;
 		private static Guid IID_ITask = typeof(V1Interop.ITask).GUID;
 		[ThreadStatic]
@@ -200,7 +199,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new ArgumentOutOfRangeException(nameof(HighestSupportedVersion), @"The value of HighestSupportedVersion cannot exceed that of the underlying Windows version library.");
 				maxVer = value;
 				maxVerSet = true;
-				var localForceV1 = value <= v1Ver;
+				var localForceV1 = value <= TaskServiceVersion.V1_1;
 				if (localForceV1 == forceV1) return;
 				forceV1 = localForceV1;
 				Connect();
@@ -723,40 +722,26 @@ namespace Microsoft.Win32.TaskScheduler
 			if (osLibVer == null)
 			{
 				if (Environment.OSVersion.Version.Major < 6)
-					osLibVer = v1Ver;
+					osLibVer = TaskServiceVersion.V1_1;
 				else
 				{
-					try
+					if (Environment.OSVersion.Version.Minor == 0)
+						osLibVer = TaskServiceVersion.V1_2;
+					else if (Environment.OSVersion.Version.Minor == 1)
+						osLibVer = TaskServiceVersion.V1_3;
+					else
 					{
-						var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(Path.Combine(System.Environment.SystemDirectory, "taskschd.dll"));
-						if (fvi.FileMajorPart == 10)
-							osLibVer = TaskServiceVersion.V1_5;
-						else if (fvi.FileMajorPart == 6)
+						try
 						{
-							switch (fvi.FileMinorPart)
-							{
-								case 0:
-									osLibVer = TaskServiceVersion.V1_2;
-									break;
-
-								case 1:
-									osLibVer = TaskServiceVersion.V1_3;
-									break;
-
-								case 2:
-								case 3:
-									osLibVer = TaskServiceVersion.V1_4;
-									break;
-
-								case 4:
-									osLibVer = TaskServiceVersion.V1_5;
-									break;
-							}
+							var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(Path.Combine(Environment.SystemDirectory, "taskschd.dll"));
+							if (fvi.FileBuildPart > 9600 && fvi.FileBuildPart <= 14393)
+								osLibVer = TaskServiceVersion.V1_5;
+							else if (fvi.FileBuildPart >= 15063)
+								osLibVer = TaskServiceVersion.V1_6;
+							else // fvi.FileBuildPart <= 9600
+								osLibVer = TaskServiceVersion.V1_4;
 						}
-					}
-					catch
-					{
-						// ignored
+						catch { /* ignored */ };
 					}
 				}
 
@@ -812,7 +797,7 @@ namespace Microsoft.Win32.TaskScheduler
 							targetServer = null;
 						v1TaskScheduler.SetTargetComputer(targetServer);
 						targetServer = v1TaskScheduler.GetTargetComputer();
-						maxVer = v1Ver;
+						maxVer = TaskServiceVersion.V1_1;
 					}
 				}
 				else
@@ -881,7 +866,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void ResetHighestSupportedVersion()
 		{
-			maxVer = Connected ? (v2TaskService != null ? GetV2Version() : v1Ver) : GetLibraryVersionFromLocalOS();
+			maxVer = Connected ? (v2TaskService != null ? GetV2Version() : TaskServiceVersion.V1_1) : GetLibraryVersionFromLocalOS();
 		}
 
 		private void ResetUnsetProperties()
@@ -893,7 +878,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!userPasswordSet) userPassword = null;
 		}
 
-		private bool ShouldSerializeHighestSupportedVersion() => LibraryIsV2 && maxVer <= v1Ver;
+		private bool ShouldSerializeHighestSupportedVersion() => LibraryIsV2 && maxVer <= TaskServiceVersion.V1_1;
 
 		private bool ShouldSerializeTargetServer() => targetServer != null && !targetServer.Trim('\\').Equals(Environment.MachineName.Trim('\\'), StringComparison.InvariantCultureIgnoreCase);
 
