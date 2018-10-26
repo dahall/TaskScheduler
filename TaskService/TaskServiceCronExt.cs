@@ -57,57 +57,40 @@ namespace Microsoft.Win32.TaskScheduler
 			var ret = new List<Trigger>();
 
 			// There isn't a clean mechanism to handle intervals on DOW or months, so punt
-			if (cron.DOW.IsIncr) throw new NotSupportedException();
-			if (cron.Months.IsIncr) throw new NotSupportedException();
+			//if (cron.DOW.IsIncr) throw new NotSupportedException();
+			//if (cron.Months.IsIncr) throw new NotSupportedException();
+
+			// WeeklyTrigger
+			if (cron.Days.FullRange && cron.Months.FullRange && !cron.DOW.IsEvery)
+			{
+				var tr = new WeeklyTrigger(cron.DOW.ToDOW());
+				ret.AddRange(ProcessCronTimes(cron, tr));
+			}
 
 			// MonthlyDOWTrigger
-			if (!cron.DOW.IsEvery)
+			if (!cron.DOW.FullRange && (!cron.Days.FullRange || !cron.Months.FullRange))
 			{
-				// Determine DOW
-				DaysOfTheWeek dow = 0;
-				foreach (var i in cron.DOW.Values)
-					dow |= (DaysOfTheWeek)(1 << i);
-
-				// Determine months
-				MonthsOfTheYear moy = 0;
-				if (cron.Months.IsEvery)
-					moy = MonthsOfTheYear.AllMonths;
-				else
-					foreach (var i in cron.Months.Values)
-						moy |= (MonthsOfTheYear)(1 << (i - 1));
-
-				var tr = new MonthlyDOWTrigger(dow, moy, WhichWeek.AllWeeks);
+				var tr = new MonthlyDOWTrigger(cron.DOW.ToDOW(), cron.Months.ToMOY(), WhichWeek.AllWeeks);
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
 
 			// MonthlyTrigger
-			if (!cron.Days.IsEvery)
+			if (!cron.Days.FullRange || !cron.Months.FullRange && cron.DOW.FullRange)
 			{
-				// Determine months
-				MonthsOfTheYear moy = 0;
-				if (cron.Months.IsEvery)
-					moy = MonthsOfTheYear.AllMonths;
-				else
-					foreach (var i in cron.Months.Values)
-						moy |= (MonthsOfTheYear)(1 << (i - 1));
-
-				var tr = new MonthlyTrigger(1, moy) { DaysOfMonth = cron.Days.Values.ToArray() };
+				var tr = new MonthlyTrigger(1, cron.Months.ToMOY()) { DaysOfMonth = cron.Days.Values.ToArray() };
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
 
 			// DailyTrigger
-			else if (cron.Months.IsEvery && (cron.Days.IsEvery || cron.Days.IsIncr) && cron.DOW.IsEvery)
+			if (cron.Days.FullRange && cron.Months.FullRange && cron.DOW.IsEvery)
 			{
 				var tr = new DailyTrigger((short)cron.Days.Increment);
 				ret.AddRange(ProcessCronTimes(cron, tr));
 			}
 
 			// Fail out
-			else
-			{
-				if (ret.Count == 0)
-					throw new NotSupportedException();
-			}
+			if (ret.Count == 0)
+				throw new NotSupportedException();
 
 			return ret.ToArray();
 		}
@@ -193,7 +176,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		class CronExpression
+		internal class CronExpression
 		{
 			private FieldVal[] Fields = new FieldVal[5];
 
@@ -297,6 +280,24 @@ namespace Microsoft.Win32.TaskScheduler
 								yield return i;
 						}
 					}
+				}
+
+				public DaysOfTheWeek ToDOW()
+				{
+					if (IsEvery) return DaysOfTheWeek.AllDays;
+					DaysOfTheWeek ret = 0;
+					foreach (var i in Values)
+						ret |= (DaysOfTheWeek)(1 << i);
+					return ret;
+				}
+
+				public MonthsOfTheYear ToMOY()
+				{
+					if (IsEvery) return MonthsOfTheYear.AllMonths;
+					MonthsOfTheYear ret = 0;
+					foreach (var i in Values)
+						ret |= (MonthsOfTheYear)(1 << (i - 1));
+					return ret;
 				}
 
 				public static FieldVal Parse(string str, CronFieldType cft)
