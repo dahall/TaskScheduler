@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("GitHub Community")]
 [assembly: AssemblyProduct("TaskService")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
-[assembly: AssemblyVersion("2.8.5")]
-[assembly: AssemblyFileVersion("2.8.5")]
+[assembly: AssemblyVersion("2.8.6")]
+[assembly: AssemblyFileVersion("2.8.6")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
