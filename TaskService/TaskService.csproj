@@ -7,7 +7,7 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>2.8.6</Version>
+    <Version>3.0.0</Version>
     <Title>Task Scheduler Managed Wrapper</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
@@ -29,27 +29,51 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Native\**" />
+    <Compile Remove="V1\**" />
+    <Compile Remove="V2\**" />
+    <EmbeddedResource Remove="Native\**" />
+    <EmbeddedResource Remove="V1\**" />
+    <EmbeddedResource Remove="V2\**" />
+    <None Remove="Native\**" />
+    <None Remove="V1\**" />
+    <None Remove="V2\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ReflectionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="TaskService.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Native\AccessControlExtension.cs" />
+    <Compile Include="Native\NTDSAPI.cs" />
+    <Compile Include="Native\WindowsImpersonatedIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TaskService.bmp" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="4.4.0" />
-    <PackageReference Include="System.Security.Permissions" Version="4.4.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="4.4.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="4.5.0" />
+    <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
+    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
+    <Reference Include="WindowsBase">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Reference Include="System.Drawing" />
@@ -61,6 +85,11 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="2.0.1" />
+    <PackageReference Include="Vanara.PInvoke.Security" Version="2.0.1" />
+    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

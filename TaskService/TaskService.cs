@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using static Vanara.PInvoke.MSTask;
+using static Vanara.PInvoke.TaskSchd;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
-	/// Quick simple trigger types for the
-	/// <see cref="TaskService.AddTask(string,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,string,string,Microsoft.Win32.TaskScheduler.TaskLogonType,string)"/> method.
+	/// Quick simple trigger types for the <see
+	/// cref="TaskService.AddTask(string,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,string,string,Microsoft.Win32.TaskScheduler.TaskLogonType,string)"/> method.
 	/// </summary>
 	public enum QuickTriggerType
 	{
@@ -38,6 +40,37 @@ namespace Microsoft.Win32.TaskScheduler
 		Monthly
 	}
 
+	/// <summary>
+	/// Known versions of the native Task Scheduler library. This can be used as a decoder for the <see
+	/// cref="TaskService.HighestSupportedVersion"/> and <see cref="TaskService.LibraryVersion"/> values.
+	/// </summary>
+	public static class TaskServiceVersion
+	{
+		/// <summary>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
+		[Description("Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).")]
+		public static readonly Version V1_1 = new Version(1, 1);
+
+		/// <summary>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
+		[Description("Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).")]
+		public static readonly Version V1_2 = new Version(1, 2);
+
+		/// <summary>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
+		[Description("Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).")]
+		public static readonly Version V1_3 = new Version(1, 3);
+
+		/// <summary>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
+		[Description("Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).")]
+		public static readonly Version V1_4 = new Version(1, 4);
+
+		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
+		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
+		public static readonly Version V1_5 = new Version(1, 5);
+
+		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
+		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
+		public static readonly Version V1_6 = new Version(1, 6);
+	}
+
 	/// <summary>Provides access to the Task Scheduler service for managing registered tasks.</summary>
 	[Description("Provides access to the Task Scheduler service.")]
 	[ToolboxItem(true), Serializable]
@@ -45,14 +78,13 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
-		private static Guid CLSID_Ctask = typeof(V1Interop.CTask).GUID;
-		private static Guid IID_ITask = typeof(V1Interop.ITask).GUID;
+		internal ITaskScheduler v1TaskScheduler;
+		internal ITaskService v2TaskService;
+		private static Guid CLSID_Ctask = typeof(CTask).GUID;
+		private static Guid IID_ITask = typeof(ITask).GUID;
 		[ThreadStatic]
 		private static TaskService instance;
 		private static Version osLibVer;
-
-		internal V1Interop.ITaskScheduler v1TaskScheduler;
-		internal V2Interop.ITaskService v2TaskService;
 		private bool forceV1;
 		private bool initializing;
 		private Version maxVer;
@@ -120,11 +152,12 @@ namespace Microsoft.Win32.TaskScheduler
 		public static TaskService Instance => instance ?? (instance = new TaskService());
 
 		/// <summary>
-		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher
-		/// than this version.
+		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any
+		/// compatibility level higher than this version.
 		/// </summary>
 		/// <value>The library version.</value>
-		/// <remarks>The following table list the various versions and their host operating system:
+		/// <remarks>
+		/// The following table list the various versions and their host operating system:
 		/// <list type="table">
 		/// <listheader><term>Version</term><term>Operating System</term></listheader>
 		/// <item><term>1.1</term><term>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</term></item>
@@ -138,7 +171,9 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false)]
 		public static Version LibraryVersion { get; } = Instance.HighestSupportedVersion;
 
-		/// <summary>Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.
+		/// </summary>
 		/// <value><c>true</c> if allow read only tasks; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Allow tasks from later OS versions with new properties to be retrieved as read only tasks.")]
 		public bool AllowReadOnlyTasks { get; set; }
@@ -178,7 +213,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Gets the highest version of Task Scheduler that a computer supports.</summary>
-		/// <remarks>The following table list the various versions and their host operating system:
+		/// <value>The highest supported version.</value>
+		/// <exception cref="ArgumentOutOfRangeException">HighestSupportedVersion - The value of HighestSupportedVersion cannot exceed that of the underlying Windows version library.</exception>
+		/// <remarks>
+		/// The following table list the various versions and their host operating system:
 		/// <list type="table">
 		/// <listheader><term>Version</term><term>Operating System</term></listheader>
 		/// <item><term>1.1</term><term>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</term></item>
@@ -192,7 +230,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), TypeConverter(typeof(VersionConverter)), Description("Highest version of library that should be used.")]
 		public Version HighestSupportedVersion
 		{
-			get { return maxVer; }
+			get => maxVer;
 			set
 			{
 				if (value > GetLibraryVersionFromLocalOS())
@@ -214,7 +252,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), DefaultValue(null), Description("The name of the computer to connect to.")]
 		public string TargetServer
 		{
-			get { return ShouldSerializeTargetServer() ? targetServer : null; }
+			get => ShouldSerializeTargetServer() ? targetServer : null;
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -232,7 +270,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), DefaultValue(null), Description("The user account domain to be used when connecting.")]
 		public string UserAccountDomain
 		{
-			get { return ShouldSerializeUserAccountDomain() ? userDomain : null; }
+			get => ShouldSerializeUserAccountDomain() ? userDomain : null;
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -250,7 +288,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), DefaultValue(null), Description("The user name to be used when connecting.")]
 		public string UserName
 		{
-			get { return ShouldSerializeUserName() ? userName : null; }
+			get => ShouldSerializeUserName() ? userName : null;
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -268,7 +306,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Category("Data"), DefaultValue(null), Description("The user password to be used when connecting.")]
 		public string UserPassword
 		{
-			get { return userPassword; }
+			get => userPassword;
 			set
 			{
 				if (value == null || value.Trim() == string.Empty) value = null;
@@ -290,7 +328,10 @@ namespace Microsoft.Win32.TaskScheduler
 		[Browsable(false)]
 		public bool Connected => v2TaskService != null && v2TaskService.Connected || v1TaskScheduler != null;
 
-		/// <summary>Gets the connection token for this <see cref="TaskService"/> instance. This token is thread safe and can be used to create new <see cref="TaskService"/> instances on other threads using the <see cref="CreateFromToken"/> static method.</summary>
+		/// <summary>
+		/// Gets the connection token for this <see cref="TaskService"/> instance. This token is thread safe and can be used to create new
+		/// <see cref="TaskService"/> instances on other threads using the <see cref="CreateFromToken"/> static method.
+		/// </summary>
 		/// <value>The connection token.</value>
 		public ConnectionToken Token =>
 			ConnectionDataManager.TokenFromInstance(TargetServer, UserName, UserAccountDomain, UserPassword, forceV1);
@@ -298,7 +339,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Gets a value indicating whether the component can raise an event.</summary>
 		protected override bool CanRaiseEvents { get; } = false;
 
-		/// <summary>Creates a new <see cref="TaskService"/> instance from a token. Given that a TaskService instance is thread specific, this is the preferred method for multi-thread creation or asynchronous method parameters.</summary>
+		/// <summary>
+		/// Creates a new <see cref="TaskService"/> instance from a token. Given that a TaskService instance is thread specific, this is the
+		/// preferred method for multi-thread creation or asynchronous method parameters.
+		/// </summary>
 		/// <param name="token">The token.</param>
 		/// <returns>A <see cref="TaskService"/> instance valid for the thread calling this method.</returns>
 		public static TaskService CreateFromToken(ConnectionToken token) => ConnectionDataManager.InstanceFromToken(token);
@@ -308,13 +352,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="resourceId">The identifier for the resource text (typically a negative number).</param>
 		/// <returns>A string in the format of $(@ [dllPath], [resourceId]).</returns>
 		/// <example>
-		/// For example, the setting this property value to $(@ %SystemRoot%\System32\ResourceName.dll, -101) will set the property to the value of the resource
-		/// text with an identifier equal to -101 in the %SystemRoot%\System32\ResourceName.dll file.
+		/// For example, the setting this property value to $(@ %SystemRoot%\System32\ResourceName.dll, -101) will set the property to the
+		/// value of the resource text with an identifier equal to -101 in the %SystemRoot%\System32\ResourceName.dll file.
 		/// </example>
 		public static string GetDllResourceString([NotNull] string dllPath, int resourceId) => $"$(@ {dllPath}, {resourceId})";
 
 		/// <summary>
-		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler"/> interface.
+		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the
+		/// <see cref="ITaskHandler"/> interface.
 		/// </summary>
 		/// <param name="clsid">The CLSID of the COM object.</param>
 		/// <param name="data">An optional string passed to the COM object at startup.</param>
@@ -332,7 +377,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="ITaskHandler"/> interface.
+		/// Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the
+		/// <see cref="ITaskHandler"/> interface.
 		/// </summary>
 		/// <param name="clsid">The CLSID of the COM object.</param>
 		/// <param name="onComplete">The action to run on thread completion.</param>
@@ -342,20 +388,24 @@ namespace Microsoft.Win32.TaskScheduler
 		/// An optional <see cref="ComHandlerUpdate"/> delegate that is called when the COM object calls the
 		/// <see cref="ITaskHandlerStatus.UpdateStatus(short, string)"/> method.
 		/// </param>
-		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null) { new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start(); }
+		public static void RunComHandlerActionAsync(Guid clsid, Action<int> onComplete, string data = null, int millisecondsTimeout = -1, ComHandlerUpdate onUpdate = null) => new ComHandlerThread(clsid, data, millisecondsTimeout, onUpdate, onComplete).Start();
 
 		/// <summary>Adds or updates an Automatic Maintenance Task on the connected machine.</summary>
 		/// <param name="taskPathAndName">Name of the task with full path.</param>
 		/// <param name="period">The amount of time the task needs once executed during regular Automatic maintenance.</param>
 		/// <param name="deadline">
-		/// The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete
-		/// during regular Automatic Maintenance.
+		/// The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task
+		/// failed to complete during regular Automatic Maintenance.
 		/// </param>
 		/// <param name="executablePath">The path to an executable file.</param>
 		/// <param name="arguments">The arguments associated with the command-line operation.</param>
-		/// <param name="workingDirectory">The directory that contains either the executable file or the files that are used by the executable file.</param>
+		/// <param name="workingDirectory">
+		/// The directory that contains either the executable file or the files that are used by the executable file.
+		/// </param>
 		/// <returns>A <see cref="Task"/> instance of the Automatic Maintenance Task.</returns>
-		/// <exception cref="System.InvalidOperationException">Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.</exception>
+		/// <exception cref="System.InvalidOperationException">
+		/// Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.
+		/// </exception>
 		public Task AddAutomaticMaintenanceTask([NotNull] string taskPathAndName, TimeSpan period, TimeSpan deadline, string executablePath, string arguments = null, string workingDirectory = null)
 		{
 			if (HighestSupportedVersion.Minor < 4)
@@ -371,18 +421,22 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Creates a new task, registers the task, and returns the instance.</summary>
 		/// <param name="path">
-		/// The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
-		/// the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
-		/// folder and the '..' characters cannot be used to specify the parent task folder in the path.
+		/// The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value
+		/// that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot
+		/// be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
 		/// </param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
 		/// <param name="action">The <see cref="Action"/> to determine what happens when the task is triggered.</param>
 		/// <param name="userId">The user credentials used to register the task.</param>
 		/// <param name="password">The password for the userId used to register the task.</param>
-		/// <param name="logonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="logonType">
+		/// A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.
+		/// </param>
 		/// <param name="description">The task description.</param>
 		/// <returns>A <see cref="Task"/> instance of the registered task.</returns>
-		/// <remarks>This method is shorthand for creating a new TaskDescription, adding a trigger and action, and then registering it in the root folder.</remarks>
+		/// <remarks>
+		/// This method is shorthand for creating a new TaskDescription, adding a trigger and action, and then registering it in the root folder.
+		/// </remarks>
 		/// <example>
 		/// <code lang="cs">
 		/// <![CDATA[
@@ -409,16 +463,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Creates a new task, registers the task, and returns the instance.</summary>
 		/// <param name="path">
-		/// The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
-		/// the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
-		/// folder and the '..' characters cannot be used to specify the parent task folder in the path.
+		/// The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value
+		/// that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot
+		/// be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
 		/// </param>
 		/// <param name="trigger">The <see cref="Trigger"/> to determine when to run the task.</param>
 		/// <param name="exePath">The executable path.</param>
 		/// <param name="arguments">The arguments (optional). Value can be NULL.</param>
 		/// <param name="userId">The user credentials used to register the task.</param>
 		/// <param name="password">The password for the userId used to register the task.</param>
-		/// <param name="logonType">A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.</param>
+		/// <param name="logonType">
+		/// A <see cref="TaskLogonType"/> value that defines what logon technique is used to run the registered task.
+		/// </param>
 		/// <param name="description">The task description.</param>
 		/// <returns>A <see cref="Task"/> instance of the registered task.</returns>
 		/// <example>
@@ -475,7 +531,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Signals the object that initialization is starting.</summary>
-		public void BeginInit() { initializing = true; }
+		public void BeginInit() => initializing = true;
 
 		/// <summary>Signals the object that initialization is complete.</summary>
 		public void EndInit()
@@ -489,10 +545,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
 		public override bool Equals(object obj)
 		{
-			var tsobj = obj as TaskService;
-			if (tsobj != null)
-				return tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPassword == UserPassword && tsobj.forceV1 == forceV1;
-			return base.Equals(obj);
+			return obj is TaskService tsobj
+				? tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPassword == UserPassword && tsobj.forceV1 == forceV1
+				: base.Equals(obj);
 		}
 
 		/// <summary>Finds all tasks matching a name or standard wildcards.</summary>
@@ -525,9 +580,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task FindTask([NotNull] string name, bool searchAllFolders = true)
 		{
 			var results = FindAllTasks(new Wildcard(name), searchAllFolders);
-			if (results.Length > 0)
-				return results[0];
-			return null;
+			return results.Length > 0 ? results[0] : null;
 		}
 
 		/// <summary>Gets the event log for this <see cref="TaskService"/> instance.</summary>
@@ -537,12 +590,14 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets the path to a folder of registered tasks.</summary>
 		/// <param name="folderName">
-		/// The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a
-		/// backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the
-		/// current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
+		/// The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is
+		/// specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character
+		/// cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
 		/// </param>
 		/// <returns><see cref="TaskFolder"/> instance for the requested folder or <c>null</c> if <paramref name="folderName"/> was unrecognized.</returns>
-		/// <exception cref="NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
+		/// <exception cref="NotV1SupportedException">
+		/// Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.
+		/// </exception>
 		public TaskFolder GetFolder(string folderName)
 		{
 			TaskFolder f = null;
@@ -577,7 +632,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (v2TaskService != null)
 				try
 				{
-					return new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? 1 : 0));
+					return new RunningTaskCollection(this, v2TaskService.GetRunningTasks(includeHidden ? TASK_ENUM_FLAGS.TASK_ENUM_HIDDEN : TASK_ENUM_FLAGS.TASK_ENUM_UNHIDDEN));
 				}
 				catch { }
 			return new RunningTaskCollection(this);
@@ -585,7 +640,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets the task with the specified path.</summary>
 		/// <param name="taskPath">The task path.</param>
-		/// <returns>The <see cref="Task"/> instance matching the <paramref name="taskPath"/>, if found. If not found, this method returns <c>null</c>.</returns>
+		/// <returns>
+		/// The <see cref="Task"/> instance matching the <paramref name="taskPath"/>, if found. If not found, this method returns <c>null</c>.
+		/// </returns>
 		public Task GetTask([NotNull] string taskPath)
 		{
 			Task t = null;
@@ -646,9 +703,9 @@ namespace Microsoft.Win32.TaskScheduler
 			info.AddValue("forceV1", forceV1, typeof(bool));
 		}
 
-		internal static V2Interop.IRegisteredTask GetTask([NotNull] V2Interop.ITaskService iSvc, [NotNull] string name)
+		internal static IRegisteredTask GetTask([NotNull] ITaskService iSvc, [NotNull] string name)
 		{
-			V2Interop.ITaskFolder fld = null;
+			ITaskFolder fld = null;
 			try
 			{
 				fld = iSvc.GetFolder("\\");
@@ -664,7 +721,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		internal static V1Interop.ITask GetTask([NotNull] V1Interop.ITaskScheduler iSvc, [NotNull] string name)
+		internal static ITask GetTask([NotNull] ITaskScheduler iSvc, [NotNull] string name)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
@@ -687,7 +744,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component"/> and optionally releases the managed resources.</summary>
+		/// <summary>
+		/// Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component"/> and optionally releases the managed resources.
+		/// </summary>
 		/// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
 		protected override void Dispose(bool disposing)
 		{
@@ -765,7 +824,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 					if (LibraryIsV2 && !forceV1)
 					{
-						v2TaskService = new V2Interop.ITaskService();
+						v2TaskService = new ITaskService();
 						if (!string.IsNullOrEmpty(targetServer))
 						{
 							// Check to ensure character only server name. (Suggested by bigsan)
@@ -786,7 +845,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 					{
 						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
-						v1TaskScheduler = new V1Interop.ITaskScheduler();
+						v1TaskScheduler = new ITaskScheduler();
 						if (!string.IsNullOrEmpty(targetServer))
 						{
 							// Check to ensure UNC format for server name. (Suggested by bigsan)
@@ -864,10 +923,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return new Version((int)(v >> 16), (int)(v & 0x0000FFFF));
 		}
 
-		private void ResetHighestSupportedVersion()
-		{
-			maxVer = Connected ? (v2TaskService != null ? GetV2Version() : TaskServiceVersion.V1_1) : GetLibraryVersionFromLocalOS();
-		}
+		private void ResetHighestSupportedVersion() => maxVer = Connected ? (v2TaskService != null ? GetV2Version() : TaskServiceVersion.V1_1) : GetLibraryVersionFromLocalOS();
 
 		private void ResetUnsetProperties()
 		{
@@ -887,13 +943,14 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool ShouldSerializeUserName() => userName != null && !userName.Equals(Environment.UserName, StringComparison.InvariantCultureIgnoreCase);
 
 		/// <summary>
-		/// Represents a valid, connected session to a Task Scheduler instance. This token is thread-safe and should be the means of passing information about a
-		/// <see cref="TaskService"/> between threads.
+		/// Represents a valid, connected session to a Task Scheduler instance. This token is thread-safe and should be the means of passing
+		/// information about a <see cref="TaskService"/> between threads.
 		/// </summary>
 		public struct ConnectionToken
 		{
 			internal int token;
-			internal ConnectionToken(int value) { token = value; }
+
+			internal ConnectionToken(int value) => token = value;
 		}
 
 		// Manages the list of tokens and associated data
@@ -992,9 +1049,9 @@ namespace Microsoft.Win32.TaskScheduler
 					OnUpdate = onUpdate;
 				}
 
-				public void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode) { OnCompleted?.Invoke(taskErrCode); }
+				public void TaskCompleted([In, MarshalAs(UnmanagedType.Error)] int taskErrCode) => OnCompleted?.Invoke(taskErrCode);
 
-				public void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage) { OnUpdate?.Invoke(percentComplete, statusMessage); }
+				public void UpdateStatus([In] short percentComplete, [In, MarshalAs(UnmanagedType.BStr)] string statusMessage) => OnUpdate?.Invoke(percentComplete, statusMessage);
 			}
 		}
 
@@ -1003,6 +1060,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			public bool ForceV1;
 			public string TargetServer, UserAccountDomain, UserName, UserPassword;
+
 			public ConnectionData(string targetServer, string userName = null, string accountDomain = null, string password = null, bool forceV1 = false)
 			{
 				TargetServer = targetServer;
@@ -1015,52 +1073,20 @@ namespace Microsoft.Win32.TaskScheduler
 			public bool Equals(ConnectionData other)
 			{
 				return string.Equals(TargetServer, other.TargetServer, StringComparison.InvariantCultureIgnoreCase) &&
-				       string.Equals(UserAccountDomain, other.UserAccountDomain, StringComparison.InvariantCultureIgnoreCase) &&
-				       string.Equals(UserName, other.UserName, StringComparison.InvariantCultureIgnoreCase) &&
-				       string.Equals(UserPassword, other.UserPassword, StringComparison.InvariantCultureIgnoreCase) &&
-				       ForceV1 == other.ForceV1;
+					   string.Equals(UserAccountDomain, other.UserAccountDomain, StringComparison.InvariantCultureIgnoreCase) &&
+					   string.Equals(UserName, other.UserName, StringComparison.InvariantCultureIgnoreCase) &&
+					   string.Equals(UserPassword, other.UserPassword, StringComparison.InvariantCultureIgnoreCase) &&
+					   ForceV1 == other.ForceV1;
 			}
 		}
 
 		private class VersionConverter : TypeConverter
 		{
-			public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-			{
-				if (sourceType == typeof(string))
-					return true;
-				return base.CanConvertFrom(context, sourceType);
-			}
+			public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+				sourceType == typeof(string) ? true : base.CanConvertFrom(context, sourceType);
 
-			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
-			{
-				var s = value as string;
-				return s != null ? new Version(s) : base.ConvertFrom(context, culture, value);
-			}
+			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) =>
+				value is string s ? new Version(s) : base.ConvertFrom(context, culture, value);
 		}
-	}
-
-	/// <summary>
-	/// Known versions of the native Task Scheduler library. This can be used as a decoder for the <see cref="TaskService.HighestSupportedVersion"/> and <see cref="TaskService.LibraryVersion"/> values.
-	/// </summary>
-	public static class TaskServiceVersion
-	{
-		/// <summary>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
-		[Description("Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).")]
-		public static readonly Version V1_1 = new Version(1, 1);
-		/// <summary>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
-		[Description("Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).")]
-		public static readonly Version V1_2 = new Version(1, 2);
-		/// <summary>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
-		[Description("Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).")]
-		public static readonly Version V1_3 = new Version(1, 3);
-		/// <summary>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
-		[Description("Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).")]
-		public static readonly Version V1_4 = new Version(1, 4);
-		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
-		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
-		public static readonly Version V1_5 = new Version(1, 5);
-		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
-		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
-		public static readonly Version V1_6 = new Version(1, 6);
 	}
 }

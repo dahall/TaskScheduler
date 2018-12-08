@@ -459,7 +459,7 @@ namespace TestTaskService
 
 				// Setup Actions
 				td.Actions.PowerShellConversion = PowerShellActionPlatformOption.All;
-				td.Actions.Add("notepad.exe", "c:\\test.log");
+				var execAction = td.Actions.Add("notepad.exe", "c:\\test.log");
 				if (isV12 || (td.Actions.PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0)
 				{
 					td.Actions.Context = "Author";
@@ -478,7 +478,7 @@ namespace TestTaskService
 					//email.HeaderFields["Importance"] = "low";
 					td.Actions.Add(new ComHandlerAction(new Guid("{BF300543-7BA5-4C17-A318-9BBDB7429A21}"), @"C:\Users\dahall\Documents\Visual Studio 2010\Projects\TaskHandlerProxy\TaskHandlerSample\bin\Release\TaskHandlerSample.dll|TaskHandlerSample.TaskHandler|MoreData"));
 				}
-				td.Actions[0] = new ExecAction("notepad.exe", "c:\\test2.log");
+				td.Actions[0] = new ExecAction("notepad.exe", "c:\\test2.log") { Id = "Exec action" };
 
 				// Validate and Register task
 				WriteXml(td, "PreRegTest");

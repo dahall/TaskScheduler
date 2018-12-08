@@ -1,57 +1,37 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using static Vanara.PInvoke.TaskSchd;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// Provides information and control for a collection of folders that contain tasks.
-	/// </summary>
+	/// <summary>Provides information and control for a collection of folders that contain tasks.</summary>
 	public sealed class TaskFolderCollection : ICollection<TaskFolder>, IDisposable
 	{
 		private readonly TaskFolder parent;
 		private readonly TaskFolder[] v1FolderList;
-		private readonly V2Interop.ITaskFolderCollection v2FolderList;
+		private readonly ITaskFolderCollection v2FolderList;
 
-		internal TaskFolderCollection()
-		{
-			v1FolderList = new TaskFolder[0];
-		}
+		internal TaskFolderCollection() => v1FolderList = new TaskFolder[0];
 
-		internal TaskFolderCollection([NotNull] TaskFolder folder, [NotNull] V2Interop.ITaskFolderCollection iCollection)
+		internal TaskFolderCollection([NotNull] TaskFolder folder, [NotNull] ITaskFolderCollection iCollection)
 		{
 			parent = folder;
 			v2FolderList = iCollection;
 		}
 
-		/// <summary>
-		/// Gets the number of items in the collection.
-		/// </summary>
+		/// <summary>Gets the number of items in the collection.</summary>
 		public int Count => v2FolderList?.Count ?? v1FolderList.Length;
 
-		/// <summary>
-		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
-		/// </summary>
+		/// <summary>Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</summary>
 		bool ICollection<TaskFolder>.IsReadOnly => false;
 
-		/// <summary>
-		/// Gets the specified folder from the collection.
-		/// </summary>
+		/// <summary>Gets the specified folder from the collection.</summary>
 		/// <param name="index">The index of the folder to be retrieved.</param>
 		/// <returns>A TaskFolder instance that represents the requested folder.</returns>
-		public TaskFolder this[int index]
-		{
-			get
-			{
-				if (v2FolderList != null)
-					return new TaskFolder(parent.TaskService, v2FolderList[++index]);
-				return v1FolderList[index];
-			}
-		}
+		public TaskFolder this[int index] => v2FolderList != null ? new TaskFolder(parent.TaskService, v2FolderList[++index]) : v1FolderList[index];
 
-		/// <summary>
-		/// Gets the specified folder from the collection.
-		/// </summary>
+		/// <summary>Gets the specified folder from the collection.</summary>
 		/// <param name="path">The path of the folder to be retrieved.</param>
 		/// <returns>A TaskFolder instance that represents the requested folder.</returns>
 		public TaskFolder this[[NotNull] string path]
@@ -70,37 +50,34 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
-		/// </summary>
-		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-		/// <exception cref="System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="TaskFolder.CreateFolder(string, string, bool)"/> instead.</exception>
-		public void Add([NotNull] TaskFolder item) { throw new NotImplementedException(); }
+		/// <summary>Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</summary>
+		/// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+		/// <exception cref="System.NotImplementedException">
+		/// This action is technically unfeasible due to limitations of the underlying library. Use the <see
+		/// cref="TaskFolder.CreateFolder(string, string, bool)"/> instead.
+		/// </exception>
+		public void Add([NotNull] TaskFolder item) => throw new NotImplementedException();
 
-		/// <summary>
-		/// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-		/// </summary>
+		/// <summary>Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</summary>
 		public void Clear()
 		{
 			if (v2FolderList != null)
 			{
-				for (int i = v2FolderList.Count; i > 0; i--)
+				for (var i = v2FolderList.Count; i > 0; i--)
 					parent.DeleteFolder(v2FolderList[i].Name, false);
 			}
 		}
 
-		/// <summary>
-		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
-		/// </summary>
-		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.</summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
 		/// <returns>
-		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+		/// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
 		/// </returns>
 		public bool Contains([NotNull] TaskFolder item)
 		{
 			if (v2FolderList != null)
 			{
-				for (int i = v2FolderList.Count; i > 0; i--)
+				for (var i = v2FolderList.Count; i > 0; i--)
 					if (string.Equals(item.Path, v2FolderList[i].Path, StringComparison.CurrentCultureIgnoreCase))
 						return true;
 			}
@@ -109,10 +86,11 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		/// <summary>
-		/// Copies the elements of the ICollection to an Array, starting at a particular Array index.
-		/// </summary>
-		/// <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="ICollection{T}"/>. The Array must have zero-based indexing.</param>
+		/// <summary>Copies the elements of the ICollection to an Array, starting at a particular Array index.</summary>
+		/// <param name="array">
+		/// The one-dimensional Array that is the destination of the elements copied from <see cref="ICollection{T}"/>. The Array must have
+		/// zero-based indexing.
+		/// </param>
 		/// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
 		public void CopyTo(TaskFolder[] array, int arrayIndex)
 		{
@@ -133,9 +111,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Releases all resources used by this class.
-		/// </summary>
+		/// <summary>Releases all resources used by this class.</summary>
 		public void Dispose()
 		{
 			if (v1FolderList != null && v1FolderList.Length > 0)
@@ -147,9 +123,7 @@ namespace Microsoft.Win32.TaskScheduler
 				System.Runtime.InteropServices.Marshal.ReleaseComObject(v2FolderList);
 		}
 
-		/// <summary>
-		/// Determines whether the specified folder exists.
-		/// </summary>
+		/// <summary>Determines whether the specified folder exists.</summary>
 		/// <param name="path">The path of the folder.</param>
 		/// <returns>true if folder exists; otherwise, false.</returns>
 		public bool Exists([NotNull] string path)
@@ -163,21 +137,17 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		/// <summary>
-		/// Gets a list of items in a collection.
-		/// </summary>
+		/// <summary>Gets a list of items in a collection.</summary>
 		/// <returns>Enumerated list of items in the collection.</returns>
 		public IEnumerator<TaskFolder> GetEnumerator()
 		{
 			if (v2FolderList != null)
-				return new System.Runtime.InteropServices.ComEnumerator<TaskFolder, V2Interop.ITaskFolder>(() => v2FolderList.Count, (object o) => v2FolderList[o], o => new TaskFolder(parent.TaskService, o));
+				return new ComEnumerator<TaskFolder, ITaskFolder>(() => v2FolderList.Count, (object o) => v2FolderList[o], o => new TaskFolder(parent.TaskService, o));
 			return Array.AsReadOnly(v1FolderList).GetEnumerator();
 		}
 
 		/*
-		/// <summary>
-		/// Returns the index of the TaskFolder within the collection.
-		/// </summary>
+		/// <summary>Returns the index of the TaskFolder within the collection.</summary>
 		/// <param name="item">TaskFolder to find.</param>
 		/// <returns>Index of the TaskFolder; -1 if not found.</returns>
 		public int IndexOf(TaskFolder item)
@@ -185,9 +155,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return IndexOf(item.Path);
 		}
 
-		/// <summary>
-		/// Returns the index of the TaskFolder within the collection.
-		/// </summary>
+		/// <summary>Returns the index of the TaskFolder within the collection.</summary>
 		/// <param name="path">Path to find.</param>
 		/// <returns>Index of the TaskFolder; -1 if not found.</returns>
 		public int IndexOf(string path)
@@ -206,18 +174,17 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 		*/
 
-		/// <summary>
-		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-		/// </summary>
-		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <summary>Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</summary>
+		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
 		/// <returns>
-		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>;
+		/// otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </returns>
 		public bool Remove([NotNull] TaskFolder item)
 		{
 			if (v2FolderList != null)
 			{
-				for (int i = v2FolderList.Count; i > 0; i--)
+				for (var i = v2FolderList.Count; i > 0; i--)
 				{
 					if (string.Equals(item.Path, v2FolderList[i].Path, StringComparison.CurrentCultureIgnoreCase))
 					{

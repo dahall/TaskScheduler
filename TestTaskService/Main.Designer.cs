@@ -170,6 +170,8 @@ namespace TestTaskService
 			// 
 			// langCombo
 			// 
+			this.langCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.langCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.langCombo.FormattingEnabled = true;
 			this.langCombo.Location = new System.Drawing.Point(167, 316);

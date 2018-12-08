@@ -88,6 +88,9 @@
     <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
       <HintPath>..\packages\TimeSpan2.2.1.6\lib\net20\TimeSpan2.dll</HintPath>
     </Reference>
+    <Reference Include="Vanara.Compatibility.EventLog, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.Compatibility.EventLog.1.0.1\lib\net20\Vanara.Compatibility.EventLog.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
     <Reference Include="ActiveDirectoryObjectPicker, Version=2.2.129.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">

@@ -1,62 +1,64 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using JetBrains.Annotations;
+using static Vanara.PInvoke.MSTask;
+using static Vanara.PInvoke.TaskSchd;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// Options for when to convert actions to PowerShell equivalents.
-	/// </summary>
+	/// <summary>Options for when to convert actions to PowerShell equivalents.</summary>
 	[Flags]
 	public enum PowerShellActionPlatformOption
 	{
 		/// <summary>
-		/// Never convert any actions to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities are found.
+		/// Never convert any actions to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities
+		/// are found.
 		/// </summary>
 		Never = 0,
+
 		/// <summary>
-		/// Convert actions under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types.
-		/// If not specified, only a single <see cref="ExecAction"/> is supported. Developer must ensure that PowerShell v2 or higher is installed on the target computer.
+		/// Convert actions under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple
+		/// actions of all types. If not specified, only a single <see cref="ExecAction"/> is supported. Developer must ensure that
+		/// PowerShell v2 or higher is installed on the target computer.
 		/// </summary>
 		Version1 = 1,
+
 		/// <summary>
-		/// Convert all <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references to their PowerShell equivalents on systems on or after Windows 8 / Server 2012.
+		/// Convert all <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references to their PowerShell equivalents on systems
+		/// on or after Windows 8 / Server 2012.
 		/// </summary>
 		Version2 = 2,
-		/// <summary>
-		/// Convert all actions regardless of version or operating system.
-		/// </summary>
+
+		/// <summary>Convert all actions regardless of version or operating system.</summary>
 		All = 3
 	}
 
-	/// <summary>
-	/// Collection that contains the actions that are performed by the task.
-	/// </summary>
+	/// <summary>Collection that contains the actions that are performed by the task.</summary>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
 	[PublicAPI]
 	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
 	{
 		internal const int MaxActions = 32;
 
-		private List<Action> v1Actions;
-		private V1Interop.ITask v1Task;
-		private V2Interop.IActionCollection v2Coll;
-		private V2Interop.ITaskDefinition v2Def;
-		private PowerShellActionPlatformOption psConvert = PowerShellActionPlatformOption.Version2;
 		private static readonly string psV2IdRegex = $"(?:; )?{nameof(PowerShellConversion)}=(?<v>0|1)";
+		private PowerShellActionPlatformOption psConvert = PowerShellActionPlatformOption.Version2;
+		private List<Action> v1Actions;
+		private ITask v1Task;
+		private IActionCollection v2Coll;
+		private ITaskDefinition v2Def;
 
-		internal ActionCollection([NotNull] V1Interop.ITask task)
+		internal ActionCollection([NotNull] ITask task)
 		{
 			v1Task = task;
 			v1Actions = GetV1Actions();
 			PowerShellConversion = Action.TryParse(v1Task.GetDataItem(nameof(PowerShellConversion)), psConvert | PowerShellActionPlatformOption.Version2);
 		}
 
-		internal ActionCollection([NotNull] V2Interop.ITaskDefinition iTaskDef)
+		internal ActionCollection([NotNull] ITaskDefinition iTaskDef)
 		{
 			v2Def = iTaskDef;
 			v2Coll = iTaskDef.Actions;
@@ -73,20 +75,13 @@ namespace Microsoft.Win32.TaskScheduler
 			UnconvertUnsupportedActions();
 		}
 
-		/// <summary>
-		/// Gets or sets the identifier of the principal for the task.
-		/// </summary>
+		/// <summary>Gets or sets the identifier of the principal for the task.</summary>
 		[XmlAttribute]
 		[DefaultValue(null)]
 		[CanBeNull]
 		public string Context
 		{
-			get
-			{
-				if (v2Coll != null)
-					return v2Coll.Context;
-				return v1Task.GetDataItem("ActionCollectionContext");
-			}
+			get => v2Coll != null ? v2Coll.Context : v1Task.GetDataItem("ActionCollectionContext");
 			set
 			{
 				if (v2Coll != null)
@@ -97,32 +92,35 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the number of actions in the collection.
+		/// Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="ExecAction"/> instances.
 		/// </summary>
-		public int Count => (v2Coll != null) ? v2Coll.Count : v1Actions.Count;
-
-		bool ICollection.IsSynchronized => false;
-
-		object ICollection.SyncRoot => this;
-
-		bool ICollection<Action>.IsReadOnly => false;
-
-		bool IList.IsFixedSize => false;
-
-		bool IList.IsReadOnly => false;
-
-		/// <summary>Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="ExecAction"/> instances.</summary>
 		/// <value>The PowerShell platform options.</value>
-		/// <remarks>This property will affect how many actions are physically stored in the system and is tied to the version of Task Scheduler.
-		/// <para>If set to <see cref="PowerShellActionPlatformOption.Never"/>, then no actions will ever be converted to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities are found.</para>
-		/// <para>If set to <see cref="PowerShellActionPlatformOption.Version1"/>, then actions will be converted only under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types. If not specified, only a single <see cref="ExecAction"/> is supported. Developer must ensure that PowerShell v2 or higher is installed on the target computer.</para>
-		/// <para>If set to <see cref="PowerShellActionPlatformOption.Version2"/> (which is the default value), then <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references will be converted to their PowerShell equivalents on systems on or after Windows 8 / Server 2012.</para>
-		/// <para>If set to <see cref="PowerShellActionPlatformOption.All"/>, then any actions not supported by the Task Scheduler version will be converted to PowerShell.</para>
+		/// <remarks>
+		/// This property will affect how many actions are physically stored in the system and is tied to the version of Task Scheduler.
+		/// <para>
+		/// If set to <see cref="PowerShellActionPlatformOption.Never"/>, then no actions will ever be converted to PowerShell. This will
+		/// force exceptions to be thrown when unsupported actions our action quantities are found.
+		/// </para>
+		/// <para>
+		/// If set to <see cref="PowerShellActionPlatformOption.Version1"/>, then actions will be converted only under Version 1 of the
+		/// library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types. If not specified,
+		/// only a single <see cref="ExecAction"/> is supported. Developer must ensure that PowerShell v2 or higher is installed on the
+		/// target computer.
+		/// </para>
+		/// <para>
+		/// If set to <see cref="PowerShellActionPlatformOption.Version2"/> (which is the default value), then
+		/// <see cref="ShowMessageAction"/> and <see cref="EmailAction"/> references will be converted to their PowerShell equivalents on
+		/// systems on or after Windows 8 / Server 2012.
+		/// </para>
+		/// <para>
+		/// If set to <see cref="PowerShellActionPlatformOption.All"/>, then any actions not supported by the Task Scheduler version will be
+		/// converted to PowerShell.
+		/// </para>
 		/// </remarks>
 		[DefaultValue(typeof(PowerShellActionPlatformOption), "Version2")]
 		public PowerShellActionPlatformOption PowerShellConversion
 		{
-			get { return psConvert; }
+			get => psConvert;
 			set
 			{
 				if (psConvert != value)
@@ -141,21 +139,10 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private bool SupportV1Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0;
-
-		private bool SupportV2Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version2) != 0;
-
-		/// <summary>
-		/// Gets or sets an XML-formatted version of the collection.
-		/// </summary>
+		/// <summary>Gets or sets an XML-formatted version of the collection.</summary>
 		public string XmlText
 		{
-			get
-			{
-				if (v2Coll != null)
-					return v2Coll.XmlText;
-				return XmlSerializationHelper.WriteObjectToXmlText(this);
-			}
+			get => v2Coll != null ? v2Coll.XmlText : XmlSerializationHelper.WriteObjectToXmlText(this);
 			set
 			{
 				if (v2Coll != null)
@@ -165,15 +152,57 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		object IList.this[int index]
+		/// <summary>Gets the number of actions in the collection.</summary>
+		public int Count => (v2Coll != null) ? v2Coll.Count : v1Actions.Count;
+
+		bool IList.IsFixedSize => false;
+
+		bool ICollection<Action>.IsReadOnly => false;
+
+		bool IList.IsReadOnly => false;
+
+		bool ICollection.IsSynchronized => false;
+
+		object ICollection.SyncRoot => this;
+
+		private bool SupportV1Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version1) != 0;
+
+		private bool SupportV2Conversion => (PowerShellConversion & PowerShellActionPlatformOption.Version2) != 0;
+
+		/// <summary>Gets or sets a specified action from the collection.</summary>
+		/// <value>The <see cref="Action"/>.</value>
+		/// <param name="actionId">The id ( <see cref="Action.Id"/>) of the action to be retrieved.</param>
+		/// <returns>Specialized <see cref="Action"/> instance.</returns>
+		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
+		/// <exception cref="System.NullReferenceException"></exception>
+		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
+		[NotNull]
+		public Action this[string actionId]
 		{
-			get { return this[index]; }
-			set { this[index] = (Action)value; }
+			get
+			{
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(nameof(actionId));
+				var t = Find(a => string.Equals(a.Id, actionId));
+				return t ?? throw new ArgumentOutOfRangeException(nameof(actionId));
+			}
+			set
+			{
+				if (value == null)
+					throw new NullReferenceException();
+				if (string.IsNullOrEmpty(actionId))
+					throw new ArgumentNullException(nameof(actionId));
+				var index = IndexOf(actionId);
+				value.Id = actionId;
+				if (index >= 0)
+					this[index] = value;
+				else
+					Add(value);
+			}
 		}
 
-		/// <summary>
-		/// Gets or sets a an action at the specified index.
-		/// </summary>
+		/// <summary>Gets or sets a an action at the specified index.</summary>
 		/// <value>The zero-based index of the action to get or set.</value>
 		[NotNull]
 		public Action this[int index]
@@ -211,50 +240,13 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets a specified action from the collection.
-		/// </summary>
-		/// <value>
-		/// The <see cref="Action"/>.
-		/// </value>
-		/// <param name="actionId">The id (<see cref="Action.Id" />) of the action to be retrieved.</param>
-		/// <returns>
-		/// Specialized <see cref="Action" /> instance.
-		/// </returns>
-		/// <exception cref="System.ArgumentNullException"></exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"></exception>
-		/// <exception cref="System.NullReferenceException"></exception>
-		/// <exception cref="System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
-		[NotNull]
-		public Action this[string actionId]
+		object IList.this[int index]
 		{
-			get
-			{
-				if (string.IsNullOrEmpty(actionId))
-					throw new ArgumentNullException(nameof(actionId));
-				var t = Find(a => string.Equals(a.Id, actionId));
-				if (t != null)
-					return t;
-				throw new ArgumentOutOfRangeException(nameof(actionId));
-			}
-			set
-			{
-				if (value == null)
-					throw new NullReferenceException();
-				if (string.IsNullOrEmpty(actionId))
-					throw new ArgumentNullException(nameof(actionId));
-				int index = IndexOf(actionId);
-				value.Id = actionId;
-				if (index >= 0)
-					this[index] = value;
-				else
-					Add(value);
-			}
+			get => this[index];
+			set => this[index] = (Action)value;
 		}
 
-		/// <summary>
-		/// Adds an action to the task.
-		/// </summary>
+		/// <summary>Adds an action to the task.</summary>
 		/// <typeparam name="TAction">A type derived from <see cref="Action"/>.</typeparam>
 		/// <param name="action">A derived <see cref="Action"/> class.</param>
 		/// <returns>The bound <see cref="Action"/> that was added to the collection.</returns>
@@ -275,20 +267,18 @@ namespace Microsoft.Win32.TaskScheduler
 			return action;
 		}
 
-		/// <summary>
-		/// Adds an <see cref="ExecAction"/> to the task.
-		/// </summary>
+		/// <summary>Adds an <see cref="ExecAction"/> to the task.</summary>
 		/// <param name="path">Path to an executable file.</param>
 		/// <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
-		/// <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
+		/// <param name="workingDirectory">
+		/// Directory that contains either the executable file or the files that are used by the executable file. This value can be null.
+		/// </param>
 		/// <returns>The bound <see cref="ExecAction"/> that was added to the collection.</returns>
 		[NotNull]
 		public ExecAction Add([NotNull] string path, [CanBeNull] string arguments = null, [CanBeNull] string workingDirectory = null) =>
-			(ExecAction)Add(new ExecAction(path, arguments, workingDirectory));
+			Add(new ExecAction(path, arguments, workingDirectory));
 
-		/// <summary>
-		/// Adds a new <see cref="Action"/> instance to the task.
-		/// </summary>
+		/// <summary>Adds a new <see cref="Action"/> instance to the task.</summary>
 		/// <param name="actionType">Type of task to be created</param>
 		/// <returns>Specialized <see cref="Action"/> instance.</returns>
 		[NotNull]
@@ -302,22 +292,23 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
 				return Action.CreateAction(v1Task);
 			}
-			return Action.CreateAction(v2Coll.Create(actionType));
+			return Action.CreateAction(v2Coll.Create((TASK_ACTION_TYPE)actionType));
 		}
 
-		/// <summary>
-		/// Adds a collection of actions to the end of the <see cref="ActionCollection" />.
-		/// </summary>
-		/// <param name="actions">The actions to be added to the end of the <see cref="ActionCollection" />. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
-		/// <exception cref="ArgumentNullException"><paramref name="actions" /> is <c>null</c>.</exception>
+		/// <summary>Adds a collection of actions to the end of the <see cref="ActionCollection"/>.</summary>
+		/// <param name="actions">
+		/// The actions to be added to the end of the <see cref="ActionCollection"/>. The collection itself cannot be <c>null</c> and cannot
+		/// contain <c>null</c> elements.
+		/// </param>
+		/// <exception cref="ArgumentNullException"><paramref name="actions"/> is <c>null</c>.</exception>
 		public void AddRange([ItemNotNull, NotNull] IEnumerable<Action> actions)
 		{
 			if (actions == null)
 				throw new ArgumentNullException(nameof(actions));
 			if (v1Task != null)
 			{
-				List<Action> list = new List<Action>(actions);
-				bool at = list.Count == 1 && list[0].ActionType == TaskActionType.Execute;
+				var list = new List<Action>(actions);
+				var at = list.Count == 1 && list[0].ActionType == TaskActionType.Execute;
 				if (!SupportV1Conversion && ((v1Actions.Count + list.Count) > 1 || !at))
 					throw new NotV1SupportedException($"Only a single {nameof(ExecAction)} is supported unless the {nameof(PowerShellConversion)} property includes the {nameof(PowerShellActionPlatformOption.Version1)} value.");
 				v1Actions.AddRange(actions);
@@ -330,9 +321,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Clears all actions from the task.
-		/// </summary>
+		/// <summary>Clears all actions from the task.</summary>
 		public void Clear()
 		{
 			if (v2Coll != null)
@@ -344,44 +333,45 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
-		/// </summary>
-		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.</summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
 		/// <returns>
-		/// true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+		/// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
 		/// </returns>
 		public bool Contains([NotNull] Action item) => Find(a => a.Equals(item)) != null;
 
-		/// <summary>
-		/// Determines whether the specified action type is contained in this collection.
-		/// </summary>
+		/// <summary>Determines whether the specified action type is contained in this collection.</summary>
 		/// <param name="actionType">Type of the action.</param>
-		/// <returns>
-		///   <c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.
-		/// </returns>
+		/// <returns><c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.</returns>
 		public bool ContainsType(Type actionType) => Find(a => a.GetType() == actionType) != null;
 
 		/// <summary>
-		/// Copies the elements of the <see cref="ActionCollection" /> to an array of <see cref="Action" />, starting at a particular  index.
+		/// Copies the elements of the <see cref="ActionCollection"/> to an array of <see cref="Action"/>, starting at a particular index.
 		/// </summary>
-		/// <param name="array">The <see cref="Action" /> array that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="Action" /> array must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <see cref="Action" /> array at which copying begins.</param>
-		public void CopyTo(Action[] array, int arrayIndex)
-		{
-			CopyTo(0, array, arrayIndex, Count);
-		}
+		/// <param name="array">
+		/// The <see cref="Action"/> array that is the destination of the elements copied from <see cref="ActionCollection"/>. The
+		/// <see cref="Action"/> array must have zero-based indexing.
+		/// </param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="Action"/> array at which copying begins.</param>
+		public void CopyTo(Action[] array, int arrayIndex) => CopyTo(0, array, arrayIndex, Count);
 
 		/// <summary>
-		/// Copies the elements of the <see cref="ActionCollection" /> to an <see cref="Action" /> array, starting at a particular <see cref="Action" /> array index.
+		/// Copies the elements of the <see cref="ActionCollection"/> to an <see cref="Action"/> array, starting at a particular
+		/// <see cref="Action"/> array index.
 		/// </summary>
 		/// <param name="index">The zero-based index in the source at which copying begins.</param>
-		/// <param name="array">The <see cref="Action" /> array that is the destination of the elements copied from <see cref="ActionCollection" />. The <see cref="Action" /> array must have zero-based indexing.</param>
-		/// <param name="arrayIndex">The zero-based index in <see cref="Action" /> array at which copying begins.</param>
+		/// <param name="array">
+		/// The <see cref="Action"/> array that is the destination of the elements copied from <see cref="ActionCollection"/>. The
+		/// <see cref="Action"/> array must have zero-based indexing.
+		/// </param>
+		/// <param name="arrayIndex">The zero-based index in <see cref="Action"/> array at which copying begins.</param>
 		/// <param name="count">The number of elements to copy.</param>
-		/// <exception cref="System.ArgumentNullException"><paramref name="array" /> is null.</exception>
-		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex" /> is less than 0.</exception>
-		/// <exception cref="System.ArgumentException">The number of elements in the source <see cref="ActionCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
+		/// <exception cref="System.ArgumentNullException"><paramref name="array"/> is null.</exception>
+		/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
+		/// <exception cref="System.ArgumentException">
+		/// The number of elements in the source <see cref="ActionCollection"/> is greater than the available space from <paramref
+		/// name="arrayIndex"/> to the end of the destination <paramref name="array"/>.
+		/// </exception>
 		public void CopyTo(int index, [NotNull] Action[] array, int arrayIndex, int count)
 		{
 			if (array == null)
@@ -394,13 +384,11 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(count));
 			if ((Count - index) > (array.Length - arrayIndex))
 				throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-			for (int i = 0; i < count; i++)
+			for (var i = 0; i < count; i++)
 				array[arrayIndex + i] = (Action)this[index + i].Clone();
 		}
 
-		/// <summary>
-		/// Releases all resources used by this class.
-		/// </summary>
+		/// <summary>Releases all resources used by this class.</summary>
 		public void Dispose()
 		{
 			v1Task = null;
@@ -409,10 +397,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the first
+		/// occurrence within the entire collection.
 		/// </summary>
-		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the <see cref="Action"/> to search for.</param>
-		/// <returns>The first <see cref="Action"/> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
+		/// <param name="match">
+		/// The <see cref="Predicate{Action}"/> delegate that defines the conditions of the <see cref="Action"/> to search for.
+		/// </param>
+		/// <returns>
+		/// The first <see cref="Action"/> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.
+		/// </returns>
 		public Action Find(Predicate<Action> match)
 		{
 			if (match == null)
@@ -423,12 +416,15 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based
+		/// index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
 		/// </summary>
 		/// <param name="startIndex">The zero-based starting index of the search.</param>
 		/// <param name="count">The number of elements in the collection to search.</param>
 		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
-		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		/// <returns>
+		/// The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+		/// </returns>
 		public int FindIndexOf(int startIndex, int count, [NotNull] Predicate<Action> match)
 		{
 			if (startIndex < 0 || startIndex >= Count)
@@ -437,81 +433,41 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentOutOfRangeException(nameof(count));
 			if (match == null)
 				throw new ArgumentNullException(nameof(match));
-			for (int i = startIndex; i < startIndex + count; i++)
+			for (var i = startIndex; i < startIndex + count; i++)
 				if (match(this[i])) return i;
 			return -1;
 		}
 
 		/// <summary>
-		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection.
+		/// Searches for an <see cref="Action"/> that matches the conditions defined by the specified predicate, and returns the zero-based
+		/// index of the first occurrence within the collection.
 		/// </summary>
 		/// <param name="match">The <see cref="Predicate{Action}"/> delegate that defines the conditions of the element to search for.</param>
-		/// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+		/// <returns>
+		/// The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+		/// </returns>
 		public int FindIndexOf([NotNull] Predicate<Action> match) => FindIndexOf(0, Count, match);
 
-		/// <summary>
-		/// Retrieves an enumeration of each of the actions.
-		/// </summary>
-		/// <returns>Returns an object that implements the <see cref="IEnumerator"/> interface and that can iterate through the <see cref="Action"/> objects within the <see cref="ActionCollection"/>.</returns>
+		/// <summary>Retrieves an enumeration of each of the actions.</summary>
+		/// <returns>
+		/// Returns an object that implements the <see cref="IEnumerator"/> interface and that can iterate through the <see cref="Action"/>
+		/// objects within the <see cref="ActionCollection"/>.
+		/// </returns>
 		public IEnumerator<Action> GetEnumerator()
 		{
 			if (v2Coll != null)
-				return new ComEnumerator<Action, V2Interop.IAction>(() => v2Coll.Count, i => v2Coll[i], Action.CreateAction);
+				return new ComEnumerator<Action, IAction>(() => v2Coll.Count, i => v2Coll[i], Action.CreateAction);
 			return v1Actions.GetEnumerator();
 		}
 
-		void ICollection.CopyTo(Array array, int index)
-		{
-			if (array != null && array.Rank != 1)
-				throw new RankException("Multi-dimensional arrays are not supported.");
-			Action[] src = new Action[Count];
-			CopyTo(src, 0);
-			Array.Copy(src, 0, array, index, Count);
-		}
-
-		void ICollection<Action>.Add(Action item)
-		{
-			Add(item);
-		}
-
-		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-		int IList.Add(object value)
-		{
-			Add((Action)value);
-			return Count - 1;
-		}
-
-		bool IList.Contains(object value) => Contains((Action)value);
-
-		int IList.IndexOf(object value) => IndexOf((Action)value);
-
-		void IList.Insert(int index, object value)
-		{
-			Insert(index, (Action)value);
-		}
-
-		void IList.Remove(object value)
-		{
-			Remove((Action)value);
-		}
-
-		/// <summary>
-		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-		/// </summary>
-		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
-		/// <returns>
-		/// The index of <paramref name="item" /> if found in the list; otherwise, -1.
-		/// </returns>
+		/// <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.</summary>
+		/// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+		/// <returns>The index of <paramref name="item"/> if found in the list; otherwise, -1.</returns>
 		public int IndexOf(Action item) => FindIndexOf(a => a.Equals(item));
 
-		/// <summary>
-		/// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-		/// </summary>
-		/// <param name="actionId">The id (<see cref="Action.Id"/>) of the action to be retrieved.</param>
-		/// <returns>
-		/// The index of <paramref name="actionId" /> if found in the list; otherwise, -1.
-		/// </returns>
+		/// <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.</summary>
+		/// <param name="actionId">The id ( <see cref="Action.Id"/>) of the action to be retrieved.</param>
+		/// <returns>The index of <paramref name="actionId"/> if found in the list; otherwise, -1.</returns>
 		public int IndexOf(string actionId)
 		{
 			if (string.IsNullOrEmpty(actionId))
@@ -519,9 +475,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return FindIndexOf(a => string.Equals(a.Id, actionId));
 		}
 
-		/// <summary>
-		/// Inserts an action at the specified index.
-		/// </summary>
+		/// <summary>Inserts an action at the specified index.</summary>
 		/// <param name="index">The zero-based index at which action should be inserted.</param>
 		/// <param name="action">The action to insert into the list.</param>
 		public void Insert(int index, [NotNull] Action action)
@@ -533,16 +487,16 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (v2Coll != null)
 			{
-				Action[] pushItems = new Action[Count - index];
+				var pushItems = new Action[Count - index];
 				if (Count != index)
 				{
 					CopyTo(index, pushItems, 0, Count - index);
-					for (int j = Count - 1; j >= index; j--)
+					for (var j = Count - 1; j >= index; j--)
 						RemoveAt(j);
 				}
 				Add(action);
 				if (Count != index)
-					for (int k = 0; k < pushItems.Length; k++)
+					for (var k = 0; k < pushItems.Length; k++)
 						Add(pushItems[k]);
 			}
 			else
@@ -554,38 +508,15 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
-
-		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
-		{
-			reader.ReadStartElement(XmlSerializationHelper.GetElementName(this), TaskDefinition.tns);
-			Context = reader.GetAttribute("Context");
-			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
-			{
-				Action a = Action.CreateAction(Action.TryParse(reader.LocalName == "Exec" ? "Execute" : reader.LocalName, TaskActionType.Execute));
-				XmlSerializationHelper.ReadObject(reader, a);
-				this.Add(a);
-			}
-			reader.ReadEndElement();
-		}
-
-		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
-		{
-			// TODO:FIX if (!string.IsNullOrEmpty(Context)) writer.WriteAttributeString("Context", Context);
-			foreach (var item in this)
-				XmlSerializationHelper.WriteObject(writer, item);
-		}
-
-		/// <summary>
-		/// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-		/// </summary>
-		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+		/// <summary>Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</summary>
+		/// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
 		/// <returns>
-		/// true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+		/// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>;
+		/// otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
 		/// </returns>
 		public bool Remove([NotNull] Action item)
 		{
-			int idx = IndexOf(item);
+			var idx = IndexOf(item);
 			if (idx != -1)
 			{
 				try
@@ -598,9 +529,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		/// <summary>
-		/// Removes the action at a specified index.
-		/// </summary>
+		/// <summary>Removes the action at a specified index.</summary>
 		/// <param name="index">Index of action to remove.</param>
 		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
 		public void RemoveAt(int index)
@@ -616,9 +545,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Copies the elements of the <see cref="ActionCollection"/> to a new array.
-		/// </summary>
+		/// <summary>Copies the elements of the <see cref="ActionCollection"/> to a new array.</summary>
 		/// <returns>An array containing copies of the elements of the <see cref="ActionCollection"/>.</returns>
 		[NotNull, ItemNotNull]
 		public Action[] ToArray()
@@ -628,12 +555,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return ret;
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the actions in this collection.
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String"/> that represents the actions in this collection.
-		/// </returns>
+		/// <summary>Returns a <see cref="System.String"/> that represents the actions in this collection.</summary>
+		/// <returns>A <see cref="System.String"/> that represents the actions in this collection.</returns>
 		public override string ToString()
 		{
 			if (Count == 1)
@@ -643,40 +566,71 @@ namespace Microsoft.Win32.TaskScheduler
 			return string.Empty;
 		}
 
+		void ICollection<Action>.Add(Action item) => Add(item);
+
+		int IList.Add(object value)
+		{
+			Add((Action)value);
+			return Count - 1;
+		}
+
+		bool IList.Contains(object value) => Contains((Action)value);
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			if (array != null && array.Rank != 1)
+				throw new RankException("Multi-dimensional arrays are not supported.");
+			var src = new Action[Count];
+			CopyTo(src, 0);
+			Array.Copy(src, 0, array, index, Count);
+		}
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
+
+		int IList.IndexOf(object value) => IndexOf((Action)value);
+
+		void IList.Insert(int index, object value) => Insert(index, (Action)value);
+
+		void IXmlSerializable.ReadXml(System.Xml.XmlReader reader)
+		{
+			reader.ReadStartElement(XmlSerializationHelper.GetElementName(this), TaskDefinition.tns);
+			Context = reader.GetAttribute("Context");
+			while (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
+			{
+				var a = Action.CreateAction(Action.TryParse(reader.LocalName == "Exec" ? "Execute" : reader.LocalName, TaskActionType.Execute));
+				XmlSerializationHelper.ReadObject(reader, a);
+				Add(a);
+			}
+			reader.ReadEndElement();
+		}
+
+		void IList.Remove(object value) => Remove((Action)value);
+
+		void IXmlSerializable.WriteXml(System.Xml.XmlWriter writer)
+		{
+			// TODO:FIX if (!string.IsNullOrEmpty(Context)) writer.WriteAttributeString("Context", Context);
+			foreach (var item in this)
+				XmlSerializationHelper.WriteObject(writer, item);
+		}
+
 		internal void ConvertUnsupportedActions()
 		{
 			if (TaskService.LibraryVersion.Minor > 3 && SupportV2Conversion)
 			{
-				for (int i = 0; i < Count; i++)
+				for (var i = 0; i < Count; i++)
 				{
-					Action action = this[i];
-					var bindable = action as IBindAsExecAction;
-					if (bindable != null && !(action is ComHandlerAction))
+					var action = this[i];
+					if (action is IBindAsExecAction bindable && !(action is ComHandlerAction))
 						this[i] = ExecAction.ConvertToPowerShellAction(action);
-				}
-			}
-		}
-
-		private void UnconvertUnsupportedActions()
-		{
-			if (TaskService.LibraryVersion.Minor > 3)
-			{
-				for (int i = 0; i < Count; i++)
-				{
-					ExecAction action = this[i] as ExecAction;
-					if (action != null)
-					{
-						Action newAction = Action.ConvertFromPowerShellAction(action);
-						if (newAction != null)
-							this[i] = newAction;
-					}
 				}
 			}
 		}
 
 		private List<Action> GetV1Actions()
 		{
-			List<Action> ret = new List<Action>();
+			var ret = new List<Action>();
 			if (v1Task != null && v1Task.GetDataItem("ActionType") != "EMPTY")
 			{
 				var exec = new ExecAction(v1Task);
@@ -742,6 +696,22 @@ namespace Microsoft.Win32.TaskScheduler
 				ea.Bind(v1Task);
 				v1Task.SetDataItem("ActionId", null);
 				v1Task.SetDataItem("ActionType", "MULTIPLE");
+			}
+		}
+
+		private void UnconvertUnsupportedActions()
+		{
+			if (TaskService.LibraryVersion.Minor > 3)
+			{
+				for (var i = 0; i < Count; i++)
+				{
+					if (this[i] is ExecAction action)
+					{
+						var newAction = Action.ConvertFromPowerShellAction(action);
+						if (newAction != null)
+							this[i] = newAction;
+					}
+				}
 			}
 		}
 	}

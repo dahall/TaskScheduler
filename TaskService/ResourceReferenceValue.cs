@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using JetBrains.Annotations;
+using static Vanara.PInvoke.Kernel32;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -93,22 +94,15 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!System.IO.File.Exists(ResourceFilePath))
 				throw new System.IO.FileNotFoundException("Invalid resource file path.", ResourceFilePath);
-			IntPtr hLib = IntPtr.Zero;
-			try
+			using (var hLib = LoadLibrary(ResourceFilePath))
 			{
-				hLib = NativeMethods.LoadLibrary(ResourceFilePath);
-				if (hLib == IntPtr.Zero)
+				if (hLib.IsInvalid)
 					throw new System.ComponentModel.Win32Exception();
 				var sb = new StringBuilder(8192);
-				int l = LoadString(hLib, ResourceIdentifier, sb, sb.Capacity);
+				var l = LoadString(hLib.DangerousGetHandle(), ResourceIdentifier, sb, sb.Capacity);
 				if (l == 0)
 					throw new System.ComponentModel.Win32Exception();
 				return sb.ToString(0, l);
-			}
-			finally
-			{
-				if (hLib != IntPtr.Zero)
-					NativeMethods.FreeLibrary(hLib);
 			}
 		}
 

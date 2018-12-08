@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using JetBrains.Annotations;
 
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
-
 namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>

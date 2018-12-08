@@ -2,33 +2,25 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using static Vanara.PInvoke.AdvApi32;
 
 namespace Microsoft.Win32
 {
 	/// <summary>
-	/// Impersonation of a user. Allows to execute code under another
-	/// user context.
-	/// Please note that the account that instantiates the Impersonator class
-	/// needs to have the 'Act as part of operating system' privilege set.
+	/// Impersonation of a user. Allows to execute code under another user context. Please note that the account that instantiates the
+	/// Impersonator class needs to have the 'Act as part of operating system' privilege set.
 	/// </summary>
 	internal class WindowsImpersonatedIdentity : IDisposable, IIdentity
 	{
-		private const int LOGON_TYPE_NEW_CREDENTIALS = 9;
-		private const int LOGON32_LOGON_INTERACTIVE = 2;
-		private const int LOGON32_PROVIDER_DEFAULT = 0;
-		private const int LOGON32_PROVIDER_WINNT50 = 3;
-
-#if NETSTANDARD2_0
-#else
+#if !(NETSTANDARD2_0)
 		private WindowsImpersonationContext impersonationContext = null;
 #endif
-		NativeMethods.SafeTokenHandle token;
+		SafeHTOKEN token;
 		private WindowsIdentity identity = null;
 
 		/// <summary>
-		/// Constructor. Starts the impersonation with the given credentials.
-		/// Please note that the account that instantiates the Impersonator class
-		/// needs to have the 'Act as part of operating system' privilege set.
+		/// Constructor. Starts the impersonation with the given credentials. Please note that the account that instantiates the Impersonator
+		/// class needs to have the 'Act as part of operating system' privilege set.
 		/// </summary>
 		/// <param name="userName">The name of the user to act as.</param>
 		/// <param name="domainName">The domain name of the user to act as.</param>
@@ -41,10 +33,10 @@ namespace Microsoft.Win32
 			}
 			else
 			{
-				if (NativeMethods.LogonUser(userName, domainName, password, domainName == null ? LOGON_TYPE_NEW_CREDENTIALS : LOGON32_LOGON_INTERACTIVE, domainName == null ? LOGON32_PROVIDER_WINNT50 : LOGON32_PROVIDER_DEFAULT, out token) != 0)
+				if (LogonUser(userName, domainName, password, domainName == null ? LogonUserType.LOGON32_LOGON_NEW_CREDENTIALS : LogonUserType.LOGON32_LOGON_INTERACTIVE, domainName == null ? LogonUserProvider.LOGON32_PROVIDER_WINNT50 : LogonUserProvider.LOGON32_PROVIDER_DEFAULT, out token))
 				{
 #if NETSTANDARD2_0
-					if (!NativeMethods.ImpersonateLoggedOnUser(token.DangerousGetHandle()))
+					if (!ImpersonateLoggedOnUser(token.DangerousGetHandle()))
 						throw new Win32Exception();
 #else
 					identity = new WindowsIdentity(token.DangerousGetHandle());
@@ -62,12 +54,12 @@ namespace Microsoft.Win32
 
 		public bool IsAuthenticated => identity == null ? false : identity.IsAuthenticated;
 
-		public string Name => identity == null ? null : identity.Name;
+		public string Name => identity?.Name;
 
 		public void Dispose()
 		{
 #if NETSTANDARD2_0
-			NativeMethods.RevertToSelf();
+			RevertToSelf();
 #else
 			if (impersonationContext != null)
 				impersonationContext.Undo();
