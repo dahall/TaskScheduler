@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32.TaskScheduler.EditorProperties;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Microsoft.Win32.TaskScheduler.EditorProperties;
-
-// ReSharper disable UnusedMember.Global
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
@@ -53,7 +52,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			set { isV2 = value; ResetControls(); }
 		}
 
-		/// <summary>Gets or sets the trigger that is being edited. A new trigger may be returned so you remove and re-add the resulting value to the <see cref="TriggerCollection"/>.</summary>
+		/// <summary>
+		/// Gets or sets the trigger that is being edited. A new trigger may be returned so you remove and re-add the resulting value to the
+		/// <see cref="TriggerCollection"/>.
+		/// </summary>
 		/// <value>The trigger.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Trigger Trigger
@@ -115,7 +117,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		/// <summary>Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+		/// </summary>
 		/// <value><c>true</c> if using the Unified Scheduling Engine; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Indicates whether dialog should restrict items to those available when using the Unified Scheduling Engine.")]
 		public bool UseUnifiedSchedulingEngine
@@ -149,10 +153,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		bool ITriggerHandler.IsTriggerValid() => true;
 
 		/// <summary>Called when the trigger type has changed.</summary>
-		protected void OnTriggerTypeChanged()
-		{
-			TriggerTypeChanged?.Invoke(this, EventArgs.Empty);
-		}
+		protected void OnTriggerTypeChanged() => TriggerTypeChanged?.Invoke(this, EventArgs.Empty);
 
 		private void monthlyTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
 		{

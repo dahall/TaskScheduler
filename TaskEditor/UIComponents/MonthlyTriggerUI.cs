@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
@@ -20,23 +21,6 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			monthlyOnWeekDropDown.InitializeFromTaskEnum(typeof(WhichWeek));
 			monthlyOnWeekDropDown.Items.RemoveAt(5);
 			InitDOWDropDown();
-		}
-
-		private void InitDOWDropDown()
-		{
-			monthlyOnDOWDropDown.BeginUpdate();
-			monthlyOnDOWDropDown.Items.Clear();
-			long allVal = 0;
-			for (int i = 0; i < 7; i++)
-			{
-				var val = (long)1 << i;
-				allVal |= val;
-				var text = System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName((DayOfWeek)i);
-				monthlyOnDOWDropDown.Items.Add(new ListControlItem(text, val));
-			}
-			if (!string.IsNullOrEmpty(monthlyOnDOWDropDown.CheckAllText))
-				monthlyOnDOWDropDown.Items.Insert(0, new ListControlItem(monthlyOnDOWDropDown.CheckAllText, allVal));
-			monthlyOnDOWDropDown.EndUpdate();
 		}
 
 		[Category("Property Changed")]
@@ -91,6 +75,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 						if (IsV2)
 							monthlyDaysDropDown.SetItemChecked(31, mt.RunOnLastDayOfMonth);
 						break;
+
 					case MonthlyDOWTrigger dowt:
 						monthlyOnRadio.Checked = true;
 						monthlyOnDOWDropDown.CheckedFlagValue = (long)dowt.DaysOfWeek;
@@ -98,6 +83,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 						monthlyOnWeekDropDown.CheckedFlagValue = (long)dowt.WeeksOfMonth;
 						monthlyOnWeekDropDown.SetItemChecked(4, dowt.RunOnLastWeekOfMonth);
 						break;
+
 					default:
 						throw new ArgumentException("Trigger must be MonthlyDOWTrigger or MonthlyTrigger.", nameof(Trigger));
 				}
@@ -109,9 +95,23 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[Browsable(false), DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
 		public TaskTriggerType TriggerType => monthlyDaysRadio.Checked ? TaskTriggerType.Monthly : TaskTriggerType.MonthlyDOW;
 
-		protected void OnTriggerTypeChanged()
+		protected void OnTriggerTypeChanged() => TriggerTypeChanged?.Invoke(this, new EventArgs());
+
+		private void InitDOWDropDown()
 		{
-			TriggerTypeChanged?.Invoke(this, new EventArgs());
+			monthlyOnDOWDropDown.BeginUpdate();
+			monthlyOnDOWDropDown.Items.Clear();
+			long allVal = 0;
+			for (var i = 0; i < 7; i++)
+			{
+				var val = (long)1 << i;
+				allVal |= val;
+				var text = System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName((DayOfWeek)i);
+				monthlyOnDOWDropDown.Items.Add(new ListControlItem(text, val));
+			}
+			if (!string.IsNullOrEmpty(monthlyOnDOWDropDown.CheckAllText))
+				monthlyOnDOWDropDown.Items.Insert(0, new ListControlItem(monthlyOnDOWDropDown.CheckAllText, allVal));
+			monthlyOnDOWDropDown.EndUpdate();
 		}
 
 		private void monthlyDaysDropDown_SelectedItemsChanged(object sender, EventArgs e)

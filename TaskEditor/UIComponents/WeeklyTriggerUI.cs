@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
 	internal partial class WeeklyTriggerUI : BaseTriggerUI
 	{
-		public WeeklyTriggerUI()
-		{
-			InitializeComponent();
-		}
+		public WeeklyTriggerUI() => InitializeComponent();
 
 		public override Trigger Trigger
 		{
@@ -48,39 +46,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
-		private void weeklySunCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Sunday);
-		}
+		private void weeklyFriCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Friday);
 
-		private void weeklyMonCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Monday);
-		}
+		private void weeklyMonCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Monday);
 
-		private void weeklyTueCheck_CheckedChanged(object sender, EventArgs e)
+		private void weeklyRecurNumUpDn_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Tuesday);
-		}
-
-		private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
-		}
-
-		private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Thursday);
-		}
-
-		private void weeklyFriCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Friday);
-		}
-
-		private void weeklySatCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
+			if (e.KeyChar.ToString() == System.Globalization.CultureInfo.CurrentUICulture.NumberFormat.NegativeSign)
+				e.Handled = true;
 		}
 
 		private void weeklyRecurNumUpDn_ValueChanged(object sender, EventArgs e)
@@ -89,10 +62,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				((WeeklyTrigger)trigger).WeeksInterval = Convert.ToInt16(weeklyRecurNumUpDn.Value);
 		}
 
-		private void weeklyRecurNumUpDn_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (e.KeyChar.ToString() == System.Globalization.CultureInfo.CurrentUICulture.NumberFormat.NegativeSign)
-				e.Handled = true;
-		}
+		private void weeklySatCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Saturday);
+
+		private void weeklySunCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Sunday);
+
+		private void weeklyThuCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Thursday);
+
+		private void weeklyTueCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Tuesday);
+
+		private void weeklyWedCheck_CheckedChanged(object sender, EventArgs e) => SetWeeklyDay(sender as CheckBox, DaysOfTheWeek.Wednesday);
 	}
 }

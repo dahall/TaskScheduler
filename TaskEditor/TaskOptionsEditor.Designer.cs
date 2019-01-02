@@ -48,7 +48,7 @@
 			this.splitterPanel = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
+			this.taskVersionCombo = new Vanara.Windows.Forms.DisabledItemComboBox();
 			this.taskNameText = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -227,12 +227,12 @@
 			// menuItemsContainer
 			// 
 			this.menuItemsContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generalItem,
-            this.triggersItem,
-            this.actionsItem,
-            this.securityItem,
-            this.startupItem,
-            this.runItem});
+			this.generalItem,
+			this.triggersItem,
+			this.actionsItem,
+			this.securityItem,
+			this.startupItem,
+			this.runItem});
 			this.menuItemsContainer.Name = "menuItemsContainer";
 			resources.ApplyResources(this.menuItemsContainer, "menuItemsContainer");
 			// 
@@ -294,7 +294,7 @@
 		private System.Windows.Forms.TextBox taskNameText;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.DisabledItemComboBox taskVersionCombo;
+		private Vanara.Windows.Forms.DisabledItemComboBox taskVersionCombo;
 		private System.Windows.Forms.ContextMenuStrip menuItemsContainer;
 	}
 }

@@ -13,10 +13,10 @@
     <tags>task interop taskscheduler UI editor</tags>
     <dependencies>
       <dependency id="TaskScheduler" version="[3.0.0]" />
-      <dependency id="AeroWizard" version="[2.1.11]" />
-      <dependency id="GroupControls" version="[1.5.3]" />
-      <dependency id="TimeSpan2" version="[2.1.6]" />
-      <dependency id="Tulpep.ActiveDirectoryObjectPicker" version="[2.2.129]" />
+      <dependency id="AeroWizard" version="[2.2.0]" />
+      <dependency id="GroupControls" version="[1.8.0]" />
+      <dependency id="TimeSpan2" version="[2.2.0]" />
+      <dependency id="Tulpep.ActiveDirectoryObjectPicker" version="[2.3.133]" />
     </dependencies>
   </metadata>
   <files>

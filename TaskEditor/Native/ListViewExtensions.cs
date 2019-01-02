@@ -1,6 +1,7 @@
-﻿using Microsoft.Win32;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text;
+using static Vanara.PInvoke.ComCtl32;
+using static Vanara.PInvoke.User32_Gdi;
 
 namespace System.Windows.Forms
 {
@@ -18,7 +19,8 @@ namespace System.Windows.Forms
 				if (i != idx)
 					nWidth -= lvw.Columns[i].Width;
 
-				// If the width goes below 1, then no need to keep going because the last column can't be sized to fit due to the widths of the columns before it.
+				// If the width goes below 1, then no need to keep going because the last column can't be sized to fit due to the widths of
+				// the columns before it.
 				if (nWidth < 1)
 					break;
 			}
@@ -31,16 +33,16 @@ namespace System.Windows.Forms
 		public static void AdjustTileToWidth(this ListView lvw, int maxLines = 1, int iconSpacing = 4)
 		{
 			const string str = "Wg";
-			var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { IconTextSpacing = iconSpacing, MaxTextLines = maxLines };
+			var lvTVInfo = new LVTILEVIEWINFO(0) { TilePadding = new Vanara.PInvoke.RECT(iconSpacing, 0, 0, 0), MaxTextLines = maxLines };
 			var sb = new StringBuilder(str);
 			for (var i = 0; i < maxLines; i++)
 				sb.Append("\r" + str);
 			using (var g = lvw.CreateGraphics())
 				lvTVInfo.TileSize = new Size(lvw.ClientSize.Width, Math.Max(lvw.LargeImageList.ImageSize.Height, TextRenderer.MeasureText(g, sb.ToString(), lvw.Font).Height));
-			NativeMethods.SendMessage(lvw.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
-			//var lvTVInfo = new NativeMethods.LVTILEVIEWINFO(0) { TileWidth = lvw.ClientSize.Width };
-			//NativeMethods.SendMessage(lvw.Handle, NativeMethods.ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
-			//NativeMethods.SendMessage(lvw.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
+			SendMessage(lvw.Handle, ListViewMessage.LVM_SETTILEVIEWINFO, 0, ref lvTVInfo);
+			//var lvTVInfo = new LVTILEVIEWINFO(0) { TileWidth = lvw.ClientSize.Width };
+			//SendMessage(lvw.Handle, ListViewMessage.SetTileViewInfo, 0, lvTVInfo);
+			//SendMessage(lvw.Handle, (uint)ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
 		}
 	}
 }

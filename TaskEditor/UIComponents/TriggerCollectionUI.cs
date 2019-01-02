@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Vanara.Extensions;
+using static Vanara.PInvoke.ComCtl32;
+using static Vanara.PInvoke.User32_Gdi;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
@@ -11,10 +14,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private ITaskDefinitionEditor editor;
 		private bool modern;
 
-		public TriggerCollectionUI()
-		{
-			InitializeComponent();
-		}
+		public TriggerCollectionUI() => InitializeComponent();
 
 		/// <summary>Gets or sets the available triggers.</summary>
 		/// <value>The available triggers.</value>
@@ -35,14 +35,14 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			}
 		}
 
+		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
+
 		private Trigger SelectedTrigger
 		{
 			get { var idx = SelectedIndex; return idx == -1 ? null : triggerListView.Items[idx].Tag as Trigger; }
 		}
 
 		private bool SelectedTriggerIsAvailable => SelectedIndex != -1 && AvailableTriggers.IsFlagSet(TypeToAv(SelectedTrigger.TriggerType));
-
-		private int SelectedIndex => triggerListView.SelectedIndices.Count > 0 ? triggerListView.SelectedIndices[0] : -1;
 
 		public void RefreshState()
 		{
@@ -63,7 +63,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				{
 					triggerListView.Alignment = ListViewAlignment.Top;
 					triggerListView.AdjustTileToWidth();
-					NativeMethods.SendMessage(triggerListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
+					SendMessage(triggerListView.Handle, (uint)ListViewMessage.LVM_SETEXTENDEDLISTVIEWSTYLE, new IntPtr(0x200000), new IntPtr(0x200000));
 				}
 				else
 				{
@@ -102,10 +102,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				lvi = index < 0 ? triggerListView.Items.Add(lvi) : triggerListView.Items.Insert(index, lvi);
 			}
 			if (!modern) return lvi.Index;
-			var nlvi = new NativeMethods.LVITEM(lvi.Index) { VisibleTileColumns = new[] { 1 } };
+			var nlvi = new LVITEM(lvi.Index) { TileColumns = new[] { new LVITEMCOLUMNINFO(1) } };
 			if (!tr.Enabled)
 				nlvi.OverlayImageIndex = (uint)disabledOverlayImageIndex;
-			NativeMethods.SendMessage(triggerListView.Handle, NativeMethods.ListViewMessage.SetItem, 0, nlvi);
+			SendMessage(triggerListView.Handle, ListViewMessage.LVM_SETITEM, 0, nlvi);
 			return lvi.Index;
 		}
 
@@ -194,10 +194,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 				triggerEditButton_Click(sender, EventArgs.Empty);
 		}
 
-		private void triggerListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			SetTriggerButtonState();
-		}
+		private void triggerListView_SelectedIndexChanged(object sender, EventArgs e) => SetTriggerButtonState();
 
 		private void triggerListView_SizeChanged(object sender, EventArgs e)
 		{

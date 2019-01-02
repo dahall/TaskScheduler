@@ -9,9 +9,8 @@ using System.IO;
 using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
-// ReSharper disable UnusedMember.Global
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+using Vanara.Extensions;
+using Vanara.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {

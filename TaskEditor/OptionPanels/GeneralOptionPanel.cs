@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using System.Windows.Forms;
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Resources;
 using System.Windows.Forms;
+using Vanara.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -184,9 +185,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// the enumerated type specified by <typeparamref name="T"/>.
 		/// </param>
 		/// <param name="exclude">(Optional) The excluded items from the enumerated type.</param>
-		public void InitializeAndSet<T>(T val, ResourceManager mgr, string prefix = null, T[] exclude = null) where T : struct, IConvertible
+		public void InitializeAndSet<T>(T val, ResourceManager mgr, string prefix = null, T[] exclude = null) where T : struct, System.Enum
 		{
-			EnumUtil.CheckIsEnum<T>(true);
 			var excl = exclude == null ? null : Array.ConvertAll(exclude, t => t.ToString());
 			InitializeFromEnum(typeof(T), mgr, prefix, excl);
 			CheckedFlagValue = Convert.ToInt64(val);

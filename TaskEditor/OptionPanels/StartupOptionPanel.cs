@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Vanara.Network;
 
 namespace Microsoft.Win32.TaskScheduler.OptionPanels
 {
@@ -16,14 +18,14 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 			availableConnectionsCombo.BeginUpdate();
 			availableConnectionsCombo.Items.Clear();
 			availableConnectionsCombo.Items.Add(EditorProperties.Resources.AnyConnection);
-			availableConnectionsCombo.Items.AddRange(Microsoft.Win32.NativeMethods.NetworkProfile.GetAllLocalProfiles());
+			availableConnectionsCombo.Items.AddRange(NetworkProfile.GetAllLocalProfiles().ToArray());
 			availableConnectionsCombo.EndUpdate();
 		}
 
 		protected override void InitializePanel()
 		{
-			bool editable = parent.Editable;
-			bool v2 = parent.IsV2;
+			var editable = parent.Editable;
+			var v2 = parent.IsV2;
 			taskStopIfGoingOnBatteriesCheck.Enabled = editable && td.Settings.DisallowStartIfOnBatteries;
 			taskStartIfConnectionCheck.Enabled = editable && v2;
 			availableConnectionsCombo.Enabled = editable && v2 && td.Settings.RunOnlyIfNetworkAvailable && ((parent.TaskService != null && parent.TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !td.Settings.UseUnifiedSchedulingEngine);
@@ -45,6 +47,23 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				availableConnectionsCombo.SelectedIndex = 0;
 			else
 				availableConnectionsCombo.SelectedItem = td.Settings.NetworkSettings.Id;
+		}
+
+		private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!onAssignment)
+			{
+				if (availableConnectionsCombo.SelectedIndex > 0)
+				{
+					td.Settings.NetworkSettings.Id = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
+					td.Settings.NetworkSettings.Name = ((NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
+				}
+				else
+				{
+					td.Settings.NetworkSettings.Id = Guid.Empty;
+					td.Settings.NetworkSettings.Name = null;
+				}
+			}
 		}
 
 		private void taskDisallowStartIfOnBatteriesCheck_CheckedChanged(object sender, EventArgs e)
@@ -89,6 +108,13 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				td.Settings.IdleSettings.RestartOnIdle = taskRestartOnIdleCheck.Checked;
 		}
 
+		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			availableConnectionsCombo.Enabled = parent.Editable && taskStartIfConnectionCheck.Checked && ((parent.TaskService != null && parent.TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !td.Settings.UseUnifiedSchedulingEngine);
+			if (!onAssignment)
+				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
+		}
+
 		private void taskStopIfGoingOnBatteriesCheck_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment)
@@ -110,36 +136,12 @@ namespace Microsoft.Win32.TaskScheduler.OptionPanels
 				td.Settings.WakeToRun = taskWakeToRunCheck.Checked;
 		}
 
-		private void taskStartIfConnectionCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			availableConnectionsCombo.Enabled = parent.Editable && taskStartIfConnectionCheck.Checked && ((parent.TaskService != null && parent.TaskService.HighestSupportedVersion < TaskServiceVersion.V1_5) || !td.Settings.UseUnifiedSchedulingEngine);
-			if (!onAssignment)
-				td.Settings.RunOnlyIfNetworkAvailable = taskStartIfConnectionCheck.Checked;
-		}
-
 		private void UpdateIdleSettingsControls()
 		{
-			bool idleEnabled = taskIdleDurationCheck.Checked ? parent.Editable : false;
+			var idleEnabled = taskIdleDurationCheck.Checked ? parent.Editable : false;
 			taskIdleDurationCombo.Enabled = taskIdleWaitTimeoutLabel.Enabled =
 				taskIdleWaitTimeoutCombo.Enabled = taskStopOnIdleEndCheck.Enabled = idleEnabled;
 			taskRestartOnIdleCheck.Enabled = parent.IsV2 && idleEnabled && td.Settings.IdleSettings.StopOnIdleEnd;
-		}
-
-		private void availableConnectionsCombo_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (!onAssignment)
-			{
-				if (availableConnectionsCombo.SelectedIndex > 0)
-				{
-					td.Settings.NetworkSettings.Id = ((Microsoft.Win32.NativeMethods.NetworkProfile)availableConnectionsCombo.SelectedItem).Id;
-					td.Settings.NetworkSettings.Name = ((Microsoft.Win32.NativeMethods.NetworkProfile)availableConnectionsCombo.SelectedItem).Name;
-				}
-				else
-				{
-					td.Settings.NetworkSettings.Id = Guid.Empty;
-					td.Settings.NetworkSettings.Name = null;
-				}
-			}
 		}
 	}
 }

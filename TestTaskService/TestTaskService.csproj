@@ -66,40 +66,16 @@
       <Name>TaskService</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net20\GroupControls.dll</HintPath>
+  <ItemGroup>
+    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
+      <HintPath>..\packages\GroupControls.1.8.0\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\GroupControls.dll</HintPath>
       <Aliases>GrpCtrl</Aliases>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net35\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net40\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.2' ">
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net452\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
+    <Reference Include="Theraot.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Theraot.Core.2.1.0\lib\$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", ""))\Theraot.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs">
-      <Link>ExtensionAttributeFor.NET_2.0.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Func.Net2.cs">
-      <Link>Func.Net2.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Linq.Net2.cs">
-      <Link>Linq.Net2.cs</Link>
-    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,7 +146,7 @@
   <Target Name="AfterBuild">
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5" RunEachTargetSeparately="true" />
     <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
   </Target>
 </Project>

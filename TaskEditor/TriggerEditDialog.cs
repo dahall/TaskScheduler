@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32.TaskScheduler.UIComponents;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.Win32.TaskScheduler.UIComponents;
-
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable UnusedMember.Global
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -161,10 +159,12 @@ namespace Microsoft.Win32.TaskScheduler
 					case TaskTriggerDisplayType.Schedule:
 						calendarTriggerUI1.Trigger = trigger;
 						break;
+
 					case TaskTriggerDisplayType.Event:
 						eventTriggerUI1.TargetServer = TargetServer;
 						eventTriggerUI1.Trigger = trigger;
 						break;
+
 					case TaskTriggerDisplayType.SessionConnect:
 					case TaskTriggerDisplayType.SessionDisconnect:
 					case TaskTriggerDisplayType.WorkstationLock:
@@ -172,6 +172,7 @@ namespace Microsoft.Win32.TaskScheduler
 						logonRemoteRadio.Checked = ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteConnect || ((SessionStateChangeTrigger)trigger).StateChange == TaskSessionStateChangeType.RemoteDisconnect;
 						logonLocalRadio.Checked = !logonRemoteRadio.Checked;
 						break;
+
 					case TaskTriggerDisplayType.Custom:
 						customNameText.Text = ((CustomTrigger)trigger).Name;
 						customPropsListView.Items.Clear();
@@ -230,7 +231,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+		/// </summary>
 		/// <value><c>true</c> if using the Unified Scheduling Engine; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior")]
 		public bool UseUnifiedSchedulingEngine
@@ -301,20 +304,28 @@ namespace Microsoft.Win32.TaskScheduler
 				case TaskTriggerType.Monthly:
 				case TaskTriggerType.MonthlyDOW:
 					return TaskTriggerDisplayType.Schedule;
+
 				case TaskTriggerType.Logon:
 					return TaskTriggerDisplayType.Logon;
+
 				case TaskTriggerType.Boot:
 					return TaskTriggerDisplayType.Boot;
+
 				case TaskTriggerType.Idle:
 					return TaskTriggerDisplayType.Idle;
+
 				case TaskTriggerType.Event:
 					return TaskTriggerDisplayType.Event;
+
 				case TaskTriggerType.Registration:
 					return TaskTriggerDisplayType.Registration;
+
 				case TaskTriggerType.SessionStateChange:
 					return TaskTriggerDisplayType.SessionConnect;
+
 				case TaskTriggerType.Custom:
 					return TaskTriggerDisplayType.Custom;
+
 				default:
 					throw new ArgumentOutOfRangeException(nameof(triggerType), triggerType, null);
 			}
@@ -341,10 +352,7 @@ namespace Microsoft.Win32.TaskScheduler
 				trigger.StartBoundary = activateDatePicker.Value == DateTimePicker.MinimumDateTime ? DateTime.MinValue : activateDatePicker.Value;
 		}
 
-		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
-		{
-			trigger = calendarTriggerUI1.Trigger;
-		}
+		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e) => trigger = calendarTriggerUI1.Trigger;
 
 		private void cancelBtn_Click(object sender, EventArgs e)
 		{
@@ -425,7 +433,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private void logonChgUserBtn_Click(object sender, EventArgs e)
 		{
 			var acct = string.Empty;
-			if (!HelperMethods.SelectAccount(this, null, ref acct, out bool _, out bool _, out var _))
+			if (!HelperMethods.SelectAccount(this, null, ref acct, out var _, out var _, out var _))
 				return;
 			((ITriggerUserId)trigger).UserId = logonUserLabel.Text = acct;
 		}

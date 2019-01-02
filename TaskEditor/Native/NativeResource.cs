@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using static Vanara.PInvoke.Kernel32;
+using static Vanara.PInvoke.User32_Gdi;
 
 namespace Microsoft.Win32
 {
@@ -7,7 +9,7 @@ namespace Microsoft.Win32
 	{
 		public class NativeResource : IDisposable
 		{
-			private readonly IntPtr hLib;
+			private readonly SafeHINSTANCE hLib;
 
 			public NativeResource(string filename)
 			{
@@ -16,32 +18,21 @@ namespace Microsoft.Win32
 				if (filename.IndexOf('%') >= 0)
 					filename = Environment.ExpandEnvironmentVariables(filename);
 				hLib = LoadLibrary(filename);
-				if (hLib == IntPtr.Zero)
+				if (hLib.IsInvalid)
 					throw new System.ComponentModel.Win32Exception();
 			}
 
-			public void Dispose()
-			{
-				if (hLib != IntPtr.Zero)
-					FreeLibrary(hLib);
-			}
-
-			public string GetString(int id)
-			{
-				IntPtr ptr;
-				var len = LoadString(hLib, id, out ptr, 0);
-				return len == 0 ? null : Marshal.PtrToStringAuto(ptr, len);
-			}
-
 			/// <summary>
-			/// Gets the resource string from a library using the string format "@[library path],[id]". Optionally, it can be contained in a "$([string])" wrapper.
+			/// Gets the resource string from a library using the string format "@[library path],[id]". Optionally, it can be contained in a
+			/// "$([string])" wrapper.
 			/// </summary>
 			/// <param name="resourceReference">The resource reference string.</param>
-			/// <returns>If <paramref name="resourceReference"/> equals <c>null</c>, <c>null</c> is returned. Otherwise, it returns the referenced string pulled from the library using the identifier.</returns>
+			/// <returns>
+			/// If <paramref name="resourceReference"/> equals <c>null</c>, <c>null</c> is returned. Otherwise, it returns the referenced
+			/// string pulled from the library using the identifier.
+			/// </returns>
 			/// <exception cref="System.ArgumentException">
-			/// Invalid string format. - resourceReference
-			/// or
-			/// Invalid resource identifier. - resourceReference
+			/// Invalid string format. - resourceReference or Invalid resource identifier. - resourceReference
 			/// </exception>
 			public static string GetResourceString(string resourceReference)
 			{
@@ -55,11 +46,18 @@ namespace Microsoft.Win32
 				if (!m.Success)
 					throw new ArgumentException(@"Invalid string format.", nameof(resourceReference));
 				// Load referenced library and extract string from identifier
-				int id;
-				if (!int.TryParse(m.Groups["i"].Value, out id) || id > 0)
+				if (!int.TryParse(m.Groups["i"].Value, out var id) || id > 0)
 					throw new ArgumentException(@"Invalid resource identifier.", nameof(resourceReference));
 				using (var nr = new NativeResource(m.Groups["f"].Value))
 					return nr.GetString(-id);
+			}
+
+			public void Dispose() => hLib?.Dispose();
+
+			public string GetString(int id)
+			{
+				var len = LoadString(hLib, id, out var ptr, 0);
+				return len == 0 ? null : Marshal.PtrToStringAuto(ptr, len);
 			}
 		}
 	}

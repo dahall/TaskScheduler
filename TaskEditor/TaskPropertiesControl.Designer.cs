@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler.UIComponents;
+using Vanara.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -41,7 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.taskHiddenCheck = new System.Windows.Forms.CheckBox();
 			this.taskVersionLabel = new System.Windows.Forms.Label();
-			this.taskVersionCombo = new System.Windows.Forms.DisabledItemComboBox();
+			this.taskVersionCombo = new Vanara.Windows.Forms.DisabledItemComboBox();
 			this.taskSecurityGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
 			this.taskRunLevelCheck = new System.Windows.Forms.CheckBox();

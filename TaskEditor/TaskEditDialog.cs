@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using System.Security.Principal;
 using System.Windows.Forms;
+using Vanara.Windows.Forms;
+
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -134,7 +135,9 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(false)]
 		public bool RegisterTaskOnAccept { get; set; }
 
-		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.
+		/// </summary>
 		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(false)]
 		[Category("Appearance")]
@@ -161,8 +164,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used to convert
-		/// unsupported actions.
+		/// Gets or sets a value indicating whether a check box is shown on Actions tab that allows user to specify if PowerShell may be used
+		/// to convert unsupported actions.
 		/// </summary>
 		/// <value><c>true</c> if check box is shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(false)]
@@ -215,7 +218,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
+		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are
+		/// not registered.
 		/// </summary>
 		/// <value>The task.</value>
 		[Browsable(false)]
@@ -227,7 +231,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the folder for the task. If control is initialized with a <see cref="Task"/>, this value will be set to the folder of the registered task.
+		/// Gets or sets the folder for the task. If control is initialized with a <see cref="Task"/>, this value will be set to the folder
+		/// of the registered task.
 		/// </summary>
 		/// <value>The task folder name.</value>
 		[Browsable(false)]
@@ -239,7 +244,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the registered task.
+		/// Gets or sets the name of the task. If control is initialized with a <see cref="Task"/>, this value will be set to the name of the
+		/// registered task.
 		/// </summary>
 		/// <value>The task name.</value>
 		[Browsable(false)]
@@ -255,8 +261,8 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to prevent the user from
-		/// editing the TaskName.
+		/// If setup with a TaskDefinition and not a Task, and if Editable is <c>true</c>, then you can set this value to <c>false</c> to
+		/// prevent the user from editing the TaskName.
 		/// </summary>
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -335,7 +341,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static string InvokeCredentialDialog(string userName, IWin32Window owner)
 		{
-			var dlg = new CredentialsDialog(Resources.TaskSchedulerName, Resources.CredentialPromptMessage, userName) {ValidatePassword = true};
+			var dlg = new CredentialsDialog(Resources.TaskSchedulerName, Resources.CredentialPromptMessage, userName);
+			dlg.ValidatePassword += CredentialsDialog.StandardPasswordValidator;
 			return dlg.ShowDialog(owner) == DialogResult.OK ? dlg.Password : null;
 		}
 
@@ -347,10 +354,7 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
-		private static bool IsValidTaskName(string name)
-		{
-			return !string.IsNullOrEmpty(name) && name.IndexOfAny(Path.GetInvalidFileNameChars()) == -1;
-		}
+		private static bool IsValidTaskName(string name) => !string.IsNullOrEmpty(name) && name.IndexOfAny(Path.GetInvalidFileNameChars()) == -1;
 
 		/// <summary>Handles the Click event of the okBtn control.</summary>
 		/// <param name="sender">The source of the event.</param>
@@ -416,14 +420,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return Text != resources.GetString("$this.Text");
 		}
 
-		private void taskPropertiesControl1_ComponentError(object sender, TaskPropertiesControl.ComponentErrorEventArgs e)
-		{
-			okBtn.Enabled = e == TaskPropertiesControl.ComponentErrorEventArgs.Empty;
-		}
+		private void taskPropertiesControl1_ComponentError(object sender, TaskPropertiesControl.ComponentErrorEventArgs e) => okBtn.Enabled = e == TaskPropertiesControl.ComponentErrorEventArgs.Empty;
 
-		private bool ValidateOneTriggerExpires()
-		{
-			return ValidateOneTriggerExpires(TaskDefinition.Triggers);
-		}
+		private bool ValidateOneTriggerExpires() => ValidateOneTriggerExpires(TaskDefinition.Triggers);
 	}
 }

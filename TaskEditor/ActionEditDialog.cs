@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable UnusedMember.Global
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -35,7 +34,7 @@ namespace Microsoft.Win32.TaskScheduler
 			ResetCombo();
 		}
 
-		/// <summary>Initializes a new instance of the <see cref="ActionEditDialog" /> class with the provided action.</summary>
+		/// <summary>Initializes a new instance of the <see cref="ActionEditDialog"/> class with the provided action.</summary>
 		/// <param name="action">The action.</param>
 		/// <param name="supportV1Only"><c>true</c> if supports V1 only; otherwise, <c>false</c>.</param>
 		/// <param name="allowedActions">The allowed actions.</param>
@@ -113,7 +112,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether dialog should restrict items to those available when using the Unified Scheduling Engine.
+		/// </summary>
 		/// <value><c>true</c> if using the Unified Scheduling Engine; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior")]
 		public bool UseUnifiedSchedulingEngine
@@ -177,13 +178,13 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static TaskActionType AvToType(AvailableActions av) => (TaskActionType)av.BitPosition();
 
-		private void cancelBtn_Click(object sender, EventArgs e) { Close(); }
+		private void cancelBtn_Click(object sender, EventArgs e) => Close();
 
-		private void DetermineIfCanValidate() { okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate; }
+		private void DetermineIfCanValidate() => okBtn.Enabled = runActionBtn.Enabled = curHandler.CanValidate;
 
 		private Action GetFirstAvailableAction() => Action.CreateAction(AvToType(AvailableActions.GetFlags().First()));
 
-		private void keyField_TextChanged(object sender, EventArgs e) { DetermineIfCanValidate(); }
+		private void keyField_TextChanged(object sender, EventArgs e) => DetermineIfCanValidate();
 
 		private void okBtn_Click(object sender, EventArgs e)
 		{
@@ -204,7 +205,7 @@ namespace Microsoft.Win32.TaskScheduler
 				throw new ArgumentException("Type of current Action is not permitted.", nameof(Action));
 		}
 
-		private void runActionBtn_Click(object sender, EventArgs e) { curHandler.Run(); }
+		private void runActionBtn_Click(object sender, EventArgs e) => curHandler.Run();
 
 		private void UpdateAction()
 		{

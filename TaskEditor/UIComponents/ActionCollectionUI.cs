@@ -3,6 +3,10 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Vanara.Extensions;
+using Vanara.Windows.Forms;
+using static Vanara.PInvoke.ComCtl32;
+using static Vanara.PInvoke.User32_Gdi;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {
@@ -11,10 +15,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private ITaskDefinitionEditor editor;
 		private bool modern;
 
-		public ActionCollectionUI()
-		{
-			InitializeComponent();
-		}
+		public ActionCollectionUI() => InitializeComponent();
 
 		/// <summary>Occurs when value of the <see cref="ActionCollection.PowerShellConversion"/> changes.</summary>
 		public event EventHandler PowerShellConversionChanged;
@@ -24,7 +25,9 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[DefaultValue(typeof(AvailableActions), nameof(AvailableActions.AllActions)), Category("Appearance")]
 		public AvailableActions AvailableActions { get; set; } = AvailableActions.AllActions;
 
-		/// <summary>Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.</summary>
+		/// <summary>
+		/// Gets or sets a value indicating whether a button is shown when editing an action that allows user to execute the current action.
+		/// </summary>
 		/// <value><c>true</c> if button is shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Appearance"), Description("Determines whether a button is shown when editing an action that allows user to execute the current action.")]
 		public bool ShowActionRunButton { get; set; }
@@ -81,7 +84,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			{
 				actionListView.Alignment = ListViewAlignment.Top;
 				actionListView.AdjustTileToWidth();
-				NativeMethods.SendMessage(actionListView.Handle, (uint)NativeMethods.ListViewMessage.SetExtendedListViewStyle, new IntPtr(0x200000), new IntPtr(0x200000));
+				SendMessage(actionListView.Handle, (uint)ListViewMessage.LVM_SETEXTENDEDLISTVIEWSTYLE, new IntPtr(0x200000), new IntPtr(0x200000));
 			}
 			else
 			{
@@ -158,10 +161,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			editor.TaskDefinition.Actions.Insert(e.NewIndex, aTemp);
 		}
 
-		private void actionListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			SetActionButtonState();
-		}
+		private void actionListView_SelectedIndexChanged(object sender, EventArgs e) => SetActionButtonState();
 
 		private void actionListView_SizeChanged(object sender, EventArgs e)
 		{

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Vanara.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// A wizard that walks the user through the creation of a simple task.
-	/// </summary>
+	/// <summary>A wizard that walks the user through the creation of a simple task.</summary>
 	[ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms.Control.TopLevel"), Description("Wizard that walks the user through the creation of a simple task.")]
 	[Designer(typeof(Design.TaskServiceComponentDesigner))]
 	[DesignTimeVisible(true), DefaultProperty("RegisterTaskOnFinish")]
@@ -23,17 +22,15 @@ namespace Microsoft.Win32.TaskScheduler
 		private AvailableWizardPages availPages = (AvailableWizardPages)0xFF;
 		private AvailableWizardTriggers availTriggers = (AvailableWizardTriggers)0x7FF;
 		private bool flagExecutorIsGroup, flagExecutorIsServiceAccount;
+		private bool flagRunOnlyWhenUserIsLoggedOn;
 		private bool IsV2 = true;
 		private bool onAssignment = false;
 		private bool registerTaskOnFinish;
 		private Task task;
 		private TaskDefinition td;
 		private Trigger trigger;
-		private bool flagRunOnlyWhenUserIsLoggedOn;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.</summary>
 		public TaskSchedulerWizard()
 		{
 			InitializeComponent();
@@ -45,9 +42,7 @@ namespace Microsoft.Win32.TaskScheduler
 			durationSpan.FormattedZero = EditorProperties.Resources.TimeSpanIndefinitely;
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.</summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="definition">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		/// <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
@@ -58,9 +53,7 @@ namespace Microsoft.Win32.TaskScheduler
 			RegisterTaskOnFinish = registerOnFinish;
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="TaskSchedulerWizard"/> class.</summary>
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		/// <param name="registerOnFinish">If set to <c>true</c> the task will be registered when Finish is pressed.</param>
 		public TaskSchedulerWizard(Task task, bool registerOnFinish = false)
@@ -70,72 +63,89 @@ namespace Microsoft.Win32.TaskScheduler
 			RegisterTaskOnFinish = registerOnFinish;
 		}
 
-		/// <summary>
-		/// Flags to indicate which actions are available in the <see cref="TaskSchedulerWizard"/>.
-		/// </summary>
+		/// <summary>Flags to indicate which actions are available in the <see cref="TaskSchedulerWizard"/>.</summary>
 		[Flags]
 		public enum AvailableWizardActions
 		{
-			/// <summary>This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is provided, find its associated application and launch the application with the document.</summary>
+			/// <summary>
+			/// This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the
+			/// name of a document is provided, find its associated application and launch the application with the document.
+			/// </summary>
 			Execute = 0x1,
+
 			/*/// <summary>This action fires a handler.</summary>
 			ComHandler = 0x20,*/
+
 			/// <summary>This action sends and e-mail.</summary>
 			SendEmail = 0x40,
+
 			/// <summary>This action shows a message box.</summary>
 			ShowMessage = 0x80
 		}
 
-		/// <summary>
-		/// Flags to indicate which pages are visible in the <see cref="TaskSchedulerWizard"/>.
-		/// </summary>
+		/// <summary>Flags to indicate which pages are visible in the <see cref="TaskSchedulerWizard"/>.</summary>
 		[Flags]
 		public enum AvailableWizardPages
 		{
 			/// <summary>Displays the introduction page with name and description.</summary>
 			IntroPage = 0x1,
+
 			/// <summary>Displays the security options page with user and password options.</summary>
 			SecurityPage = 0x10,
+
 			/// <summary>Displays trigger selection page.</summary>
 			TriggerSelectPage = 0x42,
+
 			/// <summary>Displays generic trigger properties page.</summary>
 			TriggerPropertiesPage = 0x20,
+
 			/// <summary>Displays action selection page.</summary>
 			ActionSelectPage = 0x84,
+
 			/// <summary>Displays the summary page.</summary>
 			SummaryPage = 0x8,
+
 			/// <summary>Displays a page to edit the selected trigger.</summary>
 			TriggerEditPage = 0x40,
+
 			/// <summary>Displays a page to edit the selected action.</summary>
 			ActionEditPage = 0x80
 		}
 
-		/// <summary>
-		/// Flags to indicate which triggers are available in the <see cref="TaskSchedulerWizard"/>.
-		/// </summary>
+		/// <summary>Flags to indicate which triggers are available in the <see cref="TaskSchedulerWizard"/>.</summary>
 		[Flags]
 		public enum AvailableWizardTriggers
 		{
 			/// <summary>Triggers the task when a specific event occurs. Version 1.2 only.</summary>
 			Event = 0x1,
+
 			/// <summary>Triggers the task at a specific time of day.</summary>
 			Time = 0x2,
+
 			/// <summary>Triggers the task on a daily schedule.</summary>
 			Daily = 0x4,
+
 			/// <summary>Triggers the task on a weekly schedule.</summary>
 			Weekly = 0x8,
+
 			/// <summary>Triggers the task on a monthly schedule.</summary>
 			Monthly = 0x10,
+
 			/// <summary>Triggers the task on a monthly day-of-week schedule.</summary>
 			MonthlyDOW = 0x20,
+
 			/// <summary>Triggers the task when the computer goes into an idle state.</summary>
 			Idle = 0x40,
+
 			/// <summary>Triggers the task when the task is registered. Version 1.2 only.</summary>
 			Registration = 0x80,
+
 			/// <summary>Triggers the task when the computer boots.</summary>
 			Boot = 0x100,
+
 			/// <summary>Triggers the task when a specific user logs on.</summary>
 			Logon = 0x200,
+
 			/// <summary>Triggers the task when a specific user session state changes. Version 1.2 only.</summary>
 			SessionStateChange = 0x400,
 		}
@@ -143,22 +153,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>
 		/// Gets or sets a value indicating whether show a check box on the summary page that will open the full editor when the user presses Finish.
 		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if shown; otherwise, <c>false</c>.
-		/// </value>
+		/// <value><c>true</c> if shown; otherwise, <c>false</c>.</value>
 		[DefaultValue(true), Category("Behavior"), Description("Show a check box on the summary page that will open the full editor.")]
 		public bool AllowEditorOnFinish { get; set; }
 
-		/// <summary>
-		/// Gets or sets the available actions.
-		/// </summary>
-		/// <value>
-		/// The available actions.
-		/// </value>
+		/// <summary>Gets or sets the available actions.</summary>
+		/// <value>The available actions.</value>
 		[DefaultValue((AvailableWizardActions)0xC1)]
 		public AvailableWizardActions AvailableActions
 		{
-			get { return availActions; }
+			get => availActions;
 			set
 			{
 				if (value != availActions)
@@ -169,16 +173,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the available pages.
-		/// </summary>
-		/// <value>
-		/// The available pages.
-		/// </value>
+		/// <summary>Gets or sets the available pages.</summary>
+		/// <value>The available pages.</value>
 		[DefaultValue((AvailableWizardPages)0xFF)]
 		public AvailableWizardPages AvailablePages
 		{
-			get { return availPages; }
+			get => availPages;
 			set
 			{
 				if (availPages != value)
@@ -211,16 +211,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the available triggers.
-		/// </summary>
-		/// <value>
-		/// The available triggers.
-		/// </value>
+		/// <summary>Gets or sets the available triggers.</summary>
+		/// <value>The available triggers.</value>
 		[DefaultValue((AvailableWizardPages)0x7FF)]
 		public AvailableWizardTriggers AvailableTriggers
 		{
-			get { return availTriggers; }
+			get => availTriggers;
 			set
 			{
 				if (value != availTriggers)
@@ -231,47 +227,21 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the text shown on the summary page prompting for editor on finish click.
-		/// </summary>
-		/// <value>
-		/// The editor on finish text.
-		/// </value>
-		[DefaultValue((string)null), Category("Appearance")]
+		/// <summary>Gets or sets the text shown on the summary page prompting for editor on finish click.</summary>
+		/// <value>The editor on finish text.</value>
+		[DefaultValue(null), Category("Appearance")]
 		public string EditorOnFinishText { get; set; }
 
-		/// <summary>
-		/// Gets or sets the icon for the form.
-		/// </summary>
-		/// <returns>
-		/// An <see cref="T:System.Drawing.Icon"/> that represents the icon for the form.
-		/// </returns>
-		/// <PermissionSet>
-		///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
-		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   </PermissionSet>
-		public new System.Drawing.Icon Icon
-		{
-			get { return wizardControl1.TitleIcon; }
-			set { wizardControl1.TitleIcon = value; }
-		}
-
-		/// <summary>
-		/// Gets the password.
-		/// </summary>
-		[Browsable(false), DefaultValue((string)null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		/// <summary>Gets the password.</summary>
+		[Browsable(false), DefaultValue(null), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string Password { get; private set; }
 
-		/// <summary>
-		/// Gets or sets a value indicating whether to register the task on Finish.
-		/// </summary>
+		/// <summary>Gets or sets a value indicating whether to register the task on Finish.</summary>
 		/// <value><c>true</c> if task registered on Finish; otherwise, <c>false</c>.</value>
 		[DefaultValue(false), Category("Behavior"), Description("Indicates whether to register the task on Finish")]
 		public bool RegisterTaskOnFinish
 		{
-			get { return registerTaskOnFinish; }
+			get => registerTaskOnFinish;
 			set
 			{
 				if (registerTaskOnFinish != value)
@@ -282,48 +252,35 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets a value indicating whether an icon is displayed in the caption bar of the form.
-		/// </summary>
+		/// <summary>Gets or sets a value indicating whether an icon is displayed in the caption bar of the form.</summary>
 		/// <value></value>
-		/// <returns>true if the form displays an icon in the caption bar; otherwise, false. The default is true.
-		/// </returns>
+		/// <returns>true if the form displays an icon in the caption bar; otherwise, false. The default is true.</returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new bool ShowIcon
 		{
-			get { return base.ShowIcon; }
-			set { base.ShowIcon = value; }
+			get => base.ShowIcon;
+			set => base.ShowIcon = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the summary format string.
-		/// </summary>
-		/// <value>
-		/// The summary format string.
-		/// </value>
-		[DefaultValue((string)null), Category("Appearance")]
+		/// <summary>Gets or sets the summary format string.</summary>
+		/// <value>The summary format string.</value>
+		[DefaultValue(null), Category("Appearance")]
 		public string SummaryFormatString { get; set; }
 
-		/// <summary>
-		/// Gets or sets the summary registration notice.
-		/// </summary>
-		/// <value>
-		/// The summary registration notice.
-		/// </value>
-		[DefaultValue((string)null), Category("Appearance")]
+		/// <summary>Gets or sets the summary registration notice.</summary>
+		/// <value>The summary registration notice.</value>
+		[DefaultValue(null), Category("Appearance")]
 		public string SummaryRegistrationNotice { get; set; }
 
 		/// <summary>
-		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are not registered.
+		/// Gets the current <see cref="Task"/>. This is only the task used to initialize this control. The updates made to the control are
+		/// not registered.
 		/// </summary>
 		/// <value>The task.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Task Task
 		{
-			get
-			{
-				return task;
-			}
+			get => task;
 			private set
 			{
 				task = value;
@@ -336,17 +293,12 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the <see cref="TaskDefinition"/>.
-		/// </summary>
+		/// <summary>Gets or sets the <see cref="TaskDefinition"/>.</summary>
 		/// <value>The task definition.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskDefinition TaskDefinition
 		{
-			get
-			{
-				return td;
-			}
+			get => td;
 			set
 			{
 				if (TaskService == null)
@@ -379,33 +331,38 @@ namespace Microsoft.Win32.TaskScheduler
 						SetTriggerListItem(AvailableWizardTriggers.Time);
 						availTriggers |= AvailableWizardTriggers.Time;
 						break;
+
 					case TaskTriggerType.Daily:
 						dailyTriggerUI1.Trigger = trigger;
 						SetTriggerListItem(AvailableWizardTriggers.Daily);
 						availTriggers |= AvailableWizardTriggers.Daily;
 						break;
+
 					case TaskTriggerType.Weekly:
 						weeklyTriggerUI1.Trigger = trigger;
 						SetTriggerListItem(AvailableWizardTriggers.Weekly);
 						availTriggers |= AvailableWizardTriggers.Weekly;
 						break;
+
 					case TaskTriggerType.Monthly:
 					case TaskTriggerType.MonthlyDOW:
 						monthlyTriggerUI1.Trigger = trigger;
 						SetTriggerListItem(AvailableWizardTriggers.Monthly);
 						availTriggers |= AvailableWizardTriggers.Monthly;
 						break;
+
 					case TaskTriggerType.Event:
 						eventTriggerUI1.TargetServer = TaskService.TargetServer;
 						eventTriggerUI1.Trigger = trigger;
 						SetTriggerListItem(AvailableWizardTriggers.Event);
 						availTriggers |= AvailableWizardTriggers.Event;
 						break;
+
 					default:
 						break;
 				}
 
-				bool hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
+				var hasRep = trigger.Repetition.Interval != TimeSpan.Zero;
 				if (!hasRep)
 				{
 					durationSpan.Value = repeatSpan.Value = TimeSpan.Zero;
@@ -454,75 +411,74 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets or sets the folder for the task. Used only if <see cref="Task"/> property has not been set and <see cref="RegisterTaskOnFinish"/> property is true.
+		/// Gets or sets the folder for the task. Used only if <see cref="Task"/> property has not been set and <see
+		/// cref="RegisterTaskOnFinish"/> property is true.
 		/// </summary>
 		/// <value>The task folder name.</value>
 		[DefaultValue(null), Category("Behavior"), Description("Folder for registering the task.")]
 		public string TaskFolder { get; set; }
 
-		/// <summary>
-		/// Gets or sets the name of the task.
-		/// </summary>
+		/// <summary>Gets or sets the name of the task.</summary>
 		/// <value>The name of the task.</value>
 		[DefaultValue(""), Category("Appearance"), Description("Name of the task to display")]
 		public string TaskName
 		{
-			get { return nameText.Text; }
-			set { nameText.Text = value; }
+			get => nameText.Text;
+			set => nameText.Text = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the <see cref="TaskService"/>.
-		/// </summary>
+		/// <summary>Gets or sets the <see cref="TaskService"/>.</summary>
 		/// <value>The task service.</value>
 		[DefaultValue(null), Category("Data"), Description("The TaskService for this wizard")]
 		public TaskService TaskService { get; set; }
 
-		/// <summary>
-		/// Gets or sets the text associated with this control.
-		/// </summary>
-		/// <value>
-		/// The text associated with this control.
-		/// </value>
+		/// <summary>Gets or sets the text associated with this control.</summary>
+		/// <value>The text associated with this control.</value>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new string Text
 		{
-			get { return base.Text; }
-			set { base.Text = value; }
+			get => base.Text;
+			set => base.Text = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the title.
-		/// </summary>
+		/// <summary>Gets or sets the title.</summary>
 		/// <value>The title.</value>
 		[Category("Appearance"), Description("A string to display in the title bar of the dialog box."), Localizable(true)]
 		public string Title
 		{
-			get { return wizardControl1.Title; }
-			set { wizardControl1.Title = value; }
+			get => wizardControl1.Title;
+			set => wizardControl1.Title = value;
 		}
 
-		/// <summary>
-		/// Gets or sets the trigger page prompt.
-		/// </summary>
-		/// <value>
-		/// The trigger page prompt.
-		/// </value>
-		[DefaultValue((string)null), Category("Appearance"), Description("Trigger page title prompt.")]
+		/// <summary>Gets or sets the trigger page prompt.</summary>
+		/// <value>The trigger page prompt.</value>
+		[DefaultValue(null), Category("Appearance"), Description("Trigger page title prompt.")]
 		public string TriggerPagePrompt { get; set; }
 
-		/// <summary>
-		/// Gets or sets the trigger properties page instructions text.
-		/// </summary>
-		/// <value>
-		/// The trigger properties instruction text.
-		/// </value>
-		[DefaultValue((string)null), Category("Appearance"), Description("Trigger properties page instruction text.")]
+		/// <summary>Gets or sets the trigger properties page instructions text.</summary>
+		/// <value>The trigger properties instruction text.</value>
+		[DefaultValue(null), Category("Appearance"), Description("Trigger properties page instruction text.")]
 		public string TriggerPropertiesInstructions { get; set; }
 
-		/// <summary>
-		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
-		/// </summary>
+		/// <summary>Gets or sets the icon for the form.</summary>
+		/// <returns>An <see cref="T:System.Drawing.Icon"/> that represents the icon for the form.</returns>
+		/// <PermissionSet>
+		/// <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/><IPermission
+		/// class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/><IPermission
+		/// class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/><IPermission
+		/// class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// </PermissionSet>
+		public new System.Drawing.Icon Icon
+		{
+			get => wizardControl1.TitleIcon;
+			set => wizardControl1.TitleIcon = value;
+		}
+
+		/// <summary>Initializes the control for the editing of a new <see cref="TaskDefinition"/>.</summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
 		public void Initialize(TaskService service, TaskDefinition td = null)
@@ -543,9 +499,7 @@ namespace Microsoft.Win32.TaskScheduler
 			wizardControl1.RestartPages();
 		}
 
-		/// <summary>
-		/// Initializes the control for the editing of an existing <see cref="Task"/>.
-		/// </summary>
+		/// <summary>Initializes the control for the editing of an existing <see cref="Task"/>.</summary>
 		/// <param name="task">A <see cref="Task"/> instance.</param>
 		public void Initialize(Task task)
 		{
@@ -553,15 +507,12 @@ namespace Microsoft.Win32.TaskScheduler
 			wizardControl1.RestartPages();
 		}
 
-		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			actionSelectPage.AllowNext = (actionSelectionList.SelectedIndex >= 0);
-		}
+		private void actionSelectionList_SelectedIndexChanged(object sender, System.EventArgs e) => actionSelectPage.AllowNext = (actionSelectionList.SelectedIndex >= 0);
 
 		private void actionSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			bool hasValue = (action != null);
-			AvailableWizardActions selAct = (AvailableWizardActions)actionSelectionList.SelectedItem.Tag;
+			var hasValue = (action != null);
+			var selAct = (AvailableWizardActions)actionSelectionList.SelectedItem.Tag;
 			switch (selAct)
 			{
 				case AvailableWizardActions.Execute:
@@ -569,16 +520,19 @@ namespace Microsoft.Win32.TaskScheduler
 					if (!hasValue || action.ActionType != TaskActionType.Execute)
 						action = new ExecAction();
 					break;
+
 				case AvailableWizardActions.SendEmail:
 					e.Page.NextPage = emailActionPage;
 					if (!hasValue || action.ActionType != TaskActionType.SendEmail)
 						action = new EmailAction();
 					break;
+
 				case AvailableWizardActions.ShowMessage:
 					e.Page.NextPage = msgActionPage;
 					if (!hasValue || action.ActionType != TaskActionType.ShowMessage)
 						action = new ShowMessageAction();
 					break;
+
 				default:
 					e.Cancel = true;
 					break;
@@ -609,8 +563,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void changePrincipalButton_Click(object sender, EventArgs e)
 		{
-			string acct = String.Empty, sid;
-			if (!HelperMethods.SelectAccount(this, TaskService.TargetServer, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out sid))
+			string acct = string.Empty;
+			if (!HelperMethods.SelectAccount(this, TaskService.TargetServer, ref acct, out flagExecutorIsGroup, out flagExecutorIsServiceAccount, out var sid))
 				return;
 
 			if (flagExecutorIsServiceAccount)
@@ -672,31 +626,24 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void emailActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+		private void emailActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e) => action = emailActionUI1.Action;
+
+		private void emailActionUI1_KeyValueChanged(object sender, EventArgs e) => emailActionPage.AllowNext = emailActionUI1.CanValidate;
+
+		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e) => trigger.Enabled = enabledCheckBox.Checked;
+
+		private void eventTriggerUI1_TriggerChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			action = emailActionUI1.Action;
+			if (eventTriggerUI1.IsTriggerValid())
+				onEventTriggerPage.AllowNext = true;
 		}
 
-		private void emailActionUI1_KeyValueChanged(object sender, EventArgs e)
-		{
-			emailActionPage.AllowNext = emailActionUI1.CanValidate;
-		}
-
-		private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
-		{
-			trigger.Enabled = enabledCheckBox.Checked;
-		}
-
-		private void execActionUI1_KeyValueChanged(object sender, EventArgs e)
-		{
-			runActionPage.AllowNext = execActionUI1.CanValidate;
-		}
+		private void execActionUI1_KeyValueChanged(object sender, EventArgs e) => runActionPage.AllowNext = execActionUI1.CanValidate;
 
 		private string InvokeCredentialDialog(string userName)
 		{
-			CredentialsDialog dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName,
-				EditorProperties.Resources.CredentialPromptMessage, userName);
-			dlg.ValidatePassword = true;
+			var dlg = new CredentialsDialog(EditorProperties.Resources.TaskSchedulerName, EditorProperties.Resources.CredentialPromptMessage, userName);
+			dlg.ValidatePassword += CredentialsDialog.StandardPasswordValidator;
 			if (dlg.ShowDialog(ParentForm) == DialogResult.OK)
 				return dlg.Password;
 			return null;
@@ -717,37 +664,19 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void msgActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			action = showMessageActionUI1.Action;
-		}
+		private void msgActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e) => action = showMessageActionUI1.Action;
 
-		private void nameText_TextChanged(object sender, System.EventArgs e)
-		{
-			introPage.AllowNext = nameText.TextLength > 0;
-		}
+		private void nameText_TextChanged(object sender, System.EventArgs e) => introPage.AllowNext = nameText.TextLength > 0;
 
-		private void oneTimeTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			trigger.StartBoundary = oneTimeStartTimePicker.Value;
-		}
+		private void oneTimeTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e) => trigger.StartBoundary = oneTimeStartTimePicker.Value;
 
-		private void onEventTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			trigger = eventTriggerUI1.Trigger;
-		}
+		private void onEventTriggerPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e) => trigger = eventTriggerUI1.Trigger;
 
 		private void onEventTriggerPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
 			if (eventTriggerUI1.Trigger == null)
 				eventTriggerUI1.Trigger = new EventTrigger();
 			if (System.Environment.Version.Major < 4)
-				onEventTriggerPage.AllowNext = true;
-		}
-
-		void eventTriggerUI1_TriggerChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (eventTriggerUI1.IsTriggerValid())
 				onEventTriggerPage.AllowNext = true;
 		}
 
@@ -783,14 +712,11 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-		{
-			action = execActionUI1.Action;
-		}
+		private void runActionPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e) => action = execActionUI1.Action;
 
 		private void secOptPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			string user = TaskDefinition.Principal.UserId;
+			var user = TaskDefinition.Principal.UserId;
 			Password = null;
 			if (TaskDefinition.Principal.LogonType == TaskLogonType.InteractiveTokenOrPassword || TaskDefinition.Principal.LogonType == TaskLogonType.Password)
 			{
@@ -817,7 +743,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private bool SetPage(AeroWizard.WizardPage page, int flag, int flagSet)
 		{
-			bool set = (flagSet & flag) == flag;
+			var set = (flagSet & flag) == flag;
 			page.Suppress = !set;
 			return set;
 		}
@@ -883,16 +809,19 @@ namespace Microsoft.Win32.TaskScheduler
 					flagExecutorIsServiceAccount = false;
 					flagExecutorIsGroup = false;
 					break;
+
 				case TaskLogonType.Group:
 					flagRunOnlyWhenUserIsLoggedOn = true;
 					flagExecutorIsServiceAccount = false;
 					flagExecutorIsGroup = true;
 					break;
+
 				case TaskLogonType.ServiceAccount:
 					flagRunOnlyWhenUserIsLoggedOn = false;
 					flagExecutorIsServiceAccount = true;
 					flagExecutorIsGroup = false;
 					break;
+
 				default:
 					flagRunOnlyWhenUserIsLoggedOn = false;
 					flagExecutorIsServiceAccount = false;
@@ -929,16 +858,13 @@ namespace Microsoft.Win32.TaskScheduler
 			taskLoggedOptionalRadio.Checked = !flagRunOnlyWhenUserIsLoggedOn;
 			taskLocalOnlyCheck.Checked = !flagRunOnlyWhenUserIsLoggedOn && logonType == TaskLogonType.S4U;
 
-			string user = td == null ? null : td.Principal.ToString();
+			var user = td == null ? null : td.Principal.ToString();
 			if (string.IsNullOrEmpty(user))
 				user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 			taskPrincipalText.Text = user;
 		}
 
-		private void showMessageActionUI1_KeyValueChanged(object sender, EventArgs e)
-		{
-			msgActionPage.AllowNext = showMessageActionUI1.CanValidate;
-		}
+		private void showMessageActionUI1_KeyValueChanged(object sender, EventArgs e) => msgActionPage.AllowNext = showMessageActionUI1.CanValidate;
 
 		private void summaryPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
 		{
@@ -948,7 +874,7 @@ namespace Microsoft.Win32.TaskScheduler
 			openDlgAfterCheck.Visible = AllowEditorOnFinish;
 			if (EditorOnFinishText != null)
 				openDlgAfterCheck.Text = EditorOnFinishText;
-			string fmt = string.IsNullOrEmpty(SummaryFormatString) ? EditorProperties.Resources.WizardSummaryFormatString : SummaryFormatString;
+			var fmt = string.IsNullOrEmpty(SummaryFormatString) ? EditorProperties.Resources.WizardSummaryFormatString : SummaryFormatString;
 			sumText.Text = string.Format(fmt,
 				nameText.Text,
 				descText.Text,
@@ -981,15 +907,12 @@ namespace Microsoft.Win32.TaskScheduler
 				triggerPropText.Text = TriggerPropertiesInstructions;
 		}
 
-		private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			triggerSelectPage.AllowNext = (triggerSelectionList.SelectedIndex >= 0);
-		}
+		private void triggerSelectionList_SelectedIndexChanged(object sender, System.EventArgs e) => triggerSelectPage.AllowNext = (triggerSelectionList.SelectedIndex >= 0);
 
 		private void triggerSelectPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
 		{
-			bool hasValue = (trigger != null);
-			AvailableWizardTriggers selTrig = (AvailableWizardTriggers)triggerSelectionList.SelectedItem.Tag;
+			var hasValue = (trigger != null);
+			var selTrig = (AvailableWizardTriggers)triggerSelectionList.SelectedItem.Tag;
 			switch (selTrig)
 			{
 				case AvailableWizardTriggers.Event:
@@ -997,42 +920,50 @@ namespace Microsoft.Win32.TaskScheduler
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Event)
 						trigger = new EventTrigger();
 					break;
+
 				case AvailableWizardTriggers.Time:
 					e.Page.NextPage = oneTimeTriggerPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Time)
 						trigger = new TimeTrigger();
 					oneTimeStartTimePicker.Value = trigger.StartBoundary;
 					break;
+
 				case AvailableWizardTriggers.Daily:
 					e.Page.NextPage = dailyTriggerPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Daily)
 						dailyTriggerUI1.Trigger = (trigger = new DailyTrigger());
 					break;
+
 				case AvailableWizardTriggers.Weekly:
 					e.Page.NextPage = weeklyTriggerPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Weekly)
 						weeklyTriggerUI1.Trigger = (trigger = new WeeklyTrigger());
 					break;
+
 				case AvailableWizardTriggers.Monthly:
 					e.Page.NextPage = monthlyTriggerPage;
 					if (!hasValue || (trigger.TriggerType != TaskTriggerType.Monthly && trigger.TriggerType != TaskTriggerType.MonthlyDOW))
 						monthlyTriggerUI1.Trigger = (trigger = new MonthlyTrigger());
 					break;
+
 				case AvailableWizardTriggers.Idle:
 					e.Page.NextPage = actionSelectPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Idle)
 						trigger = new IdleTrigger();
 					break;
+
 				case AvailableWizardTriggers.Boot:
 					e.Page.NextPage = actionSelectPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Boot)
 						trigger = new BootTrigger();
 					break;
+
 				case AvailableWizardTriggers.Logon:
 					e.Page.NextPage = actionSelectPage;
 					if (!hasValue || trigger.TriggerType != TaskTriggerType.Logon)
 						trigger = new LogonTrigger();
 					break;
+
 				default:
 					e.Cancel = true;
 					break;
@@ -1051,7 +982,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			var weeklyTrigger = (WeeklyTrigger)trigger;
 			var cb = (CheckBox)sender;
-			DaysOfTheWeek dow = (DaysOfTheWeek)cb.Tag;
+			var dow = (DaysOfTheWeek)cb.Tag;
 
 			if (cb.Checked)
 				weeklyTrigger.DaysOfWeek |= dow;
@@ -1067,7 +998,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void wizardControl1_Finished(object sender, System.EventArgs e)
 		{
-			bool myTS = false;
+			var myTS = false;
 
 			if (TaskService == null)
 			{
@@ -1089,7 +1020,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			if (RegisterTaskOnFinish)
 			{
-				TaskFolder fld = TaskService.RootFolder;
+				var fld = TaskService.RootFolder;
 				if (!string.IsNullOrEmpty(TaskFolder) && TaskService.HighestSupportedVersion.CompareTo(TaskServiceVersion.V1_1) != 0)
 					fld = TaskService.GetFolder(TaskFolder);
 				task = fld.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate, td.Principal.ToString(), Password, td.Principal.LogonType);

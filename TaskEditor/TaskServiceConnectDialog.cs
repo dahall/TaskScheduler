@@ -4,6 +4,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Win32.TaskScheduler.Design;
 using Microsoft.Win32.TaskScheduler.EditorProperties;
+using Vanara.Extensions;
+using Vanara.Windows.Forms;
+using FolderBrowserDialog = Vanara.Windows.Forms.FolderBrowserDialog;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -125,11 +128,15 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void computerBrowseBtn_Click(object sender, EventArgs e)
 		{
-			var dlg = FolderBrowserDialog2.ComputerBrowser;
-			dlg.Description = Resources.BrowseForTargetServerPrompt;
-			dlg.SelectedPath = TargetServer ?? Environment.MachineName;
+			var dlg = new FolderBrowserDialog
+			{
+				BrowseOption = FolderBrowserDialogOptions.Computers,
+				RootFolder = KnownFolder.ComputerFolder,
+				Description = Resources.BrowseForTargetServerPrompt,
+				SelectedItem = TargetServer ?? Environment.MachineName
+			};
 			if (dlg.ShowDialog(this) == DialogResult.OK)
-				TargetServer = remoteComputerText.Text = dlg.SelectedPath;
+				TargetServer = remoteComputerText.Text = dlg.SelectedItem;
 		}
 
 		private void computerRadio_CheckedChanged(object sender, EventArgs e)

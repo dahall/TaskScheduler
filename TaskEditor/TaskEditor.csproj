@@ -23,11 +23,19 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
+  <PropertyGroup>
+    <BuildFolder>$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</BuildFolder>
+    <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
+    <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
+    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
+    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</OutputPath>
+    <OutputPath>bin\$(Configuration)\$(BuildFolder)</OutputPath>
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,22 +49,15 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</OutputPath>
+    <OutputPath>bin\$(Configuration)\$(BuildFolder)</OutputPath>
     <DefineConstants>TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\Microsoft.Win32.TaskSchedulerEditor.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(BuildFolder)\Microsoft.Win32.TaskSchedulerEditor.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <RegisterForComInterop>false</RegisterForComInterop>
     <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup>
-    <!-- Adding a custom constant will auto-magically append a comma and space to the pre-built constants.    -->
-    <!-- Move the comma delimiter to the end of each constant and remove the trailing comma when we're done.  -->
-    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
@@ -69,95 +70,117 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="CustomMarshalers" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.2.129.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.2.129\lib\net20\ActiveDirectoryObjectPicker.dll</HintPath>
+  <ItemGroup>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\$(BuildFolder)\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.1.11.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.1.11\lib\net20\AeroWizard.dll</HintPath>
+    <Reference Include="AeroWizard, Version=2.2.0.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.2.0\lib\$(BuildFolder)\AeroWizard.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net20\GroupControls.dll</HintPath>
+    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
+      <HintPath>..\packages\GroupControls.1.8.0\lib\$(BuildFolder)\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net20\TimeSpan2.dll</HintPath>
+    <Reference Include="Theraot.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Theraot.Core.2.1.0\lib\$(BuildFolder)\Theraot.Core.dll</HintPath>
     </Reference>
+    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.2.0\lib\$(BuildFolder)\TimeSpan2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(BuildFolder)' == 'net20'">
     <Reference Include="Vanara.Compatibility.EventLog, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
       <HintPath>..\packages\Vanara.Compatibility.EventLog.1.0.1\lib\net20\Vanara.Compatibility.EventLog.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.2.129.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.2.129\lib\net35\ActiveDirectoryObjectPicker.dll</HintPath>
+  <ItemGroup>
+    <Reference Include="Vanara.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.Core.2.1.1\lib\$(BuildFolder)\Vanara.Core.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.1.11.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.1.11\lib\net35\AeroWizard.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.AclUI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.AclUI.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.AclUI.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net35\GroupControls.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.BITS, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.BITS.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.BITS.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net35\TimeSpan2.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.ComCtl32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ComCtl32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.ComCtl32.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.2.129.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.2.129\lib\net40\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.CredUI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.CredUI.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.CredUI.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.1.11.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.1.11\lib\net40\AeroWizard.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.DwmApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.DwmApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.DwmApi.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net40\GroupControls.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Gdi32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Gdi32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Gdi32.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net40\TimeSpan2.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.IpHlpApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.IpHlpApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.IpHlpApi.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.2' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.2.129.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.2.129\lib\net452\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Kernel32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Kernel32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Kernel32.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.1.11.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.1.11\lib\net452\AeroWizard.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Mpr, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Mpr.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Mpr.dll</HintPath>
     </Reference>
-    <Reference Include="GroupControls, Version=1.5.3.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.5.3\lib\net452\GroupControls.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.NetListMgr, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.NetListMgr.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.NetListMgr.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.1.6.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.1.6\lib\net452\TimeSpan2.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.NTDSApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.NTDSApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.NTDSApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Ole, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Ole.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Ole.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Security, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Security.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shared, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Shared.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shell32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Shell32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Shell32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.ShlwApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ShlwApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.ShlwApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.User32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.User32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.User32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.User32.Gdi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.User32.Gdi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.User32.Gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.UxTheme, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.UxTheme.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.UxTheme.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.VirtDisk, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.VirtDisk.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.VirtDisk.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Ws2_32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Ws2_32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Ws2_32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.Security, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.Security.2.1.1\lib\$(BuildFolder)\Vanara.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.SystemServices, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.SystemServices.2.1.1\lib\$(BuildFolder)\Vanara.SystemServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.Windows.Forms, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.Windows.Forms.2.1.1\lib\$(BuildFolder)\Vanara.Windows.Forms.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskService\Native\ADVAPI32.cs">
-      <Link>Native\ADVAPI32.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\EnumUtil.cs" Link="Native\EnumUtil.cs" />
-    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="Native\ExtensionAttributeFor.NET_2.0.cs" />
-    <Compile Include="..\TaskService\Native\Func.Net2.cs">
-      <Link>Native\Func.Net2.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\InteropUtil.cs">
-      <Link>Native\InteropUtil.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\KERNEL32.cs">
-      <Link>Native\KERNEL32.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Linq.Net2.cs">
-      <Link>Native\Linq.Net2.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
-      <Link>Native\SYSTEMTIME.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\ReflectionHelper.cs">
-      <Link>Native\ReflectionHelper.cs</Link>
-    </Compile>
     <Compile Include="ActionEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,11 +198,7 @@
     <Compile Include="EditorInterfaces.cs" />
     <Compile Include="ListControlItem.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
-    <Compile Include="Native\GenericSafeHandle.cs" />
-    <Compile Include="Native\ImageList.cs" />
-    <Compile Include="Native\ImageListExtension.cs" />
     <Compile Include="Native\NativeResource.cs" />
-    <Compile Include="Native\SafeHGlobalHandle.cs" />
     <Compile Include="OptionPanels\SecurityOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,7 +243,6 @@
       <DependentUpon>EventActionFilterTimeEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="EventQueryList.cs" />
-    <Compile Include="Native\ControlExtension.cs" />
     <Compile Include="CorrelatedTaskEvent.cs" />
     <Compile Include="DialogBase.cs">
       <SubType>Form</SubType>
@@ -235,18 +253,7 @@
     <Compile Include="ListColumnEditor.Designer.cs">
       <DependentUpon>ListColumnEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\DisabledItemComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="HelperMethods.cs" />
-    <Compile Include="Native\BROWSEINFO.cs" />
-    <Compile Include="Native\ComboBox.cs" />
-    <Compile Include="Native\CredentialsDialog.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CustomComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DropDownCheckList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -262,28 +269,9 @@
     <Compile Include="EventViewerControl.Designer.cs">
       <DependentUpon>EventViewerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\CREDUI.cs" />
-    <Compile Include="Native\FolderBrowserDialog2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Native\GDI32.cs" />
-    <Compile Include="Native\Header.cs" />
-    <Compile Include="Native\ListView.cs" />
     <Compile Include="Native\ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Native\MapWindowPoints.cs" />
-    <Compile Include="Native\OLE32.cs" />
-    <Compile Include="Native\RECT.cs" />
-    <Compile Include="Native\SafeHandles.cs" />
-    <Compile Include="Native\SHELL32.cs" />
-    <Compile Include="Native\SIZE.cs" />
-    <Compile Include="Native\USER32.cs" />
-    <Compile Include="Native\Util.cs" />
-    <Compile Include="Native\UXTHEME.cs" />
-    <Compile Include="Native\VisualStylesRendererExtension.cs" />
-    <Compile Include="Native\NetworkListManager.cs" />
-    <Compile Include="Native\NetworkProfile.cs" />
     <Compile Include="OptionPanels\ActionsOptionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1490,17 +1478,9 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <Target Name="AfterBuild">
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
-    <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5" RunEachTargetSeparately="true" />
   </Target>
 </Project>

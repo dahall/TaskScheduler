@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Reflection;
+using Vanara.Extensions;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	internal class SecEdShim
 	{
 		private static readonly Type dlgType;
-		private static readonly MethodInfo initMI;
 		private static readonly MethodInfo init2MI;
-		private static readonly MethodInfo showDlgMI;
+		private static readonly MethodInfo initMI;
 		private static readonly PropertyInfo sddlPI;
+		private static readonly MethodInfo showDlgMI;
 		private readonly object dlg;
 
 		static SecEdShim()
 		{
 			try
 			{
-				dlgType = ReflectionHelper.LoadType("Community.Windows.Forms.AccessControlEditorDialog", "SecurityEditor.dll");
+				dlgType = ReflectionExtensions.LoadType("Community.Windows.Forms.AccessControlEditorDialog", "SecurityEditor.dll");
 				if (dlgType != null)
 				{
 					initMI = dlgType.GetMethod("Initialize", new[] { typeof(object) });
@@ -30,17 +31,14 @@ namespace Microsoft.Win32.TaskScheduler
 				dlgType = null;
 		}
 
-		private SecEdShim()
-		{
-			dlg = Activator.CreateInstance(dlgType);
-		}
+		private SecEdShim() => dlg = Activator.CreateInstance(dlgType);
 
+		public static bool IsValid => dlgType != null;
 		public string SecurityDescriptorSddlForm => sddlPI.GetValue(dlg, null).ToString();
 
-		public void Initialize(object taskObj)
-		{
-			initMI.Invoke(dlg, new[] { taskObj });
-		}
+		public static SecEdShim GetNew() => dlgType != null ? new SecEdShim() : null;
+
+		public void Initialize(object taskObj) => initMI.Invoke(dlg, new[] { taskObj });
 
 		public void Initialize(string displayName, bool isContainer, string targetServer, TaskSecurity taskSecurity)
 		{
@@ -49,9 +47,5 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		public System.Windows.Forms.DialogResult ShowDialog(System.Windows.Forms.IWin32Window owner) => (System.Windows.Forms.DialogResult)showDlgMI.Invoke(dlg, new object[] { owner });
-
-		public static SecEdShim GetNew() => dlgType != null ? new SecEdShim() : null;
-
-		public static bool IsValid => dlgType != null;
 	}
 }

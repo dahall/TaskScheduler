@@ -13,7 +13,7 @@ namespace System.Windows.Forms
 
 		public static int IndexOfItemValue<T>(this ListBox ctrl, T value) => IndexOfItemValue<T>(ctrl.Items, value);
 
-		public static void InitializeFromEnum(IList list, Type enumType, ResourceManager mgr, string prefix, out long allVal, string[] exclude = null)
+		public static void InitializeFromEnum(this IList list, Type enumType, ResourceManager mgr, string prefix, out long allVal, string[] exclude = null)
 		{
 			list.Clear();
 			allVal = 0;
@@ -45,14 +45,14 @@ namespace System.Windows.Forms
 			InitializeFromEnum<T>(ctrl.Items, mgr, prefix, out allVal, null, exclude?.Select(t => t.ToString()).ToArray());
 		}
 
-		private static int IndexOfItemValue<T>(IList items, T value)
+		private static int IndexOfItemValue<T>(this IList items, T value)
 		{
 			for (var index = 0; index < items.Count; index++)
 				if (items[index] is TextValueItem<T> i && Equals(i.Value, value)) return index;
 			return -1;
 		}
 
-		private static void InitializeFromEnum<T>(IList list, ResourceManager mgr, string prefix, out long allVal, Func<string, T, object> creator = null, string[] exclude = null)
+		private static void InitializeFromEnum<T>(this IList list, ResourceManager mgr, string prefix, out long allVal, Func<string, T, object> creator = null, string[] exclude = null)
 		{
 			var enumType = typeof(T);
 			if (!enumType.IsEnum)

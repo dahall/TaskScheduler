@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Vanara.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
 {
-	/// <summary>
-	/// A check list in a drop down combo box.
-	/// </summary>
+	/// <summary>A check list in a drop down combo box.</summary>
 	[System.Drawing.ToolboxBitmap(typeof(Microsoft.Win32.TaskScheduler.TaskEditDialog), "Control")]
 	public partial class DropDownCheckTree : CustomComboBox
 	{
@@ -16,9 +15,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private bool updatingChecks;
 		private Dictionary<string, TreeNode> values = new Dictionary<string, TreeNode>();
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DropDownCheckTree"/> class.
-		/// </summary>
+		/// <summary>Initializes a new instance of the <see cref="DropDownCheckTree"/> class.</summary>
 		public DropDownCheckTree()
 		{
 			checkedTreeView = new System.Windows.Forms.TreeView()
@@ -38,68 +35,63 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private delegate void NodeAction(TreeNode node, bool childrenChecked);
 
-		/// <summary>
-		/// Occurs when the <see cref="CheckedItems"/> property changes.
-		/// </summary>
+		/// <summary>Occurs when the <see cref="CheckedItems"/> property changes.</summary>
 		[Category("Action"), Description("Occurs when the SelectedItems property changes.")]
 		public event EventHandler SelectedItemsChanged;
 
-		/// <summary>
-		/// Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.
-		/// </summary>
+		/// <summary>Gets or sets the text used on the Check All Items item that, when clicked, will check all the other items.</summary>
 		/// <value>The text.</value>
-		[DefaultValue((string)null), Category("Appearance"), Localizable(true)]
+		[DefaultValue(null), Category("Appearance"), Localizable(true)]
 		public string CheckAllText { get; set; }
 
-		/// <summary>
-		/// Gets the checked items.
-		/// </summary>
+		/// <summary>Gets the checked items.</summary>
 		/// <value>The checked items.</value>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public List<TreeNode> CheckedItems => checkedItems;
 
 		/// <summary>
-		/// Gets or sets a value indicating whether formatting is applied to the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property of the <see cref="T:System.Windows.Forms.ListControl"/>.
+		/// Gets or sets a value indicating whether formatting is applied to the <see
+		/// cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property of the <see cref="T:System.Windows.Forms.ListControl"/>.
 		/// </summary>
 		/// <value></value>
-		/// <returns>true if formatting of the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property is enabled; otherwise, false. The default is false.
+		/// <returns>
+		/// true if formatting of the <see cref="P:System.Windows.Forms.ListControl.DisplayMember"/> property is enabled; otherwise, false.
+		/// The default is false.
 		/// </returns>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new bool FormattingEnabled
 		{
-			get { return base.FormattingEnabled; }
-			set { base.FormattingEnabled = value; }
+			get => base.FormattingEnabled;
+			set => base.FormattingEnabled = value;
 		}
 
-		/// <summary>
-		/// Gets the list of all check list items.
-		/// </summary>
+		/// <summary>Gets the list of all check list items.</summary>
 		/// <value>The items.</value>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content), Category("Data")]
 		public new TreeNodeCollection Items => checkedTreeView.Nodes;
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the items in the combo box are sorted.
-		/// </summary>
+		/// <summary>Gets or sets a value indicating whether the items in the combo box are sorted.</summary>
 		/// <returns>true if the combo box is sorted; otherwise, false. The default is false.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// An attempt was made to sort a <see cref="T:System.Windows.Forms.ComboBox"/> that is attached to a data source.
 		/// </exception>
 		/// <PermissionSet>
-		///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
-		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
-		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+		/// <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/><IPermission
+		/// class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/><IPermission
+		/// class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/><IPermission
+		/// class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral,
+		/// PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		public new bool Sorted
 		{
-			get { return checkedTreeView.Sorted; }
-			set { checkedTreeView.Sorted = value; }
+			get => checkedTreeView.Sorted;
+			set => checkedTreeView.Sorted = value;
 		}
 
-		/// <summary>
-		/// Checks the matching items.
-		/// </summary>
+		/// <summary>Checks the matching items.</summary>
 		/// <param name="match">The match.</param>
 		/// <param name="keepExisting">if set to <c>true</c> keep existing checked items.</param>
 		public void CheckItems(Predicate<string> match, bool keepExisting = false)
@@ -108,36 +100,29 @@ namespace Microsoft.Win32.TaskScheduler
 			UpdateText();
 		}
 
-		/// <summary>
-		/// Checks the item in the tree whose value matches the one specified by <paramref name="value"/>.
-		/// </summary>
+		/// <summary>Checks the item in the tree whose value matches the one specified by <paramref name="value"/>.</summary>
 		/// <param name="value">The value to match.</param>
 		/// <param name="check">if set to <c>true</c> check the matching item, else uncheck it.</param>
 		public void CheckValue(string value, bool check = true)
 		{
-			TreeNode node;
 			if (value != null)
-				if (values.TryGetValue((string)value, out node))
+				if (values.TryGetValue(value, out var node))
 					node.Checked = check;
 			UpdateText();
 		}
 
-		/// <summary>
-		/// Unchecks all items in the tree.
-		/// </summary>
+		/// <summary>Unchecks all items in the tree.</summary>
 		public void UncheckAllItems()
 		{
 			updatingChecks = true;
-			for (int i = checkedItems.Count - 1; i >= 0; i--)
+			for (var i = checkedItems.Count - 1; i >= 0; i--)
 				checkedItems[i].Checked = false;
 			checkedItems.Clear();
 			updatingChecks = false;
 			UpdateText();
 		}
 
-		/// <summary>
-		/// Updates the text associated with each item of the check list.
-		/// </summary>
+		/// <summary>Updates the text associated with each item of the check list.</summary>
 		public void UpdateText()
 		{
 			if (checkedItems.Count == 0)
@@ -150,7 +135,7 @@ namespace Microsoft.Win32.TaskScheduler
 					Text = CheckAllText;
 				else
 				{
-					var selNodes = checkedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll<string>(t => (string)t.Name);
+					var selNodes = checkedItems.FindAll(n => !string.IsNullOrEmpty(n.Name)).ConvertAll<string>(t => t.Name);
 					selNodes.Sort();
 					Text = string.Join(", ", selNodes.ToArray());
 				}
@@ -159,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static TreeNode AddValue(TreeNodeCollection nodeColl, string text, string key)
 		{
-			TreeNode child = nodeColl.Add(key, text);
+			var child = nodeColl.Add(key, text);
 			if (key != null)
 			{
 				if (child.TreeView != null && child.TreeView.Parent != null && child.TreeView.Tag is DropDownCheckTree)
@@ -167,9 +152,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return child;
 		}
-		/// <summary>
-		/// Raises the <see cref="System.Windows.Forms.ComboBox.DropDownClosed"/> event.
-		/// </summary>
+
+		/// <summary>Raises the <see cref="System.Windows.Forms.ComboBox.DropDownClosed"/> event.</summary>
 		/// <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
 		protected override void OnDropDownClosed(EventArgs e)
 		{
@@ -177,19 +161,12 @@ namespace Microsoft.Win32.TaskScheduler
 			UpdateText();
 		}
 
-		/// <summary>
-		/// Raises the <see cref="SelectedItemsChanged"/> event.
-		/// </summary>
-		protected virtual void OnSelectedItemsChanged()
-		{
-			EventHandler h = SelectedItemsChanged;
-			if (h != null)
-				h(this, EventArgs.Empty);
-		}
+		/// <summary>Raises the <see cref="SelectedItemsChanged"/> event.</summary>
+		protected virtual void OnSelectedItemsChanged() => SelectedItemsChanged?.Invoke(this, EventArgs.Empty);
 
 		private bool AreChildrenChecked(TreeNode treeNode, NodeAction nodeAction = null)
 		{
-			bool foundCheck = false;
+			var foundCheck = false;
 			foreach (TreeNode n in treeNode.Nodes)
 			{
 				if (n.Checked || AreChildrenChecked(n))
@@ -198,8 +175,7 @@ namespace Microsoft.Win32.TaskScheduler
 					break;
 				}
 			}
-			if (nodeAction != null)
-				nodeAction(treeNode, foundCheck);
+			nodeAction?.Invoke(treeNode, foundCheck);
 			return foundCheck;
 		}
 
@@ -216,7 +192,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				updatingChecks = true;
 				SetCheckOnChildren(e.Node);
-				TreeNode n = e.Node;
+				var n = e.Node;
 				while (n.Parent != null)
 				{
 					n.Parent.Checked = e.Node.Checked ? true : AreChildrenChecked(n.Parent);
@@ -239,7 +215,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void SetCheckOnChildren(TreeNode treeNode)
 		{
-			bool pChecked = treeNode.Checked;
+			var pChecked = treeNode.Checked;
 			ForEachChildNode(treeNode.Nodes, n => { n.Checked = pChecked; });
 		}
 	}
