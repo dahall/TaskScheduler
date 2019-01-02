@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Microsoft.Win32.TaskScheduler
+namespace Microsoft.Win32.TaskScheduler.Models
 {
-	internal interface IActionModel
+	public interface IAction
 	{
 		TaskActionType ActionType { get; }
 		string Id { get; set; }
 	}
 
-	internal interface IActionCollectionModel : IList<IActionModel>, System.Collections.IList
+	public interface IActionCollection : IList<IAction>, System.Collections.IList
 	{
-		bool AllowConversion { get; set; }
 		string Context { get; set; }
-		IActionModel Add(TaskActionType actionType);
-		void ConvertUnsupportedActions();
+		IAction AddNew(TaskActionType actionType);
 	}
 
-	internal interface IBootTriggerModel : ITriggerModel { }
+	public interface IBootTrigger : ITrigger { }
 
-	internal interface IComHandlerActionModel : IActionModel
+	public interface IComHandlerAction : IAction
 	{
 		Guid ClassId { get; set; }
 		string Data { get; set; }
 	}
 
-	internal interface ICustomTriggerModel : ITriggerModel
+	public interface ICustomTrigger : ITrigger
 	{
 		string Name { get; }
 		IDictionary<string, string> Properties { get; }
 	}
 
-	internal interface IDailyTriggerModel : ITriggerModel
+	public interface IDailyTrigger : ITrigger
 	{
 		short DaysInterval { get; set; }
 	}
 
-	internal interface IEmailActionModel : IActionModel
+	public interface IEmailAction : IAction
 	{
 		string Server { get; set; }
 		string Subject { get; set; }
@@ -51,42 +49,42 @@ namespace Microsoft.Win32.TaskScheduler
 		string[] Attachments { get; set; }
 	}
 
-	internal interface IEventTriggerModel : ITriggerModel
+	public interface IEventTrigger : ITrigger
 	{
 		string Subscription { get; set; }
 		IDictionary<string, string> ValueQueries { get; }
 	}
 
-	internal interface IExecActionModel : IActionModel
+	public interface IExecAction : IAction
 	{
 		string Arguments { get; set; }
 		string Path { get; set; }
 		string WorkingDirectory { get; set; }
 	}
 
-	internal interface IIdleSettingsModel
+	public interface IIdleSettings
 	{
-		TimeSpan? IdleDuration { get; set; }
+		TimeSpan? IdleDurationNullable { get; set; }
 		bool RestartOnIdle { get; set; }
 		bool StopOnIdleEnd { get; set; }
-		TimeSpan? WaitTimeout { get; set; }
+		TimeSpan? WaitTimeoutNullable { get; set; }
 	}
 
-	internal interface IIdleTriggerModel : ITriggerModel { }
+	public interface IIdleTrigger : ITrigger { }
 
-	internal interface ILogonTriggerModel : ITriggerModel
+	public interface ILogonTrigger : ITrigger
 	{
 		string UserId { get; set; }
 	}
 
-	internal interface IMaintenanceSettingsModel
+	public interface IMaintenanceSettings
 	{
-		TimeSpan? Deadline { get; set; }
+		TimeSpan? DeadlineNullable { get; set; }
 		bool Exclusive { get; set; }
-		TimeSpan? Period { get; set; }
+		TimeSpan? PeriodNullable { get; set; }
 	}
 
-	internal interface IMonthlyDOWTriggerModel : ITriggerModel
+	public interface IMonthlyDOWTrigger : ITrigger
 	{
 		DaysOfTheWeek DaysOfWeek { get; set; }
 		MonthsOfTheYear MonthsOfYear { get; set; }
@@ -94,20 +92,20 @@ namespace Microsoft.Win32.TaskScheduler
 		WhichWeek WeeksOfMonth { get; set; }
 	}
 
-	internal interface IMonthlyTriggerModel : ITriggerModel
+	public interface IMonthlyTrigger : ITrigger
 	{
-		byte[] DaysOfMonth { get; set; }
+		int[] DaysOfMonth { get; set; }
 		MonthsOfTheYear MonthsOfYear { get; set; }
 		bool RunOnLastDayOfMonth { get; set; }
 	}
 
-	internal interface INetworkSettingsModel
+	public interface INetworkSettings
 	{
 		Guid Id { get; set; }
 		string Name { get; set; }
 	}
 
-	internal interface IPrincipalModel
+	public interface IPrincipal
 	{
 		string DisplayName { get; set; }
 		string GroupId { get; set; }
@@ -115,11 +113,11 @@ namespace Microsoft.Win32.TaskScheduler
 		string UserId { get; set; }
 	}
 
-	internal interface IRegisteredTaskModel
+	public interface IRegisteredTask
 	{
-		ITaskDefinitionModel Definition { get; }
+		ITaskDefinition Definition { get; }
 		bool Enabled { get; set; }
-		ITaskFolderModel Folder { get; }
+		ITaskFolder Folder { get; }
 		DateTime? LastRunTime { get; }
 		int? LastTaskResult { get; }
 		string Name { get; }
@@ -128,22 +126,29 @@ namespace Microsoft.Win32.TaskScheduler
 		string Path { get; }
 		TaskState State { get; }
 		string Xml { get; }
-		IReadOnlyList<IRunningTaskModel> GetInstances();
+		IReadOnlyList<IRunningTask> GetInstances();
 		IReadOnlyList<DateTime> GetRunTimes(DateTime start, DateTime end, uint count);
 		string GetSecurityDescriptor(System.Security.AccessControl.SecurityInfos includeSections);
-		IRunningTaskModel Run(params string[] parameters);
-		IRunningTaskModel RunEx(string[] parameters, TaskRunFlags flags, int sessionId, string user);
+		IRunningTask Run(params string[] parameters);
+		IRunningTask RunEx(string[] parameters, TaskRunFlags flags, int sessionId, string user);
 		void SetSecurityDescriptor(string sddl, TaskSetSecurityOptions options);
 		void Stop();
 	}
 
-	internal interface IRegistrationTriggerModel : ITriggerModel { }
+	public interface IRegistrationTrigger : ITrigger { }
 
-	internal interface IRunningTaskModel
+	public interface IRepetitionPattern
+	{
+		TimeSpan? DurationNullable { get; set; }
+		TimeSpan? IntervalNullable { get; set; }
+		bool StopAtDurationEnd { get; set; }
+	}
+
+	public interface IRunningTask
 	{
 		string CurrentAction { get; }
-		uint? EnginePID { get; }
-		Guid? InstanceGuid { get; }
+		uint EnginePID { get; }
+		Guid? InstanceGuidNullable { get; }
 		string Name { get; }
 		string Path { get; }
 		TaskState State { get; }
@@ -151,71 +156,64 @@ namespace Microsoft.Win32.TaskScheduler
 		void Stop();
 	}
 
-	internal interface ISessionStateChangeTriggerModel : ITriggerModel
+	public interface ISessionStateChangeTrigger : ITrigger
 	{
 		TaskSessionStateChangeType StateChange { get; set; }
 		string UserId { get; set; }
 	}
 
-	internal interface IShowMessageActionModel : IActionModel
+	public interface IShowMessageAction : IAction
 	{
 		string MessageBody { get; set; }
 		string Title { get; set; }
 	}
 
-	internal interface ITaskDefinitionModel
+	public interface ITaskDefinition
 	{
-		IActionCollectionModel Actions { get; }
-		string Author { get; set; }
+		ActionCollection Actions { get; }
 		string Data { get; set; }
-		DateTime? Date { get; set; }
-		string Description { get; set; }
-		string Documentation { get; set; }
-		TaskLogonType LogonType { get; set; }
-		IPrincipalModel Principal { get; }
-		TaskRunLevel RunLevel { get; set; }
-		string SecurityDescriptor { get; set; }
-		ITaskSettingsModel Settings { get; }
-		string Source { get; set; }
-		ITriggerCollectionModel Triggers { get; }
-		string URI { get; set; }
-		Version Version { get; set; }
-		string XmlText { get; set; }
+		TaskCompatibility LowestSupportedVersion { get; }
+		TaskPrincipal Principal { get; }
+		TaskRegistrationInfo RegistrationInfo { get; }
+		TaskSettings Settings { get; }
+		TriggerCollection Triggers { get; }
+
+		bool Validate(bool throwException = false);
 	}
 
-	internal interface ITaskFolderModel
+	public interface ITaskFolder
 	{
 		string Name { get; }
 		string Path { get; }
-		ITaskFolderModel CreateFolder(string subFolderName, string sddl);
+		ITaskFolder CreateFolder(string subFolderName, string sddl);
 		void DeleteFolder(string subFolderName);
 		void DeleteTask(string Name);
-		ITaskFolderModel GetFolder(string path);
-		ICollection<ITaskFolderModel> GetFolders();
+		ITaskFolder GetFolder(string path);
+		ICollection<ITaskFolder> GetFolders();
 		string GetSecurityDescriptor(System.Security.AccessControl.SecurityInfos includeSections);
-		IRegisteredTaskModel GetTask(string path);
-		IReadOnlyList<IRegisteredTaskModel> GetTasks(bool includeHidden = false);
-		IRegisteredTaskModel RegisterTask(string path, string xmlText, TaskCreation flags, string userId, string password, TaskLogonType logonType, string sddl);
-		IRegisteredTaskModel RegisterTaskDefinition(string path, ITaskDefinitionModel pDefinition, TaskCreation flags, string userId, string password, TaskLogonType logonType, string sddl);
+		IRegisteredTask GetTask(string path);
+		IReadOnlyList<IRegisteredTask> GetTasks(bool includeHidden = false);
+		IRegisteredTask RegisterTask(string path, string xmlText, TaskCreation flags, string userId, string password, TaskLogonType logonType, string sddl);
+		IRegisteredTask RegisterTaskDefinition(string path, ITaskDefinition pDefinition, TaskCreation flags, string userId, string password, TaskLogonType logonType, string sddl);
 		void SetSecurityDescriptor(string sddl, TaskSetSecurityOptions options);
 	}
 
-	internal interface ITaskServiceModel
+	public interface ITaskService
 	{
 		bool Connected { get; }
 		string ConnectedDomain { get; }
 		string ConnectedUser { get; }
 		Version HighestVersion { get; }
-		ITaskFolderModel RootFolder { get; }
+		ITaskFolder RootFolder { get; }
 		string TargetServer { get; }
 		void Connect(string serverName, string user, string domain, string password);
-		ITaskFolderModel GetFolder(string path);
-		IReadOnlyList<IRunningTaskModel> GetRunningTasks(bool includeHidden = false);
-		IRegisteredTaskModel GetTask(string fullPath);
-		ITaskDefinitionModel NewTask();
+		ITaskFolder GetFolder(string path);
+		IReadOnlyList<IRunningTask> GetRunningTasks(bool includeHidden = false);
+		IRegisteredTask GetTask(string fullPath);
+		ITaskDefinition NewTask();
 	}
 
-	internal interface ITaskSettingsModel
+	public interface ITaskSettings
 	{
 		bool AllowDemandStart { get; set; }
 		bool AllowHardTerminate { get; set; }
@@ -226,10 +224,10 @@ namespace Microsoft.Win32.TaskScheduler
 		bool Enabled { get; set; }
 		TimeSpan? ExecutionTimeLimit { get; set; }
 		bool Hidden { get; set; }
-		IIdleSettingsModel IdleSettings { get; }
-		IMaintenanceSettingsModel MaintenanceSettings { get; }
+		IIdleSettings IdleSettings { get; }
+		IMaintenanceSettings MaintenanceSettings { get; }
 		TaskInstancesPolicy MultipleInstances { get; set; }
-		INetworkSettingsModel NetworkSettings { get; }
+		INetworkSettings NetworkSettings { get; }
 		System.Diagnostics.ProcessPriorityClass Priority { get; set; }
 		int? RestartCount { get; set; }
 		TimeSpan? RestartInterval { get; set; }
@@ -242,28 +240,25 @@ namespace Microsoft.Win32.TaskScheduler
 		bool WakeToRun { get; set; }
 	}
 
-	internal interface ITimeTriggerModel : ITriggerModel { }
+	public interface ITimeTrigger : ITrigger { }
 
-	internal interface ITriggerCollectionModel : IList<ITriggerModel>, System.Collections.IList
+	public interface ITriggerCollection : IList<ITrigger>, System.Collections.IList
 	{
-		ITriggerModel AddNew(TaskTriggerType actionType);
+		ITrigger AddNew(TaskTriggerType actionType);
 	}
 
-	internal interface ITriggerModel
+	public interface ITrigger
 	{
-		TimeSpan? Delay { get; set; }
 		bool Enabled { get; set; }
-		DateTime? EndBoundary { get; set; }
-		TimeSpan? ExecutionTimeLimit { get; set; }
+		DateTime? EndBoundaryNullable { get; set; }
+		TimeSpan? ExecutionTimeLimitNullable { get; set; }
 		string Id { get; set; }
-		TimeSpan? RepetitionDuration { get; set; }
-		TimeSpan? RepetitionInterval { get; set; }
-		bool RepetitionStopAtDurationEnd { get; set; }
+		IRepetitionPattern Repetition { get; }
 		DateTime StartBoundary { get; set; }
 		TaskTriggerType TriggerType { get; }
 	}
 
-	internal interface IWeeklyTriggerModel : ITriggerModel
+	public interface IWeeklyTrigger : ITrigger
 	{
 		DaysOfTheWeek DaysOfWeek { get; set; }
 		short WeeksInterval { get; set; }

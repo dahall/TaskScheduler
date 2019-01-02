@@ -41,7 +41,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <see cref="ActionCollection.AddNew"/> method.
 	/// </summary>
 	[PublicAPI]
-	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged, IComparable, IComparable<Action>
+	public abstract class Action : IDisposable, ICloneable, IEquatable<Action>, INotifyPropertyChanged, IComparable, IComparable<Action>, Models.IAction
 	{
 		internal IAction iAction;
 		internal ITask v1Task;
@@ -299,7 +299,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ComHandler", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public class ComHandlerAction : Action, IBindAsExecAction
+	public class ComHandlerAction : Action, IBindAsExecAction, Models.IComHandlerAction
 	{
 		/// <summary>Creates an unbound instance of <see cref="ComHandlerAction"/>.</summary>
 		public ComHandlerAction() { }
@@ -418,7 +418,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("SendEmail", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class EmailAction : Action, IBindAsExecAction
+	public sealed class EmailAction : Action, IBindAsExecAction, Models.IEmailAction
 	{
 		private const string ImportanceHeader = "Importance";
 
@@ -580,6 +580,10 @@ namespace Microsoft.Win32.TaskScheduler
 			get => GetProperty<string, IEmailAction>(nameof(To));
 			set => SetProperty<string, IEmailAction>(nameof(To), value);
 		}
+
+		string[] Models.IEmailAction.Attachments { get => Array.ConvertAll(Attachments, o => o.ToString()); set => Attachments = value; }
+
+		IDictionary<string, string> Models.IEmailAction.HeaderFields => HeaderFields;
 
 		internal override TaskActionType InternalActionType => TaskActionType.SendEmail;
 
@@ -746,7 +750,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlRoot("Exec", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public class ExecAction : Action
+	public class ExecAction : Action, Models.IExecAction
 	{
 #if DEBUG
 		internal const string PowerShellArgFormat = "-NoExit -Command \"& {{<# {0}:{1} #> {2}}}\"";
@@ -958,7 +962,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </example>
 	[XmlType(IncludeInSchema = true)]
 	[XmlRoot("ShowMessage", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class ShowMessageAction : Action, IBindAsExecAction
+	public sealed class ShowMessageAction : Action, IBindAsExecAction, Models.IShowMessageAction
 	{
 		/// <summary>Creates a new unbound instance of <see cref="ShowMessageAction"/>.</summary>
 		public ShowMessageAction() { }

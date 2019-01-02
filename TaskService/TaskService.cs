@@ -66,15 +66,15 @@ namespace Microsoft.Win32.TaskScheduler
 		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
 		public static readonly Version V1_5 = new Version(1, 5);
 
-		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
-		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
+		/// <summary>Task Scheduler 2.4 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
+		[Description("Task Scheduler 2.4 (Windows® 10, Windows Server™ 2016 post build 1703).")]
 		public static readonly Version V1_6 = new Version(1, 6);
 	}
 
 	/// <summary>Provides access to the Task Scheduler service for managing registered tasks.</summary>
 	[Description("Provides access to the Task Scheduler service.")]
 	[ToolboxItem(true), Serializable]
-	public sealed partial class TaskService : Component, ISupportInitialize, System.Runtime.Serialization.ISerializable
+	public sealed partial class TaskService : Component, ISupportInitialize, System.Runtime.Serialization.ISerializable//, Models.ITaskService
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");

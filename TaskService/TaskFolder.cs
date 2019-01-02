@@ -17,7 +17,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// subfolders from the folder.
 	/// </summary>
 	[PublicAPI]
-	public sealed class TaskFolder : IDisposable, IComparable<TaskFolder>
+	public sealed class TaskFolder : IDisposable, IComparable<TaskFolder>//, Models.ITaskFolder
 	{
 		internal const string rootString = @"\";
 		private readonly ITaskFolder v2Folder;

@@ -40,7 +40,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Collection that contains the actions that are performed by the task.</summary>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
 	[PublicAPI]
-	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
+	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList//, Models.IActionCollection
 	{
 		internal const int MaxActions = 32;
 

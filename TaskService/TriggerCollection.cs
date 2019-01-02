@@ -11,7 +11,7 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>Provides the methods that are used to add to, remove from, and get the triggers of a task.</summary>
 	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList
+	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList//, Models.ITriggerCollection
 	{
 		private readonly ITriggerCollection v2Coll;
 		private ITask v1Task;
