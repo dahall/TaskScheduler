@@ -180,7 +180,7 @@ namespace Microsoft.Win32
 			public static LUID FromName(string name, string systemName = null)
 			{
 				LUID val;
-				if (!NativeMethods.LookupPrivilegeValue(systemName, name, out val))
+				if (!LookupPrivilegeValue(systemName, name, out val))
 					throw new System.ComponentModel.Win32Exception();
 				return val;
 			}
@@ -270,7 +270,7 @@ namespace Microsoft.Win32
 				try
 				{
 					// Retrieve token information. 
-					if (!NativeMethods.GetTokenInformation(this, type, pType, cbSize, out cbSize))
+					if (!GetTokenInformation(this, type, pType, cbSize, out cbSize))
 						throw new System.ComponentModel.Win32Exception();
 
 					// Marshal from native to .NET.
@@ -325,17 +325,17 @@ namespace Microsoft.Win32
 				lock (currentProcessToken)
 				{
 					if (currentProcessToken == null)
-						currentProcessToken = FromProcess(NativeMethods.GetCurrentProcess(), desiredAccess);
+						currentProcessToken = FromProcess(GetCurrentProcess(), desiredAccess);
 					return currentProcessToken;
 				}
 			}
 
-			public static SafeTokenHandle FromCurrentThread(AccessTypes desiredAccess = AccessTypes.TokenDuplicate, bool openAsSelf = true) => FromThread(NativeMethods.GetCurrentThread(), desiredAccess, openAsSelf);
+			public static SafeTokenHandle FromCurrentThread(AccessTypes desiredAccess = AccessTypes.TokenDuplicate, bool openAsSelf = true) => FromThread(GetCurrentThread(), desiredAccess, openAsSelf);
 
 			public static SafeTokenHandle FromProcess(IntPtr hProcess, AccessTypes desiredAccess = AccessTypes.TokenDuplicate)
 			{
 				SafeTokenHandle val;
-				if (!NativeMethods.OpenProcessToken(hProcess, desiredAccess, out val))
+				if (!OpenProcessToken(hProcess, desiredAccess, out val))
 					throw new System.ComponentModel.Win32Exception();
 				return val;
 			}
@@ -343,14 +343,14 @@ namespace Microsoft.Win32
 			public static SafeTokenHandle FromThread(IntPtr hThread, AccessTypes desiredAccess = AccessTypes.TokenDuplicate, bool openAsSelf = true)
 			{
 				SafeTokenHandle val;
-				if (!NativeMethods.OpenThreadToken(hThread, desiredAccess, openAsSelf, out val))
+				if (!OpenThreadToken(hThread, desiredAccess, openAsSelf, out val))
 				{
 					if (Marshal.GetLastWin32Error() == ERROR_NO_TOKEN)
 					{
 						SafeTokenHandle pval = FromCurrentProcess();
-						if (!NativeMethods.DuplicateTokenEx(pval, AccessTypes.TokenImpersonate | desiredAccess, IntPtr.Zero, SECURITY_IMPERSONATION_LEVEL.Impersonation, TokenType.TokenImpersonation, ref val))
+						if (!DuplicateTokenEx(pval, AccessTypes.TokenImpersonate | desiredAccess, IntPtr.Zero, SECURITY_IMPERSONATION_LEVEL.Impersonation, TokenType.TokenImpersonation, ref val))
 							throw new System.ComponentModel.Win32Exception();
-						if (!NativeMethods.SetThreadToken(IntPtr.Zero, val))
+						if (!SetThreadToken(IntPtr.Zero, val))
 							throw new System.ComponentModel.Win32Exception();
 					}
 					else
