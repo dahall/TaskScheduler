@@ -2832,7 +2832,7 @@ namespace Microsoft.Win32.TaskScheduler
 			XmlSerializationHelper.WriteObjectProperties(writer, this, ProcessVersionXml);
 		}
 
-		internal static string FixCrLf(string text) => text == null ? null : Regex.Replace(text, "\r?\n", "\r\n");
+		internal static string FixCrLf(string text) => text == null ? null : Regex.Replace(text, "(?<!\r)\n|\r(?!\n)", "\r\n");
 
 		private bool ProcessVersionXml(PropertyInfo pi, object obj, ref object value)
 		{
