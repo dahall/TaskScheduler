@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net20;net35;net40;net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0;netcoreapp2.1;net20;net35;net40;net45</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <SignAssembly>true</SignAssembly>
@@ -23,9 +23,9 @@
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
     <LangVersion>latest</LangVersion>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Microsoft.Win32.TaskScheduler.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\Microsoft.Win32.TaskScheduler.xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
@@ -53,7 +53,7 @@
   <ItemGroup>
     <EmbeddedResource Include="TaskService.bmp" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp2.0' Or '$(TargetFramework)' == 'netcoreapp2.1'">
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
@@ -80,16 +80,19 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="2.0.1" />
-    <PackageReference Include="Vanara.PInvoke.Security" Version="2.0.1" />
-    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="2.0.1" />
+    <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="2.1.1" />
+    <PackageReference Include="Vanara.PInvoke.Security" Version="2.1.1" />
+    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
