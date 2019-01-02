@@ -2007,6 +2007,7 @@ namespace Microsoft.Win32.TaskScheduler
 			EndBoundary = sourceTrigger.EndBoundary;
 			try { ExecutionTimeLimit = sourceTrigger.ExecutionTimeLimit; }
 			catch { /* ignored */ }
+			Id = sourceTrigger.Id;
 			Repetition.Duration = sourceTrigger.Repetition.Duration;
 			Repetition.Interval = sourceTrigger.Repetition.Interval;
 			Repetition.StopAtDurationEnd = sourceTrigger.Repetition.StopAtDurationEnd;
