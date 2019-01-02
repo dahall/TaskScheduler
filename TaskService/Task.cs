@@ -101,7 +101,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		V2_3 = TASK_COMPATIBILITY.TASK_COMPATIBILITY_V2_3,
 
-		/// <summary>The task is compatible with Task Scheduler 2.4 (Windows® 10, Windows Server™ 2016).</summary>
+		/// <summary>The task is compatible with Task Scheduler 2.4 (Windows® 10 Version 1703, Windows Server™ 2016 Version 1703).</summary>
 		V2_4 = TASK_COMPATIBILITY.TASK_COMPATIBILITY_V2_4,
 	}
 
@@ -574,7 +574,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Task Idle Conditions.
 	/// </summary>
 	[PublicAPI]
-	public sealed class IdleSettings : IDisposable
+	public sealed class IdleSettings : IDisposable, Models.IIdleSettings
 	{
 		private ITask v1Task;
 		private IIdleSettings v2Settings;
@@ -594,10 +594,25 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlElement("Duration")]
 		public TimeSpan IdleDuration
 		{
+			get => IdleDurationNullable.GetValueOrDefault();
+			set => IdleDurationNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.
+		/// </summary>
+		/// <value>
+		/// A value that indicates the amount of time that the computer must be in an idle state before the task is run. The minimum value is
+		/// one minute. If this value is <see langword="null"/>, then the delay will be set to the default of 10 minutes.
+		/// </value>
+		[DefaultValue(typeof(TimeSpan?), "00:10:00")]
+		[XmlIgnore]
+		public TimeSpan? IdleDurationNullable
+		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.IdleDuration.Value.GetValueOrDefault();
+					return v2Settings.IdleDuration.Value;
 				v1Task.GetIdleWait(out var _, out var deadMin);
 				return TimeSpan.FromMinutes(deadMin);
 			}
@@ -605,13 +620,13 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 				{
-					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+					if (value.HasValue && value.Value < TimeSpan.FromMinutes(1))
 						throw new ArgumentOutOfRangeException(nameof(IdleDuration));
-					v2Settings.IdleDuration = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Settings.IdleDuration = value;
 				}
 				else
 				{
-					v1Task.SetIdleWait((ushort)WaitTimeout.TotalMinutes, (ushort)value.TotalMinutes);
+					v1Task.SetIdleWait((ushort)WaitTimeout.TotalMinutes, (ushort)value.GetValueOrDefault().TotalMinutes );
 				}
 			}
 		}
@@ -656,15 +671,31 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>
 		/// A value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. The minimum time
-		/// allowed is 1 minute. If this value is <c>TimeSpan.Zero</c>, then the delay will be set to the default of 1 hour.
+		/// allowed is 1 minute. If this value is <c>IntPtr.Zero</c>, then the delay will be set to the default of 1 hour.
 		/// </value>
 		[DefaultValue(typeof(TimeSpan), "01:00:00")]
 		public TimeSpan WaitTimeout
 		{
+			get => WaitTimeoutNullable.GetValueOrDefault();
+			set => WaitTimeoutNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. If no
+		/// value is specified for this property, then the Task Scheduler service will wait indefinitely for an idle condition to occur.
+		/// </summary>
+		/// <value>
+		/// A value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. The minimum time
+		/// allowed is 1 minute. If this value is <see langword="null"/>, then the delay will be set to the default of 1 hour.
+		/// </value>
+		[DefaultValue(typeof(TimeSpan?), "01:00:00")]
+		[XmlIgnore]
+		public TimeSpan? WaitTimeoutNullable
+		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.WaitTimeout.Value.GetValueOrDefault();
+					return v2Settings.WaitTimeout.Value;
 				v1Task.GetIdleWait(out var idleMin, out var _);
 				return TimeSpan.FromMinutes(idleMin);
 			}
@@ -672,13 +703,13 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (v2Settings != null)
 				{
-					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+					if (value.HasValue && value.Value < TimeSpan.FromMinutes(1))
 						throw new ArgumentOutOfRangeException(nameof(WaitTimeout));
-					v2Settings.WaitTimeout = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Settings.WaitTimeout = value;
 				}
 				else
 				{
-					v1Task.SetIdleWait((ushort)value.TotalMinutes, (ushort)IdleDuration.TotalMinutes);
+					v1Task.SetIdleWait((ushort)value.GetValueOrDefault().TotalMinutes, (ushort)IdleDuration.TotalMinutes);
 				}
 			}
 		}
@@ -699,7 +730,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Specifies the task settings the Task scheduler will use to start task during Automatic maintenance.</summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public sealed class MaintenanceSettings : IDisposable
+	public sealed class MaintenanceSettings : IDisposable, Models.IMaintenanceSettings
 	{
 		private IMaintenanceSettings iMaintSettings;
 		private ITaskSettings3 iSettings;
@@ -721,15 +752,30 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Deadline
 		{
-			get => iMaintSettings?.Deadline.Value.GetValueOrDefault() ?? TimeSpan.Zero;
+			get => DeadlineNullable.GetValueOrDefault();
+			set => DeadlineNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance,
+		/// if the task failed to complete during regular Automatic maintenance. The minimum value is one day. The value of the
+		/// <see cref="Deadline"/> property should be greater than the value of the <see cref="Period"/> property. If the deadline is not
+		/// specified the task will not be started during emergency Automatic maintenance.
+		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DeadlineNullable
+		{
+			get => iMaintSettings?.Deadline.Value;
 			set
 			{
 				if (iSettings != null)
 				{
-					if (iMaintSettings == null && value != TimeSpan.Zero)
+					if (iMaintSettings == null && value.HasValue)
 						iMaintSettings = iSettings.CreateMaintenanceSettings();
 					if (iMaintSettings != null)
-						iMaintSettings.Deadline = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+						iMaintSettings.Deadline = value;
 				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
@@ -767,15 +813,29 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Period
 		{
-			get => iMaintSettings?.Period.Value.GetValueOrDefault() ?? TimeSpan.Zero;
+			get => PeriodNullable.GetValueOrDefault();
+			set => PeriodNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets the amount of time the task needs to be started during Automatic maintenance. The minimum value is one minute.
+		/// </summary>
+		/// <exception cref="NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? PeriodNullable
+		{
+			get => iMaintSettings?.Period.Value;
 			set
 			{
 				if (iSettings != null)
 				{
-					if (iMaintSettings == null && value != TimeSpan.Zero)
+					if (value.HasValue && value.Value < TimeSpan.FromDays(1))
+						throw new ArgumentOutOfRangeException(nameof(Period));
+					if (iMaintSettings == null && value.HasValue)
 						iMaintSettings = iSettings.CreateMaintenanceSettings();
 					if (iMaintSettings != null)
-						iMaintSettings.Period = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+						iMaintSettings.Period = value;
 				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
@@ -793,13 +853,13 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>A <see cref="System.String"/> that represents this instance.</returns>
 		public override string ToString() => iMaintSettings != null ? DebugHelper.GetDebugString(this) : base.ToString();
 
-		internal bool IsSet() => iMaintSettings != null && (iMaintSettings.Period != null || iMaintSettings.Deadline != null || iMaintSettings.Exclusive);
+		internal bool IsSet() => iMaintSettings != null && (!iMaintSettings.Period.IsInvalid || !iMaintSettings.Deadline.IsInvalid || iMaintSettings.Exclusive);
 	}
 
 	/// <summary>Provides the settings that the Task Scheduler service uses to obtain a network profile.</summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public sealed class NetworkSettings : IDisposable
+	public sealed class NetworkSettings : IDisposable, Models.INetworkSettings
 	{
 		private INetworkSettings v2Settings;
 
@@ -810,17 +870,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(Guid), "00000000-0000-0000-0000-000000000000")]
 		public Guid Id
 		{
-			get
-			{
-				string id = null;
-				if (v2Settings != null)
-					id = v2Settings.Id;
-				return string.IsNullOrEmpty(id) ? Guid.Empty : new Guid(id);
-			}
+			get => IdNullable.GetValueOrDefault();
+			set => IdNullable = value == Guid.Empty ? (Guid?)null : value;
+		}
+
+		/// <summary>Gets or sets a GUID value that identifies a network profile.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(Guid?), null)]
+		[XmlIgnore]
+		public Guid? IdNullable
+		{
+			get => Task.StringToGuid(v2Settings?.Id);
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.Id = value == Guid.Empty ? null : value.ToString();
+					v2Settings.Id = Task.GuidToString(value);
 				else
 					throw new NotV1SupportedException();
 			}
@@ -863,7 +927,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Provides the methods to get information from and control a running task.</summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public sealed class RunningTask : Task
+	public sealed class RunningTask : Task, Models.IRunningTask
 	{
 		private IRunningTask v2RunningTask;
 
@@ -891,7 +955,10 @@ namespace Microsoft.Win32.TaskScheduler
 		public string CurrentAction => v2RunningTask != null ? v2RunningTask.CurrentAction : v1Task.GetApplicationName();
 
 		/// <summary>Gets the GUID identifier for this instance of the task.</summary>
-		public Guid InstanceGuid => v2RunningTask != null ? new Guid(v2RunningTask.InstanceGuid) : Guid.Empty;
+		public Guid InstanceGuid => InstanceGuidNullable.GetValueOrDefault();
+
+		/// <summary>Gets the GUID identifier for this instance of the task.</summary>
+		public Guid? InstanceGuidNullable => StringToGuid(v2RunningTask?.InstanceGuid);
 
 		/// <summary>Gets the operational state of the running task.</summary>
 		public override TaskState State => (TaskState?)(v2RunningTask?.State) ?? base.State;
@@ -921,7 +988,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public class Task : IDisposable, IComparable, IComparable<Task>
+	public class Task : IDisposable, IComparable, IComparable<Task>//, Models.IRegisteredTask
 	{
 		internal const AccessControlSections defaultAccessControlSections = AccessControlSections.Owner | AccessControlSections.Group | AccessControlSections.Access;
 		internal const SecurityInfos defaultSecurityInfosSections = SecurityInfos.Owner | SecurityInfos.Group | SecurityInfos.DiscretionaryAcl;
@@ -1066,11 +1133,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[Obsolete("This property will be removed in deference to the GetAccessControl, GetSecurityDescriptorSddlForm, SetAccessControl and SetSecurityDescriptorSddlForm methods.")]
 		public GenericSecurityDescriptor SecurityDescriptor
 		{
-			get
-			{
-				var sddl = GetSecurityDescriptorSddlForm();
-				return new RawSecurityDescriptor(sddl);
-			}
+			get => new RawSecurityDescriptor(GetSecurityDescriptorSddlForm());
 			set => SetSecurityDescriptorSddlForm(value.GetSddlForm(defaultAccessControlSections));
 		}
 
@@ -1227,7 +1290,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="includeSections">Section(s) of the security descriptor to return.</param>
 		/// <returns>The security descriptor for the task.</returns>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
-		public string GetSecurityDescriptorSddlForm(SecurityInfos includeSections = defaultSecurityInfosSections) => v2Task != null ? v2Task.GetSecurityDescriptor((SECURITY_INFORMATION)includeSections) : throw new NotV1SupportedException();
+		public string GetSecurityDescriptorSddlForm(SecurityInfos includeSections = defaultSecurityInfosSections) => v2Task?.GetSecurityDescriptor((SECURITY_INFORMATION)includeSections) ?? throw new NotV1SupportedException();
 
 		/// <summary>
 		/// Updates the task with any changes made to the <see cref="Definition"/> by calling
@@ -1561,17 +1624,29 @@ namespace Microsoft.Win32.TaskScheduler
 			return iTask.Definition;
 		}
 
-		internal static TimeSpan StringToTimeSpan(string input)
+		internal static string GuidToString(Guid? value) => value?.ToString() ?? null;
+
+		internal static Guid? StringToGuid(string value)
+		{
+#if NET20 || NET35
+			try { return string.IsNullOrEmpty(value) ? (Guid?)null : new Guid(value); }
+			catch { return (Guid?)null; }
+#else
+			return Guid.TryParse(value, out var g) ? g : (Guid?)null;
+#endif
+		}
+
+		internal static TimeSpan? StringToTimeSpan(string input)
 		{
 			if (!string.IsNullOrEmpty(input))
 				try { return XmlConvert.ToTimeSpan(input); } catch { }
-			return TimeSpan.Zero;
+			return null;
 		}
 
-		internal static string TimeSpanToString(TimeSpan span)
+		internal static string TimeSpanToString(TimeSpan? span)
 		{
-			if (span != TimeSpan.Zero)
-				try { return XmlConvert.ToString(span); } catch { }
+			if (span.HasValue)
+				try { return XmlConvert.ToString(span.Value); } catch { }
 			return null;
 		}
 
@@ -1669,7 +1744,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Task", Namespace = tns, IsNullable = false)]
 	[XmlSchemaProvider("GetV1SchemaFile")]
 	[PublicAPI]
-	public sealed class TaskDefinition : IDisposable, IXmlSerializable
+	public sealed class TaskDefinition : IDisposable, IXmlSerializable, Models.ITaskDefinition
 	{
 		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
 
@@ -1883,11 +1958,11 @@ namespace Microsoft.Win32.TaskScheduler
 								TryAdd(ex.Data, $"Triggers[{i}].ValueQueries.Count", "!= 0");
 								break;*/
 					}
-					if (t.ExecutionTimeLimit != TimeSpan.Zero)
+					if (t.ExecutionTimeLimitNullable.HasValue)
 					{
 						bad = true;
 						if (!throwExceptionWithDetails) return false;
-						TryAdd(ex.Data, $"Triggers[{i}].ExecutionTimeLimit", "!= TimeSpan.Zero");
+						TryAdd(ex.Data, $"Triggers[{i}].ExecutionTimeLimitNullable", "!= null");
 					}
 				}
 			if (bad && throwExceptionWithDetails)
@@ -1938,7 +2013,7 @@ namespace Microsoft.Win32.TaskScheduler
 					TryAdd(ex.Data, item.Property, item.Reason);
 
 			var startWhenAvailable = Settings.StartWhenAvailable;
-			var delOldTask = Settings.DeleteExpiredTaskAfter != TimeSpan.Zero;
+			var delOldTask = Settings.DeleteExpiredTaskAfterNullable.HasValue;
 			var v1 = Settings.Compatibility < TaskCompatibility.V2;
 			var hasEndBound = false;
 			for (var i = 0; i < Triggers.Count; i++)
@@ -1958,7 +2033,7 @@ namespace Microsoft.Win32.TaskScheduler
 					hasEndBound = true;
 			}
 			if (delOldTask && !hasEndBound)
-				TryAdd(ex.Data, "Settings.DeleteExpiredTaskAfter", "!= TimeSpan.Zero requires at least one trigger with an end boundary.");
+				TryAdd(ex.Data, "Settings.DeleteExpiredTaskAfterNullable", "!= null requires at least one trigger with an end boundary.");
 
 			if (throwException && ex.Data.Count > 0)
 				throw ex;
@@ -2085,8 +2160,8 @@ namespace Microsoft.Win32.TaskScheduler
 			{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.NetworkSetting", "cannot have a value.")); }
 			if (Settings.RestartCount != 0)
 			{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartCount", "must be 0.")); }
-			if (Settings.RestartInterval != TimeSpan.Zero)
-			{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartInterval", "must be 0 (TimeSpan.Zero).")); }
+			if (Settings.RestartIntervalNullable.HasValue)
+			{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.RestartIntervalNullable", "must be null.")); }
 			if (Settings.StartWhenAvailable)
 			{ list.Add(new TaskCompatibilityEntry(TaskCompatibility.V2, "Settings.StartWhenAvailable", "must be false.")); }
 
@@ -2144,7 +2219,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlRoot("Principals", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
-	public sealed class TaskPrincipal : IDisposable, IXmlSerializable
+	public sealed class TaskPrincipal : IDisposable, IXmlSerializable, Models.IPrincipal
 	{
 		private const string localSystemAcct = "SYSTEM";
 		private readonly IPrincipal v2Principal;
@@ -2708,13 +2783,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public string SecurityDescriptorSddlForm
 		{
-			get
-			{
-				object sddl = null;
-				if (v2RegInfo != null)
-					sddl = v2RegInfo.SecurityDescriptor;
-				return sddl?.ToString();
-			}
+			get => v2RegInfo?.SecurityDescriptor?.ToString();
 			set
 			{
 				if (v2RegInfo != null)
@@ -2823,7 +2892,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		void IXmlSerializable.WriteXml(XmlWriter writer) => XmlSerializationHelper.WriteObjectProperties(writer, this, ProcessVersionXml);
 
-		internal static string FixCrLf(string text) => text == null ? null : Regex.Replace(text, "\r?\n", "\r\n");
+		internal static string FixCrLf(string text) => text == null ? null : Regex.Replace(text, "(?<!\r)\n|\r(?!\n)", "\r\n");
 
 		private bool ProcessVersionXml(PropertyInfo pi, object obj, ref object value)
 		{
@@ -2839,7 +2908,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Provides the settings that the Task Scheduler service uses to perform the task.</summary>
 	[XmlRoot("Settings", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
-	public sealed class TaskSettings : IDisposable, IXmlSerializable
+	public sealed class TaskSettings : IDisposable, IXmlSerializable//, Models.ITaskSettings
 	{
 		private const uint InfiniteRunTimeV1 = 0xFFFFFFFF;
 
@@ -2927,18 +2996,35 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "12:00:00")]
 		public TimeSpan DeleteExpiredTaskAfter
 		{
+			get => !DeleteExpiredTaskAfterNullable.HasValue ? TimeSpan.Zero : (DeleteExpiredTaskAfterNullable.Value == TimeSpan.Zero ? TimeSpan.FromSeconds(1) : DeleteExpiredTaskAfterNullable.Value);
+			set => DeleteExpiredTaskAfterNullable = value == TimeSpan.FromSeconds(1) ? TimeSpan.Zero : (value == TimeSpan.Zero ? (TimeSpan?)null : value);
+		}
+
+		/// <summary>Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.</summary>
+		/// <value>
+		/// The amount of time that the Task Scheduler will wait before deleting the task after it expires. A value of <see langword="null"/>
+		/// indicates that the task should not be deleted.
+		/// </value>
+		/// <remarks>
+		/// A task expires after the end boundary has been exceeded for all triggers associated with the task. The end boundary for a trigger
+		/// is specified by the <c>EndBoundary</c> property of all trigger types.
+		/// </remarks>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DeleteExpiredTaskAfterNullable
+		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.DeleteExpiredTaskAfter.Value == TimeSpan.Zero ? TimeSpan.FromSeconds(1) : v2Settings.DeleteExpiredTaskAfter.Value.GetValueOrDefault();
-				return v1Task.HasFlags(TaskFlags.TASK_FLAG_DELETE_WHEN_DONE) ? TimeSpan.FromSeconds(1) : TimeSpan.Zero;
+					return v2Settings.DeleteExpiredTaskAfter.Value;
+				return v1Task.HasFlags(TaskFlags.TASK_FLAG_DELETE_WHEN_DONE) ? TimeSpan.Zero : (TimeSpan?)null;
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.DeleteExpiredTaskAfter = value == TimeSpan.FromSeconds(1) ? TimeSpan.Zero : (value == TimeSpan.Zero ? (TimeSpan?)null : value);
+					v2Settings.DeleteExpiredTaskAfter = value;
 				else
-					v1Task.SetFlags(TaskFlags.TASK_FLAG_DELETE_WHEN_DONE, value >= TimeSpan.FromSeconds(1));
+					v1Task.SetFlags(TaskFlags.TASK_FLAG_DELETE_WHEN_DONE, value.HasValue);
 			}
 		}
 
@@ -3017,25 +3103,45 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "3")]
 		public TimeSpan ExecutionTimeLimit
 		{
+			get => ExecutionTimeLimitNullable.GetValueOrDefault();
+			set => ExecutionTimeLimitNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets the amount of time that is allowed to complete the task. By default, a task will be stopped 72 hours after it starts
+		/// to run.
+		/// </summary>
+		/// <value>
+		/// The amount of time that is allowed to complete the task. When this parameter is set to <see langword="null"/>, the execution time
+		/// limit is infinite.
+		/// </value>
+		/// <remarks>
+		/// If a task is started on demand, the ExecutionTimeLimit setting is bypassed. Therefore, a task that is started on demand will not
+		/// be terminated if it exceeds the ExecutionTimeLimit.
+		/// </remarks>
+		[DefaultValue(typeof(TimeSpan), "3")]
+		[XmlIgnore]
+		public TimeSpan? ExecutionTimeLimitNullable
+		{
 			get
 			{
 				if (v2Settings != null)
-					return v2Settings.ExecutionTimeLimit.Value.GetValueOrDefault();
+					return v2Settings.ExecutionTimeLimit.Value;
 				var ms = v1Task.GetMaxRunTime();
-				return ms == InfiniteRunTimeV1 ? TimeSpan.Zero : TimeSpan.FromMilliseconds(ms);
+				return ms == InfiniteRunTimeV1 ? (TimeSpan?)null : TimeSpan.FromMilliseconds(ms);
 			}
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.ExecutionTimeLimit = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Settings.ExecutionTimeLimit = value;
 				else
 				{
+					var ms = value.HasValue ? Convert.ToUInt32(value.Value.TotalMilliseconds) : InfiniteRunTimeV1;
+					v1Task.SetMaxRunTime(ms);
 					// Due to an issue introduced in Vista, and propagated to Windows 7, setting the MaxRunTime to INFINITE results in the
 					// task only running for 72 hours. For these operating systems, setting the RunTime to "INFINITE - 1" gets the desired
 					// behavior of allowing an "infinite" run of the task.
-					var ms = value == TimeSpan.Zero ? InfiniteRunTimeV1 : Convert.ToUInt32(value.TotalMilliseconds);
-					v1Task.SetMaxRunTime(ms);
-					if (value == TimeSpan.Zero && v1Task.GetMaxRunTime() != InfiniteRunTimeV1)
+					if (!value.HasValue && v1Task.GetMaxRunTime() != InfiniteRunTimeV1)
 						v1Task.SetMaxRunTime(InfiniteRunTimeV1 - 1);
 				}
 			}
@@ -3128,11 +3234,25 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RestartInterval
 		{
-			get => v2Settings?.RestartInterval.Value.GetValueOrDefault() ?? TimeSpan.Zero;
+			get => RestartIntervalNullable.GetValueOrDefault();
+			set => RestartIntervalNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that specifies how long the Task Scheduler will attempt to restart the task.</summary>
+		/// <value>
+		/// A value that specifies how long the Task Scheduler will attempt to restart the task. If this property is set, the
+		/// <see cref="RestartCount"/> property must also be set. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+		/// </value>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RestartIntervalNullable
+		{
+			get => v2Settings?.RestartInterval.Value;
 			set
 			{
 				if (v2Settings != null)
-					v2Settings.RestartInterval = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Settings.RestartInterval = value;
 				else
 					throw new NotV1SupportedException();
 			}

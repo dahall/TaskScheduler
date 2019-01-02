@@ -158,6 +158,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
 		/// <value>The delay duration.</value>
 		TimeSpan Delay { get; set; }
+
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? DelayNullable { get; set; }
 	}
 
 	/// <summary>Interface for triggers that support a user identifier.</summary>
@@ -180,7 +184,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]>
 	/// </code>
 	/// </example>
-	public sealed class BootTrigger : Trigger, ITriggerDelay
+	public sealed class BootTrigger : Trigger, ITriggerDelay, Models.IBootTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="BootTrigger"/>.</summary>
 		public BootTrigger() : base(TaskTriggerType.Boot) { }
@@ -199,11 +203,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan Delay
 		{
-			get => v2Trigger != null ? ((IBootTrigger)v2Trigger).Delay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
+			get => DelayNullable.GetValueOrDefault();
+			set => DelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DelayNullable
+		{
+			get => v2Trigger != null ? ((IBootTrigger)v2Trigger).Delay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(Delay));
 			set
 			{
 				if (v2Trigger != null)
-					((IBootTrigger)v2Trigger).Delay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IBootTrigger)v2Trigger).Delay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -220,9 +234,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a custom trigger. This class is based on undocumented features and may change. <note>This type of trigger is only
 	/// available for reading custom triggers. It cannot be used to create custom triggers.</note>
 	/// </summary>
-	public sealed class CustomTrigger : Trigger, ITriggerDelay
+	public sealed class CustomTrigger : Trigger, ITriggerDelay, Models.ICustomTrigger
 	{
-		private TimeSpan delay = TimeSpan.MinValue;
+		private TimeSpan? delay = null;
 
 		internal CustomTrigger([NotNull] ITrigger iTrigger) : base(iTrigger)
 		{
@@ -231,6 +245,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Gets a value that indicates the amount of time between the trigger events and when the task is started.</summary>
 		/// <exception cref="System.NotImplementedException">This value cannot be set.</exception>
 		public TimeSpan Delay
+		{
+			get => delay.GetValueOrDefault();
+			set => throw new NotImplementedException();
+		}
+
+		/// <summary>Gets a value that indicates the amount of time between the trigger events and when the task is started.</summary>
+		/// <exception cref="System.NotImplementedException">This value cannot be set.</exception>
+		public TimeSpan? DelayNullable
 		{
 			get => delay;
 			set => throw new NotImplementedException();
@@ -243,6 +265,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Gets the properties from the XML definition if possible.</summary>
 		[XmlArray, XmlArrayItem("Property")]
 		public NamedValueCollection Properties { get; } = new NamedValueCollection();
+
+		/// <summary>Gets the properties from the XML definition if possible.</summary>
+		IDictionary<string, string> Models.ICustomTrigger.Properties => Properties;
 
 		/// <summary>Clones this instance.</summary>
 		/// <returns>This method will always throw an exception.</returns>
@@ -316,7 +341,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class DailyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
+	public sealed class DailyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable, Models.IDailyTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="DailyTrigger"/>.</summary>
 		/// <param name="daysInterval">Interval between the days in the schedule.</param>
@@ -358,11 +383,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
-			get => v2Trigger != null ? ((IDailyTrigger)v2Trigger).RandomDelay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
+			get => RandomDelayNullable.GetValueOrDefault();
+			set => RandomDelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RandomDelayNullable
+		{
+			get => v2Trigger != null ? ((IDailyTrigger)v2Trigger).RandomDelay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(RandomDelay));
 			set
 			{
 				if (v2Trigger != null)
-					((IDailyTrigger)v2Trigger).RandomDelay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IDailyTrigger)v2Trigger).RandomDelay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -376,6 +411,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get => RandomDelay;
 			set => RandomDelay = value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? ITriggerDelay.DelayNullable
+		{
+			get => RandomDelayNullable;
+			set => RandomDelayNullable = value;
 		}
 
 		/// <summary>
@@ -443,7 +486,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlType(IncludeInSchema = false)]
-	public sealed class EventTrigger : Trigger, ITriggerDelay
+	public sealed class EventTrigger : Trigger, ITriggerDelay, Models.IEventTrigger
 	{
 		private NamedValueCollection nvc;
 
@@ -464,11 +507,20 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Delay
 		{
-			get => v2Trigger != null ? ((IEventTrigger)v2Trigger).Delay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
+			get => DelayNullable.GetValueOrDefault();
+			set => DelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DelayNullable
+		{
+			get => v2Trigger != null ? ((IEventTrigger)v2Trigger).Delay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(Delay));
 			set
 			{
 				if (v2Trigger != null)
-					((IEventTrigger)v2Trigger).Delay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IEventTrigger)v2Trigger).Delay = value;
 				else
 					unboundValues[nameof(Delay)] = value;
 			}
@@ -489,13 +541,18 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>
-		/// Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from
-		/// the subscription query specified in the Subscription property. The name of the query can be used as a variable in the message of
-		/// a <see cref="ShowMessageAction"/> action.
+		/// Gets or sets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned
+		/// from the subscription query specified in the <see cref="Subscription"/> property.
 		/// </summary>
 		[XmlArray]
 		[XmlArrayItem("Value", typeof(NameValuePair))]
 		public NamedValueCollection ValueQueries => nvc ?? (nvc = v2Trigger == null ? new NamedValueCollection() : new NamedValueCollection(((IEventTrigger)v2Trigger).ValueQueries));
+
+		/// <summary>
+		/// Gets or sets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned
+		/// from the subscription query specified in the <see cref="Subscription"/> property.
+		/// </summary>
+		IDictionary<string, string> Models.IEventTrigger.ValueQueries => ValueQueries;
 
 		/// <summary>Builds an event log XML query string based on the input parameters.</summary>
 		/// <param name="log">The event's log.</param>
@@ -646,7 +703,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]>
 	/// </code>
 	/// </example>
-	public sealed class IdleTrigger : Trigger
+	public sealed class IdleTrigger : Trigger, Models.IIdleTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="IdleTrigger"/>.</summary>
 		public IdleTrigger() : base(TaskTriggerType.Idle) { }
@@ -683,7 +740,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]>
 	/// </code>
 	/// </example>
-	public sealed class LogonTrigger : Trigger, ITriggerDelay, ITriggerUserId
+	public sealed class LogonTrigger : Trigger, ITriggerDelay, ITriggerUserId, Models.ILogonTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="LogonTrigger"/>.</summary>
 		public LogonTrigger() : base(TaskTriggerType.Logon) { }
@@ -702,11 +759,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan Delay
 		{
-			get => v2Trigger != null ? ((ILogonTrigger)v2Trigger).Delay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
+			get => DelayNullable.GetValueOrDefault();
+			set => DelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DelayNullable
+		{
+			get => v2Trigger != null ? ((ILogonTrigger)v2Trigger).Delay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(Delay));
 			set
 			{
 				if (v2Trigger != null)
-					((ILogonTrigger)v2Trigger).Delay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((ILogonTrigger)v2Trigger).Delay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -756,7 +823,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// through October.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class MonthlyDOWTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
+	public sealed class MonthlyDOWTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable, Models.IMonthlyDOWTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="MonthlyDOWTrigger"/>.</summary>
 		/// <param name="daysOfWeek">The days of the week.</param>
@@ -831,11 +898,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
-			get => v2Trigger != null ? ((IMonthlyDOWTrigger)v2Trigger).RandomDelay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
+			get => RandomDelayNullable.GetValueOrDefault();
+			set => RandomDelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RandomDelayNullable
+		{
+			get => v2Trigger != null ? ((IMonthlyDOWTrigger)v2Trigger).RandomDelay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(RandomDelay));
 			set
 			{
 				if (v2Trigger != null)
-					((IMonthlyDOWTrigger)v2Trigger).RandomDelay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IMonthlyDOWTrigger)v2Trigger).RandomDelay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -911,6 +988,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get => RandomDelay;
 			set => RandomDelay = value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? ITriggerDelay.DelayNullable
+		{
+			get => RandomDelayNullable;
+			set => RandomDelayNullable = value;
 		}
 
 		/// <summary>
@@ -1084,7 +1169,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
 	/// </summary>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class MonthlyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
+	public sealed class MonthlyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable, Models.IMonthlyTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="MonthlyTrigger"/>.</summary>
 		/// <param name="dayOfMonth">The day of the month.</param>
@@ -1155,11 +1240,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
-			get => v2Trigger != null ? ((IMonthlyTrigger)v2Trigger).RandomDelay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
+			get => RandomDelayNullable.GetValueOrDefault();
+			set => RandomDelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RandomDelayNullable
+		{
+			get => v2Trigger != null ? ((IMonthlyTrigger)v2Trigger).RandomDelay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(RandomDelay));
 			set
 			{
 				if (v2Trigger != null)
-					((IMonthlyTrigger)v2Trigger).RandomDelay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IMonthlyTrigger)v2Trigger).RandomDelay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -1191,6 +1286,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get => RandomDelay;
 			set => RandomDelay = value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? ITriggerDelay.DelayNullable
+		{
+			get => RandomDelayNullable;
+			set => RandomDelayNullable = value;
 		}
 
 		/// <summary>
@@ -1375,7 +1478,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlType(IncludeInSchema = false)]
-	public sealed class RegistrationTrigger : Trigger, ITriggerDelay
+	public sealed class RegistrationTrigger : Trigger, ITriggerDelay, Models.IRegistrationTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="RegistrationTrigger"/>.</summary>
 		public RegistrationTrigger() : base(TaskTriggerType.Registration) { }
@@ -1390,11 +1493,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan Delay
 		{
-			get => v2Trigger != null ? ((IRegistrationTrigger)v2Trigger).Delay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
+			get => DelayNullable.GetValueOrDefault();
+			set => DelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DelayNullable
+		{
+			get => v2Trigger != null ? ((IRegistrationTrigger)v2Trigger).Delay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(Delay));
 			set
 			{
 				if (v2Trigger != null)
-					((IRegistrationTrigger)v2Trigger).Delay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IRegistrationTrigger)v2Trigger).Delay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -1428,11 +1541,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </example>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[TypeConverter(typeof(RepetitionPatternConverter))]
-	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>, Models.IRepetitionPattern
 	{
 		private readonly Trigger pTrigger;
 		private readonly IRepetitionPattern v2Pattern;
-		private TimeSpan unboundInterval = TimeSpan.Zero, unboundDuration = TimeSpan.Zero;
+		private TimeSpan? unboundInterval = null, unboundDuration = null;
 		private bool unboundStopAtDurationEnd;
 
 		/// <summary>Initializes a new instance of the <see cref="RepetitionPattern"/> class.</summary>
@@ -1446,10 +1559,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="stopAtDurationEnd">
 		/// If set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.
 		/// </param>
-		public RepetitionPattern(TimeSpan interval, TimeSpan duration, bool stopAtDurationEnd = false)
+		public RepetitionPattern(TimeSpan? interval, TimeSpan? duration, bool stopAtDurationEnd = false)
 		{
-			Interval = interval;
-			Duration = duration;
+			IntervalNullable = interval;
+			DurationNullable = duration;
 			StopAtDurationEnd = stopAtDurationEnd;
 		}
 
@@ -1469,20 +1582,32 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Duration
 		{
-			get => v2Pattern != null
-				? v2Pattern.Duration.Value.GetValueOrDefault()
-				: (pTrigger != null ? TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration) : unboundDuration);
+			get => DurationNullable.GetValueOrDefault();
+			set => DurationNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets how long the pattern is repeated.</summary>
+		/// <value>
+		/// The duration that the pattern is repeated. The minimum time allowed is one minute. If <see langword="null"/> is specified, the
+		/// pattern is repeated indefinitely.
+		/// </value>
+		/// <remarks>If you specify a repetition duration for a task, you must also specify the repetition interval.</remarks>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? DurationNullable
+		{
+			get => v2Pattern != null ? v2Pattern.Duration.Value : (pTrigger != null ? TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration) : unboundDuration);
 			set
 			{
-				if (value.Ticks < 0 || value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+				if (value.HasValue && value.Value < TimeSpan.FromMinutes(1))
 					throw new ArgumentOutOfRangeException(nameof(Duration));
 				if (v2Pattern != null)
 				{
-					v2Pattern.Duration = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Pattern.Duration = value;
 				}
 				else if (pTrigger != null)
 				{
-					pTrigger.v1TriggerData.MinutesDuration = (uint)value.TotalMinutes;
+					pTrigger.v1TriggerData.MinutesDuration = (uint)value.GetValueOrDefault().TotalMinutes;
 					Bind();
 				}
 				else
@@ -1501,22 +1626,36 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Interval
 		{
-			get => v2Pattern != null
-				? v2Pattern.Interval.Value.GetValueOrDefault()
-				: (pTrigger != null ? TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval) : unboundInterval);
+			get => IntervalNullable.GetValueOrDefault();
+			set => IntervalNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets the amount of time between each restart of the task.</summary>
+		/// <value>
+		/// The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+		/// </value>
+		/// <remarks>If you specify a repetition duration for a task, you must also specify the repetition interval.</remarks>
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+		/// </exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? IntervalNullable
+		{
+			get => v2Pattern != null ? v2Pattern.Interval.Value : (pTrigger != null ? TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval) : unboundInterval);
 			set
 			{
-				if (value.Ticks < 0 || (v2Pattern != null || pTrigger == null) && value != TimeSpan.Zero && (value < TimeSpan.FromMinutes(1) || value > TimeSpan.FromDays(31)))
+				if ((v2Pattern != null || pTrigger == null) && value.HasValue && (value.Value < TimeSpan.FromMinutes(1) || value.Value > TimeSpan.FromDays(31)))
 					throw new ArgumentOutOfRangeException(nameof(Interval));
 				if (v2Pattern != null)
 				{
-					v2Pattern.Interval = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Pattern.Interval = value;
 				}
 				else if (pTrigger != null)
 				{
-					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
+					if (value.HasValue && value.Value < TimeSpan.FromMinutes(1))
 						throw new ArgumentOutOfRangeException(nameof(Interval));
-					pTrigger.v1TriggerData.MinutesInterval = (uint)value.TotalMinutes;
+					pTrigger.v1TriggerData.MinutesInterval = (uint)value.GetValueOrDefault().TotalMinutes;
 					Bind();
 				}
 				else
@@ -1606,10 +1745,8 @@ namespace Microsoft.Win32.TaskScheduler
 				pTrigger.SetV1TriggerData();
 			else if (pTrigger.v2Trigger != null)
 			{
-				if (pTrigger.v1TriggerData.MinutesInterval != 0)
-					v2Pattern.Interval = TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
-				if (pTrigger.v1TriggerData.MinutesDuration != 0)
-					v2Pattern.Duration = TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
+				v2Pattern.Interval = pTrigger.v1TriggerData.MinutesInterval < 1 ? (TimeSpan?)null : TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesInterval);
+				v2Pattern.Duration = pTrigger.v1TriggerData.MinutesDuration < 1 ? (TimeSpan?)null : TimeSpan.FromMinutes(pTrigger.v1TriggerData.MinutesDuration);
 				v2Pattern.StopAtDurationEnd = pTrigger.v1TriggerData.rgFlags.IsFlagSet(TaskTriggerFlags.TASK_TRIGGER_FLAG_KILL_AT_DURATION_END);
 			}
 		}
@@ -1651,7 +1788,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlType(IncludeInSchema = false)]
-	public sealed class SessionStateChangeTrigger : Trigger, ITriggerDelay, ITriggerUserId
+	public sealed class SessionStateChangeTrigger : Trigger, ITriggerDelay, ITriggerUserId, Models.ISessionStateChangeTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="SessionStateChangeTrigger"/>.</summary>
 		public SessionStateChangeTrigger() : base(TaskTriggerType.SessionStateChange) { }
@@ -1669,11 +1806,19 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(TimeSpan), "00:00:00")]
 		public TimeSpan Delay
 		{
-			get => v2Trigger != null ? ((ISessionStateChangeTrigger)v2Trigger).Delay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(Delay), TimeSpan.Zero);
+			get => DelayNullable.GetValueOrDefault();
+			set => DelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time between when the system is booted and when the task is started.</summary>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		public TimeSpan? DelayNullable
+		{
+			get => v2Trigger != null ? ((ISessionStateChangeTrigger)v2Trigger).Delay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(Delay));
 			set
 			{
 				if (v2Trigger != null)
-					((ISessionStateChangeTrigger)v2Trigger).Delay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((ISessionStateChangeTrigger)v2Trigger).Delay = value;
 				else
 					unboundValues[nameof(Delay)] = value;
 			}
@@ -1753,7 +1898,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// ]]>
 	/// </code>
 	/// </example>
-	public sealed class TimeTrigger : Trigger, ITriggerDelay, ICalendarTrigger
+	public sealed class TimeTrigger : Trigger, ITriggerDelay, ICalendarTrigger, Models.ITimeTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="TimeTrigger"/>.</summary>
 		public TimeTrigger() : base(TaskTriggerType.Time) { }
@@ -1776,11 +1921,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
-			get => v2Trigger != null ? ((ITimeTrigger)v2Trigger).RandomDelay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
+			get => RandomDelayNullable.GetValueOrDefault();
+			set => RandomDelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RandomDelayNullable
+		{
+			get => v2Trigger != null ? ((ITimeTrigger)v2Trigger).RandomDelay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(RandomDelay));
 			set
 			{
 				if (v2Trigger != null)
-					((ITimeTrigger)v2Trigger).RandomDelay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((ITimeTrigger)v2Trigger).RandomDelay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -1796,6 +1951,14 @@ namespace Microsoft.Win32.TaskScheduler
 			set => RandomDelay = value;
 		}
 
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? ITriggerDelay.DelayNullable
+		{
+			get => RandomDelayNullable;
+			set => RandomDelayNullable = value;
+		}
+
 		/// <summary>Gets the non-localized trigger string for V2 triggers.</summary>
 		/// <returns>String describing the trigger.</returns>
 		protected override string V2GetTriggerString() => string.Format(Properties.Resources.TriggerTime1, AdjustToLocal(StartBoundary));
@@ -1805,7 +1968,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using
 	/// the <see cref="TriggerCollection.Add{TTrigger}"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable, IComparable<Trigger>
+	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable, IComparable<Trigger>, Models.ITrigger
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 
@@ -1883,19 +2046,36 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue(typeof(DateTime), "9999-12-31T23:59:59.9999999")]
 		public DateTime EndBoundary
 		{
-			get
-			{
-				return v2Trigger != null
-					? v2Trigger.EndBoundary.Value.GetValueOrDefault(DateTime.MaxValue)
-					: GetUnboundValueOrDefault(nameof(EndBoundary), v1TriggerData.EndDate.GetValueOrDefault(DateTime.MaxValue));
-			}
+			get => EndBoundaryNullable.GetValueOrDefault(DateTime.MaxValue);
+			set => EndBoundaryNullable = value == DateTime.MaxValue ? (DateTime?)null : value;
+		}
+
+		/// <summary>Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.</summary>
+		/// <remarks>
+		/// <para>
+		/// Version 1 (1.1 on all systems prior to Vista) of the native library only allows for the Day, Month and Year values of the
+		/// <see cref="DateTime"/> structure.
+		/// </para>
+		/// <para>
+		/// Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values.
+		/// However, the user interface and <see cref="Trigger.ToString()"/> methods will always show the time translated to local time. The
+		/// library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor library,
+		/// the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user
+		/// selects the checkbox, the Kind will be changed to Utc and the time adjusted from the value displayed as the local time.
+		/// </para>
+		/// </remarks>
+		[DefaultValue(typeof(DateTime?), null)]
+		[XmlIgnore]
+		public DateTime? EndBoundaryNullable
+		{
+			get => v2Trigger != null ? v2Trigger.EndBoundary.Value : GetUnboundValueOrDefault(nameof(EndBoundary), v1TriggerData.EndDate);
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.EndBoundary = value == DateTime.MaxValue ? (DateTime?)null : value;
+					v2Trigger.EndBoundary = value;
 				else
 				{
-					v1TriggerData.EndDate = value == DateTime.MaxValue ? (DateTime?)null : value;
+					v1TriggerData.EndDate = value;
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -1913,11 +2093,24 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan ExecutionTimeLimit
 		{
-			get => v2Trigger != null ? v2Trigger.ExecutionTimeLimit.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(ExecutionTimeLimit), TimeSpan.Zero);
+			get => ExecutionTimeLimitNullable.GetValueOrDefault();
+			set => ExecutionTimeLimitNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>
+		/// Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task
+		/// Scheduler 1.0.
+		/// </summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? ExecutionTimeLimitNullable
+		{
+			get => v2Trigger != null ? v2Trigger.ExecutionTimeLimit.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(ExecutionTimeLimit));
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.ExecutionTimeLimit = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					v2Trigger.ExecutionTimeLimit = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -1979,23 +2172,52 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </remarks>
 		public DateTime StartBoundary
 		{
+			get => StartBoundaryNullable.GetValueOrDefault(DateTime.MinValue);
+			set => StartBoundaryNullable = value == DateTime.MinValue ? (DateTime?)null : value;
+		}
+
+		/// <summary>Gets or sets the date and time when the trigger is activated.</summary>
+		/// <remarks>
+		/// <para>
+		/// Version 1 (1.1 on all systems prior to Vista) of the native library only allows for <see cref="DateTime"/> values where the
+		/// <see cref="DateTime.Kind"/> is unspecified. If the DateTime value Kind is <see cref="DateTimeKind.Local"/> then it will be used as is.
+		/// If the DateTime value Kind is <see cref="DateTimeKind.Utc"/> then it will be converted to the local time and then used.
+		/// </para>
+		/// <para>
+		/// Version 2 (1.2 or higher) of the native library only allows for all <see cref="DateTime.Kind"/> values. However, the user
+		/// interface and <see cref="Trigger.ToString()"/> methods will always show the time translated to local time. The library makes
+		/// every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor library, the
+		/// "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the user
+		/// selects the checkbox, the Kind will be changed to Utc and the time adjusted from the value displayed as the local time.
+		/// </para>
+		/// <para>
+		/// Under Version 2, when converting the string used in the native library for this value (ITrigger.Startboundary) this library will
+		/// behave as follows:
+		/// <list type="bullet">
+		/// <item><description>YYYY-MM-DDTHH:MM:SS format uses DateTimeKind.Unspecified and the time specified.</description></item>
+		/// <item><description>YYYY-MM-DDTHH:MM:SSZ format uses DateTimeKind.Utc and the time specified as the GMT time.</description></item>
+		/// <item><description>YYYY-MM-DDTHH:MM:SS±HH:MM format uses DateTimeKind.Local and the time specified in that time zone.</description></item>
+		/// </list>
+		/// </para>
+		/// </remarks>
+		public DateTime? StartBoundaryNullable
+		{
 			get
 			{
-				if (v2Trigger == null) return GetUnboundValueOrDefault(nameof(StartBoundary), v1TriggerData.BeginDate);
-				var ret = v2Trigger.StartBoundary.Value;
-				if (!ret.HasValue)
-					return DateTime.MinValue;
-				if (v2Trigger.StartBoundary.StringValue.EndsWith("Z"))
-					ret = ret.Value.ToUniversalTime();
-				return ret.Value;
+				if (v2Trigger == null) return GetUnboundValueOrDefault<DateTime?>(nameof(StartBoundary), v1TriggerData.BeginDate);
+				var sb = v2Trigger.StartBoundary;
+				if (string.IsNullOrEmpty(sb.StringValue))
+					return null;
+				var ret = sb.Value.Value;
+				return sb.StringValue.EndsWith("Z") ? ret.ToUniversalTime() : ret;
 			}
 			set
 			{
 				if (v2Trigger != null)
-					v2Trigger.StartBoundary = value == DateTime.MinValue ? (DateTime?)null : value;
+					v2Trigger.StartBoundary = value;
 				else
 				{
-					v1TriggerData.BeginDate = value;
+					v1TriggerData.BeginDate = value.GetValueOrDefault(DateTime.MinValue);
 					if (v1Trigger != null)
 						SetV1TriggerData();
 					else
@@ -2008,6 +2230,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>The <see cref="TaskTriggerType"/> of the trigger.</value>
 		[XmlIgnore]
 		public TaskTriggerType TriggerType => (TaskTriggerType)ttype;
+
+		/// <summary>
+		/// Gets a <see cref="Models.IRepetitionPattern"/> instance that indicates how often the task is run and how long the repetition
+		/// pattern is repeated after the task is started.
+		/// </summary>
+		Models.IRepetitionPattern Models.ITrigger.Repetition => this.Repetition;
 
 		/// <summary>Creates the specified trigger.</summary>
 		/// <param name="triggerType">Type of the trigger to instantiate.</param>
@@ -2085,16 +2313,16 @@ namespace Microsoft.Win32.TaskScheduler
 			if (sourceTrigger == null)
 				return;
 			Enabled = sourceTrigger.Enabled;
-			EndBoundary = sourceTrigger.EndBoundary;
-			try { ExecutionTimeLimit = sourceTrigger.ExecutionTimeLimit; }
+			EndBoundaryNullable = sourceTrigger.EndBoundaryNullable;
+			try { ExecutionTimeLimitNullable = sourceTrigger.ExecutionTimeLimitNullable; }
 			catch { /* ignored */ }
 			Id = sourceTrigger.Id;
-			Repetition.Duration = sourceTrigger.Repetition.Duration;
-			Repetition.Interval = sourceTrigger.Repetition.Interval;
+			Repetition.DurationNullable = sourceTrigger.Repetition.DurationNullable;
+			Repetition.IntervalNullable = sourceTrigger.Repetition.IntervalNullable;
 			Repetition.StopAtDurationEnd = sourceTrigger.Repetition.StopAtDurationEnd;
-			StartBoundary = sourceTrigger.StartBoundary;
+			StartBoundaryNullable = sourceTrigger.StartBoundaryNullable;
 			if (sourceTrigger is ITriggerDelay delay && this is ITriggerDelay)
-				try { ((ITriggerDelay)this).Delay = delay.Delay; }
+				try { ((ITriggerDelay)this).DelayNullable = delay.DelayNullable; }
 				catch { /* ignored */ }
 			if (sourceTrigger is ITriggerUserId id && this is ITriggerUserId)
 				try { ((ITriggerUserId)this).UserId = id.UserId; }
@@ -2122,11 +2350,11 @@ namespace Microsoft.Win32.TaskScheduler
 		public virtual bool Equals(Trigger other)
 		{
 			if (other == null) return false;
-			var ret = TriggerType == other.TriggerType && Enabled == other.Enabled && EndBoundary == other.EndBoundary &&
-				ExecutionTimeLimit == other.ExecutionTimeLimit && Id == other.Id && Repetition.Equals(other.Repetition) &&
-				StartBoundary == other.StartBoundary;
+			var ret = TriggerType == other.TriggerType && Enabled == other.Enabled && EndBoundaryNullable == other.EndBoundaryNullable &&
+				ExecutionTimeLimitNullable == other.ExecutionTimeLimitNullable && Id == other.Id && Repetition.Equals(other.Repetition) &&
+				StartBoundaryNullable == other.StartBoundaryNullable;
 			if (other is ITriggerDelay delay && this is ITriggerDelay)
-				try { ret = ret && ((ITriggerDelay)this).Delay == delay.Delay; }
+				try { ret = ret && ((ITriggerDelay)this).DelayNullable == delay.DelayNullable; }
 				catch { /* ignored */ }
 			if (other is ITriggerUserId id && this is ITriggerUserId)
 				try { ret = ret && ((ITriggerUserId)this).UserId == id.UserId; }
@@ -2140,12 +2368,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			A = TriggerType,
 			B = Enabled,
-			C = EndBoundary,
-			D = ExecutionTimeLimit,
+			C = EndBoundaryNullable,
+			D = ExecutionTimeLimitNullable,
 			E = Id,
 			F = Repetition,
-			G = StartBoundary,
-			H = (this as ITriggerDelay)?.Delay ?? TimeSpan.Zero,
+			G = StartBoundaryNullable,
+			H = (this as ITriggerDelay)?.DelayNullable,
 			I = (this as ITriggerUserId)?.UserId
 		}.GetHashCode();
 
@@ -2369,12 +2597,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (o is TimeSpan ts)
 				o = Task.TimeSpanToString(ts);
 			if (o is DateTime dt)
-			{
-				if (key == "EndBoundary" && dt == DateTime.MaxValue || key == "StartBoundary" && dt == DateTime.MinValue)
-					o = null;
-				else
-					o = dt.ToString(V2BoundaryDateFormat, DefaultDateCulture);
-			}
+				o = dt.ToString(V2BoundaryDateFormat, DefaultDateCulture);
 		}
 
 		/// <summary>Gets the unbound value or a default.</summary>
@@ -2428,7 +2651,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </code>
 	/// </example>
 	[XmlRoot("CalendarTrigger", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class WeeklyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
+	public sealed class WeeklyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable, Models.IWeeklyTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="WeeklyTrigger"/>.</summary>
 		/// <param name="daysOfWeek">The days of the week.</param>
@@ -2479,11 +2702,21 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlIgnore]
 		public TimeSpan RandomDelay
 		{
-			get => v2Trigger != null ? ((IWeeklyTrigger)v2Trigger).RandomDelay.Value.GetValueOrDefault() : GetUnboundValueOrDefault(nameof(RandomDelay), TimeSpan.Zero);
+			get => RandomDelayNullable.GetValueOrDefault();
+			set => RandomDelayNullable = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+		}
+
+		/// <summary>Gets or sets a delay time that is randomly added to the start time of the trigger.</summary>
+		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		[DefaultValue(typeof(TimeSpan?), null)]
+		[XmlIgnore]
+		public TimeSpan? RandomDelayNullable
+		{
+			get => v2Trigger != null ? ((IWeeklyTrigger)v2Trigger).RandomDelay.Value : GetUnboundValueOrDefault<TimeSpan?>(nameof(RandomDelay));
 			set
 			{
 				if (v2Trigger != null)
-					((IWeeklyTrigger)v2Trigger).RandomDelay = value == TimeSpan.Zero ? (TimeSpan?)null : value;
+					((IWeeklyTrigger)v2Trigger).RandomDelay = value;
 				else if (v1Trigger != null)
 					throw new NotV1SupportedException();
 				else
@@ -2517,6 +2750,14 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get => RandomDelay;
 			set => RandomDelay = value;
+		}
+
+		/// <summary>Gets or sets a value that indicates the amount of time before the task is started.</summary>
+		/// <value>The delay duration.</value>
+		TimeSpan? ITriggerDelay.DelayNullable
+		{
+			get => RandomDelayNullable;
+			set => RandomDelayNullable = value;
 		}
 
 		/// <summary>
@@ -2684,7 +2925,7 @@ namespace Microsoft.Win32.TaskScheduler
 						break;
 
 					case "RandomDelay":
-						((ITriggerDelay)t).Delay = Task.StringToTimeSpan(reader.ReadElementContentAsString());
+						((ITriggerDelay)t).DelayNullable = Task.StringToTimeSpan(reader.ReadElementContentAsString());
 						break;
 
 					case "StartBoundary":
