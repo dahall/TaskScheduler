@@ -1241,10 +1241,22 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Runs the registered task immediately.</summary>
 		/// <param name="parameters">
-		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
 		/// <para>
-		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
-		/// <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+		/// call this method without any values (e.g. <code>Run()</code>).
+		/// </para>
+		/// <para>
+		/// The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+		/// then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+		/// the action properties.
+		/// </para>
+		/// <para>
+		/// If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+		/// "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+		/// </para>
+		/// <para>
+		/// For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+		/// <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
 		/// </para>
 		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
@@ -1286,10 +1298,22 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </param>
 		/// <param name="user">The user for which the task runs.</param>
 		/// <param name="parameters">
-		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
 		/// <para>
-		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
-		/// <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+		/// call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
+		/// </para>
+		/// <para>
+		/// The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+		/// then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+		/// the action properties.
+		/// </para>
+		/// <para>
+		/// If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+		/// "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+		/// </para>
+		/// <para>
+		/// For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+		/// <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
 		/// </para>
 		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
