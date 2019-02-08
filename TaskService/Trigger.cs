@@ -1027,11 +1027,22 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class MonthlyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable
 	{
 		/// <summary>Creates an unbound instance of a <see cref="MonthlyTrigger"/>.</summary>
-		/// <param name="dayOfMonth">The day of the month.</param>
+		/// <param name="dayOfMonth">
+		/// The day of the month. This must be a value between 1 and 32. If this value is set to 32, then the
+		/// <see cref="RunOnLastDayOfMonth"/> value will be set and no days will be added regardless of the month.
+		/// </param>
 		/// <param name="monthsOfYear">The months of the year.</param>
 		public MonthlyTrigger(int dayOfMonth = 1, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths) : base(TaskTriggerType.Monthly)
 		{
-			DaysOfMonth = new[] { dayOfMonth };
+			if (dayOfMonth < 1 || dayOfMonth > 32) throw new ArgumentOutOfRangeException(nameof(dayOfMonth));
+			if (!monthsOfYear.IsValidFlagValue()) throw new ArgumentOutOfRangeException(nameof(monthsOfYear));
+			if (dayOfMonth == 32)
+			{
+				DaysOfMonth = new int[0];
+				RunOnLastDayOfMonth = true;
+			}
+			else
+				DaysOfMonth = new[] { dayOfMonth };
 			MonthsOfYear = monthsOfYear;
 		}
 
@@ -1178,8 +1189,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="indices">An array with an element for each bit of the mask which is ON.</param>
 		/// <returns>An integer to be interpreted as a mask.</returns>
-		private static int IndicesToMask([NotNull] int[] indices)
+		private static int IndicesToMask(int[] indices)
 		{
+			if (indices is null || indices.Length == 0) return 0;
 			var mask = 0;
 			foreach (var index in indices)
 			{
