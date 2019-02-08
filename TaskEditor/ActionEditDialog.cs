@@ -85,6 +85,9 @@ namespace Microsoft.Win32.TaskScheduler
 			get => availableActions;
 			set
 			{
+				if (value == 0) throw new ArgumentException("Value cannot be 0", nameof(AvailableActions));
+				if (value == availableActions) return;
+				if (!value.IsValidFlagValue()) throw new ArgumentOutOfRangeException(nameof(AvailableActions));
 				availableActions = value;
 				ResetCombo();
 			}

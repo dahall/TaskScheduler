@@ -194,6 +194,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (value != availableTabs)
 				{
+					if (!value.IsValidFlagValue()) throw new ArgumentOutOfRangeException(nameof(AvailableTabs));
 					var rembits = new BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & availableTabs)));
 					var addbits = new BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & value)));
 					for (var i = 0; i < tabPages.Length; i++)

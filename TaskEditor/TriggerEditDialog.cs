@@ -110,6 +110,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (value == 0) throw new ArgumentException("Value cannot be 0", nameof(AvailableTriggers));
 				if (availableTriggers == value) return;
+				if (!value.IsValidFlagValue()) throw new ArgumentOutOfRangeException(nameof(AvailableTriggers));
 				availableTriggers = value;
 				calendarTriggerUI1.AvailableTriggers = AvailableTriggers;
 				ResetCombo();

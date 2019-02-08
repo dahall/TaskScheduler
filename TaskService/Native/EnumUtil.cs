@@ -49,6 +49,18 @@ namespace System
 			return (Convert.ToInt64(flags) & flagValue) == flagValue;
 		}
 
+		public static bool IsValidFlagValue<T>(this T flags) where T : struct, IConvertible
+		{
+			CheckIsEnum<T>(true);
+			var found = 0L;
+			foreach (T flag in Enum.GetValues(typeof(T)))
+			{
+				if (flags.IsFlagSet(flag))
+					found |= Convert.ToInt64(flag);
+			}
+			return found == Convert.ToInt64(flags);
+		}
+
 		public static void SetFlags<T>(ref T flags, T flag, bool set = true) where T : struct, IConvertible
 		{
 			CheckIsEnum<T>(true);
