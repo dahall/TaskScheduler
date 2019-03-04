@@ -112,25 +112,44 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="weeklySunCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 19</value>
+  </data>
   <data name="weeklySunCheck.Text" xml:space="preserve">
     <value>Воскресенье</value>
+  </data>
+  <data name="weeklyMonCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
   </data>
   <data name="weeklyMonCheck.Text" xml:space="preserve">
     <value>Понедельник</value>
   </data>
+  <data name="weeklyTueCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 19</value>
+  </data>
   <data name="weeklyTueCheck.Text" xml:space="preserve">
     <value>Вторник</value>
+  </data>
+  <data name="weeklyWedCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 19</value>
   </data>
   <data name="weeklyWedCheck.Text" xml:space="preserve">
     <value>Среда</value>
   </data>
+  <data name="weeklyThuCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 19</value>
+  </data>
   <data name="weeklyThuCheck.Text" xml:space="preserve">
     <value>Четверг</value>
+  </data>
+  <data name="weeklyFriCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 19</value>
   </data>
   <data name="weeklyFriCheck.Text" xml:space="preserve">
     <value>Пятница</value>
@@ -138,8 +157,20 @@
   <data name="weeklySatCheck.Text" xml:space="preserve">
     <value>Суббота</value>
   </data>
+  <data name="weeklyRecurNumUpDn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 0</value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 5</value>
+  </data>
+  <data name="weeklyOnWeeksLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
   <data name="weeklyOnWeeksLabel.Text" xml:space="preserve">
-    <value>неделю по</value>
+    <value>неделю в:</value>
+  </data>
+  <data name="weeklyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 15</value>
   </data>
   <data name="weeklyRecurLabel.Text" xml:space="preserve">
     <value>Повторять каждую</value>

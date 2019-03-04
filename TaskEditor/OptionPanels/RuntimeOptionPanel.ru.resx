@@ -112,43 +112,282 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="taskMultInstCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskMultInstCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskMultInstCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="taskMultInstCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 307</value>
+  </data>
+  <data name="taskPriorityCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskPriorityCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskPriorityCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskPriorityCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 355</value>
+  </data>
+  <data name="taskRunningRuleLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRunningRuleLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRunningRuleLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRunningRuleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 286</value>
+  </data>
   <data name="taskRunningRuleLabel.Text" xml:space="preserve">
     <value>Если задача уже выполняется, то применять следующее правило:</value>
+  </data>
+  <data name="label8.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label8.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label8.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 334</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Приоритет</value>
   </data>
+  <data name="taskDeleteAfterCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskDeleteAfterCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskDeleteAfterCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskDeleteAfterCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 246</value>
+  </data>
   <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
     <value>Если повтор задачи не запланирован, удалять через: </value>
+  </data>
+  <data name="taskRestartCountLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartCountLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRestartCountLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartCountLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 141</value>
   </data>
   <data name="taskRestartCountLabel.Text" xml:space="preserve">
     <value>Количество попыток перезапуска:</value>
   </data>
+  <data name="taskAllowHardTerminateCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskAllowHardTerminateCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskAllowHardTerminateCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 206</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 34</value>
+  </data>
   <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Принудительная остановка задачи, если не прекращается по запросу</value>
+    <value>Принудительная остановка задачи, если она не прекращается по запросу</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskExecutionTimeLimitCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 166</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 34</value>
   </data>
   <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Остагавливать задачу, выполняемую дольше: </value>
+    <value>Останавливать задачу, выполняемую дольше: </value>
+  </data>
+  <data name="taskDeleteAfterCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskDeleteAfterCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskDeleteAfterCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 252</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="optionPanelHeaderLabel1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="optionPanelHeaderLabel1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="optionPanelHeaderLabel1.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="taskRestartIntervalCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartIntervalCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRestartIntervalCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartIntervalCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 97</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 34</value>
+  </data>
   <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
     <value>При сбое выполнения перезапускать через:</value>
   </data>
+  <data name="taskExecutionTimeLimitCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskExecutionTimeLimitCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskExecutionTimeLimitCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 172</value>
+  </data>
+  <data name="taskRestartIntervalCombo.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartIntervalCombo.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRestartIntervalCombo.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartIntervalCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 102</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskAllowDemandStartCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskAllowDemandStartCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>Разрешить выполнение задачи по требованию</value>
+    <value>Выполнять задачу по требованию</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskStartWhenAvailableCheck.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskStartWhenAvailableCheck.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 34</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
     <value>Немедленно запускать задачу, если пропущен плановый запуск</value>
   </data>
+  <data name="taskRestartCountText.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartCountText.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRestartCountText.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartAttemptTimesLabel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartAttemptTimesLabel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 15</value>
+  </data>
   <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
     <value>раз</value>
+  </data>
+  <data name="flowLayoutPanel1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="flowLayoutPanel1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="flowLayoutPanel1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 134</value>
+  </data>
+  <data name="tableLayoutPanel1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="tableLayoutPanel1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="tableLayoutPanel1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 379</value>
+  </data>
+  <data name="$this.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="$this.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="$this.Title" xml:space="preserve">
     <value>Параметры выполнения</value>

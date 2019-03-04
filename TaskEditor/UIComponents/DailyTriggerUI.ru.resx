@@ -112,15 +112,28 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="dailyDaysLabel.Text" xml:space="preserve">
-    <value>дн.</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dailyRecurLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 15</value>
   </data>
   <data name="dailyRecurLabel.Text" xml:space="preserve">
-    <value>Повторять каждые</value>
+    <value>Повторять каждые:</value>
+  </data>
+  <data name="dailyRecurNumUpDn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 0</value>
+  </data>
+  <data name="dailyDaysLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 4</value>
+  </data>
+  <data name="dailyDaysLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 15</value>
+  </data>
+  <data name="dailyDaysLabel.Text" xml:space="preserve">
+    <value>дн.</value>
   </data>
 </root>
