@@ -112,34 +112,526 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="triggerTypeLabel.Text" xml:space="preserve">
-    <value>Начало задачи:</value>
+  <data name="okBtn.Error" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="okBtn.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="okBtn.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="okBtn.Text" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="cancelBtn.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cancelBtn.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="cancelBtn.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cancelBtn.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="expireDatePicker.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="expireDatePicker.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="expireDatePicker.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="expireDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="expireCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="expireCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="expireCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="expireCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 19</value>
+  </data>
+  <data name="expireCheckBox.Text" xml:space="preserve">
+    <value>Срок действия:</value>
+  </data>
+  <data name="activateDatePicker.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="activateDatePicker.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="activateDatePicker.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="activateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 3</value>
+  </data>
+  <data name="activateCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="activateCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="activateCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="activateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 19</value>
+  </data>
+  <data name="activateCheckBox.Text" xml:space="preserve">
+    <value>Активировать:</value>
+  </data>
+  <data name="tableLayoutPanel3.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tableLayoutPanel3.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 106</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="stopIfRunsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="stopIfRunsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 19</value>
+  </data>
+  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
+    <value>Остановить задачу через:</value>
+  </data>
+  <data name="stopIfRunsSpan.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="stopIfRunsSpan.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="stopIfRunsSpan.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="stopIfRunsSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 3</value>
+  </data>
+  <data name="flowLayoutPanel3.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="flowLayoutPanel3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="flowLayoutPanel3.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="flowLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 79</value>
+  </data>
+  <data name="flowLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 27</value>
+  </data>
+  <data name="repeatCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="repeatCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="repeatCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="repeatCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="repeatCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 19</value>
+  </data>
+  <data name="repeatCheckBox.Text" xml:space="preserve">
+    <value>Повторять задачу каждые:</value>
+  </data>
+  <data name="repeatSpan.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="repeatSpan.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="repeatSpan.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="repeatSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>177, 3</value>
+  </data>
+  <data name="durationLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="durationLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="durationLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="durationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="durationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 15</value>
+  </data>
+  <data name="durationLabel.Text" xml:space="preserve">
+    <value>в течение: </value>
+  </data>
+  <data name="durationSpan.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="durationSpan.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="durationSpan.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="durationSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>444, 3</value>
+  </data>
+  <data name="flowLayoutPanel2.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="flowLayoutPanel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="flowLayoutPanel2.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 27</value>
+  </data>
+  <data name="delayCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="delayCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="delayCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="delayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="delayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 19</value>
+  </data>
+  <data name="delayCheckBox.Text" xml:space="preserve">
+    <value>Отложить задачу на (произвольная задержка):</value>
+  </data>
+  <data name="delaySpan.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="delaySpan.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="delaySpan.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="delaySpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 3</value>
+  </data>
+  <data name="flowLayoutPanel1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="flowLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="flowLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 27</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="stopAfterDurationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 58</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 19</value>
+  </data>
+  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
+    <value>Останавливать все задачи по истечению срока повторов</value>
+  </data>
+  <data name="enabledCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="enabledCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="enabledCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="enabledCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 168</value>
+  </data>
+  <data name="enabledCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 19</value>
+  </data>
+  <data name="enabledCheckBox.Text" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="tableLayoutPanel2.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tableLayoutPanel2.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 189</value>
+  </data>
+  <data name="advSettingsGroup.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="advSettingsGroup.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="advSettingsGroup.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="advSettingsGroup.Text" xml:space="preserve">
+    <value>Дополнительные параметры</value>
+  </data>
+  <data name="calendarTriggerUI1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="calendarTriggerUI1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="calendarTriggerUI1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="scheduleTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="scheduleTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="scheduleTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox6.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox6.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonLocalRadio.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonLocalRadio.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonLocalRadio.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonLocalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 19</value>
   </data>
   <data name="logonLocalRadio.Text" xml:space="preserve">
     <value>Подключение с локального компьютера</value>
   </data>
+  <data name="logonRemoteRadio.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonRemoteRadio.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonRemoteRadio.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonRemoteRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 19</value>
+  </data>
   <data name="logonRemoteRadio.Text" xml:space="preserve">
     <value>Подключение с удаленного компьютера</value>
+  </data>
+  <data name="logonRemotePanel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonRemotePanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonRemotePanel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonChgUserBtn.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonChgUserBtn.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonChgUserBtn.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="logonChgUserBtn.Text" xml:space="preserve">
     <value>Изменить...</value>
   </data>
+  <data name="logonUserLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonUserLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonUserLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonUserLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 15</value>
+  </data>
+  <data name="logonUserLabel.Text" xml:space="preserve">
+    <value>&lt;Текущий пользователь&gt;</value>
+  </data>
+  <data name="logonSpecUserRadio.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonSpecUserRadio.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonSpecUserRadio.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonSpecUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 19</value>
+  </data>
   <data name="logonSpecUserRadio.Text" xml:space="preserve">
     <value>Указанный пользователь или группа:</value>
+  </data>
+  <data name="logonAnyUserRadio.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonAnyUserRadio.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonAnyUserRadio.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="logonAnyUserRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 19</value>
   </data>
   <data name="logonAnyUserRadio.Text" xml:space="preserve">
     <value>Любой пользователь</value>
   </data>
+  <data name="logonTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="logonTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="logonTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="startupIntroLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="startupIntroLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="startupIntroLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="startupIntroLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 15</value>
+  </data>
   <data name="startupIntroLabel.Text" xml:space="preserve">
     <value>Дополнительные параметры не требуется.</value>
   </data>
+  <data name="startupTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="startupTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="startupTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label8.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label8.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label8.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 15</value>
+  </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Для правки параметров состояния простоя, используйте вкладку "Условия" в окне свойств задачи.</value>
+  </data>
+  <data name="idleTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="idleTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="idleTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="eventTriggerUI1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="eventTriggerUI1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="eventTriggerUI1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="eventTriggerUI1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>629, 128</value>
+  </data>
+  <data name="onEventTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onEventTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="onEventTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="propNameCol.Text" xml:space="preserve">
     <value>Свойство</value>
@@ -147,52 +639,133 @@
   <data name="propValCol.Text" xml:space="preserve">
     <value>Значение</value>
   </data>
+  <data name="customPropsListView.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="customPropsListView.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="customPropsListView.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="customNameText.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="customNameText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="customNameText.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 15</value>
+  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Название:</value>
   </data>
+  <data name="customTab.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="customTab.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="customTab.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="settingsTabControl.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="settingsTabControl.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="settingsTabControl.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="groupBox1.Text" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Параметры</value>
   </data>
-  <data name="durationLabel.Text" xml:space="preserve">
-    <value>в течение: </value>
+  <data name="triggerIdText.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="stopAfterDurationCheckBox.Text" xml:space="preserve">
-    <value>Останавливать все задачи по истечению срока повторов</value>
+  <data name="triggerIdText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
-  <data name="enabledCheckBox.Text" xml:space="preserve">
-    <value>Включено</value>
+  <data name="triggerIdText.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="expireCheckBox.Text" xml:space="preserve">
-    <value>Срок действия:</value>
+  <data name="triggerTypeCombo.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="activateCheckBox.Text" xml:space="preserve">
-    <value>Активировать:</value>
+  <data name="triggerTypeCombo.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
-  <data name="stopIfRunsCheckBox.Text" xml:space="preserve">
-    <value>Остановить через:</value>
+  <data name="triggerTypeCombo.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="repeatCheckBox.Text" xml:space="preserve">
-    <value>Повторять задачу каждые:</value>
+  <data name="triggerTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 0</value>
   </data>
-  <data name="delayCheckBox.Text" xml:space="preserve">
-    <value>Отложить на:</value>
+  <data name="label2.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="advSettingsGroup.Text" xml:space="preserve">
-    <value>Дополнительные параметры</value>
+  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
-  <data name="cancelBtn.Text" xml:space="preserve">
-    <value>Отмена</value>
+  <data name="label2.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="okBtn.Text" xml:space="preserve">
-    <value>ОК</value>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>512, 4</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 15</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>ИД:</value>
   </data>
+  <data name="tableLayoutPanel1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Создание триггера</value>
   </data>
-  <data name="logonUserLabel.Text" xml:space="preserve">
-    <value>&lt;Текущий пользователь&gt;</value>
+  <data name="triggerTypeLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="triggerTypeLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="triggerTypeLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="triggerTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 15</value>
+  </data>
+  <data name="triggerTypeLabel.Text" xml:space="preserve">
+    <value>Начать задачу:</value>
   </data>
 </root>
