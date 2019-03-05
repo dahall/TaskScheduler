@@ -872,7 +872,10 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.#ctor(System.Int32,Microsoft.Win32.TaskScheduler.MonthsOfTheYear)">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger" />.</summary>
-      <param name="dayOfMonth">The day of the month.</param>
+      <param name="dayOfMonth">
+            The day of the month. This must be a value between 1 and 32. If this value is set to 32, then the
+            <see cref="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.RunOnLastDayOfMonth" /> value will be set and no days will be added regardless of the month.
+            </param>
       <param name="monthsOfYear">The months of the year.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
@@ -1961,10 +1964,22 @@
     <member name="M:Microsoft.Win32.TaskScheduler.Task.Run(System.String[])">
       <summary>Runs the registered task immediately.</summary>
       <param name="parameters">
-        <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
         <para>
-            These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
-            <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+            The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+            call this method without any values (e.g. <code>Run()</code>).
+            </para>
+        <para>
+            The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+            then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+            the action properties.
+            </para>
+        <para>
+            If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+            "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+            </para>
+        <para>
+            For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+            <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
             </para>
       </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.RunningTask" /> instance that defines the new instance of the task.</returns>
@@ -1992,10 +2007,22 @@
       </param>
       <param name="user">The user for which the task runs.</param>
       <param name="parameters">
-        <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
         <para>
-            These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information see
-            <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+            The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+            call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
+            </para>
+        <para>
+            The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+            then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+            the action properties.
+            </para>
+        <para>
+            If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+            "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+            </para>
+        <para>
+            For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+            <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
             </para>
       </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.RunningTask" /> instance that defines the new instance of the task.</returns>
