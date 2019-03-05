@@ -8,7 +8,7 @@
     <description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
     <language>en-US</language>
     <copyright>Copyright © 2002-2019</copyright>
-    <license type="MIT" />
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/dahall/taskscheduler</projectUrl>
     <iconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</iconUrl>
     <tags>task interop windows taskscheduler scheduler UI editor</tags>
