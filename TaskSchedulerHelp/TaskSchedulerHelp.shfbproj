@@ -22,7 +22,7 @@
 &amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttps://github.com/dahall/TaskScheduler&amp;quot%3b&amp;gt%3bhttps://github.com/dahall/TaskScheduler&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bh2&amp;gt%3bClass Overview&amp;lt%3b/h2&amp;gt%3b
-&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskService.htm&amp;quot%3b&amp;gt%3bTaskService&amp;lt%3b/a&amp;gt%3b class represents the machine specific instance of the system task scheduler. It provides access to information about the service, access folders %282.0 only%29, and can quickly add or retrieve a task. If you only need to use the library for very intermitant periods, wrap the TaskService instantiation in a using statement to easily disconnect at the end of your use. However, if you plan on using the connection to the Task Scheduler repeatedly, use an assembly level field to store the TaskService instance as connecting and disconnecting is an expensive operation.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskService.htm&amp;quot%3b&amp;gt%3bTaskService&amp;lt%3b/a&amp;gt%3b class represents the machine specific instance of the system task scheduler. It provides access to information about the service, access folders %282.0 only%29, and can quickly add or retrieve a task. If you only need to use the library for very intermittent periods, wrap the TaskService instantiation in a using statement to easily disconnect at the end of your use. However, if you plan on using the connection to the Task Scheduler repeatedly, use an assembly level field to store the TaskService instance as connecting and disconnecting is an expensive operation.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bTasks are accessed and can be enumerated through a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskFolder.htm&amp;quot%3b&amp;gt%3bTaskFolder&amp;lt%3b/a&amp;gt%3b. For systems supporting only the 1.0 library, there is only the root folder. The 2.0 library supports a hierarchal structure similar to a file system. The Tasks property exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskCollection.htm&amp;quot%3b&amp;gt%3bTaskCollection&amp;lt%3b/a&amp;gt%3b instance which can enumerate tasks and provides an indexer which allows access to individual tasks by name. The TaskCollection class also has methods that allow for the creation/registration and deletion of tasks and subfolders by name.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bA task is represented by a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Task.htm&amp;quot%3b&amp;gt%3bTask&amp;lt%3b/a&amp;gt%3b instance. The Task class provides information about tasks state and history and exposes the task&amp;#39%3bs &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_Task_Definition.htm&amp;quot%3b&amp;gt%3bDefinition&amp;lt%3b/a&amp;gt%3b property.&amp;lt%3b/p&amp;gt%3b
 &amp;lt%3bp&amp;gt%3bA &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b exposes all of the properties of a task which allow you to define how and what will run when the task is triggered. A task must have at least one action and one trigger defined.&amp;lt%3b/p&amp;gt%3b
@@ -118,7 +118,7 @@
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceTitle>Overview</RootNamespaceTitle>
+    <RootNamespaceTitle>Task Scheduler Managed Class Library Overview</RootNamespaceTitle>
     <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
     <ProductTitle>
     </ProductTitle>
@@ -173,6 +173,7 @@
       <Argument Key="baseSourceCodeUrl" Value="https://github.com/dahall/TaskScheduler/blob/master/" />
       <Argument Key="requestExampleUrl" Value="https://github.com/dahall/TaskScheduler/issues/new" />
     </TransformComponentArguments>
+    <VendorName>dahall</VendorName>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
