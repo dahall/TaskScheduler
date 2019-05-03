@@ -253,7 +253,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var excl = new List<TaskTriggerDisplayType>();
 				// Get unavailable settings and convert to unavailable views
-				foreach (var t in (AvailableTriggers.AllTriggers & ~AvailableTriggers).GetFlags().Select(AvToType))
+				foreach (var t in (AvailableTriggers.AllTriggers & ~AvailableTriggers).GetFlags().Where(a => a != AvailableTriggers.AllTriggers).Select(AvToType))
 				{
 					var d = DisplayForType(t);
 					// Add all types of sessions

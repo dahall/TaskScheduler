@@ -137,7 +137,7 @@ namespace Microsoft.Win32.TaskScheduler
 			get
 			{
 				var x = AvailableActions.AllActions & ~AvailableActions;
-				return x == 0 ? null : x.GetFlags().Select(AvToType).ToList();
+				return x == 0 ? null : x.GetFlags().Where(a => a != AvailableActions.AllActions).Select(AvToType).ToList();
 			}
 		}
 
