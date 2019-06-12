@@ -21,5 +21,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("GitHub Community")]
 [assembly: AssemblyProduct("TaskService")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
-[assembly: AssemblyVersion("2.8.11")]
-[assembly: AssemblyFileVersion("2.8.11")]
+[assembly: AssemblyVersion("2.8.12")]
+[assembly: AssemblyFileVersion("2.8.12")]
