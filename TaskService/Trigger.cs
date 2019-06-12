@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Serialization;
@@ -1825,7 +1826,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
+				{
+					if (value <= StartBoundary)
+						throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 					v2Trigger.EndBoundary = value == DateTime.MaxValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
+				}
 				else
 				{
 					v1TriggerData.EndDate = value == DateTime.MaxValue ? (DateTime?)null : value;
@@ -1923,7 +1928,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
+				{
+					if (value > EndBoundary)
+						throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 					v2Trigger.StartBoundary = value == DateTime.MinValue ? null : value.ToString(V2BoundaryDateFormat, DefaultDateCulture);
+				}
 				else
 				{
 					v1TriggerData.BeginDate = value;
@@ -2261,6 +2270,8 @@ namespace Microsoft.Win32.TaskScheduler
 			var iTriggers = iTaskDef.Triggers;
 			v2Trigger = iTriggers.Create(ttype);
 			Marshal.ReleaseComObject(iTriggers);
+			if ((unboundValues.TryGetValue("StartBoundary", out var dt) ? (DateTime)dt : StartBoundary) > (unboundValues.TryGetValue("EndBoundary", out dt) ? (DateTime)dt : EndBoundary))
+				throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 			foreach (var key in unboundValues.Keys)
 			{
 				try
@@ -2284,6 +2295,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
 				throw new ArgumentException("Trigger.Repetition.Interval must be less than Trigger.Repetition.Duration under Task Scheduler 1.0.");
+			if (v1TriggerData.EndDate <= v1TriggerData.BeginDate)
+				throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 			if (v1TriggerData.BeginDate == DateTime.MinValue)
 				v1TriggerData.BeginDate = DateTime.Now;
 			v1Trigger?.SetTrigger(ref v1TriggerData);

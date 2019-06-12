@@ -333,6 +333,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					trigger.StartBoundary = DateTime.MinValue;
 				initialStartBoundary = trigger.StartBoundary;
+				validateStartEndBoundary();
 			}
 		}
 
@@ -340,6 +341,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 				trigger.StartBoundary = activateDatePicker.Value == DateTimePicker.MinimumDateTime ? DateTime.MinValue : activateDatePicker.Value;
+			validateStartEndBoundary();
+		}
+
+		private void calendarTriggerUI1_StartBoundaryChanged(object sender, EventArgs e)
+		{
+			validateStartEndBoundary();
 		}
 
 		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e)
@@ -409,8 +416,20 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment && expireCheckBox.Checked)
+			if (!onAssignment && validateStartEndBoundary())
 				trigger.EndBoundary = expireDatePicker.Value == DateTimePicker.MinimumDateTime || expireDatePicker.Value == DateTimePicker.MaximumDateTime ? DateTime.MaxValue : expireDatePicker.Value;
+		}
+
+		private bool validateStartEndBoundary()
+		{
+			var bad = expireCheckBox.Checked && expireDatePicker.Value.ToUniversalTime() <= trigger.StartBoundary.ToUniversalTime();
+			dateErrorProvider.SetError(expireDatePicker, bad ? EditorProperties.Resources.Error_TriggerEndBeforeStart : null);
+			if (bad)
+			{
+				expireDatePicker.Value = trigger.StartBoundary + TimeSpan.FromMinutes(1);
+				return false;
+			}
+			return true;
 		}
 
 		private Trigger GetFirstAvailableTrigger(AvailableTriggers filter = AvailableTriggers.AllTriggers) => Trigger.CreateTrigger(AvToType((AvailableTriggers & filter).GetFlags().First()));

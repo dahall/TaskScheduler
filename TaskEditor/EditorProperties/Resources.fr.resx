@@ -552,4 +552,7 @@ Action : {3}</value>
   <data name="EventKeywordsAll" xml:space="preserve">
     <value>&lt;Tous les mots clés&gt;</value>
   </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>La date et l&amp;#39;heure d&amp;#39;expiration d&amp;#39;un déclencheur doivent être postérieures à son heure de démarrage ou d&amp;#39;activation.!</value>
+  </data>
 </root>

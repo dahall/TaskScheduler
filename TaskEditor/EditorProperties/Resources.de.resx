@@ -651,4 +651,7 @@ Aktion: {3}</value>
   <data name="EventSourcesAll" xml:space="preserve">
     <value>&lt;Alle Quellen&gt;</value>
   </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>Das Datum und die Uhrzeit, zu der ein Trigger abläuft, müssen nach der Uhrzeit liegen, zu der er gestartet oder aktiviert wird.</value>
+  </data>
 </root>

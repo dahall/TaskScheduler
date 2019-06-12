@@ -1962,6 +1962,8 @@ namespace Microsoft.Win32.TaskScheduler
 					TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
 				if (v1 && trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
 					TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
+				if (trigger.StartBoundary < trigger.EndBoundary)
+					TryAdd(ex.Data, "Trigger.StartBoundary", "< Trigger.EndBoundary is not allowed.");
 				if (delOldTask && trigger.EndBoundary != DateTime.MaxValue)
 					hasEndBound = true;
 			}
