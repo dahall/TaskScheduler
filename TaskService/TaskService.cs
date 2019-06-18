@@ -117,7 +117,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets a local instance of the <see cref="TaskService"/> using the current user's credentials.</summary>
 		/// <value>Local user <see cref="TaskService"/> instance.</value>
-		public static TaskService Instance => instance ?? (instance = new TaskService());
+		public static TaskService Instance
+		{
+			get
+			{
+				if (instance is null)
+				{
+					instance = new TaskService();
+					instance.Disposed += (i, e) => (i as TaskService)?.Connect();
+				}
+				return instance;
+			}
+		}
 
 		/// <summary>
 		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher
