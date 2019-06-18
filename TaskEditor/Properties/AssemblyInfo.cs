@@ -20,6 +20,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("https://github.com/dahall/TaskScheduler")]
 [assembly: AssemblyCompany("GitHub Community")]
 [assembly: AssemblyProduct("TaskService")]
-[assembly: AssemblyCopyright("Copyright © 2017")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyVersion("2.8.12")]
 [assembly: AssemblyFileVersion("2.8.12")]
