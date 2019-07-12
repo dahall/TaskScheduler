@@ -3863,48 +3863,58 @@
       <param name="taskPathAndName">Name of the task with full path.</param>
       <param name="period">The amount of time the task needs once executed during regular Automatic maintenance.</param>
       <param name="deadline">
-            The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to complete
-            during regular Automatic Maintenance.
+            The amount of time after which the Task Scheduler attempts to run the task during emergency Automatic maintenance, if the task
+            failed to complete during regular Automatic Maintenance.
             </param>
       <param name="executablePath">The path to an executable file.</param>
       <param name="arguments">The arguments associated with the command-line operation.</param>
-      <param name="workingDirectory">The directory that contains either the executable file or the files that are used by the executable file.</param>
+      <param name="workingDirectory">
+            The directory that contains either the executable file or the files that are used by the executable file.
+            </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the Automatic Maintenance Task.</returns>
-      <exception cref="T:System.InvalidOperationException">Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.</exception>
+      <exception cref="T:System.InvalidOperationException">
+            Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.
+            </exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.QuickTriggerType,System.String,System.String,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)">
       <summary>Creates a new task, registers the task, and returns the instance.</summary>
       <param name="path">
-            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
-            the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
-            folder and the '..' characters cannot be used to specify the parent task folder in the path.
+            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value
+            that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot
+            be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
             </param>
       <param name="trigger">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to determine when to run the task.</param>
       <param name="exePath">The executable path.</param>
       <param name="arguments">The arguments (optional). Value can be NULL.</param>
       <param name="userId">The user credentials used to register the task.</param>
       <param name="password">The password for the userId used to register the task.</param>
-      <param name="logonType">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+      <param name="logonType">
+            A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.
+            </param>
       <param name="description">The task description.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.AddTask(System.String,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType,System.String)">
       <summary>Creates a new task, registers the task, and returns the instance.</summary>
       <param name="path">
-            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by
-            the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task
-            folder and the '..' characters cannot be used to specify the parent task folder in the path.
+            The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value
+            that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot
+            be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
             </param>
       <param name="trigger">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to determine when to run the task.</param>
       <param name="action">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> to determine what happens when the task is triggered.</param>
       <param name="userId">The user credentials used to register the task.</param>
       <param name="password">The password for the userId used to register the task.</param>
-      <param name="logonType">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+      <param name="logonType">
+            A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.
+            </param>
       <param name="description">The task description.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance of the registered task.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.AllowReadOnlyTasks">
-      <summary>Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.</summary>
+      <summary>
+            Gets or sets a value indicating whether to allow tasks from later OS versions with new properties to be retrieved as read only tasks.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.AllTasks">
       <summary>Gets a <see cref="T:System.Collections.Generic.IEnumerator`1" /> which enumerates all the tasks in all folders.</summary>
@@ -3925,12 +3935,17 @@
       <summary>Gets the name of the user that is connected to the Task Scheduler service.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.CreateFromToken(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken)">
-      <summary>Creates a new <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance from a token. Given that a TaskService instance is thread specific, this is the preferred method for multi-thread creation or asynchronous method parameters.</summary>
+      <summary>
+            Creates a new <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance from a token. Given that a TaskService instance is thread specific, this is the
+            preferred method for multi-thread creation or asynchronous method parameters.
+            </summary>
       <param name="token">The token.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance valid for the thread calling this method.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.Dispose(System.Boolean)">
-      <summary>Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" /> and optionally releases the managed resources.</summary>
+      <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" /> and optionally releases the managed resources.
+            </summary>
       <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.EndInit">
@@ -3943,9 +3958,7 @@
         <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.Execute(System.String)">
-      <summary>
-            Initial call for a Fluent model of creating a task.
-            </summary>
+      <summary>Initial call for a Fluent model of creating a task.</summary>
       <param name="path">The path of the program to run.</param>
       <returns>An <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder" /> instance.</returns>
     </member>
@@ -3981,13 +3994,15 @@
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetFolder(System.String)">
       <summary>Gets the path to a folder of registered tasks.</summary>
       <param name="folderName">
-            The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is specified with a
-            backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character cannot be used to specify the
-            current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
+            The path to the folder to retrieve. Do not use a backslash following the last folder name in the path. The root task folder is
+            specified with a backslash (\). An example of a task folder path, under the root task folder, is \MyTaskFolder. The '.' character
+            cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
             </param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" /> instance for the requested folder or <c>null</c> if <paramref name="folderName" /> was unrecognized.</returns>
-      <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.</exception>
+      <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">
+            Folder other than the root (\) was requested on a system not supporting Task Scheduler 2.0.
+            </exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetHashCode">
       <summary>Returns a hash code for this instance.</summary>
@@ -4002,7 +4017,9 @@
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.GetTask(System.String)">
       <summary>Gets the task with the specified path.</summary>
       <param name="taskPath">The task path.</param>
-      <returns>The <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance matching the <paramref name="taskPath" />, if found. If not found, this method returns <c>null</c>.</returns>
+      <returns>
+            The <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance matching the <paramref name="taskPath" />, if found. If not found, this method returns <c>null</c>.
+            </returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.HighestSupportedVersion">
       <summary>Gets the highest version of Task Scheduler that a computer supports.</summary>
@@ -4012,8 +4029,8 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.LibraryVersion">
       <summary>
-            Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any compatibility level higher
-            than this version.
+            Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any
+            compatibility level higher than this version.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.NewTask">
@@ -4034,7 +4051,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.RunComHandlerAction(System.Guid,System.String,System.Int32,Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate)">
       <summary>
-            Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="T:Microsoft.Win32.TaskScheduler.ITaskHandler" /> interface.
+            Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the
+            <see cref="T:Microsoft.Win32.TaskScheduler.ITaskHandler" /> interface.
             </summary>
       <param name="clsid">The CLSID of the COM object.</param>
       <param name="data">An optional string passed to the COM object at startup.</param>
@@ -4047,7 +4065,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.RunComHandlerActionAsync(System.Guid,System.Action{System.Int32},System.String,System.Int32,Microsoft.Win32.TaskScheduler.TaskService.ComHandlerUpdate)">
       <summary>
-            Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the <see cref="T:Microsoft.Win32.TaskScheduler.ITaskHandler" /> interface.
+            Runs an action that is defined via a COM handler. COM CLSID must be registered to an object that implements the
+            <see cref="T:Microsoft.Win32.TaskScheduler.ITaskHandler" /> interface.
             </summary>
       <param name="clsid">The CLSID of the COM object.</param>
       <param name="onComplete">The action to run on thread completion.</param>
@@ -4058,6 +4077,12 @@
             <see cref="M:Microsoft.Win32.TaskScheduler.ITaskHandlerStatus.UpdateStatus(System.Int16,System.String)" /> method.
             </param>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskService.ServiceConnected">
+      <summary>Occurs when the Task Scheduler is connected to the local or remote target.</summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskService.ServiceDisconnected">
+      <summary>Occurs when the Task Scheduler is disconnected from the local or remote target.</summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.StartSystemTaskSchedulerManager">
       <summary>Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.</summary>
     </member>
@@ -4065,7 +4090,10 @@
       <summary>Gets or sets the name of the computer that is running the Task Scheduler service that the user is connected to.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.Token">
-      <summary>Gets the connection token for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance. This token is thread safe and can be used to create new <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instances on other threads using the <see cref="M:Microsoft.Win32.TaskScheduler.TaskService.CreateFromToken(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken)" /> static method.</summary>
+      <summary>
+            Gets the connection token for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instance. This token is thread safe and can be used to create new
+            <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> instances on other threads using the <see cref="M:Microsoft.Win32.TaskScheduler.TaskService.CreateFromToken(Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken)" /> static method.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskService.UserAccountDomain">
       <summary>Gets or sets the user account domain to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.</summary>
@@ -4083,13 +4111,14 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskService.ConnectionToken">
       <summary>
-            Represents a valid, connected session to a Task Scheduler instance. This token is thread-safe and should be the means of passing information about a
-            <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> between threads.
+            Represents a valid, connected session to a Task Scheduler instance. This token is thread-safe and should be the means of passing
+            information about a <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> between threads.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskServiceVersion">
       <summary>
-            Known versions of the native Task Scheduler library. This can be used as a decoder for the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.HighestSupportedVersion" /> and <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.LibraryVersion" /> values.
+            Known versions of the native Task Scheduler library. This can be used as a decoder for the
+            <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.HighestSupportedVersion" /> and <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.LibraryVersion" /> values.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskServiceVersion.V1_1">
@@ -4769,199 +4798,286 @@
       <returns>A regular expression equivalent of the given wildcard.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.AtLogon">
-      <summary>
-            Adds a trigger that executes at logon of all users.
-            </summary>
+      <summary>Adds a trigger that executes at logon of all users.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.AtLogonOf(System.String)">
-      <summary>
-            Adds a trigger that executes at logon of a specific user.
-            </summary>
+      <summary>Adds a trigger that executes at logon of a specific user.</summary>
       <param name="userId">The user id.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.AtTaskRegistration">
-      <summary>
-            Adds a trigger that executes at task registration.
-            </summary>
+      <summary>Adds a trigger that executes at task registration.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.Every(System.Int16)">
-      <summary>
-            Adds a trigger that executes every day or week.
-            </summary>
+      <summary>Adds a trigger that executes every day or week.</summary>
       <param name="num">The interval of days or weeks.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.IntervalTriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.InTheMonthOf(Microsoft.Win32.TaskScheduler.MonthsOfTheYear)">
-      <summary>
-            Adds a trigger that executes monthly on specific days.
-            </summary>
+      <summary>Adds a trigger that executes monthly on specific days.</summary>
       <param name="moy">The months of the year in which to run.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyTriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.InWorkingDirectory(System.String)">
-      <summary>
-            Adds a working directory to the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.
-            </summary>
+      <summary>Adds a working directory to the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.</summary>
       <param name="dir">The directory.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.OnAll(Microsoft.Win32.TaskScheduler.DaysOfTheWeek)">
-      <summary>
-            Adds a trigger that executes monthly on certain days of the week.
-            </summary>
+      <summary>Adds a trigger that executes monthly on certain days of the week.</summary>
       <param name="dow">The days of the week on which to run.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.OnBoot">
-      <summary>
-            Adds a trigger that executes at system startup.
-            </summary>
+      <summary>Adds a trigger that executes at system startup.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.Once">
-      <summary>
-            Adds a trigger that executes once at a specific time.
-            </summary>
+      <summary>Adds a trigger that executes once at a specific time.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.OnIdle">
-      <summary>
-            Adds a trigger that executes when system is idle.
-            </summary>
+      <summary>Adds a trigger that executes when system is idle.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.OnStateChange(Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType)">
-      <summary>
-            Adds a trigger that executes once at specified state change.
-            </summary>
+      <summary>Adds a trigger that executes once at specified state change.</summary>
       <param name="changeType">Type of the change.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder.WithArguments(System.String)">
-      <summary>
-            Adds arguments to the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.
-            </summary>
+      <summary>Adds arguments to the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.</summary>
       <param name="args">The arguments.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.ActionBuilder" /> instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.BaseBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.BaseBuilder.AsTask(System.String)">
+      <summary>Assigns the name of the task and registers it.</summary>
+      <param name="name">The name.</param>
+      <returns>A registered <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.BaseBuilder.AsTask(System.String,Microsoft.Win32.TaskScheduler.TaskCreation,System.String,System.String,Microsoft.Win32.TaskScheduler.TaskLogonType)">
+      <summary>Assigns the name of the task and registers it.</summary>
+      <param name="name">The name.</param>
+      <param name="createType">A union of <see cref="T:Microsoft.Win32.TaskScheduler.TaskCreation" /> flags.</param>
+      <param name="userId">The user credentials used to register the task.</param>
+      <param name="password">The password for the userId used to register the task.</param>
+      <param name="logonType">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+      <returns>A registered <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
+    </member>
+    <member name="P:Microsoft.Win32.TaskScheduler.Fluent.BaseBuilder.When">
+      <summary>Transitions to settings syntax.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.IntervalTriggerBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.IntervalTriggerBuilder.Days">
-      <summary>
-            Specifies that an Every target uses days as the interval.
-            </summary>
+      <summary>Specifies that an Every target uses days as the interval.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.IntervalTriggerBuilder.Weeks">
-      <summary>
-            Specifies that an Every target uses weeks as the interval.
-            </summary>
+      <summary>Specifies that an Every target uses weeks as the interval.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.WeeklyTriggerBuilder" /> instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder.In(Microsoft.Win32.TaskScheduler.WhichWeek)">
-      <summary>
-            Updates a monthly trigger to specify in which weeks of the month it will run.
-            </summary>
+      <summary>Updates a monthly trigger to specify in which weeks of the month it will run.</summary>
       <param name="ww">The week.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder.Of(Microsoft.Win32.TaskScheduler.MonthsOfTheYear)">
-      <summary>
-            Updates a monthly trigger to specify the months of the year in which it will run.
-            </summary>
+      <summary>Updates a monthly trigger to specify the months of the year in which it will run.</summary>
       <param name="moy">The month of the year.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.MonthlyTriggerBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.MonthlyTriggerBuilder.OnTheDays(System.Int32[])">
-      <summary>
-            Updates a monthly trigger to specify the days of the month on which it will run.
-            </summary>
+      <summary>Updates a monthly trigger to specify the days of the month on which it will run.</summary>
       <param name="days">The days.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
+    </member>
+    <member name="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder">
+      <summary>Fluent helper class. Not intended for use.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.AllowingStartIfOnBatteries">
+      <summary>Indicates that the task will be started even if the computer is running on battery power.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.AllowingStartOnRemoteAppSession">
+      <summary>
+            Indicates that the task will be started even if the task is triggered to run in a Remote Applications Integrated Locally
+            (RAIL) session.
+            </summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DataIs(System.String)">
+      <summary>Sets the task data to a string.</summary>
+      <param name="data">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>data</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DataIs(System.String)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DeletingTaskAfter(System.TimeSpan)">
+      <summary>Sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.</summary>
+      <param name="duration">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>duration</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DeletingTaskAfter(System.TimeSpan)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DisallowingDemandStart">
+      <summary>Indicates that the task cannot be started with the Run command or the Context menu.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.DisallowingHardTerminate">
+      <summary>Indicates that the task may not be terminated by using TerminateProcess.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.ExecutingAtMost(System.TimeSpan)">
+      <summary>Sets the amount of time that is allowed to complete the task.</summary>
+      <param name="duration">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>duration</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.ExecutingAtMost(System.TimeSpan)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.InstancesAre(Microsoft.Win32.TaskScheduler.TaskInstancesPolicy)">
+      <summary>Sets the policy that defines how the Task Scheduler handles multiple instances of the task.</summary>
+      <param name="policy">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>policy</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.InstancesAre(Microsoft.Win32.TaskScheduler.TaskInstancesPolicy)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.NotStoppingIfGoingOnBatteries">
+      <summary>Indicates that the task will not be stopped if the computer switches to battery power.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.OnlyIfIdle">
+      <summary>Indicates that the Task Scheduler will run the task only if the computer is in an idle condition.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.OnlyIfNetworkAvailable">
+      <summary>Indicates that the Task Scheduler will run the task only when a network is available.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.PriorityIs(System.Diagnostics.ProcessPriorityClass)">
+      <summary>Sets the priority level of the task.</summary>
+      <param name="priority">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>priority</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.PriorityIs(System.Diagnostics.ProcessPriorityClass)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.RestartingEvery(System.TimeSpan)">
+      <summary>Sets a value that specifies how long the Task Scheduler will attempt to restart the task.</summary>
+      <param name="interval">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>interval</parameter>
+            <parameter>M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.RestartingEvery(System.TimeSpan)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.StartingWhenAvailable">
+      <summary>Indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder.WakingToRun">
+      <summary>Indicates that the Task Scheduler will wake the computer when it is time to run the task.</summary>
+      <returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder" /> instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
-    </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.AsTask(System.String)">
-      <summary>
-            Assigns the name of the task and registers it.
-            </summary>
-      <param name="name">The name.</param>
-      <returns>A registered <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance.</returns>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Ending(System.DateTime)">
-      <summary>
-            Specifies a date and time on which a trigger will no longer run.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will no longer run.</summary>
       <param name="dt">The DateTime value.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Ending(System.Int32,System.Int32,System.Int32)">
-      <summary>
-            Specifies a date on which a trigger will no longer run.
-            </summary>
+      <summary>Specifies a date on which a trigger will no longer run.</summary>
       <param name="year">The year.</param>
       <param name="month">The month.</param>
       <param name="day">The day.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Ending(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-      <summary>
-            Specifies a date and time on which a trigger will no longer run.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will no longer run.</summary>
       <param name="year">The year.</param>
       <param name="month">The month.</param>
       <param name="day">The day.</param>
@@ -4969,81 +5085,59 @@
       <param name="min">The min.</param>
       <param name="sec">The sec.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Ending(System.String)">
-      <summary>
-            Specifies a date and time on which a trigger will no longer run.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will no longer run.</summary>
       <param name="dt">A string representing a DateTime and parsable via <see cref="M:System.DateTime.Parse(System.String)" />.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.IsDisabled">
-      <summary>
-            Determines whether this trigger is disabled.
-            </summary>
+      <summary>Determines whether this trigger is disabled.</summary>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.RepeatingEvery(System.String)">
-      <summary>
-            Specifies a repetition interval for the trigger.
-            </summary>
+      <summary>Specifies a repetition interval for the trigger.</summary>
       <param name="span">The interval span string. Must be parsable by <see cref="M:System.TimeSpan.Parse(System.String)" />.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.RepeatingEvery(System.TimeSpan)">
-      <summary>
-            Specifies a repetition interval for the trigger.
-            </summary>
+      <summary>Specifies a repetition interval for the trigger.</summary>
       <param name="span">The interval span.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.RunningAtMostFor(System.String)">
-      <summary>
-            Specifies the maximum amount of time to repeat the execution of a trigger.
-            </summary>
+      <summary>Specifies the maximum amount of time to repeat the execution of a trigger.</summary>
       <param name="span">The duration span string. Must be parsable by <see cref="M:System.TimeSpan.Parse(System.String)" />.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.RunningAtMostFor(System.TimeSpan)">
-      <summary>
-            Specifies the maximum amount of time to repeat the execution of a trigger.
-            </summary>
+      <summary>Specifies the maximum amount of time to repeat the execution of a trigger.</summary>
       <param name="span">The duration span.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Starting(System.DateTime)">
-      <summary>
-            Specifies a date and time on which a trigger will start.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will start.</summary>
       <param name="dt">The DateTime value.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Starting(System.Int32,System.Int32,System.Int32)">
-      <summary>
-            Specifies a date on which a trigger will start.
-            </summary>
+      <summary>Specifies a date on which a trigger will start.</summary>
       <param name="year">The year.</param>
       <param name="month">The month.</param>
       <param name="day">The day.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Starting(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-      <summary>
-            Specifies a date and time on which a trigger will start.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will start.</summary>
       <param name="year">The year.</param>
       <param name="month">The month.</param>
       <param name="day">The day.</param>
@@ -5051,31 +5145,22 @@
       <param name="min">The min.</param>
       <param name="sec">The sec.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder.Starting(System.String)">
-      <summary>
-            Specifies a date and time on which a trigger will start.
-            </summary>
+      <summary>Specifies a date and time on which a trigger will start.</summary>
       <param name="dt">A string representing a DateTime and parsable via <see cref="M:System.DateTime.Parse(System.String)" />.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Fluent.WeeklyTriggerBuilder">
-      <summary>
-            Fluent helper class. Not intended for use.
-            </summary>
+      <summary>Fluent helper class. Not intended for use.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Fluent.WeeklyTriggerBuilder.On(Microsoft.Win32.TaskScheduler.DaysOfTheWeek)">
-      <summary>
-            Updates a weekly trigger to specify the days of the week on which it will run.
-            </summary>
+      <summary>Updates a weekly trigger to specify the days of the week on which it will run.</summary>
       <param name="dow">The days of the week.</param>
       <returns>
-        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.
-            </returns>
+        <see cref="T:Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder" /> instance.</returns>
     </member>
   </members>
 </doc>

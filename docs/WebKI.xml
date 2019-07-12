@@ -26,6 +26,7 @@
   <HelpKINode Title="ActionBuilder class">
     <HelpKINode Title="ActionBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="ActionBuilder.AtLogon method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_AtLogon.htm" />
   <HelpKINode Title="ActionBuilder.AtLogonOf method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_AtLogonOf.htm" />
@@ -131,6 +132,8 @@
   <HelpKINode Title="AllowEditorOnFinish property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_AllowEditorOnFinish.htm" />
   <HelpKINode Title="AllowFolderSelection property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskBrowserDialog_AllowFolderSelection.htm" />
   <HelpKINode Title="AllowHardTerminate property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_AllowHardTerminate.htm" />
+  <HelpKINode Title="AllowingStartIfOnBatteries method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_AllowingStartIfOnBatteries.htm" />
+  <HelpKINode Title="AllowingStartOnRemoteAppSession method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_AllowingStartOnRemoteAppSession.htm" />
   <HelpKINode Title="AllowOnlyOneCheckedItem property" Url="html/P_Microsoft_Win32_TaskScheduler_DropDownCheckList_AllowOnlyOneCheckedItem.htm" />
   <HelpKINode Title="AllowReadOnlyTasks property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_AllowReadOnlyTasks.htm" />
   <HelpKINode Title="AllowResizeDropDown property" Url="html/P_Microsoft_Win32_TaskScheduler_CustomComboBox_AllowResizeDropDown.htm" />
@@ -148,7 +151,7 @@
   <HelpKINode Title="AssignControl method" Url="html/M_Microsoft_Win32_TaskScheduler_CustomComboBox_AssignControl.htm" />
   <HelpKINode Title="AssumeLocal enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_FullDateTimePicker_FieldConversionUtcCheckBehavior.htm" />
   <HelpKINode Title="AssumeUtc enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_FullDateTimePicker_FieldConversionUtcCheckBehavior.htm" />
-  <HelpKINode Title="AsTask method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_AsTask.htm" />
+  <HelpKINode Title="AsTask method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder_AsTask.htm" />
   <HelpKINode Title="AT enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCompatibility.htm" />
   <HelpKINode Title="AtLogon method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_AtLogon.htm" />
   <HelpKINode Title="AtLogonOf method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_AtLogonOf.htm" />
@@ -187,7 +190,10 @@
   <HelpKINode Title="BaseBuilder class">
     <HelpKINode Title="BaseBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder.htm" />
   </HelpKINode>
+  <HelpKINode Title="BaseBuilder.AsTask method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder_AsTask.htm" />
+  <HelpKINode Title="BaseBuilder.When property" Url="html/P_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder_When.htm" />
   <HelpKINode Title="Bcc property" Url="html/P_Microsoft_Win32_TaskScheduler_EmailAction_Bcc.htm" />
   <HelpKINode Title="BeginInit method">
     <HelpKINode Title="TaskEventWatcher.BeginInit Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskEventWatcher_BeginInit.htm" />
@@ -225,7 +231,9 @@
   <HelpKINode Title="CalendarTriggerUI.CalendarTriggerUI constructor" Url="html/M_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI__ctor.htm" />
   <HelpKINode Title="CalendarTriggerUI.Dispose method" Url="html/Overload_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_Dispose.htm" />
   <HelpKINode Title="CalendarTriggerUI.IsV2 property" Url="html/P_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_IsV2.htm" />
+  <HelpKINode Title="CalendarTriggerUI.OnStartBoundaryChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_OnStartBoundaryChanged.htm" />
   <HelpKINode Title="CalendarTriggerUI.OnTriggerTypeChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_OnTriggerTypeChanged.htm" />
+  <HelpKINode Title="CalendarTriggerUI.StartBoundaryChanged event" Url="html/E_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_StartBoundaryChanged.htm" />
   <HelpKINode Title="CalendarTriggerUI.Trigger property" Url="html/P_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_Trigger.htm" />
   <HelpKINode Title="CalendarTriggerUI.TriggerTypeChanged event" Url="html/E_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_TriggerTypeChanged.htm" />
   <HelpKINode Title="CalendarTriggerUI.UseUnifiedSchedulingEngine property" Url="html/P_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_UseUnifiedSchedulingEngine.htm" />
@@ -538,6 +546,7 @@
     <HelpKINode Title="ComHandlerAction.Data Property " Url="html/P_Microsoft_Win32_TaskScheduler_ComHandlerAction_Data.htm" />
     <HelpKINode Title="TaskDefinition.Data Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_Data.htm" />
   </HelpKINode>
+  <HelpKINode Title="DataIs method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DataIs.htm" />
   <HelpKINode Title="DataValues property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEvent_DataValues.htm" />
   <HelpKINode Title="Date property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskRegistrationInfo_Date.htm" />
   <HelpKINode Title="Days method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder_Days.htm" />
@@ -570,6 +579,7 @@
   <HelpKINode Title="DeleteExpiredTaskAfter property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_DeleteExpiredTaskAfter.htm" />
   <HelpKINode Title="DeleteFolder method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolder_DeleteFolder.htm" />
   <HelpKINode Title="DeleteTask method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskFolder_DeleteTask.htm" />
+  <HelpKINode Title="DeletingTaskAfter method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DeletingTaskAfter.htm" />
   <HelpKINode Title="Description property">
     <HelpKINode Title="TaskBrowserDialog.Description Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskBrowserDialog_Description.htm" />
     <HelpKINode Title="TaskRegistrationInfo.Description Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskRegistrationInfo_Description.htm" />
@@ -577,6 +587,8 @@
   <HelpKINode Title="Deserialize method" Url="html/M_Microsoft_Win32_TaskScheduler_Events_EventQuery_Deserialize.htm" />
   <HelpKINode Title="Disable enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskCreation.htm" />
   <HelpKINode Title="Disabled enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskState.htm" />
+  <HelpKINode Title="DisallowingDemandStart method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DisallowingDemandStart.htm" />
+  <HelpKINode Title="DisallowingHardTerminate method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DisallowingHardTerminate.htm" />
   <HelpKINode Title="DisallowStartIfOnBatteries property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_DisallowStartIfOnBatteries.htm" />
   <HelpKINode Title="DisallowStartOnRemoteAppSession property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_DisallowStartOnRemoteAppSession.htm" />
   <HelpKINode Title="DisplayedColumns property" Url="html/P_Microsoft_Win32_TaskScheduler_ListColumnEditor_DisplayedColumns.htm" />
@@ -924,6 +936,7 @@
   </HelpKINode>
   <HelpKINode Title="Execute method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_Execute.htm" />
   <HelpKINode Title="ExecuteFile enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskRights.htm" />
+  <HelpKINode Title="ExecutingAtMost method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_ExecutingAtMost.htm" />
   <HelpKINode Title="ExecutionTimeLimit property">
     <HelpKINode Title="TaskSettings.ExecutionTimeLimit Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_ExecutionTimeLimit.htm" />
     <HelpKINode Title="Trigger.ExecutionTimeLimit Property " Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_ExecutionTimeLimit.htm" />
@@ -1125,6 +1138,7 @@
   <HelpKINode Title="Instance property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_Instance.htm" />
   <HelpKINode Title="InstanceGuid property" Url="html/P_Microsoft_Win32_TaskScheduler_RunningTask_InstanceGuid.htm" />
   <HelpKINode Title="InstanceQueued enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
+  <HelpKINode Title="InstancesAre method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_InstancesAre.htm" />
   <HelpKINode Title="IntegralHeight property" Url="html/P_Microsoft_Win32_TaskScheduler_CustomComboBox_IntegralHeight.htm" />
   <HelpKINode Title="InteractiveToken enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskLogonType.htm" />
   <HelpKINode Title="InteractiveTokenOrPassword enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskLogonType.htm" />
@@ -1132,6 +1146,7 @@
   <HelpKINode Title="IntervalTriggerBuilder class">
     <HelpKINode Title="IntervalTriggerBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="IntervalTriggerBuilder.Days method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder_Days.htm" />
   <HelpKINode Title="IntervalTriggerBuilder.Weeks method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder_Weeks.htm" />
@@ -1342,6 +1357,7 @@
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.IntervalTriggerBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.MonthlyDOWTriggerBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.MonthlyTriggerBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder.htm" />
+  <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.SettingsBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.TriggerBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.Fluent.WeeklyTriggerBuilder class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_WeeklyTriggerBuilder.htm" />
   <HelpKINode Title="Microsoft.Win32.TaskScheduler.FullDateTimePicker class" Url="html/T_Microsoft_Win32_TaskScheduler_FullDateTimePicker.htm" />
@@ -1486,6 +1502,7 @@
   <HelpKINode Title="MonthlyDOWTriggerBuilder class">
     <HelpKINode Title="MonthlyDOWTriggerBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="MonthlyDOWTriggerBuilder.In method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder_In.htm" />
   <HelpKINode Title="MonthlyDOWTriggerBuilder.Of method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_MonthlyDOWTriggerBuilder_Of.htm" />
@@ -1507,6 +1524,7 @@
   <HelpKINode Title="MonthlyTriggerBuilder class">
     <HelpKINode Title="MonthlyTriggerBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="MonthlyTriggerBuilder.OnTheDays method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder_OnTheDays.htm" />
   <HelpKINode Title="MonthsOfTheYear enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_MonthsOfTheYear.htm" />
@@ -1591,6 +1609,7 @@
   <HelpKINode Title="NoStartOnBatteries enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="NoStartUserNotLoggedOn enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="NotStartedWithoutIdle enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
+  <HelpKINode Title="NotStoppingIfGoingOnBatteries method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_NotStoppingIfGoingOnBatteries.htm" />
   <HelpKINode Title="NotSupportedPriorToException class">
     <HelpKINode Title="NotSupportedPriorToException Class" Url="html/T_Microsoft_Win32_TaskScheduler_NotSupportedPriorToException.htm" />
     <HelpKINode Title="constructor" Url="html/M_Microsoft_Win32_TaskScheduler_NotSupportedPriorToException__ctor.htm" />
@@ -1647,11 +1666,14 @@
     <HelpKINode Title="TaskHistoryControl.OnLoad Method " Url="html/M_Microsoft_Win32_TaskScheduler_TaskHistoryControl_OnLoad.htm" />
   </HelpKINode>
   <HelpKINode Title="OnLostFocus method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskHistoryControl_OnLostFocus.htm" />
+  <HelpKINode Title="OnlyIfIdle method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_OnlyIfIdle.htm" />
+  <HelpKINode Title="OnlyIfNetworkAvailable method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_OnlyIfNetworkAvailable.htm" />
   <HelpKINode Title="OnParentFontChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskOptionsEditor_OnParentFontChanged.htm" />
   <HelpKINode Title="OnSelectedItemsChanged method">
     <HelpKINode Title="DropDownCheckList.OnSelectedItemsChanged Method " Url="html/M_Microsoft_Win32_TaskScheduler_DropDownCheckList_OnSelectedItemsChanged.htm" />
     <HelpKINode Title="DropDownCheckTree.OnSelectedItemsChanged Method " Url="html/M_Microsoft_Win32_TaskScheduler_DropDownCheckTree_OnSelectedItemsChanged.htm" />
   </HelpKINode>
+  <HelpKINode Title="OnStartBoundaryChanged method" Url="html/M_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_OnStartBoundaryChanged.htm" />
   <HelpKINode Title="OnStateChange method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_ActionBuilder_OnStateChange.htm" />
   <HelpKINode Title="OnTaskSelected method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskListView_OnTaskSelected.htm" />
   <HelpKINode Title="OnTheDays method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_MonthlyTriggerBuilder_OnTheDays.htm" />
@@ -1692,6 +1714,7 @@
     <HelpKINode Title="EmailAction.Priority Property " Url="html/P_Microsoft_Win32_TaskScheduler_EmailAction_Priority.htm" />
     <HelpKINode Title="TaskSettings.Priority Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_Priority.htm" />
   </HelpKINode>
+  <HelpKINode Title="PriorityIs method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_PriorityIs.htm" />
   <HelpKINode Title="ProcessId property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskEvent_ProcessId.htm" />
   <HelpKINode Title="ProcessTokenSidType property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskPrincipal_ProcessTokenSidType.htm" />
   <HelpKINode Title="Prompt property" Url="html/P_Microsoft_Win32_TaskScheduler_ActionEditDialog_Prompt.htm" />
@@ -1832,6 +1855,7 @@
   <HelpKINode Title="ResourceReferenceValue.ToString method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_ToString.htm" />
   <HelpKINode Title="ResourceReferenceValue.TryParse method" Url="html/M_Microsoft_Win32_TaskScheduler_ResourceReferenceValue_TryParse.htm" />
   <HelpKINode Title="RestartCount property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartCount.htm" />
+  <HelpKINode Title="RestartingEvery method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_RestartingEvery.htm" />
   <HelpKINode Title="RestartInterval property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_RestartInterval.htm" />
   <HelpKINode Title="RestartOnIdle property" Url="html/P_Microsoft_Win32_TaskScheduler_IdleSettings_RestartOnIdle.htm" />
   <HelpKINode Title="Restore method" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskSchedulerSnapshot_Restore.htm" />
@@ -1952,6 +1976,8 @@
   <HelpKINode Title="Server property" Url="html/P_Microsoft_Win32_TaskScheduler_EmailAction_Server.htm" />
   <HelpKINode Title="ServerType property" Url="html/P_Microsoft_Win32_TaskScheduler_ComObjectSelectionDialog_ServerType.htm" />
   <HelpKINode Title="ServiceAccount enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskLogonType.htm" />
+  <HelpKINode Title="ServiceConnected event" Url="html/E_Microsoft_Win32_TaskScheduler_TaskService_ServiceConnected.htm" />
+  <HelpKINode Title="ServiceDisconnected event" Url="html/E_Microsoft_Win32_TaskScheduler_TaskService_ServiceDisconnected.htm" />
   <HelpKINode Title="SeSecurityPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SeShutdownPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SessionChannelReady enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
@@ -2022,6 +2048,26 @@
   </HelpKINode>
   <HelpKINode Title="Settings enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_AvailableTaskTabs.htm" />
   <HelpKINode Title="Settings property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_Settings.htm" />
+  <HelpKINode Title="SettingsBuilder class">
+    <HelpKINode Title="SettingsBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SettingsBuilder.AllowingStartIfOnBatteries method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_AllowingStartIfOnBatteries.htm" />
+  <HelpKINode Title="SettingsBuilder.AllowingStartOnRemoteAppSession method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_AllowingStartOnRemoteAppSession.htm" />
+  <HelpKINode Title="SettingsBuilder.DataIs method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DataIs.htm" />
+  <HelpKINode Title="SettingsBuilder.DeletingTaskAfter method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DeletingTaskAfter.htm" />
+  <HelpKINode Title="SettingsBuilder.DisallowingDemandStart method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DisallowingDemandStart.htm" />
+  <HelpKINode Title="SettingsBuilder.DisallowingHardTerminate method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_DisallowingHardTerminate.htm" />
+  <HelpKINode Title="SettingsBuilder.ExecutingAtMost method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_ExecutingAtMost.htm" />
+  <HelpKINode Title="SettingsBuilder.InstancesAre method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_InstancesAre.htm" />
+  <HelpKINode Title="SettingsBuilder.NotStoppingIfGoingOnBatteries method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_NotStoppingIfGoingOnBatteries.htm" />
+  <HelpKINode Title="SettingsBuilder.OnlyIfIdle method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_OnlyIfIdle.htm" />
+  <HelpKINode Title="SettingsBuilder.OnlyIfNetworkAvailable method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_OnlyIfNetworkAvailable.htm" />
+  <HelpKINode Title="SettingsBuilder.PriorityIs method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_PriorityIs.htm" />
+  <HelpKINode Title="SettingsBuilder.RestartingEvery method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_RestartingEvery.htm" />
+  <HelpKINode Title="SettingsBuilder.StartingWhenAvailable method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_StartingWhenAvailable.htm" />
+  <HelpKINode Title="SettingsBuilder.WakingToRun method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_WakingToRun.htm" />
   <HelpKINode Title="SetValidatedPath method" Url="html/M_Microsoft_Win32_TaskScheduler_ExecAction_SetValidatedPath.htm" />
   <HelpKINode Title="SeUndockPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
   <HelpKINode Title="SeUnsolicitedInputPrivilege enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_TaskPrincipalPrivilege.htm" />
@@ -2096,11 +2142,13 @@
   <HelpKINode Title="StandardTaskEventId enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_StandardTaskEventId.htm" />
   <HelpKINode Title="Start method" Url="html/M_Microsoft_Win32_TaskScheduler_ITaskHandler_Start.htm" />
   <HelpKINode Title="StartBoundary property" Url="html/P_Microsoft_Win32_TaskScheduler_Trigger_StartBoundary.htm" />
+  <HelpKINode Title="StartBoundaryChanged event" Url="html/E_Microsoft_Win32_TaskScheduler_UIComponents_CalendarTriggerUI_StartBoundaryChanged.htm" />
   <HelpKINode Title="StartDate property">
     <HelpKINode Title="TaskRunTimesControl.StartDate Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskRunTimesControl_StartDate.htm" />
     <HelpKINode Title="TaskRunTimesDialog.StartDate Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskRunTimesDialog_StartDate.htm" />
   </HelpKINode>
   <HelpKINode Title="Starting method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_Starting.htm" />
+  <HelpKINode Title="StartingWhenAvailable method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_StartingWhenAvailable.htm" />
   <HelpKINode Title="StartSystemTaskSchedulerManager method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_StartSystemTaskSchedulerManager.htm" />
   <HelpKINode Title="StartWhenAvailable property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_StartWhenAvailable.htm" />
   <HelpKINode Title="State property">
@@ -2817,6 +2865,8 @@
   <HelpKINode Title="TaskService.RootFolder property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_RootFolder.htm" />
   <HelpKINode Title="TaskService.RunComHandlerAction method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_RunComHandlerAction.htm" />
   <HelpKINode Title="TaskService.RunComHandlerActionAsync method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_RunComHandlerActionAsync.htm" />
+  <HelpKINode Title="TaskService.ServiceConnected event" Url="html/E_Microsoft_Win32_TaskScheduler_TaskService_ServiceConnected.htm" />
+  <HelpKINode Title="TaskService.ServiceDisconnected event" Url="html/E_Microsoft_Win32_TaskScheduler_TaskService_ServiceDisconnected.htm" />
   <HelpKINode Title="TaskService.StartSystemTaskSchedulerManager method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_StartSystemTaskSchedulerManager.htm" />
   <HelpKINode Title="TaskService.TargetServer property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskService_TargetServer.htm" />
   <HelpKINode Title="TaskService.TaskService constructor" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskService__ctor.htm" />
@@ -3037,8 +3087,8 @@
   <HelpKINode Title="TriggerBuilder class">
     <HelpKINode Title="TriggerBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder.htm" />
   </HelpKINode>
-  <HelpKINode Title="TriggerBuilder.AsTask method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_AsTask.htm" />
   <HelpKINode Title="TriggerBuilder.Ending method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_Ending.htm" />
   <HelpKINode Title="TriggerBuilder.IsDisabled method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_IsDisabled.htm" />
   <HelpKINode Title="TriggerBuilder.RepeatingEvery method" Url="html/Overload_Microsoft_Win32_TaskScheduler_Fluent_TriggerBuilder_RepeatingEvery.htm" />
@@ -3213,6 +3263,7 @@
   <HelpKINode Title="Volatile property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_Volatile.htm" />
   <HelpKINode Title="WaitTimeout property" Url="html/P_Microsoft_Win32_TaskScheduler_IdleSettings_WaitTimeout.htm" />
   <HelpKINode Title="WakeToRun property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskSettings_WakeToRun.htm" />
+  <HelpKINode Title="WakingToRun method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_SettingsBuilder_WakingToRun.htm" />
   <HelpKINode Title="Wednesday enumeration member" Url="html/T_Microsoft_Win32_TaskScheduler_DaysOfTheWeek.htm" />
   <HelpKINode Title="Weekly enumeration member">
     <HelpKINode Title="AvailableTriggers Enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_AvailableTriggers.htm" />
@@ -3237,11 +3288,13 @@
   <HelpKINode Title="WeeklyTriggerBuilder class">
     <HelpKINode Title="WeeklyTriggerBuilder Class" Url="html/T_Microsoft_Win32_TaskScheduler_Fluent_WeeklyTriggerBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_Fluent_WeeklyTriggerBuilder.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_Fluent_WeeklyTriggerBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="WeeklyTriggerBuilder.On method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_WeeklyTriggerBuilder_On.htm" />
   <HelpKINode Title="Weeks method" Url="html/M_Microsoft_Win32_TaskScheduler_Fluent_IntervalTriggerBuilder_Weeks.htm" />
   <HelpKINode Title="WeeksInterval property" Url="html/P_Microsoft_Win32_TaskScheduler_WeeklyTrigger_WeeksInterval.htm" />
   <HelpKINode Title="WeeksOfMonth property" Url="html/P_Microsoft_Win32_TaskScheduler_MonthlyDOWTrigger_WeeksOfMonth.htm" />
+  <HelpKINode Title="When property" Url="html/P_Microsoft_Win32_TaskScheduler_Fluent_BaseBuilder_When.htm" />
   <HelpKINode Title="WhichWeek enumeration" Url="html/T_Microsoft_Win32_TaskScheduler_WhichWeek.htm" />
   <HelpKINode Title="Wildcard class">
     <HelpKINode Title="Wildcard Class" Url="html/T_Microsoft_Win32_TaskScheduler_Wildcard.htm" />

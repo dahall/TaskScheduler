@@ -2375,8 +2375,14 @@
     <member name="P:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.IsV2">
       <summary>Gets or sets a value indicating whether this editor supports a V1 or V2 trigger.</summary>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.OnStartBoundaryChanged">
+      <summary>Called when the trigger StartBoundary has changed.</summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.OnTriggerTypeChanged">
       <summary>Called when the trigger type has changed.</summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.StartBoundaryChanged">
+      <summary>Occurs when the trigger StartBoundary has changed.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.UIComponents.CalendarTriggerUI.Trigger">
       <summary>Gets or sets the trigger that is being edited. A new trigger may be returned so you remove and re-add the resulting value to the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />.</summary>
