@@ -350,14 +350,13 @@ namespace Microsoft.Win32.TaskScheduler
 			return new TaskCollection(TaskService, filter);
 		}
 
-		/// <summary>
-		/// Imports a <see cref="Task"/> from an XML file.
-		/// </summary>
+		/// <summary>Imports a <see cref="Task" /> from an XML file.</summary>
 		/// <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
 		/// <param name="xmlFile">The file containing the XML-formatted definition of the task.</param>
-		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
+		/// <param name="overwriteExisting">If set to <see langword="true" />, overwrites any existing task with the same name.</param>
+		/// <returns>A <see cref="Task" /> instance that represents the new task.</returns>
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
-		public Task ImportTask(string path, [NotNull] string xmlFile) => RegisterTask(path, File.ReadAllText(xmlFile));
+		public Task ImportTask(string path, [NotNull] string xmlFile, bool overwriteExisting = true) => RegisterTask(path, File.ReadAllText(xmlFile), overwriteExisting ? TaskCreation.CreateOrUpdate : TaskCreation.Create);
 
 		/// <summary>
 		/// Registers (creates) a new task in the folder using XML to define the task.
