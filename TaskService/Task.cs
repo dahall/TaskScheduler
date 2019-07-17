@@ -1260,6 +1260,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </para>
 		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Run the current task with a parameter
+		/// var runningTask = myTaskInstance.Run("info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// ]]></code></example>
 		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
@@ -1324,6 +1329,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <para>If RunEx is invoked from a disabled task, it will return <c>null</c> and the task will not be run.</para>
 		/// </remarks>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Run the current task with a parameter as a different user and ignoring any of the conditions.
+		/// var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, "DOMAIN\\User", "info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// ]]></code></example>
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task == null) throw new NotV1SupportedException();
