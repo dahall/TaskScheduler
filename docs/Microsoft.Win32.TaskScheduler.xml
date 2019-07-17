@@ -2009,7 +2009,7 @@
       <param name="parameters">
         <para>
             The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
-            call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
+            call this method without any values (e.g. <code>@@_SHFB_1</code>).
             </para>
         <para>
             The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
@@ -2900,12 +2900,11 @@
       <param name="filter">The optional name filter expression.</param>
       <returns>Collection of all matching tasks.</returns>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskFolder.ImportTask(System.String,System.String)">
-      <summary>
-            Imports a <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> from an XML file.
-            </summary>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskFolder.ImportTask(System.String,System.String,System.Boolean)">
+      <summary>Imports a <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> from an XML file.</summary>
       <param name="path">The task name. If this value is NULL, the task will be registered in the root task folder and the task name will be a GUID value that is created by the Task Scheduler service. A task name cannot begin or end with a space character. The '.' character cannot be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.</param>
       <param name="xmlFile">The file containing the XML-formatted definition of the task.</param>
+      <param name="overwriteExisting">If set to <see langword="true" />, overwrites any existing task with the same name.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance that represents the new task.</returns>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
     </member>
