@@ -1331,7 +1331,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		/// <example><code lang="cs"><![CDATA[
 		/// // Run the current task with a parameter as a different user and ignoring any of the conditions.
-		/// var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, "DOMAIN\\User", "info");
+		/// var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, 0, "DOMAIN\\User", "info");
 		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
 		/// ]]></code></example>
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
@@ -1972,8 +1972,8 @@ namespace Microsoft.Win32.TaskScheduler
 					TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
 				if (v1 && trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
 					TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
-				if (trigger.StartBoundary < trigger.EndBoundary)
-					TryAdd(ex.Data, "Trigger.StartBoundary", "< Trigger.EndBoundary is not allowed.");
+				if (trigger.EndBoundary <= trigger.StartBoundary)
+					TryAdd(ex.Data, "Trigger.StartBoundary", ">= Trigger.EndBoundary is not allowed.");
 				if (delOldTask && trigger.EndBoundary != DateTime.MaxValue)
 					hasEndBound = true;
 			}
