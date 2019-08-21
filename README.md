@@ -4,10 +4,10 @@
 > Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.
 
 ## Quick Links
-* [Discussion Forum (users helping users, enhancement requests, Q&A)](https://groups.google.com/forum/#!forum/taskscheduler)
-* [Documentation Wiki (samples, library how-to, etc.)](https://github.com/dahall/TaskScheduler/wiki)
-* [API documentation (class/method/property help)](https://dahall.github.io/TaskScheduler)
-* [Issues](https://github.com/dahall/TaskScheduler/issues)
+* [Discussion Forum](https://groups.google.com/forum/#!forum/taskscheduler) - Users helping users, enhancement requests, Q&A
+* [Wiki](https://github.com/dahall/TaskScheduler/wiki) - Sample code, library how-to, troubleshooting, etc.
+* [API documentation](https://dahall.github.io/TaskScheduler) - Class/method/property documentation and examples
+* [Full Issues Log](https://github.com/dahall/TaskScheduler/issues?q=) - Use the search box to see if your question may already be answered.
 * [ITaskHandler Template and Sample Project](https://github.com/dahall/ITaskHandlerTemplate) - Use this to create your own COM based  assembly for in-process actions.
 * [Troubleshooting Tool](https://github.com/dahall/TaskSchedulerConfig) - Tool to help identify and fix configuration and connectivity issues. (ClickOnce installer [here](https://github.com/dahall/TaskSchedulerConfig/blob/master/publish/setup.exe?raw=true))
 
