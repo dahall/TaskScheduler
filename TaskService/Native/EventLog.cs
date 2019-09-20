@@ -4590,12 +4590,8 @@ namespace System.Diagnostics.Eventing.Reader
 					{
 						case 0x3ab9:
 						case 0x3afc:
-							return list;
-
 						case 0x3ab3:
 						case 0x3ab4:
-							return list;
-
 						case 0x717:
 							return list;
 					}
