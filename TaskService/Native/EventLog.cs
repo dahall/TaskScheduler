@@ -2273,9 +2273,8 @@ namespace System.Diagnostics.Eventing.Reader
 				EventLogHandle eventMetadataEnum = NativeWrapper.EvtOpenEventMetadataEnum(handle, 0);
 				using (eventMetadataEnum)
 				{
-					EventLogHandle handle2;
 					Label_0020:
-					handle2 = handle2 = NativeWrapper.EvtNextEventMetadata(eventMetadataEnum, 0);
+					EventLogHandle handle2 = NativeWrapper.EvtNextEventMetadata(eventMetadataEnum, 0);
 					if (handle2 != null)
 					{
 						using (handle2)
