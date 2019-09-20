@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.AccessControl;
@@ -1692,8 +1693,8 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Defines all the components of a task, such as the task settings, triggers, actions, and registration information.</summary>
 	[XmlRoot("Task", Namespace = tns, IsNullable = false)]
 	[XmlSchemaProvider("GetV1SchemaFile")]
-	[PublicAPI]
-	public sealed class TaskDefinition : IDisposable, IXmlSerializable
+	[PublicAPI, Serializable]
+	public sealed class TaskDefinition : IDisposable, IXmlSerializable, ISerializable
 	{
 		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
 
@@ -1716,6 +1717,13 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskDefinition([NotNull] ITaskDefinition iDef)
 		{
 			v2Def = iDef;
+		}
+
+		private TaskDefinition(SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException("Currently there is no way to deserialize an instance of TaskDefinition due to the dependency on information from the TaskService instance.");
+			// TODO: Figure out how to associate with the ITaskService instance
+			XmlText = info.GetString(nameof(XmlText));
 		}
 
 		/// <summary>Gets a collection of actions that are performed by the task.</summary>
@@ -2164,6 +2172,11 @@ namespace Microsoft.Win32.TaskScheduler
 				outputList?.Add(item);
 			}
 			return res;
+		}
+
+		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			info.AddValue(nameof(XmlText), XmlText);
 		}
 	}
 
