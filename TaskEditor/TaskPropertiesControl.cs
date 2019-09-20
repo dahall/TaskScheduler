@@ -1463,7 +1463,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (Environment.OSVersion.Version.Major < 6 || task == null)
 					tabControl.TabPages.Remove(historyTab);
-				else if (Environment.OSVersion.Version.Major >= 6 && task != null)
+				else
 					InsertTab(8);
 			}
 		}
