@@ -283,7 +283,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal T GetProperty<T, TB>(string propName, T defaultValue = default(T))
 		{
 			if (iAction == null)
-				return (unboundValues.ContainsKey(propName)) ? (T)unboundValues[propName] : defaultValue;
+				return (unboundValues.TryGetValue(propName, out var value)) ? (T)value : defaultValue;
 			return ReflectionHelper.GetProperty((TB)iAction, propName, defaultValue);
 		}
 
