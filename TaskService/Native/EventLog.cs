@@ -4175,10 +4175,7 @@ namespace System.Diagnostics.Eventing.Reader
 
 		private void IssueCallback(EventRecordWrittenEventArgs eventArgs)
 		{
-			if (EventRecordWritten != null)
-			{
-				EventRecordWritten(this, eventArgs);
-			}
+			EventRecordWritten?.Invoke(this, eventArgs);
 		}
 
 		[System.Security.SecuritySafeCritical]
