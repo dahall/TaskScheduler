@@ -83,6 +83,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.dateErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.groupBox1.SuspendLayout();
 			this.settingsTabControl.SuspendLayout();
 			this.scheduleTab.SuspendLayout();
@@ -100,6 +101,7 @@
 			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dateErrorProvider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// triggerTypeLabel
@@ -147,6 +149,7 @@
 			// 
 			resources.ApplyResources(this.calendarTriggerUI1, "calendarTriggerUI1");
 			this.calendarTriggerUI1.Name = "calendarTriggerUI1";
+			this.calendarTriggerUI1.StartBoundaryChanged += new System.EventHandler(this.calendarTriggerUI1_StartBoundaryChanged);
 			this.calendarTriggerUI1.TriggerTypeChanged += new System.EventHandler(this.calendarTriggerUI1_TriggerTypeChanged);
 			// 
 			// logonTab
@@ -474,6 +477,11 @@
 			this.tableLayoutPanel1.Controls.Add(this.triggerTypeCombo, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			//
+			// dateErrorProvider
+			// 
+			this.dateErrorProvider.ContainerControl = this;
+			// 
 			// 
 			// TriggerEditDialog
 			// 
@@ -519,6 +527,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dateErrorProvider)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -579,5 +588,6 @@
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+		private System.Windows.Forms.ErrorProvider dateErrorProvider;
 	}
 }

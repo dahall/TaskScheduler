@@ -1,13 +1,11 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using System;
 
 namespace Microsoft.Win32.TaskScheduler
 {
 	public sealed partial class TaskService
 	{
-		/// <summary>
-		/// Initial call for a Fluent model of creating a task.
-		/// </summary>
+		/// <summary>Initial call for a Fluent model of creating a task.</summary>
 		/// <param name="path">The path of the program to run.</param>
 		/// <returns>An <see cref="Fluent.ActionBuilder"/> instance.</returns>
 		public Fluent.ActionBuilder Execute([NotNull] string path) => new Fluent.ActionBuilder(new Fluent.BuilderInfo(this), path);
@@ -15,133 +13,19 @@ namespace Microsoft.Win32.TaskScheduler
 
 	namespace Fluent
 	{
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
-		internal sealed class BuilderInfo
-		{
-			public TaskService ts;
-			public TaskDefinition td;
-
-			public BuilderInfo([NotNull] TaskService taskSvc)
-			{
-				ts = taskSvc;
-				td = ts.NewTask();
-			}
-		}
-
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
-		public abstract class BaseBuilder
-		{
-			internal BuilderInfo tb;
-
-			internal BaseBuilder(BuilderInfo taskBuilder)
-			{
-				tb = taskBuilder;
-			}
-
-			internal TaskDefinition TaskDef => tb.td;
-		}
-
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
+		/// <summary>Fluent helper class. Not intended for use.</summary>
 		public class ActionBuilder : BaseBuilder
 		{
 			internal ActionBuilder(BuilderInfo taskBuilder, string path)
-				: base(taskBuilder)
-			{
-				TaskDef.Actions.Add(new ExecAction(path));
-			}
+				: base(taskBuilder) => TaskDef.Actions.Add(new ExecAction(path));
 
-			/// <summary>
-			/// Adds arguments to the <see cref="ExecAction"/>.
-			/// </summary>
-			/// <param name="args">The arguments.</param>
-			/// <returns><see cref="ActionBuilder"/> instance.</returns>
-			public ActionBuilder WithArguments([NotNull] string args)
-			{
-				((ExecAction)TaskDef.Actions[0]).Arguments = args;
-				return this;
-			}
-
-			/// <summary>
-			/// Adds a working directory to the <see cref="ExecAction" />.
-			/// </summary>
-			/// <param name="dir">The directory.</param>
-			/// <returns><see cref="ActionBuilder" /> instance.</returns>
-			public ActionBuilder InWorkingDirectory([NotNull] string dir)
-			{
-				((ExecAction)TaskDef.Actions[0]).WorkingDirectory = dir;
-				return this;
-			}
-
-			/// <summary>
-			/// Adds a trigger that executes every day or week.
-			/// </summary>
-			/// <param name="num">The interval of days or weeks.</param>
-			/// <returns><see cref="IntervalTriggerBuilder" /> instance.</returns>
-			public IntervalTriggerBuilder Every(short num) => new IntervalTriggerBuilder(tb, num);
-
-			/// <summary>
-			/// Adds a trigger that executes monthly on certain days of the week.
-			/// </summary>
-			/// <param name="dow">The days of the week on which to run.</param>
-			/// <returns><see cref="MonthlyDOWTriggerBuilder" /> instance.</returns>
-			public MonthlyDOWTriggerBuilder OnAll(DaysOfTheWeek dow) => new MonthlyDOWTriggerBuilder(tb, dow);
-
-			/// <summary>
-			/// Adds a trigger that executes monthly on specific days.
-			/// </summary>
-			/// <param name="moy">The months of the year in which to run.</param>
-			/// <returns><see cref="MonthlyTriggerBuilder" /> instance.</returns>
-			public MonthlyTriggerBuilder InTheMonthOf(MonthsOfTheYear moy) => new MonthlyTriggerBuilder(tb, moy);
-
-			/// <summary>
-			/// Adds a trigger that executes once at a specific time.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder Once() => new TriggerBuilder(tb, TaskTriggerType.Time);
-
-			/// <summary>
-			/// Adds a trigger that executes at system startup.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder OnBoot() => new TriggerBuilder(tb, TaskTriggerType.Boot);
-
-			/// <summary>
-			/// Adds a trigger that executes when system is idle.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder OnIdle() => new TriggerBuilder(tb, TaskTriggerType.Idle);
-
-			/// <summary>
-			/// Adds a trigger that executes once at specified state change.
-			/// </summary>
-			/// <param name="changeType">Type of the change.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder OnStateChange(TaskSessionStateChangeType changeType)
-			{
-				var b = new TriggerBuilder(tb, TaskTriggerType.SessionStateChange);
-				((SessionStateChangeTrigger)b.trigger).StateChange = changeType;
-				return b;
-			}
-
-			/// <summary>
-			/// Adds a trigger that executes at logon of all users.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
+			/// <summary>Adds a trigger that executes at logon of all users.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder AtLogon() => new TriggerBuilder(tb, TaskTriggerType.Logon);
 
-			/// <summary>
-			/// Adds a trigger that executes at logon of a specific user.
-			/// </summary>
+			/// <summary>Adds a trigger that executes at logon of a specific user.</summary>
 			/// <param name="userId">The user id.</param>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder AtLogonOf(string userId)
 			{
 				var b = new TriggerBuilder(tb, TaskTriggerType.Logon);
@@ -149,73 +33,130 @@ namespace Microsoft.Win32.TaskScheduler
 				return b;
 			}
 
-			/// <summary>
-			/// Adds a trigger that executes at task registration.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
+			/// <summary>Adds a trigger that executes at task registration.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder AtTaskRegistration() => new TriggerBuilder(tb, TaskTriggerType.Registration);
+
+			/// <summary>Adds a trigger that executes every day or week.</summary>
+			/// <param name="num">The interval of days or weeks.</param>
+			/// <returns><see cref="IntervalTriggerBuilder"/> instance.</returns>
+			public IntervalTriggerBuilder Every(short num) => new IntervalTriggerBuilder(tb, num);
+
+			/// <summary>Adds a trigger that executes monthly on specific days.</summary>
+			/// <param name="moy">The months of the year in which to run.</param>
+			/// <returns><see cref="MonthlyTriggerBuilder"/> instance.</returns>
+			public MonthlyTriggerBuilder InTheMonthOf(MonthsOfTheYear moy) => new MonthlyTriggerBuilder(tb, moy);
+
+			/// <summary>Adds a working directory to the <see cref="ExecAction"/>.</summary>
+			/// <param name="dir">The directory.</param>
+			/// <returns><see cref="ActionBuilder"/> instance.</returns>
+			public ActionBuilder InWorkingDirectory([NotNull] string dir)
+			{
+				((ExecAction)TaskDef.Actions[0]).WorkingDirectory = dir;
+				return this;
+			}
+
+			/// <summary>Adds a trigger that executes monthly on certain days of the week.</summary>
+			/// <param name="dow">The days of the week on which to run.</param>
+			/// <returns><see cref="MonthlyDOWTriggerBuilder"/> instance.</returns>
+			public MonthlyDOWTriggerBuilder OnAll(DaysOfTheWeek dow) => new MonthlyDOWTriggerBuilder(tb, dow);
+
+			/// <summary>Adds a trigger that executes at system startup.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder OnBoot() => new TriggerBuilder(tb, TaskTriggerType.Boot);
+
+			/// <summary>Adds a trigger that executes once at a specific time.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Once() => new TriggerBuilder(tb, TaskTriggerType.Time);
+
+			/// <summary>Adds a trigger that executes when system is idle.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder OnIdle() => new TriggerBuilder(tb, TaskTriggerType.Idle);
+
+			/// <summary>Adds a trigger that executes once at specified state change.</summary>
+			/// <param name="changeType">Type of the change.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder OnStateChange(TaskSessionStateChangeType changeType)
+			{
+				var b = new TriggerBuilder(tb, TaskTriggerType.SessionStateChange);
+				((SessionStateChangeTrigger)b.trigger).StateChange = changeType;
+				return b;
+			}
+
+			/// <summary>Adds arguments to the <see cref="ExecAction"/>.</summary>
+			/// <param name="args">The arguments.</param>
+			/// <returns><see cref="ActionBuilder"/> instance.</returns>
+			public ActionBuilder WithArguments([NotNull] string args)
+			{
+				((ExecAction)TaskDef.Actions[0]).Arguments = args;
+				return this;
+			}
 		}
 
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
-		public class MonthlyTriggerBuilder : BaseBuilder
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		public abstract class BaseBuilder
 		{
-			private TriggerBuilder trb;
+			internal BuilderInfo tb;
 
-			internal MonthlyTriggerBuilder(BuilderInfo taskBuilder, MonthsOfTheYear moy)
-				: base(taskBuilder)
-			{
-				trb = new TriggerBuilder(taskBuilder, moy);
-			}
+			internal BaseBuilder(BuilderInfo taskBuilder) => tb = taskBuilder;
 
-			/// <summary>
-			/// Updates a monthly trigger to specify the days of the month on which it will run.
-			/// </summary>
-			/// <param name="days">The days.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder OnTheDays([NotNull] params int[] days)
-			{
-				((MonthlyTrigger)trb.trigger).DaysOfMonth = days;
-				return trb;
-			}
+			/// <summary>Transitions to settings syntax.</summary>
+			public SettingsBuilder When => new SettingsBuilder(tb);
+
+			internal TaskDefinition TaskDef => tb.td;
+
+			/// <summary>Assigns the name of the task and registers it.</summary>
+			/// <param name="name">The name.</param>
+			/// <returns>A registered <see cref="Task"/> instance.</returns>
+			public Task AsTask([NotNull] string name) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
+
+			/// <summary>Assigns the name of the task and registers it.</summary>
+			/// <param name="name">The name.</param>
+			/// <param name="createType">A union of <see cref="TaskCreation" /> flags.</param>
+			/// <param name="userId">The user credentials used to register the task.</param>
+			/// <param name="password">The password for the userId used to register the task.</param>
+			/// <param name="logonType">A <see cref="TaskLogonType" /> value that defines what logon technique is used to run the registered task.</param>
+			/// <returns>A registered <see cref="Task"/> instance.</returns>
+			public Task AsTask([NotNull] string name, TaskCreation createType, string userId, string password = null, TaskLogonType logonType = TaskLogonType.S4U) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef, createType, userId, password, logonType);
 		}
 
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		public class IntervalTriggerBuilder : BaseBuilder
+		{
+			internal short interval = 0;
+
+			internal IntervalTriggerBuilder(BuilderInfo taskBuilder, short interval)
+				: base(taskBuilder) => this.interval = interval;
+
+			/// <summary>Specifies that an Every target uses days as the interval.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Days() => new TriggerBuilder(tb) { trigger = TaskDef.Triggers.Add(new DailyTrigger(interval)) };
+
+			/// <summary>Specifies that an Every target uses weeks as the interval.</summary>
+			/// <returns><see cref="WeeklyTriggerBuilder"/> instance.</returns>
+			public WeeklyTriggerBuilder Weeks() => new WeeklyTriggerBuilder(tb, interval);
+		}
+
+		/// <summary>Fluent helper class. Not intended for use.</summary>
 		public class MonthlyDOWTriggerBuilder : BaseBuilder
 		{
 			private TriggerBuilder trb;
 
 			internal MonthlyDOWTriggerBuilder(BuilderInfo taskBuilder, DaysOfTheWeek dow)
-				: base(taskBuilder)
-			{
-				trb = new TriggerBuilder(taskBuilder, dow);
-			}
+				: base(taskBuilder) => trb = new TriggerBuilder(taskBuilder, dow);
 
-			/// <summary>
-			/// Updates a monthly trigger to specify in which weeks of the month it will run.
-			/// </summary>
+			/// <summary>Updates a monthly trigger to specify in which weeks of the month it will run.</summary>
 			/// <param name="ww">The week.</param>
-			/// <returns>
-			///   <see cref="MonthlyDOWTriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="MonthlyDOWTriggerBuilder"/> instance.</returns>
 			public MonthlyDOWTriggerBuilder In(WhichWeek ww)
 			{
 				((MonthlyDOWTrigger)trb.trigger).WeeksOfMonth = ww;
 				return this;
 			}
 
-			/// <summary>
-			/// Updates a monthly trigger to specify the months of the year in which it will run.
-			/// </summary>
+			/// <summary>Updates a monthly trigger to specify the months of the year in which it will run.</summary>
 			/// <param name="moy">The month of the year.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder Of(MonthsOfTheYear moy)
 			{
 				((MonthlyDOWTrigger)trb.trigger).MonthsOfYear = moy;
@@ -223,60 +164,155 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
-		public class WeeklyTriggerBuilder : TriggerBuilder
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		public class MonthlyTriggerBuilder : BaseBuilder
 		{
-			internal WeeklyTriggerBuilder(BuilderInfo taskBuilder, short interval)
-				: base(taskBuilder)
-			{
-				TaskDef.Triggers.Add(trigger = new WeeklyTrigger() { WeeksInterval = interval });
-			}
+			private TriggerBuilder trb;
 
-			/// <summary>
-			/// Updates a weekly trigger to specify the days of the week on which it will run.
-			/// </summary>
-			/// <param name="dow">The days of the week.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder On(DaysOfTheWeek dow)
+			internal MonthlyTriggerBuilder(BuilderInfo taskBuilder, MonthsOfTheYear moy)
+				: base(taskBuilder) => trb = new TriggerBuilder(taskBuilder, moy);
+
+			/// <summary>Updates a monthly trigger to specify the days of the month on which it will run.</summary>
+			/// <param name="days">The days.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder OnTheDays([NotNull] params int[] days)
 			{
-				((WeeklyTrigger)trigger).DaysOfWeek = dow;
-				return this as TriggerBuilder;
+				((MonthlyTrigger)trb.trigger).DaysOfMonth = days;
+				return trb;
 			}
 		}
 
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
-		public class IntervalTriggerBuilder : BaseBuilder
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		public class SettingsBuilder : BaseBuilder
 		{
-			internal short interval = 0;
-
-			internal IntervalTriggerBuilder(BuilderInfo taskBuilder, short interval)
-				: base(taskBuilder)
+			internal SettingsBuilder(BuilderInfo taskBuilder) : base(taskBuilder)
 			{
-				this.interval = interval;
+			}
+
+			/// <summary>Indicates that the task will be started even if the computer is running on battery power.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder AllowingStartIfOnBatteries()
+			{
+				TaskDef.Settings.DisallowStartIfOnBatteries = false;
+				return this;
 			}
 
 			/// <summary>
-			/// Specifies that an Every target uses days as the interval.
+			/// Indicates that the task will be started even if the task is triggered to run in a Remote Applications Integrated Locally
+			/// (RAIL) session.
 			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder Days() => new TriggerBuilder(tb) { trigger = TaskDef.Triggers.Add(new DailyTrigger(interval)) };
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder AllowingStartOnRemoteAppSession()
+			{
+				TaskDef.Settings.DisallowStartOnRemoteAppSession = false;
+				return this;
+			}
 
-			/// <summary>
-			/// Specifies that an Every target uses weeks as the interval.
-			/// </summary>
-			/// <returns><see cref="WeeklyTriggerBuilder" /> instance.</returns>
-			public WeeklyTriggerBuilder Weeks() => new WeeklyTriggerBuilder(tb, interval);
+			/// <summary>Sets the task data to a string.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder DataIs(string data)
+			{
+				TaskDef.Data = data; return this;
+			}
+
+			/// <summary>Sets the amount of time that the Task Scheduler will wait before deleting the task after it expires.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder DeletingTaskAfter(TimeSpan duration)
+			{
+				TaskDef.Settings.DeleteExpiredTaskAfter = duration;
+				return this;
+			}
+
+			/// <summary>Indicates that the task cannot be started with the Run command or the Context menu.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder DisallowingDemandStart()
+			{
+				TaskDef.Settings.AllowDemandStart = false;
+				return this;
+			}
+
+			/// <summary>Indicates that the task may not be terminated by using TerminateProcess.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder DisallowingHardTerminate()
+			{
+				TaskDef.Settings.AllowHardTerminate = false;
+				return this;
+			}
+
+			/// <summary>Sets the amount of time that is allowed to complete the task.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder ExecutingAtMost(TimeSpan duration)
+			{
+				TaskDef.Settings.ExecutionTimeLimit = duration;
+				return this;
+			}
+
+			/// <summary>Sets the policy that defines how the Task Scheduler handles multiple instances of the task.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder InstancesAre(TaskInstancesPolicy policy)
+			{
+				TaskDef.Settings.MultipleInstances = policy;
+				return this;
+			}
+
+			/// <summary>Indicates that the task will not be stopped if the computer switches to battery power.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder NotStoppingIfGoingOnBatteries()
+			{
+				TaskDef.Settings.StopIfGoingOnBatteries = true;
+				return this;
+			}
+
+			/// <summary>Indicates that the Task Scheduler will run the task only if the computer is in an idle condition.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder OnlyIfIdle()
+			{
+				TaskDef.Settings.RunOnlyIfIdle = true;
+				return this;
+			}
+
+			/// <summary>Indicates that the Task Scheduler will run the task only when a network is available.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder OnlyIfNetworkAvailable()
+			{
+				TaskDef.Settings.RunOnlyIfNetworkAvailable = true;
+				return this;
+			}
+
+			/// <summary>Sets the priority level of the task.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder PriorityIs(System.Diagnostics.ProcessPriorityClass priority)
+			{
+				TaskDef.Settings.Priority = priority;
+				return this;
+			}
+
+			/// <summary>Sets a value that specifies how long the Task Scheduler will attempt to restart the task.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder RestartingEvery(TimeSpan interval)
+			{
+				TaskDef.Settings.RestartInterval = interval;
+				return this;
+			}
+
+			/// <summary>Indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder StartingWhenAvailable()
+			{
+				TaskDef.Settings.StartWhenAvailable = true;
+				return this;
+			}
+
+			/// <summary>Indicates that the Task Scheduler will wake the computer when it is time to run the task.</summary>
+			/// <returns><see cref="SettingsBuilder"/> instance.</returns>
+			public SettingsBuilder WakingToRun()
+			{
+				TaskDef.Settings.WakeToRun = true;
+				return this;
+			}
 		}
 
-		/// <summary>
-		/// Fluent helper class. Not intended for use.
-		/// </summary>
+		/// <summary>Fluent helper class. Not intended for use.</summary>
 		public class TriggerBuilder : BaseBuilder
 		{
 			internal Trigger trigger;
@@ -287,201 +323,172 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 
 			internal TriggerBuilder(BuilderInfo taskBuilder, DaysOfTheWeek dow)
-				: this(taskBuilder)
-			{
-				TaskDef.Triggers.Add(trigger = new MonthlyDOWTrigger(dow));
-			}
+				: this(taskBuilder) => TaskDef.Triggers.Add(trigger = new MonthlyDOWTrigger(dow));
 
 			internal TriggerBuilder(BuilderInfo taskBuilder, MonthsOfTheYear moy)
-				: this(taskBuilder)
-			{
-				TaskDef.Triggers.Add(trigger = new MonthlyTrigger() { MonthsOfYear = moy });
-			}
+				: this(taskBuilder) => TaskDef.Triggers.Add(trigger = new MonthlyTrigger() { MonthsOfYear = moy });
 
 			internal TriggerBuilder(BuilderInfo taskBuilder, TaskTriggerType taskTriggerType)
-				: this(taskBuilder)
-			{
-				TaskDef.Triggers.Add(trigger = Trigger.CreateTrigger(taskTriggerType));
-			}
+				: this(taskBuilder) => TaskDef.Triggers.Add(trigger = Trigger.CreateTrigger(taskTriggerType));
 
-			/// <summary>
-			/// Specifies a date on which a trigger will start.
-			/// </summary>
+			/// <summary>Specifies a date on which a trigger will no longer run.</summary>
 			/// <param name="year">The year.</param>
 			/// <param name="month">The month.</param>
 			/// <param name="day">The day.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder Starting(int year, int month, int day)
-			{
-				trigger.StartBoundary = new DateTime(year, month, day, trigger.StartBoundary.Hour, trigger.StartBoundary.Minute, trigger.StartBoundary.Second);
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies a date and time on which a trigger will start.
-			/// </summary>
-			/// <param name="year">The year.</param>
-			/// <param name="month">The month.</param>
-			/// <param name="day">The day.</param>
-			/// <param name="hour">The hour.</param>
-			/// <param name="min">The min.</param>
-			/// <param name="sec">The sec.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder Starting(int year, int month, int day, int hour, int min, int sec)
-			{
-				trigger.StartBoundary = new DateTime(year, month, day, hour, min, sec);
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies a date and time on which a trigger will start.
-			/// </summary>
-			/// <param name="dt">A string representing a DateTime and parsable via <see cref="DateTime.Parse(string)"/>.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder Starting([NotNull] string dt)
-			{
-				trigger.StartBoundary = DateTime.Parse(dt);
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies a date and time on which a trigger will start.
-			/// </summary>
-			/// <param name="dt">The DateTime value.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
-			public TriggerBuilder Starting(DateTime dt)
-			{
-				trigger.StartBoundary = dt;
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies a date on which a trigger will no longer run.
-			/// </summary>
-			/// <param name="year">The year.</param>
-			/// <param name="month">The month.</param>
-			/// <param name="day">The day.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder Ending(int year, int month, int day)
 			{
 				trigger.EndBoundary = new DateTime(year, month, day, trigger.StartBoundary.Hour, trigger.StartBoundary.Minute, trigger.StartBoundary.Second);
 				return this;
 			}
 
-			/// <summary>
-			/// Specifies a date and time on which a trigger will no longer run.
-			/// </summary>
+			/// <summary>Specifies a date and time on which a trigger will no longer run.</summary>
 			/// <param name="year">The year.</param>
 			/// <param name="month">The month.</param>
 			/// <param name="day">The day.</param>
 			/// <param name="hour">The hour.</param>
 			/// <param name="min">The min.</param>
 			/// <param name="sec">The sec.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder Ending(int year, int month, int day, int hour, int min, int sec)
 			{
 				trigger.EndBoundary = new DateTime(year, month, day, hour, min, sec);
 				return this;
 			}
 
-			/// <summary>
-			/// Specifies a date and time on which a trigger will no longer run.
-			/// </summary>
+			/// <summary>Specifies a date and time on which a trigger will no longer run.</summary>
 			/// <param name="dt">A string representing a DateTime and parsable via <see cref="DateTime.Parse(string)"/>.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder Ending([NotNull] string dt)
 			{
 				trigger.EndBoundary = DateTime.Parse(dt);
 				return this;
 			}
 
-			/// <summary>
-			/// Specifies a date and time on which a trigger will no longer run.
-			/// </summary>
+			/// <summary>Specifies a date and time on which a trigger will no longer run.</summary>
 			/// <param name="dt">The DateTime value.</param>
-			/// <returns>
-			///   <see cref="TriggerBuilder" /> instance.
-			/// </returns>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder Ending(DateTime dt)
 			{
 				trigger.EndBoundary = dt;
 				return this;
 			}
 
-			/// <summary>
-			/// Specifies a repetition interval for the trigger.
-			/// </summary>
-			/// <param name="span">The interval span.</param>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RepeatingEvery(TimeSpan span)
-			{
-				trigger.Repetition.Interval = span;
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies a repetition interval for the trigger.
-			/// </summary>
-			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RepeatingEvery([NotNull] string span)
-			{
-				trigger.Repetition.Interval = TimeSpan.Parse(span);
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies the maximum amount of time to repeat the execution of a trigger.
-			/// </summary>
-			/// <param name="span">The duration span.</param>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RunningAtMostFor(TimeSpan span)
-			{
-				trigger.Repetition.Duration = span;
-				return this;
-			}
-
-			/// <summary>
-			/// Specifies the maximum amount of time to repeat the execution of a trigger.
-			/// </summary>
-			/// <param name="span">The duration span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
-			public TriggerBuilder RunningAtMostFor([NotNull] string span)
-			{
-				trigger.Repetition.Duration = TimeSpan.Parse(span);
-				return this;
-			}
-
-			/// <summary>
-			/// Determines whether this trigger is disabled.
-			/// </summary>
-			/// <returns><see cref="TriggerBuilder" /> instance.</returns>
+			/// <summary>Determines whether this trigger is disabled.</summary>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
 			public TriggerBuilder IsDisabled()
 			{
 				trigger.Enabled = false;
 				return this;
 			}
 
-			/// <summary>
-			/// Assigns the name of the task and registers it.
-			/// </summary>
-			/// <param name="name">The name.</param>
-			/// <returns>A registered <see cref="Task"/> instance.</returns>
-			public Task AsTask([NotNull] string name) => tb.ts.RootFolder.RegisterTaskDefinition(name, TaskDef);
+			/// <summary>Specifies a repetition interval for the trigger.</summary>
+			/// <param name="span">The interval span.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder RepeatingEvery(TimeSpan span)
+			{
+				trigger.Repetition.Interval = span;
+				return this;
+			}
+
+			/// <summary>Specifies a repetition interval for the trigger.</summary>
+			/// <param name="span">The interval span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder RepeatingEvery([NotNull] string span)
+			{
+				trigger.Repetition.Interval = TimeSpan.Parse(span);
+				return this;
+			}
+
+			/// <summary>Specifies the maximum amount of time to repeat the execution of a trigger.</summary>
+			/// <param name="span">The duration span.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder RunningAtMostFor(TimeSpan span)
+			{
+				trigger.Repetition.Duration = span;
+				return this;
+			}
+
+			/// <summary>Specifies the maximum amount of time to repeat the execution of a trigger.</summary>
+			/// <param name="span">The duration span string. Must be parsable by <see cref="TimeSpan.Parse(string)"/>.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder RunningAtMostFor([NotNull] string span)
+			{
+				trigger.Repetition.Duration = TimeSpan.Parse(span);
+				return this;
+			}
+
+			/// <summary>Specifies a date on which a trigger will start.</summary>
+			/// <param name="year">The year.</param>
+			/// <param name="month">The month.</param>
+			/// <param name="day">The day.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Starting(int year, int month, int day)
+			{
+				trigger.StartBoundary = new DateTime(year, month, day, trigger.StartBoundary.Hour, trigger.StartBoundary.Minute, trigger.StartBoundary.Second);
+				return this;
+			}
+
+			/// <summary>Specifies a date and time on which a trigger will start.</summary>
+			/// <param name="year">The year.</param>
+			/// <param name="month">The month.</param>
+			/// <param name="day">The day.</param>
+			/// <param name="hour">The hour.</param>
+			/// <param name="min">The min.</param>
+			/// <param name="sec">The sec.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Starting(int year, int month, int day, int hour, int min, int sec)
+			{
+				trigger.StartBoundary = new DateTime(year, month, day, hour, min, sec);
+				return this;
+			}
+
+			/// <summary>Specifies a date and time on which a trigger will start.</summary>
+			/// <param name="dt">A string representing a DateTime and parsable via <see cref="DateTime.Parse(string)"/>.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Starting([NotNull] string dt)
+			{
+				trigger.StartBoundary = DateTime.Parse(dt);
+				return this;
+			}
+
+			/// <summary>Specifies a date and time on which a trigger will start.</summary>
+			/// <param name="dt">The DateTime value.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder Starting(DateTime dt)
+			{
+				trigger.StartBoundary = dt;
+				return this;
+			}
+		}
+
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		public class WeeklyTriggerBuilder : TriggerBuilder
+		{
+			internal WeeklyTriggerBuilder(BuilderInfo taskBuilder, short interval)
+				: base(taskBuilder) => TaskDef.Triggers.Add(trigger = new WeeklyTrigger() { WeeksInterval = interval });
+
+			/// <summary>Updates a weekly trigger to specify the days of the week on which it will run.</summary>
+			/// <param name="dow">The days of the week.</param>
+			/// <returns><see cref="TriggerBuilder"/> instance.</returns>
+			public TriggerBuilder On(DaysOfTheWeek dow)
+			{
+				((WeeklyTrigger)trigger).DaysOfWeek = dow;
+				return this as TriggerBuilder;
+			}
+		}
+
+		/// <summary>Fluent helper class. Not intended for use.</summary>
+		internal sealed class BuilderInfo
+		{
+			public TaskDefinition td;
+			public TaskService ts;
+
+			public BuilderInfo([NotNull] TaskService taskSvc)
+			{
+				ts = taskSvc;
+				td = ts.NewTask();
+			}
 		}
 	}
 }

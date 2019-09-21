@@ -226,6 +226,10 @@ namespace TestTaskService
 			t = ts.Execute("notepad.exe").AtTaskRegistration().AsTask("Test");
 			DisplayTask(t, false);
 			ts.RootFolder.DeleteTask(t.Name);
+
+			t = ts.Execute("notepad.exe").OnIdle().When.OnlyIfNetworkAvailable().AsTask("Test", TaskCreation.CreateOrUpdate, "dahall");
+			DisplayTask(t, false);
+			ts.RootFolder.DeleteTask(t.Name);
 		}
 
 		internal static void FolderTaskAction(TaskFolder fld, Action<TaskFolder> fldAction, Action<Task> taskAction, int level = 0)

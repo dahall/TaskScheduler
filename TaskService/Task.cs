@@ -1310,13 +1310,30 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Runs the registered task immediately.</summary>
 		/// <param name="parameters">
-		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
 		/// <para>
-		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information
-		/// see <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+		/// call this method without any values (e.g. <code>Run()</code>).
+		/// </para>
+		/// <para>
+		/// The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+		/// then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+		/// the action properties.
+		/// </para>
+		/// <para>
+		/// If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+		/// "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+		/// </para>
+		/// <para>
+		/// For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+		/// <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
 		/// </para>
 		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Run the current task with a parameter
+		/// var runningTask = myTaskInstance.Run("info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// ]]></code></example>
 		public RunningTask Run(params string[] parameters)
 		{
 			if (v2Task != null)
@@ -1338,38 +1355,54 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="sessionID">
 		/// <para>The terminal server session in which you want to start the task.</para>
 		/// <para>
-		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is not passed into the <paramref name="flags"/> parameter, then the value
-		/// specified in this parameter is ignored.If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the flags parameter
-		/// and the sessionID value is less than or equal to 0, then an invalid argument error will be returned.
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is not passed into the <paramref name="flags"/> parameter, then the value specified in this
+		/// parameter is ignored.If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the flags parameter and the sessionID value is less than or
+		/// equal to 0, then an invalid argument error will be returned.
 		/// </para>
 		/// <para>
-		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID
-		/// value is a valid session ID greater than 0 and if no value is specified for the user parameter, then the Task Scheduler service
-		/// will try to start the task interactively as the user who is logged on to the specified session.
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID value is a valid session
+		/// ID greater than 0 and if no value is specified for the user parameter, then the Task Scheduler service will try to start the task interactively as
+		/// the user who is logged on to the specified session.
 		/// </para>
 		/// <para>
-		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID
-		/// value is a valid session ID greater than 0 and if a user is specified in the user parameter, then the Task Scheduler service will
-		/// try to start the task interactively as the user who is specified in the user parameter.
+		/// If the <see cref="TaskRunFlags.UseSessionId"/> value is passed into the <paramref name="flags"/> parameter and the sessionID value is a valid session
+		/// ID greater than 0 and if a user is specified in the user parameter, then the Task Scheduler service will try to start the task interactively as the
+		/// user who is specified in the user parameter.
 		/// </para>
 		/// </param>
 		/// <param name="user">The user for which the task runs.</param>
 		/// <param name="parameters">
-		/// <para>The parameters used as values in the task actions. A maximum of 32 parameters can be supplied.</para>
 		/// <para>
-		/// These values can be used in the task action where the $(ArgX) variables are used in the action properties. For more information
-		/// see <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383549(v=vs.85).aspx#USING_VARIABLES_IN_ACTION_PROPERTIES">Task Actions</a>.
+		/// The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+		/// call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
+		/// </para>
+		/// <para>
+		/// The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+		/// then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+		/// the action properties.
+		/// </para>
+		/// <para>
+		/// If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+		/// "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+		/// </para>
+		/// <para>
+		/// For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+		/// <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
 		/// </para>
 		/// </param>
 		/// <returns>A <see cref="RunningTask"/> instance that defines the new instance of the task.</returns>
 		/// <remarks>
 		/// <para>
-		/// This method will return without error, but the task will not run if the AllowDemandStart property of ITaskSettings is set to
-		/// false for the task.
+		/// This method will return without error, but the task will not run if the AllowDemandStart property of ITaskSettings is set to false for the task.
 		/// </para>
 		/// <para>If RunEx is invoked from a disabled task, it will return <c>null</c> and the task will not be run.</para>
 		/// </remarks>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
+		/// <example><code lang="cs"><![CDATA[
+		/// // Run the current task with a parameter as a different user and ignoring any of the conditions.
+		/// var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, 0, "DOMAIN\\User", "info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// ]]></code></example>
 		public RunningTask RunEx(TaskRunFlags flags, int sessionID, string user, params string[] parameters)
 		{
 			if (v2Task == null) throw new NotV1SupportedException();
@@ -2029,6 +2062,8 @@ namespace Microsoft.Win32.TaskScheduler
 					TryAdd(ex.Data, "Settings.StartWhenAvailable", "== true requires time-based tasks with an end boundary or time-based tasks that are set to repeat infinitely.");
 				if (v1 && trigger.Repetition.Interval != TimeSpan.Zero && trigger.Repetition.Interval >= trigger.Repetition.Duration)
 					TryAdd(ex.Data, "Trigger.Repetition.Interval", ">= Trigger.Repetition.Duration under Task Scheduler 1.0.");
+				if (trigger.EndBoundary <= trigger.StartBoundary)
+					TryAdd(ex.Data, "Trigger.StartBoundary", ">= Trigger.EndBoundary is not allowed.");
 				if (delOldTask && trigger.EndBoundary != DateTime.MaxValue)
 					hasEndBound = true;
 			}

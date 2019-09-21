@@ -186,7 +186,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="array">
 		/// The one-dimensional <see cref="Array"/> that is the destination of the elements copied from
-		/// <see cref="ICollection{T}/>. The <see cref="Array"/> must have zero-based indexing.
+		/// <see cref="ICollection{T}"/>. The <see cref="Array"/> must have zero-based indexing.
 		/// </param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
 		public void CopyTo(Trigger[] array, int arrayIndex) => CopyTo(0, array, arrayIndex, Count);

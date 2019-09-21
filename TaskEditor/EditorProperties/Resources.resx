@@ -876,4 +876,7 @@ Action: {3}</value>
   <data name="Error_InvalidFileName" xml:space="preserve">
     <value>The supplied program/script is not a valid file name. Please correct before continuing.</value>
   </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>The date and time a trigger expires must be later than the time time it starts or is activated.</value>
+  </data>
 </root>

@@ -556,4 +556,7 @@
   <data name="EventSourcesAll" xml:space="preserve">
     <value>&lt;所有来源&gt;</value>
   </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>触发器到期的日期和时间必须晚于其启动或激活的时间。</value>
+  </data>
 </root>

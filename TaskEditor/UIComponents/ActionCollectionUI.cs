@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Vanara.Extensions;
 using Vanara.Windows.Forms;
 using static Vanara.PInvoke.ComCtl32;
-using static Vanara.PInvoke.User32_Gdi;
+using static Vanara.PInvoke.User32;
 
 namespace Microsoft.Win32.TaskScheduler.UIComponents
 {

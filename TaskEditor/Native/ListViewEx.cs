@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using Vanara.PInvoke;
 using static Vanara.PInvoke.ComCtl32;
-using static Vanara.PInvoke.User32_Gdi;
+using static Vanara.PInvoke.User32;
 
 namespace System.Windows.Forms
 {
@@ -101,7 +101,7 @@ namespace System.Windows.Forms
 			get
 			{
 				if (IsHandleCreated)
-					return User32_Gdi.SendMessage(Handle, (uint)ListViewMessage.LVM_GETHEADER);
+					return User32.SendMessage(Handle, (uint)ListViewMessage.LVM_GETHEADER);
 				return IntPtr.Zero;
 			}
 		}
@@ -123,11 +123,11 @@ namespace System.Windows.Forms
 			{
 				// Get current listview column info
 				var lvcol = new LVCOLUMN(ListViewColumMask.LVCF_FMT);
-				User32_Gdi.SendMessage(Handle, ListViewMessage.LVM_GETCOLUMN, columnNumber, lvcol);
+				User32.SendMessage(Handle, ListViewMessage.LVM_GETCOLUMN, columnNumber, lvcol);
 
 				// Get current header info
 				var hditem = new HDITEM(HeaderItemMask.HDI_FORMAT | HeaderItemMask.HDI_DI_SETITEM);
-				User32_Gdi.SendMessage(columnHeader, HeaderMessage.HDM_GETITEM, columnNumber, hditem);
+				User32.SendMessage(columnHeader, HeaderMessage.HDM_GETITEM, columnNumber, hditem);
 
 				// Update header with column info
 				hditem.Format |= (HeaderItemFormat)((uint)lvcol.Format & 0x1001803);
@@ -141,7 +141,7 @@ namespace System.Windows.Forms
 					hditem.ImageDisplay = HeaderItemImageDisplay.None;
 
 				// Update header
-				User32_Gdi.SendMessage(columnHeader, HeaderMessage.HDM_SETITEM, columnNumber, hditem);
+				User32.SendMessage(columnHeader, HeaderMessage.HDM_SETITEM, columnNumber, hditem);
 			}
 		}
 
@@ -208,7 +208,7 @@ namespace System.Windows.Forms
 						pt = PointToClient(pt);
 						var hHdr = HeaderHandle;
 						var hti = new HDHITTESTINFO { pt = pt };
-						var item = User32_Gdi.SendMessage(hHdr, HeaderMessage.HDM_HITTEST, 0, hti).ToInt32();
+						var item = User32.SendMessage(hHdr, HeaderMessage.HDM_HITTEST, 0, hti).ToInt32();
 						if (item != -1)
 						{
 							if (ColumnContextMenuStrip != null)
@@ -254,9 +254,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private int SendMessage(ListViewMessage msg, int wParam = default, IntPtr lParam = default) => User32_Gdi.SendMessage(Handle, (uint)msg, (IntPtr)wParam, lParam).ToInt32();
+		private int SendMessage(ListViewMessage msg, int wParam = default, IntPtr lParam = default) => User32.SendMessage(Handle, (uint)msg, (IntPtr)wParam, lParam).ToInt32();
 
-		private int SendMessage(ListViewMessage msg, int wParam, LVGROUP group) => User32_Gdi.SendMessage(Handle, msg, wParam, group).ToInt32();
+		private int SendMessage(ListViewMessage msg, int wParam, LVGROUP group) => User32.SendMessage(Handle, msg, wParam, group).ToInt32();
 
 		private void SetAllGroupState(ListViewGroupState state, bool on = true)
 		{
@@ -301,7 +301,7 @@ namespace System.Windows.Forms
 				var nmlv = (NMLISTVIEW)m.GetLParam(typeof(NMLISTVIEW));
 				var iCol = nmlv.iSubItem;
 				var rc = new RECT();
-				User32_Gdi.SendMessage(HeaderHandle, HeaderMessage.HDM_GETITEMDROPDOWNRECT, iCol, ref rc);
+				User32.SendMessage(HeaderHandle, HeaderMessage.HDM_GETITEMDROPDOWNRECT, iCol, ref rc);
 				rc = RectangleToClient(rc);
 				if (ColumnContextMenuStrip != null)
 				{

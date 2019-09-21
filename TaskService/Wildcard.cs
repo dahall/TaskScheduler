@@ -27,7 +27,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public static string WildcardToRegex([NotNull] string pattern)
 		{
 			string s = Regex.Escape(pattern);
-			s = Regex.Replace(Regex.Escape(pattern), @"(?<!\\)\\\*", @".*"); // Negative Lookbehind
+			s = Regex.Replace(s, @"(?<!\\)\\\*", @".*"); // Negative Lookbehind
 			s = Regex.Replace(s, @"\\\\\\\*", @"\*");
 			s = Regex.Replace(s, @"(?<!\\)\\\?", @".");  // Negative Lookbehind
 			s = Regex.Replace(s, @"\\\\\\\?", @"\?");

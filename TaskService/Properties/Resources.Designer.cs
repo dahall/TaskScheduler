@@ -133,6 +133,15 @@ namespace Microsoft.Win32.TaskScheduler.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The date and time a trigger expires must be later than the time time it starts or is activated..
+        /// </summary>
+        internal static string Error_TriggerEndBeforeStart {
+            get {
+                return ResourceManager.GetString("Error_TriggerEndBeforeStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} {1}.
         /// </summary>
         internal static string ExecAction {

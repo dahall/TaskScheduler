@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using static Vanara.PInvoke.Kernel32;
-using static Vanara.PInvoke.User32_Gdi;
+using static Vanara.PInvoke.User32;
 
 namespace Microsoft.Win32
 {

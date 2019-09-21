@@ -199,10 +199,22 @@ namespace Microsoft.Win32.TaskScheduler
 				td == null ? "" : task.Definition.Triggers.ToString(),
 				disabled || task.NextRunTime < DateTime.Now ? string.Empty : task.NextRunTime.ToString("G"),
 				task.LastRunTime == DateTime.MinValue ? EditorProperties.Resources.Never :  task.LastRunTime.ToString("G"),
-				task.LastRunTime == DateTime.MinValue ? string.Empty : task.State == TaskState.Running ? string.Format(EditorProperties.Resources.LastResultRunning, task.LastTaskResult) : ((task.LastTaskResult == 0 ? EditorProperties.Resources.LastResultSuccessful : string.Format("(0x{0:X})", task.LastTaskResult))),
+				task.LastRunTime == DateTime.MinValue ? string.Empty : LastResultString(),
 				td == null ? "" : task.Definition.RegistrationInfo.Author,
 				string.Empty
 				};
+
+			string LastResultString()
+			{
+				if (task.State == TaskState.Running)
+					return string.Format(EditorProperties.Resources.LastResultRunning, task.LastTaskResult);
+				if (task.LastTaskResult == 0)
+					return EditorProperties.Resources.LastResultSuccessful;
+				var exc = new Win32Exception(task.LastTaskResult);
+				if (string.IsNullOrEmpty(exc.Message))
+					return string.Format("(0x{0:X})", task.LastTaskResult);
+				return exc.Message.IndexOf(task.LastTaskResult.ToString("X"), StringComparison.InvariantCultureIgnoreCase) == -1 ? string.Format("{1} (0x{0:X})", task.LastTaskResult, exc.Message) : exc.Message;
+			}
 		}
 
 		private void RefreshItems()

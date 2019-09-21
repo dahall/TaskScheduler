@@ -24,6 +24,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 			ResetControls();
 		}
 
+		/// <summary>Occurs when the trigger StartBoundary has changed.</summary>
+		[Category("Property Changed"), Description("Occurs when the trigger StartBoundary has changed.")]
+		public event EventHandler StartBoundaryChanged;
+
 		/// <summary>Occurs when the trigger type has changed.</summary>
 		[Category("Property Changed"), Description("Occurs when the trigger type has changed.")]
 		public event EventHandler TriggerTypeChanged;
@@ -152,6 +156,12 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		bool ITriggerHandler.IsTriggerValid() => true;
 
+		/// <summary>Called when the trigger StartBoundary has changed.</summary>
+		protected void OnStartBoundaryChanged()
+		{
+			StartBoundaryChanged?.Invoke(this, EventArgs.Empty);
+		}
+
 		/// <summary>Called when the trigger type has changed.</summary>
 		protected void OnTriggerTypeChanged() => TriggerTypeChanged?.Invoke(this, EventArgs.Empty);
 
@@ -168,6 +178,7 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					newT.StartBoundary = schedStartDatePicker.Value;
 				monthlyTriggerUI1.Trigger = newT;
 				schedTabControl.SelectedTab = monthlyTab;
+				OnStartBoundaryChanged();
 				OnTriggerTypeChanged();
 			}
 			else
@@ -220,7 +231,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 					monthlyTriggerUI1_TriggerTypeChanged(this, EventArgs.Empty);
 				}
 				if (nullTrigger && Trigger != null)
+				{
 					Trigger.StartBoundary = schedStartDatePicker.Value;
+					OnStartBoundaryChanged();
+				}
 				if (!onAssignment && sender != schedMonthlyRadio)
 					OnTriggerTypeChanged();
 			}
@@ -229,7 +243,10 @@ namespace Microsoft.Win32.TaskScheduler.UIComponents
 		private void schedStartDatePicker_ValueChanged(object sender, EventArgs e)
 		{
 			if (!onAssignment && Trigger != null)
+			{
 				Trigger.StartBoundary = schedStartDatePicker.Value;
+				OnStartBoundaryChanged();
+			}
 		}
 	}
 }

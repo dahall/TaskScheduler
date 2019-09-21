@@ -22,6 +22,9 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <BuildFolder>$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))</BuildFolder>
@@ -59,15 +62,6 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TaskEditor.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -81,104 +75,40 @@
     <Reference Include="System.Xml" />
     <Reference Include="CustomMarshalers" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\$(BuildFolder)\ActiveDirectoryObjectPicker.dll</HintPath>
-    </Reference>
-    <Reference Include="AeroWizard, Version=2.2.0.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.2.0\lib\$(BuildFolder)\AeroWizard.dll</HintPath>
-    </Reference>
-    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.8.0\lib\$(BuildFolder)\GroupControls.dll</HintPath>
-    </Reference>
-    <Reference Include="Theraot.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Theraot.Core.2.1.0\lib\$(BuildFolder)\Theraot.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.2.0\lib\$(BuildFolder)\TimeSpan2.dll</HintPath>
-    </Reference>
+  <!--
+  <ItemGroup Condition="'$(TargetFrameworkVersion)' == 'v4.0'">
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup Condition="'$(BuildFolder)' == 'net20'">
-    <Reference Include="Vanara.Compatibility.EventLog, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.Compatibility.EventLog.1.0.1\lib\net20\Vanara.Compatibility.EventLog.dll</HintPath>
-    </Reference>
+  <ItemGroup Condition="'$(TargetFrameworkVersion)' == 'v4.5'">
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
   </ItemGroup>
+  -->
   <ItemGroup>
-    <Reference Include="Vanara.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.Core.2.1.1\lib\$(BuildFolder)\Vanara.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.AclUI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.AclUI.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.AclUI.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.BITS, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.BITS.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.BITS.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.ComCtl32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.ComCtl32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.ComCtl32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.CredUI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.CredUI.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.CredUI.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.DwmApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.DwmApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.DwmApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Gdi32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Gdi32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Gdi32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.IpHlpApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.IpHlpApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.IpHlpApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Kernel32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Kernel32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Kernel32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Mpr, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Mpr.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Mpr.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.NetListMgr, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.NetListMgr.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.NetListMgr.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.NTDSApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.NTDSApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.NTDSApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Ole, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Ole.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Ole.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Security, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Security.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Shared, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Shared.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Shell32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Shell32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Shell32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.ShlwApi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.ShlwApi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.ShlwApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.User32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.User32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.User32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.User32.Gdi, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.User32.Gdi.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.User32.Gdi.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.UxTheme, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.UxTheme.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.UxTheme.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.VirtDisk, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.VirtDisk.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.VirtDisk.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.PInvoke.Ws2_32, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.PInvoke.Ws2_32.2.1.1\lib\$(BuildFolder)\Vanara.PInvoke.Ws2_32.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.Security, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.Security.2.1.1\lib\$(BuildFolder)\Vanara.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.SystemServices, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.SystemServices.2.1.1\lib\$(BuildFolder)\Vanara.SystemServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Vanara.Windows.Forms, Version=2.1.1.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vanara.Windows.Forms.2.1.1\lib\$(BuildFolder)\Vanara.Windows.Forms.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AeroWizard">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="GroupControls">
+      <Version>1.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="Theraot.Core">
+      <Version>3.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="TimeSpan2">
+      <Version>2.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker">
+      <Version>2.3.133</Version>
+    </PackageReference>
+    <PackageReference Include="Vanara.SystemServices">
+      <Version>3.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Vanara.Windows.Forms">
+      <Version>3.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionEditDialog.cs">
@@ -1396,7 +1326,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="app.config" />
     <None Include="TaskEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -1479,8 +1409,8 @@
     </PostBuildEvent>
   </PropertyGroup>
   <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
+    <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
     <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5" RunEachTargetSeparately="true" />-->
   </Target>
 </Project>

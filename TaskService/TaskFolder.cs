@@ -335,9 +335,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// be used to specify the current task folder and the '..' characters cannot be used to specify the parent task folder in the path.
 		/// </param>
 		/// <param name="xmlFile">The file containing the XML-formatted definition of the task.</param>
+		/// <param name="overwriteExisting">If set to <see langword="true"/>, overwrites any existing task with the same name.</param>
 		/// <returns>A <see cref="Task"/> instance that represents the new task.</returns>
 		/// <exception cref="NotV1SupportedException">Importing from an XML file is only supported under Task Scheduler 2.0.</exception>
-		public Task ImportTask(string path, [NotNull] string xmlFile) => RegisterTask(path, File.ReadAllText(xmlFile));
+		public Task ImportTask(string path, [NotNull] string xmlFile, bool overwriteExisting = true) => RegisterTask(path, File.ReadAllText(xmlFile), overwriteExisting ? TaskCreation.CreateOrUpdate : TaskCreation.Create);
 
 		/// <summary>Registers (creates) a new task in the folder using XML to define the task.</summary>
 		/// <param name="path">

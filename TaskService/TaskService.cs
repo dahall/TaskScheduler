@@ -78,13 +78,15 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
 		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
-		internal ITaskScheduler v1TaskScheduler;
-		internal ITaskService v2TaskService;
 		private static Guid CLSID_Ctask = typeof(CTask).GUID;
 		private static Guid IID_ITask = typeof(ITask).GUID;
 		[ThreadStatic]
 		private static TaskService instance;
 		private static Version osLibVer;
+
+		internal ITaskScheduler v1TaskScheduler;
+		internal ITaskService v2TaskService;
+		private bool connecting;
 		private bool forceV1;
 		private bool initializing;
 		private Version maxVer;
@@ -147,9 +149,26 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="message">An optional message.</param>
 		public delegate void ComHandlerUpdate(short percentage, string message);
 
+		/// <summary>Occurs when the Task Scheduler is connected to the local or remote target.</summary>
+		public event EventHandler ServiceConnected;
+
+		/// <summary>Occurs when the Task Scheduler is disconnected from the local or remote target.</summary>
+		public event EventHandler ServiceDisconnected;
+
 		/// <summary>Gets a local instance of the <see cref="TaskService"/> using the current user's credentials.</summary>
 		/// <value>Local user <see cref="TaskService"/> instance.</value>
-		public static TaskService Instance => instance ?? (instance = new TaskService());
+		public static TaskService Instance
+		{
+			get
+			{
+				if (instance is null)
+				{
+					instance = new TaskService();
+					instance.ServiceDisconnected += Instance_ServiceDisconnected;
+				}
+				return instance;
+			}
+		}
 
 		/// <summary>
 		/// Gets the library version. This is the highest version supported by the local library. Tasks cannot be created using any
@@ -773,6 +792,8 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Impersonation.Dispose();
 				v1Impersonation = null;
 			}
+			if (!connecting)
+				ServiceDisconnected?.Invoke(this, EventArgs.Empty);
 			base.Dispose(disposing);
 		}
 
@@ -810,6 +831,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return osLibVer;
 		}
 
+		private static void Instance_ServiceDisconnected(object sender, EventArgs e) => instance?.Connect();
+
 		/// <summary>Connects this instance of the <see cref="TaskService"/> class to a running Task Scheduler.</summary>
 		private void Connect()
 		{
@@ -820,6 +843,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword) || string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))
 				{
 					// Clear stuff if already connected
+					connecting = true;
 					Dispose(true);
 
 					if (LibraryIsV2 && !forceV1)
@@ -858,6 +882,8 @@ namespace Microsoft.Win32.TaskScheduler
 						targetServer = v1TaskScheduler.GetTargetComputer();
 						maxVer = TaskServiceVersion.V1_1;
 					}
+					ServiceConnected?.Invoke(this, EventArgs.Empty);
+					connecting = false;
 				}
 				else
 				{

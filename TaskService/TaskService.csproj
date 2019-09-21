@@ -61,7 +61,7 @@
     <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
     <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.1" />
+    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">
     <Reference Include="System.Drawing" />
@@ -90,9 +90,9 @@
     <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="2.1.1" />
-    <PackageReference Include="Vanara.PInvoke.Security" Version="2.1.1" />
-    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="2.1.1" />
+    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="3.0.1" />
+    <PackageReference Include="Vanara.PInvoke.Security" Version="3.0.1" />
+    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

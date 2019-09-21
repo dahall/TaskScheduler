@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Serialization;
@@ -1172,11 +1173,22 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed class MonthlyTrigger : Trigger, ICalendarTrigger, ITriggerDelay, IXmlSerializable, Models.IMonthlyTrigger
 	{
 		/// <summary>Creates an unbound instance of a <see cref="MonthlyTrigger"/>.</summary>
-		/// <param name="dayOfMonth">The day of the month.</param>
+		/// <param name="dayOfMonth">
+		/// The day of the month. This must be a value between 1 and 32. If this value is set to 32, then the
+		/// <see cref="RunOnLastDayOfMonth"/> value will be set and no days will be added regardless of the month.
+		/// </param>
 		/// <param name="monthsOfYear">The months of the year.</param>
 		public MonthlyTrigger(int dayOfMonth = 1, MonthsOfTheYear monthsOfYear = MonthsOfTheYear.AllMonths) : base(TaskTriggerType.Monthly)
 		{
-			DaysOfMonth = new[] { dayOfMonth };
+			if (dayOfMonth < 1 || dayOfMonth > 32) throw new ArgumentOutOfRangeException(nameof(dayOfMonth));
+			if (!monthsOfYear.IsValid()) throw new ArgumentOutOfRangeException(nameof(monthsOfYear));
+			if (dayOfMonth == 32)
+			{
+				DaysOfMonth = new int[0];
+				RunOnLastDayOfMonth = true;
+			}
+			else
+				DaysOfMonth = new[] { dayOfMonth };
 			MonthsOfYear = monthsOfYear;
 		}
 
@@ -1345,6 +1357,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>An integer to be interpreted as a mask.</returns>
 		private static int IndicesToMask([NotNull] int[] indices)
 		{
+			if (indices is null || indices.Length == 0) return 0;
 			var mask = 0;
 			foreach (var index in indices)
 			{
@@ -1976,6 +1989,7 @@ namespace Microsoft.Win32.TaskScheduler
 		internal ITaskTrigger v1Trigger;
 		internal TASK_TRIGGER v1TriggerData;
 		internal ITrigger v2Trigger;
+		/// <summary>Property values which have not yet been applied to the underlying COM object.</summary>
 		protected Dictionary<string, object> unboundValues = new Dictionary<string, object>();
 		private static bool? foundTimeSpan2;
 		private static Type timeSpan2Type;
@@ -2072,7 +2086,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
+				{
+					if (value.HasValue && value.Value <= StartBoundary)
+						throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 					v2Trigger.EndBoundary = value;
+				}
 				else
 				{
 					v1TriggerData.EndDate = value;
@@ -2214,7 +2232,11 @@ namespace Microsoft.Win32.TaskScheduler
 			set
 			{
 				if (v2Trigger != null)
+				{
+					if (value.HasValue && value.Value > EndBoundary)
+						throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 					v2Trigger.StartBoundary = value;
+				}
 				else
 				{
 					v1TriggerData.BeginDate = value.GetValueOrDefault(DateTime.MinValue);
@@ -2560,6 +2582,8 @@ namespace Microsoft.Win32.TaskScheduler
 			var iTriggers = iTaskDef.Triggers;
 			v2Trigger = iTriggers.Create(ttype);
 			Marshal.ReleaseComObject(iTriggers);
+			if ((unboundValues.TryGetValue("StartBoundary", out var dt) ? (DateTime?)dt : StartBoundaryNullable).GetValueOrDefault(DateTime.MaxValue) > (unboundValues.TryGetValue("EndBoundary", out dt) ? (DateTime?)dt : EndBoundaryNullable).GetValueOrDefault(DateTime.MaxValue))
+				throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 			foreach (var key in unboundValues.Keys)
 			{
 				try
@@ -2583,6 +2607,8 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (v1TriggerData.MinutesInterval != 0 && v1TriggerData.MinutesInterval >= v1TriggerData.MinutesDuration)
 				throw new ArgumentException("Trigger.Repetition.Interval must be less than Trigger.Repetition.Duration under Task Scheduler 1.0.");
+			if (v1TriggerData.EndDate <= v1TriggerData.BeginDate)
+				throw new ArgumentException(Properties.Resources.Error_TriggerEndBeforeStart);
 			if (v1TriggerData.BeginDate == DateTime.MinValue)
 				v1TriggerData.BeginDate = DateTime.Now;
 			v1Trigger?.SetTrigger(v1TriggerData);

@@ -221,6 +221,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (value != availableTabs)
 				{
+					if (!value.IsValid()) throw new ArgumentOutOfRangeException(nameof(AvailableTabs));
 					var rembits = new BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & availableTabs)));
 					var addbits = new BitArray(BitConverter.GetBytes((int)((value ^ availableTabs) & value)));
 					for (var i = 0; i < tabPages.Length; i++)
@@ -1468,7 +1469,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (Environment.OSVersion.Version.Major < 6 || task == null)
 					tabControl.TabPages.Remove(historyTab);
-				else if (Environment.OSVersion.Version.Major >= 6 && task != null)
+				else
 					InsertTab(8);
 			}
 		}

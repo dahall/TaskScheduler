@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using Vanara.Extensions;
+using Vanara.Extensions.Reflection;
 using static Vanara.PInvoke.MSTask;
 using static Vanara.PInvoke.TaskSchd;
 
@@ -230,15 +230,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal abstract string GetPowerShellCommand();
 
-		internal T GetProperty<T, TB>(string propName, T defaultValue = default)
-		{
-			if (iAction == null)
-				return (unboundValues.ContainsKey(propName)) ? (T)unboundValues[propName] : defaultValue;
-			//return ((TB)iAction).GetPropertyValue(propName, defaultValue);
-			var obj = (TB)iAction;
-			try { return (T)Convert.ChangeType(obj.GetType().InvokeMember(propName, BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, obj, null, null), typeof(T)); }
-			catch { return defaultValue; }			
-		}
+		internal T GetProperty<T, TB>(string propName, T defaultValue = default) =>
+			iAction == null
+				? unboundValues.TryGetValue(propName, out var value) ? (T)value : defaultValue
+				: iAction.GetPropertyValue(propName, defaultValue);
 
 		internal void OnPropertyChanged(string propName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
 

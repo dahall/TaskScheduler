@@ -108,6 +108,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (value == 0) throw new ArgumentException("Value cannot be 0", nameof(AvailableTriggers));
 				if (availableTriggers == value) return;
+				if (!value.IsValid()) throw new ArgumentOutOfRangeException(nameof(AvailableTriggers));
 				availableTriggers = value;
 				calendarTriggerUI1.AvailableTriggers = AvailableTriggers;
 				ResetCombo();
@@ -255,7 +256,7 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				var excl = new List<TaskTriggerDisplayType>();
 				// Get unavailable settings and convert to unavailable views
-				foreach (var t in (AvailableTriggers.AllTriggers & ~AvailableTriggers).GetFlags().Select(AvToType))
+				foreach (var t in (AvailableTriggers.AllTriggers & ~AvailableTriggers).GetFlags().Where(a => a != AvailableTriggers.AllTriggers).Select(AvToType))
 				{
 					var d = DisplayForType(t);
 					// Add all types of sessions
@@ -343,6 +344,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					trigger.StartBoundary = DateTime.MinValue;
 				initialStartBoundary = trigger.StartBoundary;
+				validateStartEndBoundary();
 			}
 		}
 
@@ -350,6 +352,12 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			if (!onAssignment)
 				trigger.StartBoundary = activateDatePicker.Value == DateTimePicker.MinimumDateTime ? DateTime.MinValue : activateDatePicker.Value;
+			validateStartEndBoundary();
+		}
+
+		private void calendarTriggerUI1_StartBoundaryChanged(object sender, EventArgs e)
+		{
+			validateStartEndBoundary();
 		}
 
 		private void calendarTriggerUI1_TriggerTypeChanged(object sender, EventArgs e) => trigger = calendarTriggerUI1.Trigger;
@@ -416,8 +424,20 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void expireDatePicker_ValueChanged(object sender, EventArgs e)
 		{
-			if (!onAssignment && expireCheckBox.Checked)
+			if (!onAssignment && validateStartEndBoundary())
 				trigger.EndBoundary = expireDatePicker.Value == DateTimePicker.MinimumDateTime || expireDatePicker.Value == DateTimePicker.MaximumDateTime ? DateTime.MaxValue : expireDatePicker.Value;
+		}
+
+		private bool validateStartEndBoundary()
+		{
+			var bad = expireCheckBox.Checked && expireDatePicker.Value.ToUniversalTime() <= trigger.StartBoundary.ToUniversalTime();
+			dateErrorProvider.SetError(expireDatePicker, bad ? EditorProperties.Resources.Error_TriggerEndBeforeStart : null);
+			if (bad)
+			{
+				expireDatePicker.Value = trigger.StartBoundary + TimeSpan.FromMinutes(1);
+				return false;
+			}
+			return true;
 		}
 
 		private Trigger GetFirstAvailableTrigger(AvailableTriggers filter = AvailableTriggers.AllTriggers) => Trigger.CreateTrigger(AvToType((AvailableTriggers & filter).GetFlags().First()));

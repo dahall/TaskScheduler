@@ -55,6 +55,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Theraot.Core, Version=3.0.4.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Theraot.Core.3.0.4\lib\net20\Theraot.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskEditor\TaskEditor.csproj">
@@ -70,9 +73,6 @@
     <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
       <HintPath>..\packages\GroupControls.1.8.0\lib\$(TargetFrameworkVersion.Replace("v", "net").Replace(".", ""))\GroupControls.dll</HintPath>
       <Aliases>GrpCtrl</Aliases>
-    </Reference>
-    <Reference Include="Theraot.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Theraot.Core.2.1.0\lib\$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", ""))\Theraot.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

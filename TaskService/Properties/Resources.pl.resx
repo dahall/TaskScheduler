@@ -327,4 +327,7 @@
   <data name="WWThirdWeek" xml:space="preserve">
     <value>Trzeci</value>
   </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>Data i godzina wygaśnięcia wyzwalacza musi być późniejsza niż godzina jego uruchomienia lub aktywacji.</value>
+  </data>
 </root>
