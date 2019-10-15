@@ -2227,7 +2227,12 @@ namespace Microsoft.Win32.TaskScheduler
 						{
 							var un = pn["UserId"] ?? pn["GroupId"];
 							if (un != null)
-								try { return User.FromSidString(un.InnerText).Name; } catch { return un.Value; }
+								try { return User.FromSidString(un.InnerText).Name; }
+								catch
+								{
+									try { return new User(un.InnerText).Name; }
+									catch { }
+								}
 						}
 					}
 					return new User(ToString()).Name;
