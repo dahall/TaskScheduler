@@ -1255,7 +1255,7 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.OnLostFocus(System.EventArgs)">
       <summary>Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" /> event.</summary>
-      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskHistoryControl.RefreshHistory">
       <summary>

@@ -1966,7 +1966,7 @@
       <param name="parameters">
         <para>
             The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
-            call this method without any values (e.g. <code>@@_SHFB_1</code>).
+            call this method without any values (e.g. <code>Run()</code>).
             </para>
         <para>
             The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
@@ -2009,7 +2009,7 @@
       <param name="parameters">
         <para>
             The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
-            call this method without any values (e.g. <code>@@_SHFB_1</code>).
+            call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
             </para>
         <para>
             The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
