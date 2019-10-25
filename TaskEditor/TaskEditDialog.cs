@@ -347,6 +347,12 @@ namespace Microsoft.Win32.TaskScheduler
 			return false;
 		}
 
+		private void cancelBtn_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
+
 		private static bool IsValidTaskName(string name)
 		{
 			return !string.IsNullOrEmpty(name) && name.IndexOfAny(Path.GetInvalidFileNameChars()) == -1;
