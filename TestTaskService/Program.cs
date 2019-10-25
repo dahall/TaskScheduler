@@ -107,16 +107,21 @@ namespace TestTaskService
 				// Register then show task again
 				//editorForm = new TaskEditDialog(ts, td, true, true)
 				var task = ts.RootFolder.RegisterTaskDefinition(taskName, td, TaskCreation.CreateOrUpdate, "SYSTEM", null, TaskLogonType.ServiceAccount);
-				editorForm = new TaskEditDialog(task, true, true)
+				if (editorForm == null)
 				{
-					AvailableTabs = AvailableTaskTabs.All,
-					//AvailableActions = AvailableActions.ComHandler | AvailableActions.Execute,
-					//AvailableTriggers = AvailableTriggers.Daily | AvailableTriggers.Weekly,
-					TaskName = "Test",
-					TaskNameIsEditable = false,
-					ShowActionRunButton = true,
-					ShowConvertActionsToPowerShellCheck = true
-				};
+					editorForm = new TaskEditDialog(task, true, true)
+					{
+						AvailableTabs = AvailableTaskTabs.All,
+						//AvailableActions = AvailableActions.ComHandler | AvailableActions.Execute,
+						//AvailableTriggers = AvailableTriggers.Daily | AvailableTriggers.Weekly,
+						TaskName = "Test",
+						TaskNameIsEditable = false,
+						ShowActionRunButton = true,
+						ShowConvertActionsToPowerShellCheck = true
+					};
+				}
+				else
+					editorForm.Task = task;
 				if (ts.HighestSupportedVersion >= new Version(1, 2)) editorForm.TaskFolder = @"\Microsoft";
 				if (editorForm.ShowDialog() == DialogResult.OK)
 				{
