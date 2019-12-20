@@ -1732,12 +1732,12 @@
             </summary>
       <param name="task">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Task" /> instance.</param>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition)">
-      <summary>
-            Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />.
-            </summary>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Initialize(Microsoft.Win32.TaskScheduler.TaskService,Microsoft.Win32.TaskScheduler.TaskDefinition,System.String,System.String)">
+      <summary>Initializes the control for the editing of a new <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />.</summary>
       <param name="service">A <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskService" /> instance.</param>
       <param name="td">An optional <see cref="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.TaskDefinition" />. Leaving null creates a new task.</param>
+      <param name="taskName">If set, assigns this name to the task's name field.</param>
+      <param name="taskFolder">If set, assigns this path to the task's folder.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSchedulerWizard.Password">
       <summary>
