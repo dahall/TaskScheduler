@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>TaskSchedulerEditor</id>
-    <version>2.8.17</version>
+    <version>2.8.18</version>
     <title>Task Scheduler Managed Wrapper UI Library</title>
     <authors>David Hall</authors>
     <description>Provides localizable UI elements for editing classes in the TaskScheduler library.</description>
@@ -13,7 +13,7 @@
     <iconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</iconUrl>
     <tags>task interop windows taskscheduler scheduler UI editor</tags>
     <dependencies>
-      <dependency id="TaskScheduler" version="[2.8.17]" />
+      <dependency id="TaskScheduler" version="[2.8.18]" />
       <dependency id="AeroWizard" version="[2.2.3]" />
       <dependency id="GroupControls" version="[1.8.0]" />
       <dependency id="TimeSpan2" version="[2.2.0]" />
