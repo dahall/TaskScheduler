@@ -520,15 +520,17 @@ namespace Microsoft.Win32.TaskScheduler
 		[DefaultValue((string)null), Category("Appearance"), Description("Trigger properties page instruction text.")]
 		public string TriggerPropertiesInstructions { get; set; }
 
-		/// <summary>
-		/// Initializes the control for the editing of a new <see cref="TaskDefinition"/>.
-		/// </summary>
+		/// <summary>Initializes the control for the editing of a new <see cref="TaskDefinition"/>.</summary>
 		/// <param name="service">A <see cref="TaskService"/> instance.</param>
 		/// <param name="td">An optional <see cref="TaskDefinition"/>. Leaving null creates a new task.</param>
-		public void Initialize(TaskService service, TaskDefinition td = null)
+		/// <param name="taskName">If set, assigns this name to the task's name field.</param>
+		/// <param name="taskFolder">If set, assigns this path to the task's folder.</param>
+		public void Initialize(TaskService service, TaskDefinition td = null, string taskName = null, string taskFolder = null)
 		{
 			TaskService = service;
 			task = null;
+			TaskName = taskName;
+			TaskFolder = taskFolder;
 			if (td == null)
 			{
 				TaskDefinition = service.NewTask();
@@ -1067,13 +1069,8 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private void wizardControl1_Finished(object sender, System.EventArgs e)
 		{
-			bool myTS = false;
-
 			if (TaskService == null)
-			{
-				TaskService = new TaskService();
-				myTS = true;
-			}
+				TaskService = TaskService.Instance;
 
 			td.Data = TaskName;
 			td.RegistrationInfo.Description = descText.Text;
@@ -1094,9 +1091,6 @@ namespace Microsoft.Win32.TaskScheduler
 					fld = TaskService.GetFolder(TaskFolder);
 				task = fld.RegisterTaskDefinition(TaskName, td, TaskCreation.CreateOrUpdate, td.Principal.ToString(), Password, td.Principal.LogonType);
 			}
-
-			if (myTS)
-				TaskService = null;
 		}
 	}
 }
