@@ -107,6 +107,6 @@ For extended examples on how to the use the library, look in the source code are
 ___
 This project appreciatively uses:
 
-[![JetBrains](./docs/icons/resharper-logo.svg){:height="20%" width="20%"} from JetBrains](https://www.jetbrains.com/?from=Task%20Scheduler%20Managed%20Wrapper)
+[<img alt="ReSharper from JetBrains" src="https://github.com/dahall/TaskScheduler/blob/master/docs/icons/resharper-logo.svg" height="20%" width="20%"/>](https://www.jetbrains.com/?from=Task%20Scheduler%20Managed%20Wrapper)
 
 [Sandcastle Help File Builder](https://github.com/EWSoftware/SHFB)
