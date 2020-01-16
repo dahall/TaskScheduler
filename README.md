@@ -1,4 +1,4 @@
-# Task Scheduler Managed Wrapper
+# ![](./docs/icons/tsnew48.png) Task Scheduler Managed Wrapper
 [![Version](https://img.shields.io/github/release/dahall/TaskScheduler.svg?style=flat-square)](https://github.com/dahall/TaskScheduler/releases) [![Downloads](https://img.shields.io/nuget/dt/TaskScheduler.svg?style=flat-square)](https://www.nuget.org/packages/TaskScheduler/) 
 
 > Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.
@@ -103,3 +103,10 @@ class Program
 ```
 
 For extended examples on how to the use the library, look in the source code area or look at the [Examples Page](https://github.com/dahall/TaskScheduler/wiki/Examples). The library closely follows the Task Scheduler 2.0 Scripting classes. Microsoft has some examples on [MSDN](http://msdn2.microsoft.com/en-us/library/aa384006(VS.85).aspx) around it that may further help you understand how to use this library.
+
+___
+This project appreciatively uses:
+
+[![JetBrains](./docs/icons/resharper-logo.svg){:height="20%" width="20%"} from JetBrains](https://www.jetbrains.com/?from=Task%20Scheduler%20Managed%20Wrapper)
+
+[Sandcastle Help File Builder](https://github.com/EWSoftware/SHFB)
