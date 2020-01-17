@@ -163,7 +163,7 @@
     <value>{0}</value>
   </data>
   <data name="TaskDefaultPrincipal" xml:space="preserve">
-    <value>Автор</value>
+    <value>Создатель</value>
   </data>
   <data name="TaskStateQueued" xml:space="preserve">
     <value>В очереди</value>
@@ -190,19 +190,19 @@
     <value>В {0:t} каждый день</value>
   </data>
   <data name="TriggerDaily2" xml:space="preserve">
-    <value>В {0:t} каждые {1} дней</value>
+    <value>В {0:t} каждые {1} дн.</value>
   </data>
   <data name="TriggerDuration0" xml:space="preserve">
-    <value>бессрочно</value>
+    <value>без окончания</value>
   </data>
   <data name="TriggerDurationNot0" xml:space="preserve">
-    <value>продолжительностью в {0}</value>
+    <value>в течение {0}</value>
   </data>
   <data name="TriggerDurationNot0Short" xml:space="preserve">
     <value>на {0}</value>
   </data>
   <data name="TriggerEndBoundary" xml:space="preserve">
-    <value>Триггер истекает в {0:G}.</value>
+    <value>Срок истечения действия триггера:  {0:G}.</value>
   </data>
   <data name="TriggerEvent1" xml:space="preserve">
     <value>Настраиваемое</value>
@@ -217,16 +217,16 @@
     <value>, EventID: {0}</value>
   </data>
   <data name="TriggerIdle1" xml:space="preserve">
-    <value>При простое компьютера</value>
+    <value>При бездействии компьютера</value>
   </data>
   <data name="TriggerLogon1" xml:space="preserve">
-    <value>При входе в систему {0}</value>
+    <value>При входе {0}</value>
   </data>
   <data name="TriggerMonthly1" xml:space="preserve">
     <value>В {0:t} в {1} день месяца {2}, начиная с {0:d} </value>
   </data>
   <data name="TriggerMonthlyDOW1" xml:space="preserve">
-    <value>В {0:t} по {1} {2:f} каждый {3}, начиная c {0:d} </value>
+    <value>В {0:t} по {1} {2:f} каждую {3}, начиная c {0:d} </value>
   </data>
   <data name="TriggerRegistration1" xml:space="preserve">
     <value>При создании или изменении задачи</value>
@@ -295,34 +295,34 @@
     <value>Однократно</value>
   </data>
   <data name="TriggerTypeWeekly" xml:space="preserve">
-    <value>Каждую неделю</value>
+    <value>Еженедельно</value>
   </data>
   <data name="TriggerWeekly1Week" xml:space="preserve">
-    <value>В {0:t} каждый {1} каждую неделю, начиная с {0: d}</value>
+    <value>В {0:t} по {1} еженедельно, начиная с {0:d}</value>
   </data>
   <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
-    <value>В {0:t} каждый {1} каждого {2} недель, начиная с {0: d}</value>
+    <value>В {0:t} по {1} каждую {2} неделю, начиная с {0:d}</value>
   </data>
   <data name="WWAllWeeks" xml:space="preserve">
-    <value>каждый</value>
+    <value>каждую</value>
   </data>
   <data name="WWFifthWeek" xml:space="preserve">
-    <value>пятый</value>
+    <value>5-ю</value>
   </data>
   <data name="WWFirstWeek" xml:space="preserve">
-    <value>первый</value>
+    <value>1-ю</value>
   </data>
   <data name="WWFourthWeek" xml:space="preserve">
-    <value>четвертый</value>
+    <value>4-ю</value>
   </data>
   <data name="WWLastWeek" xml:space="preserve">
-    <value>последний</value>
+    <value>последнюю</value>
   </data>
   <data name="WWSecondWeek" xml:space="preserve">
-    <value>второй</value>
+    <value>2-ю</value>
   </data>
   <data name="WWThirdWeek" xml:space="preserve">
-    <value>третий</value>
+    <value>3-ю</value>
   </data>
   <data name="TaskStateDisabled" xml:space="preserve">
     <value>Отключено</value>

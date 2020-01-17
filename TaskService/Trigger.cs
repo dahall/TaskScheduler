@@ -1355,7 +1355,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <param name="indices">An array with an element for each bit of the mask which is ON.</param>
 		/// <returns>An integer to be interpreted as a mask.</returns>
-		private static int IndicesToMask([NotNull] int[] indices)
+		private static int IndicesToMask(int[] indices)
 		{
 			if (indices is null || indices.Length == 0) return 0;
 			var mask = 0;

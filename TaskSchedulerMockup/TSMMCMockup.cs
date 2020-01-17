@@ -35,14 +35,24 @@ namespace TaskSchedulerMockup
 
 		private void createBasicTaskMenuItem_Click(object sender, EventArgs e)
 		{
-			taskSchedulerWizard1.Initialize(taskService);
-			taskSchedulerWizard1.ShowDialog(this);
+			if (curPanel != folderPanel || folderPanel is null || folderPanel.TaskFolder is null)
+				MessageBox.Show(this, "A folder is not selected. Please select a folder in the tree and try again.", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			else
+			{
+				taskSchedulerWizard1.Initialize(taskService, null, null, folderPanel.TaskFolder.Path);
+				taskSchedulerWizard1.ShowDialog(this);
+			}
 		}
 
 		private void createTaskMenuItem_Click(object sender, EventArgs e)
 		{
-			taskEditDialog1.Initialize(taskService);
-			taskEditDialog1.ShowDialog(this);
+			if (curPanel != folderPanel || folderPanel is null || folderPanel.TaskFolder is null)
+				MessageBox.Show(this, "A folder is not selected. Please select a folder in the tree and try again.", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			else
+			{
+				taskEditDialog1.Initialize(taskService, null, null, folderPanel.TaskFolder.Path);
+				taskEditDialog1.ShowDialog(this);
+			}
 		}
 
 		private void delFolderMenuItem_Click(object sender, EventArgs e)

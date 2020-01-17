@@ -112,58 +112,144 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="taskNameLabel.Text" xml:space="preserve">
-    <value>Название:</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="taskHiddenCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 19</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Расположение:</value>
+  <data name="taskHiddenCheck.Text" xml:space="preserve">
+    <value>Скрытая задача</value>
   </data>
-  <data name="taskAuthorLabel.Text" xml:space="preserve">
-    <value>Автор:</value>
+  <data name="taskVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 10</value>
   </data>
-  <data name="taskDescLabel.Text" xml:space="preserve">
-    <value>Описание:</value>
-  </data>
-  <data name="taskNameText.Text" xml:space="preserve">
-    <value>Имя задачи</value>
+  <data name="taskVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 15</value>
   </data>
   <data name="taskVersionLabel.Text" xml:space="preserve">
     <value>Настроить для:</value>
   </data>
-  <data name="taskHiddenCheck.Text" xml:space="preserve">
-    <value>Скрытая</value>
+  <data name="taskVersionCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 6</value>
   </data>
-  <data name="taskRunLevelCheck.Text" xml:space="preserve">
-    <value>Выполнить с наивысшими правами</value>
+  <data name="taskVersionCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 24</value>
   </data>
-  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
-    <value>Не сохранять пароль. Будут доступны ресурсы только локального компьютера.</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel8.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
-    <value>Выполнять вне зависимости от регистрации пользователя</value>
-  </data>
-  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
-    <value>Выполнять только для зарегистрированного пользователя</value>
-  </data>
-  <data name="changePrincipalButton.Text" xml:space="preserve">
-    <value>Изменить...</value>
+  <data name="taskUserAcctLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 15</value>
   </data>
   <data name="taskUserAcctLabel.Text" xml:space="preserve">
     <value>При выполнении задачи, используйте следующую учетную запись:</value>
   </data>
+  <data name="taskRunLevelCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 19</value>
+  </data>
+  <data name="taskRunLevelCheck.Text" xml:space="preserve">
+    <value>Выполнить с наивысшими правами</value>
+  </data>
+  <data name="taskPrincipalText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 23</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>468, 19</value>
+  </data>
+  <data name="taskLocalOnlyCheck.Text" xml:space="preserve">
+    <value>Не сохранять пароль. Будут доступны ресурсы только локального компьютера.</value>
+  </data>
+  <data name="changePrincipalButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>423, 18</value>
+  </data>
+  <data name="changePrincipalButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 25</value>
+  </data>
+  <data name="changePrincipalButton.Text" xml:space="preserve">
+    <value>Изменить...</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 19</value>
+  </data>
+  <data name="taskLoggedOptionalRadio.Text" xml:space="preserve">
+    <value>Выполнять для всех пользователей</value>
+  </data>
+  <data name="taskLoggedOnRadio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 19</value>
+  </data>
+  <data name="taskLoggedOnRadio.Text" xml:space="preserve">
+    <value>Выполнять только для пользователей, вошедших в систему</value>
+  </data>
+  <data name="tableLayoutPanel7.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="taskSecurityGroupBox.Text" xml:space="preserve">
     <value>Параметры безопасности</value>
+  </data>
+  <data name="taskNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 15</value>
+  </data>
+  <data name="taskNameLabel.Text" xml:space="preserve">
+    <value>Имя:</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 15</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Размещение:</value>
+  </data>
+  <data name="taskDescText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 78</value>
+  </data>
+  <data name="taskDescText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 85</value>
+  </data>
+  <data name="taskAuthorText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 56</value>
+  </data>
+  <data name="taskAuthorText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 15</value>
+  </data>
+  <data name="taskLocationText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 33</value>
+  </data>
+  <data name="taskLocationText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 15</value>
+  </data>
+  <data name="taskNameText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 3</value>
+  </data>
+  <data name="taskNameText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 23</value>
+  </data>
+  <data name="taskNameText.Text" xml:space="preserve">
+    <value>Имя задачи</value>
+  </data>
+  <data name="taskDescLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 15</value>
+  </data>
+  <data name="taskDescLabel.Text" xml:space="preserve">
+    <value>Описание:</value>
+  </data>
+  <data name="taskAuthorLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 15</value>
+  </data>
+  <data name="taskAuthorLabel.Text" xml:space="preserve">
+    <value>Автор:</value>
+  </data>
+  <data name="tableLayoutPanel9.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="generalTab.Text" xml:space="preserve">
     <value>Общие</value>
   </data>
   <data name="taskTriggerIntroLabel.Text" xml:space="preserve">
-    <value>При создании задачи, можно указать условия, при которых она будет запускаться.</value>
+    <value>При создании задачи вы можете указать условия ее запуска.</value>
   </data>
   <data name="triggersTab.Text" xml:space="preserve">
     <value>Триггеры</value>
@@ -174,35 +260,74 @@
   <data name="actionsTab.Text" xml:space="preserve">
     <value>Действия</value>
   </data>
+  <data name="taskStartIfConnectionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 19</value>
+  </data>
   <data name="taskStartIfConnectionCheck.Text" xml:space="preserve">
     <value>Запускать задачу только при подключении к следующей сети:</value>
+  </data>
+  <data name="tableLayoutPanel6.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="networkConditionGroupBox.Text" xml:space="preserve">
     <value>Сеть</value>
   </data>
-  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
-    <value>Останавливать при переходе на питание от батарей</value>
-  </data>
-  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
-    <value>Пробуждать компьютер для выполнения задачи</value>
+  <data name="taskDisallowStartIfOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 19</value>
   </data>
   <data name="taskDisallowStartIfOnBatteriesCheck.Text" xml:space="preserve">
     <value>Запускать только при питании от электосети</value>
   </data>
+  <data name="taskWakeToRunCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 19</value>
+  </data>
+  <data name="taskWakeToRunCheck.Text" xml:space="preserve">
+    <value>Пробуждать компьютер для выполнения задачи</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 19</value>
+  </data>
+  <data name="taskStopIfGoingOnBatteriesCheck.Text" xml:space="preserve">
+    <value>Останавливать при переходе на питание от батарей</value>
+  </data>
+  <data name="tableLayoutPanel5.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="powerConditionGroupBox.Text" xml:space="preserve">
     <value>Питание</value>
   </data>
-  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
-    <value>Перезапускать при возобновлении простоя</value>
+  <data name="taskIdleDurationCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 19</value>
   </data>
-  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
-    <value>Останавливать при выходе компьютера из простоя</value>
+  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
+    <value>Запускать задачу при простое компьютера:</value>
+  </data>
+  <data name="taskIdleWaitTimeoutCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 32</value>
+  </data>
+  <data name="taskIdleWaitTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 15</value>
   </data>
   <data name="taskIdleWaitTimeoutLabel.Text" xml:space="preserve">
     <value>Ожидать простоя в течение: </value>
   </data>
-  <data name="taskIdleDurationCheck.Text" xml:space="preserve">
-    <value>Запускать задачу при простое компьютера:</value>
+  <data name="taskIdleDurationCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 3</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 19</value>
+  </data>
+  <data name="taskStopOnIdleEndCheck.Text" xml:space="preserve">
+    <value>Останавливать при выходе компьютера из простоя</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 19</value>
+  </data>
+  <data name="taskRestartOnIdleCheck.Text" xml:space="preserve">
+    <value>Перезапускать при возобновлении простоя</value>
+  </data>
+  <data name="tableLayoutPanel4.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="idleConditionGroupBox.Text" xml:space="preserve">
     <value>Простой</value>
@@ -213,32 +338,80 @@
   <data name="conditionsTab.Text" xml:space="preserve">
     <value>Условия</value>
   </data>
-  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
-    <value>Если задача уже выполняется, то применять следующее правило:</value>
+  <data name="taskAllowDemandStartCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 19</value>
   </data>
-  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
-    <value>раз</value>
+  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
+    <value>Разрешать выполнение задачи по требованию</value>
   </data>
-  <data name="taskRestartCountLabel.Text" xml:space="preserve">
-    <value>Количество попыток перезапуска:</value>
-  </data>
-  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
-    <value>Если повтор задачи не запланирован, удалять через: </value>
-  </data>
-  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
-    <value>Принудительная остановка задачи, если она не прекращается по запросу</value>
-  </data>
-  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
-    <value>Останавливать задачу, выполняемую дольше:</value>
-  </data>
-  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
-    <value>При сбое выполнения перезапускать через:</value>
+  <data name="taskStartWhenAvailableCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 19</value>
   </data>
   <data name="taskStartWhenAvailableCheck.Text" xml:space="preserve">
     <value>Немедленно запускать задачу, если пропущен плановый запуск</value>
   </data>
-  <data name="taskAllowDemandStartCheck.Text" xml:space="preserve">
-    <value>Разрешать выполнение задачи по требованию</value>
+  <data name="taskRestartIntervalCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 19</value>
+  </data>
+  <data name="taskRestartIntervalCheck.Text" xml:space="preserve">
+    <value>При сбое выполнения перезапускать через:</value>
+  </data>
+  <data name="taskRunningRuleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 15</value>
+  </data>
+  <data name="taskRunningRuleLabel.Text" xml:space="preserve">
+    <value>Если задача уже выполняется, то применять следующее правило:</value>
+  </data>
+  <data name="taskExecutionTimeLimitCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 111</value>
+  </data>
+  <data name="taskRestartCountLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 15</value>
+  </data>
+  <data name="taskRestartCountLabel.Text" xml:space="preserve">
+    <value>Количество попыток перезапуска:</value>
+  </data>
+  <data name="taskRestartIntervalCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 53</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 19</value>
+  </data>
+  <data name="taskExecutionTimeLimitCheck.Text" xml:space="preserve">
+    <value>Останавливать задачу, выполняемую дольше:</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 19</value>
+  </data>
+  <data name="taskAllowHardTerminateCheck.Text" xml:space="preserve">
+    <value>Принудительная остановка задачи, если она не прекращается по запросу</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 19</value>
+  </data>
+  <data name="taskDeleteAfterCheck.Text" xml:space="preserve">
+    <value>Если повтор задачи не запланирован, удалять через: </value>
+  </data>
+  <data name="taskDeleteAfterCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 3</value>
+  </data>
+  <data name="flowLayoutPanel1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 15</value>
+  </data>
+  <data name="taskRestartAttemptTimesLabel.Text" xml:space="preserve">
+    <value>раз</value>
+  </data>
+  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 79</value>
+  </data>
+  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 29</value>
+  </data>
+  <data name="tableLayoutPanel3.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="settingsIntroLabel.Text" xml:space="preserve">
     <value>Укажите дополнительные параметры выполнения задачи.</value>
@@ -246,17 +419,59 @@
   <data name="settingsTab.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="taskRegSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 21</value>
+  </data>
   <data name="taskRegSourceLabel.Text" xml:space="preserve">
     <value>Источник:</value>
   </data>
   <data name="taskRegURILabel.Text" xml:space="preserve">
     <value>URI:</value>
   </data>
+  <data name="taskRegDocText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 119</value>
+  </data>
+  <data name="taskRegDocText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 207</value>
+  </data>
+  <data name="taskRegDocLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
   <data name="taskRegDocLabel.Text" xml:space="preserve">
     <value>Документация:</value>
   </data>
+  <data name="taskRegSDDLLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
   <data name="taskRegSDDLLabel.Text" xml:space="preserve">
     <value>Безопасность:</value>
+  </data>
+  <data name="taskRegSourceText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 3</value>
+  </data>
+  <data name="taskRegSourceText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 23</value>
+  </data>
+  <data name="taskRegURIText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 32</value>
+  </data>
+  <data name="taskRegURIText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 23</value>
+  </data>
+  <data name="taskRegVersionText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 61</value>
+  </data>
+  <data name="taskRegVersionText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>433, 23</value>
+  </data>
+  <data name="taskRegSDDLText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 90</value>
+  </data>
+  <data name="taskRegSDDLText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 23</value>
+  </data>
+  <data name="taskRegVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 21</value>
   </data>
   <data name="taskRegVersionLabel.Text" xml:space="preserve">
     <value>Версия:</value>
@@ -270,38 +485,95 @@
   <data name="regInfoTab.Text" xml:space="preserve">
     <value>Информация</value>
   </data>
-  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
-    <value>Запуск задания в монопольном режиме</value>
+  <data name="taskMaintenanceDeadlineLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>334, 15</value>
   </data>
   <data name="taskMaintenanceDeadlineLabel.Text" xml:space="preserve">
     <value>Если задача была завершена с ошибкой, повторить через: </value>
   </data>
+  <data name="taskMaintenancePeriodCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 32</value>
+  </data>
+  <data name="taskMaintenanceDeadlineCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 3</value>
+  </data>
+  <data name="taskMaintenancePeriodLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 15</value>
+  </data>
   <data name="taskMaintenancePeriodLabel.Text" xml:space="preserve">
     <value>В ходе обслуживания, запускать задачу каждые:</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 19</value>
+  </data>
+  <data name="taskMaintenanceExclusiveCheck.Text" xml:space="preserve">
+    <value>Запуск задания в монопольном режиме</value>
+  </data>
+  <data name="tableLayoutPanel2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="autoMaintGroup.Text" xml:space="preserve">
     <value>Автоматическое обслуживание</value>
   </data>
-  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
-    <value> Тип идентификатора безопасности:</value>
-  </data>
-  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
-    <value>Требуемые права доступа:</value>
-  </data>
-  <data name="secHardGroup.Text" xml:space="preserve">
-    <value>Усиление защиты</value>
+  <data name="taskEnabledCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 19</value>
   </data>
   <data name="taskEnabledCheck.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
+  <data name="principalSIDTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 15</value>
+  </data>
+  <data name="principalSIDTypeLabel.Text" xml:space="preserve">
+    <value> Тип идентификатора безопасности:</value>
+  </data>
+  <data name="principalReqPrivilegesDropDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 32</value>
+  </data>
+  <data name="principalReqPrivilegesDropDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>296, 23</value>
+  </data>
+  <data name="principalSIDTypeCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 3</value>
+  </data>
+  <data name="principalSIDTypeCombo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>296, 23</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 15</value>
+  </data>
+  <data name="principalReqPrivilegesLabel.Text" xml:space="preserve">
+    <value>Требуемые права доступа:</value>
+  </data>
+  <data name="tableLayoutPanel1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="secHardGroup.Text" xml:space="preserve">
+    <value>Усиление защиты</value>
+  </data>
+  <data name="taskDisallowStartOnRemoteAppSessionCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 19</value>
+  </data>
   <data name="taskDisallowStartOnRemoteAppSessionCheck.Text" xml:space="preserve">
     <value>Запретить запуск при наличии подключения со стороны удаленного приложения</value>
+  </data>
+  <data name="taskUseUnifiedSchedulingEngineCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 19</value>
   </data>
   <data name="taskUseUnifiedSchedulingEngineCheck.Text" xml:space="preserve">
     <value>Использовать единый движок планировщика</value>
   </data>
+  <data name="taskPriorityCombo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 78</value>
+  </data>
+  <data name="taskVolatileCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 19</value>
+  </data>
   <data name="taskVolatileCheck.Text" xml:space="preserve">
     <value>Автоматически отключать задачу при запуске Windows</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 15</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Приоритет:</value>
@@ -315,8 +587,14 @@
   <data name="runTimesErrorLabel.Text" xml:space="preserve">
     <value>(текст ошибки)</value>
   </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 15</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Ошибка:</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Не удается отобразить время выполнения для этой задачи.</value>

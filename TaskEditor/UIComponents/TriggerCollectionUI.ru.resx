@@ -112,40 +112,59 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="triggerEditButton.Text" xml:space="preserve">
-    <value>Изменить</value>
+    <value>Изменить...</value>
   </data>
   <data name="triggerNewButton.Text" xml:space="preserve">
-    <value>Новый</value>
+    <value>Создать...</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>Триггер</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Детали</value>
+    <value>Подробности</value>
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Статус</value>
+    <value>Состояние</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="newTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
   </data>
   <data name="newTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Новый триггер...</value>
   </data>
+  <data name="deleteTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
   <data name="deleteTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Удаление триггера</value>
+  </data>
+  <data name="editTriggerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
   </data>
   <data name="editTriggerToolStripMenuItem.Text" xml:space="preserve">
     <value>Редактирование триггера...</value>
   </data>
+  <data name="enableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
   <data name="enableToolStripMenuItem.Text" xml:space="preserve">
     <value>Включить</value>
   </data>
+  <data name="disableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
   <data name="disableToolStripMenuItem.Text" xml:space="preserve">
     <value>Отключить</value>
+  </data>
+  <data name="contextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 114</value>
   </data>
   <data name="triggerDeleteButton.Text" xml:space="preserve">
     <value>Удалить</value>

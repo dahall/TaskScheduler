@@ -2267,7 +2267,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			xmlFunc = defXml;
 			v2Principal = iPrincipal;
-			try { v2Principal2 = (IPrincipal2)v2Principal; }
+			try { if (Environment.OSVersion.Version >= new Version(6, 1)) v2Principal2 = (IPrincipal2)v2Principal; }
 			catch { }
 		}
 
@@ -2294,7 +2294,12 @@ namespace Microsoft.Win32.TaskScheduler
 						{
 							var un = pn["UserId"] ?? pn["GroupId"];
 							if (un != null)
-								try { return User.FromSidString(un.InnerText).Name; } catch { return un.Value; }
+								try { return User.FromSidString(un.InnerText).Name; }
+								catch
+								{
+									try { return new User(un.InnerText).Name; }
+									catch { }
+								}
 						}
 					}
 					return new User(ToString()).Name;
@@ -2957,9 +2962,9 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskSettings([NotNull] ITaskSettings iSettings)
 		{
 			v2Settings = iSettings;
-			try { v2Settings2 = (ITaskSettings2)v2Settings; }
+			try { if (Environment.OSVersion.Version >= new Version(6, 1)) v2Settings2 = (ITaskSettings2)v2Settings; }
 			catch { }
-			try { v2Settings3 = (ITaskSettings3)v2Settings; }
+			try { if (Environment.OSVersion.Version >= new Version(6, 2)) v2Settings3 = (ITaskSettings3)v2Settings; }
 			catch { }
 		}
 

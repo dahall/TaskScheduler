@@ -356,6 +356,12 @@ namespace Microsoft.Win32.TaskScheduler
 
 		private static bool IsValidTaskName(string name) => !string.IsNullOrEmpty(name) && name.IndexOfAny(Path.GetInvalidFileNameChars()) == -1;
 
+		private void cancelBtn_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
+
 		/// <summary>Handles the Click event of the okBtn control.</summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>

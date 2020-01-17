@@ -112,19 +112,19 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnyConnection" xml:space="preserve">
     <value>Любое подключение</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Отключено</value>
+    <value>Отключен</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>Включено</value>
+    <value>Включен</value>
   </data>
   <data name="Last" xml:space="preserve">
     <value>Последний</value>
@@ -154,13 +154,13 @@
     <value>При отключении от пользовательского сеанса</value>
   </data>
   <data name="TriggerTypeWorkstationLock" xml:space="preserve">
-    <value>При блокировке рабочей станции.</value>
+    <value>При блокировании рабочей станции.</value>
   </data>
   <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
-    <value>При разблокировке рабочей станции.</value>
+    <value>При разблокировании рабочей станции.</value>
   </data>
   <data name="DateTimeSyncText" xml:space="preserve">
-    <value>Синхронизировать по поясам</value>
+    <value>Синхр. часовые пояса</value>
   </data>
   <data name="LocalMachine" xml:space="preserve">
     <value>Локальный компьютер</value>
@@ -208,7 +208,7 @@
     <value>Время выполнения ({0})</value>
   </data>
   <data name="LastResultSuccessful" xml:space="preserve">
-    <value>Операция успешно завершена.</value>
+    <value>Задача успешно завершено. (0x0)</value>
   </data>
   <data name="Never" xml:space="preserve">
     <value>Никогда</value>
@@ -220,10 +220,10 @@
     <value>Создать действие</value>
   </data>
   <data name="TriggerDlgEditCaption" xml:space="preserve">
-    <value>Изменить триггер</value>
+    <value>Изменение триггера</value>
   </data>
   <data name="TriggerDlgNewCaption" xml:space="preserve">
-    <value>Создать триггер</value>
+    <value>Создание триггера</value>
   </data>
   <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
     <value>Если вы хотите, чтобы задача была удалена автоматически после выполнения, необходимо добавить хотя бы один триггер со сроком истечения.</value>
@@ -325,10 +325,10 @@
     <value>Высокий</value>
   </data>
   <data name="ProcessPriorityIdle" xml:space="preserve">
-    <value>Неактивен</value>
+    <value>Низкий</value>
   </data>
   <data name="ProcessPriorityNormal" xml:space="preserve">
-    <value>Средний</value>
+    <value>Среднего</value>
   </data>
   <data name="ProcessPriorityRealTime" xml:space="preserve">
     <value>Реального времени</value>
@@ -397,7 +397,7 @@
     <value>Выполняется</value>
   </data>
   <data name="TaskEventStatusSuccess" xml:space="preserve">
-    <value>Успешно</value>
+    <value>Успех</value>
   </data>
   <data name="TaskEventStatusTerminated" xml:space="preserve">
     <value>Прервано</value>
@@ -409,7 +409,7 @@
     <value>При отключении от сеанса удаленного пользователя</value>
   </data>
   <data name="LoadingPrompt" xml:space="preserve">
-    <value>Загрузка</value>
+    <value>Загрузка...</value>
   </data>
   <data name="Error_InvalidNameFormat" xml:space="preserve">
     <value>Некорректное название задачи. Присутствуют недопустимые символы.</value>
@@ -436,7 +436,7 @@
     <value>Некоторые параметры несовместимы в текущей выборке.</value>
   </data>
   <data name="LastResultRunning" xml:space="preserve">
-    <value>Задач выполняется в настоящее время. (0x{0:X})</value>
+    <value>Задание выполняется. (0x{0:X})</value>
   </data>
   <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
     <value>Недопустимый диапазон кодов событий</value>
