@@ -1,22 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <!-- ############# Project information ############# -->
+  
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.0;netcoreapp2.1;net20;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>net20;net35;net40;net45;netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>3.0.0</Version>
+    <Version>3.0.0.0</Version>
     <Title>Task Scheduler Managed Wrapper</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
     <Description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Copyright>Copyright © 2017</Copyright>
-    <PackageLicenseUrl>https://github.com/dahall/TaskScheduler/blob/master/license.md</PackageLicenseUrl>
+    <Copyright>Copyright © 2019</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dahall/taskscheduler</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</PackageIconUrl>
+    <PackageIcon>tsnew48.png</PackageIcon>
     <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>task;interop;taskscheduler</PackageTags>
@@ -24,10 +26,19 @@
     <IncludeSource>true</IncludeSource>
     <LangVersion>latest</LangVersion>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Microsoft.Win32.TaskScheduler.xml</DocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" $(TargetFramework.StartsWith('net2')) Or $(TargetFramework.StartsWith('net3')) Or $(TargetFramework.StartsWith('net4')) ">NETFRAMEWORK</DefineConstants>
+  </PropertyGroup>
+  
+  <!-- ############# File information ############# -->
+
+  <!-- Exclusions - TODO: At some point, these files should all just be deleted and only the included files below left. -->
   <ItemGroup>
     <Compile Remove="Native\**" />
     <Compile Remove="V1\**" />
@@ -45,54 +56,18 @@
   <ItemGroup>
     <None Remove="TaskService.bmp" />
   </ItemGroup>
+  <!-- Explicit inclusions -->
   <ItemGroup>
     <Compile Include="Native\AccessControlExtension.cs" />
     <Compile Include="Native\NTDSAPI.cs" />
     <Compile Include="Native\WindowsImpersonatedIdentity.cs" />
   </ItemGroup>
+  <!-- Resource files -->
   <ItemGroup>
     <EmbeddedResource Include="TaskService.bmp" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp2.0' Or '$(TargetFramework)' == 'netcoreapp2.1'">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="4.5.0" />
-    <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
-    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.2" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">
-    <Reference Include="System.Drawing" />
-    <Reference Include="System" />
-    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.1" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
-    <Reference Include="System.Drawing" />
-    <Reference Include="System" />
-    <Reference Include="WindowsBase">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System.Drawing" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System.Drawing" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.IO.Compression" />
-  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="V1\TaskSchedulerV1Schema.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="3.0.1" />
-    <PackageReference Include="Vanara.PInvoke.Security" Version="3.0.1" />
-    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -109,5 +84,50 @@
     <EmbeddedResource Update="Properties\Resources.ru.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- ############# References ############# -->
+
+  <!-- All targets -->
+  <ItemGroup>
+    <PackageReference Include="Vanara.PInvoke.NTDSApi" Version="3.1.8" />
+    <PackageReference Include="Vanara.PInvoke.Security" Version="3.1.8" />
+    <PackageReference Include="Vanara.PInvoke.TaskSchd" Version="3.1.8" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+  <!-- Random mix of targets that don't support the event log. -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net20' Or '$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp2.0' Or '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <PackageReference Include="Vanara.Compatibility.EventLog" Version="1.0.2" />
+  </ItemGroup>
+  <!-- .NET Framework -->
+  <ItemGroup Condition=" $(DefineConstants.Contains('NETFRAMEWORK')) ">
+    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <Reference Include="WindowsBase">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+  </ItemGroup>
+  <!-- .NET Standard -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.6.0" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="4.6.0" />
+    <PackageReference Include="System.Security.Permissions" Version="4.6.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.6.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+  </ItemGroup>
+  <!-- .NET Core (>= 3.0) -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' Or '$(TargetFramework)' == 'netcoreapp3.1' ">
+    <PackageReference Include="System.Diagnostics.EventLog" Version="4.6.0" />
   </ItemGroup>
 </Project>

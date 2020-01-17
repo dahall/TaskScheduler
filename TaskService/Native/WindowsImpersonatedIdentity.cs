@@ -12,7 +12,7 @@ namespace Microsoft.Win32
 	/// </summary>
 	internal class WindowsImpersonatedIdentity : IDisposable, IIdentity
 	{
-#if !(NETSTANDARD2_0 || NETCOREAPP2_0 || NETCOREAPP2_1)
+#if NETFRAMEWORK
 		private WindowsImpersonationContext impersonationContext = null;
 #endif
 		SafeHTOKEN token;
@@ -35,7 +35,7 @@ namespace Microsoft.Win32
 			{
 				if (LogonUser(userName, domainName, password, domainName == null ? LogonUserType.LOGON32_LOGON_NEW_CREDENTIALS : LogonUserType.LOGON32_LOGON_INTERACTIVE, domainName == null ? LogonUserProvider.LOGON32_PROVIDER_WINNT50 : LogonUserProvider.LOGON32_PROVIDER_DEFAULT, out token))
 				{
-#if (NETSTANDARD2_0 || NETCOREAPP2_0 || NETCOREAPP2_1)
+#if !NETFRAMEWORK
 					if (!ImpersonateLoggedOnUser(token.DangerousGetHandle()))
 						throw new Win32Exception();
 #else
@@ -58,7 +58,7 @@ namespace Microsoft.Win32
 
 		public void Dispose()
 		{
-#if (NETSTANDARD2_0 || NETCOREAPP2_0 || NETCOREAPP2_1)
+#if !NETFRAMEWORK
 			RevertToSelf();
 #else
 			if (impersonationContext != null)

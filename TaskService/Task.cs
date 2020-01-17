@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -3568,7 +3567,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 	internal static class DebugHelper
 	{
-		[SuppressMessage("Language", "CSE0003:Use expression-bodied members", Justification = "<Pending>")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Language", "CSE0003:Use expression-bodied members", Justification = "<Pending>")]
 		public static string GetDebugString(object inst)
 		{
 #if DEBUG
