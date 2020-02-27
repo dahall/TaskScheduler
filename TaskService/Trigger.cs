@@ -1801,17 +1801,22 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.</summary>
+		/// <summary>
+		/// Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
+		/// <note>While the maximum value for this property is <see cref="DateTime.MaxValue"/>, the Windows Task Scheduler management
+		/// application that is part of the OS will fail if this value is greater than December 31, 9998.</note>
+		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Version 1 (1.1 on all systems prior to Vista) of the native library only allows for the Day, Month and Year values of the <see cref="DateTime"/> structure.
+		/// Version 1 (1.1 on all systems prior to Vista) of the native library only allows for the Day, Month and Year values of the <see
+		/// cref="DateTime"/> structure.
 		/// </para>
 		/// <para>
-		/// Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values. However, the user
-		/// interface and <see cref="Trigger.ToString()"/> methods will always show the time translated to local time. The library makes every attempt to
-		/// maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor library, the "Synchronize across time zones" checkbox will be
-		/// checked if the Kind is Local or Utc. If the Kind is Unspecified and the user selects the checkbox, the Kind will be changed to Utc and the time
-		/// adjusted from the value displayed as the local time.
+		/// Version 2 (1.2 or higher) of the native library only allows for both date and time and all <see cref="DateTime.Kind"/> values.
+		/// However, the user interface and <see cref="Trigger.ToString()"/> methods will always show the time translated to local time. The
+		/// library makes every attempt to maintain the Kind value. When using the UI elements provided in the TaskSchedulerEditor library,
+		/// the "Synchronize across time zones" checkbox will be checked if the Kind is Local or Utc. If the Kind is Unspecified and the
+		/// user selects the checkbox, the Kind will be changed to Utc and the time adjusted from the value displayed as the local time.
 		/// </para>
 		/// </remarks>
 		[DefaultValue(typeof(DateTime), "9999-12-31T23:59:59.9999999")]
