@@ -479,7 +479,7 @@ namespace Microsoft.Win32.TaskScheduler.Events
 					get
 					{
 						var sb = new System.Text.StringBuilder();
-						sb.Append("*");
+						sb.Append('*');
 						if (IsSelect)
 						{
 							if (Parent.Providers.Count > 0)

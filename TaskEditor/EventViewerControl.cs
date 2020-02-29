@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -39,10 +40,7 @@ namespace Microsoft.Win32.TaskScheduler
 					computerText.Text = taskEvent.EventRecord.MachineName;
 					detailsText.Text = taskEvent.EventRecord.FormatDescription();
 					eventIdText.Text = taskEvent.EventRecord.Id.ToString();
-					System.Collections.Generic.List<string> keywords = new System.Collections.Generic.List<string>();
-					foreach (string s in taskEvent.EventRecord.KeywordsDisplayNames)
-						keywords.Add(s);
-					keywordsText.Text = string.Join(", ", keywords.ToArray());
+					keywordsText.Text = string.Join(", ", taskEvent.EventRecord.KeywordsDisplayNames.ToArray());
 					levelText.Text = taskEvent.EventRecord.LevelDisplayName;
 					loggedText.Text = taskEvent.EventRecord.TimeCreated.Value.ToString("G");
 					logNameText.Text = taskEvent.EventRecord.LogName;

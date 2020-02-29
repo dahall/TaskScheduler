@@ -1138,7 +1138,7 @@ namespace Microsoft.Win32
 				}
 			}
 
-			public override string ToString() => ("LVITEM: pszText = " + Text + ", iItem = " + iItem.ToString(CultureInfo.InvariantCulture) + ", iSubItem = " + iSubItem.ToString(CultureInfo.InvariantCulture) + ", state = " + state.ToString(CultureInfo.InvariantCulture) + ", iGroupId = " + iGroupId.ToString(CultureInfo.InvariantCulture) + ", cColumns = " + cColumns.ToString(CultureInfo.InvariantCulture));
+			public override string ToString() => $"LVITEM: pszText = {Text}, iItem = {iItem.ToString(CultureInfo.InvariantCulture)}, iSubItem = {iSubItem.ToString(CultureInfo.InvariantCulture)}, state = {state.ToString(CultureInfo.InvariantCulture)}, iGroupId = {iGroupId.ToString(CultureInfo.InvariantCulture)}, cColumns = {cColumns.ToString(CultureInfo.InvariantCulture)}";
 
 			void IDisposable.Dispose()
 			{

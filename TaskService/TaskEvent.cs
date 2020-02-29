@@ -745,18 +745,18 @@ namespace Microsoft.Win32.TaskScheduler
 			if (sb.Length > 1)
 			{
 				sb.Insert(1, "[System[Provider[@Name='Microsoft-Windows-TaskScheduler'] and ");
-				sb.Append("]");
+				sb.Append(']');
 			}
 			if (!string.IsNullOrEmpty(taskName))
 			{
 				if (sb.Length == 1)
-					sb.Append("[");
+					sb.Append('[');
 				else
 					sb.Append("]" + AND + "*[");
 				sb.AppendFormat("EventData[Data[@Name='TaskName']='{0}']", taskName);
 			}
 			if (sb.Length > 1)
-				sb.Append("]");
+				sb.Append(']');
 			return string.Format(queryString, sb);
 		}
 
@@ -769,8 +769,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (password != null)
 			{
 				spwd = new System.Security.SecureString();
-				int l = password.Length;
-				foreach (char c in password.ToCharArray(0, l))
+				foreach (char c in password)
 					spwd.AppendChar(c);
 			}
 

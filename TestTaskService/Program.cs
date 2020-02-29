@@ -411,14 +411,13 @@ namespace TestTaskService
 				if (isV12)
 				{
 					var bTrigger = td.Triggers.Add(new BootTrigger { Enabled = false }); //(BootTrigger)td.Triggers.AddNew(TaskTriggerType.Boot);
-					if (isV12) bTrigger.Delay = TimeSpan.FromMinutes(5);
+					bTrigger.Delay = TimeSpan.FromMinutes(5);
 				}
 
 				var dTrigger = td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
-				if (isV12) dTrigger.RandomDelay = TimeSpan.FromHours(2);
-
 				if (isV12)
 				{
+					dTrigger.RandomDelay = TimeSpan.FromHours(2);
 					var eTrigger = td.Triggers.Add(new EventTrigger());
 					eTrigger.Subscription = "<QueryList><Query Id=\"0\" Path=\"Security\"><Select Path=\"Security\">*[System[Provider[@Name='VSSAudit'] and EventID=25]]</Select></Query></QueryList>";
 					eTrigger.ValueQueries.Add("Name", "Value");
@@ -459,8 +458,11 @@ namespace TestTaskService
 				var tTrigger = td.Triggers.Add(new TimeTrigger());
 				tTrigger.StartBoundary = DateTime.Now + TimeSpan.FromMinutes(1);
 				tTrigger.EndBoundary = DateTime.Today + TimeSpan.FromDays(7);
-				if (isV12) tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
-				if (isV12) tTrigger.Id = "Time test";
+				if (isV12)
+				{	
+					tTrigger.ExecutionTimeLimit = TimeSpan.FromSeconds(19);
+					tTrigger.Id = "Time test";
+				}
 				tTrigger.Repetition = new RepetitionPattern(TimeSpan.FromMinutes(17), TimeSpan.FromMinutes(21), true);
 
 				var wTrigger = td.Triggers.Add(new WeeklyTrigger());
