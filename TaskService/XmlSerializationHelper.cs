@@ -143,8 +143,9 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (string.IsNullOrEmpty(outVal.ToString())) outVal = eName;
 					writer.WriteStartElement(outVal.ToString());
-					var dict = new Dictionary<Type, string>();
-					foreach (XmlArrayItemAttribute a in Attribute.GetCustomAttributes(pi, typeof(XmlArrayItemAttribute), true))
+					var attributes = Attribute.GetCustomAttributes(pi, typeof(XmlArrayItemAttribute), true);
+					var dict = new Dictionary<Type, string>(attributes.Length);
+					foreach (XmlArrayItemAttribute a in attributes)
 						dict.Add(a.Type, a.ElementName);
 					foreach (object item in ((System.Collections.IEnumerable)value))
 					{
@@ -383,8 +384,9 @@ namespace Microsoft.Win32.TaskScheduler
 					{
 						string elem = string.IsNullOrEmpty(outVal?.ToString()) ? pi.Name : outVal.ToString();
 						reader.ReadStartElement(elem);
-						var dict = new Dictionary<string, Type>();
-						foreach (XmlArrayItemAttribute a in Attribute.GetCustomAttributes(pi, typeof(XmlArrayItemAttribute), true))
+						var attributes = Attribute.GetCustomAttributes(pi, typeof(XmlArrayItemAttribute), true);
+						var dict = new Dictionary<string, Type>(attributes.Length);
+						foreach (XmlArrayItemAttribute a in attributes)
 							dict.Add(a.ElementName, a.Type);
 						List<object> output = new List<object>();
 						while (reader.MoveToContent() == XmlNodeType.Element)

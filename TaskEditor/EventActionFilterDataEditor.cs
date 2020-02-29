@@ -23,7 +23,7 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			get
 			{
-				var dict = new Dictionary<string, string>();
+				var dict = new Dictionary<string, string>(dt.Rows.Count);
 				foreach (DataRow row in dt.Rows)
 				{
 					var items = row.ItemArray;

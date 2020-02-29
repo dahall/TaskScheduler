@@ -794,11 +794,8 @@ namespace System.Windows.Forms
 				ListViewItem instance = context.Instance as ListViewItem;
 				if ((instance != null) && (instance.ListView != null))
 				{
-					ArrayList values = new ArrayList();
-					foreach (ListViewGroup group in instance.ListView.Groups)
-					{
-						values.Add(group);
-					}
+					ArrayList values = new ArrayList(instance.ListView.Groups.Count + 1);
+					values.AddRange(instance.ListView.Groups);
 					values.Add(null);
 					return new TypeConverter.StandardValuesCollection(values);
 				}
