@@ -2013,7 +2013,7 @@ namespace Microsoft.Win32.TaskScheduler
 			Dictionary<string, string> dict;
 			var o = GetV1TaskData(v1Task);
 			if (o is string)
-				dict = new Dictionary<string, string> { { "Data", o.ToString() }, { "Documentation", o.ToString() } };
+				dict = new Dictionary<string, string>(2) { { "Data", o.ToString() }, { "Documentation", o.ToString() } };
 			else
 				dict = o as Dictionary<string, string>;
 			return dict ?? new Dictionary<string, string>();

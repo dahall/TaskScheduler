@@ -217,7 +217,7 @@ namespace Microsoft.Win32.TaskScheduler
 			public struct FieldVal
 			{
 				private const string rangeRegEx = @"^(?:(?<A>\*)|(?<D1>\d+)(?:-(?<D2>\d+))?)(?:\/(?<I>\d+))?$";
-				private readonly static Dictionary<string, string> dow = new Dictionary<string, string>
+				private readonly static Dictionary<string, string> dow = new Dictionary<string, string>(7)
 				{
 					{ "SUN", "0" },
 					{ "MON", "1" },
@@ -227,7 +227,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{ "FRI", "5" },
 					{ "SAT", "6" },
 				};
-				private readonly static Dictionary<string, string> mon = new Dictionary<string, string>
+				private readonly static Dictionary<string, string> mon = new Dictionary<string, string>(12)
 				{
 					{ "JAN", "1" },
 					{ "FEB", "2" },
@@ -242,7 +242,7 @@ namespace Microsoft.Win32.TaskScheduler
 					{ "NOV", "11" },
 					{ "DEC", "12" },
 				};
-				private readonly static Dictionary<CronFieldType, MinMax> validRange = new Dictionary<CronFieldType, MinMax>
+				private readonly static Dictionary<CronFieldType, MinMax> validRange = new Dictionary<CronFieldType, MinMax>(5)
 				{
 					{ CronFieldType.Days, new MinMax(1, 31) },
 					{ CronFieldType.DaysOfWeek, new MinMax(0, 6) },
