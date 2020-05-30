@@ -79,56 +79,56 @@
     <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
       <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net20\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.2.3.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.2.3\lib\net20\AeroWizard.dll</HintPath>
+    <Reference Include="AeroWizard, Version=2.2.4.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.2.4\lib\net20\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
       <HintPath>..\packages\GroupControls.1.8.0\lib\net20\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.2.0\lib\net20\TimeSpan2.dll</HintPath>
+    <Reference Include="TimeSpan2, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.3.0\lib\net20\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
     <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
       <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net35\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.2.3.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.2.3\lib\net35\AeroWizard.dll</HintPath>
+    <Reference Include="AeroWizard, Version=2.2.4.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.2.4\lib\net35\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
       <HintPath>..\packages\GroupControls.1.8.0\lib\net35\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.2.0\lib\net35\TimeSpan2.dll</HintPath>
+    <Reference Include="TimeSpan2, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.3.0\lib\net35\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">
     <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
       <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net40\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.2.3.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.2.3\lib\net40\AeroWizard.dll</HintPath>
+    <Reference Include="AeroWizard, Version=2.2.4.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.2.4\lib\net40\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
       <HintPath>..\packages\GroupControls.1.8.0\lib\net40\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.2.0\lib\net40\TimeSpan2.dll</HintPath>
+    <Reference Include="TimeSpan2, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.3.0\lib\net40\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.2' ">
     <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
       <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net452\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
-    <Reference Include="AeroWizard, Version=2.2.3.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
-      <HintPath>..\packages\AeroWizard.2.2.3\lib\net45\AeroWizard.dll</HintPath>
+    <Reference Include="AeroWizard, Version=2.2.4.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <HintPath>..\packages\AeroWizard.2.2.4\lib\net45\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
       <HintPath>..\packages\GroupControls.1.8.0\lib\net45\GroupControls.dll</HintPath>
     </Reference>
-    <Reference Include="TimeSpan2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.2.0\lib\net45\TimeSpan2.dll</HintPath>
+    <Reference Include="TimeSpan2, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
+      <HintPath>..\packages\TimeSpan2.2.3.0\lib\net45\TimeSpan2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
