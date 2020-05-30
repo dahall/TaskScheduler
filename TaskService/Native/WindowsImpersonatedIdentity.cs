@@ -18,7 +18,7 @@ namespace Microsoft.Win32
 		private const int LOGON32_PROVIDER_DEFAULT = 0;
 		private const int LOGON32_PROVIDER_WINNT50 = 3;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD || NETCOREAPP
 #else
 		private WindowsImpersonationContext impersonationContext = null;
 #endif
@@ -43,7 +43,7 @@ namespace Microsoft.Win32
 			{
 				if (NativeMethods.LogonUser(userName, domainName, password, domainName == null ? LOGON_TYPE_NEW_CREDENTIALS : LOGON32_LOGON_INTERACTIVE, domainName == null ? LOGON32_PROVIDER_WINNT50 : LOGON32_PROVIDER_DEFAULT, out token) != 0)
 				{
-#if NETSTANDARD2_0
+#if NETSTANDARD || NETCOREAPP
 					if (!NativeMethods.ImpersonateLoggedOnUser(token.DangerousGetHandle()))
 						throw new Win32Exception();
 #else
@@ -66,7 +66,7 @@ namespace Microsoft.Win32
 
 		public void Dispose()
 		{
-#if NETSTANDARD2_0
+#if NETSTANDARD || NETCOREAPP
 			NativeMethods.RevertToSelf();
 #else
 			if (impersonationContext != null)
