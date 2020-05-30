@@ -14,7 +14,7 @@
     <Company>GitHub Community</Company>
     <Description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Copyright>Copyright © 2002-2019</Copyright>
+    <Copyright>Copyright © 2002-2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dahall/taskscheduler</PackageProjectUrl>
     <PackageIconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</PackageIconUrl>
