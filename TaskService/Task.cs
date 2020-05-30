@@ -1693,7 +1693,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Task", Namespace = tns, IsNullable = false)]
 	[XmlSchemaProvider("GetV1SchemaFile")]
 	[PublicAPI, Serializable]
-	public sealed class TaskDefinition : IDisposable, IXmlSerializable, ISerializable
+	public sealed class TaskDefinition : IDisposable, IXmlSerializable
 	{
 		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
 
@@ -1716,13 +1716,6 @@ namespace Microsoft.Win32.TaskScheduler
 		internal TaskDefinition([NotNull] ITaskDefinition iDef)
 		{
 			v2Def = iDef;
-		}
-
-		private TaskDefinition(SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException("Currently there is no way to deserialize an instance of TaskDefinition due to the dependency on information from the TaskService instance.");
-			// TODO: Figure out how to associate with the ITaskService instance
-			XmlText = info.GetString(nameof(XmlText));
 		}
 
 		/// <summary>Gets a collection of actions that are performed by the task.</summary>
@@ -2172,11 +2165,6 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return res;
 		}
-
-		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			info.AddValue(nameof(XmlText), XmlText);
-		}
 	}
 
 	/// <summary>
@@ -2540,14 +2528,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="arrayIndex">Index of the array.</param>
 		public void CopyTo(TaskPrincipalPrivilege[] array, int arrayIndex)
 		{
-			using (var pEnum = GetEnumerator())
+			using var pEnum = GetEnumerator();
+			for (var i = arrayIndex; i < array.Length; i++)
 			{
-				for (var i = arrayIndex; i < array.Length; i++)
-				{
-					if (!pEnum.MoveNext())
-						break;
-					array[i] = pEnum.Current;
-				}
+				if (!pEnum.MoveNext())
+					break;
+				array[i] = pEnum.Current;
 			}
 		}
 
