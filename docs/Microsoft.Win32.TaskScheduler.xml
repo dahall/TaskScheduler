@@ -1398,39 +1398,28 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.RunningTaskCollection">
       <summary>
-            Collection of running tasks.
+            Collection of running tasks in a <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" />. This class has no public constructor and can only be accessed via the
+            properties and functions within <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" />.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RunningTaskCollection.Count">
-      <summary>
-            Gets the number of registered tasks in the collection.
-            </summary>
+      <summary>Gets the number of registered tasks in the collection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RunningTaskCollection.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RunningTaskCollection.GetEnumerator">
-      <summary>
-            Gets an IEnumerator instance for this collection.
-            </summary>
+      <summary>Gets an IEnumerator instance for this collection.</summary>
       <returns>An enumerator.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RunningTaskCollection.Item(System.Int32)">
-      <summary>
-            Gets the specified running task from the collection.
-            </summary>
+      <summary>Gets the specified running task from the collection.</summary>
       <param name="index">The index of the running task to be retrieved.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.RunningTask" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RunningTaskCollection.ToString">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents this instance.
-            </summary>
-      <returns>
-            A <see cref="T:System.String" /> that represents this instance.
-            </returns>
+      <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
+      <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger">
       <summary>
@@ -2131,53 +2120,38 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskCollection">
       <summary>
-            Contains all the tasks that are registered.
-            </summary>
+             Contains all the tasks that are registered within a <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" />. This class has no public constructor and can only be
+             accessed via the properties and functions within <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" />.
+             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskCollection.Count">
-      <summary>
-            Gets the number of registered tasks in the collection.
-            </summary>
+      <summary>Gets the number of registered tasks in the collection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskCollection.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskCollection.Exists(System.String)">
-      <summary>
-            Determines whether the specified task exists.
-            </summary>
+      <summary>Determines whether the specified task exists.</summary>
       <param name="taskName">The name of the task.</param>
       <returns>true if task exists; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskCollection.GetEnumerator">
-      <summary>
-            Gets the collection enumerator for the register task collection.
-            </summary>
+      <summary>Gets the collection enumerator for the register task collection.</summary>
       <returns>An <see cref="T:System.Collections.IEnumerator" /> for this collection.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskCollection.Item(System.Int32)">
-      <summary>
-            Gets the specified registered task from the collection.
-            </summary>
+      <summary>Gets the specified registered task from the collection.</summary>
       <param name="index">The index of the registered task to be retrieved.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance that contains the requested context.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskCollection.Item(System.String)">
-      <summary>
-            Gets the named registered task from the collection.
-            </summary>
+      <summary>Gets the named registered task from the collection.</summary>
       <param name="name">The name of the registered task to be retrieved.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> instance that contains the requested context.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskCollection.ToString">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents this instance.
-            </summary>
-      <returns>
-            A <see cref="T:System.String" /> that represents this instance.
-            </returns>
+      <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
+      <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskCompatibility">
       <summary>Defines what versions of Task Scheduler or the AT command that the task is compatible with.</summary>
@@ -4418,7 +4392,10 @@
       <summary>Gets or sets a Boolean value that indicates whether the trigger is enabled.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.EndBoundary">
-      <summary>Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.</summary>
+      <summary>
+            Gets or sets the date and time when the trigger is deactivated. The trigger cannot start the task after it is deactivated.
+            <note>While the maximum value for this property is <see cref="F:System.DateTime.MaxValue" />, the Windows Task Scheduler management
+            application that is part of the OS will fail if this value is greater than December 31, 9998.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.Equals(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>Indicates whether the current object is equal to another object of the same type.</summary>
