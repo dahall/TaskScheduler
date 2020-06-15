@@ -83,7 +83,7 @@ class Program
    static void Main(string[] args)
    {
       // Get the service on the remote machine
-      using (TaskService ts = new TaskService(@"\\RemoteServer"))
+      using (TaskService ts = new TaskService(@"\\RemoteServer", "username", "domain", "password"))
       {
          // Create a new task definition and assign properties
          TaskDefinition td = ts.NewTask();
@@ -95,8 +95,9 @@ class Program
          // Create an action that will launch Notepad whenever the trigger fires
          td.Actions.Add(new ExecAction("notepad.exe", "c:\\test.log", null));
 
-         // Register the task in the root folder
-         ts.RootFolder.RegisterTaskDefinition(@"Test", td);
+         // Register the task in the root folder.
+         // (Use the username here to ensure remote registration works.)
+         ts.RootFolder.RegisterTaskDefinition(@"Test", td, TaskCreation.CreateOrUpdate, "username");
       }
    }
 }
