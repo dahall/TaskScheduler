@@ -1,5 +1,5 @@
 # ![](./docs/icons/tsnew48.png) Task Scheduler Managed Wrapper
-[![Version](https://img.shields.io/github/release/dahall/TaskScheduler.svg?style=flat-square)](https://github.com/dahall/TaskScheduler/releases) [![Downloads](https://img.shields.io/nuget/dt/TaskScheduler.svg?style=flat-square)](https://www.nuget.org/packages/TaskScheduler/) 
+[![Version](https://img.shields.io/github/release/dahall/TaskScheduler.svg?style=flat-square)](https://github.com/dahall/TaskScheduler/releases) [![Downloads](https://img.shields.io/nuget/dt/TaskScheduler.svg?style=flat-square)](https://www.nuget.org/packages/TaskScheduler/) [![Build status](https://ci.appveyor.com/api/projects/status/entp0dead4840cwm?svg=true)](https://ci.appveyor.com/project/dahall/taskscheduler)
 
 > Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.
 
@@ -18,6 +18,8 @@ This project's assemblies are available via NuGet.
 |------------|------------|-----------|
 |[![NuGet](https://img.shields.io/nuget/v/TaskScheduler.svg?style=flat-square)](https://www.nuget.org/packages/TaskScheduler)| TaskScheduler|Main Library|
 |[![NuGet](https://img.shields.io/nuget/v/TaskSchedulerEditor.svg?style=flat-square)](https://www.nuget.org/packages/TaskSchedulerEditor)|TaskSchedulerEditor|UI Library|
+
+You can also find prerelease NuGet pacakges on the [project's AppVeyor NuGet feed](https://ci.appveyor.com/nuget/taskscheduler-prerelease).
 
 ## Project Components
 ### Main Library
