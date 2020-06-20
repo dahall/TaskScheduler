@@ -610,7 +610,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.Now, TargetServer, UserAccountDomain, UserName, UserPassword);
+				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.UtcNow, TargetServer, UserAccountDomain, UserName, UserPassword);
 				log.Query.ReverseDirection = false;
 				watcher = new EventLogWatcher(log.Query);
 				watcher.EventRecordWritten += Watcher_EventRecordWritten;
