@@ -42,7 +42,7 @@
     </WorkingPath>
     <FrameworkVersion>.NET Framework 4.5.2</FrameworkVersion>
     <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-    <CopyrightText>&amp;#169%3b 2017 GitHub Community. All rights reserved.</CopyrightText>
+    <CopyrightText>&amp;#169%3b 2020 GitHub Community. All rights reserved.</CopyrightText>
     <PresentationStyle>VS2013</PresentationStyle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
@@ -114,7 +114,7 @@
       <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
       <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
     </NamespaceSummaries>
-    <HelpFileVersion>2.8.10</HelpFileVersion>
+    <HelpFileVersion>2.8.20</HelpFileVersion>
     <HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
