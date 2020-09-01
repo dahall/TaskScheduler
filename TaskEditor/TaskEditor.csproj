@@ -76,8 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net20\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=3.0.4.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.3.0.4\lib\net20\ActiveDirectoryObjectPicker.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="AeroWizard, Version=2.2.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.2.7\lib\net20\AeroWizard.dll</HintPath>
@@ -90,8 +91,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net35\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=3.0.4.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.3.0.4\lib\net35\ActiveDirectoryObjectPicker.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="AeroWizard, Version=2.2.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.2.7\lib\net35\AeroWizard.dll</HintPath>
@@ -104,8 +106,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net40\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=3.0.4.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.3.0.4\lib\net40\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
     <Reference Include="AeroWizard, Version=2.2.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.2.7\lib\net40\AeroWizard.dll</HintPath>
@@ -118,8 +120,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.2' ">
-    <Reference Include="ActiveDirectoryObjectPicker, Version=2.3.133.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.2.3.133\lib\net452\ActiveDirectoryObjectPicker.dll</HintPath>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=3.0.4.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.ActiveDirectoryObjectPicker.3.0.4\lib\net452\ActiveDirectoryObjectPicker.dll</HintPath>
     </Reference>
     <Reference Include="AeroWizard, Version=2.2.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.2.7\lib\net45\AeroWizard.dll</HintPath>
