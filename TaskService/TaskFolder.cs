@@ -483,7 +483,7 @@ namespace Microsoft.Win32.TaskScheduler
 			if (definition.Actions.Count < 1 || definition.Actions.Count > 32)
 				throw new ArgumentOutOfRangeException(nameof(definition.Actions), @"A task must be registered with at least one action and no more than 32 actions.");
 
-			userId = userId ?? definition.Principal.Account;
+			userId ??= definition.Principal.Account;
 			if (userId == string.Empty) userId = null;
 			User user = new User(userId);
 			if (v2Folder != null)
