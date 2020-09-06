@@ -297,7 +297,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			OnNotifyPropertyChanged(nameof(Count));
 			OnNotifyPropertyChanged(IndexerName);
-			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, action));
 			return action;
 		}
 

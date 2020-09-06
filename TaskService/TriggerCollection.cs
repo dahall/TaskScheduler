@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
@@ -11,8 +14,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides the methods that are used to add to, remove from, and get the triggers of a task.
 	/// </summary>
 	[XmlRoot("Triggers", Namespace = TaskDefinition.tns, IsNullable = false)]
-	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList
+	public sealed class TriggerCollection : IList<Trigger>, IDisposable, IXmlSerializable, IList, INotifyCollectionChanged, INotifyPropertyChanged
 	{
+		private const string IndexerName = "Item[]";
+		private bool inV2set;
 		private V1Interop.ITask v1Task;
 		private readonly V2Interop.ITriggerCollection v2Coll;
 		private V2Interop.ITaskDefinition v2Def;
@@ -27,6 +32,12 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Def = iTaskDef;
 			v2Coll = v2Def.Triggers;
 		}
+
+		/// <summary>Occurs when a collection changes.</summary>
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
 		/// Gets the number of triggers in the collection.
@@ -85,8 +96,19 @@ namespace Microsoft.Win32.TaskScheduler
 				int index = IndexOf(triggerId);
 				if (index >= 0)
 				{
-					RemoveAt(index);
-					Insert(index, value);
+					var orig = this[index].Clone();
+					inV2set = true;
+					try
+					{
+						RemoveAt(index);
+						Insert(index, value);
+					}
+					finally
+					{
+						inV2set = true;
+					}
+					OnNotifyPropertyChanged(IndexerName);
+					CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, orig, index));
 				}
 				else
 					Add(value);
@@ -108,10 +130,21 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (Count <= index)
+				if (index < 0 || Count <= index)
 					throw new ArgumentOutOfRangeException(nameof(index), index, @"Index is not a valid index in the TriggerCollection");
-				Insert(index, value);
-				RemoveAt(index + 1);
+				var orig = this[index].Clone();
+				inV2set = true;
+				try
+				{
+					Insert(index, value);
+					RemoveAt(index + 1);
+				}
+				finally
+				{
+					inV2set = false;
+				}
+				OnNotifyPropertyChanged(IndexerName);
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, orig, index));
 			}
 		}
 
@@ -147,6 +180,9 @@ namespace Microsoft.Win32.TaskScheduler
 				unboundTrigger.Bind(v2Def);
 			else
 				unboundTrigger.Bind(v1Task);
+			OnNotifyPropertyChanged(nameof(Count));
+			OnNotifyPropertyChanged(IndexerName);
+			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, unboundTrigger));
 			return unboundTrigger;
 		}
 
@@ -188,9 +224,20 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Coll.Clear();
 			else
 			{
-				for (int i = Count - 1; i >= 0; i--)
-					RemoveAt(i);
+				inV2set = true;
+				try
+				{
+					for (int i = Count - 1; i >= 0; i--)
+						RemoveAt(i);
+				}
+				finally
+				{
+					inV2set = false;
+				}
 			}
+			OnNotifyPropertyChanged(nameof(Count));
+			OnNotifyPropertyChanged(IndexerName);
+			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
 
 		/// <summary>
@@ -447,12 +494,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
 		public void RemoveAt(int index)
 		{
-			if (index >= Count)
+			if (index < 0 || index >= Count)
 				throw new ArgumentOutOfRangeException(nameof(index), index, @"Failed to remove Trigger. Index out of range.");
+			var item = this[index].Clone();
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
 			else
 				v1Task.DeleteTrigger((ushort)index); //Remove the trigger from the Task Scheduler
+			if (!inV2set)
+			{
+				OnNotifyPropertyChanged(nameof(Count));
+				OnNotifyPropertyChanged(IndexerName);
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
+			}
 		}
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -488,6 +542,10 @@ namespace Microsoft.Win32.TaskScheduler
 			foreach (Trigger t in this)
 				t.SetV1TriggerData();
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 		private sealed class V1TriggerEnumerator : IEnumerator<Trigger>
 		{
