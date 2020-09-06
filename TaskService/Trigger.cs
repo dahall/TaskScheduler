@@ -174,9 +174,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create trigger that fires 5 minutes after the system starts.
-	///BootTrigger bt = new BootTrigger();
-	///bt.Delay = TimeSpan.FromMinutes(5);  // V2 only
+	/// // Create trigger that fires 5 minutes after the system starts.
+	/// BootTrigger bt = new BootTrigger();
+	/// bt.Delay = TimeSpan.FromMinutes(5);  // V2 only
 	///]]>
 	/// </code>
 	/// </example>
@@ -310,11 +310,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a trigger that runs every other day and will start randomly between 10 a.m. and 12 p.m.
-	///DailyTrigger dt = new DailyTrigger();
-	///dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(10);
-	///dt.DaysInterval = 2;
-	///dt.RandomDelay = TimeSpan.FromHours(2); // V2 only
+	/// // Create a trigger that runs every other day and will start randomly between 10 a.m. and 12 p.m.
+	/// DailyTrigger dt = new DailyTrigger();
+	/// dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(10);
+	/// dt.DaysInterval = 2;
+	/// dt.RandomDelay = TimeSpan.FromHours(2); // V2 only
 	///]]>
 	/// </code>
 	/// </example>
@@ -445,10 +445,10 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a trigger that will fire whenever a level 2 system event fires.
-	///EventTrigger eTrigger = new EventTrigger();
-	///eTrigger.Subscription = @"<QueryList><Query Id='1'><Select Path='System'>*[System/Level=2]</Select></Query></QueryList>";
-	///eTrigger.ValueQueries.Add("Name", "Value");
+	/// // Create a trigger that will fire whenever a level 2 system event fires.
+	/// EventTrigger eTrigger = new EventTrigger();
+	/// eTrigger.Subscription = @"<QueryList><Query Id='1'><Select Path='System'>*[System/Level=2]</Select></Query></QueryList>";
+	/// eTrigger.ValueQueries.Add("Name", "Value");
 	///]]>
 	/// </code>
 	/// </example>
@@ -684,12 +684,12 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Add a general logon trigger
-	///LogonTrigger lt1 = new LogonTrigger();
-	///
-	///// V2 only: Add a delayed logon trigger for a specific user
-	///LogonTrigger lt2 = new LogonTrigger { UserId = "LocalUser" };
-	///lt2.Delay = TimeSpan.FromMinutes(15);
+	/// // Add a general logon trigger
+	/// LogonTrigger lt1 = new LogonTrigger();
+	/// 
+	/// // V2 only: Add a delayed logon trigger for a specific user
+	/// LogonTrigger lt2 = new LogonTrigger { UserId = "LocalUser" };
+	/// lt2.Delay = TimeSpan.FromMinutes(15);
 	///]]>
 	/// </code>
 	/// </example>
@@ -1388,9 +1388,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a trigger that will fire the task 5 minutes after its registered
-	///RegistrationTrigger rTrigger = new RegistrationTrigger();
-	///rTrigger.Delay = TimeSpan.FromMinutes(5);
+	/// // Create a trigger that will fire the task 5 minutes after its registered
+	/// RegistrationTrigger rTrigger = new RegistrationTrigger();
+	/// rTrigger.Delay = TimeSpan.FromMinutes(5);
 	///]]>
 	/// </code>
 	/// </example>
@@ -1433,17 +1433,17 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a time trigger with a repetition
-	///var tt = new TimeTrigger(new DateTime().Now.AddHours(1));
-	///// Set the time in between each repetition of the task after it starts to 30 minutes.
-	///tt.Repetition.Interval = TimeSpan.FromMinutes(30); // Default is TimeSpan.Zero (or never)
-	///// Set the time the task will repeat to 1 day.
-	///tt.Repetition.Duration = TimeSpan.FromDays(1); // Default is TimeSpan.Zero (or never)
-	///// Set the task to end even if running when the duration is over
-	///tt.Repetition.StopAtDurationEnd = true; // Default is false;
-	///
-	///// Do the same as above with a constructor
-	///tt = new TimeTrigger(new DateTime().Now.AddHours(1)) { Repetition = new RepetitionPattern(TimeSpan.FromMinutes(30), TimeSpan.FromDays(1), true) };
+	/// // Create a time trigger with a repetition
+	/// var tt = new TimeTrigger(new DateTime().Now.AddHours(1));
+	/// // Set the time in between each repetition of the task after it starts to 30 minutes.
+	/// tt.Repetition.Interval = TimeSpan.FromMinutes(30); // Default is TimeSpan.Zero (or never)
+	/// // Set the time the task will repeat to 1 day.
+	/// tt.Repetition.Duration = TimeSpan.FromDays(1); // Default is TimeSpan.Zero (or never)
+	/// // Set the task to end even if running when the duration is over
+	/// tt.Repetition.StopAtDurationEnd = true; // Default is false;
+	/// 
+	/// // Do the same as above with a constructor
+	/// tt = new TimeTrigger(new DateTime().Now.AddHours(1)) { Repetition = new RepetitionPattern(TimeSpan.FromMinutes(30), TimeSpan.FromDays(1), true) };
 	///]]>
 	/// </code>
 	/// </example>
@@ -1784,9 +1784,9 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a trigger that runs the last minute of this year
-	///TimeTrigger tTrigger = new TimeTrigger();
-	///tTrigger.StartBoundary = new DateTime(DateTime.Today.Year, 12, 31, 23, 59, 0);
+	/// // Create a trigger that runs the last minute of this year
+	/// TimeTrigger tTrigger = new TimeTrigger();
+	/// tTrigger.StartBoundary = new DateTime(DateTime.Today.Year, 12, 31, 23, 59, 0);
 	///]]>
 	/// </code>
 	/// </example>
@@ -2472,11 +2472,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <example>
 	/// <code lang="cs">
 	///<![CDATA[
-	///// Create a trigger that runs on Monday every third week just after midnight.
-	///WeeklyTrigger wTrigger = new WeeklyTrigger();
-	///wTrigger.StartBoundary = DateTime.Today + TimeSpan.FromSeconds(15);
-	///wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
-	///wTrigger.WeeksInterval = 3;
+	/// // Create a trigger that runs on Monday every third week just after midnight.
+	/// WeeklyTrigger wTrigger = new WeeklyTrigger();
+	/// wTrigger.StartBoundary = DateTime.Today + TimeSpan.FromSeconds(15);
+	/// wTrigger.DaysOfWeek = DaysOfTheWeek.Monday;
+	/// wTrigger.WeeksInterval = 3;
 	///]]>
 	/// </code>
 	/// </example>

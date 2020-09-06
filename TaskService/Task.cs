@@ -1133,9 +1133,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <example>
 		/// <code lang="cs">
 		///<![CDATA[
-		///// See if the last run of a task returned an error code
-		///if (TaskService.Instance.GetTask("MyTask").LastTaskResult != 0)
-		///MessageBox.Show("This program has an error.");
+		/// // See if the last run of a task returned an error code
+		/// if (TaskService.Instance.GetTask("MyTask").LastTaskResult != 0)
+		/// MessageBox.Show("This program has an error.");
 		///]]>
 		/// </code>
 		/// </example>
@@ -1391,9 +1391,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <example>
 		/// <code lang="cs">
 		///<![CDATA[
-		///// Run the current task with a parameter
-		///var runningTask = myTaskInstance.Run("info");
-		///Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// // Run the current task with a parameter
+		/// var runningTask = myTaskInstance.Run("info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
 		///]]>
 		/// </code>
 		/// </example>
@@ -1467,9 +1467,9 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <example>
 		/// <code lang="cs">
 		///<![CDATA[
-		///// Run the current task with a parameter as a different user and ignoring any of the conditions.
-		///var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, 0, "DOMAIN\\User", "info");
-		///Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
+		/// // Run the current task with a parameter as a different user and ignoring any of the conditions.
+		/// var runningTask = myTaskInstance.RunEx(TaskRunFlags.IgnoreConstraints, 0, "DOMAIN\\User", "info");
+		/// Console.Write(string.Format("Running task's current action is {0}.", runningTask.CurrentAction));
 		///]]>
 		/// </code>
 		/// </example>
@@ -1497,10 +1497,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <para>Give read access to all authenticated users for a task.</para>
 		/// <code lang="cs">
 		///<![CDATA[
-		///// Assume variable 'task' is a valid Task instance
-		///var taskSecurity = task.GetAccessControl();
-		///taskSecurity.AddAccessRule(new TaskAccessRule("Authenticated Users", TaskRights.Read, System.Security.AccessControl.AccessControlType.Allow));
-		///task.SetAccessControl(taskSecurity);
+		/// // Assume variable 'task' is a valid Task instance
+		/// var taskSecurity = task.GetAccessControl();
+		/// taskSecurity.AddAccessRule(new TaskAccessRule("Authenticated Users", TaskRights.Read, System.Security.AccessControl.AccessControlType.Allow));
+		/// task.SetAccessControl(taskSecurity);
 		///]]>
 		/// </code>
 		/// </example>
