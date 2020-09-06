@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Serialization;
@@ -166,6 +167,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(Delay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -310,6 +312,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(DaysInterval)] = value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -328,6 +331,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RandomDelay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -430,6 +434,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((IEventTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
 					unboundValues[nameof(Delay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -444,6 +449,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((IEventTrigger)v2Trigger).Subscription = value;
 				else
 					unboundValues[nameof(Subscription)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -453,7 +459,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlArray]
 		[XmlArrayItem("Value", typeof(NameValuePair))]
-		public NamedValueCollection ValueQueries => nvc ?? (nvc = v2Trigger == null ? new NamedValueCollection() : new NamedValueCollection(((IEventTrigger)v2Trigger).ValueQueries));
+		public NamedValueCollection ValueQueries => nvc ??= v2Trigger == null ? new NamedValueCollection() : new NamedValueCollection(((IEventTrigger)v2Trigger).ValueQueries);
 
 		/// <summary>Builds an event log XML query string based on the input parameters.</summary>
 		/// <param name="log">The event's log.</param>
@@ -514,42 +520,38 @@ namespace Microsoft.Win32.TaskScheduler
 			eventId = null;
 			if (!string.IsNullOrEmpty(Subscription))
 			{
-				using (var str = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(Subscription)))
+				using var str = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(Subscription));
+				using var rdr = new System.Xml.XmlTextReader(str);
+				rdr.WhitespaceHandling = System.Xml.WhitespaceHandling.None;
+				try
 				{
-					using (var rdr = new System.Xml.XmlTextReader(str))
+					rdr.MoveToContent();
+					rdr.ReadStartElement("QueryList");
+					if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
 					{
-						rdr.WhitespaceHandling = System.Xml.WhitespaceHandling.None;
-						try
+						var path = rdr.Value;
+						if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
 						{
-							rdr.MoveToContent();
-							rdr.ReadStartElement("QueryList");
-							if (rdr.Name == "Query" && rdr.MoveToAttribute("Path"))
+							var content = rdr.ReadString();
+							var m = System.Text.RegularExpressions.Regex.Match(content,
+								@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
+								System.Text.RegularExpressions.RegexOptions.IgnoreCase |
+								System.Text.RegularExpressions.RegexOptions.Compiled |
+								System.Text.RegularExpressions.RegexOptions.Singleline |
+								System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
+							if (m.Success)
 							{
-								var path = rdr.Value;
-								if (rdr.MoveToElement() && rdr.ReadToDescendant("Select") && path.Equals(rdr["Path"], StringComparison.InvariantCultureIgnoreCase))
-								{
-									var content = rdr.ReadString();
-									var m = System.Text.RegularExpressions.Regex.Match(content,
-										@"\*(?:\[System\[(?:Provider\[\@Name='(?<s>[^']+)'\])?(?:\s+and\s+)?(?:EventID=(?<e>\d+))?\]\])",
-										System.Text.RegularExpressions.RegexOptions.IgnoreCase |
-										System.Text.RegularExpressions.RegexOptions.Compiled |
-										System.Text.RegularExpressions.RegexOptions.Singleline |
-										System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace);
-									if (m.Success)
-									{
-										log = path;
-										if (m.Groups["s"].Success)
-											source = m.Groups["s"].Value;
-										if (m.Groups["e"].Success)
-											eventId = Convert.ToInt32(m.Groups["e"].Value);
-										return true;
-									}
-								}
+								log = path;
+								if (m.Groups["s"].Success)
+									source = m.Groups["s"].Value;
+								if (m.Groups["e"].Success)
+									eventId = Convert.ToInt32(m.Groups["e"].Value);
+								return true;
 							}
 						}
-						catch { /* ignored */ }
 					}
 				}
+				catch { /* ignored */ }
 			}
 			return false;
 		}
@@ -657,6 +659,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(Delay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -685,6 +688,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(UserId)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -743,6 +747,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(DaysOfWeek)] = (short)value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -765,6 +770,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(MonthsOfYear)] = (short)value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -783,6 +789,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RandomDelay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -801,6 +808,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RunOnLastWeekOfMonth)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -845,6 +853,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(WeeksOfMonth)] = (short)value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -917,27 +926,14 @@ namespace Microsoft.Win32.TaskScheduler
 									WeeksOfMonth = WhichWeek.LastWeek;
 								else
 								{
-									switch (Int32.Parse(wk))
+									WeeksOfMonth = (Int32.Parse(wk)) switch
 									{
-										case 1:
-											WeeksOfMonth = WhichWeek.FirstWeek;
-											break;
-
-										case 2:
-											WeeksOfMonth = WhichWeek.SecondWeek;
-											break;
-
-										case 3:
-											WeeksOfMonth = WhichWeek.ThirdWeek;
-											break;
-
-										case 4:
-											WeeksOfMonth = WhichWeek.FourthWeek;
-											break;
-
-										default:
-											throw new System.Xml.XmlException("Week element must contain a 1-4 or Last as content.");
-									}
+										1 => WhichWeek.FirstWeek,
+										2 => WhichWeek.SecondWeek,
+										3 => WhichWeek.ThirdWeek,
+										4 => WhichWeek.FourthWeek,
+										_ => throw new System.Xml.XmlException("Week element must contain a 1-4 or Last as content."),
+									};
 								}
 							}
 						}
@@ -1074,6 +1070,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(DaysOfMonth)] = mask;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1096,6 +1093,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(MonthsOfYear)] = (short)value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1114,6 +1112,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RandomDelay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1132,6 +1131,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RunOnLastDayOfMonth)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1197,7 +1197,7 @@ namespace Microsoft.Win32.TaskScheduler
 			foreach (var index in indices)
 			{
 				if (index < 1 || index > 31) throw new ArgumentException("Days must be in the range 1..31");
-				mask = mask | 1 << (index - 1);
+				mask |= 1 << (index - 1);
 			}
 			return mask;
 		}
@@ -1230,7 +1230,7 @@ namespace Microsoft.Win32.TaskScheduler
 			//count bits in mask
 			var cnt = 0;
 			for (var i = 0; mask >> i > 0; i++)
-				cnt = cnt + (1 & (mask >> i));
+				cnt += (1 & (mask >> i));
 			//allocate return array with one entry for each bit
 			var indices = new int[cnt];
 			//fill array with bit indices
@@ -1348,6 +1348,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(Delay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1377,7 +1378,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </example>
 	[XmlRoot("Repetition", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[TypeConverter(typeof(RepetitionPatternConverter))]
-	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>
+	public sealed class RepetitionPattern : IDisposable, IXmlSerializable, IEquatable<RepetitionPattern>, INotifyPropertyChanged
 	{
 		private readonly Trigger pTrigger;
 		private readonly IRepetitionPattern v2Pattern;
@@ -1407,6 +1408,9 @@ namespace Microsoft.Win32.TaskScheduler
 				v2Pattern = pTrigger.v2Trigger.Repetition;
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets or sets how long the pattern is repeated.</summary>
 		/// <value>
 		/// The duration that the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is repeated indefinitely.
@@ -1433,6 +1437,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					unboundDuration = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1463,6 +1468,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					unboundInterval = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1492,6 +1498,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					unboundStopAtDurationEnd = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1564,6 +1571,10 @@ namespace Microsoft.Win32.TaskScheduler
 			StopAtDurationEnd = value.StopAtDurationEnd;
 		}
 
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 		private bool ReadXmlConverter(System.Reflection.PropertyInfo pi, Object obj, ref Object value)
 		{
 			if (pi.Name != "Interval" || !(value is TimeSpan span) || span.Equals(TimeSpan.Zero) || Duration > span)
@@ -1616,6 +1627,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((ISessionStateChangeTrigger)v2Trigger).Delay = Task.TimeSpanToString(value);
 				else
 					unboundValues[nameof(Delay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1630,6 +1642,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((ISessionStateChangeTrigger)v2Trigger).StateChange = value;
 				else
 					unboundValues[nameof(StateChange)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1644,6 +1657,7 @@ namespace Microsoft.Win32.TaskScheduler
 					((ISessionStateChangeTrigger)v2Trigger).UserId = value;
 				else
 					unboundValues[nameof(UserId)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1719,6 +1733,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RandomDelay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1739,7 +1754,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the
 	/// <see cref="TriggerCollection.Add{TTrigger}"/> or the <see cref="TriggerCollection.AddNew"/> method.
 	/// </summary>
-	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable, IComparable<Trigger>
+	public abstract partial class Trigger : IDisposable, ICloneable, IEquatable<Trigger>, IComparable, IComparable<Trigger>, INotifyPropertyChanged
 	{
 		internal const string V2BoundaryDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'FFFK";
 		internal static readonly CultureInfo DefaultDateCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -1782,6 +1797,9 @@ namespace Microsoft.Win32.TaskScheduler
 				StartBoundary = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets or sets a Boolean value that indicates whether the trigger is enabled.</summary>
 		public bool Enabled
 		{
@@ -1798,6 +1816,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(Enabled)] = value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1844,6 +1863,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(EndBoundary)] = value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1864,6 +1884,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(ExecutionTimeLimit)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1882,6 +1903,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(Id)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1891,8 +1913,12 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		public RepetitionPattern Repetition
 		{
-			get => repititionPattern ?? (repititionPattern = new RepetitionPattern(this));
-			set => Repetition.Set(value);
+			get => repititionPattern ??= new RepetitionPattern(this);
+			set
+			{
+				Repetition.Set(value);
+				OnNotifyPropertyChanged();
+			}
 		}
 
 		/// <summary>Gets or sets the date and time when the trigger is activated.</summary>
@@ -1946,6 +1972,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(StartBoundary)] = value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2141,44 +2168,18 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static Trigger CreateTrigger([NotNull] V1Interop.ITaskTrigger trigger, V1Interop.TaskTriggerType triggerType)
 		{
-			Trigger t;
-			switch (triggerType)
+			Trigger t = triggerType switch
 			{
-				case V1Interop.TaskTriggerType.RunOnce:
-					t = new TimeTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.RunDaily:
-					t = new DailyTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.RunWeekly:
-					t = new WeeklyTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.RunMonthly:
-					t = new MonthlyTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.RunMonthlyDOW:
-					t = new MonthlyDOWTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.OnIdle:
-					t = new IdleTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.OnSystemStart:
-					t = new BootTrigger(trigger);
-					break;
-
-				case V1Interop.TaskTriggerType.OnLogon:
-					t = new LogonTrigger(trigger);
-					break;
-
-				default:
-					throw new ArgumentOutOfRangeException(nameof(triggerType), triggerType, null);
-			}
+				V1Interop.TaskTriggerType.RunOnce => new TimeTrigger(trigger),
+				V1Interop.TaskTriggerType.RunDaily => new DailyTrigger(trigger),
+				V1Interop.TaskTriggerType.RunWeekly => new WeeklyTrigger(trigger),
+				V1Interop.TaskTriggerType.RunMonthly => new MonthlyTrigger(trigger),
+				V1Interop.TaskTriggerType.RunMonthlyDOW => new MonthlyDOWTrigger(trigger),
+				V1Interop.TaskTriggerType.OnIdle => new IdleTrigger(trigger),
+				V1Interop.TaskTriggerType.OnSystemStart => new BootTrigger(trigger),
+				V1Interop.TaskTriggerType.OnLogon => new LogonTrigger(trigger),
+				_ => throw new ArgumentOutOfRangeException(nameof(triggerType), triggerType, null),
+			};
 			return t;
 		}
 
@@ -2331,6 +2332,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>The unbound value, if set, or the default value.</returns>
 		protected T GetUnboundValueOrDefault<T>(string prop, T def = default) => unboundValues.TryGetValue(prop, out var val) ? (T)val : def;
 
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		protected void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 		/// <summary>Gets the non-localized trigger string for V2 triggers.</summary>
 		/// <returns>String describing the trigger.</returns>
 		protected virtual string V2GetTriggerString() => string.Empty;
@@ -2415,6 +2420,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(DaysOfWeek)] = (short)value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2433,6 +2439,7 @@ namespace Microsoft.Win32.TaskScheduler
 					throw new NotV1SupportedException();
 				else
 					unboundValues[nameof(RandomDelay)] = value;
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2453,6 +2460,7 @@ namespace Microsoft.Win32.TaskScheduler
 					else
 						unboundValues[nameof(WeeksInterval)] = value;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2601,13 +2609,9 @@ namespace Microsoft.Win32.TaskScheduler
 
 				if (t != null)
 				{
-					using (var ms = new System.IO.StringReader(xml))
-					{
-						using (var iReader = System.Xml.XmlReader.Create(ms))
-						{
-							((IXmlSerializable)t).ReadXml(iReader);
-						}
-					}
+					using var ms = new System.IO.StringReader(xml);
+					using var iReader = System.Xml.XmlReader.Create(ms);
+					((IXmlSerializable)t).ReadXml(iReader);
 				}
 			}
 			return t;

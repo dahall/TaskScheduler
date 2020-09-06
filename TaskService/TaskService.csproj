@@ -8,7 +8,7 @@
     <AssemblyOriginatorKeyFile>TaskService.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageId>TaskScheduler</PackageId>
-    <Version>2.8.21</Version>
+    <Version>2.9.0</Version>
     <Title>Task Scheduler Managed Wrapper (the original Microsoft.Win32.TaskScheduler)</Title>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
