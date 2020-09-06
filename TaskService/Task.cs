@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization;
@@ -549,7 +550,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Specifies how the Task Scheduler performs tasks when the computer is in an idle condition. For information about idle conditions, see Task Idle Conditions.
 	/// </summary>
 	[PublicAPI]
-	public sealed class IdleSettings : IDisposable
+	public sealed class IdleSettings : IDisposable, INotifyPropertyChanged
 	{
 		private ITask v1Task;
 		private IIdleSettings v2Settings;
@@ -563,6 +564,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v1Task = iTask;
 		}
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.</summary>
 		/// <value>
@@ -592,6 +596,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					v1Task.SetIdleWait((ushort)WaitTimeout.TotalMinutes, (ushort)value.TotalMinutes);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -608,6 +613,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.RestartOnIdle = value;
 				else
 					v1Task.SetFlags(TaskFlags.RestartOnIdleResume, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -624,6 +630,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.StopOnIdleEnd = value;
 				else
 					v1Task.SetFlags(TaskFlags.KillOnIdleEnd, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -657,6 +664,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					v1Task.SetIdleWait((ushort)value.TotalMinutes, (ushort)IdleDuration.TotalMinutes);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -676,12 +684,16 @@ namespace Microsoft.Win32.TaskScheduler
 				return DebugHelper.GetDebugString(this);
 			return base.ToString();
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	/// <summary>Specifies the task settings the Task scheduler will use to start task during Automatic maintenance.</summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public sealed class MaintenanceSettings : IDisposable
+	public sealed class MaintenanceSettings : IDisposable, INotifyPropertyChanged
 	{
 		private IMaintenanceSettings iMaintSettings;
 		private ITaskSettings3 iSettings;
@@ -692,6 +704,9 @@ namespace Microsoft.Win32.TaskScheduler
 			if (iSettings3 != null)
 				iMaintSettings = iSettings.MaintenanceSettings;
 		}
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
 		/// Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to
@@ -714,6 +729,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -738,6 +754,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -758,6 +775,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -773,12 +791,16 @@ namespace Microsoft.Win32.TaskScheduler
 		public override string ToString() => iMaintSettings != null ? DebugHelper.GetDebugString(this) : base.ToString();
 
 		internal bool IsSet() => iMaintSettings != null && (iMaintSettings.Period != null || iMaintSettings.Deadline != null || iMaintSettings.Exclusive);
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	/// <summary>Provides the settings that the Task Scheduler service uses to obtain a network profile.</summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public sealed class NetworkSettings : IDisposable
+	public sealed class NetworkSettings : IDisposable, INotifyPropertyChanged
 	{
 		private INetworkSettings v2Settings;
 
@@ -786,6 +808,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v2Settings = iSettings;
 		}
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>Gets or sets a GUID value that identifies a network profile.</summary>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
@@ -805,6 +830,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.Id = value == Guid.Empty ? null : value.ToString();
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -820,6 +846,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.Name = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -840,6 +867,10 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		internal bool IsSet() => v2Settings != null && (!string.IsNullOrEmpty(v2Settings.Id) || !string.IsNullOrEmpty(v2Settings.Name));
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	/// <summary>Provides the methods to get information from and control a running task.</summary>
@@ -906,7 +937,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlType(IncludeInSchema = false)]
 	[PublicAPI]
-	public class Task : IDisposable, IComparable, IComparable<Task>
+	public class Task : IDisposable, IComparable, IComparable<Task>, INotifyPropertyChanged
 	{
 		internal const AccessControlSections defaultAccessControlSections = AccessControlSections.Owner | AccessControlSections.Group | AccessControlSections.Access;
 		internal const SecurityInfos defaultSecurityInfosSections = SecurityInfos.Owner | SecurityInfos.Group | SecurityInfos.DiscretionaryAcl;
@@ -933,9 +964,12 @@ namespace Microsoft.Win32.TaskScheduler
 			ReadOnly = false;
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets the definition of the task.</summary>
 		[NotNull]
-		public TaskDefinition Definition => myTD ?? (myTD = v2Task != null ? new TaskDefinition(GetV2Definition(TaskService, v2Task, true)) : new TaskDefinition(v1Task, Name));
+		public TaskDefinition Definition => myTD ??= v2Task != null ? new TaskDefinition(GetV2Definition(TaskService, v2Task, true)) : new TaskDefinition(v1Task, Name);
 
 		/// <summary>Gets or sets a Boolean value that indicates if the registered task is enabled.</summary>
 		/// <remarks>
@@ -954,6 +988,7 @@ namespace Microsoft.Win32.TaskScheduler
 					Definition.Settings.Enabled = value;
 					Definition.V1Save(null);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1606,6 +1641,10 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Task = iTask;
 		}
 
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		protected void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 		private class DefDoc
 		{
 			private readonly XmlDocument doc;
@@ -1693,7 +1732,7 @@ namespace Microsoft.Win32.TaskScheduler
 	[XmlRoot("Task", Namespace = tns, IsNullable = false)]
 	[XmlSchemaProvider("GetV1SchemaFile")]
 	[PublicAPI, Serializable]
-	public sealed class TaskDefinition : IDisposable, IXmlSerializable
+	public sealed class TaskDefinition : IDisposable, IXmlSerializable, INotifyPropertyChanged
 	{
 		internal const string tns = "http://schemas.microsoft.com/windows/2004/02/mit/task";
 
@@ -1718,6 +1757,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v2Def = iDef;
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets a collection of actions that are performed by the task.</summary>
 		[XmlArrayItem(ElementName = "Exec", IsNullable = true, Type = typeof(ExecAction))]
 		[XmlArrayItem(ElementName = "ShowMessage", IsNullable = true, Type = typeof(ShowMessageAction))]
@@ -1725,7 +1767,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlArrayItem(ElementName = "SendEmail", IsNullable = true, Type = typeof(EmailAction))]
 		[XmlArray]
 		[NotNull, ItemNotNull]
-		public ActionCollection Actions => actions ?? (actions = v2Def != null ? new ActionCollection(v2Def) : new ActionCollection(v1Task));
+		public ActionCollection Actions => actions ??= v2Def != null ? new ActionCollection(v2Def) : new ActionCollection(v1Task);
 
 		/// <summary>
 		/// Gets or sets the data that is associated with the task. This data is ignored by the Task Scheduler service, but is used by third-parties who wish to
@@ -1750,6 +1792,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Def.Data = value;
 				else
 					v1Task.SetDataItem(nameof(Data), value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -1765,7 +1808,7 @@ namespace Microsoft.Win32.TaskScheduler
 		[XmlArrayItem(ElementName = "TimeTrigger", IsNullable = true, Type = typeof(TimeTrigger))]
 		[XmlArray]
 		[NotNull, ItemNotNull]
-		public TriggerCollection Triggers => triggers ?? (triggers = v2Def != null ? new TriggerCollection(v2Def) : new TriggerCollection(v1Task));
+		public TriggerCollection Triggers => triggers ??= v2Def != null ? new TriggerCollection(v2Def) : new TriggerCollection(v1Task);
 
 		/// <summary>Gets or sets the XML-formatted definition of the task.</summary>
 		[XmlIgnore]
@@ -1778,22 +1821,23 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Def.XmlText = value;
 				else
 					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
+				OnNotifyPropertyChanged();
 			}
 		}
 
 		/// <summary>Gets the principal for the task that provides the security credentials for the task.</summary>
 		[NotNull]
-		public TaskPrincipal Principal => principal ?? (principal = v2Def != null ? new TaskPrincipal(v2Def.Principal, () => XmlText) : new TaskPrincipal(v1Task));
+		public TaskPrincipal Principal => principal ??= v2Def != null ? new TaskPrincipal(v2Def.Principal, () => XmlText) : new TaskPrincipal(v1Task);
 
 		/// <summary>
 		/// Gets a class instance of registration information that is used to describe a task, such as the description of the task, the author of the task, and
 		/// the date the task is registered.
 		/// </summary>
-		public TaskRegistrationInfo RegistrationInfo => regInfo ?? (regInfo = v2Def != null ? new TaskRegistrationInfo(v2Def.RegistrationInfo) : new TaskRegistrationInfo(v1Task));
+		public TaskRegistrationInfo RegistrationInfo => regInfo ??= v2Def != null ? new TaskRegistrationInfo(v2Def.RegistrationInfo) : new TaskRegistrationInfo(v1Task);
 
 		/// <summary>Gets the settings that define how the Task Scheduler service performs the task.</summary>
 		[NotNull]
-		public TaskSettings Settings => settings ?? (settings = v2Def != null ? new TaskSettings(v2Def.Settings) : new TaskSettings(v1Task));
+		public TaskSettings Settings => settings ??= v2Def != null ? new TaskSettings(v2Def.Settings) : new TaskSettings(v1Task);
 
 		/// <summary>Gets the XML Schema file for V1 tasks.</summary>
 		/// <param name="xs">The <see cref="System.Xml.Schema.XmlSchemaSet"/> for V1 tasks.</param>
@@ -2165,6 +2209,10 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return res;
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	/// <summary>
@@ -2172,7 +2220,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlRoot("Principals", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
-	public sealed class TaskPrincipal : IDisposable, IXmlSerializable
+	public sealed class TaskPrincipal : IDisposable, IXmlSerializable, INotifyPropertyChanged
 	{
 		private const string localSystemAcct = "SYSTEM";
 		private TaskPrincipalPrivileges reqPriv;
@@ -2194,6 +2242,9 @@ namespace Microsoft.Win32.TaskScheduler
 		{
 			v1Task = iTask;
 		}
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>Gets the account associated with this principal. This value is pulled from the TaskDefinition's XMLText property if set.</summary>
 		/// <value>The account.</value>
@@ -2243,6 +2294,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Principal.DisplayName = value;
 				else
 					v1Task.SetDataItem("PrincipalDisplayName", value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2271,6 +2323,7 @@ namespace Microsoft.Win32.TaskScheduler
 				}
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2287,6 +2340,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Principal.Id = value;
 				else
 					v1Task.SetDataItem("PrincipalId", value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2315,6 +2369,7 @@ namespace Microsoft.Win32.TaskScheduler
 						throw new NotV1SupportedException();
 					v1Task.SetFlags(TaskFlags.RunOnlyIfLoggedOn, value == TaskLogonType.InteractiveToken);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2332,6 +2387,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Principal2.ProcessTokenSidType = value;
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2340,7 +2396,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <remarks>Setting this value appears to break the Task Scheduler MMC and does not output in XML. Removed to prevent problems.</remarks>
 		[XmlIgnore]
-		public TaskPrincipalPrivileges RequiredPrivileges => reqPriv ?? (reqPriv = new TaskPrincipalPrivileges(v2Principal2));
+		public TaskPrincipalPrivileges RequiredPrivileges => reqPriv ??= new TaskPrincipalPrivileges(v2Principal2);
 
 		/// <summary>
 		/// Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
@@ -2357,6 +2413,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Principal.RunLevel = value;
 				else if (value != TaskRunLevel.LUA)
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2403,6 +2460,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v1Task.SetAccountInformation(value, IntPtr.Zero);
 					v1CachedAcctInfo = null;
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2468,6 +2526,10 @@ namespace Microsoft.Win32.TaskScheduler
 			XmlSerializationHelper.WriteObjectProperties(writer, this);
 			writer.WriteEndElement();
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	/// <summary>
@@ -2646,7 +2708,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlRoot("RegistrationInfo", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
-	public sealed class TaskRegistrationInfo : IDisposable, IXmlSerializable
+	public sealed class TaskRegistrationInfo : IDisposable, IXmlSerializable, INotifyPropertyChanged
 	{
 		private ITask v1Task;
 		private IRegistrationInfo v2RegInfo;
@@ -2661,6 +2723,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets or sets the author of the task.</summary>
 		[DefaultValue(null)]
 		public string Author
@@ -2672,6 +2737,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Author = value;
 				else
 					v1Task.SetCreator(value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2704,6 +2770,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (!string.IsNullOrEmpty(v1Path) && File.Exists(v1Path))
 						File.SetLastWriteTime(v1Path, value);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2718,6 +2785,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Description = value;
 				else
 					v1Task.SetComment(value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2732,6 +2800,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Documentation = value;
 				else
 					v1Task.SetDataItem(nameof(Documentation), value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2763,6 +2832,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.SecurityDescriptor = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2777,6 +2847,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Source = value;
 				else
 					v1Task.SetDataItem(nameof(Source), value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2799,6 +2870,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.URI = value;
 				else
 					v1Task.SetDataItem(nameof(URI), value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2818,6 +2890,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.Version = value?.ToString();
 				else
 					v1Task.SetDataItem(nameof(Version), value.ToString());
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2832,6 +2905,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2RegInfo.XmlText = value;
 				else
 					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2873,6 +2947,10 @@ namespace Microsoft.Win32.TaskScheduler
 
 		internal static string FixCrLf(string text) => text == null ? null : Regex.Replace(text, "(?<!\r)\n|\r(?!\n)", "\r\n");
 
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 		private bool ProcessVersionXml(PropertyInfo pi, object obj, ref object value)
 		{
 			if (pi.Name != "Version" || value == null) return false;
@@ -2887,7 +2965,7 @@ namespace Microsoft.Win32.TaskScheduler
 	/// <summary>Provides the settings that the Task Scheduler service uses to perform the task.</summary>
 	[XmlRoot("Settings", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
-	public sealed class TaskSettings : IDisposable, IXmlSerializable
+	public sealed class TaskSettings : IDisposable, IXmlSerializable, INotifyPropertyChanged
 	{
 		private const uint InfiniteRunTimeV1 = 0xFFFFFFFF;
 
@@ -2913,6 +2991,9 @@ namespace Microsoft.Win32.TaskScheduler
 			v1Task = iTask;
 		}
 
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.</summary>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
 		[DefaultValue(true)]
@@ -2927,6 +3008,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.AllowDemandStart = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2943,6 +3025,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.AllowHardTerminate = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2959,6 +3042,7 @@ namespace Microsoft.Win32.TaskScheduler
 				else
 					if (value != TaskCompatibility.V1)
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -2989,6 +3073,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.DeleteExpiredTaskAfter = value == TimeSpan.FromSeconds(1) ? "PT0S" : Task.TimeSpanToString(value);
 				else
 					v1Task.SetFlags(TaskFlags.DeleteWhenDone, value >= TimeSpan.FromSeconds(1));
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3003,6 +3088,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.DisallowStartIfOnBatteries = value;
 				else
 					v1Task.SetFlags(TaskFlags.DontStartIfOnBatteries, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3031,6 +3117,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings3.DisallowStartOnRemoteAppSession = value;
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3045,6 +3132,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.Enabled = value;
 				else
 					v1Task.SetFlags(TaskFlags.Disabled, !value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3082,6 +3170,7 @@ namespace Microsoft.Win32.TaskScheduler
 					if (value == TimeSpan.Zero && v1Task.GetMaxRunTime() != InfiniteRunTimeV1)
 						v1Task.SetMaxRunTime(InfiniteRunTimeV1 - 1);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3096,13 +3185,14 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.Hidden = value;
 				else
 					v1Task.SetFlags(TaskFlags.Hidden, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
 		/// <summary>Gets or sets the information that the Task Scheduler uses during Automatic maintenance.</summary>
 		[XmlIgnore]
 		[NotNull]
-		public MaintenanceSettings MaintenanceSettings => maintenanceSettings ?? (maintenanceSettings = new MaintenanceSettings(v2Settings3));
+		public MaintenanceSettings MaintenanceSettings => maintenanceSettings ??= new MaintenanceSettings(v2Settings3);
 
 		/// <summary>Gets or sets the policy that defines how the Task Scheduler handles multiple instances of the task.</summary>
 		/// <exception cref="NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
@@ -3117,6 +3207,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.MultipleInstances = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3139,6 +3230,7 @@ namespace Microsoft.Win32.TaskScheduler
 						throw new NotV1SupportedException("Unsupported priority level on Task Scheduler 1.0.");
 					v1Task.SetPriority((uint)value);
 				}
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3159,6 +3251,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.RestartCount = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3179,6 +3272,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.RestartInterval = Task.TimeSpanToString(value);
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3193,6 +3287,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.RunOnlyIfIdle = value;
 				else
 					v1Task.SetFlags(TaskFlags.StartOnlyIfIdle, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3208,6 +3303,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v1Task.SetFlags(TaskFlags.RunOnlyIfLoggedOn, value);
 				else if (v2Settings != null)
 					throw new NotV2SupportedException("Task Scheduler 2.0 (1.2) does not support setting this property. You must use an InteractiveToken in order to have the task run in the current user session.");
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3222,6 +3318,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.RunOnlyIfNetworkAvailable = value;
 				else
 					v1Task.SetFlags(TaskFlags.RunIfConnectedToInternet, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3238,6 +3335,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.StartWhenAvailable = value;
 				else
 					throw new NotV1SupportedException();
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3252,6 +3350,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.StopIfGoingOnBatteries = value;
 				else
 					v1Task.SetFlags(TaskFlags.KillIfGoingOnBatteries, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3277,6 +3376,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings3.UseUnifiedSchedulingEngine = value;
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_1);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3293,6 +3393,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings3.Volatile = value;
 				else
 					throw new NotSupportedPriorToException(TaskCompatibility.V2_2);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3307,6 +3408,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.WakeToRun = value;
 				else
 					v1Task.SetFlags(TaskFlags.SystemRequired, value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -3321,12 +3423,13 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Settings.XmlText = value;
 				else
 					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
+				OnNotifyPropertyChanged();
 			}
 		}
 
 		/// <summary>Gets or sets the information that specifies how the Task Scheduler performs tasks when the computer is in an idle state.</summary>
 		[NotNull]
-		public IdleSettings IdleSettings => idleSettings ?? (idleSettings = v2Settings != null ? new IdleSettings(v2Settings.IdleSettings) : new IdleSettings(v1Task));
+		public IdleSettings IdleSettings => idleSettings ??= v2Settings != null ? new IdleSettings(v2Settings.IdleSettings) : new IdleSettings(v1Task);
 
 		/// <summary>
 		/// Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of
@@ -3335,7 +3438,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		[XmlIgnore]
 		[NotNull]
-		public NetworkSettings NetworkSettings => networkSettings ?? (networkSettings = new NetworkSettings(v2Settings?.NetworkSettings));
+		public NetworkSettings NetworkSettings => networkSettings ??= new NetworkSettings(v2Settings?.NetworkSettings);
 
 		/// <summary>Releases all resources used by this class.</summary>
 		public void Dispose()
@@ -3446,6 +3549,10 @@ namespace Microsoft.Win32.TaskScheduler
 					return ProcessPriorityClass.Idle;
 			}
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
 	internal static class DebugHelper
