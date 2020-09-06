@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
@@ -38,10 +40,11 @@ namespace Microsoft.Win32.TaskScheduler
 	/// </summary>
 	[XmlRoot("Actions", Namespace = TaskDefinition.tns, IsNullable = false)]
 	[PublicAPI]
-	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList
+	public sealed class ActionCollection : IList<Action>, IDisposable, IXmlSerializable, IList, INotifyCollectionChanged, INotifyPropertyChanged
 	{
 		internal const int MaxActions = 32;
-
+		private const string IndexerName = "Item[]";
+		private bool inV2set;
 		private List<Action> v1Actions;
 		private V1Interop.ITask v1Task;
 		private V2Interop.IActionCollection v2Coll;
@@ -73,6 +76,12 @@ namespace Microsoft.Win32.TaskScheduler
 			UnconvertUnsupportedActions();
 		}
 
+		/// <summary>Occurs when a collection changes.</summary>
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+		/// <summary>Occurs when a property value changes.</summary>
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/// <summary>
 		/// Gets or sets the identifier of the principal for the task.
 		/// </summary>
@@ -93,6 +102,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Coll.Context = value;
 				else
 					v1Task.SetDataItem("ActionCollectionContext", value);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -137,6 +147,7 @@ namespace Microsoft.Win32.TaskScheduler
 						if (!SupportV2Conversion)
 							v2Def.Data = string.Format("{0}; {1}=0", v2Def.Data, nameof(PowerShellConversion));
 					}
+					OnNotifyPropertyChanged();
 				}
 			}
 		}
@@ -162,6 +173,7 @@ namespace Microsoft.Win32.TaskScheduler
 					v2Coll.XmlText = value;
 				else
 					XmlSerializationHelper.ReadObjectFromXmlText(value, this);
+				OnNotifyPropertyChanged();
 			}
 		}
 
@@ -198,16 +210,27 @@ namespace Microsoft.Win32.TaskScheduler
 			{
 				if (Count <= index)
 					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
+				var orig = v1Actions[index].Clone();
 				if (v2Coll != null)
 				{
-					Insert(index, value);
-					RemoveAt(index + 1);
+					inV2set = true;
+					try
+					{
+						Insert(index, value);
+						RemoveAt(index + 1);
+					}
+					finally
+					{
+						inV2set = false;
+					}
 				}
 				else
 				{
 					v1Actions[index] = value;
 					SaveV1Actions();
 				}
+				OnNotifyPropertyChanged(IndexerName);
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, orig, index));
 			}
 		}
 
@@ -272,6 +295,9 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Actions.Add(action);
 				SaveV1Actions();
 			}
+			OnNotifyPropertyChanged(nameof(Count));
+			OnNotifyPropertyChanged(IndexerName);
+			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
 			return action;
 		}
 
@@ -342,6 +368,9 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Actions.Clear();
 				SaveV1Actions();
 			}
+			OnNotifyPropertyChanged(nameof(Count));
+			OnNotifyPropertyChanged(IndexerName);
+			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
 
 		/// <summary>
@@ -552,6 +581,13 @@ namespace Microsoft.Win32.TaskScheduler
 				v1Actions.Insert(index, action);
 				SaveV1Actions();
 			}
+
+			if (!inV2set)
+			{
+				OnNotifyPropertyChanged(nameof(Count));
+				OnNotifyPropertyChanged(IndexerName);
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, action, index));
+			}
 		}
 
 		System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() => null;
@@ -605,14 +641,21 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <exception cref="ArgumentOutOfRangeException">Index out of range.</exception>
 		public void RemoveAt(int index)
 		{
-			if (index >= Count)
+			if (index < 0 || index >= Count)
 				throw new ArgumentOutOfRangeException(nameof(index), index, "Failed to remove action. Index out of range.");
+			var item = this[index].Clone();
 			if (v2Coll != null)
 				v2Coll.Remove(++index);
 			else
 			{
 				v1Actions.RemoveAt(index);
 				SaveV1Actions();
+			}
+			if (!inV2set)
+			{
+				OnNotifyPropertyChanged(nameof(Count));
+				OnNotifyPropertyChanged(IndexerName);
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
 			}
 		}
 
@@ -708,6 +751,10 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return ret;
 		}
+
+		/// <summary>Called when a property has changed to notify any attached elements.</summary>
+		/// <param name="propertyName">Name of the property.</param>
+		private void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 		private void SaveV1Actions()
 		{
