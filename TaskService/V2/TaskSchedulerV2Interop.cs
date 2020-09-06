@@ -12,6 +12,7 @@ namespace Microsoft.Win32.TaskScheduler.V2Interop
 		Hidden = 1
 	}
 
+#pragma warning disable CS0618 // Type or member is obsolete
 	[ComImport, Guid("BAE54997-48B1-4CBE-9965-D6BE263EBEA4"), InterfaceType(ComInterfaceType.InterfaceIsDual), System.Security.SuppressUnmanagedCodeSecurity]
 	internal interface IAction
 	{

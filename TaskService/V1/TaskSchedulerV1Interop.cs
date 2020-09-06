@@ -6,6 +6,8 @@ using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler.V1Interop
 {
+#pragma warning disable CS0618 // Type or member is obsolete
+
 	#region class HRESULT -- Values peculiar to the task scheduler.
 	internal class HResult
 	{
