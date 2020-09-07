@@ -3671,7 +3671,8 @@ namespace Microsoft.Win32.TaskScheduler
 	internal static class DebugHelper
 	{
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Language", "CSE0003:Use expression-bodied members", Justification = "<Pending>")]
-		public static string GetDebugString(object inst) =>
+		public static string GetDebugString(object inst)
+		{
 #if DEBUG
 			var sb = new StringBuilder();
 			foreach (var pi in inst.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
@@ -3693,8 +3694,8 @@ namespace Microsoft.Win32.TaskScheduler
 			return sb.ToString();
 #else
 			inst.GetType().ToString();
-
 #endif
+		}
 	}
 
 	internal static class TSInteropExt

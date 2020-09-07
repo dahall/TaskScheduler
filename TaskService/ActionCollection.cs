@@ -243,9 +243,9 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			set
 			{
-				if (Count <= index)
+				if (index < 0 || Count <= index)
 					throw new ArgumentOutOfRangeException(nameof(index), index, "Index is not a valid index in the ActionCollection");
-				var orig = v1Actions[index].Clone();
+				var orig = this[index].Clone();
 				if (v2Coll != null)
 				{
 					inV2set = true;
