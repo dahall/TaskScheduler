@@ -18,7 +18,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dahall/taskscheduler</PackageProjectUrl>
     <PackageIconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</PackageIconUrl>
-    <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
+    <!--<RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>-->
     <RepositoryType>Git</RepositoryType>
     <PackageTags>task;interop;windows;taskscheduler;scheduler</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
