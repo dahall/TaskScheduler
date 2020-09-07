@@ -6,87 +6,62 @@
   <members>
     <member name="T:Microsoft.Win32.TaskScheduler.Action">
       <summary>
-            Abstract base class that provides the common properties that are inherited by all action
-            objects. An action object is created by the <see cref="M:Microsoft.Win32.TaskScheduler.ActionCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskActionType)" /> method.
+            Abstract base class that provides the common properties that are inherited by all action objects. An action object is created by the
+            <see cref="M:Microsoft.Win32.TaskScheduler.ActionCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskActionType)" /> method.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Action.ActionType">
-      <summary>
-            Gets the type of the action.
-            </summary>
+      <summary>Gets the type of the action.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.Clone">
-      <summary>
-            Creates a new object that is a copy of the current instance.
-            </summary>
-      <returns>
-            A new object that is a copy of this instance.
-            </returns>
+      <summary>Creates a new object that is a copy of the current instance.</summary>
+      <returns>A new object that is a copy of this instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.CompareTo(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
+      <summary>
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current
+            instance precedes, follows, or occurs in the same position in the sort order as the other object.
+            </summary>
       <param name="obj">An object to compare with this instance.</param>
       <returns>A value that indicates the relative order of the objects being compared.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.CreateAction(Microsoft.Win32.TaskScheduler.TaskActionType)">
-      <summary>
-            Creates the specified action.
-            </summary>
+      <summary>Creates the specified action.</summary>
       <param name="actionType">Type of the action to instantiate.</param>
       <returns>
         <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> of specified type.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.Equals(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
       <returns>
-        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.Equals(System.Object)">
-      <summary>
-            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
-            </summary>
+      <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
       <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
       <returns>
-        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.GetHashCode">
-      <summary>
-            Returns a hash code for this instance.
-            </summary>
-      <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-            </returns>
+      <summary>Returns a hash code for this instance.</summary>
+      <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Action.Id">
-      <summary>
-            Gets or sets the identifier of the action.
-            </summary>
+      <summary>Gets or sets the identifier of the action.</summary>
     </member>
     <member name="E:Microsoft.Win32.TaskScheduler.Action.PropertyChanged">
-      <summary>
-            Occurs when a property value changes.
-            </summary>
+      <summary>Occurs when a property value changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.ToString">
-      <summary>
-            Returns the action Id.
-            </summary>
+      <summary>Returns the action Id.</summary>
       <returns>String representation of action.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Action.ToString(System.Globalization.CultureInfo)">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents this action.
-            </summary>
+      <summary>Returns a <see cref="T:System.String" /> that represents this action.</summary>
       <param name="culture">The culture.</param>
       <returns>String representation of action.</returns>
     </member>
@@ -94,75 +69,64 @@
       <summary>List of unbound values when working with Actions not associated with a registered task.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ActionCollection">
-      <summary>
-            Collection that contains the actions that are performed by the task.
-            </summary>
+      <summary>Collection that contains the actions that are performed by the task.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Add(System.String,System.String,System.String)">
-      <summary>
-            Adds an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> to the task.
-            </summary>
+      <summary>Adds an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> to the task.</summary>
       <param name="path">Path to an executable file.</param>
       <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
-      <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
+      <param name="workingDirectory">
+            Directory that contains either the executable file or the files that are used by the executable file. This value can be null.
+            </param>
       <returns>The bound <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> that was added to the collection.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Add``1(``0)">
-      <summary>
-            Adds an action to the task.
-            </summary>
+      <summary>Adds an action to the task.</summary>
       <param name="action">A derived <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> class.</param>
       <typeparam name="TAction">A type derived from <see cref="T:Microsoft.Win32.TaskScheduler.Action" />.</typeparam>
       <returns>The bound <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that was added to the collection.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskActionType)">
-      <summary>
-            Adds a new <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> instance to the task.
-            </summary>
+      <summary>Adds a new <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> instance to the task.</summary>
       <param name="actionType">Type of task to be created</param>
       <returns>Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> instance.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.AddRange(System.Collections.Generic.IEnumerable{Microsoft.Win32.TaskScheduler.Action})">
-      <summary>
-            Adds a collection of actions to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />.
-            </summary>
-      <param name="actions">The actions to be added to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
+      <summary>Adds a collection of actions to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />.</summary>
+      <param name="actions">
+            The actions to be added to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The collection itself cannot be <c>null</c> and cannot
+            contain <c>null</c> elements.
+            </param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="actions" /> is <c>null</c>.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Clear">
-      <summary>
-            Clears all actions from the task.
-            </summary>
+      <summary>Clears all actions from the task.</summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.ActionCollection.CollectionChanged">
+      <summary>Occurs when a collection changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Contains(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
-            </summary>
+      <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-      <returns>
-            true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
-            </returns>
+      <returns>true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.ContainsType(System.Type)">
-      <summary>
-            Determines whether the specified action type is contained in this collection.
-            </summary>
+      <summary>Determines whether the specified action type is contained in this collection.</summary>
       <param name="actionType">Type of the action.</param>
       <returns>
-        <c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified action type is contained in this collection; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.Context">
-      <summary>
-            Gets or sets the identifier of the principal for the task.
-            </summary>
+      <summary>Gets or sets the identifier of the principal for the task.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.CopyTo(Microsoft.Win32.TaskScheduler.Action[],System.Int32)">
       <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an array of <see cref="T:Microsoft.Win32.TaskScheduler.Action" />, starting at a particular  index.
+            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an array of <see cref="T:Microsoft.Win32.TaskScheduler.Action" />, starting at a particular index.
             </summary>
-      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.</param>
+      <param name="array">
+            The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.
+            </param>
       <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array at which copying begins.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.CopyTo(System.Int32,Microsoft.Win32.TaskScheduler.Action[],System.Int32,System.Int32)">
@@ -170,134 +134,124 @@
             Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array index.
             </summary>
       <param name="index">The zero-based index in the source at which copying begins.</param>
-      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.</param>
+      <param name="array">
+            The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array must have zero-based indexing.
+            </param>
       <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> array at which copying begins.</param>
       <param name="count">The number of elements to copy.</param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="array" /> is null.</exception>
       <exception cref="T:System.ArgumentOutOfRangeException">
         <paramref name="arrayIndex" /> is less than 0.</exception>
-      <exception cref="T:System.ArgumentException">The number of elements in the source <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
+      <exception cref="T:System.ArgumentException">
+            The number of elements in the source <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.
+            </exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.Count">
-      <summary>
-            Gets the number of actions in the collection.
-            </summary>
+      <summary>Gets the number of actions in the collection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Find(System.Predicate{Microsoft.Win32.TaskScheduler.Action})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the first
+            occurrence within the entire collection.
             </summary>
-      <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> to search for.</param>
-      <returns>The first <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
+      <param name="match">
+            The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> to search for.
+            </param>
+      <returns>
+            The first <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.FindIndexOf(System.Int32,System.Int32,System.Predicate{Microsoft.Win32.TaskScheduler.Action})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the zero-based
+            index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
             </summary>
       <param name="startIndex">The zero-based starting index of the search.</param>
       <param name="count">The number of elements in the collection to search.</param>
       <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the element to search for.</param>
-      <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+      <returns>
+            The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.FindIndexOf(System.Predicate{Microsoft.Win32.TaskScheduler.Action})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> that matches the conditions defined by the specified predicate, and returns the zero-based
+            index of the first occurrence within the collection.
             </summary>
       <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the element to search for.</param>
-      <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+      <returns>
+            The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.GetEnumerator">
-      <summary>
-            Retrieves an enumeration of each of the actions.
-            </summary>
-      <returns>Returns an object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and that can iterate through the <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> objects within the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />.</returns>
+      <summary>Retrieves an enumeration of each of the actions.</summary>
+      <returns>
+            Returns an object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and that can iterate through the <see cref="T:Microsoft.Win32.TaskScheduler.Action" />
+            objects within the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.IndexOf(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-            </summary>
+      <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
-      <returns>
-            The index of <paramref name="item" /> if found in the list; otherwise, -1.
-            </returns>
+      <returns>The index of <paramref name="item" /> if found in the list; otherwise, -1.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.IndexOf(System.String)">
-      <summary>
-            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-            </summary>
-      <param name="actionId">The id (<see cref="P:Microsoft.Win32.TaskScheduler.Action.Id" />) of the action to be retrieved.</param>
-      <returns>
-            The index of <paramref name="actionId" /> if found in the list; otherwise, -1.
-            </returns>
+      <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.</summary>
+      <param name="actionId">The id ( <see cref="P:Microsoft.Win32.TaskScheduler.Action.Id" />) of the action to be retrieved.</param>
+      <returns>The index of <paramref name="actionId" /> if found in the list; otherwise, -1.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Insert(System.Int32,Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Inserts an action at the specified index.
-            </summary>
+      <summary>Inserts an action at the specified index.</summary>
       <param name="index">The zero-based index at which action should be inserted.</param>
       <param name="action">The action to insert into the list.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.Item(System.Int32)">
-      <summary>
-            Gets or sets a an action at the specified index.
-            </summary>
+      <summary>Gets or sets a an action at the specified index.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.Item(System.String)">
-      <summary>
-            Gets or sets a specified action from the collection.
-            </summary>
-      <param name="actionId">The id (<see cref="P:Microsoft.Win32.TaskScheduler.Action.Id" />) of the action to be retrieved.</param>
-      <returns>
-            Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> instance.
-            </returns>
+      <summary>Gets or sets a specified action from the collection.</summary>
+      <param name="actionId">The id ( <see cref="P:Microsoft.Win32.TaskScheduler.Action.Id" />) of the action to be retrieved.</param>
+      <returns>Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Action" /> instance.</returns>
       <exception cref="T:System.ArgumentNullException"></exception>
       <exception cref="T:System.ArgumentOutOfRangeException"></exception>
       <exception cref="T:System.NullReferenceException"></exception>
       <exception cref="T:System.InvalidOperationException">Mismatching Id for action and lookup.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion">
-      <summary>Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> instances.</summary>
+      <summary>
+            Gets or sets the systems under which unsupported actions will be converted to PowerShell <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> instances.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.ActionCollection.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.Remove(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-            </summary>
+      <summary>Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
       <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
       <returns>
-            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method
+            also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
             </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.RemoveAt(System.Int32)">
-      <summary>
-            Removes the action at a specified index.
-            </summary>
+      <summary>Removes the action at a specified index.</summary>
       <param name="index">Index of action to remove.</param>
       <exception cref="T:System.ArgumentOutOfRangeException">Index out of range.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.ToArray">
-      <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to a new array.
-            </summary>
+      <summary>Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" /> to a new array.</summary>
       <returns>An array containing copies of the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.ActionCollection" />.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ActionCollection.ToString">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents the actions in this collection.
-            </summary>
-      <returns>
-            A <see cref="T:System.String" /> that represents the actions in this collection.
-            </returns>
+      <summary>Returns a <see cref="T:System.String" /> that represents the actions in this collection.</summary>
+      <returns>A <see cref="T:System.String" /> that represents the actions in this collection.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ActionCollection.XmlText">
-      <summary>
-            Gets or sets an XML-formatted version of the collection.
-            </summary>
+      <summary>Gets or sets an XML-formatted version of the collection.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.BootTrigger">
       <summary>Represents a trigger that starts a task when the system is booted.</summary>
@@ -315,55 +269,40 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ComHandlerAction">
       <summary>
-            Represents an action that fires a handler. Only available on Task Scheduler 2.0.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+             Represents an action that fires a handler. Only available on Task Scheduler 2.0. <note>Only available for Task Scheduler 2.0 on
+             Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComHandlerAction.#ctor">
-      <summary>
-            Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.
-            </summary>
+      <summary>Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComHandlerAction.#ctor(System.Guid,System.String)">
-      <summary>
-            Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.
-            </summary>
+      <summary>Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.</summary>
       <param name="classId">Identifier of the handler class.</param>
       <param name="data">Addition data associated with the handler.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComHandlerAction.ClassId">
-      <summary>
-            Gets or sets the identifier of the handler class.
-            </summary>
+      <summary>Gets or sets the identifier of the handler class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComHandlerAction.ClassName">
-      <summary>
-            Gets the name of the object referred to by <see cref="P:Microsoft.Win32.TaskScheduler.ComHandlerAction.ClassId" />.
-            </summary>
+      <summary>Gets the name of the object referred to by <see cref="P:Microsoft.Win32.TaskScheduler.ComHandlerAction.ClassId" />.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ComHandlerAction.Data">
-      <summary>
-            Gets or sets additional data that is associated with the handler.
-            </summary>
+      <summary>Gets or sets additional data that is associated with the handler.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComHandlerAction.Equals(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
       <returns>
-        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ComHandlerAction.ToString">
-      <summary>
-            Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.
-            </summary>
+      <summary>Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ComHandlerAction" />.</summary>
       <returns>String representation of this action.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.CustomTrigger">
       <summary>
-            Represents a custom trigger. This class is based on undocumented features and may change. <note>This type of trigger is only available for reading custom
-            triggers. It cannot be used to create custom triggers.</note></summary>
+            Represents a custom trigger. This class is based on undocumented features and may change. <note>This type of trigger is only
+            available for reading custom triggers. It cannot be used to create custom triggers.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.CustomTrigger.Clone">
       <summary>Clones this instance.</summary>
@@ -386,9 +325,9 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.DailyTrigger">
       <summary>
-            Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every other day, every
-            third day, and so on.
-            </summary>
+             Represents a trigger that starts a task based on a daily schedule. For example, the task starts at a specific time every day, every
+             other day, every third day, and so on.
+             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.#ctor(System.Int16)">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.DailyTrigger" />.</summary>
@@ -396,8 +335,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.DailyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -446,18 +385,15 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.EmailAction">
       <summary>
-            Represents an action that sends an e-mail.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
+             Represents an action that sends an e-mail. <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and
+             later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its
+             functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EmailAction.#ctor">
-      <summary>
-            Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.
-            </summary>
+      <summary>Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EmailAction.#ctor(System.String,System.String,System.String,System.String,System.String)">
-      <summary>
-            Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.
-            </summary>
+      <summary>Creates an unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.</summary>
       <param name="subject">Subject of the e-mail.</param>
       <param name="from">E-mail address that you want to send the e-mail from.</param>
       <param name="to">E-mail address or addresses that you want to send the e-mail to.</param>
@@ -466,78 +402,54 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Attachments">
       <summary>
-            Gets or sets an array of file paths to be sent as attachments with the e-mail. Each item must be a <see cref="T:System.String" /> value containing a path to file.
+            Gets or sets an array of file paths to be sent as attachments with the e-mail. Each item must be a <see cref="T:System.String" /> value
+            containing a path to file.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Bcc">
-      <summary>
-            Gets or sets the e-mail address or addresses that you want to Bcc in the e-mail.
-            </summary>
+      <summary>Gets or sets the e-mail address or addresses that you want to Bcc in the e-mail.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Body">
-      <summary>
-            Gets or sets the body of the e-mail that contains the e-mail message.
-            </summary>
+      <summary>Gets or sets the body of the e-mail that contains the e-mail message.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Cc">
-      <summary>
-            Gets or sets the e-mail address or addresses that you want to Cc in the e-mail.
-            </summary>
+      <summary>Gets or sets the e-mail address or addresses that you want to Cc in the e-mail.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EmailAction.Equals(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
       <returns>
-        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.From">
-      <summary>
-            Gets or sets the e-mail address that you want to send the e-mail from.
-            </summary>
+      <summary>Gets or sets the e-mail address that you want to send the e-mail from.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.HeaderFields">
-      <summary>
-            Gets or sets the header information in the e-mail message to send.
-            </summary>
+      <summary>Gets or sets the header information in the e-mail message to send.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Priority">
-      <summary>
-            Gets or sets the priority of the e-mail message.
-            </summary>
+      <summary>Gets or sets the priority of the e-mail message.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.ReplyTo">
-      <summary>
-            Gets or sets the e-mail address that you want to reply to.
-            </summary>
+      <summary>Gets or sets the e-mail address that you want to reply to.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Server">
-      <summary>
-            Gets or sets the name of the server that you use to send e-mail from.
-            </summary>
+      <summary>Gets or sets the name of the server that you use to send e-mail from.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.Subject">
-      <summary>
-            Gets or sets the subject of the e-mail.
-            </summary>
+      <summary>Gets or sets the subject of the e-mail.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EmailAction.To">
-      <summary>
-            Gets or sets the e-mail address or addresses that you want to send the e-mail to.
-            </summary>
+      <summary>Gets or sets the e-mail address or addresses that you want to send the e-mail to.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EmailAction.ToString">
-      <summary>
-            Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.
-            </summary>
+      <summary>Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" />.</summary>
       <returns>String representation of this action.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.EventTrigger">
       <summary>
-            Represents a trigger that starts a task when a system event occurs. <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003
-            and later.</note></summary>
+             Represents a trigger that starts a task when a system event occurs. <note>Only available for Task Scheduler 2.0 on Windows Vista or
+             Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.#ctor">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.EventTrigger" />.</summary>
@@ -558,8 +470,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -581,8 +493,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.EventTrigger.SetBasic(System.String,System.String,System.Nullable{System.Int32})">
       <summary>
-            Sets the subscription for a basic event. This will replace the contents of the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.Subscription" /> property and clear all entries in the
-            <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries" /> property.
+            Sets the subscription for a basic event. This will replace the contents of the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.Subscription" /> property and clear all
+            entries in the <see cref="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries" /> property.
             </summary>
       <param name="log">The event's log.</param>
       <param name="source">The event's source. Can be <c>null</c>.</param>
@@ -597,37 +509,30 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.EventTrigger.ValueQueries">
       <summary>
-            Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from the subscription query
-            specified in the Subscription property. The name of the query can be used as a variable in the message of a <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> action.
+            Gets a collection of named XPath queries. Each query in the collection is applied to the last matching event XML returned from
+            the subscription query specified in the Subscription property. The name of the query can be used as a variable in the message of
+            a <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> action.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ExecAction">
-      <summary>
-            Represents an action that executes a command-line operation.
-            </summary>
+      <summary>Represents an action that executes a command-line operation.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ExecAction.#ctor">
-      <summary>
-            Creates a new instance of an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> that can be added to <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Actions" />.
-            </summary>
+      <summary>Creates a new instance of an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> that can be added to <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Actions" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ExecAction.#ctor(System.String,System.String,System.String)">
-      <summary>
-            Creates a new instance of an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> that can be added to <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Actions" />.
-            </summary>
+      <summary>Creates a new instance of an <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> that can be added to <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Actions" />.</summary>
       <param name="path">Path to an executable file.</param>
       <param name="arguments">Arguments associated with the command-line operation. This value can be null.</param>
-      <param name="workingDirectory">Directory that contains either the executable file or the files that are used by the executable file. This value can be null.</param>
+      <param name="workingDirectory">
+            Directory that contains either the executable file or the files that are used by the executable file. This value can be null.
+            </param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ExecAction.Arguments">
-      <summary>
-            Gets or sets the arguments associated with the command-line operation.
-            </summary>
+      <summary>Gets or sets the arguments associated with the command-line operation.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ExecAction.Equals(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
       <returns>
         <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
@@ -641,21 +546,18 @@
         <c>true</c> if the specified path is a valid filename; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ExecAction.Path">
-      <summary>
-            Gets or sets the path to an executable file.
-            </summary>
+      <summary>Gets or sets the path to an executable file.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ExecAction.SetValidatedPath(System.String,System.Boolean)">
       <summary>
-            Validates the input as a valid filename and optionally checks for its existence. If valid, the <see cref="P:Microsoft.Win32.TaskScheduler.ExecAction.Path" /> property is set to the validated absolute file path.
+            Validates the input as a valid filename and optionally checks for its existence. If valid, the <see cref="P:Microsoft.Win32.TaskScheduler.ExecAction.Path" /> property is
+            set to the validated absolute file path.
             </summary>
       <param name="path">The file path to validate.</param>
       <param name="checkIfExists">if set to <c>true</c> check if the file exists.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ExecAction.ToString">
-      <summary>
-            Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.
-            </summary>
+      <summary>Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" />.</summary>
       <returns>String representation of this action.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ExecAction.WorkingDirectory">
@@ -668,23 +570,31 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.IdleSettings">
       <summary>
-            Specifies how the Task Scheduler performs tasks when the computer is in an idle condition. For information about idle conditions, see Task Idle Conditions.
+            Specifies how the Task Scheduler performs tasks when the computer is in an idle condition. For information about idle conditions,
+            see Task Idle Conditions.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.IdleSettings.Dispose">
       <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.IdleSettings.IdleDuration">
-      <summary>Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.</summary>
+      <summary>
+            Gets or sets a value that indicates the amount of time that the computer must be in an idle state before the task is run.
+            </summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.IdleSettings.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.IdleSettings.RestartOnIdle">
       <summary>
-            Gets or sets a Boolean value that indicates whether the task is restarted when the computer cycles into an idle condition more than once.
+            Gets or sets a Boolean value that indicates whether the task is restarted when the computer cycles into an idle condition more
+            than once.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.IdleSettings.StopOnIdleEnd">
       <summary>
-            Gets or sets a Boolean value that indicates that the Task Scheduler will terminate the task if the idle condition ends before the task is completed.
+            Gets or sets a Boolean value that indicates that the Task Scheduler will terminate the task if the idle condition ends before
+            the task is completed.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.IdleSettings.ToString">
@@ -693,14 +603,15 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.IdleSettings.WaitTimeout">
       <summary>
-            Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. If no value is specified for
-            this property, then the Task Scheduler service will wait indefinitely for an idle condition to occur.
+            Gets or sets a value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. If no
+            value is specified for this property, then the Task Scheduler service will wait indefinitely for an idle condition to occur.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.IdleTrigger">
       <summary>
-            Represents a trigger that starts a task when the computer goes into an idle state. For information about idle conditions, see Task Idle Conditions.
-            </summary>
+             Represents a trigger that starts a task when the computer goes into an idle state. For information about idle conditions, see Task
+             Idle Conditions.
+             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.IdleTrigger.#ctor">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.IdleTrigger" />.</summary>
@@ -769,8 +680,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.LogonTrigger">
       <summary>
-             Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are enumerated and any tasks
-             registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
+             Represents a trigger that starts a task when a user logs on. When the Task Scheduler service starts, all logged-on users are
+             enumerated and any tasks registered with logon triggers that match the logged on user are run. Not available on Task Scheduler 1.0.
              </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.LogonTrigger.#ctor">
@@ -798,9 +709,9 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Deadline">
       <summary>
-            Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance, if the task failed to
-            complete during regular Automatic maintenance. The minimum value is one day. The value of the <see cref="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Deadline" /> property should be greater than
-            the value of the <see cref="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Period" /> property. If the deadline is not specified the task will not be started during emergency Automatic maintenance.
+            Gets or sets the amount of time after which the Task scheduler attempts to run the task during emergency Automatic maintenance,
+            if the task failed to complete during regular Automatic maintenance. The minimum value is one day. The value of the <see cref="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Deadline" /> property should be greater than the value of the <see cref="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Period" /> property. If the deadline is not
+            specified the task will not be started during emergency Automatic maintenance.
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
     </member>
@@ -809,15 +720,20 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Exclusive">
       <summary>
-            Gets or sets a value indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive mode. The exclusivity is
-            guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If exclusivity is not specified, the task is
-            started in parallel with other maintenance tasks.
+            Gets or sets a value indicating whether the Task Scheduler must start the task during the Automatic maintenance in exclusive
+            mode. The exclusivity is guaranteed only between other maintenance tasks and doesn't grant any ordering priority of the task. If
+            exclusivity is not specified, the task is started in parallel with other maintenance tasks.
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.MaintenanceSettings.Period">
-      <summary>Gets or sets the amount of time the task needs to be started during Automatic maintenance. The minimum value is one minute.</summary>
+      <summary>
+            Gets or sets the amount of time the task needs to be started during Automatic maintenance. The minimum value is one minute.
+            </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.MaintenanceSettings.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MaintenanceSettings.ToString">
       <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
@@ -825,7 +741,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger">
       <summary>
-            Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May through October.
+            Represents a trigger that starts a task on a monthly day-of-week schedule. For example, the task starts on every first Thursday, May
+            through October.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.#ctor(Microsoft.Win32.TaskScheduler.DaysOfTheWeek,Microsoft.Win32.TaskScheduler.MonthsOfTheYear,Microsoft.Win32.TaskScheduler.WhichWeek)">
@@ -836,8 +753,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyDOWTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -868,20 +785,21 @@
       <summary>Gets or sets the weeks of the month during which the task runs.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger">
-      <summary>Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.</summary>
+      <summary>
+            Represents a trigger that starts a job based on a monthly schedule. For example, the task starts on specific days of specific months.
+            </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.#ctor(System.Int32,Microsoft.Win32.TaskScheduler.MonthsOfTheYear)">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.MonthlyTrigger" />.</summary>
       <param name="dayOfMonth">
-            The day of the month. This must be a value between 1 and 32. If this value is set to 32, then the
-            <see cref="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.RunOnLastDayOfMonth" /> value will be set and no days will be added regardless of the month.
+            The day of the month. This must be a value between 1 and 32. If this value is set to 32, then the <see cref="P:Microsoft.Win32.TaskScheduler.MonthlyTrigger.RunOnLastDayOfMonth" /> value will be set and no days will be added regardless of the month.
             </param>
       <param name="monthsOfYear">The months of the year.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.MonthlyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -1144,6 +1062,9 @@
       <summary>Gets or sets the name of a network profile. The name is used for display purposes.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.NetworkSettings.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.NetworkSettings.ToString">
       <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
       <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
@@ -1191,30 +1112,29 @@
       <param name="streamingContext">The streaming context.</param>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption">
-      <summary>
-            Options for when to convert actions to PowerShell equivalents.
-            </summary>
+      <summary>Options for when to convert actions to PowerShell equivalents.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never">
       <summary>
-            Never convert any actions to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities are found.
+            Never convert any actions to PowerShell. This will force exceptions to be thrown when unsupported actions our action quantities
+            are found.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Version1">
       <summary>
-            Convert actions under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple actions of all types.
-            If not specified, only a single <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> is supported. Developer must ensure that PowerShell v2 or higher is installed on the target computer.
+            Convert actions under Version 1 of the library (Windows XP or Windows Server 2003 and earlier). This option supports multiple
+            actions of all types. If not specified, only a single <see cref="T:Microsoft.Win32.TaskScheduler.ExecAction" /> is supported. Developer must ensure that
+            PowerShell v2 or higher is installed on the target computer.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Version2">
       <summary>
-            Convert all <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> and <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" /> references to their PowerShell equivalents on systems on or after Windows 8 / Server 2012.
+            Convert all <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" /> and <see cref="T:Microsoft.Win32.TaskScheduler.EmailAction" /> references to their PowerShell equivalents on systems
+            on or after Windows 8 / Server 2012.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All">
-      <summary>
-            Convert all actions regardless of version or operating system.
-            </summary>
+      <summary>Convert all actions regardless of version or operating system.</summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.QuickTriggerType">
       <summary>
@@ -1248,8 +1168,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger">
       <summary>
-            Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0. <note>Only available for Task
-            Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+             Represents a trigger that starts a task when the task is registered or updated. Not available on Task Scheduler 1.0. <note>Only
+             available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RegistrationTrigger.#ctor">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.RegistrationTrigger" />.</summary>
@@ -1271,10 +1191,12 @@
             The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
             </param>
       <param name="duration">
-            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is
-            repeated indefinitely.
+            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified,
+            the pattern is repeated indefinitely.
             </param>
-      <param name="stopAtDurationEnd">If set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
+      <param name="stopAtDurationEnd">
+            If set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.
+            </param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.Dispose">
       <summary>Releases all resources used by this class.</summary>
@@ -1299,15 +1221,22 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RepetitionPattern.Interval">
       <summary>Gets or sets the amount of time between each restart of the task.</summary>
-      <exception cref="T:System.ArgumentOutOfRangeException">The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+            The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
+            </exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.RepetitionPattern.IsSet">
       <summary>Determines whether any properties for this <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> have been set.</summary>
       <returns>
         <c>true</c> if properties have been set; otherwise, <c>false</c>.</returns>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.RepetitionPattern.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.RepetitionPattern.StopAtDurationEnd">
-      <summary>Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates if a running instance of the task is stopped at the end of repetition pattern duration.
+            </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ResourceReferenceValue">
       <summary>
@@ -1423,8 +1352,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger">
       <summary>
-            Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications. <note>Only available for
-            Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
+             Triggers tasks for console connect or disconnect, remote connect or disconnect, or workstation lock or unlock notifications.
+             <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.#ctor">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger" />.</summary>
@@ -1436,8 +1365,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -1453,7 +1382,9 @@
       <summary>Gets or sets the kind of Terminal Server session change that would trigger a task launch.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.UserId">
-      <summary>Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.</summary>
+      <summary>
+            Gets or sets the user for the Terminal Server session. When a session state change is detected for this user, a task is started.
+            </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.SessionStateChangeTrigger.V2GetTriggerString">
       <summary>Gets the non-localized trigger string for V2 triggers.</summary>
@@ -1461,44 +1392,33 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.ShowMessageAction">
       <summary>
-            Represents an action that shows a message box when a task is activated.
-            <note>Only available for Task Scheduler 2.0 on Windows Vista or Windows Server 2003 and later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this library is able to mimic its functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
+             Represents an action that shows a message box when a task is activated. <note>Only available for Task Scheduler 2.0 on Windows Vista
+             or Windows Server 2003 and later.</note><note type="warning">This action has been deprecated in Windows 8 and later. However, this
+             library is able to mimic its functionality using PowerShell if the <see cref="P:Microsoft.Win32.TaskScheduler.ActionCollection.PowerShellConversion" /> property is
+             set to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.All" />. To disable this conversion, set the value to <see cref="F:Microsoft.Win32.TaskScheduler.PowerShellActionPlatformOption.Never" />.</note></summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ShowMessageAction.#ctor">
-      <summary>
-            Creates a new unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.
-            </summary>
+      <summary>Creates a new unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ShowMessageAction.#ctor(System.String,System.String)">
-      <summary>
-            Creates a new unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.
-            </summary>
+      <summary>Creates a new unbound instance of <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.</summary>
       <param name="messageBody">Message text that is displayed in the body of the message box.</param>
       <param name="title">Title of the message box.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ShowMessageAction.Equals(Microsoft.Win32.TaskScheduler.Action)">
-      <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
+      <summary>Indicates whether the current object is equal to another object of the same type.</summary>
       <param name="other">An object to compare with this object.</param>
       <returns>
-        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ShowMessageAction.MessageBody">
-      <summary>
-            Gets or sets the message text that is displayed in the body of the message box.
-            </summary>
+      <summary>Gets or sets the message text that is displayed in the body of the message box.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.ShowMessageAction.Title">
-      <summary>
-            Gets or sets the title of the message box.
-            </summary>
+      <summary>Gets or sets the title of the message box.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.ShowMessageAction.ToString">
-      <summary>
-            Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.
-            </summary>
+      <summary>Gets a string representation of the <see cref="T:Microsoft.Win32.TaskScheduler.ShowMessageAction" />.</summary>
       <returns>String representation of this action.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.SnapshotItem">
@@ -1844,14 +1764,14 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Task">
       <summary>
-            Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials that are used to
-            register the task, and the properties that describe the task.
+            Provides the methods that are used to run the task immediately, get any running instances of the task, get or set the credentials
+            that are used to register the task, and the properties that describe the task.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.CompareTo(Microsoft.Win32.TaskScheduler.Task)">
       <summary>
-            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes,
-            follows, or occurs in the same position in the sort order as the other object.
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current
+            instance precedes, follows, or occurs in the same position in the sort order as the other object.
             </summary>
       <param name="other">An object to compare with this instance.</param>
       <returns>A value that indicates the relative order of the objects being compared.</returns>
@@ -1874,18 +1794,19 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.GetAccessControl">
       <summary>
-            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the specified type of access control list (ACL) entries for the task described by the
-            current <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
+            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the specified type of access control list (ACL) entries for the task
+            described by the current <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
             </summary>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the access control rules for the current task.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.GetAccessControl(System.Security.AccessControl.AccessControlSections)">
       <summary>
-            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the specified type of access control list (ACL) entries for the task described by the
-            current <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
+            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the specified type of access control list (ACL) entries for the task
+            described by the current <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
             </summary>
       <param name="includeSections">
-            One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies which group of access control entries to retrieve.
+            One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies which group of access control
+            entries to retrieve.
             </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that encapsulates the access control rules for the current task.</returns>
     </member>
@@ -1896,8 +1817,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.GetLastRegistrationTime">
       <summary>
-            Gets the last registration time, looking first at the <see cref="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.Date" /> value and then looking for the most recent registration
-            event in the Event Log.
+            Gets the last registration time, looking first at the <see cref="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.Date" /> value and then looking for the
+            most recent registration event in the Event Log.
             </summary>
       <returns>
         <see cref="T:System.DateTime" /> of the last registration or <see cref="F:System.DateTime.MinValue" /> if no value can be found.</returns>
@@ -1934,19 +1855,25 @@
       <summary>Gets the number of times the registered task has missed a scheduled run.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Task.OnNotifyPropertyChanged(System.String)">
+      <summary>Called when a property has changed to notify any attached elements.</summary>
+      <param name="propertyName">Name of the property.</param>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Task.Path">
       <summary>Gets the path to where the registered task is stored.</summary>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.Task.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Task.ReadOnly">
       <summary>
-            Gets a value indicating whether this task is read only. Only available if <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.AllowReadOnlyTasks" />
-            is <c>true</c>.
+            Gets a value indicating whether this task is read only. Only available if <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.AllowReadOnlyTasks" /> is <c>true</c>.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.RegisterChanges">
       <summary>
-            Updates the task with any changes made to the <see cref="P:Microsoft.Win32.TaskScheduler.Task.Definition" /> by calling
-            <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.RegisterTaskDefinition(System.String,Microsoft.Win32.TaskScheduler.TaskDefinition)" /> from the currently registered folder using the currently registered name.
+            Updates the task with any changes made to the <see cref="P:Microsoft.Win32.TaskScheduler.Task.Definition" /> by calling <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.RegisterTaskDefinition(System.String,Microsoft.Win32.TaskScheduler.TaskDefinition)" /> from the currently registered folder using the currently
+            registered name.
             </summary>
       <exception cref="T:System.Security.SecurityException">Thrown if task was previously registered with a password.</exception>
     </member>
@@ -1954,22 +1881,24 @@
       <summary>Runs the registered task immediately.</summary>
       <param name="parameters">
         <para>
-            The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
-            call this method without any values (e.g. <code>Run()</code>).
-            </para>
+             The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+             call this method without any values (e.g.
+             <code>Run()</code>
+             ).
+             </para>
         <para>
-            The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
-            then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
-            the action properties.
-            </para>
+             The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+             then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+             the action properties.
+             </para>
         <para>
-            If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
-            "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
-            </para>
+             If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+             "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+             </para>
         <para>
-            For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
-            <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
-            </para>
+             For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+             <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
+             </para>
       </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.RunningTask" /> instance that defines the new instance of the task.</returns>
     </member>
@@ -1979,40 +1908,42 @@
       <param name="sessionID">
         <para>The terminal server session in which you want to start the task.</para>
         <para>
-            If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is not passed into the <paramref name="flags" /> parameter, then the value specified in this
-            parameter is ignored.If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the flags parameter and the sessionID value is less than or
-            equal to 0, then an invalid argument error will be returned.
-            </para>
+             If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is not passed into the <paramref name="flags" /> parameter, then the value
+             specified in this parameter is ignored.If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the flags parameter
+             and the sessionID value is less than or equal to 0, then an invalid argument error will be returned.
+             </para>
         <para>
-            If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the <paramref name="flags" /> parameter and the sessionID value is a valid session
-            ID greater than 0 and if no value is specified for the user parameter, then the Task Scheduler service will try to start the task interactively as
-            the user who is logged on to the specified session.
-            </para>
+             If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the <paramref name="flags" /> parameter and the sessionID
+             value is a valid session ID greater than 0 and if no value is specified for the user parameter, then the Task Scheduler service
+             will try to start the task interactively as the user who is logged on to the specified session.
+             </para>
         <para>
-            If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the <paramref name="flags" /> parameter and the sessionID value is a valid session
-            ID greater than 0 and if a user is specified in the user parameter, then the Task Scheduler service will try to start the task interactively as the
-            user who is specified in the user parameter.
-            </para>
+             If the <see cref="F:Microsoft.Win32.TaskScheduler.TaskRunFlags.UseSessionId" /> value is passed into the <paramref name="flags" /> parameter and the sessionID
+             value is a valid session ID greater than 0 and if a user is specified in the user parameter, then the Task Scheduler service
+             will try to start the task interactively as the user who is specified in the user parameter.
+             </para>
       </param>
       <param name="user">The user for which the task runs.</param>
       <param name="parameters">
         <para>
-            The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
-            call this method without any values (e.g. <code>RunEx(0, 0, "MyUserName")</code>).
-            </para>
+             The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
+             call this method without any values (e.g.
+             <code>RunEx(0, 0, "MyUserName")</code>
+             ).
+             </para>
         <para>
-            The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
-            then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
-            the action properties.
-            </para>
+             The string values that you specify are paired with names and stored as name-value pairs. If you specify a single string value,
+             then Arg0 will be the name assigned to the value. The value can be used in the task action where the $(Arg0) variable is used in
+             the action properties.
+             </para>
         <para>
-            If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
-            "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
-            </para>
+             If you pass in values such as "0", "100", and "250" as an array of string values, then "0" will replace the $(Arg0) variables,
+             "100" will replace the $(Arg1) variables, and "250" will replace the $(Arg2) variables used in the action properties.
+             </para>
         <para>
-            For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
-            <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
-            </para>
+             For more information and a list of action properties that can use $(Arg0), $(Arg1), ..., $(Arg32) variables in their values, see
+             <a href="https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-actions#using-variables-in-action-properties">Task Actions</a>.
+             </para>
       </param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.RunningTask" /> instance that defines the new instance of the task.</returns>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
@@ -2022,9 +1953,12 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.SetAccessControl(Microsoft.Win32.TaskScheduler.TaskSecurity)">
       <summary>
-            Applies access control list (ACL) entries described by a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object to the file described by the current <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
-            </summary>
-      <param name="taskSecurity">A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that describes an access control list (ACL) entry to apply to the current task.</param>
+             Applies access control list (ACL) entries described by a <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object to the file described by the current
+             <see cref="T:Microsoft.Win32.TaskScheduler.Task" /> object.
+             </summary>
+      <param name="taskSecurity">
+             A <see cref="T:Microsoft.Win32.TaskScheduler.TaskSecurity" /> object that describes an access control list (ACL) entry to apply to the current task.
+             </param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Task.SetSecurityDescriptorSddlForm(System.String,Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions)">
       <summary>Sets the security descriptor for the task. Not available to Task Scheduler 1.0.</summary>
@@ -2087,8 +2021,8 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskActionType.Execute">
       <summary>
-            This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name of a document is
-            provided, find its associated application and launch the application with the document.
+            This action performs a command-line operation. For example, the action can run a script, launch an executable, or, if the name
+            of a document is provided, find its associated application and launch the application with the document.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskActionType.ComHandler">
@@ -2160,27 +2094,47 @@
       <summary>The task is compatible with the AT command.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V1">
-      <summary>The task is compatible with Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).
-            <para>Items not available when compared to V2:</para><list type="bullet"><item><term>TaskDefinition.Principal.GroupId - All account information can be retrieved via the UserId property.</term></item><item><term>TaskLogonType values Group, None and S4U are not supported.</term></item><item><term>TaskDefinition.Principal.RunLevel == TaskRunLevel.Highest is not supported.</term></item><item><term>Assigning access security to a task is not supported using TaskDefinition.RegistrationInfo.SecurityDescriptorSddlForm or in RegisterTaskDefinition.</term></item><item><term>TaskDefinition.RegistrationInfo.Documentation, Source, URI and Version properties are only supported using this library. See details in the remarks for <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Data" />.</term></item><item><term>TaskDefinition.Settings.AllowDemandStart cannot be false.</term></item><item><term>TaskDefinition.Settings.AllowHardTerminate cannot be false.</term></item><item><term>TaskDefinition.Settings.MultipleInstances can only be IgnoreNew.</term></item><item><term>TaskDefinition.Settings.NetworkSettings cannot have any values.</term></item><item><term>TaskDefinition.Settings.RestartCount can only be 0.</term></item><item><term>TaskDefinition.Settings.StartWhenAvailable can only be false.</term></item><item><term>TaskDefinition.Actions can only contain ExecAction instances unless the TaskDefinition.Actions.PowerShellConversion property has the Version1 flag set.</term></item><item><term>TaskDefinition.Triggers cannot contain CustomTrigger, EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger instances.</term></item><item><term>TaskDefinition.Triggers cannot contain instances with delays set.</term></item><item><term>TaskDefinition.Triggers cannot contain instances with ExecutionTimeLimit or Id properties set.</term></item><item><term>TaskDefinition.Triggers cannot contain LogonTriggers instances with the UserId property set.</term></item><item><term>TaskDefinition.Triggers cannot contain MonthlyDOWTrigger instances with the RunOnLastWeekOfMonth property set to <c>true</c>.</term></item><item><term>TaskDefinition.Triggers cannot contain MonthlyTrigger instances with the RunOnDayWeekOfMonth property set to <c>true</c>.</term></item></list></summary>
+      <summary>
+            The task is compatible with Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).
+            <para>Items not available when compared to V2:</para><list type="bullet"><item><term>TaskDefinition.Principal.GroupId - All account information can be retrieved via the UserId property.</term></item><item><term>TaskLogonType values Group, None and S4U are not supported.</term></item><item><term>TaskDefinition.Principal.RunLevel == TaskRunLevel.Highest is not supported.</term></item><item><term>
+            Assigning access security to a task is not supported using TaskDefinition.RegistrationInfo.SecurityDescriptorSddlForm or in RegisterTaskDefinition.
+            </term></item><item><term>
+            TaskDefinition.RegistrationInfo.Documentation, Source, URI and Version properties are only supported using this library. See
+            details in the remarks for <see cref="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Data" />.
+            </term></item><item><term>TaskDefinition.Settings.AllowDemandStart cannot be false.</term></item><item><term>TaskDefinition.Settings.AllowHardTerminate cannot be false.</term></item><item><term>TaskDefinition.Settings.MultipleInstances can only be IgnoreNew.</term></item><item><term>TaskDefinition.Settings.NetworkSettings cannot have any values.</term></item><item><term>TaskDefinition.Settings.RestartCount can only be 0.</term></item><item><term>TaskDefinition.Settings.StartWhenAvailable can only be false.</term></item><item><term>
+            TaskDefinition.Actions can only contain ExecAction instances unless the TaskDefinition.Actions.PowerShellConversion property has
+            the Version1 flag set.
+            </term></item><item><term>
+            TaskDefinition.Triggers cannot contain CustomTrigger, EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger instances.
+            </term></item><item><term>TaskDefinition.Triggers cannot contain instances with delays set.</term></item><item><term>TaskDefinition.Triggers cannot contain instances with ExecutionTimeLimit or Id properties set.</term></item><item><term>TaskDefinition.Triggers cannot contain LogonTriggers instances with the UserId property set.</term></item><item><term>TaskDefinition.Triggers cannot contain MonthlyDOWTrigger instances with the RunOnLastWeekOfMonth property set to <c>true</c>.</term></item><item><term>TaskDefinition.Triggers cannot contain MonthlyTrigger instances with the RunOnDayWeekOfMonth property set to <c>true</c>.</term></item></list></summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V2">
-      <summary>The task is compatible with Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).
+      <summary>
+            The task is compatible with Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).
             <para>
-            This version is the baseline for the new, non-file based Task Scheduler. See <see cref="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V1" /> remarks for functionality that was
-            not forward-compatible.
+            This version is the baseline for the new, non-file based Task Scheduler. See <see cref="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V1" /> remarks for
+            functionality that was not forward-compatible.
             </para></summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V2_1">
-      <summary>The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).
-            <para>Changes from V2:</para><list type="bullet"><item><term>TaskDefinition.Principal.ProcessTokenSidType can be defined as a value other than Default.</term></item><item><term>TaskDefinition.Actions may not contain EmailAction or ShowMessageAction instances unless the TaskDefinition.Actions.PowerShellConversion property has
-            the Version2 flag set.</term></item><item><term>TaskDefinition.Principal.RequiredPrivileges can have privilege values assigned.</term></item><item><term>TaskDefinition.Settings.DisallowStartOnRemoteAppSession can be set to true.</term></item><item><term>TaskDefinition.UseUnifiedSchedulingEngine can be set to true.</term></item></list></summary>
+      <summary>
+            The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).
+            <para>Changes from V2:</para><list type="bullet"><item><term>TaskDefinition.Principal.ProcessTokenSidType can be defined as a value other than Default.</term></item><item><term>
+            TaskDefinition.Actions may not contain EmailAction or ShowMessageAction instances unless the
+            TaskDefinition.Actions.PowerShellConversion property has the Version2 flag set.
+            </term></item><item><term>TaskDefinition.Principal.RequiredPrivileges can have privilege values assigned.</term></item><item><term>TaskDefinition.Settings.DisallowStartOnRemoteAppSession can be set to true.</term></item><item><term>TaskDefinition.UseUnifiedSchedulingEngine can be set to true.</term></item></list></summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V2_2">
-      <summary>The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).
-            <para>Changes from V2_1:</para><list type="bullet"><item><term>TaskDefinition.Settings.MaintenanceSettings can have Period or Deadline be values other than TimeSpan.Zero or the Exclusive property set to true.</term></item><item><term>TaskDefinition.Settings.Volatile can be set to true.</term></item></list></summary>
+      <summary>
+            The task is compatible with Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).
+            <para>Changes from V2_1:</para><list type="bullet"><item><term>
+            TaskDefinition.Settings.MaintenanceSettings can have Period or Deadline be values other than TimeSpan.Zero or the Exclusive
+            property set to true.
+            </term></item><item><term>TaskDefinition.Settings.Volatile can be set to true.</term></item></list></summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCompatibility.V2_3">
-      <summary>The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).
+      <summary>
+            The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).
             <para>Changes from V2_2:</para><list type="bullet"><item><term>None published.</term></item></list></summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskCompatibilityEntry">
@@ -2203,38 +2157,39 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.CreateOrUpdate">
       <summary>
-            The Task Scheduler service either registers the task as a new task or as an updated version if the task already exists. Equivalent to Create | Update.
+            The Task Scheduler service either registers the task as a new task or as an updated version if the task already exists.
+            Equivalent to Create | Update.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.Disable">
       <summary>
-            The Task Scheduler service registers the disabled task. A disabled task cannot run until it is enabled. For more information, see Enabled Property of
-            TaskSettings and Enabled Property of RegisteredTask.
+            The Task Scheduler service registers the disabled task. A disabled task cannot run until it is enabled. For more information,
+            see Enabled Property of TaskSettings and Enabled Property of RegisteredTask.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.DontAddPrincipalAce">
       <summary>
             The Task Scheduler service is prevented from adding the allow access-control entry (ACE) for the context principal. When the
-            TaskFolder.RegisterTaskDefinition or TaskFolder.RegisterTask functions are called with this flag to update a task, the Task Scheduler service does
-            not add the ACE for the new context principal and does not remove the ACE from the old context principal.
+            TaskFolder.RegisterTaskDefinition or TaskFolder.RegisterTask functions are called with this flag to update a task, the Task
+            Scheduler service does not add the ACE for the new context principal and does not remove the ACE from the old context principal.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.IgnoreRegistrationTriggers">
       <summary>
-            The Task Scheduler service creates the task, but ignores the registration triggers in the task. By ignoring the registration triggers, the task will
-            not execute when it is registered unless a time-based trigger causes it to execute on registration.
+            The Task Scheduler service creates the task, but ignores the registration triggers in the task. By ignoring the registration
+            triggers, the task will not execute when it is registered unless a time-based trigger causes it to execute on registration.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.Update">
       <summary>
-            The Task Scheduler service registers the task as an updated version of an existing task. When a task with a registration trigger is updated, the task
-            will execute after the update occurs.
+            The Task Scheduler service registers the task as an updated version of an existing task. When a task with a registration trigger
+            is updated, the task will execute after the update occurs.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskCreation.ValidateOnly">
       <summary>
-            The Task Scheduler service checks the syntax of the XML that describes the task but does not register the task. This constant cannot be combined with
-            the Create, Update, or CreateOrUpdate values.
+            The Task Scheduler service checks the syntax of the XML that describes the task but does not register the task. This constant
+            cannot be combined with the Create, Update, or CreateOrUpdate values.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskDefinition">
@@ -2244,9 +2199,12 @@
       <summary>Gets a collection of actions that are performed by the task.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.CanUseUnifiedSchedulingEngine(System.Boolean,System.Version)">
-      <summary>Determines whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> can use the Unified Scheduling Engine or if it contains unsupported properties.</summary>
+      <summary>
+            Determines whether this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> can use the Unified Scheduling Engine or if it contains unsupported properties.
+            </summary>
       <param name="throwExceptionWithDetails">
-            if set to <c>true</c> throws an <see cref="T:System.InvalidOperationException" /> with details about unsupported properties in the Data property of the exception.
+            if set to <c>true</c> throws an <see cref="T:System.InvalidOperationException" /> with details about unsupported properties in the Data
+            property of the exception.
             </param>
       <param name="taskSchedulerVersion"></param>
       <returns>
@@ -2254,8 +2212,8 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Data">
       <summary>
-            Gets or sets the data that is associated with the task. This data is ignored by the Task Scheduler service, but is used by third-parties who wish to
-            extend the task format.
+            Gets or sets the data that is associated with the task. This data is ignored by the Task Scheduler service, but is used by
+            third-parties who wish to extend the task format.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.Dispose">
@@ -2272,10 +2230,13 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Principal">
       <summary>Gets the principal for the task that provides the security credentials for the task.</summary>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskDefinition.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.RegistrationInfo">
       <summary>
-            Gets a class instance of registration information that is used to describe a task, such as the description of the task, the author of the task, and
-            the date the task is registered.
+            Gets a class instance of registration information that is used to describe a task, such as the description of the task, the
+            author of the task, and the date the task is registered.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Settings">
@@ -2286,7 +2247,9 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.Validate(System.Boolean)">
       <summary>Validates the current <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" />.</summary>
-      <param name="throwException">if set to <c>true</c> throw a <see cref="T:System.InvalidOperationException" /> with details about invalid properties.</param>
+      <param name="throwException">
+            if set to <c>true</c> throw a <see cref="T:System.InvalidOperationException" /> with details about invalid properties.
+            </param>
       <returns>
         <c>true</c> if current <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" /> is valid; <c>false</c> if not.</returns>
     </member>
@@ -2995,82 +2958,68 @@
             </returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskFolderCollection">
-      <summary>
-            Provides information and control for a collection of folders that contain tasks.
-            </summary>
+      <summary>Provides information and control for a collection of folders that contain tasks.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Add(Microsoft.Win32.TaskScheduler.TaskFolder)">
-      <summary>
-            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.
-            </summary>
+      <summary>Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
       <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-      <exception cref="T:System.NotImplementedException">This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.CreateFolder(System.String,System.String,System.Boolean)" /> instead.</exception>
+      <exception cref="T:System.NotImplementedException">
+            This action is technically unfeasible due to limitations of the underlying library. Use the <see cref="M:Microsoft.Win32.TaskScheduler.TaskFolder.CreateFolder(System.String,System.String,System.Boolean)" /> instead.
+            </exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Clear">
-      <summary>
-            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-            </summary>
+      <summary>Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskFolderCollection.CollectionChanged">
+      <summary>Occurs when a collection changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Contains(Microsoft.Win32.TaskScheduler.TaskFolder)">
-      <summary>
-            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
-            </summary>
+      <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-      <returns>
-            true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
-            </returns>
+      <returns>true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.CopyTo(Microsoft.Win32.TaskScheduler.TaskFolder[],System.Int32)">
-      <summary>
-            Copies the elements of the ICollection to an Array, starting at a particular Array index.
-            </summary>
-      <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The Array must have zero-based indexing.</param>
+      <summary>Copies the elements of the ICollection to an Array, starting at a particular Array index.</summary>
+      <param name="array">
+            The one-dimensional Array that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The Array must have
+            zero-based indexing.
+            </param>
       <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Count">
-      <summary>
-            Gets the number of items in the collection.
-            </summary>
+      <summary>Gets the number of items in the collection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Exists(System.String)">
-      <summary>
-            Determines whether the specified folder exists.
-            </summary>
+      <summary>Determines whether the specified folder exists.</summary>
       <param name="path">The path of the folder.</param>
       <returns>true if folder exists; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.GetEnumerator">
-      <summary>
-            Gets a list of items in a collection.
-            </summary>
+      <summary>Gets a list of items in a collection.</summary>
       <returns>Enumerated list of items in the collection.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Item(System.Int32)">
-      <summary>
-            Gets the specified folder from the collection.
-            </summary>
+      <summary>Gets the specified folder from the collection.</summary>
       <param name="index">The index of the folder to be retrieved.</param>
       <returns>A TaskFolder instance that represents the requested folder.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Item(System.String)">
-      <summary>
-            Gets the specified folder from the collection.
-            </summary>
+      <summary>Gets the specified folder from the collection.</summary>
       <param name="path">The path of the folder to be retrieved.</param>
       <returns>A TaskFolder instance that represents the requested folder.</returns>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskFolderCollection.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolderCollection.Remove(Microsoft.Win32.TaskScheduler.TaskFolder)">
-      <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-            </summary>
+      <summary>Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
       <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
       <returns>
-            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method
+            also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
             </returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskFolderSnapshot">
@@ -3102,8 +3051,8 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskLogonType.S4U">
       <summary>
-            Use an existing interactive token to run a task. The user must log on using a service for user (S4U) logon. When an S4U logon is used, no password is
-            stored by the system and there is no access to either the network or to encrypted files.
+            Use an existing interactive token to run a task. The user must log on using a service for user (S4U) logon. When an S4U logon is
+            used, no password is stored by the system and there is no access to either the network or to encrypted files.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskLogonType.InteractiveToken">
@@ -3113,21 +3062,27 @@
       <summary>Group activation. The groupId field specifies the group.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskLogonType.ServiceAccount">
-      <summary>Indicates that a Local System, Local Service, or Network Service account is being used as a security context to run the task.</summary>
+      <summary>
+            Indicates that a Local System, Local Service, or Network Service account is being used as a security context to run the task.
+            </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskLogonType.InteractiveTokenOrPassword">
       <summary>
-            First use the interactive token. If the user is not logged on (no interactive token is available), then the password is used. The password must be
-            specified when a task is registered. This flag is not recommended for new tasks because it is less reliable than Password.
+            First use the interactive token. If the user is not logged on (no interactive token is available), then the password is used.
+            The password must be specified when a task is registered. This flag is not recommended for new tasks because it is less reliable
+            than Password.
             </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskPrincipal">
       <summary>
-            Provides the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+            Provides the security credentials for a principal. These security credentials define the security context for the tasks that are
+            associated with the principal.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.Account">
-      <summary>Gets the account associated with this principal. This value is pulled from the TaskDefinition's XMLText property if set.</summary>
+      <summary>
+            Gets the account associated with this principal. This value is pulled from the TaskDefinition's XMLText property if set.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.DisplayName">
       <summary>Gets or sets the name of the principal that is displayed in the Task Scheduler UI.</summary>
@@ -3138,8 +3093,9 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.GroupId">
       <summary>
-            Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal. Setting this property to
-            something other than a null or empty string, will set the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.UserId" /> property to NULL and will set the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.LogonType" /> property to TaskLogonType.Group;
+            Gets or sets the identifier of the user group that is required to run the tasks that are associated with the principal. Setting
+            this property to something other than a null or empty string, will set the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.UserId" /> property to NULL and will set
+            the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.LogonType" /> property to TaskLogonType.Group;
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
@@ -3149,15 +3105,21 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.LogonType">
       <summary>Gets or sets the security logon method that is required to run the tasks that are associated with the principal.</summary>
-      <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">TaskLogonType values of Group, None, or S4UNot are not supported under Task Scheduler 1.0.</exception>
+      <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">
+            TaskLogonType values of Group, None, or S4UNot are not supported under Task Scheduler 1.0.
+            </exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.ProcessTokenSidType">
       <summary>Gets or sets the task process security identifier (SID) type.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Not supported under Task Scheduler versions prior to 2.1.</exception>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskPrincipal.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.RequiredPrivileges">
       <summary>
-            Gets the security credentials for a principal. These security credentials define the security context for the tasks that are associated with the principal.
+            Gets the security credentials for a principal. These security credentials define the security context for the tasks that are
+            associated with the principal.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipal.RequiresPassword">
@@ -3165,7 +3127,8 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.RunLevel">
       <summary>
-            Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated with the principal.
+            Gets or sets the identifier that is used to specify the privilege level that is required to run the tasks that are associated
+            with the principal.
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
@@ -3175,8 +3138,8 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.UserId">
       <summary>
-            Gets or sets the user identifier that is required to run the tasks that are associated with the principal. Setting this property to something other
-            than a null or empty string, will set the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.GroupId" /> property to NULL;
+            Gets or sets the user identifier that is required to run the tasks that are associated with the principal. Setting this property
+            to something other than a null or empty string, will set the <see cref="P:Microsoft.Win32.TaskScheduler.TaskPrincipal.GroupId" /> property to NULL;
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipal.ValidateAccountForSidType(System.String,Microsoft.Win32.TaskScheduler.TaskProcessTokenSidType)">
@@ -3209,20 +3172,21 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeTcbPrivilege">
       <summary>
-            This privilege identifies its holder as part of the trusted computer base. Some trusted protected subsystems are granted this privilege. User Right:
-            Act as part of the operating system.
+            This privilege identifies its holder as part of the trusted computer base. Some trusted protected subsystems are granted this
+            privilege. User Right: Act as part of the operating system.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeSecurityPrivilege">
       <summary>
-            Required to perform a number of security-related functions, such as controlling and viewing audit messages. This privilege identifies its holder as a
-            security operator. User Right: Manage auditing and the security log.
+            Required to perform a number of security-related functions, such as controlling and viewing audit messages. This privilege
+            identifies its holder as a security operator. User Right: Manage auditing and the security log.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeTakeOwnershipPrivilege">
       <summary>
-            Required to take ownership of an object without being granted discretionary access. This privilege allows the owner value to be set only to those
-            values that the holder may legitimately assign as the owner of an object. User Right: Take ownership of files or other objects.
+            Required to take ownership of an object without being granted discretionary access. This privilege allows the owner value to be
+            set only to those values that the holder may legitimately assign as the owner of an object. User Right: Take ownership of files
+            or other objects.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeLoadDriverPrivilege">
@@ -3248,19 +3212,19 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeBackupPrivilege">
       <summary>
-            Required to perform backup operations. This privilege causes the system to grant all read access control to any file, regardless of the access
-            control list (ACL) specified for the file. Any access request other than read is still evaluated with the ACL. This privilege is required by the
-            RegSaveKey and RegSaveKeyExfunctions. The following access rights are granted if this privilege is held: READ_CONTROL, ACCESS_SYSTEM_SECURITY,
-            FILE_GENERIC_READ, FILE_TRAVERSE. User Right: Back up files and directories.
+            Required to perform backup operations. This privilege causes the system to grant all read access control to any file, regardless
+            of the access control list (ACL) specified for the file. Any access request other than read is still evaluated with the ACL.
+            This privilege is required by the RegSaveKey and RegSaveKeyExfunctions. The following access rights are granted if this
+            privilege is held: READ_CONTROL, ACCESS_SYSTEM_SECURITY, FILE_GENERIC_READ, FILE_TRAVERSE. User Right: Back up files and directories.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeRestorePrivilege">
       <summary>
-            Required to perform restore operations. This privilege causes the system to grant all write access control to any file, regardless of the ACL
-            specified for the file. Any access request other than write is still evaluated with the ACL. Additionally, this privilege enables you to set any
-            valid user or group security identifier (SID) as the owner of a file. This privilege is required by the RegLoadKey function. The following access
-            rights are granted if this privilege is held: WRITE_DAC, WRITE_OWNER, ACCESS_SYSTEM_SECURITY, FILE_GENERIC_WRITE, FILE_ADD_FILE,
-            FILE_ADD_SUBDIRECTORY, DELETE. User Right: Restore files and directories.
+            Required to perform restore operations. This privilege causes the system to grant all write access control to any file,
+            regardless of the ACL specified for the file. Any access request other than write is still evaluated with the ACL. Additionally,
+            this privilege enables you to set any valid user or group security identifier (SID) as the owner of a file. This privilege is
+            required by the RegLoadKey function. The following access rights are granted if this privilege is held: WRITE_DAC, WRITE_OWNER,
+            ACCESS_SYSTEM_SECURITY, FILE_GENERIC_WRITE, FILE_ADD_FILE, FILE_ADD_SUBDIRECTORY, DELETE. User Right: Restore files and directories.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeShutdownPrivilege">
@@ -3274,14 +3238,14 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeSystemEnvironmentPrivilege">
       <summary>
-            Required to modify the nonvolatile RAM of systems that use this type of memory to store configuration information. User Right: Modify firmware
-            environment values.
+            Required to modify the nonvolatile RAM of systems that use this type of memory to store configuration information. User Right:
+            Modify firmware environment values.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeChangeNotifyPrivilege">
       <summary>
-            Required to receive notifications of changes to files or directories. This privilege also causes the system to skip all traversal access checks. It
-            is enabled by default for all users. User Right: Bypass traverse checking.
+            Required to receive notifications of changes to files or directories. This privilege also causes the system to skip all
+            traversal access checks. It is enabled by default for all users. User Right: Bypass traverse checking.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeRemoteShutdownPrivilege">
@@ -3292,14 +3256,15 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeSyncAgentPrivilege">
       <summary>
-            Required for a domain controller to use the LDAP directory synchronization services. This privilege allows the holder to read all objects and
-            properties in the directory, regardless of the protection on the objects and properties. By default, it is assigned to the Administrator and
-            LocalSystem accounts on domain controllers. User Right: Synchronize directory service data.
+            Required for a domain controller to use the LDAP directory synchronization services. This privilege allows the holder to read
+            all objects and properties in the directory, regardless of the protection on the objects and properties. By default, it is
+            assigned to the Administrator and LocalSystem accounts on domain controllers. User Right: Synchronize directory service data.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeEnableDelegationPrivilege">
       <summary>
-            Required to mark user and computer accounts as trusted for delegation. User Right: Enable computer and user accounts to be trusted for delegation.
+            Required to mark user and computer accounts as trusted for delegation. User Right: Enable computer and user accounts to be
+            trusted for delegation.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeManageVolumePrivilege">
@@ -3307,15 +3272,16 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeImpersonatePrivilege">
       <summary>
-            Required to impersonate. User Right: Impersonate a client after authentication. Windows XP/2000: This privilege is not supported. Note that this
-            value is supported starting with Windows Server 2003, Windows XP with SP2, and Windows 2000 with SP4.
+            Required to impersonate. User Right: Impersonate a client after authentication. Windows XP/2000: This privilege is not
+            supported. Note that this value is supported starting with Windows Server 2003, Windows XP with SP2, and Windows 2000 with SP4.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeCreateGlobalPrivilege">
       <summary>
-            Required to create named file mapping objects in the global namespace during Terminal Services sessions. This privilege is enabled by default for
-            administrators, services, and the local system account. User Right: Create global objects. Windows XP/2000: This privilege is not supported. Note
-            that this value is supported starting with Windows Server 2003, Windows XP with SP2, and Windows 2000 with SP4.
+            Required to create named file mapping objects in the global namespace during Terminal Services sessions. This privilege is
+            enabled by default for administrators, services, and the local system account. User Right: Create global objects. Windows
+            XP/2000: This privilege is not supported. Note that this value is supported starting with Windows Server 2003, Windows XP with
+            SP2, and Windows 2000 with SP4.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeTrustedCredManAccessPrivilege">
@@ -3325,7 +3291,9 @@
       <summary>Required to modify the mandatory integrity level of an object. User Right: Modify an object label.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeIncreaseWorkingSetPrivilege">
-      <summary>Required to allocate more memory for applications that run in the context of users. User Right: Increase a process working set.</summary>
+      <summary>
+            Required to allocate more memory for applications that run in the context of users. User Right: Increase a process working set.
+            </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege.SeTimeZonePrivilege">
       <summary>Required to adjust the time zone associated with the computer's internal clock. User Right: Change the time zone.</summary>
@@ -3335,8 +3303,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges">
       <summary>
-            List of security credentials for a principal under version 1.3 of the Task Scheduler. These security credentials define the security context for the
-            tasks that are associated with the principal.
+            List of security credentials for a principal under version 1.3 of the Task Scheduler. These security credentials define the security
+            context for the tasks that are associated with the principal.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.Add(Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege)">
@@ -3347,7 +3315,9 @@
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.Contains(Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege)">
       <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-      <returns>true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.</returns>
+      <returns>
+            true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.CopyTo(Microsoft.Win32.TaskScheduler.TaskPrincipalPrivilege[],System.Int32)">
       <summary>Copies to.</summary>
@@ -3376,7 +3346,9 @@
       <returns>The element at the specified index.</returns>
       <exception cref="T:System.ArgumentOutOfRangeException">
         <paramref name="index" /> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1" />.</exception>
-      <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.Generic.IList`1" /> is read-only.</exception>
+      <exception cref="T:System.NotSupportedException">
+            The property is set and the <see cref="T:System.Collections.Generic.IList`1" /> is read-only.
+            </exception>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.TaskPrincipalPrivilegesEnumerator">
       <summary>Enumerates the privileges set for a principal under version 1.3 of the Task Scheduler.</summary>
@@ -3390,7 +3362,9 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.TaskPrincipalPrivilegesEnumerator.MoveNext">
       <summary>Advances the enumerator to the next element of the collection.</summary>
-      <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
+      <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
       <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskPrincipalPrivileges.TaskPrincipalPrivilegesEnumerator.Reset">
@@ -3399,8 +3373,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskProcessTokenSidType">
       <summary>
-            Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of process SID in the
-            IPrincipal2 interface.
+            Defines the types of process security identifier (SID) that can be used by tasks. These changes are used to specify the type of
+            process SID in the IPrincipal2 interface.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskProcessTokenSidType.None">
@@ -3408,8 +3382,9 @@
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskProcessTokenSidType.Unrestricted">
       <summary>
-            A task SID that is derived from the task name will be added to the process token groups list, and the token default discretionary access control list
-            (DACL) will be modified to allow only the task SID and local system full control and the account SID read control.
+            A task SID that is derived from the task name will be added to the process token groups list, and the token default
+            discretionary access control list (DACL) will be modified to allow only the task SID and local system full control and the
+            account SID read control.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskProcessTokenSidType.Default">
@@ -3417,8 +3392,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo">
       <summary>
-            Provides the administrative information that can be used to describe the task. This information includes details such as a description of the task, the
-            author of the task, the date the task is registered, and the security descriptor of the task.
+            Provides the administrative information that can be used to describe the task. This information includes details such as a
+            description of the task, the author of the task, the date the task is registered, and the security descriptor of the task.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.Author">
@@ -3436,6 +3411,9 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.Documentation">
       <summary>Gets or sets any additional documentation for the task.</summary>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.SecurityDescriptor">
       <summary>Gets or sets the security descriptor of the task.</summary>
     </member>
@@ -3444,7 +3422,9 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.Source">
-      <summary>Gets or sets where the task originated from. For example, a task may originate from a component, service, application, or user.</summary>
+      <summary>
+            Gets or sets where the task originated from. For example, a task may originate from a component, service, application, or user.
+            </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskRegistrationInfo.ToString">
       <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
@@ -4114,38 +4094,43 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType">
       <summary>
-            Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify the type of state
-            change in the SessionStateChangeTrigger.
+            Defines what kind of Terminal Server session state change you can use to trigger a task to start. These changes are used to specify
+            the type of state change in the SessionStateChangeTrigger.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.ConsoleConnect">
       <summary>
-            Terminal Server console connection state change. For example, when you connect to a user session on the local computer by switching users on the computer.
+            Terminal Server console connection state change. For example, when you connect to a user session on the local computer by
+            switching users on the computer.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.ConsoleDisconnect">
       <summary>
-            Terminal Server console disconnection state change. For example, when you disconnect to a user session on the local computer by switching users on
-            the computer.
+            Terminal Server console disconnection state change. For example, when you disconnect to a user session on the local computer by
+            switching users on the computer.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.RemoteConnect">
       <summary>
-            Terminal Server remote connection state change. For example, when a user connects to a user session by using the Remote Desktop Connection program
-            from a remote computer.
+            Terminal Server remote connection state change. For example, when a user connects to a user session by using the Remote Desktop
+            Connection program from a remote computer.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.RemoteDisconnect">
       <summary>
-            Terminal Server remote disconnection state change. For example, when a user disconnects from a user session while using the Remote Desktop Connection
-            program from a remote computer.
+            Terminal Server remote disconnection state change. For example, when a user disconnects from a user session while using the
+            Remote Desktop Connection program from a remote computer.
             </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.SessionLock">
-      <summary>Terminal Server session locked state change. For example, this state change causes the task to run when the computer is locked.</summary>
+      <summary>
+            Terminal Server session locked state change. For example, this state change causes the task to run when the computer is locked.
+            </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskSessionStateChangeType.SessionUnlock">
-      <summary>Terminal Server session unlocked state change. For example, this state change causes the task to run when the computer is unlocked.</summary>
+      <summary>
+            Terminal Server session unlocked state change. For example, this state change causes the task to run when the computer is unlocked.
+            </summary>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TaskSetSecurityOptions">
       <summary>Options for use when calling the SetSecurityDescriptorSddlForm methods.</summary>
@@ -4160,7 +4145,9 @@
       <summary>Provides the settings that the Task Scheduler service uses to perform the task.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.AllowDemandStart">
-      <summary>Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the task can be started by using either the Run command or the Context menu.
+            </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.AllowHardTerminate">
@@ -4173,17 +4160,19 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.DeleteExpiredTaskAfter">
       <summary>
-            Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. If no value is specified for this
-            property, then the Task Scheduler service will not delete the task.
+            Gets or sets the amount of time that the Task Scheduler will wait before deleting the task after it expires. If no value is
+            specified for this property, then the Task Scheduler service will not delete the task.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.DisallowStartIfOnBatteries">
-      <summary>Gets or sets a Boolean value that indicates that the task will not be started if the computer is running on battery power.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the task will not be started if the computer is running on battery power.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.DisallowStartOnRemoteAppSession">
       <summary>
-            Gets or sets a Boolean value that indicates that the task will not be started if the task is triggered to run in a Remote Applications Integrated
-            Locally (RAIL) session.
+            Gets or sets a Boolean value that indicates that the task will not be started if the task is triggered to run in a Remote
+            Applications Integrated Locally (RAIL) session.
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.1.</exception>
     </member>
@@ -4191,18 +4180,23 @@
       <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.Enabled">
-      <summary>Gets or sets a Boolean value that indicates that the task is enabled. The task can be performed only when this setting is TRUE.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the task is enabled. The task can be performed only when this setting is TRUE.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.ExecutionTimeLimit">
       <summary>
-            Gets or sets the amount of time that is allowed to complete the task. By default, a task will be stopped 72 hours after it starts to run.
+            Gets or sets the amount of time that is allowed to complete the task. By default, a task will be stopped 72 hours after it
+            starts to run.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.Hidden">
       <summary>Gets or sets a Boolean value that indicates that the task will not be visible in the UI by default.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.IdleSettings">
-      <summary>Gets or sets the information that specifies how the Task Scheduler performs tasks when the computer is in an idle state.</summary>
+      <summary>
+            Gets or sets the information that specifies how the Task Scheduler performs tasks when the computer is in an idle state.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.MaintenanceSettings">
       <summary>Gets or sets the information that the Task Scheduler uses during Automatic maintenance.</summary>
@@ -4213,14 +4207,17 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.NetworkSettings">
       <summary>
-            Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable property of
-            ITaskSettings is true and a network profile is specified in the NetworkSettings property, then the task will run only if the specified network
-            profile is available.
+            Gets or sets the network settings object that contains a network profile identifier and name. If the RunOnlyIfNetworkAvailable
+            property of ITaskSettings is true and a network profile is specified in the NetworkSettings property, then the task will run
+            only if the specified network profile is available.
             </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.Priority">
       <summary>Gets or sets the priority level of the task.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Value set to AboveNormal or BelowNormal on Task Scheduler 1.0.</exception>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TaskSettings.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.RestartCount">
       <summary>Gets or sets the number of times that the Task Scheduler will attempt to restart the task.</summary>
@@ -4231,17 +4228,23 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.RunOnlyIfIdle">
-      <summary>Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the computer is in an idle condition.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the computer is in an idle condition.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.RunOnlyIfLoggedOn">
-      <summary>Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the user is logged on (v1.0 only)</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only if the user is logged on (v1.0 only)
+            </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV2SupportedException">Property set for a task on a Task Scheduler version other than 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.RunOnlyIfNetworkAvailable">
       <summary>Gets or sets a Boolean value that indicates that the Task Scheduler will run the task only when a network is available.</summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.StartWhenAvailable">
-      <summary>Gets or sets a Boolean value that indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the Task Scheduler can start the task at any time after its scheduled time has passed.
+            </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.StopIfGoingOnBatteries">
@@ -4260,7 +4263,9 @@
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotSupportedPriorToException">Property set for a task on a Task Scheduler version prior to 2.2.</exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.WakeToRun">
-      <summary>Gets or sets a Boolean value that indicates that the Task Scheduler will wake the computer when it is time to run the task.</summary>
+      <summary>
+            Gets or sets a Boolean value that indicates that the Task Scheduler will wake the computer when it is time to run the task.
+            </summary>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskSettings.XmlText">
       <summary>Gets or sets an XML-formatted definition of the task settings.</summary>
@@ -4281,7 +4286,9 @@
       <summary>The state of the task is unknown.</summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskState.Disabled">
-      <summary>The task is registered but is disabled and no instances of the task are queued or running. The task cannot be run until it is enabled.</summary>
+      <summary>
+            The task is registered but is disabled and no instances of the task are queued or running. The task cannot be run until it is enabled.
+            </summary>
     </member>
     <member name="F:Microsoft.Win32.TaskScheduler.TaskState.Queued">
       <summary>Instances of the task are queued.</summary>
@@ -4351,8 +4358,8 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.Trigger">
       <summary>
-            Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using the
-            <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Add``1(``0)" /> or the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskTriggerType)" /> method.
+            Abstract base class which provides the common properties that are inherited by all trigger classes. A trigger can be created using
+            the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Add``1(``0)" /> or the <see cref="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskTriggerType)" /> method.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CheckBindValue(System.String,System.Object@)">
@@ -4366,16 +4373,16 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CompareTo(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes,
-            follows, or occurs in the same position in the sort order as the other object.
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current
+            instance precedes, follows, or occurs in the same position in the sort order as the other object.
             </summary>
       <param name="other">An object to compare with this instance.</param>
       <returns>A value that indicates the relative order of the objects being compared.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
@@ -4410,7 +4417,8 @@
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.ExecutionTimeLimit">
       <summary>
-            Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task Scheduler 1.0.
+            Gets or sets the maximum amount of time that the task launched by this trigger is allowed to run. Not available with Task
+            Scheduler 1.0.
             </summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
@@ -4435,10 +4443,17 @@
       <summary>Gets or sets the identifier for the trigger. Cannot set with Task Scheduler 1.0.</summary>
       <exception cref="T:Microsoft.Win32.TaskScheduler.NotV1SupportedException">Not supported under Task Scheduler 1.0.</exception>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.Trigger.OnNotifyPropertyChanged(System.String)">
+      <summary>Called when a property has changed to notify any attached elements.</summary>
+      <param name="propertyName">Name of the property.</param>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.Trigger.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.Repetition">
       <summary>
-            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> instance that indicates how often the task is run and how long the repetition pattern is repeated after the
-            task is started.
+            Gets a <see cref="T:Microsoft.Win32.TaskScheduler.RepetitionPattern" /> instance that indicates how often the task is run and how long the repetition pattern is
+            repeated after the task is started.
             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.Trigger.SetRepetition(System.TimeSpan,System.TimeSpan,System.Boolean)">
@@ -4447,10 +4462,12 @@
             The amount of time between each restart of the task. The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
             </param>
       <param name="duration">
-            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified, the pattern is
-            repeated indefinitely.
+            The duration of how long the pattern is repeated. The minimum time allowed is one minute. If <c>TimeSpan.Zero</c> is specified,
+            the pattern is repeated indefinitely.
             </param>
-      <param name="stopAtDurationEnd">if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.</param>
+      <param name="stopAtDurationEnd">
+            if set to <c>true</c> the running instance of the task is stopped at the end of repetition pattern duration.
+            </param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.Trigger.StartBoundary">
       <summary>Gets or sets the date and time when the trigger is activated.</summary>
@@ -4475,14 +4492,10 @@
       <returns>String describing the trigger.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TriggerCollection">
-      <summary>
-            Provides the methods that are used to add to, remove from, and get the triggers of a task.
-            </summary>
+      <summary>Provides the methods that are used to add to, remove from, and get the triggers of a task.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Add``1(``0)">
-      <summary>
-            Add an unbound <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to the task.
-            </summary>
+      <summary>Add an unbound <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to the task.</summary>
       <param name="unboundTrigger">
         <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> derivative to add to the task.</param>
       <typeparam name="TTrigger">A type derived from <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</typeparam>
@@ -4491,48 +4504,44 @@
         <c>unboundTrigger</c> is <c>null</c>.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddNew(Microsoft.Win32.TaskScheduler.TaskTriggerType)">
-      <summary>
-            Add a new trigger to the collections of triggers for the task.
-            </summary>
+      <summary>Add a new trigger to the collections of triggers for the task.</summary>
       <param name="taskTriggerType">The type of trigger to create.</param>
       <returns>A <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> instance of the specified type.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.AddRange(System.Collections.Generic.IEnumerable{Microsoft.Win32.TaskScheduler.Trigger})">
-      <summary>
-            Adds a collection of unbound triggers to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />.
-            </summary>
-      <param name="triggers">The triggers to be added to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The collection itself cannot be <c>null</c> and cannot contain <c>null</c> elements.</param>
+      <summary>Adds a collection of unbound triggers to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />.</summary>
+      <param name="triggers">
+            The triggers to be added to the end of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The collection itself cannot be <c>null</c> and
+            cannot contain <c>null</c> elements.
+            </param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="triggers" /> is <c>null</c>.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Clear">
-      <summary>
-            Clears all triggers from the task.
-            </summary>
+      <summary>Clears all triggers from the task.</summary>
+    </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TriggerCollection.CollectionChanged">
+      <summary>Occurs when a collection changes.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Contains(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
-            </summary>
+      <summary>Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
-      <returns>
-            true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
-            </returns>
+      <returns>true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.ContainsType(System.Type)">
-      <summary>
-            Determines whether the specified trigger type is contained in this collection.
-            </summary>
+      <summary>Determines whether the specified trigger type is contained in this collection.</summary>
       <param name="triggerType">Type of the trigger.</param>
       <returns>
-        <c>true</c> if the specified trigger type is contained in this collection; otherwise, <c>false</c>.
-            </returns>
+        <c>true</c> if the specified trigger type is contained in this collection; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.CopyTo(Microsoft.Win32.TaskScheduler.Trigger[],System.Int32)">
       <summary>
             Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1" /> to an <see cref="T:System.Array" />, starting at a particular <see cref="T:System.Array" /> index.
             </summary>
-      <param name="array">The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+      <param name="array">
+            The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The
+            <see cref="T:System.Array" /> must have zero-based indexing.
+            </param>
       <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.CopyTo(System.Int32,Microsoft.Win32.TaskScheduler.Trigger[],System.Int32,System.Int32)">
@@ -4540,128 +4549,115 @@
             Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> to a <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array, starting at a particular <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array index.
             </summary>
       <param name="index">The zero-based index in the source at which copying begins.</param>
-      <param name="array">The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array must have zero-based indexing.</param>
+      <param name="array">
+            The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array that is the destination of the elements copied from <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />. The <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array must have zero-based indexing.
+            </param>
       <param name="arrayIndex">The zero-based index in <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> array at which copying begins.</param>
       <param name="count">The number of elements to copy.</param>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="array" /> is null.</exception>
       <exception cref="T:System.ArgumentOutOfRangeException">
         <paramref name="arrayIndex" /> is less than 0.</exception>
-      <exception cref="T:System.ArgumentException">The number of elements in the source <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.</exception>
+      <exception cref="T:System.ArgumentException">
+            The number of elements in the source <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> is greater than the available space from <paramref name="arrayIndex" /> to the end of the destination <paramref name="array" />.
+            </exception>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TriggerCollection.Count">
-      <summary>
-            Gets the number of triggers in the collection.
-            </summary>
+      <summary>Gets the number of triggers in the collection.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Dispose">
-      <summary>
-            Releases all resources used by this class.
-            </summary>
+      <summary>Releases all resources used by this class.</summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Find(System.Predicate{Microsoft.Win32.TaskScheduler.Trigger})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the first
+            occurrence within the entire collection.
             </summary>
-      <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to search for.</param>
-      <returns>The first <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.</returns>
+      <param name="match">
+            The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> to search for.
+            </param>
+      <returns>
+            The first <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, if found; otherwise, <c>null</c>.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.FindIndexOf(System.Int32,System.Int32,System.Predicate{Microsoft.Win32.TaskScheduler.Trigger})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the zero-based
+            index of the first occurrence within the collection that starts at the specified index and contains the specified number of elements.
             </summary>
       <param name="startIndex">The zero-based starting index of the search.</param>
       <param name="count">The number of elements in the collection to search.</param>
       <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the element to search for.</param>
-      <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+      <returns>
+            The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.FindIndexOf(System.Predicate{Microsoft.Win32.TaskScheduler.Trigger})">
       <summary>
-            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the collection.
+            Searches for an <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> that matches the conditions defined by the specified predicate, and returns the zero-based
+            index of the first occurrence within the collection.
             </summary>
       <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the element to search for.</param>
-      <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+      <returns>
+            The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.
+            </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.GetEnumerator">
-      <summary>
-            Gets the collection enumerator for this collection.
-            </summary>
+      <summary>Gets the collection enumerator for this collection.</summary>
       <returns>The <see cref="T:System.Collections.Generic.IEnumerator`1" /> for this collection.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.IndexOf(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-            </summary>
+      <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.</summary>
       <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
-      <returns>
-            The index of <paramref name="item" /> if found in the list; otherwise, -1.
-            </returns>
+      <returns>The index of <paramref name="item" /> if found in the list; otherwise, -1.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.IndexOf(System.String)">
-      <summary>
-            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
-            </summary>
-      <param name="triggerId">The id (<see cref="P:Microsoft.Win32.TaskScheduler.Trigger.Id" />) of the trigger to be retrieved.</param>
-      <returns>
-            The index of <paramref name="triggerId" /> if found in the list; otherwise, -1.
-            </returns>
+      <summary>Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.</summary>
+      <param name="triggerId">The id ( <see cref="P:Microsoft.Win32.TaskScheduler.Trigger.Id" />) of the trigger to be retrieved.</param>
+      <returns>The index of <paramref name="triggerId" /> if found in the list; otherwise, -1.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Insert(System.Int32,Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Inserts an trigger at the specified index.
-            </summary>
+      <summary>Inserts an trigger at the specified index.</summary>
       <param name="index">The zero-based index at which trigger should be inserted.</param>
       <param name="trigger">The trigger to insert into the list.</param>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TriggerCollection.Item(System.Int32)">
-      <summary>
-            Gets a specified trigger from the collection.
-            </summary>
+      <summary>Gets a specified trigger from the collection.</summary>
       <param name="index">The index of the trigger to be retrieved.</param>
       <returns>Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> instance.</returns>
     </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TriggerCollection.Item(System.String)">
-      <summary>
-            Gets or sets a specified trigger from the collection.
-            </summary>
-      <param name="triggerId">The id (<see cref="P:Microsoft.Win32.TaskScheduler.Trigger.Id" />) of the trigger to be retrieved.</param>
-      <returns>
-            Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> instance.
-            </returns>
+      <summary>Gets or sets a specified trigger from the collection.</summary>
+      <param name="triggerId">The id ( <see cref="P:Microsoft.Win32.TaskScheduler.Trigger.Id" />) of the trigger to be retrieved.</param>
+      <returns>Specialized <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> instance.</returns>
       <exception cref="T:System.ArgumentNullException"></exception>
       <exception cref="T:System.ArgumentOutOfRangeException"></exception>
       <exception cref="T:System.NullReferenceException"></exception>
       <exception cref="T:System.InvalidOperationException">Mismatching Id for trigger and lookup.</exception>
     </member>
+    <member name="E:Microsoft.Win32.TaskScheduler.TriggerCollection.PropertyChanged">
+      <summary>Occurs when a property value changes.</summary>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.Remove(Microsoft.Win32.TaskScheduler.Trigger)">
-      <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.
-            </summary>
+      <summary>Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
       <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
       <returns>
-            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+            true if <paramref name="item" /> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false. This method
+            also returns false if <paramref name="item" /> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1" />.
             </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.RemoveAt(System.Int32)">
-      <summary>
-            Removes the trigger at a specified index.
-            </summary>
+      <summary>Removes the trigger at a specified index.</summary>
       <param name="index">Index of trigger to remove.</param>
       <exception cref="T:System.ArgumentOutOfRangeException">Index out of range.</exception>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.ToArray">
-      <summary>
-            Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> to a new array.
-            </summary>
+      <summary>Copies the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" /> to a new array.</summary>
       <returns>An array containing copies of the elements of the <see cref="T:Microsoft.Win32.TaskScheduler.TriggerCollection" />.</returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TriggerCollection.ToString">
-      <summary>
-            Returns a <see cref="T:System.String" /> that represents the triggers in this collection.
-            </summary>
-      <returns>
-            A <see cref="T:System.String" /> that represents the triggers in this collection.
-            </returns>
+      <summary>Returns a <see cref="T:System.String" /> that represents the triggers in this collection.</summary>
+      <returns>A <see cref="T:System.String" /> that represents the triggers in this collection.</returns>
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.TSNotSupportedException">
       <summary>
@@ -4697,9 +4693,9 @@
     </member>
     <member name="T:Microsoft.Win32.TaskScheduler.WeeklyTrigger">
       <summary>
-            Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of the week every week or
-            every other week.
-            </summary>
+             Represents a trigger that starts a task based on a weekly schedule. For example, the task starts at 8:00 A.M. on a specific day of
+             the week every week or every other week.
+             </summary>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.#ctor(Microsoft.Win32.TaskScheduler.DaysOfTheWeek,System.Int16)">
       <summary>Creates an unbound instance of a <see cref="T:Microsoft.Win32.TaskScheduler.WeeklyTrigger" />.</summary>
@@ -4708,8 +4704,8 @@
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.WeeklyTrigger.CopyProperties(Microsoft.Win32.TaskScheduler.Trigger)">
       <summary>
-            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with any derived triggers
-            except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
+            Copies the properties from another <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" /> the current instance. This will not copy any properties associated with
+            any derived triggers except those supporting the <see cref="T:Microsoft.Win32.TaskScheduler.ITriggerDelay" /> interface.
             </summary>
       <param name="sourceTrigger">The source <see cref="T:Microsoft.Win32.TaskScheduler.Trigger" />.</param>
     </member>
