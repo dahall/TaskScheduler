@@ -3693,7 +3693,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			return sb.ToString();
 #else
-			inst.GetType().ToString();
+			return inst.GetType().ToString();
 #endif
 		}
 	}
