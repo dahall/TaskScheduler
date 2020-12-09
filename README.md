@@ -1,18 +1,18 @@
-# ![](./docs/icons/tsnew48.png) Task Scheduler Managed Wrapper
+# ![](docs/icons/tsnew48.png) Task Scheduler Managed Wrapper
 [![Version](https://img.shields.io/github/release/dahall/TaskScheduler.svg?style=flat-square)](https://github.com/dahall/TaskScheduler/releases) [![Downloads](https://img.shields.io/nuget/dt/TaskScheduler.svg?style=flat-square)](https://www.nuget.org/packages/TaskScheduler/) [![Build status](https://ci.appveyor.com/api/projects/status/entp0dead4840cwm?svg=true)](https://ci.appveyor.com/project/dahall/taskscheduler)
 
-> Provides a .NET wrapper for the Windows Task Scheduler. It aggregates the multiple versions, provides an editor and allows for localization.
+> The original .NET wrapper for the Windows Task Scheduler that aggregates the multiple versions and provides localized controls for editing.
 
 ## Quick Links
-* [Discussion Forum](https://groups.google.com/forum/#!forum/taskscheduler) - Users helping users, enhancement requests, Q&A
 * [Wiki](https://github.com/dahall/TaskScheduler/wiki) - Sample code, library how-to, troubleshooting, etc.
 * [API documentation](https://dahall.github.io/TaskScheduler) - Class/method/property documentation and examples
 * [Full Issues Log](https://github.com/dahall/TaskScheduler/issues?q=) - Use the search box to see if your question may already be answered.
+* [Discussion Forum](https://github.com/dahall/TaskScheduler/discussions) - Users helping users, enhancement requests, Q&A (retired Google forum [here](https://groups.google.com/forum/#!forum/taskscheduler))
 * [ITaskHandler Template and Sample Project](https://github.com/dahall/ITaskHandlerTemplate) - Use this to create your own COM based  assembly for in-process actions.
 * [Troubleshooting Tool](https://github.com/dahall/TaskSchedulerConfig) - Tool to help identify and fix configuration and connectivity issues. (ClickOnce installer [here](https://github.com/dahall/TaskSchedulerConfig/blob/master/publish/setup.exe?raw=true))
 
 ## Installation
-This project's assemblies are available via NuGet.
+This project's assemblies are available via NuGet or manually from the .zip files in the [Releases](https://github.com/dahall/TaskScheduler/releases) section.
 
 |Link|Package Name|Description|
 |------------|------------|-----------|
@@ -21,12 +21,14 @@ This project's assemblies are available via NuGet.
 
 You can also find prerelease NuGet pacakges on the [project's AppVeyor NuGet feed](https://ci.appveyor.com/nuget/taskscheduler-prerelease).
 
+Once referenced by your project, all classes can be found in the `Microsoft.Win32.TaskScheduler` namespace.
+
 ## Project Components
 ### Main Library
 Microsoft introduced version 2.0 (internally version 1.2) with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 (internally version 1.1) COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system (up through 1.4). Core features include:
 
-* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52 and .NET Standard 2.0.
-* Unlike the base library, this wrapper helps to create and view tasks up and down stream.
+* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52, .NET Standard 2.0, .NET Core 2.0, 2.1, 3.0, 3.1 and (drumroll please) **.NET 5.0**.
+* Unlike the base COM libraries, this wrapper helps to create and view tasks up and down stream.
 * Written in C#, but works with any .NET language including scripting languages (e.g. PowerShell).
 * Supports all V2 native properties, even under V1 systems.
 * Maintain EmailAction and ShowMessageAction using PowerShell scripts for systems after Win8 where these actions have been deprecated.
@@ -40,12 +42,12 @@ Microsoft introduced version 2.0 (internally version 1.2) with a completely new 
 * Supports reading "custom" triggers under Win8 and later.
 * Numerous work-arounds and checks to compensate for base library shortcomings.
 
-The project supports a number of languages and, upon request, is ready to support others. The currently supported languages include: English, Spanish, Italian, French, Chinese (Simplified), German, Polish and Russian.  
+The currently supported localizations include: English, Spanish, Italian, French, Chinese (Simplified), German, Polish and Russian. Others localizations can be added upon request, especially if you're willing to help with translations.   
 
 The project is based on work the originator started in January 2002 with the 1.0 library that is currently hosted on [CodeProject](http://www.codeproject.com/KB/system/taskschedulerlibrary.aspx).  
 
 ### UI Library
-There is a second library that includes localized and localizable GUI editors and a wizard for tasks which mimic the ones in Vista and later and adds optional pages for new properties. Following is the list of available UI controls:
+A second library includes localized and localizable GUI editors and a wizard for tasks which mimic the ones in Vista and later and adds optional pages for new properties. Following is the list of available UI controls:
 
 * Task editor dialog and tabbed control which mimics system editor (TaskEditDialog)
 * Task editor dialog using newer UI scheme (TaskOptionsEditor)
@@ -105,11 +107,11 @@ class Program
 }
 ```
 
-For extended examples on how to the use the library, look in the source code area or look at the [Examples Page](https://github.com/dahall/TaskScheduler/wiki/Examples). The library closely follows the Task Scheduler 2.0 Scripting classes. Microsoft has some examples on [MSDN](http://msdn2.microsoft.com/en-us/library/aa384006(VS.85).aspx) around it that may further help you understand how to use this library.
+For extended examples on how to the use the library, look in the source code area or look at the [Examples Page](https://github.com/dahall/TaskScheduler/wiki/Examples). The library closely follows the Task Scheduler 2.0 Scripting classes. Microsoft has some examples on [Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page) around it that may further help you understand how to use this library.
 
 ___
 This project appreciatively uses:
 
-[<img alt="ReSharper from JetBrains" src="https://github.com/dahall/TaskScheduler/blob/master/docs/icons/resharper-logo.svg" height="20%" width="20%"/>](https://www.jetbrains.com/?from=Task%20Scheduler%20Managed%20Wrapper)
+[<img alt="ReSharper from JetBrains" src="docs/icons/resharper-logo.svg" height="5%" width="5%"/> ReSharper from JetBrains](https://www.jetbrains.com/?from=Task%20Scheduler%20Managed%20Wrapper)
 
-[Sandcastle Help File Builder](https://github.com/EWSoftware/SHFB)
+[<img alt="Sandcastle Help File Builder" src="https://github.com/EWSoftware/SHFB/blob/master/NuGet/SHFB.png?raw=true"/> Sandcastle Help File Builder](https://github.com/EWSoftware/SHFB)
