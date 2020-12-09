@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net20;net35;net40;net452;netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net20;net35;net40;net452;netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <!--<TargetFrameworks>netcoreapp3.1</TargetFrameworks>-->
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
@@ -18,7 +18,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dahall/taskscheduler</PackageProjectUrl>
     <PackageIconUrl>https://github.com/dahall/TaskScheduler/blob/master/docs/icons/tsnew48.png?raw=true</PackageIconUrl>
-    <!--<RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>-->
+    <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>task;interop;windows;taskscheduler;scheduler</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
@@ -29,6 +29,11 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+  <!--<ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Microsoft.Win32.TaskSchedulerEditor, PublicKey=[Need public key]</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>-->
   <ItemGroup>
     <None Remove="TaskService.bmp" />
   </ItemGroup>
@@ -47,18 +52,18 @@
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="4.7.0" />
-    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="4.7.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="5.0.0" />
+    <PackageReference Include="System.Security.Permissions" Version="5.0.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netcoreapp')) ">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="4.6.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="4.7.0" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netcoreapp')) Or $(TargetFramework.StartsWith('net5')) ">
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="5.0.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
