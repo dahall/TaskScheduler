@@ -657,6 +657,7 @@ namespace System.Windows.Forms
 			}
 		}
 
+#if !NET5_0
 		/// <summary>
 		/// Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ContextMenu"/> property changes.
 		/// </summary>
@@ -672,6 +673,7 @@ namespace System.Windows.Forms
 				base.ContextMenuChanged -= value;
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ContextMenuStrip"/> property changes.
@@ -1395,6 +1397,7 @@ namespace System.Windows.Forms
 			}
 		}
 
+#if !NET5_0
 		/// <summary>
 		/// Gets or sets the shortcut menu associated with the control.
 		/// </summary>
@@ -1414,6 +1417,7 @@ namespace System.Windows.Forms
 				base.ContextMenu = value;
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Gets or sets the <see cref="T:System.Windows.Forms.ContextMenuStrip"/> associated with this control.
@@ -1861,6 +1865,7 @@ namespace System.Windows.Forms
 			}
 		}
 
+#if !NET5_0
 		/// <summary>
 		/// Gets or sets the <see cref="T:System.Windows.Forms.MainMenu"/> that is displayed in the form.
 		/// </summary>
@@ -1886,6 +1891,7 @@ namespace System.Windows.Forms
 				base.Menu = value;
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the Minimize button is displayed in the caption bar of the form.
