@@ -1,223 +1,139 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9B8220B-6104-4FB2-BE74-18562ED032B7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TaskSchedulerMockup</RootNamespace>
-    <AssemblyName>TaskSchedulerMockup</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <TargetFramework>net452</TargetFramework>
+    <AssemblyTitle>TaskSchedulerMockup</AssemblyTitle>
+    <Company>GitHub Community</Company>
+    <Product>TaskService</Product>
+    <Description>https://github.com/dahall/TaskScheduler</Description>
+    <Copyright>Copyright © 2020</Copyright>
+    <Version>2.9.0</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-    <DefineConstants>DEBUG;TRACE;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-    <DefineConstants>TRACE;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\ts.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=2020.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.2020.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="TimeSpan2, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0f30172e1249faac, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimeSpan2.2.3.0\lib\net20\TimeSpan2.dll</HintPath>
-    </Reference>
+    <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
+    <PackageReference Include="TimeSpan2" Version="2.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskEditor\Native\ControlExtension.cs">
-      <Link>Native\ControlExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\Header.cs">
-      <Link>Native\Header.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\ListView.cs">
-      <Link>Native\ListView.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\RECT.cs">
-      <Link>Native\RECT.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\SIZE.cs">
-      <Link>Native\SIZE.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\USER32.cs">
-      <Link>Native\USER32.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskEditor\Native\UXTHEME.cs">
-      <Link>Native\UXTHEME.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\EnumUtil.cs">
-      <Link>Native\EnumUtil.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs">
-      <Link>Native\ExtensionAttributeFor.NET_2.0.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Func.Net2.cs">
-      <Link>Native\Func.Net2.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\InteropUtil.cs">
-      <Link>Native\InteropUtil.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\SYSTEMTIME.cs">
-      <Link>Native\SYSTEMTIME.cs</Link>
-    </Compile>
-    <Compile Include="FolderPanel.cs">
+    <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\TaskEditor\Native\ControlExtension.cs" Link="Native\ControlExtension.cs" />
+    <Compile Include="..\TaskEditor\Native\Header.cs" Link="Native\Header.cs" />
+    <Compile Include="..\TaskEditor\Native\ListView.cs" Link="Native\ListView.cs" />
+    <Compile Include="..\TaskEditor\Native\RECT.cs" Link="Native\RECT.cs" />
+    <Compile Include="..\TaskEditor\Native\SIZE.cs" Link="Native\SIZE.cs" />
+    <Compile Include="..\TaskEditor\Native\USER32.cs" Link="Native\USER32.cs" />
+    <Compile Include="..\TaskEditor\Native\UXTHEME.cs" Link="Native\UXTHEME.cs" />
+    <Compile Include="..\TaskService\Native\EnumUtil.cs" Link="Native\EnumUtil.cs" />
+    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="Native\ExtensionAttributeFor.NET_2.0.cs" />
+    <Compile Include="..\TaskService\Native\Func.Net2.cs" Link="Native\Func.Net2.cs" />
+    <Compile Include="..\TaskService\Native\InteropUtil.cs" Link="Native\InteropUtil.cs" />
+    <Compile Include="..\TaskService\Native\SYSTEMTIME.cs" Link="Native\SYSTEMTIME.cs" />
+    <Compile Update="FolderPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FolderPanel.Designer.cs">
+    <Compile Update="FolderPanel.Designer.cs">
       <DependentUpon>FolderPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="GradientPanel.cs">
+    <Compile Update="GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HidableDetailPanel.cs">
+    <Compile Update="HidableDetailPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HidableDetailPanel.Designer.cs">
+    <Compile Update="HidableDetailPanel.Designer.cs">
       <DependentUpon>HidableDetailPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomePanel.cs">
+    <Compile Update="HomePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HomePanel.Designer.cs">
+    <Compile Update="HomePanel.Designer.cs">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native\ListViewExtensions.cs" />
-    <Compile Include="Native\TreeViewExtension.cs" />
-    <Compile Include="NewFolderDlg.cs">
+    <Compile Update="NewFolderDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewFolderDlg.Designer.cs">
+    <Compile Update="NewFolderDlg.Designer.cs">
       <DependentUpon>NewFolderDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelHeader.cs">
+    <Compile Update="PanelHeader.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RunningTasksDlg.cs">
+    <Compile Update="RunningTasksDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RunningTasksDlg.Designer.cs">
+    <Compile Update="RunningTasksDlg.Designer.cs">
       <DependentUpon>RunningTasksDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSMMCMockup.cs">
+    <Compile Update="TSMMCMockup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSMMCMockup.Designer.cs">
+    <Compile Update="TSMMCMockup.Designer.cs">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskEditor\TaskEditor.csproj">
-      <Project>{5279d487-59fa-4d01-9d7a-ea7387d8b67c}</Project>
-      <Name>TaskEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TaskService\TaskService.csproj">
-      <Project>{8b1f5f40-510e-4128-92d4-6cbf85da952d}</Project>
-      <Name>TaskService</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\TaskEditor\TaskEditor.csproj" />
+    <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Resources\empty.bmp" />
     <None Include="Resources\PanelHeaderArrows.png" />
     <None Include="Resources\ts.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FolderPanel.resx">
+    <EmbeddedResource Update="FolderPanel.resx">
       <DependentUpon>FolderPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HidableDetailPanel.resx">
+    <EmbeddedResource Update="HidableDetailPanel.resx">
       <DependentUpon>HidableDetailPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.de.resx">
+    <EmbeddedResource Update="HomePanel.de.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.es.resx">
+    <EmbeddedResource Update="HomePanel.es.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.fr.resx">
+    <EmbeddedResource Update="HomePanel.fr.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.it.resx">
+    <EmbeddedResource Update="HomePanel.it.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.pl.resx">
+    <EmbeddedResource Update="HomePanel.pl.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.resx">
+    <EmbeddedResource Update="HomePanel.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.ru.resx">
+    <EmbeddedResource Update="HomePanel.ru.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomePanel.zh-CN.resx">
+    <EmbeddedResource Update="HomePanel.zh-CN.resx">
       <DependentUpon>HomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewFolderDlg.resx">
+    <EmbeddedResource Update="NewFolderDlg.resx">
       <DependentUpon>NewFolderDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RunningTasksDlg.resx">
+    <EmbeddedResource Update="RunningTasksDlg.resx">
       <DependentUpon>RunningTasksDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TSMMCMockup.resx">
+    <EmbeddedResource Update="TSMMCMockup.resx">
       <DependentUpon>TSMMCMockup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ts.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
-  </Target>
 </Project>

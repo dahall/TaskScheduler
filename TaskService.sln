@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskService", "TestTask
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VBTestTaskService", "VBTestTaskService\VBTestTaskService.vbproj", "{8C410535-95B6-434B-A03D-1359884D0410}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEditor", "TaskEditor\TaskEditor.csproj", "{5279D487-59FA-4D01-9D7A-EA7387D8B67C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskEditor", "TaskEditor\TaskEditor.csproj", "{5279D487-59FA-4D01-9D7A-EA7387D8B67C}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "TaskSchedulerHelp", "TaskSchedulerHelp\TaskSchedulerHelp.shfbproj", "{DE4DC8A8-9008-4769-A7C2-F52F4F733944}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,6 +22,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTaskServiceConsole", "TestTaskServiceConsole\TestTaskServiceConsole.csproj", "{7091A61E-0F5C-4FEA-B2F3-2538D53790CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskSchedulerMockup", "TaskSchedulerMockup\TaskSchedulerMockup.csproj", "{E9B8220B-6104-4FB2-BE74-18562ED032B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CAA4778-BF5D-46AA-A92E-04F233FE1D16}"
+	ProjectSection(SolutionItems) = preProject
+		code-of-conduct.md = code-of-conduct.md
+		contributing.md = contributing.md
+		VBTestTaskService\Directory.Build.props = VBTestTaskService\Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		license.md = license.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

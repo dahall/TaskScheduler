@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+	<DocumentationFile>$(MSBuildProjectDirectory)\bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	<!--<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>-->
+  </PropertyGroup>
+  <ItemGroup>
+	<Compile Remove="**\~*.cs" />
+	<None Include="**\~*.cs" />
+	<SupportedPlatform Include="windows" />
+  </ItemGroup>
+</Project>

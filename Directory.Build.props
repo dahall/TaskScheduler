@@ -1,0 +1,43 @@
+<Project>
+  <PropertyGroup>
+    <Authors>David Hall</Authors>
+    <Company>GitHub Community</Company>
+    <Copyright>Copyright © 2002-2020</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <IncludeSource>true</IncludeSource>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Product>Microsoft.Win32.TaskScheduler</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dahall/taskscheduler</PackageProjectUrl>
+    <PackageIcon>tsnew48.png</PackageIcon>
+    <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Microsoft.Windows.TaskScheduler.pfx</AssemblyOriginatorKeyFile>
+    <Version>2.9.0</Version>
+    <NoWarn>$(NoWarn);NETSDK1138;SYSLIB0003;SYSLIB0004;SYSLIB0011</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <!-- BEGIN: Source Link configuration. -->
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedAllSources>true</EmbedAllSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <CIBuild Condition="'$(CIBUILD)' == ''">false</CIBuild>
+    <ContinuousIntegrationBuild>$(CIBUILD)</ContinuousIntegrationBuild>
+    <DeterministicSourcePaths>$(CIBUILD)</DeterministicSourcePaths>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Condition="!$(MSBuildProjectDirectory.Contains('UnitTests'))" Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
+  </ItemGroup>
+  <!-- END: Source Link configuration. -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)TaskSchedulerHelp\icons\tsnew48.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

@@ -3,7 +3,7 @@
 Module Module1
 
 	Sub Main()
-		SimpleExample()
+		ShowEditor()
 	End Sub
 
 	Sub ShowEditor()

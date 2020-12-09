@@ -1,176 +1,99 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{207F8F60-0A74-4959-8623-5D258EB133EB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TestTaskService</RootNamespace>
-    <AssemblyName>TestTaskService</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <TargetFramework>net452</TargetFramework>
+    <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
+    <AssemblyTitle>TestTaskService</AssemblyTitle>
+    <Company>GitHub Community</Company>
+    <Product>TaskService</Product>
+    <Description>https://github.com/dahall/TaskScheduler</Description>
+    <Copyright>Copyright © 2020</Copyright>
+    <Version>2.9.0</Version>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-    <DefineConstants>TRACE;DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-    <DefineConstants>TRACE;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DefineConstants Condition=" !$(DefineConstants.Contains(', NET')) ">$(DefineConstants)$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.Contains(', NET')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", NET"))))$(TargetFrameworkVersion.Replace("v", "NET").Replace(".", "")), </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 2.0 ">$(DefineConstants)NET_20_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 3.5 ">$(DefineConstants)NET_35_OR_GREATER, </DefineConstants>
-    <DefineConstants Condition=" $(TargetFrameworkVersion.Replace('v', '')) &gt;= 4.0 ">$(DefineConstants)NET_40_OR_GREATER</DefineConstants>
-    <DefineConstants Condition=" $(DefineConstants.EndsWith(', ')) ">$(DefineConstants.Remove($(DefineConstants.LastIndexOf(", "))))</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'GroupControls'">
+        <Aliases>GrpCtrl</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskEditor\TaskEditor.csproj">
-      <Project>{5279d487-59fa-4d01-9d7a-ea7387d8b67c}</Project>
-      <Name>TaskEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TaskService\TaskService.csproj">
-      <Project>{8b1f5f40-510e-4128-92d4-6cbf85da952d}</Project>
-      <Name>TaskService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">
-    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.8.0\lib\net20\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">
-    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.8.0\lib\net35\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">
-    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.8.0\lib\net40\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.2' ">
-    <Reference Include="GroupControls, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3726d9da21b6ac8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroupControls.1.8.0\lib\net45\GroupControls.dll</HintPath>
-      <Aliases>GrpCtrl</Aliases>
-    </Reference>
+    <ProjectReference Include="..\TaskEditor\TaskEditor.csproj" />
+    <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs">
-      <Link>ExtensionAttributeFor.NET_2.0.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Func.Net2.cs">
-      <Link>Func.Net2.cs</Link>
-    </Compile>
-    <Compile Include="..\TaskService\Native\Linq.Net2.cs">
-      <Link>Linq.Net2.cs</Link>
-    </Compile>
-    <Compile Include="Main.cs">
+    <PackageReference Include="GroupControls" Version="1.8.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="ExtensionAttributeFor.NET_2.0.cs" />
+    <Compile Include="..\TaskService\Native\Func.Net2.cs" Link="Func.Net2.cs" />
+    <Compile Include="..\TaskService\Native\Linq.Net2.cs" Link="Linq.Net2.cs" />
+    <Compile Update="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Update="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ScriptTestDlg.cs">
+    <Compile Update="ScriptTestDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScriptTestDlg.Designer.cs">
+    <Compile Update="ScriptTestDlg.Designer.cs">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskWatcherForm.cs">
+    <Compile Update="TaskWatcherForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaskWatcherForm.designer.cs">
+    <Compile Update="TaskWatcherForm.designer.cs">
       <DependentUpon>TaskWatcherForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Update="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScriptTestDlg.resx">
+    <EmbeddedResource Update="ScriptTestDlg.resx">
       <DependentUpon>ScriptTestDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskWatcherForm.resx">
+    <EmbeddedResource Update="TaskWatcherForm.resx">
       <DependentUpon>TaskWatcherForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\ts.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <Target Name="AfterBuild">
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 2.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v3.5" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 3.5 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.0" RunEachTargetSeparately="true" />
-    <MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v4.5.2" RunEachTargetSeparately="true" />
-    <!--<MSBuild Condition=" $(TargetFrameworkVersion.Replace(&quot;v&quot;,&quot;&quot;)) == 4.0 " Projects="$(MSBuildProjectFile)" Properties="TargetFrameworkVersion=v2.0" RunEachTargetSeparately="true" />-->
-  </Target>
 </Project>
