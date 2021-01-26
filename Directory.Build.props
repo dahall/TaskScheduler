@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
-    <Copyright>Copyright © 2002-2020</Copyright>
+    <Copyright>Copyright © 2002-2021</Copyright>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <IncludeSource>true</IncludeSource>
@@ -16,7 +16,7 @@
     <RepositoryType>Git</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Microsoft.Windows.TaskScheduler.pfx</AssemblyOriginatorKeyFile>
-    <Version>2.9.0</Version>
+    <Version>2.9.1</Version>
     <NoWarn>$(NoWarn);NETSDK1138;SYSLIB0003;SYSLIB0004;SYSLIB0011</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
