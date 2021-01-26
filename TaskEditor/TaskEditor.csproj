@@ -1,5 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <UseWindowsForms>true</UseWindowsForms>
     <TargetFrameworks>net20;net35;net40;net452</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
