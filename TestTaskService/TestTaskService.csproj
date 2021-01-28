@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net452</TargetFramework>
@@ -8,7 +8,7 @@
     <Product>TaskService</Product>
     <Description>https://github.com/dahall/TaskScheduler</Description>
     <Copyright>Copyright © 2020</Copyright>
-    <Version>2.9.0</Version>
+    <Version>2.9.1</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GroupControls" Version="1.8.0" />
+    <PackageReference Include="GroupControls" Version="1.8.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="ExtensionAttributeFor.NET_2.0.cs" />

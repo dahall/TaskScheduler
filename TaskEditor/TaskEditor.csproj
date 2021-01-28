@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net20;net35;net40;net452</TargetFrameworks>
+    <TargetFrameworks>net20;net35;net40;net452;net5.0-windows</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <PackageId>TaskSchedulerEditor</PackageId>
@@ -78,9 +78,9 @@
     <Reference Include="CustomMarshalers" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AeroWizard" Version="2.2.8" />
-    <PackageReference Include="GroupControls" Version="1.8.0" />
-    <PackageReference Include="TimeSpan2" Version="2.3.0" />
-    <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.4" />
+    <PackageReference Include="AeroWizard" Version="2.2.9" />
+    <PackageReference Include="GroupControls" Version="1.8.1" />
+    <PackageReference Include="TimeSpan2" Version="2.3.1" />
+    <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.7" />
   </ItemGroup>
 </Project>

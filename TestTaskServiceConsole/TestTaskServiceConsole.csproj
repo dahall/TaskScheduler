@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>TestTaskServiceConsole.Program</StartupObject>
-    <Version>2.9.0</Version>
+    <Version>2.9.1</Version>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
