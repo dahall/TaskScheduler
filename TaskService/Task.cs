@@ -1082,7 +1082,6 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets an instance of the parent folder.</summary>
 		/// <value>A <see cref="TaskFolder"/> object representing the parent folder of this task.</value>
-		[NotNull]
 		public TaskFolder Folder
 		{
 			get
