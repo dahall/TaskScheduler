@@ -1094,7 +1094,7 @@ namespace Microsoft.Win32.TaskScheduler
 				var parentPath = System.IO.Path.GetDirectoryName(path);
 				if (string.IsNullOrEmpty(parentPath) || parentPath == TaskFolder.rootString)
 					return TaskService.RootFolder;
-				return TaskService.GetFolder(parentPath);
+				return TaskService.GetFolder(parentPath) ?? throw new DirectoryNotFoundException();
 			}
 		}
 
