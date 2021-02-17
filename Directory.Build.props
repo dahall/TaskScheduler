@@ -16,7 +16,7 @@
     <RepositoryType>Git</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Microsoft.Windows.TaskScheduler.pfx</AssemblyOriginatorKeyFile>
-    <Version>2.9.1</Version>
+    <Version>2.9.2</Version>
     <NoWarn>$(NoWarn);NETSDK1138;SYSLIB0003;SYSLIB0004;SYSLIB0011</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
