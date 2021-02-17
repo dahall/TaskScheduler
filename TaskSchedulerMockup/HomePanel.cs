@@ -194,7 +194,7 @@ namespace TaskSchedulerMockup
 			}
 			else
 			{
-#if NET_35_OR_GREATER
+#if !NET20
 				ListViewGroup lvgroup = new ListViewGroup();
 				statusListView.BeginUpdate();
 				int running = 0, succeeded = 0, stopped = 0, failed = 0;
@@ -244,7 +244,7 @@ namespace TaskSchedulerMockup
 
 			if (!IsTaskCanceled(asyncOp.UserSuppliedState))
 			{
-#if NET_35_OR_GREATER
+#if !NET20
 				try
 				{
 					if (Environment.OSVersion.Version.Major > 5)

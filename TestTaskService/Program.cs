@@ -573,7 +573,7 @@ namespace TestTaskService
 
 		internal static void OutputJson(TaskService ts, StringWriter output)
 		{
-#if NET_35_OR_GREATER
+#if !NET20
 			try
 			{
 				using (var tt = new TempTask(ts, "Temp"))
