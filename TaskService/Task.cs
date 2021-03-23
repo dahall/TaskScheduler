@@ -2143,6 +2143,26 @@ namespace Microsoft.Win32.TaskScheduler
 			return ex.Data.Count == 0;
 		}
 
+		/// <summary>Implements the operator + for triggers on a definition, effectively adding the trigger to the definition.</summary>
+		/// <param name="definition">The definition to which the trigger is to be added.</param>
+		/// <param name="trigger">The trigger to add.</param>
+		/// <returns>The definition with the added trigger.</returns>
+		public static TaskDefinition operator +(TaskDefinition definition, Trigger trigger)
+		{
+			definition.Triggers.Add(trigger);
+			return definition;
+		}
+
+		/// <summary>Implements the operator + for actions on a definition, effectively adding the action to the definition.</summary>
+		/// <param name="definition">The definition to which the action is to be added.</param>
+		/// <param name="action">The action to add.</param>
+		/// <returns>The definition with the added action.</returns>
+		public static TaskDefinition operator +(TaskDefinition definition, Action action)
+		{
+			definition.Actions.Add(action);
+			return definition;
+		}
+
 		XmlSchema IXmlSerializable.GetSchema() => null;
 
 		void IXmlSerializable.ReadXml(XmlReader reader)
