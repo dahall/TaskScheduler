@@ -119,7 +119,9 @@ namespace TestTaskService
 			{
 				var providerOptions = new Dictionary<string, string>(1) { { "CompilerVersion", "v4.0" } };
 				provider = new CSharpCodeProvider(providerOptions);
-				compilerParams = new CompilerParameters(new[] { "System.dll", "System.Xml.dll", "System.Core.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.Win32.TaskSchedulerEditor.dll") }) { GenerateInMemory = true, GenerateExecutable = false };
+				var thisDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+				var asms = new[] { "System.dll", "System.Xml.dll", "System.Core.dll", "System.Windows.Forms.dll", "System.Drawing.dll", Path.Combine(thisDir, "Microsoft.Win32.TaskScheduler.dll"), Path.Combine(thisDir, "Microsoft.Win32.TaskSchedulerEditor.dll") };
+				compilerParams = new CompilerParameters(asms) { GenerateInMemory = true, GenerateExecutable = false, OutputAssembly = "RuntimeAsm" };
 			}
 
 			var code = string.Concat(@"using System; using System.Collections.Generic; using System.Linq; using System.Windows.Forms; using Microsoft.Win32.TaskScheduler; namespace RuntimeNS { public static class RuntimeRunner { public static void Run(TaskService ts, System.IO.StringWriter output) { ", codeEditor.Text, @" } } }");
