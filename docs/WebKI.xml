@@ -110,6 +110,7 @@
   <HelpKINode Title="AddAccessRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAccessRule.htm" />
   <HelpKINode Title="AddAuditRule method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskSecurity_AddAuditRule.htm" />
   <HelpKINode Title="AddAutomaticMaintenanceTask method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskService_AddAutomaticMaintenanceTask.htm" />
+  <HelpKINode Title="Addition operator" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskDefinition_op_Addition.htm" />
   <HelpKINode Title="AddNew method">
     <HelpKINode Title="ActionCollection.AddNew Method " Url="html/M_Microsoft_Win32_TaskScheduler_ActionCollection_AddNew.htm" />
     <HelpKINode Title="TriggerCollection.AddNew Method " Url="html/M_Microsoft_Win32_TaskScheduler_TriggerCollection_AddNew.htm" />
@@ -2352,6 +2353,7 @@
     <HelpKINode Title="TaskDefinition Class" Url="html/T_Microsoft_Win32_TaskScheduler_TaskDefinition.htm" />
     <HelpKINode Title="events" Url="html/Events_T_Microsoft_Win32_TaskScheduler_TaskDefinition.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_Microsoft_Win32_TaskScheduler_TaskDefinition.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_Microsoft_Win32_TaskScheduler_TaskDefinition.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_Microsoft_Win32_TaskScheduler_TaskDefinition.htm" />
   </HelpKINode>
   <HelpKINode Title="TaskDefinition property">
@@ -2362,6 +2364,7 @@
     <HelpKINode Title="TaskSchedulerWizard.TaskDefinition Property " Url="html/P_Microsoft_Win32_TaskScheduler_TaskSchedulerWizard_TaskDefinition.htm" />
   </HelpKINode>
   <HelpKINode Title="TaskDefinition.Actions property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_Actions.htm" />
+  <HelpKINode Title="TaskDefinition.Addition operator" Url="html/Overload_Microsoft_Win32_TaskScheduler_TaskDefinition_op_Addition.htm" />
   <HelpKINode Title="TaskDefinition.CanUseUnifiedSchedulingEngine method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskDefinition_CanUseUnifiedSchedulingEngine.htm" />
   <HelpKINode Title="TaskDefinition.Data property" Url="html/P_Microsoft_Win32_TaskScheduler_TaskDefinition_Data.htm" />
   <HelpKINode Title="TaskDefinition.Dispose method" Url="html/M_Microsoft_Win32_TaskScheduler_TaskDefinition_Dispose.htm" />

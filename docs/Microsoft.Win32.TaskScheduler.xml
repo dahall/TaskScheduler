@@ -2227,6 +2227,18 @@
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.LowestSupportedVersion">
       <summary>Gets the lowest supported version that supports the settings for this <see cref="T:Microsoft.Win32.TaskScheduler.TaskDefinition" />.</summary>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.op_Addition(Microsoft.Win32.TaskScheduler.TaskDefinition,Microsoft.Win32.TaskScheduler.Action)">
+      <summary>Implements the operator + for actions on a definition, effectively adding the action to the definition.</summary>
+      <param name="definition">The definition to which the action is to be added.</param>
+      <param name="action">The action to add.</param>
+      <returns>The definition with the added action.</returns>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskDefinition.op_Addition(Microsoft.Win32.TaskScheduler.TaskDefinition,Microsoft.Win32.TaskScheduler.Trigger)">
+      <summary>Implements the operator + for triggers on a definition, effectively adding the trigger to the definition.</summary>
+      <param name="definition">The definition to which the trigger is to be added.</param>
+      <param name="trigger">The trigger to add.</param>
+      <returns>The definition with the added trigger.</returns>
+    </member>
     <member name="P:Microsoft.Win32.TaskScheduler.TaskDefinition.Principal">
       <summary>Gets the principal for the task that provides the security credentials for the task.</summary>
     </member>
