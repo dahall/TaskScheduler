@@ -731,7 +731,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>
 		/// A value that indicates the amount of time that the Task Scheduler will wait for an idle condition to occur. The minimum time
-		/// allowed is 1 minute. If this value is <c>TimeSpan.Zero</c>, then the delay will be set to the default of 1 hour.
+		/// allowed is 1 minute. If this value is <c>TimeSpan.Zero</c>, then the delay will be the equivalent of "Do not wait".
 		/// </value>
 		[DefaultValue(typeof(TimeSpan), "01:00:00")]
 		public TimeSpan WaitTimeout
@@ -749,7 +749,7 @@ namespace Microsoft.Win32.TaskScheduler
 				{
 					if (value != TimeSpan.Zero && value < TimeSpan.FromMinutes(1))
 						throw new ArgumentOutOfRangeException(nameof(WaitTimeout));
-					v2Settings.WaitTimeout = Task.TimeSpanToString(value);
+					v2Settings.WaitTimeout = value == TimeSpan.Zero ? "PT0S" : Task.TimeSpanToString(value);
 				}
 				else
 				{
