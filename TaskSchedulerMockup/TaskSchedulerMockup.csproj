@@ -7,7 +7,7 @@
     <Product>TaskService</Product>
     <Description>https://github.com/dahall/TaskScheduler</Description>
     <Copyright>Copyright © 2020</Copyright>
-    <Version>2.9.2</Version>
+    <Version>2.10.0</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
   </PropertyGroup>
   <PropertyGroup>

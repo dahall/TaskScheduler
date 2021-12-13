@@ -14,7 +14,7 @@ Below are links to sites that provide in-depth examples, documentation and discu
 ## Key Features
 Microsoft introduced version 2.0 (internally version 1.2) with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model but allows the 1.0 (internally version 1.1) COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system (up through 1.4). Core features include:
 
-* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52, 5.0, .NET Standard 2.0, .NET Core 2.0, 2.1, 3.0, 3.1.
+* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52, 5.0, 6.0, .NET Standard 2.0, .NET Core 2.0, 2.1, 3.0, 3.1.
 * Unlike the base COM libraries, this wrapper accommodates creating and viewing tasks up and down stream.
 * Supports all V2 native properties, even under V1 tasks.
 * Maintain EmailAction and ShowMessageAction using PowerShell scripts for systems after Win8 where these actions have been deprecated.

@@ -27,7 +27,7 @@ Once referenced by your project, all classes can be found in the `Microsoft.Win3
 ### Main Library
 Microsoft introduced version 2.0 (internally version 1.2) with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 (internally version 1.1) COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system (up through 1.4). Core features include:
 
-* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52, 5.0, .NET Standard 2.0, .NET Core 2.0, 2.1, 3.0, 3.1.
+* Separate, functionally identical, libraries for .NET 2.0, 3.5, 4.0, 4.52, 5.0, 6.0, .NET Standard 2.0, .NET Core 2.0, 2.1, 3.0, 3.1.
 * Unlike the base COM libraries, this wrapper helps to create and view tasks up and down stream.
 * Written in C#, but works with any .NET language including scripting languages (e.g. PowerShell).
 * Supports all V2 native properties, even under V1 systems.
