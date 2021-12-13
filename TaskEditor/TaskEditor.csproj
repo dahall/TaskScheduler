@@ -9,7 +9,11 @@
     <Title>Task Scheduler Managed Wrapper UI Library</Title>
     <Description>Provides localizable UI elements for editing classes in the TaskScheduler library.</Description>
     <PackageTags>task;interop;taskscheduler;UI;editor</PackageTags>
+    <PackageReadmeFile>TaskEditor.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="TaskEditor.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\TaskService\Native\ADVAPI32.cs" Link="Native\ADVAPI32.cs" />
     <Compile Include="..\TaskService\Native\EnumUtil.cs" Link="Native\EnumUtil.cs" />

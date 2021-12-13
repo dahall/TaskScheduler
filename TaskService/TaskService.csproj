@@ -8,7 +8,11 @@
     <Title>Task Scheduler Managed Wrapper (the original Microsoft.Win32.TaskScheduler)</Title>
     <Description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</Description>
     <PackageTags>task;interop;windows;taskscheduler;scheduler;.net;task scheduler</PackageTags>
+    <PackageReadmeFile>TaskService.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="TaskService.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
   <ItemGroup>
     <None Remove="TaskService.bmp" />
   </ItemGroup>
