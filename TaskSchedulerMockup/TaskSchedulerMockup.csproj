@@ -14,8 +14,8 @@
     <ApplicationIcon>Resources\ts.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
-    <PackageReference Include="TimeSpan2" Version="2.3.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+    <PackageReference Include="TimeSpan2" Version="2.4.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Design" />

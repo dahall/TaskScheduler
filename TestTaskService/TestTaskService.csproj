@@ -37,7 +37,7 @@
     <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GroupControls" Version="1.8.1" />
+    <PackageReference Include="GroupControls" Version="1.9.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\TaskService\Native\ExtensionAttributeFor.NET_2.0.cs" Link="ExtensionAttributeFor.NET_2.0.cs" />

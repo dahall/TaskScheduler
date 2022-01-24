@@ -12,7 +12,7 @@
     <PackageReadmeFile>TaskEditor.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="TaskEditor.md" Pack="true" PackagePath="\"/>
+    <None Include="TaskEditor.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\TaskService\Native\ADVAPI32.cs" Link="Native\ADVAPI32.cs" />
@@ -82,9 +82,9 @@
     <Reference Include="CustomMarshalers" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AeroWizard" Version="2.2.9" />
-    <PackageReference Include="GroupControls" Version="1.8.1" />
-    <PackageReference Include="TimeSpan2" Version="2.3.1" />
-    <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.7" />
+    <PackageReference Include="AeroWizard" Version="2.3.0" />
+    <PackageReference Include="GroupControls" Version="1.9.0" />
+    <PackageReference Include="TimeSpan2" Version="2.4.1" />
+    <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.11" />
   </ItemGroup>
 </Project>
