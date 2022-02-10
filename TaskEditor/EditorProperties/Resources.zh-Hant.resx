@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyConnection" xml:space="preserve">
+    <value>任何連線</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>停用</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>啟用</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>最後一天</value>
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>啟動時</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>事件發生時</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>閒置時</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>登入時</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>在工作創建/更改</value>
+  </data>
+  <data name="TriggerTypeSchedule" xml:space="preserve">
+    <value>依排程執行</value>
+  </data>
+  <data name="TriggerTypeSessionConnect" xml:space="preserve">
+    <value>連線到使用者工作階段時</value>
+  </data>
+  <data name="TriggerTypeSessionDisconnect" xml:space="preserve">
+    <value>與使用者工作階段中斷連線時</value>
+  </data>
+  <data name="TriggerTypeWorkstationLock" xml:space="preserve">
+    <value>工作站鎖定時</value>
+  </data>
+  <data name="TriggerTypeWorkstationUnlock" xml:space="preserve">
+    <value>工作站解除鎖定時</value>
+  </data>
+  <data name="DateTimeSyncText" xml:space="preserve">
+    <value>同步處理不同時區</value>
+  </data>
+  <data name="LocalMachine" xml:space="preserve">
+    <value>本地電腦</value>
+  </data>
+  <data name="TaskEditDlgTitle" xml:space="preserve">
+    <value>{0} 屬性 ({1})</value>
+  </data>
+  <data name="WizardEventTriggerErrorTitle" xml:space="preserve">
+    <value>無效的事件觸發程序</value>
+  </data>
+  <data name="WizardEventTriggerInvalid" xml:space="preserve">
+    <value>至少要選擇一個日誌。</value>
+  </data>
+  <data name="WizardMonthlyDOWTriggerInvalid" xml:space="preserve">
+    <value>至少選擇月，周和天。</value>
+  </data>
+  <data name="WizardMonthlyTriggerErrorTitle" xml:space="preserve">
+    <value>無效的每月觸發程序</value>
+  </data>
+  <data name="WizardMonthlyTriggerInvalid" xml:space="preserve">
+    <value>至少選擇一個月和一天。</value>
+  </data>
+  <data name="ComObjectDoesNotSupportInterfaceErrorMessage" xml:space="preserve">
+    <value>這個COM類不支援需要的介面。</value>
+  </data>
+  <data name="Error_CredUIConfirmFailed" xml:space="preserve">
+    <value>Call to CredUIConfirmCredentials failed with error code: {0}</value>
+  </data>
+  <data name="Error_CredUIPromptFailed" xml:space="preserve">
+    <value>Call to CredUIPromptForCredentials failed with error code: {0}</value>
+  </data>
+  <data name="TaskSchedulerName" xml:space="preserve">
+    <value>工作計畫</value>
+  </data>
+  <data name="CredentialPromptMessage" xml:space="preserve">
+    <value>輸入執行該工作的使用者資訊。</value>
+  </data>
+  <data name="UserAuthenticationError" xml:space="preserve">
+    <value>對應帳號的密碼無效。</value>
+  </data>
+  <data name="TaskMustHaveActionsError" xml:space="preserve">
+    <value>該工作至少要有一個動作。</value>
+  </data>
+  <data name="TaskRunTimesDialogTitle" xml:space="preserve">
+    <value>工作執行時間 ({0})</value>
+  </data>
+  <data name="LastResultSuccessful" xml:space="preserve">
+    <value>該動作成功。 (0x0)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>從未</value>
+  </data>
+  <data name="ActionDlgEditCaption" xml:space="preserve">
+    <value>修改動作</value>
+  </data>
+  <data name="ActionDlgNewCaption" xml:space="preserve">
+    <value>新動作</value>
+  </data>
+  <data name="TriggerDlgEditCaption" xml:space="preserve">
+    <value>編輯觸發程序</value>
+  </data>
+  <data name="TriggerDlgNewCaption" xml:space="preserve">
+    <value>新增觸發程序</value>
+  </data>
+  <data name="Error_TaskDeleteMustHaveExpiringTrigger" xml:space="preserve">
+    <value>如果希望工作在執行後自動被刪除，必須新增至少一個有過期日期的觸發程序。</value>
+  </data>
+  <data name="BrowseForTargetServerPrompt" xml:space="preserve">
+    <value>選擇新的目的電腦:</value>
+  </data>
+  <data name="NoUserSpecifiedText" xml:space="preserve">
+    <value>&lt;無&gt;</value>
+  </data>
+  <data name="TimeSpanDoNotWait" xml:space="preserve">
+    <value>不等待</value>
+  </data>
+  <data name="TimeSpanImmediately" xml:space="preserve">
+    <value>立即</value>
+  </data>
+  <data name="TimeSpanIndefinitely" xml:space="preserve">
+    <value>不限制</value>
+  </data>
+  <data name="Error_CannotRetrieveHistory" xml:space="preserve">
+    <value>無法獲取工作歷史。錯誤: {0}</value>
+  </data>
+  <data name="Error_NoGroupsUnderV1" xml:space="preserve">
+    <value>只在 Windows Vista™ 及之後的版本在帳戶群組下執行工作。要在在帳戶群組下執行工作，必須升級該工作成 Windows Vista™ 工作.</value>
+  </data>
+  <data name="WizActionSubtextEmail" xml:space="preserve">
+    <value>用提供的資訊傳送電子郵件。</value>
+  </data>
+  <data name="WizActionSubtextExecute" xml:space="preserve">
+    <value>執行命令列動作。</value>
+  </data>
+  <data name="WizActionSubtextShowMessage" xml:space="preserve">
+    <value>當一個工作啟動時顯示一個消息視窗。</value>
+  </data>
+  <data name="WizActionTextExecute" xml:space="preserve">
+    <value>執行程式</value>
+  </data>
+  <data name="WizActionTextSendEmail" xml:space="preserve">
+    <value>傳送電子郵件</value>
+  </data>
+  <data name="WizActionTextShowMessage" xml:space="preserve">
+    <value>顯示資訊</value>
+  </data>
+  <data name="WizTriggerSubtextDaily" xml:space="preserve">
+    <value>計畫每天開始工作。例如，工作在每天，隔天，每3天等，指定的時間開始。</value>
+  </data>
+  <data name="WizTriggerTextDaily" xml:space="preserve">
+    <value>每天</value>
+  </data>
+  <data name="WizTriggerSubtextEvent" xml:space="preserve">
+    <value>當系統時間發生時開始工作。</value>
+  </data>
+  <data name="WizTriggerTextEvent" xml:space="preserve">
+    <value>當指定事件被記入日誌</value>
+  </data>
+  <data name="WizTriggerSubtextMonthly" xml:space="preserve">
+    <value>計畫每月開始工作。例如，工作在指定月的指定日子裡開始。</value>
+  </data>
+  <data name="WizTriggerTextMonthly" xml:space="preserve">
+    <value>每月</value>
+  </data>
+  <data name="WizTriggerSubtextTime" xml:space="preserve">
+    <value>指定時間開始工作。</value>
+  </data>
+  <data name="WizTriggerTextTime" xml:space="preserve">
+    <value>僅一次</value>
+  </data>
+  <data name="WizTriggerSubtextWeekly" xml:space="preserve">
+    <value>計畫每週開始工作。例如，工作在每週或隔周指定日子的上午8:00開始。</value>
+  </data>
+  <data name="WizTriggerTextWeekly" xml:space="preserve">
+    <value>每週</value>
+  </data>
+  <data name="WizardSummaryFormatString" xml:space="preserve">
+    <value>名稱: {0}
+
+描述: {1}
+
+觸發程序: {2}
+
+動作: {3}</value>
+  </data>
+  <data name="Error_RepetitionMoreThanDuration" xml:space="preserve">
+    <value>重複的間隔值必須少於等於重複的持續值</value>
+  </data>
+  <data name="Error_PasswordMustBeProvided" xml:space="preserve">
+    <value>工作計畫程式無法創建工作。使用者帳戶不存在，密碼不正確，或者使用者帳戶沒有權限來創建此工作。</value>
+  </data>
+  <data name="TaskCompatibility" xml:space="preserve">
+    <value>AT service|Windows Server™ 2003, Windows® XP o Windows® 2000|Windows Vista™, Windows Server™ 2008|Windows® 7, Windows Server™ 2008 R2|Windows® 8, Windows Server™ 2012|Windows®10</value>
+  </data>
+  <data name="TimeSpanNotStarted" xml:space="preserve">
+    <value>未開始</value>
+  </data>
+  <data name="ProcessPriorityAboveNormal" xml:space="preserve">
+    <value>以上正常</value>
+  </data>
+  <data name="ProcessPriorityBelowNormal" xml:space="preserve">
+    <value>以下正常</value>
+  </data>
+  <data name="ProcessPriorityHigh" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="ProcessPriorityIdle" xml:space="preserve">
+    <value>閒置</value>
+  </data>
+  <data name="ProcessPriorityNormal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="ProcessPriorityRealTime" xml:space="preserve">
+    <value>即時的</value>
+  </data>
+  <data name="SIDTypeDefault" xml:space="preserve">
+    <value>預設</value>
+  </data>
+  <data name="SIDTypeNone" xml:space="preserve">
+    <value>沒有</value>
+  </data>
+  <data name="SIDTypeUnrestricted" xml:space="preserve">
+    <value>無限制的</value>
+  </data>
+  <data name="Error_PrincipalSidTypeInvalid" xml:space="preserve">
+    <value>必須設置為"一般"頁籤上的"網路服務"或"本機服務"的過程SID類型設置為"無限制"新增"頁籤上的使用者帳戶。您必須更改SID類型，或者設置使用者的有效帳戶。</value>
+  </data>
+  <data name="UseUnifiedResetQuestion" xml:space="preserve">
+    <value>設置此屬性將停用一些其他屬性。你仍然要繼續嗎？</value>
+  </data>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>自訂處理常式</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>啟動程式</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>傳送電子郵件</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>顯示訊息</value>
+  </data>
+  <data name="TaskInstancesIgnoreNew" xml:space="preserve">
+    <value>不啟動一個新的實例</value>
+  </data>
+  <data name="TaskInstancesParallel" xml:space="preserve">
+    <value>以平行方式執行新執行個體</value>
+  </data>
+  <data name="TaskInstancesQueue" xml:space="preserve">
+    <value>佇列中的一個新實例</value>
+  </data>
+  <data name="TaskInstancesStopExisting" xml:space="preserve">
+    <value>停止現有的實例</value>
+  </data>
+  <data name="Error_InvalidSddlFormat" xml:space="preserve">
+    <value>，SDDL必須在定義的格式在http://goo.gl/6au0v</value>
+  </data>
+  <data name="Error_InvalidUriFormat" xml:space="preserve">
+    <value>uri是不正確的格式</value>
+  </data>
+  <data name="Error_InvalidVersionFormat" xml:space="preserve">
+    <value>的格式為major.minor版本必須是在建設[修訂]。</value>
+  </data>
+  <data name="EventDetailHeader" xml:space="preserve">
+    <value>事件{0}的TaskScheduler</value>
+  </data>
+  <data name="HistoryHeader" xml:space="preserve">
+    <value>事件數目：{0}</value>
+  </data>
+  <data name="EventPropertiesDialogTitle" xml:space="preserve">
+    <value>事件屬性 - 事件{0}的TaskScheduler</value>
+  </data>
+  <data name="TaskEventStatusFailure" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="TaskEventStatusStillRunning" xml:space="preserve">
+    <value>仍在執行</value>
+  </data>
+  <data name="TaskEventStatusSuccess" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="TaskEventStatusTerminated" xml:space="preserve">
+    <value>終止</value>
+  </data>
+  <data name="TriggerTypeRemoteConnect" xml:space="preserve">
+    <value>在連接到遠端使用者會話</value>
+  </data>
+  <data name="TriggerTypeRemoteDisconnect" xml:space="preserve">
+    <value>從遠端使用者會話斷開</value>
+  </data>
+  <data name="LoadingPrompt" xml:space="preserve">
+    <value>載入中...</value>
+  </data>
+  <data name="Error_InvalidNameFormat" xml:space="preserve">
+    <value>工作名稱不是有效格式。工作名稱中不允許不允許在檔案名中的字元。</value>
+  </data>
+  <data name="Error_CannotEditTrigger" xml:space="preserve">
+    <value>在此工具中，這種類型的觸發程序不能被編輯。</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>定制觸發程序</value>
+  </data>
+  <data name="ChangeUserBtn" xml:space="preserve">
+    <value>變更使用者或群組...</value>
+  </data>
+  <data name="ChangeUserBtnNonAdmin" xml:space="preserve">
+    <value>變更使用者...</value>
+  </data>
+  <data name="Error_EventsNotSupported" xml:space="preserve">
+    <value>上之前 3.5 的.NET 版本不支持工作事件及歷史。</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatible" xml:space="preserve">
+    <value>以下屬性設置不能用選定的相容性設置:</value>
+  </data>
+  <data name="Error_TaskPropertiesIncompatibleSimple" xml:space="preserve">
+    <value>某些設置不符合此選擇。</value>
+  </data>
+  <data name="LastResultRunning" xml:space="preserve">
+    <value>當前正在執行的工作。(0x{0:x})</value>
+  </data>
+  <data name="Error_EventTriggerIDInvalid" xml:space="preserve">
+    <value>無效的 ID 範圍模式</value>
+  </data>
+  <data name="EventTriggerFilterGoManualPrompt" xml:space="preserve">
+    <value>如果您選擇手動編輯查詢，您將不再能夠修改該查詢使用篩選器頁籤上的控制項，您要繼續嗎?</value>
+  </data>
+  <data name="EventTriggerFilterUseFormPrompt" xml:space="preserve">
+    <value>你想要使用篩選器頁籤來編輯查詢嗎?這將導致查詢被丟棄的手動更改。</value>
+  </data>
+  <data name="EventLogTime12Hours" xml:space="preserve">
+    <value>12小時</value>
+  </data>
+  <data name="EventLogTime30Days" xml:space="preserve">
+    <value>最近30天</value>
+  </data>
+  <data name="EventLogTimeAnyTime" xml:space="preserve">
+    <value>任何時間</value>
+  </data>
+  <data name="EventLogTimeCustom" xml:space="preserve">
+    <value>自訂範圍</value>
+  </data>
+  <data name="EventLogTimeCustomFrom" xml:space="preserve">
+    <value>來自{0}的所有活動</value>
+  </data>
+  <data name="EventLogTimeCustomFromTo" xml:space="preserve">
+    <value>從 {0} 到 {1}</value>
+  </data>
+  <data name="EventLogTimeCustomTo" xml:space="preserve">
+    <value>所有事件到 {1}</value>
+  </data>
+  <data name="EventLogTimeDay" xml:space="preserve">
+    <value>最後 24 小時</value>
+  </data>
+  <data name="EventLogTimeHour" xml:space="preserve">
+    <value>最後一個小時</value>
+  </data>
+  <data name="EventLogTimeWeek" xml:space="preserve">
+    <value>最近7天</value>
+  </data>
+  <data name="EventKeywordsAuditFailure" xml:space="preserve">
+    <value>審核失敗</value>
+  </data>
+  <data name="EventKeywordsAuditSuccess" xml:space="preserve">
+    <value>審核成功</value>
+  </data>
+  <data name="EventKeywordsEventLogClassic" xml:space="preserve">
+    <value>經典</value>
+  </data>
+  <data name="EventKeywordsCorrelationHint2" xml:space="preserve">
+    <value>關聯</value>
+  </data>
+  <data name="EventKeywordsResponseTime" xml:space="preserve">
+    <value>回應時間</value>
+  </data>
+  <data name="EventKeywordsSqm" xml:space="preserve">
+    <value>平方米</value>
+  </data>
+  <data name="EventKeywordsWdiContext" xml:space="preserve">
+    <value>背景</value>
+  </data>
+  <data name="EventKeywordsWdiDiagnostic" xml:space="preserve">
+    <value>WDI Diag</value>
+  </data>
+  <data name="EventKeywordsAll" xml:space="preserve">
+    <value>&lt;所有關鍵字&gt;</value>
+  </data>
+  <data name="EventTasksAll" xml:space="preserve">
+    <value>&lt;所有工作類別&gt;</value>
+  </data>
+  <data name="EventViewerDialogTitle" xml:space="preserve">
+    <value>事件檢視器</value>
+  </data>
+  <data name="EventLogParentApps" xml:space="preserve">
+    <value>應用程式和服務日誌</value>
+  </data>
+  <data name="EventLogParentStandard" xml:space="preserve">
+    <value>Windows 日誌</value>
+  </data>
+  <data name="Error_InvalidQueryFormat" xml:space="preserve">
+    <value>首字下沉的內容必須是文本或包含一個有效的 Xml 查詢檔。</value>
+  </data>
+  <data name="EventLogsAll" xml:space="preserve">
+    <value>&lt;所有日誌&gt;</value>
+  </data>
+  <data name="EventSourcesAll" xml:space="preserve">
+    <value>&lt;所有來源&gt;</value>
+  </data>
+  <data name="Error_EventFilterBadQuery" xml:space="preserve">
+    <value>無法識別的文本在查詢 XML 中找到。</value>
+  </data>
+  <data name="Error_EventFilterBadQueryText" xml:space="preserve">
+    <value>冒犯文本: '{0}'</value>
+  </data>
+  <data name="Error_MaintenanceDeadlineLimit" xml:space="preserve">
+    <value>最低期限或工作可以使用的期限是 1 天。截止日期也必須大於期。</value>
+  </data>
+  <data name="TimeSpanUnset" xml:space="preserve">
+    <value>未設置</value>
+  </data>
+  <data name="Error_RepetitionDurationOutOfRange" xml:space="preserve">
+    <value>重複持續時間值必須是 1 分鐘或更高版本。</value>
+  </data>
+  <data name="Error_RepetitionIntervalOutOfRange" xml:space="preserve">
+    <value>重複時間間隔值必須是 1 分鐘或更高版本和小於或等於 31 天。</value>
+  </data>
+  <data name="Error_InvalidSpanValue" xml:space="preserve">
+    <value>無效的工期值。 ！</value>
+  </data>
+  <data name="Error_InvalidFileName" xml:space="preserve">
+    <value>提供的程式腳本不是一個有效的檔案名。請在繼續之前更正。 ！</value>
+  </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>觸發程序到期的日期和時間必須晚於其啟動或啟動的時間。</value>
+  </data>
+</root>

@@ -35,7 +35,7 @@ namespace TestTaskService
 		{
 			var rm = new ResourceManager(type);
 			return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(c => !c.Equals(CultureInfo.InvariantCulture) &&
-				rm.GetResourceSet(c, true, false) != null).Select(c => c.IsNeutralCulture ? CultureInfo.CreateSpecificCulture(c.TwoLetterISOLanguageName) : c);
+				rm.GetResourceSet(c, true, false) != null);
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
