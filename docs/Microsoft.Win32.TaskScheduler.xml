@@ -1930,7 +1930,7 @@
         <para>
              The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
              call this method without any values (e.g.
-             <code>Run()</code>
+             <code>@@_SHFB_1</code>
              ).
              </para>
         <para>
