@@ -82,9 +82,9 @@
     <Reference Include="CustomMarshalers" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AeroWizard" Version="2.3.0" />
+    <PackageReference Include="AeroWizard" Version="2.3.1" />
     <PackageReference Include="GroupControls" Version="1.9.0" />
-    <PackageReference Include="TimeSpan2" Version="2.4.1" />
+    <PackageReference Include="TimeSpan2" Version="2.4.2" />
     <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.11" />
   </ItemGroup>
 </Project>
