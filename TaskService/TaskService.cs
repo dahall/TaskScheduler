@@ -9,7 +9,7 @@ namespace Microsoft.Win32.TaskScheduler
 {
 	/// <summary>
 	/// Quick simple trigger types for the
-	/// <see cref="TaskService.AddTask(string,Microsoft.Win32.TaskScheduler.Trigger,Microsoft.Win32.TaskScheduler.Action,string,string,Microsoft.Win32.TaskScheduler.TaskLogonType,string)"/> method.
+	/// <see cref="TaskService.AddTask(string,Trigger,Action,string,string,TaskLogonType,string)"/> method.
 	/// </summary>
 	public enum QuickTriggerType
 	{
@@ -46,27 +46,27 @@ namespace Microsoft.Win32.TaskScheduler
 	{
 		/// <summary>Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).</summary>
 		[Description("Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).")]
-		public static readonly Version V1_1 = new Version(1, 1);
+		public static readonly Version V1_1 = new(1, 1);
 
 		/// <summary>Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).</summary>
 		[Description("Task Scheduler 2.0 (Windows Vista™, Windows Server™ 2008).")]
-		public static readonly Version V1_2 = new Version(1, 2);
+		public static readonly Version V1_2 = new(1, 2);
 
 		/// <summary>Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).</summary>
 		[Description("Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).")]
-		public static readonly Version V1_3 = new Version(1, 3);
+		public static readonly Version V1_3 = new(1, 3);
 
 		/// <summary>Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).</summary>
 		[Description("Task Scheduler 2.2 (Windows® 8.x, Windows Server™ 2012).")]
-		public static readonly Version V1_4 = new Version(1, 4);
+		public static readonly Version V1_4 = new(1, 4);
 
 		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).</summary>
 		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
-		public static readonly Version V1_5 = new Version(1, 5);
+		public static readonly Version V1_5 = new(1, 5);
 
 		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
 		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
-		public static readonly Version V1_6 = new Version(1, 6);
+		public static readonly Version V1_6 = new(1, 6);
 	}
 
 	/// <summary>Provides access to the Task Scheduler service for managing registered tasks.</summary>
@@ -75,7 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 	public sealed partial class TaskService : Component, ISupportInitialize, System.Runtime.Serialization.ISerializable
 	{
 		internal static readonly bool LibraryIsV2 = Environment.OSVersion.Version.Major >= 6;
-		internal static readonly Guid PowerShellActionGuid = new Guid("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
+		internal static readonly Guid PowerShellActionGuid = new("dab4c1e3-cd12-46f1-96fc-3981143c9bab");
 		private static Guid CLSID_Ctask = typeof(V1Interop.CTask).GUID;
 		private static Guid IID_ITask = typeof(V1Interop.ITask).GUID;
 		[ThreadStatic]
@@ -376,10 +376,10 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <summary>Gets a <see cref="System.Collections.Generic.IEnumerator{T}"/> which enumerates all the tasks in all folders.</summary>
-		/// <value>A <see cref="System.Collections.Generic.IEnumerator{T}"/> for all <see cref="Task"/> instances.</value>
+		/// <summary>Gets a <see cref="IEnumerator{T}"/> which enumerates all the tasks in all folders.</summary>
+		/// <value>A <see cref="IEnumerator{T}"/> for all <see cref="Task"/> instances.</value>
 		[Browsable(false)]
-		public System.Collections.Generic.IEnumerable<Task> AllTasks => RootFolder.AllTasks;
+		public IEnumerable<Task> AllTasks => RootFolder.AllTasks;
 
 		/// <summary>Gets a Boolean value that indicates if you are connected to the Task Scheduler service.</summary>
 		[Browsable(false)]
@@ -460,7 +460,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The directory that contains either the executable file or the files that are used by the executable file.
 		/// </param>
 		/// <returns>A <see cref="Task"/> instance of the Automatic Maintenance Task.</returns>
-		/// <exception cref="System.InvalidOperationException">
+		/// <exception cref="InvalidOperationException">
 		/// Automatic Maintenance tasks are only supported on Windows 8/Server 2012 and later.
 		/// </exception>
 		public Task AddAutomaticMaintenanceTask([NotNull] string taskPathAndName, TimeSpan period, TimeSpan deadline, string executablePath, string arguments = null, string workingDirectory = null)
@@ -544,46 +544,18 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </example>
 		public Task AddTask([NotNull] string path, QuickTriggerType trigger, [NotNull] string exePath, string arguments = null, string userId = null, string password = null, TaskLogonType logonType = TaskLogonType.InteractiveToken, string description = null)
 		{
-			// Create a trigger based on quick trigger
-			Trigger newTrigger;
-			switch (trigger)
+			Trigger newTrigger = trigger switch
 			{
-				case QuickTriggerType.Boot:
-					newTrigger = new BootTrigger();
-					break;
-
-				case QuickTriggerType.Idle:
-					newTrigger = new IdleTrigger();
-					break;
-
-				case QuickTriggerType.Logon:
-					newTrigger = new LogonTrigger();
-					break;
-
-				case QuickTriggerType.TaskRegistration:
-					newTrigger = new RegistrationTrigger();
-					break;
-
-				case QuickTriggerType.Hourly:
-					newTrigger = new DailyTrigger { Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromDays(1)) };
-					break;
-
-				case QuickTriggerType.Daily:
-					newTrigger = new DailyTrigger();
-					break;
-
-				case QuickTriggerType.Weekly:
-					newTrigger = new WeeklyTrigger();
-					break;
-
-				case QuickTriggerType.Monthly:
-					newTrigger = new MonthlyTrigger();
-					break;
-
-				default:
-					throw new ArgumentOutOfRangeException(nameof(trigger), trigger, null);
-			}
-
+				QuickTriggerType.Boot => new BootTrigger(),
+				QuickTriggerType.Idle => new IdleTrigger(),
+				QuickTriggerType.Logon => new LogonTrigger(),
+				QuickTriggerType.TaskRegistration => new RegistrationTrigger(),
+				QuickTriggerType.Hourly => new DailyTrigger { Repetition = new RepetitionPattern(TimeSpan.FromHours(1), TimeSpan.FromDays(1)) },
+				QuickTriggerType.Daily => new DailyTrigger(),
+				QuickTriggerType.Weekly => new WeeklyTrigger(),
+				QuickTriggerType.Monthly => new MonthlyTrigger(),
+				_ => throw new ArgumentOutOfRangeException(nameof(trigger), trigger, null),
+			};
 			return AddTask(path, newTrigger, new ExecAction(exePath, arguments), userId, password, logonType, description);
 		}
 
@@ -602,8 +574,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
 		public override bool Equals(object obj)
 		{
-			var tsobj = obj as TaskService;
-			if (tsobj != null)
+			if (obj is TaskService tsobj)
 				return tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPassword == UserPassword && tsobj.forceV1 == forceV1;
 			return base.Equals(obj);
 		}
@@ -614,7 +585,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <returns>An array of <see cref="Task"/> containing all tasks matching <paramref name="name"/>.</returns>
 		public Task[] FindAllTasks(System.Text.RegularExpressions.Regex name, bool searchAllFolders = true)
 		{
-			var results = new System.Collections.Generic.List<Task>();
+			var results = new List<Task>();
 			FindTaskInFolder(RootFolder, name, ref results, searchAllFolders);
 			return results.ToArray();
 		}
@@ -623,13 +594,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="filter">The filter used to determine tasks to select.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
 		/// <returns>An array of <see cref="Task"/> containing all tasks matching <paramref name="filter"/>.</returns>
-		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true)
-		{
-			if (filter == null) filter = t => true;
-			var results = new System.Collections.Generic.List<Task>();
-			FindTaskInFolder(RootFolder, filter, ref results, searchAllFolders);
-			return results.ToArray();
-		}
+		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true) =>
+			TaskFolder.EnumerateFolderTasks(RootFolder, filter, searchAllFolders).ToArray();
 
 		/// <summary>Finds a task given a name and standard wildcards.</summary>
 		/// <param name="name">The task name. This can include the wildcards * or ?.</param>
@@ -638,15 +604,13 @@ namespace Microsoft.Win32.TaskScheduler
 		public Task FindTask([NotNull] string name, bool searchAllFolders = true)
 		{
 			var results = FindAllTasks(new Wildcard(name), searchAllFolders);
-			if (results.Length > 0)
-				return results[0];
-			return null;
+			return results.Length > 0 ? results[0] : null;
 		}
 
 		/// <summary>Gets the event log for this <see cref="TaskService"/> instance.</summary>
 		/// <param name="taskPath">(Optional) The task path if only the events for a single task are desired.</param>
 		/// <returns>A <see cref="TaskEventLog"/> instance.</returns>
-		public TaskEventLog GetEventLog(string taskPath = null) => new TaskEventLog(TargetServer, taskPath, UserAccountDomain, UserName, UserPassword);
+		public TaskEventLog GetEventLog(string taskPath = null) => new(TargetServer, taskPath, UserAccountDomain, UserName, UserPassword);
 
 		/// <summary>Gets the path to a folder of registered tasks.</summary>
 		/// <param name="folderName">
@@ -670,8 +634,8 @@ namespace Microsoft.Win32.TaskScheduler
 					if (ifld != null)
 						f = new TaskFolder(this, ifld);
 				}
-				catch (System.IO.DirectoryNotFoundException) { }
-				catch (System.IO.FileNotFoundException) { }
+				catch (DirectoryNotFoundException) { }
+				catch (FileNotFoundException) { }
 			}
 			else if (folderName == TaskFolder.rootString || string.IsNullOrEmpty(folderName))
 				f = new TaskFolder(this);
@@ -939,49 +903,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="results">The results.</param>
 		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
 		/// <returns>True if any tasks are found, False if not.</returns>
-		private bool FindTaskInFolder([NotNull] TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref System.Collections.Generic.List<Task> results, bool recurse = true)
+		private static void FindTaskInFolder([NotNull] TaskFolder fld, System.Text.RegularExpressions.Regex taskName, ref List<Task> results, bool recurse = true)
 		{
 			results.AddRange(fld.GetTasks(taskName));
 
 			if (recurse)
 			{
 				foreach (var f in fld.SubFolders)
-				{
-					if (FindTaskInFolder(f, taskName, ref results))
-						return true;
-				}
+					FindTaskInFolder(f, taskName, ref results);
 			}
-			return false;
-		}
-
-		/// <summary>Finds the task in folder.</summary>
-		/// <param name="fld">The folder.</param>
-		/// <param name="filter">The filter to use when looking for tasks.</param>
-		/// <param name="results">The results.</param>
-		/// <param name="recurse">if set to <c>true</c> recurse folders.</param>
-		/// <returns>True if any tasks are found, False if not.</returns>
-		private bool FindTaskInFolder([NotNull] TaskFolder fld, Predicate<Task> filter, ref System.Collections.Generic.List<Task> results, bool recurse = true)
-		{
-			foreach (var t in fld.GetTasks())
-				try
-				{
-					if (filter(t))
-						results.Add(t);
-				}
-				catch
-				{
-					System.Diagnostics.Debug.WriteLine($"Unable to evaluate filter for task '{t.Path}'.");
-				}
-
-			if (recurse)
-			{
-				foreach (var f in fld.SubFolders)
-				{
-					if (FindTaskInFolder(f, filter, ref results))
-						return true;
-				}
-			}
-			return false;
 		}
 
 		private Version GetV2Version()
@@ -1023,7 +953,7 @@ namespace Microsoft.Win32.TaskScheduler
 		// Manages the list of tokens and associated data
 		private static class ConnectionDataManager
 		{
-			public static List<ConnectionData> connections = new List<ConnectionData>() { new ConnectionData(null) };
+			public static List<ConnectionData> connections = new() { new ConnectionData(null) };
 
 			public static TaskService InstanceFromToken(ConnectionToken token)
 			{
@@ -1055,7 +985,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private class ComHandlerThread
 		{
 			public int ReturnCode;
-			private readonly System.Threading.AutoResetEvent completed = new System.Threading.AutoResetEvent(false);
+			private readonly System.Threading.AutoResetEvent completed = new(false);
 			private readonly string Data;
 			private readonly Type objType;
 			private readonly TaskHandlerStatus status;
@@ -1153,11 +1083,8 @@ namespace Microsoft.Win32.TaskScheduler
 				return base.CanConvertFrom(context, sourceType);
 			}
 
-			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
-			{
-				var s = value as string;
-				return s != null ? new Version(s) : base.ConvertFrom(context, culture, value);
-			}
+			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) =>
+				value is string s ? new Version(s) : base.ConvertFrom(context, culture, value);
 		}
 	}
 }
