@@ -40,9 +40,9 @@
 		</SandcastlePath>
 		<WorkingPath>
 		</WorkingPath>
-		<FrameworkVersion>.NET Framework 4.5.2</FrameworkVersion>
+		<FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
 		<HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-		<CopyrightText>&amp;#169%3b 2021 GitHub Community. All rights reserved.</CopyrightText>
+		<CopyrightText>&amp;#169%3b 2022 GitHub Community. All rights reserved.</CopyrightText>
 		<PresentationStyle>VS2013</PresentationStyle>
 		<ComponentConfigurations>
 			<ComponentConfig id="Code Block Component" enabled="True" xmlns="">

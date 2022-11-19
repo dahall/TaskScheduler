@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyTitle>TaskSchedulerMockup</AssemblyTitle>
     <Company>GitHub Community</Company>
     <Product>TaskService</Product>
     <Description>https://github.com/dahall/TaskScheduler</Description>
-    <Copyright>Copyright © 2020</Copyright>
-    <Version>2.10.2</Version>
+    <Copyright>Copyright © 2022</Copyright>
+    <Version>2.11.0</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
