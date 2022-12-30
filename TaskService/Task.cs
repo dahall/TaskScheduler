@@ -2351,6 +2351,14 @@ namespace Microsoft.Win32.TaskScheduler
 	/// Provides the security credentials for a principal. These security credentials define the security context for the tasks that are
 	/// associated with the principal.
 	/// </summary>
+	/// <remarks>
+	/// This class can only be accessed via <see cref="TaskDefinition.Principal"/>. It is used to set properties related to the principal
+	/// (account) that will run a task.
+	/// </remarks>
+	/// <example><code language="cs">TaskDefinition td = TaskService.Instance.NewTask();
+	/// td.Principal.UserId = "SYSTEM";
+	/// td.Principal.LogonType = TaskLogonType.ServiceAccount;</code>
+	/// </example>
 	[XmlRoot("Principals", Namespace = TaskDefinition.tns, IsNullable = true)]
 	[PublicAPI]
 	public sealed class TaskPrincipal : IDisposable, IXmlSerializable, INotifyPropertyChanged

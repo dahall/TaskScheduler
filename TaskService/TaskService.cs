@@ -593,7 +593,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Finds all tasks matching a name or standard wildcards.</summary>
 		/// <param name="filter">The filter used to determine tasks to select.</param>
 		/// <param name="searchAllFolders">if set to <c>true</c> search all sub folders.</param>
-		/// <returns>An array of <see cref="Task"/> containing all tasks matching <paramref name="filter"/>.</returns>
+		/// <returns>An array of <see cref="Task" /> containing all tasks matching <paramref name="filter" />.</returns>
+		/// <example><code title="Returns all tasks with logon triggers">TaskService.Instance.FindAllTasks(t =&gt; t.Triggers.ContainsType(typeof(LogonTrigger)), true);</code></example>
 		public Task[] FindAllTasks(Predicate<Task> filter, bool searchAllFolders = true) =>
 			TaskFolder.EnumerateFolderTasks(RootFolder, filter, searchAllFolders).ToArray();
 
