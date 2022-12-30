@@ -1,188 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
-	<PropertyGroup>
-		<!-- The configuration and platform will be used to determine which
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
          assemblies to include from solution and project documentation
          sources -->
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<SchemaVersion>2.0</SchemaVersion>
-		<ProjectGuid>{de4dc8a8-9008-4769-a7c2-f52f4f733944}</ProjectGuid>
-		<SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
-		<!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{de4dc8a8-9008-4769-a7c2-f52f4f733944}</ProjectGuid>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
-		<AssemblyName>Documentation</AssemblyName>
-		<RootNamespace>Documentation</RootNamespace>
-		<Name>Documentation</Name>
-		<!-- SHFB properties -->
-		<OutputPath>..\docs\</OutputPath>
-		<HtmlHelpName>TaskScheduler</HtmlHelpName>
-		<ProjectSummary>&amp;lt%3bh2&amp;gt%3bIntroduction&amp;lt%3b/h2&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bThe Task Scheduler Managed Class Library provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttps://github.com/dahall/TaskScheduler&amp;quot%3b&amp;gt%3bhttps://github.com/dahall/TaskScheduler&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bh2&amp;gt%3bClass Overview&amp;lt%3b/h2&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskService.htm&amp;quot%3b&amp;gt%3bTaskService&amp;lt%3b/a&amp;gt%3b class represents the machine specific instance of the system task scheduler. It provides access to information about the service, access folders %282.0 only%29, and can quickly add or retrieve a task. If you only need to use the library for very intermittent periods, wrap the TaskService instantiation in a using statement to easily disconnect at the end of your use. However, if you plan on using the connection to the Task Scheduler repeatedly, use an assembly level field to store the TaskService instance as connecting and disconnecting is an expensive operation.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bTasks are accessed and can be enumerated through a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskFolder.htm&amp;quot%3b&amp;gt%3bTaskFolder&amp;lt%3b/a&amp;gt%3b. For systems supporting only the 1.0 library, there is only the root folder. The 2.0 library supports a hierarchal structure similar to a file system. The Tasks property exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskCollection.htm&amp;quot%3b&amp;gt%3bTaskCollection&amp;lt%3b/a&amp;gt%3b instance which can enumerate tasks and provides an indexer which allows access to individual tasks by name. The TaskCollection class also has methods that allow for the creation/registration and deletion of tasks and subfolders by name.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bA task is represented by a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Task.htm&amp;quot%3b&amp;gt%3bTask&amp;lt%3b/a&amp;gt%3b instance. The Task class provides information about tasks state and history and exposes the task&amp;#39%3bs &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_Task_Definition.htm&amp;quot%3b&amp;gt%3bDefinition&amp;lt%3b/a&amp;gt%3b property.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bA &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b exposes all of the properties of a task which allow you to define how and what will run when the task is triggered. A task must have at least one action and one trigger defined.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bEach task has a list of triggers that determine when the task will be run. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Triggers.htm&amp;quot%3b&amp;gt%3bTriggers&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TriggerCollection.htm&amp;quot%3b&amp;gt%3bTriggerCollection&amp;lt%3b/a&amp;gt%3b instance. TriggerCollection provides an indexer which allows access to individual triggers by their position in the list. The TriggerCollection class also has methods that allow for the addition and removal of triggers. TriggerCollection implements the IList interface so you can also enumerate all triggers using the foreach construct.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Trigger.htm&amp;quot%3b&amp;gt%3bTrigger&amp;lt%3b/a&amp;gt%3b class is an abstract class that forms the foundation of the different types of triggers that can be specified for a task. There are 10 different specializations that provide different ways to specify the time a task will run. Not all specializations work with the 1.0 library. See the help file for details about each of the trigger classes. The Trigger Documentation has some examples of how to setup each kind of trigger.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bEach task also has a list of actions that determine what the task will do when triggered. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Actions.htm&amp;quot%3b&amp;gt%3bActions&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ActionCollection.htm&amp;quot%3b&amp;gt%3bActionCollection&amp;lt%3b/a&amp;gt%3b instance. ActionCollection provides an indexer which allows access to individual actions by their position in the list. The ActionCollection class also has methods that allow for the addition and removal of actions. ActionCollection implements the IList interface so you can also enumerate all actions using the foreach construct.&amp;lt%3b/p&amp;gt%3b
-			&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Action.htm&amp;quot%3b&amp;gt%3bAction&amp;lt%3b/a&amp;gt%3b class is an abstract class that is the foundation for four different actions. On 1.0, only the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ExecAction.htm&amp;quot%3b&amp;gt%3bExecAction&amp;lt%3b/a&amp;gt%3b specialization is available unless the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_ActionCollection_PowerShellConversion.htm&amp;quot%3b&amp;gt%3bPowerShellConversion&amp;lt%3b/a&amp;gt%3b option is enabled %28see Action Documentation for more information%29. These actions determine what the service will do when a trigger is fired. The Action Documentation has some examples of how to setup each kind of action.&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
-		<MissingTags>Summary, Parameter, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
-		<VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
-		<HtmlHelp1xCompilerPath>
-		</HtmlHelp1xCompilerPath>
-		<HtmlHelp2xCompilerPath>
-		</HtmlHelp2xCompilerPath>
-		<SandcastlePath>
-		</SandcastlePath>
-		<WorkingPath>
-		</WorkingPath>
-		<FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
-		<HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
-		<CopyrightText>&amp;#169%3b 2022 GitHub Community. All rights reserved.</CopyrightText>
-		<PresentationStyle>VS2013</PresentationStyle>
-		<ComponentConfigurations>
-			<ComponentConfig id="Code Block Component" enabled="True" xmlns="">
-				<component id="Code Block Component">
-					<basePath value="{@HtmlEncProjectFolder}" />
-					<outputPaths>{@HelpFormatOutputPaths}</outputPaths>
-					<allowMissingSource value="false" />
-					<removeRegionMarkers value="false" />
-					<colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml" styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl" stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css" scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
-				</component>
-			</ComponentConfig>
-			<ComponentConfig id="IntelliSense Component" enabled="True" xmlns="">
-				<component id="IntelliSense Component">
-					<output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}" boundedCapacity="100" />
-				</component>
-			</ComponentConfig>
-			<ComponentConfig id="API Token Resolution" enabled="True" xmlns="">
-				<component id="API Token Resolution">{@TokenFiles}
-<replace elements="/*//token" item="string(.)" /></component>
-			</ComponentConfig>
-			<ComponentConfig id="Syntax Component" enabled="True" xmlns="">
-				<component id="Syntax Component">
-					<syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="false" />
-					<generators>
+    <AssemblyName>Documentation</AssemblyName>
+    <RootNamespace>Documentation</RootNamespace>
+    <Name>Documentation</Name>
+    <!-- SHFB properties -->
+    <OutputPath>..\docs\</OutputPath>
+    <HtmlHelpName>TaskScheduler</HtmlHelpName>
+    <ProjectSummary>&amp;lt%3bh2&amp;gt%3bIntroduction&amp;lt%3b/h2&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe Task Scheduler Managed Class Library provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions, provides an editor and allows for localization support.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bMicrosoft introduced version 2.0 %28internally version 1.2%29 with a completely new object model with Windows Vista. The managed assembly closely resembles the new object model, but allows the 1.0 %28internally version 1.1%29 COM objects to be manipulated. It will automatically choose the most recent version of the library found on the host system.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bProject website: &amp;lt%3ba ref=&amp;quot%3bhttps://github.com/dahall/TaskScheduler&amp;quot%3b&amp;gt%3bhttps://github.com/dahall/TaskScheduler&amp;lt%3b/a&amp;gt%3b&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bh2&amp;gt%3bClass Overview&amp;lt%3b/h2&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskService.htm&amp;quot%3b&amp;gt%3bTaskService&amp;lt%3b/a&amp;gt%3b class represents the machine specific instance of the system task scheduler. It provides access to information about the service, access folders %282.0 only%29, and can quickly add or retrieve a task. If you only need to use the library for very intermittent periods, wrap the TaskService instantiation in a using statement to easily disconnect at the end of your use. However, if you plan on using the connection to the Task Scheduler repeatedly, use an assembly level field to store the TaskService instance as connecting and disconnecting is an expensive operation.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bTasks are accessed and can be enumerated through a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskFolder.htm&amp;quot%3b&amp;gt%3bTaskFolder&amp;lt%3b/a&amp;gt%3b. For systems supporting only the 1.0 library, there is only the root folder. The 2.0 library supports a hierarchal structure similar to a file system. The Tasks property exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskCollection.htm&amp;quot%3b&amp;gt%3bTaskCollection&amp;lt%3b/a&amp;gt%3b instance which can enumerate tasks and provides an indexer which allows access to individual tasks by name. The TaskCollection class also has methods that allow for the creation/registration and deletion of tasks and subfolders by name.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bA task is represented by a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Task.htm&amp;quot%3b&amp;gt%3bTask&amp;lt%3b/a&amp;gt%3b instance. The Task class provides information about tasks state and history and exposes the task&amp;#39%3bs &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_Task_Definition.htm&amp;quot%3b&amp;gt%3bDefinition&amp;lt%3b/a&amp;gt%3b property.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bA &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TaskDefinition.htm&amp;quot%3b&amp;gt%3bTaskDefinition&amp;lt%3b/a&amp;gt%3b exposes all of the properties of a task which allow you to define how and what will run when the task is triggered. A task must have at least one action and one trigger defined.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bEach task has a list of triggers that determine when the task will be run. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Triggers.htm&amp;quot%3b&amp;gt%3bTriggers&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_TriggerCollection.htm&amp;quot%3b&amp;gt%3bTriggerCollection&amp;lt%3b/a&amp;gt%3b instance. TriggerCollection provides an indexer which allows access to individual triggers by their position in the list. The TriggerCollection class also has methods that allow for the addition and removal of triggers. TriggerCollection implements the IList interface so you can also enumerate all triggers using the foreach construct.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Trigger.htm&amp;quot%3b&amp;gt%3bTrigger&amp;lt%3b/a&amp;gt%3b class is an abstract class that forms the foundation of the different types of triggers that can be specified for a task. There are 10 different specializations that provide different ways to specify the time a task will run. Not all specializations work with the 1.0 library. See the help file for details about each of the trigger classes. The Trigger Documentation has some examples of how to setup each kind of trigger.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bEach task also has a list of actions that determine what the task will do when triggered. These are accessed through the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_TaskDefinition_Actions.htm&amp;quot%3b&amp;gt%3bActions&amp;lt%3b/a&amp;gt%3b property of a task definition which exposes a &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ActionCollection.htm&amp;quot%3b&amp;gt%3bActionCollection&amp;lt%3b/a&amp;gt%3b instance. ActionCollection provides an indexer which allows access to individual actions by their position in the list. The ActionCollection class also has methods that allow for the addition and removal of actions. ActionCollection implements the IList interface so you can also enumerate all actions using the foreach construct.&amp;lt%3b/p&amp;gt%3b
+&amp;lt%3bp&amp;gt%3bThe &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_Action.htm&amp;quot%3b&amp;gt%3bAction&amp;lt%3b/a&amp;gt%3b class is an abstract class that is the foundation for four different actions. On 1.0, only the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bT_Microsoft_Win32_TaskScheduler_ExecAction.htm&amp;quot%3b&amp;gt%3bExecAction&amp;lt%3b/a&amp;gt%3b specialization is available unless the &amp;lt%3ba class=&amp;quot%3bcode&amp;quot%3b href=&amp;quot%3bP_Microsoft_Win32_TaskScheduler_ActionCollection_PowerShellConversion.htm&amp;quot%3b&amp;gt%3bPowerShellConversion&amp;lt%3b/a&amp;gt%3b option is enabled %28see Action Documentation for more information%29. These actions determine what the service will do when a trigger is fired. The Action Documentation has some examples of how to setup each kind of action.&amp;lt%3b/p&amp;gt%3b</ProjectSummary>
+    <MissingTags>Summary, Parameter, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
+    <VisibleItems>Attributes, InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
+    <HtmlHelp1xCompilerPath>
+    </HtmlHelp1xCompilerPath>
+    <HtmlHelp2xCompilerPath>
+    </HtmlHelp2xCompilerPath>
+    <SandcastlePath>
+    </SandcastlePath>
+    <WorkingPath>
+    </WorkingPath>
+    <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
+    <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
+    <CopyrightText>&amp;#169%3b 2022 GitHub Community. All rights reserved.</CopyrightText>
+    <PresentationStyle>Default2022</PresentationStyle>
+    <ComponentConfigurations>
+      <ComponentConfig id="Code Block Component" enabled="True">
+        <component id="Code Block Component">
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+          <allowMissingSource value="false" />
+          <removeRegionMarkers value="false" />
+          <colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml" styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl" stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css" scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
+        </component>
+      </ComponentConfig>
+<ComponentConfig id="IntelliSense Component" enabled="True"><component id="IntelliSense Component"><output includeNamespaces="false" namespacesFile="Namespaces" folder="{@OutputFolder}" boundedCapacity="100" /></component></ComponentConfig>
+<ComponentConfig id="API Token Resolution" enabled="True"><component id="API Token Resolution">{@TokenFiles}
+<replace elements="/*//token" item="string(.)" /></component></ComponentConfig>
+<ComponentConfig id="Syntax Component" enabled="True"><component id="Syntax Component"><syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="false" /><generators>
 						{@SyntaxFilters}
-					</generators>
-					<containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
-					<configurations>
-						<generator id="C#" />
-						<generator id="Visual Basic">
-							<includeLineContinuation value="false" />
-						</generator>
-						<generator id="Visual Basic Usage">
-							<includeLineContinuation value="false" />
-						</generator>
-						<generator id="Managed C++" />
-						<generator id="F#" />
-						<generator id="J#" />
-						<generator id="JScript" />
-						<generator id="JavaScript" />
-						<generator id="XAML Usage" />
-						<generator id="ASP.NET" />
-						<generator id="X#" />
-					</configurations>
-				</component>
-			</ComponentConfig>
-		</ComponentConfigurations>
-		<DocumentationSources>
-			<DocumentationSource sourceFile="..\TaskService\bin\Release\net452\Microsoft.Win32.TaskScheduler.xml" />
-			<DocumentationSource sourceFile="..\TaskService\bin\Release\net452\Microsoft.Win32.TaskScheduler.dll" />
-			<DocumentationSource sourceFile="..\TaskEditor\bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.dll" />
-			<DocumentationSource sourceFile="..\TaskEditor\bin\Release\net452\Microsoft.Win32.TaskSchedulerEditor.xml" />
-		</DocumentationSources>
-		<NamespaceSummaries>
-			<NamespaceSummaryItem name="(global)" isDocumented="False" />
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
-			<NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
-			<NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
-			<NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
-			<NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
-			<NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
-			<NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
-		</NamespaceSummaries>
-		<HelpFileVersion>2.9.3</HelpFileVersion>
-		<HelpFileFormat>MSHelpViewer, Website</HelpFileFormat>
-		<CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
-		<SdkLinkTarget>Blank</SdkLinkTarget>
-		<RootNamespaceTitle>Task Scheduler Managed Class Library Overview</RootNamespaceTitle>
-		<MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
-		<ProductTitle>
-		</ProductTitle>
-		<SccProjectName>$/taskscheduler/TaskService/TaskSchedulerHelp</SccProjectName>
-		<SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
-		<SccAuxPath>https://tfs.codeplex.com/tfs/tfs07</SccAuxPath>
-		<SccLocalPath>.</SccLocalPath>
-		<TocParentId>-1</TocParentId>
-		<TocParentVersion>100</TocParentVersion>
-		<TopicVersion>100</TopicVersion>
-		<TocOrder>-1</TocOrder>
-		<SelfBranded>True</SelfBranded>
-		<CatalogVersion>100</CatalogVersion>
-		<CatalogProductId>VS</CatalogProductId>
-		<SyntaxFilters>C#, Visual Basic, Managed C++</SyntaxFilters>
-		<RootNamespaceContainer>True</RootNamespaceContainer>
-		<Preliminary>False</Preliminary>
-		<NamingMethod>MemberName</NamingMethod>
-		<Language>en-US</Language>
-		<ContentPlacement>AboveNamespaces</ContentPlacement>
-		<PlugInConfigurations />
-		<BuildAssemblerVerbosity>AllMessages</BuildAssemblerVerbosity>
-		<IndentHtml>False</IndentHtml>
-		<KeepLogFile>True</KeepLogFile>
-		<DisableCodeBlockComponent>False</DisableCodeBlockComponent>
-		<CppCommentsFixup>False</CppCommentsFixup>
-		<CleanIntermediates>True</CleanIntermediates>
-		<PlugInNamespaces>ms.vsipcc+, ms.vsexpresscc+</PlugInNamespaces>
-		<CollectionTocStyle>Hierarchical</CollectionTocStyle>
-		<MSHelp2SdkLinkType>Msdn</MSHelp2SdkLinkType>
-		<IncludeStopWordList>True</IncludeStopWordList>
-		<ApiFilter />
-		<HelpAttributes />
-		<BuildLogFile />
-		<CatalogName>VisualStudio12</CatalogName>
-		<ComponentPath />
-		<MaximumGroupParts>2</MaximumGroupParts>
-		<NamespaceGrouping>True</NamespaceGrouping>
-		<SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-		<WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
-		<SourceCodeBasePath>..\</SourceCodeBasePath>
-		<TransformComponentArguments>
-			<Argument Key="logoFile" Value="tsnew48.png" />
-			<Argument Key="logoHeight" Value="48" />
-			<Argument Key="logoWidth" Value="48" />
-			<Argument Key="logoAltText" Value="Task Scheduler Managed Class Library" />
-			<Argument Key="logoPlacement" Value="left" />
-			<Argument Key="logoAlignment" Value="left" />
-			<Argument Key="maxVersionParts" Value="3" />
-			<Argument Key="defaultLanguage" Value="cs" />
-			<Argument Key="includeEnumValues" Value="true" />
-			<Argument Key="baseSourceCodeUrl" Value="https://github.com/dahall/TaskScheduler/blob/master/" />
-			<Argument Key="requestExampleUrl" Value="https://github.com/dahall/TaskScheduler/issues/new" />
-		</TransformComponentArguments>
-		<VendorName>dahall</VendorName>
-	</PropertyGroup>
-	<!-- There are no properties for these two groups but they need to appear in
+					</generators><containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" /><configurations><generator id="C#" /><generator id="Visual Basic"><includeLineContinuation value="false" /></generator><generator id="Visual Basic Usage"><includeLineContinuation value="false" /></generator><generator id="Managed C++" /><generator id="F#" /><generator id="J#" /><generator id="JScript" /><generator id="JavaScript" /><generator id="XAML Usage" /><generator id="ASP.NET" /><generator id="X#" /></configurations></component></ComponentConfig></ComponentConfigurations>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\TaskService\bin\Release\net48\Microsoft.Win32.TaskScheduler.dll" />
+      <DocumentationSource sourceFile="..\TaskService\bin\Release\net48\Microsoft.Win32.TaskScheduler.xml" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\net48\Microsoft.Win32.TaskSchedulerEditor.dll" />
+      <DocumentationSource sourceFile="..\TaskEditor\bin\Release\net48\Microsoft.Win32.TaskSchedulerEditor.xml" />
+    </DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler" isDocumented="True">The Microsoft.Win32.TaskScheduler namespace provides a wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It will automatically choose the most recent version of the library found on the host system. The namespace includes classes for direct manipulation of the Task Scheduler as well as UI items to allow users to manipulate tasks.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V1Interop" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.V2Interop" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Windows.Forms" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Fluent" isDocumented="True">The Fluent namespace includes classes used to expose the Fluent commands for creating tasks. These classes are not intended for use and cannot be instantiated. See the TaskService.Execute method for more information on creating tasks with the Fluent syntax.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.Events" isDocumented="True">Includes classes to encapsulate event queries used for the EventTrigger.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Microsoft.Win32 (Group)" isGroup="True" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Collections.Generic" isDocumented="False" />
+      <NamespaceSummaryItem name="Microsoft.Win32.TaskScheduler.UIComponents" isDocumented="True">The  Microsoft.Win32.TaskScheduler.UIComponents namespace includes Windows Forms controls that can be used to represent triggers and actions.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
+      <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
+    </NamespaceSummaries>
+    <HelpFileVersion>2.11.0</HelpFileVersion>
+    <HelpFileFormat>Website</HelpFileFormat>
+    <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <RootNamespaceTitle>Task Scheduler Managed Class Library Overview</RootNamespaceTitle>
+    <MSHelpViewerSdkLinkType>Msdn</MSHelpViewerSdkLinkType>
+    <ProductTitle>
+    </ProductTitle>
+    <SccProjectName>$/taskscheduler/TaskService/TaskSchedulerHelp</SccProjectName>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccAuxPath>https://tfs.codeplex.com/tfs/tfs07</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+    <TocParentId>-1</TocParentId>
+    <TocParentVersion>100</TocParentVersion>
+    <TopicVersion>100</TopicVersion>
+    <TocOrder>-1</TocOrder>
+    <SelfBranded>True</SelfBranded>
+    <CatalogVersion>100</CatalogVersion>
+    <CatalogProductId>VS</CatalogProductId>
+    <SyntaxFilters>C#</SyntaxFilters>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>MemberName</NamingMethod>
+    <Language>en-US</Language>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <PlugInConfigurations />
+    <BuildAssemblerVerbosity>AllMessages</BuildAssemblerVerbosity>
+    <IndentHtml>False</IndentHtml>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <CleanIntermediates>True</CleanIntermediates>
+    <PlugInNamespaces>ms.vsipcc+, ms.vsexpresscc+</PlugInNamespaces>
+    <CollectionTocStyle>Hierarchical</CollectionTocStyle>
+    <MSHelp2SdkLinkType>Msdn</MSHelp2SdkLinkType>
+    <IncludeStopWordList>True</IncludeStopWordList>
+    <ApiFilter />
+    <HelpAttributes />
+    <BuildLogFile />
+    <CatalogName>VisualStudio12</CatalogName>
+    <ComponentPath />
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <NamespaceGrouping>True</NamespaceGrouping>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
+    <SourceCodeBasePath>..\</SourceCodeBasePath>
+    <TransformComponentArguments>
+      <Argument Key="RobotsMetadata" Value="" />
+      <Argument Key="BibliographyDataFile" Value="" />
+      <Argument Key="RootBreadcrumbTitleText" Value="Docs" />
+      <Argument Key="CollapsibleSections" Value="True" />
+      <Argument Key="LogoFile" Value="tsnew48.png" />
+      <Argument Key="LogoHeight" Value="48" />
+      <Argument Key="LogoWidth" Value="48" />
+      <Argument Key="LogoAltText" Value="Task Scheduler Managed Class Library" />
+      <Argument Key="LogoPlacement" Value="left" />
+      <Argument Key="LogoAlignment" Value="left" />
+      <Argument Key="LogoUrl" Value="https://github.com/dahall/TaskScheduler" />
+      <Argument Key="MaxVersionParts" Value="3" />
+      <Argument Key="DefaultLanguage" Value="cs" />
+      <Argument Key="IncludeEnumValues" Value="true" />
+      <Argument Key="EnumMemberSortOrder" Value="Value" />
+      <Argument Key="FlagsEnumValueFormat" Value="IntegerValue" />
+      <Argument Key="FlagsEnumSeparatorSize" Value="0" />
+      <Argument Key="BaseSourceCodeUrl" Value="https://github.com/dahall/TaskScheduler/blob/master/" />
+      <Argument Key="RequestExampleUrl" Value="https://github.com/dahall/TaskScheduler/issues/new" />
+    </TransformComponentArguments>
+    <VendorName>dahall</VendorName>
+  </PropertyGroup>
+  <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	</PropertyGroup>
-	<ItemGroup>
-		<Folder Include="icons" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="icons\tsnew48.png" />
-	</ItemGroup>
-	<!-- Import the SHFB build targets -->
-	<Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="icons" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\tsnew48.png" />
+  </ItemGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
 </Project>
