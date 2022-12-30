@@ -40,70 +40,32 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The task is compatible with Task Scheduler 1.0 (Windows Server™ 2003, Windows® XP, or Windows® 2000).
 		/// <para>Items not available when compared to V2:</para>
 		/// <list type="bullet">
+		/// <item>TaskDefinition.Principal.GroupId - All account information can be retrieved via the UserId property.</item>
+		/// <item>TaskLogonType values Group, None and S4U are not supported.</item>
+		/// <item>TaskDefinition.Principal.RunLevel == TaskRunLevel.Highest is not supported.</item>
 		/// <item>
-		/// <term>TaskDefinition.Principal.GroupId - All account information can be retrieved via the UserId property.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskLogonType values Group, None and S4U are not supported.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Principal.RunLevel == TaskRunLevel.Highest is not supported.</term>
-		/// </item>
-		/// <item>
-		/// <term>
 		/// Assigning access security to a task is not supported using TaskDefinition.RegistrationInfo.SecurityDescriptorSddlForm or in RegisterTaskDefinition.
-		/// </term>
 		/// </item>
 		/// <item>
-		/// <term>
 		/// TaskDefinition.RegistrationInfo.Documentation, Source, URI and Version properties are only supported using this library. See
 		/// details in the remarks for <see cref="TaskDefinition.Data"/>.
-		/// </term>
 		/// </item>
+		/// <item>TaskDefinition.Settings.AllowDemandStart cannot be false.</item>
+		/// <item>TaskDefinition.Settings.AllowHardTerminate cannot be false.</item>
+		/// <item>TaskDefinition.Settings.MultipleInstances can only be IgnoreNew.</item>
+		/// <item>TaskDefinition.Settings.NetworkSettings cannot have any values.</item>
+		/// <item>TaskDefinition.Settings.RestartCount can only be 0.</item>
+		/// <item>TaskDefinition.Settings.StartWhenAvailable can only be false.</item>
 		/// <item>
-		/// <term>TaskDefinition.Settings.AllowDemandStart cannot be false.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.AllowHardTerminate cannot be false.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.MultipleInstances can only be IgnoreNew.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.NetworkSettings cannot have any values.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.RestartCount can only be 0.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.StartWhenAvailable can only be false.</term>
-		/// </item>
-		/// <item>
-		/// <term>
 		/// TaskDefinition.Actions can only contain ExecAction instances unless the TaskDefinition.Actions.PowerShellConversion property has
 		/// the Version1 flag set.
-		/// </term>
 		/// </item>
-		/// <item>
-		/// <term>
-		/// TaskDefinition.Triggers cannot contain CustomTrigger, EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger instances.
-		/// </term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Triggers cannot contain instances with delays set.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Triggers cannot contain instances with ExecutionTimeLimit or Id properties set.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Triggers cannot contain LogonTriggers instances with the UserId property set.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Triggers cannot contain MonthlyDOWTrigger instances with the RunOnLastWeekOfMonth property set to <c>true</c>.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Triggers cannot contain MonthlyTrigger instances with the RunOnDayWeekOfMonth property set to <c>true</c>.</term>
-		/// </item>
+		/// <item>TaskDefinition.Triggers cannot contain CustomTrigger, EventTrigger, SessionStateChangeTrigger, or RegistrationTrigger instances.</item>
+		/// <item>TaskDefinition.Triggers cannot contain instances with delays set.</item>
+		/// <item>TaskDefinition.Triggers cannot contain instances with ExecutionTimeLimit or Id properties set.</item>
+		/// <item>TaskDefinition.Triggers cannot contain LogonTriggers instances with the UserId property set.</item>
+		/// <item>TaskDefinition.Triggers cannot contain MonthlyDOWTrigger instances with the RunOnLastWeekOfMonth property set to <c>true</c>.</item>
+		/// <item>TaskDefinition.Triggers cannot contain MonthlyTrigger instances with the RunOnDayWeekOfMonth property set to <c>true</c>.</item>
 		/// </list>
 		/// </summary>
 		V1,
@@ -121,24 +83,14 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The task is compatible with Task Scheduler 2.1 (Windows® 7, Windows Server™ 2008 R2).
 		/// <para>Changes from V2:</para>
 		/// <list type="bullet">
+		/// <item>TaskDefinition.Principal.ProcessTokenSidType can be defined as a value other than Default.</item>
 		/// <item>
-		/// <term>TaskDefinition.Principal.ProcessTokenSidType can be defined as a value other than Default.</term>
-		/// </item>
-		/// <item>
-		/// <term>
 		/// TaskDefinition.Actions may not contain EmailAction or ShowMessageAction instances unless the
 		/// TaskDefinition.Actions.PowerShellConversion property has the Version2 flag set.
-		/// </term>
 		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Principal.RequiredPrivileges can have privilege values assigned.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.DisallowStartOnRemoteAppSession can be set to true.</term>
-		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.UseUnifiedSchedulingEngine can be set to true.</term>
-		/// </item>
+		/// <item>TaskDefinition.Principal.RequiredPrivileges can have privilege values assigned.</item>
+		/// <item>TaskDefinition.Settings.DisallowStartOnRemoteAppSession can be set to true.</item>
+		/// <item>TaskDefinition.UseUnifiedSchedulingEngine can be set to true.</item>
 		/// </list>
 		/// </summary>
 		V2_1,
@@ -148,14 +100,10 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <para>Changes from V2_1:</para>
 		/// <list type="bullet">
 		/// <item>
-		/// <term>
 		/// TaskDefinition.Settings.MaintenanceSettings can have Period or Deadline be values other than TimeSpan.Zero or the Exclusive
 		/// property set to true.
-		/// </term>
 		/// </item>
-		/// <item>
-		/// <term>TaskDefinition.Settings.Volatile can be set to true.</term>
-		/// </item>
+		/// <item>TaskDefinition.Settings.Volatile can be set to true.</item>
 		/// </list>
 		/// </summary>
 		V2_2,
@@ -164,9 +112,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The task is compatible with Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).
 		/// <para>Changes from V2_2:</para>
 		/// <list type="bullet">
-		/// <item>
-		/// <term>None published.</term>
-		/// </item>
+		/// <item>None published.</item>
 		/// </list>
 		/// </summary>
 		V2_3
