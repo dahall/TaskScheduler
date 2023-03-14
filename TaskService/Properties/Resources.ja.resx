@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionTypeComHandler" xml:space="preserve">
+    <value>COM オブジェクトを呼び出す</value>
+  </data>
+  <data name="ActionTypeExecute" xml:space="preserve">
+    <value>プログラムを起動する</value>
+  </data>
+  <data name="ActionTypeSendEmail" xml:space="preserve">
+    <value>メールを送信する</value>
+  </data>
+  <data name="ActionTypeShowMessage" xml:space="preserve">
+    <value>メッセージを表示する</value>
+  </data>
+  <data name="ComHandlerAction" xml:space="preserve">
+    <value>{3} {0:P}</value>
+    
+  </data>
+  <data name="DOWAllDays" xml:space="preserve">
+    <value>毎日</value>
+  </data>
+  <data name="EmailAction" xml:space="preserve">
+    <value>{1} {0}</value>
+    
+  </data>
+  <data name="EndSentence" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="ExecAction" xml:space="preserve">
+    <value>{0} {1}</value>
+    
+  </data>
+  <data name="HyphenSeparator" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>、</value>
+  </data>
+  <data name="MOYAllMonths" xml:space="preserve">
+    <value>毎月</value>
+  </data>
+  <data name="MultipleActions" xml:space="preserve">
+    <value>定義された複数のアクション</value>
+  </data>
+  <data name="MultipleTriggers" xml:space="preserve">
+    <value>定義された複数のトリガー</value>
+  </data>
+  <data name="ShowMessageAction" xml:space="preserve">
+    <value>{0}</value>
+    
+  </data>
+  <data name="TaskDefaultPrincipal" xml:space="preserve">
+    <value>著者</value>
+  </data>
+  <data name="TaskStateDisabled" xml:space="preserve">
+    <value>無効化されました</value>
+  </data>
+  <data name="TaskStateQueued" xml:space="preserve">
+    <value>キューに入れられました</value>
+  </data>
+  <data name="TaskStateReady" xml:space="preserve">
+    <value>準備が完了しました</value>
+  </data>
+  <data name="TaskStateRunning" xml:space="preserve">
+    <value>作動中</value>
+  </data>
+  <data name="TaskStateUnknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="TriggerAnyUser" xml:space="preserve">
+    <value>任意のユーザー</value>
+  </data>
+  <data name="TriggerBoot1" xml:space="preserve">
+    <value>システム起動時</value>
+  </data>
+  <data name="TriggerCustom1" xml:space="preserve">
+    <value>カスタムトリガー</value>
+  </data>
+  <data name="TriggerDaily1" xml:space="preserve">
+    <value>毎日 {0:t} に</value>
+  </data>
+  <data name="TriggerDaily2" xml:space="preserve">
+    <value>{1}日ごとに {0:t} に</value>
+  </data>
+  <data name="TriggerDuration0" xml:space="preserve">
+    <value>無限に</value>
+  </data>
+  <data name="TriggerDurationNot0" xml:space="preserve">
+    <value>{0} の持続時間</value>
+    
+  </data>
+  <data name="TriggerDurationNot0Short" xml:space="preserve">
+    <value>{0}</value>
+    
+  </data>
+  <data name="TriggerEndBoundary" xml:space="preserve">
+    <value>トリガーの有効期限は {0:G} です。</value>
+    
+  </data>
+  <data name="TriggerEvent1" xml:space="preserve">
+    <value>カスタムイベントフィルタ</value>
+  </data>
+  <data name="TriggerEventBasic1" xml:space="preserve">
+    <value>
+イベント時 - ログ: {0}</value>
+    
+  </data>
+  <data name="TriggerEventBasic2" xml:space="preserve">
+    <value>, ソース: {0}</value>
+    
+  </data>
+  <data name="TriggerEventBasic3" xml:space="preserve">
+    <value>, EventID: {0}</value>
+    
+  </data>
+  <data name="TriggerIdle1" xml:space="preserve">
+    <value>コンピュータがアイドル状態の時</value>
+  </data>
+  <data name="TriggerLogon1" xml:space="preserve">
+    <value>{0} のログオン時</value>
+  </data>
+  <data name="TriggerMonthly1" xml:space="preserve">
+    <value>{2} {1}日の {0:t} に、{0:d} を開始</value>
+    
+  </data>
+  <data name="TriggerMonthlyDOW1" xml:space="preserve">
+    <value>{3} の {1} {2:f} の {0:t} に、{0:d} を開始</value>
+    
+  </data>
+  <data name="TriggerRegistration1" xml:space="preserve">
+    <value>タスクが作成または変更された時</value>
+  </data>
+  <data name="TriggerRepetition" xml:space="preserve">
+    <value>トリガーされた後、{0} {1} ごとに繰り返します。</value>
+    
+  </data>
+  <data name="TriggerRepetitionShort" xml:space="preserve">
+    <value>{0} {1} ごとに。</value>
+    
+  </data>
+  <data name="TriggerSessionConsoleConnect" xml:space="preserve">
+    <value>{0} へのローカル接続時。</value>
+    
+  </data>
+  <data name="TriggerSessionConsoleDisconnect" xml:space="preserve">
+    <value>{0} からのローカル切断時。</value>
+    
+  </data>
+  <data name="TriggerSessionRemoteConnect" xml:space="preserve">
+    <value>{0} へのリモート接続時。</value>
+    
+  </data>
+  <data name="TriggerSessionRemoteDisconnect" xml:space="preserve">
+    <value>{0} からのリモート切断時。</value>
+    
+  </data>
+  <data name="TriggerSessionSessionLock" xml:space="preserve">
+    <value>{0} のワークステーションロック時。</value>
+    
+  </data>
+  <data name="TriggerSessionSessionUnlock" xml:space="preserve">
+    <value>{0} のワークステーションのロック解除時。</value>
+    
+  </data>
+  <data name="TriggerSessionUserSession" xml:space="preserve">
+    <value>{0} のユーザーセッション</value>
+    
+  </data>
+  <data name="TriggerTime1" xml:space="preserve">
+    <value>{0:d} の {0:t}</value>
+    
+  </data>
+  <data name="TriggerTypeBoot" xml:space="preserve">
+    <value>起動時</value>
+  </data>
+  <data name="TriggerTypeCustom" xml:space="preserve">
+    <value>カスタムトリガー</value>
+  </data>
+  <data name="TriggerTypeDaily" xml:space="preserve">
+    <value>毎日</value>
+  </data>
+  <data name="TriggerTypeEvent" xml:space="preserve">
+    <value>イベント時</value>
+  </data>
+  <data name="TriggerTypeIdle" xml:space="preserve">
+    <value>アイドル時</value>
+  </data>
+  <data name="TriggerTypeLogon" xml:space="preserve">
+    <value>ログオン時</value>
+  </data>
+  <data name="TriggerTypeMonthly" xml:space="preserve">
+    <value>毎月</value>
+  </data>
+  <data name="TriggerTypeMonthlyDOW" xml:space="preserve">
+    <value>毎月</value>
+  </data>
+  <data name="TriggerTypeRegistration" xml:space="preserve">
+    <value>タスクの作成/変更時</value>
+  </data>
+  <data name="TriggerTypeSessionStateChange" xml:space="preserve">
+    <value>状態変更時</value>
+  </data>
+  <data name="TriggerTypeTime" xml:space="preserve">
+    <value>ワンタイム</value>
+  </data>
+  <data name="TriggerTypeWeekly" xml:space="preserve">
+    <value>毎週</value>
+  </data>
+  <data name="TriggerWeekly1Week" xml:space="preserve">
+    <value>毎週 {1} の {0:t} に {0:d} を起動</value>
+    
+  </data>
+  <data name="TriggerWeeklyMultWeeks" xml:space="preserve">
+    <value>{2}週の {1} の {0:t} に {0:d} を起動</value>
+    
+  </data>
+  <data name="WWAllWeeks" xml:space="preserve">
+    <value>毎週</value>
+  </data>
+  <data name="WWFifthWeek" xml:space="preserve">
+    <value>第5</value>
+  </data>
+  <data name="WWFirstWeek" xml:space="preserve">
+    <value>第1</value>
+  </data>
+  <data name="WWFourthWeek" xml:space="preserve">
+    <value>第4</value>
+  </data>
+  <data name="WWLastWeek" xml:space="preserve">
+    <value>最後の</value>
+  </data>
+  <data name="WWSecondWeek" xml:space="preserve">
+    <value>第2</value>
+  </data>
+  <data name="WWThirdWeek" xml:space="preserve">
+    <value>第3</value>
+  </data>
+  <data name="Error_TriggerEndBeforeStart" xml:space="preserve">
+    <value>トリガーの有効期限の日時は、開始時刻またはアクティベート時刻よりも後でなければなりません。</value>
+  </data>
+</root>
