@@ -1996,7 +1996,7 @@
         <para>
              The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
              call this method without any values (e.g.
-             <code>Run()</code>
+             <code language="cs">Run()</code>
              ).
              </para>
         <para>
@@ -4792,19 +4792,19 @@
             This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated
             by white spaces:
             </para>
-        <codeSnippetGroup>
-          <code language="cs" codeLanguage="CSharp" style="cs">&lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;</code>
-        </codeSnippetGroup>
+        <code language="cs">
+              &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
+            </code>
         <para>Each item has bounds as defined by the following:</para>
-        <codeSnippetGroup>
-          <code language="cs" codeLanguage="CSharp" style="cs">* * * * *
-| | | | |
-| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
-| | | +------ Month of the Year (range: 1-12)
-| | +-------- Day of the Month  (range: 1-31)
-| +---------- Hour              (range: 0-23)
-+------------ Minute            (range: 0-59)</code>
-        </codeSnippetGroup>
+        <code>
+              * * * * *
+              | | | | |
+              | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+              | | | +------ Month of the Year (range: 1-12)
+              | | +-------- Day of the Month  (range: 1-31)
+              | +---------- Hour              (range: 0-23)
+              +------------ Minute            (range: 0-59)
+            </code>
         <para>Any of these 5 fields may be an asterisk (*). This would mean the entire range of possible values, i.e. each minute, each hour, etc.</para>
         <para>
             Any of the first 4 fields can be a question mark ("?"). It stands for the current time, i.e. when a field is processed, the current time will be
