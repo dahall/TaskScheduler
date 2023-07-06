@@ -97,7 +97,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private string userName;
 		private bool userNameSet;
 		private string userPassword;
-        private SecureString userSecurePassword;
+		private SecureString userSecurePassword;
 		private bool userPasswordSet;
 		private WindowsImpersonatedIdentity v1Impersonation;
 
@@ -132,7 +132,7 @@ namespace Microsoft.Win32.TaskScheduler
 			EndInit();
 		}
 
-        /// <summary>Initializes a new instance of the <see cref="TaskService"/> class.</summary>
+		/// <summary>Initializes a new instance of the <see cref="TaskService"/> class.</summary>
 		/// <param name="targetServer">
 		/// The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.
 		/// </param>
@@ -146,15 +146,15 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
 		public TaskService(string targetServer, string userName = null, string accountDomain = null, SecureString userSecurePassword = null, bool forceV1 = false)
 		{
-            BeginInit();
-            TargetServer = targetServer;
-            UserName = userName;
-            UserAccountDomain = accountDomain;
-            SetUserSecurePassword(userSecurePassword);
-            this.forceV1 = forceV1;
-            ResetHighestSupportedVersion();
+			BeginInit();
+			TargetServer = targetServer;
+			UserName = userName;
+			UserAccountDomain = accountDomain;
+			SetUserSecurePassword(userSecurePassword);
+			this.forceV1 = forceV1;
+			ResetHighestSupportedVersion();
 			EndInit();
-        }
+		}
 
 		private TaskService([NotNull] System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
 		{
@@ -402,30 +402,30 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-        internal string UserPasswordPlainText
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(userPassword))
-                {
-                    return userPassword;
-                }
-                if (userSecurePassword != null)
-                {
-                    IntPtr valuePtr = IntPtr.Zero;
-                    try
-                    {
-                        valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
-                        return Marshal.PtrToStringUni(valuePtr);
-                    }
-                    finally
-                    {
-                        Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
-                    }
-                }
-                return "";
-            }
-        }
+		internal string UserPasswordPlainText
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(userPassword))
+				{
+					return userPassword;
+				}
+				if (userSecurePassword != null)
+				{
+					IntPtr valuePtr = IntPtr.Zero;
+					try
+					{
+						valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
+						return Marshal.PtrToStringUni(valuePtr);
+					}
+					finally
+					{
+						Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+					}
+				}
+				return "";
+			}
+		}
 
 		/// <summary>Gets a <see cref="IEnumerator{T}"/> which enumerates all the tasks in all folders.</summary>
 		/// <value>A <see cref="IEnumerator{T}"/> for all <see cref="Task"/> instances.</value>
@@ -765,11 +765,11 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Sets the user password as a secure string to be used when connecting to the <see cref="TargetServer"/>.</summary>
 		/// <param name="value">A secure string containing the user password to set.</param>
 		public void SetUserSecurePassword(SecureString value)
-        {
-            userPasswordSet = true;
-            userSecurePassword = value;
-            Connect();
-        }
+		{
+			userPasswordSet = true;
+			userSecurePassword = value;
+			Connect();
+		}
 
 		/// <summary>Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.</summary>
 		public void StartSystemTaskSchedulerManager()
