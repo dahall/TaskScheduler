@@ -144,7 +144,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// The password that is used to connect to the computer as a SecureString. If the user name and securePassword are not specified, then the current token is used.
 		/// </param>
 		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
-		public TaskService(string targetServer, string userName = null, string accountDomain = null, SecureString userSecurePassword = null, bool forceV1 = false)
+		public TaskService(string targetServer, [Optional] string userName, [Optional] string accountDomain, [Optional] SecureString userSecurePassword, bool forceV1 = false)
 		{
 			BeginInit();
 			TargetServer = targetServer;
