@@ -395,7 +395,7 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value == null || value.Trim() == string.Empty) value = null;
 				if (string.CompareOrdinal(value, userPassword) != 0)
 				{
-                    userSecurePassword = null;
+					userSecurePassword = null;
 					userPasswordSet = true;
 					userPassword = value;
 					Connect();
@@ -412,18 +412,18 @@ namespace Microsoft.Win32.TaskScheduler
 					return userPassword;
 
 				if (userSecurePassword == null)
-                    return string.Empty;
+					return string.Empty;
 
-                IntPtr valuePtr = IntPtr.Zero;
-                try
-                {
-                    valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
-                    return Marshal.PtrToStringUni(valuePtr);
-                }
-                finally
-                {
-                    Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
-                }
+				IntPtr valuePtr = IntPtr.Zero;
+				try
+				{
+					valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
+					return Marshal.PtrToStringUni(valuePtr);
+				}
+				finally
+				{
+					Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+				}
 			}
 		}
 
@@ -767,7 +767,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public void SetUserSecurePassword(SecureString value)
 		{
 			userPasswordSet = true;
-            userPassword = null;
+			userPassword = null;
 			userSecurePassword = value;
 			Connect();
 		}
@@ -991,10 +991,10 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!userDomainSet) userDomain = null;
 			if (!userNameSet) userName = null;
 			if (!userPasswordSet)
-            {
-                userPassword = null;
-                userSecurePassword = null;
-            }
+			{
+				userPassword = null;
+				userSecurePassword = null;
+			}
 		}
 
 		private bool ShouldSerializeHighestSupportedVersion() => LibraryIsV2 && maxVer <= TaskServiceVersion.V1_1;
