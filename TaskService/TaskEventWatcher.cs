@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
+using System.Security;
 using JetBrains.Annotations;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -248,6 +249,19 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <param name="user">The user name with permissions on the remote machine.</param>
 		/// <param name="password">The password for the user.</param>
 		public TaskEventWatcher(string machineName, string taskPath, string domain = null, string user = null, string password = null) : this(new TaskService(machineName, user, domain, password))
+		{
+			InitTask(taskPath);
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TaskEventWatcher" /> class on a remote machine.
+		/// </summary>
+		/// <param name="machineName">Name of the remote machine.</param>
+		/// <param name="taskPath">The task path.</param>
+		/// <param name="domain">The domain of the user account.</param>
+		/// <param name="user">The user name with permissions on the remote machine.</param>
+		/// <param name="securePassword">The password for the user as a secure string.</param>
+		public TaskEventWatcher(string machineName, string taskPath, string domain = null, string user = null, SecureString securePassword = null) : this(new TaskService(machineName, user, domain, securePassword))
 		{
 			InitTask(taskPath);
 		}
@@ -610,7 +624,7 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 			else
 			{
-				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.UtcNow, TargetServer, UserAccountDomain, UserName, UserPassword);
+				var log = new TaskEventLog(taskPath, Filter.EventIds, Filter.EventLevels, DateTime.UtcNow, TargetServer, UserAccountDomain, UserName, TaskService.UserPasswordPlainText);
 				log.Query.ReverseDirection = false;
 				watcher = new EventLogWatcher(log.Query);
 				watcher.EventRecordWritten += Watcher_EventRecordWritten;

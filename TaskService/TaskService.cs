@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -96,6 +97,7 @@ namespace Microsoft.Win32.TaskScheduler
 		private string userName;
 		private bool userNameSet;
 		private string userPassword;
+		private SecureString userSecurePassword;
 		private bool userPasswordSet;
 		private WindowsImpersonatedIdentity v1Impersonation;
 
@@ -125,6 +127,30 @@ namespace Microsoft.Win32.TaskScheduler
 			UserName = userName;
 			UserAccountDomain = accountDomain;
 			UserPassword = password;
+			this.forceV1 = forceV1;
+			ResetHighestSupportedVersion();
+			EndInit();
+		}
+
+		/// <summary>Initializes a new instance of the <see cref="TaskService"/> class.</summary>
+		/// <param name="targetServer">
+		/// The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.
+		/// </param>
+		/// <param name="userName">
+		/// The user name that is used during the connection to the computer. If the user is not specified, then the current token is used.
+		/// </param>
+		/// <param name="accountDomain">The domain of the user specified in the <paramref name="userName"/> parameter.</param>
+		/// <param name="userSecurePassword">
+		/// The password that is used to connect to the computer as a SecureString. If the user name and securePassword are not specified, then the current token is used.
+		/// </param>
+		/// <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
+		public TaskService(string targetServer, [Optional] string userName, [Optional] string accountDomain, [Optional] SecureString userSecurePassword, bool forceV1 = false)
+		{
+			BeginInit();
+			TargetServer = targetServer;
+			UserName = userName;
+			UserAccountDomain = accountDomain;
+			SetUserSecurePassword(userSecurePassword);
 			this.forceV1 = forceV1;
 			ResetHighestSupportedVersion();
 			EndInit();
@@ -369,9 +395,34 @@ namespace Microsoft.Win32.TaskScheduler
 				if (value == null || value.Trim() == string.Empty) value = null;
 				if (string.CompareOrdinal(value, userPassword) != 0)
 				{
+					userSecurePassword = null;
 					userPasswordSet = true;
 					userPassword = value;
 					Connect();
+				}
+			}
+		}
+
+		/// <summary>Gets the user password in plain text from either userPassword or userSecurePassword.</summary>
+		internal string UserPasswordPlainText
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(userPassword))
+					return userPassword;
+
+				if (userSecurePassword == null)
+					return string.Empty;
+
+				IntPtr valuePtr = IntPtr.Zero;
+				try
+				{
+					valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
+					return Marshal.PtrToStringUni(valuePtr);
+				}
+				finally
+				{
+					Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
 				}
 			}
 		}
@@ -575,7 +626,7 @@ namespace Microsoft.Win32.TaskScheduler
 		public override bool Equals(object obj)
 		{
 			if (obj is TaskService tsobj)
-				return tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPassword == UserPassword && tsobj.forceV1 == forceV1;
+				return tsobj.TargetServer == TargetServer && tsobj.UserAccountDomain == UserAccountDomain && tsobj.UserName == UserName && tsobj.UserPasswordPlainText == UserPasswordPlainText && tsobj.forceV1 == forceV1;
 			return base.Equals(obj);
 		}
 
@@ -611,7 +662,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <summary>Gets the event log for this <see cref="TaskService"/> instance.</summary>
 		/// <param name="taskPath">(Optional) The task path if only the events for a single task are desired.</param>
 		/// <returns>A <see cref="TaskEventLog"/> instance.</returns>
-		public TaskEventLog GetEventLog(string taskPath = null) => new(TargetServer, taskPath, UserAccountDomain, UserName, UserPassword);
+		public TaskEventLog GetEventLog(string taskPath = null) => new(TargetServer, taskPath, UserAccountDomain, UserName, UserPasswordPlainText);
 
 		/// <summary>Gets the path to a folder of registered tasks.</summary>
 		/// <param name="folderName">
@@ -647,7 +698,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Returns a hash code for this instance.</summary>
 		/// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-		public override int GetHashCode() => new { A = TargetServer, B = UserAccountDomain, C = UserName, D = UserPassword, E = forceV1 }.GetHashCode();
+		public override int GetHashCode() => new { A = TargetServer, B = UserAccountDomain, C = UserName, D = UserPasswordPlainText, E = forceV1 }.GetHashCode();
 
 		/// <summary>Gets a collection of running tasks.</summary>
 		/// <param name="includeHidden">True to include hidden tasks.</param>
@@ -709,6 +760,16 @@ namespace Microsoft.Win32.TaskScheduler
 			var td = NewTask();
 			td.XmlText = System.IO.File.ReadAllText(xmlFile);
 			return td;
+		}
+
+		/// <summary>Sets the user password as a secure string to be used when connecting to the <see cref="TargetServer"/>.</summary>
+		/// <param name="value">A secure string containing the user password to set.</param>
+		public void SetUserSecurePassword(SecureString value)
+		{
+			userPasswordSet = true;
+			userPassword = null;
+			userSecurePassword = value;
+			Connect();
 		}
 
 		/// <summary>Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.</summary>
@@ -846,7 +907,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 			if (!initializing && !DesignMode)
 			{
-				if (!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userPassword) || string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userPassword))
+				if (!string.IsNullOrEmpty(userDomain) && !string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(UserPasswordPlainText) || string.IsNullOrEmpty(userDomain) && string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(UserPasswordPlainText))
 				{
 					// Clear stuff if already connected
 					connecting = true;
@@ -866,7 +927,7 @@ namespace Microsoft.Win32.TaskScheduler
 						}
 						else
 							targetServer = null;
-						v2TaskService.Connect(targetServer, userName, userDomain, userPassword);
+						v2TaskService.Connect(targetServer, userName, userDomain, UserPasswordPlainText);
 						targetServer = v2TaskService.TargetServer;
 						userName = v2TaskService.ConnectedUser;
 						userDomain = v2TaskService.ConnectedDomain;
@@ -874,7 +935,7 @@ namespace Microsoft.Win32.TaskScheduler
 					}
 					else
 					{
-						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, userPassword);
+						v1Impersonation = new WindowsImpersonatedIdentity(userName, userDomain, UserPasswordPlainText);
 						v1TaskScheduler = new V1Interop.ITaskScheduler();
 						if (!string.IsNullOrEmpty(targetServer))
 						{
@@ -929,7 +990,11 @@ namespace Microsoft.Win32.TaskScheduler
 			if (!targetServerSet) targetServer = null;
 			if (!userDomainSet) userDomain = null;
 			if (!userNameSet) userName = null;
-			if (!userPasswordSet) userPassword = null;
+			if (!userPasswordSet)
+			{
+				userPassword = null;
+				userSecurePassword = null;
+			}
 		}
 
 		private bool ShouldSerializeHighestSupportedVersion() => LibraryIsV2 && maxVer <= TaskServiceVersion.V1_1;
