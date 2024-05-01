@@ -657,7 +657,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-#if !NET5_0_OR_GREATER
+#if !NET5_0_OR_GREATER && !NETCOREAPP
 		/// <summary>
 		/// Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ContextMenu"/> property changes.
 		/// </summary>
@@ -1397,7 +1397,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-#if !NET5_0_OR_GREATER
+#if !NET5_0_OR_GREATER && !NETCOREAPP
 		/// <summary>
 		/// Gets or sets the shortcut menu associated with the control.
 		/// </summary>
@@ -1865,7 +1865,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-#if !NET5_0_OR_GREATER
+#if !NET5_0_OR_GREATER && !NETCOREAPP
 		/// <summary>
 		/// Gets or sets the <see cref="T:System.Windows.Forms.MainMenu"/> that is displayed in the form.
 		/// </summary>

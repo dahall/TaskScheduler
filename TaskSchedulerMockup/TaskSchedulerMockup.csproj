@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <AssemblyTitle>TaskSchedulerMockup</AssemblyTitle>
     <Company>GitHub Community</Company>
     <Product>TaskService</Product>
@@ -14,8 +14,8 @@
     <ApplicationIcon>Resources\ts.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
-    <PackageReference Include="TimeSpan2" Version="2.4.2" />
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+    <PackageReference Include="TimeSpan2" Version="2.4.3" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Design" />

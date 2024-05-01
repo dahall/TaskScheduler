@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net35;net462;net48;net6.0-windows;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <PackageId>TaskSchedulerEditor</PackageId>
@@ -68,7 +68,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TaskService\TaskService.csproj" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net2')) Or $(TargetFramework.StartsWith('net3')) Or $(TargetFramework.StartsWith('net4')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -84,7 +84,10 @@
   <ItemGroup>
     <PackageReference Include="AeroWizard" Version="2.3.1" />
     <PackageReference Include="GroupControls" Version="1.9.0" />
-    <PackageReference Include="TimeSpan2" Version="2.4.2" />
+    <PackageReference Include="TimeSpan2" Version="2.4.3" />
     <PackageReference Include="Tulpep.ActiveDirectoryObjectPicker" Version="3.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
   </ItemGroup>
 </Project>
