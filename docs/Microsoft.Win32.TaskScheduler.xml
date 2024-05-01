@@ -2799,6 +2799,16 @@
       <param name="user">The user name with permissions on the remote machine.</param>
       <param name="password">The password for the user.</param>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskEventWatcher.#ctor(System.String,System.String,System.String,System.String,System.Security.SecureString)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventWatcher" /> class on a remote machine.
+            </summary>
+      <param name="machineName">Name of the remote machine.</param>
+      <param name="taskPath">The task path.</param>
+      <param name="domain">The domain of the user account.</param>
+      <param name="user">The user name with permissions on the remote machine.</param>
+      <param name="securePassword">The password for the user as a secure string.</param>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskEventWatcher.#ctor(System.String,System.String,System.String,System.String,System.String)">
       <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskEventWatcher" /> class on a remote machine.
@@ -4090,6 +4100,20 @@
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.#ctor">
       <summary>Creates a new instance of a TaskService connecting to the local machine as the current user.</summary>
     </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskService.#ctor(System.String,System.String,System.String,System.Security.SecureString,System.Boolean)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> class.</summary>
+      <param name="targetServer">
+            The name of the computer that you want to connect to. If the this parameter is empty, then this will connect to the local computer.
+            </param>
+      <param name="userName">
+            The user name that is used during the connection to the computer. If the user is not specified, then the current token is used.
+            </param>
+      <param name="accountDomain">The domain of the user specified in the <paramref name="userName" /> parameter.</param>
+      <param name="userSecurePassword">
+            The password that is used to connect to the computer as a SecureString. If the user name and securePassword are not specified, then the current token is used.
+            </param>
+      <param name="forceV1">If set to <c>true</c> force Task Scheduler 1.0 compatibility.</param>
+    </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.Win32.TaskScheduler.TaskService" /> class.</summary>
       <param name="targetServer">
@@ -4342,6 +4366,10 @@
     </member>
     <member name="E:Microsoft.Win32.TaskScheduler.TaskService.ServiceDisconnected">
       <summary>Occurs when the Task Scheduler is disconnected from the local or remote target.</summary>
+    </member>
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskService.SetUserSecurePassword(System.Security.SecureString)">
+      <summary>Sets the user password as a secure string to be used when connecting to the <see cref="P:Microsoft.Win32.TaskScheduler.TaskService.TargetServer" />.</summary>
+      <param name="value">A secure string containing the user password to set.</param>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskService.StartSystemTaskSchedulerManager">
       <summary>Starts the Task Scheduler UI for the OS hosting the assembly if the session is running in interactive mode.</summary>
@@ -4792,11 +4820,9 @@
             This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated
             by white spaces:
             </para>
-        <code language="cs">
-              &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
-            </code>
+        <code language="cs">&lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;</code>
         <para>Each item has bounds as defined by the following:</para>
-        <code>
+        <code language="cs">
               * * * * *
               | | | | |
               | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
