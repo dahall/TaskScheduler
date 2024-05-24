@@ -110,7 +110,7 @@
       <NamespaceSummaryItem name="System.Reflection" isDocumented="False" />
       <NamespaceSummaryItem name="System.Security.AccessControl" isDocumented="False" />
     </NamespaceSummaries>
-    <HelpFileVersion>2.11.0</HelpFileVersion>
+    <HelpFileVersion>2.11.1</HelpFileVersion>
     <HelpFileFormat>Website</HelpFileFormat>
     <CopyrightHref>https://github.com/dahall/TaskScheduler/blob/master/license.md</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
