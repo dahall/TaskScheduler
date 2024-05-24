@@ -404,26 +404,29 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		/// <summary>Gets the user password in plain text from either userPassword or userSecurePassword.</summary>
+		[CanBeNull]
 		internal string UserPasswordPlainText
 		{
 			get
 			{
-				if (!string.IsNullOrEmpty(userPassword))
-					return userPassword;
+				if (!userPasswordSet)
+					return null;
 
-				if (userSecurePassword == null)
-					return string.Empty;
+				if (userSecurePassword != null)
+				{
+					IntPtr valuePtr = IntPtr.Zero;
+					try
+					{
+						valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
+						return Marshal.PtrToStringUni(valuePtr);
+					}
+					finally
+					{
+						Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+					}
+				}
 
-				IntPtr valuePtr = IntPtr.Zero;
-				try
-				{
-					valuePtr = Marshal.SecureStringToGlobalAllocUnicode(userSecurePassword);
-					return Marshal.PtrToStringUni(valuePtr);
-				}
-				finally
-				{
-					Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
-				}
+				return userPassword;
 			}
 		}
 

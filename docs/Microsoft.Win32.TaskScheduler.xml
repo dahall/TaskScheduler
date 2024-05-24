@@ -4820,9 +4820,11 @@
             This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated
             by white spaces:
             </para>
-        <code language="cs">&lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;</code>
-        <para>Each item has bounds as defined by the following:</para>
         <code language="cs">
+              &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
+            </code>
+        <para>Each item has bounds as defined by the following:</para>
+        <code>
               * * * * *
               | | | | |
               | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
