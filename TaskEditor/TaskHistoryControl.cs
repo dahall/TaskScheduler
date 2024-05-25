@@ -137,7 +137,8 @@ namespace Microsoft.Win32.TaskScheduler
 			}
 		}
 
-		/// <inheritdoc />
+		/// <summary>Raises the <see cref="E:System.Windows.Forms.Control.LostFocus"/> event.</summary>
+		/// <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
 		protected override void OnLostFocus(EventArgs e)
 		{
 			if (!historyBackgroundWorker.CancellationPending)
