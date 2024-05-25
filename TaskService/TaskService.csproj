@@ -8,7 +8,6 @@
     <Description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</Description>
     <PackageTags>task;interop;windows;taskscheduler;scheduler;.net;task scheduler</PackageTags>
     <PackageReadmeFile>TaskService.md</PackageReadmeFile>
-    <SignAssembly>True</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <None Include="TaskService.md" Pack="true" PackagePath="\" />
@@ -34,9 +33,14 @@
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) ">
+  <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) And !$(TargetFramework.StartsWith('netcore')) ">
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netcore')) ">
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
     <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
