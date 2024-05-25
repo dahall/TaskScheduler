@@ -43,7 +43,7 @@
     <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
     <HelpTitle>Task Scheduler Managed Class Library</HelpTitle>
     <CopyrightText>&amp;#169%3b 2024 GitHub Community. All rights reserved.</CopyrightText>
-    <PresentationStyle>Default2022</PresentationStyle>
+    <PresentationStyle>VS2013</PresentationStyle>
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
