@@ -4,13 +4,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <!--<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>-->
     <AssemblyTitle>TestTaskService</AssemblyTitle>
-    <Company>GitHub Community</Company>
-    <Product>TaskService</Product>
-    <Description>https://github.com/dahall/TaskScheduler</Description>
-    <Copyright>Copyright © 2024</Copyright>
-    <Version>2.11.1</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>

@@ -3,11 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <AssemblyTitle>TaskSchedulerMockup</AssemblyTitle>
-    <Company>GitHub Community</Company>
-    <Product>TaskService</Product>
     <Description>https://github.com/dahall/TaskScheduler</Description>
-    <Copyright>Copyright © 2022</Copyright>
-    <Version>2.11.1</Version>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
