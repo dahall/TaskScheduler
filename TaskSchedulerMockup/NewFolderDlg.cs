@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace TaskSchedulerMockup
@@ -12,6 +13,7 @@ namespace TaskSchedulerMockup
 			InitializeComponent();
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string FolderName
 		{
 			get

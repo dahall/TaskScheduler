@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.CSharp;
 using Microsoft.Win32.TaskScheduler;
+using System.ComponentModel;
 
 namespace TestTaskService
 {
@@ -25,6 +26,7 @@ namespace TestTaskService
 			codeEditor.DragEnter += CodeEditor_DragEnter;
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskService TaskService { get; set; }
 
 		private void closeBtn_Click(object sender, EventArgs e)

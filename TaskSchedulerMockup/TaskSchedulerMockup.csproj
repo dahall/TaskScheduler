@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
     <AssemblyTitle>TaskSchedulerMockup</AssemblyTitle>
     <Description>https://github.com/dahall/TaskScheduler</Description>
     <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)</OutputPath>
@@ -10,7 +10,7 @@
     <ApplicationIcon>Resources\ts.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
     <PackageReference Include="TimeSpan2" Version="2.4.3" />
   </ItemGroup>
   <ItemGroup>

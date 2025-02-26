@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32.TaskScheduler;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace TaskSchedulerMockup
@@ -16,6 +17,7 @@ namespace TaskSchedulerMockup
 
 		public ToolStrip MenuItems => itemMenuStrip;
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskFolder TaskFolder
 		{
 			get { return TaskListView.Folder; }
@@ -29,6 +31,7 @@ namespace TaskSchedulerMockup
 			}
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskService TaskService { get; set; }
 
 		private void deleteMenu_Click(object sender, EventArgs e)

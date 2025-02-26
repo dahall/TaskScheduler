@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Authors>David Hall</Authors>
     <Company>GitHub Community</Company>
-    <Copyright>Copyright © 2002-2024</Copyright>
+    <Copyright>Copyright © 2002-2025</Copyright>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <IncludeSource>true</IncludeSource>
@@ -14,7 +14,7 @@
     <PackageIcon>tsnew48.png</PackageIcon>
     <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>2.11.1</Version>
+    <Version>2.12.0</Version>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Microsoft.Windows.TaskScheduler.snk</AssemblyOriginatorKeyFile>
     <NoWarn>$(NoWarn);NETSDK1138;SYSLIB0003;SYSLIB0004;SYSLIB0011;SYSLIB0051;CS0672;NU1701</NoWarn>
@@ -33,7 +33,7 @@
     <DeterministicSourcePaths>$(CIBUILD)</DeterministicSourcePaths>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Condition="!$(MSBuildProjectDirectory.Contains('UnitTests'))" Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Condition="!$(MSBuildProjectDirectory.Contains('UnitTests'))" Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
   </ItemGroup>
   <!-- END: Source Link configuration. -->

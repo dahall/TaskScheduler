@@ -1,0 +1,9 @@
+/* Define the userData cache persistence mechanism for Help 1 files */
+.userDataStyle {
+    behavior: url(#default#userdata);
+}
+
+/* Style adjustments for Help 1 */
+.codeSnippetToolBarText {
+    top: -13px;
+}

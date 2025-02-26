@@ -28,6 +28,7 @@ namespace TaskSchedulerMockup
 
 		public ToolStrip MenuItems => null;
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TaskService TaskService
 		{
 			get { return ts; }

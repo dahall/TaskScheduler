@@ -1,0 +1,8 @@
+/* Style adjustments for Help Viewer */
+.codeSnippetContainerTabs {
+    top: 0px;
+}
+
+.codeSnippetToolBarText {
+    top: -13px;
+}

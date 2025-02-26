@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;netstandard2.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows;netstandard2.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <PackageId>TaskScheduler</PackageId>
