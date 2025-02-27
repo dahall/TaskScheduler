@@ -35,12 +35,12 @@
   </ItemGroup>
   <ItemGroup Condition=" !$(TargetFramework.StartsWith('netcore')) And $(TargetFramework.StartsWith('net9')) ">
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.2" />
     <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup Condition=" !$(TargetFramework.StartsWith('netcore')) And $(TargetFramework.StartsWith('net8')) ">
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.1" />
     <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup Condition=" !$(TargetFramework.StartsWith('netcore')) And $(TargetFramework.StartsWith('net7')) ">
