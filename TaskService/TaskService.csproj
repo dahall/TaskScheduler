@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows;netstandard2.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <PackageId>TaskScheduler</PackageId>
@@ -32,11 +32,6 @@
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) And !$(TargetFramework.StartsWith('netcore')) And $(TargetFramework.StartsWith('net9')) ">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) And !$(TargetFramework.StartsWith('netcore')) And $(TargetFramework.StartsWith('net8')) ">
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
