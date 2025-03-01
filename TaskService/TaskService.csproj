@@ -41,12 +41,12 @@
   <Choose>
     <When Condition=" $(TargetFramework.StartsWith('net9')) ">
       <ItemGroup>
-        <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.0" />
+        <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.2" />
       </ItemGroup>
     </When>
     <When Condition=" $(TargetFramework.StartsWith('net8')) ">
       <ItemGroup>
-        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.1" />
       </ItemGroup>
     </When>
     <When Condition=" $(TargetFramework.StartsWith('net7')) ">
