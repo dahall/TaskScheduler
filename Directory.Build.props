@@ -14,7 +14,7 @@
     <PackageIcon>tsnew48.png</PackageIcon>
     <RepositoryUrl>https://github.com/dahall/taskscheduler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>2.12.0</Version>
+    <Version>2.12.1</Version>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Microsoft.Windows.TaskScheduler.snk</AssemblyOriginatorKeyFile>
     <NoWarn>$(NoWarn);NETSDK1138;SYSLIB0003;SYSLIB0004;SYSLIB0011;SYSLIB0051;CS0672;NU1701</NoWarn>
