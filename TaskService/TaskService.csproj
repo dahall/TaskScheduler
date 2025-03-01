@@ -33,16 +33,33 @@
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) And !$(TargetFramework.StartsWith('netcore')) ">
+  <ItemGroup Condition=" !$(TargetFramework.StartsWith('net4')) " >
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
     <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netcore')) ">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
-  </ItemGroup>
+  <!-- Add EventLog reference based on OS for all versions other than .NET 4.x -->
+  <Choose>
+    <When Condition=" $(TargetFramework.StartsWith('net9')) ">
+      <ItemGroup>
+        <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.0" />
+      </ItemGroup>
+    </When>
+    <When Condition=" $(TargetFramework.StartsWith('net8')) ">
+      <ItemGroup>
+        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+      </ItemGroup>
+    </When>
+    <When Condition=" $(TargetFramework.StartsWith('net7')) ">
+      <ItemGroup>
+        <PackageReference Include="System.Diagnostics.EventLog" Version="7.0.0" />
+      </ItemGroup>
+    </When>
+    <When Condition=" !$(TargetFramework.StartsWith('net4')) " >
+      <ItemGroup>
+        <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
+      </ItemGroup>
+    </When>
+  </Choose>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
