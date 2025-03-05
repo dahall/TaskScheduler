@@ -3,7 +3,7 @@
     <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows;netstandard2.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>Microsoft.Win32.TaskScheduler</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
-    <PackageId>TaskScheduler</PackageId>
+    <PackageId>Jack251970.TaskScheduler</PackageId>
     <Title>Task Scheduler Managed Wrapper (the original Microsoft.Win32.TaskScheduler)</Title>
     <Description>Provides a single assembly wrapper for the 1.0 and 2.0 versions of Task Scheduler found in all Microsoft operating systems post Windows 98. It simplifies the coding, aggregates the multiple versions and allows for localization support.</Description>
     <PackageTags>task;interop;windows;taskscheduler;scheduler;.net;task scheduler</PackageTags>
