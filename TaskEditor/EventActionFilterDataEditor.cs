@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace Microsoft.Win32.TaskScheduler
 			dataGridView1.DataSource = dt;
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public IDictionary<string, string> DataItems
 		{
 			get

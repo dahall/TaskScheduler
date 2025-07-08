@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.Win32.TaskScheduler.EditorProperties;
+using Microsoft.Win32.TaskScheduler.Events;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.Win32.TaskScheduler.EditorProperties;
-using Microsoft.Win32.TaskScheduler.Events;
 
 namespace Microsoft.Win32.TaskScheduler
 {
@@ -79,6 +80,7 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Gets or sets the event query XML. Setting this value will reinitialize the dialog.</summary>
 		/// <value>The event query XML.</value>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public string Subscription
 		{
 			get => subscription;

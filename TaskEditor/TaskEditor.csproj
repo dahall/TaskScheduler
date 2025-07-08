@@ -2,7 +2,8 @@
   <PropertyGroup>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <UseWindowsForms>true</UseWindowsForms>
-    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows;netcoreapp3.1</TargetFrameworks>
+    <!--<TargetFrameworks>net45;net48;net6.0-windows;net7.0-windows;net8.0-windows;netcoreapp3.1</TargetFrameworks>-->
     <AssemblyName>Microsoft.Win32.TaskSchedulerEditor</AssemblyName>
     <RootNamespace>Microsoft.Win32.TaskScheduler</RootNamespace>
     <PackageId>TaskSchedulerEditor</PackageId>

@@ -159,8 +159,8 @@ namespace Microsoft.Win32.TaskScheduler
 		/// Gets or sets the size of the drop-down control itself.
 		/// </summary>
 		/// <value>The size of the drop-down control.</value>
-		[Category("Custom Drop-Down"),
-		Browsable(false)]
+		[Category("Custom Drop-Down"), Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public Size ControlSize
 		{
 			get { return m_sizeOriginal; }
@@ -193,6 +193,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The drop down control.</value>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Control DropDownControl
 		{
 			get { return m_dropDownCtrl; }
@@ -299,6 +300,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The size of the drop-down area.</value>
 		[Category("Custom Drop-Down")]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public Size DropSize
 		{
 			get { return m_sizeCombo; }
@@ -573,6 +575,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// 	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public new string Text
 		{
 			get { return base.Items.Count == 0 ? string.Empty : base.Items[0].ToString(); }
@@ -1078,6 +1081,7 @@ namespace Microsoft.Win32.TaskScheduler
 			/// <summary>
 			/// Type of resize mode, grips are automatically drawn at bottom-left and bottom-right corners.
 			/// </summary>
+			[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 			public PopupResizeMode ResizeMode
 			{
 				get { return m_resizeMode; }

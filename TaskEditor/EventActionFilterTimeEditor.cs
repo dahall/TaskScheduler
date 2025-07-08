@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Microsoft.Win32.TaskScheduler
@@ -22,6 +23,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// "From" date time.
 		/// </value>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public DateTime? FromDateTime { get; set; }
 
 		/// <summary>
@@ -30,6 +32,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// "To" date time.
 		/// </value>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public DateTime? ToDateTime { get; set; }
 
 		private void okButton_Click(object sender, EventArgs e)

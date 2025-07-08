@@ -63,6 +63,7 @@ namespace Microsoft.Win32.TaskScheduler
 		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new SortOrder Sorting
 		{
 			get { return base.Sorting; }

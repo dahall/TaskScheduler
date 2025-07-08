@@ -91,6 +91,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
 		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public new bool Sorted
 		{
 			get { return checkedTreeView.Sorted; }

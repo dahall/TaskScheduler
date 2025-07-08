@@ -252,6 +252,7 @@ namespace Microsoft.Win32.TaskScheduler
 		///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
 		///   <IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		///   </PermissionSet>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public new System.Drawing.Icon Icon
 		{
 			get { return wizardControl1.TitleIcon; }
@@ -496,6 +497,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// </summary>
 		/// <value>The title.</value>
 		[Category("Appearance"), Description("A string to display in the title bar of the dialog box."), Localizable(true)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public string Title
 		{
 			get { return wizardControl1.Title; }

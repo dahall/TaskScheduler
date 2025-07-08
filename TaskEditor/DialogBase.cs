@@ -971,6 +971,7 @@ namespace System.Windows.Forms
 		/// An <see cref="T:System.Windows.Forms.IButtonControl"/> that represents the button to use as the accept button for the form.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new IButtonControl AcceptButton
 		{
 			get
@@ -991,6 +992,7 @@ namespace System.Windows.Forms
 		/// The description of the control used by accessibility client applications. The default is null.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new string AccessibleDescription
 		{
 			get
@@ -1011,6 +1013,7 @@ namespace System.Windows.Forms
 		/// The name of the control used by accessibility client applications. The default is null.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new string AccessibleName
 		{
 			get
@@ -1034,6 +1037,7 @@ namespace System.Windows.Forms
 		/// The value assigned is not one of the <see cref="T:System.Windows.Forms.AccessibleRole"/> values.
 		/// </exception>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new AccessibleRole AccessibleRole
 		{
 			get
@@ -1098,6 +1102,7 @@ namespace System.Windows.Forms
 		/// <returns>true if the form will automatically scale itself and its controls based on the current font assigned to the form; otherwise, false. The default is true.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Obsolete("This property has been deprecated. Use the AutoScaleMode property instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new bool AutoScale
 		{
 #pragma warning disable 0618
@@ -1230,6 +1235,7 @@ namespace System.Windows.Forms
 		/// The value is not a valid <see cref="T:System.Windows.Forms.AutoSizeMode"/> value.
 		/// </exception>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new AutoSizeMode AutoSizeMode
 		{
 			get
@@ -1340,6 +1346,7 @@ namespace System.Windows.Forms
 		/// An <see cref="T:System.Windows.Forms.IButtonControl"/> that represents the cancel button for the form.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new IButtonControl CancelButton
 		{
 			get
@@ -1359,6 +1366,7 @@ namespace System.Windows.Forms
 		/// <returns>true if the control causes validation to be performed on any controls requiring validation when it receives focus; otherwise, false. The default is true.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool CausesValidation
 		{
 			get
@@ -1452,6 +1460,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool ControlBox
 		{
 			get
@@ -1649,6 +1658,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool HelpButton
 		{
 			get
@@ -1704,6 +1714,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new ImeMode ImeMode
 		{
 			get
@@ -1729,6 +1740,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool IsMdiContainer
 		{
 			get
@@ -1748,6 +1760,7 @@ namespace System.Windows.Forms
 		/// <returns>true if the form will receive all key events; false if the currently selected control on the form receives key events. The default is false.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool KeyPreview
 		{
 			get
@@ -1788,6 +1801,7 @@ namespace System.Windows.Forms
 		/// A <see cref="T:System.Windows.Forms.MenuStrip"/> that represents the container for the menu structure of the form. The default is null.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new MenuStrip MainMenuStrip
 		{
 			get { return base.MainMenuStrip; }
@@ -1799,6 +1813,7 @@ namespace System.Windows.Forms
 		/// </summary>
 		/// <value>The margin.</value>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new Padding Margin
 		{
 			get
@@ -1853,6 +1868,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new Size MaximumSize
 		{
 			get
@@ -1961,6 +1977,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new double Opacity
 		{
 			get
@@ -1984,6 +2001,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new Padding Padding
 		{
 			get
@@ -2102,6 +2120,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new Size Size
 		{
 			get
@@ -2173,6 +2192,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool TabStop
 		{
 			get
@@ -2193,6 +2213,7 @@ namespace System.Windows.Forms
 		/// An <see cref="T:System.Object"/> that contains data about the control. The default is null.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public new object Tag
 		{
 			get
@@ -2235,6 +2256,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool TopMost
 		{
 			get
@@ -2261,6 +2283,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new Color TransparencyKey
 		{
 			get
@@ -2280,6 +2303,7 @@ namespace System.Windows.Forms
 		/// <returns>true to use the wait cursor for the current control and all child controls; otherwise, false. The default is false.
 		/// </returns>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new bool UseWaitCursor
 		{
 			get
@@ -2334,6 +2358,7 @@ namespace System.Windows.Forms
 		/// 	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
 		/// </PermissionSet>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new FormWindowState WindowState
 		{
 			get

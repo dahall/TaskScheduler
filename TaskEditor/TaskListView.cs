@@ -75,6 +75,7 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <value>
 		/// A zero-based index of the currently selected item. A value of negative one (-1) is returned if no item is selected.
 		/// </value>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public int SelectedIndex
 		{
 			get { return listView1.SelectedIndices.Count == 0 ? -1 : listView1.SelectedIndices[0]; }
