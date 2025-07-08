@@ -1996,7 +1996,7 @@
         <para>
              The parameters used as values in the task actions. A maximum of 32 parameters can be supplied. To run a task with no parameters,
              call this method without any values (e.g.
-             <code language="cs">Run()</code>
+             <code>Run()</code>
              ).
              </para>
         <para>
@@ -3018,10 +3018,15 @@
             Releases all resources used by this class.
             </summary>
     </member>
-    <member name="M:Microsoft.Win32.TaskScheduler.TaskFolder.EnumerateFolders(System.Predicate{Microsoft.Win32.TaskScheduler.TaskFolder})">
+    <member name="M:Microsoft.Win32.TaskScheduler.TaskFolder.EnumerateFolders(System.Predicate{Microsoft.Win32.TaskScheduler.TaskFolder},System.Boolean)">
       <summary>Returns an enumerable collection of folders that matches a specified filter and recursion option.</summary>
       <param name="filter">An optional predicate used to filter the returned <see cref="T:Microsoft.Win32.TaskScheduler.TaskFolder" /> instances.</param>
-      <returns>An enumerable collection of folders that matches <paramref name="filter" />.</returns>
+      <param name="recurse">Specifies whether the enumeration should include all subfolders.</param>
+      <returns>
+        <para>An enumerable collection of folders that matches <paramref name="filter" />.</para>
+        <note type="note">If a filter is supplied and filters out a folder, none of its subfolders will be processed, regardless of them
+            matching the filter.</note>
+      </returns>
     </member>
     <member name="M:Microsoft.Win32.TaskScheduler.TaskFolder.EnumerateTasks(System.Predicate{Microsoft.Win32.TaskScheduler.Task},System.Boolean)">
       <summary>Returns an enumerable collection of tasks that matches a specified filter and recursion option.</summary>
@@ -4820,7 +4825,7 @@
             This section borrows liberally from the site http://www.nncron.ru/help/EN/working/cron-format.htm. The cron format consists of five fields separated
             by white spaces:
             </para>
-        <code language="cs">
+        <code>
               &lt;Minute&gt; &lt;Hour&gt; &lt;Day_of_the_Month&gt; &lt;Month_of_the_Year&gt; &lt;Day_of_the_Week&gt;
             </code>
         <para>Each item has bounds as defined by the following:</para>
