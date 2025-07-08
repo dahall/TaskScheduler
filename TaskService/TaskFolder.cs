@@ -264,14 +264,26 @@ namespace Microsoft.Win32.TaskScheduler
 
 		/// <summary>Returns an enumerable collection of folders that matches a specified filter and recursion option.</summary>
 		/// <param name="filter">An optional predicate used to filter the returned <see cref="TaskFolder"/> instances.</param>
-		/// <returns>An enumerable collection of folders that matches <paramref name="filter"/>.</returns>
+		/// <param name="recurse">Specifies whether the enumeration should include all subfolders.</param>
+		/// <returns>
+		/// <para>An enumerable collection of folders that matches <paramref name="filter"/>.</para>
+		/// <note type="note">If a filter is supplied and filters out a folder, none of its subfolders will be processed, regardless of them
+		/// matching the filter.</note>
+		/// </returns>
 		[NotNull, ItemNotNull]
-		public IEnumerable<TaskFolder> EnumerateFolders(Predicate<TaskFolder> filter = null)
+		public IEnumerable<TaskFolder> EnumerateFolders(Predicate<TaskFolder> filter = null, bool recurse = false)
 		{
 			foreach (var fld in SubFolders)
 			{
 				if (filter == null || filter(fld))
+				{
 					yield return fld;
+					if (recurse) 
+					{
+						foreach (var subFld in fld.EnumerateFolders(filter, recurse))
+							yield return subFld;
+					}
+				}
 			}
 		}
 
