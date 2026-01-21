@@ -115,7 +115,16 @@ namespace Microsoft.Win32.TaskScheduler
 		/// <item>None published.</item>
 		/// </list>
 		/// </summary>
-		V2_3
+		V2_3,
+
+		/// <summary>
+		/// The task is compatible with Task Scheduler 2.4
+		/// <para>Changes from V2_3:</para>
+		/// <list type="bullet">
+		/// <item>None published.</item>
+		/// </list>
+		/// </summary>
+		V2_4,
 	}
 
 	/// <summary>Defines how the Task Scheduler service creates, updates, or disables the task.</summary>
