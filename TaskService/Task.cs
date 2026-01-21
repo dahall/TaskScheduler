@@ -118,7 +118,7 @@ namespace Microsoft.Win32.TaskScheduler
 		V2_3,
 
 		/// <summary>
-		/// The task is compatible with Task Scheduler 2.4
+		/// The task is compatible with Task Scheduler 2.4 (Windows® 10 Version 1703, Windows Server™ 2016 Version 1703)
 		/// <para>Changes from V2_3:</para>
 		/// <list type="bullet">
 		/// <item>None published.</item>
