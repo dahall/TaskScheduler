@@ -65,8 +65,8 @@ namespace Microsoft.Win32.TaskScheduler
 		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016).")]
 		public static readonly Version V1_5 = new(1, 5);
 
-		/// <summary>Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
-		[Description("Task Scheduler 2.3 (Windows® 10, Windows Server™ 2016 post build 1703).")]
+		/// <summary>Task Scheduler 2.4 (Windows® 10, Windows Server™ 2016 post build 1703).</summary>
+		[Description("Task Scheduler 2.4 (Windows® 10, Windows Server™ 2016 post build 1703).")]
 		public static readonly Version V1_6 = new(1, 6);
 	}
 
