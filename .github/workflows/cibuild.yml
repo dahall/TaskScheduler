@@ -1,0 +1,73 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: CI Build
+
+on:
+  push:
+    branches: [ "master" ]
+#  pull_request:
+#   branches: [ "master" ]
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .\TaskService.sln
+  SOLUTION_PATH: .
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+  STAGING_REPO: https://www.myget.org/F/taskscheduler/api/v2/package
+  STAGING_AUTH_TOKEN: ${{secrets.MYGETAPIKEY}}
+  PROD_REPO: https://nuget.pkg.github.com/dahall/index.json
+  PROD_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v3
+      with:
+        vs-version: 'latest'
+        vs-prerelease: false
+
+    - name: Clear NuGet cache
+      run: nuget locals all -clear
+
+    - name: Restore Solution NuGet packages
+      working-directory: $env:GITHUB_WORKSPACE
+      run: msbuild ${{env.SOLUTION_FILE_PATH}} /m /verbosity:quiet /t:restore /p:RunAnalyzersDuringBuild=false /p:Configuration=${{env.BUILD_CONFIGURATION}}
+
+    - name: Build
+      working-directory: $env:GITHUB_WORKSPACE
+      run: msbuild /m /verbosity:quiet /t:build /p:RunAnalyzersDuringBuild=false /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Publish staging packages
+      working-directory: $env:GITHUB_WORKSPACE
+      shell: pwsh
+      run: Get-ChildItem ${{env.SOLUTION_PATH}} -Include "*.nupkg" -Recurse | ForEach-Object -Process { dotnet nuget push $_.FullName -k ${{env.STAGING_AUTH_TOKEN}} -s ${{env.STAGING_REPO}} }
+      
+    - name: NuGet login
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: nuget/login@v1 # Setup via Trusted Publishing
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: Publish production packages
+      if: startsWith(github.ref, 'refs/tags/')
+      shell: pwsh
+      run: |
+        Get-ChildItem ${{env.SOLUTION_PATH}} -Include "Vanara.*.nupkg" -Recurse | ForEach-Object -Process {
+          dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate `
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
+        }
