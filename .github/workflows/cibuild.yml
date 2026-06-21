@@ -49,7 +49,12 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /m /verbosity:quiet /t:build /p:RunAnalyzersDuringBuild=false /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      shell: pwsh
+      run: |
+        $shfbRoot = Join-Path $env:USERPROFILE ".nuget\packages\ewsoftware.shfb\2024.3.8\tools"
+        msbuild ${{env.SOLUTION_FILE_PATH}} /m /verbosity:quiet /t:build `
+          /p:RunAnalyzersDuringBuild=false /p:SHFBROOT="$shfbRoot" /p:AlwaysLoadProject=True `
+          /p:Configuration=${{env.BUILD_CONFIGURATION}}
 
     - name: Publish staging packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -71,3 +76,12 @@ jobs:
           dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate `
             --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
         }
+
+
+
+
+
+
+
+
+
